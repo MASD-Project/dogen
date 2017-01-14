@@ -10682,7 +10682,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="173,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="172.95,30.95;185.1,35.45"/>
+        <dia:rectangle val="172.95,30.95;185.1,34.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="173,31"/>
@@ -10691,7 +10691,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="12.050000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#descriptor#</dia:string>
@@ -10793,29 +10793,6 @@ Temporary data structure used to build trees of names.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Location of the input.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#extension#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

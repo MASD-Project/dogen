@@ -20,15 +20,7 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/descriptor_io.hpp"
-
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
 
 namespace dogen {
 namespace yarn {
@@ -43,7 +35,6 @@ std::ostream& operator<<(std::ostream& s, const descriptor& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::descriptor\"" << ", "
       << "\"path\": " << "\"" << v.path().generic_string() << "\"" << ", "
-      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
       << "\"is_target\": " << v.is_target()
       << " }";
     return(s);

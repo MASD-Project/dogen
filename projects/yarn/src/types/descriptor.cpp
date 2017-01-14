@@ -28,27 +28,22 @@ descriptor::descriptor()
 
 descriptor::descriptor(descriptor&& rhs)
     : path_(std::move(rhs.path_)),
-      extension_(std::move(rhs.extension_)),
       is_target_(std::move(rhs.is_target_)) { }
 
 descriptor::descriptor(
     const boost::filesystem::path& path,
-    const std::string& extension,
     const bool is_target)
     : path_(path),
-      extension_(extension),
       is_target_(is_target) { }
 
 void descriptor::swap(descriptor& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
-    swap(extension_, other.extension_);
     swap(is_target_, other.is_target_);
 }
 
 bool descriptor::operator==(const descriptor& rhs) const {
     return path_ == rhs.path_ &&
-        extension_ == rhs.extension_ &&
         is_target_ == rhs.is_target_;
 }
 
@@ -72,22 +67,6 @@ void descriptor::path(const boost::filesystem::path& v) {
 
 void descriptor::path(const boost::filesystem::path&& v) {
     path_ = std::move(v);
-}
-
-const std::string& descriptor::extension() const {
-    return extension_;
-}
-
-std::string& descriptor::extension() {
-    return extension_;
-}
-
-void descriptor::extension(const std::string& v) {
-    extension_ = v;
-}
-
-void descriptor::extension(const std::string&& v) {
-    extension_ = std::move(v);
 }
 
 bool descriptor::is_target() const {

@@ -30,12 +30,6 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
-}
-
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
@@ -50,8 +44,7 @@ descriptor_generator::descriptor_generator() : position_(0) { }
 void descriptor_generator::
 populate(const unsigned int position, result_type& v) {
     v.path(create_boost_filesystem_path(position + 0));
-    v.extension(create_std_string(position + 1));
-    v.is_target(create_bool(position + 2));
+    v.is_target(create_bool(position + 1));
 }
 
 descriptor_generator::result_type

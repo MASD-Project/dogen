@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/serialization/descriptor_fwd_ser.hpp"
@@ -50,7 +49,6 @@ public:
 public:
     descriptor(
         const boost::filesystem::path& path,
-        const std::string& extension,
         const bool is_target);
 
 private:
@@ -70,11 +68,6 @@ public:
     void path(const boost::filesystem::path& v);
     void path(const boost::filesystem::path&& v);
     /**@}*/
-
-    const std::string& extension() const;
-    std::string& extension();
-    void extension(const std::string& v);
-    void extension(const std::string&& v);
 
     /**
      * @brief If true, the input contains the intermediate target model.
@@ -96,7 +89,6 @@ public:
 
 private:
     boost::filesystem::path path_;
-    std::string extension_;
     bool is_target_;
 };
 

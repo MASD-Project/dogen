@@ -104,7 +104,6 @@ make(const std::vector<boost::filesystem::path>& dirs) const {
             descriptor d;
             d.path(f);
             d.is_target(false);
-            d.extension(f.extension().string());
             r.push_back(d);
         }
     }
@@ -123,7 +122,6 @@ descriptor_factory::make(const annotations::type_repository& atrp,
         const auto p(references_dir / ref);
         descriptor d;
         d.path(p);
-        d.extension(p.extension().string());
         r.push_back(d);
     }
     return r;
@@ -136,7 +134,6 @@ descriptor_factory::make(const boost::filesystem::path& target) const {
     descriptor r;
     r.path(target);
     r.is_target(true);
-    r.extension(target.extension().string());
 
     BOOST_LOG_SEV(lg, trace) << "Added target model: " << r.path();
     BOOST_LOG_SEV(lg, debug) << "Created descriptor for target model: " << r;

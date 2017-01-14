@@ -100,7 +100,6 @@ void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
     yarn::descriptor tgd;
-    tgd.extension(o.target().extension().string());
     tgd.is_target(true);
     tgd.path(o.target());
 
@@ -111,7 +110,6 @@ void workflow::tailor(const options::tailoring_options& o) const {
     const auto im(tgfe.read(tgd));
 
     yarn::descriptor od;
-    od.extension(o.output().extension().string());
     od.path(o.output());
     auto& ofe(rg.frontend_for_path(od.path()));
     ofe.write(im, od);

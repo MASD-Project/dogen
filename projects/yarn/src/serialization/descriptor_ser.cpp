@@ -21,7 +21,6 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -62,7 +61,6 @@ void save(Archive& ar,
     const dogen::yarn::descriptor& v,
     const unsigned int /*version*/) {
     ar << make_nvp("path", v.path_);
-    ar << make_nvp("extension", v.extension_);
     ar << make_nvp("is_target", v.is_target_);
 }
 
@@ -71,7 +69,6 @@ void load(Archive& ar,
     dogen::yarn::descriptor& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("path", v.path_);
-    ar >> make_nvp("extension", v.extension_);
     ar >> make_nvp("is_target", v.is_target_);
 }
 
