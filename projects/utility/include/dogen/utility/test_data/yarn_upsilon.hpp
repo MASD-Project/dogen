@@ -51,7 +51,12 @@ public:
     static boost::filesystem::path input_zeta_model_xml_typeinfos();
 
     static boost::filesystem::path expected();
+    static boost::filesystem::path expected_test_model_upsilon_xml();
+    static boost::filesystem::path expected_test_model_yarn_xml();
+
     static boost::filesystem::path actual();
+    static boost::filesystem::path actual_test_model_upsilon_xml();
+    static boost::filesystem::path actual_test_model_yarn_xml();
 };
 
 } } }

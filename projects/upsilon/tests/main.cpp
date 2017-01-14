@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_MODULE tailor_tests
+#define BOOST_TEST_MODULE upsilon_tests
 #include <iostream>
 #include <boost/test/included/unit_test.hpp>
 #include <boost/test/unit_test_monitor.hpp>

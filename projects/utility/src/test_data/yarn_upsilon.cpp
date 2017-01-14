@@ -41,7 +41,12 @@ path input_zeta_model_xml_typeinfos(
     "yarn.upsilon/input/Zeta.Model.xml.typeinfos");
 
 path expected("yarn.upsilon/expected");
+path expected_test_model_upsilon_xml("yarn.upsilon/expected/test_model.upsilonxml");
+path expected_test_model_yarn_xml("yarn.upsilon/expected/test_model.yarnxml");
+
 path actual("yarn.upsilon/actual");
+path actual_test_model_upsilon_xml("yarn.upsilon/actual/test_model.upsilonxml");
+path actual_test_model_yarn_xml("yarn.upsilon/actual/test_model.yarnxml");
 
 }
 
@@ -85,8 +90,24 @@ path yarn_upsilon::expected() {
     return validating_resolver::resolve(::expected);
 }
 
+boost::filesystem::path yarn_upsilon::expected_test_model_upsilon_xml() {
+    return validating_resolver::resolve(::expected_test_model_upsilon_xml);
+}
+
+boost::filesystem::path yarn_upsilon::expected_test_model_yarn_xml() {
+    return validating_resolver::resolve(::expected_test_model_yarn_xml);
+}
+
 path yarn_upsilon::actual() {
     return validating_resolver::resolve(::actual);
+}
+
+boost::filesystem::path yarn_upsilon::actual_test_model_upsilon_xml() {
+    return resolver::resolve(::actual_test_model_upsilon_xml);
+}
+
+boost::filesystem::path yarn_upsilon::actual_test_model_yarn_xml() {
+    return resolver::resolve(::actual_test_model_yarn_xml);
 }
 
 } } }

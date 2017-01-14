@@ -21,9 +21,12 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/yarn_upsilon.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/upsilon/serialization/registrar_ser.hpp"
 #include "dogen/upsilon/types/model.hpp"
+#include "dogen/upsilon/serialization/model_ser.hpp"
 #include "dogen/upsilon/types/type.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
 #include "dogen/upsilon/types/enumeration.hpp"
@@ -38,6 +41,10 @@
 #include "dogen/upsilon/io/type_information_io.hpp"
 #include "dogen/upsilon/types/hydration_error.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
+
+template<typename Archive> void register_types(Archive& ar) {
+    dogen::upsilon::register_types<Archive>(ar);
+}
 
 namespace {
 
@@ -272,6 +279,12 @@ BOOST_AUTO_TEST_CASE(full_hydration_of_test_data_config_results_in_expected_mode
     dogen::upsilon::hydrator h;
     const auto a(h.hydrate(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
+
+    const auto expected(yarn_upsilon::expected_test_model_upsilon_xml());
+    const auto actual(yarn_upsilon::actual_test_model_upsilon_xml());
+
+    using dogen::utility::test::asserter;
+    BOOST_CHECK(asserter::assert_object(expected, actual, a));
 }
 
 BOOST_AUTO_TEST_CASE(full_hydration_of_dodgy_test_data_config_throws) {

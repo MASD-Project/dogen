@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<!DOCTYPE boost_serialization>
+<boost_serialization signature="serialization::archive" version="14">
+<entity class_id="4" tracking_level="0" version="0">
+	<schemas class_id="5" tracking_level="0" version="0">
+		<count>2</count>
+		<bucket_count>5</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="6" tracking_level="0" version="0">
+			<first>Phi</first>
+			<second class_id="7" tracking_level="0" version="0">
+				<name>Phi</name>
+				<id_min>1001</id_min>
+				<id_max>10000</id_max>
+				<base_guid>469C1EBC-57F8-458A-A892-1FF640846124</base_guid>
+				<dependencies class_id="8" tracking_level="0" version="0">
+					<count>1</count>
+					<item_version>0</item_version>
+					<item class_id="9" tracking_level="0" version="0">
+						<name>Zeta</name>
+					</item>
+				</dependencies>
+				<tags class_id="10" tracking_level="0" version="0">
+					<count>2</count>
+					<item_version>0</item_version>
+					<item class_id="11" tracking_level="0" version="0">
+						<name>Configuration</name>
+						<comment>Types that represent configurations.</comment>
+					</item>
+					<item>
+						<name>AnotherTag</name>
+						<comment>Another Comment</comment>
+					</item>
+				</tags>
+				<types class_id="12" tracking_level="0" version="0">
+					<count>5</count>
+					<item_version>1</item_version>
+					<item class_id="13" tracking_level="0" version="1">
+						<px class_id="3" tracking_level="1" version="0" object_id="_0">
+							<type class_id="14" tracking_level="0" version="0">
+								<name>Date</name>
+								<extends></extends>
+								<comment>Represents the date</comment>
+								<tag_refs class_id="15" tracking_level="0" version="0">
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1125</pof_id>
+							</type>
+							<intrinsic>4</intrinsic>
+							<default_value>1970-01-01</default_value>
+						</px>
+					</item>
+					<item>
+						<px class_id="1" tracking_level="1" version="0" object_id="_1">
+							<type>
+								<name>TestType</name>
+								<extends>ModelValue</extends>
+								<comment>Test type</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>Configuration</item>
+								</tag_refs>
+								<pof_id></pof_id>
+							</type>
+							<fields class_id="16" tracking_level="0" version="0">
+								<count>2</count>
+								<item_version>0</item_version>
+								<item class_id="17" tracking_level="0" version="0">
+									<name>Version</name>
+									<type_name class_id="18" tracking_level="0" version="0">
+										<name>String</name>
+										<schema_name>Zeta</schema_name>
+									</type_name>
+									<comment>Some comment</comment>
+								</item>
+								<item>
+									<name>AField</name>
+									<type_name>
+										<name>String</name>
+										<schema_name>Zeta</schema_name>
+									</type_name>
+									<comment></comment>
+								</item>
+							</fields>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="1" object_id="_2">
+							<type>
+								<name>CollectionTestType</name>
+								<extends>ModelValue</extends>
+								<comment>Test type</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>Configuration</item>
+								</tag_refs>
+								<pof_id></pof_id>
+							</type>
+							<fields>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>
+									<name>BinariesTest</name>
+									<type_name>
+										<name>Binaries</name>
+										<schema_name>Zeta</schema_name>
+									</type_name>
+									<comment>Some comment</comment>
+								</item>
+							</fields>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="1" object_id="_3">
+							<type>
+								<name>NoFields</name>
+								<extends>ModelValue</extends>
+								<comment>Test type</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>Configuration</item>
+								</tag_refs>
+								<pof_id></pof_id>
+							</type>
+							<fields>
+								<count>0</count>
+								<item_version>0</item_version>
+							</fields>
+						</px>
+					</item>
+					<item>
+						<px class_id="2" tracking_level="1" version="0" object_id="_4">
+							<type>
+								<name>SomeEnum</name>
+								<extends></extends>
+								<comment>Represents an enum</comment>
+								<tag_refs>
+									<count>0</count>
+									<item_version>0</item_version>
+								</tag_refs>
+								<pof_id></pof_id>
+							</type>
+							<values>
+								<count>3</count>
+								<item_version>0</item_version>
+								<item>AValue</item>
+								<item>AnotherValue</item>
+								<item>FinalValue</item>
+							</values>
+							<default_value>AnotherValue</default_value>
+						</px>
+					</item>
+				</types>
+				<file_path class_id="19" tracking_level="0" version="0">
+					<path></path>
+				</file_path>
+			</second>
+		</item>
+		<item>
+			<first>Zeta</first>
+			<second>
+				<name>Zeta</name>
+				<id_min>1100</id_min>
+				<id_max>1500</id_max>
+				<base_guid>23188BEF-A85B-4CC2-AE27-508CE5EE286E</base_guid>
+				<dependencies>
+					<count>0</count>
+					<item_version>0</item_version>
+				</dependencies>
+				<tags>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<name>ZetaTypes</name>
+						<comment></comment>
+					</item>
+				</tags>
+				<types>
+					<count>6</count>
+					<item_version>1</item_version>
+					<item>
+						<px class_id_reference="3" object_id="_5">
+							<type>
+								<name>MissingValue</name>
+								<extends></extends>
+								<comment></comment>
+								<tag_refs>
+									<count>0</count>
+									<item_version>0</item_version>
+								</tag_refs>
+								<pof_id>1123</pof_id>
+							</type>
+							<intrinsic>3</intrinsic>
+							<default_value></default_value>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="3" object_id="_6">
+							<type>
+								<name>Binary</name>
+								<extends></extends>
+								<comment></comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1124</pof_id>
+							</type>
+							<intrinsic>2</intrinsic>
+							<default_value></default_value>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="3" object_id="_7">
+							<type>
+								<name>Date</name>
+								<extends></extends>
+								<comment>Represents the date</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1125</pof_id>
+							</type>
+							<intrinsic>4</intrinsic>
+							<default_value>1970-01-01</default_value>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="3" object_id="_8">
+							<type>
+								<name>String</name>
+								<extends></extends>
+								<comment>Represents a string</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1126</pof_id>
+							</type>
+							<intrinsic>9</intrinsic>
+							<default_value></default_value>
+						</px>
+					</item>
+					<item>
+						<px class_id="0" tracking_level="1" version="0" object_id="_9">
+							<type>
+								<name>ModelValues</name>
+								<extends></extends>
+								<comment>Represents a collection</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1154</pof_id>
+							</type>
+							<type_name>
+								<name>ModelValue</name>
+								<schema_name></schema_name>
+							</type_name>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="0" object_id="_10">
+							<type>
+								<name>Binaries</name>
+								<extends></extends>
+								<comment>Represents a collection</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1155</pof_id>
+							</type>
+							<type_name>
+								<name>ModelValue</name>
+								<schema_name></schema_name>
+							</type_name>
+						</px>
+					</item>
+				</types>
+				<file_path>
+					<path></path>
+				</file_path>
+			</second>
+		</item>
+	</schemas>
+	<type_information class_id="20" tracking_level="0" version="0">
+		<count>2</count>
+		<bucket_count>5</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="21" tracking_level="0" version="0">
+			<first>Phi</first>
+			<second class_id="22" tracking_level="0" version="0">
+				<entries class_id="23" tracking_level="0" version="0">
+					<count>4</count>
+					<item_version>0</item_version>
+					<item class_id="24" tracking_level="0" version="0">
+						<name>Date</name>
+						<pof_id>5123</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>TestType</name>
+						<pof_id>5124</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>CollectionTestType</name>
+						<pof_id>5125</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>Enumeration</name>
+						<pof_id>5154</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+				</entries>
+				<file_path>
+					<path>/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/yarn.upsilon/input/Phi.Model.xml.typeinfos</path>
+				</file_path>
+			</second>
+		</item>
+		<item>
+			<first>Zeta</first>
+			<second>
+				<entries>
+					<count>5</count>
+					<item_version>0</item_version>
+					<item>
+						<name>MissingValue</name>
+						<pof_id>1123</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>Binary</name>
+						<pof_id>1124</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>Date</name>
+						<pof_id>1125</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>ModelValues</name>
+						<pof_id>1154</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+					<item>
+						<name>Binaries</name>
+						<pof_id>1155</pof_id>
+						<file_path>
+							<path></path>
+						</file_path>
+					</item>
+				</entries>
+				<file_path>
+					<path>/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/yarn.upsilon/input/Zeta.Model.xml.typeinfos</path>
+				</file_path>
+			</second>
+		</item>
+	</type_information>
+	<config class_id="25" tracking_level="0" version="0">
+		<directory class_id="26" tracking_level="0" version="0">
+			<public_location>projects/test_models/common</public_location>
+			<private_location>projects/test_models</private_location>
+		</directory>
+		<schema_refs class_id="27" tracking_level="0" version="0">
+			<count>2</count>
+			<item_version>0</item_version>
+			<item class_id="28" tracking_level="0" version="0">
+				<name>Zeta</name>
+				<file>test_data/yarn.upsilon/input/Zeta.Model.xml</file>
+			</item>
+			<item>
+				<name>Phi</name>
+				<file>test_data/yarn.upsilon/input/Phi.Model.xml</file>
+			</item>
+		</schema_refs>
+		<outputs class_id="29" tracking_level="0" version="0">
+			<count>1</count>
+			<item_version>0</item_version>
+			<item class_id="30" tracking_level="0" version="0">
+				<schema_name>Zeta</schema_name>
+				<representations class_id="31" tracking_level="0" version="0">
+					<count>3</count>
+					<item_version>0</item_version>
+					<item class_id="32" tracking_level="0" version="0">
+						<target>1</target>
+						<pof>0</pof>
+					</item>
+					<item>
+						<target>2</target>
+						<pof>1</pof>
+					</item>
+					<item>
+						<target>3</target>
+						<pof>0</pof>
+					</item>
+				</representations>
+			</item>
+		</outputs>
+		<file_path>
+			<path>/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/yarn.upsilon/input/Test.Model.Configuration.xml</path>
+		</file_path>
+	</config>
+</entity>
+</boost_serialization>
+
