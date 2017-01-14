@@ -18,28 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_UPSILON_TYPES_WORKFLOW_HPP
-#define DOGEN_YARN_UPSILON_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_YARN_UPSILON_TYPES_WORKFLOW_ERROR_FWD_HPP
+#define DOGEN_YARN_UPSILON_TYPES_WORKFLOW_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/upsilon/types/model.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-class workflow final {
-private:
-    yarn::intermediate_model create_model(const dogen::upsilon::model& m) const;
-
-public:
-    yarn::intermediate_model execute(const dogen::upsilon::model& m) const;
-};
+class workflow_error;
 
 } } }
 

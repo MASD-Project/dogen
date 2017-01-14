@@ -18,21 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/test/unit_test.hpp>
-#include "dogen/utility/test/logging.hpp"
+#ifndef DOGEN_YARN_UPSILON_TYPES_WORKFLOW_ERROR_HPP
+#define DOGEN_YARN_UPSILON_TYPES_WORKFLOW_ERROR_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-const std::string empty;
-const std::string test_module("tailor");
-const std::string test_suite("fake_tests");
+#include <string>
+#include <boost/exception/info.hpp>
 
-}
+namespace dogen {
+namespace yarn {
+namespace upsilon {
 
-BOOST_AUTO_TEST_SUITE(fake_tests)
+class workflow_error : public virtual std::exception, public virtual boost::exception {
+public:
+    workflow_error() = default;
+    ~workflow_error() noexcept = default;
 
-BOOST_AUTO_TEST_CASE(test) {
-    SETUP_TEST_LOG("test");
-}
+public:
+    workflow_error(const std::string& message) : message_(message) { }
 
-BOOST_AUTO_TEST_SUITE_END()
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } }
+
+#endif

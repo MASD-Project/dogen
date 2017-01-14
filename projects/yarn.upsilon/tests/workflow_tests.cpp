@@ -18,29 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_UPSILON_TYPES_WORKFLOW_HPP
-#define DOGEN_YARN_UPSILON_TYPES_WORKFLOW_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/filesystem/path.hpp>
-#include "dogen/upsilon/types/model.hpp"
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
+#include "dogen/utility/test_data/yarn_upsilon.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/io/intermediate_model_io.hpp"
 
-namespace dogen {
-namespace yarn {
-namespace upsilon {
+namespace {
 
-class workflow final {
-private:
-    yarn::intermediate_model create_model(const dogen::upsilon::model& m) const;
+const std::string empty;
+const std::string test_module("yarn.upsilon");
+const std::string test_suite("workflow_tests");
 
-public:
-    yarn::intermediate_model execute(const dogen::upsilon::model& m) const;
-};
+}
 
-} } }
+BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-#endif
+BOOST_AUTO_TEST_CASE(test_data_mode_transforms_into_expected_yarn) {
+    SETUP_TEST_LOG("test_data_mode_transforms_into_expected_yarn");
+
+    // using dogen::utility::test_data::yarn_upsilon;
+    // const auto input(yarn_upsilon::input_test_model_configuration_xml());
+    // dogen::yarn::upsilon::
+
+}
+
+BOOST_AUTO_TEST_SUITE_END()
