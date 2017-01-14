@@ -43,7 +43,7 @@ std::ostream& operator<<(std::ostream& s, const type_information& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::upsilon::type_information\"" << ", "
       << "\"entries\": " << v.entries() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
+      << "\"file_name\": " << "\"" << v.file_name().generic_string() << "\""
       << " }";
     return(s);
 }

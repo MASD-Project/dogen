@@ -27,31 +27,31 @@ config::config(config&& rhs)
     : directory_(std::move(rhs.directory_)),
       schema_refs_(std::move(rhs.schema_refs_)),
       outputs_(std::move(rhs.outputs_)),
-      file_path_(std::move(rhs.file_path_)) { }
+      file_name_(std::move(rhs.file_name_)) { }
 
 config::config(
     const dogen::upsilon::directory& directory,
     const std::vector<dogen::upsilon::schema_ref>& schema_refs,
     const std::vector<dogen::upsilon::output>& outputs,
-    const boost::filesystem::path& file_path)
+    const boost::filesystem::path& file_name)
     : directory_(directory),
       schema_refs_(schema_refs),
       outputs_(outputs),
-      file_path_(file_path) { }
+      file_name_(file_name) { }
 
 void config::swap(config& other) noexcept {
     using std::swap;
     swap(directory_, other.directory_);
     swap(schema_refs_, other.schema_refs_);
     swap(outputs_, other.outputs_);
-    swap(file_path_, other.file_path_);
+    swap(file_name_, other.file_name_);
 }
 
 bool config::operator==(const config& rhs) const {
     return directory_ == rhs.directory_ &&
         schema_refs_ == rhs.schema_refs_ &&
         outputs_ == rhs.outputs_ &&
-        file_path_ == rhs.file_path_;
+        file_name_ == rhs.file_name_;
 }
 
 config& config::operator=(config other) {
@@ -108,20 +108,20 @@ void config::outputs(const std::vector<dogen::upsilon::output>&& v) {
     outputs_ = std::move(v);
 }
 
-const boost::filesystem::path& config::file_path() const {
-    return file_path_;
+const boost::filesystem::path& config::file_name() const {
+    return file_name_;
 }
 
-boost::filesystem::path& config::file_path() {
-    return file_path_;
+boost::filesystem::path& config::file_name() {
+    return file_name_;
 }
 
-void config::file_path(const boost::filesystem::path& v) {
-    file_path_ = v;
+void config::file_name(const boost::filesystem::path& v) {
+    file_name_ = v;
 }
 
-void config::file_path(const boost::filesystem::path&& v) {
-    file_path_ = std::move(v);
+void config::file_name(const boost::filesystem::path&& v) {
+    file_name_ = std::move(v);
 }
 
 } }

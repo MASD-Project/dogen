@@ -76,7 +76,7 @@ populate(const unsigned int position, result_type& v) {
     v.directory(create_dogen_upsilon_directory(position + 0));
     v.schema_refs(create_std_vector_dogen_upsilon_schema_ref(position + 1));
     v.outputs(create_std_vector_dogen_upsilon_output(position + 2));
-    v.file_path(create_boost_filesystem_path(position + 3));
+    v.file_name(create_boost_filesystem_path(position + 3));
 }
 
 config_generator::result_type

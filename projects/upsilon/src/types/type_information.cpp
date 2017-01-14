@@ -25,23 +25,23 @@ namespace upsilon {
 
 type_information::type_information(type_information&& rhs)
     : entries_(std::move(rhs.entries_)),
-      file_path_(std::move(rhs.file_path_)) { }
+      file_name_(std::move(rhs.file_name_)) { }
 
 type_information::type_information(
     const std::vector<dogen::upsilon::type_information_entry>& entries,
-    const boost::filesystem::path& file_path)
+    const boost::filesystem::path& file_name)
     : entries_(entries),
-      file_path_(file_path) { }
+      file_name_(file_name) { }
 
 void type_information::swap(type_information& other) noexcept {
     using std::swap;
     swap(entries_, other.entries_);
-    swap(file_path_, other.file_path_);
+    swap(file_name_, other.file_name_);
 }
 
 bool type_information::operator==(const type_information& rhs) const {
     return entries_ == rhs.entries_ &&
-        file_path_ == rhs.file_path_;
+        file_name_ == rhs.file_name_;
 }
 
 type_information& type_information::operator=(type_information other) {
@@ -66,20 +66,20 @@ void type_information::entries(const std::vector<dogen::upsilon::type_informatio
     entries_ = std::move(v);
 }
 
-const boost::filesystem::path& type_information::file_path() const {
-    return file_path_;
+const boost::filesystem::path& type_information::file_name() const {
+    return file_name_;
 }
 
-boost::filesystem::path& type_information::file_path() {
-    return file_path_;
+boost::filesystem::path& type_information::file_name() {
+    return file_name_;
 }
 
-void type_information::file_path(const boost::filesystem::path& v) {
-    file_path_ = v;
+void type_information::file_name(const boost::filesystem::path& v) {
+    file_name_ = v;
 }
 
-void type_information::file_path(const boost::filesystem::path&& v) {
-    file_path_ = std::move(v);
+void type_information::file_name(const boost::filesystem::path&& v) {
+    file_name_ = std::move(v);
 }
 
 } }

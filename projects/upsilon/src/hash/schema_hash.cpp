@@ -82,7 +82,7 @@ std::size_t schema_hasher::hash(const schema& v) {
     combine(seed, hash_std_vector_dogen_upsilon_dependency(v.dependencies()));
     combine(seed, hash_std_vector_dogen_upsilon_tag(v.tags()));
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_upsilon_type(v.types()));
-    combine(seed, hash_boost_filesystem_path(v.file_path()));
+    combine(seed, hash_boost_filesystem_path(v.file_name()));
 
     return seed;
 }

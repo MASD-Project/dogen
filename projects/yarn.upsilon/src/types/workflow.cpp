@@ -47,7 +47,7 @@ workflow::create_model(const dogen::upsilon::model& m) const {
     yarn::intermediate_model r;
 
     if (m.config().outputs().size() != 1) {
-        const auto gs(m.config().file_path().generic_string());
+        const auto gs(m.config().file_name().generic_string());
         BOOST_LOG_SEV(lg, error) << incorrect_number_of_outputs << gs;
         BOOST_THROW_EXCEPTION(workflow_error(incorrect_number_of_outputs + gs));
     }

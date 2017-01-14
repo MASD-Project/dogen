@@ -56,7 +56,7 @@ public:
         const std::vector<dogen::upsilon::dependency>& dependencies,
         const std::vector<dogen::upsilon::tag>& tags,
         const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types,
-        const boost::filesystem::path& file_path);
+        const boost::filesystem::path& file_name);
 
 private:
     template<typename Archive>
@@ -101,10 +101,10 @@ public:
     void types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >& v);
     void types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >&& v);
 
-    const boost::filesystem::path& file_path() const;
-    boost::filesystem::path& file_path();
-    void file_path(const boost::filesystem::path& v);
-    void file_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& file_name() const;
+    boost::filesystem::path& file_name();
+    void file_name(const boost::filesystem::path& v);
+    void file_name(const boost::filesystem::path&& v);
 
 public:
     bool operator==(const schema& rhs) const;
@@ -124,7 +124,7 @@ private:
     std::vector<dogen::upsilon::dependency> dependencies_;
     std::vector<dogen::upsilon::tag> tags_;
     std::vector<boost::shared_ptr<dogen::upsilon::type> > types_;
-    boost::filesystem::path file_path_;
+    boost::filesystem::path file_name_;
 };
 
 } }

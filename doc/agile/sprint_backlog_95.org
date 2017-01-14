@@ -12,24 +12,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-14 Sat 18:20]
+#+CAPTION: Clock summary at [2017-01-14 Sat 21:37]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *79:50* |       |       | 100.0 |
+| *Total time*                                                                | *80:11* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 79:50   |       |       | 100.0 |
-| Active                                                                      |         | 79:50 |       | 100.0 |
+| Stories                                                                     | 80:11   |       |       | 100.0 |
+| Active                                                                      |         | 80:11 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.2 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.3 |
-| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  10.9 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.2 |
+| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  10.8 |
 | COMPLETED Fix borked windows build                                          |         |       |  0:26 |   0.5 |
 | COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.4 |
 | COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   8.3 |
 | COMPLETED Parsing should support dot notation                               |         |       |  2:54 |   3.6 |
 | COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   4.1 |
-| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   7.3 |
+| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   7.2 |
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       |  1:13 |   1.5 |
 | CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.7 |
 | COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
@@ -40,9 +40,9 @@
 | COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.4 |
 | COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.0 |
 | COMPLETED Add read support for upsilon models                               |         |       | 13:26 |  16.8 |
-| STARTED Create an upsilon yarn frontend                                     |         |       |  5:14 |   6.6 |
+| STARTED Create an upsilon yarn frontend                                     |         |       |  5:35 |   7.0 |
 | STARTED Add auxiliary function properties to c#                             |         |       |  1:11 |   1.5 |
-| STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.1 |
+| STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.0 |
 | STARTED Add support for generic container types to C#                       |         |       |  1:16 |   1.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1001,6 +1001,7 @@ resulted in additional errors:
   appveyor.install.windows.ps1.
 
 *** STARTED Create an upsilon yarn frontend                           :story:
+    CLOCK: [2017-01-14 Sat 21:15]--[2017-01-14 Sat 21:36] =>  0:21
     CLOCK: [2017-01-14 Sat 17:43]--[2017-01-14 Sat 18:19] =>  0:36
     CLOCK: [2017-01-14 Sat 17:31]--[2017-01-14 Sat 17:42] =>  0:11
     CLOCK: [2017-01-14 Sat 17:09]--[2017-01-14 Sat 17:30] =>  0:21

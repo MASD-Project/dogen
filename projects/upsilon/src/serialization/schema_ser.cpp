@@ -73,7 +73,7 @@ void save(Archive& ar,
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("tags", v.tags_);
     ar << make_nvp("types", v.types_);
-    ar << make_nvp("file_path", v.file_path_);
+    ar << make_nvp("file_name", v.file_name_);
 }
 
 template<typename Archive>
@@ -87,7 +87,7 @@ void load(Archive& ar,
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("tags", v.tags_);
     ar >> make_nvp("types", v.types_);
-    ar >> make_nvp("file_path", v.file_path_);
+    ar >> make_nvp("file_name", v.file_name_);
 }
 
 } }

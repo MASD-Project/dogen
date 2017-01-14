@@ -61,7 +61,7 @@ std::ostream& operator<<(std::ostream& s, const config& v) {
       << "\"directory\": " << v.directory() << ", "
       << "\"schema_refs\": " << v.schema_refs() << ", "
       << "\"outputs\": " << v.outputs() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
+      << "\"file_name\": " << "\"" << v.file_name().generic_string() << "\""
       << " }";
     return(s);
 }

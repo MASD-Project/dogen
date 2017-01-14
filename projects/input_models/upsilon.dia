@@ -391,7 +391,7 @@ formats, it will be deprecated.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_path#</dia:string>
+            <dia:string>#file_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -2710,7 +2710,7 @@ formats, it will be deprecated.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_path#</dia:string>
+            <dia:string>#file_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
@@ -2913,7 +2913,7 @@ formats, it will be deprecated.
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#file_path#</dia:string>
+            <dia:string>#file_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>

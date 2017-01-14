@@ -107,7 +107,7 @@ namespace upsilon {
 
 class config_hydrator {
 public:
-    config_hydrator(boost::filesystem::path file_path);
+    config_hydrator(boost::filesystem::path file_name);
 
 private:
     void log_unsupported_element();
@@ -127,13 +127,13 @@ public:
     config hydrate();
 
 private:
-    boost::filesystem::path file_path_;
+    boost::filesystem::path file_name_;
     utility::xml::text_reader reader_;
 };
 
-config_hydrator::config_hydrator(boost::filesystem::path file_path)
-    : file_path_(file_path),
-      reader_(file_path, true/*skip_whitespace*/) { }
+config_hydrator::config_hydrator(boost::filesystem::path file_name)
+    : file_name_(file_name),
+      reader_(file_name, true/*skip_whitespace*/) { }
 
 void config_hydrator::log_unsupported_element() {
     BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
@@ -297,7 +297,7 @@ config config_hydrator::hydrate() {
     reader_.move_next();
 
     config r;
-    r.file_path(file_path_);
+    r.file_name(file_name_.filename());
     do {
         if (reader_.is_start_element(directory_name))
             r.directory(read_directory());
@@ -317,7 +317,7 @@ config config_hydrator::hydrate() {
 
 class type_information_hydrator {
 public:
-    type_information_hydrator(boost::filesystem::path file_path);
+    type_information_hydrator(boost::filesystem::path file_name);
 
 private:
     void log_unsupported_element();
@@ -326,14 +326,14 @@ public:
     type_information hydrate();
 
 private:
-    boost::filesystem::path file_path_;
+    boost::filesystem::path file_name_;
     utility::xml::text_reader reader_;
 };
 
 type_information_hydrator::
-type_information_hydrator(boost::filesystem::path file_path)
-    : file_path_(file_path),
-      reader_(file_path, true/*skip_whitespace*/) { }
+type_information_hydrator(boost::filesystem::path file_name)
+    : file_name_(file_name),
+      reader_(file_name, true/*skip_whitespace*/) { }
 
 void type_information_hydrator::log_unsupported_element() {
     BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
@@ -345,7 +345,7 @@ type_information type_information_hydrator::hydrate() {
     BOOST_LOG_SEV(lg, debug) << "Reading Type Infos.";
 
     type_information r;
-    r.file_path(file_path_);
+    r.file_name(file_name_.filename());
 
     std::list<type_information_entry> l;
     reader_.move_next();
@@ -370,7 +370,7 @@ type_information type_information_hydrator::hydrate() {
 
 class schema_hydrator {
 public:
-    schema_hydrator(boost::filesystem::path file_path);
+    schema_hydrator(boost::filesystem::path file_name);
 
 private:
     void log_unsupported_element();
@@ -396,13 +396,13 @@ public:
     schema hydrate();
 
 private:
-    boost::filesystem::path file_path_;
+    boost::filesystem::path file_name_;
     utility::xml::text_reader reader_;
 };
 
-schema_hydrator::schema_hydrator(boost::filesystem::path file_path)
-    : file_path_(file_path),
-      reader_(file_path, true/*skip_whitespace*/) { }
+schema_hydrator::schema_hydrator(boost::filesystem::path file_name)
+    : file_name_(file_name),
+      reader_(file_name, true/*skip_whitespace*/) { }
 
 void schema_hydrator::log_unsupported_element() {
     BOOST_LOG_SEV(lg, warn) << "Unsupported element: "
@@ -695,6 +695,7 @@ schema schema_hydrator::hydrate() {
     BOOST_LOG_SEV(lg, debug) << "Reading Schema.";
 
     schema r;
+    r.file_name(file_name_.filename());
     r.name(reader_.get_attribute<std::string>(name_name));
     r.id_min(reader_.get_attribute<std::string>(id_min_name));
     r.id_max(reader_.get_attribute<std::string>(id_max_name));

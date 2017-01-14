@@ -103,7 +103,7 @@ std::ostream& operator<<(std::ostream& s, const schema& v) {
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"tags\": " << v.tags() << ", "
       << "\"types\": " << v.types() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
+      << "\"file_name\": " << "\"" << v.file_name().generic_string() << "\""
       << " }";
     return(s);
 }

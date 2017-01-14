@@ -54,7 +54,7 @@ type_information_generator::type_information_generator() : position_(0) { }
 void type_information_generator::
 populate(const unsigned int position, result_type& v) {
     v.entries(create_std_vector_dogen_upsilon_type_information_entry(position + 0));
-    v.file_path(create_boost_filesystem_path(position + 1));
+    v.file_name(create_boost_filesystem_path(position + 1));
 }
 
 type_information_generator::result_type

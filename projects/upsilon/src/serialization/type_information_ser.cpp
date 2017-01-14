@@ -63,7 +63,7 @@ void save(Archive& ar,
     const dogen::upsilon::type_information& v,
     const unsigned int /*version*/) {
     ar << make_nvp("entries", v.entries_);
-    ar << make_nvp("file_path", v.file_path_);
+    ar << make_nvp("file_name", v.file_name_);
 }
 
 template<typename Archive>
@@ -71,7 +71,7 @@ void load(Archive& ar,
     dogen::upsilon::type_information& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("entries", v.entries_);
-    ar >> make_nvp("file_path", v.file_path_);
+    ar >> make_nvp("file_name", v.file_name_);
 }
 
 } }

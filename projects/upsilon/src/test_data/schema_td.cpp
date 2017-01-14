@@ -101,7 +101,7 @@ populate(const unsigned int position, result_type& v) {
     v.dependencies(create_std_vector_dogen_upsilon_dependency(position + 4));
     v.tags(create_std_vector_dogen_upsilon_tag(position + 5));
     v.types(create_std_vector_boost_shared_ptr_dogen_upsilon_type(position + 6));
-    v.file_path(create_boost_filesystem_path(position + 7));
+    v.file_name(create_boost_filesystem_path(position + 7));
 }
 
 schema_generator::result_type

@@ -46,7 +46,7 @@ public:
 public:
     type_information(
         const std::vector<dogen::upsilon::type_information_entry>& entries,
-        const boost::filesystem::path& file_path);
+        const boost::filesystem::path& file_name);
 
 private:
     template<typename Archive>
@@ -61,10 +61,10 @@ public:
     void entries(const std::vector<dogen::upsilon::type_information_entry>& v);
     void entries(const std::vector<dogen::upsilon::type_information_entry>&& v);
 
-    const boost::filesystem::path& file_path() const;
-    boost::filesystem::path& file_path();
-    void file_path(const boost::filesystem::path& v);
-    void file_path(const boost::filesystem::path&& v);
+    const boost::filesystem::path& file_name() const;
+    boost::filesystem::path& file_name();
+    void file_name(const boost::filesystem::path& v);
+    void file_name(const boost::filesystem::path&& v);
 
 public:
     bool operator==(const type_information& rhs) const;
@@ -78,7 +78,7 @@ public:
 
 private:
     std::vector<dogen::upsilon::type_information_entry> entries_;
-    boost::filesystem::path file_path_;
+    boost::filesystem::path file_name_;
 };
 
 } }

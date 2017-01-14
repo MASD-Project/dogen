@@ -67,7 +67,7 @@ void save(Archive& ar,
     ar << make_nvp("directory", v.directory_);
     ar << make_nvp("schema_refs", v.schema_refs_);
     ar << make_nvp("outputs", v.outputs_);
-    ar << make_nvp("file_path", v.file_path_);
+    ar << make_nvp("file_name", v.file_name_);
 }
 
 template<typename Archive>
@@ -77,7 +77,7 @@ void load(Archive& ar,
     ar >> make_nvp("directory", v.directory_);
     ar >> make_nvp("schema_refs", v.schema_refs_);
     ar >> make_nvp("outputs", v.outputs_);
-    ar >> make_nvp("file_path", v.file_path_);
+    ar >> make_nvp("file_name", v.file_name_);
 }
 
 } }

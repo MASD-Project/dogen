@@ -156,9 +156,9 @@
 						</px>
 					</item>
 				</types>
-				<file_path class_id="19" tracking_level="0" version="0">
-					<path></path>
-				</file_path>
+				<file_name class_id="19" tracking_level="0" version="0">
+					<path>Phi.Model.xml</path>
+				</file_name>
 			</second>
 		</item>
 		<item>
@@ -289,9 +289,9 @@
 						</px>
 					</item>
 				</types>
-				<file_path>
-					<path></path>
-				</file_path>
+				<file_name>
+					<path>Zeta.Model.xml</path>
+				</file_name>
 			</second>
 		</item>
 	</schemas>
@@ -334,9 +334,9 @@
 						</file_path>
 					</item>
 				</entries>
-				<file_path>
-					<path>/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/yarn.upsilon/input/Phi.Model.xml.typeinfos</path>
-				</file_path>
+				<file_name>
+					<path>Phi.Model.xml.typeinfos</path>
+				</file_name>
 			</second>
 		</item>
 		<item>
@@ -381,9 +381,9 @@
 						</file_path>
 					</item>
 				</entries>
-				<file_path>
-					<path>/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/yarn.upsilon/input/Zeta.Model.xml.typeinfos</path>
-				</file_path>
+				<file_name>
+					<path>Zeta.Model.xml.typeinfos</path>
+				</file_name>
 			</second>
 		</item>
 	</type_information>
@@ -427,9 +427,9 @@
 				</representations>
 			</item>
 		</outputs>
-		<file_path>
-			<path>/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/yarn.upsilon/input/Test.Model.Configuration.xml</path>
-		</file_path>
+		<file_name>
+			<path>Test.Model.Configuration.xml</path>
+		</file_name>
 	</config>
 </entity>
 </boost_serialization>

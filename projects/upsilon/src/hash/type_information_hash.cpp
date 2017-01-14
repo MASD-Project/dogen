@@ -52,7 +52,7 @@ std::size_t type_information_hasher::hash(const type_information& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_vector_dogen_upsilon_type_information_entry(v.entries()));
-    combine(seed, hash_boost_filesystem_path(v.file_path()));
+    combine(seed, hash_boost_filesystem_path(v.file_name()));
 
     return seed;
 }
