@@ -35,8 +35,9 @@ const std::string invalid_directory("Not a directory: ");
 const std::string file_not_found("File not found: ");
 const std::string directory_not_found("Could not find directory: ");
 
-}
+const std::string dot(".");
 
+}
 
 namespace dogen {
 namespace utility {
@@ -141,6 +142,16 @@ boost::filesystem::path find_file_recursively_upwards(
     const auto gs(relative_file_path.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Could not find file: " << gs;
     return path();
+}
+
+std::string extension(const boost::filesystem::path& p) {
+    const auto s(p.filename().generic_string());
+
+    const auto i(s.find(dot));
+    if (i == std::string::npos)
+        return std::string();
+
+    return s.substr(i);
 }
 
 } } }
