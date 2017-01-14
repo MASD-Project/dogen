@@ -12,38 +12,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-13 Fri 15:45]
+#+CAPTION: Clock summary at [2017-01-14 Sat 16:47]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *76:21* |       |       | 100.0 |
+| *Total time*                                                                | *78:20* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 76:21   |       |       | 100.0 |
-| Active                                                                      |         | 76:21 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.8 |
+| Stories                                                                     | 78:20   |       |       | 100.0 |
+| Active                                                                      |         | 78:20 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:35 |   0.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.2 |
-| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.5 |
-| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  11.4 |
+| COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.3 |
+| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  11.1 |
 | COMPLETED Fix borked windows build                                          |         |       |  0:26 |   0.6 |
 | COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.4 |
-| COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   8.7 |
-| COMPLETED Parsing should support dot notation                               |         |       |  2:54 |   3.8 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   4.3 |
-| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   7.6 |
+| COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   8.5 |
+| COMPLETED Parsing should support dot notation                               |         |       |  2:54 |   3.7 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   4.1 |
+| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   7.4 |
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       |  1:13 |   1.6 |
-| CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.8 |
+| CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.7 |
 | COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
-| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |   9.9 |
-| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.5 |
-| COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.5 |
-| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.2 |
-| COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.5 |
-| COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.1 |
-| COMPLETED Add read support for upsilon models                               |         |       | 13:26 |  17.6 |
-| STARTED Create an upsilon yarn frontend                                     |         |       |  1:45 |   2.3 |
+| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |   9.6 |
+| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.4 |
+| COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.4 |
+| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   3.1 |
+| COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.4 |
+| COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   3.0 |
+| COMPLETED Add read support for upsilon models                               |         |       | 13:26 |  17.1 |
+| STARTED Create an upsilon yarn frontend                                     |         |       |  3:44 |   4.8 |
 | STARTED Add auxiliary function properties to c#                             |         |       |  1:11 |   1.5 |
-| STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.4 |
-| STARTED Add support for generic container types to C#                       |         |       |  1:16 |   1.7 |
+| STARTED Add internal object dumper resolution                               |         |       |  4:51 |   6.2 |
+| STARTED Add support for generic container types to C#                       |         |       |  1:16 |   1.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -1001,6 +1001,9 @@ resulted in additional errors:
   appveyor.install.windows.ps1.
 
 *** STARTED Create an upsilon yarn frontend                           :story:
+    CLOCK: [2017-01-14 Sat 15:35]--[2017-01-14 Sat 16:44] =>  1:09
+    CLOCK: [2017-01-13 Fri 18:19]--[2017-01-13 Fri 18:32] =>  0:13
+    CLOCK: [2017-01-13 Fri 17:41]--[2017-01-13 Fri 18:18] =>  0:37
     CLOCK: [2017-01-13 Fri 14:17]--[2017-01-13 Fri 15:45] =>  1:28
     CLOCK: [2017-01-13 Fri 12:28]--[2017-01-13 Fri 12:45] =>  0:17
 
@@ -1031,6 +1034,9 @@ transformation. There are however a few corner cases:
 - registration with "composite" extensions is not working; boost path
   only returns the last extension - e.g. =.xml= instead of
   =.Configuration.xml=.
+- We've created an "extension" method that returns all extensions for
+  a given file name. It wasn't very useful in the end. If needed in
+  the future its under =f83e9152e=.
 
 Tasks:
 

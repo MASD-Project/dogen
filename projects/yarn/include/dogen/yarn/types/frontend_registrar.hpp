@@ -28,6 +28,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/frontend_interface.hpp"
 
 namespace dogen {
@@ -39,40 +40,28 @@ namespace yarn {
 class frontend_registrar {
 public:
     /**
-     * @brief Returns all available frontends for each extension.
-     *
-     * Only used for debug purposes.
-     */
-    const std::unordered_map<std::string, std::shared_ptr<frontend_interface>>&
-    frontends_by_extension() const;
-
-public:
-    /**
      * @brief Ensures the registrar is ready to be used.
      */
     void validate() const;
 
     /*
-     * @brief Registers a given frontend against a file extension.
+     * @brief Registers a given frontend.
      *
-     * @pre Extension is not yet registered.
+     * @pre Frontend is not yet registered.
      */
-    void register_frontend_against_extension(const std::string& extension,
-        std::shared_ptr<frontend_interface> fi);
+    void register_frontend(std::shared_ptr<frontend_interface> fi);
 
     /**
-     * @brief Returns the frontend that handles the supplied
-     * extension.
+     * @brief Returns the frontend that handles the supplied path.
      *
-     * @pre A frontend must have been registered for this extension.
+     * @pre A frontend must have been registered for this path.
      */
-    frontend_interface& frontend_for_extension(const std::string& extension);
+    frontend_interface& frontend_for_path(const boost::filesystem::path& p);
 
 private:
     std::unordered_map<std::string, std::shared_ptr<frontend_interface>>
-    frontends_by_extension_;
+    frontends_;
 };
-
 
 /*
  * Helper method to register frontends.
@@ -80,8 +69,7 @@ private:
 template<typename Frontend>
 inline void register_frontend(frontend_registrar& rg) {
     auto fe(std::make_shared<Frontend>());
-    for (const auto& e : fe->supported_extensions())
-        rg.register_frontend_against_extension(e, fe);
+    rg.register_frontend(fe);
 }
 
 } }

@@ -27,6 +27,7 @@
 
 #include <list>
 #include <boost/optional.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 
@@ -51,9 +52,10 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief List of file extensions supported by this frontend.
+     * @brief Returns true if the frontend can process the supplied
+     * file name.
      */
-    virtual std::list<std::string> supported_extensions() const = 0;
+    virtual bool can_process(const boost::filesystem::path& p) const = 0;
 
     /**
      * @brief Reads the contents of the descriptor and transforms it

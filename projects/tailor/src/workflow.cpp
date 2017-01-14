@@ -105,7 +105,7 @@ void workflow::tailor(const options::tailoring_options& o) const {
     tgd.path(o.target());
 
     auto& rg(yarn::workflow::frontend_registrar());
-    auto& tgfe(rg.frontend_for_extension(tgd.extension()));
+    auto& tgfe(rg.frontend_for_path(tgd.path()));
 
     BOOST_LOG_SEV(lg, info) << "Reading: " << tgd.path().generic_string();
     const auto im(tgfe.read(tgd));
@@ -113,7 +113,7 @@ void workflow::tailor(const options::tailoring_options& o) const {
     yarn::descriptor od;
     od.extension(o.output().extension().string());
     od.path(o.output());
-    auto& ofe(rg.frontend_for_extension(od.extension()));
+    auto& ofe(rg.frontend_for_path(od.path()));
     ofe.write(im, od);
     BOOST_LOG_SEV(lg, info) << "Writing: " << od.path().generic_string();
 

@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/frontend_error.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
@@ -35,6 +36,8 @@ const std::string empty;
 const std::string no_saving_support(
     "Saving not supported for yarn.upsilon frontend");
 
+const std::string extension("Configuration.xml");
+
 }
 
 namespace dogen {
@@ -47,16 +50,16 @@ std::string frontend::id() const {
     return ::id;
 }
 
-std::list<std::string> frontend::supported_extensions() const {
-    static const std::list<std::string> extensions({ ".Configuration.xml" });
-    return extensions;
+bool frontend::can_process(const boost::filesystem::path& p) const {
+    const auto gs(p.generic_string());
+    return boost::ends_with(gs, extension);
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Loading Upsilon model.";
     dogen::upsilon::hydrator h;
     const auto m(h.hydrate(d.path()));
-    BOOST_LOG_SEV(lg, debug) << "Loaded Dia model.";
+    BOOST_LOG_SEV(lg, debug) << "Loaded Upsilon model.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     workflow w;

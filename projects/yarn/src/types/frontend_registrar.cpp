@@ -31,8 +31,9 @@ static logger lg(logger_factory("yarn.frontend_registrar"));
 const std::string exension_registerd_more_than_once(
     "Extension was registered more than once");
 const std::string no_frontends("No frontends provided.");
-const std::string extension_unsupported(
-    "No frontend is available for extension:");
+const std::string multiple_frontends(
+    "More than one frontend available for file: ");
+const std::string unsupported_path("No frontend is available for path:");
 const std::string already_registered("Extension has already been registered: ");
 const std::string null_frontend("Frontend supplied is null.");
 
@@ -41,57 +42,65 @@ const std::string null_frontend("Frontend supplied is null.");
 namespace dogen {
 namespace yarn {
 
-const std::unordered_map<std::string, std::shared_ptr<frontend_interface>>&
-frontend_registrar::frontends_by_extension() const {
-    return frontends_by_extension_;
-}
-
 void frontend_registrar::validate() const {
-    if (frontends_by_extension_.empty()) {
+    if (frontends_.empty()) {
         BOOST_LOG_SEV(lg, debug) << no_frontends;
         BOOST_THROW_EXCEPTION(registrar_error(no_frontends));
     }
+
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 
     BOOST_LOG_SEV(lg, debug) << "Found "
-                             << frontends_by_extension_.size()
+                             << frontends_.size()
                              << " registered frontends. Details: ";
 
-    for (const auto& pair : frontends_by_extension_) {
-        BOOST_LOG_SEV(lg, debug) << "extension: '" << pair.first << "' "
-                                 << "id: '" << pair.second->id() << "'";
-    }
+    for (const auto& pair : frontends_)
+        BOOST_LOG_SEV(lg, debug) << "id: '" << pair.second->id() << "'";
 }
 
-void frontend_registrar::
-register_frontend_against_extension(const std::string& extension,
-    std::shared_ptr<frontend_interface> fi) {
+void
+frontend_registrar::register_frontend(std::shared_ptr<frontend_interface> fi) {
 
     // note: not logging by design
     if (!fi)
         BOOST_THROW_EXCEPTION(registrar_error(null_frontend));
 
-    auto& c(frontends_by_extension_);
-    const auto i(c.insert(std::make_pair(extension, fi)));
+    const auto i(frontends_.insert(std::make_pair(fi->id(), fi)));
     if (!i.second)
-        BOOST_THROW_EXCEPTION(registrar_error(already_registered + extension));
+        BOOST_THROW_EXCEPTION(registrar_error(already_registered + fi->id()));
 }
 
-frontend_interface& frontend_registrar::
-frontend_for_extension(const std::string& extension) {
-    BOOST_LOG_SEV(lg, debug) << "Looking for frontend for extension: "
-                             << extension;
+frontend_interface&
+frontend_registrar::frontend_for_path(const boost::filesystem::path& p) {
+    const auto gs(p.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Looking for frontend for path: " << gs;
 
-    auto& c(frontends_by_extension_);
-    const auto i(c.find(extension));
-    if (i != c.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found frontend for extension. Extension: "
-                                 << extension << "' frontend: '"
-                                 << i->second->id() << "'";
-        return *i->second;
+    bool found(false);
+    std::shared_ptr<frontend_interface> r;
+    for (const auto& pair : frontends_) {
+        const auto& fe_id(pair.first);
+        const auto& fe(pair.second);
+        if (fe->can_process(p)) {
+            BOOST_LOG_SEV(lg, debug) << "Found frontend for path. Frontend: '"
+                                     << fe_id << "'";
+
+            if (found) {
+                BOOST_LOG_SEV(lg, error) << multiple_frontends  << gs
+                                         << " Frontend: '" << fe_id << "'";
+                BOOST_THROW_EXCEPTION(registrar_error(multiple_frontends + gs));
+            }
+
+            found = true;
+            r = pair.second;
+        }
     }
-    BOOST_LOG_SEV(lg, error) << extension_unsupported  << extension;
-    BOOST_THROW_EXCEPTION(registrar_error(extension_unsupported + extension));
+
+    if (!found) {
+        BOOST_LOG_SEV(lg, error) << unsupported_path  << gs;
+        BOOST_THROW_EXCEPTION(registrar_error(unsupported_path + gs));
+    }
+
+    return *r;
 }
 
 } }

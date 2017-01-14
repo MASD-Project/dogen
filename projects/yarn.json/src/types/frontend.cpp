@@ -29,7 +29,9 @@ namespace {
 using namespace dogen::utility::log;
 const std::string id("yarn.json.frontend");
 auto lg(logger_factory(id));
+
 const std::string empty;
+const std::string extension(".json");
 
 }
 
@@ -43,9 +45,8 @@ std::string frontend::id() const {
     return ::id;
 }
 
-std::list<std::string> frontend::supported_extensions() const {
-    static const std::list<std::string> extensions({ ".json" });
-    return extensions;
+bool frontend::can_process(const boost::filesystem::path& p) const {
+    return p.extension() == extension;
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {

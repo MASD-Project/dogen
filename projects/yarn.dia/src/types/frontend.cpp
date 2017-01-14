@@ -32,6 +32,8 @@ using namespace dogen::utility::log;
 const std::string id("yarn.dia.frontend");
 auto lg(logger_factory(id));
 
+const std::string extension(".dia");
+
 const std::string no_saving_support(
     "Saving not supported for yarn.dia frontend");
 
@@ -47,9 +49,8 @@ std::string frontend::id() const {
     return ::id;
 }
 
-std::list<std::string> frontend::supported_extensions() const {
-    static const std::list<std::string> extensions({ ".dia" });
-    return extensions;
+bool frontend::can_process(const boost::filesystem::path& p) const {
+    return p.extension() == extension;
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
