@@ -50,18 +50,10 @@ create_dogen_upsilon_type_information(const unsigned int position) {
     return dogen::upsilon::type_information_generator::create(position);
 }
 
-std::vector<dogen::upsilon::type_information> create_std_vector_dogen_upsilon_type_information(unsigned int position) {
-    std::vector<dogen::upsilon::type_information> r;
+std::unordered_map<std::string, dogen::upsilon::type_information> create_std_unordered_map_std_string_dogen_upsilon_type_information(unsigned int position) {
+    std::unordered_map<std::string, dogen::upsilon::type_information> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_upsilon_type_information(position + i));
-    }
-    return r;
-}
-
-std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> > create_std_unordered_map_std_string_std_vector_dogen_upsilon_type_information(unsigned int position) {
-    std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> > r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_vector_dogen_upsilon_type_information(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_upsilon_type_information(position + i)));
     }
     return r;
 }
@@ -81,7 +73,7 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.schemas(create_std_unordered_map_std_string_dogen_upsilon_schema(position + 0));
-    v.type_information(create_std_unordered_map_std_string_std_vector_dogen_upsilon_type_information(position + 1));
+    v.type_information(create_std_unordered_map_std_string_dogen_upsilon_type_information(position + 1));
     v.config(create_dogen_upsilon_config(position + 2));
 }
 

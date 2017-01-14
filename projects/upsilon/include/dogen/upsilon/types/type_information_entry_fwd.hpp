@@ -18,34 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/upsilon/io/type_information_io.hpp"
-#include "dogen/upsilon/io/type_information_entry_io.hpp"
+#ifndef DOGEN_UPSILON_TYPES_TYPE_INFORMATION_ENTRY_FWD_HPP
+#define DOGEN_UPSILON_TYPES_TYPE_INFORMATION_ENTRY_FWD_HPP
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::type_information_entry>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const type_information& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::type_information\"" << ", "
-      << "\"entries\": " << v.entries() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
-      << " }";
-    return(s);
-}
+class type_information_entry;
 
 } }
+
+#endif

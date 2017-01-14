@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/upsilon/test_data/config_td.hpp"
 #include "dogen/upsilon/test_data/output_td.hpp"
 #include "dogen/upsilon/test_data/directory_td.hpp"
@@ -56,6 +57,13 @@ std::vector<dogen::upsilon::output> create_std_vector_dogen_upsilon_output(unsig
     return r;
 }
 
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
+}
+
 }
 
 namespace dogen {
@@ -68,6 +76,7 @@ populate(const unsigned int position, result_type& v) {
     v.directory(create_dogen_upsilon_directory(position + 0));
     v.schema_refs(create_std_vector_dogen_upsilon_schema_ref(position + 1));
     v.outputs(create_std_vector_dogen_upsilon_output(position + 2));
+    v.file_path(create_boost_filesystem_path(position + 3));
 }
 
 config_generator::result_type

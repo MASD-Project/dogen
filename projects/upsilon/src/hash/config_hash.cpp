@@ -47,6 +47,12 @@ inline std::size_t hash_std_vector_dogen_upsilon_output(const std::vector<dogen:
     return seed;
 }
 
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -58,6 +64,7 @@ std::size_t config_hasher::hash(const config& v) {
     combine(seed, v.directory());
     combine(seed, hash_std_vector_dogen_upsilon_schema_ref(v.schema_refs()));
     combine(seed, hash_std_vector_dogen_upsilon_output(v.outputs()));
+    combine(seed, hash_boost_filesystem_path(v.file_path()));
 
     return seed;
 }

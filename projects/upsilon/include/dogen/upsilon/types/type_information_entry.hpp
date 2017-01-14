@@ -18,48 +18,53 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_TYPES_TYPE_INFORMATION_HPP
-#define DOGEN_UPSILON_TYPES_TYPE_INFORMATION_HPP
+#ifndef DOGEN_UPSILON_TYPES_TYPE_INFORMATION_ENTRY_HPP
+#define DOGEN_UPSILON_TYPES_TYPE_INFORMATION_ENTRY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <vector>
+#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
-#include "dogen/upsilon/types/type_information_entry.hpp"
-#include "dogen/upsilon/serialization/type_information_fwd_ser.hpp"
+#include "dogen/upsilon/serialization/type_information_entry_fwd_ser.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-class type_information final {
+class type_information_entry final {
 public:
-    type_information() = default;
-    type_information(const type_information&) = default;
-    ~type_information() = default;
+    type_information_entry() = default;
+    type_information_entry(const type_information_entry&) = default;
+    ~type_information_entry() = default;
 
 public:
-    type_information(type_information&& rhs);
+    type_information_entry(type_information_entry&& rhs);
 
 public:
-    type_information(
-        const std::vector<dogen::upsilon::type_information_entry>& entries,
+    type_information_entry(
+        const std::string& name,
+        const std::string& pof_id,
         const boost::filesystem::path& file_path);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::type_information& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::type_information_entry& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::upsilon::type_information& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::upsilon::type_information_entry& v, unsigned int version);
 
 public:
-    const std::vector<dogen::upsilon::type_information_entry>& entries() const;
-    std::vector<dogen::upsilon::type_information_entry>& entries();
-    void entries(const std::vector<dogen::upsilon::type_information_entry>& v);
-    void entries(const std::vector<dogen::upsilon::type_information_entry>&& v);
+    const std::string& name() const;
+    std::string& name();
+    void name(const std::string& v);
+    void name(const std::string&& v);
+
+    const std::string& pof_id() const;
+    std::string& pof_id();
+    void pof_id(const std::string& v);
+    void pof_id(const std::string&& v);
 
     const boost::filesystem::path& file_path() const;
     boost::filesystem::path& file_path();
@@ -67,17 +72,18 @@ public:
     void file_path(const boost::filesystem::path&& v);
 
 public:
-    bool operator==(const type_information& rhs) const;
-    bool operator!=(const type_information& rhs) const {
+    bool operator==(const type_information_entry& rhs) const;
+    bool operator!=(const type_information_entry& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(type_information& other) noexcept;
-    type_information& operator=(type_information other);
+    void swap(type_information_entry& other) noexcept;
+    type_information_entry& operator=(type_information_entry other);
 
 private:
-    std::vector<dogen::upsilon::type_information_entry> entries_;
+    std::string name_;
+    std::string pof_id_;
     boost::filesystem::path file_path_;
 };
 
@@ -87,8 +93,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::upsilon::type_information& lhs,
-    dogen::upsilon::type_information& rhs) {
+    dogen::upsilon::type_information_entry& lhs,
+    dogen::upsilon::type_information_entry& rhs) {
     lhs.swap(rhs);
 }
 

@@ -29,6 +29,7 @@
 #include <vector>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
+#include <boost/filesystem/path.hpp>
 #include "dogen/upsilon/types/tag.hpp"
 #include "dogen/upsilon/types/type_fwd.hpp"
 #include "dogen/upsilon/types/dependency.hpp"
@@ -41,8 +42,10 @@ class schema final {
 public:
     schema() = default;
     schema(const schema&) = default;
-    schema(schema&&) = default;
     ~schema() = default;
+
+public:
+    schema(schema&& rhs);
 
 public:
     schema(
@@ -52,7 +55,8 @@ public:
         const std::string& base_guid,
         const std::vector<dogen::upsilon::dependency>& dependencies,
         const std::vector<dogen::upsilon::tag>& tags,
-        const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types);
+        const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types,
+        const boost::filesystem::path& file_path);
 
 private:
     template<typename Archive>
@@ -97,6 +101,11 @@ public:
     void types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >& v);
     void types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >&& v);
 
+    const boost::filesystem::path& file_path() const;
+    boost::filesystem::path& file_path();
+    void file_path(const boost::filesystem::path& v);
+    void file_path(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const schema& rhs) const;
     bool operator!=(const schema& rhs) const {
@@ -115,6 +124,7 @@ private:
     std::vector<dogen::upsilon::dependency> dependencies_;
     std::vector<dogen::upsilon::tag> tags_;
     std::vector<boost::shared_ptr<dogen::upsilon::type> > types_;
+    boost::filesystem::path file_path_;
 };
 
 } }

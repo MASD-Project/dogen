@@ -44,5 +44,6 @@
 #include "dogen/upsilon/io/representation_io.hpp"
 #include "dogen/upsilon/io/intrinsic_types_io.hpp"
 #include "dogen/upsilon/io/type_information_io.hpp"
+#include "dogen/upsilon/io/type_information_entry_io.hpp"
 
 #endif

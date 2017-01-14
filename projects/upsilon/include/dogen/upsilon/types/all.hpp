@@ -48,5 +48,6 @@
 #include "dogen/upsilon/types/hydration_error.hpp"
 #include "dogen/upsilon/types/intrinsic_types.hpp"
 #include "dogen/upsilon/types/type_information.hpp"
+#include "dogen/upsilon/types/type_information_entry.hpp"
 
 #endif

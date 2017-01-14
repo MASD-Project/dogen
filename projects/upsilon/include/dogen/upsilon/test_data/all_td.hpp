@@ -44,5 +44,6 @@
 #include "dogen/upsilon/test_data/representation_td.hpp"
 #include "dogen/upsilon/test_data/intrinsic_types_td.hpp"
 #include "dogen/upsilon/test_data/type_information_td.hpp"
+#include "dogen/upsilon/test_data/type_information_entry_td.hpp"
 
 #endif

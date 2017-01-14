@@ -19,48 +19,24 @@
  *
  */
 #include <ostream>
-#include "dogen/upsilon/io/config_io.hpp"
-#include "dogen/upsilon/io/output_io.hpp"
-#include "dogen/upsilon/io/directory_io.hpp"
-#include "dogen/upsilon/io/schema_ref_io.hpp"
+#include <boost/algorithm/string.hpp>
+#include "dogen/upsilon/io/type_information_entry_io.hpp"
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::schema_ref>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
     return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::output>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
 }
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const config& v) {
+std::ostream& operator<<(std::ostream& s, const type_information_entry& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::config\"" << ", "
-      << "\"directory\": " << v.directory() << ", "
-      << "\"schema_refs\": " << v.schema_refs() << ", "
-      << "\"outputs\": " << v.outputs() << ", "
+      << "\"__type__\": " << "\"dogen::upsilon::type_information_entry\"" << ", "
+      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
+      << "\"pof_id\": " << "\"" << tidy_up_string(v.pof_id()) << "\"" << ", "
       << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
       << " }";
     return(s);

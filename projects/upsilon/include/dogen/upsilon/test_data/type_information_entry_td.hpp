@@ -18,34 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/upsilon/io/type_information_io.hpp"
-#include "dogen/upsilon/io/type_information_entry_io.hpp"
+#ifndef DOGEN_UPSILON_TEST_DATA_TYPE_INFORMATION_ENTRY_TD_HPP
+#define DOGEN_UPSILON_TEST_DATA_TYPE_INFORMATION_ENTRY_TD_HPP
 
-namespace std {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::type_information_entry>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include "dogen/upsilon/types/type_information_entry.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const type_information& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::type_information\"" << ", "
-      << "\"entries\": " << v.entries() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
-      << " }";
-    return(s);
-}
+class type_information_entry_generator {
+public:
+    type_information_entry_generator();
+
+public:
+    typedef dogen::upsilon::type_information_entry result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

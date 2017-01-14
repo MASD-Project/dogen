@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include <vector>
 #include <algorithm>
 #include <unordered_map>
 #include "dogen/upsilon/types/config.hpp"
@@ -47,7 +46,7 @@ public:
 public:
     model(
         const std::unordered_map<std::string, dogen::upsilon::schema>& schemas,
-        const std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> >& type_information,
+        const std::unordered_map<std::string, dogen::upsilon::type_information>& type_information,
         const dogen::upsilon::config& config);
 
 private:
@@ -63,10 +62,10 @@ public:
     void schemas(const std::unordered_map<std::string, dogen::upsilon::schema>& v);
     void schemas(const std::unordered_map<std::string, dogen::upsilon::schema>&& v);
 
-    const std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> >& type_information() const;
-    std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> >& type_information();
-    void type_information(const std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> >& v);
-    void type_information(const std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> >&& v);
+    const std::unordered_map<std::string, dogen::upsilon::type_information>& type_information() const;
+    std::unordered_map<std::string, dogen::upsilon::type_information>& type_information();
+    void type_information(const std::unordered_map<std::string, dogen::upsilon::type_information>& v);
+    void type_information(const std::unordered_map<std::string, dogen::upsilon::type_information>&& v);
 
     const dogen::upsilon::config& config() const;
     dogen::upsilon::config& config();
@@ -85,7 +84,7 @@ public:
 
 private:
     std::unordered_map<std::string, dogen::upsilon::schema> schemas_;
-    std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> > type_information_;
+    std::unordered_map<std::string, dogen::upsilon::type_information> type_information_;
     dogen::upsilon::config config_;
 };
 

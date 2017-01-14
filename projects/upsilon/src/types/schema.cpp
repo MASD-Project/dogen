@@ -33,6 +33,16 @@ const boost::shared_ptr<dogen::upsilon::type>& rhs) {
 namespace dogen {
 namespace upsilon {
 
+schema::schema(schema&& rhs)
+    : name_(std::move(rhs.name_)),
+      id_min_(std::move(rhs.id_min_)),
+      id_max_(std::move(rhs.id_max_)),
+      base_guid_(std::move(rhs.base_guid_)),
+      dependencies_(std::move(rhs.dependencies_)),
+      tags_(std::move(rhs.tags_)),
+      types_(std::move(rhs.types_)),
+      file_path_(std::move(rhs.file_path_)) { }
+
 schema::schema(
     const std::string& name,
     const std::string& id_min,
@@ -40,14 +50,16 @@ schema::schema(
     const std::string& base_guid,
     const std::vector<dogen::upsilon::dependency>& dependencies,
     const std::vector<dogen::upsilon::tag>& tags,
-    const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types)
+    const std::vector<boost::shared_ptr<dogen::upsilon::type> >& types,
+    const boost::filesystem::path& file_path)
     : name_(name),
       id_min_(id_min),
       id_max_(id_max),
       base_guid_(base_guid),
       dependencies_(dependencies),
       tags_(tags),
-      types_(types) { }
+      types_(types),
+      file_path_(file_path) { }
 
 void schema::swap(schema& other) noexcept {
     using std::swap;
@@ -58,6 +70,7 @@ void schema::swap(schema& other) noexcept {
     swap(dependencies_, other.dependencies_);
     swap(tags_, other.tags_);
     swap(types_, other.types_);
+    swap(file_path_, other.file_path_);
 }
 
 bool schema::operator==(const schema& rhs) const {
@@ -67,7 +80,8 @@ bool schema::operator==(const schema& rhs) const {
         base_guid_ == rhs.base_guid_ &&
         dependencies_ == rhs.dependencies_ &&
         tags_ == rhs.tags_ &&
-        types_ == rhs.types_;
+        types_ == rhs.types_ &&
+        file_path_ == rhs.file_path_;
 }
 
 schema& schema::operator=(schema other) {
@@ -186,6 +200,22 @@ void schema::types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >& 
 
 void schema::types(const std::vector<boost::shared_ptr<dogen::upsilon::type> >&& v) {
     types_ = std::move(v);
+}
+
+const boost::filesystem::path& schema::file_path() const {
+    return file_path_;
+}
+
+boost::filesystem::path& schema::file_path() {
+    return file_path_;
+}
+
+void schema::file_path(const boost::filesystem::path& v) {
+    file_path_ = v;
+}
+
+void schema::file_path(const boost::filesystem::path&& v) {
+    file_path_ = std::move(v);
 }
 
 } }

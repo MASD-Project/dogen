@@ -23,21 +23,25 @@
 namespace dogen {
 namespace upsilon {
 
+type_information::type_information(type_information&& rhs)
+    : entries_(std::move(rhs.entries_)),
+      file_path_(std::move(rhs.file_path_)) { }
+
 type_information::type_information(
-    const std::string& name,
-    const std::string& pof_id)
-    : name_(name),
-      pof_id_(pof_id) { }
+    const std::vector<dogen::upsilon::type_information_entry>& entries,
+    const boost::filesystem::path& file_path)
+    : entries_(entries),
+      file_path_(file_path) { }
 
 void type_information::swap(type_information& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
-    swap(pof_id_, other.pof_id_);
+    swap(entries_, other.entries_);
+    swap(file_path_, other.file_path_);
 }
 
 bool type_information::operator==(const type_information& rhs) const {
-    return name_ == rhs.name_ &&
-        pof_id_ == rhs.pof_id_;
+    return entries_ == rhs.entries_ &&
+        file_path_ == rhs.file_path_;
 }
 
 type_information& type_information::operator=(type_information other) {
@@ -46,36 +50,36 @@ type_information& type_information::operator=(type_information other) {
     return *this;
 }
 
-const std::string& type_information::name() const {
-    return name_;
+const std::vector<dogen::upsilon::type_information_entry>& type_information::entries() const {
+    return entries_;
 }
 
-std::string& type_information::name() {
-    return name_;
+std::vector<dogen::upsilon::type_information_entry>& type_information::entries() {
+    return entries_;
 }
 
-void type_information::name(const std::string& v) {
-    name_ = v;
+void type_information::entries(const std::vector<dogen::upsilon::type_information_entry>& v) {
+    entries_ = v;
 }
 
-void type_information::name(const std::string&& v) {
-    name_ = std::move(v);
+void type_information::entries(const std::vector<dogen::upsilon::type_information_entry>&& v) {
+    entries_ = std::move(v);
 }
 
-const std::string& type_information::pof_id() const {
-    return pof_id_;
+const boost::filesystem::path& type_information::file_path() const {
+    return file_path_;
 }
 
-std::string& type_information::pof_id() {
-    return pof_id_;
+boost::filesystem::path& type_information::file_path() {
+    return file_path_;
 }
 
-void type_information::pof_id(const std::string& v) {
-    pof_id_ = v;
+void type_information::file_path(const boost::filesystem::path& v) {
+    file_path_ = v;
 }
 
-void type_information::pof_id(const std::string&& v) {
-    pof_id_ = std::move(v);
+void type_information::file_path(const boost::filesystem::path&& v) {
+    file_path_ = std::move(v);
 }
 
 } }

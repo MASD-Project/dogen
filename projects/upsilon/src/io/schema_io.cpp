@@ -102,7 +102,8 @@ std::ostream& operator<<(std::ostream& s, const schema& v) {
       << "\"base_guid\": " << "\"" << tidy_up_string(v.base_guid()) << "\"" << ", "
       << "\"dependencies\": " << v.dependencies() << ", "
       << "\"tags\": " << v.tags() << ", "
-      << "\"types\": " << v.types()
+      << "\"types\": " << v.types() << ", "
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
       << " }";
     return(s);
 }

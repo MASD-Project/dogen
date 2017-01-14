@@ -30,10 +30,34 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/upsilon/serialization/tag_ser.hpp"
 #include "dogen/upsilon/serialization/type_ser.hpp"
 #include "dogen/upsilon/serialization/schema_ser.hpp"
 #include "dogen/upsilon/serialization/dependency_ser.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
 
 namespace boost {
 namespace serialization {
@@ -49,6 +73,7 @@ void save(Archive& ar,
     ar << make_nvp("dependencies", v.dependencies_);
     ar << make_nvp("tags", v.tags_);
     ar << make_nvp("types", v.types_);
+    ar << make_nvp("file_path", v.file_path_);
 }
 
 template<typename Archive>
@@ -62,6 +87,7 @@ void load(Archive& ar,
     ar >> make_nvp("dependencies", v.dependencies_);
     ar >> make_nvp("tags", v.tags_);
     ar >> make_nvp("types", v.types_);
+    ar >> make_nvp("file_path", v.file_path_);
 }
 
 } }

@@ -18,34 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/upsilon/io/type_information_io.hpp"
-#include "dogen/upsilon/io/type_information_entry_io.hpp"
+#ifndef DOGEN_UPSILON_HASH_TYPE_INFORMATION_ENTRY_HASH_HPP
+#define DOGEN_UPSILON_HASH_TYPE_INFORMATION_ENTRY_HASH_HPP
 
-namespace std {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::type_information_entry>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
+#include <functional>
+#include "dogen/upsilon/types/type_information_entry.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const type_information& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::type_information\"" << ", "
-      << "\"entries\": " << v.entries() << ", "
-      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\""
-      << " }";
-    return(s);
-}
+struct type_information_entry_hasher {
+public:
+    static std::size_t hash(const type_information_entry& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::upsilon::type_information_entry> {
+public:
+    size_t operator()(const dogen::upsilon::type_information_entry& v) const {
+        return dogen::upsilon::type_information_entry_hasher::hash(v);
+    }
+};
+
+}
+#endif

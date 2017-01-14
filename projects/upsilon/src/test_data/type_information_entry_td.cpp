@@ -19,22 +19,14 @@
  *
  */
 #include <sstream>
-#include "dogen/upsilon/test_data/type_information_td.hpp"
 #include "dogen/upsilon/test_data/type_information_entry_td.hpp"
 
 namespace {
 
-dogen::upsilon::type_information_entry
-create_dogen_upsilon_type_information_entry(const unsigned int position) {
-    return dogen::upsilon::type_information_entry_generator::create(position);
-}
-
-std::vector<dogen::upsilon::type_information_entry> create_std_vector_dogen_upsilon_type_information_entry(unsigned int position) {
-    std::vector<dogen::upsilon::type_information_entry> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_upsilon_type_information_entry(position + i));
-    }
-    return r;
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 boost::filesystem::path
@@ -49,30 +41,31 @@ create_boost_filesystem_path(const unsigned int position) {
 namespace dogen {
 namespace upsilon {
 
-type_information_generator::type_information_generator() : position_(0) { }
+type_information_entry_generator::type_information_entry_generator() : position_(0) { }
 
-void type_information_generator::
+void type_information_entry_generator::
 populate(const unsigned int position, result_type& v) {
-    v.entries(create_std_vector_dogen_upsilon_type_information_entry(position + 0));
-    v.file_path(create_boost_filesystem_path(position + 1));
+    v.name(create_std_string(position + 0));
+    v.pof_id(create_std_string(position + 1));
+    v.file_path(create_boost_filesystem_path(position + 2));
 }
 
-type_information_generator::result_type
-type_information_generator::create(const unsigned int position) {
-    type_information r;
-    type_information_generator::populate(position, r);
+type_information_entry_generator::result_type
+type_information_entry_generator::create(const unsigned int position) {
+    type_information_entry r;
+    type_information_entry_generator::populate(position, r);
     return r;
 }
 
-type_information_generator::result_type*
-type_information_generator::create_ptr(const unsigned int position) {
-    type_information* p = new type_information();
-    type_information_generator::populate(position, *p);
+type_information_entry_generator::result_type*
+type_information_entry_generator::create_ptr(const unsigned int position) {
+    type_information_entry* p = new type_information_entry();
+    type_information_entry_generator::populate(position, *p);
     return p;
 }
 
-type_information_generator::result_type
-type_information_generator::operator()() {
+type_information_entry_generator::result_type
+type_information_entry_generator::operator()() {
     return create(position_++);
 }
 

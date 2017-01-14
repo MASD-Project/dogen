@@ -40,19 +40,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_upsilon_schema(const 
     return seed;
 }
 
-inline std::size_t hash_std_vector_dogen_upsilon_type_information(const std::vector<dogen::upsilon::type_information>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_vector_dogen_upsilon_type_information(const std::unordered_map<std::string, std::vector<dogen::upsilon::type_information> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_upsilon_type_information(const std::unordered_map<std::string, dogen::upsilon::type_information>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_vector_dogen_upsilon_type_information(i.second));
+        combine(seed, i.second);
     }
     return seed;
 }
@@ -66,7 +58,7 @@ std::size_t model_hasher::hash(const model& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_unordered_map_std_string_dogen_upsilon_schema(v.schemas()));
-    combine(seed, hash_std_unordered_map_std_string_std_vector_dogen_upsilon_type_information(v.type_information()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_upsilon_type_information(v.type_information()));
     combine(seed, v.config());
 
     return seed;

@@ -99,18 +99,19 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_model_typeinfos_results_in_expected_object) {
     const auto a(h.hydrate_type_information(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
 
-    BOOST_REQUIRE(a.size() == 4);
-    BOOST_CHECK(a[0].name() == "Date");
-    BOOST_CHECK(a[0].pof_id() == "5123");
+    const auto& entries(a.entries());
+    BOOST_REQUIRE(entries.size() == 4);
+    BOOST_CHECK(entries[0].name() == "Date");
+    BOOST_CHECK(entries[0].pof_id() == "5123");
 
-    BOOST_CHECK(a[1].name() == "TestType");
-    BOOST_CHECK(a[1].pof_id() == "5124");
+    BOOST_CHECK(entries[1].name() == "TestType");
+    BOOST_CHECK(entries[1].pof_id() == "5124");
 
-    BOOST_CHECK(a[2].name() == "CollectionTestType");
-    BOOST_CHECK(a[2].pof_id() == "5125");
+    BOOST_CHECK(entries[2].name() == "CollectionTestType");
+    BOOST_CHECK(entries[2].pof_id() == "5125");
 
-    BOOST_CHECK(a[3].name() == "Enumeration");
-    BOOST_CHECK(a[3].pof_id() == "5154");
+    BOOST_CHECK(entries[3].name() == "Enumeration");
+    BOOST_CHECK(entries[3].pof_id() == "5154");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
@@ -211,21 +212,22 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_model_typeinfos_results_in_expected_object) 
     const auto a(h.hydrate_type_information(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
 
-    BOOST_REQUIRE(a.size() == 5);
-    BOOST_CHECK(a[0].name() == "MissingValue");
-    BOOST_CHECK(a[0].pof_id() == "1123");
+    const auto& entries(a.entries());
+    BOOST_REQUIRE(entries.size() == 5);
+    BOOST_CHECK(entries[0].name() == "MissingValue");
+    BOOST_CHECK(entries[0].pof_id() == "1123");
 
-    BOOST_CHECK(a[1].name() == "Binary");
-    BOOST_CHECK(a[1].pof_id() == "1124");
+    BOOST_CHECK(entries[1].name() == "Binary");
+    BOOST_CHECK(entries[1].pof_id() == "1124");
 
-    BOOST_CHECK(a[2].name() == "Date");
-    BOOST_CHECK(a[2].pof_id() == "1125");
+    BOOST_CHECK(entries[2].name() == "Date");
+    BOOST_CHECK(entries[2].pof_id() == "1125");
 
-    BOOST_CHECK(a[3].name() == "ModelValues");
-    BOOST_CHECK(a[3].pof_id() == "1154");
+    BOOST_CHECK(entries[3].name() == "ModelValues");
+    BOOST_CHECK(entries[3].pof_id() == "1154");
 
-    BOOST_CHECK(a[4].name() == "Binaries");
-    BOOST_CHECK(a[4].pof_id() == "1155");
+    BOOST_CHECK(entries[4].name() == "Binaries");
+    BOOST_CHECK(entries[4].pof_id() == "1155");
 }
 
 BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {

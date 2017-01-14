@@ -44,5 +44,6 @@
 #include "dogen/upsilon/serialization/representation_ser.hpp"
 #include "dogen/upsilon/serialization/intrinsic_types_ser.hpp"
 #include "dogen/upsilon/serialization/type_information_ser.hpp"
+#include "dogen/upsilon/serialization/type_information_entry_ser.hpp"
 
 #endif

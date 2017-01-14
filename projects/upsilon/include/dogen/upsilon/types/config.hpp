@@ -27,6 +27,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "dogen/upsilon/types/output.hpp"
 #include "dogen/upsilon/types/directory.hpp"
 #include "dogen/upsilon/types/schema_ref.hpp"
@@ -39,14 +40,17 @@ class config final {
 public:
     config() = default;
     config(const config&) = default;
-    config(config&&) = default;
     ~config() = default;
+
+public:
+    config(config&& rhs);
 
 public:
     config(
         const dogen::upsilon::directory& directory,
         const std::vector<dogen::upsilon::schema_ref>& schema_refs,
-        const std::vector<dogen::upsilon::output>& outputs);
+        const std::vector<dogen::upsilon::output>& outputs,
+        const boost::filesystem::path& file_path);
 
 private:
     template<typename Archive>
@@ -71,6 +75,11 @@ public:
     void outputs(const std::vector<dogen::upsilon::output>& v);
     void outputs(const std::vector<dogen::upsilon::output>&& v);
 
+    const boost::filesystem::path& file_path() const;
+    boost::filesystem::path& file_path();
+    void file_path(const boost::filesystem::path& v);
+    void file_path(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const config& rhs) const;
     bool operator!=(const config& rhs) const {
@@ -85,6 +94,7 @@ private:
     dogen::upsilon::directory directory_;
     std::vector<dogen::upsilon::schema_ref> schema_refs_;
     std::vector<dogen::upsilon::output> outputs_;
+    boost::filesystem::path file_path_;
 };
 
 } }

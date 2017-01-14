@@ -44,5 +44,6 @@
 #include "dogen/upsilon/hash/representation_hash.hpp"
 #include "dogen/upsilon/hash/intrinsic_types_hash.hpp"
 #include "dogen/upsilon/hash/type_information_hash.hpp"
+#include "dogen/upsilon/hash/type_information_entry_hash.hpp"
 
 #endif

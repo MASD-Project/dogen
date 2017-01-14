@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/type_information_hash.hpp"
 #include "dogen/upsilon/hash/type_information_entry_hash.hpp"
 
 namespace {
@@ -27,14 +26,6 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_vector_dogen_upsilon_type_information_entry(const std::vector<dogen::upsilon::type_information_entry>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
 }
 
 inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
@@ -48,10 +39,11 @@ inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) 
 namespace dogen {
 namespace upsilon {
 
-std::size_t type_information_hasher::hash(const type_information& v) {
+std::size_t type_information_entry_hasher::hash(const type_information_entry& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_vector_dogen_upsilon_type_information_entry(v.entries()));
+    combine(seed, v.name());
+    combine(seed, v.pof_id());
     combine(seed, hash_boost_filesystem_path(v.file_path()));
 
     return seed;

@@ -21,14 +21,39 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
-#include <boost/serialization/string.hpp>
+#include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/upsilon/serialization/type_information_ser.hpp"
+#include "dogen/upsilon/serialization/type_information_entry_ser.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
 
 namespace boost {
 namespace serialization {
@@ -37,16 +62,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::upsilon::type_information& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
-    ar << make_nvp("pof_id", v.pof_id_);
+    ar << make_nvp("entries", v.entries_);
+    ar << make_nvp("file_path", v.file_path_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::upsilon::type_information& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
-    ar >> make_nvp("pof_id", v.pof_id_);
+    ar >> make_nvp("entries", v.entries_);
+    ar >> make_nvp("file_path", v.file_path_);
 }
 
 } }

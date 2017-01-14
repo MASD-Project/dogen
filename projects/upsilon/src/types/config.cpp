@@ -23,25 +23,35 @@
 namespace dogen {
 namespace upsilon {
 
+config::config(config&& rhs)
+    : directory_(std::move(rhs.directory_)),
+      schema_refs_(std::move(rhs.schema_refs_)),
+      outputs_(std::move(rhs.outputs_)),
+      file_path_(std::move(rhs.file_path_)) { }
+
 config::config(
     const dogen::upsilon::directory& directory,
     const std::vector<dogen::upsilon::schema_ref>& schema_refs,
-    const std::vector<dogen::upsilon::output>& outputs)
+    const std::vector<dogen::upsilon::output>& outputs,
+    const boost::filesystem::path& file_path)
     : directory_(directory),
       schema_refs_(schema_refs),
-      outputs_(outputs) { }
+      outputs_(outputs),
+      file_path_(file_path) { }
 
 void config::swap(config& other) noexcept {
     using std::swap;
     swap(directory_, other.directory_);
     swap(schema_refs_, other.schema_refs_);
     swap(outputs_, other.outputs_);
+    swap(file_path_, other.file_path_);
 }
 
 bool config::operator==(const config& rhs) const {
     return directory_ == rhs.directory_ &&
         schema_refs_ == rhs.schema_refs_ &&
-        outputs_ == rhs.outputs_;
+        outputs_ == rhs.outputs_ &&
+        file_path_ == rhs.file_path_;
 }
 
 config& config::operator=(config other) {
@@ -96,6 +106,22 @@ void config::outputs(const std::vector<dogen::upsilon::output>& v) {
 
 void config::outputs(const std::vector<dogen::upsilon::output>&& v) {
     outputs_ = std::move(v);
+}
+
+const boost::filesystem::path& config::file_path() const {
+    return file_path_;
+}
+
+boost::filesystem::path& config::file_path() {
+    return file_path_;
+}
+
+void config::file_path(const boost::filesystem::path& v) {
+    file_path_ = v;
+}
+
+void config::file_path(const boost::filesystem::path&& v) {
+    file_path_ = std::move(v);
 }
 
 } }

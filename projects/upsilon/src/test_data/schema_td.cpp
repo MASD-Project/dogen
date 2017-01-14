@@ -78,6 +78,13 @@ std::vector<boost::shared_ptr<dogen::upsilon::type> > create_std_vector_boost_sh
     return r;
 }
 
+boost::filesystem::path
+create_boost_filesystem_path(const unsigned int position) {
+    std::ostringstream s;
+    s << "/a/path/number_" << position;
+    return boost::filesystem::path(s.str());
+}
+
 }
 
 namespace dogen {
@@ -94,6 +101,7 @@ populate(const unsigned int position, result_type& v) {
     v.dependencies(create_std_vector_dogen_upsilon_dependency(position + 4));
     v.tags(create_std_vector_dogen_upsilon_tag(position + 5));
     v.types(create_std_vector_boost_shared_ptr_dogen_upsilon_type(position + 6));
+    v.file_path(create_boost_filesystem_path(position + 7));
 }
 
 schema_generator::result_type
