@@ -11,6 +11,18 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Code-generate a "one-shot" serialisation API                      :story:
+
+For the dia model we manually generated a class called
+=diagram_serialization_helper=. It provided a simple API to read/write
+the dia model:
+
+: static void to_xml(std::ostream& s, const diagram& d);
+: static diagram from_xml(std::istream& s);
+
+It would be nice to have this code-generated and also to cover the
+other two archives (text, binary).
+
 *** Rename yarn types that clash with reserved keywords               :story:
 
 When we added the new validation rules, yarn did not pass
