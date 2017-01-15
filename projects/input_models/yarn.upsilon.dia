@@ -129,13 +129,13 @@ formats, it will be deprecated.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="39,18"/>
+        <dia:point val="35,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.95,17.95;45.325,21.05"/>
+        <dia:rectangle val="34.95,17.95;41.325,21.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="39,18"/>
+        <dia:point val="35,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
@@ -242,13 +242,13 @@ formats, it will be deprecated.
         <dia:point val="47,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.95,28.95;65.26,32.65"/>
+        <dia:rectangle val="46.95,28.95;70.65,32.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="47,29"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.210000000000001"/>
+        <dia:real val="23.600000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -350,7 +350,7 @@ formats, it will be deprecated.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::model#</dia:string>
+            <dia:string>#yarn::intermediate_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -373,7 +373,7 @@ formats, it will be deprecated.
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
-                <dia:string>#m#</dia:string>
+                <dia:string>#um#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
                 <dia:string>#const upsilon::model&amp;#</dia:string>
@@ -434,17 +434,17 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="42.1375,21"/>
+        <dia:point val="38.1375,21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="41.3875,20.25;47.2,29.8"/>
+        <dia:rectangle val="37.3875,20.25;47.2,29.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="42.1375,21"/>
-        <dia:point val="42.1375,25"/>
+        <dia:point val="38.1375,21"/>
+        <dia:point val="38.1375,25"/>
         <dia:point val="47,25"/>
         <dia:point val="47,29"/>
       </dia:attribute>
@@ -469,19 +469,19 @@ formats, it will be deprecated.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O4">
       <dia:attribute name="obj_pos">
-        <dia:point val="68,18"/>
+        <dia:point val="70,18"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,17.95;74.325,21.05"/>
+        <dia:rectangle val="69.95,17.95;94.42,21.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="68,18"/>
+        <dia:point val="70,18"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="24.369999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3"/>
+        <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#transformer#</dia:string>
@@ -571,7 +571,56 @@ formats, it will be deprecated.
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes"/>
-      <dia:attribute name="operations"/>
+      <dia:attribute name="operations">
+        <dia:composite type="umloperation">
+          <dia:attribute name="name">
+            <dia:string>#transform#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="stereotype">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#yarn::intermediate_model#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="inheritance_type">
+            <dia:enum val="2"/>
+          </dia:attribute>
+          <dia:attribute name="query">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#um#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const upsilon::model&amp;#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
       </dia:attribute>
@@ -615,19 +664,19 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.21,29"/>
+        <dia:point val="70.6,29"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.46,20.95;71.3375,29.8"/>
+        <dia:rectangle val="69.85,21.55;82.385,29.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.21,29"/>
-        <dia:point val="65.21,25"/>
-        <dia:point val="71.1375,25"/>
-        <dia:point val="71.1375,21"/>
+        <dia:point val="70.6,29"/>
+        <dia:point val="70.6,25"/>
+        <dia:point val="82.185,25"/>
+        <dia:point val="82.185,21.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -791,13 +840,13 @@ formats, it will be deprecated.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O7">
       <dia:attribute name="obj_pos">
-        <dia:point val="45,42"/>
+        <dia:point val="49,42"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="44.95,41.95;52.3275,45.05"/>
+        <dia:rectangle val="48.95,41.95;56.3275,45.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="45,42"/>
+        <dia:point val="49,42"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="7.2775000000000007"/>
@@ -937,19 +986,19 @@ formats, it will be deprecated.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="56.105,32.6501"/>
+        <dia:point val="58.8,32.6501"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.5887,31.9001;56.855,43.6"/>
+        <dia:rectangle val="52.5887,31.9001;59.55,43.6"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="56.105,32.6501"/>
-        <dia:point val="56.105,38"/>
-        <dia:point val="48.6388,38"/>
-        <dia:point val="48.6388,42"/>
+        <dia:point val="58.8,32.6501"/>
+        <dia:point val="58.8,38"/>
+        <dia:point val="52.6388,38"/>
+        <dia:point val="52.6388,42"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

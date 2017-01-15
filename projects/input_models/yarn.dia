@@ -22458,7 +22458,7 @@ space.#</dia:string>
         <dia:point val="28,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="27.95,48.95;35.48,54.25"/>
+        <dia:rectangle val="27.95,48.95;35.48,55.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="28,49"/>
@@ -22467,7 +22467,7 @@ space.#</dia:string>
         <dia:real val="7.4299999999999997"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6.0000000000000009"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#languages#</dia:string>
@@ -22606,6 +22606,29 @@ space.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#language_agnostic#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#upsilon#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>
@@ -24591,7 +24614,7 @@ space.#</dia:string>
         <dia:point val="-5.125,55.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.05,55.05;-4.375,67.6"/>
+        <dia:rectangle val="-10.05,55.05;-4.375,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24662,7 +24685,7 @@ space.#</dia:string>
         <dia:point val="15,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.93,62.95;15.75,67.6"/>
+        <dia:rectangle val="8.93,62.25;15.75,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24913,7 +24936,7 @@ space.#</dia:string>
         <dia:point val="-0.51,69.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-1.26,68.85;14.4225,79.6"/>
+        <dia:rectangle val="-1.26,68.85;14.4225,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

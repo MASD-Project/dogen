@@ -1,0 +1,24 @@
+{
+  "model_name": "upsilon.builtins",
+  "documentation": "Built-in types for the upsilon models.",
+  "annotation": {
+    "yarn.language": "upsilon",
+    "yarn.is_proxy_model": true
+  },
+  "elements": [
+    {
+      "name": {
+        "simple_name": "ModelValue"
+      },
+      "meta_type": "object",
+      "in_global_module": true
+    },
+    {
+      "name": {
+        "simple_name": "Collection"
+      },
+      "meta_type": "object",
+      "in_global_module": true
+    }
+  ]
+}
