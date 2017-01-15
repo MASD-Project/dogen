@@ -65,11 +65,12 @@ BOOST_AUTO_TEST_CASE(upsilon_primitive_transforms_into_expected_yarn_primitive) 
     BOOST_LOG_SEV(lg, debug) << "input: " << i;
 
     const auto e(yarn_factory.make_primitive(0, model_name, ot));
+    const auto ot(e.origin_type());
 
     dogen::yarn::upsilon::transformer t;
-    const auto a(t.to_primitive(i));
+    const auto a(t.to_primitive(ot, model_name, i));
 
-    // BOOST_CHECK(asserter::assert_object(e, a));
+    BOOST_CHECK(asserter::assert_object(e, a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

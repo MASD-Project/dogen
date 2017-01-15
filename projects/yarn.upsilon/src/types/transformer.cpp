@@ -18,11 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
+
+yarn::primitive
+transformer::to_primitive(const yarn::origin_types ot,
+    const yarn::name& model_name, const dogen::upsilon::primitive& p) const {
+
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, p.name()));
+
+    yarn::primitive r;
+    r.name(n);
+    r.documentation(p.comment());
+    r.origin_type(ot);
+    return r;
+}
 
 yarn::object
 transformer::to_object(const dogen::upsilon::compound& /*c*/) const {
@@ -39,12 +54,6 @@ transformer::to_object(const dogen::upsilon::collection& /*c*/) const {
 yarn::enumeration
 transformer::to_enumeration(const dogen::upsilon::enumeration& /*e*/) const {
     yarn::enumeration r;
-    return r;
-}
-
-yarn::primitive
-transformer::to_primitive(const dogen::upsilon::primitive& /*p*/) const {
-    yarn::primitive r;
     return r;
 }
 

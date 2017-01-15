@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
@@ -40,11 +42,12 @@ namespace upsilon {
 
 class transformer final {
 public:
+    yarn::primitive to_primitive(const yarn::origin_types ot,
+        const yarn::name& model_name, const dogen::upsilon::primitive& p) const;
     yarn::object to_object(const dogen::upsilon::compound& c) const;
     yarn::object to_object(const dogen::upsilon::collection& c) const;
     yarn::enumeration
     to_enumeration(const dogen::upsilon::enumeration& e) const;
-    yarn::primitive to_primitive(const dogen::upsilon::primitive& p) const;
 };
 
 } } }

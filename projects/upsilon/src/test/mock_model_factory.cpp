@@ -27,14 +27,36 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("upsilon.mock_model_factory"));
 
+const std::string model_name_prefix("some_model_");
+const std::string type_name_prefix("some_type_");
+const std::string documentation("Some documentation");
+
+std::string type_name(const unsigned int i) {
+    std::ostringstream stream;
+    stream << type_name_prefix << i;
+    return stream.str();
+}
+
+/*
+std::string model_name(const unsigned int i) {
+    std::ostringstream stream;
+    stream << model_name_prefix << i;
+    return stream.str();
+}
+*/
+
+
+
 }
 
 namespace dogen {
 namespace upsilon {
 namespace test {
 
-primitive mock_model_factory::make_primitive(const unsigned int /*number*/) {
+primitive mock_model_factory::make_primitive(const unsigned int n) {
     primitive r;
+    r.name(type_name(n));
+    r.comment(documentation);
     return r;
 }
 

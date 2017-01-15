@@ -34,7 +34,7 @@ namespace test {
 
 class mock_model_factory {
 public:
-    static primitive make_primitive(const unsigned int number);
+    static primitive make_primitive(const unsigned int n);
 };
 
 } } }
