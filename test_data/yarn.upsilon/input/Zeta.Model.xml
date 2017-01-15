@@ -29,7 +29,7 @@
     </Types>
 
     <Types xsi:type="Primitive">
-        <Name Value="Date"/>
+        <Name Value="DateNew"/>
         <Id Value="1125"/>
         <TagRefs Value="ZetaTypes"/>
         <Comment Text="Represents the date"/>

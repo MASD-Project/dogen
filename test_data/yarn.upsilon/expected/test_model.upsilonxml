@@ -219,7 +219,7 @@
 					<item>
 						<px class_id_reference="3" object_id="_7">
 							<type>
-								<name>Date</name>
+								<name>DateNew</name>
 								<extends></extends>
 								<comment>Represents the date</comment>
 								<tag_refs>

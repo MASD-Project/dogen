@@ -18,42 +18,70 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.upsilon.transformer"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
+void transformer::populate_element_properties(const yarn::origin_types ot,
+    const yarn::name& model_name, const dogen::upsilon::type& t,
+    yarn::element& e) const {
+
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, t.name()));
+
+    e.name(n);
+    e.documentation(t.comment());
+    e.origin_type(ot);
+}
+
 yarn::primitive
 transformer::to_primitive(const yarn::origin_types ot,
     const yarn::name& model_name, const dogen::upsilon::primitive& p) const {
-
-    dogen::yarn::name_factory nf;
-    dogen::yarn::name n(nf.build_element_in_model(model_name, p.name()));
-
+    BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
     yarn::primitive r;
-    r.name(n);
-    r.documentation(p.comment());
-    r.origin_type(ot);
+    populate_element_properties(ot, model_name, p, r);
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
     return r;
 }
 
 yarn::object
-transformer::to_object(const dogen::upsilon::compound& /*c*/) const {
+transformer::to_object(const yarn::origin_types ot,
+    const yarn::name& model_name, const dogen::upsilon::compound& c) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
     yarn::object r;
+    populate_element_properties(ot, model_name, c, r);
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming compound";
     return r;
 }
 
 yarn::object
-transformer::to_object(const dogen::upsilon::collection& /*c*/) const {
+transformer::to_object(const yarn::origin_types ot,
+    const yarn::name& model_name, const dogen::upsilon::collection& c) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming collection: " << c.name();
     yarn::object r;
+    populate_element_properties(ot, model_name, c, r);
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming collection";
     return r;
 }
 
 yarn::enumeration
-transformer::to_enumeration(const dogen::upsilon::enumeration& /*e*/) const {
+transformer::to_enumeration(const yarn::origin_types ot,
+    const yarn::name& model_name, const dogen::upsilon::enumeration& e) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
     yarn::enumeration r;
+    populate_element_properties(ot, model_name, e, r);
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration";
     return r;
 }
 

@@ -41,13 +41,21 @@ namespace yarn {
 namespace upsilon {
 
 class transformer final {
+private:
+    void populate_element_properties(const yarn::origin_types ot,
+        const yarn::name& model_name, const dogen::upsilon::type& t,
+        yarn::element& e) const;
+
 public:
     yarn::primitive to_primitive(const yarn::origin_types ot,
         const yarn::name& model_name, const dogen::upsilon::primitive& p) const;
-    yarn::object to_object(const dogen::upsilon::compound& c) const;
-    yarn::object to_object(const dogen::upsilon::collection& c) const;
+    yarn::object to_object(const yarn::origin_types ot,
+        const yarn::name& model_name, const dogen::upsilon::compound& c) const;
+    yarn::object to_object(const yarn::origin_types ot,
+        const yarn::name& model_name, const dogen::upsilon::collection& c) const;
     yarn::enumeration
-    to_enumeration(const dogen::upsilon::enumeration& e) const;
+    to_enumeration(const yarn::origin_types ot,
+        const yarn::name& model_name, const dogen::upsilon::enumeration& e) const;
 };
 
 } } }

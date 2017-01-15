@@ -35,10 +35,13 @@ namespace upsilon {
 
 class workflow final {
 private:
-    yarn::intermediate_model create_model(const dogen::upsilon::model& m) const;
+    yarn::intermediate_model
+    create_model(const dogen::upsilon::model& um) const;
+    void populate_model(const dogen::upsilon::model& um,
+        yarn::intermediate_model& im) const;
 
 public:
-    yarn::intermediate_model execute(const dogen::upsilon::model& m) const;
+    yarn::intermediate_model execute(const dogen::upsilon::model& um) const;
 };
 
 } } }
