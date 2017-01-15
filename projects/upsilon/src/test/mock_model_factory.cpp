@@ -18,33 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn.upsilon/types/transformer.hpp"
+#include <string>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/upsilon/test/mock_model_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("upsilon.mock_model_factory"));
+
+}
 
 namespace dogen {
-namespace yarn {
 namespace upsilon {
+namespace test {
 
-yarn::object
-transformer::to_object(const dogen::upsilon::compound& /*c*/) const {
-    yarn::object r;
-    return r;
-}
-
-yarn::object
-transformer::to_object(const dogen::upsilon::collection& /*c*/) const {
-    yarn::object r;
-    return r;
-}
-
-yarn::enumeration
-transformer::to_enumeration(const dogen::upsilon::enumeration& /*e*/) const {
-    yarn::enumeration r;
-    return r;
-}
-
-yarn::primitive
-transformer::to_primitive(const dogen::upsilon::primitive& /*p*/) const {
-    yarn::primitive r;
+primitive mock_model_factory::make_primitive(const unsigned int /*number*/) {
+    primitive r;
     return r;
 }
 

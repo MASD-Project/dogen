@@ -480,6 +480,24 @@ void mock_intermediate_model_factory::handle_model_module(
     insert_nameable(m.modules(), module);
 }
 
+primitive mock_intermediate_model_factory::
+make_primitive(const unsigned int i, const name& model_name,
+        const origin_types ot, const unsigned int module_n) const {
+
+    const auto sn(type_name(i));
+    const auto ipp(make_internal_modules(module_n));
+
+    dogen::yarn::name_factory nf;
+    dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
+
+    primitive r;
+    r.name(n);
+    r.documentation(documentation);
+    r.origin_type(ot);
+
+    return r;
+}
+
 object mock_intermediate_model_factory::make_value_object(const unsigned int i,
     const name& model_name, const origin_types ot,
     const unsigned int module_n) const {
@@ -673,7 +691,7 @@ make_single_concept_model(const origin_types ot, const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c(make_concept(0, r.name(), ot));
@@ -693,7 +711,7 @@ make_first_degree_concepts_model(const origin_types ot, const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -726,7 +744,7 @@ make_second_degree_concepts_model(const origin_types ot, const unsigned int n,
     const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -775,7 +793,7 @@ make_multiple_inheritance_concepts_model(const origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -803,7 +821,7 @@ make_diamond_inheritance_concepts_model(const origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -845,7 +863,7 @@ make_object_with_parent_that_models_concept(const origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -870,7 +888,7 @@ make_object_with_parent_that_models_a_refined_concept(const origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -914,7 +932,7 @@ make_object_that_models_missing_concept(const origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -932,7 +950,7 @@ make_object_that_models_concept_with_missing_parent(const origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     intermediate_model r(make_empty_model(ot, n, add_model_module));
 
-    const auto ui(make_primitive(unsigned_int));
+    const auto ui(::make_primitive(unsigned_int));
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
@@ -1059,7 +1077,7 @@ object_with_attribute(const origin_types ot, const object_types objt,
             o0.opaque_associations().push_back(o2.name());
 
     } else if (pt == attribute_types::std_pair) {
-        const auto b(make_primitive(boolean));
+        const auto b(::make_primitive(boolean));
         r.primitives().insert(std::make_pair(b.name().id(), b));
 
         if (flags_.associations_indexed())
@@ -1073,13 +1091,13 @@ object_with_attribute(const origin_types ot, const object_types objt,
 
         insert_object(r, o2);
     } else if (pt == attribute_types::boost_variant) {
-        const auto b(make_primitive(boolean));
+        const auto b(::make_primitive(boolean));
         r.primitives().insert(std::make_pair(b.name().id(), b));
 
         if (flags_.associations_indexed())
             o0.transparent_associations().push_back(b.name());
 
-        const auto ui(make_primitive(unsigned_int));
+        const auto ui(::make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
         if (flags_.associations_indexed())
@@ -1152,7 +1170,7 @@ object_with_parent_in_the_same_model(const origin_types ot,
 
     auto r(make_empty_model(ot, 0, add_model_module));
     if (has_attribute) {
-        const auto ui(make_primitive(unsigned_int));
+        const auto ui(::make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name().id(), ui));
     }
 
@@ -1236,7 +1254,7 @@ object_with_third_degree_parent_in_same_model(const origin_types ot,
 
     auto r(make_empty_model(ot, 0, add_model_module));
     if (has_attribute) {
-        const auto ui(make_primitive(unsigned_int));
+        const auto ui(::make_primitive(unsigned_int));
         r.primitives().insert(std::make_pair(ui.name().id(), ui));
     }
 

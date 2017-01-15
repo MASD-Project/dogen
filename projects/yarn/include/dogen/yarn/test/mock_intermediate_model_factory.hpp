@@ -234,6 +234,12 @@ public:
 
 public:
     /**
+     * @brief Creates a primitive.
+     */
+    primitive make_primitive(const unsigned int i, const name& model_name,
+        const origin_types ot, const unsigned int module_n = 0) const;
+
+    /**
      * @brief Create a value object.
      */
     object make_value_object(const unsigned int i, const name& model_name,

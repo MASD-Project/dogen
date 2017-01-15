@@ -25,7 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/upsilon/types/model.hpp"
+#include "dogen/upsilon/types/primitive.hpp"
+#include "dogen/upsilon/types/compound.hpp"
+#include "dogen/upsilon/types/collection.hpp"
+#include "dogen/upsilon/types/enumeration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +40,11 @@ namespace upsilon {
 
 class transformer final {
 public:
-    transformer() = default;
-    transformer(const transformer&) = default;
-    transformer(transformer&&) = default;
-    ~transformer() = default;
-    transformer& operator=(const transformer&) = default;
-
-public:
-    bool operator==(const transformer& rhs) const;
-    bool operator!=(const transformer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    yarn::object to_object(const dogen::upsilon::compound& c) const;
+    yarn::object to_object(const dogen::upsilon::collection& c) const;
+    yarn::enumeration
+    to_enumeration(const dogen::upsilon::enumeration& e) const;
+    yarn::primitive to_primitive(const dogen::upsilon::primitive& p) const;
 };
 
 } } }

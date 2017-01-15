@@ -28,7 +28,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("dia.mock_object_factory"));
+static logger lg(logger_factory("dia.test.mock_object_factory"));
 
 const std::string empty;
 const std::string object_prefix("O");
