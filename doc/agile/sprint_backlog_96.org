@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-16 Mon 15:46]
+#+CAPTION: Clock summary at [2017-01-16 Mon 15:50]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:04* |      |      | 100.0 |
+| *Total time*                                                                | *5:07* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:04   |      |      | 100.0 |
-| Active                                                                      |        | 5:04 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |   6.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |  11.5 |
-| STARTED Create an upsilon yarn frontend                                     |        |      | 4:09 |  81.9 |
+| Stories                                                                     | 5:07   |      |      | 100.0 |
+| Active                                                                      |        | 5:07 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   7.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |  11.4 |
+| STARTED Create an upsilon yarn frontend                                     |        |      | 4:09 |  81.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-16 Mon 15:47]--[2017-01-16 Mon 15:50] =>  0:03
     CLOCK: [2017-01-16 Mon 09:27]--[2017-01-16 Mon 09:47] =>  0:20
 
 Updates to sprint and product backlog.
@@ -163,6 +164,14 @@ Tasks:
 - add new "upsilon" language which is not generatable; entire yarn
   workflow should work for upsilon, but then quilt just does nothing.
 - add tailor support so that we can convert upsilon to JSON.
+
+*** Add test in knit to validate upsilon                              :story:
+
+At present we are testing the individual (low-level) upsilon workflows
+but not the overall knit workflow for upsilon models. Due to this we
+borked knit for upsilon models without realising it. We need to add a
+test that processes the upsilon model even if it does not (yet)
+generate any code.
 
 *** Add auxiliary function properties to c#                           :story:
 
