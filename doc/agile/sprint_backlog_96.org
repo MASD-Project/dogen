@@ -13,22 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-16 Mon 18:01]
+#+CAPTION: Clock summary at [2017-01-16 Mon 21:56]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:58* |      |      | 100.0 |
+| *Total time*                                                                | *7:07* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:58   |      |      | 100.0 |
-| Active                                                                      |        | 5:58 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:23 |   6.4 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   9.8 |
-| COMPLETED Add test in knit to validate upsilon                              |        |      | 0:51 |  14.2 |
-| STARTED Create an upsilon yarn frontend                                     |        |      | 4:09 |  69.6 |
+| Stories                                                                     | 7:07   |      |      | 100.0 |
+| Active                                                                      |        | 7:07 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:32 |  21.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   8.2 |
+| COMPLETED Add test in knit to validate upsilon                              |        |      | 0:51 |  11.9 |
+| STARTED Create an upsilon yarn frontend                                     |        |      | 4:09 |  58.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-16 Mon 21:02]--[2017-01-16 Mon 21:56] =>  0:54
     CLOCK: [2017-01-16 Mon 18:02]--[2017-01-16 Mon 18:17] =>  0:15
     CLOCK: [2017-01-16 Mon 15:47]--[2017-01-16 Mon 15:50] =>  0:03
     CLOCK: [2017-01-16 Mon 09:27]--[2017-01-16 Mon 09:47] =>  0:20
@@ -204,8 +205,67 @@ would stop us code-generating a C# model in C++ and vice-versa.
 
 At present we only support the input language associated with the
 model. This has been sufficient because the input and output language
-is always the same. However, with upsilon things change: we need upsilon
+is always the same. However, with upsilon things change: we need to
+generate multiple languages off of a single upsilon model. In the
+future we will have the same requirement for LAM. We could:
 
+- rename language to input language;
+- add a set of output languages to model; for LAM these would be
+  populated via meta-data.
+- when a model comes out of intermediate, if it has an input language
+  which is not outputtable, we then look at the output languages. All
+  intermediate models must be of the same non-outputtable language. We
+  take all of these models and supply them to the mapper, together
+  with an outputtable language.
+
+*** Add support for ignoring types                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to ignore certain types I am working
+on so that I can evolve my diagram over time, whilst still being able
+to commit it.
+#+end_quote
+
+Sometimes when changing a diagram it may be useful to set some types
+to "ignore", i.e. make dogen pretend they don't exist at all. For
+instance one may want to introduce new types one at a time. It would
+be nice to have a dynamic extension flag for ignoring.
+
+We should probably have some kind of warning to ensure users are aware
+of the types being ignored.
+
+*** Add a type mapper                                                 :story:
+
+We need to create a class that receives a map of element id to element
+id. It then goes through every mapped element reference and deletes the
+element reference and replaces it with the corresponding element id.
+
+We then need to extend the resolver to do an element id based
+lookup. The only slight wrinkle in the master plan is that the current
+indices are designed to return a true/false answer to the question of
+"is this ID valid". In this use case we want something different:
+return me the complete name for this ID.
+
+We could make a requirement that mapped types must be resolvable
+directly. This would mean that the mapper could operate on the merged
+model; it could generate its own index of referrable types (but
+crucially, only for those that are mapped) and replace them
+directly. i.e.:
+
+- for every mapped element, find its name in the merged model;
+- for every candidate element, if its id is on the mapped list, swap
+  name with replacement name.
+
+Mapping happens straight after merging. Model factory would now take a
+parameter of language, which it supplies to the mapper. We have an
+additional command line argument of maps (language name +
+".map.json"?). All maps are made against LAM types. The mapper must
+load all maps and cross-reference them so that we can resolve any
+language to any language going via LAM. Two-way look-up? First from
+language to LAM them from LAM to language. If already in LAM then only
+one look-up is required. Mapping must also include removal. Actually
+this requirement is only needed for ModelValue; upsilon could filter
+out any extends of this type, greatly simplifying the mapping logic.
 
 *** Add auxiliary function properties to c#                           :story:
 

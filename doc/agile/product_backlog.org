@@ -3832,22 +3832,6 @@ extension. Having said that, if there was a way to supply an enum or
 such-like with the stream, we could create a class for streams and
 then implement the file one as an adaptor to the stream class.
 
-*** Add support for ignoring types                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to ignore certain types I am working
-on so that I can evolve my diagram over time, whilst still being able
-to commit it.
-#+end_quote
-
-Sometimes when changing a diagram it may be useful to set some types
-to "ignore", i.e. make dogen pretend they don't exist at all. For
-instance one may want to introduce new types one at a time. It would
-be nice to have a dynamic extension flag for ignoring.
-
-We should probably have some kind of warning to ensure users are aware
-of the types being ignored.
-
 *** Setup containing module correctly in mock factory                 :story:
 
 We did not update the yarn mock model factory to populate the
