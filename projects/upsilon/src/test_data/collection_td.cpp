@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/upsilon/test_data/name_td.hpp"
 #include "dogen/upsilon/test_data/type_td.hpp"
-#include "dogen/upsilon/test_data/type_name_td.hpp"
 #include "dogen/upsilon/test_data/collection_td.hpp"
 
 namespace {
 
-dogen::upsilon::type_name
-create_dogen_upsilon_type_name(const unsigned int position) {
-    return dogen::upsilon::type_name_generator::create(position);
+dogen::upsilon::name
+create_dogen_upsilon_name(const unsigned int position) {
+    return dogen::upsilon::name_generator::create(position);
 }
 
 }
@@ -39,7 +39,7 @@ collection_generator::collection_generator() : position_(0) { }
 void collection_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::upsilon::type_generator::populate(position, v);
-    v.type_name(create_dogen_upsilon_type_name(position + 0));
+    v.type_name(create_dogen_upsilon_name(position + 0));
 }
 
 collection_generator::result_type

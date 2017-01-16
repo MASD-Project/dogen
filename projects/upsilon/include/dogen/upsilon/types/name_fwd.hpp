@@ -18,23 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_SERIALIZATION_TYPE_NAME_FWD_SER_HPP
-#define DOGEN_UPSILON_SERIALIZATION_TYPE_NAME_FWD_SER_HPP
+#ifndef DOGEN_UPSILON_TYPES_NAME_FWD_HPP
+#define DOGEN_UPSILON_TYPES_NAME_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/upsilon/types/type_name_fwd.hpp"
+namespace dogen {
+namespace upsilon {
 
-namespace boost {
-namespace serialization {
-
-template<class Archive>
-void save(Archive& ar, const dogen::upsilon::type_name& v, unsigned int version);
-
-template<class Archive>
-void load(Archive& ar, dogen::upsilon::type_name& v, unsigned int version);
+class name;
 
 } }
 

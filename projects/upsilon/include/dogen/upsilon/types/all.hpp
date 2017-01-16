@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/upsilon/types/tag.hpp"
+#include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/type.hpp"
 #include "dogen/upsilon/types/field.hpp"
 #include "dogen/upsilon/types/model.hpp"
@@ -38,7 +39,6 @@
 #include "dogen/upsilon/types/directory.hpp"
 #include "dogen/upsilon/types/exclusion.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
-#include "dogen/upsilon/types/type_name.hpp"
 #include "dogen/upsilon/types/collection.hpp"
 #include "dogen/upsilon/types/dependency.hpp"
 #include "dogen/upsilon/types/schema_ref.hpp"

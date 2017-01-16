@@ -18,27 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/upsilon/io/type_name_io.hpp"
+#ifndef DOGEN_UPSILON_HASH_NAME_HASH_HPP
+#define DOGEN_UPSILON_HASH_NAME_HASH_HPP
 
-inline std::string tidy_up_string(std::string s) {
-    boost::replace_all(s, "\r\n", "<new_line>");
-    boost::replace_all(s, "\n", "<new_line>");
-    boost::replace_all(s, "\"", "<quote>");
-    return s;
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/upsilon/types/name.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream& operator<<(std::ostream& s, const type_name& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::upsilon::type_name\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\""
-      << " }";
-    return(s);
-}
+struct name_hasher {
+public:
+    static std::size_t hash(const name& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::upsilon::name> {
+public:
+    size_t operator()(const dogen::upsilon::name& v) const {
+        return dogen::upsilon::name_hasher::hash(v);
+    }
+};
+
+}
+#endif

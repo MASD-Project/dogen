@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
 
 namespace {
@@ -36,11 +37,11 @@ namespace yarn {
 namespace upsilon {
 
 std::string
-transformer::to_unparsed_type(const dogen::upsilon::type_name& tn) const {
-    if (tn.schema_name().empty())
-        return tn.name();
+transformer::to_unparsed_type(const dogen::upsilon::name& n) const {
+    if (n.schema_name().empty())
+        return n.value();
 
-    return tn.schema_name() + scope_operator + tn.name();
+    return n.schema_name() + scope_operator + n.value();
 }
 
 void transformer::populate_element_properties(const yarn::origin_types ot,
@@ -48,7 +49,7 @@ void transformer::populate_element_properties(const yarn::origin_types ot,
     yarn::element& e) const {
 
     dogen::yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(model_name, t.name()));
+    const auto n(nf.build_element_in_model(model_name, t.name().value()));
 
     e.name(n);
     e.documentation(t.comment());
@@ -107,3 +108,4 @@ transformer::to_enumeration(const yarn::origin_types ot,
 }
 
 } } }
+#

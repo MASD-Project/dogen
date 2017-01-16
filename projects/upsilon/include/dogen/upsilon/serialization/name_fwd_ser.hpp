@@ -18,35 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_TEST_DATA_TYPE_NAME_TD_HPP
-#define DOGEN_UPSILON_TEST_DATA_TYPE_NAME_TD_HPP
+#ifndef DOGEN_UPSILON_SERIALIZATION_NAME_FWD_SER_HPP
+#define DOGEN_UPSILON_SERIALIZATION_NAME_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/upsilon/types/type_name.hpp"
+#include "dogen/upsilon/types/name_fwd.hpp"
 
-namespace dogen {
-namespace upsilon {
+namespace boost {
+namespace serialization {
 
-class type_name_generator {
-public:
-    type_name_generator();
+template<class Archive>
+void save(Archive& ar, const dogen::upsilon::name& v, unsigned int version);
 
-public:
-    typedef dogen::upsilon::type_name result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+template<class Archive>
+void load(Archive& ar, dogen::upsilon::name& v, unsigned int version);
 
 } }
 

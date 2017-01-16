@@ -18,17 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_TYPES_TYPE_NAME_FWD_HPP
-#define DOGEN_UPSILON_TYPES_TYPE_NAME_FWD_HPP
+#ifndef DOGEN_UPSILON_IO_NAME_IO_HPP
+#define DOGEN_UPSILON_IO_NAME_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/upsilon/types/name.hpp"
+
 namespace dogen {
 namespace upsilon {
 
-class type_name;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::upsilon::name& v);
 
 } }
 

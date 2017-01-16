@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/upsilon/hash/tag_hash.hpp"
+#include "dogen/upsilon/hash/name_hash.hpp"
 #include "dogen/upsilon/hash/type_hash.hpp"
 #include "dogen/upsilon/hash/field_hash.hpp"
 #include "dogen/upsilon/hash/model_hash.hpp"
@@ -36,7 +37,6 @@
 #include "dogen/upsilon/hash/directory_hash.hpp"
 #include "dogen/upsilon/hash/exclusion_hash.hpp"
 #include "dogen/upsilon/hash/primitive_hash.hpp"
-#include "dogen/upsilon/hash/type_name_hash.hpp"
 #include "dogen/upsilon/hash/collection_hash.hpp"
 #include "dogen/upsilon/hash/dependency_hash.hpp"
 #include "dogen/upsilon/hash/schema_ref_hash.hpp"

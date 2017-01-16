@@ -42,8 +42,8 @@ namespace dogen {
 namespace upsilon {
 
 compound::compound(
-    const std::string& name,
-    const std::string& extends,
+    const dogen::upsilon::name& name,
+    const dogen::upsilon::name& extends,
     const std::string& comment,
     const std::vector<std::string>& tag_refs,
     const std::string& pof_id,

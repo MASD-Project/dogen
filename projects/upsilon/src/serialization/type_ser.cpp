@@ -29,6 +29,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/upsilon/serialization/name_ser.hpp"
 #include "dogen/upsilon/serialization/type_ser.hpp"
 #include "dogen/upsilon/serialization/compound_ser.hpp"
 #include "dogen/upsilon/serialization/primitive_ser.hpp"

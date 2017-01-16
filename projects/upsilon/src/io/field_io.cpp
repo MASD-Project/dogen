@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/upsilon/io/field_io.hpp"
-#include "dogen/upsilon/io/type_name_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

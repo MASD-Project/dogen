@@ -18,23 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_IO_TYPE_NAME_IO_HPP
-#define DOGEN_UPSILON_IO_TYPE_NAME_IO_HPP
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/upsilon/io/name_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <iosfwd>
-#include "dogen/upsilon/types/type_name.hpp"
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
+}
 
 namespace dogen {
 namespace upsilon {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::upsilon::type_name& v);
+std::ostream& operator<<(std::ostream& s, const name& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::upsilon::name\"" << ", "
+      << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
+      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\""
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif

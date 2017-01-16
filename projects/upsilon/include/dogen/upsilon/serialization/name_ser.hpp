@@ -18,35 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_HASH_TYPE_NAME_HASH_HPP
-#define DOGEN_UPSILON_HASH_TYPE_NAME_HASH_HPP
+#ifndef DOGEN_UPSILON_SERIALIZATION_NAME_SER_HPP
+#define DOGEN_UPSILON_SERIALIZATION_NAME_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/upsilon/types/type_name.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/upsilon/types/name.hpp"
 
-namespace dogen {
-namespace upsilon {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::upsilon::name)
+namespace boost {
+namespace serialization {
 
-struct type_name_hasher {
-public:
-    static std::size_t hash(const type_name& v);
-};
+template<typename Archive>
+void save(Archive& ar, const dogen::upsilon::name& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::upsilon::name& v, unsigned int version);
 
 } }
 
-namespace std {
-
-template<>
-struct hash<dogen::upsilon::type_name> {
-public:
-    size_t operator()(const dogen::upsilon::type_name& v) const {
-        return dogen::upsilon::type_name_hasher::hash(v);
-    }
-};
-
-}
 #endif

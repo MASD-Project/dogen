@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/upsilon/hash/name_hash.hpp"
 #include "dogen/upsilon/hash/type_hash.hpp"
-#include "dogen/upsilon/hash/type_name_hash.hpp"
 #include "dogen/upsilon/hash/collection_hash.hpp"
 
 namespace {

@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/upsilon/test_data/tag_td.hpp"
+#include "dogen/upsilon/test_data/name_td.hpp"
 #include "dogen/upsilon/test_data/type_td.hpp"
 #include "dogen/upsilon/test_data/field_td.hpp"
 #include "dogen/upsilon/test_data/model_td.hpp"
@@ -36,7 +37,6 @@
 #include "dogen/upsilon/test_data/directory_td.hpp"
 #include "dogen/upsilon/test_data/exclusion_td.hpp"
 #include "dogen/upsilon/test_data/primitive_td.hpp"
-#include "dogen/upsilon/test_data/type_name_td.hpp"
 #include "dogen/upsilon/test_data/collection_td.hpp"
 #include "dogen/upsilon/test_data/dependency_td.hpp"
 #include "dogen/upsilon/test_data/schema_ref_td.hpp"

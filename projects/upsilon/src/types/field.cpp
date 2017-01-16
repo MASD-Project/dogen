@@ -25,7 +25,7 @@ namespace upsilon {
 
 field::field(
     const std::string& name,
-    const dogen::upsilon::type_name& type_name,
+    const dogen::upsilon::name& type_name,
     const std::string& comment)
     : name_(name),
       type_name_(type_name),
@@ -66,19 +66,19 @@ void field::name(const std::string&& v) {
     name_ = std::move(v);
 }
 
-const dogen::upsilon::type_name& field::type_name() const {
+const dogen::upsilon::name& field::type_name() const {
     return type_name_;
 }
 
-dogen::upsilon::type_name& field::type_name() {
+dogen::upsilon::name& field::type_name() {
     return type_name_;
 }
 
-void field::type_name(const dogen::upsilon::type_name& v) {
+void field::type_name(const dogen::upsilon::name& v) {
     type_name_ = v;
 }
 
-void field::type_name(const dogen::upsilon::type_name&& v) {
+void field::type_name(const dogen::upsilon::name&& v) {
     type_name_ = std::move(v);
 }
 

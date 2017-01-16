@@ -20,6 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
+#include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/upsilon/types/type.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -47,8 +48,8 @@ namespace dogen {
 namespace upsilon {
 
 type::type(
-    const std::string& name,
-    const std::string& extends,
+    const dogen::upsilon::name& name,
+    const dogen::upsilon::name& extends,
     const std::string& comment,
     const std::vector<std::string>& tag_refs,
     const std::string& pof_id)
@@ -61,8 +62,8 @@ type::type(
 void type::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::upsilon::type\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(name_) << "\"" << ", "
-      << "\"extends\": " << "\"" << tidy_up_string(extends_) << "\"" << ", "
+      << "\"name\": " << name_ << ", "
+      << "\"extends\": " << extends_ << ", "
       << "\"comment\": " << "\"" << tidy_up_string(comment_) << "\"" << ", "
       << "\"tag_refs\": " << tag_refs_ << ", "
       << "\"pof_id\": " << "\"" << tidy_up_string(pof_id_) << "\""
@@ -86,35 +87,35 @@ bool type::compare(const type& rhs) const {
         pof_id_ == rhs.pof_id_;
 }
 
-const std::string& type::name() const {
+const dogen::upsilon::name& type::name() const {
     return name_;
 }
 
-std::string& type::name() {
+dogen::upsilon::name& type::name() {
     return name_;
 }
 
-void type::name(const std::string& v) {
+void type::name(const dogen::upsilon::name& v) {
     name_ = v;
 }
 
-void type::name(const std::string&& v) {
+void type::name(const dogen::upsilon::name&& v) {
     name_ = std::move(v);
 }
 
-const std::string& type::extends() const {
+const dogen::upsilon::name& type::extends() const {
     return extends_;
 }
 
-std::string& type::extends() {
+dogen::upsilon::name& type::extends() {
     return extends_;
 }
 
-void type::extends(const std::string& v) {
+void type::extends(const dogen::upsilon::name& v) {
     extends_ = v;
 }
 
-void type::extends(const std::string&& v) {
+void type::extends(const dogen::upsilon::name&& v) {
     extends_ = std::move(v);
 }
 

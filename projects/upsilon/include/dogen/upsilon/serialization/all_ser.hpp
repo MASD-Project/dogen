@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/upsilon/serialization/tag_ser.hpp"
+#include "dogen/upsilon/serialization/name_ser.hpp"
 #include "dogen/upsilon/serialization/type_ser.hpp"
 #include "dogen/upsilon/serialization/field_ser.hpp"
 #include "dogen/upsilon/serialization/model_ser.hpp"
@@ -36,7 +37,6 @@
 #include "dogen/upsilon/serialization/directory_ser.hpp"
 #include "dogen/upsilon/serialization/exclusion_ser.hpp"
 #include "dogen/upsilon/serialization/primitive_ser.hpp"
-#include "dogen/upsilon/serialization/type_name_ser.hpp"
 #include "dogen/upsilon/serialization/collection_ser.hpp"
 #include "dogen/upsilon/serialization/dependency_ser.hpp"
 #include "dogen/upsilon/serialization/schema_ref_ser.hpp"

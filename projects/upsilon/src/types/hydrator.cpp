@@ -422,15 +422,16 @@ private:
     std::vector<dependency> read_dependencies();
     tag read_tag();
 
-    bool read_type_base_fields(type& t);
-    boost::shared_ptr<type> read_primitive();
+    bool read_type_base_fields(const std::string& schema_name, type& t);
+    boost::shared_ptr<type> read_primitive(const std::string& schema_name);
 
     field read_field();
-    type_name read_type_name();
-    boost::shared_ptr<type> read_compound();
-    boost::shared_ptr<type> read_enumeration();
-    boost::shared_ptr<type> read_collection();
-    boost::shared_ptr<type> read_type();
+    name read_name();
+    name read_name(const std::string& schema_name);
+    boost::shared_ptr<type> read_compound(const std::string& schema_name);
+    boost::shared_ptr<type> read_enumeration(const std::string& schema_name);
+    boost::shared_ptr<type> read_collection(const std::string& schema_name);
+    boost::shared_ptr<type> read_type(const std::string& schema_name);
 
 public:
     schema hydrate();
@@ -533,10 +534,11 @@ tag schema_hydrator::read_tag() {
     return r;
 }
 
-bool schema_hydrator::read_type_base_fields(type& t) {
+bool schema_hydrator::
+read_type_base_fields(const std::string& schema_name, type& t) {
     if (reader_.is_start_element(name_name)) {
         reader_.validate_self_closing();
-        t.name(reader_.get_attribute<std::string>(value_name));
+        t.name(read_name(schema_name));
         return true;
     } else if (reader_.is_start_element(id_name)) {
         reader_.validate_self_closing();
@@ -548,7 +550,7 @@ bool schema_hydrator::read_type_base_fields(type& t) {
         return true;
     } else if (reader_.is_start_element(extends_name)) {
         reader_.validate_self_closing();
-        t.extends(reader_.get_attribute<std::string>(value_name));
+        t.extends(read_name());
         return true;
     } else if (reader_.is_start_element(tag_refs_name)) {
         reader_.validate_self_closing();
@@ -558,7 +560,8 @@ bool schema_hydrator::read_type_base_fields(type& t) {
     return false;
 }
 
-boost::shared_ptr<type> schema_hydrator::read_primitive() {
+boost::shared_ptr<type>
+schema_hydrator::read_primitive(const std::string& schema_name) {
     reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Primitive.";
 
@@ -566,7 +569,7 @@ boost::shared_ptr<type> schema_hydrator::read_primitive() {
     reader_.move_next();
 
     do {
-        if (read_type_base_fields(*r)) {
+        if (read_type_base_fields(schema_name, *r)) {
             // do nothing
         } else if (reader_.is_start_element(intrinsic_name)) {
             reader_.validate_self_closing();
@@ -597,17 +600,15 @@ field schema_hydrator::read_field() {
         if (reader_.is_start_element(name_name)) {
             reader_.validate_self_closing();
             r.name(reader_.get_attribute<std::string>(value_name));
-            reader_.move_next();
         } else if (reader_.is_start_element(comment_name)) {
             reader_.validate_self_closing();
             r.comment(reader_.get_attribute<std::string>(text_name));
-            reader_.move_next();
         } else if (reader_.is_start_element(type_name_name))
-            r.type_name(read_type_name());
-        else {
+            r.type_name(read_name());
+        else
             log_unsupported_element();
-            reader_.move_next();
-        }
+
+        reader_.move_next();
     } while (!reader_.is_end_element(fields_name));
     reader_.move_next();
 
@@ -615,22 +616,33 @@ field schema_hydrator::read_field() {
     return r;
 }
 
-type_name schema_hydrator::read_type_name() {
-    reader_.validate_current_element(type_name_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Type Name.";
+name schema_hydrator::read_name(const std::string& schema_name) {
+    BOOST_LOG_SEV(lg, debug) << "Reading Name.";
 
-    type_name r;
+    name r;
     reader_.validate_self_closing();
 
-    r.name(reader_.get_attribute<std::string>(value_name));
-    if (reader_.has_attribute(schema_name_name))
-        r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
+    r.value(reader_.get_attribute<std::string>(value_name));
+    r.schema_name(schema_name);
 
-    reader_.move_next();
     return r;
 }
 
-boost::shared_ptr<type> schema_hydrator::read_compound() {
+name schema_hydrator::read_name() {
+    BOOST_LOG_SEV(lg, debug) << "Reading Name.";
+
+    name r;
+    reader_.validate_self_closing();
+
+    r.value(reader_.get_attribute<std::string>(value_name));
+    if (reader_.has_attribute(schema_name_name))
+        r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
+
+    return r;
+}
+
+boost::shared_ptr<type>
+schema_hydrator::read_compound(const std::string& schema_name) {
     reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Compound.";
 
@@ -639,7 +651,7 @@ boost::shared_ptr<type> schema_hydrator::read_compound() {
 
     std::list<field> fields;
     do {
-        if (read_type_base_fields(*r)) {
+        if (read_type_base_fields(schema_name, *r)) {
             reader_.move_next();
         } else if (reader_.is_start_element(fields_name)) {
             fields.push_back(read_field());
@@ -657,7 +669,8 @@ boost::shared_ptr<type> schema_hydrator::read_compound() {
     return r;
 }
 
-boost::shared_ptr<type> schema_hydrator::read_enumeration() {
+boost::shared_ptr<type>
+schema_hydrator::read_enumeration(const std::string& schema_name) {
     reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Enumeration.";
 
@@ -666,7 +679,7 @@ boost::shared_ptr<type> schema_hydrator::read_enumeration() {
 
     std::list<std::string> values;
     do {
-        if (read_type_base_fields(*r)) {
+        if (read_type_base_fields(schema_name, *r)) {
             // do nothing
         } else if (reader_.is_start_element(values_name)) {
             reader_.move_next();
@@ -688,7 +701,8 @@ boost::shared_ptr<type> schema_hydrator::read_enumeration() {
     return r;
 }
 
-boost::shared_ptr<type> schema_hydrator::read_collection() {
+boost::shared_ptr<type>
+schema_hydrator::read_collection(const std::string& schema_name) {
     reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Collection.";
 
@@ -696,14 +710,14 @@ boost::shared_ptr<type> schema_hydrator::read_collection() {
     reader_.move_next();
 
     do {
-        if (read_type_base_fields(*r))
-            reader_.move_next();
-        else if (reader_.is_start_element(type_name_name))
-            r->type_name(read_type_name());
-        else {
+        if (read_type_base_fields(schema_name, *r)) {
+            // do nothing
+        } else if (reader_.is_start_element(type_name_name))
+            r->type_name(read_name());
+        else
             log_unsupported_element();
-            reader_.move_next();
-        }
+
+        reader_.move_next();
     } while (!reader_.is_end_element(types_name));
     reader_.move_next();
 
@@ -711,19 +725,20 @@ boost::shared_ptr<type> schema_hydrator::read_collection() {
     return r;
 }
 
-boost::shared_ptr<type> schema_hydrator::read_type() {
+boost::shared_ptr<type>
+schema_hydrator::read_type(const std::string& schema_name) {
     reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Type.";
 
     const auto s(reader_.get_attribute<std::string>(xsi_type_name));
     if (s == "Primitive")
-        return read_primitive();
+        return read_primitive(schema_name);
     else if (s == "Compound")
-        return read_compound();
+        return read_compound(schema_name);
     else if (s == "Enumeration")
-        return read_enumeration();
+        return read_enumeration(schema_name);
     else if (s == "Collection")
-        return read_collection();
+        return read_collection(schema_name);
 
     BOOST_LOG_SEV(lg, warn) << "Unsupported type: " << s;
     reader_.move_next();
@@ -751,7 +766,7 @@ schema schema_hydrator::hydrate() {
         else if (reader_.is_start_element(tags_name))
             tags.push_back(read_tag());
         else if (reader_.is_start_element(types_name)) {
-            const auto t(read_type());
+            const auto t(read_type(r.name()));
             if (t)
                 types.push_back(t);
         } else {

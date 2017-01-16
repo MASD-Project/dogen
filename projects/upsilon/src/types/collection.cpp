@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
+#include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/upsilon/io/type_io.hpp"
-#include "dogen/upsilon/io/type_name_io.hpp"
 #include "dogen/upsilon/types/collection.hpp"
 #include "dogen/upsilon/types/type_visitor.hpp"
 
@@ -28,12 +28,12 @@ namespace dogen {
 namespace upsilon {
 
 collection::collection(
-    const std::string& name,
-    const std::string& extends,
+    const dogen::upsilon::name& name,
+    const dogen::upsilon::name& extends,
     const std::string& comment,
     const std::vector<std::string>& tag_refs,
     const std::string& pof_id,
-    const dogen::upsilon::type_name& type_name)
+    const dogen::upsilon::name& type_name)
     : dogen::upsilon::type(
       name,
       extends,
@@ -92,19 +92,19 @@ collection& collection::operator=(collection other) {
     return *this;
 }
 
-const dogen::upsilon::type_name& collection::type_name() const {
+const dogen::upsilon::name& collection::type_name() const {
     return type_name_;
 }
 
-dogen::upsilon::type_name& collection::type_name() {
+dogen::upsilon::name& collection::type_name() {
     return type_name_;
 }
 
-void collection::type_name(const dogen::upsilon::type_name& v) {
+void collection::type_name(const dogen::upsilon::name& v) {
     type_name_ = v;
 }
 
-void collection::type_name(const dogen::upsilon::type_name&& v) {
+void collection::type_name(const dogen::upsilon::name&& v) {
     type_name_ = std::move(v);
 }
 

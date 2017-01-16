@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
+#include "dogen/upsilon/test_data/name_td.hpp"
 #include "dogen/upsilon/test_data/field_td.hpp"
-#include "dogen/upsilon/test_data/type_name_td.hpp"
 
 namespace {
 
@@ -30,9 +30,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::upsilon::type_name
-create_dogen_upsilon_type_name(const unsigned int position) {
-    return dogen::upsilon::type_name_generator::create(position);
+dogen::upsilon::name
+create_dogen_upsilon_name(const unsigned int position) {
+    return dogen::upsilon::name_generator::create(position);
 }
 
 }
@@ -45,7 +45,7 @@ field_generator::field_generator() : position_(0) { }
 void field_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.type_name(create_dogen_upsilon_type_name(position + 1));
+    v.type_name(create_dogen_upsilon_name(position + 1));
     v.comment(create_std_string(position + 2));
 }
 

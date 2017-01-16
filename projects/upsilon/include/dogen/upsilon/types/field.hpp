@@ -27,7 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/upsilon/types/type_name.hpp"
+#include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/serialization/field_fwd_ser.hpp"
 
 namespace dogen {
@@ -43,7 +43,7 @@ public:
 public:
     field(
         const std::string& name,
-        const dogen::upsilon::type_name& type_name,
+        const dogen::upsilon::name& type_name,
         const std::string& comment);
 
 private:
@@ -59,10 +59,10 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const dogen::upsilon::type_name& type_name() const;
-    dogen::upsilon::type_name& type_name();
-    void type_name(const dogen::upsilon::type_name& v);
-    void type_name(const dogen::upsilon::type_name&& v);
+    const dogen::upsilon::name& type_name() const;
+    dogen::upsilon::name& type_name();
+    void type_name(const dogen::upsilon::name& v);
+    void type_name(const dogen::upsilon::name&& v);
 
     const std::string& comment() const;
     std::string& comment();
@@ -81,7 +81,7 @@ public:
 
 private:
     std::string name_;
-    dogen::upsilon::type_name type_name_;
+    dogen::upsilon::name type_name_;
     std::string comment_;
 };
 

@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/upsilon/io/tag_io.hpp"
+#include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/upsilon/io/type_io.hpp"
 #include "dogen/upsilon/io/field_io.hpp"
 #include "dogen/upsilon/io/model_io.hpp"
@@ -36,7 +37,6 @@
 #include "dogen/upsilon/io/directory_io.hpp"
 #include "dogen/upsilon/io/exclusion_io.hpp"
 #include "dogen/upsilon/io/primitive_io.hpp"
-#include "dogen/upsilon/io/type_name_io.hpp"
 #include "dogen/upsilon/io/collection_io.hpp"
 #include "dogen/upsilon/io/dependency_io.hpp"
 #include "dogen/upsilon/io/schema_ref_io.hpp"

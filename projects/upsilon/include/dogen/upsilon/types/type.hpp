@@ -29,6 +29,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/type_visitor_fwd.hpp"
 #include "dogen/upsilon/serialization/type_fwd_ser.hpp"
 
@@ -45,8 +46,8 @@ public:
 
 public:
     type(
-        const std::string& name,
-        const std::string& extends,
+        const dogen::upsilon::name& name,
+        const dogen::upsilon::name& extends,
         const std::string& comment,
         const std::vector<std::string>& tag_refs,
         const std::string& pof_id);
@@ -68,15 +69,15 @@ public:
     virtual void to_stream(std::ostream& s) const;
 
 public:
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const dogen::upsilon::name& name() const;
+    dogen::upsilon::name& name();
+    void name(const dogen::upsilon::name& v);
+    void name(const dogen::upsilon::name&& v);
 
-    const std::string& extends() const;
-    std::string& extends();
-    void extends(const std::string& v);
-    void extends(const std::string&& v);
+    const dogen::upsilon::name& extends() const;
+    dogen::upsilon::name& extends();
+    void extends(const dogen::upsilon::name& v);
+    void extends(const dogen::upsilon::name&& v);
 
     const std::string& comment() const;
     std::string& comment();
@@ -102,8 +103,8 @@ protected:
     void swap(type& other) noexcept;
 
 private:
-    std::string name_;
-    std::string extends_;
+    dogen::upsilon::name name_;
+    dogen::upsilon::name extends_;
     std::string comment_;
     std::vector<std::string> tag_refs_;
     std::string pof_id_;

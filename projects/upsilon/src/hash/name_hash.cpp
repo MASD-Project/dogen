@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/type_name_hash.hpp"
+#include "dogen/upsilon/hash/name_hash.hpp"
 
 namespace {
 
@@ -33,10 +33,10 @@ inline void combine(std::size_t& seed, const HashableType& value) {
 namespace dogen {
 namespace upsilon {
 
-std::size_t type_name_hasher::hash(const type_name& v) {
+std::size_t name_hasher::hash(const name& v) {
     std::size_t seed(0);
 
-    combine(seed, v.name());
+    combine(seed, v.value());
     combine(seed, v.schema_name());
 
     return seed;

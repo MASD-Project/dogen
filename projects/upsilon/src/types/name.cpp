@@ -18,63 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/types/type_name.hpp"
+#include "dogen/upsilon/types/name.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-type_name::type_name(
-    const std::string& name,
+name::name(
+    const std::string& value,
     const std::string& schema_name)
-    : name_(name),
+    : value_(value),
       schema_name_(schema_name) { }
 
-void type_name::swap(type_name& other) noexcept {
+void name::swap(name& other) noexcept {
     using std::swap;
-    swap(name_, other.name_);
+    swap(value_, other.value_);
     swap(schema_name_, other.schema_name_);
 }
 
-bool type_name::operator==(const type_name& rhs) const {
-    return name_ == rhs.name_ &&
+bool name::operator==(const name& rhs) const {
+    return value_ == rhs.value_ &&
         schema_name_ == rhs.schema_name_;
 }
 
-type_name& type_name::operator=(type_name other) {
+name& name::operator=(name other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::string& type_name::name() const {
-    return name_;
+const std::string& name::value() const {
+    return value_;
 }
 
-std::string& type_name::name() {
-    return name_;
+std::string& name::value() {
+    return value_;
 }
 
-void type_name::name(const std::string& v) {
-    name_ = v;
+void name::value(const std::string& v) {
+    value_ = v;
 }
 
-void type_name::name(const std::string&& v) {
-    name_ = std::move(v);
+void name::value(const std::string&& v) {
+    value_ = std::move(v);
 }
 
-const std::string& type_name::schema_name() const {
+const std::string& name::schema_name() const {
     return schema_name_;
 }
 
-std::string& type_name::schema_name() {
+std::string& name::schema_name() {
     return schema_name_;
 }
 
-void type_name::schema_name(const std::string& v) {
+void name::schema_name(const std::string& v) {
     schema_name_ = v;
 }
 
-void type_name::schema_name(const std::string&& v) {
+void name::schema_name(const std::string&& v) {
     schema_name_ = std::move(v);
 }
 

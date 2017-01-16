@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/upsilon/test_data/type_name_td.hpp"
+#include "dogen/upsilon/test_data/name_td.hpp"
 
 namespace {
 
@@ -34,30 +34,30 @@ std::string create_std_string(const unsigned int position) {
 namespace dogen {
 namespace upsilon {
 
-type_name_generator::type_name_generator() : position_(0) { }
+name_generator::name_generator() : position_(0) { }
 
-void type_name_generator::
+void name_generator::
 populate(const unsigned int position, result_type& v) {
-    v.name(create_std_string(position + 0));
+    v.value(create_std_string(position + 0));
     v.schema_name(create_std_string(position + 1));
 }
 
-type_name_generator::result_type
-type_name_generator::create(const unsigned int position) {
-    type_name r;
-    type_name_generator::populate(position, r);
+name_generator::result_type
+name_generator::create(const unsigned int position) {
+    name r;
+    name_generator::populate(position, r);
     return r;
 }
 
-type_name_generator::result_type*
-type_name_generator::create_ptr(const unsigned int position) {
-    type_name* p = new type_name();
-    type_name_generator::populate(position, *p);
+name_generator::result_type*
+name_generator::create_ptr(const unsigned int position) {
+    name* p = new name();
+    name_generator::populate(position, *p);
     return p;
 }
 
-type_name_generator::result_type
-type_name_generator::operator()() {
+name_generator::result_type
+name_generator::operator()() {
     return create(position_++);
 }
 

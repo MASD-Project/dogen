@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/upsilon/types/type_name.hpp"
+#include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/model.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
 #include "dogen/upsilon/types/compound.hpp"
@@ -43,7 +43,7 @@ namespace upsilon {
 
 class transformer final {
 private:
-    std::string to_unparsed_type(const dogen::upsilon::type_name& tn) const;
+    std::string to_unparsed_type(const dogen::upsilon::name& n) const;
 
     void populate_element_properties(const yarn::origin_types ot,
         const yarn::name& model_name, const dogen::upsilon::type& t,

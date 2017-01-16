@@ -148,8 +148,8 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
     BOOST_REQUIRE(a.types().size() == 5);
 
     const auto& type_0(*a.types()[0]);
-    BOOST_CHECK(type_0.name() == "Date");
-    BOOST_CHECK(type_0.extends().empty());
+    BOOST_CHECK(type_0.name().value() == "Date");
+    BOOST_CHECK(type_0.extends().value().empty());
     BOOST_CHECK(type_0.pof_id() == "1125");
     BOOST_REQUIRE(type_0.tag_refs().size() == 1);
     BOOST_CHECK(type_0.tag_refs()[0] == "ZetaTypes");
@@ -163,8 +163,8 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
     BOOST_CHECK(primitive.default_value() == "1970-01-01");
 
     const auto& type_1(*a.types()[1]);
-    BOOST_CHECK(type_1.name() == "TestType");
-    BOOST_CHECK(type_1.extends() == "ModelValue");
+    BOOST_CHECK(type_1.name().value() == "TestType");
+    BOOST_CHECK(type_1.extends().value() == "ModelValue");
     BOOST_CHECK(type_1.pof_id().empty());
     BOOST_REQUIRE(type_1.tag_refs().size() == 1);
     BOOST_CHECK(type_1.tag_refs()[0] == "Configuration");
@@ -176,18 +176,18 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
 
     const auto& field_0(compound.fields()[0]);
     BOOST_CHECK(field_0.name() == "Version");
-    BOOST_CHECK(field_0.type_name().name() == "String");
+    BOOST_CHECK(field_0.type_name().value() == "String");
     BOOST_CHECK(field_0.type_name().schema_name() == "Zeta");
     BOOST_CHECK(field_0.comment() == "Some comment");
 
     const auto& field_1(compound.fields()[1]);
     BOOST_CHECK(field_1.name() == "AField");
-    BOOST_CHECK(field_1.type_name().name() == "String");
+    BOOST_CHECK(field_1.type_name().value() == "String");
     BOOST_CHECK(field_1.type_name().schema_name() == "Zeta");
     BOOST_CHECK(field_1.comment().empty());
 
     const auto& type_3(*a.types()[3]);
-    BOOST_CHECK(type_3.name() == "NoFields");
+    BOOST_CHECK(type_3.name().value() == "NoFields");
 
     const auto ptr_3(dynamic_cast<const dogen::upsilon::compound*>(&type_3));
     BOOST_REQUIRE(ptr_3 != nullptr);
@@ -195,8 +195,8 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
     BOOST_REQUIRE(compound_3.fields().empty());
 
     const auto& type_4(*a.types()[4]);
-    BOOST_CHECK(type_4.name() == "SomeEnum");
-    BOOST_CHECK(type_4.extends().empty());
+    BOOST_CHECK(type_4.name().value() == "SomeEnum");
+    BOOST_CHECK(type_4.extends().value().empty());
     BOOST_CHECK(type_4.pof_id().empty());
     BOOST_REQUIRE(type_4.tag_refs().empty());
 
@@ -258,8 +258,8 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
 
     BOOST_REQUIRE(a.types().size() == 6);
     const auto& type_4(*a.types()[4]);
-    BOOST_CHECK(type_4.name() == "ModelValues");
-    BOOST_CHECK(type_4.extends().empty());
+    BOOST_CHECK(type_4.name().value() == "ModelValues");
+    BOOST_CHECK(type_4.extends().value().empty());
     BOOST_CHECK(type_4.pof_id() == "1154");
     BOOST_REQUIRE(type_4.tag_refs().size() == 1);
     BOOST_CHECK(type_4.tag_refs()[0] == "ZetaTypes");
@@ -267,7 +267,7 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
     const auto ptr_4(dynamic_cast<const dogen::upsilon::collection*>(&type_4));
     BOOST_REQUIRE(ptr_4 != nullptr);
     const auto& collection(*ptr_4);
-    BOOST_CHECK(collection.type_name().name() == "ModelValue");
+    BOOST_CHECK(collection.type_name().value() == "ModelValue");
     BOOST_CHECK(collection.type_name().schema_name().empty());
 }
 

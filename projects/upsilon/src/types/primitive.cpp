@@ -39,8 +39,8 @@ primitive::primitive()
     : intrinsic_(static_cast<dogen::upsilon::intrinsic_types>(0)) { }
 
 primitive::primitive(
-    const std::string& name,
-    const std::string& extends,
+    const dogen::upsilon::name& name,
+    const dogen::upsilon::name& extends,
     const std::string& comment,
     const std::vector<std::string>& tag_refs,
     const std::string& pof_id,

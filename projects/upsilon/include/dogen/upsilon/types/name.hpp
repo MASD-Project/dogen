@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_UPSILON_TYPES_TYPE_NAME_HPP
-#define DOGEN_UPSILON_TYPES_TYPE_NAME_HPP
+#ifndef DOGEN_UPSILON_TYPES_NAME_HPP
+#define DOGEN_UPSILON_TYPES_NAME_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,35 +27,35 @@
 
 #include <string>
 #include <algorithm>
-#include "dogen/upsilon/serialization/type_name_fwd_ser.hpp"
+#include "dogen/upsilon/serialization/name_fwd_ser.hpp"
 
 namespace dogen {
 namespace upsilon {
 
-class type_name final {
+class name final {
 public:
-    type_name() = default;
-    type_name(const type_name&) = default;
-    type_name(type_name&&) = default;
-    ~type_name() = default;
+    name() = default;
+    name(const name&) = default;
+    name(name&&) = default;
+    ~name() = default;
 
 public:
-    type_name(
-        const std::string& name,
+    name(
+        const std::string& value,
         const std::string& schema_name);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::type_name& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::upsilon::name& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::upsilon::type_name& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::upsilon::name& v, unsigned int version);
 
 public:
-    const std::string& name() const;
-    std::string& name();
-    void name(const std::string& v);
-    void name(const std::string&& v);
+    const std::string& value() const;
+    std::string& value();
+    void value(const std::string& v);
+    void value(const std::string&& v);
 
     const std::string& schema_name() const;
     std::string& schema_name();
@@ -63,17 +63,17 @@ public:
     void schema_name(const std::string&& v);
 
 public:
-    bool operator==(const type_name& rhs) const;
-    bool operator!=(const type_name& rhs) const {
+    bool operator==(const name& rhs) const;
+    bool operator!=(const name& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(type_name& other) noexcept;
-    type_name& operator=(type_name other);
+    void swap(name& other) noexcept;
+    name& operator=(name other);
 
 private:
-    std::string name_;
+    std::string value_;
     std::string schema_name_;
 };
 
@@ -83,8 +83,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::upsilon::type_name& lhs,
-    dogen::upsilon::type_name& rhs) {
+    dogen::upsilon::name& lhs,
+    dogen::upsilon::name& rhs) {
     lhs.swap(rhs);
 }
 

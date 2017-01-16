@@ -83,6 +83,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Create an upsilon yarn frontend                           :story:
+    CLOCK: [2017-01-16 Mon 13:45]--[2017-01-16 Mon 14:48] =>  1:03
     CLOCK: [2017-01-16 Mon 13:01]--[2017-01-16 Mon 13:44] =>  0:43
     CLOCK: [2017-01-16 Mon 10:58]--[2017-01-16 Mon 11:44] =>  0:46
     CLOCK: [2017-01-16 Mon 10:16]--[2017-01-16 Mon 10:57] =>  0:41

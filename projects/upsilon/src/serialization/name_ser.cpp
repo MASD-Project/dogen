@@ -28,24 +28,24 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/upsilon/serialization/type_name_ser.hpp"
+#include "dogen/upsilon/serialization/name_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::upsilon::type_name& v,
+    const dogen::upsilon::name& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("name", v.name_);
+    ar << make_nvp("value", v.value_);
     ar << make_nvp("schema_name", v.schema_name_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::upsilon::type_name& v,
+    dogen::upsilon::name& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("value", v.value_);
     ar >> make_nvp("schema_name", v.schema_name_);
 }
 
@@ -54,16 +54,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::upsilon::type_name& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::upsilon::type_name& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::upsilon::name& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::upsilon::name& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::upsilon::type_name& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::upsilon::type_name& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::upsilon::name& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::upsilon::name& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::upsilon::type_name& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::upsilon::type_name& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::upsilon::name& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::upsilon::name& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::upsilon::type_name& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::upsilon::type_name& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::upsilon::name& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::upsilon::name& v, unsigned int version);
 
 } }
