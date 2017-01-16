@@ -23,10 +23,14 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/upsilon/test/mock_model_factory.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
 #include "dogen/upsilon/io/primitive_io.hpp"
+#include "dogen/upsilon/types/compound.hpp"
+#include "dogen/upsilon/io/compound_io.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
 
 namespace {
@@ -45,7 +49,7 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  */
 const mock_intermediate_model_factory::flags flags(
     false/*tagged*/, false/*merged*/, false/*resolved*/,
-    true/*concepts_indexed*/, true/*attributes_indexed*/,
+    false/*concepts_indexed*/, false/*attributes_indexed*/,
     false/*associations_indexed*/);
 const mock_intermediate_model_factory yarn_factory(flags);
 const auto ot(dogen::yarn::origin_types::target);
@@ -60,17 +64,33 @@ BOOST_AUTO_TEST_SUITE(transformer_tests)
 BOOST_AUTO_TEST_CASE(upsilon_primitive_transforms_into_expected_yarn_primitive) {
     SETUP_TEST_LOG_SOURCE("upsilon_primitive_transforms_into_expected_yarn_primitive");
 
-    const auto model_name(yarn_factory.model_name(0));
+    const auto mn(yarn_factory.model_name(0));
     const auto i(mock_model_factory::make_primitive(0));
     BOOST_LOG_SEV(lg, debug) << "input: " << i;
 
-    const auto e(yarn_factory.make_primitive(0, model_name, ot));
+    const auto e(yarn_factory.make_primitive(0, mn, ot));
     const auto ot(e.origin_type());
 
     dogen::yarn::upsilon::transformer t;
-    const auto a(t.to_primitive(ot, model_name, i));
+    const auto a(t.to_primitive(ot, mn, i));
 
     BOOST_CHECK(asserter::assert_object(e, a));
+}
+
+BOOST_AUTO_TEST_CASE(upsilon_compound_transforms_into_expected_yarn_object) {
+    SETUP_TEST_LOG_SOURCE("upsilon_compound_transforms_into_expected_yarn_object");
+
+    const auto mn(yarn_factory.model_name(0));
+    const auto i(mock_model_factory::make_compound(0));
+    BOOST_LOG_SEV(lg, debug) << "input: " << i;
+
+    const auto e(yarn_factory.make_value_object_with_attribute(0, mn, ot));
+    const auto ot(e.origin_type());
+
+    dogen::yarn::upsilon::transformer t;
+    const auto a(t.to_object(ot, mn, i));
+
+    // BOOST_CHECK(asserter::assert_object(e, a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

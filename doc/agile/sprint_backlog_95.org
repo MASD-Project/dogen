@@ -5,44 +5,45 @@
 
 * Mission Statement
 
-- Finish C# support.
+- More work on C# support;
+- Start work on Upsilon.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-16 Mon 09:46]
+#+CAPTION: Clock summary at [2017-01-16 Mon 10:23]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *84:12* |       |       | 100.0 |
+| *Total time*                                                                | *85:19* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 84:12   |       |       | 100.0 |
-| Active                                                                      |         | 84:12 |       | 100.0 |
+| Stories                                                                     | 85:19   |       |       | 100.0 |
+| Active                                                                      |         | 85:19 |       | 100.0 |
 | COMPLETED Sprint and product backlog grooming                               |         |       |  0:46 |   0.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:57 |   1.1 |
 | COMPLETED Consider supporting multiple inheritance on non-proxy models      |         |       |  3:24 |   4.0 |
-| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  10.3 |
+| COMPLETED Add basic validation infrastructure                               |         |       |  8:40 |  10.2 |
 | COMPLETED Fix borked windows build                                          |         |       |  0:26 |   0.5 |
 | COMPLETED Clean up enumerator implementation                                |         |       |  1:05 |   1.3 |
-| COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   7.9 |
+| COMPLETED Measure validation slowdown                                       |         |       |  6:38 |   7.8 |
 | COMPLETED Parsing should support dot notation                               |         |       |  2:54 |   3.4 |
-| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   3.9 |
-| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   6.9 |
+| COMPLETED Analysis for changes required in order to support containers      |         |       |  3:15 |   3.8 |
+| COMPLETED Add support for object based container types in C#                |         |       |  5:48 |   6.8 |
 | COMPLETED Understand the behaviour of helpers and assistants                |         |       |  1:13 |   1.4 |
 | CANCELLED Add support for generic parents in yarn                           |         |       |  0:35 |   0.7 |
 | COMPLETED Fix assorted windows warnings                                     |         |       |  0:19 |   0.4 |
-| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |   8.9 |
-| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.3 |
+| COMPLETED Build dogen on windows locally                                    |         |       |  7:32 |   8.8 |
+| COMPLETED Fix borked windows build                                          |         |       |  1:54 |   2.2 |
 | COMPLETED Generate windows packages with WIX                                |         |       |  3:28 |   4.1 |
-| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   2.9 |
+| COMPLETED Add validation around instatitation of abstract classes           |         |       |  2:25 |   2.8 |
 | COMPLETED Add validation to ensure enumerators do not have types            |         |       |  0:21 |   0.4 |
 | COMPLETED Add appveyor support for bintray                                  |         |       |  2:23 |   2.8 |
-| COMPLETED Add read support for upsilon models                               |         |       | 13:26 |  16.0 |
-| POSTPONED Create an upsilon yarn frontend                                   |         |       |  9:25 |  11.2 |
+| COMPLETED Add read support for upsilon models                               |         |       | 13:26 |  15.7 |
+| POSTPONED Create an upsilon yarn frontend                                   |         |       | 10:32 |  12.3 |
 | POSTPONED Add auxiliary function properties to c#                           |         |       |  1:11 |   1.4 |
-| POSTPONED Add internal object dumper resolution                             |         |       |  4:51 |   5.8 |
+| POSTPONED Add internal object dumper resolution                             |         |       |  4:51 |   5.7 |
 | POSTPONED Add support for generic container types to C#                     |         |       |  1:16 |   1.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -1004,6 +1005,7 @@ resulted in additional errors:
 
 *** POSTPONED Create an upsilon yarn frontend                         :story:
     CLOSED: [2017-01-16 Mon 09:27]
+    CLOCK: [2017-01-15 Sun 14:51]--[2017-01-15 Sun 15:58] =>  1:07
     CLOCK: [2017-01-15 Sun 12:49]--[2017-01-15 Sun 13:44] =>  0:55
     CLOCK: [2017-01-15 Sun 12:02]--[2017-01-15 Sun 12:48] =>  0:46
     CLOCK: [2017-01-15 Sun 11:36]--[2017-01-15 Sun 12:01] =>  0:5

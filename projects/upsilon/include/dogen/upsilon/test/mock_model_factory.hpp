@@ -27,6 +27,7 @@
 
 #include <array>
 #include "dogen/upsilon/types/primitive.hpp"
+#include "dogen/upsilon/types/compound.hpp"
 
 namespace dogen {
 namespace upsilon {
@@ -35,6 +36,8 @@ namespace test {
 class mock_model_factory {
 public:
     static primitive make_primitive(const unsigned int n);
+    static compound make_compound(const unsigned int n);
+    static compound make_compound_with_field(const unsigned int n);
 };
 
 } } }

@@ -48,7 +48,8 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  */
 const mock_intermediate_model_factory::flags
 flags(false/*tagged*/, false/*resolved*/, false/*merged*/,
-    true/*concepts_indexed*/, false/*attributes_indexed*/);
+    true/*concepts_indexed*/, false/*attributes_indexed*/,
+    true/*types parsed*/);
 const mock_intermediate_model_factory factory(flags);
 
 template<typename Stateful>

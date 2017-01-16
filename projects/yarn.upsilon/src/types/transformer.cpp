@@ -27,18 +27,25 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.upsilon.transformer"));
 
+const std::string scope_operator("::");
+
 }
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
+std::string
+transformer::to_unparsed_type(const dogen::upsilon::type_name& tn) const {
+    return tn.schema_name() + scope_operator + tn.name();
+}
+
 void transformer::populate_element_properties(const yarn::origin_types ot,
     const yarn::name& model_name, const dogen::upsilon::type& t,
     yarn::element& e) const {
 
     dogen::yarn::name_factory nf;
-    dogen::yarn::name n(nf.build_element_in_model(model_name, t.name()));
+    const auto n(nf.build_element_in_model(model_name, t.name()));
 
     e.name(n);
     e.documentation(t.comment());
@@ -61,6 +68,15 @@ transformer::to_object(const yarn::origin_types ot,
     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
     yarn::object r;
     populate_element_properties(ot, model_name, c, r);
+
+    dogen::yarn::name_factory nf;
+    for (const auto& f : c.fields()) {
+        yarn::attribute attr;
+        attr.name(nf.build_attribute_name(r.name(), f.name()));
+        attr.unparsed_type(to_unparsed_type(f.type_name()));
+        attr.documentation(f.comment());
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Finished transforming compound";
     return r;
 }

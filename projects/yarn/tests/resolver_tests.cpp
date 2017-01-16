@@ -55,8 +55,9 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  * Flag was added but does nothing yet.
  */
 const mock_intermediate_model_factory::flags flags(false/*tagged*/,
-    false/*resolved*/, true/*merged*/, false/*concepts_expanded*/,
-    false/*attributes_expanded*/);
+    true/*merged*/, false/*resolved*/, false/*concepts_indexed*/,
+    false/*attributes_indexed*/, false/*associations_indexed*/,
+    true/*types parsed*/);
 
 const mock_intermediate_model_factory factory(flags);
 

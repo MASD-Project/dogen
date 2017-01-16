@@ -78,7 +78,8 @@ public:
             const bool resolved = false,
             const bool concepts_indexed = false,
             const bool attributes_indexed = false,
-            const bool associations_indexed = false);
+            const bool associations_indexed = false,
+            const bool types_parsed = false);
 
     public:
         /**
@@ -135,6 +136,14 @@ public:
         void associations_indexed(const bool v);
         /**@}*/
 
+        /**
+         * @brief If true, creates the name trees for attributes.
+         */
+        /**@{*/
+        bool types_parsed() const;
+        void types_parsed(const bool v);
+        /**@}*/
+
     private:
         bool tagged_;
         bool merged_;
@@ -142,6 +151,7 @@ public:
         bool concepts_indexed_;
         bool attributes_indexed_;
         bool associations_indexed_;
+        bool types_parsed_;
     };
 
 public:
@@ -243,6 +253,14 @@ public:
      * @brief Create a value object.
      */
     object make_value_object(const unsigned int i, const name& model_name,
+        const origin_types ot,
+        const unsigned int module_n = 0) const;
+
+    /**
+     * @brief Create a value object with an attribute
+     */
+    object make_value_object_with_attribute(const unsigned int i,
+        const name& model_name,
         const origin_types ot,
         const unsigned int module_n = 0) const;
 

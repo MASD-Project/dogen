@@ -131,14 +131,33 @@ mock_name_tree_shared_ptr(const dogen::yarn::name& n) {
     return r;
 }
 
+std::string mock_unparsed_type(const dogen::yarn::name& n) {
+    std::string r;
+    for (const auto& mm : n.location().model_modules())
+        r += mm + "::";
+
+    for (const auto& mm : n.location().internal_modules())
+        r += mm + "::";
+
+    r += n.simple();
+    return r;
+}
+
+std::string mock_unparsed_type_shared_ptr(const dogen::yarn::name& n) {
+    std::string r("boost::shared_ptr<");
+    r += mock_unparsed_type(n);
+    r += ">";
+    return r;
+}
+
 dogen::yarn::name_tree mock_name_tree(
     dogen::yarn::test::mock_intermediate_model_factory::attribute_types pt) {
     using namespace dogen::yarn;
 
     name_tree r;
     dogen::yarn::name_factory nf;
-    typedef test::mock_intermediate_model_factory::attribute_types
-        attribute_types;
+    using test::mock_intermediate_model_factory;
+    using attribute_types = mock_intermediate_model_factory::attribute_types;
 
     switch(pt) {
     case attribute_types::unsigned_int:
@@ -171,6 +190,46 @@ dogen::yarn::name_tree mock_name_tree(
         BOOST_THROW_EXCEPTION(test::building_error(invalid_attribute_type));
     }
     return r;
+}
+
+std::string mock_unparsed_type(
+    dogen::yarn::test::mock_intermediate_model_factory::attribute_types pt) {
+    using namespace dogen::yarn;
+    using test::mock_intermediate_model_factory;
+    using attribute_types = mock_intermediate_model_factory::attribute_types;
+
+    switch(pt) {
+    case attribute_types::unsigned_int:
+        return unsigned_int;
+        break;
+    case attribute_types::boolean:
+        return boolean;
+        break;
+    case attribute_types::boost_variant: {
+        std::string r("boost::variant<");
+        r += boolean;
+        r += ", ";
+        r += unsigned_int;
+        r += ">";
+        return r;
+        break;
+    }
+    case attribute_types::std_string:
+        return "std::string";
+        break;
+    case attribute_types::std_pair: {
+        std::string r("std::pair<");
+        r += boolean;
+        r += ", ";
+        r += unsigned_int;
+        r += ">";
+        break;
+    }
+    default:
+        BOOST_LOG_SEV(lg, error) << invalid_attribute_type;
+        BOOST_THROW_EXCEPTION(test::building_error(invalid_attribute_type));
+    }
+    return std::string();
 }
 
 std::list<std::string> make_internal_modules(const unsigned int module_n) {
@@ -211,7 +270,7 @@ void populate_simple_model_attributes(dogen::yarn::intermediate_model& m,
 }
 
 dogen::yarn::attribute mock_attribute(const dogen::yarn::name& owning_element,
-    const unsigned int n = 0,
+    const bool types_parsed, const unsigned int n = 0,
     const dogen::yarn::test::mock_intermediate_model_factory::
     attribute_types pt =
     dogen::yarn::test::mock_intermediate_model_factory::attribute_types::
@@ -225,21 +284,32 @@ dogen::yarn::attribute mock_attribute(const dogen::yarn::name& owning_element,
     dogen::yarn::attribute r;
     r.name(pn);
 
-    using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
-        attribute_types;
+    using dogen::yarn::test::mock_intermediate_model_factory;
+    using attribute_types = mock_intermediate_model_factory::attribute_types;
+
+    if (types_parsed) {
+        if (pt == attribute_types::value_object)
+            r.parsed_type(mock_name_tree(*name));
+        else if (pt == attribute_types::boost_shared_ptr)
+            r.parsed_type(mock_name_tree_shared_ptr(*name));
+        else
+            r.parsed_type(mock_name_tree(pt));
+    } else
+        BOOST_LOG_SEV(lg, debug) << "Not generating parsed type.";
+
     if (pt == attribute_types::value_object)
-        r.parsed_type(mock_name_tree(*name));
+        r.unparsed_type(mock_unparsed_type(*name));
     else if (pt == attribute_types::boost_shared_ptr)
-        r.parsed_type(mock_name_tree_shared_ptr(*name));
+        r.unparsed_type(mock_unparsed_type_shared_ptr(*name));
     else
-        r.parsed_type(mock_name_tree(pt));
+        r.unparsed_type(mock_unparsed_type(pt));
 
     return r;
 }
 
 template<typename StatefulAndNameable>
 void add_attribute(StatefulAndNameable& sn, const bool attributes_indexed,
-    const unsigned int n = 0,
+    const bool types_parsed, const unsigned int n = 0,
     const dogen::yarn::test::mock_intermediate_model_factory::
     attribute_types pt =
     dogen::yarn::test::mock_intermediate_model_factory::attribute_types::
@@ -247,7 +317,8 @@ void add_attribute(StatefulAndNameable& sn, const bool attributes_indexed,
     boost::optional<dogen::yarn::name> name =
     boost::optional<dogen::yarn::name>()) {
 
-    auto p(mock_attribute(sn.name(), n, pt, name));
+
+    const auto p(mock_attribute(sn.name(), types_parsed, n, pt, name));
     sn.local_attributes().push_back(p);
 
     if (attributes_indexed)
@@ -342,11 +413,12 @@ namespace test {
 mock_intermediate_model_factory::flags::flags(const bool tagged,
     const bool merged, const bool resolved,
     const bool concepts_indexed, const bool attributes_indexed,
-    const bool associations_indexed) :
+    const bool associations_indexed, const bool types_parsed) :
     tagged_(tagged), merged_(merged), resolved_(resolved),
     concepts_indexed_(concepts_indexed),
     attributes_indexed_(attributes_indexed),
-    associations_indexed_(associations_indexed) { }
+    associations_indexed_(associations_indexed),
+    types_parsed_(types_parsed) { }
 
 bool mock_intermediate_model_factory::flags::tagged() const {
     return tagged_;
@@ -382,6 +454,7 @@ void mock_intermediate_model_factory::flags::concepts_indexed(const bool v) {
 bool mock_intermediate_model_factory::flags::attributes_indexed() const {
     return attributes_indexed_;
 }
+
 void mock_intermediate_model_factory::flags::attributes_indexed(const bool v) {
     attributes_indexed_ = v;
 }
@@ -389,6 +462,15 @@ void mock_intermediate_model_factory::flags::attributes_indexed(const bool v) {
 bool mock_intermediate_model_factory::flags::associations_indexed() const {
     return associations_indexed_;
 }
+
+void mock_intermediate_model_factory::flags::types_parsed(const bool v) {
+    types_parsed_ = v;
+}
+
+bool mock_intermediate_model_factory::flags::types_parsed() const {
+    return types_parsed_;
+}
+
 void mock_intermediate_model_factory::flags::
 associations_indexed(const bool v) {
     associations_indexed_ = v;
@@ -508,6 +590,15 @@ object mock_intermediate_model_factory::make_value_object(const unsigned int i,
     if (flags_.tagged())
         annotation_function_(r.annotation());
 
+    return r;
+}
+
+object mock_intermediate_model_factory::make_value_object_with_attribute(
+    const unsigned int i, const name& model_name,
+    const origin_types ot, const unsigned int module_n) const {
+
+    auto r(make_value_object(i, model_name, ot, module_n));
+    add_attribute(r, flags_.attributes_indexed(), flags_.types_parsed());
     return r;
 }
 
@@ -695,11 +786,12 @@ make_single_concept_model(const origin_types ot, const unsigned int n,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c(make_concept(0, r.name(), ot));
-    add_attribute(c, flags_.attributes_indexed());
+    add_attribute(c, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c);
 
     auto o(make_value_object(0, r.name(), ot));
-    add_attribute(o, flags_.attributes_indexed(), 1);
+    add_attribute(o, flags_.attributes_indexed(), flags_.types_parsed(), 1);
+
     model_concept(flags_.attributes_indexed(), o, c);
     insert_object(r, o);
 
@@ -715,11 +807,11 @@ make_first_degree_concepts_model(const origin_types ot, const unsigned int n,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(make_concept(1, r.name(), ot));
-    add_attribute(c1, flags_.attributes_indexed(), 1);
+    add_attribute(c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
@@ -728,7 +820,7 @@ make_first_degree_concepts_model(const origin_types ot, const unsigned int n,
     insert_object(r, o0);
 
     auto o1(make_value_object(1, r.name(), ot));
-    add_attribute(o1, flags_.attributes_indexed(), 2);
+    add_attribute(o1, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
     if (flags_.concepts_indexed())
         model_concept(flags_.attributes_indexed(), o1, c0);
@@ -748,16 +840,16 @@ make_second_degree_concepts_model(const origin_types ot, const unsigned int n,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(make_concept(1, r.name(), ot));
-    add_attribute(c1, flags_.attributes_indexed(), 1);
+    add_attribute(c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(make_concept(2, r.name(), ot));
-    add_attribute(c2, flags_.attributes_indexed(), 2);
+    add_attribute(c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
     if (flags_.concepts_indexed())
         c2.refines().push_back(c0.name());
@@ -777,7 +869,7 @@ make_second_degree_concepts_model(const origin_types ot, const unsigned int n,
     insert_object(r, o1);
 
     auto o2(make_value_object(2, r.name(), ot));
-    add_attribute(o2, flags_.attributes_indexed(), 3);
+    add_attribute(o2, flags_.attributes_indexed(), flags_.types_parsed(), 3);
     if (flags_.concepts_indexed()) {
         model_concept(flags_.attributes_indexed(), o2, c0);
         model_concept(flags_.attributes_indexed(), o2, c1);
@@ -797,15 +889,15 @@ make_multiple_inheritance_concepts_model(const origin_types ot,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(make_concept(1, r.name(), ot));
-    add_attribute(c1, flags_.attributes_indexed(), 1);
+    add_attribute(c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     insert_nameable(r.concepts(), c1);
 
     concept c2(make_concept(1, r.name(), ot));
-    add_attribute(c2, flags_.attributes_indexed(), 2);
+    add_attribute(c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
     c2.refines().push_back(c0.name());
     c2.refines().push_back(c1.name());
     insert_nameable(r.concepts(), c2);
@@ -825,21 +917,21 @@ make_diamond_inheritance_concepts_model(const origin_types ot,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(make_concept(1, r.name(), ot));
-    add_attribute(c1, flags_.attributes_indexed(), 1);
+    add_attribute(c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
     concept c2(make_concept(2, r.name(), ot));
-    add_attribute(c2, flags_.attributes_indexed(), 2);
+    add_attribute(c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
     c2.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c2);
 
     concept c3(make_concept(3, r.name(), ot));
-    add_attribute(c3, flags_.attributes_indexed(), 3);
+    add_attribute(c3, flags_.attributes_indexed(), flags_.types_parsed(), 3);
     if (flags_.concepts_indexed())
         c3.refines().push_back(c0.name());
 
@@ -867,7 +959,7 @@ make_object_with_parent_that_models_concept(const origin_types ot,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     auto o0(make_value_object(0, r.name(), ot));
@@ -892,11 +984,11 @@ make_object_with_parent_that_models_a_refined_concept(const origin_types ot,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     concept c1(make_concept(1, r.name(), ot));
-    add_attribute(c1, flags_.attributes_indexed(), 1);
+    add_attribute(c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
     c1.refines().push_back(c0.name());
     insert_nameable(r.concepts(), c1);
 
@@ -936,7 +1028,7 @@ make_object_that_models_missing_concept(const origin_types ot,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
 
     auto o0(make_value_object(0, r.name(), ot));
 
@@ -954,7 +1046,7 @@ make_object_that_models_concept_with_missing_parent(const origin_types ot,
     r.primitives().insert(std::make_pair(ui.name().id(), ui));
 
     concept c0(make_concept(0, r.name(), ot));
-    add_attribute(c0, flags_.attributes_indexed());
+    add_attribute(c0, flags_.attributes_indexed(), flags_.types_parsed());
     insert_nameable(r.concepts(), c0);
 
     auto o0(make_value_object(0, r.name(), ot));
@@ -978,7 +1070,8 @@ object_with_both_transparent_and_opaque_associations(const origin_types ot,
 
     object o0(make_value_object(0, mn, ot));
     const auto vo(attribute_types::value_object);
-    attribute p0(mock_attribute(o0.name(), 0, vo, o1.name()));
+    const auto tp(flags_.types_parsed());
+    attribute p0(mock_attribute(o0.name(), tp, 0, vo, o1.name()));
     o0.local_attributes().push_back(p0);
     if (flags_.attributes_indexed())
         o0.all_attributes().push_back(p0);
@@ -993,7 +1086,7 @@ object_with_both_transparent_and_opaque_associations(const origin_types ot,
     insert_object(r, o2);
 
     const auto bsp(attribute_types::boost_shared_ptr);
-    attribute p1(mock_attribute(o0.name(), 1, bsp, o1.name()));
+    attribute p1(mock_attribute(o0.name(), tp, 1, bsp, o1.name()));
     o0.local_attributes().push_back(p1);
     if (flags_.attributes_indexed())
         o0.all_attributes().push_back(p1);
@@ -1004,7 +1097,7 @@ object_with_both_transparent_and_opaque_associations(const origin_types ot,
     object o3(make_value_object(3, mn, ot));
     insert_object(r, o3);
 
-    attribute p2(mock_attribute(o0.name(), 2, bsp, o3.name()));
+    attribute p2(mock_attribute(o0.name(), tp, 2, bsp, o3.name()));
     o0.local_attributes().push_back(p2);
     if (flags_.attributes_indexed())
         o0.all_attributes().push_back(p2);
@@ -1016,7 +1109,7 @@ object_with_both_transparent_and_opaque_associations(const origin_types ot,
     o4.name(nf.build_element_name("std", "string"));
     insert_object(r, o4);
 
-    attribute p3(mock_attribute(o0.name(), 3, vo, o4.name()));
+    attribute p3(mock_attribute(o0.name(), tp, 3, vo, o4.name()));
     o0.local_attributes().push_back(p3);
 
     if (flags_.attributes_indexed())
@@ -1043,7 +1136,8 @@ object_with_attribute(const origin_types ot, const object_types objt,
         BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
     }
 
-    attribute p(mock_attribute(o0.name(), 0, pt, o1.name()));
+    const auto tp(flags_.types_parsed());
+    attribute p(mock_attribute(o0.name(), tp, 0, pt, o1.name()));
     o0.local_attributes().push_back(p);
     if (flags_.attributes_indexed())
         o0.all_attributes().push_back(p);
@@ -1058,8 +1152,7 @@ object_with_attribute(const origin_types ot, const object_types objt,
             o0.transparent_associations().push_back(o1.name());
     }
 
-    if (pt == attribute_types::unsigned_int ||
-        pt == attribute_types::boolean) {
+    if (pt == attribute_types::unsigned_int || pt == attribute_types::boolean) {
         primitive ui;
         ui.name(p.parsed_type().current());
         insert_nameable(r.primitives(), ui);
@@ -1131,7 +1224,7 @@ mock_intermediate_model_factory::object_with_attribute_type_in_different_model(
     const auto npr(origin_types::non_proxy_reference);
     auto o1(make_value_object(1, npr));
 
-    add_attribute(o0, flags_.attributes_indexed(),
+    add_attribute(o0, flags_.attributes_indexed(), flags_.types_parsed(),
         0, attribute_types::value_object, o1.name());
 
     intermediate_model m0(make_empty_model(tg, 0, add_model_module));
@@ -1151,7 +1244,7 @@ object_with_missing_attribute_type(const origin_types ot,
     auto o0(make_value_object(0, origin_types::target));
     auto o1(make_value_object(1, origin_types::non_proxy_reference));
 
-    add_attribute(o0, flags_.attributes_indexed(), 0,
+    add_attribute(o0, flags_.attributes_indexed(), flags_.types_parsed(), 0,
         attribute_types::value_object, o1.name());
 
     if (flags_.associations_indexed())
@@ -1176,11 +1269,14 @@ object_with_parent_in_the_same_model(const origin_types ot,
 
     auto o0(make_value_object(0, mn, ot));
     if (has_attribute)
-        add_attribute(o0, flags_.attributes_indexed());
+        add_attribute(o0, flags_.attributes_indexed(), flags_.types_parsed());
+
 
     auto o1(make_value_object(1, mn, ot));
-    if (has_attribute)
-        add_attribute(o1, flags_.attributes_indexed(), 1);
+    if (has_attribute) {
+        add_attribute(o1, flags_.attributes_indexed(),
+            flags_.types_parsed(), 1);
+    }
 
     parent_to_child(flags_.attributes_indexed(), o1, o0);
     insert_object(r, o0);
@@ -1259,22 +1355,29 @@ object_with_third_degree_parent_in_same_model(const origin_types ot,
     }
 
     auto o3(make_value_object(3, mn, ot));
-    if (has_attribute)
-        add_attribute(o3, flags_.attributes_indexed(), 3);
+    if (has_attribute) {
+        add_attribute(o3, flags_.attributes_indexed(),
+            flags_.types_parsed(), 3);
+    }
 
     auto o2(make_value_object(2, mn, ot));
-    if (has_attribute)
-        add_attribute(o2, flags_.attributes_indexed(), 2);
+    if (has_attribute) {
+        add_attribute(o2, flags_.attributes_indexed(),
+            flags_.types_parsed(), 2);
+    }
+
     parent_to_child(flags_.attributes_indexed(), o3, o2, o3, !add_leaf);
 
     auto o1(make_value_object(1, mn, ot));
-    if (has_attribute)
-        add_attribute(o1, flags_.attributes_indexed(), 1);
+    if (has_attribute) {
+        add_attribute(o1, flags_.attributes_indexed(),
+            flags_.types_parsed(), 1);
+    }
     parent_to_child(flags_.attributes_indexed(), o2, o1, o3, !add_leaf);
 
     auto o0(make_value_object(0, mn, ot));
     if (has_attribute)
-        add_attribute(o0, flags_.attributes_indexed());
+        add_attribute(o0, flags_.attributes_indexed(), flags_.types_parsed());
 
     parent_to_child(flags_.attributes_indexed(), o1, o0, o3, !add_leaf);
 
@@ -1411,11 +1514,12 @@ object_with_group_of_attributes_of_different_types(const origin_types ot,
 
     auto o1(make_value_object(1, mn, ot));
     const auto vo(attribute_types::value_object);
-    auto p0(mock_attribute(o0.name(), 0, vo, o1.name()));
+    const auto tp(flags_.types_parsed());
+    auto p0(mock_attribute(o0.name(), tp, 0, vo, o1.name()));
     lambda(p0);
     insert_object(r, o1);
 
-    auto p1(mock_attribute(o0.name(), 1));
+    auto p1(mock_attribute(o0.name(), tp, 1));
     lambda(p1);
     primitive ui;
     ui.name(p1.parsed_type().current());
@@ -1424,7 +1528,7 @@ object_with_group_of_attributes_of_different_types(const origin_types ot,
     auto o3(make_value_object(3, mn, ot));
     insert_object(r, o3);
     const auto bsp(attribute_types::boost_shared_ptr);
-    auto p2(mock_attribute(o0.name(), 2, bsp, o3.name()));
+    auto p2(mock_attribute(o0.name(), tp, 2, bsp, o3.name()));
     lambda(p2);
 
     object o2;
@@ -1435,20 +1539,20 @@ object_with_group_of_attributes_of_different_types(const origin_types ot,
 
     auto o4(make_value_object(4, mn, ot));
     insert_object(r, o4);
-    auto p3(mock_attribute(o0.name(), 3, vo, o4.name()));
+    auto p3(mock_attribute(o0.name(), tp, 3, vo, o4.name()));
     lambda(p3);
 
     if (repeat_group) {
-        auto p4(mock_attribute(o0.name(), 4, vo, o1.name()));
+        auto p4(mock_attribute(o0.name(), tp, 4, vo, o1.name()));
         lambda(p4);
 
-        auto p5(mock_attribute(o0.name(), 5));
+        auto p5(mock_attribute(o0.name(), tp, 5));
         lambda(p5);
 
-        auto p6(mock_attribute(o0.name(), 6, bsp, o3.name()));
+        auto p6(mock_attribute(o0.name(), tp, 6, bsp, o3.name()));
         lambda(p6);
 
-        auto p7(mock_attribute(o0.name(), 7, vo, o4.name()));
+        auto p7(mock_attribute(o0.name(), tp, 7, vo, o4.name()));
         lambda(p7);
     }
     insert_object(r, o0);

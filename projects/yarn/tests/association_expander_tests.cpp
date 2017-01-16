@@ -48,7 +48,7 @@ using dogen::yarn::test::mock_intermediate_model_factory;
 const mock_intermediate_model_factory::flags flags(
     false/*tagged*/, false/*merged*/, false/*resolved*/,
     true/*concepts_indexed*/, true/*attributes_indexed*/,
-    false/*associations_indexed*/);
+    false/*associations_indexed*/, true/*types parsed*/);
 const mock_intermediate_model_factory factory(flags);
 
 }
