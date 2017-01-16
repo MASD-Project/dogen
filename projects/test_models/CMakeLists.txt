@@ -212,5 +212,9 @@ foreach(dia_model ${all_dia_test_models})
         add_dependencies(clean_test_models ${target_name})
         message(STATUS "Processed model: ${model_name} (json)")
     endif()
-
 endforeach()
+
+set(top_dir "${stage_test_data_dir}/TestModel")
+set(model_folder_name "TestModel")
+set(actual_dir "${top_dir}/actual.upsilon/${model_folder_name}")
+file(MAKE_DIRECTORY "${actual_dir}")

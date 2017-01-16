@@ -49,6 +49,7 @@ obtain_invalid_enumerator_name(const languages l) const {
     switch(l) {
     case languages::csharp: return csharp_invalid;
     case languages::cpp: return cpp_invalid;
+    case languages::upsilon: return csharp_invalid;
     default: {
         const auto s(boost::lexical_cast<std::string>(l));
         BOOST_LOG_SEV(lg, error) << unsupported_language << s;

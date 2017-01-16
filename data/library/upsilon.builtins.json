@@ -19,6 +19,14 @@
       },
       "meta_type": "object",
       "in_global_module": true
+    },
+      {
+      "name": {
+        "simple_name": "int"
+      },
+      "meta_type": "primitive",
+      "is_default_enumeration_type": true,
+      "in_global_module": true
     }
   ]
 }

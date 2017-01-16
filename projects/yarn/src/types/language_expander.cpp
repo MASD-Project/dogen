@@ -76,6 +76,12 @@ languages language_expander::make_language(const type_group& tg,
 
 void language_expander::
 expand(const annotations::type_repository& atrp, intermediate_model& im) const {
+    if (im.language() != languages::invalid) {
+        BOOST_LOG_SEV(lg, debug) << "Model already has a language: "
+                                 << im.language();
+        return;
+    }
+
     const auto tg(make_type_group(atrp));
     const auto ra(im.root_module().annotation());
     const auto l(make_language(tg, ra));
