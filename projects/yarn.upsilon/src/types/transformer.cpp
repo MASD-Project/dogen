@@ -87,16 +87,6 @@ transformer::to_object(const yarn::origin_types ot,
     return r;
 }
 
-yarn::object
-transformer::to_object(const yarn::origin_types ot,
-    const yarn::name& model_name, const dogen::upsilon::collection& c) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming collection: " << c.name();
-    yarn::object r;
-    populate_element_properties(ot, model_name, c, r);
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming collection";
-    return r;
-}
-
 yarn::enumeration
 transformer::to_enumeration(const yarn::origin_types ot,
     const yarn::name& model_name, const dogen::upsilon::enumeration& e) const {

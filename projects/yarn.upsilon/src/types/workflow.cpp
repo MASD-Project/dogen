@@ -54,7 +54,6 @@ public:
 
 public:
     using dogen::upsilon::type_visitor::visit;
-    void visit(const dogen::upsilon::collection& c);
     void visit(const dogen::upsilon::compound& c);
     void visit(const dogen::upsilon::enumeration& e);
     void visit(const dogen::upsilon::primitive& p);
@@ -67,19 +66,6 @@ private:
 
 model_populator::
 model_populator(yarn::intermediate_model& im) : model_(im) {}
-
-void model_populator::visit(const dogen::upsilon::collection& c) {
-    const auto ot(model_.origin_type());
-    const auto& mn(model_.name());
-    const auto o(transformer_.to_object(ot, mn, c));
-    const auto id(o.name().id());
-    const auto pair(std::make_pair(id, o));
-    const auto inserted(model_.objects().insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
-        BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + id));
-    }
-}
 
 void model_populator::visit(const dogen::upsilon::compound& c) {
     const auto ot(model_.origin_type());
