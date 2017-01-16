@@ -1,0 +1,521 @@
+#+title: Sprint Backlog 96
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Finish C# support;
+- Finish Upsilon support.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2017-01-16 Mon 09:50]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:22* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:22   |      |      | 100.0 |
+| Active                                                                      |        | 0:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |  90.9 |
+| STARTED Edit release notes for previous sprint                              |        |      | 0:02 |   9.1 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-16 Mon 09:27]--[2017-01-16 Mon 09:47] =>  0:20
+
+Updates to sprint and product backlog.
+
+*** STARTED Edit release notes for previous sprint                    :story:
+    CLOCK: [2017-01-16 Mon 09:48]--[2017-01-16 Mon 09:50] =>  0:02
+
+Add github release notes for previous sprint.
+
+Title: Dogen v0.95.0, "TBD"
+
+#+begin_src markdown
+Overview
+=======
+
+User visible changes
+===============
+
+Next Sprint
+========
+
+Binaries
+======
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX and Linux:
+
+- [dogen_0.95.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.95.0/dogen_0.95.0_amd64-applications.deb)
+- [dogen-0.95.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.95.0/dogen-0.95.0-Darwin-x86_64.dmg)
+
+**Note**: They are produced by CI so they may not yet be ready.
+
+For all other operative systems you need to build it from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
+
+*** Create an upsilon yarn frontend                                   :story:
+
+Now we can read upsilon models, we need to transform them into yarn
+models. This fairly straightforward as a meta-model
+transformation. There are however a few corner cases:
+
+- we need to inject model value into the yarn model
+- we need to inject a =Collection= type into the yarn model, which has
+  one type parameter.
+- we need to hard-code the model to a given language. At present we do
+  not have proper multi-language workflows. When a model comes out of
+  the frontend it has to either be C++, C# or LAM. To make life easy
+  we can just set it as either C++ or C# for now. Ideally we want to
+  retrieve a LAM model, mappable to C++ and C#. Actually that's not
+  quite right as we do not have the LAM types in the frontend. For now
+  lets just hack it and retrieve it either as C++ or C#. But perhaps
+  the right solution is to create a "upsilon language" which is
+  mappable to LAM/C++/C#. In fact we should just map against LAM, and
+  deduce the mappings for all other languages from there. The "upsilon
+  language" is not generatable, so it must be mapped. Which raises an
+  interesting point: there are two uses of "language": the language in
+  which the model is written and the language in which one wants to
+  output it. Normally they are the same. However, if I supply a LAM
+  model I may want to choose a language. For Dogen/JSON frontends this
+  is simply a meta-data extension. For upsilon we need to piggy-back
+  on the existing language infrastructure.
+- registration with "composite" extensions is not working; boost path
+  only returns the last extension - e.g. =.xml= instead of
+  =.Configuration.xml=.
+- We've created an "extension" method that returns all extensions for
+  a given file name. It wasn't very useful in the end. If needed in
+  the future its under =f83e9152e=.
+
+Problems:
+
+- we assume all languaes are "outputtable". Upsilon and LAM are
+  not. Language is not even a good name for these things either.
+- the pipeline assumes that we will generate only one final model; in
+  the mapping world this is not the case. A user may wish to map a
+  given model into n "outputtable" languages. In this case we need a
+  very different workflow: read each model natively, map them to the
+  outputtable language and then perform the workflow for the
+  outputtable language, possibly loading a different set of system
+  models.
+- we have no way of telling dogen what the output language are. This
+  can be done in the diagram itself for Dia and JSON but not for
+  upsilon. We could add command line arguments for this.
+- we have no way of describing mappings. We can use meta-data for
+  Dia/JSON but not for upsilon.
+- we need an end-to-end test for the upsilon model that includes the
+  translation to c++/c# and code generation.
+
+Upsilon as a language:
+
+- originally we envisioned that upsilon would exist all the way into
+  the meta-model as an intermediate model; we'd then go through
+  mapping to convert it into an outputtable language. However, we have
+  one slight problem: upsilon allows the user to create "string
+  typedefs". This means that many primitives are user primitives (say
+  a =SequenceId= could be an =int= in disguise). With the mapping
+  approach, we need to create a large map, model specific, with all of
+  these primitives. This could be done with the help of scripting
+  (primitives have an intrinsic type that can be mapped to a language
+  type). Alternatively, we could hard-code the mapping such that
+  =yarn.upsilon= would generate a model in an outputtable
+  language. This is easier but not reusable for LAM.
+- actually we could even use tailor to generate the mapping files,
+  given that the upsilon information already has all of the required
+  information.
+
+Tasks:
+
+- add new "upsilon" language which is not generatable; entire yarn
+  workflow should work for upsilon, but then quilt just does nothing.
+- add tailor support so that we can convert upsilon to JSON.
+
+*** Add auxiliary function properties to c#                           :story:
+
+We need to associate a function with an attribute and a
+formatter. This could be the helper or the assistant (or nothing).
+
+Actually this is not quite so straightforward. In =io= (c#) we have:
+
+: assistant.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
+
+This is a bit of a problem because we now need to different
+invocations, one for helper another for the assistant, which differ on
+the function prototype. For the helper we need something like:
+
+: Add(assistant, "ByteProperty", value.ByteProperty, true/*withSeparator*/);
+
+So a string is no longer sufficient. Maybe we could have a struct with
+auxiliary function properties:
+
+- auxiliary function types = enum with { assistant, helper }
+- auxiliary function name = string
+
+So we can have a map of attribute id to map of formatter id to
+auxiliary function properties.
+
+Actually we should also create "attribute properties" as a top-level
+container so that in the future we can latch on other attribute level
+properties.
+
+*** Add internal object dumper resolution                             :story:
+
+We should try to resolve an object to a local dumper, if one exists;
+for all model types and primitives. Add a registrar for local dumpers.
+
+: using System;
+: using System.Collections.Generic;
+:
+: namespace Dogen.TestModels.CSharpModel
+: {
+:     static public class DynamicDumperRegistrar
+:     {
+:         public interface IDynamicDumper
+:         {
+:             void Dump(AssistantDumper assistant, object value);
+:         }
+:
+:         static private IDictionary<Type, IDynamicDumper> _dumpers = new Dictionary<Type, IDynamicDumper>();
+:
+:         static void RegisterDumper(Type type, IDynamicDumper dumper)
+:         {
+:         }
+:     }
+: }
+
+*** Add support for generic container types to C#                     :story:
+
+We should add all major container types and tests for them.
+
+: IEnumerable<T>
+: ICollection<T>
+: IList<T>
+: IDictionary<K, V>
+: List<T>
+: ConcurrentQueue<T>, ConcurrentStack<T>, LinkedList<T>
+: Dictionary<TKey, TValue>
+: SortedList<TKey, TValue>
+: ConcurrentDictionary<TKey, TValue>
+: KeyedCollection<TKey, TItem>
+
+Notes:
+
+- we need a way to determine if we are using a helper, the assistant
+  or a sequence generator directly.
+
+*** Add support for Language Agnostic Models (LAM)                    :story:
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N yarn merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
+
+Links:
+
+- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
+- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
+
+*** Fix issues with bintray windows uploads                           :story:
+
+At present we are doing a lot of hacks for windows:
+
+- hardcoding the path to the package
+- not uploading on just tags
+- uploading to the top-level folder instead of the version.
+
+Ideally we want to reuse the Travis BinTray descriptor but AppVeyor
+does not support this directly.
+
+*** Model references are not transitive                               :story:
+
+For some reason we do not seem to be following references of
+referenced models. We should load them automatically, now that they
+are part of the meta-data. However, the =yarn.json= model breaks when
+we remove the reference to annotation even though it does not use this
+model directly and =yarn= is referencing it correctly.
+
+*** Add support for boxed types                                       :story:
+
+At present we support built-in types such as =int= but not
+=System.Integer=. In theory we should be able to add these types with:
+
+:        "quilt.csharp.assistant.requires_assistance": true,
+:        "quilt.csharp.assistant.method_postfix": "ShortByte"
+
+And they should behave just like built-ins.
+
+*** Add handcrafted class to C# test model                            :story:
+
+We should make sure handcrafted code works in C#.
+
+Actually in order to get handcrafted types to work we need support for
+enablement. This is a somewhat tricky feature so we should leave it
+for after all the main ones are done.
+
+*** Add support for arrays                                            :story:
+
+At present the yarn parser does not support array notation:
+=string[]=. We need to look into how arrays would work for C++ and
+implement it in a compatible way.
+
+Links:
+
+- [[https://www.dotnetperls.com/array][array]]
+
+*** Add fluency support for C#                                        :story:
+
+We need to add fluent support for C#.
+
+C# properties are not compatible with the fluent pattern. Instead, one
+needs to create builders, across the inheritance tree.
+
+Links:
+
+- [[http://stackoverflow.com/questions/13761666/how-to-use-fluent-style-syntactic-sugar-with-c-sharp-property-declaration][How to use Fluent style syntactic sugar with c# property declaration]]
+
+*** Add visitor support to C#                                         :story:
+
+Implement the visitor formatters for C#.
+
+*** Benchmarks do not work for utility tests                          :story:
+
+When we run the benchmarks for utility we get an error:
+
+: Running 95 test cases...
+: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
+
+Seems like the tests do not clean up after themselves. We need to add
+some clean up logic and re-enable the tests.
+
+*** Add cross-model support to C#                                     :story:
+
+At present we do not have any tests that prove that cross-model
+support is working (other than proxy models). We need to create a user
+level model that makes use of types from another model. In theory it
+should just work since we are using fully qualified names everywhere.
+
+*** Generate AssemblyInfo in C#                                       :story:
+
+We need to inject a type for this in fabric. For now we can leave it
+mainly blank but in the future we need to have meta-data in yarn for
+all of its properties:
+
+: [assembly: AssemblyTitle ("TestDogen")]
+: [assembly: AssemblyDescription ("")]
+: [assembly: AssemblyConfiguration ("")]
+: [assembly: AssemblyCompany ("")]
+: [assembly: AssemblyProduct ("")]
+: [assembly: AssemblyCopyright ("marco")]
+: [assembly: AssemblyTrademark ("")]
+: [assembly: AssemblyCulture ("")]
+: [assembly: AssemblyVersion ("1.0.*")]
+
+These appear to just be properties at the model level.
+
+*** Consider adding a clone method for C#                             :story:
+
+It would be nice to have a way to clone a object graph. We probably
+have an equivalent story for this for C++ in the backlog.
+
+*** Consider making the output directory configurable in C#           :story:
+
+At present we are outputting binaries into the =bin= directory,
+locally on the project directory. However, it would make more sense to
+output to =build/output= like C++ does. For this to work, we need to
+be able to supply an output directory as meta-data.
+
+*** Add support for nuget                                             :story:
+
+A proxy model may require obtaining a nuget package. Users should be
+able to define a proxy model as requiring a nuget package and then
+Dogen should generate packages.config and add all such models to it.
+
+: +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
+
+*** Augment element ID with meta-model type                           :story:
+
+The element ID is considered to be a system-level, opaque
+identifier. It could, for all intents and purposes, be a large int. We
+have decided to use a string so we can dump it to the log and figure
+out what is going on without having to map IDs to a human-readable
+value. In the same vein, we could also add another component to the ID
+that would contain the meta-model element for that ID. This
+information could be placed at the start.
+
+Of course, we will not be able to remove the look-ups we have at
+present that try to figure out the meta-model element because they are
+related to resolution. But for any other cases it may result in
+slightly more performant code. We need to look at all the use cases.
+
+*** Identifiable needs to use camel case in C#                        :story:
+
+At present we are building identifiables with underscores.
+
+*** Generate windows packages with CPack                              :story:
+
+We tried to generate windows packages by using the NSIS tool, but
+there are no binaries available for it at present. However, it seems
+CPack can now generate MSIs directly:
+
+- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
+- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
+
+We need to investigate how to get the build to produce MSIs using WIX.
+
+*** Move enablement into quilt                                        :story:
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
+
+*** Add feature to disable regions                                    :story:
+
+We need a way to stop outputting regions if the user does not want
+them.
+
+*** Add parameters for using imported assemblies                      :story:
+
+Assemblies imported via proxy models need to have the ability to
+supply two parameters:
+
+- assembly name: this is not always the same as the proxy model name;
+- root namespace: similarly this may differ from the proxy model name.
+
+These should be supplied as meta data and used when constructing
+fabric types.
+
+*** Add msbuild target for C# test model                              :story:
+
+Once we are generating solutions, we should detect msbuild (or xbuild)
+and build the solution. This should be a CMake target that runs on
+Travis.
+
+*** Add visibility to yarn elements                                   :story:
+
+We need to be able to mark yarn types as:
+
+- public
+- internal
+
+This can then be used by C++ as well for visibility etc.
+
+*** Add partial element support to yarn                               :story:
+
+We need to be able to mark yarn elements as "partial". It is then up
+to programming languages to map this to a language feature. At present
+only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
+
+It would be nice to have a more meaningful name at yarn
+level. However, seems like this is a fairly general programming
+concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
+
+*** Add visibility to yarn attributes                                 :story:
+
+We need to be able to mark yarn attributes as:
+
+- public
+- private
+- protected
+
+*** Add final support in C#                                           :story:
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/88c54tsw.aspx][sealed (C# Reference)]]
+
+*** Add aspects for C# serialisation support                          :story:
+
+We need to add serialisation support:
+
+- C# serialisation
+- Data Contract serialisation
+- Json serialisation
+
+In C# these are done via attributes so we do not need additional
+facets. We will need a lot of configuration knobs though:
+
+- ability to switch a serialisation method on at model level or
+  element level.
+- support for serialisation specific arguments such as parameters for
+  Json.Net.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
+- [[https://msdn.microsoft.com/en-us/library/ms731073(v%3Dvs.110).aspx][Serialization and Deserialization]]
+- [[https://msdn.microsoft.com/en-us/library/ms733127(v%3Dvs.110).aspx][Using Data Contracts]]
+- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
+
+*** Consider adding =artefact_set= to formatters' model               :story:
+
+We are using collections of artefacts quite a bit, and it makes sense
+to create an abstraction for it such as a =artefact_set=. However, for
+this to work properly we need to add at least one basic behaviour: the
+ability to merge two artefact sets. Or else we will end up having to
+unpack the artefacts, then merging them, then creating a new artefact
+set.
+
+Problem is, we either create the artefact set as a non-generatable
+type - not ideal - or we create it as generatable and need to add this
+as a free function. We need to wait until dogen has support for
+merging code generation.
+
+** Deprecated

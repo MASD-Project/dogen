@@ -59,7 +59,7 @@ deploy:
     subject: domaindrivenconsulting
     repo: Dogen
     package: Dogen
-    artifact: build/output/msvc/Release/stage/pkg/dogen-0.95.0-Windows-AMD64.msi
-    version: 0.95.0
+    artifact: build/output/msvc/Release/stage/pkg/dogen-0.96.0-Windows-AMD64.msi
+    version: 0.96.0
     publish: true
     override: true
