@@ -757,7 +757,7 @@
 							</location>
 							<identifiable>Zeta_CollectionTestType_BinariesTest</identifiable>
 						</name>
-						<unparsed_type>Zeta::Binaries</unparsed_type>
+						<unparsed_type>Collection&lt;ModelValue&gt;</unparsed_type>
 						<parsed_type class_id="40" tracking_level="0" version="0">
 							<current>
 								<id></id>

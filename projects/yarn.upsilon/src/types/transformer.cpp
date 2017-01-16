@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/upsilon/io/name_io.hpp"
@@ -29,6 +30,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.upsilon.transformer"));
 
 const std::string scope_operator("::");
+const std::string collection_name("Collection");
+const std::string less_than("<");
+const std::string more_than(">");
 
 }
 
@@ -36,12 +40,30 @@ namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-std::string
-transformer::to_unparsed_type(const dogen::upsilon::name& n) const {
-    if (n.schema_name().empty())
-        return n.value();
+transformer::transformer(const std::unordered_map<std::string,
+    dogen::upsilon::name>& collection_names)
+    : collection_names_(collection_names) {}
 
-    return n.schema_name() + scope_operator + n.value();
+std::string
+transformer::to_unparsed_type(const dogen::upsilon::name& tn) const {
+    const auto i(collection_names_.find(tn.id()));
+    if (i == collection_names_.end()) {
+        if (tn.schema_name().empty())
+            return tn.value();
+
+        return tn.schema_name() + scope_operator + tn.value();
+    }
+
+    std::ostringstream s;
+    const auto& collection_tn(i->second);
+    s << collection_name << less_than;
+    if (collection_tn.schema_name().empty())
+        s << collection_tn.value();
+    else
+        s << collection_tn.schema_name() << scope_operator
+          << collection_tn.value();
+    s << more_than;
+    return s.str();
 }
 
 void transformer::populate_element_properties(const yarn::origin_types ot,

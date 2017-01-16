@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -42,8 +44,13 @@ namespace yarn {
 namespace upsilon {
 
 class transformer final {
+public:
+    transformer() = default;
+    explicit transformer(const std::unordered_map<std::string,
+        dogen::upsilon::name>& collection_names);
+
 private:
-    std::string to_unparsed_type(const dogen::upsilon::name& n) const;
+    std::string to_unparsed_type(const dogen::upsilon::name& tn) const;
 
     void populate_element_properties(const yarn::origin_types ot,
         const yarn::name& model_name, const dogen::upsilon::type& t,
@@ -59,6 +66,10 @@ public:
     yarn::enumeration
     to_enumeration(const yarn::origin_types ot, const yarn::name& model_name,
         const dogen::upsilon::enumeration& e) const;
+
+private:
+    const std::unordered_map<std::string, dogen::upsilon::name>
+    collection_names_;
 };
 
 } } }

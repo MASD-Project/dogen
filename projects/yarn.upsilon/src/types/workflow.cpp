@@ -19,6 +19,7 @@
  *
  */
 #include <list>
+#include <unordered_map>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name.hpp"
@@ -40,17 +41,41 @@ const std::string incorrect_number_of_outputs(
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
-
-
 }
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
+class collection_accumulator : public dogen::upsilon::type_visitor {
+public:
+    using dogen::upsilon::type_visitor::visit;
+    void visit(const dogen::upsilon::collection& c);
+
+public:
+    const std::unordered_map<std::string, dogen::upsilon::name>& result() const;
+
+private:
+    std::unordered_map<std::string, dogen::upsilon::name> result_;
+};
+
+void collection_accumulator::visit(const dogen::upsilon::collection& c) {
+    const auto pair(std::make_pair(c.name().id(), c.type_name()));
+    const auto inserted(result_.insert(pair).second);
+    if (!inserted) {
+
+    }
+}
+
+const std::unordered_map<std::string, dogen::upsilon::name>&
+collection_accumulator::result() const {
+    return result_;
+}
+
 class model_populator : public dogen::upsilon::type_visitor {
 public:
-    model_populator(yarn::intermediate_model& im);
+    model_populator(const std::unordered_map<std::string, dogen::upsilon::name>&
+        collection_names, yarn::intermediate_model& im);
 
 public:
     using dogen::upsilon::type_visitor::visit;
@@ -60,12 +85,13 @@ public:
 
 private:
     yarn::intermediate_model& model_;
-    transformer transformer_;
+    const transformer transformer_;
 };
 
-
 model_populator::
-model_populator(yarn::intermediate_model& im) : model_(im) {}
+model_populator(const std::unordered_map<std::string, dogen::upsilon::name>&
+    collection_names, yarn::intermediate_model& im)
+    : model_(im), transformer_(collection_names) {}
 
 void model_populator::visit(const dogen::upsilon::compound& c) {
     const auto ot(model_.origin_type());
@@ -135,10 +161,31 @@ workflow::create_model(const dogen::upsilon::model& um) const {
 
 void workflow::populate_model(const dogen::upsilon::model& um,
     yarn::intermediate_model& im) const {
-    model_populator mp(im);
+    /*
+     * First we obtain the id's of all collections.
+     */
+    collection_accumulator ca;
+    for (const auto& pair : um.schemas()) {
+        const auto& schema(pair.second);
+        BOOST_LOG_SEV(lg, debug) << "Processing Schema: "
+                                 << schema.file_name().generic_string();
 
-    // FIXME: merging all models into one at present
-    // FIXME: not respecting schema names either.
+        const auto& types(schema.types());
+        for (const auto& ptr : types) {
+            const auto& t(*ptr);
+            t.accept(ca);
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Finished populating from Schema.";
+    }
+
+    /*
+     * Then we can process all types.
+     *
+     * FIXME: merging all models into one at present
+     * FIXME: not respecting schema names either.
+     */
+    model_populator mp(ca.result(), im);
     for (const auto& pair : um.schemas()) {
         const auto& schema(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Populating from Schema: "
