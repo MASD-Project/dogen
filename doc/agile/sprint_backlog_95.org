@@ -109,7 +109,7 @@ You can download experimental binaries from [Bintray](https://bintray.com/domain
 For all other operative systems you need to build it from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
+- [[https://twitter.com/MarcoCraveiro/status/814095968211791877][Tweet]]
 
 *** COMPLETED Consider supporting multiple inheritance on non-proxy models :story:
     CLOSED: [2016-12-28 Wed 17:25]

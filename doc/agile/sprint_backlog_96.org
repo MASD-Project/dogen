@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-16 Mon 11:44]
+#+CAPTION: Clock summary at [2017-01-16 Mon 11:56]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:13* |      |      | 100.0 |
+| *Total time*                                                                | *2:22* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:13   |      |      | 100.0 |
-| Active                                                                      |        | 2:13 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |  15.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |  19.5 |
-| STARTED Create an upsilon yarn frontend                                     |        |      | 1:27 |  65.4 |
+| Stories                                                                     | 2:22   |      |      | 100.0 |
+| Active                                                                      |        | 2:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |  14.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |  24.6 |
+| STARTED Create an upsilon yarn frontend                                     |        |      | 1:27 |  61.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -34,6 +34,8 @@ Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2017-01-16 Mon 10:15]
+    CLOCK: [2017-01-16 Mon 11:52]--[2017-01-16 Mon 11:55] =>  0:03
+    CLOCK: [2017-01-16 Mon 11:45]--[2017-01-16 Mon 11:51] =>  0:06
     CLOCK: [2017-01-16 Mon 09:51]--[2017-01-16 Mon 10:15] =>  0:24
     CLOCK: [2017-01-16 Mon 09:48]--[2017-01-16 Mon 09:50] =>  0:02
 
@@ -67,17 +69,18 @@ The next sprint will continue to focus on C#, particularly the addition of colle
 
 Binaries
 ======
-You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX and Linux:
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
 - [dogen_0.95.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.95.0/dogen_0.95.0_amd64-applications.deb)
 - [dogen-0.95.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.95.0/dogen-0.95.0-Darwin-x86_64.dmg)
+- [dogen-0.95.0-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-0.95.0-Windows-AMD64.msi)
 
 **Note**: They are produced by CI so they may not yet be ready.
 
-For all other operative systems you need to build it from source. Source downloads are available below.
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/808591399855734784][Tweet]]
+- [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Create an upsilon yarn frontend                           :story:
     CLOCK: [2017-01-16 Mon 10:58]--[2017-01-16 Mon 11:44] =>  0:46
