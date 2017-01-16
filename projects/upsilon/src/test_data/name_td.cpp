@@ -38,8 +38,9 @@ name_generator::name_generator() : position_(0) { }
 
 void name_generator::
 populate(const unsigned int position, result_type& v) {
-    v.value(create_std_string(position + 0));
-    v.schema_name(create_std_string(position + 1));
+    v.id(create_std_string(position + 0));
+    v.value(create_std_string(position + 1));
+    v.schema_name(create_std_string(position + 2));
 }
 
 name_generator::result_type

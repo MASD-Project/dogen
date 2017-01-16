@@ -18,29 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/name_hash.hpp"
+#ifndef DOGEN_UPSILON_TYPES_ID_GENERATOR_FWD_HPP
+#define DOGEN_UPSILON_TYPES_ID_GENERATOR_FWD_HPP
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace upsilon {
 
-std::size_t name_hasher::hash(const name& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.id());
-    combine(seed, v.value());
-    combine(seed, v.schema_name());
-
-    return seed;
-}
+class id_generator;
 
 } }
+
+#endif

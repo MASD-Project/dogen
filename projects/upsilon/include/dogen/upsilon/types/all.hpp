@@ -43,6 +43,7 @@
 #include "dogen/upsilon/types/dependency.hpp"
 #include "dogen/upsilon/types/schema_ref.hpp"
 #include "dogen/upsilon/types/enumeration.hpp"
+#include "dogen/upsilon/types/id_generator.hpp"
 #include "dogen/upsilon/types/target_types.hpp"
 #include "dogen/upsilon/types/type_visitor.hpp"
 #include "dogen/upsilon/types/representation.hpp"

@@ -32,6 +32,7 @@
 #include "dogen/upsilon/types/compound.hpp"
 #include "dogen/upsilon/types/enumeration.hpp"
 #include "dogen/upsilon/types/collection.hpp"
+#include "dogen/upsilon/types/id_generator.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
 
 namespace {
@@ -625,6 +626,9 @@ name schema_hydrator::read_name(const std::string& schema_name) {
     r.value(reader_.get_attribute<std::string>(value_name));
     r.schema_name(schema_name);
 
+    id_generator g;
+    r.id(g.generate(r));
+
     return r;
 }
 
@@ -637,6 +641,9 @@ name schema_hydrator::read_name() {
     r.value(reader_.get_attribute<std::string>(value_name));
     if (reader_.has_attribute(schema_name_name))
         r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
+
+    id_generator g;
+    r.id(g.generate(r));
 
     return r;
 }

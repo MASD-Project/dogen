@@ -24,19 +24,23 @@ namespace dogen {
 namespace upsilon {
 
 name::name(
+    const std::string& id,
     const std::string& value,
     const std::string& schema_name)
-    : value_(value),
+    : id_(id),
+      value_(value),
       schema_name_(schema_name) { }
 
 void name::swap(name& other) noexcept {
     using std::swap;
+    swap(id_, other.id_);
     swap(value_, other.value_);
     swap(schema_name_, other.schema_name_);
 }
 
 bool name::operator==(const name& rhs) const {
-    return value_ == rhs.value_ &&
+    return id_ == rhs.id_ &&
+        value_ == rhs.value_ &&
         schema_name_ == rhs.schema_name_;
 }
 
@@ -44,6 +48,22 @@ name& name::operator=(name other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::string& name::id() const {
+    return id_;
+}
+
+std::string& name::id() {
+    return id_;
+}
+
+void name::id(const std::string& v) {
+    id_ = v;
+}
+
+void name::id(const std::string&& v) {
+    id_ = std::move(v);
 }
 
 const std::string& name::value() const {

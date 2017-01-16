@@ -18,29 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/name_hash.hpp"
+#include <sstream>
+#include "dogen/upsilon/types/id_generator.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+const std::string less_than("<");
+const std::string greater_than(">");
 
 }
 
 namespace dogen {
 namespace upsilon {
 
-std::size_t name_hasher::hash(const name& v) {
-    std::size_t seed(0);
+std::string id_generator::generate(const name& n) const {
+    std::ostringstream s;
+    if (!n.schema_name().empty())
+        s << less_than << n.schema_name() << greater_than;
 
-    combine(seed, v.id());
-    combine(seed, v.value());
-    combine(seed, v.schema_name());
+    s << less_than << n.value() << greater_than;
 
-    return seed;
+    return s.str();
 }
 
 } }

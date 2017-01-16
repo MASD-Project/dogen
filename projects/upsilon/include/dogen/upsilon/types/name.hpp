@@ -41,6 +41,7 @@ public:
 
 public:
     name(
+        const std::string& id,
         const std::string& value,
         const std::string& schema_name);
 
@@ -52,6 +53,11 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::upsilon::name& v, unsigned int version);
 
 public:
+    const std::string& id() const;
+    std::string& id();
+    void id(const std::string& v);
+    void id(const std::string&& v);
+
     const std::string& value() const;
     std::string& value();
     void value(const std::string& v);
@@ -73,6 +79,7 @@ public:
     name& operator=(name other);
 
 private:
+    std::string id_;
     std::string value_;
     std::string schema_name_;
 };

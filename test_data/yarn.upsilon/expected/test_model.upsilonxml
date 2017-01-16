@@ -39,10 +39,12 @@
 						<px class_id="3" tracking_level="1" version="0" object_id="_0">
 							<type class_id="14" tracking_level="0" version="0">
 								<name class_id="15" tracking_level="0" version="0">
+									<id>&lt;Phi&gt;&lt;Date&gt;</id>
 									<value>Date</value>
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -62,10 +64,12 @@
 						<px class_id="1" tracking_level="1" version="0" object_id="_1">
 							<type>
 								<name>
+									<id>&lt;Phi&gt;&lt;TestType&gt;</id>
 									<value>TestType</value>
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
 									<schema_name></schema_name>
 								</extends>
@@ -83,6 +87,7 @@
 								<item class_id="18" tracking_level="0" version="0">
 									<name>Version</name>
 									<type_name>
+										<id>&lt;Zeta&gt;&lt;String&gt;</id>
 										<value>String</value>
 										<schema_name>Zeta</schema_name>
 									</type_name>
@@ -91,6 +96,7 @@
 								<item>
 									<name>AField</name>
 									<type_name>
+										<id>&lt;Zeta&gt;&lt;String&gt;</id>
 										<value>String</value>
 										<schema_name>Zeta</schema_name>
 									</type_name>
@@ -103,10 +109,12 @@
 						<px class_id_reference="1" object_id="_2">
 							<type>
 								<name>
+									<id>&lt;Phi&gt;&lt;CollectionTestType&gt;</id>
 									<value>CollectionTestType</value>
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
 									<schema_name></schema_name>
 								</extends>
@@ -124,6 +132,7 @@
 								<item>
 									<name>BinariesTest</name>
 									<type_name>
+										<id>&lt;Zeta&gt;&lt;Binaries&gt;</id>
 										<value>Binaries</value>
 										<schema_name>Zeta</schema_name>
 									</type_name>
@@ -136,10 +145,12 @@
 						<px class_id_reference="1" object_id="_3">
 							<type>
 								<name>
+									<id>&lt;Phi&gt;&lt;NoFields&gt;</id>
 									<value>NoFields</value>
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
 									<schema_name></schema_name>
 								</extends>
@@ -161,10 +172,12 @@
 						<px class_id="2" tracking_level="1" version="0" object_id="_4">
 							<type>
 								<name>
+									<id>&lt;Phi&gt;&lt;SomeEnum&gt;</id>
 									<value>SomeEnum</value>
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -217,10 +230,12 @@
 						<px class_id_reference="3" object_id="_5">
 							<type>
 								<name>
+									<id>&lt;Zeta&gt;&lt;MissingValue&gt;</id>
 									<value>MissingValue</value>
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -239,10 +254,12 @@
 						<px class_id_reference="3" object_id="_6">
 							<type>
 								<name>
+									<id>&lt;Zeta&gt;&lt;Binary&gt;</id>
 									<value>Binary</value>
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -262,10 +279,12 @@
 						<px class_id_reference="3" object_id="_7">
 							<type>
 								<name>
+									<id>&lt;Zeta&gt;&lt;DateNew&gt;</id>
 									<value>DateNew</value>
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -285,10 +304,12 @@
 						<px class_id_reference="3" object_id="_8">
 							<type>
 								<name>
+									<id>&lt;Zeta&gt;&lt;String&gt;</id>
 									<value>String</value>
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -308,10 +329,12 @@
 						<px class_id="0" tracking_level="1" version="0" object_id="_9">
 							<type>
 								<name>
+									<id>&lt;Zeta&gt;&lt;ModelValues&gt;</id>
 									<value>ModelValues</value>
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -324,6 +347,7 @@
 								<pof_id>1154</pof_id>
 							</type>
 							<type_name>
+								<id>&lt;ModelValue&gt;</id>
 								<value>ModelValue</value>
 								<schema_name></schema_name>
 							</type_name>
@@ -333,10 +357,12 @@
 						<px class_id_reference="0" object_id="_10">
 							<type>
 								<name>
+									<id>&lt;Zeta&gt;&lt;Binaries&gt;</id>
 									<value>Binaries</value>
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
+									<id></id>
 									<value></value>
 									<schema_name></schema_name>
 								</extends>
@@ -349,6 +375,7 @@
 								<pof_id>1155</pof_id>
 							</type>
 							<type_name>
+								<id>&lt;ModelValue&gt;</id>
 								<value>ModelValue</value>
 								<schema_name></schema_name>
 							</type_name>

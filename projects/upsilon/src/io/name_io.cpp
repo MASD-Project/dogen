@@ -35,6 +35,7 @@ namespace upsilon {
 std::ostream& operator<<(std::ostream& s, const name& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::upsilon::name\"" << ", "
+      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\"" << ", "
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\""
       << " }";
