@@ -29,6 +29,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-16 Mon 18:02]--[2017-01-16 Mon 18:17] =>  0:15
     CLOCK: [2017-01-16 Mon 15:47]--[2017-01-16 Mon 15:50] =>  0:03
     CLOCK: [2017-01-16 Mon 09:27]--[2017-01-16 Mon 09:47] =>  0:20
 
@@ -189,6 +190,22 @@ Tasks:
 - add new "upsilon" language which is not generatable; entire yarn
   workflow should work for upsilon, but then quilt just does nothing.
 - add tailor support so that we can convert upsilon to JSON.
+
+*** Bind language to kernel                                           :story:
+
+At present we have the notion of a language at the frontend level but
+this is not really used when determining available kernels. So we
+simply go through all of the enabled kernels and generate them
+all. This is not ideal; we could instead determine what languages the
+kernel supports and only generate if its a supported language. This
+would stop us code-generating a C# model in C++ and vice-versa.
+
+*** Add output languages                                              :story:
+
+At present we only support the input language associated with the
+model. This has been sufficient because the input and output language
+is always the same. However, with upsilon things change: we need upsilon
+
 
 *** Add auxiliary function properties to c#                           :story:
 
