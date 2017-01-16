@@ -157,7 +157,7 @@ endforeach()
 #
 if(WIN32)
     set(CPACK_PACKAGE_INSTALL_DIRECTORY "${PROJECT_NAME}")
-    set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\doc\\\\images\\\\application_dogen.png")
+
     if (MSVC)
         # don't forget to set the WIX path, e.g.:
         # WIX="C:/Program Files (x86)/WiX Toolset v3.10/bin" cpack -G WIX -C Release
@@ -165,10 +165,12 @@ if(WIN32)
         set(CPACK_PACKAGE_EXECUTABLES "dogen.knitter" "Dogen - domain generator")
         set(CPACK_WIX_PRODUCT_GUID "6CEB9CA0-B274-41A0-8B46-D35FF3FE46B6")
         set(CPACK_WIX_UPGRADE_GUID "B634B583-2F49-41D3-AC4C-8A67E88E88E3")
+        set(CPACK_WIX_PRODUCT_ICON "${CMAKE_SOURCE_DIR}/doc/images/application_dogen.png")
     else()
         set(CPACK_GENERATOR "NSIS")
         set(CPACK_SOURCE_GENERATOR "ZIP")
         set(CPACK_PACKAGE_EXECUTABLES "dogen_knitter" "Dogen - domain generator")
+        set(CPACK_PACKAGE_ICON "${CMAKE_SOURCE_DIR}\\\\doc\\\\images\\\\application_dogen.png")
 
         if(CMAKE_CL_64)
             set(CPACK_NSIS_INSTALL_ROOT "$PROGRAMFILES64")
