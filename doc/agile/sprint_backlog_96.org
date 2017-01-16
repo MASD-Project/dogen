@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-16 Mon 09:50]
+#+CAPTION: Clock summary at [2017-01-16 Mon 10:15]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:22* |      |      | 100.0 |
+| *Total time*                                                                | *0:46* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:22   |      |      | 100.0 |
-| Active                                                                      |        | 0:22 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |  90.9 |
-| STARTED Edit release notes for previous sprint                              |        |      | 0:02 |   9.1 |
+| Stories                                                                     | 0:46   |      |      | 100.0 |
+| Active                                                                      |        | 0:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:20 |  43.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |  56.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -31,22 +31,38 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-01-16 Mon 10:15]
+    CLOCK: [2017-01-16 Mon 09:51]--[2017-01-16 Mon 10:15] =>  0:24
     CLOCK: [2017-01-16 Mon 09:48]--[2017-01-16 Mon 09:50] =>  0:02
 
 Add github release notes for previous sprint.
 
-Title: Dogen v0.95.0, "TBD"
+Title: Dogen v0.95.0, "Iona"
 
 #+begin_src markdown
 Overview
 =======
+The bulk of this sprint's work was related to a customer specific feature: support for the upsilon input format. Other smaller tasks were:
+
+- the continued work on the C# frontend, which is now nearing completion. C# support is still considered experimental and the generated code has an unstable API, liable to change without notice.
+- improvements on the Windows build.
+- addition of a benchmarking framework which allows us to measure the impact of new features in code generation time.
 
 User visible changes
 ===============
 
+In this sprint, a number of user visible features were added:
+
+- **Improvements to C# including collections**:  it is now possible to use  object based collections. We can now generate most C# code except generic containers.
+- **Packaging on Windows**: packaging support for Windows using WiX is now complete. As with OSX and Linux, Binaries are available from BinTray.
+- **Validation improvements**: with the new validation framework, Dogen detects a lot of errors at code generation time (such as invalid type names, attempt to instantiate abstract types, etc). More validation rules will be added over time.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_95.org).
+
 Next Sprint
 ========
+The next sprint will continue to focus on C#, particularly the addition of collections.
 
 Binaries
 ======
