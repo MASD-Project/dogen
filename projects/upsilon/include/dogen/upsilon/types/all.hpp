@@ -36,6 +36,7 @@
 #include "dogen/upsilon/types/compound.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
 #include "dogen/upsilon/types/directory.hpp"
+#include "dogen/upsilon/types/exclusion.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
 #include "dogen/upsilon/types/type_name.hpp"
 #include "dogen/upsilon/types/collection.hpp"

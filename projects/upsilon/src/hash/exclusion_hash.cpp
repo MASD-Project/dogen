@@ -19,8 +19,6 @@
  *
  */
 #include "dogen/upsilon/hash/exclusion_hash.hpp"
-#include "dogen/upsilon/hash/target_types_hash.hpp"
-#include "dogen/upsilon/hash/representation_hash.hpp"
 
 namespace {
 
@@ -30,26 +28,15 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_vector_dogen_upsilon_exclusion(const std::vector<dogen::upsilon::exclusion>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace upsilon {
 
-std::size_t representation_hasher::hash(const representation& v) {
+std::size_t exclusion_hasher::hash(const exclusion& v) {
     std::size_t seed(0);
 
-    combine(seed, v.target());
-    combine(seed, v.pof());
-    combine(seed, hash_std_vector_dogen_upsilon_exclusion(v.exclusions()));
-
+    combine(seed, v.type_name());
     return seed;
 }
 

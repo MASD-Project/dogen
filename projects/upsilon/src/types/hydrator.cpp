@@ -76,6 +76,8 @@ const std::string xsi_type_name("xsi:type");
 const std::string fields_name("Fields");
 const std::string type_name_name("TypeName");
 const std::string values_name("Values");
+const std::string exclusions_name("Exclusions");
+const std::string exclusion_name("Exclusion");
 
 const std::string target_java("JAVA");
 const std::string target_cpp("CPP");
@@ -119,6 +121,7 @@ private:
     directory read_directory();
     std::vector<schema_ref> read_schema_refs();
 
+    representation read_representation();
     std::vector<representation> read_representations();
     output read_output();
     std::vector<output> read_outputs();
@@ -209,6 +212,51 @@ std::vector<schema_ref> config_hydrator::read_schema_refs() {
     return r;
 }
 
+representation config_hydrator::read_representation() {
+    reader_.validate_current_element(representation_name);
+    BOOST_LOG_SEV(lg, debug) << "Reading Representation.";
+
+    representation r;
+    const auto s(reader_.get_attribute<std::string>(target_name));
+    r.target(to_target(s));
+    if (reader_.has_attribute(pof_name))
+        r.pof(reader_.get_attribute_as_boolean(pof_name));
+
+    if (reader_.is_empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Read Representation.";
+        return r;
+    }
+
+    reader_.move_next();
+    std::list<exclusion> l;
+    const auto& tnn(type_name_name);
+    do {
+        if (reader_.is_start_element(exclusions_name)) {
+            reader_.move_next();
+            do {
+                if (reader_.is_start_element(exclusion_name)) {
+                    reader_.validate_self_closing();
+
+                    exclusion exc;
+                    exc.type_name(reader_.get_attribute<std::string>(tnn));
+                    l.push_back(exc);
+                    reader_.move_next();
+                }
+            } while (!reader_.is_end_element(exclusions_name));
+        } else
+            log_unsupported_element();
+
+        reader_.move_next();
+    } while (!reader_.is_end_element(representation_name));
+
+    r.exclusions().reserve(l.size());
+    std::copy(l.begin(), l.end(), std::back_inserter(r.exclusions()));
+
+    BOOST_LOG_SEV(lg, debug) << "Read Representation.";
+
+    return r;
+}
+
 std::vector<representation> config_hydrator::read_representations() {
     reader_.validate_current_element(representations_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Representations.";
@@ -217,17 +265,9 @@ std::vector<representation> config_hydrator::read_representations() {
     reader_.move_next();
 
     do {
-        if (reader_.is_start_element(representation_name)) {
-            reader_.validate_self_closing();
-
-            representation rep;
-            const auto s(reader_.get_attribute<std::string>(target_name));
-            rep.target(to_target(s));
-            if (reader_.has_attribute(pof_name))
-                rep.pof(reader_.get_attribute_as_boolean(pof_name));
-
-            l.push_back(rep);
-        } else
+        if (reader_.is_start_element(representation_name))
+            l.push_back(read_representation());
+        else
             log_unsupported_element();
 
         reader_.move_next();

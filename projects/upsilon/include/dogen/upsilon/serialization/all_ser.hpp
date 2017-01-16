@@ -34,6 +34,7 @@
 #include "dogen/upsilon/serialization/schema_ser.hpp"
 #include "dogen/upsilon/serialization/compound_ser.hpp"
 #include "dogen/upsilon/serialization/directory_ser.hpp"
+#include "dogen/upsilon/serialization/exclusion_ser.hpp"
 #include "dogen/upsilon/serialization/primitive_ser.hpp"
 #include "dogen/upsilon/serialization/type_name_ser.hpp"
 #include "dogen/upsilon/serialization/collection_ser.hpp"

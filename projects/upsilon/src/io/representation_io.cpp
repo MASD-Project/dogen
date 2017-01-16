@@ -20,8 +20,23 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
+#include "dogen/upsilon/io/exclusion_io.hpp"
 #include "dogen/upsilon/io/target_types_io.hpp"
 #include "dogen/upsilon/io/representation_io.hpp"
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::upsilon::exclusion>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace upsilon {
@@ -36,7 +51,8 @@ std::ostream& operator<<(std::ostream& s, const representation& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::upsilon::representation\"" << ", "
       << "\"target\": " << v.target() << ", "
-      << "\"pof\": " << v.pof()
+      << "\"pof\": " << v.pof() << ", "
+      << "\"exclusions\": " << v.exclusions()
       << " }";
     return(s);
 }

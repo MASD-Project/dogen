@@ -18,24 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/exclusion_hash.hpp"
-#include "dogen/upsilon/hash/target_types_hash.hpp"
-#include "dogen/upsilon/hash/representation_hash.hpp"
+#include <sstream>
+#include "dogen/upsilon/test_data/exclusion_td.hpp"
 
 namespace {
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_vector_dogen_upsilon_exclusion(const std::vector<dogen::upsilon::exclusion>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 }
@@ -43,14 +34,30 @@ inline std::size_t hash_std_vector_dogen_upsilon_exclusion(const std::vector<dog
 namespace dogen {
 namespace upsilon {
 
-std::size_t representation_hasher::hash(const representation& v) {
-    std::size_t seed(0);
+exclusion_generator::exclusion_generator() : position_(0) { }
 
-    combine(seed, v.target());
-    combine(seed, v.pof());
-    combine(seed, hash_std_vector_dogen_upsilon_exclusion(v.exclusions()));
+void exclusion_generator::
+populate(const unsigned int position, result_type& v) {
+    v.type_name(create_std_string(position + 0));
+}
 
-    return seed;
+exclusion_generator::result_type
+exclusion_generator::create(const unsigned int position) {
+    exclusion r;
+    exclusion_generator::populate(position, r);
+    return r;
+}
+
+exclusion_generator::result_type*
+exclusion_generator::create_ptr(const unsigned int position) {
+    exclusion* p = new exclusion();
+    exclusion_generator::populate(position, *p);
+    return p;
+}
+
+exclusion_generator::result_type
+exclusion_generator::operator()() {
+    return create(position_++);
 }
 
 } }

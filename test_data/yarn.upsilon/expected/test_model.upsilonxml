@@ -415,14 +415,32 @@
 					<item class_id="32" tracking_level="0" version="0">
 						<target>1</target>
 						<pof>0</pof>
+						<exclusions class_id="33" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</exclusions>
 					</item>
 					<item>
 						<target>2</target>
 						<pof>1</pof>
+						<exclusions>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item class_id="34" tracking_level="0" version="0">
+								<type_name>Binary</type_name>
+							</item>
+							<item>
+								<type_name>DateNew</type_name>
+							</item>
+						</exclusions>
 					</item>
 					<item>
 						<target>3</target>
 						<pof>0</pof>
+						<exclusions>
+							<count>0</count>
+							<item_version>0</item_version>
+						</exclusions>
 					</item>
 				</representations>
 			</item>

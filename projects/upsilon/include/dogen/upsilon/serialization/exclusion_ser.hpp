@@ -18,39 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/exclusion_hash.hpp"
-#include "dogen/upsilon/hash/target_types_hash.hpp"
-#include "dogen/upsilon/hash/representation_hash.hpp"
+#ifndef DOGEN_UPSILON_SERIALIZATION_EXCLUSION_SER_HPP
+#define DOGEN_UPSILON_SERIALIZATION_EXCLUSION_SER_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/upsilon/types/exclusion.hpp"
 
-inline std::size_t hash_std_vector_dogen_upsilon_exclusion(const std::vector<dogen::upsilon::exclusion>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::upsilon::exclusion)
+namespace boost {
+namespace serialization {
 
-}
+template<typename Archive>
+void save(Archive& ar, const dogen::upsilon::exclusion& v, unsigned int version);
 
-namespace dogen {
-namespace upsilon {
-
-std::size_t representation_hasher::hash(const representation& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.target());
-    combine(seed, v.pof());
-    combine(seed, hash_std_vector_dogen_upsilon_exclusion(v.exclusions()));
-
-    return seed;
-}
+template<typename Archive>
+void load(Archive& ar, dogen::upsilon::exclusion& v, unsigned int version);
 
 } }
+
+#endif

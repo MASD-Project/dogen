@@ -18,39 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/upsilon/hash/exclusion_hash.hpp"
-#include "dogen/upsilon/hash/target_types_hash.hpp"
-#include "dogen/upsilon/hash/representation_hash.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/upsilon/io/exclusion_io.hpp"
 
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-inline std::size_t hash_std_vector_dogen_upsilon_exclusion(const std::vector<dogen::upsilon::exclusion>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    return s;
 }
 
 namespace dogen {
 namespace upsilon {
 
-std::size_t representation_hasher::hash(const representation& v) {
-    std::size_t seed(0);
-
-    combine(seed, v.target());
-    combine(seed, v.pof());
-    combine(seed, hash_std_vector_dogen_upsilon_exclusion(v.exclusions()));
-
-    return seed;
+std::ostream& operator<<(std::ostream& s, const exclusion& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::upsilon::exclusion\"" << ", "
+      << "\"type_name\": " << "\"" << tidy_up_string(v.type_name()) << "\""
+      << " }";
+    return(s);
 }
 
 } }

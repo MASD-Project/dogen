@@ -29,19 +29,23 @@ representation::representation()
 
 representation::representation(
     const dogen::upsilon::target_types target,
-    const bool pof)
+    const bool pof,
+    const std::vector<dogen::upsilon::exclusion>& exclusions)
     : target_(target),
-      pof_(pof) { }
+      pof_(pof),
+      exclusions_(exclusions) { }
 
 void representation::swap(representation& other) noexcept {
     using std::swap;
     swap(target_, other.target_);
     swap(pof_, other.pof_);
+    swap(exclusions_, other.exclusions_);
 }
 
 bool representation::operator==(const representation& rhs) const {
     return target_ == rhs.target_ &&
-        pof_ == rhs.pof_;
+        pof_ == rhs.pof_ &&
+        exclusions_ == rhs.exclusions_;
 }
 
 representation& representation::operator=(representation other) {
@@ -64,6 +68,22 @@ bool representation::pof() const {
 
 void representation::pof(const bool v) {
     pof_ = v;
+}
+
+const std::vector<dogen::upsilon::exclusion>& representation::exclusions() const {
+    return exclusions_;
+}
+
+std::vector<dogen::upsilon::exclusion>& representation::exclusions() {
+    return exclusions_;
+}
+
+void representation::exclusions(const std::vector<dogen::upsilon::exclusion>& v) {
+    exclusions_ = v;
+}
+
+void representation::exclusions(const std::vector<dogen::upsilon::exclusion>&& v) {
+    exclusions_ = std::move(v);
 }
 
 } }

@@ -34,6 +34,7 @@
 #include "dogen/upsilon/test_data/schema_td.hpp"
 #include "dogen/upsilon/test_data/compound_td.hpp"
 #include "dogen/upsilon/test_data/directory_td.hpp"
+#include "dogen/upsilon/test_data/exclusion_td.hpp"
 #include "dogen/upsilon/test_data/primitive_td.hpp"
 #include "dogen/upsilon/test_data/type_name_td.hpp"
 #include "dogen/upsilon/test_data/collection_td.hpp"

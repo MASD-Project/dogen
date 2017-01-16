@@ -34,6 +34,7 @@
 #include "dogen/upsilon/io/schema_io.hpp"
 #include "dogen/upsilon/io/compound_io.hpp"
 #include "dogen/upsilon/io/directory_io.hpp"
+#include "dogen/upsilon/io/exclusion_io.hpp"
 #include "dogen/upsilon/io/primitive_io.hpp"
 #include "dogen/upsilon/io/type_name_io.hpp"
 #include "dogen/upsilon/io/collection_io.hpp"

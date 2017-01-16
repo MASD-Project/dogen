@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <vector>
 #include <algorithm>
+#include "dogen/upsilon/types/exclusion.hpp"
 #include "dogen/upsilon/types/target_types.hpp"
 #include "dogen/upsilon/serialization/representation_fwd_ser.hpp"
 
@@ -44,7 +46,8 @@ public:
 public:
     representation(
         const dogen::upsilon::target_types target,
-        const bool pof);
+        const bool pof,
+        const std::vector<dogen::upsilon::exclusion>& exclusions);
 
 private:
     template<typename Archive>
@@ -60,6 +63,11 @@ public:
     bool pof() const;
     void pof(const bool v);
 
+    const std::vector<dogen::upsilon::exclusion>& exclusions() const;
+    std::vector<dogen::upsilon::exclusion>& exclusions();
+    void exclusions(const std::vector<dogen::upsilon::exclusion>& v);
+    void exclusions(const std::vector<dogen::upsilon::exclusion>&& v);
+
 public:
     bool operator==(const representation& rhs) const;
     bool operator!=(const representation& rhs) const {
@@ -73,6 +81,7 @@ public:
 private:
     dogen::upsilon::target_types target_;
     bool pof_;
+    std::vector<dogen::upsilon::exclusion> exclusions_;
 };
 
 } }

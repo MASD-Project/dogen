@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/upsilon/test_data/exclusion_td.hpp"
 #include "dogen/upsilon/test_data/target_types_td.hpp"
 #include "dogen/upsilon/test_data/representation_td.hpp"
 
@@ -32,6 +33,19 @@ bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
 }
 
+dogen::upsilon::exclusion
+create_dogen_upsilon_exclusion(const unsigned int position) {
+    return dogen::upsilon::exclusion_generator::create(position);
+}
+
+std::vector<dogen::upsilon::exclusion> create_std_vector_dogen_upsilon_exclusion(unsigned int position) {
+    std::vector<dogen::upsilon::exclusion> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_upsilon_exclusion(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -43,6 +57,7 @@ void representation_generator::
 populate(const unsigned int position, result_type& v) {
     v.target(create_dogen_upsilon_target_types(position + 0));
     v.pof(create_bool(position + 1));
+    v.exclusions(create_std_vector_dogen_upsilon_exclusion(position + 2));
 }
 
 representation_generator::result_type

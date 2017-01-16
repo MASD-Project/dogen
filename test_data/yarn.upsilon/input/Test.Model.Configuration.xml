@@ -14,7 +14,12 @@
         <Output SchemaName="Zeta">
             <Representations>
                 <Representation Target="JAVA"/>
-                <Representation Target="CPP" Pof="true"/>
+                <Representation Target="CPP" Pof="true">
+                    <Exclusions>
+                        <Exclusion TypeName="Binary"/>
+                        <Exclusion TypeName="DateNew"/>
+                    </Exclusions>
+                </Representation>
                 <Representation Target="CS"/>
             </Representations>
         </Output>
