@@ -31,6 +31,7 @@ static logger lg(logger_factory("upsilon.mock_model_factory"));
 const std::string type_name_prefix("some_type_");
 const std::string field_name_prefix("some_attribute_"); // match yarn names
 const std::string documentation("Some documentation");
+const std::string unsigned_int("unsigned int");
 
 std::string type_name(const unsigned int i) {
     std::ostringstream stream;
@@ -71,10 +72,13 @@ compound mock_model_factory::make_compound_with_field(const unsigned int n) {
 
     field f;
     f.name(field_name(n));
+    f.comment(documentation);
 
     type_name tn;
-    tn.name();
-    tn.schema_name();
+    tn.name(unsigned_int);
+    f.type_name(tn);
+
+    r.fields().push_back(f);
 
     return r;
 }

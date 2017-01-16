@@ -37,6 +37,9 @@ namespace upsilon {
 
 std::string
 transformer::to_unparsed_type(const dogen::upsilon::type_name& tn) const {
+    if (tn.schema_name().empty())
+        return tn.name();
+
     return tn.schema_name() + scope_operator + tn.name();
 }
 
@@ -70,11 +73,13 @@ transformer::to_object(const yarn::origin_types ot,
     populate_element_properties(ot, model_name, c, r);
 
     dogen::yarn::name_factory nf;
+    BOOST_LOG_SEV(lg, debug) << "Total fields: " << c.fields().size();
     for (const auto& f : c.fields()) {
         yarn::attribute attr;
         attr.name(nf.build_attribute_name(r.name(), f.name()));
         attr.unparsed_type(to_unparsed_type(f.type_name()));
         attr.documentation(f.comment());
+        r.local_attributes().push_back(attr);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming compound";

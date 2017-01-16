@@ -283,6 +283,7 @@ dogen::yarn::attribute mock_attribute(const dogen::yarn::name& owning_element,
 
     dogen::yarn::attribute r;
     r.name(pn);
+    r.documentation(documentation);
 
     using dogen::yarn::test::mock_intermediate_model_factory;
     using attribute_types = mock_intermediate_model_factory::attribute_types;
