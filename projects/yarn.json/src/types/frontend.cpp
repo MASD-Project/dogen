@@ -45,13 +45,17 @@ std::string frontend::id() const {
     return ::id;
 }
 
-bool frontend::can_process(const boost::filesystem::path& p) const {
+bool frontend::can_read(const boost::filesystem::path& p) const {
     return p.extension() == extension;
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     hydrator h;
     return h.hydrate(d.path(), d.is_target());
+}
+
+bool frontend::can_write() const {
+    return true;
 }
 
 void frontend::write(const intermediate_model& im, const descriptor& d) {

@@ -33,8 +33,8 @@ const std::string id("yarn.upsilon.frontend");
 auto lg(logger_factory(id));
 const std::string empty;
 
-const std::string no_saving_support(
-    "Saving not supported for yarn.upsilon frontend");
+const std::string no_writing_support(
+    "Writing not supported for yarn.upsilon frontend");
 
 const std::string extension("Configuration.xml");
 
@@ -50,16 +50,16 @@ std::string frontend::id() const {
     return ::id;
 }
 
-bool frontend::can_process(const boost::filesystem::path& p) const {
+bool frontend::can_read(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     return boost::ends_with(gs, extension);
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
-    BOOST_LOG_SEV(lg, debug) << "Loading Upsilon model.";
+    BOOST_LOG_SEV(lg, debug) << "Reading Upsilon model.";
     dogen::upsilon::hydrator h;
     const auto m(h.hydrate(d.path()));
-    BOOST_LOG_SEV(lg, debug) << "Loaded Upsilon model.";
+    BOOST_LOG_SEV(lg, debug) << "Read Upsilon model.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     workflow w;
@@ -69,10 +69,14 @@ yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     return r;
 }
 
+bool frontend::can_write() const {
+    return false;
+}
+
 void frontend::
 write(const intermediate_model& /*im*/, const descriptor& /*d*/) {
-    BOOST_LOG_SEV(lg, error) << no_saving_support;
-    BOOST_THROW_EXCEPTION(frontend_error(no_saving_support));
+    BOOST_LOG_SEV(lg, error) << no_writing_support;
+    BOOST_THROW_EXCEPTION(frontend_error(no_writing_support));
 }
 
 } } }

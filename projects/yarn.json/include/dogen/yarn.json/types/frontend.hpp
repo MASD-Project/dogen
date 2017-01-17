@@ -41,8 +41,9 @@ public:
 
 public:
     std::string id() const override;
-    bool can_process(const boost::filesystem::path& p) const override;
+    bool can_read(const boost::filesystem::path& p) const override;
     yarn::intermediate_model read(const yarn::descriptor& d) override;
+    bool can_write() const override;
     void write(const intermediate_model& im, const descriptor& d) override;
 };
 

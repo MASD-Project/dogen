@@ -34,8 +34,8 @@ auto lg(logger_factory(id));
 
 const std::string extension(".dia");
 
-const std::string no_saving_support(
-    "Saving not supported for yarn.dia frontend");
+const std::string no_writing_support(
+    "Writing not supported for yarn.dia frontend");
 
 }
 
@@ -49,15 +49,15 @@ std::string frontend::id() const {
     return ::id;
 }
 
-bool frontend::can_process(const boost::filesystem::path& p) const {
+bool frontend::can_read(const boost::filesystem::path& p) const {
     return p.extension() == extension;
 }
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
-    BOOST_LOG_SEV(lg, debug) << "Loading Dia diagram.";
+    BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
     dogen::dia::hydrator h;
     const auto diagram(h.hydrate(d.path()));
-    BOOST_LOG_SEV(lg, debug) << "Loaded Dia diagram.";
+    BOOST_LOG_SEV(lg, debug) << "read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     dogen::yarn::dia::workflow wf;
@@ -68,10 +68,14 @@ yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     return r;
 }
 
+bool frontend::can_write() const {
+    return false;
+}
+
 void
 frontend::write(const intermediate_model& /*im*/, const descriptor& /*d*/) {
-    BOOST_LOG_SEV(lg, error) << no_saving_support;
-    BOOST_THROW_EXCEPTION(frontend_error(no_saving_support));
+    BOOST_LOG_SEV(lg, error) << no_writing_support;
+    BOOST_THROW_EXCEPTION(frontend_error(no_writing_support));
 }
 
 } } }

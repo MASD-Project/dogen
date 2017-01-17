@@ -80,7 +80,7 @@ frontend_registrar::frontend_for_path(const boost::filesystem::path& p) {
     for (const auto& pair : frontends_) {
         const auto& fe_id(pair.first);
         const auto& fe(pair.second);
-        if (fe->can_process(p)) {
+        if (fe->can_read(p)) {
             BOOST_LOG_SEV(lg, debug) << "Found frontend for path. Frontend: '"
                                      << fe_id << "'";
 

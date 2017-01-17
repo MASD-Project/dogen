@@ -55,7 +55,7 @@ public:
      * @brief Returns true if the frontend can process the supplied
      * file name.
      */
-    virtual bool can_process(const boost::filesystem::path& p) const = 0;
+    virtual bool can_read(const boost::filesystem::path& p) const = 0;
 
     /**
      * @brief Reads the contents of the descriptor and transforms it
@@ -65,6 +65,13 @@ public:
      * frontends have state.
      */
     virtual intermediate_model read(const descriptor& d) = 0;
+
+    /**
+     * @brief Returns true if the frontend can convert the
+     * intermediate model to the native format supported by the front
+     * end and write it to a file.
+     */
+    virtual bool can_write() const = 0;
 
     /**
      * @brief Converts the intermediate model to the native format

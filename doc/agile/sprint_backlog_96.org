@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-17 Tue 10:40]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:45* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:45   |      |      | 100.0 |
-| Active                                                                      |        | 8:45 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:32 |  17.5 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   6.7 |
-| COMPLETED Add test in knit to validate upsilon                              |        |      | 0:51 |   9.7 |
-| STARTED Create an upsilon yarn frontend                                     |        |      | 5:47 |  66.1 |
+#+CAPTION: Clock summary at [2017-01-17 Tue 16:49]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *10:52* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 10:52   |       |      | 100.0 |
+| Active                                                                      |         | 10:52 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |  14.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   5.4 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       | 0:51 |   7.8 |
+| STARTED Create an upsilon yarn frontend                                     |         |       | 7:54 |  72.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -111,6 +111,8 @@ upsilon actually generated C# and C++ code. This is rather puzzling:
   format does not support it).
 
 *** STARTED Create an upsilon yarn frontend                           :story:
+    CLOCK: [2017-01-17 Tue 16:01]--[2017-01-17 Tue 16:48] =>  0:47
+    CLOCK: [2017-01-17 Tue 10:41]--[2017-01-17 Tue 12:01] =>  1:20
     CLOCK: [2017-01-17 Tue 09:24]--[2017-01-17 Tue 10:40] =>  1:16
     CLOCK: [2017-01-17 Tue 09:01]--[2017-01-17 Tue 09:23] =>  0:22
     CLOCK: [2017-01-16 Mon 15:02]--[2017-01-16 Mon 15:46] =>  0:44
@@ -201,6 +203,9 @@ Other problems:
 - comments at the top of XML
 - all types are coming under the main schema rather than the
   referenced schemas.
+- referencing all system types even for other languages.
+- logging: add field etc names, move to trace
+- how do we determine the target model?
 
 *** Bind language to kernel                                           :story:
 
