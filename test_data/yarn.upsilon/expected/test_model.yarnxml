@@ -524,7 +524,7 @@
 		</item>
 	</enumerations>
 	<objects class_id="34" tracking_level="0" version="0">
-		<count>3</count>
+		<count>4</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="35" tracking_level="0" version="0">
@@ -1154,6 +1154,215 @@
 				<provides_opaqueness>0</provides_opaqueness>
 			</second>
 		</item>
+		<item>
+			<first>&lt;Zeta&gt;&lt;ExternalModelTest&gt;</first>
+			<second object_id="_10">
+				<element>
+					<documentation>Test type</documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;Zeta&gt;&lt;ExternalModelTest&gt;</id>
+						<simple>ExternalModelTest</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>Zeta::ExternalModelTest</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>Zeta.ExternalModelTest</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>Zeta</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>Zeta_ExternalModelTest</identifiable>
+					</name>
+					<origin_type>1</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<all_attributes>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_attributes>
+				<local_attributes>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation>Some comment</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<name>
+							<id>&lt;Zeta&gt;&lt;ExternalModelTest&gt;&lt;BinariesTest&gt;</id>
+							<simple>BinariesTest</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>Zeta::ExternalModelTest::BinariesTest</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>Zeta.ExternalModelTest.BinariesTest</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>Zeta</item>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element>ExternalModelTest</element>
+							</location>
+							<identifiable>Zeta_ExternalModelTest_BinariesTest</identifiable>
+						</name>
+						<unparsed_type>Phi::Date</unparsed_type>
+						<parsed_type>
+							<current>
+								<id></id>
+								<simple></simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</current>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<identifiable></identifiable>
+							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
+						</parsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+				</local_attributes>
+				<inherited_attributes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_attributes>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
+				<is_child>0</is_child>
+				<is_leaf>0</is_leaf>
+				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<transparent_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</transparent_associations>
+				<opaque_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</opaque_associations>
+				<base_visitor>
+					<initialized>0</initialized>
+				</base_visitor>
+				<derived_visitor>
+					<initialized>0</initialized>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
+				<type_parameters>
+					<variable_number_of_parameters>0</variable_number_of_parameters>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameters>
+				<object_type>0</object_type>
+				<modeled_concepts>
+					<count>0</count>
+					<item_version>0</item_version>
+				</modeled_concepts>
+				<associative_container_keys>
+					<count>0</count>
+					<item_version>0</item_version>
+				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
+			</second>
+		</item>
 	</objects>
 	<exceptions class_id="42" tracking_level="0" version="0">
 		<count>0</count>
@@ -1188,7 +1397,7 @@
 			<item_version>0</item_version>
 		</scribble_groups>
 	</indices>
-	<root_module object_id="_10">
+	<root_module object_id="_11">
 		<element>
 			<documentation></documentation>
 			<annotation>

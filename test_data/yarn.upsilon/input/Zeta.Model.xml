@@ -68,4 +68,16 @@
         <TypeName Value="ModelValue"/>
     </Types>
 
+    <Types xsi:type="Compound">
+        <Name Value="ExternalModelTest"/>
+        <Extends Value="ModelValue"/>
+        <TagRefs Value="Configuration"/>
+        <Comment Text="Test type"/>
+        <Fields>
+            <Name Value="BinariesTest"/>
+            <TypeName Value="Date" SchemaName="Phi"/>
+            <Comment Text="Some comment"/>
+        </Fields>
+    </Types>
+
 </Schema>
