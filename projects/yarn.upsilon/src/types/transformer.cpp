@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/upsilon/io/name_io.hpp"
+#include "dogen/yarn.upsilon/types/transformation_error.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
 
 namespace {
@@ -34,15 +35,29 @@ const std::string collection_name("Collection");
 const std::string less_than("<");
 const std::string more_than(">");
 
+const std::string missing_schema_reference(
+    "Type belongs to a schema that is not referenced: ");
+
 }
 
 namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-transformer::transformer(const std::unordered_map<std::string,
+transformer::transformer(const yarn::name& target_model_name)
+    : target_model_name_(target_model_name),
+      schema_name_to_model_name_(),
+      collection_names_() {}
+
+transformer::
+transformer(const yarn::name& target_model_name,
+    const std::unordered_map<std::string, dogen::yarn::name>&
+    schema_name_to_model_name,
+    const std::unordered_map<std::string,
     dogen::upsilon::name>& collection_names)
-    : collection_names_(collection_names) {}
+    : target_model_name_(target_model_name),
+      schema_name_to_model_name_(schema_name_to_model_name),
+      collection_names_(collection_names) {}
 
 std::string
 transformer::to_unparsed_type(const dogen::upsilon::name& tn) const {
@@ -66,34 +81,53 @@ transformer::to_unparsed_type(const dogen::upsilon::name& tn) const {
     return s.str();
 }
 
-void transformer::populate_element_properties(const yarn::origin_types ot,
-    const yarn::name& model_name, const dogen::upsilon::type& t,
+void transformer::populate_element_properties(const dogen::upsilon::type& t,
     yarn::element& e) const {
 
-    dogen::yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(model_name, t.name().value()));
-
-    e.name(n);
     e.documentation(t.comment());
-    e.origin_type(ot);
+
+    dogen::yarn::name_factory nf;
+    const auto sn(t.name().schema_name());
+    if (sn.empty() || sn == target_model_name_.simple()) {
+        /*
+         * If we do not have a model name, or if the model name is the
+         * same as the target model, this type belongs to the target
+         * model.
+         */
+        e.name(nf.build_element_in_model(target_model_name_, t.name().value()));
+        e.origin_type(dogen::yarn::origin_types::target);
+    } else {
+        /*
+         * Otherwise the type must belong to a reference model. Given
+         * upsilon, we know this must be a proxy reference.
+         */
+        const auto& snmn(schema_name_to_model_name_);
+        const auto i(snmn.find(sn));
+        if (i == snmn.end()) {
+            BOOST_LOG_SEV(lg, error) << missing_schema_reference << sn
+                                     << " Type: " << t.name().value();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(missing_schema_reference + sn));
+        }
+        e.name(nf.build_element_in_model(i->second, t.name().value()));
+        e.origin_type(dogen::yarn::origin_types::proxy_reference);
+    }
 }
 
 yarn::primitive
-transformer::to_primitive(const yarn::origin_types ot,
-    const yarn::name& model_name, const dogen::upsilon::primitive& p) const {
+transformer::to_primitive(const dogen::upsilon::primitive& p) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
     yarn::primitive r;
-    populate_element_properties(ot, model_name, p, r);
+    populate_element_properties(p, r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
     return r;
 }
 
 yarn::object
-transformer::to_object(const yarn::origin_types ot,
-    const yarn::name& model_name, const dogen::upsilon::compound& c) const {
+transformer::to_object(const dogen::upsilon::compound& c) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
     yarn::object r;
-    populate_element_properties(ot, model_name, c, r);
+    populate_element_properties(c, r);
 
     dogen::yarn::name_factory nf;
     BOOST_LOG_SEV(lg, debug) << "Total fields: " << c.fields().size();
@@ -110,11 +144,10 @@ transformer::to_object(const yarn::origin_types ot,
 }
 
 yarn::enumeration
-transformer::to_enumeration(const yarn::origin_types ot,
-    const yarn::name& model_name, const dogen::upsilon::enumeration& e) const {
+transformer::to_enumeration(const dogen::upsilon::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
     yarn::enumeration r;
-    populate_element_properties(ot, model_name, e, r);
+    populate_element_properties(e, r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration";
     return r;
 }

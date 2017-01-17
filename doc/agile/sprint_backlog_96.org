@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-17 Tue 17:04]
+#+CAPTION: Clock summary at [2017-01-17 Tue 18:14]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:07* |       |      | 100.0 |
+| *Total time*                                                                | *12:16* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:07   |       |      | 100.0 |
-| Active                                                                      |         | 11:07 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |  13.8 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   5.2 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       | 0:51 |   7.6 |
-| STARTED Create an upsilon yarn frontend                                     |         |       | 8:09 |  73.3 |
+| Stories                                                                     | 12:16   |       |      | 100.0 |
+| Active                                                                      |         | 12:16 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:32 |  12.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   4.8 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       | 0:51 |   6.9 |
+| STARTED Create an upsilon yarn frontend                                     |         |       | 9:18 |  75.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -111,6 +111,7 @@ upsilon actually generated C# and C++ code. This is rather puzzling:
   format does not support it).
 
 *** STARTED Create an upsilon yarn frontend                           :story:
+    CLOCK: [2017-01-17 Tue 17:05]--[2017-01-17 Tue 18:14] =>  1:09
     CLOCK: [2017-01-17 Tue 16:49]--[2017-01-17 Tue 17:04] =>  0:15
     CLOCK: [2017-01-17 Tue 16:01]--[2017-01-17 Tue 16:48] =>  0:47
     CLOCK: [2017-01-17 Tue 10:41]--[2017-01-17 Tue 12:01] =>  1:20

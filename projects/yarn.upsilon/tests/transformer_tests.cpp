@@ -69,10 +69,9 @@ BOOST_AUTO_TEST_CASE(upsilon_primitive_transforms_into_expected_yarn_primitive) 
     BOOST_LOG_SEV(lg, debug) << "input: " << i;
 
     const auto e(yarn_factory.make_primitive(0, mn, ot));
-    const auto ot(e.origin_type());
 
-    dogen::yarn::upsilon::transformer t;
-    const auto a(t.to_primitive(ot, mn, i));
+    dogen::yarn::upsilon::transformer t(mn);
+    const auto a(t.to_primitive(i));
 
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -85,10 +84,9 @@ BOOST_AUTO_TEST_CASE(upsilon_compound_transforms_into_expected_yarn_object) {
     BOOST_LOG_SEV(lg, debug) << "input: " << i;
 
     const auto e(yarn_factory.make_value_object_with_attribute(0, mn, ot));
-    const auto ot(e.origin_type());
 
-    dogen::yarn::upsilon::transformer t;
-    const auto a(t.to_object(ot, mn, i));
+    dogen::yarn::upsilon::transformer t(mn);
+    const auto a(t.to_object(i));
 
     BOOST_CHECK(asserter::assert_object(e, a));
 }

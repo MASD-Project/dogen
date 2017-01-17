@@ -45,29 +45,33 @@ namespace upsilon {
 
 class transformer final {
 public:
-    transformer() = default;
-    explicit transformer(const std::unordered_map<std::string,
+    explicit transformer(const yarn::name& target_model_name);
+
+    transformer(
+        const yarn::name& target_model_name,
+        const std::unordered_map<std::string, dogen::yarn::name>&
+        schema_name_to_model_name,
+        const std::unordered_map<std::string,
         dogen::upsilon::name>& collection_names);
 
 private:
     std::string to_unparsed_type(const dogen::upsilon::name& tn) const;
 
-    void populate_element_properties(const yarn::origin_types ot,
-        const yarn::name& model_name, const dogen::upsilon::type& t,
+    void populate_element_properties(const dogen::upsilon::type& t,
         yarn::element& e) const;
 
 public:
-    yarn::primitive to_primitive(const yarn::origin_types ot,
-        const yarn::name& model_name, const dogen::upsilon::primitive& p) const;
+    yarn::primitive to_primitive(const dogen::upsilon::primitive& p) const;
 
-    yarn::object to_object(const yarn::origin_types ot,
-        const yarn::name& model_name, const dogen::upsilon::compound& c) const;
+    yarn::object to_object(const dogen::upsilon::compound& c) const;
 
     yarn::enumeration
-    to_enumeration(const yarn::origin_types ot, const yarn::name& model_name,
-        const dogen::upsilon::enumeration& e) const;
+    to_enumeration(const dogen::upsilon::enumeration& e) const;
 
 private:
+    const yarn::name& target_model_name_;
+    const std::unordered_map<std::string, dogen::yarn::name>
+    schema_name_to_model_name_;
     const std::unordered_map<std::string, dogen::upsilon::name>
     collection_names_;
 };

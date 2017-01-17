@@ -18,19 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_UPSILON_TYPES_ALL_HPP
-#define DOGEN_YARN_UPSILON_TYPES_ALL_HPP
+#ifndef DOGEN_YARN_UPSILON_TYPES_TRANSFORMATION_ERROR_HPP
+#define DOGEN_YARN_UPSILON_TYPES_TRANSFORMATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.upsilon/types/upsilon.hpp"
-#include "dogen/yarn.upsilon/types/frontend.hpp"
-#include "dogen/yarn.upsilon/types/workflow.hpp"
-#include "dogen/yarn.upsilon/types/initializer.hpp"
-#include "dogen/yarn.upsilon/types/transformer.hpp"
-#include "dogen/yarn.upsilon/types/workflow_error.hpp"
-#include "dogen/yarn.upsilon/types/transformation_error.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
+
+namespace dogen {
+namespace yarn {
+namespace upsilon {
+
+class transformation_error : public virtual std::exception, public virtual boost::exception {
+public:
+    transformation_error() = default;
+    ~transformation_error() noexcept = default;
+
+public:
+    transformation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
+
+} } }
 
 #endif

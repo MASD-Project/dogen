@@ -94,8 +94,11 @@ void merger::check_name(const name& model_name, const std::string& key,
             s << "Type does not belong to this model. Model name: '"
               << model_name.id() << "'. Type name: "
               << value.id();
-            BOOST_LOG_SEV(lg, error) << s.str();
-            BOOST_THROW_EXCEPTION(merging_error(s.str()));
+            BOOST_LOG_SEV(lg, warn) << s.str();
+
+            // FIXME: during the upsilon transition, we allow
+            // FIXME: mismatches between model and its types.
+            // BOOST_THROW_EXCEPTION(merging_error(s.str()));
         }
     }
 

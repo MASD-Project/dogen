@@ -39,6 +39,12 @@ namespace upsilon {
 class workflow final {
 private:
     /**
+     * @brief Creates a map of schema names to yarn model names.
+     */
+    std::unordered_map<std::string, dogen::yarn::name>
+    map_schema_name_to_model_name(const dogen::upsilon::model& um) const;
+
+    /**
      * @brief Gathers all of the names of collections on the upsilon
      * model.
      */
@@ -56,6 +62,8 @@ private:
      * @brief Populates the yarn model with all the upsilon types.
      */
     void populate_model(const dogen::upsilon::model& um,
+        const std::unordered_map<std::string, dogen::yarn::name>&
+        schema_name_to_model_name,
         const std::unordered_map<std::string, dogen::upsilon::name>&
         collection_names, yarn::intermediate_model& im) const;
 

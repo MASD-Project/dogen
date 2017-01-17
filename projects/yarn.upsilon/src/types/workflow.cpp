@@ -39,6 +39,7 @@ const std::string incorrect_number_of_outputs(
     "Upsilon moodel does not have expected number of outputs (1): ");
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
+const std::string duplicate_schema_name("Duplicate schema name: ");
 
 }
 
@@ -73,8 +74,24 @@ collection_accumulator::result() const {
 
 class model_populator : public dogen::upsilon::type_visitor {
 public:
-    model_populator(const std::unordered_map<std::string, dogen::upsilon::name>&
+    model_populator(const std::unordered_map<std::string, dogen::yarn::name>&
+        schema_name_to_model_name,
+        const std::unordered_map<std::string, dogen::upsilon::name>&
         collection_names, yarn::intermediate_model& im);
+
+private:
+    template<typename Nameable>
+    void insert(const Nameable& nbl,
+        std::unordered_map<std::string, Nameable>& target) const {
+        const auto id(nbl.name().id());
+        const auto pair(std::make_pair(id, nbl));
+        const auto inserted(target.insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
+            BOOST_THROW_EXCEPTION(
+                workflow_error(duplicate_qualified_name + id));
+        }
+    }
 
 public:
     using dogen::upsilon::type_visitor::visit;
@@ -88,47 +105,26 @@ private:
 };
 
 model_populator::
-model_populator(const std::unordered_map<std::string, dogen::upsilon::name>&
+model_populator(const std::unordered_map<std::string, dogen::yarn::name>&
+    schema_name_to_model_name,
+    const std::unordered_map<std::string, dogen::upsilon::name>&
     collection_names, yarn::intermediate_model& im)
-    : model_(im), transformer_(collection_names) {}
+    : model_(im),
+      transformer_(im.name(), schema_name_to_model_name, collection_names) {}
 
 void model_populator::visit(const dogen::upsilon::compound& c) {
-    const auto ot(model_.origin_type());
-    const auto& mn(model_.name());
-    const auto o(transformer_.to_object(ot, mn, c));
-    const auto id(o.name().id());
-    const auto pair(std::make_pair(id, o));
-    const auto inserted(model_.objects().insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
-        BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + id));
-    }
+    const auto o(transformer_.to_object(c));
+    insert(o, model_.objects());
 }
 
 void model_populator::visit(const dogen::upsilon::enumeration& e) {
-    const auto ot(model_.origin_type());
-    const auto& mn(model_.name());
-    const auto o(transformer_.to_enumeration(ot, mn, e));
-    const auto id(o.name().id());
-    const auto pair(std::make_pair(id, o));
-    const auto inserted(model_.enumerations().insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
-        BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + id));
-    }
+    const auto ye(transformer_.to_enumeration(e));
+    insert(ye, model_.enumerations());
 }
 
 void model_populator::visit(const dogen::upsilon::primitive& p) {
-    const auto ot(model_.origin_type());
-    const auto& mn(model_.name());
-    const auto o(transformer_.to_primitive(ot, mn, p));
-    const auto id(o.name().id());
-    const auto pair(std::make_pair(id, o));
-    const auto inserted(model_.primitives().insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
-        BOOST_THROW_EXCEPTION(workflow_error(duplicate_qualified_name + id));
-    }
+    const auto yp(transformer_.to_primitive(p));
+    insert(yp, model_.primitives());
 }
 
 std::unordered_map<std::string, dogen::upsilon::name> workflow::
@@ -151,6 +147,25 @@ obtain_collection_names(const dogen::upsilon::model& um) const {
     }
     BOOST_LOG_SEV(lg, debug) << "Finished accumulating collection names.";
     return ca.result();
+}
+
+std::unordered_map<std::string, dogen::yarn::name>
+workflow::map_schema_name_to_model_name(const dogen::upsilon::model& um) const {
+    std::unordered_map<std::string, dogen::yarn::name> r;
+
+    yarn::name_factory nf;
+    for (const auto& pair : um.schemas()) {
+        const auto& schema(pair.second);
+        const auto sn(schema.name());
+        const auto n(nf.build_model_name(sn));
+        const auto inserted(r.insert(std::make_pair(sn, n)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_schema_name << sn;
+            BOOST_THROW_EXCEPTION(workflow_error(duplicate_schema_name + sn));
+        }
+    }
+
+    return r;
 }
 
 yarn::intermediate_model
@@ -180,14 +195,16 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     return r;
 }
 
-void workflow::populate_model(const dogen::upsilon::model& um, const
-    std::unordered_map<std::string, dogen::upsilon::name>& collection_names,
-    yarn::intermediate_model& im) const {
+void workflow::populate_model(const dogen::upsilon::model& um,
+    const std::unordered_map<std::string, dogen::yarn::name>&
+    schema_name_to_model_name,
+    const std::unordered_map<std::string, dogen::upsilon::name>&
+    collection_names, yarn::intermediate_model& im) const {
     /*
      * FIXME: merging all models into one at present
      * FIXME: not respecting schema names either.
      */
-    model_populator mp(collection_names, im);
+    model_populator mp(schema_name_to_model_name, collection_names, im);
     for (const auto& pair : um.schemas()) {
         const auto& schema(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Populating from Schema: "
@@ -209,8 +226,9 @@ workflow::execute(const dogen::upsilon::model& um) const {
                              << um.config().file_name().generic_string();
 
     const auto cn(obtain_collection_names(um));
+    const auto snmn(map_schema_name_to_model_name(um));
     auto r(create_model(um));
-    populate_model(um, cn, r);
+    populate_model(um, snmn, cn, r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow on upsilon model.";
     return r;

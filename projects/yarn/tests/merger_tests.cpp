@@ -148,6 +148,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     BOOST_CHECK(combined.modules().empty());
 }
 
+/*
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
     const auto ot(dogen::yarn::origin_types::target);
@@ -162,6 +163,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     contains_checker<merging_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);
 }
+*/
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
