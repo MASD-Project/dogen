@@ -73,7 +73,7 @@ find_files(const std::vector<boost::filesystem::path>& dirs);
  * from the starting directory.
  */
 boost::filesystem::path find_file_recursively_upwards(
-    const boost::filesystem::path& starting_directory,
+    boost::filesystem::path starting_directory,
     const boost::filesystem::path& relative_file_path);
 
 } } }

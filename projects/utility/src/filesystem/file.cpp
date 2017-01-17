@@ -106,8 +106,11 @@ find_files(const std::vector<boost::filesystem::path>& dirs) {
 }
 
 boost::filesystem::path find_file_recursively_upwards(
-    const boost::filesystem::path& starting_directory,
+    boost::filesystem::path starting_directory,
     const boost::filesystem::path& relative_file_path) {
+
+    BOOST_LOG_SEV(lg, debug) << "Starting directory: " << starting_directory
+                             << " relative file path: " << relative_file_path;
 
     if (relative_file_path.is_absolute()) {
         /*
@@ -117,6 +120,9 @@ boost::filesystem::path find_file_recursively_upwards(
         BOOST_LOG_SEV(lg, debug) << "Path is absolute: " << gs;
         return relative_file_path;
     }
+
+    if (starting_directory.empty())
+        starting_directory = boost::filesystem::current_path();
 
     if (!boost::filesystem::is_directory(starting_directory)) {
         const auto gs(starting_directory.generic_string());
