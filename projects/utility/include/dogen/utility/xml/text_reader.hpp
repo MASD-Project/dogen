@@ -91,6 +91,11 @@ public:
      */
     bool is_end_element(std::string element_name) const;
 
+    /**
+     * @brief Returns true if the current element is a comment
+     */
+    bool is_comment() const;
+
 public:
     /**
      * @brief Reads the next node from the stream.

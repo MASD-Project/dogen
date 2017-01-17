@@ -1,4 +1,7 @@
 <?xml version="1.0"?>
+<!--                                                   -->
+<!-- some comment                                      -->
+<!--                                                   -->
 <Schema xmlns:xsi="http://www,w3.org/2001/XMLSchema-instance"
         xmlns:xsd="http://www,w3.org/2001/XMLSchema"
         xmlns="http://tempuri.org/XMLSchema.xsd"
@@ -42,7 +45,7 @@
         <Id Value="1126"/>
         <TagRefs Value="ZetaTypes"/>
         <Comment Text="Represents a string"/>
-        <Intrinsic Value="String"/>
+        <Intrinsic Value="STRING"/>
         <Default Value=""/>
     </Types>
 

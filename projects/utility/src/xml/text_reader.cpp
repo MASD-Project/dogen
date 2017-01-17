@@ -73,6 +73,8 @@ const std::string bool_false("false");
 const std::string bool_one("1");
 const std::string bool_zero("0");
 
+const std::string comment_name("#comment");
+
 /**
  * @brief Wrap the string with single quotes.
  */
@@ -307,6 +309,10 @@ bool text_reader::is_start_element(std::string element_name) const {
 
 bool text_reader::is_end_element(std::string element_name) const {
     return is_end_element() && name() == element_name;
+}
+
+bool text_reader::is_comment() const {
+    return node_type() == node_types::comment;
 }
 
 bool text_reader::read() {

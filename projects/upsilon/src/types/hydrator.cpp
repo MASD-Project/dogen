@@ -23,6 +23,7 @@
 #include <algorithm>
 #include <boost/make_shared.hpp>
 #include <boost/filesystem/path.hpp>
+#include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -80,21 +81,21 @@ const std::string values_name("Values");
 const std::string exclusions_name("Exclusions");
 const std::string exclusion_name("Exclusion");
 
-const std::string target_java("JAVA");
-const std::string target_cpp("CPP");
-const std::string target_cs("CS");
+const std::string target_java("java");
+const std::string target_cpp("cpp");
+const std::string target_cs("cs");
 
-const std::string intrinsic_types_integer("Integer");
-const std::string intrinsic_types_binary("Binary");
-const std::string intrinsic_types_boolean("Boolean");
-const std::string intrinsic_types_date("Date");
-const std::string intrinsic_types_decimal("Decimal");
-const std::string intrinsic_types_double("Double");
-const std::string intrinsic_types_guid("Guid");
-const std::string intrinsic_types_integer64("Integer64");
-const std::string intrinsic_types_string("String");
-const std::string intrinsic_types_utc_time("UtcTime");
-const std::string intrinsic_types_utc_date_time("UtcDateTime");
+const std::string intrinsic_types_integer("integer");
+const std::string intrinsic_types_binary("binary");
+const std::string intrinsic_types_boolean("boolean");
+const std::string intrinsic_types_date("date");
+const std::string intrinsic_types_decimal("decimal");
+const std::string intrinsic_types_double("double");
+const std::string intrinsic_types_guid("guid");
+const std::string intrinsic_types_integer64("integer64");
+const std::string intrinsic_types_string("string");
+const std::string intrinsic_types_utc_time("utctime");
+const std::string intrinsic_types_utc_date_time("utcdatetime");
 
 const std::string type_infos_extension(".typeinfos");
 
@@ -116,7 +117,7 @@ private:
     void log_unsupported_element();
 
 private:
-    target_types to_target(const std::string& s) const;
+    target_types to_target(std::string s) const;
 
 private:
     directory read_directory();
@@ -144,7 +145,8 @@ void config_hydrator::log_unsupported_element() {
                             << reader_.name();
 }
 
-target_types config_hydrator::to_target(const std::string& s) const {
+target_types config_hydrator::to_target(std::string s) const {
+    boost::algorithm::to_lower(s);
     if (s == target_java)
         return target_types::java;
     else if (s == target_cpp)
@@ -417,7 +419,7 @@ private:
     void log_unsupported_element();
 
 private:
-    intrinsic_types to_intrinsic_types(const std::string& s) const;
+    intrinsic_types to_intrinsic_types(std::string s) const;
 
 private:
     std::vector<dependency> read_dependencies();
@@ -452,7 +454,8 @@ void schema_hydrator::log_unsupported_element() {
 }
 
 intrinsic_types
-schema_hydrator::to_intrinsic_types(const std::string& s) const {
+schema_hydrator::to_intrinsic_types(std::string s) const {
+    boost::algorithm::to_lower(s);
     if (s == intrinsic_types_integer)
         return intrinsic_types::integer;
     else if (s == intrinsic_types_binary)
@@ -753,7 +756,13 @@ schema_hydrator::read_type(const std::string& schema_name) {
 }
 
 schema schema_hydrator::hydrate() {
-    reader_.next_element(schema_name);
+    do {
+        reader_.read();
+        if (reader_.is_comment())
+            BOOST_LOG_SEV(lg, debug) << "Skipping comment.";
+    } while (reader_.is_comment());
+
+    reader_.validate_current_element(schema_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Schema.";
 
     schema r;
