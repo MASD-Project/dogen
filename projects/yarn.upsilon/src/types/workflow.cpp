@@ -19,7 +19,6 @@
  *
  */
 #include <list>
-#include <unordered_map>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name.hpp"
@@ -132,6 +131,28 @@ void model_populator::visit(const dogen::upsilon::primitive& p) {
     }
 }
 
+std::unordered_map<std::string, dogen::upsilon::name> workflow::
+obtain_collection_names(const dogen::upsilon::model& um) const {
+    BOOST_LOG_SEV(lg, debug) << "Started accumulating collection names.";
+
+    collection_accumulator ca;
+    for (const auto& pair : um.schemas()) {
+        const auto& schema(pair.second);
+        BOOST_LOG_SEV(lg, debug) << "Processing Schema: "
+                                 << schema.file_name().generic_string();
+
+        const auto& types(schema.types());
+        for (const auto& ptr : types) {
+            const auto& t(*ptr);
+            t.accept(ca);
+        }
+
+        BOOST_LOG_SEV(lg, debug) << "Finished processing Schema.";
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished accumulating collection names.";
+    return ca.result();
+}
+
 yarn::intermediate_model
 workflow::create_model(const dogen::upsilon::model& um) const {
     if (um.config().outputs().size() != 1) {
@@ -159,33 +180,14 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     return r;
 }
 
-void workflow::populate_model(const dogen::upsilon::model& um,
+void workflow::populate_model(const dogen::upsilon::model& um, const
+    std::unordered_map<std::string, dogen::upsilon::name>& collection_names,
     yarn::intermediate_model& im) const {
     /*
-     * First we obtain the id's of all collections.
-     */
-    collection_accumulator ca;
-    for (const auto& pair : um.schemas()) {
-        const auto& schema(pair.second);
-        BOOST_LOG_SEV(lg, debug) << "Processing Schema: "
-                                 << schema.file_name().generic_string();
-
-        const auto& types(schema.types());
-        for (const auto& ptr : types) {
-            const auto& t(*ptr);
-            t.accept(ca);
-        }
-
-        BOOST_LOG_SEV(lg, debug) << "Finished populating from Schema.";
-    }
-
-    /*
-     * Then we can process all types.
-     *
      * FIXME: merging all models into one at present
      * FIXME: not respecting schema names either.
      */
-    model_populator mp(ca.result(), im);
+    model_populator mp(collection_names, im);
     for (const auto& pair : um.schemas()) {
         const auto& schema(pair.second);
         BOOST_LOG_SEV(lg, debug) << "Populating from Schema: "
@@ -206,8 +208,9 @@ workflow::execute(const dogen::upsilon::model& um) const {
     BOOST_LOG_SEV(lg, debug) << "Executing workflow on upsilon model. Config: "
                              << um.config().file_name().generic_string();
 
+    const auto cn(obtain_collection_names(um));
     auto r(create_model(um));
-    populate_model(um, r);
+    populate_model(um, cn, r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished executing workflow on upsilon model.";
     return r;

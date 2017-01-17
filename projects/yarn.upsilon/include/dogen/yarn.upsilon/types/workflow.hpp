@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/model.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -35,10 +38,26 @@ namespace upsilon {
 
 class workflow final {
 private:
+    /**
+     * @brief Gathers all of the names of collections on the upsilon
+     * model.
+     */
+    std::unordered_map<std::string, dogen::upsilon::name>
+    obtain_collection_names(const dogen::upsilon::model& um) const;
+
+    /**
+     * @brief Creates an empty yarn model with the basic properties
+     * set.
+     */
     yarn::intermediate_model
     create_model(const dogen::upsilon::model& um) const;
+
+    /**
+     * @brief Populates the yarn model with all the upsilon types.
+     */
     void populate_model(const dogen::upsilon::model& um,
-        yarn::intermediate_model& im) const;
+        const std::unordered_map<std::string, dogen::upsilon::name>&
+        collection_names, yarn::intermediate_model& im) const;
 
 public:
     yarn::intermediate_model execute(const dogen::upsilon::model& um) const;
