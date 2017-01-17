@@ -76,7 +76,7 @@ validate_name(const std::string& id, const bool in_global_namespace,
 
     const auto nl(n.location());
     const auto ml(model_name_.location());
-    if (nl.external_modules() != ml.external_modules() &&
+    if (nl.external_modules() != ml.external_modules() ||
         nl.model_modules() != ml.model_modules()) {
         std::ostringstream s;
         s << "Type does not belong to this model. Model name: '"

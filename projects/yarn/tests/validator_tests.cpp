@@ -56,29 +56,29 @@ using dogen::yarn::validation_error;
 
 BOOST_AUTO_TEST_SUITE(merger_tests)
 
-/*
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
-    SETUP_TEST_LOG("type_with_incorrect_model_name_throws");
+    SETUP_TEST_LOG_SOURCE("type_with_incorrect_model_name_throws");
     const auto ot(dogen::yarn::origin_types::target);
     auto m(factory.make_single_type_model(ot));
 
     m.name().location().model_modules().clear();
     m.name().location().model_modules().push_back(invalid_model_name);
     m.language(dogen::yarn::languages::cpp);
+    BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
     dogen::yarn::intermediate_model_validator v;
     contains_checker<validation_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(v.validate(m), validation_error, c);
 }
-*/
 
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
-    SETUP_TEST_LOG("type_with_inconsistent_key_value_pair_throws");
+    SETUP_TEST_LOG_SOURCE("type_with_inconsistent_key_value_pair_throws");
 
     const auto ot(dogen::yarn::origin_types::target);
     auto m(factory.make_multi_type_model(0, 2, ot));
     m.objects().begin()->second.name().id(invalid_id);
     m.language(dogen::yarn::languages::cpp);
+    BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
     dogen::yarn::intermediate_model_validator v;
     contains_checker<validation_error> c(inconsistent_kvp);
