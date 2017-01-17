@@ -83,15 +83,10 @@ private:
      * @brief Copies the associative container across.
      */
     template<typename ElementAssociativeContainer>
-    void copy(const name& model_name, const ElementAssociativeContainer& source,
-        ElementAssociativeContainer& destination) {
-        for (const auto& pair : source) {
-            const auto& k(pair.first);
-            const auto& v(pair.second);
-            // FIXME: we should move this check to validator.
-            check_name(model_name, k, v.name(), v.in_global_module());
-            destination.insert(pair);
-        }
+    void copy(const ElementAssociativeContainer& src,
+        ElementAssociativeContainer& dst) {
+        for (const auto& pair : src)
+            dst.insert(pair);
     }
 
 private:

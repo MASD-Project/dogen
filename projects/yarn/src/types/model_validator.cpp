@@ -236,8 +236,8 @@ void model_validator::validate_name_trees(
     const std::list<std::pair<std::string, name_tree>>& nts) const {
 
     /*
-     * The only validation we perform on name trees at present is only
-     * applicable to c++.
+     * The only validation we perform on name trees at present is done
+     * just for c++, so we can ignore all other languages.
      */
     if (l != languages::cpp)
         return;

@@ -82,35 +82,6 @@ void merger::require_not_has_merged() const {
     BOOST_THROW_EXCEPTION(merging_error(multiple_merge));
 }
 
-void merger::check_name(const name& model_name, const std::string& key,
-    const name& value, const bool in_global_namespace) const {
-
-    if (!in_global_namespace) {
-        const auto vl(value.location());
-        const auto ml(model_name.location());
-        if (vl.external_modules() != ml.external_modules() ||
-            vl.model_modules() != ml.model_modules()) {
-            std::ostringstream s;
-            s << "Type does not belong to this model. Model name: '"
-              << model_name.id() << "'. Type name: "
-              << value.id();
-            BOOST_LOG_SEV(lg, warn) << s.str();
-
-            // FIXME: during the upsilon transition, we allow
-            // FIXME: mismatches between model and its types.
-            // BOOST_THROW_EXCEPTION(merging_error(s.str()));
-        }
-    }
-
-    if (key != value.id()) {
-        std::ostringstream s;
-        s << "Inconsistency between key and value names: "
-          << " key: " << key << " value: " << value.id();
-        BOOST_LOG_SEV(lg, error) << s.str();
-        BOOST_THROW_EXCEPTION(merging_error(s.str()));
-    }
-}
-
 void merger::update_references() {
     for (const auto& pair : models_) {
         const auto n(pair.first);
@@ -157,22 +128,21 @@ void merger::add(const intermediate_model& m) {
 }
 
 void merger::merge_model(const intermediate_model& m) {
-    const auto mn(m.name());
     BOOST_LOG_SEV(lg, debug) << "Merging model: '"
-                            << mn.id()
-                            << " modules: " << m.modules().size()
-                            << " concepts: " << m.concepts().size()
-                            << " primitives: " << m.primitives().size()
-                            << " enumerations: " << m.enumerations().size()
-                            << " objects: " << m.objects().size();
+                             << m.name().id()
+                             << " modules: " << m.modules().size()
+                             << " concepts: " << m.concepts().size()
+                             << " primitives: " << m.primitives().size()
+                             << " enumerations: " << m.enumerations().size()
+                             << " objects: " << m.objects().size();
 
-    copy(mn, m.modules(), merged_model_.modules());
-    copy(mn, m.concepts(), merged_model_.concepts());
-    copy(mn, m.primitives(), merged_model_.primitives());
-    copy(mn, m.enumerations(), merged_model_.enumerations());
-    copy(mn, m.objects(), merged_model_.objects());
-    copy(mn, m.exceptions(), merged_model_.exceptions());
-    copy(mn, m.visitors(), merged_model_.visitors());
+    copy(m.modules(), merged_model_.modules());
+    copy(m.concepts(), merged_model_.concepts());
+    copy(m.primitives(), merged_model_.primitives());
+    copy(m.enumerations(), merged_model_.enumerations());
+    copy(m.objects(), merged_model_.objects());
+    copy(m.exceptions(), merged_model_.exceptions());
+    copy(m.visitors(), merged_model_.visitors());
 }
 
 void merger::merge_models() {
