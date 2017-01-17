@@ -28,12 +28,13 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/xml/text_reader.hpp"
-#include "dogen/upsilon/types/hydration_error.hpp"
-#include "dogen/upsilon/types/primitive.hpp"
+#include "dogen/upsilon/io/model_io.hpp"
 #include "dogen/upsilon/types/compound.hpp"
-#include "dogen/upsilon/types/enumeration.hpp"
+#include "dogen/upsilon/types/primitive.hpp"
 #include "dogen/upsilon/types/collection.hpp"
+#include "dogen/upsilon/types/enumeration.hpp"
 #include "dogen/upsilon/types/id_generator.hpp"
+#include "dogen/upsilon/types/hydration_error.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
 
 namespace {
@@ -160,8 +161,8 @@ target_types config_hydrator::to_target(std::string s) const {
 }
 
 directory config_hydrator::read_directory() {
-    reader_.validate_current_element(directory_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Directory.";
+    reader_.validate_current_element(directory_name);
 
     directory r;
     reader_.move_next();
@@ -186,8 +187,8 @@ directory config_hydrator::read_directory() {
 }
 
 std::vector<schema_ref> config_hydrator::read_schema_refs() {
-    reader_.validate_current_element(schema_refs_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Schema Refs.";
+    reader_.validate_current_element(schema_refs_name);
 
     std::list<schema_ref> l;
     reader_.move_next();
@@ -216,8 +217,8 @@ std::vector<schema_ref> config_hydrator::read_schema_refs() {
 }
 
 representation config_hydrator::read_representation() {
-    reader_.validate_current_element(representation_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Representation.";
+    reader_.validate_current_element(representation_name);
 
     representation r;
     const auto s(reader_.get_attribute<std::string>(target_name));
@@ -261,8 +262,8 @@ representation config_hydrator::read_representation() {
 }
 
 std::vector<representation> config_hydrator::read_representations() {
-    reader_.validate_current_element(representations_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Representations.";
+    reader_.validate_current_element(representations_name);
 
     std::list<representation> l;
     reader_.move_next();
@@ -287,8 +288,8 @@ std::vector<representation> config_hydrator::read_representations() {
 }
 
 output config_hydrator::read_output() {
-    reader_.validate_current_element(output_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Output.";
+    reader_.validate_current_element(output_name);
 
     output r;
     r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
@@ -309,8 +310,8 @@ output config_hydrator::read_output() {
 }
 
 std::vector<output> config_hydrator::read_outputs() {
-    reader_.validate_current_element(outputs_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Outputs.";
+    reader_.validate_current_element(outputs_name);
 
     std::list<output> l;
     reader_.move_next();
@@ -334,9 +335,8 @@ std::vector<output> config_hydrator::read_outputs() {
 }
 
 config config_hydrator::hydrate() {
-    reader_.next_element(config_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Config.";
-
+    reader_.next_element(config_name);
     reader_.move_next();
 
     config r;
@@ -384,8 +384,8 @@ void type_information_hydrator::log_unsupported_element() {
 }
 
 type_information type_information_hydrator::hydrate() {
-    reader_.next_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Type Infos.";
+    reader_.next_element(types_name);
 
     type_information r;
     r.file_name(file_name_.filename());
@@ -485,8 +485,8 @@ schema_hydrator::to_intrinsic_types(std::string s) const {
 }
 
 std::vector<dependency> schema_hydrator::read_dependencies() {
-    reader_.validate_current_element(dependencies_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Dependencies.";
+    reader_.validate_current_element(dependencies_name);
 
     std::list<dependency> l;
     reader_.move_next();
@@ -566,8 +566,8 @@ read_type_base_fields(const std::string& schema_name, type& t) {
 
 boost::shared_ptr<type>
 schema_hydrator::read_primitive(const std::string& schema_name) {
+    BOOST_LOG_SEV(lg, trace) << "Reading Primitive.";
     reader_.validate_current_element(types_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Primitive.";
 
     auto r(boost::make_shared<primitive>());
     reader_.move_next();
@@ -589,13 +589,13 @@ schema_hydrator::read_primitive(const std::string& schema_name) {
     } while (!reader_.is_end_element(types_name));
     reader_.move_next();
 
-    BOOST_LOG_SEV(lg, debug) << "Read Primitive.";
+    BOOST_LOG_SEV(lg, trace) << "Read Primitive.";
     return r;
 }
 
 field schema_hydrator::read_field() {
+    BOOST_LOG_SEV(lg, trace) << "Reading Field.";
     reader_.validate_current_element(fields_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Field.";
 
     field r;
     reader_.move_next();
@@ -616,12 +616,12 @@ field schema_hydrator::read_field() {
     } while (!reader_.is_end_element(fields_name));
     reader_.move_next();
 
-    BOOST_LOG_SEV(lg, debug) << "Read Field.";
+    BOOST_LOG_SEV(lg, trace) << "Read Field.";
     return r;
 }
 
 name schema_hydrator::read_name(const std::string& schema_name) {
-    BOOST_LOG_SEV(lg, debug) << "Reading Name.";
+    BOOST_LOG_SEV(lg, trace) << "Reading Name.";
 
     name r;
     reader_.validate_self_closing();
@@ -636,7 +636,7 @@ name schema_hydrator::read_name(const std::string& schema_name) {
 }
 
 name schema_hydrator::read_name() {
-    BOOST_LOG_SEV(lg, debug) << "Reading Name.";
+    BOOST_LOG_SEV(lg, trace) << "Reading Name.";
 
     name r;
     reader_.validate_self_closing();
@@ -648,13 +648,14 @@ name schema_hydrator::read_name() {
     id_generator g;
     r.id(g.generate(r));
 
+    BOOST_LOG_SEV(lg, trace) << "Read Name.";
     return r;
 }
 
 boost::shared_ptr<type>
 schema_hydrator::read_compound(const std::string& schema_name) {
+    BOOST_LOG_SEV(lg, trace) << "Reading Compound.";
     reader_.validate_current_element(types_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Compound.";
 
     auto r(boost::make_shared<compound>());
     reader_.move_next();
@@ -675,14 +676,14 @@ schema_hydrator::read_compound(const std::string& schema_name) {
     r->fields().reserve(fields.size());
     std::copy(fields.begin(), fields.end(), std::back_inserter(r->fields()));
 
-    BOOST_LOG_SEV(lg, debug) << "Read Compound.";
+    BOOST_LOG_SEV(lg, trace) << "Read Compound.";
     return r;
 }
 
 boost::shared_ptr<type>
 schema_hydrator::read_enumeration(const std::string& schema_name) {
+    BOOST_LOG_SEV(lg, trace) << "Reading Enumeration.";
     reader_.validate_current_element(types_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Enumeration.";
 
     auto r(boost::make_shared<enumeration>());
     reader_.move_next();
@@ -707,14 +708,14 @@ schema_hydrator::read_enumeration(const std::string& schema_name) {
     r->values().reserve(values.size());
     std::copy(values.begin(), values.end(), std::back_inserter(r->values()));
 
-    BOOST_LOG_SEV(lg, debug) << "Read Enumeration.";
+    BOOST_LOG_SEV(lg, trace) << "Read Enumeration.";
     return r;
 }
 
 boost::shared_ptr<type>
 schema_hydrator::read_collection(const std::string& schema_name) {
+    BOOST_LOG_SEV(lg, trace) << "Reading Collection.";
     reader_.validate_current_element(types_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Collection.";
 
     auto r(boost::make_shared<collection>());
     reader_.move_next();
@@ -731,14 +732,14 @@ schema_hydrator::read_collection(const std::string& schema_name) {
     } while (!reader_.is_end_element(types_name));
     reader_.move_next();
 
-    BOOST_LOG_SEV(lg, debug) << "Read Collection.";
+    BOOST_LOG_SEV(lg, trace) << "Read Collection.";
     return r;
 }
 
 boost::shared_ptr<type>
 schema_hydrator::read_type(const std::string& schema_name) {
-    reader_.validate_current_element(types_name);
     BOOST_LOG_SEV(lg, debug) << "Reading Type.";
+    reader_.validate_current_element(types_name);
 
     const auto s(reader_.get_attribute<std::string>(xsi_type_name));
     if (s == "Primitive")
@@ -756,14 +757,14 @@ schema_hydrator::read_type(const std::string& schema_name) {
 }
 
 schema schema_hydrator::hydrate() {
+    BOOST_LOG_SEV(lg, debug) << "Reading Schema.";
     do {
         reader_.read();
         if (reader_.is_comment())
-            BOOST_LOG_SEV(lg, debug) << "Skipping comment.";
+            BOOST_LOG_SEV(lg, trace) << "Skipping comment.";
     } while (reader_.is_comment());
 
     reader_.validate_current_element(schema_name);
-    BOOST_LOG_SEV(lg, debug) << "Reading Schema.";
 
     schema r;
     r.file_name(file_name_.filename());
@@ -820,6 +821,8 @@ type_information hydrator::hydrate_type_information(boost::filesystem::path f) {
 }
 
 model hydrator::hydrate(boost::filesystem::path config_file) {
+    BOOST_LOG_SEV(lg, debug) << "Started hydrating upsilon model";
+
     model r;
     r.config(hydrate_config(config_file));
 
@@ -869,6 +872,8 @@ model hydrator::hydrate(boost::filesystem::path config_file) {
         }
     }
 
+    BOOST_LOG_SEV(lg, debug) << "Finished hydrating upsilon model. Result: "
+                             << r;
     return r;
 }
 
