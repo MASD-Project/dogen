@@ -252,7 +252,7 @@
 					</item>
 				</tags>
 				<types>
-					<count>7</count>
+					<count>9</count>
 					<item_version>1</item_version>
 					<item>
 						<px class_id_reference="3" object_id="_6">
@@ -410,7 +410,63 @@
 						</px>
 					</item>
 					<item>
-						<px class_id_reference="1" object_id="_12">
+						<px class_id_reference="0" object_id="_12">
+							<type>
+								<name>
+									<id>&lt;Zeta&gt;&lt;CollectionOfCollection&gt;</id>
+									<value>CollectionOfCollection</value>
+									<schema_name>Zeta</schema_name>
+								</name>
+								<extends>
+									<id></id>
+									<value></value>
+									<schema_name></schema_name>
+								</extends>
+								<comment>Represents a collection of collections</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id></pof_id>
+							</type>
+							<type_name>
+								<id>&lt;Zeta&gt;&lt;Binaries&gt;</id>
+								<value>Binaries</value>
+								<schema_name>Zeta</schema_name>
+							</type_name>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="0" object_id="_13">
+							<type>
+								<name>
+									<id>&lt;Zeta&gt;&lt;CollectionOfCollectionOfCollection&gt;</id>
+									<value>CollectionOfCollectionOfCollection</value>
+									<schema_name>Zeta</schema_name>
+								</name>
+								<extends>
+									<id></id>
+									<value></value>
+									<schema_name></schema_name>
+								</extends>
+								<comment>Represents a collection of collections of collections</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id></pof_id>
+							</type>
+							<type_name>
+								<id>&lt;Zeta&gt;&lt;CollectionOfCollection&gt;</id>
+								<value>CollectionOfCollection</value>
+								<schema_name>Zeta</schema_name>
+							</type_name>
+						</px>
+					</item>
+					<item>
+						<px class_id_reference="1" object_id="_14">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;ExternalModelTest&gt;</id>
@@ -431,7 +487,7 @@
 								<pof_id></pof_id>
 							</type>
 							<fields>
-								<count>2</count>
+								<count>4</count>
 								<item_version>0</item_version>
 								<item>
 									<name>DateTest</name>
@@ -447,6 +503,24 @@
 									<type_name>
 										<id>&lt;Zeta&gt;&lt;Binaries&gt;</id>
 										<value>Binaries</value>
+										<schema_name>Zeta</schema_name>
+									</type_name>
+									<comment>Some comment</comment>
+								</item>
+								<item>
+									<name>CollectionOfCollectionTest</name>
+									<type_name>
+										<id>&lt;Zeta&gt;&lt;CollectionOfCollection&gt;</id>
+										<value>CollectionOfCollection</value>
+										<schema_name>Zeta</schema_name>
+									</type_name>
+									<comment>Some comment</comment>
+								</item>
+								<item>
+									<name>CollectionOfCollectionOfCollectionTest</name>
+									<type_name>
+										<id>&lt;Zeta&gt;&lt;CollectionOfCollectionOfCollection&gt;</id>
+										<value>CollectionOfCollectionOfCollection</value>
 										<schema_name>Zeta</schema_name>
 									</type_name>
 									<comment>Some comment</comment>

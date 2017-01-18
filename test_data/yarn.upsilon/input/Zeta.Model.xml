@@ -68,6 +68,20 @@
         <TypeName Value="ModelValue"/>
     </Types>
 
+    <Types xsi:type="Collection">
+        <Name Value="CollectionOfCollection"/>
+        <TagRefs Value="ZetaTypes"/>
+        <Comment Text="Represents a collection of collections"/>
+        <TypeName Value="Binaries"/>
+    </Types>
+
+    <Types xsi:type="Collection">
+        <Name Value="CollectionOfCollectionOfCollection"/>
+        <TagRefs Value="ZetaTypes"/>
+        <Comment Text="Represents a collection of collections of collections"/>
+        <TypeName Value="CollectionOfCollection"/>
+    </Types>
+
     <Types xsi:type="Compound">
         <Name Value="ExternalModelTest"/>
         <Extends Value="ModelValue"/>
@@ -83,5 +97,16 @@
             <TypeName Value="Binaries"/>
             <Comment Text="Some comment"/>
         </Fields>
+        <Fields>
+            <Name Value="CollectionOfCollectionTest"/>
+            <TypeName Value="CollectionOfCollection"/>
+            <Comment Text="Some comment"/>
+        </Fields>
+        <Fields>
+            <Name Value="CollectionOfCollectionOfCollectionTest"/>
+            <TypeName Value="CollectionOfCollectionOfCollection"/>
+            <Comment Text="Some comment"/>
+        </Fields>
+
     </Types>
 </Schema>

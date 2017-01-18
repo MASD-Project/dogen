@@ -71,13 +71,10 @@ transformer::to_unparsed_type(const dogen::upsilon::name& tn) const {
 
     std::ostringstream s;
     const auto& collection_tn(i->second);
-    s << collection_name << less_than;
-    if (collection_tn.schema_name().empty())
-        s << collection_tn.value();
-    else
-        s << collection_tn.schema_name() << scope_operator
-          << collection_tn.value();
-    s << more_than;
+    s << collection_name << less_than
+      << to_unparsed_type(collection_tn)
+      << more_than;
+
     return s.str();
 }
 

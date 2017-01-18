@@ -256,7 +256,7 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
     BOOST_CHECK(a.tags()[0].name() == "ZetaTypes");
     BOOST_CHECK(a.tags()[0].comment().empty());
 
-    BOOST_REQUIRE(a.types().size() == 7);
+    BOOST_REQUIRE(a.types().size() == 9);
     const auto& type_4(*a.types()[4]);
     BOOST_CHECK(type_4.name().value() == "ModelValues");
     BOOST_CHECK(type_4.extends().value().empty());
