@@ -41,7 +41,7 @@
 
 Updates to sprint and product backlog.
 
-** COMPLETED Edit release notes for previous sprint                   :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2017-01-16 Mon 10:15]
     CLOCK: [2017-01-16 Mon 11:52]--[2017-01-16 Mon 11:55] =>  0:03
     CLOCK: [2017-01-16 Mon 11:45]--[2017-01-16 Mon 11:51] =>  0:06
@@ -251,6 +251,7 @@ While fixing this bug we hit a disk space issue on the debian box
 which resulted in delays.
 
 *** STARTED Add multi-language support                                :story:
+    CLOCK: [2017-01-18 Wed 19:01]--[2017-01-18 Wed 19:49] =>  0:48
     CLOCK: [2017-01-18 Wed 17:15]--[2017-01-18 Wed 17:39] =>  0:24
     CLOCK: [2017-01-18 Wed 16:14]--[2017-01-18 Wed 17:14] =>  1:00
     CLOCK: [2017-01-18 Wed 15:56]--[2017-01-18 Wed 16:13] =>  0:17

@@ -43,10 +43,7 @@ namespace yarn {
 bool intermediate_model_expander::are_languages_compatible(
     const languages lhs, const languages rhs) const {
 
-    return
-        lhs == rhs ||
-        rhs == languages::upsilon ||
-        rhs == languages::language_agnostic;
+    return lhs == rhs;
 }
 
 void intermediate_model_expander::
@@ -135,19 +132,34 @@ expand_if_compatible(const annotations::annotation_groups_factory& agf,
      * before being copied over.
      */
     expand_annotations(agf, im);
+
+    /*
+     * We must expand modules because otherwise the root module will
+     * not be available to be populated with the correct language.
+     */
+    expand_modules(im);
+
+    /*
+     * Language expansion is required because we only want to process
+     * those types which are of the same language as target.
+     */
     expand_language(atrp, im);
 
     const auto l(im.language());
     if (!are_languages_compatible(target_language, l)) {
         BOOST_LOG_SEV(lg, warn) << "Reference model language does not"
-                                 << " match target model language. "
+                                 << " match target model language."
                                  << " Model: " << im.name().id()
                                  << " Language: " << l
                                 << " Aborting expansion.";
         return false;
+    } else {
+        BOOST_LOG_SEV(lg, warn) << "Reference model language is compatible."
+                                << " Model: " << im.name().id()
+                                << " Language: " << l;
+
     }
 
-    expand_modules(im);
     expand_origin(atrp, im);
 
     /*

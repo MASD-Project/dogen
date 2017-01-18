@@ -86,6 +86,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& im) const {
     const auto ra(im.root_module().annotation());
     const auto l(make_language(tg, ra));
     im.language(l);
+    BOOST_LOG_SEV(lg, debug) << "Expanded language to: " << l;
 }
 
 } }

@@ -94,7 +94,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
     const options::knitting_options& ko,
     frontend_registrar& rg) const {
 
-    BOOST_LOG_SEV(lg, error) << "Creating the intermediate model repository.";
+    BOOST_LOG_SEV(lg, debug) << "Creating the intermediate model repository.";
 
     intermediate_model_repository r;
     /*
@@ -116,7 +116,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
     const auto target_dir(ko.target().parent_path());
     for (auto& pair : r.by_language()) {
         const auto tl(pair.first);
-        BOOST_LOG_SEV(lg, error) << "Target model language: " << tl;
+        BOOST_LOG_SEV(lg, debug) << "Target model language: " << tl;
 
         /*
          * First we need to get our hands on the target model for this
@@ -140,14 +140,14 @@ make(const std::vector<boost::filesystem::path>& dirs,
          */
         for (const auto& d : rimd) {
             auto rim(intermediate_model_for_descriptor(rg, d));
-            const auto rl(rim.language());
-            ex.expand_if_compatible(agf, atrp, rl, rim);
-            list.push_back(rim);
+            // const auto rl(rim.language());
+            if (ex.expand_if_compatible(agf, atrp, tl, rim))
+                list.push_back(rim);
         }
     }
 
     return r;
-    BOOST_LOG_SEV(lg, error) << "Created the intermediate model repository.";
+    BOOST_LOG_SEV(lg, debug) << "Created the intermediate model repository.";
 }
 
 } }

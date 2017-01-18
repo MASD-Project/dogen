@@ -111,7 +111,7 @@ model workflow::execute(const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko) const {
 
-    const auto im(obtain_intermediate_models(data_dirs, agf, atrp, ko));
+    const auto im(obtain_intermediate_models_v2(data_dirs, agf, atrp, ko));
     const auto r(obtain_final_model(atrp, im));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;

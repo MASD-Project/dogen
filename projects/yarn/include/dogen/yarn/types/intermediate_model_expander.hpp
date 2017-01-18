@@ -44,9 +44,6 @@ private:
     /**
      * @brief Returns true if the languages are compatible, false
      * otherwise.
-     *
-     * Rhs is deemed compatible if it is either lhs or a language
-     * which can be mapped into lhs.
      */
     bool are_languages_compatible(
         const languages lhs, const languages rhs) const;
