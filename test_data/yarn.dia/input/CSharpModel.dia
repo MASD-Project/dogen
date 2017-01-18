@@ -556,7 +556,7 @@ This is a remark.#</dia:string>
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=Dogen.TestModels
-#DOGEN yarn.language=csharp
+#DOGEN yarn.input_language=csharp
 #DOGEN quilt.csharp.enabled=true
 #DOGEN quilt.cpp.enabled=false
 #DOGEN quilt.csharp.visual_studio.project_guid=9E645ACD-C04A-4734-AB23-C3FCC0F7981B

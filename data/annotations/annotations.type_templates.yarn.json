@@ -89,8 +89,8 @@
   },
   {
     "name": {
-      "simple": "languages",
-      "qualified": "yarn.language"
+      "simple": "input_language",
+      "qualified": "yarn.input_language"
     },
     "archetype_location": {
       "family": "yarn"

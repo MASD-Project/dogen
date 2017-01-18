@@ -2,7 +2,7 @@
   "model_name": "csharp.builtins",
   "documentation": "CLR-provided primitive types.",
   "annotation": {
-    "yarn.language": "csharp",
+    "yarn.input_language": "csharp",
     "yarn.is_proxy_model": true
   },
   "elements": [

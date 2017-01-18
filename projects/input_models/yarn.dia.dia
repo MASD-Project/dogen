@@ -3563,7 +3563,7 @@ the root of an inheritance tree.
 #DOGEN yarn.reference=dia.dia
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=yarn.dia
-#DOGEN yarn.language=cpp
+#DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>

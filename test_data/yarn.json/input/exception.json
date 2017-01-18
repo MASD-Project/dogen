@@ -4,7 +4,7 @@
   "annotation": {
     "yarn.dia.comment": "true",
     "yarn.dia.external_modules": "dogen::test_models",
-    "yarn.language": "cpp",
+    "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.csharp.enabled": "false",
     "annotations.profile": "dogen"

@@ -63,7 +63,7 @@ language_expander::type_group language_expander::
 make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.language = s.select_type_by_name(traits::language());
+    r.language = s.select_type_by_name(traits::input_language());
     return r;
 }
 

@@ -23,8 +23,8 @@
 namespace dogen {
 namespace yarn {
 
-std::string traits::language() {
-    static std::string r("yarn.language");
+std::string traits::input_language() {
+    static std::string r("yarn.input_language");
     return r;
 }
 

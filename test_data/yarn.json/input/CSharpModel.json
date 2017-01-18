@@ -4,7 +4,7 @@
   "annotation": {
     "yarn.dia.comment": "true",
     "yarn.dia.external_modules": "Dogen.TestModels",
-    "yarn.language": "csharp",
+    "yarn.input_language": "csharp",
     "quilt.csharp.enabled": "true",
     "quilt.cpp.enabled": "false",
     "quilt.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",

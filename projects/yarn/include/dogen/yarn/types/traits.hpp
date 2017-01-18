@@ -31,7 +31,7 @@ namespace dogen {
 namespace yarn {
 
 struct traits {
-    static std::string language();
+    static std::string input_language();
     static std::string is_proxy_model();
     static std::string reference();
 

@@ -817,7 +817,7 @@ a second line
 								<second>dogen::test_models</second>
 							</item>
 							<item>
-								<first>yarn.language</first>
+								<first>yarn.input_language</first>
 								<second>cpp</second>
 							</item>
 							<item>

@@ -2,7 +2,7 @@
   "model_name": "upsilon.builtins",
   "documentation": "Built-in types for the upsilon models.",
   "annotation": {
-    "yarn.language": "upsilon",
+    "yarn.input_language": "upsilon",
     "yarn.is_proxy_model": true
   },
   "elements": [
@@ -20,7 +20,7 @@
       "meta_type": "object",
       "in_global_module": true
     },
-      {
+    {
       "name": {
         "simple_name": "int"
       },

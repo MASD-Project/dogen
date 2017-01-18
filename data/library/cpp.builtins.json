@@ -2,7 +2,7 @@
   "model_name": "cpp.builtins",
   "documentation": "Hardware-provided primitive types.",
   "annotation": {
-    "yarn.language": "cpp",
+    "yarn.input_language": "cpp",
     "yarn.is_proxy_model": true
   },
   "elements": [

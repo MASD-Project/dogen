@@ -252,7 +252,7 @@ level.
 
 #DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen
-#DOGEN yarn.language=cpp
+#DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false#</dia:string>
           </dia:attribute>
