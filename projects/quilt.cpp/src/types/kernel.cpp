@@ -25,12 +25,12 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
-#include "dogen/quilt.cpp/types/workflow.hpp"
+#include "dogen/quilt.cpp/types/kernel.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.workflow"));
+static logger lg(logger_factory("quilt.cpp.kernel"));
 
 const std::string empty;
 const std::string dot(".");
@@ -41,9 +41,9 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 
-workflow::~workflow() noexcept { }
+kernel::~kernel() noexcept { }
 
-formattables::model workflow::create_formattables_model(
+formattables::model kernel::create_formattables_model(
     const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
@@ -55,7 +55,7 @@ formattables::model workflow::create_formattables_model(
 }
 
 std::forward_list<boost::filesystem::path>
-workflow::managed_directories(const options::knitting_options& ko,
+kernel::managed_directories(const options::knitting_options& ko,
     const yarn::name& model_name) const {
     const auto& mm(model_name.location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
@@ -65,7 +65,7 @@ workflow::managed_directories(const options::knitting_options& ko,
 }
 
 std::forward_list<dogen::formatters::artefact>
-workflow::format(const annotations::type_repository& atrp,
+kernel::format(const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
     const formattables::model& fm) const {
@@ -73,19 +73,23 @@ workflow::format(const annotations::type_repository& atrp,
     return wf.execute(fm);
 }
 
-annotations::archetype_location workflow::archetype_location() const {
+annotations::archetype_location kernel::archetype_location() const {
     static annotations::archetype_location r(traits::family(), traits::kernel(),
         empty/*facet*/, empty/*archetype*/);
     return r;
 }
 
 std::forward_list<annotations::archetype_location>
-workflow::archetype_locations() const {
+kernel::archetype_locations() const {
     return formatters::workflow::registrar().archetype_locations();
 }
 
+yarn::languages kernel::language() const {
+    return yarn::languages::cpp;
+}
+
 std::forward_list<dogen::formatters::artefact>
-workflow::generate(const options::knitting_options& ko,
+kernel::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,

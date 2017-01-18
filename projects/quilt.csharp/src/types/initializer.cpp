@@ -20,10 +20,10 @@
  */
 #include "dogen/yarn/types/workflow.hpp"
 #include "dogen/quilt/types/workflow.hpp"
-#include "dogen/quilt.csharp/types/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 #include "dogen/quilt.csharp/types/fabric/initializer.hpp"
+#include "dogen/quilt.csharp/types/kernel.hpp"
 #include "dogen/quilt.csharp/types/initializer.hpp"
 
 namespace dogen {
@@ -31,9 +31,9 @@ namespace quilt {
 namespace csharp {
 
 void initializer::initialize() {
-    quilt::register_kernel<workflow>(quilt::workflow::registrar());
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize(yarn::workflow::injector_registrar());
+    quilt::register_kernel<kernel>(quilt::workflow::registrar());
 }
 
 } } }

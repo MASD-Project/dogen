@@ -224,6 +224,7 @@ It seems that when we refer to a collection on the target model,
 resolution fails.
 
 *** STARTED Bind language to kernel                                   :story:
+    CLOCK: [2017-01-18 Wed 12:38]
     CLOCK: [2017-01-17 Tue 20:55]--[2017-01-17 Tue 21:12] =>  0:17
 
 At present we have the notion of a language at the frontend level but

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_WORKFLOW_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_WORKFLOW_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_KERNEL_HPP
+#define DOGEN_QUILT_CPP_TYPES_KERNEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,53 +34,59 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/formatters/types/repository.hpp"
-#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
-#include "dogen/quilt.csharp/types/formatters/repository.hpp"
-#include "dogen/quilt.csharp/types/formattables/model.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
-namespace csharp {
+namespace cpp {
 
 /**
- * @brief Manages the c# kernel workflow.
+ * @brief Manages the c++ kernel kernel.
  */
-class workflow final : public quilt::kernel_interface {
+class kernel final : public quilt::kernel_interface {
 public:
-    workflow() = default;
-    workflow(const workflow&) = delete;
-    workflow(workflow&&) = default;
+    kernel() = default;
+    kernel(const kernel&) = delete;
+    kernel(kernel&&) = default;
 
 public:
-    ~workflow() noexcept;
+    ~kernel() noexcept;
 
 private:
+    /**
+     * @brief Create the formattables representation of the yarn model.
+     */
     formattables::model create_formattables_model(
         const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::repository& frp, const bool enable_kernel_directories,
+        const formatters::repository& frp, const bool requires_kernel_directory,
         const yarn::model& m) const;
 
-    std::forward_list<dogen::formatters::artefact> format(
-        const annotations::type_repository& atrp,
+    /**
+     * @brief Create the files representation of the formattables model.
+     */
+    std::forward_list<dogen::formatters::artefact>
+    format(const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
         const formattables::model& fm) const;
 
 public:
     std::forward_list<boost::filesystem::path>
-        managed_directories(const options::knitting_options& ko,
-            const yarn::name& model_name) const override;
+    managed_directories(const options::knitting_options& ko,
+        const yarn::name& model_name) const override;
 
     annotations::archetype_location archetype_location() const override;
 
     std::forward_list<annotations::archetype_location>
-        archetype_locations() const override;
+    archetype_locations() const override;
+
+    yarn::languages language() const override;
 
     std::forward_list<dogen::formatters::artefact> generate(
         const options::knitting_options& ko,

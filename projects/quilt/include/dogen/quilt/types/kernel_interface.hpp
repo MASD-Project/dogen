@@ -34,6 +34,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 
 namespace dogen {
@@ -74,6 +75,11 @@ public:
      */
     virtual std::forward_list<annotations::archetype_location>
     archetype_locations() const = 0;
+
+    /**
+     * @brief Language supported by this kernel.
+     */
+    virtual yarn::languages language() const = 0;
 
     /**
      * @brief Generates the source code for the kernel.

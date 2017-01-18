@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen/quilt.cpp/types/cpp.hpp"
+#include "dogen/quilt.cpp/types/kernel.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/workflow.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 #include "dogen/quilt.cpp/types/workflow_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"

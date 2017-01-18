@@ -26,8 +26,8 @@
 #endif
 
 #include "dogen/quilt.csharp/types/csharp.hpp"
+#include "dogen/quilt.csharp/types/kernel.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/quilt.csharp/types/workflow.hpp"
 #include "dogen/quilt.csharp/types/initializer.hpp"
 #include "dogen/quilt.csharp/types/fabric/traits.hpp"
 #include "dogen/quilt.csharp/types/workflow_error.hpp"

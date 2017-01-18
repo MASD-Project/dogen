@@ -24,7 +24,7 @@
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
-#include "dogen/quilt.cpp/types/workflow.hpp"
+#include "dogen/quilt.cpp/types/kernel.hpp"
 #include "dogen/quilt.cpp/types/initializer.hpp"
 
 namespace dogen {
@@ -34,7 +34,7 @@ namespace cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize(yarn::workflow::injector_registrar());
-    quilt::register_kernel<workflow>(quilt::workflow::registrar());
+    quilt::register_kernel<kernel>(quilt::workflow::registrar());
 }
 
 } } }
