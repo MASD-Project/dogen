@@ -21,15 +21,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
-#include "dogen/yarn/types/origin_expander.hpp"
-#include "dogen/yarn/types/parsing_expander.hpp"
-#include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
-#include "dogen/yarn/types/enumeration_expander.hpp"
-#include "dogen/yarn/types/annotations_expander.hpp"
-#include "dogen/yarn/types/type_parameters_expander.hpp"
-#include "dogen/yarn/types/intermediate_model_validator.hpp"
+#include "dogen/yarn/types/intermediate_model_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
 
 namespace {
@@ -42,83 +35,6 @@ static logger lg(logger_factory("yarn.intermediate_model_factory"));
 namespace dogen {
 namespace yarn {
 
-void intermediate_model_factory::
-expand_enumerations(intermediate_model& im) const {
-    enumeration_expander ex;
-    ex.expand(im);
-}
-
-void intermediate_model_factory::expand_language(
-    const annotations::type_repository& atrp, intermediate_model& im) const {
-    language_expander ex;
-    ex.expand(atrp, im);
-}
-
-void intermediate_model_factory::expand_modules(intermediate_model& im) const {
-    modules_expander ex;
-    ex.expand(im);
-}
-
-void intermediate_model_factory::
-expand_annotations(const annotations::annotation_groups_factory& agf,
-    intermediate_model& im) const {
-    annotations_expander ex;
-    ex.expand(agf, im);
-}
-
-void intermediate_model_factory::
-expand_origin(const annotations::type_repository& atrp,
-    intermediate_model& im) const {
-    origin_expander ex;
-    ex.expand(atrp, im);
-}
-
-void intermediate_model_factory::expand_type_parameters(
-    const annotations::type_repository& atrp, intermediate_model& im) const {
-    type_parameters_expander ex;
-    ex.expand(atrp, im);
-}
-
-void intermediate_model_factory::expand_parsing(
-    const annotations::type_repository& atrp, intermediate_model& im) const {
-    parsing_expander ex;
-    ex.expand(atrp, im);
-}
-
-void intermediate_model_factory::validate(const intermediate_model& im) const {
-    intermediate_model_validator v;
-    v.validate(im);
-}
-
-void intermediate_model_factory::
-post_process(const annotations::annotation_groups_factory& agf,
-    const annotations::type_repository& atrp, intermediate_model& im) const {
-
-    /*
-     * We must expand annotations before we expand modules to
-     * ensure the root module is populated with entries
-     * before being copied over.
-     */
-    expand_annotations(agf, im);
-    expand_modules(im);
-    expand_origin(atrp, im);
-    expand_language(atrp, im);
-
-    /*
-     * Enumeration expansion must be done after language expansion as
-     * we do some language-specific processing.
-     */
-    expand_enumerations(im);
-
-    expand_type_parameters(atrp, im);
-    expand_parsing(atrp, im);
-
-    /*
-     * Ensure the model is valid.
-     */
-    validate(im);
-}
-
 intermediate_model
 intermediate_model_factory::intermediate_model_for_descriptor(
     const annotations::annotation_groups_factory& agf,
@@ -129,7 +45,9 @@ intermediate_model_factory::intermediate_model_for_descriptor(
 
     auto& fe(rg.frontend_for_path(d.path()));
     auto r(fe.read(d));
-    post_process(agf, atrp, r);
+
+    intermediate_model_expander ex;
+    ex.expand(agf, atrp, r);
 
     BOOST_LOG_SEV(lg, debug) << "Created intermediate model.";
     return r;

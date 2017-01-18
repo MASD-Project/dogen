@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-18 Wed 15:56]
+#+CAPTION: Clock summary at [2017-01-18 Wed 16:13]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *18:06* |       |       | 100.0 |
+| *Total time*                                                                | *18:23* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 18:06   |       |       | 100.0 |
-| Active                                                                      |         | 18:06 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   8.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   3.2 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   4.7 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  56.9 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   7.4 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   8.2 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   5.6 |
-| STARTED Add multi-language support                                          |         |       |  0:42 |   3.9 |
-| STARTED Add a type mapper                                                   |         |       |  0:18 |   1.7 |
+| Stories                                                                     | 18:23   |       |       | 100.0 |
+| Active                                                                      |         |  1:32 |       |   8.3 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   8.3 |
+| COMPLETED Edit release notes for previous sprint                            |         | 16:51 |       |  91.7 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   4.6 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  56.0 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   7.3 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   8.1 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   5.5 |
+| STARTED Add multi-language support                                          |         |       |  0:59 |   5.3 |
+| STARTED Add a type mapper                                                   |         |       |  0:18 |   1.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -41,7 +41,7 @@
 
 Updates to sprint and product backlog.
 
-*** COMPLETED Edit release notes for previous sprint                  :story:
+** COMPLETED Edit release notes for previous sprint                   :story:
     CLOSED: [2017-01-16 Mon 10:15]
     CLOCK: [2017-01-16 Mon 11:52]--[2017-01-16 Mon 11:55] =>  0:03
     CLOCK: [2017-01-16 Mon 11:45]--[2017-01-16 Mon 11:51] =>  0:06
@@ -251,6 +251,7 @@ While fixing this bug we hit a disk space issue on the debian box
 which resulted in delays.
 
 *** STARTED Add multi-language support                                :story:
+    CLOCK: [2017-01-18 Wed 15:56]--[2017-01-18 Wed 16:13] =>  0:17
     CLOCK: [2017-01-18 Wed 14:29]--[2017-01-18 Wed 14:53] =>  0:24
     CLOCK: [2017-01-18 Wed 13:58]--[2017-01-18 Wed 14:10] =>  0:12
     CLOCK: [2017-01-18 Wed 13:51]--[2017-01-18 Wed 13:57] =>  0:06

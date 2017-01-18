@@ -41,57 +41,6 @@ namespace yarn {
  *  @brief Performs the pre-merge sub-workflow.
  */
 class intermediate_model_factory {
-private:
-    /**
-     * @brief Expands all enumerations.
-     */
-    void expand_enumerations(intermediate_model& im) const;
-
-    /**
-     * @brief Reads the model language from meta-data.
-     */
-    void expand_language(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
-
-    /**
-     * @brief Performs a module expansion on the model.
-     */
-    void expand_modules(intermediate_model& im) const;
-
-    /**
-     * @brief Performs an expansion of all annotations objects on the
-     * model.
-     */
-    void expand_annotations(const annotations::annotation_groups_factory& agf,
-        intermediate_model& im) const;
-
-    /**
-     * @brief Performs the expansion of the origin type.
-     */
-    void expand_origin(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
-
-    /**
-     * @brief Performs a type parameters expansion on the model.
-     */
-    void expand_type_parameters(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
-
-    /**
-     * @brief Expand all parts of the model which require parsing.
-     */
-    void expand_parsing(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
-
-    void post_process(const annotations::annotation_groups_factory& agf,
-        const annotations::type_repository& atrp, intermediate_model& im) const;
-
-    /**
-     * @brief Ensures the intermediate model passes all validation
-     * rules.
-     */
-    void validate(const intermediate_model& im) const;
-
     /**
      * @brief Obtains an intermediate model.
      */
