@@ -74,10 +74,14 @@
         <TagRefs Value="Configuration"/>
         <Comment Text="Test type"/>
         <Fields>
-            <Name Value="BinariesTest"/>
+            <Name Value="DateTest"/>
             <TypeName Value="Date" SchemaName="Phi"/>
             <Comment Text="Some comment"/>
         </Fields>
+        <Fields>
+            <Name Value="BinariesTest"/>
+            <TypeName Value="Binaries"/>
+            <Comment Text="Some comment"/>
+        </Fields>
     </Types>
-
 </Schema>

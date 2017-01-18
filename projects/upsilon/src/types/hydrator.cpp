@@ -428,8 +428,7 @@ private:
     bool read_type_base_fields(const std::string& schema_name, type& t);
     boost::shared_ptr<type> read_primitive(const std::string& schema_name);
 
-    field read_field();
-    name read_name();
+    field read_field(const std::string& schema_name);
     name read_name(const std::string& schema_name);
     boost::shared_ptr<type> read_compound(const std::string& schema_name);
     boost::shared_ptr<type> read_enumeration(const std::string& schema_name);
@@ -554,7 +553,7 @@ read_type_base_fields(const std::string& schema_name, type& t) {
         return true;
     } else if (reader_.is_start_element(extends_name)) {
         reader_.validate_self_closing();
-        t.extends(read_name());
+        t.extends(read_name(schema_name));
         return true;
     } else if (reader_.is_start_element(tag_refs_name)) {
         reader_.validate_self_closing();
@@ -593,7 +592,7 @@ schema_hydrator::read_primitive(const std::string& schema_name) {
     return r;
 }
 
-field schema_hydrator::read_field() {
+field schema_hydrator::read_field(const std::string& schema_name) {
     BOOST_LOG_SEV(lg, trace) << "Reading Field.";
     reader_.validate_current_element(fields_name);
 
@@ -608,7 +607,7 @@ field schema_hydrator::read_field() {
             reader_.validate_self_closing();
             r.comment(reader_.get_attribute<std::string>(text_name));
         } else if (reader_.is_start_element(type_name_name))
-            r.type_name(read_name());
+            r.type_name(read_name(schema_name));
         else
             log_unsupported_element();
 
@@ -627,28 +626,14 @@ name schema_hydrator::read_name(const std::string& schema_name) {
     reader_.validate_self_closing();
 
     r.value(reader_.get_attribute<std::string>(value_name));
-    r.schema_name(schema_name);
-
-    id_generator g;
-    r.id(g.generate(r));
-
-    return r;
-}
-
-name schema_hydrator::read_name() {
-    BOOST_LOG_SEV(lg, trace) << "Reading Name.";
-
-    name r;
-    reader_.validate_self_closing();
-
-    r.value(reader_.get_attribute<std::string>(value_name));
     if (reader_.has_attribute(schema_name_name))
         r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
+    else
+        r.schema_name(schema_name);
 
     id_generator g;
     r.id(g.generate(r));
 
-    BOOST_LOG_SEV(lg, trace) << "Read Name.";
     return r;
 }
 
@@ -665,7 +650,7 @@ schema_hydrator::read_compound(const std::string& schema_name) {
         if (read_type_base_fields(schema_name, *r)) {
             reader_.move_next();
         } else if (reader_.is_start_element(fields_name)) {
-            fields.push_back(read_field());
+            fields.push_back(read_field(schema_name));
         } else {
             log_unsupported_element();
             reader_.move_next();
@@ -724,7 +709,7 @@ schema_hydrator::read_collection(const std::string& schema_name) {
         if (read_type_base_fields(schema_name, *r)) {
             // do nothing
         } else if (reader_.is_start_element(type_name_name))
-            r->type_name(read_name());
+            r->type_name(read_name(schema_name));
         else
             log_unsupported_element();
 
@@ -786,6 +771,8 @@ schema schema_hydrator::hydrate() {
             const auto t(read_type(r.name()));
             if (t)
                 types.push_back(t);
+            else
+                BOOST_LOG_SEV(lg, debug) << "Skipping unsupported type.";
         } else {
             log_unsupported_element();
             reader_.move_next();

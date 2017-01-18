@@ -145,7 +145,7 @@ BOOST_AUTO_TEST_CASE(hydrating_phi_schema_results_in_expected_object) {
     BOOST_CHECK(a.tags()[1].name() == "AnotherTag");
     BOOST_CHECK(a.tags()[1].comment() == "Another Comment");
 
-    BOOST_REQUIRE(a.types().size() == 5);
+    BOOST_REQUIRE(a.types().size() == 6);
 
     const auto& type_0(*a.types()[0]);
     BOOST_CHECK(type_0.name().value() == "Date");
@@ -268,7 +268,7 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
     BOOST_REQUIRE(ptr_4 != nullptr);
     const auto& collection(*ptr_4);
     BOOST_CHECK(collection.type_name().value() == "ModelValue");
-    BOOST_CHECK(collection.type_name().schema_name().empty());
+    BOOST_CHECK(collection.type_name().schema_name() == "Zeta");
 }
 
 BOOST_AUTO_TEST_CASE(full_hydration_of_test_data_config_results_in_expected_model) {

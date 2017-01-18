@@ -69,4 +69,12 @@
         <Default Value="AnotherValue"/>
     </Types>
 
+    <Types xsi:type="Collection">
+        <Name Value="SomeCollection"/>
+        <Id Value="1154"/>
+        <TagRefs Value="ZetaTypes"/>
+        <Comment Text="Represents a collection"/>
+        <TypeName Value="String" SchemaName="Zeta"/>
+    </Types>
+
 </Schema>

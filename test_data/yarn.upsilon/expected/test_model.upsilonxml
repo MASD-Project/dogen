@@ -33,7 +33,7 @@
 					</item>
 				</tags>
 				<types class_id="12" tracking_level="0" version="0">
-					<count>5</count>
+					<count>6</count>
 					<item_version>1</item_version>
 					<item class_id="13" tracking_level="0" version="1">
 						<px class_id="3" tracking_level="1" version="0" object_id="_0">
@@ -69,9 +69,9 @@
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
-									<id>&lt;ModelValue&gt;</id>
+									<id>&lt;Phi&gt;&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name></schema_name>
+									<schema_name>Phi</schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -114,9 +114,9 @@
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
-									<id>&lt;ModelValue&gt;</id>
+									<id>&lt;Phi&gt;&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name></schema_name>
+									<schema_name>Phi</schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -150,9 +150,9 @@
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
-									<id>&lt;ModelValue&gt;</id>
+									<id>&lt;Phi&gt;&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name></schema_name>
+									<schema_name>Phi</schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -198,6 +198,34 @@
 							<default_value>AnotherValue</default_value>
 						</px>
 					</item>
+					<item>
+						<px class_id="0" tracking_level="1" version="0" object_id="_5">
+							<type>
+								<name>
+									<id>&lt;Phi&gt;&lt;SomeCollection&gt;</id>
+									<value>SomeCollection</value>
+									<schema_name>Phi</schema_name>
+								</name>
+								<extends>
+									<id></id>
+									<value></value>
+									<schema_name></schema_name>
+								</extends>
+								<comment>Represents a collection</comment>
+								<tag_refs>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>ZetaTypes</item>
+								</tag_refs>
+								<pof_id>1154</pof_id>
+							</type>
+							<type_name>
+								<id>&lt;Zeta&gt;&lt;String&gt;</id>
+								<value>String</value>
+								<schema_name>Zeta</schema_name>
+							</type_name>
+						</px>
+					</item>
 				</types>
 				<file_name class_id="19" tracking_level="0" version="0">
 					<path>Phi.Model.xml</path>
@@ -227,7 +255,7 @@
 					<count>7</count>
 					<item_version>1</item_version>
 					<item>
-						<px class_id_reference="3" object_id="_5">
+						<px class_id_reference="3" object_id="_6">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;MissingValue&gt;</id>
@@ -251,7 +279,7 @@
 						</px>
 					</item>
 					<item>
-						<px class_id_reference="3" object_id="_6">
+						<px class_id_reference="3" object_id="_7">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;Binary&gt;</id>
@@ -276,7 +304,7 @@
 						</px>
 					</item>
 					<item>
-						<px class_id_reference="3" object_id="_7">
+						<px class_id_reference="3" object_id="_8">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;DateNew&gt;</id>
@@ -301,7 +329,7 @@
 						</px>
 					</item>
 					<item>
-						<px class_id_reference="3" object_id="_8">
+						<px class_id_reference="3" object_id="_9">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;String&gt;</id>
@@ -326,7 +354,7 @@
 						</px>
 					</item>
 					<item>
-						<px class_id="0" tracking_level="1" version="0" object_id="_9">
+						<px class_id_reference="0" object_id="_10">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;ModelValues&gt;</id>
@@ -347,14 +375,14 @@
 								<pof_id>1154</pof_id>
 							</type>
 							<type_name>
-								<id>&lt;ModelValue&gt;</id>
+								<id>&lt;Zeta&gt;&lt;ModelValue&gt;</id>
 								<value>ModelValue</value>
-								<schema_name></schema_name>
+								<schema_name>Zeta</schema_name>
 							</type_name>
 						</px>
 					</item>
 					<item>
-						<px class_id_reference="0" object_id="_10">
+						<px class_id_reference="0" object_id="_11">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;Binaries&gt;</id>
@@ -375,14 +403,14 @@
 								<pof_id>1155</pof_id>
 							</type>
 							<type_name>
-								<id>&lt;ModelValue&gt;</id>
+								<id>&lt;Zeta&gt;&lt;ModelValue&gt;</id>
 								<value>ModelValue</value>
-								<schema_name></schema_name>
+								<schema_name>Zeta</schema_name>
 							</type_name>
 						</px>
 					</item>
 					<item>
-						<px class_id_reference="1" object_id="_11">
+						<px class_id_reference="1" object_id="_12">
 							<type>
 								<name>
 									<id>&lt;Zeta&gt;&lt;ExternalModelTest&gt;</id>
@@ -390,9 +418,9 @@
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
-									<id>&lt;ModelValue&gt;</id>
+									<id>&lt;Zeta&gt;&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name></schema_name>
+									<schema_name>Zeta</schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -403,14 +431,23 @@
 								<pof_id></pof_id>
 							</type>
 							<fields>
-								<count>1</count>
+								<count>2</count>
 								<item_version>0</item_version>
 								<item>
-									<name>BinariesTest</name>
+									<name>DateTest</name>
 									<type_name>
 										<id>&lt;Phi&gt;&lt;Date&gt;</id>
 										<value>Date</value>
 										<schema_name>Phi</schema_name>
+									</type_name>
+									<comment>Some comment</comment>
+								</item>
+								<item>
+									<name>BinariesTest</name>
+									<type_name>
+										<id>&lt;Zeta&gt;&lt;Binaries&gt;</id>
+										<value>Binaries</value>
+										<schema_name>Zeta</schema_name>
 									</type_name>
 									<comment>Some comment</comment>
 								</item>
