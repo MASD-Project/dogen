@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
@@ -38,6 +39,15 @@ static logger lg(logger_factory("yarn.intermediate_model_expander"));
 
 namespace dogen {
 namespace yarn {
+
+bool intermediate_model_expander::are_languages_compatible(
+    const languages lhs, const languages rhs) const {
+
+    return
+        lhs == rhs ||
+        rhs == languages::upsilon ||
+        rhs == languages::language_agnostic;
+}
 
 void intermediate_model_expander::
 expand_enumerations(intermediate_model& im) const {
@@ -113,6 +123,47 @@ expand(const annotations::annotation_groups_factory& agf,
      * Ensure the model is valid.
      */
     validate(im);
+}
+
+bool intermediate_model_expander::
+expand_if_compatible(const annotations::annotation_groups_factory& agf,
+    const annotations::type_repository& atrp, const languages target_language,
+    intermediate_model& im) const {
+    /*
+     * We must expand annotations before we expand modules to
+     * ensure the root module is populated with entries
+     * before being copied over.
+     */
+    expand_annotations(agf, im);
+    expand_language(atrp, im);
+
+    const auto l(im.language());
+    if (!are_languages_compatible(target_language, l)) {
+        BOOST_LOG_SEV(lg, warn) << "Reference model language does not"
+                                 << " match target model language. "
+                                 << " Model: " << im.name().id()
+                                 << " Language: " << l
+                                << " Aborting expansion.";
+        return false;
+    }
+
+    expand_modules(im);
+    expand_origin(atrp, im);
+
+    /*
+     * Enumeration expansion must be done after language expansion as
+     * we do some language-specific processing.
+     */
+    expand_enumerations(im);
+
+    expand_type_parameters(atrp, im);
+    expand_parsing(atrp, im);
+
+    /*
+     * Ensure the model is valid.
+     */
+    validate(im);
+    return true;
 }
 
 } }

@@ -66,6 +66,7 @@
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/printing_error.hpp"
+#include "dogen/yarn/types/workflow_error.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/injection_error.hpp"

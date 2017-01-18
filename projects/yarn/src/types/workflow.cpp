@@ -19,11 +19,14 @@
  *
  */
 #include <memory>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/intermediate_model_factory.hpp"
+#include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 #include "dogen/yarn/types/model_factory.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
+#include "dogen/yarn/types/workflow_error.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
 namespace {
@@ -71,6 +74,30 @@ std::vector<intermediate_model> workflow::obtain_intermediate_models(
     const options::knitting_options& ko) const {
     intermediate_model_factory f;
     return f.make(data_dirs, agf, atrp, ko, frontend_registrar());
+}
+
+std::vector<intermediate_model> workflow::obtain_intermediate_models_v2(
+    const std::vector<boost::filesystem::path>& data_dirs,
+    const annotations::annotation_groups_factory& agf,
+    const annotations::type_repository& atrp,
+    const options::knitting_options& ko) const {
+    intermediate_model_repository_factory f;
+    const auto rp(f.make(data_dirs, agf, atrp, ko, frontend_registrar()));
+    std::vector<intermediate_model> r;
+
+    if (rp.by_language().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << "Expected only one language. "
+                                 << "Found: " << rp.by_language().size();
+        BOOST_THROW_EXCEPTION(workflow_error("Expected only one language."));
+    }
+
+    const auto& pair(*rp.by_language().begin());
+    const auto& list(pair.second);
+    r.reserve(list.size());
+    for (const auto& im : list)
+        r.push_back(im);
+
+    return r;
 }
 
 model workflow::obtain_final_model(const annotations::type_repository& atrp,

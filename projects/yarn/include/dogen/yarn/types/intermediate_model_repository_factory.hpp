@@ -25,24 +25,47 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/descriptor.hpp"
+#include "dogen/yarn/types/frontend_registrar.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/intermediate_model_repository.hpp"
 
 namespace dogen {
 namespace yarn {
 
+/**
+ *  @brief Creates an intermdiate model repository,
+ */
 class intermediate_model_repository_factory final {
-public:
-    intermediate_model_repository_factory() = default;
-    intermediate_model_repository_factory(const intermediate_model_repository_factory&) = default;
-    intermediate_model_repository_factory(intermediate_model_repository_factory&&) = default;
-    ~intermediate_model_repository_factory() = default;
-    intermediate_model_repository_factory& operator=(const intermediate_model_repository_factory&) = default;
+private:
+    /**
+     * @brief Obtains an intermediate model.
+     */
+    intermediate_model intermediate_model_for_descriptor(frontend_registrar& rg,
+        const descriptor& d) const;
+
+    /**
+     * @brief Populats the repository with the target model.
+     */
+    void populate_target_model(
+        const annotations::annotation_groups_factory& agf,
+        const annotations::type_repository& atrp,
+        const options::knitting_options& ko, frontend_registrar& rg,
+        intermediate_model_repository& rp) const;
 
 public:
-    bool operator==(const intermediate_model_repository_factory& rhs) const;
-    bool operator!=(const intermediate_model_repository_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Create the repository.
+     */
+    intermediate_model_repository
+    make(const std::vector<boost::filesystem::path>& dirs,
+        const annotations::annotation_groups_factory& agf,
+        const annotations::type_repository& atrp,
+        const options::knitting_options& ko,
+        frontend_registrar& rg) const;
 
 };
 

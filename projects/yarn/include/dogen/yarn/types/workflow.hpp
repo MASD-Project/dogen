@@ -67,6 +67,13 @@ private:
         const annotations::type_repository& atrp,
         const options::knitting_options& ko) const;
 
+    std::vector<intermediate_model> obtain_intermediate_models_v2(
+        const std::vector<boost::filesystem::path>& data_dirs,
+        const annotations::annotation_groups_factory& agf,
+        const annotations::type_repository& atrp,
+        const options::knitting_options& ko) const;
+
+
     /**
      * @brief Obtains the final model.
      */

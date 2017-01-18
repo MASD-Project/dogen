@@ -31,6 +31,7 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -39,7 +40,18 @@ namespace dogen {
 namespace yarn {
 
 class intermediate_model_expander final {
-    private:
+private:
+    /**
+     * @brief Returns true if the languages are compatible, false
+     * otherwise.
+     *
+     * Rhs is deemed compatible if it is either lhs or a language
+     * which can be mapped into lhs.
+     */
+    bool are_languages_compatible(
+        const languages lhs, const languages rhs) const;
+
+private:
     /**
      * @brief Expands all enumerations.
      */
@@ -94,6 +106,11 @@ public:
     void expand(const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         intermediate_model& im) const;
+
+    bool expand_if_compatible(const annotations::annotation_groups_factory& agf,
+        const annotations::type_repository& atrp,
+        const languages target_language, intermediate_model& im) const;
+
 };
 
 } }
