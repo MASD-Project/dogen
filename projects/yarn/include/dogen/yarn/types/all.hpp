@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/node.hpp"
 #include "dogen/yarn/types/yarn.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"

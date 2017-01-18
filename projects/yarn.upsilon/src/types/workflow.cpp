@@ -183,7 +183,7 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     }
 
     yarn::intermediate_model r;
-    r.language(yarn::languages::upsilon);
+    r.input_language(yarn::languages::upsilon);
 
     const auto& output(um.config().outputs()[0]);
 

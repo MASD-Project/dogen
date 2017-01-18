@@ -6943,7 +6943,7 @@ etc.#</dia:string>
         <dia:point val="63.3025,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.5525,62.95;68.6575,78.8"/>
+        <dia:rectangle val="62.5525,63.75;68.6575,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6952,7 +6952,7 @@ etc.#</dia:string>
         <dia:point val="63.3025,78"/>
         <dia:point val="63.3025,73"/>
         <dia:point val="68.4575,73"/>
-        <dia:point val="68.4575,63"/>
+        <dia:point val="68.4575,63.8"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12514,7 +12514,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="-14,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.05,48.95;5.8,55.85"/>
+        <dia:rectangle val="-14.05,48.95;5.8,56.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-14,49"/>
@@ -12523,7 +12523,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#model#</dia:string>
@@ -12707,7 +12707,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#language#</dia:string>
+            <dia:string>#input_language#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#languages#</dia:string>
@@ -12716,7 +12716,30 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Language that this model supports.#</dia:string>
+            <dia:string>#Language in which this model was written.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#output_language#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#languages#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Language in which to output the model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -12844,16 +12867,16 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14,55.8"/>
+        <dia:point val="-14,56.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-37.6025,55.05;-13.25,66.8"/>
+        <dia:rectangle val="-37.6025,55.85;-13.25,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14,55.8"/>
+        <dia:point val="-14,56.6"/>
         <dia:point val="-14,61"/>
         <dia:point val="-37.5525,61"/>
         <dia:point val="-37.5525,66"/>
@@ -12882,7 +12905,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="53,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,48.95;83.965,63.05"/>
+        <dia:rectangle val="52.95,48.95;83.965,63.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="53,49"/>
@@ -12891,7 +12914,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.000000000000002"/>
+        <dia:real val="14.800000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#intermediate_model#</dia:string>
@@ -13284,7 +13307,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#language#</dia:string>
+            <dia:string>#input_language#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#languages#</dia:string>
@@ -13293,7 +13316,30 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Language that this model supports.#</dia:string>
+            <dia:string>#Language in which this model was written.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#output_languages#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;languages&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#Languages in which to output this model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -19823,16 +19869,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="83.915,63"/>
+        <dia:point val="83.915,63.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.165,62.25;96.465,78.7496"/>
+        <dia:rectangle val="83.165,63.05;96.465,78.7496"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="83.915,63"/>
+        <dia:point val="83.915,63.8"/>
         <dia:point val="83.915,73"/>
         <dia:point val="96.265,73"/>
         <dia:point val="96.265,77.9496"/>
@@ -23402,7 +23448,7 @@ space.#</dia:string>
         <dia:point val="21.2175,66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.7,55.75;21.9675,66.8"/>
+        <dia:rectangle val="5.7,56.55;21.9675,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23411,7 +23457,7 @@ space.#</dia:string>
         <dia:point val="21.2175,66"/>
         <dia:point val="21.2175,61"/>
         <dia:point val="5.75,61"/>
-        <dia:point val="5.75,55.8"/>
+        <dia:point val="5.75,56.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -23629,16 +23675,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="53,63"/>
+        <dia:point val="53,63.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.075,62.95;53.2,78.8"/>
+        <dia:rectangle val="45.075,63.75;53.2,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="53,63"/>
+        <dia:point val="53,63.8"/>
         <dia:point val="53,73"/>
         <dia:point val="45.825,73"/>
         <dia:point val="45.825,78"/>
@@ -24111,16 +24157,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-4.125,55.8"/>
+        <dia:point val="-4.125,56.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-11.05,55.05;-3.375,66.8"/>
+        <dia:rectangle val="-11.05,55.85;-3.375,66.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-4.125,55.8"/>
+        <dia:point val="-4.125,56.6"/>
         <dia:point val="-4.125,61"/>
         <dia:point val="-11,61"/>
         <dia:point val="-11,66"/>
@@ -25226,16 +25272,16 @@ space.#</dia:string>
         <dia:point val="122,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,2.95;133.33,6.65"/>
+        <dia:rectangle val="121.95,2.95;139.875,7.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="122,3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="11.279999999999999"/>
+        <dia:real val="17.824999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="3.6000000000000001"/>
+        <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#mapper#</dia:string>
@@ -25355,6 +25401,40 @@ space.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="parameters">
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#from#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const languages#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
+            <dia:composite type="umlparameter">
+              <dia:attribute name="name">
+                <dia:string>#to#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="type">
+                <dia:string>#const languages#</dia:string>
+              </dia:attribute>
+              <dia:attribute name="value">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="comment">
+                <dia:string>##</dia:string>
+              </dia:attribute>
+              <dia:attribute name="kind">
+                <dia:enum val="0"/>
+              </dia:attribute>
+            </dia:composite>
             <dia:composite type="umlparameter">
               <dia:attribute name="name">
                 <dia:string>#im#</dia:string>

@@ -1281,7 +1281,11 @@
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
 	</root_module>
-	<language>0</language>
+	<input_language>0</input_language>
+	<output_languages class_id="51" tracking_level="0" version="0">
+		<count>0</count>
+		<item_version>0</item_version>
+	</output_languages>
 </entity>
 </boost_serialization>
 

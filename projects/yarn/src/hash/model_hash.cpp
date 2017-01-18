@@ -67,7 +67,8 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.root_module());
     combine(seed, hash_std_unordered_set_std_string(v.module_ids()));
     combine(seed, v.has_generatable_types());
-    combine(seed, v.language());
+    combine(seed, v.input_language());
+    combine(seed, v.output_language());
 
     return seed;
 }

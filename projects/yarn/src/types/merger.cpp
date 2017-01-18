@@ -102,8 +102,8 @@ void merger::add_target(const intermediate_model& target) {
 
     has_target_ = true;
 
-    target_language_ = target.language();
-    merged_model_.language(target_language_);
+    target_language_ = target.input_language();
+    merged_model_.input_language(target_language_);
 
     merged_model_.name(target.name());
     merged_model_.leaves(target.leaves());
@@ -150,10 +150,11 @@ void merger::merge_models() {
     for (const auto& pair : models_) {
         const auto& id(pair.first.id());
         const auto& im(pair.second);
-        if (im.language() != target_language_) {
+        if (im.input_language() != target_language_) {
             BOOST_LOG_SEV(lg, debug) << "Skipping model as language does "
                                      << " not match target's. Model: "
-                                     << id << " Language: " << im.language();
+                                     << id << " Input language: "
+                                     << im.input_language();
             continue;
         }
         BOOST_LOG_SEV(lg, debug) << "Merging model: " << id;

@@ -234,6 +234,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::languages>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -261,7 +275,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"indices\": " << v.indices() << ", "
       << "\"root_module\": " << v.root_module() << ", "
-      << "\"language\": " << v.language()
+      << "\"input_language\": " << v.input_language() << ", "
+      << "\"output_languages\": " << v.output_languages()
       << " }";
     return(s);
 }

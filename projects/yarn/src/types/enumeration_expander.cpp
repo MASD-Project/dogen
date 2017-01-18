@@ -67,13 +67,13 @@ void enumeration_expander::expand(intermediate_model& im) {
     invalid.value("0");
 
     yarn::name_factory nf;
+    const auto l(im.input_language());
     for (auto& pair : im.enumerations()) {
         auto& e(pair.second);
 
         std::vector<enumerator> enumerators;
         enumerators.reserve(e.enumerators().size() + 1/*for invalid*/);
-
-        const std::string sn(obtain_invalid_enumerator_name(im.language()));
+        const std::string sn(obtain_invalid_enumerator_name(l));
         invalid.name(nf.build_attribute_name(e.name(), sn));
         enumerators.push_back(invalid);
 

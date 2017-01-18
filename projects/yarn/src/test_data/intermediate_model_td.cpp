@@ -192,6 +192,14 @@ create_dogen_yarn_languages(const unsigned int position) {
     return dogen::yarn::languages_generator::create(position);
 }
 
+std::list<dogen::yarn::languages> create_std_list_dogen_yarn_languages(unsigned int position) {
+    std::list<dogen::yarn::languages> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_dogen_yarn_languages(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -216,7 +224,8 @@ populate(const unsigned int position, result_type& v) {
     v.has_generatable_types(create_bool(position + 12));
     v.indices(create_dogen_yarn_indices(position + 13));
     v.root_module(create_dogen_yarn_module(position + 14));
-    v.language(create_dogen_yarn_languages(position + 15));
+    v.input_language(create_dogen_yarn_languages(position + 15));
+    v.output_languages(create_std_list_dogen_yarn_languages(position + 16));
 }
 
 intermediate_model_generator::result_type

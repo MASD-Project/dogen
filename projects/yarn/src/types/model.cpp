@@ -35,7 +35,8 @@ namespace yarn {
 
 model::model()
     : has_generatable_types_(static_cast<bool>(0)),
-      language_(static_cast<dogen::yarn::languages>(0)) { }
+      input_language_(static_cast<dogen::yarn::languages>(0)),
+      output_language_(static_cast<dogen::yarn::languages>(0)) { }
 
 model::model(
     const dogen::yarn::name& name,
@@ -43,13 +44,15 @@ model::model(
     const dogen::yarn::module& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
-    const dogen::yarn::languages language)
+    const dogen::yarn::languages input_language,
+    const dogen::yarn::languages output_language)
     : name_(name),
       elements_(elements),
       root_module_(root_module),
       module_ids_(module_ids),
       has_generatable_types_(has_generatable_types),
-      language_(language) { }
+      input_language_(input_language),
+      output_language_(output_language) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -58,7 +61,8 @@ void model::swap(model& other) noexcept {
     swap(root_module_, other.root_module_);
     swap(module_ids_, other.module_ids_);
     swap(has_generatable_types_, other.has_generatable_types_);
-    swap(language_, other.language_);
+    swap(input_language_, other.input_language_);
+    swap(output_language_, other.output_language_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -67,7 +71,8 @@ bool model::operator==(const model& rhs) const {
         root_module_ == rhs.root_module_ &&
         module_ids_ == rhs.module_ids_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
-        language_ == rhs.language_;
+        input_language_ == rhs.input_language_ &&
+        output_language_ == rhs.output_language_;
 }
 
 model& model::operator=(model other) {
@@ -148,12 +153,20 @@ void model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-dogen::yarn::languages model::language() const {
-    return language_;
+dogen::yarn::languages model::input_language() const {
+    return input_language_;
 }
 
-void model::language(const dogen::yarn::languages v) {
-    language_ = v;
+void model::input_language(const dogen::yarn::languages v) {
+    input_language_ = v;
+}
+
+dogen::yarn::languages model::output_language() const {
+    return output_language_;
+}
+
+void model::output_language(const dogen::yarn::languages v) {
+    output_language_ = v;
 }
 
 } }

@@ -260,7 +260,7 @@ void model_validator::validate_name_trees(
 void model_validator::validate(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << m.name().id();
 
-    const auto l(m.language());
+    const auto l(m.input_language());
     const auto dr(decompose_model(m));
     validate_names(dr.names(), l);
     validate_name_trees(dr.abstract_elements(), l, dr.name_trees());

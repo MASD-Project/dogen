@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -67,7 +68,8 @@ void save(Archive& ar,
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("indices", v.indices_);
     ar << make_nvp("root_module", v.root_module_);
-    ar << make_nvp("language", v.language_);
+    ar << make_nvp("input_language", v.input_language_);
+    ar << make_nvp("output_languages", v.output_languages_);
 }
 
 template<typename Archive>
@@ -89,7 +91,8 @@ void load(Archive& ar,
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("indices", v.indices_);
     ar >> make_nvp("root_module", v.root_module_);
-    ar >> make_nvp("language", v.language_);
+    ar >> make_nvp("input_language", v.input_language_);
+    ar >> make_nvp("output_languages", v.output_languages_);
 }
 
 } }

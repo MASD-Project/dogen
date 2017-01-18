@@ -75,7 +75,7 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
      * model, ensure its empty - as there can only be one target per
      * language - and push the target into it.
      */
-    const auto l(tim.language());
+    const auto l(tim.input_language());
     auto& list(rp.by_language()[l]);
     if (!list.empty()) {
         BOOST_LOG_SEV(lg, error) << expected_empty_repository << l;

@@ -143,7 +143,7 @@ validate(const intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const bool ipr(im.origin_type() == origin_types::proxy_reference);
-    const bool check_names(im.language() != languages::upsilon);
+    const bool check_names(im.input_language() != languages::upsilon);
     validator v(im.name(), check_names, ipr/*is_proxy_reference*/);
 
     for (const auto& pair : im.modules())

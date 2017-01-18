@@ -95,7 +95,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"root_module\": " << v.root_module() << ", "
       << "\"module_ids\": " << v.module_ids() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
-      << "\"language\": " << v.language()
+      << "\"input_language\": " << v.input_language() << ", "
+      << "\"output_language\": " << v.output_language()
       << " }";
     return(s);
 }

@@ -58,7 +58,8 @@ public:
         const dogen::yarn::module& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
-        const dogen::yarn::languages language);
+        const dogen::yarn::languages input_language,
+        const dogen::yarn::languages output_language);
 
 private:
     template<typename Archive>
@@ -112,11 +113,19 @@ public:
     /**@}*/
 
     /**
-     * @brief Language that this model supports.
+     * @brief Language in which this model was written.
      */
     /**@{*/
-    dogen::yarn::languages language() const;
-    void language(const dogen::yarn::languages v);
+    dogen::yarn::languages input_language() const;
+    void input_language(const dogen::yarn::languages v);
+    /**@}*/
+
+    /**
+     * @brief Language in which to output the model.
+     */
+    /**@{*/
+    dogen::yarn::languages output_language() const;
+    void output_language(const dogen::yarn::languages v);
     /**@}*/
 
 public:
@@ -135,7 +144,8 @@ private:
     dogen::yarn::module root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
-    dogen::yarn::languages language_;
+    dogen::yarn::languages input_language_;
+    dogen::yarn::languages output_language_;
 };
 
 } }

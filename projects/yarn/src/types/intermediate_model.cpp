@@ -36,7 +36,7 @@ namespace yarn {
 intermediate_model::intermediate_model()
     : origin_type_(static_cast<dogen::yarn::origin_types>(0)),
       has_generatable_types_(static_cast<bool>(0)),
-      language_(static_cast<dogen::yarn::languages>(0)) { }
+      input_language_(static_cast<dogen::yarn::languages>(0)) { }
 
 intermediate_model::intermediate_model(
     const dogen::yarn::name& name,
@@ -54,7 +54,8 @@ intermediate_model::intermediate_model(
     const bool has_generatable_types,
     const dogen::yarn::indices& indices,
     const dogen::yarn::module& root_module,
-    const dogen::yarn::languages language)
+    const dogen::yarn::languages input_language,
+    const std::list<dogen::yarn::languages>& output_languages)
     : name_(name),
       origin_type_(origin_type),
       references_(references),
@@ -70,7 +71,8 @@ intermediate_model::intermediate_model(
       has_generatable_types_(has_generatable_types),
       indices_(indices),
       root_module_(root_module),
-      language_(language) { }
+      input_language_(input_language),
+      output_languages_(output_languages) { }
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
@@ -89,7 +91,8 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(indices_, other.indices_);
     swap(root_module_, other.root_module_);
-    swap(language_, other.language_);
+    swap(input_language_, other.input_language_);
+    swap(output_languages_, other.output_languages_);
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
@@ -108,7 +111,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         has_generatable_types_ == rhs.has_generatable_types_ &&
         indices_ == rhs.indices_ &&
         root_module_ == rhs.root_module_ &&
-        language_ == rhs.language_;
+        input_language_ == rhs.input_language_ &&
+        output_languages_ == rhs.output_languages_;
 }
 
 intermediate_model& intermediate_model::operator=(intermediate_model other) {
@@ -341,12 +345,28 @@ void intermediate_model::root_module(const dogen::yarn::module&& v) {
     root_module_ = std::move(v);
 }
 
-dogen::yarn::languages intermediate_model::language() const {
-    return language_;
+dogen::yarn::languages intermediate_model::input_language() const {
+    return input_language_;
 }
 
-void intermediate_model::language(const dogen::yarn::languages v) {
-    language_ = v;
+void intermediate_model::input_language(const dogen::yarn::languages v) {
+    input_language_ = v;
+}
+
+const std::list<dogen::yarn::languages>& intermediate_model::output_languages() const {
+    return output_languages_;
+}
+
+std::list<dogen::yarn::languages>& intermediate_model::output_languages() {
+    return output_languages_;
+}
+
+void intermediate_model::output_languages(const std::list<dogen::yarn::languages>& v) {
+    output_languages_ = v;
+}
+
+void intermediate_model::output_languages(const std::list<dogen::yarn::languages>&& v) {
+    output_languages_ = std::move(v);
 }
 
 } }

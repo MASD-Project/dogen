@@ -94,7 +94,8 @@ populate(const unsigned int position, result_type& v) {
     v.root_module(create_dogen_yarn_module(position + 2));
     v.module_ids(create_std_unordered_set_std_string(position + 3));
     v.has_generatable_types(create_bool(position + 4));
-    v.language(create_dogen_yarn_languages(position + 5));
+    v.input_language(create_dogen_yarn_languages(position + 5));
+    v.output_language(create_dogen_yarn_languages(position + 6));
 }
 
 model_generator::result_type

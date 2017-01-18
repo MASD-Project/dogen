@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -77,7 +78,8 @@ public:
         const bool has_generatable_types,
         const dogen::yarn::indices& indices,
         const dogen::yarn::module& root_module,
-        const dogen::yarn::languages language);
+        const dogen::yarn::languages input_language,
+        const std::list<dogen::yarn::languages>& output_languages);
 
 private:
     template<typename Archive>
@@ -221,11 +223,21 @@ public:
     void root_module(const dogen::yarn::module&& v);
 
     /**
-     * @brief Language that this model supports.
+     * @brief Language in which this model was written.
      */
     /**@{*/
-    dogen::yarn::languages language() const;
-    void language(const dogen::yarn::languages v);
+    dogen::yarn::languages input_language() const;
+    void input_language(const dogen::yarn::languages v);
+    /**@}*/
+
+    /**
+     * @brief Languages in which to output this model.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::languages>& output_languages() const;
+    std::list<dogen::yarn::languages>& output_languages();
+    void output_languages(const std::list<dogen::yarn::languages>& v);
+    void output_languages(const std::list<dogen::yarn::languages>&& v);
     /**@}*/
 
 public:
@@ -254,7 +266,8 @@ private:
     bool has_generatable_types_;
     dogen::yarn::indices indices_;
     dogen::yarn::module root_module_;
-    dogen::yarn::languages language_;
+    dogen::yarn::languages input_language_;
+    std::list<dogen::yarn::languages> output_languages_;
 };
 
 } }

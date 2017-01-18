@@ -156,7 +156,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
     const auto tg(make_type_group(atrp));
     const auto tlmn(obtain_top_level_modules(m));
     const auto ml(m.name().location());
-    const auto l(m.language());
+    const auto l(m.input_language());
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
