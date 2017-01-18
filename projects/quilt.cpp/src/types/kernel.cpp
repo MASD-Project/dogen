@@ -30,7 +30,7 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.kernel"));
+static logger lg(logger_factory(dogen::quilt::cpp::traits::kernel()));
 
 const std::string empty;
 const std::string dot(".");
@@ -52,6 +52,10 @@ formattables::model kernel::create_formattables_model(
     const yarn::model& m) const {
     formattables::workflow fw;
     return fw.execute(ko, atrp, ra, dpf, frp, enable_kernel_directories, m);
+}
+
+std::string kernel::id() const {
+    return archetype_location().kernel();
 }
 
 std::forward_list<boost::filesystem::path>

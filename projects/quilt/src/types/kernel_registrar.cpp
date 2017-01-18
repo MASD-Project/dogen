@@ -18,9 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt/types/registrar_error.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt/types/kernel_registrar.hpp"
 
 namespace {
@@ -30,6 +32,7 @@ static logger lg(logger_factory("quilt.kernel_registrar"));
 
 const std::string no_kernels("No kernels provided.");
 const std::string null_kernel("Kernel supplied is null");
+const std::string language_taken("Kernel already registered for language: ");
 
 }
 
@@ -37,24 +40,40 @@ namespace dogen {
 namespace quilt {
 
 void kernel_registrar::validate() const {
-    if (kernels_.empty()) {
+    if (kernels_by_language_.empty()) {
         BOOST_LOG_SEV(lg, error) << no_kernels;
         BOOST_THROW_EXCEPTION(registrar_error(no_kernels));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> b) {
+void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
     // no logging by design
-    if (!b)
+    if (!k)
         BOOST_THROW_EXCEPTION(registrar_error(null_kernel));
 
-    kernels_.push_front(b);
+    const auto l(k->language());
+    const auto pair(std::make_pair(l, k));
+    const auto inserted(kernels_by_language_.insert(pair).second);
+    if (!inserted) {
+        std::ostringstream s;
+        s << language_taken << l << " kernel: " << k->id();
+        BOOST_THROW_EXCEPTION(registrar_error(s.str()));
+    }
 }
 
-const std::forward_list<std::shared_ptr<kernel_interface> >&
-kernel_registrar::kernels() const {
-    return kernels_;
+std::shared_ptr<kernel_interface> kernel_registrar::
+kernel_for_language(const yarn::languages l) const {
+    const auto i(kernels_by_language_.find(l));
+    if (i == kernels_by_language_.end())
+        return std::shared_ptr<kernel_interface>();
+
+    return i->second;
+}
+
+const std::unordered_map<yarn::languages, std::shared_ptr<kernel_interface>>&
+kernel_registrar::kernels_by_language() const {
+    return kernels_by_language_;
 }
 
 } }

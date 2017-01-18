@@ -25,8 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
 #include <memory>
-#include <forward_list>
+#include <unordered_map>
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
 
 namespace dogen {
@@ -45,16 +47,25 @@ public:
     /**
      * @brief Registers a kernel.
      */
-    void register_kernel(std::shared_ptr<kernel_interface> b);
+    void register_kernel(std::shared_ptr<kernel_interface> k);
 
     /**
-     * @brief Returns all available kernels.
+     * @brief Returns the kernel for the supplied language, if any
+     * exists. Otherwise returns a null shared pointer.
      */
-    const std::forward_list<std::shared_ptr<kernel_interface> >&
-    kernels() const;
+    std::shared_ptr<kernel_interface>
+    kernel_for_language(const yarn::languages l) const;
+
+    /**
+     * @brief Returns all available kernels, by language.
+     */
+    const std::unordered_map<yarn::languages,
+                             std::shared_ptr<kernel_interface>>&
+    kernels_by_language() const;
 
 private:
-    std::forward_list<std::shared_ptr<kernel_interface> > kernels_;
+    std::unordered_map<yarn::languages, std::shared_ptr<kernel_interface>>
+    kernels_by_language_;
 };
 
 /*

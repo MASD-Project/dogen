@@ -24,6 +24,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/quilt/types/configuration_factory.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/workflow.hpp"
@@ -54,9 +55,10 @@ workflow::workflow(const options::knitting_options& o,
 std::list<annotations::archetype_location>
 workflow::kernel_archetype_locations() const {
     std::list<annotations::archetype_location> r;
-    const auto& rg(quilt::workflow::registrar());
-    for (const auto k : rg.kernels())
-        r.push_back(k->archetype_location());
+    for (const auto& pair : registrar().kernels_by_language()) {
+        const auto& k(*pair.second);
+        r.push_back(k.archetype_location());
+    }
     return r;
 }
 
@@ -93,10 +95,10 @@ kernel_registrar& workflow::registrar() {
 
 std::list<annotations::archetype_location> workflow::archetype_locations() {
     std::list<annotations::archetype_location> r;
-    const auto& rg(quilt::workflow::registrar());
-    for (const auto k : rg.kernels()) {
+    for (const auto& pair : registrar().kernels_by_language()) {
+        const auto& k(*pair.second);
         // not splicing due to a mistmatch in the list types
-        for (const auto al : k->archetype_locations())
+        for (const auto al : k.archetype_locations())
             r.push_back(al);
     }
     return r;
@@ -106,9 +108,10 @@ std::forward_list<boost::filesystem::path>
 workflow::managed_directories(const yarn::model& m) const {
     const auto& ko(knitting_options_);
     std::forward_list<boost::filesystem::path> r;
-    for(const auto b : registrar().kernels()) {
+    for (const auto& pair : registrar().kernels_by_language()) {
+        const auto& k(*pair.second);
         // not splicing due to a mistmatch in the list types
-        const auto md(b->managed_directories(ko, m.name()));
+        const auto md(k.managed_directories(ko, m.name()));
         for (const auto& d : md)
             r.push_front(d);
     }
@@ -130,25 +133,34 @@ workflow::execute(const yarn::model& m) const {
     const auto dpf(create_decoration_properties_factory(repository_, drp, ra));
 
     std::forward_list<formatters::artefact> r;
-    for(const auto k : registrar().kernels()) {
-        const auto kn(k->archetype_location().kernel());
-        BOOST_LOG_SEV(lg, debug) << "Generating files for: " << kn;
+    const auto l(m.language());
+    BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << l;
 
-        const auto& ek(cfg.enabled_kernels());
-        const auto is_enabled(ek.find(kn) != ek.end());
-        if (!is_enabled) {
-            BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled: " << kn;
-            continue;
-        }
-
-        const auto& ko(knitting_options_);
-        const bool ekd(cfg.enable_kernel_directories());
-        auto files(k->generate(ko, atrp, af, drp, dpf, ekd, m));
-        BOOST_LOG_SEV(lg, debug) << "Generated files for : " << kn
-                                 << ". Total files: "
-                                 << std::distance(files.begin(), files.end());
-        r.splice_after(r.before_begin(), files);
+    const auto ptr(registrar().kernel_for_language(l));
+    if (!ptr) {
+        BOOST_LOG_SEV(lg, debug) << "Could not find kernel for language.";
+        return r;
     }
+
+    const auto& k(*ptr);
+    const auto id(k.id());
+    BOOST_LOG_SEV(lg, debug) << "Found kernel: " << id;
+
+    const auto& ek(cfg.enabled_kernels());
+    const auto is_enabled(ek.find(id) != ek.end());
+    if (!is_enabled) {
+        BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled.";
+        return r;
+    }
+
+    const auto& ko(knitting_options_);
+    const bool ekd(cfg.enable_kernel_directories());
+    auto files(k.generate(ko, atrp, af, drp, dpf, ekd, m));
+    BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
+                             << ". Total files: "
+                             << std::distance(files.begin(), files.end());
+    r.splice_after(r.before_begin(), files);
+
     return r;
 }
 

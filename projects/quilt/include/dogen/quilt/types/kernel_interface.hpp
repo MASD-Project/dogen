@@ -53,6 +53,11 @@ public:
 
 public:
     /**
+     * @brief Returns the identity of this kernel.
+     */
+    virtual std::string id() const = 0;
+
+    /**
      * @brief Returns all directories managed by this kernel.
      */
     virtual std::forward_list<boost::filesystem::path>
