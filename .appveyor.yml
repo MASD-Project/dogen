@@ -9,8 +9,8 @@ environment:
     - compiler: msvc
 
 configuration:
-  - Debug
   - Release
+  - Debug
 
 platform:
   - x64
