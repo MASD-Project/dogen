@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/types/intermediate_model_validator.hpp"

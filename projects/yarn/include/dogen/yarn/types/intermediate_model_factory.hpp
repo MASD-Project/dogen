@@ -24,9 +24,7 @@
 #pragma once
 #endif
 
-#include <list>
 #include <vector>
-#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"

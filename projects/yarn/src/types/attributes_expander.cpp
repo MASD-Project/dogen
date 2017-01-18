@@ -23,6 +23,7 @@
 #include <unordered_map>
 #include <unordered_set>
 #include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"

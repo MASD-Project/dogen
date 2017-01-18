@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
