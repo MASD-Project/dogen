@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-18 Wed 21:01]
+#+CAPTION: Clock summary at [2017-01-18 Wed 21:21]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *20:56* |       |       | 100.0 |
+| *Total time*                                                                | *21:13* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 20:56   |       |       | 100.0 |
-| Active                                                                      |         | 20:56 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   7.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.8 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   4.1 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  49.2 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   6.4 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   7.1 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   4.9 |
-| STARTED Upsilon test borked due to no output                                |         |       |  0:21 |   1.7 |
-| STARTED Add multi-language support                                          |         |       |  3:11 |  15.2 |
+| Stories                                                                     | 21:13   |       |       | 100.0 |
+| Active                                                                      |         | 21:13 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   7.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.7 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   4.0 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  48.5 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   6.3 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   7.0 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   4.8 |
+| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   1.6 |
+| STARTED Add multi-language support                                          |         |       |  3:28 |  16.3 |
 | STARTED Add a type mapper                                                   |         |       |  0:18 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -263,6 +263,7 @@ not match the kernel's.
 : 2017-01-18 20:54:38.534027 [ERROR] [utility.filesystem.file] Could not find directory: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/TestModel/actual.upsilon/Zeta
 
 *** STARTED Add multi-language support                                :story:
+    CLOCK: [2017-01-18 Wed 21:04]--[2017-01-18 Wed 21:21] =>  0:17
     CLOCK: [2017-01-18 Wed 19:01]--[2017-01-18 Wed 19:49] =>  0:48
     CLOCK: [2017-01-18 Wed 17:15]--[2017-01-18 Wed 17:39] =>  0:24
     CLOCK: [2017-01-18 Wed 16:14]--[2017-01-18 Wed 17:14] =>  1:00
@@ -368,7 +369,7 @@ one look-up is required. Mapping must also include removal. Actually
 this requirement is only needed for ModelValue; upsilon could filter
 out any extends of this type, greatly simplifying the mapping logic.
 
-*** Backslashes in strings cause JSON parsing to failed                 :story:
+*** Backslashes in strings cause JSON parsing to failed               :story:
 
 When trying to JQ an upsilon model, JQ failed with an error due to the
 use of un-escaped backslashes. We need to add this to the tidy-up

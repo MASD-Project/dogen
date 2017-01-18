@@ -102,7 +102,6 @@
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
-#include "dogen/yarn/types/intermediate_model_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_validator.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
