@@ -49,5 +49,6 @@
 #include "dogen/yarn/test_data/type_parameters_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
 #include "dogen/yarn/test_data/decomposition_result_td.hpp"
+#include "dogen/yarn/test_data/intermediate_model_repository_td.hpp"
 
 #endif

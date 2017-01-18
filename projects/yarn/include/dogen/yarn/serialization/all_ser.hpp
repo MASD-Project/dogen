@@ -49,5 +49,6 @@
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"
+#include "dogen/yarn/serialization/intermediate_model_repository_ser.hpp"
 
 #endif

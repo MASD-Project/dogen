@@ -13,20 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-18 Wed 13:51]
+#+CAPTION: Clock summary at [2017-01-18 Wed 14:54]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *16:05* |       |       | 100.0 |
+| *Total time*                                                                | *17:05* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 16:05   |       |       | 100.0 |
-| Active                                                                      |         | 16:05 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   9.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   3.6 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   5.3 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  64.0 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   8.3 |
-| STARTED Bind language to kernel                                             |         |       |  1:29 |   9.2 |
+| Stories                                                                     | 17:05   |       |       | 100.0 |
+| Active                                                                      |         | 17:05 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   9.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   3.4 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   5.0 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  60.3 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   7.8 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   8.7 |
+| STARTED Add multi-language support                                          |         |       |  0:42 |   4.1 |
+| STARTED Add a type mapper                                                   |         |       |  0:18 |   1.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -223,7 +225,8 @@ Other problems:
 It seems that when we refer to a collection on the target model,
 resolution fails.
 
-*** STARTED Bind language to kernel                                   :story:
+*** COMPLETED Bind language to kernel                                 :story:
+    CLOSED: [2017-01-18 Wed 14:36]
     CLOCK: [2017-01-18 Wed 12:38]--[2017-01-18 Wed 13:50] =>  1:12
     CLOCK: [2017-01-17 Tue 20:55]--[2017-01-17 Tue 21:12] =>  0:17
 
@@ -234,7 +237,33 @@ all. This is not ideal; we could instead determine what languages the
 kernel supports and only generate if its a supported language. This
 would stop us code-generating a C# model in C++ and vice-versa.
 
-Notes:
+*** STARTED Add multi-language support                                :story:
+    CLOCK: [2017-01-18 Wed 14:29]--[2017-01-18 Wed 14:53] =>  0:24
+    CLOCK: [2017-01-18 Wed 13:58]--[2017-01-18 Wed 14:10] =>  0:12
+    CLOCK: [2017-01-18 Wed 13:51]--[2017-01-18 Wed 13:57] =>  0:06
+
+This story splits the mapping work into two phases: first we just add
+the capability of processing (and grouping) models by language (this
+story). Second we add mapping (on another story).
+
+The objective is to change all APIs (yarn, knit) to deal with more
+than one model, per language. For this we need the intermediate model
+factory to return models bucketed by language and for the model
+factory to process and return them by language too; finally, the main
+workflow can just return a list of models.
+
+In knit we need to process the list of models and send them to quilt
+one at a time.
+
+We should also add a list of output languages to the kernel, which for
+now will always be equal to the input language. It would be nice to
+keep track of all of the different states:
+
+- input language
+- requested output languages
+- actual output language
+
+Assorted Notes:
 
 - add a list of languages to the model, populate them from upsilon.
 - for other models read it from meta-data; if not populated, assume
@@ -245,8 +274,19 @@ Notes:
   languages. If they are different, send the model to the
   mapper. Actually we need to do this at a higher level in order to
   cater for multiple output languages.
+- we could change intermediate processing as follows: create a
+  map by language with target and references. Read target in, map it
+  to each output language. Then read each reference and map it to each
+  output language. Then for each language, read and filter all system
+  models.
 
 Merged stories:
+
+*Process models based on language*
+
+At present we are loading up all system models and processing them,
+only to discard them at merging stage. Ideally we want to process only
+if the model language matches.
 
 *Add output languages*
 
@@ -265,23 +305,8 @@ future we will have the same requirement for LAM. We could:
   take all of these models and supply them to the mapper, together
   with an outputtable language.
 
-*** Add support for ignoring types                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to ignore certain types I am working
-on so that I can evolve my diagram over time, whilst still being able
-to commit it.
-#+end_quote
-
-Sometimes when changing a diagram it may be useful to set some types
-to "ignore", i.e. make dogen pretend they don't exist at all. For
-instance one may want to introduce new types one at a time. It would
-be nice to have a dynamic extension flag for ignoring.
-
-We should probably have some kind of warning to ensure users are aware
-of the types being ignored.
-
-*** Add a type mapper                                                 :story:
+*** STARTED Add a type mapper                                         :story:
+    CLOCK: [2017-01-18 Wed 14:10]--[2017-01-18 Wed 14:28] =>  0:18
 
 We need to create a class that receives a map of element id to element
 id. It then goes through every mapped element reference and deletes the
@@ -313,6 +338,22 @@ language to LAM them from LAM to language. If already in LAM then only
 one look-up is required. Mapping must also include removal. Actually
 this requirement is only needed for ModelValue; upsilon could filter
 out any extends of this type, greatly simplifying the mapping logic.
+
+*** Add support for ignoring types                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to ignore certain types I am working
+on so that I can evolve my diagram over time, whilst still being able
+to commit it.
+#+end_quote
+
+Sometimes when changing a diagram it may be useful to set some types
+to "ignore", i.e. make dogen pretend they don't exist at all. For
+instance one may want to introduce new types one at a time. It would
+be nice to have a dynamic extension flag for ignoring.
+
+We should probably have some kind of warning to ensure users are aware
+of the types being ignored.
 
 *** Add auxiliary function properties to c#                           :story:
 
