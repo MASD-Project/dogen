@@ -32,7 +32,7 @@
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/intermediate_model_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
@@ -59,22 +59,22 @@ private:
     void validate() const;
 
     /**
-     * @brief Obtains all intermediate models.
+     * @brief Obtains all intermediate models across all languages.
      */
-    std::vector<intermediate_model> obtain_intermediate_models(
-        const std::vector<boost::filesystem::path>& data_dirs,
+    intermediate_model_repository obtain_intermediate_model_repository(
+        const std::vector<boost::filesystem::path>& dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::knitting_options& ko) const;
 
     /**
-     * @brief Obtains the final model.
+     * @brief Obtains the model.
      */
-    model obtain_final_model(const annotations::type_repository& atrp,
-        const std::vector<intermediate_model>& ims) const;
+    model obtain_model(const annotations::type_repository& atrp,
+        const std::list<intermediate_model>& ims) const;
 
 public:
-    model execute(const std::vector<boost::filesystem::path>& data_dirs,
+    std::list<model> execute(const std::vector<boost::filesystem::path>& dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::knitting_options& ko) const;

@@ -21,6 +21,7 @@
 #include <memory>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 #include "dogen/yarn/types/model_factory.hpp"
@@ -66,45 +67,36 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating registrars. ";
 }
 
-std::vector<intermediate_model> workflow::obtain_intermediate_models(
-    const std::vector<boost::filesystem::path>& data_dirs,
+intermediate_model_repository workflow::obtain_intermediate_model_repository(
+    const std::vector<boost::filesystem::path>& dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko) const {
     intermediate_model_repository_factory f;
-    const auto rp(f.make(data_dirs, agf, atrp, ko, frontend_registrar()));
-    std::vector<intermediate_model> r;
-
-    if (rp.by_language().size() != 1) {
-        BOOST_LOG_SEV(lg, error) << "Expected only one language. "
-                                 << "Found: " << rp.by_language().size();
-        BOOST_THROW_EXCEPTION(workflow_error("Expected only one language."));
-    }
-
-    const auto& pair(*rp.by_language().begin());
-    const auto& list(pair.second);
-    r.reserve(list.size());
-    for (const auto& im : list)
-        r.push_back(im);
-
+    const auto r(f.make(dirs, agf, atrp, ko, frontend_registrar()));
     return r;
 }
 
-model workflow::obtain_final_model(const annotations::type_repository& atrp,
-    const std::vector<intermediate_model>& ims) const {
+model workflow::obtain_model(const annotations::type_repository& atrp,
+    const std::list<intermediate_model>& ims) const {
     model_factory f;
     return f.make(atrp, injector_registrar(), ims);
 }
 
-model workflow::execute(const std::vector<boost::filesystem::path>& data_dirs,
+std::list<model>
+workflow::execute(const std::vector<boost::filesystem::path>& dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko) const {
+    BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+    std::list<model> r;
+    const auto imrp(obtain_intermediate_model_repository(dirs, agf, atrp, ko));
+    for(const auto& pair : imrp.by_language()) {
+        const auto& ims(pair.second);
+        r.push_back(obtain_model(atrp, ims));
+    }
 
-    const auto im(obtain_intermediate_models(data_dirs, agf, atrp, ko));
-    const auto r(obtain_final_model(atrp, im));
-
-    BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished workflow. Models: " << r;
     return r;
 }
 

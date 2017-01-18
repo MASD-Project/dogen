@@ -60,7 +60,7 @@ private:
      * @brief Creates the merged intermediate model.
      */
     intermediate_model
-    merge_intermediate_models(const std::vector<intermediate_model>& ims) const;
+    merge_intermediate_models(const std::list<intermediate_model>& ims) const;
 
     /**
      * @brief Create indices.
@@ -133,7 +133,7 @@ public:
      */
     model make(const annotations::type_repository& atrp,
         const injector_registrar& rg,
-        const std::vector<intermediate_model>& ims) const;
+        const std::list<intermediate_model>& ims) const;
 };
 
 } }

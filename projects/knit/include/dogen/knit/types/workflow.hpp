@@ -26,6 +26,7 @@
 #endif
 
 #include <map>
+#include <list>
 #include <vector>
 #include <string>
 #include <ostream>
@@ -117,10 +118,10 @@ private:
         const annotations::type_repository& atrp) const;
 
     /**
-     * @brief Obtain the yarn model.
+     * @brief Obtain the yarn models.
      */
-    yarn::model
-    obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
+    std::list<yarn::model>
+    obtain_yarn_models(const std::vector<boost::filesystem::path>& data_dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp) const;
 

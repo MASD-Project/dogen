@@ -140,7 +140,6 @@ make(const std::vector<boost::filesystem::path>& dirs,
          */
         for (const auto& d : rimd) {
             auto rim(intermediate_model_for_descriptor(rg, d));
-            // const auto rl(rim.language());
             if (ex.expand_if_compatible(agf, atrp, tl, rim))
                 list.push_back(rim);
         }

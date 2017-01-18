@@ -86,7 +86,7 @@ has_generatable_types(const intermediate_model& im) const {
 }
 
 intermediate_model model_factory::
-merge_intermediate_models(const std::vector<intermediate_model>& im) const {
+merge_intermediate_models(const std::list<intermediate_model>& im) const {
     merger mg;
     for (const auto& m : im)
         mg.add(m);
@@ -169,7 +169,7 @@ void model_factory::validate(const model& m) const {
 
 model model_factory::make(const annotations::type_repository& atrp,
     const injector_registrar& rg,
-    const std::vector<intermediate_model>& ims) const {
+    const std::list<intermediate_model>& ims) const {
     BOOST_LOG_SEV(lg, debug) << "Starting creating final model.";
 
     /*

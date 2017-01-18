@@ -101,8 +101,8 @@ workflow::create_annotation_groups_factory(
     return r;
 }
 
-yarn::model workflow::
-obtain_yarn_model(const std::vector<boost::filesystem::path>& data_dirs,
+std::list<yarn::model> workflow::
+obtain_yarn_models(const std::vector<boost::filesystem::path>& data_dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp) const {
     yarn::workflow w;
@@ -155,26 +155,28 @@ void workflow::execute() const {
         const auto alrp(obtain_archetype_location_repository());
         const auto atrp(setup_annotations_repository(data_dirs, alrp));
         const auto agf(create_annotation_groups_factory(data_dirs, alrp, atrp));
-        const auto m(obtain_yarn_model(data_dirs, agf, atrp));
+        const auto models(obtain_yarn_models(data_dirs, agf, atrp));
 
-        if (!m.has_generatable_types()) {
-            BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-            return;
-        }
+        for (const auto& m : models) {
+            if (!m.has_generatable_types()) {
+                BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
+                return;
+            }
 
-        quilt::workflow w(knitting_options_, atrp, agf);
-        const auto artefacts(w.execute(m));
-        if (artefacts.empty()) {
-            BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
-            return;
-        }
+            quilt::workflow w(knitting_options_, atrp, agf);
+            const auto artefacts(w.execute(m));
+            if (artefacts.empty()) {
+                BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
+                return;
+            }
 
-        const auto writer(obtain_file_writer());
-        write_files(writer, artefacts);
+            const auto writer(obtain_file_writer());
+            write_files(writer, artefacts);
 
-        if (housekeeping_required()) {
-            const auto md(w.managed_directories(m));
-            perform_housekeeping(artefacts, md);
+            if (housekeeping_required()) {
+                const auto md(w.managed_directories(m));
+                perform_housekeeping(artefacts, md);
+            }
         }
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));
