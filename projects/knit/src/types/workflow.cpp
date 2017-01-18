@@ -164,6 +164,10 @@ void workflow::execute() const {
 
         quilt::workflow w(knitting_options_, atrp, agf);
         const auto artefacts(w.execute(m));
+        if (artefacts.empty()) {
+            BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
+            return;
+        }
 
         const auto writer(obtain_file_writer());
         write_files(writer, artefacts);
