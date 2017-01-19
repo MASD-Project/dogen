@@ -21,8 +21,13 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
+#include "dogen/yarn/io/element_mapping_io.hpp"
+#include "dogen/yarn/io/mapping_repository_io.hpp"
+#include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
@@ -35,12 +40,53 @@ static logger lg(logger_factory("yarn.intermediate_model_repository_factory"));
 
 const std::string expected_empty_repository(
     "Expected repository to be empty for language: ");
-const std::string expected_target_model("Expcted only the target model but found: ");
+const std::string expected_target_model(
+    "Expcted only the target model but found: ");
+
+const std::string mappings_dir("mappings");
 
 }
 
 namespace dogen {
 namespace yarn {
+
+std::list<element_mapping>
+intermediate_model_repository_factory::obtain_element_mappings(
+    const std::vector<boost::filesystem::path>& dirs) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading all mappings.";
+
+    mappings_hydrator h;
+    std::list<element_mapping> r;
+    for (const auto& top_level_dir : dirs) {
+        const boost::filesystem::path mdir(top_level_dir / mappings_dir);
+        BOOST_LOG_SEV(lg, trace) << "Mapping directory: "
+                                 << mdir.generic_string();
+
+        using namespace dogen::utility::filesystem;
+        const auto files(find_files(mdir));
+
+        BOOST_LOG_SEV(lg, trace) << "Found " << files.size()
+                                 << " mapping files.";
+
+        for (const auto& f : files) {
+            BOOST_LOG_SEV(lg, trace) << "Library model: " << f.generic_string();
+            r.splice(r.end(), h.hydrate(f));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Read all mappings. Result: " << r;
+    return r;
+}
+
+mapping_repository
+intermediate_model_repository_factory::obtain_mapping_repository(
+    const std::list<element_mapping>& /*element_mappings*/) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
+    mapping_repository r;
+
+    BOOST_LOG_SEV(lg, debug) << "Obtained mapping repository. Result: " << r;
+    return r;
+}
 
 intermediate_model
 intermediate_model_repository_factory::intermediate_model_for_descriptor(
@@ -61,7 +107,7 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko, frontend_registrar& rg,
     intermediate_model_repository& rp) const {
-    BOOST_LOG_SEV(lg, error) << "Populating target model.";
+    BOOST_LOG_SEV(lg, debug) << "Populating target model.";
 
     descriptor_factory f;
     const auto timd(f.make(ko.target()));
@@ -84,7 +130,7 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     }
 
     list.push_back(tim);
-    BOOST_LOG_SEV(lg, error) << "Populated target model.";
+    BOOST_LOG_SEV(lg, debug) << "Populated target model.";
 }
 
 intermediate_model_repository intermediate_model_repository_factory::
@@ -96,9 +142,17 @@ make(const std::vector<boost::filesystem::path>& dirs,
 
     BOOST_LOG_SEV(lg, debug) << "Creating the intermediate model repository.";
 
+    /*
+     * We start by obtaining the mapping repository because it will be
+     * used by all intermediate models.
+     */
+    const auto em(obtain_element_mappings(dirs));
+    // const auto mrp(obtain_mapping_repository(em)); // FIXME
+    obtain_mapping_repository(em);
+
     intermediate_model_repository r;
     /*
-     * We need to first obtain the target intermediate model and
+     * Next We need to obtain the target intermediate model and
      * post-process it. This is done because we need to access the
      * annotations inside this model in order to figure out what the
      * user reference intermediate models are. In addition we also

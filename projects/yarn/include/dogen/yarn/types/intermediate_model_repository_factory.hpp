@@ -25,12 +25,15 @@
 #pragma once
 #endif
 
+#include <list>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
+#include "dogen/yarn/types/element_mapping.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/mapping_repository.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
 
 namespace dogen {
@@ -41,6 +44,18 @@ namespace yarn {
  */
 class intermediate_model_repository_factory final {
 private:
+    /**
+     * @brief Obtains all the element id mappings.
+     */
+    std::list<element_mapping> obtain_element_mappings(
+        const std::vector<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Obtain the mapping repository.
+     */
+    mapping_repository obtain_mapping_repository(
+        const std::list<element_mapping>& element_mappings) const;
+
     /**
      * @brief Obtains an intermediate model.
      */

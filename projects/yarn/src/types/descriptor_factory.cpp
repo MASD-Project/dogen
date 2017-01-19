@@ -98,7 +98,7 @@ make(const std::vector<boost::filesystem::path>& dirs) const {
         BOOST_LOG_SEV(lg, trace) << "Found " << files.size()
                                  << " paths to library models.";
 
-        for (const auto& f: files) {
+        for (const auto& f : files) {
             BOOST_LOG_SEV(lg, trace) << "Library model: " << f.generic_string();
 
             descriptor d;

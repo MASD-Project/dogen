@@ -433,6 +433,7 @@ hydrator::hydrate(std::istream& s, const bool is_target) const {
         BOOST_LOG_SEV(lg, error) << invalid_path << ": " << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
+    BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
 }
 
 intermediate_model hydrator::

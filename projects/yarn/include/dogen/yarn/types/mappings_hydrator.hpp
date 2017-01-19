@@ -18,32 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPING_HYDRATOR_HPP
-#define DOGEN_YARN_TYPES_MAPPING_HYDRATOR_HPP
+#ifndef DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
+#define DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/element_mapping.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class mapping_hydrator final {
-public:
-    mapping_hydrator() = default;
-    mapping_hydrator(const mapping_hydrator&) = default;
-    mapping_hydrator(mapping_hydrator&&) = default;
-    ~mapping_hydrator() = default;
-    mapping_hydrator& operator=(const mapping_hydrator&) = default;
+class mappings_hydrator final {
+private:
+    languages to_language(const std::string& s) const;
+
+private:
+    name read_name(const boost::property_tree::ptree& pt) const;
+    std::unordered_map<languages, name>
+    read_names_by_language(const boost::property_tree::ptree& pt) const;
+
+    std::list<element_mapping> read_stream(std::istream& s) const;
 
 public:
-    bool operator==(const mapping_hydrator& rhs) const;
-    bool operator!=(const mapping_hydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<element_mapping> hydrate(std::istream& s) const;
+    std::list<element_mapping> hydrate(const boost::filesystem::path& p) const;
 };
 
 } }

@@ -18,13 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/mapping_hydrator.hpp"
+#ifndef DOGEN_YARN_TYPES_HYDRATION_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_HYDRATION_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 
-bool mapping_hydrator::operator==(const mapping_hydrator& /*rhs*/) const {
-    return true;
-}
+class hydration_error;
 
 } }
+
+#endif
