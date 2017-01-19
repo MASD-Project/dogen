@@ -30,6 +30,7 @@
 #include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
+#include "dogen/yarn/types/mapping_repository_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 
@@ -80,10 +81,10 @@ intermediate_model_repository_factory::obtain_element_mappings(
 
 mapping_repository
 intermediate_model_repository_factory::obtain_mapping_repository(
-    const std::list<element_mapping>& /*element_mappings*/) const {
+    const std::list<element_mapping>& ems) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
-    mapping_repository r;
-
+    mapping_repository_factory f;
+    const auto r(f.make(ems));
     BOOST_LOG_SEV(lg, debug) << "Obtained mapping repository. Result: " << r;
     return r;
 }
@@ -146,9 +147,9 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * We start by obtaining the mapping repository because it will be
      * used by all intermediate models.
      */
-    const auto em(obtain_element_mappings(dirs));
+    const auto ems(obtain_element_mappings(dirs));
     // const auto mrp(obtain_mapping_repository(em)); // FIXME
-    obtain_mapping_repository(em);
+    obtain_mapping_repository(ems);
 
     intermediate_model_repository r;
     /*

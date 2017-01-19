@@ -42,6 +42,7 @@ const std::string names_by_language_key("names_by_language");
 const std::string name_key("name");
 const std::string simple_name_key("simple_name");
 const std::string internal_modules_key("internal_modules");
+const std::string model_modules_key("model_modules");
 
 const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
@@ -85,6 +86,10 @@ name mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     const auto im(pt.get<std::string>(internal_modules_key, empty));
     if (!im.empty())
         b.internal_modules(im);
+
+    const auto mm(pt.get<std::string>(model_modules_key, empty));
+    if (!mm.empty())
+        b.internal_modules(mm);
 
     const auto r(b.build());
     return r;

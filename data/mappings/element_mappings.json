@@ -5,22 +5,19 @@
             {
                 "language" : "cpp",
                 "name" : {
-                    "simple_name": "int",
-                    "model_modules": ""
+                    "simple_name": "int"
                 }
             },
             {
                 "language" : "upsilon",
                 "name" : {
-                    "simple_name": "integer",
-                    "model_modules": ""
+                    "simple_name": "integer"
                 }
             },
             {
                 "language" : "csharp",
                 "name" : {
-                    "simple_name": "int",
-                    "model_modules": ""
+                    "simple_name": "int"
                 }
             }
         ]
@@ -38,21 +35,42 @@
             {
                 "language" : "upsilon",
                 "name" : {
-                    "simple_name": "binary",
-                    "model_modules": ""
+                    "simple_name": "binary"
                 }
             },
             {
                 "language" : "csharp",
                 "name" : {
-                    "simple_name": "string",
-                    "model_modules": ""
+                    "simple_name": "string"
                 }
             }
         ]
     },
     {
         "id" : "lam::boolean",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "name" : {
+                    "simple_name": "bool"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "name" : {
+                    "simple_name": "boolean"
+                }
+            },
+            {
+                "language" : "csharp",
+                "name" : {
+                    "simple_name": "bool"
+                }
+            }
+        ]
+    },
+    {
+        "id" : "lam::string",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -64,15 +82,13 @@
             {
                 "language" : "upsilon",
                 "name" : {
-                    "simple_name": "binary",
-                    "model_modules": ""
+                    "simple_name": "string"
                 }
             },
             {
                 "language" : "csharp",
                 "name" : {
-                    "simple_name": "string",
-                    "model_modules": ""
+                    "simple_name": "string"
                 }
             }
         ]

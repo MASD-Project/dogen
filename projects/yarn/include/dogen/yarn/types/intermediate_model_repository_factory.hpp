@@ -53,8 +53,8 @@ private:
     /**
      * @brief Obtain the mapping repository.
      */
-    mapping_repository obtain_mapping_repository(
-        const std::list<element_mapping>& element_mappings) const;
+    mapping_repository
+    obtain_mapping_repository(const std::list<element_mapping>& ems) const;
 
     /**
      * @brief Obtains an intermediate model.

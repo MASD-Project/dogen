@@ -25,25 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen/yarn/types/element_mapping.hpp"
+#include "dogen/yarn/types/mapping_repository.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class mapping_repository_factory final {
 public:
-    mapping_repository_factory() = default;
-    mapping_repository_factory(const mapping_repository_factory&) = default;
-    mapping_repository_factory(mapping_repository_factory&&) = default;
-    ~mapping_repository_factory() = default;
-    mapping_repository_factory& operator=(const mapping_repository_factory&) = default;
-
-public:
-    bool operator==(const mapping_repository_factory& rhs) const;
-    bool operator!=(const mapping_repository_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    mapping_repository make(const std::list<element_mapping>& ems) const;
 };
 
 } }

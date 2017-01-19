@@ -350,6 +350,7 @@ future we will have the same requirement for LAM. We could:
   with an outputtable language.
 
 *** STARTED Add a type mapper                                         :story:
+    CLOCK: [2017-01-19 Thu 16:19]--[2017-01-19 Thu 17:33] =>  1:14
     CLOCK: [2017-01-19 Thu 14:37]--[2017-01-19 Thu 16:18] =>  1:41
     CLOCK: [2017-01-19 Thu 14:15]--[2017-01-19 Thu 14:36] =>  0:21
     CLOCK: [2017-01-19 Thu 11:45]--[2017-01-19 Thu 12:03] =>  0:18
