@@ -69,7 +69,8 @@ private:
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::knitting_options& ko, frontend_registrar& rg,
-        intermediate_model_repository& rp) const;
+        const mapping_repository& mrp,
+        intermediate_model_repository& imrp) const;
 
 public:
     /**

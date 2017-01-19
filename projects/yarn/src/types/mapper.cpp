@@ -23,8 +23,10 @@
 namespace dogen {
 namespace yarn {
 
-bool mapper::operator==(const mapper& /*rhs*/) const {
-    return true;
+mapper::mapper(const mapping_repository& mrp) : mapping_repository_(mrp) { }
+
+void mapper::
+map(const languages /*from*/, const languages /*to*/, intermediate_model& /*im*/) const {
 }
 
 } }

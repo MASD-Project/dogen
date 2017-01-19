@@ -107,7 +107,7 @@ void intermediate_model_repository_factory::
 populate_target_model(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko, frontend_registrar& rg,
-    intermediate_model_repository& rp) const {
+    const mapping_repository& /*mrp*/, intermediate_model_repository& rp) const {
     BOOST_LOG_SEV(lg, debug) << "Populating target model.";
 
     descriptor_factory f;
@@ -148,8 +148,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * used by all intermediate models.
      */
     const auto ems(obtain_element_mappings(dirs));
-    // const auto mrp(obtain_mapping_repository(em)); // FIXME
-    obtain_mapping_repository(ems);
+    const auto mrp(obtain_mapping_repository(ems));
 
     intermediate_model_repository r;
     /*
@@ -159,7 +158,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * user reference intermediate models are. In addition we also
      * need to know what languages we will need to support.
      */
-    populate_target_model(agf, atrp, ko, rg, r);
+    populate_target_model(agf, atrp, ko, rg, mrp, r);
 
     /*
      * Now obtain all of the descriptors for the reference models,

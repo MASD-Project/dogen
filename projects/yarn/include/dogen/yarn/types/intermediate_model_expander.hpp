@@ -101,8 +101,7 @@ private:
 
 public:
     void expand(const annotations::annotation_groups_factory& agf,
-        const annotations::type_repository& atrp,
-        intermediate_model& im) const;
+        const annotations::type_repository& atrp, intermediate_model& im) const;
 
     bool expand_if_compatible(const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,

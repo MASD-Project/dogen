@@ -25,25 +25,23 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/mapping_repository.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class mapper final {
 public:
-    mapper() = default;
-    mapper(const mapper&) = default;
-    mapper(mapper&&) = default;
-    ~mapper() = default;
-    mapper& operator=(const mapper&) = default;
+    mapper(const mapping_repository& mrp);
 
 public:
-    bool operator==(const mapper& rhs) const;
-    bool operator!=(const mapper& rhs) const {
-        return !this->operator==(rhs);
-    }
+    void
+    map(const languages from, const languages to, intermediate_model& im) const;
 
+private:
+    const mapping_repository& mapping_repository_;
 };
 
 } }
