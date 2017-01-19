@@ -46,8 +46,10 @@
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
+#include "dogen/yarn/serialization/element_mapping_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/yarn/serialization/mapping_repository_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_repository_ser.hpp"
 

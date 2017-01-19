@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-18 Wed 23:36]
+#+CAPTION: Clock summary at [2017-01-19 Thu 12:03]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *23:21* |       |       | 100.0 |
+| *Total time*                                                                | *25:44* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 23:21   |       |       | 100.0 |
-| Active                                                                      |         | 23:21 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   6.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.5 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   3.6 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  44.1 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   5.7 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   6.4 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   4.4 |
-| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   1.5 |
-| STARTED Add multi-language support                                          |         |       |  5:36 |  24.0 |
-| STARTED Add a type mapper                                                   |         |       |  0:18 |   1.3 |
+| Stories                                                                     | 25:44   |       |       | 100.0 |
+| Active                                                                      |         | 25:44 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   6.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.3 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   3.3 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  40.0 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   5.2 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   5.8 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   4.0 |
+| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   1.4 |
+| STARTED Add multi-language support                                          |         |       |  5:36 |  21.8 |
+| STARTED Add a type mapper                                                   |         |       |  2:41 |  10.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -315,6 +315,14 @@ Assorted Notes:
   to each output language. Then read each reference and map it to each
   output language. Then for each language, read and filter all system
   models.
+- we need to support "mapping to nothing". For example, the LAM will
+  have to have a pointer type, which in C# maps to nothing but in C++
+  can map to shared pointer, etc.
+
+Tasks:
+
+- create built-ins for all of upsilon's intrinsics. Convert all
+  primitives into these intrinsics.
 
 Merged stories:
 
@@ -342,6 +350,11 @@ future we will have the same requirement for LAM. We could:
   with an outputtable language.
 
 *** STARTED Add a type mapper                                         :story:
+    CLOCK: [2017-01-19 Thu 11:45]--[2017-01-19 Thu 12:03] =>  0:18
+    CLOCK: [2017-01-19 Thu 11:23]--[2017-01-19 Thu 11:44] =>  0:21
+    CLOCK: [2017-01-19 Thu 11:03]--[2017-01-19 Thu 11:22] =>  0:19
+    CLOCK: [2017-01-19 Thu 10:01]--[2017-01-19 Thu 10:40] =>  1:07
+    CLOCK: [2017-01-19 Thu 08:23]--[2017-01-19 Thu 09:09] =>  0:46
     CLOCK: [2017-01-18 Wed 14:10]--[2017-01-18 Wed 14:28] =>  0:18
 
 We need to create a class that receives a map of element id to element
@@ -374,6 +387,31 @@ language to LAM them from LAM to language. If already in LAM then only
 one look-up is required. Mapping must also include removal. Actually
 this requirement is only needed for ModelValue; upsilon could filter
 out any extends of this type, greatly simplifying the mapping logic.
+
+*** In JSON hydrator rename simple name to simple                     :story:
+
+We are still using =simple_name=. Make this consistent with the yarn
+terminology.
+
+*** Load system models based on language prefix                       :story:
+
+We used a convention for system models that have the language as a
+prefix:
+
+: cpp.boost.json
+: cpp.builtins.json
+: cpp.std.json
+: csharp.builtins.json
+: csharp.system.collections.generic.json
+: csharp.system.collections.json
+: upsilon.builtins.json
+
+Coincidentally, this could make life easier when it comes to filtering
+models by language: we could pattern match the file name depending on
+the language and only load those who match. The convention would then
+become a rule for system models. With this we would not have to load
+the models, process annotations, etc just to get access to the
+language.
 
 *** Backslashes in strings cause JSON parsing to failed               :story:
 
