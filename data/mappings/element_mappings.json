@@ -1,0 +1,80 @@
+[
+    {
+        "id" : "lam::integer",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "name" : {
+                    "simple_name": "int",
+                    "model_modules": ""
+                }
+            },
+            {
+                "language" : "upsilon",
+                "name" : {
+                    "simple_name": "integer",
+                    "model_modules": ""
+                }
+            },
+            {
+                "language" : "csharp",
+                "name" : {
+                    "simple_name": "int",
+                    "model_modules": ""
+                }
+            }
+        ]
+    },
+    {
+        "id" : "lam::binary",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "name" : {
+                    "simple_name": "string",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "name" : {
+                    "simple_name": "binary",
+                    "model_modules": ""
+                }
+            },
+            {
+                "language" : "csharp",
+                "name" : {
+                    "simple_name": "string",
+                    "model_modules": ""
+                }
+            }
+        ]
+    },
+    {
+        "id" : "lam::boolean",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "name" : {
+                    "simple_name": "string",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "name" : {
+                    "simple_name": "binary",
+                    "model_modules": ""
+                }
+            },
+            {
+                "language" : "csharp",
+                "name" : {
+                    "simple_name": "string",
+                    "model_modules": ""
+                }
+            }
+        ]
+    }
+]
