@@ -40,6 +40,9 @@ std::ostream& operator<<(std::ostream& s, const languages& v) {
     case languages::csharp:
         attr = "\"csharp\"";
         break;
+    case languages::java:
+        attr = "\"java\"";
+        break;
     case languages::language_agnostic:
         attr = "\"language_agnostic\"";
         break;
