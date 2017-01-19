@@ -145,8 +145,8 @@ make(const std::vector<boost::filesystem::path>& dirs,
         }
     }
 
-    return r;
     BOOST_LOG_SEV(lg, debug) << "Created the intermediate model repository.";
+    return r;
 }
 
 } }
