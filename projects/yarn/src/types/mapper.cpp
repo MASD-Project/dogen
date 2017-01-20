@@ -23,7 +23,7 @@
 namespace dogen {
 namespace yarn {
 
-mapper::mapper(const mapping_repository& mrp) /*: mapping_repository_(mrp)*/ { }
+mapper::mapper(const mapping_repository& /*mrp*/) /*: mapping_repository_(mrp)*/ { }
 
 void mapper::
 map(const languages /*from*/, const languages /*to*/, intermediate_model& /*im*/) const {
