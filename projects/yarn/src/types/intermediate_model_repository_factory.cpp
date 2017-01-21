@@ -119,20 +119,21 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     ex.expand(agf, atrp, tim);
 
     const mapper mp(mrp);
-    for (const auto l : tim.output_languages()) {
+    for (const auto ol : tim.output_languages()) {
         /*
          * Obtain the model container for the language of the target
          * model, ensure its empty - as there can only be one target per
          * language - and push the target into it.
          */
-        auto& list(rp.by_language()[l]);
+        auto& list(rp.by_language()[ol]);
         if (!list.empty()) {
-            BOOST_LOG_SEV(lg, error) << expected_empty_repository << l;
-            BOOST_THROW_EXCEPTION(building_error(expected_empty_repository +
-                    boost::lexical_cast<std::string>(l)));
+            const auto s(boost::lexical_cast<std::string>(ol));
+            BOOST_LOG_SEV(lg, error) << expected_empty_repository << s;
+            BOOST_THROW_EXCEPTION(
+                building_error(expected_empty_repository + s));
         }
 
-        list.push_back(mp.map(l, tim));
+        list.push_back(mp.map(tim.input_language(), ol, tim));
     }
     BOOST_LOG_SEV(lg, debug) << "Populated target model.";
 }
@@ -173,8 +174,8 @@ make(const std::vector<boost::filesystem::path>& dirs,
     intermediate_model_expander ex;
     const auto target_dir(ko.target().parent_path());
     for (auto& pair : r.by_language()) {
-        const auto tl(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Target model language: " << tl;
+        const auto ol(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Output language: " << ol;
 
         /*
          * First we need to get our hands on the target model for this
@@ -198,8 +199,8 @@ make(const std::vector<boost::filesystem::path>& dirs,
          */
         for (const auto& d : rimd) {
             auto rim(intermediate_model_for_descriptor(rg, d));
-            if (ex.expand_if_compatible(agf, atrp, tl, rim))
-                list.push_back(mp.map(tl, rim));
+            if (ex.expand_if_compatible(agf, atrp, ol, rim))
+                list.push_back(mp.map(rim.input_language(), ol, rim));
         }
     }
 

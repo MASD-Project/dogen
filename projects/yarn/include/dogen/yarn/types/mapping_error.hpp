@@ -18,40 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPER_HPP
-#define DOGEN_YARN_TYPES_MAPPER_HPP
+#ifndef DOGEN_YARN_TYPES_MAPPING_ERROR_HPP
+#define DOGEN_YARN_TYPES_MAPPING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/mapping_repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace yarn {
 
-class mapper final {
+/**
+ * @brief An error has occurred while mapping element names.
+ */
+class mapping_error : public virtual std::exception, public virtual boost::exception {
 public:
-    explicit mapper(const mapping_repository& mrp);
-
-private:
-    const std::unordered_map<std::string, name>&
-    map_for_language(const languages from, const languages to) const;
-    name_tree walk_name_tree(const std::unordered_map<std::string,
-        name>& map, const name_tree& nt) const;
-    void map_attributes(const std::unordered_map<std::string,
-        name>& map, std::list<attribute>& attrs) const;
+    mapping_error() = default;
+    ~mapping_error() noexcept = default;
 
 public:
-    intermediate_model map(const languages from, const languages to,
-        const intermediate_model& im) const;
+    mapping_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    const mapping_repository& mapping_repository_;
+    const std::string message_;
 };
 
 } }

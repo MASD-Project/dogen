@@ -58,6 +58,7 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/yarn/types/mapping_error.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/types/model_factory.hpp"
 #include "dogen/yarn/types/parsing_error.hpp"

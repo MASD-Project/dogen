@@ -42,6 +42,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(dogen::utility::log::logger_factory("upsilon.hydrator"));
 
+const std::string model_value_name("ModelValue");
 const std::string config_name("Config");
 const std::string directory_name("Directory");
 const std::string public_name("Public");
@@ -626,10 +627,16 @@ name schema_hydrator::read_name(const std::string& schema_name) {
     reader_.validate_self_closing();
 
     r.value(reader_.get_attribute<std::string>(value_name));
-    if (reader_.has_attribute(schema_name_name))
-        r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
-    else
-        r.schema_name(schema_name);
+    /*
+     * Do not default the schema if we are reading a model value, as
+     * it lives in the global namespace.
+     */
+    if (r.value() != model_value_name) {
+        if (reader_.has_attribute(schema_name_name))
+            r.schema_name(reader_.get_attribute<std::string>(schema_name_name));
+        else
+            r.schema_name(schema_name);
+    }
 
     id_generator g;
     r.id(g.generate(r));

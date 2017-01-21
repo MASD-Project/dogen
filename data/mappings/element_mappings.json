@@ -92,5 +92,54 @@
                 }
             }
         ]
+    },
+    {
+        "id" : "lam::collection",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "name" : {
+                    "simple_name": "list",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "name" : {
+                    "simple_name": "Collection"
+                }
+            },
+            {
+                "language" : "csharp",
+                "name" : {
+                    "simple_name": "List",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "id" : "lam::object",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "name" : {
+                    "simple_name": "string",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "name" : {
+                    "simple_name": "ModelValue"
+                }
+            },
+            {
+                "language" : "csharp",
+                "name" : {
+                    "simple_name": "object"
+                }
+            }
+        ]
     }
 ]

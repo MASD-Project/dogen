@@ -757,7 +757,7 @@
 							</location>
 							<identifiable>Phi_CollectionTestType_BinariesTest</identifiable>
 						</name>
-						<unparsed_type>Collection&lt;Zeta::ModelValue&gt;</unparsed_type>
+						<unparsed_type>Collection&lt;ModelValue&gt;</unparsed_type>
 						<parsed_type class_id="40" tracking_level="0" version="0">
 							<current>
 								<id></id>
@@ -1347,7 +1347,7 @@
 							</location>
 							<identifiable>Zeta_ExternalModelTest_BinariesTest</identifiable>
 						</name>
-						<unparsed_type>Collection&lt;Zeta::ModelValue&gt;</unparsed_type>
+						<unparsed_type>Collection&lt;ModelValue&gt;</unparsed_type>
 						<parsed_type>
 							<current>
 								<id></id>
@@ -1433,7 +1433,7 @@
 							</location>
 							<identifiable>Zeta_ExternalModelTest_CollectionOfCollectionTest</identifiable>
 						</name>
-						<unparsed_type>Collection&lt;Collection&lt;Zeta::ModelValue&gt;&gt;</unparsed_type>
+						<unparsed_type>Collection&lt;Collection&lt;ModelValue&gt;&gt;</unparsed_type>
 						<parsed_type>
 							<current>
 								<id></id>
@@ -1519,7 +1519,7 @@
 							</location>
 							<identifiable>Zeta_ExternalModelTest_CollectionOfCollectionOfCollectionTest</identifiable>
 						</name>
-						<unparsed_type>Collection&lt;Collection&lt;Collection&lt;Zeta::ModelValue&gt;&gt;&gt;</unparsed_type>
+						<unparsed_type>Collection&lt;Collection&lt;Collection&lt;ModelValue&gt;&gt;&gt;</unparsed_type>
 						<parsed_type>
 							<current>
 								<id></id>
@@ -1710,8 +1710,10 @@
 	</root_module>
 	<input_language>5</input_language>
 	<output_languages class_id="48" tracking_level="0" version="0">
-		<count>0</count>
+		<count>2</count>
 		<item_version>0</item_version>
+		<item>1</item>
+		<item>2</item>
 	</output_languages>
 </entity>
 </boost_serialization>

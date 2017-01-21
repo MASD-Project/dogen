@@ -144,8 +144,11 @@ std::list<languages> workflow::obtain_output_languages(
                 r.push_back(languages::cpp);
             else if (rep.target() == target_types::cs)
                 r.push_back(languages::csharp);
-            else if (rep.target() == target_types::java)
-                r.push_back(languages::java);
+            else if (rep.target() == target_types::java) {
+                // FIXME: skip java for now as we do not have a model
+                // FIXME: or mappings for it.
+                // r.push_back(languages::java);
+            }
             else {
                 const auto tg(boost::lexical_cast<std::string>(rep.target()));
                 BOOST_LOG_SEV(lg, error) << unspported_target << tg;
@@ -217,8 +220,7 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     const auto n(nf.build_model_name(output.schema_name()));
     r.name(n);
     r.origin_type(origin_types::target);
-    // FIXME: commented out until we implement the mapper.
-    // r.output_languages(obtain_output_languages(outputs));
+    r.output_languages(obtain_output_languages(outputs));
 
     yarn::module root_module;
     root_module.name(n);

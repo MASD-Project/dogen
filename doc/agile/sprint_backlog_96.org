@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-21 Sat 10:05]
+#+CAPTION: Clock summary at [2017-01-21 Sat 12:55]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *31:10* |       |       | 100.0 |
+| *Total time*                                                                | *32:33* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 31:10   |       |       | 100.0 |
-| Active                                                                      |         | 31:10 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   4.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.9 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.7 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  33.0 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   4.3 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   4.8 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   3.3 |
+| Stories                                                                     | 32:33   |       |       | 100.0 |
+| Active                                                                      |         | 32:33 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   4.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.8 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.6 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  31.6 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   4.1 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   4.6 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   3.1 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   1.1 |
-| STARTED Add multi-language support                                          |         |       |  7:24 |  23.7 |
-| STARTED Add a type mapper                                                   |         |       |  6:19 |  20.3 |
+| STARTED Add multi-language support                                          |         |       |  8:47 |  27.0 |
+| STARTED Add a type mapper                                                   |         |       |  6:19 |  19.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -263,6 +263,7 @@ not match the kernel's.
 : 2017-01-18 20:54:38.534027 [ERROR] [utility.filesystem.file] Could not find directory: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/TestModel/actual.upsilon/Zeta
 
 *** STARTED Add multi-language support                                :story:
+    CLOCK: [2017-01-21 Sat 11:32]--[2017-01-21 Sat 12:55] =>  1:23
     CLOCK: [2017-01-21 Sat 09:47]--[2017-01-21 Sat 10:04] =>  0:17
     CLOCK: [2017-01-21 Sat 08:15]--[2017-01-21 Sat 09:46] =>  1:31
     CLOCK: [2017-01-18 Wed 23:24]--[2017-01-18 Wed 23:35] =>  0:11
@@ -324,6 +325,17 @@ Assorted Notes:
 - validator checks that the output language is valid
   (e.g. outputtable).
 - upsilon maps the output languages.
+- we have incompatible requirements: all types without a schema are
+  assigned to the current schema; however, types such as model value
+  live in the global namespace. Due to this we cannot resolve them. We
+  need to map model value to something vaguely sensible in c++ or
+  remove it.
+- we seem to be running housekeeping twice, once per language. The
+  problem is, we consider the files of "the other" language as
+  unexpected (for each run we just have visibility of the files of the
+  current language) so the net result is we are deleting
+  everything. We need to somehow supply the language dependent path to
+  the house keeper or do a single run with the combined set of files.
 
 Tasks:
 

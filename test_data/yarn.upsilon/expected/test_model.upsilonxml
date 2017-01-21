@@ -69,9 +69,9 @@
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
-									<id>&lt;Phi&gt;&lt;ModelValue&gt;</id>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name>Phi</schema_name>
+									<schema_name></schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -114,9 +114,9 @@
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
-									<id>&lt;Phi&gt;&lt;ModelValue&gt;</id>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name>Phi</schema_name>
+									<schema_name></schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -150,9 +150,9 @@
 									<schema_name>Phi</schema_name>
 								</name>
 								<extends>
-									<id>&lt;Phi&gt;&lt;ModelValue&gt;</id>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name>Phi</schema_name>
+									<schema_name></schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
@@ -375,9 +375,9 @@
 								<pof_id>1154</pof_id>
 							</type>
 							<type_name>
-								<id>&lt;Zeta&gt;&lt;ModelValue&gt;</id>
+								<id>&lt;ModelValue&gt;</id>
 								<value>ModelValue</value>
-								<schema_name>Zeta</schema_name>
+								<schema_name></schema_name>
 							</type_name>
 						</px>
 					</item>
@@ -403,9 +403,9 @@
 								<pof_id>1155</pof_id>
 							</type>
 							<type_name>
-								<id>&lt;Zeta&gt;&lt;ModelValue&gt;</id>
+								<id>&lt;ModelValue&gt;</id>
 								<value>ModelValue</value>
-								<schema_name>Zeta</schema_name>
+								<schema_name></schema_name>
 							</type_name>
 						</px>
 					</item>
@@ -474,9 +474,9 @@
 									<schema_name>Zeta</schema_name>
 								</name>
 								<extends>
-									<id>&lt;Zeta&gt;&lt;ModelValue&gt;</id>
+									<id>&lt;ModelValue&gt;</id>
 									<value>ModelValue</value>
-									<schema_name>Zeta</schema_name>
+									<schema_name></schema_name>
 								</extends>
 								<comment>Test type</comment>
 								<tag_refs>
