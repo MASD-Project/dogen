@@ -25,11 +25,15 @@
 #pragma once
 #endif
 
+#include <list>
+#include <vector>
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/model.hpp"
+#include "dogen/upsilon/types/output.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -38,6 +42,13 @@ namespace upsilon {
 
 class workflow final {
 private:
+    /**
+     * @brief Obtains a list of output languages from the upsilon
+     * configuration.
+     */
+    std::list<languages> obtain_output_languages(
+        const std::vector<dogen::upsilon::output>& outputs) const;
+
     /**
      * @brief Creates a map of schema names to yarn model names.
      */

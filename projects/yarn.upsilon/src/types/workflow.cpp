@@ -19,6 +19,7 @@
  *
  */
 #include <list>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
@@ -27,6 +28,7 @@
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/upsilon/types/type_visitor.hpp"
+#include "dogen/upsilon/io/target_types_io.hpp"
 #include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
 #include "dogen/yarn.upsilon/types/workflow_error.hpp"
@@ -39,7 +41,7 @@ static logger lg(logger_factory("yarn.upsilon.workflow"));
 
 const std::string incorrect_number_of_outputs(
     "Upsilon moodel does not have expected number of outputs (1): ");
-
+const std::string unspported_target("Target is not supported: ");
 const std::string duplicate_id("Duplicate id: ");
 const std::string duplicate_schema_name("Duplicate schema name: ");
 
@@ -132,6 +134,29 @@ void model_populator::visit(const dogen::upsilon::primitive& p) {
     insert(yp, model_.primitives());
 }
 
+std::list<languages> workflow::obtain_output_languages(
+    const std::vector<dogen::upsilon::output>& outputs) const {
+    std::list<languages> r;
+    using dogen::upsilon::target_types;
+    for (const auto& o : outputs) {
+        for (const auto& rep : o.representations()) {
+            if (rep.target() == target_types::cpp)
+                r.push_back(languages::cpp);
+            else if (rep.target() == target_types::cs)
+                r.push_back(languages::csharp);
+            else if (rep.target() == target_types::java)
+                r.push_back(languages::java);
+            else {
+                const auto tg(boost::lexical_cast<std::string>(rep.target()));
+                BOOST_LOG_SEV(lg, error) << unspported_target << tg;
+                BOOST_THROW_EXCEPTION(workflow_error(unspported_target + tg));
+            }
+        }
+    }
+
+    return r;
+}
+
 std::unordered_map<std::string, dogen::upsilon::name> workflow::
 obtain_collection_names(const dogen::upsilon::model& um) const {
     BOOST_LOG_SEV(lg, debug) << "Started accumulating collection names.";
@@ -185,12 +210,15 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     yarn::intermediate_model r;
     r.input_language(yarn::languages::upsilon);
 
-    const auto& output(um.config().outputs()[0]);
+    const auto& outputs(um.config().outputs());
+    const auto& output(outputs[0]);
 
     yarn::name_factory nf;
     const auto n(nf.build_model_name(output.schema_name()));
     r.name(n);
     r.origin_type(origin_types::target);
+    // FIXME: commented out until we implement the mapper.
+    // r.output_languages(obtain_output_languages(outputs));
 
     yarn::module root_module;
     root_module.name(n);
