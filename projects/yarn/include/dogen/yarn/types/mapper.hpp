@@ -34,11 +34,11 @@ namespace yarn {
 
 class mapper final {
 public:
-    mapper(const mapping_repository& /*mrp*/);
+    explicit mapper(const mapping_repository& /*mrp*/);
 
 public:
-    void
-    map(const languages from, const languages to, intermediate_model& im) const;
+    intermediate_model map(const languages to,
+        const intermediate_model& im) const;
 
 private:
     // const mapping_repository& mapping_repository_;

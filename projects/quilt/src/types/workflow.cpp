@@ -133,10 +133,10 @@ workflow::execute(const yarn::model& m) const {
     const auto dpf(create_decoration_properties_factory(repository_, drp, ra));
 
     std::forward_list<formatters::artefact> r;
-    const auto l(m.input_language());
-    BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << l;
+    const auto ol(m.output_language());
+    BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << ol;
 
-    const auto ptr(registrar().kernel_for_language(l));
+    const auto ptr(registrar().kernel_for_language(ol));
     if (!ptr) {
         BOOST_LOG_SEV(lg, debug) << "Could not find kernel for language.";
         return r;

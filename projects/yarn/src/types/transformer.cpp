@@ -22,6 +22,8 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/transformation_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/transformer.hpp"
@@ -32,6 +34,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.transformer"));
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
+const std::string expected_one_output_language(
+    "Expected exactly one output language.");
+
 
 }
 
@@ -118,6 +123,16 @@ model transformer::transform(const intermediate_model& im) const {
     model r;
     r.name(im.name());
     r.input_language(im.input_language());
+    if (im.output_languages().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << expected_one_output_language
+                                 << " Output languages: "
+                                 << im.output_languages();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(expected_one_output_language));
+    }
+    const auto ol(im.output_languages().front());
+    r.output_language(ol);
+
     r.root_module(im.root_module());
     r.has_generatable_types(im.has_generatable_types());
 

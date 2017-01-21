@@ -18,15 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/mapper.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.mapper"));
+
+}
 
 namespace dogen {
 namespace yarn {
 
 mapper::mapper(const mapping_repository& /*mrp*/) /*: mapping_repository_(mrp)*/ { }
 
-void mapper::
-map(const languages /*from*/, const languages /*to*/, intermediate_model& /*im*/) const {
+intermediate_model
+mapper::map(const languages to, const intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Mapping to: " << to;
+
+    auto r(im);
+    r.input_language(to);
+    r.output_languages().clear();
+    r.output_languages().push_back(to);
+
+    BOOST_LOG_SEV(lg, debug) << "Output language: " << r.output_languages();
+    BOOST_LOG_SEV(lg, debug) << "Finished mapping.";
+
+    return r;
 }
 
 } }

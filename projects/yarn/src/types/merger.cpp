@@ -104,6 +104,7 @@ void merger::add_target(const intermediate_model& target) {
 
     target_language_ = target.input_language();
     merged_model_.input_language(target_language_);
+    merged_model_.output_languages(target.output_languages());
 
     merged_model_.name(target.name());
     merged_model_.leaves(target.leaves());

@@ -27,6 +27,7 @@
 #include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/io/element_mapping_io.hpp"
 #include "dogen/yarn/io/mapping_repository_io.hpp"
+#include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
@@ -107,7 +108,7 @@ void intermediate_model_repository_factory::
 populate_target_model(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko, frontend_registrar& rg,
-    const mapping_repository& /*mrp*/, intermediate_model_repository& rp) const {
+    const mapping_repository& mrp, intermediate_model_repository& rp) const {
     BOOST_LOG_SEV(lg, debug) << "Populating target model.";
 
     descriptor_factory f;
@@ -117,20 +118,22 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     intermediate_model_expander ex;
     ex.expand(agf, atrp, tim);
 
-    /*
-     * Obtain the model container for the language of the target
-     * model, ensure its empty - as there can only be one target per
-     * language - and push the target into it.
-     */
-    const auto l(tim.input_language());
-    auto& list(rp.by_language()[l]);
-    if (!list.empty()) {
-        BOOST_LOG_SEV(lg, error) << expected_empty_repository << l;
-        BOOST_THROW_EXCEPTION(building_error(expected_empty_repository +
-                boost::lexical_cast<std::string>(l)));
-    }
+    const mapper mp(mrp);
+    for (const auto l : tim.output_languages()) {
+        /*
+         * Obtain the model container for the language of the target
+         * model, ensure its empty - as there can only be one target per
+         * language - and push the target into it.
+         */
+        auto& list(rp.by_language()[l]);
+        if (!list.empty()) {
+            BOOST_LOG_SEV(lg, error) << expected_empty_repository << l;
+            BOOST_THROW_EXCEPTION(building_error(expected_empty_repository +
+                    boost::lexical_cast<std::string>(l)));
+        }
 
-    list.push_back(tim);
+        list.push_back(mp.map(l, tim));
+    }
     BOOST_LOG_SEV(lg, debug) << "Populated target model.";
 }
 
@@ -166,6 +169,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * load all reference intermediate models and post-process them.
      */
     descriptor_factory f;
+    const mapper mp(mrp);
     intermediate_model_expander ex;
     const auto target_dir(ko.target().parent_path());
     for (auto& pair : r.by_language()) {
@@ -195,7 +199,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
         for (const auto& d : rimd) {
             auto rim(intermediate_model_for_descriptor(rg, d));
             if (ex.expand_if_compatible(agf, atrp, tl, rim))
-                list.push_back(rim);
+                list.push_back(mp.map(tl, rim));
         }
     }
 

@@ -154,9 +154,9 @@ expand_if_compatible(const annotations::annotation_groups_factory& agf,
                                 << " Aborting expansion.";
         return false;
     } else {
-        BOOST_LOG_SEV(lg, warn) << "Reference model language is compatible."
-                                << " Model: " << im.name().id()
-                                << " Language: " << l;
+        BOOST_LOG_SEV(lg, debug) << "Reference model language is compatible."
+                                 << " Model: " << im.name().id()
+                                 << " Language: " << l;
 
     }
 

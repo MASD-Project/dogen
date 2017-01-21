@@ -28,6 +28,11 @@ std::string traits::input_language() {
     return r;
 }
 
+std::string traits::output_language() {
+    static std::string r("yarn.output_language");
+    return r;
+}
+
 std::string traits::is_proxy_model() {
     static std::string r("yarn.is_proxy_model");
     return r;

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
@@ -40,13 +41,17 @@ private:
 
 private:
     struct type_group {
-        annotations::type language;
+        annotations::type input_language;
+        annotations::type output_language;
     };
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
 
-    languages
-    make_language(const type_group& tg, const annotations::annotation& a) const;
+    languages make_input_language(const type_group& tg,
+        const annotations::annotation& a) const;
+
+    std::list<languages> make_output_languages(const type_group& tg,
+        const annotations::annotation& a) const;
 
 public:
     void expand(const annotations::type_repository& atrp,

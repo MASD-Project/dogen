@@ -32,6 +32,7 @@ namespace yarn {
 
 struct traits {
     static std::string input_language();
+    static std::string output_language();
     static std::string is_proxy_model();
     static std::string reference();
 
