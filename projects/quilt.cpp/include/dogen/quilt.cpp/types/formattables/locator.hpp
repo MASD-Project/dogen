@@ -127,6 +127,12 @@ private:
 
 public:
     /**
+     * @brief Top-level project directory.
+     */
+    const boost::filesystem::path project_path() const;
+
+public:
+    /**
      * @brief Generate the inclusion path for C++ headers.
      */
     boost::filesystem::path make_inclusion_path_for_cpp_header(

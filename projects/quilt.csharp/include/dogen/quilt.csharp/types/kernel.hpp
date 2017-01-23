@@ -72,10 +72,6 @@ private:
         const dogen::formatters::repository& drp,
         const formattables::model& fm) const;
 
-    std::list<boost::filesystem::path>
-    managed_directories(const options::knitting_options& ko,
-        const yarn::name& model_name) const;
-
 public:
     std::string id() const override;
 

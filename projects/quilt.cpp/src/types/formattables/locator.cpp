@@ -290,6 +290,10 @@ boost::filesystem::path locator::make_inclusion_path(
     return r;
 }
 
+const boost::filesystem::path locator::project_path() const {
+    return project_path_;
+}
+
 boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
     const yarn::name& n, const std::string& archetype) const {
     const auto extension(configuration_.header_file_extension());

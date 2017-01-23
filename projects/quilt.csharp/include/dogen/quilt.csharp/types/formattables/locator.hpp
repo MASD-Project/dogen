@@ -111,6 +111,12 @@ private:
         const std::string& extension, const yarn::name& n) const;
 
 public:
+    /**
+     * @brief Top-level project directory.
+     */
+    const boost::filesystem::path project_path() const;
+
+public:
     boost::filesystem::path make_relative_path(
         const boost::filesystem::path& full_path) const;
 

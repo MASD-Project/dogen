@@ -239,6 +239,10 @@ boost::filesystem::path locator::make_facet_path(
     return r;
 }
 
+const boost::filesystem::path locator::project_path() const {
+    return project_path_;
+}
+
 boost::filesystem::path locator::make_relative_path(
     const boost::filesystem::path& full_path) const {
 
