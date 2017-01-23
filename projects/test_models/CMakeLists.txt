@@ -214,8 +214,12 @@ foreach(dia_model ${all_dia_test_models})
     endif()
 endforeach()
 
+#
+# Upsilon machinery
+#
 set(top_dir "${stage_test_data_dir}/Zeta")
 set(model_folder_name "Zeta")
+set(model_name "Zeta")
 set(actual_dir "${top_dir}/actual.upsilon/${model_folder_name}")
 if(NOT IS_DIRECTORY "${actual_dir}")
     file(MAKE_DIRECTORY "${actual_dir}")
@@ -226,3 +230,25 @@ if(IS_DIRECTORY "${expected_dir}")
 endif()
 set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 file(COPY "${git_dir}" DESTINATION "${expected_dir}")
+
+set(expected_dir "${top_dir}/expected/Zeta")
+set(target_name "diff_${model_name}_upsilon")
+add_custom_target(${target_name}
+    COMMAND diff -r -u ${expected_dir} ${actual_dir}
+    WORKING_DIRECTORY ${stage_bin_dir})
+add_dependencies(diff_test_models ${target_name})
+
+set(target_name "rebase_${model_name}_upsilon")
+add_custom_target(${target_name}
+    COMMAND rm -rf ${git_dir}
+    COMMAND cp -r ${actual_dir} ${git_dir}
+    WORKING_DIRECTORY ${stage_bin_dir})
+add_dependencies(rebase_test_models ${target_name})
+
+set(target_name "clean_${model_name}_upsilon")
+add_custom_target(${target_name}
+    COMMAND rm -rf ${actual_dir}
+    COMMAND mkdir ${actual_dir}
+    WORKING_DIRECTORY ${stage_bin_dir})
+add_dependencies(clean_test_models ${target_name})
+message(STATUS "Processed model: ${model_name} (upsilon)")
