@@ -22,6 +22,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/canned_tests.hpp"
+#include "dogen/utility/test/io_tester.hpp"
 #include "dogen/test_models/std_model/types/all.hpp"
 #include "dogen/test_models/std_model/io/all_io.hpp"
 #include "dogen/test_models/std_model/serialization/all_ser.hpp"
@@ -105,6 +106,11 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<class_h_generator>();
     test_io<class_j_generator>();
     test_io<primitives_generator>();
+
+    class_a a;
+    a.prop0("\"\" 'test' \\ \n");
+    using dogen::utility::test::io_tester;
+    io_tester<class_a>::inserter_operator_produces_valid_json(a);
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {

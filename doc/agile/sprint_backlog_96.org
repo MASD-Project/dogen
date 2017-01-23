@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-23 Mon 14:39]
+#+CAPTION: Clock summary at [2017-01-23 Mon 15:24]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:35* |       |       | 100.0 |
+| *Total time*                                                                | *38:19* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:35   |       |       | 100.0 |
-| Active                                                                      |         | 37:35 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   5.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.6 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.3 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  27.4 |
+| Stories                                                                     | 38:19   |       |       | 100.0 |
+| Active                                                                      |         | 38:19 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   4.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.5 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.2 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  26.9 |
 | COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.5 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.9 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.7 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.9 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  35.8 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  16.8 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  35.1 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  16.5 |
+| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:44 |   1.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -423,6 +424,36 @@ one look-up is required. Mapping must also include removal. Actually
 this requirement is only needed for ModelValue; upsilon could filter
 out any extends of this type, greatly simplifying the mapping logic.
 
+*** COMPLETED Backslashes in strings cause JSON parsing to fail       :story:
+    CLOSED: [2017-01-23 Mon 15:24]
+    CLOCK: [2017-01-23 Mon 14:40]--[2017-01-23 Mon 15:24] =>  0:44
+
+When trying to JQ an upsilon model, JQ failed with an error due to the
+use of un-escaped backslashes. We need to add this to the tidy-up
+string list.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
+
+Or we could simply add a new flag like =extra-verbose=.
+
+*** Fix recursive path lookup for upsilon                             :story:
+
+It seems we still can't recurse upwards when looking for the
+components of the upsilon model.
+
+We should also look first on the current directory and then make use
+of the relative path.
+
+*** Add support for pointers to mapper                                :story:
+
+We need to detect types which are abstract (if its already populated)
+and ensure we wrap them around a pointer in C++.
+
 *** Add tailor support for upsilon                                    :story:
 
 Given an upsilon model, generate the JSON for a LAM model. If selected
@@ -449,19 +480,6 @@ or:
 
 : --meta-data a=b
 
-*** Add support for pointers to mapper                                :story:
-
-We need to detect types which are abstract (if its already populated)
-and ensure we wrap them around a pointer in C++.
-
-*** Fix recursive path lookup for upsilon                             :story:
-
-It seems we still can't recurse upwards when looking for the
-components of the upsilon model.
-
-We should also look first on the current directory and then make use
-of the relative path.
-
 *** Map upsilon primitives to intrinsics                              :story:
 
 Upsilon allows users to create "strong typedefs" around primitve
@@ -472,15 +490,6 @@ them map the intrinsics to native types.
 
 At present we are marking all types in an upsilon config as target. In
 practice, only one of the models is the target.
-
-*** Add log-level to command line                                     :story:
-
-We are now increasingly logging at trace levels. We need to allow
-users to supply a more fine-grained log configuration. This could be
-done by simply allowing users to set the log level via a command-line
-flag: =log_level=. It would replace verbose.
-
-Or we could simply add a new flag like =extra-verbose=.
 
 *** In JSON hydrator rename simple name to simple                     :story:
 
@@ -506,12 +515,6 @@ the language and only load those who match. The convention would then
 become a rule for system models. With this we would not have to load
 the models, process annotations, etc just to get access to the
 language.
-
-*** Backslashes in strings cause JSON parsing to failed               :story:
-
-When trying to JQ an upsilon model, JQ failed with an error due to the
-use of un-escaped backslashes. We need to add this to the tidy-up
-string list.
 
 *** Add support for ignoring types                                    :story:
 
