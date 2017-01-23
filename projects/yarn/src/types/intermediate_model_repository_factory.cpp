@@ -44,6 +44,7 @@ const std::string expected_empty_repository(
     "Expected repository to be empty for language: ");
 const std::string expected_target_model(
     "Expcted only the target model but found: ");
+const std::string non_absolute_target("Target path is not absolute: ");
 
 const std::string mappings_dir("mappings");
 
@@ -110,6 +111,20 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     const options::knitting_options& ko, frontend_registrar& rg,
     const mapping_repository& mrp, intermediate_model_repository& rp) const {
     BOOST_LOG_SEV(lg, debug) << "Populating target model.";
+
+    /*
+     * We require the target path supplied to us to be an absolute
+     * path. This is because we perform calculations off of it such as
+     * locating the reference models and so forth. The end-user is not
+     * required to have supplied an absolute path, but someone above
+     * us must be responsible for ensuring we receive an absolute
+     * path.
+     */
+    if (!ko.target().is_absolute()) {
+        const auto gs(ko.target().generic_string());
+        BOOST_LOG_SEV(lg, error) << non_absolute_target << gs;
+        BOOST_THROW_EXCEPTION(building_error(non_absolute_target + gs));
+    }
 
     descriptor_factory f;
     const auto timd(f.make(ko.target()));

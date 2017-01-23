@@ -217,7 +217,10 @@ BOOST_AUTO_TEST_CASE(supplying_modeling_options_results_in_expected_options) {
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(ko.target().string() == target_value_arg);
+
+    using boost::algorithm::ends_with;
+    const auto gs(ko.target().generic_string());
+    BOOST_CHECK(ends_with(gs, target_value_arg));
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in_expected_options) {
@@ -229,7 +232,10 @@ BOOST_AUTO_TEST_CASE(not_supplying_modeling_options_other_than_target_results_in
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(ko.target().string() == target_value_arg);
+
+    using boost::algorithm::ends_with;
+    const auto gs(ko.target().generic_string());
+    BOOST_CHECK(ends_with(gs, target_value_arg));
 }
 
 BOOST_AUTO_TEST_CASE(supplying_arguments_without_target_throws) {
@@ -249,7 +255,10 @@ BOOST_AUTO_TEST_CASE(supplying_output_dir_results_in_expected_options) {
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(ko.output_directory_path() == output_dir_value_arg);
+
+    using boost::algorithm::ends_with;
+    const auto gs(ko.output_directory_path().generic_string());
+    BOOST_CHECK(ends_with(gs, output_dir_value_arg));
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_output_dir_results_in_expected_options) {
@@ -300,7 +309,10 @@ BOOST_AUTO_TEST_CASE(supplying_output_directory_results_in_expected_options) {
 
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(ko.output_directory_path() == output_dir_value_arg);
+
+    using boost::algorithm::ends_with;
+    const auto gs(ko.output_directory_path().generic_string());
+    BOOST_CHECK(ends_with(gs, output_dir_value_arg));
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_output_options_results_in_expected_options) {

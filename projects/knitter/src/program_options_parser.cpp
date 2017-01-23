@@ -181,7 +181,8 @@ make_knitting_options(const variables_map& vm) const {
     if (vm.count(target_arg) == 0)
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
-    r.target(vm[target_arg].as<std::string>());
+    const auto target_str(vm[target_arg].as<std::string>());
+    r.target(boost::filesystem::absolute(target_str));
 
     if (vm.count(log_level_arg) == 0)
         r.log_level(info_level);
@@ -199,8 +200,10 @@ make_knitting_options(const variables_map& vm) const {
 
     if (!vm.count(output_dir_arg))
         r.output_directory_path(boost::filesystem::current_path());
-    else
-        r.output_directory_path(vm[output_dir_arg].as<std::string>());
+    else {
+        const auto output_str(vm[output_dir_arg].as<std::string>());
+        r.output_directory_path(boost::filesystem::absolute(output_str));
+    }
 
     return r;
 }

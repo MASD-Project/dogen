@@ -40,6 +40,8 @@ const std::string no_generatable_model_modules(
     "No generatable model modules found.");
 const std::string multiple_generatable_model_modules(
     "More than one model module is generatable: ");
+const std::string non_absolute_output(
+    "The output directory path is not absolute: ");
 
 }
 namespace dogen {
@@ -105,6 +107,20 @@ std::list<annotations::archetype_location> workflow::archetype_locations() {
 }
 
 boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
+    /*
+     * We expect the output directory to be absolute. This just makes
+     * our life easier in terms of assumptions. Note that this does
+     * not mean the end user must supply an absolute path, just that
+     * someone above must have ensured they converted it into
+     * absolute.
+     */
+    const auto& ko(knitting_options_);
+    if (!ko.output_directory_path().is_absolute()) {
+        const auto gs(ko.output_directory_path().generic_string());
+        BOOST_LOG_SEV(lg, error) << non_absolute_output << gs;
+        BOOST_THROW_EXCEPTION(workflow_error(non_absolute_output + gs));
+    }
+
     const auto ra(m.root_module().annotation());
     const auto kals(kernel_archetype_locations());
     configuration_factory cf;
@@ -137,7 +153,6 @@ boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
         return boost::optional<kernel_output>();
     }
 
-    const auto& ko(knitting_options_);
     const bool ekd(cfg.enable_kernel_directories());
     const auto r(k.generate(ko, atrp, af, drp, dpf, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
