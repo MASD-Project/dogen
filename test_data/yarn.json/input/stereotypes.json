@@ -13,7 +13,7 @@
   "elements": [
     {
       "name": {
-        "simple_name": "base_concept_model"
+        "simple": "base_concept_model"
       },
       "meta_type": "object",
       "documentation": "This class models the BaseConcept.\n",
@@ -23,7 +23,7 @@
     },
     {
       "name": {
-        "simple_name": "base_with_concept"
+        "simple": "base_with_concept"
       },
       "meta_type": "object",
       "documentation": "Base class that models a refined concept.\n",
@@ -33,7 +33,7 @@
     },
     {
       "name": {
-        "simple_name": "fluent"
+        "simple": "fluent"
       },
       "meta_type": "object",
       "documentation": "Tests the fluent scenario across the different types of properties.\n",
@@ -42,22 +42,28 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "unsigned int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::string"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::string"
         },
         {
-          "simple_name": "prop_2",
-          "type": "value"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "value"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "further_refined"
+        "simple": "further_refined"
       },
       "meta_type": "object",
       "documentation": "Descendant class that models a concept which is a refinement of the concept\nmodeled by the base.\n",
@@ -66,13 +72,13 @@
       ],
       "parents": [
         {
-          "simple_name": "base_with_concept"
+          "simple": "base_with_concept"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "immutable_four"
+        "simple": "immutable_four"
       },
       "meta_type": "object",
       "documentation": "Immutable class with non-immutable and immutable pods as properties.\n",
@@ -81,26 +87,34 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "bool"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::string"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::string"
         },
         {
-          "simple_name": "prop_2",
-          "type": "value"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "value"
         },
         {
-          "simple_name": "prop_3",
-          "type": "immutable_one_primitive"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "immutable_one_primitive"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "immutable_one_non_primitive"
+        "simple": "immutable_one_non_primitive"
       },
       "meta_type": "object",
       "documentation": "Immutable class with one pod property\n",
@@ -109,14 +123,16 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::string"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::string"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "immutable_one_primitive"
+        "simple": "immutable_one_primitive"
       },
       "meta_type": "object",
       "documentation": "Immutable class with a primitive property.\n",
@@ -125,14 +141,16 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "bool"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "immutable_two"
+        "simple": "immutable_two"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -140,18 +158,22 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "bool"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::string"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::string"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "immutable_zero"
+        "simple": "immutable_zero"
       },
       "meta_type": "object",
       "documentation": "Immutable class with no properties.\n",
@@ -161,7 +183,7 @@
     },
     {
       "name": {
-        "simple_name": "multi_concept_model"
+        "simple": "multi_concept_model"
       },
       "meta_type": "object",
       "documentation": "Type that refines more than one concept.\n",
@@ -171,15 +193,17 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_10",
-          "type": "int",
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
           "documentation": "Property of class.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "multiple_refinement_concept_model"
+        "simple": "multiple_refinement_concept_model"
       },
       "meta_type": "object",
       "documentation": "Model of MultipleRefinements concept.\n",
@@ -188,15 +212,17 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_10",
-          "type": "int",
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
           "documentation": "Property of the class itself.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "refinement_concept_model"
+        "simple": "refinement_concept_model"
       },
       "meta_type": "object",
       "documentation": "This class models the Refinement concept.\n",
@@ -206,7 +232,7 @@
     },
     {
       "name": {
-        "simple_name": "second_refinement_concept_model"
+        "simple": "second_refinement_concept_model"
       },
       "meta_type": "object",
       "documentation": "Second refinement model\n",
@@ -215,15 +241,17 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_10",
-          "type": "int",
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
           "documentation": "Property of the class itself.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "service"
+        "simple": "service"
       },
       "meta_type": "object",
       "documentation": "Type is a service.\n",
@@ -232,14 +260,16 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "simple_concept_model"
+        "simple": "simple_concept_model"
       },
       "meta_type": "object",
       "documentation": "This class models simple concept.\n",
@@ -248,15 +278,17 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_10",
-          "type": "int",
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
           "documentation": "Property that belongs to class.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "some_type"
+        "simple": "some_type"
       },
       "meta_type": "object",
       "documentation": "Type is non-generatable.\n",
@@ -279,146 +311,166 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "value"
+        "simple": "value"
       },
       "meta_type": "object",
       "documentation": "Type is a value.\n",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "BaseConcept2"
+        "simple": "BaseConcept2"
       },
       "meta_type": "concept",
       "documentation": "Base concept.\n",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::string",
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::string",
           "documentation": "Ensure we're testing header files inclusion.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "BaseConcept"
+        "simple": "BaseConcept"
       },
       "meta_type": "concept",
       "documentation": "This is the base concept.\n",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int",
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int",
           "documentation": "Property in the base concept.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "FirstRefinement"
+        "simple": "FirstRefinement"
       },
       "meta_type": "concept",
       "documentation": "First refinement\n",
       "refines": [
         {
-          "simple_name": "BaseConcept2"
+          "simple": "BaseConcept2"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int",
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int",
           "documentation": "First refinement property\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "MultipleRefinements"
+        "simple": "MultipleRefinements"
       },
       "meta_type": "concept",
       "documentation": "Multiple refinements concept\n",
       "refines": [
         {
-          "simple_name": "FirstRefinement"
+          "simple": "FirstRefinement"
         },
         {
-          "simple_name": "SecondRefinement"
+          "simple": "SecondRefinement"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_3",
-          "type": "int",
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "int",
           "documentation": "Multiple refinements property.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Refinement"
+        "simple": "Refinement"
       },
       "meta_type": "concept",
       "documentation": "This concept refines BaseConcept.\n",
       "refines": [
         {
-          "simple_name": "BaseConcept"
+          "simple": "BaseConcept"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int",
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int",
           "documentation": "Refinement concept property.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "SecondRefinement"
+        "simple": "SecondRefinement"
       },
       "meta_type": "concept",
       "documentation": "Second refinement\n",
       "refines": [
         {
-          "simple_name": "BaseConcept2"
+          "simple": "BaseConcept2"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_2",
-          "type": "int",
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "int",
           "documentation": "Second refinement property\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "SimpleConcept"
+        "simple": "SimpleConcept"
       },
       "meta_type": "concept",
       "documentation": "This is an example of a concept.\n",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int",
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int",
           "documentation": "This is a sample property in a concept.\n"
         },
         {
-          "simple_name": "prop_1",
-          "type": "value",
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "value",
           "documentation": "Prove that includes of types get picked up.\n"
         }
       ]

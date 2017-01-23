@@ -8,7 +8,7 @@
   "elements": [
     {
       "name": {
-        "simple_name": "IEnumerable"
+        "simple": "IEnumerable"
       },
       "meta_type": "object",
       "annotation": {
@@ -19,11 +19,11 @@
     },
     {
       "name": {
-        "simple_name": "ICollection"
+        "simple": "ICollection"
       },
       "parents": [
         {
-          "simple_name": "IEnumerable"
+          "simple": "IEnumerable"
         }
       ],
       "meta_type": "object",
@@ -35,11 +35,11 @@
     },
     {
       "name": {
-        "simple_name": "IList"
+        "simple": "IList"
       },
       "parents": [
         {
-          "simple_name": "ICollection"
+          "simple": "ICollection"
         }
       ],
       "meta_type": "object",
@@ -51,11 +51,11 @@
     },
     {
       "name": {
-        "simple_name": "List"
+        "simple": "List"
       },
       "parents": [
         {
-          "simple_name": "ICollection"
+          "simple": "ICollection"
         }
       ],
       "meta_type": "object",

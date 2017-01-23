@@ -12,14 +12,14 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_1",
+        "simple": "class_1",
         "internal_modules": "package_1"
       },
       "meta_type": "object"
     },
     {
       "name": {
-        "simple_name": "package_1"
+        "simple": "package_1"
       },
       "meta_type": "module"
     }

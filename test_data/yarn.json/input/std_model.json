@@ -12,282 +12,368 @@
   "elements": [
     {
       "name": {
-        "simple_name": "base"
+        "simple": "base"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::vector<std::string>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::vector<std::string>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_a"
+        "simple": "class_a"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop0",
-          "type": "std::string"
+          "name": {
+            "simple": "prop0"
+          },
+          "unparsed_type": "std::string"
         },
         {
-          "simple_name": "prop1",
-          "type": "std::string",
+          "name": {
+            "simple": "prop1"
+          },
+          "unparsed_type": "std::string",
           "documentation": "test inclusion duplicates\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_b"
+        "simple": "class_b"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::vector<std::string>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::vector<std::string>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::vector<class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::vector<class_a>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::vector<pkg1::class_c>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::vector<pkg1::class_c>"
         },
         {
-          "simple_name": "prop_3",
-          "type": "std::vector<unsigned int>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "std::vector<unsigned int>"
         },
         {
-          "simple_name": "prop_4",
-          "type": "std::vector<class_a>"
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "std::vector<class_a>"
         },
         {
-          "simple_name": "prop_5",
-          "type": "std::vector<std::vector<unsigned int>>"
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::vector<std::vector<unsigned int>>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_d"
+        "simple": "class_d"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::list<std::string>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::list<std::string>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::list<class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::list<class_a>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::list<pkg1::class_c>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::list<pkg1::class_c>"
         },
         {
-          "simple_name": "prop_3",
-          "type": "std::list<unsigned int>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "std::list<unsigned int>"
         },
         {
-          "simple_name": "prop_4",
-          "type": "std::list<class_a>"
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "std::list<class_a>"
         },
         {
-          "simple_name": "prop_5",
-          "type": "std::list<std::list<unsigned int>>"
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::list<std::list<unsigned int>>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_e"
+        "simple": "class_e"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::deque<std::string>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::deque<std::string>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::deque<class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::deque<class_a>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::deque<pkg1::class_c>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::deque<pkg1::class_c>"
         },
         {
-          "simple_name": "prop_3",
-          "type": "std::deque<unsigned int>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "std::deque<unsigned int>"
         },
         {
-          "simple_name": "prop_4",
-          "type": "std::deque<class_a>"
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "std::deque<class_a>"
         },
         {
-          "simple_name": "prop_5",
-          "type": "std::deque<std::deque<unsigned int>>"
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::deque<std::deque<unsigned int>>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_f"
+        "simple": "class_f"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::unordered_map<std::string,std::string>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::unordered_map<std::string,std::string>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::unordered_map<std::string,class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::unordered_map<std::string,class_a>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::unordered_map<class_a,pkg1::class_c>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::unordered_map<class_a,pkg1::class_c>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_g"
+        "simple": "class_g"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::unordered_map<class_a,std::vector<pkg1::class_c>>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::unordered_map<class_a,std::vector<pkg1::class_c>>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::unordered_map<pkg1::class_c,std::list<class_a>>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::unordered_map<pkg1::class_c,std::list<class_a>>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::unordered_map<std::string, class_a>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::unordered_map<std::string, class_a>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_h"
+        "simple": "class_h"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::unordered_set<class_a>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::unordered_set<class_a>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::unordered_set<pkg1::class_c>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::unordered_set<pkg1::class_c>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_j"
+        "simple": "class_j"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::pair<int,int>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::pair<int,int>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::pair<std::string,std::string>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::pair<std::string,std::string>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::vector<std::pair<std::string,int>>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::vector<std::pair<std::string,int>>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "derived"
+        "simple": "derived"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "base"
+          "simple": "base"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "std::list<pkg1::class_c>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::list<pkg1::class_c>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_c",
+        "simple": "class_c",
         "internal_modules": "pkg1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::vector<class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::vector<class_a>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "primitives"
+        "simple": "primitives"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::int8_t"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::int8_t"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::int16_t"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::int16_t"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::int32_t"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::int32_t"
         },
         {
-          "simple_name": "prop_3",
-          "type": "std::int64_t"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "std::int64_t"
         },
         {
-          "simple_name": "prop_4",
-          "type": "std::uint8_t"
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "std::uint8_t"
         },
         {
-          "simple_name": "prop_5",
-          "type": "std::uint16_t"
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::uint16_t"
         },
         {
-          "simple_name": "prop_6",
-          "type": "std::uint32_t"
+          "name": {
+            "simple": "prop_6"
+          },
+          "unparsed_type": "std::uint32_t"
         },
         {
-          "simple_name": "prop_7",
-          "type": "std::uint64_t"
+          "name": {
+            "simple": "prop_7"
+          },
+          "unparsed_type": "std::uint64_t"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "some_service"
+        "simple": "some_service"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -295,14 +381,16 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "std::shared_ptr<base>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::shared_ptr<base>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "pkg1"
+        "simple": "pkg1"
       },
       "meta_type": "module"
     }

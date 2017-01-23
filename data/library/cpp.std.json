@@ -8,7 +8,7 @@
   "elements": [
     {
       "name": {
-        "simple_name": "int8_t"
+        "simple": "int8_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -25,7 +25,7 @@
     },
     {
       "name": {
-        "simple_name": "int16_t"
+        "simple": "int16_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -41,7 +41,7 @@
     },
     {
       "name": {
-        "simple_name": "int32_t"
+        "simple": "int32_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -57,7 +57,7 @@
     },
     {
       "name": {
-        "simple_name": "int64_t"
+        "simple": "int64_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -73,7 +73,7 @@
     },
     {
       "name": {
-        "simple_name": "uint8_t"
+        "simple": "uint8_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -90,7 +90,7 @@
     },
     {
       "name": {
-        "simple_name": "uint16_t"
+        "simple": "uint16_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -106,7 +106,7 @@
     },
     {
       "name": {
-        "simple_name": "uint32_t"
+        "simple": "uint32_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -122,7 +122,7 @@
     },
     {
       "name": {
-        "simple_name": "uint64_t"
+        "simple": "uint64_t"
       },
       "meta_type": "primitive",
       "annotation": {
@@ -138,7 +138,7 @@
     },
     {
       "name": {
-        "simple_name": "string"
+        "simple": "string"
       },
       "meta_type": "object",
       "annotation": {
@@ -154,7 +154,7 @@
     },
     {
       "name": {
-        "simple_name": "vector"
+        "simple": "vector"
       },
       "meta_type": "object",
       "object_type": "sequence_container",
@@ -171,7 +171,7 @@
     },
     {
       "name": {
-        "simple_name": "deque"
+        "simple": "deque"
       },
       "meta_type": "object",
       "object_type": "sequence_container",
@@ -188,7 +188,7 @@
     },
     {
       "name": {
-        "simple_name": "array"
+        "simple": "array"
       },
       "meta_type": "object",
       "object_type": "sequence_container",
@@ -204,7 +204,7 @@
     },
     {
       "name": {
-        "simple_name": "list"
+        "simple": "list"
       },
       "meta_type": "object",
       "object_type": "sequence_container",
@@ -221,7 +221,7 @@
     },
     {
       "name": {
-        "simple_name": "forward_list"
+        "simple": "forward_list"
       },
       "meta_type": "object",
       "object_type": "sequence_container",
@@ -237,7 +237,7 @@
     },
     {
       "name": {
-        "simple_name": "set"
+        "simple": "set"
       },
       "meta_type": "object",
       "object_type": "associative_container",
@@ -254,7 +254,7 @@
     },
     {
       "name": {
-        "simple_name": "multiset"
+        "simple": "multiset"
       },
       "meta_type": "object",
       "object_type": "associative_container",
@@ -271,7 +271,7 @@
     },
     {
       "name": {
-        "simple_name": "unordered_set"
+        "simple": "unordered_set"
       },
       "meta_type": "object",
       "object_type": "associative_container",
@@ -288,7 +288,7 @@
     },
     {
       "name": {
-        "simple_name": "map"
+        "simple": "map"
       },
       "meta_type": "object",
       "object_type": "associative_container",
@@ -305,7 +305,7 @@
     },
     {
       "name": {
-        "simple_name": "multimap"
+        "simple": "multimap"
       },
       "meta_type": "object",
       "object_type": "associative_container",
@@ -322,7 +322,7 @@
     },
     {
       "name": {
-        "simple_name": "unordered_map"
+        "simple": "unordered_map"
       },
       "meta_type": "object",
       "object_type": "associative_container",
@@ -339,7 +339,7 @@
     },
     {
       "name": {
-        "simple_name": "pair"
+        "simple": "pair"
       },
       "meta_type": "object",
       "annotation": {
@@ -355,7 +355,7 @@
     },
     {
       "name": {
-        "simple_name": "shared_ptr"
+        "simple": "shared_ptr"
       },
       "meta_type": "object",
       "object_type": "smart_pointer",
@@ -372,7 +372,7 @@
     },
     {
       "name": {
-        "simple_name": "weak_ptr"
+        "simple": "weak_ptr"
       },
       "meta_type": "object",
       "object_type": "smart_pointer",
@@ -389,7 +389,7 @@
     },
     {
       "name": {
-        "simple_name": "unique_ptr"
+        "simple": "unique_ptr"
       },
       "meta_type": "object",
       "object_type": "smart_pointer",
@@ -406,7 +406,7 @@
     },
     {
       "name": {
-        "simple_name": "function"
+        "simple": "function"
       },
       "meta_type": "object",
       "annotation": {
@@ -419,7 +419,7 @@
     },
     {
       "name": {
-        "simple_name": "optional"
+        "simple": "optional"
       },
       "meta_type": "object",
       "annotation": {
@@ -434,7 +434,7 @@
     },
     {
       "name": {
-        "simple_name": "ostream"
+        "simple": "ostream"
       },
       "meta_type": "object",
       "annotation": {
@@ -447,7 +447,7 @@
     },
     {
       "name": {
-        "simple_name": "ostringstream"
+        "simple": "ostringstream"
       },
       "meta_type": "object",
       "annotation": {
@@ -458,7 +458,7 @@
     },
     {
       "name": {
-        "simple_name": "type_index"
+        "simple": "type_index"
       },
       "meta_type": "object",
       "annotation": {

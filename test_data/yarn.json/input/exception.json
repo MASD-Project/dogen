@@ -12,20 +12,20 @@
   "elements": [
     {
       "name": {
-        "simple_name": "pkg"
+        "simple": "pkg"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "my_error"
+        "simple": "my_error"
       },
       "meta_type": "exception",
       "documentation": "this is an exception\n"
     },
     {
       "name": {
-        "simple_name": "catastrophic_error",
+        "simple": "catastrophic_error",
         "internal_modules": "pkg"
       },
       "meta_type": "exception"

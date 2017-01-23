@@ -8,7 +8,7 @@
   "elements": [
     {
       "name": {
-        "simple_name": "shared_ptr"
+        "simple": "shared_ptr"
       },
       "meta_type": "object",
       "object_type": "smart_pointer",
@@ -26,7 +26,7 @@
     },
     {
       "name": {
-        "simple_name": "weak_ptr"
+        "simple": "weak_ptr"
       },
       "meta_type": "object",
       "object_type": "smart_pointer",
@@ -44,7 +44,7 @@
     },
     {
       "name": {
-        "simple_name": "scoped_ptr"
+        "simple": "scoped_ptr"
       },
       "meta_type": "object",
       "object_type": "smart_pointer",
@@ -62,7 +62,7 @@
     },
     {
       "name": {
-        "simple_name": "optional"
+        "simple": "optional"
       },
       "meta_type": "object",
       "annotation": {
@@ -80,7 +80,7 @@
     },
     {
       "name": {
-        "simple_name": "variant"
+        "simple": "variant"
       },
       "meta_type": "object",
       "annotation": {
@@ -97,7 +97,7 @@
     },
     {
       "name": {
-        "simple_name": "io_service",
+        "simple": "io_service",
         "internal_modules": "asio"
       },
       "meta_type": "object",
@@ -107,7 +107,7 @@
     },
     {
       "name": {
-        "simple_name": "socket",
+        "simple": "socket",
         "internal_modules": "asio::ip::tcp"
       },
       "meta_type": "object",
@@ -117,7 +117,7 @@
     },
     {
       "name": {
-        "simple_name": "acceptor",
+        "simple": "acceptor",
         "internal_modules": "asio::ip::tcp"
       },
       "meta_type": "object",
@@ -127,7 +127,7 @@
     },
     {
       "name": {
-        "simple_name": "path",
+        "simple": "path",
         "internal_modules": "filesystem"
       },
       "meta_type": "object",
@@ -145,7 +145,7 @@
     },
     {
       "name": {
-        "simple_name": "date",
+        "simple": "date",
         "internal_modules": "gregorian"
       },
       "meta_type": "object",
@@ -163,7 +163,7 @@
     },
     {
       "name": {
-        "simple_name": "ptime",
+        "simple": "ptime",
         "internal_modules": "posix_time"
       },
       "meta_type": "object",
@@ -181,7 +181,7 @@
     },
     {
       "name": {
-        "simple_name": "time_duration",
+        "simple": "time_duration",
         "internal_modules": "posix_time"
       },
       "meta_type": "object",
@@ -200,7 +200,7 @@
     },
     {
       "name": {
-        "simple_name": "ptree",
+        "simple": "ptree",
         "internal_modules": "property_tree"
       },
       "meta_type": "object",

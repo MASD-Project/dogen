@@ -14,125 +14,159 @@
   "elements": [
     {
       "name": {
-        "simple_name": "AllObjectCollections"
+        "simple": "AllObjectCollections"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "System.Collections.ArrayList"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "System.Collections.ArrayList"
         },
         {
-          "simple_name": "Prop1",
-          "type": "System.Collections.IEnumerable"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "System.Collections.IEnumerable"
         },
         {
-          "simple_name": "Prop2",
-          "type": "System.Collections.ICollection"
+          "name": {
+            "simple": "Prop2"
+          },
+          "unparsed_type": "System.Collections.ICollection"
         },
         {
-          "simple_name": "Prop3",
-          "type": "System.Collections.IList"
+          "name": {
+            "simple": "Prop3"
+          },
+          "unparsed_type": "System.Collections.IList"
         },
         {
-          "simple_name": "Prop4",
-          "type": "System.Collections.Hashtable"
+          "name": {
+            "simple": "Prop4"
+          },
+          "unparsed_type": "System.Collections.Hashtable"
         },
         {
-          "simple_name": "Prop5",
-          "type": "System.Collections.IDictionary"
+          "name": {
+            "simple": "Prop5"
+          },
+          "unparsed_type": "System.Collections.IDictionary"
         },
         {
-          "simple_name": "Prop6",
-          "type": "System.Collections.Specialized.HybridDictionary"
+          "name": {
+            "simple": "Prop6"
+          },
+          "unparsed_type": "System.Collections.Specialized.HybridDictionary"
         },
         {
-          "simple_name": "Prop7",
-          "type": "System.Collections.Specialized.NameValueCollection"
+          "name": {
+            "simple": "Prop7"
+          },
+          "unparsed_type": "System.Collections.Specialized.NameValueCollection"
         },
         {
-          "simple_name": "Prop8",
-          "type": "System.Collections.BitArray"
+          "name": {
+            "simple": "Prop8"
+          },
+          "unparsed_type": "System.Collections.BitArray"
         },
         {
-          "simple_name": "Prop9",
-          "type": "System.Collections.Queue"
+          "name": {
+            "simple": "Prop9"
+          },
+          "unparsed_type": "System.Collections.Queue"
         },
         {
-          "simple_name": "Prop10",
-          "type": "System.Collections.Stack"
+          "name": {
+            "simple": "Prop10"
+          },
+          "unparsed_type": "System.Collections.Stack"
         },
         {
-          "simple_name": "Prop11",
-          "type": "System.Collections.SortedList"
+          "name": {
+            "simple": "Prop11"
+          },
+          "unparsed_type": "System.Collections.SortedList"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Association"
+        "simple": "Association"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int",
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int",
           "documentation": "Simple builtin association.\n"
         },
         {
-          "simple_name": "Prop1",
-          "type": "NoProperties",
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "NoProperties",
           "documentation": "Association with a class that has no properties.\n"
         },
         {
-          "simple_name": "Prop2",
-          "type": "ColourTypes"
+          "name": {
+            "simple": "Prop2"
+          },
+          "unparsed_type": "ColourTypes"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Base"
+        "simple": "Base"
       },
       "meta_type": "object"
     },
     {
       "name": {
-        "simple_name": "ChildOfAChild1"
+        "simple": "ChildOfAChild1"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "ThirdChildWithMembers"
+          "simple": "ThirdChildWithMembers"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop2",
-          "type": "int"
+          "name": {
+            "simple": "Prop2"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ChildOfAChild2"
+        "simple": "ChildOfAChild2"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "ThirdChildWithMembers"
+          "simple": "ThirdChildWithMembers"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop2",
-          "type": "int"
+          "name": {
+            "simple": "Prop2"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ChildViaSettings"
+        "simple": "ChildViaSettings"
       },
       "meta_type": "object",
       "annotation": {
@@ -140,76 +174,86 @@
       },
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ComplexBuiltins"
+        "simple": "ComplexBuiltins"
       },
       "meta_type": "object",
       "documentation": "This is a class made up of just complex builtin types.\n\nThis is a remark.\n",
       "attributes": [
         {
-          "simple_name": "ObjectProperty",
-          "type": "object"
+          "name": {
+            "simple": "ObjectProperty"
+          },
+          "unparsed_type": "object"
         },
         {
-          "simple_name": "StringProperty",
-          "type": "string"
+          "name": {
+            "simple": "StringProperty"
+          },
+          "unparsed_type": "string"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Descendant1"
+        "simple": "Descendant1"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "Base"
+          "simple": "Base"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Descendant2"
+        "simple": "Descendant2"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "Base"
+          "simple": "Base"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Descendant3"
+        "simple": "Descendant3"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "Descendant1"
+          "simple": "Descendant1"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "bool"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "bool"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ImmutableFour"
+        "simple": "ImmutableFour"
       },
       "meta_type": "object",
       "documentation": "Immutable class with non-immutable and immutable elements as properties.\n",
@@ -218,26 +262,34 @@
       ],
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "bool"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "bool"
         },
         {
-          "simple_name": "Prop1",
-          "type": "string"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "string"
         },
         {
-          "simple_name": "Prop2",
-          "type": "ComplexBuiltins"
+          "name": {
+            "simple": "Prop2"
+          },
+          "unparsed_type": "ComplexBuiltins"
         },
         {
-          "simple_name": "Prop3",
-          "type": "ImmutableOnePrimitive"
+          "name": {
+            "simple": "Prop3"
+          },
+          "unparsed_type": "ImmutableOnePrimitive"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ImmutableOnePrimitive"
+        "simple": "ImmutableOnePrimitive"
       },
       "meta_type": "object",
       "documentation": "Immutable class with a primitive property.\n",
@@ -246,14 +298,16 @@
       ],
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "bool"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "bool"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ImmutableTwo"
+        "simple": "ImmutableTwo"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -261,18 +315,22 @@
       ],
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "bool"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "bool"
         },
         {
-          "simple_name": "Prop1",
-          "type": "string"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "string"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ImmutableZero"
+        "simple": "ImmutableZero"
       },
       "meta_type": "object",
       "documentation": "Immutable class with no properties.\n",
@@ -282,14 +340,14 @@
     },
     {
       "name": {
-        "simple_name": "NoProperties"
+        "simple": "NoProperties"
       },
       "meta_type": "object",
       "documentation": "This class tests the use case of no properties\n"
     },
     {
       "name": {
-        "simple_name": "NonFinalOrphan"
+        "simple": "NonFinalOrphan"
       },
       "meta_type": "object",
       "annotation": {
@@ -297,14 +355,16 @@
       },
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "NonSealedLeaf"
+        "simple": "NonSealedLeaf"
       },
       "meta_type": "object",
       "annotation": {
@@ -312,138 +372,160 @@
       },
       "parents": [
         {
-          "simple_name": "Descendant1"
+          "simple": "Descendant1"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "OneProperty"
+        "simple": "OneProperty"
       },
       "meta_type": "object",
       "documentation": "This class tests the use case of one property.\n",
       "attributes": [
         {
-          "simple_name": "Property",
-          "type": "int",
+          "name": {
+            "simple": "Property"
+          },
+          "unparsed_type": "int",
           "documentation": "Just the one property.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "AssociationInPackage",
+        "simple": "AssociationInPackage",
         "internal_modules": "Package1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "PrimitiveBuiltins"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "PrimitiveBuiltins"
         },
         {
-          "simple_name": "Prop1",
-          "type": "ComplexBuiltins"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "ComplexBuiltins"
         },
         {
-          "simple_name": "Prop2",
-          "type": "Package1.Class1"
+          "name": {
+            "simple": "Prop2"
+          },
+          "unparsed_type": "Package1.Class1"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Class1",
+        "simple": "Class1",
         "internal_modules": "Package1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Class2",
+        "simple": "Class2",
         "internal_modules": "Package1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Class3",
+        "simple": "Class3",
         "internal_modules": "Package1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Class4",
+        "simple": "Class4",
         "internal_modules": "Package1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Class5",
+        "simple": "Class5",
         "internal_modules": "Package1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Child",
+        "simple": "Child",
         "internal_modules": "Package2"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "Parent",
+          "simple": "Parent",
           "internal_modules": "Package2"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ChildViaSettings",
+        "simple": "ChildViaSettings",
         "internal_modules": "Package2"
       },
       "meta_type": "object",
@@ -452,59 +534,67 @@
       },
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Parent",
+        "simple": "Parent",
         "internal_modules": "Package2"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Parent",
+        "simple": "Parent",
         "internal_modules": "Package3"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Child",
+        "simple": "Child",
         "internal_modules": "Package4"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "Parent",
+          "simple": "Parent",
           "internal_modules": "Package3"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ChildViaSettings",
+        "simple": "ChildViaSettings",
         "internal_modules": "Package4"
       },
       "meta_type": "object",
@@ -513,32 +603,36 @@
       },
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Child",
+        "simple": "Child",
         "internal_modules": "Package5"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "ParentOutside"
+          "simple": "ParentOutside"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ChildViaSettings",
+        "simple": "ChildViaSettings",
         "internal_modules": "Package5"
       },
       "meta_type": "object",
@@ -547,241 +641,301 @@
       },
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ParentOutside"
+        "simple": "ParentOutside"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ParentWithMembers"
+        "simple": "ParentWithMembers"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "Prop0",
-          "type": "int"
+          "name": {
+            "simple": "Prop0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "PrimitiveBuiltins"
+        "simple": "PrimitiveBuiltins"
       },
       "meta_type": "object",
       "documentation": "This is a class made up of just primitive builtin types.\n\nThis is a remark.\n",
       "attributes": [
         {
-          "simple_name": "ByteProperty",
-          "type": "byte",
+          "name": {
+            "simple": "ByteProperty"
+          },
+          "unparsed_type": "byte",
           "documentation": "A comment at property level.\n"
         },
         {
-          "simple_name": "ShortByteProperty",
-          "type": "sbyte",
+          "name": {
+            "simple": "ShortByteProperty"
+          },
+          "unparsed_type": "sbyte",
           "documentation": "A comment at property level.\n\nThis is a remark.\n"
         },
         {
-          "simple_name": "IntProperty",
-          "type": "int"
+          "name": {
+            "simple": "IntProperty"
+          },
+          "unparsed_type": "int"
         },
         {
-          "simple_name": "UIntProperty",
-          "type": "uint"
+          "name": {
+            "simple": "UIntProperty"
+          },
+          "unparsed_type": "uint"
         },
         {
-          "simple_name": "ShortProperty",
-          "type": "short"
+          "name": {
+            "simple": "ShortProperty"
+          },
+          "unparsed_type": "short"
         },
         {
-          "simple_name": "UShortProperty",
-          "type": "ushort"
+          "name": {
+            "simple": "UShortProperty"
+          },
+          "unparsed_type": "ushort"
         },
         {
-          "simple_name": "LongProperty",
-          "type": "long"
+          "name": {
+            "simple": "LongProperty"
+          },
+          "unparsed_type": "long"
         },
         {
-          "simple_name": "ULongProperty",
-          "type": "ulong"
+          "name": {
+            "simple": "ULongProperty"
+          },
+          "unparsed_type": "ulong"
         },
         {
-          "simple_name": "FloatPropertyOne",
-          "type": "float"
+          "name": {
+            "simple": "FloatPropertyOne"
+          },
+          "unparsed_type": "float"
         },
         {
-          "simple_name": "FloatPropertyTwo",
-          "type": "float",
+          "name": {
+            "simple": "FloatPropertyTwo"
+          },
+          "unparsed_type": "float",
           "documentation": "Second float to ensure helpers are generated correctly.\n"
         },
         {
-          "simple_name": "DoublePropertyOne",
-          "type": "double"
+          "name": {
+            "simple": "DoublePropertyOne"
+          },
+          "unparsed_type": "double"
         },
         {
-          "simple_name": "DoublePropertyTwo",
-          "type": "double",
+          "name": {
+            "simple": "DoublePropertyTwo"
+          },
+          "unparsed_type": "double",
           "documentation": "Second double to ensure helpers are generated correctly.\n"
         },
         {
-          "simple_name": "CharProperty",
-          "type": "char"
+          "name": {
+            "simple": "CharProperty"
+          },
+          "unparsed_type": "char"
         },
         {
-          "simple_name": "BoolProperty",
-          "type": "bool"
+          "name": {
+            "simple": "BoolProperty"
+          },
+          "unparsed_type": "bool"
         },
         {
-          "simple_name": "DecimalProperty",
-          "type": "decimal"
+          "name": {
+            "simple": "DecimalProperty"
+          },
+          "unparsed_type": "decimal"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "SecondChildWithoutMembers"
+        "simple": "SecondChildWithoutMembers"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "ParentWithMembers"
+          "simple": "ParentWithMembers"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ThirdChildWithMembers"
+        "simple": "ThirdChildWithMembers"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "ParentWithMembers"
+          "simple": "ParentWithMembers"
         }
       ],
       "attributes": [
         {
-          "simple_name": "Prop1",
-          "type": "int"
+          "name": {
+            "simple": "Prop1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Package1"
+        "simple": "Package1"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "Package2"
+        "simple": "Package2"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "Package3"
+        "simple": "Package3"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "Package4"
+        "simple": "Package4"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "Package5"
+        "simple": "Package5"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "BookTypes"
+        "simple": "BookTypes"
       },
       "meta_type": "enumeration",
       "documentation": "this is a brief comment\n\nthis is a long comment\n",
       "enumerators": [
         {
-          "simple_name": "Great"
+          "name": {
+            "simple": "Great"
+          }
         },
         {
-          "simple_name": "NotSoGreat"
+          "name": {
+            "simple": "NotSoGreat"
+          }
         },
         {
-          "simple_name": "Bad"
+          "name": {
+            "simple": "Bad"
+          }
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ColourTypes"
+        "simple": "ColourTypes"
       },
       "meta_type": "enumeration",
       "enumerators": [
         {
-          "simple_name": "Red",
+          "name": {
+            "simple": "Red"
+          },
           "documentation": "this is colour red\n"
         },
         {
-          "simple_name": "Blue",
+          "name": {
+            "simple": "Blue"
+          },
           "documentation": "this is blue\n"
         },
         {
-          "simple_name": "Green"
+          "name": {
+            "simple": "Green"
+          }
         },
         {
-          "simple_name": "Gray",
+          "name": {
+            "simple": "Gray"
+          },
           "documentation": "another comment\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "ShapeTypes",
+        "simple": "ShapeTypes",
         "internal_modules": "Package1"
       },
       "meta_type": "enumeration",
       "enumerators": [
         {
-          "simple_name": "Triangle",
+          "name": {
+            "simple": "Triangle"
+          },
           "documentation": "some comment\n"
         },
         {
-          "simple_name": "Square",
+          "name": {
+            "simple": "Square"
+          },
           "documentation": "other comment\n"
         },
         {
-          "simple_name": "Rectangle"
+          "name": {
+            "simple": "Rectangle"
+          }
         },
         {
-          "simple_name": "Cube",
+          "name": {
+            "simple": "Cube"
+          },
           "documentation": "some comment\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "MyException"
+        "simple": "MyException"
       },
       "meta_type": "exception",
       "documentation": "this is an exception\n"
     },
     {
       "name": {
-        "simple_name": "CatastrophicException",
+        "simple": "CatastrophicException",
         "internal_modules": "Package1"
       },
       "meta_type": "exception"

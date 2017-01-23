@@ -8,21 +8,21 @@
   "elements": [
     {
       "name": {
-        "simple_name": "ModelValue"
+        "simple": "ModelValue"
       },
       "meta_type": "object",
       "in_global_module": true
     },
     {
       "name": {
-        "simple_name": "Collection"
+        "simple": "Collection"
       },
       "meta_type": "object",
       "in_global_module": true
     },
     {
       "name": {
-        "simple_name": "int"
+        "simple": "int"
       },
       "meta_type": "primitive",
       "is_default_enumeration_type": true,

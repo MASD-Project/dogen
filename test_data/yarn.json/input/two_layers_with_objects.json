@@ -12,39 +12,43 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_2",
+        "simple": "class_2",
         "internal_modules": "Package_2"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_1",
+        "simple": "class_1",
         "internal_modules": "package_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "Package_2"
+        "simple": "Package_2"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "package_1"
+        "simple": "package_1"
       },
       "meta_type": "module"
     }

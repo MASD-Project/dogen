@@ -13,7 +13,7 @@
   "elements": [
     {
       "name": {
-        "simple_name": "base"
+        "simple": "base"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -22,35 +22,37 @@
     },
     {
       "name": {
-        "simple_name": "child_of_a_child1"
+        "simple": "child_of_a_child1"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "third_child_with_members"
+          "simple": "third_child_with_members"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_of_a_child2"
+        "simple": "child_of_a_child2"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "third_child_with_members"
+          "simple": "third_child_with_members"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_2",
-          "type": "unsigned int"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "unsigned int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_via_settings"
+        "simple": "child_via_settings"
       },
       "meta_type": "object",
       "annotation": {
@@ -58,132 +60,144 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_with_members"
+        "simple": "child_with_members"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent_without_members"
+          "simple": "parent_without_members"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "unsigned int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_without_members"
+        "simple": "child_without_members"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent_without_members"
+          "simple": "parent_without_members"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "descendant1"
+        "simple": "descendant1"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "base"
+          "simple": "base"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "descendant2"
+        "simple": "descendant2"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "base"
+          "simple": "base"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "bool"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "descendant3"
+        "simple": "descendant3"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "descendant1"
+          "simple": "descendant1"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "bool"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "move_ctor_base"
+        "simple": "move_ctor_base"
       },
       "meta_type": "object",
       "documentation": "Base class for scenario that tests code generated move contructors.\n",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::filesystem::path",
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::filesystem::path",
           "documentation": "Force manual move constructor.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "move_ctor_descendant"
+        "simple": "move_ctor_descendant"
       },
       "meta_type": "object",
       "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
       "parents": [
         {
-          "simple_name": "move_ctor_base"
+          "simple": "move_ctor_base"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "boost::filesystem::path",
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "boost::filesystem::path",
           "documentation": "Force manual move constructor.\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "move_ctor_empty_descendant"
+        "simple": "move_ctor_empty_descendant"
       },
       "meta_type": "object",
       "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
       "parents": [
         {
-          "simple_name": "move_ctor_base"
+          "simple": "move_ctor_base"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "non_final_leaf"
+        "simple": "non_final_leaf"
       },
       "meta_type": "object",
       "annotation": {
@@ -191,19 +205,21 @@
       },
       "parents": [
         {
-          "simple_name": "descendant1"
+          "simple": "descendant1"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "non_final_orphan"
+        "simple": "non_final_orphan"
       },
       "meta_type": "object",
       "annotation": {
@@ -211,63 +227,71 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "parent_outside"
+        "simple": "parent_outside"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "parent_with_members"
+        "simple": "parent_with_members"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "parent_without_members"
+        "simple": "parent_without_members"
       },
       "meta_type": "object"
     },
     {
       "name": {
-        "simple_name": "child",
+        "simple": "child",
         "internal_modules": "pkg1"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent",
+          "simple": "parent",
           "internal_modules": "pkg1"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_via_settings",
+        "simple": "child_via_settings",
         "internal_modules": "pkg1"
       },
       "meta_type": "object",
@@ -276,59 +300,67 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "parent",
+        "simple": "parent",
         "internal_modules": "pkg1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "unsigned int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "parent",
+        "simple": "parent",
         "internal_modules": "pkg2"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child",
+        "simple": "child",
         "internal_modules": "pkg3"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent",
+          "simple": "parent",
           "internal_modules": "pkg2"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_via_settings",
+        "simple": "child_via_settings",
         "internal_modules": "pkg3"
       },
       "meta_type": "object",
@@ -337,32 +369,36 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child",
+        "simple": "child",
         "internal_modules": "pkg4"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent_outside"
+          "simple": "parent_outside"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "child_via_settings",
+        "simple": "child_via_settings",
         "internal_modules": "pkg4"
       },
       "meta_type": "object",
@@ -371,25 +407,27 @@
       },
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "second_child_without_members"
+        "simple": "second_child_without_members"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent_with_members"
+          "simple": "parent_with_members"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "service"
+        "simple": "service"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -398,7 +436,7 @@
     },
     {
       "name": {
-        "simple_name": "service_interface"
+        "simple": "service_interface"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -407,42 +445,44 @@
     },
     {
       "name": {
-        "simple_name": "third_child_with_members"
+        "simple": "third_child_with_members"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "parent_with_members"
+          "simple": "parent_with_members"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "unsigned int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "unsigned int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "pkg1"
+        "simple": "pkg1"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "pkg2"
+        "simple": "pkg2"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "pkg3"
+        "simple": "pkg3"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "pkg4"
+        "simple": "pkg4"
       },
       "meta_type": "module"
     }

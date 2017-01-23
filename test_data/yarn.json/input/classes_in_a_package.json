@@ -12,72 +12,82 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_1",
+        "simple": "class_1",
         "internal_modules": "package_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_2",
+        "simple": "class_2",
         "internal_modules": "package_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_3",
+        "simple": "class_3",
         "internal_modules": "package_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_4",
+        "simple": "class_4",
         "internal_modules": "package_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_5",
+        "simple": "class_5",
         "internal_modules": "package_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "package_1"
+        "simple": "package_1"
       },
       "meta_type": "module"
     }

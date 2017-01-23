@@ -4,7 +4,7 @@
   "elements": [
     {
       "name": {
-        "simple_name": "package_1"
+        "simple": "package_1"
       },
       "meta_type": "module"
     }

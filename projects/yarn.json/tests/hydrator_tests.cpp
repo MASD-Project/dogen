@@ -72,7 +72,7 @@ const std::string trivial_model(R"({
     "elements" : [
         {
             "name" : {
-                "simple_name" : "a_type"
+                "simple" : "a_type"
             },
             "meta_type" : "object",
             "documentation" : "a_doc"
@@ -86,7 +86,7 @@ const std::string no_documentation_model(R"({
     "elements" : [
         {
             "name" : {
-                "simple_name" : "a_type"
+                "simple" : "a_type"
             },
             "meta_type" : "object"
         }
@@ -98,7 +98,7 @@ const std::string no_name_model(R"({
     "elements" : [
         {
             "name" : {
-                "simple_name" : "a_type"
+                "simple" : "a_type"
             },
             "meta_type" : "object"
         }
@@ -132,7 +132,7 @@ const std::string internal_modules_model(R"({
     "elements" : [
         {
             "name" : {
-                "simple_name" : "a_type",
+                "simple" : "a_type",
                 "internal_modules" : "module_1::module_2::module_3"
             },
             "meta_type" : "object"

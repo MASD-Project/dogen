@@ -12,13 +12,15 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_1"
+        "simple": "class_1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "an_attribute",
-          "type": "int"
+          "name": {
+            "simple": "an_attribute"
+          },
+          "unparsed_type": "int"
         }
       ]
     }

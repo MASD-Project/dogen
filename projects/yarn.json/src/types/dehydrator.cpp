@@ -58,7 +58,7 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
 void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
     formatters::utility_formatter uf(s);
     s << " { ";
-    uf.insert_quoted("simple_name");
+    uf.insert_quoted("simple");
     s << " : ";
     uf.insert_quoted(n.simple());
 
@@ -168,13 +168,14 @@ void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
             s << comma_space;
 
         s << " { ";
-        uf.insert_quoted("simple_name");
+        uf.insert_quoted("name");
+        s << " : { ";
+        uf.insert_quoted("simple");
         s << " : ";
         uf.insert_quoted(a.name().simple());
+        s << " } " << comma_space;
 
-        s << comma_space;
-
-        uf.insert_quoted("type");
+        uf.insert_quoted("unparsed_type");
         s << " : ";
         uf.insert_quoted(a.unparsed_type());
 
@@ -315,9 +316,12 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
                 s << comma_space;
 
             s << " { ";
-            uf.insert_quoted("simple_name");
+            uf.insert_quoted("name");
+            s << " : { ";
+            uf.insert_quoted("simple");
             s << " : ";
             uf.insert_quoted(en.name().simple());
+            s << " }";
 
             if (!en.documentation().empty()) {
                 s << comma_space;

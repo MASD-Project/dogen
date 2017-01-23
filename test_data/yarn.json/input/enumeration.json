@@ -12,91 +12,119 @@
   "elements": [
     {
       "name": {
-        "simple_name": "a_class"
+        "simple": "a_class"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "colour_type",
-          "type": "colour_types"
+          "name": {
+            "simple": "colour_type"
+          },
+          "unparsed_type": "colour_types"
         },
         {
-          "simple_name": "book_type",
-          "type": "book_types"
+          "name": {
+            "simple": "book_type"
+          },
+          "unparsed_type": "book_types"
         },
         {
-          "simple_name": "shape_type",
-          "type": "pkg1::shape_types"
+          "name": {
+            "simple": "shape_type"
+          },
+          "unparsed_type": "pkg1::shape_types"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "pkg1"
+        "simple": "pkg1"
       },
       "meta_type": "module"
     },
     {
       "name": {
-        "simple_name": "book_types"
+        "simple": "book_types"
       },
       "meta_type": "enumeration",
       "documentation": "this is a brief comment\n\nthis is a long comment\n",
       "enumerators": [
         {
-          "simple_name": "great"
+          "name": {
+            "simple": "great"
+          }
         },
         {
-          "simple_name": "not_so_great"
+          "name": {
+            "simple": "not_so_great"
+          }
         },
         {
-          "simple_name": "bad"
+          "name": {
+            "simple": "bad"
+          }
         }
       ]
     },
     {
       "name": {
-        "simple_name": "colour_types"
+        "simple": "colour_types"
       },
       "meta_type": "enumeration",
       "enumerators": [
         {
-          "simple_name": "red",
+          "name": {
+            "simple": "red"
+          },
           "documentation": "this is colour red\n"
         },
         {
-          "simple_name": "blue",
+          "name": {
+            "simple": "blue"
+          },
           "documentation": "this is blue\n"
         },
         {
-          "simple_name": "green"
+          "name": {
+            "simple": "green"
+          }
         },
         {
-          "simple_name": "gray",
+          "name": {
+            "simple": "gray"
+          },
           "documentation": "another comment\n"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "shape_types",
+        "simple": "shape_types",
         "internal_modules": "pkg1"
       },
       "meta_type": "enumeration",
       "enumerators": [
         {
-          "simple_name": "triangle",
+          "name": {
+            "simple": "triangle"
+          },
           "documentation": "some comment\n"
         },
         {
-          "simple_name": "square",
+          "name": {
+            "simple": "square"
+          },
           "documentation": "other comment\n"
         },
         {
-          "simple_name": "rectangle"
+          "name": {
+            "simple": "rectangle"
+          }
         },
         {
-          "simple_name": "cube",
+          "name": {
+            "simple": "cube"
+          },
           "documentation": "some comment\n"
         }
       ]

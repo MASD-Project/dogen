@@ -100,7 +100,7 @@
     "scope": "root_module",
     "default_value": "language_agnostic"
   },
-    {
+  {
     "name": {
       "simple": "output_language",
       "qualified": "yarn.output_language"

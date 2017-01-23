@@ -67,8 +67,8 @@ const std::string meta_type_enumeration_value("enumeration");
 const std::string meta_type_exception_value("exception");
 const std::string meta_type_concept_value("concept");
 
-const std::string type_key("type");
-const std::string simple_name_key("simple_name");
+const std::string unparsed_type_key("unparsed_type");
+const std::string simple_key("simple");
 const std::string external_modules_key("external_modules");
 const std::string internal_modules_key("internal_modules");
 const std::string annotations_key("annotation");
@@ -151,7 +151,7 @@ read_stereotypes(const boost::property_tree::ptree& pt) const {
 
 name hydrator::read_name(const boost::property_tree::ptree& pt) const {
     yarn::name_builder b;
-    const auto sn(pt.get<std::string>(simple_name_key));
+    const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
 
     const auto im(pt.get<std::string>(internal_modules_key, empty));
@@ -176,7 +176,7 @@ name hydrator::read_name(const boost::property_tree::ptree& pt,
         b.external_modules(model_name.location().external_modules());
     }
 
-    const auto sn(pt.get<std::string>(simple_name_key));
+    const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
 
     const auto im(pt.get<std::string>(internal_modules_key, empty));
@@ -215,7 +215,12 @@ read_enumerators(const boost::property_tree::ptree& pt) const {
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         enumerator e;
-        e.name().simple(apt.get<std::string>(simple_name_key));
+        const auto j(apt.find(name_key));
+        if (j == apt.not_found()) {
+            BOOST_LOG_SEV(lg, error) << missing_name;
+            BOOST_THROW_EXCEPTION(hydration_error(missing_name));
+        }
+        e.name(read_name(j->second));
         e.documentation(read_documentation(apt));
         r.push_back(e);
     }
@@ -229,8 +234,15 @@ read_attributes(const boost::property_tree::ptree& pt) const {
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         attribute a;
-        a.name().simple(apt.get<std::string>(simple_name_key));
-        a.unparsed_type(apt.get<std::string>(type_key));
+
+        const auto j(apt.find(name_key));
+        if (j == apt.not_found()) {
+            BOOST_LOG_SEV(lg, error) << missing_name;
+            BOOST_THROW_EXCEPTION(hydration_error(missing_name));
+        }
+        a.name(read_name(j->second));
+
+        a.unparsed_type(apt.get<std::string>(unparsed_type_key));
         a.documentation(read_documentation(apt));
         r.push_back(a);
     }

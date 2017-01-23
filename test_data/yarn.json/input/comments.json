@@ -13,37 +13,43 @@
   "elements": [
     {
       "name": {
-        "simple_name": "multi_line"
+        "simple": "multi_line"
       },
       "meta_type": "object",
       "documentation": "first line\n\nsecond line\nthird line with \"quote\"\n"
     },
     {
       "name": {
-        "simple_name": "one_line"
+        "simple": "one_line"
       },
       "meta_type": "object",
       "documentation": "this is the brief comment\n",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int",
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int",
           "documentation": "another brief comment\n"
         },
         {
-          "simple_name": "prop_1",
-          "type": "int",
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int",
           "documentation": "the brief comment\n\na second line\n"
         },
         {
-          "simple_name": "prop_2",
-          "type": "int"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "package"
+        "simple": "package"
       },
       "meta_type": "module",
       "documentation": "package\n",
@@ -53,7 +59,7 @@
     },
     {
       "name": {
-        "simple_name": "package2",
+        "simple": "package2",
         "internal_modules": "package"
       },
       "meta_type": "module",

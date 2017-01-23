@@ -12,61 +12,87 @@
   "elements": [
     {
       "name": {
-        "simple_name": "a_class"
+        "simple": "a_class"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "bool_property",
-          "type": "bool"
+          "name": {
+            "simple": "bool_property"
+          },
+          "unparsed_type": "bool"
         },
         {
-          "simple_name": "char_property",
-          "type": "char"
+          "name": {
+            "simple": "char_property"
+          },
+          "unparsed_type": "char"
         },
         {
-          "simple_name": "uchar_property",
-          "type": "unsigned char"
+          "name": {
+            "simple": "uchar_property"
+          },
+          "unparsed_type": "unsigned char"
         },
         {
-          "simple_name": "int_property",
-          "type": "int"
+          "name": {
+            "simple": "int_property"
+          },
+          "unparsed_type": "int"
         },
         {
-          "simple_name": "uint_property",
-          "type": "unsigned int"
+          "name": {
+            "simple": "uint_property"
+          },
+          "unparsed_type": "unsigned int"
         },
         {
-          "simple_name": "long_property",
-          "type": "long"
+          "name": {
+            "simple": "long_property"
+          },
+          "unparsed_type": "long"
         },
         {
-          "simple_name": "ulong_property",
-          "type": "unsigned long"
+          "name": {
+            "simple": "ulong_property"
+          },
+          "unparsed_type": "unsigned long"
         },
         {
-          "simple_name": "long_long_property",
-          "type": "long long"
+          "name": {
+            "simple": "long_long_property"
+          },
+          "unparsed_type": "long long"
         },
         {
-          "simple_name": "ulong_long_property",
-          "type": "unsigned long long"
+          "name": {
+            "simple": "ulong_long_property"
+          },
+          "unparsed_type": "unsigned long long"
         },
         {
-          "simple_name": "short_property",
-          "type": "short"
+          "name": {
+            "simple": "short_property"
+          },
+          "unparsed_type": "short"
         },
         {
-          "simple_name": "ushort_property",
-          "type": "unsigned short"
+          "name": {
+            "simple": "ushort_property"
+          },
+          "unparsed_type": "unsigned short"
         },
         {
-          "simple_name": "double_property",
-          "type": "double"
+          "name": {
+            "simple": "double_property"
+          },
+          "unparsed_type": "double"
         },
         {
-          "simple_name": "float_property",
-          "type": "float"
+          "name": {
+            "simple": "float_property"
+          },
+          "unparsed_type": "float"
         }
       ]
     }

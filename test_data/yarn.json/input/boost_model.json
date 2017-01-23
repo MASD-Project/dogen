@@ -12,209 +12,267 @@
   "elements": [
     {
       "name": {
-        "simple_name": "class_a"
+        "simple": "class_a"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "unsigned int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_b"
+        "simple": "class_b"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::shared_ptr<class_a>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::shared_ptr<class_a>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::vector<boost::shared_ptr<class_a>>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::vector<boost::shared_ptr<class_a>>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::unordered_map<int,boost::shared_ptr<class_a>>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::unordered_map<int,boost::shared_ptr<class_a>>"
         },
         {
-          "simple_name": "prop_3",
-          "type": "boost::shared_ptr<pkg1::class_c>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "boost::shared_ptr<pkg1::class_c>"
         },
         {
-          "simple_name": "prop_4",
-          "type": "boost::shared_ptr<class_base>"
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "boost::shared_ptr<class_base>"
         },
         {
-          "simple_name": "prop_5",
-          "type": "std::vector<boost::shared_ptr<class_base>>"
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::vector<boost::shared_ptr<class_base>>"
         },
         {
-          "simple_name": "prop_6",
-          "type": "pkg1::class_c"
+          "name": {
+            "simple": "prop_6"
+          },
+          "unparsed_type": "pkg1::class_c"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_base"
+        "simple": "class_base"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_d"
+        "simple": "class_d"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::optional<int>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::optional<int>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "boost::optional<class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "boost::optional<class_a>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "boost::optional<pkg1::class_c>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "boost::optional<pkg1::class_c>"
         },
         {
-          "simple_name": "prop_3",
-          "type": "boost::optional<std::vector<class_a>>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "boost::optional<std::vector<class_a>>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_derived"
+        "simple": "class_derived"
       },
       "meta_type": "object",
       "parents": [
         {
-          "simple_name": "class_base"
+          "simple": "class_base"
         }
       ],
       "attributes": [
         {
-          "simple_name": "prop_1",
-          "type": "int"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_e"
+        "simple": "class_e"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::variant<int,double>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::variant<int,double>"
         },
         {
-          "simple_name": "prop_1",
-          "type": "boost::variant<int,class_derived,double>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "boost::variant<int,class_derived,double>"
         },
         {
-          "simple_name": "prop_2",
-          "type": "std::vector<boost::variant<int,class_derived,double>>"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::vector<boost::variant<int,class_derived,double>>"
         },
         {
-          "simple_name": "prop_3",
-          "type": "boost::variant<int,std::string,char>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "boost::variant<int,std::string,char>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_f"
+        "simple": "class_f"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::gregorian::date"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::gregorian::date"
         },
         {
-          "simple_name": "prop_1",
-          "type": "boost::posix_time::ptime"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "boost::posix_time::ptime"
         },
         {
-          "simple_name": "prop_2",
-          "type": "boost::posix_time::time_duration"
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "boost::posix_time::time_duration"
         },
         {
-          "simple_name": "prop_3",
-          "type": "std::list<boost::gregorian::date>"
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "std::list<boost::gregorian::date>"
         },
         {
-          "simple_name": "prop_4",
-          "type": "std::list<boost::posix_time::ptime>"
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "std::list<boost::posix_time::ptime>"
         },
         {
-          "simple_name": "prop_5",
-          "type": "std::list<boost::posix_time::time_duration>"
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::list<boost::posix_time::time_duration>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_g"
+        "simple": "class_g"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::filesystem::path"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::filesystem::path"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::list<boost::filesystem::path>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::list<boost::filesystem::path>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_h"
+        "simple": "class_h"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::property_tree::ptree"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::property_tree::ptree"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "class_c",
+        "simple": "class_c",
         "internal_modules": "pkg1"
       },
       "meta_type": "object",
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "int"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
         },
         {
-          "simple_name": "prop_1",
-          "type": "std::vector<class_a>"
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::vector<class_a>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "some_service"
+        "simple": "some_service"
       },
       "meta_type": "object",
       "stereotypes": [
@@ -222,14 +280,16 @@
       ],
       "attributes": [
         {
-          "simple_name": "prop_0",
-          "type": "boost::shared_ptr<class_a>"
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::shared_ptr<class_a>"
         }
       ]
     },
     {
       "name": {
-        "simple_name": "pkg1"
+        "simple": "pkg1"
       },
       "meta_type": "module"
     }
