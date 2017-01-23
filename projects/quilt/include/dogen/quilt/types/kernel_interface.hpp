@@ -36,6 +36,7 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/quilt/types/kernel_output.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -56,13 +57,6 @@ public:
      * @brief Returns the identity of this kernel.
      */
     virtual std::string id() const = 0;
-
-    /**
-     * @brief Returns all directories managed by this kernel.
-     */
-    virtual std::forward_list<boost::filesystem::path>
-    managed_directories(const options::knitting_options& ko,
-        const yarn::name& model_name) const = 0;
 
     /**
      * @brief The artefact location for the kernel itself.
@@ -88,12 +82,8 @@ public:
 
     /**
      * @brief Generates the source code for the kernel.
-     *
-     * @param gs General settings for the Yarn types.
-     * @param m Model to generate.
      */
-    virtual std::forward_list<formatters::artefact> generate(
-        const options::knitting_options& ko,
+    virtual kernel_output generate(const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,

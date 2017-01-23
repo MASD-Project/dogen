@@ -66,18 +66,18 @@ private:
         const formatters::repository& frp, const bool enable_kernel_directories,
         const yarn::model& m) const;
 
-    std::forward_list<dogen::formatters::artefact> format(
-        const annotations::type_repository& atrp,
+    std::list<dogen::formatters::artefact>
+    format(const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
         const formattables::model& fm) const;
 
+    std::list<boost::filesystem::path>
+    managed_directories(const options::knitting_options& ko,
+        const yarn::name& model_name) const;
+
 public:
     std::string id() const override;
-
-    std::forward_list<boost::filesystem::path>
-        managed_directories(const options::knitting_options& ko,
-            const yarn::name& model_name) const override;
 
     annotations::archetype_location archetype_location() const override;
 
@@ -86,8 +86,7 @@ public:
 
     yarn::languages language() const override;
 
-    std::forward_list<dogen::formatters::artefact> generate(
-        const options::knitting_options& ko,
+    kernel_output generate(const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,

@@ -33,7 +33,7 @@ namespace formatters {
 
 stream_writer::stream_writer(std::ostream& s) : stream_(s) {}
 
-void stream_writer::write(const std::forward_list<artefact>& files) const {
+void stream_writer::write(const std::list<artefact>& files) const {
     for (const auto& f : files) {
         stream_ << file_name << f.path().generic_string() << std::endl
                 << content << std::endl << f.content() << std::endl;

@@ -26,5 +26,6 @@
 #endif
 
 #include "dogen/quilt/hash/configuration_hash.hpp"
+#include "dogen/quilt/hash/kernel_output_hash.hpp"
 
 #endif

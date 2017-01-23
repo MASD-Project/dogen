@@ -110,8 +110,8 @@ obtain_yarn_models(const std::vector<boost::filesystem::path>& data_dirs,
 }
 
 void workflow::perform_housekeeping(
-    const std::forward_list<formatters::artefact>& artefacts,
-    const std::forward_list<boost::filesystem::path>& dirs) const {
+    const std::list<formatters::artefact>& artefacts,
+    const std::list<boost::filesystem::path>& dirs) const {
 
     std::set<boost::filesystem::path> expected_files;
     for (const auto a : artefacts) {
@@ -121,7 +121,7 @@ void workflow::perform_housekeeping(
     }
 
     const auto& ip(knitting_options_.ignore_patterns());
-    std::forward_list<std::string> ignore_patterns(ip.begin(), ip.end());
+    std::list<std::string> ignore_patterns(ip.begin(), ip.end());
     housekeeper hk(ignore_patterns, dirs, expected_files);
     hk.tidy_up();
 }
@@ -136,7 +136,7 @@ workflow::obtain_file_writer() const {
 
 void workflow::write_files(
     std::shared_ptr<dogen::formatters::artefact_writer_interface> writer,
-    const std::forward_list<formatters::artefact>& artefacts) const {
+    const std::list<formatters::artefact>& artefacts) const {
 
     if (artefacts.empty()) {
         BOOST_LOG_SEV(lg, warn) << "No files were generated, so no output.";
@@ -164,18 +164,19 @@ void workflow::execute() const {
             }
 
             quilt::workflow w(knitting_options_, atrp, agf);
-            const auto artefacts(w.execute(m));
-            if (artefacts.empty()) {
+            const auto ko(w.execute(m));
+            if (!ko || ko->artefacts().empty()) {
                 BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
                 return;
             }
 
+            const auto& art(ko->artefacts());
             const auto writer(obtain_file_writer());
-            write_files(writer, artefacts);
+            write_files(writer, art);
 
             if (housekeeping_required()) {
-                const auto md(w.managed_directories(m));
-                perform_housekeeping(artefacts, md);
+                const auto& md(ko->managed_directories());
+                perform_housekeeping(art, md);
             }
         }
     } catch(const dogen::formatters::formatting_error& e) {

@@ -18,29 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_STREAM_WRITER_HPP
-#define DOGEN_FORMATTERS_TYPES_STREAM_WRITER_HPP
+#ifndef DOGEN_QUILT_HASH_KERNEL_OUTPUT_HASH_HPP
+#define DOGEN_QUILT_HASH_KERNEL_OUTPUT_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/artefact_writer_interface.hpp"
+#include <functional>
+#include "dogen/quilt/types/kernel_output.hpp"
 
 namespace dogen {
-namespace formatters {
+namespace quilt {
 
-class stream_writer : public artefact_writer_interface {
+struct kernel_output_hasher {
 public:
-    explicit stream_writer(std::ostream& s);
-
-public:
-    void write(const std::list<artefact>& files) const override;
-
-private:
-    std::ostream& stream_;
+    static std::size_t hash(const kernel_output& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::kernel_output> {
+public:
+    size_t operator()(const dogen::quilt::kernel_output& v) const {
+        return dogen::quilt::kernel_output_hasher::hash(v);
+    }
+};
+
+}
 #endif

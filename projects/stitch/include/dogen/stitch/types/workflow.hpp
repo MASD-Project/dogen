@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <vector>
 #include <string>
 #include <forward_list>
@@ -95,7 +96,7 @@ private:
     /**
      * @brief Creates the artefacts
      */
-    std::forward_list<formatters::artefact>
+    std::list<formatters::artefact>
     create_artefacts(const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
@@ -106,7 +107,7 @@ private:
      * @brief Writes all of the artefacts to the filesystem.
      */
     void write_artefacts(
-        const std::forward_list<formatters::artefact>& artefacts) const;
+        const std::list<formatters::artefact>& artefacts) const;
 
 public:
     /**

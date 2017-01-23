@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
+#include <list>
 #include <memory>
-#include <forward_list>
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar.hpp"
@@ -48,7 +48,7 @@ public:
     static csharp::formatters::registrar& registrar();
 
 public:
-    std::forward_list<dogen::formatters::artefact>
+    std::list<dogen::formatters::artefact>
     execute(const formattables::model& fm) const;
 
 private:

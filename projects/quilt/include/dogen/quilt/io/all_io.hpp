@@ -26,5 +26,6 @@
 #endif
 
 #include "dogen/quilt/io/configuration_io.hpp"
+#include "dogen/quilt/io/kernel_output_io.hpp"
 
 #endif

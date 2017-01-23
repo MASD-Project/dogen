@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include <forward_list>
+#include <list>
 #include "dogen/formatters/types/artefact.hpp"
 
 namespace dogen {
@@ -42,7 +42,7 @@ public:
     /**
      * @brief Write the files.
      */
-    virtual void write(const std::forward_list<artefact>& files) const = 0;
+    virtual void write(const std::list<artefact>& files) const = 0;
 };
 
 } }

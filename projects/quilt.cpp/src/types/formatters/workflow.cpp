@@ -74,7 +74,7 @@ formattables::artefact_properties workflow::get_artefact_properties(
     return i->second;
 }
 
-std::forward_list<dogen::formatters::artefact>
+std::list<dogen::formatters::artefact>
 workflow::format(const formattables::model& fm, const yarn::element& e,
     const formattables::element_properties& ep) const {
 
@@ -84,7 +84,7 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     const auto ti(std::type_index(typeid(e)));
     BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
 
-    std::forward_list<dogen::formatters::artefact> r;
+    std::list<dogen::formatters::artefact> r;
     const auto& frp(registrar().formatter_repository());
     const auto i(frp.stock_artefact_formatters_by_type_index().find(ti));
     if (i == frp.stock_artefact_formatters_by_type_index().end()) {
@@ -141,16 +141,16 @@ workflow::format(const formattables::model& fm, const yarn::element& e,
     return r;
 }
 
-std::forward_list<dogen::formatters::artefact>
+std::list<dogen::formatters::artefact>
 workflow::execute(const formattables::model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started formatting. Model " << fm.name().id();
-    std::forward_list<dogen::formatters::artefact> r;
+    std::list<dogen::formatters::artefact> r;
     for (const auto& pair : fm.formattables()) {
         const auto& formattable(pair.second);
         const auto& eprops(formattable.element_properties());
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
-            r.splice_after(r.before_begin(), format(fm, e, eprops));
+            r.splice(r.end(), format(fm, e, eprops));
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished formatting.";

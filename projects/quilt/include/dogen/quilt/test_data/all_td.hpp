@@ -26,5 +26,6 @@
 #endif
 
 #include "dogen/quilt/test_data/configuration_td.hpp"
+#include "dogen/quilt/test_data/kernel_output_td.hpp"
 
 #endif

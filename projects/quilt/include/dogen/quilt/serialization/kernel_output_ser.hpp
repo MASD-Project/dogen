@@ -18,28 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_FORMATTERS_TYPES_STREAM_WRITER_HPP
-#define DOGEN_FORMATTERS_TYPES_STREAM_WRITER_HPP
+#ifndef DOGEN_QUILT_SERIALIZATION_KERNEL_OUTPUT_SER_HPP
+#define DOGEN_QUILT_SERIALIZATION_KERNEL_OUTPUT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/formatters/types/artefact_writer_interface.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt/types/kernel_output.hpp"
 
-namespace dogen {
-namespace formatters {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::kernel_output)
+namespace boost {
+namespace serialization {
 
-class stream_writer : public artefact_writer_interface {
-public:
-    explicit stream_writer(std::ostream& s);
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::kernel_output& v, unsigned int version);
 
-public:
-    void write(const std::list<artefact>& files) const override;
-
-private:
-    std::ostream& stream_;
-};
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::kernel_output& v, unsigned int version);
 
 } }
 

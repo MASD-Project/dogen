@@ -104,22 +104,7 @@ std::list<annotations::archetype_location> workflow::archetype_locations() {
     return r;
 }
 
-std::forward_list<boost::filesystem::path>
-workflow::managed_directories(const yarn::model& m) const {
-    const auto& ko(knitting_options_);
-    std::forward_list<boost::filesystem::path> r;
-    for (const auto& pair : registrar().kernels_by_language()) {
-        const auto& k(*pair.second);
-        // not splicing due to a mistmatch in the list types
-        const auto md(k.managed_directories(ko, m.name()));
-        for (const auto& d : md)
-            r.push_front(d);
-    }
-    return r;
-}
-
-std::forward_list<formatters::artefact>
-workflow::execute(const yarn::model& m) const {
+boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
     const auto ra(m.root_module().annotation());
     const auto kals(kernel_archetype_locations());
     configuration_factory cf;
@@ -132,14 +117,13 @@ workflow::execute(const yarn::model& m) const {
     const auto drp(create_formatters_decoration_repository(dd));
     const auto dpf(create_decoration_properties_factory(repository_, drp, ra));
 
-    std::forward_list<formatters::artefact> r;
     const auto ol(m.output_language());
     BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << ol;
 
     const auto ptr(registrar().kernel_for_language(ol));
     if (!ptr) {
         BOOST_LOG_SEV(lg, debug) << "Could not find kernel for language.";
-        return r;
+        return boost::optional<kernel_output>();
     }
 
     const auto& k(*ptr);
@@ -150,16 +134,16 @@ workflow::execute(const yarn::model& m) const {
     const auto is_enabled(ek.find(id) != ek.end());
     if (!is_enabled) {
         BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled.";
-        return r;
+        return boost::optional<kernel_output>();
     }
 
     const auto& ko(knitting_options_);
     const bool ekd(cfg.enable_kernel_directories());
-    auto files(k.generate(ko, atrp, af, drp, dpf, ekd, m));
+    const auto r(k.generate(ko, atrp, af, drp, dpf, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
                              << ". Total files: "
-                             << std::distance(files.begin(), files.end());
-    r.splice_after(r.before_begin(), files);
+                             << std::distance(r.artefacts().begin(),
+                                 r.artefacts().end());
 
     return r;
 }

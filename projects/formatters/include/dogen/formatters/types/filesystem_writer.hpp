@@ -64,7 +64,7 @@ private:
     void write(const artefact& f) const;
 
 public:
-    void write(const std::forward_list<artefact>& files) const override;
+    void write(const std::list<artefact>& files) const override;
 
 private:
     const bool force_write_;

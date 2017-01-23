@@ -35,10 +35,10 @@ const std::string hk_tds_actual_f1("housekeeper/actual/file_1.txt");
 const std::string hk_tds_actual_f2("housekeeper/actual/file_2.txt");
 const std::string hk_tds_actual("housekeeper/actual");
 
-const std::forward_list<std::string> ignored_files;
+const std::list<std::string> ignored_files;
 
-const std::forward_list<boost::filesystem::path> managed_directories() {
-    std::forward_list<boost::filesystem::path> r;
+const std::list<boost::filesystem::path> managed_directories() {
+    std::list<boost::filesystem::path> r;
     r.push_front(dogen::utility::test_data::tds_test_good::expected());
     return r;
 }
@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(when_all_files_are_present_housekeeper_does_not_find_extra_
     e.insert(tds_test_good::expected_empty_file_txt());
 
     bool called(false);
-    const auto lambda([&](const std::forward_list<boost::filesystem::path>&) {
+    const auto lambda([&](const std::list<boost::filesystem::path>&) {
             called = true;
         });
 
@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(when_extra_files_are_present_housekeeper_finds_the_extra_fi
     e.insert(tds_test_good::expected_empty_file_txt());
 
     bool called(false);
-    const auto lambda([&](const std::forward_list<boost::filesystem::path>& p) {
+    const auto lambda([&](const std::list<boost::filesystem::path>& p) {
             const std::list<boost::filesystem::path> l(p.begin(), p.end());
             BOOST_CHECK(l.size() == 2);
             BOOST_CHECK(
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(housekeeper_deletes_extra_files_and_only_extra_files) {
     SETUP_TEST_LOG("housekeeper_deletes_extra_files_and_only_extra_files");
     using dogen::utility::test_data::validating_resolver;
     const auto a(validating_resolver::resolve(hk_tds_actual));
-    const std::forward_list<boost::filesystem::path> v({a});
+    const std::list<boost::filesystem::path> v({a});
 
     std::set<boost::filesystem::path> f;
     f.insert(validating_resolver::resolve(hk_tds_actual_f1));
@@ -124,10 +124,10 @@ BOOST_AUTO_TEST_CASE(ignored_files_are_not_deleted) {
     e.insert(tds_test_good::expected_test_serializer_2_xmltst());
     e.insert(tds_test_good::expected_empty_file_txt());
 
-    std::forward_list<std::string> ignores({".*/file_1.*"});
+    std::list<std::string> ignores({".*/file_1.*"});
 
     bool called(false);
-    const auto lambda([&](const std::forward_list<boost::filesystem::path>& l) {
+    const auto lambda([&](const std::list<boost::filesystem::path>& l) {
             for (const auto a : l)
                 if (a == tds_test_good::expected_file_1_txt())
                     called = true;

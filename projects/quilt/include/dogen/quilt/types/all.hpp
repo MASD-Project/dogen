@@ -28,6 +28,7 @@
 #include "dogen/quilt/types/traits.hpp"
 #include "dogen/quilt/types/workflow.hpp"
 #include "dogen/quilt/types/configuration.hpp"
+#include "dogen/quilt/types/kernel_output.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/registrar_error.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"

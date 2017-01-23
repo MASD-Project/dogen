@@ -29,6 +29,7 @@
 #include <string>
 #include <memory>
 #include <forward_list>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
@@ -38,6 +39,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/quilt/types/kernel_output.hpp"
 #include "dogen/quilt/types/kernel_registrar.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
 
@@ -91,17 +93,10 @@ public:
 
 public:
     /**
-     * @brief Returns all directories managed by all kernels.
-     */
-    std::forward_list<boost::filesystem::path>
-    managed_directories(const yarn::model& m) const;
-
-    /**
      * @brief Generates files for the supplied model using all
      * registered kernels.
      */
-    std::forward_list<formatters::artefact>
-    execute(const yarn::model& m) const;
+    boost::optional<kernel_output> execute(const yarn::model& m) const;
 
 private:
     static std::shared_ptr<kernel_registrar> registrar_;

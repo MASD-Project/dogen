@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/algorithm/string/predicate.hpp>
-#include "dogen/utility/io/forward_list_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/io/artefact_io.hpp"
@@ -147,7 +147,7 @@ void filesystem_writer::write(const formatters::artefact& f) const {
     BOOST_LOG_SEV(lg, debug) << "Processed file: " << gs;
 }
 
-void filesystem_writer::write(const std::forward_list<artefact>& files) const {
+void filesystem_writer::write(const std::list<artefact>& files) const {
     BOOST_LOG_SEV(lg, info) << "Writing files: " << files;
     for (const auto& f : files)
         write(f);

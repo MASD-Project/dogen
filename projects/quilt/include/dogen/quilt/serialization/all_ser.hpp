@@ -26,5 +26,6 @@
 #endif
 
 #include "dogen/quilt/serialization/configuration_ser.hpp"
+#include "dogen/quilt/serialization/kernel_output_ser.hpp"
 
 #endif

@@ -54,21 +54,21 @@ formattables::model kernel::create_formattables_model(
     return fw.execute(ko, atrp, ra, dpf, frp, enable_kernel_directories, m);
 }
 
-std::string kernel::id() const {
-    return archetype_location().kernel();
-}
-
-std::forward_list<boost::filesystem::path>
+std::list<boost::filesystem::path>
 kernel::managed_directories(const options::knitting_options& ko,
     const yarn::name& model_name) const {
     const auto& mm(model_name.location().model_modules());
     const auto mn(boost::algorithm::join(mm, dot));
-    std::forward_list<boost::filesystem::path> r;
+    std::list<boost::filesystem::path> r;
     r.push_front(ko.output_directory_path() / mn);
     return r;
 }
 
-std::forward_list<dogen::formatters::artefact>
+std::string kernel::id() const {
+    return archetype_location().kernel();
+}
+
+std::list<dogen::formatters::artefact>
 kernel::format(const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
@@ -92,8 +92,7 @@ yarn::languages kernel::language() const {
     return yarn::languages::cpp;
 }
 
-std::forward_list<dogen::formatters::artefact>
-kernel::generate(const options::knitting_options& ko,
+kernel_output kernel::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
@@ -106,7 +105,10 @@ kernel::generate(const options::knitting_options& ko,
     const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_kernel_directories);
     const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, ekd, m));
-    const auto r(format(atrp, agf, drp, fm));
+
+    kernel_output r;
+    r.artefacts(format(atrp, agf, drp, fm));
+    r.managed_directories(managed_directories(ko, m.name()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished kernel.";
     return r;

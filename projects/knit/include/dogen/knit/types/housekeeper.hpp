@@ -26,8 +26,8 @@
 #endif
 
 #include <set>
+#include <list>
 #include <functional>
-#include <forward_list>
 #include <boost/filesystem/path.hpp>
 
 namespace dogen {
@@ -43,8 +43,7 @@ namespace knit {
 class housekeeper {
 public:
     typedef std::function<
-    void(const std::forward_list<boost::filesystem::path>&)>
-    delete_fn;
+    void(const std::list<boost::filesystem::path>&)> delete_fn;
 
 public:
     housekeeper() = delete;
@@ -62,8 +61,8 @@ public:
      * @param expected_files files that should exist in managed directories.
      * @param fn function to execute when deleting files.
      */
-    housekeeper(const std::forward_list<std::string>& ignore_patterns,
-        std::forward_list<boost::filesystem::path> managed_directories,
+    housekeeper(const std::list<std::string>& ignore_patterns,
+        std::list<boost::filesystem::path> managed_directories,
         std::set<boost::filesystem::path> expected_files,
         delete_fn fn = nullptr);
 
@@ -77,21 +76,20 @@ private:
      * @brief Remove files from list based on regular expressions
      * supplied on construction.
      */
-    std::forward_list<boost::filesystem::path> remove_ignores(
-        const std::forward_list<boost::filesystem::path>& files) const;
+    std::list<boost::filesystem::path>
+    remove_ignores(const std::list<boost::filesystem::path>& files) const;
 
     /**
      * @brief Delete files from the filesystem.
      */
-    void delete_files(
-        const std::forward_list<boost::filesystem::path>& files) const;
+    void delete_files(const std::list<boost::filesystem::path>& files) const;
 
 public:
     void tidy_up() const;
 
 private:
-    const std::forward_list<std::string> ignore_patterns_;
-    const std::forward_list<boost::filesystem::path> managed_directories_;
+    const std::list<std::string> ignore_patterns_;
+    const std::list<boost::filesystem::path> managed_directories_;
     const std::set<boost::filesystem::path> expected_files_;
     delete_fn delete_fn_;
 };
