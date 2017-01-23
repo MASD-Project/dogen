@@ -126,6 +126,15 @@ if (DOGEN_TAILOR_COMMAND)
             add_dependencies(tailor_all tailor_${model_name})
         endif()
     endforeach()
+
+    set(model_name "Zeta")
+    add_custom_target(tailor_${model_name}
+        COMMENT "Tailoring ${model_name}."
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${DOGEN_TAILOR_COMMAND} --log_level=debug --target ${CMAKE_CURRENT_SOURCE_DIR}/yarn.upsilon/input/Zeta.Model.Configuration.xml --output ${output_dir}/${model_name}.json)
+
+    add_dependencies(tailor_all tailor_${model_name})
+
 endif()
 
 #

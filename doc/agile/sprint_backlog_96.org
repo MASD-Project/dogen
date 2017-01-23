@@ -13,28 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-23 Mon 21:10]
+#+CAPTION: Clock summary at [2017-01-23 Mon 22:11]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *41:49* |       |       | 100.0 |
+| *Total time*                                                                | *42:48* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 41:49   |       |       | 100.0 |
-| Active                                                                      |         | 41:49 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   4.5 |
+| Stories                                                                     | 42:48   |       |       | 100.0 |
+| Active                                                                      |         | 42:48 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   4.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.4 |
 | COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.0 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  24.6 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.2 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  24.1 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.1 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.5 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.4 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.8 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  32.2 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  15.1 |
-| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   2.0 |
-| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   3.2 |
-| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.5 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  31.5 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  14.8 |
+| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.9 |
+| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   3.1 |
+| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.4 |
 | COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   2.5 |
+| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.6 |
+| STARTED Add mapping support between upsilon and LAM                         |         |       |  0:43 |   1.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -477,16 +479,56 @@ name function as we do for yarn names everywhere else.
 We should also update type to be unparsed type to match the yarn
 model.
 
+*** COMPLETED Add tailor support for upsilon                          :story:
+    CLOSED: [2017-01-23 Mon 21:21]
+    CLOCK: [2017-01-23 Mon 21:11]--[2017-01-23 Mon 21:27] =>  0:16
+
+Given an upsilon model, generate the JSON representation.
+
+This was implemented but its not very useful because at present we are
+not performing any mapping.
+
+*** STARTED Add mapping support between upsilon and LAM               :story:
+    CLOCK: [2017-01-23 Mon 21:28]--[2017-01-23 Mon 22:11] =>  0:43
+
+At present we map upsilon directly to a language-specific model
+(C++/C#), which gets code-generated. However, from a tailor
+perspective, this is not ideal; we would end up with N different
+models. Ideally, we should get a LAM representation of the JSON model
+which could then be used to code-generate multiple languages.
+
+This is probably not too hard, given the mapper knows how to convert
+between upsilon and LAM. We just need to finish LAM support and then
+try mapping them and see what breaks. Tailor would have to somehow
+tell yarn to set the output language to LAM.
+
+Notes:
+
+- if output is more than one language, change it to LAM. Otherwise
+  leave it as language specific.
+- we need to inject via meta-data the annotations for the output
+  languages.
+- We only need to perform mapping if input language is upsilon. For
+  all other languages we can leave it as is. But for upsilon, tailor
+  needs to do a full intermediate model workflow.
+- unparsed type needs to be recomputed as part of mapping.
+- we are not adding the LAM mapping to the upsilon id container.
+- we need to add support for "default mappings"
+
+*** Add defaults for cases where mapping is not bijective             :story:
+
+Upsilon maps a number of LAM types to "collection". This means that
+when we are mapping between LAM and upsilon, we will have
+non-functional relationships. For example: say =lam::dictionary= and
+=lam::list= will both map to =Collection=. So we will need to have a
+"default" mapping for when trying to convert between upsilon and
+LAM. We can extend the mappings class with a "is default" flag and
+update the JSON files.
+
 *** Add support for pointers to mapper                                :story:
 
 We need to detect types which are abstract (if its already populated)
 and ensure we wrap them around a pointer in C++.
-
-*** Add tailor support for upsilon                                    :story:
-
-Given an upsilon model, generate the JSON for a LAM model. If selected
-by the user, it would also be nice to generate a language-specific
-model (C++/C#).
 
 *** Make the Zeta model compilable                                    :story:
 

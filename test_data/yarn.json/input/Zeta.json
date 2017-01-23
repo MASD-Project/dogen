@@ -1,0 +1,96 @@
+{
+  "model_name": "Zeta",
+  "external_modules": "",
+  "elements": [
+    {
+      "name": {
+        "simple": "CollectionTestType"
+      },
+      "meta_type": "object",
+      "documentation": "Test type",
+      "attributes": [
+        {
+          "name": {
+            "simple": "BinariesTest"
+          },
+          "unparsed_type": "Collection<ModelValue>",
+          "documentation": "Some comment"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "NoFields"
+      },
+      "meta_type": "object",
+      "documentation": "Test type"
+    },
+    {
+      "name": {
+        "simple": "TestType"
+      },
+      "meta_type": "object",
+      "documentation": "Test type",
+      "attributes": [
+        {
+          "name": {
+            "simple": "Version"
+          },
+          "unparsed_type": "Zeta::String",
+          "documentation": "Some comment"
+        },
+        {
+          "name": {
+            "simple": "AField"
+          },
+          "unparsed_type": "Zeta::String"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "ExternalModelTest"
+      },
+      "meta_type": "object",
+      "documentation": "Test type",
+      "attributes": [
+        {
+          "name": {
+            "simple": "DateTest"
+          },
+          "unparsed_type": "Phi::Date",
+          "documentation": "Some comment"
+        },
+        {
+          "name": {
+            "simple": "BinariesTest"
+          },
+          "unparsed_type": "Collection<ModelValue>",
+          "documentation": "Some comment"
+        },
+        {
+          "name": {
+            "simple": "CollectionOfCollectionTest"
+          },
+          "unparsed_type": "Collection<Collection<ModelValue>>",
+          "documentation": "Some comment"
+        },
+        {
+          "name": {
+            "simple": "CollectionOfCollectionOfCollectionTest"
+          },
+          "unparsed_type": "Collection<Collection<Collection<ModelValue>>>",
+          "documentation": "Some comment"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "SomeEnum"
+      },
+      "meta_type": "enumeration",
+      "documentation": "Represents an enum",
+      "enumerators": []
+    }
+  ]
+}

@@ -34,6 +34,7 @@ target_link_libraries(${name}
     yarn
     yarn.dia
     yarn.json
+    yarn.upsilon
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES})
 
