@@ -13,18 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-23 Mon 17:56]
+#+CAPTION: Clock summary at [2017-01-23 Mon 18:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:46* |       |       | 100.0 |
+| *Total time*                                                                | *40:49* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:46   |       |       | 100.0 |
-| Active                                                                      |         | 40:46 |       | 100.0 |
+| Stories                                                                     | 40:49   |       |       | 100.0 |
+| Active                                                                      |         | 40:49 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   4.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.4 |
 | COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.1 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  25.3 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  25.2 |
 | COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.3 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.6 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.5 |
@@ -34,6 +34,7 @@
 | COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   2.0 |
 | COMPLETED Add log-level to command line                                     |         |       |  1:20 |   3.3 |
 | COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.5 |
+| STARTED In JSON hydrator rename simple name to simple                       |         |       |  0:03 |   0.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -461,6 +462,19 @@ components of the upsilon model.
 We should also look first on the current directory and then make use
 of the relative path.
 
+*** STARTED In JSON hydrator rename simple name to simple             :story:
+    CLOCK: [2017-01-23 Mon 17:57]--[2017-01-23 Mon 18:00] =>  0:03
+
+We are still using =simple_name=. Make this consistent with the yarn
+terminology.
+
+In order to fix this we must also fix the attribute names, which have
+been slightly hacked; we flattened them. We should reuse the same read
+name function as we do for yarn names everywhere else.
+
+We should also update type to be unparsed type to match the yarn
+model.
+
 *** Add support for pointers to mapper                                :story:
 
 We need to detect types which are abstract (if its already populated)
@@ -502,11 +516,6 @@ them map the intrinsics to native types.
 
 At present we are marking all types in an upsilon config as target. In
 practice, only one of the models is the target.
-
-*** In JSON hydrator rename simple name to simple                     :story:
-
-We are still using =simple_name=. Make this consistent with the yarn
-terminology.
 
 *** Load system models based on language prefix                       :story:
 
