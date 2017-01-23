@@ -131,7 +131,7 @@ foreach(dia_model ${all_dia_test_models})
         file(COPY "${git_dir}" DESTINATION "${expected_dir}")
 
         # ensure we remove the IDE directories before copying for the C#
-        # projects.
+        # projects, or else we will have spurious diffs.
         if ("${model_name}" STREQUAL "CSharpModel")
             file(REMOVE_RECURSE "${expected_dir}/CSharpModel/bin")
             file(REMOVE_RECURSE "${expected_dir}/CSharpModel/obj")
@@ -214,7 +214,15 @@ foreach(dia_model ${all_dia_test_models})
     endif()
 endforeach()
 
-set(top_dir "${stage_test_data_dir}/TestModel")
-set(model_folder_name "TestModel")
+set(top_dir "${stage_test_data_dir}/Zeta")
+set(model_folder_name "Zeta")
 set(actual_dir "${top_dir}/actual.upsilon/${model_folder_name}")
-file(MAKE_DIRECTORY "${actual_dir}")
+if(NOT IS_DIRECTORY "${actual_dir}")
+    file(MAKE_DIRECTORY "${actual_dir}")
+endif()
+set(expected_dir "${top_dir}/expected")
+if(IS_DIRECTORY "${expected_dir}")
+    file(REMOVE_RECURSE "${expected_dir}")
+endif()
+set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
+file(COPY "${git_dir}" DESTINATION "${expected_dir}")

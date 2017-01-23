@@ -63,11 +63,11 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 
-BOOST_AUTO_TEST_CASE(hydrating_config_results_in_expected_object) {
-    SETUP_TEST_LOG_SOURCE("hydrating_config_results_in_expected_object");
+BOOST_AUTO_TEST_CASE(hydrating_zeta_config_results_in_expected_object) {
+    SETUP_TEST_LOG_SOURCE("hydrating_zeta_config_results_in_expected_object");
 
     using dogen::utility::test_data::yarn_upsilon;
-    const auto input(yarn_upsilon::input_test_model_configuration_xml());
+    const auto input(yarn_upsilon::input_zeta_model_configuration_xml());
     dogen::upsilon::hydrator h;
     const auto a(h.hydrate_config(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
@@ -271,17 +271,17 @@ BOOST_AUTO_TEST_CASE(hydrating_zeta_schema_results_in_expected_object) {
     // BOOST_CHECK(collection.type_name().schema_name() == "Zeta");
 }
 
-BOOST_AUTO_TEST_CASE(full_hydration_of_test_data_config_results_in_expected_model) {
-    SETUP_TEST_LOG_SOURCE("full_hydration_of_test_data_config_results_in_expected_model");
+BOOST_AUTO_TEST_CASE(full_hydration_of_zeta_config_results_in_expected_model) {
+    SETUP_TEST_LOG_SOURCE("full_hydration_of_zeta_config_results_in_expected_model");
 
     using dogen::utility::test_data::yarn_upsilon;
-    const auto input(yarn_upsilon::input_test_model_configuration_xml());
+    const auto input(yarn_upsilon::input_zeta_model_configuration_xml());
     dogen::upsilon::hydrator h;
     const auto a(h.hydrate(input));
     BOOST_LOG_SEV(lg, debug) << "actual: " << a;
 
-    const auto expected(yarn_upsilon::expected_test_model_upsilon_xml());
-    const auto actual(yarn_upsilon::actual_test_model_upsilon_xml());
+    const auto expected(yarn_upsilon::expected_zeta_model_upsilon_xml());
+    const auto actual(yarn_upsilon::actual_zeta_model_upsilon_xml());
 
     using dogen::utility::test::asserter;
     BOOST_CHECK(asserter::assert_object(expected, actual, a));

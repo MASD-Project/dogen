@@ -686,7 +686,7 @@
 			</item>
 		</outputs>
 		<file_name>
-			<path>Test.Model.Configuration.xml</path>
+			<path>Zeta.Model.Configuration.xml</path>
 		</file_name>
 	</config>
 </entity>

@@ -62,11 +62,11 @@ dogen::upsilon::model from_xml(std::istream& s) {
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-BOOST_AUTO_TEST_CASE(test_data_mode_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("test_data_mode_transforms_into_expected_yarn");
+BOOST_AUTO_TEST_CASE(zeta_model_transforms_into_expected_yarn) {
+    SETUP_TEST_LOG("zeta_model_transforms_into_expected_yarn");
 
     using dogen::utility::test_data::yarn_upsilon;
-    const auto input_path(yarn_upsilon::expected_test_model_upsilon_xml());
+    const auto input_path(yarn_upsilon::expected_zeta_model_upsilon_xml());
 
     boost::filesystem::ifstream s(input_path);
     const auto input(from_xml(s));
@@ -79,8 +79,8 @@ BOOST_AUTO_TEST_CASE(test_data_mode_transforms_into_expected_yarn) {
     dogen::yarn::upsilon::workflow w;
     dogen::yarn::intermediate_model actual(w.execute(input));
 
-    const auto expected_path(yarn_upsilon::expected_test_model_yarn_xml());
-    const auto actual_path(yarn_upsilon::actual_test_model_yarn_xml());
+    const auto expected_path(yarn_upsilon::expected_zeta_model_yarn_xml());
+    const auto actual_path(yarn_upsilon::actual_zeta_model_yarn_xml());
 
     BOOST_CHECK(asserter::assert_object(expected_path, actual_path, actual));
 }

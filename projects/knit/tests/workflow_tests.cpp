@@ -72,12 +72,12 @@ const std::string actual_upsilon_dir("/actual.upsilon");
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string dia_invalid_name("Dia object name is empty");
 
-bool generate_and_diff(const boost::filesystem::path& target,
+bool generate_and_diff(const std::string& model_name,
+    const boost::filesystem::path& target,
     const std::string& actual_dir) {
-    const auto name(target.stem().string());
     using dogen::utility::test_data::validating_resolver;
-    const auto expected(validating_resolver::resolve(name + ::expected));
-    const auto actual(validating_resolver::resolve(name + actual_dir));
+    const auto expected(validating_resolver::resolve(model_name + ::expected));
+    const auto actual(validating_resolver::resolve(model_name + actual_dir));
 
     /*
      * Ensure the actual directory is empty before we run the
@@ -96,6 +96,12 @@ bool generate_and_diff(const boost::filesystem::path& target,
 
     using dogen::utility::test::asserter;
     return asserter::assert_directory(expected, actual);
+}
+
+bool generate_and_diff(const boost::filesystem::path& target,
+    const std::string& actual_dir) {
+    const auto name(target.stem().string());
+    return generate_and_diff(name, target, actual_dir);
 }
 
 }
@@ -470,16 +476,8 @@ BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
 
 BOOST_AUTO_TEST_CASE(upsilon_model_generates_expected_code) {
     SETUP_TEST_LOG("upsilon_model_generates_expected_code");
-    const auto upsilon(yarn_upsilon::input_test_model_configuration_xml());
-
-    const auto name("TestModel");
-    using dogen::utility::test_data::validating_resolver;
-    const auto actual(validating_resolver::resolve(name + actual_upsilon_dir));
-
-    using dogen::options::test::mock_options_factory;
-    const auto ko(mock_options_factory::make_knitting_options(upsilon, actual));
-    dogen::knit::workflow w(ko);
-    w.execute();
+    const auto upsilon(yarn_upsilon::input_zeta_model_configuration_xml());
+    BOOST_CHECK(generate_and_diff("Zeta", upsilon, actual_upsilon_dir));
 }
 
 BOOST_AUTO_TEST_SUITE_END()
