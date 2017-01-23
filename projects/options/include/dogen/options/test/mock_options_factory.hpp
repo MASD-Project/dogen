@@ -52,7 +52,7 @@ public:
     static knitting_options make_knitting_options(
         const boost::filesystem::path& target,
         const boost::filesystem::path project_dir = boost::filesystem::path(),
-        const bool verbose = true);
+        const std::string log_level = std::string("info"));
 };
 
 } } }

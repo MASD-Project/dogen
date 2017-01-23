@@ -43,7 +43,7 @@ std::ostream& operator<<(std::ostream& s, const darting_options& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::options::darting_options\"" << ", "
-      << "\"verbose\": " << v.verbose() << ", "
+      << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"force_write\": " << v.force_write() << ", "
       << "\"product_name\": " << "\"" << tidy_up_string(v.product_name()) << "\""
       << " }";

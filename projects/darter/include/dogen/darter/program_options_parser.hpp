@@ -62,7 +62,6 @@ private:
 private:
     typedef boost::program_options::options_description options_description;
     options_description general_options_factory() const;
-    options_description troubleshooting_options_factory() const;
     options_description input_options_factory() const;
     options_description output_options_factory() const;
     options_description options_factory() const;

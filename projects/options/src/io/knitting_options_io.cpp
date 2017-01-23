@@ -57,7 +57,7 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::options::knitting_options\"" << ", "
-      << "\"verbose\": " << v.verbose() << ", "
+      << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"force_write\": " << v.force_write() << ", "

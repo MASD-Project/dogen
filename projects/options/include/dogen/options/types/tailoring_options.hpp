@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/serialization/tailoring_options_fwd_ser.hpp"
@@ -45,7 +46,7 @@ public:
 
 public:
     tailoring_options(
-        const bool verbose,
+        const std::string& log_level,
         const boost::filesystem::path& target,
         const boost::filesystem::path& output,
         const bool force_write);
@@ -58,8 +59,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::options::tailoring_options& v, unsigned int version);
 
 public:
-    bool verbose() const;
-    void verbose(const bool v);
+    /**
+     * @brief What level of logging to log at.
+     */
+    /**@{*/
+    const std::string& log_level() const;
+    std::string& log_level();
+    void log_level(const std::string& v);
+    void log_level(const std::string&& v);
+    /**@}*/
 
     const boost::filesystem::path& target() const;
     boost::filesystem::path& target();
@@ -85,7 +93,7 @@ public:
     tailoring_options& operator=(tailoring_options other);
 
 private:
-    bool verbose_;
+    std::string log_level_;
     boost::filesystem::path target_;
     boost::filesystem::path output_;
     bool force_write_;

@@ -24,12 +24,11 @@ namespace dogen {
 namespace options {
 
 knitting_options::knitting_options()
-    : verbose_(static_cast<bool>(0)),
-      delete_extra_files_(static_cast<bool>(0)),
+    : delete_extra_files_(static_cast<bool>(0)),
       force_write_(static_cast<bool>(0)) { }
 
 knitting_options::knitting_options(knitting_options&& rhs)
-    : verbose_(std::move(rhs.verbose_)),
+    : log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
       force_write_(std::move(rhs.force_write_)),
@@ -37,13 +36,13 @@ knitting_options::knitting_options(knitting_options&& rhs)
       output_directory_path_(std::move(rhs.output_directory_path_)) { }
 
 knitting_options::knitting_options(
-    const bool verbose,
+    const std::string& log_level,
     const boost::filesystem::path& target,
     const bool delete_extra_files,
     const bool force_write,
     const std::vector<std::string>& ignore_patterns,
     const boost::filesystem::path& output_directory_path)
-    : verbose_(verbose),
+    : log_level_(log_level),
       target_(target),
       delete_extra_files_(delete_extra_files),
       force_write_(force_write),
@@ -52,7 +51,7 @@ knitting_options::knitting_options(
 
 void knitting_options::swap(knitting_options& other) noexcept {
     using std::swap;
-    swap(verbose_, other.verbose_);
+    swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(delete_extra_files_, other.delete_extra_files_);
     swap(force_write_, other.force_write_);
@@ -61,7 +60,7 @@ void knitting_options::swap(knitting_options& other) noexcept {
 }
 
 bool knitting_options::operator==(const knitting_options& rhs) const {
-    return verbose_ == rhs.verbose_ &&
+    return log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
         force_write_ == rhs.force_write_ &&
@@ -75,12 +74,20 @@ knitting_options& knitting_options::operator=(knitting_options other) {
     return *this;
 }
 
-bool knitting_options::verbose() const {
-    return verbose_;
+const std::string& knitting_options::log_level() const {
+    return log_level_;
 }
 
-void knitting_options::verbose(const bool v) {
-    verbose_ = v;
+std::string& knitting_options::log_level() {
+    return log_level_;
+}
+
+void knitting_options::log_level(const std::string& v) {
+    log_level_ = v;
+}
+
+void knitting_options::log_level(const std::string&& v) {
+    log_level_ = std::move(v);
 }
 
 const boost::filesystem::path& knitting_options::target() const {

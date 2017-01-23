@@ -24,35 +24,34 @@ namespace dogen {
 namespace options {
 
 tailoring_options::tailoring_options()
-    : verbose_(static_cast<bool>(0)),
-      force_write_(static_cast<bool>(0)) { }
+    : force_write_(static_cast<bool>(0)) { }
 
 tailoring_options::tailoring_options(tailoring_options&& rhs)
-    : verbose_(std::move(rhs.verbose_)),
+    : log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       output_(std::move(rhs.output_)),
       force_write_(std::move(rhs.force_write_)) { }
 
 tailoring_options::tailoring_options(
-    const bool verbose,
+    const std::string& log_level,
     const boost::filesystem::path& target,
     const boost::filesystem::path& output,
     const bool force_write)
-    : verbose_(verbose),
+    : log_level_(log_level),
       target_(target),
       output_(output),
       force_write_(force_write) { }
 
 void tailoring_options::swap(tailoring_options& other) noexcept {
     using std::swap;
-    swap(verbose_, other.verbose_);
+    swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(output_, other.output_);
     swap(force_write_, other.force_write_);
 }
 
 bool tailoring_options::operator==(const tailoring_options& rhs) const {
-    return verbose_ == rhs.verbose_ &&
+    return log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         output_ == rhs.output_ &&
         force_write_ == rhs.force_write_;
@@ -64,12 +63,20 @@ tailoring_options& tailoring_options::operator=(tailoring_options other) {
     return *this;
 }
 
-bool tailoring_options::verbose() const {
-    return verbose_;
+const std::string& tailoring_options::log_level() const {
+    return log_level_;
 }
 
-void tailoring_options::verbose(const bool v) {
-    verbose_ = v;
+std::string& tailoring_options::log_level() {
+    return log_level_;
+}
+
+void tailoring_options::log_level(const std::string& v) {
+    log_level_ = v;
+}
+
+void tailoring_options::log_level(const std::string&& v) {
+    log_level_ = std::move(v);
 }
 
 const boost::filesystem::path& tailoring_options::target() const {

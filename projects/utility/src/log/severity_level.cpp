@@ -18,24 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/options/test/mock_options_factory.hpp"
+#include "dogen/utility/log/severity_level.hpp"
+#include "dogen/utility/exception/invalid_enum_value.hpp"
+
+namespace {
+
+const std::string trace_level("trace");
+const std::string debug_level("debug");
+const std::string info_level("info");
+const std::string warn_level("warn");
+const std::string error_level("error");
+
+}
 
 namespace dogen {
-namespace options {
-namespace test {
+namespace utility {
+namespace log {
 
-knitting_options mock_options_factory::make_knitting_options(
-    const boost::filesystem::path& target,
-    const boost::filesystem::path project_dir,
-    const std::string log_level) {
+severity_level to_severity_level(const std::string& s) {
+    if (s == trace_level)
+        return severity_level::trace;
+    if (s == debug_level)
+        return severity_level::debug;
+    if (s == info_level)
+        return severity_level::info;
+    if (s == warn_level)
+        return severity_level::warn;
+    if (s == error_level)
+        return severity_level::error;
 
-    knitting_options r;
-    r.log_level(log_level);
-    r.target(target);
-    r.delete_extra_files(true);
-    r.force_write(false);
-    r.output_directory_path(project_dir);
-    return r;
+    using dogen::utility::exception::invalid_enum_value;
+    BOOST_THROW_EXCEPTION(
+        invalid_enum_value("Invalid or unexpected severity level: " + s));
 }
 
 } } }

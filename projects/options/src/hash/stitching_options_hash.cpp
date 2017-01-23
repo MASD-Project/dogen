@@ -42,7 +42,7 @@ namespace options {
 std::size_t stitching_options_hasher::hash(const stitching_options& v) {
     std::size_t seed(0);
 
-    combine(seed, v.verbose());
+    combine(seed, v.log_level());
     combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, v.force_write());
 

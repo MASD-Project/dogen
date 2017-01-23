@@ -49,7 +49,7 @@ const std::string missing_target("Mandatory parameter target is missing. ");
 
 const std::string help_arg("help");
 const std::string version_arg("version");
-const std::string verbose_arg("verbose");
+const std::string log_level_arg("log_level");
 
 const std::string target_arg("target");
 const std::string output_dir_arg("output-dir");
@@ -57,6 +57,7 @@ const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
 const std::string force_write_arg("force-write");
+const std::string info_level("info");
 
 }
 
@@ -78,11 +79,15 @@ program_options_parser::program_options_parser(program_options_parser&& rhs)
 
 boost::program_options::options_description
 program_options_parser::make_general_options_description() const {
+    using boost::program_options::value;
     boost::program_options::options_description r("General options");
     r.add_options()
         ("help,h", "Display this help and exit.")
-        ("version", "Output version information and exit.")
-        ("verbose,v", "Output additional diagnostic information.");
+        ("version,v", "Output version information and exit.")
+        ("log_level,l",
+            value<std::string>(),
+            "What level to use for logging. Options: "
+            "trace, debug, info, warn, error. Defaults to info.");
     return r;
 }
 
@@ -106,10 +111,10 @@ program_options_parser::make_output_options_description() const {
     r.add_options()
         ("delete-extra-files,d", "Delete any additional files found in "
             "directories managed by Knitter.")
-        ("ignore-files-matching-regex",
+        ("ignore-files-matching-regex,i",
             value<std::vector<std::string> >(),
             "Ignore files matching regex, if they are on the deletion list")
-        ("force-write", "Always write files, even when there are "
+        ("force-write,f", "Always write files, even when there are "
             "no differences.")
         ("output-dir,o",
             value<std::string>(),
@@ -173,11 +178,16 @@ options::knitting_options program_options_parser::
 make_knitting_options(const variables_map& vm) const {
     options::knitting_options r;
 
-    if (!vm.count(target_arg))
+    if (vm.count(target_arg) == 0)
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
-    r.verbose(vm.count(verbose_arg) != 0);
     r.target(vm[target_arg].as<std::string>());
+
+    if (vm.count(log_level_arg) == 0)
+        r.log_level(info_level);
+    else
+        r.log_level(vm[log_level_arg].as<std::string>());
+
     r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
     r.force_write(vm.count(force_write_arg) != 0);
 

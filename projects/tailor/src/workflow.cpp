@@ -21,6 +21,7 @@
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
+#include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/version.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
@@ -56,7 +57,9 @@ void help(const std::string& d) {
  */
 void version() {
     std::cout << tailor_product << std::endl
-              << "Copyright (C) 2012-2016 Marco Craveiro." << std::endl
+              << "Copyright (C) 2015-2017 Domain Driven Consulting Plc."
+              << std::endl
+              << "Copyright (C) 2012-2015 Marco Craveiro." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
               << std::endl;
@@ -89,7 +92,7 @@ generate_tailoring_options(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging(const options::tailoring_options& o) {
-    const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
+    const auto sev(utility::log::to_severity_level(o.log_level()));
     log_file_name_ = log_file_prefix + model_name_ + ".log";
     life_cycle_manager lcm;
     lcm.initialise(log_file_name_, sev);

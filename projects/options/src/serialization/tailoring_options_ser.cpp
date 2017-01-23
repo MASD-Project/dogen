@@ -21,6 +21,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -60,7 +61,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::options::tailoring_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("verbose", v.verbose_);
+    ar << make_nvp("log_level", v.log_level_);
     ar << make_nvp("target", v.target_);
     ar << make_nvp("output", v.output_);
     ar << make_nvp("force_write", v.force_write_);
@@ -70,7 +71,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::options::tailoring_options& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("verbose", v.verbose_);
+    ar >> make_nvp("log_level", v.log_level_);
     ar >> make_nvp("target", v.target_);
     ar >> make_nvp("output", v.output_);
     ar >> make_nvp("force_write", v.force_write_);

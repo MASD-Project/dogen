@@ -50,7 +50,7 @@ namespace options {
 std::size_t knitting_options_hasher::hash(const knitting_options& v) {
     std::size_t seed(0);
 
-    combine(seed, v.verbose());
+    combine(seed, v.log_level());
     combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, v.delete_extra_files());
     combine(seed, v.force_write());

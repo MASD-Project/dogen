@@ -23,8 +23,10 @@
 
 namespace {
 
-bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
 boost::filesystem::path
@@ -34,10 +36,8 @@ create_boost_filesystem_path(const unsigned int position) {
     return boost::filesystem::path(s.str());
 }
 
-std::string create_std_string(const unsigned int position) {
-    std::ostringstream s;
-    s << "a_string_" << position;
-    return s.str();
+bool create_bool(const unsigned int position) {
+    return (position % 2) == 0;
 }
 
 std::vector<std::string> create_std_vector_std_string(unsigned int position) {
@@ -57,7 +57,7 @@ knitting_options_generator::knitting_options_generator() : position_(0) { }
 
 void knitting_options_generator::
 populate(const unsigned int position, result_type& v) {
-    v.verbose(create_bool(position + 0));
+    v.log_level(create_std_string(position + 0));
     v.target(create_boost_filesystem_path(position + 1));
     v.delete_extra_files(create_bool(position + 2));
     v.force_write(create_bool(position + 3));

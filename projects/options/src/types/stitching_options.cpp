@@ -24,31 +24,30 @@ namespace dogen {
 namespace options {
 
 stitching_options::stitching_options()
-    : verbose_(static_cast<bool>(0)),
-      force_write_(static_cast<bool>(0)) { }
+    : force_write_(static_cast<bool>(0)) { }
 
 stitching_options::stitching_options(stitching_options&& rhs)
-    : verbose_(std::move(rhs.verbose_)),
+    : log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       force_write_(std::move(rhs.force_write_)) { }
 
 stitching_options::stitching_options(
-    const bool verbose,
+    const std::string& log_level,
     const boost::filesystem::path& target,
     const bool force_write)
-    : verbose_(verbose),
+    : log_level_(log_level),
       target_(target),
       force_write_(force_write) { }
 
 void stitching_options::swap(stitching_options& other) noexcept {
     using std::swap;
-    swap(verbose_, other.verbose_);
+    swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(force_write_, other.force_write_);
 }
 
 bool stitching_options::operator==(const stitching_options& rhs) const {
-    return verbose_ == rhs.verbose_ &&
+    return log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         force_write_ == rhs.force_write_;
 }
@@ -59,12 +58,20 @@ stitching_options& stitching_options::operator=(stitching_options other) {
     return *this;
 }
 
-bool stitching_options::verbose() const {
-    return verbose_;
+const std::string& stitching_options::log_level() const {
+    return log_level_;
 }
 
-void stitching_options::verbose(const bool v) {
-    verbose_ = v;
+std::string& stitching_options::log_level() {
+    return log_level_;
+}
+
+void stitching_options::log_level(const std::string& v) {
+    log_level_ = v;
+}
+
+void stitching_options::log_level(const std::string&& v) {
+    log_level_ = std::move(v);
 }
 
 const boost::filesystem::path& stitching_options::target() const {

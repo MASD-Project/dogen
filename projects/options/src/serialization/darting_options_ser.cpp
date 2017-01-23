@@ -37,7 +37,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::options::darting_options& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("verbose", v.verbose_);
+    ar << make_nvp("log_level", v.log_level_);
     ar << make_nvp("force_write", v.force_write_);
     ar << make_nvp("product_name", v.product_name_);
 }
@@ -46,7 +46,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::options::darting_options& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("verbose", v.verbose_);
+    ar >> make_nvp("log_level", v.log_level_);
     ar >> make_nvp("force_write", v.force_write_);
     ar >> make_nvp("product_name", v.product_name_);
 }

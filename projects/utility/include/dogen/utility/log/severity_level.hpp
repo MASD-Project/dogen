@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <ostream>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/exception/invalid_enum_value.hpp"
@@ -45,6 +46,11 @@ enum severity_level {
     warn,
     error
 };
+
+/**
+ * @brief Converts the supplied string into the severity level, if valid.
+ */
+severity_level to_severity_level(const std::string& s);
 
 /**
  * @brief Inserter for severity level enum.

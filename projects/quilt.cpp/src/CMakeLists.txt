@@ -44,7 +44,7 @@ if (DOGEN_STITCHER_COMMAND)
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_STITCHER_COMMAND}
         --target ${CMAKE_CURRENT_SOURCE_DIR}/
-        --verbose)
+        --log_level debug)
     add_dependencies(stitch_all stitch_${name})
 endif()
 

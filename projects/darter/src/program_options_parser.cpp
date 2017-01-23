@@ -37,10 +37,11 @@ const std::string at_least_one_argument("Expected at least one argument");
 const std::string empty;
 const std::string help_arg("help");
 const std::string version_arg("version");
-const std::string verbose_arg("verbose");
+const std::string log_level_arg("log_level");
 const std::string target_arg("target");
 const std::string output_arg("output");
 const std::string force_write_arg("force-write");
+const std::string info_level("info");
 
 }
 
@@ -59,19 +60,15 @@ program_options_parser(const int argc, const char* argv[])
 
 boost::program_options::options_description
 program_options_parser::general_options_factory() const {
+    using boost::program_options::value;
     boost::program_options::options_description r("General options");
     r.add_options()
         ("help,h", "Display this help and exit.")
-        ("version", "Output version information and exit.");
-    return r;
-}
-
-boost::program_options::options_description
-program_options_parser::troubleshooting_options_factory() const {
-    using boost::program_options::value;
-    boost::program_options::options_description r("Troubleshooting options");
-    r.add_options()
-        ("verbose,v", "Output additional diagnostic information.");
+        ("version,v", "Output version information and exit.")
+        ("log_level,l",
+            value<std::string>(),
+            "What level to use for logging. Options: "
+            "trace, debug, info, warn, error. Defaults to info.");
 
     return r;
 }
@@ -103,7 +100,6 @@ boost::program_options::options_description
 program_options_parser::options_factory() const {
     boost::program_options::options_description r;
     r.add(general_options_factory());
-    r.add(troubleshooting_options_factory());
     r.add(input_options_factory());
     r.add(output_options_factory());
     return r;
@@ -159,7 +155,11 @@ options::darting_options program_options_parser::
 transform_options(const variables_map& vm) const {
     options::darting_options r;
 
-    r.verbose(vm.count(verbose_arg));
+    if (vm.count(log_level_arg) == 0)
+        r.log_level(info_level);
+    else
+        r.log_level(vm[log_level_arg].as<std::string>());
+
     r.force_write(vm.count(force_write_arg));
     return r;
 }

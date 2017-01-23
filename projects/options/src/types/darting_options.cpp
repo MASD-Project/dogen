@@ -24,26 +24,25 @@ namespace dogen {
 namespace options {
 
 darting_options::darting_options()
-    : verbose_(static_cast<bool>(0)),
-      force_write_(static_cast<bool>(0)) { }
+    : force_write_(static_cast<bool>(0)) { }
 
 darting_options::darting_options(
-    const bool verbose,
+    const std::string& log_level,
     const bool force_write,
     const std::string& product_name)
-    : verbose_(verbose),
+    : log_level_(log_level),
       force_write_(force_write),
       product_name_(product_name) { }
 
 void darting_options::swap(darting_options& other) noexcept {
     using std::swap;
-    swap(verbose_, other.verbose_);
+    swap(log_level_, other.log_level_);
     swap(force_write_, other.force_write_);
     swap(product_name_, other.product_name_);
 }
 
 bool darting_options::operator==(const darting_options& rhs) const {
-    return verbose_ == rhs.verbose_ &&
+    return log_level_ == rhs.log_level_ &&
         force_write_ == rhs.force_write_ &&
         product_name_ == rhs.product_name_;
 }
@@ -54,12 +53,20 @@ darting_options& darting_options::operator=(darting_options other) {
     return *this;
 }
 
-bool darting_options::verbose() const {
-    return verbose_;
+const std::string& darting_options::log_level() const {
+    return log_level_;
 }
 
-void darting_options::verbose(const bool v) {
-    verbose_ = v;
+std::string& darting_options::log_level() {
+    return log_level_;
+}
+
+void darting_options::log_level(const std::string& v) {
+    log_level_ = v;
+}
+
+void darting_options::log_level(const std::string&& v) {
+    log_level_ = std::move(v);
 }
 
 bool darting_options::force_write() const {

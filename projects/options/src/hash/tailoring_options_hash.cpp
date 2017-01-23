@@ -42,7 +42,7 @@ namespace options {
 std::size_t tailoring_options_hasher::hash(const tailoring_options& v) {
     std::size_t seed(0);
 
-    combine(seed, v.verbose());
+    combine(seed, v.log_level());
     combine(seed, hash_boost_filesystem_path(v.target()));
     combine(seed, hash_boost_filesystem_path(v.output()));
     combine(seed, v.force_write());

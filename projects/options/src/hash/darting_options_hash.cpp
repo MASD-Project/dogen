@@ -36,7 +36,7 @@ namespace options {
 std::size_t darting_options_hasher::hash(const darting_options& v) {
     std::size_t seed(0);
 
-    combine(seed, v.verbose());
+    combine(seed, v.log_level());
     combine(seed, v.force_write());
     combine(seed, v.product_name());
 

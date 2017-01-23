@@ -23,6 +23,7 @@
 #include <boost/exception/all.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
+#include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/version.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
@@ -42,7 +43,7 @@ const std::string get_help("Use --help option to see usage instructions.");
 const std::string stitcher_product("Dogen Stitcher v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
-const std::string log_file_msg("See the log file for details.");
+const std::string log_file_msg("See the log file for details: ");
 const std::string errors_msg(" finished with errors.");
 
 /**
@@ -59,6 +60,8 @@ void help(const std::string& d) {
  */
 void version() {
     std::cout << stitcher_product << std::endl
+              << "Copyright (C) 2015-2017 Domain Driven Consulting Plc."
+              << std::endl
               << "Copyright (C) 2012-2015 Marco Craveiro." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
@@ -87,9 +90,14 @@ generate_stitching_options_activity(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::initialise_logging_activity(const options::stitching_options& o) {
-    const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
-    log_file_name_ = log_file_prefix + template_name_ + ".log";
+void workflow::
+initialise_logging_activity(const options::stitching_options& o) {
+    const auto sev(utility::log::to_severity_level(o.log_level()));
+    if (!template_name_.empty())
+        log_file_name_ = log_file_prefix + template_name_ + ".log";
+    else
+        log_file_name_ = log_file_prefix + "all_templates.log";
+
     life_cycle_manager lcm;
     lcm.initialise(log_file_name_, sev);
     can_log_ = true;
@@ -105,11 +113,8 @@ void workflow::stitch_activity(const options::stitching_options& o) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << stitcher_product << errors_msg;
-        std::cerr << log_file_name_.string() << ":0: " << log_file_msg
-                  << std::endl;
-
-            // << log_file_msg << "'" << log_file_name_.string()
-            //       << "' " << std::endl;
+        std::cerr << log_file_msg << "'" << log_file_name_.generic_string()
+                  << "' " << std::endl;
     }
 
     if (template_name_.empty())

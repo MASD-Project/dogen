@@ -44,7 +44,8 @@ const std::string version_arg("--version");
 const std::string invalid_arg("--invalid-argument");
 const std::string invalid_value_arg("invalid-value");
 
-const std::string verbose_arg("--verbose");
+const std::string log_level_arg("--log_level");
+const std::string log_level_value_arg("info");
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
 
@@ -324,25 +325,25 @@ BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     BOOST_CHECK(ko.force_write());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_verobose_flag_results_in_options_with_verbose_on) {
-    SETUP_TEST_LOG_SOURCE("supplying_verobose_flag_results_in_options_with_verbose_on");
+BOOST_AUTO_TEST_CASE(supplying_log_level_results_in_options_with_expected_log_level) {
+    SETUP_TEST_LOG_SOURCE("supplying_log_level_results_in_options_with_expected_log_level");
 
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        verbose_arg
+        log_level_arg, log_level_value_arg
     };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(ko.verbose());
+    BOOST_CHECK(ko.log_level() == log_level_value_arg);
 }
 
-BOOST_AUTO_TEST_CASE(not_supplying_verobose_flag_results_in_options_with_verbose_off) {
-    SETUP_TEST_LOG_SOURCE("not_supplying_verobose_flag_results_in_options_with_verbose_off");
+BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_a_default_log_level_set) {
+    SETUP_TEST_LOG_SOURCE("not_supplying_log_level_results_in_a_default_log_level_set");
 
     const std::vector<std::string> o = { target_arg, target_value_arg };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
-    BOOST_CHECK(!ko.verbose());
+    BOOST_CHECK(!ko.log_level().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

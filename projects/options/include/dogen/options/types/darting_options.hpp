@@ -43,7 +43,7 @@ public:
 
 public:
     darting_options(
-        const bool verbose,
+        const std::string& log_level,
         const bool force_write,
         const std::string& product_name);
 
@@ -55,8 +55,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::options::darting_options& v, unsigned int version);
 
 public:
-    bool verbose() const;
-    void verbose(const bool v);
+    /**
+     * @brief What level of logging to log at.
+     */
+    /**@{*/
+    const std::string& log_level() const;
+    std::string& log_level();
+    void log_level(const std::string& v);
+    void log_level(const std::string&& v);
+    /**@}*/
 
     bool force_write() const;
     void force_write(const bool v);
@@ -77,7 +84,7 @@ public:
     darting_options& operator=(darting_options other);
 
 private:
-    bool verbose_;
+    std::string log_level_;
     bool force_write_;
     std::string product_name_;
 };

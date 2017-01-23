@@ -21,6 +21,7 @@
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
+#include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/version.hpp"
@@ -57,7 +58,9 @@ void help(const std::string& d) {
  */
 void version() {
     std::cout << knitter_product << std::endl
-              << "Copyright (C) 2012-2016 Marco Craveiro." << std::endl
+              << "Copyright (C) 2015-2017 Domain Driven Consulting Plc."
+              << std::endl
+              << "Copyright (C) 2012-2015 Marco Craveiro." << std::endl
               << "License: GPLv3 - GNU GPL version 3 or later "
               << "<http://gnu.org/licenses/gpl.html>."
               << std::endl;
@@ -93,7 +96,7 @@ generate_knitting_options_activity(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging_activity(const options::knitting_options& o) {
-    const auto sev(o.verbose() ? severity_level::debug : severity_level::info);
+    const auto sev(utility::log::to_severity_level(o.log_level()));
     log_file_name_ = log_file_prefix + model_name_ + ".log";
     life_cycle_manager lcm;
     lcm.initialise(log_file_name_, sev);
@@ -110,7 +113,7 @@ void workflow::knit_activity(const options::knitting_options& o) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
-        std::cerr << log_file_msg << "'" << log_file_name_.string()
+        std::cerr << log_file_msg << "'" << log_file_name_.generic_string()
                   << "' " << std::endl;
     }
 

@@ -50,7 +50,7 @@ public:
 
 public:
     knitting_options(
-        const bool verbose,
+        const std::string& log_level,
         const boost::filesystem::path& target,
         const bool delete_extra_files,
         const bool force_write,
@@ -66,11 +66,13 @@ private:
 
 public:
     /**
-     * @brief Provide additional diagnostic information in the log file.
+     * @brief What level of logging to log at.
      */
     /**@{*/
-    bool verbose() const;
-    void verbose(const bool v);
+    const std::string& log_level() const;
+    std::string& log_level();
+    void log_level(const std::string& v);
+    void log_level(const std::string&& v);
     /**@}*/
 
     /**
@@ -130,7 +132,7 @@ public:
     knitting_options& operator=(knitting_options other);
 
 private:
-    bool verbose_;
+    std::string log_level_;
     boost::filesystem::path target_;
     bool delete_extra_files_;
     bool force_write_;

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/serialization/stitching_options_fwd_ser.hpp"
@@ -45,7 +46,7 @@ public:
 
 public:
     stitching_options(
-        const bool verbose,
+        const std::string& log_level,
         const boost::filesystem::path& target,
         const bool force_write);
 
@@ -57,8 +58,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::options::stitching_options& v, unsigned int version);
 
 public:
-    bool verbose() const;
-    void verbose(const bool v);
+    /**
+     * @brief What level of logging to log at.
+     */
+    /**@{*/
+    const std::string& log_level() const;
+    std::string& log_level();
+    void log_level(const std::string& v);
+    void log_level(const std::string&& v);
+    /**@}*/
 
     const boost::filesystem::path& target() const;
     boost::filesystem::path& target();
@@ -79,7 +87,7 @@ public:
     stitching_options& operator=(stitching_options other);
 
 private:
-    bool verbose_;
+    std::string log_level_;
     boost::filesystem::path target_;
     bool force_write_;
 };
