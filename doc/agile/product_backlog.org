@@ -5801,13 +5801,6 @@ no need to use it any longer. We need to investigate if the formatters
 model is making use of it (generating comments, namespaces, etc). If
 not, remove it.
 
-*** Add log-level to command line                                     :story:
-
-We are now increasingly logging at trace levels. We need to allow
-users to supply a more fine-grained log configuration. This could be
-done by simply allowing users to set the log level via a command-line
-flag: =log_level=. It would replace verbose.
-
 *** Sequences that support multiple postfixes                         :story:
 
 In C# we encountered what is probably a new use case for sequences: a

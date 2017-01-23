@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-23 Mon 11:53]
+#+CAPTION: Clock summary at [2017-01-23 Mon 14:39]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:02* |       |       | 100.0 |
+| *Total time*                                                                | *37:35* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:02   |       |       | 100.0 |
-| Active                                                                      |         | 36:02 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:32 |   4.3 |
+| Stories                                                                     | 37:35   |       |       | 100.0 |
+| Active                                                                      |         | 37:35 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   5.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.6 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.4 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  28.6 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.7 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   4.1 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.8 |
-| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   1.0 |
-| STARTED Add multi-language support                                          |         |       | 12:16 |  34.0 |
-| STARTED Add a type mapper                                                   |         |       |  6:19 |  17.5 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.3 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  27.4 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.5 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.9 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.7 |
+| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.9 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  35.8 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  16.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-23 Mon 14:18]--[2017-01-23 Mon 14:39] =>  0:21
     CLOCK: [2017-01-16 Mon 21:02]--[2017-01-16 Mon 21:56] =>  0:54
     CLOCK: [2017-01-16 Mon 18:02]--[2017-01-16 Mon 18:17] =>  0:15
     CLOCK: [2017-01-16 Mon 15:47]--[2017-01-16 Mon 15:50] =>  0:03
@@ -262,7 +263,9 @@ not match the kernel's.
 : 2017-01-18 20:54:38.534005 [INFO] [knit.housekeeper] initial configuration: ignore patterns: [  ] managed directories: [ "/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/TestModel/actual.upsilon/Zeta", "/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/TestModel/actual.upsilon/Zeta" ]
 : 2017-01-18 20:54:38.534027 [ERROR] [utility.filesystem.file] Could not find directory: /home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin/../test_data/TestModel/actual.upsilon/Zeta
 
-*** STARTED Add multi-language support                                :story:
+*** COMPLETED Add multi-language support                              :story:
+    CLOSED: [2017-01-23 Mon 14:18]
+    CLOCK: [2017-01-23 Mon 13:05]--[2017-01-23 Mon 14:17] =>  1:12
     CLOCK: [2017-01-23 Mon 11:46]--[2017-01-23 Mon 11:53] =>  0:07
     CLOCK: [2017-01-23 Mon 11:44]--[2017-01-23 Mon 11:45] =>  0:01
     CLOCK: [2017-01-23 Mon 11:16]--[2017-01-23 Mon 11:44] =>  0:28
@@ -376,7 +379,8 @@ future we will have the same requirement for LAM. We could:
   take all of these models and supply them to the mapper, together
   with an outputtable language.
 
-*** STARTED Add a type mapper                                         :story:
+*** COMPLETED Add a type mapper                                       :story:
+    CLOSED: [2017-01-23 Mon 14:39]
     CLOCK: [2017-01-19 Thu 17:34]--[2017-01-19 Thu 17:56] =>  0:22
     CLOCK: [2017-01-19 Thu 16:19]--[2017-01-19 Thu 17:33] =>  1:14
     CLOCK: [2017-01-19 Thu 14:37]--[2017-01-19 Thu 16:18] =>  1:41
@@ -418,6 +422,65 @@ language to LAM them from LAM to language. If already in LAM then only
 one look-up is required. Mapping must also include removal. Actually
 this requirement is only needed for ModelValue; upsilon could filter
 out any extends of this type, greatly simplifying the mapping logic.
+
+*** Add tailor support for upsilon                                    :story:
+
+Given an upsilon model, generate the JSON for a LAM model. If selected
+by the user, it would also be nice to generate a language-specific
+model (C++/C#).
+
+*** Make the Zeta model compilable                                    :story:
+
+We need to work through the list of issues with the Zeta model and get
+it to a compilable state.
+
+*** Add support for command line meta-data parameters                 :story:
+
+We do not want to force end users to change their existing file
+format. However, it is sometimes necessary to supply parameters into
+dogen which are not representable in the existing format. We could
+create a very simple extension to the command line arguments that
+would generate scribbles; these would then be appended to the model
+during the yarn workflow. Example:
+
+: --kvp a=b
+
+or:
+
+: --meta-data a=b
+
+*** Add support for pointers to mapper                                :story:
+
+We need to detect types which are abstract (if its already populated)
+and ensure we wrap them around a pointer in C++.
+
+*** Fix recursive path lookup for upsilon                             :story:
+
+It seems we still can't recurse upwards when looking for the
+components of the upsilon model.
+
+We should also look first on the current directory and then make use
+of the relative path.
+
+*** Map upsilon primitives to intrinsics                              :story:
+
+Upsilon allows users to create "strong typedefs" around primitve
+types. We need to unpack these into their intrinsic counterparts and
+them map the intrinsics to native types.
+
+*** Do not generate upsilon proxy models                              :story:
+
+At present we are marking all types in an upsilon config as target. In
+practice, only one of the models is the target.
+
+*** Add log-level to command line                                     :story:
+
+We are now increasingly logging at trace levels. We need to allow
+users to supply a more fine-grained log configuration. This could be
+done by simply allowing users to set the log level via a command-line
+flag: =log_level=. It would replace verbose.
+
+Or we could simply add a new flag like =extra-verbose=.
 
 *** In JSON hydrator rename simple name to simple                     :story:
 
