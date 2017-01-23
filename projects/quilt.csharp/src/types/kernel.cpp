@@ -23,6 +23,7 @@
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
+#include "dogen/quilt.csharp/types/formattables/locator.hpp"
 #include "dogen/quilt.csharp/types/kernel.hpp"
 
 namespace {
@@ -42,14 +43,13 @@ namespace csharp {
 kernel::~kernel() noexcept { }
 
 formattables::model kernel::create_formattables_model(
-    const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
-    const formatters::repository& frp, const bool enable_kernel_directories,
+    const formatters::repository& frp, const formattables::locator& l,
     const yarn::model& m) const {
     formattables::workflow fw;
-    return fw.execute(ko, atrp, ra, dpf, frp, enable_kernel_directories, m);
+    return fw.execute(atrp, ra, dpf, frp, l, m);
 }
 
 std::list<boost::filesystem::path>
@@ -101,8 +101,12 @@ kernel_output kernel::generate(const options::knitting_options& ko,
 
     const auto ra(m.root_module().annotation());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
+
+    const auto mn(m.name());
+    const auto odp(ko.output_directory_path());
     const bool ekd(enable_kernel_directories);
-    const auto fm(create_formattables_model(ko, atrp, ra, dpf, frp, ekd, m));
+    const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);
+    const auto fm(create_formattables_model(atrp, ra, dpf, frp, l, m));
 
     kernel_output r;
     r.artefacts(format(atrp, agf, drp, fm));

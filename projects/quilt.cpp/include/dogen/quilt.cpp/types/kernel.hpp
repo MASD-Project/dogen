@@ -37,6 +37,7 @@
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -60,11 +61,10 @@ private:
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(
-        const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::repository& frp, const bool requires_kernel_directory,
+        const formatters::repository& frp, const formattables::locator& l,
         const yarn::model& m) const;
 
     /**

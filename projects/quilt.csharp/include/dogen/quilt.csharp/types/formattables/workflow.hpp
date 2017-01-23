@@ -56,11 +56,10 @@ private:
 
 public:
     model execute(
-        const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const dogen::formatters::decoration_properties_factory& dpf,
-        const formatters::repository& frp, const bool enable_kernel_directories,
+        const formatters::repository& frp, const locator& l,
         const yarn::model& m) const;
 };
 
