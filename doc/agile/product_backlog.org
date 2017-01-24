@@ -11,6 +11,17 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for cross-language LAM serialisation                  :story:
+
+Now we have the basic support for LAM in place, it would be nice to be
+able to serialise across languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
 *** Code-generate a "one-shot" serialisation API                      :story:
 
 For the dia model we manually generated a class called

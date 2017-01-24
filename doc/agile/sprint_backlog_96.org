@@ -13,34 +13,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-23 Mon 22:11]
+#+CAPTION: Clock summary at [2017-01-24 Tue 12:06]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *42:48* |       |       | 100.0 |
+| *Total time*                                                                | *45:36* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 42:48   |       |       | 100.0 |
-| Active                                                                      |         | 42:48 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:53 |   4.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.4 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   2.0 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  24.1 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   3.1 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.5 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.4 |
+| Stories                                                                     | 45:36   |       |       | 100.0 |
+| Active                                                                      |         | 45:36 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:37 |   5.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.3 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.9 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  22.6 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   2.9 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.3 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.2 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.8 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  31.5 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  14.8 |
-| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.9 |
-| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   3.1 |
-| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.4 |
-| COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   2.5 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  29.5 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  13.9 |
+| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.8 |
+| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   2.9 |
+| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.3 |
+| COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   2.3 |
 | COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.6 |
-| STARTED Add mapping support between upsilon and LAM                         |         |       |  0:43 |   1.7 |
+| STARTED Add mapping support between upsilon and LAM                         |         |       |  0:43 |   1.6 |
+| STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.6 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  1:19 |   2.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-24 Tue 11:42]--[2017-01-24 Tue 12:06] =>  0:24
+    CLOCK: [2017-01-24 Tue 09:15]--[2017-01-24 Tue 09:35] =>  0:20
     CLOCK: [2017-01-23 Mon 14:18]--[2017-01-23 Mon 14:39] =>  0:21
     CLOCK: [2017-01-16 Mon 21:02]--[2017-01-16 Mon 21:56] =>  0:54
     CLOCK: [2017-01-16 Mon 18:02]--[2017-01-16 Mon 18:17] =>  0:15
@@ -488,6 +492,24 @@ Given an upsilon model, generate the JSON representation.
 This was implemented but its not very useful because at present we are
 not performing any mapping.
 
+*** CANCELLED Split generalisation expansion into two-passes          :story:
+    CLOSED: [2017-01-24 Tue 11:48]
+
+At present we are populating all generalisation properties in one
+go. However, mapper now needs to know of abstract elements. We can't
+move the entire generalisation expansion to non-merging because some
+of it relies on merging - but the abstract part doesn't. So we could
+split it into two: first pass and second pass. First pass would be
+part of the intermediate model expansion and second pass of the model
+expansion. Mapping can then rely on "is abstract".
+
+The downside of this approach is that we now can't have explicit
+pointer types. So if a model inherits from another model we won't see
+the generalisation relationship and we have no way to "force" LAM to
+generate a pointer. This is not ideal. A better way is to have an
+explicit LAM pointer type. For upsilon we can put in a hack that
+detects if a class is a parent and so forces a pointer to be emitted.
+
 *** STARTED Add mapping support between upsilon and LAM               :story:
     CLOCK: [2017-01-23 Mon 21:28]--[2017-01-23 Mon 22:11] =>  0:43
 
@@ -515,6 +537,121 @@ Notes:
 - we are not adding the LAM mapping to the upsilon id container.
 - we need to add support for "default mappings"
 
+*** STARTED Make the Zeta model compilable                            :story:
+    CLOCK: [2017-01-24 Tue 09:35]--[2017-01-24 Tue 10:20] =>  0:45
+
+We need to work through the list of issues with the Zeta model and get
+it to a compilable state.
+
+*** STARTED Add support for Language Agnostic Models (LAM)            :story:
+    CLOCK: [2017-01-24 Tue 11:11]--[2017-01-24 Tue 11:41] =>  0:30
+    CLOCK: [2017-01-24 Tue 10:21]--[2017-01-24 Tue 11:10] =>  0:49
+
+Tasks:
+
+- create the basic LAM types and add mapping for both C# and C++.
+- create a LAM test model which tests that the mapping for all types
+  generates compilable code.
+
+LAM type map:
+
+| Type                            | C++                              | C#                                          | Upsilon              |
+|---------------------------------+----------------------------------+---------------------------------------------+----------------------|
+| lam::byte                       | unsigned char                    | uchar                                       |                      |
+| lam::character                  | char                             | char                                        |                      |
+| lam::integer8                   | std::int8_t                      | sbyte                                       |                      |
+| lam::integer16                  | std::int16_t                     | System.Int16                                |                      |
+| lam::integer32                  | std::int32_t                     | System.Int32                                |                      |
+| lam::integer64                  | std::int64_t                     | System.Int64                                | Integer64            |
+| lam::integer                    | int                              | int                                         |                      |
+| lam::single_floating            | float                            | float                                       |                      |
+| lam::double_floating            | double                           | double                                      | Double               |
+| lam::boolean                    | bool                             | bool                                        | Boolean              |
+| lam::string                     | std::string                      | string                                      | Binary, Guid, String |
+| lam::date                       | boost::gregorian::date           | System.DateTime                             | Date                 |
+| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                             | UtcTime              |
+| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                             | UtcDateTime          |
+| lam::decimal                    | std::decimal                     | System.Decimal                              | Decimal              |
+| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>          | Collection           |
+| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>         |                      |
+| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V> |                      |
+| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.Dictionary<K, V> |                      |
+| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>       |                      |
+| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>     |                      |
+| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>         |                      |
+| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>         |                      |
+| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>    |                      |
+
+*Previous Understanding*
+
+When we start supporting more than one language, one interesting
+feature would be to be able to define a model once and have it
+generated for all supported languages. This would be achieved by
+having a system model (or set of system models) that define all the
+key types in a language agnostic manner. For example:
+
+: lam::string
+: lam::int
+: lam::int16
+
+Each of these types then has a set of meta-data fields that map them
+to a type in a supported language:
+
+: lam:string: cpp.concrete_type_mapping = std::string
+: lam:string: csharp.concrete_type_mapping = string
+
+And so on. We load the user model that makes use of LAM, we generate
+the merged model still with LAM types and then we perform a
+translation for each of the supported and enabled languages: for every
+LAM type, we replace all its references with the corresponding
+concrete type. We need to split the supplied mapping into a QName, use
+the QName to load the system models for that language, look up the
+type and replace it. After the translation no LAM types are left. We
+end up with N yarn merged models where N is the number of supported and
+enabled languages.
+
+Each of these models is then sent down to code generation. This should
+be equivalent to manually generating models per language - we could
+use this as a test.
+
+Once we have LAM, it would be great to be able to exchange data
+between languages. This could be done as follows:
+
+- XML: create a "LAM" XML schema, and a set of formatters that read
+  and write from it. This is kind of like reverse mapping the types
+  back to LAM types when writing the XML.
+- JSON: similar approach to XML, minus the schema.
+- POF: use the coherence libraries to dump the models into POF.
+
+Tasks:
+
+- create the LAM model with a set of basic types.
+- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
+  and populate the types with entries for each supported language.
+- create a notion of mapping of intermediate models into
+  languages. The input is the merged intermediate model and the output
+  is N models one per language. We also need a way to associate
+  backends with languages. Each model is sent down to its backend.
+- note that reverse mapping is possible: we should be able to
+  associate a type on a given language with it's lam type. This means
+  that, given a model in say C#, we could reconstruct a yarn lam model
+  (or tell the user about the list of failures to map). This should be
+  logged as a separate story.
+
+Links:
+
+- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
+- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
+
+*** Add support for pointers to mapper in upsilon                     :story:
+
+We need to detect types which are abstract (if its already populated)
+and ensure we wrap them around a pointer in C++.
+
+This is specifically done only for upsilon. We can rely on the
+populated parents collection in order to determine if a type is
+abstract.
+
 *** Add defaults for cases where mapping is not bijective             :story:
 
 Upsilon maps a number of LAM types to "collection". This means that
@@ -525,15 +662,43 @@ non-functional relationships. For example: say =lam::dictionary= and
 LAM. We can extend the mappings class with a "is default" flag and
 update the JSON files.
 
-*** Add support for pointers to mapper                                :story:
+*** Map upsilon primitives to intrinsics                              :story:
 
-We need to detect types which are abstract (if its already populated)
-and ensure we wrap them around a pointer in C++.
+Upsilon allows users to create "strong typedefs" around primitve
+types. We need to unpack these into their intrinsic counterparts and
+them map the intrinsics to native types.
 
-*** Make the Zeta model compilable                                    :story:
+*** Add support for generic container types to C#                     :story:
 
-We need to work through the list of issues with the Zeta model and get
-it to a compilable state.
+We should add all major container types and tests for them.
+
+: IEnumerable<T>
+: ICollection<T>
+: IList<T>
+: IDictionary<K, V>
+: List<T>
+: ConcurrentQueue<T>, ConcurrentStack<T>, LinkedList<T>
+: Dictionary<TKey, TValue>
+: SortedList<TKey, TValue>
+: ConcurrentDictionary<TKey, TValue>
+: KeyedCollection<TKey, TItem>
+
+Notes:
+
+- we need a way to determine if we are using a helper, the assistant
+  or a sequence generator directly.
+
+*** Allow users to choose mappings                                    :story:
+
+At present we load the "default" mappings, which are also the only
+mappings available. It is entirely possible that users will not agree
+with those mappings. If we add a name to the mappings, and provide a
+meta-data tag to choose mappings we can then allow users to provide
+their own and set the meta-data accordingly. Mapper then reads the
+meta-data in the model and uses the requested element map. For this we
+need to name the element maps and we also need to create a "mapping
+set". These can be indexed by name in the mapping repository. Mapper
+chooses the mapping set to use.
 
 *** Add support for command line meta-data parameters                 :story:
 
@@ -549,12 +714,6 @@ during the yarn workflow. Example:
 or:
 
 : --meta-data a=b
-
-*** Map upsilon primitives to intrinsics                              :story:
-
-Upsilon allows users to create "strong typedefs" around primitve
-types. We need to unpack these into their intrinsic counterparts and
-them map the intrinsics to native types.
 
 *** Do not generate upsilon proxy models                              :story:
 
@@ -649,87 +808,6 @@ for all model types and primitives. Add a registrar for local dumpers.
 :         }
 :     }
 : }
-
-*** Add support for generic container types to C#                     :story:
-
-We should add all major container types and tests for them.
-
-: IEnumerable<T>
-: ICollection<T>
-: IList<T>
-: IDictionary<K, V>
-: List<T>
-: ConcurrentQueue<T>, ConcurrentStack<T>, LinkedList<T>
-: Dictionary<TKey, TValue>
-: SortedList<TKey, TValue>
-: ConcurrentDictionary<TKey, TValue>
-: KeyedCollection<TKey, TItem>
-
-Notes:
-
-- we need a way to determine if we are using a helper, the assistant
-  or a sequence generator directly.
-
-*** Add support for Language Agnostic Models (LAM)                    :story:
-
-When we start supporting more than one language, one interesting
-feature would be to be able to define a model once and have it
-generated for all supported languages. This would be achieved by
-having a system model (or set of system models) that define all the
-key types in a language agnostic manner. For example:
-
-: lam::string
-: lam::int
-: lam::int16
-
-Each of these types then has a set of meta-data fields that map them
-to a type in a supported language:
-
-: lam:string: cpp.concrete_type_mapping = std::string
-: lam:string: csharp.concrete_type_mapping = string
-
-And so on. We load the user model that makes use of LAM, we generate
-the merged model still with LAM types and then we perform a
-translation for each of the supported and enabled languages: for every
-LAM type, we replace all its references with the corresponding
-concrete type. We need to split the supplied mapping into a QName, use
-the QName to load the system models for that language, look up the
-type and replace it. After the translation no LAM types are left. We
-end up with N yarn merged models where N is the number of supported and
-enabled languages.
-
-Each of these models is then sent down to code generation. This should
-be equivalent to manually generating models per language - we could
-use this as a test.
-
-Once we have LAM, it would be great to be able to exchange data
-between languages. This could be done as follows:
-
-- XML: create a "LAM" XML schema, and a set of formatters that read
-  and write from it. This is kind of like reverse mapping the types
-  back to LAM types when writing the XML.
-- JSON: similar approach to XML, minus the schema.
-- POF: use the coherence libraries to dump the models into POF.
-
-Tasks:
-
-- create the LAM model with a set of basic types.
-- add a set of mapping fields into yarn: =yarn.mapping.csharp=, etc
-  and populate the types with entries for each supported language.
-- create a notion of mapping of intermediate models into
-  languages. The input is the merged intermediate model and the output
-  is N models one per language. We also need a way to associate
-  backends with languages. Each model is sent down to its backend.
-- note that reverse mapping is possible: we should be able to
-  associate a type on a given language with it's lam type. This means
-  that, given a model in say C#, we could reconstruct a yarn lam model
-  (or tell the user about the list of failures to map). This should be
-  logged as a separate story.
-
-Links:
-
-- [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
-- [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
 
 *** Fix issues with bintray windows uploads                           :story:
 
