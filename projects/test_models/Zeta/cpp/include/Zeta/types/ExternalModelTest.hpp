@@ -5,8 +5,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include "Phi/types/Date.hpp"
 #include "Zeta/serialization/ExternalModelTest_fwd_ser.hpp"
@@ -28,9 +28,9 @@ public:
 public:
     ExternalModelTest(
         const Phi::Date DateTest,
-        const std::list<std::string>& BinariesTest,
-        const std::list<std::list<std::string> >& CollectionOfCollectionTest,
-        const std::list<std::list<std::list<std::string> > >& CollectionOfCollectionOfCollectionTest);
+        const std::vector<std::string>& BinariesTest,
+        const std::vector<std::vector<std::string> >& CollectionOfCollectionTest,
+        const std::vector<std::vector<std::vector<std::string> > >& CollectionOfCollectionOfCollectionTest);
 
 private:
     template<typename Archive>
@@ -52,30 +52,30 @@ public:
      * @brief Some comment
      */
     /**@{*/
-    const std::list<std::string>& BinariesTest() const;
-    std::list<std::string>& BinariesTest();
-    void BinariesTest(const std::list<std::string>& v);
-    void BinariesTest(const std::list<std::string>&& v);
+    const std::vector<std::string>& BinariesTest() const;
+    std::vector<std::string>& BinariesTest();
+    void BinariesTest(const std::vector<std::string>& v);
+    void BinariesTest(const std::vector<std::string>&& v);
     /**@}*/
 
     /**
      * @brief Some comment
      */
     /**@{*/
-    const std::list<std::list<std::string> >& CollectionOfCollectionTest() const;
-    std::list<std::list<std::string> >& CollectionOfCollectionTest();
-    void CollectionOfCollectionTest(const std::list<std::list<std::string> >& v);
-    void CollectionOfCollectionTest(const std::list<std::list<std::string> >&& v);
+    const std::vector<std::vector<std::string> >& CollectionOfCollectionTest() const;
+    std::vector<std::vector<std::string> >& CollectionOfCollectionTest();
+    void CollectionOfCollectionTest(const std::vector<std::vector<std::string> >& v);
+    void CollectionOfCollectionTest(const std::vector<std::vector<std::string> >&& v);
     /**@}*/
 
     /**
      * @brief Some comment
      */
     /**@{*/
-    const std::list<std::list<std::list<std::string> > >& CollectionOfCollectionOfCollectionTest() const;
-    std::list<std::list<std::list<std::string> > >& CollectionOfCollectionOfCollectionTest();
-    void CollectionOfCollectionOfCollectionTest(const std::list<std::list<std::list<std::string> > >& v);
-    void CollectionOfCollectionOfCollectionTest(const std::list<std::list<std::list<std::string> > >&& v);
+    const std::vector<std::vector<std::vector<std::string> > >& CollectionOfCollectionOfCollectionTest() const;
+    std::vector<std::vector<std::vector<std::string> > >& CollectionOfCollectionOfCollectionTest();
+    void CollectionOfCollectionOfCollectionTest(const std::vector<std::vector<std::vector<std::string> > >& v);
+    void CollectionOfCollectionOfCollectionTest(const std::vector<std::vector<std::vector<std::string> > >&& v);
     /**@}*/
 
 public:
@@ -90,9 +90,9 @@ public:
 
 private:
     Phi::Date DateTest_;
-    std::list<std::string> BinariesTest_;
-    std::list<std::list<std::string> > CollectionOfCollectionTest_;
-    std::list<std::list<std::list<std::string> > > CollectionOfCollectionOfCollectionTest_;
+    std::vector<std::string> BinariesTest_;
+    std::vector<std::vector<std::string> > CollectionOfCollectionTest_;
+    std::vector<std::vector<std::vector<std::string> > > CollectionOfCollectionOfCollectionTest_;
 };
 
 }

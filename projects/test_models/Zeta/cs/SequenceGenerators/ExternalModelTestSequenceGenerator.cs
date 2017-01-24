@@ -12,9 +12,9 @@ namespace Zeta
         static internal void Populate(ExternalModelTest value, uint position)
         {
             value.DateTest = Phi.DateSequenceGenerator.Create(position + 0);
-            value.BinariesTest = System.Collections.Generic.ListSequenceGenerator.Create(position + 1);
-            value.CollectionOfCollectionTest = System.Collections.Generic.ListSequenceGenerator.Create(position + 2);
-            value.CollectionOfCollectionOfCollectionTest = System.Collections.Generic.ListSequenceGenerator.Create(position + 3);
+            value.BinariesTest = System.Collections.Generic.ArraySequenceGenerator.Create(position + 1);
+            value.CollectionOfCollectionTest = System.Collections.Generic.ArraySequenceGenerator.Create(position + 2);
+            value.CollectionOfCollectionOfCollectionTest = System.Collections.Generic.ArraySequenceGenerator.Create(position + 3);
         }
 
         static internal ExternalModelTest Create(uint position)

@@ -11,12 +11,12 @@ namespace Phi
         /// <summary>
         /// Some comment
         /// </summary>
-        public System.Collections.Generic.List<object> BinariesTest { get; set; }
+        public System.Collections.Generic.Array<object> BinariesTest { get; set; }
         #endregion
 
         #region Constructors
         public CollectionTestType() { }
-        public CollectionTestType(System.Collections.Generic.List<object> binariesTest)
+        public CollectionTestType(System.Collections.Generic.Array<object> binariesTest)
         {
             BinariesTest = binariesTest;
         }

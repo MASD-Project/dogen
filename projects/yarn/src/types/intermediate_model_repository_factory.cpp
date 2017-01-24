@@ -97,15 +97,12 @@ obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
 mapping_set_repository
 intermediate_model_repository_factory::
 obtain_mapping_set_repository(const std::unordered_map<std::string,
-    std::list<mapping>>& /*mappings*/) const {
-    mapping_set_repository r;
-    return r;
-    /*BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
+    std::list<mapping>>& mappings) const {
+    BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
     mapping_set_repository_factory f;
     const auto r(f.make(mappings));
     BOOST_LOG_SEV(lg, debug) << "Obtained mapping repository. Result: " << r;
     return r;
-    */
 }
 
 intermediate_model

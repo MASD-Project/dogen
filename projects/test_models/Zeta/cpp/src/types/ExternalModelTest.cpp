@@ -7,9 +7,9 @@ ExternalModelTest::ExternalModelTest()
 
 ExternalModelTest::ExternalModelTest(
     const Phi::Date DateTest,
-    const std::list<std::string>& BinariesTest,
-    const std::list<std::list<std::string> >& CollectionOfCollectionTest,
-    const std::list<std::list<std::list<std::string> > >& CollectionOfCollectionOfCollectionTest)
+    const std::vector<std::string>& BinariesTest,
+    const std::vector<std::vector<std::string> >& CollectionOfCollectionTest,
+    const std::vector<std::vector<std::vector<std::string> > >& CollectionOfCollectionOfCollectionTest)
     : DateTest_(DateTest),
       BinariesTest_(BinariesTest),
       CollectionOfCollectionTest_(CollectionOfCollectionTest),
@@ -44,51 +44,51 @@ void ExternalModelTest::DateTest(const Phi::Date v) {
     DateTest_ = v;
 }
 
-const std::list<std::string>& ExternalModelTest::BinariesTest() const {
+const std::vector<std::string>& ExternalModelTest::BinariesTest() const {
     return BinariesTest_;
 }
 
-std::list<std::string>& ExternalModelTest::BinariesTest() {
+std::vector<std::string>& ExternalModelTest::BinariesTest() {
     return BinariesTest_;
 }
 
-void ExternalModelTest::BinariesTest(const std::list<std::string>& v) {
+void ExternalModelTest::BinariesTest(const std::vector<std::string>& v) {
     BinariesTest_ = v;
 }
 
-void ExternalModelTest::BinariesTest(const std::list<std::string>&& v) {
+void ExternalModelTest::BinariesTest(const std::vector<std::string>&& v) {
     BinariesTest_ = std::move(v);
 }
 
-const std::list<std::list<std::string> >& ExternalModelTest::CollectionOfCollectionTest() const {
+const std::vector<std::vector<std::string> >& ExternalModelTest::CollectionOfCollectionTest() const {
     return CollectionOfCollectionTest_;
 }
 
-std::list<std::list<std::string> >& ExternalModelTest::CollectionOfCollectionTest() {
+std::vector<std::vector<std::string> >& ExternalModelTest::CollectionOfCollectionTest() {
     return CollectionOfCollectionTest_;
 }
 
-void ExternalModelTest::CollectionOfCollectionTest(const std::list<std::list<std::string> >& v) {
+void ExternalModelTest::CollectionOfCollectionTest(const std::vector<std::vector<std::string> >& v) {
     CollectionOfCollectionTest_ = v;
 }
 
-void ExternalModelTest::CollectionOfCollectionTest(const std::list<std::list<std::string> >&& v) {
+void ExternalModelTest::CollectionOfCollectionTest(const std::vector<std::vector<std::string> >&& v) {
     CollectionOfCollectionTest_ = std::move(v);
 }
 
-const std::list<std::list<std::list<std::string> > >& ExternalModelTest::CollectionOfCollectionOfCollectionTest() const {
+const std::vector<std::vector<std::vector<std::string> > >& ExternalModelTest::CollectionOfCollectionOfCollectionTest() const {
     return CollectionOfCollectionOfCollectionTest_;
 }
 
-std::list<std::list<std::list<std::string> > >& ExternalModelTest::CollectionOfCollectionOfCollectionTest() {
+std::vector<std::vector<std::vector<std::string> > >& ExternalModelTest::CollectionOfCollectionOfCollectionTest() {
     return CollectionOfCollectionOfCollectionTest_;
 }
 
-void ExternalModelTest::CollectionOfCollectionOfCollectionTest(const std::list<std::list<std::list<std::string> > >& v) {
+void ExternalModelTest::CollectionOfCollectionOfCollectionTest(const std::vector<std::vector<std::vector<std::string> > >& v) {
     CollectionOfCollectionOfCollectionTest_ = v;
 }
 
-void ExternalModelTest::CollectionOfCollectionOfCollectionTest(const std::list<std::list<std::list<std::string> > >&& v) {
+void ExternalModelTest::CollectionOfCollectionOfCollectionTest(const std::vector<std::vector<std::vector<std::string> > >&& v) {
     CollectionOfCollectionOfCollectionTest_ = std::move(v);
 }
 

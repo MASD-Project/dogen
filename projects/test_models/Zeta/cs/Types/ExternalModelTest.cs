@@ -15,15 +15,15 @@ namespace Zeta
         /// <summary>
         /// Some comment
         /// </summary>
-        public System.Collections.Generic.List<object> BinariesTest { get; set; }
+        public System.Collections.Generic.Array<object> BinariesTest { get; set; }
         /// <summary>
         /// Some comment
         /// </summary>
-        public System.Collections.Generic.List<System.Collections.Generic.List<object> > CollectionOfCollectionTest { get; set; }
+        public System.Collections.Generic.Array<System.Collections.Generic.Array<object> > CollectionOfCollectionTest { get; set; }
         /// <summary>
         /// Some comment
         /// </summary>
-        public System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<object> > > CollectionOfCollectionOfCollectionTest { get; set; }
+        public System.Collections.Generic.Array<System.Collections.Generic.Array<System.Collections.Generic.Array<object> > > CollectionOfCollectionOfCollectionTest { get; set; }
         #endregion
 
         #region Constructors
@@ -31,9 +31,9 @@ namespace Zeta
 
         public ExternalModelTest(
             Phi.Date dateTest,
-            System.Collections.Generic.List<object> binariesTest,
-            System.Collections.Generic.List<System.Collections.Generic.List<object> > collectionOfCollectionTest,
-            System.Collections.Generic.List<System.Collections.Generic.List<System.Collections.Generic.List<object> > > collectionOfCollectionOfCollectionTest)
+            System.Collections.Generic.Array<object> binariesTest,
+            System.Collections.Generic.Array<System.Collections.Generic.Array<object> > collectionOfCollectionTest,
+            System.Collections.Generic.Array<System.Collections.Generic.Array<System.Collections.Generic.Array<object> > > collectionOfCollectionOfCollectionTest)
         {
             DateTest = dateTest;
             BinariesTest = binariesTest;

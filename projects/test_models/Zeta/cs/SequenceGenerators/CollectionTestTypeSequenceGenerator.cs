@@ -11,7 +11,7 @@ namespace Phi
     {
         static internal void Populate(CollectionTestType value, uint position)
         {
-            value.BinariesTest = System.Collections.Generic.ListSequenceGenerator.Create(position + 0);
+            value.BinariesTest = System.Collections.Generic.ArraySequenceGenerator.Create(position + 0);
         }
 
         static internal CollectionTestType Create(uint position)

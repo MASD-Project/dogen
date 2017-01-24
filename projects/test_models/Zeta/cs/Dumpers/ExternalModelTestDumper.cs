@@ -30,13 +30,13 @@ namespace Zeta
             Phi.DateDumper.Dump(assistant, value.DateTest, true/*withSeparator*/);
             assistant.AddKey("BinariesTest");
             assistant.AddPairSeparator();
-            System.Collections.Generic.ListDumper.Dump(assistant, value.BinariesTest, true/*withSeparator*/);
+            System.Collections.Generic.ArrayDumper.Dump(assistant, value.BinariesTest, true/*withSeparator*/);
             assistant.AddKey("CollectionOfCollectionTest");
             assistant.AddPairSeparator();
-            System.Collections.Generic.ListDumper.Dump(assistant, value.CollectionOfCollectionTest, true/*withSeparator*/);
+            System.Collections.Generic.ArrayDumper.Dump(assistant, value.CollectionOfCollectionTest, true/*withSeparator*/);
             assistant.AddKey("CollectionOfCollectionOfCollectionTest");
             assistant.AddPairSeparator();
-            System.Collections.Generic.ListDumper.Dump(assistant, value.CollectionOfCollectionOfCollectionTest);
+            System.Collections.Generic.ArrayDumper.Dump(assistant, value.CollectionOfCollectionOfCollectionTest);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);

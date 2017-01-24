@@ -27,7 +27,7 @@ namespace Phi
             assistant.AddStartObject();
             assistant.AddKey("BinariesTest");
             assistant.AddPairSeparator();
-            System.Collections.Generic.ListDumper.Dump(assistant, value.BinariesTest);
+            System.Collections.Generic.ArrayDumper.Dump(assistant, value.BinariesTest);
             assistant.AddEndObject(); // data
             assistant.AddEndObject(); // main object
             assistant.HandleMemberSeparator(withSeparator);

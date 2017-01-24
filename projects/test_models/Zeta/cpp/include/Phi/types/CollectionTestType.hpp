@@ -5,8 +5,8 @@
 #pragma once
 #endif
 
-#include <list>
 #include <string>
+#include <vector>
 #include <algorithm>
 #include "Phi/serialization/CollectionTestType_fwd_ser.hpp"
 
@@ -23,7 +23,7 @@ public:
     ~CollectionTestType() = default;
 
 public:
-    explicit CollectionTestType(const std::list<std::string>& BinariesTest);
+    explicit CollectionTestType(const std::vector<std::string>& BinariesTest);
 
 private:
     template<typename Archive>
@@ -37,10 +37,10 @@ public:
      * @brief Some comment
      */
     /**@{*/
-    const std::list<std::string>& BinariesTest() const;
-    std::list<std::string>& BinariesTest();
-    void BinariesTest(const std::list<std::string>& v);
-    void BinariesTest(const std::list<std::string>&& v);
+    const std::vector<std::string>& BinariesTest() const;
+    std::vector<std::string>& BinariesTest();
+    void BinariesTest(const std::vector<std::string>& v);
+    void BinariesTest(const std::vector<std::string>&& v);
     /**@}*/
 
 public:
@@ -54,7 +54,7 @@ public:
     CollectionTestType& operator=(CollectionTestType other);
 
 private:
-    std::list<std::string> BinariesTest_;
+    std::vector<std::string> BinariesTest_;
 };
 
 }

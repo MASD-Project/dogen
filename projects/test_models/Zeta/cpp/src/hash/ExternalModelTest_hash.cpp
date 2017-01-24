@@ -9,7 +9,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+inline std::size_t hash_std_vector_std_string(const std::vector<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -17,18 +17,18 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_std_list_std_list_std_string(const std::list<std::list<std::string> >& v) {
+inline std::size_t hash_std_vector_std_vector_std_string(const std::vector<std::vector<std::string> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_list_std_string(i));
+        combine(seed, hash_std_vector_std_string(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_list_std_list_std_list_std_string(const std::list<std::list<std::list<std::string> > >& v) {
+inline std::size_t hash_std_vector_std_vector_std_vector_std_string(const std::vector<std::vector<std::vector<std::string> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_list_std_list_std_string(i));
+        combine(seed, hash_std_vector_std_vector_std_string(i));
     }
     return seed;
 }
@@ -41,9 +41,9 @@ std::size_t ExternalModelTest_hasher::hash(const ExternalModelTest& v) {
     std::size_t seed(0);
 
     combine(seed, v.DateTest());
-    combine(seed, hash_std_list_std_string(v.BinariesTest()));
-    combine(seed, hash_std_list_std_list_std_string(v.CollectionOfCollectionTest()));
-    combine(seed, hash_std_list_std_list_std_list_std_string(v.CollectionOfCollectionOfCollectionTest()));
+    combine(seed, hash_std_vector_std_string(v.BinariesTest()));
+    combine(seed, hash_std_vector_std_vector_std_string(v.CollectionOfCollectionTest()));
+    combine(seed, hash_std_vector_std_vector_std_vector_std_string(v.CollectionOfCollectionOfCollectionTest()));
 
     return seed;
 }

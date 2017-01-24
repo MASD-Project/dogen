@@ -2,7 +2,7 @@
 
 namespace Phi {
 
-CollectionTestType::CollectionTestType(const std::list<std::string>& BinariesTest)
+CollectionTestType::CollectionTestType(const std::vector<std::string>& BinariesTest)
     : BinariesTest_(BinariesTest) { }
 
 void CollectionTestType::swap(CollectionTestType& other) noexcept {
@@ -20,19 +20,19 @@ CollectionTestType& CollectionTestType::operator=(CollectionTestType other) {
     return *this;
 }
 
-const std::list<std::string>& CollectionTestType::BinariesTest() const {
+const std::vector<std::string>& CollectionTestType::BinariesTest() const {
     return BinariesTest_;
 }
 
-std::list<std::string>& CollectionTestType::BinariesTest() {
+std::vector<std::string>& CollectionTestType::BinariesTest() {
     return BinariesTest_;
 }
 
-void CollectionTestType::BinariesTest(const std::list<std::string>& v) {
+void CollectionTestType::BinariesTest(const std::vector<std::string>& v) {
     BinariesTest_ = v;
 }
 
-void CollectionTestType::BinariesTest(const std::list<std::string>&& v) {
+void CollectionTestType::BinariesTest(const std::vector<std::string>&& v) {
     BinariesTest_ = std::move(v);
 }
 

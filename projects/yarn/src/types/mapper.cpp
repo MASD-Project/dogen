@@ -38,22 +38,22 @@ const std::string unsupported_lanugage("Language is not supported: ");
 namespace dogen {
 namespace yarn {
 
-mapper::mapper(const mapping_set_repository& /*mrp*/) {}
-// : mapping_set_repository_(mrp) { }
+mapper::mapper(const mapping_set_repository& msrp)
+    : mapping_set_repository_(msrp) { }
 
-/*const std::unordered_map<std::string, name>& mapper::
-map_for_language(const languages from, const languages to) const {
+const std::unordered_map<std::string, name>& mapper::map_for_language(
+    const mapping_set& ms, const languages from, const languages to) const {
     if (from == languages::upsilon) {
-        const auto i(mapping_repository_.by_upsilon_id().find(to));
-        if (i != mapping_repository_.by_upsilon_id().end())
+        const auto i(ms.by_upsilon_id().find(to));
+        if (i != ms.by_upsilon_id().end())
             return i->second;
 
         const auto s(boost::lexical_cast<std::string>(to));
         BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
         BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
     } else if (from == languages::language_agnostic) {
-        const auto i(mapping_repository_.by_language_agnostic_id().find(to));
-        if (i != mapping_repository_.by_upsilon_id().end())
+        const auto i(ms.by_language_agnostic_id().find(to));
+        if (i != ms.by_upsilon_id().end())
             return i->second;
 
         const auto s(boost::lexical_cast<std::string>(to));
@@ -89,13 +89,9 @@ void mapper::map_attributes(const std::unordered_map<std::string,
     for (auto& attr : attrs)
         attr.parsed_type(walk_name_tree(map, attr.parsed_type()));
 }
-*/
 
-intermediate_model mapper::map(const languages /*from*/, const languages /*to*/,
+intermediate_model mapper::map(const languages from, const languages to,
     const intermediate_model& im) const {
-    return im;
-
-/*
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
     if (from == to) {
@@ -104,7 +100,12 @@ intermediate_model mapper::map(const languages /*from*/, const languages /*to*/,
     }
 
     auto r(im);
-    const auto& map(map_for_language(from, to));
+    /*
+     * For now we always use the default mapping set. In the future
+     * this will be configurable via annotations.
+     */
+    const auto& ms(mapping_set_repository_.default_mapping_set());
+    const auto& map(map_for_language(ms, from, to));
     for (auto& pair : r.objects())
         map_attributes(map, pair.second.local_attributes());
 
@@ -119,7 +120,6 @@ intermediate_model mapper::map(const languages /*from*/, const languages /*to*/,
     BOOST_LOG_SEV(lg, debug) << "Finished mapping.";
 
     return r;
-*/
 }
 
 } }

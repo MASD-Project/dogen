@@ -36,23 +36,23 @@ namespace yarn {
 
 class mapper final {
 public:
-    explicit mapper(const mapping_set_repository& mrp);
+    explicit mapper(const mapping_set_repository& msrp);
 
 private:
-    /*const std::unordered_map<std::string, name>&
-    map_for_language(const languages from, const languages to) const;
+    const std::unordered_map<std::string, name>&
+    map_for_language(const mapping_set& ms, const languages from,
+        const languages to) const;
     name_tree walk_name_tree(const std::unordered_map<std::string,
         name>& map, const name_tree& nt) const;
     void map_attributes(const std::unordered_map<std::string,
         name>& map, std::list<attribute>& attrs) const;
-    */
 
 public:
     intermediate_model map(const languages from, const languages to,
         const intermediate_model& im) const;
 
 private:
-    // const mapping_set_repository& mapping_repository_;
+    const mapping_set_repository& mapping_set_repository_;
 };
 
 } }
