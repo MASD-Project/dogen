@@ -1,143 +1,531 @@
 [
     {
-        "id" : "lam::integer",
+        "lam_id" : "lam::byte",
         "names_by_language" : [
             {
                 "language" : "cpp",
-                "name" : {
-                    "simple_name": "int"
-                }
-            },
-            {
-                "language" : "upsilon",
-                "name" : {
-                    "simple_name": "integer"
+                "default_name" : {
+                    "simple": "unsigned char"
                 }
             },
             {
                 "language" : "csharp",
-                "name" : {
-                    "simple_name": "int"
+                "default_name" : {
+                    "simple": "uchar"
                 }
             }
         ]
     },
     {
-        "id" : "lam::binary",
+        "lam_id" : "lam::character",
         "names_by_language" : [
             {
                 "language" : "cpp",
-                "name" : {
-                    "simple_name": "string",
+                "default_name" : {
+                    "simple": "char"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "char"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::integer8",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "int8_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "upsilon",
-                "name" : {
-                    "simple_name": "binary"
-                }
-            },
-            {
                 "language" : "csharp",
-                "name" : {
-                    "simple_name": "string"
+                "default_name" : {
+                    "simple": "sbyte"
                 }
             }
         ]
     },
     {
-        "id" : "lam::boolean",
+        "lam_id" : "lam::integer16",
         "names_by_language" : [
             {
                 "language" : "cpp",
-                "name" : {
-                    "simple_name": "bool"
-                }
-            },
-            {
-                "language" : "upsilon",
-                "name" : {
-                    "simple_name": "boolean"
-                }
-            },
-            {
-                "language" : "csharp",
-                "name" : {
-                    "simple_name": "bool"
-                }
-            }
-        ]
-    },
-    {
-        "id" : "lam::string",
-        "names_by_language" : [
-            {
-                "language" : "cpp",
-                "name" : {
-                    "simple_name": "string",
+                "default_name" : {
+                    "simple": "int16_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "upsilon",
-                "name" : {
-                    "simple_name": "string"
-                }
-            },
-            {
                 "language" : "csharp",
-                "name" : {
-                    "simple_name": "string"
+                "default_name" : {
+                    "simple": "Int16",
+                    "model_modules": "System"
                 }
             }
         ]
     },
     {
-        "id" : "lam::collection",
+        "lam_id" : "lam::integer32",
         "names_by_language" : [
             {
                 "language" : "cpp",
-                "name" : {
-                    "simple_name": "list",
+                "default_name" : {
+                    "simple": "int32_t",
                     "model_modules": "std"
                 }
             },
             {
-                "language" : "upsilon",
-                "name" : {
-                    "simple_name": "Collection"
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Int32",
+                    "model_modules": "System"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::integer64",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "int64_t",
+                    "model_modules": "std"
                 }
             },
             {
                 "language" : "csharp",
-                "name" : {
-                    "simple_name": "List",
+                "default_name" : {
+                    "simple": "Int64",
+                    "model_modules": "System"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::integer",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "int"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "int"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "Integer"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::single_floating",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "float"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "float"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::double_floating",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "double"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "double"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "Double"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::boolean",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "bool"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "bool"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "Boolean"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::string",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "string",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "string"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "string"
+                },
+                "aliases" : [
+                    {
+                        "simple": "Binary"
+                    },
+                    {
+                        "simple": "Guid"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::date",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "date",
+                    "model_modules": "boost",
+                    "internal_modules": "gregorian"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "DateTime",
+                    "model_modules": "System"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "Date"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::time",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "time_duration",
+                    "model_modules": "boost",
+                    "internal_modules": "posix_time"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "TimeSpan",
+                    "model_modules": "System"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "UtcTime"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::date_time",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "ptime",
+                    "model_modules": "boost",
+                    "internal_modules": "posix_time"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "DateTime",
+                    "model_modules": "boost"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "UtcDateTime"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::decimal",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "decimal",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Decimal",
+                    "model_modules": "System"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "Decimal"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::dynamic_array",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "vector",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Array",
+                    "model_modules": "System.Collections.Generic"
+                }
+            },
+            {
+                "language" : "upsilon",
+                "default_name" : {
+                    "simple": "Collection"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::static_array",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "array",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Array",
                     "model_modules": "System.Collections.Generic"
                 }
             }
         ]
     },
     {
-        "id" : "lam::object",
+        "lam_id" : "lam::unordered_dictionary",
         "names_by_language" : [
             {
                 "language" : "cpp",
-                "name" : {
-                    "simple_name": "string",
+                "default_name" : {
+                    "simple": "unordered_map",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Dictionary",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::ordered_dictionary",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "map",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "SortedDictionary",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::unordered_set",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "unordered_set",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "HashSet",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::ordered_set",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "set",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "SortedSet",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::queue",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "queue",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Queue",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::stack",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "stack",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "Stack",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::linked_list",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "list",
+                    "model_modules": "std"
+                }
+            },
+            {
+                "language" : "csharp",
+                "default_name" : {
+                    "simple": "LinkedList",
+                    "model_modules": "System.Collections.Generic"
+                }
+            }
+        ]
+    },
+    {
+        "lam_id" : "lam::object",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "string",
                     "model_modules": "std"
                 }
             },
             {
                 "language" : "upsilon",
-                "name" : {
-                    "simple_name": "ModelValue"
+                "default_name" : {
+                    "simple": "ModelValue"
                 }
             },
             {
                 "language" : "csharp",
-                "name" : {
-                    "simple_name": "object"
+                "default_name" : {
+                    "simple": "object"
                 }
             }
         ]
