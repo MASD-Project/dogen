@@ -47,7 +47,7 @@ namespace yarn {
 std::size_t mapping_hasher::hash(const mapping& v) {
     std::size_t seed(0);
 
-    combine(seed, v.id());
+    combine(seed, v.lam_id());
     combine(seed, hash_std_unordered_map_dogen_yarn_languages_dogen_yarn_mapping_value(v.by_language()));
 
     return seed;

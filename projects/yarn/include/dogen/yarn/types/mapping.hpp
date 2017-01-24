@@ -48,7 +48,7 @@ public:
 
 public:
     mapping(
-        const std::string& id,
+        const std::string& lam_id,
         const std::unordered_map<dogen::yarn::languages, dogen::yarn::mapping_value>& by_language);
 
 private:
@@ -60,13 +60,13 @@ private:
 
 public:
     /**
-     * @brief Id of the element we're mapping from. This is expected to be a language agnostic element.
+     * @brief Language agnostic ID of the element we're mapping from.
      */
     /**@{*/
-    const std::string& id() const;
-    std::string& id();
-    void id(const std::string& v);
-    void id(const std::string&& v);
+    const std::string& lam_id() const;
+    std::string& lam_id();
+    void lam_id(const std::string& v);
+    void lam_id(const std::string&& v);
     /**@}*/
 
     /**
@@ -90,7 +90,7 @@ public:
     mapping& operator=(mapping other);
 
 private:
-    std::string id_;
+    std::string lam_id_;
     std::unordered_map<dogen::yarn::languages, dogen::yarn::mapping_value> by_language_;
 };
 

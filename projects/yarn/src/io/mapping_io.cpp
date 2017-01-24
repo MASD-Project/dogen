@@ -56,7 +56,7 @@ namespace yarn {
 std::ostream& operator<<(std::ostream& s, const mapping& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::mapping\"" << ", "
-      << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
+      << "\"lam_id\": " << "\"" << tidy_up_string(v.lam_id()) << "\"" << ", "
       << "\"by_language\": " << v.by_language()
       << " }";
     return(s);

@@ -127,7 +127,7 @@ void mapping_set_repository_factory::populate_mapping_set(
     const std::list<mapping>& mappings, mapping_set& ms) const {
 
     for (const auto& mapping : mappings) {
-        const auto lam_id(mapping.id());
+        const auto lam_id(mapping.lam_id());
 
         for (const auto& pair : mapping.by_language()) {
             const auto l(pair.first);

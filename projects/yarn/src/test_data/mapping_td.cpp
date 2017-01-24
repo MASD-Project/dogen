@@ -58,7 +58,7 @@ mapping_generator::mapping_generator() : position_(0) { }
 
 void mapping_generator::
 populate(const unsigned int position, result_type& v) {
-    v.id(create_std_string(position + 0));
+    v.lam_id(create_std_string(position + 0));
     v.by_language(create_std_unordered_map_dogen_yarn_languages_dogen_yarn_mapping_value(position + 1));
 }
 

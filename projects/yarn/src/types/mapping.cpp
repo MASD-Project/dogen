@@ -24,19 +24,19 @@ namespace dogen {
 namespace yarn {
 
 mapping::mapping(
-    const std::string& id,
+    const std::string& lam_id,
     const std::unordered_map<dogen::yarn::languages, dogen::yarn::mapping_value>& by_language)
-    : id_(id),
+    : lam_id_(lam_id),
       by_language_(by_language) { }
 
 void mapping::swap(mapping& other) noexcept {
     using std::swap;
-    swap(id_, other.id_);
+    swap(lam_id_, other.lam_id_);
     swap(by_language_, other.by_language_);
 }
 
 bool mapping::operator==(const mapping& rhs) const {
-    return id_ == rhs.id_ &&
+    return lam_id_ == rhs.lam_id_ &&
         by_language_ == rhs.by_language_;
 }
 
@@ -46,20 +46,20 @@ mapping& mapping::operator=(mapping other) {
     return *this;
 }
 
-const std::string& mapping::id() const {
-    return id_;
+const std::string& mapping::lam_id() const {
+    return lam_id_;
 }
 
-std::string& mapping::id() {
-    return id_;
+std::string& mapping::lam_id() {
+    return lam_id_;
 }
 
-void mapping::id(const std::string& v) {
-    id_ = v;
+void mapping::lam_id(const std::string& v) {
+    lam_id_ = v;
 }
 
-void mapping::id(const std::string&& v) {
-    id_ = std::move(v);
+void mapping::lam_id(const std::string&& v) {
+    lam_id_ = std::move(v);
 }
 
 const std::unordered_map<dogen::yarn::languages, dogen::yarn::mapping_value>& mapping::by_language() const {

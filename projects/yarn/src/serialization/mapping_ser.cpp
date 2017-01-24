@@ -40,7 +40,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::mapping& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("id", v.id_);
+    ar << make_nvp("lam_id", v.lam_id_);
     ar << make_nvp("by_language", v.by_language_);
 }
 
@@ -48,7 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::mapping& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("id", v.id_);
+    ar >> make_nvp("lam_id", v.lam_id_);
     ar >> make_nvp("by_language", v.by_language_);
 }
 
