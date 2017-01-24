@@ -477,7 +477,11 @@ patch and investigate this later.
 *** Add support for Decimal numbers in C++                            :story:
 
 - try using ICU DecNumber library.
-- check compiler support (MSVC may have decimals; if so, use that instead)
+- check compiler support (MSVC may have decimals; if so, use that
+  instead)
+
+- There is a cross-platform implementation of =std::decimal= available
+  [[https://sourceforge.net/p/stddecimal/code/HEAD/tree/trunk/][here]].
 
 *** Language namespaces and modeling element locations                :story:
 
