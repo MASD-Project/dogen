@@ -26,6 +26,8 @@
 #endif
 
 #include <list>
+#include <string>
+#include <unordered_map>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/options/types/knitting_options.hpp"
@@ -47,14 +49,15 @@ private:
     /**
      * @brief Obtains all the element id mappings.
      */
-    std::list<mapping> obtain_mappings(
+    std::unordered_map<std::string, std::list<mapping>> obtain_mappings(
         const std::vector<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Obtain the mapping repository.
      */
-    mapping_set_repository
-    obtain_mapping_set_repository(const std::list<mapping>& mappings) const;
+    mapping_set_repository obtain_mapping_set_repository(
+        const std::unordered_map<std::string, std::list<mapping>>&
+        mappings) const;
 
     /**
      * @brief Obtains an intermediate model.

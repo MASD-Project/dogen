@@ -43,9 +43,10 @@ private:
 
 private:
     name read_name(const boost::property_tree::ptree& pt) const;
-/*    std::unordered_map<languages, name>
-    read_names_by_language(const boost::property_tree::ptree& pt) const;
-*/
+
+    std::unordered_map<languages, mapping_value>
+    read_mapping_values(const boost::property_tree::ptree& pt) const;
+
     std::list<mapping> read_stream(std::istream& s) const;
 
 public:

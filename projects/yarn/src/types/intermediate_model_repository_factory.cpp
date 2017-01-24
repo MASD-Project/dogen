@@ -22,10 +22,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/io/mapping_io.hpp"
+#include "dogen/yarn/io/mapping_set_io.hpp"
 #include "dogen/yarn/io/mapping_set_repository_io.hpp"
 #include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/mappings_hydrator.hpp"
@@ -45,6 +47,8 @@ const std::string expected_empty_repository(
 const std::string expected_target_model(
     "Expcted only the target model but found: ");
 const std::string non_absolute_target("Target path is not absolute: ");
+const std::string duplicate_mapping_set(
+    "Found more than one mapping set with name: ");
 
 const std::string mappings_dir("mappings");
 
@@ -53,13 +57,13 @@ const std::string mappings_dir("mappings");
 namespace dogen {
 namespace yarn {
 
-std::list<mapping>
+std::unordered_map<std::string, std::list<mapping>>
 intermediate_model_repository_factory::
 obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Reading all mappings.";
 
     mappings_hydrator h;
-    std::list<mapping> r;
+    std::unordered_map<std::string, std::list<mapping>> r;
     for (const auto& top_level_dir : dirs) {
         const boost::filesystem::path mdir(top_level_dir / mappings_dir);
         BOOST_LOG_SEV(lg, trace) << "Mapping directory: "
@@ -72,8 +76,17 @@ obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
                                  << " mapping files.";
 
         for (const auto& f : files) {
-            BOOST_LOG_SEV(lg, trace) << "Library model: " << f.generic_string();
-            r.splice(r.end(), h.hydrate(f));
+            BOOST_LOG_SEV(lg, trace) << "Mapping file: " << f.generic_string();
+
+            const auto n(f.stem().string());
+            const auto mappings(h.hydrate(f));
+            const auto pair(std::make_pair(n, mappings));
+            const auto inserted(r.insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_mapping_set << n;
+                BOOST_THROW_EXCEPTION(
+                    building_error(duplicate_mapping_set + n));
+            }
         }
     }
 
@@ -82,8 +95,9 @@ obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
 }
 
 mapping_set_repository
-intermediate_model_repository_factory::obtain_mapping_set_repository(
-    const std::list<mapping>& /*mappings*/) const {
+intermediate_model_repository_factory::
+obtain_mapping_set_repository(const std::unordered_map<std::string,
+    std::list<mapping>>& /*mappings*/) const {
     mapping_set_repository r;
     return r;
     /*BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
