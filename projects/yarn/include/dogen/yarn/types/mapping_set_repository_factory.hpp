@@ -18,41 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPER_HPP
-#define DOGEN_YARN_TYPES_MAPPER_HPP
+#ifndef DOGEN_YARN_TYPES_MAPPING_SET_REPOSITORY_FACTORY_HPP
+#define DOGEN_YARN_TYPES_MAPPING_SET_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
+#include <list>
+#include <string>
+#include <unordered_map>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/mapping.hpp"
+#include "dogen/yarn/types/mapping_set.hpp"
+#include "dogen/yarn/types/mapping_value.hpp"
 #include "dogen/yarn/types/mapping_set_repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class mapper final {
-public:
-    explicit mapper(const mapping_set_repository& mrp);
-
+class mapping_set_repository_factory final {
 private:
-    /*const std::unordered_map<std::string, name>&
-    map_for_language(const languages from, const languages to) const;
-    name_tree walk_name_tree(const std::unordered_map<std::string,
-        name>& map, const name_tree& nt) const;
-    void map_attributes(const std::unordered_map<std::string,
-        name>& map, std::list<attribute>& attrs) const;
-    */
+    void insert(const std::string& upsilon_id, const std::string& lam_id,
+        std::unordered_map<std::string, std::string>& map) const;
+
+    void insert(const std::string& lam_id, const name& n,
+        const languages l, std::unordered_map<languages,
+        std::unordered_map<std::string, name>>& map) const;
+
+    void populate_upsilon_data(const std::string& lam_id,
+        const mapping& mapping, const mapping_value& upsilon_mv,
+        mapping_set& ms) const;
+
+    void populate_mapping_set(const std::list<mapping>& mappings,
+        mapping_set& ms) const;
 
 public:
-    intermediate_model map(const languages from, const languages to,
-        const intermediate_model& im) const;
-
-private:
-    // const mapping_set_repository& mapping_repository_;
+    mapping_set_repository make(const std::unordered_map<std::string,
+        std::list<mapping>>& mappings_by_set_name) const;
 };
 
 } }

@@ -38,9 +38,10 @@ const std::string unsupported_lanugage("Language is not supported: ");
 namespace dogen {
 namespace yarn {
 
-mapper::mapper(const mapping_repository& mrp) : mapping_repository_(mrp) { }
+mapper::mapper(const mapping_set_repository& /*mrp*/) {}
+// : mapping_set_repository_(mrp) { }
 
-const std::unordered_map<std::string, name>& mapper::
+/*const std::unordered_map<std::string, name>& mapper::
 map_for_language(const languages from, const languages to) const {
     if (from == languages::upsilon) {
         const auto i(mapping_repository_.by_upsilon_id().find(to));
@@ -88,9 +89,13 @@ void mapper::map_attributes(const std::unordered_map<std::string,
     for (auto& attr : attrs)
         attr.parsed_type(walk_name_tree(map, attr.parsed_type()));
 }
+*/
 
-intermediate_model mapper::map(const languages from, const languages to,
+intermediate_model mapper::map(const languages /*from*/, const languages /*to*/,
     const intermediate_model& im) const {
+    return im;
+
+/*
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
     if (from == to) {
@@ -114,6 +119,7 @@ intermediate_model mapper::map(const languages from, const languages to,
     BOOST_LOG_SEV(lg, debug) << "Finished mapping.";
 
     return r;
+*/
 }
 
 } }

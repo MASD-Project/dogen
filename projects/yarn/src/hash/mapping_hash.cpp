@@ -18,41 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
-#define DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
+#include "dogen/yarn/hash/mapping_hash.hpp"
+#include "dogen/yarn/hash/languages_hash.hpp"
+#include "dogen/yarn/hash/mapping_value_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <list>
-#include <iosfwd>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/mapping.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_map_dogen_yarn_languages_dogen_yarn_mapping_value(const std::unordered_map<dogen::yarn::languages, dogen::yarn::mapping_value>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
-class mappings_hydrator final {
-private:
-    languages to_language(const std::string& s) const;
+std::size_t mapping_hasher::hash(const mapping& v) {
+    std::size_t seed(0);
 
-private:
-    name read_name(const boost::property_tree::ptree& pt) const;
-/*    std::unordered_map<languages, name>
-    read_names_by_language(const boost::property_tree::ptree& pt) const;
-*/
-    std::list<mapping> read_stream(std::istream& s) const;
+    combine(seed, v.id());
+    combine(seed, hash_std_unordered_map_dogen_yarn_languages_dogen_yarn_mapping_value(v.by_language()));
 
-public:
-    std::list<mapping> hydrate(std::istream& s) const;
-    std::list<mapping> hydrate(const boost::filesystem::path& p) const;
-};
+    return seed;
+}
 
 } }
-
-#endif

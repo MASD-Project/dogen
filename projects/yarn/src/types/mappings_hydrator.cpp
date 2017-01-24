@@ -94,7 +94,7 @@ name mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     const auto r(b.build());
     return r;
 }
-
+/*
 std::unordered_map<languages, name> mappings_hydrator::
 read_names_by_language(const boost::property_tree::ptree& pt) const {
     std::unordered_map<languages, name> r;
@@ -163,9 +163,12 @@ std::list<element_mapping> mappings_hydrator::hydrate(std::istream& s) const {
     }
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
 }
-
-std::list<element_mapping>
-mappings_hydrator::hydrate(const boost::filesystem::path& p) const {
+*/
+std::list<mapping>
+mappings_hydrator::hydrate(const boost::filesystem::path& /*p*/) const {
+    std::list<mapping> r;
+    return r;
+    /*
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);
@@ -178,6 +181,7 @@ mappings_hydrator::hydrate(const boost::filesystem::path& p) const {
     const auto r(hydrate(s));
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;
+    */
 }
 
 } }

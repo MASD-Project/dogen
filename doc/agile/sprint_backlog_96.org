@@ -13,32 +13,32 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-24 Tue 12:06]
+#+CAPTION: Clock summary at [2017-01-24 Tue 17:25]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *45:36* |       |       | 100.0 |
+| *Total time*                                                                | *49:59* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 45:36   |       |       | 100.0 |
-| Active                                                                      |         | 45:36 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:37 |   5.7 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.3 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.9 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  22.6 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   2.9 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.3 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.2 |
-| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.8 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  29.5 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  13.9 |
-| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.8 |
-| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   2.9 |
-| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.3 |
-| COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   2.3 |
-| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.6 |
-| STARTED Add mapping support between upsilon and LAM                         |         |       |  0:43 |   1.6 |
-| STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.6 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  1:19 |   2.9 |
+| Stories                                                                     | 49:59   |       |       | 100.0 |
+| Active                                                                      |         | 49:59 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:37 |   5.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.2 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.7 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  20.6 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   2.7 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   3.0 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   2.0 |
+| COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.7 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  26.9 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  12.6 |
+| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.6 |
+| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   2.7 |
+| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   2.1 |
+| COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   2.1 |
+| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.5 |
+| STARTED Add mapping support between upsilon and LAM                         |         |       |  0:43 |   1.4 |
+| STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.5 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  5:42 |  11.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -544,6 +544,7 @@ We need to work through the list of issues with the Zeta model and get
 it to a compilable state.
 
 *** STARTED Add support for Language Agnostic Models (LAM)            :story:
+    CLOCK: [2017-01-24 Tue 13:02]--[2017-01-24 Tue 17:25] =>  4:23
     CLOCK: [2017-01-24 Tue 11:11]--[2017-01-24 Tue 11:41] =>  0:30
     CLOCK: [2017-01-24 Tue 10:21]--[2017-01-24 Tue 11:10] =>  0:49
 
@@ -555,32 +556,32 @@ Tasks:
 
 LAM type map:
 
-| Type                            | C++                              | C#                                          | Upsilon              |
-|---------------------------------+----------------------------------+---------------------------------------------+----------------------|
-| lam::byte                       | unsigned char                    | uchar                                       |                      |
-| lam::character                  | char                             | char                                        |                      |
-| lam::integer8                   | std::int8_t                      | sbyte                                       |                      |
-| lam::integer16                  | std::int16_t                     | System.Int16                                |                      |
-| lam::integer32                  | std::int32_t                     | System.Int32                                |                      |
-| lam::integer64                  | std::int64_t                     | System.Int64                                | Integer64            |
-| lam::integer                    | int                              | int                                         |                      |
-| lam::single_floating            | float                            | float                                       |                      |
-| lam::double_floating            | double                           | double                                      | Double               |
-| lam::boolean                    | bool                             | bool                                        | Boolean              |
-| lam::string                     | std::string                      | string                                      | Binary, Guid, String |
-| lam::date                       | boost::gregorian::date           | System.DateTime                             | Date                 |
-| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                             | UtcTime              |
-| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                             | UtcDateTime          |
-| lam::decimal                    | std::decimal                     | System.Decimal                              | Decimal              |
-| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>          | Collection           |
-| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>         |                      |
-| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V> |                      |
-| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.Dictionary<K, V> |                      |
-| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>       |                      |
-| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>     |                      |
-| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>         |                      |
-| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>         |                      |
-| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>    |                      |
+| Type                            | C++                              | C#                                                | Upsilon              |
+|---------------------------------+----------------------------------+---------------------------------------------------+----------------------|
+| lam::byte                       | unsigned char                    | uchar                                             |                      |
+| lam::character                  | char                             | char                                              |                      |
+| lam::integer8                   | std::int8_t                      | sbyte                                             |                      |
+| lam::integer16                  | std::int16_t                     | System.Int16                                      |                      |
+| lam::integer32                  | std::int32_t                     | System.Int32                                      |                      |
+| lam::integer64                  | std::int64_t                     | System.Int64                                      | Integer64            |
+| lam::integer                    | int                              | int                                               |                      |
+| lam::single_floating            | float                            | float                                             |                      |
+| lam::double_floating            | double                           | double                                            | Double               |
+| lam::boolean                    | bool                             | bool                                              | Boolean              |
+| lam::string                     | std::string                      | string                                            | String, Binary, Guid |
+| lam::date                       | boost::gregorian::date           | System.DateTime                                   | Date                 |
+| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                                   | UtcTime              |
+| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                                   | UtcDateTime          |
+| lam::decimal                    | std::decimal                     | System.Decimal                                    | Decimal              |
+| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>                | Collection           |
+| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>               |                      |
+| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V>       |                      |
+| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.SortedDictionary<K, V> |                      |
+| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>             |                      |
+| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>           |                      |
+| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>               |                      |
+| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>               |                      |
+| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>          |                      |
 
 *Previous Understanding*
 
@@ -688,7 +689,7 @@ Notes:
 - we need a way to determine if we are using a helper, the assistant
   or a sequence generator directly.
 
-*** Allow users to choose mappings                                    :story:
+*** Allow users to choose mapping sets                                :story:
 
 At present we load the "default" mappings, which are also the only
 mappings available. It is entirely possible that users will not agree
@@ -699,6 +700,29 @@ meta-data in the model and uses the requested element map. For this we
 need to name the element maps and we also need to create a "mapping
 set". These can be indexed by name in the mapping repository. Mapper
 chooses the mapping set to use.
+
+*** Allow users to override mapping sets at the element level         :story:
+
+Sometimes we may want to use a different mapping just for a particular
+element. For example, by default =lam::linked_list= binds to
+=std::list= for C++; once Dogen supports =std::forward_list=, one may
+want to override this for a partial number of elements. It would be
+nice if one could have a meta-data tag at the attribute level that
+would override the mapping. The one slight wrinkle is that we would
+not be able to supply a breakdown of:
+
+- simple name
+- model name
+- internal modules
+
+and so forth. So this may cause issues for resolution. We'd have to
+test it and see what breaks. If this fails, the alternative is that
+the mapping is by id, and we'd resolve it internally using the mapping
+container, e.g.:
+
+- create a map of names for each language by id
+- user supplies the id for a given language, we look it up and
+  retrieve the name.
 
 *** Add support for command line meta-data parameters                 :story:
 

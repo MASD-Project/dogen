@@ -18,40 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
-#define DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_MAPPING_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_MAPPING_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <iosfwd>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include <boost/serialization/split_free.hpp>
 #include "dogen/yarn/types/mapping.hpp"
 
-namespace dogen {
-namespace yarn {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::mapping)
+namespace boost {
+namespace serialization {
 
-class mappings_hydrator final {
-private:
-    languages to_language(const std::string& s) const;
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::mapping& v, unsigned int version);
 
-private:
-    name read_name(const boost::property_tree::ptree& pt) const;
-/*    std::unordered_map<languages, name>
-    read_names_by_language(const boost::property_tree::ptree& pt) const;
-*/
-    std::list<mapping> read_stream(std::istream& s) const;
-
-public:
-    std::list<mapping> hydrate(std::istream& s) const;
-    std::list<mapping> hydrate(const boost::filesystem::path& p) const;
-};
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::mapping& v, unsigned int version);
 
 } }
 

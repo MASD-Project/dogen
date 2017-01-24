@@ -30,10 +30,10 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
-#include "dogen/yarn/types/element_mapping.hpp"
+#include "dogen/yarn/types/mapping.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/mapping_repository.hpp"
+#include "dogen/yarn/types/mapping_set_repository.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
 
 namespace dogen {
@@ -47,14 +47,14 @@ private:
     /**
      * @brief Obtains all the element id mappings.
      */
-    std::list<element_mapping> obtain_element_mappings(
+    std::list<mapping> obtain_mappings(
         const std::vector<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Obtain the mapping repository.
      */
-    mapping_repository
-    obtain_mapping_repository(const std::list<element_mapping>& ems) const;
+    mapping_set_repository
+    obtain_mapping_set_repository(const std::list<mapping>& mappings) const;
 
     /**
      * @brief Obtains an intermediate model.
@@ -69,7 +69,7 @@ private:
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::knitting_options& ko, frontend_registrar& rg,
-        const mapping_repository& mrp,
+        const mapping_set_repository& msrp,
         intermediate_model_repository& imrp) const;
 
 public:

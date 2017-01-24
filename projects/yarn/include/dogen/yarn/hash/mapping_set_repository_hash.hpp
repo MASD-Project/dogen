@@ -18,43 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPER_HPP
-#define DOGEN_YARN_TYPES_MAPPER_HPP
+#ifndef DOGEN_YARN_HASH_MAPPING_SET_REPOSITORY_HASH_HPP
+#define DOGEN_YARN_HASH_MAPPING_SET_REPOSITORY_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
+#include <functional>
 #include "dogen/yarn/types/mapping_set_repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class mapper final {
+struct mapping_set_repository_hasher {
 public:
-    explicit mapper(const mapping_set_repository& mrp);
-
-private:
-    /*const std::unordered_map<std::string, name>&
-    map_for_language(const languages from, const languages to) const;
-    name_tree walk_name_tree(const std::unordered_map<std::string,
-        name>& map, const name_tree& nt) const;
-    void map_attributes(const std::unordered_map<std::string,
-        name>& map, std::list<attribute>& attrs) const;
-    */
-
-public:
-    intermediate_model map(const languages from, const languages to,
-        const intermediate_model& im) const;
-
-private:
-    // const mapping_set_repository& mapping_repository_;
+    static std::size_t hash(const mapping_set_repository& v);
 };
 
 } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::mapping_set_repository> {
+public:
+    size_t operator()(const dogen::yarn::mapping_set_repository& v) const {
+        return dogen::yarn::mapping_set_repository_hasher::hash(v);
+    }
+};
+
+}
 #endif

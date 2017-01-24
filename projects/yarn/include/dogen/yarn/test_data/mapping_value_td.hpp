@@ -18,41 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPER_HPP
-#define DOGEN_YARN_TYPES_MAPPER_HPP
+#ifndef DOGEN_YARN_TEST_DATA_MAPPING_VALUE_TD_HPP
+#define DOGEN_YARN_TEST_DATA_MAPPING_VALUE_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/mapping_set_repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/mapping_value.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class mapper final {
+class mapping_value_generator {
 public:
-    explicit mapper(const mapping_set_repository& mrp);
-
-private:
-    /*const std::unordered_map<std::string, name>&
-    map_for_language(const languages from, const languages to) const;
-    name_tree walk_name_tree(const std::unordered_map<std::string,
-        name>& map, const name_tree& nt) const;
-    void map_attributes(const std::unordered_map<std::string,
-        name>& map, std::list<attribute>& attrs) const;
-    */
+    mapping_value_generator();
 
 public:
-    intermediate_model map(const languages from, const languages to,
-        const intermediate_model& im) const;
+    typedef dogen::yarn::mapping_value result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
 private:
-    // const mapping_set_repository& mapping_repository_;
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }

@@ -25,13 +25,13 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
-#include "dogen/yarn/io/element_mapping_io.hpp"
-#include "dogen/yarn/io/mapping_repository_io.hpp"
+#include "dogen/yarn/io/mapping_io.hpp"
+#include "dogen/yarn/io/mapping_set_repository_io.hpp"
 #include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
-#include "dogen/yarn/types/mapping_repository_factory.hpp"
+#include "dogen/yarn/types/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 
@@ -53,13 +53,13 @@ const std::string mappings_dir("mappings");
 namespace dogen {
 namespace yarn {
 
-std::list<element_mapping>
-intermediate_model_repository_factory::obtain_element_mappings(
-    const std::vector<boost::filesystem::path>& dirs) const {
+std::list<mapping>
+intermediate_model_repository_factory::
+obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Reading all mappings.";
 
     mappings_hydrator h;
-    std::list<element_mapping> r;
+    std::list<mapping> r;
     for (const auto& top_level_dir : dirs) {
         const boost::filesystem::path mdir(top_level_dir / mappings_dir);
         BOOST_LOG_SEV(lg, trace) << "Mapping directory: "
@@ -81,14 +81,17 @@ intermediate_model_repository_factory::obtain_element_mappings(
     return r;
 }
 
-mapping_repository
-intermediate_model_repository_factory::obtain_mapping_repository(
-    const std::list<element_mapping>& ems) const {
-    BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
-    mapping_repository_factory f;
-    const auto r(f.make(ems));
+mapping_set_repository
+intermediate_model_repository_factory::obtain_mapping_set_repository(
+    const std::list<mapping>& /*mappings*/) const {
+    mapping_set_repository r;
+    return r;
+    /*BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
+    mapping_set_repository_factory f;
+    const auto r(f.make(mappings));
     BOOST_LOG_SEV(lg, debug) << "Obtained mapping repository. Result: " << r;
     return r;
+    */
 }
 
 intermediate_model
@@ -108,8 +111,9 @@ intermediate_model_repository_factory::intermediate_model_for_descriptor(
 void intermediate_model_repository_factory::
 populate_target_model(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
-    const options::knitting_options& ko, frontend_registrar& rg,
-    const mapping_repository& mrp, intermediate_model_repository& rp) const {
+    const options::knitting_options& ko,
+    frontend_registrar& rg, const mapping_set_repository& msrp,
+    intermediate_model_repository& rp) const {
     BOOST_LOG_SEV(lg, debug) << "Populating target model.";
 
     /*
@@ -133,7 +137,7 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     intermediate_model_expander ex;
     ex.expand(agf, atrp, tim);
 
-    const mapper mp(mrp);
+    const mapper mp(msrp);
     for (const auto ol : tim.output_languages()) {
         /*
          * Obtain the model container for the language of the target
@@ -166,8 +170,8 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * We start by obtaining the mapping repository because it will be
      * used by all intermediate models.
      */
-    const auto ems(obtain_element_mappings(dirs));
-    const auto mrp(obtain_mapping_repository(ems));
+    const auto mappings(obtain_mappings(dirs));
+    const auto msrp(obtain_mapping_set_repository(mappings));
 
     intermediate_model_repository r;
     /*
@@ -177,7 +181,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * user reference intermediate models are. In addition we also
      * need to know what languages we will need to support.
      */
-    populate_target_model(agf, atrp, ko, rg, mrp, r);
+    populate_target_model(agf, atrp, ko, rg, msrp, r);
 
     /*
      * Now obtain all of the descriptors for the reference models,
@@ -185,7 +189,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * load all reference intermediate models and post-process them.
      */
     descriptor_factory f;
-    const mapper mp(mrp);
+    const mapper mp(msrp);
     intermediate_model_expander ex;
     const auto target_dir(ko.target().parent_path());
     for (auto& pair : r.by_language()) {

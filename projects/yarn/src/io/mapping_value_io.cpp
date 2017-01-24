@@ -18,41 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
-#define DOGEN_YARN_TYPES_MAPPINGS_HYDRATOR_HPP
+#include <ostream>
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/mapping_value_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace std {
 
-#include <list>
-#include <iosfwd>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/mapping.hpp"
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
-class mappings_hydrator final {
-private:
-    languages to_language(const std::string& s) const;
-
-private:
-    name read_name(const boost::property_tree::ptree& pt) const;
-/*    std::unordered_map<languages, name>
-    read_names_by_language(const boost::property_tree::ptree& pt) const;
-*/
-    std::list<mapping> read_stream(std::istream& s) const;
-
-public:
-    std::list<mapping> hydrate(std::istream& s) const;
-    std::list<mapping> hydrate(const boost::filesystem::path& p) const;
-};
+std::ostream& operator<<(std::ostream& s, const mapping_value& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::mapping_value\"" << ", "
+      << "\"default_name\": " << v.default_name() << ", "
+      << "\"aliases\": " << v.aliases()
+      << " }";
+    return(s);
+}
 
 } }
-
-#endif
