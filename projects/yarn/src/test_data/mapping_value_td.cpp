@@ -20,12 +20,25 @@
  */
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/mapping_value_td.hpp"
+#include "dogen/yarn/test_data/mapping_actions_td.hpp"
 
 namespace {
+
+dogen::yarn::mapping_actions
+create_dogen_yarn_mapping_actions(const unsigned int position) {
+    return dogen::yarn::mapping_actions_generator::create(position);
+}
 
 dogen::yarn::name
 create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
+}
+
+boost::optional<dogen::yarn::name>
+create_boost_optional_dogen_yarn_name(unsigned int position) {
+    boost::optional<dogen::yarn::name> r(
+        create_dogen_yarn_name(position));
+    return r;
 }
 
 std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
@@ -45,8 +58,9 @@ mapping_value_generator::mapping_value_generator() : position_(0) { }
 
 void mapping_value_generator::
 populate(const unsigned int position, result_type& v) {
-    v.default_name(create_dogen_yarn_name(position + 0));
-    v.aliases(create_std_list_dogen_yarn_name(position + 1));
+    v.mapping_action(create_dogen_yarn_mapping_actions(position + 0));
+    v.default_name(create_boost_optional_dogen_yarn_name(position + 1));
+    v.aliases(create_std_list_dogen_yarn_name(position + 2));
 }
 
 mapping_value_generator::result_type

@@ -100,6 +100,7 @@ intermediate_model mapper::map(const languages from, const languages to,
     }
 
     auto r(im);
+
     /*
      * For now we always use the default mapping set. In the future
      * this will be configurable via annotations.

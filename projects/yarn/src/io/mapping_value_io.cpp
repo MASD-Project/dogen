@@ -21,6 +21,22 @@
 #include <ostream>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/mapping_value_io.hpp"
+#include "dogen/yarn/io/mapping_actions_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::name>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 namespace std {
 
@@ -42,6 +58,7 @@ namespace yarn {
 std::ostream& operator<<(std::ostream& s, const mapping_value& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::mapping_value\"" << ", "
+      << "\"mapping_action\": " << v.mapping_action() << ", "
       << "\"default_name\": " << v.default_name() << ", "
       << "\"aliases\": " << v.aliases()
       << " }";

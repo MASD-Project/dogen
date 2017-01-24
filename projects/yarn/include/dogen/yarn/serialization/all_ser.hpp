@@ -49,6 +49,8 @@
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/mapping_value_ser.hpp"
+#include "dogen/yarn/serialization/mapping_actions_ser.hpp"
+#include "dogen/yarn/serialization/mapping_context_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"

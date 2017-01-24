@@ -21,8 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/io/mapping_set_io.hpp"
+#include "dogen/yarn/io/mapping_context_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -52,17 +51,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -86,49 +81,15 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << i->first;
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const mapping_set& v) {
+std::ostream& operator<<(std::ostream& s, const mapping_context& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::mapping_set\"" << ", "
-      << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
-      << "\"by_language_agnostic_id\": " << v.by_language_agnostic_id() << ", "
-      << "\"by_upsilon_id\": " << v.by_upsilon_id() << ", "
-      << "\"upsilon_id_to_lam_id\": " << v.upsilon_id_to_lam_id() << ", "
-      << "\"erasures_by_language\": " << v.erasures_by_language()
+      << "\"__type__\": " << "\"dogen::yarn::mapping_context\"" << ", "
+      << "\"translations\": " << v.translations() << ", "
+      << "\"erasures\": " << v.erasures() << ", "
+      << "\"injections\": " << v.injections()
       << " }";
     return(s);
 }

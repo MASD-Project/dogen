@@ -20,6 +20,7 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/mapping_value_hash.hpp"
+#include "dogen/yarn/hash/mapping_actions_hash.hpp"
 
 namespace {
 
@@ -27,6 +28,16 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
 }
 
 inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
@@ -45,7 +56,8 @@ namespace yarn {
 std::size_t mapping_value_hasher::hash(const mapping_value& v) {
     std::size_t seed(0);
 
-    combine(seed, v.default_name());
+    combine(seed, v.mapping_action());
+    combine(seed, hash_boost_optional_dogen_yarn_name(v.default_name()));
     combine(seed, hash_std_list_dogen_yarn_name(v.aliases()));
 
     return seed;

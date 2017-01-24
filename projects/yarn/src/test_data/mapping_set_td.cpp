@@ -65,6 +65,22 @@ std::unordered_map<std::string, std::string> create_std_unordered_map_std_string
     return r;
 }
 
+std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_set<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_std_string(position + i));
+    }
+    return r;
+}
+
+std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> > create_std_unordered_map_dogen_yarn_languages_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> > r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_dogen_yarn_languages(position + i), create_std_unordered_set_std_string(position + i)));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -78,6 +94,7 @@ populate(const unsigned int position, result_type& v) {
     v.by_language_agnostic_id(create_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(position + 1));
     v.by_upsilon_id(create_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(position + 2));
     v.upsilon_id_to_lam_id(create_std_unordered_map_std_string_std_string(position + 3));
+    v.erasures_by_language(create_std_unordered_map_dogen_yarn_languages_std_unordered_set_std_string(position + 4));
 }
 
 mapping_set_generator::result_type

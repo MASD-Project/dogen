@@ -27,6 +27,7 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
@@ -44,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("by_language_agnostic_id", v.by_language_agnostic_id_);
     ar << make_nvp("by_upsilon_id", v.by_upsilon_id_);
     ar << make_nvp("upsilon_id_to_lam_id", v.upsilon_id_to_lam_id_);
+    ar << make_nvp("erasures_by_language", v.erasures_by_language_);
 }
 
 template<typename Archive>
@@ -54,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("by_language_agnostic_id", v.by_language_agnostic_id_);
     ar >> make_nvp("by_upsilon_id", v.by_upsilon_id_);
     ar >> make_nvp("upsilon_id_to_lam_id", v.upsilon_id_to_lam_id_);
+    ar >> make_nvp("erasures_by_language", v.erasures_by_language_);
 }
 
 } }

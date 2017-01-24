@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/hash/languages_hash.hpp"
@@ -52,7 +53,8 @@ public:
         const std::string& name,
         const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_language_agnostic_id,
         const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_upsilon_id,
-        const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id);
+        const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id,
+        const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language);
 
 private:
     template<typename Archive>
@@ -87,6 +89,11 @@ public:
     void upsilon_id_to_lam_id(const std::unordered_map<std::string, std::string>&& v);
     /**@}*/
 
+    const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language() const;
+    std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language();
+    void erasures_by_language(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& v);
+    void erasures_by_language(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >&& v);
+
 public:
     bool operator==(const mapping_set& rhs) const;
     bool operator!=(const mapping_set& rhs) const {
@@ -102,6 +109,7 @@ private:
     std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> > by_language_agnostic_id_;
     std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> > by_upsilon_id_;
     std::unordered_map<std::string, std::string> upsilon_id_to_lam_id_;
+    std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> > erasures_by_language_;
 };
 
 } }

@@ -49,6 +49,8 @@
 #include "dogen/yarn/test_data/object_types_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/mapping_value_td.hpp"
+#include "dogen/yarn/test_data/mapping_actions_td.hpp"
+#include "dogen/yarn/test_data/mapping_context_td.hpp"
 #include "dogen/yarn/test_data/type_parameters_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
 #include "dogen/yarn/test_data/decomposition_result_td.hpp"

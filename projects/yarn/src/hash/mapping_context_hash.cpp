@@ -19,8 +19,7 @@
  *
  */
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/languages_hash.hpp"
-#include "dogen/yarn/hash/mapping_set_hash.hpp"
+#include "dogen/yarn/hash/mapping_context_hash.hpp"
 
 namespace {
 
@@ -39,11 +38,10 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_name(const std::
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& v) {
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(i.second));
+        combine(seed, i);
     }
     return seed;
 }
@@ -57,36 +55,17 @@ inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unord
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_dogen_yarn_languages_std_unordered_set_std_string(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_unordered_set_std_string(i.second));
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
 namespace yarn {
 
-std::size_t mapping_set_hasher::hash(const mapping_set& v) {
+std::size_t mapping_context_hasher::hash(const mapping_context& v) {
     std::size_t seed(0);
 
-    combine(seed, v.name());
-    combine(seed, hash_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(v.by_language_agnostic_id()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(v.by_upsilon_id()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.upsilon_id_to_lam_id()));
-    combine(seed, hash_std_unordered_map_dogen_yarn_languages_std_unordered_set_std_string(v.erasures_by_language()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.translations()));
+    combine(seed, hash_std_unordered_set_std_string(v.erasures()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.injections()));
 
     return seed;
 }

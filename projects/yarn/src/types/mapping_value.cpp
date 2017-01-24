@@ -23,20 +23,32 @@
 namespace dogen {
 namespace yarn {
 
+mapping_value::mapping_value()
+    : mapping_action_(static_cast<dogen::yarn::mapping_actions>(0)) { }
+
+mapping_value::mapping_value(mapping_value&& rhs)
+    : mapping_action_(std::move(rhs.mapping_action_)),
+      default_name_(std::move(rhs.default_name_)),
+      aliases_(std::move(rhs.aliases_)) { }
+
 mapping_value::mapping_value(
-    const dogen::yarn::name& default_name,
+    const dogen::yarn::mapping_actions mapping_action,
+    const boost::optional<dogen::yarn::name>& default_name,
     const std::list<dogen::yarn::name>& aliases)
-    : default_name_(default_name),
+    : mapping_action_(mapping_action),
+      default_name_(default_name),
       aliases_(aliases) { }
 
 void mapping_value::swap(mapping_value& other) noexcept {
     using std::swap;
+    swap(mapping_action_, other.mapping_action_);
     swap(default_name_, other.default_name_);
     swap(aliases_, other.aliases_);
 }
 
 bool mapping_value::operator==(const mapping_value& rhs) const {
-    return default_name_ == rhs.default_name_ &&
+    return mapping_action_ == rhs.mapping_action_ &&
+        default_name_ == rhs.default_name_ &&
         aliases_ == rhs.aliases_;
 }
 
@@ -46,19 +58,27 @@ mapping_value& mapping_value::operator=(mapping_value other) {
     return *this;
 }
 
-const dogen::yarn::name& mapping_value::default_name() const {
+dogen::yarn::mapping_actions mapping_value::mapping_action() const {
+    return mapping_action_;
+}
+
+void mapping_value::mapping_action(const dogen::yarn::mapping_actions v) {
+    mapping_action_ = v;
+}
+
+const boost::optional<dogen::yarn::name>& mapping_value::default_name() const {
     return default_name_;
 }
 
-dogen::yarn::name& mapping_value::default_name() {
+boost::optional<dogen::yarn::name>& mapping_value::default_name() {
     return default_name_;
 }
 
-void mapping_value::default_name(const dogen::yarn::name& v) {
+void mapping_value::default_name(const boost::optional<dogen::yarn::name>& v) {
     default_name_ = v;
 }
 
-void mapping_value::default_name(const dogen::yarn::name&& v) {
+void mapping_value::default_name(const boost::optional<dogen::yarn::name>&& v) {
     default_name_ = std::move(v);
 }
 

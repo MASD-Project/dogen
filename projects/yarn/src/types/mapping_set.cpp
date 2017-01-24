@@ -27,11 +27,13 @@ mapping_set::mapping_set(
     const std::string& name,
     const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_language_agnostic_id,
     const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_upsilon_id,
-    const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id)
+    const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id,
+    const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language)
     : name_(name),
       by_language_agnostic_id_(by_language_agnostic_id),
       by_upsilon_id_(by_upsilon_id),
-      upsilon_id_to_lam_id_(upsilon_id_to_lam_id) { }
+      upsilon_id_to_lam_id_(upsilon_id_to_lam_id),
+      erasures_by_language_(erasures_by_language) { }
 
 void mapping_set::swap(mapping_set& other) noexcept {
     using std::swap;
@@ -39,13 +41,15 @@ void mapping_set::swap(mapping_set& other) noexcept {
     swap(by_language_agnostic_id_, other.by_language_agnostic_id_);
     swap(by_upsilon_id_, other.by_upsilon_id_);
     swap(upsilon_id_to_lam_id_, other.upsilon_id_to_lam_id_);
+    swap(erasures_by_language_, other.erasures_by_language_);
 }
 
 bool mapping_set::operator==(const mapping_set& rhs) const {
     return name_ == rhs.name_ &&
         by_language_agnostic_id_ == rhs.by_language_agnostic_id_ &&
         by_upsilon_id_ == rhs.by_upsilon_id_ &&
-        upsilon_id_to_lam_id_ == rhs.upsilon_id_to_lam_id_;
+        upsilon_id_to_lam_id_ == rhs.upsilon_id_to_lam_id_ &&
+        erasures_by_language_ == rhs.erasures_by_language_;
 }
 
 mapping_set& mapping_set::operator=(mapping_set other) {
@@ -116,6 +120,22 @@ void mapping_set::upsilon_id_to_lam_id(const std::unordered_map<std::string, std
 
 void mapping_set::upsilon_id_to_lam_id(const std::unordered_map<std::string, std::string>&& v) {
     upsilon_id_to_lam_id_ = std::move(v);
+}
+
+const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& mapping_set::erasures_by_language() const {
+    return erasures_by_language_;
+}
+
+std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& mapping_set::erasures_by_language() {
+    return erasures_by_language_;
+}
+
+void mapping_set::erasures_by_language(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& v) {
+    erasures_by_language_ = v;
+}
+
+void mapping_set::erasures_by_language(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >&& v) {
+    erasures_by_language_ = std::move(v);
 }
 
 } }

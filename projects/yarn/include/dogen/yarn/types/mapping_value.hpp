@@ -27,7 +27,9 @@
 
 #include <list>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/mapping_actions.hpp"
 #include "dogen/yarn/serialization/mapping_value_fwd_ser.hpp"
 
 namespace dogen {
@@ -38,14 +40,19 @@ namespace yarn {
  */
 class mapping_value final {
 public:
-    mapping_value() = default;
     mapping_value(const mapping_value&) = default;
-    mapping_value(mapping_value&&) = default;
     ~mapping_value() = default;
 
 public:
+    mapping_value();
+
+public:
+    mapping_value(mapping_value&& rhs);
+
+public:
     mapping_value(
-        const dogen::yarn::name& default_name,
+        const dogen::yarn::mapping_actions mapping_action,
+        const boost::optional<dogen::yarn::name>& default_name,
         const std::list<dogen::yarn::name>& aliases);
 
 private:
@@ -56,10 +63,13 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::mapping_value& v, unsigned int version);
 
 public:
-    const dogen::yarn::name& default_name() const;
-    dogen::yarn::name& default_name();
-    void default_name(const dogen::yarn::name& v);
-    void default_name(const dogen::yarn::name&& v);
+    dogen::yarn::mapping_actions mapping_action() const;
+    void mapping_action(const dogen::yarn::mapping_actions v);
+
+    const boost::optional<dogen::yarn::name>& default_name() const;
+    boost::optional<dogen::yarn::name>& default_name();
+    void default_name(const boost::optional<dogen::yarn::name>& v);
+    void default_name(const boost::optional<dogen::yarn::name>&& v);
 
     const std::list<dogen::yarn::name>& aliases() const;
     std::list<dogen::yarn::name>& aliases();
@@ -77,7 +87,8 @@ public:
     mapping_value& operator=(mapping_value other);
 
 private:
-    dogen::yarn::name default_name_;
+    dogen::yarn::mapping_actions mapping_action_;
+    boost::optional<dogen::yarn::name> default_name_;
     std::list<dogen::yarn::name> aliases_;
 };
 

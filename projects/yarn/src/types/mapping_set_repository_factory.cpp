@@ -92,13 +92,13 @@ void mapping_set_repository_factory::populate_upsilon_data(
      * default type - we don't expect aliases for other languages
      * (validated above us).
      */
-    const std::string default_upsilon_id(upsilon_mv.default_name().id());
+    const auto default_upsilon_id(upsilon_mv.default_name()->id());
     for (const auto& pair : mapping.by_language()) {
         const auto l(pair.first);
         if (l == languages::upsilon)
             continue;
 
-        const auto& n(pair.second.default_name());
+        const auto& n(*(pair.second.default_name()));
         insert(default_upsilon_id, n, l, ms.by_upsilon_id());
     }
 
@@ -117,7 +117,7 @@ void mapping_set_repository_factory::populate_upsilon_data(
             if (l == languages::upsilon)
                 continue;
 
-            const auto& n(pair.second.default_name());
+            const auto& n(*(pair.second.default_name()));
             insert(un.id(), n, l, ms.by_upsilon_id());
         }
 
@@ -148,7 +148,7 @@ void mapping_set_repository_factory::populate_mapping_set(
                  * aliases for languages other than upsilon (validated
                  * above us).
                  */
-                const auto n(mv.default_name());
+                const auto n(*mv.default_name());
                 insert(lam_id, n, l, ms.by_language_agnostic_id());
             }
         }

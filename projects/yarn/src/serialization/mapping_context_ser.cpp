@@ -19,39 +19,39 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
+#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/mapping_value_ser.hpp"
-#include "dogen/yarn/serialization/mapping_actions_ser.hpp"
+#include "dogen/yarn/serialization/mapping_context_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::mapping_value& v,
+    const dogen::yarn::mapping_context& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("mapping_action", v.mapping_action_);
-    ar << make_nvp("default_name", v.default_name_);
-    ar << make_nvp("aliases", v.aliases_);
+    ar << make_nvp("translations", v.translations_);
+    ar << make_nvp("erasures", v.erasures_);
+    ar << make_nvp("injections", v.injections_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::mapping_value& v,
+    dogen::yarn::mapping_context& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("mapping_action", v.mapping_action_);
-    ar >> make_nvp("default_name", v.default_name_);
-    ar >> make_nvp("aliases", v.aliases_);
+    ar >> make_nvp("translations", v.translations_);
+    ar >> make_nvp("erasures", v.erasures_);
+    ar >> make_nvp("injections", v.injections_);
 }
 
 } }
@@ -59,16 +59,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::mapping_value& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::mapping_value& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::mapping_context& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::mapping_context& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::mapping_value& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::mapping_value& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::mapping_context& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::mapping_context& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::mapping_value& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::mapping_value& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::mapping_context& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::mapping_context& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::mapping_value& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::mapping_value& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::mapping_context& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::mapping_context& v, unsigned int version);
 
 } }
