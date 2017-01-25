@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/mapping_actions_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
 
@@ -135,6 +136,13 @@ void mapping_set_repository_factory::populate_mapping_set(
             const auto l(pair.first);
             const auto& mv(pair.second);
 
+            BOOST_LOG_SEV(lg, debug) << "Processing mapping action: "
+                                     << mv.mapping_action();
+
+            // FIXME: ignore erases for now.
+            if (mv.mapping_action() == mapping_actions::erase)
+                continue;
+
             if (l == languages::upsilon) {
                 /*
                  * For upsilon we need to perform additional (complex)
@@ -187,6 +195,9 @@ make(const std::unordered_map<std::string, std::list<mapping>>&
         BOOST_LOG_SEV(lg, debug) << "Finished populating mapping set.";
     }
 
+    /*
+     * The default mapping set must be present.
+     */
     if (!found_default) {
         BOOST_LOG_SEV(lg, error) << missing_default_mapping_set;
         BOOST_THROW_EXCEPTION(building_error(missing_default_mapping_set));

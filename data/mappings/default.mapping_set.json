@@ -529,5 +529,21 @@
                 }
             }
         ]
+    },
+    {
+        "lam_id" : "lam::pointer",
+        "names_by_language" : [
+            {
+                "language" : "cpp",
+                "default_name" : {
+                    "simple": "shared_ptr",
+                    "model_modules": "boost"
+                }
+            },
+            {
+                "language" : "csharp",
+                "mapping_action" : "erase"
+            }
+        ]
     }
 ]

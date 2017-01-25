@@ -32,6 +32,7 @@
 #include <boost/property_tree/ptree.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/mapping_actions.hpp"
 #include "dogen/yarn/types/mapping.hpp"
 
 namespace dogen {
@@ -39,6 +40,7 @@ namespace yarn {
 
 class mappings_hydrator final {
 private:
+    mapping_actions to_mapping_action(const std::string& s) const;
     languages to_language(const std::string& s) const;
 
 private:

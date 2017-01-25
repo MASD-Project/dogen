@@ -41,9 +41,14 @@ const std::string language_key("language");
 const std::string aliases_key("aliases");
 const std::string names_by_language_key("names_by_language");
 const std::string default_name_key("default_name");
+const std::string mapping_action_key("mapping_action");
 const std::string simple_key("simple");
 const std::string internal_modules_key("internal_modules");
 const std::string model_modules_key("model_modules");
+
+const std::string default_mapping_action("translate");
+const std::string translate_mapping_action("translate");
+const std::string erase_mapping_action("erase");
 
 const std::string cpp_language("cpp");
 const std::string csharp_language("csharp");
@@ -56,15 +61,26 @@ const std::string invalid_option_in_json_file(
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string failed_to_open_file("Failed to open file: ");
 const std::string unsupported_lanugage("Language is not supported: ");
+const std::string unsupported_mapping_action(
+    "Mapping action is not supported: ");
 const std::string missing_names("Could not find names by language in JSON.");
 const std::string duplicate_language("Language mapped more than once: ");
-const std::string missing_default_name(
-    "JSON element 'default_name' is mandatory.");
 
 }
 
 namespace dogen {
 namespace yarn {
+
+mapping_actions
+mappings_hydrator::to_mapping_action(const std::string& s) const {
+    if (s == translate_mapping_action)
+        return mapping_actions::translate;
+    else if (s == erase_mapping_action)
+        return mapping_actions::erase;
+
+    BOOST_LOG_SEV(lg, error) << unsupported_mapping_action << s;
+    BOOST_THROW_EXCEPTION(hydration_error(unsupported_mapping_action + s));
+}
 
 languages mappings_hydrator::to_language(const std::string& s) const {
     if (s == cpp_language)
@@ -102,34 +118,25 @@ read_mapping_values(const boost::property_tree::ptree& pt) const {
     std::unordered_map<languages, mapping_value> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
-        const auto s(i->second.get<std::string>(language_key));
+        const auto& apt(i->second);
+        const auto s(apt.get<std::string>(language_key));
         const auto l(to_language(s));
 
-        /*
-         * Read the default name.
-         */
-        auto j(i->second.find(default_name_key));
-        if (j == i->second.not_found()) {
-            BOOST_LOG_SEV(lg, error) << missing_default_name;
-            BOOST_THROW_EXCEPTION(hydration_error(missing_default_name));
-        }
-
         mapping_value mv;
-        mv.default_name(read_name(j->second));
+        const auto& mak(mapping_action_key);
+        const auto ma_str(apt.get<std::string>(mak, default_mapping_action));
+        mv.mapping_action(to_mapping_action(ma_str));
 
-        /*
-         * Read all aliases, if any are found.
-         */
-        j = i->second.find(aliases_key);
-        if (j != i->second.not_found()) {
-            for (auto k(j->second.begin()); k != j->second.end(); ++k) {
+        auto j = apt.find(default_name_key);
+        if (j != apt.not_found())
+            mv.default_name(read_name(j->second));
+
+        j = apt.find(aliases_key);
+        if (j != apt.not_found()) {
+            for (auto k(j->second.begin()); k != j->second.end(); ++k)
                 mv.aliases().push_back(read_name(k->second));
-            }
         }
 
-        /*
-         * Slot the mapping value into its container, by language.
-         */
         const auto pair(std::make_pair(l, mv));
         const auto inserted(r.insert(pair).second);
         if (!inserted) {
