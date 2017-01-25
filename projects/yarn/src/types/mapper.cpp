@@ -35,6 +35,7 @@ const std::string lam_pointer("lam::pointer");
 
 const std::string missing_mapping("Mapping not found for LAM ID: ");
 const std::string unsupported_lanugage("Language is not supported: ");
+const std::string unexpected_number_of__children("Expected exactly one child.");
 
 }
 
@@ -117,10 +118,51 @@ mapping_context mapper::create_mapping_context(
     return r;
 }
 
-name_tree mapper::
-walk_name_tree(const mapping_context& mc, const name_tree& nt) const {
-    name_tree r;
+name_tree mapper::walk_name_tree(const mapping_context& mc, const name_tree& nt,
+    const bool skip_injection) const {
     const auto id(nt.current().id());
+    if (mc.erasures().find(id) != mc.erasures().end()) {
+        /*
+         * We need to erase this type from the name tree. We do this
+         * by skipping it. Note that, for erasures, only one child is
+         * permitted. An erasure is required, for example, for
+         * language agnostic pointers in languages where all objects
+         * are pointers anyway (such as C#).
+         */
+        if (nt.children().size() != 1) {
+            BOOST_LOG_SEV(lg, error) << unexpected_number_of__children
+                                     << " Children: " << nt.children().size();
+            BOOST_THROW_EXCEPTION(
+                mapping_error(unexpected_number_of__children));
+        }
+        const auto& c(nt.children().front());
+        return walk_name_tree(mc, c);
+    }
+
+    /*
+     * Now we handle injections. This is the insertion of an
+     * additional type above current. For example, we want to inject a
+     * pointer element for all abstract classes in C++. Note that by
+     * definitions, injections will always expect exactly one type
+     * parameter. We do not attempt injections if we are already under
+     * an injection or else we would create an infinite loop.
+     */
+    name_tree r;
+    if (!skip_injection) {
+        const auto i(mc.injections().find(id));
+        if (i != mc.injections().end()) {
+            const auto& n(i->second);
+            r.current(n);
+            r.children().push_back(walk_name_tree(mc, nt, !skip_injection));
+            return r;
+        }
+    }
+
+    /*
+     * Finally we handle translations. We locate a maping for the
+     * current ID; if one is found, we replace the name with the
+     * mapped name. Otherwise we copy across the original name.
+     */
     const auto i(mc.translations().find(id));
     if (i != mc.translations().end()) {
         r.current(i->second);
@@ -129,6 +171,9 @@ walk_name_tree(const mapping_context& mc, const name_tree& nt) const {
     } else
         r.current(nt.current());
 
+    /*
+     * We now repeat the whole process for all our children.
+     */
     for (const auto& c : nt.children())
         r.children().push_back(walk_name_tree(mc, c));
 

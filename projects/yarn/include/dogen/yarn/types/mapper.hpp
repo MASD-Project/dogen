@@ -54,7 +54,7 @@ private:
 
 private:
     name_tree walk_name_tree(const mapping_context& mc,
-        const name_tree& nt) const;
+        const name_tree& nt, const bool skip_injection = false) const;
     void map_attributes(const mapping_context& mc,
         std::list<attribute>& attrs) const;
 
