@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/types/mappings_validator.hpp"
@@ -28,7 +29,11 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.mappings_validator"));
 
+const std::string lam_id_prefix("lam::");
 const std::string default_mapping_set_name("default.mapping_set");
+
+const std::string invalid_lam_id("LAM ID is not valid: ");
+const std::string empty_mapping_set("Mapping set has no entries: ");
 const std::string missing_default_mapping_set(
     "Could not find the default mapping set: " + default_mapping_set_name);
 
@@ -47,7 +52,28 @@ void mappings_validator::validate(const std::unordered_map<std::string,
         if (n == default_mapping_set_name)
             found_default = true;
 
-        //const auto& mappings(pair.second);
+        const auto& mappings(pair.second);
+
+        /*
+         * We should have a least one mapping.
+         */
+        if (mappings.empty()) {
+            BOOST_LOG_SEV(lg, error) << empty_mapping_set << n;
+            BOOST_THROW_EXCEPTION(validation_error(empty_mapping_set + n));
+        }
+
+        for (const auto& mapping : mappings) {
+            /*
+             * LAM ID must not be empty and must start with predefined
+             * prefix.
+             */
+            const auto lam_id(mapping.lam_id());
+            if (lam_id.empty() || !boost::starts_with(lam_id, lam_id_prefix)) {
+                BOOST_LOG_SEV(lg, error) << invalid_lam_id << lam_id;
+                BOOST_THROW_EXCEPTION(
+                    validation_error(invalid_lam_id + lam_id));
+            }
+        }
     }
 
     /*
