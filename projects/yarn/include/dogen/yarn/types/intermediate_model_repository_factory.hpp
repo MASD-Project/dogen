@@ -53,6 +53,12 @@ private:
         const std::vector<boost::filesystem::path>& dirs) const;
 
     /**
+     * @brief Ensures the mappings are valid.
+     */
+    void validate_mappings(const std::unordered_map<std::string,
+        std::list<mapping>>& mappings) const;
+
+    /**
      * @brief Obtain the mapping repository.
      */
     mapping_set_repository obtain_mapping_set_repository(

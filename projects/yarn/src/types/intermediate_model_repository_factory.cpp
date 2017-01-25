@@ -34,6 +34,7 @@
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
+#include "dogen/yarn/types/mappings_validator.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 
@@ -92,6 +93,12 @@ obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
 
     BOOST_LOG_SEV(lg, debug) << "Read all mappings. Result: " << r;
     return r;
+}
+
+void intermediate_model_repository_factory::validate_mappings(
+    const std::unordered_map<std::string, std::list<mapping>>& mappings) const {
+    mappings_validator v;
+    v.validate(mappings);
 }
 
 mapping_set_repository
@@ -182,6 +189,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * used by all intermediate models.
      */
     const auto mappings(obtain_mappings(dirs));
+    validate_mappings(mappings);
     const auto msrp(obtain_mapping_set_repository(mappings));
 
     intermediate_model_repository r;

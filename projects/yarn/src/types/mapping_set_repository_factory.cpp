@@ -32,8 +32,6 @@ auto lg(logger_factory("yarn.mapping_set_repository_factory"));
 const std::string duplicate_lam_id("Duplicate language agnostic id: ");
 const std::string duplicate_upsilon_id("Duplicate upsilon id: ");
 const std::string default_mapping_set_name("default.mapping_set");
-const std::string missing_default_mapping_set(
-    "Could not find the default mapping set: " + default_mapping_set_name);
 
 }
 
@@ -176,7 +174,6 @@ make(const std::unordered_map<std::string, std::list<mapping>>&
      * different files originally - and add each one to the mapping
      * repository as a different mapping set.
      */
-    bool found_default(false);
     for (const auto& pair : mappings_by_set_name) {
         const auto& n(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Populating mapping set: " << n;
@@ -187,21 +184,11 @@ make(const std::unordered_map<std::string, std::list<mapping>>&
          * their names.
          */
         const auto& mappings(pair.second);
-        if (n == default_mapping_set_name) {
-            populate_mapping_set(mappings, r.default_mapping_set());
-            found_default = true;
-        } else
-            populate_mapping_set(mappings, r.by_name()[n]);
+        const auto& is_default(n == default_mapping_set_name);
+        auto& ms(is_default ? r.default_mapping_set() : r.by_name()[n]);
+        populate_mapping_set(mappings, ms);
 
         BOOST_LOG_SEV(lg, debug) << "Finished populating mapping set.";
-    }
-
-    /*
-     * The default mapping set must be present.
-     */
-    if (!found_default) {
-        BOOST_LOG_SEV(lg, error) << missing_default_mapping_set;
-        BOOST_THROW_EXCEPTION(building_error(missing_default_mapping_set));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating mapping set repository.";

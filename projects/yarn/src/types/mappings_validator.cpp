@@ -18,13 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/types/mappings_validator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.mappings_validator"));
+
+const std::string default_mapping_set_name("default.mapping_set");
+const std::string missing_default_mapping_set(
+    "Could not find the default mapping set: " + default_mapping_set_name);
+
+}
 
 namespace dogen {
 namespace yarn {
 
-bool mappings_validator::operator==(const mappings_validator& /*rhs*/) const {
-    return true;
+void mappings_validator::validate(const std::unordered_map<std::string,
+    std::list<mapping>>& mappings_by_set_name) const {
+
+    bool found_default(false);
+    for (const auto& pair : mappings_by_set_name) {
+        const auto& n(pair.first);
+
+        if (n == default_mapping_set_name)
+            found_default = true;
+
+        //const auto& mappings(pair.second);
+    }
+
+    /*
+     * The default mapping set must be present.
+     */
+    if (!found_default) {
+        BOOST_LOG_SEV(lg, error) << missing_default_mapping_set;
+        BOOST_THROW_EXCEPTION(validation_error(missing_default_mapping_set));
+    }
 }
 
 } }

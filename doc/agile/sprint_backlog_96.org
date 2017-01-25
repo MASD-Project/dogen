@@ -13,33 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-25 Wed 11:53]
+#+CAPTION: Clock summary at [2017-01-25 Wed 17:59]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *55:56* |       |       | 100.0 |
+| *Total time*                                                                | *60:02* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 55:56   |       |       | 100.0 |
-| Active                                                                      |         | 55:56 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:37 |   4.7 |
+| Stories                                                                     | 60:02   |       |       | 100.0 |
+| Active                                                                      |         | 60:02 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:50 |   4.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.0 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.5 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  18.4 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   2.4 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   2.7 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.8 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.4 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  17.2 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   2.2 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   2.5 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.7 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.6 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  24.1 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  11.3 |
-| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.5 |
-| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   2.4 |
-| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.8 |
-| COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   1.9 |
-| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.5 |
-| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   8.5 |
-| STARTED Add mapping support between upsilon and LAM                         |         |       |  0:43 |   1.3 |
-| STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.3 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |  12.4 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  22.4 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |  10.5 |
+| COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.4 |
+| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   2.2 |
+| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.7 |
+| COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   1.7 |
+| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.4 |
+| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   7.9 |
+| COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   2.5 |
+| STARTED Add mapping support between upsilon and LAM                         |         |       |  1:02 |   1.7 |
+| STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.2 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |  11.5 |
+| STARTED Map upsilon primitives to intrinsics                                |         |       |  2:03 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -551,6 +553,7 @@ abstract.
   named value and of the type of the primitive.
 
 *** STARTED Add mapping support between upsilon and LAM               :story:
+    CLOCK: [2017-01-25 Wed 17:39]--[2017-01-25 Wed 17:58] =>  0:19
     CLOCK: [2017-01-23 Mon 21:28]--[2017-01-23 Mon 22:11] =>  0:43
 
 At present we map upsilon directly to a language-specific model
