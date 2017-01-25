@@ -51,14 +51,6 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-std::unordered_map<std::string, std::string> create_std_unordered_map_std_string_std_string(unsigned int position) {
-    std::unordered_map<std::string, std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_string(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -70,7 +62,7 @@ void mapping_context_generator::
 populate(const unsigned int position, result_type& v) {
     v.translations(create_std_unordered_map_std_string_dogen_yarn_name(position + 0));
     v.erasures(create_std_unordered_set_std_string(position + 1));
-    v.injections(create_std_unordered_map_std_string_std_string(position + 2));
+    v.injections(create_std_unordered_map_std_string_dogen_yarn_name(position + 2));
 }
 
 mapping_context_generator::result_type

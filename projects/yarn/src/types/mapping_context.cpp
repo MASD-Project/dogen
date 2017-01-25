@@ -26,7 +26,7 @@ namespace yarn {
 mapping_context::mapping_context(
     const std::unordered_map<std::string, dogen::yarn::name>& translations,
     const std::unordered_set<std::string>& erasures,
-    const std::unordered_map<std::string, std::string>& injections)
+    const std::unordered_map<std::string, dogen::yarn::name>& injections)
     : translations_(translations),
       erasures_(erasures),
       injections_(injections) { }
@@ -82,19 +82,19 @@ void mapping_context::erasures(const std::unordered_set<std::string>&& v) {
     erasures_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::string>& mapping_context::injections() const {
+const std::unordered_map<std::string, dogen::yarn::name>& mapping_context::injections() const {
     return injections_;
 }
 
-std::unordered_map<std::string, std::string>& mapping_context::injections() {
+std::unordered_map<std::string, dogen::yarn::name>& mapping_context::injections() {
     return injections_;
 }
 
-void mapping_context::injections(const std::unordered_map<std::string, std::string>& v) {
+void mapping_context::injections(const std::unordered_map<std::string, dogen::yarn::name>& v) {
     injections_ = v;
 }
 
-void mapping_context::injections(const std::unordered_map<std::string, std::string>&& v) {
+void mapping_context::injections(const std::unordered_map<std::string, dogen::yarn::name>&& v) {
     injections_ = std::move(v);
 }
 

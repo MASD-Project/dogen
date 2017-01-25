@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/mapping_context.hpp"
 #include "dogen/yarn/types/mapping_set_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -40,12 +41,22 @@ public:
 
 private:
     const std::unordered_map<std::string, name>&
-    map_for_language(const mapping_set& ms, const languages from,
+    translations_for_language(const mapping_set& ms, const languages from,
         const languages to) const;
-    name_tree walk_name_tree(const std::unordered_map<std::string,
-        name>& map, const name_tree& nt) const;
-    void map_attributes(const std::unordered_map<std::string,
-        name>& map, std::list<attribute>& attrs) const;
+
+    std::unordered_map<std::string, name>
+    injections_for_language(const mapping_set& ms, const languages l,
+        const intermediate_model& im) const;
+
+    mapping_context create_mapping_context(const mapping_set& ms,
+        const languages from, const languages to,
+        const intermediate_model& im) const;
+
+private:
+    name_tree walk_name_tree(const mapping_context& mc,
+        const name_tree& nt) const;
+    void map_attributes(const mapping_context& mc,
+        std::list<attribute>& attrs) const;
 
 public:
     intermediate_model map(const languages from, const languages to,

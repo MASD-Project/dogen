@@ -46,7 +46,7 @@ public:
     mapping_context(
         const std::unordered_map<std::string, dogen::yarn::name>& translations,
         const std::unordered_set<std::string>& erasures,
-        const std::unordered_map<std::string, std::string>& injections);
+        const std::unordered_map<std::string, dogen::yarn::name>& injections);
 
 private:
     template<typename Archive>
@@ -66,10 +66,10 @@ public:
     void erasures(const std::unordered_set<std::string>& v);
     void erasures(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_map<std::string, std::string>& injections() const;
-    std::unordered_map<std::string, std::string>& injections();
-    void injections(const std::unordered_map<std::string, std::string>& v);
-    void injections(const std::unordered_map<std::string, std::string>&& v);
+    const std::unordered_map<std::string, dogen::yarn::name>& injections() const;
+    std::unordered_map<std::string, dogen::yarn::name>& injections();
+    void injections(const std::unordered_map<std::string, dogen::yarn::name>& v);
+    void injections(const std::unordered_map<std::string, dogen::yarn::name>&& v);
 
 public:
     bool operator==(const mapping_context& rhs) const;
@@ -84,7 +84,7 @@ public:
 private:
     std::unordered_map<std::string, dogen::yarn::name> translations_;
     std::unordered_set<std::string> erasures_;
-    std::unordered_map<std::string, std::string> injections_;
+    std::unordered_map<std::string, dogen::yarn::name> injections_;
 };
 
 } }

@@ -46,15 +46,6 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -65,7 +56,7 @@ std::size_t mapping_context_hasher::hash(const mapping_context& v) {
 
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.translations()));
     combine(seed, hash_std_unordered_set_std_string(v.erasures()));
-    combine(seed, hash_std_unordered_map_std_string_std_string(v.injections()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.injections()));
 
     return seed;
 }
