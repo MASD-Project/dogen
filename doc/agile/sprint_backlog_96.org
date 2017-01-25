@@ -660,6 +660,7 @@ Links:
 - [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
 
 *** STARTED Add support for pointers to mapper in upsilon             :story:
+    CLOCK: [2017-01-25 Wed 07:50]--[2017-01-25 Wed 08:08] =>  0:18
     CLOCK: [2017-01-25 Wed 07:12]--[2017-01-25 Wed 07:27] =>  0:15
     CLOCK: [2017-01-25 Wed 06:37]--[2017-01-25 Wed 07:03] =>  0:26
     CLOCK: [2017-01-24 Tue 21:31]--[2017-01-24 Tue 22:56] =>  1:25

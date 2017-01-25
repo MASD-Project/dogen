@@ -139,9 +139,10 @@ void mapping_set_repository_factory::populate_mapping_set(
             BOOST_LOG_SEV(lg, debug) << "Processing mapping action: "
                                      << mv.mapping_action();
 
-            // FIXME: ignore erases for now.
-            if (mv.mapping_action() == mapping_actions::erase)
+            if (mv.mapping_action() == mapping_actions::erase) {
+                ms.erasures_by_language()[l].insert(lam_id);
                 continue;
+            }
 
             if (l == languages::upsilon) {
                 /*
