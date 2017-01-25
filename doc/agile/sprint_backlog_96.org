@@ -44,6 +44,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-25 Wed 17:17]--[2017-01-25 Wed 17:30] =>  0:13
     CLOCK: [2017-01-24 Tue 11:42]--[2017-01-24 Tue 12:06] =>  0:24
     CLOCK: [2017-01-24 Tue 09:15]--[2017-01-24 Tue 09:35] =>  0:20
     CLOCK: [2017-01-23 Mon 14:18]--[2017-01-23 Mon 14:39] =>  0:21
@@ -539,6 +540,16 @@ This is specifically done only for upsilon. We can rely on the
 populated parents collection in order to determine if a type is
 abstract.
 
+*** COMPLETED Discuss the current approach with end users             :story:
+    CLOSED: [2017-01-25 Wed 17:29]
+    CLOCK: [2017-01-25 Wed 15:30]--[2017-01-25 Wed 17:01] =>  1:31
+
+- demo the current state of Dogen.
+- discuss mapping of primitives by "unboxing" them back into primitive
+  types. Final decision is that for platform primitives we should
+  unbox, for other types we should create objects with an attribute
+  named value and of the type of the primitive.
+
 *** STARTED Add mapping support between upsilon and LAM               :story:
     CLOCK: [2017-01-23 Mon 21:28]--[2017-01-23 Mon 22:11] =>  0:43
 
@@ -676,11 +687,46 @@ Links:
 - [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
 - [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
 
-*** Map upsilon primitives to intrinsics                              :story:
+*** STARTED Map upsilon primitives to intrinsics                      :story:
+    CLOCK: [2017-01-25 Wed 17:30]--[2017-01-25 Wed 17:38] =>  0:08
+    CLOCK: [2017-01-25 Wed 15:01]--[2017-01-25 Wed 15:29] =>  0:28
+    CLOCK: [2017-01-25 Wed 13:24]--[2017-01-25 Wed 14:01] =>  0:37
+    CLOCK: [2017-01-25 Wed 11:54]--[2017-01-25 Wed 12:44] =>  0:50
 
 Upsilon allows users to create "strong typedefs" around primitve
 types. We need to unpack these into their intrinsic counterparts and
 them map the intrinsics to native types.
+
+Slight mistake: we mapped the primitive types themselves but in
+reality what needs to be mapped are the fields making references to
+the primitive types. We should just filter out all primitives.
+
+Additional wrinkle: what the end users want is to unpack "real
+primitives" into intrinsics, but "other" primitives should be mapped
+to objects. This can be achieved by hard-coding =Plaform= primitives
+into the mapping layer. However, some non-platform primitives may also
+be candidates too. We need to create a list of these to see how
+widespread the problem is.
+
+Another alternative is to apply hard-coded regexes:
+
+- if the name matches any of the intrinsic names
+
+Finally, the last option may be to have yet another mapping data file
+format that lists the primitives to unbox.
+
+*** Windows package has element mappings                              :story:
+
+For some reason even after renaming the mappings file it is still on
+windows. This could also be a bug of the installer; after a uninstall
+and reinstall the problem went away. Double check with a clean
+install.
+
+*** Comments in C# appear to be the attribute name                    :story:
+
+It seems we are copying across the attribute name rather than a
+comment. This could also be a problem with the input. Check the Zeta
+model.
 
 *** Add support for generic container types to C#                     :story:
 
