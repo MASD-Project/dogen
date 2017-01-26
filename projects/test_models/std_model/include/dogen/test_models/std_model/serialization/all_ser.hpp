@@ -35,7 +35,7 @@
 #include "dogen/test_models/std_model/serialization/class_h_ser.hpp"
 #include "dogen/test_models/std_model/serialization/class_j_ser.hpp"
 #include "dogen/test_models/std_model/serialization/derived_ser.hpp"
-#include "dogen/test_models/std_model/serialization/primitives_ser.hpp"
+#include "dogen/test_models/std_model/serialization/builtins_ser.hpp"
 #include "dogen/test_models/std_model/serialization/pkg1/class_c_ser.hpp"
 
 #endif

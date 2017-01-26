@@ -36,9 +36,9 @@
 #include "dogen/test_models/stereotypes/test_data/base_concept_model_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/multi_concept_model_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/simple_concept_model_td.hpp"
-#include "dogen/test_models/stereotypes/test_data/immutable_one_primitive_td.hpp"
+#include "dogen/test_models/stereotypes/test_data/immutable_one_builtin_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/refinement_concept_model_td.hpp"
-#include "dogen/test_models/stereotypes/test_data/immutable_one_non_primitive_td.hpp"
+#include "dogen/test_models/stereotypes/test_data/immutable_one_non_builtin_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/second_refinement_concept_model_td.hpp"
 #include "dogen/test_models/stereotypes/test_data/multiple_refinement_concept_model_td.hpp"
 

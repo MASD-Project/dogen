@@ -28,7 +28,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/test_models/stereotypes/types/value.hpp"
-#include "dogen/test_models/stereotypes/types/immutable_one_primitive.hpp"
+#include "dogen/test_models/stereotypes/types/immutable_one_builtin.hpp"
 #include "dogen/test_models/stereotypes/serialization/immutable_four_fwd_ser.hpp"
 
 namespace dogen {
@@ -53,7 +53,7 @@ public:
         const bool prop_0,
         const std::string& prop_1,
         const dogen::test_models::stereotypes::value& prop_2,
-        const dogen::test_models::stereotypes::immutable_one_primitive& prop_3);
+        const dogen::test_models::stereotypes::immutable_one_builtin& prop_3);
 
 private:
     template<typename Archive>
@@ -69,7 +69,7 @@ public:
 
     const dogen::test_models::stereotypes::value& prop_2() const;
 
-    const dogen::test_models::stereotypes::immutable_one_primitive& prop_3() const;
+    const dogen::test_models::stereotypes::immutable_one_builtin& prop_3() const;
 
 public:
     bool operator==(const immutable_four& rhs) const;
@@ -81,7 +81,7 @@ private:
     bool prop_0_;
     std::string prop_1_;
     dogen::test_models::stereotypes::value prop_2_;
-    dogen::test_models::stereotypes::immutable_one_primitive prop_3_;
+    dogen::test_models::stereotypes::immutable_one_builtin prop_3_;
 };
 
 } } }

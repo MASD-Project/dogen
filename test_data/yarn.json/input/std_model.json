@@ -26,6 +26,62 @@
     },
     {
       "name": {
+        "simple": "builtins"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::int8_t"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::int16_t"
+        },
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "std::int32_t"
+        },
+        {
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "std::int64_t"
+        },
+        {
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "std::uint8_t"
+        },
+        {
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "std::uint16_t"
+        },
+        {
+          "name": {
+            "simple": "prop_6"
+          },
+          "unparsed_type": "std::uint32_t"
+        },
+        {
+          "name": {
+            "simple": "prop_7"
+          },
+          "unparsed_type": "std::uint64_t"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "class_a"
       },
       "meta_type": "object",
@@ -312,62 +368,6 @@
             "simple": "prop_1"
           },
           "unparsed_type": "std::vector<class_a>"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "primitives"
-      },
-      "meta_type": "object",
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "std::int8_t"
-        },
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "std::int16_t"
-        },
-        {
-          "name": {
-            "simple": "prop_2"
-          },
-          "unparsed_type": "std::int32_t"
-        },
-        {
-          "name": {
-            "simple": "prop_3"
-          },
-          "unparsed_type": "std::int64_t"
-        },
-        {
-          "name": {
-            "simple": "prop_4"
-          },
-          "unparsed_type": "std::uint8_t"
-        },
-        {
-          "name": {
-            "simple": "prop_5"
-          },
-          "unparsed_type": "std::uint16_t"
-        },
-        {
-          "name": {
-            "simple": "prop_6"
-          },
-          "unparsed_type": "std::uint32_t"
-        },
-        {
-          "name": {
-            "simple": "prop_7"
-          },
-          "unparsed_type": "std::uint64_t"
         }
       ]
     },

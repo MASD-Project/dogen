@@ -22,7 +22,7 @@ using System;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// Immutable class with a primitive property.
+    /// Immutable class with a builtin property.
     /// </summary>
     public sealed class ImmutableOnePrimitive
     {

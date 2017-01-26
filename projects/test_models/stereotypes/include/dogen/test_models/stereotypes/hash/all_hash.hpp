@@ -36,9 +36,9 @@
 #include "dogen/test_models/stereotypes/hash/base_concept_model_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/multi_concept_model_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/simple_concept_model_hash.hpp"
-#include "dogen/test_models/stereotypes/hash/immutable_one_primitive_hash.hpp"
+#include "dogen/test_models/stereotypes/hash/immutable_one_builtin_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/refinement_concept_model_hash.hpp"
-#include "dogen/test_models/stereotypes/hash/immutable_one_non_primitive_hash.hpp"
+#include "dogen/test_models/stereotypes/hash/immutable_one_non_builtin_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/second_refinement_concept_model_hash.hpp"
 #include "dogen/test_models/stereotypes/hash/multiple_refinement_concept_model_hash.hpp"
 

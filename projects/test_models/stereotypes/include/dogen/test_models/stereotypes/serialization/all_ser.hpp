@@ -36,9 +36,9 @@
 #include "dogen/test_models/stereotypes/serialization/base_concept_model_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/multi_concept_model_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/simple_concept_model_ser.hpp"
-#include "dogen/test_models/stereotypes/serialization/immutable_one_primitive_ser.hpp"
+#include "dogen/test_models/stereotypes/serialization/immutable_one_builtin_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/refinement_concept_model_ser.hpp"
-#include "dogen/test_models/stereotypes/serialization/immutable_one_non_primitive_ser.hpp"
+#include "dogen/test_models/stereotypes/serialization/immutable_one_non_builtin_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/second_refinement_concept_model_ser.hpp"
 #include "dogen/test_models/stereotypes/serialization/multiple_refinement_concept_model_ser.hpp"
 

@@ -563,7 +563,7 @@
 			</second>
 		</item>
 		<item>
-			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;builtins&gt;</first>
 			<second object_id="_3">
 				<element>
 					<documentation></documentation>
@@ -576,18 +576,18 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;primitives&gt;</id>
-						<simple>primitives</simple>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;builtins&gt;</id>
+						<simple>builtins</simple>
 						<qualified>
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>dogen::test_models::std_model::primitives</second>
+								<second>dogen::test_models::std_model::builtins</second>
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen.test_models.std_model.primitives</second>
+								<second>dogen.test_models.std_model.builtins</second>
 							</item>
 						</qualified>
 						<location>
@@ -608,7 +608,7 @@
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>dogen_test_models_std_model_primitives</identifiable>
+						<identifiable>dogen_test_models_std_model_builtins</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>

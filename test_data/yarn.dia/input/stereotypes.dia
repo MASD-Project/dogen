@@ -808,13 +808,13 @@
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#immutable_one_primitive#</dia:string>
+        <dia:string>#immutable_one_builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Immutable class with a primitive property.#</dia:string>
+        <dia:string>#Immutable class with a built-in property.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -942,7 +942,7 @@
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#immutable_one_non_primitive#</dia:string>
+        <dia:string>#immutable_one_non_builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#immutable#</dia:string>
@@ -1237,7 +1237,7 @@
             <dia:string>#prop_3#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#immutable_one_primitive#</dia:string>
+            <dia:string>#immutable_one_builtin#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

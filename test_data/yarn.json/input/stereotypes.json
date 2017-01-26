@@ -108,13 +108,31 @@
           "name": {
             "simple": "prop_3"
           },
-          "unparsed_type": "immutable_one_primitive"
+          "unparsed_type": "immutable_one_builtin"
         }
       ]
     },
     {
       "name": {
-        "simple": "immutable_one_non_primitive"
+        "simple": "immutable_one_builtin"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with a built-in property.\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "immutable_one_non_builtin"
       },
       "meta_type": "object",
       "documentation": "Immutable class with one pod property\n",
@@ -127,24 +145,6 @@
             "simple": "prop_0"
           },
           "unparsed_type": "std::string"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "immutable_one_primitive"
-      },
-      "meta_type": "object",
-      "documentation": "Immutable class with a primitive property.\n",
-      "stereotypes": [
-        "immutable"
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_0"
-          },
-          "unparsed_type": "bool"
         }
       ]
     },

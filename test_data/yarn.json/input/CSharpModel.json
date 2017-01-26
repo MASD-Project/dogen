@@ -292,7 +292,7 @@
         "simple": "ImmutableOnePrimitive"
       },
       "meta_type": "object",
-      "documentation": "Immutable class with a primitive property.\n",
+      "documentation": "Immutable class with a builtin property.\n",
       "stereotypes": [
         "immutable"
       ],
@@ -681,7 +681,7 @@
         "simple": "PrimitiveBuiltins"
       },
       "meta_type": "object",
-      "documentation": "This is a class made up of just primitive builtin types.\n\nThis is a remark.\n",
+      "documentation": "This is a class made up of just built-in types.\n\nThis is a remark.\n",
       "attributes": [
         {
           "name": {

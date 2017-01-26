@@ -27,7 +27,7 @@
 
 #include "dogen/test_models/stereotypes/odb/value_pragmas.hpp"
 #include "dogen/test_models/stereotypes/types/immutable_four.hpp"
-#include "dogen/test_models/stereotypes/odb/immutable_one_primitive_pragmas.hpp"
+#include "dogen/test_models/stereotypes/odb/immutable_one_builtin_pragmas.hpp"
 
 // class has no ODB pragmas defined.
 

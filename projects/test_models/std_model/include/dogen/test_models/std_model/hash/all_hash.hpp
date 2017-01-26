@@ -35,7 +35,7 @@
 #include "dogen/test_models/std_model/hash/class_h_hash.hpp"
 #include "dogen/test_models/std_model/hash/class_j_hash.hpp"
 #include "dogen/test_models/std_model/hash/derived_hash.hpp"
-#include "dogen/test_models/std_model/hash/primitives_hash.hpp"
+#include "dogen/test_models/std_model/hash/builtins_hash.hpp"
 #include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
 
 #endif

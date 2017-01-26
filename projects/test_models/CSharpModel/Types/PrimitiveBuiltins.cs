@@ -22,7 +22,7 @@ using System;
 namespace Dogen.TestModels.CSharpModel
 {
     /// <summary>
-    /// This is a class made up of just primitive builtin types.
+    /// This is a class made up of just built-in types.
     /// </summary>
     /// <remarks>
     /// This is a remark.

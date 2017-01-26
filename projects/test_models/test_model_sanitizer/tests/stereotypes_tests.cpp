@@ -48,8 +48,8 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<value_generator>();
     test_equality<immutable_four_generator>();
-    test_equality<immutable_one_non_primitive_generator>();
-    test_equality<immutable_one_primitive_generator>();
+    test_equality<immutable_one_non_builtin_generator>();
+    test_equality<immutable_one_builtin_generator>();
     test_equality<immutable_two_generator>();
     test_equality<fluent_generator>();
     test_equality<fluent_generator>();
@@ -65,8 +65,8 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     roundtrip_type<value_generator>();
     roundtrip_type<immutable_four_generator>();
-    roundtrip_type<immutable_one_non_primitive_generator>();
-    roundtrip_type<immutable_one_primitive_generator>();
+    roundtrip_type<immutable_one_non_builtin_generator>();
+    roundtrip_type<immutable_one_builtin_generator>();
     roundtrip_type<immutable_two_generator>();
     roundtrip_type<fluent_generator>();
     roundtrip_type<fluent_generator>();
@@ -82,8 +82,8 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<value_generator>();
     test_hashing<immutable_four_generator>();
-    test_hashing<immutable_one_non_primitive_generator>();
-    test_hashing<immutable_one_primitive_generator>();
+    test_hashing<immutable_one_non_builtin_generator>();
+    test_hashing<immutable_one_builtin_generator>();
     test_hashing<immutable_two_generator>();
     test_hashing<fluent_generator>();
     test_hashing<fluent_generator>();
@@ -108,8 +108,8 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<value_generator>();
     test_io<immutable_four_generator>();
-    test_io<immutable_one_non_primitive_generator>();
-    test_io<immutable_one_primitive_generator>();
+    test_io<immutable_one_non_builtin_generator>();
+    test_io<immutable_one_builtin_generator>();
     test_io<immutable_two_generator>();
     test_io<immutable_zero_generator>();
     test_io<fluent_generator>();
@@ -124,12 +124,12 @@ BOOST_AUTO_TEST_CASE(validate_io) {
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
-    // NOTE: skipping immutable_one_primitive because boolean types
+    // NOTE: skipping immutable_one_builtin because boolean types
     // don't play well with our requirement that the parameter passed
     // in must not be equal to a default constructed type.
     test_move_assignment_copy<value_generator>();
     test_move_assignment_copy<immutable_four_generator>();
-    test_move_assignment_copy<immutable_one_non_primitive_generator>();
+    test_move_assignment_copy<immutable_one_non_builtin_generator>();
     test_move_assignment_copy<immutable_two_generator>();
     test_move_assignment_copy<fluent_generator>();
     test_move_assignment_copy<fluent_generator>();

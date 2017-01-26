@@ -2006,7 +2006,7 @@
         <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitives#</dia:string>
+        <dia:string>#builtins#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>

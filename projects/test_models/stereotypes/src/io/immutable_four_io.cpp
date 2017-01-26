@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/test_models/stereotypes/io/value_io.hpp"
 #include "dogen/test_models/stereotypes/io/immutable_four_io.hpp"
-#include "dogen/test_models/stereotypes/io/immutable_one_primitive_io.hpp"
+#include "dogen/test_models/stereotypes/io/immutable_one_builtin_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");

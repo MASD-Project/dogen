@@ -13,35 +13,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-26 Thu 11:37]
+#+CAPTION: Clock summary at [2017-01-26 Thu 14:32]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *63:52* |       |       | 100.0 |
+| *Total time*                                                                | *64:28* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 63:52   |       |       | 100.0 |
-| Active                                                                      |         | 63:52 |       | 100.0 |
+| Stories                                                                     | 64:28   |       |       | 100.0 |
+| Active                                                                      |         | 64:28 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  2:50 |   4.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   0.9 |
 | COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.3 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  16.1 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  16.0 |
 | COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   2.1 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   2.3 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.6 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.5 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  21.1 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   9.9 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  20.9 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   9.8 |
 | COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.3 |
 | COMPLETED Add log-level to command line                                     |         |       |  1:20 |   2.1 |
 | COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.6 |
 | COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   1.6 |
 | COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.4 |
-| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   7.4 |
+| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   7.3 |
 | COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   2.4 |
-| STARTED Rename primitives to built-insert                                   |         |       |  1:35 |   2.5 |
+| STARTED Rename primitives to built-insert                                   |         |       |  2:11 |   3.4 |
 | STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   3.0 |
 | STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.2 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |  10.8 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |  10.7 |
 | STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   4.8 |
 | STARTED Strong type aliasing                                                |         |       |  0:20 |   0.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -555,6 +555,8 @@ abstract.
   named value and of the type of the primitive.
 
 *** STARTED Rename primitives to built-insert                         :story:
+    CLOCK: [2017-01-26 Thu 14:21]--[2017-01-26 Thu 14:32] =>  0:11
+    CLOCK: [2017-01-26 Thu 11:38]--[2017-01-26 Thu 12:03] =>  0:25
     CLOCK: [2017-01-26 Thu 11:33]--[2017-01-26 Thu 11:37] =>  0:04
     CLOCK: [2017-01-26 Thu 10:01]--[2017-01-26 Thu 11:32] =>  1:31
 

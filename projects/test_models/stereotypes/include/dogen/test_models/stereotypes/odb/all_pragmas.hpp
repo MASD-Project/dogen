@@ -36,9 +36,9 @@
 #include "dogen/test_models/stereotypes/odb/base_concept_model_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/multi_concept_model_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/simple_concept_model_pragmas.hpp"
-#include "dogen/test_models/stereotypes/odb/immutable_one_primitive_pragmas.hpp"
+#include "dogen/test_models/stereotypes/odb/immutable_one_builtin_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/refinement_concept_model_pragmas.hpp"
-#include "dogen/test_models/stereotypes/odb/immutable_one_non_primitive_pragmas.hpp"
+#include "dogen/test_models/stereotypes/odb/immutable_one_non_builtin_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/second_refinement_concept_model_pragmas.hpp"
 #include "dogen/test_models/stereotypes/odb/multiple_refinement_concept_model_pragmas.hpp"
 

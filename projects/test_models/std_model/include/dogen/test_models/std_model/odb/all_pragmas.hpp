@@ -35,7 +35,7 @@
 #include "dogen/test_models/std_model/odb/class_h_pragmas.hpp"
 #include "dogen/test_models/std_model/odb/class_j_pragmas.hpp"
 #include "dogen/test_models/std_model/odb/derived_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/primitives_pragmas.hpp"
+#include "dogen/test_models/std_model/odb/builtins_pragmas.hpp"
 #include "dogen/test_models/std_model/odb/pkg1/class_c_pragmas.hpp"
 
 #endif

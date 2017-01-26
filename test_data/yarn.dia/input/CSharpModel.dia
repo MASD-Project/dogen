@@ -86,7 +86,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This is a class made up of just primitive builtin types.
+        <dia:string>#This is a class made up of just built-in types.
 
 This is a remark.#</dia:string>
       </dia:attribute>
@@ -6354,7 +6354,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Immutable class with a primitive property.#</dia:string>
+        <dia:string>#Immutable class with a builtin property.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

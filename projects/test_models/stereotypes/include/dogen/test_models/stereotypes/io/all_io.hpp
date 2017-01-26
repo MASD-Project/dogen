@@ -36,9 +36,9 @@
 #include "dogen/test_models/stereotypes/io/base_concept_model_io.hpp"
 #include "dogen/test_models/stereotypes/io/multi_concept_model_io.hpp"
 #include "dogen/test_models/stereotypes/io/simple_concept_model_io.hpp"
-#include "dogen/test_models/stereotypes/io/immutable_one_primitive_io.hpp"
+#include "dogen/test_models/stereotypes/io/immutable_one_builtin_io.hpp"
 #include "dogen/test_models/stereotypes/io/refinement_concept_model_io.hpp"
-#include "dogen/test_models/stereotypes/io/immutable_one_non_primitive_io.hpp"
+#include "dogen/test_models/stereotypes/io/immutable_one_non_builtin_io.hpp"
 #include "dogen/test_models/stereotypes/io/second_refinement_concept_model_io.hpp"
 #include "dogen/test_models/stereotypes/io/multiple_refinement_concept_model_io.hpp"
 

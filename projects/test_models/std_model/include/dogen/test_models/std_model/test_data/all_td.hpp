@@ -35,7 +35,7 @@
 #include "dogen/test_models/std_model/test_data/class_h_td.hpp"
 #include "dogen/test_models/std_model/test_data/class_j_td.hpp"
 #include "dogen/test_models/std_model/test_data/derived_td.hpp"
-#include "dogen/test_models/std_model/test_data/primitives_td.hpp"
+#include "dogen/test_models/std_model/test_data/builtins_td.hpp"
 #include "dogen/test_models/std_model/test_data/pkg1/class_c_td.hpp"
 
 #endif

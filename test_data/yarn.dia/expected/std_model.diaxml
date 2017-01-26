@@ -9603,7 +9603,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#primitives#</value>
+										<value>#builtins#</value>
 									</value>
 								</item>
 							</values>

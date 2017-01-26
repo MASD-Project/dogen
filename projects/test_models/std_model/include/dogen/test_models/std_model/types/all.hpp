@@ -35,7 +35,7 @@
 #include "dogen/test_models/std_model/types/class_h.hpp"
 #include "dogen/test_models/std_model/types/class_j.hpp"
 #include "dogen/test_models/std_model/types/derived.hpp"
-#include "dogen/test_models/std_model/types/primitives.hpp"
+#include "dogen/test_models/std_model/types/builtins.hpp"
 #include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
 #include "dogen/test_models/std_model/types/some_service.hpp"
 

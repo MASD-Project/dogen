@@ -31,7 +31,7 @@ immutable_four::immutable_four(
     const bool prop_0,
     const std::string& prop_1,
     const dogen::test_models::stereotypes::value& prop_2,
-    const dogen::test_models::stereotypes::immutable_one_primitive& prop_3)
+    const dogen::test_models::stereotypes::immutable_one_builtin& prop_3)
     : prop_0_(prop_0),
       prop_1_(prop_1),
       prop_2_(prop_2),
@@ -56,7 +56,7 @@ const dogen::test_models::stereotypes::value& immutable_four::prop_2() const {
     return prop_2_;
 }
 
-const dogen::test_models::stereotypes::immutable_one_primitive& immutable_four::prop_3() const {
+const dogen::test_models::stereotypes::immutable_one_builtin& immutable_four::prop_3() const {
     return prop_3_;
 }
 
