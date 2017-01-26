@@ -18,34 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/primitive/test_data/product_id_td.hpp"
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_DUMMY_TYPE_TD_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_DUMMY_TYPE_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/test_models/primitive/types/dummy_type.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-product_id_generator::product_id_generator() : position_(0) { }
+class dummy_type_generator {
+public:
+    dummy_type_generator();
 
-void product_id_generator::
-populate(const unsigned int /*position*/, result_type& /*v*/) {
-}
+public:
+    typedef dogen::test_models::primitive::dummy_type result_type;
 
-product_id_generator::result_type
-product_id_generator::create(const unsigned int/*position*/) {
-    product_id r;
-    return r;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
-product_id_generator::result_type*
-product_id_generator::create_ptr(const unsigned int position) {
-    product_id* p = new product_id();
-    product_id_generator::populate(position, *p);
-    return p;
-}
-
-product_id_generator::result_type
-product_id_generator::operator()() {
-    return create(position_++);
-}
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif

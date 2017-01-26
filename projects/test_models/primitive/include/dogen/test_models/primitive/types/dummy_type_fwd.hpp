@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_PRODUCT_ID_FWD_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_PRODUCT_ID_FWD_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_DUMMY_TYPE_FWD_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_DUMMY_TYPE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace test_models {
 namespace primitive {
 
-class product_id;
+class dummy_type;
 
 } } }
 

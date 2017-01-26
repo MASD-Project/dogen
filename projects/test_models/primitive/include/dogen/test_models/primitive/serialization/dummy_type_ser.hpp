@@ -18,23 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_PRODUCT_ID_FWD_SER_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_PRODUCT_ID_FWD_SER_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_DUMMY_TYPE_SER_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_DUMMY_TYPE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/types/product_id_fwd.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/test_models/primitive/types/dummy_type.hpp"
 
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::test_models::primitive::dummy_type)
 namespace boost {
 namespace serialization {
 
-template<class Archive>
-void save(Archive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
+template<typename Archive>
+void save(Archive& ar, const dogen::test_models::primitive::dummy_type& v, unsigned int version);
 
-template<class Archive>
-void load(Archive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
+template<typename Archive>
+void load(Archive& ar, dogen::test_models::primitive::dummy_type& v, unsigned int version);
 
 } }
 

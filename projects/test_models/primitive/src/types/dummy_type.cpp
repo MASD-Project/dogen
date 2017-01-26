@@ -18,20 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/primitive/hash/product_id_hash.hpp"
-
-namespace {
-
-
-}
+#include "dogen/test_models/primitive/types/dummy_type.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-std::size_t product_id_hasher::hash(const product_id&) {
-    std::size_t seed(0);
-    return seed;
+bool dummy_type::operator==(const dummy_type& /*rhs*/) const {
+    return true;
 }
 
 } } }

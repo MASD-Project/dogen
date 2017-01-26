@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/primitive/types/product_id.hpp"
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_ODB_DUMMY_TYPE_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_ODB_DUMMY_TYPE_PRAGMAS_HPP
 
-namespace dogen {
-namespace test_models {
-namespace primitive {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-bool product_id::operator==(const product_id& /*rhs*/) const {
-    return true;
-}
+#include "dogen/test_models/primitive/types/dummy_type.hpp"
 
-} } }
+// class has no ODB pragmas defined.
+
+#endif

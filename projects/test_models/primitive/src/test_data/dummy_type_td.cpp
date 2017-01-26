@@ -18,15 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_ODB_PRODUCT_ID_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_ODB_PRODUCT_ID_PRAGMAS_HPP
+#include "dogen/test_models/primitive/test_data/dummy_type_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace primitive {
 
-#include "dogen/test_models/primitive/types/product_id.hpp"
+dummy_type_generator::dummy_type_generator() : position_(0) { }
 
-// class has no ODB pragmas defined.
+void dummy_type_generator::
+populate(const unsigned int /*position*/, result_type& /*v*/) {
+}
 
-#endif
+dummy_type_generator::result_type
+dummy_type_generator::create(const unsigned int/*position*/) {
+    dummy_type r;
+    return r;
+}
+
+dummy_type_generator::result_type*
+dummy_type_generator::create_ptr(const unsigned int position) {
+    dummy_type* p = new dummy_type();
+    dummy_type_generator::populate(position, *p);
+    return p;
+}
+
+dummy_type_generator::result_type
+dummy_type_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

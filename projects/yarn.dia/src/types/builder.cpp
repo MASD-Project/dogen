@@ -203,6 +203,10 @@ void builder::add(const processed_object& po) {
         const auto e(t.to_enumeration(po));
         add_element(itn, im.enumerations(), e, id);
         update_scribble_group(e.name(), po);
+    } else if (yot == yarn_object_types::primitive) {
+        const auto p(t.to_primitive(po));
+        add_element(itn, im.primitives(), p, id);
+        update_scribble_group(p.name(), po);
     } else if (yot == yarn_object_types::concept) {
         const auto c(t.to_concept(po));
         add_element(itn, im.concepts(), c, id);

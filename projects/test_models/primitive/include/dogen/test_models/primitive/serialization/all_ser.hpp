@@ -25,6 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/serialization/product_id_ser.hpp"
+#include "dogen/test_models/primitive/serialization/dummy_type_ser.hpp"
 
 #endif

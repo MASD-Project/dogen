@@ -25,6 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/odb/product_id_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/dummy_type_pragmas.hpp"
 
 #endif

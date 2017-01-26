@@ -19,15 +19,15 @@
  *
  */
 #include <ostream>
-#include "dogen/test_models/primitive/io/product_id_io.hpp"
+#include "dogen/test_models/primitive/io/dummy_type_io.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-std::ostream& operator<<(std::ostream& s, const product_id&) {
+std::ostream& operator<<(std::ostream& s, const dummy_type&) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::test_models::primitive::product_id\"" << " }";
+      << "\"__type__\": " << "\"dogen::test_models::primitive::dummy_type\"" << " }";
     return(s);
 }
 

@@ -18,36 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_HASH_PRODUCT_ID_HASH_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_HASH_PRODUCT_ID_HASH_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_DUMMY_TYPE_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_DUMMY_TYPE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/test_models/primitive/types/product_id.hpp"
+#include <algorithm>
+#include "dogen/test_models/primitive/serialization/dummy_type_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-struct product_id_hasher {
+/**
+ * @brief Just to force some output for now.
+ */
+class dummy_type final {
 public:
-    static std::size_t hash(const product_id& v);
+    dummy_type() = default;
+    dummy_type(const dummy_type&) = default;
+    dummy_type(dummy_type&&) = default;
+    ~dummy_type() = default;
+    dummy_type& operator=(const dummy_type&) = default;
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::primitive::dummy_type& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::dummy_type& v, unsigned int version);
+
+public:
+    bool operator==(const dummy_type& rhs) const;
+    bool operator!=(const dummy_type& rhs) const {
+        return !this->operator==(rhs);
+    }
+
 };
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::test_models::primitive::product_id> {
-public:
-    size_t operator()(const dogen::test_models::primitive::product_id& v) const {
-        return dogen::test_models::primitive::product_id_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -18,45 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_PRODUCT_ID_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_PRODUCT_ID_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_IO_DUMMY_TYPE_IO_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_IO_DUMMY_TYPE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-#include "dogen/test_models/primitive/serialization/product_id_fwd_ser.hpp"
+#include <iosfwd>
+#include "dogen/test_models/primitive/types/dummy_type.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-/**
- * @brief Represents a unique identifier for a product.
- */
-class product_id final {
-public:
-    product_id() = default;
-    product_id(const product_id&) = default;
-    product_id(product_id&&) = default;
-    ~product_id() = default;
-    product_id& operator=(const product_id&) = default;
-
-private:
-    template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
-
-    template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
-
-public:
-    bool operator==(const product_id& rhs) const;
-    bool operator!=(const product_id& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::test_models::primitive::dummy_type& v);
 
 } } }
 

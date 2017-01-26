@@ -18,37 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_PRODUCT_ID_TD_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_PRODUCT_ID_TD_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_HASH_DUMMY_TYPE_HASH_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_HASH_DUMMY_TYPE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/types/product_id.hpp"
+#include <functional>
+#include "dogen/test_models/primitive/types/dummy_type.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-class product_id_generator {
+struct dummy_type_hasher {
 public:
-    product_id_generator();
-
-public:
-    typedef dogen::test_models::primitive::product_id result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
+    static std::size_t hash(const dummy_type& v);
 };
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::test_models::primitive::dummy_type> {
+public:
+    size_t operator()(const dogen::test_models::primitive::dummy_type& v) const {
+        return dogen::test_models::primitive::dummy_type_hasher::hash(v);
+    }
+};
+
+}
 #endif
