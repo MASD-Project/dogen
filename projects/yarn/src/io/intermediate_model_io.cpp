@@ -31,6 +31,7 @@
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/exception_io.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
@@ -132,6 +133,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace std {
 
 inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::enumeration>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -269,6 +288,7 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"concepts\": " << v.concepts() << ", "
       << "\"builtins\": " << v.builtins() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
+      << "\"primitives\": " << v.primitives() << ", "
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "
       << "\"visitors\": " << v.visitors() << ", "

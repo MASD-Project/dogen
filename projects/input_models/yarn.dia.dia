@@ -3432,7 +3432,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-117,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,18.95;-86.79,103.95"/>
+        <dia:rectangle val="-117.05,18.95;-86.79,107.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3444,7 +3444,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="30.160000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="84.899999999999991"/>
+        <dia:real val="88.099999999999994"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -6911,7 +6911,7 @@ selector.#</dia:string>
         <dia:point val="12,80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.95,79.95;20.67,86.85"/>
+        <dia:rectangle val="11.95,79.95;20.67,87.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="12,80"/>
@@ -6920,7 +6920,7 @@ selector.#</dia:string>
         <dia:real val="8.620000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6.8000000000000007"/>
+        <dia:real val="7.6000000000000005"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#yarn_object_types#</dia:string>
@@ -7105,6 +7105,29 @@ selector.#</dia:string>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#concept#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#primitive#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

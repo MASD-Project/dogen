@@ -41,6 +41,7 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
@@ -71,6 +72,7 @@ public:
         const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
         const std::unordered_map<std::string, dogen::yarn::builtin>& builtins,
         const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
+        const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
         const std::unordered_map<std::string, dogen::yarn::object>& objects,
         const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
         const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
@@ -170,6 +172,16 @@ public:
     /**@}*/
 
     /**
+     * @brief All primitives in this intermediate model.
+     */
+    /**@{*/
+    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives() const;
+    std::unordered_map<std::string, dogen::yarn::primitive>& primitives();
+    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v);
+    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v);
+    /**@}*/
+
+    /**
      * @brief All objects contained in this intermediate model.
      */
     /**@{*/
@@ -259,6 +271,7 @@ private:
     std::unordered_map<std::string, dogen::yarn::concept> concepts_;
     std::unordered_map<std::string, dogen::yarn::builtin> builtins_;
     std::unordered_map<std::string, dogen::yarn::enumeration> enumerations_;
+    std::unordered_map<std::string, dogen::yarn::primitive> primitives_;
     std::unordered_map<std::string, dogen::yarn::object> objects_;
     std::unordered_map<std::string, dogen::yarn::exception> exceptions_;
     std::unordered_map<std::string, dogen::yarn::visitor> visitors_;

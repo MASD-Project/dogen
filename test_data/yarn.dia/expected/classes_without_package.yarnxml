@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <!DOCTYPE boost_serialization>
 <boost_serialization signature="serialization::archive" version="14">
-<entity class_id="12" tracking_level="0" version="0">
-	<name class_id="13" tracking_level="0" version="0">
+<entity class_id="13" tracking_level="0" version="0">
+	<name class_id="14" tracking_level="0" version="0">
 		<id>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</id>
 		<simple>classes_without_package</simple>
-		<qualified class_id="14" tracking_level="0" version="0">
+		<qualified class_id="15" tracking_level="0" version="0">
 			<count>2</count>
 			<item_version>0</item_version>
-			<item class_id="15" tracking_level="0" version="0">
+			<item class_id="16" tracking_level="0" version="0">
 				<first>1</first>
 				<second>dogen::test_models::classes_without_package</second>
 			</item>
@@ -17,8 +17,8 @@
 				<second>dogen.test_models.classes_without_package</second>
 			</item>
 		</qualified>
-		<location class_id="16" tracking_level="0" version="0">
-			<external_modules class_id="17" tracking_level="0" version="0">
+		<location class_id="17" tracking_level="0" version="0">
+			<external_modules class_id="18" tracking_level="0" version="0">
 				<count>2</count>
 				<item_version>0</item_version>
 				<item>dogen</item>
@@ -38,27 +38,27 @@
 		<identifiable>dogen_test_models_classes_without_package</identifiable>
 	</name>
 	<origin_type>1</origin_type>
-	<references class_id="18" tracking_level="0" version="0">
+	<references class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</references>
-	<leaves class_id="19" tracking_level="0" version="0">
+	<leaves class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</leaves>
-	<modules class_id="20" tracking_level="0" version="0">
+	<modules class_id="21" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="21" tracking_level="0" version="0">
+		<item class_id="22" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</first>
 			<second class_id="9" tracking_level="1" version="0" object_id="_0">
-				<element class_id="22" tracking_level="0" version="0">
+				<element class_id="23" tracking_level="0" version="0">
 					<documentation></documentation>
-					<annotation class_id="23" tracking_level="0" version="0">
-						<entries class_id="24" tracking_level="0" version="0">
+					<annotation class_id="24" tracking_level="0" version="0">
+						<entries class_id="25" tracking_level="0" version="0">
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -101,17 +101,17 @@
 						<identifiable>dogen_test_models_classes_without_package</identifiable>
 					</name>
 					<origin_type>1</origin_type>
-					<contained_by class_id="25" tracking_level="0" version="0">
+					<contained_by class_id="26" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
-					<stereotypes class_id="26" tracking_level="0" version="0">
+					<stereotypes class_id="27" tracking_level="0" version="0">
 						<count>0</count>
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<members class_id="27" tracking_level="0" version="0">
+				<members class_id="28" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
@@ -120,26 +120,31 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="28" tracking_level="0" version="0">
+	<concepts class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<builtins class_id="29" tracking_level="0" version="0">
+	<builtins class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="30" tracking_level="0" version="0">
+	<enumerations class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<objects class_id="31" tracking_level="0" version="0">
+	<primitives class_id="32" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>1</bucket_count>
+		<item_version>0</item_version>
+	</primitives>
+	<objects class_id="33" tracking_level="0" version="0">
 		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="32" tracking_level="0" version="0">
+		<item class_id="34" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;&lt;class_5&gt;</first>
 			<second class_id="10" tracking_level="1" version="0" object_id="_1">
 				<element>
@@ -198,14 +203,14 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="33" tracking_level="0" version="0">
+				<all_attributes class_id="35" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="34" tracking_level="0" version="0">
+					<item class_id="36" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
 							<entries>
@@ -240,7 +245,7 @@
 							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
-						<parsed_type class_id="35" tracking_level="0" version="0">
+						<parsed_type class_id="37" tracking_level="0" version="0">
 							<current>
 								<id></id>
 								<simple></simple>
@@ -265,7 +270,7 @@
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="36" tracking_level="0" version="0">
+							<children class_id="38" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -283,7 +288,7 @@
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="37" tracking_level="0" version="0">
+				<inherited_attributes class_id="39" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -324,7 +329,7 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters class_id="38" tracking_level="0" version="0">
+				<type_parameters class_id="40" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -1150,24 +1155,24 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="39" tracking_level="0" version="0">
+	<exceptions class_id="41" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="40" tracking_level="0" version="0">
+	<visitors class_id="42" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="41" tracking_level="0" version="0">
+	<injected_elements class_id="43" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="42" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="43" tracking_level="0" version="0">
+	<indices class_id="44" tracking_level="0" version="0">
+		<objects_always_in_heap class_id="45" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
@@ -1177,18 +1182,18 @@
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<scribble_groups class_id="44" tracking_level="0" version="0">
+		<scribble_groups class_id="46" tracking_level="0" version="0">
 			<count>1</count>
 			<bucket_count>2</bucket_count>
 			<item_version>0</item_version>
-			<item class_id="45" tracking_level="0" version="0">
+			<item class_id="47" tracking_level="0" version="0">
 				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</first>
-				<second class_id="46" tracking_level="0" version="0">
-					<parent class_id="47" tracking_level="0" version="0">
-						<entries class_id="48" tracking_level="0" version="0">
+				<second class_id="48" tracking_level="0" version="0">
+					<parent class_id="49" tracking_level="0" version="0">
+						<entries class_id="50" tracking_level="0" version="0">
 							<count>6</count>
 							<item_version>0</item_version>
-							<item class_id="49" tracking_level="0" version="0">
+							<item class_id="51" tracking_level="0" version="0">
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
@@ -1219,7 +1224,7 @@
 							<item_version>0</item_version>
 						</candidate_labels>
 					</parent>
-					<children class_id="50" tracking_level="0" version="0">
+					<children class_id="52" tracking_level="0" version="0">
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
@@ -1282,7 +1287,7 @@
 		<is_global_module>0</is_global_module>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="51" tracking_level="0" version="0">
+	<output_languages class_id="53" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>

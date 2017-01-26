@@ -47,6 +47,7 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
     const std::unordered_map<std::string, dogen::yarn::builtin>& builtins,
     const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
+    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
     const std::unordered_map<std::string, dogen::yarn::object>& objects,
     const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
@@ -64,6 +65,7 @@ intermediate_model::intermediate_model(
       concepts_(concepts),
       builtins_(builtins),
       enumerations_(enumerations),
+      primitives_(primitives),
       objects_(objects),
       exceptions_(exceptions),
       visitors_(visitors),
@@ -84,6 +86,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(concepts_, other.concepts_);
     swap(builtins_, other.builtins_);
     swap(enumerations_, other.enumerations_);
+    swap(primitives_, other.primitives_);
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
     swap(visitors_, other.visitors_);
@@ -104,6 +107,7 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         concepts_ == rhs.concepts_ &&
         builtins_ == rhs.builtins_ &&
         enumerations_ == rhs.enumerations_ &&
+        primitives_ == rhs.primitives_ &&
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
         visitors_ == rhs.visitors_ &&
@@ -239,6 +243,22 @@ void intermediate_model::enumerations(const std::unordered_map<std::string, doge
 
 void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::enumeration>&& v) {
     enumerations_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() const {
+    return primitives_;
+}
+
+std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() {
+    return primitives_;
+}
+
+void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
+    primitives_ = v;
+}
+
+void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v) {
+    primitives_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::yarn::object>& intermediate_model::objects() const {
