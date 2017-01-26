@@ -4473,37 +4473,6 @@ commits that removed the feature here.
 2cd2d89 * quilt.cpp: tidy-up annotations
 8e2e0e4 * quilt.cpp: tidy-up main workflow
 
-*** Strong type aliasing                                              :story:
-
-One extremely useful feature would be to create "aliases" for types
-which could be implemented as strongly-typed aliases where there is
-language support. The gist of the problem is as described in here:
-
-[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3515.pdf][Toward Opaque Typedefs for C++1Y]]
-
-This is also similar to the problem space of boost dimensions,
-although their problem is more generic. The gist of it is that one
-should be able to "conceptually" sub-class primitives such as int and
-even types such as string and have the code generator create some
-representation of that type that has the desired properties (including
-a "to underlying" function). These types would not be interchangeable
-with their aliased types. For example, if we define a "book id" as an
-unsigned int, it should not be interchangeable with unsigned
-int. Potentially it should also not have certain int abilities such as
-adding/multiplication and so forth.
-
-Links:
-
-- [[http://www.boost.org/doc/libs/1_37_0/boost/strong_typedef.hpp][Boost Strong Typedef]]
-- [[http://stackoverflow.com/questions/23726038/how-can-i-create-a-new-primitive-type-using-c11-style-strong-typedefs][How can I create a new primitive type using C++11 style strong
-  typedefs?]]
-- [[http://stackoverflow.com/questions/28916627/strong-typedefs][Strong typedefs]]
-- [[http://programmers.stackexchange.com/questions/243154/c-strongly-typed-typedef][C++ strongly typed typedef]]
-
-Note: the other stories in the backlog about typedefs are just about
-the C++ feature, not this extension to it. Hence we called it "type
-aliasing" to avoid confusion.
-
 *** Concepts, immutability and fluency                                :story:
 
 At present we allow the object to determine if any attributes obtained
