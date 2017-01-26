@@ -29,6 +29,7 @@
 #include <memory>
 #include "dogen/dia/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/element.hpp"
@@ -138,9 +139,17 @@ public:
      * @brief Converts a Dia object containing a class into an
      * enumeration.
      *
-     * @param o the Dia UML class containing an enumeration.
+     * @param po the Dia UML class containing an enumeration.
      */
     yarn::enumeration to_enumeration(const processed_object& po) const;
+
+    /**
+     * @brief Converts a Dia object containing a class into a
+     * primitive.
+     *
+     * @param po the Dia UML class containing a primitive.
+     */
+    yarn::primitive to_primitive(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object of type large UML package into a

@@ -180,6 +180,16 @@ transformer::to_enumeration(const processed_object& po) const {
     return r;
 }
 
+yarn::primitive
+transformer::to_primitive(const processed_object& po) const {
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
+                             << po.id();
+
+    yarn::primitive r;
+    update_element(po, r);
+    return r;
+}
+
 yarn::module transformer::to_module(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: "
                              << po.id();
