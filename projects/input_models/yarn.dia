@@ -6943,7 +6943,7 @@ etc.#</dia:string>
         <dia:point val="63.3025,78"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.5525,63.75;68.6575,78.8"/>
+        <dia:rectangle val="62.5525,64.55;68.6575,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6952,7 +6952,7 @@ etc.#</dia:string>
         <dia:point val="63.3025,78"/>
         <dia:point val="63.3025,73"/>
         <dia:point val="68.4575,73"/>
-        <dia:point val="68.4575,63.8"/>
+        <dia:point val="68.4575,64.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12905,7 +12905,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="53,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.95,48.95;83.965,63.85"/>
+        <dia:rectangle val="52.95,48.95;83.965,64.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="53,49"/>
@@ -12914,7 +12914,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="14.800000000000002"/>
+        <dia:real val="15.600000000000003"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#intermediate_model#</dia:string>
@@ -13133,6 +13133,29 @@ Leaves are types concrete types which have a parent.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#All enumerations contained in this intermediate model.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#primitives#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::unordered_map&lt;std::string, primitive&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#All primitives in this intermediate model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13926,7 +13949,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="83.915,56.5"/>
+        <dia:point val="83.915,57.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
         <dia:rectangle val="83.865,55.25;116.315,67.8"/>
@@ -13935,7 +13958,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="83.915,56.5"/>
+        <dia:point val="83.915,57.3"/>
         <dia:point val="83.915,56"/>
         <dia:point val="115.565,56"/>
         <dia:point val="115.565,67"/>
@@ -13955,7 +13978,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:color val="#000000"/>
       </dia:attribute>
       <dia:connections>
-        <dia:connection handle="0" to="O101" connection="21"/>
+        <dia:connection handle="0" to="O101" connection="23"/>
         <dia:connection handle="1" to="O106" connection="1"/>
       </dia:connections>
     </dia:object>
@@ -19873,16 +19896,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="83.915,63.8"/>
+        <dia:point val="83.915,64.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.165,63.05;96.465,78.7496"/>
+        <dia:rectangle val="83.165,63.85;96.465,78.7496"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="83.915,63.8"/>
+        <dia:point val="83.915,64.6"/>
         <dia:point val="83.915,73"/>
         <dia:point val="96.265,73"/>
         <dia:point val="96.265,77.9496"/>
@@ -23635,16 +23658,16 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="53,63.8"/>
+        <dia:point val="53,64.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.075,63.75;53.2,78.8"/>
+        <dia:rectangle val="45.075,64.55;53.2,78.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="53,63.8"/>
+        <dia:point val="53,64.6"/>
         <dia:point val="53,73"/>
         <dia:point val="45.825,73"/>
         <dia:point val="45.825,78"/>

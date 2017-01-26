@@ -60,6 +60,7 @@ const std::string invalid_object_type("Invalid value for object type: ");
 
 const std::string concept("concept");
 const std::string enumeration("enumeration");
+const std::string primitive("primitive");
 const std::string exception("exception");
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
@@ -300,6 +301,9 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) const {
         if (stereotype == enumeration) {
             require_yarn_type_not_set(po.yarn_object_type());
             po.yarn_object_type(yarn_object_types::enumeration);
+        } else if (stereotype == primitive) {
+            require_yarn_type_not_set(po.yarn_object_type());
+            po.yarn_object_type(yarn_object_types::primitive);
         } else if (stereotype == exception) {
             require_yarn_type_not_set(po.yarn_object_type());
             po.yarn_object_type(yarn_object_types::exception);

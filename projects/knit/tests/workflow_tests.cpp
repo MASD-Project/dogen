@@ -247,11 +247,11 @@ BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code_dia) {
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
-BOOST_AUTO_TEST_CASE(primitive_model_generates_expected_code_dia) {
+/*BOOST_AUTO_TEST_CASE(primitive_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("primitive_model_generates_expected_code_dia");
     const auto dia(yarn_dia::input_primitive_dia());
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
+    }*/
 
 BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("exception_model_generates_expected_code_dia");

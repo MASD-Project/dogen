@@ -50,6 +50,9 @@ std::ostream& operator<<(std::ostream& s, const yarn_object_types& v) {
     case yarn_object_types::concept:
         attr = "\"concept\"";
         break;
+    case yarn_object_types::primitive:
+        attr = "\"primitive\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for yarn_object_types");
     }

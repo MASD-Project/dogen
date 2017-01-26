@@ -35,7 +35,8 @@ enum class yarn_object_types : unsigned int {
     enumeration = 2,
     exception = 3,
     object = 4,
-    concept = 5
+    concept = 5,
+    primitive = 6
 };
 
 } } }

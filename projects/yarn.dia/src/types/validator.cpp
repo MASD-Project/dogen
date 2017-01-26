@@ -63,6 +63,9 @@ void validator::validate_yarn(const processed_object& po) const {
 }
 
 void validator::validate_uml(const processed_object& po) const {
+    /*
+     * All objects must have a valid UML type.
+     */
     if (po.dia_object_type() == dia_object_types::invalid) {
         BOOST_LOG_SEV(lg, error) << no_uml_type;
         BOOST_THROW_EXCEPTION(validation_error(no_uml_type));
