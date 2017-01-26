@@ -49,6 +49,7 @@
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/persister.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/decomposer.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/yarn/types/enumerator.hpp"

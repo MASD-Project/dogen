@@ -41,6 +41,7 @@
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/languages_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
+#include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/descriptor_td.hpp"
 #include "dogen/yarn/test_data/enumerator_td.hpp"
 #include "dogen/yarn/test_data/separators_td.hpp"

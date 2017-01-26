@@ -38,6 +38,7 @@
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
+#include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/annotations/serialization/annotation_ser.hpp"

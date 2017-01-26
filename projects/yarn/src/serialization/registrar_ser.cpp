@@ -32,6 +32,7 @@
 #include "dogen/yarn/serialization/concept_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
+#include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
@@ -49,6 +50,7 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::yarn::exception>();
     ar.template register_type<dogen::yarn::module>();
     ar.template register_type<dogen::yarn::object>();
+    ar.template register_type<dogen::yarn::primitive>();
     ar.template register_type<dogen::yarn::visitor>();
 }
 

@@ -41,6 +41,7 @@
 #include "dogen/yarn/hash/exception_hash.hpp"
 #include "dogen/yarn/hash/languages_hash.hpp"
 #include "dogen/yarn/hash/name_tree_hash.hpp"
+#include "dogen/yarn/hash/primitive_hash.hpp"
 #include "dogen/yarn/hash/descriptor_hash.hpp"
 #include "dogen/yarn/hash/enumerator_hash.hpp"
 #include "dogen/yarn/hash/separators_hash.hpp"

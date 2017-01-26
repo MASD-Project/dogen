@@ -41,6 +41,7 @@
 #include "dogen/yarn/io/exception_io.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
 #include "dogen/yarn/io/separators_io.hpp"
