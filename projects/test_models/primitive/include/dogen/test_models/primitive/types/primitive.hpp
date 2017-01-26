@@ -18,14 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_PRIMITIVE_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_PRIMITIVE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/types/primitive.hpp"
-#include "dogen/test_models/primitive/types/product_id.hpp"
+namespace dogen {
+namespace test_models {
+
+/**
+ * @brief This model tests all primitives.
+ */
+namespace primitive {
+}
+
+} }
 
 #endif

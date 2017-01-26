@@ -68,22 +68,22 @@
         <dia:point val="8.08333,10.5"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.03333,10.45;13.3983,12.75"/>
+        <dia:rectangle val="8.03333,10.45;13.6383,13.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="8.08333,10.5"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.2649999999999997"/>
+        <dia:real val="5.5049999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.1999999999999997"/>
+        <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#product_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>##</dia:string>
+        <dia:string>#primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a unique identifier for a product.#</dia:string>
@@ -178,7 +178,7 @@
         <dia:point val="2.14167,1.03333"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.09167,0.983333;22.7267,6.78333"/>
+        <dia:rectangle val="2.09167,0.983333;22.7267,8.38333"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -190,7 +190,7 @@
         <dia:real val="20.535"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.7000000000000002"/>
+        <dia:real val="7.2999999999999998"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -204,7 +204,9 @@
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>##DOGEN yarn.dia.comment=true
+            <dia:string>#This model tests all primitives.
+
+#DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
