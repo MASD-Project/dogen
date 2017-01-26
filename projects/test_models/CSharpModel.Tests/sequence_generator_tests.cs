@@ -64,13 +64,13 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(ValidateJson(NoPropertiesDumper.Dump(a)), Is.True);
 
                 /*
-                 * Class with only one primitive property.
+                 * Class with only one built-in property.
                  */
                 var b = OnePropertySequenceGenerator.Sequence().GetEnumerator().Current;
                 Assert.That(ValidateJson(OnePropertyDumper.Dump(b)), Is.True);
 
                 /*
-                 * Class with multiple primitive properties.
+                 * Class with multiple built-in properties.
                  */
                 var c = PrimitiveBuiltinsSequenceGenerator.Sequence().GetEnumerator().Current;
                 Assert.That(ValidateJson(PrimitiveBuiltinsDumper.Dump(c)), Is.True);

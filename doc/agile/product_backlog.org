@@ -75,7 +75,7 @@ ideas into stories and add them as we go along.
 - Its not possible to be immutable and fluent.
 - it is not possible to be immutable and be in an inheritance
   relationship. FIXME: why is that?
-- user models cannot have stereotype of primitive.
+- user models cannot have stereotype of built-ins.
 - we don't support generic types so we should throw if a user attempts
   to use them.
 - a type marked as final cannot have descendants.
@@ -243,8 +243,9 @@ could translate to:
 
 - adding a serialisation like interface with gets, puts, etc. We need
   to bind this to a specific cache such as memcache, coherence, etc.
-- create a type to string which converts a key made up of primitives
-  into a underscore delimited string, used as a key in the cache.
+- create a type to string which converts a key made up of built-ins or
+  built-in into a underscore delimited string, used as a key in the
+  cache.
 - we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
 
 *** Add C++-03 mode                                                    :epic:
@@ -514,7 +515,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Defines a bounded set of logically related values for a primitive type
+ * @brief Defines a bounded set of logically related values for a built-in type
  * or a string.
  */
 class enumeration final : public dogen::yarn::element {
@@ -818,10 +819,10 @@ non-target names that are in use and return those.
 At present if we build test models we don't seem to build the
 sanitizer.
 
-*** Model should contain set of primitive id's                        :story:
+*** Model should contain set of built-in id's                         :story:
 
-We are computing the set of all primitive id's in quilt but this
-should really be part of yarn.
+We are computing the set of all built-in id's in quilt but this should
+really be part of yarn.
 
 *** Handle "special includes" correctly                               :story:
 
@@ -1252,14 +1253,14 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** Identifier parser has hard-coded primitives                       :story:
+*** Identifier parser has hard-coded built-ins                        :story:
 
 Instead of using the hardware model, we have hard-coded all of the
-primitives. In addition, there are some primitives which are C++
+built-ins. In addition, there are some built-ins which are C++
 specific (=wchar_t=), as well as others which are only valid in
 certain cases such as =void=. This needs a bit of thinking.
 
-We could look for all primitives in the global namespace. Or we could
+We could look for all built-ins in the global namespace. Or we could
 have a tag in the types that describes them in a way that we can
 filter: =hardware_type= flag? The problem is that we need the
 identifier parser in order to load models and we need the loaded
@@ -1267,13 +1268,13 @@ models in order to locate these types.
 
 One solution for this problem is to move the properties expansion to
 later on after the front end workflow has finished executing. Once we
-have a merged model we can then easily take the primitives container
+have a merged model we can then easily take the built-in container
 and inject that into the identifier parser. The only slight problem is
 that we need to know of the top-level modules for a given model in
 order to use the identifier parser. This means we need to expand
 unparsed types before merging. There is a circular dependency here.
 
-We somehow need a first pass to obtain all the primitives and a second
+We somehow need a first pass to obtain all the built-ins and a second
 pass to parse.
 
 *** Update copyright notices                                          :story:
@@ -1408,7 +1409,7 @@ manual. We should also do a quick search in backlog for this.
 At present there is no code to convert non-printable chars into
 something acceptable in JSON. We probably never noticed this before
 because test data generates printable chars. Code generated is as
-follows (all primitives model):
+follows (all built-in model):
 
 : << "\"char_property\": " << "\"" << v.char_property() << "\"" << ", "
 
@@ -1558,7 +1559,7 @@ all other cases. This makes sense in terms of use cases:
   not supply includes we do not want the system to automatically
   compute include paths;
 - or we don't supply any includes, in which case:
-  - we either don't require any includes at all (hardware primitives);
+  - we either don't require any includes at all (hardware built-ins);
   - or we want all includes to be computed by the system.
 
 The problem is that we do not have a way to express this logic in the
@@ -1842,7 +1843,7 @@ In summary:
 
 *** Attribute types are always fully qualified                        :story:
 
-When we code generate non-primitive attributes we always fully qualify
+When we code generate non-built-ins attributes we always fully qualify
 them even if they are on the same namespace as the containing
 type. This should be easy to fix by extending the resolver to take in
 the internal module path of the context. We could even recurse up the
@@ -2516,7 +2517,7 @@ create floating point numbers.
 *** Equality in floating point numbers is incorrect                   :story:
 
 At present we are blindly comparing floating point numbers. In
-all_primitives test model:
+all_builtins test model:
 
 :         double_property_ == rhs.double_property_ &&
 :         float_property_ == rhs.float_property_;
@@ -2628,7 +2629,7 @@ fine, but however, it hides a bug which is that we fail to resolve
 properties of referenced models properly. The reason why is that these
 properties have a blank model name. We could simply force it to be the
 name of the referenced model but then it would fail to find
-primitives. So we leave it blank during the dia to sml translation and
+built-ins. So we leave it blank during the dia to sml translation and
 then if it gets to the resolver, it will not be able to resolve the
 type. We could add yet another layer of try-logic (e.g. try every
 model name in the references) but it seems that this is just another
@@ -2741,10 +2742,10 @@ dynamic models.
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
 
-*** Partial matching of primitives doesn't work for certain types     :story:
+*** Partial matching of built-ins doesn't work for certain types      :story:
 
 We introduced a fix that allows users to create types that partially
-match primitive types such as =in= or =integer=. The fix was copied
+match built-ins types such as =in= or =integer=. The fix was copied
 from the spirit documentation:
 
 [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
@@ -2752,8 +2753,8 @@ from the spirit documentation:
 
 However, we still haven't solved the following cases:
 
-: BOOST_CHECK(test_primitive("longer"));
-: BOOST_CHECK(test_primitive("unsigneder"));
+: BOOST_CHECK(test_builtin("longer"));
+: BOOST_CHECK(test_builtin("unsigneder"));
 
 As these are not so common they have been left for later.
 
@@ -2791,7 +2792,7 @@ We seem to have a strange bug whereby creating a
 package. This appears to be some misunderstanding in namespacing
 rules.
 
-*** Naming of saved yarn/Dia files is incorrect                        :story:
+*** Naming of saved yarn/Dia files is incorrect                       :story:
 
 For some random reason when we use dogen to save yarn/Dia files the
 names look like this:
@@ -2806,15 +2807,15 @@ but our tests expect:
 
 This must be part of a refactoring that wasn't completed properly.
 
-*** Shared pointers to primitive types                                :story:
+*** Shared pointers to built-in types                                 :story:
 
-At present we do not support shared pointers to primitive types. This
+At present we do not support shared pointers to built-in types. This
 is because they require special handling in serialisation. See:
 
 http://boost.2283326.n4.nabble.com/Serialization-of-boost-shared-ptr-lt-int-gt-td2554242.html
 
 We probably need to iterate through all the nested types and find out
-if there is a shared pointer to primitive; if there is, put in:
+if there is a shared pointer to built-in; if there is, put in:
 
 : // defined a "special kind of integer"
 : BOOST_STRONG_TYPEDEF(int, tracked_int)
@@ -3563,7 +3564,7 @@ all models with the same features:
 
 These models are at the right level of granularity but need renaming:
 
-- all_primitives: primitives or primitives_model to line up with boost
+- all_builtins: built-ins or builtins_model to line up with boost
   and std.
 - trivial_association: association
 - trivial_inheritance: inheritance
@@ -4114,7 +4115,7 @@ At present we are not testing model generation with XML disabled.
 *** Format doubles, floats and bools properly                         :story:
 
 At present we are using IO state savers but not actually setting the
-formatting on the stream depending on the primitive type.
+formatting on the stream depending on the built-in type.
 
 Ideally we should pass in some dynamic extensions to determine the
 formatting. We should also consider using =boost::format= for this.
@@ -4159,10 +4160,10 @@ ignored for the moment.
 
 - test data
 
-*** Create model with invalid primitive type                          :story:
+*** Create model with invalid built-in type                           :story:
 
-At present we are validating that all primitive types work but we
-don't check that an invalid type doesn't work.
+At present we are validating that all built-in types work but we don't
+check that an invalid type doesn't work.
 
 *** Private properties should be ignored                              :story:
 
@@ -4488,13 +4489,13 @@ is an incompatibility between concept and object.
 
 *** Improve handling of defaulting for enumeration types              :story:
 
-At present we check for a primitive market as the default type for
+At present we check for a built-in market as the default type for
 enumerations, and apply this type to all enumerations that have no
 underlying type. The problem is that if a user creates a type for
-primitives (or if we use =std::string= as a primitive type, say) we
-still require loading the primitive model to locate a default type. We
-should probably only locate this type once we have got the first
-enumeration that needs it.
+built-in (or if we use =std::string= as a built-in type, say) we still
+require loading the built-in model to locate a default type. We should
+probably only locate this type once we have got the first enumeration
+that needs it.
 
 *** Create an interface for the text reader                           :story:
 
@@ -4509,7 +4510,7 @@ than one type going into a formatter:
 
 - [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-inner-classes][inner classes]];
 - declaring all/some of the following in a single header: exceptions,
-  enumerations, primitives.
+  enumerations, built-ins.
 - typedefs ([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#manual-typedef-generation][manual]], [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#automatic-typedef-generation][automatic]])
 - [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#include-groups][include groups]] (and to be fair, [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-renaming-includers]["master" headers]] too).
 - grouping a number of forward declarations into a file.
@@ -5304,7 +5305,7 @@ compared between two objects of the same type.
 In order for a property to qualify as a comparison candidate its type
 must be:
 
-- primitive;
+- built-in;
 - =std::string=;
 - a object marked as comparable.
 
@@ -5591,7 +5592,7 @@ a way of having attributes in services and that is slightly easier:
   of a function, the first argument is a return type (they also need
   to know they represent a function). MC: is this actually necessary?
   all we need is to be able to reconstruct this syntax at format time.
-- we need a =void= type in the primitives model. This is a bit more
+- we need a =void= type in the built-ins model. This is a bit more
   complicated since this type can't have values, only pointers, and we
   don't really support raw pointers at the moment. Adding the type
   blindly would open up all sorts of compilation errors.
@@ -5635,11 +5636,11 @@ and mark them as ignore until we can find a spirit expert to help out.
 
 #+begin_quote
 *Story*: As a dogen user, I want to set default values for certain
-primitives so that I can model my domain more accurately.
+built-ins so that I can model my domain more accurately.
 #+end_quote
 
 It would be nice to be able to add a default value in Dia and have it
-set on the default constructor, if the type is a primitive or a
+set on the default constructor, if the type is a built-in or a
 =std::string=.
 
 These could be added as dynamic extensions; however, they should not
@@ -5648,14 +5649,14 @@ languages. However, note that in certain cases the default values may
 be language specific (e.g. =0.0f= for float, etc).
 
 Note also that there are two levels of default values: the type-level
-(all primitives of type =x= default to =y=) and the property level
+(all built-ins of type =x= default to =y=) and the property level
 (instances of type =x= in class =z= default to =y=). The meta-data can
 be applied at each level to achieve the desired effect.
 
 Validation rules:
 
-- property can only have a default value if primitive
-- property default value must be castable to primitive type.
+- property can only have a default value if built-in
+- property default value must be castable to built-in type.
 
 *** Add support for interfaces                                         :epic:
 
@@ -5687,12 +5688,12 @@ We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutoria
 *** Add support for configurable enumerations types                   :story:
 
 #+begin_quote
-*Story*: As a dogen user, I need to configure the primitive type of my
+*Story*: As a dogen user, I need to configure the built-in type of my
 enumerations so that I model my domain accurately.
 #+end_quote
 
 We've updated the =hardware= model with a "default enumeration value"
-field. This allows us to dynamically determine which primitive to use
+field. This allows us to dynamically determine which built-in to use
 as the type of enumerations. However:
 
 - we didn't follow it through in the formatters; we are hard-coding
@@ -6097,14 +6098,14 @@ Merged stories:
 *Usage of external module path in cmakelists*                       :story:
 
 It seems like we are not populating the target names
-properly. Originally the target name for test model all primitives was:
+properly. Originally the target name for test model all built-ins was:
 
-: dogen_all_primitives
+: dogen_all_builtins
 
 When we moved the test models into =test_models= the target name did
 not change. It should have changed to:
 
-: dogen_test_models_all_primitives
+: dogen_test_models_all_builtins
 
 *** Check that custom targets in CMake have correct dependencies      :story:
 
@@ -7598,9 +7599,9 @@ determine what facets can be enabled/disabled.
 
 Create "modes" of operation: relational, object-oriented and
 procedural. they limit the types available in yarn. relational only
-allows primitives plus relational commands (FK and PK; FK is when
+allows built-ins plus relational commands (FK and PK; FK is when
 using a model type, PK is a marker on a property). procedural only
-allows primitives plus model types. we will need pointer support for
+allows built-ins plus model types. we will need pointer support for
 this. object oriented is the current mode. the modes are validated in
 the middle end.
 

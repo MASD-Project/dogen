@@ -554,7 +554,9 @@ abstract.
   unbox, for other types we should create objects with an attribute
   named value and of the type of the primitive.
 
-*** STARTED Rename primitives to built-insert                         :story:
+*** COMPLETED Rename primitives to built-insert                       :story:
+    CLOSED: [2017-01-26 Thu 14:42]
+    CLOCK: [2017-01-26 Thu 14:33]--[2017-01-26 Thu 14:42] =>  0:09
     CLOCK: [2017-01-26 Thu 14:21]--[2017-01-26 Thu 14:32] =>  0:11
     CLOCK: [2017-01-26 Thu 11:38]--[2017-01-26 Thu 12:03] =>  0:25
     CLOCK: [2017-01-26 Thu 11:33]--[2017-01-26 Thu 11:37] =>  0:04

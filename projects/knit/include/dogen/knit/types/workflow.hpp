@@ -59,7 +59,7 @@ namespace knit {
  * depend on.
  *
  * @li @e implicit: these are known as the @e system models. They are
- * added automatically. Examples are primitives, boost, std, etc.
+ * added automatically. Examples are built-ins, boost, std, etc.
  *
  * Collectively, all implicit and explicit models are referred to as
  * the @e input models. The input models read the front-end are
