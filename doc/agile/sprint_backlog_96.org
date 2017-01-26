@@ -48,6 +48,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-26 Thu 15:16]--[2017-01-26 Thu 15:28] =>  0:12
     CLOCK: [2017-01-25 Wed 17:17]--[2017-01-25 Wed 17:30] =>  0:13
     CLOCK: [2017-01-24 Tue 11:42]--[2017-01-24 Tue 12:06] =>  0:24
     CLOCK: [2017-01-24 Tue 09:15]--[2017-01-24 Tue 09:35] =>  0:20
@@ -554,7 +555,7 @@ abstract.
   unbox, for other types we should create objects with an attribute
   named value and of the type of the primitive.
 
-*** COMPLETED Rename primitives to built-insert                       :story:
+*** COMPLETED Rename primitives to built-in                           :story:
     CLOSED: [2017-01-26 Thu 14:42]
     CLOCK: [2017-01-26 Thu 14:33]--[2017-01-26 Thu 14:42] =>  0:09
     CLOCK: [2017-01-26 Thu 14:21]--[2017-01-26 Thu 14:32] =>  0:11
@@ -566,8 +567,79 @@ We need to reuse the name primitive for something else, so free it up
 by renaming the current =primitive= to =built_in=. We should end up
 with no references at all to this name.
 
-While we're at it, we should introduce "point type" enumeration to
-replace "is floating point":
+*** STARTED Create a new yarn type for primitives                     :story:
+    CLOCK: [2017-01-26 Thu 15:04]--[2017-01-26 Thu 15:15] =>  0:11
+    CLOCK: [2017-01-26 Thu 14:42]--[2017-01-26 Thu 15:04] =>  0:22
+    CLOCK: [2017-01-26 Thu 09:40]--[2017-01-26 Thu 10:00] =>  0:20
+
+- add a new yarn element: primitive.
+- add a stereotype for primitive.
+- add a meta-data parameter for the underlying type. Make it the same
+  as for enumerations. Read the meta-data parameter somewhere in yarn
+  expansion.
+- add a
+
+- Add validation to ensure the element is always a built-in. Actually,
+  this is fine for enumerations but not for "primitives". We need an
+  additional parameter on each element (can be the underlying element
+  of a primitive?).
+- add formatters.
+
+
+
+*Previous Understanding*
+
+One extremely useful feature would be to create "aliases" for types
+which could be implemented as strongly-typed aliases where there is
+language support. The gist of the problem is as described in here:
+
+[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3515.pdf][Toward Opaque Typedefs for C++1Y]]
+
+This is also similar to the problem space of boost dimensions,
+although their problem is more generic. The gist of it is that one
+should be able to "conceptually" sub-class primitives such as int and
+even types such as string and have the code generator create some
+representation of that type that has the desired properties (including
+a "to underlying" function). These types would not be interchangeable
+with their aliased types. For example, if we define a "book id" as an
+unsigned int, it should not be interchangeable with unsigned
+int. Potentially it should also not have certain int abilities such as
+adding/multiplication and so forth.
+
+Links:
+
+- [[http://www.boost.org/doc/libs/1_37_0/boost/strong_typedef.hpp][Boost Strong Typedef]]
+- [[http://stackoverflow.com/questions/23726038/how-can-i-create-a-new-primitive-type-using-c11-style-strong-typedefs][How can I create a new primitive type using C++11 style strong
+  typedefs?]]
+- [[http://stackoverflow.com/questions/28916627/strong-typedefs][Strong typedefs]]
+- [[http://programmers.stackexchange.com/questions/243154/c-strongly-typed-typedef][C++ strongly typed typedef]]
+- [[http://www.ilikebigbits.com/blog/2014/5/6/type-safe-identifiers-in-c][Type safe handles in C++]]
+3
+Note: the other stories in the backlog about typedefs are just about
+the C++ feature, not this extension to it. Hence we called it "type
+aliasing" to avoid confusion.
+
+The implementation is fairly similar to enumerations:
+
+- add a stereotype for this concept.
+- add a yarn element.
+- add a meta-data parameter for the underlying type. Make it the same
+  as for enumerations. Add validation to ensure the element is always
+  a primitive. Actually, this is fine for enumerations but not for
+  "primitives". We need an additional parameter on each element (can
+  be the underlying element of a primitive?).
+- add formatters.
+
+The first problem is what to call it. Type alias is not a good name
+because an alias implies they are interchangeable; this is what one is
+trying to avoid. One sneaky way out is to call primitives "builtins"
+and call these "primitives". This somewhat reflects the truth in that
+builtins are supposed to be hardware level concepts.
+
+*** Tidy-up "is floating point"                                       :story:
+
+We should introduce "point type" enumeration to replace "is floating
+point":
 
 - none
 - floating
@@ -744,55 +816,30 @@ Another alternative is to apply hard-coded regexes:
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
 
-*** STARTED Strong type aliasing                                      :story:
-    CLOCK: [2017-01-26 Thu 09:40]--[2017-01-26 Thu 10:00] =>  0:20
+*** Enumerations coming out of Upsilon are empty                      :story:
 
-One extremely useful feature would be to create "aliases" for types
-which could be implemented as strongly-typed aliases where there is
-language support. The gist of the problem is as described in here:
+We don't seem to be translating the enumerators into yarn
+enumerators.
 
-[[http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2013/n3515.pdf][Toward Opaque Typedefs for C++1Y]]
+*** Add support for nullable built-ins and primitives                 :story:
 
-This is also similar to the problem space of boost dimensions,
-although their problem is more generic. The gist of it is that one
-should be able to "conceptually" sub-class primitives such as int and
-even types such as string and have the code generator create some
-representation of that type that has the desired properties (including
-a "to underlying" function). These types would not be interchangeable
-with their aliased types. For example, if we define a "book id" as an
-unsigned int, it should not be interchangeable with unsigned
-int. Potentially it should also not have certain int abilities such as
-adding/multiplication and so forth.
+One useful feature in C# is the ability to add nullable types:
 
-Links:
+: Nullable<int>
+: ?
 
-- [[http://www.boost.org/doc/libs/1_37_0/boost/strong_typedef.hpp][Boost Strong Typedef]]
-- [[http://stackoverflow.com/questions/23726038/how-can-i-create-a-new-primitive-type-using-c11-style-strong-typedefs][How can I create a new primitive type using C++11 style strong
-  typedefs?]]
-- [[http://stackoverflow.com/questions/28916627/strong-typedefs][Strong typedefs]]
-- [[http://programmers.stackexchange.com/questions/243154/c-strongly-typed-typedef][C++ strongly typed typedef]]
-- [[http://www.ilikebigbits.com/blog/2014/5/6/type-safe-identifiers-in-c][Type safe handles in C++]]
-3
-Note: the other stories in the backlog about typedefs are just about
-the C++ feature, not this extension to it. Hence we called it "type
-aliasing" to avoid confusion.
+This is particularly useful for built-in types, although its also
+applicable to value types. For primitives this is slightly more
+straightforward and we can make it a property of the meta-type (since
+the whole point is that users define new primitives for each domain
+type). For built-ins its slightly more tricky because its a property
+of the attribute. We'd have to extend:
 
-The implementation is fairly similar to enumerations:
-
-- add a stereotype for this concept.
-- add a yarn element.
-- add a meta-data parameter for the underlying type. Make it the same
-  as for enumerations. Add validation to ensure the element is always
-  a primitive. Actually, this is fine for enumerations but not for
-  "primitives". We need an additional parameter on each element (can
-  be the underlying element of a primitive?).
-- add formatters.
-
-The first problem is what to call it. Type alias is not a good name
-because an alias implies they are interchangeable; this is what one is
-trying to avoid. One sneaky way out is to call primitives "builtins"
-and call these "primitives". This somewhat reflects the truth in that
-builtins are supposed to be hardware level concepts.
+- the name tree to add a "is nullable" to each name tree
+- the parser to read nullable and do the right thing
+- LAM, to suport some kind of =lam::nullable= which in C++ translates
+  to =boost::optional= and C# =Nullable=. Interestingly enough we can
+  create a "Nullable type" in the global namespace.
 
 *** Add case conversion support                                       :story:
 
