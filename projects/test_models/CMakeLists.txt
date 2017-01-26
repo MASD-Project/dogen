@@ -42,6 +42,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/comments/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enumeration/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/primitive/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/exception/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/stereotypes/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
@@ -88,6 +89,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/primitive)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)

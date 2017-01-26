@@ -75,6 +75,7 @@ public:
     static boost::filesystem::path input_trivial_association_dia();
     static boost::filesystem::path input_comments_dia();
     static boost::filesystem::path input_enumeration_dia();
+    static boost::filesystem::path input_primitive_dia();
     static boost::filesystem::path input_exception_dia();
     static boost::filesystem::path input_stereotypes_dia();
 
@@ -114,6 +115,9 @@ public:
     static boost::filesystem::path expected_enumeration_dia_xml();
     static boost::filesystem::path expected_enumeration_yarn_xml();
     static boost::filesystem::path expected_enumeration_cpp_xml();
+    static boost::filesystem::path expected_primitive_dia_xml();
+    static boost::filesystem::path expected_primitive_yarn_xml();
+    static boost::filesystem::path expected_primitive_cpp_xml();
     static boost::filesystem::path expected_exception_dia_xml();
     static boost::filesystem::path expected_exception_yarn_xml();
     static boost::filesystem::path expected_exception_cpp_xml();
@@ -158,6 +162,9 @@ public:
     static boost::filesystem::path actual_enumeration_dia_xml();
     static boost::filesystem::path actual_enumeration_yarn_xml();
     static boost::filesystem::path actual_enumeration_cpp_xml();
+    static boost::filesystem::path actual_primitive_dia_xml();
+    static boost::filesystem::path actual_primitive_yarn_xml();
+    static boost::filesystem::path actual_primitive_cpp_xml();
     static boost::filesystem::path actual_exception_dia_xml();
     static boost::filesystem::path actual_exception_yarn_xml();
     static boost::filesystem::path actual_exception_cpp_xml();

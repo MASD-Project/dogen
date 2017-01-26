@@ -71,6 +71,7 @@ path input_trivial_inheritance_dia("yarn.dia/input/trivial_inheritance.dia");
 path input_trivial_association_dia("yarn.dia/input/trivial_association.dia");
 path input_comments_dia("yarn.dia/input/comments.dia");
 path input_enumeration_dia("yarn.dia/input/enumeration.dia");
+path input_primitive_dia("yarn.dia/input/primitive.dia");
 path input_exception_dia("yarn.dia/input/exception.dia");
 path input_stereotypes_dia("yarn.dia/input/stereotypes.dia");
 
@@ -152,6 +153,12 @@ path expected_enumeration_yarn_xml(
     "yarn.dia/expected/enumeration.yarnxml");
 path expected_enumeration_cpp_xml(
     "yarn.dia/expected/enumeration.cppxml");
+path expected_primitive_dia_xml(
+    "yarn.dia/expected/primitive.diaxml");
+path expected_primitive_yarn_xml(
+    "yarn.dia/expected/primitive.yarnxml");
+path expected_primitive_cpp_xml(
+    "yarn.dia/expected/primitive.cppxml");
 path expected_exception_dia_xml(
     "yarn.dia/expected/exception.diaxml");
 path expected_exception_yarn_xml(
@@ -243,6 +250,12 @@ path actual_enumeration_yarn_xml(
     "yarn.dia/actual/enumeration.yarnxml");
 path actual_enumeration_cpp_xml(
     "yarn.dia/actual/enumeration.cppxml");
+path actual_primitive_dia_xml(
+    "yarn.dia/actual/primitive.diaxml");
+path actual_primitive_yarn_xml(
+    "yarn.dia/actual/primitive.yarnxml");
+path actual_primitive_cpp_xml(
+    "yarn.dia/actual/primitive.cppxml");
 path actual_exception_dia_xml(
     "yarn.dia/actual/exception.diaxml");
 path actual_exception_yarn_xml(
@@ -400,6 +413,10 @@ path yarn_dia::input_comments_dia() {
 
 path yarn_dia::input_enumeration_dia() {
     return validating_resolver::resolve(::input_enumeration_dia);
+}
+
+path yarn_dia::input_primitive_dia() {
+    return validating_resolver::resolve(::input_primitive_dia);
 }
 
 path yarn_dia::input_exception_dia() {
@@ -567,6 +584,18 @@ path yarn_dia::expected_enumeration_yarn_xml() {
 
 path yarn_dia::expected_enumeration_cpp_xml() {
     return resolver::resolve(::expected_enumeration_cpp_xml);
+}
+
+path yarn_dia::expected_primitive_dia_xml() {
+    return validating_resolver::resolve(::expected_primitive_dia_xml);
+}
+
+path yarn_dia::expected_primitive_yarn_xml() {
+    return validating_resolver::resolve(::expected_primitive_yarn_xml);
+}
+
+path yarn_dia::expected_primitive_cpp_xml() {
+    return resolver::resolve(::expected_primitive_cpp_xml);
 }
 
 path yarn_dia::expected_exception_dia_xml() {
@@ -740,6 +769,18 @@ path yarn_dia::actual_enumeration_yarn_xml() {
 
 path yarn_dia::actual_enumeration_cpp_xml() {
     return resolver::resolve(::actual_enumeration_cpp_xml);
+}
+
+path yarn_dia::actual_primitive_dia_xml() {
+    return resolver::resolve(::actual_primitive_dia_xml);
+}
+
+path yarn_dia::actual_primitive_yarn_xml() {
+    return resolver::resolve(::actual_primitive_yarn_xml);
+}
+
+path yarn_dia::actual_primitive_cpp_xml() {
+    return resolver::resolve(::actual_primitive_cpp_xml);
 }
 
 path yarn_dia::actual_exception_dia_xml() {
