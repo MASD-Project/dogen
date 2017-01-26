@@ -64,14 +64,14 @@ namespace yarn {
 
 bool resolver::
 is_floating_point(const intermediate_model& im, const name& n) const {
-    auto i(im.primitives().find(n.id()));
-    return i != im.primitives().end() && i->second.is_floating_point();
+    auto i(im.builtins().find(n.id()));
+    return i != im.builtins().end() && i->second.is_floating_point();
 }
 
-bool resolver::is_primitive(const intermediate_model& im, const name& n) const {
-    auto i(im.primitives().find(n.id()));
-    if (i != im.primitives().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
+bool resolver::is_builtin(const intermediate_model& im, const name& n) const {
+    auto i(im.builtins().find(n.id()));
+    if (i != im.builtins().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to a built-in in model.";
         return true;
     }
     return false;
@@ -109,7 +109,7 @@ name resolver::
 obtain_default_enumeration_type(const intermediate_model& im) const {
     name r;
     bool found(false);
-    for (const auto& pair : im.primitives()) {
+    for (const auto& pair : im.builtins()) {
         const auto p(pair.second);
         if (p.is_default_enumeration_type()) {
             BOOST_LOG_SEV(lg, debug) << "Found default enumeration name type:"
@@ -229,7 +229,7 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
                              << " to: " << n.id();
     nt.current(n);
-    if (is_primitive(im, n)) {
+    if (is_builtin(im, n)) {
         nt.is_current_simple_type(true);
         nt.is_floating_point(is_floating_point(im, n));
     } else
@@ -380,7 +380,7 @@ void resolver::resolve_enumerations(intermediate_model& im) const {
             BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
                                      << det.id();
             e.underlying_type(det);
-        } else if (!is_primitive(im, ut)) {
+        } else if (!is_builtin(im, ut)) {
             BOOST_LOG_SEV(lg, error) << invalid_default << ut.id();
             BOOST_THROW_EXCEPTION(resolution_error(
                     invalid_default + ut.id()));

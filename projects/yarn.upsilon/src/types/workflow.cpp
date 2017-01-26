@@ -130,8 +130,8 @@ void model_populator::visit(const dogen::upsilon::enumeration& e) {
 }
 
 void model_populator::visit(const dogen::upsilon::primitive& p) {
-    const auto yp(transformer_.to_primitive(p));
-    insert(yp, model_.primitives());
+    const auto b(transformer_.to_builtin(p));
+    insert(b, model_.builtins());
 }
 
 std::list<languages> workflow::obtain_output_languages(

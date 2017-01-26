@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<node_generator>();
     test_io<attribute_generator>();
     test_io<name_generator>();
-    test_io<primitive_generator>();
+    test_io<builtin_generator>();
     test_io<enumerator_generator>();
     test_io<enumeration_generator>();
     test_io<module_generator>();

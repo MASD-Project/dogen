@@ -83,7 +83,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
     BOOST_CHECK(mg.has_merged());
     BOOST_CHECK(combined.objects().size() == n);
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
     BOOST_CHECK(combined.enumerations().empty());
     BOOST_CHECK(combined.concepts().empty());
     BOOST_CHECK(combined.modules().empty());
@@ -143,7 +143,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
     BOOST_CHECK(combined.objects().empty());
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
     BOOST_CHECK(combined.enumerations().empty());
     BOOST_CHECK(combined.modules().empty());
 }

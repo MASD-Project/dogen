@@ -110,13 +110,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.primitive_header.postfix"
+      "qualified": "quilt.cpp.odb.builtin_header.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.primitive_header"
+      "archetype": "quilt.cpp.odb.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

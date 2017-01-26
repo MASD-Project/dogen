@@ -27,10 +27,10 @@
 
 #include "dogen/yarn/types/module_fwd.hpp"
 #include "dogen/yarn/types/object_fwd.hpp"
+#include "dogen/yarn/types/builtin_fwd.hpp"
 #include "dogen/yarn/types/concept_fwd.hpp"
 #include "dogen/yarn/types/visitor_fwd.hpp"
 #include "dogen/yarn/types/exception_fwd.hpp"
-#include "dogen/yarn/types/primitive_fwd.hpp"
 #include "dogen/yarn/types/enumeration_fwd.hpp"
 
 namespace dogen {
@@ -44,6 +44,16 @@ public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
+    /**
+     * @brief Accept visits for type dogen::yarn::builtin
+     */
+    /**@{*/
+    virtual void visit(const dogen::yarn::builtin&) const { }
+    virtual void visit(const dogen::yarn::builtin&) { }
+    virtual void visit(dogen::yarn::builtin&) const { }
+    virtual void visit(dogen::yarn::builtin&) { }
+    /**@}*/
+
     /**
      * @brief Accept visits for type dogen::yarn::concept
      */
@@ -92,16 +102,6 @@ public:
     virtual void visit(const dogen::yarn::object&) { }
     virtual void visit(dogen::yarn::object&) const { }
     virtual void visit(dogen::yarn::object&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::yarn::primitive
-     */
-    /**@{*/
-    virtual void visit(const dogen::yarn::primitive&) const { }
-    virtual void visit(const dogen::yarn::primitive&) { }
-    virtual void visit(dogen::yarn::primitive&) const { }
-    virtual void visit(dogen::yarn::primitive&) { }
     /**@}*/
 
     /**

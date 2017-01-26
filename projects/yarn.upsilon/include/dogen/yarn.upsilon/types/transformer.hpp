@@ -29,7 +29,7 @@
 #include <unordered_map>
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/upsilon/types/name.hpp"
@@ -61,7 +61,7 @@ private:
         yarn::element& e) const;
 
 public:
-    yarn::primitive to_primitive(const dogen::upsilon::primitive& p) const;
+    yarn::builtin to_builtin(const dogen::upsilon::primitive& p) const;
 
     yarn::object to_object(const dogen::upsilon::compound& c) const;
 

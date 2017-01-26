@@ -50,7 +50,7 @@ std::string dehydrator::tidy_up_string(std::string s) const {
 bool dehydrator::has_elements(const intermediate_model& im) const {
     return
         !im.objects().empty() ||
-        !im.primitives().empty() ||
+        !im.builtins().empty() ||
         !im.enumerations().empty() ||
         !im.modules().empty();
 }

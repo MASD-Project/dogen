@@ -64,8 +64,8 @@ void name_tree_builder::add_name(const std::string& s) {
     names_.push_back(s);
 }
 
-void name_tree_builder::add_primitive(const std::string& s) {
-    BOOST_LOG_SEV(lg, debug) << "Pushing back primitive :" << s;
+void name_tree_builder::add_builtin(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "Pushing back builtin :" << s;
 
     name_builder b;
     b.simple_name(s);

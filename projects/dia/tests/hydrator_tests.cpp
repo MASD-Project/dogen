@@ -182,12 +182,12 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(all_primitives_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("all_primitives_results_in_expected_objects");
+BOOST_AUTO_TEST_CASE(all_builtins_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("all_builtins_results_in_expected_objects");
     using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_all_primitives_dia());
-    const auto actual(yarn_dia::actual_all_primitives_dia_xml());
-    const auto expected(yarn_dia::expected_all_primitives_dia_xml());
+    const auto input(yarn_dia::input_all_builtins_dia());
+    const auto actual(yarn_dia::actual_all_builtins_dia_xml());
+    const auto expected(yarn_dia::expected_all_builtins_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 

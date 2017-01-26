@@ -47,8 +47,8 @@ std::string traits::exception_archetype() {
     return r;
 }
 
-std::string traits::primitive_archetype() {
-    static std::string r(traits::facet() + ".primitive");
+std::string traits::builtin_archetype() {
+    static std::string r(traits::facet() + ".builtin");
     return r;
 }
 

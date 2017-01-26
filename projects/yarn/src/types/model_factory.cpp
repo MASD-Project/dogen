@@ -72,7 +72,7 @@ has_generatable_types(const intermediate_model& im) const {
             return true;
     }
 
-    for (const auto pair : im.primitives()) {
+    for (const auto pair : im.builtins()) {
         if (is_generatable(pair.second))
             return true;
     }
@@ -97,7 +97,7 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
                              << " modules: " << r.modules().size()
                              << " concepts: " << r.concepts().size()
                              << " enumerations: " << r.enumerations().size()
-                             << " primitives: " << r.primitives().size();
+                             << " builtins: " << r.builtins().size();
     return r;
 }
 

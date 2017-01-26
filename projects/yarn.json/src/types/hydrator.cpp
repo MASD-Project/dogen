@@ -30,7 +30,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
@@ -61,7 +61,7 @@ const std::string stereotypes_key("stereotypes");
 
 const std::string meta_type_key("meta_type");
 const std::string meta_type_object_value("object");
-const std::string meta_type_primitive_value("primitive");
+const std::string meta_type_builtin_value("builtin");
 const std::string meta_type_module_value("module");
 const std::string meta_type_enumeration_value("enumeration");
 const std::string meta_type_exception_value("exception");
@@ -297,8 +297,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
             BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
             BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
         }
-    } else if (meta_type_value == meta_type_primitive_value) {
-        yarn::primitive p;
+    } else if (meta_type_value == meta_type_builtin_value) {
+        yarn::builtin p;
         const auto dit(pt.get(is_default_enumeration_type_key, false));
         p.is_default_enumeration_type(dit);
 
@@ -307,7 +307,7 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
         lambda(p);
         const auto pair(std::make_pair(n.id(), p));
-        const bool inserted(im.primitives().insert(pair).second);
+        const bool inserted(im.builtins().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
             BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));

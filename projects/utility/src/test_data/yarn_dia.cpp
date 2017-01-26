@@ -65,7 +65,7 @@ path input_enable_facet_serialization_dia(
     "yarn.dia/input/enable_facet_serialization.dia"
     );
 path input_rename_facet_folder_dia("yarn.dia/input/rename_facet_folder.dia");
-path input_all_primitives_dia("yarn.dia/input/all_primitives.dia");
+path input_all_builtins_dia("yarn.dia/input/all_builtins.dia");
 path input_csharp_model_dia("yarn.dia/input/CSharpModel.dia");
 path input_trivial_inheritance_dia("yarn.dia/input/trivial_inheritance.dia");
 path input_trivial_association_dia("yarn.dia/input/trivial_association.dia");
@@ -128,10 +128,10 @@ path expected_two_layers_with_objects_yarn_xml(
     "yarn.dia/expected/two_layers_with_objects.yarnxml");
 path expected_class_in_a_package_stdout_txt(
     "yarn.dia/expected/class_in_a_package_stdout.txt");
-path expected_all_primitives_dia_xml(
-    "yarn.dia/expected/all_primitives.diaxml");
-path expected_all_primitives_yarn_xml(
-    "yarn.dia/expected/all_primitives.yarnxml");
+path expected_all_builtins_dia_xml(
+    "yarn.dia/expected/all_builtins.diaxml");
+path expected_all_builtins_yarn_xml(
+    "yarn.dia/expected/all_builtins.yarnxml");
 path expected_trivial_inheritance_dia_xml(
     "yarn.dia/expected/trivial_inheritance.diaxml");
 path expected_trivial_inheritance_yarn_xml(
@@ -219,10 +219,10 @@ path actual_two_layers_with_objects_yarn_xml(
     "yarn.dia/actual/two_layers_with_objects.yarnxml");
 path actual_class_in_a_package_stdout_txt(
     "yarn.dia/actual/class_in_a_package_stdout.txt");
-path actual_all_primitives_dia_xml(
-    "yarn.dia/actual/all_primitives.diaxml");
-path actual_all_primitives_yarn_xml(
-    "yarn.dia/actual/all_primitives.yarnxml");
+path actual_all_builtins_dia_xml(
+    "yarn.dia/actual/all_builtins.diaxml");
+path actual_all_builtins_yarn_xml(
+    "yarn.dia/actual/all_builtins.yarnxml");
 path actual_trivial_inheritance_dia_xml(
     "yarn.dia/actual/trivial_inheritance.diaxml");
 path actual_trivial_inheritance_yarn_xml(
@@ -378,8 +378,8 @@ path yarn_dia::input_rename_facet_folder_dia() {
     return validating_resolver::resolve(::input_rename_facet_folder_dia);
 }
 
-path yarn_dia::input_all_primitives_dia() {
-    return validating_resolver::resolve(::input_all_primitives_dia);
+path yarn_dia::input_all_builtins_dia() {
+    return validating_resolver::resolve(::input_all_builtins_dia);
 }
 
 path yarn_dia::input_csharp_model_dia() {
@@ -529,12 +529,12 @@ path yarn_dia::expected_two_layers_with_objects_yarn_xml() {
         ::expected_two_layers_with_objects_yarn_xml);
 }
 
-path yarn_dia::expected_all_primitives_dia_xml() {
-    return validating_resolver::resolve(::expected_all_primitives_dia_xml);
+path yarn_dia::expected_all_builtins_dia_xml() {
+    return validating_resolver::resolve(::expected_all_builtins_dia_xml);
 }
 
-path yarn_dia::expected_all_primitives_yarn_xml() {
-    return validating_resolver::resolve(::expected_all_primitives_yarn_xml);
+path yarn_dia::expected_all_builtins_yarn_xml() {
+    return validating_resolver::resolve(::expected_all_builtins_yarn_xml);
 }
 
 path yarn_dia::expected_trivial_inheritance_dia_xml() {
@@ -710,12 +710,12 @@ path yarn_dia::actual_trivial_inheritance_yarn_xml() {
     return resolver::resolve(::actual_trivial_inheritance_yarn_xml);
 }
 
-path yarn_dia::actual_all_primitives_dia_xml() {
-    return resolver::resolve(::actual_all_primitives_dia_xml);
+path yarn_dia::actual_all_builtins_dia_xml() {
+    return resolver::resolve(::actual_all_builtins_dia_xml);
 }
 
-path yarn_dia::actual_all_primitives_yarn_xml() {
-    return resolver::resolve(::actual_all_primitives_yarn_xml);
+path yarn_dia::actual_all_builtins_yarn_xml() {
+    return resolver::resolve(::actual_all_builtins_yarn_xml);
 }
 
 path yarn_dia::actual_comments_dia_xml() {

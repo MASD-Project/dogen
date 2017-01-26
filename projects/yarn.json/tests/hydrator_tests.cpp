@@ -249,7 +249,7 @@ BOOST_AUTO_TEST_CASE(no_elements_model_results_in_empty_model) {
     const auto m(hydrate(no_elements_model));
 
     BOOST_CHECK(m.objects().empty());
-    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.builtins().empty());
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(!m.modules().empty());
     BOOST_CHECK(m.references().empty());
@@ -262,7 +262,7 @@ BOOST_AUTO_TEST_CASE(empty_elements_model_throws) {
     const auto m(hydrate(empty_elements_model));
 
     BOOST_CHECK(m.objects().empty());
-    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.builtins().empty());
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(!m.modules().empty());
     BOOST_CHECK(m.references().empty());
@@ -321,9 +321,9 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
         BOOST_CHECK(n.location().external_modules().empty());
     }
 
-    const auto primitives(m.primitives());
-    BOOST_CHECK(!m.primitives().empty());
-    for (const auto& pair : primitives) {
+    const auto builtins(m.builtins());
+    BOOST_CHECK(!m.builtins().empty());
+    for (const auto& pair : builtins) {
         const auto p(pair.second);
         const auto n(p.name());
         BOOST_REQUIRE(n.location().model_modules().size() == 1);
@@ -366,7 +366,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
             cpp_boost_model_name);
         BOOST_CHECK(n.location().external_modules().empty());
     }
-    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.builtins().empty());
     BOOST_CHECK(m.enumerations().empty());
     BOOST_CHECK(!m.modules().empty());
     BOOST_CHECK(m.references().empty());
@@ -388,9 +388,9 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
         == hardware_model_name_back);
 
     BOOST_CHECK(m.objects().empty());
-    const auto primitives(m.primitives());
-    BOOST_CHECK(!primitives.empty());
-    for (const auto& pair : primitives) {
+    const auto builtins(m.builtins());
+    BOOST_CHECK(!builtins.empty());
+    for (const auto& pair : builtins) {
         const auto p(pair.second);
         const auto n(p.name());
         BOOST_CHECK(n.location().model_modules().empty());

@@ -48,7 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     // test_hashing<node_generator>();
     test_hashing<attribute_generator>();
     test_hashing<name_generator>();
-    test_hashing<primitive_generator>();
+    test_hashing<builtin_generator>();
     test_hashing<enumerator_generator>();
     test_hashing<enumeration_generator>();
     test_hashing<module_generator>();

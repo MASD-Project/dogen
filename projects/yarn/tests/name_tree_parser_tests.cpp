@@ -54,7 +54,7 @@ name_tree make(const dogen::yarn::name& n) {
     return r;
 }
 
-bool test_primitive(const std::string& s) {
+bool test_builtin(const std::string& s) {
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
 
@@ -144,25 +144,25 @@ BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
 }
 
-BOOST_AUTO_TEST_CASE(all_primitive_types_are_valid) {
-    SETUP_TEST_LOG("all_primitive_types_are_valid");
+BOOST_AUTO_TEST_CASE(all_builtin_types_are_valid) {
+    SETUP_TEST_LOG("all_builtin_types_are_valid");
 
-    BOOST_CHECK(test_primitive("char"));
-    BOOST_CHECK(test_primitive("unsigned char"));
-    BOOST_CHECK(test_primitive("wchar_t"));
-    BOOST_CHECK(test_primitive("unsigned wchar_t"));
-    BOOST_CHECK(test_primitive("bool"));
-    BOOST_CHECK(test_primitive("short"));
-    BOOST_CHECK(test_primitive("unsigned short"));
-    BOOST_CHECK(test_primitive("int"));
-    BOOST_CHECK(test_primitive("unsigned int"));
-    BOOST_CHECK(test_primitive("long"));
-    BOOST_CHECK(test_primitive("unsigned long"));
-    BOOST_CHECK(test_primitive("long long"));
-    BOOST_CHECK(test_primitive("unsigned long long"));
-    BOOST_CHECK(test_primitive("void"));
-    BOOST_CHECK(test_primitive("float"));
-    BOOST_CHECK(test_primitive("double"));
+    BOOST_CHECK(test_builtin("char"));
+    BOOST_CHECK(test_builtin("unsigned char"));
+    BOOST_CHECK(test_builtin("wchar_t"));
+    BOOST_CHECK(test_builtin("unsigned wchar_t"));
+    BOOST_CHECK(test_builtin("bool"));
+    BOOST_CHECK(test_builtin("short"));
+    BOOST_CHECK(test_builtin("unsigned short"));
+    BOOST_CHECK(test_builtin("int"));
+    BOOST_CHECK(test_builtin("unsigned int"));
+    BOOST_CHECK(test_builtin("long"));
+    BOOST_CHECK(test_builtin("unsigned long"));
+    BOOST_CHECK(test_builtin("long long"));
+    BOOST_CHECK(test_builtin("unsigned long long"));
+    BOOST_CHECK(test_builtin("void"));
+    BOOST_CHECK(test_builtin("float"));
+    BOOST_CHECK(test_builtin("double"));
 }
 
 BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
@@ -234,8 +234,8 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(parsing_vector_of_primitive_produces_expected_name_trees) {
-    SETUP_TEST_LOG_SOURCE("parsing_vector_of_primitive_produces_expected_name_trees");
+BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
+    SETUP_TEST_LOG_SOURCE("parsing_vector_of_builtin_produces_expected_name_trees");
 
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
@@ -308,25 +308,25 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(names_that_partially_match_primitives_produce_expected_name_tree) {
-    SETUP_TEST_LOG("names_that_partially_match_primitives_produce_expected_name_tree");
+BOOST_AUTO_TEST_CASE(names_that_partially_match_builtins_produce_expected_name_tree) {
+    SETUP_TEST_LOG("names_that_partially_match_builtins_produce_expected_name_tree");
 
-    BOOST_CHECK(test_primitive("character"));
-    BOOST_CHECK(test_primitive("cha"));
-    BOOST_CHECK(test_primitive("wchar_test"));
-    BOOST_CHECK(test_primitive("wcha"));
-    BOOST_CHECK(test_primitive("boolean"));
-    BOOST_CHECK(test_primitive("boo"));
-    BOOST_CHECK(test_primitive("shorter"));
-    BOOST_CHECK(test_primitive("shor"));
-    BOOST_CHECK(test_primitive("integer"));
-    BOOST_CHECK(test_primitive("in"));
-    BOOST_CHECK(test_primitive("voidest"));
-    BOOST_CHECK(test_primitive("voi"));
-    BOOST_CHECK(test_primitive("floating"));
-    BOOST_CHECK(test_primitive("floa"));
-    BOOST_CHECK(test_primitive("doubler"));
-    BOOST_CHECK(test_primitive("doubl"));
+    BOOST_CHECK(test_builtin("character"));
+    BOOST_CHECK(test_builtin("cha"));
+    BOOST_CHECK(test_builtin("wchar_test"));
+    BOOST_CHECK(test_builtin("wcha"));
+    BOOST_CHECK(test_builtin("boolean"));
+    BOOST_CHECK(test_builtin("boo"));
+    BOOST_CHECK(test_builtin("shorter"));
+    BOOST_CHECK(test_builtin("shor"));
+    BOOST_CHECK(test_builtin("integer"));
+    BOOST_CHECK(test_builtin("in"));
+    BOOST_CHECK(test_builtin("voidest"));
+    BOOST_CHECK(test_builtin("voi"));
+    BOOST_CHECK(test_builtin("floating"));
+    BOOST_CHECK(test_builtin("floa"));
+    BOOST_CHECK(test_builtin("doubler"));
+    BOOST_CHECK(test_builtin("doubl"));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -10,130 +10,130 @@
       "name": {
         "simple": "int8_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "int16_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "int32_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "int64_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "uint8_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "uint16_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "uint32_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {
       "name": {
         "simple": "uint64_t"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.types.primitive_header.inclusion_directive": "<cstdint>",
-        "quilt.cpp.hash.primitive_header.inclusion_required": false,
-        "quilt.cpp.io.primitive_header.inclusion_required": false,
-        "quilt.cpp.test_data.primitive_header.inclusion_required": false,
-        "quilt.cpp.serialization.primitive_header.inclusion_required": false,
-        "quilt.cpp.odb.primitive_header.inclusion_required": false
+        "quilt.cpp.types.builtin_header.inclusion_directive": "<cstdint>",
+        "quilt.cpp.hash.builtin_header.inclusion_required": false,
+        "quilt.cpp.io.builtin_header.inclusion_required": false,
+        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
+        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
+        "quilt.cpp.odb.builtin_header.inclusion_required": false
       }
     },
     {

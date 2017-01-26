@@ -72,8 +72,8 @@ void association_expander::walk_name_tree(
     else
         o.transparent_associations().push_back(n);
 
-    const auto i(im.primitives().find(n.id()));
-    if (i != im.primitives().end())
+    const auto i(im.builtins().find(n.id()));
+    if (i != im.builtins().end())
         return;
 
     const auto j(im.enumerations().find(n.id()));

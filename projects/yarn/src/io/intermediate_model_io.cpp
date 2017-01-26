@@ -24,13 +24,13 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"
+#include "dogen/yarn/io/builtin_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/indices_io.hpp"
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/exception_io.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
@@ -113,7 +113,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::builtin>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -267,7 +267,7 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"concepts\": " << v.concepts() << ", "
-      << "\"primitives\": " << v.primitives() << ", "
+      << "\"builtins\": " << v.builtins() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"objects\": " << v.objects() << ", "
       << "\"exceptions\": " << v.exceptions() << ", "

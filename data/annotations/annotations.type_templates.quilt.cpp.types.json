@@ -176,13 +176,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.types.primitive_header.postfix"
+      "qualified": "quilt.cpp.types.builtin_header.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.types",
-      "archetype": "quilt.cpp.types.primitive_header"
+      "archetype": "quilt.cpp.types.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

@@ -50,7 +50,7 @@ public:
     void visit(const yarn::enumeration& e);
     void visit(const yarn::exception& e);
     void visit(const yarn::object& o);
-    void visit(const yarn::primitive& p);
+    void visit(const yarn::builtin& b);
 
 public:
     const decomposition_result& result() const;

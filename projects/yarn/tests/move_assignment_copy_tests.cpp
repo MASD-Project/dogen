@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<name_tree_generator>();
     test_move_assignment_copy<attribute_generator>();
     test_move_assignment_copy<name_generator>();
-    test_move_assignment_copy<primitive_generator>();
+    test_move_assignment_copy<builtin_generator>();
     test_move_assignment_copy<enumerator_generator>();
     test_move_assignment_copy<enumeration_generator>();
     test_move_assignment_copy<module_generator>();

@@ -279,9 +279,9 @@ BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
         std::exception, c);
 }
 
-BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("all_primitives_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_all_primitives_dia());
+BOOST_AUTO_TEST_CASE(all_builtins_model_generates_expected_code_dia) {
+    SETUP_TEST_LOG("all_builtins_model_generates_expected_code_dia");
+    const auto dia(yarn_dia::input_all_builtins_dia());
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
@@ -456,9 +456,9 @@ BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code_json) {
 }
 
 
-BOOST_AUTO_TEST_CASE(all_primitives_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("all_primitives_model_generates_expected_code_json");
-    const auto json(yarn_json::input_all_primitives_json());
+BOOST_AUTO_TEST_CASE(all_builtins_model_generates_expected_code_json) {
+    SETUP_TEST_LOG("all_builtins_model_generates_expected_code_json");
+    const auto json(yarn_json::input_all_builtins_json());
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 

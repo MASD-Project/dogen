@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/all_primitives/serialization/registrar_ser.hpp"
+#include "dogen/test_models/all_builtins/serialization/registrar_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/registrar_ser.hpp"
 #include "dogen/test_models/classes_in_a_package/serialization/registrar_ser.hpp"
 #include "dogen/test_models/classes_inout_package/serialization/registrar_ser.hpp"
@@ -44,7 +44,7 @@
 #include "dogen/test_models/two_layers_with_objects/serialization/registrar_ser.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
-    dogen::test_models::all_primitives::register_types<Archive>(ar);
+    dogen::test_models::all_builtins::register_types<Archive>(ar);
     dogen::test_models::boost_model::register_types<Archive>(ar);
     dogen::test_models::classes_in_a_package::register_types<Archive>(ar);
     dogen::test_models::classes_inout_package::register_types<Archive>(ar);

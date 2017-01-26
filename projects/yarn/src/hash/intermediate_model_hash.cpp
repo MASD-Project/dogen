@@ -21,13 +21,13 @@
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"
+#include "dogen/yarn/hash/builtin_hash.hpp"
 #include "dogen/yarn/hash/concept_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/indices_hash.hpp"
 #include "dogen/yarn/hash/visitor_hash.hpp"
 #include "dogen/yarn/hash/exception_hash.hpp"
 #include "dogen/yarn/hash/languages_hash.hpp"
-#include "dogen/yarn/hash/primitive_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
@@ -75,7 +75,7 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_concept(const st
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_primitive(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_builtin(const std::unordered_map<std::string, dogen::yarn::builtin>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -157,7 +157,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_unordered_set_dogen_yarn_name(v.leaves()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_module(v.modules()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_concept(v.concepts()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_primitive(v.primitives()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_builtin(v.builtins()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_enumeration(v.enumerations()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_object(v.objects()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_exception(v.exceptions()));

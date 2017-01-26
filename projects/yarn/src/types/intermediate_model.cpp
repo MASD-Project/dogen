@@ -45,7 +45,7 @@ intermediate_model::intermediate_model(
     const std::unordered_set<dogen::yarn::name>& leaves,
     const std::unordered_map<std::string, dogen::yarn::module>& modules,
     const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
-    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
+    const std::unordered_map<std::string, dogen::yarn::builtin>& builtins,
     const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
     const std::unordered_map<std::string, dogen::yarn::object>& objects,
     const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
@@ -62,7 +62,7 @@ intermediate_model::intermediate_model(
       leaves_(leaves),
       modules_(modules),
       concepts_(concepts),
-      primitives_(primitives),
+      builtins_(builtins),
       enumerations_(enumerations),
       objects_(objects),
       exceptions_(exceptions),
@@ -82,7 +82,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
     swap(concepts_, other.concepts_);
-    swap(primitives_, other.primitives_);
+    swap(builtins_, other.builtins_);
     swap(enumerations_, other.enumerations_);
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
@@ -102,7 +102,7 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
         concepts_ == rhs.concepts_ &&
-        primitives_ == rhs.primitives_ &&
+        builtins_ == rhs.builtins_ &&
         enumerations_ == rhs.enumerations_ &&
         objects_ == rhs.objects_ &&
         exceptions_ == rhs.exceptions_ &&
@@ -209,20 +209,20 @@ void intermediate_model::concepts(const std::unordered_map<std::string, dogen::y
     concepts_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() const {
-    return primitives_;
+const std::unordered_map<std::string, dogen::yarn::builtin>& intermediate_model::builtins() const {
+    return builtins_;
 }
 
-std::unordered_map<std::string, dogen::yarn::primitive>& intermediate_model::primitives() {
-    return primitives_;
+std::unordered_map<std::string, dogen::yarn::builtin>& intermediate_model::builtins() {
+    return builtins_;
 }
 
-void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v) {
-    primitives_ = v;
+void intermediate_model::builtins(const std::unordered_map<std::string, dogen::yarn::builtin>& v) {
+    builtins_ = v;
 }
 
-void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v) {
-    primitives_ = std::move(v);
+void intermediate_model::builtins(const std::unordered_map<std::string, dogen::yarn::builtin>&& v) {
+    builtins_ = std::move(v);
 }
 
 const std::unordered_map<std::string, dogen::yarn::enumeration>& intermediate_model::enumerations() const {

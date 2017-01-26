@@ -144,13 +144,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.serialization.primitive_header.postfix"
+      "qualified": "quilt.cpp.serialization.builtin_header.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.serialization",
-      "archetype": "quilt.cpp.serialization.primitive_header"
+      "archetype": "quilt.cpp.serialization.builtin_header"
     },
     "value_type": "text",
     "template_kind": "instance",

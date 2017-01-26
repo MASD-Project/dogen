@@ -54,7 +54,7 @@
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;class_without_attributes&gt;&lt;package_1&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_0">
+			<second class_id="9" tracking_level="1" version="0" object_id="_0">
 				<element class_id="22" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="23" tracking_level="0" version="0">
@@ -192,11 +192,11 @@
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<primitives class_id="29" tracking_level="0" version="0">
+	<builtins class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
-	</primitives>
+	</builtins>
 	<enumerations class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
@@ -208,7 +208,7 @@
 		<item_version>0</item_version>
 		<item class_id="32" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;class_without_attributes&gt;&lt;package_1&gt;&lt;class_1&gt;</first>
-			<second class_id="9" tracking_level="1" version="0" object_id="_2">
+			<second class_id="10" tracking_level="1" version="0" object_id="_2">
 				<element>
 					<documentation></documentation>
 					<annotation>

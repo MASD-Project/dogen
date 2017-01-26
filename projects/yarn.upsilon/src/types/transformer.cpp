@@ -111,10 +111,10 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
     }
 }
 
-yarn::primitive
-transformer::to_primitive(const dogen::upsilon::primitive& p) const {
+yarn::builtin
+transformer::to_builtin(const dogen::upsilon::primitive& p) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
-    yarn::primitive r;
+    yarn::builtin r;
     populate_element_properties(p, r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
     return r;

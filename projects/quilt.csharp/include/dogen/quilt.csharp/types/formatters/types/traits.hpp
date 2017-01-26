@@ -55,9 +55,9 @@ struct traits final {
     static std::string exception_archetype();
 
     /**
-     * @brief Name of the primitive header archetype.
+     * @brief Name of the built-in header archetype.
      */
-    static std::string primitive_archetype();
+    static std::string builtin_archetype();
 };
 
 } } } } }

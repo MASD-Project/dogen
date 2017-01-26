@@ -15939,7 +15939,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#builtin_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C++ Artefact Formatter#</dia:string>
@@ -16050,7 +16050,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#builtin_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C++ Artefact Formatter#</dia:string>
@@ -16161,7 +16161,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#builtin_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C++ Artefact Formatter#</dia:string>
@@ -16272,7 +16272,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#builtin_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C++ Artefact Formatter#</dia:string>
@@ -16383,7 +16383,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#builtin_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C++ Artefact Formatter#</dia:string>
@@ -16494,7 +16494,7 @@ and element.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive_header_formatter#</dia:string>
+        <dia:string>#builtin_header_formatter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#C++ Artefact Formatter#</dia:string>

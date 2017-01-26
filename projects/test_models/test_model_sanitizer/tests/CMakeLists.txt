@@ -49,7 +49,7 @@ add_executable(${tests_name} ${files} ${disable_cmakelists_files})
 set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${tests_name}
-    all_primitives
+    all_builtins
     classes_in_a_package
     classes_inout_package
     classes_without_package

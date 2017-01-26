@@ -641,7 +641,7 @@ supported languages.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Returns true if @e current is a simple type such as a primitive or an enumeration.#</dia:string>
+            <dia:string>#Returns true if @e current is a simple type such as a built-in or an enumeration.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3456,13 +3456,13 @@ It is not required for any other purpose.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Represents a value type that is built-in to the language.#</dia:string>
+        <dia:string>#Represents a value type that is built-in at the hardware level.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3554,7 +3554,7 @@ It is not required for any other purpose.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, this primitive is the default type to be used on enumerations.#</dia:string>
+            <dia:string>#If true, this built-in is the default type to be used on enumerations.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3577,7 +3577,7 @@ It is not required for any other purpose.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#If true, this primitive represents a floating point number.#</dia:string>
+            <dia:string>#If true, this built-in represents a floating point number.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3660,7 +3660,7 @@ It is not required for any other purpose.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Defines a bounded set of logically related values for a primitive type
+        <dia:string>#Defines a bounded set of logically related values for a built-in type
 or a string.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -8896,7 +8896,7 @@ into trees of names.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#add_primitive#</dia:string>
+            <dia:string>#add_build_in#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -13100,16 +13100,16 @@ Leaves are types concrete types which have a parent.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#primitives#</dia:string>
+            <dia:string>#builtins#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, primitive&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, builtin&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#All primitives contained in this intermediate model.#</dia:string>
+            <dia:string>#All built-ins contained in this intermediate model.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -28980,7 +28980,7 @@ another.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Populates all secondary 
+            <dia:string>#Populates all secondary
 attributes collections.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

@@ -34,13 +34,13 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
@@ -69,7 +69,7 @@ public:
         const std::unordered_set<dogen::yarn::name>& leaves,
         const std::unordered_map<std::string, dogen::yarn::module>& modules,
         const std::unordered_map<std::string, dogen::yarn::concept>& concepts,
-        const std::unordered_map<std::string, dogen::yarn::primitive>& primitives,
+        const std::unordered_map<std::string, dogen::yarn::builtin>& builtins,
         const std::unordered_map<std::string, dogen::yarn::enumeration>& enumerations,
         const std::unordered_map<std::string, dogen::yarn::object>& objects,
         const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
@@ -150,13 +150,13 @@ public:
     /**@}*/
 
     /**
-     * @brief All primitives contained in this intermediate model.
+     * @brief All built-ins contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::primitive>& primitives() const;
-    std::unordered_map<std::string, dogen::yarn::primitive>& primitives();
-    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>& v);
-    void primitives(const std::unordered_map<std::string, dogen::yarn::primitive>&& v);
+    const std::unordered_map<std::string, dogen::yarn::builtin>& builtins() const;
+    std::unordered_map<std::string, dogen::yarn::builtin>& builtins();
+    void builtins(const std::unordered_map<std::string, dogen::yarn::builtin>& v);
+    void builtins(const std::unordered_map<std::string, dogen::yarn::builtin>&& v);
     /**@}*/
 
     /**
@@ -257,7 +257,7 @@ private:
     std::unordered_set<dogen::yarn::name> leaves_;
     std::unordered_map<std::string, dogen::yarn::module> modules_;
     std::unordered_map<std::string, dogen::yarn::concept> concepts_;
-    std::unordered_map<std::string, dogen::yarn::primitive> primitives_;
+    std::unordered_map<std::string, dogen::yarn::builtin> builtins_;
     std::unordered_map<std::string, dogen::yarn::enumeration> enumerations_;
     std::unordered_map<std::string, dogen::yarn::object> objects_;
     std::unordered_map<std::string, dogen::yarn::exception> exceptions_;

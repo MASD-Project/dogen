@@ -21,8 +21,8 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/io/primitive_io.hpp"
+#include "dogen/yarn/types/builtin.hpp"
+#include "dogen/yarn/io/builtin_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
@@ -61,17 +61,17 @@ using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(transformer_tests)
 
-BOOST_AUTO_TEST_CASE(upsilon_primitive_transforms_into_expected_yarn_primitive) {
-    SETUP_TEST_LOG_SOURCE("upsilon_primitive_transforms_into_expected_yarn_primitive");
+BOOST_AUTO_TEST_CASE(upsilon_builtin_transforms_into_expected_yarn_builtin) {
+    SETUP_TEST_LOG_SOURCE("upsilon_builtin_transforms_into_expected_yarn_builtin");
 
     const auto mn(yarn_factory.model_name(0));
     const auto i(mock_model_factory::make_primitive(0));
     BOOST_LOG_SEV(lg, debug) << "input: " << i;
 
-    const auto e(yarn_factory.make_primitive(0, mn, ot));
+    const auto e(yarn_factory.make_builtin(0, mn, ot));
 
     dogen::yarn::upsilon::transformer t(mn);
-    const auto a(t.to_primitive(i));
+    const auto a(t.to_builtin(i));
 
     BOOST_CHECK(asserter::assert_object(e, a));
 }

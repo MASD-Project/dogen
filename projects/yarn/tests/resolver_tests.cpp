@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     SETUP_TEST_LOG_SOURCE("object_with_attribute_type_in_the_same_model_resolves_successfully");
     auto m(factory.object_with_attribute());
     BOOST_CHECK(m.objects().size() == 2);
-    BOOST_CHECK(m.primitives().empty());
+    BOOST_CHECK(m.builtins().empty());
 
     for (auto& pair : m.objects()) {
         auto& o(pair.second);
@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
 
     auto combined(mg.merge());
     BOOST_CHECK(combined.objects().size() == 2);
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::indexer idx;
     idx.index(combined);
@@ -176,7 +176,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     mg.add(m);
     auto combined(mg.merge());
     BOOST_CHECK(combined.objects().size() == 2);
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
     rs.resolve(combined);
@@ -208,7 +208,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     mg.add(m[1]);
     auto combined(mg.merge());
     BOOST_CHECK(combined.objects().size() == 2);
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
     rs.resolve(combined);
@@ -239,7 +239,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
 
     auto combined(mg.merge());
     BOOST_CHECK(combined.objects().size() == 4);
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
     rs.resolve(combined);
@@ -299,7 +299,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 
     auto combined(mg.merge());
     BOOST_CHECK(combined.objects().size() == 4);
-    BOOST_CHECK(combined.primitives().empty());
+    BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
     rs.resolve(combined);

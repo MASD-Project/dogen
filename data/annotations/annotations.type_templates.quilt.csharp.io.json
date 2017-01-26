@@ -48,13 +48,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.io.primitive.postfix"
+      "qualified": "quilt.csharp.io.builtin.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
       "facet": "quilt.csharp.io",
-      "archetype": "quilt.csharp.io.primitive"
+      "archetype": "quilt.csharp.io.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",

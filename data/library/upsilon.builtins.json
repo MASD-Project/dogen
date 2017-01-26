@@ -24,7 +24,7 @@
       "name": {
         "simple": "int"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "is_default_enumeration_type": true,
       "in_global_module": true
     }

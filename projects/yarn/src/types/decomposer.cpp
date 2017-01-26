@@ -23,7 +23,7 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/decomposer.hpp"
 
@@ -97,8 +97,8 @@ void decomposer::visit(const yarn::object& o) {
         result_.abstract_elements().insert(o.name().id());
 }
 
-void decomposer::visit(const yarn::primitive& p) {
-    process_element(p);
+void decomposer::visit(const yarn::builtin& b) {
+    process_element(b);
 }
 
 const decomposition_result&  decomposer::result() const {

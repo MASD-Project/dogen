@@ -50,7 +50,7 @@ private:
 public:
     void operator()(yarn::module& m) { process(m.name()); }
     void operator()(yarn::concept& c) { process(c.name()); }
-    void operator()(yarn::primitive& p) { process(p.name()); }
+    void operator()(yarn::builtin& b) { process(b.name()); }
     void operator()(yarn::enumeration& e) { process(e.name()); }
     void operator()(yarn::object& o) { process(o.name()); }
     void operator()(yarn::exception& e) { process(e.name()); }
@@ -90,7 +90,7 @@ private:
 public:
     void operator()(yarn::module& m) { update(m); }
     void operator()(yarn::concept& c) { update(c); }
-    void operator()(yarn::primitive& p) { update(p); }
+    void operator()(yarn::builtin& b) { update(b); }
     void operator()(yarn::enumeration& e) { update(e); }
     void operator()(yarn::object& o) { update(o); }
     void operator()(yarn::exception& e) { update(e); }

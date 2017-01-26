@@ -1,6 +1,6 @@
 {
   "model_name": "csharp.builtins",
-  "documentation": "CLR-provided primitive types.",
+  "documentation": "CLR-provided built-in types.",
   "annotation": {
     "yarn.input_language": "csharp",
     "yarn.is_proxy_model": true
@@ -10,7 +10,7 @@
       "name": {
         "simple": "byte"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -22,7 +22,7 @@
       "name": {
         "simple": "sbyte"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -34,7 +34,7 @@
       "name": {
         "simple": "int"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "is_default_enumeration_type": true,
       "in_global_module": true,
       "annotation": {
@@ -47,7 +47,7 @@
       "name": {
         "simple": "uint"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -59,7 +59,7 @@
       "name": {
         "simple": "short"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -71,7 +71,7 @@
       "name": {
         "simple": "ushort"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -83,7 +83,7 @@
       "name": {
         "simple": "long"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -95,7 +95,7 @@
       "name": {
         "simple": "ulong"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -107,7 +107,7 @@
       "name": {
         "simple": "float"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "is_floating_point": true,
       "annotation": {
@@ -121,7 +121,7 @@
       "name": {
         "simple": "double"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "is_floating_point": true,
       "annotation": {
@@ -135,7 +135,7 @@
       "name": {
         "simple": "char"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -147,7 +147,7 @@
       "name": {
         "simple": "bool"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -181,7 +181,7 @@
       "name": {
         "simple": "decimal"
       },
-      "meta_type": "primitive",
+      "meta_type": "builtin",
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,

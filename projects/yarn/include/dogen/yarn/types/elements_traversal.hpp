@@ -27,7 +27,7 @@
 
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/visitor.hpp"
@@ -50,7 +50,7 @@ inline void elements_traversal(const intermediate_model& m,
     for (const auto& pair : m.concepts())
         v(pair.second);
 
-    for (const auto& pair : m.primitives())
+    for (const auto& pair : m.builtins())
         v(pair.second);
 
     for (const auto& pair : m.enumerations())
@@ -75,7 +75,7 @@ inline void elements_traversal(const intermediate_model& m,
     for (auto& pair : m.concepts())
         v(pair.second);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.builtins())
         v(pair.second);
 
     for (auto& pair : m.enumerations())
@@ -99,7 +99,7 @@ inline void elements_traversal(intermediate_model& m, TraversalVisitor& v) {
     for (auto& pair : m.concepts())
         v(pair.second);
 
-    for (auto& pair : m.primitives())
+    for (auto& pair : m.builtins())
         v(pair.second);
 
     for (auto& pair : m.enumerations())

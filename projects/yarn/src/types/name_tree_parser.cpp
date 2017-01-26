@@ -86,15 +86,15 @@ template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
     std::shared_ptr<name_tree_builder> builder;
     qi::rule<Iterator, std::string()> name_tree, name, nondigit, alphanum,
-        primitive, signable_primitive;
+        builtin, signable_builtin;
     qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
         templated_name, template_argument_list, template_argument;
 
     std::function<void()> start_template_, next_type_argument_, end_template_;
-    std::function<void(const std::string&)> add_name_tree_, add_primitive_;
+    std::function<void(const std::string&)> add_name_tree_, add_builtin_;
 
     void add_name_tree(const std::string& s) { builder->add_name(s); }
-    void add_primitive(const std::string& s) { builder->add_primitive(s); }
+    void add_builtin(const std::string& s) { builder->add_builtin(s); }
     void start_template() { builder->start_children(); }
     void next_type_argument() { builder->next_child(); }
     void end_template() { builder->end_children(); }
@@ -102,7 +102,7 @@ struct grammar : qi::grammar<Iterator> {
     void setup_functors() {
         add_name_tree_ = std::bind(&grammar::add_name_tree, this,
             std::placeholders::_1);
-        add_primitive_ = std::bind(&grammar::add_primitive, this,
+        add_builtin_ = std::bind(&grammar::add_builtin, this,
             std::placeholders::_1);
         start_template_ = std::bind(&grammar::start_template, this);
         next_type_argument_ = std::bind(&grammar::next_type_argument, this);
@@ -144,7 +144,7 @@ struct grammar : qi::grammar<Iterator> {
 
         name_tree = name[add_name_tree_]
             >> *(scope_operator >> name[add_name_tree_]);
-        signable_primitive =
+        signable_builtin =
             -(string("unsigned") >> string(" ")) >>
             (
                 distinct::keyword[string("short")] |
@@ -153,13 +153,13 @@ struct grammar : qi::grammar<Iterator> {
                 distinct::keyword[string("int")] |
                 (
                     string("long") >> -(string(" ") >> string("long"))));
-        primitive =
+        builtin =
             distinct::keyword[string("bool")] |
-            signable_primitive |
+            signable_builtin |
             distinct::keyword[string("float")] |
             distinct::keyword[string("double")] |
             distinct::keyword[string("void")];
-        type_name %= primitive[add_primitive_] |
+        type_name %= builtin[add_builtin_] |
             (name_tree >> -(templated_name));
 
         templated_name = qi::lit("<")[start_template_]

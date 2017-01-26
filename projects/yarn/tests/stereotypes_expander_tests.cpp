@@ -61,7 +61,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_REQUIRE(a.objects().size() == 1);
     BOOST_CHECK(!a.objects().begin()->second.contained_by());
     BOOST_REQUIRE(a.modules().empty());
-    BOOST_REQUIRE(a.primitives().empty());
+    BOOST_REQUIRE(a.builtins().empty());
     BOOST_REQUIRE(a.enumerations().empty());
     BOOST_REQUIRE(a.concepts().empty());
     BOOST_REQUIRE(a.visitors().empty());
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_CHECK(a.objects().size() == 1);
     BOOST_CHECK(a.visitors().empty());
     BOOST_CHECK(a.modules().empty());
-    BOOST_CHECK(a.primitives().empty());
+    BOOST_CHECK(a.builtins().empty());
     BOOST_CHECK(a.enumerations().empty());
     BOOST_CHECK(a.concepts().empty());
     BOOST_CHECK(a.visitors().empty());

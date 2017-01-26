@@ -26,7 +26,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
@@ -68,7 +68,7 @@ public:
     void visit(const yarn::enumeration& e);
     void visit(const yarn::exception& e);
     void visit(const yarn::object& o);
-    void visit(const yarn::primitive& p);
+    void visit(const yarn::builtin& p);
 
 public:
     const std::unordered_map<std::string, formattables::aspect_properties>&
@@ -127,7 +127,7 @@ void aspect_properties_generator::visit(const yarn::object& o) {
     handle_aspect_properties(o.annotation(), o.name().id());
 }
 
-void aspect_properties_generator::visit(const yarn::primitive& p) {
+void aspect_properties_generator::visit(const yarn::builtin& p) {
     handle_aspect_properties(p.annotation(), p.name().id());
 }
 

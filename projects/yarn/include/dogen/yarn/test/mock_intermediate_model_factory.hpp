@@ -244,9 +244,9 @@ public:
 
 public:
     /**
-     * @brief Creates a primitive.
+     * @brief Creates a built-in.
      */
-    primitive make_primitive(const unsigned int i, const name& model_name,
+    builtin make_builtin(const unsigned int i, const name& model_name,
         const origin_types ot, const unsigned int module_n = 0) const;
 
     /**

@@ -68,8 +68,8 @@ std::string traits::registrar_implementation_archetype() {
     return r;
 }
 
-std::string traits::primitive_header_archetype() {
-    static std::string r(traits::facet() + ".primitive_header");
+std::string traits::builtin_header_archetype() {
+    static std::string r(traits::facet() + ".builtin_header");
     return r;
 }
 

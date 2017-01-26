@@ -69,7 +69,7 @@ public:
     static boost::filesystem::path input_enable_facet_io_dia();
     static boost::filesystem::path input_enable_facet_serialization_dia();
     static boost::filesystem::path input_rename_facet_folder_dia();
-    static boost::filesystem::path input_all_primitives_dia();
+    static boost::filesystem::path input_all_builtins_dia();
     static boost::filesystem::path input_csharp_model_dia();
     static boost::filesystem::path input_trivial_inheritance_dia();
     static boost::filesystem::path input_trivial_association_dia();
@@ -104,8 +104,8 @@ public:
     static boost::filesystem::path expected_two_layers_with_objects_dia_xml();
     static boost::filesystem::path expected_two_layers_with_objects_yarn_xml();
     static boost::filesystem::path expected_class_in_a_package_stdout_txt();
-    static boost::filesystem::path expected_all_primitives_dia_xml();
-    static boost::filesystem::path expected_all_primitives_yarn_xml();
+    static boost::filesystem::path expected_all_builtins_dia_xml();
+    static boost::filesystem::path expected_all_builtins_yarn_xml();
     static boost::filesystem::path expected_trivial_inheritance_dia_xml();
     static boost::filesystem::path expected_trivial_inheritance_yarn_xml();
     static boost::filesystem::path expected_comments_dia_xml();
@@ -148,8 +148,8 @@ public:
     static boost::filesystem::path actual_two_layers_with_objects_dia_xml();
     static boost::filesystem::path actual_two_layers_with_objects_yarn_xml();
     static boost::filesystem::path actual_class_in_a_package_stdout_txt();
-    static boost::filesystem::path actual_all_primitives_dia_xml();
-    static boost::filesystem::path actual_all_primitives_yarn_xml();
+    static boost::filesystem::path actual_all_builtins_dia_xml();
+    static boost::filesystem::path actual_all_builtins_yarn_xml();
     static boost::filesystem::path actual_trivial_inheritance_dia_xml();
     static boost::filesystem::path actual_trivial_inheritance_yarn_xml();
     static boost::filesystem::path actual_comments_dia_xml();

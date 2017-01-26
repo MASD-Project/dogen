@@ -22,13 +22,13 @@
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"
+#include "dogen/yarn/test_data/builtin_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/indices_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/languages_td.hpp"
-#include "dogen/yarn/test_data/primitive_td.hpp"
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
@@ -93,15 +93,15 @@ std::unordered_map<std::string, dogen::yarn::concept> create_std_unordered_map_s
     return r;
 }
 
-dogen::yarn::primitive
-create_dogen_yarn_primitive(const unsigned int position) {
-    return dogen::yarn::primitive_generator::create(position);
+dogen::yarn::builtin
+create_dogen_yarn_builtin(const unsigned int position) {
+    return dogen::yarn::builtin_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::yarn::primitive> create_std_unordered_map_std_string_dogen_yarn_primitive(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::primitive> r;
+std::unordered_map<std::string, dogen::yarn::builtin> create_std_unordered_map_std_string_dogen_yarn_builtin(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::builtin> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_primitive(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_builtin(position + i)));
     }
     return r;
 }
@@ -215,7 +215,7 @@ populate(const unsigned int position, result_type& v) {
     v.leaves(create_std_unordered_set_dogen_yarn_name(position + 3));
     v.modules(create_std_unordered_map_std_string_dogen_yarn_module(position + 4));
     v.concepts(create_std_unordered_map_std_string_dogen_yarn_concept(position + 5));
-    v.primitives(create_std_unordered_map_std_string_dogen_yarn_primitive(position + 6));
+    v.builtins(create_std_unordered_map_std_string_dogen_yarn_builtin(position + 6));
     v.enumerations(create_std_unordered_map_std_string_dogen_yarn_enumeration(position + 7));
     v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 8));
     v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 9));

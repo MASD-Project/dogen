@@ -108,7 +108,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expa
 
     BOOST_CHECK(a.concepts().empty());
     BOOST_CHECK(a.enumerations().empty());
-    BOOST_CHECK(a.primitives().size() == 1);
+    BOOST_CHECK(a.builtins().size() == 1);
 
     BOOST_REQUIRE(a.objects().size() == 1);
     const auto& o(a.objects().begin()->second);

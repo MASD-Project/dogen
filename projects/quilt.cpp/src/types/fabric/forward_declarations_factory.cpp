@@ -54,7 +54,7 @@ public:
 
 public:
     void operator()(const yarn::concept&) {}
-    void operator()(const yarn::primitive&) {}
+    void operator()(const yarn::builtin&) {}
     void operator()(const yarn::module&) {}
 
     void operator()(const dogen::yarn::visitor& v) {

@@ -411,7 +411,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ind
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
-    BOOST_REQUIRE(m.primitives().size() == 2);
+    BOOST_REQUIRE(m.builtins().size() == 2);
 
     bool found(false);
     dogen::yarn::association_expander ex;

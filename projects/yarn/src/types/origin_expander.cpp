@@ -53,7 +53,7 @@ public:
 public:
     void operator()(yarn::module& m) { update(m); }
     void operator()(yarn::concept& c) { update(c); }
-    void operator()(yarn::primitive& p) { update(p); }
+    void operator()(yarn::builtin& b) { update(b); }
     void operator()(yarn::enumeration& e) { update(e); }
     void operator()(yarn::object& o) { update(o); }
     void operator()(yarn::exception& e) { update(e); }

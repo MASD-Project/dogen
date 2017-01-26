@@ -20,7 +20,7 @@
 
 # user includes
 include_directories(
-    ${CMAKE_SOURCE_DIR}/projects/test_models/all_primitives/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/all_builtins/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/classes_in_a_package/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/classes_inout_package/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/classes_without_package/include
@@ -67,7 +67,7 @@ add_custom_target(build_test_models)
 #
 # add projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_primitives)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_builtins)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_in_a_package)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_inout_package)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_without_package)

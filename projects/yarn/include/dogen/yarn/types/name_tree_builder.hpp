@@ -73,9 +73,9 @@ public:
     void add_name(const std::string& n);
 
     /**
-     * @brief Adds the primitive element name to the tree.
+     * @brief Adds the built-in element name to the tree.
      */
-    void add_primitive(const std::string& n);
+    void add_builtin(const std::string& n);
 
     /**
      * @brief Notify the start of children.

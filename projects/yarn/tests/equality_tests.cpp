@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<node_generator>();
     test_equality<attribute_generator>();
     test_equality<name_generator>();
-    test_equality<primitive_generator>();
+    test_equality<builtin_generator>();
     test_equality<enumerator_generator>();
     test_equality<enumeration_generator>();
     test_equality<module_generator>();

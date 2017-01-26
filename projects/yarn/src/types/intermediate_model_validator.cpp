@@ -47,7 +47,7 @@ private:
 
 public:
     void validate(const std::string& id, const yarn::concept& c) const;
-    void validate(const std::string& id, const yarn::primitive& p) const;
+    void validate(const std::string& id, const yarn::builtin& b) const;
     void validate(const std::string& id, const dogen::yarn::visitor& v) const;
     void validate(const std::string& id, const yarn::enumeration& e) const;
     void validate(const std::string& id, const yarn::object& o) const;
@@ -101,8 +101,8 @@ void validator::validate(const std::string& id, const yarn::concept& c) const {
 }
 
 void validator::
-validate(const std::string& id, const yarn::primitive& p) const {
-    validate_name(id, p.in_global_module(), p.name());
+validate(const std::string& id, const yarn::builtin& b) const {
+    validate_name(id, b.in_global_module(), b.name());
 }
 
 void validator::
@@ -152,7 +152,7 @@ validate(const intermediate_model& im) const {
     for (const auto& pair : im.concepts())
         v.validate(pair.first, pair.second);
 
-    for (const auto& pair : im.primitives())
+    for (const auto& pair : im.builtins())
         v.validate(pair.first, pair.second);
 
     for (const auto& pair : im.enumerations())

@@ -136,7 +136,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Returns true if @e current is a simple type such as a primitive or an enumeration.
+     * @brief Returns true if @e current is a simple type such as a built-in or an enumeration.
      */
     /**@{*/
     bool is_current_simple_type() const;

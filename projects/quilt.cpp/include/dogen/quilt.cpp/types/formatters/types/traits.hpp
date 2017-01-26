@@ -80,9 +80,9 @@ struct traits {
     static std::string visitor_header_archetype();
 
     /**
-     * @brief Name of the primitive implementation archetype.
+     * @brief Name of the built-in implementation archetype.
      */
-    static std::string primitive_header_archetype();
+    static std::string builtin_header_archetype();
 };
 
 } } } } }

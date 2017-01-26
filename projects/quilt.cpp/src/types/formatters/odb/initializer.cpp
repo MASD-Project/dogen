@@ -20,7 +20,7 @@
  */
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/master_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb/primitive_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/odb/builtin_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
@@ -34,7 +34,7 @@ namespace odb {
 
 void initializer::initialize(registrar& rg) {
     register_formatter<master_header_formatter>(rg, traits::facet());
-    register_formatter<primitive_header_formatter>(rg);
+    register_formatter<builtin_header_formatter>(rg);
     register_formatter<class_header_formatter>(rg);
     register_formatter<enum_header_formatter>(rg);
     register_formatter<odb_options_formatter>(rg);

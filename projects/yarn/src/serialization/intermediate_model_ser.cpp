@@ -35,13 +35,13 @@
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/object_ser.hpp"
+#include "dogen/yarn/serialization/builtin_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/indices_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/languages_ser.hpp"
-#include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
@@ -59,7 +59,7 @@ void save(Archive& ar,
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("modules", v.modules_);
     ar << make_nvp("concepts", v.concepts_);
-    ar << make_nvp("primitives", v.primitives_);
+    ar << make_nvp("builtins", v.builtins_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
@@ -82,7 +82,7 @@ void load(Archive& ar,
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("modules", v.modules_);
     ar >> make_nvp("concepts", v.concepts_);
-    ar >> make_nvp("primitives", v.primitives_);
+    ar >> make_nvp("builtins", v.builtins_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);

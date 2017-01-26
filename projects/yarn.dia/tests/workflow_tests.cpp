@@ -139,11 +139,11 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_yarn) 
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(all_primitives_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("all_primitives_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_all_primitives_dia_xml());
-    const auto e(yarn_dia::expected_all_primitives_yarn_xml());
-    const auto a(yarn_dia::actual_all_primitives_yarn_xml());
+BOOST_AUTO_TEST_CASE(all_builtins_dia_transforms_into_expected_yarn) {
+    SETUP_TEST_LOG("all_builtins_dia_transforms_into_expected_yarn");
+    const auto i(yarn_dia::expected_all_builtins_dia_xml());
+    const auto e(yarn_dia::expected_all_builtins_yarn_xml());
+    const auto a(yarn_dia::actual_all_builtins_yarn_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 

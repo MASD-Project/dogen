@@ -64,13 +64,13 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.csharp.types.primitive.postfix"
+      "qualified": "quilt.csharp.types.builtin.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.csharp",
       "facet": "quilt.csharp.types",
-      "archetype": "quilt.csharp.types.primitive"
+      "archetype": "quilt.csharp.types.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",
@@ -86,7 +86,7 @@
       "family": "quilt",
       "kernel": "quilt.csharp",
       "facet": "quilt.csharp.types",
-      "archetype": "quilt.csharp.exception.primitive"
+      "archetype": "quilt.csharp.exception.builtin"
     },
     "value_type": "text",
     "template_kind": "instance",
