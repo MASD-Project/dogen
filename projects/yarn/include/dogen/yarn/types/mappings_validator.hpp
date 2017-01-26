@@ -28,12 +28,18 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/mapping_value.hpp"
 #include "dogen/yarn/types/mapping.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class mappings_validator final {
+private:
+    void validate(const languages l, const mapping_value& mv) const;
+    void validate(const mapping& m) const;
+
 public:
     void validate(const std::unordered_map<std::string,
         std::list<mapping>>& mappings_by_set_name) const;
