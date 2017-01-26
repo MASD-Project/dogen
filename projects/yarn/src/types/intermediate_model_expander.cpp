@@ -25,6 +25,7 @@
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/enumeration_expander.hpp"
+#include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_validator.hpp"
@@ -49,6 +50,12 @@ bool intermediate_model_expander::are_languages_compatible(
 void intermediate_model_expander::
 expand_enumerations(intermediate_model& im) const {
     enumeration_expander ex;
+    ex.expand(im);
+}
+
+void intermediate_model_expander::
+expand_primitives(intermediate_model& im) const {
+    primitive_expander ex;
     ex.expand(im);
 }
 

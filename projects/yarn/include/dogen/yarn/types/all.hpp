@@ -103,6 +103,7 @@
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/mappings_validator.hpp"
+#include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"

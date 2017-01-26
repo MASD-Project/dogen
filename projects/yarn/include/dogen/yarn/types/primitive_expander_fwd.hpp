@@ -18,29 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_ENUMERATION_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_ENUMERATION_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_PRIMITIVE_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_PRIMITIVE_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-
 namespace dogen {
 namespace yarn {
 
-class enumeration_expander final {
-private:
-    std::string obtain_invalid_enumerator_name(const languages l) const;
-
-public:
-    /**
-     * @brief Expands all enumerations in model.
-     */
-    void expand(intermediate_model& im);
-};
+class primitive_expander;
 
 } }
 

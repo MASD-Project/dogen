@@ -55,6 +55,11 @@ private:
     void expand_enumerations(intermediate_model& im) const;
 
     /**
+     * @brief Expands all primitives.
+     */
+    void expand_primitives(intermediate_model& im) const;
+
+    /**
      * @brief Reads the model language from meta-data.
      */
     void expand_language(const annotations::type_repository& atrp,
