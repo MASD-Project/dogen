@@ -64,6 +64,7 @@ const std::string meta_type_object_value("object");
 const std::string meta_type_builtin_value("builtin");
 const std::string meta_type_module_value("module");
 const std::string meta_type_enumeration_value("enumeration");
+const std::string meta_type_primitive_value("primitive");
 const std::string meta_type_exception_value("exception");
 const std::string meta_type_concept_value("concept");
 
@@ -330,6 +331,16 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
 
         const auto pair(std::make_pair(n.id(), e));
         const bool inserted(im.enumerations().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+        }
+    } else if (meta_type_value == meta_type_primitive_value) {
+        yarn::primitive p;
+        lambda(p);
+
+        const auto pair(std::make_pair(n.id(), p));
+        const bool inserted(im.primitives().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
             BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));

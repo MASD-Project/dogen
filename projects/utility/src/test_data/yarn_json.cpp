@@ -70,6 +70,7 @@ path input_trivial_inheritance_json("yarn.json/input/trivial_inheritance.json");
 path input_trivial_association_json("yarn.json/input/trivial_association.json");
 path input_comments_json("yarn.json/input/comments.json");
 path input_enumeration_json("yarn.json/input/enumeration.json");
+path input_primitive_json("yarn.json/input/primitive.json");
 path input_exception_json("yarn.json/input/exception.json");
 path input_stereotypes_json("yarn.json/input/stereotypes.json");
 
@@ -214,6 +215,10 @@ path yarn_json::input_comments_json() {
 
 path yarn_json::input_enumeration_json() {
     return validating_resolver::resolve(::input_enumeration_json);
+}
+
+path yarn_json::input_primitive_json() {
+    return validating_resolver::resolve(::input_primitive_json);
 }
 
 path yarn_json::input_exception_json() {

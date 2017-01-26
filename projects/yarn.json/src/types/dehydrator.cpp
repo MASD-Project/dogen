@@ -49,10 +49,12 @@ std::string dehydrator::tidy_up_string(std::string s) const {
 
 bool dehydrator::has_elements(const intermediate_model& im) const {
     return
-        !im.objects().empty() ||
-        !im.builtins().empty() ||
+        !im.modules().empty() ||
+        !im.concepts().empty() ||
         !im.enumerations().empty() ||
-        !im.modules().empty();
+        !im.primitives().empty() ||
+        !im.objects().empty() ||
+        !im.exceptions().empty();
 }
 
 void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
@@ -341,13 +343,33 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
 }
 
 void dehydrator::
+dehydrate_primitives(const intermediate_model& im, std::ostream& s) const {
+    using boost::algorithm::join;
+    formatters::utility_formatter uf(s);
+
+    bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
+        im.modules().empty() || im.enumerations().empty());
+    const auto primitives(to_map(im.primitives()));
+    for (const auto& pair : primitives) {
+        if (output_comma)
+            s << comma_space;
+
+        const auto& o(pair.second);
+        s << " { ";
+        dehydrate_element(im, o, "primitive", s);
+        s << " }";
+        output_comma = true;
+    }
+}
+
+void dehydrator::
 dehydrate_exceptions(const intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
     bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
-        im.modules().empty() || im.modules().empty() ||
-        im.enumerations().empty());
+        im.modules().empty() || im.enumerations().empty() ||
+        im.primitives().empty());
     const auto exceptions(to_map(im.exceptions()));
     for (const auto& pair : exceptions) {
         if (output_comma)
@@ -398,6 +420,7 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
         dehydrate_concepts(im, s);
         dehydrate_modules(im, s);
         dehydrate_enumerations(im, s);
+        dehydrate_primitives(im, s);
         dehydrate_exceptions(im, s);
         s << " ]";
     }

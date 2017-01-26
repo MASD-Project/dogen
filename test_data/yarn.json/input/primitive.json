@@ -1,0 +1,29 @@
+{
+  "model_name": "primitive",
+  "external_modules": "dogen::test_models",
+  "documentation": "This model tests all primitives.\n",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "dummy_type"
+      },
+      "meta_type": "object",
+      "documentation": "Just to force some output for now.\n"
+    },
+    {
+      "name": {
+        "simple": "product_id"
+      },
+      "meta_type": "primitive",
+      "documentation": "Represents a unique identifier for a product.\n"
+    }
+  ]
+}

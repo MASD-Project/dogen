@@ -74,6 +74,7 @@ public:
     static boost::filesystem::path input_trivial_association_json();
     static boost::filesystem::path input_comments_json();
     static boost::filesystem::path input_enumeration_json();
+    static boost::filesystem::path input_primitive_json();
     static boost::filesystem::path input_exception_json();
     static boost::filesystem::path input_stereotypes_json();
 

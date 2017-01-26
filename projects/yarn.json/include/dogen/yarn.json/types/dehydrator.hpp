@@ -65,6 +65,8 @@ private:
     void dehydrate_modules(const intermediate_model& im, std::ostream& s) const;
     void dehydrate_enumerations(
         const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_primitives(
+        const intermediate_model& im, std::ostream& s) const;
     void dehydrate_exceptions(
         const intermediate_model& im, std::ostream& s) const;
 
