@@ -84,6 +84,7 @@ public:
     void operator()(const yarn::concept& c) { add(c); }
     void operator()(const yarn::builtin& b) { add(b); }
     void operator()(const yarn::enumeration& e) { add(e); }
+    void operator()(const yarn::primitive& p) { add(p); }
     void operator()(const yarn::object& o) { add(o); }
     void operator()(const yarn::exception& e) { add(e); }
     void operator()(const yarn::visitor& v) { add(v); }
@@ -112,6 +113,7 @@ transformer::compute_total_size(const intermediate_model& im) const {
     r += im.concepts().size();
     r += im.builtins().size();
     r += im.enumerations().size();
+    r += im.primitives().size();
     r += im.objects().size();
     r += im.exceptions().size();
     r += im.visitors().size();

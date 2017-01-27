@@ -27,5 +27,6 @@
 
 #include "dogen/test_models/primitive/types/primitive.hpp"
 #include "dogen/test_models/primitive/types/dummy_type.hpp"
+#include "dogen/test_models/primitive/types/product_id.hpp"
 
 #endif

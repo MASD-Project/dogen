@@ -83,6 +83,7 @@ public:
     void operator()(const yarn::builtin&) {}
     void operator()(const dogen::yarn::visitor& v) { process_element(v); }
     void operator()(const yarn::enumeration& e) { process_element(e); }
+    void operator()(const yarn::primitive& p) { process_element(p); }
     void operator()(const yarn::object& o) { process_element(o); }
     void operator()(const yarn::exception& e) { process_element(e); }
     void operator()(const yarn::module& m) { process_element(m); }

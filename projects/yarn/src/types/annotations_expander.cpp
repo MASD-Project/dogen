@@ -76,6 +76,7 @@ public:
     void operator()(yarn::concept& c) { update_scribble(c); }
     void operator()(yarn::builtin& b) { update_scribble(b); }
     void operator()(yarn::enumeration& e) { update_scribble(e); }
+    void operator()(yarn::primitive& p) { update_scribble(p); }
     void operator()(yarn::object& o) { update_scribble(o); }
     void operator()(yarn::exception& e) { update_scribble(e); }
     void operator()(yarn::visitor& v) { update_scribble(v); }
@@ -145,6 +146,7 @@ public:
     void operator()(yarn::concept& c) { update_extensible_and_stateful(c); }
     void operator()(yarn::builtin& b) { update_extensible(b); }
     void operator()(yarn::enumeration& e) { update_extensible(e); }
+    void operator()(yarn::primitive& p) { update_extensible(p); }
     void operator()(yarn::object& o) { update_extensible_and_stateful(o); }
     void operator()(yarn::exception& e) { update_extensible(e); }
     void operator()(yarn::visitor& v) { update_extensible(v); }

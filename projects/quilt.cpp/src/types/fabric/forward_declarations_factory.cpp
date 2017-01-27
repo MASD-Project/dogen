@@ -68,6 +68,10 @@ public:
         result_.push_back(fd);
     }
 
+    void operator()(const yarn::primitive& p) {
+        result_.push_back(create(p));
+    }
+
     void operator()(const yarn::object& o) {
         result_.push_back(create(o));
     }
