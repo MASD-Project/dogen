@@ -96,6 +96,38 @@
   {
     "name": {
       "simple": "postfix",
+      "qualified": "quilt.cpp.types.primitive_header.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.types",
+      "archetype": "quilt.cpp.types.primitive_header"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.types.primitive_implementation.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.types",
+      "archetype": "quilt.cpp.types.primitive_implementation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
       "qualified": "quilt.cpp.types.exception_header.postfix"
     },
     "archetype_location": {

@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::csharp::formatters::io #>
 <#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
-<#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/io/traits.hpp" #>
@@ -10,8 +10,8 @@
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/io/primitive_formatter.hpp" #>
 <#@ stitch.wale.template=csharp_formatter_implementation.wale #>
 <#@ stitch.wale.kvp.class.simple_name=primitive_formatter #>
-<#@ stitch.wale.kvp.archetype.simple_name=class #>
-<#@ stitch.wale.kvp.yarn_element=yarn::object #>
+<#@ stitch.wale.kvp.archetype.simple_name=primitive #>
+<#@ stitch.wale.kvp.yarn_element=yarn::primitive #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

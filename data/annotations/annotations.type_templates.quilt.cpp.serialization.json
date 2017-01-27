@@ -80,6 +80,38 @@
   {
     "name": {
       "simple": "postfix",
+      "qualified": "quilt.cpp.serialization.primitive_header.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.serialization",
+      "archetype": "quilt.cpp.serialization.primitive_header"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.serialization.primitive_implementation.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.serialization",
+      "archetype": "quilt.cpp.serialization.primitive_implementation"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
       "qualified": "quilt.cpp.serialization.registrar_header.postfix"
     },
     "archetype_location": {

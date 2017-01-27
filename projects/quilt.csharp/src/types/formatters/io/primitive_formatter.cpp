@@ -23,7 +23,7 @@
 #include "dogen/quilt.csharp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -34,7 +34,7 @@ namespace formatters {
 namespace io {
 
 std::string primitive_formatter::static_artefact() {
-    return traits::class_archetype();
+    return traits::primitive_archetype();
 }
 
 std::string primitive_formatter::formatter_name() const {
@@ -51,7 +51,7 @@ annotations::archetype_location primitive_formatter::archetype_location() const 
 }
 
 std::type_index primitive_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::object)));
+    static auto r(std::type_index(typeid(yarn::primitive)));
     return r;
 }
 
