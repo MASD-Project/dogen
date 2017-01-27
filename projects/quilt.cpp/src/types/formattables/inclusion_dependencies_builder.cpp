@@ -125,7 +125,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const auto& art_props(eprops.artefact_properties());
     const auto j(art_props.find(archetype));
     if (j == art_props.end()) {
-        BOOST_LOG_SEV(lg, debug) << archetype_not_found << archetype
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype
                                  << " element id: " << n.id();
         BOOST_THROW_EXCEPTION(
             building_error(archetype_not_found + archetype));

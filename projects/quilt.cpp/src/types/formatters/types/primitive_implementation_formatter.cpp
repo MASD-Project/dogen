@@ -96,9 +96,21 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 }
 
 dogen::formatters::artefact primitive_implementation_formatter::
-format(const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::artefact r;
-    return r;
-}
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
 
+    const auto sn(p.name().simple());
+    const auto qn(a.get_qualified_name(p.name()));
+    {
+
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+            const auto ns(a.make_namespaces(p.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+        } // snf
+    } // sbf
+    return a.make_artefact();
+}
 } } } } }

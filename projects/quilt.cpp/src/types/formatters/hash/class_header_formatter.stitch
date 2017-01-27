@@ -3,6 +3,7 @@
 <#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formattables/helper_properties.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>

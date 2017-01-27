@@ -24,7 +24,6 @@
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>

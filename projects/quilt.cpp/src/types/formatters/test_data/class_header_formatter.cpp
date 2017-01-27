@@ -25,6 +25,7 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 #include "dogen/formatters/types/sequence_formatter.hpp"

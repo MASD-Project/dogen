@@ -27,7 +27,7 @@
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
@@ -58,7 +58,7 @@ primitive_implementation_formatter::archetype_location() const {
 }
 
 std::type_index primitive_implementation_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::object)));
+    static auto r(std::type_index(typeid(yarn::primitive)));
     return r;
 }
 
@@ -87,20 +87,33 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
 
-    const auto& o(assistant::as<yarn::object>(static_artefact(), e));
+    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
-    builder.add(o.name(), traits::class_header_archetype());
+    builder.add(o.name(), traits::primitive_header_archetype());
 
-    const auto si(builder.make_special_includes(o));
-    if (si.has_path || si.has_std_string)
-        builder.add(inclusion_constants::std::sstream());
+    // const auto si(builder.make_special_includes(o));
+    // if (si.has_path || si.has_std_string)
+    //    builder.add(inclusion_constants::std::sstream());
 
     return builder.build();
 }
 
 dogen::formatters::artefact primitive_implementation_formatter::
-format(const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::artefact r;
-    return r;
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+
+    const auto sn(p.name().simple());
+    const auto qn(a.get_qualified_name(p.name()));
+    {
+
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+            const auto ns(a.make_namespaces(p.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+        } // snf
+    } // sbf
+    return a.make_artefact();
 }
 } } } } }
