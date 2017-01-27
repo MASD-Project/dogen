@@ -65,9 +65,19 @@ struct traits {
     static std::string enum_implementation_archetype();
 
     /**
-     * @brief Name of the built-in implementation archetype.
+     * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();
+
+    /**
+     * @brief Name of the built-in header archetype.
+     */
+    static std::string primitive_header_archetype();
+
+    /**
+     * @brief Name of the built-in implementation archetype.
+     */
+    static std::string primitive_implementation_archetype();
 };
 
 } } } } }

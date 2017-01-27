@@ -63,4 +63,14 @@ std::string traits::builtin_header_archetype() {
     return r;
 }
 
+std::string traits::primitive_header_archetype() {
+    static std::string r(traits::facet() + ".primitive_header");
+    return r;
+}
+
+std::string traits::primitive_implementation_archetype() {
+    static std::string r(traits::facet() + ".primitive_implementation");
+    return r;
+}
+
 } } } } }
