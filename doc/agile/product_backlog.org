@@ -3412,6 +3412,14 @@ At present we are always adding =#pragrma once= to the header guard:
 This should really be optional and controlled via dynamic extensions,
 probably at the c++ model level.
 
+*** Add support for eCore as a frontend                               :story:
+
+It would be nice to be able to read an eCore model and generate code
+from it. This would be particularly useful if we could generate java
+code. We would require a mapping layer of eCore types into LAM.
+
+- [[http://eclipsesource.com/blogs/tutorials/emf-tutorial/][What every Eclipse developer should know about EMF]]
+
 *** Add the the EMF purchase order examples to manual                 :story:
 
 We should make use of the examples for eCore and EMF or perhaps
