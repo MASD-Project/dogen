@@ -11,6 +11,24 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add support for "extensions"                                      :story:
+
+Until we have proper merging support, one feature which would be quite
+nice is to mark an element as "extensible"; that would automatically
+generate hpp/cpp/cs with an appropriate prefix
+(e.g. =TYPE_extensions=) so that the user can add "extension
+methods". In C# this would map to real extension methods, in C++ to
+just helper functions.
+
+Notes:
+
+- this could be a stereotype.
+- we could inject a type with the appropriate name, but then we need
+  to ensure it uses the handcrafted profile.
+- for extra bonus points: it would be nice if the extensions could be
+  made a class with access to private properties in the "extended"
+  object. This would allow us to encapsulate state.
+
 *** Add support for cross-language LAM serialisation                  :story:
 
 Now we have the basic support for LAM in place, it would be nice to be
@@ -63,6 +81,11 @@ ideas into stories and add them as we go along.
   resulting in warnings in the complete constructor (argument assigned
   to itself). A simple validation check is to error if a user add an
   attribute that starts with lower case in C#.
+- enumeration values should be valid according to its type. Basically
+  cast to int.
+- if =use_implementation_defined_underlier= is true then
+  =underlying_element= must be empty and vice-versa
+- primitive =underlying_element= must not be empty.
 - enumeration must have at least one enumerator. warning?
 - external module path of the model matches all objects, etc in
   current model.
@@ -3727,6 +3750,14 @@ a builder just like we do for visitor.
 
 See [[https://github.com/netty/netty/blob/master/example/src/main/java/io/netty/example/echo/EchoServer.java][this example]] (ServerBootstrap in particular).
 
+The slight problem though is that we would then require the builder to
+propagate down through all objects the object has attributes of (and
+their objects and so forth). So we'd have to create a lot of builders
+by just marking one type as buildable. Alternatively, it would be up
+to the user to mark those types individually and we just expect the
+user to give us a value for a given type (probably much more
+sensible).
+
 *** Consider using boost pointer container for formatters             :story:
 
 At present we are using a container of shared pointers to house the
@@ -4519,16 +4550,6 @@ Instead if this cleverness, users should be allowed to mark the
 concept itself as immutable/fluent and we should simply throw if there
 is an incompatibility between concept and object.
 
-*** Improve handling of defaulting for enumeration types              :story:
-
-At present we check for a built-in market as the default type for
-enumerations, and apply this type to all enumerations that have no
-underlying type. The problem is that if a user creates a type for
-built-in (or if we use =std::string= as a built-in type, say) we still
-require loading the built-in model to locate a default type. We should
-probably only locate this type once we have got the first enumeration
-that needs it.
-
 *** Create an interface for the text reader                           :story:
 
 In order to do performance testing of the dia model we should create
@@ -4890,17 +4911,6 @@ are abstract or implemented. We may be able to reuse the existing
 At present the visitor is named by dogen. There is nothing stopping us
 from allowing users to rename it via meta-data. We don't have a use
 case yet.
-
-*** Disable =invalid= value in enumerations                           :story:
-
-#+begin_quote
-*Story*: As a dogen user, I may not want to allow invalid values in
-enumerations because they do not model my problem domain accurately.
-#+end_quote
-
-At present all enumerations must have an invalid value. One can
-conceive cases where that is not a useful thing. We should have a
-dynamic extension flag that disables it.
 
 *** Move =invalid= value to a different value                         :story:
 
@@ -5716,22 +5726,6 @@ useful to make sure the source code matches the latest version of the
 diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
-
-*** Add support for configurable enumeration values                   :story:
-
-At present we generate the enumeration value as part of the
-transformation process in =yarn.dia=, based on the relative position
-of the enumerator. This is not ideal:
-
-- it won't work for JSON;
-- it does not allow users to supply their own values;
-- it does not allow users to disable enumeration values altogether and
-  rely on language defaults instead.
-
-We could:
-
-- add meta-data for users to supply their own values;
-- add meta-data to disable setting the enumerator value altogether.
 
 *** Add support for private and protected attributes                  :story:
 
