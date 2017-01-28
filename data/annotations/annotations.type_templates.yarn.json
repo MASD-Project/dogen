@@ -40,6 +40,69 @@
   },
   {
     "name": {
+      "simple": "use_implementation_defined_underlying_element",
+      "qualified": "yarn.enumeration.use_implementation_defined_underlying_element"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "underlying_element",
+      "qualified": "yarn.enumeration.underlying_element"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "use_implementation_defined_enumerator_values",
+      "qualified": "yarn.enumeration.use_implementation_defined_enumerator_values"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": false
+  },
+  {
+    "name": {
+      "simple": "add_invalid_enumerator",
+      "qualified": "yarn.enumeration.add_invalid_enumerator"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "value",
+      "qualified": "yarn.enumerator.value"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
       "simple": "is_final",
       "qualified": "yarn.generalization.is_final"
     },
