@@ -530,6 +530,9 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</enumerators>
+				<use_implementation_defined_underlying_element>0</use_implementation_defined_underlying_element>
+				<use_implementation_defined_enumerator_values>0</use_implementation_defined_enumerator_values>
+				<add_invalid_enumerator>0</add_invalid_enumerator>
 			</second>
 		</item>
 	</enumerations>

@@ -404,6 +404,9 @@
 						<value></value>
 					</item>
 				</enumerators>
+				<use_implementation_defined_underlying_element>0</use_implementation_defined_underlying_element>
+				<use_implementation_defined_enumerator_values>0</use_implementation_defined_enumerator_values>
+				<add_invalid_enumerator>0</add_invalid_enumerator>
 			</second>
 		</item>
 		<item>
@@ -608,6 +611,9 @@
 						<value></value>
 					</item>
 				</enumerators>
+				<use_implementation_defined_underlying_element>0</use_implementation_defined_underlying_element>
+				<use_implementation_defined_enumerator_values>0</use_implementation_defined_enumerator_values>
+				<add_invalid_enumerator>0</add_invalid_enumerator>
 			</second>
 		</item>
 		<item>
@@ -784,6 +790,9 @@ this is a long comment
 						<value></value>
 					</item>
 				</enumerators>
+				<use_implementation_defined_underlying_element>0</use_implementation_defined_underlying_element>
+				<use_implementation_defined_enumerator_values>0</use_implementation_defined_enumerator_values>
+				<add_invalid_enumerator>0</add_invalid_enumerator>
 			</second>
 		</item>
 	</enumerations>

@@ -86,6 +86,8 @@ ideas into stories and add them as we go along.
 - if =use_implementation_defined_underlier= is true then
   =underlying_element= must be empty and vice-versa
 - primitive =underlying_element= must not be empty.
+- if =use_implementation_defined_enumerator_values= is true then
+  enumerator's value must be empty.
 - enumeration must have at least one enumerator. warning?
 - external module path of the model matches all objects, etc in
   current model.

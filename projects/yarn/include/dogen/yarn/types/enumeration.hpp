@@ -42,9 +42,11 @@ namespace yarn {
  */
 class enumeration final : public dogen::yarn::element {
 public:
-    enumeration() = default;
     enumeration(const enumeration&) = default;
     enumeration(enumeration&&) = default;
+
+public:
+    enumeration();
 
     virtual ~enumeration() noexcept { }
 
@@ -59,7 +61,10 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const dogen::yarn::name& underlying_type,
-        const std::vector<dogen::yarn::enumerator>& enumerators);
+        const std::vector<dogen::yarn::enumerator>& enumerators,
+        const bool use_implementation_defined_underlying_element,
+        const bool use_implementation_defined_enumerator_values,
+        const bool add_invalid_enumerator);
 
 private:
     template<typename Archive>
@@ -99,6 +104,30 @@ public:
     void enumerators(const std::vector<dogen::yarn::enumerator>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, we will use the implementation specific default enumeration type.
+     */
+    /**@{*/
+    bool use_implementation_defined_underlying_element() const;
+    void use_implementation_defined_underlying_element(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, we will rely on compiler generated enumeration values.
+     */
+    /**@{*/
+    bool use_implementation_defined_enumerator_values() const;
+    void use_implementation_defined_enumerator_values(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, an enumerator for "invalid" will be added.
+     */
+    /**@{*/
+    bool add_invalid_enumerator() const;
+    void add_invalid_enumerator(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const enumeration& rhs) const;
     bool operator!=(const enumeration& rhs) const {
@@ -115,6 +144,9 @@ public:
 private:
     dogen::yarn::name underlying_type_;
     std::vector<dogen::yarn::enumerator> enumerators_;
+    bool use_implementation_defined_underlying_element_;
+    bool use_implementation_defined_enumerator_values_;
+    bool add_invalid_enumerator_;
 };
 
 } }

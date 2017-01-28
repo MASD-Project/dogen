@@ -13,41 +13,43 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-28 Sat 17:12]
+#+CAPTION: Clock summary at [2017-01-28 Sat 19:08]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *74:52* |       |       | 100.0 |
+| *Total time*                                                                | *76:44* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 74:52   |       |       | 100.0 |
-| Active                                                                      |         | 74:52 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  4:09 |   5.5 |
+| Stories                                                                     | 76:44   |       |       | 100.0 |
+| Active                                                                      |         | 76:44 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  4:21 |   5.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   0.8 |
 | COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.1 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  13.8 |
-| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   1.8 |
-| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   2.0 |
-| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.4 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  13.4 |
+| COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   1.7 |
+| COMPLETED Bind language to kernel                                           |         |       |  1:29 |   1.9 |
+| COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.3 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.5 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  18.0 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.4 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  17.5 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.2 |
 | COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.1 |
-| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   1.8 |
-| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.4 |
+| COMPLETED Add log-level to command line                                     |         |       |  1:20 |   1.7 |
+| COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.3 |
 | COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   1.4 |
-| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.4 |
-| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.3 |
+| COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.3 |
+| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.2 |
 | COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   2.0 |
-| COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   3.1 |
-| STARTED Create a new yarn type for primitives                               |         |       |  9:16 |  12.4 |
-| STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   2.6 |
+| COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   3.0 |
+| STARTED Create a new yarn type for primitives                               |         |       |  9:19 |  12.1 |
+| STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   2.5 |
 | STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.0 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   9.2 |
-| STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   4.1 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   9.0 |
+| STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   4.0 |
+| STARTED Add support for configurable enumerations types                     |         |       |  1:37 |   2.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-28 Sat 17:17]--[2017-01-28 Sat 17:29] =>  0:12
     CLOCK: [2017-01-28 Sat 15:30]--[2017-01-28 Sat 15:39] =>  0:09
     CLOCK: [2017-01-28 Sat 14:31]--[2017-01-28 Sat 15:29] =>  0:58
     CLOCK: [2017-01-26 Thu 15:16]--[2017-01-26 Thu 15:28] =>  0:12
@@ -609,7 +611,22 @@ cpp. However, in reality the world looks more like this:
   =backends::cpp= and so on. For instance, the language specific stuff
   now in =formatters= should move here.
 
+*** CANCELLED Improve handling of defaulting for enumeration types    :story:
+    CLOSED: [2017-01-28 Sat 17:58]
+
+*Rationale*: this is a premature optimisation. The built-in model is
+tiny, and we should always load it anyway.
+
+At present we check for a built-in market as the default type for
+enumerations, and apply this type to all enumerations that have no
+underlying type. The problem is that if a user creates a type for
+built-in (or if we use =std::string= as a built-in type, say) we still
+require loading the built-in model to locate a default type. We should
+probably only locate this type once we have got the first enumeration
+that needs it.
+
 *** STARTED Create a new yarn type for primitives                     :story:
+    CLOCK: [2017-01-28 Sat 17:13]--[2017-01-28 Sat 17:16] =>  0:03
     CLOCK: [2017-01-28 Sat 16:02]--[2017-01-28 Sat 17:12] =>  1:10
     CLOCK: [2017-01-27 Fri 13:26]--[2017-01-27 Fri 14:16] =>  0:50
     CLOCK: [2017-01-27 Fri 12:11]--[2017-01-27 Fri 12:14] =>  0:03
@@ -868,6 +885,71 @@ Another alternative is to apply hard-coded regexes:
 
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
+
+*** STARTED Add support for configurable enumerations types           :story:
+    CLOCK: [2017-01-28 Sat 18:53]--[2017-01-28 Sat 19:08] =>  0:15
+    CLOCK: [2017-01-28 Sat 17:30]--[2017-01-28 Sat 18:52] =>  1:22
+
+#+begin_quote
+*Story*: As a dogen user, I need to configure the built-in type of my
+enumerations so that I model my domain accurately.
+#+end_quote
+
+We've updated the =builtins= model with a "default enumeration value"
+field. This allows us to dynamically determine which built-in to use
+as the type of enumerations. However:
+
+- we didn't follow it through in the formatters; we are hard-coding
+  this at present in C++. In a cross-language world, we should
+  dynamically detect the default enumeration type. This is not quite
+  as trivial as it seems (what would happen if we loaded multiple
+  programming languages?). Supporting this properly may require adding
+  a programming language to the model.
+- it is not possible to override this from JSON/Dia. We could do this
+  by supplying a type via dynamic extensions.
+
+Tasks:
+
+- add meta-data parameter to enumeration expander
+- add resolver support to resolve name
+- add meta-data flag for using language default type
+
+*** Validate enum types                                               :story:
+
+The following are the valid types for enumerations:
+
+- C#: byte, sbyte, short, ushort, int, uint, long, or ulong.
+- C++: int, unsigned int, long, unsigned long, long long, or unsigned long long
+
+We need to populate =can_be_enumeration_underlier= and add these types
+to the indices. We then need to update the validator to check the user
+has selected a valid underlying type.
+
+*** Add support for configurable enumeration values                   :story:
+
+At present we generate the enumeration value as part of the
+transformation process in =yarn.dia=, based on the relative position
+of the enumerator. This is not ideal:
+
+- it does not allow users to supply their own values;
+- it does not allow users to disable enumeration values altogether and
+  rely on language defaults instead.
+
+We could:
+
+- add meta-data for users to supply their own values;
+- add meta-data to disable setting the enumerator value altogether.
+
+*** Allow disabling =invalid= value in enumerations                   :story:
+
+#+begin_quote
+*Story*: As a dogen user, I may not want to allow invalid values in
+enumerations because they do not model my problem domain accurately.
+#+end_quote
+
+At present all enumerations must have an invalid value. One can
+conceive cases where that is not a useful thing. We should have a
+dynamic extension flag that disables it.
 
 *** Merge both yarn model validators                                  :story:
 

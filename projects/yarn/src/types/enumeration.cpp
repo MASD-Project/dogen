@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
@@ -42,6 +43,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::yarn::
 namespace dogen {
 namespace yarn {
 
+enumeration::enumeration()
+    : use_implementation_defined_underlying_element_(static_cast<bool>(0)),
+      use_implementation_defined_enumerator_values_(static_cast<bool>(0)),
+      add_invalid_enumerator_(static_cast<bool>(0)) { }
+
 enumeration::enumeration(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
@@ -52,7 +58,10 @@ enumeration::enumeration(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const dogen::yarn::name& underlying_type,
-    const std::vector<dogen::yarn::enumerator>& enumerators)
+    const std::vector<dogen::yarn::enumerator>& enumerators,
+    const bool use_implementation_defined_underlying_element,
+    const bool use_implementation_defined_enumerator_values,
+    const bool add_invalid_enumerator)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -63,7 +72,10 @@ enumeration::enumeration(
       stereotypes,
       is_element_extension),
       underlying_type_(underlying_type),
-      enumerators_(enumerators) { }
+      enumerators_(enumerators),
+      use_implementation_defined_underlying_element_(use_implementation_defined_underlying_element),
+      use_implementation_defined_enumerator_values_(use_implementation_defined_enumerator_values),
+      add_invalid_enumerator_(add_invalid_enumerator) { }
 
 void enumeration::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -82,13 +94,22 @@ void enumeration::accept(element_visitor& v) {
 }
 
 void enumeration::to_stream(std::ostream& s) const {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::enumeration\"" << ", "
       << "\"__parent_0__\": ";
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"underlying_type\": " << underlying_type_ << ", "
-      << "\"enumerators\": " << enumerators_
+      << "\"enumerators\": " << enumerators_ << ", "
+      << "\"use_implementation_defined_underlying_element\": " << use_implementation_defined_underlying_element_ << ", "
+      << "\"use_implementation_defined_enumerator_values\": " << use_implementation_defined_enumerator_values_ << ", "
+      << "\"add_invalid_enumerator\": " << add_invalid_enumerator_
       << " }";
 }
 
@@ -98,6 +119,9 @@ void enumeration::swap(enumeration& other) noexcept {
     using std::swap;
     swap(underlying_type_, other.underlying_type_);
     swap(enumerators_, other.enumerators_);
+    swap(use_implementation_defined_underlying_element_, other.use_implementation_defined_underlying_element_);
+    swap(use_implementation_defined_enumerator_values_, other.use_implementation_defined_enumerator_values_);
+    swap(add_invalid_enumerator_, other.add_invalid_enumerator_);
 }
 
 bool enumeration::equals(const dogen::yarn::element& other) const {
@@ -109,7 +133,10 @@ bool enumeration::equals(const dogen::yarn::element& other) const {
 bool enumeration::operator==(const enumeration& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         underlying_type_ == rhs.underlying_type_ &&
-        enumerators_ == rhs.enumerators_;
+        enumerators_ == rhs.enumerators_ &&
+        use_implementation_defined_underlying_element_ == rhs.use_implementation_defined_underlying_element_ &&
+        use_implementation_defined_enumerator_values_ == rhs.use_implementation_defined_enumerator_values_ &&
+        add_invalid_enumerator_ == rhs.add_invalid_enumerator_;
 }
 
 enumeration& enumeration::operator=(enumeration other) {
@@ -148,6 +175,30 @@ void enumeration::enumerators(const std::vector<dogen::yarn::enumerator>& v) {
 
 void enumeration::enumerators(const std::vector<dogen::yarn::enumerator>&& v) {
     enumerators_ = std::move(v);
+}
+
+bool enumeration::use_implementation_defined_underlying_element() const {
+    return use_implementation_defined_underlying_element_;
+}
+
+void enumeration::use_implementation_defined_underlying_element(const bool v) {
+    use_implementation_defined_underlying_element_ = v;
+}
+
+bool enumeration::use_implementation_defined_enumerator_values() const {
+    return use_implementation_defined_enumerator_values_;
+}
+
+void enumeration::use_implementation_defined_enumerator_values(const bool v) {
+    use_implementation_defined_enumerator_values_ = v;
+}
+
+bool enumeration::add_invalid_enumerator() const {
+    return add_invalid_enumerator_;
+}
+
+void enumeration::add_invalid_enumerator(const bool v) {
+    add_invalid_enumerator_ = v;
 }
 
 } }

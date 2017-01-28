@@ -48,6 +48,9 @@ void save(Archive& ar,
 
     ar << make_nvp("underlying_type", v.underlying_type_);
     ar << make_nvp("enumerators", v.enumerators_);
+    ar << make_nvp("use_implementation_defined_underlying_element", v.use_implementation_defined_underlying_element_);
+    ar << make_nvp("use_implementation_defined_enumerator_values", v.use_implementation_defined_enumerator_values_);
+    ar << make_nvp("add_invalid_enumerator", v.add_invalid_enumerator_);
 }
 
 template<typename Archive>
@@ -58,6 +61,9 @@ void load(Archive& ar,
 
     ar >> make_nvp("underlying_type", v.underlying_type_);
     ar >> make_nvp("enumerators", v.enumerators_);
+    ar >> make_nvp("use_implementation_defined_underlying_element", v.use_implementation_defined_underlying_element_);
+    ar >> make_nvp("use_implementation_defined_enumerator_values", v.use_implementation_defined_enumerator_values_);
+    ar >> make_nvp("add_invalid_enumerator", v.add_invalid_enumerator_);
 }
 
 } }
