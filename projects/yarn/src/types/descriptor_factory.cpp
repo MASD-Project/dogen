@@ -46,7 +46,7 @@ std::ostream&
 operator<<(std::ostream& s, const descriptor_factory::type_group& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
+      << "\"__type__\": " << "\"dogen::yarn::"
       << "descriptor_factory::type_group\"" << ", "
       << "\"references\": " << v.reference
       << " }";
@@ -61,6 +61,8 @@ make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
     const annotations::type_repository_selector s(atrp);
     r.reference = s.select_type_by_name(traits::reference());
+
+    BOOST_LOG_SEV(lg, debug) << "Created type group. Result: " << r;
     return r;
 }
 

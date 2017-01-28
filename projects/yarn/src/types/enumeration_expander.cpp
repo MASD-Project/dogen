@@ -22,10 +22,14 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/enumeration_expander.hpp"
 
 namespace {
@@ -47,6 +51,114 @@ const std::string missing_default(
 
 namespace dogen {
 namespace yarn {
+
+std::ostream&
+operator<<(std::ostream& s,
+    const enumeration_expander::enumeration_type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::"
+      << "enumeration_expander::enumeration_type_group\"" << ", "
+      << "\"use_implementation_defined_underlying_element\": "
+      << v.use_implementation_defined_underlying_element << ", "
+      << "\"underlying_element\": " << v.underlying_element << ", "
+      << "\"use_implementation_defined_enumerator_values\": "
+      << v.use_implementation_defined_enumerator_values << ", "
+      << "\"add_invalid_enumerator\": " << v.add_invalid_enumerator
+      << " }";
+
+    return s;
+}
+
+std::ostream&
+operator<<(std::ostream& s,
+    const enumeration_expander::enumerator_type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::"
+      << "enumeration_expander::enumerator_type_group\"" << ", "
+      << "\"value\": " << v.value
+      << " }";
+
+    return s;
+}
+
+std::ostream&
+operator<<(std::ostream& s, const enumeration_expander::type_group& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::enumeration_expander::"
+      << "type_group\"" << ", "
+      << "\"enumeration\": " << v.enumeration << ", "
+      << "\"enumerator\": " << v.enumerator
+      << " }";
+
+    return s;
+}
+
+enumeration_expander::enumeration_type_group enumeration_expander::
+make_enumeration_type_group(const annotations::type_repository& atrp) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating enumeration type group.";
+
+    enumeration_type_group r;
+    const annotations::type_repository_selector s(atrp);
+
+    using en = traits::enumeration;
+    const auto uidue(en::use_implementation_defined_underlying_element());
+    r.use_implementation_defined_underlying_element =
+        s.select_type_by_name(uidue);
+
+    const auto ue(en::underlying_element());
+    r.underlying_element = s.select_type_by_name(ue);
+
+    const auto uidev(en::use_implementation_defined_enumerator_values());
+    r.use_implementation_defined_enumerator_values =
+        s.select_type_by_name(uidev);
+
+    const auto aie(en::add_invalid_enumerator());
+    r.add_invalid_enumerator = s.select_type_by_name(aie);
+
+    BOOST_LOG_SEV(lg, debug) << "Created enumeration type group.";
+    return r;
+}
+
+enumeration_expander::enumerator_type_group enumeration_expander::
+make_enumerator_type_group(const annotations::type_repository& atrp) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating enumerator type group.";
+
+    enumerator_type_group r;
+    const annotations::type_repository_selector s(atrp);
+    r.value = s.select_type_by_name(traits::enumerator::value());
+
+    BOOST_LOG_SEV(lg, debug) << "Created enumerator type group.";
+    return r;
+}
+
+enumeration_expander::type_group enumeration_expander::
+make_type_group(const annotations::type_repository& atrp) const {
+    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
+
+    type_group r;
+    r.enumeration = make_enumeration_type_group(atrp);
+    r.enumerator = make_enumerator_type_group(atrp);
+
+    BOOST_LOG_SEV(lg, debug) << "Created type group. Result" << r;
+    return r;
+}
+
+void enumeration_expander::populate_from_annotations(
+    const enumeration_type_group& tg, enumeration& e) const {
+
+    const auto& a(e.annotation());
+    const annotations::entry_selector s(a);
+    const auto uidue(tg.use_implementation_defined_underlying_element);
+    e.use_implementation_defined_underlying_element(
+        s.get_boolean_content_or_default(uidue));
+}
+
+void enumeration_expander::populate_from_annotations(
+    const enumerator_type_group& /*tg*/, enumerator& /*e*/) const {
+}
 
 name enumeration_expander::obtain_enumeration_default_underlying_element_name(
     const intermediate_model& im) const {
@@ -157,7 +269,8 @@ expand_enumerators(const languages l, enumeration& e) const {
     e.enumerators(enumerators);
 }
 
-void enumeration_expander::expand(intermediate_model& im) {
+void enumeration_expander::
+expand(const annotations::type_repository& atrp, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expanding enumerations for model: "
                              << im.name().id();
 
@@ -171,6 +284,7 @@ void enumeration_expander::expand(intermediate_model& im) {
         return;
 
     const auto l(im.input_language());
+    const auto tg(make_type_group(atrp));
     const auto duen(obtain_enumeration_default_underlying_element_name(im));
 
     for (auto& pair : im.enumerations()) {
@@ -178,6 +292,7 @@ void enumeration_expander::expand(intermediate_model& im) {
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
         auto& e(pair.second);
+        populate_from_annotations(tg.enumeration, e);
         expand_default_underlying_element(duen, e);
         expand_enumerators(l, e);
     }

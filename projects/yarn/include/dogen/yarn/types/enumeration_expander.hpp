@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -32,6 +35,42 @@ namespace dogen {
 namespace yarn {
 
 class enumeration_expander final {
+private:
+    struct enumeration_type_group {
+        annotations::type use_implementation_defined_underlying_element;
+        annotations::type underlying_element;
+        annotations::type use_implementation_defined_enumerator_values;
+        annotations::type add_invalid_enumerator;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const enumeration_type_group& v);
+
+    struct enumerator_type_group {
+        annotations::type value;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const enumerator_type_group& v);
+
+    struct type_group {
+        enumeration_type_group enumeration;
+        enumerator_type_group enumerator;
+    };
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    enumeration_type_group make_enumeration_type_group(
+        const annotations::type_repository& atrp) const;
+
+    enumerator_type_group make_enumerator_type_group(
+        const annotations::type_repository& atrp) const;
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+private:
+    void populate_from_annotations(const enumeration_type_group& tg,
+        enumeration& e) const;
+    void populate_from_annotations(const enumerator_type_group& tg,
+        enumerator& e) const;
+
 private:
     name obtain_enumeration_default_underlying_element_name(
         const intermediate_model& im) const;
@@ -47,7 +86,8 @@ public:
     /**
      * @brief Expands all enumerations in model.
      */
-    void expand(intermediate_model& im);
+    void expand(const annotations::type_repository& atrp,
+        intermediate_model& im);
 };
 
 } }

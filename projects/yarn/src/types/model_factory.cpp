@@ -102,9 +102,11 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
     return r;
 }
 
-void model_factory::expand_enumerations(intermediate_model& im) const {
+void model_factory::
+expand_enumerations(const annotations::type_repository& atrp,
+    intermediate_model& im) const {
     enumeration_expander ex;
-    ex.expand(im);
+    ex.expand(atrp, im);
 }
 
 void model_factory::create_indices(intermediate_model& im) const {
@@ -188,7 +190,7 @@ model model_factory::make(const annotations::type_repository& atrp,
      * Enumeration expansion must be done after merging as we need the
      * built-in types.
      */
-    expand_enumerations(im);
+    expand_enumerations(atrp, im);
 
     /*
      * Create all indices first as its needed by generalisation. Note

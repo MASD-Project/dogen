@@ -65,7 +65,8 @@ private:
     /**
      * @brief Expands all enumerations.
      */
-    void expand_enumerations(intermediate_model& im) const;
+    void expand_enumerations(const annotations::type_repository& atrp,
+        intermediate_model& im) const;
 
     /**
      * @brief Create indices.

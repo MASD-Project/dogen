@@ -68,4 +68,33 @@ std::string traits::generalization::parent() {
     return r;
 }
 
+std::string traits::enumeration::
+use_implementation_defined_underlying_element() {
+    static std::string r(
+        "yarn.enumeration.use_implementation_defined_underlying_element");
+    return r;
+}
+
+std::string traits::enumeration::underlying_element() {
+    static std::string r("yarn.enumeration.underlying_element");
+    return r;
+}
+
+std::string traits::enumeration::
+use_implementation_defined_enumerator_values() {
+    static std::string r(
+        "yarn.enumeration.use_implementation_defined_enumerator_values");
+    return r;
+}
+
+std::string traits::enumeration::add_invalid_enumerator() {
+    static std::string r("yarn.enumeration.add_invalid_enumerator");
+    return r;
+}
+
+std::string traits::enumerator::value() {
+    static std::string r("yarn.enumerator.value");
+    return r;
+}
+
 } }
