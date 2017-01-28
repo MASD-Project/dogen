@@ -8500,13 +8500,14 @@ not yet allocated a term.
 | Term   | Meaning | Dogen usage                                               |
 |--------+---------+-----------------------------------------------------------|
 | weave  |         | Reserved for AOP support?                                 |
-| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Will be used for the skeleton generator tool.             |
+| [[https://en.wikipedia.org/wiki/Glossary_of_sewing_terms#D][dart]]   |         | Skeleton generator tool.                                  |
 | [[https://en.wikipedia.org/wiki/Yoke_(clothing)][yoke]]   |         |                                                           |
 | tailor |         | Format converter. e.g. Dia to JSON, etc.                  |
 | jersey |         | Code generation service.                                  |
 | hem    |         | HTTP Wrapper around jersey.                               |
 | twine  |         | Tool to infer model from XML/JSON/CSV instance documents. |
 |        |         | Tool to infer model from SQL database schemas.            |
+| pleat  |         |                                                           |
 
 *** Feature toggles and code generation                               :story:
 
