@@ -33,7 +33,15 @@ namespace yarn {
 
 class enumeration_expander final {
 private:
-    std::string obtain_invalid_enumerator_name(const languages l) const;
+    name obtain_enumeration_default_underlying_element_name(
+        const intermediate_model& im) const;
+    std::string obtain_invalid_enumerator_simple_name(const languages l) const;
+    enumerator make_invalid_enumerator(
+        const name& n, const languages l) const;
+
+    void expand_default_underlying_element(
+        const name& default_underlying_element_name, enumeration& e);
+    void expand_enumerators(const languages l, enumeration& e) const;
 
 public:
     /**

@@ -55,11 +55,6 @@ private:
 
 private:
     /**
-     * @brief Returns the default enumeration type.
-     */
-    name obtain_default_enumeration_type(const intermediate_model& im) const;
-
-    /**
      * @brief Returns true if the name is in the model and can be
      * referred to from an attribute, false otherwise.
      */

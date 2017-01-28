@@ -50,11 +50,6 @@ private:
 
 private:
     /**
-     * @brief Expands all enumerations.
-     */
-    void expand_enumerations(intermediate_model& im) const;
-
-    /**
      * @brief Expands all primitives.
      */
     void expand_primitives(intermediate_model& im) const;

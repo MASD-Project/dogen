@@ -10,8 +10,8 @@ std::ostream& operator<<(std::ostream& s, const SomeEnum& v) {
 
     std::string attr;
     switch (v) {
-    case SomeEnum::Invalid:
-        attr = "\"Invalid\"";
+    case SomeEnum::invalid:
+        attr = "\"invalid\"";
         break;
     default:
         throw std::invalid_argument("Invalid value for SomeEnum");

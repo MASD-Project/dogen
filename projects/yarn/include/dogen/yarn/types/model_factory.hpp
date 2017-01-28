@@ -63,6 +63,11 @@ private:
     merge_intermediate_models(const std::list<intermediate_model>& ims) const;
 
     /**
+     * @brief Expands all enumerations.
+     */
+    void expand_enumerations(intermediate_model& im) const;
+
+    /**
      * @brief Create indices.
      */
     void create_indices(intermediate_model& im) const;

@@ -24,7 +24,6 @@
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
 #include "dogen/yarn/types/language_expander.hpp"
-#include "dogen/yarn/types/enumeration_expander.hpp"
 #include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
@@ -45,12 +44,6 @@ bool intermediate_model_expander::are_languages_compatible(
     const languages lhs, const languages rhs) const {
 
     return lhs == rhs;
-}
-
-void intermediate_model_expander::
-expand_enumerations(intermediate_model& im) const {
-    enumeration_expander ex;
-    ex.expand(im);
 }
 
 void intermediate_model_expander::
@@ -110,16 +103,20 @@ expand(const annotations::annotation_groups_factory& agf,
      * before being copied over.
      */
     expand_annotations(agf, im);
+
+    /*
+     * Module expansion must be done before origin and language
+     * expansion to get these properties populated on the new
+     * modules.
+     */
     expand_modules(im);
     expand_origin(atrp, im);
     expand_language(atrp, im);
 
     /*
-     * Enumeration expansion must be done after language expansion as
-     * we do some language-specific processing.
+     * There are no particular dependencies on the remaining
+     * expansions.
      */
-    expand_enumerations(im);
-
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
 
@@ -168,13 +165,6 @@ expand_if_compatible(const annotations::annotation_groups_factory& agf,
     }
 
     expand_origin(atrp, im);
-
-    /*
-     * Enumeration expansion must be done after language expansion as
-     * we do some language-specific processing.
-     */
-    expand_enumerations(im);
-
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
 

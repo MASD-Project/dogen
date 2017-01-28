@@ -48,12 +48,8 @@ const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
 const std::string undefined_type("Object has attribute with undefined type: ");
-const std::string too_many_defaults(
-    "Model has more than one default enumeration: ");
-const std::string missing_default(
-    "Model does not have a default enumeration type: ");
-const std::string invalid_default(
-    "Model has a default enumeration type that cannot be found: ");
+const std::string invalid_underlying_type(
+    "Could not find enumeration's underlying type: ");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
@@ -103,35 +99,6 @@ bool resolver:: is_concept(const intermediate_model& im, const name& n) const {
         return true;
     }
     return false;
-}
-
-name resolver::
-obtain_default_enumeration_type(const intermediate_model& im) const {
-    name r;
-    bool found(false);
-    for (const auto& pair : im.builtins()) {
-        const auto p(pair.second);
-        if (p.is_default_enumeration_type()) {
-            BOOST_LOG_SEV(lg, debug) << "Found default enumeration name type:"
-                                     << p.name().id();
-
-            if (found) {
-                BOOST_LOG_SEV(lg, error) << too_many_defaults
-                                         << p.name().id();
-                BOOST_THROW_EXCEPTION(
-                    resolution_error(too_many_defaults + p.name().id()));
-            }
-            found = true;
-            r = p.name();
-        }
-    }
-
-    if (!found) {
-        BOOST_LOG_SEV(lg, error) << missing_default;
-        BOOST_THROW_EXCEPTION(resolution_error(missing_default));
-    }
-
-    return r;
 }
 
 bool resolver::is_name_referable(const indices& idx, const name& n) const {
@@ -359,31 +326,26 @@ resolve_objects(intermediate_model& im) const {
 void resolver::resolve_enumerations(intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Enumerations: " << im.enumerations().size();
 
-    /*
-     * If no enumerations exist, we can just exit. This means we can
-     * still support models that have no dependencies, provided they
-     * do not use enumerations.
-     */
-    if (im.enumerations().empty())
-        return;
-
-    const auto det(obtain_default_enumeration_type(im));
     for (auto& pair : im.enumerations()) {
         auto& e(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << e.name().id();
 
-        const auto ut(e.underlying_type());
-        BOOST_LOG_SEV(lg, debug) << "Underlying type: " << ut;
+        /*
+         * If we're not relying on the underlying element, we don't
+         * need to worry about resolving it.
+         */
+        if (e.use_implementation_defined_underlying_element())
+            continue;
 
-        if (ut.simple().empty()) {
-            BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
-                                     << det.id();
-            e.underlying_type(det);
-        } else if (!is_builtin(im, ut)) {
-            BOOST_LOG_SEV(lg, error) << invalid_default << ut.id();
-            BOOST_THROW_EXCEPTION(resolution_error(
-                    invalid_default + ut.id()));
+        const auto ut(e.underlying_type());
+        const auto id(ut.id());
+        BOOST_LOG_SEV(lg, debug) << "Underlying type: '" << id << "'";
+
+        if (!is_builtin(im, ut)) {
+            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << id;
+            BOOST_THROW_EXCEPTION(
+                resolution_error(invalid_underlying_type + id));
         }
     }
 }

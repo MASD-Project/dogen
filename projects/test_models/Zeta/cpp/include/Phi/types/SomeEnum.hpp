@@ -11,7 +11,7 @@ namespace Phi {
  * @brief Represents an enum
  */
 enum class SomeEnum : unsigned int {
-    Invalid = 0 ///< Represents an uninitialised enum
+    invalid = 0 ///< Represents an uninitialised enum
 };
 
 }

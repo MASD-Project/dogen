@@ -26,6 +26,7 @@
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
+#include "dogen/yarn/types/enumeration_expander.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 #include "dogen/yarn/types/containment_expander.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
@@ -99,6 +100,11 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
                              << " enumerations: " << r.enumerations().size()
                              << " builtins: " << r.builtins().size();
     return r;
+}
+
+void model_factory::expand_enumerations(intermediate_model& im) const {
+    enumeration_expander ex;
+    ex.expand(im);
 }
 
 void model_factory::create_indices(intermediate_model& im) const {
@@ -177,6 +183,12 @@ model model_factory::make(const annotations::type_repository& atrp,
      * merged model.
      */
     auto im(merge_intermediate_models(ims));
+
+    /*
+     * Enumeration expansion must be done after merging as we need the
+     * built-in types.
+     */
+    expand_enumerations(im);
 
     /*
      * Create all indices first as its needed by generalisation. Note
