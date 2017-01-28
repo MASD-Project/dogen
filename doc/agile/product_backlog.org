@@ -6870,110 +6870,7 @@ trim down the obvious ones:
 Basically any feature which we are not using at present and cannot
 think of an obvious use case.
 
-*** Thoughts around multi-kernel support                               :epic:
-
-Dogen only has a single backend kernel: quilt. This story looks into
-how the world looks like if we want to support multiple of these.
-
-*More recent ideas on this space*
-
-- it may be possible for simpler languages to have an outputting model
-  that has only formatters and uses yarn directly. For example for C#
-  and Java it is likely we could get away with a simple utility layer.
-- this implies that we may either end up with outputting models that
-  are nothing but just stitch templates.
-- this being the case, we could perhaps have two kernels: the cpp
-  kernel (quilt) which requires lots of hand-crafting to generate the
-  output and this more generic kernel which is just formatters per
-  language (pleat?). Quilt/cpp kernel could also be transformed into a
-  C/cpp/glib kernel, where the services we have at present for C++ are
-  shared between these different languages (they all need includes,
-  etc). Other languages may also have similar requirements (D?).
-
-*Previous notes, slightly bit-rotted*
-
-At present we have hard-coded knit to support a single C++ model,
-cpp. However, in reality the world looks more like this:
-
-- there are "groups of models" that have models that target specific
-  languages. We need to give a name to the "default" model group in
-  dogen. We should choose something from the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][sewing terms]]; for now
-  lets call it =quilt=. =quilt= contains a number of languages such as
-  =cpp=. A user can only generate one model group at a time. Users can
-  generate one or more languages within a group (depending on what the
-  group supports).
-- we should have a top-level folder to house all model groups:
-  =backends=. The existing =backend= model becomes =backends::core=.
-- there may be facilities that are language specific, shared by model
-  groups. These can be housed in language specific folders:
-  =backends::cpp= and so on. For instance, the language specific stuff
-  now in =formatters= should move here.
-- different groups may express yarn models differently; almost by
-  definition, they will, or else there is little purpose in having
-  multiple groups. For example, one can imagine a model group (say
-  =pleat=) which expresses [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#add-support-for-language-agnostic-models-lam][LAM]] as a model that is identical on every
-  supported language, ignoring native types; that is, expresses LAM as
-  a LAM model. However, =quilt= would still express LAM as a mapping
-  between generic LAM types and concrete native types (e.g. LAM
-  dictionary is a C++ unordered map). A good candidate for =pleat=
-  would be [[http://www.eclipse.org/modeling/emf/][eCore]].
-- if one was to try to generate code that is identical to =protobuf=,
-  the xsd tool, =odb=, etc one would generate model groups for these.
-- we may need multiple "needles" for each model group. For example,
-  the supporting libraries for =quilt= may be (and almost certainly,
-  will be) totally different than that of those in =pleat=. And of
-  course, needle would have different expressions in each programming
-  language. So perhaps needle is more of a concept than a physical
-  thing. We should rename it to something meaningful that represents
-  "a library with supporting code for a given model group". However,
-  it does make sense to have a top-level folder to house all of the
-  supporting libraries, so maybe needle does exist physically as the
-  namespace to house all of the different supporting libraries. For
-  example: =dogen::needle::quilt=, etc.
-- the different needle libraries should be pushed to the appropriate
-  repositories (e.g. nuget for C# and maybe C++, biicode for C++,
-  maven for Java, etc).
-- in the model groups world, each model most likely will only support
-  a single model group: for example either quilt or pleat, etc. This
-  is because some types only make sense with a given model group (say
-  for example a cross platform =String= type in pleat won't exist in
-  quilt and so forth). This means one must filter the models one is
-  loading depending on the model group. This applies to both internal
-  and external models. Also a model group may support a different
-  subset of programming languages compared to another model group.
-- we need a better name than "model group". word-storming: dimension,
-  universe, space, package, module, ensemble, generation unit,
-  assembly.
-- Another way to think about it is that model groups are really
-  backends. Backends support one or more "languages" (we need a word
-  to reflect variations such as XML). Only one backend can be enabled
-  at one time. One or more languages can be enabled, depending on what
-  the backend supports. The options that configure languages and
-  backends are in the meta-data; it does not make sense to supply
-  these in the command-line because the model is coupled with the
-  backend to a large extent (for example, native types are only
-  supported in the native backend and so on).
-- model groups and type support: some types will only make sense with
-  certain model groups. For example, if one were to create a "cross
-  platform string type", say String, for =pleat= which would then be
-  implemented in =needle::pleat= for all languages, it would not make
-  sense to try to use this type from =quilt=. This means that we need
-  some kind of way to associate types with a model group. In terms of
-  code generation, the formatter "enabled/disabled" logic will kick
-  in, and if the type has no formatters in a given backend, then it is
-  effectively disabled. But one wonders if this is a sensible way to
-  figure out what types are available to which model groups. Seems
-  like one would have to spend a lot of time looking into the
-  meta-data to determine whats available.
-- we probably need to add the model group to the ownership hierarchy,
-  but at present we cannot think of a use case for it; we never enable
-  anything across languages in a model group. In the same vein, we
-  would also need the language. Fields would then be
-  =quilt.cpp.enabled= and so on.
-
-Merged with other stories:
-
-*Multi-purpose models per language*
+*** Add support for multiple backends                                  :epic:
 
 #+begin_quote
 This story is a very vague story that keeps track of ideas on making
@@ -6990,88 +6887,66 @@ available with a given dogen model. However, there is another way to
 look at this; one could make other kinds of code generators using the
 dogen infrastructure.
 
-That is, contrary to it's name, dogen isn't just for "domain model
-generation". Nothing stops one from building a protocol buffers or
-thrift compiler using dogen infrastructure that outputs *exactly* the
-same code as the original tools. All that would be required to do so
-is:
+That is, contrary to it's name, dogen isn't necessarily just for
+"domain model generation". Nothing stops one from building a protocol
+buffers or thrift compiler using dogen infrastructure that outputs
+*exactly* the same code as the original tools. All that would be
+required to do so is:
 
-- create a front-end that reads in their specification;
+- create a frontend that reads in their specification;
 - to ensure yarn is expressive enough to cover all of the aspects of
   the code that needs to be generated;
 - to create the formatters.
 
-In this view of the world, we have two options:
+However we can't just add this formatters to =quilt=. Quilt is a
+single-purpose backend (as all backends should be): to generate domain
+objects for different languages. All kernels in =quilt= are aligned
+with this vision.
 
-- create groups of facets within the =cpp= model; for example,
-  the thrift group, the domain generation group etc. These are
-  mutually incompatible sets of formatters and only one of them can be
-  enabled for a given execution.
-- create models at the same level of the =cpp= model. We could group
-  them by language (e.g. the =cpp= namespace). However, this seems
-  less practical because these models would probably have a lot in
-  common. This is yet to be seen as we need to finish the large
-  formatters refactor before we can answer this question.
+But we could introduce additional backends. As as example of an
+additional backend, we have eCore. We already have a story for
+supporting eCore as a frontend, but there the idea is simply that we
+read the XML, convert it into yarn (as we do with any other frontend)
+and then generate "native types". But an alternative dimension to this
+is to provide a eCore backend which generates a completely different
+kind of types, which look like a cross-platform version of eCore:
 
-Taking this to its logical consequence, even a tool as complex as ODB
-could potentially be implementable in this way: one can conceive a
-clang front-end that reads in source code and generates an yarn model;
-this model then can be used to generate C++ code that is identical to
-the code produced by ODB (again assuming that yarn is extended to be
-expressive enough to represent all the constructs required by ODB).
+- provide inheritance from an =EObject= supertype
+- provide cross-language reflection
 
-This would be a compelling proposition if we had =stitch= because it
-would make the generation of formatters quite trivial and would also
-mean that people that want to create code generators don't have to
-worry about a lot of the boilerplate code. However, the biggest
-problem is that we'd be imposing a large and complex "framework" on
-them with all the evilness that that entails.
+And so forth. This is very different from =quilt=. this =ecore=
+backend would have a dependency on the =yarn.ecore= frontend and we'd
+have to probably extend =yarn= to cope with all the nitty-gritty
+detail of eCore.
 
-Food for thought:
+Other examples:
 
-- in this light, a better name for dogen would be =codegen= (or =cogen=
-  to make it a bit more unique in google). The tag line is then The
-  Generic Code Generator. Unfortunately there are already a few
-  projects with the name =cogen= so we may need to find a better
-  name. Alternatively we can maintain the name dogen, but take away
-  its meaning (i.e. no longer "The Domain Generator").
-- the merge of =cpp= and =cpp_formatters= may not have been for the
-  best in this case; it would make more sense to have a =cpp::dogen=
-  where we collect all of the formatters related to domain
-  generation - after the =cogen= rename; if no rename then we need
-  some other name to imply domain generation. At this level we could
-  then have =cogen::cpp::odb=, =cogen::cpp::protobuf= and so on. They
-  all make use of the core types defined in =cogen::cpp=. The problem
-  with this approach is that dogen is not really designed to share a
-  namespace in this way. We won't be able to have a =cpp= project as
-  well as placing other projects inside of the =cpp= namespace. We can
-  have one or the other in the current setup, but not both. We could
-  take the same approach as we did for test models: create a cpp
-  folder and then put the model under a different name such as =model=
-  or =domain= etc. Note that we still have to define all of the
-  formatter interfaces in the "main" model, as well as workflows
-  etc. However, some interfaces may not make sense for other models:
-  what is a registrar in protocol buffers? If it exists at all, its
-  probably something very different from boost serialisation and as
-  such will require other data.
-- note that this kind of grouping is not necessarily at the language
-  level. For example, domain generation should be common to a set of
-  languages, and so would protocol buffers. This means that rather
-  than a facet or formatter grouping, we need a higher level construct
-  to aggregate things; "domain generation" is made up of languages,
-  languages are made of of facets, facets have formatters. We need a
-  name/classification for "domain generation" in this context.
+- a =protobuf= tool that generates code identical to the =protobuf=
+  compiler and reads its input from the IDL;
+- a database mapping tool like =odb=; one can conceive a clang
+  front-end that reads in source code and generates an yarn model
+  ([[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-c-itself-as-a-front-end][already in backlog]]); this model then can be used to generate C++
+  code that is identical to the code produced by ODB (again assuming
+  that yarn is extended to be expressive enough to represent all the
+  constructs required by ODB).
+- an =xsd= tool.
 
-We should bear in mind [[http://st-www.cs.illinois.edu/users/droberts/evolve.html][this quote]]:
+In this world we'd somehow start creating a bit of binding between the
+frontend and the backend because each model most likely will only support
+a backend: either protobuf, or xsd, etc.
 
-#+begin_quote
-People develop abstractions by generalizing from concrete
-examples. Every attempt to determine the correct abstractions on paper
-without actually developing a running system is doomed to failure. No
-one is that smart. A framework is a reusable design, so you develop it
-by looking at the things it is supposed to be a design of. The more
-examples you look at, the more general your framework will be.
-#+end_quote
+This approach is compelling proposition because it means people who
+want to create code generators don't have to worry about a lot of the
+boilerplate code. However, the biggest problem is that we'd be
+imposing a large and complex "framework" on them with all the evilness
+that that entails.
+
+In the light of this story, a better name for dogen would be =codegen=
+(or =cogen= to make it a bit more unique in google). The tag line is
+then The Generic Code Generator. Unfortunately there are already a few
+projects with the name =cogen= so we may need to find a better
+name. Alternatively we can maintain the name dogen, but take away its
+meaning (i.e. no longer "The Domain Generator").
 
 *** Consider adding a meta-meta-model                                 :story:
 

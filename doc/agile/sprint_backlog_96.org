@@ -13,41 +13,42 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-27 Fri 14:16]
+#+CAPTION: Clock summary at [2017-01-28 Sat 15:29]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *72:35* |       |       | 100.0 |
+| *Total time*                                                                | *73:33* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 72:35   |       |       | 100.0 |
-| Active                                                                      |         | 72:35 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:02 |   4.2 |
+| Stories                                                                     | 73:33   |       |       | 100.0 |
+| Active                                                                      |         | 73:33 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  4:00 |   5.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   0.8 |
 | COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.2 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  14.2 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  14.0 |
 | COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   1.8 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   2.0 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.4 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.5 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  18.6 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.7 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  18.3 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.6 |
 | COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.1 |
 | COMPLETED Add log-level to command line                                     |         |       |  1:20 |   1.8 |
 | COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.4 |
 | COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   1.4 |
 | COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.4 |
-| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.5 |
+| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.4 |
 | COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   2.1 |
 | COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   3.2 |
-| STARTED Create a new yarn type for primitives                               |         |       |  8:06 |  11.2 |
-| STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   2.7 |
+| STARTED Create a new yarn type for primitives                               |         |       |  8:06 |  11.0 |
+| STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   2.6 |
 | STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.0 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   9.5 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   9.4 |
 | STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   4.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-01-28 Sat 14:31]--[2017-01-28 Sat 15:29] =>  0:58
     CLOCK: [2017-01-26 Thu 15:16]--[2017-01-26 Thu 15:28] =>  0:12
     CLOCK: [2017-01-25 Wed 17:17]--[2017-01-25 Wed 17:30] =>  0:13
     CLOCK: [2017-01-24 Tue 11:42]--[2017-01-24 Tue 12:06] =>  0:24
@@ -566,6 +567,46 @@ abstract.
 We need to reuse the name primitive for something else, so free it up
 by renaming the current =primitive= to =built_in=. We should end up
 with no references at all to this name.
+
+*** COMPLETED Thoughts around multi-kernel support                     :epic:
+    CLOSED: [2017-01-28 Sat 15:29]
+
+*Rationale*: we've already implemented a lot of the multi-kernel
+infrastructure, so we should remove this from backlog.
+
+*More recent ideas on this space*
+
+- it may be possible for simpler languages to have an outputting model
+  that has only formatters and uses yarn directly. For example for C#
+  and Java it is likely we could get away with a simple utility layer.
+- this implies that we may either end up with outputting models that
+  are nothing but just stitch templates.
+- this being the case, we could perhaps have two kernels: the cpp
+  kernel (quilt) which requires lots of hand-crafting to generate the
+  output and this more generic kernel which is just formatters per
+  language (pleat?). Quilt/cpp kernel could also be transformed into a
+  C/cpp/glib kernel, where the services we have at present for C++ are
+  shared between these different languages (they all need includes,
+  etc). Other languages may also have similar requirements (D?).
+
+*Previous notes, slightly bit-rotted*
+
+At present we have hard-coded knit to support a single C++ model,
+cpp. However, in reality the world looks more like this:
+
+- there are "groups of models" that have models that target specific
+  languages. We need to give a name to the "default" model group in
+  dogen. We should choose something from the [[http://en.wikipedia.org/wiki/Glossary_of_sewing_terms][sewing terms]]; for now
+  lets call it =quilt=. =quilt= contains a number of languages such as
+  =cpp=. A user can only generate one model group at a time. Users can
+  generate one or more languages within a group (depending on what the
+  group supports).
+- we should have a top-level folder to house all model groups:
+  =backends=. The existing =backend= model becomes =backends::core=.
+- there may be facilities that are language specific, shared by model
+  groups. These can be housed in language specific folders:
+  =backends::cpp= and so on. For instance, the language specific stuff
+  now in =formatters= should move here.
 
 *** STARTED Create a new yarn type for primitives                     :story:
     CLOCK: [2017-01-27 Fri 13:26]--[2017-01-27 Fri 14:16] =>  0:50
