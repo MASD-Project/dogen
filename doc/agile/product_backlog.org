@@ -75,7 +75,8 @@ ideas into stories and add them as we go along.
 - Its not possible to be immutable and fluent.
 - it is not possible to be immutable and be in an inheritance
   relationship. FIXME: why is that?
-- user models cannot have stereotype of built-ins.
+- user models cannot have stereotype of "builtins". Actually do we
+  even need to validate this since it would do nothing.
 - we don't support generic types so we should throw if a user attempts
   to use them.
 - a type marked as final cannot have descendants.
@@ -132,6 +133,29 @@ Existing validation code:
 :     const auto op2(mock_profile(po2));
 :     BOOST_CHECK_EXCEPTION(transform(c, po2, op2), transformation_error, cc);
 : }
+
+*** Improve handling of stereotypes                                   :story:
+
+At present we can add any string as a stereotype. If anyone binds to
+that string, we will do "something" if no one binds, we will do
+"nothing". This is not ideal:
+
+- its not easy to tell what stereotypes are available and what they
+  do.
+- if a user is expecting some functionality to come out based on a
+  stereotype, they won't know why it didn't.
+- more than one consumer may exist for a single stereotype - e.g. a
+  stereotype may have more than one meaning by mistake.
+
+Ideally we should have:
+
+- a central registry of stereotypes with associated descriptions;
+- a validation check that all stereotypes match registered stereotypes
+  and a fatal error if not (perhaps overridable?)
+- a command-line parameter to dump available stereotypes and their
+  descriptions so that users know whats available.
+- a check that a stereotype has not yet been registered so only one
+  consumer can bind to it.
 
 *** Add test for parent with no derived classes on the same model     :story:
 
@@ -5692,26 +5716,6 @@ useful to make sure the source code matches the latest version of the
 diagram.
 
 We could use something like the [[https://code.google.com/p/dtl-cpp/wiki/Tutorial][DTL library]].
-
-*** Add support for configurable enumerations types                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need to configure the built-in type of my
-enumerations so that I model my domain accurately.
-#+end_quote
-
-We've updated the =hardware= model with a "default enumeration value"
-field. This allows us to dynamically determine which built-in to use
-as the type of enumerations. However:
-
-- we didn't follow it through in the formatters; we are hard-coding
-  this at present in C++. In a cross-language world, we should
-  dynamically detect the default enumeration type. This is not quite
-  as trivial as it seems (what would happen if we loaded multiple
-  programming languages?). Supporting this properly may require adding
-  a programming language to the model.
-- it is not possible to override this from JSON/Dia. We could do this
-  by supplying a type via dynamic extensions.
 
 *** Add support for configurable enumeration values                   :story:
 
