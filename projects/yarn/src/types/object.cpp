@@ -104,7 +104,8 @@ object::object()
       is_visitation_root_(static_cast<bool>(0)),
       is_visitation_leaf_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::yarn::object_types>(0)),
-      provides_opaqueness_(static_cast<bool>(0)) { }
+      provides_opaqueness_(static_cast<bool>(0)),
+      can_be_primitive_underlier_(static_cast<bool>(0)) { }
 
 object::object(object&& rhs)
     : dogen::yarn::element(
@@ -133,7 +134,8 @@ object::object(object&& rhs)
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
-      provides_opaqueness_(std::move(rhs.provides_opaqueness_)) { }
+      provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
+      can_be_primitive_underlier_(std::move(rhs.can_be_primitive_underlier_)) { }
 
 object::object(
     const std::string& documentation,
@@ -168,7 +170,8 @@ object::object(
     const dogen::yarn::object_types object_type,
     const std::list<dogen::yarn::name>& modeled_concepts,
     const std::list<dogen::yarn::name>& associative_container_keys,
-    const bool provides_opaqueness)
+    const bool provides_opaqueness,
+    const bool can_be_primitive_underlier)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -202,7 +205,8 @@ object::object(
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
       associative_container_keys_(associative_container_keys),
-      provides_opaqueness_(provides_opaqueness) { }
+      provides_opaqueness_(provides_opaqueness),
+      can_be_primitive_underlier_(can_be_primitive_underlier) { }
 
 void object::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -256,7 +260,8 @@ void object::to_stream(std::ostream& s) const {
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
-      << "\"provides_opaqueness\": " << provides_opaqueness_
+      << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
+      << "\"can_be_primitive_underlier\": " << can_be_primitive_underlier_
       << " }";
 }
 
@@ -289,6 +294,7 @@ void object::swap(object& other) noexcept {
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
+    swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -323,7 +329,8 @@ bool object::operator==(const object& rhs) const {
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
-        provides_opaqueness_ == rhs.provides_opaqueness_;
+        provides_opaqueness_ == rhs.provides_opaqueness_ &&
+        can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_;
 }
 
 object& object::operator=(object other) {
@@ -634,6 +641,14 @@ bool object::provides_opaqueness() const {
 
 void object::provides_opaqueness(const bool v) {
     provides_opaqueness_ = v;
+}
+
+bool object::can_be_primitive_underlier() const {
+    return can_be_primitive_underlier_;
+}
+
+void object::can_be_primitive_underlier(const bool v) {
+    can_be_primitive_underlier_ = v;
 }
 
 } }

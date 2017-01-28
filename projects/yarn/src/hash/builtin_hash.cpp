@@ -41,6 +41,8 @@ std::size_t builtin_hasher::hash(const builtin& v) {
 
     combine(seed, v.is_default_enumeration_type());
     combine(seed, v.is_floating_point());
+    combine(seed, v.can_be_enumeration_underlier());
+    combine(seed, v.can_be_primitive_underlier());
 
     return seed;
 }

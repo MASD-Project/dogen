@@ -103,6 +103,7 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_name(v.modeled_concepts()));
     combine(seed, hash_std_list_dogen_yarn_name(v.associative_container_keys()));
     combine(seed, v.provides_opaqueness());
+    combine(seed, v.can_be_primitive_underlier());
 
     return seed;
 }

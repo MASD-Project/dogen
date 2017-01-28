@@ -43,6 +43,9 @@ void save(Archive& ar,
     ar << make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
     ar << make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
     ar << make_nvp("scribble_groups", v.scribble_groups_);
+    ar << make_nvp("primitive_underliers", v.primitive_underliers_);
+    ar << make_nvp("enumeration_underliers", v.enumeration_underliers_);
+    ar << make_nvp("abstract_elements", v.abstract_elements_);
 }
 
 template<typename Archive>
@@ -52,6 +55,9 @@ void load(Archive& ar,
     ar >> make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
     ar >> make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
     ar >> make_nvp("scribble_groups", v.scribble_groups_);
+    ar >> make_nvp("primitive_underliers", v.primitive_underliers_);
+    ar >> make_nvp("enumeration_underliers", v.enumeration_underliers_);
+    ar >> make_nvp("abstract_elements", v.abstract_elements_);
 }
 
 } }

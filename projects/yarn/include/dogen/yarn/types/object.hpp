@@ -95,7 +95,8 @@ public:
         const dogen::yarn::object_types object_type,
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
-        const bool provides_opaqueness);
+        const bool provides_opaqueness,
+        const bool can_be_primitive_underlier);
 
 private:
     template<typename Archive>
@@ -338,6 +339,14 @@ public:
     void provides_opaqueness(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, this object can be the underlying element of a primitive.
+     */
+    /**@{*/
+    bool can_be_primitive_underlier() const;
+    void can_be_primitive_underlier(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -377,6 +386,7 @@ private:
     std::list<dogen::yarn::name> modeled_concepts_;
     std::list<dogen::yarn::name> associative_container_keys_;
     bool provides_opaqueness_;
+    bool can_be_primitive_underlier_;
 };
 
 } }

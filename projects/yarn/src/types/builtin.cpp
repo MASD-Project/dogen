@@ -29,7 +29,9 @@ namespace yarn {
 
 builtin::builtin()
     : is_default_enumeration_type_(static_cast<bool>(0)),
-      is_floating_point_(static_cast<bool>(0)) { }
+      is_floating_point_(static_cast<bool>(0)),
+      can_be_enumeration_underlier_(static_cast<bool>(0)),
+      can_be_primitive_underlier_(static_cast<bool>(0)) { }
 
 builtin::builtin(
     const std::string& documentation,
@@ -41,7 +43,9 @@ builtin::builtin(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const bool is_default_enumeration_type,
-    const bool is_floating_point)
+    const bool is_floating_point,
+    const bool can_be_enumeration_underlier,
+    const bool can_be_primitive_underlier)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -52,7 +56,9 @@ builtin::builtin(
       stereotypes,
       is_element_extension),
       is_default_enumeration_type_(is_default_enumeration_type),
-      is_floating_point_(is_floating_point) { }
+      is_floating_point_(is_floating_point),
+      can_be_enumeration_underlier_(can_be_enumeration_underlier),
+      can_be_primitive_underlier_(can_be_primitive_underlier) { }
 
 void builtin::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -83,7 +89,9 @@ void builtin::to_stream(std::ostream& s) const {
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"is_default_enumeration_type\": " << is_default_enumeration_type_ << ", "
-      << "\"is_floating_point\": " << is_floating_point_
+      << "\"is_floating_point\": " << is_floating_point_ << ", "
+      << "\"can_be_enumeration_underlier\": " << can_be_enumeration_underlier_ << ", "
+      << "\"can_be_primitive_underlier\": " << can_be_primitive_underlier_
       << " }";
 }
 
@@ -93,6 +101,8 @@ void builtin::swap(builtin& other) noexcept {
     using std::swap;
     swap(is_default_enumeration_type_, other.is_default_enumeration_type_);
     swap(is_floating_point_, other.is_floating_point_);
+    swap(can_be_enumeration_underlier_, other.can_be_enumeration_underlier_);
+    swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
 }
 
 bool builtin::equals(const dogen::yarn::element& other) const {
@@ -104,7 +114,9 @@ bool builtin::equals(const dogen::yarn::element& other) const {
 bool builtin::operator==(const builtin& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         is_default_enumeration_type_ == rhs.is_default_enumeration_type_ &&
-        is_floating_point_ == rhs.is_floating_point_;
+        is_floating_point_ == rhs.is_floating_point_ &&
+        can_be_enumeration_underlier_ == rhs.can_be_enumeration_underlier_ &&
+        can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_;
 }
 
 builtin& builtin::operator=(builtin other) {
@@ -127,6 +139,22 @@ bool builtin::is_floating_point() const {
 
 void builtin::is_floating_point(const bool v) {
     is_floating_point_ = v;
+}
+
+bool builtin::can_be_enumeration_underlier() const {
+    return can_be_enumeration_underlier_;
+}
+
+void builtin::can_be_enumeration_underlier(const bool v) {
+    can_be_enumeration_underlier_ = v;
+}
+
+bool builtin::can_be_primitive_underlier() const {
+    return can_be_primitive_underlier_;
+}
+
+void builtin::can_be_primitive_underlier(const bool v) {
+    can_be_primitive_underlier_ = v;
 }
 
 } }

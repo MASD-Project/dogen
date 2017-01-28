@@ -71,7 +71,10 @@ std::ostream& operator<<(std::ostream& s, const indices& v) {
       << "\"__type__\": " << "\"dogen::yarn::indices\"" << ", "
       << "\"objects_always_in_heap\": " << v.objects_always_in_heap() << ", "
       << "\"elements_referable_by_attributes\": " << v.elements_referable_by_attributes() << ", "
-      << "\"scribble_groups\": " << v.scribble_groups()
+      << "\"scribble_groups\": " << v.scribble_groups() << ", "
+      << "\"primitive_underliers\": " << v.primitive_underliers() << ", "
+      << "\"enumeration_underliers\": " << v.enumeration_underliers() << ", "
+      << "\"abstract_elements\": " << v.abstract_elements()
       << " }";
     return(s);
 }

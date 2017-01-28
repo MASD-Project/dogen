@@ -46,7 +46,10 @@ public:
     indices(
         const std::unordered_set<std::string>& objects_always_in_heap,
         const std::unordered_set<std::string>& elements_referable_by_attributes,
-        const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups);
+        const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
+        const std::unordered_set<std::string>& primitive_underliers,
+        const std::unordered_set<std::string>& enumeration_underliers,
+        const std::unordered_set<std::string>& abstract_elements);
 
 private:
     template<typename Archive>
@@ -71,6 +74,21 @@ public:
     void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v);
     void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v);
 
+    const std::unordered_set<std::string>& primitive_underliers() const;
+    std::unordered_set<std::string>& primitive_underliers();
+    void primitive_underliers(const std::unordered_set<std::string>& v);
+    void primitive_underliers(const std::unordered_set<std::string>&& v);
+
+    const std::unordered_set<std::string>& enumeration_underliers() const;
+    std::unordered_set<std::string>& enumeration_underliers();
+    void enumeration_underliers(const std::unordered_set<std::string>& v);
+    void enumeration_underliers(const std::unordered_set<std::string>&& v);
+
+    const std::unordered_set<std::string>& abstract_elements() const;
+    std::unordered_set<std::string>& abstract_elements();
+    void abstract_elements(const std::unordered_set<std::string>& v);
+    void abstract_elements(const std::unordered_set<std::string>&& v);
+
 public:
     bool operator==(const indices& rhs) const;
     bool operator!=(const indices& rhs) const {
@@ -85,6 +103,9 @@ private:
     std::unordered_set<std::string> objects_always_in_heap_;
     std::unordered_set<std::string> elements_referable_by_attributes_;
     std::unordered_map<std::string, dogen::annotations::scribble_group> scribble_groups_;
+    std::unordered_set<std::string> primitive_underliers_;
+    std::unordered_set<std::string> enumeration_underliers_;
+    std::unordered_set<std::string> abstract_elements_;
 };
 
 } }

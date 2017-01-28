@@ -57,6 +57,9 @@ std::size_t indices_hasher::hash(const indices& v) {
     combine(seed, hash_std_unordered_set_std_string(v.objects_always_in_heap()));
     combine(seed, hash_std_unordered_set_std_string(v.elements_referable_by_attributes()));
     combine(seed, hash_std_unordered_map_std_string_dogen_annotations_scribble_group(v.scribble_groups()));
+    combine(seed, hash_std_unordered_set_std_string(v.primitive_underliers()));
+    combine(seed, hash_std_unordered_set_std_string(v.enumeration_underliers()));
+    combine(seed, hash_std_unordered_set_std_string(v.abstract_elements()));
 
     return seed;
 }

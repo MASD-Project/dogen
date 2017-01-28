@@ -57,7 +57,9 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const bool is_default_enumeration_type,
-        const bool is_floating_point);
+        const bool is_floating_point,
+        const bool can_be_enumeration_underlier,
+        const bool can_be_primitive_underlier);
 
 private:
     template<typename Archive>
@@ -93,6 +95,22 @@ public:
     void is_floating_point(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, this element can be the underlying element of an enumeration.
+     */
+    /**@{*/
+    bool can_be_enumeration_underlier() const;
+    void can_be_enumeration_underlier(const bool v);
+    /**@}*/
+
+    /**
+     * @brief If true, this built-in can be the underlying element of a primitive.
+     */
+    /**@{*/
+    bool can_be_primitive_underlier() const;
+    void can_be_primitive_underlier(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const builtin& rhs) const;
     bool operator!=(const builtin& rhs) const {
@@ -109,6 +127,8 @@ public:
 private:
     bool is_default_enumeration_type_;
     bool is_floating_point_;
+    bool can_be_enumeration_underlier_;
+    bool can_be_primitive_underlier_;
 };
 
 } }

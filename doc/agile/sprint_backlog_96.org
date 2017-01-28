@@ -13,37 +13,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-28 Sat 15:29]
+#+CAPTION: Clock summary at [2017-01-28 Sat 17:12]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *73:33* |       |       | 100.0 |
+| *Total time*                                                                | *74:52* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 73:33   |       |       | 100.0 |
-| Active                                                                      |         | 73:33 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  4:00 |   5.4 |
+| Stories                                                                     | 74:52   |       |       | 100.0 |
+| Active                                                                      |         | 74:52 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  4:09 |   5.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   0.8 |
-| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.2 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  14.0 |
+| COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.1 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  13.8 |
 | COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   1.8 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   2.0 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.4 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.5 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  18.3 |
-| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.6 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  18.0 |
+| COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.4 |
 | COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.1 |
 | COMPLETED Add log-level to command line                                     |         |       |  1:20 |   1.8 |
 | COMPLETED Fix recursive path lookup for upsilon                             |         |       |  1:02 |   1.4 |
 | COMPLETED In JSON hydrator rename simple name to simple                     |         |       |  1:03 |   1.4 |
 | COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.4 |
-| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.4 |
-| COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   2.1 |
-| COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   3.2 |
-| STARTED Create a new yarn type for primitives                               |         |       |  8:06 |  11.0 |
+| COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.3 |
+| COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   2.0 |
+| COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   3.1 |
+| STARTED Create a new yarn type for primitives                               |         |       |  9:16 |  12.4 |
 | STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   2.6 |
 | STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.0 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   9.4 |
-| STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   4.2 |
+| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   9.2 |
+| STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   4.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -610,6 +610,7 @@ cpp. However, in reality the world looks more like this:
   now in =formatters= should move here.
 
 *** STARTED Create a new yarn type for primitives                     :story:
+    CLOCK: [2017-01-28 Sat 16:02]--[2017-01-28 Sat 17:12] =>  1:10
     CLOCK: [2017-01-27 Fri 13:26]--[2017-01-27 Fri 14:16] =>  0:50
     CLOCK: [2017-01-27 Fri 12:11]--[2017-01-27 Fri 12:14] =>  0:03
     CLOCK: [2017-01-27 Fri 11:38]--[2017-01-27 Fri 12:10] =>  0:32
@@ -867,6 +868,45 @@ Another alternative is to apply hard-coded regexes:
 
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
+
+*** Merge both yarn model validators                                  :story:
+
+In truth we do not need =model= validation, just =intermediate_model=
+validation; the transformation between the two is trivial. What we do
+need is two kinds of =intermediate_model= validation:
+
+- after the "single" =intermediate_model= is generated.
+- after the merged, resolved, etc =intermediate_model= is generated.
+
+We could call these "stages" and have two methods:
+
+- =validate_first_stage=
+- =validate_second_stage=
+
+Actually the problem is this class is going to become too messy. Maybe
+we do need to classes, but reflecting the stages rather than the model
+types:
+
+- first stage validator
+- second stage validator
+
+Both validate =intermediate_model=.
+
+Tasks:
+
+- move =abstract_elements= to indices
+- decomposer now operates on intermediate models
+- rename validators
+
+*** Add validation for C# keywords                                    :story:
+
+At present we are checking the model does not contain C++ keywords but
+we're not doing the same for C#.
+
+- [[https://en.wikibooks.org/wiki/C_Sharp_Programming/Keywords][C# Programming/Keywords]]
+
+We should also ensure models in LAM are checked for both C# and C++
+keywords - or actually always check all keywords for all languages.
 
 *** Tidy-up "is floating point"                                       :story:
 

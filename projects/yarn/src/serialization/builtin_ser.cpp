@@ -45,6 +45,8 @@ void save(Archive& ar,
 
     ar << make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
     ar << make_nvp("is_floating_point", v.is_floating_point_);
+    ar << make_nvp("can_be_enumeration_underlier", v.can_be_enumeration_underlier_);
+    ar << make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
 }
 
 template<typename Archive>
@@ -55,6 +57,8 @@ void load(Archive& ar,
 
     ar >> make_nvp("is_default_enumeration_type", v.is_default_enumeration_type_);
     ar >> make_nvp("is_floating_point", v.is_floating_point_);
+    ar >> make_nvp("can_be_enumeration_underlier", v.can_be_enumeration_underlier_);
+    ar >> make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
 }
 
 } }

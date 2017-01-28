@@ -63,6 +63,9 @@ populate(const unsigned int position, result_type& v) {
     v.objects_always_in_heap(create_std_unordered_set_std_string(position + 0));
     v.elements_referable_by_attributes(create_std_unordered_set_std_string(position + 1));
     v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 2));
+    v.primitive_underliers(create_std_unordered_set_std_string(position + 3));
+    v.enumeration_underliers(create_std_unordered_set_std_string(position + 4));
+    v.abstract_elements(create_std_unordered_set_std_string(position + 5));
 }
 
 indices_generator::result_type
