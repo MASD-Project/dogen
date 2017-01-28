@@ -20,6 +20,7 @@
  */
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
+#include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 
 namespace {
@@ -31,6 +32,11 @@ create_dogen_yarn_name(const unsigned int position) {
 
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
+}
+
+dogen::yarn::attribute
+create_dogen_yarn_attribute(const unsigned int position) {
+    return dogen::yarn::attribute_generator::create(position);
 }
 
 }
@@ -45,6 +51,7 @@ populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.underlying_type(create_dogen_yarn_name(position + 0));
     v.is_nullable(create_bool(position + 1));
+    v.value_attribute(create_dogen_yarn_attribute(position + 2));
 }
 
 primitive_generator::result_type

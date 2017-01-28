@@ -22,6 +22,7 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 
@@ -41,7 +42,8 @@ primitive::primitive(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const dogen::yarn::name& underlying_type,
-    const bool is_nullable)
+    const bool is_nullable,
+    const dogen::yarn::attribute& value_attribute)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -52,7 +54,8 @@ primitive::primitive(
       stereotypes,
       is_element_extension),
       underlying_type_(underlying_type),
-      is_nullable_(is_nullable) { }
+      is_nullable_(is_nullable),
+      value_attribute_(value_attribute) { }
 
 void primitive::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -83,7 +86,8 @@ void primitive::to_stream(std::ostream& s) const {
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"underlying_type\": " << underlying_type_ << ", "
-      << "\"is_nullable\": " << is_nullable_
+      << "\"is_nullable\": " << is_nullable_ << ", "
+      << "\"value_attribute\": " << value_attribute_
       << " }";
 }
 
@@ -93,6 +97,7 @@ void primitive::swap(primitive& other) noexcept {
     using std::swap;
     swap(underlying_type_, other.underlying_type_);
     swap(is_nullable_, other.is_nullable_);
+    swap(value_attribute_, other.value_attribute_);
 }
 
 bool primitive::equals(const dogen::yarn::element& other) const {
@@ -104,7 +109,8 @@ bool primitive::equals(const dogen::yarn::element& other) const {
 bool primitive::operator==(const primitive& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         underlying_type_ == rhs.underlying_type_ &&
-        is_nullable_ == rhs.is_nullable_;
+        is_nullable_ == rhs.is_nullable_ &&
+        value_attribute_ == rhs.value_attribute_;
 }
 
 primitive& primitive::operator=(primitive other) {
@@ -135,6 +141,22 @@ bool primitive::is_nullable() const {
 
 void primitive::is_nullable(const bool v) {
     is_nullable_ = v;
+}
+
+const dogen::yarn::attribute& primitive::value_attribute() const {
+    return value_attribute_;
+}
+
+dogen::yarn::attribute& primitive::value_attribute() {
+    return value_attribute_;
+}
+
+void primitive::value_attribute(const dogen::yarn::attribute& v) {
+    value_attribute_ = v;
+}
+
+void primitive::value_attribute(const dogen::yarn::attribute&& v) {
+    value_attribute_ = std::move(v);
 }
 
 } }

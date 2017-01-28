@@ -29,6 +29,7 @@
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/serialization/primitive_fwd_ser.hpp"
 
 namespace dogen {
@@ -58,7 +59,8 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const dogen::yarn::name& underlying_type,
-        const bool is_nullable);
+        const bool is_nullable,
+        const dogen::yarn::attribute& value_attribute);
 
 private:
     template<typename Archive>
@@ -91,6 +93,11 @@ public:
     void is_nullable(const bool v);
     /**@}*/
 
+    const dogen::yarn::attribute& value_attribute() const;
+    dogen::yarn::attribute& value_attribute();
+    void value_attribute(const dogen::yarn::attribute& v);
+    void value_attribute(const dogen::yarn::attribute&& v);
+
 public:
     bool operator==(const primitive& rhs) const;
     bool operator!=(const primitive& rhs) const {
@@ -107,6 +114,7 @@ public:
 private:
     dogen::yarn::name underlying_type_;
     bool is_nullable_;
+    dogen::yarn::attribute value_attribute_;
 };
 
 } }

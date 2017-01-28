@@ -29,6 +29,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -46,6 +47,7 @@ void save(Archive& ar,
 
     ar << make_nvp("underlying_type", v.underlying_type_);
     ar << make_nvp("is_nullable", v.is_nullable_);
+    ar << make_nvp("value_attribute", v.value_attribute_);
 }
 
 template<typename Archive>
@@ -56,6 +58,7 @@ void load(Archive& ar,
 
     ar >> make_nvp("underlying_type", v.underlying_type_);
     ar >> make_nvp("is_nullable", v.is_nullable_);
+    ar >> make_nvp("value_attribute", v.value_attribute_);
 }
 
 } }

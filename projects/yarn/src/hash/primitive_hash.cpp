@@ -20,6 +20,7 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
+#include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"
 
 namespace {
@@ -42,6 +43,7 @@ std::size_t primitive_hasher::hash(const primitive& v) {
 
     combine(seed, v.underlying_type());
     combine(seed, v.is_nullable());
+    combine(seed, v.value_attribute());
 
     return seed;
 }
