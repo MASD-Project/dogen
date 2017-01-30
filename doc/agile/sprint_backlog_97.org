@@ -79,6 +79,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Create a new yarn type for primitives                     :story:
+    CLOCK: [2017-01-30 Mon 13:38]--[2017-01-30 Mon 14:09] =>  0:31
     CLOCK: [2017-01-30 Mon 13:16]--[2017-01-30 Mon 13:37] =>  0:21
     CLOCK: [2017-01-30 Mon 12:39]--[2017-01-30 Mon 13:15] =>  0:36
     CLOCK: [2017-01-30 Mon 11:28]--[2017-01-30 Mon 12:01] =>  0:33

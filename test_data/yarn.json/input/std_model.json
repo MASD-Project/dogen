@@ -393,6 +393,27 @@
         "simple": "pkg1"
       },
       "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "enum_with_std_builtin"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.underlying_element": "std::int8_t"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "an_enumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "another_enumerator"
+          }
+        }
+      ]
     }
   ]
 }

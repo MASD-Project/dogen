@@ -73,10 +73,14 @@ boost::filesystem::path enum_header_formatter::full_path(
 }
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    const auto& en(assistant::as<yarn::enumeration>(static_artefact(), e));
+    auto builder(f.make());
+    const auto arch(traits::canonical_archetype());
+    builder.add(en.underlying_element(), arch);
+    return builder.build();
 }
 
 dogen::formatters::artefact enum_header_formatter::

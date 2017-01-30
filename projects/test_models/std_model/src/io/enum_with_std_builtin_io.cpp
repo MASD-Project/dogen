@@ -18,25 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_IO_ALL_IO_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/test_models/std_model/io/base_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_io.hpp"
-#include "dogen/test_models/std_model/io/class_b_io.hpp"
-#include "dogen/test_models/std_model/io/class_d_io.hpp"
-#include "dogen/test_models/std_model/io/class_e_io.hpp"
-#include "dogen/test_models/std_model/io/class_f_io.hpp"
-#include "dogen/test_models/std_model/io/class_g_io.hpp"
-#include "dogen/test_models/std_model/io/class_h_io.hpp"
-#include "dogen/test_models/std_model/io/class_j_io.hpp"
-#include "dogen/test_models/std_model/io/derived_io.hpp"
-#include "dogen/test_models/std_model/io/builtins_io.hpp"
-#include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
 #include "dogen/test_models/std_model/io/enum_with_std_builtin_io.hpp"
 
-#endif
+namespace dogen {
+namespace test_models {
+namespace std_model {
+
+std::ostream& operator<<(std::ostream& s, const enum_with_std_builtin& v) {
+    s << "{ " << "\"__type__\": " << "\"enum_with_std_builtin\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case enum_with_std_builtin::invalid:
+        attr = "\"invalid\"";
+        break;
+    case enum_with_std_builtin::an_enumerator:
+        attr = "\"an_enumerator\"";
+        break;
+    case enum_with_std_builtin::another_enumerator:
+        attr = "\"another_enumerator\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for enum_with_std_builtin");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} } }

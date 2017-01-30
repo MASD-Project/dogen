@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_SERIALIZATION_ENUM_WITH_STD_BUILTIN_SER_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_SERIALIZATION_ENUM_WITH_STD_BUILTIN_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/std_model/types/base.hpp"
-#include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/class_b.hpp"
-#include "dogen/test_models/std_model/types/class_d.hpp"
-#include "dogen/test_models/std_model/types/class_e.hpp"
-#include "dogen/test_models/std_model/types/class_f.hpp"
-#include "dogen/test_models/std_model/types/class_g.hpp"
-#include "dogen/test_models/std_model/types/class_h.hpp"
-#include "dogen/test_models/std_model/types/class_j.hpp"
-#include "dogen/test_models/std_model/types/derived.hpp"
-#include "dogen/test_models/std_model/types/builtins.hpp"
-#include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
-#include "dogen/test_models/std_model/types/some_service.hpp"
+#include <boost/serialization/nvp.hpp>
 #include "dogen/test_models/std_model/types/enum_with_std_builtin.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::test_models::std_model::enum_with_std_builtin& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("enum_with_std_builtin", v);
+}
 
 #endif

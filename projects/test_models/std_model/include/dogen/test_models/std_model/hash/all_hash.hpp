@@ -37,5 +37,6 @@
 #include "dogen/test_models/std_model/hash/derived_hash.hpp"
 #include "dogen/test_models/std_model/hash/builtins_hash.hpp"
 #include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
+#include "dogen/test_models/std_model/hash/enum_with_std_builtin_hash.hpp"
 
 #endif

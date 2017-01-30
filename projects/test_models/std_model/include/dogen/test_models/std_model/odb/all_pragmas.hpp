@@ -37,5 +37,6 @@
 #include "dogen/test_models/std_model/odb/derived_pragmas.hpp"
 #include "dogen/test_models/std_model/odb/builtins_pragmas.hpp"
 #include "dogen/test_models/std_model/odb/pkg1/class_c_pragmas.hpp"
+#include "dogen/test_models/std_model/odb/enum_with_std_builtin_pragmas.hpp"
 
 #endif

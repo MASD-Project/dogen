@@ -18,25 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_TEST_DATA_ALL_TD_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_TEST_DATA_ALL_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/test_models/std_model/test_data/base_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_a_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_b_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_d_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_e_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_f_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_g_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_h_td.hpp"
-#include "dogen/test_models/std_model/test_data/class_j_td.hpp"
-#include "dogen/test_models/std_model/test_data/derived_td.hpp"
-#include "dogen/test_models/std_model/test_data/builtins_td.hpp"
-#include "dogen/test_models/std_model/test_data/pkg1/class_c_td.hpp"
 #include "dogen/test_models/std_model/test_data/enum_with_std_builtin_td.hpp"
 
-#endif
+namespace dogen {
+namespace test_models {
+namespace std_model {
+
+enum_with_std_builtin_generator::enum_with_std_builtin_generator() : position_(0) { }
+void enum_with_std_builtin_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<enum_with_std_builtin>(position % 3);
+}
+
+enum_with_std_builtin_generator::result_type
+enum_with_std_builtin_generator::create(const unsigned int  position) {
+    result_type r;
+    enum_with_std_builtin_generator::populate(position, r);
+    return r;
+}
+
+enum_with_std_builtin_generator::result_type
+enum_with_std_builtin_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

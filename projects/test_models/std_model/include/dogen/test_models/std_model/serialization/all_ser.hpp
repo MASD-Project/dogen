@@ -37,5 +37,6 @@
 #include "dogen/test_models/std_model/serialization/derived_ser.hpp"
 #include "dogen/test_models/std_model/serialization/builtins_ser.hpp"
 #include "dogen/test_models/std_model/serialization/pkg1/class_c_ser.hpp"
+#include "dogen/test_models/std_model/serialization/enum_with_std_builtin_ser.hpp"
 
 #endif
