@@ -21,10 +21,10 @@ using System;
 
 namespace Dogen.TestModels.CSharpModel
 {
-    public enum TestAllKnobs : int
+    public enum TestAllKnobs
     {
-        Invalid = 0, /// Represents an uninitialised enum
-        AnEnumerator = 1,
-        AnotherEnumerator = 2
+        Invalid, /// Represents an uninitialised enum
+        AnEnumerator,
+        AnotherEnumerator
     }
 }

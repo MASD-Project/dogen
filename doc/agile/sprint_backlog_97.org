@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-30 Mon 14:31]
+#+CAPTION: Clock summary at [2017-01-30 Mon 14:39]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:23* |      |      | 100.0 |
+| *Total time*                                                                | *4:32* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:23   |      |      | 100.0 |
-| Active                                                                      |        | 4:23 |      | 100.0 |
+| Stories                                                                     | 4:32   |      |      | 100.0 |
+| Active                                                                      |        | 4:32 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |        |      | 0:01 |   0.4 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:20 |   7.6 |
-| COMPLETED Add support for configurable enumerations types                   |        |      | 4:01 |  91.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:20 |   7.4 |
+| COMPLETED Add support for configurable enumerations types                   |        |      | 4:10 |  91.9 |
 | STARTED Allow disabling =invalid= value in enumerations                     |        |      | 0:01 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -81,6 +81,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 *** COMPLETED Add support for configurable enumerations types         :story:
     CLOSED: [2017-01-30 Mon 14:30]
+    CLOCK: [2017-01-30 Mon 14:30]--[2017-01-30 Mon 14:39] =>  0:09
     CLOCK: [2017-01-30 Mon 14:10]--[2017-01-30 Mon 14:29] =>  0:19
     CLOCK: [2017-01-30 Mon 13:38]--[2017-01-30 Mon 14:09] =>  0:31
     CLOCK: [2017-01-30 Mon 13:16]--[2017-01-30 Mon 13:37] =>  0:21

@@ -32,12 +32,22 @@ using System;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
+            if (ye.use_implementation_defined_underlying_element())
+#>
+    public enum <#= sn #>
+<#+
+            else
 #>
     public enum <#= sn #> : <#= a.get_qualified_name(ye.underlying_element()) #>
     {
 <#+
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
+                if (ye.use_implementation_defined_enumerator_values())
+#>
+        <#= en.name().simple() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
+<#+
+                else
 #>
         <#= en.name().simple() #> = <#= en.value() #><#= sf.postfix() #><#= a.comment_inline(en.documentation()) #>
 <#+

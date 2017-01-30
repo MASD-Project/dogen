@@ -81,10 +81,16 @@ a.stream() << std::endl;
             const auto ns(a.make_namespaces(e.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
+            if (ye.use_implementation_defined_underlying_element())
+a.stream() << "    public enum " << sn << std::endl;
+            else
 a.stream() << "    public enum " << sn << " : " << a.get_qualified_name(ye.underlying_element()) << std::endl;
 a.stream() << "    {" << std::endl;
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
+                if (ye.use_implementation_defined_enumerator_values())
+a.stream() << "        " << en.name().simple() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
+                else
 a.stream() << "        " << en.name().simple() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;
                 sf.next();
             }
