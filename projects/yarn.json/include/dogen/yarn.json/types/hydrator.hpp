@@ -89,13 +89,15 @@ private:
      * @brief Reads all enumerators from the node.
      */
     std::vector<enumerator>
-    read_enumerators(const boost::property_tree::ptree& pt) const;
+    read_enumerators(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
 
     /**
      * @brief Reads all attributes from the node.
      */
     std::list<attribute>
-    read_attributes(const boost::property_tree::ptree& pt) const;
+    read_attributes(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
 
     /**
      * @brief Reads all properties at the element level and inserts

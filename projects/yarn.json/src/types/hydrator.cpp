@@ -209,8 +209,8 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::vector<enumerator> hydrator::
-read_enumerators(const boost::property_tree::ptree& pt) const {
+std::vector<enumerator> hydrator::read_enumerators(
+    const boost::property_tree::ptree& pt, yarn::intermediate_model& im) const {
     std::vector<enumerator> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
@@ -223,13 +223,18 @@ read_enumerators(const boost::property_tree::ptree& pt) const {
         }
         e.name(read_name(j->second));
         e.documentation(read_documentation(apt));
+
+        const auto kvps(read_kvps(pt));
+        const auto st(annotations::scope_types::property);
+        insert_scribbles(e.name(), st, kvps, im);
+
         r.push_back(e);
     }
     return r;
 }
 
-std::list<attribute> hydrator::
-read_attributes(const boost::property_tree::ptree& pt) const {
+std::list<attribute> hydrator::read_attributes(
+    const boost::property_tree::ptree& pt, yarn::intermediate_model& im) const {
     std::list<attribute> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
@@ -245,6 +250,11 @@ read_attributes(const boost::property_tree::ptree& pt) const {
 
         a.unparsed_type(apt.get<std::string>(unparsed_type_key));
         a.documentation(read_documentation(apt));
+
+        const auto kvps(read_kvps(pt));
+        const auto st(annotations::scope_types::property);
+        insert_scribbles(a.name(), st, kvps, im);
+
         r.push_back(a);
     }
     return r;
@@ -286,7 +296,7 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
 
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        o.local_attributes(read_attributes(i->second));
+        o.local_attributes(read_attributes(i->second, im));
 
     i = pt.find(parents_key);
     if (i != pt.not_found())
@@ -345,7 +355,7 @@ void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
 
     const auto i(pt.find(enumerators_key));
     if (i != pt.not_found())
-        e.enumerators(read_enumerators(i->second));
+        e.enumerators(read_enumerators(i->second, im));
 
     const auto id(e.name().id());
     const auto pair(std::make_pair(id, e));
@@ -393,7 +403,7 @@ void hydrator::read_concept(const boost::property_tree::ptree& pt,
 
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        c.local_attributes(read_attributes(i->second));
+        c.local_attributes(read_attributes(i->second, im));
 
     i = pt.find(refines_key);
     if (i != pt.not_found()) {

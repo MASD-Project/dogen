@@ -31,6 +31,7 @@ static logger lg(logger_factory("yarn.json.dehydrator"));
 
 const std::string scope("::");
 const std::string comma_space(", ");
+const std::string invalid_enumerator("invalid");
 
 }
 
@@ -339,8 +340,8 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
         std::vector<enumerator> enumerators;
         enumerators.reserve(e.enumerators().size());
         for (const auto& en : e.enumerators()) {
-            // FIXME: to lower
-            if (en.name().simple() != "invalid")
+            const auto n(boost::algorithm::to_lower_copy(en.name().simple()));
+            if (n != invalid_enumerator)
                 enumerators.push_back(en);
         }
 
