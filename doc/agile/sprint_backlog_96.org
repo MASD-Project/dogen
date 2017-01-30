@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-28 Sat 21:39]
+#+CAPTION: Clock summary at [2017-01-30 Mon 09:22]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *78:49* |       |       | 100.0 |
+| *Total time*                                                                | *79:09* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 78:49   |       |       | 100.0 |
-| Active                                                                      |         | 78:49 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  4:21 |   5.5 |
+| Stories                                                                     | 79:09   |       |       | 100.0 |
+| Active                                                                      |         | 79:09 |       | 100.0 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  4:41 |   5.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   0.7 |
 | COMPLETED Add test in knit to validate upsilon                              |         |       |  0:51 |   1.1 |
-| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  13.1 |
+| COMPLETED Create an upsilon yarn frontend                                   |         |       | 10:18 |  13.0 |
 | COMPLETED Fields with collections in upsilon cause errors                   |         |       |  1:20 |   1.7 |
 | COMPLETED Bind language to kernel                                           |         |       |  1:29 |   1.9 |
 | COMPLETED Upsilon can have collections of collections                       |         |       |  1:01 |   1.3 |
 | COMPLETED Upsilon test borked due to no output                              |         |       |  0:21 |   0.4 |
-| COMPLETED Add multi-language support                                        |         |       | 13:28 |  17.1 |
+| COMPLETED Add multi-language support                                        |         |       | 13:28 |  17.0 |
 | COMPLETED Add a type mapper                                                 |         |       |  6:19 |   8.0 |
 | COMPLETED Backslashes in strings cause JSON parsing to fail                 |         |       |  0:49 |   1.0 |
 | COMPLETED Add log-level to command line                                     |         |       |  1:20 |   1.7 |
@@ -38,17 +38,19 @@
 | COMPLETED Add tailor support for upsilon                                    |         |       |  0:16 |   0.3 |
 | COMPLETED Add support for pointers to mapper in upsilon                     |         |       |  4:44 |   6.0 |
 | COMPLETED Discuss the current approach with end users                       |         |       |  1:31 |   1.9 |
-| COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   3.0 |
-| STARTED Create a new yarn type for primitives                               |         |       |  9:19 |  11.8 |
-| STARTED Add mapping support between upsilon and LAM                         |         |       |  1:56 |   2.5 |
-| STARTED Make the Zeta model compilable                                      |         |       |  0:45 |   1.0 |
-| STARTED Add support for Language Agnostic Models (LAM)                      |         |       |  6:55 |   8.8 |
-| STARTED Map upsilon primitives to intrinsics                                |         |       |  3:04 |   3.9 |
-| STARTED Add support for configurable enumerations types                     |         |       |  3:42 |   4.7 |
+| COMPLETED Rename primitives to built-in                                     |         |       |  2:20 |   2.9 |
+| POSTPONED Create a new yarn type for primitives                             |         |       |  9:19 |  11.8 |
+| POSTPONED Add mapping support between upsilon and LAM                       |         |       |  1:56 |   2.4 |
+| POSTPONED Make the Zeta model compilable                                    |         |       |  0:45 |   0.9 |
+| POSTPONED Add support for Language Agnostic Models (LAM)                    |         |       |  6:55 |   8.7 |
+| POSTPONED Map upsilon primitives to intrinsics                              |         |       |  3:04 |   3.9 |
+| POSTPONED Add support for configurable enumerations types                   |         |       |  3:42 |   4.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2017-01-30 Mon 09:21]
+    CLOCK: [2017-01-30 Mon 09:02]--[2017-01-30 Mon 09:22] =>  0:20
     CLOCK: [2017-01-28 Sat 17:17]--[2017-01-28 Sat 17:29] =>  0:12
     CLOCK: [2017-01-28 Sat 15:30]--[2017-01-28 Sat 15:39] =>  0:09
     CLOCK: [2017-01-28 Sat 14:31]--[2017-01-28 Sat 15:29] =>  0:58
@@ -625,7 +627,8 @@ require loading the built-in model to locate a default type. We should
 probably only locate this type once we have got the first enumeration
 that needs it.
 
-*** STARTED Create a new yarn type for primitives                     :story:
+*** POSTPONED Create a new yarn type for primitives                   :story:
+    CLOSED: [2017-01-30 Mon 09:21]
     CLOCK: [2017-01-28 Sat 17:13]--[2017-01-28 Sat 17:16] =>  0:03
     CLOCK: [2017-01-28 Sat 16:02]--[2017-01-28 Sat 17:12] =>  1:10
     CLOCK: [2017-01-27 Fri 13:26]--[2017-01-27 Fri 14:16] =>  0:50
@@ -716,7 +719,8 @@ trying to avoid. One sneaky way out is to call primitives "builtins"
 and call these "primitives". This somewhat reflects the truth in that
 builtins are supposed to be hardware level concepts.
 
-*** STARTED Add mapping support between upsilon and LAM               :story:
+*** POSTPONED Add mapping support between upsilon and LAM             :story:
+    CLOSED: [2017-01-30 Mon 09:21]
     CLOCK: [2017-01-26 Thu 06:57]--[2017-01-26 Thu 07:40] =>  0:43
     CLOCK: [2017-01-25 Wed 17:59]--[2017-01-25 Wed 18:10] =>  0:11
     CLOCK: [2017-01-25 Wed 17:39]--[2017-01-25 Wed 17:58] =>  0:19
@@ -746,13 +750,15 @@ Notes:
 - we are not adding the LAM mapping to the upsilon id container.
 - we need to add support for "default mappings"
 
-*** STARTED Make the Zeta model compilable                            :story:
+*** POSTPONED Make the Zeta model compilable                          :story:
+    CLOSED: [2017-01-30 Mon 09:21]
     CLOCK: [2017-01-24 Tue 09:35]--[2017-01-24 Tue 10:20] =>  0:45
 
 We need to work through the list of issues with the Zeta model and get
 it to a compilable state.
 
-*** STARTED Add support for Language Agnostic Models (LAM)            :story:
+*** POSTPONED Add support for Language Agnostic Models (LAM)          :story:
+    CLOSED: [2017-01-30 Mon 09:21]
     CLOCK: [2017-01-24 Tue 18:20]--[2017-01-24 Tue 18:40] =>  0:20
     CLOCK: [2017-01-24 Tue 17:26]--[2017-01-24 Tue 18:19] =>  0:53
     CLOCK: [2017-01-24 Tue 13:02]--[2017-01-24 Tue 17:25] =>  4:23
@@ -856,7 +862,8 @@ Links:
 - [[http://stackoverflow.com/questions/741054/mapping-between-stl-c-and-c-sharp-containers][Mapping between stl C++ and C# containers]]
 - [[http://stackoverflow.com/questions/3659044/comparison-of-c-stl-collections-and-c-sharp-collections][Comparison of C++ STL collections and C# collections?]]
 
-*** STARTED Map upsilon primitives to intrinsics                      :story:
+*** POSTPONED Map upsilon primitives to intrinsics                    :story:
+    CLOSED: [2017-01-30 Mon 09:21]
     CLOCK: [2017-01-26 Thu 08:42]--[2017-01-26 Thu 09:39] =>  0:57
     CLOCK: [2017-01-26 Thu 07:39]--[2017-01-26 Thu 07:43] =>  0:04
     CLOCK: [2017-01-25 Wed 17:30]--[2017-01-25 Wed 17:38] =>  0:08
@@ -886,7 +893,8 @@ Another alternative is to apply hard-coded regexes:
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
 
-*** STARTED Add support for configurable enumerations types           :story:
+*** POSTPONED Add support for configurable enumerations types         :story:
+    CLOSED: [2017-01-30 Mon 09:21]
     CLOCK: [2017-01-28 Sat 20:41]--[2017-01-28 Sat 21:39] =>  0:58
     CLOCK: [2017-01-28 Sat 19:09]--[2017-01-28 Sat 20:16] =>  1:07
     CLOCK: [2017-01-28 Sat 18:53]--[2017-01-28 Sat 19:08] =>  0:15
@@ -915,558 +923,5 @@ Tasks:
 - add meta-data parameter to enumeration expander
 - add resolver support to resolve name
 - add meta-data flag for using language default type
-
-*** Validate enum types                                               :story:
-
-The following are the valid types for enumerations:
-
-- C#: byte, sbyte, short, ushort, int, uint, long, or ulong.
-- C++: int, unsigned int, long, unsigned long, long long, or unsigned long long
-
-We need to populate =can_be_enumeration_underlier= and add these types
-to the indices. We then need to update the validator to check the user
-has selected a valid underlying type.
-
-*** Add support for configurable enumeration values                   :story:
-
-At present we generate the enumeration value as part of the
-transformation process in =yarn.dia=, based on the relative position
-of the enumerator. This is not ideal:
-
-- it does not allow users to supply their own values;
-- it does not allow users to disable enumeration values altogether and
-  rely on language defaults instead.
-
-We could:
-
-- add meta-data for users to supply their own values;
-- add meta-data to disable setting the enumerator value altogether.
-
-*** Allow disabling =invalid= value in enumerations                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I may not want to allow invalid values in
-enumerations because they do not model my problem domain accurately.
-#+end_quote
-
-At present all enumerations must have an invalid value. One can
-conceive cases where that is not a useful thing. We should have a
-dynamic extension flag that disables it.
-
-*** Merge both yarn model validators                                  :story:
-
-In truth we do not need =model= validation, just =intermediate_model=
-validation; the transformation between the two is trivial. What we do
-need is two kinds of =intermediate_model= validation:
-
-- after the "single" =intermediate_model= is generated.
-- after the merged, resolved, etc =intermediate_model= is generated.
-
-We could call these "stages" and have two methods:
-
-- =validate_first_stage=
-- =validate_second_stage=
-
-Actually the problem is this class is going to become too messy. Maybe
-we do need to classes, but reflecting the stages rather than the model
-types:
-
-- first stage validator
-- second stage validator
-
-Both validate =intermediate_model=.
-
-Tasks:
-
-- move =abstract_elements= to indices
-- decomposer now operates on intermediate models
-- rename validators
-
-*** Add validation for C# keywords                                    :story:
-
-At present we are checking the model does not contain C++ keywords but
-we're not doing the same for C#.
-
-- [[https://en.wikibooks.org/wiki/C_Sharp_Programming/Keywords][C# Programming/Keywords]]
-
-We should also ensure models in LAM are checked for both C# and C++
-keywords - or actually always check all keywords for all languages.
-
-*** Tidy-up "is floating point"                                       :story:
-
-We should introduce "point type" enumeration to replace "is floating
-point":
-
-- none
-- floating
-- fixed
-- exact
-
-*** Enumerations coming out of Upsilon are empty                      :story:
-
-We don't seem to be translating the enumerators into yarn
-enumerators.
-
-*** Add support for nullable built-ins and primitives                 :story:
-
-One useful feature in C# is the ability to add nullable types:
-
-: Nullable<int>
-: ?
-
-This is particularly useful for built-in types, although its also
-applicable to value types. For primitives this is slightly more
-straightforward and we can make it a property of the meta-type (since
-the whole point is that users define new primitives for each domain
-type). For built-ins its slightly more tricky because its a property
-of the attribute. We'd have to extend:
-
-- the name tree to add a "is nullable" to each name tree
-- the parser to read nullable and do the right thing
-- LAM, to suport some kind of =lam::nullable= which in C++ translates
-  to =boost::optional= and C# =Nullable=. Interestingly enough we can
-  create a "Nullable type" in the global namespace.
-
-*** Add case conversion support                                       :story:
-
-When we map a LAM model into C#, it will have whatever case we used
-originally. This is not ideal as in C++ we'd like to use underscores
-instead. It would be nice if there was an "identifier converter" that
-went through the model and updated all identifiers from underscores to
-camel case. This includes classes, attributes, enumerators, etc. The
-LAM model would remain with underscores.
-
-For this to work correctly we'd need some kind of "casing" enumeration
-associated with the model, and then another one associated with each
-language. This means that if the model is already in camel case, we
-would just generate camel case for both C++ and C#.
-
-*** Consider renaming LAM to a sewing term                            :story:
-
-In keeping with the rest of Dogen we should also use a sewing term for
-LAM. Wool is an interesting one.
-
-*** Windows package has element mappings                              :story:
-
-For some reason even after renaming the mappings file it is still on
-windows. This could also be a bug of the installer; after a uninstall
-and reinstall the problem went away. Double check with a clean
-install.
-
-*** Comments in C# appear to be the attribute name                    :story:
-
-It seems we are copying across the attribute name rather than a
-comment. This could also be a problem with the input. Check the Zeta
-model.
-
-*** Add support for generic container types to C#                     :story:
-
-We should add all major container types and tests for them.
-
-: IEnumerable<T>
-: ICollection<T>
-: IList<T>
-: IDictionary<K, V>
-: List<T>
-: ConcurrentQueue<T>, ConcurrentStack<T>, LinkedList<T>
-: Dictionary<TKey, TValue>
-: SortedList<TKey, TValue>
-: ConcurrentDictionary<TKey, TValue>
-: KeyedCollection<TKey, TItem>
-
-Notes:
-
-- we need a way to determine if we are using a helper, the assistant
-  or a sequence generator directly.
-
-*** Allow users to choose mapping sets                                :story:
-
-At present we load the "default" mappings, which are also the only
-mappings available. It is entirely possible that users will not agree
-with those mappings. If we add a name to the mappings, and provide a
-meta-data tag to choose mappings we can then allow users to provide
-their own and set the meta-data accordingly. Mapper then reads the
-meta-data in the model and uses the requested element map. For this we
-need to name the element maps and we also need to create a "mapping
-set". These can be indexed by name in the mapping repository. Mapper
-chooses the mapping set to use.
-
-*** Allow users to override mapping sets at the element level         :story:
-
-Sometimes we may want to use a different mapping just for a particular
-element. For example, by default =lam::linked_list= binds to
-=std::list= for C++; once Dogen supports =std::forward_list=, one may
-want to override this for a partial number of elements. It would be
-nice if one could have a meta-data tag at the attribute level that
-would override the mapping. The one slight wrinkle is that we would
-not be able to supply a breakdown of:
-
-- simple name
-- model name
-- internal modules
-
-and so forth. So this may cause issues for resolution. We'd have to
-test it and see what breaks. If this fails, the alternative is that
-the mapping is by id, and we'd resolve it internally using the mapping
-container, e.g.:
-
-- create a map of names for each language by id
-- user supplies the id for a given language, we look it up and
-  retrieve the name.
-
-*** Add support for command line meta-data parameters                 :story:
-
-We do not want to force end users to change their existing file
-format. However, it is sometimes necessary to supply parameters into
-dogen which are not representable in the existing format. We could
-create a very simple extension to the command line arguments that
-would generate scribbles; these would then be appended to the model
-during the yarn workflow. Example:
-
-: --kvp a=b
-
-or:
-
-: --meta-data a=b
-
-*** Do not generate upsilon proxy models                              :story:
-
-At present we are marking all types in an upsilon config as target. In
-practice, only one of the models is the target.
-
-*** Load system models based on language prefix                       :story:
-
-We used a convention for system models that have the language as a
-prefix:
-
-: cpp.boost.json
-: cpp.builtins.json
-: cpp.std.json
-: csharp.builtins.json
-: csharp.system.collections.generic.json
-: csharp.system.collections.json
-: upsilon.builtins.json
-
-Coincidentally, this could make life easier when it comes to filtering
-models by language: we could pattern match the file name depending on
-the language and only load those who match. The convention would then
-become a rule for system models. With this we would not have to load
-the models, process annotations, etc just to get access to the
-language.
-
-*** Add support for ignoring types                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to ignore certain types I am working
-on so that I can evolve my diagram over time, whilst still being able
-to commit it.
-#+end_quote
-
-Sometimes when changing a diagram it may be useful to set some types
-to "ignore", i.e. make dogen pretend they don't exist at all. For
-instance one may want to introduce new types one at a time. It would
-be nice to have a dynamic extension flag for ignoring.
-
-We should probably have some kind of warning to ensure users are aware
-of the types being ignored.
-
-*** Add auxiliary function properties to c#                           :story:
-
-We need to associate a function with an attribute and a
-formatter. This could be the helper or the assistant (or nothing).
-
-Actually this is not quite so straightforward. In =io= (c#) we have:
-
-: assistant.Add("ByteProperty", value.ByteProperty, true/*withSeparator*/);
-
-This is a bit of a problem because we now need to different
-invocations, one for helper another for the assistant, which differ on
-the function prototype. For the helper we need something like:
-
-: Add(assistant, "ByteProperty", value.ByteProperty, true/*withSeparator*/);
-
-So a string is no longer sufficient. Maybe we could have a struct with
-auxiliary function properties:
-
-- auxiliary function types = enum with { assistant, helper }
-- auxiliary function name = string
-
-So we can have a map of attribute id to map of formatter id to
-auxiliary function properties.
-
-Actually we should also create "attribute properties" as a top-level
-container so that in the future we can latch on other attribute level
-properties.
-
-*** Add internal object dumper resolution                             :story:
-
-We should try to resolve an object to a local dumper, if one exists;
-for all model types and primitives. Add a registrar for local dumpers.
-
-: using System;
-: using System.Collections.Generic;
-:
-: namespace Dogen.TestModels.CSharpModel
-: {
-:     static public class DynamicDumperRegistrar
-:     {
-:         public interface IDynamicDumper
-:         {
-:             void Dump(AssistantDumper assistant, object value);
-:         }
-:
-:         static private IDictionary<Type, IDynamicDumper> _dumpers = new Dictionary<Type, IDynamicDumper>();
-:
-:         static void RegisterDumper(Type type, IDynamicDumper dumper)
-:         {
-:         }
-:     }
-: }
-
-*** Fix issues with bintray windows uploads                           :story:
-
-At present we are doing a lot of hacks for windows:
-
-- hardcoding the path to the package
-- not uploading on just tags
-- uploading to the top-level folder instead of the version.
-
-Ideally we want to reuse the Travis BinTray descriptor but AppVeyor
-does not support this directly.
-
-*** Model references are not transitive                               :story:
-
-For some reason we do not seem to be following references of
-referenced models. We should load them automatically, now that they
-are part of the meta-data. However, the =yarn.json= model breaks when
-we remove the reference to annotation even though it does not use this
-model directly and =yarn= is referencing it correctly.
-
-*** Add support for boxed types                                       :story:
-
-At present we support built-in types such as =int= but not
-=System.Integer=. In theory we should be able to add these types with:
-
-:        "quilt.csharp.assistant.requires_assistance": true,
-:        "quilt.csharp.assistant.method_postfix": "ShortByte"
-
-And they should behave just like built-ins.
-
-*** Add handcrafted class to C# test model                            :story:
-
-We should make sure handcrafted code works in C#.
-
-Actually in order to get handcrafted types to work we need support for
-enablement. This is a somewhat tricky feature so we should leave it
-for after all the main ones are done.
-
-*** Add support for arrays                                            :story:
-
-At present the yarn parser does not support array notation:
-=string[]=. We need to look into how arrays would work for C++ and
-implement it in a compatible way.
-
-Links:
-
-- [[https://www.dotnetperls.com/array][array]]
-
-*** Add fluency support for C#                                        :story:
-
-We need to add fluent support for C#.
-
-C# properties are not compatible with the fluent pattern. Instead, one
-needs to create builders, across the inheritance tree.
-
-Links:
-
-- [[http://stackoverflow.com/questions/13761666/how-to-use-fluent-style-syntactic-sugar-with-c-sharp-property-declaration][How to use Fluent style syntactic sugar with c# property declaration]]
-
-*** Add visitor support to C#                                         :story:
-
-Implement the visitor formatters for C#.
-
-*** Benchmarks do not work for utility tests                          :story:
-
-When we run the benchmarks for utility we get an error:
-
-: Running 95 test cases...
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/utility/tests/asserter_tests.cpp(141): error: in "asserter_tests/assert_directory_good_data_set_returns_true": check asserter::assert_directory(e, a) has failed
-
-Seems like the tests do not clean up after themselves. We need to add
-some clean up logic and re-enable the tests.
-
-*** Add cross-model support to C#                                     :story:
-
-At present we do not have any tests that prove that cross-model
-support is working (other than proxy models). We need to create a user
-level model that makes use of types from another model. In theory it
-should just work since we are using fully qualified names everywhere.
-
-*** Generate AssemblyInfo in C#                                       :story:
-
-We need to inject a type for this in fabric. For now we can leave it
-mainly blank but in the future we need to have meta-data in yarn for
-all of its properties:
-
-: [assembly: AssemblyTitle ("TestDogen")]
-: [assembly: AssemblyDescription ("")]
-: [assembly: AssemblyConfiguration ("")]
-: [assembly: AssemblyCompany ("")]
-: [assembly: AssemblyProduct ("")]
-: [assembly: AssemblyCopyright ("marco")]
-: [assembly: AssemblyTrademark ("")]
-: [assembly: AssemblyCulture ("")]
-: [assembly: AssemblyVersion ("1.0.*")]
-
-These appear to just be properties at the model level.
-
-*** Consider adding a clone method for C#                             :story:
-
-It would be nice to have a way to clone a object graph. We probably
-have an equivalent story for this for C++ in the backlog.
-
-*** Consider making the output directory configurable in C#           :story:
-
-At present we are outputting binaries into the =bin= directory,
-locally on the project directory. However, it would make more sense to
-output to =build/output= like C++ does. For this to work, we need to
-be able to supply an output directory as meta-data.
-
-*** Add support for nuget                                             :story:
-
-A proxy model may require obtaining a nuget package. Users should be
-able to define a proxy model as requiring a nuget package and then
-Dogen should generate packages.config and add all such models to it.
-
-: +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
-
-*** Augment element ID with meta-model type                           :story:
-
-The element ID is considered to be a system-level, opaque
-identifier. It could, for all intents and purposes, be a large int. We
-have decided to use a string so we can dump it to the log and figure
-out what is going on without having to map IDs to a human-readable
-value. In the same vein, we could also add another component to the ID
-that would contain the meta-model element for that ID. This
-information could be placed at the start.
-
-Of course, we will not be able to remove the look-ups we have at
-present that try to figure out the meta-model element because they are
-related to resolution. But for any other cases it may result in
-slightly more performant code. We need to look at all the use cases.
-
-*** Identifiable needs to use camel case in C#                        :story:
-
-At present we are building identifiables with underscores.
-
-*** Generate windows packages with CPack                              :story:
-
-We tried to generate windows packages by using the NSIS tool, but
-there are no binaries available for it at present. However, it seems
-CPack can now generate MSIs directly:
-
-- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
-- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
-
-We need to investigate how to get the build to produce MSIs using WIX.
-
-*** Move enablement into quilt                                        :story:
-
-We need to make use of the exact same logic as implemented in
-=quilt.cpp= for enablement. Perhaps all of the enablement related
-functionality can be lifted and grafted onto quilt without any major
-changes.
-
-*** Add feature to disable regions                                    :story:
-
-We need a way to stop outputting regions if the user does not want
-them.
-
-*** Add parameters for using imported assemblies                      :story:
-
-Assemblies imported via proxy models need to have the ability to
-supply two parameters:
-
-- assembly name: this is not always the same as the proxy model name;
-- root namespace: similarly this may differ from the proxy model name.
-
-These should be supplied as meta data and used when constructing
-fabric types.
-
-*** Add msbuild target for C# test model                              :story:
-
-Once we are generating solutions, we should detect msbuild (or xbuild)
-and build the solution. This should be a CMake target that runs on
-Travis.
-
-*** Add visibility to yarn elements                                   :story:
-
-We need to be able to mark yarn types as:
-
-- public
-- internal
-
-This can then be used by C++ as well for visibility etc.
-
-*** Add partial element support to yarn                               :story:
-
-We need to be able to mark yarn elements as "partial". It is then up
-to programming languages to map this to a language feature. At present
-only [[https://msdn.microsoft.com/en-us/library/wa80x488.aspx][C# would do so]].
-
-It would be nice to have a more meaningful name at yarn
-level. However, seems like this is a fairly general programming
-concept now: [[https://en.wikipedia.org/wiki/Class_(computer_programming)#Partial][wikipedia]].
-
-*** Add visibility to yarn attributes                                 :story:
-
-We need to be able to mark yarn attributes as:
-
-- public
-- private
-- protected
-
-*** Add final support in C#                                           :story:
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/88c54tsw.aspx][sealed (C# Reference)]]
-
-*** Add aspects for C# serialisation support                          :story:
-
-We need to add serialisation support:
-
-- C# serialisation
-- Data Contract serialisation
-- Json serialisation
-
-In C# these are done via attributes so we do not need additional
-facets. We will need a lot of configuration knobs though:
-
-- ability to switch a serialisation method on at model level or
-  element level.
-- support for serialisation specific arguments such as parameters for
-  Json.Net.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
-- [[https://msdn.microsoft.com/en-us/library/ms731073(v%3Dvs.110).aspx][Serialization and Deserialization]]
-- [[https://msdn.microsoft.com/en-us/library/ms733127(v%3Dvs.110).aspx][Using Data Contracts]]
-- [[https://msdn.microsoft.com/en-us/library/ms731923(v%3Dvs.110).aspx][Types Supported by the Data Contract Serializer]]
-
-*** Consider adding =artefact_set= to formatters' model               :story:
-
-We are using collections of artefacts quite a bit, and it makes sense
-to create an abstraction for it such as a =artefact_set=. However, for
-this to work properly we need to add at least one basic behaviour: the
-ability to merge two artefact sets. Or else we will end up having to
-unpack the artefacts, then merging them, then creating a new artefact
-set.
-
-Problem is, we either create the artefact set as a non-generatable
-type - not ideal - or we create it as generatable and need to add this
-as a free function. We need to wait until dogen has support for
-merging code generation.
 
 ** Deprecated
