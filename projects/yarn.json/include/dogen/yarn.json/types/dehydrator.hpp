@@ -26,10 +26,12 @@
 #endif
 
 #include <map>
-#include <unordered_map>
 #include <string>
 #include <ostream>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
+#include <boost/optional.hpp>
+#include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -51,14 +53,22 @@ private:
     }
 
 private:
+    boost::optional<annotations::scribble_group> scribble_group_for_name(
+        const intermediate_model& im, const yarn::name& n) const;
+    boost::optional<annotations::scribble>
+    scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
+        const yarn::name& n) const;
     void dehydrate_name(const name& n, std::ostream& s) const;
     void dehydrate_names(const std::list<name>& names, std::ostream& s) const;
-    void dehydrate_annotations(const intermediate_model& im,
-        const std::string& id, std::ostream& s) const;
-    void dehydrate_element(const intermediate_model& im, const element& e,
-        const std::string& meta_type, std::ostream& s) const;
-    void dehydrate_attributes(const std::list<attribute>& attrs,
+    void dehydrate_annotations(
+        const boost::optional<annotations::scribble>& scribble,
         std::ostream& s) const;
+    void dehydrate_element(
+        const boost::optional<annotations::scribble_group>& sg,
+        const element& e, const std::string& meta_type, std::ostream& s) const;
+    void dehydrate_attributes(
+        const boost::optional<annotations::scribble_group>& sg,
+        const std::list<attribute>& attrs, std::ostream& s) const;
     void dehydrate_objects(const intermediate_model& im, std::ostream& s) const;
     void dehydrate_concepts(const intermediate_model& im,
         std::ostream& s) const;

@@ -57,6 +57,32 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
         !im.exceptions().empty();
 }
 
+boost::optional<annotations::scribble_group>
+dehydrator::scribble_group_for_name(const intermediate_model& im,
+    const yarn::name& n) const {
+
+    const auto& scribble_groups(im.indices().scribble_groups());
+    const auto i(scribble_groups.find(n.id()));
+    if (i == scribble_groups.end())
+        return boost::optional<annotations::scribble_group>();
+
+    return i->second;
+}
+
+boost::optional<annotations::scribble> dehydrator::
+scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
+    const yarn::name& n) const {
+
+    if (!sg)
+        return boost::optional<annotations::scribble>();
+
+    const auto i(sg->children().find(n.id()));
+    if (i == sg->children().end())
+        return boost::optional<annotations::scribble>();
+
+    return i->second;
+}
+
 void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
     formatters::utility_formatter uf(s);
     s << " { ";
@@ -88,27 +114,20 @@ dehydrate_names(const std::list<name>& names, std::ostream& s) const {
     s << " ] ";
 }
 
-void dehydrator::dehydrate_annotations(const intermediate_model& im,
-    const std::string& id, std::ostream& s) const {
+void dehydrator::
+dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
+    std::ostream& s) const {
+
+    if (!scribble || scribble->entries().empty())
+        return;
 
     formatters::utility_formatter uf(s);
-    bool has_annotations(false);
-    const auto& scribble_groups(im.indices().scribble_groups());
-    const auto i(scribble_groups.find(id));
-    if (i == scribble_groups.end())
-        return;
-
-    bool is_first(true);
-    const auto scribble(i->second.parent());
-    has_annotations = !scribble.entries().empty();
-    if (!has_annotations)
-        return;
-
     s << comma_space;
     uf.insert_quoted("annotation");
     s << " : {";
 
-    for (const auto& entry : scribble.entries()) {
+    bool is_first(true);
+    for (const auto& entry : scribble->entries()) {
         if (!is_first)
             s << ", ";
         uf.insert_quoted(entry.first);
@@ -119,8 +138,9 @@ void dehydrator::dehydrate_annotations(const intermediate_model& im,
     s << " }";
 }
 
-void dehydrator::dehydrate_element(const intermediate_model& im,
-    const element& e, const std::string& meta_type, std::ostream& s) const {
+void dehydrator::dehydrate_element(
+    const boost::optional<annotations::scribble_group>& sg, const element& e,
+    const std::string& meta_type, std::ostream& s) const {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
@@ -155,11 +175,14 @@ void dehydrator::dehydrate_element(const intermediate_model& im,
         s << " ] ";
     }
 
-    dehydrate_annotations(im, e.name().id(), s);
+    if (sg)
+        dehydrate_annotations(sg->parent(), s);
 }
 
-void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
-    std::ostream& s) const {
+void dehydrator::dehydrate_attributes(
+    const boost::optional<annotations::scribble_group>& sg,
+    const std::list<attribute>& attrs, std::ostream& s) const {
+
     formatters::utility_formatter uf(s);
     uf.insert_quoted("attributes");
     s << ": [";
@@ -188,6 +211,9 @@ void dehydrator::dehydrate_attributes(const std::list<attribute>& attrs,
             uf.insert_quoted(tidy_up_string(a.documentation()));
         }
 
+        const auto scribble(scribble_for_name(sg, a.name()));
+        dehydrate_annotations(scribble, s);
+
         s << " }";
         is_first = false;
     }
@@ -207,8 +233,10 @@ dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
             s << comma_space;
 
         const auto& o(pair.second);
+        const auto sg(scribble_group_for_name(im, o.name()));
+
         s << " { ";
-        dehydrate_element(im, o, "object", s);
+        dehydrate_element(sg, o, "object", s);
         if (!o.parents().empty()) {
             s << comma_space;
             uf.insert_quoted("parents");
@@ -218,7 +246,7 @@ dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
 
         if (!o.local_attributes().empty()) {
             s << comma_space;
-            dehydrate_attributes(o.local_attributes(), s);
+            dehydrate_attributes(sg, o.local_attributes(), s);
         }
         s << " }";
         is_first = false;
@@ -238,8 +266,10 @@ dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
             s << comma_space;
 
         const auto& c(pair.second);
+        const auto sg(scribble_group_for_name(im, c.name()));
+
         s << " { ";
-        dehydrate_element(im, c, "concept", s);
+        dehydrate_element(sg, c, "concept", s);
 
         if (!c.refines().empty()) {
             s << comma_space;
@@ -250,7 +280,7 @@ dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
 
         if (!c.local_attributes().empty()) {
             s << comma_space;
-            dehydrate_attributes(c.local_attributes(), s);
+            dehydrate_attributes(sg, c.local_attributes(), s);
         }
         s << " }";
         output_comma = true;
@@ -274,10 +304,13 @@ dehydrate_modules(const intermediate_model& im, std::ostream& s) const {
         if (output_comma)
             s << comma_space;
 
-        const auto& o(pair.second);
+        const auto& m(pair.second);
+        const auto sg(scribble_group_for_name(im, m.name()));
+
         s << " { ";
-        dehydrate_element(im, o, "module", s);
+        dehydrate_element(sg, m, "module", s);
         s << " }";
+
         output_comma = true;
     }
 }
@@ -293,17 +326,19 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
         if (output_comma)
             s << comma_space;
 
-        const auto& o(pair.second);
+        const auto& e(pair.second);
+        const auto sg(scribble_group_for_name(im, e.name()));
+
         s << " { ";
-        dehydrate_element(im, o, "enumeration", s);
+        dehydrate_element(sg, e, "enumeration", s);
         s << comma_space;
 
         /*
          * Remove invalid from enumerators.
          */
         std::vector<enumerator> enumerators;
-        enumerators.reserve(o.enumerators().size());
-        for (const auto& en : o.enumerators()) {
+        enumerators.reserve(e.enumerators().size());
+        for (const auto& en : e.enumerators()) {
             // FIXME: to lower
             if (en.name().simple() != "invalid")
                 enumerators.push_back(en);
@@ -332,6 +367,9 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
                 uf.insert_quoted(tidy_up_string(en.documentation()));
             }
 
+            const auto scribble(scribble_for_name(sg, en.name()));
+            dehydrate_annotations(scribble, s);
+
             s << " }";
             is_first = false;
         }
@@ -354,9 +392,11 @@ dehydrate_primitives(const intermediate_model& im, std::ostream& s) const {
         if (output_comma)
             s << comma_space;
 
-        const auto& o(pair.second);
+        const auto& p(pair.second);
+        const auto sg(scribble_group_for_name(im, p.name()));
+
         s << " { ";
-        dehydrate_element(im, o, "primitive", s);
+        dehydrate_element(sg, p, "primitive", s);
         s << " }";
         output_comma = true;
     }
@@ -375,9 +415,11 @@ dehydrate_exceptions(const intermediate_model& im, std::ostream& s) const {
         if (output_comma)
             s << comma_space;
 
-        const auto& o(pair.second);
+        const auto& p(pair.second);
+        const auto sg(scribble_group_for_name(im, p.name()));
+
         s << " { ";
-        dehydrate_element(im, o, "exception", s);
+        dehydrate_element(sg, p, "exception", s);
         s << " }";
         output_comma = true;
     }
@@ -410,7 +452,9 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
         }
     }
 
-    dehydrate_annotations(im, im.name().id(), s);
+    const auto sg(scribble_group_for_name(im, im.name()));
+    if (sg)
+        dehydrate_annotations(sg->parent(), s);
 
     if (has_elements(im)) {
         s << comma_space;
