@@ -18,18 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/test_models/enumeration/io/test_all_knobs_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace enumeration {
 
-#include "dogen/test_models/enumeration/odb/a_class_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/book_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/short_enum_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/colour_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/test_all_knobs_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/pkg1/shape_types_pragmas.hpp"
+std::ostream& operator<<(std::ostream& s, const test_all_knobs& v) {
+    s << "{ " << "\"__type__\": " << "\"test_all_knobs\", " << "\"value\": ";
 
-#endif
+    std::string attr;
+    switch (v) {
+    case test_all_knobs::invalid:
+        attr = "\"invalid\"";
+        break;
+    case test_all_knobs::an_enumerator:
+        attr = "\"an_enumerator\"";
+        break;
+    case test_all_knobs::another_enumerator:
+        attr = "\"another_enumerator\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for test_all_knobs");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} } }

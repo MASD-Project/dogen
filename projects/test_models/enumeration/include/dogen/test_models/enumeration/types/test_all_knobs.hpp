@@ -18,18 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_TEST_ALL_KNOBS_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_TEST_ALL_KNOBS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/odb/a_class_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/book_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/short_enum_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/colour_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/test_all_knobs_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/pkg1/shape_types_pragmas.hpp"
+namespace dogen {
+namespace test_models {
+namespace enumeration {
+
+enum class test_all_knobs : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    an_enumerator = 1,
+    another_enumerator = 2
+};
+
+} } }
 
 #endif

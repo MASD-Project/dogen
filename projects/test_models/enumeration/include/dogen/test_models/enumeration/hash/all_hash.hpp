@@ -29,6 +29,7 @@
 #include "dogen/test_models/enumeration/hash/book_types_hash.hpp"
 #include "dogen/test_models/enumeration/hash/short_enum_hash.hpp"
 #include "dogen/test_models/enumeration/hash/colour_types_hash.hpp"
+#include "dogen/test_models/enumeration/hash/test_all_knobs_hash.hpp"
 #include "dogen/test_models/enumeration/hash/pkg1/shape_types_hash.hpp"
 
 #endif

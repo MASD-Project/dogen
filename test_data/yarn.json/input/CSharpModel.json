@@ -949,6 +949,29 @@
     },
     {
       "name": {
+        "simple": "TestAllKnobs"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
+        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "AnEnumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "AnotherEnumerator"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "MyException"
       },
       "meta_type": "exception",

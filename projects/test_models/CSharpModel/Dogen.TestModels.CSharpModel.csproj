@@ -71,6 +71,7 @@
     <Compile Include="Dumpers\PrimitiveBuiltinsDumper.cs" />
     <Compile Include="Dumpers\SecondChildWithoutMembersDumper.cs" />
     <Compile Include="Dumpers\ShortEnumDumper.cs" />
+    <Compile Include="Dumpers\TestAllKnobsDumper.cs" />
     <Compile Include="Dumpers\ThirdChildWithMembersDumper.cs" />
     <Compile Include="SequenceGenerators\AllObjectCollectionsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
@@ -113,6 +114,7 @@
     <Compile Include="SequenceGenerators\PrimitiveBuiltinsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\SecondChildWithoutMembersSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ShortEnumSequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\TestAllKnobsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ThirdChildWithMembersSequenceGenerator.cs" />
     <Compile Include="Types\AllObjectCollections.cs" />
     <Compile Include="Types\Association.cs" />
@@ -156,6 +158,7 @@
     <Compile Include="Types\PrimitiveBuiltins.cs" />
     <Compile Include="Types\SecondChildWithoutMembers.cs" />
     <Compile Include="Types\ShortEnum.cs" />
+    <Compile Include="Types\TestAllKnobs.cs" />
     <Compile Include="Types\ThirdChildWithMembers.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

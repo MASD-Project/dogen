@@ -18,18 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
+#include "dogen/test_models/enumeration/test_data/test_all_knobs_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace enumeration {
 
-#include "dogen/test_models/enumeration/odb/a_class_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/book_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/short_enum_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/colour_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/test_all_knobs_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/pkg1/shape_types_pragmas.hpp"
+test_all_knobs_generator::test_all_knobs_generator() : position_(0) { }
+void test_all_knobs_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<test_all_knobs>(position % 3);
+}
 
-#endif
+test_all_knobs_generator::result_type
+test_all_knobs_generator::create(const unsigned int  position) {
+    result_type r;
+    test_all_knobs_generator::populate(position, r);
+    return r;
+}
+
+test_all_knobs_generator::result_type
+test_all_knobs_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

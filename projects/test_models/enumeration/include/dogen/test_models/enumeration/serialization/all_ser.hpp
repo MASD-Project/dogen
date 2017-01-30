@@ -29,6 +29,7 @@
 #include "dogen/test_models/enumeration/serialization/book_types_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/short_enum_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/colour_types_ser.hpp"
+#include "dogen/test_models/enumeration/serialization/test_all_knobs_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/pkg1/shape_types_ser.hpp"
 
 #endif

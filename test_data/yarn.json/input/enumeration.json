@@ -149,6 +149,29 @@
           }
         }
       ]
+    },
+    {
+      "name": {
+        "simple": "test_all_knobs"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
+        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "an_enumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "another_enumerator"
+          }
+        }
+      ]
     }
   ]
 }

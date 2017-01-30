@@ -151,9 +151,12 @@ void enumeration_expander::populate_from_annotations(
     e.use_implementation_defined_underlying_element(
         s.get_boolean_content_or_default(uidue));
 
+    const auto uidev(tg.use_implementation_defined_enumerator_values);
+    e.use_implementation_defined_enumerator_values(
+        s.get_boolean_content_or_default(uidev));
 
-
-
+    const auto aie(tg.add_invalid_enumerator);
+    e.add_invalid_enumerator(s.get_boolean_content_or_default(aie));
 }
 
 void enumeration_expander::populate_from_annotations(

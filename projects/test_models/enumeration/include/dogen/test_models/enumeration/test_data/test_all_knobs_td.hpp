@@ -18,18 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_ODB_ALL_PRAGMAS_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_TEST_DATA_TEST_ALL_KNOBS_TD_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_TEST_DATA_TEST_ALL_KNOBS_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/odb/a_class_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/book_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/short_enum_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/colour_types_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/test_all_knobs_pragmas.hpp"
-#include "dogen/test_models/enumeration/odb/pkg1/shape_types_pragmas.hpp"
+#include "dogen/test_models/enumeration/types/test_all_knobs.hpp"
+
+namespace dogen {
+namespace test_models {
+namespace enumeration {
+
+class test_all_knobs_generator {
+public:
+    test_all_knobs_generator();
+
+public:
+    typedef dogen::test_models::enumeration::test_all_knobs result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} } }
 
 #endif

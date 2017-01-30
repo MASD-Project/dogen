@@ -29,6 +29,7 @@
 #include "dogen/test_models/enumeration/types/book_types.hpp"
 #include "dogen/test_models/enumeration/types/short_enum.hpp"
 #include "dogen/test_models/enumeration/types/colour_types.hpp"
+#include "dogen/test_models/enumeration/types/test_all_knobs.hpp"
 #include "dogen/test_models/enumeration/types/pkg1/shape_types.hpp"
 
 #endif
