@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/test_models/enumeration/test_data/a_class_td.hpp"
+#include "dogen/test_models/enumeration/test_data/hex_flags_td.hpp"
 #include "dogen/test_models/enumeration/test_data/book_types_td.hpp"
 #include "dogen/test_models/enumeration/test_data/short_enum_td.hpp"
 #include "dogen/test_models/enumeration/test_data/colour_types_td.hpp"

@@ -99,6 +99,58 @@
     },
     {
       "name": {
+        "simple": "hex_flags"
+      },
+      "meta_type": "enumeration",
+      "documentation": "This is an example of an enumeration using hex flags.\n",
+      "annotation": {
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "none"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x00"
+          }
+        },
+        {
+          "name": {
+            "simple": "top"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x01"
+          }
+        },
+        {
+          "name": {
+            "simple": "bottom"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x02"
+          }
+        },
+        {
+          "name": {
+            "simple": "left"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x04"
+          }
+        },
+        {
+          "name": {
+            "simple": "right"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x08"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "shape_types",
         "internal_modules": "pkg1"
       },

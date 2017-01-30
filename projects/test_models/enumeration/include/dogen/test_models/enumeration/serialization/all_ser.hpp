@@ -26,6 +26,7 @@
 #endif
 
 #include "dogen/test_models/enumeration/serialization/a_class_ser.hpp"
+#include "dogen/test_models/enumeration/serialization/hex_flags_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/book_types_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/short_enum_ser.hpp"
 #include "dogen/test_models/enumeration/serialization/colour_types_ser.hpp"

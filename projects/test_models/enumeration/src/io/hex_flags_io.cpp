@@ -18,19 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/test_models/enumeration/io/hex_flags_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace enumeration {
 
-#include "dogen/test_models/enumeration/hash/a_class_hash.hpp"
-#include "dogen/test_models/enumeration/hash/hex_flags_hash.hpp"
-#include "dogen/test_models/enumeration/hash/book_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/short_enum_hash.hpp"
-#include "dogen/test_models/enumeration/hash/colour_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/test_all_knobs_hash.hpp"
-#include "dogen/test_models/enumeration/hash/pkg1/shape_types_hash.hpp"
+std::ostream& operator<<(std::ostream& s, const hex_flags& v) {
+    s << "{ " << "\"__type__\": " << "\"hex_flags\", " << "\"value\": ";
 
-#endif
+    std::string attr;
+    switch (v) {
+    case hex_flags::none:
+        attr = "\"none\"";
+        break;
+    case hex_flags::top:
+        attr = "\"top\"";
+        break;
+    case hex_flags::bottom:
+        attr = "\"bottom\"";
+        break;
+    case hex_flags::left:
+        attr = "\"left\"";
+        break;
+    case hex_flags::right:
+        attr = "\"right\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for hex_flags");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} } }

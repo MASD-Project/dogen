@@ -99,7 +99,7 @@
     },
     "value_type": "text",
     "template_kind": "instance",
-    "scope": "entity"
+    "scope": "property"
   },
   {
     "name": {

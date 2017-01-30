@@ -18,19 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
+#include "dogen/test_models/enumeration/test_data/hex_flags_td.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace enumeration {
 
-#include "dogen/test_models/enumeration/hash/a_class_hash.hpp"
-#include "dogen/test_models/enumeration/hash/hex_flags_hash.hpp"
-#include "dogen/test_models/enumeration/hash/book_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/short_enum_hash.hpp"
-#include "dogen/test_models/enumeration/hash/colour_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/test_all_knobs_hash.hpp"
-#include "dogen/test_models/enumeration/hash/pkg1/shape_types_hash.hpp"
+hex_flags_generator::hex_flags_generator() : position_(0) { }
+void hex_flags_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<hex_flags>(position % 5);
+}
 
-#endif
+hex_flags_generator::result_type
+hex_flags_generator::create(const unsigned int  position) {
+    result_type r;
+    hex_flags_generator::populate(position, r);
+    return r;
+}
+
+hex_flags_generator::result_type
+hex_flags_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

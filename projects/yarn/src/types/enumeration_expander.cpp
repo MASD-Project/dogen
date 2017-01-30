@@ -163,8 +163,11 @@ void enumeration_expander::populate_from_annotations(
     const enumerator_type_group& tg, enumerator& e) const {
     const auto& a(e.annotation());
     const annotations::entry_selector s(a);
-    if (s.has_entry(tg.value))
+    if (s.has_entry(tg.value)) {
         e.value(s.get_text_content(tg.value));
+        BOOST_LOG_SEV(lg, debug) << "Read enumerator value: "
+                                 << e.value();
+    }
 }
 
 name enumeration_expander::obtain_enumeration_default_underlying_element_name(
@@ -267,8 +270,16 @@ expand_enumerators(const enumerator_type_group& tg, const languages l,
         }
 
         auto copy(en);
+
+        /*
+         * We try to read the value from the annotations. If its not
+         * populated we set it ourselves. Note that it is validation's
+         * job to ensure the user doesn't start mixing and matching,
+         * populating the value for some enumerators but not others.
+         */
         populate_from_annotations(tg, copy);
-        copy.value(boost::lexical_cast<std::string>(pos));
+        if (copy.value().empty())
+            copy.value(boost::lexical_cast<std::string>(pos));
 
         /*
          * Expand name. At this point, we've only populated

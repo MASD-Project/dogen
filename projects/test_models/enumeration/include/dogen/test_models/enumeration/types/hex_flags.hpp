@@ -18,19 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_HEX_FLAGS_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_HEX_FLAGS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/hash/a_class_hash.hpp"
-#include "dogen/test_models/enumeration/hash/hex_flags_hash.hpp"
-#include "dogen/test_models/enumeration/hash/book_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/short_enum_hash.hpp"
-#include "dogen/test_models/enumeration/hash/colour_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/test_all_knobs_hash.hpp"
-#include "dogen/test_models/enumeration/hash/pkg1/shape_types_hash.hpp"
+namespace dogen {
+namespace test_models {
+namespace enumeration {
+
+/**
+ * @brief This is an example of an enumeration using hex flags.
+ */
+enum class hex_flags : unsigned int {
+    none = 0x00,
+    top = 0x01,
+    bottom = 0x02,
+    left = 0x04,
+    right = 0x08
+};
+
+} } }
 
 #endif

@@ -145,11 +145,7 @@ public:
     void operator()(yarn::module& m) { update_extensible(m); }
     void operator()(yarn::concept& c) { update_extensible_and_stateful(c); }
     void operator()(yarn::builtin& b) { update_extensible(b); }
-    void operator()(yarn::enumeration& e) {
-        update_extensible(e);
-        for (auto& en : e.enumerators())
-            update_extensible(en);
-    }
+    void operator()(yarn::enumeration& e);
     void operator()(yarn::primitive& p) { update_extensible(p); }
     void operator()(yarn::object& o) { update_extensible_and_stateful(o); }
     void operator()(yarn::exception& e) { update_extensible(e); }
@@ -160,6 +156,33 @@ private:
     const std::unordered_map<std::string, annotations::annotation_group>&
     annotation_groups_;
 };
+
+void annotation_updater::operator()(yarn::enumeration& e) {
+    const auto id(e.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
+
+    const auto i(annotation_groups_.find(id));
+    if (i == annotation_groups_.end()) {
+        BOOST_LOG_SEV(lg, debug) << "No annotation group for element: " << id;
+        return;
+    }
+
+    const auto& ag(i->second);
+    e.annotation(ag.parent());
+
+    for (auto& en : e.enumerators()) {
+        const auto n(en.name().simple());
+        const auto i(ag.children().find(n));
+        if (i == ag.children().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Enumerator has no annotation: " << n
+                                     << ". Element: " << e.name().id();
+            continue;
+        }
+
+        en.annotation(i->second);
+        BOOST_LOG_SEV(lg, debug) << "Created annotations for attribute: " << n;
+    }
+}
 
 annotation_updater::annotation_updater(const yarn::name& model_name,
     const std::unordered_map<std::string, annotations::annotation_group>&

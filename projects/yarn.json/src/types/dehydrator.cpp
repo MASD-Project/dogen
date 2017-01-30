@@ -77,7 +77,7 @@ scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
     if (!sg)
         return boost::optional<annotations::scribble>();
 
-    const auto i(sg->children().find(n.id()));
+    const auto i(sg->children().find(n.simple()));
     if (i == sg->children().end())
         return boost::optional<annotations::scribble>();
 

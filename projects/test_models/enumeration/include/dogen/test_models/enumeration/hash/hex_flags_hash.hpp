@@ -18,19 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_HASH_ALL_HASH_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_HASH_HEX_FLAGS_HASH_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_HASH_HEX_FLAGS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/hash/a_class_hash.hpp"
-#include "dogen/test_models/enumeration/hash/hex_flags_hash.hpp"
-#include "dogen/test_models/enumeration/hash/book_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/short_enum_hash.hpp"
-#include "dogen/test_models/enumeration/hash/colour_types_hash.hpp"
-#include "dogen/test_models/enumeration/hash/test_all_knobs_hash.hpp"
-#include "dogen/test_models/enumeration/hash/pkg1/shape_types_hash.hpp"
+#include <functional>
+#include "dogen/test_models/enumeration/types/hex_flags.hpp"
+
+namespace std {
+
+template<>
+struct hash<dogen::test_models::enumeration::hex_flags> {
+public:
+    size_t operator()(const dogen::test_models::enumeration::hex_flags& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
+};
+
+}
 
 #endif
