@@ -46,7 +46,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar << make_nvp("underlying_type", v.underlying_type_);
+    ar << make_nvp("underlying_element", v.underlying_element_);
     ar << make_nvp("enumerators", v.enumerators_);
     ar << make_nvp("use_implementation_defined_underlying_element", v.use_implementation_defined_underlying_element_);
     ar << make_nvp("use_implementation_defined_enumerator_values", v.use_implementation_defined_enumerator_values_);
@@ -59,7 +59,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar >> make_nvp("underlying_type", v.underlying_type_);
+    ar >> make_nvp("underlying_element", v.underlying_element_);
     ar >> make_nvp("enumerators", v.enumerators_);
     ar >> make_nvp("use_implementation_defined_underlying_element", v.use_implementation_defined_underlying_element_);
     ar >> make_nvp("use_implementation_defined_enumerator_values", v.use_implementation_defined_enumerator_values_);

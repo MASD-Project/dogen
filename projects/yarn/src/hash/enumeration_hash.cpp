@@ -49,7 +49,7 @@ std::size_t enumeration_hasher::hash(const enumeration& v) {
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
-    combine(seed, v.underlying_type());
+    combine(seed, v.underlying_element());
     combine(seed, hash_std_vector_dogen_yarn_enumerator(v.enumerators()));
     combine(seed, v.use_implementation_defined_underlying_element());
     combine(seed, v.use_implementation_defined_enumerator_values());

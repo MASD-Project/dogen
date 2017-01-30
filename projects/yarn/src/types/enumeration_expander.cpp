@@ -222,15 +222,15 @@ make_invalid_enumerator(const name& n, const languages l) const {
 
 void enumeration_expander::expand_default_underlying_element(
     const name& default_underlying_element_name, enumeration& e) {
-    const auto ut(e.underlying_type());
-    BOOST_LOG_SEV(lg, debug) << "Underlying type: '" << ut.id() << "'";
+    const auto ue(e.underlying_element());
+    BOOST_LOG_SEV(lg, debug) << "Underlying type: '" << ue.id() << "'";
 
-    if (!ut.simple().empty())
+    if (!ue.simple().empty())
         return;
 
     BOOST_LOG_SEV(lg, debug) << "Defaulting enumeration to type: "
                              << default_underlying_element_name.id();
-    e.underlying_type(default_underlying_element_name);
+    e.underlying_element(default_underlying_element_name);
 }
 
 void enumeration_expander::

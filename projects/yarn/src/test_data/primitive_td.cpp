@@ -49,9 +49,10 @@ primitive_generator::primitive_generator() : position_(0) { }
 void primitive_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.underlying_type(create_dogen_yarn_name(position + 0));
+    v.underlying_element(create_dogen_yarn_name(position + 0));
     v.is_nullable(create_bool(position + 1));
     v.value_attribute(create_dogen_yarn_attribute(position + 2));
+    v.use_type_aliasing(create_bool(position + 3));
 }
 
 primitive_generator::result_type

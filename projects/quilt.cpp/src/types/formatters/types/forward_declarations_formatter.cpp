@@ -96,7 +96,7 @@ format(const context& ctx, const yarn::element& e) const {
 
             if (fd.is_enum()) {
 a.stream() << std::endl;
-a.stream() << "enum class " << fd.name().simple() << " : " << fd.underlying_type().simple() << ";" << std::endl;
+a.stream() << "enum class " << fd.name().simple() << " : " << fd.underlying_element().simple() << ";" << std::endl;
 a.stream() << std::endl;
             } else {
 a.stream() << std::endl;

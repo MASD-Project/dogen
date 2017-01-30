@@ -13759,7 +13759,7 @@ an enumeration, false otherwise.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#underlying_type#</dia:string>
+            <dia:string>#underlying_element#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#yarn::name#</dia:string>

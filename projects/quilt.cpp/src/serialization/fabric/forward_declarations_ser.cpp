@@ -45,7 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("is_enum", v.is_enum_);
-    ar << make_nvp("underlying_type", v.underlying_type_);
+    ar << make_nvp("underlying_element", v.underlying_element_);
     ar << make_nvp("is_exception", v.is_exception_);
 }
 
@@ -56,7 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("is_enum", v.is_enum_);
-    ar >> make_nvp("underlying_type", v.underlying_type_);
+    ar >> make_nvp("underlying_element", v.underlying_element_);
     ar >> make_nvp("is_exception", v.is_exception_);
 }
 

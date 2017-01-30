@@ -58,9 +58,10 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const dogen::yarn::name& underlying_type,
+        const dogen::yarn::name& underlying_element,
         const bool is_nullable,
-        const dogen::yarn::attribute& value_attribute);
+        const dogen::yarn::attribute& value_attribute,
+        const bool use_type_aliasing);
 
 private:
     template<typename Archive>
@@ -80,10 +81,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const dogen::yarn::name& underlying_type() const;
-    dogen::yarn::name& underlying_type();
-    void underlying_type(const dogen::yarn::name& v);
-    void underlying_type(const dogen::yarn::name&& v);
+    /**
+     * @brief Underlying element of each instance of the primitive.
+     */
+    /**@{*/
+    const dogen::yarn::name& underlying_element() const;
+    dogen::yarn::name& underlying_element();
+    void underlying_element(const dogen::yarn::name& v);
+    void underlying_element(const dogen::yarn::name&& v);
+    /**@}*/
 
     /**
      * @brief If true, this element can be null (empty).
@@ -93,10 +99,23 @@ public:
     void is_nullable(const bool v);
     /**@}*/
 
+    /**
+     * @brief Attribute that represents the value of the primitive.
+     */
+    /**@{*/
     const dogen::yarn::attribute& value_attribute() const;
     dogen::yarn::attribute& value_attribute();
     void value_attribute(const dogen::yarn::attribute& v);
     void value_attribute(const dogen::yarn::attribute&& v);
+    /**@}*/
+
+    /**
+     * @brief If true and if the programming language supports it, it uses type aliases
+     */
+    /**@{*/
+    bool use_type_aliasing() const;
+    void use_type_aliasing(const bool v);
+    /**@}*/
 
 public:
     bool operator==(const primitive& rhs) const;
@@ -112,9 +131,10 @@ public:
     primitive& operator=(primitive other);
 
 private:
-    dogen::yarn::name underlying_type_;
+    dogen::yarn::name underlying_element_;
     bool is_nullable_;
     dogen::yarn::attribute value_attribute_;
+    bool use_type_aliasing_;
 };
 
 } }

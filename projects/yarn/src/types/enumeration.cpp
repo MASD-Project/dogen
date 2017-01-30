@@ -57,7 +57,7 @@ enumeration::enumeration(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::name& underlying_type,
+    const dogen::yarn::name& underlying_element,
     const std::vector<dogen::yarn::enumerator>& enumerators,
     const bool use_implementation_defined_underlying_element,
     const bool use_implementation_defined_enumerator_values,
@@ -71,7 +71,7 @@ enumeration::enumeration(
       in_global_module,
       stereotypes,
       is_element_extension),
-      underlying_type_(underlying_type),
+      underlying_element_(underlying_element),
       enumerators_(enumerators),
       use_implementation_defined_underlying_element_(use_implementation_defined_underlying_element),
       use_implementation_defined_enumerator_values_(use_implementation_defined_enumerator_values),
@@ -105,7 +105,7 @@ void enumeration::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::yarn::element::to_stream(s);
     s << ", "
-      << "\"underlying_type\": " << underlying_type_ << ", "
+      << "\"underlying_element\": " << underlying_element_ << ", "
       << "\"enumerators\": " << enumerators_ << ", "
       << "\"use_implementation_defined_underlying_element\": " << use_implementation_defined_underlying_element_ << ", "
       << "\"use_implementation_defined_enumerator_values\": " << use_implementation_defined_enumerator_values_ << ", "
@@ -117,7 +117,7 @@ void enumeration::swap(enumeration& other) noexcept {
     dogen::yarn::element::swap(other);
 
     using std::swap;
-    swap(underlying_type_, other.underlying_type_);
+    swap(underlying_element_, other.underlying_element_);
     swap(enumerators_, other.enumerators_);
     swap(use_implementation_defined_underlying_element_, other.use_implementation_defined_underlying_element_);
     swap(use_implementation_defined_enumerator_values_, other.use_implementation_defined_enumerator_values_);
@@ -132,7 +132,7 @@ bool enumeration::equals(const dogen::yarn::element& other) const {
 
 bool enumeration::operator==(const enumeration& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
-        underlying_type_ == rhs.underlying_type_ &&
+        underlying_element_ == rhs.underlying_element_ &&
         enumerators_ == rhs.enumerators_ &&
         use_implementation_defined_underlying_element_ == rhs.use_implementation_defined_underlying_element_ &&
         use_implementation_defined_enumerator_values_ == rhs.use_implementation_defined_enumerator_values_ &&
@@ -145,20 +145,20 @@ enumeration& enumeration::operator=(enumeration other) {
     return *this;
 }
 
-const dogen::yarn::name& enumeration::underlying_type() const {
-    return underlying_type_;
+const dogen::yarn::name& enumeration::underlying_element() const {
+    return underlying_element_;
 }
 
-dogen::yarn::name& enumeration::underlying_type() {
-    return underlying_type_;
+dogen::yarn::name& enumeration::underlying_element() {
+    return underlying_element_;
 }
 
-void enumeration::underlying_type(const dogen::yarn::name& v) {
-    underlying_type_ = v;
+void enumeration::underlying_element(const dogen::yarn::name& v) {
+    underlying_element_ = v;
 }
 
-void enumeration::underlying_type(const dogen::yarn::name&& v) {
-    underlying_type_ = std::move(v);
+void enumeration::underlying_element(const dogen::yarn::name&& v) {
+    underlying_element_ = std::move(v);
 }
 
 const std::vector<dogen::yarn::enumerator>& enumeration::enumerators() const {

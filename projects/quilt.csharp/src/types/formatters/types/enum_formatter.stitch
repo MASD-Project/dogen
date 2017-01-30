@@ -33,7 +33,7 @@ using System;
             auto snf(a.make_scoped_namespace_formatter(ns));
             a.comment(e.documentation(), 1/*indent*/);
 #>
-    public enum <#= sn #> : <#= a.get_qualified_name(ye.underlying_type()) #>
+    public enum <#= sn #> : <#= a.get_qualified_name(ye.underlying_element()) #>
     {
 <#+
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());

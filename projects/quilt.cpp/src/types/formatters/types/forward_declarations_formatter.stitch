@@ -43,7 +43,7 @@ format(const context& ctx, const yarn::element& e) const {
             if (fd.is_enum()) {
 #>
 
-enum class <#= fd.name().simple() #> : <#= fd.underlying_type().simple() #>;
+enum class <#= fd.name().simple() #> : <#= fd.underlying_element().simple() #>;
 
 <#+
             } else {

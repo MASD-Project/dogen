@@ -640,9 +640,9 @@ make_enumeration(const unsigned int i, const name& model_name,
     r.documentation(documentation);
     r.origin_type(ot);
 
-    name un;
-    un.simple(unsigned_int);
-    r.underlying_type(un);
+    name ue;
+    ue.simple(unsigned_int);
+    r.underlying_element(ue);
 
     const auto lambda([&](const unsigned int pos) -> enumerator {
             enumerator r;

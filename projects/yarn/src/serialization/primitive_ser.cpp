@@ -45,9 +45,10 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar << make_nvp("underlying_type", v.underlying_type_);
+    ar << make_nvp("underlying_element", v.underlying_element_);
     ar << make_nvp("is_nullable", v.is_nullable_);
     ar << make_nvp("value_attribute", v.value_attribute_);
+    ar << make_nvp("use_type_aliasing", v.use_type_aliasing_);
 }
 
 template<typename Archive>
@@ -56,9 +57,10 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar >> make_nvp("underlying_type", v.underlying_type_);
+    ar >> make_nvp("underlying_element", v.underlying_element_);
     ar >> make_nvp("is_nullable", v.is_nullable_);
     ar >> make_nvp("value_attribute", v.value_attribute_);
+    ar >> make_nvp("use_type_aliasing", v.use_type_aliasing_);
 }
 
 } }

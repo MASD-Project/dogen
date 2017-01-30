@@ -43,7 +43,7 @@ std::size_t forward_declarations_hasher::hash(const forward_declarations& v) {
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
     combine(seed, v.is_enum());
-    combine(seed, v.underlying_type());
+    combine(seed, v.underlying_element());
     combine(seed, v.is_exception());
 
     return seed;

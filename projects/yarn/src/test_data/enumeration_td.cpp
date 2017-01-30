@@ -57,7 +57,7 @@ enumeration_generator::enumeration_generator() : position_(0) { }
 void enumeration_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.underlying_type(create_dogen_yarn_name(position + 0));
+    v.underlying_element(create_dogen_yarn_name(position + 0));
     v.enumerators(create_std_vector_dogen_yarn_enumerator(position + 1));
     v.use_implementation_defined_underlying_element(create_bool(position + 2));
     v.use_implementation_defined_enumerator_values(create_bool(position + 3));

@@ -41,9 +41,10 @@ std::size_t primitive_hasher::hash(const primitive& v) {
 
     combine(seed, dynamic_cast<const dogen::yarn::element&>(v));
 
-    combine(seed, v.underlying_type());
+    combine(seed, v.underlying_element());
     combine(seed, v.is_nullable());
     combine(seed, v.value_attribute());
+    combine(seed, v.use_type_aliasing());
 
     return seed;
 }

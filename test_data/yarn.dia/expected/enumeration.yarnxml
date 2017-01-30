@@ -261,7 +261,7 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<underlying_type>
+				<underlying_element>
 					<id></id>
 					<simple></simple>
 					<qualified>
@@ -284,7 +284,7 @@
 						<element></element>
 					</location>
 					<identifiable></identifiable>
-				</underlying_type>
+				</underlying_element>
 				<enumerators class_id="33" tracking_level="0" version="0">
 					<count>4</count>
 					<item_version>0</item_version>
@@ -468,7 +468,7 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<underlying_type>
+				<underlying_element>
 					<id></id>
 					<simple></simple>
 					<qualified>
@@ -491,7 +491,7 @@
 						<element></element>
 					</location>
 					<identifiable></identifiable>
-				</underlying_type>
+				</underlying_element>
 				<enumerators>
 					<count>4</count>
 					<item_version>0</item_version>
@@ -678,7 +678,7 @@ this is a long comment
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<underlying_type>
+				<underlying_element>
 					<id></id>
 					<simple></simple>
 					<qualified>
@@ -701,7 +701,7 @@ this is a long comment
 						<element></element>
 					</location>
 					<identifiable></identifiable>
-				</underlying_type>
+				</underlying_element>
 				<enumerators>
 					<count>3</count>
 					<item_version>0</item_version>

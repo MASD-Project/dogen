@@ -64,7 +64,7 @@ public:
     void operator()(const yarn::enumeration& e) {
         const auto fd(create(e));
         fd->is_enum(true);
-        fd->underlying_type(e.underlying_type());
+        fd->underlying_element(e.underlying_element());
         result_.push_back(fd);
     }
 

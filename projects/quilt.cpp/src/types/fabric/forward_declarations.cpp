@@ -44,7 +44,7 @@ forward_declarations::forward_declarations(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const bool is_enum,
-    const dogen::yarn::name& underlying_type,
+    const dogen::yarn::name& underlying_element,
     const bool is_exception)
     : dogen::yarn::element(
       documentation,
@@ -56,7 +56,7 @@ forward_declarations::forward_declarations(
       stereotypes,
       is_element_extension),
       is_enum_(is_enum),
-      underlying_type_(underlying_type),
+      underlying_element_(underlying_element),
       is_exception_(is_exception) { }
 
 void forward_declarations::accept(const dogen::yarn::element_visitor& v) const {
@@ -100,7 +100,7 @@ void forward_declarations::to_stream(std::ostream& s) const {
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"is_enum\": " << is_enum_ << ", "
-      << "\"underlying_type\": " << underlying_type_ << ", "
+      << "\"underlying_element\": " << underlying_element_ << ", "
       << "\"is_exception\": " << is_exception_
       << " }";
 }
@@ -110,7 +110,7 @@ void forward_declarations::swap(forward_declarations& other) noexcept {
 
     using std::swap;
     swap(is_enum_, other.is_enum_);
-    swap(underlying_type_, other.underlying_type_);
+    swap(underlying_element_, other.underlying_element_);
     swap(is_exception_, other.is_exception_);
 }
 
@@ -123,7 +123,7 @@ bool forward_declarations::equals(const dogen::yarn::element& other) const {
 bool forward_declarations::operator==(const forward_declarations& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         is_enum_ == rhs.is_enum_ &&
-        underlying_type_ == rhs.underlying_type_ &&
+        underlying_element_ == rhs.underlying_element_ &&
         is_exception_ == rhs.is_exception_;
 }
 
@@ -141,20 +141,20 @@ void forward_declarations::is_enum(const bool v) {
     is_enum_ = v;
 }
 
-const dogen::yarn::name& forward_declarations::underlying_type() const {
-    return underlying_type_;
+const dogen::yarn::name& forward_declarations::underlying_element() const {
+    return underlying_element_;
 }
 
-dogen::yarn::name& forward_declarations::underlying_type() {
-    return underlying_type_;
+dogen::yarn::name& forward_declarations::underlying_element() {
+    return underlying_element_;
 }
 
-void forward_declarations::underlying_type(const dogen::yarn::name& v) {
-    underlying_type_ = v;
+void forward_declarations::underlying_element(const dogen::yarn::name& v) {
+    underlying_element_ = v;
 }
 
-void forward_declarations::underlying_type(const dogen::yarn::name&& v) {
-    underlying_type_ = std::move(v);
+void forward_declarations::underlying_element(const dogen::yarn::name&& v) {
+    underlying_element_ = std::move(v);
 }
 
 bool forward_declarations::is_exception() const {

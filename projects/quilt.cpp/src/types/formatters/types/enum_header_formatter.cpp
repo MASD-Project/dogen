@@ -92,7 +92,7 @@ format(const context& ctx, const yarn::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(e.documentation());
-a.stream() << "enum class " << ye.name().simple() << " : " << a.get_qualified_name(ye.underlying_type()) << " {" << std::endl;
+a.stream() << "enum class " << ye.name().simple() << " : " << a.get_qualified_name(ye.underlying_element()) << " {" << std::endl;
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
 a.stream() << "    " << en.name().simple() << " = " << en.value() << sf.postfix() << a.comment_inline(en.documentation()) << std::endl;

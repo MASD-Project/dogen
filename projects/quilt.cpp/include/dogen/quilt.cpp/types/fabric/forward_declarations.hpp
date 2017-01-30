@@ -57,7 +57,7 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const bool is_enum,
-        const dogen::yarn::name& underlying_type,
+        const dogen::yarn::name& underlying_element,
         const bool is_exception);
 
 private:
@@ -91,10 +91,10 @@ public:
      * @brief The underlying type of the enumeration, if we are an enum forward declaration.
      */
     /**@{*/
-    const dogen::yarn::name& underlying_type() const;
-    dogen::yarn::name& underlying_type();
-    void underlying_type(const dogen::yarn::name& v);
-    void underlying_type(const dogen::yarn::name&& v);
+    const dogen::yarn::name& underlying_element() const;
+    dogen::yarn::name& underlying_element();
+    void underlying_element(const dogen::yarn::name& v);
+    void underlying_element(const dogen::yarn::name&& v);
     /**@}*/
 
     bool is_exception() const;
@@ -115,7 +115,7 @@ public:
 
 private:
     bool is_enum_;
-    dogen::yarn::name underlying_type_;
+    dogen::yarn::name underlying_element_;
     bool is_exception_;
 };
 

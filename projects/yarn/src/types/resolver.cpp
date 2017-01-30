@@ -48,8 +48,8 @@ const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
 const std::string undefined_type("Object has attribute with undefined type: ");
-const std::string invalid_underlying_type(
-    "Could not find enumeration's underlying type: ");
+const std::string invalid_underlying_element(
+    "Could not find enumeration's underlying element: ");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
@@ -338,14 +338,14 @@ void resolver::resolve_enumerations(intermediate_model& im) const {
         if (e.use_implementation_defined_underlying_element())
             continue;
 
-        const auto ut(e.underlying_type());
-        const auto id(ut.id());
-        BOOST_LOG_SEV(lg, debug) << "Underlying type: '" << id << "'";
+        const auto ue(e.underlying_element());
+        const auto id(ue.id());
+        BOOST_LOG_SEV(lg, debug) << "Underlying element: '" << id << "'";
 
-        if (!is_builtin(im, ut)) {
-            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << id;
+        if (!is_builtin(im, ue)) {
+            BOOST_LOG_SEV(lg, error) << invalid_underlying_element << id;
             BOOST_THROW_EXCEPTION(
-                resolution_error(invalid_underlying_type + id));
+                resolution_error(invalid_underlying_element + id));
         }
     }
 }

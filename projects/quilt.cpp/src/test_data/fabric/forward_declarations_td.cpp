@@ -46,7 +46,7 @@ void forward_declarations_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
     v.is_enum(create_bool(position + 0));
-    v.underlying_type(create_dogen_yarn_name(position + 1));
+    v.underlying_element(create_dogen_yarn_name(position + 1));
     v.is_exception(create_bool(position + 2));
 }
 
