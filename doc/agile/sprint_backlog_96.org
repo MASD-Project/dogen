@@ -5,7 +5,6 @@
 
 * Mission Statement
 
-- Finish C# support;
 - Finish Upsilon support.
 
 * Stories
