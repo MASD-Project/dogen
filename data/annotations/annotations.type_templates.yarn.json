@@ -174,5 +174,41 @@
     "value_type": "text_collection",
     "template_kind": "instance",
     "scope": "root_module"
+  },
+  {
+    "name": {
+      "simple": "underlying_element",
+      "qualified": "yarn.primitive.underlying_element"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "is_nullable",
+      "qualified": "yarn.primitive.is_nullable"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity"
+  },
+  {
+    "name": {
+      "simple": "use_type_aliasing",
+      "qualified": "yarn.primitive.use_type_aliasing"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "entity"
   }
 ]

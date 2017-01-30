@@ -97,4 +97,19 @@ std::string traits::enumerator::value() {
     return r;
 }
 
+std::string traits::primitive::underlying_element() {
+    static std::string r("yarn.primitive.underlying_element");
+    return r;
+}
+
+std::string traits::primitive::is_nullable() {
+    static std::string r("yarn.primitive.is_nullable");
+    return r;
+}
+
+std::string traits::primitive::use_type_aliasing() {
+    static std::string r("yarn.primitive.use_type_aliasing");
+    return r;
+}
+
 } }

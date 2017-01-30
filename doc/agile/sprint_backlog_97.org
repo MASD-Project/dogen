@@ -13,16 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-30 Mon 09:45]
+#+CAPTION: Clock summary at [2017-01-30 Mon 12:01]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:21* |      |      | 100.0 |
+| *Total time*                                                                | *2:35* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:21   |      |      | 100.0 |
-| Active                                                                      |        | 0:21 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:01 |   4.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:20 |  95.2 |
+| Stories                                                                     | 2:35   |      |      | 100.0 |
+| Active                                                                      |        | 2:35 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:01 |   0.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:20 |  12.9 |
+| STARTED Create a new yarn type for primitives                               |        |      | 2:14 |  86.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -77,7 +78,10 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
-*** Create a new yarn type for primitives                             :story:
+*** STARTED Create a new yarn type for primitives                     :story:
+    CLOCK: [2017-01-30 Mon 11:28]--[2017-01-30 Mon 12:01] =>  0:33
+    CLOCK: [2017-01-30 Mon 10:49]--[2017-01-30 Mon 11:27] =>  0:38
+    CLOCK: [2017-01-30 Mon 09:45]--[2017-01-30 Mon 10:48] =>  1:03
 
 - add a new yarn element: primitive. Add an attribute of type name
   called =underlying_type=.

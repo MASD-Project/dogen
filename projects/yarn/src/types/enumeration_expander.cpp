@@ -61,7 +61,6 @@ operator<<(std::ostream& s,
       << "enumeration_expander::enumeration_type_group\"" << ", "
       << "\"use_implementation_defined_underlying_element\": "
       << v.use_implementation_defined_underlying_element << ", "
-      << "\"underlying_element\": " << v.underlying_element << ", "
       << "\"use_implementation_defined_enumerator_values\": "
       << v.use_implementation_defined_enumerator_values << ", "
       << "\"add_invalid_enumerator\": " << v.add_invalid_enumerator
@@ -108,9 +107,6 @@ make_enumeration_type_group(const annotations::type_repository& atrp) const {
     r.use_implementation_defined_underlying_element =
         s.select_type_by_name(uidue);
 
-    const auto ue(en::underlying_element());
-    r.underlying_element = s.select_type_by_name(ue);
-
     const auto uidev(en::use_implementation_defined_enumerator_values());
     r.use_implementation_defined_enumerator_values =
         s.select_type_by_name(uidev);
@@ -154,6 +150,10 @@ void enumeration_expander::populate_from_annotations(
     const auto uidue(tg.use_implementation_defined_underlying_element);
     e.use_implementation_defined_underlying_element(
         s.get_boolean_content_or_default(uidue));
+
+
+
+
 }
 
 void enumeration_expander::populate_from_annotations(

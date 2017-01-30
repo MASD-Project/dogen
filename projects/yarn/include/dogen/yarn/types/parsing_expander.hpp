@@ -26,9 +26,13 @@
 #endif
 
 #include <string>
-#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -36,22 +40,34 @@ namespace yarn {
 
 /**
  * @brief Expands all encoded representations that require parsing
- * into their parsed form.
+ * into their yarn form.
  *
  * As an example, all local attributes have unparsed types - strings
  * following a well defined notation - that need to be parsed into
  * name trees. All such forms of encoding are processed by this
  * expander.
+ *
+ * It is also responsible for reading all meta-data that requires
+ * parsing such as parent names, enumeration underlying types and so
+ * forth.
  */
 class parsing_expander {
 private:
     struct type_group {
         annotations::type parent;
+        annotations::type enumeration_underlying_element;
+        annotations::type primitive_underlying_element;
     };
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
 
     std::string make_parent(const type_group& tg,
+        const annotations::annotation& a) const;
+
+    std::string make_enumeration_underlying_element(const type_group& tg,
+        const annotations::annotation& a) const;
+
+    std::string make_primitive_underlying_element(const type_group& tg,
         const annotations::annotation& a) const;
 
 private:
@@ -76,6 +92,23 @@ private:
     void parse_parent(const type_group& tg, const location& model_location,
         const std::unordered_set<std::string>& top_level_modules,
         object& o) const;
+
+    /**
+     * @brief Parses the underlying element in the supplied
+     * enumeration.
+     */
+    void parse_underlying_element(const type_group& tg,
+        const location& model_location,
+        const std::unordered_set<std::string>& top_level_modules,
+        enumeration& e) const;
+
+    /**
+     * @brief Parses underlying element in the supplied primitive.
+     */
+    void parse_underlying_element(const type_group& tg,
+        const location& model_location,
+        const std::unordered_set<std::string>& top_level_modules,
+        primitive& p) const;
 
 public:
     /**

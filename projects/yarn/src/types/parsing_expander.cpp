@@ -42,6 +42,8 @@ auto lg(logger_factory("yarn.parsing_expander"));
 const std::string empty_type("Attribute type is empty: ");
 const std::string parent_name_conflict(
     "Parent name is defined in both meta-data and structure of model: ");
+const std::string underlying_element_conflict(
+    "Underlying element name is already defined: ");
 
 }
 
@@ -52,15 +54,41 @@ parsing_expander::type_group parsing_expander::make_type_group(
     const annotations::type_repository& atrp) const {
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    r.parent = s.select_type_by_name(traits::generalization::parent());
+    const auto gp(traits::generalization::parent());
+    r.parent = s.select_type_by_name(gp);
+
+    const auto eue(traits::enumeration::underlying_element());
+    r.enumeration_underlying_element = s.select_type_by_name(eue);
+
+    const auto pue(traits::primitive::underlying_element());
+    r.primitive_underlying_element = s.select_type_by_name(pue);
+
     return r;
 }
 
 std::string parsing_expander::
-make_parent(const type_group& tg, const annotations::annotation& o) const {
-    const annotations::entry_selector s(o);
+make_parent(const type_group& tg, const annotations::annotation& a) const {
+    const annotations::entry_selector s(a);
     if (s.has_entry(tg.parent))
         return s.get_text_content(tg.parent);
+
+    return std::string();
+}
+
+std::string parsing_expander::make_enumeration_underlying_element(
+    const type_group& tg, const annotations::annotation& a) const {
+    const annotations::entry_selector s(a);
+    if (s.has_entry(tg.enumeration_underlying_element))
+        return s.get_text_content(tg.enumeration_underlying_element);
+
+    return std::string();
+}
+
+std::string parsing_expander::make_primitive_underlying_element(
+    const type_group& tg, const annotations::annotation& a) const {
+    const annotations::entry_selector s(a);
+    if (s.has_entry(tg.primitive_underlying_element))
+        return s.get_text_content(tg.primitive_underlying_element);
 
     return std::string();
 }
@@ -151,6 +179,72 @@ parse_parent(const type_group& tg, const location& model_location,
     o.parents().push_back(pn);
 }
 
+void parsing_expander::parse_underlying_element(const type_group& tg,
+    const location& model_location,
+    const std::unordered_set<std::string>& top_level_modules,
+    enumeration& e) const {
+
+    /*
+     * Obtain the underlying element name from the meta-data. If there
+     * is none, there is nothing to do.
+     */
+    const auto s(make_enumeration_underlying_element(tg, e.annotation()));
+    if (s.empty())
+        return;
+
+    /*
+     * If we've already have an underlying element name, this means
+     * there are now two conflicting sources of information.
+     */
+    if (!e.underlying_element().simple().empty()) {
+        const auto& id(e.name().id());
+        BOOST_LOG_SEV(lg, error) << underlying_element_conflict << id;
+        BOOST_THROW_EXCEPTION(
+            expansion_error(underlying_element_conflict + id));
+    }
+
+    /*
+     * Convert the string obtained via meta-data into a yarn name and
+     * set it as our underlying element name.
+     */
+    const auto& tpm(top_level_modules);
+    const auto ue(name_builder::build(model_location, tpm, s));
+    e.underlying_element(ue);
+}
+
+void parsing_expander::parse_underlying_element(const type_group& tg,
+    const location& model_location,
+    const std::unordered_set<std::string>& top_level_modules,
+    primitive& p) const {
+
+    /*
+     * Obtain the underlying element name from the meta-data. If there
+     * is none, there is nothing to do.
+     */
+    const auto s(make_primitive_underlying_element(tg, p.annotation()));
+    if (s.empty())
+        return;
+
+    /*
+     * If we've already have an underlying element name, this means
+     * there are now two conflicting sources of information.
+     */
+    if (!p.underlying_element().simple().empty()) {
+        const auto& id(p.name().id());
+        BOOST_LOG_SEV(lg, error) << underlying_element_conflict << id;
+        BOOST_THROW_EXCEPTION(
+            expansion_error(underlying_element_conflict + id));
+    }
+
+    /*
+     * Convert the string obtained via meta-data into a yarn name and
+     * set it as our underlying element name.
+     */
+    const auto& tpm(top_level_modules);
+    const auto ue(name_builder::build(model_location, tpm, s));
+    p.underlying_element(ue);
+}
+
 void parsing_expander::
 expand(const annotations::type_repository& atrp, intermediate_model& m) const {
     const auto tg(make_type_group(atrp));
@@ -177,6 +271,30 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
 
         try {
             parse_attributes(ml, tlmn, l, c.local_attributes());
+        } catch (boost::exception& e) {
+            e << errmsg_parsing_owner(id);
+            throw;
+        }
+    }
+
+    for (auto& pair : m.enumerations()) {
+        auto& e(pair.second);
+        const auto id(e.name().id());
+
+        try {
+            parse_underlying_element(tg, ml, tlmn, e);
+        } catch (boost::exception& e) {
+            e << errmsg_parsing_owner(id);
+            throw;
+        }
+    }
+
+    for (auto& pair : m.primitives()) {
+        auto& p(pair.second);
+        const auto id(p.name().id());
+
+        try {
+            parse_underlying_element(tg, ml, tlmn, p);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;

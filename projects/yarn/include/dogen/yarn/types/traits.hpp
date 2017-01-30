@@ -57,6 +57,12 @@ struct traits {
     struct enumerator {
         static std::string value();
     };
+
+    struct primitive {
+        static std::string underlying_element();
+        static std::string is_nullable();
+        static std::string use_type_aliasing();
+    };
 };
 
 } }

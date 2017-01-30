@@ -38,7 +38,6 @@ class enumeration_expander final {
 private:
     struct enumeration_type_group {
         annotations::type use_implementation_defined_underlying_element;
-        annotations::type underlying_element;
         annotations::type use_implementation_defined_enumerator_values;
         annotations::type add_invalid_enumerator;
     };
