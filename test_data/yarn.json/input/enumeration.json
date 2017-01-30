@@ -169,7 +169,8 @@
         {
           "name": {
             "simple": "another_enumerator"
-          }
+          },
+          "documentation": "A comment.\n"
         }
       ]
     }

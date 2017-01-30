@@ -702,7 +702,8 @@ this is a long comment
 						<value></value>
 					</item>
 					<item>
-						<documentation></documentation>
+						<documentation>A comment.
+</documentation>
 						<name>
 							<id></id>
 							<simple>another_enumerator</simple>

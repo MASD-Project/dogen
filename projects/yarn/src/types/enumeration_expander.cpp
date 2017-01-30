@@ -239,15 +239,18 @@ void enumeration_expander::expand_default_underlying_element(
 void enumeration_expander::
 expand_enumerators(const languages l, enumeration& e) const {
     std::vector<enumerator> enumerators;
-    enumerators.reserve(e.enumerators().size() + 1/*invalid*/);
-    enumerators.push_back(make_invalid_enumerator(e.name(), l));
+
+    if (e.add_invalid_enumerator()) {
+        enumerators.reserve(e.enumerators().size() + 1/*invalid*/);
+        enumerators.push_back(make_invalid_enumerator(e.name(), l));
+    } else
+        enumerators.reserve(e.enumerators().size());
 
     /*
-     * Update the value of each enumerator, and ensure the
-     * enumerator names are unique. Note that position zero is
-     * already taken by "invalid".
+     * Update the value of each enumerator, and ensure the enumerator
+     * names are unique.
      */
-    unsigned int pos(1);
+    unsigned int pos(e.add_invalid_enumerator() ? 1 : 0);
     yarn::name_factory nf;
     std::set<std::string> enumerator_names;
     for (const auto& en : e.enumerators()) {

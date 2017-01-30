@@ -32,9 +32,6 @@ std::ostream& operator<<(std::ostream& s, const test_all_knobs& v) {
 
     std::string attr;
     switch (v) {
-    case test_all_knobs::invalid:
-        attr = "\"invalid\"";
-        break;
     case test_all_knobs::an_enumerator:
         attr = "\"an_enumerator\"";
         break;

@@ -966,7 +966,8 @@
         {
           "name": {
             "simple": "AnotherEnumerator"
-          }
+          },
+          "documentation": "A comment.\n"
         }
       ]
     },

@@ -30,9 +30,8 @@ namespace test_models {
 namespace enumeration {
 
 enum class test_all_knobs {
-    invalid, ///< Represents an uninitialised enum
     an_enumerator,
-    another_enumerator
+    another_enumerator ///< A comment.
 };
 
 } } }

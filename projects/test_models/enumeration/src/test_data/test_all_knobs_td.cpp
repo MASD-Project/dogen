@@ -27,7 +27,7 @@ namespace enumeration {
 test_all_knobs_generator::test_all_knobs_generator() : position_(0) { }
 void test_all_knobs_generator::
 populate(const unsigned int position, result_type& v) {
-    v = static_cast<test_all_knobs>(position % 3);
+    v = static_cast<test_all_knobs>(position % 2);
 }
 
 test_all_knobs_generator::result_type

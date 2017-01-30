@@ -23,8 +23,7 @@ namespace Dogen.TestModels.CSharpModel
 {
     public enum TestAllKnobs
     {
-        Invalid, /// Represents an uninitialised enum
         AnEnumerator,
-        AnotherEnumerator
+        AnotherEnumerator /// A comment.
     }
 }

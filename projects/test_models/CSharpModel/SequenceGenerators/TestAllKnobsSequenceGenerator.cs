@@ -30,7 +30,7 @@ namespace Dogen.TestModels.CSharpModel
     {
         static internal TestAllKnobs Create(uint position)
         {
-            var result = (TestAllKnobs)(position % 3);
+            var result = (TestAllKnobs)(position % 2);
             return result;
         }
 

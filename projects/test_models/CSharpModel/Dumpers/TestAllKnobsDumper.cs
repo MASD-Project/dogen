@@ -35,9 +35,6 @@ namespace Dogen.TestModels.CSharpModel
             string valueAsString = "Unsupported Value";
             switch (value)
             {
-                case TestAllKnobs.Invalid:
-                    valueAsString = "Invalid";
-                    break;
                 case TestAllKnobs.AnEnumerator:
                     valueAsString = "AnEnumerator";
                     break;

@@ -5828,7 +5828,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>##</value>
+																<value>#A comment.#</value>
 															</value>
 														</item>
 													</values>
