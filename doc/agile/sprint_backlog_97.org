@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-30 Mon 13:37]
+#+CAPTION: Clock summary at [2017-01-30 Mon 14:31]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:32* |      |      | 100.0 |
+| *Total time*                                                                | *4:23* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:32   |      |      | 100.0 |
-| Active                                                                      |        | 3:32 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:01 |   0.5 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:20 |   9.4 |
-| STARTED Create a new yarn type for primitives                               |        |      | 3:11 |  90.1 |
+| Stories                                                                     | 4:23   |      |      | 100.0 |
+| Active                                                                      |        | 4:23 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:01 |   0.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:20 |   7.6 |
+| COMPLETED Add support for configurable enumerations types                   |        |      | 4:01 |  91.6 |
+| STARTED Allow disabling =invalid= value in enumerations                     |        |      | 0:01 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -78,13 +79,68 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
-*** STARTED Create a new yarn type for primitives                     :story:
+*** COMPLETED Add support for configurable enumerations types         :story:
+    CLOSED: [2017-01-30 Mon 14:30]
+    CLOCK: [2017-01-30 Mon 14:10]--[2017-01-30 Mon 14:29] =>  0:19
     CLOCK: [2017-01-30 Mon 13:38]--[2017-01-30 Mon 14:09] =>  0:31
     CLOCK: [2017-01-30 Mon 13:16]--[2017-01-30 Mon 13:37] =>  0:21
     CLOCK: [2017-01-30 Mon 12:39]--[2017-01-30 Mon 13:15] =>  0:36
     CLOCK: [2017-01-30 Mon 11:28]--[2017-01-30 Mon 12:01] =>  0:33
     CLOCK: [2017-01-30 Mon 10:49]--[2017-01-30 Mon 11:27] =>  0:38
     CLOCK: [2017-01-30 Mon 09:45]--[2017-01-30 Mon 10:48] =>  1:03
+
+#+begin_quote
+*Story*: As a dogen user, I need to configure the built-in type of my
+enumerations so that I model my domain accurately.
+#+end_quote
+
+We've updated the =builtins= model with a "default enumeration value"
+field. This allows us to dynamically determine which built-in to use
+as the type of enumerations. However:
+
+- we didn't follow it through in the formatters; we are hard-coding
+  this at present in C++. In a cross-language world, we should
+  dynamically detect the default enumeration type. This is not quite
+  as trivial as it seems (what would happen if we loaded multiple
+  programming languages?). Supporting this properly may require adding
+  a programming language to the model.
+- it is not possible to override this from JSON/Dia. We could do this
+  by supplying a type via dynamic extensions.
+
+Tasks:
+
+- add meta-data parameter to enumeration expander
+- add resolver support to resolve name
+- add meta-data flag for using language default type
+
+*** STARTED Allow disabling =invalid= value in enumerations           :story:
+    CLOCK: [2017-01-30 Mon 14:30]--[2017-01-30 Mon 14:31] =>  0:01
+
+#+begin_quote
+*Story*: As a dogen user, I may not want to allow invalid values in
+enumerations because they do not model my problem domain accurately.
+#+end_quote
+
+At present all enumerations must have an invalid value. One can
+conceive cases where that is not a useful thing. We should have a
+dynamic extension flag that disables it.
+
+*** Add support for configurable enumeration values                   :story:
+
+At present we generate the enumeration value as part of the
+transformation process in =yarn.dia=, based on the relative position
+of the enumerator. This is not ideal:
+
+- it does not allow users to supply their own values;
+- it does not allow users to disable enumeration values altogether and
+  rely on language defaults instead.
+
+We could:
+
+- add meta-data for users to supply their own values;
+- add meta-data to disable setting the enumerator value altogether.
+
+*** Create a new yarn type for primitives                             :story:
 
 - add a new yarn element: primitive. Add an attribute of type name
   called =underlying_type=.
@@ -305,32 +361,6 @@ Another alternative is to apply hard-coded regexes:
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
 
-*** Add support for configurable enumerations types                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I need to configure the built-in type of my
-enumerations so that I model my domain accurately.
-#+end_quote
-
-We've updated the =builtins= model with a "default enumeration value"
-field. This allows us to dynamically determine which built-in to use
-as the type of enumerations. However:
-
-- we didn't follow it through in the formatters; we are hard-coding
-  this at present in C++. In a cross-language world, we should
-  dynamically detect the default enumeration type. This is not quite
-  as trivial as it seems (what would happen if we loaded multiple
-  programming languages?). Supporting this properly may require adding
-  a programming language to the model.
-- it is not possible to override this from JSON/Dia. We could do this
-  by supplying a type via dynamic extensions.
-
-Tasks:
-
-- add meta-data parameter to enumeration expander
-- add resolver support to resolve name
-- add meta-data flag for using language default type
-
 *** Validate enum types                                               :story:
 
 The following are the valid types for enumerations:
@@ -341,32 +371,6 @@ The following are the valid types for enumerations:
 We need to populate =can_be_enumeration_underlier= and add these types
 to the indices. We then need to update the validator to check the user
 has selected a valid underlying type.
-
-*** Add support for configurable enumeration values                   :story:
-
-At present we generate the enumeration value as part of the
-transformation process in =yarn.dia=, based on the relative position
-of the enumerator. This is not ideal:
-
-- it does not allow users to supply their own values;
-- it does not allow users to disable enumeration values altogether and
-  rely on language defaults instead.
-
-We could:
-
-- add meta-data for users to supply their own values;
-- add meta-data to disable setting the enumerator value altogether.
-
-*** Allow disabling =invalid= value in enumerations                   :story:
-
-#+begin_quote
-*Story*: As a dogen user, I may not want to allow invalid values in
-enumerations because they do not model my problem domain accurately.
-#+end_quote
-
-At present all enumerations must have an invalid value. One can
-conceive cases where that is not a useful thing. We should have a
-dynamic extension flag that disables it.
 
 *** Merge both yarn model validators                                  :story:
 

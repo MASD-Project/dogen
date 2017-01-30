@@ -29,10 +29,10 @@ namespace dogen {
 namespace test_models {
 namespace enumeration {
 
-enum class test_all_knobs : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    an_enumerator = 1,
-    another_enumerator = 2
+enum class test_all_knobs {
+    invalid, ///< Represents an uninitialised enum
+    an_enumerator,
+    another_enumerator
 };
 
 } } }
