@@ -70,6 +70,12 @@ Add github release notes for previous sprint.
 Title: Dogen v0.94.0, "Baía dos Tigres"
 
 #+begin_src markdown
+<p align="center">
+  <img src="http://www.redeangola.info/wp-content/uploads/2014/06/roteiro_deserto-namibe-5_Carlos-Lousada-580x361.jpg">
+<br>
+<figcaption><i>Parque Nacional do Iona, Namibe, Angola. (C) 2014 Pedro Cardoso. Obtained from the website of Rede Angola.</i></figcaption>
+</p>
+
 Overview
 =======
 The sprint's headline feature is the continued work on the C# kernel. It is still considered experimental and the generated code has an unstable API, liable to change without notice.

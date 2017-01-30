@@ -77,6 +77,11 @@ Add github release notes for previous sprint.
 Title: Dogen v0.95.0, "Iona"
 
 #+begin_src markdown
+<p align="center">
+  <img src="http://static.panoramio.com/photos/large/820003.jpg">
+<br>
+<figcaption><i>Praia das Miragens, Namibe, Angola. (C) Ivo Cardoso, 2007. Sourced from Panoramio.</i></figcaption>
+</p>
 Overview
 =======
 The bulk of this sprint's work was related to a customer specific feature: support for the upsilon input format. Other smaller tasks were:
