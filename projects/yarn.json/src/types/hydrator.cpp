@@ -250,8 +250,8 @@ read_attributes(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-void hydrator::read_element(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+void hydrator::populate_element(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im, yarn::element& e) const {
 
     const auto in_global_module(pt.get(in_global_module_key, false));
     const auto i(pt.find(name_key));
@@ -263,121 +263,175 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     yarn::name n(read_name(i->second, im.name(), in_global_module));
     const auto id(n.id());
 
-    const auto lambda([&](yarn::element& e) {
-            BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
-            e.name(n);
-            e.origin_type(origin_types::not_yet_determined);
-            e.in_global_module(in_global_module);
-            e.documentation(read_documentation(pt));
-            e.stereotypes(read_stereotypes(pt));
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
+    e.name(n);
+    e.origin_type(origin_types::not_yet_determined);
+    e.in_global_module(in_global_module);
+    e.documentation(read_documentation(pt));
+    e.stereotypes(read_stereotypes(pt));
 
-            const auto kvps(read_kvps(pt));
-            const auto st(annotations::scope_types::entity);
-            insert_scribbles(e.name(), st, kvps, im);
-        });
+    const auto kvps(read_kvps(pt));
+    const auto st(annotations::scope_types::entity);
+    insert_scribbles(e.name(), st, kvps, im);
+}
 
-    const auto meta_type_value(pt.get<std::string>(meta_type_key));
-    if (meta_type_value == meta_type_object_value) {
-        yarn::object o;
-        lambda(o);
+void hydrator::read_object(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
 
-        const auto ot(pt.get_optional<std::string>(object_type_key));
-        o.object_type(to_object_type(ot));
+    yarn::object o;
+    populate_element(pt, im, o);
 
-        auto i(pt.find(attributes_key));
-        if (i != pt.not_found())
-            o.local_attributes(read_attributes(i->second));
+    const auto ot(pt.get_optional<std::string>(object_type_key));
+    o.object_type(to_object_type(ot));
 
-        i = pt.find(parents_key);
-        if (i != pt.not_found())
-            o.parents(read_names(i->second));
+    auto i(pt.find(attributes_key));
+    if (i != pt.not_found())
+        o.local_attributes(read_attributes(i->second));
 
-        const auto pair(std::make_pair(n.id(), o));
-        const bool inserted(im.objects().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else if (meta_type_value == meta_type_builtin_value) {
-        yarn::builtin p;
-        const auto dit(pt.get(is_default_enumeration_type_key, false));
-        p.is_default_enumeration_type(dit);
+    i = pt.find(parents_key);
+    if (i != pt.not_found())
+        o.parents(read_names(i->second));
 
-        const auto ifp(pt.get(is_floating_point_key, false));
-        p.is_floating_point(ifp);
+    const auto id(o.name().id());
+    const auto pair(std::make_pair(id, o));
+    const bool inserted(im.objects().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
 
-        lambda(p);
-        const auto pair(std::make_pair(n.id(), p));
-        const bool inserted(im.builtins().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else if (meta_type_value == meta_type_module_value) {
-        yarn::module m;
-        lambda(m);
-        const auto pair(std::make_pair(n.id(), m));
-        const bool inserted(im.modules().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else if (meta_type_value == meta_type_enumeration_value) {
-        yarn::enumeration e;
-        lambda(e);
-        const auto i(pt.find(enumerators_key));
-        if (i != pt.not_found())
-            e.enumerators(read_enumerators(i->second));
+void hydrator::read_builtin(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
 
-        const auto pair(std::make_pair(n.id(), e));
-        const bool inserted(im.enumerations().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else if (meta_type_value == meta_type_primitive_value) {
-        yarn::primitive p;
-        lambda(p);
+    yarn::builtin p;
+    populate_element(pt, im, p);
 
-        const auto pair(std::make_pair(n.id(), p));
-        const bool inserted(im.primitives().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else if (meta_type_value == meta_type_exception_value) {
-        yarn::exception e;
-        lambda(e);
-        const auto pair(std::make_pair(n.id(), e));
-        const bool inserted(im.exceptions().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else if (meta_type_value == meta_type_concept_value) {
-        yarn::concept c;
-        lambda(c);
+    const auto dit(pt.get(is_default_enumeration_type_key, false));
+    p.is_default_enumeration_type(dit);
 
-        auto i(pt.find(attributes_key));
-        if (i != pt.not_found())
-            c.local_attributes(read_attributes(i->second));
+    const auto ifp(pt.get(is_floating_point_key, false));
+    p.is_floating_point(ifp);
 
-        i = pt.find(refines_key);
-        if (i != pt.not_found()) {
-            for (auto j(i->second.begin()); j != i->second.end(); ++j)
-                c.refines().push_back(read_name(j->second, im.name()));
-        }
+    const auto id(p.name().id());
+    const auto pair(std::make_pair(id, p));
+    const bool inserted(im.builtins().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
 
-        const auto pair(std::make_pair(n.id(), c));
-        const bool inserted(im.concepts().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
-        }
-    } else {
-        BOOST_LOG_SEV(lg, error) << invalid_meta_type << meta_type_value;
+void hydrator::read_module(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
+
+    yarn::module m;
+    populate_element(pt, im, m);
+
+    const auto id(m.name().id());
+    const auto pair(std::make_pair(id, m));
+    const bool inserted(im.modules().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
+
+void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
+
+    yarn::enumeration e;
+    populate_element(pt, im, e);
+
+    const auto i(pt.find(enumerators_key));
+    if (i != pt.not_found())
+        e.enumerators(read_enumerators(i->second));
+
+    const auto id(e.name().id());
+    const auto pair(std::make_pair(id, e));
+    const bool inserted(im.enumerations().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
+
+void hydrator::read_primitive(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
+
+    yarn::primitive p;
+    populate_element(pt, im, p);
+
+    const auto id(p.name().id());
+    const auto pair(std::make_pair(id, p));
+    const bool inserted(im.primitives().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
+
+void hydrator::read_exception(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
+    yarn::exception e;
+    populate_element(pt, im, e);
+
+    const auto id(e.name().id());
+    const auto pair(std::make_pair(id, e));
+    const bool inserted(im.exceptions().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
+
+void hydrator::read_concept(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
+
+    yarn::concept c;
+    populate_element(pt, im, c);
+
+    auto i(pt.find(attributes_key));
+    if (i != pt.not_found())
+        c.local_attributes(read_attributes(i->second));
+
+    i = pt.find(refines_key);
+    if (i != pt.not_found()) {
+        for (auto j(i->second.begin()); j != i->second.end(); ++j)
+            c.refines().push_back(read_name(j->second, im.name()));
+    }
+
+    const auto id(c.name().id());
+    const auto pair(std::make_pair(id, c));
+    const bool inserted(im.concepts().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
+
+void hydrator::dispatch_meta_type(const boost::property_tree::ptree& pt,
+    yarn::intermediate_model& im) const {
+
+    const auto s(pt.get<std::string>(meta_type_key));
+    if (s == meta_type_object_value)
+        read_object(pt, im);
+    else if (s == meta_type_builtin_value)
+        read_builtin(pt, im);
+    else if (s == meta_type_module_value)
+        read_module(pt, im);
+    else if (s == meta_type_enumeration_value)
+        read_enumeration(pt, im);
+    else if (s == meta_type_primitive_value)
+        read_primitive(pt, im);
+    else if (s == meta_type_exception_value)
+        read_exception(pt, im);
+    else if (s == meta_type_concept_value)
+        read_concept(pt, im);
+    else {
+        BOOST_LOG_SEV(lg, error) << invalid_meta_type << s;
         BOOST_THROW_EXCEPTION(
-            hydration_error(invalid_meta_type + meta_type_value));
+            hydration_error(invalid_meta_type + s));
     }
 }
 
@@ -413,7 +467,7 @@ hydrator::read_stream(std::istream& s, const bool is_target) const {
         BOOST_LOG_SEV(lg, warn) << "Did not find any elements in model";
     } else {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            read_element(j->second, r);
+            dispatch_meta_type(j->second, r);
     }
 
     return r;

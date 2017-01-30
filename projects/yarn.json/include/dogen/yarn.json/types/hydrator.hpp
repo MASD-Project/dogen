@@ -98,9 +98,59 @@ private:
     read_attributes(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Reads an element from the property tree.
+     * @brief Reads all properties at the element level and inserts
+     * its scribbles.
      */
-    void read_element(const boost::property_tree::ptree& pt,
+    void populate_element(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im, yarn::element& e) const;
+
+    /**
+     * @brief Reads an object.
+     */
+    void read_object(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads a builtin.
+     */
+    void read_builtin(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads a module.
+     */
+    void read_module(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads an enumeration.
+     */
+    void read_enumeration(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads a primitive.
+     */
+    void read_primitive(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads an exception.
+     */
+    void read_exception(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads a concept.
+     */
+    void read_concept(const boost::property_tree::ptree& pt,
+        yarn::intermediate_model& im) const;
+
+    /**
+     * @brief Reads the meta-type and dispatches to the correct read
+     * functions.
+     */
+    void dispatch_meta_type(const boost::property_tree::ptree& pt,
         yarn::intermediate_model& im) const;
 
     /**
