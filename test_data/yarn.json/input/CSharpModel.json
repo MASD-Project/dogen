@@ -896,6 +896,58 @@
     },
     {
       "name": {
+        "simple": "HexFlags"
+      },
+      "meta_type": "enumeration",
+      "documentation": "This is an example of an enumeration using hex flags.\n",
+      "annotation": {
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "None"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x00"
+          }
+        },
+        {
+          "name": {
+            "simple": "Top"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x01"
+          }
+        },
+        {
+          "name": {
+            "simple": "Bottom"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x02"
+          }
+        },
+        {
+          "name": {
+            "simple": "Left"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x04"
+          }
+        },
+        {
+          "name": {
+            "simple": "Right"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x08"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "ShapeTypes",
         "internal_modules": "Package1"
       },

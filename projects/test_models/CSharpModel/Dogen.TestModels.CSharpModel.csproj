@@ -43,6 +43,7 @@
     <Compile Include="Dumpers\Descendant1Dumper.cs" />
     <Compile Include="Dumpers\Descendant2Dumper.cs" />
     <Compile Include="Dumpers\Descendant3Dumper.cs" />
+    <Compile Include="Dumpers\HexFlagsDumper.cs" />
     <Compile Include="Dumpers\ImmutableFourDumper.cs" />
     <Compile Include="Dumpers\ImmutableOnePrimitiveDumper.cs" />
     <Compile Include="Dumpers\ImmutableTwoDumper.cs" />
@@ -86,6 +87,7 @@
     <Compile Include="SequenceGenerators\Descendant1SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant2SequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\Descendant3SequenceGenerator.cs" />
+    <Compile Include="SequenceGenerators\HexFlagsSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ImmutableFourSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ImmutableOnePrimitiveSequenceGenerator.cs" />
     <Compile Include="SequenceGenerators\ImmutableTwoSequenceGenerator.cs" />
@@ -128,6 +130,7 @@
     <Compile Include="Types\Descendant1.cs" />
     <Compile Include="Types\Descendant2.cs" />
     <Compile Include="Types\Descendant3.cs" />
+    <Compile Include="Types\HexFlags.cs" />
     <Compile Include="Types\ImmutableFour.cs" />
     <Compile Include="Types\ImmutableOnePrimitive.cs" />
     <Compile Include="Types\ImmutableTwo.cs" />
