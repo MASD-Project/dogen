@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_TEST_DATA_SHORT_ENUM_TD_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_TEST_DATA_SHORT_ENUM_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/types/a_class.hpp"
-#include "dogen/test_models/enumeration/types/book_types.hpp"
 #include "dogen/test_models/enumeration/types/short_enum.hpp"
-#include "dogen/test_models/enumeration/types/colour_types.hpp"
-#include "dogen/test_models/enumeration/types/pkg1/shape_types.hpp"
+
+namespace dogen {
+namespace test_models {
+namespace enumeration {
+
+class short_enum_generator {
+public:
+    short_enum_generator();
+
+public:
+    typedef dogen::test_models::enumeration::short_enum result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+};
+
+} } }
 
 #endif

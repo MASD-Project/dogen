@@ -198,12 +198,160 @@
 		<item_version>0</item_version>
 	</builtins>
 	<enumerations class_id="31" tracking_level="0" version="0">
-		<count>3</count>
+		<count>4</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="32" tracking_level="0" version="0">
-			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;short_enum&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_2">
+				<element>
+					<documentation></documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;short_enum&gt;</id>
+						<simple>short_enum</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::enumeration::short_enum</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.enumeration.short_enum</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>enumeration</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_enumeration_short_enum</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<underlying_element>
+					<id></id>
+					<simple></simple>
+					<qualified>
+						<count>0</count>
+						<item_version>0</item_version>
+					</qualified>
+					<location>
+						<external_modules>
+							<count>0</count>
+							<item_version>0</item_version>
+						</external_modules>
+						<model_modules>
+							<count>0</count>
+							<item_version>0</item_version>
+						</model_modules>
+						<internal_modules>
+							<count>0</count>
+							<item_version>0</item_version>
+						</internal_modules>
+						<element></element>
+					</location>
+					<identifiable></identifiable>
+				</underlying_element>
+				<enumerators class_id="33" tracking_level="0" version="0">
+					<count>2</count>
+					<item_version>0</item_version>
+					<item class_id="34" tracking_level="0" version="0">
+						<documentation></documentation>
+						<name>
+							<id></id>
+							<simple>an_enumerator</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<value></value>
+					</item>
+					<item>
+						<documentation></documentation>
+						<name>
+							<id></id>
+							<simple>another_enumerator</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<value></value>
+					</item>
+				</enumerators>
+				<use_implementation_defined_underlying_element>0</use_implementation_defined_underlying_element>
+				<use_implementation_defined_enumerator_values>0</use_implementation_defined_enumerator_values>
+				<add_invalid_enumerator>0</add_invalid_enumerator>
+			</second>
+		</item>
+		<item>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;pkg1&gt;&lt;shape_types&gt;</first>
+			<second object_id="_3">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -285,10 +433,10 @@
 					</location>
 					<identifiable></identifiable>
 				</underlying_element>
-				<enumerators class_id="33" tracking_level="0" version="0">
+				<enumerators>
 					<count>4</count>
 					<item_version>0</item_version>
-					<item class_id="34" tracking_level="0" version="0">
+					<item>
 						<documentation>some comment
 </documentation>
 						<name>
@@ -411,7 +559,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;colour_types&gt;</first>
-			<second object_id="_3">
+			<second object_id="_4">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -618,7 +766,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;book_types&gt;</first>
-			<second object_id="_4">
+			<second object_id="_5">
 				<element>
 					<documentation>this is a brief comment
 
@@ -807,7 +955,7 @@ this is a long comment
 		<item_version>0</item_version>
 		<item class_id="37" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;a_class&gt;</first>
-			<second class_id="10" tracking_level="1" version="0" object_id="_5">
+			<second class_id="10" tracking_level="1" version="0" object_id="_6">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -1191,17 +1339,42 @@ this is a long comment
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
 		<scribble_groups class_id="49" tracking_level="0" version="0">
-			<count>1</count>
-			<bucket_count>2</bucket_count>
+			<count>2</count>
+			<bucket_count>5</bucket_count>
 			<item_version>0</item_version>
 			<item class_id="50" tracking_level="0" version="0">
-				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</first>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;&lt;short_enum&gt;</first>
 				<second class_id="51" tracking_level="0" version="0">
 					<parent class_id="52" tracking_level="0" version="0">
 						<entries class_id="53" tracking_level="0" version="0">
-							<count>6</count>
+							<count>1</count>
 							<item_version>0</item_version>
 							<item class_id="54" tracking_level="0" version="0">
+								<first>yarn.enumeration.underlying_element</first>
+								<second>short</second>
+							</item>
+						</entries>
+						<scope>5</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
+					</parent>
+					<children class_id="55" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</children>
+				</second>
+			</item>
+			<item>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;enumeration&gt;</first>
+				<second>
+					<parent>
+						<entries>
+							<count>6</count>
+							<item_version>0</item_version>
+							<item>
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
@@ -1232,7 +1405,7 @@ this is a long comment
 							<item_version>0</item_version>
 						</candidate_labels>
 					</parent>
-					<children class_id="55" tracking_level="0" version="0">
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
@@ -1256,7 +1429,7 @@ this is a long comment
 			<item_version>0</item_version>
 		</abstract_elements>
 	</indices>
-	<root_module object_id="_6">
+	<root_module object_id="_7">
 		<element>
 			<documentation></documentation>
 			<annotation>

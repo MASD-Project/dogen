@@ -18,17 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_SHORT_ENUM_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_SHORT_ENUM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/types/a_class.hpp"
-#include "dogen/test_models/enumeration/types/book_types.hpp"
-#include "dogen/test_models/enumeration/types/short_enum.hpp"
-#include "dogen/test_models/enumeration/types/colour_types.hpp"
-#include "dogen/test_models/enumeration/types/pkg1/shape_types.hpp"
+namespace dogen {
+namespace test_models {
+namespace enumeration {
+
+enum class short_enum : short {
+    invalid = 0, ///< Represents an uninitialised enum
+    an_enumerator = 1,
+    another_enumerator = 2
+};
+
+} } }
 
 #endif

@@ -928,6 +928,27 @@
     },
     {
       "name": {
+        "simple": "ShortEnum"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.underlying_element": "short"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "AnEnumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "AnotherEnumerator"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "MyException"
       },
       "meta_type": "exception",

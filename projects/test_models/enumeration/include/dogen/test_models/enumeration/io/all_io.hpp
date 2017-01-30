@@ -27,6 +27,7 @@
 
 #include "dogen/test_models/enumeration/io/a_class_io.hpp"
 #include "dogen/test_models/enumeration/io/book_types_io.hpp"
+#include "dogen/test_models/enumeration/io/short_enum_io.hpp"
 #include "dogen/test_models/enumeration/io/colour_types_io.hpp"
 #include "dogen/test_models/enumeration/io/pkg1/shape_types_io.hpp"
 

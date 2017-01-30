@@ -18,17 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/test_models/enumeration/io/short_enum_io.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace enumeration {
 
-#include "dogen/test_models/enumeration/types/a_class.hpp"
-#include "dogen/test_models/enumeration/types/book_types.hpp"
-#include "dogen/test_models/enumeration/types/short_enum.hpp"
-#include "dogen/test_models/enumeration/types/colour_types.hpp"
-#include "dogen/test_models/enumeration/types/pkg1/shape_types.hpp"
+std::ostream& operator<<(std::ostream& s, const short_enum& v) {
+    s << "{ " << "\"__type__\": " << "\"short_enum\", " << "\"value\": ";
 
-#endif
+    std::string attr;
+    switch (v) {
+    case short_enum::invalid:
+        attr = "\"invalid\"";
+        break;
+    case short_enum::an_enumerator:
+        attr = "\"an_enumerator\"";
+        break;
+    case short_enum::another_enumerator:
+        attr = "\"another_enumerator\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for short_enum");
+    }
+    s << attr << " }";
+    return s;
+}
+
+} } }

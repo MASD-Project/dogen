@@ -18,17 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_ENUMERATION_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_ENUMERATION_SERIALIZATION_SHORT_ENUM_SER_HPP
+#define DOGEN_TEST_MODELS_ENUMERATION_SERIALIZATION_SHORT_ENUM_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/enumeration/types/a_class.hpp"
-#include "dogen/test_models/enumeration/types/book_types.hpp"
+#include <boost/serialization/nvp.hpp>
 #include "dogen/test_models/enumeration/types/short_enum.hpp"
-#include "dogen/test_models/enumeration/types/colour_types.hpp"
-#include "dogen/test_models/enumeration/types/pkg1/shape_types.hpp"
+
+template<class Archive>
+void serialize(Archive& ar, dogen::test_models::enumeration::short_enum& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("short_enum", v);
+}
 
 #endif

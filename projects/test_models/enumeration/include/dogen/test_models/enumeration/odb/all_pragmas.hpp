@@ -27,6 +27,7 @@
 
 #include "dogen/test_models/enumeration/odb/a_class_pragmas.hpp"
 #include "dogen/test_models/enumeration/odb/book_types_pragmas.hpp"
+#include "dogen/test_models/enumeration/odb/short_enum_pragmas.hpp"
 #include "dogen/test_models/enumeration/odb/colour_types_pragmas.hpp"
 #include "dogen/test_models/enumeration/odb/pkg1/shape_types_pragmas.hpp"
 

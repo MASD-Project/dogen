@@ -128,6 +128,27 @@
           "documentation": "some comment\n"
         }
       ]
+    },
+    {
+      "name": {
+        "simple": "short_enum"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.underlying_element": "short"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "an_enumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "another_enumerator"
+          }
+        }
+      ]
     }
   ]
 }
