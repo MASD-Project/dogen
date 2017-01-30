@@ -313,6 +313,14 @@
 							</location>
 							<identifiable></identifiable>
 						</name>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<value></value>
 					</item>
 					<item>
@@ -341,6 +349,14 @@
 							</location>
 							<identifiable></identifiable>
 						</name>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<value></value>
 					</item>
 				</enumerators>

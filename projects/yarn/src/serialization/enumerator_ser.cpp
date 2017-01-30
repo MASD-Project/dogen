@@ -30,6 +30,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/enumerator_ser.hpp"
+#include "dogen/annotations/serialization/annotation_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -40,6 +41,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("annotation", v.annotation_);
     ar << make_nvp("value", v.value_);
 }
 
@@ -49,6 +51,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("annotation", v.annotation_);
     ar >> make_nvp("value", v.value_);
 }
 

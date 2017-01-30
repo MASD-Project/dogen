@@ -145,7 +145,11 @@ public:
     void operator()(yarn::module& m) { update_extensible(m); }
     void operator()(yarn::concept& c) { update_extensible_and_stateful(c); }
     void operator()(yarn::builtin& b) { update_extensible(b); }
-    void operator()(yarn::enumeration& e) { update_extensible(e); }
+    void operator()(yarn::enumeration& e) {
+        update_extensible(e);
+        for (auto& en : e.enumerators())
+            update_extensible(en);
+    }
     void operator()(yarn::primitive& p) { update_extensible(p); }
     void operator()(yarn::object& o) { update_extensible_and_stateful(o); }
     void operator()(yarn::exception& e) { update_extensible(e); }

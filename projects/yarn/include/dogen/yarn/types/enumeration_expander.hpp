@@ -79,7 +79,8 @@ private:
 
     void expand_default_underlying_element(
         const name& default_underlying_element_name, enumeration& e);
-    void expand_enumerators(const languages l, enumeration& e) const;
+    void expand_enumerators(const enumerator_type_group& tg, const languages l,
+        enumeration& e) const;
 
 public:
     /**

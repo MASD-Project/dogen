@@ -21,6 +21,7 @@
 #include <sstream>
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/enumerator_td.hpp"
+#include "dogen/annotations/test_data/annotation_td.hpp"
 
 namespace {
 
@@ -35,6 +36,11 @@ create_dogen_yarn_name(const unsigned int position) {
     return dogen::yarn::name_generator::create(position);
 }
 
+dogen::annotations::annotation
+create_dogen_annotations_annotation(const unsigned int position) {
+    return dogen::annotations::annotation_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -46,7 +52,8 @@ void enumerator_generator::
 populate(const unsigned int position, result_type& v) {
     v.documentation(create_std_string(position + 0));
     v.name(create_dogen_yarn_name(position + 1));
-    v.value(create_std_string(position + 2));
+    v.annotation(create_dogen_annotations_annotation(position + 2));
+    v.value(create_std_string(position + 3));
 }
 
 enumerator_generator::result_type

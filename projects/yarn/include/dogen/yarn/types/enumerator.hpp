@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/serialization/enumerator_fwd_ser.hpp"
 
 namespace dogen {
@@ -49,6 +50,7 @@ public:
     enumerator(
         const std::string& documentation,
         const dogen::yarn::name& name,
+        const dogen::annotations::annotation& annotation,
         const std::string& value);
 
 private:
@@ -84,6 +86,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Annotation for this element.
+     */
+    /**@{*/
+    const dogen::annotations::annotation& annotation() const;
+    dogen::annotations::annotation& annotation();
+    void annotation(const dogen::annotations::annotation& v);
+    void annotation(const dogen::annotations::annotation&& v);
+    /**@}*/
+
+    /**
      * @brief Value for the enumerator.
      *
      * It must be castable to instance of the type defined in the enumeration.
@@ -108,6 +120,7 @@ public:
 private:
     std::string documentation_;
     dogen::yarn::name name_;
+    dogen::annotations::annotation annotation_;
     std::string value_;
 };
 

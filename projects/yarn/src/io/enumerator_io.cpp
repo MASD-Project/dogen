@@ -22,6 +22,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
+#include "dogen/annotations/io/annotation_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -39,6 +40,7 @@ std::ostream& operator<<(std::ostream& s, const enumerator& v) {
       << "\"__type__\": " << "\"dogen::yarn::enumerator\"" << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(v.documentation()) << "\"" << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"annotation\": " << v.annotation() << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
     return(s);

@@ -20,6 +20,7 @@
  */
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/hash/enumerator_hash.hpp"
+#include "dogen/annotations/hash/annotation_hash.hpp"
 
 namespace {
 
@@ -39,6 +40,7 @@ std::size_t enumerator_hasher::hash(const enumerator& v) {
 
     combine(seed, v.documentation());
     combine(seed, v.name());
+    combine(seed, v.annotation());
     combine(seed, v.value());
 
     return seed;
