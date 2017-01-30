@@ -115,27 +115,27 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
 void builder::
 update_scribble_group(const yarn::name& n, const processed_object& po) {
 
-    annotations::scribble ps;
+    annotations::scribble psbl;
     const auto& kvps(po.comment().key_value_pairs());
-    ps.entries(kvps);
+    psbl.entries(kvps);
 
     using annotations::scope_types;
-    ps.scope(n == repository_.model().name() ?
+    psbl.scope(n == repository_.model().name() ?
         scope_types::root_module : scope_types::entity);
 
     annotations::scribble_group sg;
-    sg.parent(ps);
+    sg.parent(psbl);
 
     for (const auto& attr : po.attributes()) {
         const auto& kvps(attr.comment().key_value_pairs());
         if (kvps.empty())
             continue;
 
-        annotations::scribble cs;
-        cs.entries(kvps);
-        cs.scope(scope_types::property);
+        annotations::scribble csbl;
+        csbl.entries(kvps);
+        csbl.scope(scope_types::property);
 
-        const auto pair(std::make_pair(attr.name(), cs));
+        const auto pair(std::make_pair(attr.name(), csbl));
         const auto&inserted(sg.children().insert(pair).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_attribute_name << attr.name();

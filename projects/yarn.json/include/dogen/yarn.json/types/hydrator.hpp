@@ -53,12 +53,32 @@ private:
     read_kvps(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Inserts the scribbles into the model's indicies.
+     * @brief Reads the scribble group.
      */
-    void insert_scribbles(const yarn::name& owner,
-        const annotations::scope_types scope,
-        const std::list<std::pair<std::string, std::string>>& kvps,
-        intermediate_model& im) const;
+    annotations::scribble_group read_scribble_group(
+        const boost::property_tree::ptree& pt,
+        const annotations::scope_types st) const;
+
+    /**
+     * @brief Inserts the scribble group into the model's indicies.
+     */
+    void insert_scribble_group(const yarn::name& owner,
+        const annotations::scribble_group& sg, intermediate_model& im) const;
+
+    /**
+     * @brief Reads and inserts the scribble group.
+     */
+    void read_and_insert_scribble_group(const yarn::name& owner,
+        const annotations::scope_types st,
+        const boost::property_tree::ptree& pt, intermediate_model& im) const;
+
+    /**
+     * @brief Read and inserts the scribble into the scribble group.
+     */
+    void read_and_insert_scribble(const yarn::name& owner,
+        const annotations::scope_types st,
+        const boost::property_tree::ptree& pt,
+        annotations::scribble_group& sg) const;
 
     /**
      * @brief Read a name.
@@ -90,14 +110,14 @@ private:
      */
     std::vector<enumerator>
     read_enumerators(const boost::property_tree::ptree& pt,
-        yarn::intermediate_model& im) const;
+        annotations::scribble_group& sg) const;
 
     /**
      * @brief Reads all attributes from the node.
      */
     std::list<attribute>
     read_attributes(const boost::property_tree::ptree& pt,
-        yarn::intermediate_model& im) const;
+        annotations::scribble_group& sg) const;
 
     /**
      * @brief Reads all properties at the element level and inserts

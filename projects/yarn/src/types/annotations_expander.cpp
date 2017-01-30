@@ -60,6 +60,10 @@ private:
             return;
         }
 
+        /*
+         * Note that we are ignoring children here on purpose;
+         * candidate labels are not used by children at present.
+         */
         BOOST_LOG_SEV(lg, debug) << "Injecting new scribble group.";
         annotations::scribble_group sg;
         sg.parent().candidate_labels(e.stereotypes());
@@ -126,17 +130,22 @@ private:
         eas.annotation(ag.parent());
 
         for (auto& attr : eas.local_attributes()) {
-            const auto n(attr.name().simple());
-            const auto j(ag.children().find(n));
+            /*
+             * Bit of a hack here; we are using simple name because the
+             * dia frontend is inserting by simple name and its
+             * non-trivial to change it to insert by ID.
+             */
+            const auto sn(attr.name().simple());
+            const auto j(ag.children().find(sn));
             if (j == ag.children().end()) {
-                BOOST_LOG_SEV(lg, debug) << "Attribute has no annotation: " << n
+                BOOST_LOG_SEV(lg, debug) << "Attribute has no annotation: " << sn
                                          << ". Element: " << eas.name().id();
                 continue;
             }
 
             attr.annotation(j->second);
             BOOST_LOG_SEV(lg, debug) << "Created annotations for attribute: "
-                                     << n;
+                                     << sn;
         }
         BOOST_LOG_SEV(lg, debug) << "Created annotations for element.";
     }
@@ -171,16 +180,21 @@ void annotation_updater::operator()(yarn::enumeration& e) {
     e.annotation(ag.parent());
 
     for (auto& en : e.enumerators()) {
-        const auto n(en.name().simple());
-        const auto i(ag.children().find(n));
+        /*
+         * Bit of a hack here; we are using simple name because the
+         * dia frontend is inserting by simple name and its
+         * non-trivial to change it to insert by ID.
+         */
+        const auto sn(en.name().simple());
+        const auto i(ag.children().find(sn));
         if (i == ag.children().end()) {
-            BOOST_LOG_SEV(lg, debug) << "Enumerator has no annotation: " << n
+            BOOST_LOG_SEV(lg, debug) << "Enumerator has no annotation: " << sn
                                      << ". Element: " << e.name().id();
             continue;
         }
 
         en.annotation(i->second);
-        BOOST_LOG_SEV(lg, debug) << "Created annotations for attribute: " << n;
+        BOOST_LOG_SEV(lg, debug) << "Created annotations for attribute: " << sn;
     }
 }
 

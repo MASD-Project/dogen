@@ -113,20 +113,28 @@ hydrator::read_kvps(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-void hydrator::insert_scribbles(const yarn::name& owner,
-    const annotations::scope_types scope,
-    const std::list<std::pair<std::string, std::string>>& kvps,
-    intermediate_model& im) const {
+annotations::scribble_group
+hydrator::read_scribble_group(const boost::property_tree::ptree& pt,
+    const annotations::scope_types st) const {
 
+    annotations::scribble_group r;
+    const auto kvps(read_kvps(pt));
     if (kvps.empty())
+        return r;
+
+    annotations::scribble sbl;
+    sbl.entries(kvps);
+    sbl.scope(st);
+    r.parent(sbl);
+
+    return r;
+}
+
+void hydrator::insert_scribble_group(const yarn::name& owner,
+    const annotations::scribble_group& sg, intermediate_model& im) const {
+
+    if (sg.parent().entries().empty() && sg.children().empty())
         return;
-
-    annotations::scribble s;
-    s.entries(kvps);
-    s.scope(scope);
-
-    annotations::scribble_group sg;
-    sg.parent(s);
 
     const auto id(owner.id());
     const auto pair(std::make_pair(id, sg));
@@ -134,6 +142,40 @@ void hydrator::insert_scribbles(const yarn::name& owner,
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
         BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));
+    }
+}
+
+void hydrator::read_and_insert_scribble_group(const yarn::name& owner,
+    const annotations::scope_types st, const boost::property_tree::ptree& pt,
+    intermediate_model& im) const {
+    const auto sg(read_scribble_group(pt, st));
+    insert_scribble_group(owner, sg, im);
+}
+
+void hydrator::read_and_insert_scribble(const yarn::name& owner,
+    const annotations::scope_types st, const boost::property_tree::ptree& pt,
+    annotations::scribble_group& sg) const {
+
+    const auto kvps(read_kvps(pt));
+    if (kvps.empty())
+        return;
+
+    annotations::scribble sbl;
+    sbl.entries(kvps);
+    sbl.scope(st);
+
+    /*
+     * Note: we are inserting by simple name here rather than ID
+     * because the dia frontend is also inserting by simple name and
+     * its non-trivial to change it to insert by ID.
+     * FIXME: use ID consistently.
+     */
+    const auto sn(owner.simple());
+    const auto pair(std::make_pair(sn, sbl));
+    const bool inserted(sg.children().insert(pair).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << sn;
+        BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + sn));
     }
 }
 
@@ -209,32 +251,32 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::vector<enumerator> hydrator::read_enumerators(
-    const boost::property_tree::ptree& pt, yarn::intermediate_model& im) const {
-    std::vector<enumerator> r;
+std::vector<enumerator>
+hydrator::read_enumerators(const boost::property_tree::ptree& pt,
+    annotations::scribble_group& sg) const {
 
+    std::vector<enumerator> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
-        enumerator e;
+        enumerator en;
         const auto j(apt.find(name_key));
         if (j == apt.not_found()) {
             BOOST_LOG_SEV(lg, error) << missing_name;
             BOOST_THROW_EXCEPTION(hydration_error(missing_name));
         }
-        e.name(read_name(j->second));
-        e.documentation(read_documentation(apt));
+        en.name(read_name(j->second));
+        en.documentation(read_documentation(apt));
 
-        const auto kvps(read_kvps(pt));
         const auto st(annotations::scope_types::property);
-        insert_scribbles(e.name(), st, kvps, im);
-
-        r.push_back(e);
+        read_and_insert_scribble(en.name(), st, apt, sg);
+        r.push_back(en);
     }
     return r;
 }
 
-std::list<attribute> hydrator::read_attributes(
-    const boost::property_tree::ptree& pt, yarn::intermediate_model& im) const {
+std::list<attribute>
+hydrator::read_attributes(const boost::property_tree::ptree& pt,
+    annotations::scribble_group& sg) const {
     std::list<attribute> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
@@ -251,10 +293,8 @@ std::list<attribute> hydrator::read_attributes(
         a.unparsed_type(apt.get<std::string>(unparsed_type_key));
         a.documentation(read_documentation(apt));
 
-        const auto kvps(read_kvps(pt));
         const auto st(annotations::scope_types::property);
-        insert_scribbles(a.name(), st, kvps, im);
-
+        read_and_insert_scribble(a.name(), st, apt, sg);
         r.push_back(a);
     }
     return r;
@@ -279,10 +319,6 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
     e.in_global_module(in_global_module);
     e.documentation(read_documentation(pt));
     e.stereotypes(read_stereotypes(pt));
-
-    const auto kvps(read_kvps(pt));
-    const auto st(annotations::scope_types::entity);
-    insert_scribbles(e.name(), st, kvps, im);
 }
 
 void hydrator::read_object(const boost::property_tree::ptree& pt,
@@ -294,9 +330,14 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
     const auto ot(pt.get_optional<std::string>(object_type_key));
     o.object_type(to_object_type(ot));
 
+    const auto st(annotations::scope_types::entity);
+    auto sg(read_scribble_group(pt, st));
+
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        o.local_attributes(read_attributes(i->second, im));
+        o.local_attributes(read_attributes(i->second, sg));
+
+    insert_scribble_group(o.name(), sg, im);
 
     i = pt.find(parents_key);
     if (i != pt.not_found())
@@ -316,6 +357,8 @@ void hydrator::read_builtin(const boost::property_tree::ptree& pt,
 
     yarn::builtin p;
     populate_element(pt, im, p);
+    const auto st(annotations::scope_types::entity);
+    read_and_insert_scribble_group(p.name(), st, pt, im);
 
     const auto dit(pt.get(is_default_enumeration_type_key, false));
     p.is_default_enumeration_type(dit);
@@ -337,6 +380,8 @@ void hydrator::read_module(const boost::property_tree::ptree& pt,
 
     yarn::module m;
     populate_element(pt, im, m);
+    const auto st(annotations::scope_types::entity);
+    read_and_insert_scribble_group(m.name(), st, pt, im);
 
     const auto id(m.name().id());
     const auto pair(std::make_pair(id, m));
@@ -352,10 +397,14 @@ void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
 
     yarn::enumeration e;
     populate_element(pt, im, e);
+    const auto st(annotations::scope_types::entity);
+    auto sg(read_scribble_group(pt, st));
 
     const auto i(pt.find(enumerators_key));
     if (i != pt.not_found())
-        e.enumerators(read_enumerators(i->second, im));
+        e.enumerators(read_enumerators(i->second, sg));
+
+    insert_scribble_group(e.name(), sg, im);
 
     const auto id(e.name().id());
     const auto pair(std::make_pair(id, e));
@@ -371,6 +420,8 @@ void hydrator::read_primitive(const boost::property_tree::ptree& pt,
 
     yarn::primitive p;
     populate_element(pt, im, p);
+    const auto st(annotations::scope_types::entity);
+    read_and_insert_scribble_group(p.name(), st, pt, im);
 
     const auto id(p.name().id());
     const auto pair(std::make_pair(id, p));
@@ -383,8 +434,11 @@ void hydrator::read_primitive(const boost::property_tree::ptree& pt,
 
 void hydrator::read_exception(const boost::property_tree::ptree& pt,
     yarn::intermediate_model& im) const {
+
     yarn::exception e;
     populate_element(pt, im, e);
+    const auto st(annotations::scope_types::entity);
+    read_and_insert_scribble_group(e.name(), st, pt, im);
 
     const auto id(e.name().id());
     const auto pair(std::make_pair(id, e));
@@ -400,10 +454,14 @@ void hydrator::read_concept(const boost::property_tree::ptree& pt,
 
     yarn::concept c;
     populate_element(pt, im, c);
+    const auto st(annotations::scope_types::entity);
+    auto sg(read_scribble_group(pt, st));
 
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        c.local_attributes(read_attributes(i->second, im));
+        c.local_attributes(read_attributes(i->second, sg));
+
+    insert_scribble_group(c.name(), sg, im);
 
     i = pt.find(refines_key);
     if (i != pt.not_found()) {
@@ -463,9 +521,8 @@ hydrator::read_stream(std::istream& s, const bool is_target) const {
     r.origin_type(ot);
 
     yarn::module m;
-    const auto kvps(read_kvps(pt));
     const auto st(annotations::scope_types::root_module);
-    insert_scribbles(r.name(), st, kvps, r);
+    read_and_insert_scribble_group(r.name(), st, pt, r);
 
     m.documentation(read_documentation(pt));
     m.name(r.name());

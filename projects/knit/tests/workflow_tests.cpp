@@ -431,14 +431,11 @@ BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code_json) {
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
-/*
-FIXME
 BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code_json) {
     SETUP_TEST_LOG("enumeration_model_generates_expected_code_json");
     const auto json(yarn_json::input_enumeration_json());
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
-*/
 
 BOOST_AUTO_TEST_CASE(primitive_model_generates_expected_code_json) {
     SETUP_TEST_LOG("primitive_model_generates_expected_code_json");
@@ -469,7 +466,6 @@ BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code_json) {
     const auto json(yarn_json::input_stereotypes_json());
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
-
 
 BOOST_AUTO_TEST_CASE(all_builtins_model_generates_expected_code_json) {
     SETUP_TEST_LOG("all_builtins_model_generates_expected_code_json");
