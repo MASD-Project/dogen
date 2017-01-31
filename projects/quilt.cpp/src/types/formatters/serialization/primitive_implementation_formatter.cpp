@@ -123,12 +123,31 @@ format(const context& ctx, const yarn::element& e) const {
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));
     {
-
         auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-        } // snf
+        const auto attr(p.value_attribute());
+a.stream() << std::endl;
+a.stream() << "namespace boost {" << std::endl;
+a.stream() << "namespace serialization {" << std::endl;
+
+        /*
+         * Save function
+         */
+a.stream() << std::endl;
+a.stream() << "template<typename Archive>" << std::endl;
+a.stream() << "void save(Archive& ar, const " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
+a.stream() << "    ar << make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+        /*
+         * Load function
+         */
+a.stream() << "template<typename Archive>" << std::endl;
+a.stream() << "void load(Archive& ar, " << qn << "& v, const unsigned int /*version*/) {" << std::endl;
+a.stream() << "    ar >> make_nvp(\"" << attr.name().simple() << "\", v." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "} }" << std::endl;
+a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }

@@ -61,12 +61,37 @@ format(const context& ctx, const yarn::element& e) const {
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));
     {
-
         auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-        } // snf
+        const auto attr(p.value_attribute());
+#>
+
+namespace boost {
+namespace serialization {
+<#+
+
+        /*
+         * Save function
+         */
+#>
+
+template<typename Archive>
+void save(Archive& ar, const <#= qn #>& v, const unsigned int /*version*/) {
+    ar << make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #>);
+}
+
+<#+
+        /*
+         * Load function
+         */
+#>
+template<typename Archive>
+void load(Archive& ar, <#= qn #>& v, const unsigned int /*version*/) {
+    ar >> make_nvp("<#= attr.name().simple() #>", v.<#= a.make_member_variable_name(attr) #>);
+}
+
+} }
+
+<#+
     } // sbf
     return a.make_artefact();
 }

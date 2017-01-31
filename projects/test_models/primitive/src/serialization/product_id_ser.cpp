@@ -29,7 +29,18 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/primitive/serialization/product_id_ser.hpp"
 
-namespace dogen {
-namespace test_models {
-namespace primitive {
-} } }
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::test_models::primitive::product_id& v, const unsigned int /*version*/) {
+    ar << make_nvp("value", v.value_);
+}
+
+template<typename Archive>
+void load(Archive& ar, dogen::test_models::primitive::product_id& v, const unsigned int /*version*/) {
+    ar >> make_nvp("value", v.value_);
+}
+
+} }
+
