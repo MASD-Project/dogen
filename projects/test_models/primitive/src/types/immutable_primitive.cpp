@@ -23,4 +23,8 @@
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+immutable_primitive::immutable_primitive(const short value)
+    : value_(value) { }
+
 } } }

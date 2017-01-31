@@ -23,4 +23,8 @@
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+product_id::product_id(const short value)
+    : value_(value) { }
+
 } } }

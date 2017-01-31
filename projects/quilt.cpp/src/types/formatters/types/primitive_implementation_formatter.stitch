@@ -47,6 +47,39 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto attr(p.value_attribute());
+
+            /*
+             * Default constructor.
+             */
+            if (a.requires_manual_default_constructor()) {
+#>
+
+<#= sn #>::<#= sn #>()
+    : <#= a.make_member_variable_name(attr) #>(static_cast<<#= a.get_qualified_name(attr.parsed_type()) #>>(0)) { }
+<#+
+            }
+
+            /*
+             * Move constructor.
+             */
+            if (a.requires_manual_move_constructor()) {
+#>
+
+<#= sn #>::<#= sn #>(<#= sn #>&& rhs)
+    : <#= a.make_member_variable_name(attr) #>(std::move(rhs.<#= a.make_member_variable_name(attr) #>)) { }
+<#+
+            }
+
+            /*
+             * Complete constructor.
+             */
+#>
+
+<#= sn #>::<#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>)
+    : <#= a.make_member_variable_name(attr) #>(<#= attr.name().simple() #>) { }
+
+<#+
         } // snf
     } // sbf
     return a.make_artefact();
