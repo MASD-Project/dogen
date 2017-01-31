@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <string>
+#include <iosfwd>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"

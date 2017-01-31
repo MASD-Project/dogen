@@ -25,10 +25,13 @@
 #pragma once
 #endif
 
+#include <string>
+#include <iosfwd>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -44,9 +47,10 @@ private:
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
+    void populate_from_annotations(const type_group& tg, primitive& p) const;
 
 private:
-    void populate_from_annotations(const type_group& tg, primitive& p) const;
+    std::string obtain_value_attribute_simple_name(const languages l) const;
 
 public:
     /**

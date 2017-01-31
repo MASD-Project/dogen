@@ -92,6 +92,44 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            a.comment(p.documentation());
+a.stream() << "class " << sn << " final {" << std::endl;
+a.stream() << "public:" << std::endl;
+            /*
+             * Compiler generated constructors and destructors.
+             */
+            if (!a.requires_manual_default_constructor())
+a.stream() << "    " << sn << "() = default;" << std::endl;
+a.stream() << "    " << sn << "(const " << sn << "&) = default;" << std::endl;
+            if (!a.requires_manual_move_constructor())
+a.stream() << "    " << sn << "(" << sn << "&&) = default;" << std::endl;
+a.stream() << "    ~" << sn << "() = default;" << std::endl;
+            if (p.is_immutable())
+a.stream() << "    " << sn << "& operator=(const " << sn << "&) = delete;" << std::endl;
+            /*
+             * Manually generated default constructor.
+             */
+            if (a.requires_manual_default_constructor()) {
+a.stream() << "public:" << std::endl;
+a.stream() << "    " << sn << "();" << std::endl;
+a.stream() << std::endl;
+            }
+
+            /*
+             * Manually generated move constructor.
+             */
+            if (a.requires_manual_move_constructor()) {
+a.stream() << "public:" << std::endl;
+a.stream() << "    " << sn << "(" << sn << "&& rhs);" << std::endl;
+a.stream() << std::endl;
+            }
+
+            /*
+             * Manually generated complete constructor.
+             */
+a.stream() << "public:" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         } // snf
     } // sbf
     return a.make_artefact();

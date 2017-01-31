@@ -122,6 +122,12 @@ expand(const annotations::annotation_groups_factory& agf,
     expand_parsing(atrp, im);
 
     /*
+     * Primitive expansion requires parsing expansion to populate the
+     * underlying elements.
+     */
+    expand_primitives(atrp, im);
+
+    /*
      * Ensure the model is valid.
      */
     validate(im);

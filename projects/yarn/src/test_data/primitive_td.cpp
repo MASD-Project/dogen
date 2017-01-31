@@ -53,6 +53,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_nullable(create_bool(position + 1));
     v.value_attribute(create_dogen_yarn_attribute(position + 2));
     v.use_type_aliasing(create_bool(position + 3));
+    v.is_immutable(create_bool(position + 4));
 }
 
 primitive_generator::result_type

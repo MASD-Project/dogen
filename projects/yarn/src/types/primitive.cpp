@@ -31,7 +31,8 @@ namespace yarn {
 
 primitive::primitive()
     : is_nullable_(static_cast<bool>(0)),
-      use_type_aliasing_(static_cast<bool>(0)) { }
+      use_type_aliasing_(static_cast<bool>(0)),
+      is_immutable_(static_cast<bool>(0)) { }
 
 primitive::primitive(
     const std::string& documentation,
@@ -45,7 +46,8 @@ primitive::primitive(
     const dogen::yarn::name& underlying_element,
     const bool is_nullable,
     const dogen::yarn::attribute& value_attribute,
-    const bool use_type_aliasing)
+    const bool use_type_aliasing,
+    const bool is_immutable)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -58,7 +60,8 @@ primitive::primitive(
       underlying_element_(underlying_element),
       is_nullable_(is_nullable),
       value_attribute_(value_attribute),
-      use_type_aliasing_(use_type_aliasing) { }
+      use_type_aliasing_(use_type_aliasing),
+      is_immutable_(is_immutable) { }
 
 void primitive::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -91,7 +94,8 @@ void primitive::to_stream(std::ostream& s) const {
       << "\"underlying_element\": " << underlying_element_ << ", "
       << "\"is_nullable\": " << is_nullable_ << ", "
       << "\"value_attribute\": " << value_attribute_ << ", "
-      << "\"use_type_aliasing\": " << use_type_aliasing_
+      << "\"use_type_aliasing\": " << use_type_aliasing_ << ", "
+      << "\"is_immutable\": " << is_immutable_
       << " }";
 }
 
@@ -103,6 +107,7 @@ void primitive::swap(primitive& other) noexcept {
     swap(is_nullable_, other.is_nullable_);
     swap(value_attribute_, other.value_attribute_);
     swap(use_type_aliasing_, other.use_type_aliasing_);
+    swap(is_immutable_, other.is_immutable_);
 }
 
 bool primitive::equals(const dogen::yarn::element& other) const {
@@ -116,7 +121,8 @@ bool primitive::operator==(const primitive& rhs) const {
         underlying_element_ == rhs.underlying_element_ &&
         is_nullable_ == rhs.is_nullable_ &&
         value_attribute_ == rhs.value_attribute_ &&
-        use_type_aliasing_ == rhs.use_type_aliasing_;
+        use_type_aliasing_ == rhs.use_type_aliasing_ &&
+        is_immutable_ == rhs.is_immutable_;
 }
 
 primitive& primitive::operator=(primitive other) {
@@ -171,6 +177,14 @@ bool primitive::use_type_aliasing() const {
 
 void primitive::use_type_aliasing(const bool v) {
     use_type_aliasing_ = v;
+}
+
+bool primitive::is_immutable() const {
+    return is_immutable_;
+}
+
+void primitive::is_immutable(const bool v) {
+    is_immutable_ = v;
 }
 
 } }

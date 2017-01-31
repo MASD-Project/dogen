@@ -28,5 +28,17 @@
 namespace dogen {
 namespace test_models {
 namespace primitive {
+/**
+ * @brief Represents a unique identifier for a product.
+ */
+class product_id final {
+public:
+    product_id() = default;
+    product_id(const product_id&) = default;
+    product_id(product_id&&) = default;
+    ~product_id() = default;
+public:
+};
+
 } } }
 #endif

@@ -49,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("is_nullable", v.is_nullable_);
     ar << make_nvp("value_attribute", v.value_attribute_);
     ar << make_nvp("use_type_aliasing", v.use_type_aliasing_);
+    ar << make_nvp("is_immutable", v.is_immutable_);
 }
 
 template<typename Archive>
@@ -61,6 +62,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_nullable", v.is_nullable_);
     ar >> make_nvp("value_attribute", v.value_attribute_);
     ar >> make_nvp("use_type_aliasing", v.use_type_aliasing_);
+    ar >> make_nvp("is_immutable", v.is_immutable_);
 }
 
 } }

@@ -23,7 +23,10 @@
         "simple": "product_id"
       },
       "meta_type": "primitive",
-      "documentation": "Represents a unique identifier for a product.\n"
+      "documentation": "Represents a unique identifier for a product.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "short"
+      }
     }
   ]
 }

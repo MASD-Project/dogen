@@ -61,7 +61,8 @@ public:
         const dogen::yarn::name& underlying_element,
         const bool is_nullable,
         const dogen::yarn::attribute& value_attribute,
-        const bool use_type_aliasing);
+        const bool use_type_aliasing,
+        const bool is_immutable);
 
 private:
     template<typename Archive>
@@ -117,6 +118,14 @@ public:
     void use_type_aliasing(const bool v);
     /**@}*/
 
+    /**
+     * @brief If true, do not generate a setter..
+     */
+    /**@{*/
+    bool is_immutable() const;
+    void is_immutable(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const primitive& rhs) const;
     bool operator!=(const primitive& rhs) const {
@@ -135,6 +144,7 @@ private:
     bool is_nullable_;
     dogen::yarn::attribute value_attribute_;
     bool use_type_aliasing_;
+    bool is_immutable_;
 };
 
 } }

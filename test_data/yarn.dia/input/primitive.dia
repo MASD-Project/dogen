@@ -86,7 +86,9 @@
         <dia:string>#primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Represents a unique identifier for a product.#</dia:string>
+        <dia:string>#Represents a unique identifier for a product.
+
+#DOGEN yarn.primitive.underlying_element=short#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>

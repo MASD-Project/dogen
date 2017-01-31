@@ -197,7 +197,8 @@
     },
     "value_type": "boolean",
     "template_kind": "instance",
-    "scope": "entity"
+    "scope": "entity",
+    "default_value": false
   },
   {
     "name": {
@@ -209,6 +210,7 @@
     },
     "value_type": "boolean",
     "template_kind": "instance",
-    "scope": "entity"
+    "scope": "entity",
+    "default_value": false
   }
 ]

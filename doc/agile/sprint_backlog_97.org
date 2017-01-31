@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-31 Tue 07:07]
+#+CAPTION: Clock summary at [2017-01-31 Tue 09:16]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *11:13* |       |      | 100.0 |
+| *Total time*                                                                | *12:46* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 11:13   |       |      | 100.0 |
-| Active                                                                      |         | 11:13 |      | 100.0 |
+| Stories                                                                     | 12:46   |       |      | 100.0 |
+| Active                                                                      |         | 12:46 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:01 |   0.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:43 |   6.4 |
-| COMPLETED Add support for configurable enumerations types                   |         |       | 4:10 |  37.1 |
-| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       | 0:12 |   1.8 |
-| COMPLETED Add support for configurable enumeration values                   |         |       | 5:26 |  48.4 |
-| STARTED Create a new yarn type for primitives                               |         |       | 0:41 |   6.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:43 |   5.6 |
+| COMPLETED Add support for configurable enumerations types                   |         |       | 4:10 |  32.6 |
+| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       | 0:12 |   1.6 |
+| COMPLETED Add support for configurable enumeration values                   |         |       | 5:26 |  42.6 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 2:14 |  17.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -155,7 +155,9 @@ We could:
 - add meta-data for users to supply their own values;
 - add meta-data to disable setting the enumerator value altogether.
 
-*** STARTED Create a new yarn type for primitives                     :story:
+*** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-01-31 Tue 07:45]--[2017-01-31 Tue 09:15] =>  1:30
+    CLOCK: [2017-01-31 Tue 07:08]--[2017-01-31 Tue 07:11] =>  0:03
     CLOCK: [2017-01-31 Tue 06:59]--[2017-01-31 Tue 07:07] =>  0:08
     CLOCK: [2017-01-31 Tue 06:31]--[2017-01-31 Tue 06:58] =>  0:27
     CLOCK: [2017-01-31 Tue 05:31]--[2017-01-31 Tue 05:37] =>  0:06
@@ -169,9 +171,6 @@ We could:
   as for enumerations. Add it to the parsing expander.
 - add a primitive expander, similar to the enumeration expander in
   intermediate model expansion.
-- add a property to type: =can_be_primitive_underlier=. Add JSON
-  support for it. Set it to true to all built-ins and for strings.
-- Add validation to ensure the underlier is valid (separate story).
 - add formatters for primitive across all facets and languages.
 - add a test model for each language with primitives that test all
   built-ins, string and date.
@@ -225,6 +224,25 @@ trying to avoid. One sneaky way out is to call primitives "builtins"
 and call these "primitives". This somewhat reflects the truth in that
 builtins are supposed to be hardware level concepts.
 
+*** Mark elements that are valid enumeration underlying elements      :story:
+
+The following are the valid types for enumerations:
+
+- C#: byte, sbyte, short, ushort, int, uint, long, or ulong.
+- C++: int, unsigned int, long, unsigned long, long long, or unsigned long long
+
+We need to populate =can_be_enumeration_underlier= and add these types
+to the indices. We then need to update the validator to check the user
+has selected a valid underlying type.
+
+*** Mark elements that are valid primitive underlying elements        :story:
+
+The following are the valid types for primitives:
+
+- all built-ins;
+- string types.
+- date, time, etc.
+
 *** Merge both yarn model validators                                  :story:
 
 In truth we do not need =model= validation, just =intermediate_model=
@@ -259,25 +277,6 @@ Tasks:
 We need to add all of the rules related to validation of primitives
 and enumerations to the validators. This can only be done after the
 indices have been populated.
-
-*** Mark elements that are valid enumeration underlying elements      :story:
-
-The following are the valid types for enumerations:
-
-- C#: byte, sbyte, short, ushort, int, uint, long, or ulong.
-- C++: int, unsigned int, long, unsigned long, long long, or unsigned long long
-
-We need to populate =can_be_enumeration_underlier= and add these types
-to the indices. We then need to update the validator to check the user
-has selected a valid underlying type.
-
-*** Mark elements that are valid primitive underlying elements        :story:
-
-The following are the valid types for primitives:
-
-- all built-ins;
-- string types.
-- date, time, etc.
 
 *** Add mapping support between upsilon and LAM                       :story:
 

@@ -45,6 +45,7 @@ std::size_t primitive_hasher::hash(const primitive& v) {
     combine(seed, v.is_nullable());
     combine(seed, v.value_attribute());
     combine(seed, v.use_type_aliasing());
+    combine(seed, v.is_immutable());
 
     return seed;
 }

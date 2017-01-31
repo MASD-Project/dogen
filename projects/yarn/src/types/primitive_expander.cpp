@@ -18,17 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/primitive_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.primitive_expander"));
+
+const std::string csharp_value("Value");
+const std::string cpp_value("value");
+
+const std::string unsupported_language("Invalid or unsupported language: ");
+const std::string missing_underlier(
+    "Primitive does not have an underlying element name: ");
 
 }
 
@@ -72,11 +84,25 @@ populate_from_annotations(const type_group& tg, primitive& p) const {
     p.use_type_aliasing(s.get_boolean_content_or_default(tg.use_type_aliasing));
 }
 
+std::string primitive_expander::
+obtain_value_attribute_simple_name(const languages l) const {
+    switch(l) {
+    case languages::csharp: return csharp_value;
+    case languages::cpp: return cpp_value;
+    case languages::upsilon: return csharp_value;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(l));
+        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
+        BOOST_THROW_EXCEPTION(expansion_error(unsupported_language + s));
+    } }
+}
+
 void primitive_expander::expand(const annotations::type_repository& atrp,
     intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expanding primitives for model: "
                              << im.name().id();
 
+    const auto l(im.input_language());
     const auto tg(make_type_group(atrp));
     for (auto& pair : im.primitives()) {
         const auto& id(pair.first);
@@ -84,6 +110,16 @@ void primitive_expander::expand(const annotations::type_repository& atrp,
 
         auto& p(pair.second);
         populate_from_annotations(tg, p);
+
+        if (p.underlying_element().simple().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_underlier << id;
+            BOOST_THROW_EXCEPTION(expansion_error(missing_underlier + id));
+        }
+
+        yarn::name_factory nf;
+        const auto& n(p.name());
+        const auto sn(obtain_value_attribute_simple_name(l));
+        p.value_attribute().name(nf.build_attribute_name(n, sn));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding primitives for model.";

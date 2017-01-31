@@ -38,6 +38,58 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            a.comment(p.documentation());
+#>
+class <#= sn #> final {
+public:
+<#+
+            /*
+             * Compiler generated constructors and destructors.
+             */
+            if (!a.requires_manual_default_constructor())
+#>
+    <#= sn #>() = default;
+    <#= sn #>(const <#= sn #>&) = default;
+<#+
+            if (!a.requires_manual_move_constructor())
+#>
+    <#= sn #>(<#= sn #>&&) = default;
+    ~<#= sn #>() = default;
+<#+
+            if (p.is_immutable())
+#>
+    <#= sn #>& operator=(const <#= sn #>&) = delete;
+<#+
+            /*
+             * Manually generated default constructor.
+             */
+            if (a.requires_manual_default_constructor()) {
+#>
+public:
+    <#= sn #>();
+
+<#+
+            }
+
+            /*
+             * Manually generated move constructor.
+             */
+            if (a.requires_manual_move_constructor()) {
+#>
+public:
+    <#= sn #>(<#= sn #>&& rhs);
+
+<#+
+            }
+
+            /*
+             * Manually generated complete constructor.
+             */
+#>
+public:
+};
+
+<#+
         } // snf
     } // sbf
     return a.make_artefact();
