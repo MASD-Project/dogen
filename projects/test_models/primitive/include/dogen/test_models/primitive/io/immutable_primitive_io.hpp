@@ -25,8 +25,16 @@
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/test_models/primitive/types/immutable_primitive.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+std::ostream&
+operator<<(std::ostream& s, const dogen::test_models::primitive::immutable_primitive& v);
+
 } } }
+
 #endif

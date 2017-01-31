@@ -25,8 +25,16 @@
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/test_models/primitive/types/product_id.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+std::ostream&
+operator<<(std::ostream& s, const dogen::test_models::primitive::product_id& v);
+
 } } }
+
 #endif

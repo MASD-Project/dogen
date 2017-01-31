@@ -22,6 +22,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -72,10 +73,15 @@ boost::filesystem::path primitive_header_formatter::full_path(
 }
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    auto builder(f.make());
+    builder.add(inclusion_constants::std::iosfwd());
+
+    using traits = formatters::types::traits;
+    builder.add(e.name(), traits::canonical_archetype());
+
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -92,7 +98,13 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto qn(a.get_qualified_name(p.name()));
+a.stream() << std::endl;
+a.stream() << "std::ostream&" << std::endl;
+a.stream() << "operator<<(std::ostream& s, const " << qn << "& v);" << std::endl;
+a.stream() << std::endl;
         } // snf
+a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
