@@ -27,7 +27,6 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/serialization/primitive_fwd_ser.hpp"
@@ -58,7 +57,6 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const dogen::yarn::name& underlying_element,
         const bool is_nullable,
         const dogen::yarn::attribute& value_attribute,
         const bool use_type_aliasing,
@@ -82,16 +80,6 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    /**
-     * @brief Underlying element of each instance of the primitive.
-     */
-    /**@{*/
-    const dogen::yarn::name& underlying_element() const;
-    dogen::yarn::name& underlying_element();
-    void underlying_element(const dogen::yarn::name& v);
-    void underlying_element(const dogen::yarn::name&& v);
-    /**@}*/
-
     /**
      * @brief If true, this element can be null (empty).
      */
@@ -140,7 +128,6 @@ public:
     primitive& operator=(primitive other);
 
 private:
-    dogen::yarn::name underlying_element_;
     bool is_nullable_;
     dogen::yarn::attribute value_attribute_;
     bool use_type_aliasing_;

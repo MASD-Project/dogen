@@ -29,6 +29,7 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/attribute.hpp"
@@ -71,6 +72,9 @@ private:
         const annotations::annotation& a) const;
 
 private:
+    std::string obtain_value_attribute_simple_name(const languages l) const;
+
+private:
     /**
      * @brief Returns all of the top-level modules in the supplied
      * model.
@@ -106,7 +110,7 @@ private:
      * @brief Parses underlying element in the supplied primitive.
      */
     void parse_underlying_element(const type_group& tg,
-        const location& model_location,
+        const location& model_location, const languages l,
         const std::unordered_set<std::string>& top_level_modules,
         primitive& p) const;
 

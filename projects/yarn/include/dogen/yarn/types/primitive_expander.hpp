@@ -31,7 +31,6 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -48,9 +47,6 @@ private:
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
     void populate_from_annotations(const type_group& tg, primitive& p) const;
-
-private:
-    std::string obtain_value_attribute_simple_name(const languages l) const;
 
 public:
     /**

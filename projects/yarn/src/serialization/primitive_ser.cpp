@@ -27,7 +27,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
@@ -45,7 +44,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar << make_nvp("underlying_element", v.underlying_element_);
     ar << make_nvp("is_nullable", v.is_nullable_);
     ar << make_nvp("value_attribute", v.value_attribute_);
     ar << make_nvp("use_type_aliasing", v.use_type_aliasing_);
@@ -58,7 +56,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar >> make_nvp("underlying_element", v.underlying_element_);
     ar >> make_nvp("is_nullable", v.is_nullable_);
     ar >> make_nvp("value_attribute", v.value_attribute_);
     ar >> make_nvp("use_type_aliasing", v.use_type_aliasing_);

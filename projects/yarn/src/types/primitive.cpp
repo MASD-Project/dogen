@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -43,7 +42,6 @@ primitive::primitive(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::name& underlying_element,
     const bool is_nullable,
     const dogen::yarn::attribute& value_attribute,
     const bool use_type_aliasing,
@@ -57,7 +55,6 @@ primitive::primitive(
       in_global_module,
       stereotypes,
       is_element_extension),
-      underlying_element_(underlying_element),
       is_nullable_(is_nullable),
       value_attribute_(value_attribute),
       use_type_aliasing_(use_type_aliasing),
@@ -91,7 +88,6 @@ void primitive::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::yarn::element::to_stream(s);
     s << ", "
-      << "\"underlying_element\": " << underlying_element_ << ", "
       << "\"is_nullable\": " << is_nullable_ << ", "
       << "\"value_attribute\": " << value_attribute_ << ", "
       << "\"use_type_aliasing\": " << use_type_aliasing_ << ", "
@@ -103,7 +99,6 @@ void primitive::swap(primitive& other) noexcept {
     dogen::yarn::element::swap(other);
 
     using std::swap;
-    swap(underlying_element_, other.underlying_element_);
     swap(is_nullable_, other.is_nullable_);
     swap(value_attribute_, other.value_attribute_);
     swap(use_type_aliasing_, other.use_type_aliasing_);
@@ -118,7 +113,6 @@ bool primitive::equals(const dogen::yarn::element& other) const {
 
 bool primitive::operator==(const primitive& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
-        underlying_element_ == rhs.underlying_element_ &&
         is_nullable_ == rhs.is_nullable_ &&
         value_attribute_ == rhs.value_attribute_ &&
         use_type_aliasing_ == rhs.use_type_aliasing_ &&
@@ -129,22 +123,6 @@ primitive& primitive::operator=(primitive other) {
     using std::swap;
     swap(*this, other);
     return *this;
-}
-
-const dogen::yarn::name& primitive::underlying_element() const {
-    return underlying_element_;
-}
-
-dogen::yarn::name& primitive::underlying_element() {
-    return underlying_element_;
-}
-
-void primitive::underlying_element(const dogen::yarn::name& v) {
-    underlying_element_ = v;
-}
-
-void primitive::underlying_element(const dogen::yarn::name&& v) {
-    underlying_element_ = std::move(v);
 }
 
 bool primitive::is_nullable() const {

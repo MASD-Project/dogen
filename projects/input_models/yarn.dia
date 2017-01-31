@@ -29528,7 +29528,7 @@ output languages.#</dia:string>
         <dia:point val="-71,91"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-71.05,90.95;-60.055,97.05"/>
+        <dia:rectangle val="-71.05,90.95;-60.055,96.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-71,91"/>
@@ -29537,7 +29537,7 @@ output languages.#</dia:string>
         <dia:real val="10.895"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="6"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#primitive#</dia:string>
@@ -29627,29 +29627,6 @@ output languages.#</dia:string>
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
       <dia:attribute name="attributes">
-        <dia:composite type="umlattribute">
-          <dia:attribute name="name">
-            <dia:string>#underlying_element#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#name#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="value">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>#Underlying element of each instance of the primitive.#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-        </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
             <dia:string>#is_nullable#</dia:string>

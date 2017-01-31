@@ -18,17 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
 
 namespace {
-
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
-}
 
 bool create_bool(const unsigned int position) {
     return (position % 2) == 0;
@@ -49,11 +43,10 @@ primitive_generator::primitive_generator() : position_(0) { }
 void primitive_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.underlying_element(create_dogen_yarn_name(position + 0));
-    v.is_nullable(create_bool(position + 1));
-    v.value_attribute(create_dogen_yarn_attribute(position + 2));
-    v.use_type_aliasing(create_bool(position + 3));
-    v.is_immutable(create_bool(position + 4));
+    v.is_nullable(create_bool(position + 0));
+    v.value_attribute(create_dogen_yarn_attribute(position + 1));
+    v.use_type_aliasing(create_bool(position + 2));
+    v.is_immutable(create_bool(position + 3));
 }
 
 primitive_generator::result_type

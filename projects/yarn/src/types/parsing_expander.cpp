@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -26,8 +27,10 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/types/name_tree_parser.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 
@@ -39,9 +42,15 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.parsing_expander"));
 
+const std::string csharp_value("Value");
+const std::string cpp_value("value");
+
 const std::string empty_type("Attribute type is empty: ");
 const std::string parent_name_conflict(
     "Parent name is defined in both meta-data and structure of model: ");
+const std::string missing_underlier(
+    "Primitive does not have an underlying element name: ");
+const std::string unsupported_language("Invalid or unsupported language: ");
 const std::string underlying_element_conflict(
     "Underlying element name is already defined: ");
 
@@ -92,6 +101,20 @@ std::string parsing_expander::make_primitive_underlying_element(
 
     return std::string();
 }
+
+std::string parsing_expander::
+obtain_value_attribute_simple_name(const languages l) const {
+    switch(l) {
+    case languages::csharp: return csharp_value;
+    case languages::cpp: return cpp_value;
+    case languages::upsilon: return csharp_value;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(l));
+        BOOST_LOG_SEV(lg, error) << unsupported_language << s;
+        BOOST_THROW_EXCEPTION(expansion_error(unsupported_language + s));
+    } }
+}
+
 
 std::unordered_set<std::string>
 parsing_expander::obtain_top_level_modules(const intermediate_model& m) const {
@@ -213,36 +236,34 @@ void parsing_expander::parse_underlying_element(const type_group& tg,
 }
 
 void parsing_expander::parse_underlying_element(const type_group& tg,
-    const location& model_location,
+    const location& model_location, const languages l,
     const std::unordered_set<std::string>& top_level_modules,
     primitive& p) const {
 
-    /*
-     * Obtain the underlying element name from the meta-data. If there
-     * is none, there is nothing to do.
-     */
-    const auto s(make_primitive_underlying_element(tg, p.annotation()));
-    if (s.empty())
-        return;
+    const auto id(p.name().id());
 
     /*
-     * If we've already have an underlying element name, this means
-     * there are now two conflicting sources of information.
+     * Obtain the underlying element name from the meta-data. If there
+     * isn't one, bomb out as primitives require it.
      */
-    if (!p.underlying_element().simple().empty()) {
-        const auto& id(p.name().id());
-        BOOST_LOG_SEV(lg, error) << underlying_element_conflict << id;
-        BOOST_THROW_EXCEPTION(
-            expansion_error(underlying_element_conflict + id));
+    auto ut(make_primitive_underlying_element(tg, p.annotation()));
+    boost::algorithm::trim(ut);
+    if (ut.empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_underlier << id;
+        BOOST_THROW_EXCEPTION(expansion_error(missing_underlier + id));
     }
 
     /*
-     * Convert the string obtained via meta-data into a yarn name and
-     * set it as our underlying element name.
+     * Create the value attribute.
      */
-    const auto& tpm(top_level_modules);
-    const auto ue(name_builder::build(model_location, tpm, s));
-    p.underlying_element(ue);
+    name_factory nf;
+    const auto& n(p.name());
+    const auto sn(obtain_value_attribute_simple_name(l));
+    p.value_attribute().name(nf.build_attribute_name(n, sn));
+    p.value_attribute().unparsed_type(ut);
+    const name_tree_parser ntp(top_level_modules, model_location, l);
+    auto nt(ntp.parse(ut));
+    p.value_attribute().parsed_type(nt);
 }
 
 void parsing_expander::
@@ -294,7 +315,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
         const auto id(p.name().id());
 
         try {
-            parse_underlying_element(tg, ml, tlmn, p);
+            parse_underlying_element(tg, ml, l, tlmn, p);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
