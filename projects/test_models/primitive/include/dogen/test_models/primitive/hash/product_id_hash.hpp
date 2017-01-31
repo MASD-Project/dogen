@@ -25,8 +25,29 @@
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/test_models/primitive/types/product_id.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+struct product_id_hasher {
+public:
+    static std::size_t hash(const product_id& v);
+};
+
 } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::test_models::primitive::product_id> {
+public:
+    size_t operator()(const dogen::test_models::primitive::product_id& v) const {
+        return dogen::test_models::primitive::product_id_hasher::hash(v);
+    }
+};
+
+}
 #endif

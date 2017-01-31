@@ -5,6 +5,7 @@
 <#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/hash/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
@@ -18,10 +19,13 @@
 <#+
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    auto builder(f.make());
+    builder.add(inclusion_constants::std::functional());
+    builder.add(e.name(), types::traits::canonical_archetype());
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -38,9 +42,30 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+struct <#= sn #>_hasher {
+public:
+    static std::size_t hash(const <#= sn #>& v);
+};
+
+<#+
         } // snf
+#>
+
+namespace std {
+
+template<>
+struct hash<<#= qn #>> {
+public:
+    size_t operator()(const <#= qn #>& v) const {
+        return <#= qn #>_hasher::hash(v);
+    }
+};
+
+}
+<#+
     } // sbf
     return a.make_artefact();
 }
-
 #>

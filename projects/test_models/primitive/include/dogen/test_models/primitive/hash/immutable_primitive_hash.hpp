@@ -25,8 +25,29 @@
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/test_models/primitive/types/immutable_primitive.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+struct immutable_primitive_hasher {
+public:
+    static std::size_t hash(const immutable_primitive& v);
+};
+
 } } }
+
+namespace std {
+
+template<>
+struct hash<dogen::test_models::primitive::immutable_primitive> {
+public:
+    size_t operator()(const dogen::test_models::primitive::immutable_primitive& v) const {
+        return dogen::test_models::primitive::immutable_primitive_hasher::hash(v);
+    }
+};
+
+}
 #endif
