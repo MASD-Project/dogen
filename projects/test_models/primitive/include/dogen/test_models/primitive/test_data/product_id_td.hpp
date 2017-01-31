@@ -25,8 +25,26 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/primitive/types/product_id.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+class product_id_generator {
+public:
+    product_id_generator();
+
+public:
+    typedef dogen::test_models::primitive::product_id result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
 } } }
+
 #endif

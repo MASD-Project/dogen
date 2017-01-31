@@ -22,6 +22,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -73,10 +74,11 @@ boost::filesystem::path primitive_header_formatter::full_path(
 }
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+    auto builder(f.make());
+    builder.add(e.name(), types::traits::primitive_header_archetype());
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -93,7 +95,24 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+a.stream() << std::endl;
+a.stream() << "class " << sn << "_generator {" << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    " << sn << "_generator();" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    typedef " << qn << " result_type;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+            if (!p.is_immutable())
+a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    static result_type* create_ptr(const unsigned int position);" << std::endl;
+a.stream() << "};" << std::endl;
+a.stream() << std::endl;
         } // snf
+a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }

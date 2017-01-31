@@ -25,8 +25,26 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/primitive/types/immutable_primitive.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+class immutable_primitive_generator {
+public:
+    immutable_primitive_generator();
+
+public:
+    typedef dogen::test_models::primitive::immutable_primitive result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
 } } }
+
 #endif
