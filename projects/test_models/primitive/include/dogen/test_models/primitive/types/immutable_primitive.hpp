@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <algorithm>
+#include "dogen/test_models/primitive/serialization/immutable_primitive_fwd_ser.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
@@ -39,6 +42,17 @@ public:
     ~immutable_primitive() = default;
 public:
     explicit immutable_primitive(const short value);
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::primitive::immutable_primitive& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::immutable_primitive& v, unsigned int version);
+
+public:
+    short value() const;
+    void value(const short v);
 };
 
 } } }

@@ -25,6 +25,9 @@
 #pragma once
 #endif
 
+#include <algorithm>
+#include "dogen/test_models/primitive/serialization/product_id_fwd_ser.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
@@ -39,6 +42,17 @@ public:
     ~product_id() = default;
 public:
     explicit product_id(const short value);
+
+private:
+    template<typename Archive>
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
+
+    template<typename Archive>
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
+
+public:
+    short value() const;
+    void value(const short v);
 };
 
 } } }

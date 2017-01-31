@@ -21,6 +21,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/primitive_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
+#include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
@@ -72,10 +73,23 @@ boost::filesystem::path primitive_header_formatter::full_path(
 }
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    auto builder(f.make());
+
+    // algorithm: domain headers need it for the swap function.
+    builder.add(inclusion_constants::std::algorithm());
+
+    using ser = formatters::serialization::traits;
+    const auto ser_fwd_arch(ser::forward_declarations_archetype());
+    builder.add(p.name(), ser_fwd_arch);
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(p.value_attribute().parsed_type().current(), carch);
+
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -92,6 +106,8 @@ format(const context& ctx, const yarn::element& e) const {
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto attr(p.value_attribute());
+
             a.comment(p.documentation());
 a.stream() << "class " << sn << " final {" << std::endl;
 a.stream() << "public:" << std::endl;
@@ -127,9 +143,46 @@ a.stream() << std::endl;
             /*
              * Manually generated complete constructor.
              */
-             const auto attr(p.value_attribute());
 a.stream() << "public:" << std::endl;
 a.stream() << "    explicit " << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
+a.stream() << std::endl;
+            /*
+             * Serialisaton Friends
+             */
+            if (a.is_serialization_enabled()) {
+a.stream() << "private:" << std::endl;
+a.stream() << "    template<typename Archive>" << std::endl;
+a.stream() << "    friend void boost::serialization::save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    template<typename Archive>" << std::endl;
+a.stream() << "    friend void boost::serialization::load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+            }
+
+            /*
+             * Getters and setters.
+             */
+a.stream() << "public:" << std::endl;
+            a.comment_start_method_group(attr.documentation(), !attr.is_immutable());
+            if (attr.parsed_type().is_current_simple_type()) {
+a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << "() const;" << std::endl;
+                if (attr.is_immutable()) {
+a.stream() << std::endl;
+
+                } else {
+a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
+                }
+            } else {
+a.stream() << "    const " << a.get_qualified_name(attr.parsed_type()) << "& " << attr.name().simple() << "() const;" << std::endl;
+                if (attr.is_immutable()) {
+a.stream() << std::endl;
+                } else {
+a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << "();" << std::endl;
+a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
+a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v);" << std::endl;
+                }
+            }
+            a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         } // snf
