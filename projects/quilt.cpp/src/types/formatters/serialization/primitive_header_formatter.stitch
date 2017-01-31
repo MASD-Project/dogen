@@ -7,6 +7,7 @@
 <#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
@@ -20,10 +21,17 @@
 <#+
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    auto builder(f.make());
+    builder.add(p.name(), types::traits::primitive_header_archetype());
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::serialization::split_free());
+
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -37,10 +45,21 @@ format(const context& ctx, const yarn::element& e) const {
     {
 
         auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-        } // snf
+#>
+BOOST_SERIALIZATION_SPLIT_FREE(<#= qn #>)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const <#= qn #>& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, <#= qn #>& v, unsigned int version);
+
+} }
+
+<#+
     } // sbf
     return a.make_artefact();
 }

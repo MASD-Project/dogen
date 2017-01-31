@@ -25,8 +25,20 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace test_models {
-namespace primitive {
-} } }
+#include <boost/serialization/split_free.hpp>
+#include "dogen/test_models/primitive/types/immutable_primitive.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::test_models::primitive::immutable_primitive)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::test_models::primitive::immutable_primitive& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::test_models::primitive::immutable_primitive& v, unsigned int version);
+
+} }
+
 #endif

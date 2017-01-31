@@ -22,6 +22,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -74,10 +75,17 @@ boost::filesystem::path primitive_header_formatter::full_path(
 }
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    auto builder(f.make());
+    builder.add(p.name(), types::traits::primitive_header_archetype());
+
+    using ic = inclusion_constants;
+    builder.add(ic::boost::serialization::split_free());
+
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -91,10 +99,19 @@ format(const context& ctx, const yarn::element& e) const {
     {
 
         auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-        } // snf
+a.stream() << "BOOST_SERIALIZATION_SPLIT_FREE(" << qn << ")" << std::endl;
+a.stream() << std::endl;
+a.stream() << "namespace boost {" << std::endl;
+a.stream() << "namespace serialization {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template<typename Archive>" << std::endl;
+a.stream() << "void save(Archive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template<typename Archive>" << std::endl;
+a.stream() << "void load(Archive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "} }" << std::endl;
+a.stream() << std::endl;
     } // sbf
     return a.make_artefact();
 }
