@@ -20,7 +20,24 @@
  */
 #include "dogen/test_models/primitive/hash/immutable_primitive_hash.hpp"
 
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+std::size_t immutable_primitive_hasher::hash(const immutable_primitive& v) {
+    std::size_t seed(0);
+    combine(seed, v.value());
+    return seed;
+}
+
 } } }

@@ -25,10 +25,10 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
 
-    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     const auto carch(traits::canonical_archetype());
     auto builder(f.make());
-    builder.add(o.name(), carch);
+    builder.add(p.name(), carch);
 
     return builder.build();
 }
@@ -42,11 +42,46 @@ format(const context& ctx, const yarn::element& e) const {
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));
     {
-
         auto sbf(a.make_scoped_boilerplate_formatter());
+#>
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+<#+
+
+        a.add_helper_methods(p.name().id());
+#>
+
+}
+
+<#+
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(p.name().simple());
+            const auto qn(a.get_qualified_name(p.name()));
+            const auto attr(p.value_attribute());
+#>
+
+std::size_t <#= sn #>_hasher::hash(const <#= sn #>& v) {
+    std::size_t seed(0);
+<#+
+            if (a.requires_hashing_helper_method(attr))
+#>
+    combine(seed, hash_<#= attr.parsed_type().identifiable() #>(v.<#= attr.name().simple() #>()));
+<#+
+            else
+#>
+    combine(seed, v.<#= attr.name().simple() #>());
+    return seed;
+}
+
+<#+
         } // snf
     } // sbf
     return a.make_artefact();

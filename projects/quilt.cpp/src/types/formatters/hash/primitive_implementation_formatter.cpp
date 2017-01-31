@@ -87,10 +87,10 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
 
-    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     const auto carch(traits::canonical_archetype());
     auto builder(f.make());
-    builder.add(o.name(), carch);
+    builder.add(p.name(), carch);
 
     return builder.build();
 }
@@ -104,11 +104,36 @@ format(const context& ctx, const yarn::element& e) const {
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));
     {
-
         auto sbf(a.make_scoped_boilerplate_formatter());
+a.stream() << std::endl;
+a.stream() << "namespace {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template <typename HashableType>" << std::endl;
+a.stream() << "inline void combine(std::size_t& seed, const HashableType& value) {" << std::endl;
+a.stream() << "    std::hash<HashableType> hasher;" << std::endl;
+a.stream() << "    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);" << std::endl;
+a.stream() << "}" << std::endl;
+
+        a.add_helper_methods(p.name().id());
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(p.name().simple());
+            const auto qn(a.get_qualified_name(p.name()));
+            const auto attr(p.value_attribute());
+a.stream() << std::endl;
+a.stream() << "std::size_t " << sn << "_hasher::hash(const " << sn << "& v) {" << std::endl;
+a.stream() << "    std::size_t seed(0);" << std::endl;
+            if (a.requires_hashing_helper_method(attr))
+a.stream() << "    combine(seed, hash_" << attr.parsed_type().identifiable() << "(v." << attr.name().simple() << "()));" << std::endl;
+            else
+a.stream() << "    combine(seed, v." << attr.name().simple() << "());" << std::endl;
+a.stream() << "    return seed;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } // snf
     } // sbf
     return a.make_artefact();
