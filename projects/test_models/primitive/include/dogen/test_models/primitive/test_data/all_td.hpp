@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/test_data/dummy_type_td.hpp"
 #include "dogen/test_models/primitive/test_data/product_id_td.hpp"
 #include "dogen/test_models/primitive/test_data/immutable_primitive_td.hpp"
 

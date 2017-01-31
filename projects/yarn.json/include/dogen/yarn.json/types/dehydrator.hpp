@@ -69,15 +69,18 @@ private:
     void dehydrate_attributes(
         const boost::optional<annotations::scribble_group>& sg,
         const std::list<attribute>& attrs, std::ostream& s) const;
-    void dehydrate_objects(const intermediate_model& im, std::ostream& s) const;
-    void dehydrate_concepts(const intermediate_model& im,
+    void dehydrate_objects(const bool requires_leading_comma,
+        const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_concepts(const bool requires_leading_comma,
+        const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_modules(const bool requires_leading_comma,
+        const intermediate_model& im, std::ostream& s) const;
+    void dehydrate_enumerations(const bool requires_leading_comma,
+        const intermediate_model& im,
         std::ostream& s) const;
-    void dehydrate_modules(const intermediate_model& im, std::ostream& s) const;
-    void dehydrate_enumerations(
+    void dehydrate_primitives(const bool requires_leading_comma,
         const intermediate_model& im, std::ostream& s) const;
-    void dehydrate_primitives(
-        const intermediate_model& im, std::ostream& s) const;
-    void dehydrate_exceptions(
+    void dehydrate_exceptions(const bool requires_leading_comma,
         const intermediate_model& im, std::ostream& s) const;
 
 public:

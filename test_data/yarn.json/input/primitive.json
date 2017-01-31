@@ -13,13 +13,6 @@
   "elements": [
     {
       "name": {
-        "simple": "dummy_type"
-      },
-      "meta_type": "object",
-      "documentation": "Just to force some output for now.\n"
-    },
-    {
-      "name": {
         "simple": "immutable_primitive"
       },
       "meta_type": "primitive",

@@ -221,16 +221,16 @@ void dehydrator::dehydrate_attributes(
     s << " ]";
 }
 
-void dehydrator::
-dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
+void dehydrator::dehydrate_objects(const bool requires_leading_comma,
+    const intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
-    bool is_first(true);
 
     const auto objects(to_map(im.objects()));
+    bool output_comma(requires_leading_comma);
     for (const auto& pair : objects) {
-        if (!is_first)
+        if (output_comma)
             s << comma_space;
 
         const auto& o(pair.second);
@@ -250,16 +250,16 @@ dehydrate_objects(const intermediate_model& im, std::ostream& s) const {
             dehydrate_attributes(sg, o.local_attributes(), s);
         }
         s << " }";
-        is_first = false;
+        output_comma = true;
     }
 }
 
-void dehydrator::
-dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
+void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
+    const intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
-    bool output_comma(!im.objects().empty());
+    bool output_comma(requires_leading_comma);
 
     const auto concepts(to_map(im.concepts()));
     for (const auto& pair : concepts) {
@@ -288,8 +288,8 @@ dehydrate_concepts(const intermediate_model& im, std::ostream& s) const {
     }
 }
 
-void dehydrator::
-dehydrate_modules(const intermediate_model& im, std::ostream& s) const {
+void dehydrator::dehydrate_modules(const bool requires_leading_comma,
+    const intermediate_model& im, std::ostream& s) const {
     /*
      * Remove the root module.
      */
@@ -300,7 +300,7 @@ dehydrate_modules(const intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
-    bool output_comma(!im.objects().empty() || !im.concepts().empty());
+    bool output_comma(requires_leading_comma);
     for (const auto& pair : modules) {
         if (output_comma)
             s << comma_space;
@@ -316,12 +316,11 @@ dehydrate_modules(const intermediate_model& im, std::ostream& s) const {
     }
 }
 
-void dehydrator::
-dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
+void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
+    const intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
-    bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
-        im.modules().empty());
+    bool output_comma(requires_leading_comma);
     const auto enumerations(to_map(im.enumerations()));
     for (const auto& pair : enumerations) {
         if (output_comma)
@@ -381,13 +380,12 @@ dehydrate_enumerations(const intermediate_model& im, std::ostream& s) const {
     }
 }
 
-void dehydrator::
-dehydrate_primitives(const intermediate_model& im, std::ostream& s) const {
+void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
+    const intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
-    bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
-        im.modules().empty() || im.enumerations().empty());
+    bool output_comma(requires_leading_comma);
     const auto primitives(to_map(im.primitives()));
     for (const auto& pair : primitives) {
         if (output_comma)
@@ -404,13 +402,12 @@ dehydrate_primitives(const intermediate_model& im, std::ostream& s) const {
 }
 
 void dehydrator::
-dehydrate_exceptions(const intermediate_model& im, std::ostream& s) const {
+dehydrate_exceptions(const bool requires_leading_comma,
+    const intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
-    bool output_comma(!im.objects().empty() || !im.concepts().empty() ||
-        im.modules().empty() || im.enumerations().empty() ||
-        im.primitives().empty());
+    bool output_comma(requires_leading_comma);
     const auto exceptions(to_map(im.exceptions()));
     for (const auto& pair : exceptions) {
         if (output_comma)
@@ -461,12 +458,26 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
         s << comma_space;
         uf.insert_quoted("elements");
         s << ": [";
-        dehydrate_objects(im, s);
-        dehydrate_concepts(im, s);
-        dehydrate_modules(im, s);
-        dehydrate_enumerations(im, s);
-        dehydrate_primitives(im, s);
-        dehydrate_exceptions(im, s);
+
+        bool requires_leading_comma(false);
+
+        dehydrate_objects(requires_leading_comma, im, s);
+        requires_leading_comma |= !im.objects().empty();
+
+        dehydrate_concepts(requires_leading_comma, im, s);
+        requires_leading_comma |= !im.concepts().empty();
+
+        dehydrate_modules(requires_leading_comma, im, s);
+        requires_leading_comma |= im.modules().size() > 1/*root module*/;
+
+        dehydrate_enumerations(requires_leading_comma, im, s);
+        requires_leading_comma |= !im.enumerations().empty();
+
+        dehydrate_primitives(requires_leading_comma, im, s);
+        requires_leading_comma |= !im.primitives().empty();
+
+        dehydrate_exceptions(requires_leading_comma, im, s);
+
         s << " ]";
     }
 
