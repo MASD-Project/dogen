@@ -27,4 +27,27 @@ namespace primitive {
 product_id::product_id(const short value)
     : value_(value) { }
 
+short product_id::value() const {
+    return value_;
+}
+
+void product_id::value(const short v) {
+    value_ = v;
+}
+
+bool product_id::operator==(const product_id& rhs) const {
+    return value_ == rhs.value_;
+}
+
+void product_id::swap(product_id& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+product_id& product_id::operator=(product_id other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
 } } }

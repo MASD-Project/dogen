@@ -136,6 +136,43 @@ a.stream() << std::endl;
 a.stream() << sn << "::" << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ")" << std::endl;
 a.stream() << "    : " << a.make_member_variable_name(attr) << "(" << attr.name().simple() << ") { }" << std::endl;
 a.stream() << std::endl;
+            /*
+             * Getters and setters
+             */
+a.stream() << a.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
+a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            if (!p.is_immutable()) {
+a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
+a.stream() << "    " << a.make_member_variable_name(attr) << " = v;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
+
+            /*
+             * Equality.
+             */
+a.stream() << "bool " << sn << "::operator==(const " << sn << "& rhs) const {" << std::endl;
+a.stream() << "    return " << a.make_member_variable_name(attr) << " == rhs." << a.make_member_variable_name(attr) << ";" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            /*
+             * Swap and assignment.
+             */
+            if (!p.is_immutable()) {
+a.stream() << "void " << sn << "::swap(" << sn << "& other) noexcept {" << std::endl;
+a.stream() << "    using std::swap;" << std::endl;
+a.stream() << "    swap(" << a.make_member_variable_name(attr) << ", other." << a.make_member_variable_name(attr) << ");" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << sn << "& " << sn << "::operator=(" << sn << " other) {" << std::endl;
+a.stream() << "    using std::swap;" << std::endl;
+a.stream() << "    swap(*this, other);" << std::endl;
+a.stream() << "    return *this;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+            }
         } // snf
     } // sbf
     return a.make_artefact();

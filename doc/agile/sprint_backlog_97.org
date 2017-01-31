@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-31 Tue 15:09]
+#+CAPTION: Clock summary at [2017-01-31 Tue 15:30]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:02* |       |      | 100.0 |
+| *Total time*                                                                | *17:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:02   |       |      | 100.0 |
-| Active                                                                      |         | 17:02 |      | 100.0 |
+| Stories                                                                     | 17:22   |       |      | 100.0 |
+| Active                                                                      |         | 17:22 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:01 |   0.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:43 |   4.2 |
-| COMPLETED Add support for configurable enumerations types                   |         |       | 4:10 |  24.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:43 |   4.1 |
+| COMPLETED Add support for configurable enumerations types                   |         |       | 4:10 |  24.0 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       | 0:12 |   1.2 |
-| COMPLETED Add support for configurable enumeration values                   |         |       | 5:26 |  31.9 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 6:30 |  38.2 |
+| COMPLETED Add support for configurable enumeration values                   |         |       | 5:26 |  31.3 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 6:50 |  39.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -156,6 +156,7 @@ We could:
 - add meta-data to disable setting the enumerator value altogether.
 
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-01-31 Tue 15:10]--[2017-01-31 Tue 15:30] =>  0:20
     CLOCK: [2017-01-31 Tue 14:50]--[2017-01-31 Tue 15:09] =>  0:19
     CLOCK: [2017-01-31 Tue 14:12]--[2017-01-31 Tue 14:49] =>  0:37
     CLOCK: [2017-01-31 Tue 13:25]--[2017-01-31 Tue 13:52] =>  0:27
