@@ -188,7 +188,8 @@ model model_factory::make(const annotations::type_repository& atrp,
 
     /*
      * Enumeration expansion must be done after merging as we need the
-     * built-in types.
+     * built-in types; these are required in order to find the default
+     * enumeration underlying element.
      */
     expand_enumerations(atrp, im);
 
