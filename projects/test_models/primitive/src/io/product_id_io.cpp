@@ -18,9 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/test_models/primitive/io/product_id_io.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+std::ostream& operator<<(std::ostream& s, const product_id& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::test_models::primitive::product_id\"" << ", "
+      << "\"value\": " << v.value()
+      << " }";
+
+    return s;
+}
+
 } } }

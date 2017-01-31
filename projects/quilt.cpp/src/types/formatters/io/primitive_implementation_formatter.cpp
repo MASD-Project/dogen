@@ -87,10 +87,21 @@ boost::filesystem::path primitive_implementation_formatter::full_path(
 std::list<std::string> primitive_implementation_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
+
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
     const auto ch_fn(traits::primitive_header_archetype());
-    builder.add(o.name(), ch_fn);
+    builder.add(p.name(), ch_fn);
+
+    const auto io_carch(formatters::io::traits::canonical_archetype());
+    const auto self_fn(primitive_implementation_formatter::static_artefact());
+    const bool io_enabled(builder.is_enabled(p.name(), self_fn));
+
+    if (!io_enabled)
+        return builder.build();
+
+    const auto os(inclusion_constants::std::ostream());
+    builder.add(os);
 
     return builder.build();
 }
@@ -101,14 +112,36 @@ format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& p(a.as<yarn::primitive>(static_artefact(), e));
 
-    const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
     {
-
         auto sbf(a.make_scoped_boilerplate_formatter());
+        a.add_helper_methods(p.name().id());
+
         {
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+            const auto sn(p.name().simple());
+            const auto qn(a.get_qualified_name(p.name()));
+            const auto attr(p.value_attribute());
+a.stream() << std::endl;
+a.stream() << "std::ostream& operator<<(std::ostream& s, const " << sn << "& v) {" << std::endl;
+            if (a.requires_stream_manipulators()) {
+a.stream() << "    boost::io::ios_flags_saver ifs(s);" << std::endl;
+a.stream() << "    s.setf(std::ios_base::boolalpha);" << std::endl;
+a.stream() << "    s.setf(std::ios::fixed, std::ios::floatfield);" << std::endl;
+a.stream() << "    s.precision(6);" << std::endl;
+a.stream() << "    s.setf(std::ios::showpoint);" << std::endl;
+            }
+
+            const std::string variable_name = "v." + a.make_getter_setter_name(attr) + "()";
+a.stream() << std::endl;
+a.stream() << "    s << \" { \"" << std::endl;
+a.stream() << "      << \"\\\"__type__\\\": \" << \"\\\"" << qn << "\\\"\" << \", \"" << std::endl;
+a.stream() << "      << \"\\\"" << attr.name().simple() << "\\\": \" << " << a.streaming_for_type(attr.parsed_type().current(), variable_name) << std::endl;
+a.stream() << "      << \" }\";" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    return s;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } // snf
     } // sbf
     return a.make_artefact();

@@ -18,9 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
 #include "dogen/test_models/primitive/io/immutable_primitive_io.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+std::ostream& operator<<(std::ostream& s, const immutable_primitive& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::test_models::primitive::immutable_primitive\"" << ", "
+      << "\"value\": " << v.value()
+      << " }";
+
+    return s;
+}
+
 } } }
