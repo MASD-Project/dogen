@@ -47,9 +47,10 @@ bool intermediate_model_expander::are_languages_compatible(
 }
 
 void intermediate_model_expander::
-expand_primitives(intermediate_model& im) const {
+expand_primitives(const annotations::type_repository& atrp,
+    intermediate_model& im) const {
     primitive_expander ex;
-    ex.expand(im);
+    ex.expand(atrp, im);
 }
 
 void intermediate_model_expander::expand_language(

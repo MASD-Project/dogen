@@ -26,9 +26,10 @@
 #endif
 
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {

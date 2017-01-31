@@ -13,19 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-01-30 Mon 23:06]
+#+CAPTION: Clock summary at [2017-01-31 Tue 06:58]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *10:32* |       |      | 100.0 |
+| *Total time*                                                                | *11:05* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 10:32   |       |      | 100.0 |
-| Active                                                                      |         | 10:32 |      | 100.0 |
+| Stories                                                                     | 11:05   |       |      | 100.0 |
+| Active                                                                      |         | 11:05 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:01 |   0.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:43 |   6.8 |
-| COMPLETED Add support for configurable enumerations types                   |         |       | 4:10 |  39.6 |
-| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       | 0:12 |   1.9 |
-| COMPLETED Add support for configurable enumeration values                   |         |       | 5:26 |  51.6 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:43 |   6.5 |
+| COMPLETED Add support for configurable enumerations types                   |         |       | 4:10 |  37.6 |
+| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       | 0:12 |   1.8 |
+| COMPLETED Add support for configurable enumeration values                   |         |       | 5:26 |  49.0 |
+| STARTED Create a new yarn type for primitives                               |         |       | 0:33 |   5.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -154,7 +155,9 @@ We could:
 - add meta-data for users to supply their own values;
 - add meta-data to disable setting the enumerator value altogether.
 
-*** Create a new yarn type for primitives                             :story:
+*** STARTED Create a new yarn type for primitives                     :story:
+    CLOCK: [2017-01-31 Tue 06:31]--[2017-01-31 Tue 06:58] =>  0:27
+    CLOCK: [2017-01-31 Tue 05:31]--[2017-01-31 Tue 05:37] =>  0:06
 
 - add a new yarn element: primitive. Add an attribute of type name
   called =underlying_type=.
@@ -162,15 +165,15 @@ We could:
   primitive can be null.
 - add a stereotype for primitive.
 - add a meta-data parameter for the underlying type. Make it the same
-  as for enumerations.
+  as for enumerations. Add it to the parsing expander.
 - add a primitive expander, similar to the enumeration expander in
-  intermediate model expansion. Read the meta-data parameter there.
+  intermediate model expansion.
 - add a property to type: =can_be_primitive_underlier=. Add JSON
   support for it. Set it to true to all built-ins and for strings.
-- Add validation to ensure the underlier is valid.
+- Add validation to ensure the underlier is valid (separate story).
 - add formatters for primitive across all facets and languages.
 - add a test model for each language with primitives that test all
-  built-ins and string.
+  built-ins, string and date.
 
 *Previous Understanding*
 
@@ -220,6 +223,60 @@ because an alias implies they are interchangeable; this is what one is
 trying to avoid. One sneaky way out is to call primitives "builtins"
 and call these "primitives". This somewhat reflects the truth in that
 builtins are supposed to be hardware level concepts.
+
+*** Merge both yarn model validators                                  :story:
+
+In truth we do not need =model= validation, just =intermediate_model=
+validation; the transformation between the two is trivial. What we do
+need is two kinds of =intermediate_model= validation:
+
+- after the "single" =intermediate_model= is generated.
+- after the merged, resolved, etc =intermediate_model= is generated.
+
+We could call these "stages" and have two methods:
+
+- =validate_first_stage=
+- =validate_second_stage=
+
+Actually the problem is this class is going to become too messy. Maybe
+we do need to classes, but reflecting the stages rather than the model
+types:
+
+- first stage validator
+- second stage validator
+
+Both validate =intermediate_model=.
+
+Tasks:
+
+- move =abstract_elements= to indices
+- decomposer now operates on intermediate models
+- rename validators
+
+*** Add validation rules for primitives and enumerations              :story:
+
+We need to add all of the rules related to validation of primitives
+and enumerations to the validators. This can only be done after the
+indices have been populated.
+
+*** Mark elements that are valid enumeration underlying elements      :story:
+
+The following are the valid types for enumerations:
+
+- C#: byte, sbyte, short, ushort, int, uint, long, or ulong.
+- C++: int, unsigned int, long, unsigned long, long long, or unsigned long long
+
+We need to populate =can_be_enumeration_underlier= and add these types
+to the indices. We then need to update the validator to check the user
+has selected a valid underlying type.
+
+*** Mark elements that are valid primitive underlying elements        :story:
+
+The following are the valid types for primitives:
+
+- all built-ins;
+- string types.
+- date, time, etc.
 
 *** Add mapping support between upsilon and LAM                       :story:
 
@@ -374,46 +431,6 @@ Another alternative is to apply hard-coded regexes:
 
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
-
-*** Validate enum types                                               :story:
-
-The following are the valid types for enumerations:
-
-- C#: byte, sbyte, short, ushort, int, uint, long, or ulong.
-- C++: int, unsigned int, long, unsigned long, long long, or unsigned long long
-
-We need to populate =can_be_enumeration_underlier= and add these types
-to the indices. We then need to update the validator to check the user
-has selected a valid underlying type.
-
-*** Merge both yarn model validators                                  :story:
-
-In truth we do not need =model= validation, just =intermediate_model=
-validation; the transformation between the two is trivial. What we do
-need is two kinds of =intermediate_model= validation:
-
-- after the "single" =intermediate_model= is generated.
-- after the merged, resolved, etc =intermediate_model= is generated.
-
-We could call these "stages" and have two methods:
-
-- =validate_first_stage=
-- =validate_second_stage=
-
-Actually the problem is this class is going to become too messy. Maybe
-we do need to classes, but reflecting the stages rather than the model
-types:
-
-- first stage validator
-- second stage validator
-
-Both validate =intermediate_model=.
-
-Tasks:
-
-- move =abstract_elements= to indices
-- decomposer now operates on intermediate models
-- rename validators
 
 *** Add validation for C# keywords                                    :story:
 

@@ -25,17 +25,35 @@
 #pragma once
 #endif
 
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class primitive_expander final {
+private:
+    struct type_group {
+        annotations::type is_nullable;
+        annotations::type use_type_aliasing;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+private:
+    void populate_from_annotations(const type_group& tg, primitive& p) const;
+
 public:
     /**
      * @brief Expands all primitives in model.
      */
-    void expand(intermediate_model& im);
+    void expand(const annotations::type_repository& atrp,
+        intermediate_model& im);
 };
 
 } }

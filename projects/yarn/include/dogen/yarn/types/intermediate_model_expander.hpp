@@ -52,7 +52,8 @@ private:
     /**
      * @brief Expands all primitives.
      */
-    void expand_primitives(intermediate_model& im) const;
+    void expand_primitives(const annotations::type_repository& atrp,
+        intermediate_model& im) const;
 
     /**
      * @brief Reads the model language from meta-data.
