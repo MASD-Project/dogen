@@ -85,8 +85,10 @@ public:
             /*
              * Manually generated complete constructor.
              */
+             const auto attr(p.value_attribute());
 #>
 public:
+    explicit <#= sn #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>);
 };
 
 <#+

@@ -38,6 +38,7 @@ public:
     product_id(product_id&&) = default;
     ~product_id() = default;
 public:
+    explicit product_id(const short value);
 };
 
 } } }

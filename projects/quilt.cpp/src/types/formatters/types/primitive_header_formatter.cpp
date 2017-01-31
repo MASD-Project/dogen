@@ -127,7 +127,9 @@ a.stream() << std::endl;
             /*
              * Manually generated complete constructor.
              */
+             const auto attr(p.value_attribute());
 a.stream() << "public:" << std::endl;
+a.stream() << "    explicit " << sn << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << ");" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         } // snf

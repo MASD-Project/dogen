@@ -230,21 +230,25 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     nt.qualified(iq.second);
 }
 
+void resolver::resolve_attribute(const intermediate_model& im,
+    const name& owner, attribute& attr) const {
+    try {
+        resolve_name_tree(im, owner, attr.parsed_type());
+        BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << attr.name().id();
+    } catch (boost::exception& e) {
+        std::ostringstream s;
+        s << "Owner type name: " << owner.id()
+          << " Attribute name: " << attr.name()
+          << " Attribute type: " << attr.parsed_type();
+        e << errmsg_info(s.str());
+        throw;
+    }
+}
+
 void resolver::resolve_attributes(const intermediate_model& im,
     const name& owner, std::list<attribute>& attributes) const {
-    for (auto& a : attributes) {
-        try {
-            resolve_name_tree(im, owner, a.parsed_type());
-            BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << a.name().id();
-        } catch (boost::exception& e) {
-            std::ostringstream s;
-            s << "Owner type name: " << owner.id()
-              << " Attribute name: " << a.name()
-              << " Attribute type: " << a.parsed_type();
-            e << errmsg_info(s.str());
-            throw;
-        }
-    }
+    for (auto& attr : attributes)
+        resolve_attribute(im, owner, attr);
 }
 
 void resolver::validate_inheritance_graph(const intermediate_model& im,
@@ -299,7 +303,8 @@ void resolver::validate_refinements(const intermediate_model& im,
 
 void resolver::
 resolve_concepts(intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Concepts: " << im.concepts().size();
+    BOOST_LOG_SEV(lg, debug) << "Resolving concepts. Size: "
+                             << im.concepts().size();
 
     for (auto& pair : im.concepts()) {
         concept& c(pair.second);
@@ -308,11 +313,14 @@ resolve_concepts(intermediate_model& im) const {
         resolve_attributes(im, c.name(), c.local_attributes());
         validate_refinements(im, c);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Resolved concepts.";
 }
 
 void resolver::
 resolve_objects(intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Objects: " << im.objects().size();
+    BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
+                             << im.objects().size();
 
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
@@ -321,10 +329,13 @@ resolve_objects(intermediate_model& im) const {
         validate_inheritance_graph(im, o);
         resolve_attributes(im, o.name(), o.local_attributes());
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Resolved objects.";
 }
 
 void resolver::resolve_enumerations(intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Enumerations: " << im.enumerations().size();
+    BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
+                             << im.enumerations().size();
 
     for (auto& pair : im.enumerations()) {
         auto& e(pair.second);
@@ -348,16 +359,38 @@ void resolver::resolve_enumerations(intermediate_model& im) const {
                 resolution_error(invalid_underlying_element + id));
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Resolved enumerations.";
+}
+
+void resolver::resolve_primitives(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
+                             << im.primitives().size();
+
+    for (auto& pair : im.primitives()) {
+        auto& p(pair.second);
+
+        BOOST_LOG_SEV(lg, debug) << "Resolving: " << p.name().id();
+        resolve_attribute(im, p.name(), p.value_attribute());
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Resolved primitives.";
 }
 
 void resolver::resolve(intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
+
     resolve_concepts(im);
     resolve_objects(im);
     resolve_enumerations(im);
+    resolve_primitives(im);
+
+    BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }
 
 name resolver::resolve(const intermediate_model& im, const name& context,
     const name& n) const {
+
     const auto r(resolve_name(im, context, n));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
                              << " to: " << r.id();

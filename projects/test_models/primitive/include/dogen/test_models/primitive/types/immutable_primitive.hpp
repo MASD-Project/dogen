@@ -38,6 +38,7 @@ public:
     immutable_primitive(immutable_primitive&&) = default;
     ~immutable_primitive() = default;
 public:
+    explicit immutable_primitive(const short value);
 };
 
 } } }

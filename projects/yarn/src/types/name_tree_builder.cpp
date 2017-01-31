@@ -154,7 +154,7 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
 }
 
 name_tree name_tree_builder::build() {
-    BOOST_LOG_SEV(lg, debug) << "Started build";
+    BOOST_LOG_SEV(lg, debug) << "Started building.";
 
     /*
      * Flush any pending work and build the name for it. This handles
@@ -167,7 +167,7 @@ name_tree name_tree_builder::build() {
      */
     name_tree r(make_name_tree(*root_));
 
-    BOOST_LOG_SEV(lg, debug) << "Finished build. Final name: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Finished building. Final name: " << r;
 
     return r;
 }

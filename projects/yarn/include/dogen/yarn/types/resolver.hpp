@@ -73,6 +73,12 @@ private:
         name_tree& nt) const;
 
     /**
+     * @brief Resolves all references to types in the supplied attribute.
+     */
+    void resolve_attribute(const intermediate_model& im,
+        const name& owner, attribute& attr) const;
+
+    /**
      * @brief Resolves all references to types in the supplied attributes.
      */
     void resolve_attributes(const intermediate_model& im,
@@ -109,6 +115,11 @@ private:
      * @brief Resolve all enumerations.
      */
     void resolve_enumerations(intermediate_model& im) const;
+
+    /**
+     * @brief Resolve all primitives.
+     */
+    void resolve_primitives(intermediate_model& im) const;
 
 public:
     /**
