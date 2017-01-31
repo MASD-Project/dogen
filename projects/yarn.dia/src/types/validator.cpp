@@ -36,8 +36,8 @@ static logger lg(logger_factory("yarn.dia.validator"));
  * stereotypes as flags.
  */
 const std::string no_uml_type("No UML type.");
-const std::string stereotypes_require_yarn_object(
-    "Only yarn objects can have stereotypes.");
+const std::string invalid_use_of_stereotypes(
+    "Stereotypes can only be used with yarn objects and primitives.");
 const std::string object_options_on_non_object(
     "Only yarn objects can have object options");
 
@@ -48,17 +48,23 @@ namespace yarn {
 namespace dia {
 
 void validator::validate_yarn(const processed_object& po) const {
-    if (po.yarn_object_type() == yarn_object_types::object)
-        return; // nothing to validate for yarn objects.
+    /*
+     * We only have validation rules for yarn objects and primitives;
+     * if we're neither, there's nothing to do.
+     */
+    if (po.yarn_object_type() == yarn_object_types::object ||
+        po.yarn_object_type() == yarn_object_types::primitive)
+        return;
 
     /*
-     * Non-yarn objects are not allowed to have stereotypes.
+     * Stereotypes - other than type-related ones - can only be used
+     * by yarn objects and primitives.
      */
     if (!po.stereotypes().empty()) {
-        BOOST_LOG_SEV(lg, error) << stereotypes_require_yarn_object << ": "
-                                 << po.stereotypes();
+        BOOST_LOG_SEV(lg, error) << invalid_use_of_stereotypes
+                                 << " Stereotypes used: " << po.stereotypes();
         BOOST_THROW_EXCEPTION(
-            validation_error(stereotypes_require_yarn_object));
+            validation_error(invalid_use_of_stereotypes));
     }
 }
 

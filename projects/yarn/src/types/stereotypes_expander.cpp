@@ -313,11 +313,34 @@ void stereotypes_expander::expand(object& o, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Unknown: " << o.stereotypes();
 }
 
+void stereotypes_expander::expand(primitive& p) const {
+    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << p.name().id();
+    if (p.stereotypes().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Original: " << p.stereotypes();
+    std::vector<std::string> unknown_stereotypes;
+    for (const auto s : p.stereotypes()) {
+        if (s == stereotype_immutable)
+            p.is_immutable(true);
+        else
+            unknown_stereotypes.push_back(s);
+    }
+
+    p.stereotypes(unknown_stereotypes);
+    BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();
+}
+
 void stereotypes_expander::expand(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
 
     for (auto& pair : im.objects())
         expand(pair.second, im);
+
+    for (auto& pair : im.primitives())
+        expand(pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes.";
 }

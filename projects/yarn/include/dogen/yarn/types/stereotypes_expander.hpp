@@ -27,6 +27,8 @@
 
 #include <list>
 #include <unordered_map>
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/hash/location_hash.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -86,6 +88,11 @@ private:
      * @brief Expands all stereotypes for the object.
      */
     void expand(object& o, intermediate_model& im) const;
+
+    /**
+     * @brief Expands all stereotypes for the primitive.
+     */
+    void expand(primitive& p) const;
 
 public:
     /**

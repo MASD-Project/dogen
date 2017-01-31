@@ -27,5 +27,6 @@
 
 #include "dogen/test_models/primitive/io/dummy_type_io.hpp"
 #include "dogen/test_models/primitive/io/product_id_io.hpp"
+#include "dogen/test_models/primitive/io/immutable_primitive_io.hpp"
 
 #endif

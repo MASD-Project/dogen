@@ -27,5 +27,6 @@
 
 #include "dogen/test_models/primitive/odb/dummy_type_pragmas.hpp"
 #include "dogen/test_models/primitive/odb/product_id_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/immutable_primitive_pragmas.hpp"
 
 #endif

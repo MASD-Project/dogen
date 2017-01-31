@@ -27,5 +27,6 @@
 
 #include "dogen/test_models/primitive/serialization/dummy_type_ser.hpp"
 #include "dogen/test_models/primitive/serialization/product_id_ser.hpp"
+#include "dogen/test_models/primitive/serialization/immutable_primitive_ser.hpp"
 
 #endif

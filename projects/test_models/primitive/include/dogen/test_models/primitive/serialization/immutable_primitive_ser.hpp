@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_ALL_TD_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_ALL_TD_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_IMMUTABLE_PRIMITIVE_SER_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_IMMUTABLE_PRIMITIVE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/test_data/dummy_type_td.hpp"
-#include "dogen/test_models/primitive/test_data/product_id_td.hpp"
-#include "dogen/test_models/primitive/test_data/immutable_primitive_td.hpp"
-
+namespace dogen {
+namespace test_models {
+namespace primitive {
+} } }
 #endif

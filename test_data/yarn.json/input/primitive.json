@@ -20,6 +20,16 @@
     },
     {
       "name": {
+        "simple": "immutable_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test for a primitive which is also immutable.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "short"
+      }
+    },
+    {
+      "name": {
         "simple": "product_id"
       },
       "meta_type": "primitive",

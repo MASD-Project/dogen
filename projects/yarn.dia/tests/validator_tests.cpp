@@ -36,7 +36,7 @@ const std::string test_module("yarn.dia");
 const std::string test_suite("validator_tests");
 
 const std::string no_uml_type("No UML type");
-const std::string invalid_stereotypes("Only yarn objects can have stereotypes");
+const std::string invalid_stereotypes("Stereotypes can only be used with yarn");
 
 }
 

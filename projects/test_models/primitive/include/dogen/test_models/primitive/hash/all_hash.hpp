@@ -27,5 +27,6 @@
 
 #include "dogen/test_models/primitive/hash/dummy_type_hash.hpp"
 #include "dogen/test_models/primitive/hash/product_id_hash.hpp"
+#include "dogen/test_models/primitive/hash/immutable_primitive_hash.hpp"
 
 #endif
