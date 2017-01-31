@@ -183,10 +183,60 @@ a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name(
                 }
             }
             a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+
+            /*
+             * Explicit cast.
+             */
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    explicit operator " << a.get_qualified_name(attr.parsed_type()) << "() const {" << std::endl;
+a.stream() << "        return " << a.make_member_variable_name(attr) << ";" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+            /*
+             * Equality.
+             */
+a.stream() << std::endl;
+a.stream() << "public:" << std::endl;
+a.stream() << "    bool operator==(const " << sn << "& rhs) const;" << std::endl;
+a.stream() << "    bool operator!=(const " << sn << "& rhs) const {" << std::endl;
+a.stream() << "        return !this->operator==(rhs);" << std::endl;
+a.stream() << "    }" << std::endl;
+a.stream() << std::endl;
+            /*
+             * Swap and assignment.
+             */
+a.stream() << "public:" << std::endl;
+a.stream() << "    void swap(" << sn << "& other) noexcept;" << std::endl;
+            if (!p.is_immutable()) {
+a.stream() << "    " << sn << "& operator=(" << sn << " other);" << std::endl;
+            }
+
+            /*
+             * Member variables.
+             */
+a.stream() << std::endl;
+a.stream() << "private:" << std::endl;
+a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << " " << a.make_member_variable_name(attr) << ";" << std::endl;
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
         } // snf
-    } // sbf
+
+        if (!p.is_immutable()) {
+a.stream() << std::endl;
+a.stream() << "namespace std {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template<>" << std::endl;
+a.stream() << "inline void swap(" << std::endl;
+a.stream() << "    " << qn << "& lhs," << std::endl;
+a.stream() << "    " << qn << "& rhs) {" << std::endl;
+a.stream() << "    lhs.swap(rhs);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
+        }
+a.stream() << std::endl;
+    } //ah  sbf
     return a.make_artefact();
 }
 

@@ -53,7 +53,38 @@ private:
 public:
     short value() const;
     void value(const short v);
+
+public:
+    explicit operator short() const {
+        return value_;
+    }
+
+
+public:
+    bool operator==(const product_id& rhs) const;
+    bool operator!=(const product_id& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(product_id& other) noexcept;
+    product_id& operator=(product_id other);
+
+private:
+    short value_;
 };
 
 } } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::test_models::primitive::product_id& lhs,
+    dogen::test_models::primitive::product_id& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
 #endif

@@ -53,7 +53,38 @@ private:
 public:
     short value() const;
     void value(const short v);
+
+public:
+    explicit operator short() const {
+        return value_;
+    }
+
+
+public:
+    bool operator==(const immutable_primitive& rhs) const;
+    bool operator!=(const immutable_primitive& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+public:
+    void swap(immutable_primitive& other) noexcept;
+    immutable_primitive& operator=(immutable_primitive other);
+
+private:
+    short value_;
 };
 
 } } }
+
+namespace std {
+
+template<>
+inline void swap(
+    dogen::test_models::primitive::immutable_primitive& lhs,
+    dogen::test_models::primitive::immutable_primitive& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+
 #endif

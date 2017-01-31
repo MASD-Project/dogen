@@ -159,12 +159,74 @@ public:
                 }
             }
             a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
+
+            /*
+             * Explicit cast.
+             */
 #>
+
+public:
+    explicit operator <#= a.get_qualified_name(attr.parsed_type()) #>() const {
+        return <#= a.make_member_variable_name(attr) #>;
+    }
+
+<#+
+            /*
+             * Equality.
+             */
+#>
+
+public:
+    bool operator==(const <#= sn #>& rhs) const;
+    bool operator!=(const <#= sn #>& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+<#+
+            /*
+             * Swap and assignment.
+             */
+#>
+public:
+    void swap(<#= sn #>& other) noexcept;
+<#+
+            if (!p.is_immutable()) {
+#>
+    <#= sn #>& operator=(<#= sn #> other);
+<#+
+            }
+
+            /*
+             * Member variables.
+             */
+#>
+
+private:
+    <#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_member_variable_name(attr) #>;
 };
 
 <#+
         } // snf
-    } // sbf
+
+        if (!p.is_immutable()) {
+#>
+
+namespace std {
+
+template<>
+inline void swap(
+    <#= qn #>& lhs,
+    <#= qn #>& rhs) {
+    lhs.swap(rhs);
+}
+
+}
+<#+
+        }
+#>
+
+<#+
+    } //ah  sbf
     return a.make_artefact();
 }
 
