@@ -5,6 +5,7 @@
 <#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
@@ -18,10 +19,14 @@
 <#+
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    auto builder(f.make());
+    builder.add(p.name(), types::traits::primitive_header_archetype());
+
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -30,15 +35,54 @@ format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
     const auto& p(a.as<yarn::primitive>(static_artefact(), e));
 
-    const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
     {
-
+        const auto sn(p.name().simple());
+        const auto qn(a.get_qualified_name(p.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-        } // snf
+        const auto top_level_pragmas(a.get_odb_pragmas());
+        const auto attr(p.value_attribute());
+
+        if (top_level_pragmas.empty()) {
+#>
+// class has no ODB pragmas defined.
+
+<#+
+        } else {
+            {
+                const auto ns(a.make_namespaces(p.name()));
+                auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+
+#ifdef ODB_COMPILER
+
+<#+
+                for (const auto& pg : top_level_pragmas)
+#>
+#pragma db object(<#= sn #>) <#= pg #>
+<#+
+
+                bool is_first(true);
+                const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().id()));
+                for (const auto pg : attr_level_pragmas) {
+                        if (is_first)
+#>
+
+<#+
+                        is_first = false;
+#>
+#pragma db member(<#= sn #>::<#= a.make_member_variable_name(attr) #>) <#= pg #>
+<#+
+                }
+#>
+
+#endif
+
+<#+
+            }
+#>
+
+<#+
+        }
     } // sbf
     return a.make_artefact();
 }

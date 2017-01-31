@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-namespace dogen {
-namespace test_models {
-namespace primitive {
-} } }
+#include "dogen/test_models/primitive/types/immutable_primitive.hpp"
+
+// class has no ODB pragmas defined.
+
 #endif

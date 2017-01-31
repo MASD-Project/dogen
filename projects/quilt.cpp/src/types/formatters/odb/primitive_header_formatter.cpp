@@ -22,6 +22,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/primitive.hpp"
@@ -72,10 +73,14 @@ boost::filesystem::path primitive_header_formatter::full_path(
 }
 
 std::list<std::string> primitive_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
-    static const std::list<std::string> r;
-    return r;
+    const formattables::inclusion_dependencies_builder_factory& f,
+    const yarn::element& e) const {
+
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    auto builder(f.make());
+    builder.add(p.name(), types::traits::primitive_header_archetype());
+
+    return builder.build();
 }
 
 dogen::formatters::artefact primitive_header_formatter::
@@ -84,15 +89,40 @@ format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
     const auto& p(a.as<yarn::primitive>(static_artefact(), e));
 
-    const auto sn(p.name().simple());
-    const auto qn(a.get_qualified_name(p.name()));
     {
-
+        const auto sn(p.name().simple());
+        const auto qn(a.get_qualified_name(p.name()));
         auto sbf(a.make_scoped_boilerplate_formatter());
-        {
-            const auto ns(a.make_namespaces(p.name()));
-            auto snf(a.make_scoped_namespace_formatter(ns));
-        } // snf
+        const auto top_level_pragmas(a.get_odb_pragmas());
+        const auto attr(p.value_attribute());
+
+        if (top_level_pragmas.empty()) {
+a.stream() << "// class has no ODB pragmas defined." << std::endl;
+a.stream() << std::endl;
+        } else {
+            {
+                const auto ns(a.make_namespaces(p.name()));
+                auto snf(a.make_scoped_namespace_formatter(ns));
+a.stream() << std::endl;
+a.stream() << "#ifdef ODB_COMPILER" << std::endl;
+a.stream() << std::endl;
+                for (const auto& pg : top_level_pragmas)
+a.stream() << "#pragma db object(" << sn << ") " << pg << std::endl;
+
+                bool is_first(true);
+                const auto attr_level_pragmas(a.get_odb_pragmas(attr.name().id()));
+                for (const auto pg : attr_level_pragmas) {
+                        if (is_first)
+a.stream() << std::endl;
+                        is_first = false;
+a.stream() << "#pragma db member(" << sn << "::" << a.make_member_variable_name(attr) << ") " << pg << std::endl;
+                }
+a.stream() << std::endl;
+a.stream() << "#endif" << std::endl;
+a.stream() << std::endl;
+            }
+a.stream() << std::endl;
+        }
     } // sbf
     return a.make_artefact();
 }
