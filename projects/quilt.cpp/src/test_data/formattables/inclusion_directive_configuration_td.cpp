@@ -33,6 +33,14 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.push_back(create_std_string(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -46,6 +54,7 @@ void inclusion_directive_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.inclusion_required(create_bool(position + 0));
     v.inclusion_directive(create_std_string(position + 1));
+    v.auxiliary_directives(create_std_list_std_string(position + 2));
 }
 
 inclusion_directive_configuration_generator::result_type

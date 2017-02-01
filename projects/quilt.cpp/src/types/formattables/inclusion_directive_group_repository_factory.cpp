@@ -271,13 +271,12 @@ inclusion_directive_group_repository_factory::make(const type_group& tg,
     const formatters_by_type_index_type& afti, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
-    inclusion_directive_group_repository r;
-
     /*
-     * Now, for all formattables and their associated element
-     * segments, find the formatters that support the element segment
-     * and compute the inclusion directive for it.
+     * For all formattables and their associated element segments,
+     * find the formatters that support the element segment and
+     * then compute the inclusion directive group for it.
      */
+    inclusion_directive_group_repository r;
     for (const auto& pair : formattables) {
         const auto& formattable(pair.second);
 

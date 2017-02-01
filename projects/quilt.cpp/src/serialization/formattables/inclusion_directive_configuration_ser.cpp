@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -39,6 +40,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("inclusion_required", v.inclusion_required_);
     ar << make_nvp("inclusion_directive", v.inclusion_directive_);
+    ar << make_nvp("auxiliary_directives", v.auxiliary_directives_);
 }
 
 template<typename Archive>
@@ -47,6 +49,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("inclusion_required", v.inclusion_required_);
     ar >> make_nvp("inclusion_directive", v.inclusion_directive_);
+    ar >> make_nvp("auxiliary_directives", v.auxiliary_directives_);
 }
 
 } }

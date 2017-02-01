@@ -30,19 +30,23 @@ inclusion_directive_configuration::inclusion_directive_configuration()
 
 inclusion_directive_configuration::inclusion_directive_configuration(
     const bool inclusion_required,
-    const std::string& inclusion_directive)
+    const std::string& inclusion_directive,
+    const std::list<std::string>& auxiliary_directives)
     : inclusion_required_(inclusion_required),
-      inclusion_directive_(inclusion_directive) { }
+      inclusion_directive_(inclusion_directive),
+      auxiliary_directives_(auxiliary_directives) { }
 
 void inclusion_directive_configuration::swap(inclusion_directive_configuration& other) noexcept {
     using std::swap;
     swap(inclusion_required_, other.inclusion_required_);
     swap(inclusion_directive_, other.inclusion_directive_);
+    swap(auxiliary_directives_, other.auxiliary_directives_);
 }
 
 bool inclusion_directive_configuration::operator==(const inclusion_directive_configuration& rhs) const {
     return inclusion_required_ == rhs.inclusion_required_ &&
-        inclusion_directive_ == rhs.inclusion_directive_;
+        inclusion_directive_ == rhs.inclusion_directive_ &&
+        auxiliary_directives_ == rhs.auxiliary_directives_;
 }
 
 inclusion_directive_configuration& inclusion_directive_configuration::operator=(inclusion_directive_configuration other) {
@@ -73,6 +77,22 @@ void inclusion_directive_configuration::inclusion_directive(const std::string& v
 
 void inclusion_directive_configuration::inclusion_directive(const std::string&& v) {
     inclusion_directive_ = std::move(v);
+}
+
+const std::list<std::string>& inclusion_directive_configuration::auxiliary_directives() const {
+    return auxiliary_directives_;
+}
+
+std::list<std::string>& inclusion_directive_configuration::auxiliary_directives() {
+    return auxiliary_directives_;
+}
+
+void inclusion_directive_configuration::auxiliary_directives(const std::list<std::string>& v) {
+    auxiliary_directives_ = v;
+}
+
+void inclusion_directive_configuration::auxiliary_directives(const std::list<std::string>&& v) {
+    auxiliary_directives_ = std::move(v);
 }
 
 } } } }

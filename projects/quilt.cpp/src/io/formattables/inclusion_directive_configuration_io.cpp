@@ -31,6 +31,20 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -46,7 +60,8 @@ std::ostream& operator<<(std::ostream& s, const inclusion_directive_configuratio
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive_configuration\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required() << ", "
-      << "\"inclusion_directive\": " << "\"" << tidy_up_string(v.inclusion_directive()) << "\""
+      << "\"inclusion_directive\": " << "\"" << tidy_up_string(v.inclusion_directive()) << "\"" << ", "
+      << "\"auxiliary_directives\": " << v.auxiliary_directives()
       << " }";
     return(s);
 }

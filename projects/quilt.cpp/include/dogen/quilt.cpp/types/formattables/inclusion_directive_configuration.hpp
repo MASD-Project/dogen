@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include "dogen/quilt.cpp/serialization/formattables/inclusion_directive_configuration_fwd_ser.hpp"
@@ -46,7 +47,8 @@ public:
 public:
     inclusion_directive_configuration(
         const bool inclusion_required,
-        const std::string& inclusion_directive);
+        const std::string& inclusion_directive,
+        const std::list<std::string>& auxiliary_directives);
 
 private:
     template<typename Archive>
@@ -64,6 +66,11 @@ public:
     void inclusion_directive(const std::string& v);
     void inclusion_directive(const std::string&& v);
 
+    const std::list<std::string>& auxiliary_directives() const;
+    std::list<std::string>& auxiliary_directives();
+    void auxiliary_directives(const std::list<std::string>& v);
+    void auxiliary_directives(const std::list<std::string>&& v);
+
 public:
     bool operator==(const inclusion_directive_configuration& rhs) const;
     bool operator!=(const inclusion_directive_configuration& rhs) const {
@@ -77,6 +84,7 @@ public:
 private:
     bool inclusion_required_;
     std::string inclusion_directive_;
+    std::list<std::string> auxiliary_directives_;
 };
 
 } } } }

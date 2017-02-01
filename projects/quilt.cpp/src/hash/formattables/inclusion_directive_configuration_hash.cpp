@@ -28,6 +28,14 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -40,6 +48,7 @@ std::size_t inclusion_directive_configuration_hasher::hash(const inclusion_direc
 
     combine(seed, v.inclusion_required());
     combine(seed, v.inclusion_directive());
+    combine(seed, hash_std_list_std_string(v.auxiliary_directives()));
 
     return seed;
 }
