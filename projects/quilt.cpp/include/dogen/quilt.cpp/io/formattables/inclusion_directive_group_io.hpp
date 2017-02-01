@@ -18,35 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class inclusion_directives_repository_factory final {
-public:
-    inclusion_directives_repository_factory() = default;
-    inclusion_directives_repository_factory(const inclusion_directives_repository_factory&) = default;
-    inclusion_directives_repository_factory(inclusion_directives_repository_factory&&) = default;
-    ~inclusion_directives_repository_factory() = default;
-    inclusion_directives_repository_factory& operator=(const inclusion_directives_repository_factory&) = default;
-
-public:
-    bool operator==(const inclusion_directives_repository_factory& rhs) const;
-    bool operator!=(const inclusion_directives_repository_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::formattables::inclusion_directive_group& v);
 
 } } } }
 

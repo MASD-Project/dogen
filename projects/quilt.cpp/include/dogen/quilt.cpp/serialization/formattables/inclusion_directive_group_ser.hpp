@@ -18,38 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_INCLUSION_DIRECTIVE_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FORMATTABLES_INCLUSION_DIRECTIVE_TD_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive.hpp"
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace formattables {
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::inclusion_directive_group)
+namespace boost {
+namespace serialization {
 
-class inclusion_directive_generator {
-public:
-    inclusion_directive_generator();
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::formattables::inclusion_directive_group& v, unsigned int version);
 
-public:
-    typedef dogen::quilt::cpp::formattables::inclusion_directive result_type;
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::formattables::inclusion_directive_group& v, unsigned int version);
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} } } }
+} }
 
 #endif

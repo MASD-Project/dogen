@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/inclusion_directive_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -49,11 +49,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const inclusion_directive& v) {
+std::ostream& operator<<(std::ostream& s, const inclusion_directive_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive\"" << ", "
-      << "\"principal\": " << "\"" << tidy_up_string(v.principal()) << "\"" << ", "
-      << "\"auxiliary\": " << v.auxiliary()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive_group\"" << ", "
+      << "\"principal_directive\": " << "\"" << tidy_up_string(v.principal_directive()) << "\"" << ", "
+      << "\"auxiliary_directives\": " << v.auxiliary_directives()
       << " }";
     return(s);
 }

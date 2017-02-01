@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/inclusion_directive_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/inclusion_directive_group_hash.hpp"
 
 namespace {
 
@@ -43,11 +43,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t inclusion_directive_hasher::hash(const inclusion_directive& v) {
+std::size_t inclusion_directive_group_hasher::hash(const inclusion_directive_group& v) {
     std::size_t seed(0);
 
-    combine(seed, v.principal());
-    combine(seed, hash_std_list_std_string(v.auxiliary()));
+    combine(seed, v.principal_directive());
+    combine(seed, hash_std_list_std_string(v.auxiliary_directives()));
 
     return seed;
 }

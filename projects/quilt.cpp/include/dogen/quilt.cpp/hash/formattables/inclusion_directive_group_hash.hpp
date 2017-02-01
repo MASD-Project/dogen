@@ -18,20 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_HASH_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_HASH_HPP
+#define DOGEN_QUILT_CPP_HASH_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <functional>
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class inclusion_directives_repository;
+struct inclusion_directive_group_hasher {
+public:
+    static std::size_t hash(const inclusion_directive_group& v);
+};
 
 } } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::quilt::cpp::formattables::inclusion_directive_group> {
+public:
+    size_t operator()(const dogen::quilt::cpp::formattables::inclusion_directive_group& v) const {
+        return dogen::quilt::cpp::formattables::inclusion_directive_group_hasher::hash(v);
+    }
+};
+
+}
 #endif

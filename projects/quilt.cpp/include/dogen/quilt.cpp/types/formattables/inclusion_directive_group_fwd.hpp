@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/formattables/inclusion_directives_repository.hpp"
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::inclusion_directives_repository)
-namespace boost {
-namespace serialization {
+class inclusion_directive_group;
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::inclusion_directives_repository& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::inclusion_directives_repository& v, unsigned int version);
-
-} }
+} } } }
 
 #endif

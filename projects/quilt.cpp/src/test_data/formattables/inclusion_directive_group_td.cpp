@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/quilt.cpp/test_data/formattables/inclusion_directive_td.hpp"
+#include "dogen/quilt.cpp/test_data/formattables/inclusion_directive_group_td.hpp"
 
 namespace {
 
@@ -44,30 +44,30 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-inclusion_directive_generator::inclusion_directive_generator() : position_(0) { }
+inclusion_directive_group_generator::inclusion_directive_group_generator() : position_(0) { }
 
-void inclusion_directive_generator::
+void inclusion_directive_group_generator::
 populate(const unsigned int position, result_type& v) {
-    v.principal(create_std_string(position + 0));
-    v.auxiliary(create_std_list_std_string(position + 1));
+    v.principal_directive(create_std_string(position + 0));
+    v.auxiliary_directives(create_std_list_std_string(position + 1));
 }
 
-inclusion_directive_generator::result_type
-inclusion_directive_generator::create(const unsigned int position) {
-    inclusion_directive r;
-    inclusion_directive_generator::populate(position, r);
+inclusion_directive_group_generator::result_type
+inclusion_directive_group_generator::create(const unsigned int position) {
+    inclusion_directive_group r;
+    inclusion_directive_group_generator::populate(position, r);
     return r;
 }
 
-inclusion_directive_generator::result_type*
-inclusion_directive_generator::create_ptr(const unsigned int position) {
-    inclusion_directive* p = new inclusion_directive();
-    inclusion_directive_generator::populate(position, *p);
+inclusion_directive_group_generator::result_type*
+inclusion_directive_group_generator::create_ptr(const unsigned int position) {
+    inclusion_directive_group* p = new inclusion_directive_group();
+    inclusion_directive_group_generator::populate(position, *p);
     return p;
 }
 
-inclusion_directive_generator::result_type
-inclusion_directive_generator::operator()() {
+inclusion_directive_group_generator::result_type
+inclusion_directive_group_generator::operator()() {
     return create(position_++);
 }
 

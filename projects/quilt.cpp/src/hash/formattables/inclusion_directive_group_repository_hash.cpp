@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/hash/formattables/inclusion_directive_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/inclusion_directives_repository_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/inclusion_directive_group_hash.hpp"
+#include "dogen/quilt.cpp/hash/formattables/inclusion_directive_group_repository_hash.hpp"
 
 namespace {
 
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::inclusion_directive>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive_group(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::inclusion_directive_group>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -38,11 +38,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_quilt_cpp_formattable
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::inclusion_directive> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive_group(const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::inclusion_directive_group> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive(i.second));
+        combine(seed, hash_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive_group(i.second));
     }
     return seed;
 }
@@ -54,10 +54,10 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::size_t inclusion_directives_repository_hasher::hash(const inclusion_directives_repository& v) {
+std::size_t inclusion_directive_group_repository_hasher::hash(const inclusion_directive_group_repository& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive(v.by_id()));
+    combine(seed, hash_std_unordered_map_std_string_std_unordered_map_std_string_dogen_quilt_cpp_formattables_inclusion_directive_group(v.by_id()));
     return seed;
 }
 
