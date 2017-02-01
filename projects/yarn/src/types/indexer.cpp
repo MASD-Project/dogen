@@ -38,6 +38,9 @@ void indexer::index(intermediate_model& m) const {
     for (const auto& pair : m.builtins())
         idx.elements_referable_by_attributes().insert(pair.first);
 
+    for (const auto& pair : m.primitives())
+        idx.elements_referable_by_attributes().insert(pair.first);
+
     for (const auto& pair : m.enumerations())
         idx.elements_referable_by_attributes().insert(pair.first);
 

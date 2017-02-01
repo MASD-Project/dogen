@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/primitive/hash/consumer_hash.hpp"
 #include "dogen/test_models/primitive/hash/product_id_hash.hpp"
 #include "dogen/test_models/primitive/hash/immutable_primitive_hash.hpp"
 

@@ -18,15 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_IO_ALL_IO_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_IO_ALL_IO_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_ODB_CONSUMER_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_ODB_CONSUMER_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/io/consumer_io.hpp"
-#include "dogen/test_models/primitive/io/product_id_io.hpp"
-#include "dogen/test_models/primitive/io/immutable_primitive_io.hpp"
+#include "dogen/test_models/primitive/types/consumer.hpp"
+#include "dogen/test_models/primitive/odb/product_id_pragmas.hpp"
+
+// class has no ODB pragmas defined.
 
 #endif

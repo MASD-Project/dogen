@@ -49,6 +49,7 @@ class resolver {
 private:
     bool is_floating_point(const intermediate_model& im, const name& n) const;
     bool is_builtin(const intermediate_model& im, const name& n) const;
+    bool is_primitive(const intermediate_model& im, const name& n) const;
     bool is_object(const intermediate_model& im, const name& n) const;
     bool is_enumeration(const intermediate_model& im, const name& n) const;
     bool is_concept(const intermediate_model& im, const name& n) const;

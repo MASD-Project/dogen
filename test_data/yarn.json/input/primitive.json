@@ -13,6 +13,21 @@
   "elements": [
     {
       "name": {
+        "simple": "consumer"
+      },
+      "meta_type": "object",
+      "documentation": "This type makes use of all primitves in this test model.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop0"
+          },
+          "unparsed_type": "product_id"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "immutable_primitive"
       },
       "meta_type": "primitive",

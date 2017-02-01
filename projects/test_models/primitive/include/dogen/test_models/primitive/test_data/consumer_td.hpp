@@ -18,15 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_IO_ALL_IO_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_IO_ALL_IO_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_CONSUMER_TD_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_CONSUMER_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/io/consumer_io.hpp"
-#include "dogen/test_models/primitive/io/product_id_io.hpp"
-#include "dogen/test_models/primitive/io/immutable_primitive_io.hpp"
+#include "dogen/test_models/primitive/types/consumer.hpp"
+
+namespace dogen {
+namespace test_models {
+namespace primitive {
+
+class consumer_generator {
+public:
+    consumer_generator();
+
+public:
+    typedef dogen::test_models::primitive::consumer result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } }
 
 #endif

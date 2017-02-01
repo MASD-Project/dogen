@@ -18,15 +18,46 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_ALL_TD_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_ALL_TD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
 #include "dogen/test_models/primitive/test_data/consumer_td.hpp"
 #include "dogen/test_models/primitive/test_data/product_id_td.hpp"
-#include "dogen/test_models/primitive/test_data/immutable_primitive_td.hpp"
 
-#endif
+namespace {
+
+dogen::test_models::primitive::product_id
+create_dogen_test_models_primitive_product_id(const unsigned int position) {
+    return dogen::test_models::primitive::product_id_generator::create(position);
+}
+
+}
+
+namespace dogen {
+namespace test_models {
+namespace primitive {
+
+consumer_generator::consumer_generator() : position_(0) { }
+
+void consumer_generator::
+populate(const unsigned int position, result_type& v) {
+    v.prop0(create_dogen_test_models_primitive_product_id(position + 0));
+}
+
+consumer_generator::result_type
+consumer_generator::create(const unsigned int position) {
+    consumer r;
+    consumer_generator::populate(position, r);
+    return r;
+}
+
+consumer_generator::result_type*
+consumer_generator::create_ptr(const unsigned int position) {
+    consumer* p = new consumer();
+    consumer_generator::populate(position, *p);
+    return p;
+}
+
+consumer_generator::result_type
+consumer_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

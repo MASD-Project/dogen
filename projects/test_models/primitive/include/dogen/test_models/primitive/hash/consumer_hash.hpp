@@ -18,15 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_IO_ALL_IO_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_IO_ALL_IO_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_HASH_CONSUMER_HASH_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_HASH_CONSUMER_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/io/consumer_io.hpp"
-#include "dogen/test_models/primitive/io/product_id_io.hpp"
-#include "dogen/test_models/primitive/io/immutable_primitive_io.hpp"
+#include <functional>
+#include "dogen/test_models/primitive/types/consumer.hpp"
 
+namespace dogen {
+namespace test_models {
+namespace primitive {
+
+struct consumer_hasher {
+public:
+    static std::size_t hash(const consumer& v);
+};
+
+} } }
+
+namespace std {
+
+template<>
+struct hash<dogen::test_models::primitive::consumer> {
+public:
+    size_t operator()(const dogen::test_models::primitive::consumer& v) const {
+        return dogen::test_models::primitive::consumer_hasher::hash(v);
+    }
+};
+
+}
 #endif

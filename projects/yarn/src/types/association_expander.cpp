@@ -33,8 +33,6 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.association_expander"));
 
-const std::string object_not_found("Object not found in object container: ");
-
 }
 
 namespace dogen {
@@ -72,20 +70,6 @@ void association_expander::walk_name_tree(
     else
         o.transparent_associations().push_back(n);
 
-    const auto i(im.builtins().find(n.id()));
-    if (i != im.builtins().end())
-        return;
-
-    const auto j(im.enumerations().find(n.id()));
-    if (j != im.enumerations().end())
-        return;
-
-    const auto k(im.objects().find(n.id()));
-    if (k == im.objects().end()) {
-        BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
-        BOOST_THROW_EXCEPTION(expansion_error(object_not_found + n.id()));
-    }
-
     /*
      * if the parent type is an associative container, the first child
      * type will represent the key of the associative container and
@@ -93,9 +77,13 @@ void association_expander::walk_name_tree(
      * keys.
      */
     bool is_first(true);
+    const auto ac(object_types::associative_container);
+    const auto i(im.objects().find(n.id()));
+    const auto is_associative_container(i != im.objects().end() &&
+        i->second.object_type() == ac);
+
     for (const auto c : nt.children()) {
-        const auto ac(object_types::associative_container);
-        if (is_first && k->second.object_type() == ac)
+        if (is_first && is_associative_container)
             o.associative_container_keys().push_back(c.current());
 
         walk_name_tree(im, o, c, nt.are_children_opaque());

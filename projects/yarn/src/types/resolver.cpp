@@ -73,6 +73,15 @@ bool resolver::is_builtin(const intermediate_model& im, const name& n) const {
     return false;
 }
 
+bool resolver::is_primitive(const intermediate_model& im, const name& n) const {
+    auto i(im.primitives().find(n.id()));
+    if (i != im.primitives().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
+        return true;
+    }
+    return false;
+}
+
 bool
 resolver::is_enumeration(const intermediate_model& im, const name& n) const {
     auto i(im.enumerations().find(n.id()));
