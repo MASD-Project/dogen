@@ -39,7 +39,6 @@ public:
     typedef dogen::test_models::primitive::immutable_primitive result_type;
 
 public:
-    static void populate(const unsigned int position, result_type& v);
     static result_type create(const unsigned int position);
     result_type operator()();
 

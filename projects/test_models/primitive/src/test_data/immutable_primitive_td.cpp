@@ -34,23 +34,14 @@ namespace primitive {
 
 immutable_primitive_generator::immutable_primitive_generator() : position_(0) { }
 
-void immutable_primitive_generator::
-populate(const unsigned int position, result_type& v) {
-    v.value(create_short(position + 1));
-}
-
 immutable_primitive_generator::result_type
 immutable_primitive_generator::create(const unsigned int position) {
-    immutable_primitive r;
-    immutable_primitive_generator::populate(position, r);
-    return r;
+    return immutable_primitive(create_short(position + 1));
 }
 
 immutable_primitive_generator::result_type*
 immutable_primitive_generator::create_ptr(const unsigned int position) {
-    immutable_primitive* r = new immutable_primitive();
-    immutable_primitive_generator::populate(position, *r);
-    return r;
+    return new immutable_primitive(create(position));
 }
 
 immutable_primitive_generator::result_type

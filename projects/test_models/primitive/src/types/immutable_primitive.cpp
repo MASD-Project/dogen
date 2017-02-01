@@ -31,23 +31,8 @@ short immutable_primitive::value() const {
     return value_;
 }
 
-void immutable_primitive::value(const short v) {
-    value_ = v;
-}
-
 bool immutable_primitive::operator==(const immutable_primitive& rhs) const {
     return value_ == rhs.value_;
-}
-
-void immutable_primitive::swap(immutable_primitive& other) noexcept {
-    using std::swap;
-    swap(value_, other.value_);
-}
-
-immutable_primitive& immutable_primitive::operator=(immutable_primitive other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
 }
 
 } } }

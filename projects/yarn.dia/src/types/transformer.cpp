@@ -123,6 +123,10 @@ update_element(const processed_object& po, yarn::element& e) const {
     }
 
     e.documentation(po.comment().documentation());
+
+    e.stereotypes().reserve(po.stereotypes().size());
+    for (const auto us : po.stereotypes())
+        e.stereotypes().push_back(us);
 }
 
 yarn::object transformer::to_object(const processed_object& po) const {
@@ -131,10 +135,6 @@ yarn::object transformer::to_object(const processed_object& po) const {
 
     yarn::object r;
     update_element(po, r);
-
-    r.stereotypes().reserve(po.stereotypes().size());
-    for (const auto us : po.stereotypes())
-        r.stereotypes().push_back(us);
 
     for (const auto& p : po.attributes())
         r.local_attributes().push_back(to_attribute(p));

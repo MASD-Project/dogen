@@ -17,6 +17,9 @@
       },
       "meta_type": "primitive",
       "documentation": "Test for a primitive which is also immutable.\n",
+      "stereotypes": [
+        "immutable"
+      ],
       "annotation": {
         "yarn.primitive.underlying_element": "short"
       }

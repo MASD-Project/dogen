@@ -40,6 +40,7 @@ public:
     immutable_primitive(const immutable_primitive&) = default;
     immutable_primitive(immutable_primitive&&) = default;
     ~immutable_primitive() = default;
+    immutable_primitive& operator=(const immutable_primitive&) = delete;
 public:
     explicit immutable_primitive(const short value);
 
@@ -72,23 +73,11 @@ public:
 
 public:
     void swap(immutable_primitive& other) noexcept;
-    immutable_primitive& operator=(immutable_primitive other);
 
 private:
     short value_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::test_models::primitive::immutable_primitive& lhs,
-    dogen::test_models::primitive::immutable_primitive& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif
