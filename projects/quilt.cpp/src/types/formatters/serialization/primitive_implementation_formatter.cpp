@@ -148,6 +148,22 @@ a.stream() << "}" << std::endl;
 a.stream() << std::endl;
 a.stream() << "} }" << std::endl;
 a.stream() << std::endl;
+a.stream() << "namespace boost {" << std::endl;
+a.stream() << "namespace serialization {" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template void save(archive::polymorphic_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::polymorphic_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template void save(archive::text_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::text_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template void save(archive::binary_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::binary_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "template void save(archive::xml_oarchive& ar, const " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << "template void load(archive::xml_iarchive& ar, " << qn << "& v, unsigned int version);" << std::endl;
+a.stream() << std::endl;
+a.stream() << "} }" << std::endl;
     } // sbf
     return a.make_artefact();
 }

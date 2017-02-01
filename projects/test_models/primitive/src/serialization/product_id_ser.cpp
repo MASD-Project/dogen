@@ -44,3 +44,19 @@ void load(Archive& ar, dogen::test_models::primitive::product_id& v, const unsig
 
 } }
 
+namespace boost {
+namespace serialization {
+
+template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
+
+template void save(archive::text_oarchive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
+
+template void save(archive::binary_oarchive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
+
+template void save(archive::xml_oarchive& ar, const dogen::test_models::primitive::product_id& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
+
+} }

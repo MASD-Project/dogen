@@ -156,6 +156,8 @@ We could:
 - add meta-data to disable setting the enumerator value altogether.
 
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-02-01 Wed 14:02]
+    CLOCK: [2017-02-01 Wed 11:40]--[2017-02-01 Wed 12:01] =>  0:21
     CLOCK: [2017-02-01 Wed 11:06]--[2017-02-01 Wed 11:39] =>  0:33
     CLOCK: [2017-02-01 Wed 11:01]--[2017-02-01 Wed 11:05] =>  0:04
     CLOCK: [2017-02-01 Wed 10:55]--[2017-02-01 Wed 11:01] =>  0:06

@@ -66,6 +66,7 @@ target_link_libraries(${tests_name}
     trivial_inheritance
     trivial_association
     enumeration
+    primitive
     std_model
     boost_model
     stereotypes

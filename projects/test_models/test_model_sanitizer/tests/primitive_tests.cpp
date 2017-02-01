@@ -41,35 +41,40 @@ using namespace dogen::test_models::primitive;
 using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(primitive_tests)
-/*
+
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<product_id_generator>();
+    test_equality<immutable_primitive_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     roundtrip_type<product_id_generator>();
+    roundtrip_type<immutable_primitive_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<product_id_generator>();
+    test_hashing<immutable_primitive_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
-    SETUP_TEST_LOG("validate_hashing");
+    SETUP_TEST_LOG("validate_swap");
     test_swap<product_id_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<product_id_generator>();
+    test_io<immutable_primitive_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
     test_move_assignment_copy<product_id_generator>();
+    test_move_assignment_copy<immutable_primitive_generator>();
 }
-*/
+
 BOOST_AUTO_TEST_SUITE_END()
