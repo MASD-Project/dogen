@@ -20,7 +20,42 @@
  */
 #include "dogen/test_models/primitive/test_data/product_id_td.hpp"
 
+namespace {
+
+short create_short(const unsigned int position) {
+    return static_cast<short>(position);
+}
+
+}
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+product_id_generator::product_id_generator() : position_(0) { }
+
+void product_id_generator::
+populate(const unsigned int position, result_type& v) {
+    v.value(create_short(position + 1));
+}
+
+product_id_generator::result_type
+product_id_generator::create(const unsigned int position) {
+    product_id r;
+    product_id_generator::populate(position, r);
+    return r;
+}
+
+product_id_generator::result_type*
+product_id_generator::create_ptr(const unsigned int position) {
+    product_id* r = new product_id();
+    product_id_generator::populate(position, *r);
+    return r;
+}
+
+product_id_generator::result_type
+product_id_generator::operator()() {
+    return create(position_++);
+}
+
 } } }

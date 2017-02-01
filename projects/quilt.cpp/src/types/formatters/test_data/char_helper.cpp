@@ -44,7 +44,8 @@ std::string char_helper::family() const {
 std::list<std::string>
 char_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
-        traits::class_implementation_archetype()
+        traits::class_implementation_archetype(),
+        traits::primitive_implementation_archetype()
     });
     return r;
 }

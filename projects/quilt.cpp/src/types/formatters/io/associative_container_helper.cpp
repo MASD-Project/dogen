@@ -46,7 +46,8 @@ std::list<std::string>
 associative_container_helper::owning_formatters() const {
     static auto r(std::list<std::string> {
         io::traits::class_implementation_archetype(),
-        types::traits::class_implementation_archetype()
+        types::traits::class_implementation_archetype(),
+        types::traits::primitive_implementation_archetype()
     });
     return r;
 }

@@ -20,7 +20,42 @@
  */
 #include "dogen/test_models/primitive/test_data/immutable_primitive_td.hpp"
 
+namespace {
+
+short create_short(const unsigned int position) {
+    return static_cast<short>(position);
+}
+
+}
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
+
+immutable_primitive_generator::immutable_primitive_generator() : position_(0) { }
+
+void immutable_primitive_generator::
+populate(const unsigned int position, result_type& v) {
+    v.value(create_short(position + 1));
+}
+
+immutable_primitive_generator::result_type
+immutable_primitive_generator::create(const unsigned int position) {
+    immutable_primitive r;
+    immutable_primitive_generator::populate(position, r);
+    return r;
+}
+
+immutable_primitive_generator::result_type*
+immutable_primitive_generator::create_ptr(const unsigned int position) {
+    immutable_primitive* r = new immutable_primitive();
+    immutable_primitive_generator::populate(position, *r);
+    return r;
+}
+
+immutable_primitive_generator::result_type
+immutable_primitive_generator::operator()() {
+    return create(position_++);
+}
+
 } } }

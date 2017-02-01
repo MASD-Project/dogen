@@ -106,6 +106,11 @@ a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
             if (!p.is_immutable())
 a.stream() << "    static void populate(const unsigned int position, result_type& v);" << std::endl;
+a.stream() << "    static result_type create(const unsigned int position);" << std::endl;
+a.stream() << "    result_type operator()();" << std::endl;
+a.stream() << std::endl;
+a.stream() << "private:" << std::endl;
+a.stream() << "    unsigned int position_;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    static result_type* create_ptr(const unsigned int position);" << std::endl;

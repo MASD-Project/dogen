@@ -25,9 +25,9 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
 
-    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
-    builder.add(o.name(), traits::primitive_header_archetype());
+    builder.add(p.name(), traits::primitive_header_archetype());
 
     // const auto si(builder.make_special_includes(o));
     // if (si.has_path || si.has_std_string)
@@ -47,9 +47,95 @@ format(const context& ctx, const yarn::element& e) const {
     {
 
         auto sbf(a.make_scoped_boilerplate_formatter());
+#>
+namespace {
+<#+
+        a.add_helper_methods(p.name().id());
+#>
+
+}
+
+<#+
         {
+            const auto attr(p.value_attribute());
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+
+            /*
+             * Default constructor.
+             */
+#>
+
+<#= sn #>_generator::<#= sn #>_generator() : position_(0) { }
+<#+
+            /*
+             * Populate method.
+             */
+            if (!p.is_immutable()) {
+#>
+
+void <#= sn #>_generator::
+populate(const unsigned int position, result_type& v) {
+    v.<#= attr.name().simple() #>(create_<#= attr.parsed_type().identifiable() #>(position + 1));
+}
+<#+
+            }
+
+            /*
+             * Create method.
+             */
+#>
+
+<#= sn #>_generator::result_type
+<#= sn #>_generator::create(const unsigned int position) {
+<#+
+            if (p.is_immutable()) {
+#>
+    return <#= sn #>(create_<#= attr.parsed_type().identifiable() #>(position + 1));
+<#+
+            } else {
+#>
+    <#= sn #> r;
+    <#= sn #>_generator::populate(position, r);
+    return r;
+<#+
+            }
+#>
+}
+<#+
+            /*
+             * Create method ptr.
+             */
+#>
+
+<#= sn #>_generator::result_type*
+<#= sn #>_generator::create_ptr(const unsigned int position) {
+<#+
+            if (p.is_immutable())
+#>
+    return new <#= sn #>(create(position));
+<#+
+            else {
+#>
+    <#= sn #>* r = new <#= sn #>();
+    <#= sn #>_generator::populate(position, *r);
+    return r;
+<#+
+            }
+#>
+}
+<#+
+            /*
+             * Function operator
+             */
+#>
+
+<#= sn #>_generator::result_type
+<#= sn #>_generator::operator()() {
+    return create(position_++);
+}
+
+<#+
         } // snf
     } // sbf
     return a.make_artefact();

@@ -87,9 +87,9 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
 
-    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
-    builder.add(o.name(), traits::primitive_header_archetype());
+    builder.add(p.name(), traits::primitive_header_archetype());
 
     // const auto si(builder.make_special_includes(o));
     // if (si.has_path || si.has_std_string)
@@ -109,9 +109,69 @@ format(const context& ctx, const yarn::element& e) const {
     {
 
         auto sbf(a.make_scoped_boilerplate_formatter());
+a.stream() << "namespace {" << std::endl;
+        a.add_helper_methods(p.name().id());
+a.stream() << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         {
+            const auto attr(p.value_attribute());
             const auto ns(a.make_namespaces(p.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));
+
+            /*
+             * Default constructor.
+             */
+a.stream() << std::endl;
+a.stream() << sn << "_generator::" << sn << "_generator() : position_(0) { }" << std::endl;
+            /*
+             * Populate method.
+             */
+            if (!p.is_immutable()) {
+a.stream() << std::endl;
+a.stream() << "void " << sn << "_generator::" << std::endl;
+a.stream() << "populate(const unsigned int position, result_type& v) {" << std::endl;
+a.stream() << "    v." << attr.name().simple() << "(create_" << attr.parsed_type().identifiable() << "(position + 1));" << std::endl;
+a.stream() << "}" << std::endl;
+            }
+
+            /*
+             * Create method.
+             */
+a.stream() << std::endl;
+a.stream() << sn << "_generator::result_type" << std::endl;
+a.stream() << sn << "_generator::create(const unsigned int position) {" << std::endl;
+            if (p.is_immutable()) {
+a.stream() << "    return " << sn << "(create_" << attr.parsed_type().identifiable() << "(position + 1));" << std::endl;
+            } else {
+a.stream() << "    " << sn << " r;" << std::endl;
+a.stream() << "    " << sn << "_generator::populate(position, r);" << std::endl;
+a.stream() << "    return r;" << std::endl;
+            }
+a.stream() << "}" << std::endl;
+            /*
+             * Create method ptr.
+             */
+a.stream() << std::endl;
+a.stream() << sn << "_generator::result_type*" << std::endl;
+a.stream() << sn << "_generator::create_ptr(const unsigned int position) {" << std::endl;
+            if (p.is_immutable())
+a.stream() << "    return new " << sn << "(create(position));" << std::endl;
+            else {
+a.stream() << "    " << sn << "* r = new " << sn << "();" << std::endl;
+a.stream() << "    " << sn << "_generator::populate(position, *r);" << std::endl;
+a.stream() << "    return r;" << std::endl;
+            }
+a.stream() << "}" << std::endl;
+            /*
+             * Function operator
+             */
+a.stream() << std::endl;
+a.stream() << sn << "_generator::result_type" << std::endl;
+a.stream() << sn << "_generator::operator()() {" << std::endl;
+a.stream() << "    return create(position_++);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
         } // snf
     } // sbf
     return a.make_artefact();

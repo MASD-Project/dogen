@@ -24,6 +24,8 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
@@ -103,11 +105,12 @@ private:
 
 public:
     /*
-     * We are only interested in yarn objects; all other element
-     * types do not need helpers.
+     * We are only interested in yarn objects and primitives; all
+     * other element types do not need helpers.
      */
     using yarn::element_visitor::visit;
     void visit(const yarn::object& o);
+    void visit(const yarn::primitive& p);
 
 public:
     const std::list<formattables::helper_properties>& result() const;
@@ -272,14 +275,6 @@ helper_properties_generator::walk_name_tree(const helper_configuration& cfg,
     return r;
 }
 
-void helper_properties_generator::visit(const yarn::object& o) {
-    const auto& fff(facets_for_family_);
-    const auto& cfg(helper_configuration_);
-    const auto& attrs(o.local_attributes());
-    const auto iir(o.in_inheritance_relationship());
-    result_ = compute_helper_properties(cfg, fff, iir, attrs);
-}
-
 std::list<helper_properties>
 helper_properties_generator::
 compute_helper_properties(const helper_configuration& cfg,
@@ -291,11 +286,11 @@ compute_helper_properties(const helper_configuration& cfg,
 
     std::list<helper_properties> r;
     if (attrs.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "No properties found.";
+        BOOST_LOG_SEV(lg, debug) << "No attributes found.";
         return r;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Properties found: " << attrs.size();
+    BOOST_LOG_SEV(lg, debug) << "Attributes found: " << attrs.size();
 
     std::unordered_set<std::string> done;
     const bool opaqueness_from_parent(false);
@@ -310,6 +305,22 @@ compute_helper_properties(const helper_configuration& cfg,
 
     BOOST_LOG_SEV(lg, debug) << "Finished making helper properties.";
     return r;
+}
+
+void helper_properties_generator::visit(const yarn::object& o) {
+    const auto& fff(facets_for_family_);
+    const auto& cfg(helper_configuration_);
+    const auto& attrs(o.local_attributes());
+    const auto iir(o.in_inheritance_relationship());
+    result_ = compute_helper_properties(cfg, fff, iir, attrs);
+}
+
+void helper_properties_generator::visit(const yarn::primitive& p) {
+    const auto& fff(facets_for_family_);
+    const auto& cfg(helper_configuration_);
+    const std::list<yarn::attribute> attrs({ p.value_attribute() });
+    const auto iir(false/*in_inheritance_relationship*/);
+    result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
 
 const std::list<formattables::helper_properties>&
@@ -396,8 +407,10 @@ void helper_expander::populate_helper_properties(
          * reduction or else we will not get helpers for referenced
          * models.
          */
-        if (segment->origin_type() != yarn::origin_types::target)
+        if (segment->origin_type() != yarn::origin_types::target) {
+            BOOST_LOG_SEV(lg, debug) << "Skipping non-target element.";
             continue;
+        }
 
         /*
          * Update the helper properties, if any exist.
@@ -406,6 +419,9 @@ void helper_expander::populate_helper_properties(
         helper_properties_generator g(cfg, fff);
         e.accept(g);
         eprops.helper_properties(g.result());
+
+        BOOST_LOG_SEV(lg, debug) << "Helper properties generated: "
+                                 << g.result().size();
     }
 }
 
