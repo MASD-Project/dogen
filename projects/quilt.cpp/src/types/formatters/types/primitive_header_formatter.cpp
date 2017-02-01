@@ -192,7 +192,6 @@ a.stream() << "public:" << std::endl;
 a.stream() << "    explicit operator " << a.get_qualified_name(attr.parsed_type()) << "() const {" << std::endl;
 a.stream() << "        return " << a.make_member_variable_name(attr) << ";" << std::endl;
 a.stream() << "    }" << std::endl;
-a.stream() << std::endl;
             /*
              * Equality.
              */

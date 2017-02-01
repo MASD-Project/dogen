@@ -51,14 +51,18 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::product_id& v, unsigned int version);
 
 public:
+    /**
+     * @brief Obtain the underlying value.
+     */
+    /**@{*/
     short value() const;
     void value(const short v);
+    /**@}*/
 
 public:
     explicit operator short() const {
         return value_;
     }
-
 
 public:
     bool operator==(const product_id& rhs) const;

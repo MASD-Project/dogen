@@ -44,6 +44,7 @@ auto lg(logger_factory("yarn.parsing_expander"));
 
 const std::string csharp_value("Value");
 const std::string cpp_value("value");
+const std::string documentation("Obtain the underlying value.");
 
 const std::string empty_type("Attribute type is empty: ");
 const std::string parent_name_conflict(
@@ -259,11 +260,17 @@ void parsing_expander::parse_underlying_element(const type_group& tg,
     name_factory nf;
     const auto& n(p.name());
     const auto sn(obtain_value_attribute_simple_name(l));
-    p.value_attribute().name(nf.build_attribute_name(n, sn));
-    p.value_attribute().unparsed_type(ut);
+
+    yarn::attribute attr;
+    attr.name(nf.build_attribute_name(n, sn));
+    attr.unparsed_type(ut);
+    attr.documentation(documentation);
+
     const name_tree_parser ntp(top_level_modules, model_location, l);
     auto nt(ntp.parse(ut));
-    p.value_attribute().parsed_type(nt);
+    attr.parsed_type(nt);
+
+    p.value_attribute(attr);
 }
 
 void parsing_expander::

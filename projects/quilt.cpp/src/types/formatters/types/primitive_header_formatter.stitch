@@ -169,7 +169,6 @@ public:
     explicit operator <#= a.get_qualified_name(attr.parsed_type()) #>() const {
         return <#= a.make_member_variable_name(attr) #>;
     }
-
 <#+
             /*
              * Equality.
