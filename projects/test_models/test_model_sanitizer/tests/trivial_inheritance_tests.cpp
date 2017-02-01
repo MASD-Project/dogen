@@ -156,7 +156,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
-    SETUP_TEST_LOG("validate_hashing");
+    SETUP_TEST_LOG("validate_swap");
     test_swap<child_with_members_generator>();
     test_swap<second_child_without_members_generator>();
     test_swap<child_of_a_child1_generator>();

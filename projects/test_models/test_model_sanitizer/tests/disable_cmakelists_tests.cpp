@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
-    SETUP_TEST_LOG("validate_hashing");
+    SETUP_TEST_LOG("validate_swap");
     test_swap<first_class_generator>();
 }
 

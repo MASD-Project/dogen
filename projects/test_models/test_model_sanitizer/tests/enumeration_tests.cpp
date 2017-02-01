@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
-    SETUP_TEST_LOG("validate_hashing");
+    SETUP_TEST_LOG("validate_swap");
     test_swap<book_types_generator>();
     test_swap<colour_types_generator>();
     test_swap<pkg1::shape_types_generator>();
