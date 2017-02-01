@@ -873,38 +873,6 @@ sanitizer.
 We are computing the set of all built-in id's in quilt but this should
 really be part of yarn.
 
-*** Handle "special includes" correctly                               :story:
-
-We did a quick hack to handle "special includes": we simply "detected"
-them in include builder and then did the appropriate action in each of
-the include providers. In order to make this work dynamically, we need
-somehow to have "associated includes" on a per type basis. For
-example:
-
-- type =x= requires include =y= in formatter =f=.
-
-This can easily be achieved via an "additional inclusion directive"
-which is a container. For example:
-
-:        "extensions" : {
-:                "quilt.cpp.helper.family" : "Dereferenceable",
-:                "quilt.cpp.types.class_header_formatter.inclusion_directive" : "<boost/weak_ptr.hpp>",
-
-Could have:
-
-:                "quilt.cpp.types.class_header_formatter.additional_inclusion_directive" : "<some_include.hpp>",
-
-If multiple are provided then they are all added. This highlights an
-important point: we need a way to inject type specific includes from a
-formatter. It makes no sense to declare all of these up front in a
-library since we do not know what all possible formatters are, nor
-what requirements they may have for inclusion. At the same time,
-formatters cannot be expected to declare types. The solution is to be
-able to "inject" these dependencies from a JSON file associated with
-the formatter. We could supply the qualified name and the properties
-to inject. This problem can be solved later on - create a separate
-story for this.
-
 *** Allow logging during initialisation                               :story:
 
 At present we assume the log has not been initialised during
