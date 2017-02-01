@@ -357,20 +357,6 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
     }
 }
 
-/*
-BOOST_AUTO_TEST_CASE(model_with_object_with_missing_object_attribute_throws) {
-    SETUP_TEST_LOG_SOURCE("model_with_object_with_missing_object_attribute_throws");
-
-    auto m(factory.object_with_missing_attribute_type());
-    BOOST_LOG_SEV(lg, debug) << "input model: " << m;
-    BOOST_REQUIRE(m.objects().size() == 1);
-
-    dogen::yarn::association_expander ex;
-    contains_checker<expansion_error> c(object_not_found);
-    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
-}
-*/
-
 BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices) {
     SETUP_TEST_LOG_SOURCE("object_with_std_pair_attribute_results_in_expected_indices");
 
