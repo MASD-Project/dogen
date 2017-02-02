@@ -45,11 +45,6 @@ std::string inclusion_constants::std::ostream() {
     return r;
 }
 
-std::string inclusion_constants::std::sstream() {
-    static ::std::string r("<sstream>");
-    return r;
-}
-
 std::string inclusion_constants::std::functional() {
     static ::std::string r("<functional>");
     return r;
@@ -57,26 +52,6 @@ std::string inclusion_constants::std::functional() {
 
 std::string inclusion_constants::std::stdexcept() {
     static ::std::string r("<stdexcept>");
-    return r;
-}
-
-std::string inclusion_constants::boost::date_time::gregorian::identity() {
-    static ::std::string r("<boost/date_time/gregorian/gregorian.hpp>");
-    return r;
-}
-
-std::string inclusion_constants::boost::date_time::posix_time::identity() {
-    static ::std::string r("<boost/date_time/posix_time/posix_time.hpp>");
-    return r;
-}
-
-std::string inclusion_constants::boost::algorithm::string() {
-    static ::std::string r("<boost/algorithm/string.hpp>");
-    return r;
-}
-
-std::string inclusion_constants::boost::io::ios_state() {
-    static ::std::string r("<boost/io/ios_state.hpp>");
     return r;
 }
 
@@ -142,11 +117,6 @@ std::string inclusion_constants::boost::serialization::assume_abstract() {
 
 std::string inclusion_constants::boost::exception::info() {
     static ::std::string r("<boost/exception/info.hpp>");
-    return r;
-}
-
-std::string inclusion_constants::boost::visitor::apply_visitor() {
-    static ::std::string r("<boost/variant/apply_visitor.hpp>");
     return r;
 }
 

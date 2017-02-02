@@ -43,30 +43,11 @@ struct inclusion_constants {
         static ::std::string iosfwd();
         static ::std::string algorithm();
         static ::std::string ostream();
-        static ::std::string sstream();
         static ::std::string functional();
         static ::std::string stdexcept();
     };
 
     struct boost {
-        struct date_time {
-            struct gregorian {
-                static ::std::string identity();
-            };
-
-            struct posix_time {
-                static ::std::string identity();
-            };
-        };
-
-        struct algorithm {
-            static ::std::string string();
-        };
-
-        struct io {
-            static ::std::string ios_state();
-        };
-
         struct type_traits {
             static ::std::string is_virtual_base_of();
         };
@@ -90,10 +71,6 @@ struct inclusion_constants {
 
         struct exception {
             static ::std::string info();
-        };
-
-        struct visitor {
-            static ::std::string apply_visitor();
         };
     };
 };
