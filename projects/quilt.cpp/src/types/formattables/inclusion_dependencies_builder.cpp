@@ -57,24 +57,23 @@ namespace cpp {
 namespace formattables {
 
 inclusion_dependencies_builder::inclusion_dependencies_builder(
-    const std::unordered_map<std::string,
-    std::unordered_map<std::string, std::string>>& inclusion_directives,
+    const inclusion_directive_group_repository& idgrp,
     const std::unordered_map<std::string, formattable>& formattables)
-    : inclusion_directives_(inclusion_directives),
-      formattables_(formattables) {}
+    : inclusion_directives_(idgrp), formattables_(formattables) {}
 
 boost::optional<std::string>
 inclusion_dependencies_builder::get_inclusion_directive(
     const yarn::name& n, const std::string& archetype) const {
-    const auto i(inclusion_directives_.find(n.id()));
-    if (i == inclusion_directives_.end())
+    const auto& c(inclusion_directives_.by_id());
+    const auto i(c.find(n.id()));
+    if (i == c.end())
         return boost::optional<std::string>();
 
     const auto j(i->second.find(archetype));
     if (j == i->second.end())
         return boost::optional<std::string>();
 
-    return j->second;
+    return j->second.principal_directive();
 }
 
 inclusion_dependencies_builder::special_includes

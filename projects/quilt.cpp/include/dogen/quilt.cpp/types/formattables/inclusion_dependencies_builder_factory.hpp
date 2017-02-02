@@ -30,6 +30,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -50,10 +51,8 @@ namespace formattables {
  */
 class inclusion_dependencies_builder_factory final {
 public:
-    inclusion_dependencies_builder_factory(const std::unordered_map<
-        std::string,
-        std::unordered_map<std::string, std::string>
-        >& inclusion_directives,
+    inclusion_dependencies_builder_factory(
+        const inclusion_directive_group_repository& idgrp,
         const std::unordered_map<std::string, formattable>& formattables);
 
 public:
@@ -63,11 +62,8 @@ public:
     inclusion_dependencies_builder make() const;
 
 private:
-    const std::unordered_map<std::string,
-                             std::unordered_map<std::string, std::string>
-                             >& inclusion_directives_;
+    const inclusion_directive_group_repository& inclusion_directives_;
     const std::unordered_map<std::string, formattable>& formattables_;
-    std::list<std::string> inclusion_dependencies_;
 };
 
 } } } }

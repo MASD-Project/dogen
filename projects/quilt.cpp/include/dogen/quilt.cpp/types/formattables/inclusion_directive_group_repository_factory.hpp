@@ -76,12 +76,16 @@ private:
 public:
     typedef std::forward_list<
     std::shared_ptr<formatters::artefact_formatter_interface>
-    > formatter_list_type;
+    > artefact_formatters_type;
 
-    typedef std::unordered_map<
-        std::type_index,
-        inclusion_directive_group_repository_factory::formatter_list_type
-    > formatters_by_type_index_type;
+    artefact_formatters_type remove_non_includible_formatters(
+        const artefact_formatters_type& formatters) const;
+
+    typedef std::unordered_map<std::type_index, artefact_formatters_type>
+    artefact_formatters_by_type_index_type;
+
+    artefact_formatters_by_type_index_type includible_formatters_by_type_index(
+        const formatters::repository& frp) const;
 
 private:
     void insert_inclusion_directive(const std::string& id,
@@ -89,13 +93,17 @@ private:
         inclusion_directive_group_repository& idgrp) const;
 
     void compute_inclusion_directives(const type_group& tg,
-        const yarn::element& e, const formatter_list_type& formatters,
+        const yarn::element& e, const artefact_formatters_type& formatters,
         const locator& l, inclusion_directive_group_repository& idgrp) const;
+
+    inclusion_directive_group_repository make(const type_group& tg,
+        const artefact_formatters_by_type_index_type& afti, const locator& l,
+        const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
     inclusion_directive_group_repository
-    make(const type_group& tg, const formatters_by_type_index_type& afti,
-        const locator& l,
+    make(const annotations::type_repository& atrp,
+        const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 };
 

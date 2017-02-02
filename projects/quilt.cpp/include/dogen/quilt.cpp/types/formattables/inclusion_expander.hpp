@@ -26,18 +26,13 @@
 #endif
 
 #include <string>
-#include <memory>
-#include <forward_list>
-#include <unordered_map>
-#include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
-#include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -53,10 +48,11 @@ namespace formattables {
  * An inclusion directive is a string with delimiters but without the
  * #include pragma. For example "a/b/c.hpp" and <a/b/c.hpp> are
  * inclusion directives; note that the quotes and angle brackets are
- * part of the directive. There should be an inclusion directive
+ * part of the directive. An inclusion directive group is a group of
+ * such things. There should be an inclusion directive group
  * associated with every ordered pair (name, archetype). The inclusion
- * directive repository contains the complete set of inclusion
- * directives - the inclusion directives domain if you'd like.
+ * directive group repository contains the complete set of inclusion
+ * directive groups - the inclusion directives domain if you'd like.
  *
  * Inclusion dependencies are a set of inclusion directives. They are
  * also associated with a pair (name, archetype). The inclusion
@@ -71,68 +67,14 @@ namespace formattables {
  */
 class inclusion_expander {
 private:
-    struct formattater_type_group {
-        annotations::type inclusion_directive;
-        annotations::type inclusion_required;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const formattater_type_group& v);
-
-    struct type_group {
-        annotations::type inclusion_required;
-        std::unordered_map<std::string, formattater_type_group>
-        formattaters_type_groups;
-    };
-    friend std::ostream& operator<<(std::ostream& s,
-        const type_group& v);
-
-    type_group make_type_group(const annotations::type_repository& atrp,
-        const formatters::repository& frp) const;
-
-    bool make_top_level_inclusion_required(const type_group& tg,
-        const annotations::annotation& a) const;
-
-    inclusion_directive_configuration make_inclusion_directive_configuration(
-        const type_group& tg, const std::string& archetype,
-        const annotations::annotation& a) const;
-
-private:
-    typedef std::forward_list<
-    std::shared_ptr<formatters::artefact_formatter_interface>
-    > formatter_list_type;
-
-    formatter_list_type remove_non_includible_formatters(
-        const formatter_list_type& formatters) const;
-
-    std::unordered_map<std::type_index, formatter_list_type>
-    includible_formatters_by_type_index(
-        const formatters::repository& frp) const;
-
-private:
-    std::string to_inclusion_directive(const boost::filesystem::path& p) const;
-
-private:
-    typedef std::unordered_map<std::string,
-                               std::unordered_map<std::string, std::string>
-                               >
-    inclusion_directives_container_type;
-
-    void insert_inclusion_directive(const std::string& id,
-        const std::string& archetype, const std::string& directive,
-        inclusion_directives_container_type& idc) const;
-
-    void compute_inclusion_directives(const type_group& tg,
-        const yarn::element& e, const formatter_list_type& formatters,
-        const locator& l, inclusion_directives_container_type& idc) const;
-
-    inclusion_directives_container_type compute_inclusion_directives(
-        const type_group& tg, const formatters::repository& frp,
-        const locator& l,
+    inclusion_directive_group_repository create_inclusion_directive_groups(
+        const annotations::type_repository& atrp,
+        const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
-private:
+public:
     typedef std::unordered_map<std::string, std::list<std::string>>
-        element_inclusion_dependencies_type;
+    element_inclusion_dependencies_type;
 
     element_inclusion_dependencies_type compute_inclusion_dependencies(
         const formatters::repository& frp,
@@ -140,7 +82,7 @@ private:
         const yarn::element& e) const;
 
     void populate_inclusion_dependencies(const formatters::repository& frp,
-        const inclusion_directives_container_type& idc,
+        const inclusion_dependencies_builder_factory& idf,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
