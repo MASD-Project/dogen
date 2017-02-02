@@ -104,10 +104,6 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
 
-    // const auto si(builder.make_special_includes(o));
-    // if (si.has_ptime)
-    //    builder.add(ic::boost::date_time::posix_time::identity());
-
     return builder.build();
 }
 

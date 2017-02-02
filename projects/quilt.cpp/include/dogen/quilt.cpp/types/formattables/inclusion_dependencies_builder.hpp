@@ -47,14 +47,6 @@ namespace formattables {
  */
 class inclusion_dependencies_builder {
 public:
-    // FIXME: temporary hack to handle special includes.
-    struct special_includes {
-        special_includes() : has_ptime(false) {}
-
-        bool has_ptime;
-    };
-
-public:
     inclusion_dependencies_builder(
         const inclusion_directive_group_repository& idgrp,
         const std::unordered_map<std::string, formattable>& formattables);
@@ -70,11 +62,6 @@ private:
         const yarn::name& n, const std::string& archetype) const;
 
 public:
-    /**
-     * @brief Detects the presence of all the "special" includes.
-     */
-    special_includes make_special_includes(const yarn::object& o) const;
-
     /**
      * @brief Returns true if the formatter is enabled.
      */

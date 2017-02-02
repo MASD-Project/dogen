@@ -152,6 +152,7 @@
         "quilt.cpp.helper.family": "BoostPTime",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
+        "quilt.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
         "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
         "quilt.cpp.io.class_implementation.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"

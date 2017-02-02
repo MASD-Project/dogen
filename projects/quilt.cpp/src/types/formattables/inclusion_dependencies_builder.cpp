@@ -74,28 +74,6 @@ inclusion_dependencies_builder::get_inclusion_directive_group(
     return j->second;
 }
 
-inclusion_dependencies_builder::special_includes
-inclusion_dependencies_builder::make_special_includes(
-    const yarn::object& o) const {
-    special_includes r;
-    const auto lambda([&](const std::list<yarn::name> names) {
-            if (names.empty())
-                return;
-
-            for (const auto& n : names) {
-                const auto sn(n.simple());
-
-                if (sn == ptime_type)
-                    r.has_ptime = true;
-            }
-        });
-
-    lambda(o.opaque_associations());
-    lambda(o.transparent_associations());
-
-    return r;
-}
-
 bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     const std::string& archetype) const {
     const auto i(formattables_.find(n.id()));
