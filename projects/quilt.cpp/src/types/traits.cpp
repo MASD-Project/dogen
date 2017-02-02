@@ -74,8 +74,13 @@ std::string traits::inclusion_required() {
     return r;
 }
 
-std::string traits::inclusion_directive() {
+std::string traits::primary_inclusion_directive() {
     static std::string r("inclusion_directive");
+    return r;
+}
+
+std::string traits::secondary_inclusion_directive() {
+    static std::string r("secondary_inclusion_directive");
     return r;
 }
 

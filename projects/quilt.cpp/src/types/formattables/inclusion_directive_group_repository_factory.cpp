@@ -31,6 +31,7 @@
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
+#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository_factory.hpp"
 
 namespace {
@@ -45,7 +46,8 @@ const std::string boost_serialization_gregorian("greg_serialize.hpp");
 
 const std::string duplicate_element_name("Duplicate delement name: ");
 const std::string missing_archetype("Archetype not found: ");
-const std::string empty_include_directive("Include directive is empty.");
+const std::string empty_primary_directive(
+    "Primary include directive is empty.");
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
 const std::string empty_archetype("Formatter name is empty.");
@@ -65,7 +67,10 @@ std::ostream& operator<<(std::ostream& s,
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "inclusion_directive_group_repository_factory::formatters_type_group\""
       << ", "
-      << "\"inclusion_directive\": " << v.inclusion_directive << ", "
+      << "\"primary_inclusion_directive\": "
+      << v.primary_inclusion_directive << ", "
+      << "\"secondary_inclusion_directive\": "
+      << v.secondary_inclusion_directive << ", "
       << "\"inclusion_required\": " << v.inclusion_required
       << " }";
 
@@ -109,8 +114,11 @@ inclusion_directive_group_repository_factory::make_type_group(
         }
 
         formattater_type_group ftg;
-        const auto& id(traits::inclusion_directive());
-        ftg.inclusion_directive = s.select_type_by_name(arch, id);
+        const auto& pid(traits::primary_inclusion_directive());
+        ftg.primary_inclusion_directive = s.select_type_by_name(arch, pid);
+
+        const auto& sid(traits::secondary_inclusion_directive());
+        ftg.secondary_inclusion_directive = s.select_type_by_name(arch, sid);
 
         // note: redefinition of "ir" by design as scopes are different.
         const auto& ir(traits::inclusion_required());
@@ -152,9 +160,13 @@ make_inclusion_directive_configuration(
     const auto& ir(ft.inclusion_required);
     r.inclusion_required(s.get_boolean_content_or_default(ir));
 
-    const auto id(ft.inclusion_directive);
-    if (s.has_entry(id))
-        r.primary_directive(s.get_text_content(id));
+    const auto pid(ft.primary_inclusion_directive);
+    if (s.has_entry(pid))
+        r.primary_directive(s.get_text_content(pid));
+
+    const auto sid(ft.secondary_inclusion_directive);
+    if (s.has_entry(sid))
+        r.secondary_directives(s.get_text_collection_content(sid));
 
     return r;
 }
@@ -196,20 +208,18 @@ includible_formatters_by_type_index(const formatters::repository& frp) const {
 
 void inclusion_directive_group_repository_factory::
 insert_inclusion_directive(const std::string& id, const std::string& archetype,
-    const std::string& directive,
+    const inclusion_directive_group& idg,
     inclusion_directive_group_repository& idgrp) const {
 
-    if (directive.empty()) {
+    if (idg.primary_directive().empty()) {
         std::ostringstream s;
-        s << empty_include_directive << archetype << " for type: " << id;
+        s << empty_primary_directive << archetype << " for type: " << id;
 
         const auto msg(s.str());
         BOOST_LOG_SEV(lg, error) << msg;
         BOOST_THROW_EXCEPTION(expansion_error(msg));
     }
 
-    inclusion_directive_group idg;
-    idg.primary_directive(directive);
     const auto pair(std::make_pair(archetype, idg));
     const auto inserted(idgrp.by_id()[id].insert(pair).second);
     if (inserted)
@@ -278,9 +288,9 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
          * models such as boost, std etc where we can't compute the
          * inclusion directive.
          */
-        std::string directive;
+        inclusion_directive_group idg;
         if (!id_cfg.primary_directive().empty())
-            directive = id_cfg.primary_directive();
+            idg.primary_directive(id_cfg.primary_directive());
         else {
             /*
              * Finally, we have no alternative but to compute the
@@ -288,11 +298,11 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
              * heuristic.
              */
             const auto path(fmt->inclusion_path(l, n));
-            directive = to_inclusion_directive(path);
+            idg.primary_directive(to_inclusion_directive(path));
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << directive;
-        insert_inclusion_directive(id, arch, directive, idgrp);
+        BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << idg;
+        insert_inclusion_directive(id, arch, idg, idgrp);
     }
 }
 

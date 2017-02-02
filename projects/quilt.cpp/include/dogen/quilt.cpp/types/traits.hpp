@@ -82,9 +82,15 @@ struct traits {
     static std::string header_guard();
 
     /**
-     * @brief Delimited include path to use for type.
+     * @brief Primary inclusion directive to use for type, if any.
      */
-    static std::string inclusion_directive();
+    static std::string primary_inclusion_directive();
+
+    /**
+     * @brief Any additional inclusion directives to use for type, if
+     * any.
+     */
+    static std::string secondary_inclusion_directive();
 
     /**
      * @brief Files this file must include

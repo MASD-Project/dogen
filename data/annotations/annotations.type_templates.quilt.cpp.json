@@ -143,6 +143,19 @@
   },
   {
     "name": {
+      "simple": "secondary_inclusion_directive",
+      "formatter_group": "quilt.cpp.header_files"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text_collection",
+    "template_kind": "archetype_template",
+    "scope": "entity"
+  },
+  {
+    "name": {
       "simple": "inclusion_dependency"
     },
     "archetype_location": {

@@ -46,7 +46,8 @@ namespace formattables {
 class inclusion_directive_group_repository_factory final {
 private:
     struct formattater_type_group {
-        annotations::type inclusion_directive;
+        annotations::type primary_inclusion_directive;
+        annotations::type secondary_inclusion_directive;
         annotations::type inclusion_required;
     };
     friend std::ostream& operator<<(std::ostream& s,
@@ -89,7 +90,7 @@ public:
 
 private:
     void insert_inclusion_directive(const std::string& id,
-        const std::string& archetype, const std::string& directive,
+        const std::string& archetype, const inclusion_directive_group& idg,
         inclusion_directive_group_repository& idgrp) const;
 
     void compute_inclusion_directives(const type_group& tg,
