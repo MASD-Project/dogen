@@ -30,7 +30,7 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     builder.add(o.name(), traits::class_header_archetype());
 
     const auto si(builder.make_special_includes(o));
-    if (si.has_path || si.has_std_string)
+    if (si.has_path)
         builder.add(inclusion_constants::std::sstream());
 
     const auto carch(traits::canonical_archetype());

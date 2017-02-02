@@ -49,11 +49,9 @@ public:
     // FIXME: temporary hack to handle special includes.
     struct special_includes {
         special_includes() :
-            has_std_string(false), has_std_pair(false),
-            has_variant(false), has_ptree(false), has_path(false),
-            has_date(false), has_ptime(false) {}
+            has_std_pair(false), has_variant(false), has_ptree(false),
+            has_path(false), has_date(false), has_ptime(false) {}
 
-        bool has_std_string;
         bool has_std_pair;
         bool has_variant;
         bool has_ptree;

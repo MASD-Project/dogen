@@ -105,10 +105,6 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const auto os(inclusion_constants::std::ostream());
     builder.add(os);
 
-    const auto si(builder.make_special_includes(o));
-    if (si.has_std_string)
-        builder.add(inclusion_constants::boost::algorithm::string());
-
     const auto io_carch(io::traits::canonical_archetype());
     builder.add(o.transparent_associations(), io_carch);
     builder.add(o.opaque_associations(), io_carch);

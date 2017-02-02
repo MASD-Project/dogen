@@ -92,7 +92,7 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     builder.add(p.name(), traits::primitive_header_archetype());
 
     // const auto si(builder.make_special_includes(o));
-    // if (si.has_path || si.has_std_string)
+    // if (si.has_path)
     //    builder.add(inclusion_constants::std::sstream());
 
     return builder.build();
