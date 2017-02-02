@@ -11,6 +11,43 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Inclusion directive logic is too complex                          :story:
+
+At present we have a number of flags handling inclusion directive
+generation:
+
+- =quilt.cpp.inclusion_required=: if true, the type requires inclusion
+  across the board; defaults to true.
+- =quilt.cpp.hash.class_header.inclusion_required=: i.e. formatter
+  specific inclusion required; if true this specific formatter
+  requires an inclusion directive. Defaults to true.
+
+The logic is then as follows:
+
+- if the top-level inclusion directive is true and there are no
+  "overrides", we generate the inclusion directives ourselves.
+- if the top-level inclusion directive is true and there are
+  "overrides", we use the overrides.
+- if the top-level inclusion directive is false, no inclusion
+  directives are used for this type.
+
+Now in practice, the use cases are a bit more limited:
+
+- either the type is a code-generator type, in which case, all flags
+  are true and all overrides are unused.
+- or the type belongs to a proxy model and has one or more
+  overrides. In this case, for the archetypes where there is an
+  override, we use that, for all other archetypes we do not require
+  inclusion. An additional case is where we just don't support the
+  archetype but we're ignoring that for now.
+
+So it seems the key problem is in distinguishing the origin of the
+type: if it comes from a proxy model, we should never generate the
+directives, and use overrides where available; if it comes from a
+reference or target model we shuld always generate the directives.
+
+This could be achieved by flagging proxy types somehow.
+
 *** Add support for "extensions"                                      :story:
 
 Until we have proper merging support, one feature which would be quite
