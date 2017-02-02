@@ -43,6 +43,7 @@ static logger lg(logger_factory(
 const std::string double_quote("\"");
 const std::string boost_name("boost");
 const std::string boost_serialization_gregorian("greg_serialize.hpp");
+const std::string override_postfix("_inclusion_directive");
 
 const std::string duplicate_element_name("Duplicate delement name: ");
 const std::string missing_archetype("Archetype not found: ");
@@ -171,6 +172,15 @@ make_inclusion_directive_configuration(
     return r;
 }
 
+bool inclusion_directive_group_repository_factory::
+has_inclusion_directive_overrides(const annotations::annotation& a) const {
+    const annotations::entry_selector s(a);
+    const auto r(s.has_key_ending_with(override_postfix));
+    BOOST_LOG_SEV(lg, debug) << "Found entries with keys ending with "
+                             << override_postfix << ": " << r;
+    return r;
+}
+
 std::string inclusion_directive_group_repository_factory::
 to_inclusion_directive(const boost::filesystem::path& p) const {
     std::ostringstream ss;
@@ -260,6 +270,14 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
     } else
         BOOST_LOG_SEV(lg, trace) << "Inclusion directive required for element.";
 
+
+    /*
+     * Find out if this element has any inclusion directive overrides
+     * at all. If it has at least one override, we know we don't need
+     * to generate inclusion directives manually.
+     */
+    const bool has_overrides(has_inclusion_directive_overrides(a));
+
     /*
      * Now we start working at the formatter level.
      */
@@ -268,52 +286,43 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
         BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
 
         /*
-         * Does the archetype require an inclusion directive for this
-         * specific formatter? Some elements require inclusion
-         * directives for some archetypes, but not for others. For
-         * example, we may need an include for serialising a
-         * std::list, but in test data we make use of helpers and thus
-         * not require an include.
-         *
-         * Again, we default this flag to true.
+         * If the user has not provided any overrides at all, we can
+         * safely compute the inclusion directive according to a
+         * well-defined heuristic, slot it in and get on our way. It's
+         * basically a dogen generated model.
          */
-        const auto id_cfg(make_inclusion_directive_configuration(tg, arch, a));
-        if (!id_cfg.inclusion_required()) {
-            BOOST_LOG_SEV(lg, trace) << "Inclusion directive not required "
-                                     << " for archetype.";
-            continue;
-        } else
-            BOOST_LOG_SEV(lg, trace) << "Inclusion directive required "
-                                     << " for archetype.";
-
-        /*
-         * Does the configuration provide a "hard-coded" inclusion
-         * directive?  That is, the archetype has an hard-coded
-         * incantation for its include. This is the case for proxy
-         * models such as boost, std etc where we can't compute the
-         * inclusion directive.
-         */
-        inclusion_directive_group idg;
-        if (!id_cfg.primary_directive().empty()) {
-            idg.primary_directive(id_cfg.primary_directive());
-            BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
-                                     << "configuration: "
-                                     << id_cfg.primary_directive();
-        } else {
-            /*
-             * Finally, we have no alternative but to compute the
-             * inclusion directive according to a well-defined
-             * heuristic.
-             */
+        if (!has_overrides) {
             const auto path(fmt->inclusion_path(l, n));
+            inclusion_directive_group idg;
             idg.primary_directive(to_inclusion_directive(path));
             BOOST_LOG_SEV(lg, trace) << "Computed primary directive: "
                                      << idg.primary_directive();
+
+            insert_inclusion_directive(id, arch, idg, idgrp);
+            BOOST_LOG_SEV(lg, trace) << "Inserting inclusion directive group: "
+                                     << idg;
+            continue;
         }
 
-        insert_inclusion_directive(id, arch, idg, idgrp);
-        BOOST_LOG_SEV(lg, trace) << "Inserting inclusion directive group: "
-                                 << idg;
+        /*
+         * Now we need to fetch the overrides from meta-data. They may
+         * not exist - i.e. the question we're asking is "does the
+         * archetype require an inclusion directive for this specific
+         * formatter?" Some elements require inclusion directives for
+         * some archetypes, but not for others. For example, we may
+         * need an include for serialising a std::list, but in test
+         * data we make use of helpers and thus not require an
+         * include.
+         */
+        const auto id_cfg(make_inclusion_directive_configuration(tg, arch, a));
+        if (!id_cfg.primary_directive().empty()) {
+            inclusion_directive_group idg;
+            idg.primary_directive(id_cfg.primary_directive());
+            insert_inclusion_directive(id, arch, idg, idgrp);
+            BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
+                                     << "configuration: "
+                                     << id_cfg.primary_directive();
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing inclusion directives.";

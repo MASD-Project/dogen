@@ -16,12 +16,7 @@
         "quilt.cpp.helper.family": "Boolean",
         "quilt.cpp.aspect.requires_stream_manipulators": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>",
-        "quilt.cpp.types.builtin_header.inclusion_required": false,
-        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
-        "quilt.cpp.hash.builtin_header.inclusion_required": false,
-        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
-        "quilt.cpp.odb.builtin_header.inclusion_required": false
+        "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -159,12 +154,7 @@
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>",
-        "quilt.cpp.types.builtin_header.inclusion_required": false,
-        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
-        "quilt.cpp.hash.builtin_header.inclusion_required": false,
-        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
-        "quilt.cpp.odb.builtin_header.inclusion_required": false
+        "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {
@@ -178,12 +168,7 @@
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_stream_manipulators": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
-        "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>",
-        "quilt.cpp.types.builtin_header.inclusion_required": false,
-        "quilt.cpp.serialization.builtin_header.inclusion_required": false,
-        "quilt.cpp.hash.builtin_header.inclusion_required": false,
-        "quilt.cpp.test_data.builtin_header.inclusion_required": false,
-        "quilt.cpp.odb.builtin_header.inclusion_required": false
+        "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
       }
     },
     {

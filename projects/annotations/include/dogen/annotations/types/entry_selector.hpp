@@ -59,6 +59,11 @@ public:
     bool has_entry(const type& t) const;
     /**@}*/
 
+    /**
+     * @brief Returns true if at least one entry ends with @code s.
+     */
+    bool has_key_ending_with(const std::string& s) const;
+
 private:
     /**
      * @brief Returns a value of an entry from an annotation.

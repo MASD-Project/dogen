@@ -75,6 +75,20 @@ bool entry_selector::has_entry(const type& t) const {
     return has_entry(t.name().qualified());
 }
 
+bool entry_selector::has_key_ending_with(const std::string& s) const {
+    for (const auto& pair : annotation_.entries()) {
+        const auto& key(pair.first);
+        BOOST_LOG_SEV(lg, trace) << "Key: " << key;
+
+        if (boost::ends_with(key, s)) {
+            BOOST_LOG_SEV(lg, trace) << "Key ends with " << s;
+            return true;
+        } else
+            BOOST_LOG_SEV(lg, trace) << "Key does not end with " << s;
+    }
+    return false;
+}
+
 const value& entry_selector::
 get_entry_value(const std::string& qualified_name) const {
     const auto i(annotation_.entries().find(qualified_name));

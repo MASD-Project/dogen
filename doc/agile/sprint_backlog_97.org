@@ -13,22 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-02 Thu 16:53]
+#+CAPTION: Clock summary at [2017-02-02 Thu 18:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *32:40* |       |       | 100.0 |
+| *Total time*                                                                | *33:46* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 32:40   |       |       | 100.0 |
-| Active                                                                      |         | 32:40 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   2.2 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  12.8 |
+| Stories                                                                     | 33:46   |       |       | 100.0 |
+| Active                                                                      |         | 33:46 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   2.1 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  12.3 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.6 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  16.6 |
-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.8 |
-| STARTED Handle "special includes" generically                               |         |       |  8:38 |  26.4 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 12:15 |  37.5 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  16.1 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.7 |
+| STARTED Inclusion directive logic is too complex                            |         |       |  1:06 |   3.3 |
+| STARTED Handle "special includes" generically                               |         |       |  8:38 |  25.6 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 12:15 |  36.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -190,6 +191,60 @@ executed and the way boolean works:
   booleans are not currently being tested.
 - the problem was solved by ensuring the oscillations of the bools do
   match the expectations of the tests.
+
+*** STARTED Inclusion directive logic is too complex                  :story:
+    CLOCK: [2017-02-02 Thu 17:25]--[2017-02-02 Thu 18:01] =>  0:36
+    CLOCK: [2017-02-02 Thu 16:54]--[2017-02-02 Thu 17:24] =>  0:30
+
+At present we have a number of flags handling inclusion directive
+generation:
+
+- =quilt.cpp.inclusion_required=: if true, the type requires inclusion
+  across the board; defaults to true.
+- =quilt.cpp.hash.class_header.inclusion_required=: i.e. formatter
+  specific inclusion required; if true this specific formatter
+  requires an inclusion directive. Defaults to true.
+
+The logic is then as follows:
+
+- if the top-level inclusion directive is true and there are no
+  "overrides", we generate the inclusion directives ourselves.
+- if the top-level inclusion directive is true and there are
+  "overrides", we use the overrides.
+- if the top-level inclusion directive is false, no inclusion
+  directives are used for this type.
+
+Now in practice, the use cases are a bit more limited:
+
+- either the type is a code-generator type, in which case, all flags
+  are true and all overrides are unused.
+- or the type belongs to a proxy model and has one or more
+  overrides. In this case, for the archetypes where there is an
+  override, we use that, for all other archetypes we do not require
+  inclusion. An additional case is where we just don't support the
+  archetype but we're ignoring that for now.
+
+So it seems the key problem is in distinguishing the origin of the
+type: if it comes from a proxy model, we should never generate the
+directives, and use overrides where available; if it comes from a
+reference or target model we shuld always generate the directives.
+
+This could be achieved by flagging proxy types somehow.
+
+Another interesting point is that if we somehow could know if there is
+at least one overridden directive for any of the formatters, we could
+then not bother having a field for the formatter level
+=inclusion_required=; we could simply default them all to
+false. This could be achieved by a meta-data API that checks to see if
+a field exists by name (we probably have this already).
+
+Cases:
+
+| Scenario                                    | Example     | Action                       |
+|---------------------------------------------+-------------+------------------------------|
+| Proxy model that does not require overrides | int         | inclusion_required is false. |
+| Proxy model that requires some overrides    | std::string | detect presence of override. |
+| Non-proxy model                             |             | Generate directives          |
 
 *** STARTED Handle "special includes" generically                     :story:
     CLOCK: [2017-02-02 Thu 15:09]--[2017-02-02 Thu 15:35] =>  0:26

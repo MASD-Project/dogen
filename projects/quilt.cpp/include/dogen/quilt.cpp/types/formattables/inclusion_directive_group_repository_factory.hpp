@@ -71,6 +71,9 @@ private:
         const type_group& tg, const std::string& archetype,
         const annotations::annotation& a) const;
 
+    bool has_inclusion_directive_overrides(
+        const annotations::annotation& a) const;
+
 private:
     std::string to_inclusion_directive(const boost::filesystem::path& p) const;
 
