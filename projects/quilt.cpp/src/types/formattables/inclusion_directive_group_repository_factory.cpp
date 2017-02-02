@@ -209,7 +209,7 @@ insert_inclusion_directive(const std::string& id, const std::string& archetype,
     }
 
     inclusion_directive_group idg;
-    idg.principal_directive(directive);
+    idg.primary_directive(directive);
     const auto pair(std::make_pair(archetype, idg));
     const auto inserted(idgrp.by_id()[id].insert(pair).second);
     if (inserted)

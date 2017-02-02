@@ -46,8 +46,8 @@ namespace formattables {
 std::size_t inclusion_directive_group_hasher::hash(const inclusion_directive_group& v) {
     std::size_t seed(0);
 
-    combine(seed, v.principal_directive());
-    combine(seed, hash_std_list_std_string(v.auxiliary_directives()));
+    combine(seed, v.primary_directive());
+    combine(seed, hash_std_list_std_string(v.secondary_directives()));
 
     return seed;
 }

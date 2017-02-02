@@ -47,8 +47,8 @@ public:
 
 public:
     inclusion_directive_group(
-        const std::string& principal_directive,
-        const std::list<std::string>& auxiliary_directives);
+        const std::string& primary_directive,
+        const std::list<std::string>& secondary_directives);
 
 private:
     template<typename Archive>
@@ -62,20 +62,20 @@ public:
      * @brief The main inclusion directive needed for this element.
      */
     /**@{*/
-    const std::string& principal_directive() const;
-    std::string& principal_directive();
-    void principal_directive(const std::string& v);
-    void principal_directive(const std::string&& v);
+    const std::string& primary_directive() const;
+    std::string& primary_directive();
+    void primary_directive(const std::string& v);
+    void primary_directive(const std::string&& v);
     /**@}*/
 
     /**
      * @brief Any other directives that are also needed for this element.
      */
     /**@{*/
-    const std::list<std::string>& auxiliary_directives() const;
-    std::list<std::string>& auxiliary_directives();
-    void auxiliary_directives(const std::list<std::string>& v);
-    void auxiliary_directives(const std::list<std::string>&& v);
+    const std::list<std::string>& secondary_directives() const;
+    std::list<std::string>& secondary_directives();
+    void secondary_directives(const std::list<std::string>& v);
+    void secondary_directives(const std::list<std::string>&& v);
     /**@}*/
 
 public:
@@ -89,8 +89,8 @@ public:
     inclusion_directive_group& operator=(inclusion_directive_group other);
 
 private:
-    std::string principal_directive_;
-    std::list<std::string> auxiliary_directives_;
+    std::string primary_directive_;
+    std::list<std::string> secondary_directives_;
 };
 
 } } } }

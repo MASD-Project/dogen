@@ -73,7 +73,7 @@ inclusion_dependencies_builder::get_inclusion_directive(
     if (j == i->second.end())
         return boost::optional<std::string>();
 
-    return j->second.principal_directive();
+    return j->second.primary_directive();
 }
 
 inclusion_dependencies_builder::special_includes

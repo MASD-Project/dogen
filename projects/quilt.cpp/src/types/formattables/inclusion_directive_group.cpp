@@ -26,20 +26,20 @@ namespace cpp {
 namespace formattables {
 
 inclusion_directive_group::inclusion_directive_group(
-    const std::string& principal_directive,
-    const std::list<std::string>& auxiliary_directives)
-    : principal_directive_(principal_directive),
-      auxiliary_directives_(auxiliary_directives) { }
+    const std::string& primary_directive,
+    const std::list<std::string>& secondary_directives)
+    : primary_directive_(primary_directive),
+      secondary_directives_(secondary_directives) { }
 
 void inclusion_directive_group::swap(inclusion_directive_group& other) noexcept {
     using std::swap;
-    swap(principal_directive_, other.principal_directive_);
-    swap(auxiliary_directives_, other.auxiliary_directives_);
+    swap(primary_directive_, other.primary_directive_);
+    swap(secondary_directives_, other.secondary_directives_);
 }
 
 bool inclusion_directive_group::operator==(const inclusion_directive_group& rhs) const {
-    return principal_directive_ == rhs.principal_directive_ &&
-        auxiliary_directives_ == rhs.auxiliary_directives_;
+    return primary_directive_ == rhs.primary_directive_ &&
+        secondary_directives_ == rhs.secondary_directives_;
 }
 
 inclusion_directive_group& inclusion_directive_group::operator=(inclusion_directive_group other) {
@@ -48,36 +48,36 @@ inclusion_directive_group& inclusion_directive_group::operator=(inclusion_direct
     return *this;
 }
 
-const std::string& inclusion_directive_group::principal_directive() const {
-    return principal_directive_;
+const std::string& inclusion_directive_group::primary_directive() const {
+    return primary_directive_;
 }
 
-std::string& inclusion_directive_group::principal_directive() {
-    return principal_directive_;
+std::string& inclusion_directive_group::primary_directive() {
+    return primary_directive_;
 }
 
-void inclusion_directive_group::principal_directive(const std::string& v) {
-    principal_directive_ = v;
+void inclusion_directive_group::primary_directive(const std::string& v) {
+    primary_directive_ = v;
 }
 
-void inclusion_directive_group::principal_directive(const std::string&& v) {
-    principal_directive_ = std::move(v);
+void inclusion_directive_group::primary_directive(const std::string&& v) {
+    primary_directive_ = std::move(v);
 }
 
-const std::list<std::string>& inclusion_directive_group::auxiliary_directives() const {
-    return auxiliary_directives_;
+const std::list<std::string>& inclusion_directive_group::secondary_directives() const {
+    return secondary_directives_;
 }
 
-std::list<std::string>& inclusion_directive_group::auxiliary_directives() {
-    return auxiliary_directives_;
+std::list<std::string>& inclusion_directive_group::secondary_directives() {
+    return secondary_directives_;
 }
 
-void inclusion_directive_group::auxiliary_directives(const std::list<std::string>& v) {
-    auxiliary_directives_ = v;
+void inclusion_directive_group::secondary_directives(const std::list<std::string>& v) {
+    secondary_directives_ = v;
 }
 
-void inclusion_directive_group::auxiliary_directives(const std::list<std::string>&& v) {
-    auxiliary_directives_ = std::move(v);
+void inclusion_directive_group::secondary_directives(const std::list<std::string>&& v) {
+    secondary_directives_ = std::move(v);
 }
 
 } } } }

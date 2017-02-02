@@ -48,8 +48,8 @@ inclusion_directive_group_generator::inclusion_directive_group_generator() : pos
 
 void inclusion_directive_group_generator::
 populate(const unsigned int position, result_type& v) {
-    v.principal_directive(create_std_string(position + 0));
-    v.auxiliary_directives(create_std_list_std_string(position + 1));
+    v.primary_directive(create_std_string(position + 0));
+    v.secondary_directives(create_std_list_std_string(position + 1));
 }
 
 inclusion_directive_group_generator::result_type

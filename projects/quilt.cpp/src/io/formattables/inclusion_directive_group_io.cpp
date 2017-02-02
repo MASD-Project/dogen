@@ -52,8 +52,8 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const inclusion_directive_group& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive_group\"" << ", "
-      << "\"principal_directive\": " << "\"" << tidy_up_string(v.principal_directive()) << "\"" << ", "
-      << "\"auxiliary_directives\": " << v.auxiliary_directives()
+      << "\"primary_directive\": " << "\"" << tidy_up_string(v.primary_directive()) << "\"" << ", "
+      << "\"secondary_directives\": " << v.secondary_directives()
       << " }";
     return(s);
 }
