@@ -60,8 +60,8 @@ std::ostream& operator<<(std::ostream& s, const inclusion_directive_configuratio
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive_configuration\"" << ", "
       << "\"inclusion_required\": " << v.inclusion_required() << ", "
-      << "\"inclusion_directive\": " << "\"" << tidy_up_string(v.inclusion_directive()) << "\"" << ", "
-      << "\"auxiliary_directives\": " << v.auxiliary_directives()
+      << "\"primary_directive\": " << "\"" << tidy_up_string(v.primary_directive()) << "\"" << ", "
+      << "\"secondary_directives\": " << v.secondary_directives()
       << " }";
     return(s);
 }

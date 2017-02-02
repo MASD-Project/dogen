@@ -154,7 +154,7 @@ make_inclusion_directive_configuration(
 
     const auto id(ft.inclusion_directive);
     if (s.has_entry(id))
-        r.inclusion_directive(s.get_text_content(id));
+        r.primary_directive(s.get_text_content(id));
 
     return r;
 }
@@ -279,8 +279,8 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
          * inclusion directive.
          */
         std::string directive;
-        if (!id_cfg.inclusion_directive().empty())
-            directive = id_cfg.inclusion_directive();
+        if (!id_cfg.primary_directive().empty())
+            directive = id_cfg.primary_directive();
         else {
             /*
              * Finally, we have no alternative but to compute the

@@ -53,8 +53,8 @@ inclusion_directive_configuration_generator::inclusion_directive_configuration_g
 void inclusion_directive_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.inclusion_required(create_bool(position + 0));
-    v.inclusion_directive(create_std_string(position + 1));
-    v.auxiliary_directives(create_std_list_std_string(position + 2));
+    v.primary_directive(create_std_string(position + 1));
+    v.secondary_directives(create_std_list_std_string(position + 2));
 }
 
 inclusion_directive_configuration_generator::result_type

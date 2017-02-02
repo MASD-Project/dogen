@@ -23274,7 +23274,7 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#inclusion_directive#</dia:string>
+            <dia:string>#primary_directive#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -23297,7 +23297,7 @@ and element.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#auxiliary_directives#</dia:string>
+            <dia:string>#secondary_directives#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::list&lt;std::string&gt;#</dia:string>

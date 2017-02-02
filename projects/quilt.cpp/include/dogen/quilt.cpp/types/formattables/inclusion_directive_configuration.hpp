@@ -47,8 +47,8 @@ public:
 public:
     inclusion_directive_configuration(
         const bool inclusion_required,
-        const std::string& inclusion_directive,
-        const std::list<std::string>& auxiliary_directives);
+        const std::string& primary_directive,
+        const std::list<std::string>& secondary_directives);
 
 private:
     template<typename Archive>
@@ -61,15 +61,15 @@ public:
     bool inclusion_required() const;
     void inclusion_required(const bool v);
 
-    const std::string& inclusion_directive() const;
-    std::string& inclusion_directive();
-    void inclusion_directive(const std::string& v);
-    void inclusion_directive(const std::string&& v);
+    const std::string& primary_directive() const;
+    std::string& primary_directive();
+    void primary_directive(const std::string& v);
+    void primary_directive(const std::string&& v);
 
-    const std::list<std::string>& auxiliary_directives() const;
-    std::list<std::string>& auxiliary_directives();
-    void auxiliary_directives(const std::list<std::string>& v);
-    void auxiliary_directives(const std::list<std::string>&& v);
+    const std::list<std::string>& secondary_directives() const;
+    std::list<std::string>& secondary_directives();
+    void secondary_directives(const std::list<std::string>& v);
+    void secondary_directives(const std::list<std::string>&& v);
 
 public:
     bool operator==(const inclusion_directive_configuration& rhs) const;
@@ -83,8 +83,8 @@ public:
 
 private:
     bool inclusion_required_;
-    std::string inclusion_directive_;
-    std::list<std::string> auxiliary_directives_;
+    std::string primary_directive_;
+    std::list<std::string> secondary_directives_;
 };
 
 } } } }

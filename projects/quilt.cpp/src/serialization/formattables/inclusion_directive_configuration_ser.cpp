@@ -39,8 +39,8 @@ void save(Archive& ar,
     const dogen::quilt::cpp::formattables::inclusion_directive_configuration& v,
     const unsigned int /*version*/) {
     ar << make_nvp("inclusion_required", v.inclusion_required_);
-    ar << make_nvp("inclusion_directive", v.inclusion_directive_);
-    ar << make_nvp("auxiliary_directives", v.auxiliary_directives_);
+    ar << make_nvp("primary_directive", v.primary_directive_);
+    ar << make_nvp("secondary_directives", v.secondary_directives_);
 }
 
 template<typename Archive>
@@ -48,8 +48,8 @@ void load(Archive& ar,
     dogen::quilt::cpp::formattables::inclusion_directive_configuration& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("inclusion_required", v.inclusion_required_);
-    ar >> make_nvp("inclusion_directive", v.inclusion_directive_);
-    ar >> make_nvp("auxiliary_directives", v.auxiliary_directives_);
+    ar >> make_nvp("primary_directive", v.primary_directive_);
+    ar >> make_nvp("secondary_directives", v.secondary_directives_);
 }
 
 } }
