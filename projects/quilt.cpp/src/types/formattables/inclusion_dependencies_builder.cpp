@@ -85,9 +85,7 @@ inclusion_dependencies_builder::make_special_includes(
             for (const auto& n : names) {
                 const auto sn(n.simple());
 
-                if (sn == date_type)
-                    r.has_date = true;
-                else if (sn == ptime_type)
+                if (sn == ptime_type)
                     r.has_ptime = true;
             }
         });

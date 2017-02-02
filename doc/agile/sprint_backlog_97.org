@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-02 Thu 22:54]
+#+CAPTION: Clock summary at [2017-02-02 Thu 23:05]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *35:30* |       |       | 100.0 |
+| *Total time*                                                                | *35:40* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 35:30   |       |       | 100.0 |
-| Active                                                                      |         | 35:30 |       | 100.0 |
+| Stories                                                                     | 35:40   |       |       | 100.0 |
+| Active                                                                      |         | 35:40 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   2.0 |
 | COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  11.7 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.6 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  15.3 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  15.2 |
 | COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.5 |
-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.8 |
-| STARTED Handle "special includes" generically                               |         |       | 10:08 |  28.5 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 12:15 |  34.5 |
+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.7 |
+| STARTED Handle "special includes" generically                               |         |       | 10:18 |  28.9 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 12:15 |  34.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -250,6 +250,7 @@ Cases:
 | Non-proxy model                             |             | Generate directives          |
 
 *** STARTED Handle "special includes" generically                     :story:
+    CLOCK: [2017-02-02 Thu 22:55]--[2017-02-02 Thu 23:05] =>  0:10
     CLOCK: [2017-02-02 Thu 22:41]--[2017-02-02 Thu 22:54] =>  0:13
     CLOCK: [2017-02-02 Thu 22:15]--[2017-02-02 Thu 22:40] =>  0:25
     CLOCK: [2017-02-02 Thu 20:37]--[2017-02-02 Thu 21:00] =>  0:23
