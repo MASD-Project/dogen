@@ -83,9 +83,7 @@ inclusion_dependencies_builder::make_special_includes(
 
             for (const auto& n : names) {
                 const auto sn(n.simple());
-                if (sn == variant_type)
-                    r.has_variant = true;
-                else if (sn == pair_type)
+                if (sn == pair_type)
                     r.has_std_pair = true;
                 else if (sn == ptree_type)
                     r.has_ptree = true;

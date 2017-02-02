@@ -30,10 +30,6 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     auto builder(f.make());
     builder.add(o.name(), carch);
 
-    const auto si(builder.make_special_includes(o));
-    if (si.has_variant)
-        builder.add(inclusion_constants::boost::visitor::apply_visitor());
-
     builder.add(o.transparent_associations(), carch);
     builder.add(o.opaque_associations(), carch);
     builder.add(o.parents(), carch);
