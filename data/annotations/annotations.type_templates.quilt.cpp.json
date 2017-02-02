@@ -156,32 +156,6 @@
   },
   {
     "name": {
-      "simple": "inclusion_dependency"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp"
-    },
-    "value_type": "text_collection",
-    "template_kind": "archetype_template",
-    "scope": "entity"
-  },
-  {
-    "name": {
-      "simple": "inclusion_required",
-      "formatter_group": "quilt.cpp.header_files"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp"
-    },
-    "value_type": "boolean",
-    "template_kind": "archetype_template",
-    "scope": "entity",
-    "default_value": true
-  },
-  {
-    "name": {
       "simple": "split_project",
       "qualified": "quilt.cpp.split_project"
     },

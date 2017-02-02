@@ -71,8 +71,7 @@ std::ostream& operator<<(std::ostream& s,
       << "\"primary_inclusion_directive\": "
       << v.primary_inclusion_directive << ", "
       << "\"secondary_inclusion_directive\": "
-      << v.secondary_inclusion_directive << ", "
-      << "\"inclusion_required\": " << v.inclusion_required
+      << v.secondary_inclusion_directive
       << " }";
 
     return s;
@@ -121,9 +120,6 @@ inclusion_directive_group_repository_factory::make_type_group(
         const auto& sid(traits::secondary_inclusion_directive());
         ftg.secondary_inclusion_directive = s.select_type_by_name(arch, sid);
 
-        // note: redefinition of "ir" by design as scopes are different.
-        const auto& ir(traits::inclusion_required());
-        ftg.inclusion_required = s.select_type_by_name(arch, ir);
         r.formattaters_type_groups[arch] = ftg;
     }
 
@@ -138,8 +134,8 @@ make_top_level_inclusion_required(
     return s.get_boolean_content_or_default(tg.inclusion_required);
 }
 
-inclusion_directive_configuration inclusion_directive_group_repository_factory::
-make_inclusion_directive_configuration(
+boost::optional<inclusion_directive_group>
+inclusion_directive_group_repository_factory::make_inclusion_directive_group(
     const type_group& tg,const std::string& archetype,
     const annotations::annotation& a) const {
 
@@ -156,18 +152,23 @@ make_inclusion_directive_configuration(
 
     const auto& ft(i->second);
     const annotations::entry_selector s(a);
-    inclusion_directive_configuration r;
+    inclusion_directive_group r;
 
-    const auto& ir(ft.inclusion_required);
-    r.inclusion_required(s.get_boolean_content_or_default(ir));
-
+    bool found(false);
     const auto pid(ft.primary_inclusion_directive);
-    if (s.has_entry(pid))
+    if (s.has_entry(pid)) {
+        found = true;
         r.primary_directive(s.get_text_content(pid));
+    }
 
     const auto sid(ft.secondary_inclusion_directive);
-    if (s.has_entry(sid))
+    if (s.has_entry(sid)) {
+        found = true;
         r.secondary_directives(s.get_text_collection_content(sid));
+    }
+
+    if (!found)
+        return boost::optional<inclusion_directive_group>();
 
     return r;
 }
@@ -314,14 +315,11 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
          * data we make use of helpers and thus not require an
          * include.
          */
-        const auto id_cfg(make_inclusion_directive_configuration(tg, arch, a));
-        if (!id_cfg.primary_directive().empty()) {
-            inclusion_directive_group idg;
-            idg.primary_directive(id_cfg.primary_directive());
-            insert_inclusion_directive(id, arch, idg, idgrp);
+        const auto idg(make_inclusion_directive_group(tg, arch, a));
+        if (idg) {
+            insert_inclusion_directive(id, arch, *idg, idgrp);
             BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
-                                     << "configuration: "
-                                     << id_cfg.primary_directive();
+                                     << "meta-data: " << *idg;
         }
     }
 

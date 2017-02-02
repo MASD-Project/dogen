@@ -27,6 +27,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
@@ -48,7 +49,6 @@ private:
     struct formattater_type_group {
         annotations::type primary_inclusion_directive;
         annotations::type secondary_inclusion_directive;
-        annotations::type inclusion_required;
     };
     friend std::ostream& operator<<(std::ostream& s,
         const formattater_type_group& v);
@@ -67,7 +67,7 @@ private:
     bool make_top_level_inclusion_required(const type_group& tg,
         const annotations::annotation& a) const;
 
-    inclusion_directive_configuration make_inclusion_directive_configuration(
+    boost::optional<inclusion_directive_group> make_inclusion_directive_group(
         const type_group& tg, const std::string& archetype,
         const annotations::annotation& a) const;
 
