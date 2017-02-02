@@ -38,7 +38,12 @@ std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int positi
 }
 
 bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+    if (position == 0)
+        return true;
+    else if (position == 1)
+        return false;
+    else
+        return (position % 2) == 0;
 }
 
 }

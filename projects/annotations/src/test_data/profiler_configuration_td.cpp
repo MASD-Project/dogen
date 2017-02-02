@@ -35,7 +35,12 @@ create_dogen_annotations_annotation(const unsigned int position) {
 }
 
 bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+    if (position == 0)
+        return true;
+    else if (position == 1)
+        return false;
+    else
+        return (position % 2) == 0;
 }
 
 }

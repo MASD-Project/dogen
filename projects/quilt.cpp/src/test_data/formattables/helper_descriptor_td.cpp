@@ -51,7 +51,12 @@ create_boost_optional_dogen_quilt_cpp_formattables_streaming_properties(unsigned
 }
 
 bool create_bool(const unsigned int position) {
-    return (position % 2) == 0;
+    if (position == 0)
+        return true;
+    else if (position == 1)
+        return false;
+    else
+        return (position % 2) == 0;
 }
 
 }
