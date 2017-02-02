@@ -122,6 +122,8 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<pkg4::child_via_settings_generator>();
     test_equality<non_final_leaf_generator>();
     test_equality<non_final_orphan_generator>();
+    test_equality<descendant2_generator>();
+    test_equality<descendant3_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
@@ -141,6 +143,8 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     roundtrip_type<pkg4::child_via_settings_generator>();
     roundtrip_type<non_final_leaf_generator>();
     roundtrip_type<non_final_orphan_generator>();
+    roundtrip_type<descendant2_generator>();
+    roundtrip_type<descendant3_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_hashing) {
@@ -160,6 +164,8 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<pkg4::child_via_settings_generator>();
     test_hashing<non_final_leaf_generator>();
     test_hashing<non_final_orphan_generator>();
+    test_hashing<descendant2_generator>();
+    test_hashing<descendant3_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
@@ -179,6 +185,8 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<pkg4::child_via_settings_generator>();
     test_swap<non_final_leaf_generator>();
     test_swap<non_final_orphan_generator>();
+    test_swap<descendant2_generator>();
+    test_swap<descendant3_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_io) {
@@ -198,6 +206,8 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<pkg4::child_via_settings_generator>();
     test_io<non_final_leaf_generator>();
     test_io<non_final_orphan_generator>();
+    test_io<descendant2_generator>();
+    test_io<descendant3_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
@@ -218,6 +228,8 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<pkg4::child_via_settings_generator>();
     test_move_assignment_copy<non_final_leaf_generator>();
     test_move_assignment_copy<non_final_orphan_generator>();
+    test_move_assignment_copy<descendant2_generator>();
+    test_move_assignment_copy<descendant3_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(visitor_dispatches_to_the_correct_classes) {

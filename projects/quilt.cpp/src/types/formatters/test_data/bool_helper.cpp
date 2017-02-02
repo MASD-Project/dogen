@@ -72,12 +72,7 @@ void bool_helper::
 format(assistant& a, const formattables::helper_properties& /*hp*/) const {
 a.stream() << std::endl;
 a.stream() << "bool create_bool(const unsigned int position) {" << std::endl;
-a.stream() << "    if (position == 0)" << std::endl;
-a.stream() << "        return true;" << std::endl;
-a.stream() << "    else if (position == 1)" << std::endl;
-a.stream() << "        return false;" << std::endl;
-a.stream() << "    else" << std::endl;
-a.stream() << "        return (position % 2) == 0;" << std::endl;
+a.stream() << "    return (position % 2) != 0;" << std::endl;
 a.stream() << "}" << std::endl;
 }
 } } } } }
