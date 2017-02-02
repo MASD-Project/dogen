@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-02 Thu 15:08]
+#+CAPTION: Clock summary at [2017-02-02 Thu 15:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *30:59* |       |       | 100.0 |
+| *Total time*                                                                | *31:42* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 30:59   |       |       | 100.0 |
-| Active                                                                      |         | 30:59 |       | 100.0 |
+| Stories                                                                     | 31:42   |       |       | 100.0 |
+| Active                                                                      |         | 31:42 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   2.3 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  13.4 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  13.1 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.6 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  17.5 |
-| STARTED Handle "special includes" generically                               |         |       |  8:12 |  26.5 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 12:15 |  39.5 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  17.1 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  0:17 |   0.9 |
+| STARTED Handle "special includes" generically                               |         |       |  8:38 |  27.2 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 12:15 |  38.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -156,7 +157,19 @@ We could:
 - add meta-data for users to supply their own values;
 - add meta-data to disable setting the enumerator value altogether.
 
+*** COMPLETED Test data for booleans is not oscillating correctly     :story:
+    CLOSED: [2017-02-02 Thu 15:51]
+    CLOCK: [2017-02-02 Thu 15:36]--[2017-02-02 Thu 15:53] =>  0:17
+
+We are not handling correctly zero and one, both producing
+false. Ideally we should have a true, false, ... sequence across the
+board rather than false, false, true, ... This can cause tests to fail
+spuriously because we rely on generators where g(0) != g(1). If a
+class has only a property of type bool this (should) be a problem. Why
+it hasn't been thus far is not clear.
+
 *** STARTED Handle "special includes" generically                     :story:
+    CLOCK: [2017-02-02 Thu 15:09]--[2017-02-02 Thu 15:35] =>  0:26
     CLOCK: [2017-02-02 Thu 15:04]--[2017-02-02 Thu 15:08] =>  0:04
     CLOCK: [2017-02-02 Thu 14:03]--[2017-02-02 Thu 15:03] =>  1:00
     CLOCK: [2017-02-02 Thu 10:33]--[2017-02-02 Thu 12:01] =>  1:28
