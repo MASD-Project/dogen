@@ -44,12 +44,7 @@ std::vector<dogen::yarn::enumerator> create_std_vector_dogen_yarn_enumerator(uns
 }
 
 bool create_bool(const unsigned int position) {
-    if (position == 0)
-        return true;
-    else if (position == 1)
-        return false;
-    else
-        return (position % 2) == 0;
+    return (position % 2) != 0;
 }
 
 }

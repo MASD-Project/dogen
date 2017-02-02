@@ -46,12 +46,7 @@ std::list<std::pair<std::string, std::string> > create_std_list_std_pair_std_str
 }
 
 bool create_bool(const unsigned int position) {
-    if (position == 0)
-        return true;
-    else if (position == 1)
-        return false;
-    else
-        return (position % 2) == 0;
+    return (position % 2) != 0;
 }
 
 }

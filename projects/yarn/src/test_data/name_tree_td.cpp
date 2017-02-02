@@ -44,12 +44,7 @@ std::list<dogen::yarn::name_tree> create_std_list_dogen_yarn_name_tree(unsigned 
 }
 
 bool create_bool(const unsigned int position) {
-    if (position == 0)
-        return true;
-    else if (position == 1)
-        return false;
-    else
-        return (position % 2) == 0;
+    return (position % 2) != 0;
 }
 
 dogen::yarn::languages

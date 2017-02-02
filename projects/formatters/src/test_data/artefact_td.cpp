@@ -37,12 +37,7 @@ std::string create_std_string(const unsigned int position) {
 }
 
 bool create_bool(const unsigned int position) {
-    if (position == 0)
-        return true;
-    else if (position == 1)
-        return false;
-    else
-        return (position % 2) == 0;
+    return (position % 2) != 0;
 }
 
 std::vector<boost::filesystem::path> create_std_vector_boost_filesystem_path(unsigned int position) {

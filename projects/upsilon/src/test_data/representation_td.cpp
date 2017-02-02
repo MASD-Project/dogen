@@ -30,12 +30,7 @@ create_dogen_upsilon_target_types(const unsigned int position) {
 }
 
 bool create_bool(const unsigned int position) {
-    if (position == 0)
-        return true;
-    else if (position == 1)
-        return false;
-    else
-        return (position % 2) == 0;
+    return (position % 2) != 0;
 }
 
 dogen::upsilon::exclusion

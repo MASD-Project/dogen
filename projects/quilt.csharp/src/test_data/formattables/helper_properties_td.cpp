@@ -37,12 +37,7 @@ std::list<dogen::quilt::csharp::formattables::helper_descriptor> create_std_list
 }
 
 bool create_bool(const unsigned int position) {
-    if (position == 0)
-        return true;
-    else if (position == 1)
-        return false;
-    else
-        return (position % 2) == 0;
+    return (position % 2) != 0;
 }
 
 }
