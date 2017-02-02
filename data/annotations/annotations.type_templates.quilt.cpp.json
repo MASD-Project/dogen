@@ -130,7 +130,7 @@
   },
   {
     "name": {
-      "simple": "inclusion_directive",
+      "simple": "primary_inclusion_directive",
       "formatter_group": "quilt.cpp.header_files"
     },
     "archetype_location": {
