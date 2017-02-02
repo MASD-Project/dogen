@@ -53,7 +53,6 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<formattables::facet_properties_generator>();
     test_equality<formattables::helper_descriptor_generator>();
     test_equality<formattables::streaming_properties_generator>();
-    test_equality<formattables::inclusion_directive_configuration_generator>();
     test_equality<formattables::locator_configuration_generator>();
     test_equality<formattables::locator_facet_configuration_generator>();
     test_equality<formattables::locator_archetype_configuration_generator>();

@@ -55,7 +55,6 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<formattables::locator_configuration_generator>();
     test_io<formattables::locator_facet_configuration_generator>();
     test_io<formattables::locator_archetype_configuration_generator>();
-    test_io<formattables::inclusion_directive_configuration_generator>();
     test_io<fabric::registrar_generator>();
     test_io<fabric::cmakelists_generator>();
     test_io<fabric::odb_options_generator>();

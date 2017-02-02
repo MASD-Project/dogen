@@ -52,7 +52,6 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     test_swap<formattables::facet_properties_generator>();
     test_swap<formattables::helper_descriptor_generator>();
     test_swap<formattables::streaming_properties_generator>();
-    test_swap<formattables::inclusion_directive_configuration_generator>();
     test_swap<formattables::locator_configuration_generator>();
     test_swap<formattables::locator_facet_configuration_generator>();
     test_swap<formattables::locator_archetype_configuration_generator>();

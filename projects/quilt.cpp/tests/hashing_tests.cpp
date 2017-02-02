@@ -56,7 +56,6 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<formattables::locator_configuration_generator>();
     test_hashing<formattables::locator_facet_configuration_generator>();
     test_hashing<formattables::locator_archetype_configuration_generator>();
-    test_hashing<formattables::inclusion_directive_configuration_generator>();
     test_hashing<fabric::registrar_generator>();
     test_hashing<fabric::cmakelists_generator>();
     test_hashing<fabric::odb_options_generator>();

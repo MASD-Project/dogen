@@ -175,7 +175,6 @@
 #include "dogen/quilt.cpp/types/formatters/io/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/inserter_implementation_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/builtin_header_formatter.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/class_implementation_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/sequence_container_helper.hpp"

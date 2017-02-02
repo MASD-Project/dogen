@@ -53,7 +53,6 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<formattables::facet_properties_generator>();
     test_move_assignment_copy<formattables::helper_descriptor_generator>();
     test_move_assignment_copy<formattables::streaming_properties_generator>();
-    test_move_assignment_copy<formattables::inclusion_directive_configuration_generator>();
     test_move_assignment_copy<formattables::locator_configuration_generator>();
     test_move_assignment_copy<formattables::locator_facet_configuration_generator>();
     test_move_assignment_copy<formattables::locator_archetype_configuration_generator>();

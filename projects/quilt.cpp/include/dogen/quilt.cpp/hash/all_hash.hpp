@@ -50,7 +50,6 @@
 #include "dogen/quilt.cpp/hash/formattables/local_enablement_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/global_enablement_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/locator_archetype_configuration_hash.hpp"
-#include "dogen/quilt.cpp/hash/formattables/inclusion_directive_configuration_hash.hpp"
 #include "dogen/quilt.cpp/hash/formattables/inclusion_directive_group_repository_hash.hpp"
 
 #endif

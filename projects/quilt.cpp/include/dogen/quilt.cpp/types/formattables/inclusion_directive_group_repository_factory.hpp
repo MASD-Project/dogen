@@ -36,7 +36,6 @@
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
 
 namespace dogen {

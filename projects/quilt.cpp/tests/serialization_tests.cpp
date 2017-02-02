@@ -64,7 +64,6 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<formattables::locator_configuration_generator>();
     roundtrip_type<formattables::locator_facet_configuration_generator>();
     roundtrip_type<formattables::locator_archetype_configuration_generator>();
-    roundtrip_type<formattables::inclusion_directive_configuration_generator>();
     roundtrip_type<fabric::registrar_generator>();
     roundtrip_type<fabric::cmakelists_generator>();
     roundtrip_type<fabric::odb_options_generator>();

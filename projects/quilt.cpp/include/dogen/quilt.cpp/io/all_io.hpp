@@ -51,7 +51,6 @@
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_archetype_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/inclusion_directive_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_repository_io.hpp"
 
 #endif
