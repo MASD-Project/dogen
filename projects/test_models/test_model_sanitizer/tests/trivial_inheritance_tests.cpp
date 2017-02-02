@@ -38,7 +38,8 @@ const std::string empty;
 const std::string test_module("test_model_sanitizer");
 const std::string test_suite("trivial_inheritance_tests");
 
-class mock_visitor : public dogen::test_models::trivial_inheritance::base_visitor {
+class mock_visitor
+    : public dogen::test_models::trivial_inheritance::base_visitor {
 public:
     mock_visitor() { reset(); }
 
@@ -47,7 +48,8 @@ public:
 
 public:
     virtual void visit(
-        const dogen::test_models::trivial_inheritance::descendant2&) const override {
+        const dogen::test_models::trivial_inheritance::descendant2&
+        ) const override {
         visited |= 0x02;
     }
 
@@ -61,12 +63,15 @@ public:
         visited |= 0x08;
     }
 
-    virtual void visit(dogen::test_models::trivial_inheritance::descendant2&) override {
+    virtual void visit(
+        dogen::test_models::trivial_inheritance::descendant2&
+        ) override {
         visited |= 0x10;
     }
 
     virtual void visit(
-        const dogen::test_models::trivial_inheritance::descendant3&) const override {
+        const dogen::test_models::trivial_inheritance::descendant3&
+        ) const override {
         visited |= 0x20;
     }
 
@@ -76,12 +81,14 @@ public:
     }
 
     virtual void visit(
-        dogen::test_models::trivial_inheritance::descendant3& d) const override {
+        dogen::test_models::trivial_inheritance::descendant3& d
+        ) const override {
         d.prop_0(true);
         visited |= 0x40;
     }
 
-    virtual void visit(dogen::test_models::trivial_inheritance::descendant3& d) override {
+    virtual void visit(
+        dogen::test_models::trivial_inheritance::descendant3& d) override {
         d.prop_0(true);
         visited |= 0x50;
     }
