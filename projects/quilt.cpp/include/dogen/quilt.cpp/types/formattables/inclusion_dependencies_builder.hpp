@@ -33,6 +33,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
 
 namespace dogen {
@@ -48,10 +49,9 @@ class inclusion_dependencies_builder {
 public:
     // FIXME: temporary hack to handle special includes.
     struct special_includes {
-        special_includes() : has_ptree(false), has_path(false), has_date(false),
+        special_includes() : has_path(false), has_date(false),
                              has_ptime(false) {}
 
-        bool has_ptree;
         bool has_path;
         bool has_date;
         bool has_ptime;
@@ -64,12 +64,12 @@ public:
 
 private:
     /**
-     * @brief Returns the inclusion directive for a given name and
-     * formatter name.
+     * @brief Returns the inclusion directive group for a given name
+     * and formatter name.
      *
      * @pre name must exist in path derivatives collection.
      */
-    boost::optional<std::string> get_inclusion_directive(
+    boost::optional<inclusion_directive_group> get_inclusion_directive_group(
         const yarn::name& n, const std::string& archetype) const;
 
 public:
@@ -88,7 +88,11 @@ public:
     /**
      * @brief Adds the supplied inclusion directive.
      */
+    /**@{*/
     void add(const std::string& inclusion_directive);
+    void add(const std::list<std::string>& inclusion_directives);
+
+    /**@{*/
 
     /**
      * @brief Adds the inclusion directive for the supplied archetype

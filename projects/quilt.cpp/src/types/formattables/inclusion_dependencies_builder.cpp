@@ -24,6 +24,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
+#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
 
@@ -58,19 +59,19 @@ inclusion_dependencies_builder::inclusion_dependencies_builder(
     const std::unordered_map<std::string, formattable>& formattables)
     : inclusion_directives_(idgrp), formattables_(formattables) {}
 
-boost::optional<std::string>
-inclusion_dependencies_builder::get_inclusion_directive(
+boost::optional<inclusion_directive_group>
+inclusion_dependencies_builder::get_inclusion_directive_group(
     const yarn::name& n, const std::string& archetype) const {
     const auto& c(inclusion_directives_.by_id());
     const auto i(c.find(n.id()));
     if (i == c.end())
-        return boost::optional<std::string>();
+        return boost::optional<inclusion_directive_group>();
 
     const auto j(i->second.find(archetype));
     if (j == i->second.end())
-        return boost::optional<std::string>();
+        return boost::optional<inclusion_directive_group>();
 
-    return j->second.primary_directive();
+    return j->second;
 }
 
 inclusion_dependencies_builder::special_includes
@@ -83,9 +84,7 @@ inclusion_dependencies_builder::make_special_includes(
 
             for (const auto& n : names) {
                 const auto sn(n.simple());
-                if (sn == ptree_type)
-                    r.has_ptree = true;
-                else if (sn == path_type)
+                if (sn == path_type)
                     r.has_path = true;
                 else if (sn == date_type)
                     r.has_date = true;
@@ -139,6 +138,12 @@ add(const std::string& inclusion_directive) {
 }
 
 void inclusion_dependencies_builder::
+add(const std::list<std::string>& inclusion_directives) {
+    for (const auto& id : inclusion_directives)
+        add(id);
+}
+
+void inclusion_dependencies_builder::
 add(const yarn::name& n, const std::string& archetype) {
     BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
 
@@ -151,10 +156,11 @@ add(const yarn::name& n, const std::string& archetype) {
         return;
     }
 
-    const auto id(get_inclusion_directive(n, resolved_arch));
+    const auto id(get_inclusion_directive_group(n, resolved_arch));
     if (id) {
-        add(*id);
-        BOOST_LOG_SEV(lg, trace) << "Adding inclusion directive: " << *id;
+        add(id->primary_directive());
+        add(id->secondary_directives());
+        BOOST_LOG_SEV(lg, trace) << "Adding inclusion directive group: " << *id;
     } else
         BOOST_LOG_SEV(lg, trace) << "Could not find an inclusion directive.";
 }

@@ -41,14 +41,6 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 
     const auto os(inclusion_constants::std::ostream());
     builder.add(os);
-
-    const auto si(builder.make_special_includes(o));
-
-    if (si.has_ptree) {
-        builder.add(inclusion_constants::std::sstream());
-        builder.add(inclusion_constants::boost::algorithm::string());
-    }
-
     builder.add(o.transparent_associations(), io_carch);
     builder.add(o.opaque_associations(), io_carch);
     builder.add(o.parents(), io_carch);

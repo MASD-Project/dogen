@@ -52,6 +52,9 @@ const std::string empty_primary_directive(
 const std::string formatter_not_found_for_type(
     "Formatter not found for type: ");
 const std::string empty_archetype("Formatter name is empty.");
+const std::string secondary_without_primary(
+    "Element contains secondary directives but no primary directives."
+    "Archetype: ");
 
 }
 
@@ -163,7 +166,12 @@ inclusion_directive_group_repository_factory::make_inclusion_directive_group(
 
     const auto sid(ft.secondary_inclusion_directive);
     if (s.has_entry(sid)) {
-        found = true;
+        if (!found) {
+            BOOST_LOG_SEV(lg, error) << secondary_without_primary << archetype;
+            BOOST_THROW_EXCEPTION(
+                expansion_error(secondary_without_primary + archetype));
+        }
+
         r.secondary_directives(s.get_text_collection_content(sid));
     }
 
