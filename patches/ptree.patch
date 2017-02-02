@@ -1,0 +1,130 @@
+diff --git a/data/library/cpp.boost.json b/data/library/cpp.boost.json
+index d77e08ffb..cebaf103e 100644
+--- a/data/library/cpp.boost.json
++++ b/data/library/cpp.boost.json
+@@ -179,9 +179,15 @@
+         "quilt.cpp.helper.family": "BoostPTree",
+         "quilt.cpp.aspect.requires_manual_move_constructor": true,
+         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
++        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree.hpp>",
+         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
++        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/property_tree/ptree_serialization.hpp>",
+         "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
+-        "quilt.cpp.io.class_implementation.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>"
++        "quilt.cpp.io.class_header.secondary_inclusion_directive": "<sstream>",
++        "quilt.cpp.io.class_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>",
++        "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/property_tree/json_parser.hpp>",
++        "quilt.cpp.io.primitive_header.secondary_inclusion_directive": "<sstream>",
++        "quilt.cpp.io.primitive_header.secondary_inclusion_directive": "<boost/algorithm/string.hpp>"
+       }
+     }
+   ]
+diff --git a/doc/agile/sprint_backlog_97.org b/doc/agile/sprint_backlog_97.org
+index b942dd860..f027cf2c5 100644
+--- a/doc/agile/sprint_backlog_97.org
++++ b/doc/agile/sprint_backlog_97.org
+@@ -250,6 +250,7 @@ Cases:
+ | Non-proxy model                             |             | Generate directives          |
+ 
+ *** STARTED Handle "special includes" generically                     :story:
++    CLOCK: [2017-02-02 Thu 20:37]--[2017-02-02 Thu 21:00] =>  0:23
+     CLOCK: [2017-02-02 Thu 20:33]--[2017-02-02 Thu 20:36] =>  0:03
+     CLOCK: [2017-02-02 Thu 20:15]--[2017-02-02 Thu 20:32] =>  0:17
+     CLOCK: [2017-02-02 Thu 18:18]--[2017-02-02 Thu 18:27] =>  0:09
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp
+index d7ddca0c7..eb95b4382 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp
+@@ -48,10 +48,9 @@ class inclusion_dependencies_builder {
+ public:
+     // FIXME: temporary hack to handle special includes.
+     struct special_includes {
+-        special_includes() : has_ptree(false), has_path(false), has_date(false),
++        special_includes() : has_path(false), has_date(false),
+                              has_ptime(false) {}
+ 
+-        bool has_ptree;
+         bool has_path;
+         bool has_date;
+         bool has_ptime;
+diff --git a/projects/quilt.cpp/src/types/formattables/inclusion_dependencies_builder.cpp b/projects/quilt.cpp/src/types/formattables/inclusion_dependencies_builder.cpp
+index 25c383f4c..eeeb7d6c7 100644
+--- a/projects/quilt.cpp/src/types/formattables/inclusion_dependencies_builder.cpp
++++ b/projects/quilt.cpp/src/types/formattables/inclusion_dependencies_builder.cpp
+@@ -83,9 +83,7 @@ inclusion_dependencies_builder::make_special_includes(
+ 
+             for (const auto& n : names) {
+                 const auto sn(n.simple());
+-                if (sn == ptree_type)
+-                    r.has_ptree = true;
+-                else if (sn == path_type)
++                if (sn == path_type)
+                     r.has_path = true;
+                 else if (sn == date_type)
+                     r.has_date = true;
+diff --git a/projects/quilt.cpp/src/types/formattables/inclusion_directive_group_repository_factory.cpp b/projects/quilt.cpp/src/types/formattables/inclusion_directive_group_repository_factory.cpp
+index b8270d8e5..edf7d64d2 100644
+--- a/projects/quilt.cpp/src/types/formattables/inclusion_directive_group_repository_factory.cpp
++++ b/projects/quilt.cpp/src/types/formattables/inclusion_directive_group_repository_factory.cpp
+@@ -52,6 +52,9 @@ const std::string empty_primary_directive(
+ const std::string formatter_not_found_for_type(
+     "Formatter not found for type: ");
+ const std::string empty_archetype("Formatter name is empty.");
++const std::string secondary_without_primary(
++    "Element contains secondary directives but no primary directives."
++    "Archetype: ");
+ 
+ }
+ 
+@@ -163,7 +166,12 @@ inclusion_directive_group_repository_factory::make_inclusion_directive_group(
+ 
+     const auto sid(ft.secondary_inclusion_directive);
+     if (s.has_entry(sid)) {
+-        found = true;
++        if (!found) {
++            BOOST_LOG_SEV(lg, error) << secondary_without_primary << archetype;
++            BOOST_THROW_EXCEPTION(
++                expansion_error(secondary_without_primary + archetype));
++        }
++
+         r.secondary_directives(s.get_text_collection_content(sid));
+     }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp b/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp
+index e3434074a..a0c0efcee 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.cpp
+@@ -103,14 +103,6 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
+ 
+     const auto os(inclusion_constants::std::ostream());
+     builder.add(os);
+-
+-    const auto si(builder.make_special_includes(o));
+-
+-    if (si.has_ptree) {
+-        builder.add(inclusion_constants::std::sstream());
+-        builder.add(inclusion_constants::boost::algorithm::string());
+-    }
+-
+     builder.add(o.transparent_associations(), io_carch);
+     builder.add(o.opaque_associations(), io_carch);
+     builder.add(o.parents(), io_carch);
+diff --git a/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.stitch b/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.stitch
+index e6031bd28..a8d44bf8d 100644
+--- a/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/io/class_implementation_formatter.stitch
+@@ -41,14 +41,6 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
+ 
+     const auto os(inclusion_constants::std::ostream());
+     builder.add(os);
+-
+-    const auto si(builder.make_special_includes(o));
+-
+-    if (si.has_ptree) {
+-        builder.add(inclusion_constants::std::sstream());
+-        builder.add(inclusion_constants::boost::algorithm::string());
+-    }
+-
+     builder.add(o.transparent_associations(), io_carch);
+     builder.add(o.opaque_associations(), io_carch);
+     builder.add(o.parents(), io_carch);
