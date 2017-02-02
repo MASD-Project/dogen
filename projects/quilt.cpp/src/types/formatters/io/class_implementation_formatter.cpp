@@ -105,9 +105,6 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     builder.add(os);
 
     const auto si(builder.make_special_includes(o));
-    if (si.requires_stream_manipulators)
-        builder.add(inclusion_constants::boost::io::ios_state());
-
     if (si.has_std_string)
         builder.add(inclusion_constants::boost::algorithm::string());
 

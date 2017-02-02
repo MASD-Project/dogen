@@ -236,6 +236,8 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
 
     const auto& n(e.name());
     const auto id(n.id());
+    BOOST_LOG_SEV(lg, debug) << "Started computing inclusion directives for: "
+                             << id;
 
     /*
      * First we extract the data required to generated include
@@ -253,16 +255,17 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
     const auto& a(e.annotation());
     const bool required(make_top_level_inclusion_required(tg, a));
     if (!required) {
-        BOOST_LOG_SEV(lg, debug) << "Inclusion not required for element.";
+        BOOST_LOG_SEV(lg, trace) << "Inclusion not required for element.";
         return;
-    }
+    } else
+        BOOST_LOG_SEV(lg, trace) << "Inclusion directive required for element.";
 
     /*
      * Now we start working at the formatter level.
      */
     for (const auto& fmt : formatters) {
         const auto arch(fmt->archetype_location().archetype());
-        BOOST_LOG_SEV(lg, debug) << "Archetype: " << arch;
+        BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
 
         /*
          * Does the archetype require an inclusion directive for this
@@ -276,10 +279,12 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
          */
         const auto id_cfg(make_inclusion_directive_configuration(tg, arch, a));
         if (!id_cfg.inclusion_required()) {
-            BOOST_LOG_SEV(lg, debug) << "Inclusion directive not required "
-                                     << " for archetype: " << arch;
+            BOOST_LOG_SEV(lg, trace) << "Inclusion directive not required "
+                                     << " for archetype.";
             continue;
-        }
+        } else
+            BOOST_LOG_SEV(lg, trace) << "Inclusion directive required "
+                                     << " for archetype.";
 
         /*
          * Does the configuration provide a "hard-coded" inclusion
@@ -289,9 +294,12 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
          * inclusion directive.
          */
         inclusion_directive_group idg;
-        if (!id_cfg.primary_directive().empty())
+        if (!id_cfg.primary_directive().empty()) {
             idg.primary_directive(id_cfg.primary_directive());
-        else {
+            BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
+                                     << "configuration: "
+                                     << id_cfg.primary_directive();
+        } else {
             /*
              * Finally, we have no alternative but to compute the
              * inclusion directive according to a well-defined
@@ -299,11 +307,16 @@ compute_inclusion_directives(const type_group& tg, const yarn::element& e,
              */
             const auto path(fmt->inclusion_path(l, n));
             idg.primary_directive(to_inclusion_directive(path));
+            BOOST_LOG_SEV(lg, trace) << "Computed primary directive: "
+                                     << idg.primary_directive();
         }
 
-        BOOST_LOG_SEV(lg, debug) << "Inclusion directive: " << idg;
         insert_inclusion_directive(id, arch, idg, idgrp);
+        BOOST_LOG_SEV(lg, trace) << "Inserting inclusion directive group: "
+                                 << idg;
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished computing inclusion directives.";
 }
 
 inclusion_directive_group_repository

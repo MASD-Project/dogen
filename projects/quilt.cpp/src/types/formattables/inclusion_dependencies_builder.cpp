@@ -34,9 +34,6 @@ static logger lg(logger_factory(
         "quilt.cpp.formattables.inclusion_dependencies_builder"));
 
 const auto empty_list = std::list<std::string> {};
-const std::string bool_type("bool");
-const std::string double_type("double");
-const std::string float_type("float");
 const std::string pair_type("pair");
 const std::string string_type("string");
 const std::string variant_type("variant");
@@ -86,9 +83,7 @@ inclusion_dependencies_builder::make_special_includes(
 
             for (const auto& n : names) {
                 const auto sn(n.simple());
-                if (sn == bool_type || sn == double_type || sn == float_type)
-                    r.requires_stream_manipulators = true;
-                else if (sn == string_type)
+                if (sn == string_type)
                     r.has_std_string = true;
                 else if (sn == variant_type)
                     r.has_variant = true;
@@ -132,7 +127,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
     const bool r(j->second.enabled());
     if (!r) {
-        BOOST_LOG_SEV(lg, debug) << "Archetype disabled. Archetype: "
+        BOOST_LOG_SEV(lg, trace) << "Archetype disabled. Archetype: "
                                  << archetype << " on type: " << n.id() << "'";
     }
     return r;
@@ -140,6 +135,8 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
 
 void inclusion_dependencies_builder::
 add(const std::string& inclusion_directive) {
+    BOOST_LOG_SEV(lg, debug) << "Adding directive: " << inclusion_directive;
+
     if (inclusion_directive.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_directive;
         BOOST_THROW_EXCEPTION(building_error(empty_directive));
@@ -149,15 +146,23 @@ add(const std::string& inclusion_directive) {
 
 void inclusion_dependencies_builder::
 add(const yarn::name& n, const std::string& archetype) {
+    BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
+
     canonical_archetype_resolver res(formattables_);
     const auto resolved_arch(res.resolve(n.id(), archetype));
 
-    if (!is_enabled(n, resolved_arch))
+    if (!is_enabled(n, resolved_arch)) {
+        BOOST_LOG_SEV(lg, trace) << "Resolved archetype not enabled: "
+                                 << resolved_arch;
         return;
+    }
 
     const auto id(get_inclusion_directive(n, resolved_arch));
-    if (id)
+    if (id) {
         add(*id);
+        BOOST_LOG_SEV(lg, trace) << "Adding inclusion directive: " << *id;
+    } else
+        BOOST_LOG_SEV(lg, trace) << "Could not find an inclusion directive.";
 }
 
 void inclusion_dependencies_builder::add(const boost::optional<yarn::name>& n,

@@ -32,6 +32,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
 
 const std::string duplicate_archetype("Duplicate archetype: ");
+const std::string duplicate_master(
+    "More than one master segment found. Last: ");
 
 }
 
@@ -71,8 +73,14 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
          */
         auto& fbl(i->second);
         fbl.all_segments().push_back(ptr);
-        if (!e.is_element_extension())
+        if (!e.is_element_extension()) {
+            if (fbl.master_segment()) {
+                BOOST_LOG_SEV(lg, error) << duplicate_master << id;
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(duplicate_master + id));
+            }
             fbl.master_segment(ptr);
+        }
 
         /*
          * Check to see if the element has any formatters. Some
