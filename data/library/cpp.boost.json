@@ -17,7 +17,9 @@
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
-        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>"
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/shared_ptr.hpp>",
+        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/shared_ptr.hpp>"
       }
     },
     {
@@ -31,7 +33,9 @@
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
-        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>"
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/weak_ptr.hpp>",
+        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/weak_ptr.hpp>"
       }
     },
     {
@@ -45,7 +49,9 @@
         "yarn.type_parameters.count": 1,
         "yarn.type_parameters.always_in_heap": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
-        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>"
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/scoped_ptr.hpp>",
+        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/scoped_ptr.hpp>"
       }
     },
     {
@@ -59,7 +65,9 @@
         "yarn.type_parameters.always_in_heap": false,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/optional.hpp>",
-        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>"
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/optional.hpp>",
+        "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/optional.hpp>"
       }
     },
     {
@@ -72,6 +80,8 @@
         "yarn.type_parameters.variable_number_of_parameters": true,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/variant.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/variant.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/serialization/variant.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/serialization/variant.hpp>",
         "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
         "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
@@ -87,7 +97,8 @@
       },
       "meta_type": "object",
       "annotation": {
-        "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
+        "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
       }
     },
     {
@@ -97,7 +108,8 @@
       },
       "meta_type": "object",
       "annotation": {
-        "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
+        "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
       }
     },
     {
@@ -107,7 +119,8 @@
       },
       "meta_type": "object",
       "annotation": {
-        "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
+        "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
       }
     },
     {
@@ -121,7 +134,9 @@
         "quilt.cpp.streaming.string_conversion_method": "generic_string()",
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/filesystem/path.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "\"dogen/utility/serialization/path.hpp\"",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "\"dogen/utility/serialization/path.hpp\"",
         "quilt.cpp.test_data.class_header.primary_inclusion_directive": "<sstream>",
         "quilt.cpp.test_data.primitive_header.primary_inclusion_directive": "<sstream>"
       }
@@ -136,6 +151,7 @@
         "quilt.cpp.helper.family": "BoostDate",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
         "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
         "quilt.cpp.io.class_implementation.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
@@ -152,10 +168,12 @@
         "quilt.cpp.helper.family": "BoostPTime",
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
-        "quilt.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
-        "quilt.cpp.io.class_implementation.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
+        "quilt.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
+        "quilt.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",        "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
       }
     },
     {
@@ -169,8 +187,11 @@
         "quilt.cpp.streaming.requires_quoting": true,
         "quilt.cpp.aspect.requires_manual_move_constructor": true,
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
+        "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time_types.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
+        "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
       }
     },
     {
