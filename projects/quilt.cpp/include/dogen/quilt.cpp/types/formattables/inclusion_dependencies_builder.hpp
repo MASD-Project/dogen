@@ -49,10 +49,8 @@ class inclusion_dependencies_builder {
 public:
     // FIXME: temporary hack to handle special includes.
     struct special_includes {
-        special_includes() : has_path(false), has_date(false),
-                             has_ptime(false) {}
+        special_includes() : has_date(false), has_ptime(false) {}
 
-        bool has_path;
         bool has_date;
         bool has_ptime;
     };

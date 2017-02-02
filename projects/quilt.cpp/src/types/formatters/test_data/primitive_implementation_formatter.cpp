@@ -90,11 +90,6 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
     builder.add(p.name(), traits::primitive_header_archetype());
-
-    // const auto si(builder.make_special_includes(o));
-    // if (si.has_path)
-    //    builder.add(inclusion_constants::std::sstream());
-
     return builder.build();
 }
 
