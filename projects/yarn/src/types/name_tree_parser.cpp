@@ -19,6 +19,7 @@
  *
  */
 #define BOOST_SPIRIT_USE_PHOENIX_V3
+//#define BOOST_SPIRIT_DEBUG
 #include <functional>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
@@ -85,8 +86,9 @@ const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 template<typename Iterator>
 struct grammar : qi::grammar<Iterator> {
     std::shared_ptr<name_tree_builder> builder;
+    qi::rule<Iterator> match_signable_builtin;
     qi::rule<Iterator, std::string()> name_tree, name, nondigit, alphanum,
-        builtin, signable_builtin;
+        builtin;
     qi::rule<Iterator> identifier, scope_operator, type_name, template_id,
         templated_name, template_argument_list, template_argument;
 
@@ -144,21 +146,22 @@ struct grammar : qi::grammar<Iterator> {
 
         name_tree = name[add_name_tree_]
             >> *(scope_operator >> name[add_name_tree_]);
-        signable_builtin =
-            -(string("unsigned") >> string(" ")) >>
+        match_signable_builtin =
+            -(distinct::keyword["unsigned"] >> ' ') >>
             (
-                distinct::keyword[string("short")] |
-                distinct::keyword[string("wchar_t")] |
-                distinct::keyword[string("char")] |
-                distinct::keyword[string("int")] |
-                (
-                    string("long") >> -(string(" ") >> string("long"))));
-        builtin =
-            distinct::keyword[string("bool")] |
-            signable_builtin |
-            distinct::keyword[string("float")] |
-            distinct::keyword[string("double")] |
-            distinct::keyword[string("void")];
+                distinct::keyword["short"] |
+                distinct::keyword["wchar_t"] |
+                distinct::keyword["char"] |
+                distinct::keyword["int"] |
+                distinct::keyword["long"] >> -(' ' >> distinct::keyword["long"])
+            );
+        builtin = qi::raw [
+            distinct::keyword["bool"] |
+            match_signable_builtin |
+            distinct::keyword["float"] |
+            distinct::keyword["double"] |
+            distinct::keyword["void"]
+        ];
         type_name %= builtin[add_builtin_] |
             (name_tree >> -(templated_name));
 
@@ -177,6 +180,21 @@ struct grammar : qi::grammar<Iterator> {
                 << val("\"")
                 << std::endl
                 );
+
+        using qi::debug;
+        BOOST_SPIRIT_DEBUG_NODE(name_tree);
+        BOOST_SPIRIT_DEBUG_NODE(name);
+        BOOST_SPIRIT_DEBUG_NODE(nondigit);
+        BOOST_SPIRIT_DEBUG_NODE(alphanum);
+        BOOST_SPIRIT_DEBUG_NODE(builtin);
+        BOOST_SPIRIT_DEBUG_NODE(match_signable_builtin);
+        BOOST_SPIRIT_DEBUG_NODE(identifier);
+        BOOST_SPIRIT_DEBUG_NODE(scope_operator);
+        BOOST_SPIRIT_DEBUG_NODE(type_name);
+        BOOST_SPIRIT_DEBUG_NODE(template_id);
+        BOOST_SPIRIT_DEBUG_NODE(templated_name);
+        BOOST_SPIRIT_DEBUG_NODE(template_argument_list);
+        BOOST_SPIRIT_DEBUG_NODE(template_argument);
     }
 };
 
