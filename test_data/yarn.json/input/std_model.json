@@ -333,6 +333,20 @@
     },
     {
       "name": {
+        "simple": "class_k"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "string_primitive"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "derived"
       },
       "meta_type": "object",
@@ -414,6 +428,16 @@
           }
         }
       ]
+    },
+    {
+      "name": {
+        "simple": "string_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying string.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "std::string"
+      }
     }
   ]
 }

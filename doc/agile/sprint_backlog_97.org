@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-03 Fri 12:23]
+#+CAPTION: Clock summary at [2017-02-03 Fri 12:55]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:18* |       |       | 100.0 |
+| *Total time*                                                                | *40:48* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:18   |       |       | 100.0 |
-| Active                                                                      |         | 40:18 |       | 100.0 |
+| Stories                                                                     | 40:48   |       |       | 100.0 |
+| Active                                                                      |         | 40:48 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.8 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  10.3 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  10.2 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.5 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  13.5 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  13.3 |
 | COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.1 |
 | COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.3 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  26.2 |
-| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   2.1 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 15:47 |  39.2 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  25.9 |
+| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   2.0 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 16:17 |  39.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -339,6 +339,8 @@ it with the existing parsers:
 - [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
 
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-02-03 Fri 12:48]--[2017-02-03 Fri 12:55] =>  0:07
+    CLOCK: [2017-02-03 Fri 12:24]--[2017-02-03 Fri 12:47] =>  0:23
     CLOCK: [2017-02-03 Fri 11:14]--[2017-02-03 Fri 12:23] =>  1:09
     CLOCK: [2017-02-03 Fri 11:00]--[2017-02-03 Fri 11:13] =>  0:13
     CLOCK: [2017-02-03 Fri 09:38]--[2017-02-03 Fri 10:59] =>  1:21

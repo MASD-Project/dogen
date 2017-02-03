@@ -18,27 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_HASH_ALL_HASH_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_HASH_ALL_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/test_models/std_model/hash/base_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_a_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_b_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_d_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_e_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_f_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_g_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_h_hash.hpp"
-#include "dogen/test_models/std_model/hash/class_j_hash.hpp"
 #include "dogen/test_models/std_model/hash/class_k_hash.hpp"
-#include "dogen/test_models/std_model/hash/derived_hash.hpp"
-#include "dogen/test_models/std_model/hash/builtins_hash.hpp"
-#include "dogen/test_models/std_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/test_models/std_model/hash/string_primitive_hash.hpp"
-#include "dogen/test_models/std_model/hash/enum_with_std_builtin_hash.hpp"
 
-#endif
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+}
+
+namespace dogen {
+namespace test_models {
+namespace std_model {
+
+std::size_t class_k_hasher::hash(const class_k& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.prop_0());
+    return seed;
+}
+
+} } }

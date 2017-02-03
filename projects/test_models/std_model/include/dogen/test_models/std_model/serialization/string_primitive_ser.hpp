@@ -18,28 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_SERIALIZATION_STRING_PRIMITIVE_SER_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_SERIALIZATION_STRING_PRIMITIVE_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/std_model/types/base.hpp"
-#include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/class_b.hpp"
-#include "dogen/test_models/std_model/types/class_d.hpp"
-#include "dogen/test_models/std_model/types/class_e.hpp"
-#include "dogen/test_models/std_model/types/class_f.hpp"
-#include "dogen/test_models/std_model/types/class_g.hpp"
-#include "dogen/test_models/std_model/types/class_h.hpp"
-#include "dogen/test_models/std_model/types/class_j.hpp"
-#include "dogen/test_models/std_model/types/class_k.hpp"
-#include "dogen/test_models/std_model/types/derived.hpp"
-#include "dogen/test_models/std_model/types/builtins.hpp"
-#include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
-#include "dogen/test_models/std_model/types/some_service.hpp"
+#include <boost/serialization/split_free.hpp>
 #include "dogen/test_models/std_model/types/string_primitive.hpp"
-#include "dogen/test_models/std_model/types/enum_with_std_builtin.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::test_models::std_model::string_primitive)
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::test_models::std_model::string_primitive& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::test_models::std_model::string_primitive& v, unsigned int version);
+
+} }
 
 #endif

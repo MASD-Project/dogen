@@ -34,9 +34,11 @@
 #include "dogen/test_models/std_model/test_data/class_g_td.hpp"
 #include "dogen/test_models/std_model/test_data/class_h_td.hpp"
 #include "dogen/test_models/std_model/test_data/class_j_td.hpp"
+#include "dogen/test_models/std_model/test_data/class_k_td.hpp"
 #include "dogen/test_models/std_model/test_data/derived_td.hpp"
 #include "dogen/test_models/std_model/test_data/builtins_td.hpp"
 #include "dogen/test_models/std_model/test_data/pkg1/class_c_td.hpp"
+#include "dogen/test_models/std_model/test_data/string_primitive_td.hpp"
 #include "dogen/test_models/std_model/test_data/enum_with_std_builtin_td.hpp"
 
 #endif

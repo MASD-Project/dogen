@@ -18,27 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_IO_ALL_IO_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_IO_ALL_IO_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include "dogen/test_models/std_model/io/base_io.hpp"
-#include "dogen/test_models/std_model/io/class_a_io.hpp"
-#include "dogen/test_models/std_model/io/class_b_io.hpp"
-#include "dogen/test_models/std_model/io/class_d_io.hpp"
-#include "dogen/test_models/std_model/io/class_e_io.hpp"
-#include "dogen/test_models/std_model/io/class_f_io.hpp"
-#include "dogen/test_models/std_model/io/class_g_io.hpp"
-#include "dogen/test_models/std_model/io/class_h_io.hpp"
-#include "dogen/test_models/std_model/io/class_j_io.hpp"
+#include <ostream>
 #include "dogen/test_models/std_model/io/class_k_io.hpp"
-#include "dogen/test_models/std_model/io/derived_io.hpp"
-#include "dogen/test_models/std_model/io/builtins_io.hpp"
-#include "dogen/test_models/std_model/io/pkg1/class_c_io.hpp"
 #include "dogen/test_models/std_model/io/string_primitive_io.hpp"
-#include "dogen/test_models/std_model/io/enum_with_std_builtin_io.hpp"
 
-#endif
+namespace dogen {
+namespace test_models {
+namespace std_model {
+
+std::ostream& operator<<(std::ostream& s, const class_k& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::test_models::std_model::class_k\"" << ", "
+      << "\"prop_0\": " << v.prop_0()
+      << " }";
+    return(s);
+}
+
+} } }

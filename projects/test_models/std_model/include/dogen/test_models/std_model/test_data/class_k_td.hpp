@@ -18,28 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_TEST_DATA_CLASS_K_TD_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_TEST_DATA_CLASS_K_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/std_model/types/base.hpp"
-#include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/class_b.hpp"
-#include "dogen/test_models/std_model/types/class_d.hpp"
-#include "dogen/test_models/std_model/types/class_e.hpp"
-#include "dogen/test_models/std_model/types/class_f.hpp"
-#include "dogen/test_models/std_model/types/class_g.hpp"
-#include "dogen/test_models/std_model/types/class_h.hpp"
-#include "dogen/test_models/std_model/types/class_j.hpp"
 #include "dogen/test_models/std_model/types/class_k.hpp"
-#include "dogen/test_models/std_model/types/derived.hpp"
-#include "dogen/test_models/std_model/types/builtins.hpp"
-#include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
-#include "dogen/test_models/std_model/types/some_service.hpp"
-#include "dogen/test_models/std_model/types/string_primitive.hpp"
-#include "dogen/test_models/std_model/types/enum_with_std_builtin.hpp"
+
+namespace dogen {
+namespace test_models {
+namespace std_model {
+
+class class_k_generator {
+public:
+    class_k_generator();
+
+public:
+    typedef dogen::test_models::std_model::class_k result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
+
+} } }
 
 #endif

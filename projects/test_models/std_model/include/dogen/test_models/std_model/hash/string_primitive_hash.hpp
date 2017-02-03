@@ -18,28 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_TYPES_ALL_HPP
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_HASH_STRING_PRIMITIVE_HASH_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_HASH_STRING_PRIMITIVE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/std_model/types/base.hpp"
-#include "dogen/test_models/std_model/types/class_a.hpp"
-#include "dogen/test_models/std_model/types/class_b.hpp"
-#include "dogen/test_models/std_model/types/class_d.hpp"
-#include "dogen/test_models/std_model/types/class_e.hpp"
-#include "dogen/test_models/std_model/types/class_f.hpp"
-#include "dogen/test_models/std_model/types/class_g.hpp"
-#include "dogen/test_models/std_model/types/class_h.hpp"
-#include "dogen/test_models/std_model/types/class_j.hpp"
-#include "dogen/test_models/std_model/types/class_k.hpp"
-#include "dogen/test_models/std_model/types/derived.hpp"
-#include "dogen/test_models/std_model/types/builtins.hpp"
-#include "dogen/test_models/std_model/types/pkg1/class_c.hpp"
-#include "dogen/test_models/std_model/types/some_service.hpp"
+#include <functional>
 #include "dogen/test_models/std_model/types/string_primitive.hpp"
-#include "dogen/test_models/std_model/types/enum_with_std_builtin.hpp"
 
+namespace dogen {
+namespace test_models {
+namespace std_model {
+
+struct string_primitive_hasher {
+public:
+    static std::size_t hash(const string_primitive& v);
+};
+
+} } }
+
+namespace std {
+
+template<>
+struct hash<dogen::test_models::std_model::string_primitive> {
+public:
+    size_t operator()(const dogen::test_models::std_model::string_primitive& v) const {
+        return dogen::test_models::std_model::string_primitive_hasher::hash(v);
+    }
+};
+
+}
 #endif

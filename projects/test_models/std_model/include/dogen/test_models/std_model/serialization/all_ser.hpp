@@ -34,9 +34,11 @@
 #include "dogen/test_models/std_model/serialization/class_g_ser.hpp"
 #include "dogen/test_models/std_model/serialization/class_h_ser.hpp"
 #include "dogen/test_models/std_model/serialization/class_j_ser.hpp"
+#include "dogen/test_models/std_model/serialization/class_k_ser.hpp"
 #include "dogen/test_models/std_model/serialization/derived_ser.hpp"
 #include "dogen/test_models/std_model/serialization/builtins_ser.hpp"
 #include "dogen/test_models/std_model/serialization/pkg1/class_c_ser.hpp"
+#include "dogen/test_models/std_model/serialization/string_primitive_ser.hpp"
 #include "dogen/test_models/std_model/serialization/enum_with_std_builtin_ser.hpp"
 
 #endif

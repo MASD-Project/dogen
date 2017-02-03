@@ -18,27 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_STD_MODEL_ODB_ALL_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_STD_MODEL_ODB_ALL_PRAGMAS_HPP
+#ifndef DOGEN_TEST_MODELS_STD_MODEL_ODB_CLASS_K_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_STD_MODEL_ODB_CLASS_K_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/std_model/odb/base_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_a_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_b_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_d_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_e_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_f_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_g_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_h_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_j_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/class_k_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/derived_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/builtins_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/pkg1/class_c_pragmas.hpp"
+#include "dogen/test_models/std_model/types/class_k.hpp"
 #include "dogen/test_models/std_model/odb/string_primitive_pragmas.hpp"
-#include "dogen/test_models/std_model/odb/enum_with_std_builtin_pragmas.hpp"
+
+// class has no ODB pragmas defined.
 
 #endif
