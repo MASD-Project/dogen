@@ -13,23 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-02 Thu 23:38]
+#+CAPTION: Clock summary at [2017-02-03 Fri 10:31]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:10* |       |       | 100.0 |
+| *Total time*                                                                | *37:35* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:10   |       |       | 100.0 |
-| Active                                                                      |         | 36:10 |       | 100.0 |
+| Stories                                                                     | 37:35   |       |       | 100.0 |
+| Active                                                                      |         | 37:35 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   2.0 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  11.5 |
-| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.6 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  15.0 |
-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.5 |
-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.7 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  29.2 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 12:29 |  34.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.9 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  11.1 |
+| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.5 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  14.5 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.3 |
+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.5 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  28.1 |
+| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   2.2 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 13:04 |  34.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -313,7 +314,32 @@ Tasks:
 - add =inclusion_directive.auxiliary=;
 - change code to also include auxiliary directives.
 
+*** POSTPONED Partial matching of built-ins doesn't work for certain types :story:
+    CLOSED: [2017-02-03 Fri 10:29]
+    CLOCK: [2017-02-03 Fri 09:37]--[2017-02-03 Fri 10:27] =>  0:50
+
+We introduced a fix that allows users to create types that partially
+match built-ins types such as =in= or =integer=. The fix was copied
+from the spirit documentation:
+
+[[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
+- [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
+
+However, we still haven't solved the following cases:
+
+: BOOST_CHECK(test_builtin("longer"));
+: BOOST_CHECK(test_builtin("unsigneder"));
+
+As these are not so common they have been left for later.
+
+Seems like the thing to do here is to create a keyword parser and nest
+it with the existing parsers:
+
+- [[http://stackoverflow.com/questions/21960167/prevent-the-boost-spirit-symbol-parser-from-accepting-a-keyword-too-early][Prevent the Boost Spirit Symbol parser from accepting a keyword too early]]
+- [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
+
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-02-03 Fri 09:02]--[2017-02-03 Fri 09:37] =>  0:35
     CLOCK: [2017-02-02 Thu 23:24]--[2017-02-02 Thu 23:38] =>  0:14
     CLOCK: [2017-02-01 Wed 14:02]--[2017-02-01 Wed 15:08] =>  1:06
     CLOCK: [2017-02-01 Wed 11:40]--[2017-02-01 Wed 12:01] =>  0:21

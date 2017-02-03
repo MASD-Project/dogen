@@ -55,17 +55,17 @@ name_tree_builder::name_tree_builder(
 
     current_ = root_;
     BOOST_LOG_SEV(lg, debug) << "Initialised with inputs:";
-    BOOST_LOG_SEV(lg, debug) << " modules: " << top_level_modules_;
-    BOOST_LOG_SEV(lg, debug) << " location: " << model_location_;
+    BOOST_LOG_SEV(lg, debug) << "modules: " << top_level_modules_;
+    BOOST_LOG_SEV(lg, debug) << "location: " << model_location_;
 }
 
 void name_tree_builder::add_name(const std::string& s) {
-    BOOST_LOG_SEV(lg, debug) << "Pushing back name: " << s;
+    BOOST_LOG_SEV(lg, debug) << "Pushing back name: '" << s << "'";
     names_.push_back(s);
 }
 
 void name_tree_builder::add_builtin(const std::string& s) {
-    BOOST_LOG_SEV(lg, debug) << "Pushing back builtin :" << s;
+    BOOST_LOG_SEV(lg, debug) << "Pushing back builtin: '" << s << "'";
 
     name_builder b;
     b.simple_name(s);

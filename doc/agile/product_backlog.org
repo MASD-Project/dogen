@@ -2733,6 +2733,28 @@ code generation, e.g. =--validate= or something along those lines.
 We are interested in performing the parsing. This would be useful for
 example for a flymake mode in emacs.
 
+*** Partial matching of built-ins doesn't work for certain types      :story:
+
+We introduced a fix that allows users to create types that partially
+match built-ins types such as =in= or =integer=. The fix was copied
+from the spirit documentation:
+
+[[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
+- [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
+
+However, we still haven't solved the following cases:
+
+: BOOST_CHECK(test_builtin("longer"));
+: BOOST_CHECK(test_builtin("unsigneder"));
+
+As these are not so common they have been left for later.
+
+Seems like the thing to do here is to create a keyword parser and nest
+it with the existing parsers:
+
+- [[http://stackoverflow.com/questions/21960167/prevent-the-boost-spirit-symbol-parser-from-accepting-a-keyword-too-early][Prevent the Boost Spirit Symbol parser from accepting a keyword too early]]
+- [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
+
 *** Add a property for the model name as dynamic extensions           :story:
 
 #+begin_quote
@@ -2758,22 +2780,6 @@ dynamic models.
 
 We should issue a warning if a user defines methods in value or entity
 objects as its most likely by mistake.
-
-*** Partial matching of built-ins doesn't work for certain types      :story:
-
-We introduced a fix that allows users to create types that partially
-match built-ins types such as =in= or =integer=. The fix was copied
-from the spirit documentation:
-
-[[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
-- [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
-
-However, we still haven't solved the following cases:
-
-: BOOST_CHECK(test_builtin("longer"));
-: BOOST_CHECK(test_builtin("unsigneder"));
-
-As these are not so common they have been left for later.
 
 *** Shared pointer to vector fails to build                           :story:
 
