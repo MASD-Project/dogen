@@ -87,7 +87,6 @@
         "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
         "quilt.cpp.hash.class_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>",
         "quilt.cpp.hash.primitive_header.primary_inclusion_directive": "<boost/variant/apply_visitor.hpp>"
-
       }
     },
     {
@@ -172,7 +171,8 @@
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
         "quilt.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
         "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/time_serialize.hpp>",
-        "quilt.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",        "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "quilt.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
+        "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>",
         "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/posix_time/posix_time.hpp>"
       }
     },

@@ -17,7 +17,6 @@
         "quilt.cpp.aspect.requires_stream_manipulators": true,
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
         "quilt.cpp.io.builtin_header.primary_inclusion_directive": "<boost/io/ios_state.hpp>"
-
       }
     },
     {
