@@ -32,8 +32,12 @@
 #include "dogen/test_models/boost_model/test_data/class_f_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_g_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_h_td.hpp"
+#include "dogen/test_models/boost_model/test_data/class_j_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_base_td.hpp"
 #include "dogen/test_models/boost_model/test_data/pkg1/class_c_td.hpp"
 #include "dogen/test_models/boost_model/test_data/class_derived_td.hpp"
+#include "dogen/test_models/boost_model/test_data/date_primitive_td.hpp"
+#include "dogen/test_models/boost_model/test_data/ptime_primitive_td.hpp"
+#include "dogen/test_models/boost_model/test_data/time_duration_primitive_td.hpp"
 
 #endif

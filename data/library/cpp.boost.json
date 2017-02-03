@@ -152,9 +152,11 @@
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian_types.hpp>",
         "quilt.cpp.io.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
-        "quilt.cpp.io.class_implementation.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
+        "quilt.cpp.io.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
         "quilt.cpp.serialization.class_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
-        "quilt.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>"
+        "quilt.cpp.serialization.class_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>",
+        "quilt.cpp.serialization.primitive_header.primary_inclusion_directive": "<boost/date_time/gregorian/greg_serialize.hpp>",
+        "quilt.cpp.serialization.primitive_header.secondary_inclusion_directive": "<boost/date_time/gregorian/gregorian.hpp>"
       }
     },
     {

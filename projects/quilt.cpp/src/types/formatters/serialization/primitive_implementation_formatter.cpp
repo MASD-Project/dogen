@@ -85,11 +85,11 @@ boost::filesystem::path primitive_implementation_formatter::full_path(
 std::list<std::string> primitive_implementation_formatter::inclusion_dependencies(
     const formattables::inclusion_dependencies_builder_factory& f,
     const yarn::element& e) const {
-    const auto& o(assistant::as<yarn::primitive>(static_artefact(), e));
+    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
 
-    const auto ch_fn(traits::primitive_header_archetype());
-    builder.add(o.name(), ch_fn);
+    const auto ph_fn(traits::primitive_header_archetype());
+    builder.add(p.name(), ph_fn);
 
     using ic = inclusion_constants;
     builder.add(ic::boost::archive::text_iarchive());
@@ -103,6 +103,9 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
     builder.add(ic::boost::serialization::nvp());
     builder.add(ic::boost::archive::xml_iarchive());
     builder.add(ic::boost::archive::xml_oarchive());
+
+    const auto carch(traits::canonical_archetype());
+    builder.add(p.value_attribute().parsed_type().current(), carch);
 
     return builder.build();
 }

@@ -28,8 +28,8 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 
     const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
     auto builder(f.make());
-    const auto ch_fn(traits::primitive_header_archetype());
-    builder.add(p.name(), ch_fn);
+    const auto ph_fn(traits::primitive_header_archetype());
+    builder.add(p.name(), ph_fn);
 
     const auto io_carch(formatters::io::traits::canonical_archetype());
     const auto self_fn(primitive_implementation_formatter::static_artefact());
@@ -40,6 +40,7 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 
     const auto os(inclusion_constants::std::ostream());
     builder.add(os);
+    builder.add(p.value_attribute().parsed_type().current(), io_carch);
 
     return builder.build();
 }

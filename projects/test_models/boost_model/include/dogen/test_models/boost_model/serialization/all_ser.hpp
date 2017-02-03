@@ -32,8 +32,12 @@
 #include "dogen/test_models/boost_model/serialization/class_f_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_g_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_h_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/class_j_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_base_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/pkg1/class_c_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/class_derived_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/date_primitive_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/ptime_primitive_ser.hpp"
+#include "dogen/test_models/boost_model/serialization/time_duration_primitive_ser.hpp"
 
 #endif

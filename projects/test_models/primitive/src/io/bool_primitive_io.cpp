@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include "dogen/test_models/primitive/io/bool_primitive_io.hpp"
 
 namespace dogen {

@@ -138,15 +138,36 @@ a.stream() << std::endl;
             /*
              * Getters and setters
              */
+             if (attr.parsed_type().is_current_simple_type()) {
 a.stream() << a.get_qualified_name(attr.parsed_type()) << " " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
 a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
-            if (!p.is_immutable()) {
+                if (!p.is_immutable()) {
 a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << " v) {" << std::endl;
 a.stream() << "    " << a.make_member_variable_name(attr) << " = v;" << std::endl;
 a.stream() << "}" << std::endl;
 a.stream() << std::endl;
+                }
+            } else {
+a.stream() << "const " << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() const {" << std::endl;
+a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
+a.stream() << "}" << std::endl;
+                if (!p.is_immutable()) {
+a.stream() << std::endl;
+a.stream() << a.get_qualified_name(attr.parsed_type()) << "& " << sn << "::" << attr.name().simple() << "() {" << std::endl;
+a.stream() << "    return " << a.make_member_variable_name(attr) << ";" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "& v) {" << std::endl;
+a.stream() << "    " << a.make_member_variable_name(attr) << " = v;" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+a.stream() << "void " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
+a.stream() << "    " << a.make_member_variable_name(attr) << " = std::move(v);" << std::endl;
+a.stream() << "}" << std::endl;
+a.stream() << std::endl;
+                }
             }
 
             /*

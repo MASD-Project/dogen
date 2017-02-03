@@ -32,8 +32,12 @@
 #include "dogen/test_models/boost_model/odb/class_f_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/class_g_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/class_h_pragmas.hpp"
+#include "dogen/test_models/boost_model/odb/class_j_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/class_base_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/pkg1/class_c_pragmas.hpp"
 #include "dogen/test_models/boost_model/odb/class_derived_pragmas.hpp"
+#include "dogen/test_models/boost_model/odb/date_primitive_pragmas.hpp"
+#include "dogen/test_models/boost_model/odb/ptime_primitive_pragmas.hpp"
+#include "dogen/test_models/boost_model/odb/time_duration_primitive_pragmas.hpp"
 
 #endif

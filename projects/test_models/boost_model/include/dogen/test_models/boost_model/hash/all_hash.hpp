@@ -32,8 +32,12 @@
 #include "dogen/test_models/boost_model/hash/class_f_hash.hpp"
 #include "dogen/test_models/boost_model/hash/class_g_hash.hpp"
 #include "dogen/test_models/boost_model/hash/class_h_hash.hpp"
+#include "dogen/test_models/boost_model/hash/class_j_hash.hpp"
 #include "dogen/test_models/boost_model/hash/class_base_hash.hpp"
 #include "dogen/test_models/boost_model/hash/pkg1/class_c_hash.hpp"
 #include "dogen/test_models/boost_model/hash/class_derived_hash.hpp"
+#include "dogen/test_models/boost_model/hash/date_primitive_hash.hpp"
+#include "dogen/test_models/boost_model/hash/ptime_primitive_hash.hpp"
+#include "dogen/test_models/boost_model/hash/time_duration_primitive_hash.hpp"
 
 #endif

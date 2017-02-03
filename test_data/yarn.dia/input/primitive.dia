@@ -235,13 +235,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="36,13"/>
+        <dia:point val="3,53"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,12.95;45.79,23.85"/>
+        <dia:rectangle val="2.95,52.95;12.79,63.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="36,13"/>
+        <dia:point val="3,53"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.7400000000000002"/>

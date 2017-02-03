@@ -32,8 +32,12 @@
 #include "dogen/test_models/boost_model/io/class_f_io.hpp"
 #include "dogen/test_models/boost_model/io/class_g_io.hpp"
 #include "dogen/test_models/boost_model/io/class_h_io.hpp"
+#include "dogen/test_models/boost_model/io/class_j_io.hpp"
 #include "dogen/test_models/boost_model/io/class_base_io.hpp"
 #include "dogen/test_models/boost_model/io/pkg1/class_c_io.hpp"
 #include "dogen/test_models/boost_model/io/class_derived_io.hpp"
+#include "dogen/test_models/boost_model/io/date_primitive_io.hpp"
+#include "dogen/test_models/boost_model/io/ptime_primitive_io.hpp"
+#include "dogen/test_models/boost_model/io/time_duration_primitive_io.hpp"
 
 #endif

@@ -203,17 +203,800 @@
 		<item_version>0</item_version>
 	</enumerations>
 	<primitives class_id="32" tracking_level="0" version="0">
-		<count>0</count>
-		<bucket_count>1</bucket_count>
+		<count>3</count>
+		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
+		<item class_id="33" tracking_level="0" version="0">
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;date_primitive&gt;</first>
+			<second class_id="11" tracking_level="1" version="0" object_id="_2">
+				<element>
+					<documentation>Test a primitive with an underlying time_duration.
+</documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;date_primitive&gt;</id>
+						<simple>date_primitive</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::boost_model::date_primitive</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.boost_model.date_primitive</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>boost_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_boost_model_date_primitive</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<is_nullable>0</is_nullable>
+				<value_attribute class_id="34" tracking_level="0" version="0">
+					<documentation></documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id></id>
+						<simple></simple>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_modules>
+							<model_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable></identifiable>
+					</name>
+					<unparsed_type></unparsed_type>
+					<parsed_type class_id="35" tracking_level="0" version="0">
+						<current>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</current>
+						<children class_id="36" tracking_level="0" version="0">
+							<count>0</count>
+							<item_version>0</item_version>
+						</children>
+						<are_children_opaque>0</are_children_opaque>
+						<is_circular_dependency>0</is_circular_dependency>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<identifiable></identifiable>
+						<is_current_simple_type>0</is_current_simple_type>
+						<is_floating_point>0</is_floating_point>
+					</parsed_type>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+				</value_attribute>
+				<use_type_aliasing>0</use_type_aliasing>
+				<is_immutable>0</is_immutable>
+			</second>
+		</item>
+		<item>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;time_duration_primitive&gt;</first>
+			<second object_id="_3">
+				<element>
+					<documentation>Test a primitive with an underlying time_duration.
+</documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;time_duration_primitive&gt;</id>
+						<simple>time_duration_primitive</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::boost_model::time_duration_primitive</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.boost_model.time_duration_primitive</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>boost_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_boost_model_time_duration_primitive</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<is_nullable>0</is_nullable>
+				<value_attribute>
+					<documentation></documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id></id>
+						<simple></simple>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_modules>
+							<model_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable></identifiable>
+					</name>
+					<unparsed_type></unparsed_type>
+					<parsed_type>
+						<current>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</current>
+						<children>
+							<count>0</count>
+							<item_version>0</item_version>
+						</children>
+						<are_children_opaque>0</are_children_opaque>
+						<is_circular_dependency>0</is_circular_dependency>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<identifiable></identifiable>
+						<is_current_simple_type>0</is_current_simple_type>
+						<is_floating_point>0</is_floating_point>
+					</parsed_type>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+				</value_attribute>
+				<use_type_aliasing>0</use_type_aliasing>
+				<is_immutable>0</is_immutable>
+			</second>
+		</item>
+		<item>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;ptime_primitive&gt;</first>
+			<second object_id="_4">
+				<element>
+					<documentation>Test a primitive with an underlying ptime.
+</documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;ptime_primitive&gt;</id>
+						<simple>ptime_primitive</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::boost_model::ptime_primitive</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.boost_model.ptime_primitive</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>boost_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_boost_model_ptime_primitive</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<is_nullable>0</is_nullable>
+				<value_attribute>
+					<documentation></documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id></id>
+						<simple></simple>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_modules>
+							<model_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable></identifiable>
+					</name>
+					<unparsed_type></unparsed_type>
+					<parsed_type>
+						<current>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</current>
+						<children>
+							<count>0</count>
+							<item_version>0</item_version>
+						</children>
+						<are_children_opaque>0</are_children_opaque>
+						<is_circular_dependency>0</is_circular_dependency>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<identifiable></identifiable>
+						<is_current_simple_type>0</is_current_simple_type>
+						<is_floating_point>0</is_floating_point>
+					</parsed_type>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+				</value_attribute>
+				<use_type_aliasing>0</use_type_aliasing>
+				<is_immutable>0</is_immutable>
+			</second>
+		</item>
 	</primitives>
-	<objects class_id="33" tracking_level="0" version="0">
-		<count>11</count>
+	<objects class_id="37" tracking_level="0" version="0">
+		<count>12</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="34" tracking_level="0" version="0">
+		<item class_id="38" tracking_level="0" version="0">
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_j&gt;</first>
+			<second class_id="10" tracking_level="1" version="0" object_id="_5">
+				<element>
+					<documentation></documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_j&gt;</id>
+						<simple>class_j</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::boost_model::class_j</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.boost_model.class_j</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>boost_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_boost_model_class_j</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<all_attributes class_id="39" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_attributes>
+				<local_attributes>
+					<count>3</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<name>
+							<id></id>
+							<simple>prop_0</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<unparsed_type>ptime_primitive</unparsed_type>
+						<parsed_type>
+							<current>
+								<id></id>
+								<simple></simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</current>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<identifiable></identifiable>
+							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
+						</parsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<name>
+							<id></id>
+							<simple>prop_1</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<unparsed_type>time_duration_primitive</unparsed_type>
+						<parsed_type>
+							<current>
+								<id></id>
+								<simple></simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</current>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<identifiable></identifiable>
+							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
+						</parsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+					<item>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<name>
+							<id></id>
+							<simple>prop_2</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<unparsed_type>date_primitive</unparsed_type>
+						<parsed_type>
+							<current>
+								<id></id>
+								<simple></simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</current>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<identifiable></identifiable>
+							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
+						</parsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+					</item>
+				</local_attributes>
+				<inherited_attributes class_id="40" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_attributes>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
+				<is_child>0</is_child>
+				<is_leaf>0</is_leaf>
+				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<transparent_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</transparent_associations>
+				<opaque_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</opaque_associations>
+				<base_visitor>
+					<initialized>0</initialized>
+				</base_visitor>
+				<derived_visitor>
+					<initialized>0</initialized>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
+				<type_parameters class_id="41" tracking_level="0" version="0">
+					<variable_number_of_parameters>0</variable_number_of_parameters>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameters>
+				<object_type>0</object_type>
+				<modeled_concepts>
+					<count>0</count>
+					<item_version>0</item_version>
+				</modeled_concepts>
+				<associative_container_keys>
+					<count>0</count>
+					<item_version>0</item_version>
+				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
+				<can_be_primitive_underlier>0</can_be_primitive_underlier>
+			</second>
+		</item>
+		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_h&gt;</first>
-			<second class_id="10" tracking_level="1" version="0" object_id="_2">
+			<second object_id="_6">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -270,14 +1053,14 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="35" tracking_level="0" version="0">
+				<all_attributes>
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="36" tracking_level="0" version="0">
+					<item>
 						<documentation></documentation>
 						<annotation>
 							<entries>
@@ -312,7 +1095,7 @@
 							<identifiable></identifiable>
 						</name>
 						<unparsed_type>boost::property_tree::ptree</unparsed_type>
-						<parsed_type class_id="37" tracking_level="0" version="0">
+						<parsed_type>
 							<current>
 								<id></id>
 								<simple></simple>
@@ -337,7 +1120,7 @@
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="38" tracking_level="0" version="0">
+							<children>
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -355,7 +1138,7 @@
 						<is_fluent>0</is_fluent>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="39" tracking_level="0" version="0">
+				<inherited_attributes>
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -396,7 +1179,7 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters class_id="40" tracking_level="0" version="0">
+				<type_parameters>
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -416,7 +1199,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_base&gt;</first>
-			<second object_id="_3">
+			<second object_id="_7">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -619,7 +1402,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_derived&gt;</first>
-			<second object_id="_4">
+			<second object_id="_8">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -857,7 +1640,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_a&gt;</first>
-			<second object_id="_5">
+			<second object_id="_9">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -1060,7 +1843,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</first>
-			<second object_id="_6">
+			<second object_id="_10">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -1341,7 +2124,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_b&gt;</first>
-			<second object_id="_7">
+			<second object_id="_11">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -2006,7 +2789,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_d&gt;</first>
-			<second object_id="_8">
+			<second object_id="_12">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -2440,7 +3223,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_e&gt;</first>
-			<second object_id="_9">
+			<second object_id="_13">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -2874,7 +3657,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;some_service&gt;</first>
-			<second object_id="_10">
+			<second object_id="_14">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -3078,7 +3861,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_g&gt;</first>
-			<second object_id="_11">
+			<second object_id="_15">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -3358,7 +4141,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_f&gt;</first>
-			<second object_id="_12">
+			<second object_id="_16">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -3945,24 +4728,24 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="41" tracking_level="0" version="0">
+	<exceptions class_id="42" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="42" tracking_level="0" version="0">
+	<visitors class_id="43" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="43" tracking_level="0" version="0">
+	<injected_elements class_id="44" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="44" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="45" tracking_level="0" version="0">
+	<indices class_id="45" tracking_level="0" version="0">
+		<objects_always_in_heap class_id="46" tracking_level="0" version="0">
 			<count>0</count>
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
@@ -3972,18 +4755,93 @@
 			<bucket_count>1</bucket_count>
 			<item_version>0</item_version>
 		</elements_referable_by_attributes>
-		<scribble_groups class_id="46" tracking_level="0" version="0">
-			<count>1</count>
-			<bucket_count>2</bucket_count>
+		<scribble_groups class_id="47" tracking_level="0" version="0">
+			<count>4</count>
+			<bucket_count>5</bucket_count>
 			<item_version>0</item_version>
-			<item class_id="47" tracking_level="0" version="0">
+			<item class_id="48" tracking_level="0" version="0">
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;date_primitive&gt;</first>
+				<second class_id="49" tracking_level="0" version="0">
+					<parent class_id="50" tracking_level="0" version="0">
+						<entries class_id="51" tracking_level="0" version="0">
+							<count>1</count>
+							<item_version>0</item_version>
+							<item class_id="52" tracking_level="0" version="0">
+								<first>yarn.primitive.underlying_element</first>
+								<second>boost::gregorian::date</second>
+							</item>
+						</entries>
+						<scope>5</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
+					</parent>
+					<children class_id="53" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</children>
+				</second>
+			</item>
+			<item>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;time_duration_primitive&gt;</first>
+				<second>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.primitive.underlying_element</first>
+								<second>boost::posix_time::time_duration</second>
+							</item>
+						</entries>
+						<scope>5</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
+					</parent>
+					<children>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</children>
+				</second>
+			</item>
+			<item>
+				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;ptime_primitive&gt;</first>
+				<second>
+					<parent>
+						<entries>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>
+								<first>yarn.primitive.underlying_element</first>
+								<second>boost::posix_time::ptime</second>
+							</item>
+						</entries>
+						<scope>5</scope>
+						<candidate_labels>
+							<count>0</count>
+							<item_version>0</item_version>
+						</candidate_labels>
+					</parent>
+					<children>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</children>
+				</second>
+			</item>
+			<item>
 				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;</first>
-				<second class_id="48" tracking_level="0" version="0">
-					<parent class_id="49" tracking_level="0" version="0">
-						<entries class_id="50" tracking_level="0" version="0">
+				<second>
+					<parent>
+						<entries>
 							<count>6</count>
 							<item_version>0</item_version>
-							<item class_id="51" tracking_level="0" version="0">
+							<item>
 								<first>yarn.dia.comment</first>
 								<second>true</second>
 							</item>
@@ -4014,7 +4872,7 @@
 							<item_version>0</item_version>
 						</candidate_labels>
 					</parent>
-					<children class_id="52" tracking_level="0" version="0">
+					<children>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
@@ -4038,7 +4896,7 @@
 			<item_version>0</item_version>
 		</abstract_elements>
 	</indices>
-	<root_module object_id="_13">
+	<root_module object_id="_17">
 		<element>
 			<documentation></documentation>
 			<annotation>
@@ -4092,7 +4950,7 @@
 		<is_global_module>0</is_global_module>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="53" tracking_level="0" version="0">
+	<output_languages class_id="54" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>

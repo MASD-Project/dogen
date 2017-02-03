@@ -251,6 +251,32 @@
     },
     {
       "name": {
+        "simple": "class_j"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "ptime_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "time_duration_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "date_primitive"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "class_c",
         "internal_modules": "pkg1"
       },
@@ -292,6 +318,36 @@
         "simple": "pkg1"
       },
       "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "date_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying time_duration.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "boost::gregorian::date"
+      }
+    },
+    {
+      "name": {
+        "simple": "ptime_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying ptime.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "boost::posix_time::ptime"
+      }
+    },
+    {
+      "name": {
+        "simple": "time_duration_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying time_duration.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "boost::posix_time::time_duration"
+      }
     }
   ]
 }

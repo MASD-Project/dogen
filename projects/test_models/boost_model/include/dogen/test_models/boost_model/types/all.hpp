@@ -32,9 +32,13 @@
 #include "dogen/test_models/boost_model/types/class_f.hpp"
 #include "dogen/test_models/boost_model/types/class_g.hpp"
 #include "dogen/test_models/boost_model/types/class_h.hpp"
+#include "dogen/test_models/boost_model/types/class_j.hpp"
 #include "dogen/test_models/boost_model/types/class_base.hpp"
 #include "dogen/test_models/boost_model/types/pkg1/class_c.hpp"
 #include "dogen/test_models/boost_model/types/some_service.hpp"
 #include "dogen/test_models/boost_model/types/class_derived.hpp"
+#include "dogen/test_models/boost_model/types/date_primitive.hpp"
+#include "dogen/test_models/boost_model/types/ptime_primitive.hpp"
+#include "dogen/test_models/boost_model/types/time_duration_primitive.hpp"
 
 #endif
