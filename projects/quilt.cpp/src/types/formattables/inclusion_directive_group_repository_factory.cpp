@@ -381,10 +381,12 @@ make(const annotations::type_repository& atrp,
      */
     const auto afti(includible_formatters_by_type_index(frp));
     const auto tg(make_type_group(atrp, frp));
-    return make(tg, afti, l, formattables);
+    const auto r(make(tg, afti, l, formattables));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies "
                              << "group repository.";
+
+    return r;
 }
 
 } } } }
