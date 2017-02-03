@@ -26,7 +26,17 @@
 #endif
 
 #include "dogen/test_models/primitive/odb/consumer_pragmas.hpp"
-#include "dogen/test_models/primitive/odb/product_id_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/int_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/bool_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/char_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/uint_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/float_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/short_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/uchar_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/ulong_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/a_long_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/double_primitive_pragmas.hpp"
+#include "dogen/test_models/primitive/odb/ushort_primitive_pragmas.hpp"
 #include "dogen/test_models/primitive/odb/immutable_primitive_pragmas.hpp"
 
 #endif

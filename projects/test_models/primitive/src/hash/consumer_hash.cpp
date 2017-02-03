@@ -19,7 +19,17 @@
  *
  */
 #include "dogen/test_models/primitive/hash/consumer_hash.hpp"
-#include "dogen/test_models/primitive/hash/product_id_hash.hpp"
+#include "dogen/test_models/primitive/hash/int_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/bool_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/char_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/uint_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/float_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/short_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/uchar_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/ulong_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/a_long_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/double_primitive_hash.hpp"
+#include "dogen/test_models/primitive/hash/ushort_primitive_hash.hpp"
 
 namespace {
 
@@ -39,6 +49,17 @@ std::size_t consumer_hasher::hash(const consumer& v) {
     std::size_t seed(0);
 
     combine(seed, v.prop0());
+    combine(seed, v.prop1());
+    combine(seed, v.prop2());
+    combine(seed, v.prop3());
+    combine(seed, v.prop4());
+    combine(seed, v.prop5());
+    combine(seed, v.prop6());
+    combine(seed, v.prop7());
+    combine(seed, v.prop8());
+    combine(seed, v.prop9());
+    combine(seed, v.prop10());
+
     return seed;
 }
 

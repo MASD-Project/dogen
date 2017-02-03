@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-03 Fri 10:31]
+#+CAPTION: Clock summary at [2017-02-03 Fri 11:13]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:35* |       |       | 100.0 |
+| *Total time*                                                                | *39:09* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:35   |       |       | 100.0 |
-| Active                                                                      |         | 37:35 |       | 100.0 |
+| Stories                                                                     | 39:09   |       |       | 100.0 |
+| Active                                                                      |         | 39:09 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.9 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  11.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.8 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  10.6 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.5 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  14.5 |
-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.3 |
-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.5 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  28.1 |
-| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   2.2 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 13:04 |  34.8 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  13.9 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.2 |
+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.4 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  27.0 |
+| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   2.1 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 14:38 |  37.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -339,6 +339,8 @@ it with the existing parsers:
 - [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
 
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-02-03 Fri 11:00]--[2017-02-03 Fri 11:13] =>  0:13
+    CLOCK: [2017-02-03 Fri 09:38]--[2017-02-03 Fri 10:59] =>  1:21
     CLOCK: [2017-02-03 Fri 09:02]--[2017-02-03 Fri 09:37] =>  0:35
     CLOCK: [2017-02-02 Thu 23:24]--[2017-02-02 Thu 23:38] =>  0:14
     CLOCK: [2017-02-01 Wed 14:02]--[2017-02-01 Wed 15:08] =>  1:06

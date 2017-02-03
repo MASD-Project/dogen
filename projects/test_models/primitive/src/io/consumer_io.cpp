@@ -20,7 +20,17 @@
  */
 #include <ostream>
 #include "dogen/test_models/primitive/io/consumer_io.hpp"
-#include "dogen/test_models/primitive/io/product_id_io.hpp"
+#include "dogen/test_models/primitive/io/int_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/bool_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/char_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/uint_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/float_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/short_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/uchar_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/ulong_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/a_long_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/double_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/ushort_primitive_io.hpp"
 
 namespace dogen {
 namespace test_models {
@@ -29,7 +39,17 @@ namespace primitive {
 std::ostream& operator<<(std::ostream& s, const consumer& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::primitive::consumer\"" << ", "
-      << "\"prop0\": " << v.prop0()
+      << "\"prop0\": " << v.prop0() << ", "
+      << "\"prop1\": " << v.prop1() << ", "
+      << "\"prop2\": " << v.prop2() << ", "
+      << "\"prop3\": " << v.prop3() << ", "
+      << "\"prop4\": " << v.prop4() << ", "
+      << "\"prop5\": " << v.prop5() << ", "
+      << "\"prop6\": " << v.prop6() << ", "
+      << "\"prop7\": " << v.prop7() << ", "
+      << "\"prop8\": " << v.prop8() << ", "
+      << "\"prop9\": " << v.prop9() << ", "
+      << "\"prop10\": " << v.prop10()
       << " }";
     return(s);
 }

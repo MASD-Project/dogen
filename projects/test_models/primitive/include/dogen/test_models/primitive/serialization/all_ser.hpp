@@ -26,7 +26,17 @@
 #endif
 
 #include "dogen/test_models/primitive/serialization/consumer_ser.hpp"
-#include "dogen/test_models/primitive/serialization/product_id_ser.hpp"
+#include "dogen/test_models/primitive/serialization/int_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/bool_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/char_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/uint_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/float_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/short_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/uchar_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/ulong_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/a_long_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/double_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/ushort_primitive_ser.hpp"
 #include "dogen/test_models/primitive/serialization/immutable_primitive_ser.hpp"
 
 #endif

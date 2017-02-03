@@ -28,7 +28,17 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/test_models/primitive/serialization/consumer_ser.hpp"
-#include "dogen/test_models/primitive/serialization/product_id_ser.hpp"
+#include "dogen/test_models/primitive/serialization/int_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/bool_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/char_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/uint_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/float_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/short_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/uchar_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/ulong_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/a_long_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/double_primitive_ser.hpp"
+#include "dogen/test_models/primitive/serialization/ushort_primitive_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -38,6 +48,16 @@ void save(Archive& ar,
     const dogen::test_models::primitive::consumer& v,
     const unsigned int /*version*/) {
     ar << make_nvp("prop0", v.prop0_);
+    ar << make_nvp("prop1", v.prop1_);
+    ar << make_nvp("prop2", v.prop2_);
+    ar << make_nvp("prop3", v.prop3_);
+    ar << make_nvp("prop4", v.prop4_);
+    ar << make_nvp("prop5", v.prop5_);
+    ar << make_nvp("prop6", v.prop6_);
+    ar << make_nvp("prop7", v.prop7_);
+    ar << make_nvp("prop8", v.prop8_);
+    ar << make_nvp("prop9", v.prop9_);
+    ar << make_nvp("prop10", v.prop10_);
 }
 
 template<typename Archive>
@@ -45,6 +65,16 @@ void load(Archive& ar,
     dogen::test_models::primitive::consumer& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("prop0", v.prop0_);
+    ar >> make_nvp("prop1", v.prop1_);
+    ar >> make_nvp("prop2", v.prop2_);
+    ar >> make_nvp("prop3", v.prop3_);
+    ar >> make_nvp("prop4", v.prop4_);
+    ar >> make_nvp("prop5", v.prop5_);
+    ar >> make_nvp("prop6", v.prop6_);
+    ar >> make_nvp("prop7", v.prop7_);
+    ar >> make_nvp("prop8", v.prop8_);
+    ar >> make_nvp("prop9", v.prop9_);
+    ar >> make_nvp("prop10", v.prop10_);
 }
 
 } }

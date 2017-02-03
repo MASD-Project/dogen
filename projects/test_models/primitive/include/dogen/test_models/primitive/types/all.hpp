@@ -27,7 +27,17 @@
 
 #include "dogen/test_models/primitive/types/consumer.hpp"
 #include "dogen/test_models/primitive/types/primitive.hpp"
-#include "dogen/test_models/primitive/types/product_id.hpp"
+#include "dogen/test_models/primitive/types/int_primitive.hpp"
+#include "dogen/test_models/primitive/types/bool_primitive.hpp"
+#include "dogen/test_models/primitive/types/char_primitive.hpp"
+#include "dogen/test_models/primitive/types/uint_primitive.hpp"
+#include "dogen/test_models/primitive/types/float_primitive.hpp"
+#include "dogen/test_models/primitive/types/short_primitive.hpp"
+#include "dogen/test_models/primitive/types/uchar_primitive.hpp"
+#include "dogen/test_models/primitive/types/ulong_primitive.hpp"
+#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
+#include "dogen/test_models/primitive/types/double_primitive.hpp"
+#include "dogen/test_models/primitive/types/ushort_primitive.hpp"
 #include "dogen/test_models/primitive/types/immutable_primitive.hpp"
 
 #endif

@@ -22,9 +22,119 @@
           "name": {
             "simple": "prop0"
           },
-          "unparsed_type": "product_id"
+          "unparsed_type": "short_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop1"
+          },
+          "unparsed_type": "ushort_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop2"
+          },
+          "unparsed_type": "a_long_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop3"
+          },
+          "unparsed_type": "ulong_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop4"
+          },
+          "unparsed_type": "int_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop5"
+          },
+          "unparsed_type": "uint_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop6"
+          },
+          "unparsed_type": "char_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop7"
+          },
+          "unparsed_type": "uchar_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop8"
+          },
+          "unparsed_type": "double_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop9"
+          },
+          "unparsed_type": "float_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop10"
+          },
+          "unparsed_type": "bool_primitive"
         }
       ]
+    },
+    {
+      "name": {
+        "simple": "a_long_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying long.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "long"
+      }
+    },
+    {
+      "name": {
+        "simple": "bool_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying bool.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "bool"
+      }
+    },
+    {
+      "name": {
+        "simple": "char_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying char.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "char"
+      }
+    },
+    {
+      "name": {
+        "simple": "double_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying double.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "double"
+      }
+    },
+    {
+      "name": {
+        "simple": "float_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying float.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "float"
+      }
     },
     {
       "name": {
@@ -41,12 +151,62 @@
     },
     {
       "name": {
-        "simple": "product_id"
+        "simple": "int_primitive"
       },
       "meta_type": "primitive",
-      "documentation": "Represents a unique identifier for a product.\n",
+      "documentation": "Test a primitive with an underlying int.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "short_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying short.\n",
       "annotation": {
         "yarn.primitive.underlying_element": "short"
+      }
+    },
+    {
+      "name": {
+        "simple": "uchar_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsigned char.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned char"
+      }
+    },
+    {
+      "name": {
+        "simple": "uint_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsigned int.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned int"
+      }
+    },
+    {
+      "name": {
+        "simple": "ulong_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsigned long.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned long"
+      }
+    },
+    {
+      "name": {
+        "simple": "ushort_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsgined short.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned short"
       }
     }
   ]
