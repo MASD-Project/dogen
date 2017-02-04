@@ -8463,6 +8463,7 @@ This article by Fowler has some interesting ideas:
 
 It is not clear how it applies to code generation, if at all. This
 story is to bookmark the article so we can mine it later for ideas.
+
 *** Write blog post on reflexive programming                          :story:
 
 Basic idea is that domain expertise tightens the agile circle,
