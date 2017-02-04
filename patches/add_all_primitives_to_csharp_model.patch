@@ -1,0 +1,3858 @@
+diff --git a/doc/agile/sprint_backlog_97.org b/doc/agile/sprint_backlog_97.org
+index 200789988..f22c53a94 100644
+--- a/doc/agile/sprint_backlog_97.org
++++ b/doc/agile/sprint_backlog_97.org
+@@ -393,6 +393,7 @@ really need from the core models to see if we can reduce the build
+ time by a fair bit (5 mins or more).
+ 
+ *** STARTED Add support for primitives across the pipeline            :story:
++    CLOCK: [2017-02-04 Sat 23:11]--[2017-02-04 Sat 23:31] =>  0:20
+     CLOCK: [2017-02-04 Sat 22:47]--[2017-02-04 Sat 23:10] =>  0:23
+     CLOCK: [2017-02-04 Sat 21:12]--[2017-02-04 Sat 22:46] =>  1:34
+     CLOCK: [2017-02-04 Sat 08:15]--[2017-02-04 Sat 08:26] =>  0:11
+diff --git a/projects/quilt.csharp/src/types/formattables/helper_expander.cpp b/projects/quilt.csharp/src/types/formattables/helper_expander.cpp
+index b6d0d582c..61cead438 100644
+--- a/projects/quilt.csharp/src/types/formattables/helper_expander.cpp
++++ b/projects/quilt.csharp/src/types/formattables/helper_expander.cpp
+@@ -24,6 +24,7 @@
+ #include "dogen/annotations/types/entry_selector.hpp"
+ #include "dogen/annotations/types/type_repository_selector.hpp"
+ #include "dogen/yarn/types/object.hpp"
++#include "dogen/yarn/types/primitive.hpp"
+ #include "dogen/yarn/types/element.hpp"
+ #include "dogen/yarn/types/attribute.hpp"
+ #include "dogen/yarn/types/element_visitor.hpp"
+@@ -91,11 +92,12 @@ private:
+ 
+ public:
+     /*
+-     * We are only interested in yarn objects; all other element
+-     * types do not need helpers.
++     * We are only interested in yarn objects and primitives; all
++     * other element types do not need helpers.
+      */
+     using yarn::element_visitor::visit;
+     void visit(const yarn::object& o);
++    void visit(const yarn::primitive& p);
+ 
+ public:
+     const std::list<formattables::helper_properties>& result() const;
+@@ -133,6 +135,14 @@ void helper_properties_generator::visit(const yarn::object& o) {
+     result_ = compute_helper_properties(cfg, fff, iir, attrs);
+ }
+ 
++void helper_properties_generator::visit(const yarn::primitive& p) {
++    const auto& fff(facets_for_family_);
++    const auto& cfg(helper_configuration_);
++    std::list<yarn::attribute> attrs({ p.value_attribute() });
++    const auto iir(false/*in_inheritance_relationship*/);
++    result_ = compute_helper_properties(cfg, fff, iir, attrs);
++}
++
+ const std::list<formattables::helper_properties>&
+ helper_properties_generator::result() const {
+     return result_;
+diff --git a/projects/test_models/CSharpModel/Dogen.TestModels.CSharpModel.csproj b/projects/test_models/CSharpModel/Dogen.TestModels.CSharpModel.csproj
+index a96f011b1..9067fce01 100644
+--- a/projects/test_models/CSharpModel/Dogen.TestModels.CSharpModel.csproj
++++ b/projects/test_models/CSharpModel/Dogen.TestModels.CSharpModel.csproj
+@@ -35,6 +35,8 @@
+     <Compile Include="Dumpers\AssociationDumper.cs" />
+     <Compile Include="Dumpers\BaseDumper.cs" />
+     <Compile Include="Dumpers\BookTypesDumper.cs" />
++    <Compile Include="Dumpers\BoolPrimitiveDumper.cs" />
++    <Compile Include="Dumpers\CharPrimitiveDumper.cs" />
+     <Compile Include="Dumpers\ChildOfAChild1Dumper.cs" />
+     <Compile Include="Dumpers\ChildOfAChild2Dumper.cs" />
+     <Compile Include="Dumpers\ChildViaSettingsDumper.cs" />
+@@ -43,11 +45,15 @@
+     <Compile Include="Dumpers\Descendant1Dumper.cs" />
+     <Compile Include="Dumpers\Descendant2Dumper.cs" />
+     <Compile Include="Dumpers\Descendant3Dumper.cs" />
++    <Compile Include="Dumpers\DoublePrimitiveDumper.cs" />
++    <Compile Include="Dumpers\FloatPrimitiveDumper.cs" />
+     <Compile Include="Dumpers\HexFlagsDumper.cs" />
+     <Compile Include="Dumpers\ImmutableFourDumper.cs" />
+     <Compile Include="Dumpers\ImmutableOnePrimitiveDumper.cs" />
+     <Compile Include="Dumpers\ImmutableTwoDumper.cs" />
+     <Compile Include="Dumpers\ImmutableZeroDumper.cs" />
++    <Compile Include="Dumpers\IntPrimitiveDumper.cs" />
++    <Compile Include="Dumpers\LongPrimitiveDumper.cs" />
+     <Compile Include="Dumpers\NoPropertiesDumper.cs" />
+     <Compile Include="Dumpers\NonFinalOrphanDumper.cs" />
+     <Compile Include="Dumpers\NonSealedLeafDumper.cs" />
+@@ -75,11 +81,16 @@
+     <Compile Include="Dumpers\ShortPrimitiveDumper.cs" />
+     <Compile Include="Dumpers\TestAllKnobsDumper.cs" />
+     <Compile Include="Dumpers\ThirdChildWithMembersDumper.cs" />
++    <Compile Include="Dumpers\UIntPrimitiveDumper.cs" />
++    <Compile Include="Dumpers\ULongPrimitiveDumper.cs" />
++    <Compile Include="Dumpers\UShortPrimitiveDumper.cs" />
+     <Compile Include="SequenceGenerators\AllObjectCollectionsSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\AssistantSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\AssociationSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\BaseSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\BookTypesSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\BoolPrimitiveSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\CharPrimitiveSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ChildOfAChild1SequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ChildOfAChild2SequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ChildViaSettingsSequenceGenerator.cs" />
+@@ -88,11 +99,15 @@
+     <Compile Include="SequenceGenerators\Descendant1SequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\Descendant2SequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\Descendant3SequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\DoublePrimitiveSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\FloatPrimitiveSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\HexFlagsSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ImmutableFourSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ImmutableOnePrimitiveSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ImmutableTwoSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ImmutableZeroSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\IntPrimitiveSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\LongPrimitiveSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\NoPropertiesSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\NonFinalOrphanSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\NonSealedLeafSequenceGenerator.cs" />
+@@ -120,10 +135,15 @@
+     <Compile Include="SequenceGenerators\ShortPrimitiveSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\TestAllKnobsSequenceGenerator.cs" />
+     <Compile Include="SequenceGenerators\ThirdChildWithMembersSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\UIntPrimitiveSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\ULongPrimitiveSequenceGenerator.cs" />
++    <Compile Include="SequenceGenerators\UShortPrimitiveSequenceGenerator.cs" />
+     <Compile Include="Types\AllObjectCollections.cs" />
+     <Compile Include="Types\Association.cs" />
+     <Compile Include="Types\Base.cs" />
+     <Compile Include="Types\BookTypes.cs" />
++    <Compile Include="Types\BoolPrimitive.cs" />
++    <Compile Include="Types\CharPrimitive.cs" />
+     <Compile Include="Types\ChildOfAChild1.cs" />
+     <Compile Include="Types\ChildOfAChild2.cs" />
+     <Compile Include="Types\ChildViaSettings.cs" />
+@@ -132,11 +152,15 @@
+     <Compile Include="Types\Descendant1.cs" />
+     <Compile Include="Types\Descendant2.cs" />
+     <Compile Include="Types\Descendant3.cs" />
++    <Compile Include="Types\DoublePrimitive.cs" />
++    <Compile Include="Types\FloatPrimitive.cs" />
+     <Compile Include="Types\HexFlags.cs" />
+     <Compile Include="Types\ImmutableFour.cs" />
+     <Compile Include="Types\ImmutableOnePrimitive.cs" />
+     <Compile Include="Types\ImmutableTwo.cs" />
+     <Compile Include="Types\ImmutableZero.cs" />
++    <Compile Include="Types\IntPrimitive.cs" />
++    <Compile Include="Types\LongPrimitive.cs" />
+     <Compile Include="Types\MyException.cs" />
+     <Compile Include="Types\NoProperties.cs" />
+     <Compile Include="Types\NonFinalOrphan.cs" />
+@@ -166,6 +190,9 @@
+     <Compile Include="Types\ShortPrimitive.cs" />
+     <Compile Include="Types\TestAllKnobs.cs" />
+     <Compile Include="Types\ThirdChildWithMembers.cs" />
++    <Compile Include="Types\UIntPrimitive.cs" />
++    <Compile Include="Types\ULongPrimitive.cs" />
++    <Compile Include="Types\UShortPrimitive.cs" />
+   </ItemGroup>
+   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+ </Project>
+diff --git a/projects/test_models/CSharpModel/Dumpers/BoolPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/BoolPrimitiveDumper.cs
+new file mode 100644
+index 000000000..92b4650eb
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/BoolPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of BoolPrimitive.
++    /// </summary>
++    public static class BoolPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, BoolPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.BoolPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(BoolPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/CharPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/CharPrimitiveDumper.cs
+new file mode 100644
+index 000000000..2b34b5470
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/CharPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of CharPrimitive.
++    /// </summary>
++    public static class CharPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, CharPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.CharPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(CharPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/DoublePrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/DoublePrimitiveDumper.cs
+new file mode 100644
+index 000000000..5131e3b04
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/DoublePrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of DoublePrimitive.
++    /// </summary>
++    public static class DoublePrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, DoublePrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.DoublePrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(DoublePrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/FloatPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/FloatPrimitiveDumper.cs
+new file mode 100644
+index 000000000..a1e4f7882
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/FloatPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of FloatPrimitive.
++    /// </summary>
++    public static class FloatPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, FloatPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.FloatPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(FloatPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/IntPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/IntPrimitiveDumper.cs
+new file mode 100644
+index 000000000..4886cb2a8
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/IntPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of IntPrimitive.
++    /// </summary>
++    public static class IntPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, IntPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.IntPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(IntPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/LongPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/LongPrimitiveDumper.cs
+new file mode 100644
+index 000000000..1ae6b2c1c
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/LongPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of LongPrimitive.
++    /// </summary>
++    public static class LongPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, LongPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.LongPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(LongPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/UIntPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/UIntPrimitiveDumper.cs
+new file mode 100644
+index 000000000..2c77bd5ac
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/UIntPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of UIntPrimitive.
++    /// </summary>
++    public static class UIntPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, UIntPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.UIntPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(UIntPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/ULongPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/ULongPrimitiveDumper.cs
+new file mode 100644
+index 000000000..a882435e1
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/ULongPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of ULongPrimitive.
++    /// </summary>
++    public static class ULongPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, ULongPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.ULongPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(ULongPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Dumpers/UShortPrimitiveDumper.cs b/projects/test_models/CSharpModel/Dumpers/UShortPrimitiveDumper.cs
+new file mode 100644
+index 000000000..20d3bb8aa
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Dumpers/UShortPrimitiveDumper.cs
+@@ -0,0 +1,62 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of UShortPrimitive.
++    /// </summary>
++    public static class UShortPrimitiveDumper
++    {
++        static internal void Dump(AssistantDumper assistant, UShortPrimitive value, bool withSeparator = false)
++        {
++            assistant.IncrementDepth();
++            if (assistant.MaximumDepthExceeded())
++                return;
++
++            assistant.AddStartObject();
++            assistant.AddType("Dogen.TestModels.CSharpModel.UShortPrimitive", true/*withSeparator*/);
++            if (value == null)
++            {
++                assistant.Add("data", "<null>");
++                assistant.AddEndObject();
++                return;
++            }
++
++            assistant.AddKey("data");
++            assistant.AddPairSeparator();
++            assistant.AddStartObject();
++            assistant.Add("Value", value.Value);
++            assistant.AddEndObject(); // data
++            assistant.AddEndObject(); // main object
++            assistant.HandleMemberSeparator(withSeparator);
++
++            assistant.DecrementDepth();
++        }
++
++        public static string Dump(UShortPrimitive value)
++        {
++            var assistant = new AssistantDumper();
++            Dump(assistant, value);
++            return assistant.ToString();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/BoolPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/BoolPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..6063798c4
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/BoolPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of BoolPrimitive.
++    /// </summary>
++    public static class BoolPrimitiveSequenceGenerator
++    {
++        static internal void Populate(BoolPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateBool(position);
++        }
++
++        static internal BoolPrimitive Create(uint position)
++        {
++            var result = new BoolPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class BoolPrimitiveEnumerator : IEnumerator, IEnumerator<BoolPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private BoolPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = BoolPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            BoolPrimitive IEnumerator<BoolPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public BoolPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class BoolPrimitiveEnumerable : IEnumerable, IEnumerable<BoolPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new BoolPrimitiveEnumerator();
++            }
++
++            IEnumerator<BoolPrimitive> IEnumerable<BoolPrimitive>.GetEnumerator()
++            {
++                return new BoolPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<BoolPrimitive> Sequence()
++        {
++            return new BoolPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/CharPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/CharPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..e31889eb2
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/CharPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of CharPrimitive.
++    /// </summary>
++    public static class CharPrimitiveSequenceGenerator
++    {
++        static internal void Populate(CharPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateChar(position);
++        }
++
++        static internal CharPrimitive Create(uint position)
++        {
++            var result = new CharPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class CharPrimitiveEnumerator : IEnumerator, IEnumerator<CharPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private CharPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = CharPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            CharPrimitive IEnumerator<CharPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public CharPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class CharPrimitiveEnumerable : IEnumerable, IEnumerable<CharPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new CharPrimitiveEnumerator();
++            }
++
++            IEnumerator<CharPrimitive> IEnumerable<CharPrimitive>.GetEnumerator()
++            {
++                return new CharPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<CharPrimitive> Sequence()
++        {
++            return new CharPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/DoublePrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/DoublePrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..644a3f2f5
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/DoublePrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of DoublePrimitive.
++    /// </summary>
++    public static class DoublePrimitiveSequenceGenerator
++    {
++        static internal void Populate(DoublePrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateDouble(position);
++        }
++
++        static internal DoublePrimitive Create(uint position)
++        {
++            var result = new DoublePrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class DoublePrimitiveEnumerator : IEnumerator, IEnumerator<DoublePrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private DoublePrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = DoublePrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            DoublePrimitive IEnumerator<DoublePrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public DoublePrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class DoublePrimitiveEnumerable : IEnumerable, IEnumerable<DoublePrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new DoublePrimitiveEnumerator();
++            }
++
++            IEnumerator<DoublePrimitive> IEnumerable<DoublePrimitive>.GetEnumerator()
++            {
++                return new DoublePrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<DoublePrimitive> Sequence()
++        {
++            return new DoublePrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/FloatPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/FloatPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..1a104939f
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/FloatPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of FloatPrimitive.
++    /// </summary>
++    public static class FloatPrimitiveSequenceGenerator
++    {
++        static internal void Populate(FloatPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateFloat(position);
++        }
++
++        static internal FloatPrimitive Create(uint position)
++        {
++            var result = new FloatPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class FloatPrimitiveEnumerator : IEnumerator, IEnumerator<FloatPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private FloatPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = FloatPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            FloatPrimitive IEnumerator<FloatPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public FloatPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class FloatPrimitiveEnumerable : IEnumerable, IEnumerable<FloatPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new FloatPrimitiveEnumerator();
++            }
++
++            IEnumerator<FloatPrimitive> IEnumerable<FloatPrimitive>.GetEnumerator()
++            {
++                return new FloatPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<FloatPrimitive> Sequence()
++        {
++            return new FloatPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/IntPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/IntPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..a6c44f21d
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/IntPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of IntPrimitive.
++    /// </summary>
++    public static class IntPrimitiveSequenceGenerator
++    {
++        static internal void Populate(IntPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateInt(position);
++        }
++
++        static internal IntPrimitive Create(uint position)
++        {
++            var result = new IntPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class IntPrimitiveEnumerator : IEnumerator, IEnumerator<IntPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private IntPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = IntPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            IntPrimitive IEnumerator<IntPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public IntPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class IntPrimitiveEnumerable : IEnumerable, IEnumerable<IntPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new IntPrimitiveEnumerator();
++            }
++
++            IEnumerator<IntPrimitive> IEnumerable<IntPrimitive>.GetEnumerator()
++            {
++                return new IntPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<IntPrimitive> Sequence()
++        {
++            return new IntPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/LongPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/LongPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..b610ee13a
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/LongPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of LongPrimitive.
++    /// </summary>
++    public static class LongPrimitiveSequenceGenerator
++    {
++        static internal void Populate(LongPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateLong(position);
++        }
++
++        static internal LongPrimitive Create(uint position)
++        {
++            var result = new LongPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class LongPrimitiveEnumerator : IEnumerator, IEnumerator<LongPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private LongPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = LongPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            LongPrimitive IEnumerator<LongPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public LongPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class LongPrimitiveEnumerable : IEnumerable, IEnumerable<LongPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new LongPrimitiveEnumerator();
++            }
++
++            IEnumerator<LongPrimitive> IEnumerable<LongPrimitive>.GetEnumerator()
++            {
++                return new LongPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<LongPrimitive> Sequence()
++        {
++            return new LongPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/UIntPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/UIntPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..7a52f8323
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/UIntPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of UIntPrimitive.
++    /// </summary>
++    public static class UIntPrimitiveSequenceGenerator
++    {
++        static internal void Populate(UIntPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateUInt(position);
++        }
++
++        static internal UIntPrimitive Create(uint position)
++        {
++            var result = new UIntPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class UIntPrimitiveEnumerator : IEnumerator, IEnumerator<UIntPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private UIntPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = UIntPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            UIntPrimitive IEnumerator<UIntPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public UIntPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class UIntPrimitiveEnumerable : IEnumerable, IEnumerable<UIntPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new UIntPrimitiveEnumerator();
++            }
++
++            IEnumerator<UIntPrimitive> IEnumerable<UIntPrimitive>.GetEnumerator()
++            {
++                return new UIntPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<UIntPrimitive> Sequence()
++        {
++            return new UIntPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/ULongPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/ULongPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..99b3f51db
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/ULongPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of ULongPrimitive.
++    /// </summary>
++    public static class ULongPrimitiveSequenceGenerator
++    {
++        static internal void Populate(ULongPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateULong(position);
++        }
++
++        static internal ULongPrimitive Create(uint position)
++        {
++            var result = new ULongPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class ULongPrimitiveEnumerator : IEnumerator, IEnumerator<ULongPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private ULongPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = ULongPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            ULongPrimitive IEnumerator<ULongPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public ULongPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class ULongPrimitiveEnumerable : IEnumerable, IEnumerable<ULongPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new ULongPrimitiveEnumerator();
++            }
++
++            IEnumerator<ULongPrimitive> IEnumerable<ULongPrimitive>.GetEnumerator()
++            {
++                return new ULongPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<ULongPrimitive> Sequence()
++        {
++            return new ULongPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/SequenceGenerators/UShortPrimitiveSequenceGenerator.cs b/projects/test_models/CSharpModel/SequenceGenerators/UShortPrimitiveSequenceGenerator.cs
+new file mode 100644
+index 000000000..b72d60098
+--- /dev/null
++++ b/projects/test_models/CSharpModel/SequenceGenerators/UShortPrimitiveSequenceGenerator.cs
+@@ -0,0 +1,121 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++using System.Collections;
++using System.Collections.Generic;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Generates sequences of UShortPrimitive.
++    /// </summary>
++    public static class UShortPrimitiveSequenceGenerator
++    {
++        static internal void Populate(UShortPrimitive value, uint position)
++        {
++            value.Value = AssistantSequenceGenerator.CreateUShort(position);
++        }
++
++        static internal UShortPrimitive Create(uint position)
++        {
++            var result = new UShortPrimitive();
++            Populate(result, position);
++            return result;
++        }
++
++        #region Enumerator
++        private class UShortPrimitiveEnumerator : IEnumerator, IEnumerator<UShortPrimitive>, IDisposable
++        {
++            #region Properties
++            private uint _position;
++            private UShortPrimitive _current;
++            #endregion
++
++            private void PopulateCurrent()
++            {
++                _current = UShortPrimitiveSequenceGenerator.Create(_position);
++            }
++
++            #region IDisposable
++            public void Dispose()
++            {
++            }
++            #endregion
++
++            #region IEnumerator implementation
++            public bool MoveNext()
++            {
++                ++_position;
++                PopulateCurrent();
++                return true;
++            }
++
++            public void Reset()
++            {
++                _position = 0;
++                PopulateCurrent();
++            }
++
++            public object Current {
++                get
++                {
++                    return _current;
++                }
++            }
++
++            UShortPrimitive IEnumerator<UShortPrimitive>.Current
++            {
++                get
++                {
++                    return _current;
++                }
++            }
++            #endregion
++
++            public UShortPrimitiveEnumerator()
++            {
++                PopulateCurrent();
++            }
++        }
++        #endregion
++
++        #region Enumerable
++        private class UShortPrimitiveEnumerable : IEnumerable, IEnumerable<UShortPrimitive>
++        {
++            #region IEnumerable implementation
++            public IEnumerator GetEnumerator()
++            {
++                return new UShortPrimitiveEnumerator();
++            }
++
++            IEnumerator<UShortPrimitive> IEnumerable<UShortPrimitive>.GetEnumerator()
++            {
++                return new UShortPrimitiveEnumerator();
++            }
++            #endregion
++        }
++        #endregion
++
++        static public IEnumerable<UShortPrimitive> Sequence()
++        {
++            return new UShortPrimitiveEnumerable();
++        }
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/BoolPrimitive.cs b/projects/test_models/CSharpModel/Types/BoolPrimitive.cs
+new file mode 100644
+index 000000000..206b7a82a
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/BoolPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying bool.
++    /// </summary>
++    public sealed class BoolPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public bool Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public BoolPrimitive() { }
++        public BoolPrimitive(bool value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as BoolPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(BoolPrimitive lhs, BoolPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(BoolPrimitive lhs, BoolPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/CharPrimitive.cs b/projects/test_models/CSharpModel/Types/CharPrimitive.cs
+new file mode 100644
+index 000000000..c23e4cd83
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/CharPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying char.
++    /// </summary>
++    public sealed class CharPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public char Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public CharPrimitive() { }
++        public CharPrimitive(char value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as CharPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(CharPrimitive lhs, CharPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(CharPrimitive lhs, CharPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/DoublePrimitive.cs b/projects/test_models/CSharpModel/Types/DoublePrimitive.cs
+new file mode 100644
+index 000000000..534921b51
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/DoublePrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying double.
++    /// </summary>
++    public sealed class DoublePrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public double Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public DoublePrimitive() { }
++        public DoublePrimitive(double value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as DoublePrimitive;
++            if (value == null) return false;
++            return
++                NearlyEqual(Value, value.Value);
++        }
++
++        public static bool operator ==(DoublePrimitive lhs, DoublePrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(DoublePrimitive lhs, DoublePrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/FloatPrimitive.cs b/projects/test_models/CSharpModel/Types/FloatPrimitive.cs
+new file mode 100644
+index 000000000..646a0417f
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/FloatPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying float.
++    /// </summary>
++    public sealed class FloatPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public float Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public FloatPrimitive() { }
++        public FloatPrimitive(float value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as FloatPrimitive;
++            if (value == null) return false;
++            return
++                NearlyEqual(Value, value.Value);
++        }
++
++        public static bool operator ==(FloatPrimitive lhs, FloatPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(FloatPrimitive lhs, FloatPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/IntPrimitive.cs b/projects/test_models/CSharpModel/Types/IntPrimitive.cs
+new file mode 100644
+index 000000000..a3729d17c
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/IntPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying int.
++    /// </summary>
++    public sealed class IntPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public int Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public IntPrimitive() { }
++        public IntPrimitive(int value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as IntPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(IntPrimitive lhs, IntPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(IntPrimitive lhs, IntPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/LongPrimitive.cs b/projects/test_models/CSharpModel/Types/LongPrimitive.cs
+new file mode 100644
+index 000000000..4ab126ec9
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/LongPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying long.
++    /// </summary>
++    public sealed class LongPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public long Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public LongPrimitive() { }
++        public LongPrimitive(long value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as LongPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(LongPrimitive lhs, LongPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(LongPrimitive lhs, LongPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/UIntPrimitive.cs b/projects/test_models/CSharpModel/Types/UIntPrimitive.cs
+new file mode 100644
+index 000000000..bb59062a0
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/UIntPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying unsigned int.
++    /// </summary>
++    public sealed class UIntPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public uint Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public UIntPrimitive() { }
++        public UIntPrimitive(uint value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as UIntPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(UIntPrimitive lhs, UIntPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(UIntPrimitive lhs, UIntPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/ULongPrimitive.cs b/projects/test_models/CSharpModel/Types/ULongPrimitive.cs
+new file mode 100644
+index 000000000..98b7984df
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/ULongPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying unsigned long.
++    /// </summary>
++    public sealed class ULongPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public ulong Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public ULongPrimitive() { }
++        public ULongPrimitive(ulong value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as ULongPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(ULongPrimitive lhs, ULongPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(ULongPrimitive lhs, ULongPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/projects/test_models/CSharpModel/Types/UShortPrimitive.cs b/projects/test_models/CSharpModel/Types/UShortPrimitive.cs
+new file mode 100644
+index 000000000..d3652a985
+--- /dev/null
++++ b/projects/test_models/CSharpModel/Types/UShortPrimitive.cs
+@@ -0,0 +1,85 @@
++// -*- mode: csharp; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++//
++// Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++//
++// This program is free software; you can redistribute it and/or modify
++// it under the terms of the GNU General Public License as published by
++// the Free Software Foundation; either version 3 of the License, or
++// (at your option) any later version.
++//
++// This program is distributed in the hope that it will be useful,
++// but WITHOUT ANY WARRANTY; without even the implied warranty of
++// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++// GNU General Public License for more details.
++//
++// You should have received a copy of the GNU General Public License
++// along with this program; if not, write to the Free Software
++// Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++// MA 02110-1301, USA.
++//
++using System;
++
++namespace Dogen.TestModels.CSharpModel
++{
++    /// <summary>
++    /// Test a primitive with an underlying unsgined short.
++    /// </summary>
++    public sealed class UShortPrimitive
++    {
++        #region Properties
++        /// <summary>
++        /// Obtain the underlying value.
++        /// </summary>
++        public ushort Value { get; set; }
++        #endregion
++
++        #region Constructors
++        public UShortPrimitive() { }
++        public UShortPrimitive(ushort value)
++        {
++            Value = value;
++        }
++        #endregion
++
++        #region Equality
++        public override bool Equals(object obj)
++        {
++            if (ReferenceEquals(null, obj)) return false;
++            if (ReferenceEquals(this, obj)) return true;
++            if (obj.GetType() != GetType()) return false;
++
++            var value = obj as UShortPrimitive;
++            if (value == null) return false;
++            return
++                Value == value.Value;
++        }
++
++        public static bool operator ==(UShortPrimitive lhs, UShortPrimitive rhs)
++        {
++            if (Object.ReferenceEquals(lhs, rhs))
++                return true;
++
++            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
++        }
++
++        public static bool operator !=(UShortPrimitive lhs, UShortPrimitive rhs)
++        {
++            return !(lhs == rhs);
++        }
++
++        public override int GetHashCode()
++        {
++            unchecked
++            {
++                // Choose large primes to avoid hashing collisions
++                const int HashingBase = (int) 2166136261;
++                const int HashingMultiplier = 16777619;
++
++                int hash = HashingBase;
++                hash = (hash * HashingMultiplier) ^ Value.GetHashCode();
++                return hash;
++            }
++        }
++        #endregion
++    }
++}
+diff --git a/test_data/yarn.dia/input/CSharpModel.dia b/test_data/yarn.dia/input/CSharpModel.dia
+index e1da1c9fb..1e5f8fced 100644
+--- a/test_data/yarn.dia/input/CSharpModel.dia
++++ b/test_data/yarn.dia/input/CSharpModel.dia
+@@ -7868,5 +7868,1013 @@ this is a long comment#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="templates"/>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O63">
++      <dia:attribute name="obj_pos">
++        <dia:point val="29,118"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="28.95,117.95;35.84,121.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="29,118"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.79"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#LongPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying long.
++
++#DOGEN yarn.primitive.underlying_element=long#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O64">
++      <dia:attribute name="obj_pos">
++        <dia:point val="29,123"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="28.95,122.95;34.8875,126.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="29,123"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="5.8375000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#IntPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying int.
++
++#DOGEN yarn.primitive.underlying_element=int#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O65">
++      <dia:attribute name="obj_pos">
++        <dia:point val="29,128"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="28.95,127.95;35.73,131.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="29,128"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.6799999999999997"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#CharPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying char.
++
++#DOGEN yarn.primitive.underlying_element=char#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O66">
++      <dia:attribute name="obj_pos">
++        <dia:point val="41,118"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="40.95,117.95;48.49,121.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="41,118"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="7.4400000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#ULongPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying unsigned long.
++
++#DOGEN yarn.primitive.underlying_element=ulong#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O67">
++      <dia:attribute name="obj_pos">
++        <dia:point val="41,123"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="40.95,122.95;47.5375,126.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="41,123"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.4874999999999998"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#UIntPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying unsigned int.
++
++#DOGEN yarn.primitive.underlying_element=uint#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O68">
++      <dia:attribute name="obj_pos">
++        <dia:point val="41,113"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="40.95,112.95;48.76,116.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="41,113"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="7.7099999999999991"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#UShortPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying unsgined short.
++
++#DOGEN yarn.primitive.underlying_element=ushort#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O69">
++      <dia:attribute name="obj_pos">
++        <dia:point val="29,133"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="28.95,132.95;36.8125,136.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="29,133"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="7.7625000000000002"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#DoublePrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying double.
++
++#DOGEN yarn.primitive.underlying_element=double#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O70">
++      <dia:attribute name="obj_pos">
++        <dia:point val="41,133"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="40.95,132.95;47.9325,136.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="41,133"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.8825000000000003"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#FloatPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying float.
++
++#DOGEN yarn.primitive.underlying_element=float#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O71">
++      <dia:attribute name="obj_pos">
++        <dia:point val="41,128"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="40.95,127.95;47.6225,131.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="41,128"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="6.5724999999999998"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#BoolPrimitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#primitive#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>#Test a primitive with an underlying bool.
++
++#DOGEN yarn.primitive.underlying_element=bool#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/test_data/yarn.json/input/CSharpModel.json b/test_data/yarn.json/input/CSharpModel.json
+index 354deb93d..720fb352b 100644
+--- a/test_data/yarn.json/input/CSharpModel.json
++++ b/test_data/yarn.json/input/CSharpModel.json
+@@ -1025,6 +1025,66 @@
+     },
+     {
+       "name": {
++        "simple": "BoolPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying bool.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "bool"
++      }
++    },
++    {
++      "name": {
++        "simple": "CharPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying char.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "char"
++      }
++    },
++    {
++      "name": {
++        "simple": "DoublePrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying double.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "double"
++      }
++    },
++    {
++      "name": {
++        "simple": "FloatPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying float.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "float"
++      }
++    },
++    {
++      "name": {
++        "simple": "IntPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying int.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "int"
++      }
++    },
++    {
++      "name": {
++        "simple": "LongPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying long.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "long"
++      }
++    },
++    {
++      "name": {
+         "simple": "ShortPrimitive"
+       },
+       "meta_type": "primitive",
+@@ -1035,6 +1095,36 @@
+     },
+     {
+       "name": {
++        "simple": "UIntPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying unsigned int.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "uint"
++      }
++    },
++    {
++      "name": {
++        "simple": "ULongPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying unsigned long.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "ulong"
++      }
++    },
++    {
++      "name": {
++        "simple": "UShortPrimitive"
++      },
++      "meta_type": "primitive",
++      "documentation": "Test a primitive with an underlying unsgined short.\n",
++      "annotation": {
++        "yarn.primitive.underlying_element": "ushort"
++      }
++    },
++    {
++      "name": {
+         "simple": "MyException"
+       },
+       "meta_type": "exception",
