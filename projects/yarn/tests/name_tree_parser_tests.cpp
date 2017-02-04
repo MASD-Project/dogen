@@ -327,8 +327,8 @@ BOOST_AUTO_TEST_CASE(names_that_partially_match_builtins_produce_expected_name_t
     BOOST_CHECK(test_builtin("floa"));
     BOOST_CHECK(test_builtin("doubler"));
     BOOST_CHECK(test_builtin("doubl"));
-    // BOOST_CHECK(test_builtin("unsigneder"));
-    // BOOST_CHECK(test_builtin("longer"));
+    BOOST_CHECK(test_builtin("unsigneder"));
+    BOOST_CHECK(test_builtin("longer"));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

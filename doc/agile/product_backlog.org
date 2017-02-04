@@ -2742,13 +2742,6 @@ from the spirit documentation:
 [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/distinct.html][- Qi Distinct Parser Directive]]
 - [[http://www.boost.org/doc/libs/1_52_0/libs/spirit/repository/test/qi/distinct.cpp][distinct.cpp]]
 
-However, we still haven't solved the following cases:
-
-: BOOST_CHECK(test_builtin("longer"));
-: BOOST_CHECK(test_builtin("unsigneder"));
-
-As these are not so common they have been left for later.
-
 Seems like the thing to do here is to create a keyword parser and nest
 it with the existing parsers:
 
