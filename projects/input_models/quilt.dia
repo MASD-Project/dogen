@@ -1409,7 +1409,7 @@
         <dia:point val="-2,-16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-2.05,-16.05;18.2,-7.05"/>
+        <dia:rectangle val="-2.05,-16.05;19.74,-7.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1418,7 +1418,7 @@
         <dia:point val="-2,-16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.150000000000002"/>
+        <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.9000000000000004"/>
@@ -1444,7 +1444,7 @@
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -2372,7 +2372,7 @@
         <dia:point val="49.65,-12"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="48.9,-16.75;83.23,-10.4"/>
+        <dia:rectangle val="48.9,-16.75;83.23,-11.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
