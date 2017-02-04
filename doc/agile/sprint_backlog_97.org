@@ -372,6 +372,7 @@ parameters as "type arguments" just like we do with operations and
 properties (preferred). The parser would then use this info.
 
 *** STARTED Try to improve compilation times                          :story:
+    CLOCK: [2017-02-04 Sat 17:43]--[2017-02-04 Sat 17:48] =>  0:05
     CLOCK: [2017-02-04 Sat 17:40]--[2017-02-04 Sat 17:42] =>  0:02
     CLOCK: [2017-02-04 Sat 17:32]--[2017-02-04 Sat 17:37] =>  0:05
     CLOCK: [2017-02-04 Sat 17:28]--[2017-02-04 Sat 17:31] =>  0:03
