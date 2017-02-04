@@ -5551,33 +5551,6 @@ scattered around different places. They should all live under test
 data and be part of a test data set. The test data set should probably
 be the spec name.
 
-*** Add support for template classes                                  :story:
-
-At present we can create classes in dia that require template
-parameters; however, when we try to create member variables that
-instantiate that class the parser fails to parse. For example,
-=expansion::inclusion_dependencies_provider= has a template parameter:
-
-: std::forward_list<boost::shared_ptr<expansion::inclusion_dependencies_provider<sml::module>>
-
-The parser fails:
-
-: 2015-04-02 15:55:02.084366 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::forward_list<boost::shared_ptr<expansion::inclusion_dependencies_provider<sml::module>>
-: 2015-04-02 15:55:02.086929 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(197): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
-: std::exception::what: Failed to parse string: std::forward_list<boost::shared_ptr<expansion::inclusion_dependencies_provider<sml::module>>
-: [P12tag_workflow] = Code generation failure.
-
-In addition, even if the parser succeeded, we still need a way to tell
-dogen that the class has a template parameter; this is hard-coded at
-the moment for containers (we determine if the type is an associative
-container, etc). We need it to be dynamically determined when
-inspecting the yarn type. For example, we could have a "number of
-template parameters" in the type. This could be set in the meta-data
-for STL containers. Or we could actually specify the template
-parameters as "type arguments" just like we do with operations and
-properties (preferred). The parser would then use this info.
-
 *** Add support for =std::function=                                   :story:
 
 #+begin_quote

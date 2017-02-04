@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-03 Fri 12:55]
+#+CAPTION: Clock summary at [2017-02-04 Sat 15:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *40:48* |       |       | 100.0 |
+| *Total time*                                                                | *42:11* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 40:48   |       |       | 100.0 |
-| Active                                                                      |         | 40:48 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:01 |   0.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.8 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |  10.2 |
+| Stories                                                                     | 42:11   |       |       | 100.0 |
+| Active                                                                      |         | 42:11 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.7 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   9.9 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.5 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  13.3 |
-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.1 |
-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.3 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  25.9 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  12.9 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   3.0 |
+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.2 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  25.0 |
 | POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   2.0 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 16:17 |  39.9 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 16:28 |  39.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-02-04 Sat 14:15]--[2017-02-04 Sat 15:27] =>  1:12
     CLOCK: [2017-01-30 Mon 09:22]--[2017-01-30 Mon 09:23] =>  0:01
 
 Updates to sprint and product backlog.
@@ -337,6 +338,37 @@ it with the existing parsers:
 
 - [[http://stackoverflow.com/questions/21960167/prevent-the-boost-spirit-symbol-parser-from-accepting-a-keyword-too-early][Prevent the Boost Spirit Symbol parser from accepting a keyword too early]]
 - [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
+
+*** COMPLETED Add support for template classes                        :story:
+    CLOSED: [2017-02-04 Sat 14:53]
+
+*Rationale*: the parser is already able to cope with this use case and
+we already have number of type parameters.
+
+At present we can create classes in dia that require template
+parameters; however, when we try to create member variables that
+instantiate that class the parser fails to parse. For example,
+=expansion::inclusion_dependencies_provider= has a template parameter:
+
+: std::forward_list<boost::shared_ptr<expansion::inclusion_dependencies_provider<sml::module>>
+
+The parser fails:
+
+: 2015-04-02 15:55:02.084366 [ERROR] [dia_to_sml.identifier_parser] Failed to parse string: std::forward_list<boost::shared_ptr<expansion::inclusion_dependencies_provider<sml::module>>
+: 2015-04-02 15:55:02.086929 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/dia_to_sml/src/types/identifier_parser.cpp(197): Throw in function sml::nested_qname dogen::dia_to_sml::identifier_parser::parse_qname(const std::string &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen10dia_to_sml13parsing_errorEEE
+: std::exception::what: Failed to parse string: std::forward_list<boost::shared_ptr<expansion::inclusion_dependencies_provider<sml::module>>
+: [P12tag_workflow] = Code generation failure.
+
+In addition, even if the parser succeeded, we still need a way to tell
+dogen that the class has a template parameter; this is hard-coded at
+the moment for containers (we determine if the type is an associative
+container, etc). We need it to be dynamically determined when
+inspecting the yarn type. For example, we could have a "number of
+template parameters" in the type. This could be set in the meta-data
+for STL containers. Or we could actually specify the template
+parameters as "type arguments" just like we do with operations and
+properties (preferred). The parser would then use this info.
 
 *** STARTED Add support for primitives across the pipeline            :story:
     CLOCK: [2017-02-04 Sat 08:15]--[2017-02-04 Sat 08:26] =>  0:11
