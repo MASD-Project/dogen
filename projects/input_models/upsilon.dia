@@ -104,7 +104,7 @@ formats, it will be deprecated.
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -4026,7 +4026,7 @@ formats, it will be deprecated.
         <dia:point val="129.912,30.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.938,29.85;130.662,42.7499"/>
+        <dia:rectangle val="119.937,29.85;130.662,42.7499"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5618,7 +5618,7 @@ formats, it will be deprecated.
         <dia:point val="80.9125,14.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="80.1625,13.85;86.1875,28.6"/>
+        <dia:rectangle val="80.1625,13.85;86.1875,27.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5823,7 +5823,7 @@ formats, it will be deprecated.
         <dia:point val="126.975,46.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.627,45.65;127.725,55.6"/>
+        <dia:rectangle val="120.627,45.65;127.725,54.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6053,7 +6053,7 @@ formats, it will be deprecated.
         <dia:point val="94.18,67"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="87.075,58.35;94.93,68.6"/>
+        <dia:rectangle val="87.075,58.35;94.93,67.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
