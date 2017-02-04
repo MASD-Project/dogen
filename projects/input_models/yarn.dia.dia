@@ -3458,7 +3458,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Yarn Dia is a unidirectional transformation model that transforms a
+            <dia:string>#Yarn Dia is a unidirectional transformation model that transforms
 Dia @e diagram into an yarn @e model.
 
 By that we mean that it is a model designed to transform a representation of
@@ -3566,7 +3566,7 @@ the root of an inheritance tree.
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

@@ -29,7 +29,7 @@ namespace dogen {
 namespace yarn {
 
 /**
- * @brief Yarn Dia is a unidirectional transformation model that transforms a
+ * @brief Yarn Dia is a unidirectional transformation model that transforms
  * Dia @e diagram into an yarn @e model.
  *
  * By that we mean that it is a model designed to transform a representation of
