@@ -18,38 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TEST_DATA_FABRIC_ODB_OPTIONS_TD_HPP
-#define DOGEN_QUILT_CPP_TEST_DATA_FABRIC_ODB_OPTIONS_TD_HPP
+#include <boost/test/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+const std::string empty;
+const std::string test_module("quilt.cpp");
+const std::string test_suite("fake_tests");
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace fabric {
+}
 
-class odb_options_generator {
-public:
-    odb_options_generator();
+BOOST_AUTO_TEST_SUITE(fake_tests)
 
-public:
-    typedef dogen::quilt::cpp::fabric::odb_options result_type;
+BOOST_AUTO_TEST_CASE(test) {
+    SETUP_TEST_LOG("test");
+}
 
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
-
-} } } }
-
-#endif
+BOOST_AUTO_TEST_SUITE_END()

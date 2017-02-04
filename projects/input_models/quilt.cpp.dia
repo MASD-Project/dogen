@@ -106,7 +106,7 @@
         <dia:point val="-49,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.05,15.95;-28.8,26.55"/>
+        <dia:rectangle val="-49.05,15.95;-27.26,26.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -115,7 +115,7 @@
         <dia:point val="-49,16"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.150000000000002"/>
+        <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="10.500000000000002"/>
@@ -143,7 +143,7 @@
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_odb_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -16904,7 +16904,7 @@ and element.#</dia:string>
         <dia:point val="131.19,75.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="117.328,75.05;131.94,86.8"/>
+        <dia:rectangle val="117.327,75.05;131.94,86.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -22793,7 +22793,7 @@ and element.#</dia:string>
         <dia:point val="190.49,92.0293"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.74,90.35;208.877,100.05"/>
+        <dia:rectangle val="189.74,90.35;208.878,100.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23965,7 +23965,7 @@ and element.#</dia:string>
         <dia:point val="-46,69"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-46.75,58.35;-39.2737,69.8"/>
+        <dia:rectangle val="-46.75,58.35;-39.2738,69.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24247,7 +24247,7 @@ and element.#</dia:string>
         <dia:point val="213.15,74.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="208.627,73.45;213.9,86.8"/>
+        <dia:rectangle val="208.628,73.45;213.9,86.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
