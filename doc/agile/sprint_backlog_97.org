@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-04 Sat 17:55]
+#+CAPTION: Clock summary at [2017-02-04 Sat 22:46]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *43:50* |       |       | 100.0 |
+| *Total time*                                                                | *45:24* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 43:50   |       |       | 100.0 |
-| Active                                                                      |         | 43:50 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.8 |
+| Stories                                                                     | 45:24   |       |       | 100.0 |
+| Active                                                                      |         | 45:24 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.6 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   9.5 |
-| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.5 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  12.4 |
-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.9 |
-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.0 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  24.1 |
-| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.9 |
-| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.8 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 16:28 |  37.6 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   9.2 |
+| COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.4 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  12.0 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.8 |
+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.9 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  23.3 |
+| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.8 |
+| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.6 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 18:02 |  39.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -393,6 +393,7 @@ really need from the core models to see if we can reduce the build
 time by a fair bit (5 mins or more).
 
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-02-04 Sat 21:12]--[2017-02-04 Sat 22:46] =>  1:34
     CLOCK: [2017-02-04 Sat 08:15]--[2017-02-04 Sat 08:26] =>  0:11
     CLOCK: [2017-02-03 Fri 12:48]--[2017-02-03 Fri 12:55] =>  0:07
     CLOCK: [2017-02-03 Fri 12:24]--[2017-02-03 Fri 12:47] =>  0:23

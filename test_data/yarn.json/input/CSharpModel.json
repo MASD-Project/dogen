@@ -1025,6 +1025,16 @@
     },
     {
       "name": {
+        "simple": "ShortPrimitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying short.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "short"
+      }
+    },
+    {
+      "name": {
         "simple": "MyException"
       },
       "meta_type": "exception",

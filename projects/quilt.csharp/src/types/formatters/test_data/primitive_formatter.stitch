@@ -16,8 +16,10 @@
 <#+
 
 dogen::formatters::artefact
-primitive_formatter::format(const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::artefact r;
-    return r;
+primitive_formatter::format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
+    // const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    return a.make_artefact();
 }
 #>

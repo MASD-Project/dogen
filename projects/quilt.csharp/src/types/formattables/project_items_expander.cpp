@@ -25,6 +25,7 @@
 #include"dogen/yarn/types/builtin.hpp"
 #include"dogen/yarn/types/exception.hpp"
 #include"dogen/yarn/types/enumeration.hpp"
+#include"dogen/yarn/types/primitive.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 
@@ -37,6 +38,7 @@ bool project_items_expander::is_project_item(const std::type_index& ti) const {
     return
         ti == std::type_index(typeid(fabric::assistant)) ||
         ti == std::type_index(typeid(yarn::enumeration)) ||
+        ti == std::type_index(typeid(yarn::primitive)) ||
         ti == std::type_index(typeid(yarn::exception)) ||
         ti == std::type_index(typeid(yarn::object)) ||
         ti == std::type_index(typeid(yarn::builtin)) ||

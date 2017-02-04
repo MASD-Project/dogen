@@ -67,8 +67,105 @@ inclusion_dependencies(const yarn::element& /*e*/) const {
 }
 
 dogen::formatters::artefact
-primitive_formatter::format(const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::artefact r;
-    return r;
+primitive_formatter::format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
+    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    {
+        const auto sn(e.name().simple());
+        // const auto qn(a.get_qualified_name(e.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+a.stream() << "using System;" << std::endl;
+a.stream() << std::endl;
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            a.comment(e.documentation(), 1/*indent*/);
+a.stream() << "    public sealed class " << sn << std::endl;
+a.stream() << "    {" << std::endl;
+            if (!ctx.element_properties().helper_properties().empty())
+                a.add_helper_methods(id);
+
+            /*
+             * Properties
+             */
+a.stream() << "        #region Properties" << std::endl;
+            const auto& attr(p.value_attribute());
+            a.comment(attr.documentation(), 2/*indent*/);
+a.stream() << "        public " << a.get_qualified_name(attr.parsed_type()) << " " << attr.name().simple() << " { get; " << (p.is_immutable() ? "internal " : "") << "set; }" << std::endl;
+a.stream() << "        #endregion" << std::endl;
+a.stream() << std::endl;
+            /*
+             * Constructors.
+             */
+a.stream() << "        #region Constructors" << std::endl;
+a.stream() << "        public " << sn << "() { }" << std::endl;
+a.stream() << "        public " << sn << "(" << a.get_qualified_name(attr.parsed_type()) << " " << a.make_argument_name(attr) << ")" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            " << attr.name().simple() << " = " << a.make_argument_name(attr) << ";" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << "        #endregion" << std::endl;
+a.stream() << std::endl;
+            /*
+             * Equals
+             */
+a.stream() << "        #region Equality" << std::endl;
+a.stream() << "        public override bool Equals(object obj)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            if (ReferenceEquals(null, obj)) return false;" << std::endl;
+a.stream() << "            if (ReferenceEquals(this, obj)) return true;" << std::endl;
+a.stream() << "            if (obj.GetType() != GetType()) return false;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            var value = obj as " << sn << ";" << std::endl;
+a.stream() << "            if (value == null) return false;" << std::endl;
+a.stream() << "            return" << std::endl;
+             if (attr.parsed_type().is_current_simple_type()) {
+                if (attr.parsed_type().is_floating_point()) {
+a.stream() << "                NearlyEqual(" << attr.name().simple() << ", value." << attr.name().simple() << ");" << std::endl;
+                } else {
+a.stream() << "                " << attr.name().simple() << " == value." << attr.name().simple() << ";" << std::endl;
+                }
+           } else {
+a.stream() << "                " << attr.name().simple() << " != null && value." << attr.name().simple() << " != null &&" << std::endl;
+a.stream() << "                " << attr.name().simple() << ".Equals(value." << attr.name().simple() << ");" << std::endl;
+            }
+a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static bool operator ==(" << sn << " lhs, " << sn << " rhs)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            if (Object.ReferenceEquals(lhs, rhs))" << std::endl;
+a.stream() << "                return true;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public static bool operator !=(" << sn << " lhs, " << sn << " rhs)" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            return !(lhs == rhs);" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << std::endl;
+a.stream() << "        public override int GetHashCode()" << std::endl;
+a.stream() << "        {" << std::endl;
+a.stream() << "            unchecked" << std::endl;
+a.stream() << "            {" << std::endl;
+a.stream() << "                // Choose large primes to avoid hashing collisions" << std::endl;
+a.stream() << "                const int HashingBase = (int) 2166136261;" << std::endl;
+a.stream() << "                const int HashingMultiplier = 16777619;" << std::endl;
+a.stream() << std::endl;
+a.stream() << "                int hash = HashingBase;" << std::endl;
+                if (attr.parsed_type().is_current_simple_type()) {
+a.stream() << "                hash = (hash * HashingMultiplier) ^ " << attr.name().simple() << ".GetHashCode();" << std::endl;
+                } else {
+a.stream() << "                hash = (hash * HashingMultiplier) ^" << std::endl;
+a.stream() << "                    (!" << a.reference_equals(attr) << ".ReferenceEquals(null, " << attr.name().simple() << ") ? " << attr.name().simple() << ".GetHashCode() : 0);" << std::endl;
+                }
+a.stream() << "                return hash;" << std::endl;
+a.stream() << "            }" << std::endl;
+a.stream() << "        }" << std::endl;
+a.stream() << "        #endregion" << std::endl;
+a.stream() << "    }" << std::endl;
+        } // snf
+    } // sbf
+    return a.make_artefact();
 }
 } } } } }

@@ -16,8 +16,131 @@
 <#+
 
 dogen::formatters::artefact
-primitive_formatter::format(const context& /*ctx*/, const yarn::element& /*e*/) const {
-    dogen::formatters::artefact r;
-    return r;
+primitive_formatter::format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), id);
+    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    {
+        const auto sn(e.name().simple());
+        // const auto qn(a.get_qualified_name(e.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+#>
+using System;
+
+<#+
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+            a.comment(e.documentation(), 1/*indent*/);
+#>
+    public sealed class <#= sn #>
+    {
+<#+
+            if (!ctx.element_properties().helper_properties().empty())
+                a.add_helper_methods(id);
+
+            /*
+             * Properties
+             */
+#>
+        #region Properties
+<#+
+            const auto& attr(p.value_attribute());
+            a.comment(attr.documentation(), 2/*indent*/);
+#>
+        public <#= a.get_qualified_name(attr.parsed_type()) #> <#= attr.name().simple() #> { get; <#= (p.is_immutable() ? "internal " : "") #>set; }
+        #endregion
+
+<#+
+            /*
+             * Constructors.
+             */
+#>
+        #region Constructors
+        public <#= sn #>() { }
+        public <#= sn #>(<#= a.get_qualified_name(attr.parsed_type()) #> <#= a.make_argument_name(attr) #>)
+        {
+            <#= attr.name().simple() #> = <#= a.make_argument_name(attr) #>;
+        }
+        #endregion
+
+<#+
+            /*
+             * Equals
+             */
+#>
+        #region Equality
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != GetType()) return false;
+
+            var value = obj as <#= sn #>;
+            if (value == null) return false;
+            return
+<#+
+             if (attr.parsed_type().is_current_simple_type()) {
+                if (attr.parsed_type().is_floating_point()) {
+#>
+                NearlyEqual(<#= attr.name().simple() #>, value.<#= attr.name().simple() #>);
+<#+
+                } else {
+#>
+                <#= attr.name().simple() #> == value.<#= attr.name().simple() #>;
+<#+
+                }
+           } else {
+#>
+                <#= attr.name().simple() #> != null && value.<#= attr.name().simple() #> != null &&
+                <#= attr.name().simple() #>.Equals(value.<#= attr.name().simple() #>);
+<#+
+            }
+#>
+        }
+
+        public static bool operator ==(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            if (Object.ReferenceEquals(lhs, rhs))
+                return true;
+
+            return !Object.ReferenceEquals(null, lhs) && lhs.Equals(rhs);
+        }
+
+        public static bool operator !=(<#= sn #> lhs, <#= sn #> rhs)
+        {
+            return !(lhs == rhs);
+        }
+
+        public override int GetHashCode()
+        {
+            unchecked
+            {
+                // Choose large primes to avoid hashing collisions
+                const int HashingBase = (int) 2166136261;
+                const int HashingMultiplier = 16777619;
+
+                int hash = HashingBase;
+<#+
+                if (attr.parsed_type().is_current_simple_type()) {
+#>
+                hash = (hash * HashingMultiplier) ^ <#= attr.name().simple() #>.GetHashCode();
+<#+
+                } else {
+#>
+                hash = (hash * HashingMultiplier) ^
+                    (!<#= a.reference_equals(attr) #>.ReferenceEquals(null, <#= attr.name().simple() #>) ? <#= attr.name().simple() #>.GetHashCode() : 0);
+<#+
+                }
+#>
+                return hash;
+            }
+        }
+        #endregion
+    }
+<#+
+        } // snf
+    } // sbf
+    return a.make_artefact();
 }
 #>
