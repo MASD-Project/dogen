@@ -147,6 +147,9 @@ public:
 
     /**
      * @brief The set of all attributes obtained via inheritance, by parent name.
+     *
+     * Note that we are using name as a key by design (instead of id); it is required for
+     * formatting.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& inherited_attributes() const;

@@ -4470,17 +4470,17 @@ decided instead to use the word object.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-83.66,31"/>
+        <dia:point val="-85.4675,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-84.41,21.95;-53.0425,31.8"/>
+        <dia:rectangle val="-86.2175,21.95;-53.0425,31.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-83.66,31"/>
-        <dia:point val="-83.66,26"/>
+        <dia:point val="-85.4675,31"/>
+        <dia:point val="-85.4675,26"/>
         <dia:point val="-53.2425,26"/>
         <dia:point val="-53.2425,22"/>
       </dia:attribute>
@@ -5030,16 +5030,16 @@ can make use of these types.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O42">
       <dia:attribute name="obj_pos">
-        <dia:point val="-97,31"/>
+        <dia:point val="-99,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-97.05,30.95;-70.27,37.85"/>
+        <dia:rectangle val="-99.05,30.95;-71.885,37.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-97,31"/>
+        <dia:point val="-99,31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.68"/>
+        <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -5192,13 +5192,16 @@ not have a need for it.#</dia:string>
             <dia:string>#inherited_attributes#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;name,std::list&lt;attribute&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;name, std::list&lt;attribute&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#The set of all attributes obtained via inheritance, by parent name.#</dia:string>
+            <dia:string>#The set of all attributes obtained via inheritance, by parent name.
+
+Note that we are using name as a key by design (instead of id); it is required for
+formatting.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
