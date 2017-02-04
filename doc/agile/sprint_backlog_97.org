@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-04 Sat 17:42]
+#+CAPTION: Clock summary at [2017-02-04 Sat 17:55]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *43:42* |       |       | 100.0 |
+| *Total time*                                                                | *43:50* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 43:42   |       |       | 100.0 |
-| Active                                                                      |         | 43:42 |       | 100.0 |
+| Stories                                                                     | 43:50   |       |       | 100.0 |
+| Active                                                                      |         | 43:50 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.6 |
 | COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   9.5 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.5 |
 | COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  12.4 |
 | COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.9 |
-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.1 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  24.2 |
+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   3.0 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  24.1 |
 | POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.9 |
-| STARTED Try to improve compilation times                                    |         |       |  1:31 |   3.5 |
-| STARTED Add support for primitives across the pipeline                      |         |       | 16:28 |  37.7 |
+| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.8 |
+| STARTED Add support for primitives across the pipeline                      |         |       | 16:28 |  37.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -371,7 +371,9 @@ for STL containers. Or we could actually specify the template
 parameters as "type arguments" just like we do with operations and
 properties (preferred). The parser would then use this info.
 
-*** STARTED Try to improve compilation times                          :story:
+*** COMPLETED Try to improve compilation times                        :story:
+    CLOSED: [2017-02-04 Sat 17:55]
+    CLOCK: [2017-02-04 Sat 17:49]--[2017-02-04 Sat 17:52] =>  0:03
     CLOCK: [2017-02-04 Sat 17:43]--[2017-02-04 Sat 17:48] =>  0:05
     CLOCK: [2017-02-04 Sat 17:40]--[2017-02-04 Sat 17:42] =>  0:02
     CLOCK: [2017-02-04 Sat 17:32]--[2017-02-04 Sat 17:37] =>  0:05
