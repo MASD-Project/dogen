@@ -8005,6 +8005,12 @@ that I don't have to install Dia.
 It should be fairly straightforward to add a yuml front end that reads
 a file using their markup language and generates an yarn model from it.
 
+*** Add PlantUML markup language support                              :story:
+
+It would be nice to support PlantUML as a frontend:
+
+http://plantuml.com/
+
 *** Code generation as a service                                       :epic:
 
 *Latest Understanding*
