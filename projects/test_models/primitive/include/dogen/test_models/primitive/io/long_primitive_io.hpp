@@ -18,44 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/primitive/test_data/a_long_primitive_td.hpp"
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_IO_LONG_PRIMITIVE_IO_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_IO_LONG_PRIMITIVE_IO_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-long create_long(const unsigned int position) {
-    return static_cast<long>(position);
-}
-
-}
+#include <iosfwd>
+#include "dogen/test_models/primitive/types/long_primitive.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-a_long_primitive_generator::a_long_primitive_generator() : position_(0) { }
-
-void a_long_primitive_generator::
-populate(const unsigned int position, result_type& v) {
-    v.value(create_long(position + 1));
-}
-
-a_long_primitive_generator::result_type
-a_long_primitive_generator::create(const unsigned int position) {
-    a_long_primitive r;
-    a_long_primitive_generator::populate(position, r);
-    return r;
-}
-
-a_long_primitive_generator::result_type*
-a_long_primitive_generator::create_ptr(const unsigned int position) {
-    a_long_primitive* r = new a_long_primitive();
-    a_long_primitive_generator::populate(position, *r);
-    return r;
-}
-
-a_long_primitive_generator::result_type
-a_long_primitive_generator::operator()() {
-    return create(position_++);
-}
+std::ostream&
+operator<<(std::ostream& s, const dogen::test_models::primitive::long_primitive& v);
 
 } } }
+
+#endif

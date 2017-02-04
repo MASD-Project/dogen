@@ -29,12 +29,12 @@
 #include "dogen/test_models/primitive/types/int_primitive.hpp"
 #include "dogen/test_models/primitive/types/bool_primitive.hpp"
 #include "dogen/test_models/primitive/types/char_primitive.hpp"
+#include "dogen/test_models/primitive/types/long_primitive.hpp"
 #include "dogen/test_models/primitive/types/uint_primitive.hpp"
 #include "dogen/test_models/primitive/types/float_primitive.hpp"
 #include "dogen/test_models/primitive/types/short_primitive.hpp"
 #include "dogen/test_models/primitive/types/uchar_primitive.hpp"
 #include "dogen/test_models/primitive/types/ulong_primitive.hpp"
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
 #include "dogen/test_models/primitive/types/double_primitive.hpp"
 #include "dogen/test_models/primitive/types/ushort_primitive.hpp"
 #include "dogen/test_models/primitive/serialization/consumer_fwd_ser.hpp"
@@ -57,7 +57,7 @@ public:
     consumer(
         const dogen::test_models::primitive::short_primitive& prop0,
         const dogen::test_models::primitive::ushort_primitive& prop1,
-        const dogen::test_models::primitive::a_long_primitive& prop2,
+        const dogen::test_models::primitive::long_primitive& prop2,
         const dogen::test_models::primitive::ulong_primitive& prop3,
         const dogen::test_models::primitive::int_primitive& prop4,
         const dogen::test_models::primitive::uint_primitive& prop5,
@@ -85,10 +85,10 @@ public:
     void prop1(const dogen::test_models::primitive::ushort_primitive& v);
     void prop1(const dogen::test_models::primitive::ushort_primitive&& v);
 
-    const dogen::test_models::primitive::a_long_primitive& prop2() const;
-    dogen::test_models::primitive::a_long_primitive& prop2();
-    void prop2(const dogen::test_models::primitive::a_long_primitive& v);
-    void prop2(const dogen::test_models::primitive::a_long_primitive&& v);
+    const dogen::test_models::primitive::long_primitive& prop2() const;
+    dogen::test_models::primitive::long_primitive& prop2();
+    void prop2(const dogen::test_models::primitive::long_primitive& v);
+    void prop2(const dogen::test_models::primitive::long_primitive&& v);
 
     const dogen::test_models::primitive::ulong_primitive& prop3() const;
     dogen::test_models::primitive::ulong_primitive& prop3();
@@ -143,7 +143,7 @@ public:
 private:
     dogen::test_models::primitive::short_primitive prop0_;
     dogen::test_models::primitive::ushort_primitive prop1_;
-    dogen::test_models::primitive::a_long_primitive prop2_;
+    dogen::test_models::primitive::long_primitive prop2_;
     dogen::test_models::primitive::ulong_primitive prop3_;
     dogen::test_models::primitive::int_primitive prop4_;
     dogen::test_models::primitive::uint_primitive prop5_;

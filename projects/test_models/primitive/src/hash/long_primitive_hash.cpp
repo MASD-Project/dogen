@@ -18,27 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_A_LONG_PRIMITIVE_SER_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_A_LONG_PRIMITIVE_SER_HPP
+#include "dogen/test_models/primitive/hash/long_primitive_hash.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::test_models::primitive::a_long_primitive)
+}
 
-namespace boost {
-namespace serialization {
+namespace dogen {
+namespace test_models {
+namespace primitive {
 
-template<typename Archive>
-void save(Archive& ar, const dogen::test_models::primitive::a_long_primitive& v, unsigned int version);
+std::size_t long_primitive_hasher::hash(const long_primitive& v) {
+    std::size_t seed(0);
+    combine(seed, v.value());
+    return seed;
+}
 
-template<typename Archive>
-void load(Archive& ar, dogen::test_models::primitive::a_long_primitive& v, unsigned int version);
-
-} }
-
-#endif
+} } }

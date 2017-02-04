@@ -18,19 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_A_LONG_PRIMITIVE_FWD_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_A_LONG_PRIMITIVE_FWD_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_HASH_LONG_PRIMITIVE_HASH_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_HASH_LONG_PRIMITIVE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/test_models/primitive/types/long_primitive.hpp"
+
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-class a_long_primitive;
+struct long_primitive_hasher {
+public:
+    static std::size_t hash(const long_primitive& v);
+};
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::test_models::primitive::long_primitive> {
+public:
+    size_t operator()(const dogen::test_models::primitive::long_primitive& v) const {
+        return dogen::test_models::primitive::long_primitive_hasher::hash(v);
+    }
+};
+
+}
 #endif

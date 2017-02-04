@@ -23,12 +23,12 @@
 #include "dogen/test_models/primitive/io/int_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/bool_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/char_primitive_io.hpp"
+#include "dogen/test_models/primitive/io/long_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/uint_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/float_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/short_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/uchar_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/ulong_primitive_io.hpp"
-#include "dogen/test_models/primitive/io/a_long_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/double_primitive_io.hpp"
 #include "dogen/test_models/primitive/io/ushort_primitive_io.hpp"
 

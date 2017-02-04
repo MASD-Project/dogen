@@ -339,6 +339,7 @@ it with the existing parsers:
 - [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
 
 *** STARTED Add support for primitives across the pipeline            :story:
+    CLOCK: [2017-02-04 Sat 08:15]--[2017-02-04 Sat 08:26] =>  0:11
     CLOCK: [2017-02-03 Fri 12:48]--[2017-02-03 Fri 12:55] =>  0:07
     CLOCK: [2017-02-03 Fri 12:24]--[2017-02-03 Fri 12:47] =>  0:23
     CLOCK: [2017-02-03 Fri 11:14]--[2017-02-03 Fri 12:23] =>  1:09

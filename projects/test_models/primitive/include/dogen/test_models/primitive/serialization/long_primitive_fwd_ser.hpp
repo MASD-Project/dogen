@@ -18,36 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_HASH_A_LONG_PRIMITIVE_HASH_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_HASH_A_LONG_PRIMITIVE_HASH_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_LONG_PRIMITIVE_FWD_SER_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_SERIALIZATION_LONG_PRIMITIVE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
+#include "dogen/test_models/primitive/types/long_primitive_fwd.hpp"
 
-namespace dogen {
-namespace test_models {
-namespace primitive {
+namespace boost {
+namespace serialization {
 
-struct a_long_primitive_hasher {
-public:
-    static std::size_t hash(const a_long_primitive& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::test_models::primitive::long_primitive& v, unsigned int version);
 
-} } }
+template<class Archive>
+void load(Archive& ar, dogen::test_models::primitive::long_primitive& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::test_models::primitive::a_long_primitive> {
-public:
-    size_t operator()(const dogen::test_models::primitive::a_long_primitive& v) const {
-        return dogen::test_models::primitive::a_long_primitive_hasher::hash(v);
-    }
-};
-
-}
 #endif

@@ -18,15 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_A_LONG_PRIMITIVE_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_A_LONG_PRIMITIVE_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_LONG_PRIMITIVE_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_LONG_PRIMITIVE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <algorithm>
-#include "dogen/test_models/primitive/serialization/a_long_primitive_fwd_ser.hpp"
+#include "dogen/test_models/primitive/serialization/long_primitive_fwd_ser.hpp"
 
 namespace dogen {
 namespace test_models {
@@ -34,21 +34,21 @@ namespace primitive {
 /**
  * @brief Test a primitive with an underlying long.
  */
-class a_long_primitive final {
+class long_primitive final {
 public:
-    a_long_primitive() = default;
-    a_long_primitive(const a_long_primitive&) = default;
-    a_long_primitive(a_long_primitive&&) = default;
-    ~a_long_primitive() = default;
+    long_primitive() = default;
+    long_primitive(const long_primitive&) = default;
+    long_primitive(long_primitive&&) = default;
+    ~long_primitive() = default;
 public:
-    explicit a_long_primitive(const long value);
+    explicit long_primitive(const long value);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::test_models::primitive::a_long_primitive& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::test_models::primitive::long_primitive& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::a_long_primitive& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::test_models::primitive::long_primitive& v, unsigned int version);
 
 public:
     /**
@@ -65,14 +65,14 @@ public:
     }
 
 public:
-    bool operator==(const a_long_primitive& rhs) const;
-    bool operator!=(const a_long_primitive& rhs) const {
+    bool operator==(const long_primitive& rhs) const;
+    bool operator!=(const long_primitive& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(a_long_primitive& other) noexcept;
-    a_long_primitive& operator=(a_long_primitive other);
+    void swap(long_primitive& other) noexcept;
+    long_primitive& operator=(long_primitive other);
 
 private:
     long value_;
@@ -84,8 +84,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::test_models::primitive::a_long_primitive& lhs,
-    dogen::test_models::primitive::a_long_primitive& rhs) {
+    dogen::test_models::primitive::long_primitive& lhs,
+    dogen::test_models::primitive::long_primitive& rhs) {
     lhs.swap(rhs);
 }
 

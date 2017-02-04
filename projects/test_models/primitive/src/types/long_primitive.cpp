@@ -18,15 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_ODB_A_LONG_PRIMITIVE_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_ODB_A_LONG_PRIMITIVE_PRAGMAS_HPP
+#include "dogen/test_models/primitive/types/long_primitive.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace test_models {
+namespace primitive {
 
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
+long_primitive::long_primitive(const long value)
+    : value_(value) { }
 
-// class has no ODB pragmas defined.
+long long_primitive::value() const {
+    return value_;
+}
 
-#endif
+void long_primitive::value(const long v) {
+    value_ = v;
+}
+
+bool long_primitive::operator==(const long_primitive& rhs) const {
+    return value_ == rhs.value_;
+}
+
+void long_primitive::swap(long_primitive& other) noexcept {
+    using std::swap;
+    swap(value_, other.value_);
+}
+
+long_primitive& long_primitive::operator=(long_primitive other) {
+    using std::swap;
+    swap(*this, other);
+    return *this;
+}
+
+} } }

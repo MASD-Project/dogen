@@ -27,7 +27,7 @@ namespace primitive {
 consumer::consumer(
     const dogen::test_models::primitive::short_primitive& prop0,
     const dogen::test_models::primitive::ushort_primitive& prop1,
-    const dogen::test_models::primitive::a_long_primitive& prop2,
+    const dogen::test_models::primitive::long_primitive& prop2,
     const dogen::test_models::primitive::ulong_primitive& prop3,
     const dogen::test_models::primitive::int_primitive& prop4,
     const dogen::test_models::primitive::uint_primitive& prop5,
@@ -115,19 +115,19 @@ void consumer::prop1(const dogen::test_models::primitive::ushort_primitive&& v) 
     prop1_ = std::move(v);
 }
 
-const dogen::test_models::primitive::a_long_primitive& consumer::prop2() const {
+const dogen::test_models::primitive::long_primitive& consumer::prop2() const {
     return prop2_;
 }
 
-dogen::test_models::primitive::a_long_primitive& consumer::prop2() {
+dogen::test_models::primitive::long_primitive& consumer::prop2() {
     return prop2_;
 }
 
-void consumer::prop2(const dogen::test_models::primitive::a_long_primitive& v) {
+void consumer::prop2(const dogen::test_models::primitive::long_primitive& v) {
     prop2_ = v;
 }
 
-void consumer::prop2(const dogen::test_models::primitive::a_long_primitive&& v) {
+void consumer::prop2(const dogen::test_models::primitive::long_primitive&& v) {
     prop2_ = std::move(v);
 }
 

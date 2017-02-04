@@ -34,7 +34,7 @@
           "name": {
             "simple": "prop2"
           },
-          "unparsed_type": "a_long_primitive"
+          "unparsed_type": "long_primitive"
         },
         {
           "name": {
@@ -85,16 +85,6 @@
           "unparsed_type": "bool_primitive"
         }
       ]
-    },
-    {
-      "name": {
-        "simple": "a_long_primitive"
-      },
-      "meta_type": "primitive",
-      "documentation": "Test a primitive with an underlying long.\n",
-      "annotation": {
-        "yarn.primitive.underlying_element": "long"
-      }
     },
     {
       "name": {
@@ -157,6 +147,16 @@
       "documentation": "Test a primitive with an underlying int.\n",
       "annotation": {
         "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "long_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying long.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "long"
       }
     },
     {

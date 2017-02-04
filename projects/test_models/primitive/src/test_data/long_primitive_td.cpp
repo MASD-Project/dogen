@@ -18,36 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
+#include "dogen/test_models/primitive/test_data/long_primitive_td.hpp"
+
+namespace {
+
+long create_long(const unsigned int position) {
+    return static_cast<long>(position);
+}
+
+}
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-a_long_primitive::a_long_primitive(const long value)
-    : value_(value) { }
+long_primitive_generator::long_primitive_generator() : position_(0) { }
 
-long a_long_primitive::value() const {
-    return value_;
+void long_primitive_generator::
+populate(const unsigned int position, result_type& v) {
+    v.value(create_long(position + 1));
 }
 
-void a_long_primitive::value(const long v) {
-    value_ = v;
+long_primitive_generator::result_type
+long_primitive_generator::create(const unsigned int position) {
+    long_primitive r;
+    long_primitive_generator::populate(position, r);
+    return r;
 }
 
-bool a_long_primitive::operator==(const a_long_primitive& rhs) const {
-    return value_ == rhs.value_;
+long_primitive_generator::result_type*
+long_primitive_generator::create_ptr(const unsigned int position) {
+    long_primitive* r = new long_primitive();
+    long_primitive_generator::populate(position, *r);
+    return r;
 }
 
-void a_long_primitive::swap(a_long_primitive& other) noexcept {
-    using std::swap;
-    swap(value_, other.value_);
-}
-
-a_long_primitive& a_long_primitive::operator=(a_long_primitive other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+long_primitive_generator::result_type
+long_primitive_generator::operator()() {
+    return create(position_++);
 }
 
 } } }

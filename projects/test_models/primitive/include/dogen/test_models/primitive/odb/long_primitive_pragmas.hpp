@@ -18,23 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_IO_A_LONG_PRIMITIVE_IO_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_IO_A_LONG_PRIMITIVE_IO_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_ODB_LONG_PRIMITIVE_PRAGMAS_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_ODB_LONG_PRIMITIVE_PRAGMAS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
+#include "dogen/test_models/primitive/types/long_primitive.hpp"
 
-namespace dogen {
-namespace test_models {
-namespace primitive {
-
-std::ostream&
-operator<<(std::ostream& s, const dogen::test_models::primitive::a_long_primitive& v);
-
-} } }
+// class has no ODB pragmas defined.
 
 #endif

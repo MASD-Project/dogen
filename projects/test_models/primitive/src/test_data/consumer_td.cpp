@@ -22,12 +22,12 @@
 #include "dogen/test_models/primitive/test_data/int_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/bool_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/char_primitive_td.hpp"
+#include "dogen/test_models/primitive/test_data/long_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/uint_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/float_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/short_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/uchar_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/ulong_primitive_td.hpp"
-#include "dogen/test_models/primitive/test_data/a_long_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/double_primitive_td.hpp"
 #include "dogen/test_models/primitive/test_data/ushort_primitive_td.hpp"
 
@@ -43,9 +43,9 @@ create_dogen_test_models_primitive_ushort_primitive(const unsigned int position)
     return dogen::test_models::primitive::ushort_primitive_generator::create(position);
 }
 
-dogen::test_models::primitive::a_long_primitive
-create_dogen_test_models_primitive_a_long_primitive(const unsigned int position) {
-    return dogen::test_models::primitive::a_long_primitive_generator::create(position);
+dogen::test_models::primitive::long_primitive
+create_dogen_test_models_primitive_long_primitive(const unsigned int position) {
+    return dogen::test_models::primitive::long_primitive_generator::create(position);
 }
 
 dogen::test_models::primitive::ulong_primitive
@@ -100,7 +100,7 @@ void consumer_generator::
 populate(const unsigned int position, result_type& v) {
     v.prop0(create_dogen_test_models_primitive_short_primitive(position + 0));
     v.prop1(create_dogen_test_models_primitive_ushort_primitive(position + 1));
-    v.prop2(create_dogen_test_models_primitive_a_long_primitive(position + 2));
+    v.prop2(create_dogen_test_models_primitive_long_primitive(position + 2));
     v.prop3(create_dogen_test_models_primitive_ulong_primitive(position + 3));
     v.prop4(create_dogen_test_models_primitive_int_primitive(position + 4));
     v.prop5(create_dogen_test_models_primitive_uint_primitive(position + 5));

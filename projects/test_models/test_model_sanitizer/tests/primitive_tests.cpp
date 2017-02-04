@@ -46,7 +46,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<short_primitive_generator>();
     test_equality<ushort_primitive_generator>();
-    test_equality<a_long_primitive_generator>();
+    test_equality<long_primitive_generator>();
     test_equality<ulong_primitive_generator>();
     test_equality<int_primitive_generator>();
     test_equality<uint_primitive_generator>();
@@ -64,7 +64,7 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     roundtrip_type<short_primitive_generator>();
     roundtrip_type<ushort_primitive_generator>();
-    roundtrip_type<a_long_primitive_generator>();
+    roundtrip_type<long_primitive_generator>();
     roundtrip_type<ulong_primitive_generator>();
     roundtrip_type<int_primitive_generator>();
     roundtrip_type<uint_primitive_generator>();
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     SETUP_TEST_LOG("validate_hashing");
     test_hashing<short_primitive_generator>();
     test_hashing<ushort_primitive_generator>();
-    test_hashing<a_long_primitive_generator>();
+    test_hashing<long_primitive_generator>();
     test_hashing<ulong_primitive_generator>();
     test_hashing<int_primitive_generator>();
     test_hashing<uint_primitive_generator>();
@@ -100,7 +100,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
     test_swap<short_primitive_generator>();
     test_swap<ushort_primitive_generator>();
-    test_swap<a_long_primitive_generator>();
+    test_swap<long_primitive_generator>();
     test_swap<ulong_primitive_generator>();
     test_swap<int_primitive_generator>();
     test_swap<uint_primitive_generator>();
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     SETUP_TEST_LOG("validate_io");
     test_io<short_primitive_generator>();
     test_io<ushort_primitive_generator>();
-    test_io<a_long_primitive_generator>();
+    test_io<long_primitive_generator>();
     test_io<ulong_primitive_generator>();
     test_io<int_primitive_generator>();
     test_io<uint_primitive_generator>();
@@ -135,7 +135,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
     test_move_assignment_copy<short_primitive_generator>();
     test_move_assignment_copy<ushort_primitive_generator>();
-    test_move_assignment_copy<a_long_primitive_generator>();
+    test_move_assignment_copy<long_primitive_generator>();
     test_move_assignment_copy<ulong_primitive_generator>();
     test_move_assignment_copy<int_primitive_generator>();
     test_move_assignment_copy<uint_primitive_generator>();

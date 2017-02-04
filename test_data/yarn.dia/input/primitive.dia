@@ -388,7 +388,7 @@
             <dia:string>#prop2#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#a_long_primitive#</dia:string>
+            <dia:string>#long_primitive#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -714,19 +714,19 @@
         <dia:point val="2,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,23.95;9.93,27.05"/>
+        <dia:rectangle val="1.95,23.95;8.99,27.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="2,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8799999999999999"/>
+        <dia:real val="6.9400000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#a_long_primitive#</dia:string>
+        <dia:string>#long_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#primitive#</dia:string>

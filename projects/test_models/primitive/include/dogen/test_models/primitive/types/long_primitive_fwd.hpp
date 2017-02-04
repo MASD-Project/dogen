@@ -18,37 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_A_LONG_PRIMITIVE_TD_HPP
-#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_A_LONG_PRIMITIVE_TD_HPP
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TYPES_LONG_PRIMITIVE_FWD_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TYPES_LONG_PRIMITIVE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/primitive/types/a_long_primitive.hpp"
-
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-class a_long_primitive_generator {
-public:
-    a_long_primitive_generator();
-
-public:
-    typedef dogen::test_models::primitive::a_long_primitive result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+class long_primitive;
 
 } } }
 

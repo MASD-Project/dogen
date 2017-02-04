@@ -18,26 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/test_models/primitive/hash/a_long_primitive_hash.hpp"
-
-namespace {
-
-template <typename HashableType>
-inline void combine(std::size_t& seed, const HashableType& value) {
-    std::hash<HashableType> hasher;
-    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
-}
-
-}
+#include <ostream>
+#include "dogen/test_models/primitive/io/long_primitive_io.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-std::size_t a_long_primitive_hasher::hash(const a_long_primitive& v) {
-    std::size_t seed(0);
-    combine(seed, v.value());
-    return seed;
+std::ostream& operator<<(std::ostream& s, const long_primitive& v) {
+
+    s << " { "
+      << "\"__type__\": " << "\"dogen::test_models::primitive::long_primitive\"" << ", "
+      << "\"value\": " << v.value()
+      << " }";
+
+    return s;
 }
 
 } } }

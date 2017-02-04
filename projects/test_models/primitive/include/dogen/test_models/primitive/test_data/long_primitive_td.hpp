@@ -18,21 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/test_models/primitive/io/a_long_primitive_io.hpp"
+#ifndef DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_LONG_PRIMITIVE_TD_HPP
+#define DOGEN_TEST_MODELS_PRIMITIVE_TEST_DATA_LONG_PRIMITIVE_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/test_models/primitive/types/long_primitive.hpp"
 
 namespace dogen {
 namespace test_models {
 namespace primitive {
 
-std::ostream& operator<<(std::ostream& s, const a_long_primitive& v) {
+class long_primitive_generator {
+public:
+    long_primitive_generator();
 
-    s << " { "
-      << "\"__type__\": " << "\"dogen::test_models::primitive::a_long_primitive\"" << ", "
-      << "\"value\": " << v.value()
-      << " }";
+public:
+    typedef dogen::test_models::primitive::long_primitive result_type;
 
-    return s;
-}
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } } }
+
+#endif
