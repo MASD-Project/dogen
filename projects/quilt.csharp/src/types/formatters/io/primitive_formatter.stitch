@@ -19,7 +19,75 @@ dogen::formatters::artefact
 primitive_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    // const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    {
+        const auto sn(e.name().simple());
+        const auto qn(a.get_qualified_name(e.name()));
+        auto sbf(a.make_scoped_boilerplate_formatter());
+        {
+#>
+using System;
+
+<#+
+            const auto ns(a.make_namespaces(e.name()));
+            auto snf(a.make_scoped_namespace_formatter(ns));
+#>
+    /// <summary>
+    /// Generates sequences of <#= sn #>.
+    /// </summary>
+    public static class <#= sn #>Dumper
+    {
+        static internal void Dump(AssistantDumper assistant, <#= sn #> value, bool withSeparator = false)
+        {
+            assistant.IncrementDepth();
+            if (assistant.MaximumDepthExceeded())
+                return;
+
+            assistant.AddStartObject();
+            assistant.AddType("<#= qn #>", true/*withSeparator*/);
+            if (value == null)
+            {
+                assistant.Add("data", "<null>");
+                assistant.AddEndObject();
+                return;
+            }
+
+            assistant.AddKey("data");
+            assistant.AddPairSeparator();
+            assistant.AddStartObject();
+<#+
+            const auto attr(p.value_attribute());
+            const auto oap(a.get_assistant_properties(attr));
+            if (oap && oap->requires_assistance()) {
+#>
+            assistant.Add("<#= attr.name().simple() #>", value.<#= attr.name().simple() #>);
+<#+
+            } else {
+                const auto attr_qn(a.get_qualified_name(attr.parsed_type().current()));
+#>
+            assistant.AddKey("<#= attr.name().simple() #>");
+            assistant.AddPairSeparator();
+            <#= attr_qn #>Dumper.Dump(assistant, value.<#= attr.name().simple() #>;
+<#+
+            }
+#>
+            assistant.AddEndObject(); // data
+            assistant.AddEndObject(); // main object
+            assistant.HandleMemberSeparator(withSeparator);
+
+            assistant.DecrementDepth();
+        }
+
+        public static string Dump(<#= sn #> value)
+        {
+            var assistant = new AssistantDumper();
+            Dump(assistant, value);
+            return assistant.ToString();
+        }
+    }
+<#+
+        }
+    } // sbf
     return a.make_artefact();
 }
 #>
