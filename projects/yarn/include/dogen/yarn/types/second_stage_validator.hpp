@@ -44,6 +44,13 @@ private:
     decomposition_result decompose_model(const intermediate_model& im) const;
 
 private:
+    void validate_enumerations(const indices& idx,
+        const std::unordered_map<std::string, enumeration>& enumerations) const;
+
+    void validate_primitives(const indices& idx,
+        const std::unordered_map<std::string, primitive>& primitivess) const;
+
+private:
     void validate_string(const std::string& s,
         bool check_not_builtin = true) const;
     void validate_strings(const std::list<std::string>& strings) const;

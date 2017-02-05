@@ -12,6 +12,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Boolean",
         "quilt.cpp.aspect.requires_stream_manipulators": true,
@@ -25,6 +26,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.remove_unprintable_characters": false,
@@ -39,6 +41,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.remove_unprintable_characters": false,
@@ -163,6 +166,7 @@
       "meta_type": "builtin",
       "in_global_module": true,
       "is_floating_point": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -176,6 +180,7 @@
       "meta_type": "builtin",
       "in_global_module": true,
       "is_floating_point": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_stream_manipulators": true,
@@ -189,6 +194,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.inclusion_required": false,

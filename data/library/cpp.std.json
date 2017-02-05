@@ -11,6 +11,8 @@
         "simple": "int8_t"
       },
       "meta_type": "builtin",
+      "can_be_enumeration_underlier": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.requires_quoting": true,
@@ -23,6 +25,7 @@
         "simple": "int16_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -34,6 +37,7 @@
         "simple": "int32_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -45,6 +49,7 @@
         "simple": "int64_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -56,6 +61,7 @@
         "simple": "uint8_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Character",
         "quilt.cpp.streaming.requires_quoting": true,
@@ -68,6 +74,7 @@
         "simple": "uint16_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -79,6 +86,7 @@
         "simple": "uint32_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,
@@ -90,6 +98,7 @@
         "simple": "uint64_t"
       },
       "meta_type": "builtin",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "Number",
         "quilt.cpp.aspect.requires_manual_default_constructor": true,

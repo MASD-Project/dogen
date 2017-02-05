@@ -39,6 +39,8 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.second_stage_validator"));
 
+const std::string space(" ");
+
 /*
  * FIXME: we've removed the following keywords for now because yarn
  * uses these terms: module, concept. We need to first rename it to
@@ -72,8 +74,11 @@ const std::string invalid_string(
 const std::string reserved_keyword(
     "String matches a resvered keyword on one of the supported languages: ");
 const std::string builtin_name("String matches the name of a built in type: ");
-const std::string abstract_instance("Attempt to instantiate an abstract type: ");
-const std::string space(" ");
+const std::string abstract_instance(
+    "Attempt to instantiate an abstract type: ");
+const std::string invalid_underlying_type("Invalid underlying type: ");
+
+
 
 }
 
@@ -118,6 +123,40 @@ decompose_model(const intermediate_model& im) const {
      */
     return dc.result();
 }
+
+void second_stage_validator::validate_enumerations(const indices& idx,
+    const std::unordered_map<std::string, enumeration>& enumerations) const {
+
+    for (const auto& pair : enumerations) {
+        const auto& e(pair.second);
+        const auto ue_id(e.underlying_element().id());
+        const auto i(idx.enumeration_underliers().find(ue_id));
+        if (i == idx.enumeration_underliers().end()) {
+            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
+                                     << " for enumeration: " << e.name().id();
+            BOOST_THROW_EXCEPTION(
+                validation_error(invalid_underlying_type + ue_id));
+        }
+    }
+}
+
+void second_stage_validator::validate_primitives(const indices& idx,
+    const std::unordered_map<std::string, primitive>& primitivess) const {
+
+    for (const auto& pair : primitivess) {
+        const auto& p(pair.second);
+        const auto& attr(p.value_attribute());
+        const auto& ue_id(attr.parsed_type().current().id());
+        const auto i(idx.primitive_underliers().find(ue_id));
+        if (i == idx.primitive_underliers().end()) {
+            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
+                                     << " for primitive: " << p.name().id();
+            BOOST_THROW_EXCEPTION(
+                validation_error(invalid_underlying_type + ue_id));
+        }
+    }
+}
+
 
 void second_stage_validator::
 validate_string(const std::string& s, bool check_not_builtin) const {
@@ -280,6 +319,8 @@ validate(const indices& idx, const intermediate_model& im) const {
     const auto dr(decompose_model(im));
     validate_names(dr.names(), l);
     validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
+    validate_enumerations(idx, im.enumerations());
+    validate_primitives(idx, im.primitives());
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

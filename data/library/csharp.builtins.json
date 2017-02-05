@@ -126,6 +126,7 @@
       "meta_type": "builtin",
       "in_global_module": true,
       "is_floating_point": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.csharp.helper.family": "FloatingPointNumber",
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -140,6 +141,7 @@
       "meta_type": "builtin",
       "in_global_module": true,
       "is_floating_point": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.csharp.helper.family": "FloatingPointNumber",
         "quilt.csharp.aspect.requires_static_reference_equals": false,
@@ -153,6 +155,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
@@ -165,6 +168,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
@@ -200,6 +204,7 @@
       },
       "meta_type": "builtin",
       "in_global_module": true,
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,

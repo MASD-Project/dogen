@@ -35,11 +35,23 @@ namespace yarn {
 
 indices indexer::index(intermediate_model& m) const {
     indices r;
-    for (const auto& pair : m.builtins())
-        r.elements_referable_by_attributes().insert(pair.first);
 
-    for (const auto& pair : m.primitives())
-        r.elements_referable_by_attributes().insert(pair.first);
+    for (const auto& pair : m.builtins()) {
+        const auto id(pair.first);
+        r.elements_referable_by_attributes().insert(id);
+
+        const auto& b(pair.second);
+        if (b.can_be_enumeration_underlier())
+            r.enumeration_underliers().insert(id);
+
+        if (b.can_be_primitive_underlier())
+            r.primitive_underliers().insert(id);
+    }
+
+    for (const auto& pair : m.primitives()) {
+        const auto id(pair.first);
+        r.elements_referable_by_attributes().insert(id);
+    }
 
     for (const auto& pair : m.enumerations())
         r.elements_referable_by_attributes().insert(pair.first);
@@ -54,6 +66,9 @@ indices indexer::index(intermediate_model& m) const {
 
         if (o.is_abstract())
             r.abstract_elements().insert(id);
+
+        if (o.can_be_primitive_underlier())
+            r.primitive_underliers().insert(id);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Indices: " << r;
