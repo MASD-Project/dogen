@@ -76,7 +76,7 @@ boost::filesystem::path class_header_formatter::full_path(
 }
 
 std::list<std::string> class_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
+    const formattables::dependencies_builder_factory& f,
     const yarn::element& e) const {
 
     const auto& o(assistant::as<yarn::object>(static_artefact(), e));

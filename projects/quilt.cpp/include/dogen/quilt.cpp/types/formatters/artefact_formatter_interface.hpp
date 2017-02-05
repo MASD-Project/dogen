@@ -32,7 +32,7 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 
@@ -91,7 +91,7 @@ public:
      * against the supplied element.
      */
     virtual std::list<std::string> inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
+        const formattables::dependencies_builder_factory& f,
         const yarn::element& e) const = 0;
 
 public:

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_BUILDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_BUILDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,8 +33,8 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -45,10 +45,10 @@ namespace formattables {
  * @brief Helps in building the inclusion dependencies for a given
  * formatter.
  */
-class inclusion_dependencies_builder {
+class dependencies_builder {
 public:
-    inclusion_dependencies_builder(
-        const inclusion_directive_group_repository& idgrp,
+    dependencies_builder(
+        const directive_group_repository& dgrp,
         const std::unordered_map<std::string, formattable>& formattables);
 
 private:
@@ -58,23 +58,22 @@ private:
      *
      * @pre name must exist in path derivatives collection.
      */
-    boost::optional<inclusion_directive_group> get_inclusion_directive_group(
-        const yarn::name& n, const std::string& archetype) const;
+    boost::optional<directive_group> get_directive_group(const yarn::name& n,
+        const std::string& archetype) const;
 
 public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const yarn::name& n,
-        const std::string& archetype) const;
+    bool is_enabled(const yarn::name& n, const std::string& archetype) const;
 
 public:
     /**
      * @brief Adds the supplied inclusion directive.
      */
     /**@{*/
-    void add(const std::string& inclusion_directive);
-    void add(const std::list<std::string>& inclusion_directives);
+    void add(const std::string& directive);
+    void add(const std::list<std::string>& directives);
 
     /**@{*/
 
@@ -103,9 +102,9 @@ public:
     std::list<std::string> build();
 
 private:
-    const inclusion_directive_group_repository& inclusion_directives_;
+    const directive_group_repository& repository_;
     const std::unordered_map<std::string, formattable>& formattables_;
-    std::list<std::string> inclusion_dependencies_;
+    std::list<std::string> dependencies_;
 };
 
 } } } }

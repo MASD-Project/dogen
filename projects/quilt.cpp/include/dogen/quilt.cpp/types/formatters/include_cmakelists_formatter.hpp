@@ -44,7 +44,7 @@ public:
 
 public:
     std::list<std::string> inclusion_dependencies(
-        const formattables::inclusion_dependencies_builder_factory& f,
+        const formattables::dependencies_builder_factory& f,
         const yarn::element& e) const override;
 
     inclusion_support_types inclusion_support_type() const override;

@@ -33,6 +33,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/directive_group_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/aspect_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatting_styles_ser.hpp"
@@ -45,11 +46,10 @@
 #include "dogen/quilt.cpp/serialization/formattables/locator_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatting_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/inclusion_directive_group_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/directive_group_repository_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/locator_facet_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/local_enablement_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/global_enablement_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/locator_archetype_configuration_ser.hpp"
-#include "dogen/quilt.cpp/serialization/formattables/inclusion_directive_group_repository_ser.hpp"
 
 #endif

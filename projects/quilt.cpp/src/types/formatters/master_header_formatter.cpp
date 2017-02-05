@@ -69,7 +69,7 @@ boost::filesystem::path master_header_formatter::full_path(
 }
 
 std::list<std::string> master_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
+    const formattables::dependencies_builder_factory& f,
     const yarn::element& e) const {
     const auto fct(archetype_location_.facet());
     const auto arch(archetype_location_.archetype());

@@ -18,26 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_SER_HPP
+#include "dogen/quilt.cpp/types/formattables/dependencies_builder_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formattables {
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group.hpp"
+dependencies_builder_factory::dependencies_builder_factory(
+    const directive_group_repository& dgrp,
+    const std::unordered_map<std::string, formattable>& formattables)
+    : inclusion_directives_(dgrp), formattables_(formattables) {}
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::inclusion_directive_group)
-namespace boost {
-namespace serialization {
+dependencies_builder dependencies_builder_factory::make() const {
+    return dependencies_builder(inclusion_directives_, formattables_);
+}
 
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::inclusion_directive_group& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::inclusion_directive_group& v, unsigned int version);
-
-} }
-
-#endif
+} } } }

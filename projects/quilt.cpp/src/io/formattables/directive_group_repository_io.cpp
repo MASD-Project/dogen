@@ -20,7 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/directive_group_repository_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,13 +33,35 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::quilt::cpp::formattables::directive_group>& v) {
+    s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
     }
-    s << "] ";
+    s << " ] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, dogen::quilt::cpp::formattables::directive_group> >& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
     return s;
 }
 
@@ -49,11 +72,10 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const inclusion_directive_group& v) {
+std::ostream& operator<<(std::ostream& s, const directive_group_repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::inclusion_directive_group\"" << ", "
-      << "\"primary_directive\": " << "\"" << tidy_up_string(v.primary_directive()) << "\"" << ", "
-      << "\"secondary_directives\": " << v.secondary_directives()
+      << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::directive_group_repository\"" << ", "
+      << "\"by_id\": " << v.by_id()
       << " }";
     return(s);
 }

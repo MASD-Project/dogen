@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-05 Sun 10:57]
+#+CAPTION: Clock summary at [2017-02-05 Sun 11:36]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *47:10* |       |       | 100.0 |
+| *Total time*                                                                | *47:50* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 47:10   |       |       | 100.0 |
-| Active                                                                      |         | 47:10 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.6 |
+| Stories                                                                     | 47:50   |       |       | 100.0 |
+| Active                                                                      |         | 47:50 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.5 |
-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   8.8 |
+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   8.7 |
 | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.4 |
-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  11.5 |
-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.7 |
+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  11.4 |
+| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.6 |
 | COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.8 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  22.4 |
-| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.8 |
-| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.5 |
-| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  42.0 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  22.1 |
+| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.7 |
+| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.4 |
+| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  41.4 |
+| COMPLETED Drop "inclusion" prefix in quilt.cpp                              |         |       |  0:40 |   1.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -502,26 +503,15 @@ trying to avoid. One sneaky way out is to call primitives "builtins"
 and call these "primitives". This somewhat reflects the truth in that
 builtins are supposed to be hardware level concepts.
 
-*** Drop "inclusion" prefix in quilt.cpp                              :story:
+*** COMPLETED Drop "inclusion" prefix in quilt.cpp                    :story:
+    CLOSED: [2017-02-05 Sun 11:36]
+    CLOCK: [2017-02-05 Sun 11:35]--[2017-02-05 Sun 11:36] =>  0:01
+    CLOCK: [2017-02-05 Sun 10:55]--[2017-02-05 Sun 11:34] =>  0:39
 
 The inclusion related classes in quilt.cpp have really long names. We
 probably don't really need them to have the "inclusion" prefix as we
 know what they are doing by looking at just
 "directive/dependencies". Drop the inclusion prefix across the board.
-
-*** Immutable types cannot be owned by mutable types                  :story:
-
-When we try to create a mutable class that has a property of an
-immutable type, the code fails to compile due to the swap
-method. This is because immutable types do not provide swap.
-
-*** "Assistant" type found in test model                              :story:
-
-We seem to be generating an "Assistant" type on the =primitve= test model:
-
-: 2017-02-01 10:28:44.513705 [DEBUG] [quilt.cpp.formattables.helper_expander] Procesing element: <dogen><test_models><primitive><Assistant>
-
-Figure out what this type is and why its appearing on this test model.
 
 *** Mark elements that are valid enumeration underlying elements      :story:
 
@@ -541,6 +531,20 @@ The following are the valid types for primitives:
 - all built-ins;
 - string types.
 - date, time, etc.
+
+*** Immutable types cannot be owned by mutable types                  :story:
+
+When we try to create a mutable class that has a property of an
+immutable type, the code fails to compile due to the swap
+method. This is because immutable types do not provide swap.
+
+*** "Assistant" type found in test model                              :story:
+
+We seem to be generating an "Assistant" type on the =primitve= test model:
+
+: 2017-02-01 10:28:44.513705 [DEBUG] [quilt.cpp.formattables.helper_expander] Procesing element: <dogen><test_models><primitive><Assistant>
+
+Figure out what this type is and why its appearing on this test model.
 
 *** Merge both yarn model validators                                  :story:
 

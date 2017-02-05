@@ -71,7 +71,7 @@ boost::filesystem::path namespace_header_formatter::full_path(
 }
 
 std::list<std::string> namespace_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& /*f*/,
+    const formattables::dependencies_builder_factory& /*f*/,
     const yarn::element& /*e*/) const {
     static std::list<std::string> r;
     return r;

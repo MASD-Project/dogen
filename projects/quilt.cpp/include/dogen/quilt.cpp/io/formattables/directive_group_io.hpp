@@ -18,21 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
+#ifndef DOGEN_QUILT_CPP_IO_FORMATTABLES_DIRECTIVE_GROUP_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FORMATTABLES_DIRECTIVE_GROUP_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-inclusion_dependencies_builder_factory::inclusion_dependencies_builder_factory(
-    const inclusion_directive_group_repository& idgrp,
-    const std::unordered_map<std::string, formattable>& formattables)
-    : inclusion_directives_(idgrp), formattables_(formattables) {}
-
-inclusion_dependencies_builder inclusion_dependencies_builder_factory::
-make() const {
-    return inclusion_dependencies_builder(inclusion_directives_, formattables_);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::formattables::directive_group& v);
 
 } } } }
+
+#endif

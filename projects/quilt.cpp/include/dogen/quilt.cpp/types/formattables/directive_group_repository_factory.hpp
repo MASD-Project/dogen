@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVES_REPOSITORY_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -35,15 +35,14 @@
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class inclusion_directive_group_repository_factory final {
+class directive_group_repository_factory final {
 private:
     struct formattater_type_group {
         annotations::type primary_inclusion_directive;
@@ -66,7 +65,7 @@ private:
     bool make_top_level_inclusion_required(const type_group& tg,
         const annotations::annotation& a) const;
 
-    boost::optional<inclusion_directive_group> make_inclusion_directive_group(
+    boost::optional<directive_group> make_directive_group(
         const type_group& tg, const std::string& archetype,
         const annotations::annotation& a) const;
 
@@ -92,19 +91,19 @@ public:
 
 private:
     void insert_inclusion_directive(const std::string& id,
-        const std::string& archetype, const inclusion_directive_group& idg,
-        inclusion_directive_group_repository& idgrp) const;
+        const std::string& archetype, const directive_group& dg,
+        directive_group_repository& dgrp) const;
 
-    void compute_inclusion_directives(const type_group& tg,
+    void compute_directives(const type_group& tg,
         const yarn::element& e, const artefact_formatters_type& formatters,
-        const locator& l, inclusion_directive_group_repository& idgrp) const;
+        const locator& l, directive_group_repository& dgrp) const;
 
-    inclusion_directive_group_repository make(const type_group& tg,
+    directive_group_repository make(const type_group& tg,
         const artefact_formatters_by_type_index_type& afti, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:
-    inclusion_directive_group_repository
+    directive_group_repository
     make(const annotations::type_repository& atrp,
         const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;

@@ -25,7 +25,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group_repository_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
 
 namespace {
@@ -98,19 +98,19 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-inclusion_directive_group_repository inclusion_expander::
-create_inclusion_directive_groups(const annotations::type_repository& atrp,
+directive_group_repository inclusion_expander::
+create_directive_groups(const annotations::type_repository& atrp,
     const formatters::repository& frp, const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
-    inclusion_directive_group_repository_factory f;
+    directive_group_repository_factory f;
     return f.make(atrp, frp, l, formattables);
 }
 
 inclusion_expander::element_inclusion_dependencies_type
 inclusion_expander::compute_inclusion_dependencies(
     const formatters::repository& frp,
-    const inclusion_dependencies_builder_factory& idf,
+    const dependencies_builder_factory& df,
     const yarn::element& e) const {
 
     const auto id(e.name().id());
@@ -147,7 +147,7 @@ inclusion_expander::compute_inclusion_dependencies(
          * Obtain the formatter's list of inclusion dependencies. If
          * none, we're done.
          */
-        auto deps(fmt->inclusion_dependencies(idf, e));
+        auto deps(fmt->inclusion_dependencies(df, e));
         if (deps.empty())
             continue;
 
@@ -177,7 +177,7 @@ inclusion_expander::compute_inclusion_dependencies(
 
 void inclusion_expander::populate_inclusion_dependencies(
     const formatters::repository& frp,
-    const inclusion_dependencies_builder_factory& idf,
+    const dependencies_builder_factory& df,
     std::unordered_map<std::string, formattable>& formattables) const {
 
     BOOST_LOG_SEV(lg, debug) << "Creating inclusion dependencies "
@@ -212,7 +212,7 @@ void inclusion_expander::populate_inclusion_dependencies(
              * element. If it does not have any dependencies, we
              * haven't got any work to do.
              */
-            const auto deps(compute_inclusion_dependencies(frp, idf, e));
+            const auto deps(compute_inclusion_dependencies(frp, df, e));
             if (deps.empty())
                 continue;
 
@@ -246,9 +246,9 @@ void inclusion_expander::expand(const annotations::type_repository& atrp,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     auto& fbls(fm.formattables());
-    const auto idgrp(create_inclusion_directive_groups(atrp, frp, l, fbls));
-    inclusion_dependencies_builder_factory idf(idgrp, fbls);
-    populate_inclusion_dependencies(frp, idf, fbls);
+    const auto dgrp(create_directive_groups(atrp, frp, l, fbls));
+    dependencies_builder_factory df(dgrp, fbls);
+    populate_inclusion_dependencies(frp, df, fbls);
 }
 
 } } } }

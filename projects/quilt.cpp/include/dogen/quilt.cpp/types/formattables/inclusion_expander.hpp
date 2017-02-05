@@ -31,8 +31,8 @@
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/dependencies_builder_factory.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -67,7 +67,7 @@ namespace formattables {
  */
 class inclusion_expander {
 private:
-    inclusion_directive_group_repository create_inclusion_directive_groups(
+    directive_group_repository create_directive_groups(
         const annotations::type_repository& atrp,
         const formatters::repository& frp, const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
@@ -78,11 +78,11 @@ public:
 
     element_inclusion_dependencies_type compute_inclusion_dependencies(
         const formatters::repository& frp,
-        const inclusion_dependencies_builder_factory& f,
+        const dependencies_builder_factory& f,
         const yarn::element& e) const;
 
     void populate_inclusion_dependencies(const formatters::repository& frp,
-        const inclusion_dependencies_builder_factory& idf,
+        const dependencies_builder_factory& df,
         std::unordered_map<std::string, formattable>& formattables) const;
 
 public:

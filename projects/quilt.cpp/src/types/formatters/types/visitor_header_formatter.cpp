@@ -75,7 +75,7 @@ boost::filesystem::path visitor_header_formatter::full_path(
 }
 
 std::list<std::string> visitor_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
+    const formattables::dependencies_builder_factory& f,
     const yarn::element& e) const {
     const auto& v(assistant::as<yarn::visitor>(static_artefact(), e));
     auto builder(f.make());

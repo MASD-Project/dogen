@@ -25,7 +25,7 @@
 
 std::list<std::string> registrar_implementation_formatter::
 inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
+    const formattables::dependencies_builder_factory& f,
     const yarn::element& e) const {
     const auto arch(static_artefact());
     const auto& rg(assistant::as<fabric::registrar>(arch, e));

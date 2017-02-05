@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_REPOSITORY_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_REPOSITORY_SER_HPP
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::inclusion_directive_group_repository)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::formattables::directive_group_repository)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::formattables::inclusion_directive_group_repository& v, unsigned int version);
+void save(Archive& ar, const dogen::quilt::cpp::formattables::directive_group_repository& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::formattables::inclusion_directive_group_repository& v, unsigned int version);
+void load(Archive& ar, dogen::quilt::cpp::formattables::directive_group_repository& v, unsigned int version);
 
 } }
 

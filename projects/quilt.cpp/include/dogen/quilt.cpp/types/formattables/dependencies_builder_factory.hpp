@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_BUILDER_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DEPENDENCIES_BUILDER_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_FACTORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DEPENDENCIES_BUILDER_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,8 +29,8 @@
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_directive_group_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/dependencies_builder.hpp"
+#include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -49,20 +49,20 @@ namespace formattables {
  * Finally, the factory pre-computes the mapping of the default
  * formatters per facet.
  */
-class inclusion_dependencies_builder_factory final {
+class dependencies_builder_factory final {
 public:
-    inclusion_dependencies_builder_factory(
-        const inclusion_directive_group_repository& idgrp,
+    dependencies_builder_factory(
+        const directive_group_repository& dgrp,
         const std::unordered_map<std::string, formattable>& formattables);
 
 public:
     /**
      * @brief Create an inclusion dependencies builder.
      */
-    inclusion_dependencies_builder make() const;
+    dependencies_builder make() const;
 
 private:
-    const inclusion_directive_group_repository& inclusion_directives_;
+    const directive_group_repository& inclusion_directives_;
     const std::unordered_map<std::string, formattable>& formattables_;
 };
 

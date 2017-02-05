@@ -73,7 +73,7 @@ boost::filesystem::path enum_header_formatter::full_path(
 }
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
-    const formattables::inclusion_dependencies_builder_factory& f,
+    const formattables::dependencies_builder_factory& f,
     const yarn::element& e) const {
 
     const auto& en(assistant::as<yarn::enumeration>(static_artefact(), e));

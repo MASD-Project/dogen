@@ -24,15 +24,14 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/building_error.hpp"
-#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
-#include "dogen/quilt.cpp/types/formattables/inclusion_dependencies_builder.hpp"
+#include "dogen/quilt.cpp/types/formattables/dependencies_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory(
-        "quilt.cpp.formattables.inclusion_dependencies_builder"));
+static logger lg(logger_factory("quilt.cpp.formattables.dependencies_builder"));
 
 const auto empty_list = std::list<std::string> {};
 const std::string pair_type("pair");
@@ -54,27 +53,27 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-inclusion_dependencies_builder::inclusion_dependencies_builder(
-    const inclusion_directive_group_repository& idgrp,
+dependencies_builder::dependencies_builder(
+    const directive_group_repository& dgrp,
     const std::unordered_map<std::string, formattable>& formattables)
-    : inclusion_directives_(idgrp), formattables_(formattables) {}
+    : repository_(dgrp), formattables_(formattables) {}
 
-boost::optional<inclusion_directive_group>
-inclusion_dependencies_builder::get_inclusion_directive_group(
+boost::optional<directive_group>
+dependencies_builder::get_directive_group(
     const yarn::name& n, const std::string& archetype) const {
-    const auto& c(inclusion_directives_.by_id());
+    const auto& c(repository_.by_id());
     const auto i(c.find(n.id()));
     if (i == c.end())
-        return boost::optional<inclusion_directive_group>();
+        return boost::optional<directive_group>();
 
     const auto j(i->second.find(archetype));
     if (j == i->second.end())
-        return boost::optional<inclusion_directive_group>();
+        return boost::optional<directive_group>();
 
     return j->second;
 }
 
-bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
+bool dependencies_builder::is_enabled(const yarn::name& n,
     const std::string& archetype) const {
     const auto i(formattables_.find(n.id()));
     if (i == formattables_.end()) {
@@ -101,7 +100,7 @@ bool inclusion_dependencies_builder::is_enabled(const yarn::name& n,
     return r;
 }
 
-void inclusion_dependencies_builder::
+void dependencies_builder::
 add(const std::string& inclusion_directive) {
     BOOST_LOG_SEV(lg, debug) << "Adding directive: " << inclusion_directive;
 
@@ -109,16 +108,16 @@ add(const std::string& inclusion_directive) {
         BOOST_LOG_SEV(lg, error) << empty_directive;
         BOOST_THROW_EXCEPTION(building_error(empty_directive));
     }
-    inclusion_dependencies_.push_back(inclusion_directive);
+    dependencies_.push_back(inclusion_directive);
 }
 
-void inclusion_dependencies_builder::
+void dependencies_builder::
 add(const std::list<std::string>& inclusion_directives) {
     for (const auto& id : inclusion_directives)
         add(id);
 }
 
-void inclusion_dependencies_builder::
+void dependencies_builder::
 add(const yarn::name& n, const std::string& archetype) {
     BOOST_LOG_SEV(lg, debug) << "Adding name: " << n.id();
 
@@ -131,16 +130,16 @@ add(const yarn::name& n, const std::string& archetype) {
         return;
     }
 
-    const auto id(get_inclusion_directive_group(n, resolved_arch));
-    if (id) {
-        add(id->primary_directive());
-        add(id->secondary_directives());
-        BOOST_LOG_SEV(lg, trace) << "Adding inclusion directive group: " << *id;
+    const auto dg(get_directive_group(n, resolved_arch));
+    if (dg) {
+        add(dg->primary());
+        add(dg->secondary());
+        BOOST_LOG_SEV(lg, trace) << "Adding inclusion directive group: " << *dg;
     } else
         BOOST_LOG_SEV(lg, trace) << "Could not find an inclusion directive.";
 }
 
-void inclusion_dependencies_builder::add(const boost::optional<yarn::name>& n,
+void dependencies_builder::add(const boost::optional<yarn::name>& n,
     const std::string& archetype) {
 
     if (!n)
@@ -149,17 +148,17 @@ void inclusion_dependencies_builder::add(const boost::optional<yarn::name>& n,
     add(*n, archetype);
 }
 
-void inclusion_dependencies_builder::
+void dependencies_builder::
 add(const std::list<yarn::name>& names, const std::string& archetype) {
     for (const auto& n : names)
         add(n, archetype);
 }
 
-std::list<std::string> inclusion_dependencies_builder::build() {
+std::list<std::string> dependencies_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Built inclusion dependencies for archetype.";
-    BOOST_LOG_SEV(lg, debug) << "Result: " << inclusion_dependencies_;
+    BOOST_LOG_SEV(lg, debug) << "Result: " << dependencies_;
 
-    return inclusion_dependencies_;
+    return dependencies_;
 }
 
 } } } }

@@ -34,6 +34,7 @@
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatting_styles_io.hpp"
@@ -46,11 +47,10 @@
 #include "dogen/quilt.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatting_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/directive_group_repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_facet_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/global_enablement_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_archetype_configuration_io.hpp"
-#include "dogen/quilt.cpp/io/formattables/inclusion_directive_group_repository_io.hpp"
 
 #endif

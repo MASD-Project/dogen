@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_INCLUSION_DIRECTIVE_GROUP_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_DIRECTIVE_GROUP_REPOSITORY_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class inclusion_directive_group;
+class directive_group_repository_factory;
 
 } } } }
 
