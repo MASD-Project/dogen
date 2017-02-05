@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/intermediate_model_validator.hpp"
+#include "dogen/yarn/types/first_stage_validator.hpp"
 #include "dogen/yarn/types/validation_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     m.input_language(dogen::yarn::languages::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
-    dogen::yarn::intermediate_model_validator v;
+    dogen::yarn::first_stage_validator v;
     contains_checker<validation_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(v.validate(m), validation_error, c);
 }
@@ -80,7 +80,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     m.input_language(dogen::yarn::languages::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
-    dogen::yarn::intermediate_model_validator v;
+    dogen::yarn::first_stage_validator v;
     contains_checker<validation_error> c(inconsistent_kvp);
     BOOST_CHECK_EXCEPTION(v.validate(m), validation_error, c);
 }

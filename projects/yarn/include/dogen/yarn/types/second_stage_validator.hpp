@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_MODEL_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_SECOND_STAGE_VALIDATOR_HPP
+#define DOGEN_YARN_TYPES_SECOND_STAGE_VALIDATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -37,7 +37,7 @@
 namespace dogen {
 namespace yarn {
 
-class model_validator final {
+class second_stage_validator final {
 private:
     bool allow_spaces_in_built_in_types(const languages l) const;
     decomposition_result decompose_model(const model& m) const;

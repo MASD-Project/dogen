@@ -27,7 +27,7 @@
 #include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
-#include "dogen/yarn/types/intermediate_model_validator.hpp"
+#include "dogen/yarn/types/first_stage_validator.hpp"
 #include "dogen/yarn/types/intermediate_model_expander.hpp"
 
 namespace {
@@ -91,7 +91,7 @@ void intermediate_model_expander::expand_parsing(
 }
 
 void intermediate_model_expander::validate(const intermediate_model& im) const {
-    intermediate_model_validator v;
+    first_stage_validator v;
     v.validate(im);
 }
 

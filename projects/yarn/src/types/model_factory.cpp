@@ -33,7 +33,7 @@
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/injection_expander.hpp"
-#include "dogen/yarn/types/model_validator.hpp"
+#include "dogen/yarn/types/second_stage_validator.hpp"
 #include "dogen/yarn/types/model_factory.hpp"
 
 namespace {
@@ -176,7 +176,7 @@ model model_factory::transform_intermediate_model(
 }
 
 void model_factory::validate(const model& m) const {
-    model_validator v;
+    second_stage_validator v;
     v.validate(m);
 }
 

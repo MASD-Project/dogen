@@ -21,12 +21,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/validation_error.hpp"
-#include "dogen/yarn/types/intermediate_model_validator.hpp"
+#include "dogen/yarn/types/first_stage_validator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.intermediate_model_validator"));
+auto lg(logger_factory("yarn.first_stage_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");
@@ -138,8 +138,7 @@ void validator::validate(const std::string& id, const yarn::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 
-void intermediate_model_validator::
-validate(const intermediate_model& im) const {
+void first_stage_validator::validate(const intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const bool ipr(im.origin_type() == origin_types::proxy_reference);

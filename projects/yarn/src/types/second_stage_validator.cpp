@@ -29,7 +29,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/decomposer.hpp"
 #include "dogen/yarn/types/validation_error.hpp"
-#include "dogen/yarn/types/model_validator.hpp"
+#include "dogen/yarn/types/second_stage_validator.hpp"
 
 typedef boost::error_info<struct owner, std::string>
 errmsg_validation_owner;
@@ -37,7 +37,7 @@ errmsg_validation_owner;
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.model_validator"));
+auto lg(logger_factory("yarn.second_stage_validator"));
 
 /*
  * FIXME: we've removed the following keywords for now because yarn
@@ -80,11 +80,11 @@ const std::string space(" ");
 namespace dogen {
 namespace yarn {
 
-bool model_validator::allow_spaces_in_built_in_types(const languages l) const {
+bool second_stage_validator::allow_spaces_in_built_in_types(const languages l) const {
     return l == languages::cpp;
 }
 
-decomposition_result model_validator::decompose_model(const model& m) const {
+decomposition_result second_stage_validator::decompose_model(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << m.name().id();
 
     /*
@@ -104,7 +104,7 @@ decomposition_result model_validator::decompose_model(const model& m) const {
     return dc.result();
 }
 
-void model_validator::
+void second_stage_validator::
 validate_string(const std::string& s, bool check_not_builtin) const {
     static std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
     if (!std::regex_match(s, name_regex)) {
@@ -129,13 +129,13 @@ validate_string(const std::string& s, bool check_not_builtin) const {
     BOOST_LOG_SEV(lg, debug) << "String passed all sanity checks: " << s;
 }
 
-void model_validator::
+void second_stage_validator::
 validate_strings(const std::list<std::string>& strings) const {
     for (const auto& s : strings)
         validate_string(s);
 }
 
-void model_validator::
+void second_stage_validator::
 validate_name(const name& n, const bool allow_spaces_in_built_in_types) const {
     /*
      * Built-in types are defined at the global namespace level; if we
@@ -177,7 +177,7 @@ validate_name(const name& n, const bool allow_spaces_in_built_in_types) const {
         validate_string(l.element());
 }
 
-void model_validator::
+void second_stage_validator::
 validate_names(const std::list<std::pair<std::string, name>>& names,
     const languages l) const {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
@@ -215,7 +215,7 @@ validate_names(const std::list<std::pair<std::string, name>>& names,
     BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
 }
 
-void model_validator::
+void second_stage_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     const languages l, const name_tree& nt,
     const bool inherit_opaqueness_from_parent) const {
@@ -232,7 +232,7 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
         validate_name_tree(ae, l, c, nt.are_children_opaque());
 }
 
-void model_validator::validate_name_trees(
+void second_stage_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements, const languages l,
     const std::list<std::pair<std::string, name_tree>>& nts) const {
 
@@ -257,7 +257,7 @@ void model_validator::validate_name_trees(
     }
 }
 
-void model_validator::validate(const model& m) const {
+void second_stage_validator::validate(const model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << m.name().id();
 
     const auto l(m.input_language());
