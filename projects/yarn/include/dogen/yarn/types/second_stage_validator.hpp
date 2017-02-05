@@ -30,6 +30,7 @@
 #include <utility>
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/decomposition_result.hpp"
@@ -60,7 +61,7 @@ private:
         const std::list<std::pair<std::string, name_tree>>& nts) const;
 
 public:
-    void validate(const intermediate_model& im) const;
+    void validate(const indices& idx, const intermediate_model& im) const;
 };
 
 } }

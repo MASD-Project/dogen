@@ -36,7 +36,6 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/builtin.hpp"
 #include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/visitor.hpp"
 #include "dogen/yarn/hash/name_hash.hpp"
 #include "dogen/yarn/types/exception.hpp"
@@ -45,6 +44,7 @@
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/serialization/intermediate_model_fwd_ser.hpp"
 
 namespace dogen {
@@ -78,10 +78,10 @@ public:
         const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
         const bool has_generatable_types,
-        const dogen::yarn::indices& indices,
         const dogen::yarn::module& root_module,
         const dogen::yarn::languages input_language,
-        const std::list<dogen::yarn::languages>& output_languages);
+        const std::list<dogen::yarn::languages>& output_languages,
+        const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups);
 
 private:
     template<typename Archive>
@@ -224,11 +224,6 @@ public:
     void has_generatable_types(const bool v);
     /**@}*/
 
-    const dogen::yarn::indices& indices() const;
-    dogen::yarn::indices& indices();
-    void indices(const dogen::yarn::indices& v);
-    void indices(const dogen::yarn::indices&& v);
-
     const dogen::yarn::module& root_module() const;
     dogen::yarn::module& root_module();
     void root_module(const dogen::yarn::module& v);
@@ -251,6 +246,11 @@ public:
     void output_languages(const std::list<dogen::yarn::languages>& v);
     void output_languages(const std::list<dogen::yarn::languages>&& v);
     /**@}*/
+
+    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups() const;
+    std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups();
+    void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v);
+    void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v);
 
 public:
     bool operator==(const intermediate_model& rhs) const;
@@ -277,10 +277,10 @@ private:
     std::unordered_map<std::string, dogen::yarn::visitor> visitors_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > injected_elements_;
     bool has_generatable_types_;
-    dogen::yarn::indices indices_;
     dogen::yarn::module root_module_;
     dogen::yarn::languages input_language_;
     std::list<dogen::yarn::languages> output_languages_;
+    std::unordered_map<std::string, dogen::annotations::scribble_group> scribble_groups_;
 };
 
 } }

@@ -1660,38 +1660,6 @@
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="47" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="48" tracking_level="0" version="0">
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</objects_always_in_heap>
-		<elements_referable_by_attributes>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</elements_referable_by_attributes>
-		<scribble_groups class_id="49" tracking_level="0" version="0">
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</scribble_groups>
-		<primitive_underliers>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</primitive_underliers>
-		<enumeration_underliers>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</enumeration_underliers>
-		<abstract_elements>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</abstract_elements>
-	</indices>
 	<root_module object_id="_11">
 		<element>
 			<documentation></documentation>
@@ -1746,12 +1714,17 @@
 		<is_global_module>0</is_global_module>
 	</root_module>
 	<input_language>5</input_language>
-	<output_languages class_id="50" tracking_level="0" version="0">
+	<output_languages class_id="47" tracking_level="0" version="0">
 		<count>2</count>
 		<item_version>0</item_version>
 		<item>1</item>
 		<item>2</item>
 	</output_languages>
+	<scribble_groups class_id="48" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>1</bucket_count>
+		<item_version>0</item_version>
+	</scribble_groups>
 </entity>
 </boost_serialization>
 

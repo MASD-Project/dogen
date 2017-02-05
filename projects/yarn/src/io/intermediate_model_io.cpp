@@ -27,7 +27,6 @@
 #include "dogen/yarn/io/builtin_io.hpp"
 #include "dogen/yarn/io/concept_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/indices_io.hpp"
 #include "dogen/yarn/io/visitor_io.hpp"
 #include "dogen/yarn/io/exception_io.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
@@ -35,6 +34,7 @@
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
 
 namespace std {
 
@@ -268,6 +268,24 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::la
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -294,10 +312,10 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"visitors\": " << v.visitors() << ", "
       << "\"injected_elements\": " << v.injected_elements() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
-      << "\"indices\": " << v.indices() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_language\": " << v.input_language() << ", "
-      << "\"output_languages\": " << v.output_languages()
+      << "\"output_languages\": " << v.output_languages() << ", "
+      << "\"scribble_groups\": " << v.scribble_groups()
       << " }";
     return(s);
 }

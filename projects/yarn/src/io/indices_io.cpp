@@ -21,7 +21,6 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/indices_io.hpp"
-#include "dogen/annotations/io/scribble_group_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,24 +44,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 
@@ -71,7 +52,6 @@ std::ostream& operator<<(std::ostream& s, const indices& v) {
       << "\"__type__\": " << "\"dogen::yarn::indices\"" << ", "
       << "\"objects_always_in_heap\": " << v.objects_always_in_heap() << ", "
       << "\"elements_referable_by_attributes\": " << v.elements_referable_by_attributes() << ", "
-      << "\"scribble_groups\": " << v.scribble_groups() << ", "
       << "\"primitive_underliers\": " << v.primitive_underliers() << ", "
       << "\"enumeration_underliers\": " << v.enumeration_underliers() << ", "
       << "\"abstract_elements\": " << v.abstract_elements()

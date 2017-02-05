@@ -28,9 +28,10 @@
 #include <unordered_set>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/name.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -48,7 +49,8 @@ private:
 
 private:
     std::unordered_set<std::string>
-    update_and_collect_parent_ids(intermediate_model& im) const;
+    update_and_collect_parent_ids(const indices& idx,
+        intermediate_model& im) const;
 
     void populate_properties_up_the_generalization_tree(
         const type_group& tg, const yarn::name& leaf,
@@ -62,7 +64,7 @@ private:
 
 public:
     void
-    expand(const annotations::type_repository& atrp,
+    expand(const annotations::type_repository& atrp, const indices& idx,
         intermediate_model& im) const;
 };
 

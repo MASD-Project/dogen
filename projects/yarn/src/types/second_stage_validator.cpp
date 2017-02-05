@@ -272,13 +272,14 @@ void second_stage_validator::validate_name_trees(
     }
 }
 
-void second_stage_validator::validate(const intermediate_model& im) const {
+void second_stage_validator::
+validate(const indices& idx, const intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const auto l(im.input_language());
     const auto dr(decompose_model(im));
     validate_names(dr.names(), l);
-    validate_name_trees(im.indices().abstract_elements(), l, dr.name_trees());
+    validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

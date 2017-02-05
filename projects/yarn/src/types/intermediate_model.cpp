@@ -53,10 +53,10 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
     const bool has_generatable_types,
-    const dogen::yarn::indices& indices,
     const dogen::yarn::module& root_module,
     const dogen::yarn::languages input_language,
-    const std::list<dogen::yarn::languages>& output_languages)
+    const std::list<dogen::yarn::languages>& output_languages,
+    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups)
     : name_(name),
       origin_type_(origin_type),
       references_(references),
@@ -71,10 +71,10 @@ intermediate_model::intermediate_model(
       visitors_(visitors),
       injected_elements_(injected_elements),
       has_generatable_types_(has_generatable_types),
-      indices_(indices),
       root_module_(root_module),
       input_language_(input_language),
-      output_languages_(output_languages) { }
+      output_languages_(output_languages),
+      scribble_groups_(scribble_groups) { }
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
@@ -92,10 +92,10 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(visitors_, other.visitors_);
     swap(injected_elements_, other.injected_elements_);
     swap(has_generatable_types_, other.has_generatable_types_);
-    swap(indices_, other.indices_);
     swap(root_module_, other.root_module_);
     swap(input_language_, other.input_language_);
     swap(output_languages_, other.output_languages_);
+    swap(scribble_groups_, other.scribble_groups_);
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
@@ -113,10 +113,10 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         visitors_ == rhs.visitors_ &&
         injected_elements_ == rhs.injected_elements_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
-        indices_ == rhs.indices_ &&
         root_module_ == rhs.root_module_ &&
         input_language_ == rhs.input_language_ &&
-        output_languages_ == rhs.output_languages_;
+        output_languages_ == rhs.output_languages_ &&
+        scribble_groups_ == rhs.scribble_groups_;
 }
 
 intermediate_model& intermediate_model::operator=(intermediate_model other) {
@@ -333,22 +333,6 @@ void intermediate_model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-const dogen::yarn::indices& intermediate_model::indices() const {
-    return indices_;
-}
-
-dogen::yarn::indices& intermediate_model::indices() {
-    return indices_;
-}
-
-void intermediate_model::indices(const dogen::yarn::indices& v) {
-    indices_ = v;
-}
-
-void intermediate_model::indices(const dogen::yarn::indices&& v) {
-    indices_ = std::move(v);
-}
-
 const dogen::yarn::module& intermediate_model::root_module() const {
     return root_module_;
 }
@@ -387,6 +371,22 @@ void intermediate_model::output_languages(const std::list<dogen::yarn::languages
 
 void intermediate_model::output_languages(const std::list<dogen::yarn::languages>&& v) {
     output_languages_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::annotations::scribble_group>& intermediate_model::scribble_groups() const {
+    return scribble_groups_;
+}
+
+std::unordered_map<std::string, dogen::annotations::scribble_group>& intermediate_model::scribble_groups() {
+    return scribble_groups_;
+}
+
+void intermediate_model::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
+    scribble_groups_ = v;
+}
+
+void intermediate_model::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v) {
+    scribble_groups_ = std::move(v);
 }
 
 } }

@@ -122,8 +122,8 @@ bool resolver::is_name_referable(const indices& idx, const name& n) const {
 }
 
 name resolver::
-resolve_name(const intermediate_model& im, const name& context,
-    const name& n) const {
+resolve_name(const intermediate_model& im, const indices& idx,
+    const name& context, const name& n) const {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
     BOOST_LOG_SEV(lg, debug) << "Initial state: " << n;
@@ -132,7 +132,7 @@ resolve_name(const intermediate_model& im, const name& context,
      * types placed in the global module.
      */
     BOOST_LOG_SEV(lg, debug) << "Resolving as is.";
-    if (is_name_referable(im.indices(), n)) {
+    if (is_name_referable(idx, n)) {
         BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
         return n;
     }
@@ -157,7 +157,7 @@ resolve_name(const intermediate_model& im, const name& context,
         const auto r(nf.build_combined_element_name(context, n,
                 true/*populate_model_name_if_blank*/));
 
-        if (is_name_referable(im.indices(), r)) {
+        if (is_name_referable(idx, r)) {
             BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
         }
@@ -173,7 +173,7 @@ resolve_name(const intermediate_model& im, const name& context,
         BOOST_LOG_SEV(lg, debug) << "Resolving using reference: " << ref;
         const auto r(nf.build_combined_element_name(ref, n));
 
-        if (is_name_referable(im.indices(), r)) {
+        if (is_name_referable(idx, r)) {
             BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
         }
@@ -187,7 +187,7 @@ resolve_name(const intermediate_model& im, const name& context,
     {
         BOOST_LOG_SEV(lg, debug) << "Resolving as package with model name.";
         auto r(nf.build_promoted_module_name(im.name(), n));
-        if (is_name_referable(im.indices(), r)) {
+        if (is_name_referable(idx, r)) {
             BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
         }
@@ -199,8 +199,8 @@ resolve_name(const intermediate_model& im, const name& context,
 }
 
 void resolver::resolve_name_tree(const intermediate_model& im,
-    const name& owner, name_tree& nt) const {
-    const name n(resolve_name(im, owner, nt.current()));
+    const indices& idx, const name& owner, name_tree& nt) const {
+    const name n(resolve_name(im, idx, owner, nt.current()));
 
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
                              << " to: " << n.id();
@@ -211,8 +211,8 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     } else
         nt.is_current_simple_type(is_enumeration(im, n));
 
-    const auto i(im.indices().objects_always_in_heap().find(n.id()));
-    nt.are_children_opaque(i != im.indices().objects_always_in_heap().end());
+    const auto i(idx.objects_always_in_heap().find(n.id()));
+    nt.are_children_opaque(i != idx.objects_always_in_heap().end());
 
     identifiable_and_qualified_builder iqb;
     iqb.add(n);
@@ -230,7 +230,7 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     }
 
     for (auto& c : nt.children()) {
-        resolve_name_tree(im, owner, c);
+        resolve_name_tree(im, idx, owner, c);
         iqb.add(c);
     }
 
@@ -240,9 +240,9 @@ void resolver::resolve_name_tree(const intermediate_model& im,
 }
 
 void resolver::resolve_attribute(const intermediate_model& im,
-    const name& owner, attribute& attr) const {
+    const indices& idx, const name& owner, attribute& attr) const {
     try {
-        resolve_name_tree(im, owner, attr.parsed_type());
+        resolve_name_tree(im, idx, owner, attr.parsed_type());
         BOOST_LOG_SEV(lg, debug) << "Resolved attribute: " << attr.name().id();
     } catch (boost::exception& e) {
         std::ostringstream s;
@@ -255,9 +255,10 @@ void resolver::resolve_attribute(const intermediate_model& im,
 }
 
 void resolver::resolve_attributes(const intermediate_model& im,
-    const name& owner, std::list<attribute>& attributes) const {
+    const indices& idx, const name& owner,
+    std::list<attribute>& attributes) const {
     for (auto& attr : attributes)
-        resolve_attribute(im, owner, attr);
+        resolve_attribute(im, idx, owner, attr);
 }
 
 void resolver::validate_inheritance_graph(const intermediate_model& im,
@@ -311,7 +312,7 @@ void resolver::validate_refinements(const intermediate_model& im,
 }
 
 void resolver::
-resolve_concepts(intermediate_model& im) const {
+resolve_concepts(const indices& idx, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving concepts. Size: "
                              << im.concepts().size();
 
@@ -319,7 +320,7 @@ resolve_concepts(intermediate_model& im) const {
         concept& c(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << c.name().id();
-        resolve_attributes(im, c.name(), c.local_attributes());
+        resolve_attributes(im, idx, c.name(), c.local_attributes());
         validate_refinements(im, c);
     }
 
@@ -327,7 +328,7 @@ resolve_concepts(intermediate_model& im) const {
 }
 
 void resolver::
-resolve_objects(intermediate_model& im) const {
+resolve_objects(const indices& idx, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
                              << im.objects().size();
 
@@ -336,7 +337,7 @@ resolve_objects(intermediate_model& im) const {
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << o.name().id();
         validate_inheritance_graph(im, o);
-        resolve_attributes(im, o.name(), o.local_attributes());
+        resolve_attributes(im, idx, o.name(), o.local_attributes());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Resolved objects.";
@@ -372,7 +373,8 @@ void resolver::resolve_enumerations(intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Resolved enumerations.";
 }
 
-void resolver::resolve_primitives(intermediate_model& im) const {
+void resolver::
+resolve_primitives(const indices& idx, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
                              << im.primitives().size();
 
@@ -380,27 +382,27 @@ void resolver::resolve_primitives(intermediate_model& im) const {
         auto& p(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving: " << p.name().id();
-        resolve_attribute(im, p.name(), p.value_attribute());
+        resolve_attribute(im, idx, p.name(), p.value_attribute());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Resolved primitives.";
 }
 
-void resolver::resolve(intermediate_model& im) const {
+void resolver::resolve(const indices& idx, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
 
-    resolve_concepts(im);
-    resolve_objects(im);
+    resolve_concepts(idx, im);
+    resolve_objects(idx, im);
     resolve_enumerations(im);
-    resolve_primitives(im);
+    resolve_primitives(idx, im);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";
 }
 
-name resolver::resolve(const intermediate_model& im, const name& context,
-    const name& n) const {
+name resolver::resolve(const intermediate_model& im, const indices& idx,
+    const name& context, const name& n) const {
 
-    const auto r(resolve_name(im, context, n));
+    const auto r(resolve_name(im, idx, context, n));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
                              << " to: " << r.id();
     return r;

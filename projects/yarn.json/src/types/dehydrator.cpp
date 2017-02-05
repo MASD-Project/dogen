@@ -62,7 +62,7 @@ boost::optional<annotations::scribble_group>
 dehydrator::scribble_group_for_name(const intermediate_model& im,
     const yarn::name& n) const {
 
-    const auto& scribble_groups(im.indices().scribble_groups());
+    const auto& scribble_groups(im.scribble_groups());
     const auto i(scribble_groups.find(n.id()));
     if (i == scribble_groups.end())
         return boost::optional<annotations::scribble_group>();

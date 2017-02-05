@@ -38,7 +38,6 @@
 #include "dogen/yarn/serialization/builtin_ser.hpp"
 #include "dogen/yarn/serialization/concept_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/yarn/serialization/indices_ser.hpp"
 #include "dogen/yarn/serialization/visitor_ser.hpp"
 #include "dogen/yarn/serialization/exception_ser.hpp"
 #include "dogen/yarn/serialization/languages_ser.hpp"
@@ -46,6 +45,7 @@
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -68,10 +68,10 @@ void save(Archive& ar,
     ar << make_nvp("visitors", v.visitors_);
     ar << make_nvp("injected_elements", v.injected_elements_);
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
-    ar << make_nvp("indices", v.indices_);
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("input_language", v.input_language_);
     ar << make_nvp("output_languages", v.output_languages_);
+    ar << make_nvp("scribble_groups", v.scribble_groups_);
 }
 
 template<typename Archive>
@@ -92,10 +92,10 @@ void load(Archive& ar,
     ar >> make_nvp("visitors", v.visitors_);
     ar >> make_nvp("injected_elements", v.injected_elements_);
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
-    ar >> make_nvp("indices", v.indices_);
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("input_language", v.input_language_);
     ar >> make_nvp("output_languages", v.output_languages_);
+    ar >> make_nvp("scribble_groups", v.scribble_groups_);
 }
 
 } }

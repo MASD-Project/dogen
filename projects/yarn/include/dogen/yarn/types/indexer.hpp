@@ -27,6 +27,7 @@
 
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
@@ -34,7 +35,7 @@ namespace yarn {
 
 class indexer {
 public:
-    void index(intermediate_model& m) const;
+    indices index(intermediate_model& m) const;
 };
 
 } }

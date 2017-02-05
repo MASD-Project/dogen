@@ -1176,83 +1176,6 @@
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<indices class_id="44" tracking_level="0" version="0">
-		<objects_always_in_heap class_id="45" tracking_level="0" version="0">
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</objects_always_in_heap>
-		<elements_referable_by_attributes>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</elements_referable_by_attributes>
-		<scribble_groups class_id="46" tracking_level="0" version="0">
-			<count>1</count>
-			<bucket_count>2</bucket_count>
-			<item_version>0</item_version>
-			<item class_id="47" tracking_level="0" version="0">
-				<first>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</first>
-				<second class_id="48" tracking_level="0" version="0">
-					<parent class_id="49" tracking_level="0" version="0">
-						<entries class_id="50" tracking_level="0" version="0">
-							<count>6</count>
-							<item_version>0</item_version>
-							<item class_id="51" tracking_level="0" version="0">
-								<first>yarn.dia.comment</first>
-								<second>true</second>
-							</item>
-							<item>
-								<first>yarn.dia.external_modules</first>
-								<second>dogen::test_models</second>
-							</item>
-							<item>
-								<first>yarn.input_language</first>
-								<second>cpp</second>
-							</item>
-							<item>
-								<first>quilt.cpp.enabled</first>
-								<second>true</second>
-							</item>
-							<item>
-								<first>quilt.csharp.enabled</first>
-								<second>false</second>
-							</item>
-							<item>
-								<first>annotations.profile</first>
-								<second>dogen</second>
-							</item>
-						</entries>
-						<scope>3</scope>
-						<candidate_labels>
-							<count>0</count>
-							<item_version>0</item_version>
-						</candidate_labels>
-					</parent>
-					<children class_id="52" tracking_level="0" version="0">
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</children>
-				</second>
-			</item>
-		</scribble_groups>
-		<primitive_underliers>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</primitive_underliers>
-		<enumeration_underliers>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</enumeration_underliers>
-		<abstract_elements>
-			<count>0</count>
-			<bucket_count>1</bucket_count>
-			<item_version>0</item_version>
-		</abstract_elements>
-	</indices>
 	<root_module object_id="_6">
 		<element>
 			<documentation></documentation>
@@ -1307,10 +1230,60 @@
 		<is_global_module>0</is_global_module>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="53" tracking_level="0" version="0">
+	<output_languages class_id="44" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
+	<scribble_groups class_id="45" tracking_level="0" version="0">
+		<count>1</count>
+		<bucket_count>2</bucket_count>
+		<item_version>0</item_version>
+		<item class_id="46" tracking_level="0" version="0">
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;classes_without_package&gt;</first>
+			<second class_id="47" tracking_level="0" version="0">
+				<parent class_id="48" tracking_level="0" version="0">
+					<entries class_id="49" tracking_level="0" version="0">
+						<count>6</count>
+						<item_version>0</item_version>
+						<item class_id="50" tracking_level="0" version="0">
+							<first>yarn.dia.comment</first>
+							<second>true</second>
+						</item>
+						<item>
+							<first>yarn.dia.external_modules</first>
+							<second>dogen::test_models</second>
+						</item>
+						<item>
+							<first>yarn.input_language</first>
+							<second>cpp</second>
+						</item>
+						<item>
+							<first>quilt.cpp.enabled</first>
+							<second>true</second>
+						</item>
+						<item>
+							<first>quilt.csharp.enabled</first>
+							<second>false</second>
+						</item>
+						<item>
+							<first>annotations.profile</first>
+							<second>dogen</second>
+						</item>
+					</entries>
+					<scope>3</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children class_id="51" tracking_level="0" version="0">
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</second>
+		</item>
+	</scribble_groups>
 </entity>
 </boost_serialization>
 

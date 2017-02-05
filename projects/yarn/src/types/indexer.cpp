@@ -33,30 +33,31 @@ auto lg(logger_factory("yarn.indexer"));
 namespace dogen {
 namespace yarn {
 
-void indexer::index(intermediate_model& m) const {
-    auto& idx(m.indices());
+indices indexer::index(intermediate_model& m) const {
+    indices r;
     for (const auto& pair : m.builtins())
-        idx.elements_referable_by_attributes().insert(pair.first);
+        r.elements_referable_by_attributes().insert(pair.first);
 
     for (const auto& pair : m.primitives())
-        idx.elements_referable_by_attributes().insert(pair.first);
+        r.elements_referable_by_attributes().insert(pair.first);
 
     for (const auto& pair : m.enumerations())
-        idx.elements_referable_by_attributes().insert(pair.first);
+        r.elements_referable_by_attributes().insert(pair.first);
 
     for (const auto& pair : m.objects()) {
         const auto id(pair.first);
-        idx.elements_referable_by_attributes().insert(id);
+        r.elements_referable_by_attributes().insert(id);
 
         const auto& o(pair.second);
         if (o.type_parameters().always_in_heap())
-            idx.objects_always_in_heap().insert(id);
+            r.objects_always_in_heap().insert(id);
 
         if (o.is_abstract())
-            idx.abstract_elements().insert(id);
+            r.abstract_elements().insert(id);
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Indices: " << idx;
+    BOOST_LOG_SEV(lg, debug) << "Indices: " << r;
+    return r;
 }
 
 } }

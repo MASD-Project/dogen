@@ -114,9 +114,9 @@ expand_enumerations(const annotations::type_repository& atrp,
     ex.expand(atrp, im);
 }
 
-void model_factory::create_indices(intermediate_model& im) const {
+indices model_factory::create_indices(intermediate_model& im) const {
     indexer idx;
-    idx.index(im);
+    return idx.index(im);
 }
 
 void model_factory::expand_stereotypes(intermediate_model& im) const {
@@ -130,16 +130,16 @@ void model_factory::expand_containment(intermediate_model& im) const {
 }
 
 void model_factory::
-resolve_element_references(intermediate_model& im) const {
+resolve_element_references(const indices& idx, intermediate_model& im) const {
     resolver rs;
-    rs.resolve(im);
+    rs.resolve(idx, im);
 }
 
 void model_factory::
 expand_generalizations(const annotations::type_repository& atrp,
-    intermediate_model& im) const {
+    const indices& idx, intermediate_model& im) const {
     generalization_expander ex;
-    ex.expand(atrp, im);
+    ex.expand(atrp, idx, im);
 }
 
 void model_factory::expand_concepts(intermediate_model& im) const {
@@ -169,9 +169,10 @@ void model_factory::inject_model(const annotations::type_repository& atrp,
     ex.expand(atrp, ra, rg, im);
 }
 
-void model_factory::validate(const intermediate_model& im) const {
+void model_factory::
+validate(const indices& idx, const intermediate_model& im) const {
     second_stage_validator v;
-    v.validate(im);
+    v.validate(idx, im);
 }
 
 model model_factory::transform_intermediate_model(
@@ -203,7 +204,7 @@ model model_factory::make(const annotations::type_repository& atrp,
      * that this means injected types are not part of indices, which
      * is not ideal - but for now, its not a major problem.
      */
-    create_indices(im);
+    const auto idx(create_indices(im));
 
     /*
      * We must expand generalisation relationships before we expand
@@ -212,7 +213,7 @@ model model_factory::make(const annotations::type_repository& atrp,
      * expanded after merging models because we may inherit across
      * models.
      */
-    expand_generalizations(atrp, im);
+    expand_generalizations(atrp, idx, im);
 
     /*
      * Stereotypes expansion must be done before concepts because we
@@ -227,7 +228,7 @@ model model_factory::make(const annotations::type_repository& atrp,
      * injected or else it will fail to find any references to those
      * elements.
      */
-    resolve_element_references(im);
+    resolve_element_references(idx, im);
 
     /*
      * We can only expand attributes after we've expanded:
@@ -254,7 +255,7 @@ model model_factory::make(const annotations::type_repository& atrp,
     /*
      * Ensure the model is valid.
      */
-    validate(im);
+    validate(idx, im);
 
     /*
      * Perform the final transformation.

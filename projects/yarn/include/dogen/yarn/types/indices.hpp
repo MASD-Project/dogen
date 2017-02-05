@@ -27,9 +27,7 @@
 
 #include <string>
 #include <algorithm>
-#include <unordered_map>
 #include <unordered_set>
-#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/serialization/indices_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,7 +44,6 @@ public:
     indices(
         const std::unordered_set<std::string>& objects_always_in_heap,
         const std::unordered_set<std::string>& elements_referable_by_attributes,
-        const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
         const std::unordered_set<std::string>& primitive_underliers,
         const std::unordered_set<std::string>& enumeration_underliers,
         const std::unordered_set<std::string>& abstract_elements);
@@ -68,11 +65,6 @@ public:
     std::unordered_set<std::string>& elements_referable_by_attributes();
     void elements_referable_by_attributes(const std::unordered_set<std::string>& v);
     void elements_referable_by_attributes(const std::unordered_set<std::string>&& v);
-
-    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups() const;
-    std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups();
-    void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v);
-    void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v);
 
     const std::unordered_set<std::string>& primitive_underliers() const;
     std::unordered_set<std::string>& primitive_underliers();
@@ -102,7 +94,6 @@ public:
 private:
     std::unordered_set<std::string> objects_always_in_heap_;
     std::unordered_set<std::string> elements_referable_by_attributes_;
-    std::unordered_map<std::string, dogen::annotations::scribble_group> scribble_groups_;
     std::unordered_set<std::string> primitive_underliers_;
     std::unordered_set<std::string> enumeration_underliers_;
     std::unordered_set<std::string> abstract_elements_;

@@ -68,8 +68,9 @@ generalization_expander::make_is_final(const type_group& tg,
     return boost::optional<bool>();
 }
 
-std::unordered_set<std::string> generalization_expander::
-update_and_collect_parent_ids(intermediate_model& im) const {
+std::unordered_set<std::string>
+generalization_expander::update_and_collect_parent_ids(const indices& idx,
+    intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     resolver rs;
@@ -92,7 +93,7 @@ update_and_collect_parent_ids(intermediate_model& im) const {
          */
         std::list<name> resolved_parents;
         for (const auto& pn : o.parents()) {
-            const auto resolved_pn(rs.resolve(im, o.name(), pn));
+            const auto resolved_pn(rs.resolve(im, idx, o.name(), pn));
             r.insert(resolved_pn.id());
             resolved_parents.push_back(resolved_pn);
         }
@@ -232,8 +233,9 @@ void generalization_expander::sort_leaves(intermediate_model& im) const {
 }
 
 void generalization_expander::
-expand(const annotations::type_repository& atrp, intermediate_model& im) const {
-    const auto parent_ids(update_and_collect_parent_ids(im));
+expand(const annotations::type_repository& atrp, const indices& idx,
+    intermediate_model& im) const {
+    const auto parent_ids(update_and_collect_parent_ids(idx, im));
 
     const auto tg(make_type_group(atrp));
     populate_generalizable_properties(tg, parent_ids, im);

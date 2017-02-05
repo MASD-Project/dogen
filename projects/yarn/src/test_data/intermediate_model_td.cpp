@@ -25,7 +25,6 @@
 #include "dogen/yarn/test_data/builtin_td.hpp"
 #include "dogen/yarn/test_data/concept_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
-#include "dogen/yarn/test_data/indices_td.hpp"
 #include "dogen/yarn/test_data/visitor_td.hpp"
 #include "dogen/yarn/test_data/exception_td.hpp"
 #include "dogen/yarn/test_data/languages_td.hpp"
@@ -33,6 +32,7 @@
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
+#include "dogen/annotations/test_data/scribble_group_td.hpp"
 
 namespace {
 
@@ -196,11 +196,6 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-dogen::yarn::indices
-create_dogen_yarn_indices(const unsigned int position) {
-    return dogen::yarn::indices_generator::create(position);
-}
-
 dogen::yarn::languages
 create_dogen_yarn_languages(const unsigned int position) {
     return dogen::yarn::languages_generator::create(position);
@@ -210,6 +205,19 @@ std::list<dogen::yarn::languages> create_std_list_dogen_yarn_languages(unsigned 
     std::list<dogen::yarn::languages> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_languages(position + i));
+    }
+    return r;
+}
+
+dogen::annotations::scribble_group
+create_dogen_annotations_scribble_group(const unsigned int position) {
+    return dogen::annotations::scribble_group_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::annotations::scribble_group> create_std_unordered_map_std_string_dogen_annotations_scribble_group(unsigned int position) {
+    std::unordered_map<std::string, dogen::annotations::scribble_group> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_scribble_group(position + i)));
     }
     return r;
 }
@@ -237,10 +245,10 @@ populate(const unsigned int position, result_type& v) {
     v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 11));
     v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 12));
     v.has_generatable_types(create_bool(position + 13));
-    v.indices(create_dogen_yarn_indices(position + 14));
-    v.root_module(create_dogen_yarn_module(position + 15));
-    v.input_language(create_dogen_yarn_languages(position + 16));
-    v.output_languages(create_std_list_dogen_yarn_languages(position + 17));
+    v.root_module(create_dogen_yarn_module(position + 14));
+    v.input_language(create_dogen_yarn_languages(position + 15));
+    v.output_languages(create_std_list_dogen_yarn_languages(position + 16));
+    v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 17));
 }
 
 intermediate_model_generator::result_type

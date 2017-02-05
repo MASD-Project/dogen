@@ -26,12 +26,10 @@
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/unordered_map.hpp>
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/indices_ser.hpp"
-#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -42,7 +40,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
     ar << make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
-    ar << make_nvp("scribble_groups", v.scribble_groups_);
     ar << make_nvp("primitive_underliers", v.primitive_underliers_);
     ar << make_nvp("enumeration_underliers", v.enumeration_underliers_);
     ar << make_nvp("abstract_elements", v.abstract_elements_);
@@ -54,7 +51,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
     ar >> make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
-    ar >> make_nvp("scribble_groups", v.scribble_groups_);
     ar >> make_nvp("primitive_underliers", v.primitive_underliers_);
     ar >> make_nvp("enumeration_underliers", v.enumeration_underliers_);
     ar >> make_nvp("abstract_elements", v.abstract_elements_);

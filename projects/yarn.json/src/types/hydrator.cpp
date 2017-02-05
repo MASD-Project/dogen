@@ -143,7 +143,7 @@ void hydrator::insert_scribble_group(const yarn::name& owner,
 
     const auto id(owner.id());
     const auto pair(std::make_pair(id, sg));
-    const bool inserted(im.indices().scribble_groups().insert(pair).second);
+    const bool inserted(im.scribble_groups().insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
         BOOST_THROW_EXCEPTION(hydration_error(duplicate_element_id + id));

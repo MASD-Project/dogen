@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
@@ -71,7 +72,7 @@ private:
     /**
      * @brief Create indices.
      */
-    void create_indices(intermediate_model& im) const;
+    indices create_indices(intermediate_model& im) const;
 
     /**
      * @brief Expand all stereotypes used in model.
@@ -86,13 +87,14 @@ private:
     /**
      * @brief Ensures all references point to elements in the model.
      */
-    void resolve_element_references(intermediate_model& im) const;
+    void resolve_element_references(const indices& idx,
+        intermediate_model& im) const;
 
     /**
      * @brief Expand all generalization relationships.
      */
     void expand_generalizations(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
+        const indices& idx, intermediate_model& im) const;
 
     /**
      * @brief Expand all concepts.
@@ -125,7 +127,7 @@ private:
     /**
      * @brief Ensures the model passes all validation rules.
      */
-    void validate(const intermediate_model& im) const;
+    void validate(const indices& idx, const intermediate_model& im) const;
 
     /**
      * @brief Transforms the intermediate model to the final

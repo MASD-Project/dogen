@@ -26,13 +26,11 @@ namespace yarn {
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,
     const std::unordered_set<std::string>& elements_referable_by_attributes,
-    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
     const std::unordered_set<std::string>& primitive_underliers,
     const std::unordered_set<std::string>& enumeration_underliers,
     const std::unordered_set<std::string>& abstract_elements)
     : objects_always_in_heap_(objects_always_in_heap),
       elements_referable_by_attributes_(elements_referable_by_attributes),
-      scribble_groups_(scribble_groups),
       primitive_underliers_(primitive_underliers),
       enumeration_underliers_(enumeration_underliers),
       abstract_elements_(abstract_elements) { }
@@ -41,7 +39,6 @@ void indices::swap(indices& other) noexcept {
     using std::swap;
     swap(objects_always_in_heap_, other.objects_always_in_heap_);
     swap(elements_referable_by_attributes_, other.elements_referable_by_attributes_);
-    swap(scribble_groups_, other.scribble_groups_);
     swap(primitive_underliers_, other.primitive_underliers_);
     swap(enumeration_underliers_, other.enumeration_underliers_);
     swap(abstract_elements_, other.abstract_elements_);
@@ -50,7 +47,6 @@ void indices::swap(indices& other) noexcept {
 bool indices::operator==(const indices& rhs) const {
     return objects_always_in_heap_ == rhs.objects_always_in_heap_ &&
         elements_referable_by_attributes_ == rhs.elements_referable_by_attributes_ &&
-        scribble_groups_ == rhs.scribble_groups_ &&
         primitive_underliers_ == rhs.primitive_underliers_ &&
         enumeration_underliers_ == rhs.enumeration_underliers_ &&
         abstract_elements_ == rhs.abstract_elements_;
@@ -92,22 +88,6 @@ void indices::elements_referable_by_attributes(const std::unordered_set<std::str
 
 void indices::elements_referable_by_attributes(const std::unordered_set<std::string>&& v) {
     elements_referable_by_attributes_ = std::move(v);
-}
-
-const std::unordered_map<std::string, dogen::annotations::scribble_group>& indices::scribble_groups() const {
-    return scribble_groups_;
-}
-
-std::unordered_map<std::string, dogen::annotations::scribble_group>& indices::scribble_groups() {
-    return scribble_groups_;
-}
-
-void indices::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
-    scribble_groups_ = v;
-}
-
-void indices::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v) {
-    scribble_groups_ = std::move(v);
 }
 
 const std::unordered_set<std::string>& indices::primitive_underliers() const {

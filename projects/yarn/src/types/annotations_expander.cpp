@@ -211,11 +211,11 @@ update_scribble_groups(intermediate_model& im) const {
      * Augment all scribbles with candidate labels, which are in
      * effect the stereotypes.
      */
-    scribble_updater u(im.indices().scribble_groups());
+    scribble_updater u(im.scribble_groups());
     yarn::elements_traversal(im, u);
 
     BOOST_LOG_SEV(lg, debug) << "Updated scribble groups. Result: "
-                             << im.indices().scribble_groups();
+                             << im.scribble_groups();
 }
 
 void annotations_expander::
@@ -226,7 +226,7 @@ update_annotations(const annotations::annotation_groups_factory& agf,
      * We first call the annotations group factory to convert our
      * scribble groups into annotation groups.
      */
-    const auto annotation_groups(agf.make(im.indices().scribble_groups()));
+    const auto annotation_groups(agf.make(im.scribble_groups()));
 
     /*
      * Now we have to unpack all of the annotation groups and populate

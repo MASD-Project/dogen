@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/indexer.hpp"
 #include "dogen/yarn/types/resolver.hpp"
+#include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/utility/test/equality_tester.hpp"
@@ -61,6 +62,8 @@ const mock_intermediate_model_factory::flags flags(false/*tagged*/,
 
 const mock_intermediate_model_factory factory(flags);
 
+const auto idx = dogen::yarn::indices();
+
 const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
 const std::string missing_target("No target model found");
@@ -92,14 +95,14 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
             t.id(t.simple());
         }
     }
-    dogen::yarn::indexer idx;
-    idx.index(m);
+    dogen::yarn::indexer indexer;
+    const auto idx(indexer.index(m));
 
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
 
     dogen::yarn::resolver rs;
-    rs.resolve(m);
+    rs.resolve(idx, m);
     BOOST_LOG_SEV(lg, debug) << "resolved: " << m;
     BOOST_CHECK(m != original);
 
@@ -134,11 +137,11 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
-    dogen::yarn::indexer idx;
-    idx.index(combined);
+    dogen::yarn::indexer indexer;
+    const auto idx(indexer.index(combined));
 
     dogen::yarn::resolver rs;
-    rs.resolve(combined);
+    rs.resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -166,7 +169,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
     auto m(factory.object_with_missing_attribute_type());
     dogen::yarn::resolver rs;
     contains_checker<resolution_error> c(undefined_type);
-    BOOST_CHECK_EXCEPTION(rs.resolve(m), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(rs.resolve(idx, m), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
@@ -179,7 +182,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
-    rs.resolve(combined);
+    rs.resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -211,7 +214,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
     BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
-    rs.resolve(combined);
+    rs.resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -242,7 +245,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
     BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
-    rs.resolve(combined);
+    rs.resolve(idx, combined);
 
     bool found_one(false);
     bool found_two(false);
@@ -283,7 +286,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model
 
     contains_checker<resolution_error> c(missing_parent);
     dogen::yarn::resolver rs;
-    BOOST_CHECK_EXCEPTION(rs.resolve(m), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(rs.resolve(idx, m), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolves_successfully) {
@@ -302,7 +305,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     BOOST_CHECK(combined.builtins().empty());
 
     dogen::yarn::resolver rs;
-    rs.resolve(combined);
+    rs.resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -335,7 +338,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models
     dogen::yarn::resolver rs;
 
     contains_checker<resolution_error> c(missing_parent);
-    BOOST_CHECK_EXCEPTION(rs.resolve(combined), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(rs.resolve(idx, combined), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

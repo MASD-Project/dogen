@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/yarn/hash/indices_hash.hpp"
-#include "dogen/annotations/hash/scribble_group_hash.hpp"
 
 namespace {
 
@@ -37,15 +36,6 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_scribble_group(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
-    }
-    return seed;
-}
-
 }
 
 namespace dogen {
@@ -56,7 +46,6 @@ std::size_t indices_hasher::hash(const indices& v) {
 
     combine(seed, hash_std_unordered_set_std_string(v.objects_always_in_heap()));
     combine(seed, hash_std_unordered_set_std_string(v.elements_referable_by_attributes()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_scribble_group(v.scribble_groups()));
     combine(seed, hash_std_unordered_set_std_string(v.primitive_underliers()));
     combine(seed, hash_std_unordered_set_std_string(v.enumeration_underliers()));
     combine(seed, hash_std_unordered_set_std_string(v.abstract_elements()));

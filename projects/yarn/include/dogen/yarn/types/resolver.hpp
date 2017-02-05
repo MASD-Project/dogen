@@ -64,25 +64,25 @@ private:
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    name resolve_name(const intermediate_model& im, const name& context,
-        const name& n) const;
+    name resolve_name(const intermediate_model& im, const indices& idx,
+        const name& context, const name& n) const;
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
-    void resolve_name_tree(const intermediate_model& im, const name& owner,
-        name_tree& nt) const;
+    void resolve_name_tree(const intermediate_model& im, const indices& idx,
+        const name& owner, name_tree& nt) const;
 
     /**
      * @brief Resolves all references to types in the supplied attribute.
      */
-    void resolve_attribute(const intermediate_model& im,
+    void resolve_attribute(const intermediate_model& im, const indices& idx,
         const name& owner, attribute& attr) const;
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
-    void resolve_attributes(const intermediate_model& im,
+    void resolve_attributes(const intermediate_model& im, const indices& idx,
         const name& owner, std::list<attribute>& attributes) const;
 
     /**
@@ -105,12 +105,12 @@ private:
     /**
      * @brief Resolve all concepts.
      */
-    void resolve_concepts(intermediate_model& im) const;
+    void resolve_concepts(const indices& idx, intermediate_model& im) const;
 
     /**
      * @brief Resolve all objects.
      */
-    void resolve_objects(intermediate_model& im) const;
+    void resolve_objects(const indices& idx, intermediate_model& im) const;
 
     /**
      * @brief Resolve all enumerations.
@@ -120,19 +120,19 @@ private:
     /**
      * @brief Resolve all primitives.
      */
-    void resolve_primitives(intermediate_model& im) const;
+    void resolve_primitives(const indices& idx, intermediate_model& im) const;
 
 public:
     /**
      * @brief Resolve all references to types within model.
      */
-    void resolve(intermediate_model& im) const;
+    void resolve(const indices& idx, intermediate_model& im) const;
 
     /**
      * @brief Resolves the name against the supplied model.
      */
-    name resolve(const intermediate_model& im, const name& context,
-        const name& n) const;
+    name resolve(const intermediate_model& im, const indices& idx,
+        const name& context, const name& n) const;
 };
 
 } }

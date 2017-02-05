@@ -20,7 +20,6 @@
  */
 #include <sstream>
 #include "dogen/yarn/test_data/indices_td.hpp"
-#include "dogen/annotations/test_data/scribble_group_td.hpp"
 
 namespace {
 
@@ -38,19 +37,6 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-dogen::annotations::scribble_group
-create_dogen_annotations_scribble_group(const unsigned int position) {
-    return dogen::annotations::scribble_group_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::annotations::scribble_group> create_std_unordered_map_std_string_dogen_annotations_scribble_group(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::scribble_group> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_scribble_group(position + i)));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -62,10 +48,9 @@ void indices_generator::
 populate(const unsigned int position, result_type& v) {
     v.objects_always_in_heap(create_std_unordered_set_std_string(position + 0));
     v.elements_referable_by_attributes(create_std_unordered_set_std_string(position + 1));
-    v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 2));
-    v.primitive_underliers(create_std_unordered_set_std_string(position + 3));
-    v.enumeration_underliers(create_std_unordered_set_std_string(position + 4));
-    v.abstract_elements(create_std_unordered_set_std_string(position + 5));
+    v.primitive_underliers(create_std_unordered_set_std_string(position + 2));
+    v.enumeration_underliers(create_std_unordered_set_std_string(position + 3));
+    v.abstract_elements(create_std_unordered_set_std_string(position + 4));
 }
 
 indices_generator::result_type

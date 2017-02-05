@@ -151,7 +151,7 @@ update_scribble_group(const yarn::name& n, const processed_object& po) {
     const auto pair(std::make_pair(n.id(), sg));
     BOOST_LOG_SEV(lg, debug) << "Inserting scribble group: " << pair;
 
-    auto& sgrps(repository_.model().indices().scribble_groups());
+    auto& sgrps(repository_.model().scribble_groups());
     const bool inserted(sgrps.insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
