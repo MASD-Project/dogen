@@ -24,6 +24,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
@@ -91,11 +92,12 @@ private:
 
 public:
     /*
-     * We are only interested in yarn objects; all other element
-     * types do not need helpers.
+     * We are only interested in yarn objects and primitives; all
+     * other element types do not need helpers.
      */
     using yarn::element_visitor::visit;
     void visit(const yarn::object& o);
+    void visit(const yarn::primitive& p);
 
 public:
     const std::list<formattables::helper_properties>& result() const;
@@ -130,6 +132,14 @@ void helper_properties_generator::visit(const yarn::object& o) {
     const auto& cfg(helper_configuration_);
     const auto& attrs(o.local_attributes());
     const auto iir(o.in_inheritance_relationship());
+    result_ = compute_helper_properties(cfg, fff, iir, attrs);
+}
+
+void helper_properties_generator::visit(const yarn::primitive& p) {
+    const auto& fff(facets_for_family_);
+    const auto& cfg(helper_configuration_);
+    std::list<yarn::attribute> attrs({ p.value_attribute() });
+    const auto iir(false/*in_inheritance_relationship*/);
     result_ = compute_helper_properties(cfg, fff, iir, attrs);
 }
 

@@ -97,6 +97,16 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(k.Equals(m), Is.True);
                 Assert.That(k == m, Is.True);
                 Assert.That(k != m, Is.False);
+
+                var l = ShortPrimitiveSequenceGenerator.Sequence().GetEnumerator().Current;
+                var n = ShortPrimitiveSequenceGenerator.Sequence().GetEnumerator().Current;
+                Log.DebugFormat("l: {0}", ShortPrimitiveDumper.Dump(l));
+                Log.DebugFormat("n: {0}", ShortPrimitiveDumper.Dump(n));
+
+                Assert.That(object.ReferenceEquals(l, n), Is.False);
+                Assert.That(l.Equals(n), Is.True);
+                Assert.That(l == n, Is.True);
+                Assert.That(l != n, Is.False);
             }
         }
 
@@ -162,6 +172,15 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(f == f, Is.True);
                 // Analysis disable once EqualExpressionComparison
                 Assert.That(f != f, Is.False);
+
+                var g = ShortPrimitiveSequenceGenerator.Sequence().GetEnumerator().Current;
+                Log.DebugFormat("f: {0}", ShortPrimitiveDumper.Dump(g));
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(g.Equals(g), Is.True);
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(g == g, Is.True);
+                // Analysis disable once EqualExpressionComparison
+                Assert.That(g != g, Is.False);
                 #pragma warning restore 1718
             }
         }
@@ -234,6 +253,18 @@ namespace Dogen.TestModels.CSharpModel.Tests
                 Assert.That(k.Equals(m), Is.False);
                 Assert.That(k == m, Is.False);
                 Assert.That(k != m, Is.True);
+
+                var en7 = ShortPrimitiveSequenceGenerator.Sequence().GetEnumerator();
+                var l = en7.Current;
+                en7.MoveNext();
+                var n = en7.Current;
+                Log.DebugFormat("l: {0}", ShortPrimitiveDumper.Dump(l));
+                Log.DebugFormat("n: {0}", ShortPrimitiveDumper.Dump(n));
+
+                Assert.That(object.ReferenceEquals(l, n), Is.False);
+                Assert.That(l.Equals(n), Is.False);
+                Assert.That(l == n, Is.False);
+                Assert.That(l != n, Is.True);
             }
         }
 

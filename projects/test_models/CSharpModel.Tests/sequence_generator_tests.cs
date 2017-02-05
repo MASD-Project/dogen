@@ -122,6 +122,20 @@ namespace Dogen.TestModels.CSharpModel.Tests
 
         [Test]
         // Analysis disable once InconsistentNaming
+        public void dumping_primitives_produces_valid_json()
+        {
+            using (var lc = new LogConfigurator(FixtureName))
+            {
+                var p0 = ShortPrimitiveSequenceGenerator.Sequence().GetEnumerator();
+                Assert.That(ValidateJson(ShortPrimitiveDumper.Dump(p0.Current)), Is.True);
+
+                var p1 = DoublePrimitiveSequenceGenerator.Sequence().GetEnumerator();
+                Assert.That(ValidateJson(DoublePrimitiveDumper.Dump(p1.Current)), Is.True);
+            }
+        }
+
+        [Test]
+        // Analysis disable once InconsistentNaming
         public void dumping_classes_in_namespaces_produces_valid_json()
         {
             using (var lc = new LogConfigurator(FixtureName))
