@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-05 Sun 22:25]
+#+CAPTION: Clock summary at [2017-02-05 Sun 22:42]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *50:33* |       |       | 100.0 |
+| *Total time*                                                                | *50:49* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 50:33   |       |       | 100.0 |
-| Active                                                                      |         | 50:33 |       | 100.0 |
+| Stories                                                                     | 50:49   |       |       | 100.0 |
+| Active                                                                      |         | 50:49 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.4 |
 | COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   8.2 |
@@ -28,15 +28,16 @@
 | COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  10.7 |
 | COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.5 |
 | COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.6 |
-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  20.9 |
+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  20.8 |
 | POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.6 |
-| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.3 |
-| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  39.2 |
+| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.2 |
+| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  39.0 |
 | COMPLETED Drop "inclusion" prefix in quilt.cpp                              |         |       |  0:40 |   1.3 |
 | COMPLETED Mark elements that are valid enumeration underlying elements      |         |       |  0:19 |   0.6 |
 | COMPLETED Refactor yarn model validators                                    |         |       |  1:10 |   2.3 |
 | COMPLETED Split indices out of the intermediate model                       |         |       |  0:40 |   1.3 |
 | COMPLETED Add validation rules for primitives and enumerations              |         |       |  0:34 |   1.1 |
+| COMPLETED Add validation for C# keywords                                    |         |       |  0:16 |   0.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -595,6 +596,18 @@ We need to add all of the rules related to validation of primitives
 and enumerations to the validators. This can only be done after the
 indices have been populated.
 
+*** COMPLETED Add validation for C# keywords                          :story:
+    CLOSED: [2017-02-05 Sun 22:42]
+    CLOCK: [2017-02-05 Sun 22:26]--[2017-02-05 Sun 22:42] =>  0:16
+
+At present we are checking the model does not contain C++ keywords but
+we're not doing the same for C#.
+
+- [[https://en.wikibooks.org/wiki/C_Sharp_Programming/Keywords][C# Programming/Keywords]]
+
+We should also ensure models in LAM are checked for both C# and C++
+keywords - or actually always check all keywords for all languages.
+
 *** Immutable types cannot be owned by mutable types                  :story:
 
 When we try to create a mutable class that has a property of an
@@ -762,16 +775,6 @@ Another alternative is to apply hard-coded regexes:
 
 Finally, the last option may be to have yet another mapping data file
 format that lists the primitives to unbox.
-
-*** Add validation for C# keywords                                    :story:
-
-At present we are checking the model does not contain C++ keywords but
-we're not doing the same for C#.
-
-- [[https://en.wikibooks.org/wiki/C_Sharp_Programming/Keywords][C# Programming/Keywords]]
-
-We should also ensure models in LAM are checked for both C# and C++
-keywords - or actually always check all keywords for all languages.
 
 *** Tidy-up "is floating point"                                       :story:
 

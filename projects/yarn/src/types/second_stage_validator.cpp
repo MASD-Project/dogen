@@ -47,24 +47,55 @@ const std::string space(" ");
  * package or somesuch other name and then add it back.
  */
 std::array<std::string, 81> cpp_reserved = { {
-    "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
-    "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor",
-    "break", "case", "catch", "class", "compl", "const",
-    "const_cast", "constexpr", "continue", "decltype", "default", "delete",
-    "do", "dynamic_cast", "else", "enum", "explicit", "export", "extern",
-    "false", "for", "friend", "goto", "if", "import", "inline",
-    "mutable", "namespace", "new", "noexcept", "not",
-    "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected",
-    "public", "register", "reinterpret_cast", "requires", "return", "sizeof",
-    "static", "static_assert", "static_cast", "struct", "switch",
-    "synchronized", "template", "this", "thread_local", "throw", "true", "try",
-    "typedef", "typeid", "typename", "union", "using", "virtual", "void",
-    "volatile", "wchar_t", "while", "xor", "xor_eq", "xor_eqalignas"
+        "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
+        "atomic_commit", "atomic_noexcept", "auto", "bitand", "bitor",
+        "break", "case", "catch", "class", "compl", "const",
+        "const_cast", "constexpr", "continue", "decltype", "default", "delete",
+        "do", "dynamic_cast", "else", "enum", "explicit", "export", "extern",
+        "false", "for", "friend", "goto", "if", "import", "inline",
+        "mutable", "namespace", "new", "noexcept", "not",
+        "not_eq", "nullptr", "operator", "or", "or_eq", "private", "protected",
+        "public", "register", "reinterpret_cast", "requires", "return",
+        "sizeof", "static", "static_assert", "static_cast", "struct", "switch",
+        "synchronized", "template", "this", "thread_local", "throw", "true",
+        "try", "typedef", "typeid", "typename", "union", "using", "virtual",
+        "void", "volatile", "wchar_t", "while", "xor", "xor_eq", "xor_eqalignas"
     } };
 
 std::array<std::string, 11> cpp_builtins = { {
     "char16_t", "char32_t", "unsigned", "bool", "char", "double", "float",
     "int", "long", "short", "signed"
+    }
+};
+
+/*
+ * FIXME: we've removed the following keywords for now because test
+ * models use these terms: "base". We need to first rename it
+ * to package or somesuch other name and then add it back.
+ */
+
+std::array<std::string, 64> csharp_reserved = { {
+        "abstract", "as", "break",
+        "case", "catch", "checked", "class",
+        "const", "continue", "default", "delegate",
+        "do", "else", "enum", "event",
+        "explicit", "extern",   "false", "finally",
+        "fixed", "for", "foreach", "goto",
+        "if", "implicit", "in", "interface",
+        "internal",  "is", "lock", "namespace",
+        "new", "null", "operator", "out",
+        "override", "params", "private", "protected",
+        "public", "readonly", "ref", "return",
+        "sealed", "sizeof", "stackalloc", "static",
+        "struct", "switch", "this", "throw",
+        "true", "try", "typeof", "unchecked",
+        "unsafe", "using", "var", "virtual",
+        "void", "volatile", "while"
+    } };
+
+std::array<std::string, 15> csharp_builtins = { {
+        "byte", "bool", "char", "decimal", "double", "float", "int", "long",
+        "sbyte", "short",  "uint", "ulong", "ushort", "object", "string"
     }
 };
 
@@ -77,8 +108,6 @@ const std::string builtin_name("String matches the name of a built in type: ");
 const std::string abstract_instance(
     "Attempt to instantiate an abstract type: ");
 const std::string invalid_underlying_type("Invalid underlying type: ");
-
-
 
 }
 
@@ -160,6 +189,7 @@ void second_stage_validator::validate_primitives(const indices& idx,
 
 void second_stage_validator::
 validate_string(const std::string& s, bool check_not_builtin) const {
+    BOOST_LOG_SEV(lg, trace) << "Sanity checking string: " << s;
     static std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
     if (!std::regex_match(s, name_regex)) {
         BOOST_LOG_SEV(lg, error) << invalid_string << "'" << s << "'";
@@ -172,15 +202,27 @@ validate_string(const std::string& s, bool check_not_builtin) const {
         BOOST_THROW_EXCEPTION(validation_error(reserved_keyword + s));
     }
 
+    const auto j(std::find(csharp_reserved.begin(), csharp_reserved.end(), s));
+    if (j != csharp_reserved.end()) {
+        BOOST_LOG_SEV(lg, error) << reserved_keyword << s;
+        BOOST_THROW_EXCEPTION(validation_error(reserved_keyword + s));
+    }
+
     if (check_not_builtin) {
-        const auto j(std::find(cpp_builtins.begin(), cpp_builtins.end(), s));
-        if (j != cpp_builtins.end()) {
+        const auto k(std::find(cpp_builtins.begin(), cpp_builtins.end(), s));
+        if (k != cpp_builtins.end()) {
+            BOOST_LOG_SEV(lg, error) << builtin_name << s;
+            BOOST_THROW_EXCEPTION(validation_error(builtin_name + s));
+        }
+
+        const auto l(std::find(cpp_builtins.begin(), cpp_builtins.end(), s));
+        if (l != cpp_builtins.end()) {
             BOOST_LOG_SEV(lg, error) << builtin_name << s;
             BOOST_THROW_EXCEPTION(validation_error(builtin_name + s));
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "String passed all sanity checks: " << s;
+    BOOST_LOG_SEV(lg, trace) << "String passed all sanity checks.";
 }
 
 void second_stage_validator::
