@@ -86,20 +86,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<std::
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace yarn {
 
@@ -107,8 +93,7 @@ std::ostream& operator<<(std::ostream& s, const decomposition_result& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::decomposition_result\"" << ", "
       << "\"names\": " << v.names() << ", "
-      << "\"name_trees\": " << v.name_trees() << ", "
-      << "\"abstract_elements\": " << v.abstract_elements()
+      << "\"name_trees\": " << v.name_trees()
       << " }";
     return(s);
 }

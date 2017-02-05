@@ -73,14 +73,6 @@ std::list<std::pair<std::string, dogen::yarn::name_tree> > create_std_list_std_p
     return r;
 }
 
-std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_set<std::string> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(create_std_string(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -92,7 +84,6 @@ void decomposition_result_generator::
 populate(const unsigned int position, result_type& v) {
     v.names(create_std_list_std_pair_std_string_dogen_yarn_name(position + 0));
     v.name_trees(create_std_list_std_pair_std_string_dogen_yarn_name_tree(position + 1));
-    v.abstract_elements(create_std_unordered_set_std_string(position + 2));
 }
 
 decomposition_result_generator::result_type

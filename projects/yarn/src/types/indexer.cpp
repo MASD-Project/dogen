@@ -45,9 +45,15 @@ void indexer::index(intermediate_model& m) const {
         idx.elements_referable_by_attributes().insert(pair.first);
 
     for (const auto& pair : m.objects()) {
-        idx.elements_referable_by_attributes().insert(pair.first);
-        if (pair.second.type_parameters().always_in_heap())
-            idx.objects_always_in_heap().insert(pair.first);
+        const auto id(pair.first);
+        idx.elements_referable_by_attributes().insert(id);
+
+        const auto& o(pair.second);
+        if (o.type_parameters().always_in_heap())
+            idx.objects_always_in_heap().insert(id);
+
+        if (o.is_abstract())
+            idx.abstract_elements().insert(id);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Indices: " << idx;

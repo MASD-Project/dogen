@@ -28,7 +28,6 @@
 #include <boost/serialization/utility.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
-#include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/name_ser.hpp"
@@ -44,7 +43,6 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("names", v.names_);
     ar << make_nvp("name_trees", v.name_trees_);
-    ar << make_nvp("abstract_elements", v.abstract_elements_);
 }
 
 template<typename Archive>
@@ -53,7 +51,6 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("names", v.names_);
     ar >> make_nvp("name_trees", v.name_trees_);
-    ar >> make_nvp("abstract_elements", v.abstract_elements_);
 }
 
 } }

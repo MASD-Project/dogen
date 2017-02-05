@@ -29,7 +29,6 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/serialization/decomposition_result_fwd_ser.hpp"
@@ -47,8 +46,7 @@ public:
 public:
     decomposition_result(
         const std::list<std::pair<std::string, dogen::yarn::name> >& names,
-        const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees,
-        const std::unordered_set<std::string>& abstract_elements);
+        const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees);
 
 private:
     template<typename Archive>
@@ -68,11 +66,6 @@ public:
     void name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >& v);
     void name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >&& v);
 
-    const std::unordered_set<std::string>& abstract_elements() const;
-    std::unordered_set<std::string>& abstract_elements();
-    void abstract_elements(const std::unordered_set<std::string>& v);
-    void abstract_elements(const std::unordered_set<std::string>&& v);
-
 public:
     bool operator==(const decomposition_result& rhs) const;
     bool operator!=(const decomposition_result& rhs) const {
@@ -86,7 +79,6 @@ public:
 private:
     std::list<std::pair<std::string, dogen::yarn::name> > names_;
     std::list<std::pair<std::string, dogen::yarn::name_tree> > name_trees_;
-    std::unordered_set<std::string> abstract_elements_;
 };
 
 } }

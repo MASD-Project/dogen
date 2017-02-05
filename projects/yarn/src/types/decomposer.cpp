@@ -85,9 +85,6 @@ void decomposer::decompose(const yarn::exception& e) {
 void decomposer::decompose(const yarn::object& o) {
     process_element(o);
     process_attributes(o.name().id(), o.local_attributes());
-
-    if (o.is_abstract())
-        result_.abstract_elements().insert(o.name().id());
 }
 
 void decomposer::decompose(const yarn::builtin& b) {
