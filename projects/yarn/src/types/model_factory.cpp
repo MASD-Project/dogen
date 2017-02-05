@@ -169,15 +169,15 @@ void model_factory::inject_model(const annotations::type_repository& atrp,
     ex.expand(atrp, ra, rg, im);
 }
 
+void model_factory::validate(const intermediate_model& im) const {
+    second_stage_validator v;
+    v.validate(im);
+}
+
 model model_factory::transform_intermediate_model(
     const intermediate_model& im) const {
     transformer t;
     return t.transform(im);
-}
-
-void model_factory::validate(const model& m) const {
-    second_stage_validator v;
-    v.validate(m);
 }
 
 model model_factory::make(const annotations::type_repository& atrp,
@@ -252,14 +252,14 @@ model model_factory::make(const annotations::type_repository& atrp,
     inject_model(atrp, ra, rg, im);
 
     /*
+     * Ensure the model is valid.
+     */
+    validate(im);
+
+    /*
      * Perform the final transformation.
      */
     const auto r(transform_intermediate_model(im));
-
-    /*
-     * Ensure the model is valid.
-     */
-    validate(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating final model.";
     return r;

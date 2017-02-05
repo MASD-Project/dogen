@@ -123,15 +123,15 @@ private:
         intermediate_model& im) const;
 
     /**
+     * @brief Ensures the model passes all validation rules.
+     */
+    void validate(const intermediate_model& im) const;
+
+    /**
      * @brief Transforms the intermediate model to the final
      * representation.
      */
     model transform_intermediate_model(const intermediate_model& im) const;
-
-    /**
-     * @brief Ensures the model passes all validation rules.
-     */
-    void validate(const model& m) const;
 
 public:
     /**

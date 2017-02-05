@@ -27,14 +27,20 @@
 
 #include <string>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/concept.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/exception.hpp"
+#include "dogen/yarn/types/builtin.hpp"
+#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/attribute.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/types/decomposition_result.hpp"
 
 namespace dogen {
 namespace yarn {
 
-class decomposer final : public element_visitor {
+class decomposer final {
 private:
     void add_name(const std::string& owner, const name& n);
     void add_name_tree(const std::string& owner, const name_tree& nt);
@@ -44,13 +50,12 @@ private:
     void process_element(const element& e);
 
 public:
-    using element_visitor::visit;
-    void visit(const yarn::concept& c);
-    void visit(const yarn::module& m);
-    void visit(const yarn::enumeration& e);
-    void visit(const yarn::exception& e);
-    void visit(const yarn::object& o);
-    void visit(const yarn::builtin& b);
+    void decompose(const yarn::concept& c);
+    void decompose(const yarn::module& m);
+    void decompose(const yarn::enumeration& e);
+    void decompose(const yarn::exception& e);
+    void decompose(const yarn::object& o);
+    void decompose(const yarn::builtin& b);
 
 public:
     const decomposition_result& result() const;

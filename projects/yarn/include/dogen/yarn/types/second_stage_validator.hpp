@@ -30,8 +30,8 @@
 #include <utility>
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/decomposition_result.hpp"
 
 namespace dogen {
@@ -40,7 +40,7 @@ namespace yarn {
 class second_stage_validator final {
 private:
     bool allow_spaces_in_built_in_types(const languages l) const;
-    decomposition_result decompose_model(const model& m) const;
+    decomposition_result decompose_model(const intermediate_model& im) const;
 
 private:
     void validate_string(const std::string& s,
@@ -60,7 +60,7 @@ private:
         const std::list<std::pair<std::string, name_tree>>& nts) const;
 
 public:
-    void validate(const model& m) const;
+    void validate(const intermediate_model& im) const;
 };
 
 } }

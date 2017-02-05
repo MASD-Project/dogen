@@ -80,21 +80,36 @@ const std::string space(" ");
 namespace dogen {
 namespace yarn {
 
-bool second_stage_validator::allow_spaces_in_built_in_types(const languages l) const {
+bool second_stage_validator::
+allow_spaces_in_built_in_types(const languages l) const {
     return l == languages::cpp;
 }
 
-decomposition_result second_stage_validator::decompose_model(const model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << m.name().id();
+decomposition_result second_stage_validator::
+decompose_model(const intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
 
     /*
      * Collect the names of all elements and attributes.
      */
     decomposer dc;
-    for (const auto& ptr : m.elements()) {
-        const auto& e(*ptr);
-        e.accept(dc);
-    }
+    for (const auto& pair : im.modules())
+        dc.decompose(pair.second);
+
+    for (const auto& pair : im.concepts())
+        dc.decompose(pair.second);
+
+    for (const auto& pair : im.builtins())
+        dc.decompose(pair.second);
+
+    for (const auto& pair : im.enumerations())
+        dc.decompose(pair.second);
+
+    for (const auto& pair : im.objects())
+        dc.decompose(pair.second);
+
+    for (const auto& pair : im.exceptions())
+        dc.decompose(pair.second);
 
     /*
      * Note that we do not add the model name itself; this is because
@@ -257,11 +272,11 @@ void second_stage_validator::validate_name_trees(
     }
 }
 
-void second_stage_validator::validate(const model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << m.name().id();
+void second_stage_validator::validate(const intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
-    const auto l(m.input_language());
-    const auto dr(decompose_model(m));
+    const auto l(im.input_language());
+    const auto dr(decompose_model(im));
     validate_names(dr.names(), l);
     validate_name_trees(dr.abstract_elements(), l, dr.name_trees());
 

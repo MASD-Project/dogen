@@ -18,13 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/builtin.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/decomposer.hpp"
 
 namespace dogen {
@@ -62,12 +55,12 @@ void decomposer::process_element(const element& e) {
     add_name(e.name().id(), e.name());
 }
 
-void decomposer::visit(const yarn::concept& c) {
+void decomposer::decompose(const yarn::concept& c) {
     process_element(c);
     process_attributes(c.name().id(), c.local_attributes());
 }
 
-void decomposer::visit(const yarn::module& m) {
+void decomposer::decompose(const yarn::module& m) {
     /*
      * The global module represents the unnamed global
      * namespace. There can only be one of these and it is generated
@@ -79,17 +72,17 @@ void decomposer::visit(const yarn::module& m) {
     process_element(m);
 }
 
-void decomposer::visit(const yarn::enumeration& e) {
+void decomposer::decompose(const yarn::enumeration& e) {
     process_element(e);
     for (const auto& en : e.enumerators())
         add_name(e.name().id(), en.name());
 }
 
-void decomposer::visit(const yarn::exception& e) {
+void decomposer::decompose(const yarn::exception& e) {
     process_element(e);
 }
 
-void decomposer::visit(const yarn::object& o) {
+void decomposer::decompose(const yarn::object& o) {
     process_element(o);
     process_attributes(o.name().id(), o.local_attributes());
 
@@ -97,7 +90,7 @@ void decomposer::visit(const yarn::object& o) {
         result_.abstract_elements().insert(o.name().id());
 }
 
-void decomposer::visit(const yarn::builtin& b) {
+void decomposer::decompose(const yarn::builtin& b) {
     process_element(b);
 }
 
