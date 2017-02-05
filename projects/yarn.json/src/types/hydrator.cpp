@@ -68,6 +68,11 @@ const std::string meta_type_primitive_value("primitive");
 const std::string meta_type_exception_value("exception");
 const std::string meta_type_concept_value("concept");
 
+const std::string can_be_enumeration_underlier_key(
+    "can_be_enumeration_underlier");
+const std::string can_be_primitive_underlier_key(
+    "can_be_primitive_underlier");
+
 const std::string unparsed_type_key("unparsed_type");
 const std::string simple_key("simple");
 const std::string external_modules_key("external_modules");
@@ -330,6 +335,9 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
     const auto ot(pt.get_optional<std::string>(object_type_key));
     o.object_type(to_object_type(ot));
 
+    const auto cbpu(pt.get(can_be_primitive_underlier_key, false));
+    o.can_be_primitive_underlier(cbpu);
+
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
 
@@ -355,19 +363,25 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
 void hydrator::read_builtin(const boost::property_tree::ptree& pt,
     yarn::intermediate_model& im) const {
 
-    yarn::builtin p;
-    populate_element(pt, im, p);
+    yarn::builtin b;
+    populate_element(pt, im, b);
     const auto st(annotations::scope_types::entity);
-    read_and_insert_scribble_group(p.name(), st, pt, im);
+    read_and_insert_scribble_group(b.name(), st, pt, im);
 
     const auto dit(pt.get(is_default_enumeration_type_key, false));
-    p.is_default_enumeration_type(dit);
+    b.is_default_enumeration_type(dit);
 
     const auto ifp(pt.get(is_floating_point_key, false));
-    p.is_floating_point(ifp);
+    b.is_floating_point(ifp);
 
-    const auto id(p.name().id());
-    const auto pair(std::make_pair(id, p));
+    const auto cbeu(pt.get(can_be_enumeration_underlier_key, false));
+    b.can_be_enumeration_underlier(cbeu);
+
+    const auto cbpu(pt.get(can_be_primitive_underlier_key, false));
+    b.can_be_primitive_underlier(cbpu);
+
+    const auto id(b.name().id());
+    const auto pair(std::make_pair(id, b));
     const bool inserted(im.builtins().insert(pair).second);
     if (!inserted) {
         BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;

@@ -101,6 +101,7 @@
         "simple": "string"
       },
       "meta_type": "object",
+      "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "String",
         "quilt.cpp.streaming.remove_unprintable_characters": true,
