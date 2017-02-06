@@ -1,0 +1,506 @@
+diff --git a/doc/agile/sprint_backlog_97.org b/doc/agile/sprint_backlog_97.org
+index 4c17361f8..324217d71 100644
+--- a/doc/agile/sprint_backlog_97.org
++++ b/doc/agile/sprint_backlog_97.org
+@@ -13,32 +13,32 @@
+ ** Active
+ 
+ #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+-#+CAPTION: Clock summary at [2017-02-06 Mon 21:21]
++#+CAPTION: Clock summary at [2017-02-06 Mon 22:30]
+ | <75>                                                                        |         |       |       |       |
+ | Headline                                                                    | Time    |       |       |     % |
+ |-----------------------------------------------------------------------------+---------+-------+-------+-------|
+-| *Total time*                                                                | *51:24* |       |       | 100.0 |
++| *Total time*                                                                | *52:33* |       |       | 100.0 |
+ |-----------------------------------------------------------------------------+---------+-------+-------+-------|
+-| Stories                                                                     | 51:24   |       |       | 100.0 |
+-| Active                                                                      |         | 51:24 |       | 100.0 |
+-| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.4 |
++| Stories                                                                     | 52:33   |       |       | 100.0 |
++| Active                                                                      |         | 52:33 |       | 100.0 |
++| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.3 |
+ | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.4 |
+-| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   8.1 |
++| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   7.9 |
+ | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.4 |
+-| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  10.6 |
++| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  10.3 |
+ | COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.4 |
+-| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.6 |
+-| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  20.6 |
++| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.5 |
++| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  20.1 |
+ | POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.6 |
+-| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.2 |
+-| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  38.5 |
++| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.1 |
++| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  37.7 |
+ | COMPLETED Drop "inclusion" prefix in quilt.cpp                              |         |       |  0:40 |   1.3 |
+ | COMPLETED Mark elements that are valid enumeration underlying elements      |         |       |  0:19 |   0.6 |
+-| COMPLETED Refactor yarn model validators                                    |         |       |  1:10 |   2.3 |
++| COMPLETED Refactor yarn model validators                                    |         |       |  1:10 |   2.2 |
+ | COMPLETED Split indices out of the intermediate model                       |         |       |  0:40 |   1.3 |
+ | COMPLETED Add validation rules for primitives and enumerations              |         |       |  0:34 |   1.1 |
+ | COMPLETED Add validation for C# keywords                                    |         |       |  0:16 |   0.5 |
+-| STARTED Map upsilon primitives to intrinsics                                |         |       |  0:35 |   1.1 |
++| STARTED Map upsilon primitives to intrinsics                                |         |       |  1:44 |   3.3 |
+ #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+ #+end:
+ 
+@@ -610,6 +610,7 @@ We should also ensure models in LAM are checked for both C# and C++
+ keywords - or actually always check all keywords for all languages.
+ 
+ *** STARTED Map upsilon primitives to intrinsics                      :story:
++    CLOCK: [2017-02-06 Mon 21:21]--[2017-02-06 Mon 22:30] =>  1:09
+     CLOCK: [2017-02-06 Mon 20:45]--[2017-02-06 Mon 21:20] =>  0:35
+ 
+ Upsilon allows users to create "strong typedefs" around primitve
+diff --git a/projects/input_models/upsilon.dia b/projects/input_models/upsilon.dia
+index 49420e7fe..44cb39f51 100644
+--- a/projects/input_models/upsilon.dia
++++ b/projects/input_models/upsilon.dia
+@@ -6085,19 +6085,19 @@ formats, it will be deprecated.
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O49">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="72,78"/>
++        <dia:point val="77,78"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="71.95,77.95;94.495,82.45"/>
++        <dia:rectangle val="76.95,77.95;104.885,84.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="72,78"/>
++        <dia:point val="77,78"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="22.445"/>
++        <dia:real val="27.835000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="4.4000000000000004"/>
++        <dia:real val="6"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#converter#</dia:string>
+@@ -6190,6 +6190,54 @@ formats, it will be deprecated.
+       <dia:attribute name="operations">
+         <dia:composite type="umloperation">
+           <dia:attribute name="name">
++            <dia:string>#try_to_intrinsic_type#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="stereotype">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#boost::optional&lt;intrinsic_types&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="inheritance_type">
++            <dia:enum val="2"/>
++          </dia:attribute>
++          <dia:attribute name="query">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="parameters">
++            <dia:composite type="umlparameter">
++              <dia:attribute name="name">
++                <dia:string>#s#</dia:string>
++              </dia:attribute>
++              <dia:attribute name="type">
++                <dia:string>#std::string#</dia:string>
++              </dia:attribute>
++              <dia:attribute name="value">
++                <dia:string>##</dia:string>
++              </dia:attribute>
++              <dia:attribute name="comment">
++                <dia:string>##</dia:string>
++              </dia:attribute>
++              <dia:attribute name="kind">
++                <dia:enum val="0"/>
++              </dia:attribute>
++            </dia:composite>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umloperation">
++          <dia:attribute name="name">
+             <dia:string>#to_intrinsic_type#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="stereotype">
+@@ -6222,7 +6270,55 @@ formats, it will be deprecated.
+                 <dia:string>#s#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#const std::string&amp;#</dia:string>
++                <dia:string>#std::string#</dia:string>
++              </dia:attribute>
++              <dia:attribute name="value">
++                <dia:string>##</dia:string>
++              </dia:attribute>
++              <dia:attribute name="comment">
++                <dia:string>##</dia:string>
++              </dia:attribute>
++              <dia:attribute name="kind">
++                <dia:enum val="0"/>
++              </dia:attribute>
++            </dia:composite>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umloperation">
++          <dia:attribute name="name">
++            <dia:string>#from_intrinsic_type#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="stereotype">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="inheritance_type">
++            <dia:enum val="2"/>
++          </dia:attribute>
++          <dia:attribute name="query">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="parameters">
++            <dia:composite type="umlparameter">
++              <dia:attribute name="name">
++                <dia:string>#it#</dia:string>
++              </dia:attribute>
++              <dia:attribute name="type">
++                <dia:string>#const intrinsic_types#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -6270,7 +6366,7 @@ formats, it will be deprecated.
+                 <dia:string>#s#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#const std::string&amp;#</dia:string>
++                <dia:string>#std::string#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -6328,17 +6424,17 @@ formats, it will be deprecated.
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="72,78"/>
++        <dia:point val="77,78"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="52.4937,65.55;72.75,79.6"/>
++        <dia:rectangle val="52.4937,65.55;77.75,79.6"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="72,78"/>
+-        <dia:point val="72,74"/>
++        <dia:point val="77,78"/>
++        <dia:point val="77,74"/>
+         <dia:point val="52.5438,74"/>
+         <dia:point val="52.5438,65.6"/>
+       </dia:attribute>
+@@ -6399,17 +6495,17 @@ formats, it will be deprecated.
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="94.445,78"/>
++        <dia:point val="90.9175,78"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="93.695,59.15;99.3375,79.6"/>
++        <dia:rectangle val="90.1675,59.15;99.3375,79.6"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="94.445,78"/>
+-        <dia:point val="94.445,74"/>
++        <dia:point val="90.9175,78"/>
++        <dia:point val="90.9175,74"/>
+         <dia:point val="99.1375,74"/>
+         <dia:point val="99.1375,59.2"/>
+       </dia:attribute>
+@@ -6428,19 +6524,19 @@ formats, it will be deprecated.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O49" connection="2"/>
++        <dia:connection handle="0" to="O49" connection="1"/>
+         <dia:connection handle="1" to="O29" connection="6"/>
+       </dia:connections>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O52">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="87,91"/>
++        <dia:point val="105,67"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="86.95,90.95;95.1525,94.05"/>
++        <dia:rectangle val="104.95,66.95;113.153,70.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="87,91"/>
++        <dia:point val="105,67"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="8.1025000000000009"/>
+@@ -6580,19 +6676,19 @@ formats, it will be deprecated.
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="83.2225,82.4"/>
++        <dia:point val="104.835,78"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="82.4725,81.65;91.2512,92.6"/>
++        <dia:rectangle val="104.085,69.95;109.251,79.6"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="83.2225,82.4"/>
+-        <dia:point val="83.2225,87"/>
+-        <dia:point val="91.0512,87"/>
+-        <dia:point val="91.0512,91"/>
++        <dia:point val="104.835,78"/>
++        <dia:point val="104.835,74"/>
++        <dia:point val="109.051,74"/>
++        <dia:point val="109.051,70"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6609,8 +6705,8 @@ formats, it will be deprecated.
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O49" connection="6"/>
+-        <dia:connection handle="1" to="O52" connection="1"/>
++        <dia:connection handle="0" to="O49" connection="2"/>
++        <dia:connection handle="1" to="O52" connection="6"/>
+       </dia:connections>
+     </dia:object>
+   </dia:layer>
+diff --git a/projects/upsilon/include/dogen/upsilon/types/converter.hpp b/projects/upsilon/include/dogen/upsilon/types/converter.hpp
+index 1d0f6df4d..ad435b24a 100644
+--- a/projects/upsilon/include/dogen/upsilon/types/converter.hpp
++++ b/projects/upsilon/include/dogen/upsilon/types/converter.hpp
+@@ -26,6 +26,7 @@
+ #endif
+ 
+ #include <string>
++#include <boost/optional.hpp>
+ #include "dogen/upsilon/types/intrinsic_types.hpp"
+ #include "dogen/upsilon/types/target_types.hpp"
+ 
+@@ -34,7 +35,10 @@ namespace upsilon {
+ 
+ class converter final {
+ public:
++    boost::optional<intrinsic_types>
++    try_to_intrinsic_types(std::string s) const;
+     intrinsic_types to_intrinsic_types(std::string s) const;
++    std::string from_intrinsic_types(const intrinsic_types it) const;
+     target_types to_target_types(std::string s) const;
+ 
+ };
+diff --git a/projects/upsilon/src/types/converter.cpp b/projects/upsilon/src/types/converter.cpp
+index 9a00077c3..4db2fed08 100644
+--- a/projects/upsilon/src/types/converter.cpp
++++ b/projects/upsilon/src/types/converter.cpp
+@@ -18,10 +18,12 @@
+  * MA 02110-1301, USA.
+  *
+  */
++#include <boost/lexical_cast.hpp>
+ #include <boost/throw_exception.hpp>
+ #include <boost/algorithm/string.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/upsilon/types/conversion_error.hpp"
++#include "dogen/upsilon/io/intrinsic_types_io.hpp"
+ #include "dogen/upsilon/types/converter.hpp"
+ 
+ namespace {
+@@ -52,7 +54,8 @@ const std::string unsupported_value("Unsupported attribute value: ");
+ namespace dogen {
+ namespace upsilon {
+ 
+-intrinsic_types converter::to_intrinsic_types(std::string s) const {
++boost::optional<intrinsic_types> converter::
++try_to_intrinsic_types(std::string s) const {
+     boost::algorithm::to_lower(s);
+     if (s == intrinsic_types_integer)
+         return intrinsic_types::integer;
+@@ -76,12 +79,41 @@ intrinsic_types converter::to_intrinsic_types(std::string s) const {
+         return intrinsic_types::utc_time;
+     else if (s == intrinsic_types_utc_date_time)
+         return intrinsic_types::utc_date_time;
+-    else {
++
++    return boost::optional<intrinsic_types>();
++}
++
++intrinsic_types converter::to_intrinsic_types(std::string s) const {
++    const auto r(try_to_intrinsic_types(s));
++
++    if (!r) {
+         BOOST_LOG_SEV(lg, error) << unsupported_value << s;
+         BOOST_THROW_EXCEPTION(conversion_error(unsupported_value + s));
+     }
++    return *r;
++}
++
++std::string converter::from_intrinsic_types(intrinsic_types it) const {
++    switch(it) {
++    case intrinsic_types::integer: return intrinsic_types_integer;
++    case intrinsic_types::binary: return intrinsic_types_binary;
++    case intrinsic_types::boolean: return intrinsic_types_boolean;
++    case intrinsic_types::date: return intrinsic_types_date;
++    case intrinsic_types::decimal: return intrinsic_types_decimal;
++    case intrinsic_types::double_x: return intrinsic_types_double;
++    case intrinsic_types::guid: return intrinsic_types_guid;
++    case intrinsic_types::integer64: return intrinsic_types_integer64;
++    case intrinsic_types::string: return intrinsic_types_string;
++    case intrinsic_types::utc_time: return intrinsic_types_utc_time;
++    case intrinsic_types::utc_date_time: return intrinsic_types_utc_date_time;
++    default: {
++        const auto s(boost::lexical_cast<std::string>(it));
++        BOOST_LOG_SEV(lg, error) << unsupported_value << s;
++        BOOST_THROW_EXCEPTION(conversion_error(unsupported_value + s));
++    } }
+ }
+ 
++
+ target_types converter::to_target_types(std::string s) const {
+     boost::algorithm::to_lower(s);
+     if (s == target_java)
+diff --git a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp
+index 1bf26ff8a..74986d3f4 100644
+--- a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp
++++ b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp
+@@ -31,6 +31,7 @@
+ #include "dogen/yarn/types/name.hpp"
+ #include "dogen/yarn/types/builtin.hpp"
+ #include "dogen/yarn/types/object.hpp"
++#include "dogen/yarn/types/primitive.hpp"
+ #include "dogen/yarn/types/enumeration.hpp"
+ #include "dogen/upsilon/types/name.hpp"
+ #include "dogen/upsilon/types/model.hpp"
+@@ -62,7 +63,8 @@ private:
+ 
+ public:
+     yarn::builtin to_builtin(const dogen::upsilon::primitive& p) const;
+-
++    dogen::yarn::primitive
++    to_primitive(const dogen::upsilon::primitive& p) const;
+     yarn::object to_object(const dogen::upsilon::compound& c) const;
+ 
+     yarn::enumeration
+diff --git a/projects/yarn.upsilon/src/types/transformer.cpp b/projects/yarn.upsilon/src/types/transformer.cpp
+index 646e8beeb..f5e563491 100644
+--- a/projects/yarn.upsilon/src/types/transformer.cpp
++++ b/projects/yarn.upsilon/src/types/transformer.cpp
+@@ -22,6 +22,7 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/yarn/types/name_factory.hpp"
+ #include "dogen/upsilon/io/name_io.hpp"
++#include "dogen/upsilon/types/converter.hpp"
+ #include "dogen/yarn.upsilon/types/transformation_error.hpp"
+ #include "dogen/yarn.upsilon/types/transformer.hpp"
+ 
+@@ -120,6 +121,29 @@ transformer::to_builtin(const dogen::upsilon::primitive& p) const {
+     return r;
+ }
+ 
++dogen::yarn::primitive
++transformer::to_primitive(const dogen::upsilon::primitive& p) const {
++    BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
++    yarn::primitive r;
++    populate_element_properties(p, r);
++
++    dogen::upsilon::converter c;
++    const auto s(c.from_intrinsic_types(p.intrinsic()));
++
++    dogen::yarn::name_factory nf;
++    const auto n(nf.build_element_in_model(target_model_name_, s));
++
++    yarn::attribute attr;
++    attr.name(nf.build_attribute_name(r.name(), "value"));
++    attr.unparsed_type(c.from_intrinsic_types(p.intrinsic()));
++    attr.documentation("");
++
++    r.value_attribute(attr);
++
++    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
++    return r;
++}
++
+ yarn::object
+ transformer::to_object(const dogen::upsilon::compound& c) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
+diff --git a/projects/yarn.upsilon/src/types/workflow.cpp b/projects/yarn.upsilon/src/types/workflow.cpp
+index e580f0923..ba1330842 100644
+--- a/projects/yarn.upsilon/src/types/workflow.cpp
++++ b/projects/yarn.upsilon/src/types/workflow.cpp
+@@ -27,6 +27,7 @@
+ #include "dogen/yarn/types/name_factory.hpp"
+ #include "dogen/yarn/types/origin_types.hpp"
+ #include "dogen/yarn/types/module.hpp"
++#include "dogen/upsilon/types/converter.hpp"
+ #include "dogen/upsilon/types/type_visitor.hpp"
+ #include "dogen/upsilon/io/target_types_io.hpp"
+ #include "dogen/upsilon/io/name_io.hpp"
+@@ -130,8 +131,21 @@ void model_populator::visit(const dogen::upsilon::enumeration& e) {
+ }
+ 
+ void model_populator::visit(const dogen::upsilon::primitive& p) {
+-    const auto b(transformer_.to_builtin(p));
+-    insert(b, model_.builtins());
++    dogen::upsilon::converter c;
++
++    const auto n(p.name().value());
++    const auto it(c.try_to_intrinsic_types((n)));
++    if (it) {
++        /*
++         * Type name matches the intrinsic type, so we should convert
++         * it to a regular built-in.
++         */
++        const auto b(transformer_.to_builtin(p));
++        insert(b, model_.builtins());
++    } else {
++        const auto b(transformer_.to_primitive(p));
++        insert(b, model_.primitives());
++    }
+ }
+ 
+ std::list<languages> workflow::obtain_output_languages(
