@@ -36,6 +36,7 @@
 #include "dogen/upsilon/types/upsilon.hpp"
 #include "dogen/upsilon/types/compound.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
+#include "dogen/upsilon/types/converter.hpp"
 #include "dogen/upsilon/types/directory.hpp"
 #include "dogen/upsilon/types/exclusion.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
@@ -49,6 +50,7 @@
 #include "dogen/upsilon/types/representation.hpp"
 #include "dogen/upsilon/types/hydration_error.hpp"
 #include "dogen/upsilon/types/intrinsic_types.hpp"
+#include "dogen/upsilon/types/conversion_error.hpp"
 #include "dogen/upsilon/types/type_information.hpp"
 #include "dogen/upsilon/types/type_information_entry.hpp"
 

@@ -22,6 +22,7 @@
 #include <vector>
 #include <algorithm>
 #include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
 #include <boost/filesystem/path.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/operations.hpp>
@@ -35,6 +36,7 @@
 #include "dogen/upsilon/types/enumeration.hpp"
 #include "dogen/upsilon/types/id_generator.hpp"
 #include "dogen/upsilon/types/hydration_error.hpp"
+#include "dogen/upsilon/types/converter.hpp"
 #include "dogen/upsilon/types/hydrator.hpp"
 
 namespace {
@@ -83,25 +85,8 @@ const std::string values_name("Values");
 const std::string exclusions_name("Exclusions");
 const std::string exclusion_name("Exclusion");
 
-const std::string target_java("java");
-const std::string target_cpp("cpp");
-const std::string target_cs("cs");
-
-const std::string intrinsic_types_integer("integer");
-const std::string intrinsic_types_binary("binary");
-const std::string intrinsic_types_boolean("boolean");
-const std::string intrinsic_types_date("date");
-const std::string intrinsic_types_decimal("decimal");
-const std::string intrinsic_types_double("double");
-const std::string intrinsic_types_guid("guid");
-const std::string intrinsic_types_integer64("integer64");
-const std::string intrinsic_types_string("string");
-const std::string intrinsic_types_utc_time("utctime");
-const std::string intrinsic_types_utc_date_time("utcdatetime");
-
 const std::string type_infos_extension(".typeinfos");
 
-const std::string unsupported_value("Unsupported attribute value: ");
 const std::string duplicate_schema("Schema name already exists: ");
 const std::string schema_not_found("Could not locate schema: ");
 const std::string type_infos_not_found("Could not locate type infos: ");
@@ -148,17 +133,8 @@ void config_hydrator::log_unsupported_element() {
 }
 
 target_types config_hydrator::to_target(std::string s) const {
-    boost::algorithm::to_lower(s);
-    if (s == target_java)
-        return target_types::java;
-    else if (s == target_cpp)
-        return target_types::cpp;
-    else if (s == target_cs)
-        return target_types::cs;
-    else {
-        BOOST_LOG_SEV(lg, error) << unsupported_value << s;
-        BOOST_THROW_EXCEPTION(hydration_error(unsupported_value + s));
-    }
+    converter c;
+    return c.to_target_types(s);
 }
 
 directory config_hydrator::read_directory() {
@@ -455,33 +431,8 @@ void schema_hydrator::log_unsupported_element() {
 
 intrinsic_types
 schema_hydrator::to_intrinsic_types(std::string s) const {
-    boost::algorithm::to_lower(s);
-    if (s == intrinsic_types_integer)
-        return intrinsic_types::integer;
-    else if (s == intrinsic_types_binary)
-        return intrinsic_types::binary;
-    else if (s == intrinsic_types_boolean)
-        return intrinsic_types::boolean;
-    else if (s == intrinsic_types_date)
-        return intrinsic_types::date;
-    else if (s == intrinsic_types_decimal)
-        return intrinsic_types::decimal;
-    else if (s == intrinsic_types_double)
-        return intrinsic_types::double_x;
-    else if (s == intrinsic_types_guid)
-        return intrinsic_types::guid;
-    else if (s == intrinsic_types_integer64)
-        return intrinsic_types::integer64;
-    else if (s == intrinsic_types_string)
-        return intrinsic_types::string;
-    else if (s == intrinsic_types_utc_time)
-        return intrinsic_types::utc_time;
-    else if (s == intrinsic_types_utc_date_time)
-        return intrinsic_types::utc_date_time;
-    else {
-        BOOST_LOG_SEV(lg, error) << unsupported_value << s;
-        BOOST_THROW_EXCEPTION(hydration_error(unsupported_value + s));
-    }
+    converter c;
+    return c.to_intrinsic_types(s);
 }
 
 std::vector<dependency> schema_hydrator::read_dependencies() {
