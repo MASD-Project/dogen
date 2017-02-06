@@ -11,6 +11,11 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Consider adding stereotype of noncopyable                         :story:
+
+This is a common pattern is C++. However, its not yet clear how this
+would work with regular domain types.
+
 *** Add support for "extensions"                                      :story:
 
 Until we have proper merging support, one feature which would be quite
