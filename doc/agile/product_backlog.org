@@ -5502,13 +5502,17 @@ enumeration for all of the available test data sets, and an
 enumeration for the valid file formats. we should be able to pass in a
 pair of file formats (input, actual/expected) and out should come a
 triplet of directories. This would make maintenance really easy as
-we'd only need to ad new strings to a string table. the service would
+we'd only need to add new strings to a string table. The service would
 also handle things like the actual and expected directories, etc.
 
 It should fix the following issues:
 
 - [[*Adding%20new%20engine%20spec%20tests%20is%20hard][Adding new engine spec tests is hard]]
 - [[*Naming%20of%20saved%20yarn/Dia%20files%20is%20incorrect][Naming of saved yarn/Dia files is incorrect]]
+
+Actually we should also look into using the DTL library:
+
+- [[https://github.com/cubicdaiya/dtl][diff template library written by C++]]
 
 *Old understanding*:
 
