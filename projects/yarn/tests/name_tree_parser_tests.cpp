@@ -20,9 +20,15 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
+
+#include "../src/types/name_tree_parser_impl.hpp"
+
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/types/languages.hpp"
+
+/*
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
@@ -31,7 +37,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/types/name_tree_parser.hpp"
-#include "dogen/yarn/types/merger.hpp"
+#include "dogen/yarn/types/merger.hpp"*/
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;
@@ -47,45 +53,91 @@ const dogen::yarn::languages cpp(dogen::yarn::languages::cpp);
 const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = dogen::yarn::location();
 
-dogen::yarn::
-name_tree make(const dogen::yarn::name& n) {
-    dogen::yarn::name_tree r;
-    r.current(n);
-    return r;
+
+
+struct test_dummy_builder
+{
+
+};
+
+bool applied = false;
+name_tree_listener<test_dummy_builder> listener;
+
+template<>
+void name_tree_listener<test_dummy_builder>::apply()
+{
+    applied = true;
 }
 
-bool test_builtin(const std::string& s) {
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    const auto a(ntp.parse(s));
+bool check_parse(const std::string & s)
+{
+    applied = false;
+    grammar<std::string::const_iterator, test_dummy_builder> g(listener, cpp);
 
-    dogen::yarn::name_factory nf;
-    const auto e(make(nf.build_element_name(s)));
-    return asserter::assert_equals(e, a);
+    std::string::const_iterator i(s.begin());
+    std::string::const_iterator end(s.end());
+    const bool ok(boost::spirit::qi::phrase_parse(i, end, g, ascii::space));
+
+    return ok && (i != end);
 }
 
 }
-
 using dogen::yarn::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(name_tree_parser_tests)
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_name) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_many_nested_scopes_produces_expected_name");
-    const std::string s("a::b::c::z");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+    {
+        custom_type_grammar<std::string::const_iterator, test_dummy_builder> ctg{&listener, cpp};
+        
+        listener.type_name.clear();
+        std::string s = "abc";
+        auto itr = s.cbegin();
+        BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+        BOOST_CHECK(itr == s.cend());
+        BOOST_CHECK_EQUAL(listener.type_name, "abc");
 
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    const auto a(ntp.parse(s));
+        listener.type_name.clear();
+        s = "a1::b2:: _c";
+        itr = s.cbegin();
+        BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+        BOOST_CHECK(itr == s.cend());
+        BOOST_CHECK_EQUAL(listener.type_name, "a1::b2::_c");
 
-    dogen::yarn::name_builder b;
-    b.simple_name("z");
-    b.model_name("a");
-    b.internal_modules(std::list<std::string> { "b", "c"});
-    const auto e(make(b.build()));
+        listener.type_name.clear();
+        s = "__a";
+        itr = s.cbegin();
+        BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+        BOOST_CHECK(itr == s.cend());
+        BOOST_CHECK_EQUAL(listener.type_name, "__a");
 
-    BOOST_CHECK(asserter::assert_equals(e, a));
+        s = "-a";
+        itr = s.cbegin();
+        BOOST_CHECK(!boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+        BOOST_CHECK(itr != s.cend());
+
+        s = "a::9::a";
+        itr = s.cbegin();
+        BOOST_CHECK(!boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+        BOOST_CHECK(itr != s.cend());
+    }
+    BOOST_TEST_PASSPOINT();
+    BOOST_CHECK(check_parse("a::b::c::z"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK(listener.type_name == "a::b::c::z");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+
 }
 
+/*
 BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_name) {
     SETUP_TEST_LOG_SOURCE("parsing_string_without_scope_operator_produces_expected_name");
     const std::string s("zeta");
@@ -329,6 +381,6 @@ BOOST_AUTO_TEST_CASE(names_that_partially_match_builtins_produce_expected_name_t
     BOOST_CHECK(test_builtin("doubl"));
     BOOST_CHECK(test_builtin("unsigneder"));
     BOOST_CHECK(test_builtin("longer"));
-}
+}*/
 
 BOOST_AUTO_TEST_SUITE_END()
