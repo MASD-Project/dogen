@@ -1,5 +1,111 @@
+diff --git a/data/library/csharp.system.json b/data/library/csharp.system.json
+new file mode 100644
+index 000000000..7847a3c4d
+--- /dev/null
++++ b/data/library/csharp.system.json
+@@ -0,0 +1,20 @@
++{
++  "model_name": "System",
++  "documentation": "Basic system types.",
++  "annotation": {
++    "yarn.input_language": "csharp",
++    "yarn.is_proxy_model": true
++  },
++  "elements": [
++    {
++      "name": {
++        "simple": "DateTime"
++      },
++      "meta_type": "object",
++      "can_be_primitive_underlier": true,
++      "annotation": {
++        "quilt.csharp.aspect.requires_static_reference_equals": true
++      }
++    }
++  ]
++}
+diff --git a/data/mappings/default.mapping_set.json b/data/mappings/default.mapping_set.json
+index 6ffcb1111..eced500d7 100644
+--- a/data/mappings/default.mapping_set.json
++++ b/data/mappings/default.mapping_set.json
+@@ -126,7 +126,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "Integer"
++                    "simple": "integer"
+                 }
+             }
+         ]
+@@ -166,7 +166,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "Double"
++                    "simple": "double"
+                 }
+             }
+         ]
+@@ -189,7 +189,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "Boolean"
++                    "simple": "boolean"
+                 }
+             }
+         ]
+@@ -217,10 +217,10 @@
+                 },
+                 "aliases" : [
+                     {
+-                        "simple": "Binary"
++                        "simple": "binary"
+                     },
+                     {
+-                        "simple": "Guid"
++                        "simple": "guid"
+                     }
+                 ]
+             }
+@@ -247,7 +247,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "Date"
++                    "simple": "date"
+                 }
+             }
+         ]
+@@ -273,7 +273,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "UtcTime"
++                    "simple": "utctime"
+                 }
+             }
+         ]
+@@ -299,7 +299,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "UtcDateTime"
++                    "simple": "utcdatetime"
+                 }
+             }
+         ]
+@@ -324,7 +324,7 @@
+             {
+                 "language" : "upsilon",
+                 "default_name" : {
+-                    "simple": "Decimal"
++                    "simple": "decimal"
+                 }
+             }
+         ]
 diff --git a/doc/agile/sprint_backlog_97.org b/doc/agile/sprint_backlog_97.org
-index 4c17361f8..324217d71 100644
+index 4c17361f8..a1533d7bb 100644
 --- a/doc/agile/sprint_backlog_97.org
 +++ b/doc/agile/sprint_backlog_97.org
 @@ -13,32 +13,32 @@
@@ -7,55 +113,75 @@ index 4c17361f8..324217d71 100644
  
  #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
 -#+CAPTION: Clock summary at [2017-02-06 Mon 21:21]
-+#+CAPTION: Clock summary at [2017-02-06 Mon 22:30]
++#+CAPTION: Clock summary at [2017-02-09 Thu 19:40]
  | <75>                                                                        |         |       |       |       |
  | Headline                                                                    | Time    |       |       |     % |
  |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 -| *Total time*                                                                | *51:24* |       |       | 100.0 |
-+| *Total time*                                                                | *52:33* |       |       | 100.0 |
++| *Total time*                                                                | *54:12* |       |       | 100.0 |
  |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 -| Stories                                                                     | 51:24   |       |       | 100.0 |
 -| Active                                                                      |         | 51:24 |       | 100.0 |
 -| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.4 |
-+| Stories                                                                     | 52:33   |       |       | 100.0 |
-+| Active                                                                      |         | 52:33 |       | 100.0 |
-+| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.3 |
- | COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.4 |
+-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.4 |
 -| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   8.1 |
-+| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   7.9 |
++| Stories                                                                     | 54:12   |       |       | 100.0 |
++| Active                                                                      |         | 54:12 |       | 100.0 |
++| STARTED Sprint and product backlog grooming                                 |         |       |  1:13 |   2.2 |
++| COMPLETED Edit release notes for previous sprint                            |         |       |  0:43 |   1.3 |
++| COMPLETED Add support for configurable enumerations types                   |         |       |  4:10 |   7.7 |
  | COMPLETED Allow disabling =invalid= value in enumerations                   |         |       |  0:12 |   0.4 |
 -| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  10.6 |
-+| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  10.3 |
- | COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.4 |
+-| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.4 |
 -| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.6 |
 -| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  20.6 |
-+| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.5 |
-+| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  20.1 |
- | POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.6 |
+-| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.6 |
 -| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.2 |
 -| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  38.5 |
-+| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.1 |
-+| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  37.7 |
- | COMPLETED Drop "inclusion" prefix in quilt.cpp                              |         |       |  0:40 |   1.3 |
+-| COMPLETED Drop "inclusion" prefix in quilt.cpp                              |         |       |  0:40 |   1.3 |
++| COMPLETED Add support for configurable enumeration values                   |         |       |  5:26 |  10.0 |
++| COMPLETED Test data for booleans is not oscillating correctly               |         |       |  1:15 |   2.3 |
++| COMPLETED Inclusion directive logic is too complex                          |         |       |  1:20 |   2.5 |
++| COMPLETED Handle "special includes" generically                             |         |       | 10:34 |  19.5 |
++| POSTPONED Partial matching of built-ins doesn't work for certain types      |         |       |  0:50 |   1.5 |
++| COMPLETED Try to improve compilation times                                  |         |       |  1:39 |   3.0 |
++| COMPLETED Add support for primitives across the pipeline                    |         |       | 19:48 |  36.5 |
++| COMPLETED Drop "inclusion" prefix in quilt.cpp                              |         |       |  0:40 |   1.2 |
  | COMPLETED Mark elements that are valid enumeration underlying elements      |         |       |  0:19 |   0.6 |
 -| COMPLETED Refactor yarn model validators                                    |         |       |  1:10 |   2.3 |
+-| COMPLETED Split indices out of the intermediate model                       |         |       |  0:40 |   1.3 |
+-| COMPLETED Add validation rules for primitives and enumerations              |         |       |  0:34 |   1.1 |
 +| COMPLETED Refactor yarn model validators                                    |         |       |  1:10 |   2.2 |
- | COMPLETED Split indices out of the intermediate model                       |         |       |  0:40 |   1.3 |
- | COMPLETED Add validation rules for primitives and enumerations              |         |       |  0:34 |   1.1 |
++| COMPLETED Split indices out of the intermediate model                       |         |       |  0:40 |   1.2 |
++| COMPLETED Add validation rules for primitives and enumerations              |         |       |  0:34 |   1.0 |
  | COMPLETED Add validation for C# keywords                                    |         |       |  0:16 |   0.5 |
 -| STARTED Map upsilon primitives to intrinsics                                |         |       |  0:35 |   1.1 |
-+| STARTED Map upsilon primitives to intrinsics                                |         |       |  1:44 |   3.3 |
++| STARTED Map upsilon primitives to intrinsics                                |         |       |  3:23 |   6.2 |
  #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
  #+end:
  
-@@ -610,6 +610,7 @@ We should also ensure models in LAM are checked for both C# and C++
+@@ -610,6 +610,9 @@ We should also ensure models in LAM are checked for both C# and C++
  keywords - or actually always check all keywords for all languages.
  
  *** STARTED Map upsilon primitives to intrinsics                      :story:
++    CLOCK: [2017-02-09 Thu 18:49]--[2017-02-09 Thu 19:40] =>  0:51
++    CLOCK: [2017-02-09 Thu 06:46]--[2017-02-09 Thu 07:34] =>  0:48
 +    CLOCK: [2017-02-06 Mon 21:21]--[2017-02-06 Mon 22:30] =>  1:09
      CLOCK: [2017-02-06 Mon 20:45]--[2017-02-06 Mon 21:20] =>  0:35
  
  Upsilon allows users to create "strong typedefs" around primitve
+@@ -634,6 +637,11 @@ Another alternative is to apply hard-coded regexes:
+ Finally, the last option may be to have yet another mapping data file
+ format that lists the primitives to unbox.
+ 
++Notes:
++
++- manually hack an entry into annotations with the underlying type.
++- we don't seem to be reading the internal modules of mappings.
++
+ *** Immutable types cannot be owned by mutable types                  :story:
+ 
+ When we try to create a mutable class that has a property of an
 diff --git a/projects/input_models/upsilon.dia b/projects/input_models/upsilon.dia
 index 49420e7fe..44cb39f51 100644
 --- a/projects/input_models/upsilon.dia
@@ -427,24 +553,35 @@ index 1bf26ff8a..74986d3f4 100644
  
      yarn::enumeration
 diff --git a/projects/yarn.upsilon/src/types/transformer.cpp b/projects/yarn.upsilon/src/types/transformer.cpp
-index 646e8beeb..f5e563491 100644
+index 646e8beeb..86a84fb80 100644
 --- a/projects/yarn.upsilon/src/types/transformer.cpp
 +++ b/projects/yarn.upsilon/src/types/transformer.cpp
-@@ -22,6 +22,7 @@
+@@ -21,7 +21,12 @@
+ #include <sstream>
  #include "dogen/utility/log/logger.hpp"
  #include "dogen/yarn/types/name_factory.hpp"
++#include "dogen/yarn/io/primitive_io.hpp"
++#include "dogen/yarn/io/builtin_io.hpp"
++#include "dogen/yarn/io/object_io.hpp"
++#include "dogen/yarn/io/enumeration_io.hpp"
  #include "dogen/upsilon/io/name_io.hpp"
 +#include "dogen/upsilon/types/converter.hpp"
  #include "dogen/yarn.upsilon/types/transformation_error.hpp"
  #include "dogen/yarn.upsilon/types/transformer.hpp"
  
-@@ -120,6 +121,29 @@ transformer::to_builtin(const dogen::upsilon::primitive& p) const {
-     return r;
- }
- 
+@@ -116,7 +121,32 @@ transformer::to_builtin(const dogen::upsilon::primitive& p) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
+     yarn::builtin r;
+     populate_element_properties(p, r);
+-    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
++    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive: " << r;
++    return r;
++}
++
 +dogen::yarn::primitive
 +transformer::to_primitive(const dogen::upsilon::primitive& p) const {
 +    BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
++
 +    yarn::primitive r;
 +    populate_element_properties(p, r);
 +
@@ -454,22 +591,38 @@ index 646e8beeb..f5e563491 100644
 +    dogen::yarn::name_factory nf;
 +    const auto n(nf.build_element_in_model(target_model_name_, s));
 +
++
++
++    
 +    yarn::attribute attr;
 +    attr.name(nf.build_attribute_name(r.name(), "value"));
 +    attr.unparsed_type(c.from_intrinsic_types(p.intrinsic()));
-+    attr.documentation("");
-+
 +    r.value_attribute(attr);
 +
-+    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
-+    return r;
-+}
-+
- yarn::object
- transformer::to_object(const dogen::upsilon::compound& c) const {
-     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
++    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive: " << r;
+     return r;
+ }
+ 
+@@ -136,7 +166,7 @@ transformer::to_object(const dogen::upsilon::compound& c) const {
+         r.local_attributes().push_back(attr);
+     }
+ 
+-    BOOST_LOG_SEV(lg, debug) << "Finished transforming compound";
++    BOOST_LOG_SEV(lg, debug) << "Finished transforming compound: " << r;
+     return r;
+ }
+ 
+@@ -145,7 +175,7 @@ transformer::to_enumeration(const dogen::upsilon::enumeration& e) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+     yarn::enumeration r;
+     populate_element_properties(e, r);
+-    BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration";
++    BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration: " << r;
+     return r;
+ }
+ 
 diff --git a/projects/yarn.upsilon/src/types/workflow.cpp b/projects/yarn.upsilon/src/types/workflow.cpp
-index e580f0923..ba1330842 100644
+index e580f0923..1e05062d3 100644
 --- a/projects/yarn.upsilon/src/types/workflow.cpp
 +++ b/projects/yarn.upsilon/src/types/workflow.cpp
 @@ -27,6 +27,7 @@
@@ -480,7 +633,16 @@ index e580f0923..ba1330842 100644
  #include "dogen/upsilon/types/type_visitor.hpp"
  #include "dogen/upsilon/io/target_types_io.hpp"
  #include "dogen/upsilon/io/name_io.hpp"
-@@ -130,8 +131,21 @@ void model_populator::visit(const dogen::upsilon::enumeration& e) {
+@@ -39,6 +40,8 @@ namespace {
+ using namespace dogen::utility::log;
+ static logger lg(logger_factory("yarn.upsilon.workflow"));
+ 
++const std::string underlying_type_key("yarn.primitive.underlying_element");
++
+ const std::string incorrect_number_of_outputs(
+     "Upsilon moodel does not have expected number of outputs (1): ");
+ const std::string unspported_target("Target is not supported: ");
+@@ -130,8 +133,37 @@ void model_populator::visit(const dogen::upsilon::enumeration& e) {
  }
  
  void model_populator::visit(const dogen::upsilon::primitive& p) {
@@ -498,9 +660,67 @@ index e580f0923..ba1330842 100644
 +        const auto b(transformer_.to_builtin(p));
 +        insert(b, model_.builtins());
 +    } else {
-+        const auto b(transformer_.to_primitive(p));
-+        insert(b, model_.primitives());
++        const auto yp(transformer_.to_primitive(p));
++        insert(yp, model_.primitives());
++
++        const auto it(c.from_intrinsic_types(p.intrinsic()));
++        const auto pair(std::make_pair(underlying_type_key, it));
++
++        annotations::scribble s;
++        s.scope(annotations::scope_types::entity);
++        s.entries().push_back(pair);
++
++        dogen::yarn::name_factory nf;
++        const auto n(nf.build_attribute_name(yp.name(), "value"));
++
++        annotations::scribble_group sg;
++        sg.parent(s);
++
++        const auto pair3(std::make_pair(yp.name().id(), sg));
++        model_.scribble_groups().insert(pair3);
 +    }
  }
  
  std::list<languages> workflow::obtain_output_languages(
+diff --git a/projects/yarn/include/dogen/yarn/types/mapper.hpp b/projects/yarn/include/dogen/yarn/types/mapper.hpp
+index b95db6b44..4f80b5bf4 100644
+--- a/projects/yarn/include/dogen/yarn/types/mapper.hpp
++++ b/projects/yarn/include/dogen/yarn/types/mapper.hpp
+@@ -55,6 +55,7 @@ private:
+ private:
+     name_tree walk_name_tree(const mapping_context& mc,
+         const name_tree& nt, const bool skip_injection = false) const;
++    void map_attribute(const mapping_context& mc, attribute& attr) const;
+     void map_attributes(const mapping_context& mc,
+         std::list<attribute>& attrs) const;
+ 
+diff --git a/projects/yarn/src/types/mapper.cpp b/projects/yarn/src/types/mapper.cpp
+index 7be19e7d1..fe4db6216 100644
+--- a/projects/yarn/src/types/mapper.cpp
++++ b/projects/yarn/src/types/mapper.cpp
+@@ -180,10 +180,14 @@ name_tree mapper::walk_name_tree(const mapping_context& mc, const name_tree& nt,
+     return r;
+ }
+ 
++void mapper::map_attribute(const mapping_context& mc, attribute& attr) const {
++    attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
++}
++
+ void mapper::
+ map_attributes(const mapping_context& mc, std::list<attribute>& attrs) const {
+     for (auto& attr : attrs)
+-        attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
++        map_attribute(mc, attr);
+ }
+ 
+ intermediate_model mapper::map(const languages from, const languages to,
+@@ -209,6 +213,9 @@ intermediate_model mapper::map(const languages from, const languages to,
+     for (auto& pair : r.concepts())
+         map_attributes(mc, pair.second.local_attributes());
+ 
++    for (auto& pair : r.primitives())
++        map_attribute(mc, pair.second.value_attribute());
++
+     r.input_language(to);
+     r.output_languages().clear();
+     r.output_languages().push_back(to);
