@@ -54,14 +54,14 @@ const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = dogen::yarn::location();
 
 
-
+ 
 struct test_dummy_builder
 {
 
 };
 
 bool applied = false;
-name_tree_listener<test_dummy_builder> listener;
+name_tree_listener<test_dummy_builder> listener{};
 
 template<>
 void name_tree_listener<test_dummy_builder>::apply()
@@ -72,13 +72,16 @@ void name_tree_listener<test_dummy_builder>::apply()
 bool check_parse(const std::string & s)
 {
     applied = false;
-    grammar<std::string::const_iterator, test_dummy_builder> g(listener, cpp);
+    listener = name_tree_listener<test_dummy_builder>{};
+
+    grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> g(listener, cpp);
 
     std::string::const_iterator i(s.begin());
     std::string::const_iterator end(s.end());
-    const bool ok(boost::spirit::qi::phrase_parse(i, end, g, ascii::space));
 
-    return ok && (i != end);
+    const bool ok = boost::spirit::qi::phrase_parse(i, end, g, ascii::space);
+
+    return ok && (i == end);
 }
 
 }
@@ -88,9 +91,9 @@ BOOST_AUTO_TEST_SUITE(name_tree_parser_tests)
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_name) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_many_nested_scopes_produces_expected_name");
- 
+
     {
-        custom_type_grammar<std::string::const_iterator, test_dummy_builder> ctg{&listener, cpp};
+        custom_type_grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> ctg{&listener, cpp};
         
         listener.type_name.clear();
         std::string s = "abc";
@@ -106,8 +109,15 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
         BOOST_CHECK(itr == s.cend());
         BOOST_CHECK_EQUAL(listener.type_name, "a1::b2::_c");
 
+        listener.type_name.clear();     
+        s = "a::b::c::z";
+        itr = s.cbegin();
+        BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+        BOOST_CHECK(itr == s.cend());
+        BOOST_CHECK_EQUAL(listener.type_name, "a::b::c::z");
+
         listener.type_name.clear();
-        s = "__a";
+        s = "::__a";
         itr = s.cbegin();
         BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
         BOOST_CHECK(itr == s.cend());
@@ -118,22 +128,99 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
         BOOST_CHECK(!boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
         BOOST_CHECK(itr != s.cend());
 
-        s = "a::9::a";
+        s = "a::7::D";
         itr = s.cbegin();
-        BOOST_CHECK(!boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
         BOOST_CHECK(itr != s.cend());
+
+        s = "a: :x";
+        itr = s.cbegin();
+        BOOST_CHECK(itr != s.cend());
+
     }
-    BOOST_TEST_PASSPOINT();
-    BOOST_CHECK(check_parse("a::b::c::z"));
+
+    BOOST_CHECK(check_parse("a :: b :: c :: z"));
     BOOST_CHECK(applied);
     BOOST_CHECK(!listener.is_const);
     BOOST_CHECK(!listener.is_volatile);
     BOOST_CHECK(!listener.sign);
-    BOOST_CHECK(listener.type_name == "a::b::c::z");
+    BOOST_CHECK_EQUAL(listener.type_name, "a::b::c::z");
     BOOST_CHECK(listener.pointers.empty());
     BOOST_CHECK(!listener.is_reference);
     BOOST_CHECK(!listener.is_array);
 
+    BOOST_CHECK(check_parse("const a :: b :: c :: z"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "a::b::c::z");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("consta :: b :: c :: z"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "consta::b::c::z");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("const volatile a :: b :: c :: z"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "a::b::c::z");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("const a :: b :: c :: z &"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "a::b::c::z");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("const std::string & ** const volatile * const * volatile"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "std::string");
+    BOOST_CHECK(listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+    BOOST_REQUIRE_EQUAL(listener.pointers.size(), 4);
+
+    BOOST_CHECK(!listener.pointers[0].is_const);
+    BOOST_CHECK(!listener.pointers[0].is_volatile);
+
+    BOOST_CHECK(listener.pointers[1].is_const);
+    BOOST_CHECK(listener.pointers[1].is_volatile);
+
+    BOOST_CHECK( listener.pointers[2].is_const);
+    BOOST_CHECK(!listener.pointers[2].is_volatile);
+
+    BOOST_CHECK(!listener.pointers[3].is_const);
+    BOOST_CHECK( listener.pointers[3].is_volatile);
+
+    BOOST_CHECK(check_parse("const thingy [3]"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "thingy");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(listener.is_array);
+    BOOST_CHECK_EQUAL(*listener.is_array, 3);
+    
 
 }
 

@@ -40,7 +40,7 @@ name_tree name_tree_parser::parse(const std::string& s) const {
 
     //no need for a shared_ptr, since the ownership is not shared.
     name_tree_listener<name_tree_builder> listener{ top_level_modules_, model_location_ };
-    grammar<std::string::const_iterator, name_tree_builder> g(listener, language_);
+    grammar<std::string::const_iterator, ascii::space_type, name_tree_builder> g(listener, language_);
 
     std::string::const_iterator i(s.begin());
     std::string::const_iterator end(s.end());

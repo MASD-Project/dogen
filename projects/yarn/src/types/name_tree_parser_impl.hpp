@@ -21,10 +21,10 @@
 namespace {
 
 using namespace dogen::utility::log;
-static auto lg = logger_factory("yarn.name_tree_parser");
+auto lg = logger_factory("yarn.name_tree_parser");
 
-const static std::string unsupported_language = "Invalid or unsupported language: ";
-const static std::string error_msg = "Failed to parse string: ";
+const std::string unsupported_language = "Invalid or unsupported language: ";
+const std::string error_msg = "Failed to parse string: ";
 using namespace boost::spirit;
 
 using dogen::yarn::name_tree_builder;
@@ -58,8 +58,8 @@ char_spec(String const& str) { return ascii::char_(str); }
 typedef traits::char_spec<std::string>::type charset_tag_type;
 typedef traits::distinct_spec<charset_tag_type>::type keyword_tag_type;
 
-const static std::string keyword_spec("0-9a-zA-Z_");
-const static keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
+const std::string keyword_spec("0-9a-zA-Z_");
+const keyword_tag_type keyword = distinct_spec(char_spec(keyword_spec));
 
 }
 
@@ -231,17 +231,17 @@ struct name_tree_listener
 };
 
 //Type to be extended later on
-template<typename Iterator, typename NameTreeBuilder>
-struct custom_type_grammar : qi::grammar<Iterator>
+template<typename Iterator, typename Skipper, typename NameTreeBuilder>
+struct custom_type_grammar : qi::grammar<Iterator, Skipper>
 {
     name_tree_listener<NameTreeBuilder> * listener;
 
-    qi::rule<Iterator, std::string()> scope;
-    qi::rule<Iterator, std::string()> id;
-    qi::rule<Iterator, std::string()> type_name;
+    qi::rule<Iterator, std::string(), Skipper> scope;
+    qi::rule<Iterator, std::string(), Skipper> id;
+    qi::rule<Iterator, std::string(), Skipper> type_name;
 
 
-    qi::rule<Iterator> custom_type;
+    qi::rule<Iterator, Skipper> custom_type;
 
     std::function<void(const std::string & st, qi::unused_type, bool & pass)> make()
     {
@@ -271,30 +271,30 @@ struct custom_type_grammar : qi::grammar<Iterator>
     custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const dogen::yarn::languages l) 
           : custom_type_grammar::base_type(custom_type), listener(listener), scope_str(scope_operator_for_language(l))
     {
-        scope = qi::string(scope_str);
-        id = qi::char_("_A-Za-z") >> *qi::char_("_A-Za-z0-9");
-        type_name = -qi::string("::") >> ( id % scope );
+        scope = scope_str;
+        id = qi::lexeme[qi::char_("_A-Za-z") >> *qi::char_("_A-Za-z0-9")];
+        type_name = -qi::lit("::") >> id >> * ( scope >> id );
 
         custom_type = type_name[make()];
     }
 };
 
-template<typename Iterator, typename NameTreeBuilder>
-struct grammar : qi::grammar<Iterator> {
+template<typename Iterator, typename Skipper, typename NameTreeBuilder>
+struct grammar : qi::grammar<Iterator, Skipper> {
     
     typedef name_tree_listener<NameTreeBuilder> listener_t;
     listener_t * listener;
     std::function<void(qi::unused_type, qi::unused_type, bool & pass)> make_attribute_setter(bool (listener_t::* ptr)())
     {
-        return [&](qi::unused_type, qi::unused_type, bool & pass)
+        return [this, ptr](qi::unused_type, qi::unused_type, bool & pass)
         {
-            pass = !(listener->*ptr)();
+            pass = (listener->*ptr)();
         };
     }
 
     std::function<void(qi::unused_type)> make_attribute_setter(void (listener_t::* ptr)())
     {
-        return [&](qi::unused_type)
+        return [this, ptr](qi::unused_type)
         {
             (listener->*ptr)();
         };
@@ -316,22 +316,22 @@ struct grammar : qi::grammar<Iterator> {
         return set_name_{ listener, id };
     }
 
-    custom_type_grammar<Iterator, NameTreeBuilder> custom_type;
+    custom_type_grammar<Iterator, Skipper, NameTreeBuilder> custom_type;
 
-    qi::rule<Iterator> qualifier;
-    qi::rule<Iterator> builtin_simple;
-    qi::rule<Iterator> sign;
-    qi::rule<Iterator> lengthable;
-    qi::rule<Iterator> signable;
-    qi::rule<Iterator> long_double; 
-    qi::rule<Iterator> multitoken;
-    qi::rule<Iterator> builtin;
-    qi::rule<Iterator> pointer;
-    qi::rule<Iterator> reference;
-    qi::rule<Iterator> array_;
+    qi::rule<Iterator, Skipper> qualifier;
+    qi::rule<Iterator, Skipper> builtin_simple;
+    qi::rule<Iterator, Skipper> sign;
+    qi::rule<Iterator, Skipper> lengthable;
+    qi::rule<Iterator, Skipper> signable;
+    qi::rule<Iterator, Skipper> long_double; 
+    qi::rule<Iterator, Skipper> multitoken;
+    qi::rule<Iterator, Skipper> builtin;
+    qi::rule<Iterator, Skipper> pointer;
+    qi::rule<Iterator, Skipper> reference;
+    qi::rule<Iterator, Skipper> array_;
 
-    qi::rule<Iterator> type;
-    qi::rule<Iterator> type_name;
+    qi::rule<Iterator, Skipper> type;
+    qi::rule<Iterator, Skipper> type_name;
 
     std::function<void()> start_template_, next_type_argument_, end_template_;
     std::function<void(const std::string&)> add_name_tree_, add_builtin_;
@@ -354,7 +354,7 @@ struct grammar : qi::grammar<Iterator> {
 
     grammar(listener_t &l,
             const dogen::yarn::languages language)
-                : grammar::base_type(type_name), listener(&l), custom_type{ listener , language} {
+                : grammar::base_type(type_name), listener(&l), custom_type{ &l , language } {
         setup_functors();
         using qi::on_error;
         using qi::fail;
