@@ -12,6 +12,8 @@
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include <boost/optional.hpp>
 
+#include <boost/phoenix/bind/bind_function.hpp>
+
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
@@ -240,7 +242,6 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     qi::rule<Iterator, std::string(), Skipper> id;
     qi::rule<Iterator, std::string(), Skipper> type_name;
 
-
     qi::rule<Iterator, Skipper> custom_type;
 
     std::function<void(const std::string & st, qi::unused_type, bool & pass)> make()
@@ -267,13 +268,32 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
             return "";
         } }
     }
+
+    static bool is_keyword(const std::string & input)
+    {
+    	const static std::vector<const char*> keywords = 
+            {
+    			"alignas", "alignof", "and", "and_eq", "asm", "auto", "bitand", "bitor", "bool", "break", 
+    			"case", "catch", "char", "char16_t", "char32_t", "class", "compl", "const", "constexpr", 
+    			"const_cast", "continue", "decltype", "default", "delete", "do", "double", "dynamic_cast", 
+    			"else", "enum", "explicit", "export", "extern", "false", "float", "for", "friend", "goto", 
+    			"if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", "not_eq", 
+    			"nullptr", "operator", "or", "or_eq", "private", "protected", "public", "register", "reinterpret_cast", 
+    			"return", "short", "signed", "sizeof", "static", "static_assert", "static_cast", "struct", "switch", 
+    			"template", "this", "thread_local", "throw", "true", "try", "typedef", "typeid", "typename", "union", 
+    			"unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq" 
+            };
+        return std::count_if(keywords.begin(), keywords.end(), [&](const char * st){return st == input;}) != 0;
+    }
+
     std::string scope_str;
     custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const dogen::yarn::languages l) 
           : custom_type_grammar::base_type(custom_type), listener(listener), scope_str(scope_operator_for_language(l))
     {
+    	namespace phoenix = boost::phoenix;
         scope = scope_str;
-        id = qi::lexeme[qi::char_("_A-Za-z") >> *qi::char_("_A-Za-z0-9")];
-        type_name = -qi::lit("::") >> id >> * ( scope >> id );
+        id = qi::lexeme[(qi::char_("_A-Za-z") >> *qi::char_("_A-Za-z0-9"))];
+        type_name = -qi::lit("::") >> ( id[qi::_val += qi::_1, qi::_pass = !phoenix::bind(&custom_type_grammar<Iterator, Skipper, NameTreeBuilder>::is_keyword, qi::_1)] % scope[qi::_val += qi::_1] ); //>> id[qi::_val += qi::_1] );
 
         custom_type = type_name[make()];
     }

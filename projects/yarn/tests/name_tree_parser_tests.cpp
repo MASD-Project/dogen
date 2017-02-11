@@ -220,102 +220,202 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     BOOST_CHECK(!listener.is_reference);
     BOOST_CHECK(listener.is_array);
     BOOST_CHECK_EQUAL(*listener.is_array, 3);
-    
 
+    //check that it does not accidentally parse keywords in scope
+
+    BOOST_CHECK(!check_parse("signed::foo::bar"));
+    BOOST_CHECK(!check_parse("foo::volatile::bar"));
+    BOOST_CHECK(!check_parse("foo::bar::unsigned"));
+    
 }
 
-/*
+
 BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_name) {
     SETUP_TEST_LOG_SOURCE("parsing_string_without_scope_operator_produces_expected_name");
-    const std::string s("zeta");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    const auto a(ntp.parse(s));
+    BOOST_CHECK(check_parse("zeta"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "zeta");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
 
-    dogen::yarn::name_factory nf;
-    const auto e(make(nf.build_element_name(s)));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(check_parse("const thingy [3]"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "thingy");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_REQUIRE(listener.is_array);
+    BOOST_CHECK_EQUAL(*listener.is_array, 3);
 }
+
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_name) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_one_scope_operator_produces_expected_name");
     const std::string s("a::z");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    const auto a(ntp.parse(s));
-
-    dogen::yarn::name_factory nf;
-    const auto e(make(nf.build_element_name("a", "z")));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(check_parse(s));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, s);
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+    
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_colon_fails_to_parse");
     const std::string s("a:z");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+
+    custom_type_grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> ctg{&listener, cpp};
+
+    listener.type_name.clear();
+    auto itr = s.cbegin();
+    BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+    BOOST_CHECK(itr != s.cend());
+    BOOST_CHECK_EQUAL(listener.type_name, "a");
 }
+
 
 BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("string_starting_with_digit_fails_to_parse");
     const std::string s("0a");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+
+    custom_type_grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> ctg{&listener, cpp};
+
+    listener.type_name.clear();
+    auto itr = s.cbegin();
+    BOOST_CHECK(!boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+    BOOST_CHECK(itr != s.cend());
 }
 
 BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("string_ending_with_scope_operator_fails_to_parse");
     const std::string s("a::");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+
+    custom_type_grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> ctg{&listener, cpp};
+
+    listener.type_name.clear();
+    auto itr = s.cbegin();
+    BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+    BOOST_CHECK(itr != s.cend());
+
 }
 
 BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("scope_operator_followed_by_scope_operator_fails_to_parse");
     const std::string s("A::::");
-    BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+
+    custom_type_grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> ctg{&listener, cpp};
+
+    listener.type_name.clear();
+    auto itr = s.cbegin();
+    BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
+    BOOST_CHECK(itr != s.cend());
 }
 
 BOOST_AUTO_TEST_CASE(all_builtin_types_are_valid) {
     SETUP_TEST_LOG("all_builtin_types_are_valid");
 
-    BOOST_CHECK(test_builtin("char"));
-    BOOST_CHECK(test_builtin("unsigned char"));
-    BOOST_CHECK(test_builtin("wchar_t"));
-    BOOST_CHECK(test_builtin("unsigned wchar_t"));
-    BOOST_CHECK(test_builtin("bool"));
-    BOOST_CHECK(test_builtin("short"));
-    BOOST_CHECK(test_builtin("unsigned short"));
-    BOOST_CHECK(test_builtin("int"));
-    BOOST_CHECK(test_builtin("unsigned int"));
-    BOOST_CHECK(test_builtin("long"));
-    BOOST_CHECK(test_builtin("unsigned long"));
-    BOOST_CHECK(test_builtin("long long"));
-    BOOST_CHECK(test_builtin("unsigned long long"));
-    BOOST_CHECK(test_builtin("void"));
-    BOOST_CHECK(test_builtin("float"));
-    BOOST_CHECK(test_builtin("double"));
+    BOOST_CHECK(check_parse("char"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "char");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("char unsigned"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_REQUIRE(listener.sign);
+    BOOST_CHECK(!*listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "char");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+
+    BOOST_CHECK(check_parse("unsigned wchar_t"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_REQUIRE(listener.sign);
+    BOOST_CHECK(!*listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "wchar_t");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+
+    BOOST_CHECK(check_parse("short int"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "short");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("unsigned short"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_REQUIRE(listener.sign);
+    BOOST_CHECK(!*listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "short");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("long signed long"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_REQUIRE(listener.sign);
+    BOOST_CHECK(*listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "long long");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("double long"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(!listener.is_const);
+    BOOST_CHECK(!listener.is_volatile);
+    BOOST_CHECK(!listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "long double");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(!listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
 }
+
 
 BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
-    dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
-    BOOST_CHECK_THROW(ntp.parse("unsigned bool"), parsing_error);
-    BOOST_CHECK_THROW(ntp.parse("unsigned x"), parsing_error);
-    BOOST_CHECK_THROW(ntp.parse("unsigned float"), parsing_error);
-    BOOST_CHECK_THROW(ntp.parse("unsigned double"), parsing_error);
+    
+    BOOST_CHECK(!check_parse("unsigned bool"));
+    BOOST_CHECK(!check_parse("unsigned x"));
+    BOOST_CHECK(!check_parse("unsigned float"));
+    BOOST_CHECK(!check_parse("unsigned double"));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_name_trees");
-
+/*
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.current(nf.build_element_name("type"));
@@ -328,12 +428,12 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
     const std::string s("type<abc>");
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_name_trees");
-
+/*
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.current(nf.build_element_name("type"));
@@ -351,12 +451,12 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected
 
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
 
 BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_name_trees");
-    dogen::yarn::name_tree e;
+ /*   dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.current(nf.build_element_name("std", "vector"));
 
@@ -370,12 +470,12 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
 
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
 
 BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_builtin_produces_expected_name_trees");
-
+/*
     dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.current(nf.build_element_name("std", "vector"));
@@ -390,12 +490,12 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
 
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
 
 BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_unordered_map_produces_expected_name_trees");
-
+/*
     dogen::yarn::name_tree e;
 
     dogen::yarn::name_factory nf;
@@ -420,13 +520,13 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
     BOOST_LOG_SEV(lg, info) << "input: " << s2;
 
     const auto a2(ntp.parse(s2));
-    BOOST_CHECK(asserter::assert_equals(e, a2));
+    BOOST_CHECK(asserter::assert_equals(e, a2));*/
 }
 
 BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_shared_ptr_produces_expected_name_trees");
 
-    dogen::yarn::name_tree e;
+  /*  dogen::yarn::name_tree e;
     dogen::yarn::name_factory nf;
     e.current(nf.build_element_name("std", "vector"));
 
@@ -444,12 +544,12 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) 
 
     dogen::yarn::name_tree_parser ntp(top_level_modules, model_location, cpp);
     const auto a(ntp.parse(s));
-    BOOST_CHECK(asserter::assert_equals(e, a));
+    BOOST_CHECK(asserter::assert_equals(e, a));*/
 }
 
 BOOST_AUTO_TEST_CASE(names_that_partially_match_builtins_produce_expected_name_tree) {
     SETUP_TEST_LOG("names_that_partially_match_builtins_produce_expected_name_tree");
-
+/*
     BOOST_CHECK(test_builtin("character"));
     BOOST_CHECK(test_builtin("cha"));
     BOOST_CHECK(test_builtin("wchar_test"));
@@ -467,7 +567,7 @@ BOOST_AUTO_TEST_CASE(names_that_partially_match_builtins_produce_expected_name_t
     BOOST_CHECK(test_builtin("doubler"));
     BOOST_CHECK(test_builtin("doubl"));
     BOOST_CHECK(test_builtin("unsigneder"));
-    BOOST_CHECK(test_builtin("longer"));
-}*/
+    BOOST_CHECK(test_builtin("longer"));*/
+}
 
 BOOST_AUTO_TEST_SUITE_END()
