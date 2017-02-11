@@ -401,6 +401,17 @@ BOOST_AUTO_TEST_CASE(all_builtin_types_are_valid) {
     BOOST_CHECK(listener.pointers.empty());
     BOOST_CHECK(!listener.is_reference);
     BOOST_CHECK(!listener.is_array);
+
+    BOOST_CHECK(check_parse("int signed volatile long const long &"));
+    BOOST_CHECK(applied);
+    BOOST_CHECK(listener.is_const);
+    BOOST_CHECK(listener.is_volatile);
+    BOOST_REQUIRE(listener.sign);
+    BOOST_CHECK(*listener.sign);
+    BOOST_CHECK_EQUAL(listener.type_name, "long long");
+    BOOST_CHECK(listener.pointers.empty());
+    BOOST_CHECK(listener.is_reference);
+    BOOST_CHECK(!listener.is_array);
 }
 
 
