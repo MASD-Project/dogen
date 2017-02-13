@@ -30,7 +30,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/name_tree_parser.hpp"
+#include "dogen/yarn/types/legacy_name_tree_parser.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 
@@ -154,7 +154,8 @@ parse_attributes(const location& model_location,
     const std::unordered_set<std::string>& top_level_modules,
     const languages language, std::list<attribute>& attrs) const {
 
-    const name_tree_parser ntp(top_level_modules, model_location, language);
+    const legacy_name_tree_parser
+        ntp(top_level_modules, model_location, language);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
 
@@ -266,7 +267,7 @@ void parsing_expander::parse_underlying_element(const type_group& tg,
     attr.unparsed_type(ut);
     attr.documentation(documentation);
 
-    const name_tree_parser ntp(top_level_modules, model_location, l);
+    const legacy_name_tree_parser ntp(top_level_modules, model_location, l);
     auto nt(ntp.parse(ut));
     attr.parsed_type(nt);
 

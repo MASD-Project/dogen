@@ -1,3 +1,29 @@
+/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+ *
+ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ */
+#ifndef DOGEN_YARN_TYPES_NEW_NAME_TREE_PARSER_HPP
+#define DOGEN_YARN_TYPES_NEW_NAME_TREE_PARSER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 #include <functional>
 #include <boost/lexical_cast.hpp>
@@ -182,7 +208,7 @@ struct name_tree_listener
     {
         if (is_reference || !pointers.empty())
             return false;
-        
+
         is_reference = true;
         return true;
     }
@@ -202,7 +228,7 @@ struct name_tree_listener
         return !type_name.empty();
     }
 
-    void add_pointer() 
+    void add_pointer()
     {
         pointers.push_back({false, false}); //can always be done because int &* is a reference to a pointer
     }
@@ -228,7 +254,7 @@ struct name_tree_listener
     }
 
     //in case you want to check a type is correct. NOTE: that could get the location too, but that would need more template stuff; but then you could add "#line foo.cpp 42"
-    bool validate_typename(const std::string & ) { return true; } 
+    bool validate_typename(const std::string & ) { return true; }
 
 };
 
@@ -271,26 +297,26 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
 
     static bool is_keyword(const std::string & input)
     {
-    	const static std::vector<const char*> keywords = 
+        const static std::vector<const char*> keywords =
             {
-    			"alignas", "alignof", "and", "and_eq", "asm", "auto", "bitand", "bitor", "bool", "break", 
-    			"case", "catch", "char", "char16_t", "char32_t", "class", "compl", "const", "constexpr", 
-    			"const_cast", "continue", "decltype", "default", "delete", "do", "double", "dynamic_cast", 
-    			"else", "enum", "explicit", "export", "extern", "false", "float", "for", "friend", "goto", 
-    			"if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", "not_eq", 
-    			"nullptr", "operator", "or", "or_eq", "private", "protected", "public", "register", "reinterpret_cast", 
-    			"return", "short", "signed", "sizeof", "static", "static_assert", "static_cast", "struct", "switch", 
-    			"template", "this", "thread_local", "throw", "true", "try", "typedef", "typeid", "typename", "union", 
-    			"unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq" 
+                "alignas", "alignof", "and", "and_eq", "asm", "auto", "bitand", "bitor", "bool", "break",
+                "case", "catch", "char", "char16_t", "char32_t", "class", "compl", "const", "constexpr",
+                "const_cast", "continue", "decltype", "default", "delete", "do", "double", "dynamic_cast",
+                "else", "enum", "explicit", "export", "extern", "false", "float", "for", "friend", "goto",
+                "if", "inline", "int", "long", "mutable", "namespace", "new", "noexcept", "not", "not_eq",
+                "nullptr", "operator", "or", "or_eq", "private", "protected", "public", "register", "reinterpret_cast",
+                "return", "short", "signed", "sizeof", "static", "static_assert", "static_cast", "struct", "switch",
+                "template", "this", "thread_local", "throw", "true", "try", "typedef", "typeid", "typename", "union",
+                "unsigned", "using", "virtual", "void", "volatile", "wchar_t", "while", "xor", "xor_eq"
             };
         return std::count_if(keywords.begin(), keywords.end(), [&](const char * st){return st == input;}) != 0;
     }
 
     std::string scope_str;
-    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const dogen::yarn::languages l) 
+    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const dogen::yarn::languages l)
           : custom_type_grammar::base_type(custom_type), listener(listener), scope_str(scope_operator_for_language(l))
     {
-    	namespace phoenix = boost::phoenix;
+        namespace phoenix = boost::phoenix;
         scope = scope_str;
         id = qi::lexeme[(qi::char_("_A-Za-z") >> *qi::char_("_A-Za-z0-9"))];
         type_name = -qi::lit("::") >> ( id[qi::_val += qi::_1, qi::_pass = !phoenix::bind(&custom_type_grammar<Iterator, Skipper, NameTreeBuilder>::is_keyword, qi::_1)] % scope[qi::_val += qi::_1] ); //>> id[qi::_val += qi::_1] );
@@ -301,7 +327,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
 
 template<typename Iterator, typename Skipper, typename NameTreeBuilder>
 struct grammar : qi::grammar<Iterator, Skipper> {
-    
+
     typedef name_tree_listener<NameTreeBuilder> listener_t;
     listener_t * listener;
     std::function<void(qi::unused_type, qi::unused_type, bool & pass)> make_attribute_setter(bool (listener_t::* ptr)())
@@ -343,7 +369,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
     qi::rule<Iterator, Skipper> sign;
     qi::rule<Iterator, Skipper> lengthable;
     qi::rule<Iterator, Skipper> signable;
-    qi::rule<Iterator, Skipper> long_double; 
+    qi::rule<Iterator, Skipper> long_double;
     qi::rule<Iterator, Skipper> multitoken;
     qi::rule<Iterator, Skipper> builtin;
     qi::rule<Iterator, Skipper> pointer;
@@ -387,7 +413,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
         using boost::phoenix::push_back;
         using boost::phoenix::construct;
 
-        builtin_simple = 
+        builtin_simple =
             distinct::keyword["bool"]    [set_name("bool")]     |
             distinct::keyword["float"]   [set_name("float")]    |
             distinct::keyword["void"]    [set_name("void")]     |
@@ -398,7 +424,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
         qualifier = distinct::keyword["const"]   [make_attribute_setter(&listener_t::set_const)] |
                     distinct::keyword["volatile"][make_attribute_setter(&listener_t::set_volatile)];
 
-        long_double = -distinct::keyword["long"]  [make_attribute_setter(&listener_t::set_long)]   >> repeat(0,2)[qualifier] >> 
+        long_double = -distinct::keyword["long"]  [make_attribute_setter(&listener_t::set_long)]   >> repeat(0,2)[qualifier] >>
                        distinct::keyword["double"][make_attribute_setter(&listener_t::set_double)] >> repeat(0,2)[qualifier] >>
                       -distinct::keyword["long"]  [make_attribute_setter(&listener_t::set_long)];
 
@@ -413,7 +439,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
 
         signable = distinct::keyword["char"]   [set_name("char")] |
                    distinct::keyword["wchar_t"][set_name("wchar_t")];
-                
+
         //now, invalid combinations except for the long double is handled by the listener, so I'll just throw everything together
         //note that this allows a plain "const", so that will be handled by the has_name function
         multitoken = +(sign  | lengthable | signable | qualifier) >> qi::eps[make_attribute_setter(&listener_t::has_name)];
@@ -435,9 +461,9 @@ struct grammar : qi::grammar<Iterator, Skipper> {
             (
                 type_name,
                 std::cout << val("Error! Expecting ")
-                << _4                             // what failed?
+                << boost::spirit::_4                             // what failed?
                 << val(" here: \"")
-                << construct<std::string>(_3, _2) // iterators to error-pos, end
+                << construct<std::string>(boost::spirit::_3, boost::spirit::_2) // iterators to error-pos, end
                 << val("\"")
                 << std::endl
                 );
@@ -463,3 +489,5 @@ struct grammar : qi::grammar<Iterator, Skipper> {
 };
 
 }
+
+#endif

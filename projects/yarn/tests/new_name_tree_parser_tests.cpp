@@ -20,9 +20,6 @@
  */
 #include <sstream>
 #include <boost/test/unit_test.hpp>
-
-#include "../src/types/name_tree_parser_impl.hpp"
-
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/list_io.hpp"
@@ -39,6 +36,7 @@
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/merger.hpp"*/
 #include "dogen/utility/test/exception_checkers.hpp"
+#include "dogen/yarn/types/new_name_tree_parser.hpp"
 
 using dogen::utility::test::asserter;
 
@@ -54,7 +52,7 @@ const auto top_level_modules = std::unordered_set<std::string>();
 const auto model_location = dogen::yarn::location();
 
 
- 
+
 struct test_dummy_builder
 {
 
@@ -94,7 +92,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
 
     {
         custom_type_grammar<std::string::const_iterator, ascii::space_type, test_dummy_builder> ctg{&listener, cpp};
-        
+
         listener.type_name.clear();
         std::string s = "abc";
         auto itr = s.cbegin();
@@ -109,7 +107,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
         BOOST_CHECK(itr == s.cend());
         BOOST_CHECK_EQUAL(listener.type_name, "a1::b2::_c");
 
-        listener.type_name.clear();     
+        listener.type_name.clear();
         s = "a::b::c::z";
         itr = s.cbegin();
         BOOST_CHECK(boost::spirit::qi::phrase_parse(itr, s.cend(), ctg, ascii::space));
@@ -226,7 +224,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     BOOST_CHECK(!check_parse("signed::foo::bar"));
     BOOST_CHECK(!check_parse("foo::volatile::bar"));
     BOOST_CHECK(!check_parse("foo::bar::unsigned"));
-    
+
 }
 
 
@@ -269,7 +267,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
     BOOST_CHECK(listener.pointers.empty());
     BOOST_CHECK(!listener.is_reference);
     BOOST_CHECK(!listener.is_array);
-    
+
 }
 
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
@@ -417,7 +415,7 @@ BOOST_AUTO_TEST_CASE(all_builtin_types_are_valid) {
 
 BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
-    
+
     BOOST_CHECK(!check_parse("unsigned bool"));
     BOOST_CHECK(!check_parse("unsigned x"));
     BOOST_CHECK(!check_parse("unsigned float"));

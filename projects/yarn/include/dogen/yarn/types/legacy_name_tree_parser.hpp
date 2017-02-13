@@ -39,7 +39,7 @@ namespace yarn {
  * @brief Parses identifiers according to a well-defined syntax, and
  * generates a tree of names from them.
  */
-class name_tree_parser {
+class legacy_name_tree_parser {
 public:
     /**
      * @brief Initialises the parser.
@@ -50,7 +50,8 @@ public:
      * model.
      * @param language what programming language syntax to use.
      */
-    name_tree_parser(const std::unordered_set<std::string>& top_level_modules,
+    legacy_name_tree_parser(
+        const std::unordered_set<std::string>& top_level_modules,
         const location& model_location, const languages language);
 
 public:

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_NAME_TREE_PARSER_FWD_HPP
-#define DOGEN_YARN_TYPES_NAME_TREE_PARSER_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_LEGACY_NAME_TREE_PARSER_FWD_HPP
+#define DOGEN_YARN_TYPES_LEGACY_NAME_TREE_PARSER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace yarn {
 
-class name_tree_parser;
+class legacy_name_tree_parser;
 
 } }
 
