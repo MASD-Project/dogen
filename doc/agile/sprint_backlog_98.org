@@ -90,6 +90,13 @@ the base for the model.
 
 - [[https://northwinddatabase.codeplex.com/][Northwind Database]]
 
+*** Add ODB to the build machine                                      :story:
+
+At present we are only compiling and running the ODB tests
+locally. Now that ODB is becoming a core dependency, we need to make
+sure we are running these tests on the build machines - Windows and
+Linux at least.
+
 *** Map upsilon primitives to intrinsics                              :story:
 
 Upsilon allows users to create "strong typedefs" around primitve
