@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/io/scope_types_io.hpp"

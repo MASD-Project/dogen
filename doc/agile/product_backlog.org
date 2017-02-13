@@ -3443,17 +3443,13 @@ code. We would require a mapping layer of eCore types into LAM.
 
 *** Add the the EMF purchase order examples to manual                 :story:
 
-We should make use of the examples for eCore and EMF or perhaps
-Microsoft Access Northwind to demo Dogen. We could make a similar
-chapter flow in the manual, starting with a simpler model and then
-evolving it to the most complicated one. It would require a little bit
-of an adaptation since Dogen does not support all of the features that
-EMF has, but it seems a better way to demo Dogen rather than just
-talk about the code structure. We could add this after the section on
-authoring diagrams.
-
-- [[https://northwinddatabase.codeplex.com/][Northwind Database]]: may be a bit too complicated, but it is a good
-  way to demo complex features.
+We should make use of the examples for eCore to demo Dogen. We could
+make a similar chapter flow in the manual, starting with a simpler
+model and then evolving it to the most complicated one. It would
+require a little bit of an adaptation since Dogen does not support all
+of the features that EMF has, but it seems a better way to demo Dogen
+rather than just talk about the code structure. We could add this
+after the section on authoring diagrams.
 
 *** Change stitch's standard control block start marker to match t4   :story:
 
