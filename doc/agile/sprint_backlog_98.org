@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-13 Mon 12:36]
+#+CAPTION: Clock summary at [2017-02-13 Mon 13:13]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
@@ -46,7 +46,9 @@ Marginal de Moçamedes, Namibe, Angola. (C) Angola Bela. Sourced from Angola Bel
 
 Overview
 =======
-This sprint had work slightly scattered all over, but with a few interesting features for users around enumerations and primitives, described below.
+This sprint had work slightly scattered, but the core work are a few interesting features for users around enumerations and primitives - described below.
+
+In this release we also started work on the next generation parser, thanks to @klemens-morgenstern who has laid its foundations. The integration work of this new parser will proceed over the next few sprints.
 
 User visible changes
 ===============
