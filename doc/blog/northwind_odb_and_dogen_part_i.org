@@ -2,22 +2,24 @@
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
 Thanks to my first [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] paying customer, I finally got a chance to
-work with [[http://www.codesynthesis.com/products/odb/][ODB]] - [[www.codesynthesis.com][Code Synthesis']] amazingly interesting C++
+work with [[http://www.codesynthesis.com/products/odb/][ODB]] - [[http://www.codesynthesis.com][Code Synthesis']] amazingly interesting C++
 Object-Relational Mapping tool, built on the back of the GCC plugin
 system. I've personally always been in awe of what Boris Kolpackov has
 achieved, and, of course, it being a South African company made me all
-the more keen to use their products.
+the more keen to use their products. More importantly: the product
+just seems to rock in terms of polish, features and documentation.
 
-Astute readers of this blog will note that Dogen has been supporting
-ODB for quite some time. That is indeed true, but since I haven't used
-this feature in anger, I wasn't sure how good the support really was;
-our fairly trivial database model ([[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/projects/input_models/database.dia][Dia]]) explored only a small fraction
-of what is possible. Now that I finally had a chance to use it in
-production, I needed to expand the tests and try to replicate the
-customer's scenario as close as possible. As always in these
-situations, there was a snag: instead of using [[https://www.postgresql.org/][PostgreSQL]] - the RDBMS
-I had developed support for in Dogen - they were using Oracle. So my
-first task was to setup Oracle locally on my beloved Debian Linux.
+Astute readers of this blog will point out that Dogen has been
+supporting ODB for quite some time. That is indeed true, but since I
+haven't used this feature in anger, I wasn't sure how good the support
+really was; our fairly trivial database model ([[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/projects/input_models/database.dia][Dia]]) explored only a
+small fraction of what is possible. Now that I finally had a chance to
+use it in production, I needed to expand the tests and try to
+replicate the customer's scenario as close as possible. As always in
+these situations, there was a snag: instead of using [[https://www.postgresql.org/][PostgreSQL]] - the
+RDBMS I had originally used in my Dogen tests - they were using
+Oracle. So my first task was to setup Oracle locally on my beloved
+Debian Linux.
 
 Never one to miss an opportunity, I decided this adventure was worthy
 of a quick blog post; it soon turned out to be a series of posts, if I
@@ -27,27 +29,28 @@ also demonstrates what you can do with Dogen and ODB. And so, here we
 are.
 
 The first part of the series deals with just trying to convince Oracle
-to run. On Debian Testing - something that /obviously/ Oracle does not
+to run on Debian Testing - something that /obviously/ Oracle does not
 support out of the box.
 
 Before we proceed, a word to the wise: this is a *highly experimental*
 Oracle setup, which I embarked upon just because I could; follow it at
 your own peril, and *do not use it anywhere near production*. More
 generally, if you want to stick to the beaten track, use Oracle on
-CentOS or Windows. All of that said, if like me, you are a Debian
-person, well, there's not much for it other than to fire off a VM and
-start looking for those damned faint tracks in the jungle.
+RHEL, CentOS or - god forbid - even Windows. All of that said, if like
+me, you are a Debian person, well, there's not much for it other than
+to fire off a VM and start looking for those damned faint tracks in
+the jungle.
 
 * Alien Worlds
 
 The very first stumbling block was Oracle itself. After all, for all
 the many years of using this RBDMS at work - more than I care to admit
 in polite company - I suddenly realised I actually never used it at
-home. The good news was that Oracle did support Linux, and they did
-have a "free" version available: Oracle Database Express Edition
-(XE). A quick glance at the Oracle website revealed RPM's for 64-bits
-(Intel only, of course). So before anything else, I decided to brush
-up my knowledge of Alien.
+home. Or course, Oracle has supported Linux for a little while now;
+and the good news is they have a "free" version available: Oracle
+Database Express Edition (XE). A quick glance at the Oracle website
+revealed RPM's for 64-bits (Intel only, of course). So before anything
+else, I decided to brush up my knowledge of Alien.
 
 Alien is a debian package that converts RPMs into DEBs. I've used it
 in the past for another (lovely) Oracle technology: Java. It had
@@ -63,18 +66,18 @@ And then apply it to the RPM in question. So the next quest was
 obtaining those darn RPMs.
 
 Of course, once you move away from the easy world of Free and Open
-Source Software, things tart to get complicated. Those lovely links
-you can easy Google for don't actually work until you sign up for an
-Oracle developer account, asking /all sorts/ of personal
-information. Sadly, even listening to Tesla earnings conferences
-requires registering these days. Undaunted, I filled all required
-fields, obtained my developer account and returned to download my
-loot. For Oracle Express it's rather straightforward: there is a
-grand-total of one package for Linux 64-bit, so you can't really go
-wrong. Here's the link, just in case:
+Source Software, things start to get a bit more complicated. Those
+lovely links you can easy Google for don't actually work until you
+sign up for an Oracle developer account, asking /all sorts/ of
+personal information. Sadly, even listening to Tesla earnings
+conferences requires registering these days. Undaunted, I filled all
+required fields, obtained my developer account and returned to
+download my loot. For Oracle Express it's rather straightforward:
+there is a grand-total of one package for Linux 64-bit, so you can't
+really go wrong. Here's the link, just in case:
 
 - [[http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html][Oracle Express]]: download the 64-bit Linux RPM
-  (oracle-xe-11.2.0-1.0.x86_64.rpm.zip)
+  =oracle-xe-11.2.0-1.0.x86_64.rpm.zip=.
 
 It is interesting that they decided to zip the RPM but you can easily
 unzip it with the =unzip= tool. The contents are the RPM Alien
@@ -92,28 +95,30 @@ Archive:  oracle-xe-11.2.0-1.0.x86_64.rpm.zip
   inflating: Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm
 #+end_example
 
-As far as I could understand, the Oracle Express package contains just
-the database server; it does not include a command line client, nor
-does it include the APIs to build applications that talk to the
-database. To be fair, this is not an entirely uncommon approach;
-Debian also packages the PostgreSQL server separately from the
-development libraries. But behind =apt-get= and =synaptic=,
-installation of packages is all so trivial. Not so when you have to go
-through lots of detailed explanations of different packages and
-variations. But; onwards! In the [[http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html][Instant client]] page, I settled on the
-downloading the following:
+From a quick glance at the instructions, it appeared the Oracle
+Express package contained just the database server - that meant it did
+not include a command line client, or the APIs to build applications
+that talk to the database. To be fair, this is not an entirely
+uncommon approach; Debian also packages the PostgreSQL server
+separately from the development libraries. But behind =apt-get= and
+=synaptic=, installation of packages is all so trivial. Not so when
+you have to go through lots of detailed explanations of different
+packages and variations. But; onwards! In the [[http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html][Instant client]] page, I
+settled on the downloading the following:
 
 - /Basic/: client shared libraries. Package:
-  oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+  =oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm=
 - /SQL Plus/: command-line client. Package:
-  oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+  =oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm=
 - /SDK/: header files to compile code. Package:
-  oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+  =oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm=
 
-As it turns out, you don't really need the SQL Plus package since its
-already included with Oracle Express.
+*Update*: As it turns out, I was wrong on my original expectations,
+and you don't really need the SQL Plus package - its already included
+with Oracle Express. But I only figured it out much later, so I'll
+leave the steps as I originally followed them.
 
-With all of these packages in hand, I swiftly get busy with Alien,
+With all of these packages in hand, I swiftly got busy with Alien,
 only to also rather swiftly hit an issue:
 
 #+begin_example
@@ -212,7 +217,7 @@ Setting up oracle-instantclient12.1-devel (12.1.0.2.0-2) ...
 
 So, at this point in time we have a bunch of stuff installed in all
 sorts of random (read: Oracle-like) locations. The database itself is
-under =ls /u01/app/oracle/product/11.2.0/=, and all the other packages
+under =/u01/app/oracle/product/11.2.0/=, and all the other packages
 seemed to have gone into =/usr/lib/oracle/12.1/client64/= and
 =/usr/include/oracle/12.1/client64/=. The first task is now to start
 the database server. For this we can rely on the scripts we installed
@@ -260,8 +265,10 @@ Starting Oracle Database 11g Express Edition instance...Done
 Installation completed successfully.
 #+end_example
 
-After this I could indeed see a whole load of Oracle processes
-running:
+Notice how your port 8080 has been hogged. If you are using it for
+other work, you may need to move the Oracle Application Express server
+to some other port. At any rate, after this I could indeed see a whole
+load of Oracle processes running:
 
 #+begin_example
 $ ps -ef | grep oracle
@@ -279,8 +286,9 @@ oracle   21273     1  0 22:36 ?        00:00:00 xe_lgwr_XE
 ...
 #+end_example
 
-For more details, there are also a bunch of useful logs under the
-Oracle directories:
+To the untrained eye, this seems like a healthy start; but for more
+details, there are also a bunch of useful logs under the Oracle
+directories:
 
 #+begin_example
 # ls -l /u01/app/oracle/product/11.2.0/xe/config/log
@@ -316,7 +324,7 @@ The magic word is =XE= (the net service name, i.e. what we will be
 connecting against). Now we can simply do:
 
 #+begin_example
-. /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+$ . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
 $ tnsping XE
 
 TNS Ping Utility for Linux: Version 11.2.0.2.0 - Production on 23-FEB-2017 22:52:04
@@ -331,11 +339,15 @@ Attempting to contact (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = lorenz)(
 OK (0 msec)
 #+end_example
 
-Success! The final test at this stage is to ensure we can connect with
-SQL Plus:
+Success! Worth noticing that the first step was to call
+=oracle_env.sh= to bring in all the required environment variables of
+our Oracle setup.
+
+The final test at this stage is to ensure we can connect with SQL
+Plus. For this we will just rely on the =SYSTEM= user.
 
 #+begin_example
-sqlplus SYSTEM@XE
+$ sqlplus SYSTEM@XE
 
 SQL*Plus: Release 11.2.0.2.0 Production on Thu Feb 23 22:56:31 2017
 
@@ -356,7 +368,7 @@ CON$
 UNDO$
 #+end_example
 
-And there you go! We have an absolutely minimal, bare-bones setup of
+And there you go. We have an absolutely minimal, bare-bones setup of
 Oracle Express running on Debian Linux. Worth bearing in mind that if
 you want to make use of SQL Plus from within emacs you must make sure
 you start emacs on a shell that has all the variables defined in
