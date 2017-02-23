@@ -1,38 +1,184 @@
-#+title: Nerd Food: Northwind, or Using Dogen with ODB
+#+title: Nerd Food: Northwind, or Using Dogen with ODB - Part I
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
-* Debian and Ubuntu Preliminaries
+Thanks to my first [[https://github.com/DomainDrivenConsulting/dogen][Dogen]] paying customer, I finally got a chance to
+work with [[http://www.codesynthesis.com/products/odb/][ODB]] - [[www.codesynthesis.com][Code Synthesis']] amazingly interesting C++
+Object-Relational Mapping tool, built on the back of the GCC plugin
+system. I've personally always been in awe of what Boris Kolpackov has
+achieved, and, of course, it being a South African company made me all
+the more keen to use their products.
 
-Install alien:
+Astute readers of this blog will note that Dogen has been supporting
+ODB for quite some time. That is indeed true, but since I haven't used
+this feature in anger, I wasn't sure how good the support really was;
+our fairly trivial database model ([[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/projects/input_models/database.dia][Dia]]) explored only a small fraction
+of what is possible. Now that I finally had a chance to use it in
+production, I needed to expand the tests and try to replicate the
+customer's scenario as close as possible. As always in these
+situations, there was a snag: instead of using [[https://www.postgresql.org/][PostgreSQL]] - the RDBMS
+I had developed support for in Dogen - they were using Oracle. So my
+first task was to setup Oracle locally on my beloved Debian Linux.
+
+Never one to miss an opportunity, I decided this adventure was worthy
+of a quick blog post; it soon turned out to be a series of posts, if I
+was to do any justice to this strange and wild experiment, through all
+of its twists and turns. But hopefully it is worth the effort, as it
+also demonstrates what you can do with Dogen and ODB. And so, here we
+are.
+
+The first part of the series deals with just trying to convince Oracle
+to run. On Debian Testing - something that /obviously/ Oracle does not
+support out of the box.
+
+Before we proceed, a word to the wise: this is a *highly experimental*
+Oracle setup, which I embarked upon just because I could; follow it at
+your own peril, and *do not use it anywhere near production*. More
+generally, if you want to stick to the beaten track, use Oracle on
+CentOS or Windows. All of that said, if like me, you are a Debian
+person, well, there's not much for it other than to fire off a VM and
+start looking for those damned faint tracks in the jungle.
+
+* Alien Worlds
+
+The very first stumbling block was Oracle itself. After all, for all
+the many years of using this RBDMS at work - more than I care to admit
+in polite company - I suddenly realised I actually never used it at
+home. The good news was that Oracle did support Linux, and they did
+have a "free" version available: Oracle Database Express Edition
+(XE). A quick glance at the Oracle website revealed RPM's for 64-bits
+(Intel only, of course). So before anything else, I decided to brush
+up my knowledge of Alien.
+
+Alien is a debian package that converts RPMs into DEBs. I've used it
+in the past for another (lovely) Oracle technology: Java. It had
+worked wonderfully well then so I thought I'd give it a try. The
+[[https://help.ubuntu.com/community/RPM/AlienHowto][Ubuntu Alien HowTo]] is pretty straightforward, and so is
+[[https://wiki.debian.org/Alien][Debian's]]. Basically, obtain Alien:
 
 #+begin_example
 sudo apt-get install alien
 #+end_example
 
-https://help.ubuntu.com/community/RPM/AlienHowto
+And then apply it to the RPM in question. So the next quest was
+obtaining those darn RPMs.
 
-* Installing Oracle Express
+Of course, once you move away from the easy world of Free and Open
+Source Software, things tart to get complicated. Those lovely links
+you can easy Google for don't actually work until you sign up for an
+Oracle developer account, asking /all sorts/ of personal
+information. Sadly, even listening to Tesla earnings conferences
+requires registering these days. Undaunted, I filled all required
+fields, obtained my developer account and returned to download my
+loot. For Oracle Express it's rather straightforward: there is a
+grand-total of one package for Linux 64-bit, so you can't really go
+wrong. Here's the link, just in case:
 
-Download:
+- [[http://www.oracle.com/technetwork/database/database-technologies/express-edition/downloads/index.html][Oracle Express]]: download the 64-bit Linux RPM
+  (oracle-xe-11.2.0-1.0.x86_64.rpm.zip)
 
-- oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
-- oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+It is interesting that they decided to zip the RPM but you can easily
+unzip it with the =unzip= tool. The contents are the RPM Alien
+expects, plus a few oracle specific files which I decided to ignore
+for now:
 
 #+begin_example
-alien oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+$ unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+Archive:  oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+   creating: Disk1/
+   creating: Disk1/upgrade/
+  inflating: Disk1/upgrade/gen_inst.sql
+   creating: Disk1/response/
+  inflating: Disk1/response/xe.rsp
+  inflating: Disk1/oracle-xe-11.2.0-1.0.x86_64.rpm
+#+end_example
+
+As far as I could understand, the Oracle Express package contains just
+the database server; it does not include a command line client, nor
+does it include the APIs to build applications that talk to the
+database. To be fair, this is not an entirely uncommon approach;
+Debian also packages the PostgreSQL server separately from the
+development libraries. But behind =apt-get= and =synaptic=,
+installation of packages is all so trivial. Not so when you have to go
+through lots of detailed explanations of different packages and
+variations. But; onwards! In the [[http://www.oracle.com/technetwork/topics/linuxx86-64soft-092277.html][Instant client]] page, I settled on the
+downloading the following:
+
+- /Basic/: client shared libraries. Package:
+  oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+- /SQL Plus/: command-line client. Package:
+  oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+- /SDK/: header files to compile code. Package:
+  oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+
+As it turns out, you don't really need the SQL Plus package since its
+already included with Oracle Express.
+
+With all of these packages in hand, I swiftly get busy with Alien,
+only to also rather swiftly hit an issue:
+
+#+begin_example
+$ cd Disk1
+$ alien --scripts oracle-xe-11.2.0-1.0.x86_64.rpm
+Must run as root to convert to deb format (or you may use fakeroot).
+#+end_example
+
+Yes, sadly you cannot run alien directly as an unprivileged user. I
+did not wish to start reading up on [[https://wiki.debian.org/FakeRoot][FakeRoot]] - seems straightforward
+enough, to be fair, but hey - so I took the easy way out and ran all
+the Alien commands as root. Note also the =--scripts= to ensure the
+scripts will also get converted across. This will bring us some
+other... interesting issues, shall we say, but seems worthwhile doing.
+
+Quite a few seconds later (hey, it was a 300 MB RPM!), a nice looking
+DEB was generated:
+
+#+begin_example
+# alien --scripts oracle-xe-11.2.0-1.0.x86_64.rpm
+oracle-xe_11.2.0-2_amd64.deb generated
+#+end_example
+
+A rather promising start. For good measure, I repeated the process
+with all RPMs, all with similar results:
+
+#+begin_example
+# alien oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb
 oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb generated
 
-alien --scripts oracle-xe-11.2.0-1.0.x86_64.rpm
-oracle-xe_11.2.0-2_amd64.deb generated
-
-alien oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+# alien oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
 oracle-instantclient12.1-sqlplus_12.1.0.2.0-2_amd64.deb generated
 
-alien  oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+# alien  oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
 oracle-instantclient12.1-devel_12.1.0.2.0-2_amd64.deb generated
 #+end_example
 
-Install the packages:
+Voila, all DEBs generated. Of course, as the English love to say, the
+proof is in the pudding - whatever that means, exactly. So before one
+can celebrate, you should try to install the generated packages. That
+can be easily done with our old trusty =dpkg=:
+
+#+begin_example
+# dpkg -i oracle-xe_11.2.0-2_amd64.deb
+Selecting previously unselected package oracle-xe.
+(Reading database ... 564824 files and directories currently installed.)
+Preparing to unpack oracle-xe_11.2.0-2_amd64.deb ...
+Unpacking oracle-xe (11.2.0-2) ...
+Setting up oracle-xe (11.2.0-2) ...
+Executing post-install steps...
+/var/lib/dpkg/info/oracle-xe.postinst: line 114: /sbin/chkconfig: No such file or directory
+You must run '/etc/init.d/oracle-xe configure' as the root user to configure the database.
+
+Processing triggers for libc-bin (2.24-8) ...
+Processing triggers for systemd (232-8) ...
+Processing triggers for desktop-file-utils (0.23-1) ...
+Processing triggers for gnome-menus (3.13.3-8) ...
+Processing triggers for mime-support (3.60) ...
+Processing triggers for mime-support (3.60) ...
+#+end_example
+
+As it turns out, it seems the error for chkconfig is related to
+setting up the service to  autostart. Since this was not a key
+requirement for my purposes, I decided to ignore it. The remaining
+RPMs - or should I say DEBs - installed beautifully:
 
 #+begin_example
 # dpkg -i oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb
@@ -62,35 +208,28 @@ Unpacking oracle-instantclient12.1-devel (12.1.0.2.0-2) ...
 Setting up oracle-instantclient12.1-devel (12.1.0.2.0-2) ...
 #+end_example
 
-#+begin_example
-# dpkg -i oracle-xe_11.2.0-2_amd64.deb
-Selecting previously unselected package oracle-xe.
-(Reading database ... 564824 files and directories currently installed.)
-Preparing to unpack oracle-xe_11.2.0-2_amd64.deb ...
-Unpacking oracle-xe (11.2.0-2) ...
-Setting up oracle-xe (11.2.0-2) ...
-Executing post-install steps...
-/var/lib/dpkg/info/oracle-xe.postinst: line 114: /sbin/chkconfig: No such file or directory
-You must run '/etc/init.d/oracle-xe configure' as the root user to configure the database.
+* Talking to the Oracle
 
-Processing triggers for libc-bin (2.24-8) ...
-Processing triggers for systemd (232-8) ...
-Processing triggers for desktop-file-utils (0.23-1) ...
-Processing triggers for gnome-menus (3.13.3-8) ...
-Processing triggers for mime-support (3.60) ...
-Processing triggers for mime-support (3.60) ...
+So, at this point in time we have a bunch of stuff installed in all
+sorts of random (read: Oracle-like) locations. The database itself is
+under =ls /u01/app/oracle/product/11.2.0/=, and all the other packages
+seemed to have gone into =/usr/lib/oracle/12.1/client64/= and
+=/usr/include/oracle/12.1/client64/=. The first task is now to start
+the database server. For this we can rely on the scripts we installed
+earlier on. However, before we proceed, one little spoiler: we need to
+ensure the scripts can find =awk= at =/bin/awk= (these days it lives
+in =/usr/bin/awk=). For this we can do a swift (and brutal) hack:
+
+#+begin_example
+# ln -s /usr/bin/awk /bin/awk
 #+end_example
 
-Error for chkconfig is related to service autostart. Manual start works.
-
-Symlink awk:
-
-#+begin_example
-ln -s /usr/bin/awk /bin/awk
-#+end_example
+Now we can configure it. I accepted all of the defaults, and setup a
+suitably sensible password:
 
 #+begin_example
-root@euler:/home/marco/Downloads/oracle/Disk1# /etc/init.d/oracle-xe configure
+# cd /etc/init.d/
+# /etc/init.d/oracle-xe configure
 
 Oracle Database 11g Express Edition Configuration
 -------------------------------------------------
@@ -117,34 +256,116 @@ y
 
 Starting Oracle Net Listener...Done
 Configuring database...
-Database Configuration failed.  Look into /u01/app/oracle/product/11.2.0/xe/config/log for details
+Starting Oracle Database 11g Express Edition instance...Done
+Installation completed successfully.
 #+end_example
 
-
-[marco@euler oracle]$ export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
-export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
-[marco@euler oracle]$ /u01/app/oracle/product/11.2.0/xe/bin/tnsping XE
-/u01/app/oracle/product/11.2.0/xe/bin/tnsping XE
-
-
-* Installing ODB
-
-From the main [[http://www.codesynthesis.com/products/odb/download.xhtml][ODB website]], download:
-
-- [[http://www.codesynthesis.com/download/odb/2.4/odb_2.4.0-1_amd64.deb][odb_2.4.0-1_amd64.deb]]
-- [[http://www.codesynthesis.com/download/odb/2.4/libodb-2.4.0.tar.gz][libodb-2.4.0]]
-- [[http://www.codesynthesis.com/download/odb/2.4/libodb-pgsql-2.4.0.tar.gz][libodb-pgsql-2.4.0]]
-- [[http://www.codesynthesis.com/download/odb/2.4/libodb-oracle-2.4.0.tar.gz][libodb-oracle-2.4.0]]
-- [[http://www.codesynthesis.com/download/odb/2.4/libodb-boost-2.4.0.tar.gz][libodb-boost-2.4.0]]
-
-Using wget, as a regular user, do:
+After this I could indeed see a whole load of Oracle processes
+running:
 
 #+begin_example
-mkdir odb
-cd odb
-wget http://www.codesynthesis.com/download/odb/2.4/odb_2.4.0-1_amd64.deb -O odb_2.4.0-1_amd64.deb
-wget http://www.codesynthesis.com/download/odb/2.4/libodb-2.4.0.tar.gz -O libodb-2.4.0.tar.gz
-wget http://www.codesynthesis.com/download/odb/2.4/libodb-pgsql-2.4.0.tar.gz -O libodb-pgsql-2.4.0.tar.gz
-wget http://www.codesynthesis.com/download/odb/2.4/libodb-oracle-2.4.0.tar.gz -O libodb-oracle-2.4.0.tar.gz
-wget http://www.codesynthesis.com/download/odb/2.4/libodb-boost-2.4.0.tar.gz -O libodb-boost-2.4.0.tar.gz
+$ ps -ef | grep oracle
+oracle   20228     1  0 22:35 ?        00:00:00 /u01/app/oracle/product/11.2.0/xe/bin/tnslsnr LISTENER -inhe
+oracle   21251     1  0 22:36 ?        00:00:00 xe_pmon_XE
+oracle   21253     1  0 22:36 ?        00:00:00 xe_psp0_XE
+oracle   21257     1  0 22:36 ?        00:00:00 xe_vktm_XE
+oracle   21261     1  0 22:36 ?        00:00:00 xe_gen0_XE
+oracle   21263     1  0 22:36 ?        00:00:00 xe_diag_XE
+oracle   21265     1  0 22:36 ?        00:00:00 xe_dbrm_XE
+oracle   21267     1  0 22:36 ?        00:00:00 xe_dia0_XE
+oracle   21269     1  0 22:36 ?        00:00:00 xe_mman_XE
+oracle   21271     1  0 22:36 ?        00:00:00 xe_dbw0_XE
+oracle   21273     1  0 22:36 ?        00:00:00 xe_lgwr_XE
+...
 #+end_example
+
+For more details, there are also a bunch of useful logs under the
+Oracle directories:
+
+#+begin_example
+# ls -l /u01/app/oracle/product/11.2.0/xe/config/log
+ls -l /u01/app/oracle/product/11.2.0/xe/config/log
+total 20
+-rw-r--r-- 1 oracle dba 1369 Feb 23 22:36 CloneRmanRestore.log
+-rw-r--r-- 1 oracle dba 7377 Feb 23 22:36 cloneDBCreation.log
+-rw-r--r-- 1 oracle dba 1278 Feb 23 22:36 postDBCreation.log
+-rw-r--r-- 1 oracle dba  227 Feb 23 22:36 postScripts.log
+#+end_example
+
+Now, at this point in time, if all had gone according to plan we
+should be able to connect to our new instance. A typical trick in
+Oracle is to use =tnsping= to validate the setup. For this we need to
+know what to ping, and that is where [[https://docs.oracle.com/database/121/NETRF/tnsnames.htm#NETRF260][TNS Names]] comes in handy:
+
+#+begin_example
+$ cat /u01/app/oracle/product/11.2.0/xe/network/admin/tnsnames.ora
+# tnsnames.ora Network Configuration File:
+
+XE =
+  (DESCRIPTION =
+    (ADDRESS = (PROTOCOL = TCP)(HOST = lorenz)(PORT = 1521))
+    (CONNECT_DATA =
+      (SERVER = DEDICATED)
+      (SERVICE_NAME = XE)
+    )
+  )
+...
+#+end_example
+
+The magic word is =XE= (the net service name, i.e. what we will be
+connecting against). Now we can simply do:
+
+#+begin_example
+. /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+$ tnsping XE
+
+TNS Ping Utility for Linux: Version 11.2.0.2.0 - Production on 23-FEB-2017 22:52:04
+
+Copyright (c) 1997, 2011, Oracle.  All rights reserved.
+
+Used parameter files:
+
+
+Used TNSNAMES adapter to resolve the alias
+Attempting to contact (DESCRIPTION = (ADDRESS = (PROTOCOL = TCP)(HOST = lorenz)(PORT = 1521)) (CONNECT_DATA = (SERVER = DEDICATED) (SERVICE_NAME = XE)))
+OK (0 msec)
+#+end_example
+
+Success! The final test at this stage is to ensure we can connect with
+SQL Plus:
+
+#+begin_example
+sqlplus SYSTEM@XE
+
+SQL*Plus: Release 11.2.0.2.0 Production on Thu Feb 23 22:56:31 2017
+
+Copyright (c) 1982, 2011, Oracle.  All rights reserved.
+
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> select table_name from all_tables where rownum < 4;
+select table_name from all_tables where rownum < 4;
+
+TABLE_NAME
+------------------------------
+ICOL$
+CON$
+UNDO$
+#+end_example
+
+And there you go! We have an absolutely minimal, bare-bones setup of
+Oracle Express running on Debian Linux. Worth bearing in mind that if
+you want to make use of SQL Plus from within emacs you must make sure
+you start emacs on a shell that has all the variables defined in
+=oracle_env.sh=.
+
+* Conclusions
+
+In this first part we simply setup Oracle Express, and the client
+libraries. We also managed to prove that the setup is vaguely working
+by connecting to it first at a low-level via TNS ping and then at a
+proper client level using SQL Plus. The next part will wrap things up
+with the Oracle setup and then move on to ODB.
