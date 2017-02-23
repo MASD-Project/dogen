@@ -5,7 +5,7 @@
 
 * Mission Statement
 
-- Finish C# support;
+- Improve ODB testing.
 - Finish Upsilon support.
 
 * Stories
@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-13 Mon 22:33]
+#+CAPTION: Clock summary at [2017-02-14 Tue 17:48]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:47* |      |      | 100.0 |
+| *Total time*                                                                | *3:44* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:47   |      |      | 100.0 |
-| Active                                                                      |        | 2:47 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   5.4 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  18.0 |
-| STARTED Implement the database model using Northwind                        |        |      | 2:08 |  76.6 |
+| Stories                                                                     | 3:44   |      |      | 100.0 |
+| Active                                                                      |        | 3:44 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:09 |   4.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  13.4 |
+| STARTED Implement the database model using Northwind                        |        |      | 3:05 |  82.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -81,6 +81,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-14 Tue 18:16]
+    CLOCK: [2017-02-14 Tue 06:33]--[2017-02-14 Tue 07:30] =>  0:57
     CLOCK: [2017-02-13 Mon 20:25]--[2017-02-13 Mon 22:33] =>  2:08
 
 Now we are using Dogen in anger with ODB, we need to make sure the
@@ -89,6 +91,9 @@ easy way of achieving this is to use Microsoft's Northwind Database as
 the base for the model.
 
 - [[https://northwinddatabase.codeplex.com/][Northwind Database]]
+
+We should implement it using Oracle and use this to test the changes
+to ODB's oracle support.
 
 *** Add ODB to the build machine                                      :story:
 

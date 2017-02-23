@@ -1,0 +1,150 @@
+#+title: Nerd Food: Northwind, or Using Dogen with ODB
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+* Debian and Ubuntu Preliminaries
+
+Install alien:
+
+#+begin_example
+sudo apt-get install alien
+#+end_example
+
+https://help.ubuntu.com/community/RPM/AlienHowto
+
+* Installing Oracle Express
+
+Download:
+
+- oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+- oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+
+#+begin_example
+alien oracle-instantclient12.1-basic-12.1.0.2.0-1.x86_64.rpm
+oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb generated
+
+alien --scripts oracle-xe-11.2.0-1.0.x86_64.rpm
+oracle-xe_11.2.0-2_amd64.deb generated
+
+alien oracle-instantclient12.1-sqlplus-12.1.0.2.0-1.x86_64.rpm
+oracle-instantclient12.1-sqlplus_12.1.0.2.0-2_amd64.deb generated
+
+alien  oracle-instantclient12.1-devel-12.1.0.2.0-1.x86_64.rpm
+oracle-instantclient12.1-devel_12.1.0.2.0-2_amd64.deb generated
+#+end_example
+
+Install the packages:
+
+#+begin_example
+# dpkg -i oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb
+Selecting previously unselected package oracle-instantclient12.1-basic.
+(Reading database ... 564801 files and directories currently installed.)
+Preparing to unpack oracle-instantclient12.1-basic_12.1.0.2.0-2_amd64.deb ...
+Unpacking oracle-instantclient12.1-basic (12.1.0.2.0-2) ...
+Setting up oracle-instantclient12.1-basic (12.1.0.2.0-2) ...
+Processing triggers for libc-bin (2.24-8) ...
+#+end_example
+
+#+begin_example
+# dpkg -i oracle-instantclient12.1-sqlplus_12.1.0.2.0-2_amd64.deb
+Selecting previously unselected package oracle-instantclient12.1-sqlplus.
+(Reading database ... 567895 files and directories currently installed.)
+Preparing to unpack oracle-instantclient12.1-sqlplus_12.1.0.2.0-2_amd64.deb ...
+Unpacking oracle-instantclient12.1-sqlplus (12.1.0.2.0-2) ...
+Setting up oracle-instantclient12.1-sqlplus (12.1.0.2.0-2) ...
+#+end_example
+
+#+begin_example
+# dpkg -i oracle-instantclient12.1-devel_12.1.0.2.0-2_amd64.deb
+Selecting previously unselected package oracle-instantclient12.1-devel.
+(Reading database ... 567903 files and directories currently installed.)
+Preparing to unpack oracle-instantclient12.1-devel_12.1.0.2.0-2_amd64.deb ...
+Unpacking oracle-instantclient12.1-devel (12.1.0.2.0-2) ...
+Setting up oracle-instantclient12.1-devel (12.1.0.2.0-2) ...
+#+end_example
+
+#+begin_example
+# dpkg -i oracle-xe_11.2.0-2_amd64.deb
+Selecting previously unselected package oracle-xe.
+(Reading database ... 564824 files and directories currently installed.)
+Preparing to unpack oracle-xe_11.2.0-2_amd64.deb ...
+Unpacking oracle-xe (11.2.0-2) ...
+Setting up oracle-xe (11.2.0-2) ...
+Executing post-install steps...
+/var/lib/dpkg/info/oracle-xe.postinst: line 114: /sbin/chkconfig: No such file or directory
+You must run '/etc/init.d/oracle-xe configure' as the root user to configure the database.
+
+Processing triggers for libc-bin (2.24-8) ...
+Processing triggers for systemd (232-8) ...
+Processing triggers for desktop-file-utils (0.23-1) ...
+Processing triggers for gnome-menus (3.13.3-8) ...
+Processing triggers for mime-support (3.60) ...
+Processing triggers for mime-support (3.60) ...
+#+end_example
+
+Error for chkconfig is related to service autostart. Manual start works.
+
+Symlink awk:
+
+#+begin_example
+ln -s /usr/bin/awk /bin/awk
+#+end_example
+
+#+begin_example
+root@euler:/home/marco/Downloads/oracle/Disk1# /etc/init.d/oracle-xe configure
+
+Oracle Database 11g Express Edition Configuration
+-------------------------------------------------
+This will configure on-boot properties of Oracle Database 11g Express
+Edition.  The following questions will determine whether the database should
+be starting upon system boot, the ports it will use, and the passwords that
+will be used for database accounts.  Press <Enter> to accept the defaults.
+Ctrl-C will abort.
+
+Specify the HTTP port that will be used for Oracle Application Express [8080]:
+
+Specify a port that will be used for the database listener [1521]:
+
+Specify a password to be used for database accounts.  Note that the same
+password will be used for SYS and SYSTEM.  Oracle recommends the use of
+different passwords for each database account.  This can be done after
+initial configuration:
+
+Confirm the password:
+
+
+Do you want Oracle Database 11g Express Edition to be started on boot (y/n) [y]:y
+y
+
+Starting Oracle Net Listener...Done
+Configuring database...
+Database Configuration failed.  Look into /u01/app/oracle/product/11.2.0/xe/config/log for details
+#+end_example
+
+
+[marco@euler oracle]$ export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe
+[marco@euler oracle]$ /u01/app/oracle/product/11.2.0/xe/bin/tnsping XE
+/u01/app/oracle/product/11.2.0/xe/bin/tnsping XE
+
+
+* Installing ODB
+
+From the main [[http://www.codesynthesis.com/products/odb/download.xhtml][ODB website]], download:
+
+- [[http://www.codesynthesis.com/download/odb/2.4/odb_2.4.0-1_amd64.deb][odb_2.4.0-1_amd64.deb]]
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-2.4.0.tar.gz][libodb-2.4.0]]
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-pgsql-2.4.0.tar.gz][libodb-pgsql-2.4.0]]
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-oracle-2.4.0.tar.gz][libodb-oracle-2.4.0]]
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-boost-2.4.0.tar.gz][libodb-boost-2.4.0]]
+
+Using wget, as a regular user, do:
+
+#+begin_example
+mkdir odb
+cd odb
+wget http://www.codesynthesis.com/download/odb/2.4/odb_2.4.0-1_amd64.deb -O odb_2.4.0-1_amd64.deb
+wget http://www.codesynthesis.com/download/odb/2.4/libodb-2.4.0.tar.gz -O libodb-2.4.0.tar.gz
+wget http://www.codesynthesis.com/download/odb/2.4/libodb-pgsql-2.4.0.tar.gz -O libodb-pgsql-2.4.0.tar.gz
+wget http://www.codesynthesis.com/download/odb/2.4/libodb-oracle-2.4.0.tar.gz -O libodb-oracle-2.4.0.tar.gz
+wget http://www.codesynthesis.com/download/odb/2.4/libodb-boost-2.4.0.tar.gz -O libodb-boost-2.4.0.tar.gz
+#+end_example
