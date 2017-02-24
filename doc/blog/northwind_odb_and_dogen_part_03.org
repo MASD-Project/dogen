@@ -1,0 +1,164 @@
+#+title: Nerd Food: Northwind, or Using Dogen with ODB - Part III
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+On [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] of this series we got our Oracle Express set up - added the
+required schemas and so forth - and we built and installed latest
+ODB. After this grand build up, we shall finally get a chance to make
+use of Dogen and ODB.
+
+* Installing Dogen
+
+Before we go much further we need to install Dogen. This is fairly
+straightforward: we can just grab a recent relese from BinTray:
+
+- [[https://dl.bintray.com/domaindrivenconsulting/Dogen/0.97.0/dogen_0.97.0_amd64-applications.deb][dogen 0.97.0 amd64-applications.deb]]
+
+The process is as per any DEB:
+
+#+begin_example
+$ wget https://dl.bintray.com/domaindrivenconsulting/Dogen/0.97.0/dogen_0.97.0_amd64-applications.deb -O dogen_0.97.0_amd64-applications.deb
+$ sudo dpkg -i dogen_0.97.0_amd64-applications.deb
+[sudo] password for USER:
+Selecting previously unselected package dogen-applications.
+(Reading database ... 551550 files and directories currently installed.)
+Preparing to unpack dogen_0.97.0_amd64-applications.deb ...
+Unpacking dogen-applications (0.97.0) ...
+Setting up dogen-applications (0.97.0) ...
+#+end_example
+
+If all has gone according to plan, you should see something along the
+lines of:
+
+#+begin_example
+$ dogen.knitter --version
+Dogen Knitter v0.97.0
+Copyright (C) 2015-2017 Domain Driven Consulting Plc.
+Copyright (C) 2012-2015 Marco Craveiro.
+License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+#+end_example
+
+One final note on installations: I had previously assumed Boost to be
+installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][part II]] but - if nothing else, purely for the sake of
+completeness - here are the instructions to set it up, as well as
+CMake. We will need both of these in order to build our application,
+but we won't dwell on them /too/ much on them or else this series of
+posts would go on forever.
+
+#+begin_example
+# apt-get install cmake
+# apt-get install libboost-all-dev
+#+end_example
+
+Mind you, you don't /actually/ need the entirety of Boost for this
+exercise, but it's just easier this way.
+
+* The Application
+
+At long last, we can start to create our very simple project. We will
+first start by going through all the motions of setting up the project
+and getting it to build and run, and then discuss in a bit more detail
+just what exactly this project is doing.
+
+Lets call our project =app=. A couple of simple commands will get us
+on our way:
+
+#+begin_example
+$ mkdir app
+$ cd app
+$ echo log > .gitignore
+$ echo build/output >> .gitignore
+$ mkdir -p build/cmake
+$ mkdir build/output
+$ wget -q https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/a7b1383f52ee721515254377054cef3adfdffab1/build/cmake/FindODB.cmake -O build/cmake/FindODB.cmake
+$ mkdir -p projects/input_models
+$ mkdir projects/tool
+$ wget -q https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/a7b1383f52ee721515254377054cef3adfdffab1/projects/input_models/database.dia -O projects/input_models/database.dia_tmp
+$ cat projects/input_models/database.dia_tmp | sed s/dogen::test_models/app/g > projects/input_models/database.dia_tmp_2
+$ cat projects/input_models/database.dia_tmp_2 | sed s/dogen.disable_cmake/dogen/g > projects/input_models/database.dia
+$ rm projects/input_models/database.dia_tmp projects/input_models/database.dia_tmp_2
+#+end_example
+
+To recap, we created a directory called =app=, created a basic folder
+structure for the project and downloaded a couple of useful files: the
+CMake file for ODB and Dogen's database test model in [[https://wiki.gnome.org/Apps/Dia/][Dia]] format. Note
+also that we did some trivial hackery on the model, massaging it to
+fit the purposes of the current exercise. You don't need to worry too
+much about it, but if you are curious:
+
+- we updated its "external module" to point to =app= rather than
+  =dogen::test_modules=. This is not strictly necessary but will just
+  make the generated code a tad more sensible - instead of generating
+  namespaces for =dogen= and =test_modules=, it just generates a
+  namespace for =app=.
+- we also updated the profile to a standard dogen profile. This is
+  just so that Dogen generates the CMake build files.
+
+Since we commit early, and commit often, this is a good time to
+version control our project:
+
+#+begin_example
+$ git init .
+$ git add -A
+$ git commit -m "initial commit"
+#+end_example
+
+Now we can generate the source code for the database model. Normally
+you'd have [[https://github.com/DomainDrivenConsulting/dogen/blob/a7b1383f52ee721515254377054cef3adfdffab1/projects/input_models/CMakeLists.txt][a Dogen target in your CMake file]], but since we're trying
+to keep things easy we will just run the commands ourselves:
+
+#+begin_example
+$ dogen.knitter --delete-extra-files --output-dir projects --target projects/input_models/database.dia
+$ git add -A projects/database
+$ git commit -m "generate database model"
+<snip>
+#+end_example
+
+Next, we add the top-level CMake file; call it =CMakeLists.txt= and
+add the following contents:
+
+#+begin_example
+cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
+project(app)
+
+list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
+find_package(Boost 1.62 REQUIRED COMPONENTS
+    system
+    serialization
+    date_time
+    filesystem
+    program_options
+    )
+
+find_package(ODB REQUIRED)
+if(ODB_FOUND)
+    include_directories(SYSTEM ${ODB_INCLUDE_DIR})
+    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
+endif()
+
+include_directories(${CMAKE_SOURCE_DIR}/projects/database/include)
+add_subdirectory(${CMAKE_SOURCE_DIR}/projects/database)
+add_executable(tool projects/tool/main.cpp)
+#+end_example
+
+Finally we need to create a main under =projects/tool/main.cpp=. We'll
+keep it trivial for now and update it later on.
+
+#+begin_src c++
+#include <iostream>
+
+int main() {
+    return 0;
+}
+#+end_src
+
+At this point, if all has gone well, we should be in a position to
+build; let's first check point it into git, of course:
+
+#+begin_example
+$ git add -A
+$ git commit -m "add cmake files and main."
+#+end_example
+
+CMAKE_INCLUDE_PATH=/full/path/to/local/include CMAKE_LIBRARY_PATH=/full/path/to/local/lib cmake ../..
+
+* Conclusion

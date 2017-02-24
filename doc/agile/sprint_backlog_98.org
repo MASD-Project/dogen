@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-24 Fri 13:16]
+#+CAPTION: Clock summary at [2017-02-24 Fri 22:55]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *11:59* |       |       | 100.0 |
+| *Total time*                                                                | *13:53* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 11:59   |       |       | 100.0 |
-| Active                                                                      |         | 11:59 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   3.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   4.2 |
-| STARTED Implement the database model using Northwind                        |         |       | 11:05 |  92.5 |
+| Stories                                                                     | 13:53   |       |       | 100.0 |
+| Active                                                                      |         | 13:53 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   3.6 |
+| STARTED Implement the database model using Northwind                        |         |       | 12:59 |  93.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -82,6 +82,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
     CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
     CLOCK: [2017-02-24 Fri 09:01]--[2017-02-24 Fri 10:33] =>  1:32
     CLOCK: [2017-02-23 Thu 23:06]--[2017-02-23 Thu 23:39] =>  0:33
