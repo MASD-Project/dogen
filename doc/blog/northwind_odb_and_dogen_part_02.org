@@ -3,9 +3,10 @@
 
 On [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]] of this series, we got our Oracle Express database up and
 running against Debian Testing. It involved quite a bit of fiddling
-but seemed to get us there in the end. In Part II we shall now finish
-the configuration of the Oracle database and start our work on the
-application side.
+but we seemed to get there in the end. In Part II we shall now finish
+the configuration of the Oracle database and set up the application
+dependencies. On Part III we will finally get to the Dogen model, and
+start to make use of ODB.
 
 * What's in a Schema?
 
@@ -151,8 +152,7 @@ SQL> grant select on test to basic;
 Grant succeeded.
 
 SQL> Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
-[marco@lorenz init.d]$ sqlplus basic@XE
-sqlplus basic@XE
+$ sqlplus basic@XE
 
 SQL*Plus: Release 11.2.0.2.0 Production on Fri Feb 24 10:23:04 2017
 
@@ -181,8 +181,176 @@ to enter the application world.
 
 * Enter ODB
 
+Setting up ODB is fairly easy, especially if you are on Debian: you
+can simply obtain it from =apt-get= or =synaptic=. The only slight
+snag is, I could not find the oracle dependencies
+(i.e. =libodb-oracle=). Likely this is because they depend on OCI,
+which is non-free, so Debian either does not bother to package it at
+all or you need some kind of special (non-free) repo for it. As it
+was, instead of losing myself on wild goose chases, I thought easier
+to build from source. And since I had to build /one/ from source,
+might as well build /all/ (or almost all) to demonstrate the whole
+process from scratch as it is pretty straightforward, really.
 
+Before we proceed, one warning: when it comes to the libraries, best
+if you either use your package manager /or/ build from source. You
+should probably only mix-and-match if you really know what you are
+doing; if you do and things get tangled up, it may take you a long
+while to figure out the source of your woes. Note also that this
+warning applies to the support libraries but not to the ODB compiler
+itself.
 
+So, the manual approach. I first started by revisiting my previous
+notes on building ODB; as it happens, I had covered installing ODB
+from source previously [[http://mcraveiro.blogspot.co.uk/2013/03/nerd-food-installing-latest-stable-odb.html][here]] for version 2.2. However, those
+instructions have largely bit-rotted at the Dogen end and things have
+changed slightly since that post, so a revisit is worthwhile.
 
+As usual, we start by grabbing all of the packages from the main [[http://www.codesynthesis.com/products/odb/download.xhtml][ODB
+website]]:
 
-* Conclusions
+-  [[http://www.codesynthesis.com/download/odb/2.4/odb_2.4.0-1_amd64.deb][odb 2.4.0-1 amd64.deb]]: the ODB compiler itself.
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-2.4.0.tar.gz][libodb-2.4.0]]: the main ODB library, required by all backends.
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-pgsql-2.4.0.tar.gz][libodb-pgsql-2.4.0]]: the PostgreSQL backend. We don't need it today,
+  of course, but since PostgreSQL is my DB of choice I always install
+  it.
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-oracle-2.4.0.tar.gz][libodb-oracle-2.4.0]]: the Oracle backend. We will need this one.
+- [[http://www.codesynthesis.com/download/odb/2.4/libodb-boost-2.4.0.tar.gz][libodb-boost-2.4.0]]: the ODB boost profile. This allows using boost
+  types in your Dogen model and having ODB do the right thing in terms
+  of ORM mapping. Our Northwind model does not use boost at present,
+  but I intend to change it as soon as possible as this is a very
+  important feature for customers.
+
+Of course, if you are too lazy to click on links, just use =wget=:
+
+#+begin_example
+$ mkdir odb
+$ cd odb
+$ wget http://www.codesynthesis.com/download/odb/2.4/odb_2.4.0-1_amd64.deb -O odb_2.4.0-1_amd64.deb
+$ wget http://www.codesynthesis.com/download/odb/2.4/libodb-2.4.0.tar.gz -O libodb-2.4.0.tar.gz
+$ wget http://www.codesynthesis.com/download/odb/2.4/libodb-pgsql-2.4.0.tar.gz -O libodb-pgsql-2.4.0.tar.gz
+$ wget http://www.codesynthesis.com/download/odb/2.4/libodb-oracle-2.4.0.tar.gz -O libodb-oracle-2.4.0.tar.gz
+$ wget http://www.codesynthesis.com/download/odb/2.4/libodb-boost-2.4.0.tar.gz -O libodb-boost-2.4.0.tar.gz
+#+end_example
+
+We start with the DEB, as simple as always:
+
+#+begin_example
+# dpkg -i odb_2.4.0-1_amd64.deb
+Selecting previously unselected package odb.
+(Reading database ... 549841 files and directories currently installed.)
+Preparing to unpack odb_2.4.0-1_amd64.deb ...
+Unpacking odb (2.4.0-1) ...
+Setting up odb (2.4.0-1) ...
+Processing triggers for man-db (2.7.6.1-2) ...
+#+end_example
+
+I tend to store locally built software under my home directory, so
+that's where we'll place the libraries:
+
+#+begin_example
+$ mkdir ~/local
+$ tar -xaf libodb-2.4.0.tar.gz
+$ cd libodb-2.4.0/
+$ ./configure --prefix=/full/path/to/local
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-2.4.0'
+$ make install
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-2.4.0'
+#+end_example
+
+Remember to replace =/full/path/to/local= with your installation
+directory. The process is similar for the other three packages, with
+one crucial difference: you need to ensure the environment variables
+are set to place all required dependencies in the include and link
+path. This is achieved via the venerable environment variables
+=CPPFLAGS= and =LDFLAGS= (and =LD_LIBRARY_PATH= as we shall see). You
+may bump into =--with-libodb=. However, be careful; the documentation
+states:
+
+#+begin_quote
+If these libraries are not installed and you would like to use their
+build directories instead, you can use the =--with-libodb=, and
+=--with-boost= configure options to specify their locations, for
+example:
+
+=./configure --with-boost=/tmp/boost=
+#+end_quote
+
+So if you did =make install=, you need the environment variables
+instead.
+
+Without further ado, here are the shell commands. First boost; do note
+I am relying on the presence of Debian's system boost; if you have a
+local build of boost, which is not in the flags below, you will also
+need to add a path to it.
+
+#+begin_example
+$ cd ..
+$ tar -xaf libodb-boost-2.4.0.tar.gz
+$ cd libodb-boost-2.4.0/
+$ CPPFLAGS=-I/full/path/to/local/include LDFLAGS=-L/full/path/to/local/lib ./configure --prefix=/full/path/to/local
+<snip>
+config.status: executing libtool-rpath-patch commands
+$ make -j5
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-boost-2.4.0'
+$ make install
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-boost-2.4.0'
+#+end_example
+
+For PostgreSQL again I am relying on the header files installed in
+Debian. The commands are:
+
+#+begin_example
+$ cd ..
+$ tar -xaf libodb-pgsql-2.4.0.tar.gz
+$ cd libodb-pgsql-2.4.0/
+$ CPPFLAGS=-I/full/path/to/local/include LDFLAGS=-L/full/path/to/local/lib ./configure --prefix=/full/path/to/local
+<snip>
+config.status: executing libtool-rpath-patch commands
+$ make -j5
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-pgsql-2.4.0'
+$ make install
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-pgsql-2.4.0'
+#+end_example
+
+Finally, Oracle. For this we need to supply the locations of the
+downloaded drivers or else ODB will not find the Oracle header and
+libraries. If you recall from the previous post, they are located in
+=/usr/include/oracle/12.1/client64= and
+=/usr/lib/oracle/12.1/client64/lib=, so we must augment the flags with
+those two paths. In addition, I found =configure= was failing with
+errors finding shared objects, so I added =LD_LIBRARY_PATH= for good
+measure. The end result was as follows:
+
+#+begin_example
+$ cd ..
+$ tar -xaf libodb-oracle-2.4.0.tar.gz
+$ cd libodb-oracle-2.4.0
+$ LD_LIBRARY_PATH=/usr/lib/oracle/12.1/client64/lib CPPFLAGS="-I/full/path/to/local/include -I/usr/include/oracle/12.1/client64" LDFLAGS="-L/full/path/to/local/lib -L/usr/lib/oracle/12.1/client64/lib" ./configure --prefix=/full/path/to/local
+<snip>
+config.status: executing libtool-rpath-patch commands
+$ make -j5
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-oracle-2.4.0'
+$ make install
+<snip>
+make[1]: Leaving directory '/path/to/build/directory/odb/2.4/libodb-oracle-2.4.0'
+#+end_example
+
+And there you are; all libraries built and installed into our local
+directory, ready to be used.
+
+* Conclusion
+
+In this part we've configured the Oracle Express database with the
+application users, and we sanity checked the configuration. Once that
+was out of the way, we built and installed all of the ODB libraries
+required by application code.
+
+On Part III we will finally start making use of this setup and attempt
+to connect to the Oracle database. Stay tuned!
