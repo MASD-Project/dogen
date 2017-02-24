@@ -1,0 +1,188 @@
+#+title: Nerd Food: Northwind, or Using Dogen with ODB - Part II
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+On [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]] of this series, we got our Oracle Express database up and
+running against Debian Testing. It involved quite a bit of fiddling
+but seemed to get us there in the end. In Part II we shall now finish
+the configuration of the Oracle database and start our work on the
+application side.
+
+* What's in a Schema?
+
+The first thing we need to do to our database is add the "application
+users". This is a common approach to most server side apps, where we
+tend to have "service users" that login to the database and act upon
+user requests on their behalf. We can then use audit tables to stamp
+the user actions so we can monitor them. We can also have application
+level permissions that stop users from doing silly things. This is of
+course a step up from the applications in the nineties, where one
+would have one database account for each user - allowing all sorts of
+weird and wonderful things such as users connecting directly to
+databases via ODBC and Excel or Access. I guess nowadays developers
+don't even know someone thought this to be a good idea at one point.
+
+When I say "database user", most developers exposed to RDBMs
+immediately associate this to a user account. This is of course how
+most databases work, but /obviously/ not so with Oracle. In Oracle,
+"users" and "schemas" are conflated, so much so it's hard to tell if
+there is any difference between them. For the purist RDBM user, a
+schema is a /schema/ - a collection of tables and other database
+objects, effectively a namespace - and a user is a /user/ - a person
+(real or otherwise) that owns database objects. In Oracle these two
+more or less map to the same concept. So when you create a user, you
+have created a schema and you can start adding tables to it; and when
+you refer to database objects, you prefix them by the user name just
+as you would if they belonged to a schema. And, of course, you can
+have users that have no database objects for themselves, but which
+were granted permission to access database objects from other users.
+
+So our first task is to create two schemas; these are required by the
+Dogen model which we will use as our "application". They are:
+
+- =basic=
+- =northwind=
+
+As I mentioned before, I had created some fairly basic tests for ODB
+support in Dogen. Those entities were placed in the aptly named schema
+=basic=. I then decided to extend the schema with something a bit more
+meaty, which is where =northwind= comes in.
+
+For the oldest readers, especially those with a Microsoft background,
+Northwind is bound to conjure memories. Many of us learned Microsoft
+Access at some point in the nineties, and in those days the samples
+were pure gold. I was lucky enough to learn about relational databases
+in my high-school days, using [[https://en.wikipedia.org/wiki/Clipper_(programming_language)][Clipper]] and [[https://en.wikipedia.org/wiki/DBase][dBASE IV]], so the transition
+to Microsoft Access was more of an exercise in mapping than learning
+proper. And that's where Northwind came in. It was a "large" database,
+with forms and queries and tables and all sorts of weird and wonderful
+things; every time you needed something done to your database you'd
+check first to see how Northwind had done it.
+
+Now that we are much older, of course, we can see the flaws of
+Northwind and even [[http://www.hanselman.com/blog/CommunityCallToActionNOTNorthwind.aspx][call for its abolition]]. But you must remember that
+in the nineties there was no Internet for most of us - even dial-up
+was pretty rare where I was - and up-to-date IT books were almost as
+scarce, so samples were like gold dust. So for all of these historic
+reasons and as an homage to my olden days, I decided to implement the
+Northwind schema in Dogen and ODB; it may not cover all corner cases,
+but it is certainly a step up on my previous =basic= tests.
+
+Enough about history and motivations. Returning to our SQLPlus from
+[[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]], where we were logged in as =SYSTEM=, we start first by
+creating a table space and then the users which will make use of that
+table space:
+
+#+begin_example
+
+SQL> create tablespace tbs_01 datafile 'tbs_f01.dbf' size 200M online;
+
+Tablespace created.
+
+SQL> create user basic identified by "PASSWORD" default tablespace tbs_01 quota 100M on tbs_01;
+User created.
+
+SQL> create user northwind identified by "PASSWORD" default tablespace tbs_01 quota 100M on tbs_01;
+
+User created.
+#+end_example
+
+Remember to replace =PASSWORD= with your own passwords. This is of
+course a very simple setup; in the real world you would have to take
+great care setting the users and table spaces up, including thinking
+about temporary table spaces and so forth. But for our simplistic
+purposes this suffices. Now we need to grant these users a couple of
+useful privileges - again, for a real setup, you'd need quite a bit
+more:
+
+#+begin_example
+SQL> GRANT create session TO basic;
+GRANT create session TO basic;
+
+Grant succeeded.
+
+SQL> GRANT create table TO basic;
+GRANT create table TO basic;
+
+Grant succeeded.
+
+SQL> GRANT create session TO northwind;
+GRANT create session TO northwind;
+
+Grant succeeded.
+
+SQL> GRANT create table TO northwind;
+GRANT create table TO northwind;
+
+Grant succeeded.
+#+end_example
+
+If all went well, we should now be able to exit the =SYSTEM= session,
+start a new one with one of these users, and play with a test table:
+
+#+begin_example
+$ sqlplus northwind@XE
+
+SQL*Plus: Release 11.2.0.2.0 Production on Fri Feb 24 10:20:10 2017
+
+Copyright (c) 1982, 2011, Oracle.  All rights reserved.
+
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> create table test ( name varchar(10) );
+
+Table created.
+
+SQL> insert into test(name) values ('kianda');
+insert into test(name) values ('kianda');
+
+1 row created.
+
+SQL> select * from test;
+
+NAME
+----------
+kianda
+
+SQL> grant select on test to basic;
+
+Grant succeeded.
+
+SQL> Disconnected from Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+[marco@lorenz init.d]$ sqlplus basic@XE
+sqlplus basic@XE
+
+SQL*Plus: Release 11.2.0.2.0 Production on Fri Feb 24 10:23:04 2017
+
+Copyright (c) 1982, 2011, Oracle.  All rights reserved.
+
+Enter password:
+
+Connected to:
+Oracle Database 11g Express Edition Release 11.2.0.2.0 - 64bit Production
+
+SQL> select * from northwind.test;
+
+NAME
+----------
+kianda
+#+end_example
+
+This all looks quite promising. To recap, we logged in with user
+=northwind=, created a table, inserted some random data and selected
+it back; all looked ok. Then for good measure, we granted the rights
+to see this test table to user =basic=; logged in as that user and
+selected the test table, with the expected results.
+
+At this point we consider our Oracle setup completed and we're ready
+to enter the application world.
+
+* Enter ODB
+
+
+
+
+
+* Conclusions
