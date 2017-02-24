@@ -145,6 +145,45 @@ modified   Src/XDatabase/src/options.odb
 --profile boost
 #+end_example
 
+*** Add prefetch support to ODB                                       :story:
+
+As per Boris email:
+
+#+begin_quote
+Hm, I am not sure the bulk approach (with a compiler-time pragma) is
+right in this case. There we don't really have a choice since we need
+to know the "batch buffer" size.
+
+But here it is all runtime. Plus, you may want to have different
+prefetch for different queries of the same object. In fact, you
+can already customize it for queries (but not for object loads)
+by using prepared queries (Section 4.5 in the manual):
+
+1. Create prepared query.
+
+2. Get its statement (statement()).
+
+3. Cast it to odb::oracle::select_statement.
+
+4. Call handle() on the result to get OCIStmt*.
+
+5. Set custom OCI_ATTR_PREFETCH_ROWS.
+
+6. Execute the query.
+
+The problems with this approach are: (1) it is tedious and (2) it
+doesn't work for non-query SELECT's (e.g., database::load()). So
+perhaps the way to do it is:
+
+1. Provide prefetch() functions on oracle::database() and
+   oracle::connection() that can be used to modify database-wide
+   and connection-wide prefetch values. Also set it to some
+   reasonable default (say 512?)
+
+2. Provide oracle::select_statement::prefetch() to make the
+   prepared query approach less tedious.
+#+end_quote
+
 *** Add ODB to the build machine                                      :story:
 
 At present we are only compiling and running the ODB tests
