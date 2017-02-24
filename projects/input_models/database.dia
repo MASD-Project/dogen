@@ -65,13 +65,13 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Class" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="6,-51"/>
+        <dia:point val="8,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,-51.05;19.255,-45.75"/>
+        <dia:rectangle val="7.95,-49.05;21.255,-43.75"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6,-51"/>
+        <dia:point val="8,-49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.205"/>
@@ -88,7 +88,7 @@
       <dia:attribute name="comment">
         <dia:string>#Simple value class with no primary keys, etc.
 #DOGEN odb_pragma=no_id
-#DOGEN odb_pragma=schema("kitanda")#</dia:string>
+#DOGEN odb_pragma=schema("basic")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -270,13 +270,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="25,-51"/>
+        <dia:point val="26,-49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,-51.05;30.17,-48.15"/>
+        <dia:rectangle val="25.95,-49.05;31.17,-46.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="25,-51"/>
+        <dia:point val="26,-49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.1200000000000001"/>
@@ -292,7 +292,7 @@
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN odb_pragma=no_id
-#DOGEN odb_pragma=schema("kitanda")#</dia:string>
+#DOGEN odb_pragma=schema("basic")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -405,13 +405,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O2">
       <dia:attribute name="obj_pos">
-        <dia:point val="6,-43"/>
+        <dia:point val="8,-39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,-43.05;14.635,-39.35"/>
+        <dia:rectangle val="7.95,-39.05;16.635,-35.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6,-43"/>
+        <dia:point val="8,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -426,7 +426,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN odb_pragma=schema("kitanda")#</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("basic")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -562,13 +562,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O3">
       <dia:attribute name="obj_pos">
-        <dia:point val="26,-43"/>
+        <dia:point val="22,-39"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="25.95,-43.05;42.335,-39.35"/>
+        <dia:rectangle val="21.95,-39.05;38.335,-35.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="26,-43"/>
+        <dia:point val="22,-39"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="16.285"/>
@@ -583,7 +583,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN odb_pragma=schema("kitanda")
+        <dia:string>##DOGEN odb_pragma=schema("basic")
 #DOGEN odb_pragma=no_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -756,19 +756,19 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="25.2925,-32"/>
+        <dia:point val="21.2925,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.5425,-39.45;34.3425,-31.2"/>
+        <dia:rectangle val="20.5425,-35.45;30.3425,-27.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="25.2925,-32"/>
-        <dia:point val="25.2925,-35"/>
-        <dia:point val="34.1425,-35"/>
-        <dia:point val="34.1425,-39.4"/>
+        <dia:point val="21.2925,-28"/>
+        <dia:point val="21.2925,-31"/>
+        <dia:point val="30.1425,-31"/>
+        <dia:point val="30.1425,-35.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -791,13 +791,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="21,-32"/>
+        <dia:point val="17,-28"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="20.95,-32.05;29.635,-29.15"/>
+        <dia:rectangle val="16.95,-28.05;25.635,-25.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="21,-32"/>
+        <dia:point val="17,-28"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="8.5849999999999991"/>
@@ -812,7 +812,7 @@
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN odb_pragma=schema("kitanda")#</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("basic")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -925,16 +925,16 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="6,-63"/>
+        <dia:point val="8,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.95,-63.05;29.28,-53.25"/>
+        <dia:rectangle val="7.95,-63.05;31.28,-53.25"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="6,-63"/>
+        <dia:point val="8,-63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="23.230000000000004"/>
@@ -973,7 +973,7 @@ types to test features not covered in Northwind.
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="6.35,-61.755"/>
+            <dia:point val="8.35,-61.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2112,7 +2112,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2383,7 +2383,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2745,7 +2745,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3403,7 +3403,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3608,7 +3608,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4135,7 +4135,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4540,7 +4540,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4833,7 +4833,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5127,7 +5127,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5492,7 +5492,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5650,7 +5650,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5994,7 +5994,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="60.18,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.43,-17.05;62.9525,-7.4"/>
+        <dia:rectangle val="59.43,-17.05;62.9525,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6066,7 +6066,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="53,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.8137,-17.05;53.75,-7.4"/>
+        <dia:rectangle val="50.8138,-17.05;53.75,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6138,7 +6138,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="58.18,-27.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.8137,-28.55;58.93,-18.4"/>
+        <dia:rectangle val="50.8138,-28.55;58.93,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6210,7 +6210,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="67.36,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.61,-17.05;74.2,-7.4"/>
+        <dia:rectangle val="66.61,-17.05;74.2,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6282,7 +6282,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="85.18,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="79.455,-17.05;85.93,-7.4"/>
+        <dia:rectangle val="79.455,-17.05;85.93,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6354,7 +6354,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="72,-29.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="62.7025,-30.15;72.75,-18.4"/>
+        <dia:rectangle val="62.7025,-30.15;72.75,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6426,7 +6426,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="85.59,-29.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.84,-30.15;97.9525,-18.4"/>
+        <dia:rectangle val="84.84,-30.15;97.9525,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6498,7 +6498,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="98.49,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="78.745,-37.05;99.24,-31.4"/>
+        <dia:rectangle val="78.745,-37.75;99.24,-32.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6569,7 +6569,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="97.7525,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.0025,-17.75;106.2,-7.4"/>
+        <dia:rectangle val="97.0025,-17.75;106.2,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6641,7 +6641,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="113.565,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="112.815,-16.9998;118.264,-7.4"/>
+        <dia:rectangle val="112.815,-16.9998;118.264,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6713,7 +6713,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="142.18,-27.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.078,-28.35;142.93,-18.4"/>
+        <dia:rectangle val="121.077,-28.35;142.93,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6785,7 +6785,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="118.565,-29.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="114.95,-30.15;119.315,-18.4"/>
+        <dia:rectangle val="114.95,-30.15;119.315,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6857,7 +6857,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="104.185,-41.1501"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.435,-41.9001;111.2,-31.4"/>
+        <dia:rectangle val="103.435,-41.9001;111.2,-32.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6929,7 +6929,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="126.13,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="125.38,-41.05;128.994,-31.4"/>
+        <dia:rectangle val="125.38,-41.05;128.994,-32.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7001,7 +7001,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="124.565,-51.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.815,-52.35;128.994,-42.4"/>
+        <dia:rectangle val="123.815,-52.35;128.994,-43.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7073,7 +7073,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="124.565,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.815,-59.05;138.2,-54.4"/>
+        <dia:rectangle val="123.815,-59.75;138.2,-55.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7145,7 +7145,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="155.41,-56"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="143.455,-59.05;156.16,-54.4"/>
+        <dia:rectangle val="143.455,-59.75;156.16,-55.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7216,7 +7216,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="113.565,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.703,3.45;114.315,13.6"/>
+        <dia:rectangle val="106.702,3.45;114.315,12.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7288,7 +7288,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="99.795,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.045,14.95;106.953,23.6"/>
+        <dia:rectangle val="99.045,14.95;106.952,22.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7360,7 +7360,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="121.13,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="120.38,-17.05;132.2,-7.4"/>
+        <dia:rectangle val="120.38,-17.05;132.2,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7432,7 +7432,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="136.18,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.935,-17.05;136.93,-7.4"/>
+        <dia:rectangle val="134.935,-17.05;136.93,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7503,7 +7503,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="151,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="137.92,-17.05;151.75,-7.4"/>
+        <dia:rectangle val="137.92,-17.05;151.75,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7575,7 +7575,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="162.105,-29.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.145,-30.15;162.855,-18.4"/>
+        <dia:rectangle val="158.145,-30.15;162.855,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7647,7 +7647,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="168.055,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.145,-17.05;168.805,-7.4"/>
+        <dia:rectangle val="158.145,-17.05;168.805,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7701,7 +7701,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##</dia:string>
+        <dia:string>##DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7854,7 +7854,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="159.528,-5.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="158.778,-6.15;166.155,3.6"/>
+        <dia:rectangle val="158.778,-6.15;166.155,2.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
