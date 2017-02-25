@@ -33,15 +33,10 @@
 #include "dogen/yarn/types/injector_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/indices.hpp"
-#include "dogen/yarn/types/model.hpp"
 
 namespace dogen {
 namespace yarn {
 
-/**
- * @brief Responsible for performing all the tasks after the merging
- * of the models has taken place.
- */
 class second_stage_expander {
 private:
     /**
@@ -129,18 +124,12 @@ private:
      */
     void validate(const indices& idx, const intermediate_model& im) const;
 
-    /**
-     * @brief Transforms the intermediate model to the final
-     * representation.
-     */
-    model transform_intermediate_model(const intermediate_model& im) const;
-
 public:
     /**
      * @brief Make the final model.
      */
-    model make(const annotations::type_repository& atrp,
-        const injector_registrar& rg,
+    intermediate_model
+    make(const annotations::type_repository& atrp, const injector_registrar& rg,
         const std::list<intermediate_model>& ims) const;
 };
 

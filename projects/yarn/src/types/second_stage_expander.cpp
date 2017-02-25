@@ -24,7 +24,6 @@
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/indexer.hpp"
 #include "dogen/yarn/types/resolver.hpp"
-#include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/concept_expander.hpp"
 #include "dogen/yarn/types/enumeration_expander.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
@@ -176,36 +175,30 @@ validate(const indices& idx, const intermediate_model& im) const {
     v.validate(idx, im);
 }
 
-model second_stage_expander::transform_intermediate_model(
-    const intermediate_model& im) const {
-    transformer t;
-    return t.transform(im);
-}
-
-model second_stage_expander::make(const annotations::type_repository& atrp,
-    const injector_registrar& rg,
+intermediate_model second_stage_expander::
+make(const annotations::type_repository& atrp, const injector_registrar& rg,
     const std::list<intermediate_model>& ims) const {
-    BOOST_LOG_SEV(lg, debug) << "Starting creating final model.";
+    BOOST_LOG_SEV(lg, debug) << "Starting second stage expansion.";
 
     /*
      * First we must merge all of the intermediate models into the
      * merged model.
      */
-    auto im(merge_intermediate_models(ims));
+    auto r(merge_intermediate_models(ims));
 
     /*
      * Enumeration expansion must be done after merging as we need the
      * built-in types; these are required in order to find the default
      * enumeration underlying element.
      */
-    expand_enumerations(atrp, im);
+    expand_enumerations(atrp, r);
 
     /*
      * Create all indices first as its needed by generalisation. Note
      * that this means injected types are not part of indices, which
      * is not ideal - but for now, its not a major problem.
      */
-    const auto idx(create_indices(im));
+    const auto idx(create_indices(r));
 
     /*
      * We must expand generalisation relationships before we expand
@@ -214,22 +207,22 @@ model second_stage_expander::make(const annotations::type_repository& atrp,
      * expanded after merging models because we may inherit across
      * models.
      */
-    expand_generalizations(atrp, idx, im);
+    expand_generalizations(atrp, idx, r);
 
     /*
      * Stereotypes expansion must be done before concepts because we
      * obtain concept information from the stereotypes.
      */
-    expand_stereotypes(im);
-    expand_concepts(im);
-    expand_containment(im);
+    expand_stereotypes(r);
+    expand_concepts(r);
+    expand_containment(r);
 
     /*
      * Resolution must be done after system elements have been
      * injected or else it will fail to find any references to those
      * elements.
      */
-    resolve_element_references(idx, im);
+    resolve_element_references(idx, r);
 
     /*
      * We can only expand attributes after we've expanded:
@@ -240,30 +233,25 @@ model second_stage_expander::make(const annotations::type_repository& atrp,
      *   fluency to be populated.
      *  - resolution, else we will copy unresolved attributes.
      */
-    expand_attributes(im);
+    expand_attributes(r);
 
     /*
      * We must expand associations after attributes have been expanded
      * as it relies on the various attribute containers being
      * populated.
      */
-    expand_associations(im);
-    update_model_generability(im);
+    expand_associations(r);
+    update_model_generability(r);
 
-    const auto ra(im.root_module().annotation());
-    inject_model(atrp, ra, rg, im);
+    const auto ra(r.root_module().annotation());
+    inject_model(atrp, ra, rg, r);
 
     /*
      * Ensure the model is valid.
      */
-    validate(idx, im);
+    validate(idx, r);
 
-    /*
-     * Perform the final transformation.
-     */
-    const auto r(transform_intermediate_model(im));
-
-    BOOST_LOG_SEV(lg, debug) << "Finished creating final model.";
+    BOOST_LOG_SEV(lg, debug) << "Finished second stage expansion.";
     return r;
 }
 

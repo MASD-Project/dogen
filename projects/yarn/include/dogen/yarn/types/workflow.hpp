@@ -61,17 +61,23 @@ private:
     /**
      * @brief Obtains all intermediate models across all languages.
      */
-    intermediate_model_repository obtain_intermediate_model_repository(
+    intermediate_model_repository create_intermediate_model_repository(
         const std::vector<boost::filesystem::path>& dirs,
         const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const options::knitting_options& ko) const;
 
     /**
-     * @brief Obtains the model.
+     * @brief Performs the second stage expansion.
      */
-    model obtain_model(const annotations::type_repository& atrp,
+    intermediate_model peform_second_stage_expansion(
+        const annotations::type_repository& atrp,
         const std::list<intermediate_model>& ims) const;
+
+    /**
+     * @brief Obtains the final model.
+     */
+    model transform_to_model(const intermediate_model& im) const;
 
 public:
     std::list<model> execute(const std::vector<boost::filesystem::path>& dirs,

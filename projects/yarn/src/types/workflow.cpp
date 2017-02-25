@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/second_stage_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/workflow_error.hpp"
+#include "dogen/yarn/types/transformer.hpp"
 #include "dogen/yarn/types/workflow.hpp"
 
 namespace {
@@ -67,7 +68,7 @@ void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Finished validating registrars. ";
 }
 
-intermediate_model_repository workflow::obtain_intermediate_model_repository(
+intermediate_model_repository workflow::create_intermediate_model_repository(
     const std::vector<boost::filesystem::path>& dirs,
     const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp,
@@ -77,10 +78,16 @@ intermediate_model_repository workflow::obtain_intermediate_model_repository(
     return r;
 }
 
-model workflow::obtain_model(const annotations::type_repository& atrp,
+intermediate_model workflow::peform_second_stage_expansion(
+    const annotations::type_repository& atrp,
     const std::list<intermediate_model>& ims) const {
     second_stage_expander ex;
     return ex.make(atrp, injector_registrar(), ims);
+}
+
+model workflow::transform_to_model(const intermediate_model& im) const {
+    transformer t;
+    return t.transform(im);
 }
 
 std::list<model>
@@ -89,11 +96,13 @@ workflow::execute(const std::vector<boost::filesystem::path>& dirs,
     const annotations::type_repository& atrp,
     const options::knitting_options& ko) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+
     std::list<model> r;
-    const auto imrp(obtain_intermediate_model_repository(dirs, agf, atrp, ko));
+    const auto imrp(create_intermediate_model_repository(dirs, agf, atrp, ko));
     for(const auto& pair : imrp.by_language()) {
         const auto& ims(pair.second);
-        r.push_back(obtain_model(atrp, ims));
+        const auto im(peform_second_stage_expansion(atrp, ims));
+        r.push_back(transform_to_model(im));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished workflow. Models: " << r;

@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-25 Sat 23:36]
+#+CAPTION: Clock summary at [2017-02-25 Sat 23:52]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *20:07* |       |       | 100.0 |
+| *Total time*                                                                | *20:22* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 20:07   |       |       | 100.0 |
-| Active                                                                      |         | 20:07 |       | 100.0 |
+| Stories                                                                     | 20:22   |       |       | 100.0 |
+| Active                                                                      |         | 20:22 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.5 |
 | COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   4.6 |
-| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  82.6 |
+| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   4.3 |
+| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  81.6 |
 | STARTED ODB Fixes to support Oracle                                         |         |       |  1:02 |   5.1 |
-| STARTED Rename intermediate model expander and model factory                |         |       |  0:38 |   3.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -105,6 +105,18 @@ Final decision on this was to generate the pragma on the back of a
 schema pragma insertion and to inject the attribute automatically on
 the back of it.
 
+*** COMPLETED Rename intermediate model expander and model factory    :story:
+    CLOSED: [2017-02-25 Sat 23:52]
+    CLOCK: [2017-02-25 Sat 23:37]--[2017-02-25 Sat 23:52] =>  0:15
+    CLOCK: [2017-02-25 Sat 22:58]--[2017-02-25 Sat 23:36] =>  0:38
+
+Originally we thought of these classes as if they pertained to the
+type of model they were working on; however, with the appearance of
+first and second stage validation it became clear that we just have
+two pipelines for two different stages of processing. Rename these two
+classes to reflect the pipelines, and split out the final model
+generation from the second stage.
+
 *** STARTED Implement the database model using Northwind              :story:
     CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
     CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
@@ -175,16 +187,6 @@ modified   Src/XDatabase/src/options.odb
  # use the boost profile
 --profile boost
 #+end_example
-
-*** STARTED Rename intermediate model expander and model factory      :story:
-    CLOCK: [2017-02-25 Sat 22:58]--[2017-02-25 Sat 23:36] =>  0:38
-
-Originally we thought of these classes as if they pertained to the
-type of model they were working on; however, with the appearance of
-first and second stage validation it became clear that we just have
-two pipelines for two different stages of processing. Rename these two
-classes to reflect the pipelines, and split out the final model
-generation from the second stage.
 
 *** Add prefetch support to ODB                                       :story:
 
