@@ -36,7 +36,7 @@ if(NOT EXISTS "${src_odb_dir}")
     file(MAKE_DIRECTORY "${src_odb_dir}")
 endif()
 
-add_custom_target(codegen_primitive_odb
+add_custom_target(odb_primitive
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/primitive/odb/*.cpp
     ${src_odb_dir})
@@ -53,20 +53,17 @@ foreach(odb_file ${all_odb_files})
         string(REPLACE "\\" "_" type_name ${type_name})
         string(REPLACE "/" "_" type_name ${type_name})
 
-        set(pfh_dir "$ENV{PFH_LOCATION}")
-        set(target_name "codegen_primitive_odb_${type_name}")
+        set(target_name "odb_primitive_${type_name}")
         add_custom_target(${target_name}
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND odb
+            COMMAND ${ODB_EXECUTABLE}
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
-            --std c++11
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/primitive/odb/
             --odb-epilogue '\#include \"dogen/primitive/odb/${odb_file}\"'
-            -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include
+            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
             ${include_dir}/types/${type_name}.hpp)
 
-        add_dependencies(codegen_primitive_odb ${target_name})
+        add_dependencies(odb_primitive ${target_name})
     endif()
-    add_dependencies(codegen_primitive_odb codegen_primitive)
     set(ignore_file false)
 endforeach()

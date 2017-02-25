@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-25 Sat 21:53]
+#+CAPTION: Clock summary at [2017-02-25 Sat 22:29]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *18:27* |       |       | 100.0 |
+| *Total time*                                                                | *19:02* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 18:27   |       |       | 100.0 |
-| Active                                                                      |         | 18:27 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.7 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   5.1 |
-| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  90.1 |
+| Stories                                                                     | 19:02   |       |       | 100.0 |
+| Active                                                                      |         | 19:02 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.1 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.6 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   4.9 |
+| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  87.3 |
+| STARTED ODB Fixes to support Oracle                                         |         |       |  0:35 |   3.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -126,7 +127,8 @@ the base for the model.
 We should implement it using Oracle and use this to test the changes
 to ODB's oracle support.
 
-*** ODB Fixes to support Oracle                                       :story:
+*** STARTED ODB Fixes to support Oracle                               :story:
+    CLOCK: [2017-02-25 Sat 21:54]--[2017-02-25 Sat 22:29] =>  0:35
 
 At present we hard-coded quite a bit of the ODB profile just to allow
 it to work for postgres. However, this is now causing problems when we

@@ -81,8 +81,8 @@ format(const context& ctx, const yarn::element& e) const {
         const auto product_name(a.get_product_name(o.name()));
         const auto odb_folder(a.get_odb_facet_directory());
 #>
-# enable C++11. FIXME: causes ODB crash in options file.
-# --std c++11
+# enable C++11
+--std c++11
 
 # target postgres
 --database pgsql

@@ -1,5 +1,5 @@
-# enable C++11. FIXME: causes ODB crash in options file.
-# --std c++11
+# enable C++11
+--std c++11
 
 # target postgres
 --database pgsql

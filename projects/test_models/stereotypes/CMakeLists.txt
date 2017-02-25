@@ -36,7 +36,7 @@ if(NOT EXISTS "${src_odb_dir}")
     file(MAKE_DIRECTORY "${src_odb_dir}")
 endif()
 
-add_custom_target(codegen_stereotypes_odb
+add_custom_target(odb_stereotypes
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/stereotypes/odb/*.cpp
     ${src_odb_dir})
@@ -53,20 +53,17 @@ foreach(odb_file ${all_odb_files})
         string(REPLACE "\\" "_" type_name ${type_name})
         string(REPLACE "/" "_" type_name ${type_name})
 
-        set(pfh_dir "$ENV{PFH_LOCATION}")
-        set(target_name "codegen_stereotypes_odb_${type_name}")
+        set(target_name "odb_stereotypes_${type_name}")
         add_custom_target(${target_name}
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND odb
+            COMMAND ${ODB_EXECUTABLE}
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
-            --std c++11
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/stereotypes/odb/
             --odb-epilogue '\#include \"dogen/stereotypes/odb/${odb_file}\"'
-            -I ${pfh_dir}/include -I ${CMAKE_CURRENT_SOURCE_DIR}/include
+            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
             ${include_dir}/types/${type_name}.hpp)
 
-        add_dependencies(codegen_stereotypes_odb ${target_name})
+        add_dependencies(odb_stereotypes ${target_name})
     endif()
-    add_dependencies(codegen_stereotypes_odb codegen_stereotypes)
     set(ignore_file false)
 endforeach()

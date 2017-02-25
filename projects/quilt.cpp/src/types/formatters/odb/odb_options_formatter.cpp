@@ -103,8 +103,8 @@ format(const context& ctx, const yarn::element& e) const {
         const auto model_name(a.get_identifiable_model_name(o.name()));
         const auto product_name(a.get_product_name(o.name()));
         const auto odb_folder(a.get_odb_facet_directory());
-a.stream() << "# enable C++11. FIXME: causes ODB crash in options file." << std::endl;
-a.stream() << "# --std c++11" << std::endl;
+a.stream() << "# enable C++11" << std::endl;
+a.stream() << "--std c++11" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# target postgres" << std::endl;
 a.stream() << "--database pgsql" << std::endl;
