@@ -28,6 +28,22 @@
 #include "dogen/test_models/database/types/northwind/order_details.hpp"
 #include "dogen/test_models/database/odb/northwind/order_details_key_pragmas.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+namespace northwind {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(order_details) schema("northwind")
+
+#pragma db member(order_details::order_details_key_) id
+#pragma db member(order_details::unit_price_) not_null
+#pragma db member(order_details::quantity_) not_null
+#pragma db member(order_details::discount_) not_null
+
+#endif
+
+} } } }
 
 #endif

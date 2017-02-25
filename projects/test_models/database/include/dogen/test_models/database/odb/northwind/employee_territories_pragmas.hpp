@@ -28,6 +28,17 @@
 #include "dogen/test_models/database/types/northwind/employee_territories.hpp"
 #include "dogen/test_models/database/odb/northwind/employee_territories_key_pragmas.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+namespace northwind {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(employee_territories) schema("northwind")
+
+#endif
+
+} } } }
 
 #endif

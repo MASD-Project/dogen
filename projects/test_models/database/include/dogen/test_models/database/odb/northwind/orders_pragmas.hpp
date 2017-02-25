@@ -30,6 +30,32 @@
 #include "dogen/test_models/database/odb/northwind/customer_id_pragmas.hpp"
 #include "dogen/test_models/database/odb/northwind/employee_id_pragmas.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+namespace northwind {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(orders) schema("northwind")
+
+#pragma db member(orders::order_id_) id
+#pragma db member(orders::customer_id_) null
+#pragma db member(orders::employee_id_) null
+#pragma db member(orders::order_date_) null
+#pragma db member(orders::required_date_) null
+#pragma db member(orders::shipped_date_) null
+#pragma db member(orders::ship_via_) null
+#pragma db member(orders::freight_) null
+#pragma db member(orders::ship_name_) null
+#pragma db member(orders::ship_address_) null
+#pragma db member(orders::ship_city_) null
+#pragma db member(orders::ship_region_) null
+#pragma db member(orders::ship_postal_code_) null
+#pragma db member(orders::ship_country_) null
+
+#endif
+
+} } } }
 
 #endif

@@ -33,7 +33,7 @@ namespace database {
 
 #ifdef ODB_COMPILER
 
-#pragma db object(primary_key_2) schema("kitanda")
+#pragma db object(primary_key_2) schema("basic")
 
 #pragma db member(primary_key_2::prop_0_) id
 

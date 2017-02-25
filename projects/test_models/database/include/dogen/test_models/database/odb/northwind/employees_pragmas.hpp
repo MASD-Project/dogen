@@ -28,6 +28,37 @@
 #include "dogen/test_models/database/types/northwind/employees.hpp"
 #include "dogen/test_models/database/odb/northwind/employee_id_pragmas.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+namespace northwind {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(employees) schema("northwind")
+
+#pragma db member(employees::employee_id_) id
+#pragma db member(employees::last_name_) not_null
+#pragma db member(employees::first_name_) not_null
+#pragma db member(employees::title_) null
+#pragma db member(employees::title_of_courtesy_) null
+#pragma db member(employees::birth_date_) null
+#pragma db member(employees::hire_date_) null
+#pragma db member(employees::address_) null
+#pragma db member(employees::city_) null
+#pragma db member(employees::region_) null
+#pragma db member(employees::postal_code_) null
+#pragma db member(employees::country_) null
+#pragma db member(employees::home_phone_) null
+#pragma db member(employees::extension_) null
+#pragma db member(employees::photo_) null
+#pragma db member(employees::photo_) type("BLOB")
+#pragma db member(employees::notes_) null
+#pragma db member(employees::reports_to_) null
+#pragma db member(employees::photo_path_) null
+
+#endif
+
+} } } }
 
 #endif

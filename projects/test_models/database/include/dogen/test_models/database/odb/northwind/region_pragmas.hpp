@@ -28,6 +28,20 @@
 #include "dogen/test_models/database/types/northwind/region.hpp"
 #include "dogen/test_models/database/odb/northwind/region_id_pragmas.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+namespace northwind {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(region) schema("northwind")
+
+#pragma db member(region::region_id_) id
+#pragma db member(region::region_description_) not_null
+
+#endif
+
+} } } }
 
 #endif
