@@ -1046,8 +1046,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value
-#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1501,7 +1500,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2001,7 +2000,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -2271,7 +2270,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value
+#DOGEN odb_pragma=schema("northwind")
 #</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -3180,7 +3179,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3292,7 +3291,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4271,7 +4270,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=std::string
-#DOGEN odb_pragma=value#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4722,7 +4721,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value#</dia:string>
+#DOGEN odb_pragma=schema("northwind")#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5015,7 +5014,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int
-#DOGEN odb_pragma=value
+#DOGEN odb_pragma=schema("northwind")
 #</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -5809,7 +5808,7 @@ types to test features not covered in Northwind.
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=std::string
-#DOGEN odb_pragma=value
+#DOGEN odb_pragma=schema("northwind")
 #</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -6066,7 +6065,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="53,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.8138,-17.05;53.75,-8.2"/>
+        <dia:rectangle val="50.8137,-17.05;53.75,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6138,7 +6137,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="58.18,-27.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.8138,-28.55;58.93,-19.2"/>
+        <dia:rectangle val="50.8137,-28.55;58.93,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6713,7 +6712,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="142.18,-27.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.077,-28.35;142.93,-19.2"/>
+        <dia:rectangle val="121.078,-28.35;142.93,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7216,7 +7215,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="113.565,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.702,3.45;114.315,12.8"/>
+        <dia:rectangle val="106.703,3.45;114.315,12.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7288,7 +7287,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="99.795,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.045,14.95;106.952,22.8"/>
+        <dia:rectangle val="99.045,14.95;106.953,22.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

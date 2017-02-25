@@ -58,7 +58,7 @@ format(const context& ctx, const yarn::element& e) const {
 <#+
                 for (const auto& pg : top_level_pragmas)
 #>
-#pragma db object(<#= sn #>) <#= pg #>
+#pragma db value(<#= sn #>) <#= pg #>
 <#+
 
                 bool is_first(true);

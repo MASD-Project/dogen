@@ -43,17 +43,11 @@ private:
     struct type_group {
         annotations::type odb_pragma;
     };
+    friend class odb_properties_generator;
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
-
-    std::list<std::string> make_odb_pragmas(
-        const type_group& tg, const annotations::annotation& o) const;
-
-private:
-    boost::optional<odb_properties> compute_odb_configuration(
-        const type_group& tg, const yarn::object& o) const;
 
 public:
     void expand(const annotations::type_repository& atrp, model& fm) const;

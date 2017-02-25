@@ -27,6 +27,19 @@
 
 #include "dogen/test_models/database/types/northwind/category_id.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+namespace northwind {
+
+#ifdef ODB_COMPILER
+
+#pragma db value(category_id) schema("northwind")
+
+#pragma db member(category_id::value_) column("category_id")
+
+#endif
+
+} } } }
 
 #endif
