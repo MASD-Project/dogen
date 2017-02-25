@@ -58,6 +58,11 @@ std::string traits::odb_pragma() {
     return r;
 }
 
+std::string traits::odb_database() {
+    static std::string r("odb_database");
+    return r;
+}
+
 std::string traits::builtin_header_archetype() {
     static std::string r(traits::facet() + ".builtin_header");
     return r;

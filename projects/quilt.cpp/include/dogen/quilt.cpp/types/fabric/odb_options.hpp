@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp"
@@ -52,7 +54,8 @@ public:
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
-        const bool is_element_extension);
+        const bool is_element_extension,
+        const std::list<std::string>& databases);
 
 private:
     template<typename Archive>
@@ -72,6 +75,12 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
+    const std::list<std::string>& databases() const;
+    std::list<std::string>& databases();
+    void databases(const std::list<std::string>& v);
+    void databases(const std::list<std::string>&& v);
+
+public:
     bool operator==(const odb_options& rhs) const;
     bool operator!=(const odb_options& rhs) const {
         return !this->operator==(rhs);
@@ -84,6 +93,8 @@ public:
     void swap(odb_options& other) noexcept;
     odb_options& operator=(odb_options other);
 
+private:
+    std::list<std::string> databases_;
 };
 
 } } } }

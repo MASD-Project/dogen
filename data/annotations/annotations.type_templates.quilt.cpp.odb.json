@@ -125,6 +125,20 @@
   },
   {
     "name": {
+      "simple": "odb_database",
+      "qualified": "odb_database"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb"
+    },
+    "value_type": "text_collection",
+    "template_kind": "instance",
+    "scope": "root_module"
+  },
+  {
+    "name": {
       "simple": "postfix",
       "qualified": "quilt.cpp.odb.builtin_header.postfix"
     },

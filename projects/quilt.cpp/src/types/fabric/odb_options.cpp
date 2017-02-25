@@ -19,9 +19,32 @@
  *
  */
 #include <ostream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace quilt {
@@ -36,7 +59,8 @@ odb_options::odb_options(
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
-    const bool is_element_extension)
+    const bool is_element_extension,
+    const std::list<std::string>& databases)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -45,7 +69,8 @@ odb_options::odb_options(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension) { }
+      is_element_extension),
+      databases_(databases) { }
 
 void odb_options::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -80,12 +105,16 @@ void odb_options::to_stream(std::ostream& s) const {
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::odb_options\"" << ", "
       << "\"__parent_0__\": ";
     dogen::yarn::element::to_stream(s);
-    s << " }";
+    s << ", "
+      << "\"databases\": " << databases_
+      << " }";
 }
 
 void odb_options::swap(odb_options& other) noexcept {
     dogen::yarn::element::swap(other);
 
+    using std::swap;
+    swap(databases_, other.databases_);
 }
 
 bool odb_options::equals(const dogen::yarn::element& other) const {
@@ -95,13 +124,30 @@ bool odb_options::equals(const dogen::yarn::element& other) const {
 }
 
 bool odb_options::operator==(const odb_options& rhs) const {
-    return dogen::yarn::element::compare(rhs);
+    return dogen::yarn::element::compare(rhs) &&
+        databases_ == rhs.databases_;
 }
 
 odb_options& odb_options::operator=(odb_options other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const std::list<std::string>& odb_options::databases() const {
+    return databases_;
+}
+
+std::list<std::string>& odb_options::databases() {
+    return databases_;
+}
+
+void odb_options::databases(const std::list<std::string>& v) {
+    databases_ = v;
+}
+
+void odb_options::databases(const std::list<std::string>&& v) {
+    databases_ = std::move(v);
 }
 
 } } } }

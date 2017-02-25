@@ -15351,16 +15351,16 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="313.083,60.1667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="313.033,60.1167;319.103,62.4167"/>
+        <dia:rectangle val="313.033,60.1167;326.723,63.0167"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="313.083,60.1667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.9700000000000006"/>
+        <dia:real val="13.59"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="2.1999999999999997"/>
+        <dia:real val="2.7999999999999998"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#odb_options#</dia:string>
@@ -15449,7 +15449,31 @@ an enumeration, false otherwise.#</dia:string>
       <dia:attribute name="comment_font_height">
         <dia:real val="0.69999999999999996"/>
       </dia:attribute>
-      <dia:attribute name="attributes"/>
+      <dia:attribute name="attributes">
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#databases#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+      </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
         <dia:boolean val="false"/>
@@ -15498,7 +15522,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="306.828,74.1667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="306.078,62.3167;316.268,74.9667"/>
+        <dia:rectangle val="306.078,62.9167;320.078,74.9667"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15506,8 +15530,8 @@ an enumeration, false otherwise.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="306.828,74.1667"/>
         <dia:point val="306.828,69.1667"/>
-        <dia:point val="316.068,69.1667"/>
-        <dia:point val="316.068,62.3667"/>
+        <dia:point val="319.878,69.1667"/>
+        <dia:point val="319.878,62.9667"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
