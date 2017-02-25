@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_MODEL_FACTORY_HPP
-#define DOGEN_YARN_TYPES_MODEL_FACTORY_HPP
+#ifndef DOGEN_YARN_TYPES_SECOND_STAGE_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_SECOND_STAGE_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -42,7 +42,7 @@ namespace yarn {
  * @brief Responsible for performing all the tasks after the merging
  * of the models has taken place.
  */
-class model_factory {
+class second_stage_expander {
 private:
     /**
      * @brief Returns true if the element belongs to the target model,

@@ -24,7 +24,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
-#include "dogen/yarn/types/model_factory.hpp"
+#include "dogen/yarn/types/second_stage_expander.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/workflow_error.hpp"
 #include "dogen/yarn/types/workflow.hpp"
@@ -79,8 +79,8 @@ intermediate_model_repository workflow::obtain_intermediate_model_repository(
 
 model workflow::obtain_model(const annotations::type_repository& atrp,
     const std::list<intermediate_model>& ims) const {
-    model_factory f;
-    return f.make(atrp, injector_registrar(), ims);
+    second_stage_expander ex;
+    return ex.make(atrp, injector_registrar(), ims);
 }
 
 std::list<model>

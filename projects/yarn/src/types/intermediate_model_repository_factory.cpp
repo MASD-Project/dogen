@@ -35,7 +35,7 @@
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/mappings_validator.hpp"
-#include "dogen/yarn/types/intermediate_model_expander.hpp"
+#include "dogen/yarn/types/first_stage_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 
 namespace {
@@ -152,7 +152,7 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     const auto timd(f.make(ko.target()));
     auto tim(intermediate_model_for_descriptor(rg, timd));
 
-    intermediate_model_expander ex;
+    first_stage_expander ex;
     ex.expand(agf, atrp, tim);
 
     const mapper mp(msrp);
@@ -209,7 +209,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      */
     descriptor_factory f;
     const mapper mp(msrp);
-    intermediate_model_expander ex;
+    first_stage_expander ex;
     const auto target_dir(ko.target().parent_path());
     for (auto& pair : r.by_language()) {
         const auto ol(pair.first);

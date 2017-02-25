@@ -28,74 +28,74 @@
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/first_stage_validator.hpp"
-#include "dogen/yarn/types/intermediate_model_expander.hpp"
+#include "dogen/yarn/types/first_stage_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.intermediate_model_expander"));
+static logger lg(logger_factory("yarn.first_stage_expander"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-bool intermediate_model_expander::are_languages_compatible(
+bool first_stage_expander::are_languages_compatible(
     const languages lhs, const languages rhs) const {
 
     return lhs == rhs;
 }
 
-void intermediate_model_expander::
+void first_stage_expander::
 expand_primitives(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     primitive_expander ex;
     ex.expand(atrp, im);
 }
 
-void intermediate_model_expander::expand_language(
+void first_stage_expander::expand_language(
     const annotations::type_repository& atrp, intermediate_model& im) const {
     language_expander ex;
     ex.expand(atrp, im);
 }
 
-void intermediate_model_expander::expand_modules(intermediate_model& im) const {
+void first_stage_expander::expand_modules(intermediate_model& im) const {
     modules_expander ex;
     ex.expand(im);
 }
 
-void intermediate_model_expander::
+void first_stage_expander::
 expand_annotations(const annotations::annotation_groups_factory& agf,
     intermediate_model& im) const {
     annotations_expander ex;
     ex.expand(agf, im);
 }
 
-void intermediate_model_expander::
+void first_stage_expander::
 expand_origin(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     origin_expander ex;
     ex.expand(atrp, im);
 }
 
-void intermediate_model_expander::expand_type_parameters(
+void first_stage_expander::expand_type_parameters(
     const annotations::type_repository& atrp, intermediate_model& im) const {
     type_parameters_expander ex;
     ex.expand(atrp, im);
 }
 
-void intermediate_model_expander::expand_parsing(
+void first_stage_expander::expand_parsing(
     const annotations::type_repository& atrp, intermediate_model& im) const {
     parsing_expander ex;
     ex.expand(atrp, im);
 }
 
-void intermediate_model_expander::validate(const intermediate_model& im) const {
+void first_stage_expander::validate(const intermediate_model& im) const {
     first_stage_validator v;
     v.validate(im);
 }
 
-void intermediate_model_expander::
+void first_stage_expander::
 expand(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
     /*
@@ -133,7 +133,7 @@ expand(const annotations::annotation_groups_factory& agf,
     validate(im);
 }
 
-bool intermediate_model_expander::
+bool first_stage_expander::
 expand_if_compatible(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, const languages target_language,
     intermediate_model& im) const {

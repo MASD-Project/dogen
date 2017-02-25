@@ -34,24 +34,24 @@
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/injection_expander.hpp"
 #include "dogen/yarn/types/second_stage_validator.hpp"
-#include "dogen/yarn/types/model_factory.hpp"
+#include "dogen/yarn/types/second_stage_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.model_factory"));
+auto lg(logger_factory("yarn.second_stage_expander"));
 
 }
 
 namespace dogen {
 namespace yarn {
 
-bool model_factory::is_generatable(const element& e) const {
+bool second_stage_expander::is_generatable(const element& e) const {
     const auto ot(e.origin_type());
     return ot == origin_types::target;
 }
 
-bool model_factory::
+bool second_stage_expander::
 has_generatable_types(const intermediate_model& im) const {
     for (const auto pair : im.objects()) {
         if (is_generatable(pair.second))
@@ -91,7 +91,7 @@ has_generatable_types(const intermediate_model& im) const {
     return false;
 }
 
-intermediate_model model_factory::
+intermediate_model second_stage_expander::
 merge_intermediate_models(const std::list<intermediate_model>& im) const {
     merger mg;
     for (const auto& m : im)
@@ -107,81 +107,82 @@ merge_intermediate_models(const std::list<intermediate_model>& im) const {
     return r;
 }
 
-void model_factory::
+void second_stage_expander::
 expand_enumerations(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     enumeration_expander ex;
     ex.expand(atrp, im);
 }
 
-indices model_factory::create_indices(intermediate_model& im) const {
+indices second_stage_expander::create_indices(intermediate_model& im) const {
     indexer idx;
     return idx.index(im);
 }
 
-void model_factory::expand_stereotypes(intermediate_model& im) const {
+void second_stage_expander::expand_stereotypes(intermediate_model& im) const {
     stereotypes_expander ex;
     ex.expand(im);
 }
 
-void model_factory::expand_containment(intermediate_model& im) const {
+void second_stage_expander::expand_containment(intermediate_model& im) const {
     containment_expander ex;
     ex.expand(im);
 }
 
-void model_factory::
+void second_stage_expander::
 resolve_element_references(const indices& idx, intermediate_model& im) const {
     resolver rs;
     rs.resolve(idx, im);
 }
 
-void model_factory::
+void second_stage_expander::
 expand_generalizations(const annotations::type_repository& atrp,
     const indices& idx, intermediate_model& im) const {
     generalization_expander ex;
     ex.expand(atrp, idx, im);
 }
 
-void model_factory::expand_concepts(intermediate_model& im) const {
+void second_stage_expander::expand_concepts(intermediate_model& im) const {
     concept_expander ex;
     ex.expand(im);
 }
 
-void model_factory::expand_attributes(intermediate_model& im) const {
+void second_stage_expander::expand_attributes(intermediate_model& im) const {
     attributes_expander ex;
     ex.expand(im);
 }
 
-void model_factory::expand_associations(intermediate_model& im) const {
+void second_stage_expander::expand_associations(intermediate_model& im) const {
     association_expander ex;
     ex.expand(im);
 }
 
-void model_factory::
+void second_stage_expander::
 update_model_generability(intermediate_model& im) const {
     im.has_generatable_types(has_generatable_types(im));
 }
 
-void model_factory::inject_model(const annotations::type_repository& atrp,
+void second_stage_expander::
+inject_model(const annotations::type_repository& atrp,
     const annotations::annotation& ra, const injector_registrar& rg,
     intermediate_model& im) const {
     injection_expander ex;
     ex.expand(atrp, ra, rg, im);
 }
 
-void model_factory::
+void second_stage_expander::
 validate(const indices& idx, const intermediate_model& im) const {
     second_stage_validator v;
     v.validate(idx, im);
 }
 
-model model_factory::transform_intermediate_model(
+model second_stage_expander::transform_intermediate_model(
     const intermediate_model& im) const {
     transformer t;
     return t.transform(im);
 }
 
-model model_factory::make(const annotations::type_repository& atrp,
+model second_stage_expander::make(const annotations::type_repository& atrp,
     const injector_registrar& rg,
     const std::list<intermediate_model>& ims) const {
     BOOST_LOG_SEV(lg, debug) << "Starting creating final model.";

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_EXPANDER_HPP
-#define DOGEN_YARN_TYPES_INTERMEDIATE_MODEL_EXPANDER_HPP
+#ifndef DOGEN_YARN_TYPES_FIRST_STAGE_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_FIRST_STAGE_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -39,7 +39,7 @@
 namespace dogen {
 namespace yarn {
 
-class intermediate_model_expander final {
+class first_stage_expander final {
 private:
     /**
      * @brief Returns true if the languages are compatible, false
