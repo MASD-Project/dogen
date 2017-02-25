@@ -160,5 +160,6 @@ $ git commit -m "add cmake files and main."
 #+end_example
 
 CMAKE_INCLUDE_PATH=/full/path/to/local/include CMAKE_LIBRARY_PATH=/full/path/to/local/lib cmake ../..
+CMAKE_INCLUDE_PATH=/home/marco/local/include CMAKE_LIBRARY_PATH=/home/marco/local/lib cmake ../..
 
 * Conclusion

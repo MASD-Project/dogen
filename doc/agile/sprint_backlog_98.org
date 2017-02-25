@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-24 Fri 22:55]
+#+CAPTION: Clock summary at [2017-02-25 Sat 05:54]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *13:53* |       |       | 100.0 |
+| *Total time*                                                                | *15:42* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 13:53   |       |       | 100.0 |
-| Active                                                                      |         | 13:53 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   3.6 |
-| STARTED Implement the database model using Northwind                        |         |       | 12:59 |  93.5 |
+| Stories                                                                     | 15:42   |       |       | 100.0 |
+| Active                                                                      |         | 15:42 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   3.2 |
+| STARTED Implement the database model using Northwind                        |         |       | 14:48 |  94.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -82,6 +82,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-25 Sat 04:05]--[2017-02-25 Sat 05:54] =>  1:49
     CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
     CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
     CLOCK: [2017-02-24 Fri 09:01]--[2017-02-24 Fri 10:33] =>  1:32
@@ -184,6 +185,46 @@ perhaps the way to do it is:
 2. Provide oracle::select_statement::prefetch() to make the
    prepared query approach less tedious.
 #+end_quote
+
+*** Make ODB backend settable from meta-data                          :story:
+
+At present we hard-coded the ODB backend in the options file. However:
+
+- we may have more than one backend;
+- users must be able to set them.
+
+*** Add option to capitalise column and table names                   :story:
+
+One very useful thing is to allow users to define types in camel case
+or underscore separated but then have the ODB names generated all in
+caps (schema name, table name, column name). The database we are
+currently working with is all in caps and we are forced to manually
+enter pragmas for every single type because of this. Instead, we
+should have some meta-data:
+
+: odb.use_capitals=true
+
+This would automatically generate the pragmas.
+
+One slight downside is that if a user then tries to manually override
+the pragmas, we will have duplicates, in effect:
+
+: #DOGEN odb_pragma=schema("northwind")
+: #DOGEN odb_pragma=schema("NORTHWIND")
+
+*** Fix ODB targets                                                   :story:
+
+At present the ODB targets make no sense:
+
+- we must manually create =codegen_northwind=
+- the name =codegen= is obscure - should just be "odb"
+
+*** Replace the database model with the northwind model               :story:
+
+As part of the [[https://github.com/DomainDrivenConsulting/zango][zango]] project we are creating a model that exercises
+Dogen and ODB. It is largely based on the database model, minus the
+basic types we had added a while ago. We should just drop the database
+model and adopt the northwind model from zango.
 
 *** Add ODB to the build machine                                      :story:
 
