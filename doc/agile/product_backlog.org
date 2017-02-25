@@ -834,18 +834,6 @@ should check the family and the streaming settings; if both of these
 are empty then there should not be a need for a helper. But maybe
 there is more to it.
 
-*** Clean up odb implementation                                       :story:
-
-When we start using odb in anger we need to tidy-up how it is
-implemented. We need to split the concepts which properly belong in
-yarn such as identity, primary key, foreign key, etc from those that
-are odb specific (perhaps schema name etc). odb formatter simply maps
-yarn concepts to odb concepts rather than having its own. We need to
-dig out the stories around key support.
-
-This story should only be done when we are building real databases
-with odb.
-
 *** Remove unused elements from yarn's final model                    :story:
 
 We could mark all used elements during resolution and then during the
@@ -1794,15 +1782,6 @@ so that we could print it to the command line. We could simply add a
 JSON attribute to the field called description to start off with. But
 ideally we need a command line argument to dump all fields and their
 descriptions so that users know what's available.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
 
 *** Add importers and backends to =info= command line option          :story:
 

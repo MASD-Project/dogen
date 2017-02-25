@@ -13,17 +13,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-25 Sat 05:54]
+#+CAPTION: Clock summary at [2017-02-25 Sat 19:52]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *15:42* |       |       | 100.0 |
+| *Total time*                                                                | *17:31* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 15:42   |       |       | 100.0 |
-| Active                                                                      |         | 15:42 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   3.2 |
-| STARTED Implement the database model using Northwind                        |         |       | 14:48 |  94.3 |
+| Stories                                                                     | 17:31   |       |       | 100.0 |
+| Active                                                                      |         | 17:31 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   2.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.9 |
+| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  94.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -82,6 +82,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
+    CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
+    CLOCK: [2017-02-25 Sat 18:02]--[2017-02-25 Sat 18:56] =>  0:54
     CLOCK: [2017-02-25 Sat 04:05]--[2017-02-25 Sat 05:54] =>  1:49
     CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
     CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
@@ -100,6 +103,20 @@ the base for the model.
 
 We should implement it using Oracle and use this to test the changes
 to ODB's oracle support.
+
+*** ODB and primitives                                                :story:
+
+If we are to support primitives with ODB, we should probably have a
+mechanism to automatically add the pragmas to the primitive:
+
+: #pragma db value(region_id) schema("northwind")
+: #pragma db member(region_id::value_) column("region_id")
+
+In addition we are not generating pragmas at all for primitives at
+present.
+
+Actually we should only add the member pragma if there is at least one
+value-level pragma.
 
 *** ODB Fixes to support Oracle                                       :story:
 
@@ -219,6 +236,34 @@ At present the ODB targets make no sense:
 - we must manually create =codegen_northwind=
 - the name =codegen= is obscure - should just be "odb"
 
+*** Clean up odb implementation                                       :story:
+
+When we start using odb in anger we need to tidy-up how it is
+implemented. We need to split the concepts which properly belong in
+yarn such as identity, primary key, foreign key, etc from those that
+are odb specific (perhaps schema name etc). odb formatter simply maps
+yarn concepts to odb concepts rather than having its own. We need to
+dig out the stories around key support.
+
+This story should only be done when we are building real databases
+with odb.
+
+This time has arrived now. We should create a set of concepts in yarn
+related to ORM (object-relational mapping). These are:
+
+- yarn.orm.enabled: model module level. If true, will switch on language
+  specific ORM.
+- yarn.orm.database: container of supported database types. Create
+  enumeration.
+- yarn.orm.override: if true, orm meta-data is ignored altogether. User is
+  expected to manually supply ODB pragmas.
+- yarn.orm.schema_name: model module level or element
+- yarn.orm.table_name: element
+- yarn.orm.is_primary_key: attribute
+- yarn.orm.column_name: attribute
+- yarn.orm.nullable: attribute
+- yarn.org.naming_style: capitals, lowercase, as_is.
+
 *** Replace the database model with the northwind model               :story:
 
 As part of the [[https://github.com/DomainDrivenConsulting/zango][zango]] project we are creating a model that exercises
@@ -232,6 +277,15 @@ At present we are only compiling and running the ODB tests
 locally. Now that ODB is becoming a core dependency, we need to make
 sure we are running these tests on the build machines - Windows and
 Linux at least.
+
+*** Rename ODB parameters                                             :story:
+
+At present we use the following form:
+
+: #DOGEN ODB_PRAGMA=no_id
+
+We need to use the new naming style =cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
 
 *** Map upsilon primitives to intrinsics                              :story:
 
