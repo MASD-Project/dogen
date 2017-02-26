@@ -60,6 +60,7 @@
 #include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/pair_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/ptree_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
