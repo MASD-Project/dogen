@@ -20,7 +20,11 @@
 # enable C++11
 --std c++11
 
-# target postgres
+# enable multi-database support
+--multi-database static
+
+# target databases
+--database oracle
 --database pgsql
 
 # use the boost profile

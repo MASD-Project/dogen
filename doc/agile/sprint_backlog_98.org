@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-26 Sun 00:43]
+#+CAPTION: Clock summary at [2017-02-26 Sun 22:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *21:07* |       |       | 100.0 |
+| *Total time*                                                                | *22:09* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 21:07   |       |       | 100.0 |
-| Active                                                                      |         | 21:07 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.4 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   4.4 |
-| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   4.2 |
-| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   2.8 |
-| STARTED ODB Fixes to support Oracle                                         |         |       |  1:12 |   5.7 |
-| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  78.7 |
+| Stories                                                                     | 22:09   |       |       | 100.0 |
+| Active                                                                      |         | 22:09 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.3 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   4.2 |
+| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   4.0 |
+| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   2.6 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |  10.1 |
+| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  75.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -141,7 +141,9 @@ annotation could come from somewhere else, when in fact it
 can't. Remove it from the API and force injectors to read it directly
 from the intermediate model.
 
-*** STARTED ODB Fixes to support Oracle                               :story:
+*** COMPLETED ODB Fixes to support Oracle                             :story:
+    CLOSED: [2017-02-26 Sun 22:04]
+    CLOCK: [2017-02-26 Sun 21:02]--[2017-02-26 Sun 22:04] =>  1:02
     CLOCK: [2017-02-25 Sat 23:54]--[2017-02-26 Sun 00:04] =>  0:10
     CLOCK: [2017-02-25 Sat 22:30]--[2017-02-25 Sat 22:57] =>  0:27
     CLOCK: [2017-02-25 Sat 21:54]--[2017-02-25 Sat 22:29] =>  0:35
@@ -189,6 +191,16 @@ modified   Src/XDatabase/src/options.odb
  # use the boost profile
 --profile boost
 #+end_example
+
+*** COMPLETED Make ODB backend settable from meta-data                :story:
+    CLOSED: [2017-02-26 Sun 22:04]
+
+*Rationale*: Fixed as part of another story.
+
+At present we hard-coded the ODB backend in the options file. However:
+
+- we may have more than one backend;
+- users must be able to set them.
 
 *** STARTED Implement the database model using Northwind              :story:
     CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
@@ -251,13 +263,6 @@ perhaps the way to do it is:
 2. Provide oracle::select_statement::prefetch() to make the
    prepared query approach less tedious.
 #+end_quote
-
-*** Make ODB backend settable from meta-data                          :story:
-
-At present we hard-coded the ODB backend in the options file. However:
-
-- we may have more than one backend;
-- users must be able to set them.
 
 *** Add option to capitalise column and table names                   :story:
 

@@ -1,9 +1,6 @@
 # enable C++11
 --std c++11
 
-# target postgres
---database pgsql
-
 # use the boost profile
 --profile boost
 

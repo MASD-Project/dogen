@@ -928,7 +928,7 @@
         <dia:point val="8,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.95,-63.05;31.28,-53.25"/>
+        <dia:rectangle val="7.95,-63.05;31.28,-51.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -940,7 +940,7 @@
         <dia:real val="23.230000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.7000000000000011"/>
+        <dia:real val="11.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -964,7 +964,9 @@ types to test features not covered in Northwind.
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
-#DOGEN annotations.profile=dogen.disable_cmake#</dia:string>
+#DOGEN annotations.profile=dogen.disable_cmake
+#DOGEN odb_database=pgsql
+#DOGEN odb_database=oracle#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

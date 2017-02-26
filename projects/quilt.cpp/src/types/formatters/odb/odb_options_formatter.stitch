@@ -84,9 +84,27 @@ format(const context& ctx, const yarn::element& e) const {
 # enable C++11
 --std c++11
 
-# target postgres
---database pgsql
+<#+
+        if (o.databases().size() > 1) {
+#>
+# enable multi-database support
+--multi-database static
 
+<#+
+        }
+
+        if (!o.databases().empty()) {
+#>
+# target databases
+<#+
+
+            for (const auto& d : o.databases())
+#>
+--database <#= d #>
+
+<#+
+        }
+#>
 # use the boost profile
 --profile boost
 

@@ -106,9 +106,19 @@ format(const context& ctx, const yarn::element& e) const {
 a.stream() << "# enable C++11" << std::endl;
 a.stream() << "--std c++11" << std::endl;
 a.stream() << std::endl;
-a.stream() << "# target postgres" << std::endl;
-a.stream() << "--database pgsql" << std::endl;
+        if (o.databases().size() > 1) {
+a.stream() << "# enable multi-database support" << std::endl;
+a.stream() << "--multi-database static" << std::endl;
 a.stream() << std::endl;
+        }
+
+        if (!o.databases().empty()) {
+a.stream() << "# target databases" << std::endl;
+
+            for (const auto& d : o.databases())
+a.stream() << "--database " << d << std::endl;
+a.stream() << std::endl;
+        }
 a.stream() << "# use the boost profile" << std::endl;
 a.stream() << "--profile boost" << std::endl;
 a.stream() << std::endl;

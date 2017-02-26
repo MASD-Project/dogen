@@ -25,7 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/quilt.cpp/types/formatters/repository.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,19 +42,20 @@ namespace cpp {
 namespace fabric {
 
 class odb_options_factory final {
-public:
-    odb_options_factory() = default;
-    odb_options_factory(const odb_options_factory&) = default;
-    odb_options_factory(odb_options_factory&&) = default;
-    ~odb_options_factory() = default;
-    odb_options_factory& operator=(const odb_options_factory&) = default;
+private:
+    struct type_group {
+        annotations::type odb_database;
+    };
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    std::list<std::string> make_databases(const type_group& tg,
+        const annotations::annotation& ra) const;
 
 public:
-    bool operator==(const odb_options_factory& rhs) const;
-    bool operator!=(const odb_options_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    boost::shared_ptr<yarn::element>
+    make(const annotations::type_repository& atrp,
+        const yarn::intermediate_model& im) const;
 };
 
 } } } }
