@@ -163,10 +163,9 @@ update_model_generability(intermediate_model& im) const {
 
 void second_stage_expander::
 inject_model(const annotations::type_repository& atrp,
-    const annotations::annotation& ra, const injector_registrar& rg,
-    intermediate_model& im) const {
+    const injector_registrar& rg, intermediate_model& im) const {
     injection_expander ex;
-    ex.expand(atrp, ra, rg, im);
+    ex.expand(atrp, rg, im);
 }
 
 void second_stage_expander::
@@ -243,8 +242,11 @@ make(const annotations::type_repository& atrp, const injector_registrar& rg,
     expand_associations(r);
     update_model_generability(r);
 
-    const auto ra(r.root_module().annotation());
-    inject_model(atrp, ra, rg, r);
+    /*
+     * We can inject types into the model last as no one should be
+     * relying on them.
+     */
+    inject_model(atrp, rg, r);
 
     /*
      * Ensure the model is valid.

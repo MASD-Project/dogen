@@ -36,8 +36,7 @@ namespace yarn {
 class injection_expander {
 public:
     void expand(const annotations::type_repository& atrp,
-        const annotations::annotation& ra, const injector_registrar& rg,
-        intermediate_model& im);
+        const injector_registrar& rg, intermediate_model& im);
 };
 
 } }

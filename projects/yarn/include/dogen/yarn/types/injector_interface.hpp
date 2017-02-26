@@ -22,7 +22,6 @@
 #define DOGEN_YARN_TYPES_INJECTOR_INTERFACE_HPP
 
 #include <string>
-#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
@@ -43,7 +42,7 @@ public:
 public:
     virtual std::string id() const = 0;
     virtual void inject(const annotations::type_repository& atrp,
-        const annotations::annotation& ra, intermediate_model& im) const = 0;
+        intermediate_model& im) const = 0;
 };
 
 } }

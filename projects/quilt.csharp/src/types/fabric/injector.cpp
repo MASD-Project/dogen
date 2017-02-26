@@ -69,9 +69,9 @@ add_elements(const std::list<boost::shared_ptr<yarn::element>>& elements,
 }
 
 void injector::inject_visual_studio(const annotations::type_repository& atrp,
-    const annotations::annotation& ra, yarn::intermediate_model& im) const {
+    yarn::intermediate_model& im) const {
     visual_studio_factory f;
-    const auto e(f.make(atrp, ra, im));
+    const auto e(f.make(atrp, im));
     add_elements(e, im);
 }
 
@@ -88,9 +88,8 @@ void injector::inject_assistant(yarn::intermediate_model& im) const {
 }
 
 void injector::inject(const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
     yarn::intermediate_model& im) const {
-    inject_visual_studio(atrp, ra, im);
+    inject_visual_studio(atrp, im);
     inject_assembly_info(im);
     inject_assistant(im);
 }

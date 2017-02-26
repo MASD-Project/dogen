@@ -140,10 +140,10 @@ make_project(const visual_studio_configuration cfg,
 
 std::list<boost::shared_ptr<yarn::element>> visual_studio_factory::
 make(const annotations::type_repository& atrp,
-    const annotations::annotation& ra,
     const yarn::intermediate_model& im) const {
 
     const auto pn(obtain_project_name(im));
+    const auto ra(im.root_module().annotation());
     const auto cfg(make_configuration(atrp, ra));
 
     std::list<boost::shared_ptr<yarn::element>> r;

@@ -116,8 +116,7 @@ private:
      * @brief Injects any external types into the model.
      */
     void inject_model(const annotations::type_repository& atrp,
-        const annotations::annotation& ra, const injector_registrar& rg,
-        intermediate_model& im) const;
+        const injector_registrar& rg, intermediate_model& im) const;
 
     /**
      * @brief Ensures the model passes all validation rules.

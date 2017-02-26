@@ -73,7 +73,6 @@ private:
 public:
     std::list<boost::shared_ptr<yarn::element>>
     make(const annotations::type_repository& atrp,
-        const annotations::annotation& ra,
         const yarn::intermediate_model& im) const;
 };
 
