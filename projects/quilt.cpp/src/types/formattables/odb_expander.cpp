@@ -188,7 +188,6 @@ expand(const annotations::type_repository& atrp, model& fm) const {
         if (segment->origin_type() != yarn::origin_types::target)
             continue;
 
-
         /*
          * Update the odb properties, if any exist.
          */
