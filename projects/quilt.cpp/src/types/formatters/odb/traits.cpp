@@ -58,6 +58,11 @@ std::string traits::odb_pragma() {
     return r;
 }
 
+std::string traits::odb_is_value() {
+    static std::string r("odb_is_value");
+    return r;
+}
+
 std::string traits::odb_database() {
     static std::string r("odb_database");
     return r;

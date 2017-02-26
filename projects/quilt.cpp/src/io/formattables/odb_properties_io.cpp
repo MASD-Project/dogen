@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 
@@ -68,8 +69,15 @@ namespace cpp {
 namespace formattables {
 
 std::ostream& operator<<(std::ostream& s, const odb_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::odb_properties\"" << ", "
+      << "\"is_value\": " << v.is_value() << ", "
       << "\"top_level_odb_pragmas\": " << v.top_level_odb_pragmas() << ", "
       << "\"attribute_level_odb_pragmas\": " << v.attribute_level_odb_pragmas()
       << " }";

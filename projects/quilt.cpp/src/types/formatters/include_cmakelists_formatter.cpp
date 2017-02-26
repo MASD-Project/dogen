@@ -141,6 +141,7 @@ a.stream() << "        string(REPLACE \"/\" \"_\" type_name ${type_name})" << st
 a.stream() << std::endl;
 a.stream() << "        set(target_name \"odb_" << model_name << "_${type_name}\")" << std::endl;
 a.stream() << "        add_custom_target(${target_name}" << std::endl;
+a.stream() << "            COMMENT \"ODB ${type_name}\"" << std::endl;
 a.stream() << "            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl;
 a.stream() << "            COMMAND ${ODB_EXECUTABLE}" << std::endl;
 a.stream() << "            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb" << std::endl;

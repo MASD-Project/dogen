@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-26 Sun 22:04]
+#+CAPTION: Clock summary at [2017-02-26 Sun 23:21]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *22:09* |       |       | 100.0 |
+| *Total time*                                                                | *23:24* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 22:09   |       |       | 100.0 |
-| Active                                                                      |         | 22:09 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.8 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.3 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   4.2 |
-| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   4.0 |
-| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   2.6 |
-| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |  10.1 |
-| STARTED Implement the database model using Northwind                        |         |       | 16:37 |  75.0 |
+| Stories                                                                     | 23:24   |       |       | 100.0 |
+| Active                                                                      |         | 23:24 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.7 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   2.1 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   4.0 |
+| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   3.8 |
+| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   2.5 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   9.5 |
+| STARTED Implement the database model using Northwind                        |         |       | 17:52 |  76.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -203,6 +203,8 @@ At present we hard-coded the ODB backend in the options file. However:
 - users must be able to set them.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-26 Sun 22:48]--[2017-02-26 Sun 23:21] =>  0:33
+    CLOCK: [2017-02-26 Sun 22:05]--[2017-02-26 Sun 22:47] =>  0:42
     CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
     CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
     CLOCK: [2017-02-25 Sat 18:02]--[2017-02-25 Sat 18:56] =>  0:54
@@ -224,6 +226,11 @@ the base for the model.
 
 We should implement it using Oracle and use this to test the changes
 to ODB's oracle support.
+
+Tasks:
+
+- add comment for ODB targets
+- add flag to mark a type as a value
 
 *** Add prefetch support to ODB                                       :story:
 

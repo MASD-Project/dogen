@@ -38,13 +38,16 @@ namespace formattables {
 
 class odb_properties final {
 public:
-    odb_properties() = default;
     odb_properties(const odb_properties&) = default;
     odb_properties(odb_properties&&) = default;
     ~odb_properties() = default;
 
 public:
+    odb_properties();
+
+public:
     odb_properties(
+        const bool is_value,
         const std::list<std::string>& top_level_odb_pragmas,
         const std::unordered_map<std::string, std::list<std::string> >& attribute_level_odb_pragmas);
 
@@ -56,6 +59,9 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::odb_properties& v, unsigned int version);
 
 public:
+    bool is_value() const;
+    void is_value(const bool v);
+
     const std::list<std::string>& top_level_odb_pragmas() const;
     std::list<std::string>& top_level_odb_pragmas();
     void top_level_odb_pragmas(const std::list<std::string>& v);
@@ -77,6 +83,7 @@ public:
     odb_properties& operator=(odb_properties other);
 
 private:
+    bool is_value_;
     std::list<std::string> top_level_odb_pragmas_;
     std::unordered_map<std::string, std::list<std::string> > attribute_level_odb_pragmas_;
 };

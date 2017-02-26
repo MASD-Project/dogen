@@ -50,7 +50,7 @@ public:
 
 private:
     std::list<std::string> make_odb_pragmas(const odb_expander::type_group& tg,
-        const annotations::annotation& o) const;
+        const annotations::annotation& a) const;
 
 public:
     /*
@@ -74,9 +74,9 @@ odb_properties_generator::odb_properties_generator(
 
 std::list<std::string>
 odb_properties_generator::make_odb_pragmas(const odb_expander::type_group& tg,
-    const annotations::annotation& o) const {
+    const annotations::annotation& a) const {
 
-    const annotations::entry_selector s(o);
+    const annotations::entry_selector s(a);
     if (!s.has_entry(tg.odb_pragma))
         return std::list<std::string>();
 
@@ -85,6 +85,10 @@ odb_properties_generator::make_odb_pragmas(const odb_expander::type_group& tg,
 
 void odb_properties_generator::visit(const yarn::object& o) {
     odb_properties op;
+
+    const annotations::entry_selector s(o.annotation());
+    op.is_value(s.get_boolean_content_or_default(type_group_.odb_is_value));
+
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, o.annotation()));
     for (const auto& attr : o.local_attributes()) {
         const auto id(attr.name().id());
@@ -105,6 +109,8 @@ void odb_properties_generator::visit(const yarn::object& o) {
 
 void odb_properties_generator::visit(const yarn::primitive& p) {
     odb_properties op;
+    op.is_value(true);
+
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, p.annotation()));
     const bool has_top_level_pragmas(!op.top_level_odb_pragmas().empty());
     if (!has_top_level_pragmas)
@@ -142,7 +148,8 @@ std::ostream& operator<<(std::ostream& s,
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "odb_expander::type_group\"" << ", "
-      << "\"odb_pragma\": " << v.odb_pragma
+      << "\"odb_pragma\": " << v.odb_pragma << ", "
+      << "\"odb_is_value\": " << v.odb_is_value
       << " }";
 
     return s;
@@ -150,14 +157,17 @@ std::ostream& operator<<(std::ostream& s,
 
 odb_expander::type_group odb_expander::
 make_type_group(const annotations::type_repository& atrp) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating field definitions.";
+    BOOST_LOG_SEV(lg, debug) << "Creating type groups.";
 
     type_group r;
     const annotations::type_repository_selector s(atrp);
-    const auto& cc(formatters::odb::traits::odb_pragma());
-    r.odb_pragma = s.select_type_by_name(cc);
+    const auto& op(formatters::odb::traits::odb_pragma());
+    r.odb_pragma = s.select_type_by_name(op);
 
-    BOOST_LOG_SEV(lg, debug) << "Created field definitions. Result: " << r;
+    const auto& oiv(formatters::odb::traits::odb_is_value());
+    r.odb_is_value = s.select_type_by_name(oiv);
+
+    BOOST_LOG_SEV(lg, debug) << "Created type groups. Result: " << r;
     return r;
 }
 

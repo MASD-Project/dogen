@@ -113,7 +113,7 @@ a.stream() << std::endl;
 a.stream() << "#ifdef ODB_COMPILER" << std::endl;
 a.stream() << std::endl;
                 for (const auto& pg : top_level_pragmas)
-a.stream() << "#pragma db object(" << sn << ") " << pg << std::endl;
+a.stream() << "#pragma db " << a.get_odb_type() << "(" << sn << ") " << pg << std::endl;
 
                 bool is_first(true);
                 for (const auto& attr : o.local_attributes()) {

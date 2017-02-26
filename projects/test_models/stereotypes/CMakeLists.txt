@@ -55,6 +55,7 @@ foreach(odb_file ${all_odb_files})
 
         set(target_name "odb_stereotypes_${type_name}")
         add_custom_target(${target_name}
+            COMMENT "ODB ${type_name}"
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${ODB_EXECUTABLE}
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb

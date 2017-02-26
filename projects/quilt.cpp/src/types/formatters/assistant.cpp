@@ -53,6 +53,8 @@ const std::string final_keyword_text("final ");
 const std::string namespace_separator("::");
 const std::string member_variable_postfix("_");
 const std::string underscore("_");
+const std::string odb_value_type("value");
+const std::string odb_object_type("object");
 
 const bool start_on_first_line(true);
 const bool use_documentation_tool_markup(true);
@@ -572,6 +574,17 @@ assistant::get_odb_pragmas(const std::string& attr_id) const {
         return std::list<std::string>();
 
     return i->second;
+}
+
+std::string assistant::get_odb_type() const {
+    const auto& eprops(context_.element_properties());
+    const auto& odb_props(eprops.odb_properties());
+    if (!odb_props)
+        return std::string();
+
+    if (odb_props->is_value())
+        return odb_value_type;
+    return odb_object_type;
 }
 
 std::list<yarn::name> assistant::

@@ -303,6 +303,11 @@ public:
      */
     std::list<std::string> get_odb_pragmas(const std::string& attr_id) const;
 
+    /**
+     * @brief Returns the ODB type for the current element.
+     */
+    std::string get_odb_type() const;
+
 public:
     /**
      * @brief Returns the subset of names for which the supplied

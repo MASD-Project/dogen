@@ -125,6 +125,21 @@
   },
   {
     "name": {
+      "simple": "odb_is_value",
+      "qualified": "odb_is_value"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "default_value": false,
+    "scope": "any"
+  },
+  {
+    "name": {
       "simple": "odb_database",
       "qualified": "odb_database"
     },

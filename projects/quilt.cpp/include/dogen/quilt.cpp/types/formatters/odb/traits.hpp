@@ -65,6 +65,11 @@ struct traits {
     static std::string odb_pragma();
 
     /**
+     * @brief If true, mark the type as a value.
+     */
+    static std::string odb_is_value();
+
+    /**
      * @brief The database to target with ODB.
      */
     static std::string odb_database();

@@ -39,6 +39,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::formattables::odb_properties& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("is_value", v.is_value_);
     ar << make_nvp("top_level_odb_pragmas", v.top_level_odb_pragmas_);
     ar << make_nvp("attribute_level_odb_pragmas", v.attribute_level_odb_pragmas_);
 }
@@ -47,6 +48,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::formattables::odb_properties& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("is_value", v.is_value_);
     ar >> make_nvp("top_level_odb_pragmas", v.top_level_odb_pragmas_);
     ar >> make_nvp("attribute_level_odb_pragmas", v.attribute_level_odb_pragmas_);
 }
