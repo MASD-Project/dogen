@@ -37,8 +37,8 @@
 --include-regex '%(.*).hpp%dogen/boost_model/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/boost_model/odb/$1-odb.$2%'
---include-regex '%dogen/boost_model/types/(.*)-odb.(.*)%dogen/boost_model/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/boost_model/odb/$1-odb$2%'
+--include-regex '%dogen/boost_model/types/(.*)-odb(.*)%dogen/boost_model/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace

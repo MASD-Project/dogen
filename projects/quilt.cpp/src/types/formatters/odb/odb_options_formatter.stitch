@@ -122,8 +122,8 @@ format(const context& ctx, const yarn::element& e) const {
 --include-regex '%(.*).hpp%<#= product_name #>/<#= model_name #>/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%<#= product_name #>/<#= model_name #>/odb/$1-odb.$2%'
---include-regex '%<#= product_name #>/<#= model_name #>/types/(.*)-odb.(.*)%<#= product_name #>/<#= model_name #>/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%<#= product_name #>/<#= model_name #>/odb/$1-odb$2%'
+--include-regex '%<#= product_name #>/<#= model_name #>/types/(.*)-odb(.*)%<#= product_name #>/<#= model_name #>/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace

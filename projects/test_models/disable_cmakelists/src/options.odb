@@ -37,8 +37,8 @@
 --include-regex '%(.*).hpp%dogen/disable_cmakelists/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/disable_cmakelists/odb/$1-odb.$2%'
---include-regex '%dogen/disable_cmakelists/types/(.*)-odb.(.*)%dogen/disable_cmakelists/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/disable_cmakelists/odb/$1-odb$2%'
+--include-regex '%dogen/disable_cmakelists/types/(.*)-odb(.*)%dogen/disable_cmakelists/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace

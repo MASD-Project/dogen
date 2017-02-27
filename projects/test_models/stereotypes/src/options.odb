@@ -37,8 +37,8 @@
 --include-regex '%(.*).hpp%dogen/stereotypes/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/stereotypes/odb/$1-odb.$2%'
---include-regex '%dogen/stereotypes/types/(.*)-odb.(.*)%dogen/stereotypes/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/stereotypes/odb/$1-odb$2%'
+--include-regex '%dogen/stereotypes/types/(.*)-odb(.*)%dogen/stereotypes/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace

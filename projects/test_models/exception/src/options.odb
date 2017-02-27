@@ -37,8 +37,8 @@
 --include-regex '%(.*).hpp%dogen/exception/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/exception/odb/$1-odb.$2%'
---include-regex '%dogen/exception/types/(.*)-odb.(.*)%dogen/exception/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/exception/odb/$1-odb$2%'
+--include-regex '%dogen/exception/types/(.*)-odb(.*)%dogen/exception/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace

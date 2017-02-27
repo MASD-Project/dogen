@@ -37,8 +37,8 @@
 --include-regex '%(.*).hpp%dogen/all_builtins/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/all_builtins/odb/$1-odb.$2%'
---include-regex '%dogen/all_builtins/types/(.*)-odb.(.*)%dogen/all_builtins/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/all_builtins/odb/$1-odb$2%'
+--include-regex '%dogen/all_builtins/types/(.*)-odb(.*)%dogen/all_builtins/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace

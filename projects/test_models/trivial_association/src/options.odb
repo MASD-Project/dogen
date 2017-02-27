@@ -37,8 +37,8 @@
 --include-regex '%(.*).hpp%dogen/trivial_association/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb.(.*)%dogen/trivial_association/odb/$1-odb.$2%'
---include-regex '%dogen/trivial_association/types/(.*)-odb.(.*)%dogen/trivial_association/odb/$1-odb.$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/trivial_association/odb/$1-odb$2%'
+--include-regex '%dogen/trivial_association/types/(.*)-odb(.*)%dogen/trivial_association/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace
