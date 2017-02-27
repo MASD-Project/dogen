@@ -24,6 +24,7 @@
 --multi-database static
 
 # target databases
+--database common
 --database oracle
 --database pgsql
 

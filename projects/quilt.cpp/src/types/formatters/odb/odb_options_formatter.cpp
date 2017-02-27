@@ -114,6 +114,7 @@ a.stream() << std::endl;
 
         if (!o.databases().empty()) {
 a.stream() << "# target databases" << std::endl;
+a.stream() << "--database common" << std::endl;
 
             for (const auto& d : o.databases())
 a.stream() << "--database " << d << std::endl;

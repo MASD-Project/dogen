@@ -96,6 +96,7 @@ format(const context& ctx, const yarn::element& e) const {
         if (!o.databases().empty()) {
 #>
 # target databases
+--database common
 <#+
 
             for (const auto& d : o.databases())
