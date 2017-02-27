@@ -6,6 +6,20 @@ required schemas and so forth - and we built and installed latest
 ODB. After this grand build up, we shall finally get a chance to make
 use of Dogen and ODB.
 
+* Errata
+
+: rm ~/local/lib/libodb-oracle* ~/local/include/odb/oracle
+: . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+: LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/home/marco/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/home/marco/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/home/marco/local
+
+Casing:
+
+-
+http://www.codesynthesis.com/pipermail/odb-users/2014-September/002109.html
+http://www.codesynthesis.com/pipermail/odb-users/2014-January/001689.html
+http://www.codesynthesis.com/products/odb/doc/odb.xhtml --sql-name-case
+
+
 * Installing Dogen
 
 Before we go much further we need to install Dogen. This is fairly
