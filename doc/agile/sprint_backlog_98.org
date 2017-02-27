@@ -233,6 +233,26 @@ Tasks:
 - add comment for ODB targets
 - add flag to mark a type as a value
 
+*** Use =cxx= extension with ODB files                                :story:
+
+At present we renamed the ODB extension to =.cpp=. This is to make the
+ODB files part of the project:
+
+: set(files "")
+: file(GLOB_RECURSE files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+However, it's quite nice to have distinct extensions for ODB and Dogen
+files. We should add a conditional in CMake that detects ODB and if
+found adds:
+
+: set(odb_files "")
+: file(GLOB_RECURSE odb_files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+: set(files ${files} ${odb_files})
+
 *** Add prefetch support to ODB                                       :story:
 
 As per Boris email:
