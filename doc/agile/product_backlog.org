@@ -5759,6 +5759,24 @@ symmetric for both use cases.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Add proper DEB support to bintray                                 :story:
+
+At present we are uploading our Debian package to a "generic" area in
+bintray. This has served us well so far but has one shortcoming: we
+need to manually update packages every time there is a new release,
+requiring change of paths, manual downloads, =apt-get remove= etc. It
+would be much easier to upload the package as a DEB and then use
+apt-get to install it. We just need to look into the bintray
+descriptors to figure out how to upload it to the correct repository.
+
+*** Add nuget support to bintray                                      :story:
+
+It would be nice to add a nuget "repo" (if that is the right term) to
+bintray, so that users can install Dogen from nuget. It should support
+MSIs - but if it doesn't we may need to manually package Dogen as a
+=nupkg=. This is not too difficult: we need the descriptor and some
+basic shell scripts.
+
 *** Windows build release test failures                               :epic:
 
 Dia tests:
