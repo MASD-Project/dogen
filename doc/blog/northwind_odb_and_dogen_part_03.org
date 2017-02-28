@@ -8,36 +8,70 @@ use of Dogen and ODB.
 
 * Errata
 
-: rm ~/local/lib/libodb-oracle* ~/local/include/odb/oracle
+However, before we proceed we must address some of the instructions on
+the previous posts which were not quite right. The first point was the
+need to download extra Oracle packages. Originally, when I looked at
+the Oracle XE install I did not see the traditional =include=
+directory, so I had assumed one needed to download the header files
+separately. I did find this state of affairs somewhat unusual - but
+then again this is Oracle, so "unusual" is the default behaviour. As
+it turns out, I was wrong; the header files are indeed part of the
+Oracle XE install, just placed in a rather... creative location:
+=/u01/app/oracle/product/11.2.0/xe/rdbms/public=.
+
+This is quite an important find because the OCI driver has moved on to
+v12, whereas XE is still on v11. There is backwards compatibility, of
+course - and everything should work fine connecting a v12 client
+against an v11 database - but it does introduce a layer of complexity:
+you now need to make sure you do not simultaneously have both v11 and
+v12 shared objects in the path when linking or else you will start to
+get some strange warnings. As usual, we try to confuse only one issue
+at a time, so we need to make sure we are only making use of v11 and
+purge all references to v12.
+
+To address this issue, we need to recompile ODB's oracle support. If
+you followed the instructions on Part II and you've have already
+installed it, you need to first remove it:
+
+: rm /full/path/to/local/lib/libodb-oracle* /full/path/to/local/odb/oracle
+
+Replacing =/full/path/to/local= as required for your local
+setup. Then, you can follow the instructions as per previous post, but
+with *one crucial difference* at configure time: point to the Oracle
+XE directories instead of the OCI driver directories:
+
+#+begin_example
 : . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
-: LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/home/marco/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/home/marco/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/home/marco/local
+: LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local/local
+#+end_example
 
-Casing:
-
--
-http://www.codesynthesis.com/pipermail/odb-users/2014-September/002109.html
-http://www.codesynthesis.com/pipermail/odb-users/2014-January/001689.html
-http://www.codesynthesis.com/products/odb/doc/odb.xhtml --sql-name-case
-
+This will result on a ODB Oracle library that uses the OCI driver from
+Oracle XE. You then just need to make sure you have executed
+=oracle_env.sh= before running your binary, as we shall see later
+on.
 
 * Installing Dogen
 
-Before we go much further we need to install Dogen. This is fairly
-straightforward: we can just grab a recent relese from BinTray:
+With that out of the way, we can now resume scheduled service. The
+last package we need to install is Dogen. This is fairly
+straightforward: we can just grab the latest release from BinTray:
 
-- [[https://dl.bintray.com/domaindrivenconsulting/Dogen/0.97.0/dogen_0.97.0_amd64-applications.deb][dogen 0.97.0 amd64-applications.deb]]
+- [[https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb][dogen 0.98.0 amd64-applications.deb]]
 
-The process is as per any DEB:
+It must be v98 or above because we did a number of fixes to Dogen as a
+result of this series of articles; previous releases had shortcomings
+with their ODB support. As expected, the setup is pretty standard-fare
+debian:
 
 #+begin_example
-$ wget https://dl.bintray.com/domaindrivenconsulting/Dogen/0.97.0/dogen_0.97.0_amd64-applications.deb -O dogen_0.97.0_amd64-applications.deb
-$ sudo dpkg -i dogen_0.97.0_amd64-applications.deb
+$ wget https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb -O dogen_0.98.0_amd64-applications.deb
+$ sudo dpkg -i dogen_0.98.0_amd64-applications.deb
 [sudo] password for USER:
 Selecting previously unselected package dogen-applications.
 (Reading database ... 551550 files and directories currently installed.)
-Preparing to unpack dogen_0.97.0_amd64-applications.deb ...
-Unpacking dogen-applications (0.97.0) ...
-Setting up dogen-applications (0.97.0) ...
+Preparing to unpack dogen_0.98.0_amd64-applications.deb ...
+Unpacking dogen-applications (0.98.0) ...
+Setting up dogen-applications (0.98.0) ...
 #+end_example
 
 If all has gone according to plan, you should see something along the
@@ -45,7 +79,7 @@ lines of:
 
 #+begin_example
 $ dogen.knitter --version
-Dogen Knitter v0.97.0
+Dogen Knitter v0.98.0
 Copyright (C) 2015-2017 Domain Driven Consulting Plc.
 Copyright (C) 2012-2015 Marco Craveiro.
 License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
@@ -68,110 +102,21 @@ exercise, but it's just easier this way.
 
 * The Application
 
-At long last, we can start to create our very simple project. We will
-first start by going through all the motions of setting up the project
-and getting it to build and run, and then discuss in a bit more detail
-just what exactly this project is doing.
+At long last, we can start to create our very "simple" project. I say
+simple, but in truth it ended up being a tad more complex than I'd
+liked, so it was easier to create a github project for it and then
+discuss it here in this post.
 
-Lets call our project =app=. A couple of simple commands will get us
-on our way:
 
-#+begin_example
-$ mkdir app
-$ cd app
-$ echo log > .gitignore
-$ echo build/output >> .gitignore
-$ mkdir -p build/cmake
-$ mkdir build/output
-$ wget -q https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/a7b1383f52ee721515254377054cef3adfdffab1/build/cmake/FindODB.cmake -O build/cmake/FindODB.cmake
-$ mkdir -p projects/input_models
-$ mkdir projects/tool
-$ wget -q https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/a7b1383f52ee721515254377054cef3adfdffab1/projects/input_models/database.dia -O projects/input_models/database.dia_tmp
-$ cat projects/input_models/database.dia_tmp | sed s/dogen::test_models/app/g > projects/input_models/database.dia_tmp_2
-$ cat projects/input_models/database.dia_tmp_2 | sed s/dogen.disable_cmake/dogen/g > projects/input_models/database.dia
-$ rm projects/input_models/database.dia_tmp projects/input_models/database.dia_tmp_2
-#+end_example
+Casing:
 
-To recap, we created a directory called =app=, created a basic folder
-structure for the project and downloaded a couple of useful files: the
-CMake file for ODB and Dogen's database test model in [[https://wiki.gnome.org/Apps/Dia/][Dia]] format. Note
-also that we did some trivial hackery on the model, massaging it to
-fit the purposes of the current exercise. You don't need to worry too
-much about it, but if you are curious:
+-
+http://www.codesynthesis.com/pipermail/odb-users/2014-September/002109.html
+http://www.codesynthesis.com/pipermail/odb-users/2014-January/001689.html
+http://www.codesynthesis.com/products/odb/doc/odb.xhtml --sql-name-case
 
-- we updated its "external module" to point to =app= rather than
-  =dogen::test_modules=. This is not strictly necessary but will just
-  make the generated code a tad more sensible - instead of generating
-  namespaces for =dogen= and =test_modules=, it just generates a
-  namespace for =app=.
-- we also updated the profile to a standard dogen profile. This is
-  just so that Dogen generates the CMake build files.
 
-Since we commit early, and commit often, this is a good time to
-version control our project:
 
-#+begin_example
-$ git init .
-$ git add -A
-$ git commit -m "initial commit"
-#+end_example
-
-Now we can generate the source code for the database model. Normally
-you'd have [[https://github.com/DomainDrivenConsulting/dogen/blob/a7b1383f52ee721515254377054cef3adfdffab1/projects/input_models/CMakeLists.txt][a Dogen target in your CMake file]], but since we're trying
-to keep things easy we will just run the commands ourselves:
-
-#+begin_example
-$ dogen.knitter --delete-extra-files --output-dir projects --target projects/input_models/database.dia
-$ git add -A projects/database
-$ git commit -m "generate database model"
-<snip>
-#+end_example
-
-Next, we add the top-level CMake file; call it =CMakeLists.txt= and
-add the following contents:
-
-#+begin_example
-cmake_minimum_required(VERSION 3.4 FATAL_ERROR)
-project(app)
-
-list(APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/build/cmake)
-find_package(Boost 1.62 REQUIRED COMPONENTS
-    system
-    serialization
-    date_time
-    filesystem
-    program_options
-    )
-
-find_package(ODB REQUIRED)
-if(ODB_FOUND)
-    include_directories(SYSTEM ${ODB_INCLUDE_DIR})
-    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
-endif()
-
-include_directories(${CMAKE_SOURCE_DIR}/projects/database/include)
-add_subdirectory(${CMAKE_SOURCE_DIR}/projects/database)
-add_executable(tool projects/tool/main.cpp)
-#+end_example
-
-Finally we need to create a main under =projects/tool/main.cpp=. We'll
-keep it trivial for now and update it later on.
-
-#+begin_src c++
-#include <iostream>
-
-int main() {
-    return 0;
-}
-#+end_src
-
-At this point, if all has gone well, we should be in a position to
-build; let's first check point it into git, of course:
-
-#+begin_example
-$ git add -A
-$ git commit -m "add cmake files and main."
-#+end_example
 
 CMAKE_INCLUDE_PATH=/full/path/to/local/include CMAKE_LIBRARY_PATH=/full/path/to/local/lib cmake ../..
 CMAKE_INCLUDE_PATH=/home/marco/local/include CMAKE_LIBRARY_PATH=/home/marco/local/lib cmake ../..
