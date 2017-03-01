@@ -302,23 +302,6 @@ could translate to:
   cache.
 - we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
 
-*** Add C++-03 mode                                                    :epic:
-
-#+begin_quote
-*Story*: As a dogen user, I want to create models in C++ 03 so that I
-can interface with legacy code.
-#+end_quote
-
-It shouldn't be too hard to generate C++-03 code in addition to
-C++-14. We could follow the gcc/odb convention and have a =-std=
-option for this in meta-data. The only problem would be testing - at
-present the language settings comes from cmake, and we'd have to make
-sure the compiler is not in C++-14 mode when compiling test models
-in 03. Also, the mixing and matching of 03 with 14 may not be
-trivial. We should wait for a use case.
-
-It may be possible to add different flags to different projects in CMake.
-
 *** Add support for thrift and protocol buffers                        :epic:
 
 #+begin_quote

@@ -202,6 +202,20 @@ At present we hard-coded the ODB backend in the options file. However:
 - we may have more than one backend;
 - users must be able to set them.
 
+*** COMPLETED Setup codacy                                            :story:
+    CLOSED: [2017-03-01 Wed 20:04]
+    CLOCK: [2017-03-01 Wed 19:41]--[2017-03-01 Wed 20:03] =>  0:22
+
+We created an account for codacy but never got round setting it
+up. How to set it up:
+
+#+begin_quote
+For future reference, I didn't realise I needed to manually enable the
+checkers: Code Patterns (left hand-side bar at the bottom), cppcheck,
+tick all boxes (all 302 of them, in my case). You can also provide a
+config file, apparently.
+#+end_quote
+
 *** STARTED Implement the database model using Northwind              :story:
     CLOCK: [2017-02-28 Tue 06:41]--[2017-02-28 Tue 07:25] =>  0:44
     CLOCK: [2017-02-27 Mon 22:11]--[2017-02-27 Mon 22:34] =>  0:23
@@ -244,6 +258,142 @@ Tasks:
   entity, but that then causes an exception.
 - =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
 
+*** STARTED Create a language independent ORM layer                   :story:
+    CLOCK: [2017-03-01 Wed 13:10]--[2017-03-01 Wed 17:57] =>  4:47
+
+At present we are populating ODB pragmas manually. While this works,
+this has a number of downsides:
+
+- we need to add ODB schema pragmas to all types we want to
+  generate. Ideally it would be better to just mark the type as
+  "ORM generatable" or some other flag. Dogen then adds the appropriate
+  ODB pragmas.
+- we need to manually upper case all schemas and column names. Whilst
+  this can be ameliorated by using the ODB compiler command line
+  options, we still have to deal with the cases where the user
+  overrides the schema name or the column name. Because ODB uses
+  quotes, we get the values as-is, meaning the user needs to upper
+  case all of them. This is a particular problem for primitives,
+  because we are injecting the column name.
+- whenever the primitive name matches the attribute name, we want to
+  "reset" the column name; else we end up with a name like
+  "my_id_my_id". Actually the solution is the other way around:
+  primitives should always have a blank column name and the attribute
+  using them should be responsible for setting the column name.
+
+These are:
+
+- =yarn.orm.enabled=: model module level. If true, will switch on language
+  specific ORM. Do we need this? Users should just enable low-level
+  ORM.
+- =yarn.orm.generate_mapping=: boolean. If true, generate mapping for a
+  given type.
+- =yarn.orm.database=: container of supported database types. Create
+  enumeration. PostgreSQL, etc. Model level.
+- =yarn.orm.override=: if true, orm meta-data is ignored
+  altogether. User is expected to manually supply ODB
+  pragmas. Actually we can just not use "generate_mapping" for this
+  type and add pragmas manually. Actually we should wait for a use
+  case for this; we may need an "additive" override, or a "remove all
+  and add only these" override. For now lets just not support
+  overrides.
+- =yarn.orm.schema_name=: model module level or element
+- =yarn.orm.table_name=: element
+- =yarn.orm.is_primary_key=: boolean. Attribute level.
+- =yarn.orm.column_name=: string. Attribute level.
+- =yarn.orm.nullable=: boolean. Attribute level.
+- =yarn.org.naming_style=: enum: capitals, lowercase, as_is. Model
+  level.
+- =yarn.org.meta_type=: value or object.
+- =yarn.org.type_mapping=: string. For now only BLOB is
+  supported. Actually lets use a generic mapping scheme instead so
+  that we push this logic to the user.
+
+Basically we have the following "configuration points":
+
+- =orm_model_configuration=: naming style, database, schema name;
+- =orm_element_configuration=: generate mapping, schema name, table
+  name, meta type
+- =orm_attribute_configuration=: type, nullable, column name, is
+  primary key.
+
+We need to add classes in yarn to capture this.
+
+*Previous Understanding*
+
+When we start using odb in anger we need to tidy-up how it is
+implemented. We need to split the concepts which properly belong in
+yarn such as identity, primary key, foreign key, etc from those that
+are odb specific (perhaps schema name etc). odb formatter simply maps
+yarn concepts to odb concepts rather than having its own. We need to
+dig out the stories around key support.
+
+This story should only be done when we are building real databases
+with odb.
+
+This time has arrived now. We should create a set of concepts in yarn
+related to ORM (object-relational mapping).
+
+*** Add support for Visual Studio C++ projects                        :story:
+
+Visual studio project needs the files to be listed by hand. We can
+either generate the project or the user has to manually add the
+files. This is a problem every time they change. Requirements:
+
+- we need to be able to support multiple VS versions as well (user
+  configurable)
+- user may want to import property sheets
+- need guids (as per C# projects)
+- need additional library/include directories
+- need to add pre-compiled headers support with /FI.
+- add a solution for good measure, using the C# code.
+- add filter files for headers and source files.
+
+As per ODB, users may also want to build with different versions of
+VS. We should allow generating more than one solution and postfix them
+with the VS version.
+
+*** Add support for pre-compiled headers on windows                   :story:
+
+Most VS users have pre-compiled headers. We need to generate
+=stdafx.h= etc. For now we can have it minimally populated until we
+understand better the requirements.
+
+*** Add support for DLL Main on windows                               :story:
+
+At present we are manually generating DLL Main by hand and then
+excluding it on regexes. This is not ideal and will be more of a
+problem when we generate project files. Ideally we should code
+generate it. Requirements:
+
+- user must be able to disable it;
+- user must be able to handcraft it in case they want different
+  contents;
+
+*** Add C++-03 mode                                                    :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create models in C++ 03 so that I
+can interface with legacy code.
+#+end_quote
+
+It shouldn't be too hard to generate C++-03 code in addition to
+C++-14. We could follow the gcc/odb convention and have a =-std=
+option for this in meta-data. The only problem would be testing - at
+present the language settings comes from cmake, and we'd have to make
+sure the compiler is not in C++-14 mode when compiling test models
+in 03. Also, the mixing and matching of 03 with 14 may not be
+trivial. We should wait for a use case.
+
+It may be possible to add different flags to different projects in CMake.
+
+Tasks:
+
+- default ctors, final, noexcept. Need to manually add default
+  ctor (e.g. force it).
+- enums
+- need to disable ODB c++ 11 as well.
+
 *** Use =cxx= extension with ODB files                                :story:
 
 At present we renamed the ODB extension to =.cpp=. This is to make the
@@ -263,6 +413,25 @@ found adds:
 :    "${CMAKE_CURRENT_SOURCE_DIR}/"
 :    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
 : set(files ${files} ${odb_files})
+
+*** Add option to capitalise column and table names                   :story:
+
+One very useful thing is to allow users to define types in camel case
+or underscore separated but then have the ODB names generated all in
+caps (schema name, table name, column name). The database we are
+currently working with is all in caps and we are forced to manually
+enter pragmas for every single type because of this. Instead, we
+should have some meta-data:
+
+: odb.use_capitals=true
+
+This would automatically generate the pragmas.
+
+One slight downside is that if a user then tries to manually override
+the pragmas, we will have duplicates, in effect:
+
+: #DOGEN odb_pragma=schema("northwind")
+: #DOGEN odb_pragma=schema("NORTHWIND")
 
 *** Add prefetch support to ODB                                       :story:
 
@@ -302,53 +471,6 @@ perhaps the way to do it is:
 2. Provide oracle::select_statement::prefetch() to make the
    prepared query approach less tedious.
 #+end_quote
-
-*** Add option to capitalise column and table names                   :story:
-
-One very useful thing is to allow users to define types in camel case
-or underscore separated but then have the ODB names generated all in
-caps (schema name, table name, column name). The database we are
-currently working with is all in caps and we are forced to manually
-enter pragmas for every single type because of this. Instead, we
-should have some meta-data:
-
-: odb.use_capitals=true
-
-This would automatically generate the pragmas.
-
-One slight downside is that if a user then tries to manually override
-the pragmas, we will have duplicates, in effect:
-
-: #DOGEN odb_pragma=schema("northwind")
-: #DOGEN odb_pragma=schema("NORTHWIND")
-
-*** Clean up odb implementation                                       :story:
-
-When we start using odb in anger we need to tidy-up how it is
-implemented. We need to split the concepts which properly belong in
-yarn such as identity, primary key, foreign key, etc from those that
-are odb specific (perhaps schema name etc). odb formatter simply maps
-yarn concepts to odb concepts rather than having its own. We need to
-dig out the stories around key support.
-
-This story should only be done when we are building real databases
-with odb.
-
-This time has arrived now. We should create a set of concepts in yarn
-related to ORM (object-relational mapping). These are:
-
-- yarn.orm.enabled: model module level. If true, will switch on language
-  specific ORM.
-- yarn.orm.database: container of supported database types. Create
-  enumeration.
-- yarn.orm.override: if true, orm meta-data is ignored altogether. User is
-  expected to manually supply ODB pragmas.
-- yarn.orm.schema_name: model module level or element
-- yarn.orm.table_name: element
-- yarn.orm.is_primary_key: attribute
-- yarn.orm.column_name: attribute
-- yarn.orm.nullable: attribute
-- yarn.org.naming_style: capitals, lowercase, as_is.
 
 *** Replace the database model with the northwind model               :story:
 
