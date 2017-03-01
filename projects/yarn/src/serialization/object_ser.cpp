@@ -36,6 +36,7 @@
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
+#include "dogen/yarn/serialization/orm_object_configuration_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::object,
@@ -76,6 +77,7 @@ void save(Archive& ar,
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
     ar << make_nvp("provides_opaqueness", v.provides_opaqueness_);
     ar << make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
+    ar << make_nvp("orm_configuration", v.orm_configuration_);
 }
 
 template<typename Archive>
@@ -110,6 +112,7 @@ void load(Archive& ar,
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);
     ar >> make_nvp("provides_opaqueness", v.provides_opaqueness_);
     ar >> make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
+    ar >> make_nvp("orm_configuration", v.orm_configuration_);
 }
 
 } }

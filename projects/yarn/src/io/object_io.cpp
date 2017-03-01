@@ -26,6 +26,7 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/type_parameters_io.hpp"
+#include "dogen/yarn/io/orm_object_configuration_io.hpp"
 
 namespace dogen {
 namespace yarn {

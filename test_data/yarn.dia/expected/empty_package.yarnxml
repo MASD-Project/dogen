@@ -285,6 +285,9 @@
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</scribble_groups>
+	<orm_configuration class_id="39" tracking_level="0" version="0">
+		<initialized>0</initialized>
+	</orm_configuration>
 </entity>
 </boost_serialization>
 

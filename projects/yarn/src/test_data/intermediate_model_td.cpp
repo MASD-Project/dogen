@@ -33,6 +33,7 @@
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_td.hpp"
 #include "dogen/annotations/test_data/scribble_group_td.hpp"
+#include "dogen/yarn/test_data/orm_model_configuration_td.hpp"
 
 namespace {
 
@@ -222,6 +223,18 @@ std::unordered_map<std::string, dogen::annotations::scribble_group> create_std_u
     return r;
 }
 
+dogen::yarn::orm_model_configuration
+create_dogen_yarn_orm_model_configuration(const unsigned int position) {
+    return dogen::yarn::orm_model_configuration_generator::create(position);
+}
+
+boost::optional<dogen::yarn::orm_model_configuration>
+create_boost_optional_dogen_yarn_orm_model_configuration(unsigned int position) {
+    boost::optional<dogen::yarn::orm_model_configuration> r(
+        create_dogen_yarn_orm_model_configuration(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -249,6 +262,7 @@ populate(const unsigned int position, result_type& v) {
     v.input_language(create_dogen_yarn_languages(position + 15));
     v.output_languages(create_std_list_dogen_yarn_languages(position + 16));
     v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 17));
+    v.orm_configuration(create_boost_optional_dogen_yarn_orm_model_configuration(position + 18));
 }
 
 intermediate_model_generator::result_type

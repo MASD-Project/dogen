@@ -38,6 +38,16 @@ model::model()
       input_language_(static_cast<dogen::yarn::languages>(0)),
       output_language_(static_cast<dogen::yarn::languages>(0)) { }
 
+model::model(model&& rhs)
+    : name_(std::move(rhs.name_)),
+      elements_(std::move(rhs.elements_)),
+      root_module_(std::move(rhs.root_module_)),
+      module_ids_(std::move(rhs.module_ids_)),
+      has_generatable_types_(std::move(rhs.has_generatable_types_)),
+      input_language_(std::move(rhs.input_language_)),
+      output_language_(std::move(rhs.output_language_)),
+      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+
 model::model(
     const dogen::yarn::name& name,
     const std::vector<boost::shared_ptr<dogen::yarn::element> >& elements,
@@ -45,14 +55,16 @@ model::model(
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
     const dogen::yarn::languages input_language,
-    const dogen::yarn::languages output_language)
+    const dogen::yarn::languages output_language,
+    const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration)
     : name_(name),
       elements_(elements),
       root_module_(root_module),
       module_ids_(module_ids),
       has_generatable_types_(has_generatable_types),
       input_language_(input_language),
-      output_language_(output_language) { }
+      output_language_(output_language),
+      orm_configuration_(orm_configuration) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -63,6 +75,7 @@ void model::swap(model& other) noexcept {
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(input_language_, other.input_language_);
     swap(output_language_, other.output_language_);
+    swap(orm_configuration_, other.orm_configuration_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -72,7 +85,8 @@ bool model::operator==(const model& rhs) const {
         module_ids_ == rhs.module_ids_ &&
         has_generatable_types_ == rhs.has_generatable_types_ &&
         input_language_ == rhs.input_language_ &&
-        output_language_ == rhs.output_language_;
+        output_language_ == rhs.output_language_ &&
+        orm_configuration_ == rhs.orm_configuration_;
 }
 
 model& model::operator=(model other) {
@@ -167,6 +181,22 @@ dogen::yarn::languages model::output_language() const {
 
 void model::output_language(const dogen::yarn::languages v) {
     output_language_ = v;
+}
+
+const boost::optional<dogen::yarn::orm_model_configuration>& model::orm_configuration() const {
+    return orm_configuration_;
+}
+
+boost::optional<dogen::yarn::orm_model_configuration>& model::orm_configuration() {
+    return orm_configuration_;
+}
+
+void model::orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v) {
+    orm_configuration_ = v;
+}
+
+void model::orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>&& v) {
+    orm_configuration_ = std::move(v);
 }
 
 } }

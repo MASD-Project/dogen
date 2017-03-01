@@ -35,6 +35,7 @@
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
+#include "dogen/yarn/io/orm_model_configuration_io.hpp"
 
 namespace std {
 
@@ -286,6 +287,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_model_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -315,7 +331,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"root_module\": " << v.root_module() << ", "
       << "\"input_language\": " << v.input_language() << ", "
       << "\"output_languages\": " << v.output_languages() << ", "
-      << "\"scribble_groups\": " << v.scribble_groups()
+      << "\"scribble_groups\": " << v.scribble_groups() << ", "
+      << "\"orm_configuration\": " << v.orm_configuration()
       << " }";
     return(s);
 }

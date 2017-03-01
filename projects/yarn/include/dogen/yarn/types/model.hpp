@@ -29,12 +29,14 @@
 #include <vector>
 #include <algorithm>
 #include <unordered_set>
+#include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/serialization/model_fwd_ser.hpp"
+#include "dogen/yarn/types/orm_model_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -45,11 +47,13 @@ namespace yarn {
 class model final {
 public:
     model(const model&) = default;
-    model(model&&) = default;
     ~model() = default;
 
 public:
     model();
+
+public:
+    model(model&& rhs);
 
 public:
     model(
@@ -59,7 +63,8 @@ public:
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
         const dogen::yarn::languages input_language,
-        const dogen::yarn::languages output_language);
+        const dogen::yarn::languages output_language,
+        const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration);
 
 private:
     template<typename Archive>
@@ -128,6 +133,11 @@ public:
     void output_language(const dogen::yarn::languages v);
     /**@}*/
 
+    const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration() const;
+    boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration();
+    void orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v);
+    void orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -146,6 +156,7 @@ private:
     bool has_generatable_types_;
     dogen::yarn::languages input_language_;
     dogen::yarn::languages output_language_;
+    boost::optional<dogen::yarn::orm_model_configuration> orm_configuration_;
 };
 
 } }

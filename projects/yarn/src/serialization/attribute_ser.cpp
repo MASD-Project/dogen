@@ -24,6 +24,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
@@ -32,6 +33,7 @@
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/name_tree_ser.hpp"
 #include "dogen/annotations/serialization/annotation_ser.hpp"
+#include "dogen/yarn/serialization/orm_attribute_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -47,6 +49,7 @@ void save(Archive& ar,
     ar << make_nvp("parsed_type", v.parsed_type_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
+    ar << make_nvp("orm_configuration", v.orm_configuration_);
 }
 
 template<typename Archive>
@@ -60,6 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("parsed_type", v.parsed_type_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
+    ar >> make_nvp("orm_configuration", v.orm_configuration_);
 }
 
 } }

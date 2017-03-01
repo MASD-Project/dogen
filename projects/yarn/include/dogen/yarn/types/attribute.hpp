@@ -27,10 +27,12 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/yarn/serialization/attribute_fwd_ser.hpp"
+#include "dogen/yarn/types/orm_attribute_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -41,11 +43,13 @@ namespace yarn {
 class attribute final {
 public:
     attribute(const attribute&) = default;
-    attribute(attribute&&) = default;
     ~attribute() = default;
 
 public:
     attribute();
+
+public:
+    attribute(attribute&& rhs);
 
 public:
     attribute(
@@ -55,7 +59,8 @@ public:
         const std::string& unparsed_type,
         const dogen::yarn::name_tree& parsed_type,
         const bool is_immutable,
-        const bool is_fluent);
+        const bool is_fluent,
+        const boost::optional<dogen::yarn::orm_attribute_configuration>& orm_configuration);
 
 private:
     template<typename Archive>
@@ -137,6 +142,11 @@ public:
     void is_fluent(const bool v);
     /**@}*/
 
+    const boost::optional<dogen::yarn::orm_attribute_configuration>& orm_configuration() const;
+    boost::optional<dogen::yarn::orm_attribute_configuration>& orm_configuration();
+    void orm_configuration(const boost::optional<dogen::yarn::orm_attribute_configuration>& v);
+    void orm_configuration(const boost::optional<dogen::yarn::orm_attribute_configuration>&& v);
+
 public:
     bool operator==(const attribute& rhs) const;
     bool operator!=(const attribute& rhs) const {
@@ -155,6 +165,7 @@ private:
     dogen::yarn::name_tree parsed_type_;
     bool is_immutable_;
     bool is_fluent_;
+    boost::optional<dogen::yarn::orm_attribute_configuration> orm_configuration_;
 };
 
 } }

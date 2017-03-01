@@ -24,6 +24,7 @@
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/languages_td.hpp"
+#include "dogen/yarn/test_data/orm_model_configuration_td.hpp"
 
 namespace {
 
@@ -80,6 +81,18 @@ create_dogen_yarn_languages(const unsigned int position) {
     return dogen::yarn::languages_generator::create(position);
 }
 
+dogen::yarn::orm_model_configuration
+create_dogen_yarn_orm_model_configuration(const unsigned int position) {
+    return dogen::yarn::orm_model_configuration_generator::create(position);
+}
+
+boost::optional<dogen::yarn::orm_model_configuration>
+create_boost_optional_dogen_yarn_orm_model_configuration(unsigned int position) {
+    boost::optional<dogen::yarn::orm_model_configuration> r(
+        create_dogen_yarn_orm_model_configuration(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -96,6 +109,7 @@ populate(const unsigned int position, result_type& v) {
     v.has_generatable_types(create_bool(position + 4));
     v.input_language(create_dogen_yarn_languages(position + 5));
     v.output_language(create_dogen_yarn_languages(position + 6));
+    v.orm_configuration(create_boost_optional_dogen_yarn_orm_model_configuration(position + 7));
 }
 
 model_generator::result_type

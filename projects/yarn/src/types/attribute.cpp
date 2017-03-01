@@ -27,6 +27,16 @@ attribute::attribute()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)) { }
 
+attribute::attribute(attribute&& rhs)
+    : documentation_(std::move(rhs.documentation_)),
+      annotation_(std::move(rhs.annotation_)),
+      name_(std::move(rhs.name_)),
+      unparsed_type_(std::move(rhs.unparsed_type_)),
+      parsed_type_(std::move(rhs.parsed_type_)),
+      is_immutable_(std::move(rhs.is_immutable_)),
+      is_fluent_(std::move(rhs.is_fluent_)),
+      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+
 attribute::attribute(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
@@ -34,14 +44,16 @@ attribute::attribute(
     const std::string& unparsed_type,
     const dogen::yarn::name_tree& parsed_type,
     const bool is_immutable,
-    const bool is_fluent)
+    const bool is_fluent,
+    const boost::optional<dogen::yarn::orm_attribute_configuration>& orm_configuration)
     : documentation_(documentation),
       annotation_(annotation),
       name_(name),
       unparsed_type_(unparsed_type),
       parsed_type_(parsed_type),
       is_immutable_(is_immutable),
-      is_fluent_(is_fluent) { }
+      is_fluent_(is_fluent),
+      orm_configuration_(orm_configuration) { }
 
 void attribute::swap(attribute& other) noexcept {
     using std::swap;
@@ -52,6 +64,7 @@ void attribute::swap(attribute& other) noexcept {
     swap(parsed_type_, other.parsed_type_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(orm_configuration_, other.orm_configuration_);
 }
 
 bool attribute::operator==(const attribute& rhs) const {
@@ -61,7 +74,8 @@ bool attribute::operator==(const attribute& rhs) const {
         unparsed_type_ == rhs.unparsed_type_ &&
         parsed_type_ == rhs.parsed_type_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        is_fluent_ == rhs.is_fluent_;
+        is_fluent_ == rhs.is_fluent_ &&
+        orm_configuration_ == rhs.orm_configuration_;
 }
 
 attribute& attribute::operator=(attribute other) {
@@ -164,6 +178,22 @@ bool attribute::is_fluent() const {
 
 void attribute::is_fluent(const bool v) {
     is_fluent_ = v;
+}
+
+const boost::optional<dogen::yarn::orm_attribute_configuration>& attribute::orm_configuration() const {
+    return orm_configuration_;
+}
+
+boost::optional<dogen::yarn::orm_attribute_configuration>& attribute::orm_configuration() {
+    return orm_configuration_;
+}
+
+void attribute::orm_configuration(const boost::optional<dogen::yarn::orm_attribute_configuration>& v) {
+    orm_configuration_ = v;
+}
+
+void attribute::orm_configuration(const boost::optional<dogen::yarn::orm_attribute_configuration>&& v) {
+    orm_configuration_ = std::move(v);
 }
 
 } }

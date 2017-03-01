@@ -25,6 +25,7 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen/yarn/io/orm_attribute_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,6 +33,21 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_attribute_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace dogen {
@@ -52,7 +68,8 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"unparsed_type\": " << "\"" << tidy_up_string(v.unparsed_type()) << "\"" << ", "
       << "\"parsed_type\": " << v.parsed_type() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
-      << "\"is_fluent\": " << v.is_fluent()
+      << "\"is_fluent\": " << v.is_fluent() << ", "
+      << "\"orm_configuration\": " << v.orm_configuration()
       << " }";
     return(s);
 }

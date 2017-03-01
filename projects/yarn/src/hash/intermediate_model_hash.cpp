@@ -32,6 +32,7 @@
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
+#include "dogen/yarn/hash/orm_model_configuration_hash.hpp"
 
 namespace {
 
@@ -162,6 +163,16 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_scribble_
     return seed;
 }
 
+inline std::size_t hash_boost_optional_dogen_yarn_orm_model_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -188,6 +199,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, v.input_language());
     combine(seed, hash_std_list_dogen_yarn_languages(v.output_languages()));
     combine(seed, hash_std_unordered_map_std_string_dogen_annotations_scribble_group(v.scribble_groups()));
+    combine(seed, hash_boost_optional_dogen_yarn_orm_model_configuration(v.orm_configuration()));
 
     return seed;
 }

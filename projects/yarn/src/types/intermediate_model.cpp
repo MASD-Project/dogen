@@ -38,6 +38,27 @@ intermediate_model::intermediate_model()
       has_generatable_types_(static_cast<bool>(0)),
       input_language_(static_cast<dogen::yarn::languages>(0)) { }
 
+intermediate_model::intermediate_model(intermediate_model&& rhs)
+    : name_(std::move(rhs.name_)),
+      origin_type_(std::move(rhs.origin_type_)),
+      references_(std::move(rhs.references_)),
+      leaves_(std::move(rhs.leaves_)),
+      modules_(std::move(rhs.modules_)),
+      concepts_(std::move(rhs.concepts_)),
+      builtins_(std::move(rhs.builtins_)),
+      enumerations_(std::move(rhs.enumerations_)),
+      primitives_(std::move(rhs.primitives_)),
+      objects_(std::move(rhs.objects_)),
+      exceptions_(std::move(rhs.exceptions_)),
+      visitors_(std::move(rhs.visitors_)),
+      injected_elements_(std::move(rhs.injected_elements_)),
+      has_generatable_types_(std::move(rhs.has_generatable_types_)),
+      root_module_(std::move(rhs.root_module_)),
+      input_language_(std::move(rhs.input_language_)),
+      output_languages_(std::move(rhs.output_languages_)),
+      scribble_groups_(std::move(rhs.scribble_groups_)),
+      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+
 intermediate_model::intermediate_model(
     const dogen::yarn::name& name,
     const dogen::yarn::origin_types origin_type,
@@ -56,7 +77,8 @@ intermediate_model::intermediate_model(
     const dogen::yarn::module& root_module,
     const dogen::yarn::languages input_language,
     const std::list<dogen::yarn::languages>& output_languages,
-    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups)
+    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
+    const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration)
     : name_(name),
       origin_type_(origin_type),
       references_(references),
@@ -74,7 +96,8 @@ intermediate_model::intermediate_model(
       root_module_(root_module),
       input_language_(input_language),
       output_languages_(output_languages),
-      scribble_groups_(scribble_groups) { }
+      scribble_groups_(scribble_groups),
+      orm_configuration_(orm_configuration) { }
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
@@ -96,6 +119,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(input_language_, other.input_language_);
     swap(output_languages_, other.output_languages_);
     swap(scribble_groups_, other.scribble_groups_);
+    swap(orm_configuration_, other.orm_configuration_);
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
@@ -116,7 +140,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         root_module_ == rhs.root_module_ &&
         input_language_ == rhs.input_language_ &&
         output_languages_ == rhs.output_languages_ &&
-        scribble_groups_ == rhs.scribble_groups_;
+        scribble_groups_ == rhs.scribble_groups_ &&
+        orm_configuration_ == rhs.orm_configuration_;
 }
 
 intermediate_model& intermediate_model::operator=(intermediate_model other) {
@@ -387,6 +412,22 @@ void intermediate_model::scribble_groups(const std::unordered_map<std::string, d
 
 void intermediate_model::scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v) {
     scribble_groups_ = std::move(v);
+}
+
+const boost::optional<dogen::yarn::orm_model_configuration>& intermediate_model::orm_configuration() const {
+    return orm_configuration_;
+}
+
+boost::optional<dogen::yarn::orm_model_configuration>& intermediate_model::orm_configuration() {
+    return orm_configuration_;
+}
+
+void intermediate_model::orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v) {
+    orm_configuration_ = v;
+}
+
+void intermediate_model::orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>&& v) {
+    orm_configuration_ = std::move(v);
 }
 
 } }

@@ -47,6 +47,7 @@
 #include "dogen/yarn/serialization/separators_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/mapping_set_ser.hpp"
+#include "dogen/yarn/serialization/letter_cases_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/mapping_value_ser.hpp"
@@ -55,7 +56,11 @@
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"
+#include "dogen/yarn/serialization/orm_database_systems_ser.hpp"
 #include "dogen/yarn/serialization/mapping_set_repository_ser.hpp"
+#include "dogen/yarn/serialization/orm_model_configuration_ser.hpp"
+#include "dogen/yarn/serialization/orm_object_configuration_ser.hpp"
+#include "dogen/yarn/serialization/orm_attribute_configuration_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_repository_ser.hpp"
 
 #endif

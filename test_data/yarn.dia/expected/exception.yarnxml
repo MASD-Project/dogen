@@ -460,6 +460,9 @@
 			</second>
 		</item>
 	</scribble_groups>
+	<orm_configuration class_id="46" tracking_level="0" version="0">
+		<initialized>0</initialized>
+	</orm_configuration>
 </entity>
 </boost_serialization>
 

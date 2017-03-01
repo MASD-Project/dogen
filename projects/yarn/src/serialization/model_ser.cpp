@@ -25,6 +25,7 @@
 #include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
@@ -36,6 +37,7 @@
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/languages_ser.hpp"
+#include "dogen/yarn/serialization/orm_model_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -51,6 +53,7 @@ void save(Archive& ar,
     ar << make_nvp("has_generatable_types", v.has_generatable_types_);
     ar << make_nvp("input_language", v.input_language_);
     ar << make_nvp("output_language", v.output_language_);
+    ar << make_nvp("orm_configuration", v.orm_configuration_);
 }
 
 template<typename Archive>
@@ -64,6 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("has_generatable_types", v.has_generatable_types_);
     ar >> make_nvp("input_language", v.input_language_);
     ar >> make_nvp("output_language", v.output_language_);
+    ar >> make_nvp("orm_configuration", v.orm_configuration_);
 }
 
 } }

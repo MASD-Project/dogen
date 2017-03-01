@@ -26,6 +26,7 @@
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/orm_model_configuration_io.hpp"
 
 namespace boost {
 
@@ -79,6 +80,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_model_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 
@@ -97,7 +113,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"module_ids\": " << v.module_ids() << ", "
       << "\"has_generatable_types\": " << v.has_generatable_types() << ", "
       << "\"input_language\": " << v.input_language() << ", "
-      << "\"output_language\": " << v.output_language()
+      << "\"output_language\": " << v.output_language() << ", "
+      << "\"orm_configuration\": " << v.orm_configuration()
       << " }";
     return(s);
 }

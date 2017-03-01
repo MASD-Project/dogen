@@ -47,6 +47,7 @@
 #include "dogen/yarn/io/separators_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/mapping_set_io.hpp"
+#include "dogen/yarn/io/letter_cases_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/yarn/io/mapping_value_io.hpp"
@@ -55,7 +56,11 @@
 #include "dogen/yarn/io/type_parameters_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/decomposition_result_io.hpp"
+#include "dogen/yarn/io/orm_database_systems_io.hpp"
 #include "dogen/yarn/io/mapping_set_repository_io.hpp"
+#include "dogen/yarn/io/orm_model_configuration_io.hpp"
+#include "dogen/yarn/io/orm_object_configuration_io.hpp"
+#include "dogen/yarn/io/orm_attribute_configuration_io.hpp"
 #include "dogen/yarn/io/intermediate_model_repository_io.hpp"
 
 #endif

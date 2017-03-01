@@ -37,6 +37,7 @@
 #include "dogen/yarn/types/object_types.hpp"
 #include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/serialization/object_fwd_ser.hpp"
+#include "dogen/yarn/types/orm_object_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -96,7 +97,8 @@ public:
         const std::list<dogen::yarn::name>& modeled_concepts,
         const std::list<dogen::yarn::name>& associative_container_keys,
         const bool provides_opaqueness,
-        const bool can_be_primitive_underlier);
+        const bool can_be_primitive_underlier,
+        const boost::optional<dogen::yarn::orm_object_configuration>& orm_configuration);
 
 private:
     template<typename Archive>
@@ -350,6 +352,11 @@ public:
     void can_be_primitive_underlier(const bool v);
     /**@}*/
 
+    const boost::optional<dogen::yarn::orm_object_configuration>& orm_configuration() const;
+    boost::optional<dogen::yarn::orm_object_configuration>& orm_configuration();
+    void orm_configuration(const boost::optional<dogen::yarn::orm_object_configuration>& v);
+    void orm_configuration(const boost::optional<dogen::yarn::orm_object_configuration>&& v);
+
 public:
     bool operator==(const object& rhs) const;
     bool operator!=(const object& rhs) const {
@@ -390,6 +397,7 @@ private:
     std::list<dogen::yarn::name> associative_container_keys_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;
+    boost::optional<dogen::yarn::orm_object_configuration> orm_configuration_;
 };
 
 } }
