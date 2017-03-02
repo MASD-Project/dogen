@@ -23,6 +23,7 @@
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
+#include "dogen/yarn/types/orm_configuration_expander.hpp"
 #include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
@@ -50,6 +51,13 @@ void first_stage_expander::
 expand_primitives(const annotations::type_repository& atrp,
     intermediate_model& im) const {
     primitive_expander ex;
+    ex.expand(atrp, im);
+}
+
+void first_stage_expander::
+expand_orm_configuration(const annotations::type_repository& atrp,
+    intermediate_model& im) const {
+    orm_configuration_expander ex;
     ex.expand(atrp, im);
 }
 
@@ -149,6 +157,11 @@ expand_if_compatible(const annotations::annotation_groups_factory& agf,
      * not be available to be populated with the correct language.
      */
     expand_modules(im);
+
+    /*
+     * ORM expansion can be done before or after language expansion.
+     */
+    expand_orm_configuration(atrp, im);
 
     /*
      * Language expansion is required because we only want to process

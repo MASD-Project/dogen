@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-02 Thu 09:38]
+#+CAPTION: Clock summary at [2017-03-02 Thu 10:03]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *33:41* |       |       | 100.0 |
+| *Total time*                                                                | *34:05* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 33:41   |       |       | 100.0 |
-| Active                                                                      |         | 33:41 |       | 100.0 |
+| Stories                                                                     | 34:05   |       |       | 100.0 |
+| Active                                                                      |         | 34:05 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.5 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.8 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.7 |
 | COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   2.6 |
 | COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.7 |
 | COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   6.6 |
 | COMPLETED Setup codacy                                                      |         |       |  0:22 |   1.1 |
-| STARTED Create a language independent ORM layer                             |         |       |  7:00 |  20.8 |
-| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  61.7 |
+| STARTED Create a language independent ORM layer                             |         |       |  7:24 |  21.7 |
+| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  61.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -219,6 +219,7 @@ config file, apparently.
 #+end_quote
 
 *** STARTED Create a language independent ORM layer                   :story:
+    CLOCK: [2017-03-02 Thu 09:39]--[2017-03-02 Thu 10:03] =>  0:24
     CLOCK: [2017-03-02 Thu 08:05]--[2017-03-02 Thu 09:38] =>  1:33
     CLOCK: [2017-03-02 Thu 06:48]--[2017-03-02 Thu 07:28] =>  0:40
     CLOCK: [2017-03-01 Wed 13:10]--[2017-03-01 Wed 17:57] =>  4:47

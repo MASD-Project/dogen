@@ -56,6 +56,12 @@ private:
         intermediate_model& im) const;
 
     /**
+     * @brief Reads the ORM configuration from the meta-data.
+     */
+    void expand_orm_configuration(const annotations::type_repository& atrp,
+        intermediate_model& im) const;
+
+    /**
      * @brief Reads the model language from meta-data.
      */
     void expand_language(const annotations::type_repository& atrp,
