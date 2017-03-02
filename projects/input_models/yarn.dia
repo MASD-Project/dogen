@@ -1095,7 +1095,7 @@ intermediate merged model.#</dia:string>
         <dia:point val="-16.3975,26.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.5813,24.95;-15.6475,29.05"/>
+        <dia:rectangle val="-49.5812,24.95;-15.6475,29.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2640,7 +2640,7 @@ intermediate model.#</dia:string>
         <dia:point val="-15.9325,16"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.1688,12.25;-15.1825,16.8"/>
+        <dia:rectangle val="-49.1687,12.25;-15.1825,16.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -17469,7 +17469,7 @@ space.#</dia:string>
         <dia:point val="69.3025,80.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.5662,79.85;70.0525,91.7498"/>
+        <dia:rectangle val="59.5663,79.85;70.0525,91.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24768,7 +24768,7 @@ space.#</dia:string>
         <dia:point val="101.377,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="101.328,4.15;112.75,14.8"/>
+        <dia:rectangle val="101.327,4.15;112.75,14.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30614,7 +30614,7 @@ output languages.#</dia:string>
         <dia:point val="104,81.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="103.25,80.65;109.338,92.6"/>
+        <dia:rectangle val="103.25,80.65;109.338,91.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30685,7 +30685,7 @@ output languages.#</dia:string>
         <dia:point val="124.52,81.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.77,80.65;129.674,92.6"/>
+        <dia:rectangle val="123.77,80.65;129.674,91.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30756,7 +30756,7 @@ output languages.#</dia:string>
         <dia:point val="105.915,66.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.165,65.65;114.46,78.6"/>
+        <dia:rectangle val="105.165,65.65;114.46,77.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -30791,7 +30791,7 @@ output languages.#</dia:string>
         <dia:point val="10,107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,106.95;21.9675,111.45"/>
+        <dia:rectangle val="9.95,106.95;21.9675,112.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,107"/>
@@ -30800,7 +30800,7 @@ output languages.#</dia:string>
         <dia:real val="11.9175"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="4.4000000000000004"/>
+        <dia:real val="5.2000000000000011"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#orm_object_configuration#</dia:string>
@@ -30915,6 +30915,29 @@ output languages.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
+            <dia:string>#schema_name#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#std::string#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
             <dia:string>#table_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
@@ -31007,7 +31030,7 @@ output languages.#</dia:string>
         <dia:point val="20,98.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.9087,97.85;20.75,108.6"/>
+        <dia:rectangle val="15.9087,97.85;20.75,107.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31281,7 +31304,7 @@ output languages.#</dia:string>
         <dia:point val="-82,22.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-105.325,22.05;-81.25,33.6"/>
+        <dia:rectangle val="-105.325,22.05;-81.25,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31511,7 +31534,7 @@ output languages.#</dia:string>
         <dia:point val="113.755,-1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="113.005,-7.95;126.05,0.6"/>
+        <dia:rectangle val="113.005,-8.65;126.05,-0.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

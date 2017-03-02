@@ -43,8 +43,9 @@ orm_object_configuration_generator::orm_object_configuration_generator() : posit
 void orm_object_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.generate_mapping(create_bool(position + 0));
-    v.table_name(create_std_string(position + 1));
-    v.is_value(create_bool(position + 2));
+    v.schema_name(create_std_string(position + 1));
+    v.table_name(create_std_string(position + 2));
+    v.is_value(create_bool(position + 3));
 }
 
 orm_object_configuration_generator::result_type

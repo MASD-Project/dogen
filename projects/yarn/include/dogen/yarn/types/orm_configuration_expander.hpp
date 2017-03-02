@@ -25,25 +25,49 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <iosfwd>
+#include <boost/optional.hpp>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/orm_model_configuration.hpp"
+#include "dogen/yarn/types/orm_object_configuration.hpp"
+#include "dogen/yarn/types/orm_attribute_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class orm_configuration_expander final {
 public:
-    orm_configuration_expander() = default;
-    orm_configuration_expander(const orm_configuration_expander&) = default;
-    orm_configuration_expander(orm_configuration_expander&&) = default;
-    ~orm_configuration_expander() = default;
-    orm_configuration_expander& operator=(const orm_configuration_expander&) = default;
+    struct type_group {
+        annotations::type generate_mapping;
+        annotations::type database_system;
+        annotations::type table_name;
+        annotations::type schema_name;
+        annotations::type is_primary_key;
+        annotations::type column_name;
+        annotations::type is_nullable;
+        annotations::type letter_case;
+        annotations::type is_value;
+        annotations::type type_override;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    boost::optional<orm_model_configuration> make_model_configuration(
+        const type_group& tg, const annotations::annotation& a) const;
+
+    boost::optional<orm_object_configuration> make_object_configuration(
+        const type_group& tg, const annotations::annotation& a) const;
+
+    boost::optional<orm_attribute_configuration> make_attribute_configuration(
+        const type_group& tg, const annotations::annotation& a) const;
 
 public:
-    bool operator==(const orm_configuration_expander& rhs) const;
-    bool operator!=(const orm_configuration_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const annotations::type_repository& atrp,
+        intermediate_model& im) const;
 };
 
 } }

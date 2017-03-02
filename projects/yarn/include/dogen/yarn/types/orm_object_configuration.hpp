@@ -44,6 +44,7 @@ public:
 public:
     orm_object_configuration(
         const bool generate_mapping,
+        const std::string& schema_name,
         const std::string& table_name,
         const bool is_value);
 
@@ -62,6 +63,11 @@ public:
     bool generate_mapping() const;
     void generate_mapping(const bool v);
     /**@}*/
+
+    const std::string& schema_name() const;
+    std::string& schema_name();
+    void schema_name(const std::string& v);
+    void schema_name(const std::string&& v);
 
     /**
      * @brief Name of the table to map this element to.
@@ -93,6 +99,7 @@ public:
 
 private:
     bool generate_mapping_;
+    std::string schema_name_;
     std::string table_name_;
     bool is_value_;
 };

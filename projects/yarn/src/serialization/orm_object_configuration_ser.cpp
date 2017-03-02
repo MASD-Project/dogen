@@ -38,6 +38,7 @@ void save(Archive& ar,
     const dogen::yarn::orm_object_configuration& v,
     const unsigned int /*version*/) {
     ar << make_nvp("generate_mapping", v.generate_mapping_);
+    ar << make_nvp("schema_name", v.schema_name_);
     ar << make_nvp("table_name", v.table_name_);
     ar << make_nvp("is_value", v.is_value_);
 }
@@ -47,6 +48,7 @@ void load(Archive& ar,
     dogen::yarn::orm_object_configuration& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("generate_mapping", v.generate_mapping_);
+    ar >> make_nvp("schema_name", v.schema_name_);
     ar >> make_nvp("table_name", v.table_name_);
     ar >> make_nvp("is_value", v.is_value_);
 }

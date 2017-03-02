@@ -44,6 +44,7 @@ std::ostream& operator<<(std::ostream& s, const orm_object_configuration& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::orm_object_configuration\"" << ", "
       << "\"generate_mapping\": " << v.generate_mapping() << ", "
+      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"table_name\": " << "\"" << tidy_up_string(v.table_name()) << "\"" << ", "
       << "\"is_value\": " << v.is_value()
       << " }";

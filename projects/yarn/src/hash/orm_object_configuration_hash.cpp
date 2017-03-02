@@ -37,6 +37,7 @@ std::size_t orm_object_configuration_hasher::hash(const orm_object_configuration
     std::size_t seed(0);
 
     combine(seed, v.generate_mapping());
+    combine(seed, v.schema_name());
     combine(seed, v.table_name());
     combine(seed, v.is_value());
 

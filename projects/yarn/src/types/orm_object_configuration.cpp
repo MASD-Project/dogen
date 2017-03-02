@@ -29,21 +29,25 @@ orm_object_configuration::orm_object_configuration()
 
 orm_object_configuration::orm_object_configuration(
     const bool generate_mapping,
+    const std::string& schema_name,
     const std::string& table_name,
     const bool is_value)
     : generate_mapping_(generate_mapping),
+      schema_name_(schema_name),
       table_name_(table_name),
       is_value_(is_value) { }
 
 void orm_object_configuration::swap(orm_object_configuration& other) noexcept {
     using std::swap;
     swap(generate_mapping_, other.generate_mapping_);
+    swap(schema_name_, other.schema_name_);
     swap(table_name_, other.table_name_);
     swap(is_value_, other.is_value_);
 }
 
 bool orm_object_configuration::operator==(const orm_object_configuration& rhs) const {
     return generate_mapping_ == rhs.generate_mapping_ &&
+        schema_name_ == rhs.schema_name_ &&
         table_name_ == rhs.table_name_ &&
         is_value_ == rhs.is_value_;
 }
@@ -60,6 +64,22 @@ bool orm_object_configuration::generate_mapping() const {
 
 void orm_object_configuration::generate_mapping(const bool v) {
     generate_mapping_ = v;
+}
+
+const std::string& orm_object_configuration::schema_name() const {
+    return schema_name_;
+}
+
+std::string& orm_object_configuration::schema_name() {
+    return schema_name_;
+}
+
+void orm_object_configuration::schema_name(const std::string& v) {
+    schema_name_ = v;
+}
+
+void orm_object_configuration::schema_name(const std::string&& v) {
+    schema_name_ = std::move(v);
 }
 
 const std::string& orm_object_configuration::table_name() const {
