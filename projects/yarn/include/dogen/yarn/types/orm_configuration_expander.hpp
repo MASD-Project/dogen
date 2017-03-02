@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include <list>
 #include <iosfwd>
+#include <vector>
+#include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
@@ -33,12 +36,25 @@
 #include "dogen/yarn/types/orm_model_configuration.hpp"
 #include "dogen/yarn/types/orm_object_configuration.hpp"
 #include "dogen/yarn/types/orm_attribute_configuration.hpp"
+#include "dogen/yarn/types/orm_database_systems.hpp"
+#include "dogen/yarn/types/letter_cases.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class orm_configuration_expander final {
-public:
+private:
+    orm_database_systems to_orm_database_system(const std::string& s) const;
+
+    std::vector<orm_database_systems>
+    to_orm_database_system(const std::list<std::string>& vs) const;
+
+    letter_cases to_letter_case(const std::string& s) const;
+
+    std::unordered_map<orm_database_systems, std::string>
+    make_type_overrides(const std::list<std::string> ls) const;
+
+private:
     struct type_group {
         annotations::type generate_mapping;
         annotations::type database_system;
@@ -64,6 +80,10 @@ public:
 
     boost::optional<orm_attribute_configuration> make_attribute_configuration(
         const type_group& tg, const annotations::annotation& a) const;
+
+private:
+    void expand_objects(const type_group& tg, intermediate_model& im) const;
+    void expand_concepts(const type_group& tg, intermediate_model& im) const;
 
 public:
     void expand(const annotations::type_repository& atrp,

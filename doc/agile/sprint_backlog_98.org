@@ -13,21 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-02-28 Tue 07:26]
+#+CAPTION: Clock summary at [2017-03-02 Thu 09:38]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *26:19* |       |       | 100.0 |
+| *Total time*                                                                | *33:41* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 26:19   |       |       | 100.0 |
-| Active                                                                      |         | 26:19 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.9 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   3.5 |
-| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   3.4 |
-| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   2.2 |
-| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   8.5 |
-| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  79.0 |
+| Stories                                                                     | 33:41   |       |       | 100.0 |
+| Active                                                                      |         | 33:41 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.5 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.8 |
+| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   2.6 |
+| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.7 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   6.6 |
+| COMPLETED Setup codacy                                                      |         |       |  0:22 |   1.1 |
+| STARTED Create a language independent ORM layer                             |         |       |  7:00 |  20.8 |
+| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  61.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -216,49 +218,9 @@ tick all boxes (all 302 of them, in my case). You can also provide a
 config file, apparently.
 #+end_quote
 
-*** STARTED Implement the database model using Northwind              :story:
-    CLOCK: [2017-02-28 Tue 06:41]--[2017-02-28 Tue 07:25] =>  0:44
-    CLOCK: [2017-02-27 Mon 22:11]--[2017-02-27 Mon 22:34] =>  0:23
-    CLOCK: [2017-02-27 Mon 21:10]--[2017-02-27 Mon 22:10] =>  1:00
-    CLOCK: [2017-02-26 Sun 23:22]--[2017-02-27 Mon 00:10] =>  0:48
-    CLOCK: [2017-02-26 Sun 22:48]--[2017-02-26 Sun 23:21] =>  0:33
-    CLOCK: [2017-02-26 Sun 22:05]--[2017-02-26 Sun 22:47] =>  0:42
-    CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
-    CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
-    CLOCK: [2017-02-25 Sat 18:02]--[2017-02-25 Sat 18:56] =>  0:54
-    CLOCK: [2017-02-25 Sat 04:05]--[2017-02-25 Sat 05:54] =>  1:49
-    CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
-    CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
-    CLOCK: [2017-02-24 Fri 09:01]--[2017-02-24 Fri 10:33] =>  1:32
-    CLOCK: [2017-02-23 Thu 23:06]--[2017-02-23 Thu 23:39] =>  0:33
-    CLOCK: [2017-02-23 Thu 19:15]--[2017-02-23 Thu 23:05] =>  3:50
-    CLOCK: [2017-02-14 Tue 06:33]--[2017-02-14 Tue 07:30] =>  0:57
-    CLOCK: [2017-02-13 Mon 20:25]--[2017-02-13 Mon 22:33] =>  2:08
-
-Now we are using Dogen in anger with ODB, we need to make sure the
-database model is actually exercising all of this functionality. One
-easy way of achieving this is to use Microsoft's Northwind Database as
-the base for the model.
-
-- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
-
-We should implement it using Oracle and use this to test the changes
-to ODB's oracle support.
-
-Tasks:
-
-- add comment for ODB targets
-- add flag to mark a type as a value
-- case of the identifiers is a problem: sometimes we get them
-  uppercase (when we do them without quotes in sql plus) sometimes we
-  get them lowercase (from odb). use =--sql-name-case= upper/lower as
-  a flag.
-- schema initialisation from statics is not working; this is as
-  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
-  entity, but that then causes an exception.
-- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
-
 *** STARTED Create a language independent ORM layer                   :story:
+    CLOCK: [2017-03-02 Thu 08:05]--[2017-03-02 Thu 09:38] =>  1:33
+    CLOCK: [2017-03-02 Thu 06:48]--[2017-03-02 Thu 07:28] =>  0:40
     CLOCK: [2017-03-01 Wed 13:10]--[2017-03-01 Wed 17:57] =>  4:47
 
 At present we are populating ODB pragmas manually. While this works,
@@ -333,6 +295,78 @@ with odb.
 
 This time has arrived now. We should create a set of concepts in yarn
 related to ORM (object-relational mapping).
+
+*** Clean up annotation scope types                                   :story:
+
+As part of the attribute rename (which used to be called property) we
+should have renamed the annotation scope as well to attribute.
+
+In addition, we have a scope type of "entity" but the yarn meta-model
+type is really "element".
+
+We should also check if "not applicable" scope is in use, and if not
+delete it.
+
+*** Add a new annotation type of "pair"                               :story:
+
+It would be nice to be able to declare a annotation type with a value
+type of "pair" or "key value pair" and have the annotations
+automatically perform the splitting. The separator should not be
+equals, since we already use that for annotations kvps, but it could
+be comma, pipe, etc. The API would be augmented to return a
+=std::pair= with key and value.
+
+One slight snag: the value could be of any type:
+
+- boolean
+- string
+- enumeration (when we support these)
+- even text collection
+
+We can start by just supporting strings, but probably worthwhile
+having a think on how to specify the type.
+
+*** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-28 Tue 06:41]--[2017-02-28 Tue 07:25] =>  0:44
+    CLOCK: [2017-02-27 Mon 22:11]--[2017-02-27 Mon 22:34] =>  0:23
+    CLOCK: [2017-02-27 Mon 21:10]--[2017-02-27 Mon 22:10] =>  1:00
+    CLOCK: [2017-02-26 Sun 23:22]--[2017-02-27 Mon 00:10] =>  0:48
+    CLOCK: [2017-02-26 Sun 22:48]--[2017-02-26 Sun 23:21] =>  0:33
+    CLOCK: [2017-02-26 Sun 22:05]--[2017-02-26 Sun 22:47] =>  0:42
+    CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
+    CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
+    CLOCK: [2017-02-25 Sat 18:02]--[2017-02-25 Sat 18:56] =>  0:54
+    CLOCK: [2017-02-25 Sat 04:05]--[2017-02-25 Sat 05:54] =>  1:49
+    CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
+    CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
+    CLOCK: [2017-02-24 Fri 09:01]--[2017-02-24 Fri 10:33] =>  1:32
+    CLOCK: [2017-02-23 Thu 23:06]--[2017-02-23 Thu 23:39] =>  0:33
+    CLOCK: [2017-02-23 Thu 19:15]--[2017-02-23 Thu 23:05] =>  3:50
+    CLOCK: [2017-02-14 Tue 06:33]--[2017-02-14 Tue 07:30] =>  0:57
+    CLOCK: [2017-02-13 Mon 20:25]--[2017-02-13 Mon 22:33] =>  2:08
+
+Now we are using Dogen in anger with ODB, we need to make sure the
+database model is actually exercising all of this functionality. One
+easy way of achieving this is to use Microsoft's Northwind Database as
+the base for the model.
+
+- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
+
+We should implement it using Oracle and use this to test the changes
+to ODB's oracle support.
+
+Tasks:
+
+- add comment for ODB targets
+- add flag to mark a type as a value
+- case of the identifiers is a problem: sometimes we get them
+  uppercase (when we do them without quotes in sql plus) sometimes we
+  get them lowercase (from odb). use =--sql-name-case= upper/lower as
+  a flag.
+- schema initialisation from statics is not working; this is as
+  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
+  entity, but that then causes an exception.
+- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
 
 *** Add support for Visual Studio C++ projects                        :story:
 

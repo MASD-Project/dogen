@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"

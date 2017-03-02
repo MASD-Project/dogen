@@ -112,4 +112,54 @@ std::string traits::primitive::use_type_aliasing() {
     return r;
 }
 
+std::string traits::orm::generate_mapping() {
+    static std::string r("yarn.orm.generate_mapping");
+    return r;
+}
+
+std::string traits::orm::database_system() {
+    static std::string r("yarn.orm.database_system");
+    return r;
+}
+
+std::string traits::orm::table_name() {
+    static std::string r("yarn.orm.table_name");
+    return r;
+}
+
+std::string traits::orm::schema_name() {
+    static std::string r("yarn.orm.schema_name");
+    return r;
+}
+
+std::string traits::orm::is_primary_key() {
+    static std::string r("yarn.orm.is_primary_key");
+    return r;
+}
+
+std::string traits::orm::column_name() {
+    static std::string r("yarn.orm.column_name");
+    return r;
+}
+
+std::string traits::orm::is_nullable() {
+    static std::string r("yarn.orm.is_nullable");
+    return r;
+}
+
+std::string traits::orm::letter_case() {
+    static std::string r("yarn.orm.letter_case");
+    return r;
+}
+
+std::string traits::orm::is_value() {
+    static std::string r("yarn.orm.is_value");
+    return r;
+}
+
+std::string traits::orm::type_override() {
+    static std::string r("yarn.orm.type_override");
+    return r;
+}
+
 } }

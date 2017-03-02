@@ -63,6 +63,19 @@ struct traits {
         static std::string is_nullable();
         static std::string use_type_aliasing();
     };
+
+    struct orm {
+        static std::string generate_mapping();
+        static std::string database_system();
+        static std::string table_name();
+        static std::string schema_name();
+        static std::string is_primary_key();
+        static std::string column_name();
+        static std::string is_nullable();
+        static std::string letter_case();
+        static std::string is_value();
+        static std::string type_override();
+    };
 };
 
 } }
