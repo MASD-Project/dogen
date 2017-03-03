@@ -377,6 +377,10 @@ tests. In addition, DST's such as thrift provide a wealth of wire
 formats, so if there is no easy-access low-level wire format library,
 it would be very difficult to get this right.
 
+Links:
+
+- [[https://github.com/protobuf-c/protobuf-c][protobuf-c]]: protobuf stand alone library in C.
+
 *** Add support for BSON serialisation                                :story:
 
 It would be useful to support Mongo DB's BSON. There is a C++ stand
