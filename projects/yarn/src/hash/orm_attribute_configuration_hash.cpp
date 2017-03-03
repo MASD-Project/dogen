@@ -29,6 +29,16 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
+inline std::size_t hash_boost_optional_bool(const boost::optional<bool>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_map_dogen_yarn_orm_database_systems_std_string(const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -48,7 +58,7 @@ std::size_t orm_attribute_configuration_hasher::hash(const orm_attribute_configu
 
     combine(seed, v.column_name());
     combine(seed, v.is_primary_key());
-    combine(seed, v.is_nullable());
+    combine(seed, hash_boost_optional_bool(v.is_nullable()));
     combine(seed, hash_std_unordered_map_dogen_yarn_orm_database_systems_std_string(v.type_overrides()));
 
     return seed;

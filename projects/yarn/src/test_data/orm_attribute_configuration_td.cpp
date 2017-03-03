@@ -34,6 +34,13 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
+boost::optional<bool>
+create_boost_optional_bool(unsigned int position) {
+    boost::optional<bool> r(
+        create_bool(position));
+    return r;
+}
+
 dogen::yarn::orm_database_systems
 create_dogen_yarn_orm_database_systems(const unsigned int position) {
     return dogen::yarn::orm_database_systems_generator::create(position);
@@ -58,7 +65,7 @@ void orm_attribute_configuration_generator::
 populate(const unsigned int position, result_type& v) {
     v.column_name(create_std_string(position + 0));
     v.is_primary_key(create_bool(position + 1));
-    v.is_nullable(create_bool(position + 2));
+    v.is_nullable(create_boost_optional_bool(position + 2));
     v.type_overrides(create_std_unordered_map_dogen_yarn_orm_database_systems_std_string(position + 3));
 }
 

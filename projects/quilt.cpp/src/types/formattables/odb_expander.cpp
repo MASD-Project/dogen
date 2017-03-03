@@ -41,6 +41,9 @@ const std::string primitive_column_attribute("column(\"\")");
 const std::string id_pragma("id");
 const std::string no_id_pragma("no_id");
 
+const std::string null_pragma("null");
+const std::string not_null_pragma("not_null");
+
 }
 
 namespace dogen {
@@ -132,6 +135,13 @@ void odb_properties_generator::visit(const yarn::object& o) {
             const auto& cfg(*attr.orm_configuration());
             if (cfg.is_primary_key())
                 attr_pragmas.push_back(id_pragma);
+
+            if (cfg.is_nullable()) {
+                if (*cfg.is_nullable())
+                    attr_pragmas.push_back(null_pragma);
+                else
+                    attr_pragmas.push_back(not_null_pragma);
+            }
         }
 
         if (attr_pragmas.empty())

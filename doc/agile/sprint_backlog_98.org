@@ -230,6 +230,7 @@ Codacy picked up on the fact that our constructor for exceptions is
 not explicit. Update template and regenerate all code.
 
 *** STARTED Create a language independent ORM layer                   :story:
+    CLOCK: [2017-03-03 Fri 22:57]--[2017-03-03 Fri 23:27] =>  0:30
     CLOCK: [2017-03-03 Fri 22:40]--[2017-03-03 Fri 22:56] =>  0:16
     CLOCK: [2017-03-03 Fri 22:01]--[2017-03-03 Fri 22:39] =>  0:38
     CLOCK: [2017-03-03 Fri 21:20]--[2017-03-03 Fri 21:34] =>  0:14

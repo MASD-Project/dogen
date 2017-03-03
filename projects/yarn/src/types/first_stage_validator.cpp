@@ -35,6 +35,8 @@ const std::string generate_mapping_off(
     "mapping properties set: ");
 const std::string multiple_primary_keys(
     "Object has more than one attribute marked as primary key: ");
+const std::string nullable_primary_key(
+    "Primary key cannot be nullable. Object: ");
 
 }
 
@@ -153,6 +155,14 @@ void validator::validate(const std::string& id, const yarn::object& o) const {
         const auto& cfg(*attr.orm_configuration());
         if (!cfg.is_primary_key())
             continue;
+
+        /*
+         * Primary keys cannot be nullable.
+         */
+        if (cfg.is_nullable() && *cfg.is_nullable()) {
+            BOOST_LOG_SEV(lg, error) << nullable_primary_key << id;
+            BOOST_THROW_EXCEPTION(validation_error(nullable_primary_key + id));
+        }
 
         /*
          * An object can have at most one attribute marked as a primary

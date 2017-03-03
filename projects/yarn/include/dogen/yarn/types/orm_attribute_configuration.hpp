@@ -28,6 +28,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/yarn/hash/orm_database_systems_hash.hpp"
 #include "dogen/yarn/serialization/orm_attribute_configuration_fwd_ser.hpp"
@@ -38,17 +39,19 @@ namespace yarn {
 class orm_attribute_configuration final {
 public:
     orm_attribute_configuration(const orm_attribute_configuration&) = default;
-    orm_attribute_configuration(orm_attribute_configuration&&) = default;
     ~orm_attribute_configuration() = default;
 
 public:
     orm_attribute_configuration();
 
 public:
+    orm_attribute_configuration(orm_attribute_configuration&& rhs);
+
+public:
     orm_attribute_configuration(
         const std::string& column_name,
         const bool is_primary_key,
-        const bool is_nullable,
+        const boost::optional<bool>& is_nullable,
         const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& type_overrides);
 
 private:
@@ -81,8 +84,10 @@ public:
      * @brief If true, the attribute can be NULL.
      */
     /**@{*/
-    bool is_nullable() const;
-    void is_nullable(const bool v);
+    const boost::optional<bool>& is_nullable() const;
+    boost::optional<bool>& is_nullable();
+    void is_nullable(const boost::optional<bool>& v);
+    void is_nullable(const boost::optional<bool>&& v);
     /**@}*/
 
     /**
@@ -108,7 +113,7 @@ public:
 private:
     std::string column_name_;
     bool is_primary_key_;
-    bool is_nullable_;
+    boost::optional<bool> is_nullable_;
     std::unordered_map<dogen::yarn::orm_database_systems, std::string> type_overrides_;
 };
 

@@ -24,13 +24,18 @@ namespace dogen {
 namespace yarn {
 
 orm_attribute_configuration::orm_attribute_configuration()
-    : is_primary_key_(static_cast<bool>(0)),
-      is_nullable_(static_cast<bool>(0)) { }
+    : is_primary_key_(static_cast<bool>(0)) { }
+
+orm_attribute_configuration::orm_attribute_configuration(orm_attribute_configuration&& rhs)
+    : column_name_(std::move(rhs.column_name_)),
+      is_primary_key_(std::move(rhs.is_primary_key_)),
+      is_nullable_(std::move(rhs.is_nullable_)),
+      type_overrides_(std::move(rhs.type_overrides_)) { }
 
 orm_attribute_configuration::orm_attribute_configuration(
     const std::string& column_name,
     const bool is_primary_key,
-    const bool is_nullable,
+    const boost::optional<bool>& is_nullable,
     const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& type_overrides)
     : column_name_(column_name),
       is_primary_key_(is_primary_key),
@@ -82,12 +87,20 @@ void orm_attribute_configuration::is_primary_key(const bool v) {
     is_primary_key_ = v;
 }
 
-bool orm_attribute_configuration::is_nullable() const {
+const boost::optional<bool>& orm_attribute_configuration::is_nullable() const {
     return is_nullable_;
 }
 
-void orm_attribute_configuration::is_nullable(const bool v) {
+boost::optional<bool>& orm_attribute_configuration::is_nullable() {
+    return is_nullable_;
+}
+
+void orm_attribute_configuration::is_nullable(const boost::optional<bool>& v) {
     is_nullable_ = v;
+}
+
+void orm_attribute_configuration::is_nullable(const boost::optional<bool>&& v) {
+    is_nullable_ = std::move(v);
 }
 
 const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& orm_attribute_configuration::type_overrides() const {
