@@ -1481,6 +1481,15 @@ renaming =dia.comment= to =yarn.dia.comment=, we had no errors at all,
 but then all fields defaulted. We should have gotten an error message
 stating that the field did not exist.
 
+Links:
+
+- [[https://github.com/Martinsos/edlib][edlib]]: Lightweight, super fast C/C++ (& Python) library for sequence
+  alignment using edit (Levenshtein) distance.
+- [[https://github.com/cschanaj/levenshtein-distance][levenshtein-distance]]: C++ Functions for Levenshtein Distance
+  Computation with Generic Types
+- [[https://github.com/schuyler/levenshtein][levenshtein]]: Fast string edit distance computation, using the
+  Damerau-Levenshtein algorithm.
+
 *** Consider renaming test data to sequence                           :story:
 
 Test data is a strange name. We need something slightly more idiomatic
@@ -7942,7 +7951,10 @@ or python by creating a formatter for it. Boost.Python would be more
 straightforward as it is plain C++ code; SWIG would require generating
 an interface file (IDL-like) and as such is closer to [[*Add%20support%20for%20thrift%20and%20protocol%20buffers][this]] story.
 
-See also this article: [[https://www.softwariness.com/articles/api-design-for-swig/][C++ API Design for SWIG]]
+Links:
+
+- [[https://www.softwariness.com/articles/api-design-for-swig/][C++ API Design for SWIG]]
+- [[https://github.com/pybind/pybind11][pybind11]]: Seamless operability between C++11 and Python
 
 *** Consider adding support for Boost.Operators                       :story:
 
