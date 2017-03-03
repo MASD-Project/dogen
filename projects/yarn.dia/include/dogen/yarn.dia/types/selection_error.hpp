@@ -38,7 +38,7 @@ public:
     ~selection_error() noexcept = default;
 
 public:
-    selection_error(const std::string& message) : message_(message) { }
+    explicit selection_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

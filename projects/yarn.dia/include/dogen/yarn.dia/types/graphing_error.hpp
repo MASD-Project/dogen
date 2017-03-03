@@ -41,7 +41,7 @@ public:
     ~graphing_error() noexcept = default;
 
 public:
-    graphing_error(const std::string& message) : message_(message) { }
+    explicit graphing_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

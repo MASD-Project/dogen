@@ -36,7 +36,7 @@ namespace northwind {
 
 #ifdef ODB_COMPILER
 
-#pragma db object(territory) schema("northwind")
+#pragma db object(territory) no_id
 
 #pragma db member(territory::territory_description_) not_null
 #pragma db member(territory::region_id_) not_null

@@ -39,7 +39,7 @@ public:
     ~resolution_error() noexcept = default;
 
 public:
-    resolution_error(const std::string& message) : message_(message) { }
+    explicit resolution_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

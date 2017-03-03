@@ -40,7 +40,7 @@ public:
     ~indexing_error() noexcept = default;
 
 public:
-    indexing_error(const std::string& message) : message_(message) { }
+    explicit indexing_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

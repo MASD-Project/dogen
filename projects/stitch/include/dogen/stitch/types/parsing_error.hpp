@@ -40,7 +40,7 @@ public:
     ~parsing_error() noexcept = default;
 
 public:
-    parsing_error(const std::string& message) : message_(message) { }
+    explicit parsing_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }

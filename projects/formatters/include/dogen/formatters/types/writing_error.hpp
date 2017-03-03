@@ -40,7 +40,7 @@ public:
     ~writing_error() noexcept = default;
 
 public:
-    writing_error(const std::string& message) : message_(message) { }
+    explicit writing_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }
