@@ -490,6 +490,7 @@ Notes:
 - add CMake file to find knitter etc and include those files in
   package. We probably should install dogen now and have dogen rely on
   installed dogen first, with an option to switch to "built" dogen.
+- see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas.
 
 *** Merge properties factory with stitching factory                   :story:
 
