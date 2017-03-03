@@ -8284,6 +8284,7 @@ See also:
 - [[http://blog.qt.io/blog/2017/01/23/qt-scxml-state-chart-support-qt-creator/][Qt SCXML and State Chart Support in Qt Creator]]
 - [[https://en.wikipedia.org/wiki/SCXML][SCXML (wikipedia)]]
 - [[https://www.w3.org/TR/scxml/][State Chart XML (SCXML): State Machine Notation for Control Abstraction]]
+- [[https://github.com/tklab-tud/uscxml][uscxml]]
 
 *** Add reflection support by using model and type enums               :epic:
 
