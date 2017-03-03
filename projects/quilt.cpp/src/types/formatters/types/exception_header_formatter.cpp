@@ -102,7 +102,7 @@ a.stream() << "    " << ye.name().simple() << "() = default;" << std::endl;
 a.stream() << "    ~" << ye.name().simple() << "() noexcept = default;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
-a.stream() << "    " << ye.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
+a.stream() << "    explicit " << ye.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    const char* what() const noexcept { return(message_.c_str()); }" << std::endl;

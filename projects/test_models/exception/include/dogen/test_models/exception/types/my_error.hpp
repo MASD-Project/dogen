@@ -41,7 +41,7 @@ public:
     ~my_error() noexcept = default;
 
 public:
-    my_error(const std::string& message) : message_(message) { }
+    explicit my_error(const std::string& message) : message_(message) { }
 
 public:
     const char* what() const noexcept { return(message_.c_str()); }
