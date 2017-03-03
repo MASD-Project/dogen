@@ -3133,7 +3133,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=null#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_nullable=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3559,7 +3559,8 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=type("BLOB")
+            <dia:string>##DOGEN yarn.orm.type_override=postgresql,BYTEA
+#DOGEN yarn.orm.type_override=oracle,BLOB
 #DOGEN yarn.orm.is_nullable=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -4017,7 +4018,8 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=type("BLOB")
+            <dia:string>##DOGEN yarn.orm.type_override=postgresql,BYTEA
+#DOGEN yarn.orm.type_override=oracle,BLOB
 #DOGEN yarn.orm.is_nullable=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
@@ -5097,13 +5099,13 @@ types to test features not covered in Northwind.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O29">
       <dia:attribute name="obj_pos">
-        <dia:point val="127.917,-8.91667"/>
+        <dia:point val="129,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.867,-8.96667;142.327,1.93333"/>
+        <dia:rectangle val="128.95,-9.05;143.41,1.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="127.917,-8.91667"/>
+        <dia:point val="129,-9"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="14.359999999999999"/>
@@ -5756,7 +5758,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=null#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_nullable=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7420,17 +7422,17 @@ database, adapted to fit both Dogen and ODB.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="135.097,-8.91667"/>
+        <dia:point val="136.18,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="134.347,-17.05;135.847,-8.11667"/>
+        <dia:rectangle val="134.935,-17.05;136.93,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="135.097,-8.91667"/>
-        <dia:point val="135.097,-13"/>
+        <dia:point val="136.18,-9"/>
+        <dia:point val="136.18,-13"/>
         <dia:point val="134.985,-13"/>
         <dia:point val="134.985,-17"/>
       </dia:attribute>
