@@ -162,7 +162,7 @@ boost::optional<name> updater::containing_module(const name& n) {
         BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
                                  << n.id()
                                  << "' Module: '" << module_n.id();
-        i->second.members().push_back(n);
+        i->second.members().push_back(n.id());
         return module_n;
     }
 

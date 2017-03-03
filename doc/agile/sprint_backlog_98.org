@@ -306,6 +306,11 @@ with odb.
 This time has arrived now. We should create a set of concepts in yarn
 related to ORM (object-relational mapping).
 
+*** Fix codacy warning on exceptions                                  :story:
+
+Codacy picked up on the fact that our constructor for exceptions is
+not explicit. Update template and regenerate all code.
+
 *** Add a "flat directory" mode                                       :story:
 
 It would be nice to have a mode in which all files get placed in a

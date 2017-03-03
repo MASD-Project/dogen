@@ -1981,7 +1981,7 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
             <dia:string>#members#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;name&gt;#</dia:string>
+            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -17492,7 +17492,7 @@ space.#</dia:string>
         <dia:point val="69.3025,80.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.5662,79.85;70.0525,91.7498"/>
+        <dia:rectangle val="59.5663,79.85;70.0525,91.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31076,7 +31076,7 @@ output languages.#</dia:string>
         <dia:point val="20,98.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.9087,97.85;20.75,107.8"/>
+        <dia:rectangle val="15.9088,97.85;20.75,107.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -31785,7 +31785,7 @@ output languages.#</dia:string>
         <dia:point val="-2.0075,96.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.81875,95.45;-1.2575,108.6"/>
+        <dia:rectangle val="-9.81875,95.45;-1.2575,107.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

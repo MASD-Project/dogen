@@ -27,9 +27,9 @@
 
 #include <list>
 #include <iosfwd>
+#include <string>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/serialization/module_fwd_ser.hpp"
 #include "dogen/yarn/types/orm_module_configuration.hpp"
@@ -64,7 +64,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const std::list<dogen::yarn::name>& members,
+        const std::list<std::string>& members,
         const bool is_root,
         const bool is_global_module,
         const boost::optional<dogen::yarn::orm_module_configuration>& orm_configuration);
@@ -91,10 +91,10 @@ public:
      * @brief All the model elements contained in this module.
      */
     /**@{*/
-    const std::list<dogen::yarn::name>& members() const;
-    std::list<dogen::yarn::name>& members();
-    void members(const std::list<dogen::yarn::name>& v);
-    void members(const std::list<dogen::yarn::name>&& v);
+    const std::list<std::string>& members() const;
+    std::list<std::string>& members();
+    void members(const std::list<std::string>& v);
+    void members(const std::list<std::string>&& v);
     /**@}*/
 
     /**
@@ -132,7 +132,7 @@ public:
     module& operator=(module other);
 
 private:
-    std::list<dogen::yarn::name> members_;
+    std::list<std::string> members_;
     bool is_root_;
     bool is_global_module_;
     boost::optional<dogen::yarn::orm_module_configuration> orm_configuration_;

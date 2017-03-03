@@ -20,19 +20,27 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/yarn/io/orm_module_configuration_io.hpp"
 
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << *i;
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
     s << "] ";
     return s;
@@ -79,7 +87,7 @@ module::module(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const std::list<dogen::yarn::name>& members,
+    const std::list<std::string>& members,
     const bool is_root,
     const bool is_global_module,
     const boost::optional<dogen::yarn::orm_module_configuration>& orm_configuration)
@@ -162,19 +170,19 @@ module& module::operator=(module other) {
     return *this;
 }
 
-const std::list<dogen::yarn::name>& module::members() const {
+const std::list<std::string>& module::members() const {
     return members_;
 }
 
-std::list<dogen::yarn::name>& module::members() {
+std::list<std::string>& module::members() {
     return members_;
 }
 
-void module::members(const std::list<dogen::yarn::name>& v) {
+void module::members(const std::list<std::string>& v) {
     members_ = v;
 }
 
-void module::members(const std::list<dogen::yarn::name>&& v) {
+void module::members(const std::list<std::string>&& v) {
     members_ = std::move(v);
 }
 

@@ -22,6 +22,7 @@
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/optional.hpp>
@@ -29,7 +30,6 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/orm_module_configuration_ser.hpp"

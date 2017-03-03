@@ -18,22 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/name_td.hpp"
+#include <sstream>
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/orm_module_configuration_td.hpp"
 
 namespace {
 
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
 }
 
-std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
-    std::list<dogen::yarn::name> r;
+std::list<std::string> create_std_list_std_string(unsigned int position) {
+    std::list<std::string> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_name(position + i));
+        r.push_back(create_std_string(position + i));
     }
     return r;
 }
@@ -64,7 +65,7 @@ module_generator::module_generator() : position_(0) { }
 void module_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::element_generator::populate(position, v);
-    v.members(create_std_list_dogen_yarn_name(position + 0));
+    v.members(create_std_list_std_string(position + 0));
     v.is_root(create_bool(position + 1));
     v.is_global_module(create_bool(position + 2));
     v.orm_configuration(create_boost_optional_dogen_yarn_orm_module_configuration(position + 3));
