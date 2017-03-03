@@ -59,6 +59,7 @@
 #include "dogen/yarn/io/orm_database_systems_io.hpp"
 #include "dogen/yarn/io/mapping_set_repository_io.hpp"
 #include "dogen/yarn/io/orm_model_configuration_io.hpp"
+#include "dogen/yarn/io/orm_module_configuration_io.hpp"
 #include "dogen/yarn/io/orm_object_configuration_io.hpp"
 #include "dogen/yarn/io/orm_attribute_configuration_io.hpp"
 #include "dogen/yarn/io/intermediate_model_repository_io.hpp"

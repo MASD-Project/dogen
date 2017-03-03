@@ -113,6 +113,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration class_id="29" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -178,45 +181,48 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="29" tracking_level="0" version="0">
+	<concepts class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<builtins class_id="30" tracking_level="0" version="0">
+	<builtins class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="31" tracking_level="0" version="0">
+	<enumerations class_id="32" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="32" tracking_level="0" version="0">
+	<primitives class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="33" tracking_level="0" version="0">
+	<objects class_id="34" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</objects>
-	<exceptions class_id="34" tracking_level="0" version="0">
+	<exceptions class_id="35" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="35" tracking_level="0" version="0">
+	<visitors class_id="36" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="36" tracking_level="0" version="0">
+	<injected_elements class_id="37" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
@@ -274,18 +280,21 @@
 		</members>
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
+		<orm_configuration>
+			<initialized>0</initialized>
+		</orm_configuration>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="37" tracking_level="0" version="0">
+	<output_languages class_id="38" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
-	<scribble_groups class_id="38" tracking_level="0" version="0">
+	<scribble_groups class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</scribble_groups>
-	<orm_configuration class_id="39" tracking_level="0" version="0">
+	<orm_configuration class_id="40" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_configuration>
 </entity>

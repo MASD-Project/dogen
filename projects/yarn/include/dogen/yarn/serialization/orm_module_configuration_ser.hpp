@@ -18,19 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/module_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/orm_module_configuration_io.hpp"
+#ifndef DOGEN_YARN_SERIALIZATION_ORM_MODULE_CONFIGURATION_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_ORM_MODULE_CONFIGURATION_SER_HPP
 
-namespace dogen {
-namespace yarn {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const module& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/yarn/types/orm_module_configuration.hpp"
+
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::orm_module_configuration)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::yarn::orm_module_configuration& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::yarn::orm_module_configuration& v, unsigned int version);
 
 } }
+
+#endif

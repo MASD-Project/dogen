@@ -120,6 +120,7 @@
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/legacy_name_tree_parser.hpp"
 #include "dogen/yarn/types/orm_model_configuration.hpp"
+#include "dogen/yarn/types/orm_module_configuration.hpp"
 #include "dogen/yarn/types/orm_object_configuration.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/orm_configuration_expander.hpp"

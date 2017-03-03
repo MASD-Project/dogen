@@ -18,19 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/module_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/orm_module_configuration_io.hpp"
+#ifndef DOGEN_YARN_HASH_ORM_MODULE_CONFIGURATION_HASH_HPP
+#define DOGEN_YARN_HASH_ORM_MODULE_CONFIGURATION_HASH_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <functional>
+#include "dogen/yarn/types/orm_module_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const module& v) {
-    v.to_stream(s);
-    return(s);
-}
+struct orm_module_configuration_hasher {
+public:
+    static std::size_t hash(const orm_module_configuration& v);
+};
 
 } }
+
+namespace std {
+
+template<>
+struct hash<dogen::yarn::orm_module_configuration> {
+public:
+    size_t operator()(const dogen::yarn::orm_module_configuration& v) const {
+        return dogen::yarn::orm_module_configuration_hasher::hash(v);
+    }
+};
+
+}
+#endif

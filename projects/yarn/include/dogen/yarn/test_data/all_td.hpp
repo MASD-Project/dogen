@@ -59,6 +59,7 @@
 #include "dogen/yarn/test_data/orm_database_systems_td.hpp"
 #include "dogen/yarn/test_data/mapping_set_repository_td.hpp"
 #include "dogen/yarn/test_data/orm_model_configuration_td.hpp"
+#include "dogen/yarn/test_data/orm_module_configuration_td.hpp"
 #include "dogen/yarn/test_data/orm_object_configuration_td.hpp"
 #include "dogen/yarn/test_data/orm_attribute_configuration_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_repository_td.hpp"

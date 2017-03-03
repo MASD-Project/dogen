@@ -21,6 +21,7 @@
 #include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
+#include "dogen/yarn/test_data/orm_module_configuration_td.hpp"
 
 namespace {
 
@@ -41,6 +42,18 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
+dogen::yarn::orm_module_configuration
+create_dogen_yarn_orm_module_configuration(const unsigned int position) {
+    return dogen::yarn::orm_module_configuration_generator::create(position);
+}
+
+boost::optional<dogen::yarn::orm_module_configuration>
+create_boost_optional_dogen_yarn_orm_module_configuration(unsigned int position) {
+    boost::optional<dogen::yarn::orm_module_configuration> r(
+        create_dogen_yarn_orm_module_configuration(position));
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -54,6 +67,7 @@ populate(const unsigned int position, result_type& v) {
     v.members(create_std_list_dogen_yarn_name(position + 0));
     v.is_root(create_bool(position + 1));
     v.is_global_module(create_bool(position + 2));
+    v.orm_configuration(create_boost_optional_dogen_yarn_orm_module_configuration(position + 3));
 }
 
 module_generator::result_type

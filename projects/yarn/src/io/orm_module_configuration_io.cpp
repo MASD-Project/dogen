@@ -19,17 +19,25 @@
  *
  */
 #include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/module_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
+#include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/orm_module_configuration_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const module& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const orm_module_configuration& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::orm_module_configuration\"" << ", "
+      << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\""
+      << " }";
     return(s);
 }
 

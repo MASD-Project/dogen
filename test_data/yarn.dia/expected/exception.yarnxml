@@ -117,6 +117,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration class_id="29" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -184,39 +187,42 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="29" tracking_level="0" version="0">
+	<concepts class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<builtins class_id="30" tracking_level="0" version="0">
+	<builtins class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="31" tracking_level="0" version="0">
+	<enumerations class_id="32" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="32" tracking_level="0" version="0">
+	<primitives class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="33" tracking_level="0" version="0">
+	<objects class_id="34" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</objects>
-	<exceptions class_id="34" tracking_level="0" version="0">
+	<exceptions class_id="35" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="35" tracking_level="0" version="0">
+		<item class_id="36" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;&lt;pkg&gt;&lt;catastrophic_error&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_2">
 				<element>
@@ -341,12 +347,12 @@
 			</second>
 		</item>
 	</exceptions>
-	<visitors class_id="36" tracking_level="0" version="0">
+	<visitors class_id="37" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="37" tracking_level="0" version="0">
+	<injected_elements class_id="38" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
@@ -404,24 +410,27 @@
 		</members>
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
+		<orm_configuration>
+			<initialized>0</initialized>
+		</orm_configuration>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="38" tracking_level="0" version="0">
+	<output_languages class_id="39" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
-	<scribble_groups class_id="39" tracking_level="0" version="0">
+	<scribble_groups class_id="40" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="40" tracking_level="0" version="0">
+		<item class_id="41" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;exception&gt;</first>
-			<second class_id="41" tracking_level="0" version="0">
-				<parent class_id="42" tracking_level="0" version="0">
-					<entries class_id="43" tracking_level="0" version="0">
+			<second class_id="42" tracking_level="0" version="0">
+				<parent class_id="43" tracking_level="0" version="0">
+					<entries class_id="44" tracking_level="0" version="0">
 						<count>6</count>
 						<item_version>0</item_version>
-						<item class_id="44" tracking_level="0" version="0">
+						<item class_id="45" tracking_level="0" version="0">
 							<first>yarn.dia.comment</first>
 							<second>true</second>
 						</item>
@@ -452,7 +461,7 @@
 						<item_version>0</item_version>
 					</candidate_labels>
 				</parent>
-				<children class_id="45" tracking_level="0" version="0">
+				<children class_id="46" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -460,7 +469,7 @@
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_configuration class_id="46" tracking_level="0" version="0">
+	<orm_configuration class_id="47" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_configuration>
 </entity>

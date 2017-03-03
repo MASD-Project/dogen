@@ -121,6 +121,9 @@ in the context of inheritance.
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration class_id="29" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -188,6 +191,9 @@ in the context of inheritance.
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -255,6 +261,9 @@ in the context of inheritance.
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -322,6 +331,9 @@ in the context of inheritance.
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -389,34 +401,37 @@ in the context of inheritance.
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="29" tracking_level="0" version="0">
+	<concepts class_id="30" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<builtins class_id="30" tracking_level="0" version="0">
+	<builtins class_id="31" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="31" tracking_level="0" version="0">
+	<enumerations class_id="32" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</enumerations>
-	<primitives class_id="32" tracking_level="0" version="0">
+	<primitives class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="33" tracking_level="0" version="0">
+	<objects class_id="34" tracking_level="0" version="0">
 		<count>29</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="34" tracking_level="0" version="0">
+		<item class_id="35" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;pkg4&gt;&lt;child_via_settings&gt;</first>
 			<second class_id="10" tracking_level="1" version="0" object_id="_5">
 				<element>
@@ -476,14 +491,14 @@ in the context of inheritance.
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="35" tracking_level="0" version="0">
+				<all_attributes class_id="36" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
 				<local_attributes>
 					<count>1</count>
 					<item_version>0</item_version>
-					<item class_id="36" tracking_level="0" version="0">
+					<item class_id="37" tracking_level="0" version="0">
 						<documentation></documentation>
 						<annotation>
 							<entries>
@@ -518,7 +533,7 @@ in the context of inheritance.
 							<identifiable></identifiable>
 						</name>
 						<unparsed_type>int</unparsed_type>
-						<parsed_type class_id="37" tracking_level="0" version="0">
+						<parsed_type class_id="38" tracking_level="0" version="0">
 							<current>
 								<id></id>
 								<simple></simple>
@@ -543,7 +558,7 @@ in the context of inheritance.
 								</location>
 								<identifiable></identifiable>
 							</current>
-							<children class_id="38" tracking_level="0" version="0">
+							<children class_id="39" tracking_level="0" version="0">
 								<count>0</count>
 								<item_version>0</item_version>
 							</children>
@@ -559,12 +574,12 @@ in the context of inheritance.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration class_id="39" tracking_level="0" version="0">
+						<orm_configuration class_id="40" tracking_level="0" version="0">
 							<initialized>0</initialized>
 						</orm_configuration>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="40" tracking_level="0" version="0">
+				<inherited_attributes class_id="41" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -605,7 +620,7 @@ in the context of inheritance.
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters class_id="41" tracking_level="0" version="0">
+				<type_parameters class_id="42" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -621,7 +636,7 @@ in the context of inheritance.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration class_id="42" tracking_level="0" version="0">
+				<orm_configuration class_id="43" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_configuration>
 			</second>
@@ -6301,17 +6316,17 @@ in the context of inheritance.
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="43" tracking_level="0" version="0">
+	<exceptions class_id="44" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="44" tracking_level="0" version="0">
+	<visitors class_id="45" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="45" tracking_level="0" version="0">
+	<injected_elements class_id="46" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
@@ -6369,24 +6384,27 @@ in the context of inheritance.
 		</members>
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
+		<orm_configuration>
+			<initialized>0</initialized>
+		</orm_configuration>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="46" tracking_level="0" version="0">
+	<output_languages class_id="47" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
-	<scribble_groups class_id="47" tracking_level="0" version="0">
+	<scribble_groups class_id="48" tracking_level="0" version="0">
 		<count>7</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="48" tracking_level="0" version="0">
+		<item class_id="49" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;trivial_inheritance&gt;&lt;non_final_orphan&gt;</first>
-			<second class_id="49" tracking_level="0" version="0">
-				<parent class_id="50" tracking_level="0" version="0">
-					<entries class_id="51" tracking_level="0" version="0">
+			<second class_id="50" tracking_level="0" version="0">
+				<parent class_id="51" tracking_level="0" version="0">
+					<entries class_id="52" tracking_level="0" version="0">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item class_id="52" tracking_level="0" version="0">
+						<item class_id="53" tracking_level="0" version="0">
 							<first>yarn.generalization.is_final</first>
 							<second>false</second>
 						</item>
@@ -6397,7 +6415,7 @@ in the context of inheritance.
 						<item_version>0</item_version>
 					</candidate_labels>
 				</parent>
-				<children class_id="53" tracking_level="0" version="0">
+				<children class_id="54" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -6575,7 +6593,7 @@ in the context of inheritance.
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_configuration class_id="54" tracking_level="0" version="0">
+	<orm_configuration class_id="55" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_configuration>
 </entity>
