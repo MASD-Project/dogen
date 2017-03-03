@@ -290,6 +290,25 @@ orm_configuration_expander::make_attribute_configuration(const type_group& tg,
     return boost::optional<orm_attribute_configuration>();
 }
 
+boost::optional<orm_module_configuration>
+orm_configuration_expander::make_module_configuration(const type_group& tg,
+    const annotations::annotation& a) const {
+
+    const annotations::entry_selector s(a);
+    bool found_any(false);
+
+    orm_module_configuration r;
+    if (s.has_entry(tg.schema_name)) {
+        found_any = true;
+        r.schema_name(s.get_text_content(tg.schema_name));
+    }
+
+    if (found_any)
+        return r;
+
+    return boost::optional<orm_module_configuration>();
+}
+
 void orm_configuration_expander::
 expand_objects(const type_group& tg, intermediate_model& im) const {
     for (auto& pair : im.objects()) {
@@ -323,12 +342,46 @@ expand_concepts(const type_group& tg, intermediate_model& im) const {
 }
 
 void orm_configuration_expander::
+expand_modules(const type_group& tg, intermediate_model& im) const {
+    for (auto& pair : im.modules()) {
+        auto& m(pair.second);
+        const auto& a(m.annotation());
+        auto cfg(make_module_configuration(tg, a));
+        if (!cfg)
+            continue;
+
+        /*
+         * Update all objects that do not have a schema name to use
+         * it's containing module's schema name.
+         */
+        m.orm_configuration(cfg);
+        const auto& sn(m.orm_configuration()->schema_name());
+        for (const auto& id : m.members()) {
+            const auto i(im.objects().find(id));
+            if (i == im.objects().end())
+                continue;
+
+            auto& o(i->second);
+            auto& cfg(o.orm_configuration());
+            if (!cfg || cfg->generate_mapping())
+                continue;
+
+            if (!cfg->schema_name().empty())
+                continue;
+
+            cfg->schema_name(sn);
+        }
+    }
+}
+
+void orm_configuration_expander::
 expand(const annotations::type_repository& atrp, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
 
     const auto tg(make_type_group(atrp));
     expand_objects(tg, im);
     expand_concepts(tg, im);
+    expand_modules(tg, im);
 
     const auto& rm(im.root_module());
     im.orm_configuration(make_model_configuration(tg, rm.annotation()));

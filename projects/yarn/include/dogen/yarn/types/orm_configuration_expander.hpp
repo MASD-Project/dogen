@@ -35,6 +35,7 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/orm_model_configuration.hpp"
 #include "dogen/yarn/types/orm_object_configuration.hpp"
+#include "dogen/yarn/types/orm_module_configuration.hpp"
 #include "dogen/yarn/types/orm_attribute_configuration.hpp"
 #include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/yarn/types/letter_cases.hpp"
@@ -81,9 +82,13 @@ private:
     boost::optional<orm_attribute_configuration> make_attribute_configuration(
         const type_group& tg, const annotations::annotation& a) const;
 
+    boost::optional<orm_module_configuration> make_module_configuration(
+        const type_group& tg, const annotations::annotation& a) const;
+
 private:
     void expand_objects(const type_group& tg, intermediate_model& im) const;
     void expand_concepts(const type_group& tg, intermediate_model& im) const;
+    void expand_modules(const type_group& tg, intermediate_model& im) const;
 
 public:
     void expand(const annotations::type_repository& atrp,
