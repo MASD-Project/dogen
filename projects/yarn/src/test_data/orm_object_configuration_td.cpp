@@ -46,6 +46,7 @@ populate(const unsigned int position, result_type& v) {
     v.schema_name(create_std_string(position + 1));
     v.table_name(create_std_string(position + 2));
     v.is_value(create_bool(position + 3));
+    v.has_primary_key(create_bool(position + 4));
 }
 
 orm_object_configuration_generator::result_type

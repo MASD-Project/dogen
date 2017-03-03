@@ -25,17 +25,20 @@ namespace yarn {
 
 orm_object_configuration::orm_object_configuration()
     : generate_mapping_(static_cast<bool>(0)),
-      is_value_(static_cast<bool>(0)) { }
+      is_value_(static_cast<bool>(0)),
+      has_primary_key_(static_cast<bool>(0)) { }
 
 orm_object_configuration::orm_object_configuration(
     const bool generate_mapping,
     const std::string& schema_name,
     const std::string& table_name,
-    const bool is_value)
+    const bool is_value,
+    const bool has_primary_key)
     : generate_mapping_(generate_mapping),
       schema_name_(schema_name),
       table_name_(table_name),
-      is_value_(is_value) { }
+      is_value_(is_value),
+      has_primary_key_(has_primary_key) { }
 
 void orm_object_configuration::swap(orm_object_configuration& other) noexcept {
     using std::swap;
@@ -43,13 +46,15 @@ void orm_object_configuration::swap(orm_object_configuration& other) noexcept {
     swap(schema_name_, other.schema_name_);
     swap(table_name_, other.table_name_);
     swap(is_value_, other.is_value_);
+    swap(has_primary_key_, other.has_primary_key_);
 }
 
 bool orm_object_configuration::operator==(const orm_object_configuration& rhs) const {
     return generate_mapping_ == rhs.generate_mapping_ &&
         schema_name_ == rhs.schema_name_ &&
         table_name_ == rhs.table_name_ &&
-        is_value_ == rhs.is_value_;
+        is_value_ == rhs.is_value_ &&
+        has_primary_key_ == rhs.has_primary_key_;
 }
 
 orm_object_configuration& orm_object_configuration::operator=(orm_object_configuration other) {
@@ -104,6 +109,14 @@ bool orm_object_configuration::is_value() const {
 
 void orm_object_configuration::is_value(const bool v) {
     is_value_ = v;
+}
+
+bool orm_object_configuration::has_primary_key() const {
+    return has_primary_key_;
+}
+
+void orm_object_configuration::has_primary_key(const bool v) {
+    has_primary_key_ = v;
 }
 
 } }

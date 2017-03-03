@@ -30791,7 +30791,7 @@ output languages.#</dia:string>
         <dia:point val="10,107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,106.95;21.9675,112.25"/>
+        <dia:rectangle val="9.95,106.95;21.9675,113.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="10,107"/>
@@ -30800,7 +30800,7 @@ output languages.#</dia:string>
         <dia:real val="11.9175"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#orm_object_configuration#</dia:string>
@@ -30982,6 +30982,29 @@ output languages.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
         </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#has_primary_key#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#True if the object has an attribute marked as a primary key, false otherwise.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
       </dia:attribute>
       <dia:attribute name="operations"/>
       <dia:attribute name="template">
@@ -31030,7 +31053,7 @@ output languages.#</dia:string>
         <dia:point val="20,98.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.9088,97.85;20.75,107.8"/>
+        <dia:rectangle val="15.9087,97.85;20.75,107.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

@@ -46,7 +46,8 @@ public:
         const bool generate_mapping,
         const std::string& schema_name,
         const std::string& table_name,
-        const bool is_value);
+        const bool is_value,
+        const bool has_primary_key);
 
 private:
     template<typename Archive>
@@ -87,6 +88,14 @@ public:
     void is_value(const bool v);
     /**@}*/
 
+    /**
+     * @brief True if the object has an attribute marked as a primary key, false otherwise.
+     */
+    /**@{*/
+    bool has_primary_key() const;
+    void has_primary_key(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const orm_object_configuration& rhs) const;
     bool operator!=(const orm_object_configuration& rhs) const {
@@ -102,6 +111,7 @@ private:
     std::string schema_name_;
     std::string table_name_;
     bool is_value_;
+    bool has_primary_key_;
 };
 
 } }

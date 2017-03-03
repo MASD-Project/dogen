@@ -293,14 +293,21 @@ orm_configuration_expander::make_attribute_configuration(const type_group& tg,
 void orm_configuration_expander::
 expand_objects(const type_group& tg, intermediate_model& im) const {
     for (auto& pair : im.objects()) {
+        bool has_primary_key(false);
         auto& o(pair.second);
-        const auto& a(o.annotation());
-        o.orm_configuration(make_object_configuration(tg, a));
-
         for (auto& attr : o.local_attributes()) {
             const auto& a(attr.annotation());
-            attr.orm_configuration(make_attribute_configuration(tg, a));
+            const auto cfg(make_attribute_configuration(tg, a));
+            has_primary_key |= (cfg && cfg->is_primary_key());
+            attr.orm_configuration(cfg);
         }
+
+        const auto& a(o.annotation());
+        auto cfg(make_object_configuration(tg, a));
+        if (cfg && cfg->generate_mapping())
+            cfg->has_primary_key(has_primary_key);
+
+        o.orm_configuration(cfg);
     }
 }
 

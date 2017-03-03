@@ -41,6 +41,7 @@ void save(Archive& ar,
     ar << make_nvp("schema_name", v.schema_name_);
     ar << make_nvp("table_name", v.table_name_);
     ar << make_nvp("is_value", v.is_value_);
+    ar << make_nvp("has_primary_key", v.has_primary_key_);
 }
 
 template<typename Archive>
@@ -51,6 +52,7 @@ void load(Archive& ar,
     ar >> make_nvp("schema_name", v.schema_name_);
     ar >> make_nvp("table_name", v.table_name_);
     ar >> make_nvp("is_value", v.is_value_);
+    ar >> make_nvp("has_primary_key", v.has_primary_key_);
 }
 
 } }
