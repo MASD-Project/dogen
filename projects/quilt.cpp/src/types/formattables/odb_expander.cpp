@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <sstream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
@@ -34,8 +33,9 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger
-lg(logger_factory("quilt.cpp.formattables.odb_expander"));
+static logger lg(logger_factory("quilt.cpp.formattables.odb_expander"));
+
+const std::string primitive_column_attribute("column(\"\")");
 
 }
 
@@ -122,15 +122,13 @@ void odb_properties_generator::visit(const yarn::primitive& p) {
      * cannot see the internal attribute.
      *
      * We add this pragma so as to name the primitive's internal value
-     * attribute with the name of the primitive itself. This is done
-     * so that when ODB maps the value type, it generates a column
-     * name with just the primitive simple name - rather than
-     * primitive simple name plus the postfix "_value".
+     * attribute correctly. Primitives do not have column names; they
+     * are set by the type that owns them. This avoids names such as
+     * "primitive_id_primitive_id", which become "primitive_id"
+     * instead.
      */
-    std::ostringstream s;
     const auto& attr(p.value_attribute());
-    s << "column(\"" << p.name().simple() << "\")";
-    const auto pragmas(std::list<std::string> { s.str() });
+    const auto pragmas(std::list<std::string> { primitive_column_attribute });
 
     const auto id(attr.name().id());
     op.attribute_level_odb_pragmas()[id] = pragmas;

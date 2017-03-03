@@ -36,7 +36,7 @@ namespace northwind {
 
 #pragma db value(product_id) schema("northwind")
 
-#pragma db member(product_id::value_) column("product_id")
+#pragma db member(product_id::value_) column("")
 
 #endif
 
