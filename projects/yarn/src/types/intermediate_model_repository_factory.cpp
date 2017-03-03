@@ -153,7 +153,7 @@ populate_target_model(const annotations::annotation_groups_factory& agf,
     auto tim(intermediate_model_for_descriptor(rg, timd));
 
     first_stage_expander ex;
-    ex.expand(agf, atrp, tim);
+    ex.expand_target(agf, atrp, tim);
 
     const mapper mp(msrp);
     for (const auto ol : tim.output_languages()) {
@@ -237,7 +237,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
          */
         for (const auto& d : rimd) {
             auto rim(intermediate_model_for_descriptor(rg, d));
-            if (ex.expand_if_compatible(agf, atrp, ol, rim))
+            if (ex.try_expand_reference(agf, atrp, ol, rim))
                 list.push_back(mp.map(rim.input_language(), ol, rim));
         }
     }

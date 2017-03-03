@@ -45,6 +45,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/building_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"

@@ -25,11 +25,13 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/yarn/serialization/letter_cases_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -46,6 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar << make_nvp("databases", v.databases_);
+    ar << make_nvp("letter_case", v.letter_case_);
 }
 
 template<typename Archive>
@@ -55,6 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
     ar >> make_nvp("databases", v.databases_);
+    ar >> make_nvp("letter_case", v.letter_case_);
 }
 
 } }

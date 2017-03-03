@@ -107,13 +107,12 @@ private:
     void validate(const intermediate_model& im) const;
 
 public:
-    void expand(const annotations::annotation_groups_factory& agf,
+    void expand_target(const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp, intermediate_model& im) const;
 
-    bool expand_if_compatible(const annotations::annotation_groups_factory& agf,
+    bool try_expand_reference(const annotations::annotation_groups_factory& agf,
         const annotations::type_repository& atrp,
         const languages target_language, intermediate_model& im) const;
-
 };
 
 } }

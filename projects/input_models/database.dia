@@ -965,8 +965,8 @@ types to test features not covered in Northwind.
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_cmake
-#DOGEN odb_database=pgsql
-#DOGEN odb_database=oracle#</dia:string>
+#DOGEN yarn.orm.database_system=postgresql
+#DOGEN yarn.orm.database_system=oracle#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>
@@ -6067,7 +6067,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="53,-9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.8137,-17.05;53.75,-8.2"/>
+        <dia:rectangle val="50.8138,-17.05;53.75,-8.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6139,7 +6139,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="58.18,-27.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="50.8137,-28.55;58.93,-19.2"/>
+        <dia:rectangle val="50.8138,-28.55;58.93,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -6714,7 +6714,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="142.18,-27.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.078,-28.35;142.93,-19.2"/>
+        <dia:rectangle val="121.077,-28.35;142.93,-19.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7217,7 +7217,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="113.565,4.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.703,3.45;114.315,12.8"/>
+        <dia:rectangle val="106.702,3.45;114.315,12.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7289,7 +7289,7 @@ database, adapted to fit both Dogen and ODB.
         <dia:point val="99.795,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.045,14.95;106.953,22.8"/>
+        <dia:rectangle val="99.045,14.95;106.952,22.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

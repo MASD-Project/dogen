@@ -104,7 +104,7 @@ void first_stage_expander::validate(const intermediate_model& im) const {
 }
 
 void first_stage_expander::
-expand(const annotations::annotation_groups_factory& agf,
+expand_target(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
     /*
      * We must expand annotations before we expand modules to
@@ -126,6 +126,7 @@ expand(const annotations::annotation_groups_factory& agf,
      * There are no particular dependencies on the remaining
      * expansions.
      */
+    expand_orm_configuration(atrp, im);
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
 
@@ -142,7 +143,7 @@ expand(const annotations::annotation_groups_factory& agf,
 }
 
 bool first_stage_expander::
-expand_if_compatible(const annotations::annotation_groups_factory& agf,
+try_expand_reference(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, const languages target_language,
     intermediate_model& im) const {
     /*
@@ -157,11 +158,6 @@ expand_if_compatible(const annotations::annotation_groups_factory& agf,
      * not be available to be populated with the correct language.
      */
     expand_modules(im);
-
-    /*
-     * ORM expansion can be done before or after language expansion.
-     */
-    expand_orm_configuration(atrp, im);
 
     /*
      * Language expansion is required because we only want to process

@@ -29,7 +29,9 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/letter_cases.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -41,9 +43,11 @@ class odb_options final : public dogen::yarn::element {
 public:
     odb_options() = default;
     odb_options(const odb_options&) = default;
-    odb_options(odb_options&&) = default;
 
     virtual ~odb_options() noexcept { }
+
+public:
+    odb_options(odb_options&& rhs);
 
 public:
     odb_options(
@@ -55,7 +59,8 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const std::list<std::string>& databases);
+        const std::list<std::string>& databases,
+        const boost::optional<dogen::yarn::letter_cases>& letter_case);
 
 private:
     template<typename Archive>
@@ -80,6 +85,11 @@ public:
     void databases(const std::list<std::string>& v);
     void databases(const std::list<std::string>&& v);
 
+    const boost::optional<dogen::yarn::letter_cases>& letter_case() const;
+    boost::optional<dogen::yarn::letter_cases>& letter_case();
+    void letter_case(const boost::optional<dogen::yarn::letter_cases>& v);
+    void letter_case(const boost::optional<dogen::yarn::letter_cases>&& v);
+
 public:
     bool operator==(const odb_options& rhs) const;
     bool operator!=(const odb_options& rhs) const {
@@ -95,6 +105,7 @@ public:
 
 private:
     std::list<std::string> databases_;
+    boost::optional<dogen::yarn::letter_cases> letter_case_;
 };
 
 } } } }

@@ -18,34 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_BUILDING_ERROR_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_BUILDING_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
 #include <string>
-#include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/orm_model_configuration.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class odb_options_factory final {
-private:
-    std::list<std::string>
-    make_databases(const yarn::orm_model_configuration& cfg) const;
+class building_error : public virtual std::exception, public virtual boost::exception {
+public:
+    building_error() = default;
+    ~building_error() noexcept = default;
 
 public:
-    boost::shared_ptr<yarn::element>
-    make(const yarn::intermediate_model& im) const;
+    building_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } } }

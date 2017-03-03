@@ -70,11 +70,6 @@ struct traits {
     static std::string odb_is_value();
 
     /**
-     * @brief The database to target with ODB.
-     */
-    static std::string odb_database();
-
-    /**
      * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();

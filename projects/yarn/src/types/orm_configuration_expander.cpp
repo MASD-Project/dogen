@@ -27,6 +27,7 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/io/orm_model_configuration_io.hpp"
 #include "dogen/yarn/types/orm_configuration_expander.hpp"
 
 namespace {
@@ -189,6 +190,7 @@ boost::optional<orm_model_configuration>
 orm_configuration_expander::make_model_configuration(const type_group& tg,
     const annotations::annotation& a) const {
 
+    BOOST_LOG_SEV(lg, debug) << "Started creating model configuration.";
     const annotations::entry_selector s(a);
     bool found_any(false);
 
@@ -210,9 +212,12 @@ orm_configuration_expander::make_model_configuration(const type_group& tg,
         r.letter_case(to_letter_case(lc));
     }
 
-    if (found_any)
+    if (found_any) {
+        BOOST_LOG_SEV(lg, debug) << "Created model configuration: " << r;
         return r;
+    }
 
+    BOOST_LOG_SEV(lg, debug) << "Model configuration is empty.";
     return boost::optional<orm_model_configuration>();
 }
 

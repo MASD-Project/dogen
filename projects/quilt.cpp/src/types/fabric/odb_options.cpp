@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/letter_cases_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 
@@ -46,10 +47,31 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 }
 
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::letter_cases>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
+
+odb_options::odb_options(odb_options&& rhs)
+    : dogen::yarn::element(
+        std::forward<dogen::yarn::element>(rhs)),
+      databases_(std::move(rhs.databases_)),
+      letter_case_(std::move(rhs.letter_case_)) { }
 
 odb_options::odb_options(
     const std::string& documentation,
@@ -60,7 +82,8 @@ odb_options::odb_options(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const std::list<std::string>& databases)
+    const std::list<std::string>& databases,
+    const boost::optional<dogen::yarn::letter_cases>& letter_case)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -70,7 +93,8 @@ odb_options::odb_options(
       in_global_module,
       stereotypes,
       is_element_extension),
-      databases_(databases) { }
+      databases_(databases),
+      letter_case_(letter_case) { }
 
 void odb_options::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -106,7 +130,8 @@ void odb_options::to_stream(std::ostream& s) const {
       << "\"__parent_0__\": ";
     dogen::yarn::element::to_stream(s);
     s << ", "
-      << "\"databases\": " << databases_
+      << "\"databases\": " << databases_ << ", "
+      << "\"letter_case\": " << letter_case_
       << " }";
 }
 
@@ -115,6 +140,7 @@ void odb_options::swap(odb_options& other) noexcept {
 
     using std::swap;
     swap(databases_, other.databases_);
+    swap(letter_case_, other.letter_case_);
 }
 
 bool odb_options::equals(const dogen::yarn::element& other) const {
@@ -125,7 +151,8 @@ bool odb_options::equals(const dogen::yarn::element& other) const {
 
 bool odb_options::operator==(const odb_options& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
-        databases_ == rhs.databases_;
+        databases_ == rhs.databases_ &&
+        letter_case_ == rhs.letter_case_;
 }
 
 odb_options& odb_options::operator=(odb_options other) {
@@ -148,6 +175,22 @@ void odb_options::databases(const std::list<std::string>& v) {
 
 void odb_options::databases(const std::list<std::string>&& v) {
     databases_ = std::move(v);
+}
+
+const boost::optional<dogen::yarn::letter_cases>& odb_options::letter_case() const {
+    return letter_case_;
+}
+
+boost::optional<dogen::yarn::letter_cases>& odb_options::letter_case() {
+    return letter_case_;
+}
+
+void odb_options::letter_case(const boost::optional<dogen::yarn::letter_cases>& v) {
+    letter_case_ = v;
+}
+
+void odb_options::letter_case(const boost::optional<dogen::yarn::letter_cases>&& v) {
+    letter_case_ = std::move(v);
 }
 
 } } } }
