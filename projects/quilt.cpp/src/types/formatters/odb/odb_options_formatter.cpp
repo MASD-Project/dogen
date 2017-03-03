@@ -106,6 +106,12 @@ format(const context& ctx, const yarn::element& e) const {
 a.stream() << "# enable C++11" << std::endl;
 a.stream() << "--std c++11" << std::endl;
 a.stream() << std::endl;
+        if (o.letter_case()) {
+a.stream() << "# casing" << std::endl;
+a.stream() << "--sql-name-case " << a.get_letter_case(*o.letter_case()) << std::endl;
+a.stream() << std::endl;
+        }
+
         if (o.databases().size() > 1) {
 a.stream() << "# enable multi-database support" << std::endl;
 a.stream() << "--multi-database static" << std::endl;

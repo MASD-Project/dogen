@@ -208,7 +208,7 @@ orm_configuration_expander::make_model_configuration(const type_group& tg,
 
     if (s.has_entry(tg.letter_case)) {
         found_any = true;
-        const auto lc(s.get_text_content(tg.schema_name));
+        const auto lc(s.get_text_content(tg.letter_case));
         r.letter_case(to_letter_case(lc));
     }
 

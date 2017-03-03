@@ -20,6 +20,9 @@
 # enable C++11
 --std c++11
 
+# casing
+--sql-name-case upper
+
 # enable multi-database support
 --multi-database static
 

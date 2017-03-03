@@ -85,6 +85,14 @@ format(const context& ctx, const yarn::element& e) const {
 --std c++11
 
 <#+
+        if (o.letter_case()) {
+#>
+# casing
+--sql-name-case <#= a.get_letter_case(*o.letter_case()) #>
+
+<#+
+        }
+
         if (o.databases().size() > 1) {
 #>
 # enable multi-database support

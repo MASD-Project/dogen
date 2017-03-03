@@ -39,6 +39,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/letter_cases.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
@@ -307,6 +308,11 @@ public:
      * @brief Returns the ODB type for the current element.
      */
     std::string get_odb_type() const;
+
+    /**
+     * @brief Returns the type of letter casing to use.
+     */
+    std::string get_letter_case(const yarn::letter_cases lc) const;
 
 public:
     /**
