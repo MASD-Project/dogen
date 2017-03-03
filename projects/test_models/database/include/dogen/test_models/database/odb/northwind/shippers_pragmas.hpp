@@ -38,6 +38,8 @@ namespace northwind {
 #pragma db object(shippers) schema(NORTHWIND)
 
 #pragma db member(shippers::shipper_id_) id
+#pragma db member(shippers::company_name_) not_null
+#pragma db member(shippers::phone_) null
 
 #endif
 

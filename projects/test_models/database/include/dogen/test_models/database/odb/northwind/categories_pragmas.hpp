@@ -39,8 +39,8 @@ namespace northwind {
 
 #pragma db member(categories::category_id_) id
 #pragma db member(categories::description_) null
-#pragma db member(categories::picutre_) null
 #pragma db member(categories::picutre_) type("BLOB")
+#pragma db member(categories::picutre_) null
 
 #endif
 
