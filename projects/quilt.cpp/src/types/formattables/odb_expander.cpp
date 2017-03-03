@@ -36,6 +36,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.odb_expander"));
 
 const std::string primitive_column_attribute("column(\"\")");
+const std::string id_pragma("id");
+const std::string no_id_pragma("no_id");
 
 }
 
@@ -89,14 +91,34 @@ void odb_properties_generator::visit(const yarn::object& o) {
     const annotations::entry_selector s(o.annotation());
     op.is_value(s.get_boolean_content_or_default(type_group_.odb_is_value));
 
-    op.top_level_odb_pragmas(make_odb_pragmas(type_group_, o.annotation()));
+    auto top_level_pragmas(make_odb_pragmas(type_group_, o.annotation()));
+    if (o.orm_configuration()) {
+        /*
+         * If the user has supplied an ORM configuration and this
+         * object does not have a primary key, we need to inject ODB's
+         * pragma for it.
+         */
+        const auto& cfg(*o.orm_configuration());
+        if (cfg.generate_mapping() && !cfg.has_primary_key())
+            top_level_pragmas.push_back(no_id_pragma);
+    }
+
+    op.top_level_odb_pragmas(top_level_pragmas);
+
     for (const auto& attr : o.local_attributes()) {
         const auto id(attr.name().id());
-        const auto pragmas(make_odb_pragmas(type_group_, attr.annotation()));
-        if (pragmas.empty())
+        auto attr_pragmas(make_odb_pragmas(type_group_, attr.annotation()));
+
+        if (attr.orm_configuration()) {
+            const auto& cfg(*attr.orm_configuration());
+            if (cfg.is_primary_key())
+                attr_pragmas.push_back(id_pragma);
+        }
+
+        if (attr_pragmas.empty())
             continue;
 
-        op.attribute_level_odb_pragmas()[id] = pragmas;
+        op.attribute_level_odb_pragmas()[id] = attr_pragmas;
     }
 
     const bool has_top_level_pragmas(!op.top_level_odb_pragmas().empty());

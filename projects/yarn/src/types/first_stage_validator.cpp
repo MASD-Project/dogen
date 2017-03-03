@@ -32,7 +32,7 @@ const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");
 const std::string generate_mapping_off(
     "Object has generate mapping set to false, but attributes have ORM "
-    "mapping properties set.");
+    "mapping properties set: ");
 const std::string multiple_primary_keys(
     "Object has more than one attribute marked as primary key: ");
 
