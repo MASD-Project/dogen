@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
@@ -99,8 +100,16 @@ void odb_properties_generator::visit(const yarn::object& o) {
          * pragma for it.
          */
         const auto& cfg(*o.orm_configuration());
-        if (cfg.generate_mapping() && !cfg.has_primary_key())
-            top_level_pragmas.push_back(no_id_pragma);
+        if (cfg.generate_mapping()) {
+            if (!cfg.has_primary_key())
+                top_level_pragmas.push_back(no_id_pragma);
+
+            if (!cfg.schema_name().empty()) {
+                std::ostringstream s;
+                s << "schema(" << cfg.schema_name() << ")";
+                top_level_pragmas.push_back(s.str());
+            }
+        }
     }
 
     op.top_level_odb_pragmas(top_level_pragmas);
