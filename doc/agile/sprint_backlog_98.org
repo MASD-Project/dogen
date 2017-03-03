@@ -13,27 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-03 Fri 08:39]
+#+CAPTION: Clock summary at [2017-03-03 Fri 11:35]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *34:23* |       |       | 100.0 |
+| *Total time*                                                                | *35:42* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 34:23   |       |       | 100.0 |
-| Active                                                                      |         | 34:23 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:42 |   2.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.5 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.7 |
-| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   2.6 |
-| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.7 |
-| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   6.5 |
-| COMPLETED Setup codacy                                                      |         |       |  0:22 |   1.1 |
-| STARTED Create a language independent ORM layer                             |         |       |  7:24 |  21.5 |
-| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  60.4 |
+| Stories                                                                     | 35:42   |       |       | 100.0 |
+| Active                                                                      |         | 35:42 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:01 |   5.6 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.4 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.6 |
+| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   2.5 |
+| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.6 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   6.3 |
+| COMPLETED Setup codacy                                                      |         |       |  0:22 |   1.0 |
+| STARTED Create a language independent ORM layer                             |         |       |  7:24 |  20.7 |
+| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  58.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-03-03 Fri 11:20]--[2017-03-03 Fri 11:35] =>  0:15
+    CLOCK: [2017-03-03 Fri 10:15]--[2017-03-03 Fri 11:19] =>  1:04
     CLOCK: [2017-03-03 Fri 08:21]--[2017-03-03 Fri 08:39] =>  0:18
     CLOCK: [2017-02-24 Fri 13:01]--[2017-02-24 Fri 13:16] =>  0:15
     CLOCK: [2017-02-13 Mon 11:55]--[2017-02-13 Mon 12:04] =>  0:09
@@ -298,13 +300,13 @@ with odb.
 This time has arrived now. We should create a set of concepts in yarn
 related to ORM (object-relational mapping).
 
-*** "flat" mode                                                       :story:
+*** Add a "flat directory" mode                                       :story:
 
 It would be nice to have a mode in which all files get placed in a
 single-directory: no src, include, etc – just one big folder with all
 files.
 
-*** "one off" profiles                                                :story:
+*** Add support for "one off" profiles                                :story:
 
 At present one can define top-level profiles. These are useful, but in
 practice we ended up still defining a lot of things in each model. We
@@ -312,7 +314,7 @@ need a way to associate a profile with a model by supplying it on the
 command line. That way users can create profiles and store them next
 to the model rather than having to create a data directory, etc etc.
 
-*** Introduce projects                                                :story:
+*** Introduce dogen projects                                          :story:
 
 At present we are manually configuring each dogen target, adding each
 separately to the build system. Perhaps a better approach is to have a
@@ -404,6 +406,22 @@ Tasks:
   entity, but that then causes an exception.
 - =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
 
+*** Add a top-level "Visual Studio" knob                              :story:
+
+We have a number of features that only make sense when on Windows and
+building for Visual Studio. We should have a top-level knob that
+enables or disables all of these features in one go:
+
+- =quilt.cpp.visual_studio.enabled=
+
+*** Add =targetver.h= support                                         :story:
+
+On windows we should be generating the targetver header.
+
+Links:
+
+- [[https://github.com/Microsoft/Windows-classic-samples/blob/master/Samples/RadialController/cpp/targetver.h][targetver.h]]
+
 *** Add support for Visual Studio C++ projects                        :story:
 
 Visual studio project needs the files to be listed by hand. We can
@@ -423,11 +441,39 @@ As per ODB, users may also want to build with different versions of
 VS. We should allow generating more than one solution and postfix them
 with the VS version.
 
+We should also generate filters for the project:
+
+- header files
+- source files
+- ODB header files
+- ODB source files
+
+The inclusion of ODB files must be done using regular expressions
+because we do not want to have to do two passes for knit; so we don't
+really know what files are available. However, if the ODB files have a
+=cxx= extension, we can just =CLInclude= =*cxx=.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
+
 *** Add support for pre-compiled headers on windows                   :story:
 
 Most VS users have pre-compiled headers. We need to generate
 =stdafx.h= etc. For now we can have it minimally populated until we
 understand better the requirements.
+
+Actually we could probably do a very simple computation in quilt to
+figure out the most frequently used headers and add those to
+=stdafx=. We just need to go through the entire model in the inclusion
+expander to perform this calculation.
+
+In addition we need to make sure =stdafx= is added as the first
+include.
+
+We should have a quilt setting for pre-compilation. We should also
+check that visual studio support is enabled in order to generate
+=stdafx=.
 
 *** Add support for DLL Main on windows                               :story:
 
@@ -439,6 +485,10 @@ generate it. Requirements:
 - user must be able to disable it;
 - user must be able to handcraft it in case they want different
   contents;
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/aa370448(v%3Dvs.85).aspx][DLL Main]]
 
 *** Add C++-03 mode                                                    :epic:
 
