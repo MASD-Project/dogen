@@ -35,7 +35,6 @@ namespace northwind {
 
 #ifdef ODB_COMPILER
 
-#pragma db object(categories) no_id
 #pragma db object(categories) schema(NORTHWIND)
 
 #pragma db member(categories::category_id_) id

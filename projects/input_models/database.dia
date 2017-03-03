@@ -1703,7 +1703,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2202,7 +2202,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2472,7 +2472,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2834,7 +2834,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3490,7 +3490,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -3695,7 +3695,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4222,7 +4222,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4626,7 +4626,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4918,7 +4918,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5210,7 +5210,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5733,7 +5733,7 @@ types to test features not covered in Northwind.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN odb_pragma=id#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7784,7 +7784,7 @@ database, adapted to fit both Dogen and ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
