@@ -8314,6 +8314,8 @@ Use cases:
 Links:
 
 - [[https://github.com/billyquith/ponder][Ponder]] a c++ reflection library.
+- [[https://github.com/cginternals/cppexpose][cppexpose]]: library for type introspection, reflection, and scripting
+  interface.
 
 *** Add diff support                                                   :epic:
 
