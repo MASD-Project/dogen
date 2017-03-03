@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
@@ -106,7 +107,16 @@ void odb_properties_generator::visit(const yarn::object& o) {
 
             if (!cfg.schema_name().empty()) {
                 std::ostringstream s;
-                s << "schema(" << cfg.schema_name() << ")";
+                s << "schema(";
+
+                if (!cfg.letter_case())
+                    s << cfg.schema_name();
+                else if (*cfg.letter_case() == yarn::letter_cases::upper_case)
+                    s << boost::to_upper_copy(cfg.schema_name());
+                else if (*cfg.letter_case() == yarn::letter_cases::lower_case)
+                    s << boost::to_lower_copy(cfg.schema_name());
+
+                s << ")";
                 top_level_pragmas.push_back(s.str());
             }
         }

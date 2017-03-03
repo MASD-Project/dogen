@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/io/orm_model_configuration_io.hpp"
+#include "dogen/yarn/io/orm_object_configuration_io.hpp"
 #include "dogen/yarn/types/orm_configuration_expander.hpp"
 
 namespace {
@@ -311,6 +312,12 @@ orm_configuration_expander::make_module_configuration(const type_group& tg,
 
 void orm_configuration_expander::
 expand_objects(const type_group& tg, intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Started object expansion.";
+
+    boost::optional<letter_cases> lc;
+    if (im.orm_configuration())
+        lc = im.orm_configuration()->letter_case();
+
     for (auto& pair : im.objects()) {
         bool has_primary_key(false);
         auto& o(pair.second);
@@ -323,15 +330,23 @@ expand_objects(const type_group& tg, intermediate_model& im) const {
 
         const auto& a(o.annotation());
         auto cfg(make_object_configuration(tg, a));
-        if (cfg && cfg->generate_mapping())
+        if (cfg && cfg->generate_mapping()) {
             cfg->has_primary_key(has_primary_key);
+            cfg->letter_case(lc);
+            BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
+                                     << pair.first << ": " << *cfg;
+        }
 
         o.orm_configuration(cfg);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished object expansion.";
 }
 
 void orm_configuration_expander::
 expand_concepts(const type_group& tg, intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Started concept expansion.";
+
     for (auto& pair : im.concepts()) {
         auto& c(pair.second);
         for (auto& attr : c.local_attributes()) {
@@ -339,10 +354,14 @@ expand_concepts(const type_group& tg, intermediate_model& im) const {
             attr.orm_configuration(make_attribute_configuration(tg, a));
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished module expansion.";
 }
 
 void orm_configuration_expander::
 expand_modules(const type_group& tg, intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Started module expansion.";
+
     for (auto& pair : im.modules()) {
         auto& m(pair.second);
         const auto& a(m.annotation());
@@ -363,15 +382,19 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
 
             auto& o(i->second);
             auto& cfg(o.orm_configuration());
-            if (!cfg || cfg->generate_mapping())
+            if (!cfg || !cfg->generate_mapping())
                 continue;
 
             if (!cfg->schema_name().empty())
                 continue;
 
+            BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
+                                     << " to: " << sn;
             cfg->schema_name(sn);
         }
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished module expansion.";
 }
 
 void orm_configuration_expander::
@@ -379,12 +402,12 @@ expand(const annotations::type_repository& atrp, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
 
     const auto tg(make_type_group(atrp));
+    const auto& rm(im.root_module());
+    im.orm_configuration(make_model_configuration(tg, rm.annotation()));
+
     expand_objects(tg, im);
     expand_concepts(tg, im);
     expand_modules(tg, im);
-
-    const auto& rm(im.root_module());
-    im.orm_configuration(make_model_configuration(tg, rm.annotation()));
 
     BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
 }

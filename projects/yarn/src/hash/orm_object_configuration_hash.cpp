@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/letter_cases_hash.hpp"
 #include "dogen/yarn/hash/orm_object_configuration_hash.hpp"
 
 namespace {
@@ -26,6 +27,16 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_optional_dogen_yarn_letter_cases(const boost::optional<dogen::yarn::letter_cases>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
 }
 
 }
@@ -41,6 +52,7 @@ std::size_t orm_object_configuration_hasher::hash(const orm_object_configuration
     combine(seed, v.table_name());
     combine(seed, v.is_value());
     combine(seed, v.has_primary_key());
+    combine(seed, hash_boost_optional_dogen_yarn_letter_cases(v.letter_case()));
 
     return seed;
 }

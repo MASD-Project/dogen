@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include "dogen/yarn/test_data/letter_cases_td.hpp"
 #include "dogen/yarn/test_data/orm_object_configuration_td.hpp"
 
 namespace {
@@ -31,6 +32,18 @@ std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
     return s.str();
+}
+
+dogen::yarn::letter_cases
+create_dogen_yarn_letter_cases(const unsigned int position) {
+    return dogen::yarn::letter_cases_generator::create(position);
+}
+
+boost::optional<dogen::yarn::letter_cases>
+create_boost_optional_dogen_yarn_letter_cases(unsigned int position) {
+    boost::optional<dogen::yarn::letter_cases> r(
+        create_dogen_yarn_letter_cases(position));
+    return r;
 }
 
 }
@@ -47,6 +60,7 @@ populate(const unsigned int position, result_type& v) {
     v.table_name(create_std_string(position + 2));
     v.is_value(create_bool(position + 3));
     v.has_primary_key(create_bool(position + 4));
+    v.letter_case(create_boost_optional_dogen_yarn_letter_cases(position + 5));
 }
 
 orm_object_configuration_generator::result_type

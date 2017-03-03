@@ -24,10 +24,12 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/letter_cases_ser.hpp"
 #include "dogen/yarn/serialization/orm_object_configuration_ser.hpp"
 
 namespace boost {
@@ -42,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("table_name", v.table_name_);
     ar << make_nvp("is_value", v.is_value_);
     ar << make_nvp("has_primary_key", v.has_primary_key_);
+    ar << make_nvp("letter_case", v.letter_case_);
 }
 
 template<typename Archive>
@@ -53,6 +56,7 @@ void load(Archive& ar,
     ar >> make_nvp("table_name", v.table_name_);
     ar >> make_nvp("is_value", v.is_value_);
     ar >> make_nvp("has_primary_key", v.has_primary_key_);
+    ar >> make_nvp("letter_case", v.letter_case_);
 }
 
 } }

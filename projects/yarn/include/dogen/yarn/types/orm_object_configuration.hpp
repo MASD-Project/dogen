@@ -27,6 +27,8 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/optional.hpp>
+#include "dogen/yarn/types/letter_cases.hpp"
 #include "dogen/yarn/serialization/orm_object_configuration_fwd_ser.hpp"
 
 namespace dogen {
@@ -35,11 +37,13 @@ namespace yarn {
 class orm_object_configuration final {
 public:
     orm_object_configuration(const orm_object_configuration&) = default;
-    orm_object_configuration(orm_object_configuration&&) = default;
     ~orm_object_configuration() = default;
 
 public:
     orm_object_configuration();
+
+public:
+    orm_object_configuration(orm_object_configuration&& rhs);
 
 public:
     orm_object_configuration(
@@ -47,7 +51,8 @@ public:
         const std::string& schema_name,
         const std::string& table_name,
         const bool is_value,
-        const bool has_primary_key);
+        const bool has_primary_key,
+        const boost::optional<dogen::yarn::letter_cases>& letter_case);
 
 private:
     template<typename Archive>
@@ -96,6 +101,11 @@ public:
     void has_primary_key(const bool v);
     /**@}*/
 
+    const boost::optional<dogen::yarn::letter_cases>& letter_case() const;
+    boost::optional<dogen::yarn::letter_cases>& letter_case();
+    void letter_case(const boost::optional<dogen::yarn::letter_cases>& v);
+    void letter_case(const boost::optional<dogen::yarn::letter_cases>&& v);
+
 public:
     bool operator==(const orm_object_configuration& rhs) const;
     bool operator!=(const orm_object_configuration& rhs) const {
@@ -112,6 +122,7 @@ private:
     std::string table_name_;
     bool is_value_;
     bool has_primary_key_;
+    boost::optional<dogen::yarn::letter_cases> letter_case_;
 };
 
 } }

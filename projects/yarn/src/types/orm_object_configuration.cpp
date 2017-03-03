@@ -28,17 +28,27 @@ orm_object_configuration::orm_object_configuration()
       is_value_(static_cast<bool>(0)),
       has_primary_key_(static_cast<bool>(0)) { }
 
+orm_object_configuration::orm_object_configuration(orm_object_configuration&& rhs)
+    : generate_mapping_(std::move(rhs.generate_mapping_)),
+      schema_name_(std::move(rhs.schema_name_)),
+      table_name_(std::move(rhs.table_name_)),
+      is_value_(std::move(rhs.is_value_)),
+      has_primary_key_(std::move(rhs.has_primary_key_)),
+      letter_case_(std::move(rhs.letter_case_)) { }
+
 orm_object_configuration::orm_object_configuration(
     const bool generate_mapping,
     const std::string& schema_name,
     const std::string& table_name,
     const bool is_value,
-    const bool has_primary_key)
+    const bool has_primary_key,
+    const boost::optional<dogen::yarn::letter_cases>& letter_case)
     : generate_mapping_(generate_mapping),
       schema_name_(schema_name),
       table_name_(table_name),
       is_value_(is_value),
-      has_primary_key_(has_primary_key) { }
+      has_primary_key_(has_primary_key),
+      letter_case_(letter_case) { }
 
 void orm_object_configuration::swap(orm_object_configuration& other) noexcept {
     using std::swap;
@@ -47,6 +57,7 @@ void orm_object_configuration::swap(orm_object_configuration& other) noexcept {
     swap(table_name_, other.table_name_);
     swap(is_value_, other.is_value_);
     swap(has_primary_key_, other.has_primary_key_);
+    swap(letter_case_, other.letter_case_);
 }
 
 bool orm_object_configuration::operator==(const orm_object_configuration& rhs) const {
@@ -54,7 +65,8 @@ bool orm_object_configuration::operator==(const orm_object_configuration& rhs) c
         schema_name_ == rhs.schema_name_ &&
         table_name_ == rhs.table_name_ &&
         is_value_ == rhs.is_value_ &&
-        has_primary_key_ == rhs.has_primary_key_;
+        has_primary_key_ == rhs.has_primary_key_ &&
+        letter_case_ == rhs.letter_case_;
 }
 
 orm_object_configuration& orm_object_configuration::operator=(orm_object_configuration other) {
@@ -117,6 +129,22 @@ bool orm_object_configuration::has_primary_key() const {
 
 void orm_object_configuration::has_primary_key(const bool v) {
     has_primary_key_ = v;
+}
+
+const boost::optional<dogen::yarn::letter_cases>& orm_object_configuration::letter_case() const {
+    return letter_case_;
+}
+
+boost::optional<dogen::yarn::letter_cases>& orm_object_configuration::letter_case() {
+    return letter_case_;
+}
+
+void orm_object_configuration::letter_case(const boost::optional<dogen::yarn::letter_cases>& v) {
+    letter_case_ = v;
+}
+
+void orm_object_configuration::letter_case(const boost::optional<dogen::yarn::letter_cases>&& v) {
+    letter_case_ = std::move(v);
 }
 
 } }

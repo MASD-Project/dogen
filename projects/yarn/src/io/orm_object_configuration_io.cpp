@@ -21,6 +21,7 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/letter_cases_io.hpp"
 #include "dogen/yarn/io/orm_object_configuration_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -29,6 +30,21 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
+}
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::letter_cases>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
 }
 
 namespace dogen {
@@ -47,7 +63,8 @@ std::ostream& operator<<(std::ostream& s, const orm_object_configuration& v) {
       << "\"schema_name\": " << "\"" << tidy_up_string(v.schema_name()) << "\"" << ", "
       << "\"table_name\": " << "\"" << tidy_up_string(v.table_name()) << "\"" << ", "
       << "\"is_value\": " << v.is_value() << ", "
-      << "\"has_primary_key\": " << v.has_primary_key()
+      << "\"has_primary_key\": " << v.has_primary_key() << ", "
+      << "\"letter_case\": " << v.letter_case()
       << " }";
     return(s);
 }
