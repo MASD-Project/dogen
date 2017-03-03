@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
@@ -141,6 +142,23 @@ void odb_properties_generator::visit(const yarn::object& o) {
                     attr_pragmas.push_back(null_pragma);
                 else
                     attr_pragmas.push_back(not_null_pragma);
+            }
+
+            if (!cfg.type_overrides().empty()) {
+                std::ostringstream s;
+                bool is_first(true);
+                for (const auto pair : cfg.type_overrides()) {
+                    if (!is_first)
+                        s << " ";
+
+                    const auto ds(pair.first);
+                    const auto type(pair.second);
+                    s << fabric::odb_options_factory::to_string(ds)
+                      << ":type(\"" << type << "\")";
+
+                    is_first = false;
+                }
+                attr_pragmas.push_back(s.str());
             }
         }
 

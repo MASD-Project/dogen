@@ -31,6 +31,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/orm_model_configuration.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 
 namespace dogen {
@@ -39,6 +40,9 @@ namespace cpp {
 namespace fabric {
 
 class odb_options_factory final {
+public:
+    static std::string to_string(const yarn::orm_database_systems ds);
+
 private:
     std::list<std::string>
     make_databases(const yarn::orm_model_configuration& cfg) const;

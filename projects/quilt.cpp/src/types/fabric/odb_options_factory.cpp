@@ -50,23 +50,29 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
+std::string
+odb_options_factory::to_string(const yarn::orm_database_systems ds) {
+    using yarn::orm_database_systems;
+
+    switch (ds) {
+    case orm_database_systems::mysql: return mysql;
+    case orm_database_systems::postgresql: return postgresql;
+    case orm_database_systems::oracle: return oracle;
+    case orm_database_systems::sql_server: return sql_server;
+    case orm_database_systems::sqllite: return sqllite;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(ds));
+        BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
+        BOOST_THROW_EXCEPTION(building_error(invalid_daatabase_system + s));
+    } }
+}
+
+
 std::list<std::string> odb_options_factory::
 make_databases(const yarn::orm_model_configuration& cfg) const {
     std::list<std::string> r;
-    using yarn::orm_database_systems;
-    for (const auto ds : cfg.database_systems()) {
-        switch (ds) {
-        case orm_database_systems::mysql: r.push_back(mysql); break;
-        case orm_database_systems::postgresql: r.push_back(postgresql); break;
-        case orm_database_systems::oracle: r.push_back(oracle); break;
-        case orm_database_systems::sql_server: r.push_back(sql_server); break;
-        case orm_database_systems::sqllite: r.push_back(sqllite); break;
-        default: {
-            const auto s(boost::lexical_cast<std::string>(ds));
-            BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
-            BOOST_THROW_EXCEPTION(building_error(invalid_daatabase_system + s));
-        } }
-    }
+    for (const auto ds : cfg.database_systems())
+        r.push_back(to_string(ds));
 
     return r;
 }
