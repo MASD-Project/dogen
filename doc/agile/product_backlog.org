@@ -8306,6 +8306,10 @@ Use cases:
 
 - diff support
 
+Links:
+
+- [[https://github.com/billyquith/ponder][Ponder]] a c++ reflection library.
+
 *** Add diff support                                                   :epic:
 
 One very useful feature we need to implement is the ability to compare
