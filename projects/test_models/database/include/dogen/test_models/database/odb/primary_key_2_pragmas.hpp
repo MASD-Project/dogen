@@ -27,6 +27,18 @@
 
 #include "dogen/test_models/database/types/primary_key_2.hpp"
 
-// class has no ODB pragmas defined.
+namespace dogen {
+namespace test_models {
+namespace database {
+
+#ifdef ODB_COMPILER
+
+#pragma db object(primary_key_2) schema(BASIC)
+
+#pragma db member(primary_key_2::prop_0_) id
+
+#endif
+
+} } }
 
 #endif

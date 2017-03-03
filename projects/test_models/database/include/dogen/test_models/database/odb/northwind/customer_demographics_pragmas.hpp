@@ -36,6 +36,7 @@ namespace northwind {
 #ifdef ODB_COMPILER
 
 #pragma db object(customer_demographics) no_id
+#pragma db object(customer_demographics) schema(NORTHWIND)
 
 #pragma db member(customer_demographics::customer_type_id_) id
 #pragma db member(customer_demographics::customer_description_) null
