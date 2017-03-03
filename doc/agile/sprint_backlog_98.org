@@ -5,35 +5,36 @@
 
 * Mission Statement
 
-- Improve ODB testing.
-- Finish Upsilon support.
+- Improve ODB support.
+- Improve C++ Visual Studio support.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-02 Thu 10:03]
+#+CAPTION: Clock summary at [2017-03-03 Fri 08:39]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *34:05* |       |       | 100.0 |
+| *Total time*                                                                | *34:23* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 34:05   |       |       | 100.0 |
-| Active                                                                      |         | 34:05 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:24 |   1.2 |
+| Stories                                                                     | 34:23   |       |       | 100.0 |
+| Active                                                                      |         | 34:23 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:42 |   2.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.5 |
 | COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.7 |
 | COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   2.6 |
 | COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.7 |
-| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   6.6 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   6.5 |
 | COMPLETED Setup codacy                                                      |         |       |  0:22 |   1.1 |
-| STARTED Create a language independent ORM layer                             |         |       |  7:24 |  21.7 |
-| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  61.0 |
+| STARTED Create a language independent ORM layer                             |         |       |  7:24 |  21.5 |
+| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  60.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-03-03 Fri 08:21]--[2017-03-03 Fri 08:39] =>  0:18
     CLOCK: [2017-02-24 Fri 13:01]--[2017-02-24 Fri 13:16] =>  0:15
     CLOCK: [2017-02-13 Mon 11:55]--[2017-02-13 Mon 12:04] =>  0:09
 
@@ -296,6 +297,40 @@ with odb.
 
 This time has arrived now. We should create a set of concepts in yarn
 related to ORM (object-relational mapping).
+
+*** "flat" mode                                                       :story:
+
+It would be nice to have a mode in which all files get placed in a
+single-directory: no src, include, etc – just one big folder with all
+files.
+
+*** "one off" profiles                                                :story:
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
+
+*** Introduce projects                                                :story:
+
+At present we are manually configuring each dogen target, adding each
+separately to the build system. Perhaps a better approach is to have a
+dogen project file where one can configure all of the targets in one
+go. We don’t necessarily have to call dogen directly – perhaps another
+command line tool is responsible for invoking dogen? The problem here
+is that we’d end up with all dogen models in memory.
+
+At any rate, the project file would contain all models for a given
+product. We could possibly run with “all” or “specific” whereby the
+user would supply one or more projects to code generate. For all
+properties that are common, we’d defined them only once somehow
+(common regexes, log level, etc).
+
+*** Make log directory configurable                                   :story:
+
+It would be nice to supply a directory for the log files and get dogen
+to output the logs there.
 
 *** Clean up annotation scope types                                   :story:
 
