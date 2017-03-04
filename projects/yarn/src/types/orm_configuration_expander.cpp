@@ -369,12 +369,23 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
         if (!cfg)
             continue;
 
-        /*
-         * Update all objects that do not have a schema name to use
-         * it's containing module's schema name.
-         */
         m.orm_configuration(cfg);
+
+        /*
+         * If we do not have a schema name at the module level we have
+         * nothing to worry about; either the object has no schema
+         * name either, or it has been overridden - but either way,
+         * its not our problem.
+         */
         const auto& sn(m.orm_configuration()->schema_name());
+        if (sn.empty())
+            continue;
+
+        /*
+         * If we do have a schema name, we need to update all objects
+         * that do not have a schema name to use it's containing
+         * module's schema name.
+         */
         for (const auto& id : m.members()) {
             const auto i(im.objects().find(id));
             if (i == im.objects().end())
@@ -382,10 +393,10 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
 
             auto& o(i->second);
             auto& cfg(o.orm_configuration());
-            if (!cfg || !cfg->generate_mapping())
-                continue;
+            const bool has_schema_name(cfg && cfg->schema_name().empty() &&
+                (cfg->generate_mapping() || cfg->is_value()));
 
-            if (!cfg->schema_name().empty())
+            if (!has_schema_name)
                 continue;
 
             BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id

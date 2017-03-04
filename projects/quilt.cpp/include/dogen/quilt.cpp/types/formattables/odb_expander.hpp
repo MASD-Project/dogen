@@ -42,7 +42,6 @@ class odb_expander {
 private:
     struct type_group {
         annotations::type odb_pragma;
-        annotations::type odb_is_value;
     };
     friend class odb_properties_generator;
 

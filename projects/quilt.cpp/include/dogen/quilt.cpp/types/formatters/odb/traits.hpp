@@ -65,11 +65,6 @@ struct traits {
     static std::string odb_pragma();
 
     /**
-     * @brief If true, mark the type as a value.
-     */
-    static std::string odb_is_value();
-
-    /**
      * @brief Name of the built-in header archetype.
      */
     static std::string builtin_header_archetype();

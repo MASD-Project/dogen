@@ -44,6 +44,7 @@ const std::string no_id_pragma("no_id");
 
 const std::string null_pragma("null");
 const std::string not_null_pragma("not_null");
+const std::string value_pragma("value");
 
 }
 
@@ -95,7 +96,6 @@ void odb_properties_generator::visit(const yarn::object& o) {
     odb_properties op;
 
     const annotations::entry_selector s(o.annotation());
-    op.is_value(s.get_boolean_content_or_default(type_group_.odb_is_value));
 
     auto top_level_pragmas(make_odb_pragmas(type_group_, o.annotation()));
     if (o.orm_configuration()) {
@@ -105,24 +105,25 @@ void odb_properties_generator::visit(const yarn::object& o) {
          * pragma for it.
          */
         const auto& cfg(*o.orm_configuration());
-        if (cfg.generate_mapping()) {
-            if (!cfg.has_primary_key())
-                top_level_pragmas.push_back(no_id_pragma);
+        op.is_value(cfg.is_value());
 
-            if (!cfg.schema_name().empty()) {
-                std::ostringstream s;
-                s << "schema(";
+        if (cfg.generate_mapping() && !cfg.has_primary_key())
+            top_level_pragmas.push_back(no_id_pragma);
 
-                if (!cfg.letter_case())
-                    s << cfg.schema_name();
-                else if (*cfg.letter_case() == yarn::letter_cases::upper_case)
-                    s << boost::to_upper_copy(cfg.schema_name());
-                else if (*cfg.letter_case() == yarn::letter_cases::lower_case)
-                    s << boost::to_lower_copy(cfg.schema_name());
+        const auto& sn(cfg.schema_name());
+        if (!sn.empty() && (op.is_value() || cfg.generate_mapping())) {
+            std::ostringstream s;
+            s << "schema(";
 
-                s << ")";
-                top_level_pragmas.push_back(s.str());
-            }
+            if (!cfg.letter_case())
+                s << cfg.schema_name();
+            else if (*cfg.letter_case() == yarn::letter_cases::upper_case)
+                s << boost::to_upper_copy(cfg.schema_name());
+            else if (*cfg.letter_case() == yarn::letter_cases::lower_case)
+                s << boost::to_lower_copy(cfg.schema_name());
+
+            s << ")";
+            top_level_pragmas.push_back(s.str());
         }
     }
 
@@ -215,8 +216,7 @@ std::ostream& operator<<(std::ostream& s,
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::"
       << "odb_expander::type_group\"" << ", "
-      << "\"odb_pragma\": " << v.odb_pragma << ", "
-      << "\"odb_is_value\": " << v.odb_is_value
+      << "\"odb_pragma\": " << v.odb_pragma
       << " }";
 
     return s;
@@ -230,9 +230,6 @@ make_type_group(const annotations::type_repository& atrp) const {
     const annotations::type_repository_selector s(atrp);
     const auto& op(formatters::odb::traits::odb_pragma());
     r.odb_pragma = s.select_type_by_name(op);
-
-    const auto& oiv(formatters::odb::traits::odb_is_value());
-    r.odb_is_value = s.select_type_by_name(oiv);
 
     BOOST_LOG_SEV(lg, debug) << "Created type groups. Result: " << r;
     return r;
