@@ -56,15 +56,6 @@ bool test_hydrator(
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 
-BOOST_AUTO_TEST_CASE(class_in_a_package_diagram_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("class_in_a_package_diagram_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_class_in_a_package_dia());
-    const auto actual(yarn_dia::actual_class_in_a_package_dia_xml());
-    const auto expected(yarn_dia::expected_class_in_a_package_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
 BOOST_IGNORE_AUTO_TEST_CASE(compressed_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("compressed_diagram_results_in_expected_objects");
     using dogen::utility::test_data::yarn_dia;
@@ -92,75 +83,12 @@ BOOST_AUTO_TEST_CASE(two_empty_layers_diagram_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(stand_alone_class_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("stand_alone_class_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_stand_alone_class_dia());
-    const auto actual(yarn_dia::actual_stand_alone_class_dia_xml());
-    const auto expected(yarn_dia::expected_stand_alone_class_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(class_with_empty_package_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("class_with_empty_package_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_empty_package_dia());
-    const auto actual(yarn_dia::actual_empty_package_dia_xml());
-    const auto expected(yarn_dia::expected_empty_package_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
 BOOST_AUTO_TEST_CASE(class_without_name_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("class_without_name_results_in_expected_objects");
     using dogen::utility::test_data::yarn_dia;
     const auto input(yarn_dia::input_class_without_name_dia());
     const auto actual(yarn_dia::actual_class_without_name_dia_xml());
     const auto expected(yarn_dia::expected_class_without_name_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(class_in_a_package_class_without_package_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("class_in_a_package_class_without_package_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_classes_inout_package_dia());
-    const auto actual(yarn_dia::actual_classes_inout_package_dia_xml());
-    const auto expected(yarn_dia::expected_classes_inout_package_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_attributes_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("class_without_attributes_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_class_without_attributes_dia());
-    const auto actual(yarn_dia::actual_class_without_attributes_dia_xml());
-    const auto expected(yarn_dia::expected_class_without_attributes_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_package_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("class_without_package_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_class_without_package_dia());
-    const auto actual(yarn_dia::actual_class_without_package_dia_xml());
-    const auto expected(yarn_dia::expected_class_without_package_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(classes_in_a_package_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("classes_in_a_package_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_classes_in_a_package_dia());
-    const auto actual(yarn_dia::actual_classes_in_a_package_dia_xml());
-    const auto expected(yarn_dia::expected_classes_in_a_package_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(classes_without_package_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("classes_without_package_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_classes_without_package_dia());
-    const auto actual(yarn_dia::actual_classes_without_package_dia_xml());
-    const auto expected(yarn_dia::expected_classes_without_package_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
@@ -182,24 +110,6 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_results_in_expected_objects) {
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 
-BOOST_AUTO_TEST_CASE(all_builtins_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("all_builtins_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_all_builtins_dia());
-    const auto actual(yarn_dia::actual_all_builtins_dia_xml());
-    const auto expected(yarn_dia::expected_all_builtins_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(trivial_inheritance_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("trivial_inheritance_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_trivial_inheritance_dia());
-    const auto actual(yarn_dia::actual_trivial_inheritance_dia_xml());
-    const auto expected(yarn_dia::expected_trivial_inheritance_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
 BOOST_AUTO_TEST_CASE(boost_model_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("boost_model_results_in_expected_objects");
     using dogen::utility::test_data::yarn_dia;
@@ -215,33 +125,6 @@ BOOST_AUTO_TEST_CASE(std_model_results_in_expected_objects) {
     const auto input(yarn_dia::input_std_model_dia());
     const auto actual(yarn_dia::actual_std_model_dia_xml());
     const auto expected(yarn_dia::expected_std_model_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(comments_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("comments_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_comments_dia());
-    const auto actual(yarn_dia::actual_comments_dia_xml());
-    const auto expected(yarn_dia::expected_comments_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(enumeration_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("enumeration_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_enumeration_dia());
-    const auto actual(yarn_dia::actual_enumeration_dia_xml());
-    const auto expected(yarn_dia::expected_enumeration_dia_xml());
-    BOOST_CHECK(test_hydrator(input, expected, actual));
-}
-
-BOOST_AUTO_TEST_CASE(exception_results_in_expected_objects) {
-    SETUP_TEST_LOG_SOURCE("exception_results_in_expected_objects");
-    using dogen::utility::test_data::yarn_dia;
-    const auto input(yarn_dia::input_exception_dia());
-    const auto actual(yarn_dia::actual_exception_dia_xml());
-    const auto expected(yarn_dia::expected_exception_dia_xml());
     BOOST_CHECK(test_hydrator(input, expected, actual));
 }
 

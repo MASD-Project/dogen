@@ -47,9 +47,9 @@ const std::string yarn_dia_actual_dir("yarn.dia/actual");
 
 const std::string boolean_values_file("xml_reader/input/boolean_values.xml");
 const std::string class_namespace_file_dia(
-    "yarn.dia/input/class_in_a_package.dia");
+    "yarn.dia/input/boost_model.dia");
 const std::string class_namespace_file_diaxml(
-    "yarn.dia/expected/class_in_a_package.diaxml");
+    "yarn.dia/expected/boost_model.diaxml");
 const std::string non_existent_file_name("non_existent_file");
 
 void test_main_directory(boost::filesystem::path path, std::string data_set) {
@@ -108,9 +108,9 @@ BOOST_AUTO_TEST_CASE(yarn_dia_passes_sanity_checks) {
     test_main_directory(yarn_dia::actual(), yarn_dia_actual_dir);
     test_non_existent_file(yarn_dia::non_existent_file(), dia_extension);
 
-    test_valid_file(yarn_dia::input_class_in_a_package_dia(),
+    test_valid_file(yarn_dia::input_boost_model_dia(),
         class_namespace_file_dia);
-    test_valid_file(yarn_dia::expected_class_in_a_package_dia_xml(),
+    test_valid_file(yarn_dia::expected_boost_model_dia_xml(),
         class_namespace_file_diaxml);
 }
 

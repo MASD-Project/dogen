@@ -75,14 +75,6 @@ using dogen::utility::test::contains_checker;
 
 BOOST_AUTO_TEST_SUITE(workflow_tests)
 
-BOOST_AUTO_TEST_CASE(class_in_a_package_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("class_in_a_package_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_class_in_a_package_dia_xml());
-    const auto e(yarn_dia::expected_class_in_a_package_yarn_xml());
-    const auto a(yarn_dia::actual_class_in_a_package_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
 BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_yarn) {
     SETUP_TEST_LOG("empty_dia_transforms_into_expected_yarn");
     const auto i(yarn_dia::expected_empty_dia_xml());
@@ -91,67 +83,11 @@ BOOST_AUTO_TEST_CASE(empty_dia_transforms_into_expected_yarn) {
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
-BOOST_AUTO_TEST_CASE(empty_package_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("empty_package_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_empty_package_dia_xml());
-    const auto e(yarn_dia::expected_empty_package_yarn_xml());
-    const auto a(yarn_dia::actual_empty_package_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(classes_inout_package_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("classes_inout_package_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_classes_inout_package_dia_xml());
-    const auto e(yarn_dia::expected_classes_inout_package_yarn_xml());
-    const auto a(yarn_dia::actual_classes_inout_package_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_attributes_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("class_without_attributes_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_class_without_attributes_dia_xml());
-    const auto e(yarn_dia::expected_class_without_attributes_yarn_xml());
-    const auto a(yarn_dia::actual_class_without_attributes_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_package_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("class_without_package_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_class_without_package_dia_xml());
-    const auto e(yarn_dia::expected_class_without_package_yarn_xml());
-    const auto a(yarn_dia::actual_class_without_package_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(classes_without_package_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("classes_without_package_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_classes_without_package_dia_xml());
-    const auto e(yarn_dia::expected_classes_without_package_yarn_xml());
-    const auto a(yarn_dia::actual_classes_without_package_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_yarn) {
     SETUP_TEST_LOG("two_layers_with_objects_dia_transforms_into_expected_yarn");
     const auto i(yarn_dia::expected_two_layers_with_objects_dia_xml());
     const auto e(yarn_dia::expected_two_layers_with_objects_yarn_xml());
     const auto a(yarn_dia::actual_two_layers_with_objects_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(all_builtins_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("all_builtins_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_all_builtins_dia_xml());
-    const auto e(yarn_dia::expected_all_builtins_yarn_xml());
-    const auto a(yarn_dia::actual_all_builtins_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(trivial_inheritance_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("trivial_inheritance_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_trivial_inheritance_dia_xml());
-    const auto e(yarn_dia::expected_trivial_inheritance_yarn_xml());
-    const auto a(yarn_dia::actual_trivial_inheritance_yarn_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
@@ -168,30 +104,6 @@ BOOST_AUTO_TEST_CASE(boost_model_dia_transforms_into_expected_yarn) {
     const auto i(yarn_dia::expected_boost_model_dia_xml());
     const auto e(yarn_dia::expected_boost_model_yarn_xml());
     const auto a(yarn_dia::actual_boost_model_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(comments_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("comments_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_comments_dia_xml());
-    const auto e(yarn_dia::expected_comments_yarn_xml());
-    const auto a(yarn_dia::actual_comments_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(enumeration_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("enumeration_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_enumeration_dia_xml());
-    const auto e(yarn_dia::expected_enumeration_yarn_xml());
-    const auto a(yarn_dia::actual_enumeration_yarn_xml());
-    BOOST_CHECK(test_workflow(i, e, a));
-}
-
-BOOST_AUTO_TEST_CASE(exception_dia_transforms_into_expected_yarn) {
-    SETUP_TEST_LOG("exception_dia_transforms_into_expected_yarn");
-    const auto i(yarn_dia::expected_exception_dia_xml());
-    const auto e(yarn_dia::expected_exception_yarn_xml());
-    const auto a(yarn_dia::actual_exception_yarn_xml());
     BOOST_CHECK(test_workflow(i, e, a));
 }
 

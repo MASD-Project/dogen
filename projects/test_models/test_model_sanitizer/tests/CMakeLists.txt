@@ -49,27 +49,15 @@ add_executable(${tests_name} ${files} ${disable_cmakelists_files})
 set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${tests_name}
-    all_builtins
-    classes_in_a_package
-    classes_inout_package
-    classes_without_package
-    class_in_a_package
-    class_without_package
     compressed
     disable_facet_folders
     enable_facet_types
     enable_facet_hash
     enable_facet_io
     enable_facet_serialization
-    stand_alone_class
     two_layers_with_objects
-    trivial_inheritance
-    trivial_association
-    enumeration
-    primitive
     std_model
     boost_model
-    stereotypes
     utility
     ${LIBXML2_LIBRARIES}
     ${CMAKE_REQUIRED_LIBRARIES}

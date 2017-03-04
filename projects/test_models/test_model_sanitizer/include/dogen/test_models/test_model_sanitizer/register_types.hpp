@@ -25,41 +25,21 @@
 #pragma once
 #endif
 
-#include "dogen/test_models/all_builtins/serialization/registrar_ser.hpp"
 #include "dogen/test_models/boost_model/serialization/registrar_ser.hpp"
-#include "dogen/test_models/classes_in_a_package/serialization/registrar_ser.hpp"
-#include "dogen/test_models/classes_inout_package/serialization/registrar_ser.hpp"
-#include "dogen/test_models/classes_without_package/serialization/registrar_ser.hpp"
-#include "dogen/test_models/class_in_a_package/serialization/registrar_ser.hpp"
-#include "dogen/test_models/class_without_package/serialization/registrar_ser.hpp"
 #include "dogen/test_models/compressed/serialization/registrar_ser.hpp"
 #include "dogen/test_models/disable_cmakelists/serialization/registrar_ser.hpp"
 #include "dogen/test_models/disable_facet_folders/registrar_ser.hpp"
-#include "dogen/test_models/enumeration/serialization/registrar_ser.hpp"
-#include "dogen/test_models/stand_alone_class/serialization/registrar_ser.hpp"
 #include "dogen/test_models/std_model/serialization/registrar_ser.hpp"
 #include "dogen/test_models/enable_facet_serialization/serialization/registrar_ser.hpp"
-#include "dogen/test_models/trivial_association/serialization/registrar_ser.hpp"
-#include "dogen/test_models/trivial_inheritance/serialization/registrar_ser.hpp"
 #include "dogen/test_models/two_layers_with_objects/serialization/registrar_ser.hpp"
 
 template<typename Archive> void register_types(Archive& ar) {
-    dogen::test_models::all_builtins::register_types<Archive>(ar);
     dogen::test_models::boost_model::register_types<Archive>(ar);
-    dogen::test_models::classes_in_a_package::register_types<Archive>(ar);
-    dogen::test_models::classes_inout_package::register_types<Archive>(ar);
-    dogen::test_models::classes_without_package::register_types<Archive>(ar);
-    dogen::test_models::class_in_a_package::register_types<Archive>(ar);
-    dogen::test_models::class_without_package::register_types<Archive>(ar);
     dogen::test_models::compressed::register_types<Archive>(ar);
     dogen::test_models::disable_cmakelists::register_types<Archive>(ar);
     dogen::test_models::disable_facet_folders::register_types<Archive>(ar);
-    dogen::test_models::enumeration::register_types<Archive>(ar);
-    dogen::test_models::stand_alone_class::register_types<Archive>(ar);
     dogen::test_models::std_model::register_types<Archive>(ar);
     dogen::test_models::enable_facet_serialization::register_types<Archive>(ar);
-    dogen::test_models::trivial_association::register_types<Archive>(ar);
-    dogen::test_models::trivial_inheritance::register_types<Archive>(ar);
     dogen::test_models::two_layers_with_objects::register_types<Archive>(ar);
 }
 

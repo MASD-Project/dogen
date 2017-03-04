@@ -149,12 +149,6 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_dia) {
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
-BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_class_in_a_package_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
 BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code_dia) {
     SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code_dia");
     const auto dia(yarn_dia::input_two_empty_layers_dia());
@@ -175,42 +169,6 @@ BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code_dia) {
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
-BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code_dia) {
-    SETUP_TEST_LOG("empty_package_model_does_not_generate_code_dia");
-    const auto dia(yarn_dia::input_empty_package_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_classes_inout_package_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("class_without_package_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_class_without_package_dia());
-    BOOST_REQUIRE(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_stand_alone_class_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("classes_in_a_package_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_classes_in_a_package_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("classes_without_package_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_classes_without_package_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code_dia");
     const auto dia(yarn_dia::input_compressed_dia());
@@ -220,42 +178,6 @@ BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code_dia) {
 BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code_dia) {
     SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code_dia");
     const auto dia(yarn_dia::input_two_layers_with_objects_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("trivial_inheritance_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_trivial_inheritance_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("trivial_association_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_trivial_association_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("comments_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_comments_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("enumeration_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_enumeration_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(primitive_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("primitive_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_primitive_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("exception_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_exception_dia());
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
@@ -271,24 +193,12 @@ BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code_dia) {
     BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
-BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("stereotypes_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_stereotypes_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
     const auto target(yarn_dia::input_package_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(generate_and_diff(target, actual_dia_dir),
         std::exception, c);
-}
-
-BOOST_AUTO_TEST_CASE(all_builtins_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("all_builtins_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_all_builtins_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
 #ifdef ENABLE_CSHARP_TESTS
@@ -341,63 +251,9 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_json) {
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
-BOOST_AUTO_TEST_CASE(class_in_a_package_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("class_in_a_package_model_generates_expected_code_json");
-    const auto json(yarn_json::input_class_in_a_package_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
 BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code_json) {
     SETUP_TEST_LOG("empty_model_generates_expected_code_json");
     const auto json(yarn_json::input_empty_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(empty_package_model_does_not_generate_code_json) {
-    SETUP_TEST_LOG("empty_package_model_does_not_generate_code_json");
-    const auto json(yarn_json::input_empty_package_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(classes_inout_package_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("classes_inout_package_model_generates_expected_code_json");
-    const auto json(yarn_json::input_classes_inout_package_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("class_without_attributes_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_class_without_attributes_dia());
-    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_attributes_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("class_without_attributes_model_generates_expected_code_json");
-    const auto json(yarn_json::input_class_without_attributes_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(class_without_package_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("class_without_package_model_generates_expected_code_json");
-    const auto json(yarn_json::input_class_without_package_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(stand_alone_class_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("stand_alone_class_model_generates_expected_code_json");
-    const auto json(yarn_json::input_stand_alone_class_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(classes_in_a_package_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("classes_in_a_package_model_generates_expected_code_json");
-    const auto json(yarn_json::input_classes_in_a_package_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(classes_without_package_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("classes_without_package_model_generates_expected_code_json");
-    const auto json(yarn_json::input_classes_without_package_json());
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
@@ -413,42 +269,6 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code_json)
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
-BOOST_AUTO_TEST_CASE(trivial_inheritance_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("trivial_inheritance_model_generates_expected_code_json");
-    const auto json(yarn_json::input_trivial_inheritance_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(trivial_association_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("trivial_association_model_generates_expected_code_json");
-    const auto json(yarn_json::input_trivial_association_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(comments_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("comments_model_generates_expected_code_json");
-    const auto json(yarn_json::input_comments_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(enumeration_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("enumeration_model_generates_expected_code_json");
-    const auto json(yarn_json::input_enumeration_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(primitive_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("primitive_model_generates_expected_code_json");
-    const auto json(yarn_json::input_primitive_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(exception_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("exception_model_generates_expected_code_json");
-    const auto json(yarn_json::input_exception_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
 BOOST_AUTO_TEST_CASE(std_model_generates_expected_code_json) {
     SETUP_TEST_LOG("std_model_generates_expected_code_json");
     const auto json(yarn_json::input_std_model_json());
@@ -458,18 +278,6 @@ BOOST_AUTO_TEST_CASE(std_model_generates_expected_code_json) {
 BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code_json) {
     SETUP_TEST_LOG("boost_model_generates_expected_code_json");
     const auto json(yarn_json::input_boost_model_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(stereotypes_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("stereotypes_model_generates_expected_code_json");
-    const auto json(yarn_json::input_stereotypes_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(all_builtins_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("all_builtins_model_generates_expected_code_json");
-    const auto json(yarn_json::input_all_builtins_json());
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 

@@ -20,14 +20,6 @@
 
 # user includes
 include_directories(
-    ${CMAKE_SOURCE_DIR}/projects/test_models/all_builtins/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/classes_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/classes_inout_package/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/classes_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/class_in_a_package/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/class_without_attributes/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/class_without_package/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/stand_alone_class/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/compressed/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_facet_folders/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/include
@@ -36,15 +28,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_io/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/enable_facet_serialization/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/two_layers_with_objects/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_inheritance/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/trivial_association/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/std_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/comments/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/enumeration/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/primitive/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/exception/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/stereotypes/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
     )
@@ -68,14 +53,6 @@ add_custom_target(build_test_models)
 #
 # add projects
 #
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/all_builtins)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_in_a_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_inout_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/classes_without_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_in_a_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_attributes)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/class_without_package)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stand_alone_class)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_types)
@@ -83,15 +60,8 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_hash)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_io)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_serialization)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/two_layers_with_objects)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_inheritance)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/trivial_association)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/comments)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enumeration)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/primitive)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/exception)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/stereotypes)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
 
