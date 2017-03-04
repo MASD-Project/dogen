@@ -38,9 +38,11 @@ const std::string empty;
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string log_level_arg("log_level");
+const std::string log_directory_arg("log_directory");
 const std::string target_arg("target");
 const std::string force_write_arg("force-write");
 const std::string info_level("info");
+const std::string default_log_directory("log");
 
 }
 
@@ -64,6 +66,8 @@ program_options_parser::general_options_factory() const {
     r.add_options()
         ("help,h", "Display this help and exit.")
         ("version,v", "Output version information and exit.")
+        ("log_directory,g", value<std::string>(),
+            "Where to place the log file. Defaults to log.")
         ("log_level,l",
             value<std::string>(),
             "What level to use for logging. Options: "
@@ -153,6 +157,11 @@ void program_options_parser::version_function(std::function<void()> value) {
 options::stitching_options program_options_parser::
 transform_options(const variables_map& vm) const {
     options::stitching_options r;
+
+    if (vm.count(log_directory_arg) == 0)
+        r.log_directory(default_log_directory);
+    else
+        r.log_directory(vm[log_directory_arg].as<std::string>());
 
     if (vm.count(log_level_arg) == 0)
         r.log_level(info_level);
