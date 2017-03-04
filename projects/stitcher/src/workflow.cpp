@@ -21,6 +21,7 @@
 #include <sstream>
 #include <iostream>
 #include <boost/exception/all.hpp>
+#include <boost/filesystem/operations.hpp>
 #include <boost/exception/diagnostic_information.hpp>
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
@@ -38,7 +39,7 @@ using namespace dogen::utility::log;
 namespace {
 
 auto lg(logger_factory("stitcher"));
-const std::string log_file_prefix("log/dogen.stitcher.");
+const std::string log_file_prefix("dogen.stitcher.");
 const std::string get_help("Use --help option to see usage instructions.");
 const std::string stitcher_product("Dogen Stitcher v" DOGEN_VERSION);
 const std::string usage_error_msg("Usage error: ");
@@ -78,7 +79,8 @@ workflow::workflow() : can_log_(false) { }
 void workflow::
 initialise_template_name(const dogen::options::stitching_options& o) {
     const boost::filesystem::path p(o.target());
-    template_name_ = p.stem().filename().string();
+    if (!boost::filesystem::is_directory(p))
+        template_name_ = p.stem().filename().string();
 }
 
 boost::optional<options::stitching_options> workflow::
@@ -92,14 +94,15 @@ generate_stitching_options_activity(const int argc, const char* argv[]) const {
 
 void workflow::
 initialise_logging_activity(const options::stitching_options& o) {
+    const auto dir(o.log_directory());
     const auto sev(utility::log::to_severity_level(o.log_level()));
-    if (!template_name_.empty())
-        log_file_name_ = log_file_prefix + template_name_ + ".log";
-    else
-        log_file_name_ = log_file_prefix + "all_templates.log";
+    const std::string log_file_name(log_file_prefix + template_name_ +
+        (template_name_.empty() ? "log" : ".log"));
+
+    log_path_ = dir / log_file_name;
 
     life_cycle_manager lcm;
-    lcm.initialise(log_file_name_, sev);
+    lcm.initialise(log_path_, sev);
     can_log_ = true;
 }
 
@@ -113,7 +116,7 @@ void workflow::stitch_activity(const options::stitching_options& o) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << stitcher_product << errors_msg;
-        std::cerr << log_file_msg << "'" << log_file_name_.generic_string()
+        std::cerr << log_file_msg << "'" << log_path_.generic_string()
                   << "' " << std::endl;
     }
 
@@ -125,10 +128,11 @@ void workflow::report_exception_common() const {
 }
 
 void workflow::report_exception(const std::exception& e) const {
-    /* we must catch by std::exception and cast the boost
-     * exception here; if we were to catch boost exception, we
-     * would not have access to the what() method and thus could
-     * not provide a user-friendly message to the console.
+    /*
+     * We must catch by std::exception and cast the boost exception
+     * here; if we were to catch boost exception, we would not have
+     * access to the what() method and thus could not provide a
+     * user-friendly message to the console.
      */
     const auto be(dynamic_cast<const boost::exception* const>(&e));
     if (be && can_log_) {
@@ -158,8 +162,9 @@ int workflow::execute(const int argc, const char* argv[]) {
     try {
         const auto o(generate_stitching_options_activity(argc, argv));
 
-        /* can only happen if the options are valid but do not
-         * require any action.
+        /*
+         * Can only happen if the options are valid but do not require
+         * any action.
          */
         if (!o)
             return 0;
@@ -169,7 +174,8 @@ int workflow::execute(const int argc, const char* argv[]) {
         initialise_logging_activity(s);
         stitch_activity(s);
     } catch (const stitcher::parser_validation_error& e) {
-        /* log known not to be initialised as we are still parsing
+        /*
+         * Log known not to be initialised as we are still parsing
          * command line options.
          */
         std::cerr << usage_error_msg << e.what() << std::endl;

@@ -34,7 +34,7 @@ namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("tailor"));
-const std::string log_file_prefix("log/dogen.tailor.");
+const std::string log_file_prefix("dogen.tailor.");
 const std::string more_information(
     "Try `dogen.tailor --help' for more information.");
 const std::string tailor_product("Dogen Tailor v" DOGEN_VERSION);
@@ -92,10 +92,13 @@ generate_tailoring_options(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging(const options::tailoring_options& o) {
+    const auto dir(o.log_directory());
     const auto sev(utility::log::to_severity_level(o.log_level()));
-    log_file_name_ = log_file_prefix + model_name_ + ".log";
+    const std::string log_file_name(log_file_prefix + model_name_ + ".log");
+    log_path_ = dir / log_file_name;
+
     life_cycle_manager lcm;
-    lcm.initialise(log_file_name_, sev);
+    lcm.initialise(log_path_, sev);
     can_log_ = true;
 }
 
@@ -124,7 +127,7 @@ void workflow::tailor(const options::tailoring_options& o) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << tailor_product << errors_msg;
-        std::cerr << log_file_msg << "'" << log_file_name_.string()
+        std::cerr << log_file_msg << "'" << log_path_.string()
                   << "' " << std::endl;
     }
 

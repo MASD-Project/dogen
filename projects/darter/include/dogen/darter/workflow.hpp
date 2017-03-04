@@ -91,7 +91,7 @@ public:
 private:
     bool can_log_;
     std::string model_name_;
-    boost::filesystem::path log_file_name_;
+    boost::filesystem::path log_path_;
 };
 
 } }

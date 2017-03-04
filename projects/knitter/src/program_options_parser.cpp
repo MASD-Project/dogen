@@ -51,7 +51,6 @@ const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string log_level_arg("log_level");
 const std::string log_directory_arg("log_directory");
-
 const std::string target_arg("target");
 const std::string output_dir_arg("output-dir");
 const std::string delete_extra_files_arg("delete-extra-files");
@@ -84,7 +83,7 @@ program_options_parser::make_general_options_description() const {
     using boost::program_options::value;
     boost::program_options::options_description r("General options");
     r.add_options()
-        ("help,h", "Display this help and exit.")
+        ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.")
         ("log_level,l",
             value<std::string>(),

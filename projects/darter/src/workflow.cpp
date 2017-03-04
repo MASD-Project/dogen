@@ -34,7 +34,7 @@ namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("darter"));
-const std::string log_file_prefix("log/dogen.darter.");
+const std::string log_file_prefix("dogen.darter.");
 const std::string more_information(
     "Try `dogen.darter --help' for more information.");
 const std::string darter_product("Dogen Darter v" DOGEN_VERSION);
@@ -92,10 +92,12 @@ generate_darting_options(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging(const options::darting_options& o) {
+    const auto dir(o.log_directory());
     const auto sev(utility::log::to_severity_level(o.log_level()));
-    log_file_name_ = log_file_prefix + model_name_ + ".log";
+    const std::string log_file_name(log_file_prefix + model_name_ + ".log");
+    log_path_ = dir / log_file_name;
     life_cycle_manager lcm;
-    lcm.initialise(log_file_name_, sev);
+    lcm.initialise(log_path_, sev);
     can_log_ = true;
 }
 
@@ -108,7 +110,7 @@ void workflow::dart(const options::darting_options& /*o*/) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << darter_product << errors_msg;
-        std::cerr << log_file_msg << "'" << log_file_name_.string()
+        std::cerr << log_file_msg << "'" << log_path_.string()
                   << "' " << std::endl;
     }
 

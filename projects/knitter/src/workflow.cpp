@@ -100,6 +100,7 @@ void workflow::initialise_logging_activity(const options::knitting_options& o) {
     const auto sev(utility::log::to_severity_level(o.log_level()));
     const std::string log_file_name(log_file_prefix + model_name_ + ".log");
     log_path_ = dir / log_file_name;
+
     life_cycle_manager lcm;
     lcm.initialise(log_path_, sev);
     can_log_ = true;

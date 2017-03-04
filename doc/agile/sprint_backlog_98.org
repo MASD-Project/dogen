@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-04 Sat 00:27]
+#+CAPTION: Clock summary at [2017-03-04 Sat 19:30]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *41:17* |       |       | 100.0 |
+| *Total time*                                                                | *42:43* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 41:17   |       |       | 100.0 |
-| Active                                                                      |         | 41:17 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:01 |   4.9 |
+| Stories                                                                     | 42:43   |       |       | 100.0 |
+| Active                                                                      |         | 42:43 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:01 |   4.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.2 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.3 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.2 |
 | COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   2.1 |
 | COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.4 |
-| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   5.4 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   5.2 |
 | COMPLETED Setup codacy                                                      |         |       |  0:22 |   0.9 |
 | COMPLETED Fix codacy warning on exceptions                                  |         |       |  0:08 |   0.3 |
-| COMPLETED Create a language independent ORM layer                           |         |       | 12:51 |  31.1 |
-| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  50.3 |
+| COMPLETED Create a language independent ORM layer                           |         |       | 12:51 |  30.1 |
+| COMPLETED Make log directory configurable                                   |         |       |  1:26 |   3.4 |
+| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  48.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -92,7 +93,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/820962437465866241][Tweet]]
 
 *** COMPLETED Fix the handling of ODB pragmas for yarn primitives     :story:
-    CLOSED: [2017-02-25 Sat 21:53]
+    CLOSED: [2017-03-04 Sat 17:16]
     CLOCK: [2017-02-25 Sat 21:32]--[2017-02-25 Sat 21:52] =>  0:20
     CLOCK: [2017-02-25 Sat 20:55]--[2017-02-25 Sat 21:31] =>  0:36
 
@@ -323,6 +324,15 @@ with odb.
 This time has arrived now. We should create a set of concepts in yarn
 related to ORM (object-relational mapping).
 
+*** COMPLETED Make log directory configurable                         :story:
+    CLOSED: [2017-03-04 Sat 19:03]
+    CLOCK: [2017-03-04 Sat 19:04]--[2017-03-04 Sat 19:30] =>  0:26
+    CLOCK: [2017-03-04 Sat 18:31]--[2017-03-04 Sat 19:03] =>  0:32
+    CLOCK: [2017-03-04 Sat 18:02]--[2017-03-04 Sat 18:30] =>  0:28
+
+It would be nice to supply a directory for the log files and get dogen
+to output the logs there.
+
 *** Add a "flat directory" mode                                       :story:
 
 It would be nice to have a mode in which all files get placed in a
@@ -351,11 +361,6 @@ product. We could possibly run with “all” or “specific” whereby the
 user would supply one or more projects to code generate. For all
 properties that are common, we’d defined them only once somehow
 (common regexes, log level, etc).
-
-*** Make log directory configurable                                   :story:
-
-It would be nice to supply a directory for the log files and get dogen
-to output the logs there.
 
 *** Clean up annotation scope types                                   :story:
 
@@ -386,6 +391,17 @@ One slight snag: the value could be of any type:
 
 We can start by just supporting strings, but probably worthwhile
 having a think on how to specify the type.
+
+*** Create a base options class across all tools                      :story:
+
+At present we are copying and pasting a bit of code related to general
+options across all the command line tools (knitter, darter, stitcher,
+tailor). We could create a base class that has the common options and
+then have a factory that populates the boost program options
+associated with that class.
+
+Ideally we should also have a log initialisation class that uses those
+common options.
 
 *** STARTED Implement the database model using Northwind              :story:
     CLOCK: [2017-02-28 Tue 06:41]--[2017-02-28 Tue 07:25] =>  0:44

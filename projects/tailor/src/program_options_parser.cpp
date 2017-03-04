@@ -65,7 +65,7 @@ program_options_parser::general_options_factory() const {
     using boost::program_options::value;
     boost::program_options::options_description r("General options");
     r.add_options()
-        ("help,h", "Display this help and exit.")
+        ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.")
         ("log_level,l",
             value<std::string>(),
