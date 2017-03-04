@@ -318,7 +318,7 @@
     "archetype_location": {
       "family": "yarn"
     },
-      "value_type": "boolean",
+    "value_type": "boolean",
     "template_kind": "instance",
     "scope": "entity"
   },

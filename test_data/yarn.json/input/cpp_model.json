@@ -1,0 +1,1695 @@
+{
+  "model_name": "cpp_model",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.csharp.enabled": "false",
+    "annotations.profile": "dogen"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "a_class"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "colour_type"
+          },
+          "unparsed_type": "colour_types"
+        },
+        {
+          "name": {
+            "simple": "book_type"
+          },
+          "unparsed_type": "book_types"
+        },
+        {
+          "name": {
+            "simple": "shape_type"
+          },
+          "unparsed_type": "package_4::shape_types"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "a_service"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "base"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "visitable"
+      ]
+    },
+    {
+      "name": {
+        "simple": "base_concept_model"
+      },
+      "meta_type": "object",
+      "documentation": "This class models the BaseConcept.\n",
+      "stereotypes": [
+        "BaseConcept"
+      ]
+    },
+    {
+      "name": {
+        "simple": "base_with_concept"
+      },
+      "meta_type": "object",
+      "documentation": "Base class that models a refined concept.\n",
+      "stereotypes": [
+        "SecondRefinement"
+      ]
+    },
+    {
+      "name": {
+        "simple": "builtins"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "bool_property"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "char_property"
+          },
+          "unparsed_type": "char"
+        },
+        {
+          "name": {
+            "simple": "uchar_property"
+          },
+          "unparsed_type": "unsigned char"
+        },
+        {
+          "name": {
+            "simple": "int_property"
+          },
+          "unparsed_type": "int"
+        },
+        {
+          "name": {
+            "simple": "uint_property"
+          },
+          "unparsed_type": "unsigned int"
+        },
+        {
+          "name": {
+            "simple": "long_property"
+          },
+          "unparsed_type": "long"
+        },
+        {
+          "name": {
+            "simple": "ulong_property"
+          },
+          "unparsed_type": "unsigned long"
+        },
+        {
+          "name": {
+            "simple": "long_long_property"
+          },
+          "unparsed_type": "long long"
+        },
+        {
+          "name": {
+            "simple": "ulong_long_property"
+          },
+          "unparsed_type": "unsigned long long"
+        },
+        {
+          "name": {
+            "simple": "short_property"
+          },
+          "unparsed_type": "short"
+        },
+        {
+          "name": {
+            "simple": "ushort_property"
+          },
+          "unparsed_type": "unsigned short"
+        },
+        {
+          "name": {
+            "simple": "double_property"
+          },
+          "unparsed_type": "double"
+        },
+        {
+          "name": {
+            "simple": "float_property"
+          },
+          "unparsed_type": "float"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_of_a_child1"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "third_child_with_members"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_of_a_child2"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "third_child_with_members"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_via_settings"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "parent_with_members"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_with_members"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent_without_members"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_without_members"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent_without_members"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_0"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple": "class_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_a"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_b"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "class_a"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_c"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple": "class_d"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple": "consumer"
+      },
+      "meta_type": "object",
+      "documentation": "This type makes use of all primitves in this test model.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop0"
+          },
+          "unparsed_type": "short_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop1"
+          },
+          "unparsed_type": "ushort_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop2"
+          },
+          "unparsed_type": "long_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop3"
+          },
+          "unparsed_type": "ulong_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop4"
+          },
+          "unparsed_type": "int_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop5"
+          },
+          "unparsed_type": "uint_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop6"
+          },
+          "unparsed_type": "char_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop7"
+          },
+          "unparsed_type": "uchar_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop8"
+          },
+          "unparsed_type": "double_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop9"
+          },
+          "unparsed_type": "float_primitive"
+        },
+        {
+          "name": {
+            "simple": "prop10"
+          },
+          "unparsed_type": "bool_primitive"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "descendant1"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "base"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "descendant2"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "base"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "descendant3"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "descendant1"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "fluent"
+      },
+      "meta_type": "object",
+      "documentation": "Tests the fluent scenario across the different types of properties.\n",
+      "stereotypes": [
+        "fluent"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "value"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "further_refined"
+      },
+      "meta_type": "object",
+      "documentation": "Descendant class that models a concept which is a refinement of the concept\nmodeled by the base.\n",
+      "stereotypes": [
+        "MultipleRefinements"
+      ],
+      "parents": [
+        {
+          "simple": "base_with_concept"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "immutable_four"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with non-immutable and immutable pods as properties.\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "value"
+        },
+        {
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "immutable_one_builtin"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "immutable_one_builtin"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with a built-in property.\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "immutable_one_non_builtin"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with one pod property\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "immutable_two"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "immutable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "immutable_zero"
+      },
+      "meta_type": "object",
+      "documentation": "Immutable class with no properties.\n",
+      "stereotypes": [
+        "immutable"
+      ]
+    },
+    {
+      "name": {
+        "simple": "move_ctor_base"
+      },
+      "meta_type": "object",
+      "documentation": "Base class for scenario that tests code generated move contructors.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Force manual move constructor.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "move_ctor_descendant"
+      },
+      "meta_type": "object",
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
+      "parents": [
+        {
+          "simple": "move_ctor_base"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Force manual move constructor.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "move_ctor_empty_descendant"
+      },
+      "meta_type": "object",
+      "documentation": "Descendant class for scenario that tests code generated move contructors.\n",
+      "parents": [
+        {
+          "simple": "move_ctor_base"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "multi_concept_model"
+      },
+      "meta_type": "object",
+      "documentation": "Type that refines more than one concept.\n",
+      "stereotypes": [
+        "FirstRefinement",
+        "SecondRefinement"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
+          "documentation": "Property of class.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "multi_line"
+      },
+      "meta_type": "object",
+      "documentation": "first line\n\nsecond line\nthird line with \"quote\"\n"
+    },
+    {
+      "name": {
+        "simple": "multiple_refinement_concept_model"
+      },
+      "meta_type": "object",
+      "documentation": "Model of MultipleRefinements concept.\n",
+      "stereotypes": [
+        "MultipleRefinements"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
+          "documentation": "Property of the class itself.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "non_final_leaf"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.is_final": "false"
+      },
+      "parents": [
+        {
+          "simple": "descendant1"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "non_final_orphan"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.is_final": "false"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "one_line"
+      },
+      "meta_type": "object",
+      "documentation": "this is the brief comment\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int",
+          "documentation": "another brief comment\n"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int",
+          "documentation": "the brief comment\n\na second line\n"
+        },
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_1",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_2",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_3",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_4",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_5",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_1",
+        "internal_modules": "package_2"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child",
+        "internal_modules": "package_6"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent",
+          "internal_modules": "package_6"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_via_settings",
+        "internal_modules": "package_6"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "package_6::parent"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parent",
+        "internal_modules": "package_6"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parent",
+        "internal_modules": "package_7"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child",
+        "internal_modules": "package_8"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent",
+          "internal_modules": "package_7"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_via_settings",
+        "internal_modules": "package_8"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "package_7::parent"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child",
+        "internal_modules": "package_9"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent_outside"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_via_settings",
+        "internal_modules": "package_9"
+      },
+      "meta_type": "object",
+      "annotation": {
+        "yarn.generalization.parent": "parent_outside"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parent_outside"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parent_with_members"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parent_without_members"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
+        "simple": "refinement_concept_model"
+      },
+      "meta_type": "object",
+      "documentation": "This class models the Refinement concept.\n",
+      "stereotypes": [
+        "Refinement"
+      ]
+    },
+    {
+      "name": {
+        "simple": "second_child_without_members"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent_with_members"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "second_refinement_concept_model"
+      },
+      "meta_type": "object",
+      "documentation": "Second refinement model\n",
+      "stereotypes": [
+        "SecondRefinement"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
+          "documentation": "Property of the class itself.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "service"
+      },
+      "meta_type": "object",
+      "documentation": "Type is a service.\n",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "service_interface"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "simple_concept_model"
+      },
+      "meta_type": "object",
+      "documentation": "This class models simple concept.\n",
+      "stereotypes": [
+        "SimpleConcept"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_10"
+          },
+          "unparsed_type": "int",
+          "documentation": "Property that belongs to class.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "some_type"
+      },
+      "meta_type": "object",
+      "documentation": "Type is non-generatable.\n",
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "annotation": {
+        "quilt.cpp.hash.enabled": "true",
+        "quilt.cpp.hash.overwrite": "false",
+        "quilt.cpp.io.enabled": "true",
+        "quilt.cpp.io.overwrite": "false",
+        "quilt.cpp.odb.enabled": "true",
+        "quilt.cpp.odb.overwrite": "false",
+        "quilt.cpp.serialization.enabled": "true",
+        "quilt.cpp.serialization.overwrite": "false",
+        "quilt.cpp.test_data.enabled": "true",
+        "quilt.cpp.test_data.overwrite": "false",
+        "quilt.cpp.types.forward_declarations.overwrite": "true",
+        "quilt.cpp.serialization.forward_declarations.overwrite": "true"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "third_child_with_members"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent_with_members"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "unsigned int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "value"
+      },
+      "meta_type": "object",
+      "documentation": "Type is a value.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "BaseConcept2"
+      },
+      "meta_type": "concept",
+      "documentation": "Base concept.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Ensure we're testing header files inclusion.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "BaseConcept"
+      },
+      "meta_type": "concept",
+      "documentation": "This is the base concept.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int",
+          "documentation": "Property in the base concept.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "FirstRefinement"
+      },
+      "meta_type": "concept",
+      "documentation": "First refinement\n",
+      "refines": [
+        {
+          "simple": "BaseConcept2"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int",
+          "documentation": "First refinement property\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "MultipleRefinements"
+      },
+      "meta_type": "concept",
+      "documentation": "Multiple refinements concept\n",
+      "refines": [
+        {
+          "simple": "FirstRefinement"
+        },
+        {
+          "simple": "SecondRefinement"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "int",
+          "documentation": "Multiple refinements property.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Refinement"
+      },
+      "meta_type": "concept",
+      "documentation": "This concept refines BaseConcept.\n",
+      "refines": [
+        {
+          "simple": "BaseConcept"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int",
+          "documentation": "Refinement concept property.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "SecondRefinement"
+      },
+      "meta_type": "concept",
+      "documentation": "Second refinement\n",
+      "refines": [
+        {
+          "simple": "BaseConcept2"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "int",
+          "documentation": "Second refinement property\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "SimpleConcept"
+      },
+      "meta_type": "concept",
+      "documentation": "This is an example of a concept.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int",
+          "documentation": "This is a sample property in a concept.\n"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "value",
+          "documentation": "Prove that includes of types get picked up.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "package_0"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_1"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_2"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_3"
+      },
+      "meta_type": "module",
+      "documentation": "package\n",
+      "annotation": {
+        "yarn.dia.comment": "true"
+      }
+    },
+    {
+      "name": {
+        "simple": "package_1",
+        "internal_modules": "package_3"
+      },
+      "meta_type": "module",
+      "documentation": "inner package\n",
+      "annotation": {
+        "yarn.dia.comment": "true"
+      }
+    },
+    {
+      "name": {
+        "simple": "package_4"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_5"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_6"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_7"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_8"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_9"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "book_types"
+      },
+      "meta_type": "enumeration",
+      "documentation": "this is a brief comment\n\nthis is a long comment\n",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "great"
+          }
+        },
+        {
+          "name": {
+            "simple": "not_so_great"
+          }
+        },
+        {
+          "name": {
+            "simple": "bad"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "colour_types"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "red"
+          },
+          "documentation": "this is colour red\n"
+        },
+        {
+          "name": {
+            "simple": "blue"
+          },
+          "documentation": "this is blue\n"
+        },
+        {
+          "name": {
+            "simple": "green"
+          }
+        },
+        {
+          "name": {
+            "simple": "gray"
+          },
+          "documentation": "another comment\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "hex_flags"
+      },
+      "meta_type": "enumeration",
+      "documentation": "This is an example of an enumeration using hex flags.\n",
+      "annotation": {
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "none"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x00"
+          }
+        },
+        {
+          "name": {
+            "simple": "top"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x01"
+          }
+        },
+        {
+          "name": {
+            "simple": "bottom"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x02"
+          }
+        },
+        {
+          "name": {
+            "simple": "left"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x04"
+          }
+        },
+        {
+          "name": {
+            "simple": "right"
+          },
+          "annotation": {
+            "yarn.enumerator.value": "0x08"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "shape_types",
+        "internal_modules": "package_4"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "triangle"
+          }
+        },
+        {
+          "name": {
+            "simple": "square"
+          }
+        },
+        {
+          "name": {
+            "simple": "rectangle"
+          }
+        },
+        {
+          "name": {
+            "simple": "circle"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "short_enum"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.underlying_element": "short"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "an_enumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "another_enumerator"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "test_all_knobs"
+      },
+      "meta_type": "enumeration",
+      "annotation": {
+        "yarn.enumeration.use_implementation_defined_underlying_element": "true",
+        "yarn.enumeration.use_implementation_defined_enumerator_values": "true",
+        "yarn.enumeration.add_invalid_enumerator": "false"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "an_enumerator"
+          }
+        },
+        {
+          "name": {
+            "simple": "another_enumerator"
+          },
+          "documentation": "A comment.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "bool_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying bool.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "bool"
+      }
+    },
+    {
+      "name": {
+        "simple": "char_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying char.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "char"
+      }
+    },
+    {
+      "name": {
+        "simple": "double_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying double.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "double"
+      }
+    },
+    {
+      "name": {
+        "simple": "float_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying float.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "float"
+      }
+    },
+    {
+      "name": {
+        "simple": "immutable_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test for a primitive which is also immutable.\n",
+      "stereotypes": [
+        "immutable"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "short"
+      }
+    },
+    {
+      "name": {
+        "simple": "int_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying int.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "long_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying long.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "long"
+      }
+    },
+    {
+      "name": {
+        "simple": "short_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying short.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "short"
+      }
+    },
+    {
+      "name": {
+        "simple": "uchar_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsigned char.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned char"
+      }
+    },
+    {
+      "name": {
+        "simple": "uint_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsigned int.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned int"
+      }
+    },
+    {
+      "name": {
+        "simple": "ulong_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsigned long.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned long"
+      }
+    },
+    {
+      "name": {
+        "simple": "ushort_primitive"
+      },
+      "meta_type": "primitive",
+      "documentation": "Test a primitive with an underlying unsgined short.\n",
+      "annotation": {
+        "yarn.primitive.underlying_element": "unsigned short"
+      }
+    },
+    {
+      "name": {
+        "simple": "my_error"
+      },
+      "meta_type": "exception",
+      "documentation": "this is an exception\n"
+    },
+    {
+      "name": {
+        "simple": "catastrophic_error",
+        "internal_modules": "package_5"
+      },
+      "meta_type": "exception"
+    }
+  ]
+}

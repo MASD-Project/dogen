@@ -28,6 +28,7 @@ namespace {
 
 path data_set("yarn.json");
 path input("yarn.json/input");
+path input_cpp_model_json("yarn.json/input/cpp_model.json");
 path input_boost_model_json("yarn.json/input/boost_model.json");
 path input_std_model_json("yarn.json/input/std_model.json");
 path input_compressed_json("yarn.json/input/compressed.json");
@@ -62,6 +63,10 @@ path yarn_json::data_set() {
 
 path yarn_json::input() {
     return validating_resolver::resolve(::input);
+}
+
+path yarn_json::input_cpp_model_json() {
+    return validating_resolver::resolve(::input_cpp_model_json);
 }
 
 path yarn_json::input_boost_model_json() {

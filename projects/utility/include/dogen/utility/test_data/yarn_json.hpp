@@ -43,6 +43,7 @@ public:
     static boost::filesystem::path data_set();
 
     static boost::filesystem::path input();
+    static boost::filesystem::path input_cpp_model_json();
     static boost::filesystem::path input_boost_model_json();
     static boost::filesystem::path input_std_model_json();
     static boost::filesystem::path input_compressed_json();
