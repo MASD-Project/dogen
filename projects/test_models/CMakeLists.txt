@@ -20,6 +20,7 @@
 
 # user includes
 include_directories(
+    ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/compressed/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_facet_folders/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/disable_cmakelists/include
@@ -53,6 +54,7 @@ add_custom_target(build_test_models)
 #
 # add projects
 #
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/compressed)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/disable_facet_folders)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/enable_facet_types)

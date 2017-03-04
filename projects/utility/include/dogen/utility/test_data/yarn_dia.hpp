@@ -44,6 +44,7 @@ public:
     static boost::filesystem::path non_existent_file();
 
     static boost::filesystem::path input();
+    static boost::filesystem::path input_cpp_model_dia();
     static boost::filesystem::path input_boost_model_dia();
     static boost::filesystem::path input_std_model_dia();
     static boost::filesystem::path input_compressed_dia();
@@ -61,6 +62,8 @@ public:
     static boost::filesystem::path input_csharp_model_dia();
 
     static boost::filesystem::path expected();
+    static boost::filesystem::path expected_cpp_model_dia_xml();
+    static boost::filesystem::path expected_cpp_model_yarn_xml();
     static boost::filesystem::path expected_compressed_dia_xml();
     static boost::filesystem::path expected_empty_dia_xml();
     static boost::filesystem::path expected_empty_yarn_xml();
@@ -74,8 +77,12 @@ public:
     static boost::filesystem::path expected_std_model_yarn_xml();
     static boost::filesystem::path expected_boost_model_dia_xml();
     static boost::filesystem::path expected_boost_model_yarn_xml();
+    static boost::filesystem::path expected_csharp_model_dia_xml();
+    static boost::filesystem::path expected_csharp_model_yarn_xml();
 
     static boost::filesystem::path actual();
+    static boost::filesystem::path actual_cpp_model_dia_xml();
+    static boost::filesystem::path actual_cpp_model_yarn_xml();
     static boost::filesystem::path actual_compressed_dia_xml();
     static boost::filesystem::path actual_empty_dia_xml();
     static boost::filesystem::path actual_empty_yarn_xml();
@@ -89,6 +96,8 @@ public:
     static boost::filesystem::path actual_std_model_yarn_xml();
     static boost::filesystem::path actual_boost_model_dia_xml();
     static boost::filesystem::path actual_boost_model_yarn_xml();
+    static boost::filesystem::path actual_csharp_model_dia_xml();
+    static boost::filesystem::path actual_csharp_model_yarn_xml();
 };
 
 } } }

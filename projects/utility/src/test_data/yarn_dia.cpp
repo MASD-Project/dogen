@@ -29,6 +29,7 @@ namespace {
 path data_set("yarn.dia");
 path non_existent_file("yarn.dia/input/non_existent_file.dia");
 path input("yarn.dia/input");
+path input_cpp_model_dia("yarn.dia/input/cpp_model.dia");
 path input_boost_model_dia("yarn.dia/input/boost_model.dia");
 path input_std_model_dia("yarn.dia/input/std_model.dia");
 path input_compressed_dia("yarn.dia/input/compressed.dia");
@@ -52,6 +53,10 @@ path input_enable_facet_serialization_dia(
 path input_csharp_model_dia("yarn.dia/input/CSharpModel.dia");
 
 path expected("yarn.dia/expected");
+path expected_cpp_model_dia_xml(
+    "yarn.dia/expected/cpp_model.diaxml");
+path expected_cpp_model_yarn_xml(
+    "yarn.dia/expected/cpp_model.yarnxml");
 path expected_compressed_dia_xml(
     "yarn.dia/expected/compressed.diaxml");
 path expected_empty_dia_xml(
@@ -78,8 +83,16 @@ path expected_boost_model_dia_xml(
     "yarn.dia/expected/boost_model.diaxml");
 path expected_boost_model_yarn_xml(
     "yarn.dia/expected/boost_model.yarnxml");
+path expected_csharp_model_dia_xml(
+    "yarn.dia/expected/csharp_model.diaxml");
+path expected_csharp_model_yarn_xml(
+    "yarn.dia/expected/csharp_model.yarnxml");
 
 path actual("yarn.dia/actual");
+path actual_cpp_model_dia_xml(
+    "yarn.dia/actual/cpp_model.diaxml");
+path actual_cpp_model_yarn_xml(
+    "yarn.dia/actual/cpp_model.yarnxml");
 path actual_compressed_dia_xml(
     "yarn.dia/actual/compressed.diaxml");
 path actual_empty_dia_xml(
@@ -106,6 +119,10 @@ path actual_boost_model_dia_xml(
     "yarn.dia/actual/boost_model.diaxml");
 path actual_boost_model_yarn_xml(
     "yarn.dia/actual/boost_model.yarnxml");
+path actual_csharp_model_dia_xml(
+    "yarn.dia/actual/csharp_model.diaxml");
+path actual_csharp_model_yarn_xml(
+    "yarn.dia/actual/csharp_model.yarnxml");
 
 }
 
@@ -123,6 +140,10 @@ path yarn_dia::non_existent_file() {
 
 path yarn_dia::input() {
     return validating_resolver::resolve(::input);
+}
+
+path yarn_dia::input_cpp_model_dia() {
+    return validating_resolver::resolve(::input_cpp_model_dia);
 }
 
 path yarn_dia::input_boost_model_dia() {
@@ -189,6 +210,14 @@ path yarn_dia::expected() {
     return validating_resolver::resolve(::expected);
 }
 
+path yarn_dia::expected_cpp_model_dia_xml() {
+    return validating_resolver::resolve(::expected_cpp_model_dia_xml);
+}
+
+path yarn_dia::expected_cpp_model_yarn_xml() {
+    return validating_resolver::resolve(::expected_cpp_model_yarn_xml);
+}
+
 path yarn_dia::expected_compressed_dia_xml() {
     return validating_resolver::resolve(::expected_compressed_dia_xml);
 }
@@ -245,8 +274,24 @@ path yarn_dia::expected_boost_model_yarn_xml() {
     return validating_resolver::resolve(::expected_boost_model_yarn_xml);
 }
 
+path yarn_dia::expected_csharp_model_dia_xml() {
+    return validating_resolver::resolve(::expected_csharp_model_dia_xml);
+}
+
+path yarn_dia::expected_csharp_model_yarn_xml() {
+    return validating_resolver::resolve(::expected_csharp_model_yarn_xml);
+}
+
 path yarn_dia::actual() {
     return validating_resolver::resolve(::actual);
+}
+
+path yarn_dia::actual_cpp_model_dia_xml() {
+    return resolver::resolve(::actual_cpp_model_dia_xml);
+}
+
+path yarn_dia::actual_cpp_model_yarn_xml() {
+    return resolver::resolve(::actual_cpp_model_yarn_xml);
 }
 
 path yarn_dia::actual_compressed_dia_xml() {
@@ -299,6 +344,14 @@ path yarn_dia::actual_boost_model_dia_xml() {
 
 path yarn_dia::actual_boost_model_yarn_xml() {
     return resolver::resolve(::actual_boost_model_yarn_xml);
+}
+
+path yarn_dia::actual_csharp_model_dia_xml() {
+    return resolver::resolve(::actual_csharp_model_dia_xml);
+}
+
+path yarn_dia::actual_csharp_model_yarn_xml() {
+    return resolver::resolve(::actual_csharp_model_yarn_xml);
 }
 
 } } }
