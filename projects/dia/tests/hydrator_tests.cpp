@@ -56,6 +56,15 @@ bool test_hydrator(
 
 BOOST_AUTO_TEST_SUITE(hydrator_tests)
 
+BOOST_AUTO_TEST_CASE(cpp_model_results_in_expected_objects) {
+    SETUP_TEST_LOG_SOURCE("cpp_model_results_in_expected_objects");
+    using dogen::utility::test_data::yarn_dia;
+    const auto input(yarn_dia::input_cpp_model_dia());
+    const auto actual(yarn_dia::actual_cpp_model_dia_xml());
+    const auto expected(yarn_dia::expected_cpp_model_dia_xml());
+    BOOST_CHECK(test_hydrator(input, expected, actual));
+}
+
 BOOST_IGNORE_AUTO_TEST_CASE(compressed_diagram_results_in_expected_objects) {
     SETUP_TEST_LOG_SOURCE("compressed_diagram_results_in_expected_objects");
     using dogen::utility::test_data::yarn_dia;
