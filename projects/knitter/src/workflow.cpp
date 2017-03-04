@@ -35,7 +35,7 @@ namespace {
 
 using namespace dogen::utility::log;
 auto lg(logger_factory("knitter"));
-const std::string log_file_prefix("log/dogen.knitter.");
+const std::string log_file_prefix("dogen.knitter.");
 const std::string more_information(
     "Try `dogen.knitter --help' for more information.");
 const std::string knitter_product("Dogen Knitter v" DOGEN_VERSION);
@@ -96,10 +96,12 @@ generate_knitting_options_activity(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging_activity(const options::knitting_options& o) {
+    const auto dir(o.log_directory());
     const auto sev(utility::log::to_severity_level(o.log_level()));
-    log_file_name_ = log_file_prefix + model_name_ + ".log";
+    const std::string log_file_name(log_file_prefix + model_name_ + ".log");
+    log_path_ = dir / log_file_name;
     life_cycle_manager lcm;
-    lcm.initialise(log_file_name_, sev);
+    lcm.initialise(log_path_, sev);
     can_log_ = true;
 }
 
@@ -113,7 +115,7 @@ void workflow::knit_activity(const options::knitting_options& o) const {
 void workflow::report_exception_common() const {
     if (can_log_) {
         BOOST_LOG_SEV(lg, warn) << knitter_product << errors_msg;
-        std::cerr << log_file_msg << "'" << log_file_name_.generic_string()
+        std::cerr << log_file_msg << "'" << log_path_.generic_string()
                   << "' " << std::endl;
     }
 

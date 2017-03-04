@@ -89,9 +89,9 @@ program_options_parser::make_general_options_description() const {
         ("log_level,l",
             value<std::string>(),
             "What level to use for logging. Options: "
-            "trace, debug, info, warn, error. Defaults to info.")
+            "trace, debug, info, warn, error. Defaults to 'info'.")
         ("log_directory,g", value<std::string>(),
-            "Where to place the log file. Defaults to log.");
+            "Directory to place the log file in. Defaults to 'log'.");
 
     return r;
 }
