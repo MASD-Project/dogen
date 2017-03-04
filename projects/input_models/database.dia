@@ -2584,7 +2584,8 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN odb_pragma=value#</dia:string>
+        <dia:string>##DOGEN yarn.orm.is_value=true
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -4378,7 +4379,8 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN odb_pragma=value#</dia:string>
+        <dia:string>##DOGEN yarn.orm.is_value=true
+#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5485,7 +5487,7 @@ types to test features not covered in Northwind.
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN odb_pragma=value#</dia:string>
+        <dia:string>##DOGEN yarn.orm.is_value=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
