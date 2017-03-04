@@ -29,27 +29,32 @@ stitching_options::stitching_options()
 stitching_options::stitching_options(stitching_options&& rhs)
     : log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
-      force_write_(std::move(rhs.force_write_)) { }
+      force_write_(std::move(rhs.force_write_)),
+      log_directory_(std::move(rhs.log_directory_)) { }
 
 stitching_options::stitching_options(
     const std::string& log_level,
     const boost::filesystem::path& target,
-    const bool force_write)
+    const bool force_write,
+    const boost::filesystem::path& log_directory)
     : log_level_(log_level),
       target_(target),
-      force_write_(force_write) { }
+      force_write_(force_write),
+      log_directory_(log_directory) { }
 
 void stitching_options::swap(stitching_options& other) noexcept {
     using std::swap;
     swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(force_write_, other.force_write_);
+    swap(log_directory_, other.log_directory_);
 }
 
 bool stitching_options::operator==(const stitching_options& rhs) const {
     return log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
-        force_write_ == rhs.force_write_;
+        force_write_ == rhs.force_write_ &&
+        log_directory_ == rhs.log_directory_;
 }
 
 stitching_options& stitching_options::operator=(stitching_options other) {
@@ -96,6 +101,22 @@ bool stitching_options::force_write() const {
 
 void stitching_options::force_write(const bool v) {
     force_write_ = v;
+}
+
+const boost::filesystem::path& stitching_options::log_directory() const {
+    return log_directory_;
+}
+
+boost::filesystem::path& stitching_options::log_directory() {
+    return log_directory_;
+}
+
+void stitching_options::log_directory(const boost::filesystem::path& v) {
+    log_directory_ = v;
+}
+
+void stitching_options::log_directory(const boost::filesystem::path&& v) {
+    log_directory_ = std::move(v);
 }
 
 } }

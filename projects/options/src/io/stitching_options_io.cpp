@@ -45,7 +45,8 @@ std::ostream& operator<<(std::ostream& s, const stitching_options& v) {
       << "\"__type__\": " << "\"dogen::options::stitching_options\"" << ", "
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
-      << "\"force_write\": " << v.force_write()
+      << "\"force_write\": " << v.force_write() << ", "
+      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\""
       << " }";
     return(s);
 }

@@ -46,7 +46,8 @@ std::ostream& operator<<(std::ostream& s, const tailoring_options& v) {
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"output\": " << "\"" << v.output().generic_string() << "\"" << ", "
-      << "\"force_write\": " << v.force_write()
+      << "\"force_write\": " << v.force_write() << ", "
+      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\""
       << " }";
     return(s);
 }

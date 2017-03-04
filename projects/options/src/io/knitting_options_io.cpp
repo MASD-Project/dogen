@@ -62,7 +62,8 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
       << "\"force_write\": " << v.force_write() << ", "
       << "\"ignore_patterns\": " << v.ignore_patterns() << ", "
-      << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\""
+      << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
+      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\""
       << " }";
     return(s);
 }

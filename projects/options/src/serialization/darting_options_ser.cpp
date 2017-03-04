@@ -28,7 +28,31 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/options/serialization/darting_options_ser.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
 
 namespace boost {
 namespace serialization {
@@ -40,6 +64,7 @@ void save(Archive& ar,
     ar << make_nvp("log_level", v.log_level_);
     ar << make_nvp("force_write", v.force_write_);
     ar << make_nvp("product_name", v.product_name_);
+    ar << make_nvp("log_directory", v.log_directory_);
 }
 
 template<typename Archive>
@@ -49,6 +74,7 @@ void load(Archive& ar,
     ar >> make_nvp("log_level", v.log_level_);
     ar >> make_nvp("force_write", v.force_write_);
     ar >> make_nvp("product_name", v.product_name_);
+    ar >> make_nvp("log_directory", v.log_directory_);
 }
 
 } }

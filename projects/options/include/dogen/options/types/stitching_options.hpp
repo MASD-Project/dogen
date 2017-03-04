@@ -48,7 +48,8 @@ public:
     stitching_options(
         const std::string& log_level,
         const boost::filesystem::path& target,
-        const bool force_write);
+        const bool force_write,
+        const boost::filesystem::path& log_directory);
 
 private:
     template<typename Archive>
@@ -76,6 +77,11 @@ public:
     bool force_write() const;
     void force_write(const bool v);
 
+    const boost::filesystem::path& log_directory() const;
+    boost::filesystem::path& log_directory();
+    void log_directory(const boost::filesystem::path& v);
+    void log_directory(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const stitching_options& rhs) const;
     bool operator!=(const stitching_options& rhs) const {
@@ -90,6 +96,7 @@ private:
     std::string log_level_;
     boost::filesystem::path target_;
     bool force_write_;
+    boost::filesystem::path log_directory_;
 };
 
 } }

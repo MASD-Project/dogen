@@ -68,6 +68,7 @@ void save(Archive& ar,
     ar << make_nvp("force_write", v.force_write_);
     ar << make_nvp("ignore_patterns", v.ignore_patterns_);
     ar << make_nvp("output_directory_path", v.output_directory_path_);
+    ar << make_nvp("log_directory", v.log_directory_);
 }
 
 template<typename Archive>
@@ -80,6 +81,7 @@ void load(Archive& ar,
     ar >> make_nvp("force_write", v.force_write_);
     ar >> make_nvp("ignore_patterns", v.ignore_patterns_);
     ar >> make_nvp("output_directory_path", v.output_directory_path_);
+    ar >> make_nvp("log_directory", v.log_directory_);
 }
 
 } }

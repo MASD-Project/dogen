@@ -27,6 +27,7 @@
 
 #include <string>
 #include <algorithm>
+#include <boost/filesystem/path.hpp>
 #include "dogen/options/serialization/darting_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -35,17 +36,20 @@ namespace options {
 class darting_options final {
 public:
     darting_options(const darting_options&) = default;
-    darting_options(darting_options&&) = default;
     ~darting_options() = default;
 
 public:
     darting_options();
 
 public:
+    darting_options(darting_options&& rhs);
+
+public:
     darting_options(
         const std::string& log_level,
         const bool force_write,
-        const std::string& product_name);
+        const std::string& product_name,
+        const boost::filesystem::path& log_directory);
 
 private:
     template<typename Archive>
@@ -73,6 +77,11 @@ public:
     void product_name(const std::string& v);
     void product_name(const std::string&& v);
 
+    const boost::filesystem::path& log_directory() const;
+    boost::filesystem::path& log_directory();
+    void log_directory(const boost::filesystem::path& v);
+    void log_directory(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const darting_options& rhs) const;
     bool operator!=(const darting_options& rhs) const {
@@ -87,6 +96,7 @@ private:
     std::string log_level_;
     bool force_write_;
     std::string product_name_;
+    boost::filesystem::path log_directory_;
 };
 
 } }

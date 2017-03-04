@@ -55,7 +55,8 @@ public:
         const bool delete_extra_files,
         const bool force_write,
         const std::vector<std::string>& ignore_patterns,
-        const boost::filesystem::path& output_directory_path);
+        const boost::filesystem::path& output_directory_path,
+        const boost::filesystem::path& log_directory);
 
 private:
     template<typename Archive>
@@ -121,6 +122,11 @@ public:
     void output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
+    const boost::filesystem::path& log_directory() const;
+    boost::filesystem::path& log_directory();
+    void log_directory(const boost::filesystem::path& v);
+    void log_directory(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const knitting_options& rhs) const;
     bool operator!=(const knitting_options& rhs) const {
@@ -138,6 +144,7 @@ private:
     bool force_write_;
     std::vector<std::string> ignore_patterns_;
     boost::filesystem::path output_directory_path_;
+    boost::filesystem::path log_directory_;
 };
 
 } }

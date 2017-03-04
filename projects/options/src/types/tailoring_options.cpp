@@ -30,17 +30,20 @@ tailoring_options::tailoring_options(tailoring_options&& rhs)
     : log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       output_(std::move(rhs.output_)),
-      force_write_(std::move(rhs.force_write_)) { }
+      force_write_(std::move(rhs.force_write_)),
+      log_directory_(std::move(rhs.log_directory_)) { }
 
 tailoring_options::tailoring_options(
     const std::string& log_level,
     const boost::filesystem::path& target,
     const boost::filesystem::path& output,
-    const bool force_write)
+    const bool force_write,
+    const boost::filesystem::path& log_directory)
     : log_level_(log_level),
       target_(target),
       output_(output),
-      force_write_(force_write) { }
+      force_write_(force_write),
+      log_directory_(log_directory) { }
 
 void tailoring_options::swap(tailoring_options& other) noexcept {
     using std::swap;
@@ -48,13 +51,15 @@ void tailoring_options::swap(tailoring_options& other) noexcept {
     swap(target_, other.target_);
     swap(output_, other.output_);
     swap(force_write_, other.force_write_);
+    swap(log_directory_, other.log_directory_);
 }
 
 bool tailoring_options::operator==(const tailoring_options& rhs) const {
     return log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         output_ == rhs.output_ &&
-        force_write_ == rhs.force_write_;
+        force_write_ == rhs.force_write_ &&
+        log_directory_ == rhs.log_directory_;
 }
 
 tailoring_options& tailoring_options::operator=(tailoring_options other) {
@@ -117,6 +122,22 @@ bool tailoring_options::force_write() const {
 
 void tailoring_options::force_write(const bool v) {
     force_write_ = v;
+}
+
+const boost::filesystem::path& tailoring_options::log_directory() const {
+    return log_directory_;
+}
+
+boost::filesystem::path& tailoring_options::log_directory() {
+    return log_directory_;
+}
+
+void tailoring_options::log_directory(const boost::filesystem::path& v) {
+    log_directory_ = v;
+}
+
+void tailoring_options::log_directory(const boost::filesystem::path&& v) {
+    log_directory_ = std::move(v);
 }
 
 } }
