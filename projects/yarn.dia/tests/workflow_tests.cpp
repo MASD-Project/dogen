@@ -91,6 +91,15 @@ BOOST_AUTO_TEST_CASE(two_layers_with_objects_dia_transforms_into_expected_yarn) 
     BOOST_CHECK(test_workflow(i, e, a));
 }
 
+BOOST_AUTO_TEST_CASE(cpp_model_dia_transforms_into_expected_yarn) {
+    SETUP_TEST_LOG("cpp_model_dia_transforms_into_expected_yarn");
+    const auto i(yarn_dia::expected_cpp_model_dia_xml());
+    const auto e(yarn_dia::expected_cpp_model_yarn_xml());
+    const auto a(yarn_dia::actual_cpp_model_yarn_xml());
+    BOOST_CHECK(test_workflow(i, e, a));
+}
+
+
 BOOST_AUTO_TEST_CASE(std_model_dia_transforms_into_expected_yarn) {
     SETUP_TEST_LOG("std_model_dia_transforms_into_expected_yarn");
     const auto i(yarn_dia::expected_std_model_dia_xml());
