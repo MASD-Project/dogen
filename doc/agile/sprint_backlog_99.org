@@ -5,160 +5,106 @@
 
 * Mission Statement
 
-- Improve visual studio support
+- Improve Visual Studio support.
+- Finish ODB/Oracle blog post series.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-04 Sat 23:45]
-| <75>                                                                        |         |       |       |       |
-| Headline                                                                    | Time    |       |       |     % |
-|-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *45:20* |       |       | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 45:20   |       |       | 100.0 |
-| Active                                                                      |         | 45:20 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  2:01 |   4.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.1 |
-| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.1 |
-| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   1.9 |
-| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.3 |
-| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   4.9 |
-| COMPLETED Setup codacy                                                      |         |       |  0:22 |   0.8 |
-| COMPLETED Fix codacy warning on exceptions                                  |         |       |  0:08 |   0.3 |
-| COMPLETED Create a language independent ORM layer                           |         |       | 12:51 |  28.3 |
-| COMPLETED Make log directory configurable                                   |         |       |  1:26 |   3.2 |
-| COMPLETED Tidy-up test models                                               |         |       |  2:37 |   5.8 |
-| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  45.8 |
+#+CAPTION: Clock summary at [2017-03-06 Mon 14:41]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *1:05* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 1:05   |      |      | 100.0 |
+| Active                                                                      |        | 1:05 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |  24.6 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |  40.0 |
+| STARTED Build on tags for Windows                                           |        |      | 0:15 |  23.1 |
+| STARTED Add a "flat directory" mode                                         |        |      | 0:08 |  12.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
-    CLOCK: [2017-03-06 Mon 10:33]
+    CLOCK: [2017-03-06 Mon 10:33]--[2017-03-06 Mon 10:49] =>  0:16
 
 Updates to sprint and product backlog.
 
-*** Add a "flat directory" mode                                       :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-03-06 Mon 12:15]
+    CLOCK: [2017-03-06 Mon 10:49]--[2017-03-06 Mon 11:15] =>  0:26
+
+Add github release notes for previous sprint.
+
+Title: Dogen v0.98.0, "Santo Adrião"
+
+#+begin_src markdown
+![alt text](http://3.bp.blogspot.com/_QN04x6AzKRw/S3GrWbya3EI/AAAAAAAASdo/UiHYehVmWQE/s640/Igreja.jpg)
+Igreja de Santo Adrião, Namibe, Angola. (C) Blog Moçâmedes Saudade, in [blogspot](http://mocamedes-saudade.blogspot.co.uk/2007/05/blog-post_2275.html).
+
+Overview
+=======
+As with the previous sprint, this sprint was also a smuttering of unrelated commits, attempting to address problems we are facing in production at present. However a main theme emerged: major improvements in the ODB support.
+
+This was spurned by the ongoing series of blogposts on the integration of ODB with Dogen, using Oracle as the RDBMS:
+
+- [Nerd Food: Northwind, or Using Dogen with ODB - Part I](http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html)
+- [Nerd Food: Northwind, or Using Dogen with ODB - Part II](http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html)
+
+The purpose of these series of posts is to give Dogen's ORM functionality a through testing to ensure its good enough for production. The end result will be an update to the Database test model.
+
+Finally, we also took the chance to clean up the multiple test models we had in C++, and coalesced a number of them into a single, unified test model for C++, along the lines of what we had done for C#.
+
+User visible changes
+===============
+In this sprint, a small number of user visible changes were made:
+
+- **ODB Fixes**: a number of small fixes in the ODB support were performed, including fixing the CMake targets.
+- **Introduction of the ORM layer**: We create a layer of indirection between Dogen and ODB, allowing users to configure the object-relational mapping in "generic terms". This has the side-effect of greatly reducing the number of manual ODB pragmas required, because Dogen can now infer a lot of information from the meta-data supplied.
+- **Log directory is now configurable**: You can now send the Dogen logs to a directory of your choosing, making Dogen easier to integrate with existing builds, which may already have their own log directory.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_98.org).
+
+Next Sprint
+========
+The next sprint will continue to focus on ODB and Visual Studio support.
+
+Binaries
+======
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_0.98.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb)
+- [dogen-0.98.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen-0.98.0-Darwin-x86_64.dmg)
+- [dogen-0.98.0-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-0.98.0-Windows-AMD64.msi)
+
+**Note**: They are produced by CI so they may not yet be ready.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/838746103579291648][Tweet]]
+- [[https://www.linkedin.com/hp/update/6244512213571248128/][LinkedIn]]
+
+*** STARTED Build on tags for Windows                                 :story:
+    CLOCK: [2017-03-06 Mon 12:01]--[2017-03-06 Mon 12:16] =>  0:15
+
+At present we are not building and deploying for tags on Windows. This
+is a major pain because it means we must remember to always push the
+tag separately. We need to setup appveyor correctly.
+
+Links:
+
+- [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
+
+*** STARTED Add a "flat directory" mode                               :story:
+    CLOCK: [2017-03-06 Mon 14:31]--[2017-03-06 Mon 14:39] =>  0:08
 
 It would be nice to have a mode in which all files get placed in a
 single-directory: no src, include, etc – just one big folder with all
 files.
-
-*** Add support for "one off" profiles                                :story:
-
-At present one can define top-level profiles. These are useful, but in
-practice we ended up still defining a lot of things in each model. We
-need a way to associate a profile with a model by supplying it on the
-command line. That way users can create profiles and store them next
-to the model rather than having to create a data directory, etc etc.
-
-*** Introduce dogen projects                                          :story:
-
-At present we are manually configuring each dogen target, adding each
-separately to the build system. Perhaps a better approach is to have a
-dogen project file where one can configure all of the targets in one
-go. We don’t necessarily have to call dogen directly – perhaps another
-command line tool is responsible for invoking dogen? The problem here
-is that we’d end up with all dogen models in memory.
-
-At any rate, the project file would contain all models for a given
-product. We could possibly run with “all” or “specific” whereby the
-user would supply one or more projects to code generate. For all
-properties that are common, we’d defined them only once somehow
-(common regexes, log level, etc).
-
-*** Clean up annotation scope types                                   :story:
-
-As part of the attribute rename (which used to be called property) we
-should have renamed the annotation scope as well to attribute.
-
-In addition, we have a scope type of "entity" but the yarn meta-model
-type is really "element".
-
-We should also check if "not applicable" scope is in use, and if not
-delete it.
-
-*** Add a new annotation type of "pair"                               :story:
-
-It would be nice to be able to declare a annotation type with a value
-type of "pair" or "key value pair" and have the annotations
-automatically perform the splitting. The separator should not be
-equals, since we already use that for annotations kvps, but it could
-be comma, pipe, etc. The API would be augmented to return a
-=std::pair= with key and value.
-
-One slight snag: the value could be of any type:
-
-- boolean
-- string
-- enumeration (when we support these)
-- even text collection
-
-We can start by just supporting strings, but probably worthwhile
-having a think on how to specify the type.
-
-*** Create a base options class across all tools                      :story:
-
-At present we are copying and pasting a bit of code related to general
-options across all the command line tools (knitter, darter, stitcher,
-tailor). We could create a base class that has the common options and
-then have a factory that populates the boost program options
-associated with that class.
-
-Ideally we should also have a log initialisation class that uses those
-common options.
-
-*** STARTED Implement the database model using Northwind              :story:
-    CLOCK: [2017-02-28 Tue 06:41]--[2017-02-28 Tue 07:25] =>  0:44
-    CLOCK: [2017-02-27 Mon 22:11]--[2017-02-27 Mon 22:34] =>  0:23
-    CLOCK: [2017-02-27 Mon 21:10]--[2017-02-27 Mon 22:10] =>  1:00
-    CLOCK: [2017-02-26 Sun 23:22]--[2017-02-27 Mon 00:10] =>  0:48
-    CLOCK: [2017-02-26 Sun 22:48]--[2017-02-26 Sun 23:21] =>  0:33
-    CLOCK: [2017-02-26 Sun 22:05]--[2017-02-26 Sun 22:47] =>  0:42
-    CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
-    CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
-    CLOCK: [2017-02-25 Sat 18:02]--[2017-02-25 Sat 18:56] =>  0:54
-    CLOCK: [2017-02-25 Sat 04:05]--[2017-02-25 Sat 05:54] =>  1:49
-    CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
-    CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
-    CLOCK: [2017-02-24 Fri 09:01]--[2017-02-24 Fri 10:33] =>  1:32
-    CLOCK: [2017-02-23 Thu 23:06]--[2017-02-23 Thu 23:39] =>  0:33
-    CLOCK: [2017-02-23 Thu 19:15]--[2017-02-23 Thu 23:05] =>  3:50
-    CLOCK: [2017-02-14 Tue 06:33]--[2017-02-14 Tue 07:30] =>  0:57
-    CLOCK: [2017-02-13 Mon 20:25]--[2017-02-13 Mon 22:33] =>  2:08
-
-Now we are using Dogen in anger with ODB, we need to make sure the
-database model is actually exercising all of this functionality. One
-easy way of achieving this is to use Microsoft's Northwind Database as
-the base for the model.
-
-- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
-
-We should implement it using Oracle and use this to test the changes
-to ODB's oracle support.
-
-Tasks:
-
-- add comment for ODB targets
-- add flag to mark a type as a value
-- case of the identifiers is a problem: sometimes we get them
-  uppercase (when we do them without quotes in sql plus) sometimes we
-  get them lowercase (from odb). use =--sql-name-case= upper/lower as
-  a flag.
-- schema initialisation from statics is not working; this is as
-  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
-  entity, but that then causes an exception.
-- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
-
-*** Add a top-level "Visual Studio" knob                              :story:
-
-We have a number of features that only make sense when on Windows and
-building for Visual Studio. We should have a top-level knob that
-enables or disables all of these features in one go:
-
-- =quilt.cpp.visual_studio.enabled=
 
 *** Add =targetver.h= support                                         :story:
 
@@ -167,6 +113,39 @@ On windows we should be generating the targetver header.
 Links:
 
 - [[https://github.com/Microsoft/Windows-classic-samples/blob/master/Samples/RadialController/cpp/targetver.h][targetver.h]]
+
+*** Add support for DLL Main on windows                               :story:
+
+At present we are manually generating DLL Main by hand and then
+excluding it on regexes. This is not ideal and will be more of a
+problem when we generate project files. Ideally we should code
+generate it. Requirements:
+
+- user must be able to disable it;
+- user must be able to handcraft it in case they want different
+  contents;
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/aa370448(v%3Dvs.85).aspx][DLL Main]]
+
+*** Add support for pre-compiled headers on windows                   :story:
+
+Most VS users have pre-compiled headers. We need to generate
+=stdafx.h= etc. For now we can have it minimally populated until we
+understand better the requirements.
+
+Actually we could probably do a very simple computation in quilt to
+figure out the most frequently used headers and add those to
+=stdafx=. We just need to go through the entire model in the inclusion
+expander to perform this calculation.
+
+In addition we need to make sure =stdafx= is added as the first
+include.
+
+We should have a quilt setting for pre-compilation. We should also
+check that visual studio support is enabled in order to generate
+=stdafx=.
 
 *** Add support for Visual Studio C++ projects                        :story:
 
@@ -203,38 +182,13 @@ Links:
 
 - [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
 
-*** Add support for pre-compiled headers on windows                   :story:
+*** Add a top-level "Visual Studio" knob                              :story:
 
-Most VS users have pre-compiled headers. We need to generate
-=stdafx.h= etc. For now we can have it minimally populated until we
-understand better the requirements.
+We have a number of features that only make sense when on Windows and
+building for Visual Studio. We should have a top-level knob that
+enables or disables all of these features in one go:
 
-Actually we could probably do a very simple computation in quilt to
-figure out the most frequently used headers and add those to
-=stdafx=. We just need to go through the entire model in the inclusion
-expander to perform this calculation.
-
-In addition we need to make sure =stdafx= is added as the first
-include.
-
-We should have a quilt setting for pre-compilation. We should also
-check that visual studio support is enabled in order to generate
-=stdafx=.
-
-*** Add support for DLL Main on windows                               :story:
-
-At present we are manually generating DLL Main by hand and then
-excluding it on regexes. This is not ideal and will be more of a
-problem when we generate project files. Ideally we should code
-generate it. Requirements:
-
-- user must be able to disable it;
-- user must be able to handcraft it in case they want different
-  contents;
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/aa370448(v%3Dvs.85).aspx][DLL Main]]
+- =quilt.cpp.visual_studio.enabled=
 
 *** Add C++-03 mode                                                    :epic:
 
@@ -282,6 +236,95 @@ found adds:
 :    "${CMAKE_CURRENT_SOURCE_DIR}/"
 :    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
 : set(files ${files} ${odb_files})
+
+*** Clean up annotation scope types                                   :story:
+
+As part of the attribute rename (which used to be called property) we
+should have renamed the annotation scope as well to attribute.
+
+In addition, we have a scope type of "entity" but the yarn meta-model
+type is really "element".
+
+We should also check if "not applicable" scope is in use, and if not
+delete it.
+
+*** Add a new annotation type of "pair"                               :story:
+
+It would be nice to be able to declare a annotation type with a value
+type of "pair" or "key value pair" and have the annotations
+automatically perform the splitting. The separator should not be
+equals, since we already use that for annotations kvps, but it could
+be comma, pipe, etc. The API would be augmented to return a
+=std::pair= with key and value.
+
+One slight snag: the value could be of any type:
+
+- boolean
+- string
+- enumeration (when we support these)
+- even text collection
+
+We can start by just supporting strings, but probably worthwhile
+having a think on how to specify the type.
+
+*** Create a base options class across all tools                      :story:
+
+At present we are copying and pasting a bit of code related to general
+options across all the command line tools (knitter, darter, stitcher,
+tailor). We could create a base class that has the common options and
+then have a factory that populates the boost program options
+associated with that class.
+
+Ideally we should also have a log initialisation class that uses those
+common options.
+
+*** Implement the database model using Northwind                      :story:
+
+Now we are using Dogen in anger with ODB, we need to make sure the
+database model is actually exercising all of this functionality. One
+easy way of achieving this is to use Microsoft's Northwind Database as
+the base for the model.
+
+- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
+
+We should implement it using Oracle and use this to test the changes
+to ODB's oracle support.
+
+Tasks:
+
+- add comment for ODB targets
+- add flag to mark a type as a value
+- case of the identifiers is a problem: sometimes we get them
+  uppercase (when we do them without quotes in sql plus) sometimes we
+  get them lowercase (from odb). use =--sql-name-case= upper/lower as
+  a flag.
+- schema initialisation from statics is not working; this is as
+  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
+  entity, but that then causes an exception.
+- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
+
+*** Introduce dogen projects                                          :story:
+
+At present we are manually configuring each dogen target, adding each
+separately to the build system. Perhaps a better approach is to have a
+dogen project file where one can configure all of the targets in one
+go. We don’t necessarily have to call dogen directly – perhaps another
+command line tool is responsible for invoking dogen? The problem here
+is that we’d end up with all dogen models in memory.
+
+At any rate, the project file would contain all models for a given
+product. We could possibly run with “all” or “specific” whereby the
+user would supply one or more projects to code generate. For all
+properties that are common, we’d defined them only once somehow
+(common regexes, log level, etc).
+
+*** Add support for "one off" profiles                                :story:
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
 
 *** Add option to capitalise column and table names                   :story:
 
