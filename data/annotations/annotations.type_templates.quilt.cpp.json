@@ -91,19 +91,6 @@
   },
   {
     "name": {
-      "simple": "header_guard"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp",
-      "formatter_group": "quilt.cpp.header_files"
-    },
-    "value_type": "text",
-    "template_kind": "archetype_template",
-    "scope": "entity"
-  },
-  {
-    "name": {
       "simple": "inclusion_required",
       "qualified": "quilt.cpp.inclusion_required"
     },
