@@ -27,6 +27,7 @@
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
@@ -39,7 +40,6 @@ const std::string id("quilt.cpp.fabric.injector");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
-const std::string cmakelists_name("CMakeLists");
 const std::string odb_options_name("options.odb");
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
@@ -83,11 +83,8 @@ void injector::inject_registrar(yarn::intermediate_model& im) const {
 void injector::inject_cmakelists(yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
-    yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(im.name(), cmakelists_name));
-    auto e(boost::make_shared<cmakelists>());
-    e->name(n);
-    e->origin_type(im.origin_type());
+    cmakelists_factory f;
+    const auto e(f.make(im));
     add_element(e, im);
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";

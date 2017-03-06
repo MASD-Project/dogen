@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-06 Mon 20:35]
+#+CAPTION: Clock summary at [2017-03-06 Mon 22:15]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *3:12* |      |      | 100.0 |
+| *Total time*                                                                | *4:25* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 3:12   |      |      | 100.0 |
-| Active                                                                      |        | 3:12 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |   8.3 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |  13.5 |
-| STARTED Add test model for path meta-data                                   |        |      | 1:36 |  50.0 |
-| STARTED Build on tags for Windows                                           |        |      | 0:15 |   7.8 |
-| STARTED Add a "flat directory" mode                                         |        |      | 0:08 |   4.2 |
-| STARTED Split include and source directories                                |        |      | 0:31 |  16.1 |
+| Stories                                                                     | 4:25   |      |      | 100.0 |
+| Active                                                                      |        | 4:25 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |   6.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |   9.8 |
+| COMPLETED Add test model for path meta-data                                 |        |      | 2:49 |  63.8 |
+| STARTED Build on tags for Windows                                           |        |      | 0:15 |   5.7 |
+| STARTED Add a "flat directory" mode                                         |        |      | 0:08 |   3.0 |
+| STARTED Split include and source directories                                |        |      | 0:31 |  11.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -90,7 +90,10 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/838746103579291648][Tweet]]
 - [[https://www.linkedin.com/hp/update/6244512213571248128/][LinkedIn]]
 
-*** STARTED Add test model for path meta-data                         :story:
+*** COMPLETED Add test model for path meta-data                       :story:
+    CLOSED: [2017-03-06 Mon 22:15]
+    CLOCK: [2017-03-06 Mon 21:02]--[2017-03-06 Mon 22:09] =>  1:07
+    CLOCK: [2017-03-06 Mon 20:36]--[2017-03-06 Mon 20:42] =>  0:06
     CLOCK: [2017-03-06 Mon 20:21]--[2017-03-06 Mon 20:35] =>  0:14
     CLOCK: [2017-03-06 Mon 20:05]--[2017-03-06 Mon 20:20] =>  0:15
     CLOCK: [2017-03-06 Mon 18:22]--[2017-03-06 Mon 18:29] =>  0:07
@@ -99,6 +102,12 @@ For all other architectures and/or operative systems, you will need to build Dog
 We are making use of directory and file settings, but we do not have
 any tests for it. Add a simple test model that exercises all settings
 in one go (at least those that are not mutually exclusive).
+
+*** Check for incomatibility between input language and enabled kernels :story:
+
+At present it is possible to have a model with input language of say
+C++ but with the C# kernel enabled. We should throw if the input
+language is incompatible with the enabled kernels.
 
 *** STARTED Build on tags for Windows                                 :story:
     CLOCK: [2017-03-06 Mon 12:01]--[2017-03-06 Mon 12:16] =>  0:15
@@ -162,6 +171,34 @@ At present we are only generating a cmakelists file for include
 folders on non-split projects. This means that the header files for
 split projects won't be packaged up. It also means that for ODB
 projects we won't get the ODB targets.
+
+*** ODB CMakeLists does not cope with changes to project paths        :story:
+
+We have hard-coded the path to the ODB directory in the CMakeLists
+file. This means that when we update the path to a different include,
+source or ODB directory, the CMake file will fail. We need to add these
+locations to fabric's CMakeLists and use the locator to populate it.
+
+Notes:
+
+- injection is done before the quilt workflow, so we do not have a
+  locator handy. CMakeLists population will have to be a two-step
+  process. We could add a CMakeLists expander (or somesuch other name)
+  which is responsible for populating these directories.
+- we may need to split CMakeLists into two: include and source. We
+  don't need these parameters for source.
+- we need the include directory name, path to source and include ODB
+  directories and path to ODB options file.
+
+Parameters not tested in the =all_path_and_directory_settings.dia=
+model due to this problem:
+
+: #DOGEN quilt.cpp.source_directory_name=some_source_dir
+: #DOGEN quilt.cpp.include_directory_name=some_include_dir
+: #DOGEN quilt.cpp.odb.directory=odb_dir
+
+
+
 
 *** Add =targetver.h= support                                         :story:
 
@@ -482,6 +519,9 @@ At present we use the following form:
 
 We need to use the new naming style =cpp.odb.pragma=. We also need to
 rename the opaque_parameters to reflect ODB specific data.
+
+Finally we should no longer attempt to derive the ODB pragma
+context. We should just add it verbatim.
 
 *** Map upsilon primitives to intrinsics                              :story:
 

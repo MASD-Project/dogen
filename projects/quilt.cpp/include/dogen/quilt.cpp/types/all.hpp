@@ -56,6 +56,7 @@
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
+#include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/building_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
