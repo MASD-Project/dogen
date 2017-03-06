@@ -58,6 +58,7 @@ public:
     static boost::filesystem::path input_enable_facet_hash_json();
     static boost::filesystem::path input_enable_facet_io_json();
     static boost::filesystem::path input_enable_facet_serialization_json();
+    static boost::filesystem::path input_all_path_and_directory_settings_json();
     static boost::filesystem::path input_csharp_model_json();
 
     static boost::filesystem::path expected();

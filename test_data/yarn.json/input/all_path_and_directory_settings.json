@@ -1,0 +1,152 @@
+{
+  "model_name": "all_path_and_directory_settings",
+  "external_modules": "dogen::test_models",
+  "documentation": "This model tests all settings related to paths and file names.\n",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "annotations.profile": "dogen",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.csharp.enabled": "true",
+    "quilt.cpp.directory": "cpp_kernel",
+    "quilt.cpp.source_directory_name": "some_source_dir",
+    "quilt.cpp.include_directory_name": "some_include_dir",
+    "quilt.cpp.header_file_extension": ".hxx",
+    "quilt.cpp.implementation_file_extension": ".cxx",
+    "quilt.cpp.hash.directory": "hash_dir",
+    "quilt.cpp.hash.postfix": "the_hash",
+    "quilt.cpp.hash.class_header.postfix": "0_0_0",
+    "quilt.cpp.hash.class_implementation.postfix": "0_0_1",
+    "quilt.cpp.hash.enum_header.postfix": "0_0_2",
+    "quilt.cpp.hash.enum_implementation.postfix": "0_0_3",
+    "quilt.cpp.hash.primitive_header.postfix": "0_0_4",
+    "quilt.cpp.hash.primitive_implementation.postfix": "0_0_5",
+    "quilt.cpp.hash.master_header.postfix": "0_0_6",
+    "quilt.cpp.io.directory": "io_dir",
+    "quilt.cpp.io.postfix": "the_io",
+    "quilt.cpp.io.class_header.postfix": "0_1_0",
+    "quilt.cpp.io.class_implementation.postfix": "0_1_1",
+    "quilt.cpp.io.enum_header.postfix": "0_1_2",
+    "quilt.cpp.io.enum_implementation.postfix": "0_1_3",
+    "quilt.cpp.io.primitive_header.postfix": "0_1_4",
+    "quilt.cpp.io.primitive_implementation.postfix": "0_1_5",
+    "quilt.cpp.io.master_header.postfix": "0_1_6",
+    "quilt.cpp.odb.directory": "odb_dir",
+    "quilt.cpp.odb.postfix": "the_odb",
+    "quilt.cpp.odb.class_header.postfix": "0_2_0",
+    "quilt.cpp.odb.enum_header.postfix": "0_2_1",
+    "quilt.cpp.odb.primitive_header.postfix": "0_2_2",
+    "quilt.cpp.odb.odb_options.postfix": "0_2_3",
+    "quilt.cpp.odb.master_header.postfix": "0_2_4",
+    "quilt.cpp.serialization.directory": "serialization_dir",
+    "quilt.cpp.serialization.postfix": "the_serialization",
+    "quilt.cpp.serialization.class_header.postfix": "0_3_0",
+    "quilt.cpp.serialization.class_implementation.postfix": "0_3_1",
+    "quilt.cpp.serialization.enum_header.postfix": "0_3_2",
+    "quilt.cpp.serialization.primitive_header.postfix": "0_3_3",
+    "quilt.cpp.serialization.primitive_implementation.postfix": "0_3_4",
+    "quilt.cpp.serialization.master_header.postfix": "0_3_5",
+    "quilt.cpp.serialization.forward_declarations.postfix": "0_3_6",
+    "quilt.cpp.serialization.registrar_header.postfix": "0_3_7",
+    "quilt.cpp.serialization.registrar_implementation.postfix": "0_3_8",
+    "quilt.cpp.test_data.directory": "test_data_dir",
+    "quilt.cpp.test_data.postfix": "the_test_data",
+    "quilt.cpp.test_data.class_header.postfix": "0_4_0",
+    "quilt.cpp.test_data.class_implementation.postfix": "0_4_1",
+    "quilt.cpp.test_data.enum_header.postfix": "0_4_2",
+    "quilt.cpp.test_data.enum_implementation.postfix": "0_4_3",
+    "quilt.cpp.test_data.primitive_header.postfix": "0_4_4",
+    "quilt.cpp.test_data.primitive_implementation.postfix": "0_4_5",
+    "quilt.cpp.test_data.master_header.postfix": "0_4_6",
+    "quilt.cpp.types.directory": "types_dir",
+    "quilt.cpp.types.postfix": "the_types",
+    "quilt.cpp.types.class_header.postfix": "0_5_0",
+    "quilt.cpp.types.class_implementation.postfix": "0_5_1",
+    "quilt.cpp.types.enum_header.postfix": "0_5_2",
+    "quilt.cpp.types.enum_implementation.postfix": "0_5_3",
+    "quilt.cpp.types.primitive_header.postfix": "0_5_4",
+    "quilt.cpp.types.primitive_implementation.postfix": "0_5_5",
+    "quilt.cpp.types.master_header.postfix": "0_5_6",
+    "quilt.cpp.types.forward_declarations.postfix": "0_5_7",
+    "quilt.csharp.directory": "csharp_kernel",
+    "quilt.csharp.visual_studio.solution.postfix": "_vs15_",
+    "quilt.csharp.visual_studio.project.postfix": "_vc15_",
+    "quilt.csharp.test_data.directory": "test_data_dir",
+    "quilt.csharp.test_data.postfix": "the_test_data",
+    "quilt.csharp.test_data.class.postfix": "1_0_0",
+    "quilt.csharp.test_data.assistant.postfix": "1_0_1",
+    "quilt.csharp.test_data.enum.postfix": "1_0_2",
+    "quilt.csharp.test_data.primitive.postfix": "1_0_3",
+    "quilt.csharp.io.directory": "io_dir",
+    "quilt.csharp.io.postfix": "the_io",
+    "quilt.csharp.io.class.postfix": "2_0_0",
+    "quilt.csharp.io.assistant.postfix": "2_0_1",
+    "quilt.csharp.io.enum.postfix": "2_0_2",
+    "quilt.csharp.io.primitive.postfix": "2_0_3",
+    "quilt.csharp.types.directory": "types_dir",
+    "quilt.csharp.types.postfix": "the_types",
+    "quilt.csharp.types.class.postfix": "1_1_0",
+    "quilt.csharp.types.enum.postfix": "1_1_2",
+    "quilt.csharp.types.primitive.postfix": "1_1_3"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "class_0"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_1",
+        "internal_modules": "package_0"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_2",
+        "internal_modules": "package_0::package_0_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "package_0"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_0_1",
+        "internal_modules": "package_0"
+      },
+      "meta_type": "module"
+    }
+  ]
+}
