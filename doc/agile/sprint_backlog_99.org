@@ -1,0 +1,397 @@
+#+title: Sprint Backlog 98
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Improve visual studio support
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2017-03-04 Sat 23:45]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *45:20* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 45:20   |       |       | 100.0 |
+| Active                                                                      |         | 45:20 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  2:01 |   4.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.1 |
+| COMPLETED Fix the handling of ODB pragmas for yarn primitives               |         |       |  0:56 |   2.1 |
+| COMPLETED Rename intermediate model expander and model factory              |         |       |  0:53 |   1.9 |
+| COMPLETED Injection splits annotation from intermediate model               |         |       |  0:35 |   1.3 |
+| COMPLETED ODB Fixes to support Oracle                                       |         |       |  2:14 |   4.9 |
+| COMPLETED Setup codacy                                                      |         |       |  0:22 |   0.8 |
+| COMPLETED Fix codacy warning on exceptions                                  |         |       |  0:08 |   0.3 |
+| COMPLETED Create a language independent ORM layer                           |         |       | 12:51 |  28.3 |
+| COMPLETED Make log directory configurable                                   |         |       |  1:26 |   3.2 |
+| COMPLETED Tidy-up test models                                               |         |       |  2:37 |   5.8 |
+| STARTED Implement the database model using Northwind                        |         |       | 20:47 |  45.8 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-03-06 Mon 10:33]
+
+Updates to sprint and product backlog.
+
+*** Add a "flat directory" mode                                       :story:
+
+It would be nice to have a mode in which all files get placed in a
+single-directory: no src, include, etc – just one big folder with all
+files.
+
+*** Add support for "one off" profiles                                :story:
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
+
+*** Introduce dogen projects                                          :story:
+
+At present we are manually configuring each dogen target, adding each
+separately to the build system. Perhaps a better approach is to have a
+dogen project file where one can configure all of the targets in one
+go. We don’t necessarily have to call dogen directly – perhaps another
+command line tool is responsible for invoking dogen? The problem here
+is that we’d end up with all dogen models in memory.
+
+At any rate, the project file would contain all models for a given
+product. We could possibly run with “all” or “specific” whereby the
+user would supply one or more projects to code generate. For all
+properties that are common, we’d defined them only once somehow
+(common regexes, log level, etc).
+
+*** Clean up annotation scope types                                   :story:
+
+As part of the attribute rename (which used to be called property) we
+should have renamed the annotation scope as well to attribute.
+
+In addition, we have a scope type of "entity" but the yarn meta-model
+type is really "element".
+
+We should also check if "not applicable" scope is in use, and if not
+delete it.
+
+*** Add a new annotation type of "pair"                               :story:
+
+It would be nice to be able to declare a annotation type with a value
+type of "pair" or "key value pair" and have the annotations
+automatically perform the splitting. The separator should not be
+equals, since we already use that for annotations kvps, but it could
+be comma, pipe, etc. The API would be augmented to return a
+=std::pair= with key and value.
+
+One slight snag: the value could be of any type:
+
+- boolean
+- string
+- enumeration (when we support these)
+- even text collection
+
+We can start by just supporting strings, but probably worthwhile
+having a think on how to specify the type.
+
+*** Create a base options class across all tools                      :story:
+
+At present we are copying and pasting a bit of code related to general
+options across all the command line tools (knitter, darter, stitcher,
+tailor). We could create a base class that has the common options and
+then have a factory that populates the boost program options
+associated with that class.
+
+Ideally we should also have a log initialisation class that uses those
+common options.
+
+*** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-02-28 Tue 06:41]--[2017-02-28 Tue 07:25] =>  0:44
+    CLOCK: [2017-02-27 Mon 22:11]--[2017-02-27 Mon 22:34] =>  0:23
+    CLOCK: [2017-02-27 Mon 21:10]--[2017-02-27 Mon 22:10] =>  1:00
+    CLOCK: [2017-02-26 Sun 23:22]--[2017-02-27 Mon 00:10] =>  0:48
+    CLOCK: [2017-02-26 Sun 22:48]--[2017-02-26 Sun 23:21] =>  0:33
+    CLOCK: [2017-02-26 Sun 22:05]--[2017-02-26 Sun 22:47] =>  0:42
+    CLOCK: [2017-02-25 Sat 19:47]--[2017-02-25 Sat 19:52] =>  0:05
+    CLOCK: [2017-02-25 Sat 18:56]--[2017-02-25 Sat 19:46] =>  0:50
+    CLOCK: [2017-02-25 Sat 18:02]--[2017-02-25 Sat 18:56] =>  0:54
+    CLOCK: [2017-02-25 Sat 04:05]--[2017-02-25 Sat 05:54] =>  1:49
+    CLOCK: [2017-02-24 Fri 21:01]--[2017-02-24 Fri 22:55] =>  1:54
+    CLOCK: [2017-02-24 Fri 10:34]--[2017-02-24 Fri 12:39] =>  2:05
+    CLOCK: [2017-02-24 Fri 09:01]--[2017-02-24 Fri 10:33] =>  1:32
+    CLOCK: [2017-02-23 Thu 23:06]--[2017-02-23 Thu 23:39] =>  0:33
+    CLOCK: [2017-02-23 Thu 19:15]--[2017-02-23 Thu 23:05] =>  3:50
+    CLOCK: [2017-02-14 Tue 06:33]--[2017-02-14 Tue 07:30] =>  0:57
+    CLOCK: [2017-02-13 Mon 20:25]--[2017-02-13 Mon 22:33] =>  2:08
+
+Now we are using Dogen in anger with ODB, we need to make sure the
+database model is actually exercising all of this functionality. One
+easy way of achieving this is to use Microsoft's Northwind Database as
+the base for the model.
+
+- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
+
+We should implement it using Oracle and use this to test the changes
+to ODB's oracle support.
+
+Tasks:
+
+- add comment for ODB targets
+- add flag to mark a type as a value
+- case of the identifiers is a problem: sometimes we get them
+  uppercase (when we do them without quotes in sql plus) sometimes we
+  get them lowercase (from odb). use =--sql-name-case= upper/lower as
+  a flag.
+- schema initialisation from statics is not working; this is as
+  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
+  entity, but that then causes an exception.
+- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
+
+*** Add a top-level "Visual Studio" knob                              :story:
+
+We have a number of features that only make sense when on Windows and
+building for Visual Studio. We should have a top-level knob that
+enables or disables all of these features in one go:
+
+- =quilt.cpp.visual_studio.enabled=
+
+*** Add =targetver.h= support                                         :story:
+
+On windows we should be generating the targetver header.
+
+Links:
+
+- [[https://github.com/Microsoft/Windows-classic-samples/blob/master/Samples/RadialController/cpp/targetver.h][targetver.h]]
+
+*** Add support for Visual Studio C++ projects                        :story:
+
+Visual studio project needs the files to be listed by hand. We can
+either generate the project or the user has to manually add the
+files. This is a problem every time they change. Requirements:
+
+- we need to be able to support multiple VS versions as well (user
+  configurable)
+- user may want to import property sheets
+- need guids (as per C# projects)
+- need additional library/include directories
+- need to add pre-compiled headers support with /FI.
+- add a solution for good measure, using the C# code.
+- add filter files for headers and source files.
+
+As per ODB, users may also want to build with different versions of
+VS. We should allow generating more than one solution and postfix them
+with the VS version.
+
+We should also generate filters for the project:
+
+- header files
+- source files
+- ODB header files
+- ODB source files
+
+The inclusion of ODB files must be done using regular expressions
+because we do not want to have to do two passes for knit; so we don't
+really know what files are available. However, if the ODB files have a
+=cxx= extension, we can just =CLInclude= =*cxx=.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
+
+*** Add support for pre-compiled headers on windows                   :story:
+
+Most VS users have pre-compiled headers. We need to generate
+=stdafx.h= etc. For now we can have it minimally populated until we
+understand better the requirements.
+
+Actually we could probably do a very simple computation in quilt to
+figure out the most frequently used headers and add those to
+=stdafx=. We just need to go through the entire model in the inclusion
+expander to perform this calculation.
+
+In addition we need to make sure =stdafx= is added as the first
+include.
+
+We should have a quilt setting for pre-compilation. We should also
+check that visual studio support is enabled in order to generate
+=stdafx=.
+
+*** Add support for DLL Main on windows                               :story:
+
+At present we are manually generating DLL Main by hand and then
+excluding it on regexes. This is not ideal and will be more of a
+problem when we generate project files. Ideally we should code
+generate it. Requirements:
+
+- user must be able to disable it;
+- user must be able to handcraft it in case they want different
+  contents;
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/aa370448(v%3Dvs.85).aspx][DLL Main]]
+
+*** Add C++-03 mode                                                    :epic:
+
+#+begin_quote
+*Story*: As a dogen user, I want to create models in C++ 03 so that I
+can interface with legacy code.
+#+end_quote
+
+It shouldn't be too hard to generate C++-03 code in addition to
+C++-14. We could follow the gcc/odb convention and have a =-std=
+option for this in meta-data. The only problem would be testing - at
+present the language settings comes from cmake, and we'd have to make
+sure the compiler is not in C++-14 mode when compiling test models
+in 03. Also, the mixing and matching of 03 with 14 may not be
+trivial. We should wait for a use case.
+
+It may be possible to add different flags to different projects in
+CMake.
+
+We should call this the c++ dialect.
+
+Tasks:
+
+- default ctors, final, noexcept. Need to manually add default
+  ctor (e.g. force it).
+- enums
+- need to disable ODB c++ 11 as well.
+
+*** Use =cxx= extension with ODB files                                :story:
+
+At present we renamed the ODB extension to =.cpp=. This is to make the
+ODB files part of the project:
+
+: set(files "")
+: file(GLOB_RECURSE files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+However, it's quite nice to have distinct extensions for ODB and Dogen
+files. We should add a conditional in CMake that detects ODB and if
+found adds:
+
+: set(odb_files "")
+: file(GLOB_RECURSE odb_files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+: set(files ${files} ${odb_files})
+
+*** Add option to capitalise column and table names                   :story:
+
+One very useful thing is to allow users to define types in camel case
+or underscore separated but then have the ODB names generated all in
+caps (schema name, table name, column name). The database we are
+currently working with is all in caps and we are forced to manually
+enter pragmas for every single type because of this. Instead, we
+should have some meta-data:
+
+: odb.use_capitals=true
+
+This would automatically generate the pragmas.
+
+One slight downside is that if a user then tries to manually override
+the pragmas, we will have duplicates, in effect:
+
+: #DOGEN odb_pragma=schema("northwind")
+: #DOGEN odb_pragma=schema("NORTHWIND")
+
+*** Add prefetch support to ODB                                       :story:
+
+As per Boris email:
+
+#+begin_quote
+Hm, I am not sure the bulk approach (with a compiler-time pragma) is
+right in this case. There we don't really have a choice since we need
+to know the "batch buffer" size.
+
+But here it is all runtime. Plus, you may want to have different
+prefetch for different queries of the same object. In fact, you
+can already customize it for queries (but not for object loads)
+by using prepared queries (Section 4.5 in the manual):
+
+1. Create prepared query.
+
+2. Get its statement (statement()).
+
+3. Cast it to odb::oracle::select_statement.
+
+4. Call handle() on the result to get OCIStmt*.
+
+5. Set custom OCI_ATTR_PREFETCH_ROWS.
+
+6. Execute the query.
+
+The problems with this approach are: (1) it is tedious and (2) it
+doesn't work for non-query SELECT's (e.g., database::load()). So
+perhaps the way to do it is:
+
+1. Provide prefetch() functions on oracle::database() and
+   oracle::connection() that can be used to modify database-wide
+   and connection-wide prefetch values. Also set it to some
+   reasonable default (say 512?)
+
+2. Provide oracle::select_statement::prefetch() to make the
+   prepared query approach less tedious.
+#+end_quote
+
+*** Replace the database model with the northwind model               :story:
+
+As part of the [[https://github.com/DomainDrivenConsulting/zango][zango]] project we are creating a model that exercises
+Dogen and ODB. It is largely based on the database model, minus the
+basic types we had added a while ago. We should just drop the database
+model and adopt the northwind model from zango.
+
+*** Add ODB to the build machine                                      :story:
+
+At present we are only compiling and running the ODB tests
+locally. Now that ODB is becoming a core dependency, we need to make
+sure we are running these tests on the build machines - Windows and
+Linux at least.
+
+*** Rename ODB parameters                                             :story:
+
+At present we use the following form:
+
+: #DOGEN ODB_PRAGMA=no_id
+
+We need to use the new naming style =cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
+
+*** Map upsilon primitives to intrinsics                              :story:
+
+Upsilon allows users to create "strong typedefs" around primitve
+types. We need to unpack these into their intrinsic counterparts and
+them map the intrinsics to native types.
+
+Slight mistake: we mapped the primitive types themselves but in
+reality what needs to be mapped are the fields making references to
+the primitive types. We should just filter out all primitives.
+
+Additional wrinkle: what the end users want is to unpack "real
+primitives" into intrinsics, but "other" primitives should be mapped
+to objects. This can be achieved by hard-coding =Plaform= primitives
+into the mapping layer. However, some non-platform primitives may also
+be candidates too. We need to create a list of these to see how
+widespread the problem is.
+
+Another alternative is to apply hard-coded regexes:
+
+- if the name matches any of the intrinsic names
+
+Finally, the last option may be to have yet another mapping data file
+format that lists the primitives to unbox.
+
+*** Immutable types cannot be owned by mutable types                  :story:
+
+When we try to create a mutable class that has a property of an
+immutable type, the code fails to compile due to the swap
+method. This is because immutable types do not provide swap.
+
+** Deprecated
