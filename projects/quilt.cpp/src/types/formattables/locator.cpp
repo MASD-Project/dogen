@@ -43,6 +43,8 @@ const std::string separator("_");
 
 const std::string missing_archetype_configuration(
     "Could not find configuration for archetype: ");
+const std::string missing_kernel_directory(
+    "Enable kernel directory is on but kernel directory is empty.");
 
 }
 
@@ -212,7 +214,11 @@ boost::filesystem::path locator::make_project_path(
     r = output_directory_path;
     r /= boost::algorithm::join(mmp, dot);
     if (enable_kernel_directories) {
-        // FIXME: check directory name is not empty
+        if (lc.kernel_directory_name().empty()) {
+            BOOST_LOG_SEV(lg, error) << missing_kernel_directory;
+            BOOST_THROW_EXCEPTION(location_error(missing_kernel_directory));
+        }
+
         r /= lc.kernel_directory_name();
     }
 
