@@ -13,18 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-06 Mon 14:41]
+#+CAPTION: Clock summary at [2017-03-06 Mon 20:35]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:05* |      |      | 100.0 |
+| *Total time*                                                                | *3:12* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:05   |      |      | 100.0 |
-| Active                                                                      |        | 1:05 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |  24.6 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |  40.0 |
-| STARTED Build on tags for Windows                                           |        |      | 0:15 |  23.1 |
-| STARTED Add a "flat directory" mode                                         |        |      | 0:08 |  12.3 |
+| Stories                                                                     | 3:12   |      |      | 100.0 |
+| Active                                                                      |        | 3:12 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |   8.3 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |  13.5 |
+| STARTED Add test model for path meta-data                                   |        |      | 1:36 |  50.0 |
+| STARTED Build on tags for Windows                                           |        |      | 0:15 |   7.8 |
+| STARTED Add a "flat directory" mode                                         |        |      | 0:08 |   4.2 |
+| STARTED Split include and source directories                                |        |      | 0:31 |  16.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -88,6 +90,16 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/838746103579291648][Tweet]]
 - [[https://www.linkedin.com/hp/update/6244512213571248128/][LinkedIn]]
 
+*** STARTED Add test model for path meta-data                         :story:
+    CLOCK: [2017-03-06 Mon 20:21]--[2017-03-06 Mon 20:35] =>  0:14
+    CLOCK: [2017-03-06 Mon 20:05]--[2017-03-06 Mon 20:20] =>  0:15
+    CLOCK: [2017-03-06 Mon 18:22]--[2017-03-06 Mon 18:29] =>  0:07
+    CLOCK: [2017-03-06 Mon 17:02]--[2017-03-06 Mon 18:02] =>  1:00
+
+We are making use of directory and file settings, but we do not have
+any tests for it. Add a simple test model that exercises all settings
+in one go (at least those that are not mutually exclusive).
+
 *** STARTED Build on tags for Windows                                 :story:
     CLOCK: [2017-03-06 Mon 12:01]--[2017-03-06 Mon 12:16] =>  0:15
 
@@ -105,6 +117,51 @@ Links:
 It would be nice to have a mode in which all files get placed in a
 single-directory: no src, include, etc – just one big folder with all
 files.
+
+Actually we can already achieve this:
+
+- set =quilt.cpp.disable_facet_directories= to true
+- set =quilt.cpp.include_directory_name= to empty
+- set =source_directory_name= to empty
+
+It is however a bit painful. It would be nice to have a shorthand for
+this, which could be the "flat directory" mode. It is also compatible
+with split project mode (we just have flat directories in two
+different top-level directories), which is nice.
+
+We should check that =enable_unique_file_names= is set to true.
+
+*** STARTED Split include and source directories                      :story:
+    CLOCK: [2017-03-06 Mon 16:30]--[2017-03-06 Mon 17:01] =>  0:31
+
+We removed a feature due to lack of use cases: splitting source and
+include directories. It allowed having them placed in different
+top-level directories. It also meant that the computation of managed
+directories required access to the root object. In case we need to
+reactivate this story (if we find a use case), we keep track of the
+commits that removed the feature here.
+
+- [[https://github.com/DomainDrivenConsulting/dogen/commit/6103de47af5fc7d33710b216cac0fb1943416448][remove support for split projects]]
+
+This will be implemented slightly differently this time round
+though. Instead of a "split project" option and two additional options
+for include and source, we'll just add a new option for include:
+
+: output-cpp-include-dir
+
+If present, it will be used for the c++ include directory. If not
+present, the behaviour will remain as is. We can propagate this
+information all the way to the locator, where it will do the right
+thing.
+
+Merged stories:
+
+*Handling of include cmakelists in split projects is not correct*
+
+At present we are only generating a cmakelists file for include
+folders on non-split projects. This means that the header files for
+split projects won't be packaged up. It also means that for ODB
+projects we won't get the ODB targets.
 
 *** Add =targetver.h= support                                         :story:
 
@@ -216,6 +273,25 @@ Tasks:
   ctor (e.g. force it).
 - enums
 - need to disable ODB c++ 11 as well.
+
+*** Handcrafted support for fabric types                              :story:
+
+At present we can either disable fabric types or enable them
+(CMakeLists, etc). However, there is a third common use case: to
+handcraft them. To do this we normally disable them and then add the
+file to the ignore list:
+
+:  --ignore-files-matching-regex .*/CMakeLists.txt)
+
+One could conceive of some meta-data support that would make this
+process a tad easier and more generic:
+
+: quilt.cpp.cmakelists.stereotypes=handcrafted
+
+Then hopefully the existing pipeline would take over and we'd generate
+the files for the first time but then let the user overwrite it. This
+would also be applicable to all fabric types (registrar, etc) but we'd
+have to manually read each stereotype on each factory.
 
 *** Use =cxx= extension with ODB files                                :story:
 

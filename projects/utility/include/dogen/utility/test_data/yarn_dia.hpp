@@ -59,6 +59,7 @@ public:
     static boost::filesystem::path input_enable_facet_hash_dia();
     static boost::filesystem::path input_enable_facet_io_dia();
     static boost::filesystem::path input_enable_facet_serialization_dia();
+    static boost::filesystem::path input_all_path_and_directory_settings_dia();
     static boost::filesystem::path input_csharp_model_dia();
 
     static boost::filesystem::path expected();

@@ -4990,18 +4990,6 @@ facet depends on the hash facet if the user decides to add a
 type. We need to make sure we take these run-time dependencies into
 account too.
 
-*** Split include and source directories                              :story:
-
-We removed a feature due to lack of use cases: splitting source and
-include directories. It allowed having them placed in different
-top-level directories. It also meant that the computation of managed
-directories required access to the root object. In case we need to
-reactivate this story (if we find a use case), we keep track of the
-commits that removed the feature here.
-
-2cd2d89 * quilt.cpp: tidy-up annotations
-8e2e0e4 * quilt.cpp: tidy-up main workflow
-
 *** Concepts, immutability and fluency                                :story:
 
 At present we allow the object to determine if any attributes obtained

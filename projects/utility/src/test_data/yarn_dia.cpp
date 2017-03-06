@@ -50,6 +50,9 @@ path input_enable_facet_io_dia("yarn.dia/input/enable_facet_io.dia");
 path input_enable_facet_serialization_dia(
     "yarn.dia/input/enable_facet_serialization.dia"
     );
+path input_all_path_and_directory_settings_dia(
+    "yarn.dia/input/all_path_and_directory_settings.dia");
+
 path input_csharp_model_dia("yarn.dia/input/CSharpModel.dia");
 
 path expected("yarn.dia/expected");
@@ -200,6 +203,10 @@ path yarn_dia::input_enable_facet_io_dia() {
 
 path yarn_dia::input_enable_facet_serialization_dia() {
     return validating_resolver::resolve(::input_enable_facet_serialization_dia);
+}
+
+path yarn_dia::input_all_path_and_directory_settings_dia() {
+    return resolver::resolve(::input_all_path_and_directory_settings_dia);
 }
 
 path yarn_dia::input_csharp_model_dia() {

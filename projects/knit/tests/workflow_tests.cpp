@@ -201,10 +201,16 @@ BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code_dia) {
 
 BOOST_AUTO_TEST_CASE(package_without_name_model_throws) {
     SETUP_TEST_LOG("package_without_name_model_throws");
-    const auto target(yarn_dia::input_package_without_name_dia());
+    const auto dia(yarn_dia::input_package_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
-    BOOST_CHECK_EXCEPTION(generate_and_diff(target, actual_dia_dir),
+    BOOST_CHECK_EXCEPTION(generate_and_diff(dia, actual_dia_dir),
         std::exception, c);
+}
+
+BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_dia) {
+    SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_dia");
+    const auto dia(yarn_dia::input_all_path_and_directory_settings_dia());
+    BOOST_CHECK(generate_and_diff(dia, actual_dia_dir));
 }
 
 #ifdef ENABLE_CSHARP_TESTS
