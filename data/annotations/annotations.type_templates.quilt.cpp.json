@@ -91,18 +91,6 @@
   },
   {
     "name": {
-      "simple": "file_path"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp"
-    },
-    "value_type": "text",
-    "template_kind": "archetype_template",
-    "scope": "entity"
-  },
-  {
-    "name": {
       "simple": "header_guard"
     },
     "archetype_location": {
@@ -153,20 +141,6 @@
     "value_type": "text_collection",
     "template_kind": "archetype_template",
     "scope": "entity"
-  },
-  {
-    "name": {
-      "simple": "split_project",
-      "qualified": "quilt.cpp.split_project"
-    },
-    "archetype_location": {
-      "family": "quilt",
-      "kernel": "quilt.cpp"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "root_module",
-    "default_value": false
   },
   {
     "name": {
