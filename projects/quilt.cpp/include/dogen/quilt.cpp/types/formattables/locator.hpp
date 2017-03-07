@@ -92,12 +92,20 @@ private:
 
 private:
     /**
+     * @brief Given a facet, returns its configuration.
+     *
+     * @pre Facet must have a configuration.
+     */
+    const locator_facet_configuration&
+    configuration_for_facet(const std::string& facet) const;
+
+    /**
      * @brief Given an archetype, returns its configuration.
      *
      * @pre Archetype must have a configuration.
      */
-    const locator_archetype_configuration& configuration_for_archetype(
-        const std::string& archetype) const;
+    const locator_archetype_configuration&
+    configuration_for_archetype(const std::string& archetype) const;
 
 private:
     /**
@@ -118,20 +126,38 @@ private:
         const std::string& extension, const yarn::name& n) const;
 
     /**
+     * @brief Makes the first part of the inclusion path.
+     */
+    boost::filesystem::path
+    make_inclusion_path_prefix(const yarn::name& n) const;
+
+    /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
-    boost::filesystem::path make_inclusion_path(
-        const std::string& archetype, const std::string& extension,
-        const yarn::name& n) const;
+    boost::filesystem::path make_inclusion_path(const std::string& archetype,
+        const std::string& extension, const yarn::name& n) const;
 
 public:
     /**
      * @brief Top-level project directory.
      */
-    const boost::filesystem::path project_path() const;
+    boost::filesystem::path project_path() const;
 
 public:
+    /**
+     * @brief Name of the include directory.
+     */
+    std::string include_directory_name() const;
+
+public:
+    /**
+     * @brief Generate the relative path to the include directory for
+     * a given facet.
+     */
+    boost::filesystem::path make_relative_include_path_for_facet(
+        const std::string& facet) const;
+
     /**
      * @brief Generate the inclusion path for C++ headers.
      */
@@ -143,6 +169,12 @@ public:
      */
     boost::filesystem::path make_full_path_for_cpp_header(
         const yarn::name& n, const std::string& archetype) const;
+
+    /**
+     * @brief Generate the relative implementation path for a facet.
+     */
+    boost::filesystem::path make_relative_implementation_path_for_facet(
+        const std::string& facet) const;
 
     /**
      * @brief Generate the full path for C++ implementation.
@@ -160,6 +192,12 @@ public:
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_source_cmakelists(
+        const yarn::name& n, const std::string& archetype) const;
+
+    /**
+     * @brief Generate the relatvie path for odb options.
+     */
+    boost::filesystem::path make_relative_path_for_odb_options(
         const yarn::name& n, const std::string& archetype) const;
 
     /**

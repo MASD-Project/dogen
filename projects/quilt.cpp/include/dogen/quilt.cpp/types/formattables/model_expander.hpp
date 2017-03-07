@@ -75,6 +75,8 @@ private:
     void expand_formatting_properties(const annotations::type_repository& atrp,
         const formatters::repository& frp, model& fm) const;
 
+    void expand_cmakelists(const locator& l, model& fm) const;
+
 public:
     void expand(const annotations::type_repository& atrp,
         const annotations::annotation& ra,

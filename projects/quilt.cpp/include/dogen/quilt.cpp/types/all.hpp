@@ -103,6 +103,7 @@
 #include "dogen/quilt.cpp/types/formatters/hash/optional_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/cmakelists_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatting_expander.hpp"

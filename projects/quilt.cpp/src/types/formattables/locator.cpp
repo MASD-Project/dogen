@@ -41,6 +41,8 @@ const std::string double_quote("\"");
 const std::string dot(".");
 const std::string separator("_");
 
+const std::string missing_facet_configuration(
+    "Could not find configuration for facet: ");
 const std::string missing_archetype_configuration(
     "Could not find configuration for archetype: ");
 const std::string missing_kernel_directory(
@@ -192,6 +194,18 @@ locator_configuration locator::make_configuration(
     return r;
 }
 
+const locator_facet_configuration& locator::
+configuration_for_facet(const std::string& facet) const {
+    const auto& fct_cfg(configuration_.facet_configurations());
+    const auto i(fct_cfg.find(facet));
+    if (i == fct_cfg.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_facet_configuration;
+        BOOST_THROW_EXCEPTION(location_error(missing_facet_configuration));
+    }
+
+    return i->second;
+}
+
 const locator_archetype_configuration& locator::
 configuration_for_archetype(const std::string& archetype) const {
     const auto& arch_cfg(configuration_.archetype_configurations());
@@ -230,8 +244,6 @@ boost::filesystem::path locator::make_facet_path(
     const yarn::name& n) const {
     BOOST_LOG_SEV(lg, debug) << "Making facet path for: " << n.id();
 
-    const auto& arch_cfg(configuration_for_archetype(archetype));
-
     boost::filesystem::path r;
 
     /*
@@ -239,11 +251,12 @@ boost::filesystem::path locator::make_facet_path(
      * contribute to the file name path, add it.
      */
     const auto& cfg(configuration_);
+    const auto& arch_cfg(configuration_for_archetype(archetype));
     if (!arch_cfg.facet_directory().empty() && !cfg.disable_facet_directories())
         r /= arch_cfg.facet_directory();
 
     /*
-     * Add the module path of the modules internal to this model.
+     * Add the module path of all the modules that contain this name.
      */
     for (const auto& m : n.location().internal_modules())
         r /= m;
@@ -273,7 +286,23 @@ boost::filesystem::path locator::make_facet_path(
     stream << dot << extension;
     r /= stream.str();
 
-    BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: "
+                             << r.generic_string();
+    return r;
+}
+
+boost::filesystem::path locator::make_inclusion_path_prefix(
+    const yarn::name& n) const {
+    /*
+     * Header files require both the external module path and the
+     * model module path in the file name path.
+     */
+    boost::filesystem::path r;
+    for (const auto& m : n.location().external_modules())
+        r /= m;
+
+    const auto& mmp(n.location().model_modules());
+    r /= boost::algorithm::join(mmp, dot);
     return r;
 }
 
@@ -281,23 +310,30 @@ boost::filesystem::path locator::make_inclusion_path(
     const std::string& archetype, const std::string& extension,
     const yarn::name& n) const {
 
-    boost::filesystem::path r;
-
-    /*
-     * Header files require both the external module path and the
-     * model module path in the file name path.
-     */
-    for (const auto& m : n.location().external_modules())
-        r /= m;
-
-    const auto& mmp(n.location().model_modules());
-    r /= boost::algorithm::join(mmp, dot);
+    boost::filesystem::path r(make_inclusion_path_prefix(n));
     r /= make_facet_path(archetype, extension, n);
     return r;
 }
 
-const boost::filesystem::path locator::project_path() const {
+boost::filesystem::path locator::project_path() const {
     return project_path_;
+}
+
+std::string locator::include_directory_name() const {
+    return configuration_.include_directory_name();
+}
+
+boost::filesystem::path locator::
+make_relative_include_path_for_facet(const std::string& facet) const {
+    const auto& cfg(configuration_);
+    boost::filesystem::path r(cfg.include_directory_name());
+    r /= make_inclusion_path_prefix(model_name_);
+
+    const auto& fct_cfg(configuration_for_facet(facet));
+    if (!fct_cfg.directory().empty() && !cfg.disable_facet_directories())
+        r /= fct_cfg.directory();
+
+    return r;
 }
 
 boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
@@ -310,10 +346,24 @@ boost::filesystem::path locator::make_full_path_for_cpp_header(
     const yarn::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
-    r /= configuration_.include_directory_name();
+    const auto& cfg(configuration_);
+    r /= cfg.include_directory_name();
 
-    const auto extension(configuration_.header_file_extension());
+    const auto extension(cfg.header_file_extension());
     r /= make_inclusion_path_for_cpp_header(n, archetype);
+
+    return r;
+}
+
+boost::filesystem::path locator::make_relative_implementation_path_for_facet(
+    const std::string& facet) const {
+
+    const auto& cfg(configuration_);
+    boost::filesystem::path r(cfg.source_directory_name());
+
+    const auto& fct_cfg(configuration_for_facet(facet));
+    if (!fct_cfg.directory().empty() && !cfg.disable_facet_directories())
+        r /= fct_cfg.directory();
 
     return r;
 }
@@ -322,9 +372,10 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
     const yarn::name& n, const std::string& archetype) const {
 
     auto r(project_path_);
-    r /= configuration_.source_directory_name();
+    const auto& cfg(configuration_);
+    r /= cfg.source_directory_name();
 
-    const auto extension(configuration_.implementation_file_extension());
+    const auto extension(cfg.implementation_file_extension());
     const auto facet_path(make_facet_path(archetype, extension, n));
     r /= facet_path;
 
@@ -346,11 +397,18 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
     return r;
 }
 
-boost::filesystem::path locator::make_full_path_for_odb_options(
+boost::filesystem::path locator::make_relative_path_for_odb_options(
     const yarn::name& /*n*/, const std::string& /*archetype*/) const {
-    auto r(project_path_);
-    r /= configuration_.source_directory_name();
+
+    boost::filesystem::path r(configuration_.source_directory_name());
     r /= "options.odb"; // FIXME: hack for filename
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_odb_options(
+    const yarn::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+    r /= make_relative_path_for_odb_options(n, archetype);
     return r;
 }
 

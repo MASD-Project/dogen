@@ -30,6 +30,7 @@
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/facet_directory_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/formatting_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/cmakelists_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 
 namespace dogen {
@@ -112,6 +113,11 @@ void model_expander::expand_formatting_properties(
     ex.expand(atrp, frp, fm);
 }
 
+void model_expander::expand_cmakelists(const locator& l, model& fm) const {
+    cmakelists_expander ex;
+    ex.expand(l, fm);
+}
+
 void model_expander::expand(
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const dogen::formatters::decoration_properties_factory& dpf,
@@ -151,6 +157,7 @@ void model_expander::expand(
     expand_odb(atrp, fm);
     expand_facet_directories(l, fm);
     expand_formatting_properties(atrp, frp, fm);
+    expand_cmakelists(l, fm);
 }
 
 } } } }
