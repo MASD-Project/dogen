@@ -21,14 +21,39 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/utility/serialization/path.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
+
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+inline void save(Archive& ar,
+    const boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    s = p.generic_string();
+    ar & boost::serialization::make_nvp("path", s);
+}
+
+template<typename Archive>
+inline void load(Archive& ar,
+    boost::filesystem::path& p,
+    const unsigned int /*version*/) {
+    std::string s;
+    ar & boost::serialization::make_nvp("path", s);
+    p = s;
+}
+
+} }
 
 BOOST_CLASS_TRACKING(
     dogen::quilt::cpp::fabric::cmakelists,
@@ -42,6 +67,12 @@ void save(Archive& ar,
     const dogen::quilt::cpp::fabric::cmakelists& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar << make_nvp("include_directory_name", v.include_directory_name_);
+    ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+    ar << make_nvp("odb_source_directory_path", v.odb_source_directory_path_);
+    ar << make_nvp("odb_options_file_path", v.odb_options_file_path_);
+    ar << make_nvp("types_include_directory_path", v.types_include_directory_path_);
 }
 
 template<typename Archive>
@@ -49,6 +80,12 @@ void load(Archive& ar,
     dogen::quilt::cpp::fabric::cmakelists& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+
+    ar >> make_nvp("include_directory_name", v.include_directory_name_);
+    ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+    ar >> make_nvp("odb_source_directory_path", v.odb_source_directory_path_);
+    ar >> make_nvp("odb_options_file_path", v.odb_options_file_path_);
+    ar >> make_nvp("types_include_directory_path", v.types_include_directory_path_);
 }
 
 } }
