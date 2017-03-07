@@ -55,6 +55,7 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const std::string& include_directory_name,
+        const std::string& source_directory_name,
         const std::string& odb_include_directory_path,
         const std::string& odb_inclusion_directory_path,
         const std::string& odb_source_directory_path,
@@ -86,6 +87,11 @@ public:
     std::string& include_directory_name();
     void include_directory_name(const std::string& v);
     void include_directory_name(const std::string&& v);
+
+    const std::string& source_directory_name() const;
+    std::string& source_directory_name();
+    void source_directory_name(const std::string& v);
+    void source_directory_name(const std::string&& v);
 
     const std::string& odb_include_directory_path() const;
     std::string& odb_include_directory_path();
@@ -142,6 +148,7 @@ public:
 
 private:
     std::string include_directory_name_;
+    std::string source_directory_name_;
     std::string odb_include_directory_path_;
     std::string odb_inclusion_directory_path_;
     std::string odb_source_directory_path_;

@@ -99,7 +99,7 @@ format(const context& ctx, const yarn::element& e) const {
 
     {
         a.make_decoration_preamble();
-a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)" << std::endl;
+a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "install(" << std::endl;
 a.stream() << "    DIRECTORY " << c.include_directory_name() << "/" << std::endl;

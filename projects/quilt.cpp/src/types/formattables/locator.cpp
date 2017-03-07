@@ -336,6 +336,10 @@ std::string locator::include_directory_name() const {
     return configuration_.include_directory_name();
 }
 
+std::string locator::source_directory_name() const {
+    return configuration_.source_directory_name();
+}
+
 boost::filesystem::path locator::
 make_relative_include_path(bool for_include_statement) const {
     boost::filesystem::path r;

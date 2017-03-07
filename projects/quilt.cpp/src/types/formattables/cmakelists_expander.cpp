@@ -85,6 +85,7 @@ cmakelists_updater(const locator& l, const yarn::name& odb_options_name)
 
 void cmakelists_updater::visit(fabric::cmakelists& c) {
     c.include_directory_name(locator_.include_directory_name());
+    c.source_directory_name(locator_.source_directory_name());
 
     const auto odb_fctn(dogen::quilt::cpp::formatters::odb::traits::facet());
     c.odb_include_directory_path(

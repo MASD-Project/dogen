@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-07 Tue 13:33]
+#+CAPTION: Clock summary at [2017-03-07 Tue 14:07]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:18* |      |      | 100.0 |
+| *Total time*                                                                | *9:49* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:18   |      |      | 100.0 |
-| Active                                                                      |        | 9:18 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |   2.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |   4.7 |
-| COMPLETED Add test model for path meta-data                                 |        |      | 2:58 |  31.9 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |        |      | 4:33 |  48.9 |
-| STARTED Check for incompatibility between input language and enabled kernels |        |      | 0:11 |   2.0 |
-| STARTED Build on tags for Windows                                           |        |      | 0:15 |   2.7 |
+| Stories                                                                     | 9:49   |      |      | 100.0 |
+| Active                                                                      |        | 9:49 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:16 |   2.7 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:26 |   4.4 |
+| COMPLETED Add test model for path meta-data                                 |        |      | 2:58 |  30.2 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |        |      | 5:04 |  51.6 |
+| STARTED Check for incompatibility between input language and enabled kernels |        |      | 0:11 |   1.9 |
+| STARTED Build on tags for Windows                                           |        |      | 0:15 |   2.5 |
 | STARTED Add a "flat directory" mode                                         |        |      | 0:08 |   1.4 |
-| STARTED Split include and source directories                                |        |      | 0:31 |   5.6 |
+| STARTED Split include and source directories                                |        |      | 0:31 |   5.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -108,6 +108,8 @@ in one go (at least those that are not mutually exclusive).
 
 *** COMPLETED ODB CMakeLists does not cope with changes to project paths :story:
     CLOSED: [2017-03-07 Tue 13:33]
+    CLOCK: [2017-03-07 Tue 13:56]--[2017-03-07 Tue 14:06] =>  0:10
+    CLOCK: [2017-03-07 Tue 13:34]--[2017-03-07 Tue 13:55] =>  0:21
     CLOCK: [2017-03-07 Tue 13:18]--[2017-03-07 Tue 13:33] =>  0:15
     CLOCK: [2017-03-07 Tue 12:40]--[2017-03-07 Tue 13:17] =>  0:37
     CLOCK: [2017-03-07 Tue 11:39]--[2017-03-07 Tue 12:02] =>  0:23

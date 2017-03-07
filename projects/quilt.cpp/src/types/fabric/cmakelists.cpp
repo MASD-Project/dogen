@@ -47,6 +47,7 @@ cmakelists::cmakelists(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const std::string& include_directory_name,
+    const std::string& source_directory_name,
     const std::string& odb_include_directory_path,
     const std::string& odb_inclusion_directory_path,
     const std::string& odb_source_directory_path,
@@ -65,6 +66,7 @@ cmakelists::cmakelists(
       stereotypes,
       is_element_extension),
       include_directory_name_(include_directory_name),
+      source_directory_name_(source_directory_name),
       odb_include_directory_path_(odb_include_directory_path),
       odb_inclusion_directory_path_(odb_inclusion_directory_path),
       odb_source_directory_path_(odb_source_directory_path),
@@ -109,6 +111,7 @@ void cmakelists::to_stream(std::ostream& s) const {
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"include_directory_name\": " << "\"" << tidy_up_string(include_directory_name_) << "\"" << ", "
+      << "\"source_directory_name\": " << "\"" << tidy_up_string(source_directory_name_) << "\"" << ", "
       << "\"odb_include_directory_path\": " << "\"" << tidy_up_string(odb_include_directory_path_) << "\"" << ", "
       << "\"odb_inclusion_directory_path\": " << "\"" << tidy_up_string(odb_inclusion_directory_path_) << "\"" << ", "
       << "\"odb_source_directory_path\": " << "\"" << tidy_up_string(odb_source_directory_path_) << "\"" << ", "
@@ -125,6 +128,7 @@ void cmakelists::swap(cmakelists& other) noexcept {
 
     using std::swap;
     swap(include_directory_name_, other.include_directory_name_);
+    swap(source_directory_name_, other.source_directory_name_);
     swap(odb_include_directory_path_, other.odb_include_directory_path_);
     swap(odb_inclusion_directory_path_, other.odb_inclusion_directory_path_);
     swap(odb_source_directory_path_, other.odb_source_directory_path_);
@@ -144,6 +148,7 @@ bool cmakelists::equals(const dogen::yarn::element& other) const {
 bool cmakelists::operator==(const cmakelists& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         include_directory_name_ == rhs.include_directory_name_ &&
+        source_directory_name_ == rhs.source_directory_name_ &&
         odb_include_directory_path_ == rhs.odb_include_directory_path_ &&
         odb_inclusion_directory_path_ == rhs.odb_inclusion_directory_path_ &&
         odb_source_directory_path_ == rhs.odb_source_directory_path_ &&
@@ -174,6 +179,22 @@ void cmakelists::include_directory_name(const std::string& v) {
 
 void cmakelists::include_directory_name(const std::string&& v) {
     include_directory_name_ = std::move(v);
+}
+
+const std::string& cmakelists::source_directory_name() const {
+    return source_directory_name_;
+}
+
+std::string& cmakelists::source_directory_name() {
+    return source_directory_name_;
+}
+
+void cmakelists::source_directory_name(const std::string& v) {
+    source_directory_name_ = v;
+}
+
+void cmakelists::source_directory_name(const std::string&& v) {
+    source_directory_name_ = std::move(v);
 }
 
 const std::string& cmakelists::odb_include_directory_path() const {

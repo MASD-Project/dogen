@@ -77,7 +77,7 @@ format(const context& ctx, const yarn::element& e) const {
     {
         a.make_decoration_preamble();
 #>
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
 
 install(
     DIRECTORY <#= c.include_directory_name() #>/

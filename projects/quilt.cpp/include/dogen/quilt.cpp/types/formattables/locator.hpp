@@ -166,6 +166,11 @@ public:
      */
     std::string include_directory_name() const;
 
+    /**
+     * @brief Name of the source directory.
+     */
+    std::string source_directory_name() const;
+
 public:
     /**
      * @brief Generate the relative path to the include directory.
