@@ -293,9 +293,8 @@
             <dia:string>##DOGEN yarn.dia.comment=true
 #DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
-#DOGEN quilt.cpp.enabled=true
-#DOGEN quilt.csharp.enabled=false
-#DOGEN quilt.cpp.#</dia:string>
+#DOGEN quilt.cpp.enabled=false
+#DOGEN quilt.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
             <dia:font family="monospace" style="0" name="Courier"/>

@@ -1,0 +1,40 @@
+{
+  "model_name": "flat_directory_mode",
+  "external_modules": "dogen::test_models",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.csharp.enabled": "false"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "first_class",
+        "internal_modules": "package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "public_attribute"
+          },
+          "unparsed_type": "int"
+        },
+        {
+          "name": {
+            "simple": "private_attribute"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "package1"
+      },
+      "meta_type": "module"
+    }
+  ]
+}
