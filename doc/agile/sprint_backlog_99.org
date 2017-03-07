@@ -13,28 +13,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-07 Tue 21:01]
+#+CAPTION: Clock summary at [2017-03-07 Tue 21:23]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:26* |       |      | 100.0 |
+| *Total time*                                                                | *12:48* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:26   |       |      | 100.0 |
-| Active                                                                      |         | 12:26 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:16 |   2.1 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   3.5 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  23.9 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  40.8 |
-| STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   1.5 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |  14.5 |
+| Stories                                                                     | 12:48   |       |      | 100.0 |
+| Active                                                                      |         | 12:48 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:38 |   4.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   3.4 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  23.2 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  39.6 |
+| STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   1.4 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |  14.1 |
 | STARTED Build on tags for Windows                                           |         |       | 0:15 |   2.0 |
-| STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   1.1 |
-| STARTED Split include and source directories                                |         |       | 0:31 |   4.2 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 0:49 |   6.6 |
+| STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   1.0 |
+| STARTED Split include and source directories                                |         |       | 0:31 |   4.0 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 0:49 |   6.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-03-07 Tue 21:01]--[2017-03-07 Tue 21:23] =>  0:22
     CLOCK: [2017-03-06 Mon 10:33]--[2017-03-06 Mon 10:49] =>  0:16
 
 Updates to sprint and product backlog.
@@ -270,6 +271,44 @@ For now we removed the project and solution postfixes:
 
 : #DOGEN quilt.csharp.visual_studio.solution.postfix=_vs15_
 : #DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
+
+*** Support containers correctly in annotations                       :story:
+
+At present we are allowing users to enter the same key multiple times
+to represent a container:
+
+: #DOGEN yarn.output_language=cpp
+: #DOGEN yarn.output_language=csharp
+
+
+This was an acceptable pattern from a Dia perspective, because we had
+control of the KVP semantics. However, when we copied the pattern
+across to the JSON representation things did not work out so
+well. This is because the following JSON:
+
+:     "yarn.output_language": "csharp",
+:     "yarn.output_language": "cpp",
+
+Is interpreted by a lot of JSON parsers as a duplicate, and results on
+only a single KVP making it. We could try to solve a lot of problems
+in one go and standardise all of the meta-data on JSON:
+
+- use start and end markers to enclose the JSON when in dia. Story:
+  [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-a-start-and-end-dogen-variable-block-in-dia][Consider adding a start and end dogen variable block in dia]]
+- this would also solve the problem with pairs (or at least part of
+  it). Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-a-new-annotation-type-of-pair][Add a new annotation type of “pair”]]
+- we could allow users to keep the JSON externally. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-support-for-one-off-profiles][Add support
+  for “one off” profiles]]
+- the JSON would also work nicely with the concept of a dogen
+  project. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#introduce-dogen-projects][Introduce dogen projects]]
+
+However, before we embark on this story we need to perform a lot of
+analysis on this.
+
+Notes:
+
+- [[http://json-schema.org/][JSON Schema]]
+- [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
 
 *** Add =targetver.h= support                                         :story:
 
