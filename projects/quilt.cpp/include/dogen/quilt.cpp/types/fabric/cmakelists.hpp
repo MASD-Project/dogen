@@ -61,7 +61,10 @@ public:
         const boost::filesystem::path& odb_include_directory_path,
         const boost::filesystem::path& odb_source_directory_path,
         const boost::filesystem::path& odb_options_file_path,
-        const boost::filesystem::path& types_include_directory_path);
+        const std::string& odb_postfix,
+        const boost::filesystem::path& types_include_directory_path,
+        const std::string& header_file_extension,
+        const std::string& implementation_file_extension);
 
 private:
     template<typename Archive>
@@ -101,10 +104,25 @@ public:
     void odb_options_file_path(const boost::filesystem::path& v);
     void odb_options_file_path(const boost::filesystem::path&& v);
 
+    const std::string& odb_postfix() const;
+    std::string& odb_postfix();
+    void odb_postfix(const std::string& v);
+    void odb_postfix(const std::string&& v);
+
     const boost::filesystem::path& types_include_directory_path() const;
     boost::filesystem::path& types_include_directory_path();
     void types_include_directory_path(const boost::filesystem::path& v);
     void types_include_directory_path(const boost::filesystem::path&& v);
+
+    const std::string& header_file_extension() const;
+    std::string& header_file_extension();
+    void header_file_extension(const std::string& v);
+    void header_file_extension(const std::string&& v);
+
+    const std::string& implementation_file_extension() const;
+    std::string& implementation_file_extension();
+    void implementation_file_extension(const std::string& v);
+    void implementation_file_extension(const std::string&& v);
 
 public:
     bool operator==(const cmakelists& rhs) const;
@@ -124,7 +142,10 @@ private:
     boost::filesystem::path odb_include_directory_path_;
     boost::filesystem::path odb_source_directory_path_;
     boost::filesystem::path odb_options_file_path_;
+    std::string odb_postfix_;
     boost::filesystem::path types_include_directory_path_;
+    std::string header_file_extension_;
+    std::string implementation_file_extension_;
 };
 
 } } } }

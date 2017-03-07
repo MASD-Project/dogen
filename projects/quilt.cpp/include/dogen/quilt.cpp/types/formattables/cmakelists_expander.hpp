@@ -34,9 +34,6 @@ namespace cpp {
 namespace formattables {
 
 class cmakelists_expander final {
-private:
-    
-    
 public:
     void expand(const locator& l, model& fm) const;
 };

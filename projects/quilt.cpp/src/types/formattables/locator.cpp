@@ -218,6 +218,19 @@ configuration_for_archetype(const std::string& archetype) const {
     return i->second;
 }
 
+std::string locator::header_file_extension() const {
+    return configuration_.header_file_extension();
+}
+
+std::string locator::implementation_file_extension() const {
+    return configuration_.implementation_file_extension();
+}
+
+std::string locator::postfix_for_facet(const std::string& facet) const {
+    const auto cfg(configuration_for_facet(facet));
+    return cfg.postfix();
+}
+
 boost::filesystem::path locator::make_project_path(
     const boost::filesystem::path& output_directory_path,
     const yarn::name& model_name, const locator_configuration& lc,

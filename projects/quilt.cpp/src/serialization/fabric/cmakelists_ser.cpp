@@ -72,7 +72,10 @@ void save(Archive& ar,
     ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
     ar << make_nvp("odb_source_directory_path", v.odb_source_directory_path_);
     ar << make_nvp("odb_options_file_path", v.odb_options_file_path_);
+    ar << make_nvp("odb_postfix", v.odb_postfix_);
     ar << make_nvp("types_include_directory_path", v.types_include_directory_path_);
+    ar << make_nvp("header_file_extension", v.header_file_extension_);
+    ar << make_nvp("implementation_file_extension", v.implementation_file_extension_);
 }
 
 template<typename Archive>
@@ -85,7 +88,10 @@ void load(Archive& ar,
     ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
     ar >> make_nvp("odb_source_directory_path", v.odb_source_directory_path_);
     ar >> make_nvp("odb_options_file_path", v.odb_options_file_path_);
+    ar >> make_nvp("odb_postfix", v.odb_postfix_);
     ar >> make_nvp("types_include_directory_path", v.types_include_directory_path_);
+    ar >> make_nvp("header_file_extension", v.header_file_extension_);
+    ar >> make_nvp("implementation_file_extension", v.implementation_file_extension_);
 }
 
 } }

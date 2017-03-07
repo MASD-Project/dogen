@@ -107,6 +107,22 @@ private:
     const locator_archetype_configuration&
     configuration_for_archetype(const std::string& archetype) const;
 
+public:
+    /**
+     * @brief Returns the extension used for header files.
+     */
+    std::string header_file_extension() const;
+
+    /**
+     * @brief Returns the extension used for implementation files.
+     */
+    std::string implementation_file_extension() const;
+
+    /**
+     * @brief Returns the postfix for the supplied facet.
+     */
+    std::string postfix_for_facet(const std::string& facet) const;
+
 private:
     /**
      * @brief Returns the absolute path to the project folder.

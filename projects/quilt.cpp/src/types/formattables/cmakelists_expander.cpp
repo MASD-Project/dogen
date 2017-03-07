@@ -98,10 +98,15 @@ void cmakelists_updater::visit(fabric::cmakelists& c) {
         locator_.make_relative_path_for_odb_options(
             odb_options_name_, oo_arch));
 
+    c.odb_postfix(locator_.postfix_for_facet(odb_fctn));
+
     const auto types_fctn(
         dogen::quilt::cpp::formatters::types::traits::facet());
     c.types_include_directory_path(
         locator_.make_relative_include_path_for_facet(types_fctn));
+
+    c.header_file_extension(locator_.header_file_extension());
+    c.implementation_file_extension(locator_.implementation_file_extension());
 }
 
 void cmakelists_expander::expand(const locator& l, model& fm) const {
