@@ -29,7 +29,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.mappings_validator"));
 
-const std::string lam_id_prefix("lam::");
+const std::string lam_id_prefix("<lam>");
 const std::string default_mapping_set_name("default.mapping_set");
 
 const std::string invalid_lam_id("LAM ID is not valid: ");

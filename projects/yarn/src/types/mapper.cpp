@@ -24,6 +24,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/mapping_error.hpp"
+#include "dogen/yarn/io/mapping_context_io.hpp"
 #include "dogen/yarn/types/mapper.hpp"
 
 namespace {
@@ -31,7 +32,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.mapper"));
 
-const std::string lam_pointer("lam::pointer");
+const std::string lam_pointer("<lam><pointer>");
 
 const std::string missing_mapping("Mapping not found for LAM ID: ");
 const std::string unsupported_lanugage("Language is not supported: ");
@@ -168,8 +169,10 @@ name_tree mapper::walk_name_tree(const mapping_context& mc, const name_tree& nt,
         r.current(i->second);
         BOOST_LOG_SEV(lg, debug) << "Mapping from: " << id
                                  << " to: " << i->second.id();
-    } else
+    } else {
+        BOOST_LOG_SEV(lg, debug) << "No translation for: " << id;
         r.current(nt.current());
+    }
 
     /*
      * We now repeat the whole process for all our children.
@@ -203,6 +206,8 @@ intermediate_model mapper::map(const languages from, const languages to,
      */
     const auto& ms(mapping_set_repository_.default_mapping_set());
     const auto mc(create_mapping_context(ms, from, to, im));
+    BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
+
     for (auto& pair : r.objects())
         map_attributes(mc, pair.second.local_attributes());
 

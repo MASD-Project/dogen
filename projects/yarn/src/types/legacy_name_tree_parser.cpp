@@ -114,8 +114,9 @@ struct grammar : qi::grammar<Iterator> {
     std::string scope_operator_for_language(const dogen::yarn::languages l) {
         switch (l) {
         case dogen::yarn::languages::csharp: return ".";
-        case dogen::yarn::languages::cpp: return "::";
-        case dogen::yarn::languages::upsilon: return "::";
+        case dogen::yarn::languages::cpp:
+        case dogen::yarn::languages::upsilon:
+        case dogen::yarn::languages::language_agnostic: return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(l));
             BOOST_LOG_SEV(lg, error) << unsupported_language << s;

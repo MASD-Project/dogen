@@ -6,7 +6,8 @@
     "yarn.dia.comment": "true",
     "yarn.dia.external_modules": "dogen::test_models",
     "annotations.profile": "dogen",
-    "yarn.input_language": "cpp",
+    "yarn.input_language": "language_agnostic",
+    "yarn.output_language": "csharp",
     "quilt.cpp.enabled": "true",
     "quilt.csharp.enabled": "true",
     "quilt.cpp.directory": "cpp_kernel",
@@ -101,7 +102,7 @@
           "name": {
             "simple": "prop_0"
           },
-          "unparsed_type": "int"
+          "unparsed_type": "lam::integer"
         }
       ]
     },
@@ -116,7 +117,7 @@
           "name": {
             "simple": "prop_0"
           },
-          "unparsed_type": "int"
+          "unparsed_type": "lam::integer"
         }
       ]
     },
@@ -131,7 +132,7 @@
           "name": {
             "simple": "prop_0"
           },
-          "unparsed_type": "int"
+          "unparsed_type": "lam::integer"
         }
       ]
     },

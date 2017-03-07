@@ -299,11 +299,11 @@ BOOST_AUTO_TEST_CASE(boost_model_generates_expected_code_json) {
     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
 }
 
-BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_json) {
-    SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_json");
-    const auto json(yarn_json::input_all_path_and_directory_settings_json());
-    BOOST_CHECK(generate_and_diff(json, actual_json_dir));
-}
+// BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_json) {
+//     SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_json");
+//     const auto json(yarn_json::input_all_path_and_directory_settings_json());
+//     BOOST_CHECK(generate_and_diff(json, actual_json_dir));
+// }
 
 #ifdef ENABLE_CSHARP_TESTS
 

@@ -1,6 +1,6 @@
 [
     {
-        "lam_id" : "lam::byte",
+        "lam_id" : "<lam><byte>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -17,7 +17,7 @@
         ]
     },
     {
-        "lam_id" : "lam::character",
+        "lam_id" : "<lam><character>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -34,7 +34,7 @@
         ]
     },
     {
-        "lam_id" : "lam::integer8",
+        "lam_id" : "<lam><integer8>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -52,7 +52,7 @@
         ]
     },
     {
-        "lam_id" : "lam::integer16",
+        "lam_id" : "<lam><integer16>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -71,7 +71,7 @@
         ]
     },
     {
-        "lam_id" : "lam::integer32",
+        "lam_id" : "<lam><integer32>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -90,7 +90,7 @@
         ]
     },
     {
-        "lam_id" : "lam::integer64",
+        "lam_id" : "<lam><integer64>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -109,7 +109,7 @@
         ]
     },
     {
-        "lam_id" : "lam::integer",
+        "lam_id" : "<lam><integer>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -132,7 +132,7 @@
         ]
     },
     {
-        "lam_id" : "lam::single_floating",
+        "lam_id" : "<lam><single_floating>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -149,7 +149,7 @@
         ]
     },
     {
-        "lam_id" : "lam::double_floating",
+        "lam_id" : "<lam><double_floating>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -172,7 +172,7 @@
         ]
     },
     {
-        "lam_id" : "lam::boolean",
+        "lam_id" : "<lam><boolean>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -195,7 +195,7 @@
         ]
     },
     {
-        "lam_id" : "lam::string",
+        "lam_id" : "<lam><string>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -227,7 +227,7 @@
         ]
     },
     {
-        "lam_id" : "lam::date",
+        "lam_id" : "<lam><date>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -253,7 +253,7 @@
         ]
     },
     {
-        "lam_id" : "lam::time",
+        "lam_id" : "<lam><time>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -279,7 +279,7 @@
         ]
     },
     {
-        "lam_id" : "lam::date_time",
+        "lam_id" : "<lam><date_time>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -305,7 +305,7 @@
         ]
     },
     {
-        "lam_id" : "lam::decimal",
+        "lam_id" : "<lam><decimal>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -330,7 +330,7 @@
         ]
     },
     {
-        "lam_id" : "lam::dynamic_array",
+        "lam_id" : "<lam><dynamic_array>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -355,7 +355,7 @@
         ]
     },
     {
-        "lam_id" : "lam::static_array",
+        "lam_id" : "<lam><static_array>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -374,7 +374,7 @@
         ]
     },
     {
-        "lam_id" : "lam::unordered_dictionary",
+        "lam_id" : "<lam><unordered_dictionary>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -393,7 +393,7 @@
         ]
     },
     {
-        "lam_id" : "lam::ordered_dictionary",
+        "lam_id" : "<lam><ordered_dictionary>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -412,7 +412,7 @@
         ]
     },
     {
-        "lam_id" : "lam::unordered_set",
+        "lam_id" : "<lam><unordered_set>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -431,7 +431,7 @@
         ]
     },
     {
-        "lam_id" : "lam::ordered_set",
+        "lam_id" : "<lam><ordered_set>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -450,7 +450,7 @@
         ]
     },
     {
-        "lam_id" : "lam::queue",
+        "lam_id" : "<lam><queue>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -469,7 +469,7 @@
         ]
     },
     {
-        "lam_id" : "lam::stack",
+        "lam_id" : "<lam><stack>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -488,7 +488,7 @@
         ]
     },
     {
-        "lam_id" : "lam::linked_list",
+        "lam_id" : "<lam><linked_list>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -507,7 +507,7 @@
         ]
     },
     {
-        "lam_id" : "lam::object",
+        "lam_id" : "<lam><object>",
         "names_by_language" : [
             {
                 "language" : "cpp",
@@ -531,7 +531,7 @@
         ]
     },
     {
-        "lam_id" : "lam::pointer",
+        "lam_id" : "<lam><pointer>",
         "names_by_language" : [
             {
                 "language" : "cpp",

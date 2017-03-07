@@ -158,6 +158,26 @@ models we are going to build and if there is a mismatch we can
 throw. But extracting the =configuration_factory= out of quilt
 workflow is not going to be easy without screwing up the API.
 
+*** STARTED Add a LAM test model just to validate existing functionality :story:
+    CLOCK: [2017-03-07 Tue 14:07]--[2017-03-07 Tue 15:55] =>  1:48
+
+At present we have basic support for LAM. We should create a simple
+test model that uses a few of the mapped types just to make sure it
+vaguely works and does not
+
+*** Not setting output language results in weird errors               :story:
+
+When setting the input language to language agnostic and not setting
+the output languages, we get the following error:
+
+: /dogen/projects/yarn/src/types/legacy_name_tree_parser.cpp(123): Throw in function std::__cxx11::string {anonymous}::grammar<Iterator>::scope_operator_for_language(dogen::yarn::languages) [with Iterator = __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >; std::__cxx11::string = std::__cxx11::basic_string<char>]
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::yarn::parsing_error>
+: std::exception::what: Invalid or unsupported language: { "__type__": "languages", "value": "language_agnostic" }
+: [tag_workflow*] = Code generation failure.
+: [owner*] = <dogen><test_models><all_path_and_directory_settings><package_0><package_0_1><class_2>
+: unknown location(0): fatal error: in "workflow_tests/all_path_and_directory_settings_generates_expected_code_dia": std::runtime_error: Error during test
+: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/tests/workflow_tests.cpp(213): last checkpoint
+
 *** STARTED Build on tags for Windows                                 :story:
     CLOCK: [2017-03-06 Mon 12:01]--[2017-03-06 Mon 12:16] =>  0:15
 

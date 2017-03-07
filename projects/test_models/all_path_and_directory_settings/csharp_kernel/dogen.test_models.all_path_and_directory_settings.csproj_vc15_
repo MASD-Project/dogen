@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{00000000-0000-0000-0000-000000000000}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>dogen.test_models.all_path_and_directory_settings</RootNamespace>
+    <AssemblyName>dogen.test_models.all_path_and_directory_settings</AssemblyName>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="io_dir\Assistant2_0_1the_io.cs" />
+    <Compile Include="io_dir\class_02_0_0the_io.cs" />
+    <Compile Include="io_dir\package_0\class_12_0_0the_io.cs" />
+    <Compile Include="io_dir\package_0\package_0_1\class_22_0_0the_io.cs" />
+    <Compile Include="test_data_dir\Assistant1_0_1the_test_data.cs" />
+    <Compile Include="test_data_dir\class_01_0_0the_test_data.cs" />
+    <Compile Include="test_data_dir\package_0\class_11_0_0the_test_data.cs" />
+    <Compile Include="test_data_dir\package_0\package_0_1\class_21_0_0the_test_data.cs" />
+    <Compile Include="types_dir\class_01_1_0the_types.cs" />
+    <Compile Include="types_dir\package_0\class_11_1_0the_types.cs" />
+    <Compile Include="types_dir\package_0\package_0_1\class_21_1_0the_types.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

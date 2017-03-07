@@ -65,6 +65,7 @@ make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
     const annotations::type_repository_selector s(atrp);
     r.input_language = s.select_type_by_name(traits::input_language());
+    r.output_language = s.select_type_by_name(traits::output_language());
     return r;
 }
 
@@ -115,13 +116,18 @@ expand(const annotations::type_repository& atrp, intermediate_model& im) const {
          * output. Validator will ensure this language is actually
          * outputtable.
          */
-        if (ol.empty())
+        if (ol.empty()) {
             im.output_languages().push_back(im.input_language());
-        else
+
+            BOOST_LOG_SEV(lg, debug) << "No output language overrides found. "
+                                     << "Defaulting to input languae: "
+                                     << im.output_languages();
+        } else {
             im.output_languages(ol);
 
-        BOOST_LOG_SEV(lg, debug) << "Expanded output languages to: "
-                                 << im.output_languages();
+            BOOST_LOG_SEV(lg, debug) << "Expanded output languages to: "
+                                     << im.output_languages();
+        }
     } else {
         BOOST_LOG_SEV(lg, debug) << "Model already has output languages: "
                                  << im.output_languages();
