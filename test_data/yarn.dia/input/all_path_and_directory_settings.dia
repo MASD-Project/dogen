@@ -338,8 +338,6 @@
 #DOGEN quilt.cpp.types.master_header.postfix=0_5_6
 #DOGEN quilt.cpp.types.forward_declarations.postfix=0_5_7
 #DOGEN quilt.csharp.directory=csharp_kernel
-#DOGEN quilt.csharp.visual_studio.solution.postfix=_vs15_
-#DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
 #DOGEN quilt.csharp.test_data.directory=test_data_dir
 #DOGEN quilt.csharp.test_data.postfix=the_test_data
 #DOGEN quilt.csharp.test_data.class.postfix=1_0_0

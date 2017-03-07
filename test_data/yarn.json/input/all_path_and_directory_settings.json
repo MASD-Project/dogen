@@ -71,8 +71,6 @@
     "quilt.cpp.types.master_header.postfix": "0_5_6",
     "quilt.cpp.types.forward_declarations.postfix": "0_5_7",
     "quilt.csharp.directory": "csharp_kernel",
-    "quilt.csharp.visual_studio.solution.postfix": "_vs15_",
-    "quilt.csharp.visual_studio.project.postfix": "_vc15_",
     "quilt.csharp.test_data.directory": "test_data_dir",
     "quilt.csharp.test_data.postfix": "the_test_data",
     "quilt.csharp.test_data.class.postfix": "1_0_0",
