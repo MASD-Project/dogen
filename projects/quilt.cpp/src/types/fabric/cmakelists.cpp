@@ -37,18 +37,6 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-cmakelists::cmakelists(cmakelists&& rhs)
-    : dogen::yarn::element(
-        std::forward<dogen::yarn::element>(rhs)),
-      include_directory_name_(std::move(rhs.include_directory_name_)),
-      odb_include_directory_path_(std::move(rhs.odb_include_directory_path_)),
-      odb_source_directory_path_(std::move(rhs.odb_source_directory_path_)),
-      odb_options_file_path_(std::move(rhs.odb_options_file_path_)),
-      odb_postfix_(std::move(rhs.odb_postfix_)),
-      types_include_directory_path_(std::move(rhs.types_include_directory_path_)),
-      header_file_extension_(std::move(rhs.header_file_extension_)),
-      implementation_file_extension_(std::move(rhs.implementation_file_extension_)) { }
-
 cmakelists::cmakelists(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
@@ -59,11 +47,12 @@ cmakelists::cmakelists(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const std::string& include_directory_name,
-    const boost::filesystem::path& odb_include_directory_path,
-    const boost::filesystem::path& odb_source_directory_path,
-    const boost::filesystem::path& odb_options_file_path,
+    const std::string& odb_include_directory_path,
+    const std::string& odb_inclusion_directory_path,
+    const std::string& odb_source_directory_path,
+    const std::string& odb_options_file_path,
     const std::string& odb_postfix,
-    const boost::filesystem::path& types_include_directory_path,
+    const std::string& types_include_directory_path,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension)
     : dogen::yarn::element(
@@ -77,6 +66,7 @@ cmakelists::cmakelists(
       is_element_extension),
       include_directory_name_(include_directory_name),
       odb_include_directory_path_(odb_include_directory_path),
+      odb_inclusion_directory_path_(odb_inclusion_directory_path),
       odb_source_directory_path_(odb_source_directory_path),
       odb_options_file_path_(odb_options_file_path),
       odb_postfix_(odb_postfix),
@@ -119,11 +109,12 @@ void cmakelists::to_stream(std::ostream& s) const {
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"include_directory_name\": " << "\"" << tidy_up_string(include_directory_name_) << "\"" << ", "
-      << "\"odb_include_directory_path\": " << "\"" << odb_include_directory_path_.generic_string() << "\"" << ", "
-      << "\"odb_source_directory_path\": " << "\"" << odb_source_directory_path_.generic_string() << "\"" << ", "
-      << "\"odb_options_file_path\": " << "\"" << odb_options_file_path_.generic_string() << "\"" << ", "
+      << "\"odb_include_directory_path\": " << "\"" << tidy_up_string(odb_include_directory_path_) << "\"" << ", "
+      << "\"odb_inclusion_directory_path\": " << "\"" << tidy_up_string(odb_inclusion_directory_path_) << "\"" << ", "
+      << "\"odb_source_directory_path\": " << "\"" << tidy_up_string(odb_source_directory_path_) << "\"" << ", "
+      << "\"odb_options_file_path\": " << "\"" << tidy_up_string(odb_options_file_path_) << "\"" << ", "
       << "\"odb_postfix\": " << "\"" << tidy_up_string(odb_postfix_) << "\"" << ", "
-      << "\"types_include_directory_path\": " << "\"" << types_include_directory_path_.generic_string() << "\"" << ", "
+      << "\"types_include_directory_path\": " << "\"" << tidy_up_string(types_include_directory_path_) << "\"" << ", "
       << "\"header_file_extension\": " << "\"" << tidy_up_string(header_file_extension_) << "\"" << ", "
       << "\"implementation_file_extension\": " << "\"" << tidy_up_string(implementation_file_extension_) << "\""
       << " }";
@@ -135,6 +126,7 @@ void cmakelists::swap(cmakelists& other) noexcept {
     using std::swap;
     swap(include_directory_name_, other.include_directory_name_);
     swap(odb_include_directory_path_, other.odb_include_directory_path_);
+    swap(odb_inclusion_directory_path_, other.odb_inclusion_directory_path_);
     swap(odb_source_directory_path_, other.odb_source_directory_path_);
     swap(odb_options_file_path_, other.odb_options_file_path_);
     swap(odb_postfix_, other.odb_postfix_);
@@ -153,6 +145,7 @@ bool cmakelists::operator==(const cmakelists& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         include_directory_name_ == rhs.include_directory_name_ &&
         odb_include_directory_path_ == rhs.odb_include_directory_path_ &&
+        odb_inclusion_directory_path_ == rhs.odb_inclusion_directory_path_ &&
         odb_source_directory_path_ == rhs.odb_source_directory_path_ &&
         odb_options_file_path_ == rhs.odb_options_file_path_ &&
         odb_postfix_ == rhs.odb_postfix_ &&
@@ -183,51 +176,67 @@ void cmakelists::include_directory_name(const std::string&& v) {
     include_directory_name_ = std::move(v);
 }
 
-const boost::filesystem::path& cmakelists::odb_include_directory_path() const {
+const std::string& cmakelists::odb_include_directory_path() const {
     return odb_include_directory_path_;
 }
 
-boost::filesystem::path& cmakelists::odb_include_directory_path() {
+std::string& cmakelists::odb_include_directory_path() {
     return odb_include_directory_path_;
 }
 
-void cmakelists::odb_include_directory_path(const boost::filesystem::path& v) {
+void cmakelists::odb_include_directory_path(const std::string& v) {
     odb_include_directory_path_ = v;
 }
 
-void cmakelists::odb_include_directory_path(const boost::filesystem::path&& v) {
+void cmakelists::odb_include_directory_path(const std::string&& v) {
     odb_include_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& cmakelists::odb_source_directory_path() const {
+const std::string& cmakelists::odb_inclusion_directory_path() const {
+    return odb_inclusion_directory_path_;
+}
+
+std::string& cmakelists::odb_inclusion_directory_path() {
+    return odb_inclusion_directory_path_;
+}
+
+void cmakelists::odb_inclusion_directory_path(const std::string& v) {
+    odb_inclusion_directory_path_ = v;
+}
+
+void cmakelists::odb_inclusion_directory_path(const std::string&& v) {
+    odb_inclusion_directory_path_ = std::move(v);
+}
+
+const std::string& cmakelists::odb_source_directory_path() const {
     return odb_source_directory_path_;
 }
 
-boost::filesystem::path& cmakelists::odb_source_directory_path() {
+std::string& cmakelists::odb_source_directory_path() {
     return odb_source_directory_path_;
 }
 
-void cmakelists::odb_source_directory_path(const boost::filesystem::path& v) {
+void cmakelists::odb_source_directory_path(const std::string& v) {
     odb_source_directory_path_ = v;
 }
 
-void cmakelists::odb_source_directory_path(const boost::filesystem::path&& v) {
+void cmakelists::odb_source_directory_path(const std::string&& v) {
     odb_source_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& cmakelists::odb_options_file_path() const {
+const std::string& cmakelists::odb_options_file_path() const {
     return odb_options_file_path_;
 }
 
-boost::filesystem::path& cmakelists::odb_options_file_path() {
+std::string& cmakelists::odb_options_file_path() {
     return odb_options_file_path_;
 }
 
-void cmakelists::odb_options_file_path(const boost::filesystem::path& v) {
+void cmakelists::odb_options_file_path(const std::string& v) {
     odb_options_file_path_ = v;
 }
 
-void cmakelists::odb_options_file_path(const boost::filesystem::path&& v) {
+void cmakelists::odb_options_file_path(const std::string&& v) {
     odb_options_file_path_ = std::move(v);
 }
 
@@ -247,19 +256,19 @@ void cmakelists::odb_postfix(const std::string&& v) {
     odb_postfix_ = std::move(v);
 }
 
-const boost::filesystem::path& cmakelists::types_include_directory_path() const {
+const std::string& cmakelists::types_include_directory_path() const {
     return types_include_directory_path_;
 }
 
-boost::filesystem::path& cmakelists::types_include_directory_path() {
+std::string& cmakelists::types_include_directory_path() {
     return types_include_directory_path_;
 }
 
-void cmakelists::types_include_directory_path(const boost::filesystem::path& v) {
+void cmakelists::types_include_directory_path(const std::string& v) {
     types_include_directory_path_ = v;
 }
 
-void cmakelists::types_include_directory_path(const boost::filesystem::path&& v) {
+void cmakelists::types_include_directory_path(const std::string&& v) {
     types_include_directory_path_ = std::move(v);
 }
 

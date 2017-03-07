@@ -28,32 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/utility/serialization/path.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
-
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-inline void save(Archive& ar,
-    const boost::filesystem::path& p,
-    const unsigned int /*version*/) {
-    std::string s;
-    s = p.generic_string();
-    ar & boost::serialization::make_nvp("path", s);
-}
-
-template<typename Archive>
-inline void load(Archive& ar,
-    boost::filesystem::path& p,
-    const unsigned int /*version*/) {
-    std::string s;
-    ar & boost::serialization::make_nvp("path", s);
-    p = s;
-}
-
-} }
 
 BOOST_CLASS_TRACKING(
     dogen::quilt::cpp::fabric::cmakelists,
@@ -70,6 +46,7 @@ void save(Archive& ar,
 
     ar << make_nvp("include_directory_name", v.include_directory_name_);
     ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+    ar << make_nvp("odb_inclusion_directory_path", v.odb_inclusion_directory_path_);
     ar << make_nvp("odb_source_directory_path", v.odb_source_directory_path_);
     ar << make_nvp("odb_options_file_path", v.odb_options_file_path_);
     ar << make_nvp("odb_postfix", v.odb_postfix_);
@@ -86,6 +63,7 @@ void load(Archive& ar,
 
     ar >> make_nvp("include_directory_name", v.include_directory_name_);
     ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+    ar >> make_nvp("odb_inclusion_directory_path", v.odb_inclusion_directory_path_);
     ar >> make_nvp("odb_source_directory_path", v.odb_source_directory_path_);
     ar >> make_nvp("odb_options_file_path", v.odb_options_file_path_);
     ar >> make_nvp("odb_postfix", v.odb_postfix_);

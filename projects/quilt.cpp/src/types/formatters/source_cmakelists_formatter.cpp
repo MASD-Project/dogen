@@ -103,7 +103,7 @@ format(const context& ctx, const yarn::element& e) const {
 a.stream() << "set(files \"\")" << std::endl;
 a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
-a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*.cpp\")" << std::endl;
+a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*." << c.implementation_file_extension() << "\")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "add_library(" << model_name << " STATIC ${files})" << std::endl;
 a.stream() << "set_target_properties(" << model_name << " PROPERTIES" << std::endl;

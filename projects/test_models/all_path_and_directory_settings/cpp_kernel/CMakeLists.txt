@@ -25,23 +25,23 @@ install(
     COMPONENT headers
     FILES_MATCHING PATTERN "*.hh")
 
-set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings")
+set(include_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/some_include_dir/dogen/test_models/all_path_and_directory_settings/odb_dir")
 set(all_odb_files "")
 file(GLOB_RECURSE all_odb_files RELATIVE
-    "${include_dir}/odb_dir/"
-    "${include_dir}/odb_dir/*_the_odb.hh")
+    "${include_odb_dir}/"
+    "${include_odb_dir}/*_the_odb.hh")
 
-set(src_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/src/odb_dir/")
+set(src_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/some_source_dir/odb_dir/")
 if(NOT EXISTS "${src_odb_dir}")
     file(MAKE_DIRECTORY "${src_odb_dir}")
 endif()
 
 add_custom_target(odb_all_path_and_directory_settings
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings/odb_dir/*.cc
-    ${src_odb_dir})
+    COMMAND mv ${include_odb_dir}/*.cpp ${src_odb_dir})
 
 set(ignore_file false)
+set(include_types_dir "${CMAKE_CURRENT_SOURCE_DIR}/some_include_dir/dogen/test_models/all_path_and_directory_settings/types_dir")
 foreach(odb_file ${all_odb_files})
     if (odb_file MATCHES "all_the_odb.hh")
         set(ignore_file true)
@@ -58,11 +58,11 @@ foreach(odb_file ${all_odb_files})
             COMMENT "ODB ${type_name}"
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${ODB_EXECUTABLE}
-            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings/odb_dir/
-            --odb-epilogue '\#include \"dogen/all_path_and_directory_settings/odb_dir/${odb_file}\"'
-            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
-            ${include_dir}/types/${type_name}.hh)
+            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/some_source_dir/options.odb
+            --output-dir ${include_odb_dir}/
+            --odb-epilogue '\#include \"dogen/test_models/all_path_and_directory_settings/odb_dir/${odb_file}\"'
+            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/some_include_dir
+            ${include_types_dir}/${type_name}.hh)
 
         add_dependencies(odb_all_path_and_directory_settings ${target_name})
     endif()

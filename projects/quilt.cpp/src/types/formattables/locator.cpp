@@ -337,11 +337,26 @@ std::string locator::include_directory_name() const {
 }
 
 boost::filesystem::path locator::
-make_relative_include_path_for_facet(const std::string& facet) const {
+make_relative_include_path(bool for_include_statement) const {
+    boost::filesystem::path r;
     const auto& cfg(configuration_);
-    boost::filesystem::path r(cfg.include_directory_name());
-    r /= make_inclusion_path_prefix(model_name_);
 
+    /*
+     * If the path is being made for an include statement, we must not
+     * include the top-level include directory.
+     */
+    if (!for_include_statement)
+        r /= cfg.include_directory_name();
+
+    r /= make_inclusion_path_prefix(model_name_);
+    return r;
+}
+
+boost::filesystem::path locator::make_relative_include_path_for_facet(
+    const std::string& facet, bool for_include_statement) const {
+    auto r(make_relative_include_path(for_include_statement));
+
+    const auto& cfg(configuration_);
     const auto& fct_cfg(configuration_for_facet(facet));
     if (!fct_cfg.directory().empty() && !cfg.disable_facet_directories())
         r /= fct_cfg.directory();

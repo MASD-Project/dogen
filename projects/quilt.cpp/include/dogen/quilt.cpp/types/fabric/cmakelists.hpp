@@ -28,7 +28,6 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_fwd_ser.hpp"
 
@@ -41,11 +40,9 @@ class cmakelists final : public dogen::yarn::element {
 public:
     cmakelists() = default;
     cmakelists(const cmakelists&) = default;
+    cmakelists(cmakelists&&) = default;
 
     virtual ~cmakelists() noexcept { }
-
-public:
-    cmakelists(cmakelists&& rhs);
 
 public:
     cmakelists(
@@ -58,11 +55,12 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const std::string& include_directory_name,
-        const boost::filesystem::path& odb_include_directory_path,
-        const boost::filesystem::path& odb_source_directory_path,
-        const boost::filesystem::path& odb_options_file_path,
+        const std::string& odb_include_directory_path,
+        const std::string& odb_inclusion_directory_path,
+        const std::string& odb_source_directory_path,
+        const std::string& odb_options_file_path,
         const std::string& odb_postfix,
-        const boost::filesystem::path& types_include_directory_path,
+        const std::string& types_include_directory_path,
         const std::string& header_file_extension,
         const std::string& implementation_file_extension);
 
@@ -89,30 +87,35 @@ public:
     void include_directory_name(const std::string& v);
     void include_directory_name(const std::string&& v);
 
-    const boost::filesystem::path& odb_include_directory_path() const;
-    boost::filesystem::path& odb_include_directory_path();
-    void odb_include_directory_path(const boost::filesystem::path& v);
-    void odb_include_directory_path(const boost::filesystem::path&& v);
+    const std::string& odb_include_directory_path() const;
+    std::string& odb_include_directory_path();
+    void odb_include_directory_path(const std::string& v);
+    void odb_include_directory_path(const std::string&& v);
 
-    const boost::filesystem::path& odb_source_directory_path() const;
-    boost::filesystem::path& odb_source_directory_path();
-    void odb_source_directory_path(const boost::filesystem::path& v);
-    void odb_source_directory_path(const boost::filesystem::path&& v);
+    const std::string& odb_inclusion_directory_path() const;
+    std::string& odb_inclusion_directory_path();
+    void odb_inclusion_directory_path(const std::string& v);
+    void odb_inclusion_directory_path(const std::string&& v);
 
-    const boost::filesystem::path& odb_options_file_path() const;
-    boost::filesystem::path& odb_options_file_path();
-    void odb_options_file_path(const boost::filesystem::path& v);
-    void odb_options_file_path(const boost::filesystem::path&& v);
+    const std::string& odb_source_directory_path() const;
+    std::string& odb_source_directory_path();
+    void odb_source_directory_path(const std::string& v);
+    void odb_source_directory_path(const std::string&& v);
+
+    const std::string& odb_options_file_path() const;
+    std::string& odb_options_file_path();
+    void odb_options_file_path(const std::string& v);
+    void odb_options_file_path(const std::string&& v);
 
     const std::string& odb_postfix() const;
     std::string& odb_postfix();
     void odb_postfix(const std::string& v);
     void odb_postfix(const std::string&& v);
 
-    const boost::filesystem::path& types_include_directory_path() const;
-    boost::filesystem::path& types_include_directory_path();
-    void types_include_directory_path(const boost::filesystem::path& v);
-    void types_include_directory_path(const boost::filesystem::path&& v);
+    const std::string& types_include_directory_path() const;
+    std::string& types_include_directory_path();
+    void types_include_directory_path(const std::string& v);
+    void types_include_directory_path(const std::string&& v);
 
     const std::string& header_file_extension() const;
     std::string& header_file_extension();
@@ -139,11 +142,12 @@ public:
 
 private:
     std::string include_directory_name_;
-    boost::filesystem::path odb_include_directory_path_;
-    boost::filesystem::path odb_source_directory_path_;
-    boost::filesystem::path odb_options_file_path_;
+    std::string odb_include_directory_path_;
+    std::string odb_inclusion_directory_path_;
+    std::string odb_source_directory_path_;
+    std::string odb_options_file_path_;
     std::string odb_postfix_;
-    boost::filesystem::path types_include_directory_path_;
+    std::string types_include_directory_path_;
     std::string header_file_extension_;
     std::string implementation_file_extension_;
 };

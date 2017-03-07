@@ -25,11 +25,11 @@ install(
     COMPONENT headers
     FILES_MATCHING PATTERN "*.hpp")
 
-set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/two_layers_with_objects")
+set(include_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/test_models/two_layers_with_objects/odb")
 set(all_odb_files "")
 file(GLOB_RECURSE all_odb_files RELATIVE
-    "${include_dir}/odb/"
-    "${include_dir}/odb/*_pragmas.hpp")
+    "${include_odb_dir}/"
+    "${include_odb_dir}/*_pragmas.hpp")
 
 set(src_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/src/odb/")
 if(NOT EXISTS "${src_odb_dir}")
@@ -38,10 +38,10 @@ endif()
 
 add_custom_target(odb_two_layers_with_objects
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/two_layers_with_objects/odb/*.cpp
-    ${src_odb_dir})
+    COMMAND mv ${include_odb_dir}/*.cpp ${src_odb_dir})
 
 set(ignore_file false)
+set(include_types_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/test_models/two_layers_with_objects/types")
 foreach(odb_file ${all_odb_files})
     if (odb_file MATCHES "all_pragmas.hpp")
         set(ignore_file true)
@@ -59,10 +59,10 @@ foreach(odb_file ${all_odb_files})
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${ODB_EXECUTABLE}
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
-            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/two_layers_with_objects/odb/
-            --odb-epilogue '\#include \"dogen/two_layers_with_objects/odb/${odb_file}\"'
+            --output-dir ${include_odb_dir}/
+            --odb-epilogue '\#include \"dogen/test_models/two_layers_with_objects/odb/${odb_file}\"'
             -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
-            ${include_dir}/types/${type_name}.hpp)
+            ${include_types_dir}/${type_name}.hpp)
 
         add_dependencies(odb_two_layers_with_objects ${target_name})
     endif()

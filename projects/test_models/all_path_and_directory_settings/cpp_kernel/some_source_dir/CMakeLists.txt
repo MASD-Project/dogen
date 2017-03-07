@@ -20,7 +20,7 @@
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.cc")
 
 add_library(all_path_and_directory_settings STATIC ${files})
 set_target_properties(all_path_and_directory_settings PROPERTIES

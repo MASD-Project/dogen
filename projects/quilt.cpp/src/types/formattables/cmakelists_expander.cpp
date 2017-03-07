@@ -88,22 +88,29 @@ void cmakelists_updater::visit(fabric::cmakelists& c) {
 
     const auto odb_fctn(dogen::quilt::cpp::formatters::odb::traits::facet());
     c.odb_include_directory_path(
-        locator_.make_relative_include_path_for_facet(odb_fctn));
+        locator_.make_relative_include_path_for_facet(odb_fctn)
+        .generic_string());
+    c.odb_inclusion_directory_path(
+        locator_.make_relative_include_path_for_facet(odb_fctn,
+            true/*for_include_statement*/).generic_string());
+
     c.odb_source_directory_path(
-        locator_.make_relative_implementation_path_for_facet(odb_fctn));
+        locator_.make_relative_implementation_path_for_facet(odb_fctn)
+        .generic_string());
 
     const auto oo_arch(
         dogen::quilt::cpp::formatters::odb::traits::odb_options_archetype());
     c.odb_options_file_path(
-        locator_.make_relative_path_for_odb_options(
-            odb_options_name_, oo_arch));
+        locator_.make_relative_path_for_odb_options(odb_options_name_, oo_arch)
+        .generic_string());
 
     c.odb_postfix(locator_.postfix_for_facet(odb_fctn));
 
     const auto types_fctn(
         dogen::quilt::cpp::formatters::types::traits::facet());
     c.types_include_directory_path(
-        locator_.make_relative_include_path_for_facet(types_fctn));
+        locator_.make_relative_include_path_for_facet(types_fctn)
+        .generic_string());
 
     c.header_file_extension(locator_.header_file_extension());
     c.implementation_file_extension(locator_.implementation_file_extension());

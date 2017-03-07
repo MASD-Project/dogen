@@ -81,7 +81,7 @@ format(const context& ctx, const yarn::element& e) const {
 set(files "")
 file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
-    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+    "${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>")
 
 add_library(<#= model_name #> STATIC ${files})
 set_target_properties(<#= model_name #> PROPERTIES

@@ -168,11 +168,17 @@ public:
 
 public:
     /**
+     * @brief Generate the relative path to the include directory.
+     */
+    boost::filesystem::path make_relative_include_path(
+        bool for_include_statement) const;
+
+    /**
      * @brief Generate the relative path to the include directory for
      * a given facet.
      */
     boost::filesystem::path make_relative_include_path_for_facet(
-        const std::string& facet) const;
+        const std::string& facet, bool for_include_statement = false) const;
 
     /**
      * @brief Generate the inclusion path for C++ headers.
