@@ -278,8 +278,8 @@
 #DOGEN quilt.cpp.directory=cpp_kernel
 #DOGEN quilt.cpp.source_directory_name=some_source_dir
 #DOGEN quilt.cpp.include_directory_name=some_include_dir
-#DOGEN quilt.cpp.header_file_extension=.hxx
-#DOGEN quilt.cpp.implementation_file_extension=.cxx
+#DOGEN quilt.cpp.header_file_extension=hh
+#DOGEN quilt.cpp.implementation_file_extension=cc
 #DOGEN quilt.cpp.hash.directory=hash_dir
 #DOGEN quilt.cpp.hash.postfix=the_hash
 #DOGEN quilt.cpp.hash.class_header.postfix=0_0_0

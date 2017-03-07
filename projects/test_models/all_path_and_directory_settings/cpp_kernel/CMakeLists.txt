@@ -20,16 +20,16 @@
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 install(
-    DIRECTORY include/
-    DESTINATION include/
+    DIRECTORY some_include_dir/
+    DESTINATION some_include_dir/
     COMPONENT headers
-    FILES_MATCHING PATTERN "*.hpp")
+    FILES_MATCHING PATTERN "*.hh")
 
 set(include_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings")
 set(all_odb_files "")
 file(GLOB_RECURSE all_odb_files RELATIVE
     "${include_dir}/odb_dir/"
-    "${include_dir}/odb_dir/*_pragmas.hpp")
+    "${include_dir}/odb_dir/*_the_odb.hh")
 
 set(src_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/src/odb_dir/")
 if(NOT EXISTS "${src_odb_dir}")
@@ -38,18 +38,18 @@ endif()
 
 add_custom_target(odb_all_path_and_directory_settings
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings/odb_dir/*.cpp
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings/odb_dir/*.cc
     ${src_odb_dir})
 
 set(ignore_file false)
 foreach(odb_file ${all_odb_files})
-    if (odb_file MATCHES "all_pragmas.hpp")
+    if (odb_file MATCHES "all_the_odb.hh")
         set(ignore_file true)
     endif()
 
     if(NOT ignore_file)
         set(type_name "")
-        string(REPLACE "_pragmas.hpp" "" type_name ${odb_file})
+        string(REPLACE "_the_odb.hh" "" type_name ${odb_file})
         string(REPLACE "\\" "_" type_name ${type_name})
         string(REPLACE "/" "_" type_name ${type_name})
 
@@ -62,7 +62,7 @@ foreach(odb_file ${all_odb_files})
             --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/all_path_and_directory_settings/odb_dir/
             --odb-epilogue '\#include \"dogen/all_path_and_directory_settings/odb_dir/${odb_file}\"'
             -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
-            ${include_dir}/types/${type_name}.hpp)
+            ${include_dir}/types/${type_name}.hh)
 
         add_dependencies(odb_all_path_and_directory_settings ${target_name})
     endif()

@@ -361,8 +361,6 @@ boost::filesystem::path locator::make_full_path_for_cpp_header(
     auto r(project_path_);
     const auto& cfg(configuration_);
     r /= cfg.include_directory_name();
-
-    const auto extension(cfg.header_file_extension());
     r /= make_inclusion_path_for_cpp_header(n, archetype);
 
     return r;

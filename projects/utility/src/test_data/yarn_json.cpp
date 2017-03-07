@@ -120,7 +120,8 @@ path yarn_json::input_enable_facet_io_json() {
 }
 
 path yarn_json::input_enable_facet_serialization_json() {
-    return validating_resolver::resolve(::input_enable_facet_serialization_json);
+    return validating_resolver::resolve(
+        ::input_enable_facet_serialization_json);
 }
 
 path yarn_json::input_all_path_and_directory_settings_json() {
