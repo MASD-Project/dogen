@@ -34,6 +34,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc/another/split_project/include
     )
 
 #
@@ -71,6 +72,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/std_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/some_dir/split_project)
 
 # copy all generated files into the expected directory of test data
 foreach(dia_model ${all_dia_test_models})
@@ -127,7 +129,9 @@ foreach(dia_model ${all_dia_test_models})
     message(STATUS "Created data set for model: ${model_name}")
 endforeach()
 
-# targets for each test model
+# targets for each test model. First the manual ones.
+add_dependencies(test_models all_path_and_directory_settings)
+add_dependencies(test_models split_project)
 foreach(dia_model ${all_dia_test_models})
     set(ignore_dependencies false)
     if (dia_model MATCHES "disable_cmakelists")
