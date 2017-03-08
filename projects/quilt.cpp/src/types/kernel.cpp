@@ -25,7 +25,6 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
-#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/kernel.hpp"
 
 namespace {
@@ -52,6 +51,20 @@ formattables::model kernel::create_formattables_model(
     const yarn::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, dpf, l, frp, m);
+}
+
+formattables::locator kernel::make_locator(const options::knitting_options& ko,
+    const annotations::type_repository& atrp, const annotations::annotation& ra,
+    const formatters::repository& frp, const bool enable_kernel_directories,
+    const yarn::model& m) const {
+
+    const auto& mn(m.name());
+    const auto odp(ko.output_directory_path());
+    const auto chodp(ko.cpp_headers_output_directory_path());
+    const auto ekd(enable_kernel_directories);
+    const auto ids(m.module_ids());
+    const formattables::locator r(odp, chodp, atrp, frp, ra, mn, ids, ekd);
+    return r;
 }
 
 std::string kernel::id() const {
@@ -93,11 +106,7 @@ kernel_output kernel::generate(const options::knitting_options& ko,
 
     const auto ra(m.root_module().annotation());
     const auto& frp(formatters::workflow::registrar().formatter_repository());
-
-    const auto mn(m.name());
-    const auto odp(ko.output_directory_path());
-    const auto ekd(enable_kernel_directories);
-    const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);
+    const auto l(make_locator(ko, atrp, ra, frp, enable_kernel_directories, m));
     const auto fm(create_formattables_model(atrp, ra, dpf, frp, l, m));
 
     kernel_output r;

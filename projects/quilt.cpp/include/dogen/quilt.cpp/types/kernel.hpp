@@ -68,6 +68,14 @@ private:
         const yarn::model& m) const;
 
     /**
+     * @brief Creates a file locator.
+     */
+    formattables::locator make_locator(const options::knitting_options& ko,
+        const annotations::type_repository& atrp,
+        const annotations::annotation& ra, const formatters::repository& frp,
+        const bool enable_kernel_directories,const yarn::model& m) const;
+
+    /**
      * @brief Create the files representation of the formattables model.
      */
     std::list<dogen::formatters::artefact>

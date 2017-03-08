@@ -49,6 +49,7 @@ class locator {
 public:
     locator(
         const boost::filesystem::path& output_directory_path,
+        const boost::filesystem::path& cpp_headers_output_directory_path,
         const annotations::type_repository& atrp,
         const formatters::repository& frp, const annotations::annotation& root,
         const yarn::name& model_name,
@@ -241,6 +242,7 @@ private:
     const locator_configuration configuration_;
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;
+    const boost::filesystem::path headers_project_path_;
 };
 
 } } } }

@@ -34,7 +34,7 @@ knitting_options::knitting_options(knitting_options&& rhs)
       force_write_(std::move(rhs.force_write_)),
       ignore_patterns_(std::move(rhs.ignore_patterns_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
-      cpp_headers_output_directory_(std::move(rhs.cpp_headers_output_directory_)),
+      cpp_headers_output_directory_path_(std::move(rhs.cpp_headers_output_directory_path_)),
       log_directory_(std::move(rhs.log_directory_)) { }
 
 knitting_options::knitting_options(
@@ -44,7 +44,7 @@ knitting_options::knitting_options(
     const bool force_write,
     const std::vector<std::string>& ignore_patterns,
     const boost::filesystem::path& output_directory_path,
-    const boost::filesystem::path& cpp_headers_output_directory,
+    const boost::filesystem::path& cpp_headers_output_directory_path,
     const boost::filesystem::path& log_directory)
     : log_level_(log_level),
       target_(target),
@@ -52,7 +52,7 @@ knitting_options::knitting_options(
       force_write_(force_write),
       ignore_patterns_(ignore_patterns),
       output_directory_path_(output_directory_path),
-      cpp_headers_output_directory_(cpp_headers_output_directory),
+      cpp_headers_output_directory_path_(cpp_headers_output_directory_path),
       log_directory_(log_directory) { }
 
 void knitting_options::swap(knitting_options& other) noexcept {
@@ -63,7 +63,7 @@ void knitting_options::swap(knitting_options& other) noexcept {
     swap(force_write_, other.force_write_);
     swap(ignore_patterns_, other.ignore_patterns_);
     swap(output_directory_path_, other.output_directory_path_);
-    swap(cpp_headers_output_directory_, other.cpp_headers_output_directory_);
+    swap(cpp_headers_output_directory_path_, other.cpp_headers_output_directory_path_);
     swap(log_directory_, other.log_directory_);
 }
 
@@ -74,7 +74,7 @@ bool knitting_options::operator==(const knitting_options& rhs) const {
         force_write_ == rhs.force_write_ &&
         ignore_patterns_ == rhs.ignore_patterns_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
-        cpp_headers_output_directory_ == rhs.cpp_headers_output_directory_ &&
+        cpp_headers_output_directory_path_ == rhs.cpp_headers_output_directory_path_ &&
         log_directory_ == rhs.log_directory_;
 }
 
@@ -164,20 +164,20 @@ void knitting_options::output_directory_path(const boost::filesystem::path&& v) 
     output_directory_path_ = std::move(v);
 }
 
-const boost::filesystem::path& knitting_options::cpp_headers_output_directory() const {
-    return cpp_headers_output_directory_;
+const boost::filesystem::path& knitting_options::cpp_headers_output_directory_path() const {
+    return cpp_headers_output_directory_path_;
 }
 
-boost::filesystem::path& knitting_options::cpp_headers_output_directory() {
-    return cpp_headers_output_directory_;
+boost::filesystem::path& knitting_options::cpp_headers_output_directory_path() {
+    return cpp_headers_output_directory_path_;
 }
 
-void knitting_options::cpp_headers_output_directory(const boost::filesystem::path& v) {
-    cpp_headers_output_directory_ = v;
+void knitting_options::cpp_headers_output_directory_path(const boost::filesystem::path& v) {
+    cpp_headers_output_directory_path_ = v;
 }
 
-void knitting_options::cpp_headers_output_directory(const boost::filesystem::path&& v) {
-    cpp_headers_output_directory_ = std::move(v);
+void knitting_options::cpp_headers_output_directory_path(const boost::filesystem::path&& v) {
+    cpp_headers_output_directory_path_ = std::move(v);
 }
 
 const boost::filesystem::path& knitting_options::log_directory() const {

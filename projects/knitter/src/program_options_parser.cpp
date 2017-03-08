@@ -222,7 +222,7 @@ make_knitting_options(const variables_map& vm) const {
 
     if (vm.count(cpp_headers_output_directory_arg)) {
         const auto s(vm[cpp_headers_output_directory_arg].as<std::string>());
-        r.cpp_headers_output_directory(boost::filesystem::absolute(s));
+        r.cpp_headers_output_directory_path(boost::filesystem::absolute(s));
     }
 
     return r;

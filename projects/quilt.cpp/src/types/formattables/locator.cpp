@@ -55,7 +55,9 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-locator::locator(const boost::filesystem::path& output_directory_path,
+locator::locator(
+    const boost::filesystem::path& output_directory_path,
+    const boost::filesystem::path& cpp_headers_output_directory_path,
     const annotations::type_repository& atrp, const formatters::repository& frp,
     const annotations::annotation& root, const yarn::name& model_name,
     const std::unordered_set<std::string>& module_ids,
@@ -64,10 +66,15 @@ locator::locator(const boost::filesystem::path& output_directory_path,
       configuration_(make_configuration(atrp, frp, root)),
       module_ids_(module_ids),
       project_path_(make_project_path(output_directory_path, model_name,
+              configuration_, enable_kernel_directories)),
+      headers_project_path_(
+          cpp_headers_output_directory_path.empty() ?
+          project_path_ :
+          make_project_path(cpp_headers_output_directory_path, model_name,
               configuration_, enable_kernel_directories)) {}
 
-locator::type_group locator::make_type_group(
-    const annotations::type_repository& atrp,
+locator::type_group
+locator::make_type_group(const annotations::type_repository& atrp,
     const formatters::repository& frp) const {
 
     type_group r;
@@ -377,7 +384,7 @@ boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
 boost::filesystem::path locator::make_full_path_for_cpp_header(
     const yarn::name& n, const std::string& archetype) const {
 
-    auto r(project_path_);
+    auto r(headers_project_path_);
     const auto& cfg(configuration_);
     r /= cfg.include_directory_name();
     r /= make_inclusion_path_for_cpp_header(n, archetype);
@@ -414,7 +421,7 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
 
 boost::filesystem::path locator::make_full_path_for_include_cmakelists(
     const yarn::name& n, const std::string& /*archetype*/) const {
-    auto r(project_path_);
+    auto r(headers_project_path_);
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
 }
