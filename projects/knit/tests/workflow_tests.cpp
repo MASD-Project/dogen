@@ -234,6 +234,24 @@ BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_dia
 
 BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
     SETUP_TEST_LOG("split_project_model_generates_expected_code");
+
+    const auto dia(yarn_dia::input_split_project_dia());
+    const auto model_name(dia.stem().string());
+    auto tc(make_test_configuration(model_name, dia, actual_dia_dir));
+
+    /*
+     * note that we keep the project name just to make the life easier
+     * for the rebaselining scripts.
+     */
+    tc.options.output_directory_path() /= "split_project";
+
+    tc.options.cpp_headers_output_directory_path(
+        tc.options.output_directory_path());
+    const boost::filesystem::path p("dir/inc/another");
+    tc.options.cpp_headers_output_directory_path() /= p;
+    tc.options.output_directory_path() /= "some_dir";
+
+    BOOST_CHECK(execute_test(tc));
 }
 
 #ifdef ENABLE_CSHARP_TESTS
