@@ -77,6 +77,9 @@ private:
 
     void expand_cmakelists(const locator& l, model& fm) const;
 
+    void expand_cpp_standard(const annotations::type_repository& atrp,
+        const annotations::annotation& ra, model& fm) const;
+
 public:
     void expand(const annotations::type_repository& atrp,
         const annotations::annotation& ra,

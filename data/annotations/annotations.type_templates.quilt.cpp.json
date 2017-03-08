@@ -257,6 +257,20 @@
   },
   {
     "name": {
+      "simple": "cpp_standard",
+      "qualified": "quilt.cpp.cpp_standard"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "c++-14"
+  },
+  {
+    "name": {
       "simple": "family",
       "qualified": "quilt.cpp.helper.family"
     },

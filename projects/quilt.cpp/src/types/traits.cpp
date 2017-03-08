@@ -134,6 +134,11 @@ std::string traits::cpp::disable_facet_directories() {
     return r;
 }
 
+std::string traits::cpp::cpp_standard() {
+    static std::string r("quilt.cpp.cpp_standard");
+    return r;
+}
+
 std::string traits::cpp::helper::family() {
     static std::string r("quilt.cpp.helper.family");
     return r;

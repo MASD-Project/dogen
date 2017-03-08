@@ -25,7 +25,11 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/quilt.cpp/types/formattables/cpp_standards.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,19 +37,22 @@ namespace cpp {
 namespace formattables {
 
 class cpp_standard_expander final {
-public:
-    cpp_standard_expander() = default;
-    cpp_standard_expander(const cpp_standard_expander&) = default;
-    cpp_standard_expander(cpp_standard_expander&&) = default;
-    ~cpp_standard_expander() = default;
-    cpp_standard_expander& operator=(const cpp_standard_expander&) = default;
+private:
+    cpp_standards to_cpp_standard(const std::string& s) const;
+
+private:
+    struct type_group {
+        annotations::type cpp_standard;
+    };
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    cpp_standards
+    make_standard(const type_group& tg, const annotations::annotation& a) const;
 
 public:
-    bool operator==(const cpp_standard_expander& rhs) const;
-    bool operator!=(const cpp_standard_expander& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void expand(const annotations::type_repository& atrp,
+        const annotations::annotation& ra, model& fm) const;
 };
 
 } } } }

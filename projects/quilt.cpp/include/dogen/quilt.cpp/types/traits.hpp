@@ -148,6 +148,11 @@ struct traits {
          */
         static std::string disable_facet_directories();
 
+        /**
+         * @brief Which C++ standard to use.
+         */
+        static std::string cpp_standard();
+
         struct helper {
             /**
              * @brief Family of the helper methods.
