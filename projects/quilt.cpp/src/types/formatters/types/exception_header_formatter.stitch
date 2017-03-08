@@ -48,13 +48,13 @@ format(const context& ctx, const yarn::element& e) const {
 class <#= ye.name().simple() #> : public virtual std::exception, public virtual boost::exception {
 public:
     <#= ye.name().simple() #>() = default;
-    ~<#= ye.name().simple() #>() noexcept = default;
+    ~<#= ye.name().simple() #>()<#= a.make_noexcept_keyword_text() #> = default;
 
 public:
     explicit <#= ye.name().simple() #>(const std::string& message) : message_(message) { }
 
 public:
-    const char* what() const noexcept { return(message_.c_str()); }
+    const char* what() const<#= a.make_noexcept_keyword_text() #> { return(message_.c_str()); }
 
 private:
     const std::string message_;

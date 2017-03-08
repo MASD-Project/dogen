@@ -206,7 +206,7 @@ a.stream() << std::endl;
              * Swap and assignment.
              */
 a.stream() << "public:" << std::endl;
-a.stream() << "    void swap(" << sn << "& other) noexcept;" << std::endl;
+a.stream() << "    void swap(" << sn << "& other)" << a.make_noexcept_keyword_text() << ";" << std::endl;
             if (!p.is_immutable()) {
 a.stream() << "    " << sn << "& operator=(" << sn << " other);" << std::endl;
             }

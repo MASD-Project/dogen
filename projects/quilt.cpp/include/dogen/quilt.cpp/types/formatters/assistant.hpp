@@ -74,7 +74,19 @@ public:
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
      */
-    static std::string make_final_keyword_text(const yarn::object& o);
+    std::string make_final_keyword_text(const yarn::object& o) const;
+
+    /**
+     * @brief Returns the override keyword, if supported by the
+     * current standard.
+     */
+    std::string make_override_keyword_text() const;
+
+    /**
+     * @brief Returns the noexcept keyword, if supported by the
+     * current standard.
+     */
+    std::string make_noexcept_keyword_text() const;
 
     /**
      * @brief Returns the by-ref to use given the property.

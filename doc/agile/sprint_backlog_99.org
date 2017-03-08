@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-08 Wed 21:01]
+#+CAPTION: Clock summary at [2017-03-08 Wed 23:50]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:44* |       |      | 100.0 |
+| *Total time*                                                                | *20:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:44   |       |      | 100.0 |
-| Active                                                                      |         | 18:44 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   4.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   2.3 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  15.8 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  27.0 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  28.6 |
-| STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   1.0 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   9.6 |
-| STARTED Build on tags for Windows                                           |         |       | 0:15 |   1.3 |
+| Stories                                                                     | 20:18   |       |      | 100.0 |
+| Active                                                                      |         | 20:18 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   4.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   2.1 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  14.6 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  25.0 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  26.4 |
+| STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.9 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   8.9 |
+| STARTED Build on tags for Windows                                           |         |       | 0:15 |   1.2 |
 | STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.7 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 0:49 |   4.4 |
-| STARTED Add C++-03 mode                                                     |         |       | 0:54 |   4.8 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 0:49 |   4.0 |
+| STARTED Add C++-03 mode                                                     |         |       | 2:28 |  12.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -282,6 +282,8 @@ For now we removed the project and solution postfixes:
 : #DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
 
 *** STARTED Add C++-03 mode                                            :epic:
+    CLOCK: [2017-03-08 Wed 23:32]--[2017-03-08 Wed 23:50] =>  0:18
+    CLOCK: [2017-03-08 Wed 22:15]--[2017-03-08 Wed 23:31] =>  1:16
     CLOCK: [2017-03-08 Wed 20:26]--[2017-03-08 Wed 21:01] =>  0:35
     CLOCK: [2017-03-08 Wed 17:32]--[2017-03-08 Wed 17:51] =>  0:19
 

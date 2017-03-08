@@ -187,7 +187,7 @@ public:
              */
 #>
 public:
-    void swap(<#= sn #>& other) noexcept;
+    void swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #>;
 <#+
             if (!p.is_immutable()) {
 #>

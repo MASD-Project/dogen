@@ -325,7 +325,7 @@ void <#= sn #>::to_stream(std::ostream& s) const {
                 const bool empty(o.all_attributes().empty() && o.parents().empty());
 #>
 
-void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>) noexcept {
+void <#= sn #>::swap(<#= sn #>&<#= (empty ? "" : " other") #>)<#= a.make_noexcept_keyword_text() #> {
 <#+
                if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());

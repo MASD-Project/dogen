@@ -332,7 +332,7 @@ a.stream() << "}" << std::endl;
             if (!o.is_immutable() && (!o.all_attributes().empty() || o.is_parent())) {
                 const bool empty(o.all_attributes().empty() && o.parents().empty());
 a.stream() << std::endl;
-a.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ") noexcept {" << std::endl;
+a.stream() << "void " << sn << "::swap(" << sn << "&" << (empty ? "" : " other") << ")" << a.make_noexcept_keyword_text() << " {" << std::endl;
                if (!o.parents().empty()) {
                     const auto& pn(o.parents().front());
                     const auto pqn(a.get_qualified_name(pn));

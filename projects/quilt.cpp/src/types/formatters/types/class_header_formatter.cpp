@@ -182,10 +182,10 @@ a.stream() << std::endl;
              * undefined reference to `vtable.
              */
             if (o.is_parent()) {
-a.stream() << "    virtual ~" << sn << "() noexcept = 0;" << std::endl;
+a.stream() << "    virtual ~" << sn << "()" << a.make_noexcept_keyword_text() << " = 0;" << std::endl;
 a.stream() << std::endl;
             } else if (o.is_child() != 0) {
-a.stream() << "    virtual ~" << sn << "() noexcept { }" << std::endl;
+a.stream() << "    virtual ~" << sn << "()" << a.make_noexcept_keyword_text() << " { }" << std::endl;
 a.stream() << std::endl;
             }
 
@@ -256,10 +256,10 @@ a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    using " << rpn << "::accept;" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v) const override;" << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v) const override;" << std::endl;
-a.stream() << "    virtual void accept(const " << bvn << "& v) override;" << std::endl;
-a.stream() << "    virtual void accept(" << bvn << "& v) override;" << std::endl;
+a.stream() << "    virtual void accept(const " << bvn << "& v) const" << a.make_override_keyword_text() << ";" << std::endl;
+a.stream() << "    virtual void accept(" << bvn << "& v) const" << a.make_override_keyword_text() << ";" << std::endl;
+a.stream() << "    virtual void accept(const " << bvn << "& v)" << a.make_override_keyword_text() << ";" << std::endl;
+a.stream() << "    virtual void accept(" << bvn << "& v)" << a.make_override_keyword_text() << ";" << std::endl;
             }
 
             /*
@@ -272,7 +272,7 @@ a.stream() << "    virtual void to_stream(std::ostream& s) const;" << std::endl;
 a.stream() << std::endl;
                 } else if (!o.parents().empty()) {
 a.stream() << "public:" << std::endl;
-a.stream() << "    void to_stream(std::ostream& s) const override;" << std::endl;
+a.stream() << "    void to_stream(std::ostream& s) const" << a.make_override_keyword_text() << ";" << std::endl;
 a.stream() << std::endl;
                 }
             }
@@ -333,7 +333,7 @@ a.stream() << "    virtual bool equals(const " << sn << "& other) const = 0;" <<
 a.stream() << "    virtual bool equals(const " << a.get_qualified_name(rpn) << "& other) const = 0;" << std::endl;
                 } else if (!o.root_parents().empty()) {
                     const auto rpn(o.root_parents().front());
-a.stream() << "    bool equals(const " << a.get_qualified_name(rpn) << "& other) const override;" << std::endl;
+a.stream() << "    bool equals(const " << a.get_qualified_name(rpn) << "& other) const" << a.make_override_keyword_text() << ";" << std::endl;
                 }
 a.stream() << std::endl;
              }
@@ -349,7 +349,7 @@ a.stream() << "protected:" << std::endl;
                 } else {
 a.stream() << "public:" << std::endl;
                 }
-a.stream() << "    void swap(" << sn << "& other) noexcept;" << std::endl;
+a.stream() << "    void swap(" << sn << "& other)" << a.make_noexcept_keyword_text() << ";" << std::endl;
                 if (!o.is_parent() && !o.is_immutable()) {
 a.stream() << "    " << sn << "& operator=(" << sn << " other);" << std::endl;
                 }
@@ -371,7 +371,7 @@ a.stream() << std::endl;
              * Destructor implementation.
              */
             if (o.is_parent()) {
-a.stream() << "inline " << sn << "::~" << sn << "() noexcept { }" << std::endl;
+a.stream() << "inline " << sn << "::~" << sn << "()" << a.make_noexcept_keyword_text() << " { }" << std::endl;
 a.stream() << std::endl;
             }
 

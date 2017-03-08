@@ -136,7 +136,7 @@ bool <#= sn #>::operator==(const <#= sn #>& rhs) const {
              */
             if (!p.is_immutable()) {
 #>
-void <#= sn #>::swap(<#= sn #>& other) noexcept {
+void <#= sn #>::swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #> {
     using std::swap;
     swap(<#= a.make_member_variable_name(attr) #>, other.<#= a.make_member_variable_name(attr) #>);
 }

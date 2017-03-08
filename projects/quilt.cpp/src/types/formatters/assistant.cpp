@@ -52,6 +52,8 @@ const std::string empty;
 const std::string by_ref_text("&");
 const std::string void_keyword_text("void");
 const std::string final_keyword_text("final ");
+const std::string override_keyword_text(" override");
+const std::string noexcept_keyword_text(" noexcept");
 const std::string namespace_separator("::");
 const std::string member_variable_postfix("_");
 const std::string underscore("_");
@@ -137,8 +139,25 @@ void assistant::validate() const {
     }
 }
 
-std::string assistant::make_final_keyword_text(const yarn::object& o) {
+std::string assistant::make_final_keyword_text(const yarn::object& o) const {
+    if (context_.model().cpp_standard() == formattables::cpp_standards::cpp_98)
+        return empty;
+
     return o.is_final() ? final_keyword_text : empty;
+}
+
+std::string assistant::make_override_keyword_text() const {
+    if (context_.model().cpp_standard() == formattables::cpp_standards::cpp_98)
+        return empty;
+
+    return override_keyword_text;
+}
+
+std::string assistant::make_noexcept_keyword_text() const {
+    if (context_.model().cpp_standard() == formattables::cpp_standards::cpp_98)
+        return empty;
+
+    return noexcept_keyword_text;
 }
 
 std::string assistant::make_by_ref_text(const yarn::attribute& attr) {

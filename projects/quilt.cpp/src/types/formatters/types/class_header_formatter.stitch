@@ -149,12 +149,12 @@ public:
              */
             if (o.is_parent()) {
 #>
-    virtual ~<#= sn #>() noexcept = 0;
+    virtual ~<#= sn #>()<#= a.make_noexcept_keyword_text() #> = 0;
 
 <#+
             } else if (o.is_child() != 0) {
 #>
-    virtual ~<#= sn #>() noexcept { }
+    virtual ~<#= sn #>()<#= a.make_noexcept_keyword_text() #> { }
 
 <#+
             }
@@ -243,10 +243,10 @@ public:
 public:
     using <#= rpn #>::accept;
 
-    virtual void accept(const <#= bvn #>& v) const override;
-    virtual void accept(<#= bvn #>& v) const override;
-    virtual void accept(const <#= bvn #>& v) override;
-    virtual void accept(<#= bvn #>& v) override;
+    virtual void accept(const <#= bvn #>& v) const<#= a.make_override_keyword_text() #>;
+    virtual void accept(<#= bvn #>& v) const<#= a.make_override_keyword_text() #>;
+    virtual void accept(const <#= bvn #>& v)<#= a.make_override_keyword_text() #>;
+    virtual void accept(<#= bvn #>& v)<#= a.make_override_keyword_text() #>;
 <#+
             }
 
@@ -263,7 +263,7 @@ public:
                 } else if (!o.parents().empty()) {
 #>
 public:
-    void to_stream(std::ostream& s) const override;
+    void to_stream(std::ostream& s) const<#= a.make_override_keyword_text() #>;
 
 <#+
                 }
@@ -352,7 +352,7 @@ public:
                 } else if (!o.root_parents().empty()) {
                     const auto rpn(o.root_parents().front());
 #>
-    bool equals(const <#= a.get_qualified_name(rpn) #>& other) const override;
+    bool equals(const <#= a.get_qualified_name(rpn) #>& other) const<#= a.make_override_keyword_text() #>;
 <#+
                 }
 #>
@@ -376,7 +376,7 @@ public:
 <#+
                 }
 #>
-    void swap(<#= sn #>& other) noexcept;
+    void swap(<#= sn #>& other)<#= a.make_noexcept_keyword_text() #>;
 <#+
                 if (!o.is_parent() && !o.is_immutable()) {
 #>
@@ -410,7 +410,7 @@ private:
              */
             if (o.is_parent()) {
 #>
-inline <#= sn #>::~<#= sn #>() noexcept { }
+inline <#= sn #>::~<#= sn #>()<#= a.make_noexcept_keyword_text() #> { }
 
 <#+
             }

@@ -181,7 +181,7 @@ a.stream() << std::endl;
              * Swap and assignment.
              */
             if (!p.is_immutable()) {
-a.stream() << "void " << sn << "::swap(" << sn << "& other) noexcept {" << std::endl;
+a.stream() << "void " << sn << "::swap(" << sn << "& other)" << a.make_noexcept_keyword_text() << " {" << std::endl;
 a.stream() << "    using std::swap;" << std::endl;
 a.stream() << "    swap(" << a.make_member_variable_name(attr) << ", other." << a.make_member_variable_name(attr) << ");" << std::endl;
 a.stream() << "}" << std::endl;

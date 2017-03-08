@@ -61,7 +61,7 @@ class <#= v.name().simple() #> : public <#= pqn #> {
             }
 #>
 public:
-    virtual ~<#= v.name().simple() #>() noexcept = 0;
+    virtual ~<#= v.name().simple() #>()<#= a.make_noexcept_keyword_text() #> = 0;
 
 public:
 <#+
@@ -95,7 +95,7 @@ public:
 #>
 };
 
-inline <#= v.name().simple() #>::~<#= v.name().simple() #>() noexcept { }
+inline <#= v.name().simple() #>::~<#= v.name().simple() #>()<#= a.make_noexcept_keyword_text() #> { }
 
 <#+
         } // snf

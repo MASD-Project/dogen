@@ -108,7 +108,7 @@ a.stream() << "class " << v.name().simple() << " {" << std::endl;
 a.stream() << "class " << v.name().simple() << " : public " << pqn << " {" << std::endl;
             }
 a.stream() << "public:" << std::endl;
-a.stream() << "    virtual ~" << v.name().simple() << "() noexcept = 0;" << std::endl;
+a.stream() << "    virtual ~" << v.name().simple() << "()" << a.make_noexcept_keyword_text() << " = 0;" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
             if (v.parent()) {
@@ -134,7 +134,7 @@ a.stream() << "    virtual void visit(" << qn << "&) { }" << std::endl;
             }
 a.stream() << "};" << std::endl;
 a.stream() << std::endl;
-a.stream() << "inline " << v.name().simple() << "::~" << v.name().simple() << "() noexcept { }" << std::endl;
+a.stream() << "inline " << v.name().simple() << "::~" << v.name().simple() << "()" << a.make_noexcept_keyword_text() << " { }" << std::endl;
 a.stream() << std::endl;
         } // snf
 a.stream() << std::endl;

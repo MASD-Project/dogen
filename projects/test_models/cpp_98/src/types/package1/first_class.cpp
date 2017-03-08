@@ -15,7 +15,7 @@ first_class::first_class(
     : public_attribute_(public_attribute),
       private_attribute_(private_attribute) { }
 
-void first_class::swap(first_class& other) noexcept {
+void first_class::swap(first_class& other) {
     using std::swap;
     swap(public_attribute_, other.public_attribute_);
     swap(private_attribute_, other.private_attribute_);
