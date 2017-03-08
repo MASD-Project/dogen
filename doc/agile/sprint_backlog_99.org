@@ -344,6 +344,9 @@ Sample:
     "yarn.output_language": [ "csharp", "cpp" ]
 #+end_src
 
+This error has been picked up by codacy too:
+
+- [[https://www.codacy.com/app/marco-craveiro/dogen/commit?cid%3D79696432&bid%3D3493157&utm_campaign%3Dnew_commit&utm_medium%3DEmail&utm_source%3DInternal][Commit 91886c6]]&
 
 *** Add =targetver.h= support                                         :story:
 
