@@ -49,6 +49,7 @@ path input_enable_facet_serialization_json(
 path input_csharp_model_json("yarn.json/input/CSharpModel.json");
 path input_all_path_and_directory_settings_json(
     "yarn.json/input/all_path_and_directory_settings.json");
+path input_split_project_json("yarn.json/input/split_project.json");
 
 path expected("yarn.json/expected");
 path actual("yarn.json/actual");
@@ -127,6 +128,10 @@ path yarn_json::input_enable_facet_serialization_json() {
 path yarn_json::input_all_path_and_directory_settings_json() {
     return validating_resolver::resolve(
         ::input_all_path_and_directory_settings_json);
+}
+
+path yarn_json::input_split_project_json() {
+    return validating_resolver::resolve(::input_split_project_json);
 }
 
 path yarn_json::input_csharp_model_json() {

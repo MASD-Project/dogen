@@ -93,6 +93,27 @@ test_configuration make_test_configuration(const std::string& model_name,
     return r;
 }
 
+test_configuration make_split_project_configuration(const bool json = false) {
+    const auto target(json ?
+        yarn_json::input_split_project_json() :
+        yarn_dia::input_split_project_dia());
+    const auto model_name(target.stem().string());
+    auto r(make_test_configuration(model_name, target, actual_dia_dir));
+
+    /*
+     * note that we keep the project name just to make the life easier
+     * for the rebaselining scripts.
+     */
+    r.options.output_directory_path() /= "split_project";
+
+    r.options.cpp_headers_output_directory_path(
+        r.options.output_directory_path());
+    const boost::filesystem::path p("dir/inc/another");
+    r.options.cpp_headers_output_directory_path() /= p;
+    r.options.output_directory_path() /= "some_dir";
+    return r;
+}
+
 bool execute_test(const test_configuration& tc) {
     /*
      * Ensure the actual directory is empty before we run the
@@ -232,25 +253,9 @@ BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_dia
     BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
 }
 
-BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code) {
-    SETUP_TEST_LOG("split_project_model_generates_expected_code");
-
-    const auto dia(yarn_dia::input_split_project_dia());
-    const auto model_name(dia.stem().string());
-    auto tc(make_test_configuration(model_name, dia, actual_dia_dir));
-
-    /*
-     * note that we keep the project name just to make the life easier
-     * for the rebaselining scripts.
-     */
-    tc.options.output_directory_path() /= "split_project";
-
-    tc.options.cpp_headers_output_directory_path(
-        tc.options.output_directory_path());
-    const boost::filesystem::path p("dir/inc/another");
-    tc.options.cpp_headers_output_directory_path() /= p;
-    tc.options.output_directory_path() /= "some_dir";
-
+BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_dia) {
+    SETUP_TEST_LOG("split_project_model_generates_expected_code_dia");
+    const auto tc(make_split_project_configuration());
     BOOST_CHECK(execute_test(tc));
 }
 
@@ -344,6 +349,12 @@ BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_jso
     SETUP_TEST_LOG("all_path_and_directory_settings_generates_expected_code_json");
     const auto json(yarn_json::input_all_path_and_directory_settings_json());
     BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
+}
+
+BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_json) {
+    SETUP_TEST_LOG("split_project_model_generates_expected_code_json");
+    const auto tc(make_split_project_configuration());
+    BOOST_CHECK(execute_test(tc));
 }
 
 #ifdef ENABLE_CSHARP_TESTS
