@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
@@ -84,13 +85,29 @@ cmakelists_updater(const locator& l, const yarn::name& odb_options_name)
     : locator_(l), odb_options_name_(odb_options_name) {}
 
 void cmakelists_updater::visit(fabric::cmakelists& c) {
-    c.include_directory_name(locator_.include_directory_name());
+    const auto odb_fctn(dogen::quilt::cpp::formatters::odb::traits::facet());
+    if (locator_.project_path() == locator_.headers_project_path()) {
+        c.include_directory_path(locator_.include_directory_name());
+        c.odb_include_directory_path(
+            locator_.make_relative_include_path_for_facet(odb_fctn)
+            .generic_string());
+    } else {
+        /*
+         * We need to compute relative paths, from the project
+         * directory into the headers project directory.
+         */
+        const auto id(locator_.make_full_path_to_include_directory());
+        const auto rp(id.lexically_relative(locator_.project_path()));
+
+        c.include_directory_path(rp.generic_string());
+        c.odb_include_directory_path((rp /
+                locator_.make_relative_include_path_for_facet(odb_fctn,
+                    true/*for_include_statement*/))
+            .generic_string());
+    }
+
     c.source_directory_name(locator_.source_directory_name());
 
-    const auto odb_fctn(dogen::quilt::cpp::formatters::odb::traits::facet());
-    c.odb_include_directory_path(
-        locator_.make_relative_include_path_for_facet(odb_fctn)
-        .generic_string());
     c.odb_inclusion_directory_path(
         locator_.make_relative_include_path_for_facet(odb_fctn,
             true/*for_include_statement*/).generic_string());

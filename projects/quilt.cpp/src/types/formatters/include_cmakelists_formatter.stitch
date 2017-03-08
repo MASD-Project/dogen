@@ -80,8 +80,8 @@ format(const context& ctx, const yarn::element& e) const {
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/<#= c.source_directory_name() #>)
 
 install(
-    DIRECTORY <#= c.include_directory_name() #>/
-    DESTINATION <#= c.include_directory_name() #>/
+    DIRECTORY <#= c.include_directory_path() #>/
+    DESTINATION <#= c.include_directory_path() #>/
     COMPONENT headers
     FILES_MATCHING PATTERN "*.<#= c.header_file_extension() #>")
 <#+
@@ -127,7 +127,7 @@ foreach(odb_file ${all_odb_files})
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/<#= c.odb_options_file_path() #>
             --output-dir ${include_odb_dir}/
             --odb-epilogue '\#include \"<#= c.odb_inclusion_directory_path() #>/${odb_file}\"'
-            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/<#= c.include_directory_name() #>
+            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/<#= c.include_directory_path() #>
             ${include_types_dir}/${type_name}.<#= c.header_file_extension() #>)
 
         add_dependencies(odb_<#= model_name #> ${target_name})

@@ -15110,13 +15110,13 @@ an enumeration, false otherwise.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O118">
       <dia:attribute name="obj_pos">
-        <dia:point val="260,43"/>
+        <dia:point val="261.917,34.75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="259.95,42.95;277.105,53.05"/>
+        <dia:rectangle val="261.867,34.7;279.022,44.8"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="260,43"/>
+        <dia:point val="261.917,34.75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="17.055"/>
@@ -15214,7 +15214,7 @@ an enumeration, false otherwise.#</dia:string>
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#include_directory_name#</dia:string>
+            <dia:string>#include_directory_path#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#std::string#</dia:string>
@@ -15546,7 +15546,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="278.447,59.9498"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="268.477,52.95;279.197,60.7498"/>
+        <dia:rectangle val="270.394,44.7;279.197,60.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15554,8 +15554,8 @@ an enumeration, false otherwise.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="278.447,59.9498"/>
         <dia:point val="278.447,56"/>
-        <dia:point val="268.527,56"/>
-        <dia:point val="268.527,53"/>
+        <dia:point val="270.444,56"/>
+        <dia:point val="270.444,44.75"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -15776,7 +15776,7 @@ an enumeration, false otherwise.#</dia:string>
         <dia:point val="323.645,60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="322.895,46.55;333.882,60.8"/>
+        <dia:rectangle val="322.895,46.55;333.883,60.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

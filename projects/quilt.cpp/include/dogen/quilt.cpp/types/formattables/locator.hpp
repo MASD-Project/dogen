@@ -161,6 +161,11 @@ public:
      */
     boost::filesystem::path project_path() const;
 
+    /**
+     * @brief Top-level headers project directory.
+     */
+    boost::filesystem::path headers_project_path() const;
+
 public:
     /**
      * @brief Name of the include directory.
@@ -191,6 +196,11 @@ public:
      */
     boost::filesystem::path make_inclusion_path_for_cpp_header(
         const yarn::name& n, const std::string& archetype) const;
+
+    /**
+     * @brief Generate the full path to the include directory
+     */
+    boost::filesystem::path make_full_path_to_include_directory() const;
 
     /**
      * @brief Generate the full path for C++ headers.

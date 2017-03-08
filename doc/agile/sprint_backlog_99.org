@@ -148,6 +148,7 @@ model due to this problem:
 
 *** COMPLETED Split include and source directories                    :story:
     CLOSED: [2017-03-08 Wed 14:39]
+    CLOCK: [2017-03-08 Wed 15:52]--[2017-03-08 Wed 16:29] =>  0:37
     CLOCK: [2017-03-08 Wed 15:47]--[2017-03-08 Wed 15:51] =>  0:04
     CLOCK: [2017-03-08 Wed 15:16]--[2017-03-08 Wed 15:46] =>  0:30
     CLOCK: [2017-03-08 Wed 14:40]--[2017-03-08 Wed 15:15] =>  0:35

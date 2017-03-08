@@ -1,12 +1,12 @@
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/src)
 
 install(
-    DIRECTORY include/
-    DESTINATION include/
+    DIRECTORY ../../dir/inc/another/split_project/include/
+    DESTINATION ../../dir/inc/another/split_project/include/
     COMPONENT headers
     FILES_MATCHING PATTERN "*.hpp")
 
-set(include_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/test_models/split_project/odb")
+set(include_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/../../dir/inc/another/split_project/include/dogen/test_models/split_project/odb")
 set(all_odb_files "")
 file(GLOB_RECURSE all_odb_files RELATIVE
     "${include_odb_dir}/"
@@ -42,7 +42,7 @@ foreach(odb_file ${all_odb_files})
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
             --output-dir ${include_odb_dir}/
             --odb-epilogue '\#include \"dogen/test_models/split_project/odb/${odb_file}\"'
-            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
+            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/../../dir/inc/another/split_project/include
             ${include_types_dir}/${type_name}.hpp)
 
         add_dependencies(odb_split_project ${target_name})

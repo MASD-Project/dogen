@@ -102,8 +102,8 @@ format(const context& ctx, const yarn::element& e) const {
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "install(" << std::endl;
-a.stream() << "    DIRECTORY " << c.include_directory_name() << "/" << std::endl;
-a.stream() << "    DESTINATION " << c.include_directory_name() << "/" << std::endl;
+a.stream() << "    DIRECTORY " << c.include_directory_path() << "/" << std::endl;
+a.stream() << "    DESTINATION " << c.include_directory_path() << "/" << std::endl;
 a.stream() << "    COMPONENT headers" << std::endl;
 a.stream() << "    FILES_MATCHING PATTERN \"*." << c.header_file_extension() << "\")" << std::endl;
         if (a.is_odb_facet_enabled()) {
@@ -147,7 +147,7 @@ a.stream() << "            COMMAND ${ODB_EXECUTABLE}" << std::endl;
 a.stream() << "            --options-file ${CMAKE_CURRENT_SOURCE_DIR}/" << c.odb_options_file_path() << std::endl;
 a.stream() << "            --output-dir ${include_odb_dir}/" << std::endl;
 a.stream() << "            --odb-epilogue '\\#include \\\"" << c.odb_inclusion_directory_path() << "/${odb_file}\\\"'" << std::endl;
-a.stream() << "            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/" << c.include_directory_name() << std::endl;
+a.stream() << "            -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/" << c.include_directory_path() << std::endl;
 a.stream() << "            ${include_types_dir}/${type_name}." << c.header_file_extension() << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "        add_dependencies(odb_" << model_name << " ${target_name})" << std::endl;

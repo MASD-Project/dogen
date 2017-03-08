@@ -339,6 +339,10 @@ boost::filesystem::path locator::project_path() const {
     return project_path_;
 }
 
+boost::filesystem::path locator::headers_project_path() const {
+    return headers_project_path_;
+}
+
 std::string locator::include_directory_name() const {
     return configuration_.include_directory_name();
 }
@@ -381,14 +385,17 @@ boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
     return make_inclusion_path(archetype, extension, n);
 }
 
-boost::filesystem::path locator::make_full_path_for_cpp_header(
-    const yarn::name& n, const std::string& archetype) const {
-
+boost::filesystem::path locator::make_full_path_to_include_directory() const {
     auto r(headers_project_path_);
     const auto& cfg(configuration_);
     r /= cfg.include_directory_name();
-    r /= make_inclusion_path_for_cpp_header(n, archetype);
+    return r;
+}
 
+boost::filesystem::path locator::make_full_path_for_cpp_header(
+    const yarn::name& n, const std::string& archetype) const {
+    auto r(make_full_path_to_include_directory());
+    r /= make_inclusion_path_for_cpp_header(n, archetype);
     return r;
 }
 

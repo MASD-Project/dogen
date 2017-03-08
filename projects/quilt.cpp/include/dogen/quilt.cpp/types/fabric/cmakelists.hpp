@@ -54,7 +54,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const std::string& include_directory_name,
+        const std::string& include_directory_path,
         const std::string& source_directory_name,
         const std::string& odb_include_directory_path,
         const std::string& odb_inclusion_directory_path,
@@ -83,10 +83,10 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::string& include_directory_name() const;
-    std::string& include_directory_name();
-    void include_directory_name(const std::string& v);
-    void include_directory_name(const std::string&& v);
+    const std::string& include_directory_path() const;
+    std::string& include_directory_path();
+    void include_directory_path(const std::string& v);
+    void include_directory_path(const std::string&& v);
 
     const std::string& source_directory_name() const;
     std::string& source_directory_name();
@@ -147,7 +147,7 @@ public:
     cmakelists& operator=(cmakelists other);
 
 private:
-    std::string include_directory_name_;
+    std::string include_directory_path_;
     std::string source_directory_name_;
     std::string odb_include_directory_path_;
     std::string odb_inclusion_directory_path_;

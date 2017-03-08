@@ -44,7 +44,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar << make_nvp("include_directory_name", v.include_directory_name_);
+    ar << make_nvp("include_directory_path", v.include_directory_path_);
     ar << make_nvp("source_directory_name", v.source_directory_name_);
     ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
     ar << make_nvp("odb_inclusion_directory_path", v.odb_inclusion_directory_path_);
@@ -62,7 +62,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar >> make_nvp("include_directory_name", v.include_directory_name_);
+    ar >> make_nvp("include_directory_path", v.include_directory_path_);
     ar >> make_nvp("source_directory_name", v.source_directory_name_);
     ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
     ar >> make_nvp("odb_inclusion_directory_path", v.odb_inclusion_directory_path_);
