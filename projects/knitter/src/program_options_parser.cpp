@@ -53,6 +53,8 @@ const std::string log_level_arg("log-level");
 const std::string log_directory_arg("log-directory");
 const std::string target_arg("target");
 const std::string output_dir_arg("output-directory");
+const std::string cpp_headers_output_directory_arg(
+    "cpp-headers-output-directory");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
@@ -123,7 +125,11 @@ program_options_parser::make_output_options_description() const {
         ("output-directory,o",
             value<std::string>(),
             "Output directory for the generated code. "
-            "Defaults to the current working directory.");
+            "Defaults to the current working directory.")
+        ("cpp-headers-output-directory,c",
+            value<std::string>(),
+            "If set, the c++ header files will be placed at this location."
+            "If not set, they are placed inside of output-directory.");
 
     return r;
 }
@@ -210,8 +216,13 @@ make_knitting_options(const variables_map& vm) const {
     if (!vm.count(output_dir_arg))
         r.output_directory_path(boost::filesystem::current_path());
     else {
-        const auto output_str(vm[output_dir_arg].as<std::string>());
-        r.output_directory_path(boost::filesystem::absolute(output_str));
+        const auto s(vm[output_dir_arg].as<std::string>());
+        r.output_directory_path(boost::filesystem::absolute(s));
+    }
+
+    if (vm.count(cpp_headers_output_directory_arg)) {
+        const auto s(vm[cpp_headers_output_directory_arg].as<std::string>());
+        r.cpp_headers_output_directory(boost::filesystem::absolute(s));
     }
 
     return r;

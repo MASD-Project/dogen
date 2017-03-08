@@ -178,16 +178,16 @@
         <dia:point val="-59,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-59.05,-32.05;-40.355,-24.35"/>
+        <dia:rectangle val="-59.05,-32.05;-37.66,-23.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-59,-32"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="18.594999999999999"/>
+        <dia:real val="21.289999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="7.5999999999999996"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#knitting_options#</dia:string>
@@ -404,6 +404,29 @@
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Full path to the directory in which to place the generated code.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#cpp_headers_output_directory#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#boost::filesystem::path#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If set, all c++ include files will be placed at this location.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -645,7 +668,7 @@
         <dia:point val="-33,-32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-49.7525,-37.75;-32.25,-31.2"/>
+        <dia:rectangle val="-48.405,-37.75;-32.25,-31.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -653,8 +676,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="-33,-32"/>
         <dia:point val="-33,-37"/>
-        <dia:point val="-49.7025,-37"/>
-        <dia:point val="-49.7025,-32"/>
+        <dia:point val="-48.355,-37"/>
+        <dia:point val="-48.355,-32"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

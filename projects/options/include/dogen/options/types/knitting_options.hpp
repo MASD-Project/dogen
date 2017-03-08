@@ -56,6 +56,7 @@ public:
         const bool force_write,
         const std::vector<std::string>& ignore_patterns,
         const boost::filesystem::path& output_directory_path,
+        const boost::filesystem::path& cpp_headers_output_directory,
         const boost::filesystem::path& log_directory);
 
 private:
@@ -122,6 +123,16 @@ public:
     void output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
+    /**
+     * @brief If set, all c++ include files will be placed at this location.
+     */
+    /**@{*/
+    const boost::filesystem::path& cpp_headers_output_directory() const;
+    boost::filesystem::path& cpp_headers_output_directory();
+    void cpp_headers_output_directory(const boost::filesystem::path& v);
+    void cpp_headers_output_directory(const boost::filesystem::path&& v);
+    /**@}*/
+
     const boost::filesystem::path& log_directory() const;
     boost::filesystem::path& log_directory();
     void log_directory(const boost::filesystem::path& v);
@@ -144,6 +155,7 @@ private:
     bool force_write_;
     std::vector<std::string> ignore_patterns_;
     boost::filesystem::path output_directory_path_;
+    boost::filesystem::path cpp_headers_output_directory_;
     boost::filesystem::path log_directory_;
 };
 
