@@ -134,8 +134,8 @@ std::string traits::cpp::disable_facet_directories() {
     return r;
 }
 
-std::string traits::cpp::cpp_standard() {
-    static std::string r("quilt.cpp.cpp_standard");
+std::string traits::cpp::standard() {
+    static std::string r("quilt.cpp.standard");
     return r;
 }
 

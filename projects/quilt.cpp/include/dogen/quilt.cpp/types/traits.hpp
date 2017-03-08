@@ -151,7 +151,7 @@ struct traits {
         /**
          * @brief Which C++ standard to use.
          */
-        static std::string cpp_standard();
+        static std::string standard();
 
         struct helper {
             /**

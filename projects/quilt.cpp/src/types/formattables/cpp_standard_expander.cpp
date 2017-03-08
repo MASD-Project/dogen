@@ -61,7 +61,7 @@ cpp_standard_expander::type_group cpp_standard_expander::
 make_type_group(const annotations::type_repository& atrp) const {
     const annotations::type_repository_selector s(atrp);
     type_group r;
-    const auto cs(traits::cpp::cpp_standard());
+    const auto cs(traits::cpp::standard());
     r.cpp_standard = s.select_type_by_name(cs);
     return r;
 }

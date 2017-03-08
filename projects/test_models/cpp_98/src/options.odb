@@ -1,0 +1,28 @@
+# enable C++11
+--std c++11
+
+# use the boost profile
+--profile boost
+
+# generate queries and embedded schemas
+--generate-query
+--generate-schema
+--schema-format embedded
+
+# use extensions similar to the dogen ones
+# --ixx-suffix .ipp
+# --hxx-suffix .hpp
+--cxx-suffix .cpp
+
+# fix domain includes
+--include-regex '%(.*).hpp%dogen/cpp_98/types/$1.hpp%'
+
+# fix odb generated includes
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/cpp_98/odb/$1-odb$2%'
+--include-regex '%dogen/cpp_98/types/(.*)-odb(.*)%dogen/cpp_98/odb/$1-odb$2%'
+
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix DOGEN_CPP_98_ODB

@@ -257,8 +257,8 @@
   },
   {
     "name": {
-      "simple": "cpp_standard",
-      "qualified": "quilt.cpp.cpp_standard"
+      "simple": "standard",
+      "qualified": "quilt.cpp.standard"
     },
     "archetype_location": {
       "family": "quilt",

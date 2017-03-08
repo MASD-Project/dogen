@@ -1,0 +1,42 @@
+{
+  "model_name": "cpp_98",
+  "external_modules": "dogen::test_models",
+  "documentation": "Tests support for C++ 98.\n",
+  "annotation": {
+    "yarn.dia.comment": "true",
+    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.input_language": "cpp",
+    "quilt.cpp.enabled": "true",
+    "quilt.csharp.enabled": "false",
+    "quilt.cpp.standard": "c++-98"
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "first_class",
+        "internal_modules": "package1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "public_attribute"
+          },
+          "unparsed_type": "int"
+        },
+        {
+          "name": {
+            "simple": "private_attribute"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "package1"
+      },
+      "meta_type": "module"
+    }
+  ]
+}

@@ -53,6 +53,7 @@ path input_enable_facet_serialization_dia(
 path input_all_path_and_directory_settings_dia(
     "yarn.dia/input/all_path_and_directory_settings.dia");
 path input_split_project_dia("yarn.dia/input/split_project.dia");
+path input_cpp_98_dia("yarn.dia/input/cpp_98.dia");
 path input_csharp_model_dia("yarn.dia/input/CSharpModel.dia");
 
 path expected("yarn.dia/expected");
@@ -211,6 +212,10 @@ path yarn_dia::input_all_path_and_directory_settings_dia() {
 
 path yarn_dia::input_split_project_dia() {
     return resolver::resolve(::input_split_project_dia);
+}
+
+path yarn_dia::input_cpp_98_dia() {
+    return resolver::resolve(::input_cpp_98_dia);
 }
 
 path yarn_dia::input_csharp_model_dia() {

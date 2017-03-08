@@ -35,6 +35,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc/another/split_project/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_98/include
     )
 
 #
@@ -73,6 +74,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/boost_model)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/some_dir/split_project)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_98)
 
 # copy all generated files into the expected directory of test data
 foreach(dia_model ${all_dia_test_models})

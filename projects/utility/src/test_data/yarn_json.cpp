@@ -46,10 +46,12 @@ path input_enable_facet_io_json("yarn.json/input/enable_facet_io.json");
 path input_enable_facet_serialization_json(
     "yarn.json/input/enable_facet_serialization.json"
     );
-path input_csharp_model_json("yarn.json/input/CSharpModel.json");
 path input_all_path_and_directory_settings_json(
     "yarn.json/input/all_path_and_directory_settings.json");
 path input_split_project_json("yarn.json/input/split_project.json");
+path input_cpp_98_json("yarn.json/input/cpp_98.json");
+path input_csharp_model_json("yarn.json/input/CSharpModel.json");
+
 
 path expected("yarn.json/expected");
 path actual("yarn.json/actual");
@@ -132,6 +134,10 @@ path yarn_json::input_all_path_and_directory_settings_json() {
 
 path yarn_json::input_split_project_json() {
     return validating_resolver::resolve(::input_split_project_json);
+}
+
+path yarn_json::input_cpp_98_json() {
+    return validating_resolver::resolve(::input_cpp_98_json);
 }
 
 path yarn_json::input_csharp_model_json() {

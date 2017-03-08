@@ -259,6 +259,12 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_dia) {
     BOOST_CHECK(execute_test(tc));
 }
 
+BOOST_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_dia) {
+    SETUP_TEST_LOG("cpp_98_model_generates_expected_code_dia");
+    const auto dia(yarn_dia::input_cpp_98_dia());
+    BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
+}
+
 #ifdef ENABLE_CSHARP_TESTS
 
 BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {
@@ -357,12 +363,18 @@ BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_json) {
     BOOST_CHECK(execute_test(tc));
 }
 
+BOOST_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_json) {
+    SETUP_TEST_LOG("cpp_98_model_generates_expected_code_json");
+    const auto json(yarn_json::input_cpp_98_json());
+    BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
+}
+
 #ifdef ENABLE_CSHARP_TESTS
 
 BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
     SETUP_TEST_LOG("csharp_model_generates_expected_code_json");
-    const auto dia(yarn_json::input_csharp_model_json());
-    BOOST_CHECK(test_knit_workflow(dia, actual_json_dir));
+    const auto json(yarn_json::input_csharp_model_json());
+    BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
 }
 
 #endif // ENABLE_CSHARP_TESTS
