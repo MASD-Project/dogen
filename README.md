@@ -89,6 +89,9 @@ cmake ../.. -DCMAKE_BUILD_TYPE=Release -G 'Visual Studio 14 2015 Win64'
 cmake --build . --config Release --target ALL_BUILD
 ```
 
+**Important**: We link statically against Boost at present, so be sure
+to build the static libraries.
+
 # Demo
 
 At present we don't have a recent demo of Dogen, but this fairly old
