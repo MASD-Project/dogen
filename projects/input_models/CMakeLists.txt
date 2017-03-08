@@ -24,7 +24,7 @@ if (DOGEN_KNITTER_COMMAND)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/test/.*)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/tests/.*)
 
-    set(other_options --log-level debug)
+    set(other_options --log-level ${DOGEN_LOG_LEVEL})
     set(other_options ${other_options} --delete-extra-files)
 
     set(common_arguments --output-directory ${projects_dir}/)

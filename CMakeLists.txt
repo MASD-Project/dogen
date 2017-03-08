@@ -307,6 +307,11 @@ else()
 endif()
 
 #
+# Log level to use for all Dogen tools
+#
+set(DOGEN_LOG_LEVEL "debug")
+
+#
 # knitter setup.
 #
 list(APPEND CMAKE_PROGRAM_PATH ${stage_bin_dir})
