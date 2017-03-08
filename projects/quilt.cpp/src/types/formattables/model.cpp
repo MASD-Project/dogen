@@ -25,15 +25,20 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
+model::model()
+    : cpp_standard_(static_cast<dogen::quilt::cpp::formattables::cpp_standards>(0)) { }
+
 model::model(
     const dogen::yarn::name& name,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
-    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties)
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
+    const dogen::quilt::cpp::formattables::cpp_standards cpp_standard)
     : name_(name),
       streaming_properties_(streaming_properties),
       formattables_(formattables),
-      facet_properties_(facet_properties) { }
+      facet_properties_(facet_properties),
+      cpp_standard_(cpp_standard) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -41,13 +46,15 @@ void model::swap(model& other) noexcept {
     swap(streaming_properties_, other.streaming_properties_);
     swap(formattables_, other.formattables_);
     swap(facet_properties_, other.facet_properties_);
+    swap(cpp_standard_, other.cpp_standard_);
 }
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
         streaming_properties_ == rhs.streaming_properties_ &&
         formattables_ == rhs.formattables_ &&
-        facet_properties_ == rhs.facet_properties_;
+        facet_properties_ == rhs.facet_properties_ &&
+        cpp_standard_ == rhs.cpp_standard_;
 }
 
 model& model::operator=(model other) {
@@ -118,6 +125,14 @@ void model::facet_properties(const std::unordered_map<std::string, dogen::quilt:
 
 void model::facet_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>&& v) {
     facet_properties_ = std::move(v);
+}
+
+dogen::quilt::cpp::formattables::cpp_standards model::cpp_standard() const {
+    return cpp_standard_;
+}
+
+void model::cpp_standard(const dogen::quilt::cpp::formattables::cpp_standards v) {
+    cpp_standard_ = v;
 }
 
 } } } }

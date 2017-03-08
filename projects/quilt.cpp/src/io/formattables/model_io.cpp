@@ -23,6 +23,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 
@@ -99,7 +100,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"name\": " << v.name() << ", "
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"formattables\": " << v.formattables() << ", "
-      << "\"facet_properties\": " << v.facet_properties()
+      << "\"facet_properties\": " << v.facet_properties() << ", "
+      << "\"cpp_standard\": " << v.cpp_standard()
       << " }";
     return(s);
 }

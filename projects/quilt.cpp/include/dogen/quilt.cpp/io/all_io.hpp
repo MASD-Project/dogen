@@ -32,6 +32,7 @@
 #include "dogen/quilt.cpp/io/fabric/master_header_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
+#include "dogen/quilt.cpp/io/formattables/cpp_standards_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/directive_group_io.hpp"

@@ -32,6 +32,7 @@
 #include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/cpp_standards_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/facet_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/streaming_properties_ser.hpp"
 
@@ -46,6 +47,7 @@ void save(Archive& ar,
     ar << make_nvp("streaming_properties", v.streaming_properties_);
     ar << make_nvp("formattables", v.formattables_);
     ar << make_nvp("facet_properties", v.facet_properties_);
+    ar << make_nvp("cpp_standard", v.cpp_standard_);
 }
 
 template<typename Archive>
@@ -56,6 +58,7 @@ void load(Archive& ar,
     ar >> make_nvp("streaming_properties", v.streaming_properties_);
     ar >> make_nvp("formattables", v.formattables_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
+    ar >> make_nvp("cpp_standard", v.cpp_standard_);
 }
 
 } }

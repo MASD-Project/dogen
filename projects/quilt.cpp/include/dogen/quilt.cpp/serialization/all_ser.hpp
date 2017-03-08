@@ -31,6 +31,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/cpp_standards_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/directive_group_ser.hpp"
