@@ -24,10 +24,10 @@ if (DOGEN_KNITTER_COMMAND)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/test/.*)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/tests/.*)
 
-    set(other_options --log_level debug)
+    set(other_options --log-level debug)
     set(other_options ${other_options} --delete-extra-files)
 
-    set(common_arguments --output-dir ${projects_dir}/)
+    set(common_arguments --output-directory ${projects_dir}/)
     set(common_arguments ${common_arguments} ${other_options})
     set(common_arguments ${common_arguments} ${ignore_regexes})
 

@@ -49,10 +49,10 @@ const std::string missing_target("Mandatory parameter target is missing. ");
 
 const std::string help_arg("help");
 const std::string version_arg("version");
-const std::string log_level_arg("log_level");
-const std::string log_directory_arg("log_directory");
+const std::string log_level_arg("log-level");
+const std::string log_directory_arg("log-directory");
 const std::string target_arg("target");
-const std::string output_dir_arg("output-dir");
+const std::string output_dir_arg("output-directory");
 const std::string delete_extra_files_arg("delete-extra-files");
 const std::string ignore_files_matching_regex_arg(
     "ignore-files-matching-regex");
@@ -85,11 +85,11 @@ program_options_parser::make_general_options_description() const {
     r.add_options()
         ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.")
-        ("log_level,l",
+        ("log-level,l",
             value<std::string>(),
             "What level to use for logging. Options: "
             "trace, debug, info, warn, error. Defaults to 'info'.")
-        ("log_directory,g", value<std::string>(),
+        ("log-directory,g", value<std::string>(),
             "Directory to place the log file in. Defaults to 'log'.");
 
     return r;
@@ -120,7 +120,7 @@ program_options_parser::make_output_options_description() const {
             "Ignore files matching regex, if they are on the deletion list")
         ("force-write,f", "Always write files, even when there are "
             "no differences.")
-        ("output-dir,o",
+        ("output-directory,o",
             value<std::string>(),
             "Output directory for the generated code. "
             "Defaults to the current working directory.");

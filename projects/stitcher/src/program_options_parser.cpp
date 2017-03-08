@@ -37,8 +37,8 @@ const std::string at_least_one_argument("Expected at least one argument");
 const std::string empty;
 const std::string help_arg("help");
 const std::string version_arg("version");
-const std::string log_level_arg("log_level");
-const std::string log_directory_arg("log_directory");
+const std::string log_level_arg("log-level");
+const std::string log_directory_arg("log-directory");
 const std::string target_arg("target");
 const std::string force_write_arg("force-write");
 const std::string info_level("info");
@@ -66,9 +66,9 @@ program_options_parser::general_options_factory() const {
     r.add_options()
         ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.")
-        ("log_directory,g", value<std::string>(),
+        ("log-directory,g", value<std::string>(),
             "Where to place the log file. Defaults to log.")
-        ("log_level,l",
+        ("log-level,l",
             value<std::string>(),
             "What level to use for logging. Options: "
             "trace, debug, info, warn, error. Defaults to info.");

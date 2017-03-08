@@ -44,12 +44,15 @@ const std::string version_arg("--version");
 const std::string invalid_arg("--invalid-argument");
 const std::string invalid_value_arg("invalid-value");
 
-const std::string log_level_arg("--log_level");
+const std::string log_level_arg("--log-level");
 const std::string log_level_value_arg("info");
+const std::string log_directory_arg("--log-directory");
+const std::string log_directory_value_arg("some_dir");
+
 const std::string target_arg("--target");
 const std::string target_value_arg("some_target");
 
-const std::string output_dir_arg("--output-dir");
+const std::string output_dir_arg("--output-directory");
 const std::string output_dir_value_arg("an output dir");
 
 const std::string delete_extra_files_arg("--delete-extra-files");
@@ -337,16 +340,18 @@ BOOST_AUTO_TEST_CASE(supplying_output_options_results_in_expected_options) {
     BOOST_CHECK(ko.force_write());
 }
 
-BOOST_AUTO_TEST_CASE(supplying_log_level_results_in_options_with_expected_log_level) {
-    SETUP_TEST_LOG_SOURCE("supplying_log_level_results_in_options_with_expected_log_level");
+BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_options) {
+    SETUP_TEST_LOG_SOURCE("supplying_log_options_results_in_options_with_expected_log_options");
 
     const std::vector<std::string> o = {
         target_arg, target_value_arg,
-        log_level_arg, log_level_value_arg
+        log_level_arg, log_level_value_arg,
+        log_directory_arg, log_directory_value_arg
     };
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
     BOOST_CHECK(ko.log_level() == log_level_value_arg);
+    BOOST_CHECK(ko.log_directory() == log_directory_value_arg);
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_a_default_log_level_set) {
@@ -356,6 +361,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_a_default_log_level_set)
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
     BOOST_CHECK(!ko.log_level().empty());
+    BOOST_CHECK(!ko.log_directory().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()
