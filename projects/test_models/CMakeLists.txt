@@ -50,7 +50,10 @@ endif()
 add_custom_target(rebase_test_models)
 add_custom_target(diff_test_models)
 add_custom_target(clean_test_models)
-add_custom_target(build_test_models)
+
+# Note: no "build_" prefix to make it similar to all other build
+# targets.
+add_custom_target(test_models)
 
 #
 # add projects
@@ -137,8 +140,8 @@ foreach(dia_model ${all_dia_test_models})
     set(top_dir "${stage_test_data_dir}/${model_name}")
 
     set(model_folder_name "${model_name}")
-    set(actual_dir "${top_dir}/actual.dia/${model_folder_name}")
-    set(expected_dir "${top_dir}/expected/${model_folder_name}")
+    set(actual_dir "${top_dir}/actual.dia/")
+    set(expected_dir "${top_dir}/expected/")
     set(git_dir "${CMAKE_CURRENT_SOURCE_DIR}/${model_folder_name}")
 
     if (EXISTS "${actual_dir}")
@@ -146,26 +149,29 @@ foreach(dia_model ${all_dia_test_models})
         if (NOT ignore_dependencies)
             # Checking the presence of the cmake file to ensure this
             # is a valid project to build - e.g. ignore C#.
-            if (EXISTS "${expected_dir}/CMakeLists.txt")
-                add_dependencies(build_test_models ${main_target_name})
+            if (EXISTS "${expected_dir}/${model_folder_name}/CMakeLists.txt")
+                add_dependencies(test_models ${main_target_name})
             endif()
         endif()
 
         set(target_name "diff_${model_name}_dia")
         add_custom_target(${target_name}
+            COMMENT "Diffing ${model_name}"
             COMMAND diff -r -u ${expected_dir} ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(diff_test_models ${target_name})
 
         set(target_name "rebase_${model_name}_dia")
         add_custom_target(${target_name}
+            COMMENT "Rebasing ${model_name}"
             COMMAND rm -rf ${git_dir}
-            COMMAND cp -r ${actual_dir} ${git_dir}
+            COMMAND cp -r ${actual_dir}/${model_name} ${git_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(rebase_test_models ${target_name})
 
         set(target_name "clean_${model_name}_dia")
         add_custom_target(${target_name}
+            COMMENT "Cleaning ${model_name}"
             COMMAND rm -rf ${actual_dir}
             COMMAND mkdir ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
@@ -173,18 +179,20 @@ foreach(dia_model ${all_dia_test_models})
         message(STATUS "Processed model: ${model_name} (dia)")
     endif()
 
-    set(actual_dir "${top_dir}/actual.json/${model_folder_name}")
+    set(actual_dir "${top_dir}/actual.json/")
     if (EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
 
         set(target_name "diff_${model_name}_json")
         add_custom_target(${target_name}
+            COMMENT "Diffing ${model_name}"
             COMMAND diff -r -u ${expected_dir} ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
         add_dependencies(diff_test_models ${target_name})
 
         set(target_name "clean_${model_name}_json")
         add_custom_target(${target_name}
+            COMMENT "Cleaning ${model_name}"
             COMMAND rm -rf ${actual_dir}
             COMMAND mkdir ${actual_dir}
             WORKING_DIRECTORY ${stage_bin_dir})
