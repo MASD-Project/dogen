@@ -421,7 +421,11 @@ boost::filesystem::path locator::make_full_path_for_cpp_implementation(
 
 boost::filesystem::path locator::make_full_path_for_include_cmakelists(
     const yarn::name& n, const std::string& /*archetype*/) const {
-    auto r(headers_project_path_);
+    /*
+     * Note that we are placing the "include" CMake file with the
+     * project directory rather than the project headers directory.
+     */
+    auto r(project_path_);
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
 }

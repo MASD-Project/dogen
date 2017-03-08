@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-08 Wed 14:24]
+#+CAPTION: Clock summary at [2017-03-08 Wed 14:39]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *15:30* |       |      | 100.0 |
+| *Total time*                                                                | *15:44* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 15:30   |       |      | 100.0 |
-| Active                                                                      |         | 15:30 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   5.3 |
+| Stories                                                                     | 15:44   |       |      | 100.0 |
+| Active                                                                      |         | 15:44 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:49 |   5.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   2.8 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  19.1 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  32.7 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  18.9 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  32.2 |
+| COMPLETED Split include and source directories                              |         |       | 3:16 |  20.8 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   1.2 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |  11.6 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |  11.4 |
 | STARTED Build on tags for Windows                                           |         |       | 0:15 |   1.6 |
-| STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.9 |
-| STARTED Split include and source directories                                |         |       | 3:02 |  19.6 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 0:49 |   5.3 |
+| STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.8 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 0:49 |   5.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -146,6 +146,53 @@ model due to this problem:
 : #DOGEN quilt.cpp.include_directory_name=some_include_dir
 : #DOGEN quilt.cpp.odb.directory=odb_dir
 
+*** COMPLETED Split include and source directories                    :story:
+    CLOSED: [2017-03-08 Wed 14:39]
+    CLOCK: [2017-03-08 Wed 14:40]--[2017-03-08 Wed 15:15] =>  0:35
+    CLOCK: [2017-03-08 Wed 14:25]--[2017-03-08 Wed 14:39] =>  0:14
+    CLOCK: [2017-03-08 Wed 13:56]--[2017-03-08 Wed 14:24] =>  0:28
+    CLOCK: [2017-03-08 Wed 13:35]--[2017-03-08 Wed 13:55] =>  0:20
+    CLOCK: [2017-03-08 Wed 11:39]--[2017-03-08 Wed 12:33] =>  0:54
+    CLOCK: [2017-03-08 Wed 11:16]--[2017-03-08 Wed 11:38] =>  0:22
+    CLOCK: [2017-03-08 Wed 09:42]--[2017-03-08 Wed 10:09] =>  0:27
+    CLOCK: [2017-03-06 Mon 16:30]--[2017-03-06 Mon 17:01] =>  0:31
+
+We removed a feature due to lack of use cases: splitting source and
+include directories. It allowed having them placed in different
+top-level directories. It also meant that the computation of managed
+directories required access to the root object. In case we need to
+reactivate this story (if we find a use case), we keep track of the
+commits that removed the feature here.
+
+- [[https://github.com/DomainDrivenConsulting/dogen/commit/6103de47af5fc7d33710b216cac0fb1943416448][remove support for split projects]]
+
+This will be implemented slightly differently this time round
+though. Instead of a "split project" option and two additional options
+for include and source, we'll just add a new option for include:
+
+: output-cpp-include-dir
+
+If present, it will be used for the c++ include directory. If not
+present, the behaviour will remain as is. We can propagate this
+information all the way to the locator, where it will do the right
+thing.
+
+Major problem: all of the CMake file relationships breakdown because
+they had assumed include and source had the same parent directory. We
+now need to:
+
+- compute relative paths between include and source;
+- move top-level CMake file to stay with source.
+
+Merged stories:
+
+*Handling of include cmakelists in split projects is not correct*
+
+At present we are only generating a cmakelists file for include
+folders on non-split projects. This means that the header files for
+split projects won't be packaged up. It also means that for ODB
+projects we won't get the ODB targets.
+
 *** STARTED Check for incompatibility between input language and enabled kernels :story:
     CLOCK: [2017-03-06 Mon 22:20]--[2017-03-06 Mon 22:31] =>  0:11
 
@@ -200,43 +247,6 @@ with split project mode (we just have flat directories in two
 different top-level directories), which is nice.
 
 We should check that =enable_unique_file_names= is set to true.
-
-*** STARTED Split include and source directories                      :story:
-    CLOCK: [2017-03-08 Wed 13:56]--[2017-03-08 Wed 14:24] =>  0:28
-    CLOCK: [2017-03-08 Wed 13:35]--[2017-03-08 Wed 13:55] =>  0:20
-    CLOCK: [2017-03-08 Wed 11:39]--[2017-03-08 Wed 12:33] =>  0:54
-    CLOCK: [2017-03-08 Wed 11:16]--[2017-03-08 Wed 11:38] =>  0:22
-    CLOCK: [2017-03-08 Wed 09:42]--[2017-03-08 Wed 10:09] =>  0:27
-    CLOCK: [2017-03-06 Mon 16:30]--[2017-03-06 Mon 17:01] =>  0:31
-
-We removed a feature due to lack of use cases: splitting source and
-include directories. It allowed having them placed in different
-top-level directories. It also meant that the computation of managed
-directories required access to the root object. In case we need to
-reactivate this story (if we find a use case), we keep track of the
-commits that removed the feature here.
-
-- [[https://github.com/DomainDrivenConsulting/dogen/commit/6103de47af5fc7d33710b216cac0fb1943416448][remove support for split projects]]
-
-This will be implemented slightly differently this time round
-though. Instead of a "split project" option and two additional options
-for include and source, we'll just add a new option for include:
-
-: output-cpp-include-dir
-
-If present, it will be used for the c++ include directory. If not
-present, the behaviour will remain as is. We can propagate this
-information all the way to the locator, where it will do the right
-thing.
-
-Merged stories:
-
-*Handling of include cmakelists in split projects is not correct*
-
-At present we are only generating a cmakelists file for include
-folders on non-split projects. This means that the header files for
-split projects won't be packaged up. It also means that for ODB
-projects we won't get the ODB targets.
 
 *** STARTED Handling of visual studio projects and solutions is incorrect :story:
     CLOCK: [2017-03-07 Tue 20:56]--[2017-03-07 Tue 21:00] =>  0:04
