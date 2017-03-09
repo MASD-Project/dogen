@@ -122,11 +122,7 @@ if (CMAKE_COMPILER_IS_GNUCXX OR CMAKE_COMPILER_IS_CLANGXX)
     # enable RTTI
     # -fvisibility=hidden
     add_definitions(-D_GLIBCXX_USE_CXX11_ABI=1)
-    if (WIN32)
-        set(other_flags "-std=gnu++14")
-    else()
-        set(other_flags "-std=c++14")
-    endif()
+    set(CMAKE_CXX_STANDARD 14)
     set(other_flags "${other_flags} -frtti -fvisibility-inlines-hidden")
     set(other_flags "${other_flags} -fvisibility=default")
 
