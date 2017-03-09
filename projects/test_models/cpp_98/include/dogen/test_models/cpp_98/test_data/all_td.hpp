@@ -7,6 +7,7 @@
 
 #include "dogen/test_models/cpp_98/test_data/child_td.hpp"
 #include "dogen/test_models/cpp_98/test_data/parent_td.hpp"
+#include "dogen/test_models/cpp_98/test_data/no_default_ctor_td.hpp"
 #include "dogen/test_models/cpp_98/test_data/package1/first_class_td.hpp"
 
 #endif

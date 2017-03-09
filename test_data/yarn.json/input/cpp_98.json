@@ -33,6 +33,21 @@
     },
     {
       "name": {
+        "simple": "no_default_ctor"
+      },
+      "meta_type": "object",
+      "documentation": "This class does not require a default constructor due to using simple types.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "first_class",
         "internal_modules": "package1"
       },

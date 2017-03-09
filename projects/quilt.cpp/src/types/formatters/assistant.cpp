@@ -296,12 +296,25 @@ bool assistant::supports_defaulted_functions() const {
 
 bool assistant::requires_manual_default_constructor() const {
     const auto& ap(context_.element_properties().aspect_properties());
-    return ap.requires_manual_default_constructor();
+
+    /*
+     * In C++ 98 we must always create a default constructor because
+     * we cannot make use of the defaulted functions.
+     */
+    return is_cpp_standard_98() || ap.requires_manual_default_constructor();
+}
+
+bool assistant::supports_move_operator() const {
+    return !is_cpp_standard_98();
 }
 
 bool assistant::requires_manual_move_constructor() const {
     const auto& ap(context_.element_properties().aspect_properties());
-    return ap.requires_manual_move_constructor();
+
+    /*
+     * C++ 98 does not support move constructors.
+     */
+    return !is_cpp_standard_98() && ap.requires_manual_move_constructor();
 }
 
 bool assistant::requires_stream_manipulators() const {

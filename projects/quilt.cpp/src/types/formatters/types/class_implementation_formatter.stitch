@@ -92,10 +92,12 @@ format(const context& ctx, const yarn::element& e) const {
                 // FIXME: indentation is all off too.
                 std::ostringstream ss;
                 bool is_first(true);
+                bool found(false);
                 for (const auto attr : o.local_attributes()) {
                     if (!attr.parsed_type().is_current_simple_type())
                         continue;
 
+                    found = true;
                     if (!is_first)
                         ss << "," << std::endl << "      ";
 
@@ -108,7 +110,7 @@ format(const context& ctx, const yarn::element& e) const {
                 ss << " { }";
                 const std::string out(ss.str());
 #>
-    : <#= out #>
+    <#= (found ? ": " : "") #><#= out #>
 <#+
             }
 
@@ -486,18 +488,22 @@ const <#= a.get_qualified_name(attr.parsed_type()) #>& <#= sn #>::<#= attr.name(
                         }
 #>
 }
+<#+
+                        if (a.supports_move_operator()) {
+#>
 
 <#= (o.is_fluent() ? sn + "&" : "void") #> <#= sn #>::<#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v) {
     <#= a.make_member_variable_name(attr) #> = std::move(v);
 <#+
-                        if (o.is_fluent()) {
+                            if (o.is_fluent()) {
 #>
     return *this;
 <#+
-                        }
+                            }
 #>
 }
 <#+
+                        }
                     }
                 }
             }

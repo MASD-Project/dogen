@@ -309,8 +309,12 @@ public:
 #>
     <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> <#= attr.name().simple() #>();
     <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #><#= a.make_by_ref_text(attr) #> v);
+<#+
+                        if (a.supports_move_operator()) {
+#>
     <#= a.make_setter_return_type(sn, attr) #> <#= attr.name().simple() #>(const <#= a.get_qualified_name(attr.parsed_type()) #>&& v);
 <#+
+                        }
                     }
                     a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
 #>

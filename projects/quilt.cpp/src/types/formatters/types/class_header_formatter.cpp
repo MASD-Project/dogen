@@ -304,7 +304,9 @@ a.stream() << std::endl;
                         }
 a.stream() << "    " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " " << attr.name().simple() << "();" << std::endl;
 a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << a.make_by_ref_text(attr) << " v);" << std::endl;
+                        if (a.supports_move_operator()) {
 a.stream() << "    " << a.make_setter_return_type(sn, attr) << " " << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v);" << std::endl;
+                        }
                     }
                     a.comment_end_method_group(attr.documentation(), !attr.is_immutable());
 a.stream() << std::endl;

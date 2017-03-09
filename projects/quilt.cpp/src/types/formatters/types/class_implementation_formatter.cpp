@@ -152,10 +152,12 @@ a.stream() << sn << "::" << sn << "()" << std::endl;
                 // FIXME: indentation is all off too.
                 std::ostringstream ss;
                 bool is_first(true);
+                bool found(false);
                 for (const auto attr : o.local_attributes()) {
                     if (!attr.parsed_type().is_current_simple_type())
                         continue;
 
+                    found = true;
                     if (!is_first)
                         ss << "," << std::endl << "      ";
 
@@ -167,7 +169,7 @@ a.stream() << sn << "::" << sn << "()" << std::endl;
                 }
                 ss << " { }";
                 const std::string out(ss.str());
-a.stream() << "    : " << out << std::endl;
+a.stream() << "    " << (found ? ": " : "") << out << std::endl;
             }
 
             /*
@@ -455,13 +457,15 @@ a.stream() << "    " << a.make_member_variable_name(attr) << " = v;" << std::end
 a.stream() << "    return *this;" << std::endl;
                         }
 a.stream() << "}" << std::endl;
+                        if (a.supports_move_operator()) {
 a.stream() << std::endl;
 a.stream() << (o.is_fluent() ? sn + "&" : "void") << " " << sn << "::" << attr.name().simple() << "(const " << a.get_qualified_name(attr.parsed_type()) << "&& v) {" << std::endl;
 a.stream() << "    " << a.make_member_variable_name(attr) << " = std::move(v);" << std::endl;
-                        if (o.is_fluent()) {
+                            if (o.is_fluent()) {
 a.stream() << "    return *this;" << std::endl;
-                        }
+                            }
 a.stream() << "}" << std::endl;
+                        }
                     }
                 }
             }

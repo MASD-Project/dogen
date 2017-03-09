@@ -176,6 +176,12 @@ public:
      */
     bool supports_defaulted_functions() const;
 
+    /**
+     * @brief If true, the current standard supports defaulted
+     * functions.
+     */
+    bool supports_move_operator() const;
+
 public:
     /**
      * @brief If true, the current element requires a manually
