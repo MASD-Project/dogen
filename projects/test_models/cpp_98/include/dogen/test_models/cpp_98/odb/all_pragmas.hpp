@@ -5,6 +5,8 @@
 #pragma once
 #endif
 
+#include "dogen/test_models/cpp_98/odb/child_pragmas.hpp"
+#include "dogen/test_models/cpp_98/odb/parent_pragmas.hpp"
 #include "dogen/test_models/cpp_98/odb/package1/first_class_pragmas.hpp"
 
 #endif

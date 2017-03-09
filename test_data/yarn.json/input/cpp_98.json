@@ -14,6 +14,25 @@
   "elements": [
     {
       "name": {
+        "simple": "child"
+      },
+      "meta_type": "object",
+      "parents": [
+        {
+          "simple": "parent"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "first_class",
         "internal_modules": "package1"
       },
@@ -28,6 +47,20 @@
         {
           "name": {
             "simple": "private_attribute"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parent"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
           },
           "unparsed_type": "int"
         }

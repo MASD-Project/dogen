@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-09 Thu 15:07]
+#+CAPTION: Clock summary at [2017-03-09 Thu 15:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *23:05* |       |      | 100.0 |
+| *Total time*                                                                | *23:29* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 23:05   |       |      | 100.0 |
-| Active                                                                      |         | 23:05 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   4.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.9 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  12.9 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  21.9 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  23.2 |
+| Stories                                                                     | 23:29   |       |      | 100.0 |
+| Active                                                                      |         | 23:29 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   4.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.8 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  12.6 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  21.6 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  22.9 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.8 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   7.8 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   7.7 |
 | STARTED Build on tags for Windows                                           |         |       | 0:15 |   1.1 |
 | STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.6 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   5.1 |
-| STARTED Add C++-03 mode                                                     |         |       | 4:41 |  20.3 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   5.0 |
+| STARTED Add C++-03 mode                                                     |         |       | 5:05 |  21.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -377,6 +377,7 @@ paths. We need to catalogue them all and name them properly.
   the include path.
 
 *** STARTED Add C++-03 mode                                            :epic:
+    CLOCK: [2017-03-09 Thu 15:08]--[2017-03-09 Thu 15:32] =>  0:24
     CLOCK: [2017-03-09 Thu 15:00]--[2017-03-09 Thu 15:07] =>  0:07
     CLOCK: [2017-03-09 Thu 13:42]--[2017-03-09 Thu 14:59] =>  1:17
     CLOCK: [2017-03-09 Thu 08:21]--[2017-03-09 Thu 09:10] =>  0:49

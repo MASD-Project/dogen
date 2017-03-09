@@ -42,21 +42,25 @@ BOOST_AUTO_TEST_SUITE(cpp_98_tests)
 BOOST_AUTO_TEST_CASE(validate_equality) {
     SETUP_TEST_LOG("validate_equality");
     test_equality<first_class_generator>();
+    test_equality<child_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_swap) {
     SETUP_TEST_LOG("validate_swap");
     test_swap<first_class_generator>();
+    test_swap<child_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     SETUP_TEST_LOG("validate_move_assignment_copy");
     test_move_assignment_copy<first_class_generator>();
+    test_move_assignment_copy<child_generator>();
 }
 
 BOOST_AUTO_TEST_CASE(validate_serialisation) {
     SETUP_TEST_LOG("validate_serialisation");
     roundtrip_type<first_class_generator>();
+    roundtrip_type<child_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()
