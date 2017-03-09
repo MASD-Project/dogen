@@ -166,6 +166,18 @@ public:
 
 public:
     /**
+     * @brief If true, the current standard is set to c++ 98.
+     */
+    bool is_cpp_standard_98() const;
+
+    /**
+     * @brief If true, the current standard supports defaulted
+     * functions.
+     */
+    bool supports_defaulted_functions() const;
+
+public:
+    /**
      * @brief If true, the current element requires a manually
      * implemented default constructor.
      */

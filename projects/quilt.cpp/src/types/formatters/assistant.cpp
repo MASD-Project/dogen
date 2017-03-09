@@ -140,21 +140,21 @@ void assistant::validate() const {
 }
 
 std::string assistant::make_final_keyword_text(const yarn::object& o) const {
-    if (context_.model().cpp_standard() == formattables::cpp_standards::cpp_98)
+    if (is_cpp_standard_98())
         return empty;
 
     return o.is_final() ? final_keyword_text : empty;
 }
 
 std::string assistant::make_override_keyword_text() const {
-    if (context_.model().cpp_standard() == formattables::cpp_standards::cpp_98)
+    if (is_cpp_standard_98())
         return empty;
 
     return override_keyword_text;
 }
 
 std::string assistant::make_noexcept_keyword_text() const {
-    if (context_.model().cpp_standard() == formattables::cpp_standards::cpp_98)
+    if (is_cpp_standard_98())
         return empty;
 
     return noexcept_keyword_text;
@@ -283,6 +283,15 @@ get_facet_directory_for_facet(const std::string& facet_name) const {
 std::string assistant::get_odb_facet_directory() const {
     using formatters::odb::traits;
     return get_facet_directory_for_facet(traits::facet());
+}
+
+bool assistant::is_cpp_standard_98() const {
+    using formattables::cpp_standards;
+    return context_.model().cpp_standard() == cpp_standards::cpp_98;
+}
+
+bool assistant::supports_defaulted_functions() const {
+    return !is_cpp_standard_98();
 }
 
 bool assistant::requires_manual_default_constructor() const {

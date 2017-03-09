@@ -5,6 +5,7 @@ file(GLOB_RECURSE files RELATIVE
 
 add_library(cpp_98 STATIC ${files})
 set_target_properties(cpp_98 PROPERTIES
+    CXX_STANDARD 98
     OUTPUT_NAME dogen.cpp_98)
 
 install(TARGETS cpp_98 ARCHIVE DESTINATION lib COMPONENT libraries)

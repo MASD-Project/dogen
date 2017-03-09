@@ -98,34 +98,38 @@ class <#= sn #> <#= a.make_final_keyword_text(o) #>{
 class <#= sn #> <#= a.make_final_keyword_text(o) #>: public <#= pqn #> {
 <#+
             }
-#>
-public:
-<#+
+
             /*
              * Compiler generated constructors and destructors.
              */
-            if (!a.requires_manual_default_constructor())
+            if (a.supports_defaulted_functions()) {
+#>
+public:
+<#+
+                if (!a.requires_manual_default_constructor())
 #>
     <#= sn #>() = default;
     <#= sn #>(const <#= sn #>&) = default;
 <#+
-            if (!a.requires_manual_move_constructor())
+                if (!a.requires_manual_move_constructor())
 #>
     <#= sn #>(<#= sn #>&&) = default;
 <#+
-            if (!o.in_inheritance_relationship())
+                if (!o.in_inheritance_relationship())
 #>
     ~<#= sn #>() = default;
 <#+
-            if (o.is_immutable())
+                if (o.is_immutable())
 #>
     <#= sn #>& operator=(const <#= sn #>&) = delete;
 <#+
-            else if (o.all_attributes().empty())
+                else if (o.all_attributes().empty())
 #>
     <#= sn #>& operator=(const <#= sn #>&) = default;
 
 <#+
+            }
+
             /*
              * Manually generated default constructor.
              */

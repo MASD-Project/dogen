@@ -146,22 +146,26 @@ a.stream() << "class " << sn << " " << a.make_final_keyword_text(o) << "{" << st
                 const auto pqn(a.get_qualified_name(pn));
 a.stream() << "class " << sn << " " << a.make_final_keyword_text(o) << ": public " << pqn << " {" << std::endl;
             }
-a.stream() << "public:" << std::endl;
+
             /*
              * Compiler generated constructors and destructors.
              */
-            if (!a.requires_manual_default_constructor())
+            if (a.supports_defaulted_functions()) {
+a.stream() << "public:" << std::endl;
+                if (!a.requires_manual_default_constructor())
 a.stream() << "    " << sn << "() = default;" << std::endl;
 a.stream() << "    " << sn << "(const " << sn << "&) = default;" << std::endl;
-            if (!a.requires_manual_move_constructor())
+                if (!a.requires_manual_move_constructor())
 a.stream() << "    " << sn << "(" << sn << "&&) = default;" << std::endl;
-            if (!o.in_inheritance_relationship())
+                if (!o.in_inheritance_relationship())
 a.stream() << "    ~" << sn << "() = default;" << std::endl;
-            if (o.is_immutable())
+                if (o.is_immutable())
 a.stream() << "    " << sn << "& operator=(const " << sn << "&) = delete;" << std::endl;
-            else if (o.all_attributes().empty())
+                else if (o.all_attributes().empty())
 a.stream() << "    " << sn << "& operator=(const " << sn << "&) = default;" << std::endl;
 a.stream() << std::endl;
+            }
+
             /*
              * Manually generated default constructor.
              */

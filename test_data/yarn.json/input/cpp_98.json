@@ -8,7 +8,8 @@
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.csharp.enabled": "false",
-    "quilt.cpp.standard": "c++-98"
+    "quilt.cpp.standard": "c++-98",
+    "quilt.cpp.hash.enabled": "false"
   },
   "elements": [
     {

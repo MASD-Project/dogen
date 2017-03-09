@@ -15,11 +15,6 @@ namespace package1 {
 
 class first_class {
 public:
-    first_class(const first_class&) = default;
-    first_class(first_class&&) = default;
-    ~first_class() = default;
-
-public:
     first_class();
 
 public:

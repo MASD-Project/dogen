@@ -245,7 +245,7 @@ Actually we can already achieve this:
 
 - set =quilt.cpp.disable_facet_directories= to true
 - set =quilt.cpp.include_directory_name= to empty
-- set =source_directory_name= to empty
+- set =quilt.cpp.source_directory_name= to empty
 
 It is however a bit painful. It would be nice to have a shorthand for
 this, which could be the "flat directory" mode. It is also compatible
@@ -334,7 +334,6 @@ includes. There are some differences though:
   "apply archetype postfix" supplied as an argument. Since we have the
   Visual Studio element we have visibility of all enabled versions.
 
-
 *** Split out the file extension from the formatter                   :story:
 
 At present we have handled file extensions in one of two ways:
@@ -378,6 +377,8 @@ paths. We need to catalogue them all and name them properly.
   the include path.
 
 *** STARTED Add C++-03 mode                                            :epic:
+    CLOCK: [2017-03-09 Thu 13:42]--[2017-03-09 Thu 14:59] =>  1:17
+    CLOCK: [2017-03-09 Thu 08:21]--[2017-03-09 Thu 09:10] =>  0:49
     CLOCK: [2017-03-08 Wed 23:32]--[2017-03-08 Wed 23:50] =>  0:18
     CLOCK: [2017-03-08 Wed 22:15]--[2017-03-08 Wed 23:31] =>  1:16
     CLOCK: [2017-03-08 Wed 20:26]--[2017-03-08 Wed 21:01] =>  0:35
