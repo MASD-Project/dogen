@@ -50,6 +50,7 @@ set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
 target_link_libraries(${tests_name}
     cpp_model
+    cpp_98
     compressed
     disable_facet_folders
     enable_facet_types
