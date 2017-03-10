@@ -99,7 +99,7 @@ endif()
 #    include_directories(SYSTEM ${ODB_INCLUDE_DIR})
 #    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
 # else()
-    message(STATUS "odb not found.")
+#    message(STATUS "odb not found.")
 # endif()
 
 # packaging type
