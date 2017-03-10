@@ -18,3 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/new_name_tree_parser.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg2(logger_factory("yarn.new_name_tree_parser"));
+
+}
