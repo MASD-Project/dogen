@@ -92,6 +92,24 @@
         "simple": "package1"
       },
       "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "an_enumeration"
+      },
+      "meta_type": "enumeration",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "first"
+          }
+        },
+        {
+          "name": {
+            "simple": "second"
+          }
+        }
+      ]
     }
   ]
 }

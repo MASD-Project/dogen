@@ -9,6 +9,7 @@
 #include "dogen/test_models/cpp_98/types/cpp_98.hpp"
 #include "dogen/test_models/cpp_98/types/parent.hpp"
 #include "dogen/test_models/cpp_98/types/no_properties.hpp"
+#include "dogen/test_models/cpp_98/types/an_enumeration.hpp"
 #include "dogen/test_models/cpp_98/types/no_default_ctor.hpp"
 #include "dogen/test_models/cpp_98/types/package1/first_class.hpp"
 

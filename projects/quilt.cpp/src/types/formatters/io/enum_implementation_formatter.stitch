@@ -55,6 +55,11 @@ std::ostream& operator<<(std::ostream& s, const <#= ye.name().simple() #>& v) {
     switch (v) {
 <#+
             for (const auto& en : ye.enumerators()) {
+                if (a.is_cpp_standard_98())
+#>
+    case <#= en.name().simple() #>:
+<#+
+                else
 #>
     case <#= ye.name().simple() #>::<#= en.name().simple() #>:
         attr = "\"<#= en.name().simple() #>\"";

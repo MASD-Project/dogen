@@ -96,10 +96,15 @@ format(const context& ctx, const yarn::element& e) const {
             auto snf(a.make_scoped_namespace_formatter(ns));
 a.stream() << std::endl;
             a.comment(e.documentation());
-            if (ye.use_implementation_defined_underlying_element())
+            if (a.is_cpp_standard_98()) {
+a.stream() << "enum " << ye.name().simple() << " {" << std::endl;
+            } else {
+                if (ye.use_implementation_defined_underlying_element())
 a.stream() << "enum class " << ye.name().simple() << " {" << std::endl;
-            else
+                else
 a.stream() << "enum class " << ye.name().simple() << " : " << a.get_qualified_name(ye.underlying_element()) << " {" << std::endl;
+            }
+
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())

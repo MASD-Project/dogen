@@ -8,6 +8,7 @@
 #include "dogen/test_models/cpp_98/io/child_io.hpp"
 #include "dogen/test_models/cpp_98/io/parent_io.hpp"
 #include "dogen/test_models/cpp_98/io/no_properties_io.hpp"
+#include "dogen/test_models/cpp_98/io/an_enumeration_io.hpp"
 #include "dogen/test_models/cpp_98/io/no_default_ctor_io.hpp"
 #include "dogen/test_models/cpp_98/io/package1/first_class_io.hpp"
 

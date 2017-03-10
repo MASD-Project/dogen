@@ -44,14 +44,21 @@ format(const context& ctx, const yarn::element& e) const {
 
 <#+
             a.comment(e.documentation());
-            if (ye.use_implementation_defined_underlying_element())
+            if (a.is_cpp_standard_98()) {
+#>
+enum <#= ye.name().simple() #> {
+<#+
+            } else {
+                if (ye.use_implementation_defined_underlying_element())
 #>
 enum class <#= ye.name().simple() #> {
 <#+
-            else
+                else
 #>
 enum class <#= ye.name().simple() #> : <#= a.get_qualified_name(ye.underlying_element()) #> {
 <#+
+            }
+
             dogen::formatters::sequence_formatter sf(ye.enumerators().size());
             for (const auto& en : ye.enumerators()) {
                 if (ye.use_implementation_defined_enumerator_values())
