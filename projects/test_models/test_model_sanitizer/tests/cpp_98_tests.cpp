@@ -25,6 +25,7 @@
 #include "dogen/test_models/cpp_98/io/all_io.hpp"
 #include "dogen/test_models/cpp_98/serialization/all_ser.hpp"
 #include "dogen/test_models/cpp_98/test_data/all_td.hpp"
+#include "dogen/test_models/test_model_sanitizer/register_types.hpp"
 
 namespace {
 
