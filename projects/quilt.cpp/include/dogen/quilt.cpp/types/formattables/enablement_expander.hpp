@@ -50,6 +50,8 @@ private:
         annotations::type archetype_enabled;
         annotations::type facet_overwrite;
         annotations::type archetype_overwrite;
+
+        std::string facet_name;
     };
 
     friend std::ostream& operator<<(std::ostream& s,
@@ -69,6 +71,10 @@ private:
     global_enablement_configurations_type
     obtain_global_configurations(const global_type_group_type& gtg,
         const annotations::annotation& ra) const;
+
+    void validate_enabled_facets(
+        const global_enablement_configurations_type& gcs,
+        const formattables::cpp_standards cs) const;
 
     void update_facet_enablement(const formatters::repository& frp,
         const global_enablement_configurations_type& gcs, model& fm) const;

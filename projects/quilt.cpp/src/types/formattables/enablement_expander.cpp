@@ -28,6 +28,7 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/io/formattables/local_enablement_configuration_io.hpp"
@@ -44,6 +45,8 @@ const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
 const std::string archetype_not_found("Archetype not found: ");
+const std::string incompatible_facet(
+    "Facet is not compatible with C++ standard chosen: ");
 const std::string element_not_found("Element not found: ");
 const std::string default_value_unset("Default value not set for field: ");
 
@@ -103,6 +106,8 @@ make_global_type_group(const annotations::type_repository& atrp,
         gtg.facet_overwrite = s.select_type_by_name(al.facet(), ow);
         gtg.archetype_overwrite = s.select_type_by_name(al.archetype(), ow);
 
+        gtg.facet_name = al.facet();
+
         r[al.archetype()] = gtg;
     }
 
@@ -126,6 +131,7 @@ enablement_expander::obtain_global_configurations(
         global_enablement_configuration gec;
         gec.kernel_enabled(s.get_boolean_content_or_default(t.kernel_enabled));
         gec.facet_enabled(s.get_boolean_content_or_default(t.facet_enabled));
+        gec.facet_name(t.facet_name);
         gec.archetype_enabled(
             s.get_boolean_content_or_default(t.archetype_enabled));
         gec.facet_overwrite(
@@ -142,6 +148,32 @@ enablement_expander::obtain_global_configurations(
     BOOST_LOG_SEV(lg, debug) << "Created global enablement configuration. "
                              << "Result: " << r;
     return r;
+}
+
+void enablement_expander::validate_enabled_facets(
+    const global_enablement_configurations_type& gcs,
+    const formattables::cpp_standards cs) const {
+    BOOST_LOG_SEV(lg, debug) << "Validating enabled facets.";
+
+    if (cs == formattables::cpp_standards::cpp_98) {
+        using formatters::hash::traits;
+        const auto arch(traits::class_header_archetype());
+
+        const auto i(gcs.find(arch));
+        if (i == gcs.end()) {
+            BOOST_LOG_SEV(lg, error) << archetype_not_found << arch;
+            BOOST_THROW_EXCEPTION(expansion_error(archetype_not_found + arch));
+        }
+
+        const auto& gc(i->second);
+        if (gc.facet_enabled()) {
+            const auto fctn(gc.facet_name());
+            BOOST_LOG_SEV(lg, error) << incompatible_facet << fctn;
+            BOOST_THROW_EXCEPTION(expansion_error(incompatible_facet + fctn));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Validated enabled facets.";
 }
 
 void enablement_expander::update_facet_enablement(
@@ -450,6 +482,7 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
      * and update the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gtg, ra));
+    validate_enabled_facets(gcs, fm.cpp_standard());
     update_facet_enablement(frp, gcs, fm);
 
     /*

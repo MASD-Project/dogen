@@ -138,6 +138,13 @@ void model_expander::expand(
     expand_streaming(atrp, fm);
 
     /*
+     * C++ standard expansion must be done before enablement because
+     * we will use it to check that the enabled facets are compatible
+     * with the C++ standard (e.g. hash is not available for C++ 98).
+     */
+    expand_cpp_standard(atrp, ra, fm);
+
+    /*
      * Enablement expansion must be done before inclusion because
      * inclusion relies on it to know which formatters are enabled.
      */
@@ -166,7 +173,6 @@ void model_expander::expand(
     expand_facet_directories(l, fm);
     expand_formatting_properties(atrp, frp, fm);
     expand_cmakelists(l, fm);
-    expand_cpp_standard(atrp, ra, fm);
 }
 
 } } } }

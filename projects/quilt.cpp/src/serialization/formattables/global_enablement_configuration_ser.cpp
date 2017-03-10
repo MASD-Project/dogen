@@ -21,6 +21,7 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/serialization/optional.hpp>
@@ -39,6 +40,7 @@ void save(Archive& ar,
     const unsigned int /*version*/) {
     ar << make_nvp("kernel_enabled", v.kernel_enabled_);
     ar << make_nvp("facet_enabled", v.facet_enabled_);
+    ar << make_nvp("facet_name", v.facet_name_);
     ar << make_nvp("archetype_enabled", v.archetype_enabled_);
     ar << make_nvp("facet_overwrite", v.facet_overwrite_);
     ar << make_nvp("archetype_overwrite", v.archetype_overwrite_);
@@ -50,6 +52,7 @@ void load(Archive& ar,
     const unsigned int /*version*/) {
     ar >> make_nvp("kernel_enabled", v.kernel_enabled_);
     ar >> make_nvp("facet_enabled", v.facet_enabled_);
+    ar >> make_nvp("facet_name", v.facet_name_);
     ar >> make_nvp("archetype_enabled", v.archetype_enabled_);
     ar >> make_nvp("facet_overwrite", v.facet_overwrite_);
     ar >> make_nvp("archetype_overwrite", v.archetype_overwrite_);

@@ -34,6 +34,7 @@ global_enablement_configuration::global_enablement_configuration()
 global_enablement_configuration::global_enablement_configuration(global_enablement_configuration&& rhs)
     : kernel_enabled_(std::move(rhs.kernel_enabled_)),
       facet_enabled_(std::move(rhs.facet_enabled_)),
+      facet_name_(std::move(rhs.facet_name_)),
       archetype_enabled_(std::move(rhs.archetype_enabled_)),
       facet_overwrite_(std::move(rhs.facet_overwrite_)),
       archetype_overwrite_(std::move(rhs.archetype_overwrite_)) { }
@@ -41,11 +42,13 @@ global_enablement_configuration::global_enablement_configuration(global_enableme
 global_enablement_configuration::global_enablement_configuration(
     const bool kernel_enabled,
     const bool facet_enabled,
+    const std::string& facet_name,
     const bool archetype_enabled,
     const bool facet_overwrite,
     const boost::optional<bool>& archetype_overwrite)
     : kernel_enabled_(kernel_enabled),
       facet_enabled_(facet_enabled),
+      facet_name_(facet_name),
       archetype_enabled_(archetype_enabled),
       facet_overwrite_(facet_overwrite),
       archetype_overwrite_(archetype_overwrite) { }
@@ -54,6 +57,7 @@ void global_enablement_configuration::swap(global_enablement_configuration& othe
     using std::swap;
     swap(kernel_enabled_, other.kernel_enabled_);
     swap(facet_enabled_, other.facet_enabled_);
+    swap(facet_name_, other.facet_name_);
     swap(archetype_enabled_, other.archetype_enabled_);
     swap(facet_overwrite_, other.facet_overwrite_);
     swap(archetype_overwrite_, other.archetype_overwrite_);
@@ -62,6 +66,7 @@ void global_enablement_configuration::swap(global_enablement_configuration& othe
 bool global_enablement_configuration::operator==(const global_enablement_configuration& rhs) const {
     return kernel_enabled_ == rhs.kernel_enabled_ &&
         facet_enabled_ == rhs.facet_enabled_ &&
+        facet_name_ == rhs.facet_name_ &&
         archetype_enabled_ == rhs.archetype_enabled_ &&
         facet_overwrite_ == rhs.facet_overwrite_ &&
         archetype_overwrite_ == rhs.archetype_overwrite_;
@@ -87,6 +92,22 @@ bool global_enablement_configuration::facet_enabled() const {
 
 void global_enablement_configuration::facet_enabled(const bool v) {
     facet_enabled_ = v;
+}
+
+const std::string& global_enablement_configuration::facet_name() const {
+    return facet_name_;
+}
+
+std::string& global_enablement_configuration::facet_name() {
+    return facet_name_;
+}
+
+void global_enablement_configuration::facet_name(const std::string& v) {
+    facet_name_ = v;
+}
+
+void global_enablement_configuration::facet_name(const std::string&& v) {
+    facet_name_ = std::move(v);
 }
 
 bool global_enablement_configuration::archetype_enabled() const {

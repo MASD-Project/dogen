@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-10 Fri 11:27]
+#+CAPTION: Clock summary at [2017-03-10 Fri 12:01]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:11* |       |      | 100.0 |
+| *Total time*                                                                | *26:43* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:11   |       |      | 100.0 |
-| Active                                                                      |         | 26:11 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.7 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  11.3 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  19.4 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  20.5 |
+| Stories                                                                     | 26:43   |       |      | 100.0 |
+| Active                                                                      |         | 26:43 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.8 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.6 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  11.1 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  19.0 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  20.1 |
+| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  31.1 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.7 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   6.9 |
-| STARTED Build on tags for Windows                                           |         |       | 0:15 |   1.0 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   6.7 |
+| STARTED Build on tags for Windows                                           |         |       | 0:15 |   0.9 |
 | STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.5 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   4.5 |
-| STARTED Add C++-03 mode                                                     |         |       | 7:47 |  29.7 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   4.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -198,6 +198,46 @@ At present we are only generating a cmakelists file for include
 folders on non-split projects. This means that the header files for
 split projects won't be packaged up. It also means that for ODB
 projects we won't get the ODB targets.
+
+*** COMPLETED Add C++-03 mode                                          :epic:
+    CLOSED: [2017-03-10 Fri 12:01]
+    CLOCK: [2017-03-10 Fri 11:28]--[2017-03-10 Fri 12:00] =>  0:32
+    CLOCK: [2017-03-10 Fri 11:02]--[2017-03-10 Fri 11:27] =>  0:25
+    CLOCK: [2017-03-10 Fri 10:12]--[2017-03-10 Fri 10:47] =>  0:35
+    CLOCK: [2017-03-09 Thu 15:33]--[2017-03-09 Thu 17:15] =>  1:42
+    CLOCK: [2017-03-09 Thu 15:08]--[2017-03-09 Thu 15:32] =>  0:24
+    CLOCK: [2017-03-09 Thu 15:00]--[2017-03-09 Thu 15:07] =>  0:07
+    CLOCK: [2017-03-09 Thu 13:42]--[2017-03-09 Thu 14:59] =>  1:17
+    CLOCK: [2017-03-09 Thu 08:21]--[2017-03-09 Thu 09:10] =>  0:49
+    CLOCK: [2017-03-08 Wed 23:32]--[2017-03-08 Wed 23:50] =>  0:18
+    CLOCK: [2017-03-08 Wed 22:15]--[2017-03-08 Wed 23:31] =>  1:16
+    CLOCK: [2017-03-08 Wed 20:26]--[2017-03-08 Wed 21:01] =>  0:35
+    CLOCK: [2017-03-08 Wed 17:32]--[2017-03-08 Wed 17:51] =>  0:19
+
+#+begin_quote
+*Story*: As a dogen user, I want to create models in C++ 03 so that I
+can interface with legacy code.
+#+end_quote
+
+It shouldn't be too hard to generate C++-03 code in addition to
+C++-14. We could follow the gcc/odb convention and have a =-std=
+option for this in meta-data. The only problem would be testing - at
+present the language settings comes from cmake, and we'd have to make
+sure the compiler is not in C++-14 mode when compiling test models
+in 03. Also, the mixing and matching of 03 with 14 may not be
+trivial. We should wait for a use case.
+
+It may be possible to add different flags to different projects in
+CMake.
+
+We should call this the c++ dialect.
+
+Tasks:
+
+- default ctors, final, noexcept. Need to manually add default
+  ctor (e.g. force it).
+- enums
+- need to disable ODB c++ 11 as well.
 
 *** STARTED Check for incompatibility between input language and enabled kernels :story:
     CLOCK: [2017-03-06 Mon 22:20]--[2017-03-06 Mon 22:31] =>  0:11
@@ -375,44 +415,6 @@ paths. We need to catalogue them all and name them properly.
   the headers. Only applicable to c++.
 - include directory: aka inclusion directory; directory to place in
   the include path.
-
-*** STARTED Add C++-03 mode                                            :epic:
-    CLOCK: [2017-03-10 Fri 11:02]--[2017-03-10 Fri 11:27] =>  0:25
-    CLOCK: [2017-03-10 Fri 10:12]--[2017-03-10 Fri 10:47] =>  0:35
-    CLOCK: [2017-03-09 Thu 15:33]--[2017-03-09 Thu 17:15] =>  1:42
-    CLOCK: [2017-03-09 Thu 15:08]--[2017-03-09 Thu 15:32] =>  0:24
-    CLOCK: [2017-03-09 Thu 15:00]--[2017-03-09 Thu 15:07] =>  0:07
-    CLOCK: [2017-03-09 Thu 13:42]--[2017-03-09 Thu 14:59] =>  1:17
-    CLOCK: [2017-03-09 Thu 08:21]--[2017-03-09 Thu 09:10] =>  0:49
-    CLOCK: [2017-03-08 Wed 23:32]--[2017-03-08 Wed 23:50] =>  0:18
-    CLOCK: [2017-03-08 Wed 22:15]--[2017-03-08 Wed 23:31] =>  1:16
-    CLOCK: [2017-03-08 Wed 20:26]--[2017-03-08 Wed 21:01] =>  0:35
-    CLOCK: [2017-03-08 Wed 17:32]--[2017-03-08 Wed 17:51] =>  0:19
-
-#+begin_quote
-*Story*: As a dogen user, I want to create models in C++ 03 so that I
-can interface with legacy code.
-#+end_quote
-
-It shouldn't be too hard to generate C++-03 code in addition to
-C++-14. We could follow the gcc/odb convention and have a =-std=
-option for this in meta-data. The only problem would be testing - at
-present the language settings comes from cmake, and we'd have to make
-sure the compiler is not in C++-14 mode when compiling test models
-in 03. Also, the mixing and matching of 03 with 14 may not be
-trivial. We should wait for a use case.
-
-It may be possible to add different flags to different projects in
-CMake.
-
-We should call this the c++ dialect.
-
-Tasks:
-
-- default ctors, final, noexcept. Need to manually add default
-  ctor (e.g. force it).
-- enums
-- need to disable ODB c++ 11 as well.
 
 *** Start signing all tags                                            :story:
 
