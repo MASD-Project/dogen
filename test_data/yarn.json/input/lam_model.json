@@ -4,29 +4,92 @@
   "annotation": {
     "yarn.dia.comment": "true",
     "yarn.dia.external_modules": "dogen::test_models",
-    "yarn.input_language": "cpp",
+    "yarn.input_language": "language_agnostic",
+    "yarn.output_language": "csharp",
     "quilt.cpp.enabled": "true",
-    "quilt.csharp.enabled": "false"
+    "quilt.csharp.enabled": "true"
   },
   "elements": [
     {
       "name": {
-        "simple": "first_class",
+        "simple": "builtins"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "lam::character"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "lam::byte"
+        },
+        {
+          "name": {
+            "simple": "prop_2"
+          },
+          "unparsed_type": "lam::integer8"
+        },
+        {
+          "name": {
+            "simple": "prop_3"
+          },
+          "unparsed_type": "lam::integer16"
+        },
+        {
+          "name": {
+            "simple": "prop_4"
+          },
+          "unparsed_type": "lam::integer32"
+        },
+        {
+          "name": {
+            "simple": "prop_5"
+          },
+          "unparsed_type": "lam::integer64"
+        },
+        {
+          "name": {
+            "simple": "prop_6"
+          },
+          "unparsed_type": "lam::integer"
+        },
+        {
+          "name": {
+            "simple": "prop_7"
+          },
+          "unparsed_type": "lam::single_floating"
+        },
+        {
+          "name": {
+            "simple": "prop_8"
+          },
+          "unparsed_type": "lam::double_floating"
+        },
+        {
+          "name": {
+            "simple": "prop_9"
+          },
+          "unparsed_type": "lam::boolean"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_in_package",
         "internal_modules": "package1"
       },
       "meta_type": "object",
       "attributes": [
         {
           "name": {
-            "simple": "public_attribute"
+            "simple": "prop_0"
           },
-          "unparsed_type": "int"
-        },
-        {
-          "name": {
-            "simple": "private_attribute"
-          },
-          "unparsed_type": "int"
+          "unparsed_type": "lam::integer"
         }
       ]
     },

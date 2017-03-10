@@ -62,6 +62,7 @@ public:
     static boost::filesystem::path input_all_path_and_directory_settings_dia();
     static boost::filesystem::path input_split_project_dia();
     static boost::filesystem::path input_cpp_98_dia();
+    static boost::filesystem::path input_lam_model_dia();
     static boost::filesystem::path input_csharp_model_dia();
 
     static boost::filesystem::path expected();

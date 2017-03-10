@@ -11,7 +11,7 @@
             {
                 "language" : "csharp",
                 "default_name" : {
-                    "simple": "uchar"
+                    "simple": "byte"
                 }
             }
         ]

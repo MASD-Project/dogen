@@ -265,6 +265,12 @@ BOOST_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_dia) {
     BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
 }
 
+BOOST_AUTO_TEST_CASE(lam_model_generates_expected_code_dia) {
+    SETUP_TEST_LOG("lam_model_generates_expected_code_dia");
+    const auto dia(yarn_dia::input_lam_model_dia());
+    BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
+}
+
 #ifdef ENABLE_CSHARP_TESTS
 
 BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {

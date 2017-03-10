@@ -1,0 +1,52 @@
+{
+  "model_name": "System",
+  "documentation": "System types.",
+  "annotation": {
+    "yarn.input_language": "csharp",
+    "yarn.is_proxy_model": true
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "Int16"
+      },
+      "meta_type": "builtin",
+      "is_default_enumeration_type": false,
+      "can_be_enumeration_underlier": true,
+      "can_be_primitive_underlier": true,
+      "annotation": {
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
+        "quilt.csharp.assistant.requires_assistance": true,
+        "quilt.csharp.assistant.method_postfix": "Int"
+      }
+    },
+    {
+      "name": {
+        "simple": "Int32"
+      },
+      "meta_type": "builtin",
+      "is_default_enumeration_type": false,
+      "can_be_enumeration_underlier": true,
+      "can_be_primitive_underlier": true,
+      "annotation": {
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
+        "quilt.csharp.assistant.requires_assistance": true,
+        "quilt.csharp.assistant.method_postfix": "Int"
+      }
+    },
+    {
+      "name": {
+        "simple": "Int64"
+      },
+      "meta_type": "builtin",
+      "is_default_enumeration_type": false,
+      "can_be_enumeration_underlier": true,
+      "can_be_primitive_underlier": true,
+      "annotation": {
+        "quilt.csharp.aspect.requires_static_reference_equals": false,
+        "quilt.csharp.assistant.requires_assistance": true,
+        "quilt.csharp.assistant.method_postfix": "Int"
+      }
+    }
+  ]
+}

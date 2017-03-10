@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-10 Fri 12:01]
+#+CAPTION: Clock summary at [2017-03-10 Fri 21:06]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:43* |       |      | 100.0 |
+| *Total time*                                                                | *27:33* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:43   |       |      | 100.0 |
-| Active                                                                      |         | 26:43 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.8 |
+| Stories                                                                     | 27:33   |       |      | 100.0 |
+| Active                                                                      |         | 27:33 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.6 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  11.1 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  19.0 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  20.1 |
-| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  31.1 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  10.8 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  18.4 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  19.5 |
+| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  30.2 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.7 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 1:48 |   6.7 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 2:38 |   9.6 |
 | STARTED Build on tags for Windows                                           |         |       | 0:15 |   0.9 |
 | STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.5 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   4.4 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   4.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -257,6 +257,8 @@ throw. But extracting the =configuration_factory= out of quilt
 workflow is not going to be easy without screwing up the API.
 
 *** STARTED Add a LAM test model just to validate existing functionality :story:
+    CLOCK: [2017-03-10 Fri 20:40]--[2017-03-10 Fri 21:06] =>  0:26
+    CLOCK: [2017-03-10 Fri 15:31]--[2017-03-10 Fri 15:55] =>  0:24
     CLOCK: [2017-03-07 Tue 14:07]--[2017-03-07 Tue 15:55] =>  1:48
 
 At present we have basic support for LAM. We should create a simple
