@@ -48,6 +48,12 @@
     },
     {
       "name": {
+        "simple": "no_properties"
+      },
+      "meta_type": "object"
+    },
+    {
+      "name": {
         "simple": "first_class",
         "internal_modules": "package1"
       },
