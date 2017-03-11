@@ -14,9 +14,9 @@ namespace dogen.test_models.lam_model
             value.prop_0 = AssistantSequenceGenerator.CreateChar(position + 0);
             value.prop_1 = AssistantSequenceGenerator.CreateByte(position + 1);
             value.prop_2 = AssistantSequenceGenerator.CreateShortByte(position + 2);
-            value.prop_3 = AssistantSequenceGenerator.CreateInt(position + 3);
+            value.prop_3 = AssistantSequenceGenerator.CreateShort(position + 3);
             value.prop_4 = AssistantSequenceGenerator.CreateInt(position + 4);
-            value.prop_5 = AssistantSequenceGenerator.CreateInt(position + 5);
+            value.prop_5 = AssistantSequenceGenerator.CreateLong(position + 5);
             value.prop_6 = AssistantSequenceGenerator.CreateInt(position + 6);
             value.prop_7 = AssistantSequenceGenerator.CreateFloat(position + 7);
             value.prop_8 = AssistantSequenceGenerator.CreateDouble(position + 8);

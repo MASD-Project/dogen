@@ -17,7 +17,7 @@
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Int"
+        "quilt.csharp.assistant.method_postfix": "Short"
       }
     },
     {
@@ -45,7 +45,7 @@
       "annotation": {
         "quilt.csharp.aspect.requires_static_reference_equals": false,
         "quilt.csharp.assistant.requires_assistance": true,
-        "quilt.csharp.assistant.method_postfix": "Int"
+        "quilt.csharp.assistant.method_postfix": "Long"
       }
     }
   ]
