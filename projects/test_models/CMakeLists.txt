@@ -36,6 +36,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc/another/split_project/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_98/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/lam_model/cpp/include
     )
 
 #
@@ -75,6 +76,7 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/test_model_sanitizer/tests)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/seam)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/split_project/some_dir/split_project)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/cpp_98)
+add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/lam_model/cpp)
 
 # copy all generated files into the expected directory of test data
 foreach(dia_model ${all_dia_test_models})
@@ -121,6 +123,9 @@ foreach(dia_model ${all_dia_test_models})
         elseif("${model_name}" STREQUAL "all_path_and_directory_settings")
             file(REMOVE_RECURSE "${expected_dir}/all_path_and_directory_settings/csharp_kernel/bin")
             file(REMOVE_RECURSE "${expected_dir}/all_path_and_directory_settings/csharp_kernel/obj")
+        elseif("${model_name}" STREQUAL "lam_model")
+            file(REMOVE_RECURSE "${expected_dir}/lam_model/cs/bin")
+            file(REMOVE_RECURSE "${expected_dir}/lam_model/cs/obj")
         endif()
     else()
         if(NOT EXISTS "${expected_dir}")
