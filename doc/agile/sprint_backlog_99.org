@@ -411,6 +411,15 @@ Notes:
 : set linesize 8192
 : set pagesize 50000
 
+*** Rename main Dogen package in Debian                               :story:
+
+At present we seem to have called our package =dogen-applications=:
+
+: $ apt-cache search dogen-applications
+: dogen-applications - The Domain Generator - Generates source code for domain driven development.
+
+We should try to call it just =dogen=.
+
 *** Split out the file extension from the formatter                   :story:
 
 At present we have handled file extensions in one of two ways:
