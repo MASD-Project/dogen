@@ -251,11 +251,11 @@ articles; hopefully the diagrams are sufficiently self-explanatory.
 
 You can open the diagram from the folder
 =projects/input_models/northwind.dia=. Here's a screenshot of most of
-the UML model - probably too small to read, unfortunately.
+the UML model - regrettably, a tad too small to read:
 
 #+begin_html
-<img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png" width="60%" height="60%"/>
-<div>Northwind Schema (C) Microsoft.</div>
+<img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png" width="90%" height="90%"/>
+<div>Dogen Northwind model.</div>
 #+end_html
 
 The first point of note in that diagram is - if you pardon the pun -
