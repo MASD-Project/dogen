@@ -51,10 +51,10 @@ confuse only one issue at a time, so we need to make sure we are only
 making use of v11 and purge all references to v12.
 
 To address this issue, we need to recompile ODB's oracle support. If
-you followed the instructions on Part II and you've have already
-installed it, you need to first remove it:
+you followed the instructions on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] and you've have already
+installed the ODB Oracle library, you'll need to remove it first:
 
-: rm /full/path/to/local/lib/libodb-oracle* /full/path/to/local/odb/oracle
+: rm /full/path/to/local/lib/libodb-oracle* /full/path/to/local/include/odb/oracle
 
 Replacing =/full/path/to/local= as required for your local
 setup. Then, you can follow the instructions as per previous post, but
@@ -118,8 +118,8 @@ With all of this said, lets resume from where we left off.
 * Installing the Remaining Packages
 
 We still have a number of packages to install, but fortunately the
-installation steps are quite straightforward so we'll cover them
-quickly in this section.
+installation steps are easy enough so we'll cover them quickly in this
+section.
 
 ** Dogen
 
@@ -201,8 +201,8 @@ exercise, but it's just easier this way.
 At long last, we can start to create our very "simple" project. I say
 simple, but in truth it ended up being a tad more complex than I'd
 liked, so it was easier to create a [[https://github.com/DomainDrivenConsulting/zango][GitHub project]] for it and then
-discuss it here in this post. In order to follow the remainder of this
-post, please clone the =zango= repository from GitHub:
+discuss it here. So, in order to follow the remainder of this post,
+please clone the =zango= repository from GitHub:
 
 #+begin_example
 : git clone git@github.com:DomainDrivenConsulting/zango.git
@@ -226,9 +226,9 @@ and develop ideas for Access.
 
 For the true DBAs out there: let's not get too hung-up on the
 "quality" of the database schema of Northwind; the purpose of this
-exercise is merely to exercise commonly used functionality on both
-Dogen and ODB. From this perspective, the Northwind database schema is
-more than adequate to test-drive all the features we're interested
+work is merely to exercise commonly used functionality on both Dogen
+and ODB. From this perspective, the Northwind database schema is more
+than adequate to test-drive all the features we're interested
 in. Whether you agree or not with the decisions the original creators
 of this schema made is a completely different matter, which is well
 beyond the scope of this series of posts.
@@ -250,8 +250,16 @@ articles; hopefully the diagrams are sufficiently self-explanatory.
 ** The Dogen Model for Northwind
 
 You can open the diagram from the folder
-=projects/input_models/northwind.dia=. The first point of note in that
-diagram is the UML note:
+=projects/input_models/northwind.dia=. Here's a screenshot of most of
+the UML model - probably too small to read, unfortunately.
+
+#+begin_html
+<img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png" width="60%" height="60%"/>
+<div>Northwind Schema (C) Microsoft.</div>
+#+end_html
+
+The first point of note in that diagram is - if you pardon the pun -
+the UML note.
 
 #+caption: UML Note from northwind model.
 https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_uml_note.png
