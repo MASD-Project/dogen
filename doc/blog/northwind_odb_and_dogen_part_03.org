@@ -15,20 +15,24 @@ Optimism is an occupational hazard of programming; feedback is the treatment.
 </table>
 #+end_html
 
-Welcome to the third part of a the series of N blog posts on using
-Dogen with ODB against an Oracle database ([[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]], [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]]). The story
-so far can be quickly summarised as follows: we got our Oracle Express
-database installed and set up by adding the required users; we built
-the ODB libraries and installed the ODB compiler. After this rather
-grand build up, we shall finally get to look at Dogen - just about.
+Welcome to the third part of a series of N blog posts on using Dogen
+with ODB against an Oracle database. If you want more than the TL;DR,
+please read [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]] and [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]]. Otherwise, the story so far can be
+quickly summarised as follows: we got our Oracle Express database
+installed and set up by adding the required users; we then built the
+ODB libraries and installed the ODB compiler. After this rather grand
+build up, we shall finally get to look at Dogen - just about - in Part
+III. It seems the series will have to be extended by at last one or
+two more parts in order to cover the material originally planned.
 
-I wasn't expecting N to become so large, but - like every good
-software project - I'm now realising you can only estimate the size of
-the series properly once you've actually finished it. And to rub salt
-to the wounds, before we can proceed we must start by addressing some
-of the instructions on the previous posts which were not quite right.
+To be honest, I wasn't expecting N to become so large, but - like
+every good software project - I'm now realising you can only estimate
+the size of the series properly once you've actually finished it. And
+to rub salt into the wounds, before we can proceed we must start by
+addressing some of the instructions on the previous posts which were
+not quite right.
 
-* Errata
+* Errare Humanum Est
 
 The first point we need to look at are the extra Oracle
 packages. Originally, when I checked my Oracle XE install I did not
@@ -50,36 +54,40 @@ will start to get some strange warnings. As usual, we try our best to
 confuse only one issue at a time, so we need to make sure we are only
 making use of v11 and purge all references to v12.
 
-To address this issue, we need to recompile ODB's oracle support. If
+To address this problem, we need to recompile ODB's oracle support. If
 you followed the instructions on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] and you've have already
 installed the ODB Oracle library, you'll need to remove it first:
 
 : rm /full/path/to/local/lib/libodb-oracle* /full/path/to/local/include/odb/oracle
 
-Replacing =/full/path/to/local= as required for your local
-setup. Then, you can follow the instructions as per previous post, but
-with *one crucial difference* at configure time: point to the Oracle
-XE directories instead of the OCI driver directories:
+Remember to replace =/full/path/to/local= with the path to your local
+directory. Then, you can build by following the instructions as per
+previous post, but with *one crucial difference* at configure time:
+point to the Oracle XE directories instead of the external OCI driver
+directories:
 
 #+begin_example
-: . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
-: LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local/local
+. /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local/local
 #+end_example
 
 This will result on a ODB Oracle library that uses the OCI driver from
 Oracle XE. You then just need to make sure you have executed
 =oracle_env.sh= before running your binary, as we shall see later
-on.
+on. Alas, as our update to [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]] indicated, we didn't really need to
+download SQLPlus separately either - it is also included in XE
+package - so really you can get away with just downloading XE and
+nothing else.
 
-The other, slightly minor alteration is that I removed the need for
-the =basic= schema. In truth, the entities placed in that schema were
-not adding a lot of value - their use cases are already covered by the
-entities in =northwind=. So we don't really need two schemas, just
-one.
+The other minor alteration to what was laid out on the original posts
+is that I removed the need for the =basic= database schema. In truth,
+the entities placed in that schema were not adding a lot of value;
+their use cases are already covered by the entities in =northwind=. So
+I removed the need for two schemas and collapsed them into one.
 
-One final note - not quite an "errata" as such but a worthwhile
-note. We didn't do a "proper" Oracle setup, so when you reboot your
-box you will find that the service is no longer running. You can
+One final note - not quite an /errata/ as such but a worthwhile note
+nonetheless. We didn't do a "proper" Oracle setup, so when you reboot
+your box you will find that the service is no longer running. You can
 easily restart it from the shell, logged in as root:
 
 #+begin_example
@@ -182,7 +190,7 @@ setup:
 ** Other Dependencies
 
 One final note on installations: I had previously assumed Boost to be
-installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][part II]] but - if nothing else, purely for the sake of
+installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] but - if nothing else, purely for the sake of
 completeness - here are the instructions to set it up, as well as
 CMake. We will need both of these in order to build our application,
 but we won't dwell on them /too/ much on them or else this series of
@@ -200,12 +208,12 @@ exercise, but it's just easier this way.
 
 At long last, we can start to create our very "simple" project. I say
 simple, but in truth it ended up being a tad more complex than I'd
-liked, so it was easier to create a [[https://github.com/DomainDrivenConsulting/zango][GitHub project]] for it and then
+liked, so it was easier to create a [[https://github.com/DomainDrivenConsulting/zango][GitHub repository]] for it and then
 discuss it here. So, in order to follow the remainder of this post,
-please clone the =zango= repository from GitHub:
+please clone =zango= from GitHub:
 
 #+begin_example
-: git clone git@github.com:DomainDrivenConsulting/zango.git
+git clone git@github.com:DomainDrivenConsulting/zango.git
 #+end_example
 
 ** Northwind Schema
@@ -241,11 +249,12 @@ relationships:
 <div>Northwind Schema (C) Microsoft.</div>
 #+end_html
 
-We can easily use this image to create a Dia diagram that follows
-Dogen's conventions and thus is ready for code-generation. At this
-juncture I must place yet another disclaimer: a proper explanation on
-how to use Dia (and UML in general) is outside the scope of these
-articles; hopefully the diagrams are sufficiently self-explanatory.
+Using this image we can manually extract all the required information
+to create a Dia diagram that follows Dogen's conventions - and thus is
+ready for code-generation. At this juncture I must place yet another
+disclaimer: a proper explanation on how to use Dia (and UML in
+general) is outside the scope of these articles; hopefully the
+diagrams are sufficiently self-explanatory.
 
 ** The Dogen Model for Northwind
 
@@ -264,13 +273,15 @@ the UML note.
 #+caption: UML Note from northwind model.
 https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_uml_note.png
 
-A few points of note here. All lines starting with =#DOGEN= are
-an extension mechanism used to supply meta-data into Dogen. First,
-lets have a very quick look at the model's more "general settings":
+This configuration is quite important so we'll discuss it a bit more
+detail. All lines starting with =#DOGEN= are an extension mechanism
+used to supply meta-data into Dogen. First, lets have a very quick
+look at the model's more "general settings":
 
 - =yarn.dia.comment=: this is a special command that tells Dogen to
   use this UML note as the source code comments for the namespace of
-  the model (i.e. =northwind=).
+  the model (i.e. =northwind=). Thus the text "The Northwind model is
+  a..." will become part of a doxygen comment for the namespace.
 - =yarn.dia.external_modules=: this places all types into the
   top-level namespace =northwind=.
 - =yarn.input_language=: the notation for types used in this model is
@@ -282,37 +293,45 @@ lets have a very quick look at the model's more "general settings":
 - =quilt.csharp.enabled=: As this is a C++-only model, we will disable
   C#.
 - =annotations.profile=: Do not worry too much about this knob, it
-  just sets a lot of default options for this project.
-
+  just sets a lot of default options for this project such as
+  copyright notices and so forth.
 
 Now, you will notice we hand-waved quite a lot on the description of
-these settings. It is very difficult to describe these things without
-giving the reader an immense amount of context about Dogen. This, of
-course, needs to be done - particularly since we haven't really spent
-the required time updating the manual. However, in the interest of
-keeping this series of posts somewhat focused on ODB and ORM, we'll
-just leave it at that.
+these settings. It is very difficult to describe them without giving
+the reader an immense amount of context about Dogen. This, of course,
+needs to be done - particularly since we haven't really spent the
+required time updating the manual. However, in the interest of keeping
+this series of posts somewhat focused on ODB and ORM, we'll just leave
+it at that, with a promise to create Dogen-specific posts on them.
 
-And talking about ORM, the next batch of settings is exactly related
-to that.
+Talking about ORM, the next batch of settings is exactly related to
+that.
 
 - =yarn.orm.database_system=: here, we're stating that we're
   interested in both =oracle= and =postgresql= databases.
 - =yarn.orm.letter_case=: this sets the "case" to use for all
   identifiers; either =upper_case= or =lower_case=. So if you choose
   =upper_case=, all your table names will be in upper case and
-  vice-versa.
+  vice-versa. This applies to all columns and object names on the
+  entirety of this model (e.g. =customers= becomes =CUSTOMERS= and so
+  forth).
 - =yarn.orm.schema_name=: finally we set the schema name to
   =northwind=. Remember that we are in upper case, so the name becomes
   =NORTHWIND=.
 
-The second point worth noticing is that there is a large overlapping
-between C++ classes and entities in the original diagram. For example,
-we have =customers and =suppliers= and =employees= as one would
-expect. Each of the attributes as the closest C++ type we could find
-that maps to the SQL type used on the original diagram. If one is to
-look at a properties of a few attributes, one can see more Dogen
-meta-data. Take  =customer_id= in the =customers= class:
+In addition to the meta-data, the second point worth noticing is that
+there is a large overlap between C++ classes and the entities in the
+original diagram. For example, we have =customers=, =suppliers=,
+=employees= and so forth - the Object-Relational Mapping is very
+"linear". This is a characteristic of the Dogen approach to ORM, but
+you do not necessarily need to use ODB in this manner; we discuss this
+in the next section. Finally, each of the attributes of these classes
+has the closest C++ type we could find that maps to the SQL type used
+on the original diagram.
+
+If one is to look at a properties of a few attributes in more detail,
+one can see additional Dogen meta-data. Take =customer_id= in the
+=customers= class:
 
 #+caption: Properties of customer_id in the customer class.
 https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_customer_id_attributes.png
@@ -321,26 +340,27 @@ The setting =yarn.orm.is_primary_key= tells Dogen that this attribute
 is the primary key of this class. Note that we did not use a
 =std::string= as the type of =customer_id= but instead we made use of
 a Dogen feature called "primitive types". Primitive types are simple
-wrappers around built-in types such as std::string that have little or
-no overhead after the compiler is done with them. They are useful when
-you want to use domain concepts to clarify intent rather than just use
-the class library types. This means that - for example - it is obvious
-when you attempt to use a =customer_id= when a =supplier_id= was
-called for.
+wrappers around built-in types such as =std::string= that have little
+or no overhead after the compiler is done with them. They are useful
+when you want to use domain concepts to clarify intent rather than
+just use the class library types. This means that - for example - it
+is obvious when you attempt to use a =customer_id= when a
+=supplier_id= was called for.
 
-We also make use of =#yarn.orm.is_nullable=, settable to =true= or
+We also make use of =yarn.orm.is_nullable=, settable to =true= or
 =false=, which results in Dogen telling ODB if a column can be =NULL=
 or not.
 
 A final note on composite keys. Dogen follows the ODB model in that
 primary keys that have more than one column must be expressed as a
-class on its own right. We use the postfix =_key= on the class names
-to make them easier to identify - e.g. =employee_territories_key=,
-=order_details_key= and so forth. You won't fail to notice that these
-types have the following flag set: =#yarn.orm.is_value=. This tells
-Dogen (and ODB by extension) that this type is not really a full-blown
-type, which would map it to a table, but instead should be treated
-like other primitive types such as =std::string=.
+class on its own right. In the =northwind= model, we use the postfix
+=_key= for these class names in order to make them easier to
+identify - e.g. =employee_territories_key=, =order_details_key= and so
+forth. You won't fail to notice that these types have the following
+flag set: =yarn.orm.is_value=. This tells Dogen (and ODB by extension)
+that this type is not really a full-blown type, which would map it to
+a table, but instead should be treated like other primitive types such
+as =std::string=.
 
 ** Interlude: Dogen with ODB vs Plain ODB
 
@@ -354,18 +374,21 @@ not necessarily the case that _all_ ODB users would benefit from
 Dogen. If you think of one of the classic ODB use cases, which is to
 take an existing code base and to add support for Object-Relational
 Mapping, then it makes little sense to introduce Dogen. ODB is
-extremely good at requiring little changes to the original source
-code and has the ability to parse very complex C++ code.
+extremely good at requiring little changes to the original source code
+and has the ability to parse very complex C++ code. Using ODB in this
+manner also allows one to deal with impedance mismatches between the
+relational model and the object model of your domain.
 
 Dogen on the other hand, does not support this use case; it exists
-mainly to support [[https://en.wikipedia.org/wiki/Model-driven_software_development][Model Driven Software Development]] (MDSD). This means
-that one is expected to start with a Dogen model, and to use the
-traditional MDSD techniques for the management of the life-cycle of
-your software product families. Of course, you do not need to buy in
-to the _whole_ of MDSD principles in order to use Dogen but you should
-at least understand it in this context. You should think in terms of
-Domain Models (as [[https://en.wikipedia.org/wiki/Domain-driven_design][Domain Driven Development]] defines them) and then in
-terms of "classes of features" the elements of your domain
+mainly to support [[https://en.wikipedia.org/wiki/Model-driven_software_development][Model Driven Software Development]] (MDSD), so the
+modeling process is the driver. This means that one is expected to
+start with a Dogen model, and to use the traditional MDSD techniques
+for the management of the life-cycle of your model - and ideally for
+the generation of /entire product lines/. Of course, you do not need
+to buy in to the /whole/ of MDSD principles in order to use Dogen but
+you should at least understand it in this context. You should think in
+terms of Domain Models (as [[https://en.wikipedia.org/wiki/Domain-driven_design][Domain Driven Development]] defines them) and
+then in terms of "classes of features" the elements of your domain
 require. These we call "facets" in Dogen parlance. There are many such
 facets like =io=, which is the ability to dump an object's state into
 a C++ stream - at present using JSON notation - or =serialization=
