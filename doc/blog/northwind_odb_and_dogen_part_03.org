@@ -1,22 +1,43 @@
 #+title: Nerd Food: Northwind, or Using Dogen with ODB - Part III
 #+options: date:nil toc:nil author:nil num:nil title:nil
 
-On [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] of this series we got our Oracle Express set up - added the
-required schemas and so forth - and we built and installed latest
-ODB. After this grand build up, we shall finally get a chance to make
-use of Dogen and ODB.
+#+begin_html
+<table border="0">
+<tr>
+<td width="50%"></td>
+<td width="50%"><p class="verse" style="text-align:left">
+<small>
+Optimism is an occupational hazard of programming; feedback is the treatment.
+<i>-- <a href="https://books.google.co.uk/books?id=G8EL4H4vf7UC&lpg=PA31&ots=j9AMurgRCr&dq=Optimism%20is%20an%20occupational%20hazard%20of%20programming%3B%20feedback%20is%20the%20treatment.%20Extreme%20Programming%20Explained&pg=PA31#v=onepage&q&f=false">Kent Beck</a></i>
+</small>
+</p></td>
+</tr>
+</table>
+#+end_html
+
+Welcome to the third part of a the series of N blog posts on using
+Dogen with ODB against an Oracle database ([[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]], [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]]). The story
+so far can be quickly summarised as follows: we got our Oracle Express
+database installed and set up by adding the required users; we built
+the ODB libraries and installed the ODB compiler. After this rather
+grand build up, we shall finally get to look at Dogen - just about.
+
+I wasn't expecting N to become so large, but - like every good
+software project - I'm now realising you can only estimate the size of
+the series properly once you've actually finished it. And to rub salt
+to the wounds, before we can proceed we must start by addressing some
+of the instructions on the previous posts which were not quite right.
 
 * Errata
 
-However, before we proceed we must address some of the instructions on
-the previous posts which were not quite right. The first point was the
-need to download extra Oracle packages. Originally, when I looked at
-the Oracle XE install I did not see the traditional =include=
-directory, so I had assumed one needed to download the header files
-separately. I did find this state of affairs somewhat unusual - but
-then again this is Oracle, so "unusual" is the default behaviour. As
-it turns out, I was wrong; the header files are indeed part of the
-Oracle XE install, just placed in a rather... creative location:
+The first point we need to look at are the extra Oracle
+packages. Originally, when I checked my Oracle XE install I did not
+see the traditional =include= directory, so I had assumed one needed
+to download the header files separately. I did find this state of
+affairs somewhat unusual - but then again this is Oracle, so "unusual"
+is the default behaviour. As it turns out, I was wrong; the header
+files are indeed part of the Oracle XE install, just placed under a
+rather... "creative" location:
 =/u01/app/oracle/product/11.2.0/xe/rdbms/public=.
 
 This is quite an important find because the OCI driver has moved on to
@@ -24,10 +45,10 @@ v12, whereas XE is still on v11. There is backwards compatibility, of
 course - and everything should work fine connecting a v12 client
 against an v11 database - but it does introduce a layer of complexity:
 you now need to make sure you do not simultaneously have both v11 and
-v12 shared objects in the path when linking or else you will start to
-get some strange warnings. As usual, we try to confuse only one issue
-at a time, so we need to make sure we are only making use of v11 and
-purge all references to v12.
+v12 shared objects in the path when linking and running or else you
+will start to get some strange warnings. As usual, we try our best to
+confuse only one issue at a time, so we need to make sure we are only
+making use of v11 and purge all references to v12.
 
 To address this issue, we need to recompile ODB's oracle support. If
 you followed the instructions on Part II and you've have already
@@ -50,18 +71,68 @@ Oracle XE. You then just need to make sure you have executed
 =oracle_env.sh= before running your binary, as we shall see later
 on.
 
-* Installing Dogen
+The other, slightly minor alteration is that I removed the need for
+the =basic= schema. In truth, the entities placed in that schema were
+not adding a lot of value - their use cases are already covered by the
+entities in =northwind=. So we don't really need two schemas, just
+one.
 
-With that out of the way, we can now resume scheduled service. The
-last package we need to install is Dogen. This is fairly
-straightforward: we can just grab the latest release from BinTray:
+One final note - not quite an "errata" as such but a worthwhile
+note. We didn't do a "proper" Oracle setup, so when you reboot your
+box you will find that the service is no longer running. You can
+easily restart it from the shell, logged in as root:
+
+#+begin_example
+# cd /etc/init.d/
+# ./oracle-xe start
+Starting oracle-xe (via systemctl): oracle-xe.service.
+#+end_example
+
+Notice that Debian is actually clever enough to integrate the Oracle
+scripts with systemd, so you can use the usual tools to find out more
+about this service:
+
+#+begin_example
+# systemctl status oracle-xe
+● oracle-xe.service - SYSV: This is a program that is responsible for taking care of
+   Loaded: loaded (/etc/init.d/oracle-xe; generated; vendor preset: enabled)
+   Active: active (exited) since Sun 2017-03-12 15:10:47 GMT; 6s ago
+     Docs: man:systemd-sysv-generator(8)
+  Process: 16761 ExecStart=/etc/init.d/oracle-xe start (code=exited, status=0/SUCCESS)
+
+Mar 12 15:10:37 lorenz systemd[1]: Starting SYSV: This is a program that is responsible for taking c…e of...
+Mar 12 15:10:37 lorenz oracle-xe[16761]: Starting Oracle Net Listener.
+Mar 12 15:10:37 lorenz su[16772]: Successful su for oracle by root
+Mar 12 15:10:37 lorenz su[16772]: + ??? root:oracle
+Mar 12 15:10:37 lorenz su[16772]: pam_unix(su:session): session opened for user oracle by (uid=0)
+Mar 12 15:10:39 lorenz oracle-xe[16761]: Starting Oracle Database 11g Express Edition instance.
+Mar 12 15:10:39 lorenz su[16800]: Successful su for oracle by root
+Mar 12 15:10:39 lorenz su[16800]: + ??? root:oracle
+Mar 12 15:10:39 lorenz su[16800]: pam_unix(su:session): session opened for user oracle by (uid=0)
+Mar 12 15:10:47 lorenz systemd[1]: Started SYSV: This is a program that is responsible for taking care of.
+Hint: Some lines were ellipsized, use -l to show in full.
+#+end_example
+
+With all of this said, lets resume from where we left off.
+
+* Installing the Remaining Packages
+
+We still have a number of packages to install, but fortunately the
+installation steps are quite straightforward so we'll cover them
+quickly in this section.
+
+** Dogen
+
+Let's start with Dogen. This is fairly straightforward: we can just
+grab the latest release from BinTray:
 
 - [[https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb][dogen 0.98.0 amd64-applications.deb]]
 
-It must be v98 or above because we did a number of fixes to Dogen as a
-result of this series of articles; previous releases had shortcomings
-with their ODB support. As expected, the setup is pretty standard-fare
-debian:
+As it happens, we must install v98 or above because we did a number of
+fixes to Dogen as a result of this series of articles; previous
+releases had shortcomings with their ODB support.
+
+As expected, the setup is pretty standard-fare debian:
 
 #+begin_example
 $ wget https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb -O dogen_0.98.0_amd64-applications.deb
@@ -85,6 +156,31 @@ Copyright (C) 2012-2015 Marco Craveiro.
 License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 #+end_example
 
+** Dia
+
+Dogen has multiple frontends - at the time of writing, JSON and
+[[https://wiki.gnome.org/Apps/Dia/][Dia]]. We'll stick with Dia, because of its visual nature. However, keep
+in mind that what you can do with Dia you can also do with JSON. For
+those not in the know, a quick word on Dia (from it's home page):
+
+#+begin_quote
+Dia is a GTK+ based diagram creation program for GNU/Linux, MacOS X,
+Unix, and Windows, and is released under the GPL license.
+
+Dia is roughly inspired by the commercial Windows program 'Visio,'
+though more geared towards informal diagrams for casual use. It can be
+used to draw many different kinds of diagrams. It currently has
+special objects to help draw entity relationship diagrams, UML
+diagrams, flowcharts, network diagrams, and many other diagrams.
+#+end_quote
+
+You should be able to install dia straight off of the standard package
+setup:
+
+: apt-get install dia
+
+** Other Dependencies
+
 One final note on installations: I had previously assumed Boost to be
 installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][part II]] but - if nothing else, purely for the sake of
 completeness - here are the instructions to set it up, as well as
@@ -100,25 +196,206 @@ posts would go on forever.
 Mind you, you don't /actually/ need the entirety of Boost for this
 exercise, but it's just easier this way.
 
-* The Application
+* Introducing Zango
 
 At long last, we can start to create our very "simple" project. I say
 simple, but in truth it ended up being a tad more complex than I'd
-liked, so it was easier to create a github project for it and then
-discuss it here in this post.
+liked, so it was easier to create a [[https://github.com/DomainDrivenConsulting/zango][GitHub project]] for it and then
+discuss it here in this post. In order to follow the remainder of this
+post, please clone the =zango= repository from GitHub:
+
+#+begin_example
+: git clone git@github.com:DomainDrivenConsulting/zango.git
+#+end_example
+
+** Northwind Schema
+
+Before we delve into the project, let's start by first looking at
+Northwind itself. Microsoft makes Northwind available in CodePlex, at
+[[https://northwinddatabase.codeplex.com/][this]] location. We found a useful description of the Northwind database
+[[http://www.geeksengine.com/article/northwind.html][here]], which we quote:
+
+#+begin_quote
+Northwind Traders Access database is a sample database that shipped
+with Microsoft Office suite. The Northwind database contains the sales
+data for a fictitious company called Northwind Traders, which imports
+and exports specialty foods from around the world. You can use and
+experiment with Access with Northwind database while you're learning
+and develop ideas for Access.
+#+end_quote
+
+For the true DBAs out there: let's not get too hung-up on the
+"quality" of the database schema of Northwind; the purpose of this
+exercise is merely to exercise commonly used functionality on both
+Dogen and ODB. From this perspective, the Northwind database schema is
+more than adequate to test-drive all the features we're interested
+in. Whether you agree or not with the decisions the original creators
+of this schema made is a completely different matter, which is well
+beyond the scope of this series of posts.
+
+Thanks to CodePlex we have a diagram with the tables and their
+relationships:
+
+#+begin_html
+<img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/Northwind_A4_size_for_Print.png" width="80%" height="80%"/>
+<div>Northwind Schema (C) Microsoft.</div>
+#+end_html
+
+We can easily use this image to create a Dia diagram that follows
+Dogen's conventions and thus is ready for code-generation. At this
+juncture I must place yet another disclaimer: a proper explanation on
+how to use Dia (and UML in general) is outside the scope of these
+articles; hopefully the diagrams are sufficiently self-explanatory.
+
+** The Dogen Model for Northwind
+
+You can open the diagram from the folder
+=projects/input_models/northwind.dia=. The first point of note in that
+diagram is the UML note:
+
+#+caption: UML Note from northwind model.
+https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_uml_note.png
+
+A few points of note here. All lines starting with =#DOGEN= are
+an extension mechanism used to supply meta-data into Dogen. First,
+lets have a very quick look at the model's more "general settings":
+
+- =yarn.dia.comment=: this is a special command that tells Dogen to
+  use this UML note as the source code comments for the namespace of
+  the model (i.e. =northwind=).
+- =yarn.dia.external_modules=: this places all types into the
+  top-level namespace =northwind=.
+- =yarn.input_language=: the notation for types used in this model is
+  C++. We won't delve on this too much, but just keep in mind that
+  Dogen supports both C++ and C#.
+- =quilt.cpp.enabled=: as we are using C++, we must enable it.
+- =quilt.cpp.hash.enabled=: we not require this feature for the
+  purposes of this exercise.
+- =quilt.csharp.enabled=: As this is a C++-only model, we will disable
+  C#.
+- =annotations.profile=: Do not worry too much about this knob, it
+  just sets a lot of default options for this project.
 
 
-Casing:
+Now, you will notice we hand-waved quite a lot on the description of
+these settings. It is very difficult to describe these things without
+giving the reader an immense amount of context about Dogen. This, of
+course, needs to be done - particularly since we haven't really spent
+the required time updating the manual. However, in the interest of
+keeping this series of posts somewhat focused on ODB and ORM, we'll
+just leave it at that.
 
--
-http://www.codesynthesis.com/pipermail/odb-users/2014-September/002109.html
-http://www.codesynthesis.com/pipermail/odb-users/2014-January/001689.html
-http://www.codesynthesis.com/products/odb/doc/odb.xhtml --sql-name-case
+And talking about ORM, the next batch of settings is exactly related
+to that.
 
+- =yarn.orm.database_system=: here, we're stating that we're
+  interested in both =oracle= and =postgresql= databases.
+- =yarn.orm.letter_case=: this sets the "case" to use for all
+  identifiers; either =upper_case= or =lower_case=. So if you choose
+  =upper_case=, all your table names will be in upper case and
+  vice-versa.
+- =yarn.orm.schema_name=: finally we set the schema name to
+  =northwind=. Remember that we are in upper case, so the name becomes
+  =NORTHWIND=.
 
+The second point worth noticing is that there is a large overlapping
+between C++ classes and entities in the original diagram. For example,
+we have =customers and =suppliers= and =employees= as one would
+expect. Each of the attributes as the closest C++ type we could find
+that maps to the SQL type used on the original diagram. If one is to
+look at a properties of a few attributes, one can see more Dogen
+meta-data. Take  =customer_id= in the =customers= class:
 
+#+caption: Properties of customer_id in the customer class.
+https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_customer_id_attributes.png
 
-CMAKE_INCLUDE_PATH=/full/path/to/local/include CMAKE_LIBRARY_PATH=/full/path/to/local/lib cmake ../..
-CMAKE_INCLUDE_PATH=/home/marco/local/include CMAKE_LIBRARY_PATH=/home/marco/local/lib cmake ../..
+The setting =yarn.orm.is_primary_key= tells Dogen that this attribute
+is the primary key of this class. Note that we did not use a
+=std::string= as the type of =customer_id= but instead we made use of
+a Dogen feature called "primitive types". Primitive types are simple
+wrappers around built-in types such as std::string that have little or
+no overhead after the compiler is done with them. They are useful when
+you want to use domain concepts to clarify intent rather than just use
+the class library types. This means that - for example - it is obvious
+when you attempt to use a =customer_id= when a =supplier_id= was
+called for.
+
+We also make use of =#yarn.orm.is_nullable=, settable to =true= or
+=false=, which results in Dogen telling ODB if a column can be =NULL=
+or not.
+
+A final note on composite keys. Dogen follows the ODB model in that
+primary keys that have more than one column must be expressed as a
+class on its own right. We use the postfix =_key= on the class names
+to make them easier to identify - e.g. =employee_territories_key=,
+=order_details_key= and so forth. You won't fail to notice that these
+types have the following flag set: =#yarn.orm.is_value=. This tells
+Dogen (and ODB by extension) that this type is not really a full-blown
+type, which would map it to a table, but instead should be treated
+like other primitive types such as =std::string=.
+
+** Interlude: Dogen with ODB vs Plain ODB
+
+The inquisitive user may ask: "but why add yet another layer of
+indirection? Why not just use ODB directly?". At first, it may be
+puzzling for there to be a need for a code-generator which generates
+code for another code-generator. Over-engineering at his best, the
+crowd cries. First, it is important to understand the argument we're
+trying to make here: Dogen models benefit greatly from ODB, but its
+not necessarily the case that _all_ ODB users would benefit from
+Dogen. If you think of one of the classic ODB use cases, which is to
+take an existing code base and to add support for Object-Relational
+Mapping, then it makes little sense to introduce Dogen. ODB is
+extremely good at requiring little changes to the original source
+code and has the ability to parse very complex C++ code.
+
+Dogen on the other hand, does not support this use case; it exists
+mainly to support [[https://en.wikipedia.org/wiki/Model-driven_software_development][Model Driven Software Development]] (MDSD). This means
+that one is expected to start with a Dogen model, and to use the
+traditional MDSD techniques for the management of the life-cycle of
+your software product families. Of course, you do not need to buy in
+to the _whole_ of MDSD principles in order to use Dogen but you should
+at least understand it in this context. You should think in terms of
+Domain Models (as [[https://en.wikipedia.org/wiki/Domain-driven_design][Domain Driven Development]] defines them) and then in
+terms of "classes of features" the elements of your domain
+require. These we call "facets" in Dogen parlance. There are many such
+facets like =io=, which is the ability to dump an object's state into
+a C++ stream - at present using JSON notation - or =serialization=
+which is the ability to serialise an object using Boost
+serialisation. It is in this context that ODB enters the Dogen
+world. We could, of course, generate ORM mappings (and SQL) directly
+from Dogen. But given what we've seen from ODB, it seems this would be
+a very large project (or, conversely, we'd have very poor support, not
+dealing with a great number of corner cases). By generating the very
+minimal (and very non-intrusive) code that ODB needs, we benefit from
+the years of experience accumulated in ODB whilst at the same time
+making life easier for Dogen users.
+
+Of course, as with all engineering trade-offs this one is not without
+its disadvantages. When things do go wrong you now have more moving
+parts that could be causing your problem: was it an error in the
+diagram, or was it Dogen, or was it the mapping between Dogen and ODB
+or was it ODB? In practice, this problem is minimised greatly by the
+way in which you should use Dogen. You can look at the ODB input files
+generated by Dogen, and they should look very much like hand-crafted
+ODB input files, making use of =pragmas= and so forth. You are also
+required to run ODB manually. In practice, we have found
+troubleshooting straightforward enough that it does not constitute a
+problem.
+
+Finally, its worth pointing out that the Domain Models Dogen generates
+have a fairly straightforward shape to them, making the ODB mapping a
+lot more trivial that "general" C++ code would have. It is because of
+this that we have =orm= parameters in Dogen, which can expand to
+multiple ODB pragmas - the user should not need to worry about that
+expansion.
 
 * Conclusion
+
+This part is already becoming quite large, so I'm afraid we need to
+stop it here and continue on Part IV. However, we have managed to
+address a few of the mistakes of the Oracle setup of previous parts,
+introduced the remaining applications that we need to install and then
+discussed Northwind - both in terms of its original intent and also in
+terms of the Dogen objectives. Finally we provided an explanation of
+how Dogen and ODB fit together in a tooling ecosystem.

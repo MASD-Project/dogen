@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-10 Fri 21:06]
+#+CAPTION: Clock summary at [2017-03-12 Sun 18:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *27:33* |       |      | 100.0 |
+| *Total time*                                                                | *30:46* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 27:33   |       |      | 100.0 |
-| Active                                                                      |         | 27:33 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.7 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.6 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |  10.8 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  18.4 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  19.5 |
-| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  30.2 |
-| STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.7 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 2:38 |   9.6 |
-| STARTED Build on tags for Windows                                           |         |       | 0:15 |   0.9 |
-| STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.5 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   4.3 |
+| Stories                                                                     | 30:46   |       |      | 100.0 |
+| Active                                                                      |         | 30:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.4 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |   9.6 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  16.5 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  17.4 |
+| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  27.0 |
+| STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.6 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 2:38 |   8.6 |
+| STARTED Build on tags for Windows                                           |         |       | 0:15 |   0.8 |
+| STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.4 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   3.8 |
+| STARTED Implement the database model using Northwind                        |         |       | 3:13 |  10.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -376,6 +377,38 @@ includes. There are some differences though:
   "apply archetype postfix" supplied as an argument. Since we have the
   Visual Studio element we have visibility of all enabled versions.
 
+*** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-12 Sun 17:21]--[2017-03-12 Sun 18:19] =>  0:58
+    CLOCK: [2017-03-12 Sun 15:05]--[2017-03-12 Sun 17:20] =>  2:15
+
+Now we are using Dogen in anger with ODB, we need to make sure the
+database model is actually exercising all of this functionality. One
+easy way of achieving this is to use Microsoft's Northwind Database as
+the base for the model.
+
+- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
+
+We should implement it using Oracle and use this to test the changes
+to ODB's oracle support.
+
+Tasks:
+
+- add comment for ODB targets
+- add flag to mark a type as a value
+- case of the identifiers is a problem: sometimes we get them
+  uppercase (when we do them without quotes in sql plus) sometimes we
+  get them lowercase (from odb). use =--sql-name-case= upper/lower as
+  a flag.
+- schema initialisation from statics is not working; this is as
+  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
+  entity, but that then causes an exception.
+- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
+
+Notes:
+
+: set linesize 8192
+: set pagesize 50000
+
 *** Split out the file extension from the formatter                   :story:
 
 At present we have handled file extensions in one of two ways:
@@ -678,31 +711,6 @@ associated with that class.
 
 Ideally we should also have a log initialisation class that uses those
 common options.
-
-*** Implement the database model using Northwind                      :story:
-
-Now we are using Dogen in anger with ODB, we need to make sure the
-database model is actually exercising all of this functionality. One
-easy way of achieving this is to use Microsoft's Northwind Database as
-the base for the model.
-
-- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
-
-We should implement it using Oracle and use this to test the changes
-to ODB's oracle support.
-
-Tasks:
-
-- add comment for ODB targets
-- add flag to mark a type as a value
-- case of the identifiers is a problem: sometimes we get them
-  uppercase (when we do them without quotes in sql plus) sometimes we
-  get them lowercase (from odb). use =--sql-name-case= upper/lower as
-  a flag.
-- schema initialisation from statics is not working; this is as
-  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
-  entity, but that then causes an exception.
-- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
 
 *** Introduce dogen projects                                          :story:
 
