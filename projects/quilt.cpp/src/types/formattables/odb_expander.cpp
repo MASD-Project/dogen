@@ -113,7 +113,7 @@ void odb_properties_generator::visit(const yarn::object& o) {
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && (op.is_value() || cfg.generate_mapping())) {
             std::ostringstream s;
-            s << "schema(";
+            s << "schema(\"";
 
             if (!cfg.letter_case())
                 s << cfg.schema_name();
@@ -122,7 +122,7 @@ void odb_properties_generator::visit(const yarn::object& o) {
             else if (*cfg.letter_case() == yarn::letter_cases::lower_case)
                 s << boost::to_lower_copy(cfg.schema_name());
 
-            s << ")";
+            s <<"\")";
             top_level_pragmas.push_back(s.str());
         }
     }

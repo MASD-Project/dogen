@@ -330,7 +330,7 @@ expand_objects(const type_group& tg, intermediate_model& im) const {
 
         const auto& a(o.annotation());
         auto cfg(make_object_configuration(tg, a));
-        if (cfg && cfg->generate_mapping()) {
+        if (cfg && (cfg->generate_mapping() || cfg->is_value())) {
             cfg->has_primary_key(has_primary_key);
             cfg->letter_case(lc);
             BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
@@ -382,9 +382,9 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
             continue;
 
         /*
-         * If we do have a schema name, we need to update all objects
-         * that do not have a schema name to use it's containing
-         * module's schema name.
+         * If we do have a schema name at the module level, we need to
+         * update all objects that do not have a schema name to use
+         * it's containing module's schema name.
          */
         for (const auto& id : m.members()) {
             const auto i(im.objects().find(id));
@@ -393,10 +393,10 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
 
             auto& o(i->second);
             auto& cfg(o.orm_configuration());
-            const bool has_schema_name(cfg && cfg->schema_name().empty() &&
+            const bool update_schema_name(cfg && cfg->schema_name().empty() &&
                 (cfg->generate_mapping() || cfg->is_value()));
 
-            if (!has_schema_name)
+            if (!update_schema_name)
                 continue;
 
             BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
