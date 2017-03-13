@@ -68,7 +68,7 @@ directories:
 
 #+begin_example
 . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
-LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local/local
+LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local
 #+end_example
 
 This will result on a ODB Oracle library that uses the OCI driver from
