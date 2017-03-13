@@ -58,7 +58,6 @@ private:
 
 private:
     struct type_group {
-        annotations::type generate_mapping;
         annotations::type database_system;
         annotations::type table_name;
         annotations::type schema_name;
@@ -66,7 +65,6 @@ private:
         annotations::type column_name;
         annotations::type is_nullable;
         annotations::type letter_case;
-        annotations::type is_value;
         annotations::type type_override;
     };
 
@@ -77,14 +75,15 @@ private:
     boost::optional<orm_model_configuration> make_model_configuration(
         const type_group& tg, const annotations::annotation& a) const;
 
-    boost::optional<orm_object_configuration> make_object_configuration(
-        const type_group& tg, const annotations::annotation& a) const;
+    void update_object_configuration(const type_group& tg,
+        const annotations::annotation& a, orm_object_configuration& cfg) const;
 
     boost::optional<orm_attribute_configuration> make_attribute_configuration(
         const type_group& tg, const annotations::annotation& a) const;
 
-    boost::optional<orm_primitive_configuration> make_primitive_configuration(
-        const type_group& tg, const annotations::annotation& a) const;
+    void update_primitive_configuration(const type_group& tg,
+        const annotations::annotation& a,
+        orm_primitive_configuration& cfg) const;
 
     boost::optional<orm_module_configuration> make_module_configuration(
         const type_group& tg, const annotations::annotation& a) const;

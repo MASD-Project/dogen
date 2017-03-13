@@ -215,19 +215,6 @@
   },
   {
     "name": {
-      "simple": "generate_mapping",
-      "qualified": "yarn.orm.generate_mapping"
-    },
-    "archetype_location": {
-      "family": "yarn"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity",
-    "default_value": false
-  },
-  {
-    "name": {
       "simple": "database_system",
       "qualified": "yarn.orm.database_system"
     },
@@ -309,18 +296,6 @@
     "value_type": "text",
     "template_kind": "instance",
     "scope": "root_module"
-  },
-  {
-    "name": {
-      "simple": "is_value",
-      "qualified": "yarn.orm.is_value"
-    },
-    "archetype_location": {
-      "family": "yarn"
-    },
-    "value_type": "boolean",
-    "template_kind": "instance",
-    "scope": "entity"
   },
   {
     "name": {

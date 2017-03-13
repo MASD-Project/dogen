@@ -112,11 +112,6 @@ std::string traits::primitive::use_type_aliasing() {
     return r;
 }
 
-std::string traits::orm::generate_mapping() {
-    static std::string r("yarn.orm.generate_mapping");
-    return r;
-}
-
 std::string traits::orm::database_system() {
     static std::string r("yarn.orm.database_system");
     return r;
@@ -149,11 +144,6 @@ std::string traits::orm::is_nullable() {
 
 std::string traits::orm::letter_case() {
     static std::string r("yarn.orm.letter_case");
-    return r;
-}
-
-std::string traits::orm::is_value() {
-    static std::string r("yarn.orm.is_value");
     return r;
 }
 

@@ -5151,7 +5151,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:point val="100.448,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.698,-107.75;108.064,-99.2"/>
+        <dia:rectangle val="99.6975,-107.75;108.064,-99.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

@@ -135,14 +135,12 @@ operator<<(std::ostream& s, const orm_configuration_expander::type_group& v) {
     s << " { "
       << "\"__type__\": " << "\"yarn::orm_configuration_expander::"
       << "type_group\"" << ", "
-      << "\"generate_mapping\": " << v.generate_mapping << ", "
       << "\"database_system\": " << v.database_system << ", "
       << "\"table_name\": " << v.table_name << ", "
       << "\"column_name\": " << v.column_name << ", "
       << "\"schema_name\": " << v.schema_name << ", "
       << "\"is_primary_key\": " << v.is_primary_key << ", "
       << "\"letter_case\": " << v.letter_case << ", "
-      << "\"is_value\": " << v.is_value << ", "
       << "\"type_override\": " << v.type_override
       << " }";
 
@@ -154,9 +152,6 @@ make_type_group(const annotations::type_repository& atrp) const {
     type_group r;
 
     const annotations::type_repository_selector rs(atrp);
-
-    const auto& gm(traits::orm::generate_mapping());
-    r.generate_mapping = rs.select_type_by_name(gm);
 
     const auto& ds(traits::orm::database_system());
     r.database_system = rs.select_type_by_name(ds);
@@ -178,9 +173,6 @@ make_type_group(const annotations::type_repository& atrp) const {
 
     const auto& lc(traits::orm::letter_case());
     r.letter_case = rs.select_type_by_name(lc);
-
-    const auto& iv(traits::orm::is_value());
-    r.is_value = rs.select_type_by_name(iv);
 
     const auto& to(traits::orm::type_override());
     r.type_override = rs.select_type_by_name(to);
@@ -223,38 +215,16 @@ orm_configuration_expander::make_model_configuration(const type_group& tg,
     return boost::optional<orm_model_configuration>();
 }
 
-boost::optional<orm_object_configuration>
-orm_configuration_expander::make_object_configuration(const type_group& tg,
-    const annotations::annotation& a) const {
+void orm_configuration_expander::update_object_configuration(
+    const type_group& tg, const annotations::annotation& a,
+    orm_object_configuration& cfg) const {
 
     const annotations::entry_selector s(a);
-    bool found_any(false);
+    if (s.has_entry(tg.schema_name))
+        cfg.schema_name(s.get_text_content(tg.schema_name));
 
-    orm_object_configuration r;
-    if (s.has_entry(tg.generate_mapping)) {
-        found_any = true;
-        r.generate_mapping(s.get_boolean_content(tg.generate_mapping));
-    }
-
-    if (s.has_entry(tg.schema_name)) {
-        found_any = true;
-        r.schema_name(s.get_text_content(tg.schema_name));
-    }
-
-    if (s.has_entry(tg.table_name)) {
-        found_any = true;
-        r.table_name(s.get_text_content(tg.table_name));
-    }
-
-    if (s.has_entry(tg.is_value)) {
-        found_any = true;
-        r.is_value(s.get_boolean_content(tg.is_value));
-    }
-
-    if (found_any)
-        return r;
-
-    return boost::optional<orm_object_configuration>();
+    if (s.has_entry(tg.table_name))
+        cfg.table_name(s.get_text_content(tg.table_name));
 }
 
 boost::optional<orm_attribute_configuration>
@@ -292,28 +262,13 @@ orm_configuration_expander::make_attribute_configuration(const type_group& tg,
     return boost::optional<orm_attribute_configuration>();
 }
 
-boost::optional<orm_primitive_configuration>
-orm_configuration_expander::make_primitive_configuration(const type_group& tg,
-    const annotations::annotation& a) const {
+void orm_configuration_expander::update_primitive_configuration(
+    const type_group& tg, const annotations::annotation& a,
+    orm_primitive_configuration& cfg) const {
 
     const annotations::entry_selector s(a);
-    bool found_any(false);
-
-    orm_primitive_configuration r;
-    if (s.has_entry(tg.generate_mapping)) {
-        found_any = true;
-        r.generate_mapping(s.get_boolean_content(tg.generate_mapping));
-    }
-
-    if (s.has_entry(tg.schema_name)) {
-        found_any = true;
-        r.schema_name(s.get_text_content(tg.schema_name));
-    }
-
-    if (found_any)
-        return r;
-
-    return boost::optional<orm_primitive_configuration>();
+    if (s.has_entry(tg.schema_name))
+        cfg.schema_name(s.get_text_content(tg.schema_name));
 }
 
 boost::optional<orm_module_configuration>
@@ -344,25 +299,45 @@ expand_objects(const type_group& tg, intermediate_model& im) const {
         lc = im.orm_configuration()->letter_case();
 
     for (auto& pair : im.objects()) {
-        bool has_primary_key(false);
+        /*
+         * If we do not have a configuration, there is nothing to be
+         * done for this object. Configurations are setup during
+         * stereotype expansion, if the ORM stereotypes were present.
+         */
         auto& o(pair.second);
+        if (!o.orm_configuration())
+            continue;
+
+        auto& ocfg(*o.orm_configuration());
+
+        /*
+         * Letter case is always setup to match the model configuration.
+         */
+        ocfg.letter_case(lc);
+
+        /*
+         * Now read all of the configuration for each attribute and
+         * detect the presence of primary keys.
+         */
+        bool has_primary_key(false);
+        const auto id(pair.first);
         for (auto& attr : o.local_attributes()) {
             const auto& a(attr.annotation());
-            const auto cfg(make_attribute_configuration(tg, a));
-            has_primary_key |= (cfg && cfg->is_primary_key());
-            attr.orm_configuration(cfg);
+            const auto attr_cfg(make_attribute_configuration(tg, a));
+            has_primary_key |= (attr_cfg && attr_cfg->is_primary_key());
+            attr.orm_configuration(attr_cfg);
         }
 
+        /*
+         * Update the object's configuration with any additional
+         * meta-data the user may have supplied.
+         */
         const auto& a(o.annotation());
-        auto cfg(make_object_configuration(tg, a));
-        if (cfg && (cfg->generate_mapping() || cfg->is_value())) {
-            cfg->has_primary_key(has_primary_key);
-            cfg->letter_case(lc);
-            BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
-                                     << pair.first << ": " << *cfg;
-        }
+        update_object_configuration(tg, a, ocfg);
+        ocfg.has_primary_key(has_primary_key);
 
-        o.orm_configuration(cfg);
+        BOOST_LOG_SEV(lg, debug) << "ORM configuration for object: "
+                                 << pair.first << ": " << ocfg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished object expansion.";
@@ -393,16 +368,30 @@ void orm_configuration_expander::expand_primitives(
         lc = im.orm_configuration()->letter_case();
 
     for (auto& pair : im.primitives()) {
+        /*
+         * If we do not have a configuration, there is nothing to be
+         * done for this primitive. Configurations are setup during
+         * stereotype expansion, if the ORM stereotypes were present.
+         */
         auto& p(pair.second);
-        const auto& a(p.annotation());
-        auto cfg(make_primitive_configuration(tg, a));
-        if (cfg && cfg->generate_mapping()) {
-            cfg->letter_case(lc);
-            BOOST_LOG_SEV(lg, debug) << "ORM configuration for primitive: "
-                                     << pair.first << ": " << *cfg;
-        }
+        if (!p.orm_configuration())
+            continue;
 
-        p.orm_configuration(cfg);
+        auto& cfg(*p.orm_configuration());
+
+        /*
+         * Letter case is always setup to match the model configuration.
+         */
+        cfg.letter_case(lc);
+
+        /*
+         * Read any additional meta-data the user may have supplied
+         * for the configuration.
+         */
+        const auto& a(p.annotation());
+        update_primitive_configuration(tg, a, cfg);
+        BOOST_LOG_SEV(lg, debug) << "ORM configuration for primitive: "
+                                 << pair.first << ": " << cfg;
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished primitive expansion.";

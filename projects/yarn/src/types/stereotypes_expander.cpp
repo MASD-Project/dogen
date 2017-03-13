@@ -27,6 +27,8 @@
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/orm_object_configuration.hpp"
+#include "dogen/yarn/types/orm_primitive_configuration.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 
 using namespace dogen::utility::log;
@@ -38,10 +40,13 @@ auto lg(logger_factory("yarn.stereotypes_expander"));
 const std::string stereotype_visitor("visitable");
 const std::string stereotype_fluent("fluent");
 const std::string stereotype_immutable("immutable");
+const std::string stereotype_orm_object("orm_object");
+const std::string stereotype_orm_value("orm_value");
 const std::string visitor_name("visitor");
 const std::string visitor_argument_name("v");
 const std::string visitor_doc("Visitor for ");
 const std::string visit_operation_doc("Accept visits for type ");
+
 const std::string duplicate_name(
     "Attempt to add object with a name that already exists in model: ");
 const std::string zero_leaves("Type marked as visitable but has no leaves: ");
@@ -49,6 +54,8 @@ const std::string leaf_not_found("Could not find leaf object: ");
 const std::string leaves_not_found("Could not find leaves for: ");
 const std::string no_visitees("Visitor is not visiting any types: ");
 const std::string visitable_child("Children cannot be marked as visitable: ");
+const std::string invalid_primitive_configuration(
+    "Primitive cannot have a stereotype of 'orm_object': ");
 
 }
 
@@ -303,7 +310,16 @@ void stereotypes_expander::expand(object& o, intermediate_model& im) const {
             o.is_fluent(true);
         else if (s == stereotype_immutable)
             o.is_immutable(true);
-        else {
+        else if (s == stereotype_orm_object) {
+            orm_object_configuration cfg;
+            cfg.generate_mapping(true);
+            o.orm_configuration(cfg);
+        } else if (s == stereotype_orm_value) {
+            orm_object_configuration cfg;
+            cfg.generate_mapping(true);
+            cfg.is_value(true);
+            o.orm_configuration(cfg);
+        } else {
             const bool processed(try_expand_concept(s, o, im));
             if (!processed)
                 unknown_stereotypes.push_back(s);
@@ -314,7 +330,8 @@ void stereotypes_expander::expand(object& o, intermediate_model& im) const {
 }
 
 void stereotypes_expander::expand(primitive& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << p.name().id();
+    const auto id(p.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
     if (p.stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
         return;
@@ -325,7 +342,15 @@ void stereotypes_expander::expand(primitive& p) const {
     for (const auto s : p.stereotypes()) {
         if (s == stereotype_immutable)
             p.is_immutable(true);
-        else
+        else if (s == stereotype_orm_value) {
+            orm_primitive_configuration cfg;
+            cfg.generate_mapping(true);
+            p.orm_configuration(cfg);
+        } else if (s == stereotype_orm_object) {
+            BOOST_LOG_SEV(lg, error) << invalid_primitive_configuration << id;
+            BOOST_THROW_EXCEPTION(
+                expansion_error(invalid_primitive_configuration + id));
+        } else
             unknown_stereotypes.push_back(s);
     }
 

@@ -96,7 +96,6 @@ void odb_properties_generator::visit(const yarn::object& o) {
     odb_properties op;
 
     const annotations::entry_selector s(o.annotation());
-
     auto top_level_pragmas(make_odb_pragmas(type_group_, o.annotation()));
     if (o.orm_configuration()) {
         /*
