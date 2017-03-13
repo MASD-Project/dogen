@@ -136,10 +136,10 @@ void validator::validate(const std::string& id, const yarn::object& o) const {
     }
 
     bool has_primary_key(false);
-    const auto& cfg(o.orm_configuration());
+    const auto& cfg(o.orm_properties());
     const bool generate_mapping(cfg && cfg->generate_mapping());
     for (const auto& attr : o.local_attributes()) {
-        if (!attr.orm_configuration())
+        if (!attr.orm_properties())
             continue;
 
         /*
@@ -152,7 +152,7 @@ void validator::validate(const std::string& id, const yarn::object& o) const {
             BOOST_THROW_EXCEPTION(validation_error(generate_mapping_off + id));
         }
 
-        const auto& cfg(*attr.orm_configuration());
+        const auto& cfg(*attr.orm_properties());
         if (!cfg.is_primary_key())
             continue;
 

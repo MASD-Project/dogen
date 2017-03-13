@@ -24,7 +24,7 @@
 #include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_hash.hpp"
-#include "dogen/yarn/hash/orm_object_configuration_hash.hpp"
+#include "dogen/yarn/hash/orm_object_properties_hash.hpp"
 
 namespace {
 
@@ -69,7 +69,7 @@ inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dog
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_yarn_orm_object_configuration(const boost::optional<dogen::yarn::orm_object_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_yarn_orm_object_properties(const boost::optional<dogen::yarn::orm_object_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -115,7 +115,7 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_name(v.associative_container_keys()));
     combine(seed, v.provides_opaqueness());
     combine(seed, v.can_be_primitive_underlier());
-    combine(seed, hash_boost_optional_dogen_yarn_orm_object_configuration(v.orm_configuration()));
+    combine(seed, hash_boost_optional_dogen_yarn_orm_object_properties(v.orm_properties()));
 
     return seed;
 }

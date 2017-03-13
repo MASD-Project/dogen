@@ -31,7 +31,7 @@
 #include "dogen/yarn/serialization/element_ser.hpp"
 #include "dogen/yarn/serialization/attribute_ser.hpp"
 #include "dogen/yarn/serialization/primitive_ser.hpp"
-#include "dogen/yarn/serialization/orm_primitive_configuration_ser.hpp"
+#include "dogen/yarn/serialization/orm_primitive_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::primitive,
@@ -50,7 +50,7 @@ void save(Archive& ar,
     ar << make_nvp("value_attribute", v.value_attribute_);
     ar << make_nvp("use_type_aliasing", v.use_type_aliasing_);
     ar << make_nvp("is_immutable", v.is_immutable_);
-    ar << make_nvp("orm_configuration", v.orm_configuration_);
+    ar << make_nvp("orm_properties", v.orm_properties_);
 }
 
 template<typename Archive>
@@ -63,7 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("value_attribute", v.value_attribute_);
     ar >> make_nvp("use_type_aliasing", v.use_type_aliasing_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
-    ar >> make_nvp("orm_configuration", v.orm_configuration_);
+    ar >> make_nvp("orm_properties", v.orm_properties_);
 }
 
 } }

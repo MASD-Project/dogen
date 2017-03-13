@@ -23,7 +23,7 @@
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/languages_hash.hpp"
-#include "dogen/yarn/hash/orm_model_configuration_hash.hpp"
+#include "dogen/yarn/hash/orm_model_properties_hash.hpp"
 
 namespace {
 
@@ -55,7 +55,7 @@ inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<st
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_yarn_orm_model_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_yarn_orm_model_properties(const boost::optional<dogen::yarn::orm_model_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -80,7 +80,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.has_generatable_types());
     combine(seed, v.input_language());
     combine(seed, v.output_language());
-    combine(seed, hash_boost_optional_dogen_yarn_orm_model_configuration(v.orm_configuration()));
+    combine(seed, hash_boost_optional_dogen_yarn_orm_model_properties(v.orm_properties()));
 
     return seed;
 }

@@ -24,7 +24,7 @@
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/object_types_td.hpp"
 #include "dogen/yarn/test_data/type_parameters_td.hpp"
-#include "dogen/yarn/test_data/orm_object_configuration_td.hpp"
+#include "dogen/yarn/test_data/orm_object_properties_td.hpp"
 
 namespace {
 
@@ -83,15 +83,15 @@ create_dogen_yarn_object_types(const unsigned int position) {
     return dogen::yarn::object_types_generator::create(position);
 }
 
-dogen::yarn::orm_object_configuration
-create_dogen_yarn_orm_object_configuration(const unsigned int position) {
-    return dogen::yarn::orm_object_configuration_generator::create(position);
+dogen::yarn::orm_object_properties
+create_dogen_yarn_orm_object_properties(const unsigned int position) {
+    return dogen::yarn::orm_object_properties_generator::create(position);
 }
 
-boost::optional<dogen::yarn::orm_object_configuration>
-create_boost_optional_dogen_yarn_orm_object_configuration(unsigned int position) {
-    boost::optional<dogen::yarn::orm_object_configuration> r(
-        create_dogen_yarn_orm_object_configuration(position));
+boost::optional<dogen::yarn::orm_object_properties>
+create_boost_optional_dogen_yarn_orm_object_properties(unsigned int position) {
+    boost::optional<dogen::yarn::orm_object_properties> r(
+        create_dogen_yarn_orm_object_properties(position));
     return r;
 }
 
@@ -131,7 +131,7 @@ populate(const unsigned int position, result_type& v) {
     v.associative_container_keys(create_std_list_dogen_yarn_name(position + 23));
     v.provides_opaqueness(create_bool(position + 24));
     v.can_be_primitive_underlier(create_bool(position + 25));
-    v.orm_configuration(create_boost_optional_dogen_yarn_orm_object_configuration(position + 26));
+    v.orm_properties(create_boost_optional_dogen_yarn_orm_object_properties(position + 26));
 }
 
 object_generator::result_type

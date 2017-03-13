@@ -57,12 +57,12 @@
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"
 #include "dogen/yarn/serialization/orm_database_systems_ser.hpp"
+#include "dogen/yarn/serialization/orm_model_properties_ser.hpp"
+#include "dogen/yarn/serialization/orm_module_properties_ser.hpp"
+#include "dogen/yarn/serialization/orm_object_properties_ser.hpp"
 #include "dogen/yarn/serialization/mapping_set_repository_ser.hpp"
-#include "dogen/yarn/serialization/orm_model_configuration_ser.hpp"
-#include "dogen/yarn/serialization/orm_module_configuration_ser.hpp"
-#include "dogen/yarn/serialization/orm_object_configuration_ser.hpp"
-#include "dogen/yarn/serialization/orm_attribute_configuration_ser.hpp"
-#include "dogen/yarn/serialization/orm_primitive_configuration_ser.hpp"
+#include "dogen/yarn/serialization/orm_attribute_properties_ser.hpp"
+#include "dogen/yarn/serialization/orm_primitive_properties_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_repository_ser.hpp"
 
 #endif

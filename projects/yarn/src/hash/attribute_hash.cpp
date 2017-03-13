@@ -22,7 +22,7 @@
 #include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/name_tree_hash.hpp"
 #include "dogen/annotations/hash/annotation_hash.hpp"
-#include "dogen/yarn/hash/orm_attribute_configuration_hash.hpp"
+#include "dogen/yarn/hash/orm_attribute_properties_hash.hpp"
 
 namespace {
 
@@ -32,7 +32,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_yarn_orm_attribute_configuration(const boost::optional<dogen::yarn::orm_attribute_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_yarn_orm_attribute_properties(const boost::optional<dogen::yarn::orm_attribute_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -57,7 +57,7 @@ std::size_t attribute_hasher::hash(const attribute& v) {
     combine(seed, v.parsed_type());
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
-    combine(seed, hash_boost_optional_dogen_yarn_orm_attribute_configuration(v.orm_configuration()));
+    combine(seed, hash_boost_optional_dogen_yarn_orm_attribute_properties(v.orm_properties()));
 
     return seed;
 }

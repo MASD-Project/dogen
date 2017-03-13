@@ -24,7 +24,7 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/yarn/io/orm_module_configuration_io.hpp"
+#include "dogen/yarn/io/orm_module_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -50,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_module_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_module_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -76,7 +76,7 @@ module::module(module&& rhs)
       members_(std::move(rhs.members_)),
       is_root_(std::move(rhs.is_root_)),
       is_global_module_(std::move(rhs.is_global_module_)),
-      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)) { }
 
 module::module(
     const std::string& documentation,
@@ -90,7 +90,7 @@ module::module(
     const std::list<std::string>& members,
     const bool is_root,
     const bool is_global_module,
-    const boost::optional<dogen::yarn::orm_module_configuration>& orm_configuration)
+    const boost::optional<dogen::yarn::orm_module_properties>& orm_properties)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -103,7 +103,7 @@ module::module(
       members_(members),
       is_root_(is_root),
       is_global_module_(is_global_module),
-      orm_configuration_(orm_configuration) { }
+      orm_properties_(orm_properties) { }
 
 void module::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -136,7 +136,7 @@ void module::to_stream(std::ostream& s) const {
       << "\"members\": " << members_ << ", "
       << "\"is_root\": " << is_root_ << ", "
       << "\"is_global_module\": " << is_global_module_ << ", "
-      << "\"orm_configuration\": " << orm_configuration_
+      << "\"orm_properties\": " << orm_properties_
       << " }";
 }
 
@@ -147,7 +147,7 @@ void module::swap(module& other) noexcept {
     swap(members_, other.members_);
     swap(is_root_, other.is_root_);
     swap(is_global_module_, other.is_global_module_);
-    swap(orm_configuration_, other.orm_configuration_);
+    swap(orm_properties_, other.orm_properties_);
 }
 
 bool module::equals(const dogen::yarn::element& other) const {
@@ -161,7 +161,7 @@ bool module::operator==(const module& rhs) const {
         members_ == rhs.members_ &&
         is_root_ == rhs.is_root_ &&
         is_global_module_ == rhs.is_global_module_ &&
-        orm_configuration_ == rhs.orm_configuration_;
+        orm_properties_ == rhs.orm_properties_;
 }
 
 module& module::operator=(module other) {
@@ -202,20 +202,20 @@ void module::is_global_module(const bool v) {
     is_global_module_ = v;
 }
 
-const boost::optional<dogen::yarn::orm_module_configuration>& module::orm_configuration() const {
-    return orm_configuration_;
+const boost::optional<dogen::yarn::orm_module_properties>& module::orm_properties() const {
+    return orm_properties_;
 }
 
-boost::optional<dogen::yarn::orm_module_configuration>& module::orm_configuration() {
-    return orm_configuration_;
+boost::optional<dogen::yarn::orm_module_properties>& module::orm_properties() {
+    return orm_properties_;
 }
 
-void module::orm_configuration(const boost::optional<dogen::yarn::orm_module_configuration>& v) {
-    orm_configuration_ = v;
+void module::orm_properties(const boost::optional<dogen::yarn::orm_module_properties>& v) {
+    orm_properties_ = v;
 }
 
-void module::orm_configuration(const boost::optional<dogen::yarn::orm_module_configuration>&& v) {
-    orm_configuration_ = std::move(v);
+void module::orm_properties(const boost::optional<dogen::yarn::orm_module_properties>&& v) {
+    orm_properties_ = std::move(v);
 }
 
 } }

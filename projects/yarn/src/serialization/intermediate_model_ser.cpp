@@ -46,8 +46,8 @@
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/yarn/serialization/orm_model_properties_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
-#include "dogen/yarn/serialization/orm_model_configuration_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -74,7 +74,7 @@ void save(Archive& ar,
     ar << make_nvp("input_language", v.input_language_);
     ar << make_nvp("output_languages", v.output_languages_);
     ar << make_nvp("scribble_groups", v.scribble_groups_);
-    ar << make_nvp("orm_configuration", v.orm_configuration_);
+    ar << make_nvp("orm_properties", v.orm_properties_);
 }
 
 template<typename Archive>
@@ -99,7 +99,7 @@ void load(Archive& ar,
     ar >> make_nvp("input_language", v.input_language_);
     ar >> make_nvp("output_languages", v.output_languages_);
     ar >> make_nvp("scribble_groups", v.scribble_groups_);
-    ar >> make_nvp("orm_configuration", v.orm_configuration_);
+    ar >> make_nvp("orm_properties", v.orm_properties_);
 }
 
 } }

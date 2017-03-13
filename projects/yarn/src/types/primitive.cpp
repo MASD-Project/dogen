@@ -24,11 +24,11 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+#include "dogen/yarn/io/orm_primitive_properties_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_primitive_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_primitive_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -56,7 +56,7 @@ primitive::primitive(primitive&& rhs)
       value_attribute_(std::move(rhs.value_attribute_)),
       use_type_aliasing_(std::move(rhs.use_type_aliasing_)),
       is_immutable_(std::move(rhs.is_immutable_)),
-      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)) { }
 
 primitive::primitive(
     const std::string& documentation,
@@ -71,7 +71,7 @@ primitive::primitive(
     const dogen::yarn::attribute& value_attribute,
     const bool use_type_aliasing,
     const bool is_immutable,
-    const boost::optional<dogen::yarn::orm_primitive_configuration>& orm_configuration)
+    const boost::optional<dogen::yarn::orm_primitive_properties>& orm_properties)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -85,7 +85,7 @@ primitive::primitive(
       value_attribute_(value_attribute),
       use_type_aliasing_(use_type_aliasing),
       is_immutable_(is_immutable),
-      orm_configuration_(orm_configuration) { }
+      orm_properties_(orm_properties) { }
 
 void primitive::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -119,7 +119,7 @@ void primitive::to_stream(std::ostream& s) const {
       << "\"value_attribute\": " << value_attribute_ << ", "
       << "\"use_type_aliasing\": " << use_type_aliasing_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
-      << "\"orm_configuration\": " << orm_configuration_
+      << "\"orm_properties\": " << orm_properties_
       << " }";
 }
 
@@ -131,7 +131,7 @@ void primitive::swap(primitive& other) noexcept {
     swap(value_attribute_, other.value_attribute_);
     swap(use_type_aliasing_, other.use_type_aliasing_);
     swap(is_immutable_, other.is_immutable_);
-    swap(orm_configuration_, other.orm_configuration_);
+    swap(orm_properties_, other.orm_properties_);
 }
 
 bool primitive::equals(const dogen::yarn::element& other) const {
@@ -146,7 +146,7 @@ bool primitive::operator==(const primitive& rhs) const {
         value_attribute_ == rhs.value_attribute_ &&
         use_type_aliasing_ == rhs.use_type_aliasing_ &&
         is_immutable_ == rhs.is_immutable_ &&
-        orm_configuration_ == rhs.orm_configuration_;
+        orm_properties_ == rhs.orm_properties_;
 }
 
 primitive& primitive::operator=(primitive other) {
@@ -195,20 +195,20 @@ void primitive::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-const boost::optional<dogen::yarn::orm_primitive_configuration>& primitive::orm_configuration() const {
-    return orm_configuration_;
+const boost::optional<dogen::yarn::orm_primitive_properties>& primitive::orm_properties() const {
+    return orm_properties_;
 }
 
-boost::optional<dogen::yarn::orm_primitive_configuration>& primitive::orm_configuration() {
-    return orm_configuration_;
+boost::optional<dogen::yarn::orm_primitive_properties>& primitive::orm_properties() {
+    return orm_properties_;
 }
 
-void primitive::orm_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>& v) {
-    orm_configuration_ = v;
+void primitive::orm_properties(const boost::optional<dogen::yarn::orm_primitive_properties>& v) {
+    orm_properties_ = v;
 }
 
-void primitive::orm_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>&& v) {
-    orm_configuration_ = std::move(v);
+void primitive::orm_properties(const boost::optional<dogen::yarn::orm_primitive_properties>&& v) {
+    orm_properties_ = std::move(v);
 }
 
 } }

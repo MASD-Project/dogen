@@ -27,7 +27,7 @@
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/type_parameters_io.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
-#include "dogen/yarn/io/orm_object_configuration_io.hpp"
+#include "dogen/yarn/io/orm_object_properties_io.hpp"
 
 namespace std {
 
@@ -92,7 +92,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_object_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_object_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -152,7 +152,7 @@ object::object(object&& rhs)
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
       provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
       can_be_primitive_underlier_(std::move(rhs.can_be_primitive_underlier_)),
-      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)) { }
 
 object::object(
     const std::string& documentation,
@@ -189,7 +189,7 @@ object::object(
     const std::list<dogen::yarn::name>& associative_container_keys,
     const bool provides_opaqueness,
     const bool can_be_primitive_underlier,
-    const boost::optional<dogen::yarn::orm_object_configuration>& orm_configuration)
+    const boost::optional<dogen::yarn::orm_object_properties>& orm_properties)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -225,7 +225,7 @@ object::object(
       associative_container_keys_(associative_container_keys),
       provides_opaqueness_(provides_opaqueness),
       can_be_primitive_underlier_(can_be_primitive_underlier),
-      orm_configuration_(orm_configuration) { }
+      orm_properties_(orm_properties) { }
 
 void object::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -281,7 +281,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
       << "\"can_be_primitive_underlier\": " << can_be_primitive_underlier_ << ", "
-      << "\"orm_configuration\": " << orm_configuration_
+      << "\"orm_properties\": " << orm_properties_
       << " }";
 }
 
@@ -315,7 +315,7 @@ void object::swap(object& other) noexcept {
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
     swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
-    swap(orm_configuration_, other.orm_configuration_);
+    swap(orm_properties_, other.orm_properties_);
 }
 
 bool object::equals(const dogen::yarn::element& other) const {
@@ -352,7 +352,7 @@ bool object::operator==(const object& rhs) const {
         associative_container_keys_ == rhs.associative_container_keys_ &&
         provides_opaqueness_ == rhs.provides_opaqueness_ &&
         can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_ &&
-        orm_configuration_ == rhs.orm_configuration_;
+        orm_properties_ == rhs.orm_properties_;
 }
 
 object& object::operator=(object other) {
@@ -673,20 +673,20 @@ void object::can_be_primitive_underlier(const bool v) {
     can_be_primitive_underlier_ = v;
 }
 
-const boost::optional<dogen::yarn::orm_object_configuration>& object::orm_configuration() const {
-    return orm_configuration_;
+const boost::optional<dogen::yarn::orm_object_properties>& object::orm_properties() const {
+    return orm_properties_;
 }
 
-boost::optional<dogen::yarn::orm_object_configuration>& object::orm_configuration() {
-    return orm_configuration_;
+boost::optional<dogen::yarn::orm_object_properties>& object::orm_properties() {
+    return orm_properties_;
 }
 
-void object::orm_configuration(const boost::optional<dogen::yarn::orm_object_configuration>& v) {
-    orm_configuration_ = v;
+void object::orm_properties(const boost::optional<dogen::yarn::orm_object_properties>& v) {
+    orm_properties_ = v;
 }
 
-void object::orm_configuration(const boost::optional<dogen::yarn::orm_object_configuration>&& v) {
-    orm_configuration_ = std::move(v);
+void object::orm_properties(const boost::optional<dogen::yarn::orm_object_properties>&& v) {
+    orm_properties_ = std::move(v);
 }
 
 } }

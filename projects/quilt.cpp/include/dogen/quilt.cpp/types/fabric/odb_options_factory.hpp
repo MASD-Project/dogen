@@ -29,7 +29,7 @@
 #include <string>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/orm_model_configuration.hpp"
+#include "dogen/yarn/types/orm_model_properties.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
@@ -45,7 +45,7 @@ public:
 
 private:
     std::list<std::string>
-    make_databases(const yarn::orm_model_configuration& cfg) const;
+    make_databases(const yarn::orm_model_properties& cfg) const;
 
 public:
     boost::shared_ptr<yarn::element>

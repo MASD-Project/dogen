@@ -31,8 +31,8 @@
 #include <algorithm>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/orm_module_properties.hpp"
 #include "dogen/yarn/serialization/module_fwd_ser.hpp"
-#include "dogen/yarn/types/orm_module_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -67,7 +67,7 @@ public:
         const std::list<std::string>& members,
         const bool is_root,
         const bool is_global_module,
-        const boost::optional<dogen::yarn::orm_module_configuration>& orm_configuration);
+        const boost::optional<dogen::yarn::orm_module_properties>& orm_properties);
 
 private:
     template<typename Archive>
@@ -113,10 +113,10 @@ public:
     void is_global_module(const bool v);
     /**@}*/
 
-    const boost::optional<dogen::yarn::orm_module_configuration>& orm_configuration() const;
-    boost::optional<dogen::yarn::orm_module_configuration>& orm_configuration();
-    void orm_configuration(const boost::optional<dogen::yarn::orm_module_configuration>& v);
-    void orm_configuration(const boost::optional<dogen::yarn::orm_module_configuration>&& v);
+    const boost::optional<dogen::yarn::orm_module_properties>& orm_properties() const;
+    boost::optional<dogen::yarn::orm_module_properties>& orm_properties();
+    void orm_properties(const boost::optional<dogen::yarn::orm_module_properties>& v);
+    void orm_properties(const boost::optional<dogen::yarn::orm_module_properties>&& v);
 
 public:
     bool operator==(const module& rhs) const;
@@ -135,7 +135,7 @@ private:
     std::list<std::string> members_;
     bool is_root_;
     bool is_global_module_;
-    boost::optional<dogen::yarn::orm_module_configuration> orm_configuration_;
+    boost::optional<dogen::yarn::orm_module_properties> orm_properties_;
 };
 
 } }

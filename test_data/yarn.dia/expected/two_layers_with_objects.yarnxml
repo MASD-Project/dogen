@@ -117,9 +117,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration class_id="28" tracking_level="0" version="0">
+				<orm_properties class_id="28" tracking_level="0" version="0">
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -187,9 +187,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -257,9 +257,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 	</modules>
@@ -430,9 +430,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration class_id="39" tracking_level="0" version="0">
+						<orm_properties class_id="39" tracking_level="0" version="0">
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes class_id="40" tracking_level="0" version="0">
@@ -492,9 +492,9 @@
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration class_id="43" tracking_level="0" version="0">
+				<orm_properties class_id="43" tracking_level="0" version="0">
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -640,9 +640,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -702,9 +702,9 @@
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 	</objects>
@@ -776,9 +776,9 @@
 		</members>
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
-		<orm_configuration>
+		<orm_properties>
 			<initialized>0</initialized>
-		</orm_configuration>
+		</orm_properties>
 	</root_module>
 	<input_language>0</input_language>
 	<output_languages class_id="47" tracking_level="0" version="0">
@@ -835,9 +835,9 @@
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_configuration class_id="55" tracking_level="0" version="0">
+	<orm_properties class_id="55" tracking_level="0" version="0">
 		<initialized>0</initialized>
-	</orm_configuration>
+	</orm_properties>
 </entity>
 </boost_serialization>
 

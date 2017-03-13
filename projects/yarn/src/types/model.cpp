@@ -46,7 +46,7 @@ model::model(model&& rhs)
       has_generatable_types_(std::move(rhs.has_generatable_types_)),
       input_language_(std::move(rhs.input_language_)),
       output_language_(std::move(rhs.output_language_)),
-      orm_configuration_(std::move(rhs.orm_configuration_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)) { }
 
 model::model(
     const dogen::yarn::name& name,
@@ -56,7 +56,7 @@ model::model(
     const bool has_generatable_types,
     const dogen::yarn::languages input_language,
     const dogen::yarn::languages output_language,
-    const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration)
+    const boost::optional<dogen::yarn::orm_model_properties>& orm_properties)
     : name_(name),
       elements_(elements),
       root_module_(root_module),
@@ -64,7 +64,7 @@ model::model(
       has_generatable_types_(has_generatable_types),
       input_language_(input_language),
       output_language_(output_language),
-      orm_configuration_(orm_configuration) { }
+      orm_properties_(orm_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -75,7 +75,7 @@ void model::swap(model& other) noexcept {
     swap(has_generatable_types_, other.has_generatable_types_);
     swap(input_language_, other.input_language_);
     swap(output_language_, other.output_language_);
-    swap(orm_configuration_, other.orm_configuration_);
+    swap(orm_properties_, other.orm_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -86,7 +86,7 @@ bool model::operator==(const model& rhs) const {
         has_generatable_types_ == rhs.has_generatable_types_ &&
         input_language_ == rhs.input_language_ &&
         output_language_ == rhs.output_language_ &&
-        orm_configuration_ == rhs.orm_configuration_;
+        orm_properties_ == rhs.orm_properties_;
 }
 
 model& model::operator=(model other) {
@@ -183,20 +183,20 @@ void model::output_language(const dogen::yarn::languages v) {
     output_language_ = v;
 }
 
-const boost::optional<dogen::yarn::orm_model_configuration>& model::orm_configuration() const {
-    return orm_configuration_;
+const boost::optional<dogen::yarn::orm_model_properties>& model::orm_properties() const {
+    return orm_properties_;
 }
 
-boost::optional<dogen::yarn::orm_model_configuration>& model::orm_configuration() {
-    return orm_configuration_;
+boost::optional<dogen::yarn::orm_model_properties>& model::orm_properties() {
+    return orm_properties_;
 }
 
-void model::orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v) {
-    orm_configuration_ = v;
+void model::orm_properties(const boost::optional<dogen::yarn::orm_model_properties>& v) {
+    orm_properties_ = v;
 }
 
-void model::orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>&& v) {
-    orm_configuration_ = std::move(v);
+void model::orm_properties(const boost::optional<dogen::yarn::orm_model_properties>&& v) {
+    orm_properties_ = std::move(v);
 }
 
 } }

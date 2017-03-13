@@ -69,7 +69,7 @@ odb_options_factory::to_string(const yarn::orm_database_systems ds) {
 
 
 std::list<std::string> odb_options_factory::
-make_databases(const yarn::orm_model_configuration& cfg) const {
+make_databases(const yarn::orm_model_properties& cfg) const {
     std::list<std::string> r;
     for (const auto ds : cfg.database_systems())
         r.push_back(to_string(ds));
@@ -88,8 +88,8 @@ odb_options_factory::make(const yarn::intermediate_model& im) const {
     r->name(n);
     r->origin_type(im.origin_type());
 
-    if (im.orm_configuration()) {
-        const auto cfg(*im.orm_configuration());
+    if (im.orm_properties()) {
+        const auto cfg(*im.orm_properties());
         r->databases(make_databases(cfg));
         r->letter_case(cfg.letter_case());
     }

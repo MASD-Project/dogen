@@ -35,8 +35,8 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/element_fwd.hpp"
+#include "dogen/yarn/types/orm_model_properties.hpp"
 #include "dogen/yarn/serialization/model_fwd_ser.hpp"
-#include "dogen/yarn/types/orm_model_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -64,7 +64,7 @@ public:
         const bool has_generatable_types,
         const dogen::yarn::languages input_language,
         const dogen::yarn::languages output_language,
-        const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration);
+        const boost::optional<dogen::yarn::orm_model_properties>& orm_properties);
 
 private:
     template<typename Archive>
@@ -133,10 +133,10 @@ public:
     void output_language(const dogen::yarn::languages v);
     /**@}*/
 
-    const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration() const;
-    boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration();
-    void orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v);
-    void orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>&& v);
+    const boost::optional<dogen::yarn::orm_model_properties>& orm_properties() const;
+    boost::optional<dogen::yarn::orm_model_properties>& orm_properties();
+    void orm_properties(const boost::optional<dogen::yarn::orm_model_properties>& v);
+    void orm_properties(const boost::optional<dogen::yarn::orm_model_properties>&& v);
 
 public:
     bool operator==(const model& rhs) const;
@@ -156,7 +156,7 @@ private:
     bool has_generatable_types_;
     dogen::yarn::languages input_language_;
     dogen::yarn::languages output_language_;
-    boost::optional<dogen::yarn::orm_model_configuration> orm_configuration_;
+    boost::optional<dogen::yarn::orm_model_properties> orm_properties_;
 };
 
 } }

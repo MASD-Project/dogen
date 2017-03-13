@@ -56,9 +56,9 @@ private:
         intermediate_model& im) const;
 
     /**
-     * @brief Reads the ORM configuration from the meta-data.
+     * @brief Reads the ORM properties from the meta-data.
      */
-    void expand_orm_configuration(const annotations::type_repository& atrp,
+    void expand_orm_properties(const annotations::type_repository& atrp,
         intermediate_model& im) const;
 
     /**

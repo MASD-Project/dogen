@@ -23,7 +23,7 @@
 #include "dogen/yarn/io/element_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/primitive_io.hpp"
-#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+#include "dogen/yarn/io/orm_primitive_properties_io.hpp"
 
 namespace dogen {
 namespace yarn {

@@ -23,7 +23,7 @@
 #include "dogen/yarn/types/origin_expander.hpp"
 #include "dogen/yarn/types/parsing_expander.hpp"
 #include "dogen/yarn/types/modules_expander.hpp"
-#include "dogen/yarn/types/orm_configuration_expander.hpp"
+#include "dogen/yarn/types/orm_properties_expander.hpp"
 #include "dogen/yarn/types/language_expander.hpp"
 #include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
@@ -55,9 +55,9 @@ expand_primitives(const annotations::type_repository& atrp,
 }
 
 void first_stage_expander::
-expand_orm_configuration(const annotations::type_repository& atrp,
+expand_orm_properties(const annotations::type_repository& atrp,
     intermediate_model& im) const {
-    orm_configuration_expander ex;
+    orm_properties_expander ex;
     ex.expand(atrp, im);
 }
 
@@ -123,10 +123,10 @@ expand_target(const annotations::annotation_groups_factory& agf,
     expand_language(atrp, im);
 
     /*
-     * There are no particular dependencies on the remaining
+     * There are no particular dependencies on the next set of
      * expansions.
      */
-    expand_orm_configuration(atrp, im);
+    expand_orm_properties(atrp, im);
     expand_type_parameters(atrp, im);
     expand_parsing(atrp, im);
 

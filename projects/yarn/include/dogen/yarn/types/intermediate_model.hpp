@@ -45,8 +45,8 @@
 #include "dogen/yarn/types/element_fwd.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/yarn/types/orm_model_properties.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
-#include "dogen/yarn/types/orm_model_configuration.hpp"
 #include "dogen/yarn/serialization/intermediate_model_fwd_ser.hpp"
 
 namespace dogen {
@@ -86,7 +86,7 @@ public:
         const dogen::yarn::languages input_language,
         const std::list<dogen::yarn::languages>& output_languages,
         const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
-        const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration);
+        const boost::optional<dogen::yarn::orm_model_properties>& orm_properties);
 
 private:
     template<typename Archive>
@@ -257,10 +257,10 @@ public:
     void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v);
     void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v);
 
-    const boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration() const;
-    boost::optional<dogen::yarn::orm_model_configuration>& orm_configuration();
-    void orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>& v);
-    void orm_configuration(const boost::optional<dogen::yarn::orm_model_configuration>&& v);
+    const boost::optional<dogen::yarn::orm_model_properties>& orm_properties() const;
+    boost::optional<dogen::yarn::orm_model_properties>& orm_properties();
+    void orm_properties(const boost::optional<dogen::yarn::orm_model_properties>& v);
+    void orm_properties(const boost::optional<dogen::yarn::orm_model_properties>&& v);
 
 public:
     bool operator==(const intermediate_model& rhs) const;
@@ -291,7 +291,7 @@ private:
     dogen::yarn::languages input_language_;
     std::list<dogen::yarn::languages> output_languages_;
     std::unordered_map<std::string, dogen::annotations::scribble_group> scribble_groups_;
-    boost::optional<dogen::yarn::orm_model_configuration> orm_configuration_;
+    boost::optional<dogen::yarn::orm_model_properties> orm_properties_;
 };
 
 } }

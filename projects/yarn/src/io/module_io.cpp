@@ -23,7 +23,7 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/orm_module_configuration_io.hpp"
+#include "dogen/yarn/io/orm_module_properties_io.hpp"
 
 namespace dogen {
 namespace yarn {

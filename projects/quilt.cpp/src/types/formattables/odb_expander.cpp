@@ -97,13 +97,13 @@ void odb_properties_generator::visit(const yarn::object& o) {
 
     const annotations::entry_selector s(o.annotation());
     auto top_level_pragmas(make_odb_pragmas(type_group_, o.annotation()));
-    if (o.orm_configuration()) {
+    if (o.orm_properties()) {
         /*
-         * If the user has supplied an ORM configuration and this
+         * If the user has supplied an ORM properties and this
          * object does not have a primary key, we need to inject ODB's
          * pragma for it.
          */
-        const auto& cfg(*o.orm_configuration());
+        const auto& cfg(*o.orm_properties());
         op.is_value(cfg.is_value());
 
         if (cfg.generate_mapping() && !cfg.has_primary_key())
@@ -132,8 +132,8 @@ void odb_properties_generator::visit(const yarn::object& o) {
         const auto id(attr.name().id());
         auto attr_pragmas(make_odb_pragmas(type_group_, attr.annotation()));
 
-        if (attr.orm_configuration()) {
-            const auto& cfg(*attr.orm_configuration());
+        if (attr.orm_properties()) {
+            const auto& cfg(*attr.orm_properties());
             if (cfg.is_primary_key())
                 attr_pragmas.push_back(id_pragma);
 
@@ -181,8 +181,8 @@ void odb_properties_generator::visit(const yarn::primitive& p) {
     op.is_value(true);
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, p.annotation()));
 
-    if (p.orm_configuration()) {
-        const auto& cfg(*p.orm_configuration());
+    if (p.orm_properties()) {
+        const auto& cfg(*p.orm_properties());
 
         const auto& sn(cfg.schema_name());
         if (!sn.empty() && cfg.generate_mapping()) {
@@ -256,7 +256,7 @@ make_type_group(const annotations::type_repository& atrp) const {
 
 void odb_expander::
 expand(const annotations::type_repository& atrp, model& fm) const {
-    BOOST_LOG_SEV(lg, debug) << "Started expanding odb configuration.";
+    BOOST_LOG_SEV(lg, debug) << "Started expanding odb properties.";
 
     const auto tg(make_type_group(atrp));
     for (auto& pair : fm.formattables()) {
@@ -272,9 +272,9 @@ expand(const annotations::type_repository& atrp, model& fm) const {
         auto segment(formattable.master_segment());
 
         /*
-         * We only need to generate the aspect configuration for
+         * We only need to generate the aspect properties for
          * elements of the target model. However, we can't perform
-         * this after reduction because the aspect configurations must
+         * this after reduction because the aspect propertiess must
          * be build prior to reduction or else we will not get aspects
          * for referenced models.
          */
@@ -295,7 +295,7 @@ expand(const annotations::type_repository& atrp, model& fm) const {
         eprops.odb_properties(*g.result());
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished expanding odb configuration. ";
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding odb properties. ";
 }
 
 } } } }

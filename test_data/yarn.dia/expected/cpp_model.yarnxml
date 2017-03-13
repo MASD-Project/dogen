@@ -117,9 +117,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration class_id="28" tracking_level="0" version="0">
+				<orm_properties class_id="28" tracking_level="0" version="0">
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -187,9 +187,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -257,9 +257,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -327,9 +327,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -397,9 +397,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -467,9 +467,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -539,9 +539,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -609,9 +609,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -679,9 +679,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -749,9 +749,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -820,9 +820,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -890,9 +890,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 	</modules>
@@ -1044,9 +1044,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration class_id="35" tracking_level="0" version="0">
+						<orm_properties class_id="35" tracking_level="0" version="0">
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes class_id="36" tracking_level="0" version="0">
@@ -1277,9 +1277,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -1475,9 +1475,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -1673,9 +1673,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation>Prove that includes of types get picked up.
@@ -1754,9 +1754,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -1917,9 +1917,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -2080,9 +2080,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -2278,9 +2278,9 @@
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -3730,15 +3730,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration class_id="45" tracking_level="0" version="0">
+				<orm_properties class_id="45" tracking_level="0" version="0">
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -3878,15 +3878,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4026,15 +4026,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4174,15 +4174,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4322,15 +4322,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4470,15 +4470,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4618,15 +4618,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4767,15 +4767,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -4915,15 +4915,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -5063,15 +5063,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -5211,15 +5211,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -5359,15 +5359,15 @@ this is a long comment
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_configuration>
+					<orm_properties>
 						<initialized>0</initialized>
-					</orm_configuration>
+					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 	</primitives>
@@ -5518,9 +5518,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -5615,9 +5615,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration class_id="49" tracking_level="0" version="0">
+				<orm_properties class_id="49" tracking_level="0" version="0">
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -5763,9 +5763,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -5825,9 +5825,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -5973,9 +5973,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -6071,9 +6071,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -6219,9 +6219,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -6281,9 +6281,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -6429,9 +6429,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -6491,9 +6491,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -6638,9 +6638,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -6700,9 +6700,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -6847,9 +6847,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -6944,9 +6944,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -7109,9 +7109,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -7258,9 +7258,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -7355,9 +7355,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -7503,9 +7503,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -7601,9 +7601,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -7765,9 +7765,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -7915,9 +7915,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -7977,9 +7977,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -8108,9 +8108,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -8256,9 +8256,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -8318,9 +8318,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -8468,9 +8468,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -8530,9 +8530,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -8679,9 +8679,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -8741,9 +8741,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -8890,9 +8890,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -8952,9 +8952,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -9099,9 +9099,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -9161,9 +9161,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -9310,9 +9310,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -9372,9 +9372,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -9521,9 +9521,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -9583,9 +9583,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -9730,9 +9730,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -9792,9 +9792,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -9923,9 +9923,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -10072,9 +10072,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -10134,9 +10134,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -10298,9 +10298,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -10446,9 +10446,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -10508,9 +10508,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -10656,9 +10656,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -10736,9 +10736,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -10798,9 +10798,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -10946,9 +10946,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -11008,9 +11008,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -11157,9 +11157,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11237,9 +11237,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11317,9 +11317,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11397,9 +11397,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -11459,9 +11459,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -11607,9 +11607,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11687,9 +11687,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11767,9 +11767,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11847,9 +11847,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -11927,9 +11927,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -12007,9 +12007,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -12087,9 +12087,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -12167,9 +12167,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -12247,9 +12247,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -12327,9 +12327,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -12407,9 +12407,9 @@ this is a long comment
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -12469,9 +12469,9 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -12602,9 +12602,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -12749,9 +12749,9 @@ third line with &quot;quote&quot;
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -12846,9 +12846,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -12994,9 +12994,9 @@ third line with &quot;quote&quot;
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -13056,9 +13056,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -13187,9 +13187,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -13334,9 +13334,9 @@ third line with &quot;quote&quot;
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -13396,9 +13396,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -13544,9 +13544,9 @@ third line with &quot;quote&quot;
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -13606,9 +13606,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -13737,9 +13737,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -13884,9 +13884,9 @@ third line with &quot;quote&quot;
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -13981,9 +13981,9 @@ third line with &quot;quote&quot;
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -14130,9 +14130,9 @@ third line with &quot;quote&quot;
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation>the brief comment
@@ -14213,9 +14213,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -14293,9 +14293,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -14355,9 +14355,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -14503,9 +14503,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -14565,9 +14565,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -14695,9 +14695,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -14843,9 +14843,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -14905,9 +14905,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -15034,9 +15034,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -15163,9 +15163,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -15312,9 +15312,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -15392,9 +15392,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -15472,9 +15472,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -15534,9 +15534,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -15682,9 +15682,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -15744,9 +15744,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -15894,9 +15894,9 @@ a second line
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -15956,9 +15956,9 @@ a second line
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -16123,9 +16123,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -16270,9 +16270,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -16350,9 +16350,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -16430,9 +16430,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -16492,9 +16492,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -16643,9 +16643,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -16705,9 +16705,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -16853,9 +16853,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -16915,9 +16915,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -17062,9 +17062,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -17159,9 +17159,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -17288,9 +17288,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -17452,9 +17452,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -17581,9 +17581,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -17728,9 +17728,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -17790,9 +17790,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -17937,9 +17937,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18017,9 +18017,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18097,9 +18097,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18177,9 +18177,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18257,9 +18257,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18337,9 +18337,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18417,9 +18417,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18497,9 +18497,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18577,9 +18577,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18657,9 +18657,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18737,9 +18737,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18817,9 +18817,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 					<item>
 						<documentation></documentation>
@@ -18897,9 +18897,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -18959,9 +18959,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -19106,9 +19106,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -19168,9 +19168,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -19315,9 +19315,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -19412,9 +19412,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -19576,9 +19576,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -19706,9 +19706,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -19853,9 +19853,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -19915,9 +19915,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -20045,9 +20045,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 		<item>
@@ -20192,9 +20192,9 @@ modeled by the base.
 						</parsed_type>
 						<is_immutable>0</is_immutable>
 						<is_fluent>0</is_fluent>
-						<orm_configuration>
+						<orm_properties>
 							<initialized>0</initialized>
-						</orm_configuration>
+						</orm_properties>
 					</item>
 				</local_attributes>
 				<inherited_attributes>
@@ -20289,9 +20289,9 @@ modeled by the base.
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration>
+				<orm_properties>
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 	</objects>
@@ -20487,9 +20487,9 @@ modeled by the base.
 		</members>
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
-		<orm_configuration>
+		<orm_properties>
 			<initialized>0</initialized>
-		</orm_configuration>
+		</orm_properties>
 	</root_module>
 	<input_language>0</input_language>
 	<output_languages class_id="54" tracking_level="0" version="0">
@@ -21288,9 +21288,9 @@ modeled by the base.
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_configuration class_id="63" tracking_level="0" version="0">
+	<orm_properties class_id="63" tracking_level="0" version="0">
 		<initialized>0</initialized>
-	</orm_configuration>
+	</orm_properties>
 </entity>
 </boost_serialization>
 

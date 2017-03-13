@@ -27,8 +27,8 @@
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/orm_object_configuration.hpp"
-#include "dogen/yarn/types/orm_primitive_configuration.hpp"
+#include "dogen/yarn/types/orm_object_properties.hpp"
+#include "dogen/yarn/types/orm_primitive_properties.hpp"
 #include "dogen/yarn/types/stereotypes_expander.hpp"
 
 using namespace dogen::utility::log;
@@ -54,7 +54,7 @@ const std::string leaf_not_found("Could not find leaf object: ");
 const std::string leaves_not_found("Could not find leaves for: ");
 const std::string no_visitees("Visitor is not visiting any types: ");
 const std::string visitable_child("Children cannot be marked as visitable: ");
-const std::string invalid_primitive_configuration(
+const std::string invalid_primitive_properties(
     "Primitive cannot have a stereotype of 'orm_object': ");
 
 }
@@ -311,14 +311,14 @@ void stereotypes_expander::expand(object& o, intermediate_model& im) const {
         else if (s == stereotype_immutable)
             o.is_immutable(true);
         else if (s == stereotype_orm_object) {
-            orm_object_configuration cfg;
+            orm_object_properties cfg;
             cfg.generate_mapping(true);
-            o.orm_configuration(cfg);
+            o.orm_properties(cfg);
         } else if (s == stereotype_orm_value) {
-            orm_object_configuration cfg;
+            orm_object_properties cfg;
             cfg.generate_mapping(true);
             cfg.is_value(true);
-            o.orm_configuration(cfg);
+            o.orm_properties(cfg);
         } else {
             const bool processed(try_expand_concept(s, o, im));
             if (!processed)
@@ -343,13 +343,13 @@ void stereotypes_expander::expand(primitive& p) const {
         if (s == stereotype_immutable)
             p.is_immutable(true);
         else if (s == stereotype_orm_value) {
-            orm_primitive_configuration cfg;
+            orm_primitive_properties cfg;
             cfg.generate_mapping(true);
-            p.orm_configuration(cfg);
+            p.orm_properties(cfg);
         } else if (s == stereotype_orm_object) {
-            BOOST_LOG_SEV(lg, error) << invalid_primitive_configuration << id;
+            BOOST_LOG_SEV(lg, error) << invalid_primitive_properties << id;
             BOOST_THROW_EXCEPTION(
-                expansion_error(invalid_primitive_configuration + id));
+                expansion_error(invalid_primitive_properties + id));
         } else
             unknown_stereotypes.push_back(s);
     }

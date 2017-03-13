@@ -23,7 +23,7 @@
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/name_tree_td.hpp"
 #include "dogen/annotations/test_data/annotation_td.hpp"
-#include "dogen/yarn/test_data/orm_attribute_configuration_td.hpp"
+#include "dogen/yarn/test_data/orm_attribute_properties_td.hpp"
 
 namespace {
 
@@ -52,15 +52,15 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-dogen::yarn::orm_attribute_configuration
-create_dogen_yarn_orm_attribute_configuration(const unsigned int position) {
-    return dogen::yarn::orm_attribute_configuration_generator::create(position);
+dogen::yarn::orm_attribute_properties
+create_dogen_yarn_orm_attribute_properties(const unsigned int position) {
+    return dogen::yarn::orm_attribute_properties_generator::create(position);
 }
 
-boost::optional<dogen::yarn::orm_attribute_configuration>
-create_boost_optional_dogen_yarn_orm_attribute_configuration(unsigned int position) {
-    boost::optional<dogen::yarn::orm_attribute_configuration> r(
-        create_dogen_yarn_orm_attribute_configuration(position));
+boost::optional<dogen::yarn::orm_attribute_properties>
+create_boost_optional_dogen_yarn_orm_attribute_properties(unsigned int position) {
+    boost::optional<dogen::yarn::orm_attribute_properties> r(
+        create_dogen_yarn_orm_attribute_properties(position));
     return r;
 }
 
@@ -80,7 +80,7 @@ populate(const unsigned int position, result_type& v) {
     v.parsed_type(create_dogen_yarn_name_tree(position + 4));
     v.is_immutable(create_bool(position + 5));
     v.is_fluent(create_bool(position + 6));
-    v.orm_configuration(create_boost_optional_dogen_yarn_orm_attribute_configuration(position + 7));
+    v.orm_properties(create_boost_optional_dogen_yarn_orm_attribute_properties(position + 7));
 }
 
 attribute_generator::result_type

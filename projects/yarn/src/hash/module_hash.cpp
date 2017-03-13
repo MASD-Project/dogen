@@ -20,7 +20,7 @@
  */
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/element_hash.hpp"
-#include "dogen/yarn/hash/orm_module_configuration_hash.hpp"
+#include "dogen/yarn/hash/orm_module_properties_hash.hpp"
 
 namespace {
 
@@ -38,7 +38,7 @@ inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     return seed;
 }
 
-inline std::size_t hash_boost_optional_dogen_yarn_orm_module_configuration(const boost::optional<dogen::yarn::orm_module_configuration>& v) {
+inline std::size_t hash_boost_optional_dogen_yarn_orm_module_properties(const boost::optional<dogen::yarn::orm_module_properties>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -61,7 +61,7 @@ std::size_t module_hasher::hash(const module& v) {
     combine(seed, hash_std_list_std_string(v.members()));
     combine(seed, v.is_root());
     combine(seed, v.is_global_module());
-    combine(seed, hash_boost_optional_dogen_yarn_orm_module_configuration(v.orm_configuration()));
+    combine(seed, hash_boost_optional_dogen_yarn_orm_module_properties(v.orm_properties()));
 
     return seed;
 }

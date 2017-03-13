@@ -137,7 +137,7 @@ model transformer::transform(const intermediate_model& im) const {
 
     r.root_module(im.root_module());
     r.has_generatable_types(im.has_generatable_types());
-    r.orm_configuration(im.orm_configuration());
+    r.orm_properties(im.orm_properties());
 
     const auto size(compute_total_size(im));
     r.elements().reserve(size);

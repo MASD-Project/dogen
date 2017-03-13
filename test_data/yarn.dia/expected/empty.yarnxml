@@ -113,9 +113,9 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration class_id="28" tracking_level="0" version="0">
+				<orm_properties class_id="28" tracking_level="0" version="0">
 					<initialized>0</initialized>
-				</orm_configuration>
+				</orm_properties>
 			</second>
 		</item>
 	</modules>
@@ -212,9 +212,9 @@
 		</members>
 		<is_root>0</is_root>
 		<is_global_module>0</is_global_module>
-		<orm_configuration>
+		<orm_properties>
 			<initialized>0</initialized>
-		</orm_configuration>
+		</orm_properties>
 	</root_module>
 	<input_language>0</input_language>
 	<output_languages class_id="37" tracking_level="0" version="0">
@@ -226,9 +226,9 @@
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</scribble_groups>
-	<orm_configuration class_id="39" tracking_level="0" version="0">
+	<orm_properties class_id="39" tracking_level="0" version="0">
 		<initialized>0</initialized>
-	</orm_configuration>
+	</orm_properties>
 </entity>
 </boost_serialization>
 

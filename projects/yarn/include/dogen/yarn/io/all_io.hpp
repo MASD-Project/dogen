@@ -57,12 +57,12 @@
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/decomposition_result_io.hpp"
 #include "dogen/yarn/io/orm_database_systems_io.hpp"
+#include "dogen/yarn/io/orm_model_properties_io.hpp"
+#include "dogen/yarn/io/orm_module_properties_io.hpp"
+#include "dogen/yarn/io/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/mapping_set_repository_io.hpp"
-#include "dogen/yarn/io/orm_model_configuration_io.hpp"
-#include "dogen/yarn/io/orm_module_configuration_io.hpp"
-#include "dogen/yarn/io/orm_object_configuration_io.hpp"
-#include "dogen/yarn/io/orm_attribute_configuration_io.hpp"
-#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+#include "dogen/yarn/io/orm_attribute_properties_io.hpp"
+#include "dogen/yarn/io/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/io/intermediate_model_repository_io.hpp"
 
 #endif

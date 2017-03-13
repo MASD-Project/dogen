@@ -21,7 +21,7 @@
 #include <sstream>
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/element_td.hpp"
-#include "dogen/yarn/test_data/orm_module_configuration_td.hpp"
+#include "dogen/yarn/test_data/orm_module_properties_td.hpp"
 
 namespace {
 
@@ -43,15 +43,15 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
-dogen::yarn::orm_module_configuration
-create_dogen_yarn_orm_module_configuration(const unsigned int position) {
-    return dogen::yarn::orm_module_configuration_generator::create(position);
+dogen::yarn::orm_module_properties
+create_dogen_yarn_orm_module_properties(const unsigned int position) {
+    return dogen::yarn::orm_module_properties_generator::create(position);
 }
 
-boost::optional<dogen::yarn::orm_module_configuration>
-create_boost_optional_dogen_yarn_orm_module_configuration(unsigned int position) {
-    boost::optional<dogen::yarn::orm_module_configuration> r(
-        create_dogen_yarn_orm_module_configuration(position));
+boost::optional<dogen::yarn::orm_module_properties>
+create_boost_optional_dogen_yarn_orm_module_properties(unsigned int position) {
+    boost::optional<dogen::yarn::orm_module_properties> r(
+        create_dogen_yarn_orm_module_properties(position));
     return r;
 }
 
@@ -68,7 +68,7 @@ populate(const unsigned int position, result_type& v) {
     v.members(create_std_list_std_string(position + 0));
     v.is_root(create_bool(position + 1));
     v.is_global_module(create_bool(position + 2));
-    v.orm_configuration(create_boost_optional_dogen_yarn_orm_module_configuration(position + 3));
+    v.orm_properties(create_boost_optional_dogen_yarn_orm_module_properties(position + 3));
 }
 
 module_generator::result_type

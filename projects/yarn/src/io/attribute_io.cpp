@@ -25,7 +25,7 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
-#include "dogen/yarn/io/orm_attribute_configuration_io.hpp"
+#include "dogen/yarn/io/orm_attribute_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -37,7 +37,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_attribute_configuration>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_attribute_properties>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -69,7 +69,7 @@ std::ostream& operator<<(std::ostream& s, const attribute& v) {
       << "\"parsed_type\": " << v.parsed_type() << ", "
       << "\"is_immutable\": " << v.is_immutable() << ", "
       << "\"is_fluent\": " << v.is_fluent() << ", "
-      << "\"orm_configuration\": " << v.orm_configuration()
+      << "\"orm_properties\": " << v.orm_properties()
       << " }";
     return(s);
 }

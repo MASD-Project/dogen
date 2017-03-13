@@ -57,12 +57,12 @@
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/decomposition_result_hash.hpp"
 #include "dogen/yarn/hash/orm_database_systems_hash.hpp"
+#include "dogen/yarn/hash/orm_model_properties_hash.hpp"
+#include "dogen/yarn/hash/orm_module_properties_hash.hpp"
+#include "dogen/yarn/hash/orm_object_properties_hash.hpp"
 #include "dogen/yarn/hash/mapping_set_repository_hash.hpp"
-#include "dogen/yarn/hash/orm_model_configuration_hash.hpp"
-#include "dogen/yarn/hash/orm_module_configuration_hash.hpp"
-#include "dogen/yarn/hash/orm_object_configuration_hash.hpp"
-#include "dogen/yarn/hash/orm_attribute_configuration_hash.hpp"
-#include "dogen/yarn/hash/orm_primitive_configuration_hash.hpp"
+#include "dogen/yarn/hash/orm_attribute_properties_hash.hpp"
+#include "dogen/yarn/hash/orm_primitive_properties_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_repository_hash.hpp"
 
 #endif

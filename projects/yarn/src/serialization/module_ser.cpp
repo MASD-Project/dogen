@@ -32,7 +32,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/module_ser.hpp"
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/yarn/serialization/orm_module_configuration_ser.hpp"
+#include "dogen/yarn/serialization/orm_module_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::module,
@@ -50,7 +50,7 @@ void save(Archive& ar,
     ar << make_nvp("members", v.members_);
     ar << make_nvp("is_root", v.is_root_);
     ar << make_nvp("is_global_module", v.is_global_module_);
-    ar << make_nvp("orm_configuration", v.orm_configuration_);
+    ar << make_nvp("orm_properties", v.orm_properties_);
 }
 
 template<typename Archive>
@@ -62,7 +62,7 @@ void load(Archive& ar,
     ar >> make_nvp("members", v.members_);
     ar >> make_nvp("is_root", v.is_root_);
     ar >> make_nvp("is_global_module", v.is_global_module_);
-    ar >> make_nvp("orm_configuration", v.orm_configuration_);
+    ar >> make_nvp("orm_properties", v.orm_properties_);
 }
 
 } }
