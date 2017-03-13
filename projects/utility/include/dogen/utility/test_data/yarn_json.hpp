@@ -61,6 +61,7 @@ public:
     static boost::filesystem::path input_all_path_and_directory_settings_json();
     static boost::filesystem::path input_split_project_json();
     static boost::filesystem::path input_cpp_98_json();
+    static boost::filesystem::path input_lam_model_json();
     static boost::filesystem::path input_csharp_model_json();
 
     static boost::filesystem::path expected();

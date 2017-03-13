@@ -50,6 +50,7 @@ path input_all_path_and_directory_settings_json(
     "yarn.json/input/all_path_and_directory_settings.json");
 path input_split_project_json("yarn.json/input/split_project.json");
 path input_cpp_98_json("yarn.json/input/cpp_98.json");
+path input_lam_model_json("yarn.json/input/lam_model.json");
 path input_csharp_model_json("yarn.json/input/CSharpModel.json");
 
 
@@ -138,6 +139,10 @@ path yarn_json::input_split_project_json() {
 
 path yarn_json::input_cpp_98_json() {
     return validating_resolver::resolve(::input_cpp_98_json);
+}
+
+path yarn_json::input_lam_model_json() {
+    return validating_resolver::resolve(::input_lam_model_json);
 }
 
 path yarn_json::input_csharp_model_json() {

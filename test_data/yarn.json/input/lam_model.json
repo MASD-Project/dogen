@@ -6,8 +6,10 @@
     "yarn.dia.external_modules": "dogen::test_models",
     "yarn.input_language": "language_agnostic",
     "yarn.output_language": "csharp",
+    "yarn.output_language": "cpp",
     "quilt.cpp.enabled": "true",
-    "quilt.csharp.enabled": "true"
+    "quilt.csharp.enabled": "true",
+    "annotations.profile": "dogen"
   },
   "elements": [
     {

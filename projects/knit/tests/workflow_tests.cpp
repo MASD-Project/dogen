@@ -375,6 +375,12 @@ BOOST_AUTO_TEST_CASE(cpp_98_model_generates_expected_code_json) {
     BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
 }
 
+BOOST_AUTO_TEST_CASE(lam_model_generates_expected_code_json) {
+    SETUP_TEST_LOG("lam_model_generates_expected_code_json");
+    const auto json(yarn_json::input_lam_model_json());
+    BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
+}
+
 #ifdef ENABLE_CSHARP_TESTS
 
 BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
