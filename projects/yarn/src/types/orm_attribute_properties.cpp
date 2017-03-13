@@ -24,23 +24,27 @@ namespace dogen {
 namespace yarn {
 
 orm_attribute_properties::orm_attribute_properties()
-    : is_primary_key_(static_cast<bool>(0)) { }
+    : is_primary_key_(static_cast<bool>(0)),
+      is_composite_(static_cast<bool>(0)) { }
 
 orm_attribute_properties::orm_attribute_properties(orm_attribute_properties&& rhs)
     : column_name_(std::move(rhs.column_name_)),
       is_primary_key_(std::move(rhs.is_primary_key_)),
       is_nullable_(std::move(rhs.is_nullable_)),
-      type_overrides_(std::move(rhs.type_overrides_)) { }
+      type_overrides_(std::move(rhs.type_overrides_)),
+      is_composite_(std::move(rhs.is_composite_)) { }
 
 orm_attribute_properties::orm_attribute_properties(
     const std::string& column_name,
     const bool is_primary_key,
     const boost::optional<bool>& is_nullable,
-    const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& type_overrides)
+    const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& type_overrides,
+    const bool is_composite)
     : column_name_(column_name),
       is_primary_key_(is_primary_key),
       is_nullable_(is_nullable),
-      type_overrides_(type_overrides) { }
+      type_overrides_(type_overrides),
+      is_composite_(is_composite) { }
 
 void orm_attribute_properties::swap(orm_attribute_properties& other) noexcept {
     using std::swap;
@@ -48,13 +52,15 @@ void orm_attribute_properties::swap(orm_attribute_properties& other) noexcept {
     swap(is_primary_key_, other.is_primary_key_);
     swap(is_nullable_, other.is_nullable_);
     swap(type_overrides_, other.type_overrides_);
+    swap(is_composite_, other.is_composite_);
 }
 
 bool orm_attribute_properties::operator==(const orm_attribute_properties& rhs) const {
     return column_name_ == rhs.column_name_ &&
         is_primary_key_ == rhs.is_primary_key_ &&
         is_nullable_ == rhs.is_nullable_ &&
-        type_overrides_ == rhs.type_overrides_;
+        type_overrides_ == rhs.type_overrides_ &&
+        is_composite_ == rhs.is_composite_;
 }
 
 orm_attribute_properties& orm_attribute_properties::operator=(orm_attribute_properties other) {
@@ -117,6 +123,14 @@ void orm_attribute_properties::type_overrides(const std::unordered_map<dogen::ya
 
 void orm_attribute_properties::type_overrides(const std::unordered_map<dogen::yarn::orm_database_systems, std::string>&& v) {
     type_overrides_ = std::move(v);
+}
+
+bool orm_attribute_properties::is_composite() const {
+    return is_composite_;
+}
+
+void orm_attribute_properties::is_composite(const bool v) {
+    is_composite_ = v;
 }
 
 } }

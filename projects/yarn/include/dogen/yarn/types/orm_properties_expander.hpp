@@ -66,6 +66,7 @@ private:
         annotations::type is_nullable;
         annotations::type letter_case;
         annotations::type type_override;
+        annotations::type is_composite;
     };
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);

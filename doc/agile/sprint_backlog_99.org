@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-13 Mon 20:16]
+#+CAPTION: Clock summary at [2017-03-13 Mon 21:10]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *39:13* |       |       | 100.0 |
+| *Total time*                                                                | *40:06* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 39:13   |       |       | 100.0 |
-| Active                                                                      |         | 39:13 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:01 |   2.6 |
+| Stories                                                                     | 40:06   |       |       | 100.0 |
+| Active                                                                      |         | 40:06 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:01 |   2.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:26 |   1.1 |
-| COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   7.6 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |  12.9 |
-| COMPLETED Split include and source directories                              |         |       |  5:22 |  13.7 |
-| COMPLETED Add C++-03 mode                                                   |         |       |  8:19 |  21.2 |
-| COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   6.7 |
+| COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   7.4 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |  12.6 |
+| COMPLETED Split include and source directories                              |         |       |  5:22 |  13.4 |
+| COMPLETED Add C++-03 mode                                                   |         |       |  8:19 |  20.7 |
+| COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   6.6 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       |  0:11 |   0.5 |
 | STARTED Build on tags for Windows                                           |         |       |  0:15 |   0.6 |
 | STARTED Add a "flat directory" mode                                         |         |       |  0:08 |   0.3 |
 | STARTED Handling of visual studio projects and solutions is incorrect       |         |       |  1:11 |   3.0 |
-| STARTED Implement the database model using Northwind                        |         |       | 11:40 |  29.7 |
+| STARTED Implement the database model using Northwind                        |         |       | 12:33 |  31.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -379,6 +379,7 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-13 Mon 20:17]--[2017-03-13 Mon 21:10] =>  0:53
     CLOCK: [2017-03-13 Mon 19:35]--[2017-03-13 Mon 20:16] =>  0:41
     CLOCK: [2017-03-13 Mon 17:57]--[2017-03-13 Mon 18:31] =>  0:34
     CLOCK: [2017-03-13 Mon 16:45]--[2017-03-13 Mon 17:56] =>  1:11

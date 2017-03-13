@@ -80,7 +80,8 @@ std::ostream& operator<<(std::ostream& s, const orm_attribute_properties& v) {
       << "\"column_name\": " << "\"" << tidy_up_string(v.column_name()) << "\"" << ", "
       << "\"is_primary_key\": " << v.is_primary_key() << ", "
       << "\"is_nullable\": " << v.is_nullable() << ", "
-      << "\"type_overrides\": " << v.type_overrides()
+      << "\"type_overrides\": " << v.type_overrides() << ", "
+      << "\"is_composite\": " << v.is_composite()
       << " }";
     return(s);
 }

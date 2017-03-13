@@ -142,6 +142,7 @@ operator<<(std::ostream& s, const orm_properties_expander::type_group& v) {
       << "\"is_primary_key\": " << v.is_primary_key << ", "
       << "\"letter_case\": " << v.letter_case << ", "
       << "\"type_override\": " << v.type_override
+      << "\"is_composite\": " << v.is_composite
       << " }";
 
     return s;
@@ -176,6 +177,9 @@ make_type_group(const annotations::type_repository& atrp) const {
 
     const auto& to(traits::orm::type_override());
     r.type_override = rs.select_type_by_name(to);
+
+    const auto& ic(traits::orm::is_composite());
+    r.is_composite = rs.select_type_by_name(ic);
 
     return r;
 }
@@ -254,6 +258,11 @@ orm_properties_expander::make_attribute_properties(const type_group& tg,
         found_any = true;
         const auto to(s.get_text_collection_content(tg.type_override));
         r.type_overrides(make_type_overrides(to));
+    }
+
+    if (s.has_entry(tg.is_composite)) {
+        found_any = true;
+        r.is_composite(s.get_boolean_content(tg.is_composite));
     }
 
     if (found_any)

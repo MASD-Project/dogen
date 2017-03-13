@@ -60,6 +60,7 @@ std::size_t orm_attribute_properties_hasher::hash(const orm_attribute_properties
     combine(seed, v.is_primary_key());
     combine(seed, hash_boost_optional_bool(v.is_nullable()));
     combine(seed, hash_std_unordered_map_dogen_yarn_orm_database_systems_std_string(v.type_overrides()));
+    combine(seed, v.is_composite());
 
     return seed;
 }

@@ -31160,7 +31160,7 @@ output languages.#</dia:string>
         <dia:point val="-119,32"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-119.05,31.95;-91.5,37.25"/>
+        <dia:rectangle val="-119.05,31.95;-91.5,38.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-119,32"/>
@@ -31169,7 +31169,7 @@ output languages.#</dia:string>
         <dia:real val="27.449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.2000000000000011"/>
+        <dia:real val="6"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#orm_attribute_properties#</dia:string>
@@ -31340,6 +31340,29 @@ output languages.#</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
             <dia:string>#Override the default type for this attribute for a given database system.#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="visibility">
+            <dia:enum val="0"/>
+          </dia:attribute>
+          <dia:attribute name="abstract">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+          <dia:attribute name="class_scope">
+            <dia:boolean val="false"/>
+          </dia:attribute>
+        </dia:composite>
+        <dia:composite type="umlattribute">
+          <dia:attribute name="name">
+            <dia:string>#is_composite#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="type">
+            <dia:string>#bool#</dia:string>
+          </dia:attribute>
+          <dia:attribute name="value">
+            <dia:string>##</dia:string>
+          </dia:attribute>
+          <dia:attribute name="comment">
+            <dia:string>#If true, the value of this attribute is a composite value.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -32014,7 +32037,7 @@ output languages.#</dia:string>
         <dia:point val="-42.585,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-50.5225,82.25;-41.835,92.5499"/>
+        <dia:rectangle val="-50.5225,82.25;-41.835,91.7499"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32085,7 +32108,7 @@ output languages.#</dia:string>
         <dia:point val="53.29,58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.54,57.65;62.2,78.6"/>
+        <dia:rectangle val="52.54,57.65;62.2,77.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -32156,7 +32179,7 @@ output languages.#</dia:string>
         <dia:point val="30.295,16.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="29.545,15.35;40.05,21.7"/>
+        <dia:rectangle val="29.545,15.35;40.05,20.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

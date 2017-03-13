@@ -287,6 +287,18 @@
   },
   {
     "name": {
+      "simple": "is_composite",
+      "qualified": "yarn.orm.is_composite"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "boolean",
+    "template_kind": "instance",
+    "scope": "property"
+  },
+  {
+    "name": {
       "simple": "letter_case",
       "qualified": "yarn.orm.letter_case"
     },

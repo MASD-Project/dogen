@@ -73,6 +73,7 @@ struct traits {
         static std::string is_nullable();
         static std::string letter_case();
         static std::string type_override();
+        static std::string is_composite();
     };
 };
 

@@ -152,4 +152,9 @@ std::string traits::orm::type_override() {
     return r;
 }
 
+std::string traits::orm::is_composite() {
+    static std::string r("yarn.orm.is_composite");
+    return r;
+}
+
 } }

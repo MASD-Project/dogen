@@ -38,7 +38,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.odb_expander"));
 
-const std::string primitive_column_attribute("column(\"\")");
+const std::string empty_column_attribute("column(\"\")");
 const std::string id_pragma("id");
 const std::string no_id_pragma("no_id");
 
@@ -137,6 +137,13 @@ void odb_properties_generator::visit(const yarn::object& o) {
             if (cfg.is_primary_key())
                 attr_pragmas.push_back(id_pragma);
 
+            /*
+             * For composite keys, we do not want to use the column
+             * name as a prefix.
+             */
+            if (cfg.is_composite())
+                attr_pragmas.push_back(empty_column_attribute);
+
             if (cfg.is_nullable()) {
                 if (*cfg.is_nullable())
                     attr_pragmas.push_back(null_pragma);
@@ -217,7 +224,7 @@ void odb_properties_generator::visit(const yarn::primitive& p) {
      * instead.
      */
     const auto& attr(p.value_attribute());
-    const auto pragmas(std::list<std::string> { primitive_column_attribute });
+    const auto pragmas(std::list<std::string> { empty_column_attribute });
 
     const auto id(attr.name().id());
     op.attribute_level_odb_pragmas()[id] = pragmas;

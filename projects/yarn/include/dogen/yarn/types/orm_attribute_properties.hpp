@@ -52,7 +52,8 @@ public:
         const std::string& column_name,
         const bool is_primary_key,
         const boost::optional<bool>& is_nullable,
-        const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& type_overrides);
+        const std::unordered_map<dogen::yarn::orm_database_systems, std::string>& type_overrides,
+        const bool is_composite);
 
 private:
     template<typename Archive>
@@ -100,6 +101,14 @@ public:
     void type_overrides(const std::unordered_map<dogen::yarn::orm_database_systems, std::string>&& v);
     /**@}*/
 
+    /**
+     * @brief If true, the value of this attribute is a composite value.
+     */
+    /**@{*/
+    bool is_composite() const;
+    void is_composite(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const orm_attribute_properties& rhs) const;
     bool operator!=(const orm_attribute_properties& rhs) const {
@@ -115,6 +124,7 @@ private:
     bool is_primary_key_;
     boost::optional<bool> is_nullable_;
     std::unordered_map<dogen::yarn::orm_database_systems, std::string> type_overrides_;
+    bool is_composite_;
 };
 
 } }

@@ -44,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("is_primary_key", v.is_primary_key_);
     ar << make_nvp("is_nullable", v.is_nullable_);
     ar << make_nvp("type_overrides", v.type_overrides_);
+    ar << make_nvp("is_composite", v.is_composite_);
 }
 
 template<typename Archive>
@@ -54,6 +55,7 @@ void load(Archive& ar,
     ar >> make_nvp("is_primary_key", v.is_primary_key_);
     ar >> make_nvp("is_nullable", v.is_nullable_);
     ar >> make_nvp("type_overrides", v.type_overrides_);
+    ar >> make_nvp("is_composite", v.is_composite_);
 }
 
 } }

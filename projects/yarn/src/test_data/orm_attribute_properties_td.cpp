@@ -67,6 +67,7 @@ populate(const unsigned int position, result_type& v) {
     v.is_primary_key(create_bool(position + 1));
     v.is_nullable(create_boost_optional_bool(position + 2));
     v.type_overrides(create_std_unordered_map_dogen_yarn_orm_database_systems_std_string(position + 3));
+    v.is_composite(create_bool(position + 4));
 }
 
 orm_attribute_properties_generator::result_type
