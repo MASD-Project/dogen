@@ -378,7 +378,8 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
-    CLOCK: [2017-03-13 Mon 11:02]
+    CLOCK: [2017-03-13 Mon 13:35]
+    CLOCK: [2017-03-13 Mon 11:02]--[2017-03-13 Mon 11:25] =>  0:23
     CLOCK: [2017-03-13 Mon 10:30]--[2017-03-13 Mon 10:34] =>  0:04
     CLOCK: [2017-03-13 Mon 09:12]--[2017-03-13 Mon 10:03] =>  0:51
     CLOCK: [2017-03-12 Sun 21:37]--[2017-03-12 Sun 21:51] =>  0:14
@@ -413,6 +414,31 @@ Notes:
 
 : set linesize 8192
 : set pagesize 50000
+
+*** Ignore ODB files automatically                                    :story:
+
+At present we are adding the following regular expressions to knitter
+whenever we are using ODB with dogen:
+
+:        --ignore-files-matching-regex .*sql
+:        --ignore-files-matching-regex .*-odb.*)
+
+We should inject the ODB files automatically into the list of expected
+files. For a given element =foreign_key=, we will have a dogen file
+
+: foreign_key_pragmas.hpp
+
+We will also have the following ODB files:
+
+: foreign_key-odb.cxx
+: foreign_key-odb.hxx
+: foreign_key-odb.ipp
+: foreign_key-odb.ixx
+
+The first file can either be on the =include/odb= directory or on the
+=src/odb= directory (it is moved by the ODB target). All other files
+are placed in the =include/odb= folder. Note that at present we are
+using =cpp= extension rather than =cxx=.
 
 *** Rename main Dogen package in Debian                               :story:
 

@@ -44,9 +44,9 @@ include_directories(
 #
 if(ODB_FOUND)
     message(STATUS "Adding ODB feature test project")
-    include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/database/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
+    # include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/database/include)
+    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database)
+    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/database/spec)
 endif()
 
 # global targets
