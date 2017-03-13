@@ -32,6 +32,7 @@
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
 #include "dogen/yarn/types/injection_expander.hpp"
+#include "dogen/yarn/types/orm_properties_expander.hpp"
 #include "dogen/yarn/types/second_stage_validator.hpp"
 #include "dogen/yarn/types/second_stage_expander.hpp"
 
@@ -129,6 +130,13 @@ void second_stage_expander::expand_containment(intermediate_model& im) const {
 }
 
 void second_stage_expander::
+expand_orm_properties(const annotations::type_repository& atrp,
+    intermediate_model& im) const {
+    orm_properties_expander ex;
+    ex.expand(atrp, im);
+}
+
+void second_stage_expander::
 resolve_element_references(const indices& idx, intermediate_model& im) const {
     resolver rs;
     rs.resolve(idx, im);
@@ -215,6 +223,12 @@ make(const annotations::type_repository& atrp, const injector_registrar& rg,
     expand_stereotypes(r);
     expand_concepts(r);
     expand_containment(r);
+
+    /*
+     * ORM properties must be expanded after stereotypes and
+     * containment.
+     */
+    expand_orm_properties(atrp, r);
 
     /*
      * Resolution must be done after system elements have been

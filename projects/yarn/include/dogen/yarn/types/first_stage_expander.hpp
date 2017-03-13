@@ -56,12 +56,6 @@ private:
         intermediate_model& im) const;
 
     /**
-     * @brief Reads the ORM properties from the meta-data.
-     */
-    void expand_orm_properties(const annotations::type_repository& atrp,
-        intermediate_model& im) const;
-
-    /**
      * @brief Reads the model language from meta-data.
      */
     void expand_language(const annotations::type_repository& atrp,

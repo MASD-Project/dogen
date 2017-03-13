@@ -80,6 +80,12 @@ private:
     void expand_containment(intermediate_model& im) const;
 
     /**
+     * @brief Reads the ORM properties from the meta-data.
+     */
+    void expand_orm_properties(const annotations::type_repository& atrp,
+        intermediate_model& im) const;
+
+    /**
      * @brief Ensures all references point to elements in the model.
      */
     void resolve_element_references(const indices& idx,
