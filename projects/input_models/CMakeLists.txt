@@ -94,9 +94,9 @@ if (DOGEN_KNITTER_COMMAND)
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
 
-    set(target database)
+    set(target northwind)
     add_custom_target(knit_${target}
-        COMMENT "Knitting database model" VERBATIM
+        COMMENT "Knitting northwind model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_COMMAND}
         --target ${models_dir}/${target}.dia
@@ -250,9 +250,9 @@ if (DOGEN_KNITTER_COMMAND)
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
-        set(target database)
+        set(target northwind)
         add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting database model" VERBATIM
+            COMMENT "Benchmarking knitting northwind model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
