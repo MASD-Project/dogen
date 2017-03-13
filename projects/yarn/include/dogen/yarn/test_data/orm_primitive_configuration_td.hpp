@@ -18,19 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/primitive_io.hpp"
-#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+#ifndef DOGEN_YARN_TEST_DATA_ORM_PRIMITIVE_CONFIGURATION_TD_HPP
+#define DOGEN_YARN_TEST_DATA_ORM_PRIMITIVE_CONFIGURATION_TD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn/types/orm_primitive_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const primitive& v) {
-    v.to_stream(s);
-    return(s);
-}
+class orm_primitive_configuration_generator {
+public:
+    orm_primitive_configuration_generator();
+
+public:
+    typedef dogen::yarn::orm_primitive_configuration result_type;
+
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
+};
 
 } }
+
+#endif

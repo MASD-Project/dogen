@@ -125,6 +125,7 @@
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/orm_configuration_expander.hpp"
 #include "dogen/yarn/types/orm_attribute_configuration.hpp"
+#include "dogen/yarn/types/orm_primitive_configuration.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"

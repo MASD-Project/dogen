@@ -62,6 +62,7 @@
 #include "dogen/yarn/hash/orm_module_configuration_hash.hpp"
 #include "dogen/yarn/hash/orm_object_configuration_hash.hpp"
 #include "dogen/yarn/hash/orm_attribute_configuration_hash.hpp"
+#include "dogen/yarn/hash/orm_primitive_configuration_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_repository_hash.hpp"
 
 #endif

@@ -24,6 +24,22 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/types/primitive.hpp"
 #include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+
+namespace boost {
+
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::orm_primitive_configuration>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -32,6 +48,15 @@ primitive::primitive()
     : is_nullable_(static_cast<bool>(0)),
       use_type_aliasing_(static_cast<bool>(0)),
       is_immutable_(static_cast<bool>(0)) { }
+
+primitive::primitive(primitive&& rhs)
+    : dogen::yarn::element(
+        std::forward<dogen::yarn::element>(rhs)),
+      is_nullable_(std::move(rhs.is_nullable_)),
+      value_attribute_(std::move(rhs.value_attribute_)),
+      use_type_aliasing_(std::move(rhs.use_type_aliasing_)),
+      is_immutable_(std::move(rhs.is_immutable_)),
+      orm_configuration_(std::move(rhs.orm_configuration_)) { }
 
 primitive::primitive(
     const std::string& documentation,
@@ -45,7 +70,8 @@ primitive::primitive(
     const bool is_nullable,
     const dogen::yarn::attribute& value_attribute,
     const bool use_type_aliasing,
-    const bool is_immutable)
+    const bool is_immutable,
+    const boost::optional<dogen::yarn::orm_primitive_configuration>& orm_configuration)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -58,7 +84,8 @@ primitive::primitive(
       is_nullable_(is_nullable),
       value_attribute_(value_attribute),
       use_type_aliasing_(use_type_aliasing),
-      is_immutable_(is_immutable) { }
+      is_immutable_(is_immutable),
+      orm_configuration_(orm_configuration) { }
 
 void primitive::accept(const element_visitor& v) const {
     v.visit(*this);
@@ -91,7 +118,8 @@ void primitive::to_stream(std::ostream& s) const {
       << "\"is_nullable\": " << is_nullable_ << ", "
       << "\"value_attribute\": " << value_attribute_ << ", "
       << "\"use_type_aliasing\": " << use_type_aliasing_ << ", "
-      << "\"is_immutable\": " << is_immutable_
+      << "\"is_immutable\": " << is_immutable_ << ", "
+      << "\"orm_configuration\": " << orm_configuration_
       << " }";
 }
 
@@ -103,6 +131,7 @@ void primitive::swap(primitive& other) noexcept {
     swap(value_attribute_, other.value_attribute_);
     swap(use_type_aliasing_, other.use_type_aliasing_);
     swap(is_immutable_, other.is_immutable_);
+    swap(orm_configuration_, other.orm_configuration_);
 }
 
 bool primitive::equals(const dogen::yarn::element& other) const {
@@ -116,7 +145,8 @@ bool primitive::operator==(const primitive& rhs) const {
         is_nullable_ == rhs.is_nullable_ &&
         value_attribute_ == rhs.value_attribute_ &&
         use_type_aliasing_ == rhs.use_type_aliasing_ &&
-        is_immutable_ == rhs.is_immutable_;
+        is_immutable_ == rhs.is_immutable_ &&
+        orm_configuration_ == rhs.orm_configuration_;
 }
 
 primitive& primitive::operator=(primitive other) {
@@ -163,6 +193,22 @@ bool primitive::is_immutable() const {
 
 void primitive::is_immutable(const bool v) {
     is_immutable_ = v;
+}
+
+const boost::optional<dogen::yarn::orm_primitive_configuration>& primitive::orm_configuration() const {
+    return orm_configuration_;
+}
+
+boost::optional<dogen::yarn::orm_primitive_configuration>& primitive::orm_configuration() {
+    return orm_configuration_;
+}
+
+void primitive::orm_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>& v) {
+    orm_configuration_ = v;
+}
+
+void primitive::orm_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>&& v) {
+    orm_configuration_ = std::move(v);
 }
 
 } }

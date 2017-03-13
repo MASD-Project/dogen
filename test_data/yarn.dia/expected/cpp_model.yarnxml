@@ -3736,6 +3736,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration class_id="45" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -3881,6 +3884,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4026,6 +4032,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4171,6 +4180,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4316,6 +4328,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4461,6 +4476,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4606,6 +4624,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4752,6 +4773,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -4897,6 +4921,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -5042,6 +5069,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -5187,6 +5217,9 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 		<item>
@@ -5332,14 +5365,17 @@ this is a long comment
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration>
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 	</primitives>
-	<objects class_id="45" tracking_level="0" version="0">
+	<objects class_id="46" tracking_level="0" version="0">
 		<count>63</count>
 		<bucket_count>97</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="46" tracking_level="0" version="0">
+		<item class_id="47" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_9&gt;&lt;child&gt;</first>
 			<second class_id="10" tracking_level="1" version="0" object_id="_37">
 				<element>
@@ -5563,7 +5599,7 @@ this is a long comment
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters class_id="47" tracking_level="0" version="0">
+				<type_parameters class_id="48" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -5579,7 +5615,7 @@ this is a long comment
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration class_id="48" tracking_level="0" version="0">
+				<orm_configuration class_id="49" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_configuration>
 			</second>
@@ -20259,11 +20295,11 @@ modeled by the base.
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="49" tracking_level="0" version="0">
+	<exceptions class_id="50" tracking_level="0" version="0">
 		<count>2</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="50" tracking_level="0" version="0">
+		<item class_id="51" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_5&gt;&lt;catastrophic_error&gt;</first>
 			<second class_id="8" tracking_level="1" version="0" object_id="_100">
 				<element>
@@ -20388,12 +20424,12 @@ modeled by the base.
 			</second>
 		</item>
 	</exceptions>
-	<visitors class_id="51" tracking_level="0" version="0">
+	<visitors class_id="52" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="52" tracking_level="0" version="0">
+	<injected_elements class_id="53" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
@@ -20456,22 +20492,22 @@ modeled by the base.
 		</orm_configuration>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="53" tracking_level="0" version="0">
+	<output_languages class_id="54" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
-	<scribble_groups class_id="54" tracking_level="0" version="0">
+	<scribble_groups class_id="55" tracking_level="0" version="0">
 		<count>25</count>
 		<bucket_count>47</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="55" tracking_level="0" version="0">
+		<item class_id="56" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_9&gt;&lt;child_via_settings&gt;</first>
-			<second class_id="56" tracking_level="0" version="0">
-				<parent class_id="57" tracking_level="0" version="0">
-					<entries class_id="58" tracking_level="0" version="0">
+			<second class_id="57" tracking_level="0" version="0">
+				<parent class_id="58" tracking_level="0" version="0">
+					<entries class_id="59" tracking_level="0" version="0">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item class_id="59" tracking_level="0" version="0">
+						<item class_id="60" tracking_level="0" version="0">
 							<first>yarn.generalization.parent</first>
 							<second>parent_outside</second>
 						</item>
@@ -20482,7 +20518,7 @@ modeled by the base.
 						<item_version>0</item_version>
 					</candidate_labels>
 				</parent>
-				<children class_id="60" tracking_level="0" version="0">
+				<children class_id="61" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -20661,7 +20697,7 @@ modeled by the base.
 					<count>5</count>
 					<bucket_count>11</bucket_count>
 					<item_version>0</item_version>
-					<item class_id="61" tracking_level="0" version="0">
+					<item class_id="62" tracking_level="0" version="0">
 						<first>right</first>
 						<second>
 							<entries>
@@ -21252,7 +21288,7 @@ modeled by the base.
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_configuration class_id="62" tracking_level="0" version="0">
+	<orm_configuration class_id="63" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_configuration>
 </entity>

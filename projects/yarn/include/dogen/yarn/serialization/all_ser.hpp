@@ -62,6 +62,7 @@
 #include "dogen/yarn/serialization/orm_module_configuration_ser.hpp"
 #include "dogen/yarn/serialization/orm_object_configuration_ser.hpp"
 #include "dogen/yarn/serialization/orm_attribute_configuration_ser.hpp"
+#include "dogen/yarn/serialization/orm_primitive_configuration_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_repository_ser.hpp"
 
 #endif

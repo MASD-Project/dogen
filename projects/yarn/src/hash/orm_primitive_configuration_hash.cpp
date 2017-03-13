@@ -18,19 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/primitive_io.hpp"
-#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+#include "dogen/yarn/hash/letter_cases_hash.hpp"
+#include "dogen/yarn/hash/orm_primitive_configuration_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_optional_dogen_yarn_letter_cases(const boost::optional<dogen::yarn::letter_cases>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const primitive& v) {
-    v.to_stream(s);
-    return(s);
+std::size_t orm_primitive_configuration_hasher::hash(const orm_primitive_configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.generate_mapping());
+    combine(seed, v.schema_name());
+    combine(seed, hash_boost_optional_dogen_yarn_letter_cases(v.letter_case()));
+
+    return seed;
 }
 
 } }

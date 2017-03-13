@@ -21,6 +21,7 @@
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/attribute_hash.hpp"
 #include "dogen/yarn/hash/primitive_hash.hpp"
+#include "dogen/yarn/hash/orm_primitive_configuration_hash.hpp"
 
 namespace {
 
@@ -28,6 +29,16 @@ template <typename HashableType>
 inline void combine(std::size_t& seed, const HashableType& value) {
     std::hash<HashableType> hasher;
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_boost_optional_dogen_yarn_orm_primitive_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>& v) {
+    std::size_t seed(0);
+
+    if (!v)
+        return seed;
+
+    combine(seed, *v);
+    return seed;
 }
 
 }
@@ -44,6 +55,7 @@ std::size_t primitive_hasher::hash(const primitive& v) {
     combine(seed, v.value_attribute());
     combine(seed, v.use_type_aliasing());
     combine(seed, v.is_immutable());
+    combine(seed, hash_boost_optional_dogen_yarn_orm_primitive_configuration(v.orm_configuration()));
 
     return seed;
 }

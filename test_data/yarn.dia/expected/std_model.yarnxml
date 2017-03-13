@@ -519,14 +519,17 @@
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
+				<orm_configuration class_id="41" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</orm_configuration>
 			</second>
 		</item>
 	</primitives>
-	<objects class_id="41" tracking_level="0" version="0">
+	<objects class_id="42" tracking_level="0" version="0">
 		<count>14</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="42" tracking_level="0" version="0">
+		<item class_id="43" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;</first>
 			<second class_id="10" tracking_level="1" version="0" object_id="_4">
 				<element>
@@ -585,7 +588,7 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="43" tracking_level="0" version="0">
+				<all_attributes class_id="44" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
@@ -833,7 +836,7 @@
 						</orm_configuration>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="44" tracking_level="0" version="0">
+				<inherited_attributes class_id="45" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -846,7 +849,7 @@
 				<is_final>0</is_final>
 				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<root_parents class_id="45" tracking_level="0" version="0">
+				<root_parents class_id="46" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</root_parents>
@@ -874,7 +877,7 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters class_id="46" tracking_level="0" version="0">
+				<type_parameters class_id="47" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -890,7 +893,7 @@
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_configuration class_id="47" tracking_level="0" version="0">
+				<orm_configuration class_id="48" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_configuration>
 			</second>
@@ -5971,17 +5974,17 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="48" tracking_level="0" version="0">
+	<exceptions class_id="49" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="49" tracking_level="0" version="0">
+	<visitors class_id="50" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="50" tracking_level="0" version="0">
+	<injected_elements class_id="51" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
@@ -6044,22 +6047,22 @@
 		</orm_configuration>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="51" tracking_level="0" version="0">
+	<output_languages class_id="52" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
-	<scribble_groups class_id="52" tracking_level="0" version="0">
+	<scribble_groups class_id="53" tracking_level="0" version="0">
 		<count>3</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="53" tracking_level="0" version="0">
+		<item class_id="54" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;string_primitive&gt;</first>
-			<second class_id="54" tracking_level="0" version="0">
-				<parent class_id="55" tracking_level="0" version="0">
-					<entries class_id="56" tracking_level="0" version="0">
+			<second class_id="55" tracking_level="0" version="0">
+				<parent class_id="56" tracking_level="0" version="0">
+					<entries class_id="57" tracking_level="0" version="0">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item class_id="57" tracking_level="0" version="0">
+						<item class_id="58" tracking_level="0" version="0">
 							<first>yarn.primitive.underlying_element</first>
 							<second>std::string</second>
 						</item>
@@ -6070,7 +6073,7 @@
 						<item_version>0</item_version>
 					</candidate_labels>
 				</parent>
-				<children class_id="58" tracking_level="0" version="0">
+				<children class_id="59" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -6148,7 +6151,7 @@
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_configuration class_id="59" tracking_level="0" version="0">
+	<orm_configuration class_id="60" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_configuration>
 </entity>

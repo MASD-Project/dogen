@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-12 Sun 21:51]
+#+CAPTION: Clock summary at [2017-03-13 Mon 10:34]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *32:23* |       |      | 100.0 |
+| *Total time*                                                                | *33:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 32:23   |       |      | 100.0 |
-| Active                                                                      |         | 32:23 |      | 100.0 |
+| Stories                                                                     | 33:18   |       |      | 100.0 |
+| Active                                                                      |         | 33:18 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.1 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.3 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |   9.2 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  15.6 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  16.6 |
-| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  25.7 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |   8.9 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  15.2 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  16.1 |
+| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  25.0 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.6 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 2:38 |   8.1 |
+| STARTED Add a LAM test model just to validate existing functionality        |         |       | 2:38 |   7.9 |
 | STARTED Build on tags for Windows                                           |         |       | 0:15 |   0.8 |
 | STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.4 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   3.7 |
-| STARTED Implement the database model using Northwind                        |         |       | 4:50 |  14.9 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   3.6 |
+| STARTED Implement the database model using Northwind                        |         |       | 5:45 |  17.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -378,6 +378,9 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-13 Mon 11:02]
+    CLOCK: [2017-03-13 Mon 10:30]--[2017-03-13 Mon 10:34] =>  0:04
+    CLOCK: [2017-03-13 Mon 09:12]--[2017-03-13 Mon 10:03] =>  0:51
     CLOCK: [2017-03-12 Sun 21:37]--[2017-03-12 Sun 21:51] =>  0:14
     CLOCK: [2017-03-12 Sun 20:13]--[2017-03-12 Sun 21:36] =>  1:23
     CLOCK: [2017-03-12 Sun 17:21]--[2017-03-12 Sun 18:19] =>  0:58

@@ -107,28 +107,28 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<members class_id="28" tracking_level="0" version="0">
+				<members>
 					<count>0</count>
 					<item_version>0</item_version>
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_configuration class_id="29" tracking_level="0" version="0">
+				<orm_configuration class_id="28" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_configuration>
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="30" tracking_level="0" version="0">
+	<concepts class_id="29" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<builtins class_id="31" tracking_level="0" version="0">
+	<builtins class_id="30" tracking_level="0" version="0">
 		<count>5</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="32" tracking_level="0" version="0">
+		<item class_id="31" tracking_level="0" version="0">
 			<first>&lt;Phi&gt;&lt;Date&gt;</first>
 			<second class_id="5" tracking_level="1" version="0" object_id="_1">
 				<element>
@@ -444,11 +444,11 @@
 			</second>
 		</item>
 	</builtins>
-	<enumerations class_id="33" tracking_level="0" version="0">
+	<enumerations class_id="32" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="34" tracking_level="0" version="0">
+		<item class_id="33" tracking_level="0" version="0">
 			<first>&lt;Phi&gt;&lt;SomeEnum&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_6">
 				<element>
@@ -529,7 +529,7 @@
 					</location>
 					<identifiable></identifiable>
 				</underlying_element>
-				<enumerators class_id="35" tracking_level="0" version="0">
+				<enumerators class_id="34" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</enumerators>
@@ -539,16 +539,16 @@
 			</second>
 		</item>
 	</enumerations>
-	<primitives class_id="36" tracking_level="0" version="0">
+	<primitives class_id="35" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</primitives>
-	<objects class_id="37" tracking_level="0" version="0">
+	<objects class_id="36" tracking_level="0" version="0">
 		<count>4</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="38" tracking_level="0" version="0">
+		<item class_id="37" tracking_level="0" version="0">
 			<first>&lt;Phi&gt;&lt;NoFields&gt;</first>
 			<second class_id="10" tracking_level="1" version="0" object_id="_7">
 				<element>
@@ -605,7 +605,7 @@
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
 				</element>
-				<all_attributes class_id="39" tracking_level="0" version="0">
+				<all_attributes class_id="38" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
@@ -613,7 +613,7 @@
 					<count>0</count>
 					<item_version>0</item_version>
 				</local_attributes>
-				<inherited_attributes class_id="40" tracking_level="0" version="0">
+				<inherited_attributes class_id="39" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -626,7 +626,7 @@
 				<is_final>0</is_final>
 				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<root_parents>
+				<root_parents class_id="40" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</root_parents>

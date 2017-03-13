@@ -21,6 +21,7 @@
 #include "dogen/yarn/test_data/element_td.hpp"
 #include "dogen/yarn/test_data/attribute_td.hpp"
 #include "dogen/yarn/test_data/primitive_td.hpp"
+#include "dogen/yarn/test_data/orm_primitive_configuration_td.hpp"
 
 namespace {
 
@@ -31,6 +32,18 @@ bool create_bool(const unsigned int position) {
 dogen::yarn::attribute
 create_dogen_yarn_attribute(const unsigned int position) {
     return dogen::yarn::attribute_generator::create(position);
+}
+
+dogen::yarn::orm_primitive_configuration
+create_dogen_yarn_orm_primitive_configuration(const unsigned int position) {
+    return dogen::yarn::orm_primitive_configuration_generator::create(position);
+}
+
+boost::optional<dogen::yarn::orm_primitive_configuration>
+create_boost_optional_dogen_yarn_orm_primitive_configuration(unsigned int position) {
+    boost::optional<dogen::yarn::orm_primitive_configuration> r(
+        create_dogen_yarn_orm_primitive_configuration(position));
+    return r;
 }
 
 }
@@ -47,6 +60,7 @@ populate(const unsigned int position, result_type& v) {
     v.value_attribute(create_dogen_yarn_attribute(position + 1));
     v.use_type_aliasing(create_bool(position + 2));
     v.is_immutable(create_bool(position + 3));
+    v.orm_configuration(create_boost_optional_dogen_yarn_orm_primitive_configuration(position + 4));
 }
 
 primitive_generator::result_type

@@ -27,9 +27,11 @@
 
 #include <iosfwd>
 #include <algorithm>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/serialization/primitive_fwd_ser.hpp"
+#include "dogen/yarn/types/orm_primitive_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -40,12 +42,14 @@ namespace yarn {
 class primitive final : public dogen::yarn::element {
 public:
     primitive(const primitive&) = default;
-    primitive(primitive&&) = default;
 
 public:
     primitive();
 
     virtual ~primitive() noexcept { }
+
+public:
+    primitive(primitive&& rhs);
 
 public:
     primitive(
@@ -60,7 +64,8 @@ public:
         const bool is_nullable,
         const dogen::yarn::attribute& value_attribute,
         const bool use_type_aliasing,
-        const bool is_immutable);
+        const bool is_immutable,
+        const boost::optional<dogen::yarn::orm_primitive_configuration>& orm_configuration);
 
 private:
     template<typename Archive>
@@ -114,6 +119,11 @@ public:
     void is_immutable(const bool v);
     /**@}*/
 
+    const boost::optional<dogen::yarn::orm_primitive_configuration>& orm_configuration() const;
+    boost::optional<dogen::yarn::orm_primitive_configuration>& orm_configuration();
+    void orm_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>& v);
+    void orm_configuration(const boost::optional<dogen::yarn::orm_primitive_configuration>&& v);
+
 public:
     bool operator==(const primitive& rhs) const;
     bool operator!=(const primitive& rhs) const {
@@ -132,6 +142,7 @@ private:
     dogen::yarn::attribute value_attribute_;
     bool use_type_aliasing_;
     bool is_immutable_;
+    boost::optional<dogen::yarn::orm_primitive_configuration> orm_configuration_;
 };
 
 } }

@@ -50,10 +50,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::orm_module_configuration& v, unsigned int version);
 
 public:
+    /**
+     * @brief Name of the database schema in which elements contained by this module will placed in.
+     */
+    /**@{*/
     const std::string& schema_name() const;
     std::string& schema_name();
     void schema_name(const std::string& v);
     void schema_name(const std::string&& v);
+    /**@}*/
 
 public:
     bool operator==(const orm_module_configuration& rhs) const;

@@ -18,19 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/primitive_io.hpp"
-#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
+#ifndef DOGEN_YARN_IO_ORM_PRIMITIVE_CONFIGURATION_IO_HPP
+#define DOGEN_YARN_IO_ORM_PRIMITIVE_CONFIGURATION_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/yarn/types/orm_primitive_configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const primitive& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::orm_primitive_configuration& v);
 
 } }
+
+#endif
