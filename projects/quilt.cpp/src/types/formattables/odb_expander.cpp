@@ -180,8 +180,28 @@ void odb_properties_generator::visit(const yarn::object& o) {
 void odb_properties_generator::visit(const yarn::primitive& p) {
     odb_properties op;
     op.is_value(true);
-
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, p.annotation()));
+
+    if (p.orm_configuration()) {
+        const auto& cfg(*p.orm_configuration());
+
+        const auto& sn(cfg.schema_name());
+        if (!sn.empty() && cfg.generate_mapping()) {
+            std::ostringstream s;
+            s << "schema(\"";
+
+            if (!cfg.letter_case())
+                s << cfg.schema_name();
+            else if (*cfg.letter_case() == yarn::letter_cases::upper_case)
+                s << boost::to_upper_copy(cfg.schema_name());
+            else if (*cfg.letter_case() == yarn::letter_cases::lower_case)
+                s << boost::to_lower_copy(cfg.schema_name());
+
+            s <<"\")";
+            op.top_level_odb_pragmas().push_back(s.str());
+        }
+    }
+
     const bool has_top_level_pragmas(!op.top_level_odb_pragmas().empty());
     if (!has_top_level_pragmas)
         return;

@@ -1078,13 +1078,13 @@ It's objective is to test Dogen integration with ODB.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="104.5,-99.0833"/>
+        <dia:point val="105,-100"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="104.45,-99.1333;110.278,-96.0333"/>
+        <dia:rectangle val="104.95,-100.05;110.778,-96.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="104.5,-99.0833"/>
+        <dia:point val="105,-100"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="5.7275"/>
@@ -1099,7 +1099,8 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
+        <dia:string>##DOGEN yarn.primitive.underlying_element=int
+#DOGEN yarn.orm.generate_mapping=true#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5079,7 +5080,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:point val="110,-89"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="107.314,-96.1333;110.75,-88.2"/>
+        <dia:rectangle val="107.814,-97.05;110.75,-88.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5087,8 +5088,8 @@ It's objective is to test Dogen integration with ODB.
       <dia:attribute name="orth_points">
         <dia:point val="110,-89"/>
         <dia:point val="110,-93"/>
-        <dia:point val="107.364,-93"/>
-        <dia:point val="107.364,-96.0833"/>
+        <dia:point val="107.864,-93"/>
+        <dia:point val="107.864,-97"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5150,7 +5151,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:point val="100.448,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.698,-107.75;107.564,-98.2833"/>
+        <dia:rectangle val="99.698,-107.75;108.064,-99.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5158,8 +5159,8 @@ It's objective is to test Dogen integration with ODB.
       <dia:attribute name="orth_points">
         <dia:point val="100.448,-107"/>
         <dia:point val="100.448,-103"/>
-        <dia:point val="107.364,-103"/>
-        <dia:point val="107.364,-99.0833"/>
+        <dia:point val="107.864,-103"/>
+        <dia:point val="107.864,-100"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

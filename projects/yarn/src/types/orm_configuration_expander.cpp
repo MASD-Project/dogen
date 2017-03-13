@@ -437,12 +437,14 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
          * it's containing module's schema name.
          */
         for (const auto& id : m.members()) {
+            BOOST_LOG_SEV(lg, debug) << "Processing member: " << id;
+
             const auto i(im.objects().find(id));
             if (i != im.objects().end()) {
                 auto& o(i->second);
                 auto& cfg(o.orm_configuration());
-                const bool update_schema_name(cfg && cfg->schema_name().empty() &&
-                    (cfg->generate_mapping() || cfg->is_value()));
+                const bool update_schema_name(cfg && cfg->schema_name().empty()
+                    && (cfg->generate_mapping() || cfg->is_value()));
 
                 if (!update_schema_name)
                     continue;
@@ -455,11 +457,10 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
                 if (j == im.primitives().end())
                     continue;
 
-                auto& p(i->second);
+                auto& p(j->second);
                 auto& cfg(p.orm_configuration());
                 const bool update_schema_name(cfg &&
-                    cfg->schema_name().empty() &&
-                    (cfg->generate_mapping() || cfg->is_value()));
+                    cfg->schema_name().empty() && cfg->generate_mapping());
 
                 if (!update_schema_name)
                     continue;

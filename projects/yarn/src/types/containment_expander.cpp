@@ -82,6 +82,7 @@ void containment_expander::inject_global_module(intermediate_model& im) {
     add_containing_module_to_non_contained_entities(gmn, im.objects());
     add_containing_module_to_non_contained_entities(gmn, im.exceptions());
     add_containing_module_to_non_contained_entities(gmn, im.visitors());
+    add_containing_module_to_non_contained_entities(gmn, im.primitives());
 
     BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
 }
