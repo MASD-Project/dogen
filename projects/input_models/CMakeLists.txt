@@ -96,7 +96,7 @@ if (DOGEN_KNITTER_COMMAND)
 
     set(target northwind)
     add_custom_target(knit_${target}
-        COMMENT "Knitting northwind model" VERBATIM
+        COMMENT "Knitting Northwind model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
         COMMAND ${DOGEN_KNITTER_COMMAND}
         --target ${models_dir}/${target}.dia
@@ -252,7 +252,7 @@ if (DOGEN_KNITTER_COMMAND)
 
         set(target northwind)
         add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting northwind model" VERBATIM
+            COMMENT "Benchmarking knitting Northwind model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
