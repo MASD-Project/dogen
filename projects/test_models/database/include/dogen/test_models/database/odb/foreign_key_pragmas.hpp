@@ -35,7 +35,7 @@ namespace database {
 #ifdef ODB_COMPILER
 
 #pragma db object(foreign_key) no_id
-#pragma db object(foreign_key) schema(BASIC)
+#pragma db object(foreign_key) schema("BASIC")
 
 #endif
 

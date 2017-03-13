@@ -36,7 +36,7 @@ namespace northwind {
 
 #ifdef ODB_COMPILER
 
-#pragma db value(employee_territories_key) schema(northwind)
+#pragma db value(employee_territories_key) schema("NORTHWIND")
 
 #endif
 

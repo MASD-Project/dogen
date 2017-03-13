@@ -34,7 +34,7 @@ namespace database {
 #ifdef ODB_COMPILER
 
 #pragma db object(no_keys_2) no_id
-#pragma db object(no_keys_2) schema(BASIC)
+#pragma db object(no_keys_2) schema("BASIC")
 
 #endif
 

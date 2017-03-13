@@ -33,7 +33,7 @@ namespace database {
 
 #ifdef ODB_COMPILER
 
-#pragma db object(primary_key) schema(BASIC)
+#pragma db object(primary_key) schema("BASIC")
 
 #pragma db member(primary_key::prop_0_) id
 
