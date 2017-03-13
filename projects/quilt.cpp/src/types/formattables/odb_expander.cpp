@@ -67,8 +67,8 @@ private:
 public:
     using fabric::element_visitor::visit;
     void visit(fabric::odb_options& oo);
-    void visit(const yarn::object& o);
-    void visit(const yarn::primitive& p);
+    void visit(yarn::object& o);
+    void visit(yarn::primitive& p);
 
 public:
     const boost::optional<odb_properties>& result() const;
@@ -108,7 +108,7 @@ void updator::visit(fabric::odb_options& oo) {
         .generic_string());
 }
 
-void updator::visit(const yarn::object& o) {
+void updator::visit(yarn::object& o) {
     odb_properties op;
 
     const annotations::entry_selector s(o.annotation());
@@ -199,7 +199,7 @@ void updator::visit(const yarn::object& o) {
         result_ = op;
 }
 
-void updator::visit(const yarn::primitive& p) {
+void updator::visit(yarn::primitive& p) {
     odb_properties op;
     op.is_value(true);
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, p.annotation()));
