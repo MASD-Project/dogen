@@ -106,7 +106,7 @@ void odb_properties_generator::visit(const yarn::object& o) {
         const auto& cfg(*o.orm_properties());
         op.is_value(cfg.is_value());
 
-        if (cfg.generate_mapping() && !cfg.has_primary_key())
+        if (cfg.generate_mapping() && !op.is_value() && !cfg.has_primary_key())
             top_level_pragmas.push_back(no_id_pragma);
 
         const auto& sn(cfg.schema_name());
