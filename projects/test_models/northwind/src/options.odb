@@ -45,14 +45,14 @@
 --cxx-suffix .cpp
 
 # fix domain includes
---include-regex '%(.*).hpp%dogen/northwind/types/$1.hpp%'
+--include-regex '%(.*).hpp%dogen/test_models/northwind/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/northwind/odb/$1-odb$2%'
---include-regex '%dogen/northwind/types/(.*)-odb(.*)%dogen/northwind/odb/$1-odb$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2%'
+--include-regex '%dogen/test_models/northwind/types/(.*)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace
 
 # make the header guards similar to dogen ones
---guard-prefix DOGEN_NORTHWIND_ODB
+--guard-prefix DOGEN_TEST_MODELS_NORTHWIND_ODB
