@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/io/orm_model_configuration_io.hpp"
 #include "dogen/yarn/io/orm_object_configuration_io.hpp"
+#include "dogen/yarn/io/orm_primitive_configuration_io.hpp"
 #include "dogen/yarn/types/orm_configuration_expander.hpp"
 
 namespace {
@@ -291,6 +292,30 @@ orm_configuration_expander::make_attribute_configuration(const type_group& tg,
     return boost::optional<orm_attribute_configuration>();
 }
 
+boost::optional<orm_primitive_configuration>
+orm_configuration_expander::make_primitive_configuration(const type_group& tg,
+    const annotations::annotation& a) const {
+
+    const annotations::entry_selector s(a);
+    bool found_any(false);
+
+    orm_primitive_configuration r;
+    if (s.has_entry(tg.generate_mapping)) {
+        found_any = true;
+        r.generate_mapping(s.get_boolean_content(tg.generate_mapping));
+    }
+
+    if (s.has_entry(tg.schema_name)) {
+        found_any = true;
+        r.schema_name(s.get_text_content(tg.schema_name));
+    }
+
+    if (found_any)
+        return r;
+
+    return boost::optional<orm_primitive_configuration>();
+}
+
 boost::optional<orm_module_configuration>
 orm_configuration_expander::make_module_configuration(const type_group& tg,
     const annotations::annotation& a) const {
@@ -358,6 +383,31 @@ expand_concepts(const type_group& tg, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Finished module expansion.";
 }
 
+void orm_configuration_expander::expand_primitives(
+    const type_group& tg, intermediate_model& im) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Started primitive expansion.";
+
+    boost::optional<letter_cases> lc;
+    if (im.orm_configuration())
+        lc = im.orm_configuration()->letter_case();
+
+    for (auto& pair : im.primitives()) {
+        auto& p(pair.second);
+        const auto& a(p.annotation());
+        auto cfg(make_primitive_configuration(tg, a));
+        if (cfg && cfg->generate_mapping()) {
+            cfg->letter_case(lc);
+            BOOST_LOG_SEV(lg, debug) << "ORM configuration for primitive: "
+                                     << pair.first << ": " << *cfg;
+        }
+
+        p.orm_configuration(cfg);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished primitive expansion.";
+}
+
 void orm_configuration_expander::
 expand_modules(const type_group& tg, intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started module expansion.";
@@ -388,20 +438,36 @@ expand_modules(const type_group& tg, intermediate_model& im) const {
          */
         for (const auto& id : m.members()) {
             const auto i(im.objects().find(id));
-            if (i == im.objects().end())
-                continue;
+            if (i != im.objects().end()) {
+                auto& o(i->second);
+                auto& cfg(o.orm_configuration());
+                const bool update_schema_name(cfg && cfg->schema_name().empty() &&
+                    (cfg->generate_mapping() || cfg->is_value()));
 
-            auto& o(i->second);
-            auto& cfg(o.orm_configuration());
-            const bool update_schema_name(cfg && cfg->schema_name().empty() &&
-                (cfg->generate_mapping() || cfg->is_value()));
+                if (!update_schema_name)
+                    continue;
 
-            if (!update_schema_name)
-                continue;
+                BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
+                                         << " to: " << sn;
+                cfg->schema_name(sn);
+            } else {
+                const auto j(im.primitives().find(id));
+                if (j == im.primitives().end())
+                    continue;
 
-            BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
-                                     << " to: " << sn;
-            cfg->schema_name(sn);
+                auto& p(i->second);
+                auto& cfg(p.orm_configuration());
+                const bool update_schema_name(cfg &&
+                    cfg->schema_name().empty() &&
+                    (cfg->generate_mapping() || cfg->is_value()));
+
+                if (!update_schema_name)
+                    continue;
+
+                BOOST_LOG_SEV(lg, debug) << "Updating schema name for: " << id
+                                         << " to: " << sn;
+                cfg->schema_name(sn);
+            }
         }
     }
 
@@ -418,6 +484,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& im) const {
 
     expand_objects(tg, im);
     expand_concepts(tg, im);
+    expand_primitives(tg, im);
     expand_modules(tg, im);
 
     BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
