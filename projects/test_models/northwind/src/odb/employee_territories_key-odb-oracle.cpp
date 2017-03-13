@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/odb/employee_territories_key-odb-oracle.hxx"
+#include "dogen/test_models/northwind/odb/employee_territories_key-odb-oracle.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy

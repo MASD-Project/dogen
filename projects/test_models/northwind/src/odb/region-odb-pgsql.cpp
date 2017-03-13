@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/odb/region-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/region-odb-pgsql.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy

@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_REPOSITORY_ODB_HXX
-#define DOGEN_NORTHWIND_ODB_REPOSITORY_ODB_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_REPOSITORY_ODB_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_REPOSITORY_ODB_HXX
 
 // Begin prologue.
 //
@@ -28,33 +28,33 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/repository.hpp"
+#include "dogen/test_models/northwind/types/repository.hpp"
 
-#include "dogen/test_models/northwind/types/categories-odb.hxx"
-#include "dogen/test_models/northwind/types/category_id-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_customer_demo-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_customer_demo_key-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_demographics-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_id-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_type_id-odb.hxx"
-#include "dogen/test_models/northwind/types/customers-odb.hxx"
-#include "dogen/test_models/northwind/types/employee_id-odb.hxx"
-#include "dogen/test_models/northwind/types/employee_territories-odb.hxx"
-#include "dogen/test_models/northwind/types/employee_territories_key-odb.hxx"
-#include "dogen/test_models/northwind/types/employees-odb.hxx"
-#include "dogen/test_models/northwind/types/order_details-odb.hxx"
-#include "dogen/test_models/northwind/types/order_details_key-odb.hxx"
-#include "dogen/test_models/northwind/types/order_id-odb.hxx"
-#include "dogen/test_models/northwind/types/product_id-odb.hxx"
-#include "dogen/test_models/northwind/types/products-odb.hxx"
-#include "dogen/test_models/northwind/types/region-odb.hxx"
-#include "dogen/test_models/northwind/types/region_id-odb.hxx"
-#include "dogen/test_models/northwind/types/shipper_id-odb.hxx"
-#include "dogen/test_models/northwind/types/shippers-odb.hxx"
-#include "dogen/test_models/northwind/types/supplier-odb.hxx"
-#include "dogen/test_models/northwind/types/supplier_id-odb.hxx"
-#include "dogen/test_models/northwind/types/territory-odb.hxx"
-#include "dogen/test_models/northwind/types/territory_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/categories-odb.hxx"
+#include "dogen/test_models/northwind/odb/category_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_customer_demo-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_customer_demo_key-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_demographics-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_type_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/customers-odb.hxx"
+#include "dogen/test_models/northwind/odb/employee_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/employee_territories-odb.hxx"
+#include "dogen/test_models/northwind/odb/employee_territories_key-odb.hxx"
+#include "dogen/test_models/northwind/odb/employees-odb.hxx"
+#include "dogen/test_models/northwind/odb/order_details-odb.hxx"
+#include "dogen/test_models/northwind/odb/order_details_key-odb.hxx"
+#include "dogen/test_models/northwind/odb/order_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/product_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/products-odb.hxx"
+#include "dogen/test_models/northwind/odb/region-odb.hxx"
+#include "dogen/test_models/northwind/odb/region_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/shipper_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/shippers-odb.hxx"
+#include "dogen/test_models/northwind/odb/supplier-odb.hxx"
+#include "dogen/test_models/northwind/odb/supplier_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/territory-odb.hxx"
+#include "dogen/test_models/northwind/odb/territory_id-odb.hxx"
 
 #include <memory>
 #include <cstddef>
@@ -80,8 +80,8 @@ namespace odb
 {
 }
 
-#include "dogen/northwind/odb/repository-odb.ixx"
+#include "dogen/test_models/northwind/odb/repository-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_REPOSITORY_ODB_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_REPOSITORY_ODB_HXX

@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_CUSTOMER_CUSTOMER_DEMO_ODB_HXX
-#define DOGEN_NORTHWIND_ODB_CUSTOMER_CUSTOMER_DEMO_ODB_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMER_CUSTOMER_DEMO_ODB_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMER_CUSTOMER_DEMO_ODB_HXX
 
 // Begin prologue.
 //
@@ -28,11 +28,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/customer_customer_demo.hpp"
+#include "dogen/test_models/northwind/types/customer_customer_demo.hpp"
 
-#include "dogen/test_models/northwind/types/customer_customer_demo_key-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_id-odb.hxx"
-#include "dogen/test_models/northwind/types/customer_type_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_customer_demo_key-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/customer_type_id-odb.hxx"
 
 #include <memory>
 #include <cstddef>
@@ -100,8 +100,8 @@ namespace odb
   };
 }
 
-#include "dogen/northwind/odb/customer_customer_demo-odb.ixx"
+#include "dogen/test_models/northwind/odb/customer_customer_demo-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_CUSTOMER_CUSTOMER_DEMO_ODB_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMER_CUSTOMER_DEMO_ODB_HXX

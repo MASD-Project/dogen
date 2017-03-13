@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/odb/order_details-odb-oracle.hxx"
+#include "dogen/test_models/northwind/odb/order_details-odb-oracle.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy

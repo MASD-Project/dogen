@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_TERRITORY_ODB_HXX
-#define DOGEN_NORTHWIND_ODB_TERRITORY_ODB_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_TERRITORY_ODB_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_TERRITORY_ODB_HXX
 
 // Begin prologue.
 //
@@ -28,10 +28,10 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/territory.hpp"
+#include "dogen/test_models/northwind/types/territory.hpp"
 
-#include "dogen/test_models/northwind/types/region_id-odb.hxx"
-#include "dogen/test_models/northwind/types/territory_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/region_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/territory_id-odb.hxx"
 
 #include <memory>
 #include <cstddef>
@@ -99,8 +99,8 @@ namespace odb
   };
 }
 
-#include "dogen/northwind/odb/territory-odb.ixx"
+#include "dogen/test_models/northwind/odb/territory-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_TERRITORY_ODB_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_TERRITORY_ODB_HXX

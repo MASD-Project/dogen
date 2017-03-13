@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_REPOSITORY_ODB_PGSQL_HXX
-#define DOGEN_NORTHWIND_ODB_REPOSITORY_ODB_PGSQL_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_REPOSITORY_ODB_PGSQL_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_REPOSITORY_ODB_PGSQL_HXX
 
 // Begin prologue.
 //
@@ -31,35 +31,35 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/repository.hpp"
+#include "dogen/test_models/northwind/types/repository.hpp"
 
-#include "dogen/test_models/northwind/types/categories-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/category_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/customer_customer_demo-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/customer_customer_demo_key-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/customer_demographics-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/customer_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/customer_type_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/customers-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/employee_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/employee_territories-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/employee_territories_key-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/employees-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/order_details-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/order_details_key-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/order_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/product_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/products-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/region-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/region_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/shipper_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/shippers-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/supplier-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/supplier_id-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/territory-odb-pgsql.hxx"
-#include "dogen/test_models/northwind/types/territory_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/categories-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/category_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/customer_customer_demo-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/customer_customer_demo_key-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/customer_demographics-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/customer_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/customer_type_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/customers-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/employee_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/employee_territories-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/employee_territories_key-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/employees-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/order_details-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/order_details_key-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/order_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/product_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/products-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/region-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/region_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/shipper_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/shippers-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/supplier-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/supplier_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/territory-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/territory_id-odb-pgsql.hxx"
 
-#include "dogen/northwind/odb/repository-odb.hxx"
+#include "dogen/test_models/northwind/odb/repository-odb.hxx"
 
 #include <odb/details/buffer.hxx>
 
@@ -73,8 +73,8 @@ namespace odb
 {
 }
 
-#include "dogen/northwind/odb/repository-odb-pgsql.ixx"
+#include "dogen/test_models/northwind/odb/repository-odb-pgsql.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_REPOSITORY_ODB_PGSQL_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_REPOSITORY_ODB_PGSQL_HXX

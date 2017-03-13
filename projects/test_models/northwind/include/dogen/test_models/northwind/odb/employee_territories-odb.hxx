@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_EMPLOYEE_TERRITORIES_ODB_HXX
-#define DOGEN_NORTHWIND_ODB_EMPLOYEE_TERRITORIES_ODB_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_EMPLOYEE_TERRITORIES_ODB_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_EMPLOYEE_TERRITORIES_ODB_HXX
 
 // Begin prologue.
 //
@@ -28,11 +28,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/employee_territories.hpp"
+#include "dogen/test_models/northwind/types/employee_territories.hpp"
 
-#include "dogen/test_models/northwind/types/employee_id-odb.hxx"
-#include "dogen/test_models/northwind/types/employee_territories_key-odb.hxx"
-#include "dogen/test_models/northwind/types/territory_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/employee_id-odb.hxx"
+#include "dogen/test_models/northwind/odb/employee_territories_key-odb.hxx"
+#include "dogen/test_models/northwind/odb/territory_id-odb.hxx"
 
 #include <memory>
 #include <cstddef>
@@ -100,8 +100,8 @@ namespace odb
   };
 }
 
-#include "dogen/northwind/odb/employee_territories-odb.ixx"
+#include "dogen/test_models/northwind/odb/employee_territories-odb.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_EMPLOYEE_TERRITORIES_ODB_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_EMPLOYEE_TERRITORIES_ODB_HXX

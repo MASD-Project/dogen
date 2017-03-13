@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/odb/shippers-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/shippers-odb-pgsql.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy

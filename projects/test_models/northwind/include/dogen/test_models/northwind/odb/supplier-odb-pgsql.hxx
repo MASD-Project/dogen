@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_SUPPLIER_ODB_PGSQL_HXX
-#define DOGEN_NORTHWIND_ODB_SUPPLIER_ODB_PGSQL_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIER_ODB_PGSQL_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIER_ODB_PGSQL_HXX
 
 // Begin prologue.
 //
@@ -31,11 +31,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/supplier.hpp"
+#include "dogen/test_models/northwind/types/supplier.hpp"
 
-#include "dogen/test_models/northwind/types/supplier_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/supplier_id-odb-pgsql.hxx"
 
-#include "dogen/northwind/odb/supplier-odb.hxx"
+#include "dogen/test_models/northwind/odb/supplier-odb.hxx"
 
 #include <odb/details/buffer.hxx>
 
@@ -474,8 +474,8 @@ namespace odb
   //
 }
 
-#include "dogen/northwind/odb/supplier-odb-pgsql.ixx"
+#include "dogen/test_models/northwind/odb/supplier-odb-pgsql.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_SUPPLIER_ODB_PGSQL_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIER_ODB_PGSQL_HXX

@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_CATEGORIES_ODB_PGSQL_HXX
-#define DOGEN_NORTHWIND_ODB_CATEGORIES_ODB_PGSQL_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_CATEGORIES_ODB_PGSQL_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_CATEGORIES_ODB_PGSQL_HXX
 
 // Begin prologue.
 //
@@ -31,11 +31,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/categories.hpp"
+#include "dogen/test_models/northwind/types/categories.hpp"
 
-#include "dogen/test_models/northwind/types/category_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/category_id-odb-pgsql.hxx"
 
-#include "dogen/northwind/odb/categories-odb.hxx"
+#include "dogen/test_models/northwind/odb/categories-odb.hxx"
 
 #include <odb/details/buffer.hxx>
 
@@ -290,8 +290,8 @@ namespace odb
   //
 }
 
-#include "dogen/northwind/odb/categories-odb-pgsql.ixx"
+#include "dogen/test_models/northwind/odb/categories-odb-pgsql.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_CATEGORIES_ODB_PGSQL_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_CATEGORIES_ODB_PGSQL_HXX

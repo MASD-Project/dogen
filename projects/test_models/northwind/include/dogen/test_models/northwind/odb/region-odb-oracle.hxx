@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_NORTHWIND_ODB_REGION_ODB_ORACLE_HXX
-#define DOGEN_NORTHWIND_ODB_REGION_ODB_ORACLE_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_REGION_ODB_ORACLE_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_REGION_ODB_ORACLE_HXX
 
 // Begin prologue.
 //
@@ -31,11 +31,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/northwind/types/region.hpp"
+#include "dogen/test_models/northwind/types/region.hpp"
 
-#include "dogen/test_models/northwind/types/region_id-odb-oracle.hxx"
+#include "dogen/test_models/northwind/odb/region_id-odb-oracle.hxx"
 
-#include "dogen/northwind/odb/region-odb.hxx"
+#include "dogen/test_models/northwind/odb/region-odb.hxx"
 
 #include <odb/details/buffer.hxx>
 
@@ -239,8 +239,8 @@ namespace odb
   //
 }
 
-#include "dogen/northwind/odb/region-odb-oracle.ixx"
+#include "dogen/test_models/northwind/odb/region-odb-oracle.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_NORTHWIND_ODB_REGION_ODB_ORACLE_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_REGION_ODB_ORACLE_HXX
