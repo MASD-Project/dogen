@@ -1568,7 +1568,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true
+#DOGEN yarn.orm.is_composite=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2468,13 +2469,13 @@ It's objective is to test Dogen integration with ODB.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="92,-113"/>
+        <dia:point val="95,-113"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="91.95,-113.05;102.945,-106.95"/>
+        <dia:rectangle val="94.95,-113.05;105.945,-106.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="92,-113"/>
+        <dia:point val="95,-113"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.895"/>
@@ -3313,7 +3314,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true
+#DOGEN yarn.orm.is_composite=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5147,17 +5149,17 @@ It's objective is to test Dogen integration with ODB.
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="97.4475,-107"/>
+        <dia:point val="100.448,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="96.6975,-107.75;104.07,-99.2"/>
+        <dia:rectangle val="99.6975,-107.75;104.07,-99.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="97.4475,-107"/>
-        <dia:point val="97.4475,-103"/>
+        <dia:point val="100.448,-107"/>
+        <dia:point val="100.448,-103"/>
         <dia:point val="103.87,-103"/>
         <dia:point val="103.87,-100"/>
       </dia:attribute>
@@ -6786,7 +6788,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_primary_key=true#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_primary_key=true
+#DOGEN yarn.orm.is_composite=true#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

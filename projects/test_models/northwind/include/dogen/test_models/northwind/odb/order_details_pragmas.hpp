@@ -37,6 +37,7 @@ namespace northwind {
 #pragma db object(order_details) schema("NORTHWIND")
 
 #pragma db member(order_details::order_details_key_) id
+#pragma db member(order_details::order_details_key_) column("")
 #pragma db member(order_details::unit_price_) not_null
 #pragma db member(order_details::quantity_) not_null
 #pragma db member(order_details::discount_) not_null
