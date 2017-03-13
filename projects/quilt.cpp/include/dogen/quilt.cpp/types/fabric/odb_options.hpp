@@ -60,7 +60,10 @@ public:
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
         const std::list<std::string>& databases,
-        const boost::optional<dogen::yarn::letter_cases>& letter_case);
+        const boost::optional<dogen::yarn::letter_cases>& letter_case,
+        const std::string& odb_include_directory_path,
+        const std::string& types_include_directory_path,
+        const std::string& header_guard_prefix);
 
 private:
     template<typename Archive>
@@ -90,6 +93,21 @@ public:
     void letter_case(const boost::optional<dogen::yarn::letter_cases>& v);
     void letter_case(const boost::optional<dogen::yarn::letter_cases>&& v);
 
+    const std::string& odb_include_directory_path() const;
+    std::string& odb_include_directory_path();
+    void odb_include_directory_path(const std::string& v);
+    void odb_include_directory_path(const std::string&& v);
+
+    const std::string& types_include_directory_path() const;
+    std::string& types_include_directory_path();
+    void types_include_directory_path(const std::string& v);
+    void types_include_directory_path(const std::string&& v);
+
+    const std::string& header_guard_prefix() const;
+    std::string& header_guard_prefix();
+    void header_guard_prefix(const std::string& v);
+    void header_guard_prefix(const std::string&& v);
+
 public:
     bool operator==(const odb_options& rhs) const;
     bool operator!=(const odb_options& rhs) const {
@@ -106,6 +124,9 @@ public:
 private:
     std::list<std::string> databases_;
     boost::optional<dogen::yarn::letter_cases> letter_case_;
+    std::string odb_include_directory_path_;
+    std::string types_include_directory_path_;
+    std::string header_guard_prefix_;
 };
 
 } } } }

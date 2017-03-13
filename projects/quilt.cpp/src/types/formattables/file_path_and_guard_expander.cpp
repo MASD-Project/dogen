@@ -19,8 +19,8 @@
  *
  */
 #include <boost/throw_exception.hpp>
-#include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.cpp/types/formattables/header_guard_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/file_path_and_guard_expander.hpp"
@@ -31,9 +31,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory(
         "quilt.cpp.formattables.file_path_and_guard_expander"));
 
-const std::string empty;
-const std::string dot(".");
-const std::string separator("_");
 const std::string missing_archetype("Archetype not found: ");
 
 }
@@ -42,20 +39,6 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
-
-std::string file_path_and_guard_expander::
-to_header_guard(const boost::filesystem::path& p) const {
-    bool is_first(true);
-    std::ostringstream ss;
-    for (const auto& token : p) {
-        std::string s(token.string());
-        boost::replace_all(s, dot, separator);
-        boost::to_upper(s);
-        ss << (is_first ? empty : separator) << s;
-        is_first = false;
-    }
-    return ss.str();
-}
 
 void file_path_and_guard_expander::
 expand(const formatters::repository& frp, const locator& l, model& fm) const {
@@ -102,7 +85,7 @@ expand(const formatters::repository& frp, const locator& l, model& fm) const {
             const auto ns(formatters::inclusion_support_types::not_supported);
             if (fmt->inclusion_support_type() != ns) {
                 const auto ip(fmt->inclusion_path(l, n));
-                art_props.header_guard(to_header_guard(ip));
+                art_props.header_guard(header_guard_factory::make(ip));
             }
         }
     }

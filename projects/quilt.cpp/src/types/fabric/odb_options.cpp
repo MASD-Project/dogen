@@ -71,7 +71,10 @@ odb_options::odb_options(odb_options&& rhs)
     : dogen::yarn::element(
         std::forward<dogen::yarn::element>(rhs)),
       databases_(std::move(rhs.databases_)),
-      letter_case_(std::move(rhs.letter_case_)) { }
+      letter_case_(std::move(rhs.letter_case_)),
+      odb_include_directory_path_(std::move(rhs.odb_include_directory_path_)),
+      types_include_directory_path_(std::move(rhs.types_include_directory_path_)),
+      header_guard_prefix_(std::move(rhs.header_guard_prefix_)) { }
 
 odb_options::odb_options(
     const std::string& documentation,
@@ -83,7 +86,10 @@ odb_options::odb_options(
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
     const std::list<std::string>& databases,
-    const boost::optional<dogen::yarn::letter_cases>& letter_case)
+    const boost::optional<dogen::yarn::letter_cases>& letter_case,
+    const std::string& odb_include_directory_path,
+    const std::string& types_include_directory_path,
+    const std::string& header_guard_prefix)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -94,7 +100,10 @@ odb_options::odb_options(
       stereotypes,
       is_element_extension),
       databases_(databases),
-      letter_case_(letter_case) { }
+      letter_case_(letter_case),
+      odb_include_directory_path_(odb_include_directory_path),
+      types_include_directory_path_(types_include_directory_path),
+      header_guard_prefix_(header_guard_prefix) { }
 
 void odb_options::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
@@ -131,7 +140,10 @@ void odb_options::to_stream(std::ostream& s) const {
     dogen::yarn::element::to_stream(s);
     s << ", "
       << "\"databases\": " << databases_ << ", "
-      << "\"letter_case\": " << letter_case_
+      << "\"letter_case\": " << letter_case_ << ", "
+      << "\"odb_include_directory_path\": " << "\"" << tidy_up_string(odb_include_directory_path_) << "\"" << ", "
+      << "\"types_include_directory_path\": " << "\"" << tidy_up_string(types_include_directory_path_) << "\"" << ", "
+      << "\"header_guard_prefix\": " << "\"" << tidy_up_string(header_guard_prefix_) << "\""
       << " }";
 }
 
@@ -141,6 +153,9 @@ void odb_options::swap(odb_options& other) noexcept {
     using std::swap;
     swap(databases_, other.databases_);
     swap(letter_case_, other.letter_case_);
+    swap(odb_include_directory_path_, other.odb_include_directory_path_);
+    swap(types_include_directory_path_, other.types_include_directory_path_);
+    swap(header_guard_prefix_, other.header_guard_prefix_);
 }
 
 bool odb_options::equals(const dogen::yarn::element& other) const {
@@ -152,7 +167,10 @@ bool odb_options::equals(const dogen::yarn::element& other) const {
 bool odb_options::operator==(const odb_options& rhs) const {
     return dogen::yarn::element::compare(rhs) &&
         databases_ == rhs.databases_ &&
-        letter_case_ == rhs.letter_case_;
+        letter_case_ == rhs.letter_case_ &&
+        odb_include_directory_path_ == rhs.odb_include_directory_path_ &&
+        types_include_directory_path_ == rhs.types_include_directory_path_ &&
+        header_guard_prefix_ == rhs.header_guard_prefix_;
 }
 
 odb_options& odb_options::operator=(odb_options other) {
@@ -191,6 +209,54 @@ void odb_options::letter_case(const boost::optional<dogen::yarn::letter_cases>& 
 
 void odb_options::letter_case(const boost::optional<dogen::yarn::letter_cases>&& v) {
     letter_case_ = std::move(v);
+}
+
+const std::string& odb_options::odb_include_directory_path() const {
+    return odb_include_directory_path_;
+}
+
+std::string& odb_options::odb_include_directory_path() {
+    return odb_include_directory_path_;
+}
+
+void odb_options::odb_include_directory_path(const std::string& v) {
+    odb_include_directory_path_ = v;
+}
+
+void odb_options::odb_include_directory_path(const std::string&& v) {
+    odb_include_directory_path_ = std::move(v);
+}
+
+const std::string& odb_options::types_include_directory_path() const {
+    return types_include_directory_path_;
+}
+
+std::string& odb_options::types_include_directory_path() {
+    return types_include_directory_path_;
+}
+
+void odb_options::types_include_directory_path(const std::string& v) {
+    types_include_directory_path_ = v;
+}
+
+void odb_options::types_include_directory_path(const std::string&& v) {
+    types_include_directory_path_ = std::move(v);
+}
+
+const std::string& odb_options::header_guard_prefix() const {
+    return header_guard_prefix_;
+}
+
+std::string& odb_options::header_guard_prefix() {
+    return header_guard_prefix_;
+}
+
+void odb_options::header_guard_prefix(const std::string& v) {
+    header_guard_prefix_ = v;
+}
+
+void odb_options::header_guard_prefix(const std::string&& v) {
+    header_guard_prefix_ = std::move(v);
 }
 
 } } } }

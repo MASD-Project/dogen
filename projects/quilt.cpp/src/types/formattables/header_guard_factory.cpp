@@ -18,29 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FILE_PATH_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FILE_PATH_EXPANDER_HPP
+#include <sstream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/quilt.cpp/types/formattables/header_guard_factory.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/types/formatters/repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
+const std::string empty;
+const std::string dot(".");
+const std::string separator("_");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class file_path_and_guard_expander {
-public:
-    void expand(const formatters::repository& frp, const locator& l,
-        model& fm) const;
-};
+std::string header_guard_factory::make(const boost::filesystem::path& p) {
+    bool is_first(true);
+    std::ostringstream ss;
+    for (const auto& token : p) {
+        std::string s(token.string());
+        boost::replace_all(s, dot, separator);
+        boost::to_upper(s);
+        ss << (is_first ? empty : separator) << s;
+        is_first = false;
+    }
+    return ss.str();
+
+}
 
 } } } }
-
-#endif

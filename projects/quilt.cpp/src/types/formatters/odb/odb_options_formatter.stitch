@@ -77,14 +77,14 @@ format(const context& ctx, const yarn::element& e) const {
     {
         a.make_decoration_preamble();
 
-        const auto model_name(a.get_identifiable_model_name(o.name()));
-        const auto product_name(a.get_product_name(o.name()));
-        const auto odb_folder(a.get_odb_facet_directory());
+        if (!a.is_cpp_standard_98()) {
 #>
 # enable C++11
 --std c++11
 
 <#+
+        }
+
         if (o.letter_case()) {
 #>
 # casing
@@ -128,17 +128,17 @@ format(const context& ctx, const yarn::element& e) const {
 --cxx-suffix .cpp
 
 # fix domain includes
---include-regex '%(.*).hpp%<#= product_name #>/<#= model_name #>/types/$1.hpp%'
+--include-regex '%(.*).hpp%<#= o.types_include_directory_path() #>/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%<#= product_name #>/<#= model_name #>/odb/$1-odb$2%'
---include-regex '%<#= product_name #>/<#= model_name #>/types/(.*)-odb(.*)%<#= product_name #>/<#= model_name #>/odb/$1-odb$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%<#= o.odb_include_directory_path() #>/$1-odb$2%'
+--include-regex '%<#= o.types_include_directory_path() #>/(.*)-odb(.*)%<#= o.odb_include_directory_path() #>/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace
 
 # make the header guards similar to dogen ones
---guard-prefix <#= boost::to_upper_copy(product_name) #>_<#= boost::to_upper_copy(model_name) #>_<#= boost::to_upper_copy(odb_folder) #>
+--guard-prefix <#= o.header_guard_prefix() #>
 <#+
     } // sbf
     return a.make_artefact();

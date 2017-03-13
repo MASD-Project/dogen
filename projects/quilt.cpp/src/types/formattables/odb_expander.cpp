@@ -27,10 +27,13 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
+#include "dogen/quilt.cpp/types/formattables/header_guard_factory.hpp"
+#include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
 
 namespace {
@@ -53,20 +56,17 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class odb_properties_generator : public yarn::element_visitor {
+class updator : public fabric::element_visitor {
 public:
-    explicit odb_properties_generator(const odb_expander::type_group& tg);
+    updator(const locator& l, const odb_expander::type_group& tg);
 
 private:
     std::list<std::string> make_odb_pragmas(const odb_expander::type_group& tg,
         const annotations::annotation& a) const;
 
 public:
-    /*
-     * We are only interested in yarn objects and primitives; all
-     * other element types do not need helpers.
-     */
-    using yarn::element_visitor::visit;
+    using fabric::element_visitor::visit;
+    void visit(fabric::odb_options& oo);
     void visit(const yarn::object& o);
     void visit(const yarn::primitive& p);
 
@@ -74,15 +74,16 @@ public:
     const boost::optional<odb_properties>& result() const;
 
 private:
+    const locator locator_;
     const odb_expander::type_group& type_group_;
     boost::optional<odb_properties> result_;
 };
 
-odb_properties_generator::odb_properties_generator(
-    const odb_expander::type_group& tg) : type_group_(tg) {}
+updator::updator(const locator& l,
+    const odb_expander::type_group& tg) : locator_(l), type_group_(tg) {}
 
 std::list<std::string>
-odb_properties_generator::make_odb_pragmas(const odb_expander::type_group& tg,
+updator::make_odb_pragmas(const odb_expander::type_group& tg,
     const annotations::annotation& a) const {
 
     const annotations::entry_selector s(a);
@@ -92,7 +93,22 @@ odb_properties_generator::make_odb_pragmas(const odb_expander::type_group& tg,
     return s.get_text_collection_content(tg.odb_pragma);
 }
 
-void odb_properties_generator::visit(const yarn::object& o) {
+void updator::visit(fabric::odb_options& oo) {
+    const bool for_include_statement(true);
+    const auto odb_fctn(formatters::odb::traits::facet());
+    const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
+            for_include_statement));
+    oo.odb_include_directory_path(odb_dp.generic_string());
+    oo.header_guard_prefix(header_guard_factory::make(odb_dp));
+
+    const auto types_fctn(formatters::types::traits::facet());
+    oo.types_include_directory_path(
+        locator_.make_relative_include_path_for_facet(types_fctn,
+            for_include_statement)
+        .generic_string());
+}
+
+void updator::visit(const yarn::object& o) {
     odb_properties op;
 
     const annotations::entry_selector s(o.annotation());
@@ -183,7 +199,7 @@ void odb_properties_generator::visit(const yarn::object& o) {
         result_ = op;
 }
 
-void odb_properties_generator::visit(const yarn::primitive& p) {
+void updator::visit(const yarn::primitive& p) {
     odb_properties op;
     op.is_value(true);
     op.top_level_odb_pragmas(make_odb_pragmas(type_group_, p.annotation()));
@@ -232,7 +248,7 @@ void odb_properties_generator::visit(const yarn::primitive& p) {
 }
 
 const boost::optional<odb_properties>&
-odb_properties_generator::result() const {
+updator::result() const {
     return result_;
 }
 
@@ -261,8 +277,8 @@ make_type_group(const annotations::type_repository& atrp) const {
     return r;
 }
 
-void odb_expander::
-expand(const annotations::type_repository& atrp, model& fm) const {
+void odb_expander::expand(const annotations::type_repository& atrp,
+    const locator& l, model& fm) const {
     BOOST_LOG_SEV(lg, debug) << "Started expanding odb properties.";
 
     const auto tg(make_type_group(atrp));
@@ -291,8 +307,8 @@ expand(const annotations::type_repository& atrp, model& fm) const {
         /*
          * Update the odb properties, if any exist.
          */
-        const auto& e(*segment);
-        odb_properties_generator g(tg);
+        auto& e(*segment);
+        updator g(l, tg);
         e.accept(g);
 
         if (!g.result())

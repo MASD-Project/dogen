@@ -95,10 +95,10 @@ void model_expander::expand_file_paths_and_guards(
     ex.expand(frp, l, fm);
 }
 
-void model_expander::
-expand_odb(const annotations::type_repository& atrp, model& fm) const {
+void model_expander::expand_odb(const annotations::type_repository& atrp,
+    const locator& l, model& fm) const {
     odb_expander ex;
-    ex.expand(atrp, fm);
+    ex.expand(atrp, l, fm);
 }
 
 void model_expander::
@@ -169,7 +169,7 @@ void model_expander::expand(
     reduce(fm);
 
     expand_file_paths_and_guards(frp, l, fm);
-    expand_odb(atrp, fm);
+    expand_odb(atrp, l, fm);
     expand_facet_directories(l, fm);
     expand_formatting_properties(atrp, frp, fm);
     expand_cmakelists(l, fm);

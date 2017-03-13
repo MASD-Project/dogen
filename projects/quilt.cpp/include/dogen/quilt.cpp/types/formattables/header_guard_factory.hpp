@@ -18,27 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FILE_PATH_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_FILE_PATH_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HEADER_GUARD_FACTORY_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_HEADER_GUARD_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/quilt.cpp/types/formatters/repository.hpp"
-#include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class file_path_and_guard_expander {
+class header_guard_factory final {
 public:
-    void expand(const formatters::repository& frp, const locator& l,
-        model& fm) const;
+    static std::string make(const boost::filesystem::path& p);
 };
 
 } } } }

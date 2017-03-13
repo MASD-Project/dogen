@@ -49,6 +49,9 @@ void save(Archive& ar,
 
     ar << make_nvp("databases", v.databases_);
     ar << make_nvp("letter_case", v.letter_case_);
+    ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+    ar << make_nvp("types_include_directory_path", v.types_include_directory_path_);
+    ar << make_nvp("header_guard_prefix", v.header_guard_prefix_);
 }
 
 template<typename Archive>
@@ -59,6 +62,9 @@ void load(Archive& ar,
 
     ar >> make_nvp("databases", v.databases_);
     ar >> make_nvp("letter_case", v.letter_case_);
+    ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+    ar >> make_nvp("types_include_directory_path", v.types_include_directory_path_);
+    ar >> make_nvp("header_guard_prefix", v.header_guard_prefix_);
 }
 
 } }

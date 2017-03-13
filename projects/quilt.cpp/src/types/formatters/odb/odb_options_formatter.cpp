@@ -100,12 +100,12 @@ format(const context& ctx, const yarn::element& e) const {
     {
         a.make_decoration_preamble();
 
-        const auto model_name(a.get_identifiable_model_name(o.name()));
-        const auto product_name(a.get_product_name(o.name()));
-        const auto odb_folder(a.get_odb_facet_directory());
+        if (!a.is_cpp_standard_98()) {
 a.stream() << "# enable C++11" << std::endl;
 a.stream() << "--std c++11" << std::endl;
 a.stream() << std::endl;
+        }
+
         if (o.letter_case()) {
 a.stream() << "# casing" << std::endl;
 a.stream() << "--sql-name-case " << a.get_letter_case(*o.letter_case()) << std::endl;
@@ -140,17 +140,17 @@ a.stream() << "# --hxx-suffix .hpp" << std::endl;
 a.stream() << "--cxx-suffix .cpp" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# fix domain includes" << std::endl;
-a.stream() << "--include-regex '%(.*).hpp%" << product_name << "/" << model_name << "/types/$1.hpp%'" << std::endl;
+a.stream() << "--include-regex '%(.*).hpp%" << o.types_include_directory_path() << "/$1.hpp%'" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# fix odb generated includes" << std::endl;
-a.stream() << "--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%" << product_name << "/" << model_name << "/odb/$1-odb$2%'" << std::endl;
-a.stream() << "--include-regex '%" << product_name << "/" << model_name << "/types/(.*)-odb(.*)%" << product_name << "/" << model_name << "/odb/$1-odb$2%'" << std::endl;
+a.stream() << "--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%" << o.odb_include_directory_path() << "/$1-odb$2%'" << std::endl;
+a.stream() << "--include-regex '%" << o.types_include_directory_path() << "/(.*)-odb(.*)%" << o.odb_include_directory_path() << "/$1-odb$2%'" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# debug regexes" << std::endl;
 a.stream() << "# --include-regex-trace" << std::endl;
 a.stream() << std::endl;
 a.stream() << "# make the header guards similar to dogen ones" << std::endl;
-a.stream() << "--guard-prefix " << boost::to_upper_copy(product_name) << "_" << boost::to_upper_copy(model_name) << "_" << boost::to_upper_copy(odb_folder) << std::endl;
+a.stream() << "--guard-prefix " << o.header_guard_prefix() << std::endl;
     } // sbf
     return a.make_artefact();
 }

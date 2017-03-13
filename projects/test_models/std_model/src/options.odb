@@ -34,14 +34,14 @@
 --cxx-suffix .cpp
 
 # fix domain includes
---include-regex '%(.*).hpp%dogen/std_model/types/$1.hpp%'
+--include-regex '%(.*).hpp%dogen/test_models/std_model/types/$1.hpp%'
 
 # fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/std_model/odb/$1-odb$2%'
---include-regex '%dogen/std_model/types/(.*)-odb(.*)%dogen/std_model/odb/$1-odb$2%'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/test_models/std_model/odb/$1-odb$2%'
+--include-regex '%dogen/test_models/std_model/types/(.*)-odb(.*)%dogen/test_models/std_model/odb/$1-odb$2%'
 
 # debug regexes
 # --include-regex-trace
 
 # make the header guards similar to dogen ones
---guard-prefix DOGEN_STD_MODEL_ODB
+--guard-prefix DOGEN_TEST_MODELS_STD_MODEL_ODB

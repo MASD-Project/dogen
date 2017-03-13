@@ -30,6 +30,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/object.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -43,14 +44,15 @@ private:
     struct type_group {
         annotations::type odb_pragma;
     };
-    friend class odb_properties_generator;
+    friend class updator;
 
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     type_group make_type_group(const annotations::type_repository& atrp) const;
 
 public:
-    void expand(const annotations::type_repository& atrp, model& fm) const;
+    void expand(const annotations::type_repository& atrp, const locator& l,
+        model& fm) const;
 };
 
 } } } }

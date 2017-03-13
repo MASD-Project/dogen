@@ -45,8 +45,8 @@ include_directories(
 if(ODB_FOUND)
     message(STATUS "Adding ODB feature test project")
     include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/northwind/include)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind/tests)
+    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind)
+    # add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind/tests)
 endif()
 
 # global targets
@@ -165,50 +165,58 @@ foreach(dia_model ${all_dia_test_models})
             endif()
         endif()
 
-        set(target_name "diff_${model_name}_dia")
-        add_custom_target(${target_name}
-            COMMENT "Diffing ${model_name}"
-            COMMAND diff -r -u ${expected_dir} ${actual_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(diff_test_models ${target_name})
+        file(GLOB result ${actual_dir}/*)
+        list(LENGTH result result_length)
+        if(NOT result_length EQUAL 0)
+            set(target_name "diff_${model_name}_dia")
+            add_custom_target(${target_name}
+                COMMENT "Diffing ${model_name}"
+                COMMAND diff -r -u ${expected_dir} ${actual_dir}
+                WORKING_DIRECTORY ${stage_bin_dir})
+            add_dependencies(diff_test_models ${target_name})
 
-        set(target_name "rebase_${model_name}_dia")
-        add_custom_target(${target_name}
-            COMMENT "Rebasing ${model_name}"
-            COMMAND rm -rf ${git_dir}
-            COMMAND cp -r ${actual_dir}/${model_name} ${git_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(rebase_test_models ${target_name})
+            set(target_name "rebase_${model_name}_dia")
+            add_custom_target(${target_name}
+                COMMENT "Rebasing ${model_name}"
+                COMMAND rm -rf ${git_dir}
+                COMMAND cp -r ${actual_dir}/${model_name} ${git_dir}
+                WORKING_DIRECTORY ${stage_bin_dir})
+            add_dependencies(rebase_test_models ${target_name})
 
-        set(target_name "clean_${model_name}_dia")
-        add_custom_target(${target_name}
-            COMMENT "Cleaning ${model_name}"
-            COMMAND rm -rf ${actual_dir}
-            COMMAND mkdir ${actual_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(clean_test_models ${target_name})
-        message(STATUS "Processed model: ${model_name} (dia)")
+            set(target_name "clean_${model_name}_dia")
+            add_custom_target(${target_name}
+                COMMENT "Cleaning ${model_name}"
+                COMMAND rm -rf ${actual_dir}
+                COMMAND mkdir ${actual_dir}
+                WORKING_DIRECTORY ${stage_bin_dir})
+            add_dependencies(clean_test_models ${target_name})
+            message(STATUS "Processed model: ${model_name} (dia)")
+        endif()
     endif()
 
     set(actual_dir "${top_dir}/actual.json/")
     if (EXISTS "${actual_dir}")
         set(main_target_name "${model_name}")
 
-        set(target_name "diff_${model_name}_json")
-        add_custom_target(${target_name}
-            COMMENT "Diffing ${model_name}"
-            COMMAND diff -r -u ${expected_dir} ${actual_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(diff_test_models ${target_name})
+        file(GLOB result ${actual_dir})
+        list(LENGTH result result_length)
+        if(NOT result_length EQUAL 0)
+            set(target_name "diff_${model_name}_json")
+            add_custom_target(${target_name}
+                COMMENT "Diffing ${model_name}"
+                COMMAND diff -r -u ${expected_dir} ${actual_dir}
+                WORKING_DIRECTORY ${stage_bin_dir})
+            add_dependencies(diff_test_models ${target_name})
 
-        set(target_name "clean_${model_name}_json")
-        add_custom_target(${target_name}
-            COMMENT "Cleaning ${model_name}"
-            COMMAND rm -rf ${actual_dir}
-            COMMAND mkdir ${actual_dir}
-            WORKING_DIRECTORY ${stage_bin_dir})
-        add_dependencies(clean_test_models ${target_name})
-        message(STATUS "Processed model: ${model_name} (json)")
+            set(target_name "clean_${model_name}_json")
+            add_custom_target(${target_name}
+                COMMENT "Cleaning ${model_name}"
+                COMMAND rm -rf ${actual_dir}
+                COMMAND mkdir ${actual_dir}
+                WORKING_DIRECTORY ${stage_bin_dir})
+            add_dependencies(clean_test_models ${target_name})
+            message(STATUS "Processed model: ${model_name} (json)")
+        endif()
     endif()
 endforeach()
 
