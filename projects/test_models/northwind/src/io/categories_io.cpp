@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "zango/northwind/io/categories_io.hpp"
-#include "zango/northwind/io/category_id_io.hpp"
+#include "dogen/test_models/northwind/io/categories_io.hpp"
+#include "dogen/test_models/northwind/io/category_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -45,12 +45,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<char>& v) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const categories& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::categories\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::categories\"" << ", "
       << "\"category_id\": " << v.category_id() << ", "
       << "\"category_name\": " << "\"" << tidy_up_string(v.category_name()) << "\"" << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
@@ -59,4 +60,4 @@ std::ostream& operator<<(std::ostream& s, const categories& v) {
     return(s);
 }
 
-} }
+} } }

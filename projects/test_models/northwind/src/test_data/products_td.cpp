@@ -19,16 +19,16 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/products_td.hpp"
-#include "zango/northwind/test_data/product_id_td.hpp"
-#include "zango/northwind/test_data/category_id_td.hpp"
-#include "zango/northwind/test_data/supplier_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/products_td.hpp"
+#include "dogen/test_models/northwind/test_data/product_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/category_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/supplier_id_td.hpp"
 
 namespace {
 
-zango::northwind::product_id
-create_zango_northwind_product_id(const unsigned int position) {
-    return zango::northwind::product_id_generator::create(position);
+dogen::test_models::northwind::product_id
+create_dogen_test_models_northwind_product_id(const unsigned int position) {
+    return dogen::test_models::northwind::product_id_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -37,14 +37,14 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-zango::northwind::supplier_id
-create_zango_northwind_supplier_id(const unsigned int position) {
-    return zango::northwind::supplier_id_generator::create(position);
+dogen::test_models::northwind::supplier_id
+create_dogen_test_models_northwind_supplier_id(const unsigned int position) {
+    return dogen::test_models::northwind::supplier_id_generator::create(position);
 }
 
-zango::northwind::category_id
-create_zango_northwind_category_id(const unsigned int position) {
-    return zango::northwind::category_id_generator::create(position);
+dogen::test_models::northwind::category_id
+create_dogen_test_models_northwind_category_id(const unsigned int position) {
+    return dogen::test_models::northwind::category_id_generator::create(position);
 }
 
 double create_double(const unsigned int position) {
@@ -61,17 +61,18 @@ bool create_bool(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 products_generator::products_generator() : position_(0) { }
 
 void products_generator::
 populate(const unsigned int position, result_type& v) {
-    v.product_id(create_zango_northwind_product_id(position + 0));
+    v.product_id(create_dogen_test_models_northwind_product_id(position + 0));
     v.product_name(create_std_string(position + 1));
-    v.supplier_id(create_zango_northwind_supplier_id(position + 2));
-    v.category_id(create_zango_northwind_category_id(position + 3));
+    v.supplier_id(create_dogen_test_models_northwind_supplier_id(position + 2));
+    v.category_id(create_dogen_test_models_northwind_category_id(position + 3));
     v.quantity_per_unit(create_std_string(position + 4));
     v.unit_price(create_double(position + 5));
     v.units_in_stock(create_int(position + 6));
@@ -99,4 +100,4 @@ products_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

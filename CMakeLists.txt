@@ -93,14 +93,20 @@ if(LIBXML2_FOUND)
 endif()
 
 # odb
-# find_package(ODB)
-# if(ODB_FOUND)
-#    message(STATUS "Found odb...")
-#    include_directories(SYSTEM ${ODB_INCLUDE_DIR})
-#    set(LIBS ${LIBS} ${LIBXML2_LIBRARY_DIR})
-# else()
-#    message(STATUS "odb not found.")
-# endif()
+find_package(Oracle)
+if(ORACLE_FOUND)
+    find_package(ODB COMPONENTS boost oracle pgsql)
+    if(ODB_FOUND)
+        message(STATUS "Found odb...")
+
+        include_directories(SYSTEM ${ORACLE_INCLUDE_DIR} ${ODB_INCLUDE_DIRS})
+        set(LIBS ${LIBS} ${ORACLE_LIBRARY} ${ODB_LIBRARIES} ${Boost_LIBRARIES})
+    else()
+        message(STATUS "odb not found.")
+    endif()
+else()
+    message(STATUS "Oracle not found.")
+endif()
 
 # packaging type
 if(WITH_MINIMAL_PACKAGING)

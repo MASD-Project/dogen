@@ -24,6 +24,6 @@ file(GLOB_RECURSE files RELATIVE
 
 add_library(northwind STATIC ${files})
 set_target_properties(northwind PROPERTIES
-    OUTPUT_NAME zango.northwind)
+    OUTPUT_NAME dogen.northwind)
 
 install(TARGETS northwind ARCHIVE DESTINATION lib COMPONENT libraries)

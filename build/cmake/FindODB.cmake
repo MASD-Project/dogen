@@ -1,105 +1,111 @@
-# - Find ODB library
-# Find the native ODB includes and library
-# This module defines
-#  ODB_INCLUDE_DIR, where to find Url.h, etc.
-#  ODB_LIBRARIES, libraries to link against to use ODB client C++.
-#  ODB_FOUND, If false, do not try to use ODB client C++.
-# also defined, but not for general use are
-#  ODB_CORE_LIBRARY, where to find the core ODB library.
-#  ODB_MYSQL_LIBRARY, where to find the mysql ODB library.
-#  ODB_PGSQL_LIBRARY, where to find the pgsql ODB library.
-#  ODB_BOOST_LIBRARY, where to find the boost profile for the ODB library.
-
-# function(ODB_WRAP SRCS HDRS DATABASE PROFILE) # ARGS
-# MESSAGE(STATUS "ODB database: " ${DATABASE})
-# MESSAGE(STATUS "ODB profile: " ${PROFILE})
-# set(${SRCS})
-# set(${HDRS})
-# foreach(_odb_h ${ARGN})
-#     get_filename_component(_abs_odb_h ${_odb_h} ABSOLUTE)
-#     get_filename_component(_we_odb_h ${_odb_h} NAME_WE)
-
-#     list(APPEND ${SRCS} "${CMAKE_CURRENT_BINARY_DIR}/${_we_odb_h}-odb.cpp")
-#     list(APPEND ${HDRS} "${CMAKE_CURRENT_BINARY_DIR}/${_we_odb_h}-odb.h")
-#     list(APPEND ${HDRS} "${CMAKE_CURRENT_BINARY_DIR}/${_we_odb_h}-odb.i")
-
-#     add_custom_command(
-#     OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${_we_odb_h}-odb.cpp"
-#            "${CMAKE_CURRENT_BINARY_DIR}/${_we_odb_h}-odb.h"
-#            "${CMAKE_CURRENT_BINARY_DIR}/${_we_odb_h}-odb.i"
-#     COMMAND ${ODB_COMPILER}
-#     ARGS -d ${DATABASE} -p ${PROFILE}
-#     -I ${ODB_INCLUDE_DIR} -I ${CMAKE_BINARY_DIR}/proto
-#     --hxx-suffix .h
-#     --ixx-suffix .i
-#     --cxx-suffix .cpp
-#     --output-dir ${CMAKE_CURRENT_BINARY_DIR}
-#     --generate-query
-#     --generate-schema
-# #   --schema-format embedded
-#     ${_abs_odb_h}
-#     DEPENDS ${_abs_odb_h}
-#     COMMENT "Running C++ ODB compiler on ${_odb_h}")
-# endforeach()
-# set_source_files_properties(${${SRCS}} ${${HDRS}} PROPERTIES GENERATED TRUE)
-# set(${SRCS} ${${SRCS}} PARENT_SCOPE)
-# set(${HDRS} ${${HDRS}} PARENT_SCOPE)
-# endfunction()
-
-# function(ODB_WRAP_MYSQL_BOOST SRCS HDRS)
-# ODB_WRAP(__srcs __hdrs "mysql" "boost" ${ARGN})
-# SET(${SRCS} ${__srcs} PARENT_SCOPE)
-# SET(${HDRS} ${__hdrs} PARENT_SCOPE)
-# endfunction()
-
-# function(ODB_WRAP_PGSQL_BOOST SRCS HDRS)
-# ODB_WRAP(__srcs __hdrs "pgsql" "boost" ${ARGN})
-# SET(${SRCS} ${__srcs} PARENT_SCOPE)
-# SET(${HDRS} ${__hdrs} PARENT_SCOPE)
-# endfunction()
-
-
-# FIND_PROGRAM(ODB_COMPILER odb
-# PATHS
-# /bin
-# /usr/bin
-# /opt/bin
-# /opt/odb/bin
-# )
-
-FIND_PATH(ODB_INCLUDE_DIR odb/core.hxx)
-
-FIND_LIBRARY(ODB_CORE_LIBRARY odb)
-
-# FIND_LIBRARY(ODB_MYSQL_LIBRARY odb-mysql
-# PATHS
-# /usr/lib/
-# /usr/lib64/
-# /usr/local/lib/
-# /usr/local/lib64/
-# /opt/odb/lib
-# /opt/lib
-# )
-
-FIND_LIBRARY(ODB_PGSQL_LIBRARY odb-pgsql)
-
-FIND_LIBRARY(ODB_BOOST_LIBRARY odb-boost)
-
-# handle the QUIETLY and REQUIRED arguments and set ODB_FOUND to TRUE if
-# all listed variables are TRUE
-INCLUDE(FindPackageHandleStandardArgs)
-FIND_PACKAGE_HANDLE_STANDARD_ARGS(ODB  DEFAULT_MSG
-    ODB_CORE_LIBRARY ODB_PGSQL_LIBRARY ODB_BOOST_LIBRARY # ODB_MYSQL_LIBRARY
-    ODB_INCLUDE_DIR #ODB_COMPILER
-    )
 #
-IF(ODB_FOUND)
-    SET(ODB_LIBRARIES ${ODB_CORE_LIBRARY} ${ODB_BOOST_LIBRARY})
-    # MESSAGE(STATUS "Found ODB Compiler (ODB_COMPILER = ${ODB_COMPILER})")
-    MESSAGE(STATUS "Found ODB Include folder (ODB_INCLUDE_DIR = ${ODB_INCLUDE_DIR})")
-    MESSAGE(STATUS "Found ODB Core Libraries (ODB_LIBRARIES = ${ODB_LIBRARIES})")
-    # MESSAGE(STATUS "Found ODB MySQL Library (ODB_MYSQL_LIBRARY = ${ODB_MYSQL_LIBRARY})")
-    MESSAGE(STATUS "Found ODB PostgreSQL Library (ODB_PGSQL_LIBRARY = ${ODB_PGSQL_LIBRARY})")
-ENDIF()
+# This module defines the following variables:
 #
-MARK_AS_ADVANCED(ODB_INCLUDE_DIR ODB_LIBRARIES)
+#   ODB_USE_FILE - Path to the UseODB.cmake file. Use it to include the ODB use file.
+#                  The use file defines the needed functionality to compile and use
+#                  odb generated headers.
+#
+#   ODB_FOUND - All required components and the core library were found
+#   ODB_INCLUDR_DIRS - Combined list of all components include dirs
+#   ODB_LIBRARIES - Combined list of all componenets libraries
+#
+#   ODB_LIBODB_FOUND - Libodb core library was found
+#   ODB_LIBODB_INCLUDE_DIRS - Include dirs for libodb core library
+#   ODB_LIBODB_LIBRARIES - Libraries for libodb core library
+#
+# For each requested component the following variables are defined:
+#
+#   ODB_<component>_FOUND - The component was found
+#   ODB_<component>_INCLUDE_DIRS - The components include dirs
+#   ODB_<component>_LIBRARIES - The components libraries
+#
+# <component> is the original or uppercase name of the component
+#
+# The component names relate directly to the odb module names.
+# So for the libodb-mysql.so library, the component is named mysql,
+# for the libodb-qt.so module it's qt, and so on.
+#
+
+set(ODB_USE_FILE "${CMAKE_CURRENT_LIST_DIR}/UseODB.cmake")
+
+find_package(PkgConfig QUIET)
+
+function(find_odb_api component)
+    string(TOUPPER "${component}" component_u)
+    set(ODB_${component_u}_FOUND FALSE PARENT_SCOPE)
+
+    pkg_check_modules(PC_ODB_${component} QUIET "libodb-${component}")
+
+    find_path(ODB_${component}_INCLUDE_DIR
+        NAMES odb/${component}/version.hxx
+        HINTS
+            ${ODB_LIBODB_INCLUDE_DIRS}
+            ${PC_ODB_${component}_INCLUDE_DIRS})
+
+    find_library(ODB_${component}_LIBRARY
+        NAMES odb-${component} libodb-${component}
+        HINTS
+            ${ODB_LIBRARY_PATH}
+            ${PC_ODB_${component}_LIBRARY_DIRS})
+
+    set(ODB_${component_u}_INCLUDE_DIRS ${ODB_${component}_INCLUDE_DIR} CACHE STRING "ODB ${component} include dirs")
+    set(ODB_${component_u}_LIBRARIES ${ODB_${component}_LIBRARY} CACHE STRING "ODB ${component} libraries")
+
+    mark_as_advanced(ODB_${component}_INCLUDE_DIR ODB_${component}_LIBRARY)
+
+    if(ODB_${component_u}_INCLUDE_DIRS AND ODB_${component_u}_LIBRARIES)
+        set(ODB_${component_u}_FOUND TRUE PARENT_SCOPE)
+        set(ODB_${component}_FOUND TRUE PARENT_SCOPE)
+
+        list(APPEND ODB_INCLUDE_DIRS ${ODB_${component_u}_INCLUDE_DIRS})
+        list(REMOVE_DUPLICATES ODB_INCLUDE_DIRS)
+        set(ODB_INCLUDE_DIRS ${ODB_INCLUDE_DIRS} PARENT_SCOPE)
+
+        list(APPEND ODB_LIBRARIES ${ODB_${component_u}_LIBRARIES})
+        list(REMOVE_DUPLICATES ODB_LIBRARIES)
+        set(ODB_LIBRARIES ${ODB_LIBRARIES} PARENT_SCOPE)
+    endif()
+endfunction()
+
+pkg_check_modules(PC_LIBODB QUIET "libodb")
+
+set(ODB_LIBRARY_PATH "" CACHE STRING "Common library search hint for all ODB libs")
+
+find_path(libodb_INCLUDE_DIR
+    NAMES odb/version.hxx
+    HINTS
+        ${PC_LIBODB_INCLUDE_DIRS})
+
+find_library(libodb_LIBRARY
+    NAMES odb libodb
+    HINTS
+        ${ODB_LIBRARY_PATH}
+        ${PC_LIBODB_LIBRARY_DIRS})
+
+find_program(odb_BIN
+    NAMES odb
+    HINTS
+        ${libodb_INCLUDE_DIR}/../bin)
+
+set(ODB_LIBODB_INCLUDE_DIRS ${libodb_INCLUDE_DIR} CACHE STRING "ODB libodb include dirs")
+set(ODB_LIBODB_LIBRARIES ${libodb_LIBRARY} CACHE STRING "ODB libodb library")
+set(ODB_EXECUTABLE ${odb_BIN} CACHE STRING "ODB executable")
+
+mark_as_advanced(libodb_INCLUDE_DIR libodb_LIBRARY odb_BIN)
+
+if(ODB_LIBODB_INCLUDE_DIRS AND ODB_LIBODB_LIBRARIES)
+    set(ODB_LIBODB_FOUND TRUE)
+endif()
+
+set(ODB_INCLUDE_DIRS ${ODB_LIBODB_INCLUDE_DIRS})
+set(ODB_LIBRARIES ${ODB_LIBODB_LIBRARIES})
+
+foreach(component ${ODB_FIND_COMPONENTS})
+    find_odb_api(${component})
+endforeach()
+
+include(FindPackageHandleStandardArgs)
+find_package_handle_standard_args(ODB
+    FOUND_VAR ODB_FOUND
+    REQUIRED_VARS ODB_EXECUTABLE ODB_LIBODB_FOUND
+    HANDLE_COMPONENTS)

@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/supplier_td.hpp"
-#include "zango/northwind/test_data/supplier_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/supplier_td.hpp"
+#include "dogen/test_models/northwind/test_data/supplier_id_td.hpp"
 
 namespace {
 
-zango::northwind::supplier_id
-create_zango_northwind_supplier_id(const unsigned int position) {
-    return zango::northwind::supplier_id_generator::create(position);
+dogen::test_models::northwind::supplier_id
+create_dogen_test_models_northwind_supplier_id(const unsigned int position) {
+    return dogen::test_models::northwind::supplier_id_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -37,14 +37,15 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 supplier_generator::supplier_generator() : position_(0) { }
 
 void supplier_generator::
 populate(const unsigned int position, result_type& v) {
-    v.supplier_id(create_zango_northwind_supplier_id(position + 0));
+    v.supplier_id(create_dogen_test_models_northwind_supplier_id(position + 0));
     v.company_name(create_std_string(position + 1));
     v.contact_name(create_std_string(position + 2));
     v.contact_title(create_std_string(position + 3));
@@ -77,4 +78,4 @@ supplier_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

@@ -27,18 +27,18 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "zango/northwind/serialization/supplier_id_ser.hpp"
+#include "dogen/test_models/northwind/serialization/supplier_id_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const zango::northwind::supplier_id& v, const unsigned int /*version*/) {
+void save(Archive& ar, const dogen::test_models::northwind::supplier_id& v, const unsigned int /*version*/) {
     ar << make_nvp("value", v.value_);
 }
 
 template<typename Archive>
-void load(Archive& ar, zango::northwind::supplier_id& v, const unsigned int /*version*/) {
+void load(Archive& ar, dogen::test_models::northwind::supplier_id& v, const unsigned int /*version*/) {
     ar >> make_nvp("value", v.value_);
 }
 
@@ -47,16 +47,16 @@ void load(Archive& ar, zango::northwind::supplier_id& v, const unsigned int /*ve
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const zango::northwind::supplier_id& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, zango::northwind::supplier_id& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::northwind::supplier_id& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::test_models::northwind::supplier_id& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const zango::northwind::supplier_id& v, unsigned int version);
-template void load(archive::text_iarchive& ar, zango::northwind::supplier_id& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::test_models::northwind::supplier_id& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::test_models::northwind::supplier_id& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const zango::northwind::supplier_id& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, zango::northwind::supplier_id& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::test_models::northwind::supplier_id& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::test_models::northwind::supplier_id& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const zango::northwind::supplier_id& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, zango::northwind::supplier_id& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::test_models::northwind::supplier_id& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::test_models::northwind::supplier_id& v, unsigned int version);
 
 } }

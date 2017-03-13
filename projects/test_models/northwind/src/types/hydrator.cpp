@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/hydrator.hpp"
+#include "dogen/test_models/northwind/types/hydrator.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 bool hydrator::operator==(const hydrator& /*rhs*/) const {
     return true;
 }
 
-} }
+} } }

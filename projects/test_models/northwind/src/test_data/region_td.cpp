@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/region_td.hpp"
-#include "zango/northwind/test_data/region_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/region_td.hpp"
+#include "dogen/test_models/northwind/test_data/region_id_td.hpp"
 
 namespace {
 
-zango::northwind::region_id
-create_zango_northwind_region_id(const unsigned int position) {
-    return zango::northwind::region_id_generator::create(position);
+dogen::test_models::northwind::region_id
+create_dogen_test_models_northwind_region_id(const unsigned int position) {
+    return dogen::test_models::northwind::region_id_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -37,14 +37,15 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 region_generator::region_generator() : position_(0) { }
 
 void region_generator::
 populate(const unsigned int position, result_type& v) {
-    v.region_id(create_zango_northwind_region_id(position + 0));
+    v.region_id(create_dogen_test_models_northwind_region_id(position + 0));
     v.region_description(create_std_string(position + 1));
 }
 
@@ -67,4 +68,4 @@ region_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

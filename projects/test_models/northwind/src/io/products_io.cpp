@@ -21,10 +21,10 @@
 #include <ostream>
 #include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "zango/northwind/io/products_io.hpp"
-#include "zango/northwind/io/product_id_io.hpp"
-#include "zango/northwind/io/category_id_io.hpp"
-#include "zango/northwind/io/supplier_id_io.hpp"
+#include "dogen/test_models/northwind/io/products_io.hpp"
+#include "dogen/test_models/northwind/io/product_id_io.hpp"
+#include "dogen/test_models/northwind/io/category_id_io.hpp"
+#include "dogen/test_models/northwind/io/supplier_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,7 +34,8 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const products& v) {
@@ -45,7 +46,7 @@ std::ostream& operator<<(std::ostream& s, const products& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::products\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::products\"" << ", "
       << "\"product_id\": " << v.product_id() << ", "
       << "\"product_name\": " << "\"" << tidy_up_string(v.product_name()) << "\"" << ", "
       << "\"supplier_id\": " << v.supplier_id() << ", "
@@ -60,4 +61,4 @@ std::ostream& operator<<(std::ostream& s, const products& v) {
     return(s);
 }
 
-} }
+} } }

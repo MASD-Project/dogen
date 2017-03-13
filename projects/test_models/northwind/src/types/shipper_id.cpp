@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/shipper_id.hpp"
+#include "dogen/test_models/northwind/types/shipper_id.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 shipper_id::shipper_id(const int value)
@@ -49,4 +50,4 @@ shipper_id& shipper_id::operator=(shipper_id other) {
     return *this;
 }
 
-} }
+} } }

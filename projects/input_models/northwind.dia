@@ -99,7 +99,7 @@ Northwind database, provided as a sample for Access and SQL Server.
 It's objective is to test Dogen integration with ODB.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=zango
+#DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.hash.enabled=false
@@ -5150,7 +5150,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:point val="100.448,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.6975,-107.75;107.564,-98.2833"/>
+        <dia:rectangle val="99.698,-107.75;107.564,-98.2833"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

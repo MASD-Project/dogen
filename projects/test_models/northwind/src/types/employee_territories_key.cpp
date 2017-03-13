@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/employee_territories_key.hpp"
+#include "dogen/test_models/northwind/types/employee_territories_key.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 employee_territories_key::employee_territories_key(
-    const zango::northwind::employee_id& employee_id,
-    const zango::northwind::territory_id& territory_id)
+    const dogen::test_models::northwind::employee_id& employee_id,
+    const dogen::test_models::northwind::territory_id& territory_id)
     : employee_id_(employee_id),
       territory_id_(territory_id) { }
 
@@ -46,36 +47,36 @@ employee_territories_key& employee_territories_key::operator=(employee_territori
     return *this;
 }
 
-const zango::northwind::employee_id& employee_territories_key::employee_id() const {
+const dogen::test_models::northwind::employee_id& employee_territories_key::employee_id() const {
     return employee_id_;
 }
 
-zango::northwind::employee_id& employee_territories_key::employee_id() {
+dogen::test_models::northwind::employee_id& employee_territories_key::employee_id() {
     return employee_id_;
 }
 
-void employee_territories_key::employee_id(const zango::northwind::employee_id& v) {
+void employee_territories_key::employee_id(const dogen::test_models::northwind::employee_id& v) {
     employee_id_ = v;
 }
 
-void employee_territories_key::employee_id(const zango::northwind::employee_id&& v) {
+void employee_territories_key::employee_id(const dogen::test_models::northwind::employee_id&& v) {
     employee_id_ = std::move(v);
 }
 
-const zango::northwind::territory_id& employee_territories_key::territory_id() const {
+const dogen::test_models::northwind::territory_id& employee_territories_key::territory_id() const {
     return territory_id_;
 }
 
-zango::northwind::territory_id& employee_territories_key::territory_id() {
+dogen::test_models::northwind::territory_id& employee_territories_key::territory_id() {
     return territory_id_;
 }
 
-void employee_territories_key::territory_id(const zango::northwind::territory_id& v) {
+void employee_territories_key::territory_id(const dogen::test_models::northwind::territory_id& v) {
     territory_id_ = v;
 }
 
-void employee_territories_key::territory_id(const zango::northwind::territory_id&& v) {
+void employee_territories_key::territory_id(const dogen::test_models::northwind::territory_id&& v) {
     territory_id_ = std::move(v);
 }
 
-} }
+} } }

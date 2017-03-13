@@ -28,16 +28,16 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "zango/northwind/serialization/region_id_ser.hpp"
-#include "zango/northwind/serialization/territory_ser.hpp"
-#include "zango/northwind/serialization/territory_id_ser.hpp"
+#include "dogen/test_models/northwind/serialization/region_id_ser.hpp"
+#include "dogen/test_models/northwind/serialization/territory_ser.hpp"
+#include "dogen/test_models/northwind/serialization/territory_id_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const zango::northwind::territory& v,
+    const dogen::test_models::northwind::territory& v,
     const unsigned int /*version*/) {
     ar << make_nvp("territory_id", v.territory_id_);
     ar << make_nvp("territory_description", v.territory_description_);
@@ -46,7 +46,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    zango::northwind::territory& v,
+    dogen::test_models::northwind::territory& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("territory_id", v.territory_id_);
     ar >> make_nvp("territory_description", v.territory_description_);
@@ -58,16 +58,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const zango::northwind::territory& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, zango::northwind::territory& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::northwind::territory& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::test_models::northwind::territory& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const zango::northwind::territory& v, unsigned int version);
-template void load(archive::text_iarchive& ar, zango::northwind::territory& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::test_models::northwind::territory& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::test_models::northwind::territory& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const zango::northwind::territory& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, zango::northwind::territory& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::test_models::northwind::territory& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::test_models::northwind::territory& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const zango::northwind::territory& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, zango::northwind::territory& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::test_models::northwind::territory& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::test_models::northwind::territory& v, unsigned int version);
 
 } }

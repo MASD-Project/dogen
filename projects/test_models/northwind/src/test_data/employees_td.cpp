@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/employees_td.hpp"
-#include "zango/northwind/test_data/employee_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/employees_td.hpp"
+#include "dogen/test_models/northwind/test_data/employee_id_td.hpp"
 
 namespace {
 
-zango::northwind::employee_id
-create_zango_northwind_employee_id(const unsigned int position) {
-    return zango::northwind::employee_id_generator::create(position);
+dogen::test_models::northwind::employee_id
+create_dogen_test_models_northwind_employee_id(const unsigned int position) {
+    return dogen::test_models::northwind::employee_id_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -56,14 +56,15 @@ std::vector<char> create_std_vector_char(unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 employees_generator::employees_generator() : position_(0) { }
 
 void employees_generator::
 populate(const unsigned int position, result_type& v) {
-    v.employee_id(create_zango_northwind_employee_id(position + 0));
+    v.employee_id(create_dogen_test_models_northwind_employee_id(position + 0));
     v.last_name(create_std_string(position + 1));
     v.first_name(create_std_string(position + 2));
     v.title(create_std_string(position + 3));
@@ -79,7 +80,7 @@ populate(const unsigned int position, result_type& v) {
     v.extension(create_std_string(position + 13));
     v.photo(create_std_vector_char(position + 14));
     v.notes(create_std_string(position + 15));
-    v.reports_to(create_zango_northwind_employee_id(position + 16));
+    v.reports_to(create_dogen_test_models_northwind_employee_id(position + 16));
     v.photo_path(create_std_string(position + 17));
 }
 
@@ -102,4 +103,4 @@ employees_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

@@ -21,8 +21,8 @@
 #include <ostream>
 #include <boost/algorithm/string.hpp>
 #include <boost/date_time/gregorian/gregorian.hpp>
-#include "zango/northwind/io/employees_io.hpp"
-#include "zango/northwind/io/employee_id_io.hpp"
+#include "dogen/test_models/northwind/io/employees_io.hpp"
+#include "dogen/test_models/northwind/io/employee_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,12 +46,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::vector<char>& v) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const employees& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::employees\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::employees\"" << ", "
       << "\"employee_id\": " << v.employee_id() << ", "
       << "\"last_name\": " << "\"" << tidy_up_string(v.last_name()) << "\"" << ", "
       << "\"first_name\": " << "\"" << tidy_up_string(v.first_name()) << "\"" << ", "
@@ -74,4 +75,4 @@ std::ostream& operator<<(std::ostream& s, const employees& v) {
     return(s);
 }
 
-} }
+} } }

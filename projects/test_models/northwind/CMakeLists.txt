@@ -25,7 +25,7 @@ install(
     COMPONENT headers
     FILES_MATCHING PATTERN "*.hpp")
 
-set(include_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/zango/northwind/odb")
+set(include_odb_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/test_models/northwind/odb")
 set(all_odb_files "")
 file(GLOB_RECURSE all_odb_files RELATIVE
     "${include_odb_dir}/"
@@ -41,7 +41,7 @@ add_custom_target(odb_northwind
     COMMAND mv ${include_odb_dir}/*.cpp ${src_odb_dir})
 
 set(ignore_file false)
-set(include_types_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/zango/northwind/types")
+set(include_types_dir "${CMAKE_CURRENT_SOURCE_DIR}/include/dogen/test_models/northwind/types")
 foreach(odb_file ${all_odb_files})
     if (odb_file MATCHES "all_pragmas.hpp")
         set(ignore_file true)
@@ -60,7 +60,7 @@ foreach(odb_file ${all_odb_files})
             COMMAND ${ODB_EXECUTABLE}
             --options-file ${CMAKE_CURRENT_SOURCE_DIR}/src/options.odb
             --output-dir ${include_odb_dir}/
-            --odb-epilogue '\#include \"zango/northwind/odb/${odb_file}\"'
+            --odb-epilogue '\#include \"dogen/test_models/northwind/odb/${odb_file}\"'
             -I ${ODB_INCLUDE_DIRS} -I ${CMAKE_CURRENT_SOURCE_DIR}/include
             ${include_types_dir}/${type_name}.hpp)
 

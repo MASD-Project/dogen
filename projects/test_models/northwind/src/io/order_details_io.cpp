@@ -20,10 +20,11 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "zango/northwind/io/order_details_io.hpp"
-#include "zango/northwind/io/order_details_key_io.hpp"
+#include "dogen/test_models/northwind/io/order_details_io.hpp"
+#include "dogen/test_models/northwind/io/order_details_key_io.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const order_details& v) {
@@ -34,7 +35,7 @@ std::ostream& operator<<(std::ostream& s, const order_details& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::order_details\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::order_details\"" << ", "
       << "\"order_details_key\": " << v.order_details_key() << ", "
       << "\"unit_price\": " << v.unit_price() << ", "
       << "\"quantity\": " << v.quantity() << ", "
@@ -43,4 +44,4 @@ std::ostream& operator<<(std::ostream& s, const order_details& v) {
     return(s);
 }
 
-} }
+} } }

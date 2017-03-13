@@ -46,7 +46,7 @@ if(ODB_FOUND)
     message(STATUS "Adding ODB feature test project")
     include_directories(${CMAKE_SOURCE_DIR}/projects/test_models/northwind/include)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind)
-    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind/test)
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/northwind/tests)
 endif()
 
 # global targets

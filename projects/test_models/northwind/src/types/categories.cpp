@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/categories.hpp"
+#include "dogen/test_models/northwind/types/categories.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 categories::categories(
-    const zango::northwind::category_id& category_id,
+    const dogen::test_models::northwind::category_id& category_id,
     const std::string& category_name,
     const std::string& description,
     const std::vector<char>& picutre)
@@ -54,19 +55,19 @@ categories& categories::operator=(categories other) {
     return *this;
 }
 
-const zango::northwind::category_id& categories::category_id() const {
+const dogen::test_models::northwind::category_id& categories::category_id() const {
     return category_id_;
 }
 
-zango::northwind::category_id& categories::category_id() {
+dogen::test_models::northwind::category_id& categories::category_id() {
     return category_id_;
 }
 
-void categories::category_id(const zango::northwind::category_id& v) {
+void categories::category_id(const dogen::test_models::northwind::category_id& v) {
     category_id_ = v;
 }
 
-void categories::category_id(const zango::northwind::category_id&& v) {
+void categories::category_id(const dogen::test_models::northwind::category_id&& v) {
     category_id_ = std::move(v);
 }
 
@@ -118,4 +119,4 @@ void categories::picutre(const std::vector<char>&& v) {
     picutre_ = std::move(v);
 }
 
-} }
+} } }

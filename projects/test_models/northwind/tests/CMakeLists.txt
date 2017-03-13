@@ -17,17 +17,19 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-set(tests_files "")
-file(GLOB_RECURSE tests_files RELATIVE
+set(name "northwind")
+set(tests_name "${name}.tests")
+set(binary_name "dogen.${tests_name}")
+set(files "")
+file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
-add_executable(northwind_tests ${tests_files})
-set(binary_name "dogen_northwind_tests")
-set_target_properties(northwind_tests PROPERTIES OUTPUT_NAME ${binary_name})
+add_executable(${tests_name} ${files})
+set_target_properties(${tests_name} PROPERTIES OUTPUT_NAME ${binary_name})
 
-target_link_libraries(northwind_tests
-    northwind
+target_link_libraries(${tests_name}
+    ${name}
     utility
     ${LIBXML2_LIBRARIES}
     ${Boost_LIBRARIES}
@@ -39,11 +41,25 @@ target_link_libraries(northwind_tests
 
 set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
-add_custom_target(run_northwind_tests
+add_custom_target(run_${tests_name}
+    COMMENT "Running ${tests_name}" VERBATIM
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
-    DEPENDS northwind_tests)
-add_dependencies(run_all_testss run_northwind_tests)
+    DEPENDS ${tests_name})
 
-add_boost_tests(northwind ${test^s_files})
-install(TARGETS northwind_tests RUNTIME DESTINATION bin COMPONENT tests)
+add_dependencies(run_all_tests run_${tests_name})
+
+if(WITH_BENCHMARKS)
+    add_custom_target(benchmark_${tests_name}
+        COMMENT "Benchmarking testing ${tests_name}" VERBATIM
+        COMMAND ${benchmark_command} ${benchmark_repeats}
+        ${benchmark_directory}/${benchmark_prefix}${tests_name}.csv ${command}
+        WORKING_DIRECTORY ${stage_bin_dir}
+        DEPENDS ${tests_name})
+
+    add_dependencies(benchmark_all benchmark_${tests_name})
+endif()
+
+add_boost_tests(${name} ${files})
+
+install(TARGETS ${tests_name} RUNTIME DESTINATION bin COMPONENT tests)

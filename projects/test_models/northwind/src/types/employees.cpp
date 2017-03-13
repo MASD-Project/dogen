@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/employees.hpp"
+#include "dogen/test_models/northwind/types/employees.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 employees::employees(
-    const zango::northwind::employee_id& employee_id,
+    const dogen::test_models::northwind::employee_id& employee_id,
     const std::string& last_name,
     const std::string& first_name,
     const std::string& title,
@@ -40,7 +41,7 @@ employees::employees(
     const std::string& extension,
     const std::vector<char>& photo,
     const std::string& notes,
-    const zango::northwind::employee_id& reports_to,
+    const dogen::test_models::northwind::employee_id& reports_to,
     const std::string& photo_path)
     : employee_id_(employee_id),
       last_name_(last_name),
@@ -110,19 +111,19 @@ employees& employees::operator=(employees other) {
     return *this;
 }
 
-const zango::northwind::employee_id& employees::employee_id() const {
+const dogen::test_models::northwind::employee_id& employees::employee_id() const {
     return employee_id_;
 }
 
-zango::northwind::employee_id& employees::employee_id() {
+dogen::test_models::northwind::employee_id& employees::employee_id() {
     return employee_id_;
 }
 
-void employees::employee_id(const zango::northwind::employee_id& v) {
+void employees::employee_id(const dogen::test_models::northwind::employee_id& v) {
     employee_id_ = v;
 }
 
-void employees::employee_id(const zango::northwind::employee_id&& v) {
+void employees::employee_id(const dogen::test_models::northwind::employee_id&& v) {
     employee_id_ = std::move(v);
 }
 
@@ -366,19 +367,19 @@ void employees::notes(const std::string&& v) {
     notes_ = std::move(v);
 }
 
-const zango::northwind::employee_id& employees::reports_to() const {
+const dogen::test_models::northwind::employee_id& employees::reports_to() const {
     return reports_to_;
 }
 
-zango::northwind::employee_id& employees::reports_to() {
+dogen::test_models::northwind::employee_id& employees::reports_to() {
     return reports_to_;
 }
 
-void employees::reports_to(const zango::northwind::employee_id& v) {
+void employees::reports_to(const dogen::test_models::northwind::employee_id& v) {
     reports_to_ = v;
 }
 
-void employees::reports_to(const zango::northwind::employee_id&& v) {
+void employees::reports_to(const dogen::test_models::northwind::employee_id&& v) {
     reports_to_ = std::move(v);
 }
 
@@ -398,4 +399,4 @@ void employees::photo_path(const std::string&& v) {
     photo_path_ = std::move(v);
 }
 
-} }
+} } }

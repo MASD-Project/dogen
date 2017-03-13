@@ -19,20 +19,21 @@
  *
  */
 #include <ostream>
-#include "zango/northwind/io/customer_id_io.hpp"
-#include "zango/northwind/io/customer_type_id_io.hpp"
-#include "zango/northwind/io/customer_customer_demo_key_io.hpp"
+#include "dogen/test_models/northwind/io/customer_id_io.hpp"
+#include "dogen/test_models/northwind/io/customer_type_id_io.hpp"
+#include "dogen/test_models/northwind/io/customer_customer_demo_key_io.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const customer_customer_demo_key& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::customer_customer_demo_key\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::customer_customer_demo_key\"" << ", "
       << "\"customer_id\": " << v.customer_id() << ", "
       << "\"customer_type_id\": " << v.customer_type_id()
       << " }";
     return(s);
 }
 
-} }
+} } }

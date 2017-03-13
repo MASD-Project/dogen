@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "zango/northwind/io/region_id_io.hpp"
-#include "zango/northwind/io/territory_io.hpp"
-#include "zango/northwind/io/territory_id_io.hpp"
+#include "dogen/test_models/northwind/io/region_id_io.hpp"
+#include "dogen/test_models/northwind/io/territory_io.hpp"
+#include "dogen/test_models/northwind/io/territory_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,12 +32,13 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const territory& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::territory\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::territory\"" << ", "
       << "\"territory_id\": " << v.territory_id() << ", "
       << "\"territory_description\": " << "\"" << tidy_up_string(v.territory_description()) << "\"" << ", "
       << "\"region_id\": " << v.region_id()
@@ -45,4 +46,4 @@ std::ostream& operator<<(std::ostream& s, const territory& v) {
     return(s);
 }
 
-} }
+} } }

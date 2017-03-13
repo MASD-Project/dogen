@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/region_id.hpp"
+#include "dogen/test_models/northwind/types/region_id.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 region_id::region_id(const int value)
@@ -49,4 +50,4 @@ region_id& region_id::operator=(region_id other) {
     return *this;
 }
 
-} }
+} } }

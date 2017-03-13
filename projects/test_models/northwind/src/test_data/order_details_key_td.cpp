@@ -18,33 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/test_data/order_id_td.hpp"
-#include "zango/northwind/test_data/product_id_td.hpp"
-#include "zango/northwind/test_data/order_details_key_td.hpp"
+#include "dogen/test_models/northwind/test_data/order_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/product_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/order_details_key_td.hpp"
 
 namespace {
 
-zango::northwind::product_id
-create_zango_northwind_product_id(const unsigned int position) {
-    return zango::northwind::product_id_generator::create(position);
+dogen::test_models::northwind::product_id
+create_dogen_test_models_northwind_product_id(const unsigned int position) {
+    return dogen::test_models::northwind::product_id_generator::create(position);
 }
 
-zango::northwind::order_id
-create_zango_northwind_order_id(const unsigned int position) {
-    return zango::northwind::order_id_generator::create(position);
+dogen::test_models::northwind::order_id
+create_dogen_test_models_northwind_order_id(const unsigned int position) {
+    return dogen::test_models::northwind::order_id_generator::create(position);
 }
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 order_details_key_generator::order_details_key_generator() : position_(0) { }
 
 void order_details_key_generator::
 populate(const unsigned int position, result_type& v) {
-    v.product_id(create_zango_northwind_product_id(position + 0));
-    v.order_id(create_zango_northwind_order_id(position + 1));
+    v.product_id(create_dogen_test_models_northwind_product_id(position + 0));
+    v.order_id(create_dogen_test_models_northwind_order_id(position + 1));
 }
 
 order_details_key_generator::result_type
@@ -66,4 +67,4 @@ order_details_key_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "zango/northwind/io/territory_id_io.hpp"
+#include "dogen/test_models/northwind/io/territory_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -30,17 +30,18 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const territory_id& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::territory_id\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::territory_id\"" << ", "
       << "\"value\": " << "\"" << tidy_up_string(v.value()) << "\""
       << " }";
 
     return s;
 }
 
-} }
+} } }

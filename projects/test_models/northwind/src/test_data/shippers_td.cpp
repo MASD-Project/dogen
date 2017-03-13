@@ -19,14 +19,14 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/shippers_td.hpp"
-#include "zango/northwind/test_data/shipper_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/shippers_td.hpp"
+#include "dogen/test_models/northwind/test_data/shipper_id_td.hpp"
 
 namespace {
 
-zango::northwind::shipper_id
-create_zango_northwind_shipper_id(const unsigned int position) {
-    return zango::northwind::shipper_id_generator::create(position);
+dogen::test_models::northwind::shipper_id
+create_dogen_test_models_northwind_shipper_id(const unsigned int position) {
+    return dogen::test_models::northwind::shipper_id_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -37,14 +37,15 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 shippers_generator::shippers_generator() : position_(0) { }
 
 void shippers_generator::
 populate(const unsigned int position, result_type& v) {
-    v.shipper_id(create_zango_northwind_shipper_id(position + 0));
+    v.shipper_id(create_dogen_test_models_northwind_shipper_id(position + 0));
     v.company_name(create_std_string(position + 1));
     v.phone(create_std_string(position + 2));
 }
@@ -68,4 +69,4 @@ shippers_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

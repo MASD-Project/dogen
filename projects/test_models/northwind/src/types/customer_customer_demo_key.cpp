@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/customer_customer_demo_key.hpp"
+#include "dogen/test_models/northwind/types/customer_customer_demo_key.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 customer_customer_demo_key::customer_customer_demo_key(
-    const zango::northwind::customer_id& customer_id,
-    const zango::northwind::customer_type_id& customer_type_id)
+    const dogen::test_models::northwind::customer_id& customer_id,
+    const dogen::test_models::northwind::customer_type_id& customer_type_id)
     : customer_id_(customer_id),
       customer_type_id_(customer_type_id) { }
 
@@ -46,36 +47,36 @@ customer_customer_demo_key& customer_customer_demo_key::operator=(customer_custo
     return *this;
 }
 
-const zango::northwind::customer_id& customer_customer_demo_key::customer_id() const {
+const dogen::test_models::northwind::customer_id& customer_customer_demo_key::customer_id() const {
     return customer_id_;
 }
 
-zango::northwind::customer_id& customer_customer_demo_key::customer_id() {
+dogen::test_models::northwind::customer_id& customer_customer_demo_key::customer_id() {
     return customer_id_;
 }
 
-void customer_customer_demo_key::customer_id(const zango::northwind::customer_id& v) {
+void customer_customer_demo_key::customer_id(const dogen::test_models::northwind::customer_id& v) {
     customer_id_ = v;
 }
 
-void customer_customer_demo_key::customer_id(const zango::northwind::customer_id&& v) {
+void customer_customer_demo_key::customer_id(const dogen::test_models::northwind::customer_id&& v) {
     customer_id_ = std::move(v);
 }
 
-const zango::northwind::customer_type_id& customer_customer_demo_key::customer_type_id() const {
+const dogen::test_models::northwind::customer_type_id& customer_customer_demo_key::customer_type_id() const {
     return customer_type_id_;
 }
 
-zango::northwind::customer_type_id& customer_customer_demo_key::customer_type_id() {
+dogen::test_models::northwind::customer_type_id& customer_customer_demo_key::customer_type_id() {
     return customer_type_id_;
 }
 
-void customer_customer_demo_key::customer_type_id(const zango::northwind::customer_type_id& v) {
+void customer_customer_demo_key::customer_type_id(const dogen::test_models::northwind::customer_type_id& v) {
     customer_type_id_ = v;
 }
 
-void customer_customer_demo_key::customer_type_id(const zango::northwind::customer_type_id&& v) {
+void customer_customer_demo_key::customer_type_id(const dogen::test_models::northwind::customer_type_id&& v) {
     customer_type_id_ = std::move(v);
 }
 
-} }
+} } }

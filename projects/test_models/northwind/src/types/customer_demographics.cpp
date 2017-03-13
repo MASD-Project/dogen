@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/customer_demographics.hpp"
+#include "dogen/test_models/northwind/types/customer_demographics.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 customer_demographics::customer_demographics(
-    const zango::northwind::customer_type_id& customer_type_id,
+    const dogen::test_models::northwind::customer_type_id& customer_type_id,
     const std::string& customer_description)
     : customer_type_id_(customer_type_id),
       customer_description_(customer_description) { }
@@ -46,19 +47,19 @@ customer_demographics& customer_demographics::operator=(customer_demographics ot
     return *this;
 }
 
-const zango::northwind::customer_type_id& customer_demographics::customer_type_id() const {
+const dogen::test_models::northwind::customer_type_id& customer_demographics::customer_type_id() const {
     return customer_type_id_;
 }
 
-zango::northwind::customer_type_id& customer_demographics::customer_type_id() {
+dogen::test_models::northwind::customer_type_id& customer_demographics::customer_type_id() {
     return customer_type_id_;
 }
 
-void customer_demographics::customer_type_id(const zango::northwind::customer_type_id& v) {
+void customer_demographics::customer_type_id(const dogen::test_models::northwind::customer_type_id& v) {
     customer_type_id_ = v;
 }
 
-void customer_demographics::customer_type_id(const zango::northwind::customer_type_id&& v) {
+void customer_demographics::customer_type_id(const dogen::test_models::northwind::customer_type_id&& v) {
     customer_type_id_ = std::move(v);
 }
 
@@ -78,4 +79,4 @@ void customer_demographics::customer_description(const std::string&& v) {
     customer_description_ = std::move(v);
 }
 
-} }
+} } }

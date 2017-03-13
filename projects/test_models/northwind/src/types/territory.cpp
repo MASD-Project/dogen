@@ -18,15 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/territory.hpp"
+#include "dogen/test_models/northwind/types/territory.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 territory::territory(
-    const zango::northwind::territory_id& territory_id,
+    const dogen::test_models::northwind::territory_id& territory_id,
     const std::string& territory_description,
-    const zango::northwind::region_id& region_id)
+    const dogen::test_models::northwind::region_id& region_id)
     : territory_id_(territory_id),
       territory_description_(territory_description),
       region_id_(region_id) { }
@@ -50,19 +51,19 @@ territory& territory::operator=(territory other) {
     return *this;
 }
 
-const zango::northwind::territory_id& territory::territory_id() const {
+const dogen::test_models::northwind::territory_id& territory::territory_id() const {
     return territory_id_;
 }
 
-zango::northwind::territory_id& territory::territory_id() {
+dogen::test_models::northwind::territory_id& territory::territory_id() {
     return territory_id_;
 }
 
-void territory::territory_id(const zango::northwind::territory_id& v) {
+void territory::territory_id(const dogen::test_models::northwind::territory_id& v) {
     territory_id_ = v;
 }
 
-void territory::territory_id(const zango::northwind::territory_id&& v) {
+void territory::territory_id(const dogen::test_models::northwind::territory_id&& v) {
     territory_id_ = std::move(v);
 }
 
@@ -82,20 +83,20 @@ void territory::territory_description(const std::string&& v) {
     territory_description_ = std::move(v);
 }
 
-const zango::northwind::region_id& territory::region_id() const {
+const dogen::test_models::northwind::region_id& territory::region_id() const {
     return region_id_;
 }
 
-zango::northwind::region_id& territory::region_id() {
+dogen::test_models::northwind::region_id& territory::region_id() {
     return region_id_;
 }
 
-void territory::region_id(const zango::northwind::region_id& v) {
+void territory::region_id(const dogen::test_models::northwind::region_id& v) {
     region_id_ = v;
 }
 
-void territory::region_id(const zango::northwind::region_id&& v) {
+void territory::region_id(const dogen::test_models::northwind::region_id&& v) {
     region_id_ = std::move(v);
 }
 
-} }
+} } }

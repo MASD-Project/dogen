@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/order_details_key.hpp"
+#include "dogen/test_models/northwind/types/order_details_key.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 order_details_key::order_details_key(
-    const zango::northwind::product_id& product_id,
-    const zango::northwind::order_id& order_id)
+    const dogen::test_models::northwind::product_id& product_id,
+    const dogen::test_models::northwind::order_id& order_id)
     : product_id_(product_id),
       order_id_(order_id) { }
 
@@ -46,36 +47,36 @@ order_details_key& order_details_key::operator=(order_details_key other) {
     return *this;
 }
 
-const zango::northwind::product_id& order_details_key::product_id() const {
+const dogen::test_models::northwind::product_id& order_details_key::product_id() const {
     return product_id_;
 }
 
-zango::northwind::product_id& order_details_key::product_id() {
+dogen::test_models::northwind::product_id& order_details_key::product_id() {
     return product_id_;
 }
 
-void order_details_key::product_id(const zango::northwind::product_id& v) {
+void order_details_key::product_id(const dogen::test_models::northwind::product_id& v) {
     product_id_ = v;
 }
 
-void order_details_key::product_id(const zango::northwind::product_id&& v) {
+void order_details_key::product_id(const dogen::test_models::northwind::product_id&& v) {
     product_id_ = std::move(v);
 }
 
-const zango::northwind::order_id& order_details_key::order_id() const {
+const dogen::test_models::northwind::order_id& order_details_key::order_id() const {
     return order_id_;
 }
 
-zango::northwind::order_id& order_details_key::order_id() {
+dogen::test_models::northwind::order_id& order_details_key::order_id() {
     return order_id_;
 }
 
-void order_details_key::order_id(const zango::northwind::order_id& v) {
+void order_details_key::order_id(const dogen::test_models::northwind::order_id& v) {
     order_id_ = v;
 }
 
-void order_details_key::order_id(const zango::northwind::order_id&& v) {
+void order_details_key::order_id(const dogen::test_models::northwind::order_id&& v) {
     order_id_ = std::move(v);
 }
 
-} }
+} } }

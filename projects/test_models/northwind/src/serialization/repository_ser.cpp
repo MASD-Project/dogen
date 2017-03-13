@@ -28,26 +28,26 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "zango/northwind/serialization/region_ser.hpp"
-#include "zango/northwind/serialization/products_ser.hpp"
-#include "zango/northwind/serialization/shippers_ser.hpp"
-#include "zango/northwind/serialization/supplier_ser.hpp"
-#include "zango/northwind/serialization/customers_ser.hpp"
-#include "zango/northwind/serialization/employees_ser.hpp"
-#include "zango/northwind/serialization/territory_ser.hpp"
-#include "zango/northwind/serialization/categories_ser.hpp"
-#include "zango/northwind/serialization/repository_ser.hpp"
-#include "zango/northwind/serialization/order_details_ser.hpp"
-#include "zango/northwind/serialization/employee_territories_ser.hpp"
-#include "zango/northwind/serialization/customer_demographics_ser.hpp"
-#include "zango/northwind/serialization/customer_customer_demo_ser.hpp"
+#include "dogen/test_models/northwind/serialization/region_ser.hpp"
+#include "dogen/test_models/northwind/serialization/products_ser.hpp"
+#include "dogen/test_models/northwind/serialization/shippers_ser.hpp"
+#include "dogen/test_models/northwind/serialization/supplier_ser.hpp"
+#include "dogen/test_models/northwind/serialization/customers_ser.hpp"
+#include "dogen/test_models/northwind/serialization/employees_ser.hpp"
+#include "dogen/test_models/northwind/serialization/territory_ser.hpp"
+#include "dogen/test_models/northwind/serialization/categories_ser.hpp"
+#include "dogen/test_models/northwind/serialization/repository_ser.hpp"
+#include "dogen/test_models/northwind/serialization/order_details_ser.hpp"
+#include "dogen/test_models/northwind/serialization/employee_territories_ser.hpp"
+#include "dogen/test_models/northwind/serialization/customer_demographics_ser.hpp"
+#include "dogen/test_models/northwind/serialization/customer_customer_demo_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const zango::northwind::repository& v,
+    const dogen::test_models::northwind::repository& v,
     const unsigned int /*version*/) {
     ar << make_nvp("territories", v.territories_);
     ar << make_nvp("regions", v.regions_);
@@ -65,7 +65,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    zango::northwind::repository& v,
+    dogen::test_models::northwind::repository& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("territories", v.territories_);
     ar >> make_nvp("regions", v.regions_);
@@ -86,16 +86,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const zango::northwind::repository& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, zango::northwind::repository& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::northwind::repository& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::test_models::northwind::repository& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const zango::northwind::repository& v, unsigned int version);
-template void load(archive::text_iarchive& ar, zango::northwind::repository& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::test_models::northwind::repository& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::test_models::northwind::repository& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const zango::northwind::repository& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, zango::northwind::repository& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::test_models::northwind::repository& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::test_models::northwind::repository& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const zango::northwind::repository& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, zango::northwind::repository& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::test_models::northwind::repository& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::test_models::northwind::repository& v, unsigned int version);
 
 } }

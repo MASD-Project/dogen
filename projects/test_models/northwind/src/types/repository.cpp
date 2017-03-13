@@ -18,24 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/repository.hpp"
+#include "dogen/test_models/northwind/types/repository.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 repository::repository(
-    const std::list<zango::northwind::territory>& territories,
-    const std::list<zango::northwind::region>& regions,
-    const std::list<zango::northwind::employees>& employees,
-    const std::list<zango::northwind::employee_territories>& employee_territories,
-    const std::list<zango::northwind::order_details>& order_details,
-    const std::list<zango::northwind::categories>& categories,
-    const std::list<zango::northwind::customer_demographics>& customer_demographics,
-    const std::list<zango::northwind::products>& products,
-    const std::list<zango::northwind::supplier>& suppliers,
-    const std::list<zango::northwind::shippers>& shippers,
-    const std::list<zango::northwind::customer_customer_demo>& customer_customer_demos,
-    const std::list<zango::northwind::customers>& customers)
+    const std::list<dogen::test_models::northwind::territory>& territories,
+    const std::list<dogen::test_models::northwind::region>& regions,
+    const std::list<dogen::test_models::northwind::employees>& employees,
+    const std::list<dogen::test_models::northwind::employee_territories>& employee_territories,
+    const std::list<dogen::test_models::northwind::order_details>& order_details,
+    const std::list<dogen::test_models::northwind::categories>& categories,
+    const std::list<dogen::test_models::northwind::customer_demographics>& customer_demographics,
+    const std::list<dogen::test_models::northwind::products>& products,
+    const std::list<dogen::test_models::northwind::supplier>& suppliers,
+    const std::list<dogen::test_models::northwind::shippers>& shippers,
+    const std::list<dogen::test_models::northwind::customer_customer_demo>& customer_customer_demos,
+    const std::list<dogen::test_models::northwind::customers>& customers)
     : territories_(territories),
       regions_(regions),
       employees_(employees),
@@ -86,196 +87,196 @@ repository& repository::operator=(repository other) {
     return *this;
 }
 
-const std::list<zango::northwind::territory>& repository::territories() const {
+const std::list<dogen::test_models::northwind::territory>& repository::territories() const {
     return territories_;
 }
 
-std::list<zango::northwind::territory>& repository::territories() {
+std::list<dogen::test_models::northwind::territory>& repository::territories() {
     return territories_;
 }
 
-void repository::territories(const std::list<zango::northwind::territory>& v) {
+void repository::territories(const std::list<dogen::test_models::northwind::territory>& v) {
     territories_ = v;
 }
 
-void repository::territories(const std::list<zango::northwind::territory>&& v) {
+void repository::territories(const std::list<dogen::test_models::northwind::territory>&& v) {
     territories_ = std::move(v);
 }
 
-const std::list<zango::northwind::region>& repository::regions() const {
+const std::list<dogen::test_models::northwind::region>& repository::regions() const {
     return regions_;
 }
 
-std::list<zango::northwind::region>& repository::regions() {
+std::list<dogen::test_models::northwind::region>& repository::regions() {
     return regions_;
 }
 
-void repository::regions(const std::list<zango::northwind::region>& v) {
+void repository::regions(const std::list<dogen::test_models::northwind::region>& v) {
     regions_ = v;
 }
 
-void repository::regions(const std::list<zango::northwind::region>&& v) {
+void repository::regions(const std::list<dogen::test_models::northwind::region>&& v) {
     regions_ = std::move(v);
 }
 
-const std::list<zango::northwind::employees>& repository::employees() const {
+const std::list<dogen::test_models::northwind::employees>& repository::employees() const {
     return employees_;
 }
 
-std::list<zango::northwind::employees>& repository::employees() {
+std::list<dogen::test_models::northwind::employees>& repository::employees() {
     return employees_;
 }
 
-void repository::employees(const std::list<zango::northwind::employees>& v) {
+void repository::employees(const std::list<dogen::test_models::northwind::employees>& v) {
     employees_ = v;
 }
 
-void repository::employees(const std::list<zango::northwind::employees>&& v) {
+void repository::employees(const std::list<dogen::test_models::northwind::employees>&& v) {
     employees_ = std::move(v);
 }
 
-const std::list<zango::northwind::employee_territories>& repository::employee_territories() const {
+const std::list<dogen::test_models::northwind::employee_territories>& repository::employee_territories() const {
     return employee_territories_;
 }
 
-std::list<zango::northwind::employee_territories>& repository::employee_territories() {
+std::list<dogen::test_models::northwind::employee_territories>& repository::employee_territories() {
     return employee_territories_;
 }
 
-void repository::employee_territories(const std::list<zango::northwind::employee_territories>& v) {
+void repository::employee_territories(const std::list<dogen::test_models::northwind::employee_territories>& v) {
     employee_territories_ = v;
 }
 
-void repository::employee_territories(const std::list<zango::northwind::employee_territories>&& v) {
+void repository::employee_territories(const std::list<dogen::test_models::northwind::employee_territories>&& v) {
     employee_territories_ = std::move(v);
 }
 
-const std::list<zango::northwind::order_details>& repository::order_details() const {
+const std::list<dogen::test_models::northwind::order_details>& repository::order_details() const {
     return order_details_;
 }
 
-std::list<zango::northwind::order_details>& repository::order_details() {
+std::list<dogen::test_models::northwind::order_details>& repository::order_details() {
     return order_details_;
 }
 
-void repository::order_details(const std::list<zango::northwind::order_details>& v) {
+void repository::order_details(const std::list<dogen::test_models::northwind::order_details>& v) {
     order_details_ = v;
 }
 
-void repository::order_details(const std::list<zango::northwind::order_details>&& v) {
+void repository::order_details(const std::list<dogen::test_models::northwind::order_details>&& v) {
     order_details_ = std::move(v);
 }
 
-const std::list<zango::northwind::categories>& repository::categories() const {
+const std::list<dogen::test_models::northwind::categories>& repository::categories() const {
     return categories_;
 }
 
-std::list<zango::northwind::categories>& repository::categories() {
+std::list<dogen::test_models::northwind::categories>& repository::categories() {
     return categories_;
 }
 
-void repository::categories(const std::list<zango::northwind::categories>& v) {
+void repository::categories(const std::list<dogen::test_models::northwind::categories>& v) {
     categories_ = v;
 }
 
-void repository::categories(const std::list<zango::northwind::categories>&& v) {
+void repository::categories(const std::list<dogen::test_models::northwind::categories>&& v) {
     categories_ = std::move(v);
 }
 
-const std::list<zango::northwind::customer_demographics>& repository::customer_demographics() const {
+const std::list<dogen::test_models::northwind::customer_demographics>& repository::customer_demographics() const {
     return customer_demographics_;
 }
 
-std::list<zango::northwind::customer_demographics>& repository::customer_demographics() {
+std::list<dogen::test_models::northwind::customer_demographics>& repository::customer_demographics() {
     return customer_demographics_;
 }
 
-void repository::customer_demographics(const std::list<zango::northwind::customer_demographics>& v) {
+void repository::customer_demographics(const std::list<dogen::test_models::northwind::customer_demographics>& v) {
     customer_demographics_ = v;
 }
 
-void repository::customer_demographics(const std::list<zango::northwind::customer_demographics>&& v) {
+void repository::customer_demographics(const std::list<dogen::test_models::northwind::customer_demographics>&& v) {
     customer_demographics_ = std::move(v);
 }
 
-const std::list<zango::northwind::products>& repository::products() const {
+const std::list<dogen::test_models::northwind::products>& repository::products() const {
     return products_;
 }
 
-std::list<zango::northwind::products>& repository::products() {
+std::list<dogen::test_models::northwind::products>& repository::products() {
     return products_;
 }
 
-void repository::products(const std::list<zango::northwind::products>& v) {
+void repository::products(const std::list<dogen::test_models::northwind::products>& v) {
     products_ = v;
 }
 
-void repository::products(const std::list<zango::northwind::products>&& v) {
+void repository::products(const std::list<dogen::test_models::northwind::products>&& v) {
     products_ = std::move(v);
 }
 
-const std::list<zango::northwind::supplier>& repository::suppliers() const {
+const std::list<dogen::test_models::northwind::supplier>& repository::suppliers() const {
     return suppliers_;
 }
 
-std::list<zango::northwind::supplier>& repository::suppliers() {
+std::list<dogen::test_models::northwind::supplier>& repository::suppliers() {
     return suppliers_;
 }
 
-void repository::suppliers(const std::list<zango::northwind::supplier>& v) {
+void repository::suppliers(const std::list<dogen::test_models::northwind::supplier>& v) {
     suppliers_ = v;
 }
 
-void repository::suppliers(const std::list<zango::northwind::supplier>&& v) {
+void repository::suppliers(const std::list<dogen::test_models::northwind::supplier>&& v) {
     suppliers_ = std::move(v);
 }
 
-const std::list<zango::northwind::shippers>& repository::shippers() const {
+const std::list<dogen::test_models::northwind::shippers>& repository::shippers() const {
     return shippers_;
 }
 
-std::list<zango::northwind::shippers>& repository::shippers() {
+std::list<dogen::test_models::northwind::shippers>& repository::shippers() {
     return shippers_;
 }
 
-void repository::shippers(const std::list<zango::northwind::shippers>& v) {
+void repository::shippers(const std::list<dogen::test_models::northwind::shippers>& v) {
     shippers_ = v;
 }
 
-void repository::shippers(const std::list<zango::northwind::shippers>&& v) {
+void repository::shippers(const std::list<dogen::test_models::northwind::shippers>&& v) {
     shippers_ = std::move(v);
 }
 
-const std::list<zango::northwind::customer_customer_demo>& repository::customer_customer_demos() const {
+const std::list<dogen::test_models::northwind::customer_customer_demo>& repository::customer_customer_demos() const {
     return customer_customer_demos_;
 }
 
-std::list<zango::northwind::customer_customer_demo>& repository::customer_customer_demos() {
+std::list<dogen::test_models::northwind::customer_customer_demo>& repository::customer_customer_demos() {
     return customer_customer_demos_;
 }
 
-void repository::customer_customer_demos(const std::list<zango::northwind::customer_customer_demo>& v) {
+void repository::customer_customer_demos(const std::list<dogen::test_models::northwind::customer_customer_demo>& v) {
     customer_customer_demos_ = v;
 }
 
-void repository::customer_customer_demos(const std::list<zango::northwind::customer_customer_demo>&& v) {
+void repository::customer_customer_demos(const std::list<dogen::test_models::northwind::customer_customer_demo>&& v) {
     customer_customer_demos_ = std::move(v);
 }
 
-const std::list<zango::northwind::customers>& repository::customers() const {
+const std::list<dogen::test_models::northwind::customers>& repository::customers() const {
     return customers_;
 }
 
-std::list<zango::northwind::customers>& repository::customers() {
+std::list<dogen::test_models::northwind::customers>& repository::customers() {
     return customers_;
 }
 
-void repository::customers(const std::list<zango::northwind::customers>& v) {
+void repository::customers(const std::list<dogen::test_models::northwind::customers>& v) {
     customers_ = v;
 }
 
-void repository::customers(const std::list<zango::northwind::customers>&& v) {
+void repository::customers(const std::list<dogen::test_models::northwind::customers>&& v) {
     customers_ = std::move(v);
 }
 
-} }
+} } }

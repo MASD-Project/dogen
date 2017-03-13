@@ -19,19 +19,20 @@
  *
  */
 #include <ostream>
-#include "zango/northwind/io/region_id_io.hpp"
+#include "dogen/test_models/northwind/io/region_id_io.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const region_id& v) {
 
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::region_id\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::region_id\"" << ", "
       << "\"value\": " << v.value()
       << " }";
 
     return s;
 }
 
-} }
+} } }

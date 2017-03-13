@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/territory_id.hpp"
+#include "dogen/test_models/northwind/types/territory_id.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 territory_id::territory_id(const std::string& value)
@@ -57,4 +58,4 @@ territory_id& territory_id::operator=(territory_id other) {
     return *this;
 }
 
-} }
+} } }

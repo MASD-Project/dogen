@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/supplier.hpp"
+#include "dogen/test_models/northwind/types/supplier.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 supplier::supplier(
-    const zango::northwind::supplier_id& supplier_id,
+    const dogen::test_models::northwind::supplier_id& supplier_id,
     const std::string& company_name,
     const std::string& contact_name,
     const std::string& contact_title,
@@ -86,19 +87,19 @@ supplier& supplier::operator=(supplier other) {
     return *this;
 }
 
-const zango::northwind::supplier_id& supplier::supplier_id() const {
+const dogen::test_models::northwind::supplier_id& supplier::supplier_id() const {
     return supplier_id_;
 }
 
-zango::northwind::supplier_id& supplier::supplier_id() {
+dogen::test_models::northwind::supplier_id& supplier::supplier_id() {
     return supplier_id_;
 }
 
-void supplier::supplier_id(const zango::northwind::supplier_id& v) {
+void supplier::supplier_id(const dogen::test_models::northwind::supplier_id& v) {
     supplier_id_ = v;
 }
 
-void supplier::supplier_id(const zango::northwind::supplier_id&& v) {
+void supplier::supplier_id(const dogen::test_models::northwind::supplier_id&& v) {
     supplier_id_ = std::move(v);
 }
 
@@ -278,4 +279,4 @@ void supplier::home_page(const std::string&& v) {
     home_page_ = std::move(v);
 }
 
-} }
+} } }

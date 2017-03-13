@@ -18,33 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/test_data/customer_id_td.hpp"
-#include "zango/northwind/test_data/customer_type_id_td.hpp"
-#include "zango/northwind/test_data/customer_customer_demo_key_td.hpp"
+#include "dogen/test_models/northwind/test_data/customer_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/customer_type_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/customer_customer_demo_key_td.hpp"
 
 namespace {
 
-zango::northwind::customer_id
-create_zango_northwind_customer_id(const unsigned int position) {
-    return zango::northwind::customer_id_generator::create(position);
+dogen::test_models::northwind::customer_id
+create_dogen_test_models_northwind_customer_id(const unsigned int position) {
+    return dogen::test_models::northwind::customer_id_generator::create(position);
 }
 
-zango::northwind::customer_type_id
-create_zango_northwind_customer_type_id(const unsigned int position) {
-    return zango::northwind::customer_type_id_generator::create(position);
+dogen::test_models::northwind::customer_type_id
+create_dogen_test_models_northwind_customer_type_id(const unsigned int position) {
+    return dogen::test_models::northwind::customer_type_id_generator::create(position);
 }
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 customer_customer_demo_key_generator::customer_customer_demo_key_generator() : position_(0) { }
 
 void customer_customer_demo_key_generator::
 populate(const unsigned int position, result_type& v) {
-    v.customer_id(create_zango_northwind_customer_id(position + 0));
-    v.customer_type_id(create_zango_northwind_customer_type_id(position + 1));
+    v.customer_id(create_dogen_test_models_northwind_customer_id(position + 0));
+    v.customer_type_id(create_dogen_test_models_northwind_customer_type_id(position + 1));
 }
 
 customer_customer_demo_key_generator::result_type
@@ -66,4 +67,4 @@ customer_customer_demo_key_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

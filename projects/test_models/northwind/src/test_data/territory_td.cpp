@@ -19,15 +19,15 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/region_id_td.hpp"
-#include "zango/northwind/test_data/territory_td.hpp"
-#include "zango/northwind/test_data/territory_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/region_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/territory_td.hpp"
+#include "dogen/test_models/northwind/test_data/territory_id_td.hpp"
 
 namespace {
 
-zango::northwind::territory_id
-create_zango_northwind_territory_id(const unsigned int position) {
-    return zango::northwind::territory_id_generator::create(position);
+dogen::test_models::northwind::territory_id
+create_dogen_test_models_northwind_territory_id(const unsigned int position) {
+    return dogen::test_models::northwind::territory_id_generator::create(position);
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -36,23 +36,24 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-zango::northwind::region_id
-create_zango_northwind_region_id(const unsigned int position) {
-    return zango::northwind::region_id_generator::create(position);
+dogen::test_models::northwind::region_id
+create_dogen_test_models_northwind_region_id(const unsigned int position) {
+    return dogen::test_models::northwind::region_id_generator::create(position);
 }
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 territory_generator::territory_generator() : position_(0) { }
 
 void territory_generator::
 populate(const unsigned int position, result_type& v) {
-    v.territory_id(create_zango_northwind_territory_id(position + 0));
+    v.territory_id(create_dogen_test_models_northwind_territory_id(position + 0));
     v.territory_description(create_std_string(position + 1));
-    v.region_id(create_zango_northwind_region_id(position + 2));
+    v.region_id(create_dogen_test_models_northwind_region_id(position + 2));
 }
 
 territory_generator::result_type
@@ -74,4 +75,4 @@ territory_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

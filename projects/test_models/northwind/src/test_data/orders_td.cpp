@@ -19,26 +19,26 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/orders_td.hpp"
-#include "zango/northwind/test_data/order_id_td.hpp"
-#include "zango/northwind/test_data/customer_id_td.hpp"
-#include "zango/northwind/test_data/employee_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/orders_td.hpp"
+#include "dogen/test_models/northwind/test_data/order_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/customer_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/employee_id_td.hpp"
 
 namespace {
 
-zango::northwind::order_id
-create_zango_northwind_order_id(const unsigned int position) {
-    return zango::northwind::order_id_generator::create(position);
+dogen::test_models::northwind::order_id
+create_dogen_test_models_northwind_order_id(const unsigned int position) {
+    return dogen::test_models::northwind::order_id_generator::create(position);
 }
 
-zango::northwind::customer_id
-create_zango_northwind_customer_id(const unsigned int position) {
-    return zango::northwind::customer_id_generator::create(position);
+dogen::test_models::northwind::customer_id
+create_dogen_test_models_northwind_customer_id(const unsigned int position) {
+    return dogen::test_models::northwind::customer_id_generator::create(position);
 }
 
-zango::northwind::employee_id
-create_zango_northwind_employee_id(const unsigned int position) {
-    return zango::northwind::employee_id_generator::create(position);
+dogen::test_models::northwind::employee_id
+create_dogen_test_models_northwind_employee_id(const unsigned int position) {
+    return dogen::test_models::northwind::employee_id_generator::create(position);
 }
 
 boost::gregorian::date
@@ -64,16 +64,17 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 orders_generator::orders_generator() : position_(0) { }
 
 void orders_generator::
 populate(const unsigned int position, result_type& v) {
-    v.order_id(create_zango_northwind_order_id(position + 0));
-    v.customer_id(create_zango_northwind_customer_id(position + 1));
-    v.employee_id(create_zango_northwind_employee_id(position + 2));
+    v.order_id(create_dogen_test_models_northwind_order_id(position + 0));
+    v.customer_id(create_dogen_test_models_northwind_customer_id(position + 1));
+    v.employee_id(create_dogen_test_models_northwind_employee_id(position + 2));
     v.order_date(create_boost_gregorian_date(position + 3));
     v.required_date(create_boost_gregorian_date(position + 4));
     v.shipped_date(create_boost_gregorian_date(position + 5));
@@ -106,4 +107,4 @@ orders_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

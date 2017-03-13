@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "zango/northwind/io/region_io.hpp"
-#include "zango/northwind/io/region_id_io.hpp"
+#include "dogen/test_models/northwind/io/region_io.hpp"
+#include "dogen/test_models/northwind/io/region_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -31,16 +31,17 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const region& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::region\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::region\"" << ", "
       << "\"region_id\": " << v.region_id() << ", "
       << "\"region_description\": " << "\"" << tidy_up_string(v.region_description()) << "\""
       << " }";
     return(s);
 }
 
-} }
+} } }

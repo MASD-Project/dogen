@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/customer_customer_demo.hpp"
+#include "dogen/test_models/northwind/types/customer_customer_demo.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
-customer_customer_demo::customer_customer_demo(const zango::northwind::customer_customer_demo_key& customer_customer_demo_key)
+customer_customer_demo::customer_customer_demo(const dogen::test_models::northwind::customer_customer_demo_key& customer_customer_demo_key)
     : customer_customer_demo_key_(customer_customer_demo_key) { }
 
 void customer_customer_demo::swap(customer_customer_demo& other) noexcept {
@@ -41,20 +42,20 @@ customer_customer_demo& customer_customer_demo::operator=(customer_customer_demo
     return *this;
 }
 
-const zango::northwind::customer_customer_demo_key& customer_customer_demo::customer_customer_demo_key() const {
+const dogen::test_models::northwind::customer_customer_demo_key& customer_customer_demo::customer_customer_demo_key() const {
     return customer_customer_demo_key_;
 }
 
-zango::northwind::customer_customer_demo_key& customer_customer_demo::customer_customer_demo_key() {
+dogen::test_models::northwind::customer_customer_demo_key& customer_customer_demo::customer_customer_demo_key() {
     return customer_customer_demo_key_;
 }
 
-void customer_customer_demo::customer_customer_demo_key(const zango::northwind::customer_customer_demo_key& v) {
+void customer_customer_demo::customer_customer_demo_key(const dogen::test_models::northwind::customer_customer_demo_key& v) {
     customer_customer_demo_key_ = v;
 }
 
-void customer_customer_demo::customer_customer_demo_key(const zango::northwind::customer_customer_demo_key&& v) {
+void customer_customer_demo::customer_customer_demo_key(const dogen::test_models::northwind::customer_customer_demo_key&& v) {
     customer_customer_demo_key_ = std::move(v);
 }
 
-} }
+} } }

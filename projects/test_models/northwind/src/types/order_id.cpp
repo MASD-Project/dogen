@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/order_id.hpp"
+#include "dogen/test_models/northwind/types/order_id.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 order_id::order_id(const int value)
@@ -49,4 +50,4 @@ order_id& order_id::operator=(order_id other) {
     return *this;
 }
 
-} }
+} } }

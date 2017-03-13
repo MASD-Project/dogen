@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-13 Mon 13:53]
+#+CAPTION: Clock summary at [2017-03-13 Mon 15:15]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *33:59* |       |      | 100.0 |
+| *Total time*                                                                | *35:20* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 33:59   |       |      | 100.0 |
-| Active                                                                      |         | 33:59 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   3.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.3 |
-| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |   8.7 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  14.9 |
-| COMPLETED Split include and source directories                              |         |       | 5:22 |  15.8 |
-| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  24.5 |
+| Stories                                                                     | 35:20   |       |      | 100.0 |
+| Active                                                                      |         | 35:20 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:01 |   2.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:26 |   1.2 |
+| COMPLETED Add test model for path meta-data                                 |         |       | 2:58 |   8.4 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       | 5:04 |  14.3 |
+| COMPLETED Split include and source directories                              |         |       | 5:22 |  15.2 |
+| COMPLETED Add C++-03 mode                                                   |         |       | 8:19 |  23.5 |
+| COMPLETED Add a LAM test model just to validate existing functionality      |         |       | 2:38 |   7.5 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       | 0:11 |   0.5 |
-| STARTED Add a LAM test model just to validate existing functionality        |         |       | 2:38 |   7.7 |
 | STARTED Build on tags for Windows                                           |         |       | 0:15 |   0.7 |
 | STARTED Add a "flat directory" mode                                         |         |       | 0:08 |   0.4 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   3.5 |
-| STARTED Implement the database model using Northwind                        |         |       | 6:26 |  18.9 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       | 1:11 |   3.3 |
+| STARTED Implement the database model using Northwind                        |         |       | 7:47 |  22.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -240,6 +240,16 @@ Tasks:
 - enums
 - need to disable ODB c++ 11 as well.
 
+*** COMPLETED Add a LAM test model just to validate existing functionality :story:
+    CLOSED: [2017-03-13 Mon 14:34]
+    CLOCK: [2017-03-10 Fri 20:40]--[2017-03-10 Fri 21:06] =>  0:26
+    CLOCK: [2017-03-10 Fri 15:31]--[2017-03-10 Fri 15:55] =>  0:24
+    CLOCK: [2017-03-07 Tue 14:07]--[2017-03-07 Tue 15:55] =>  1:48
+
+At present we have basic support for LAM. We should create a simple
+test model that uses a few of the mapped types just to make sure it
+vaguely works and does not
+
 *** STARTED Check for incompatibility between input language and enabled kernels :story:
     CLOCK: [2017-03-06 Mon 22:20]--[2017-03-06 Mon 22:31] =>  0:11
 
@@ -256,15 +266,6 @@ quilt that returns all enabled kernels; we could then look at all
 models we are going to build and if there is a mismatch we can
 throw. But extracting the =configuration_factory= out of quilt
 workflow is not going to be easy without screwing up the API.
-
-*** STARTED Add a LAM test model just to validate existing functionality :story:
-    CLOCK: [2017-03-10 Fri 20:40]--[2017-03-10 Fri 21:06] =>  0:26
-    CLOCK: [2017-03-10 Fri 15:31]--[2017-03-10 Fri 15:55] =>  0:24
-    CLOCK: [2017-03-07 Tue 14:07]--[2017-03-07 Tue 15:55] =>  1:48
-
-At present we have basic support for LAM. We should create a simple
-test model that uses a few of the mapped types just to make sure it
-vaguely works and does not
 
 *** STARTED Build on tags for Windows                                 :story:
     CLOCK: [2017-03-06 Mon 12:01]--[2017-03-06 Mon 12:16] =>  0:15
@@ -378,6 +379,7 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-13 Mon 13:54]--[2017-03-13 Mon 15:15] =>  1:21
     CLOCK: [2017-03-13 Mon 13:35]--[2017-03-13 Mon 13:53] =>  0:18
     CLOCK: [2017-03-13 Mon 11:02]--[2017-03-13 Mon 11:25] =>  0:23
     CLOCK: [2017-03-13 Mon 10:30]--[2017-03-13 Mon 10:34] =>  0:04
@@ -439,6 +441,10 @@ The first file can either be on the =include/odb= directory or on the
 =src/odb= directory (it is moved by the ODB target). All other files
 are placed in the =include/odb= folder. Note that at present we are
 using =cpp= extension rather than =cxx=.
+
+Ideally we should also add the ODB include files to the master
+includes. However, we probably need a separate master include file
+just for ODB files.
 
 *** Rename main Dogen package in Debian                               :story:
 

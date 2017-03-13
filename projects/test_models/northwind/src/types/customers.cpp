@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/customers.hpp"
+#include "dogen/test_models/northwind/types/customers.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 customers::customers(
-    const zango::northwind::customer_id& customer_id,
+    const dogen::test_models::northwind::customer_id& customer_id,
     const std::string& company_name,
     const std::string& contact_name,
     const std::string& contact_title,
@@ -82,19 +83,19 @@ customers& customers::operator=(customers other) {
     return *this;
 }
 
-const zango::northwind::customer_id& customers::customer_id() const {
+const dogen::test_models::northwind::customer_id& customers::customer_id() const {
     return customer_id_;
 }
 
-zango::northwind::customer_id& customers::customer_id() {
+dogen::test_models::northwind::customer_id& customers::customer_id() {
     return customer_id_;
 }
 
-void customers::customer_id(const zango::northwind::customer_id& v) {
+void customers::customer_id(const dogen::test_models::northwind::customer_id& v) {
     customer_id_ = v;
 }
 
-void customers::customer_id(const zango::northwind::customer_id&& v) {
+void customers::customer_id(const dogen::test_models::northwind::customer_id&& v) {
     customer_id_ = std::move(v);
 }
 
@@ -258,4 +259,4 @@ void customers::fax(const std::string&& v) {
     fax_ = std::move(v);
 }
 
-} }
+} } }

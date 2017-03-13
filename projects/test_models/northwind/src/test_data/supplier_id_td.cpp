@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/test_data/supplier_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/supplier_id_td.hpp"
 
 namespace {
 
@@ -28,7 +28,8 @@ int create_int(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 supplier_id_generator::supplier_id_generator() : position_(0) { }
@@ -57,4 +58,4 @@ supplier_id_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

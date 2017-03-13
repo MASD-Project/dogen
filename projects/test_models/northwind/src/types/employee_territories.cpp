@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/employee_territories.hpp"
+#include "dogen/test_models/northwind/types/employee_territories.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
-employee_territories::employee_territories(const zango::northwind::employee_territories_key& employee_territories_key)
+employee_territories::employee_territories(const dogen::test_models::northwind::employee_territories_key& employee_territories_key)
     : employee_territories_key_(employee_territories_key) { }
 
 void employee_territories::swap(employee_territories& other) noexcept {
@@ -41,20 +42,20 @@ employee_territories& employee_territories::operator=(employee_territories other
     return *this;
 }
 
-const zango::northwind::employee_territories_key& employee_territories::employee_territories_key() const {
+const dogen::test_models::northwind::employee_territories_key& employee_territories::employee_territories_key() const {
     return employee_territories_key_;
 }
 
-zango::northwind::employee_territories_key& employee_territories::employee_territories_key() {
+dogen::test_models::northwind::employee_territories_key& employee_territories::employee_territories_key() {
     return employee_territories_key_;
 }
 
-void employee_territories::employee_territories_key(const zango::northwind::employee_territories_key& v) {
+void employee_territories::employee_territories_key(const dogen::test_models::northwind::employee_territories_key& v) {
     employee_territories_key_ = v;
 }
 
-void employee_territories::employee_territories_key(const zango::northwind::employee_territories_key&& v) {
+void employee_territories::employee_territories_key(const dogen::test_models::northwind::employee_territories_key&& v) {
     employee_territories_key_ = std::move(v);
 }
 
-} }
+} } }

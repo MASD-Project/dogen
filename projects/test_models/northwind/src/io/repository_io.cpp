@@ -19,23 +19,23 @@
  *
  */
 #include <ostream>
-#include "zango/northwind/io/region_io.hpp"
-#include "zango/northwind/io/products_io.hpp"
-#include "zango/northwind/io/shippers_io.hpp"
-#include "zango/northwind/io/supplier_io.hpp"
-#include "zango/northwind/io/customers_io.hpp"
-#include "zango/northwind/io/employees_io.hpp"
-#include "zango/northwind/io/territory_io.hpp"
-#include "zango/northwind/io/categories_io.hpp"
-#include "zango/northwind/io/repository_io.hpp"
-#include "zango/northwind/io/order_details_io.hpp"
-#include "zango/northwind/io/employee_territories_io.hpp"
-#include "zango/northwind/io/customer_demographics_io.hpp"
-#include "zango/northwind/io/customer_customer_demo_io.hpp"
+#include "dogen/test_models/northwind/io/region_io.hpp"
+#include "dogen/test_models/northwind/io/products_io.hpp"
+#include "dogen/test_models/northwind/io/shippers_io.hpp"
+#include "dogen/test_models/northwind/io/supplier_io.hpp"
+#include "dogen/test_models/northwind/io/customers_io.hpp"
+#include "dogen/test_models/northwind/io/employees_io.hpp"
+#include "dogen/test_models/northwind/io/territory_io.hpp"
+#include "dogen/test_models/northwind/io/categories_io.hpp"
+#include "dogen/test_models/northwind/io/repository_io.hpp"
+#include "dogen/test_models/northwind/io/order_details_io.hpp"
+#include "dogen/test_models/northwind/io/employee_territories_io.hpp"
+#include "dogen/test_models/northwind/io/customer_demographics_io.hpp"
+#include "dogen/test_models/northwind/io/customer_customer_demo_io.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::territory>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::territory>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,7 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::region>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::region>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -63,7 +63,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::employees>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::employees>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -77,7 +77,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::employee_territories>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::employee_territories>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -91,7 +91,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::order_details>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::order_details>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -105,7 +105,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::categories>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::categories>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -119,7 +119,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::customer_demographics>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::customer_demographics>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -133,7 +133,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::products>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::products>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -147,7 +147,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::supplier>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::supplier>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -161,7 +161,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::shippers>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::shippers>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -175,7 +175,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::customer_customer_demo>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::customer_customer_demo>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -189,7 +189,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwind::customers>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::test_models::northwind::customers>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -201,12 +201,13 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<zango::northwin
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const repository& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::repository\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::repository\"" << ", "
       << "\"territories\": " << v.territories() << ", "
       << "\"regions\": " << v.regions() << ", "
       << "\"employees\": " << v.employees() << ", "
@@ -223,4 +224,4 @@ std::ostream& operator<<(std::ostream& s, const repository& v) {
     return(s);
 }
 
-} }
+} } }

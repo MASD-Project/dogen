@@ -32,11 +32,11 @@
 #include "dogen/test_models/northwind/types/all.hpp"
 #include "dogen/test_models/northwind/io/all_io.hpp"
 #include "dogen/test_models/northwind/test_data/all_td.hpp"
-#include "dogen/test_models/northwind/odb/no_keys-odb.hxx"
-#include "dogen/test_models/northwind/odb/no_keys_2-odb.hxx"
-#include "dogen/test_models/northwind/odb/primary_key-odb.hxx"
-#include "dogen/test_models/northwind/odb/primary_key_2-odb.hxx"
-#include "dogen/test_models/northwind/odb/foreign_key-odb.hxx"
+// #include "dogen/test_models/northwind/odb/no_keys-odb.hxx"
+// #include "dogen/test_models/northwind/odb/no_keys_2-odb.hxx"
+// #include "dogen/test_models/northwind/odb/primary_key-odb.hxx"
+// #include "dogen/test_models/northwind/odb/primary_key_2-odb.hxx"
+// #include "dogen/test_models/northwind/odb/foreign_key-odb.hxx"
 
 using namespace odb::core;
 
@@ -45,9 +45,9 @@ namespace  {
 const std::string test_suite("odb_tests");
 const std::string test_module("northwind");
 
-odb::database* create_db() {
-    return new odb::pgsql::database ("build", "", "musseque", "localhost");
-}
+// odb::database* create_db() {
+//     return new odb::pgsql::database ("build", "", "musseque", "localhost");
+// }
 
 template<typename T>
 long long delete_rows(odb::database& db) {

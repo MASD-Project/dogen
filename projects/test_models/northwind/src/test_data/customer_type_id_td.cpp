@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "zango/northwind/test_data/customer_type_id_td.hpp"
+#include "dogen/test_models/northwind/test_data/customer_type_id_td.hpp"
 
 namespace {
 
@@ -31,7 +31,8 @@ std::string create_std_string(const unsigned int position) {
 
 }
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 customer_type_id_generator::customer_type_id_generator() : position_(0) { }
@@ -60,4 +61,4 @@ customer_type_id_generator::operator()() {
     return create(position_++);
 }
 
-} }
+} } }

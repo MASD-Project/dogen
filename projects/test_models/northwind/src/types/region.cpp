@@ -18,13 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/region.hpp"
+#include "dogen/test_models/northwind/types/region.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 region::region(
-    const zango::northwind::region_id& region_id,
+    const dogen::test_models::northwind::region_id& region_id,
     const std::string& region_description)
     : region_id_(region_id),
       region_description_(region_description) { }
@@ -46,19 +47,19 @@ region& region::operator=(region other) {
     return *this;
 }
 
-const zango::northwind::region_id& region::region_id() const {
+const dogen::test_models::northwind::region_id& region::region_id() const {
     return region_id_;
 }
 
-zango::northwind::region_id& region::region_id() {
+dogen::test_models::northwind::region_id& region::region_id() {
     return region_id_;
 }
 
-void region::region_id(const zango::northwind::region_id& v) {
+void region::region_id(const dogen::test_models::northwind::region_id& v) {
     region_id_ = v;
 }
 
-void region::region_id(const zango::northwind::region_id&& v) {
+void region::region_id(const dogen::test_models::northwind::region_id&& v) {
     region_id_ = std::move(v);
 }
 
@@ -78,4 +79,4 @@ void region::region_description(const std::string&& v) {
     region_description_ = std::move(v);
 }
 
-} }
+} } }

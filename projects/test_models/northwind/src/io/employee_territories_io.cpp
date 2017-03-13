@@ -19,18 +19,19 @@
  *
  */
 #include <ostream>
-#include "zango/northwind/io/employee_territories_io.hpp"
-#include "zango/northwind/io/employee_territories_key_io.hpp"
+#include "dogen/test_models/northwind/io/employee_territories_io.hpp"
+#include "dogen/test_models/northwind/io/employee_territories_key_io.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 std::ostream& operator<<(std::ostream& s, const employee_territories& v) {
     s << " { "
-      << "\"__type__\": " << "\"zango::northwind::employee_territories\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::employee_territories\"" << ", "
       << "\"employee_territories_key\": " << v.employee_territories_key()
       << " }";
     return(s);
 }
 
-} }
+} } }

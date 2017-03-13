@@ -28,15 +28,15 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "zango/northwind/serialization/customer_type_id_ser.hpp"
-#include "zango/northwind/serialization/customer_demographics_ser.hpp"
+#include "dogen/test_models/northwind/serialization/customer_type_id_ser.hpp"
+#include "dogen/test_models/northwind/serialization/customer_demographics_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const zango::northwind::customer_demographics& v,
+    const dogen::test_models::northwind::customer_demographics& v,
     const unsigned int /*version*/) {
     ar << make_nvp("customer_type_id", v.customer_type_id_);
     ar << make_nvp("customer_description", v.customer_description_);
@@ -44,7 +44,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    zango::northwind::customer_demographics& v,
+    dogen::test_models::northwind::customer_demographics& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("customer_type_id", v.customer_type_id_);
     ar >> make_nvp("customer_description", v.customer_description_);
@@ -55,16 +55,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const zango::northwind::customer_demographics& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, zango::northwind::customer_demographics& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::test_models::northwind::customer_demographics& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::test_models::northwind::customer_demographics& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const zango::northwind::customer_demographics& v, unsigned int version);
-template void load(archive::text_iarchive& ar, zango::northwind::customer_demographics& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::test_models::northwind::customer_demographics& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::test_models::northwind::customer_demographics& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const zango::northwind::customer_demographics& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, zango::northwind::customer_demographics& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::test_models::northwind::customer_demographics& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::test_models::northwind::customer_demographics& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const zango::northwind::customer_demographics& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, zango::northwind::customer_demographics& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::test_models::northwind::customer_demographics& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::test_models::northwind::customer_demographics& v, unsigned int version);
 
 } }

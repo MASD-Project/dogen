@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/order_details.hpp"
+#include "dogen/test_models/northwind/types/order_details.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 order_details::order_details()
@@ -29,7 +30,7 @@ order_details::order_details()
       discount_(static_cast<double>(0)) { }
 
 order_details::order_details(
-    const zango::northwind::order_details_key& order_details_key,
+    const dogen::test_models::northwind::order_details_key& order_details_key,
     const double unit_price,
     const int quantity,
     const double discount)
@@ -59,19 +60,19 @@ order_details& order_details::operator=(order_details other) {
     return *this;
 }
 
-const zango::northwind::order_details_key& order_details::order_details_key() const {
+const dogen::test_models::northwind::order_details_key& order_details::order_details_key() const {
     return order_details_key_;
 }
 
-zango::northwind::order_details_key& order_details::order_details_key() {
+dogen::test_models::northwind::order_details_key& order_details::order_details_key() {
     return order_details_key_;
 }
 
-void order_details::order_details_key(const zango::northwind::order_details_key& v) {
+void order_details::order_details_key(const dogen::test_models::northwind::order_details_key& v) {
     order_details_key_ = v;
 }
 
-void order_details::order_details_key(const zango::northwind::order_details_key&& v) {
+void order_details::order_details_key(const dogen::test_models::northwind::order_details_key&& v) {
     order_details_key_ = std::move(v);
 }
 
@@ -99,4 +100,4 @@ void order_details::discount(const double v) {
     discount_ = v;
 }
 
-} }
+} } }

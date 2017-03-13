@@ -18,9 +18,10 @@
  * MA 02110-1301, USA.
  *
  */
-#include "zango/northwind/types/customer_type_id.hpp"
+#include "dogen/test_models/northwind/types/customer_type_id.hpp"
 
-namespace zango {
+namespace dogen {
+namespace test_models {
 namespace northwind {
 
 customer_type_id::customer_type_id(const std::string& value)
@@ -57,4 +58,4 @@ customer_type_id& customer_type_id::operator=(customer_type_id other) {
     return *this;
 }
 
-} }
+} } }
