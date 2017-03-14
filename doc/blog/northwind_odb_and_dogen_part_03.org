@@ -75,13 +75,13 @@ directories:
 LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local
 #+end_example
 
-This will result on a ODB Oracle library that uses the OCI driver from
-Oracle XE. You then just need to make sure you have executed
-=oracle_env.sh= before running your binary, as we shall see later
-on. Alas, as our update to [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]] indicated, we didn't really need to
-download SQLPlus separately either - it is also included in XE
-package - so really you can get away with just downloading XE and
-nothing else.
+Again, replacing the paths accordingly. The end result will be an ODB
+Oracle library that uses the OCI driver from Oracle XE. You then just
+need to make sure you have executed =oracle_env.sh= before running
+your binary, as we shall see later on. Alas, as our update to [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]
+indicated, we didn't really need to download SQLPlus separately
+either - it is also included in XE package - so really you can get
+away with just downloading XE and nothing else.
 
 The other minor alteration to what was laid out on the original posts
 is that I removed the need for the =basic= database schema. In truth,
@@ -131,30 +131,30 @@ With all of this said, lets resume from where we left off.
 
 We still have a number of packages to install, but fortunately the
 installation steps are easy enough so we'll cover them quickly in this
-section.
+section. Let's start with Dogen.
 
 ** Dogen
 
-Let's start with Dogen. This is fairly straightforward: we can just
-grab the latest release from BinTray:
+Installing Dogen is fairly straightforward: we can just grab the
+latest release from BinTray:
 
-- [[https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb][dogen 0.98.0 amd64-applications.deb]]
+- [[https://dl.bintray.com/domaindrivenconsulting/Dogen/0.99.0/dogen_0.99.0_amd64-applications.deb][dogen 0.99.0 amd64-applications.deb]]
 
-As it happens, we must install v98 or above because we did a number of
+As it happens, we must install v99 or above because we did a number of
 fixes to Dogen as a result of this series of articles; previous
 releases had shortcomings with their ODB support.
 
 As expected, the setup is pretty standard-fare debian:
 
 #+begin_example
-$ wget https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb -O dogen_0.98.0_amd64-applications.deb
-$ sudo dpkg -i dogen_0.98.0_amd64-applications.deb
+$ wget https://dl.bintray.com/domaindrivenconsulting/Dogen/0.99.0/dogen_0.99.0_amd64-applications.deb -O dogen_0.99.0_amd64-applications.deb
+$ sudo dpkg -i dogen_0.99.0_amd64-applications.deb
 [sudo] password for USER:
 Selecting previously unselected package dogen-applications.
 (Reading database ... 551550 files and directories currently installed.)
-Preparing to unpack dogen_0.98.0_amd64-applications.deb ...
-Unpacking dogen-applications (0.98.0) ...
-Setting up dogen-applications (0.98.0) ...
+Preparing to unpack dogen_0.99.0_amd64-applications.deb ...
+Unpacking dogen-applications (0.99.0) ...
+Setting up dogen-applications (0.99.0) ...
 #+end_example
 
 If all has gone according to plan, you should see something along the
@@ -162,7 +162,7 @@ lines of:
 
 #+begin_example
 $ dogen.knitter --version
-Dogen Knitter v0.98.0
+Dogen Knitter v0.99.0
 Copyright (C) 2015-2017 Domain Driven Consulting Plc.
 Copyright (C) 2012-2015 Marco Craveiro.
 License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
@@ -186,19 +186,20 @@ special objects to help draw entity relationship diagrams, UML
 diagrams, flowcharts, network diagrams, and many other diagrams.
 #+end_quote
 
-You should be able to install dia straight off of the standard package
-setup:
+Dia does not change very often, so any old version will do. Thus you
+should be able to install dia straight off of package manager:
 
 : apt-get install dia
 
 ** Other Dependencies
 
-One final note on installations: I had previously assumed Boost to be
+A final note on installations: I had previously assumed Boost to be
 installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] but - if nothing else, purely for the sake of
 completeness - here are the instructions to set it up, as well as
 CMake. We will need both of these in order to build our application,
 but we won't dwell on them /too/ much on them or else this series of
-posts would go on forever.
+posts would go on forever. Pretty much any recent version of Boost and
+CMake will do, so again we'll just stick to vanilla package manager:
 
 #+begin_example
 # apt-get install cmake
@@ -210,22 +211,45 @@ exercise, but it's just easier this way.
 
 * Introducing Zango
 
-At long last, we can start to create our very "simple" project. I say
-simple, but in truth it ended up being a tad more complex than I'd
-liked, so it was easier to create a [[https://github.com/DomainDrivenConsulting/zango][GitHub repository]] for it and then
-discuss it here. So, in order to follow the remainder of this post,
-please clone =zango= from GitHub:
+After this excruciatingly long setup process, we can at /long last/
+start to create our very "simple" project. Simple, in quotes, because
+it ended up being a tad more complex than what originally envisioned,
+so I ended up creating a [[https://github.com/DomainDrivenConsulting/zango][GitHub repository]] for it. It would have been
+preferable to describe it from first principles, but then the
+commentary would literally go on for ever so a compromise was
+required. Anyway, in order to follow the remainder of this post please
+clone =zango= from GitHub:
 
 #+begin_example
 git clone git@github.com:DomainDrivenConsulting/zango.git
 #+end_example
 
+Zango is a very small Dogen project that builds with CMake. Here are
+some notes on the folder structure to help you navigate:
+
+- =build/cmake=: additional CMake modules that are not part of the
+  standard CMake distribution. We need this for ODB, Oracle and
+  Dogen.
+- =data=: some application data that we will use to populate our
+  database.
+- =projects=: where all the code lives.
+- =projects/input_models=: location of the Dogen models - in this
+  case, we just have one. You could, of course, place it anywhere
+  you'd like, but traditionally this is where they live.
+- =projects/northwind=: code output of the Dogen model. This is the
+  key project of =zango=.
+- =projects/application=: our little command line driver for the
+  application.
+
+Now, before we get into the code, I'd like to first talk about
+Northwind , let's start by first looking at Northwind and on the
+relationship between Dogen and ODB.
+
 ** Northwind Schema
 
-Before we delve into the project, let's start by first looking at
-Northwind itself. Microsoft makes Northwind available in CodePlex, at
-[[https://northwinddatabase.codeplex.com/][this]] location. We found a useful description of the Northwind database
-[[http://www.geeksengine.com/article/northwind.html][here]], which we quote:
+Microsoft makes the venerable Northwind database available in
+CodePlex, at [[https://northwinddatabase.codeplex.com/][this]] location. We found a useful description of the
+Northwind database [[http://www.geeksengine.com/article/northwind.html][here]], which we quote:
 
 #+begin_quote
 Northwind Traders Access database is a sample database that shipped

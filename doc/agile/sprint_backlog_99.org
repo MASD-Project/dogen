@@ -13,26 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-14 Tue 07:22]
+#+CAPTION: Clock summary at [2017-03-14 Tue 18:35]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *42:20* |       |       | 100.0 |
+| *Total time*                                                                | *43:02* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 42:20   |       |       | 100.0 |
-| Active                                                                      |         | 42:20 |       | 100.0 |
+| Stories                                                                     | 43:02   |       |       | 100.0 |
+| Active                                                                      |         | 43:02 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:01 |   2.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:26 |   1.0 |
-| COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   7.0 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |  12.0 |
-| COMPLETED Split include and source directories                              |         |       |  5:22 |  12.7 |
-| COMPLETED Add C++-03 mode                                                   |         |       |  8:19 |  19.6 |
-| COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   6.2 |
+| COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   6.9 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |  11.8 |
+| COMPLETED Split include and source directories                              |         |       |  5:22 |  12.5 |
+| COMPLETED Add C++-03 mode                                                   |         |       |  8:19 |  19.3 |
+| COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   6.1 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       |  0:11 |   0.4 |
 | STARTED Build on tags for Windows                                           |         |       |  0:15 |   0.6 |
 | STARTED Add a "flat directory" mode                                         |         |       |  0:08 |   0.3 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       |  1:11 |   2.8 |
-| STARTED Implement the database model using Northwind                        |         |       | 14:47 |  34.9 |
+| STARTED Handling of visual studio projects and solutions is incorrect       |         |       |  1:11 |   2.7 |
+| STARTED Implement the database model using Northwind                        |         |       | 15:11 |  35.3 |
+| STARTED Split project should not include model name                         |         |       |  0:18 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -379,6 +380,7 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-14 Tue 18:11]--[2017-03-14 Tue 18:35] =>  0:24
     CLOCK: [2017-03-14 Tue 06:40]--[2017-03-14 Tue 07:21] =>  0:41
     CLOCK: [2017-03-13 Mon 21:11]--[2017-03-13 Mon 22:44] =>  1:33
     CLOCK: [2017-03-13 Mon 20:17]--[2017-03-13 Mon 21:10] =>  0:53
@@ -426,7 +428,7 @@ Notes:
 : set pagesize 50000
 
 *** STARTED Split project should not include model name               :story:
-    CLOCK: [2017-03-14 Tue 17:53]
+    CLOCK: [2017-03-14 Tue 17:53]--[2017-03-14 Tue 18:11] =>  0:18
 
 When we supply the C++ header output path, we should not add the model
 name to it.
