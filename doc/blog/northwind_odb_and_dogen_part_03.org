@@ -20,29 +20,33 @@ with ODB against an Oracle database. If you want more than the TL;DR,
 please read [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]] and [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]]. Otherwise, the story so far can be
 quickly summarised as follows: we got our Oracle Express database
 installed and set up by adding the required users; we then built the
-ODB libraries and installed the ODB compiler. After this rather grand
-build up, we shall finally get to look at Dogen - just about - in Part
-III. It seems the series will have to be extended by at last one or
-two more parts in order to cover the material originally planned.
+ODB libraries and installed the ODB compiler.
 
-To be honest, I wasn't expecting N to become so large, but - like
-every good software project - I'm now realising you can only estimate
-the size of the series properly once you've actually finished it. And
-to rub salt into the wounds, before we can proceed we must start by
-addressing some of the instructions on the previous posts which were
-not quite right.
+After this rather grand build up, we shall finally get to look at
+Dogen - just about - here in Part III. It now seems clear these series
+will have to be extended by at least one or two additional instalments
+in order to provide a vaguely sensible treatment of the material I had
+initially planned to cover. Alas, I wasn't expecting N to become so
+large, but - like every good software project - I'm now realising you
+can only estimate the size of the series properly once you've actually
+finished it. And to rub salt into the wounds: before we can proceed,
+we must start by addressing some of the instructions on the previous
+posts which were /not quite right/.
 
 * Errare Humanum Est
 
-The first point we need to look at are the extra Oracle
-packages. Originally, when I checked my Oracle XE install I did not
-see the traditional =include= directory, so I had assumed one needed
-to download the header files separately. I did find this state of
-affairs somewhat unusual - but then again this is Oracle, so "unusual"
-is the default behaviour. As it turns out, I was wrong; the header
-files are indeed part of the Oracle XE install, just placed under a
-rather... "creative" location:
-=/u01/app/oracle/product/11.2.0/xe/rdbms/public=.
+The first and foremost point in the /errata/ agenda is concerned with
+the extra Oracle packages we downloaded in [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]. When I had
+originally checked my Oracle XE install, I did not find the
+traditional =include= directory, which led me to conclude that a
+separate download was required for the libs and header files. I did
+find this state of affairs somewhat unusual - but then again, this is
+Oracle we're talking about here, so "unusual" is the default
+behaviour. As it turns out, I was wrong; the header files are indeed
+part of the Oracle XE install, just placed under a rather... shall we
+say, /creative/, location:
+=/u01/app/oracle/product/11.2.0/xe/rdbms/public=. The libs are there
+too, under the slightly more conventionally named directory =lib=.
 
 This is quite an important find because the OCI driver has moved on to
 v12, whereas XE is still on v11. There is backwards compatibility, of
