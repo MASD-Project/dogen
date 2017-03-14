@@ -93,7 +93,7 @@ format(const context& ctx, const yarn::element& e) const {
 <#+
         }
 
-        if (o.databases().size() > 1) {
+        if (!o.databases().empty()) {
 #>
 # enable multi-database support
 --multi-database static

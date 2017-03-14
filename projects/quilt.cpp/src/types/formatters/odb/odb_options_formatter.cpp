@@ -112,7 +112,7 @@ a.stream() << "--sql-name-case " << a.get_letter_case(*o.letter_case()) << std::
 a.stream() << std::endl;
         }
 
-        if (o.databases().size() > 1) {
+        if (!o.databases().empty()) {
 a.stream() << "# enable multi-database support" << std::endl;
 a.stream() << "--multi-database static" << std::endl;
 a.stream() << std::endl;
