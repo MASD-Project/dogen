@@ -193,13 +193,13 @@ should be able to install dia straight off of package manager:
 
 ** Other Dependencies
 
-A final note on installations: I had previously assumed Boost to be
-installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] but - if nothing else, purely for the sake of
-completeness - here are the instructions to set it up, as well as
-CMake. We will need both of these in order to build our application,
-but we won't dwell on them /too/ much on them or else this series of
-posts would go on forever. Pretty much any recent version of Boost and
-CMake will do, so again we'll just stick to vanilla package manager:
+I had previously assumed Boost to be installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] but - if
+nothing else, purely for the sake of completeness - here are the
+instructions to set it up, as well as CMake. We will need both of
+these in order to build our application, but we won't dwell on them
+/too/ much on them or else this series of posts would go on
+forever. Pretty much any recent version of Boost and CMake will do, so
+again we'll just stick to vanilla package manager:
 
 #+begin_example
 # apt-get install cmake
@@ -208,6 +208,20 @@ CMake will do, so again we'll just stick to vanilla package manager:
 
 Mind you, you don't /actually/ need the entirety of Boost for this
 exercise, but it's just easier this way.
+
+One final lose note which might as well add here. If you wish to use
+SQLPlus from within Emacs - and you should since the [[http://dbspecialists.com/an-introduction-to-emacs-sqli-mode/][SQLi mode]] is just
+simply glorious - you can configure it to use our Oracle Express
+database quite easily:
+
+#+begin_example
+(add-to-list 'exec-path "/u01/app/oracle/product/11.2.0/xe/bin")
+(setenv "PATH" (concat (getenv "PATH") ":/u01/app/oracle/product/11.2.0/xe/bin"))
+(setenv "ORACLE_HOME" "/u01/app/oracle/product/11.2.0/xe")
+#+end_example
+
+After this you should be able to start SQlPlus from Emacs with the
+usual =sql-oracle= command.
 
 * Introducing Zango
 
