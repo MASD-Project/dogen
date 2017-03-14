@@ -425,6 +425,42 @@ Notes:
 : set linesize 8192
 : set pagesize 50000
 
+*** STARTED Split project should not include model name               :story:
+    CLOCK: [2017-03-14 Tue 17:53]
+
+When we supply the C++ header output path, we should not add the model
+name to it.
+
+We should also omit the =include= directory too.
+
+*** Setting include and source directory to empty                     :story:
+
+At present it does not seem possible to set either the include or
+source directories to empty. This probably just requires annotations
+to understand empty values, e.g.
+
+: a.b.c=
+
+*** Drop the "c++-" prefix in meta-data for standard                  :story:
+
+At present we do:
+
+: quilt.cpp.standard=c++-98
+
+The "c++-" seems a bit redundant.
+
+*** Objects without primary keys do not have =no_id= set              :story:
+
+Previously we were automatically adding the ODB pragma =no_id= to
+objects that had no primary key set. This no longer seems to be
+happening.
+
+*** Always add multiple databases to ODB options                      :story:
+
+At present we only add multiple databases when the user requests more
+than one database system. However, since we are asking for "common"
+this is causing problems. Always add this flag.
+
 *** Ignore ODB files automatically                                    :story:
 
 At present we are adding the following regular expressions to knitter

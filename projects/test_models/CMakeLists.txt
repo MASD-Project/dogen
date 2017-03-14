@@ -34,7 +34,7 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/projects/test_models/boost_model/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/test_model_sanitizer/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/seam/include
-    ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc/another/split_project/include
+    ${CMAKE_SOURCE_DIR}/projects/test_models/split_project/dir/inc/another
     ${CMAKE_SOURCE_DIR}/projects/test_models/cpp_98/include
     ${CMAKE_SOURCE_DIR}/projects/test_models/lam_model/cpp/include
     )

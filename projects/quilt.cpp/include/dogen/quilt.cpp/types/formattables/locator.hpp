@@ -253,6 +253,7 @@ private:
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;
     const boost::filesystem::path headers_project_path_;
+    const bool split_mode_;
 };
 
 } } } }

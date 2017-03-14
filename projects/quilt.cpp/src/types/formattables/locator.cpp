@@ -69,9 +69,8 @@ locator::locator(
               configuration_, enable_kernel_directories)),
       headers_project_path_(
           cpp_headers_output_directory_path.empty() ?
-          project_path_ :
-          make_project_path(cpp_headers_output_directory_path, model_name,
-              configuration_, enable_kernel_directories)) {}
+          project_path_ : cpp_headers_output_directory_path),
+      split_mode_(!cpp_headers_output_directory_path.empty()) {}
 
 locator::type_group
 locator::make_type_group(const annotations::type_repository& atrp,
@@ -388,7 +387,15 @@ boost::filesystem::path locator::make_inclusion_path_for_cpp_header(
 boost::filesystem::path locator::make_full_path_to_include_directory() const {
     auto r(headers_project_path_);
     const auto& cfg(configuration_);
-    r /= cfg.include_directory_name();
+
+    /*
+     * If we are in split mode, we do not want to add a top-level
+     * include directory; the user is expected to have already set up
+     * its own directory structure.
+     */
+    if (!split_mode_)
+        r /= cfg.include_directory_name();
+
     return r;
 }
 
