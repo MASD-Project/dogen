@@ -5301,26 +5301,15 @@ analysis but the gist of it is that we could then map quantities to
 the most appropriate platform specific technology - in Java/C# create
 a type or use a int, in c++ use literals, etc.
 
-*** Add export macros support                                         :story:
+*** Add export macros support for Linux                               :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to export types selectively so that I
 can control what external users can depend on.
 #+end_quote
 
-We should add export macros for shared objects/DLLs:
-
-: #ifdef ExportDeclaration
-:    #undef ExportDeclaration
-: #endif
-:
-: #ifdef
-:    #define ExportMacro __declspec(dllexport)
-: #else
-:    #define ExportMacro __declspec(dllimport)
-: #endif
-
-There is also a GCC equivalent explained [[http://pic.dhe.ibm.com/infocenter/tpfhelp/current/index.jsp?topic%3D%252Fcom.ibm.ztpf-ztpfdf.doc_put.cur%252Fgtpl2%252Fexport.html][here]].
+We've already looked into adding exports for Windows. There is also a
+GCC equivalent explained [[https://gcc.gnu.org/wiki/Visibility][here]].
 
 We should have some dynamic extensions to control the outputting of
 these.

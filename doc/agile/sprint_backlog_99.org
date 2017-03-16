@@ -447,6 +447,13 @@ Notes:
 : set linesize 8192
 : set pagesize 50000
 
+*** Disable common support on ODB for a single database               :story:
+
+We are always enabling common regardless of how many database systems
+the user has requested. Similar with multiple database support. We
+should disable all of this (at least for now) on the single database
+scenario.
+
 *** Setting include and source directory to empty                     :story:
 
 At present it does not seem possible to set either the include or
@@ -645,6 +652,30 @@ Sample:
 This error has been picked up by codacy too:
 
 - [[https://www.codacy.com/app/marco-craveiro/dogen/commit?cid%3D79696432&bid%3D3493157&utm_campaign%3Dnew_commit&utm_medium%3DEmail&utm_source%3DInternal][Commit 91886c6]]&
+
+*** Add support for exports on windows                                :story:
+
+We should add export macros for shared objects/DLLs for windows. We
+should create a file =exports.hpp= probably at top-level with all the
+exports.
+
+#+begin_example
+#pragma once
+
+#ifdef MODEL_DECL
+    #undef MODEL _DECL
+#endif
+
+#ifdef MODEL _EXPORTS
+    #define MODEL _DECL __declspec(dllexport)
+#else
+    #define MODEL _DECL __declspec(dllimport)
+#endif
+#+end_example
+
+It is used as follows:
+
+: class MODEL_DECL Tags xxx
 
 *** Add =targetver.h= support                                         :story:
 
