@@ -23,17 +23,17 @@ installed and set up by adding the required users; we then built the
 ODB libraries and installed the ODB compiler.
 
 After this rather grand build up, we shall finally get to look at
-Dogen - just about - here in Part III. It now seems clear these series
-will have to be extended by at least one or two additional instalments
-in order to provide a vaguely sensible treatment of the material I had
-initially planned to cover. Alas, I wasn't expecting N to become so
-large, but - like every good software project - I'm now realising you
-can only estimate the size of the series properly once you've actually
-finished it. And to rub salt into the wounds: before we can proceed,
-we must start by addressing some of the instructions on the previous
-posts which were /not quite right/.
+Dogen - just about. It now seems clear these series will have to be
+extended by at least one or two additional instalments in order to
+provide a vaguely sensible treatment of the material I had initially
+planned to cover. I wasn't expecting N to become so large, but - like
+every good software project - I'm now realising you can only estimate
+the size of the series properly once you've actually finished it. And
+to rub salt into the wounds, before we can proceed we must start by
+addressing some of the instructions on the previous posts which were
+/not quite right/.
 
-* Errare Humanum Est
+* Est Humanum Errare
 
 The first and foremost point in the /errata/ agenda is concerned with
 the extra Oracle packages we downloaded in [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]. When I had
@@ -41,10 +41,10 @@ originally checked my Oracle XE install, I did not find the
 traditional =include= directory, which led me to conclude that a
 separate download was required for the libs and header files. I did
 find this state of affairs somewhat unusual - but then again, this is
-Oracle we're talking about here, so "unusual" is the default
-behaviour. As it turns out, I was wrong; the header files are indeed
-part of the Oracle XE install, just placed under a rather... shall we
-say, /creative/, location:
+Oracle we're talking about, so "unusual" is the default behaviour. As
+it turns out, I was wrong; the header files are indeed part of the
+Oracle XE install, just placed under a rather... shall we say,
+/creative/, location:
 =/u01/app/oracle/product/11.2.0/xe/rdbms/public=. The libs are there
 too, under the slightly more conventionally named directory =lib=.
 
@@ -75,24 +75,27 @@ directories:
 LD_LIBRARY_PATH=/u01/app/oracle/product/11.2.0/xe/lib CPPFLAGS="-I/full/path/to/local/include -I/u01/app/oracle/product/11.2.0/xe/rdbms/public" LDFLAGS="-L/full/path/to/local/lib -L/u01/app/oracle/product/11.2.0/xe/lib" ./configure --prefix=/full/path/to/local
 #+end_example
 
-Again, replacing the paths accordingly. The end result will be an ODB
-Oracle library that uses the OCI driver from Oracle XE. You then just
-need to make sure you have executed =oracle_env.sh= before running
-your binary, as we shall see later on. Alas, as our update to [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]
-indicated, we didn't really need to download SQLPlus separately
-either - it is also included in XE package - so really you can get
-away with just downloading XE and nothing else.
+Again, replacing the paths accordingly. If all goes well, the end
+result should be an ODB Oracle library that uses the OCI driver from
+Oracle XE. You then just need to make sure you have executed
+=oracle_env.sh= before running your binary, but don't worry too much
+because I'll remind you later on. Whilst we're on the subject of
+Oracle packages, it's worth mentioning that I did a minor update to
+[[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]: you didn't need to download SQLPlus separately either, as it
+is also included in XE package. So, in conclusion, after a lot of
+faffing, it turns out you can get away with just downloading XE and
+nothing else.
 
 The other minor alteration to what was laid out on the original posts
 is that I removed the need for the =basic= database schema. In truth,
 the entities placed in that schema were not adding a lot of value;
-their use cases are already covered by the entities in =northwind=. So
-I removed the need for two schemas and collapsed them into one.
+their use cases are already covered by the =northwind= schema, so I
+removed the need for two schemas and collapsed them into one.
 
-One final note - not quite an /errata/ as such but a worthwhile note
-nonetheless. We didn't do a "proper" Oracle setup, so when you reboot
-your box you will find that the service is no longer running. You can
-easily restart it from the shell, logged in as root:
+A final note - not quite an /errata per se/ but still, something
+worthwhile mentioning. We didn't do a "proper" Oracle setup, so when
+you reboot your box you will find that the service is no longer
+running. You can easily restart it from the shell, logged in as root:
 
 #+begin_example
 # cd /etc/init.d/

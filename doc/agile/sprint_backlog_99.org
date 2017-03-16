@@ -398,6 +398,7 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-16 Thu 19:39]--[2017-03-16 Thu 20:24] =>  0:45
     CLOCK: [2017-03-14 Tue 22:11]--[2017-03-14 Tue 22:31] =>  0:20
     CLOCK: [2017-03-14 Tue 21:40]--[2017-03-14 Tue 22:10] =>  0:30
     CLOCK: [2017-03-14 Tue 18:11]--[2017-03-14 Tue 18:35] =>  0:24
