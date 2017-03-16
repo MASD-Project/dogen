@@ -41,25 +41,25 @@ namespace serialization {
  * @brief Reads in the file given by path and deserialises it.
  */
 template<typename Entity>
-Entity xml_deserialize(boost::filesystem::path path) {
-    if (!boost::filesystem::exists(path))
-        BOOST_THROW_EXCEPTION(utility::filesystem::file_not_found(path.string()));
+Entity xml_deserialize(boost::filesystem::path p) {
+    if (!boost::filesystem::exists(p))
+        BOOST_THROW_EXCEPTION(utility::filesystem::file_not_found(p.string()));
 
-    boost::filesystem::ifstream input_stream(path);
-    boost::archive::xml_iarchive input_archive(input_stream);
-    Entity entity;
-    input_archive >> BOOST_SERIALIZATION_NVP(entity);
-    return entity;
+    boost::filesystem::ifstream is(p);
+    boost::archive::xml_iarchive ia(is);
+    Entity e;
+    ia >> BOOST_SERIALIZATION_NVP(e);
+    return e;
 }
 
 /**
  * @brief Serialises entity into the file given by path.
  */
 template<typename Entity>
-void xml_serialize(boost::filesystem::path path, Entity entity) {
-    boost::filesystem::ofstream output_stream(path);
-    boost::archive::xml_oarchive input_archive(output_stream);
-    input_archive << BOOST_SERIALIZATION_NVP(entity);
+void xml_serialize(boost::filesystem::path p, Entity e) {
+    boost::filesystem::ofstream os(p);
+    boost::archive::xml_oarchive oa(os);
+    oa << BOOST_SERIALIZATION_NVP(e);
 }
 
 } } }
