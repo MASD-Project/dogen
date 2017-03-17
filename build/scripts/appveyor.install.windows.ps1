@@ -24,7 +24,7 @@ $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
-buid\scripts\wget.exe --no-check-certificate ${input_location} -O ${output_location}
+build\scripts\wget.exe --no-check-certificate ${input_location} -O ${output_location}
 
 write-host "URL: ${input_location}"
 write-host "Dogen deps: ${output_location}"
