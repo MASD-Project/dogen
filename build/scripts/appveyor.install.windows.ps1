@@ -24,7 +24,7 @@ $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
-bash -c "wget --no-check-certificate ${input_location} -O ${output_location}"
+$env:APPVEYOR_BUILD_FOLDER\wget.exe --no-check-certificate ${input_location} -O ${output_location}
 
 write-host "URL: ${input_location}"
 write-host "Dogen deps: ${output_location}"
