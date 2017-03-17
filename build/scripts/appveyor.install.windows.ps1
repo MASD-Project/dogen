@@ -24,7 +24,7 @@ $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
-(New-Object System.Net.WebClient).DownloadFile(${input_location}, ${output_location})
+Invoke-WebRequest -Uri ${input_location} -OutFile ${output_location} -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
 write-host "URL: ${input_location}"
 write-host "Dogen deps: ${output_location}"
 mkdir ${extract_dir} | Out-Null
