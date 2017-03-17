@@ -23,8 +23,8 @@ $package="dogen_deps_vc14_windows_amd64_v${version}.7z"
 $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
-
-wget ${input_location} -OutFile ${output_location}
+$user_agent="-UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox"
+Invoke-WebRequest -Uri ${input_location} -OutFile ${output_location} ${user_agent}
 write-host "Dogen deps: ${output_location}"
 mkdir ${extract_dir} | Out-Null
 cd ${extract_dir}
