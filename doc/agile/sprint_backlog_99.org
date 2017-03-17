@@ -13,14 +13,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-17 Fri 11:18]
+#+CAPTION: Clock summary at [2017-03-17 Fri 11:26]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *46:54* |       |       | 100.0 |
+| *Total time*                                                                | *47:00* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 46:54   |       |       | 100.0 |
-| Active                                                                      |         | 46:54 |       | 100.0 |
+| Stories                                                                     | 47:00   |       |       | 100.0 |
+| Active                                                                      |         | 47:00 |       | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  1:01 |   2.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:26 |   0.9 |
 | COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   6.3 |
@@ -30,7 +30,7 @@
 | COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   5.6 |
 | COMPLETED Split project should not include model name                       |         |       |  0:18 |   0.6 |
 | COMPLETED Always add multiple databases to ODB options                      |         |       |  0:03 |   0.1 |
-| STARTED Fix issues with dropbox downloads                                   |         |       |  2:14 |   4.8 |
+| STARTED Fix issues with dropbox downloads                                   |         |       |  2:20 |   5.0 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       |  0:11 |   0.4 |
 | STARTED Build on tags for Windows                                           |         |       |  0:15 |   0.5 |
 | STARTED Add a "flat directory" mode                                         |         |       |  0:08 |   0.3 |
@@ -271,6 +271,7 @@ than one database system. However, since we are asking for "common"
 this is causing problems. Always add this flag.
 
 *** STARTED Fix issues with dropbox downloads                         :story:
+    CLOCK: [2017-03-17 Fri 11:19]--[2017-03-17 Fri 11:25] =>  0:06
     CLOCK: [2017-03-17 Fri 11:14]--[2017-03-17 Fri 11:18] =>  0:04
     CLOCK: [2017-03-17 Fri 10:59]--[2017-03-17 Fri 11:13] =>  0:14
     CLOCK: [2017-03-17 Fri 10:52]--[2017-03-17 Fri 10:58] =>  0:06
