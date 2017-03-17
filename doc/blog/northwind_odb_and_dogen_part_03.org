@@ -277,14 +277,18 @@ experiment with Access with Northwind database while you're learning
 and develop ideas for Access.
 #+end_quote
 
-For the true DBAs out there: let's not get too hung-up on the
-"quality" of the database schema of Northwind; the purpose of this
-work is merely to exercise commonly used functionality on both Dogen
-and ODB. From this perspective, the Northwind database schema is more
-than adequate to test-drive all the features we're interested
-in. Whether you agree or not with the decisions the original creators
-of this schema made is a completely different matter, which is well
-beyond the scope of this series of posts.
+If you /really/ want a slightly more thorough introduction to
+Northwind, you could do worse than reading this paper: [[http://eduglopedia.org/resource/cea008e18dee42899aeff7a0c58dddaf8e9b5bc6/download][Adapting the
+Access Northwind Database to Support a Database Course]]. And for the
+true DBAs crowd out there, before you start the heckling: I beg you
+not get too hung-up on the "quality" of the database schema of
+Northwind; the purpose of this work is merely to exercise commonly
+used functionality on both Dogen and ODB. From this perspective, the
+Northwind database schema is more than adequate to test-drive all the
+features we're interested in. Whether you agree or not with the
+decisions the original creators of this schema made is a completely
+different matter, which is well beyond the scope of this series of
+posts.
 
 Thanks to CodePlex we have a diagram with the tables and their
 relationships:
