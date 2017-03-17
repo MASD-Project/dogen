@@ -4855,10 +4855,6 @@ Tasks:
   populate the slot accordingly.
 - update quilt to use the indices where possible.
 
-*** Create a UML profile to formalise yarn concepts                    :epic:
-
-Profile should include the hashable, etc changes.
-
 *** Create a map between UML/MOF terminology and yarn                  :epic:
 
 It would be helpful to know what a yarn type means in terms of
