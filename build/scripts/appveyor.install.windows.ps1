@@ -24,7 +24,8 @@ $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
-Invoke-WebRequest -Uri ${input_location} -OutFile ${output_location} -UserAgent [Microsoft.PowerShell.Commands.PSUserAgent]::FireFox
+bash -c "wget --no-check-certificate ${input_location} -O ${output_location}"
+
 write-host "URL: ${input_location}"
 write-host "Dogen deps: ${output_location}"
 mkdir ${extract_dir} | Out-Null
