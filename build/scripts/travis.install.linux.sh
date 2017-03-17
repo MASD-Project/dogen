@@ -19,6 +19,19 @@
 #
 
 #
+# deps
+#
+dropbox="https://www.dropbox.com/s/axf22srjkiltvr7/"
+version=8
+package="dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2"
+input_location="${dropbox}/${package}"
+output_location="/tmp/${package}"
+extract_dir="/tmp/dogen_deps"
+wget --no-check-certificate ${input_location} -O ${output_location}
+mkdir ${extract_dir}
+tar -xaf ${output_location} -C ${extract_dir}
+
+#
 # common repos
 #
 sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test
@@ -63,19 +76,6 @@ fi
 # ninja
 #
 sudo apt-get install ninja-build
-
-#
-# deps
-#
-dropbox="https://www.dropbox.com/sh/xs1kvi6ilbnagc1/AAB9eTt7qdjDeAHTL7tnAAQua/packages/"
-version=8
-package="dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2"
-input_location="${dropbox}/${package}"
-output_location="/tmp/${package}"
-extract_dir="/tmp/dogen_deps"
-wget --no-check-certificate ${input_location} -O ${output_location}
-mkdir ${extract_dir}
-tar -xaf ${output_location} -C ${extract_dir}
 
 #
 # cmake
