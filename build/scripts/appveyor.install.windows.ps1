@@ -24,8 +24,9 @@ $input_location="${dropbox}/${package}"
 $output_location="$env:temp/${package}"
 $extract_dir="$env:temp/dogen_deps"
 
-$env:APPVEYOR_BUILD_FOLDER\wget.exe --no-check-certificate ${input_location} -O ${output_location}
+$PSScriptRoot\wget.exe --no-check-certificate ${input_location} -O ${output_location}
 
+write-host $pwd
 write-host "URL: ${input_location}"
 write-host "Dogen deps: ${output_location}"
 mkdir ${extract_dir} | Out-Null
