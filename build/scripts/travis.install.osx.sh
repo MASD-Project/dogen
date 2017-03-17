@@ -21,7 +21,7 @@
 #
 # deps
 #
-dropbox="https://dl.dropboxusercontent.com/u/541873/packages"
+dropbox="https://www.dropbox.com/sh/xs1kvi6ilbnagc1/AAB9eTt7qdjDeAHTL7tnAAQua/packages/"
 package="dogen_deps_clang_7_3_0_osx_amd64.tar.bz2"
 input_location="${dropbox}/${package}"
 output_location="/tmp/${package}"

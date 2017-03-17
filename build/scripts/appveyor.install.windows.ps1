@@ -17,7 +17,7 @@
 # MA 02110-1301, USA.
 #
 
-$dropbox="https://dl.dropboxusercontent.com/u/541873/packages"
+$dropbox="https://www.dropbox.com/sh/xs1kvi6ilbnagc1/AAB9eTt7qdjDeAHTL7tnAAQua/packages/"
 $version=4
 $package="dogen_deps_vc14_windows_amd64_v${version}.7z"
 $input_location="${dropbox}/${package}"
