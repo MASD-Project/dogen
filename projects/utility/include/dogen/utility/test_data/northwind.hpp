@@ -18,45 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_NORTHWIND_TYPES_HYDRATOR_HPP
-#define DOGEN_TEST_MODELS_NORTHWIND_TYPES_HYDRATOR_HPP
+#ifndef DOGEN_UTILITY_TEST_DATA_NORTHWIND_HPP
+#define DOGEN_UTILITY_TEST_DATA_NORTHWIND_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <tuple>
-#include <string>
-#include <iosfwd>
-#include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include <boost/property_tree/ptree.hpp>
-#include "dogen/test_models/northwind/types/repository.hpp"
 
 namespace dogen {
-namespace test_models {
-namespace northwind {
+namespace utility {
+namespace test_data {
 
-class hydrator final {
-private:
-    void log_tuple(
-        const std::tuple<std::string, std::string, std::string>& t) const;
-
-    std::tuple<std::string, std::string, std::string>
-    section_insert_line(const std::string& s) const;
-
-    void scrub_tuple(
-        std::tuple<std::string, std::string, std::string>& t) const;
-
-    std::unordered_map<std::string, std::string> map_keys_to_values(
-        const std::string& keys, const std::string& values) const;
-
-private:
-    repository read_stream(std::istream& s) const;
+class northwind {
+public:
+    northwind() = delete;
+    northwind(const northwind&) = delete;
+    ~northwind() = delete;
+    northwind(northwind&&) = delete;
+    northwind& operator=(const northwind&) = delete;
 
 public:
-    repository hydrate(std::istream& s) const;
-    repository hydrate(const boost::filesystem::path& p) const;
+    static boost::filesystem::path data_set();
+    static boost::filesystem::path non_existent_file();
+
+    static boost::filesystem::path input();
+    static boost::filesystem::path input_northwind_ascii_sql();
 };
 
 } } }

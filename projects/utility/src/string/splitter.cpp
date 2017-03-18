@@ -85,7 +85,7 @@ split_delimited(const std::string& n, const std::string& delimiter) {
 }
 
 std::list<std::string> splitter::split_csv(const std::string& n) {
-    BOOST_LOG_SEV(lg, debug) << "Parsing csv string: " << n;
+    BOOST_LOG_SEV(lg, debug) << "Parsing csv string: '" << n << "'";
 
     if (n.empty())
         return std::list<std::string> {};

@@ -47,6 +47,7 @@
 #include "dogen/test_models/northwind/types/supplier_id.hpp"
 #include "dogen/test_models/northwind/types/territory_id.hpp"
 #include "dogen/test_models/northwind/types/order_details.hpp"
+#include "dogen/test_models/northwind/types/hydration_error.hpp"
 #include "dogen/test_models/northwind/types/customer_type_id.hpp"
 #include "dogen/test_models/northwind/types/order_details_key.hpp"
 #include "dogen/test_models/northwind/types/employee_territories.hpp"
