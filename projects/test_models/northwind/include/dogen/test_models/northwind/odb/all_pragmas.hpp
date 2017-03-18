@@ -37,7 +37,6 @@
 #include "dogen/test_models/northwind/odb/territory_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/categories_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/product_id_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/repository_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/shipper_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/category_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/customer_id_pragmas.hpp"

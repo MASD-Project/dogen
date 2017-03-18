@@ -37,7 +37,6 @@
 #include "dogen/test_models/northwind/test_data/territory_td.hpp"
 #include "dogen/test_models/northwind/test_data/categories_td.hpp"
 #include "dogen/test_models/northwind/test_data/product_id_td.hpp"
-#include "dogen/test_models/northwind/test_data/repository_td.hpp"
 #include "dogen/test_models/northwind/test_data/shipper_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/category_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/customer_id_td.hpp"

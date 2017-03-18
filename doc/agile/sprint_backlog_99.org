@@ -427,6 +427,7 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-18 Sat 22:16]--[2017-03-18 Sat 22:19] =>  0:03
     CLOCK: [2017-03-18 Sat 20:51]--[2017-03-18 Sat 22:15] =>  1:24
     CLOCK: [2017-03-18 Sat 17:08]--[2017-03-18 Sat 18:53] =>  1:45
     CLOCK: [2017-03-17 Fri 11:30]--[2017-03-17 Fri 11:50] =>  0:20
@@ -535,9 +536,20 @@ The first file can either be on the =include/odb= directory or on the
 are placed in the =include/odb= folder. Note that at present we are
 using =cpp= extension rather than =cxx=.
 
+In addition, on a multi-database environment we also have:
+
+- =repository-odb-oracle.hxx=
+- =repository-odb-pgsql.hxx=
+- ...
+
 Ideally we should also add the ODB include files to the master
 includes. However, we probably need a separate master include file
 just for ODB files.
+
+One of the amazing side-effects of this approach is that we will
+automatically delete any ODB files which are no longer required
+(because we will not generate ignores for them). At present we are
+manually deleting them.
 
 *** Rename main Dogen package in Debian                               :story:
 
