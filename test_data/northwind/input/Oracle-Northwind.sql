@@ -9,7 +9,7 @@ CREATE TABLE CATEGORIES
 
 CREATE UNIQUE INDEX UIDX_CATEGORY_NAME ON CATEGORIES(CATEGORY_NAME);
 
-CREATE SEQUENCE SEQ_NW_CATEGORIES  
+CREATE SEQUENCE SEQ_NW_CATEGORIES
     MINVALUE 1
     MAXVALUE 999999999999999999999999999
     START WITH 9
@@ -103,545 +103,545 @@ SET DEFINE OFF;
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (1, 'ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative', 
-    'Obere Str. 57', 'Berlin', '12209', 'Germany', 
+   (1, 'ALFKI', 'Alfreds Futterkiste', 'Maria Anders', 'Sales Representative',
+    'Obere Str. 57', 'Berlin', '12209', 'Germany',
     '030-0074321', '030-0076545');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (2, 'ANATR', 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Owner', 
-    'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico', 
+   (2, 'ANATR', 'Ana Trujillo Emparedados y helados', 'Ana Trujillo', 'Owner',
+    'Avda. de la Constitución 2222', 'México D.F.', '05021', 'Mexico',
     '(5) 555-4729', '(5) 555-3745');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (3, 'ANTON', 'Antonio Moreno Taquería', 'Antonio Moreno', 'Owner', 
+   (3, 'ANTON', 'Antonio Moreno Taquería', 'Antonio Moreno', 'Owner',
     'Mataderos  2312', 'México D.F.', '05023', 'Mexico', '(5) 555-3932');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (4, 'AROUT', 'Around the Horn', 'Thomas Hardy', 'Sales Representative', 
-    '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK', 
+   (4, 'AROUT', 'Around the Horn', 'Thomas Hardy', 'Sales Representative',
+    '120 Hanover Sq.', 'London', 'WA1 1DP', 'UK',
     '(171) 555-7788', '(171) 555-6750');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (5, 'BERGS', 'Berglunds snabbköp', 'Christina Berglund', 'Order Administrator', 
-    'Berguvsvägen  8', 'Luleå', 'S-958 22', 'Sweden', 
+   (5, 'BERGS', 'Berglunds snabbköp', 'Christina Berglund', 'Order Administrator',
+    'Berguvsvägen  8', 'Luleå', 'S-958 22', 'Sweden',
     '0921-12 34 65', '0921-12 34 67');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (6, 'BLAUS', 'Blauer See Delikatessen', 'Hanna Moos', 'Sales Representative', 
-    'Forsterstr. 57', 'Mannheim', '68306', 'Germany', 
+   (6, 'BLAUS', 'Blauer See Delikatessen', 'Hanna Moos', 'Sales Representative',
+    'Forsterstr. 57', 'Mannheim', '68306', 'Germany',
     '0621-08460', '0621-08924');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (7, 'BLONP', 'Blondel père et fils', 'Frédérique Citeaux', 'Marketing Manager', 
-    '24, place Kléber', 'Strasbourg', '67000', 'France', 
+   (7, 'BLONP', 'Blondel père et fils', 'Frédérique Citeaux', 'Marketing Manager',
+    '24, place Kléber', 'Strasbourg', '67000', 'France',
     '88.60.15.31', '88.60.15.32');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (8, 'BOLID', 'Bólido Comidas preparadas', 'Martín Sommer', 'Owner', 
-    'C/ Araquil, 67', 'Madrid', '28023', 'Spain', 
+   (8, 'BOLID', 'Bólido Comidas preparadas', 'Martín Sommer', 'Owner',
+    'C/ Araquil, 67', 'Madrid', '28023', 'Spain',
     '(91) 555 22 82', '(91) 555 91 99');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (9, 'BONAP', 'Bon app''', 'Laurence Lebihan', 'Owner', 
-    '12, rue des Bouchers', 'Marseille', '13008', 'France', 
+   (9, 'BONAP', 'Bon app''', 'Laurence Lebihan', 'Owner',
+    '12, rue des Bouchers', 'Marseille', '13008', 'France',
     '91.24.45.40', '91.24.45.41');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (10, 'BOTTM', 'Bottom-Dollar Markets', 'Elizabeth Lincoln', 'Accounting Manager', 
-    '23 Tsawassen Blvd.', 'Tsawassen', 'BC', 'T2F 8M4', 'Canada', 
+   (10, 'BOTTM', 'Bottom-Dollar Markets', 'Elizabeth Lincoln', 'Accounting Manager',
+    '23 Tsawassen Blvd.', 'Tsawassen', 'BC', 'T2F 8M4', 'Canada',
     '(604) 555-4729', '(604) 555-3745');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (11, 'BSBEV', 'B''s Beverages', 'Victoria Ashworth', 'Sales Representative', 
+   (11, 'BSBEV', 'B''s Beverages', 'Victoria Ashworth', 'Sales Representative',
     'Fauntleroy Circus', 'London', 'EC2 5NT', 'UK', '(171) 555-1212');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (12, 'CACTU', 'Cactus Comidas para llevar', 'Patricio Simpson', 'Sales Agent', 
-    'Cerrito 333', 'Buenos Aires', '1010', 'Argentina', 
+   (12, 'CACTU', 'Cactus Comidas para llevar', 'Patricio Simpson', 'Sales Agent',
+    'Cerrito 333', 'Buenos Aires', '1010', 'Argentina',
     '(1) 135-5555', '(1) 135-4892');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (13, 'CENTC', 'Centro comercial Moctezuma', 'Francisco Chang', 'Marketing Manager', 
-    'Sierras de Granada 9993', 'México D.F.', '05022', 'Mexico', 
+   (13, 'CENTC', 'Centro comercial Moctezuma', 'Francisco Chang', 'Marketing Manager',
+    'Sierras de Granada 9993', 'México D.F.', '05022', 'Mexico',
     '(5) 555-3392', '(5) 555-7293');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (14, 'CHOPS', 'Chop-suey Chinese', 'Yang Wang', 'Owner', 
+   (14, 'CHOPS', 'Chop-suey Chinese', 'Yang Wang', 'Owner',
     'Hauptstr. 29', 'Bern', '3012', 'Switzerland', '0452-076545');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (15, 'COMMI', 'Comércio Mineiro', 'Pedro Afonso', 'Sales Associate', 
-    'Av. dos Lusíadas, 23', 'São Paulo', 'SP', '05432-043', 'Brazil', 
+   (15, 'COMMI', 'Comércio Mineiro', 'Pedro Afonso', 'Sales Associate',
+    'Av. dos Lusíadas, 23', 'São Paulo', 'SP', '05432-043', 'Brazil',
     '(11) 555-7647');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (16, 'CONSH', 'Consolidated Holdings', 'Elizabeth Brown', 'Sales Representative', 
+   (16, 'CONSH', 'Consolidated Holdings', 'Elizabeth Brown', 'Sales Representative',
     'Berkeley Gardens
-12  Brewery ', 'London', 'WX1 6LT', 'UK', 
+12  Brewery ', 'London', 'WX1 6LT', 'UK',
     '(171) 555-2282', '(171) 555-9199');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (17, 'DRACD', 'Drachenblut Delikatessen', 'Sven Ottlieb', 'Order Administrator', 
-    'Walserweg 21', 'Aachen', '52066', 'Germany', 
+   (17, 'DRACD', 'Drachenblut Delikatessen', 'Sven Ottlieb', 'Order Administrator',
+    'Walserweg 21', 'Aachen', '52066', 'Germany',
     '0241-039123', '0241-059428');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (18, 'DUMON', 'Du monde entier', 'Janine Labrune', 'Owner', 
-    '67, rue des Cinquante Otages', 'Nantes', '44000', 'France', 
+   (18, 'DUMON', 'Du monde entier', 'Janine Labrune', 'Owner',
+    '67, rue des Cinquante Otages', 'Nantes', '44000', 'France',
     '40.67.88.88', '40.67.89.89');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (19, 'EASTC', 'Eastern Connection', 'Ann Devon', 'Sales Agent', 
-    '35 King George', 'London', 'WX3 6FW', 'UK', 
+   (19, 'EASTC', 'Eastern Connection', 'Ann Devon', 'Sales Agent',
+    '35 King George', 'London', 'WX3 6FW', 'UK',
     '(171) 555-0297', '(171) 555-3373');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (20, 'ERNSH', 'Ernst Handel', 'Roland Mendel', 'Sales Manager', 
-    'Kirchgasse 6', 'Graz', '8010', 'Austria', 
+   (20, 'ERNSH', 'Ernst Handel', 'Roland Mendel', 'Sales Manager',
+    'Kirchgasse 6', 'Graz', '8010', 'Austria',
     '7675-3425', '7675-3426');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (21, 'FAMIA', 'Familia Arquibaldo', 'Aria Cruz', 'Marketing Assistant', 
-    'Rua Orós, 92', 'São Paulo', 'SP', '05442-030', 'Brazil', 
+   (21, 'FAMIA', 'Familia Arquibaldo', 'Aria Cruz', 'Marketing Assistant',
+    'Rua Orós, 92', 'São Paulo', 'SP', '05442-030', 'Brazil',
     '(11) 555-9857');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (22, 'FISSA', 'FISSA Fabrica Inter. Salchichas S.A.', 'Diego Roel', 'Accounting Manager', 
-    'C/ Moralzarzal, 86', 'Madrid', '28034', 'Spain', 
+   (22, 'FISSA', 'FISSA Fabrica Inter. Salchichas S.A.', 'Diego Roel', 'Accounting Manager',
+    'C/ Moralzarzal, 86', 'Madrid', '28034', 'Spain',
     '(91) 555 94 44', '(91) 555 55 93');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (23, 'FOLIG', 'Folies gourmandes', 'Martine Rancé', 'Assistant Sales Agent', 
-    '184, chaussée de Tournai', 'Lille', '59000', 'France', 
+   (23, 'FOLIG', 'Folies gourmandes', 'Martine Rancé', 'Assistant Sales Agent',
+    '184, chaussée de Tournai', 'Lille', '59000', 'France',
     '20.16.10.16', '20.16.10.17');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (24, 'FOLKO', 'Folk och fä HB', 'Maria Larsson', 'Owner', 
+   (24, 'FOLKO', 'Folk och fä HB', 'Maria Larsson', 'Owner',
     'Åkergatan 24', 'Bräcke', 'S-844 67', 'Sweden', '0695-34 67 21');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (25, 'FRANK', 'Frankenversand', 'Peter Franken', 'Marketing Manager', 
-    'Berliner Platz 43', 'München', '80805', 'Germany', 
+   (25, 'FRANK', 'Frankenversand', 'Peter Franken', 'Marketing Manager',
+    'Berliner Platz 43', 'München', '80805', 'Germany',
     '089-0877310', '089-0877451');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (26, 'FRANR', 'France restauration', 'Carine Schmitt', 'Marketing Manager', 
-    '54, rue Royale', 'Nantes', '44000', 'France', 
+   (26, 'FRANR', 'France restauration', 'Carine Schmitt', 'Marketing Manager',
+    '54, rue Royale', 'Nantes', '44000', 'France',
     '40.32.21.21', '40.32.21.20');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (27, 'FRANS', 'Franchi S.p.A.', 'Paolo Accorti', 'Sales Representative', 
-    'Via Monte Bianco 34', 'Torino', '10100', 'Italy', 
+   (27, 'FRANS', 'Franchi S.p.A.', 'Paolo Accorti', 'Sales Representative',
+    'Via Monte Bianco 34', 'Torino', '10100', 'Italy',
     '011-4988260', '011-4988261');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (28, 'FURIB', 'Furia Bacalhau e Frutos do Mar', 'Lino Rodriguez ', 'Sales Manager', 
-    'Jardim das rosas n. 32', 'Lisboa', '1675', 'Portugal', 
+   (28, 'FURIB', 'Furia Bacalhau e Frutos do Mar', 'Lino Rodriguez ', 'Sales Manager',
+    'Jardim das rosas n. 32', 'Lisboa', '1675', 'Portugal',
     '(1) 354-2534', '(1) 354-2535');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (29, 'GALED', 'Galería del gastrónomo', 'Eduardo Saavedra', 'Marketing Manager', 
-    'Rambla de Cataluña, 23', 'Barcelona', '08022', 'Spain', 
+   (29, 'GALED', 'Galería del gastrónomo', 'Eduardo Saavedra', 'Marketing Manager',
+    'Rambla de Cataluña, 23', 'Barcelona', '08022', 'Spain',
     '(93) 203 4560', '(93) 203 4561');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (30, 'GODOS', 'Godos Cocina Típica', 'José Pedro Freyre', 'Sales Manager', 
+   (30, 'GODOS', 'Godos Cocina Típica', 'José Pedro Freyre', 'Sales Manager',
     'C/ Romero, 33', 'Sevilla', '41101', 'Spain', '(95) 555 82 82');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (31, 'GOURL', 'Gourmet Lanchonetes', 'André Fonseca', 'Sales Associate', 
-    'Av. Brasil, 442', 'Campinas', 'SP', '04876-786', 'Brazil', 
+   (31, 'GOURL', 'Gourmet Lanchonetes', 'André Fonseca', 'Sales Associate',
+    'Av. Brasil, 442', 'Campinas', 'SP', '04876-786', 'Brazil',
     '(11) 555-9482');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (32, 'GREAL', 'Great Lakes Food Market', 'Howard Snyder', 'Marketing Manager', 
-    '2732 Baker Blvd.', 'Eugene', 'OR', '97403', 'USA', 
+   (32, 'GREAL', 'Great Lakes Food Market', 'Howard Snyder', 'Marketing Manager',
+    '2732 Baker Blvd.', 'Eugene', 'OR', '97403', 'USA',
     '(503) 555-7555');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (33, 'GROSR', 'GROSELLA-Restaurante', 'Manuel Pereira', 'Owner', 
-    '5ª Ave. Los Palos Grandes', 'Caracas', 'DF', '1081', 'Venezuela', 
+   (33, 'GROSR', 'GROSELLA-Restaurante', 'Manuel Pereira', 'Owner',
+    '5ª Ave. Los Palos Grandes', 'Caracas', 'DF', '1081', 'Venezuela',
     '(2) 283-2951', '(2) 283-3397');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (34, 'HANAR', 'Hanari Carnes', 'Mario Pontes', 'Accounting Manager', 
-    'Rua do Paço, 67', 'Rio de Janeiro', 'RJ', '05454-876', 'Brazil', 
+   (34, 'HANAR', 'Hanari Carnes', 'Mario Pontes', 'Accounting Manager',
+    'Rua do Paço, 67', 'Rio de Janeiro', 'RJ', '05454-876', 'Brazil',
     '(21) 555-0091', '(21) 555-8765');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (35, 'HILAA', 'HILARIÓN-Abastos', 'Carlos Hernández', 'Sales Representative', 
-    'Carrera 22 con Ave. Carlos Soublette #8-35', 'San Cristóbal', 'Táchira', '5022', 'Venezuela', 
+   (35, 'HILAA', 'HILARIÓN-Abastos', 'Carlos Hernández', 'Sales Representative',
+    'Carrera 22 con Ave. Carlos Soublette #8-35', 'San Cristóbal', 'Táchira', '5022', 'Venezuela',
     '(5) 555-1340', '(5) 555-1948');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (36, 'HUNGC', 'Hungry Coyote Import Store', 'Yoshi Latimer', 'Sales Representative', 
+   (36, 'HUNGC', 'Hungry Coyote Import Store', 'Yoshi Latimer', 'Sales Representative',
     'City Center Plaza
-516 Main St.', 'Elgin', 'OR', '97827', 'USA', 
+516 Main St.', 'Elgin', 'OR', '97827', 'USA',
     '(503) 555-6874', '(503) 555-2376');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, COUNTRY, PHONE, FAX)
  Values
-   (37, 'HUNGO', 'Hungry Owl All-Night Grocers', 'Patricia McKenna', 'Sales Associate', 
-    '8 Johnstown Road', 'Cork', 'Co. Cork', 'Ireland', 
+   (37, 'HUNGO', 'Hungry Owl All-Night Grocers', 'Patricia McKenna', 'Sales Associate',
+    '8 Johnstown Road', 'Cork', 'Co. Cork', 'Ireland',
     '2967 542', '2967 3333');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (38, 'ISLAT', 'Island Trading', 'Helen Bennett', 'Marketing Manager', 
+   (38, 'ISLAT', 'Island Trading', 'Helen Bennett', 'Marketing Manager',
     'Garden House
-Crowther Way', 'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK', 
+Crowther Way', 'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK',
     '(198) 555-8888');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (39, 'KOENE', 'Königlich Essen', 'Philip Cramer', 'Sales Associate', 
+   (39, 'KOENE', 'Königlich Essen', 'Philip Cramer', 'Sales Associate',
     'Maubelstr. 90', 'Brandenburg', '14776', 'Germany', '0555-09876');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (40, 'LACOR', 'La corne d''abondance', 'Daniel Tonini', 'Sales Representative', 
-    '67, avenue de l''Europe', 'Versailles', '78000', 'France', 
+   (40, 'LACOR', 'La corne d''abondance', 'Daniel Tonini', 'Sales Representative',
+    '67, avenue de l''Europe', 'Versailles', '78000', 'France',
     '30.59.84.10', '30.59.85.11');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (41, 'LAMAI', 'La maison d''Asie', 'Annette Roulet', 'Sales Manager', 
-    '1 rue Alsace-Lorraine', 'Toulouse', '31000', 'France', 
+   (41, 'LAMAI', 'La maison d''Asie', 'Annette Roulet', 'Sales Manager',
+    '1 rue Alsace-Lorraine', 'Toulouse', '31000', 'France',
     '61.77.61.10', '61.77.61.11');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (42, 'LAUGB', 'Laughing Bacchus Wine Cellars', 'Yoshi Tannamuri', 'Marketing Assistant', 
-    '1900 Oak St.', 'Vancouver', 'BC', 'V3F 2K1', 'Canada', 
+   (42, 'LAUGB', 'Laughing Bacchus Wine Cellars', 'Yoshi Tannamuri', 'Marketing Assistant',
+    '1900 Oak St.', 'Vancouver', 'BC', 'V3F 2K1', 'Canada',
     '(604) 555-3392', '(604) 555-7293');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (43, 'LAZYK', 'Lazy K Kountry Store', 'John Steel', 'Marketing Manager', 
-    '12 Orchestra Terrace', 'Walla Walla', 'WA', '99362', 'USA', 
+   (43, 'LAZYK', 'Lazy K Kountry Store', 'John Steel', 'Marketing Manager',
+    '12 Orchestra Terrace', 'Walla Walla', 'WA', '99362', 'USA',
     '(509) 555-7969', '(509) 555-6221');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (44, 'LEHMS', 'Lehmanns Marktstand', 'Renate Messner', 'Sales Representative', 
-    'Magazinweg 7', 'Frankfurt a.M. ', '60528', 'Germany', 
+   (44, 'LEHMS', 'Lehmanns Marktstand', 'Renate Messner', 'Sales Representative',
+    'Magazinweg 7', 'Frankfurt a.M. ', '60528', 'Germany',
     '069-0245984', '069-0245874');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (45, 'LETSS', 'Let''s Stop N Shop', 'Jaime Yorres', 'Owner', 
+   (45, 'LETSS', 'Let''s Stop N Shop', 'Jaime Yorres', 'Owner',
     '87 Polk St.
-Suite 5', 'San Francisco', 'CA', '94117', 'USA', 
+Suite 5', 'San Francisco', 'CA', '94117', 'USA',
     '(415) 555-5938');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (46, 'LILAS', 'LILA-Supermercado', 'Carlos González', 'Accounting Manager', 
-    'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 'Barquisimeto', 'Lara', '3508', 'Venezuela', 
+   (46, 'LILAS', 'LILA-Supermercado', 'Carlos González', 'Accounting Manager',
+    'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 'Barquisimeto', 'Lara', '3508', 'Venezuela',
     '(9) 331-6954', '(9) 331-7256');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (47, 'LINOD', 'LINO-Delicateses', 'Felipe Izquierdo', 'Owner', 
-    'Ave. 5 de Mayo Porlamar', 'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela', 
+   (47, 'LINOD', 'LINO-Delicateses', 'Felipe Izquierdo', 'Owner',
+    'Ave. 5 de Mayo Porlamar', 'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela',
     '(8) 34-56-12', '(8) 34-93-93');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (48, 'LONEP', 'Lonesome Pine Restaurant', 'Fran Wilson', 'Sales Manager', 
-    '89 Chiaroscuro Rd.', 'Portland', 'OR', '97219', 'USA', 
+   (48, 'LONEP', 'Lonesome Pine Restaurant', 'Fran Wilson', 'Sales Manager',
+    '89 Chiaroscuro Rd.', 'Portland', 'OR', '97219', 'USA',
     '(503) 555-9573', '(503) 555-9646');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (49, 'MAGAA', 'Magazzini Alimentari Riuniti', 'Giovanni Rovelli', 'Marketing Manager', 
-    'Via Ludovico il Moro 22', 'Bergamo', '24100', 'Italy', 
+   (49, 'MAGAA', 'Magazzini Alimentari Riuniti', 'Giovanni Rovelli', 'Marketing Manager',
+    'Via Ludovico il Moro 22', 'Bergamo', '24100', 'Italy',
     '035-640230', '035-640231');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (50, 'MAISD', 'Maison Dewey', 'Catherine Dewey', 'Sales Agent', 
-    'Rue Joseph-Bens 532', 'Bruxelles', 'B-1180', 'Belgium', 
+   (50, 'MAISD', 'Maison Dewey', 'Catherine Dewey', 'Sales Agent',
+    'Rue Joseph-Bens 532', 'Bruxelles', 'B-1180', 'Belgium',
     '(02) 201 24 67', '(02) 201 24 68');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (51, 'MEREP', 'Mère Paillarde', 'Jean Fresnière', 'Marketing Assistant', 
-    '43 rue St. Laurent', 'Montréal', 'Québec', 'H1J 1C3', 'Canada', 
+   (51, 'MEREP', 'Mère Paillarde', 'Jean Fresnière', 'Marketing Assistant',
+    '43 rue St. Laurent', 'Montréal', 'Québec', 'H1J 1C3', 'Canada',
     '(514) 555-8054', '(514) 555-8055');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (52, 'MORGK', 'Morgenstern Gesundkost', 'Alexander Feuer', 'Marketing Assistant', 
+   (52, 'MORGK', 'Morgenstern Gesundkost', 'Alexander Feuer', 'Marketing Assistant',
     'Heerstr. 22', 'Leipzig', '04179', 'Germany', '0342-023176');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (53, 'NORTS', 'North/South', 'Simon Crowther', 'Sales Associate', 
+   (53, 'NORTS', 'North/South', 'Simon Crowther', 'Sales Associate',
     'South House
-300 Queensbridge', 'London', 'SW7 1RZ', 'UK', 
+300 Queensbridge', 'London', 'SW7 1RZ', 'UK',
     '(171) 555-7733', '(171) 555-2530');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (54, 'OCEAN', 'Océano Atlántico Ltda.', 'Yvonne Moncada', 'Sales Agent', 
+   (54, 'OCEAN', 'Océano Atlántico Ltda.', 'Yvonne Moncada', 'Sales Agent',
     'Ing. Gustavo Moncada 8585
-Piso 20-A', 'Buenos Aires', '1010', 'Argentina', 
+Piso 20-A', 'Buenos Aires', '1010', 'Argentina',
     '(1) 135-5333', '(1) 135-5535');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (55, 'OLDWO', 'Old World Delicatessen', 'Rene Phillips', 'Sales Representative', 
-    '2743 Bering St.', 'Anchorage', 'AK', '99508', 'USA', 
+   (55, 'OLDWO', 'Old World Delicatessen', 'Rene Phillips', 'Sales Representative',
+    '2743 Bering St.', 'Anchorage', 'AK', '99508', 'USA',
     '(907) 555-7584', '(907) 555-2880');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (56, 'OTTIK', 'Ottilies Käseladen', 'Henriette Pfalzheim', 'Owner', 
-    'Mehrheimerstr. 369', 'Köln', '50739', 'Germany', 
+   (56, 'OTTIK', 'Ottilies Käseladen', 'Henriette Pfalzheim', 'Owner',
+    'Mehrheimerstr. 369', 'Köln', '50739', 'Germany',
     '0221-0644327', '0221-0765721');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (57, 'PARIS', 'Paris spécialités', 'Marie Bertrand', 'Owner', 
-    '265, boulevard Charonne', 'Paris', '75012', 'France', 
+   (57, 'PARIS', 'Paris spécialités', 'Marie Bertrand', 'Owner',
+    '265, boulevard Charonne', 'Paris', '75012', 'France',
     '(1) 42.34.22.66', '(1) 42.34.22.77');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (58, 'PERIC', 'Pericles Comidas clásicas', 'Guillermo Fernández', 'Sales Representative', 
-    'Calle Dr. Jorge Cash 321', 'México D.F.', '05033', 'Mexico', 
+   (58, 'PERIC', 'Pericles Comidas clásicas', 'Guillermo Fernández', 'Sales Representative',
+    'Calle Dr. Jorge Cash 321', 'México D.F.', '05033', 'Mexico',
     '(5) 552-3745', '(5) 545-3745');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (59, 'PICCO', 'Piccolo und mehr', 'Georg Pipps', 'Sales Manager', 
-    'Geislweg 14', 'Salzburg', '5020', 'Austria', 
+   (59, 'PICCO', 'Piccolo und mehr', 'Georg Pipps', 'Sales Manager',
+    'Geislweg 14', 'Salzburg', '5020', 'Austria',
     '6562-9722', '6562-9723');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (60, 'PRINI', 'Princesa Isabel Vinhos', 'Isabel de Castro', 'Sales Representative', 
+   (60, 'PRINI', 'Princesa Isabel Vinhos', 'Isabel de Castro', 'Sales Representative',
     'Estrada da saúde n. 58', 'Lisboa', '1756', 'Portugal', '(1) 356-5634');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (61, 'QUEDE', 'Que Delícia', 'Bernardo Batista', 'Accounting Manager', 
-    'Rua da Panificadora, 12', 'Rio de Janeiro', 'RJ', '02389-673', 'Brazil', 
+   (61, 'QUEDE', 'Que Delícia', 'Bernardo Batista', 'Accounting Manager',
+    'Rua da Panificadora, 12', 'Rio de Janeiro', 'RJ', '02389-673', 'Brazil',
     '(21) 555-4252', '(21) 555-4545');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (62, 'QUEEN', 'Queen Cozinha', 'Lúcia Carvalho', 'Marketing Assistant', 
-    'Alameda dos Canàrios, 891', 'São Paulo', 'SP', '05487-020', 'Brazil', 
+   (62, 'QUEEN', 'Queen Cozinha', 'Lúcia Carvalho', 'Marketing Assistant',
+    'Alameda dos Canàrios, 891', 'São Paulo', 'SP', '05487-020', 'Brazil',
     '(11) 555-1189');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (63, 'QUICK', 'QUICK-Stop', 'Horst Kloss', 'Accounting Manager', 
+   (63, 'QUICK', 'QUICK-Stop', 'Horst Kloss', 'Accounting Manager',
     'Taucherstraße 10', 'Cunewalde', '01307', 'Germany', '0372-035188');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (64, 'RANCH', 'Rancho grande', 'Sergio Gutiérrez', 'Sales Representative', 
-    'Av. del Libertador 900', 'Buenos Aires', '1010', 'Argentina', 
+   (64, 'RANCH', 'Rancho grande', 'Sergio Gutiérrez', 'Sales Representative',
+    'Av. del Libertador 900', 'Buenos Aires', '1010', 'Argentina',
     '(1) 123-5555', '(1) 123-5556');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (65, 'RATTC', 'Rattlesnake Canyon Grocery', 'Paula Wilson', 'Assistant Sales Representative', 
-    '2817 Milton Dr.', 'Albuquerque', 'NM', '87110', 'USA', 
+   (65, 'RATTC', 'Rattlesnake Canyon Grocery', 'Paula Wilson', 'Assistant Sales Representative',
+    '2817 Milton Dr.', 'Albuquerque', 'NM', '87110', 'USA',
     '(505) 555-5939', '(505) 555-3620');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (66, 'REGGC', 'Reggiani Caseifici', 'Maurizio Moroni', 'Sales Associate', 
-    'Strada Provinciale 124', 'Reggio Emilia', '42100', 'Italy', 
+   (66, 'REGGC', 'Reggiani Caseifici', 'Maurizio Moroni', 'Sales Associate',
+    'Strada Provinciale 124', 'Reggio Emilia', '42100', 'Italy',
     '0522-556721', '0522-556722');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (67, 'RICAR', 'Ricardo Adocicados', 'Janete Limeira', 'Assistant Sales Agent', 
-    'Av. Copacabana, 267', 'Rio de Janeiro', 'RJ', '02389-890', 'Brazil', 
+   (67, 'RICAR', 'Ricardo Adocicados', 'Janete Limeira', 'Assistant Sales Agent',
+    'Av. Copacabana, 267', 'Rio de Janeiro', 'RJ', '02389-890', 'Brazil',
     '(21) 555-3412');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (68, 'RICSU', 'Richter Supermarkt', 'Michael Holz', 'Sales Manager', 
+   (68, 'RICSU', 'Richter Supermarkt', 'Michael Holz', 'Sales Manager',
     'Grenzacherweg 237', 'Genève', '1203', 'Switzerland', '0897-034214');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (69, 'ROMEY', 'Romero y tomillo', 'Alejandra Camino', 'Accounting Manager', 
-    'Gran Vía, 1', 'Madrid', '28001', 'Spain', 
+   (69, 'ROMEY', 'Romero y tomillo', 'Alejandra Camino', 'Accounting Manager',
+    'Gran Vía, 1', 'Madrid', '28001', 'Spain',
     '(91) 745 6200', '(91) 745 6210');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (70, 'SANTG', 'Santé Gourmet', 'Jonas Bergulfsen', 'Owner', 
-    'Erling Skakkes gate 78', 'Stavern', '4110', 'Norway', 
+   (70, 'SANTG', 'Santé Gourmet', 'Jonas Bergulfsen', 'Owner',
+    'Erling Skakkes gate 78', 'Stavern', '4110', 'Norway',
     '07-98 92 35', '07-98 92 47');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (71, 'SAVEA', 'Save-a-lot Markets', 'Jose Pavarotti', 'Sales Representative', 
-    '187 Suffolk Ln.', 'Boise', 'ID', '83720', 'USA', 
+   (71, 'SAVEA', 'Save-a-lot Markets', 'Jose Pavarotti', 'Sales Representative',
+    '187 Suffolk Ln.', 'Boise', 'ID', '83720', 'USA',
     '(208) 555-8097');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (72, 'SEVES', 'Seven Seas Imports', 'Hari Kumar', 'Sales Manager', 
-    '90 Wadhurst Rd.', 'London', 'OX15 4NB', 'UK', 
+   (72, 'SEVES', 'Seven Seas Imports', 'Hari Kumar', 'Sales Manager',
+    '90 Wadhurst Rd.', 'London', 'OX15 4NB', 'UK',
     '(171) 555-1717', '(171) 555-5646');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (73, 'SIMOB', 'Simons bistro', 'Jytte Petersen', 'Owner', 
-    'Vinbæltet 34', 'København', '1734', 'Denmark', 
+   (73, 'SIMOB', 'Simons bistro', 'Jytte Petersen', 'Owner',
+    'Vinbæltet 34', 'København', '1734', 'Denmark',
     '31 12 34 56', '31 13 35 57');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (74, 'SPECD', 'Spécialités du monde', 'Dominique Perrier', 'Marketing Manager', 
-    '25, rue Lauriston', 'Paris', '75016', 'France', 
+   (74, 'SPECD', 'Spécialités du monde', 'Dominique Perrier', 'Marketing Manager',
+    '25, rue Lauriston', 'Paris', '75016', 'France',
     '(1) 47.55.60.10', '(1) 47.55.60.20');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (75, 'SPLIR', 'Split Rail Beer & Ale', 'Art Braunschweiger', 'Sales Manager', 
-    'P.O. Box 555', 'Lander', 'WY', '82520', 'USA', 
+   (75, 'SPLIR', 'Split Rail Beer & Ale', 'Art Braunschweiger', 'Sales Manager',
+    'P.O. Box 555', 'Lander', 'WY', '82520', 'USA',
     '(307) 555-4680', '(307) 555-6525');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (76, 'SUPRD', 'Suprêmes délices', 'Pascale Cartrain', 'Accounting Manager', 
-    'Boulevard Tirou, 255', 'Charleroi', 'B-6000', 'Belgium', 
+   (76, 'SUPRD', 'Suprêmes délices', 'Pascale Cartrain', 'Accounting Manager',
+    'Boulevard Tirou, 255', 'Charleroi', 'B-6000', 'Belgium',
     '(071) 23 67 22 20', '(071) 23 67 22 21');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (77, 'THEBI', 'The Big Cheese', 'Liz Nixon', 'Marketing Manager', 
+   (77, 'THEBI', 'The Big Cheese', 'Liz Nixon', 'Marketing Manager',
     '89 Jefferson Way
-Suite 2', 'Portland', 'OR', '97201', 'USA', 
+Suite 2', 'Portland', 'OR', '97201', 'USA',
     '(503) 555-3612');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (78, 'THECR', 'The Cracker Box', 'Liu Wong', 'Marketing Assistant', 
-    '55 Grizzly Peak Rd.', 'Butte', 'MT', '59801', 'USA', 
+   (78, 'THECR', 'The Cracker Box', 'Liu Wong', 'Marketing Assistant',
+    '55 Grizzly Peak Rd.', 'Butte', 'MT', '59801', 'USA',
     '(406) 555-5834', '(406) 555-8083');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (79, 'TOMSP', 'Toms Spezialitäten', 'Karin Josephs', 'Marketing Manager', 
-    'Luisenstr. 48', 'Münster', '44087', 'Germany', 
+   (79, 'TOMSP', 'Toms Spezialitäten', 'Karin Josephs', 'Marketing Manager',
+    'Luisenstr. 48', 'Münster', '44087', 'Germany',
     '0251-031259', '0251-035695');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (80, 'TORTU', 'Tortuga Restaurante', 'Miguel Angel Paolino', 'Owner', 
+   (80, 'TORTU', 'Tortuga Restaurante', 'Miguel Angel Paolino', 'Owner',
     'Avda. Azteca 123', 'México D.F.', '05033', 'Mexico', '(5) 555-2933');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (81, 'TRADH', 'Tradição Hipermercados', 'Anabela Domingues', 'Sales Representative', 
-    'Av. Inês de Castro, 414', 'São Paulo', 'SP', '05634-030', 'Brazil', 
+   (81, 'TRADH', 'Tradição Hipermercados', 'Anabela Domingues', 'Sales Representative',
+    'Av. Inês de Castro, 414', 'São Paulo', 'SP', '05634-030', 'Brazil',
     '(11) 555-2167', '(11) 555-2168');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (82, 'TRAIH', 'Trail''s Head Gourmet Provisioners', 'Helvetius Nagy', 'Sales Associate', 
-    '722 DaVinci Blvd.', 'Kirkland', 'WA', '98034', 'USA', 
+   (82, 'TRAIH', 'Trail''s Head Gourmet Provisioners', 'Helvetius Nagy', 'Sales Associate',
+    '722 DaVinci Blvd.', 'Kirkland', 'WA', '98034', 'USA',
     '(206) 555-8257', '(206) 555-2174');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (83, 'VAFFE', 'Vaffeljernet', 'Palle Ibsen', 'Sales Manager', 
-    'Smagsløget 45', 'Århus', '8200', 'Denmark', 
+   (83, 'VAFFE', 'Vaffeljernet', 'Palle Ibsen', 'Sales Manager',
+    'Smagsløget 45', 'Århus', '8200', 'Denmark',
     '86 21 32 43', '86 22 33 44');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (84, 'VICTE', 'Victuailles en stock', 'Mary Saveley', 'Sales Agent', 
-    '2, rue du Commerce', 'Lyon', '69004', 'France', 
+   (84, 'VICTE', 'Victuailles en stock', 'Mary Saveley', 'Sales Agent',
+    '2, rue du Commerce', 'Lyon', '69004', 'France',
     '78.32.54.86', '78.32.54.87');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (85, 'VINET', 'Vins et alcools Chevalier', 'Paul Henriot', 'Accounting Manager', 
-    '59 rue de l''Abbaye', 'Reims', '51100', 'France', 
+   (85, 'VINET', 'Vins et alcools Chevalier', 'Paul Henriot', 'Accounting Manager',
+    '59 rue de l''Abbaye', 'Reims', '51100', 'France',
     '26.47.15.10', '26.47.15.11');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (86, 'WANDK', 'Die Wandernde Kuh', 'Rita Müller', 'Sales Representative', 
-    'Adenauerallee 900', 'Stuttgart', '70563', 'Germany', 
+   (86, 'WANDK', 'Die Wandernde Kuh', 'Rita Müller', 'Sales Representative',
+    'Adenauerallee 900', 'Stuttgart', '70563', 'Germany',
     '0711-020361', '0711-035428');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (87, 'WARTH', 'Wartian Herkku', 'Pirkko Koskitalo', 'Accounting Manager', 
-    'Torikatu 38', 'Oulu', '90110', 'Finland', 
+   (87, 'WARTH', 'Wartian Herkku', 'Pirkko Koskitalo', 'Accounting Manager',
+    'Torikatu 38', 'Oulu', '90110', 'Finland',
     '981-443655', '981-443655');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE)
  Values
-   (88, 'WELLI', 'Wellington Importadora', 'Paula Parente', 'Sales Manager', 
-    'Rua do Mercado, 12', 'Resende', 'SP', '08737-363', 'Brazil', 
+   (88, 'WELLI', 'Wellington Importadora', 'Paula Parente', 'Sales Manager',
+    'Rua do Mercado, 12', 'Resende', 'SP', '08737-363', 'Brazil',
     '(14) 555-8122');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, REGION, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (89, 'WHITC', 'White Clover Markets', 'Karl Jablonski', 'Owner', 
+   (89, 'WHITC', 'White Clover Markets', 'Karl Jablonski', 'Owner',
     '305 - 14th Ave. S.
-Suite 3B', 'Seattle', 'WA', '98128', 'USA', 
+Suite 3B', 'Seattle', 'WA', '98128', 'USA',
     '(206) 555-4112', '(206) 555-4115');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (90, 'WILMK', 'Wilman Kala', 'Matti Karttunen', 'Owner/Marketing Assistant', 
-    'Keskuskatu 45', 'Helsinki', '21240', 'Finland', 
+   (90, 'WILMK', 'Wilman Kala', 'Matti Karttunen', 'Owner/Marketing Assistant',
+    'Keskuskatu 45', 'Helsinki', '21240', 'Finland',
     '90-224 8858', '90-224 8858');
 Insert into CUSTOMERS
    (CUSTOMER_ID, CUSTOMER_CODE, COMPANY_NAME, CONTACT_NAME, CONTACT_TITLE, ADDRESS, CITY, POSTAL_CODE, COUNTRY, PHONE, FAX)
  Values
-   (91, 'WOLZA', 'Wolski  Zajazd', 'Zbyszek Piestrzeniewicz', 'Owner', 
-    'ul. Filtrowa 68', 'Warszawa', '01-012', 'Poland', 
+   (91, 'WOLZA', 'Wolski  Zajazd', 'Zbyszek Piestrzeniewicz', 'Owner',
+    'ul. Filtrowa 68', 'Warszawa', '01-012', 'Poland',
     '(26) 642-7012', '(26) 642-7012');
 COMMIT;
 
@@ -675,7 +675,7 @@ CREATE INDEX IDX_EMPLOYEES_POSTAL_CODE ON EMPLOYEES(POSTAL_CODE);
 CREATE OR REPLACE TRIGGER TRG_EMP_BIRTHDATE
 BEFORE INSERT OR UPDATE
 OF BIRTHDATE
-ON EMPLOYEES 
+ON EMPLOYEES
 REFERENCING NEW AS NEW OLD AS OLD
 FOR EACH ROW
 begin
@@ -761,7 +761,7 @@ CREATE TABLE SUPPLIERS
     PHONE VARCHAR2(24 BYTE),
     FAX VARCHAR2(24 BYTE),
     HOME_PAGE VARCHAR2(500 BYTE),
-    CONSTRAINT PK_SUPPLIERS PRIMARY KEY (SUPPLIER_ID)  
+    CONSTRAINT PK_SUPPLIERS PRIMARY KEY (SUPPLIER_ID)
 );
 
 CREATE INDEX IDX_SUPPLIERS_COMPANY_NAME ON SUPPLIERS(COMPANY_NAME);
@@ -932,9 +932,9 @@ CREATE TABLE PRODUCTS
     DISCONTINUED CHAR(1 BYTE) DEFAULT 'N' NOT NULL CONSTRAINT CK_PRODUCTS_DISCONTINUED CHECK (Discontinued in ('Y','N')),
     CONSTRAINT PK_PRODUCTS PRIMARY KEY (PRODUCT_ID),
     CONSTRAINT FK_CATEGORY_ID FOREIGN KEY (CATEGORY_ID) REFERENCES CATEGORIES(CATEGORY_ID),
-    CONSTRAINT FK_SUPPLIER_ID FOREIGN KEY (SUPPLIER_ID) REFERENCES SUPPLIERS(SUPPLIER_ID)  
+    CONSTRAINT FK_SUPPLIER_ID FOREIGN KEY (SUPPLIER_ID) REFERENCES SUPPLIERS(SUPPLIER_ID)
 );
-  
+
 CREATE INDEX IDX_PRODUCTS_CATEGORY_ID ON PRODUCTS(CATEGORY_ID);
 
 CREATE INDEX IDX_PRODUCTS_SUPPLIER_ID ON PRODUCTS(SUPPLIER_ID);
@@ -947,7 +947,7 @@ CREATE SEQUENCE SEQ_NW_PRODUCTS
     NOCYCLE
     NOCACHE
     NOORDER;
-  
+
 COMMENT ON COLUMN PRODUCTS.PRODUCT_ID IS 'Number automatically assigned to new product.';
 
 COMMENT ON COLUMN PRODUCTS.SUPPLIER_ID IS 'Same entry as in Suppliers table.';
@@ -964,387 +964,387 @@ SET DEFINE OFF;
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (1, 'Chai', 1, 1, '10 boxes x 20 bags', 
+   (1, 'Chai', 1, 1, '10 boxes x 20 bags',
     18, 39, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (2, 'Chang', 1, 1, '24 - 12 oz bottles', 
+   (2, 'Chang', 1, 1, '24 - 12 oz bottles',
     19, 17, 40, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles', 
+   (3, 'Aniseed Syrup', 1, 2, '12 - 550 ml bottles',
     10, 13, 70, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (4, 'Chef Anton''s Cajun Seasoning', 2, 2, '48 - 6 oz jars', 
+   (4, 'Chef Anton''s Cajun Seasoning', 2, 2, '48 - 6 oz jars',
     22, 53, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (5, 'Chef Anton''s Gumbo Mix', 2, 2, '36 boxes', 
+   (5, 'Chef Anton''s Gumbo Mix', 2, 2, '36 boxes',
     21.35, 0, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (6, 'Grandma''s Boysenberry Spread', 3, 2, '12 - 8 oz jars', 
+   (6, 'Grandma''s Boysenberry Spread', 3, 2, '12 - 8 oz jars',
     25, 120, 0, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (7, 'Uncle Bob''s Organic Dried Pears', 3, 7, '12 - 1 lb pkgs.', 
+   (7, 'Uncle Bob''s Organic Dried Pears', 3, 7, '12 - 1 lb pkgs.',
     30, 15, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (8, 'Northwoods Cranberry Sauce', 3, 2, '12 - 12 oz jars', 
+   (8, 'Northwoods Cranberry Sauce', 3, 2, '12 - 12 oz jars',
     40, 6, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (9, 'Mishi Kobe Niku', 4, 6, '18 - 500 g pkgs.', 
+   (9, 'Mishi Kobe Niku', 4, 6, '18 - 500 g pkgs.',
     97, 29, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (10, 'Ikura', 4, 8, '12 - 200 ml jars', 
+   (10, 'Ikura', 4, 8, '12 - 200 ml jars',
     31, 31, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (11, 'Queso Cabrales', 5, 4, '1 kg pkg.', 
+   (11, 'Queso Cabrales', 5, 4, '1 kg pkg.',
     21, 22, 30, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (12, 'Queso Manchego La Pastora', 5, 4, '10 - 500 g pkgs.', 
+   (12, 'Queso Manchego La Pastora', 5, 4, '10 - 500 g pkgs.',
     38, 86, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (13, 'Konbu', 6, 8, '2 kg box', 
+   (13, 'Konbu', 6, 8, '2 kg box',
     6, 24, 0, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (14, 'Tofu', 6, 7, '40 - 100 g pkgs.', 
+   (14, 'Tofu', 6, 7, '40 - 100 g pkgs.',
     23.25, 35, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (15, 'Genen Shouyu', 6, 2, '24 - 250 ml bottles', 
+   (15, 'Genen Shouyu', 6, 2, '24 - 250 ml bottles',
     15.5, 39, 0, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (16, 'Pavlova', 7, 3, '32 - 500 g boxes', 
+   (16, 'Pavlova', 7, 3, '32 - 500 g boxes',
     17.45, 29, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (17, 'Alice Mutton', 7, 6, '20 - 1 kg tins', 
+   (17, 'Alice Mutton', 7, 6, '20 - 1 kg tins',
     39, 0, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (18, 'Carnarvon Tigers', 7, 8, '16 kg pkg.', 
+   (18, 'Carnarvon Tigers', 7, 8, '16 kg pkg.',
     62.5, 42, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (19, 'Teatime Chocolate Biscuits', 8, 3, '10 boxes x 12 pieces', 
+   (19, 'Teatime Chocolate Biscuits', 8, 3, '10 boxes x 12 pieces',
     9.2, 25, 0, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (20, 'Sir Rodney''s Marmalade', 8, 3, '30 gift boxes', 
+   (20, 'Sir Rodney''s Marmalade', 8, 3, '30 gift boxes',
     81, 40, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (21, 'Sir Rodney''s Scones', 8, 3, '24 pkgs. x 4 pieces', 
+   (21, 'Sir Rodney''s Scones', 8, 3, '24 pkgs. x 4 pieces',
     10, 3, 40, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (22, 'Gustaf''s Knäckebröd', 9, 5, '24 - 500 g pkgs.', 
+   (22, 'Gustaf''s Knäckebröd', 9, 5, '24 - 500 g pkgs.',
     21, 104, 0, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (23, 'Tunnbröd', 9, 5, '12 - 250 g pkgs.', 
+   (23, 'Tunnbröd', 9, 5, '12 - 250 g pkgs.',
     9, 61, 0, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (24, 'Guaraná Fantástica', 10, 1, '12 - 355 ml cans', 
+   (24, 'Guaraná Fantástica', 10, 1, '12 - 355 ml cans',
     4.5, 20, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (25, 'NuNuCa Nuß-Nougat-Creme', 11, 3, '20 - 450 g glasses', 
+   (25, 'NuNuCa Nuß-Nougat-Creme', 11, 3, '20 - 450 g glasses',
     14, 76, 0, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (26, 'Gumbär Gummibärchen', 11, 3, '100 - 250 g bags', 
+   (26, 'Gumbär Gummibärchen', 11, 3, '100 - 250 g bags',
     31.23, 15, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (27, 'Schoggi Schokolade', 11, 3, '100 - 100 g pieces', 
+   (27, 'Schoggi Schokolade', 11, 3, '100 - 100 g pieces',
     43.9, 49, 0, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (28, 'Rössle Sauerkraut', 12, 7, '25 - 825 g cans', 
+   (28, 'Rössle Sauerkraut', 12, 7, '25 - 825 g cans',
     45.6, 26, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (29, 'Thüringer Rostbratwurst', 12, 6, '50 bags x 30 sausgs.', 
+   (29, 'Thüringer Rostbratwurst', 12, 6, '50 bags x 30 sausgs.',
     123.79, 0, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (30, 'Nord-Ost Matjeshering', 13, 8, '10 - 200 g glasses', 
+   (30, 'Nord-Ost Matjeshering', 13, 8, '10 - 200 g glasses',
     25.89, 10, 0, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (31, 'Gorgonzola Telino', 14, 4, '12 - 100 g pkgs', 
+   (31, 'Gorgonzola Telino', 14, 4, '12 - 100 g pkgs',
     12.5, 0, 70, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (32, 'Mascarpone Fabioli', 14, 4, '24 - 200 g pkgs.', 
+   (32, 'Mascarpone Fabioli', 14, 4, '24 - 200 g pkgs.',
     32, 9, 40, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (33, 'Geitost', 15, 4, '500 g', 
+   (33, 'Geitost', 15, 4, '500 g',
     2.5, 112, 0, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (34, 'Sasquatch Ale', 16, 1, '24 - 12 oz bottles', 
+   (34, 'Sasquatch Ale', 16, 1, '24 - 12 oz bottles',
     14, 111, 0, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (35, 'Steeleye Stout', 16, 1, '24 - 12 oz bottles', 
+   (35, 'Steeleye Stout', 16, 1, '24 - 12 oz bottles',
     18, 20, 0, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (36, 'Inlagd Sill', 17, 8, '24 - 250 g  jars', 
+   (36, 'Inlagd Sill', 17, 8, '24 - 250 g  jars',
     19, 112, 0, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (37, 'Gravad lax', 17, 8, '12 - 500 g pkgs.', 
+   (37, 'Gravad lax', 17, 8, '12 - 500 g pkgs.',
     26, 11, 50, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (38, 'Côte de Blaye', 18, 1, '12 - 75 cl bottles', 
+   (38, 'Côte de Blaye', 18, 1, '12 - 75 cl bottles',
     263.5, 17, 0, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (39, 'Chartreuse verte', 18, 1, '750 cc per bottle', 
+   (39, 'Chartreuse verte', 18, 1, '750 cc per bottle',
     18, 69, 0, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (40, 'Boston Crab Meat', 19, 8, '24 - 4 oz tins', 
+   (40, 'Boston Crab Meat', 19, 8, '24 - 4 oz tins',
     18.4, 123, 0, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (41, 'Jack''s New England Clam Chowder', 19, 8, '12 - 12 oz cans', 
+   (41, 'Jack''s New England Clam Chowder', 19, 8, '12 - 12 oz cans',
     9.65, 85, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (42, 'Singaporean Hokkien Fried Mee', 20, 5, '32 - 1 kg pkgs.', 
+   (42, 'Singaporean Hokkien Fried Mee', 20, 5, '32 - 1 kg pkgs.',
     14, 26, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (43, 'Ipoh Coffee', 20, 1, '16 - 500 g tins', 
+   (43, 'Ipoh Coffee', 20, 1, '16 - 500 g tins',
     46, 17, 10, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (44, 'Gula Malacca', 20, 2, '20 - 2 kg bags', 
+   (44, 'Gula Malacca', 20, 2, '20 - 2 kg bags',
     19.45, 27, 0, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (45, 'Røgede sild', 21, 8, '1k pkg.', 
+   (45, 'Røgede sild', 21, 8, '1k pkg.',
     9.5, 5, 70, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (46, 'Spegesild', 21, 8, '4 - 450 g glasses', 
+   (46, 'Spegesild', 21, 8, '4 - 450 g glasses',
     12, 95, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (47, 'Zaanse koeken', 22, 3, '10 - 4 oz boxes', 
+   (47, 'Zaanse koeken', 22, 3, '10 - 4 oz boxes',
     9.5, 36, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (48, 'Chocolade', 22, 3, '10 pkgs.', 
+   (48, 'Chocolade', 22, 3, '10 pkgs.',
     12.75, 15, 70, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (49, 'Maxilaku', 23, 3, '24 - 50 g pkgs.', 
+   (49, 'Maxilaku', 23, 3, '24 - 50 g pkgs.',
     20, 10, 60, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (50, 'Valkoinen suklaa', 23, 3, '12 - 100 g bars', 
+   (50, 'Valkoinen suklaa', 23, 3, '12 - 100 g bars',
     16.25, 65, 0, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (51, 'Manjimup Dried Apples', 24, 7, '50 - 300 g pkgs.', 
+   (51, 'Manjimup Dried Apples', 24, 7, '50 - 300 g pkgs.',
     53, 20, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (52, 'Filo Mix', 24, 5, '16 - 2 kg boxes', 
+   (52, 'Filo Mix', 24, 5, '16 - 2 kg boxes',
     7, 38, 0, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (53, 'Perth Pasties', 24, 6, '48 pieces', 
+   (53, 'Perth Pasties', 24, 6, '48 pieces',
     32.8, 0, 0, 0, 'Y');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (54, 'Tourtière', 25, 6, '16 pies', 
+   (54, 'Tourtière', 25, 6, '16 pies',
     7.45, 21, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (55, 'Pâté chinois', 25, 6, '24 boxes x 2 pies', 
+   (55, 'Pâté chinois', 25, 6, '24 boxes x 2 pies',
     24, 115, 0, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (56, 'Gnocchi di nonna Alice', 26, 5, '24 - 250 g pkgs.', 
+   (56, 'Gnocchi di nonna Alice', 26, 5, '24 - 250 g pkgs.',
     38, 21, 10, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (57, 'Ravioli Angelo', 26, 5, '24 - 250 g pkgs.', 
+   (57, 'Ravioli Angelo', 26, 5, '24 - 250 g pkgs.',
     19.5, 36, 0, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (58, 'Escargots de Bourgogne', 27, 8, '24 pieces', 
+   (58, 'Escargots de Bourgogne', 27, 8, '24 pieces',
     13.25, 62, 0, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (59, 'Raclette Courdavault', 28, 4, '5 kg pkg.', 
+   (59, 'Raclette Courdavault', 28, 4, '5 kg pkg.',
     55, 79, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (60, 'Camembert Pierrot', 28, 4, '15 - 300 g rounds', 
+   (60, 'Camembert Pierrot', 28, 4, '15 - 300 g rounds',
     34, 19, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (61, 'Sirop d''érable', 29, 2, '24 - 500 ml bottles', 
+   (61, 'Sirop d''érable', 29, 2, '24 - 500 ml bottles',
     28.5, 113, 0, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (62, 'Tarte au sucre', 29, 3, '48 pies', 
+   (62, 'Tarte au sucre', 29, 3, '48 pies',
     49.3, 17, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (63, 'Vegie-spread', 7, 2, '15 - 625 g jars', 
+   (63, 'Vegie-spread', 7, 2, '15 - 625 g jars',
     43.9, 24, 0, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (64, 'Wimmers gute Semmelknödel', 12, 5, '20 bags x 4 pieces', 
+   (64, 'Wimmers gute Semmelknödel', 12, 5, '20 bags x 4 pieces',
     33.25, 22, 80, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (65, 'Louisiana Fiery Hot Pepper Sauce', 2, 2, '32 - 8 oz bottles', 
+   (65, 'Louisiana Fiery Hot Pepper Sauce', 2, 2, '32 - 8 oz bottles',
     21.05, 76, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (66, 'Louisiana Hot Spiced Okra', 2, 2, '24 - 8 oz jars', 
+   (66, 'Louisiana Hot Spiced Okra', 2, 2, '24 - 8 oz jars',
     17, 4, 100, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (67, 'Laughing Lumberjack Lager', 16, 1, '24 - 12 oz bottles', 
+   (67, 'Laughing Lumberjack Lager', 16, 1, '24 - 12 oz bottles',
     14, 52, 0, 10, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (68, 'Scottish Longbreads', 8, 3, '10 boxes x 8 pieces', 
+   (68, 'Scottish Longbreads', 8, 3, '10 boxes x 8 pieces',
     12.5, 6, 10, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (69, 'Gudbrandsdalsost', 15, 4, '10 kg pkg.', 
+   (69, 'Gudbrandsdalsost', 15, 4, '10 kg pkg.',
     36, 26, 0, 15, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (70, 'Outback Lager', 7, 1, '24 - 355 ml bottles', 
+   (70, 'Outback Lager', 7, 1, '24 - 355 ml bottles',
     15, 15, 10, 30, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (71, 'Fløtemysost', 15, 4, '10 - 500 g pkgs.', 
+   (71, 'Fløtemysost', 15, 4, '10 - 500 g pkgs.',
     21.5, 26, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (72, 'Mozzarella di Giovanni', 14, 4, '24 - 200 g pkgs.', 
+   (72, 'Mozzarella di Giovanni', 14, 4, '24 - 200 g pkgs.',
     34.8, 14, 0, 0, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (73, 'Röd Kaviar', 17, 8, '24 - 150 g jars', 
+   (73, 'Röd Kaviar', 17, 8, '24 - 150 g jars',
     15, 101, 0, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (74, 'Longlife Tofu', 4, 7, '5 kg pkg.', 
+   (74, 'Longlife Tofu', 4, 7, '5 kg pkg.',
     10, 4, 20, 5, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (75, 'Rhönbräu Klosterbier', 12, 1, '24 - 0.5 l bottles', 
+   (75, 'Rhönbräu Klosterbier', 12, 1, '24 - 0.5 l bottles',
     7.75, 125, 0, 25, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (76, 'Lakkalikööri', 23, 1, '500 ml', 
+   (76, 'Lakkalikööri', 23, 1, '500 ml',
     18, 57, 0, 20, 'N');
 Insert into PRODUCTS
    (PRODUCT_ID, PRODUCT_NAME, SUPPLIER_ID, CATEGORY_ID, QUANTITY_PER_UNIT, UNIT_PRICE, UNITS_IN_STOCK, UNITS_ON_ORDER, REORDER_LEVEL, DISCONTINUED)
  Values
-   (77, 'Original Frankfurter grüne Soße', 12, 2, '12 boxes', 
+   (77, 'Original Frankfurter grüne Soße', 12, 2, '12 boxes',
     13, 32, 0, 15, 'N');
 
 COMMIT;
@@ -1367,9 +1367,9 @@ CREATE TABLE ORDERS
     SHIP_POSTAL_CODE VARCHAR2(10 BYTE),
     SHIP_COUNTRY VARCHAR2(15 BYTE),
     CONSTRAINT PK_ORDERS PRIMARY KEY (ORDER_ID),
-    CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID),  
-    CONSTRAINT FK_EMPLOYEE_ID FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEES(EMPLOYEE_ID),  
-    CONSTRAINT FK_SHIPPER_ID FOREIGN KEY (SHIP_VIA) REFERENCES SHIPPERS(SHIPPER_ID)  
+    CONSTRAINT FK_CUSTOMER_ID FOREIGN KEY (CUSTOMER_ID) REFERENCES CUSTOMERS(CUSTOMER_ID),
+    CONSTRAINT FK_EMPLOYEE_ID FOREIGN KEY (EMPLOYEE_ID) REFERENCES EMPLOYEES(EMPLOYEE_ID),
+    CONSTRAINT FK_SHIPPER_ID FOREIGN KEY (SHIP_VIA) REFERENCES SHIPPERS(SHIPPER_ID)
 );
 
 CREATE INDEX IDX_ORDERS_CUSTOMER_ID ON ORDERS(CUSTOMER_ID);
@@ -1411,5030 +1411,5030 @@ SET DEFINE OFF;
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10440, 71, 4, TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 86.53, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10440, 71, 4, TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 86.53, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10441, 55, 3, TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 73.02, 'Old World Delicatessen', '2743 Bering St.', 
+   (10441, 55, 3, TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 73.02, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10442, 20, 3, TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 47.94, 'Ernst Handel', 'Kirchgasse 6', 
+   (10442, 20, 3, TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 47.94, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10443, 66, 8, TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 13.95, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10443, 66, 8, TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 13.95, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10444, 5, 3, TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.5, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10444, 5, 3, TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.5, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10445, 5, 3, TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 9.3, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10445, 5, 3, TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 9.3, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10446, 79, 6, TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 14.68, 'Toms Spezialitäten', 'Luisenstr. 48', 
+   (10446, 79, 6, TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 14.68, 'Toms Spezialitäten', 'Luisenstr. 48',
     'Münster', '44087', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10447, 67, 4, TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 68.66, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10447, 67, 4, TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 68.66, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10448, 64, 4, TO_DATE('02/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 38.82, 'Rancho grande', 'Av. del Libertador 900', 
+   (10448, 64, 4, TO_DATE('02/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 38.82, 'Rancho grande', 'Av. del Libertador 900',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10449, 7, 3, TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.3, 'Blondel père et fils', '24, place Kléber', 
+   (10449, 7, 3, TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.3, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10450, 84, 8, TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.23, 'Victuailles en stock', '2, rue du Commerce', 
+   (10450, 84, 8, TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.23, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10451, 63, 4, TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 189.09, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10451, 63, 4, TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 189.09, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10452, 71, 8, TO_DATE('02/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 140.26, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10452, 71, 8, TO_DATE('02/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 140.26, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10453, 4, 1, TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10453, 4, 1, TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('02/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.36, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10454, 41, 4, TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.74, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10454, 41, 4, TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.74, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10455, 87, 8, TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 180.45, 'Wartian Herkku', 'Torikatu 38', 
+   (10455, 87, 8, TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 180.45, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10456, 39, 8, TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.12, 'Königlich Essen', 'Maubelstr. 90', 
+   (10456, 39, 8, TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.12, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10457, 39, 2, TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.57, 'Königlich Essen', 'Maubelstr. 90', 
+   (10457, 39, 2, TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.57, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10458, 76, 7, TO_DATE('02/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 147.06, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10458, 76, 7, TO_DATE('02/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 147.06, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10459, 84, 4, TO_DATE('02/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.09, 'Victuailles en stock', '2, rue du Commerce', 
+   (10459, 84, 4, TO_DATE('02/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.09, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10460, 24, 8, TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.27, 'Folk och fä HB', 'Åkergatan 24', 
+   (10460, 24, 8, TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.27, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10461, 46, 1, TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 148.61, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10461, 46, 1, TO_DATE('02/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 148.61, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10462, 16, 2, TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10462, 16, 2, TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 6.17, 'Consolidated Holdings', 'Berkeley Gardens
-12  Brewery ', 
+12  Brewery ',
     'London', 'WX1 6LT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10463, 76, 5, TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 14.78, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10463, 76, 5, TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 14.78, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10464, 28, 4, TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 89, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10464, 28, 4, TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 89, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10465, 83, 1, TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 145.04, 'Vaffeljernet', 'Smagsløget 45', 
+   (10465, 83, 1, TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 145.04, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10466, 15, 4, TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.93, 'Comércio Mineiro', 'Av. dos Lusíadas, 23', 
+   (10466, 15, 4, TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.93, 'Comércio Mineiro', 'Av. dos Lusíadas, 23',
     'São Paulo', 'SP', '05432-043', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10467, 49, 8, TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.93, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10467, 49, 8, TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.93, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10468, 39, 3, TO_DATE('03/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 44.12, 'Königlich Essen', 'Maubelstr. 90', 
+   (10468, 39, 3, TO_DATE('03/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 44.12, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10469, 89, 1, TO_DATE('03/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 60.18, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10469, 89, 1, TO_DATE('03/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 60.18, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10470, 9, 4, TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.56, 'Bon app''', '12, rue des Bouchers', 
+   (10470, 9, 4, TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.56, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10471, 11, 2, TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 45.59, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10471, 11, 2, TO_DATE('03/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 45.59, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10472, 72, 8, TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.2, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10472, 72, 8, TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.2, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10473, 38, 1, TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10473, 38, 1, TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 16.37, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10474, 58, 5, TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 83.49, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321', 
+   (10474, 58, 5, TO_DATE('03/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 83.49, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10475, 76, 9, TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 68.52, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10475, 76, 9, TO_DATE('03/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 68.52, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10476, 35, 8, TO_DATE('03/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.41, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10476, 35, 8, TO_DATE('03/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.41, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10477, 60, 5, TO_DATE('03/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.02, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58', 
+   (10477, 60, 5, TO_DATE('03/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.02, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58',
     'Lisboa', '1756', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10478, 84, 2, TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.81, 'Victuailles en stock', '2, rue du Commerce', 
+   (10478, 84, 2, TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.81, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10479, 65, 3, TO_DATE('03/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 708.95, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10479, 65, 3, TO_DATE('03/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 708.95, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10480, 23, 6, TO_DATE('03/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.35, 'Folies gourmandes', '184, chaussée de Tournai', 
+   (10480, 23, 6, TO_DATE('03/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.35, 'Folies gourmandes', '184, chaussée de Tournai',
     'Lille', '59000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10481, 67, 8, TO_DATE('03/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.33, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10481, 67, 8, TO_DATE('03/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.33, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10482, 43, 1, TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.48, 'Lazy K Kountry Store', '12 Orchestra Terrace', 
+   (10482, 43, 1, TO_DATE('03/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.48, 'Lazy K Kountry Store', '12 Orchestra Terrace',
     'Walla Walla', 'WA', '99362', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10483, 89, 7, TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.28, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10483, 89, 7, TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.28, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10484, 11, 3, TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 6.88, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10484, 11, 3, TO_DATE('03/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 6.88, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10485, 47, 4, TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.45, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10485, 47, 4, TO_DATE('03/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.45, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10486, 35, 1, TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.53, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10486, 35, 1, TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.53, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10487, 62, 2, TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 71.07, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10487, 62, 2, TO_DATE('03/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 71.07, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10488, 25, 8, TO_DATE('03/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.93, 'Frankenversand', 'Berliner Platz 43', 
+   (10488, 25, 8, TO_DATE('03/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.93, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10489, 59, 6, TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 5.29, 'Piccolo und mehr', 'Geislweg 14', 
+   (10489, 59, 6, TO_DATE('03/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 5.29, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10490, 35, 7, TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 210.19, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10490, 35, 7, TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 210.19, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10491, 28, 8, TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 16.96, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10491, 28, 8, TO_DATE('03/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 16.96, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10492, 10, 3, TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 62.89, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10492, 10, 3, TO_DATE('04/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 62.89, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10493, 41, 4, TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.64, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10493, 41, 4, TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.64, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10494, 15, 4, TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 65.99, 'Comércio Mineiro', 'Av. dos Lusíadas, 23', 
+   (10494, 15, 4, TO_DATE('04/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 65.99, 'Comércio Mineiro', 'Av. dos Lusíadas, 23',
     'São Paulo', 'SP', '05432-043', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10495, 42, 3, TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.65, 'Laughing Bacchus Wine Cellars', '2319 Elm St.', 
+   (10495, 42, 3, TO_DATE('04/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.65, 'Laughing Bacchus Wine Cellars', '2319 Elm St.',
     'Vancouver', 'BC', 'V3F 2K1', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10496, 81, 7, TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 46.77, 'Tradição Hipermercados', 'Av. Inês de Castro, 414', 
+   (10496, 81, 7, TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 46.77, 'Tradição Hipermercados', 'Av. Inês de Castro, 414',
     'São Paulo', 'SP', '05634-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10497, 44, 7, TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 36.21, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10497, 44, 7, TO_DATE('04/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 36.21, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10498, 35, 8, TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.75, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10498, 35, 8, TO_DATE('04/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.75, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10499, 46, 4, TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 102.02, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10499, 46, 4, TO_DATE('04/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 102.02, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10500, 41, 6, TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 42.68, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10500, 41, 6, TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 42.68, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10501, 6, 9, TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 8.85, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (10501, 6, 9, TO_DATE('04/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 8.85, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10502, 58, 2, TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 69.32, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321', 
+   (10502, 58, 2, TO_DATE('04/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 69.32, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10503, 37, 6, TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 16.74, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10503, 37, 6, TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 16.74, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10504, 89, 4, TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 59.13, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10504, 89, 4, TO_DATE('04/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 59.13, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10505, 51, 3, TO_DATE('04/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.13, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10505, 51, 3, TO_DATE('04/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.13, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10506, 39, 9, TO_DATE('04/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 21.19, 'Königlich Essen', 'Maubelstr. 90', 
+   (10506, 39, 9, TO_DATE('04/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 21.19, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10507, 3, 7, TO_DATE('04/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.45, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10507, 3, 7, TO_DATE('04/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.45, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10508, 56, 1, TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.99, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10508, 56, 1, TO_DATE('04/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.99, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10509, 6, 4, TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.15, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (10509, 6, 4, TO_DATE('04/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.15, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10510, 71, 6, TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 367.63, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10510, 71, 6, TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 367.63, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10511, 9, 4, TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 350.64, 'Bon app''', '12, rue des Bouchers', 
+   (10511, 9, 4, TO_DATE('04/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 350.64, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10512, 21, 7, TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.53, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10512, 21, 7, TO_DATE('04/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.53, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10513, 86, 7, TO_DATE('04/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 105.65, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10513, 86, 7, TO_DATE('04/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 105.65, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10514, 20, 3, TO_DATE('04/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 789.95, 'Ernst Handel', 'Kirchgasse 6', 
+   (10514, 20, 3, TO_DATE('04/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 789.95, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10515, 63, 2, TO_DATE('04/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 204.47, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10515, 63, 2, TO_DATE('04/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 204.47, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10516, 37, 2, TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 62.78, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10516, 37, 2, TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 62.78, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10517, 53, 3, TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10517, 53, 3, TO_DATE('04/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.07, 'North/South', 'South House
-300 Queensbridge', 
+300 Queensbridge',
     'London', 'SW7 1RZ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10518, 80, 4, TO_DATE('04/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 218.15, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10518, 80, 4, TO_DATE('04/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 218.15, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10519, 14, 6, TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 91.76, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (10519, 14, 6, TO_DATE('04/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 91.76, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10520, 70, 7, TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 13.37, 'Santé Gourmet', 'Erling Skakkes gate 78', 
+   (10520, 70, 7, TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 13.37, 'Santé Gourmet', 'Erling Skakkes gate 78',
     'Stavern', '4110', 'Norway');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10521, 12, 8, TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.22, 'Cactus Comidas para llevar', 'Cerrito 333', 
+   (10521, 12, 8, TO_DATE('04/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.22, 'Cactus Comidas para llevar', 'Cerrito 333',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10522, 44, 4, TO_DATE('04/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.33, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10522, 44, 4, TO_DATE('04/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.33, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10523, 72, 7, TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 77.63, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10523, 72, 7, TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 77.63, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10524, 5, 1, TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 244.79, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10524, 5, 1, TO_DATE('05/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 244.79, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10525, 9, 1, TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.06, 'Bon app''', '12, rue des Bouchers', 
+   (10525, 9, 1, TO_DATE('05/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.06, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10526, 87, 4, TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.59, 'Wartian Herkku', 'Torikatu 38', 
+   (10526, 87, 4, TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.59, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10527, 63, 7, TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.9, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10527, 63, 7, TO_DATE('05/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.9, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10528, 32, 6, TO_DATE('05/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.35, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10528, 32, 6, TO_DATE('05/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.35, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10529, 50, 5, TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 66.69, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (10529, 50, 5, TO_DATE('05/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 66.69, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10530, 59, 3, TO_DATE('05/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 339.22, 'Piccolo und mehr', 'Geislweg 14', 
+   (10530, 59, 3, TO_DATE('05/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 339.22, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10531, 54, 7, TO_DATE('05/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10531, 54, 7, TO_DATE('05/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.12, 'Océano Atlántico Ltda.', 'Ing. Gustavo Moncada 8585
-Piso 20-A', 
+Piso 20-A',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10532, 19, 7, TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 74.46, 'Eastern Connection', '35 King George', 
+   (10532, 19, 7, TO_DATE('05/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 74.46, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10533, 24, 8, TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 188.04, 'Folk och fä HB', 'Åkergatan 24', 
+   (10533, 24, 8, TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 188.04, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10534, 44, 8, TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.94, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10534, 44, 8, TO_DATE('05/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.94, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10535, 3, 4, TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 15.64, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10535, 3, 4, TO_DATE('05/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 15.64, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10536, 44, 3, TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.88, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10536, 44, 3, TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.88, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10537, 68, 1, TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 78.85, 'Richter Supermarkt', 'Starenweg 5', 
+   (10537, 68, 1, TO_DATE('05/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 78.85, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10538, 11, 9, TO_DATE('05/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.87, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10538, 11, 9, TO_DATE('05/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.87, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10539, 11, 6, TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.36, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10539, 11, 6, TO_DATE('05/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.36, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10540, 63, 3, TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1007.64, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10540, 63, 3, TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1007.64, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10541, 34, 2, TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 68.65, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10541, 34, 2, TO_DATE('05/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 68.65, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10542, 39, 1, TO_DATE('05/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.95, 'Königlich Essen', 'Maubelstr. 90', 
+   (10542, 39, 1, TO_DATE('05/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.95, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10543, 46, 8, TO_DATE('05/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 48.17, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10543, 46, 8, TO_DATE('05/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 48.17, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10544, 48, 4, TO_DATE('05/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 24.91, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10544, 48, 4, TO_DATE('05/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 24.91, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10545, 43, 8, TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.92, 'Lazy K Kountry Store', '12 Orchestra Terrace', 
+   (10545, 43, 8, TO_DATE('05/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.92, 'Lazy K Kountry Store', '12 Orchestra Terrace',
     'Walla Walla', 'WA', '99362', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10546, 84, 1, TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 194.72, 'Victuailles en stock', '2, rue du Commerce', 
+   (10546, 84, 1, TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 194.72, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10547, 72, 3, TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 178.43, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10547, 72, 3, TO_DATE('05/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 178.43, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10548, 79, 3, TO_DATE('05/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.43, 'Toms Spezialitäten', 'Luisenstr. 48', 
+   (10548, 79, 3, TO_DATE('05/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.43, 'Toms Spezialitäten', 'Luisenstr. 48',
     'Münster', '44087', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10549, 63, 5, TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 171.24, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10549, 63, 5, TO_DATE('05/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 171.24, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10550, 30, 7, TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.32, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10550, 30, 7, TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.32, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10551, 28, 4, TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 72.95, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10551, 28, 4, TO_DATE('05/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 72.95, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10552, 35, 2, TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 83.22, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10552, 35, 2, TO_DATE('05/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 83.22, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10553, 87, 2, TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 149.49, 'Wartian Herkku', 'Torikatu 38', 
+   (10553, 87, 2, TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 149.49, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10554, 56, 4, TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 120.97, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10554, 56, 4, TO_DATE('05/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 120.97, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10555, 71, 6, TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 252.49, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10555, 71, 6, TO_DATE('06/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 252.49, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10556, 73, 2, TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 9.8, 'Simons bistro', 'Vinbæltet 34', 
+   (10556, 73, 2, TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 9.8, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10557, 44, 9, TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 96.72, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10557, 44, 9, TO_DATE('06/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 96.72, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10558, 4, 1, TO_DATE('06/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10558, 4, 1, TO_DATE('06/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 72.97, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10559, 7, 6, TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.05, 'Blondel père et fils', '24, place Kléber', 
+   (10559, 7, 6, TO_DATE('06/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.05, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10560, 25, 8, TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 36.65, 'Frankenversand', 'Berliner Platz 43', 
+   (10560, 25, 8, TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 36.65, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10248, 85, 5, TO_DATE('07/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.38, 'Vins et alcools Chevalier', '59 rue de l''Abbaye', 
+   (10248, 85, 5, TO_DATE('07/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.38, 'Vins et alcools Chevalier', '59 rue de l''Abbaye',
     'Reims', '51100', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10249, 79, 6, TO_DATE('07/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.61, 'Toms Spezialitäten', 'Luisenstr. 48', 
+   (10249, 79, 6, TO_DATE('07/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.61, 'Toms Spezialitäten', 'Luisenstr. 48',
     'Münster', '44087', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10250, 34, 4, TO_DATE('07/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 65.83, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10250, 34, 4, TO_DATE('07/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 65.83, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10251, 84, 3, TO_DATE('07/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.34, 'Victuailles en stock', '2, rue du Commerce', 
+   (10251, 84, 3, TO_DATE('07/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.34, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10252, 76, 4, TO_DATE('07/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 51.3, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10252, 76, 4, TO_DATE('07/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 51.3, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10253, 34, 3, TO_DATE('07/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.17, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10253, 34, 3, TO_DATE('07/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.17, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10254, 14, 5, TO_DATE('07/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22.98, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (10254, 14, 5, TO_DATE('07/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22.98, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10255, 68, 9, TO_DATE('07/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 148.33, 'Richter Supermarkt', 'Starenweg 5', 
+   (10255, 68, 9, TO_DATE('07/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 148.33, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10256, 88, 3, TO_DATE('07/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.97, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10256, 88, 3, TO_DATE('07/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.97, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10257, 35, 4, TO_DATE('07/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 81.91, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10257, 35, 4, TO_DATE('07/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 81.91, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10258, 20, 1, TO_DATE('07/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 140.51, 'Ernst Handel', 'Kirchgasse 6', 
+   (10258, 20, 1, TO_DATE('07/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 140.51, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10259, 13, 4, TO_DATE('07/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.25, 'Centro comercial Moctezuma', 'Sierras de Granada 9993', 
+   (10259, 13, 4, TO_DATE('07/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.25, 'Centro comercial Moctezuma', 'Sierras de Granada 9993',
     'México D.F.', '05022', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10260, 56, 4, TO_DATE('07/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.09, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10260, 56, 4, TO_DATE('07/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.09, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10261, 61, 4, TO_DATE('07/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.05, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10261, 61, 4, TO_DATE('07/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.05, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10262, 65, 8, TO_DATE('07/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 48.29, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10262, 65, 8, TO_DATE('07/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 48.29, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10263, 20, 9, TO_DATE('07/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 146.06, 'Ernst Handel', 'Kirchgasse 6', 
+   (10263, 20, 9, TO_DATE('07/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 146.06, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10264, 24, 6, TO_DATE('07/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.67, 'Folk och fä HB', 'Åkergatan 24', 
+   (10264, 24, 6, TO_DATE('07/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.67, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10265, 7, 2, TO_DATE('07/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.28, 'Blondel père et fils', '24, place Kléber', 
+   (10265, 7, 2, TO_DATE('07/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.28, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10266, 87, 3, TO_DATE('07/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 25.73, 'Wartian Herkku', 'Torikatu 38', 
+   (10266, 87, 3, TO_DATE('07/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 25.73, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10267, 25, 4, TO_DATE('07/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 208.58, 'Frankenversand', 'Berliner Platz 43', 
+   (10267, 25, 4, TO_DATE('07/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 208.58, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10268, 33, 8, TO_DATE('07/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 66.29, 'GROSELLA-Restaurante', '5ª Ave. Los Palos Grandes', 
+   (10268, 33, 8, TO_DATE('07/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 66.29, 'GROSELLA-Restaurante', '5ª Ave. Los Palos Grandes',
     'Caracas', 'DF', '1081', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10269, 89, 5, TO_DATE('07/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.56, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10269, 89, 5, TO_DATE('07/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.56, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10270, 87, 1, TO_DATE('08/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 136.54, 'Wartian Herkku', 'Torikatu 38', 
+   (10270, 87, 1, TO_DATE('08/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 136.54, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10271, 75, 6, TO_DATE('08/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.54, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10271, 75, 6, TO_DATE('08/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.54, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10272, 65, 6, TO_DATE('08/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 98.03, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10272, 65, 6, TO_DATE('08/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 98.03, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10273, 63, 3, TO_DATE('08/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 76.07, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10273, 63, 3, TO_DATE('08/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 76.07, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10274, 85, 6, TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 6.01, 'Vins et alcools Chevalier', '59 rue de l''Abbaye', 
+   (10274, 85, 6, TO_DATE('08/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 6.01, 'Vins et alcools Chevalier', '59 rue de l''Abbaye',
     'Reims', '51100', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10275, 49, 1, TO_DATE('08/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.93, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10275, 49, 1, TO_DATE('08/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.93, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10276, 80, 8, TO_DATE('08/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.84, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10276, 80, 8, TO_DATE('08/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.84, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10277, 52, 2, TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 125.77, 'Morgenstern Gesundkost', 'Heerstr. 22', 
+   (10277, 52, 2, TO_DATE('08/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 125.77, 'Morgenstern Gesundkost', 'Heerstr. 22',
     'Leipzig', '04179', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10278, 5, 8, TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 92.69, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10278, 5, 8, TO_DATE('08/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 92.69, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10279, 44, 8, TO_DATE('08/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.83, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10279, 44, 8, TO_DATE('08/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.83, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10280, 5, 2, TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.98, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10280, 5, 2, TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.98, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10281, 69, 4, TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.94, 'Romero y tomillo', 'Gran Vía, 1', 
+   (10281, 69, 4, TO_DATE('08/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.94, 'Romero y tomillo', 'Gran Vía, 1',
     'Madrid', '28001', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10282, 69, 4, TO_DATE('08/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.69, 'Romero y tomillo', 'Gran Vía, 1', 
+   (10282, 69, 4, TO_DATE('08/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.69, 'Romero y tomillo', 'Gran Vía, 1',
     'Madrid', '28001', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10283, 46, 3, TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.81, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10283, 46, 3, TO_DATE('08/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.81, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10284, 44, 4, TO_DATE('08/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 76.56, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10284, 44, 4, TO_DATE('08/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 76.56, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10285, 63, 1, TO_DATE('08/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 76.83, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10285, 63, 1, TO_DATE('08/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 76.83, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10286, 63, 8, TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 229.24, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10286, 63, 8, TO_DATE('08/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 229.24, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10287, 67, 8, TO_DATE('08/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.76, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10287, 67, 8, TO_DATE('08/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.76, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10288, 66, 4, TO_DATE('08/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.45, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10288, 66, 4, TO_DATE('08/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.45, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10289, 11, 7, TO_DATE('08/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 22.77, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10289, 11, 7, TO_DATE('08/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 22.77, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10290, 15, 8, TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 79.7, 'Comércio Mineiro', 'Av. dos Lusíadas, 23', 
+   (10290, 15, 8, TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 79.7, 'Comércio Mineiro', 'Av. dos Lusíadas, 23',
     'São Paulo', 'SP', '05432-043', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10291, 61, 6, TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 6.4, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10291, 61, 6, TO_DATE('08/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 6.4, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10292, 81, 1, TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.35, 'Tradição Hipermercados', 'Av. Inês de Castro, 414', 
+   (10292, 81, 1, TO_DATE('08/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.35, 'Tradição Hipermercados', 'Av. Inês de Castro, 414',
     'São Paulo', 'SP', '05634-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10293, 80, 1, TO_DATE('08/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 21.18, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10293, 80, 1, TO_DATE('08/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 21.18, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10294, 65, 4, TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 147.26, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10294, 65, 4, TO_DATE('08/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 147.26, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10295, 85, 2, TO_DATE('09/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.15, 'Vins et alcools Chevalier', '59 rue de l''Abbaye', 
+   (10295, 85, 2, TO_DATE('09/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.15, 'Vins et alcools Chevalier', '59 rue de l''Abbaye',
     'Reims', '51100', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10296, 46, 6, TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.12, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10296, 46, 6, TO_DATE('09/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.12, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10297, 7, 5, TO_DATE('09/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 5.74, 'Blondel père et fils', '24, place Kléber', 
+   (10297, 7, 5, TO_DATE('09/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 5.74, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10298, 37, 6, TO_DATE('09/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 168.22, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10298, 37, 6, TO_DATE('09/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 168.22, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10299, 67, 4, TO_DATE('09/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.76, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10299, 67, 4, TO_DATE('09/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.76, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10300, 49, 2, TO_DATE('09/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.68, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10300, 49, 2, TO_DATE('09/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.68, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10301, 86, 8, TO_DATE('09/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 45.08, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10301, 86, 8, TO_DATE('09/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 45.08, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10302, 76, 4, TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 6.27, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10302, 76, 4, TO_DATE('09/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 6.27, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10303, 30, 7, TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 107.83, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10303, 30, 7, TO_DATE('09/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 107.83, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10304, 80, 1, TO_DATE('09/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 63.79, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10304, 80, 1, TO_DATE('09/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 63.79, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10305, 55, 8, TO_DATE('09/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 257.62, 'Old World Delicatessen', '2743 Bering St.', 
+   (10305, 55, 8, TO_DATE('09/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 257.62, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10306, 69, 1, TO_DATE('09/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.56, 'Romero y tomillo', 'Gran Vía, 1', 
+   (10306, 69, 1, TO_DATE('09/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.56, 'Romero y tomillo', 'Gran Vía, 1',
     'Madrid', '28001', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10307, 48, 2, TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.56, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10307, 48, 2, TO_DATE('09/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.56, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10308, 2, 7, TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.61, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222', 
+   (10308, 2, 7, TO_DATE('09/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.61, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222',
     'México D.F.', '05021', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10309, 37, 3, TO_DATE('09/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.3, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10309, 37, 3, TO_DATE('09/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.3, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10310, 77, 8, TO_DATE('09/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10310, 77, 8, TO_DATE('09/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('09/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.52, 'The Big Cheese', '89 Jefferson Way
-Suite 2', 
+Suite 2',
     'Portland', 'OR', '97201', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10311, 18, 1, TO_DATE('09/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.69, 'Du monde entier', '67, rue des Cinquante Otages', 
+   (10311, 18, 1, TO_DATE('09/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.69, 'Du monde entier', '67, rue des Cinquante Otages',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10691, 63, 2, TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 810.05, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10691, 63, 2, TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 810.05, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10692, 1, 4, TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 61.02, 'Alfreds Futterkiste', 'Obere Str. 57', 
+   (10692, 1, 4, TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 61.02, 'Alfreds Futterkiste', 'Obere Str. 57',
     'Berlin', '12209', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10693, 89, 3, TO_DATE('10/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 139.34, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10693, 89, 3, TO_DATE('10/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 139.34, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10694, 63, 8, TO_DATE('10/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 398.36, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10694, 63, 8, TO_DATE('10/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 398.36, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10695, 90, 7, TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.72, 'Wilman Kala', 'Keskuskatu 45', 
+   (10695, 90, 7, TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.72, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10696, 89, 8, TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 102.55, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10696, 89, 8, TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 102.55, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10697, 47, 3, TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.52, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10697, 47, 3, TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.52, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10698, 20, 4, TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 272.47, 'Ernst Handel', 'Kirchgasse 6', 
+   (10698, 20, 4, TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 272.47, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10699, 52, 3, TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.58, 'Morgenstern Gesundkost', 'Heerstr. 22', 
+   (10699, 52, 3, TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.58, 'Morgenstern Gesundkost', 'Heerstr. 22',
     'Leipzig', '04179', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10312, 86, 2, TO_DATE('09/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 40.26, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10312, 86, 2, TO_DATE('09/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 40.26, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10313, 63, 2, TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.96, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10313, 63, 2, TO_DATE('09/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.96, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10314, 65, 1, TO_DATE('09/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 74.16, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10314, 65, 1, TO_DATE('09/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 74.16, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10315, 38, 4, TO_DATE('09/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10315, 38, 4, TO_DATE('09/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 41.76, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10316, 65, 1, TO_DATE('09/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 150.15, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10316, 65, 1, TO_DATE('09/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 150.15, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10317, 48, 6, TO_DATE('09/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.69, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10317, 48, 6, TO_DATE('09/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.69, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10318, 38, 8, TO_DATE('10/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10318, 38, 8, TO_DATE('10/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.73, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10319, 80, 7, TO_DATE('10/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 64.5, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10319, 80, 7, TO_DATE('10/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 64.5, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10320, 87, 5, TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 34.57, 'Wartian Herkku', 'Torikatu 38', 
+   (10320, 87, 5, TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 34.57, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10321, 38, 3, TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10321, 38, 3, TO_DATE('10/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.43, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10322, 58, 7, TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.4, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321', 
+   (10322, 58, 7, TO_DATE('10/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.4, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10323, 39, 4, TO_DATE('10/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.88, 'Königlich Essen', 'Maubelstr. 90', 
+   (10323, 39, 4, TO_DATE('10/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.88, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10324, 71, 9, TO_DATE('10/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 214.27, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10324, 71, 9, TO_DATE('10/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 214.27, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10325, 39, 1, TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 64.86, 'Königlich Essen', 'Maubelstr. 90', 
+   (10325, 39, 1, TO_DATE('10/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 64.86, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10326, 8, 4, TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 77.92, 'Bólido Comidas preparadas', 'C/ Araquil, 67', 
+   (10326, 8, 4, TO_DATE('10/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 77.92, 'Bólido Comidas preparadas', 'C/ Araquil, 67',
     'Madrid', '28023', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10327, 24, 2, TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 63.36, 'Folk och fä HB', 'Åkergatan 24', 
+   (10327, 24, 2, TO_DATE('10/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 63.36, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10328, 28, 4, TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 87.03, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10328, 28, 4, TO_DATE('10/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 87.03, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10329, 75, 4, TO_DATE('10/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 191.67, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10329, 75, 4, TO_DATE('10/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 191.67, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10330, 46, 3, TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.75, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10330, 46, 3, TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.75, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10331, 9, 9, TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 10.19, 'Bon app''', '12, rue des Bouchers', 
+   (10331, 9, 9, TO_DATE('10/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 10.19, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10332, 51, 3, TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 52.84, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10332, 51, 3, TO_DATE('10/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 52.84, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10333, 87, 5, TO_DATE('10/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.59, 'Wartian Herkku', 'Torikatu 38', 
+   (10333, 87, 5, TO_DATE('10/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.59, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10334, 84, 8, TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.56, 'Victuailles en stock', '2, rue du Commerce', 
+   (10334, 84, 8, TO_DATE('10/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.56, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10335, 37, 7, TO_DATE('10/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 42.11, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10335, 37, 7, TO_DATE('10/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 42.11, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10336, 60, 7, TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.51, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58', 
+   (10336, 60, 7, TO_DATE('10/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.51, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58',
     'Lisboa', '1756', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10337, 25, 4, TO_DATE('10/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 108.26, 'Frankenversand', 'Berliner Platz 43', 
+   (10337, 25, 4, TO_DATE('10/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 108.26, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10338, 55, 4, TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.21, 'Old World Delicatessen', '2743 Bering St.', 
+   (10338, 55, 4, TO_DATE('10/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.21, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10339, 51, 2, TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.66, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10339, 51, 2, TO_DATE('10/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.66, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10340, 9, 1, TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 166.31, 'Bon app''', '12, rue des Bouchers', 
+   (10340, 9, 1, TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 166.31, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10341, 73, 7, TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 26.78, 'Simons bistro', 'Vinbæltet 34', 
+   (10341, 73, 7, TO_DATE('10/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 26.78, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10342, 25, 4, TO_DATE('10/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 54.83, 'Frankenversand', 'Berliner Platz 43', 
+   (10342, 25, 4, TO_DATE('10/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 54.83, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10343, 44, 4, TO_DATE('10/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 110.37, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10343, 44, 4, TO_DATE('10/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 110.37, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10344, 89, 4, TO_DATE('11/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 23.29, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10344, 89, 4, TO_DATE('11/01/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 23.29, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10345, 63, 2, TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 249.06, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10345, 63, 2, TO_DATE('11/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 249.06, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10346, 65, 3, TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 142.08, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10346, 65, 3, TO_DATE('11/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 142.08, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10347, 21, 4, TO_DATE('11/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.1, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10347, 21, 4, TO_DATE('11/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.1, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10348, 86, 4, TO_DATE('11/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.78, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10348, 86, 4, TO_DATE('11/07/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.78, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10349, 75, 7, TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.63, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10349, 75, 7, TO_DATE('11/08/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.63, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10350, 41, 6, TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.19, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10350, 41, 6, TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 64.19, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10351, 20, 1, TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 162.33, 'Ernst Handel', 'Kirchgasse 6', 
+   (10351, 20, 1, TO_DATE('11/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 162.33, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10352, 28, 3, TO_DATE('11/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.3, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10352, 28, 3, TO_DATE('11/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.3, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10353, 59, 7, TO_DATE('11/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 360.63, 'Piccolo und mehr', 'Geislweg 14', 
+   (10353, 59, 7, TO_DATE('11/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 360.63, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10354, 58, 8, TO_DATE('11/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 53.8, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321', 
+   (10354, 58, 8, TO_DATE('11/14/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 53.8, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10355, 4, 6, TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10355, 4, 6, TO_DATE('11/15/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.95, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10356, 86, 6, TO_DATE('11/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 36.71, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10356, 86, 6, TO_DATE('11/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 36.71, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10357, 46, 1, TO_DATE('11/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 34.88, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10357, 46, 1, TO_DATE('11/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 34.88, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10358, 41, 5, TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 19.64, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10358, 41, 5, TO_DATE('11/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 19.64, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10359, 72, 5, TO_DATE('11/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 288.43, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10359, 72, 5, TO_DATE('11/21/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 288.43, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10360, 7, 4, TO_DATE('11/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 131.7, 'Blondel père et fils', '24, place Kléber', 
+   (10360, 7, 4, TO_DATE('11/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 131.7, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10361, 63, 1, TO_DATE('11/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 183.17, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10361, 63, 1, TO_DATE('11/22/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 183.17, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10362, 9, 3, TO_DATE('11/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.04, 'Bon app''', '12, rue des Bouchers', 
+   (10362, 9, 3, TO_DATE('11/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.04, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10363, 17, 4, TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.54, 'Drachenblut Delikatessen', 'Walserweg 21', 
+   (10363, 17, 4, TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.54, 'Drachenblut Delikatessen', 'Walserweg 21',
     'Aachen', '52066', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10364, 19, 1, TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 71.97, 'Eastern Connection', '35 King George', 
+   (10364, 19, 1, TO_DATE('11/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 71.97, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10365, 3, 3, TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10365, 3, 3, TO_DATE('11/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10366, 29, 8, TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 10.14, 'Galería del gastronómo', 'Rambla de Cataluña, 23', 
+   (10366, 29, 8, TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 10.14, 'Galería del gastronómo', 'Rambla de Cataluña, 23',
     'Barcelona', '8022', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10367, 83, 7, TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.55, 'Vaffeljernet', 'Smagsløget 45', 
+   (10367, 83, 7, TO_DATE('11/28/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.55, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10368, 20, 2, TO_DATE('11/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 101.95, 'Ernst Handel', 'Kirchgasse 6', 
+   (10368, 20, 2, TO_DATE('11/29/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 101.95, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10369, 75, 8, TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 195.68, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10369, 75, 8, TO_DATE('12/02/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 195.68, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10370, 14, 6, TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.17, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (10370, 14, 6, TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.17, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10371, 41, 1, TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.45, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10371, 41, 1, TO_DATE('12/03/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.45, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10372, 62, 5, TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 890.78, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10372, 62, 5, TO_DATE('12/04/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 890.78, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10939, 49, 2, TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 76.33, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10939, 49, 2, TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 76.33, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10940, 9, 8, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 19.77, 'Bon app''', '12, rue des Bouchers', 
+   (10940, 9, 8, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 19.77, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10941, 71, 7, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 400.81, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10941, 71, 7, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 400.81, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10373, 37, 4, TO_DATE('12/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 124.12, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10373, 37, 4, TO_DATE('12/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 124.12, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10374, 91, 1, TO_DATE('12/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.94, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (10374, 91, 1, TO_DATE('12/05/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 3.94, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10375, 36, 3, TO_DATE('12/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10375, 36, 3, TO_DATE('12/06/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.12, 'Hungry Coyote Import Store', 'City Center Plaza
-516 Main St.', 
+516 Main St.',
     'Elgin', 'OR', '97827', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10376, 51, 1, TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.39, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10376, 51, 1, TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.39, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10377, 72, 1, TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 22.21, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10377, 72, 1, TO_DATE('12/09/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 22.21, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10378, 24, 5, TO_DATE('12/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.44, 'Folk och fä HB', 'Åkergatan 24', 
+   (10378, 24, 5, TO_DATE('12/10/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.44, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10379, 61, 2, TO_DATE('12/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.03, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10379, 61, 2, TO_DATE('12/11/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.03, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10380, 37, 8, TO_DATE('12/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 35.03, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10380, 37, 8, TO_DATE('12/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 35.03, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10381, 46, 3, TO_DATE('12/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.99, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10381, 46, 3, TO_DATE('12/12/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7.99, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10382, 20, 4, TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 94.77, 'Ernst Handel', 'Kirchgasse 6', 
+   (10382, 20, 4, TO_DATE('12/13/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 94.77, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10383, 4, 8, TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10383, 4, 8, TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 34.24, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10384, 5, 3, TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 168.64, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10384, 5, 3, TO_DATE('12/16/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 168.64, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10385, 75, 1, TO_DATE('12/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.96, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10385, 75, 1, TO_DATE('12/17/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.96, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10386, 21, 9, TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.99, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10386, 21, 9, TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.99, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10387, 70, 1, TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 93.63, 'Santé Gourmet', 'Erling Skakkes gate 78', 
+   (10387, 70, 1, TO_DATE('12/18/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 93.63, 'Santé Gourmet', 'Erling Skakkes gate 78',
     'Stavern', '4110', 'Norway');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10388, 72, 2, TO_DATE('12/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 34.86, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10388, 72, 2, TO_DATE('12/19/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 34.86, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10389, 10, 4, TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 47.42, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10389, 10, 4, TO_DATE('12/20/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 47.42, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10390, 20, 6, TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 126.38, 'Ernst Handel', 'Kirchgasse 6', 
+   (10390, 20, 6, TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 126.38, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10391, 17, 3, TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.45, 'Drachenblut Delikatessen', 'Walserweg 21', 
+   (10391, 17, 3, TO_DATE('12/23/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.45, 'Drachenblut Delikatessen', 'Walserweg 21',
     'Aachen', '52066', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10392, 59, 2, TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 122.46, 'Piccolo und mehr', 'Geislweg 14', 
+   (10392, 59, 2, TO_DATE('12/24/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 122.46, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10393, 71, 1, TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 126.56, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10393, 71, 1, TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 126.56, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10394, 36, 1, TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10394, 36, 1, TO_DATE('12/25/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.34, 'Hungry Coyote Import Store', 'City Center Plaza
-516 Main St.', 
+516 Main St.',
     'Elgin', 'OR', '97827', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10395, 35, 6, TO_DATE('12/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 184.41, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10395, 35, 6, TO_DATE('12/26/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 184.41, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10396, 25, 1, TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 135.35, 'Frankenversand', 'Berliner Platz 43', 
+   (10396, 25, 1, TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 135.35, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10397, 60, 5, TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 60.26, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58', 
+   (10397, 60, 5, TO_DATE('12/27/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 60.26, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58',
     'Lisboa', '1756', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10398, 71, 2, TO_DATE('12/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 89.16, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10398, 71, 2, TO_DATE('12/30/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 89.16, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10399, 83, 8, TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 27.36, 'Vaffeljernet', 'Smagsløget 45', 
+   (10399, 83, 8, TO_DATE('12/31/1996 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 27.36, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10400, 19, 1, TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 83.93, 'Eastern Connection', '35 King George', 
+   (10400, 19, 1, TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 83.93, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10401, 65, 1, TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.51, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10401, 65, 1, TO_DATE('01/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.51, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10402, 20, 8, TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 67.88, 'Ernst Handel', 'Kirchgasse 6', 
+   (10402, 20, 8, TO_DATE('01/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 67.88, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10403, 20, 4, TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 73.79, 'Ernst Handel', 'Kirchgasse 6', 
+   (10403, 20, 4, TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 73.79, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10404, 49, 2, TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 155.97, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10404, 49, 2, TO_DATE('01/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 155.97, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10405, 47, 1, TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 34.82, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10405, 47, 1, TO_DATE('01/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 34.82, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10406, 62, 7, TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 108.04, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10406, 62, 7, TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 108.04, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10407, 56, 2, TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 91.48, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10407, 56, 2, TO_DATE('01/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 91.48, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10408, 23, 8, TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.26, 'Folies gourmandes', '184, chaussée de Tournai', 
+   (10408, 23, 8, TO_DATE('01/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.26, 'Folies gourmandes', '184, chaussée de Tournai',
     'Lille', '59000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10409, 54, 3, TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10409, 54, 3, TO_DATE('01/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.83, 'Océano Atlántico Ltda.', 'Ing. Gustavo Moncada 8585
-Piso 20-A', 
+Piso 20-A',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10410, 10, 3, TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.4, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10410, 10, 3, TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.4, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10411, 10, 9, TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.65, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10411, 10, 9, TO_DATE('01/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.65, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10412, 87, 8, TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.77, 'Wartian Herkku', 'Torikatu 38', 
+   (10412, 87, 8, TO_DATE('01/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.77, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10413, 41, 3, TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 95.66, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10413, 41, 3, TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 95.66, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10414, 21, 2, TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 21.48, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10414, 21, 2, TO_DATE('01/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 21.48, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10415, 36, 3, TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10415, 36, 3, TO_DATE('01/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.2, 'Hungry Coyote Import Store', 'City Center Plaza
-516 Main St.', 
+516 Main St.',
     'Elgin', 'OR', '97827', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10416, 87, 8, TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 22.72, 'Wartian Herkku', 'Torikatu 38', 
+   (10416, 87, 8, TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 22.72, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10417, 73, 4, TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 70.29, 'Simons bistro', 'Vinbæltet 34', 
+   (10417, 73, 4, TO_DATE('01/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 70.29, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10418, 63, 4, TO_DATE('01/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 17.55, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10418, 63, 4, TO_DATE('01/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 17.55, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10419, 68, 4, TO_DATE('01/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 137.35, 'Richter Supermarkt', 'Starenweg 5', 
+   (10419, 68, 4, TO_DATE('01/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 137.35, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10420, 88, 3, TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 44.12, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10420, 88, 3, TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 44.12, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10421, 61, 8, TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 99.23, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10421, 61, 8, TO_DATE('01/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 99.23, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10422, 27, 2, TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.02, 'Franchi S.p.A.', 'Via Monte Bianco 34', 
+   (10422, 27, 2, TO_DATE('01/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.02, 'Franchi S.p.A.', 'Via Monte Bianco 34',
     'Torino', '10100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10423, 31, 6, TO_DATE('01/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.5, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10423, 31, 6, TO_DATE('01/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.5, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10424, 51, 7, TO_DATE('01/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 370.61, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10424, 51, 7, TO_DATE('01/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 370.61, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10425, 41, 6, TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.93, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10425, 41, 6, TO_DATE('01/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.93, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10426, 29, 4, TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 18.69, 'Galería del gastronómo', 'Rambla de Cataluña, 23', 
+   (10426, 29, 4, TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 18.69, 'Galería del gastronómo', 'Rambla de Cataluña, 23',
     'Barcelona', '8022', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10427, 59, 4, TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 31.29, 'Piccolo und mehr', 'Geislweg 14', 
+   (10427, 59, 4, TO_DATE('01/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 31.29, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10428, 66, 7, TO_DATE('01/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.09, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10428, 66, 7, TO_DATE('01/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 11.09, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10429, 37, 3, TO_DATE('01/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 56.63, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10429, 37, 3, TO_DATE('01/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 56.63, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10430, 20, 4, TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 458.78, 'Ernst Handel', 'Kirchgasse 6', 
+   (10430, 20, 4, TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 458.78, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10431, 10, 4, TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.17, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10431, 10, 4, TO_DATE('01/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.17, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10432, 75, 3, TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.34, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10432, 75, 3, TO_DATE('01/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.34, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10433, 60, 3, TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 73.83, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58', 
+   (10433, 60, 3, TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 73.83, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58',
     'Lisboa', '1756', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10434, 24, 3, TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.92, 'Folk och fä HB', 'Åkergatan 24', 
+   (10434, 24, 3, TO_DATE('02/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 17.92, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10435, 16, 8, TO_DATE('02/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10435, 16, 8, TO_DATE('02/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 9.21, 'Consolidated Holdings', 'Berkeley Gardens
-12  Brewery ', 
+12  Brewery ',
     'London', 'WX1 6LT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10436, 7, 3, TO_DATE('02/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 156.66, 'Blondel père et fils', '24, place Kléber', 
+   (10436, 7, 3, TO_DATE('02/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 156.66, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10437, 87, 8, TO_DATE('02/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 19.97, 'Wartian Herkku', 'Torikatu 38', 
+   (10437, 87, 8, TO_DATE('02/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 19.97, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10438, 79, 3, TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.24, 'Toms Spezialitäten', 'Luisenstr. 48', 
+   (10438, 79, 3, TO_DATE('02/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.24, 'Toms Spezialitäten', 'Luisenstr. 48',
     'Münster', '44087', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10439, 51, 6, TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.07, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10439, 51, 6, TO_DATE('02/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.07, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11018, 48, 4, TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.65, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (11018, 48, 4, TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.65, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11019, 64, 6, TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    3, 3.17, 'Rancho grande', 'Av. del Libertador 900', 
+   (11019, 64, 6, TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    3, 3.17, 'Rancho grande', 'Av. del Libertador 900',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11020, 56, 2, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 43.3, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (11020, 56, 2, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 43.3, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11021, 63, 3, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 297.18, 'QUICK-Stop', 'Taucherstraße 10', 
+   (11021, 63, 3, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 297.18, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11022, 34, 9, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 6.27, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (11022, 34, 9, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 6.27, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11023, 11, 1, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 123.83, 'B''s Beverages', 'Fauntleroy Circus', 
+   (11023, 11, 1, TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 123.83, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11024, 19, 4, TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 74.36, 'Eastern Connection', '35 King George', 
+   (11024, 19, 4, TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 74.36, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11025, 87, 6, TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.17, 'Wartian Herkku', 'Torikatu 38', 
+   (11025, 87, 6, TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.17, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11026, 27, 4, TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.09, 'Franchi S.p.A.', 'Via Monte Bianco 34', 
+   (11026, 27, 4, TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.09, 'Franchi S.p.A.', 'Via Monte Bianco 34',
     'Torino', '10100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11027, 10, 1, TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 52.52, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (11027, 10, 1, TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 52.52, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11028, 39, 2, TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.59, 'Königlich Essen', 'Maubelstr. 90', 
+   (11028, 39, 2, TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.59, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11029, 14, 4, TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.84, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (11029, 14, 4, TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.84, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11030, 71, 7, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 830.75, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (11030, 71, 7, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 830.75, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11031, 71, 6, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 227.22, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (11031, 71, 6, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 227.22, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11032, 89, 2, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 606.19, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (11032, 89, 2, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 606.19, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11033, 68, 7, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.74, 'Richter Supermarkt', 'Starenweg 5', 
+   (11033, 68, 7, TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.74, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11034, 55, 8, TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 40.32, 'Old World Delicatessen', '2743 Bering St.', 
+   (11034, 55, 8, TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 40.32, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11035, 76, 2, TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.17, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (11035, 76, 2, TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.17, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11036, 17, 8, TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 149.47, 'Drachenblut Delikatessen', 'Walserweg 21', 
+   (11036, 17, 8, TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 149.47, 'Drachenblut Delikatessen', 'Walserweg 21',
     'Aachen', '52066', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11037, 30, 7, TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.2, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (11037, 30, 7, TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.2, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11038, 76, 1, TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.59, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (11038, 76, 1, TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.59, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11039, 47, 1, TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 65, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (11039, 47, 1, TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 65, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11040, 32, 4, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    3, 18.84, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (11040, 32, 4, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    3, 18.84, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11041, 14, 3, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 48.22, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (11041, 14, 3, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 48.22, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11042, 15, 2, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.99, 'Comércio Mineiro', 'Av. dos Lusíadas, 23', 
+   (11042, 15, 2, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.99, 'Comércio Mineiro', 'Av. dos Lusíadas, 23',
     'São Paulo', 'SP', '05432-043', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11043, 74, 5, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.8, 'Spécialités du monde', '25, rue Lauriston', 
+   (11043, 74, 5, TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.8, 'Spécialités du monde', '25, rue Lauriston',
     'Paris', '75016', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11044, 91, 4, TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.72, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (11044, 91, 4, TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.72, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11045, 10, 6, TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 70.58, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (11045, 10, 6, TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 70.58, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11046, 86, 8, TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 71.64, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (11046, 86, 8, TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 71.64, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11047, 19, 7, TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 46.62, 'Eastern Connection', '35 King George', 
+   (11047, 19, 7, TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 46.62, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11048, 10, 7, TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.12, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (11048, 10, 7, TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.12, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11049, 31, 3, TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.34, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (11049, 31, 3, TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.34, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11050, 24, 8, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 59.41, 'Folk och fä HB', 'Åkergatan 24', 
+   (11050, 24, 8, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 59.41, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11051, 41, 7, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    3, 2.79, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (11051, 41, 7, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    3, 2.79, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11052, 34, 3, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 67.26, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (11052, 34, 3, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 67.26, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11053, 59, 2, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.05, 'Piccolo und mehr', 'Geislweg 14', 
+   (11053, 59, 2, TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.05, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11054, 12, 8, TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    1, 0.33, 'Cactus Comidas para llevar', 'Cerrito 333', 
+   (11054, 12, 8, TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    1, 0.33, 'Cactus Comidas para llevar', 'Cerrito 333',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11055, 35, 7, TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 120.92, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (11055, 35, 7, TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 120.92, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11056, 19, 8, TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 278.96, 'Eastern Connection', '35 King George', 
+   (11056, 19, 8, TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 278.96, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11057, 53, 3, TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (11057, 53, 3, TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.13, 'North/South', 'South House
-300 Queensbridge', 
+300 Queensbridge',
     'London', 'SW7 1RZ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11058, 6, 9, TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    3, 31.14, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (11058, 6, 9, TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    3, 31.14, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11059, 67, 2, TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 85.8, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (11059, 67, 2, TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 85.8, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11060, 27, 2, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 10.98, 'Franchi S.p.A.', 'Via Monte Bianco 34', 
+   (11060, 27, 2, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 10.98, 'Franchi S.p.A.', 'Via Monte Bianco 34',
     'Torino', '10100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11061, 32, 4, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    3, 14.01, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (11061, 32, 4, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    3, 14.01, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11062, 66, 4, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 29.93, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (11062, 66, 4, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 29.93, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (11063, 37, 3, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 81.73, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (11063, 37, 3, TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 81.73, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11064, 71, 1, TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 30.09, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (11064, 71, 1, TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 30.09, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11065, 46, 8, TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    1, 12.91, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (11065, 46, 8, TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    1, 12.91, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11066, 89, 7, TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.72, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (11066, 89, 7, TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.72, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10561, 24, 2, TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 242.21, 'Folk och fä HB', 'Åkergatan 24', 
+   (10561, 24, 2, TO_DATE('06/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 242.21, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10562, 66, 1, TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 22.95, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10562, 66, 1, TO_DATE('06/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 22.95, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10563, 67, 2, TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 60.43, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10563, 67, 2, TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 60.43, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10564, 65, 4, TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.75, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10564, 65, 4, TO_DATE('06/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.75, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10565, 51, 8, TO_DATE('06/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.15, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10565, 51, 8, TO_DATE('06/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.15, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10566, 7, 9, TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 88.4, 'Blondel père et fils', '24, place Kléber', 
+   (10566, 7, 9, TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 88.4, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10567, 37, 1, TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 33.97, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10567, 37, 1, TO_DATE('06/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 33.97, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10568, 29, 3, TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 6.54, 'Galería del gastronómo', 'Rambla de Cataluña, 23', 
+   (10568, 29, 3, TO_DATE('06/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 6.54, 'Galería del gastronómo', 'Rambla de Cataluña, 23',
     'Barcelona', '8022', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10569, 65, 5, TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 58.98, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10569, 65, 5, TO_DATE('06/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 58.98, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10570, 51, 3, TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 188.99, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10570, 51, 3, TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 188.99, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10571, 20, 8, TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 26.06, 'Ernst Handel', 'Kirchgasse 6', 
+   (10571, 20, 8, TO_DATE('06/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 26.06, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10572, 5, 3, TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 116.43, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10572, 5, 3, TO_DATE('06/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 116.43, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10573, 3, 7, TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.84, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10573, 3, 7, TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 84.84, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10574, 82, 4, TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 37.6, 'Trail''s Head Gourmet Provisioners', '722 DaVinci Blvd.', 
+   (10574, 82, 4, TO_DATE('06/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 37.6, 'Trail''s Head Gourmet Provisioners', '722 DaVinci Blvd.',
     'Kirkland', 'WA', '98034', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10575, 52, 5, TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 127.34, 'Morgenstern Gesundkost', 'Heerstr. 22', 
+   (10575, 52, 5, TO_DATE('06/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 127.34, 'Morgenstern Gesundkost', 'Heerstr. 22',
     'Leipzig', '04179', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10576, 80, 3, TO_DATE('06/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 18.56, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10576, 80, 3, TO_DATE('06/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 18.56, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10577, 82, 9, TO_DATE('06/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.41, 'Trail''s Head Gourmet Provisioners', '722 DaVinci Blvd.', 
+   (10577, 82, 9, TO_DATE('06/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.41, 'Trail''s Head Gourmet Provisioners', '722 DaVinci Blvd.',
     'Kirkland', 'WA', '98034', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10578, 11, 4, TO_DATE('06/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.6, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10578, 11, 4, TO_DATE('06/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.6, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10649, 50, 5, TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 6.2, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (10649, 50, 5, TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 6.2, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10650, 21, 5, TO_DATE('08/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 176.81, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10650, 21, 5, TO_DATE('08/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 176.81, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10651, 86, 8, TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.6, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10651, 86, 8, TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.6, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10652, 31, 4, TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.14, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10652, 31, 4, TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.14, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10653, 25, 1, TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 93.25, 'Frankenversand', 'Berliner Platz 43', 
+   (10653, 25, 1, TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 93.25, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10654, 5, 5, TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.26, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10654, 5, 5, TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.26, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10655, 66, 1, TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.41, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10655, 66, 1, TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.41, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10656, 32, 6, TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 57.15, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10656, 32, 6, TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 57.15, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10657, 71, 2, TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 352.69, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10657, 71, 2, TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 352.69, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10658, 63, 4, TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 364.15, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10658, 63, 4, TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 364.15, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10659, 62, 7, TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 105.81, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10659, 62, 7, TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 105.81, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10660, 36, 8, TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10660, 36, 8, TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 111.29, 'Hungry Coyote Import Store', 'City Center Plaza
-516 Main St.', 
+516 Main St.',
     'Elgin', 'OR', '97827', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10661, 37, 7, TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 17.55, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10661, 37, 7, TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 17.55, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10662, 48, 3, TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.28, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10662, 48, 3, TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.28, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10663, 9, 2, TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 113.15, 'Bon app''', '12, rue des Bouchers', 
+   (10663, 9, 2, TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 113.15, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10664, 28, 1, TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.27, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10664, 28, 1, TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.27, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10665, 48, 1, TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 26.31, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10665, 48, 1, TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 26.31, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10666, 68, 7, TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 232.42, 'Richter Supermarkt', 'Starenweg 5', 
+   (10666, 68, 7, TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 232.42, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10667, 20, 7, TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 78.09, 'Ernst Handel', 'Kirchgasse 6', 
+   (10667, 20, 7, TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 78.09, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10668, 86, 1, TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 47.22, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10668, 86, 1, TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 47.22, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10669, 73, 2, TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 24.39, 'Simons bistro', 'Vinbæltet 34', 
+   (10669, 73, 2, TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 24.39, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10670, 25, 4, TO_DATE('09/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 203.48, 'Frankenversand', 'Berliner Platz 43', 
+   (10670, 25, 4, TO_DATE('09/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 203.48, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10671, 26, 1, TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 30.34, 'France restauration', '54, rue Royale', 
+   (10671, 26, 1, TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 30.34, 'France restauration', '54, rue Royale',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10672, 5, 9, TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 95.75, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10672, 5, 9, TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 95.75, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10673, 90, 2, TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 22.76, 'Wilman Kala', 'Keskuskatu 45', 
+   (10673, 90, 2, TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 22.76, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10674, 38, 4, TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10674, 38, 4, TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.9, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10675, 25, 5, TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 31.85, 'Frankenversand', 'Berliner Platz 43', 
+   (10675, 25, 5, TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 31.85, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10676, 80, 2, TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.01, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10676, 80, 2, TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.01, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10677, 3, 1, TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.03, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10677, 3, 1, TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.03, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10678, 71, 7, TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 388.98, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10678, 71, 7, TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 388.98, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10679, 7, 8, TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 27.94, 'Blondel père et fils', '24, place Kléber', 
+   (10679, 7, 8, TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 27.94, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10680, 55, 1, TO_DATE('09/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.61, 'Old World Delicatessen', '2743 Bering St.', 
+   (10680, 55, 1, TO_DATE('09/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.61, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10681, 32, 3, TO_DATE('09/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 76.13, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10681, 32, 3, TO_DATE('09/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 76.13, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10682, 3, 3, TO_DATE('09/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 36.13, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10682, 3, 3, TO_DATE('09/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 36.13, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10683, 18, 2, TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.4, 'Du monde entier', '67, rue des Cinquante Otages', 
+   (10683, 18, 2, TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.4, 'Du monde entier', '67, rue des Cinquante Otages',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10684, 56, 3, TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 145.63, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10684, 56, 3, TO_DATE('09/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 145.63, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10685, 31, 4, TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.75, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10685, 31, 4, TO_DATE('09/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.75, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10686, 59, 2, TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.5, 'Piccolo und mehr', 'Geislweg 14', 
+   (10686, 59, 2, TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.5, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10687, 37, 9, TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 296.43, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10687, 37, 9, TO_DATE('09/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 296.43, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10688, 83, 4, TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 299.09, 'Vaffeljernet', 'Smagsløget 45', 
+   (10688, 83, 4, TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 299.09, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10689, 5, 1, TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.42, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10689, 5, 1, TO_DATE('10/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.42, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10690, 34, 1, TO_DATE('10/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 15.8, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10690, 34, 1, TO_DATE('10/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 15.8, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11072, 20, 4, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 258.64, 'Ernst Handel', 'Kirchgasse 6', 
+   (11072, 20, 4, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 258.64, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11073, 58, 2, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 24.95, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321', 
+   (11073, 58, 2, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 24.95, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11074, 73, 7, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 18.44, 'Simons bistro', 'Vinbæltet 34', 
+   (11074, 73, 7, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 18.44, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11075, 68, 8, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 6.19, 'Richter Supermarkt', 'Starenweg 5', 
+   (11075, 68, 8, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 6.19, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11076, 9, 4, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 38.28, 'Bon app''', '12, rue des Bouchers', 
+   (11076, 9, 4, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 38.28, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11077, 65, 1, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 8.53, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (11077, 65, 1, TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 8.53, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10700, 71, 3, TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 65.1, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10700, 71, 3, TO_DATE('10/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 65.1, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10701, 37, 6, TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 220.31, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10701, 37, 6, TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 220.31, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10702, 1, 4, TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 23.94, 'Alfreds Futterkiste', 'Obere Str. 57', 
+   (10702, 1, 4, TO_DATE('10/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 23.94, 'Alfreds Futterkiste', 'Obere Str. 57',
     'Berlin', '12209', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10703, 24, 6, TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 152.3, 'Folk och fä HB', 'Åkergatan 24', 
+   (10703, 24, 6, TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 152.3, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10704, 62, 6, TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.78, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10704, 62, 6, TO_DATE('10/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.78, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10705, 35, 9, TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.52, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10705, 35, 9, TO_DATE('10/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.52, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10706, 55, 8, TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 135.63, 'Old World Delicatessen', '2743 Bering St.', 
+   (10706, 55, 8, TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 135.63, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10707, 4, 4, TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10707, 4, 4, TO_DATE('10/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 21.74, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10708, 77, 6, TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10708, 77, 6, TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.96, 'The Big Cheese', '89 Jefferson Way
-Suite 2', 
+Suite 2',
     'Portland', 'OR', '97201', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10709, 31, 1, TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 210.8, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10709, 31, 1, TO_DATE('10/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 210.8, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10710, 27, 1, TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.98, 'Franchi S.p.A.', 'Via Monte Bianco 34', 
+   (10710, 27, 1, TO_DATE('10/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.98, 'Franchi S.p.A.', 'Via Monte Bianco 34',
     'Torino', '10100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10711, 71, 5, TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 52.41, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10711, 71, 5, TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 52.41, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10712, 37, 3, TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 89.93, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10712, 37, 3, TO_DATE('10/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 89.93, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10713, 71, 1, TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 167.05, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10713, 71, 1, TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 167.05, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10714, 71, 5, TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.49, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10714, 71, 5, TO_DATE('10/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 24.49, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10715, 9, 3, TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 63.2, 'Bon app''', '12, rue des Bouchers', 
+   (10715, 9, 3, TO_DATE('10/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 63.2, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10716, 64, 4, TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22.57, 'Rancho grande', 'Av. del Libertador 900', 
+   (10716, 64, 4, TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22.57, 'Rancho grande', 'Av. del Libertador 900',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10717, 25, 1, TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 59.25, 'Frankenversand', 'Berliner Platz 43', 
+   (10717, 25, 1, TO_DATE('10/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 59.25, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10718, 39, 1, TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 170.88, 'Königlich Essen', 'Maubelstr. 90', 
+   (10718, 39, 1, TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 170.88, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10719, 45, 8, TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10719, 45, 8, TO_DATE('10/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 51.44, 'Let''s Stop N Shop', '87 Polk St.
-Suite 5', 
+Suite 5',
     'San Francisco', 'CA', '94117', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10720, 61, 8, TO_DATE('10/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 9.53, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10720, 61, 8, TO_DATE('10/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 9.53, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10721, 63, 5, TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 48.92, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10721, 63, 5, TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 48.92, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10722, 71, 8, TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 74.58, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10722, 71, 8, TO_DATE('10/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 74.58, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10723, 89, 3, TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 21.72, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10723, 89, 3, TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 21.72, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10724, 51, 8, TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 57.75, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10724, 51, 8, TO_DATE('10/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 57.75, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10725, 21, 4, TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.83, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10725, 21, 4, TO_DATE('10/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.83, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10726, 19, 4, TO_DATE('11/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.56, 'Eastern Connection', '35 King George', 
+   (10726, 19, 4, TO_DATE('11/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.56, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10727, 66, 2, TO_DATE('11/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 89.9, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10727, 66, 2, TO_DATE('11/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 89.9, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10728, 62, 4, TO_DATE('11/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.33, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10728, 62, 4, TO_DATE('11/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.33, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10729, 47, 8, TO_DATE('11/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 141.06, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10729, 47, 8, TO_DATE('11/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 141.06, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10730, 9, 5, TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 20.12, 'Bon app''', '12, rue des Bouchers', 
+   (10730, 9, 5, TO_DATE('11/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 20.12, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10731, 14, 7, TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.65, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (10731, 14, 7, TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.65, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10732, 9, 3, TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.97, 'Bon app''', '12, rue des Bouchers', 
+   (10732, 9, 3, TO_DATE('11/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.97, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10733, 5, 1, TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 110.11, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10733, 5, 1, TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 110.11, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10734, 31, 2, TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.63, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10734, 31, 2, TO_DATE('11/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.63, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10735, 45, 6, TO_DATE('11/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10735, 45, 6, TO_DATE('11/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 45.97, 'Let''s Stop N Shop', '87 Polk St.
-Suite 5', 
+Suite 5',
     'San Francisco', 'CA', '94117', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10736, 37, 9, TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.1, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10736, 37, 9, TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.1, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10737, 85, 2, TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.79, 'Vins et alcools Chevalier', '59 rue de l''Abbaye', 
+   (10737, 85, 2, TO_DATE('11/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.79, 'Vins et alcools Chevalier', '59 rue de l''Abbaye',
     'Reims', '51100', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10738, 74, 2, TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.91, 'Spécialités du monde', '25, rue Lauriston', 
+   (10738, 74, 2, TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.91, 'Spécialités du monde', '25, rue Lauriston',
     'Paris', '75016', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10739, 85, 3, TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 11.08, 'Vins et alcools Chevalier', '59 rue de l''Abbaye', 
+   (10739, 85, 3, TO_DATE('11/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 11.08, 'Vins et alcools Chevalier', '59 rue de l''Abbaye',
     'Reims', '51100', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10740, 89, 4, TO_DATE('11/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 81.88, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10740, 89, 4, TO_DATE('11/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 81.88, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10741, 4, 4, TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10741, 4, 4, TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 10.96, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10742, 10, 3, TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 243.73, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10742, 10, 3, TO_DATE('11/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 243.73, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10743, 4, 1, TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10743, 4, 1, TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 23.72, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10744, 83, 6, TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 69.19, 'Vaffeljernet', 'Smagsløget 45', 
+   (10744, 83, 6, TO_DATE('11/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 69.19, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10745, 63, 9, TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.52, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10745, 63, 9, TO_DATE('11/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.52, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10746, 14, 1, TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 31.43, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (10746, 14, 1, TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 31.43, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10747, 59, 6, TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 117.33, 'Piccolo und mehr', 'Geislweg 14', 
+   (10747, 59, 6, TO_DATE('11/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 117.33, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10748, 71, 3, TO_DATE('11/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 232.55, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10748, 71, 3, TO_DATE('11/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 232.55, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10749, 38, 4, TO_DATE('11/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10749, 38, 4, TO_DATE('11/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 61.53, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10750, 87, 9, TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 79.3, 'Wartian Herkku', 'Torikatu 38', 
+   (10750, 87, 9, TO_DATE('11/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 79.3, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10751, 68, 3, TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 130.79, 'Richter Supermarkt', 'Starenweg 5', 
+   (10751, 68, 3, TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 130.79, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10752, 53, 2, TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10752, 53, 2, TO_DATE('11/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.39, 'North/South', 'South House
-300 Queensbridge', 
+300 Queensbridge',
     'London', 'SW7 1RZ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10753, 27, 3, TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.7, 'Franchi S.p.A.', 'Via Monte Bianco 34', 
+   (10753, 27, 3, TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.7, 'Franchi S.p.A.', 'Via Monte Bianco 34',
     'Torino', '10100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10754, 49, 6, TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.38, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10754, 49, 6, TO_DATE('11/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.38, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10755, 9, 4, TO_DATE('11/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 16.71, 'Bon app''', '12, rue des Bouchers', 
+   (10755, 9, 4, TO_DATE('11/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 16.71, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10756, 75, 8, TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 73.21, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10756, 75, 8, TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 73.21, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10757, 71, 6, TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.19, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10757, 71, 6, TO_DATE('11/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 8.19, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10758, 68, 3, TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 138.17, 'Richter Supermarkt', 'Starenweg 5', 
+   (10758, 68, 3, TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 138.17, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10759, 2, 3, TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 11.99, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222', 
+   (10759, 2, 3, TO_DATE('11/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 11.99, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222',
     'México D.F.', '05021', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10760, 50, 4, TO_DATE('12/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 155.64, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (10760, 50, 4, TO_DATE('12/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 155.64, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10761, 65, 5, TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 18.66, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10761, 65, 5, TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 18.66, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10762, 24, 3, TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 328.74, 'Folk och fä HB', 'Åkergatan 24', 
+   (10762, 24, 3, TO_DATE('12/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 328.74, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10763, 23, 3, TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 37.35, 'Folies gourmandes', '184, chaussée de Tournai', 
+   (10763, 23, 3, TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 37.35, 'Folies gourmandes', '184, chaussée de Tournai',
     'Lille', '59000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10764, 20, 6, TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 145.45, 'Ernst Handel', 'Kirchgasse 6', 
+   (10764, 20, 6, TO_DATE('12/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 145.45, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10765, 63, 3, TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 42.74, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10765, 63, 3, TO_DATE('12/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 42.74, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10766, 56, 4, TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 157.55, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10766, 56, 4, TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 157.55, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10767, 76, 4, TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.59, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10767, 76, 4, TO_DATE('12/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.59, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10768, 4, 3, TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10768, 4, 3, TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 146.32, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10769, 83, 3, TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 65.06, 'Vaffeljernet', 'Smagsløget 45', 
+   (10769, 83, 3, TO_DATE('12/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 65.06, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10770, 34, 8, TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.32, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10770, 34, 8, TO_DATE('12/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.32, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10771, 20, 9, TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.19, 'Ernst Handel', 'Kirchgasse 6', 
+   (10771, 20, 9, TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 11.19, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10772, 44, 3, TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 91.28, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10772, 44, 3, TO_DATE('12/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 91.28, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10773, 20, 1, TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 96.43, 'Ernst Handel', 'Kirchgasse 6', 
+   (10773, 20, 1, TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 96.43, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10774, 24, 4, TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 48.2, 'Folk och fä HB', 'Åkergatan 24', 
+   (10774, 24, 4, TO_DATE('12/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 48.2, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10775, 78, 7, TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 20.25, 'The Cracker Box', '55 Grizzly Peak Rd.', 
+   (10775, 78, 7, TO_DATE('12/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 20.25, 'The Cracker Box', '55 Grizzly Peak Rd.',
     'Butte', 'MT', '59801', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10776, 20, 1, TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 351.53, 'Ernst Handel', 'Kirchgasse 6', 
+   (10776, 20, 1, TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 351.53, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10777, 31, 7, TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.01, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10777, 31, 7, TO_DATE('12/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.01, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10778, 5, 3, TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 6.79, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10778, 5, 3, TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 6.79, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10779, 52, 3, TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.13, 'Morgenstern Gesundkost', 'Heerstr. 22', 
+   (10779, 52, 3, TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.13, 'Morgenstern Gesundkost', 'Heerstr. 22',
     'Leipzig', '04179', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10780, 46, 2, TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 42.13, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10780, 46, 2, TO_DATE('12/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 42.13, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10781, 87, 2, TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 73.16, 'Wartian Herkku', 'Torikatu 38', 
+   (10781, 87, 2, TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 73.16, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10782, 12, 9, TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.1, 'Cactus Comidas para llevar', 'Cerrito 333', 
+   (10782, 12, 9, TO_DATE('12/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.1, 'Cactus Comidas para llevar', 'Cerrito 333',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10783, 34, 4, TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 124.98, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10783, 34, 4, TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 124.98, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10784, 49, 4, TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 70.09, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10784, 49, 4, TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 70.09, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10785, 33, 1, TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.51, 'GROSELLA-Restaurante', '5ª Ave. Los Palos Grandes', 
+   (10785, 33, 1, TO_DATE('12/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.51, 'GROSELLA-Restaurante', '5ª Ave. Los Palos Grandes',
     'Caracas', 'DF', '1081', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10786, 62, 8, TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 110.87, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10786, 62, 8, TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 110.87, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10787, 41, 2, TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 249.93, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10787, 41, 2, TO_DATE('12/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 249.93, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10788, 63, 1, TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 42.7, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10788, 63, 1, TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 42.7, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10789, 23, 1, TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 100.6, 'Folies gourmandes', '184, chaussée de Tournai', 
+   (10789, 23, 1, TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 100.6, 'Folies gourmandes', '184, chaussée de Tournai',
     'Lille', '59000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10790, 31, 6, TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 28.23, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10790, 31, 6, TO_DATE('12/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 28.23, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10791, 25, 6, TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 16.85, 'Frankenversand', 'Berliner Platz 43', 
+   (10791, 25, 6, TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 16.85, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10792, 91, 1, TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.79, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (10792, 91, 1, TO_DATE('12/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.79, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10793, 4, 3, TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10793, 4, 3, TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.52, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10794, 61, 6, TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 21.49, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10794, 61, 6, TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 21.49, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10795, 20, 8, TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 126.66, 'Ernst Handel', 'Kirchgasse 6', 
+   (10795, 20, 8, TO_DATE('12/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 126.66, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10796, 35, 3, TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.52, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10796, 35, 3, TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.52, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10797, 17, 7, TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.35, 'Drachenblut Delikatessen', 'Walserweg 21', 
+   (10797, 17, 7, TO_DATE('12/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.35, 'Drachenblut Delikatessen', 'Walserweg 21',
     'Aachen', '52066', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10798, 38, 2, TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10798, 38, 2, TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.33, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10799, 39, 9, TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.76, 'Königlich Essen', 'Maubelstr. 90', 
+   (10799, 39, 9, TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.76, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10800, 72, 1, TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 137.44, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10800, 72, 1, TO_DATE('12/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 137.44, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10801, 8, 4, TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 97.09, 'Bólido Comidas preparadas', 'C/ Araquil, 67', 
+   (10801, 8, 4, TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 97.09, 'Bólido Comidas preparadas', 'C/ Araquil, 67',
     'Madrid', '28023', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10802, 73, 4, TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 257.26, 'Simons bistro', 'Vinbæltet 34', 
+   (10802, 73, 4, TO_DATE('12/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 257.26, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10803, 88, 4, TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.23, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10803, 88, 4, TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.23, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10804, 72, 6, TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.33, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10804, 72, 6, TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.33, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10805, 77, 2, TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10805, 77, 2, TO_DATE('12/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 237.34, 'The Big Cheese', '89 Jefferson Way
-Suite 2', 
+Suite 2',
     'Portland', 'OR', '97201', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10806, 84, 3, TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22.11, 'Victuailles en stock', '2, rue du Commerce', 
+   (10806, 84, 3, TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 22.11, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10807, 27, 4, TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.36, 'Franchi S.p.A.', 'Via Monte Bianco 34', 
+   (10807, 27, 4, TO_DATE('12/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.36, 'Franchi S.p.A.', 'Via Monte Bianco 34',
     'Torino', '10100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10808, 55, 2, TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 45.53, 'Old World Delicatessen', '2743 Bering St.', 
+   (10808, 55, 2, TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 45.53, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10809, 88, 7, TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.87, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10809, 88, 7, TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.87, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10810, 42, 2, TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.33, 'Laughing Bacchus Wine Cellars', '2319 Elm St.', 
+   (10810, 42, 2, TO_DATE('01/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.33, 'Laughing Bacchus Wine Cellars', '2319 Elm St.',
     'Vancouver', 'BC', 'V3F 2K1', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10811, 47, 8, TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 31.22, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10811, 47, 8, TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 31.22, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10812, 66, 5, TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 59.78, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10812, 66, 5, TO_DATE('01/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 59.78, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10813, 67, 1, TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.38, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10813, 67, 1, TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 47.38, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10814, 84, 3, TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 130.94, 'Victuailles en stock', '2, rue du Commerce', 
+   (10814, 84, 3, TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 130.94, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10815, 71, 2, TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 14.62, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10815, 71, 2, TO_DATE('01/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 14.62, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10816, 32, 4, TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 719.78, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10816, 32, 4, TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 719.78, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10817, 39, 3, TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 306.07, 'Königlich Essen', 'Maubelstr. 90', 
+   (10817, 39, 3, TO_DATE('01/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 306.07, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10818, 49, 7, TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 65.48, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10818, 49, 7, TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 65.48, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10819, 12, 2, TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 19.76, 'Cactus Comidas para llevar', 'Cerrito 333', 
+   (10819, 12, 2, TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 19.76, 'Cactus Comidas para llevar', 'Cerrito 333',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10820, 65, 3, TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 37.52, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10820, 65, 3, TO_DATE('01/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 37.52, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10821, 75, 1, TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 36.68, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10821, 75, 1, TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 36.68, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10822, 82, 6, TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7, 'Trail''s Head Gourmet Provisioners', '722 DaVinci Blvd.', 
+   (10822, 82, 6, TO_DATE('01/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 7, 'Trail''s Head Gourmet Provisioners', '722 DaVinci Blvd.',
     'Kirkland', 'WA', '98034', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10823, 46, 5, TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 163.97, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10823, 46, 5, TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 163.97, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10824, 24, 8, TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.23, 'Folk och fä HB', 'Åkergatan 24', 
+   (10824, 24, 8, TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.23, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10825, 17, 1, TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 79.25, 'Drachenblut Delikatessen', 'Walserweg 21', 
+   (10825, 17, 1, TO_DATE('01/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 79.25, 'Drachenblut Delikatessen', 'Walserweg 21',
     'Aachen', '52066', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10826, 7, 6, TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.09, 'Blondel père et fils', '24, place Kléber', 
+   (10826, 7, 6, TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.09, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10827, 9, 1, TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 63.54, 'Bon app''', '12, rue des Bouchers', 
+   (10827, 9, 1, TO_DATE('01/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 63.54, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10828, 64, 9, TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 90.85, 'Rancho grande', 'Av. del Libertador 900', 
+   (10828, 64, 9, TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 90.85, 'Rancho grande', 'Av. del Libertador 900',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10829, 38, 9, TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10829, 38, 9, TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 154.72, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10830, 81, 4, TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 81.83, 'Tradição Hipermercados', 'Av. Inês de Castro, 414', 
+   (10830, 81, 4, TO_DATE('01/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 81.83, 'Tradição Hipermercados', 'Av. Inês de Castro, 414',
     'São Paulo', 'SP', '05634-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10831, 70, 3, TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 72.19, 'Santé Gourmet', 'Erling Skakkes gate 78', 
+   (10831, 70, 3, TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 72.19, 'Santé Gourmet', 'Erling Skakkes gate 78',
     'Stavern', '4110', 'Norway');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10832, 41, 2, TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 43.26, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10832, 41, 2, TO_DATE('01/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 43.26, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10833, 56, 6, TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 71.49, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10833, 56, 6, TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 71.49, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10834, 81, 1, TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.78, 'Tradição Hipermercados', 'Av. Inês de Castro, 414', 
+   (10834, 81, 1, TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.78, 'Tradição Hipermercados', 'Av. Inês de Castro, 414',
     'São Paulo', 'SP', '05634-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10835, 1, 1, TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 69.53, 'Alfreds Futterkiste', 'Obere Str. 57', 
+   (10835, 1, 1, TO_DATE('01/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 69.53, 'Alfreds Futterkiste', 'Obere Str. 57',
     'Berlin', '12209', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10836, 20, 7, TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 411.88, 'Ernst Handel', 'Kirchgasse 6', 
+   (10836, 20, 7, TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 411.88, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10837, 5, 9, TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.32, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10837, 5, 9, TO_DATE('01/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 13.32, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10838, 47, 3, TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 59.28, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10838, 47, 3, TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 59.28, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10839, 81, 3, TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 35.43, 'Tradição Hipermercados', 'Av. Inês de Castro, 414', 
+   (10839, 81, 3, TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 35.43, 'Tradição Hipermercados', 'Av. Inês de Castro, 414',
     'São Paulo', 'SP', '05634-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10840, 47, 4, TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.71, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10840, 47, 4, TO_DATE('01/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.71, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10841, 76, 5, TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 424.3, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10841, 76, 5, TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 424.3, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10842, 80, 1, TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 54.42, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10842, 80, 1, TO_DATE('01/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 54.42, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10843, 84, 4, TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 9.26, 'Victuailles en stock', '2, rue du Commerce', 
+   (10843, 84, 4, TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 9.26, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10844, 59, 8, TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.22, 'Piccolo und mehr', 'Geislweg 14', 
+   (10844, 59, 8, TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.22, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10845, 63, 8, TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 212.98, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10845, 63, 8, TO_DATE('01/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 212.98, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10846, 76, 2, TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 56.46, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10846, 76, 2, TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 56.46, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10847, 71, 4, TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 487.57, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10847, 71, 4, TO_DATE('01/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 487.57, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10848, 16, 7, TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10848, 16, 7, TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 38.24, 'Consolidated Holdings', 'Berkeley Gardens
-12  Brewery ', 
+12  Brewery ',
     'London', 'WX1 6LT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10849, 39, 9, TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.56, 'Königlich Essen', 'Maubelstr. 90', 
+   (10849, 39, 9, TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.56, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10850, 84, 1, TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 49.19, 'Victuailles en stock', '2, rue du Commerce', 
+   (10850, 84, 1, TO_DATE('01/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 49.19, 'Victuailles en stock', '2, rue du Commerce',
     'Lyon', '69004', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10851, 67, 5, TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 160.55, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10851, 67, 5, TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 160.55, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10852, 65, 8, TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 174.05, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10852, 65, 8, TO_DATE('01/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 174.05, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10853, 6, 9, TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.83, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (10853, 6, 9, TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.83, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10854, 20, 3, TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 100.22, 'Ernst Handel', 'Kirchgasse 6', 
+   (10854, 20, 3, TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 100.22, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10855, 55, 3, TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 170.97, 'Old World Delicatessen', '2743 Bering St.', 
+   (10855, 55, 3, TO_DATE('01/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 170.97, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10856, 3, 3, TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.43, 'Antonio Moreno Taquería', 'Mataderos  2312', 
+   (10856, 3, 3, TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 58.43, 'Antonio Moreno Taquería', 'Mataderos  2312',
     'México D.F.', '05023', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10857, 5, 8, TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 188.85, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10857, 5, 8, TO_DATE('01/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 188.85, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10858, 40, 2, TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 52.51, 'La corne d''abondance', '67, avenue de l''Europe', 
+   (10858, 40, 2, TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 52.51, 'La corne d''abondance', '67, avenue de l''Europe',
     'Versailles', '78000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10859, 25, 1, TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 76.1, 'Frankenversand', 'Berliner Platz 43', 
+   (10859, 25, 1, TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 76.1, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10860, 26, 3, TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 19.26, 'France restauration', '54, rue Royale', 
+   (10860, 26, 3, TO_DATE('01/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 19.26, 'France restauration', '54, rue Royale',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10861, 89, 4, TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 14.93, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10861, 89, 4, TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 14.93, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10862, 44, 8, TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.23, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10862, 44, 8, TO_DATE('01/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.23, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10863, 35, 4, TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.26, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10863, 35, 4, TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.26, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10864, 4, 4, TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10864, 4, 4, TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.04, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10865, 63, 2, TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 348.14, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10865, 63, 2, TO_DATE('02/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 348.14, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10866, 5, 5, TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 109.11, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10866, 5, 5, TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 109.11, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10867, 48, 6, TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.93, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10867, 48, 6, TO_DATE('02/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.93, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10868, 62, 7, TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 191.27, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10868, 62, 7, TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 191.27, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10869, 72, 5, TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 143.28, 'Seven Seas Imports', '90 Wadhurst Rd.', 
+   (10869, 72, 5, TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 143.28, 'Seven Seas Imports', '90 Wadhurst Rd.',
     'London', 'OX15 4NB', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10870, 91, 5, TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.04, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (10870, 91, 5, TO_DATE('02/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.04, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10871, 9, 9, TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 112.27, 'Bon app''', '12, rue des Bouchers', 
+   (10871, 9, 9, TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 112.27, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10872, 30, 5, TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 175.32, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10872, 30, 5, TO_DATE('02/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 175.32, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10873, 90, 4, TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.82, 'Wilman Kala', 'Keskuskatu 45', 
+   (10873, 90, 4, TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.82, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10874, 30, 5, TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 19.58, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10874, 30, 5, TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 19.58, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10875, 5, 4, TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.37, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10875, 5, 4, TO_DATE('02/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.37, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10876, 9, 7, TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 60.42, 'Bon app''', '12, rue des Bouchers', 
+   (10876, 9, 7, TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 60.42, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10877, 67, 1, TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 38.06, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10877, 67, 1, TO_DATE('02/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 38.06, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10878, 63, 4, TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 46.69, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10878, 63, 4, TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 46.69, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10879, 90, 3, TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 8.5, 'Wilman Kala', 'Keskuskatu 45', 
+   (10879, 90, 3, TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 8.5, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10880, 24, 7, TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 88.01, 'Folk och fä HB', 'Åkergatan 24', 
+   (10880, 24, 7, TO_DATE('02/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 88.01, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10881, 12, 4, TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.84, 'Cactus Comidas para llevar', 'Cerrito 333', 
+   (10881, 12, 4, TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.84, 'Cactus Comidas para llevar', 'Cerrito 333',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10882, 71, 4, TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.1, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10882, 71, 4, TO_DATE('02/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.1, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10883, 48, 8, TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.53, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.', 
+   (10883, 48, 8, TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.53, 'Lonesome Pine Restaurant', '89 Chiaroscuro Rd.',
     'Portland', 'OR', '97219', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10884, 45, 4, TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10884, 45, 4, TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 90.97, 'Let''s Stop N Shop', '87 Polk St.
-Suite 5', 
+Suite 5',
     'San Francisco', 'CA', '94117', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10885, 76, 6, TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.64, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10885, 76, 6, TO_DATE('02/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 5.64, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10886, 34, 1, TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.99, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10886, 34, 1, TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 4.99, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10887, 29, 8, TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.25, 'Galería del gastronómo', 'Rambla de Cataluña, 23', 
+   (10887, 29, 8, TO_DATE('02/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.25, 'Galería del gastronómo', 'Rambla de Cataluña, 23',
     'Barcelona', '8022', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10888, 30, 1, TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 51.87, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10888, 30, 1, TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 51.87, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10889, 65, 9, TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 280.61, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10889, 65, 9, TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 280.61, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10890, 18, 7, TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 32.76, 'Du monde entier', '67, rue des Cinquante Otages', 
+   (10890, 18, 7, TO_DATE('02/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 32.76, 'Du monde entier', '67, rue des Cinquante Otages',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10891, 44, 7, TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.37, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10891, 44, 7, TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.37, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10892, 50, 4, TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 120.27, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (10892, 50, 4, TO_DATE('02/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 120.27, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10893, 39, 9, TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 77.78, 'Königlich Essen', 'Maubelstr. 90', 
+   (10893, 39, 9, TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 77.78, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10894, 71, 1, TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 116.13, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10894, 71, 1, TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 116.13, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10895, 20, 3, TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 162.75, 'Ernst Handel', 'Kirchgasse 6', 
+   (10895, 20, 3, TO_DATE('02/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 162.75, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10896, 50, 7, TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.45, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (10896, 50, 7, TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.45, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10897, 37, 3, TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 603.54, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10897, 37, 3, TO_DATE('02/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 603.54, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10898, 54, 4, TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10898, 54, 4, TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.27, 'Océano Atlántico Ltda.', 'Ing. Gustavo Moncada 8585
-Piso 20-A', 
+Piso 20-A',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10899, 46, 5, TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.21, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10899, 46, 5, TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.21, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10900, 88, 1, TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.66, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10900, 88, 1, TO_DATE('02/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.66, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10901, 35, 4, TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 62.09, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10901, 35, 4, TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 62.09, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10902, 24, 1, TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 44.15, 'Folk och fä HB', 'Åkergatan 24', 
+   (10902, 24, 1, TO_DATE('02/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 44.15, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10903, 34, 3, TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 36.71, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10903, 34, 3, TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 36.71, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10904, 89, 3, TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 162.95, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10904, 89, 3, TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 162.95, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10905, 88, 9, TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.72, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10905, 88, 9, TO_DATE('02/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.72, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10906, 91, 4, TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 26.29, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (10906, 91, 4, TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 26.29, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10907, 74, 6, TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 9.19, 'Spécialités du monde', '25, rue Lauriston', 
+   (10907, 74, 6, TO_DATE('02/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 9.19, 'Spécialités du monde', '25, rue Lauriston',
     'Paris', '75016', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10908, 66, 4, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.96, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10908, 66, 4, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.96, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10909, 70, 1, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.05, 'Santé Gourmet', 'Erling Skakkes gate 78', 
+   (10909, 70, 1, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 53.05, 'Santé Gourmet', 'Erling Skakkes gate 78',
     'Stavern', '4110', 'Norway');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10910, 90, 1, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 38.11, 'Wilman Kala', 'Keskuskatu 45', 
+   (10910, 90, 1, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 38.11, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10911, 30, 3, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 38.19, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10911, 30, 3, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 38.19, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10912, 37, 2, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 580.91, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10912, 37, 2, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 580.91, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10913, 62, 4, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 33.05, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10913, 62, 4, TO_DATE('02/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 33.05, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10914, 62, 6, TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 21.19, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10914, 62, 6, TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 21.19, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10915, 80, 2, TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.51, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (10915, 80, 2, TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.51, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10916, 64, 1, TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 63.77, 'Rancho grande', 'Av. del Libertador 900', 
+   (10916, 64, 1, TO_DATE('02/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 63.77, 'Rancho grande', 'Av. del Libertador 900',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10917, 69, 4, TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.29, 'Romero y tomillo', 'Gran Vía, 1', 
+   (10917, 69, 4, TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.29, 'Romero y tomillo', 'Gran Vía, 1',
     'Madrid', '28001', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10918, 10, 3, TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 48.83, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10918, 10, 3, TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 48.83, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10919, 47, 2, TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 19.8, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10919, 47, 2, TO_DATE('03/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 19.8, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10920, 4, 4, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10920, 4, 4, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 29.61, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10921, 83, 1, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 176.48, 'Vaffeljernet', 'Smagsløget 45', 
+   (10921, 83, 1, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 176.48, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10922, 34, 5, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 62.74, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10922, 34, 5, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 62.74, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10923, 41, 7, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 68.26, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10923, 41, 7, TO_DATE('03/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 68.26, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10924, 5, 3, TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 151.52, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10924, 5, 3, TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 151.52, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10925, 34, 3, TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.27, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10925, 34, 3, TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.27, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10926, 2, 4, TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 39.92, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222', 
+   (10926, 2, 4, TO_DATE('03/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 39.92, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222',
     'México D.F.', '05021', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10927, 40, 4, TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 19.79, 'La corne d''abondance', '67, avenue de l''Europe', 
+   (10927, 40, 4, TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 19.79, 'La corne d''abondance', '67, avenue de l''Europe',
     'Versailles', '78000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10928, 29, 1, TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.36, 'Galería del gastronómo', 'Rambla de Cataluña, 23', 
+   (10928, 29, 1, TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.36, 'Galería del gastronómo', 'Rambla de Cataluña, 23',
     'Barcelona', '8022', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10929, 25, 6, TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 33.93, 'Frankenversand', 'Berliner Platz 43', 
+   (10929, 25, 6, TO_DATE('03/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 33.93, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10930, 76, 4, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 15.55, 'Suprêmes délices', 'Boulevard Tirou, 255', 
+   (10930, 76, 4, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 15.55, 'Suprêmes délices', 'Boulevard Tirou, 255',
     'Charleroi', 'B-6000', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10931, 68, 4, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.6, 'Richter Supermarkt', 'Starenweg 5', 
+   (10931, 68, 4, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.6, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10932, 9, 8, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 134.64, 'Bon app''', '12, rue des Bouchers', 
+   (10932, 9, 8, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 134.64, 'Bon app''', '12, rue des Bouchers',
     'Marseille', '13008', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10933, 38, 6, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10933, 38, 6, TO_DATE('03/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 54.15, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10934, 44, 3, TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.01, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10934, 44, 3, TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.01, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10935, 88, 4, TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 47.59, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10935, 88, 4, TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 47.59, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10936, 32, 3, TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.68, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10936, 32, 3, TO_DATE('03/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.68, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10937, 12, 7, TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 31.51, 'Cactus Comidas para llevar', 'Cerrito 333', 
+   (10937, 12, 7, TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 31.51, 'Cactus Comidas para llevar', 'Cerrito 333',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10938, 63, 3, TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 31.89, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10938, 63, 3, TO_DATE('03/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 31.89, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11067, 17, 1, TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.98, 'Drachenblut Delikatessen', 'Walserweg 21', 
+   (11067, 17, 1, TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.98, 'Drachenblut Delikatessen', 'Walserweg 21',
     'Aachen', '52066', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11068, 62, 8, TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    2, 81.75, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (11068, 62, 8, TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    2, 81.75, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11069, 80, 1, TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.67, 'Tortuga Restaurante', 'Avda. Azteca 123', 
+   (11069, 80, 1, TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.67, 'Tortuga Restaurante', 'Avda. Azteca 123',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11070, 44, 2, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    1, 136, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (11070, 44, 2, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    1, 136, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11071, 46, 1, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    1, 0.93, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (11071, 46, 1, TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('06/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    1, 0.93, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10942, 66, 9, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 17.95, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10942, 66, 9, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 17.95, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10943, 11, 4, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.17, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10943, 11, 4, TO_DATE('03/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.17, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10944, 10, 6, TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 52.92, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10944, 10, 6, TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 52.92, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10945, 52, 4, TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 10.22, 'Morgenstern Gesundkost', 'Heerstr. 22', 
+   (10945, 52, 4, TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 10.22, 'Morgenstern Gesundkost', 'Heerstr. 22',
     'Leipzig', '04179', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10946, 83, 1, TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.2, 'Vaffeljernet', 'Smagsløget 45', 
+   (10946, 83, 1, TO_DATE('03/12/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.2, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10947, 11, 3, TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.26, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10947, 11, 3, TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.26, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10948, 30, 3, TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.39, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10948, 30, 3, TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.39, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10949, 10, 2, TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 74.44, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10949, 10, 2, TO_DATE('03/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 74.44, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10950, 49, 1, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.5, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10950, 49, 1, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.5, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10951, 68, 9, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.85, 'Richter Supermarkt', 'Starenweg 5', 
+   (10951, 68, 9, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 30.85, 'Richter Supermarkt', 'Starenweg 5',
     'Genève', '1204', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10952, 1, 1, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 40.42, 'Alfreds Futterkiste', 'Obere Str. 57', 
+   (10952, 1, 1, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 40.42, 'Alfreds Futterkiste', 'Obere Str. 57',
     'Berlin', '12209', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10579, 45, 1, TO_DATE('06/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10579, 45, 1, TO_DATE('06/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 13.73, 'Let''s Stop N Shop', '87 Polk St.
-Suite 5', 
+Suite 5',
     'San Francisco', 'CA', '94117', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10580, 56, 4, TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 75.89, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10580, 56, 4, TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 75.89, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10581, 21, 3, TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.01, 'Familia Arquibaldo', 'Rua Orós, 92', 
+   (10581, 21, 3, TO_DATE('06/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 3.01, 'Familia Arquibaldo', 'Rua Orós, 92',
     'São Paulo', 'SP', '05442-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10582, 6, 3, TO_DATE('06/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.71, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (10582, 6, 3, TO_DATE('06/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.71, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10583, 87, 2, TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.28, 'Wartian Herkku', 'Torikatu 38', 
+   (10583, 87, 2, TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 7.28, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10584, 7, 4, TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 59.14, 'Blondel père et fils', '24, place Kléber', 
+   (10584, 7, 4, TO_DATE('06/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 59.14, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10585, 88, 7, TO_DATE('07/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 13.41, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10585, 88, 7, TO_DATE('07/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 13.41, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10586, 66, 9, TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.48, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (10586, 66, 9, TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.48, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10587, 61, 1, TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 62.52, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10587, 61, 1, TO_DATE('07/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 62.52, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10588, 63, 2, TO_DATE('07/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 194.67, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10588, 63, 2, TO_DATE('07/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 194.67, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10589, 32, 8, TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.42, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10589, 32, 8, TO_DATE('07/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.42, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10590, 51, 4, TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 44.77, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10590, 51, 4, TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 44.77, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10591, 83, 1, TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.92, 'Vaffeljernet', 'Smagsløget 45', 
+   (10591, 83, 1, TO_DATE('07/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 55.92, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10592, 44, 3, TO_DATE('07/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 32.1, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10592, 44, 3, TO_DATE('07/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 32.1, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10593, 44, 7, TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 174.2, 'Lehmanns Marktstand', 'Magazinweg 7', 
+   (10593, 44, 7, TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 174.2, 'Lehmanns Marktstand', 'Magazinweg 7',
     'Frankfurt a.M. ', '60528', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10594, 55, 3, TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 5.24, 'Old World Delicatessen', '2743 Bering St.', 
+   (10594, 55, 3, TO_DATE('07/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 5.24, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10595, 20, 2, TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.78, 'Ernst Handel', 'Kirchgasse 6', 
+   (10595, 20, 2, TO_DATE('07/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 96.78, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10596, 89, 8, TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.34, 'White Clover Markets', '1029 - 12th Ave. S.', 
+   (10596, 89, 8, TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.34, 'White Clover Markets', '1029 - 12th Ave. S.',
     'Seattle', 'WA', '98124', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10597, 59, 7, TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 35.12, 'Piccolo und mehr', 'Geislweg 14', 
+   (10597, 59, 7, TO_DATE('07/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 35.12, 'Piccolo und mehr', 'Geislweg 14',
     'Salzburg', '5020', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10598, 65, 1, TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 44.42, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10598, 65, 1, TO_DATE('07/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 44.42, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10599, 11, 6, TO_DATE('07/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.98, 'B''s Beverages', 'Fauntleroy Circus', 
+   (10599, 11, 6, TO_DATE('07/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 29.98, 'B''s Beverages', 'Fauntleroy Circus',
     'London', 'EC2 5NT', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10600, 36, 4, TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10600, 36, 4, TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 45.13, 'Hungry Coyote Import Store', 'City Center Plaza
-516 Main St.', 
+516 Main St.',
     'Elgin', 'OR', '97827', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10601, 35, 7, TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 58.3, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10601, 35, 7, TO_DATE('07/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 58.3, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10602, 83, 8, TO_DATE('07/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.92, 'Vaffeljernet', 'Smagsløget 45', 
+   (10602, 83, 8, TO_DATE('07/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 2.92, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10603, 71, 8, TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 48.77, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10603, 71, 8, TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 48.77, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10604, 28, 1, TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.46, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10604, 28, 1, TO_DATE('07/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 7.46, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10605, 51, 1, TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 379.13, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10605, 51, 1, TO_DATE('07/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 379.13, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10606, 81, 4, TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 79.4, 'Tradição Hipermercados', 'Av. Inês de Castro, 414', 
+   (10606, 81, 4, TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 79.4, 'Tradição Hipermercados', 'Av. Inês de Castro, 414',
     'São Paulo', 'SP', '05634-030', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10607, 71, 5, TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 200.24, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10607, 71, 5, TO_DATE('07/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 200.24, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10608, 79, 4, TO_DATE('07/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.79, 'Toms Spezialitäten', 'Luisenstr. 48', 
+   (10608, 79, 4, TO_DATE('07/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 27.79, 'Toms Spezialitäten', 'Luisenstr. 48',
     'Münster', '44087', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10609, 18, 7, TO_DATE('07/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.85, 'Du monde entier', '67, rue des Cinquante Otages', 
+   (10609, 18, 7, TO_DATE('07/24/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.85, 'Du monde entier', '67, rue des Cinquante Otages',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10610, 41, 8, TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.78, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10610, 41, 8, TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 26.78, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10611, 91, 6, TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 80.65, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (10611, 91, 6, TO_DATE('07/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 80.65, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10612, 71, 1, TO_DATE('07/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 544.08, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10612, 71, 1, TO_DATE('07/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 544.08, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10613, 35, 4, TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.11, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10613, 35, 4, TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 8.11, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10614, 6, 8, TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.93, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (10614, 6, 8, TO_DATE('07/29/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 1.93, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10615, 90, 2, TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.75, 'Wilman Kala', 'Keskuskatu 45', 
+   (10615, 90, 2, TO_DATE('07/30/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.75, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10616, 32, 1, TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 116.53, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10616, 32, 1, TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 116.53, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10617, 32, 4, TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 18.53, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (10617, 32, 4, TO_DATE('07/31/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 18.53, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10618, 51, 1, TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 154.68, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10618, 51, 1, TO_DATE('08/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 154.68, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10619, 51, 3, TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 91.05, 'Mère Paillarde', '43 rue St. Laurent', 
+   (10619, 51, 3, TO_DATE('08/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 91.05, 'Mère Paillarde', '43 rue St. Laurent',
     'Montréal', 'Québec', 'H1J 1C3', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10620, 42, 2, TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.94, 'Laughing Bacchus Wine Cellars', '2319 Elm St.', 
+   (10620, 42, 2, TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 0.94, 'Laughing Bacchus Wine Cellars', '2319 Elm St.',
     'Vancouver', 'BC', 'V3F 2K1', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10621, 38, 4, TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10621, 38, 4, TO_DATE('08/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 23.73, 'Island Trading', 'Garden House
-Crowther Way', 
+Crowther Way',
     'Cowes', 'Isle of Wight', 'PO31 7PJ', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10622, 67, 4, TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 50.97, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10622, 67, 4, TO_DATE('08/06/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 50.97, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10623, 25, 8, TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 97.18, 'Frankenversand', 'Berliner Platz 43', 
+   (10623, 25, 8, TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 97.18, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10624, 78, 4, TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 94.8, 'The Cracker Box', '55 Grizzly Peak Rd.', 
+   (10624, 78, 4, TO_DATE('08/07/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/04/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 94.8, 'The Cracker Box', '55 Grizzly Peak Rd.',
     'Butte', 'MT', '59801', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10625, 2, 3, TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 43.9, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222', 
+   (10625, 2, 3, TO_DATE('08/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 43.9, 'Ana Trujillo Emparedados y helados', 'Avda. de la Constitución 2222',
     'México D.F.', '05021', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10626, 5, 1, TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 138.69, 'Berglunds snabbköp', 'Berguvsvägen  8', 
+   (10626, 5, 1, TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 138.69, 'Berglunds snabbköp', 'Berguvsvägen  8',
     'Luleå', 'S-958 22', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10627, 71, 8, TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 107.46, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10627, 71, 8, TO_DATE('08/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 107.46, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10628, 7, 4, TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.36, 'Blondel père et fils', '24, place Kléber', 
+   (10628, 7, 4, TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 30.36, 'Blondel père et fils', '24, place Kléber',
     'Strasbourg', '67000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10629, 30, 4, TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 85.46, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (10629, 30, 4, TO_DATE('08/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 85.46, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10630, 39, 1, TO_DATE('08/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.35, 'Königlich Essen', 'Maubelstr. 90', 
+   (10630, 39, 1, TO_DATE('08/13/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.35, 'Königlich Essen', 'Maubelstr. 90',
     'Brandenburg', '14776', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10631, 41, 8, TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.87, 'La maison d''Asie', '1 rue Alsace-Lorraine', 
+   (10631, 41, 8, TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.87, 'La maison d''Asie', '1 rue Alsace-Lorraine',
     'Toulouse', '31000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10632, 86, 8, TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.38, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10632, 86, 8, TO_DATE('08/14/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/11/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 41.38, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10633, 20, 7, TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 477.9, 'Ernst Handel', 'Kirchgasse 6', 
+   (10633, 20, 7, TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 477.9, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10634, 23, 4, TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 487.38, 'Folies gourmandes', '184, chaussée de Tournai', 
+   (10634, 23, 4, TO_DATE('08/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/12/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 487.38, 'Folies gourmandes', '184, chaussée de Tournai',
     'Lille', '59000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10635, 49, 8, TO_DATE('08/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 47.46, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22', 
+   (10635, 49, 8, TO_DATE('08/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/15/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 47.46, 'Magazzini Alimentari Riuniti', 'Via Ludovico il Moro 22',
     'Bergamo', '24100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10636, 87, 4, TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.15, 'Wartian Herkku', 'Torikatu 38', 
+   (10636, 87, 4, TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.15, 'Wartian Herkku', 'Torikatu 38',
     'Oulu', '90110', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10637, 62, 6, TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 201.29, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10637, 62, 6, TO_DATE('08/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/16/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 201.29, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10638, 47, 3, TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 158.44, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10638, 47, 3, TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 158.44, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10639, 70, 7, TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 38.64, 'Santé Gourmet', 'Erling Skakkes gate 78', 
+   (10639, 70, 7, TO_DATE('08/20/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/17/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 38.64, 'Santé Gourmet', 'Erling Skakkes gate 78',
     'Stavern', '4110', 'Norway');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10640, 86, 4, TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 23.55, 'Die Wandernde Kuh', 'Adenauerallee 900', 
+   (10640, 86, 4, TO_DATE('08/21/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/18/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 23.55, 'Die Wandernde Kuh', 'Adenauerallee 900',
     'Stuttgart', '70563', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10641, 35, 4, TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 179.61, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10641, 35, 4, TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 179.61, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10642, 73, 7, TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 41.89, 'Simons bistro', 'Vinbæltet 34', 
+   (10642, 73, 7, TO_DATE('08/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/19/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/05/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 41.89, 'Simons bistro', 'Vinbæltet 34',
     'København', '1734', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10643, 1, 6, TO_DATE('08/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.46, 'Alfreds Futterkiste', 'Obere Str. 57A 
-FDS', 
+   (10643, 1, 6, TO_DATE('08/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 29.46, 'Alfreds Futterkiste', 'Obere Str. 57A
+FDS',
     'Berlin', '12209', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10644, 88, 3, TO_DATE('08/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.14, 'Wellington Importadora', 'Rua do Mercado, 12', 
+   (10644, 88, 3, TO_DATE('08/25/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/22/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/01/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.14, 'Wellington Importadora', 'Rua do Mercado, 12',
     'Resende', 'SP', '08737-363', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10645, 34, 4, TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.41, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10645, 34, 4, TO_DATE('08/26/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/23/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/02/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 12.41, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10646, 37, 9, TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 142.33, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10646, 37, 9, TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/08/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 142.33, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10647, 61, 4, TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 45.54, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10647, 61, 4, TO_DATE('08/27/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('09/10/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/03/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 45.54, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10648, 67, 5, TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 14.25, 'Ricardo Adocicados', 'Av. Copacabana, 267', 
+   (10648, 67, 5, TO_DATE('08/28/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('10/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('09/09/1997 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 14.25, 'Ricardo Adocicados', 'Av. Copacabana, 267',
     'Rio de Janeiro', 'RJ', '02389-890', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10953, 4, 9, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10953, 4, 9, TO_DATE('03/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 23.72, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10954, 47, 5, TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 27.91, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (10954, 47, 5, TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 27.91, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10955, 24, 8, TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.26, 'Folk och fä HB', 'Åkergatan 24', 
+   (10955, 24, 8, TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 3.26, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10956, 6, 6, TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.65, 'Blauer See Delikatessen', 'Forsterstr. 57', 
+   (10956, 6, 6, TO_DATE('03/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 44.65, 'Blauer See Delikatessen', 'Forsterstr. 57',
     'Mannheim', '68306', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10957, 35, 8, TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 105.36, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10957, 35, 8, TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 105.36, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10958, 54, 7, TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10958, 54, 7, TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 49.56, 'Océano Atlántico Ltda.', 'Ing. Gustavo Moncada 8585
-Piso 20-A', 
+Piso 20-A',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10959, 31, 6, TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.98, 'Gourmet Lanchonetes', 'Av. Brasil, 442', 
+   (10959, 31, 6, TO_DATE('03/18/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.98, 'Gourmet Lanchonetes', 'Av. Brasil, 442',
     'Campinas', 'SP', '04876-786', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10960, 35, 3, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.08, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10960, 35, 3, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 2.08, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10961, 62, 8, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 104.47, 'Queen Cozinha', 'Alameda dos Canàrios, 891', 
+   (10961, 62, 8, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 104.47, 'Queen Cozinha', 'Alameda dos Canàrios, 891',
     'São Paulo', 'SP', '05487-020', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10962, 63, 8, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 275.79, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10962, 63, 8, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 275.79, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10963, 28, 9, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.7, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32', 
+   (10963, 28, 9, TO_DATE('03/19/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 2.7, 'Furia Bacalhau e Frutos do Mar', 'Jardim das rosas n. 32',
     'Lisboa', '1675', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10964, 74, 3, TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 87.38, 'Spécialités du monde', '25, rue Lauriston', 
+   (10964, 74, 3, TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 87.38, 'Spécialités du monde', '25, rue Lauriston',
     'Paris', '75016', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10965, 55, 6, TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 144.38, 'Old World Delicatessen', '2743 Bering St.', 
+   (10965, 55, 6, TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 144.38, 'Old World Delicatessen', '2743 Bering St.',
     'Anchorage', 'AK', '99508', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10966, 14, 4, TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 27.19, 'Chop-suey Chinese', 'Hauptstr. 31', 
+   (10966, 14, 4, TO_DATE('03/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 27.19, 'Chop-suey Chinese', 'Hauptstr. 31',
     'Bern', '3012', 'Switzerland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10967, 79, 2, TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 62.22, 'Toms Spezialitäten', 'Luisenstr. 48', 
+   (10967, 79, 2, TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 62.22, 'Toms Spezialitäten', 'Luisenstr. 48',
     'Münster', '44087', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10968, 20, 1, TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 74.6, 'Ernst Handel', 'Kirchgasse 6', 
+   (10968, 20, 1, TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 74.6, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10969, 15, 1, TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.21, 'Comércio Mineiro', 'Av. dos Lusíadas, 23', 
+   (10969, 15, 1, TO_DATE('03/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.21, 'Comércio Mineiro', 'Av. dos Lusíadas, 23',
     'São Paulo', 'SP', '05432-043', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10970, 8, 9, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.16, 'Bólido Comidas preparadas', 'C/ Araquil, 67', 
+   (10970, 8, 9, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 16.16, 'Bólido Comidas preparadas', 'C/ Araquil, 67',
     'Madrid', '28023', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10971, 26, 2, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 121.82, 'France restauration', '54, rue Royale', 
+   (10971, 26, 2, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 121.82, 'France restauration', '54, rue Royale',
     'Nantes', '44000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10972, 40, 4, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.02, 'La corne d''abondance', '67, avenue de l''Europe', 
+   (10972, 40, 4, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 0.02, 'La corne d''abondance', '67, avenue de l''Europe',
     'Versailles', '78000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10973, 40, 6, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.17, 'La corne d''abondance', '67, avenue de l''Europe', 
+   (10973, 40, 6, TO_DATE('03/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 15.17, 'La corne d''abondance', '67, avenue de l''Europe',
     'Versailles', '78000', 'France');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10974, 75, 3, TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.96, 'Split Rail Beer & Ale', 'P.O. Box 555', 
+   (10974, 75, 3, TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 12.96, 'Split Rail Beer & Ale', 'P.O. Box 555',
     'Lander', 'WY', '82520', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10975, 10, 1, TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.27, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10975, 10, 1, TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/22/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 32.27, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10976, 35, 1, TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 37.97, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35', 
+   (10976, 35, 1, TO_DATE('03/25/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 37.97, 'HILARIÓN-Abastos', 'Carrera 22 con Ave. Carlos Soublette #8-35',
     'San Cristóbal', 'Táchira', '5022', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10977, 24, 8, TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 208.5, 'Folk och fä HB', 'Åkergatan 24', 
+   (10977, 24, 8, TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 208.5, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10978, 50, 9, TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.82, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (10978, 50, 9, TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 32.82, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10979, 20, 8, TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 353.07, 'Ernst Handel', 'Kirchgasse 6', 
+   (10979, 20, 8, TO_DATE('03/26/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 353.07, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10980, 24, 4, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.26, 'Folk och fä HB', 'Åkergatan 24', 
+   (10980, 24, 4, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.26, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10981, 34, 1, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 193.37, 'Hanari Carnes', 'Rua do Paço, 67', 
+   (10981, 34, 1, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 193.37, 'Hanari Carnes', 'Rua do Paço, 67',
     'Rio de Janeiro', 'RJ', '05454-876', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10982, 10, 2, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 14.01, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.', 
+   (10982, 10, 2, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 14.01, 'Bottom-Dollar Markets', '23 Tsawassen Blvd.',
     'Tsawassen', 'BC', 'T2F 8M4', 'Canada');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10983, 71, 2, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 657.54, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10983, 71, 2, TO_DATE('03/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 657.54, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10984, 71, 1, TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 211.22, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (10984, 71, 1, TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 211.22, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_COUNTRY)
  Values
-   (10985, 37, 2, TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 91.51, 'Hungry Owl All-Night Grocers', '8 Johnstown Road', 
+   (10985, 37, 2, TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 91.51, 'Hungry Owl All-Night Grocers', '8 Johnstown Road',
     'Cork', 'Co. Cork', 'Ireland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10986, 54, 8, TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10986, 54, 8, TO_DATE('03/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/27/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 217.86, 'Océano Atlántico Ltda.', 'Ing. Gustavo Moncada 8585
-Piso 20-A', 
+Piso 20-A',
     'Buenos Aires', '1010', 'Argentina');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10987, 19, 8, TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 185.48, 'Eastern Connection', '35 King George', 
+   (10987, 19, 8, TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 185.48, 'Eastern Connection', '35 King George',
     'London', 'WX3 6FW', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10988, 65, 3, TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 61.14, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (10988, 65, 3, TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 61.14, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10989, 61, 2, TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 34.76, 'Que Delícia', 'Rua da Panificadora, 12', 
+   (10989, 61, 2, TO_DATE('03/31/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/28/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 34.76, 'Que Delícia', 'Rua da Panificadora, 12',
     'Rio de Janeiro', 'RJ', '02389-673', 'Brazil');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10990, 20, 2, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 117.61, 'Ernst Handel', 'Kirchgasse 6', 
+   (10990, 20, 2, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 117.61, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10991, 63, 1, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 38.51, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10991, 63, 1, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 38.51, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10992, 77, 1, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (10992, 77, 1, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 4.27, 'The Big Cheese', '89 Jefferson Way
-Suite 2', 
+Suite 2',
     'Portland', 'OR', '97201', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10993, 24, 7, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 8.81, 'Folk och fä HB', 'Åkergatan 24', 
+   (10993, 24, 7, TO_DATE('04/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/29/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 8.81, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10994, 83, 2, TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 65.53, 'Vaffeljernet', 'Smagsløget 45', 
+   (10994, 83, 2, TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 65.53, 'Vaffeljernet', 'Smagsløget 45',
     'Århus', '8200', 'Denmark');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10995, 58, 1, TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 46, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321', 
+   (10995, 58, 1, TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 46, 'Pericles Comidas clásicas', 'Calle Dr. Jorge Cash 321',
     'México D.F.', '05033', 'Mexico');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10996, 63, 4, TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.12, 'QUICK-Stop', 'Taucherstraße 10', 
+   (10996, 63, 4, TO_DATE('04/02/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/30/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 1.12, 'QUICK-Stop', 'Taucherstraße 10',
     'Cunewalde', '01307', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10997, 46, 8, TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 73.91, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo', 
+   (10997, 46, 8, TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 73.91, 'LILA-Supermercado', 'Carrera 52 con Ave. Bolívar #65-98 Llano Largo',
     'Barquisimeto', 'Lara', '3508', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10998, 91, 8, TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.31, 'Wolski Zajazd', 'ul. Filtrowa 68', 
+   (10998, 91, 8, TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 20.31, 'Wolski Zajazd', 'ul. Filtrowa 68',
     'Warszawa', '01-012', 'Poland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (10999, 56, 6, TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 96.35, 'Ottilies Käseladen', 'Mehrheimerstr. 369', 
+   (10999, 56, 6, TO_DATE('04/03/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/01/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 96.35, 'Ottilies Käseladen', 'Mehrheimerstr. 369',
     'Köln', '50739', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11000, 65, 2, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 55.12, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.', 
+   (11000, 65, 2, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 55.12, 'Rattlesnake Canyon Grocery', '2817 Milton Dr.',
     'Albuquerque', 'NM', '87110', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11001, 24, 2, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 197.3, 'Folk och fä HB', 'Åkergatan 24', 
+   (11001, 24, 2, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/14/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 197.3, 'Folk och fä HB', 'Åkergatan 24',
     'Bräcke', 'S-844 67', 'Sweden');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11002, 71, 4, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 141.16, 'Save-a-lot Markets', '187 Suffolk Ln.', 
+   (11002, 71, 4, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/16/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 141.16, 'Save-a-lot Markets', '187 Suffolk Ln.',
     'Boise', 'ID', '83720', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11003, 78, 3, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 14.91, 'The Cracker Box', '55 Grizzly Peak Rd.', 
+   (11003, 78, 3, TO_DATE('04/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/04/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 14.91, 'The Cracker Box', '55 Grizzly Peak Rd.',
     'Butte', 'MT', '59801', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11004, 50, 3, TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 44.84, 'Maison Dewey', 'Rue Joseph-Bens 532', 
+   (11004, 50, 3, TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 44.84, 'Maison Dewey', 'Rue Joseph-Bens 532',
     'Bruxelles', 'B-1180', 'Belgium');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11005, 90, 2, TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.75, 'Wilman Kala', 'Keskuskatu 45', 
+   (11005, 90, 2, TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 0.75, 'Wilman Kala', 'Keskuskatu 45',
     'Helsinki', '21240', 'Finland');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11006, 32, 3, TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.19, 'Great Lakes Food Market', '2732 Baker Blvd.', 
+   (11006, 32, 3, TO_DATE('04/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/05/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 25.19, 'Great Lakes Food Market', '2732 Baker Blvd.',
     'Eugene', 'OR', '97403', 'USA');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11007, 60, 8, TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 202.24, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58', 
+   (11007, 60, 8, TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 202.24, 'Princesa Isabel Vinhos', 'Estrada da saúde n. 58',
     'Lisboa', '1756', 'Portugal');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11008, 20, 7, TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    3, 79.46, 'Ernst Handel', 'Kirchgasse 6', 
+   (11008, 20, 7, TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    3, 79.46, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11009, 30, 2, TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 59.11, 'Godos Cocina Típica', 'C/ Romero, 33', 
+   (11009, 30, 2, TO_DATE('04/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/06/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 59.11, 'Godos Cocina Típica', 'C/ Romero, 33',
     'Sevilla', '41101', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11010, 66, 2, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 28.71, 'Reggiani Caseifici', 'Strada Provinciale 124', 
+   (11010, 66, 2, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/21/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 28.71, 'Reggiani Caseifici', 'Strada Provinciale 124',
     'Reggio Emilia', '42100', 'Italy');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11011, 1, 3, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.21, 'Alfreds Futterkiste', 'Obere Str. 57', 
+   (11011, 1, 3, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 1.21, 'Alfreds Futterkiste', 'Obere Str. 57',
     'Berlin', '12209', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11012, 25, 1, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 242.95, 'Frankenversand', 'Berliner Platz 43', 
+   (11012, 25, 1, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/23/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/17/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 242.95, 'Frankenversand', 'Berliner Platz 43',
     'München', '80805', 'Germany');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11013, 69, 2, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 32.99, 'Romero y tomillo', 'Gran Vía, 1', 
+   (11013, 69, 2, TO_DATE('04/09/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/07/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 1, 32.99, 'Romero y tomillo', 'Gran Vía, 1',
     'Madrid', '28001', 'Spain');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11014, 47, 2, TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.6, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar', 
+   (11014, 47, 2, TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/15/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 3, 23.6, 'LINO-Delicateses', 'Ave. 5 de Mayo Porlamar',
     'I. de Margarita', 'Nueva Esparta', '4980', 'Venezuela');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11015, 70, 2, TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.62, 'Santé Gourmet', 'Erling Skakkes gate 78', 
+   (11015, 70, 2, TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('04/24/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 4.62, 'Santé Gourmet', 'Erling Skakkes gate 78',
     'Stavern', '4110', 'Norway');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_REGION, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11016, 4, 9, TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
+   (11016, 4, 9, TO_DATE('04/10/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/08/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
     TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 33.8, 'Around the Horn', 'Brook Farm
-Stratford St. Mary', 
+Stratford St. Mary',
     'Colchester', 'Essex', 'CO7 6JX', 'UK');
 Insert into ORDERS
    (ORDER_ID, CUSTOMER_ID, EMPLOYEE_ID, ORDER_DATE, REQUIRED_DATE, SHIPPED_DATE, SHIP_VIA, FREIGHT, SHIP_NAME, SHIP_ADDRESS, SHIP_CITY, SHIP_POSTAL_CODE, SHIP_COUNTRY)
  Values
-   (11017, 20, 9, TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 
-    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 754.26, 'Ernst Handel', 'Kirchgasse 6', 
+   (11017, 20, 9, TO_DATE('04/13/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), TO_DATE('05/11/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'),
+    TO_DATE('04/20/1998 00:00:00', 'MM/DD/YYYY HH24:MI:SS'), 2, 754.26, 'Ernst Handel', 'Kirchgasse 6',
     'Graz', '8010', 'Austria');
 COMMIT;
 
@@ -15082,4 +15082,3 @@ Insert into ADHOC.ORDER_DETAILS
    (11052, 43, 46, 30, 0.2);
 
 COMMIT;
-
