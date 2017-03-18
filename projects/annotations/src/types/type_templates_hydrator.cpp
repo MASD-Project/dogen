@@ -69,10 +69,10 @@ const std::string template_kind_kernel_template("kernel_template");
 const std::string template_kind_facet_template("facet_template");
 const std::string template_kind_archetype_template("archetype_template");
 
+const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_json_file("Failed to parse JSON file");
-const std::string invalid_option_in_json_file(
-    "Failed to read option in JSON file: ");
-const std::string invalid_path("Failed to find JSON path: ");
+const std::string invalid_value_in_json("Failed to value in JSON: ");
+const std::string invalid_path("Failed to find path: ");
 const std::string template_has_no_name("Template has no 'name'.");
 const std::string template_has_no_hierarchy(
     "Template has no ownership hierarchy.");
@@ -223,23 +223,29 @@ type_templates_hydrator::hydrate(std::istream& s) const {
         BOOST_LOG_SEV(lg, trace) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_json_file << ": " << e.what();
+        BOOST_LOG_SEV(lg, error) << invalid_json_file <<  e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_json_file + e.what()));
     } catch (const ptree_bad_data& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_option_in_json_file << ": "
-                                 << e.what();
+        BOOST_LOG_SEV(lg, error) << invalid_value_in_json << e.what();
         BOOST_THROW_EXCEPTION(
-            hydration_error(invalid_option_in_json_file + e.what()));
+            hydration_error(invalid_value_in_json + e.what()));
     } catch (const ptree_bad_path& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_path << ": " << e.what();
+        BOOST_LOG_SEV(lg, error) << invalid_path << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
 }
 
 std::list<type_template> type_templates_hydrator::
 hydrate(const boost::filesystem::path& p) const {
-    BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << p.generic_string();
+    const auto gs(p.generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
+
     boost::filesystem::ifstream s(p);
+    if (s.fail()) {
+        BOOST_LOG_SEV(lg, error) << failed_to_open_file << gs;
+        BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
+    }
+
     const auto r(hydrate(s));
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;

@@ -85,9 +85,8 @@ const std::string object_type_associative_container_value(
     "associative_container");
 const std::string object_type_sequence_container_value("sequence_container");
 
-const std::string invalid_json_file("Failed to parse JSON file");
-const std::string invalid_option_in_json_file(
-    "Failed to read option in JSON file: ");
+const std::string invalid_json_file("Failed to parse JSON file: ");
+const std::string invalid_value_in_json("Failed to value in JSON: ");
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_meta_type("Invalid value for meta type: ");
 const std::string missing_module("Could not find module: ");
@@ -580,18 +579,16 @@ hydrator::hydrate(std::istream& s, const bool is_target) const {
         BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_json_file << ": " << e.what();
+        BOOST_LOG_SEV(lg, error) << invalid_json_file << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_json_file + e.what()));
     } catch (const ptree_bad_data& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_option_in_json_file << ": "
-                                 << e.what();
+        BOOST_LOG_SEV(lg, error) << invalid_value_in_json << e.what();
         BOOST_THROW_EXCEPTION(
-            hydration_error(invalid_option_in_json_file + e.what()));
+            hydration_error(invalid_value_in_json + e.what()));
     } catch (const ptree_bad_path& e) {
-        BOOST_LOG_SEV(lg, error) << invalid_path << ": " << e.what();
+        BOOST_LOG_SEV(lg, error) << invalid_path << e.what();
         BOOST_THROW_EXCEPTION(hydration_error(invalid_path + e.what()));
     }
-    BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
 }
 
 intermediate_model hydrator::
@@ -601,7 +598,7 @@ hydrate(const boost::filesystem::path& p, const bool is_target) const {
     boost::filesystem::ifstream s(p);
 
     if (s.fail()) {
-        BOOST_LOG_SEV(lg, error) << failed_to_open_file << ": " << gs;
+        BOOST_LOG_SEV(lg, error) << failed_to_open_file << gs;
         BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
     }
 
