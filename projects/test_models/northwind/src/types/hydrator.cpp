@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include <boost/filesystem/fstream.hpp>
@@ -37,6 +38,14 @@ auto lg(logger_factory("test_models::northwind"));
 
 const std::string insert_line("INSERT ");
 
+const std::string region_entity("Region");
+const std::string employees_entity("Employees");
+
+const std::string key_region_id("RegionID");
+const std::string key_employee_id("EmployeeID");
+const std::string key_region_description("RegionDescription");
+
+const std::string invalid_key("Key is not valid: ");
 const std::string invalid_path("Failed to find JSON path: ");
 const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_json_file("Failed to parse JSON file: ");
@@ -47,12 +56,53 @@ const std::string insert_line_missing_end_bracket(
     "Insert line does not have the expected end bracket ')'");
 const std::string mismatch_between_keys_and_values(
     "Keys and values containers do not having matching sizes");
+const std::string unsupported_entity("Entity is not supported: ");
 
 }
 
 namespace dogen {
 namespace test_models {
 namespace northwind {
+
+void hydrator::populate_region(
+    const std::unordered_map<std::string, std::string>& map,
+    repository& rp) const {
+
+    region rg;
+    for (const auto& pair : map) {
+        const auto& key(pair.first);
+        const auto& value(pair.second);
+        if (key == key_region_id)
+            rg.region_id(region_id(boost::lexical_cast<int>(value)));
+        else if (key == key_region_description)
+            rg.region_description(value);
+        else {
+            BOOST_LOG_SEV(lg, error) << invalid_key << key;
+            BOOST_THROW_EXCEPTION(hydration_error(invalid_key + key));
+        }
+    }
+
+    rp.regions().push_back(rg);
+}
+
+void hydrator::populate_employees(
+    const std::unordered_map<std::string, std::string>& map,
+    repository& rp) const {
+
+    employees e;
+    for (const auto& pair : map) {
+        const auto& key(pair.first);
+        const auto& value(pair.second);
+        if (key == key_employee_id)
+            e.employee_id(employee_id(boost::lexical_cast<int>(value)));
+        // else {
+        //     BOOST_LOG_SEV(lg, error) << invalid_key << key;
+        //     BOOST_THROW_EXCEPTION(hydration_error(invalid_key + key));
+        // }
+    }
+
+    rp.employees().push_back(e);
+}
 
 void hydrator::
 log_tuple(const std::tuple<std::string, std::string, std::string>& t) const {
@@ -117,15 +167,24 @@ void hydrator::
 scrub_tuple(std::tuple<std::string, std::string, std::string>& t) const {
     BOOST_LOG_SEV(lg, debug) << "Started scrubbing tuple.";
 
-    boost::erase_first(std::get<0>(t), insert_line);
-    boost::erase_all(std::get<0>(t), "[dbo].");
-    boost::erase_all(std::get<0>(t), "[");
-    boost::erase_all(std::get<0>(t), "]");
+    auto& zeroth(std::get<0>(t));
+    boost::erase_first(zeroth, insert_line);
+    boost::erase_all(zeroth, "[dbo].");
+    boost::erase_all(zeroth, "[");
+    boost::erase_all(zeroth, "]");
 
-    boost::erase_all(std::get<1>(t), "[");
-    boost::erase_all(std::get<1>(t), "]");
+    auto& first(std::get<1>(t));
+    boost::erase_all(first, "[");
+    boost::erase_all(first, "]");
 
-    boost::replace_all(std::get<2>(t), ", N'", ", ");
+    auto& second(std::get<2>(t));
+    boost::replace_all(second, ", N'", ", ");
+    boost::replace_all(second, "\r\n", "<new_line>");
+    boost::replace_all(second, "\n", "<new_line>");
+
+    const char quote('\'');
+    if (!second.empty() && second[second.length() - 1] == quote)
+        second = second.substr(0, second.length() - 2);
 
     log_tuple(t);
     BOOST_LOG_SEV(lg, debug) << "Finished scrubbing tuple.";
@@ -156,6 +215,20 @@ std::unordered_map<std::string, std::string> hydrator::map_keys_to_values(
     return r;
 }
 
+void hydrator::populate_repository(const std::string& entity,
+    const std::unordered_map<std::string, std::string>& map,
+    repository& rp) const {
+
+    if (entity == region_entity)
+        populate_region(map, rp);
+    else if (entity == employees_entity)
+        populate_employees(map, rp);
+    else {
+        BOOST_LOG_SEV(lg, error) << unsupported_entity << entity;
+        BOOST_THROW_EXCEPTION(hydration_error(unsupported_entity + entity));
+    }
+}
+
 repository hydrator::read_stream(std::istream& s) const {
     repository r;
 
@@ -169,10 +242,12 @@ repository hydrator::read_stream(std::istream& s) const {
         auto t(section_insert_line(line));
         scrub_tuple(t);
 
-        const auto entity(std::get<0>(t));
         const auto keys(std::get<1>(t));
         const auto values(std::get<2>(t));
         const auto map(map_keys_to_values(keys, values));
+
+        const auto entity(std::get<0>(t));
+        populate_repository(entity, map, r);
     }
 
     return r;

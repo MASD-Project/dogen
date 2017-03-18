@@ -34,7 +34,9 @@ namespace  {
 const std::string test_suite("hydrator_tests");
 const std::string test_module("northwind");
 
-const std::string region_data("INSERT [dbo].[Region] ([RegionID], [RegionDescription]) VALUES (1, N'Eastern                               ");
+const std::string region_data("INSERT [dbo].[Region] ([RegionID], [RegionDescription]) VALUES (1, N'Eastern                               '");
+const std::string employees_data(R"(INSERT [dbo].[Employees] ([EmployeeID], [LastName], [FirstName], [Title], [TitleOfCourtesy], [BirthDate], [HireDate], [Address], [City], [Region], [PostalCode], [Country], [HomePhone], [Extension], [Photo], [Notes], [ReportsTo], [PhotoPath]) VALUES (1, N'Davolio', N'Nancy', N'Sales Representative', N'Ms.', CAST(0x000045D100000000 AS DateTime), CAST(0x000083BB00000000 AS DateTime), N'507 - 20th Ave. E.
+Apt. 2A', N'Seattle', N'WA', N'98122', N'USA', N'(206) 555-9857', N'5467', 0x151C2F00020000, N'Education includes a BA in psychology from Colorado State University in 1970.  She also completed "The Art of the Cold Call."  Nancy is a member of Toastmasters International.', 2, N'http://accweb/emmployees/davolio.bmp')");
 
 }
 
@@ -49,6 +51,28 @@ BOOST_AUTO_TEST_CASE(hydrating_region_results_in_expected_data) {
     hydrator h;
     const auto rp(h.hydrate(iss));
     BOOST_LOG_SEV(lg, debug) << "Result: " << rp;
+
+    BOOST_REQUIRE(rp.regions().size() == 1);
+    const auto& rg(rp.regions().front());
+
+    BOOST_CHECK(rg.region_id().value() == 1);
+    BOOST_CHECK(rg.region_description() == "Eastern");
+}
+
+BOOST_AUTO_TEST_CASE(hydrating_employees_results_in_expected_data) {
+    SETUP_TEST_LOG_SOURCE("hydrating_employees_results_in_expected_data");
+/*
+    std::istringstream iss(employees_data);
+    hydrator h;
+    const auto rp(h.hydrate(iss));
+    BOOST_LOG_SEV(lg, debug) << "Result: " << rp;
+
+    BOOST_REQUIRE(rp.regions().size() == 1);
+    const auto& rg(rp.regions().front());
+
+    BOOST_CHECK(rg.region_id().value() == 1);
+    BOOST_CHECK(rg.region_description() == "Eastern");
+*/
 }
 
 BOOST_AUTO_TEST_SUITE_END()

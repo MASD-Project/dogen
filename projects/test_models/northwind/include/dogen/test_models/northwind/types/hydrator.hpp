@@ -39,6 +39,14 @@ namespace northwind {
 
 class hydrator final {
 private:
+    void populate_region(
+        const std::unordered_map<std::string, std::string>& map,
+        repository& rp) const;
+    void populate_employees(
+        const std::unordered_map<std::string, std::string>& map,
+        repository& rp) const;
+
+private:
     void log_tuple(
         const std::tuple<std::string, std::string, std::string>& t) const;
 
@@ -50,6 +58,10 @@ private:
 
     std::unordered_map<std::string, std::string> map_keys_to_values(
         const std::string& keys, const std::string& values) const;
+
+    void populate_repository(const std::string& entity,
+        const std::unordered_map<std::string, std::string>& map,
+        repository& rp) const;
 
 private:
     repository read_stream(std::istream& s) const;
