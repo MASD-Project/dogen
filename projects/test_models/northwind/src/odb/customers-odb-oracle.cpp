@@ -77,6 +77,15 @@ namespace odb
       n += 1UL;
     }
 
+    // customer_code_
+    //
+    b[n].type = oracle::bind::string;
+    b[n].buffer = i.customer_code_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.customer_code_value));
+    b[n].size = &i.customer_code_size;
+    b[n].indicator = &i.customer_code_indicator;
+    n++;
+
     // company_name_
     //
     b[n].type = oracle::bind::string;
@@ -202,6 +211,26 @@ namespace odb
         i.customer_id_value,
         v,
         sk);
+    }
+
+    // customer_code_
+    //
+    {
+      ::std::string const& v =
+        o.customer_code ();
+
+      bool is_null (true);
+      std::size_t size (0);
+      oracle::value_traits<
+          ::std::string,
+          oracle::id_string >::set_image (
+        i.customer_code_value,
+        sizeof (i.customer_code_value),
+        size,
+        is_null,
+        v);
+      i.customer_code_indicator = is_null ? -1 : 0;
+      i.customer_code_size = static_cast<ub2> (size);
     }
 
     // company_name_
@@ -426,6 +455,21 @@ namespace odb
         db);
     }
 
+    // customer_code_
+    //
+    {
+      ::std::string& v =
+        o.customer_code ();
+
+      oracle::value_traits<
+          ::std::string,
+          oracle::id_string >::set_value (
+        v,
+        i.customer_code_value,
+        i.customer_code_size,
+        i.customer_code_indicator == -1);
+    }
+
     // company_name_
     //
     {
@@ -592,6 +636,7 @@ namespace odb
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_oracle >::persist_statement[] =
   "INSERT INTO \"NORTHWIND\".\"CUSTOMERS\" "
   "(\"CUSTOMER_ID\", "
+  "\"CUSTOMER_CODE\", "
   "\"COMPANY_NAME\", "
   "\"CONTACT_NAME\", "
   "\"CONTACT_TITLE\", "
@@ -603,11 +648,12 @@ namespace odb
   "\"PHONE\", "
   "\"FAX\") "
   "VALUES "
-  "(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11)";
+  "(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12)";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_oracle >::find_statement[] =
   "SELECT "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_ID\", "
+  "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_CODE\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"COMPANY_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_TITLE\", "
@@ -624,17 +670,18 @@ namespace odb
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_oracle >::update_statement[] =
   "UPDATE \"NORTHWIND\".\"CUSTOMERS\" "
   "SET "
-  "\"COMPANY_NAME\"=:1, "
-  "\"CONTACT_NAME\"=:2, "
-  "\"CONTACT_TITLE\"=:3, "
-  "\"ADDRESS\"=:4, "
-  "\"CITY\"=:5, "
-  "\"REGION\"=:6, "
-  "\"POSTAL_CODE\"=:7, "
-  "\"COUNTRY\"=:8, "
-  "\"PHONE\"=:9, "
-  "\"FAX\"=:10 "
-  "WHERE \"CUSTOMER_ID\"=:11";
+  "\"CUSTOMER_CODE\"=:1, "
+  "\"COMPANY_NAME\"=:2, "
+  "\"CONTACT_NAME\"=:3, "
+  "\"CONTACT_TITLE\"=:4, "
+  "\"ADDRESS\"=:5, "
+  "\"CITY\"=:6, "
+  "\"REGION\"=:7, "
+  "\"POSTAL_CODE\"=:8, "
+  "\"COUNTRY\"=:9, "
+  "\"PHONE\"=:10, "
+  "\"FAX\"=:11 "
+  "WHERE \"CUSTOMER_ID\"=:12";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_oracle >::erase_statement[] =
   "DELETE FROM \"NORTHWIND\".\"CUSTOMERS\" "
@@ -643,6 +690,7 @@ namespace odb
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_oracle >::query_statement[] =
   "SELECT "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_ID\", "
+  "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_CODE\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"COMPANY_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_TITLE\", "
@@ -1062,6 +1110,7 @@ namespace odb
         {
           db.execute ("CREATE TABLE \"NORTHWIND\".\"CUSTOMERS\" (\n"
                       "  \"CUSTOMER_ID\" NUMBER(10) NOT NULL PRIMARY KEY,\n"
+                      "  \"CUSTOMER_CODE\" VARCHAR2(512) NULL,\n"
                       "  \"COMPANY_NAME\" VARCHAR2(512) NULL,\n"
                       "  \"CONTACT_NAME\" VARCHAR2(512) NULL,\n"
                       "  \"CONTACT_TITLE\" VARCHAR2(512) NULL,\n"

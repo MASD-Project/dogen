@@ -24,14 +24,14 @@
 
 namespace {
 
-dogen::test_models::northwind::product_id
-create_dogen_test_models_northwind_product_id(const unsigned int position) {
-    return dogen::test_models::northwind::product_id_generator::create(position);
-}
-
 dogen::test_models::northwind::order_id
 create_dogen_test_models_northwind_order_id(const unsigned int position) {
     return dogen::test_models::northwind::order_id_generator::create(position);
+}
+
+dogen::test_models::northwind::product_id
+create_dogen_test_models_northwind_product_id(const unsigned int position) {
+    return dogen::test_models::northwind::product_id_generator::create(position);
 }
 
 }
@@ -44,8 +44,8 @@ order_details_key_generator::order_details_key_generator() : position_(0) { }
 
 void order_details_key_generator::
 populate(const unsigned int position, result_type& v) {
-    v.product_id(create_dogen_test_models_northwind_product_id(position + 0));
-    v.order_id(create_dogen_test_models_northwind_order_id(position + 1));
+    v.order_id(create_dogen_test_models_northwind_order_id(position + 0));
+    v.product_id(create_dogen_test_models_northwind_product_id(position + 1));
 }
 
 order_details_key_generator::result_type

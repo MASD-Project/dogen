@@ -20,9 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include <boost/date_time/gregorian/gregorian.hpp>
-#include "dogen/test_models/northwind/io/employees_io.hpp"
-#include "dogen/test_models/northwind/io/employee_id_io.hpp"
+#include "dogen/test_models/northwind/io/suppliers_io.hpp"
+#include "dogen/test_models/northwind/io/supplier_id_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -36,26 +35,21 @@ namespace dogen {
 namespace test_models {
 namespace northwind {
 
-std::ostream& operator<<(std::ostream& s, const employees& v) {
+std::ostream& operator<<(std::ostream& s, const suppliers& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::test_models::northwind::employees\"" << ", "
-      << "\"employee_id\": " << v.employee_id() << ", "
-      << "\"last_name\": " << "\"" << tidy_up_string(v.last_name()) << "\"" << ", "
-      << "\"first_name\": " << "\"" << tidy_up_string(v.first_name()) << "\"" << ", "
-      << "\"title\": " << "\"" << tidy_up_string(v.title()) << "\"" << ", "
-      << "\"title_of_courtesy\": " << "\"" << tidy_up_string(v.title_of_courtesy()) << "\"" << ", "
-      << "\"birth_date\": " << "\"" << v.birth_date() << "\"" << ", "
-      << "\"hire_date\": " << "\"" << v.hire_date() << "\"" << ", "
+      << "\"__type__\": " << "\"dogen::test_models::northwind::suppliers\"" << ", "
+      << "\"supplier_id\": " << v.supplier_id() << ", "
+      << "\"company_name\": " << "\"" << tidy_up_string(v.company_name()) << "\"" << ", "
+      << "\"contact_name\": " << "\"" << tidy_up_string(v.contact_name()) << "\"" << ", "
+      << "\"contact_title\": " << "\"" << tidy_up_string(v.contact_title()) << "\"" << ", "
       << "\"address\": " << "\"" << tidy_up_string(v.address()) << "\"" << ", "
       << "\"city\": " << "\"" << tidy_up_string(v.city()) << "\"" << ", "
       << "\"region\": " << "\"" << tidy_up_string(v.region()) << "\"" << ", "
       << "\"postal_code\": " << "\"" << tidy_up_string(v.postal_code()) << "\"" << ", "
       << "\"country\": " << "\"" << tidy_up_string(v.country()) << "\"" << ", "
-      << "\"home_phone\": " << "\"" << tidy_up_string(v.home_phone()) << "\"" << ", "
-      << "\"extension\": " << "\"" << tidy_up_string(v.extension()) << "\"" << ", "
-      << "\"photo\": " << "\"" << tidy_up_string(v.photo()) << "\"" << ", "
-      << "\"notes\": " << "\"" << tidy_up_string(v.notes()) << "\"" << ", "
-      << "\"reports_to\": " << v.reports_to()
+      << "\"phone\": " << "\"" << tidy_up_string(v.phone()) << "\"" << ", "
+      << "\"fax\": " << "\"" << tidy_up_string(v.fax()) << "\"" << ", "
+      << "\"home_page\": " << "\"" << tidy_up_string(v.home_page()) << "\""
       << " }";
     return(s);
 }

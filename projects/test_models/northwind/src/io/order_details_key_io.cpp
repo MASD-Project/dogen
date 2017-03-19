@@ -30,8 +30,8 @@ namespace northwind {
 std::ostream& operator<<(std::ostream& s, const order_details_key& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::northwind::order_details_key\"" << ", "
-      << "\"product_id\": " << v.product_id() << ", "
-      << "\"order_id\": " << v.order_id()
+      << "\"order_id\": " << v.order_id() << ", "
+      << "\"product_id\": " << v.product_id()
       << " }";
     return(s);
 }

@@ -104,9 +104,9 @@ namespace odb
     typedef
     pgsql::query_column<
       pgsql::value_traits<
-        ::std::vector< char >,
-        pgsql::id_bytea >::query_type,
-      pgsql::id_bytea >
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
     picutre_type_;
 
     static const picutre_type_ picutre;

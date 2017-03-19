@@ -34,16 +34,16 @@ namespace odb
 
     bool grew (false);
 
-    // product_id_
-    //
-    if (composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::grow (
-          i.product_id_value, t + 0UL))
-      grew = true;
-
     // order_id_
     //
     if (composite_value_traits< ::dogen::test_models::northwind::order_id, id_pgsql >::grow (
-          i.order_id_value, t + 1UL))
+          i.order_id_value, t + 0UL))
+      grew = true;
+
+    // product_id_
+    //
+    if (composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::grow (
+          i.product_id_value, t + 1UL))
       grew = true;
 
     return grew;
@@ -63,16 +63,16 @@ namespace odb
     std::size_t n (0);
     ODB_POTENTIALLY_UNUSED (n);
 
-    // product_id_
-    //
-    composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::bind (
-      b + n, i.product_id_value, sk);
-    n += 1UL;
-
     // order_id_
     //
     composite_value_traits< ::dogen::test_models::northwind::order_id, id_pgsql >::bind (
       b + n, i.order_id_value, sk);
+    n += 1UL;
+
+    // product_id_
+    //
+    composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::bind (
+      b + n, i.product_id_value, sk);
     n += 1UL;
   }
 
@@ -89,18 +89,6 @@ namespace odb
 
     bool grew (false);
 
-    // product_id_
-    //
-    {
-      ::dogen::test_models::northwind::product_id const& v =
-        o.product_id ();
-
-      composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::init (
-        i.product_id_value,
-        v,
-        sk);
-    }
-
     // order_id_
     //
     {
@@ -109,6 +97,18 @@ namespace odb
 
       composite_value_traits< ::dogen::test_models::northwind::order_id, id_pgsql >::init (
         i.order_id_value,
+        v,
+        sk);
+    }
+
+    // product_id_
+    //
+    {
+      ::dogen::test_models::northwind::product_id const& v =
+        o.product_id ();
+
+      composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::init (
+        i.product_id_value,
         v,
         sk);
     }
@@ -125,18 +125,6 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // product_id_
-    //
-    {
-      ::dogen::test_models::northwind::product_id& v =
-        o.product_id ();
-
-      composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::init (
-        v,
-        i.product_id_value,
-        db);
-    }
-
     // order_id_
     //
     {
@@ -146,6 +134,18 @@ namespace odb
       composite_value_traits< ::dogen::test_models::northwind::order_id, id_pgsql >::init (
         v,
         i.order_id_value,
+        db);
+    }
+
+    // product_id_
+    //
+    {
+      ::dogen::test_models::northwind::product_id& v =
+        o.product_id ();
+
+      composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::init (
+        v,
+        i.product_id_value,
         db);
     }
   }

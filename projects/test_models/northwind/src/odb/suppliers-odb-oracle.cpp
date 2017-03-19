@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/test_models/northwind/odb/employees-odb-oracle.hxx"
+#include "dogen/test_models/northwind/odb/suppliers-odb-oracle.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy
@@ -24,10 +24,10 @@
 
 namespace odb
 {
-  // employees
+  // suppliers
   //
 
-  struct access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::extra_statement_cache_type
+  struct access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::extra_statement_cache_type
   {
     extra_statement_cache_type (
       oracle::connection&,
@@ -39,8 +39,8 @@ namespace odb
     }
   };
 
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::id_type
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::id_type
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   id (const image_type& i)
   {
     oracle::database* db (0);
@@ -48,16 +48,16 @@ namespace odb
 
     id_type id;
     {
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::init (
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::init (
         id,
-        i.employee_id_value,
+        i.supplier_id_value,
         db);
     }
 
     return id;
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   bind (oracle::bind* b,
         image_type& i,
         oracle::statement_kind sk)
@@ -68,67 +68,40 @@ namespace odb
 
     std::size_t n (0);
 
-    // employee_id_
+    // supplier_id_
     //
     if (sk != statement_update)
     {
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::bind (
-        b + n, i.employee_id_value, sk);
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::bind (
+        b + n, i.supplier_id_value, sk);
       n += 1UL;
     }
 
-    // last_name_
+    // company_name_
     //
     b[n].type = oracle::bind::string;
-    b[n].buffer = i.last_name_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.last_name_value));
-    b[n].size = &i.last_name_size;
-    b[n].indicator = &i.last_name_indicator;
+    b[n].buffer = i.company_name_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.company_name_value));
+    b[n].size = &i.company_name_size;
+    b[n].indicator = &i.company_name_indicator;
     n++;
 
-    // first_name_
+    // contact_name_
     //
     b[n].type = oracle::bind::string;
-    b[n].buffer = i.first_name_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.first_name_value));
-    b[n].size = &i.first_name_size;
-    b[n].indicator = &i.first_name_indicator;
+    b[n].buffer = i.contact_name_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.contact_name_value));
+    b[n].size = &i.contact_name_size;
+    b[n].indicator = &i.contact_name_indicator;
     n++;
 
-    // title_
+    // contact_title_
     //
     b[n].type = oracle::bind::string;
-    b[n].buffer = i.title_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.title_value));
-    b[n].size = &i.title_size;
-    b[n].indicator = &i.title_indicator;
-    n++;
-
-    // title_of_courtesy_
-    //
-    b[n].type = oracle::bind::string;
-    b[n].buffer = i.title_of_courtesy_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.title_of_courtesy_value));
-    b[n].size = &i.title_of_courtesy_size;
-    b[n].indicator = &i.title_of_courtesy_indicator;
-    n++;
-
-    // birth_date_
-    //
-    b[n].type = oracle::bind::date;
-    b[n].buffer = i.birth_date_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.birth_date_value));
-    b[n].size = 0;
-    b[n].indicator = &i.birth_date_indicator;
-    n++;
-
-    // hire_date_
-    //
-    b[n].type = oracle::bind::date;
-    b[n].buffer = i.hire_date_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.hire_date_value));
-    b[n].size = 0;
-    b[n].indicator = &i.hire_date_indicator;
+    b[n].buffer = i.contact_title_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.contact_title_value));
+    b[n].size = &i.contact_title_size;
+    b[n].indicator = &i.contact_title_indicator;
     n++;
 
     // address_
@@ -176,59 +149,44 @@ namespace odb
     b[n].indicator = &i.country_indicator;
     n++;
 
-    // home_phone_
+    // phone_
     //
     b[n].type = oracle::bind::string;
-    b[n].buffer = i.home_phone_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.home_phone_value));
-    b[n].size = &i.home_phone_size;
-    b[n].indicator = &i.home_phone_indicator;
+    b[n].buffer = i.phone_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.phone_value));
+    b[n].size = &i.phone_size;
+    b[n].indicator = &i.phone_indicator;
     n++;
 
-    // extension_
+    // fax_
     //
     b[n].type = oracle::bind::string;
-    b[n].buffer = i.extension_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.extension_value));
-    b[n].size = &i.extension_size;
-    b[n].indicator = &i.extension_indicator;
+    b[n].buffer = i.fax_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.fax_value));
+    b[n].size = &i.fax_size;
+    b[n].indicator = &i.fax_indicator;
     n++;
 
-    // photo_
+    // home_page_
     //
     b[n].type = oracle::bind::string;
-    b[n].buffer = i.photo_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.photo_value));
-    b[n].size = &i.photo_size;
-    b[n].indicator = &i.photo_indicator;
+    b[n].buffer = i.home_page_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.home_page_value));
+    b[n].size = &i.home_page_size;
+    b[n].indicator = &i.home_page_indicator;
     n++;
-
-    // notes_
-    //
-    b[n].type = oracle::bind::string;
-    b[n].buffer = i.notes_value;
-    b[n].capacity = static_cast<ub4> (sizeof (i.notes_value));
-    b[n].size = &i.notes_size;
-    b[n].indicator = &i.notes_indicator;
-    n++;
-
-    // reports_to_
-    //
-    composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::bind (
-      b + n, i.reports_to_value, sk);
-    n += 1UL;
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   bind (oracle::bind* b, id_image_type& i)
   {
     std::size_t n (0);
     oracle::statement_kind sk (oracle::statement_select);
-    composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::bind (
+    composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::bind (
       b + n, i.id_value, sk);
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   init (image_type& i,
         const object_type& o,
         oracle::statement_kind sk)
@@ -242,125 +200,77 @@ namespace odb
     if (i.change_callback_.callback != 0)
       (i.change_callback_.callback) (i.change_callback_.context);
 
-    // employee_id_
+    // supplier_id_
     //
     if (sk == statement_insert)
     {
-      ::dogen::test_models::northwind::employee_id const& v =
-        o.employee_id ();
+      ::dogen::test_models::northwind::supplier_id const& v =
+        o.supplier_id ();
 
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::init (
-        i.employee_id_value,
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::init (
+        i.supplier_id_value,
         v,
         sk);
     }
 
-    // last_name_
+    // company_name_
     //
     {
       ::std::string const& v =
-        o.last_name ();
-
-      bool is_null (false);
-      std::size_t size (0);
-      oracle::value_traits<
-          ::std::string,
-          oracle::id_string >::set_image (
-        i.last_name_value,
-        sizeof (i.last_name_value),
-        size,
-        is_null,
-        v);
-      i.last_name_indicator = is_null ? -1 : 0;
-      i.last_name_size = static_cast<ub2> (size);
-    }
-
-    // first_name_
-    //
-    {
-      ::std::string const& v =
-        o.first_name ();
-
-      bool is_null (false);
-      std::size_t size (0);
-      oracle::value_traits<
-          ::std::string,
-          oracle::id_string >::set_image (
-        i.first_name_value,
-        sizeof (i.first_name_value),
-        size,
-        is_null,
-        v);
-      i.first_name_indicator = is_null ? -1 : 0;
-      i.first_name_size = static_cast<ub2> (size);
-    }
-
-    // title_
-    //
-    {
-      ::std::string const& v =
-        o.title ();
+        o.company_name ();
 
       bool is_null (true);
       std::size_t size (0);
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_image (
-        i.title_value,
-        sizeof (i.title_value),
+        i.company_name_value,
+        sizeof (i.company_name_value),
         size,
         is_null,
         v);
-      i.title_indicator = is_null ? -1 : 0;
-      i.title_size = static_cast<ub2> (size);
+      i.company_name_indicator = is_null ? -1 : 0;
+      i.company_name_size = static_cast<ub2> (size);
     }
 
-    // title_of_courtesy_
+    // contact_name_
     //
     {
       ::std::string const& v =
-        o.title_of_courtesy ();
+        o.contact_name ();
 
       bool is_null (true);
       std::size_t size (0);
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_image (
-        i.title_of_courtesy_value,
-        sizeof (i.title_of_courtesy_value),
+        i.contact_name_value,
+        sizeof (i.contact_name_value),
         size,
         is_null,
         v);
-      i.title_of_courtesy_indicator = is_null ? -1 : 0;
-      i.title_of_courtesy_size = static_cast<ub2> (size);
+      i.contact_name_indicator = is_null ? -1 : 0;
+      i.contact_name_size = static_cast<ub2> (size);
     }
 
-    // birth_date_
+    // contact_title_
     //
     {
-      ::boost::gregorian::date const& v =
-        o.birth_date ();
+      ::std::string const& v =
+        o.contact_title ();
 
       bool is_null (true);
+      std::size_t size (0);
       oracle::value_traits<
-          ::boost::gregorian::date,
-          oracle::id_date >::set_image (
-        i.birth_date_value, is_null, v);
-      i.birth_date_indicator = is_null ? -1 : 0;
-    }
-
-    // hire_date_
-    //
-    {
-      ::boost::gregorian::date const& v =
-        o.hire_date ();
-
-      bool is_null (true);
-      oracle::value_traits<
-          ::boost::gregorian::date,
-          oracle::id_date >::set_image (
-        i.hire_date_value, is_null, v);
-      i.hire_date_indicator = is_null ? -1 : 0;
+          ::std::string,
+          oracle::id_string >::set_image (
+        i.contact_title_value,
+        sizeof (i.contact_title_value),
+        size,
+        is_null,
+        v);
+      i.contact_title_indicator = is_null ? -1 : 0;
+      i.contact_title_size = static_cast<ub2> (size);
     }
 
     // address_
@@ -463,100 +373,68 @@ namespace odb
       i.country_size = static_cast<ub2> (size);
     }
 
-    // home_phone_
+    // phone_
     //
     {
       ::std::string const& v =
-        o.home_phone ();
+        o.phone ();
 
       bool is_null (true);
       std::size_t size (0);
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_image (
-        i.home_phone_value,
-        sizeof (i.home_phone_value),
+        i.phone_value,
+        sizeof (i.phone_value),
         size,
         is_null,
         v);
-      i.home_phone_indicator = is_null ? -1 : 0;
-      i.home_phone_size = static_cast<ub2> (size);
+      i.phone_indicator = is_null ? -1 : 0;
+      i.phone_size = static_cast<ub2> (size);
     }
 
-    // extension_
+    // fax_
     //
     {
       ::std::string const& v =
-        o.extension ();
+        o.fax ();
 
       bool is_null (true);
       std::size_t size (0);
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_image (
-        i.extension_value,
-        sizeof (i.extension_value),
+        i.fax_value,
+        sizeof (i.fax_value),
         size,
         is_null,
         v);
-      i.extension_indicator = is_null ? -1 : 0;
-      i.extension_size = static_cast<ub2> (size);
+      i.fax_indicator = is_null ? -1 : 0;
+      i.fax_size = static_cast<ub2> (size);
     }
 
-    // photo_
+    // home_page_
     //
     {
       ::std::string const& v =
-        o.photo ();
+        o.home_page ();
 
       bool is_null (true);
       std::size_t size (0);
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_image (
-        i.photo_value,
-        sizeof (i.photo_value),
+        i.home_page_value,
+        sizeof (i.home_page_value),
         size,
         is_null,
         v);
-      i.photo_indicator = is_null ? -1 : 0;
-      i.photo_size = static_cast<ub2> (size);
-    }
-
-    // notes_
-    //
-    {
-      ::std::string const& v =
-        o.notes ();
-
-      bool is_null (true);
-      std::size_t size (0);
-      oracle::value_traits<
-          ::std::string,
-          oracle::id_string >::set_image (
-        i.notes_value,
-        sizeof (i.notes_value),
-        size,
-        is_null,
-        v);
-      i.notes_indicator = is_null ? -1 : 0;
-      i.notes_size = static_cast<ub2> (size);
-    }
-
-    // reports_to_
-    //
-    {
-      ::dogen::test_models::northwind::employee_id const& v =
-        o.reports_to ();
-
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::init (
-        i.reports_to_value,
-        v,
-        sk);
+      i.home_page_indicator = is_null ? -1 : 0;
+      i.home_page_size = static_cast<ub2> (size);
     }
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -565,104 +443,61 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // employee_id_
+    // supplier_id_
     //
     {
-      ::dogen::test_models::northwind::employee_id& v =
-        o.employee_id ();
+      ::dogen::test_models::northwind::supplier_id& v =
+        o.supplier_id ();
 
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::init (
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::init (
         v,
-        i.employee_id_value,
+        i.supplier_id_value,
         db);
     }
 
-    // last_name_
+    // company_name_
     //
     {
       ::std::string& v =
-        o.last_name ();
+        o.company_name ();
 
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_value (
         v,
-        i.last_name_value,
-        i.last_name_size,
-        i.last_name_indicator == -1);
+        i.company_name_value,
+        i.company_name_size,
+        i.company_name_indicator == -1);
     }
 
-    // first_name_
+    // contact_name_
     //
     {
       ::std::string& v =
-        o.first_name ();
+        o.contact_name ();
 
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_value (
         v,
-        i.first_name_value,
-        i.first_name_size,
-        i.first_name_indicator == -1);
+        i.contact_name_value,
+        i.contact_name_size,
+        i.contact_name_indicator == -1);
     }
 
-    // title_
+    // contact_title_
     //
     {
       ::std::string& v =
-        o.title ();
+        o.contact_title ();
 
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_value (
         v,
-        i.title_value,
-        i.title_size,
-        i.title_indicator == -1);
-    }
-
-    // title_of_courtesy_
-    //
-    {
-      ::std::string& v =
-        o.title_of_courtesy ();
-
-      oracle::value_traits<
-          ::std::string,
-          oracle::id_string >::set_value (
-        v,
-        i.title_of_courtesy_value,
-        i.title_of_courtesy_size,
-        i.title_of_courtesy_indicator == -1);
-    }
-
-    // birth_date_
-    //
-    {
-      ::boost::gregorian::date& v =
-        o.birth_date ();
-
-      oracle::value_traits<
-          ::boost::gregorian::date,
-          oracle::id_date >::set_value (
-        v,
-        i.birth_date_value,
-        i.birth_date_indicator == -1);
-    }
-
-    // hire_date_
-    //
-    {
-      ::boost::gregorian::date& v =
-        o.hire_date ();
-
-      oracle::value_traits<
-          ::boost::gregorian::date,
-          oracle::id_date >::set_value (
-        v,
-        i.hire_date_value,
-        i.hire_date_indicator == -1);
+        i.contact_title_value,
+        i.contact_title_size,
+        i.contact_title_indicator == -1);
     }
 
     // address_
@@ -740,188 +575,141 @@ namespace odb
         i.country_indicator == -1);
     }
 
-    // home_phone_
+    // phone_
     //
     {
       ::std::string& v =
-        o.home_phone ();
+        o.phone ();
 
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_value (
         v,
-        i.home_phone_value,
-        i.home_phone_size,
-        i.home_phone_indicator == -1);
+        i.phone_value,
+        i.phone_size,
+        i.phone_indicator == -1);
     }
 
-    // extension_
+    // fax_
     //
     {
       ::std::string& v =
-        o.extension ();
+        o.fax ();
 
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_value (
         v,
-        i.extension_value,
-        i.extension_size,
-        i.extension_indicator == -1);
+        i.fax_value,
+        i.fax_size,
+        i.fax_indicator == -1);
     }
 
-    // photo_
+    // home_page_
     //
     {
       ::std::string& v =
-        o.photo ();
+        o.home_page ();
 
       oracle::value_traits<
           ::std::string,
           oracle::id_string >::set_value (
         v,
-        i.photo_value,
-        i.photo_size,
-        i.photo_indicator == -1);
-    }
-
-    // notes_
-    //
-    {
-      ::std::string& v =
-        o.notes ();
-
-      oracle::value_traits<
-          ::std::string,
-          oracle::id_string >::set_value (
-        v,
-        i.notes_value,
-        i.notes_size,
-        i.notes_indicator == -1);
-    }
-
-    // reports_to_
-    //
-    {
-      ::dogen::test_models::northwind::employee_id& v =
-        o.reports_to ();
-
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::init (
-        v,
-        i.reports_to_value,
-        db);
+        i.home_page_value,
+        i.home_page_size,
+        i.home_page_indicator == -1);
     }
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   init (id_image_type& i, const id_type& id)
   {
     oracle::statement_kind sk (oracle::statement_select);
     {
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::init (
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::init (
         i.id_value,
         id,
         sk);
     }
   }
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::persist_statement[] =
-  "INSERT INTO \"NORTHWIND\".\"EMPLOYEES\" "
-  "(\"EMPLOYEE_ID\", "
-  "\"LAST_NAME\", "
-  "\"FIRST_NAME\", "
-  "\"TITLE\", "
-  "\"TITLE_OF_COURTESY\", "
-  "\"BIRTH_DATE\", "
-  "\"HIRE_DATE\", "
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::persist_statement[] =
+  "INSERT INTO \"NORTHWIND\".\"SUPPLIERS\" "
+  "(\"SUPPLIER_ID\", "
+  "\"COMPANY_NAME\", "
+  "\"CONTACT_NAME\", "
+  "\"CONTACT_TITLE\", "
   "\"ADDRESS\", "
   "\"CITY\", "
   "\"REGION\", "
   "\"POSTAL_CODE\", "
   "\"COUNTRY\", "
-  "\"HOME_PHONE\", "
-  "\"EXTENSION\", "
-  "\"PHOTO\", "
-  "\"NOTES\", "
-  "\"REPORTS_TO\") "
+  "\"PHONE\", "
+  "\"FAX\", "
+  "\"HOME_PAGE\") "
   "VALUES "
-  "(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12, :13, :14, :15, :16, :17)";
+  "(:1, :2, :3, :4, :5, :6, :7, :8, :9, :10, :11, :12)";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::find_statement[] =
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::find_statement[] =
   "SELECT "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EMPLOYEE_ID\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"LAST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"FIRST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE_OF_COURTESY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"BIRTH_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HIRE_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"ADDRESS\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"CITY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REGION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"POSTAL_CODE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"COUNTRY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HOME_PHONE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EXTENSION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"PHOTO\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"NOTES\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REPORTS_TO\" "
-  "FROM \"NORTHWIND\".\"EMPLOYEES\" "
-  "WHERE \"NORTHWIND\".\"EMPLOYEES\".\"EMPLOYEE_ID\"=:1";
+  "\"NORTHWIND\".\"SUPPLIERS\".\"SUPPLIER_ID\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COMPANY_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_TITLE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"ADDRESS\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CITY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"REGION\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"POSTAL_CODE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COUNTRY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"PHONE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"FAX\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"HOME_PAGE\" "
+  "FROM \"NORTHWIND\".\"SUPPLIERS\" "
+  "WHERE \"NORTHWIND\".\"SUPPLIERS\".\"SUPPLIER_ID\"=:1";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::update_statement[] =
-  "UPDATE \"NORTHWIND\".\"EMPLOYEES\" "
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::update_statement[] =
+  "UPDATE \"NORTHWIND\".\"SUPPLIERS\" "
   "SET "
-  "\"LAST_NAME\"=:1, "
-  "\"FIRST_NAME\"=:2, "
-  "\"TITLE\"=:3, "
-  "\"TITLE_OF_COURTESY\"=:4, "
-  "\"BIRTH_DATE\"=:5, "
-  "\"HIRE_DATE\"=:6, "
-  "\"ADDRESS\"=:7, "
-  "\"CITY\"=:8, "
-  "\"REGION\"=:9, "
-  "\"POSTAL_CODE\"=:10, "
-  "\"COUNTRY\"=:11, "
-  "\"HOME_PHONE\"=:12, "
-  "\"EXTENSION\"=:13, "
-  "\"PHOTO\"=:14, "
-  "\"NOTES\"=:15, "
-  "\"REPORTS_TO\"=:16 "
-  "WHERE \"EMPLOYEE_ID\"=:17";
+  "\"COMPANY_NAME\"=:1, "
+  "\"CONTACT_NAME\"=:2, "
+  "\"CONTACT_TITLE\"=:3, "
+  "\"ADDRESS\"=:4, "
+  "\"CITY\"=:5, "
+  "\"REGION\"=:6, "
+  "\"POSTAL_CODE\"=:7, "
+  "\"COUNTRY\"=:8, "
+  "\"PHONE\"=:9, "
+  "\"FAX\"=:10, "
+  "\"HOME_PAGE\"=:11 "
+  "WHERE \"SUPPLIER_ID\"=:12";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::erase_statement[] =
-  "DELETE FROM \"NORTHWIND\".\"EMPLOYEES\" "
-  "WHERE \"EMPLOYEE_ID\"=:1";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::erase_statement[] =
+  "DELETE FROM \"NORTHWIND\".\"SUPPLIERS\" "
+  "WHERE \"SUPPLIER_ID\"=:1";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::query_statement[] =
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::query_statement[] =
   "SELECT "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EMPLOYEE_ID\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"LAST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"FIRST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE_OF_COURTESY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"BIRTH_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HIRE_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"ADDRESS\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"CITY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REGION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"POSTAL_CODE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"COUNTRY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HOME_PHONE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EXTENSION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"PHOTO\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"NOTES\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REPORTS_TO\" "
-  "FROM \"NORTHWIND\".\"EMPLOYEES\"";
+  "\"NORTHWIND\".\"SUPPLIERS\".\"SUPPLIER_ID\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COMPANY_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_TITLE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"ADDRESS\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CITY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"REGION\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"POSTAL_CODE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COUNTRY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"PHONE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"FAX\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"HOME_PAGE\" "
+  "FROM \"NORTHWIND\".\"SUPPLIERS\"";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::erase_query_statement[] =
-  "DELETE FROM \"NORTHWIND\".\"EMPLOYEES\"";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::erase_query_statement[] =
+  "DELETE FROM \"NORTHWIND\".\"SUPPLIERS\"";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::table_name[] =
-  "\"NORTHWIND\".\"EMPLOYEES\"";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::table_name[] =
+  "\"NORTHWIND\".\"SUPPLIERS\"";
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   persist (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -959,7 +747,7 @@ namespace odb
               callback_event::post_persist);
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -975,7 +763,7 @@ namespace odb
       conn.statement_cache ().find_object<object_type> ());
 
     const id_type& id (
-      obj.employee_id ());
+      obj.supplier_id ());
     id_image_type& idi (sts.id_image ());
     init (idi, id);
 
@@ -1019,7 +807,7 @@ namespace odb
     pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   erase (database& db, const id_type& id)
   {
     using namespace oracle;
@@ -1048,8 +836,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::pointer_type
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::pointer_type
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   find (database& db, const id_type& id)
   {
     using namespace oracle;
@@ -1105,7 +893,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace oracle;
@@ -1139,7 +927,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   reload (database& db, object_type& obj)
   {
     using namespace oracle;
@@ -1152,7 +940,7 @@ namespace odb
     statements_type::auto_lock l (sts);
 
     const id_type& id  (
-      obj.employee_id ());
+      obj.supplier_id ());
 
     if (!find_ (sts, &id))
       return false;
@@ -1170,7 +958,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   find_ (statements_type& sts,
          const id_type* id)
   {
@@ -1207,8 +995,8 @@ namespace odb
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::object_type >
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  result< access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::object_type >
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   query (database&, const query_base_type& q)
   {
     using namespace oracle;
@@ -1258,7 +1046,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits_impl< ::dogen::test_models::northwind::employees, id_oracle >::
+  unsigned long long access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace oracle;
@@ -1304,7 +1092,7 @@ namespace odb
         {
           db.execute ("BEGIN\n"
                       "  BEGIN\n"
-                      "    EXECUTE IMMEDIATE 'DROP TABLE \"NORTHWIND\".\"EMPLOYEES\" CASCADE CONSTRAINTS';\n"
+                      "    EXECUTE IMMEDIATE 'DROP TABLE \"NORTHWIND\".\"SUPPLIERS\" CASCADE CONSTRAINTS';\n"
                       "  EXCEPTION\n"
                       "    WHEN OTHERS THEN\n"
                       "      IF SQLCODE != -942 THEN RAISE; END IF;\n"
@@ -1320,24 +1108,19 @@ namespace odb
       {
         case 1:
         {
-          db.execute ("CREATE TABLE \"NORTHWIND\".\"EMPLOYEES\" (\n"
-                      "  \"EMPLOYEE_ID\" NUMBER(10) NOT NULL PRIMARY KEY,\n"
-                      "  \"LAST_NAME\" VARCHAR2(512) NOT NULL,\n"
-                      "  \"FIRST_NAME\" VARCHAR2(512) NOT NULL,\n"
-                      "  \"TITLE\" VARCHAR2(512) NULL,\n"
-                      "  \"TITLE_OF_COURTESY\" VARCHAR2(512) NULL,\n"
-                      "  \"BIRTH_DATE\" DATE NULL,\n"
-                      "  \"HIRE_DATE\" DATE NULL,\n"
+          db.execute ("CREATE TABLE \"NORTHWIND\".\"SUPPLIERS\" (\n"
+                      "  \"SUPPLIER_ID\" NUMBER(10) NOT NULL PRIMARY KEY,\n"
+                      "  \"COMPANY_NAME\" VARCHAR2(512) NULL,\n"
+                      "  \"CONTACT_NAME\" VARCHAR2(512) NULL,\n"
+                      "  \"CONTACT_TITLE\" VARCHAR2(512) NULL,\n"
                       "  \"ADDRESS\" VARCHAR2(512) NULL,\n"
                       "  \"CITY\" VARCHAR2(512) NULL,\n"
                       "  \"REGION\" VARCHAR2(512) NULL,\n"
                       "  \"POSTAL_CODE\" VARCHAR2(512) NULL,\n"
                       "  \"COUNTRY\" VARCHAR2(512) NULL,\n"
-                      "  \"HOME_PHONE\" VARCHAR2(512) NULL,\n"
-                      "  \"EXTENSION\" VARCHAR2(512) NULL,\n"
-                      "  \"PHOTO\" VARCHAR2(512) NULL,\n"
-                      "  \"NOTES\" VARCHAR2(512) NULL,\n"
-                      "  \"REPORTS_TO\" NUMBER(10) NULL)");
+                      "  \"PHONE\" VARCHAR2(512) NULL,\n"
+                      "  \"FAX\" VARCHAR2(512) NULL,\n"
+                      "  \"HOME_PAGE\" VARCHAR2(512) NULL)");
           return false;
         }
       }

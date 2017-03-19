@@ -28,7 +28,7 @@ categories::categories(
     const dogen::test_models::northwind::category_id& category_id,
     const std::string& category_name,
     const std::string& description,
-    const std::vector<char>& picutre)
+    const std::string& picutre)
     : category_id_(category_id),
       category_name_(category_name),
       description_(description),
@@ -103,19 +103,19 @@ void categories::description(const std::string&& v) {
     description_ = std::move(v);
 }
 
-const std::vector<char>& categories::picutre() const {
+const std::string& categories::picutre() const {
     return picutre_;
 }
 
-std::vector<char>& categories::picutre() {
+std::string& categories::picutre() {
     return picutre_;
 }
 
-void categories::picutre(const std::vector<char>& v) {
+void categories::picutre(const std::string& v) {
     picutre_ = v;
 }
 
-void categories::picutre(const std::vector<char>&& v) {
+void categories::picutre(const std::string&& v) {
     picutre_ = std::move(v);
 }
 

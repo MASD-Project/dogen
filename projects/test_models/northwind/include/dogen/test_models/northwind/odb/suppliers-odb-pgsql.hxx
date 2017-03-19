@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMERS_ODB_PGSQL_HXX
-#define DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMERS_ODB_PGSQL_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIERS_ODB_PGSQL_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIERS_ODB_PGSQL_HXX
 
 // Begin prologue.
 //
@@ -31,11 +31,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/test_models/northwind/types/customers.hpp"
+#include "dogen/test_models/northwind/types/suppliers.hpp"
 
-#include "dogen/test_models/northwind/odb/customer_id-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/supplier_id-odb-pgsql.hxx"
 
-#include "dogen/test_models/northwind/odb/customers-odb.hxx"
+#include "dogen/test_models/northwind/odb/suppliers-odb.hxx"
 
 #include <odb/details/buffer.hxx>
 
@@ -47,16 +47,16 @@
 
 namespace odb
 {
-  // customers
+  // suppliers
   //
   template <typename A>
-  struct query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >
+  struct query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >
   {
-    // customer_id
+    // supplier_id
     //
-    struct customer_id_class_
+    struct supplier_id_class_
     {
-      customer_id_class_ ()
+      supplier_id_class_ ()
       {
       }
 
@@ -73,19 +73,7 @@ namespace odb
       static const value_type_ value;
     };
 
-    static const customer_id_class_ customer_id;
-
-    // customer_code
-    //
-    typedef
-    pgsql::query_column<
-      pgsql::value_traits<
-        ::std::string,
-        pgsql::id_string >::query_type,
-      pgsql::id_string >
-    customer_code_type_;
-
-    static const customer_code_type_ customer_code;
+    static const supplier_id_class_ supplier_id;
 
     // company_name
     //
@@ -206,101 +194,107 @@ namespace odb
     fax_type_;
 
     static const fax_type_ fax;
+
+    // home_page
+    //
+    typedef
+    pgsql::query_column<
+      pgsql::value_traits<
+        ::std::string,
+        pgsql::id_string >::query_type,
+      pgsql::id_string >
+    home_page_type_;
+
+    static const home_page_type_ home_page;
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::customer_id_class_::value_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::customer_id_class_::
-  value (A::table_name, "\"CUSTOMER_ID\"", 0);
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::supplier_id_class_::value_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::supplier_id_class_::
+  value (A::table_name, "\"SUPPLIER_ID\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::customer_id_class_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::customer_id;
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::supplier_id_class_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::supplier_id;
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::customer_code_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
-  customer_code (A::table_name, "\"CUSTOMER_CODE\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::company_name_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::company_name_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   company_name (A::table_name, "\"COMPANY_NAME\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::contact_name_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::contact_name_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   contact_name (A::table_name, "\"CONTACT_NAME\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::contact_title_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::contact_title_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   contact_title (A::table_name, "\"CONTACT_TITLE\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::address_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::address_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   address (A::table_name, "\"ADDRESS\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::city_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::city_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   city (A::table_name, "\"CITY\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::region_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::region_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   region (A::table_name, "\"REGION\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::postal_code_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::postal_code_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   postal_code (A::table_name, "\"POSTAL_CODE\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::country_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::country_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   country (A::table_name, "\"COUNTRY\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::phone_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::phone_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   phone (A::table_name, "\"PHONE\"", 0);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::fax_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::fax_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
   fax (A::table_name, "\"FAX\"", 0);
 
   template <typename A>
-  struct pointer_query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >:
-    query_columns< ::dogen::test_models::northwind::customers, id_pgsql, A >
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::home_page_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >::
+  home_page (A::table_name, "\"HOME_PAGE\"", 0);
+
+  template <typename A>
+  struct pointer_query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >:
+    query_columns< ::dogen::test_models::northwind::suppliers, id_pgsql, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >:
-    public access::object_traits< ::dogen::test_models::northwind::customers >
+  class access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >:
+    public access::object_traits< ::dogen::test_models::northwind::suppliers >
   {
     public:
     struct id_image_type
     {
-      composite_value_traits< ::dogen::test_models::northwind::customer_id, id_pgsql >::image_type id_value;
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::image_type id_value;
 
       std::size_t version;
     };
 
     struct image_type
     {
-      // customer_id_
+      // supplier_id_
       //
-      composite_value_traits< ::dogen::test_models::northwind::customer_id, id_pgsql >::image_type customer_id_value;
-
-      // customer_code_
-      //
-      details::buffer customer_code_value;
-      std::size_t customer_code_size;
-      bool customer_code_null;
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::image_type supplier_id_value;
 
       // company_name_
       //
@@ -361,6 +355,12 @@ namespace odb
       details::buffer fax_value;
       std::size_t fax_size;
       bool fax_null;
+
+      // home_page_
+      //
+      details::buffer home_page_value;
+      std::size_t home_page_size;
+      bool home_page_null;
 
       std::size_t version;
     };
@@ -470,12 +470,12 @@ namespace odb
            bool reload);
   };
 
-  // customers
+  // suppliers
   //
 }
 
-#include "dogen/test_models/northwind/odb/customers-odb-pgsql.ixx"
+#include "dogen/test_models/northwind/odb/suppliers-odb-pgsql.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMERS_ODB_PGSQL_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIERS_ODB_PGSQL_HXX

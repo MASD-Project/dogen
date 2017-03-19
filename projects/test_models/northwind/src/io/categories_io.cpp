@@ -31,20 +31,6 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::vector<char>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << *i << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace dogen {
 namespace test_models {
 namespace northwind {
@@ -55,7 +41,7 @@ std::ostream& operator<<(std::ostream& s, const categories& v) {
       << "\"category_id\": " << v.category_id() << ", "
       << "\"category_name\": " << "\"" << tidy_up_string(v.category_name()) << "\"" << ", "
       << "\"description\": " << "\"" << tidy_up_string(v.description()) << "\"" << ", "
-      << "\"picutre\": " << v.picutre()
+      << "\"picutre\": " << "\"" << tidy_up_string(v.picutre()) << "\""
       << " }";
     return(s);
 }

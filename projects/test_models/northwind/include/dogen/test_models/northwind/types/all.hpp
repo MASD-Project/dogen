@@ -26,16 +26,13 @@
 #endif
 
 #include "dogen/test_models/northwind/types/orders.hpp"
-#include "dogen/test_models/northwind/types/region.hpp"
 #include "dogen/test_models/northwind/types/order_id.hpp"
 #include "dogen/test_models/northwind/types/products.hpp"
 #include "dogen/test_models/northwind/types/shippers.hpp"
-#include "dogen/test_models/northwind/types/supplier.hpp"
 #include "dogen/test_models/northwind/types/customers.hpp"
 #include "dogen/test_models/northwind/types/employees.hpp"
 #include "dogen/test_models/northwind/types/northwind.hpp"
-#include "dogen/test_models/northwind/types/region_id.hpp"
-#include "dogen/test_models/northwind/types/territory.hpp"
+#include "dogen/test_models/northwind/types/suppliers.hpp"
 #include "dogen/test_models/northwind/types/categories.hpp"
 #include "dogen/test_models/northwind/types/product_id.hpp"
 #include "dogen/test_models/northwind/types/shipper_id.hpp"
@@ -43,14 +40,7 @@
 #include "dogen/test_models/northwind/types/customer_id.hpp"
 #include "dogen/test_models/northwind/types/employee_id.hpp"
 #include "dogen/test_models/northwind/types/supplier_id.hpp"
-#include "dogen/test_models/northwind/types/territory_id.hpp"
 #include "dogen/test_models/northwind/types/order_details.hpp"
-#include "dogen/test_models/northwind/types/customer_type_id.hpp"
 #include "dogen/test_models/northwind/types/order_details_key.hpp"
-#include "dogen/test_models/northwind/types/employee_territories.hpp"
-#include "dogen/test_models/northwind/types/customer_demographics.hpp"
-#include "dogen/test_models/northwind/types/customer_customer_demo.hpp"
-#include "dogen/test_models/northwind/types/employee_territories_key.hpp"
-#include "dogen/test_models/northwind/types/customer_customer_demo_key.hpp"
 
 #endif

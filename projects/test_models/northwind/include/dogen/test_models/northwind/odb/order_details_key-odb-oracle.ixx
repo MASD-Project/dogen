@@ -12,8 +12,8 @@ namespace odb
   get_null (const image_type& i)
   {
     bool r (true);
-    r = r && composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::get_null (i.product_id_value);
     r = r && composite_value_traits< ::dogen::test_models::northwind::order_id, id_oracle >::get_null (i.order_id_value);
+    r = r && composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::get_null (i.product_id_value);
     return r;
   }
 
@@ -26,8 +26,8 @@ namespace odb
 
     using namespace oracle;
 
-    composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::set_null (i.product_id_value, sk);
     composite_value_traits< ::dogen::test_models::northwind::order_id, id_oracle >::set_null (i.order_id_value, sk);
+    composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::set_null (i.product_id_value, sk);
   }
 }
 

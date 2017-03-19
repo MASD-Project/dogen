@@ -51,7 +51,7 @@ namespace odb
     pgsql::int4_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::bytea_oid
+    pgsql::text_oid
   };
 
   const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::categories, id_pgsql >::
@@ -65,7 +65,7 @@ namespace odb
   {
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::bytea_oid,
+    pgsql::text_oid,
     pgsql::int4_oid
   };
 
@@ -183,7 +183,7 @@ namespace odb
 
     // picutre_
     //
-    b[n].type = pgsql::bind::bytea;
+    b[n].type = pgsql::bind::text;
     b[n].buffer = i.picutre_value.data ();
     b[n].capacity = i.picutre_value.capacity ();
     b[n].size = &i.picutre_size;
@@ -271,15 +271,15 @@ namespace odb
     // picutre_
     //
     {
-      ::std::vector< char > const& v =
+      ::std::string const& v =
         o.picutre ();
 
       bool is_null (true);
       std::size_t size (0);
       std::size_t cap (i.picutre_value.capacity ());
       pgsql::value_traits<
-          ::std::vector< char >,
-          pgsql::id_bytea >::set_image (
+          ::std::string,
+          pgsql::id_string >::set_image (
         i.picutre_value,
         size,
         is_null,
@@ -346,12 +346,12 @@ namespace odb
     // picutre_
     //
     {
-      ::std::vector< char >& v =
+      ::std::string& v =
         o.picutre ();
 
       pgsql::value_traits<
-          ::std::vector< char >,
-          pgsql::id_bytea >::set_value (
+          ::std::string,
+          pgsql::id_string >::set_value (
         v,
         i.picutre_value,
         i.picutre_size,
@@ -831,7 +831,7 @@ namespace odb
                       "  \"CATEGORY_ID\" INTEGER NOT NULL PRIMARY KEY,\n"
                       "  \"CATEGORY_NAME\" TEXT NOT NULL,\n"
                       "  \"DESCRIPTION\" TEXT NULL,\n"
-                      "  \"PICUTRE\" BYTEA NULL)");
+                      "  \"PICUTRE\" TEXT NULL)");
           return false;
         }
       }

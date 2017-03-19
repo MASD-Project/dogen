@@ -58,6 +58,7 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
+    pgsql::text_oid,
     pgsql::text_oid
   };
 
@@ -70,6 +71,7 @@ namespace odb
   const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >::
   update_statement_types[] =
   {
+    pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -130,9 +132,17 @@ namespace odb
           i.customer_id_value, t + 0UL))
       grew = true;
 
-    // company_name_
+    // customer_code_
     //
     if (t[1UL])
+    {
+      i.customer_code_value.capacity (i.customer_code_size);
+      grew = true;
+    }
+
+    // company_name_
+    //
+    if (t[2UL])
     {
       i.company_name_value.capacity (i.company_name_size);
       grew = true;
@@ -140,7 +150,7 @@ namespace odb
 
     // contact_name_
     //
-    if (t[2UL])
+    if (t[3UL])
     {
       i.contact_name_value.capacity (i.contact_name_size);
       grew = true;
@@ -148,7 +158,7 @@ namespace odb
 
     // contact_title_
     //
-    if (t[3UL])
+    if (t[4UL])
     {
       i.contact_title_value.capacity (i.contact_title_size);
       grew = true;
@@ -156,7 +166,7 @@ namespace odb
 
     // address_
     //
-    if (t[4UL])
+    if (t[5UL])
     {
       i.address_value.capacity (i.address_size);
       grew = true;
@@ -164,7 +174,7 @@ namespace odb
 
     // city_
     //
-    if (t[5UL])
+    if (t[6UL])
     {
       i.city_value.capacity (i.city_size);
       grew = true;
@@ -172,7 +182,7 @@ namespace odb
 
     // region_
     //
-    if (t[6UL])
+    if (t[7UL])
     {
       i.region_value.capacity (i.region_size);
       grew = true;
@@ -180,7 +190,7 @@ namespace odb
 
     // postal_code_
     //
-    if (t[7UL])
+    if (t[8UL])
     {
       i.postal_code_value.capacity (i.postal_code_size);
       grew = true;
@@ -188,7 +198,7 @@ namespace odb
 
     // country_
     //
-    if (t[8UL])
+    if (t[9UL])
     {
       i.country_value.capacity (i.country_size);
       grew = true;
@@ -196,7 +206,7 @@ namespace odb
 
     // phone_
     //
-    if (t[9UL])
+    if (t[10UL])
     {
       i.phone_value.capacity (i.phone_size);
       grew = true;
@@ -204,7 +214,7 @@ namespace odb
 
     // fax_
     //
-    if (t[10UL])
+    if (t[11UL])
     {
       i.fax_value.capacity (i.fax_size);
       grew = true;
@@ -232,6 +242,15 @@ namespace odb
         b + n, i.customer_id_value, sk);
       n += 1UL;
     }
+
+    // customer_code_
+    //
+    b[n].type = pgsql::bind::text;
+    b[n].buffer = i.customer_code_value.data ();
+    b[n].capacity = i.customer_code_value.capacity ();
+    b[n].size = &i.customer_code_size;
+    b[n].is_null = &i.customer_code_null;
+    n++;
 
     // company_name_
     //
@@ -357,6 +376,27 @@ namespace odb
         i.customer_id_value,
         v,
         sk);
+    }
+
+    // customer_code_
+    //
+    {
+      ::std::string const& v =
+        o.customer_code ();
+
+      bool is_null (false);
+      std::size_t size (0);
+      std::size_t cap (i.customer_code_value.capacity ());
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_image (
+        i.customer_code_value,
+        size,
+        is_null,
+        v);
+      i.customer_code_null = is_null;
+      i.customer_code_size = size;
+      grew = grew || (cap != i.customer_code_value.capacity ());
     }
 
     // company_name_
@@ -593,6 +633,21 @@ namespace odb
         db);
     }
 
+    // customer_code_
+    //
+    {
+      ::std::string& v =
+        o.customer_code ();
+
+      pgsql::value_traits<
+          ::std::string,
+          pgsql::id_string >::set_value (
+        v,
+        i.customer_code_value,
+        i.customer_code_size,
+        i.customer_code_null);
+    }
+
     // company_name_
     //
     {
@@ -759,6 +814,7 @@ namespace odb
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >::persist_statement[] =
   "INSERT INTO \"NORTHWIND\".\"CUSTOMERS\" "
   "(\"CUSTOMER_ID\", "
+  "\"CUSTOMER_CODE\", "
   "\"COMPANY_NAME\", "
   "\"CONTACT_NAME\", "
   "\"CONTACT_TITLE\", "
@@ -770,11 +826,12 @@ namespace odb
   "\"PHONE\", "
   "\"FAX\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
+  "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >::find_statement[] =
   "SELECT "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_ID\", "
+  "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_CODE\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"COMPANY_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_TITLE\", "
@@ -791,17 +848,18 @@ namespace odb
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >::update_statement[] =
   "UPDATE \"NORTHWIND\".\"CUSTOMERS\" "
   "SET "
-  "\"COMPANY_NAME\"=$1, "
-  "\"CONTACT_NAME\"=$2, "
-  "\"CONTACT_TITLE\"=$3, "
-  "\"ADDRESS\"=$4, "
-  "\"CITY\"=$5, "
-  "\"REGION\"=$6, "
-  "\"POSTAL_CODE\"=$7, "
-  "\"COUNTRY\"=$8, "
-  "\"PHONE\"=$9, "
-  "\"FAX\"=$10 "
-  "WHERE \"CUSTOMER_ID\"=$11";
+  "\"CUSTOMER_CODE\"=$1, "
+  "\"COMPANY_NAME\"=$2, "
+  "\"CONTACT_NAME\"=$3, "
+  "\"CONTACT_TITLE\"=$4, "
+  "\"ADDRESS\"=$5, "
+  "\"CITY\"=$6, "
+  "\"REGION\"=$7, "
+  "\"POSTAL_CODE\"=$8, "
+  "\"COUNTRY\"=$9, "
+  "\"PHONE\"=$10, "
+  "\"FAX\"=$11 "
+  "WHERE \"CUSTOMER_ID\"=$12";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >::erase_statement[] =
   "DELETE FROM \"NORTHWIND\".\"CUSTOMERS\" "
@@ -810,6 +868,7 @@ namespace odb
   const char access::object_traits_impl< ::dogen::test_models::northwind::customers, id_pgsql >::query_statement[] =
   "SELECT "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_ID\", "
+  "\"NORTHWIND\".\"CUSTOMERS\".\"CUSTOMER_CODE\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"COMPANY_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_NAME\", "
   "\"NORTHWIND\".\"CUSTOMERS\".\"CONTACT_TITLE\", "
@@ -1242,6 +1301,7 @@ namespace odb
         {
           db.execute ("CREATE TABLE \"NORTHWIND\".\"CUSTOMERS\" (\n"
                       "  \"CUSTOMER_ID\" INTEGER NOT NULL PRIMARY KEY,\n"
+                      "  \"CUSTOMER_CODE\" TEXT NOT NULL,\n"
                       "  \"COMPANY_NAME\" TEXT NOT NULL,\n"
                       "  \"CONTACT_NAME\" TEXT NULL,\n"
                       "  \"CONTACT_TITLE\" TEXT NULL,\n"

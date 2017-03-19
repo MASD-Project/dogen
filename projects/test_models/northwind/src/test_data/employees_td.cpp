@@ -42,18 +42,6 @@ create_boost_gregorian_date(const unsigned int position) {
     return r;
 }
 
-char create_char(const unsigned int position) {
-    return static_cast<char>(((position % 95) + 32) == 34) ? 35 : ((position % 95) + 32);
-}
-
-std::vector<char> create_std_vector_char(unsigned int position) {
-    std::vector<char> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_char(position + i));
-    }
-    return r;
-}
-
 }
 
 namespace dogen {
@@ -78,10 +66,9 @@ populate(const unsigned int position, result_type& v) {
     v.country(create_std_string(position + 11));
     v.home_phone(create_std_string(position + 12));
     v.extension(create_std_string(position + 13));
-    v.photo(create_std_vector_char(position + 14));
+    v.photo(create_std_string(position + 14));
     v.notes(create_std_string(position + 15));
     v.reports_to(create_dogen_test_models_northwind_employee_id(position + 16));
-    v.photo_path(create_std_string(position + 17));
 }
 
 employees_generator::result_type

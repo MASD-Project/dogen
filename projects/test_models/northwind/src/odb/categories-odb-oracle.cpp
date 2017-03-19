@@ -97,11 +97,11 @@ namespace odb
 
     // picutre_
     //
-    b[n].type = oracle::bind::blob;
-    b[n].buffer = &i.picutre_lob;
+    b[n].type = oracle::bind::string;
+    b[n].buffer = i.picutre_value;
+    b[n].capacity = static_cast<ub4> (sizeof (i.picutre_value));
+    b[n].size = &i.picutre_size;
     b[n].indicator = &i.picutre_indicator;
-    b[n].callback = &i.picutre_callback;
-
     n++;
   }
 
@@ -184,19 +184,21 @@ namespace odb
     // picutre_
     //
     {
-      ::std::vector< char > const& v =
+      ::std::string const& v =
         o.picutre ();
 
       bool is_null (true);
-      i.picutre_lob.position = 0;
+      std::size_t size (0);
       oracle::value_traits<
-          ::std::vector< char >,
-          oracle::id_blob >::set_image (
-        i.picutre_callback.callback.param,
-        i.picutre_callback.context.param,
+          ::std::string,
+          oracle::id_string >::set_image (
+        i.picutre_value,
+        sizeof (i.picutre_value),
+        size,
         is_null,
         v);
       i.picutre_indicator = is_null ? -1 : 0;
+      i.picutre_size = static_cast<ub2> (size);
     }
   }
 
@@ -254,15 +256,15 @@ namespace odb
     // picutre_
     //
     {
-      ::std::vector< char >& v =
+      ::std::string& v =
         o.picutre ();
 
       oracle::value_traits<
-          ::std::vector< char >,
-          oracle::id_blob >::set_value (
+          ::std::string,
+          oracle::id_string >::set_value (
         v,
-        i.picutre_callback.callback.result,
-        i.picutre_callback.context.result,
+        i.picutre_value,
+        i.picutre_size,
         i.picutre_indicator == -1);
     }
   }
@@ -726,7 +728,7 @@ namespace odb
                       "  \"CATEGORY_ID\" NUMBER(10) NOT NULL PRIMARY KEY,\n"
                       "  \"CATEGORY_NAME\" VARCHAR2(512) NULL,\n"
                       "  \"DESCRIPTION\" VARCHAR2(512) NULL,\n"
-                      "  \"PICUTRE\" BLOB NULL)");
+                      "  \"PICUTRE\" VARCHAR2(512) NULL)");
           return false;
         }
       }

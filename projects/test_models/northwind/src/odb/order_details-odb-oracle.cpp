@@ -265,8 +265,8 @@ namespace odb
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::order_details, id_oracle >::persist_statement[] =
   "INSERT INTO \"NORTHWIND\".\"ORDER_DETAILS\" "
-  "(\"PRODUCT_ID\", "
-  "\"ORDER_ID\", "
+  "(\"ORDER_ID\", "
+  "\"PRODUCT_ID\", "
   "\"UNIT_PRICE\", "
   "\"QUANTITY\", "
   "\"DISCOUNT\") "
@@ -275,13 +275,13 @@ namespace odb
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::order_details, id_oracle >::find_statement[] =
   "SELECT "
-  "\"NORTHWIND\".\"ORDER_DETAILS\".\"PRODUCT_ID\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"ORDER_ID\", "
+  "\"NORTHWIND\".\"ORDER_DETAILS\".\"PRODUCT_ID\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"UNIT_PRICE\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"QUANTITY\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"DISCOUNT\" "
   "FROM \"NORTHWIND\".\"ORDER_DETAILS\" "
-  "WHERE \"NORTHWIND\".\"ORDER_DETAILS\".\"PRODUCT_ID\"=:1 AND \"NORTHWIND\".\"ORDER_DETAILS\".\"ORDER_ID\"=:2";
+  "WHERE \"NORTHWIND\".\"ORDER_DETAILS\".\"ORDER_ID\"=:1 AND \"NORTHWIND\".\"ORDER_DETAILS\".\"PRODUCT_ID\"=:2";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::order_details, id_oracle >::update_statement[] =
   "UPDATE \"NORTHWIND\".\"ORDER_DETAILS\" "
@@ -289,16 +289,16 @@ namespace odb
   "\"UNIT_PRICE\"=:1, "
   "\"QUANTITY\"=:2, "
   "\"DISCOUNT\"=:3 "
-  "WHERE \"PRODUCT_ID\"=:4 AND \"ORDER_ID\"=:5";
+  "WHERE \"ORDER_ID\"=:4 AND \"PRODUCT_ID\"=:5";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::order_details, id_oracle >::erase_statement[] =
   "DELETE FROM \"NORTHWIND\".\"ORDER_DETAILS\" "
-  "WHERE \"PRODUCT_ID\"=:1 AND \"ORDER_ID\"=:2";
+  "WHERE \"ORDER_ID\"=:1 AND \"PRODUCT_ID\"=:2";
 
   const char access::object_traits_impl< ::dogen::test_models::northwind::order_details, id_oracle >::query_statement[] =
   "SELECT "
-  "\"NORTHWIND\".\"ORDER_DETAILS\".\"PRODUCT_ID\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"ORDER_ID\", "
+  "\"NORTHWIND\".\"ORDER_DETAILS\".\"PRODUCT_ID\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"UNIT_PRICE\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"QUANTITY\", "
   "\"NORTHWIND\".\"ORDER_DETAILS\".\"DISCOUNT\" "
@@ -710,13 +710,13 @@ namespace odb
         case 1:
         {
           db.execute ("CREATE TABLE \"NORTHWIND\".\"ORDER_DETAILS\" (\n"
-                      "  \"PRODUCT_ID\" NUMBER(10) NOT NULL,\n"
                       "  \"ORDER_ID\" NUMBER(10) NOT NULL,\n"
+                      "  \"PRODUCT_ID\" NUMBER(10) NOT NULL,\n"
                       "  \"UNIT_PRICE\" BINARY_DOUBLE NOT NULL,\n"
                       "  \"QUANTITY\" NUMBER(10) NOT NULL,\n"
                       "  \"DISCOUNT\" BINARY_DOUBLE NOT NULL,\n"
-                      "  PRIMARY KEY (\"PRODUCT_ID\",\n"
-                      "               \"ORDER_ID\"))");
+                      "  PRIMARY KEY (\"ORDER_ID\",\n"
+                      "               \"PRODUCT_ID\"))");
           return false;
         }
       }

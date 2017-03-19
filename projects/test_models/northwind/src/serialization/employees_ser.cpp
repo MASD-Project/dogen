@@ -22,7 +22,6 @@
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
-#include <boost/serialization/vector.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
@@ -58,7 +57,6 @@ void save(Archive& ar,
     ar << make_nvp("photo", v.photo_);
     ar << make_nvp("notes", v.notes_);
     ar << make_nvp("reports_to", v.reports_to_);
-    ar << make_nvp("photo_path", v.photo_path_);
 }
 
 template<typename Archive>
@@ -82,7 +80,6 @@ void load(Archive& ar,
     ar >> make_nvp("photo", v.photo_);
     ar >> make_nvp("notes", v.notes_);
     ar >> make_nvp("reports_to", v.reports_to_);
-    ar >> make_nvp("photo_path", v.photo_path_);
 }
 
 } }

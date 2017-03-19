@@ -39,6 +39,7 @@ std::ostream& operator<<(std::ostream& s, const customers& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::test_models::northwind::customers\"" << ", "
       << "\"customer_id\": " << v.customer_id() << ", "
+      << "\"customer_code\": " << "\"" << tidy_up_string(v.customer_code()) << "\"" << ", "
       << "\"company_name\": " << "\"" << tidy_up_string(v.company_name()) << "\"" << ", "
       << "\"contact_name\": " << "\"" << tidy_up_string(v.contact_name()) << "\"" << ", "
       << "\"contact_title\": " << "\"" << tidy_up_string(v.contact_title()) << "\"" << ", "

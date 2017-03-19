@@ -26,15 +26,12 @@
 #endif
 
 #include "dogen/test_models/northwind/odb/orders_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/region_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/order_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/products_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/shippers_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/supplier_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/customers_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/employees_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/region_id_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/territory_pragmas.hpp"
+#include "dogen/test_models/northwind/odb/suppliers_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/categories_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/product_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/shipper_id_pragmas.hpp"
@@ -42,14 +39,7 @@
 #include "dogen/test_models/northwind/odb/customer_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/employee_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/supplier_id_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/territory_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/order_details_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/customer_type_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/order_details_key_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/employee_territories_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/customer_demographics_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/customer_customer_demo_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/employee_territories_key_pragmas.hpp"
-#include "dogen/test_models/northwind/odb/customer_customer_demo_key_pragmas.hpp"
 
 #endif

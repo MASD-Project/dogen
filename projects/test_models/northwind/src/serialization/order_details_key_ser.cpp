@@ -38,16 +38,16 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::test_models::northwind::order_details_key& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("product_id", v.product_id_);
     ar << make_nvp("order_id", v.order_id_);
+    ar << make_nvp("product_id", v.product_id_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::test_models::northwind::order_details_key& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("product_id", v.product_id_);
     ar >> make_nvp("order_id", v.order_id_);
+    ar >> make_nvp("product_id", v.product_id_);
 }
 
 } }

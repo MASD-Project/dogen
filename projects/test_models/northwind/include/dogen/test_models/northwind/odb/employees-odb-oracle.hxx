@@ -236,9 +236,9 @@ namespace odb
     typedef
     oracle::query_column<
       oracle::value_traits<
-        ::std::vector< char >,
-        oracle::id_blob >::query_type,
-      oracle::id_blob >
+        ::std::string,
+        oracle::id_string >::query_type,
+      oracle::id_string >
     photo_type_;
 
     static const photo_type_ photo;
@@ -277,18 +277,6 @@ namespace odb
     };
 
     static const reports_to_class_ reports_to;
-
-    // photo_path
-    //
-    typedef
-    oracle::query_column<
-      oracle::value_traits<
-        ::std::string,
-        oracle::id_string >::query_type,
-      oracle::id_string >
-    photo_path_type_;
-
-    static const photo_path_type_ photo_path;
   };
 
   template <typename A>
@@ -368,7 +356,7 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::photo_type_
   query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::
-  photo (A::table_name, "\"PHOTO\"", 0);
+  photo (A::table_name, "\"PHOTO\"", 0, 512);
 
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::notes_type_
@@ -383,11 +371,6 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::reports_to_class_
   query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::reports_to;
-
-  template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::photo_path_type_
-  query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >::
-  photo_path (A::table_name, "\"PHOTO_PATH\"", 0, 512);
 
   template <typename A>
   struct pointer_query_columns< ::dogen::test_models::northwind::employees, id_oracle, A >:
@@ -493,9 +476,9 @@ namespace odb
 
       // photo_
       //
-      mutable oracle::lob_callback photo_callback;
+      char photo_value[512];
+      ub2 photo_size;
       sb2 photo_indicator;
-      oracle::lob photo_lob;
 
       // notes_
       //
@@ -506,12 +489,6 @@ namespace odb
       // reports_to_
       //
       composite_value_traits< ::dogen::test_models::northwind::employee_id, id_oracle >::image_type reports_to_value;
-
-      // photo_path_
-      //
-      char photo_path_value[512];
-      ub2 photo_path_size;
-      sb2 photo_path_indicator;
 
       std::size_t version;
 
@@ -556,7 +533,7 @@ namespace odb
 
     typedef oracle::query_base query_base_type;
 
-    static const std::size_t column_count = 18UL;
+    static const std::size_t column_count = 17UL;
     static const std::size_t id_column_count = 1UL;
     static const std::size_t inverse_column_count = 0UL;
     static const std::size_t readonly_column_count = 0UL;

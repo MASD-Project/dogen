@@ -26,15 +26,12 @@
 #endif
 
 #include "dogen/test_models/northwind/serialization/orders_ser.hpp"
-#include "dogen/test_models/northwind/serialization/region_ser.hpp"
 #include "dogen/test_models/northwind/serialization/order_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/products_ser.hpp"
 #include "dogen/test_models/northwind/serialization/shippers_ser.hpp"
-#include "dogen/test_models/northwind/serialization/supplier_ser.hpp"
 #include "dogen/test_models/northwind/serialization/customers_ser.hpp"
 #include "dogen/test_models/northwind/serialization/employees_ser.hpp"
-#include "dogen/test_models/northwind/serialization/region_id_ser.hpp"
-#include "dogen/test_models/northwind/serialization/territory_ser.hpp"
+#include "dogen/test_models/northwind/serialization/suppliers_ser.hpp"
 #include "dogen/test_models/northwind/serialization/categories_ser.hpp"
 #include "dogen/test_models/northwind/serialization/product_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/shipper_id_ser.hpp"
@@ -42,14 +39,7 @@
 #include "dogen/test_models/northwind/serialization/customer_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/employee_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/supplier_id_ser.hpp"
-#include "dogen/test_models/northwind/serialization/territory_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/order_details_ser.hpp"
-#include "dogen/test_models/northwind/serialization/customer_type_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/order_details_key_ser.hpp"
-#include "dogen/test_models/northwind/serialization/employee_territories_ser.hpp"
-#include "dogen/test_models/northwind/serialization/customer_demographics_ser.hpp"
-#include "dogen/test_models/northwind/serialization/customer_customer_demo_ser.hpp"
-#include "dogen/test_models/northwind/serialization/employee_territories_key_ser.hpp"
-#include "dogen/test_models/northwind/serialization/customer_customer_demo_key_ser.hpp"
 
 #endif

@@ -4,7 +4,7 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/test_models/northwind/odb/employees-odb-pgsql.hxx"
+#include "dogen/test_models/northwind/odb/suppliers-odb-pgsql.hxx"
 
 #include <cassert>
 #include <cstring>  // std::memcpy
@@ -24,28 +24,28 @@
 
 namespace odb
 {
-  // employees
+  // suppliers
   //
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
-  persist_statement_name[] = "PERSIST_DOGEN_TEST_MODELS_NORTHWIND_EMPLOYEES";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
+  persist_statement_name[] = "PERSIST_DOGEN_TEST_MODELS_NORTHWIND_SUPPLIERS";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
-  find_statement_name[] = "FIND_DOGEN_TEST_MODELS_NORTHWIND_EMPLOYEES";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
+  find_statement_name[] = "FIND_DOGEN_TEST_MODELS_NORTHWIND_SUPPLIERS";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
-  update_statement_name[] = "UPDATE_DOGEN_TEST_MODELS_NORTHWIND_EMPLOYEES";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
+  update_statement_name[] = "UPDATE_DOGEN_TEST_MODELS_NORTHWIND_SUPPLIERS";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
-  erase_statement_name[] = "ERASE_DOGEN_TEST_MODELS_NORTHWIND_EMPLOYEES";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
+  erase_statement_name[] = "ERASE_DOGEN_TEST_MODELS_NORTHWIND_SUPPLIERS";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
-  query_statement_name[] = "QUERY_DOGEN_TEST_MODELS_NORTHWIND_EMPLOYEES";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
+  query_statement_name[] = "QUERY_DOGEN_TEST_MODELS_NORTHWIND_SUPPLIERS";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
-  erase_query_statement_name[] = "ERASE_QUERY_DOGEN_TEST_MODELS_NORTHWIND_EMPLOYEES";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
+  erase_query_statement_name[] = "ERASE_QUERY_DOGEN_TEST_MODELS_NORTHWIND_SUPPLIERS";
 
-  const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   persist_statement_types[] =
   {
     pgsql::int4_oid,
@@ -53,35 +53,28 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::date_oid,
-    pgsql::date_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::int4_oid
+    pgsql::text_oid
   };
 
-  const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   find_statement_types[] =
   {
     pgsql::int4_oid
   };
 
-  const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  const unsigned int access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   update_statement_types[] =
   {
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::date_oid,
-    pgsql::date_oid,
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
@@ -89,13 +82,10 @@ namespace odb
     pgsql::text_oid,
     pgsql::text_oid,
     pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::text_oid,
-    pgsql::int4_oid,
     pgsql::int4_oid
   };
 
-  struct access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::extra_statement_cache_type
+  struct access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::extra_statement_cache_type
   {
     extra_statement_cache_type (
       pgsql::connection&,
@@ -109,8 +99,8 @@ namespace odb
     }
   };
 
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::id_type
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::id_type
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   id (const image_type& i)
   {
     pgsql::database* db (0);
@@ -118,16 +108,16 @@ namespace odb
 
     id_type id;
     {
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::init (
         id,
-        i.employee_id_value,
+        i.supplier_id_value,
         db);
     }
 
     return id;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   grow (image_type& i,
         bool* t)
   {
@@ -136,55 +126,39 @@ namespace odb
 
     bool grew (false);
 
-    // employee_id_
+    // supplier_id_
     //
-    if (composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::grow (
-          i.employee_id_value, t + 0UL))
+    if (composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::grow (
+          i.supplier_id_value, t + 0UL))
       grew = true;
 
-    // last_name_
+    // company_name_
     //
     if (t[1UL])
     {
-      i.last_name_value.capacity (i.last_name_size);
+      i.company_name_value.capacity (i.company_name_size);
       grew = true;
     }
 
-    // first_name_
+    // contact_name_
     //
     if (t[2UL])
     {
-      i.first_name_value.capacity (i.first_name_size);
+      i.contact_name_value.capacity (i.contact_name_size);
       grew = true;
     }
 
-    // title_
+    // contact_title_
     //
     if (t[3UL])
     {
-      i.title_value.capacity (i.title_size);
+      i.contact_title_value.capacity (i.contact_title_size);
       grew = true;
     }
-
-    // title_of_courtesy_
-    //
-    if (t[4UL])
-    {
-      i.title_of_courtesy_value.capacity (i.title_of_courtesy_size);
-      grew = true;
-    }
-
-    // birth_date_
-    //
-    t[5UL] = 0;
-
-    // hire_date_
-    //
-    t[6UL] = 0;
 
     // address_
     //
-    if (t[7UL])
+    if (t[4UL])
     {
       i.address_value.capacity (i.address_size);
       grew = true;
@@ -192,7 +166,7 @@ namespace odb
 
     // city_
     //
-    if (t[8UL])
+    if (t[5UL])
     {
       i.city_value.capacity (i.city_size);
       grew = true;
@@ -200,7 +174,7 @@ namespace odb
 
     // region_
     //
-    if (t[9UL])
+    if (t[6UL])
     {
       i.region_value.capacity (i.region_size);
       grew = true;
@@ -208,7 +182,7 @@ namespace odb
 
     // postal_code_
     //
-    if (t[10UL])
+    if (t[7UL])
     {
       i.postal_code_value.capacity (i.postal_code_size);
       grew = true;
@@ -216,54 +190,40 @@ namespace odb
 
     // country_
     //
-    if (t[11UL])
+    if (t[8UL])
     {
       i.country_value.capacity (i.country_size);
       grew = true;
     }
 
-    // home_phone_
+    // phone_
     //
-    if (t[12UL])
+    if (t[9UL])
     {
-      i.home_phone_value.capacity (i.home_phone_size);
+      i.phone_value.capacity (i.phone_size);
       grew = true;
     }
 
-    // extension_
+    // fax_
     //
-    if (t[13UL])
+    if (t[10UL])
     {
-      i.extension_value.capacity (i.extension_size);
+      i.fax_value.capacity (i.fax_size);
       grew = true;
     }
 
-    // photo_
+    // home_page_
     //
-    if (t[14UL])
+    if (t[11UL])
     {
-      i.photo_value.capacity (i.photo_size);
+      i.home_page_value.capacity (i.home_page_size);
       grew = true;
     }
-
-    // notes_
-    //
-    if (t[15UL])
-    {
-      i.notes_value.capacity (i.notes_size);
-      grew = true;
-    }
-
-    // reports_to_
-    //
-    if (composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::grow (
-          i.reports_to_value, t + 16UL))
-      grew = true;
 
     return grew;
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   bind (pgsql::bind* b,
         image_type& i,
         pgsql::statement_kind sk)
@@ -274,63 +234,40 @@ namespace odb
 
     std::size_t n (0);
 
-    // employee_id_
+    // supplier_id_
     //
     if (sk != statement_update)
     {
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::bind (
-        b + n, i.employee_id_value, sk);
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::bind (
+        b + n, i.supplier_id_value, sk);
       n += 1UL;
     }
 
-    // last_name_
+    // company_name_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.last_name_value.data ();
-    b[n].capacity = i.last_name_value.capacity ();
-    b[n].size = &i.last_name_size;
-    b[n].is_null = &i.last_name_null;
+    b[n].buffer = i.company_name_value.data ();
+    b[n].capacity = i.company_name_value.capacity ();
+    b[n].size = &i.company_name_size;
+    b[n].is_null = &i.company_name_null;
     n++;
 
-    // first_name_
+    // contact_name_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.first_name_value.data ();
-    b[n].capacity = i.first_name_value.capacity ();
-    b[n].size = &i.first_name_size;
-    b[n].is_null = &i.first_name_null;
+    b[n].buffer = i.contact_name_value.data ();
+    b[n].capacity = i.contact_name_value.capacity ();
+    b[n].size = &i.contact_name_size;
+    b[n].is_null = &i.contact_name_null;
     n++;
 
-    // title_
+    // contact_title_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.title_value.data ();
-    b[n].capacity = i.title_value.capacity ();
-    b[n].size = &i.title_size;
-    b[n].is_null = &i.title_null;
-    n++;
-
-    // title_of_courtesy_
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.title_of_courtesy_value.data ();
-    b[n].capacity = i.title_of_courtesy_value.capacity ();
-    b[n].size = &i.title_of_courtesy_size;
-    b[n].is_null = &i.title_of_courtesy_null;
-    n++;
-
-    // birth_date_
-    //
-    b[n].type = pgsql::bind::date;
-    b[n].buffer = &i.birth_date_value;
-    b[n].is_null = &i.birth_date_null;
-    n++;
-
-    // hire_date_
-    //
-    b[n].type = pgsql::bind::date;
-    b[n].buffer = &i.hire_date_value;
-    b[n].is_null = &i.hire_date_null;
+    b[n].buffer = i.contact_title_value.data ();
+    b[n].capacity = i.contact_title_value.capacity ();
+    b[n].size = &i.contact_title_size;
+    b[n].is_null = &i.contact_title_null;
     n++;
 
     // address_
@@ -378,59 +315,44 @@ namespace odb
     b[n].is_null = &i.country_null;
     n++;
 
-    // home_phone_
+    // phone_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.home_phone_value.data ();
-    b[n].capacity = i.home_phone_value.capacity ();
-    b[n].size = &i.home_phone_size;
-    b[n].is_null = &i.home_phone_null;
+    b[n].buffer = i.phone_value.data ();
+    b[n].capacity = i.phone_value.capacity ();
+    b[n].size = &i.phone_size;
+    b[n].is_null = &i.phone_null;
     n++;
 
-    // extension_
+    // fax_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.extension_value.data ();
-    b[n].capacity = i.extension_value.capacity ();
-    b[n].size = &i.extension_size;
-    b[n].is_null = &i.extension_null;
+    b[n].buffer = i.fax_value.data ();
+    b[n].capacity = i.fax_value.capacity ();
+    b[n].size = &i.fax_size;
+    b[n].is_null = &i.fax_null;
     n++;
 
-    // photo_
+    // home_page_
     //
     b[n].type = pgsql::bind::text;
-    b[n].buffer = i.photo_value.data ();
-    b[n].capacity = i.photo_value.capacity ();
-    b[n].size = &i.photo_size;
-    b[n].is_null = &i.photo_null;
+    b[n].buffer = i.home_page_value.data ();
+    b[n].capacity = i.home_page_value.capacity ();
+    b[n].size = &i.home_page_size;
+    b[n].is_null = &i.home_page_null;
     n++;
-
-    // notes_
-    //
-    b[n].type = pgsql::bind::text;
-    b[n].buffer = i.notes_value.data ();
-    b[n].capacity = i.notes_value.capacity ();
-    b[n].size = &i.notes_size;
-    b[n].is_null = &i.notes_null;
-    n++;
-
-    // reports_to_
-    //
-    composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::bind (
-      b + n, i.reports_to_value, sk);
-    n += 1UL;
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   bind (pgsql::bind* b, id_image_type& i)
   {
     std::size_t n (0);
     pgsql::statement_kind sk (pgsql::statement_select);
-    composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::bind (
+    composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::bind (
       b + n, i.id_value, sk);
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   init (image_type& i,
         const object_type& o,
         pgsql::statement_kind sk)
@@ -443,129 +365,80 @@ namespace odb
 
     bool grew (false);
 
-    // employee_id_
+    // supplier_id_
     //
     if (sk == statement_insert)
     {
-      ::dogen::test_models::northwind::employee_id const& v =
-        o.employee_id ();
+      ::dogen::test_models::northwind::supplier_id const& v =
+        o.supplier_id ();
 
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::init (
-        i.employee_id_value,
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::init (
+        i.supplier_id_value,
         v,
         sk);
     }
 
-    // last_name_
+    // company_name_
     //
     {
       ::std::string const& v =
-        o.last_name ();
+        o.company_name ();
 
       bool is_null (false);
       std::size_t size (0);
-      std::size_t cap (i.last_name_value.capacity ());
+      std::size_t cap (i.company_name_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.last_name_value,
+        i.company_name_value,
         size,
         is_null,
         v);
-      i.last_name_null = is_null;
-      i.last_name_size = size;
-      grew = grew || (cap != i.last_name_value.capacity ());
+      i.company_name_null = is_null;
+      i.company_name_size = size;
+      grew = grew || (cap != i.company_name_value.capacity ());
     }
 
-    // first_name_
+    // contact_name_
     //
     {
       ::std::string const& v =
-        o.first_name ();
+        o.contact_name ();
 
-      bool is_null (false);
+      bool is_null (true);
       std::size_t size (0);
-      std::size_t cap (i.first_name_value.capacity ());
+      std::size_t cap (i.contact_name_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.first_name_value,
+        i.contact_name_value,
         size,
         is_null,
         v);
-      i.first_name_null = is_null;
-      i.first_name_size = size;
-      grew = grew || (cap != i.first_name_value.capacity ());
+      i.contact_name_null = is_null;
+      i.contact_name_size = size;
+      grew = grew || (cap != i.contact_name_value.capacity ());
     }
 
-    // title_
+    // contact_title_
     //
     {
       ::std::string const& v =
-        o.title ();
+        o.contact_title ();
 
       bool is_null (true);
       std::size_t size (0);
-      std::size_t cap (i.title_value.capacity ());
+      std::size_t cap (i.contact_title_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.title_value,
+        i.contact_title_value,
         size,
         is_null,
         v);
-      i.title_null = is_null;
-      i.title_size = size;
-      grew = grew || (cap != i.title_value.capacity ());
-    }
-
-    // title_of_courtesy_
-    //
-    {
-      ::std::string const& v =
-        o.title_of_courtesy ();
-
-      bool is_null (true);
-      std::size_t size (0);
-      std::size_t cap (i.title_of_courtesy_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.title_of_courtesy_value,
-        size,
-        is_null,
-        v);
-      i.title_of_courtesy_null = is_null;
-      i.title_of_courtesy_size = size;
-      grew = grew || (cap != i.title_of_courtesy_value.capacity ());
-    }
-
-    // birth_date_
-    //
-    {
-      ::boost::gregorian::date const& v =
-        o.birth_date ();
-
-      bool is_null (true);
-      pgsql::value_traits<
-          ::boost::gregorian::date,
-          pgsql::id_date >::set_image (
-        i.birth_date_value, is_null, v);
-      i.birth_date_null = is_null;
-    }
-
-    // hire_date_
-    //
-    {
-      ::boost::gregorian::date const& v =
-        o.hire_date ();
-
-      bool is_null (true);
-      pgsql::value_traits<
-          ::boost::gregorian::date,
-          pgsql::id_date >::set_image (
-        i.hire_date_value, is_null, v);
-      i.hire_date_null = is_null;
+      i.contact_title_null = is_null;
+      i.contact_title_size = size;
+      grew = grew || (cap != i.contact_title_value.capacity ());
     }
 
     // address_
@@ -673,106 +546,73 @@ namespace odb
       grew = grew || (cap != i.country_value.capacity ());
     }
 
-    // home_phone_
+    // phone_
     //
     {
       ::std::string const& v =
-        o.home_phone ();
+        o.phone ();
 
       bool is_null (true);
       std::size_t size (0);
-      std::size_t cap (i.home_phone_value.capacity ());
+      std::size_t cap (i.phone_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.home_phone_value,
+        i.phone_value,
         size,
         is_null,
         v);
-      i.home_phone_null = is_null;
-      i.home_phone_size = size;
-      grew = grew || (cap != i.home_phone_value.capacity ());
+      i.phone_null = is_null;
+      i.phone_size = size;
+      grew = grew || (cap != i.phone_value.capacity ());
     }
 
-    // extension_
+    // fax_
     //
     {
       ::std::string const& v =
-        o.extension ();
+        o.fax ();
 
       bool is_null (true);
       std::size_t size (0);
-      std::size_t cap (i.extension_value.capacity ());
+      std::size_t cap (i.fax_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.extension_value,
+        i.fax_value,
         size,
         is_null,
         v);
-      i.extension_null = is_null;
-      i.extension_size = size;
-      grew = grew || (cap != i.extension_value.capacity ());
+      i.fax_null = is_null;
+      i.fax_size = size;
+      grew = grew || (cap != i.fax_value.capacity ());
     }
 
-    // photo_
+    // home_page_
     //
     {
       ::std::string const& v =
-        o.photo ();
+        o.home_page ();
 
       bool is_null (true);
       std::size_t size (0);
-      std::size_t cap (i.photo_value.capacity ());
+      std::size_t cap (i.home_page_value.capacity ());
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_image (
-        i.photo_value,
+        i.home_page_value,
         size,
         is_null,
         v);
-      i.photo_null = is_null;
-      i.photo_size = size;
-      grew = grew || (cap != i.photo_value.capacity ());
-    }
-
-    // notes_
-    //
-    {
-      ::std::string const& v =
-        o.notes ();
-
-      bool is_null (true);
-      std::size_t size (0);
-      std::size_t cap (i.notes_value.capacity ());
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_image (
-        i.notes_value,
-        size,
-        is_null,
-        v);
-      i.notes_null = is_null;
-      i.notes_size = size;
-      grew = grew || (cap != i.notes_value.capacity ());
-    }
-
-    // reports_to_
-    //
-    {
-      ::dogen::test_models::northwind::employee_id const& v =
-        o.reports_to ();
-
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::init (
-        i.reports_to_value,
-        v,
-        sk);
+      i.home_page_null = is_null;
+      i.home_page_size = size;
+      grew = grew || (cap != i.home_page_value.capacity ());
     }
 
     return grew;
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   init (object_type& o,
         const image_type& i,
         database* db)
@@ -781,104 +621,61 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // employee_id_
+    // supplier_id_
     //
     {
-      ::dogen::test_models::northwind::employee_id& v =
-        o.employee_id ();
+      ::dogen::test_models::northwind::supplier_id& v =
+        o.supplier_id ();
 
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::init (
         v,
-        i.employee_id_value,
+        i.supplier_id_value,
         db);
     }
 
-    // last_name_
+    // company_name_
     //
     {
       ::std::string& v =
-        o.last_name ();
+        o.company_name ();
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.last_name_value,
-        i.last_name_size,
-        i.last_name_null);
+        i.company_name_value,
+        i.company_name_size,
+        i.company_name_null);
     }
 
-    // first_name_
+    // contact_name_
     //
     {
       ::std::string& v =
-        o.first_name ();
+        o.contact_name ();
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.first_name_value,
-        i.first_name_size,
-        i.first_name_null);
+        i.contact_name_value,
+        i.contact_name_size,
+        i.contact_name_null);
     }
 
-    // title_
+    // contact_title_
     //
     {
       ::std::string& v =
-        o.title ();
+        o.contact_title ();
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.title_value,
-        i.title_size,
-        i.title_null);
-    }
-
-    // title_of_courtesy_
-    //
-    {
-      ::std::string& v =
-        o.title_of_courtesy ();
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.title_of_courtesy_value,
-        i.title_of_courtesy_size,
-        i.title_of_courtesy_null);
-    }
-
-    // birth_date_
-    //
-    {
-      ::boost::gregorian::date& v =
-        o.birth_date ();
-
-      pgsql::value_traits<
-          ::boost::gregorian::date,
-          pgsql::id_date >::set_value (
-        v,
-        i.birth_date_value,
-        i.birth_date_null);
-    }
-
-    // hire_date_
-    //
-    {
-      ::boost::gregorian::date& v =
-        o.hire_date ();
-
-      pgsql::value_traits<
-          ::boost::gregorian::date,
-          pgsql::id_date >::set_value (
-        v,
-        i.hire_date_value,
-        i.hire_date_null);
+        i.contact_title_value,
+        i.contact_title_size,
+        i.contact_title_null);
     }
 
     // address_
@@ -956,188 +753,141 @@ namespace odb
         i.country_null);
     }
 
-    // home_phone_
+    // phone_
     //
     {
       ::std::string& v =
-        o.home_phone ();
+        o.phone ();
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.home_phone_value,
-        i.home_phone_size,
-        i.home_phone_null);
+        i.phone_value,
+        i.phone_size,
+        i.phone_null);
     }
 
-    // extension_
+    // fax_
     //
     {
       ::std::string& v =
-        o.extension ();
+        o.fax ();
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.extension_value,
-        i.extension_size,
-        i.extension_null);
+        i.fax_value,
+        i.fax_size,
+        i.fax_null);
     }
 
-    // photo_
+    // home_page_
     //
     {
       ::std::string& v =
-        o.photo ();
+        o.home_page ();
 
       pgsql::value_traits<
           ::std::string,
           pgsql::id_string >::set_value (
         v,
-        i.photo_value,
-        i.photo_size,
-        i.photo_null);
-    }
-
-    // notes_
-    //
-    {
-      ::std::string& v =
-        o.notes ();
-
-      pgsql::value_traits<
-          ::std::string,
-          pgsql::id_string >::set_value (
-        v,
-        i.notes_value,
-        i.notes_size,
-        i.notes_null);
-    }
-
-    // reports_to_
-    //
-    {
-      ::dogen::test_models::northwind::employee_id& v =
-        o.reports_to ();
-
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::init (
-        v,
-        i.reports_to_value,
-        db);
+        i.home_page_value,
+        i.home_page_size,
+        i.home_page_null);
     }
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   init (id_image_type& i, const id_type& id)
   {
     pgsql::statement_kind sk (pgsql::statement_select);
     {
-      composite_value_traits< ::dogen::test_models::northwind::employee_id, id_pgsql >::init (
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_pgsql >::init (
         i.id_value,
         id,
         sk);
     }
   }
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::persist_statement[] =
-  "INSERT INTO \"NORTHWIND\".\"EMPLOYEES\" "
-  "(\"EMPLOYEE_ID\", "
-  "\"LAST_NAME\", "
-  "\"FIRST_NAME\", "
-  "\"TITLE\", "
-  "\"TITLE_OF_COURTESY\", "
-  "\"BIRTH_DATE\", "
-  "\"HIRE_DATE\", "
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::persist_statement[] =
+  "INSERT INTO \"NORTHWIND\".\"SUPPLIERS\" "
+  "(\"SUPPLIER_ID\", "
+  "\"COMPANY_NAME\", "
+  "\"CONTACT_NAME\", "
+  "\"CONTACT_TITLE\", "
   "\"ADDRESS\", "
   "\"CITY\", "
   "\"REGION\", "
   "\"POSTAL_CODE\", "
   "\"COUNTRY\", "
-  "\"HOME_PHONE\", "
-  "\"EXTENSION\", "
-  "\"PHOTO\", "
-  "\"NOTES\", "
-  "\"REPORTS_TO\") "
+  "\"PHONE\", "
+  "\"FAX\", "
+  "\"HOME_PAGE\") "
   "VALUES "
-  "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)";
+  "($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::find_statement[] =
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::find_statement[] =
   "SELECT "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EMPLOYEE_ID\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"LAST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"FIRST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE_OF_COURTESY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"BIRTH_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HIRE_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"ADDRESS\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"CITY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REGION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"POSTAL_CODE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"COUNTRY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HOME_PHONE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EXTENSION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"PHOTO\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"NOTES\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REPORTS_TO\" "
-  "FROM \"NORTHWIND\".\"EMPLOYEES\" "
-  "WHERE \"NORTHWIND\".\"EMPLOYEES\".\"EMPLOYEE_ID\"=$1";
+  "\"NORTHWIND\".\"SUPPLIERS\".\"SUPPLIER_ID\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COMPANY_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_TITLE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"ADDRESS\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CITY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"REGION\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"POSTAL_CODE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COUNTRY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"PHONE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"FAX\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"HOME_PAGE\" "
+  "FROM \"NORTHWIND\".\"SUPPLIERS\" "
+  "WHERE \"NORTHWIND\".\"SUPPLIERS\".\"SUPPLIER_ID\"=$1";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::update_statement[] =
-  "UPDATE \"NORTHWIND\".\"EMPLOYEES\" "
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::update_statement[] =
+  "UPDATE \"NORTHWIND\".\"SUPPLIERS\" "
   "SET "
-  "\"LAST_NAME\"=$1, "
-  "\"FIRST_NAME\"=$2, "
-  "\"TITLE\"=$3, "
-  "\"TITLE_OF_COURTESY\"=$4, "
-  "\"BIRTH_DATE\"=$5, "
-  "\"HIRE_DATE\"=$6, "
-  "\"ADDRESS\"=$7, "
-  "\"CITY\"=$8, "
-  "\"REGION\"=$9, "
-  "\"POSTAL_CODE\"=$10, "
-  "\"COUNTRY\"=$11, "
-  "\"HOME_PHONE\"=$12, "
-  "\"EXTENSION\"=$13, "
-  "\"PHOTO\"=$14, "
-  "\"NOTES\"=$15, "
-  "\"REPORTS_TO\"=$16 "
-  "WHERE \"EMPLOYEE_ID\"=$17";
+  "\"COMPANY_NAME\"=$1, "
+  "\"CONTACT_NAME\"=$2, "
+  "\"CONTACT_TITLE\"=$3, "
+  "\"ADDRESS\"=$4, "
+  "\"CITY\"=$5, "
+  "\"REGION\"=$6, "
+  "\"POSTAL_CODE\"=$7, "
+  "\"COUNTRY\"=$8, "
+  "\"PHONE\"=$9, "
+  "\"FAX\"=$10, "
+  "\"HOME_PAGE\"=$11 "
+  "WHERE \"SUPPLIER_ID\"=$12";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::erase_statement[] =
-  "DELETE FROM \"NORTHWIND\".\"EMPLOYEES\" "
-  "WHERE \"EMPLOYEE_ID\"=$1";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::erase_statement[] =
+  "DELETE FROM \"NORTHWIND\".\"SUPPLIERS\" "
+  "WHERE \"SUPPLIER_ID\"=$1";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::query_statement[] =
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::query_statement[] =
   "SELECT "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EMPLOYEE_ID\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"LAST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"FIRST_NAME\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"TITLE_OF_COURTESY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"BIRTH_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HIRE_DATE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"ADDRESS\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"CITY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REGION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"POSTAL_CODE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"COUNTRY\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"HOME_PHONE\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"EXTENSION\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"PHOTO\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"NOTES\", "
-  "\"NORTHWIND\".\"EMPLOYEES\".\"REPORTS_TO\" "
-  "FROM \"NORTHWIND\".\"EMPLOYEES\"";
+  "\"NORTHWIND\".\"SUPPLIERS\".\"SUPPLIER_ID\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COMPANY_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_NAME\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CONTACT_TITLE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"ADDRESS\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"CITY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"REGION\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"POSTAL_CODE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"COUNTRY\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"PHONE\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"FAX\", "
+  "\"NORTHWIND\".\"SUPPLIERS\".\"HOME_PAGE\" "
+  "FROM \"NORTHWIND\".\"SUPPLIERS\"";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::erase_query_statement[] =
-  "DELETE FROM \"NORTHWIND\".\"EMPLOYEES\"";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::erase_query_statement[] =
+  "DELETE FROM \"NORTHWIND\".\"SUPPLIERS\"";
 
-  const char access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::table_name[] =
-  "\"NORTHWIND\".\"EMPLOYEES\"";
+  const char access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::table_name[] =
+  "\"NORTHWIND\".\"SUPPLIERS\"";
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   persist (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -1176,7 +926,7 @@ namespace odb
               callback_event::post_persist);
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   update (database& db, const object_type& obj)
   {
     ODB_POTENTIALLY_UNUSED (db);
@@ -1192,7 +942,7 @@ namespace odb
       conn.statement_cache ().find_object<object_type> ());
 
     const id_type& id (
-      obj.employee_id ());
+      obj.supplier_id ());
     id_image_type& idi (sts.id_image ());
     init (idi, id);
 
@@ -1237,7 +987,7 @@ namespace odb
     pointer_cache_traits::update (db, obj);
   }
 
-  void access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  void access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   erase (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -1266,8 +1016,8 @@ namespace odb
     pointer_cache_traits::erase (db, id);
   }
 
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::pointer_type
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::pointer_type
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   find (database& db, const id_type& id)
   {
     using namespace pgsql;
@@ -1322,7 +1072,7 @@ namespace odb
     return p;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   find (database& db, const id_type& id, object_type& obj)
   {
     using namespace pgsql;
@@ -1355,7 +1105,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   reload (database& db, object_type& obj)
   {
     using namespace pgsql;
@@ -1368,7 +1118,7 @@ namespace odb
     statements_type::auto_lock l (sts);
 
     const id_type& id  (
-      obj.employee_id ());
+      obj.supplier_id ());
 
     if (!find_ (sts, &id))
       return false;
@@ -1385,7 +1135,7 @@ namespace odb
     return true;
   }
 
-  bool access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  bool access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   find_ (statements_type& sts,
          const id_type* id)
   {
@@ -1436,8 +1186,8 @@ namespace odb
     return r != select_statement::no_data;
   }
 
-  result< access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::object_type >
-  access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  result< access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::object_type >
+  access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -1491,7 +1241,7 @@ namespace odb
     return result<object_type> (r);
   }
 
-  unsigned long long access::object_traits_impl< ::dogen::test_models::northwind::employees, id_pgsql >::
+  unsigned long long access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_pgsql >::
   erase_query (database&, const query_base_type& q)
   {
     using namespace pgsql;
@@ -1538,7 +1288,7 @@ namespace odb
         }
         case 2:
         {
-          db.execute ("DROP TABLE IF EXISTS \"NORTHWIND\".\"EMPLOYEES\" CASCADE");
+          db.execute ("DROP TABLE IF EXISTS \"NORTHWIND\".\"SUPPLIERS\" CASCADE");
           return false;
         }
       }
@@ -1549,24 +1299,19 @@ namespace odb
       {
         case 1:
         {
-          db.execute ("CREATE TABLE \"NORTHWIND\".\"EMPLOYEES\" (\n"
-                      "  \"EMPLOYEE_ID\" INTEGER NOT NULL PRIMARY KEY,\n"
-                      "  \"LAST_NAME\" TEXT NOT NULL,\n"
-                      "  \"FIRST_NAME\" TEXT NOT NULL,\n"
-                      "  \"TITLE\" TEXT NULL,\n"
-                      "  \"TITLE_OF_COURTESY\" TEXT NULL,\n"
-                      "  \"BIRTH_DATE\" DATE NULL,\n"
-                      "  \"HIRE_DATE\" DATE NULL,\n"
+          db.execute ("CREATE TABLE \"NORTHWIND\".\"SUPPLIERS\" (\n"
+                      "  \"SUPPLIER_ID\" INTEGER NOT NULL PRIMARY KEY,\n"
+                      "  \"COMPANY_NAME\" TEXT NOT NULL,\n"
+                      "  \"CONTACT_NAME\" TEXT NULL,\n"
+                      "  \"CONTACT_TITLE\" TEXT NULL,\n"
                       "  \"ADDRESS\" TEXT NULL,\n"
                       "  \"CITY\" TEXT NULL,\n"
                       "  \"REGION\" TEXT NULL,\n"
                       "  \"POSTAL_CODE\" TEXT NULL,\n"
                       "  \"COUNTRY\" TEXT NULL,\n"
-                      "  \"HOME_PHONE\" TEXT NULL,\n"
-                      "  \"EXTENSION\" TEXT NULL,\n"
-                      "  \"PHOTO\" TEXT NULL,\n"
-                      "  \"NOTES\" TEXT NULL,\n"
-                      "  \"REPORTS_TO\" INTEGER NULL)");
+                      "  \"PHONE\" TEXT NULL,\n"
+                      "  \"FAX\" TEXT NULL,\n"
+                      "  \"HOME_PAGE\" TEXT NULL)");
           return false;
         }
       }

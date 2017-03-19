@@ -46,16 +46,17 @@ customers_generator::customers_generator() : position_(0) { }
 void customers_generator::
 populate(const unsigned int position, result_type& v) {
     v.customer_id(create_dogen_test_models_northwind_customer_id(position + 0));
-    v.company_name(create_std_string(position + 1));
-    v.contact_name(create_std_string(position + 2));
-    v.contact_title(create_std_string(position + 3));
-    v.address(create_std_string(position + 4));
-    v.city(create_std_string(position + 5));
-    v.region(create_std_string(position + 6));
-    v.postal_code(create_std_string(position + 7));
-    v.country(create_std_string(position + 8));
-    v.phone(create_std_string(position + 9));
-    v.fax(create_std_string(position + 10));
+    v.customer_code(create_std_string(position + 1));
+    v.company_name(create_std_string(position + 2));
+    v.contact_name(create_std_string(position + 3));
+    v.contact_title(create_std_string(position + 4));
+    v.address(create_std_string(position + 5));
+    v.city(create_std_string(position + 6));
+    v.region(create_std_string(position + 7));
+    v.postal_code(create_std_string(position + 8));
+    v.country(create_std_string(position + 9));
+    v.phone(create_std_string(position + 10));
+    v.fax(create_std_string(position + 11));
 }
 
 customers_generator::result_type

@@ -26,15 +26,12 @@
 #endif
 
 #include "dogen/test_models/northwind/test_data/orders_td.hpp"
-#include "dogen/test_models/northwind/test_data/region_td.hpp"
 #include "dogen/test_models/northwind/test_data/order_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/products_td.hpp"
 #include "dogen/test_models/northwind/test_data/shippers_td.hpp"
-#include "dogen/test_models/northwind/test_data/supplier_td.hpp"
 #include "dogen/test_models/northwind/test_data/customers_td.hpp"
 #include "dogen/test_models/northwind/test_data/employees_td.hpp"
-#include "dogen/test_models/northwind/test_data/region_id_td.hpp"
-#include "dogen/test_models/northwind/test_data/territory_td.hpp"
+#include "dogen/test_models/northwind/test_data/suppliers_td.hpp"
 #include "dogen/test_models/northwind/test_data/categories_td.hpp"
 #include "dogen/test_models/northwind/test_data/product_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/shipper_id_td.hpp"
@@ -42,14 +39,7 @@
 #include "dogen/test_models/northwind/test_data/customer_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/employee_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/supplier_id_td.hpp"
-#include "dogen/test_models/northwind/test_data/territory_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/order_details_td.hpp"
-#include "dogen/test_models/northwind/test_data/customer_type_id_td.hpp"
 #include "dogen/test_models/northwind/test_data/order_details_key_td.hpp"
-#include "dogen/test_models/northwind/test_data/employee_territories_td.hpp"
-#include "dogen/test_models/northwind/test_data/customer_demographics_td.hpp"
-#include "dogen/test_models/northwind/test_data/customer_customer_demo_td.hpp"
-#include "dogen/test_models/northwind/test_data/employee_territories_key_td.hpp"
-#include "dogen/test_models/northwind/test_data/customer_customer_demo_key_td.hpp"
 
 #endif

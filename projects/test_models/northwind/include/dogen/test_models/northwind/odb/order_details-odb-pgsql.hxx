@@ -62,29 +62,6 @@ namespace odb
       {
       }
 
-      // product_id
-      //
-      struct product_id_class_1_
-      {
-        product_id_class_1_ ()
-        {
-        }
-
-        // value
-        //
-        typedef
-        pgsql::query_column<
-          pgsql::value_traits<
-            int,
-            pgsql::id_integer >::query_type,
-          pgsql::id_integer >
-        value_type_;
-
-        static const value_type_ value;
-      };
-
-      static const product_id_class_1_ product_id;
-
       // order_id
       //
       struct order_id_class_1_
@@ -107,6 +84,29 @@ namespace odb
       };
 
       static const order_id_class_1_ order_id;
+
+      // product_id
+      //
+      struct product_id_class_1_
+      {
+        product_id_class_1_ ()
+        {
+        }
+
+        // value
+        //
+        typedef
+        pgsql::query_column<
+          pgsql::value_traits<
+            int,
+            pgsql::id_integer >::query_type,
+          pgsql::id_integer >
+        value_type_;
+
+        static const value_type_ value;
+      };
+
+      static const product_id_class_1_ product_id;
     };
 
     static const order_details_key_class_ order_details_key;
@@ -149,15 +149,6 @@ namespace odb
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id_class_1_::value_type_
-  query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id_class_1_::
-  value (A::table_name, "\"PRODUCT_ID\"", 0);
-
-  template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id_class_1_
-  query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id;
-
-  template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::order_id_class_1_::value_type_
   query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::order_id_class_1_::
   value (A::table_name, "\"ORDER_ID\"", 0);
@@ -165,6 +156,15 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::order_id_class_1_
   query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::order_id;
+
+  template <typename A>
+  const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id_class_1_::value_type_
+  query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id_class_1_::
+  value (A::table_name, "\"PRODUCT_ID\"", 0);
+
+  template <typename A>
+  const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id_class_1_
+  query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_::product_id;
 
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::order_details, id_pgsql, A >::order_details_key_class_

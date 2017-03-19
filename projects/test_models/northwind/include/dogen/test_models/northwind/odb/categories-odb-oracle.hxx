@@ -104,9 +104,9 @@ namespace odb
     typedef
     oracle::query_column<
       oracle::value_traits<
-        ::std::vector< char >,
-        oracle::id_blob >::query_type,
-      oracle::id_blob >
+        ::std::string,
+        oracle::id_string >::query_type,
+      oracle::id_string >
     picutre_type_;
 
     static const picutre_type_ picutre;
@@ -134,7 +134,7 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::categories, id_oracle, A >::picutre_type_
   query_columns< ::dogen::test_models::northwind::categories, id_oracle, A >::
-  picutre (A::table_name, "\"PICUTRE\"", 0);
+  picutre (A::table_name, "\"PICUTRE\"", 0, 512);
 
   template <typename A>
   struct pointer_query_columns< ::dogen::test_models::northwind::categories, id_oracle, A >:
@@ -176,9 +176,9 @@ namespace odb
 
       // picutre_
       //
-      mutable oracle::lob_callback picutre_callback;
+      char picutre_value[512];
+      ub2 picutre_size;
       sb2 picutre_indicator;
-      oracle::lob picutre_lob;
 
       std::size_t version;
 

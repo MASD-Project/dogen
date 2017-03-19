@@ -18,30 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_CATEGORIES_PRAGMAS_HPP
-#define DOGEN_TEST_MODELS_NORTHWIND_ODB_CATEGORIES_PRAGMAS_HPP
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_SERIALIZATION_SUPPLIERS_FWD_SER_HPP
+#define DOGEN_TEST_MODELS_NORTHWIND_SERIALIZATION_SUPPLIERS_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/test_models/northwind/types/categories.hpp"
-#include "dogen/test_models/northwind/odb/category_id_pragmas.hpp"
+#include "dogen/test_models/northwind/types/suppliers_fwd.hpp"
 
-namespace dogen {
-namespace test_models {
-namespace northwind {
+namespace boost {
+namespace serialization {
 
-#ifdef ODB_COMPILER
+template<class Archive>
+void save(Archive& ar, const dogen::test_models::northwind::suppliers& v, unsigned int version);
 
-#pragma db object(categories) schema("NORTHWIND")
+template<class Archive>
+void load(Archive& ar, dogen::test_models::northwind::suppliers& v, unsigned int version);
 
-#pragma db member(categories::category_id_) id
-#pragma db member(categories::description_) null
-#pragma db member(categories::picutre_) null
-
-#endif
-
-} } }
+} }
 
 #endif

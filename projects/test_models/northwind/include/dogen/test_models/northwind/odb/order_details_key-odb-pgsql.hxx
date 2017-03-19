@@ -58,13 +58,13 @@ namespace odb
 
     struct image_type
     {
-      // product_id_
-      //
-      composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::image_type product_id_value;
-
       // order_id_
       //
       composite_value_traits< ::dogen::test_models::northwind::order_id, id_pgsql >::image_type order_id_value;
+
+      // product_id_
+      //
+      composite_value_traits< ::dogen::test_models::northwind::product_id, id_pgsql >::image_type product_id_value;
     };
 
     static bool

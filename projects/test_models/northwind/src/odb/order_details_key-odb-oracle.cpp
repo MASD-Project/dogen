@@ -39,16 +39,16 @@ namespace odb
     std::size_t n (0);
     ODB_POTENTIALLY_UNUSED (n);
 
-    // product_id_
-    //
-    composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::bind (
-      b + n, i.product_id_value, sk);
-    n += 1UL;
-
     // order_id_
     //
     composite_value_traits< ::dogen::test_models::northwind::order_id, id_oracle >::bind (
       b + n, i.order_id_value, sk);
+    n += 1UL;
+
+    // product_id_
+    //
+    composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::bind (
+      b + n, i.product_id_value, sk);
     n += 1UL;
   }
 
@@ -63,18 +63,6 @@ namespace odb
 
     using namespace oracle;
 
-    // product_id_
-    //
-    {
-      ::dogen::test_models::northwind::product_id const& v =
-        o.product_id ();
-
-      composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::init (
-        i.product_id_value,
-        v,
-        sk);
-    }
-
     // order_id_
     //
     {
@@ -83,6 +71,18 @@ namespace odb
 
       composite_value_traits< ::dogen::test_models::northwind::order_id, id_oracle >::init (
         i.order_id_value,
+        v,
+        sk);
+    }
+
+    // product_id_
+    //
+    {
+      ::dogen::test_models::northwind::product_id const& v =
+        o.product_id ();
+
+      composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::init (
+        i.product_id_value,
         v,
         sk);
     }
@@ -97,18 +97,6 @@ namespace odb
     ODB_POTENTIALLY_UNUSED (i);
     ODB_POTENTIALLY_UNUSED (db);
 
-    // product_id_
-    //
-    {
-      ::dogen::test_models::northwind::product_id& v =
-        o.product_id ();
-
-      composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::init (
-        v,
-        i.product_id_value,
-        db);
-    }
-
     // order_id_
     //
     {
@@ -118,6 +106,18 @@ namespace odb
       composite_value_traits< ::dogen::test_models::northwind::order_id, id_oracle >::init (
         v,
         i.order_id_value,
+        db);
+    }
+
+    // product_id_
+    //
+    {
+      ::dogen::test_models::northwind::product_id& v =
+        o.product_id ();
+
+      composite_value_traits< ::dogen::test_models::northwind::product_id, id_oracle >::init (
+        v,
+        i.product_id_value,
         db);
     }
   }

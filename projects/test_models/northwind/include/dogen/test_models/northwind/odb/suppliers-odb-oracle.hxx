@@ -2,8 +2,8 @@
 // compiler for C++.
 //
 
-#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMERS_ODB_ORACLE_HXX
-#define DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMERS_ODB_ORACLE_HXX
+#ifndef DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIERS_ODB_ORACLE_HXX
+#define DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIERS_ODB_ORACLE_HXX
 
 // Begin prologue.
 //
@@ -31,11 +31,11 @@
 
 #include <odb/pre.hxx>
 
-#include "dogen/test_models/northwind/types/customers.hpp"
+#include "dogen/test_models/northwind/types/suppliers.hpp"
 
-#include "dogen/test_models/northwind/odb/customer_id-odb-oracle.hxx"
+#include "dogen/test_models/northwind/odb/supplier_id-odb-oracle.hxx"
 
-#include "dogen/test_models/northwind/odb/customers-odb.hxx"
+#include "dogen/test_models/northwind/odb/suppliers-odb.hxx"
 
 #include <odb/details/buffer.hxx>
 
@@ -47,16 +47,16 @@
 
 namespace odb
 {
-  // customers
+  // suppliers
   //
   template <typename A>
-  struct query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >
+  struct query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >
   {
-    // customer_id
+    // supplier_id
     //
-    struct customer_id_class_
+    struct supplier_id_class_
     {
-      customer_id_class_ ()
+      supplier_id_class_ ()
       {
       }
 
@@ -73,19 +73,7 @@ namespace odb
       static const value_type_ value;
     };
 
-    static const customer_id_class_ customer_id;
-
-    // customer_code
-    //
-    typedef
-    oracle::query_column<
-      oracle::value_traits<
-        ::std::string,
-        oracle::id_string >::query_type,
-      oracle::id_string >
-    customer_code_type_;
-
-    static const customer_code_type_ customer_code;
+    static const supplier_id_class_ supplier_id;
 
     // company_name
     //
@@ -206,103 +194,109 @@ namespace odb
     fax_type_;
 
     static const fax_type_ fax;
+
+    // home_page
+    //
+    typedef
+    oracle::query_column<
+      oracle::value_traits<
+        ::std::string,
+        oracle::id_string >::query_type,
+      oracle::id_string >
+    home_page_type_;
+
+    static const home_page_type_ home_page;
   };
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::customer_id_class_::value_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::customer_id_class_::
-  value (A::table_name, "\"CUSTOMER_ID\"", 0, 10);
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::supplier_id_class_::value_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::supplier_id_class_::
+  value (A::table_name, "\"SUPPLIER_ID\"", 0, 10);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::customer_id_class_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::customer_id;
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::supplier_id_class_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::supplier_id;
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::customer_code_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
-  customer_code (A::table_name, "\"CUSTOMER_CODE\"", 0, 512);
-
-  template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::company_name_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::company_name_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   company_name (A::table_name, "\"COMPANY_NAME\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::contact_name_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::contact_name_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   contact_name (A::table_name, "\"CONTACT_NAME\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::contact_title_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::contact_title_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   contact_title (A::table_name, "\"CONTACT_TITLE\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::address_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::address_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   address (A::table_name, "\"ADDRESS\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::city_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::city_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   city (A::table_name, "\"CITY\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::region_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::region_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   region (A::table_name, "\"REGION\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::postal_code_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::postal_code_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   postal_code (A::table_name, "\"POSTAL_CODE\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::country_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::country_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   country (A::table_name, "\"COUNTRY\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::phone_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::phone_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   phone (A::table_name, "\"PHONE\"", 0, 512);
 
   template <typename A>
-  const typename query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::fax_type_
-  query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >::
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::fax_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
   fax (A::table_name, "\"FAX\"", 0, 512);
 
   template <typename A>
-  struct pointer_query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >:
-    query_columns< ::dogen::test_models::northwind::customers, id_oracle, A >
+  const typename query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::home_page_type_
+  query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >::
+  home_page (A::table_name, "\"HOME_PAGE\"", 0, 512);
+
+  template <typename A>
+  struct pointer_query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >:
+    query_columns< ::dogen::test_models::northwind::suppliers, id_oracle, A >
   {
   };
 
   template <>
-  class access::object_traits_impl< ::dogen::test_models::northwind::customers, id_oracle >:
-    public access::object_traits< ::dogen::test_models::northwind::customers >
+  class access::object_traits_impl< ::dogen::test_models::northwind::suppliers, id_oracle >:
+    public access::object_traits< ::dogen::test_models::northwind::suppliers >
   {
     public:
     static const std::size_t batch = 1UL;
 
     struct id_image_type
     {
-      composite_value_traits< ::dogen::test_models::northwind::customer_id, id_oracle >::image_type id_value;
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::image_type id_value;
 
       std::size_t version;
     };
 
     struct image_type
     {
-      // customer_id_
+      // supplier_id_
       //
-      composite_value_traits< ::dogen::test_models::northwind::customer_id, id_oracle >::image_type customer_id_value;
-
-      // customer_code_
-      //
-      char customer_code_value[512];
-      ub2 customer_code_size;
-      sb2 customer_code_indicator;
+      composite_value_traits< ::dogen::test_models::northwind::supplier_id, id_oracle >::image_type supplier_id_value;
 
       // company_name_
       //
@@ -363,6 +357,12 @@ namespace odb
       char fax_value[512];
       ub2 fax_size;
       sb2 fax_indicator;
+
+      // home_page_
+      //
+      char home_page_value[512];
+      ub2 home_page_size;
+      sb2 home_page_indicator;
 
       std::size_t version;
 
@@ -465,12 +465,12 @@ namespace odb
            bool reload);
   };
 
-  // customers
+  // suppliers
   //
 }
 
-#include "dogen/test_models/northwind/odb/customers-odb-oracle.ixx"
+#include "dogen/test_models/northwind/odb/suppliers-odb-oracle.ixx"
 
 #include <odb/post.hxx>
 
-#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_CUSTOMERS_ODB_ORACLE_HXX
+#endif // DOGEN_TEST_MODELS_NORTHWIND_ODB_SUPPLIERS_ODB_ORACLE_HXX

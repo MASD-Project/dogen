@@ -51,10 +51,8 @@ namespace northwind {
 #pragma db member(employees::home_phone_) null
 #pragma db member(employees::extension_) null
 #pragma db member(employees::photo_) null
-#pragma db member(employees::photo_) pgsql:type("BYTEA") oracle:type("BLOB")
 #pragma db member(employees::notes_) null
 #pragma db member(employees::reports_to_) null
-#pragma db member(employees::photo_path_) null
 
 #endif
 
