@@ -393,11 +393,12 @@ GeeksEngine SQL schema and to model them in Dia, following Dogen's
 conventions: each SQL type is converted to what we deemed to be the
 closest C++ type. You can open the diagram from the folder
 =projects/input_models/northwind.dia=, but if you haven't got it
-handy, here's a screenshot of most of the UML model - hopefully not
-too small to read.
+handy, here's a screenshot of most of the UML model:
 
-#+caption: Dogen Northwind model.
-https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png
+#+begin_html
+<img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png" width="90%" height="90%"/>
+<div>Dogen Northwind model.</div>
+#+end_html
 
 The first point of note in that diagram is - if you pardon the pun -
 the UML note.
@@ -428,13 +429,14 @@ look at the model's more "general settings":
   just sets a lot of default options for this project such as
   copyright notices and so forth.
 
-Now, you will notice we hand-waved quite a lot on the description of
-these settings. It is very difficult to describe them without giving
-the reader an immense amount of context about Dogen. This, of course,
-needs to be done - particularly since we haven't really spent the
-required time updating the manual. However, in the interest of keeping
-this series of posts somewhat focused on ODB and ORM, we'll just leave
-it at that, with a promise to create Dogen-specific posts on them.
+As promised, you won't fail to notice we hand-waved quite a lot on the
+description of these settings. It is very difficult to explain them
+properly them without giving the reader an immense amount of context
+about Dogen. This, of course, needs to be done - particularly since we
+haven't really spent the required time updating the manual. However,
+in the interest of keeping this series of posts somewhat focused on
+ODB and ORM, we'll just leave it at that, with a promise to create
+Dogen-specific posts on them.
 
 Talking about ORM, the next batch of settings is exactly related to
 that.
@@ -457,9 +459,7 @@ original diagram. For example, we have =customers=, =suppliers=,
 =employees= and so forth - the Object-Relational Mapping is very
 "linear". This is a characteristic of the Dogen approach to ORM, but
 you do not necessarily need to use ODB in this manner; we discuss this
-in the next section. Finally, each of the attributes of these classes
-has the closest C++ type we could find that maps to the SQL type used
-on the original diagram.
+in the next section.
 
 If one is to look at a properties of a few attributes in more detail,
 one can see additional Dogen meta-data. Take =customer_id= in the
@@ -469,92 +469,114 @@ one can see additional Dogen meta-data. Take =customer_id= in the
 https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_customer_id_attributes.png
 
 The setting =yarn.orm.is_primary_key= tells Dogen that this attribute
-is the primary key of this class. Note that we did not use a
-=std::string= as the type of =customer_id= but instead we made use of
-a Dogen feature called "primitive types". Primitive types are simple
-wrappers around built-in types such as =std::string= that have little
-or no overhead after the compiler is done with them. They are useful
-when you want to use domain concepts to clarify intent rather than
-just use the class library types. This means that - for example - it
-is obvious when you attempt to use a =customer_id= when a
-=supplier_id= was called for.
-
-We also make use of =yarn.orm.is_nullable=, settable to =true= or
-=false=, which results in Dogen telling ODB if a column can be =NULL=
+is the primary key of the table. Note that we did not use an =int= as
+the type of =customer_id= but instead made use of a Dogen feature
+called "primitives". Primitives are simple wrappers around builtins
+and "core" types such as =std::string=, intended to have little or no
+overhead after the compiler is done with them. They are useful when
+you want to use domain concepts to clarify intent. For example,
+primitives help making it obvious when you try to use a =customer_id=
+when a =supplier_id= was called for. It's also worth noticing that
+=customer_id= makes use of =yarn.orm.is_nullable= - settable to =true=
+or =false=. It results in Dogen telling ODB if a column can be =NULL=
 or not.
 
-Dogen's ORM support is still a bit young - literally a couple of
+As we stated, each of the attributes of these classes has the closest
+C++ type we could find that maps to the SQL type used in the database
+schema. Of course, different developers can make different choices for
+these types. For example, were we to store the picture data rather
+than a path to the picture as GeeksEngine decided to do, we would use
+a =std::vector<char>= instead of a =std::string=. In that case, we'd
+have to perform some additional mapping too:
+
+: #DOGEN yarn.orm.type_override=postgresql,BYTEA
+: #DOGEN yarn.orm.type_override=oracle,BLOB
+
+This tells Dogen about the mapping of the attribute's type to the SQL
+type. Dogen then conveys this information to ODB.
+
+Dogen's ORM support is still quite young - literally a couple of
 sprints old - so there will be cases where you may need to perform
-some customisation which is not yet available. In these cases you can
-use ODB pragmas directly. As an example, GeeksEngine Oracle schema
-named a few columns in =Employees= without underscores such as
-=FIRSTNAME= and =LASTNAME=. We want the C++ classes to have the
-correct names (e.g. =first_name=, =last_name=, etc) so we simply tell
-ODB that this column has a different name in the database:
+some customisation which is not yet available in its meta-model. In
+these cases, you can bypass Dogen and make use of ODB pragmas
+directly. As an example, GeeksEngine Oracle schema named a few columns
+in =Employees= without underscores such as =FIRSTNAME= and
+=LASTNAME=. We want the C++ classes to have the correct names
+(e.g. =first_name=, =last_name=, etc) so we simply tell ODB that these
+columns have different names in the database. Take last name for
+example:
 
 #+caption: Properties of last name in the employee class.
 [[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_last_name_attributes.png]]
 
-A final note on composite keys. Dogen follows the ODB model in that
-primary keys that have more than one column must be expressed as a
-class on its own right. In the =northwind= model, we use the postfix
-=_key= for these class names in order to make them easier to
+A final note on composite keys. Predictably, Dogen follows the ODB
+approach - in that primary keys that have more than one column must be
+expressed as a class on its own right. In =northwind=, we use the
+postfix =_key= for these class names in order to make them easier to
 identify - e.g. =order_details_key=. You won't fail to notice that
-this types has the following flag set: =yarn.orm.is_value=. This tells
-Dogen (and ODB by extension) that it is not really a full-blown type,
-which would map it to a table, but instead should be treated like
-other primitive types such as =std::string=.
+this class has the flag =yarn.orm.is_value= set. It tells Dogen - and,
+by extension, ODB - that it is not really a full-blown type, which
+would map it to a table, but instead should be treated like other
+value types such as =std::string=.
 
 ** Interlude: Dogen with ODB vs Plain ODB
 
-The inquisitive user may ask: "but why add yet another layer of
-indirection? Why not just use ODB directly?". At first, it may be
-puzzling for there to be a need for a code-generator which generates
-code for another code-generator. Over-engineering at his best, the
-crowd cries. First, it is important to understand the argument we're
-trying to make here: Dogen models benefit greatly from ODB, but its
-not necessarily the case that _all_ ODB users would benefit from
-Dogen. If you think of one of the classic ODB use cases, which is to
-take an existing code base and to add support for Object-Relational
-Mapping, then it makes little sense to introduce Dogen. ODB is
-extremely good at requiring little changes to the original source code
-and has the ability to parse very complex C++ code. Using ODB in this
-manner also allows one to deal with impedance mismatches between the
-relational model and the object model of your domain.
+"The technical minutiae is all well and good", the inquisitive reader
+will say, "but why Dogen /and/ ODB? Why add yet another layer of
+indirection when one can just use ODB?" Indeed, it may be puzzling for
+there to be a need for a code-generator which generates code for
+another code-generator. "Turtles all the way down" and "We
+over-engineered it yet again", the crowd chants from the terraces.
 
-Dogen on the other hand, does not support this use case; it exists
-mainly to support [[https://en.wikipedia.org/wiki/Model-driven_software_development][Model Driven Software Development]] (MDSD), so the
-modeling process is the driver. This means that one is expected to
-start with a Dogen model, and to use the traditional MDSD techniques
-for the management of the life-cycle of your model - and ideally for
-the generation of /entire product lines/. Of course, you do not need
-to buy in to the /whole/ of MDSD principles in order to use Dogen but
-you should at least understand it in this context. You should think in
-terms of Domain Models (as [[https://en.wikipedia.org/wiki/Domain-driven_design][Domain Driven Development]] defines them) and
-then in terms of "classes of features" the elements of your domain
-require. These we call "facets" in Dogen parlance. There are many such
-facets like =io=, which is the ability to dump an object's state into
-a C++ stream - at present using JSON notation - or =serialization=
-which is the ability to serialise an object using Boost
-serialisation. It is in this context that ODB enters the Dogen
-world. We could, of course, generate ORM mappings (and SQL) directly
-from Dogen. But given what we've seen from ODB, it seems this would be
-a very large project (or, conversely, we'd have very poor support, not
-dealing with a great number of corner cases). By generating the very
-minimal (and very non-intrusive) code that ODB needs, we benefit from
-the years of experience accumulated in ODB whilst at the same time
-making life easier for Dogen users.
+Let me attempt to address some of these concerns.
 
-Of course, as with all engineering trade-offs this one is not without
+First, it is important to understand the argument we're trying to make
+here: Dogen models benefit greatly from ODB, but its not necessarily
+the case that /all/ ODB users benefit from Dogen. Let's start with a
+classic ODB use case, which is to take an existing code base and add
+ORM support to it. In this scenario it makes no sense to introduce
+Dogen; after all, ODB requires only small changes to the original
+source code and has the ability to parse very complex C++. And, of
+course, using ODB in this manner also allows one to deal with
+impedance mismatches between the relational model and the object model
+of your domain.
+
+Dogen, on the other hand, exists mainly to support [[https://en.wikipedia.org/wiki/Model-driven_software_development][Model Driven
+Software Development]] (MDSD), so the modeling process is the
+driver. This means that one is expected to start with a Dogen model,
+and to use the traditional MDSD techniques for the management of the
+life-cycle of your model - and eventually for the generation of
+/entire software product lines/. Of course, you need not buy into the
+whole MDSD sales pitch in order to make use of Dogen, but you should
+at least understand it in this context. At a bare minimum, it requires
+you to think in terms of Domain Models - as [[https://en.wikipedia.org/wiki/Domain-driven_design][Domain Driven Development]]
+defines them - and then in terms of "classes of features" required by
+the elements of your domain. These we call "facets" in Dogen
+parlance. There are many such facets like =io=, which is the ability
+to dump an object's state into a C++ stream - at present using JSON
+notation - or =serialization= which is the ability to serialise an
+object using Boost serialisation. It is in this context that ODB
+enters the Dogen world. We could, of course, generate ORM mappings
+(and SQL) directly from Dogen. But given what we've seen from ODB, it
+seems this would be a very large project - or, conversely, we'd have
+very poor support, not dealing with a great number of corner cases. By
+generating the very minimal and very non-intrusive code that ODB
+needs, we benefit from the years of experience accumulated in this
+tool whilst at the same time making life easier for Dogen users.
+
+Of course, as with all engineering trade-offs, this one is not without
 its disadvantages. When things do go wrong you now have more moving
-parts that could be causing your problem: was it an error in the
-diagram, or was it Dogen, or was it the mapping between Dogen and ODB
-or was it ODB? In practice, this problem is minimised greatly by the
-way in which you should use Dogen. You can look at the ODB input files
-generated by Dogen, and they should look very much like hand-crafted
-ODB input files, making use of =pragmas= and so forth. You are also
-required to run ODB manually. In practice, we have found
-troubleshooting straightforward enough that it does not constitute a
+parts to go through when root-causing: was it an error in the diagram,
+or was it Dogen, or was it the mapping between Dogen and ODB or was it
+ODB?  Fortunately, I found that this situation is minimised by the way
+in which you end up using Dogen. For instance, all generated code can
+be version-controlled, so you can look at the ODB input files
+generated by Dogen and observe how they change with changes in the
+Dogen model. The Dogen ODB files should also look very much like
+regular hand-crafted ODB files - making use of =pragmas= and so
+forth - and you are also required to run ODB manually against
+them. Thus, in practice, I have found troubleshooting straightforward
+enough that the layers of indirection end up not constituting a real
 problem.
 
 Finally, its worth pointing out that the Domain Models Dogen generates
@@ -562,14 +584,16 @@ have a fairly straightforward shape to them, making the ODB mapping a
 lot more trivial that "general" C++ code would have. It is because of
 this that we have =orm= parameters in Dogen, which can expand to
 multiple ODB pragmas - the user should not need to worry about that
-expansion.
+expansion - one hopes.
 
 * Conclusion
 
 This part is already becoming quite large, so I'm afraid we need to
-stop it here and continue on Part IV. However, we have managed to
+stop it here and resume on Part IV. However, we have managed to
 address a few of the mistakes of the Oracle setup of previous parts,
-introduced the remaining applications that we need to install and then
+introduced the remaining dependencies that we need to install and then
 discussed Northwind - both in terms of its original intent and also in
 terms of the Dogen objectives. Finally we provided an explanation of
 how Dogen and ODB fit together in a tooling ecosystem.
+
+Stay tuned for the next part.
