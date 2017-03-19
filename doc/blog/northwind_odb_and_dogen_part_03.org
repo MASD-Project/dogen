@@ -277,39 +277,75 @@ experiment with Access with Northwind database while you're learning
 and develop ideas for Access.
 #+end_quote
 
-If you /really/ want a slightly more thorough introduction to
-Northwind, you could do worse than reading this paper: [[http://eduglopedia.org/resource/cea008e18dee42899aeff7a0c58dddaf8e9b5bc6/download][Adapting the
-Access Northwind Database to Support a Database Course]]. And for the
-true DBAs crowd out there, before you start the heckling: I beg you
-not get too hung-up on the "quality" of the database schema of
-Northwind; the purpose of this work is merely to exercise commonly
-used functionality on both Dogen and ODB. From this perspective, the
-Northwind database schema is more than adequate to test-drive all the
-features we're interested in. Whether you agree or not with the
-decisions the original creators of this schema made is a completely
-different matter, which is well beyond the scope of this series of
-posts.
-
-Thanks to CodePlex we have a diagram with the tables and their
-relationships:
+If you /really/ want a thorough introduction to Northwind, you could
+do worse than reading this paper: [[http://eduglopedia.org/resource/cea008e18dee42899aeff7a0c58dddaf8e9b5bc6/download][Adapting the Access Northwind
+Database to Support a Database Course]]; having said that, for the
+purposes of this article, we don't really need to delve too deep. In
+fact I'll just present CodePlex's diagram with the tables and their
+relationships to give you an idea of the schema.
 
 #+begin_html
 <img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/Northwind_A4_size_for_Print.png" width="80%" height="80%"/>
 <div>Northwind Schema (C) Microsoft.</div>
 #+end_html
 
-Using this image we can manually extract all the required information
-to create a Dia diagram that follows Dogen's conventions - and thus is
-ready for code-generation. At this juncture I must place yet another
-disclaimer: a proper explanation on how to use Dia (and UML in
-general) is outside the scope of these articles; hopefully the
-diagrams are sufficiently self-explanatory.
+Now, /in theory/, we could use this image to manually extract all the
+required information to create a Dia diagram that follows Dogen's
+conventions, code-generate that and Bob's your Uncle. However, /in
+practice/ we have a problem: the CodePlex project only contains [[https://northwinddatabase.codeplex.com/releases/view/71634][the
+SQL statements for Microsoft SQL Server]]. Part of the point of this
+exercise is to show that we can load real data from Oracle, rather
+than just generate random data, so it would be nice to load up the
+"real" Northwind data from their own tables. This would be more of an
+"end-to-end" test, as opposed to using ODB to generate the tables, and
+Dogen to generate random data which we can push to the database.
+
+However, its not entirely trivial to convert T-SQL into Oracle SQL,
+and since this is supposed to be a "quick" project on the side -
+focusing on ODB and Dogen - I was keen on not spending time on
+unrelated activities such as SQL conversions. Fortunately, I found
+exactly what I was looking for: a series of posts from [[http://www.geeksengine.com/][GeeksEngine]]
+entitled "Convert MS Access Northwind database to Oracle". For
+reference, these are as follows:
+
+- [[http://www.geeksengine.com/article/northwind-oracle.html][How the data types in Access Northwind are converted to Oracle]]
+- [[http://www.geeksengine.com/article/northwind-oracle-2.html][Building Oracle Northwind database objects]]
+- [[http://www.geeksengine.com/article/northwind-oracle-3.html][Queries to generate aggregated data for Oracle Northwind database]]
+
+If you don't care too much about the details, you can just look at the
+Oracle SQL statements, available [[http://www.geeksengine.com/lg.php?i%3Doracle-northwind-sql][here]] and copied across into the Zango
+project. I guess it's stills worthwhile mentioning that GeeksEngine
+has reduced considerably the number of entities in the Schema - for
+which they provide a rationale. Before we start an in-depth
+discussions into the merits of normalisation and de-normalisation and
+other DBA level topics, I have to stop you in your tracks. Please do
+not get too hung-up on the "quality" of the database schema of
+Northwind - either the Microsoft or the GeeksEngine one. The purpose
+of this exercise is merely to exercise commonly used functionality on
+both Dogen and ODB. From this perspective, any vaguely realistic
+database schema is adequate - provided it allows us to test-drive all
+the features we're interested in. Whether you agree or not with the
+decisions the original creators of this schema made is a completely
+different matter, which is well beyond the scope of this series of
+posts.
+
+So let's model these entities in Dogen.
 
 ** The Dogen Model for Northwind
 
-You can open the diagram from the folder
-=projects/input_models/northwind.dia=. Here's a screenshot of most of
-the UML model - regrettably, a tad too small to read:
+Before we proceed, I'm afraid I must make yet another disclaimer: a
+proper explanation on how to use Dia (and UML in general) is outside
+the scope of these articles, so you'll see me hand-waving quite a
+lot. Hopefully the diagrams are sufficiently self-explanatory for you
+to get the idea.
+
+The process of modeling is simply to take the entities of the
+GeeksEngine SQL schema and to model them in Dia, following Dogen's
+conventions: each SQL type is converted to what we deemed to be the
+closest C++ type. You can open the diagram from the folder
+=projects/input_models/northwind.dia=, but if you haven't got it
+handy, here's a screenshot of most of the UML model - perhaps a tad
+too small to read.
 
 #+begin_html
 <img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png" width="90%" height="90%"/>
