@@ -329,7 +329,45 @@ decisions the original creators of this schema made is a completely
 different matter, which is well beyond the scope of this series of
 posts.
 
-So let's model these entities in Dogen.
+Right, so now we need to setup our Northwind schema. For this you can
+open a SQL Plus session with user Northwind as explained previously
+and then run in the SQL script:
+
+: @/path/to/zango/data/Oracle-Northwind.sql
+
+Replacing =/path/to= with the full path to your Zango checkout. This
+executes the GeeksEngine script against your local Oracle XE
+database. If all has gone well, you should now have a whole load of
+tables and data. You can sanity-check the setup by running the
+following SQL:
+
+#+begin_example
+SQL> set linesize 8192
+SQL> set pagesize 50000
+SQL> select table_name from all_tables where owner = 'NORTHWIND';
+
+TABLE_NAME
+------------------------------
+ORDER_DETAILS
+CATEGORIES
+CUSTOMERS
+EMPLOYEES
+SUPPLIERS
+SHIPPERS
+PRODUCTS
+ORDERS
+
+8 rows selected.
+
+SQL> select employee_id, firstname, lastname from employees where rownum <3;
+
+EMPLOYEE_ID FIRSTNAME  LASTNAME
+----------- ---------- --------------------
+      1 Nancy      Davolio
+      2 Andrew     Fuller
+#+end_example
+
+Now then, let's model these entities in Dogen.
 
 ** The Dogen Model for Northwind
 
@@ -436,16 +474,27 @@ We also make use of =yarn.orm.is_nullable=, settable to =true= or
 =false=, which results in Dogen telling ODB if a column can be =NULL=
 or not.
 
+Dogen's ORM support is still a bit young - literally a couple of
+sprints old - so there will be cases where you may need to perform
+some customisation which is not yet available. In these cases you can
+use ODB pragmas directly. As an example, GeeksEngine Oracle schema
+named a few columns in =Employees= without underscores such as
+=FIRSTNAME= and =LASTNAME=. We want the C++ classes to have the
+correct names (e.g. =first_name=, =last_name=, etc) so we simply tell
+ODB that this column has a different name in the database:
+
+#+caption: Properties of last name in the employee class.
+[[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/odb_last_name_attributes.png]]
+
 A final note on composite keys. Dogen follows the ODB model in that
 primary keys that have more than one column must be expressed as a
 class on its own right. In the =northwind= model, we use the postfix
 =_key= for these class names in order to make them easier to
-identify - e.g. =employee_territories_key=, =order_details_key= and so
-forth. You won't fail to notice that these types have the following
-flag set: =yarn.orm.is_value=. This tells Dogen (and ODB by extension)
-that this type is not really a full-blown type, which would map it to
-a table, but instead should be treated like other primitive types such
-as =std::string=.
+identify - e.g. =order_details_key=. You won't fail to notice that
+this types has the following flag set: =yarn.orm.is_value=. This tells
+Dogen (and ODB by extension) that it is not really a full-blown type,
+which would map it to a table, but instead should be treated like
+other primitive types such as =std::string=.
 
 ** Interlude: Dogen with ODB vs Plain ODB
 
