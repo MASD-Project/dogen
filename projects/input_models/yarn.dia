@@ -2077,13 +2077,13 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O16">
       <dia:attribute name="obj_pos">
-        <dia:point val="2,77"/>
+        <dia:point val="1,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,76.95;12.175,81.45"/>
+        <dia:rectangle val="0.95,76.95;11.175,81.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="2,77"/>
+        <dia:point val="1,77"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.125"/>
@@ -3582,13 +3582,13 @@ It is not required for any other purpose.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O31">
       <dia:attribute name="obj_pos">
-        <dia:point val="-25,77"/>
+        <dia:point val="-27,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.05,76.95;-4.43,83.05"/>
+        <dia:rectangle val="-27.05,76.95;-6.43,83.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-25,77"/>
+        <dia:point val="-27,77"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.52"/>
@@ -3983,17 +3983,17 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-14.74,83"/>
+        <dia:point val="-16.74,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-26.2925,82.25;-13.99,91.8"/>
+        <dia:rectangle val="-26.2925,82.25;-15.99,91.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-14.74,83"/>
-        <dia:point val="-14.74,87"/>
+        <dia:point val="-16.74,83"/>
+        <dia:point val="-16.74,87"/>
         <dia:point val="-26.2425,87"/>
         <dia:point val="-26.2425,91"/>
       </dia:attribute>
@@ -4021,7 +4021,7 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
         <dia:point val="3.4475,68.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-14.79,68.55;4.2975,77.05"/>
+        <dia:rectangle val="-16.79,68.55;4.2975,77.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4029,8 +4029,8 @@ It must be castable to instance of the type defined in the enumeration.#</dia:st
       <dia:attribute name="orth_points">
         <dia:point val="3.4475,68.6"/>
         <dia:point val="3.4475,72"/>
-        <dia:point val="-14.74,72"/>
-        <dia:point val="-14.74,77"/>
+        <dia:point val="-16.74,72"/>
+        <dia:point val="-16.74,77"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12328,7 +12328,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="3.4475,68.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.5975,68.55;7.1125,77.05"/>
+        <dia:rectangle val="2.5975,68.55;6.1125,77.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -12336,8 +12336,8 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
       <dia:attribute name="orth_points">
         <dia:point val="3.4475,68.6"/>
         <dia:point val="3.4475,72"/>
-        <dia:point val="7.0625,72"/>
-        <dia:point val="7.0625,77"/>
+        <dia:point val="6.0625,72"/>
+        <dia:point val="6.0625,77"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

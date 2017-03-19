@@ -4024,14 +4024,6 @@ At present we are always adding =#pragrma once= to the header guard:
 This should really be optional and controlled via dynamic extensions,
 probably at the c++ model level.
 
-*** Add support for eCore as a frontend                               :story:
-
-It would be nice to be able to read an eCore model and generate code
-from it. This would be particularly useful if we could generate java
-code. We would require a mapping layer of eCore types into LAM.
-
-- [[http://eclipsesource.com/blogs/tutorials/emf-tutorial/][What every Eclipse developer should know about EMF]]
-
 *** Add the the EMF purchase order examples to manual                 :story:
 
 We should make use of the examples for eCore to demo Dogen. We could
@@ -7038,6 +7030,176 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Add support for UML profiles and XMI                               :epic:
+
+We now understand most of the picture of how UML is related to
+Dogen. eCore is an implementation of UML's meta-model - it diverges
+from UML slightly, but for our purposes we can think of it as
+equivalent to UML's meta-model. At the meta-model level, it is
+possible to extend UML: this is done via profiles and
+stereotypes. Profiles are basically a collection of types which make
+use of UML stereotypes to extend the UML meta-model. So it is possible
+to inherit from say =Class= and create a new meta-class that extends
+=Class= in some way (in eCore terms, =eClass=).
+
+For instance, we could create a meta-class called =visitor=. In fact,
+all meta-types in =yarn= can be redone as extensions to the UML
+meta-model. It just so happens that we did not understand the UML
+meta-model properly so we created a completely separate meta-model and
+then we mapped the Dia representation of the UML meta-model into
+yarn. But this muddles things because we are using Dia's diagram
+meta-model, which contains an incomplete representation of UML's
+meta-model (since it exists purely for drawing diagrams). A better way
+to go about this is:
+
+- create a c++ implementation of the ecore model. Use exactly the same
+  terminology - e.g. =eclass= etc.
+- create a dia to XMI exporter. This would have obtained the essence
+  of the UML diagram required for code-generation, removing all of the
+  "diagramatic" aspects of the model. [[https://www.ibm.com/developerworks/library/x-wxxm24/][XMI example]]:
+
+#+begin_src xml
+<?xml version="1.0"?>
+<XMI xmi.version="1.2" xmlns:UML="org.omg/UML/1.4">
+ <XMI.header>
+  <XMI.documentation>
+   <XMI.exporter>ananas.org stylesheet</XMI.exporter>
+  </XMI.documentation>
+  <XMI.metamodel xmi.name="UML" xmi.version="1.4"/>
+ </XMI.header>
+ <XMI.content>
+  <UML:Model xmi.id="M.1" name="address" visibility="public"
+              isSpecification="false" isRoot="false"
+              isLeaf="false" isAbstract="false">
+   <UML:Namespace.ownedElement>
+    <UML:Class xmi.id="C.1" name="address" visibility="public"
+               isSpecification="false" namespace="M.1" isRoot="true"
+               isLeaf="true" isAbstract="false" isActive="false">
+     <UML:Classifier.feature>
+      <UML:Attribute xmi.id="A.1" name="name" visibility="private"
+                     isSpecification="false" ownerScope="instance"/>
+      <UML:Attribute xmi.id="A.2" name="street" visibility="private"
+                     isSpecification="false" ownerScope="instance"/>
+      <UML:Attribute xmi.id="A.3" name="zip" visibility="private"
+                     isSpecification="false" ownerScope="instance"/>
+      <UML:Attribute xmi.id="A.4" name="region" visibility="private"
+                     isSpecification="false" ownerScope="instance"/>
+      <UML:Attribute xmi.id="A.5" name="city" visibility="private"
+                     isSpecification="false" ownerScope="instance"/>
+      <UML:Attribute xmi.id="A.6" name="country" visibility="private"
+                     isSpecification="false" ownerScope="instance"/>
+     </UML:Classifier.feature>
+    </UML:Class>
+   </UML:Namespace.ownedElement>
+  </UML:Model>
+ </XMI.content>
+</XMI>
+#+end_src
+
+- note that the dia to XMI exporter would have to make use of some
+  "extensions" to dia such as the =yarn.dia.comment=. But the key
+  thing is we would end up with a UML meta-model description of the
+  diagram (XMI is roughly speaking an XML representation of the UML
+  meta-model).
+- create a UML profile for =yarn= describing all of the meta-model
+  elements in terms of the UML meta-model. This could be the exact
+  same diagram we have for =yarn= right now, except all the meta-model
+  entities would be marked as =stereotypes= (i.e. with a UML
+  stereotype of =stereotype=) and would have to inherit from =ecore=
+  classes such as =eclass=.
+- create a =ecore= XMI reader.
+- create a =yarn.ecore= transformer. The transformer outputs a =yarn=
+  model, just like the current =yarn= frontends would. The remaining
+  of the processing is done as it is for the current =yarn= models.
+- in the main =yarn= workflows: whenever it encounters a class with a
+  stereotype of =stereotype= it knows it must inherit from the
+  appropriate meta-model. It effectively expands these
+  meta-stereotypes into inheritance relationships from the meta-model.
+- create a UML profile for =quilt.cpp= (and =quilt.csharp=). Again,
+  this could be the exact same =quilt.cpp= model we have, except all
+  of the meta-model entities are described as meta-stereotypes, and
+  inherit from the =yarn= meta-model entities. This means that instead
+  of extending the =yarn= types via composition, we would have to use
+  inheritance. This is somewhat non-trivial because we need to extend
+  the base class =element= since all =quilt.cpp= elements have common
+  properties.
+- note: it is important to note that we're not interested in eCore
+  models per se. To generate an eCore model requires having the eCore
+  model at run-time as well. This is a completely separate kernel from
+  =quilt=. The kind of models we'd be generating would be very
+  different from the =quilt= models (generated types would inherit
+  from =eObject=, they would have reflection support and so forth -
+  all features that we are not interested in at present). However,
+  eCore as a plain meta-model is useful because it is directly related
+  to XMI and to UML profiles (since its just UML meta-model in
+  disguise).
+
+Advantages of this approach:
+
+- we'd be relying on standards: any tool that can output XMI can be
+  used as a front-end, and all the extensions used for Dogen are part
+  of XMI/UML. Nothing is proprietary.
+- since all extensions to meta-model elements are done via profiles,
+  we are able to figure out where the meta-data is (all tagged values
+  in the profile are annotations). It is still not totally clear how
+  one would map the =annotation= types (e.g. =text=, =number= etc) to
+  programming language types, but the gist is we should be able to
+  generate the factories that read meta-data and instantiate
+  objects. Not all mappings are trivial of course.
+- we can create arbitrary extensions to the meta-model just by using
+  the meta-stereotype. Users can create their own on their diagrams,
+  and because of the stitch integration, they can already add their
+  own templates. This makes the system arbitrarily extensible. Of
+  course, we still need to plug in the new meta-model items to the
+  pipeline (how would they get populated?).
+
+High-level tasks to get us there:
+
+- create a =ecore= =yarn= model.
+- add a =ecore.xmi= model that reads XMI and instantiates
+  =ecore=. Actually we should probably create an =xmi= model that
+  reads XML and JSON and then use that model as input for the
+  =ecore.xmi= transformer.
+- change the =yarn= model to inherit from the appropriate =ecore=
+  entities. This will be a bit problematic if there is use of
+  reflection (e.g. eObject etc).
+- transform =quilt.cpp= and =quilt.csharp= into =yarn=
+  extensions. Instead of composition we need to use inheritance
+  somehow. Composition is possible of course, but basically we need to
+  be able to express it as a UML profile.
+- add a =yarn.ecore= model that converts =ecore= into =yarn=.
+- update =yarn= to understands meta-stereotypes. When it sees a
+  stereotype of =stereotype= it looks for a tagged value for
+  inheritance and instantiates the inheritance relationship of
+  meta-model items. In practice we can support this right now in yarn,
+  there is no dependency on anything else for this. Users just need to
+  add the meta-model to their list of referenced models, add a
+  stereotype of =stereotype= and the appropriate generalisation
+  relationship. The =stereotype= is just for cosmetic purposes, =yarn=
+  workflows would already inherit correctly.
+- create a =dia.xmi= model that outputs XMI documents, possibly in
+  [[https://github.com/dsevilla/xmi-to-json][JSON as well]]. Delete the current =yarn.dia= frontend and rewrite it
+  in terms of =dia.xmi= and =yarn.xmi=.
+
+Note:
+
+- it is interesting to notice that in practice we don't actually need
+  to link =ecore= to =yarn= (inheritance, etc), provided that we
+  support interoperability between the two: stereotypes, tagged
+  values, etc. As long as the mapping results in the correct
+  instantiation of the =yarn= model, this is semantically equivalent
+  to making =yarn= a proper specialisation of the UML
+  meta-model. Problems start when users try to make use of UML
+  meta-model types for their own templates though.
+
+*Previous Understanding*
+
+It would be nice to be able to read an eCore model and generate code
+from it. This would be particularly useful if we could generate java
+code. We would require a mapping layer of eCore types into LAM.
+
+- [[http://eclipsesource.com/blogs/tutorials/emf-tutorial/][What every Eclipse developer should know about EMF]]
 
 *** Reducing the overhead of other facets in types                    :story:
 
