@@ -37,11 +37,15 @@ namespace northwind {
 #pragma db object(employees) schema("NORTHWIND")
 
 #pragma db member(employees::employee_id_) id
+#pragma db member(employees::last_name_) column("LASTNAME")
 #pragma db member(employees::last_name_) not_null
+#pragma db member(employees::first_name_) column("FIRSTNAME")
 #pragma db member(employees::first_name_) not_null
 #pragma db member(employees::title_) null
 #pragma db member(employees::title_of_courtesy_) null
+#pragma db member(employees::birth_date_) column("BIRTHDATE")
 #pragma db member(employees::birth_date_) null
+#pragma db member(employees::hire_date_) column("HIREDATE")
 #pragma db member(employees::hire_date_) null
 #pragma db member(employees::address_) null
 #pragma db member(employees::city_) null

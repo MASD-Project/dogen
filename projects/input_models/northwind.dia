@@ -2541,7 +2541,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_nullable=false#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_nullable=false
+#DOGEN odb_pragma=column("LASTNAME")#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2564,7 +2565,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_nullable=false#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_nullable=false
+#DOGEN odb_pragma=column("FIRSTNAME")#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2633,7 +2635,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_nullable=true#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_nullable=true
+#DOGEN odb_pragma=column("BIRTHDATE")#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -2656,7 +2659,8 @@ It's objective is to test Dogen integration with ODB.
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##DOGEN yarn.orm.is_nullable=true#</dia:string>
+            <dia:string>##DOGEN yarn.orm.is_nullable=true
+#DOGEN odb_pragma=column("HIREDATE")#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

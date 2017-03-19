@@ -291,12 +291,12 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::last_name_type_
   query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::
-  last_name (A::table_name, "\"LAST_NAME\"", 0);
+  last_name (A::table_name, "\"LASTNAME\"", 0);
 
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::first_name_type_
   query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::
-  first_name (A::table_name, "\"FIRST_NAME\"", 0);
+  first_name (A::table_name, "\"FIRSTNAME\"", 0);
 
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::title_type_
@@ -311,12 +311,12 @@ namespace odb
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::birth_date_type_
   query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::
-  birth_date (A::table_name, "\"BIRTH_DATE\"", 0);
+  birth_date (A::table_name, "\"BIRTHDATE\"", 0);
 
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::hire_date_type_
   query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::
-  hire_date (A::table_name, "\"HIRE_DATE\"", 0);
+  hire_date (A::table_name, "\"HIREDATE\"", 0);
 
   template <typename A>
   const typename query_columns< ::dogen::test_models::northwind::employees, id_pgsql, A >::address_type_
