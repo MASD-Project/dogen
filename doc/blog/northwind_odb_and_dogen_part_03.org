@@ -30,36 +30,36 @@ planned to cover. I wasn't expecting N to become so large, but - like
 every good software project - I'm now realising you can only estimate
 the size of the series properly once you've actually finished it. And
 to rub salt into the wounds, before we can proceed we must start by
-addressing some of the instructions on the previous posts which were
+addressing some of the instructions in the previous posts which were
 /not quite right/.
 
-* Est Humanum Errare
+* Est Humanum Errare?
 
 The first and foremost point in the /errata/ agenda is concerned with
-the extra Oracle packages we downloaded in [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]. When I had
-originally checked my Oracle XE install, I did not find the
-traditional =include= directory, which led me to conclude that a
-separate download was required for the libs and header files. I did
-find this state of affairs somewhat unusual - but then again, this is
-Oracle we're talking about, so "unusual" is the default behaviour. As
-it turns out, I was wrong; the header files are indeed part of the
-Oracle XE install, just placed under a rather... shall we say,
-/creative/, location:
-=/u01/app/oracle/product/11.2.0/xe/rdbms/public=. The libs are there
-too, under the slightly more conventionally named directory =lib=.
+the additional Oracle packages we downloaded in [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]]. When I had
+originally checked my Oracle XE install, I did not find an =include=
+directory, which led me to conclude that a separate download was
+required for driver libraries and header files. I did find this state
+of affairs somewhat unusual - but then again, it is Oracle we're
+talking about here, so "unusual" is the default behaviour. As it turns
+out, I was wrong; the header files are indeed part of the Oracle XE
+install, just placed under a rather... shall we say, /creative/,
+location: =/u01/app/oracle/product/11.2.0/xe/rdbms/public=. The
+libraries are there too, under the slightly more conventionally named
+=lib= directory.
 
-This is quite an important find because the OCI driver has moved on to
-v12, whereas XE is still on v11. There is backwards compatibility, of
-course - and everything should work fine connecting a v12 client
-against an v11 database - but it does introduce a layer of complexity:
-you now need to make sure you do not simultaneously have both v11 and
-v12 shared objects in the path when linking and running or else you
-will start to get some strange warnings. As usual, we try our best to
-confuse only one issue at a time, so we need to make sure we are only
-making use of v11 and purge all references to v12.
+This is quite an important find because the downloaded OCI driver has
+moved on to v12 whereas XE is still on v11. There is backwards
+compatibility, of course - and everything should work fine connecting
+a v12 client against an v11 database - but it does introduce an extra
+layer of complexity: you now need to make sure you do not
+simultaneously have both v11 and v12 shared objects in the path when
+linking and running or else you will start to get some strange
+warnings. As usual, we try our best to confuse only one issue at a
+time, so we need to make sure we are making use of v11 and purge all
+references to v12; this entails recompiling ODB's oracle support.
 
-To address this problem, we need to recompile ODB's oracle support. If
-you followed the instructions on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] and you've have already
+If you followed the instructions on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] and you have already
 installed the ODB Oracle library, you'll need to remove it first:
 
 : rm /full/path/to/local/lib/libodb-oracle* /full/path/to/local/include/odb/oracle
@@ -173,10 +173,13 @@ License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
 
 ** Dia
 
+
 Dogen has multiple frontends - at the time of writing, JSON and
-[[https://wiki.gnome.org/Apps/Dia/][Dia]]. We'll stick with Dia, because of its visual nature. However, keep
-in mind that what you can do with Dia you can also do with JSON. For
-those not in the know, a quick word on Dia (from it's home page):
+[[https://wiki.gnome.org/Apps/Dia/][Dia]]. We'll stick with Dia because of its visual nature, but keep in
+mind that what you can do with Dia you can also do with JSON.
+
+A quick word on Dia for those not in the know, copied /verbatim/ from
+its home page:
 
 #+begin_quote
 Dia is a GTK+ based diagram creation program for GNU/Linux, MacOS X,
@@ -189,8 +192,8 @@ special objects to help draw entity relationship diagrams, UML
 diagrams, flowcharts, network diagrams, and many other diagrams.
 #+end_quote
 
-Dia does not change very often, so any old version will do. Thus you
-should be able to install dia straight off of package manager:
+Dia does not change very often, which means any old version will
+do. You should be able to install dia straight off of package manager:
 
 : apt-get install dia
 
@@ -198,24 +201,25 @@ should be able to install dia straight off of package manager:
 
 I had previously assumed Boost to be installed on [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] but - if
 nothing else, purely for the sake of completeness - here are the
-instructions to set it up, as well as CMake. We will need both of
+instructions to set it up, as well as CMake and Ninja. We will need
 these in order to build our application, but we won't dwell on them
 /too/ much on them or else this series of posts would go on
 forever. Pretty much any recent version of Boost and CMake will do, so
 again we'll just stick to vanilla package manager:
 
 #+begin_example
-# apt-get install cmake
-# apt-get install libboost-all-dev
+# apt-get install cmake ninja-build libboost-all-dev
 #+end_example
 
 Mind you, you don't /actually/ need the entirety of Boost for this
 exercise, but it's just easier this way.
 
-One final lose note which might as well add here. If you wish to use
-SQLPlus from within Emacs - and you should since the [[http://dbspecialists.com/an-introduction-to-emacs-sqli-mode/][SQLi mode]] is just
-simply glorious - you can configure it to use our Oracle Express
-database quite easily:
+** Emacs and SQL Plus
+
+Finally, a couple of lose notes which I might as well add here. If you
+wish to use SQLPlus from within Emacs - and you should, since the [[http://dbspecialists.com/an-introduction-to-emacs-sqli-mode/][SQLi
+mode]] is just simply glorious - you can configure it to use our Oracle
+Express database quite easily:
 
 #+begin_example
 (add-to-list 'exec-path "/u01/app/oracle/product/11.2.0/xe/bin")
@@ -223,19 +227,27 @@ database quite easily:
 (setenv "ORACLE_HOME" "/u01/app/oracle/product/11.2.0/xe")
 #+end_example
 
-After this you should be able to start SQlPlus from Emacs with the
-usual =sql-oracle= command.
+After this you will be able to start SQL Plus from Emacs with the
+usual =sql-oracle= command. I recommend you to do at least a minimal
+setup of SQL Plus too, to make it usable:
+
+#+begin_example
+SQL> set linesize 8192
+SQL> set pagesize 50000
+#+end_example
 
 * Introducing Zango
 
 After this excruciatingly long setup process, we can at /long last/
-start to create our very "simple" project. Simple, in quotes, because
-it ended up being a tad more complex than what originally envisioned,
-so I ended up creating a [[https://github.com/DomainDrivenConsulting/zango][GitHub repository]] for it. It would have been
+start to create our very "simple" project. Simple in quotes because it
+ended up being a tad more complex than what was originally envisioned, so
+it was easier to create a [[https://github.com/DomainDrivenConsulting/zango][GitHub repository]] for it. It would have been
 preferable to describe it from first principles, but then the
-commentary would literally go on for ever so a compromise was
-required. Anyway, in order to follow the remainder of this post please
-clone =zango= from GitHub:
+commentary would literally go on for ever. A compromise had to be
+made.
+
+In order to follow the remainder of this post please clone =zango=
+from GitHub:
 
 #+begin_example
 git clone git@github.com:DomainDrivenConsulting/zango.git
@@ -258,15 +270,14 @@ some notes on the folder structure to help you navigate:
 - =projects/application=: our little command line driver for the
   application.
 
-Now, before we get into the code, I'd like to first talk about
-Northwind , let's start by first looking at Northwind and on the
-relationship between Dogen and ODB.
+Now, before we get to look at the code I'd like to first talk about
+Northwind and on the relationship between Dogen and ODB.
 
 ** Northwind Schema
 
 Microsoft makes the venerable Northwind database available in
-CodePlex, at [[https://northwinddatabase.codeplex.com/][this]] location. We found a useful description of the
-Northwind database [[http://www.geeksengine.com/article/northwind.html][here]], which we quote:
+CodePlex, at [[https://northwinddatabase.codeplex.com/][this]] location. I found a useful description of the
+Northwind database [[http://www.geeksengine.com/article/northwind.html][here]], which I quote:
 
 #+begin_quote
 Northwind Traders Access database is a sample database that shipped
@@ -279,10 +290,12 @@ and develop ideas for Access.
 
 If you /really/ want a thorough introduction to Northwind, you could
 do worse than reading this paper: [[http://eduglopedia.org/resource/cea008e18dee42899aeff7a0c58dddaf8e9b5bc6/download][Adapting the Access Northwind
-Database to Support a Database Course]]; having said that, for the
-purposes of this article, we don't really need to delve too deep. In
-fact I'll just present CodePlex's diagram with the tables and their
-relationships to give you an idea of the schema.
+Database to Support a Database Course]]. Having said that, for the
+purposes of this series we don't really need to dig /that/ deep. In
+fact, I'll just present CodePlex's diagram with the tables and their
+relationships to give you an idea of the schema - without any further
+commentary - and that's more or less all that needs to be said about
+it:
 
 #+begin_html
 <img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/Northwind_A4_size_for_Print.png" width="80%" height="80%"/>
@@ -314,24 +327,24 @@ reference, these are as follows:
 
 If you don't care too much about the details, you can just look at the
 Oracle SQL statements, available [[http://www.geeksengine.com/lg.php?i%3Doracle-northwind-sql][here]] and copied across into the Zango
-project. I guess it's stills worthwhile mentioning that GeeksEngine
-has reduced considerably the number of entities in the Schema - for
-which they provide a rationale. Before we start an in-depth
-discussions into the merits of normalisation and de-normalisation and
-other DBA level topics, I have to stop you in your tracks. Please do
-not get too hung-up on the "quality" of the database schema of
-Northwind - either the Microsoft or the GeeksEngine one. The purpose
-of this exercise is merely to exercise commonly used functionality on
-both Dogen and ODB. From this perspective, any vaguely realistic
-database schema is adequate - provided it allows us to test-drive all
-the features we're interested in. Whether you agree or not with the
+project. I guess it's still worthwhile mentioning that GeeksEngine has
+reduced considerably the number of entities in the schema - for which
+they provide a rationale. Before we start an in-depth discussions into
+the merits of normalisation and de-normalisation and other DBA level
+topics, I have to stop you in your tracks. Please do not get too
+hung-up on the "quality" of the database schema of Northwind - either
+the Microsoft or the GeeksEngine one. The purpose of this exercise is
+merely to demonstrate how Dogen and ODB work together to provide an
+ORM solution. From this perspective, any vaguely realistic database
+schema is adequate - provided it allows us to test-drive all the
+features we're interested in. Whether you agree or not with the
 decisions the original creators of this schema made is a completely
 different matter, which is well beyond the scope of this series of
 posts.
 
-Right, so now we need to setup our Northwind schema. For this you can
-open a SQL Plus session with user Northwind as explained previously
-and then run in the SQL script:
+Right, so now we need to setup our Northwind schema and populate it
+with data. For this you can open a SQL Plus session with user
+Northwind as explained previously and then run in the SQL script:
 
 : @/path/to/zango/data/Oracle-Northwind.sql
 
@@ -342,8 +355,6 @@ tables and data. You can sanity-check the setup by running the
 following SQL:
 
 #+begin_example
-SQL> set linesize 8192
-SQL> set pagesize 50000
 SQL> select table_name from all_tables where owner = 'NORTHWIND';
 
 TABLE_NAME
@@ -382,13 +393,11 @@ GeeksEngine SQL schema and to model them in Dia, following Dogen's
 conventions: each SQL type is converted to what we deemed to be the
 closest C++ type. You can open the diagram from the folder
 =projects/input_models/northwind.dia=, but if you haven't got it
-handy, here's a screenshot of most of the UML model - perhaps a tad
+handy, here's a screenshot of most of the UML model - hopefully not
 too small to read.
 
-#+begin_html
-<img src="https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png" width="90%" height="90%"/>
-<div>Dogen Northwind model.</div>
-#+end_html
+#+caption: Dogen Northwind model.
+https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/doc/blog/images/dia_with_northwind.png
 
 The first point of note in that diagram is - if you pardon the pun -
 the UML note.

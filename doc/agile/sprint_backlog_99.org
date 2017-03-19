@@ -13,30 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-19 Sun 18:05]
+#+CAPTION: Clock summary at [2017-03-19 Sun 21:39]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *56:17* |       |       | 100.0 |
+| *Total time*                                                                | *57:41* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 56:17   |       |       | 100.0 |
-| Active                                                                      |         | 56:17 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:18 |   5.9 |
+| Stories                                                                     | 57:41   |       |       | 100.0 |
+| Active                                                                      |         | 57:41 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  3:18 |   5.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:26 |   0.8 |
-| COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   5.3 |
-| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |   9.0 |
-| COMPLETED Split include and source directories                              |         |       |  5:22 |   9.5 |
-| COMPLETED Add C++-03 mode                                                   |         |       |  8:19 |  14.8 |
-| COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   4.7 |
+| COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   5.1 |
+| COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |   8.8 |
+| COMPLETED Split include and source directories                              |         |       |  5:22 |   9.3 |
+| COMPLETED Add C++-03 mode                                                   |         |       |  8:19 |  14.4 |
+| COMPLETED Add a LAM test model just to validate existing functionality      |         |       |  2:38 |   4.6 |
 | COMPLETED Split project should not include model name                       |         |       |  0:18 |   0.5 |
 | COMPLETED Always add multiple databases to ODB options                      |         |       |  0:03 |   0.1 |
-| COMPLETED Fix issues with dropbox downloads                                 |         |       |  3:38 |   6.5 |
+| COMPLETED Fix issues with dropbox downloads                                 |         |       |  3:38 |   6.3 |
 | STARTED Create a UML profile to formalise yarn concepts                     |         |       |  0:23 |   0.7 |
 | STARTED Check for incompatibility between input language and enabled kernels |         |       |  0:11 |   0.3 |
 | STARTED Build on tags for Windows                                           |         |       |  0:15 |   0.4 |
 | STARTED Add a "flat directory" mode                                         |         |       |  0:08 |   0.2 |
 | STARTED Handling of visual studio projects and solutions is incorrect       |         |       |  1:11 |   2.1 |
-| STARTED Implement the database model using Northwind                        |         |       | 22:05 |  39.2 |
+| STARTED Implement the database model using Northwind                        |         |       | 23:29 |  40.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -428,6 +428,7 @@ includes. There are some differences though:
   Visual Studio element we have visibility of all enabled versions.
 
 *** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-19 Sun 20:15]--[2017-03-19 Sun 21:39] =>  1:24
     CLOCK: [2017-03-19 Sun 17:54]--[2017-03-19 Sun 18:05] =>  0:11
     CLOCK: [2017-03-19 Sun 17:32]--[2017-03-19 Sun 17:53] =>  0:21
     CLOCK: [2017-03-19 Sun 17:05]--[2017-03-19 Sun 17:31] =>  0:26
