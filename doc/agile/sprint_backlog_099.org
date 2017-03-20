@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 98
+#+title: Sprint Backlog 99
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) }
@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-19 Sun 23:09]
+#+CAPTION: Clock summary at [2017-03-20 Mon 11:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
@@ -21,7 +21,7 @@
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 | Stories                                                                     | 59:10   |       |       | 100.0 |
 | Active                                                                      |         | 59:10 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  3:18 |   5.6 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  3:18 |   5.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:26 |   0.7 |
 | COMPLETED Add test model for path meta-data                                 |         |       |  2:58 |   5.0 |
 | COMPLETED ODB CMakeLists does not cope with changes to project paths        |         |       |  5:04 |   8.6 |
@@ -31,16 +31,17 @@
 | COMPLETED Split project should not include model name                       |         |       |  0:18 |   0.5 |
 | COMPLETED Always add multiple databases to ODB options                      |         |       |  0:03 |   0.1 |
 | COMPLETED Fix issues with dropbox downloads                                 |         |       |  3:38 |   6.1 |
-| STARTED Create a UML profile to formalise yarn concepts                     |         |       |  0:23 |   0.6 |
-| STARTED Check for incompatibility between input language and enabled kernels |         |       |  0:11 |   0.3 |
-| STARTED Build on tags for Windows                                           |         |       |  0:15 |   0.4 |
-| STARTED Add a "flat directory" mode                                         |         |       |  0:08 |   0.2 |
-| STARTED Handling of visual studio projects and solutions is incorrect       |         |       |  1:11 |   2.0 |
-| STARTED Implement the database model using Northwind                        |         |       | 24:58 |  42.2 |
+| COMPLETED Create a UML profile to formalise yarn concepts                   |         |       |  0:23 |   0.6 |
+| POSTPONED Check for incompatibility between input language and enabled kernels |         |       |  0:11 |   0.3 |
+| POSTPONED Build on tags for Windows                                         |         |       |  0:15 |   0.4 |
+| POSTPONED Add a "flat directory" mode                                       |         |       |  0:08 |   0.2 |
+| POSTPONED Handling of visual studio projects and solutions is incorrect     |         |       |  1:11 |   2.0 |
+| POSTPONED Implement the database model using Northwind                      |         |       | 24:58 |  42.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2017-03-20 Mon 11:18]
     CLOCK: [2017-03-19 Sun 09:45]--[2017-03-19 Sun 12:02] =>  2:17
     CLOCK: [2017-03-09 Thu 07:10]--[2017-03-09 Thu 07:22] =>  0:12
     CLOCK: [2017-03-07 Tue 21:31]--[2017-03-07 Tue 21:36] =>  0:05
@@ -292,14 +293,16 @@ New links:
 - https://www.dropbox.com/s/axf22srjkiltvr7/dogen_deps_gcc_5.3_linux_amd64_v8.bz2
 - https://www.dropbox.com/s/ntz6moq7kg9a8m7/dogen_deps_vc14_windows_amd64_v4.7z
 
-*** STARTED Create a UML profile to formalise yarn concepts            :epic:
+*** COMPLETED Create a UML profile to formalise yarn concepts          :epic:
+    CLOSED: [2017-03-20 Mon 11:18]
     CLOCK: [2017-03-17 Fri 15:21]--[2017-03-17 Fri 15:44] =>  0:23
 
 We should define all of the available stereotypes by creating a UML
 profile. This allows specialising the UML meta-model via
 stereotypes. The profile should help clarify Dogen's design.
 
-*** STARTED Check for incompatibility between input language and enabled kernels :story:
+*** POSTPONED Check for incompatibility between input language and enabled kernels :story:
+    CLOSED: [2017-03-20 Mon 11:19]
     CLOCK: [2017-03-06 Mon 22:20]--[2017-03-06 Mon 22:31] =>  0:11
 
 At present it is possible to have a model with input language of say
@@ -316,7 +319,8 @@ models we are going to build and if there is a mismatch we can
 throw. But extracting the =configuration_factory= out of quilt
 workflow is not going to be easy without screwing up the API.
 
-*** STARTED Build on tags for Windows                                 :story:
+*** POSTPONED Build on tags for Windows                               :story:
+    CLOSED: [2017-03-20 Mon 11:19]
     CLOCK: [2017-03-06 Mon 12:01]--[2017-03-06 Mon 12:16] =>  0:15
 
 At present we are not building and deploying for tags on Windows. This
@@ -327,7 +331,8 @@ Links:
 
 - [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
 
-*** STARTED Add a "flat directory" mode                               :story:
+*** POSTPONED Add a "flat directory" mode                             :story:
+    CLOSED: [2017-03-20 Mon 11:19]
     CLOCK: [2017-03-06 Mon 14:31]--[2017-03-06 Mon 14:39] =>  0:08
 
 It would be nice to have a mode in which all files get placed in a
@@ -347,7 +352,8 @@ different top-level directories), which is nice.
 
 We should check that =enable_unique_file_names= is set to true.
 
-*** STARTED Handling of visual studio projects and solutions is incorrect :story:
+*** POSTPONED Handling of visual studio projects and solutions is incorrect :story:
+    CLOSED: [2017-03-20 Mon 11:19]
     CLOCK: [2017-03-09 Thu 06:39]--[2017-03-09 Thu 07:01] =>  0:22
     CLOCK: [2017-03-07 Tue 20:56]--[2017-03-07 Tue 21:00] =>  0:04
     CLOCK: [2017-03-07 Tue 20:10]--[2017-03-07 Tue 20:55] =>  0:45
@@ -427,7 +433,8 @@ includes. There are some differences though:
   "apply archetype postfix" supplied as an argument. Since we have the
   Visual Studio element we have visibility of all enabled versions.
 
-*** STARTED Implement the database model using Northwind              :story:
+*** POSTPONED Implement the database model using Northwind            :story:
+    CLOSED: [2017-03-20 Mon 11:19]
     CLOCK: [2017-03-19 Sun 21:40]--[2017-03-19 Sun 23:09] =>  1:29
     CLOCK: [2017-03-19 Sun 20:15]--[2017-03-19 Sun 21:39] =>  1:24
     CLOCK: [2017-03-19 Sun 17:54]--[2017-03-19 Sun 18:05] =>  0:11
@@ -483,552 +490,5 @@ Tasks:
   entity, but that then causes an exception.
 - =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
 - paper:
-
-*** Add column name support to ORM                                    :story:
-
-At present we need to fall back to ODB pragmas in order to rename a
-column. We should have =yarn.orm.column_name=.
-
-*** Disable common support on ODB for a single database               :story:
-
-We are always enabling common regardless of how many database systems
-the user has requested. Similar with multiple database support. We
-should disable all of this (at least for now) on the single database
-scenario.
-
-*** Setting include and source directory to empty                     :story:
-
-At present it does not seem possible to set either the include or
-source directories to empty. This probably just requires annotations
-to understand empty values, e.g.
-
-: a.b.c=
-
-*** Drop the "c++-" prefix in meta-data for standard                  :story:
-
-At present we do:
-
-: quilt.cpp.standard=c++-98
-
-The "c++-" seems a bit redundant.
-
-*** Objects without primary keys do not have =no_id= set              :story:
-
-Previously we were automatically adding the ODB pragma =no_id= to
-objects that had no primary key set. This no longer seems to be
-happening.
-
-*** Ignore ODB files automatically                                    :story:
-
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
-
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
-
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
-
-: foreign_key_pragmas.hpp
-
-We will also have the following ODB files:
-
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ipp
-: foreign_key-odb.ixx
-
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
-
-In addition, on a multi-database environment we also have:
-
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
-- ...
-
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
-
-*** Rename main Dogen package in Debian                               :story:
-
-At present we seem to have called our package =dogen-applications=:
-
-: $ apt-cache search dogen-applications
-: dogen-applications - The Domain Generator - Generates source code for domain driven development.
-
-We should try to call it just =dogen=.
-
-*** Split out the file extension from the formatter                   :story:
-
-At present we have handled file extensions in one of two ways:
-
-- we baked them in into locator, dynamically: this is the case for
-  =hpp= and =cpp=, where locator is responsible for retrieving the
-  meta-data related to extensions.
-- we hacked them in into locator, statically: this is the case for
-  CMakeLists, where the =txt= is hard-coded in.
-- we hacked them in into the elements: this is the case for Visual
-  Studio solutions and projects.
-
-In reality, what we need is to create a separation between the
-archetype, the extension "kind" and the actual extension. All
-archetypes have a fixed "extension kind". For example, C++ headers
-will always have a C++ header extension even though the actual header
-extension used is not known. In other cases the extension kind has a
-fixed extension (CMakeLists, Visual Studio projects, solutions). At
-present this mapping is done via the multiple functions locator
-supplies.
-
-We could conceivably have an enumeration for extension kind and then
-have a single function for full paths, that just takes in the
-extension kind, archetype etc. This would replace the proliferation of
-"full path for XYZ".
-
-We also have the concept of inclusion paths. We should generalise this
-to just "relative paths" and have a "add project directory?" flag.
-
-*** Name all project paths according to a scheme                      :story:
-
-The locator API looks really confusing due to the various kinds of
-paths. We need to catalogue them all and name them properly.
-
-- output directory: directory into which knitter will write all files,
-  unless "c++ headers output directory" is set, in which case it will
-  write all files except for the headers.
-- c++ headers output directory: directory in which knitter will write
-  the headers. Only applicable to c++.
-- include directory: aka inclusion directory; directory to place in
-  the include path.
-
-*** Start signing all tags                                            :story:
-
-We should really be signing all git tags.
-
-Links:
-
-- [[https://git-scm.com/book/tr/v2/Git-Tools-Signing-Your-Work][Git Tools - Signing Your Work]]
-- [[http://stackoverflow.com/questions/10161198/is-there-a-way-to-autosign-commits-in-git-with-a-gpg-key][Is there a way to “autosign” commits in Git with a GPG key?]]
-- [[http://emacs.stackexchange.com/questions/18514/how-to-automatically-sign-commits-with-magit][How to automatically sign commits with magit?]]
-
-*** Not setting output language results in weird errors               :story:
-
-When setting the input language to language agnostic and not setting
-the output languages, we get the following error:
-
-: /dogen/projects/yarn/src/types/legacy_name_tree_parser.cpp(123): Throw in function std::__cxx11::string {anonymous}::grammar<Iterator>::scope_operator_for_language(dogen::yarn::languages) [with Iterator = __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >; std::__cxx11::string = std::__cxx11::basic_string<char>]
-: Dynamic exception type: boost::exception_detail::clone_impl<dogen::yarn::parsing_error>
-: std::exception::what: Invalid or unsupported language: { "__type__": "languages", "value": "language_agnostic" }
-: [tag_workflow*] = Code generation failure.
-: [owner*] = <dogen><test_models><all_path_and_directory_settings><package_0><package_0_1><class_2>
-: unknown location(0): fatal error: in "workflow_tests/all_path_and_directory_settings_generates_expected_code_dia": std::runtime_error: Error during test
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/tests/workflow_tests.cpp(213): last checkpoint
-
-*** Using underscores with C# results in invalid code                 :story:
-
-When building in LAM, if one uses underscore notation we create code
-like so:
-
-:        public int prop_0 { get; set; }
-:        public class_0(int prop_0)
-:        {
-:            prop_0 = prop_0;
-:        }
-
-C# thinks we're assigning the parameter to itself rather than making
-use of the property.
-
-*** Support containers correctly in annotations                       :story:
-
-At present we are allowing users to enter the same key multiple times
-to represent a container:
-
-: #DOGEN yarn.output_language=cpp
-: #DOGEN yarn.output_language=csharp
-
-
-This was an acceptable pattern from a Dia perspective, because we had
-control of the KVP semantics. However, when we copied the pattern
-across to the JSON representation things did not work out so
-well. This is because the following JSON:
-
-:     "yarn.output_language": "csharp",
-:     "yarn.output_language": "cpp",
-
-Is interpreted by a lot of JSON parsers as a duplicate, and results on
-only a single KVP making it. We could try to solve a lot of problems
-in one go and standardise all of the meta-data on JSON:
-
-- use start and end markers to enclose the JSON when in dia. Story:
-  [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-a-start-and-end-dogen-variable-block-in-dia][Consider adding a start and end dogen variable block in dia]]
-- this would also solve the problem with pairs (or at least part of
-  it). Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-a-new-annotation-type-of-pair][Add a new annotation type of “pair”]]
-- we could allow users to keep the JSON externally. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-support-for-one-off-profiles][Add support
-  for “one off” profiles]]
-- the JSON would also work nicely with the concept of a dogen
-  project. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#introduce-dogen-projects][Introduce dogen projects]]
-
-However, before we embark on this story we need to perform a lot of
-analysis on this.
-
-Notes:
-
-- [[http://json-schema.org/][JSON Schema]]
-- [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
-- yarn.dia.comment is no longer necessary, just look for the
-  markers.
-- we should only allow arrays of simple types.
-- the fragment used inside Dia should be identical to the file
-  supplied as argument for the one-off profile and it should also
-  identical to a fragment inside a project. Do we need to support both
-  projects and one-off profiles?
-
-Sample:
-
-#+begin_src
-  "annotation": {
-    "yarn.dia.comment": true,
-    "yarn.dia.external_modules": "dogen::test_models",
-    "annotations.profile": "dogen",
-    "yarn.input_language": "language_agnostic",
-    "yarn.output_language": [ "csharp", "cpp" ]
-#+end_src
-
-This error has been picked up by codacy too:
-
-- [[https://www.codacy.com/app/marco-craveiro/dogen/commit?cid%3D79696432&bid%3D3493157&utm_campaign%3Dnew_commit&utm_medium%3DEmail&utm_source%3DInternal][Commit 91886c6]]&
-
-*** Add support for exports on windows                                :story:
-
-We should add export macros for shared objects/DLLs for windows. We
-should create a file =exports.hpp= probably at top-level with all the
-exports.
-
-#+begin_example
-#pragma once
-
-#ifdef MODEL_DECL
-    #undef MODEL _DECL
-#endif
-
-#ifdef MODEL _EXPORTS
-    #define MODEL _DECL __declspec(dllexport)
-#else
-    #define MODEL _DECL __declspec(dllimport)
-#endif
-#+end_example
-
-It is used as follows:
-
-: class MODEL_DECL Tags xxx
-
-*** Add =targetver.h= support                                         :story:
-
-On windows we should be generating the targetver header.
-
-Links:
-
-- [[https://github.com/Microsoft/Windows-classic-samples/blob/master/Samples/RadialController/cpp/targetver.h][targetver.h]]
-
-*** Add support for DLL Main on windows                               :story:
-
-At present we are manually generating DLL Main by hand and then
-excluding it on regexes. This is not ideal and will be more of a
-problem when we generate project files. Ideally we should code
-generate it. Requirements:
-
-- user must be able to disable it;
-- user must be able to handcraft it in case they want different
-  contents;
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/aa370448(v%3Dvs.85).aspx][DLL Main]]
-
-*** Add support for pre-compiled headers on windows                   :story:
-
-Most VS users have pre-compiled headers. We need to generate
-=stdafx.h= etc. For now we can have it minimally populated until we
-understand better the requirements.
-
-Actually we could probably do a very simple computation in quilt to
-figure out the most frequently used headers and add those to
-=stdafx=. We just need to go through the entire model in the inclusion
-expander to perform this calculation.
-
-In addition we need to make sure =stdafx= is added as the first
-include.
-
-We should have a quilt setting for pre-compilation. We should also
-check that visual studio support is enabled in order to generate
-=stdafx=.
-
-*** Add support for Visual Studio C++ projects                        :story:
-
-Visual studio project needs the files to be listed by hand. We can
-either generate the project or the user has to manually add the
-files. This is a problem every time they change. Requirements:
-
-- we need to be able to support multiple VS versions as well (user
-  configurable)
-- user may want to import property sheets
-- need guids (as per C# projects)
-- need additional library/include directories
-- need to add pre-compiled headers support with /FI.
-- add a solution for good measure, using the C# code.
-- add filter files for headers and source files.
-
-As per ODB, users may also want to build with different versions of
-VS. We should allow generating more than one solution and postfix them
-with the VS version.
-
-We should also generate filters for the project:
-
-- header files
-- source files
-- ODB header files
-- ODB source files
-
-The inclusion of ODB files must be done using regular expressions
-because we do not want to have to do two passes for knit; so we don't
-really know what files are available. However, if the ODB files have a
-=cxx= extension, we can just =CLInclude= =*cxx=.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
-
-*** Add a top-level "Visual Studio" knob                              :story:
-
-We have a number of features that only make sense when on Windows and
-building for Visual Studio. We should have a top-level knob that
-enables or disables all of these features in one go:
-
-- =quilt.cpp.visual_studio.enabled=
-
-*** Handcrafted support for fabric types                              :story:
-
-At present we can either disable fabric types or enable them
-(CMakeLists, etc). However, there is a third common use case: to
-handcraft them. To do this we normally disable them and then add the
-file to the ignore list:
-
-:  --ignore-files-matching-regex .*/CMakeLists.txt)
-
-One could conceive of some meta-data support that would make this
-process a tad easier and more generic:
-
-: quilt.cpp.cmakelists.stereotypes=handcrafted
-
-Then hopefully the existing pipeline would take over and we'd generate
-the files for the first time but then let the user overwrite it. This
-would also be applicable to all fabric types (registrar, etc) but we'd
-have to manually read each stereotype on each factory.
-
-*** Use =cxx= extension with ODB files                                :story:
-
-At present we renamed the ODB extension to =.cpp=. This is to make the
-ODB files part of the project:
-
-: set(files "")
-: file(GLOB_RECURSE files RELATIVE
-:    "${CMAKE_CURRENT_SOURCE_DIR}/"
-:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-
-However, it's quite nice to have distinct extensions for ODB and Dogen
-files. We should add a conditional in CMake that detects ODB and if
-found adds:
-
-: set(odb_files "")
-: file(GLOB_RECURSE odb_files RELATIVE
-:    "${CMAKE_CURRENT_SOURCE_DIR}/"
-:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
-: set(files ${files} ${odb_files})
-
-*** Clean up annotation scope types                                   :story:
-
-As part of the attribute rename (which used to be called property) we
-should have renamed the annotation scope as well to attribute.
-
-In addition, we have a scope type of "entity" but the yarn meta-model
-type is really "element".
-
-We should also check if "not applicable" scope is in use, and if not
-delete it.
-
-*** Add a new annotation type of "pair"                               :story:
-
-It would be nice to be able to declare a annotation type with a value
-type of "pair" or "key value pair" and have the annotations
-automatically perform the splitting. The separator should not be
-equals, since we already use that for annotations kvps, but it could
-be comma, pipe, etc. The API would be augmented to return a
-=std::pair= with key and value.
-
-One slight snag: the value could be of any type:
-
-- boolean
-- string
-- enumeration (when we support these)
-- even text collection
-
-We can start by just supporting strings, but probably worthwhile
-having a think on how to specify the type.
-
-*** Create a base options class across all tools                      :story:
-
-At present we are copying and pasting a bit of code related to general
-options across all the command line tools (knitter, darter, stitcher,
-tailor). We could create a base class that has the common options and
-then have a factory that populates the boost program options
-associated with that class.
-
-Ideally we should also have a log initialisation class that uses those
-common options.
-
-*** Introduce dogen projects                                          :story:
-
-At present we are manually configuring each dogen target, adding each
-separately to the build system. Perhaps a better approach is to have a
-dogen project file where one can configure all of the targets in one
-go. We don’t necessarily have to call dogen directly – perhaps another
-command line tool is responsible for invoking dogen? The problem here
-is that we’d end up with all dogen models in memory.
-
-At any rate, the project file would contain all models for a given
-product. We could possibly run with “all” or “specific” whereby the
-user would supply one or more projects to code generate. For all
-properties that are common, we’d defined them only once somehow
-(common regexes, log level, etc).
-
-*** Add support for "one off" profiles                                :story:
-
-At present one can define top-level profiles. These are useful, but in
-practice we ended up still defining a lot of things in each model. We
-need a way to associate a profile with a model by supplying it on the
-command line. That way users can create profiles and store them next
-to the model rather than having to create a data directory, etc etc.
-
-*** Add option to capitalise column and table names                   :story:
-
-One very useful thing is to allow users to define types in camel case
-or underscore separated but then have the ODB names generated all in
-caps (schema name, table name, column name). The database we are
-currently working with is all in caps and we are forced to manually
-enter pragmas for every single type because of this. Instead, we
-should have some meta-data:
-
-: odb.use_capitals=true
-
-This would automatically generate the pragmas.
-
-One slight downside is that if a user then tries to manually override
-the pragmas, we will have duplicates, in effect:
-
-: #DOGEN odb_pragma=schema("northwind")
-: #DOGEN odb_pragma=schema("NORTHWIND")
-
-*** Add prefetch support to ODB                                       :story:
-
-As per Boris email:
-
-#+begin_quote
-Hm, I am not sure the bulk approach (with a compiler-time pragma) is
-right in this case. There we don't really have a choice since we need
-to know the "batch buffer" size.
-
-But here it is all runtime. Plus, you may want to have different
-prefetch for different queries of the same object. In fact, you
-can already customize it for queries (but not for object loads)
-by using prepared queries (Section 4.5 in the manual):
-
-1. Create prepared query.
-
-2. Get its statement (statement()).
-
-3. Cast it to odb::oracle::select_statement.
-
-4. Call handle() on the result to get OCIStmt*.
-
-5. Set custom OCI_ATTR_PREFETCH_ROWS.
-
-6. Execute the query.
-
-The problems with this approach are: (1) it is tedious and (2) it
-doesn't work for non-query SELECT's (e.g., database::load()). So
-perhaps the way to do it is:
-
-1. Provide prefetch() functions on oracle::database() and
-   oracle::connection() that can be used to modify database-wide
-   and connection-wide prefetch values. Also set it to some
-   reasonable default (say 512?)
-
-2. Provide oracle::select_statement::prefetch() to make the
-   prepared query approach less tedious.
-#+end_quote
-
-*** Replace the database model with the northwind model               :story:
-
-As part of the [[https://github.com/DomainDrivenConsulting/zango][zango]] project we are creating a model that exercises
-Dogen and ODB. It is largely based on the database model, minus the
-basic types we had added a while ago. We should just drop the database
-model and adopt the northwind model from zango.
-
-*** Add ODB to the build machine                                      :story:
-
-At present we are only compiling and running the ODB tests
-locally. Now that ODB is becoming a core dependency, we need to make
-sure we are running these tests on the build machines - Windows and
-Linux at least.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
-Finally we should no longer attempt to derive the ODB pragma
-context. We should just add it verbatim.
-
-*** Map upsilon primitives to intrinsics                              :story:
-
-Upsilon allows users to create "strong typedefs" around primitve
-types. We need to unpack these into their intrinsic counterparts and
-them map the intrinsics to native types.
-
-Slight mistake: we mapped the primitive types themselves but in
-reality what needs to be mapped are the fields making references to
-the primitive types. We should just filter out all primitives.
-
-Additional wrinkle: what the end users want is to unpack "real
-primitives" into intrinsics, but "other" primitives should be mapped
-to objects. This can be achieved by hard-coding =Plaform= primitives
-into the mapping layer. However, some non-platform primitives may also
-be candidates too. We need to create a list of these to see how
-widespread the problem is.
-
-Another alternative is to apply hard-coded regexes:
-
-- if the name matches any of the intrinsic names
-
-Finally, the last option may be to have yet another mapping data file
-format that lists the primitives to unbox.
-
-*** Immutable types cannot be owned by mutable types                  :story:
-
-When we try to create a mutable class that has a property of an
-immutable type, the code fails to compile due to the swap
-method. This is because immutable types do not provide swap.
 
 ** Deprecated
