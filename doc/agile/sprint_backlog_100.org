@@ -12,15 +12,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-20 Mon 11:23]
+#+CAPTION: Clock summary at [2017-03-20 Mon 11:53]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:11* |      |      | 100.0 |
+| *Total time*                                                                | *0:41* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:11   |      |      | 100.0 |
-| Active                                                                      |        | 0:11 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 | 100.0 |
+| Stories                                                                     | 0:41   |      |      | 100.0 |
+| Active                                                                      |        | 0:41 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |  26.8 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  73.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -29,50 +30,52 @@
 
 Updates to sprint and product backlog.
 
-*** Edit release notes for previous sprint                            :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-03-20 Mon 11:53]
+    CLOCK: [2017-03-20 Mon 11:23]--[2017-03-20 Mon 11:53] =>  0:30
 
 Add github release notes for previous sprint.
 
-Title: Dogen v0.99.0, "Santo Adrião"
+Title: Dogen v0.99.0, "Cine Estúdio"
 
 #+begin_src markdown
-![alt text](http://3.bp.blogspot.com/_QN04x6AzKRw/S3GrWbya3EI/AAAAAAAASdo/UiHYehVmWQE/s640/Igreja.jpg)
-Igreja de Santo Adrião, Namibe, Angola. (C) Blog Moçâmedes Saudade, in [blogspot](http://mocamedes-saudade.blogspot.co.uk/2007/05/blog-post_2275.html).
+![Cine Estúdio](http://photos1.blogger.com/blogger/5188/3180/1600/blog_IMG_0530.jpg)The unfinished Cine Estúdio, Namibe, Angola. (C) Blog O Desterro do Arquitecto, in [blogspot](http://odesterrodoarquitecto.blogspot.co.uk/2006/07/o-cine-estudio-do-namibe.html).
 
 Overview
 =======
-As with the previous sprint, this sprint was also a smuttering of unrelated commits, attempting to address problems we are facing in production at present. However a main theme emerged: major improvements in the ODB support.
+This sprint was mainly focused on improving our ORM/ODB support. We have continued our series of posts on it, with the third part of the series:
 
-This was spurned by the ongoing series of blogposts on the integration of ODB with Dogen, using Oracle as the RDBMS:
+- [Nerd Food: Northwind, or Using Dogen with ODB - Part III](http://mcraveiro.blogspot.co.uk/2017/03/nerd-food-northwind-or-using-dogen-with.html)
 
-- [Nerd Food: Northwind, or Using Dogen with ODB - Part I](http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html)
-- [Nerd Food: Northwind, or Using Dogen with ODB - Part II](http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html)
+We have also improved testing around a few areas:
 
-The purpose of these series of posts is to give Dogen's ORM functionality a through testing to ensure its good enough for production. The end result will be an update to the Database test model.
+- all of the meta-data settings for paths and directories, fixing a few bugs in the process.
+- LAM: language agnostic models have now basic coverage and should work for both C# and C++.
+- ODB: the northwind project saw significant activity, as narrated in the blog posts.
 
-Finally, we also took the chance to clean up the multiple test models we had in C++, and coalesced a number of them into a single, unified test model for C++, along the lines of what we had done for C#.
+Finally, the other significant feature added in this sprint is support for C++ 98: It is now possible to generate models which do not use any of the C++ 11 (and above features).
 
 User visible changes
 ===============
-In this sprint, a small number of user visible changes were made:
+In this sprint, a number of user visible changes were made:
 
-- **ODB Fixes**: a number of small fixes in the ODB support were performed, including fixing the CMake targets.
-- **Introduction of the ORM layer**: We create a layer of indirection between Dogen and ODB, allowing users to configure the object-relational mapping in "generic terms". This has the side-effect of greatly reducing the number of manual ODB pragmas required, because Dogen can now infer a lot of information from the meta-data supplied.
-- **Log directory is now configurable**: You can now send the Dogen logs to a directory of your choosing, making Dogen easier to integrate with existing builds, which may already have their own log directory.
+- **Split directory**: this feature was resurrected; it is now possible to place the include directory in a location other than the main project directory.
+- **Improvements in the ORM layer**: more features were added and quite a few fixes. See the [northwind](https://github.com/DomainDrivenConsulting/dogen/blob/09d7f7cd40b29ed0dded559b75d9dbcbad52f777/projects/input_models/northwind.dia) model for an example.
+- **C++ standard is now settable**: users can now choose C++ 98 or C++ 11/14 as the standard and the generated code will be compliant.
 
-For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_98.org).
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_099.org).
 
 Next Sprint
 ========
-The next sprint will continue to focus on ODB and Visual Studio support.
+In the next sprint we'll wrap things up with our ODB work and start adding Visual Studio support.
 
 Binaries
 ======
 You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_0.98.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen_0.98.0_amd64-applications.deb)
-- [dogen-0.98.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.98.0/dogen-0.98.0-Darwin-x86_64.dmg)
-- [dogen-0.98.0-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-0.98.0-Windows-AMD64.msi)
+- [dogen_0.99.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.99.0/dogen_0.99.0_amd64-applications.deb)
+- [dogen-0.99.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/0.99.0/dogen-0.99.0-Darwin-x86_64.dmg)
+- [dogen-0.99.0-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-0.99.0-Windows-AMD64.msi)
 
 **Note**: They are produced by CI so they may not yet be ready.
 
