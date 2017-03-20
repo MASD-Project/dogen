@@ -12,16 +12,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-20 Mon 11:53]
+#+CAPTION: Clock summary at [2017-03-20 Mon 22:43]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:41* |      |      | 100.0 |
+| *Total time*                                                                | *2:39* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:41   |      |      | 100.0 |
-| Active                                                                      |        | 0:41 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |  26.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  73.2 |
+| Stories                                                                     | 2:39   |      |      | 100.0 |
+| Active                                                                      |        | 2:39 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   6.9 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  18.9 |
+| STARTED Implement the database model using Northwind                        |        |      | 1:58 |  74.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -82,8 +83,35 @@ You can download experimental binaries from [Bintray](https://bintray.com/domain
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/838746103579291648][Tweet]]
-- [[https://www.linkedin.com/hp/update/6244512213571248128/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/843812829148954625][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6249579000297975808/][LinkedIn]]
+
+*** STARTED Implement the database model using Northwind              :story:
+    CLOCK: [2017-03-20 Mon 20:45]--[2017-03-20 Mon 22:43] =>  1:58
+
+Now we are using Dogen in anger with ODB, we need to make sure the
+database model is actually exercising all of this functionality. One
+easy way of achieving this is to use Microsoft's Northwind Database as
+the base for the model.
+
+- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
+
+We should implement it using Oracle and use this to test the changes
+to ODB's oracle support.
+
+Tasks:
+
+- add comment for ODB targets
+- add flag to mark a type as a value
+- case of the identifiers is a problem: sometimes we get them
+  uppercase (when we do them without quotes in sql plus) sometimes we
+  get them lowercase (from odb). use =--sql-name-case= upper/lower as
+  a flag.
+- schema initialisation from statics is not working; this is as
+  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
+  entity, but that then causes an exception.
+- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
+- paper:
 
 *** Check for incompatibility between input language and enabled kernels :story:
 
@@ -206,32 +234,6 @@ includes. There are some differences though:
   part requires some hacking. We could have an option in locator:
   "apply archetype postfix" supplied as an argument. Since we have the
   Visual Studio element we have visibility of all enabled versions.
-
-*** Implement the database model using Northwind                      :story:
-
-Now we are using Dogen in anger with ODB, we need to make sure the
-database model is actually exercising all of this functionality. One
-easy way of achieving this is to use Microsoft's Northwind Database as
-the base for the model.
-
-- [[https://northwinddatabase.codeplex.com/][Northwind Database]]
-
-We should implement it using Oracle and use this to test the changes
-to ODB's oracle support.
-
-Tasks:
-
-- add comment for ODB targets
-- add flag to mark a type as a value
-- case of the identifiers is a problem: sometimes we get them
-  uppercase (when we do them without quotes in sql plus) sometimes we
-  get them lowercase (from odb). use =--sql-name-case= upper/lower as
-  a flag.
-- schema initialisation from statics is not working; this is as
-  explained in [[http://www.codesynthesis.com/pipermail/odb-users/2013-May/001286.html][this email]]. We can force it by doing a query on that
-  entity, but that then causes an exception.
-- =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
-- paper:
 
 *** Add column name support to ORM                                    :story:
 

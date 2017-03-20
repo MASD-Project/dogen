@@ -1,0 +1,224 @@
+#+title: Nerd Food: Northwind, or Using Dogen with ODB - Part IV
+#+options: date:nil toc:nil author:nil num:nil title:nil
+
+So, dear reader, we meet again for the fourth and final instalment of
+our series of posts on using Dogen with ODB! And if you missed an
+episode - unlikely as it may be - well, fear not for you can always
+catch up! Here are the links: [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with.html][Part I]], [[http://mcraveiro.blogspot.co.uk/2017/02/nerd-food-northwind-or-using-dogen-with_24.html][Part II]] and [[http://mcraveiro.blogspot.co.uk/2017/03/nerd-food-northwind-or-using-dogen-with.html][Part III]]. But, if
+you are too lazy and need a summary: all we've done thus far is to
+install and setup an Oracle Express database, populate it with a
+schema (and data) and finally code-generate an ORM model for it using
+Dogen and ODB.
+
+I guess it would not be entirely unfair to describe our adventure thus
+far as a prelude; if nothing else, it was a character building
+experience. But /now/ we can finally enjoy the code.
+
+* Building Zango
+
+Assuming you have checked out =zango= as described in [[http://mcraveiro.blogspot.co.uk/2017/03/nerd-food-northwind-or-using-dogen-with.html][Part III]] and you
+are sitting on its containing directory, you can "configure" the
+project fairly simply:
+
+#+begin_example
+$ . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh
+$ cd zango/build
+$ mkdir output
+$ cd output
+$ CMAKE_INCLUDE_PATH=/full/path/to/local/include CMAKE_LIBRARY_PATH=/full/path/to/local/lib cmake ../.. -G Ninja
+-- The C compiler identification is GNU 6.3.0
+<lots of CMake output>
+-- Generating done
+-- Build files have been written to: /path/to/zango/build/output
+#+end_example
+
+As always, do not forget to replace =/full/path/to/local= with your
+path to the directory containing the ODB libraries. If all has gone
+according to plan, CMake should have found ODB, Boost, Dogen and all
+other dependencies we have carefully and painstakingly setup in the
+previous three parts. Once the configuration is done, you can fire up
+Ninja to build:
+
+#+begin_example
+$ ninja -j5
+[1/100] Building CXX object projects/northwind/src/CMakeFiles/northwind.dir/io/category_id_io.cpp.o
+<lots of Ninja output>
+[98/100] Linking CXX static library projects/northwind/src/libzango.northwind.a
+[99/100] Building CXX object CMakeFiles/application.dir/projects/application/main.cpp.o
+[100/100] Linking CXX executable application
+#+end_example
+
+That was easy! But what have we built?
+
+* The "Application"
+
+We've created a really simple application to test drive the northwind
+model. This is really /not how your production code should look like/,
+but it's fine for our purposes. We shall start by reading a password
+from the command line and then we use it to instantiate our Oracle
+database:
+
+#+begin_src c++
+    const std::string password(argv[1]);
+    using odb::oracle::database;
+    std::unique_ptr<database>
+        db(new database("northwind", password, "XE", "localhost", 1521));
+#+end_src
+
+We then use this database to read all available customers:
+
+#+begin_src c++
+std::list<zango::northwind::customers>
+load_customers(odb::oracle::database& db) {
+    odb::oracle::transaction t(db.begin());
+
+    std::list<zango::northwind::customers> r;
+    auto rs(db.query<zango::northwind::customers>());
+    for (auto i(rs.begin ()); i != rs.end (); ++i)
+        r.push_back(*i);
+    return r;
+}
+#+end_src
+
+Please note that this is a straightforward use of the ODB API, but
+barely scratches the surface of what ODB can do. ODB supports all
+sorts of weird and wonderful things, including fairly complex queries
+and other great features. If you'd like more details on how to use
+ODB, you should read its manual: [[http://www.codesynthesis.com/products/odb/doc/manual.xhtml][C++ Object Persistence with ODB]]. It's
+extremely comprehensive and very well written.
+
+Once we have the customers in memory, we can start to do things with
+them. We can for example serialise them to a Boost serialisation
+binary archive and read them back out:
+
+#+begin_src c++
+    boost::filesystem::path file("a_file.bin");
+    {
+        boost::filesystem::ofstream os(file);
+        boost::archive::binary_oarchive oa(os);
+        oa << customers;
+    }
+
+    std::cout << "Wrote customers to file: "
+              << file.generic_string() << std::endl;
+
+    std::list<zango::northwind::customers> customers_from_file;
+    {
+        boost::filesystem::ifstream is(file);
+        boost::archive::binary_iarchive ia(is);
+        ia >> customers_from_file;
+    }
+#+end_src
+
+This is where hopefully you should start to see the advantages of
+Dogen: without writing any code, we have full serialisation support to
+all classes in the model - in addition to ODB support, of course.
+
+Another very useful feature is to dump objects into a stream:
+
+#+begin_src c++
+    for (const auto& c : customers_from_file)
+        std::cout << "Customer: " << c << std::endl;
+#+end_src
+
+The objects are written in JSON, making it easy to post-process the
+output with JSON tools such as [[https://github.com/stedolan/jq][JQ]], resulting in a nicely formatted
+output:
+
+#+begin_example
+{
+  "__type__": "zango::northwind::customers",
+  "customer_id": {
+    "__type__": "zango::northwind::customer_id",
+    "value": 90
+  },
+  "customer_code": "WILMK",
+  "company_name": "Wilman Kala",
+  "contact_name": "Matti Karttunen",
+  "contact_title": "Owner/Marketing Assistant",
+  "address": "Keskuskatu 45",
+  "city": "Helsinki",
+  "region": "",
+  "postal_code": "21240",
+  "country": "Finland",
+  "phone": "90-224 8858",
+  "fax": "90-224 8858"
+}
+#+end_example
+
+Dogen supports this output in arbitrarily-nested graphs. When you do
+bump into really complex objects and JQ just won't cut it, you can
+always dump the JSON into PostgreSQL - very easily indeed, given the
+ODB support - and then run queries on the object using the power of
+[[http://schinckel.net/2014/05/25/querying-json-in-postgres/][JSONB]]. You can also dump the objects into MongoDB with a little bit
+more trouble.
+
+Another useful Dogen feature is test data generation. This can be
+handy for performance testing, for example. Let's say we want to
+generate 10K customers and see how Oracle fares:
+
+#+begin_src c++
+std::vector<zango::northwind::customers> generate_customers() {
+    std::vector<zango::northwind::customers> r;
+    const auto total(10 * 1000);
+    r.reserve(total);
+
+    zango::northwind::customers_generator g;
+    for (int i = 0; i < total; ++i) {
+        const auto c(g());
+        if (i > 100)
+            r.push_back(g());
+    }
+
+    return r;
+}
+#+end_src
+
+We skipped the first hundred customers just to avoid clashes with the
+=customer_id= primary key. Now, thanks to the magic of ODB we can
+easily push this data into the database:
+
+#+begin_src c++
+void save_customers(odb::oracle::database& db,
+    const std::vector<zango::northwind::customers>& customers) {
+
+    odb::transaction t(db.begin());
+    for (const auto c : customers)
+        db.persist(c);
+    t.commit();
+}
+#+end_src
+
+/Et voilá/, we have lots of customers in the database now:
+
+
+#+begin_src c++
+SQL> select count(1) from customers;
+
+  COUNT(1)
+----------
+      9990
+#+end_src
+
+To be totally honest, this exercise revealed a shortcoming in Dogen:
+since it does not know of the size of fields on the database, the
+generated test data may in some cases be too big to fit the database
+fields:
+
+#+begin_example
+Saving customers...
+terminate called after throwing an instance of 'odb::oracle::database_exception'
+  what():  12899: ORA-12899: value too large for column "NORTHWIND"."CUSTOMERS"."CUSTOMER_CODE" (actual: 6, maximum: 5)
+#+end_example
+
+I solved this problem with a quick hack for this article (by removing
+the prefix used in the test data) but a proper fix is now sitting in
+Dogen's product backlog for implementation in the near future.
+
+* Dogen and ODB Targets
+
+Zango also comes with a couple of targets for Dogen and ODB:
+
+- =knit_northwind= generates the Dogen code from the model.
+- =odb_northwind= runs ODB against the Dogen model, generating the ODB
+  sources.
