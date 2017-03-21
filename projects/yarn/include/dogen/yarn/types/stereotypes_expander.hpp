@@ -41,6 +41,14 @@ namespace yarn {
  */
 class stereotypes_expander {
 private:
+    /**
+     * @brief If true, this stereotype is part of the list of
+     * stereotypes that are valid but require no action from this
+     * expander; it is someone else's problem.
+     */
+    bool is_stereotype_handled_externally(const std::string& s) const;
+
+private:
     struct visitor_details {
         visitor_details(const name& b) : base(b) { }
         visitor_details(const name& b, const name& d) : base(b), derived(d) { }

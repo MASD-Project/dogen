@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/vector_io.hpp"
@@ -42,6 +43,14 @@ const std::string stereotype_fluent("fluent");
 const std::string stereotype_immutable("immutable");
 const std::string stereotype_orm_object("orm_object");
 const std::string stereotype_orm_value("orm_value");
+const std::string stereotype_exception("exception");
+const std::string stereotype_enumeration("enumeration");
+const std::string stereotype_handcrafted("handcrafted");
+const std::string stereotype_cpp_helper_formatter("C++ Helper Formatter");
+const std::string stereotype_cpp_artefact_formatter("C++ Artefact Formatter");
+const std::string stereotype_csharp_helper_formatter("C# Helper Formatter");
+const std::string stereotype_csharp_artefact_formatter("C# Artefact Formatter");
+
 const std::string visitor_name("visitor");
 const std::string visitor_argument_name("v");
 const std::string visitor_doc("Visitor for ");
@@ -56,11 +65,24 @@ const std::string no_visitees("Visitor is not visiting any types: ");
 const std::string visitable_child("Children cannot be marked as visitable: ");
 const std::string invalid_primitive_properties(
     "Primitive cannot have a stereotype of 'orm_object': ");
+const std::string invalid_stereotypes("Stereotypes are not valid: ");
 
 }
 
 namespace dogen {
 namespace yarn {
+
+bool stereotypes_expander::
+is_stereotype_handled_externally(const std::string& s) const {
+    return
+        s == stereotype_exception ||
+        s == stereotype_enumeration ||
+        s == stereotype_handcrafted ||
+        s == stereotype_cpp_helper_formatter ||
+        s == stereotype_cpp_artefact_formatter ||
+        s == stereotype_csharp_helper_formatter ||
+        s == stereotype_csharp_artefact_formatter;
+}
 
 std::unordered_map<location, std::list<name> > stereotypes_expander::
 bucket_leaves_by_location(const std::list<name>& leaves) const {
@@ -303,8 +325,12 @@ void stereotypes_expander::expand(object& o, intermediate_model& im) const {
 
     BOOST_LOG_SEV(lg, debug) << "Original: " << o.stereotypes();
     std::vector<std::string> unknown_stereotypes;
+    std::vector<std::string> external_stereotypes;
     for (const auto s : o.stereotypes()) {
-        if (s == stereotype_visitor)
+        if (is_stereotype_handled_externally(s)) {
+            external_stereotypes.push_back(s);
+            continue;
+        } else if (s == stereotype_visitor)
             expand_visitable(o, im);
         else if (s == stereotype_fluent)
             o.is_fluent(true);
@@ -320,13 +346,25 @@ void stereotypes_expander::expand(object& o, intermediate_model& im) const {
             cfg.is_value(true);
             o.orm_properties(cfg);
         } else {
-            const bool processed(try_expand_concept(s, o, im));
-            if (!processed)
+            const bool is_concept(try_expand_concept(s, o, im));
+            if (!is_concept)
                 unknown_stereotypes.push_back(s);
         }
     }
-    o.stereotypes(unknown_stereotypes);
-    BOOST_LOG_SEV(lg, debug) << "Unknown: " << o.stereotypes();
+
+    /*
+     * If there are any stereotypes we do not know about, throw an
+     * error. This way the user can figure out if its trying to use a
+     * concept but it has not been found or if its trying to use an
+     * unsupported feature.
+     */
+    if (!unknown_stereotypes.empty()) {
+        const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
+        BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
+        BOOST_THROW_EXCEPTION(expansion_error(invalid_stereotypes + s));
+    }
+
+    o.stereotypes(external_stereotypes);
 }
 
 void stereotypes_expander::expand(primitive& p) const {
@@ -354,7 +392,12 @@ void stereotypes_expander::expand(primitive& p) const {
             unknown_stereotypes.push_back(s);
     }
 
-    p.stereotypes(unknown_stereotypes);
+    if (!unknown_stereotypes.empty()) {
+        const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
+        BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
+        BOOST_THROW_EXCEPTION(expansion_error(invalid_stereotypes + s));
+    }
+
     BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();
 }
 

@@ -231,6 +231,10 @@ void concept_expander::expand_concepts(intermediate_model& im) {
 }
 
 void concept_expander::expand(intermediate_model& im) {
+    /*
+     * We must expand concepts before we expand objects as we rely on
+     * the expanded attributes.
+     */
     expand_concepts(im);
     expand_objects(im);
 }

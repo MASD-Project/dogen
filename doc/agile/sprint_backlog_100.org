@@ -12,20 +12,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-21 Tue 12:09]
+#+CAPTION: Clock summary at [2017-03-21 Tue 14:26]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *4:13* |      |      | 100.0 |
+| *Total time*                                                                | *4:49* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 4:13   |      |      | 100.0 |
-| Active                                                                      |        | 4:13 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   4.3 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  11.9 |
-| COMPLETED Header directory is not part of housekeeping                      |        |      | 0:49 |  19.4 |
-| COMPLETED Disable common support on ODB for a single database               |        |      | 0:08 |   3.2 |
-| STARTED Implement the database model using Northwind                        |        |      | 1:58 |  46.6 |
-| STARTED Allow users to override string prefixes in test data                |        |      | 0:37 |  14.6 |
+| Stories                                                                     | 4:49   |      |      | 100.0 |
+| Active                                                                      |        | 4:49 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   3.8 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  10.4 |
+| COMPLETED Header directory is not part of housekeeping                      |        |      | 0:49 |  17.0 |
+| COMPLETED Disable common support on ODB for a single database               |        |      | 0:08 |   2.8 |
+| STARTED Implement the database model using Northwind                        |        |      | 1:58 |  40.8 |
+| STARTED Allow users to override string prefixes in test data                |        |      | 0:37 |  12.8 |
+| STARTED Concepts cannot be placed inside of packages                        |        |      | 0:36 |  12.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -199,17 +200,51 @@ Tasks:
 - inject a new fabric type for test data configuration. It can be a
   simple struct.
 
-*** ODB options does not cater for types placed in namespaces         :story:
+*** STARTED Concepts cannot be placed inside of packages              :story:
+    CLOCK: [2017-03-21 Tue 14:10]--[2017-03-21 Tue 14:26] =>  0:16
+    CLOCK: [2017-03-21 Tue 12:10]--[2017-03-21 Tue 12:30] =>  0:20
 
-At present the regexes assume the types are placed on the top-level
-ODB directory.
+At present it is not possible to create a concept inside a
+package or reuse concepts across models. This is because we do not
+resolve the refines container of a concept, or the models container of
+an object. We could trivially add resolution to concept expansion but
+we do not have a use case for this yet. The approach should be similar
+to what we did for generalisation expansion: call the
+resolver. However, we need to refactor the resolver because we need to
+use the same algorithm but this time on the concepts container.
 
-*** Concepts do not work in namespaces                                :story:
+*Previous Understanding*
+
+#+begin_quote
+*Story*: As a dogen user, I want to place concepts in packages so that
+I can scope them when required.
+#+end_quote
+
+At present it is not possible to create a concept inside a
+package. This is because the concept qualified name is assumed to be
+at top-level. In the future it may be useful to use scoping for
+concept names in the stereotype. We do not yet have a use case for
+this.
+
+This can be done trivially by:
+
+- allowing (or forcing?) the stereotype to have the package path;
+- using the package path in stereotype expansion when constructing the
+  concept name.
+
+Merged stories:
+
+*Concepts do not work in namespaces*
 
 We just fail to resole them and do not even throw an error.
 
 We can either always place concepts on the model namespace or we can
 fix resolver to default to current scope.
+
+*** ODB options does not cater for types placed in namespaces         :story:
+
+At present the regexes assume the types are placed on the top-level
+ODB directory.
 
 *** Types in namespaces do not have ORM properties applied            :story:
 

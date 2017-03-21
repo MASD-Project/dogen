@@ -13007,7 +13007,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:string>#intermediate_model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable, DeterminableOrigin, Generatable#</dia:string>
+        <dia:string>#Nameable, DeterminableOrigin#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Intermediate representation of a yarn model.#</dia:string>
