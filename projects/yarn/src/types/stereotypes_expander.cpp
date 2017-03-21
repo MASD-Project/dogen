@@ -24,6 +24,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
@@ -273,47 +274,15 @@ expand_visitable(object& o, intermediate_model& im) const {
 }
 
 bool stereotypes_expander::try_expand_concept(
-    const std::string& s, object& o, intermediate_model& im) const {
+    const std::string& s, object& o, const intermediate_model& im) const {
 
-    /*
-     * Compute a tentative yarn name based on the model.
-     */
-    yarn::name_factory f;
-    const auto n(f.build_element_in_model(im.name(), s));
-    BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+    resolver rs;
+    const auto on(rs.try_resolve_concept_name(s, im));
+    if (!on)
+        return false;
 
-    /*
-     * If we can locate a concept with that name, the stereotype is
-     * deemed to be referring to it.
-     */
-    const auto i(im.concepts().find(n.id()));
-    if (i != im.concepts().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
-        o.modeled_concepts().push_back(i->second.name());
-        return true;
-    }
-
-    /*
-     * Lets try using the references instead.
-     */
-    for (const auto& pair : im.references()) {
-        const auto& ref(pair.first);
-        const auto n(f.build_element_in_model(ref, s));
-        BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
-
-        const auto i(im.concepts().find(n.id()));
-        if (i != im.concepts().end()) {
-            BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
-            o.modeled_concepts().push_back(i->second.name());
-            return true;
-        }
-    }
-
-    /*
-     * There are no concepts in this model which match the stereotype name.
-     */
-    BOOST_LOG_SEV(lg, debug) << "Could not find a concept with tentative name.";
-    return false;
+    o.modeled_concepts().push_back(*on);
+    return true;
 }
 
 void stereotypes_expander::expand(object& o, intermediate_model& im) const {

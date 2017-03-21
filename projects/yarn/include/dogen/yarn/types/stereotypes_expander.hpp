@@ -90,7 +90,7 @@ private:
      * on success, false otherwise.
      */
     bool try_expand_concept(
-        const std::string& s, object& o, intermediate_model& im) const;
+        const std::string& s, object& o, const intermediate_model& im) const;
 
     /**
      * @brief Expands all stereotypes for the object.

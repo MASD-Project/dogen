@@ -408,4 +408,45 @@ name resolver::resolve(const intermediate_model& im, const indices& idx,
     return r;
 }
 
+boost::optional<name> resolver::try_resolve_concept_name(const std::string& s,
+    const intermediate_model& im) const {
+    /*
+     * Compute a tentative yarn name based on the model.
+     */
+    name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), s));
+    BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+
+    /*
+     * If we can locate a concept with that name, the stereotype is
+     * deemed to be referring to it.
+     */
+    const auto i(im.concepts().find(n.id()));
+    if (i != im.concepts().end()) {
+        BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
+        return i->second.name();
+    }
+
+    /*
+     * Lets try using the references instead.
+     */
+    for (const auto& pair : im.references()) {
+        const auto& ref(pair.first);
+        const auto n(nf.build_element_in_model(ref, s));
+        BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+
+        const auto i(im.concepts().find(n.id()));
+        if (i != im.concepts().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
+            return i->second.name();
+        }
+    }
+
+    /*
+     * There are no concepts in this model which match the stereotype name.
+     */
+    BOOST_LOG_SEV(lg, debug) << "Could not find a concept with tentative name.";
+    return boost::optional<name>();
+}
+
 } }

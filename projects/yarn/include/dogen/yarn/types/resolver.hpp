@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <boost/optional.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/indices.hpp"
 #include "dogen/yarn/types/name.hpp"
@@ -128,11 +129,18 @@ public:
      */
     void resolve(const indices& idx, intermediate_model& im) const;
 
+public:
     /**
      * @brief Resolves the name against the supplied model.
      */
     name resolve(const intermediate_model& im, const indices& idx,
         const name& context, const name& n) const;
+
+    /**
+     * @brief Resolves the name as a concept name.
+     */
+    boost::optional<name> try_resolve_concept_name(const std::string& s,
+        const intermediate_model& im) const;
 };
 
 } }
