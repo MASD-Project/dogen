@@ -84,6 +84,12 @@ private:
         const dogen::formatters::repository& drp,
         const formattables::model& fm) const;
 
+    /**
+     * @brief Creates a list of all the managed directories.
+     */
+    std::list<boost::filesystem::path>
+    managed_directories(const formattables::locator& l) const;
+
 public:
     std::string id() const override;
 

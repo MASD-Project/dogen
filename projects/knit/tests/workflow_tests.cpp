@@ -98,19 +98,26 @@ test_configuration make_split_project_configuration(const bool json = false) {
         yarn_json::input_split_project_json() :
         yarn_dia::input_split_project_dia());
     const auto model_name(target.stem().string());
-    auto r(make_test_configuration(model_name, target, actual_dia_dir));
+    const auto actual_dir(json ? actual_json_dir : actual_dia_dir);
+    auto r(make_test_configuration(model_name, target, actual_dir));
+    auto& o(r.options);
 
     /*
-     * note that we keep the project name just to make the life easier
-     * for the rebaselining scripts.
+     * Note that we create a top-level directory with the project name
+     * just to make the life easier for the rebaselining
+     * scripts.
      */
-    r.options.output_directory_path() /= "split_project";
+    o.output_directory_path() /= "split_project";
 
-    r.options.cpp_headers_output_directory_path(
-        r.options.output_directory_path());
+    /*
+     * Its important that the output directory is _not_ a parent of
+     * the header directory, or else we will not test housekeeping
+     * properly.
+     */
+    o.cpp_headers_output_directory_path(o.output_directory_path());
     const boost::filesystem::path p("dir/inc/another");
-    r.options.cpp_headers_output_directory_path() /= p;
-    r.options.output_directory_path() /= "some_dir";
+    o.cpp_headers_output_directory_path() /= p;
+    o.output_directory_path() /= "some_dir";
     return r;
 }
 
@@ -121,8 +128,8 @@ bool execute_test(const test_configuration& tc) {
      * it is created by the scripts. This is a very roundabout way of
      * doing things, but works for now.
      */
-    boost::filesystem::remove_all(tc.actual);
-    boost::filesystem::create_directory(tc.actual);
+    // boost::filesystem::remove_all(tc.actual);
+    // boost::filesystem::create_directory(tc.actual);
 
     dogen::knit::workflow w(tc.options);
     w.execute();
@@ -365,7 +372,7 @@ BOOST_AUTO_TEST_CASE(all_path_and_directory_settings_generates_expected_code_jso
 
 BOOST_AUTO_TEST_CASE(split_project_model_generates_expected_code_json) {
     SETUP_TEST_LOG("split_project_model_generates_expected_code_json");
-    const auto tc(make_split_project_configuration());
+    const auto tc(make_split_project_configuration(true/*json*/));
     BOOST_CHECK(execute_test(tc));
 }
 

@@ -80,6 +80,16 @@ kernel::format(const annotations::type_repository& atrp,
     return wf.execute(fm);
 }
 
+std::list<boost::filesystem::path> kernel::
+managed_directories(const formattables::locator& l) const {
+    std::list<boost::filesystem::path> r;
+    r.push_back(l.project_path());
+    if (l.project_path() != l.headers_project_path())
+      r.push_back(l.headers_project_path());
+
+    return r;
+}
+
 annotations::archetype_location kernel::archetype_location() const {
     static annotations::archetype_location r(traits::family(), traits::kernel(),
         empty/*facet*/, empty/*archetype*/);
@@ -111,7 +121,7 @@ kernel_output kernel::generate(const options::knitting_options& ko,
 
     kernel_output r;
     r.artefacts(format(atrp, agf, drp, fm));
-    r.managed_directories().push_back(l.project_path());
+    r.managed_directories(managed_directories(l));
 
     BOOST_LOG_SEV(lg, debug) << "Finished kernel.";
     return r;

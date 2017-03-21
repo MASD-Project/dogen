@@ -12,17 +12,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-20 Mon 22:43]
+#+CAPTION: Clock summary at [2017-03-21 Tue 11:52]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:39* |      |      | 100.0 |
+| *Total time*                                                                | *4:05* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:39   |      |      | 100.0 |
-| Active                                                                      |        | 2:39 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   6.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  18.9 |
-| STARTED Implement the database model using Northwind                        |        |      | 1:58 |  74.2 |
+| Stories                                                                     | 4:05   |      |      | 100.0 |
+| Active                                                                      |        | 4:05 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:11 |   4.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:30 |  12.2 |
+| COMPLETED Header directory is not part of housekeeping                      |        |      | 0:49 |  20.0 |
+| STARTED Implement the database model using Northwind                        |        |      | 1:58 |  48.2 |
+| STARTED Allow users to override string prefixes in test data                |        |      | 0:37 |  15.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -86,6 +88,14 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/843812829148954625][Tweet]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6249579000297975808/][LinkedIn]]
 
+*** COMPLETED Header directory is not part of housekeeping            :story:
+    CLOSED: [2017-03-21 Tue 11:46]
+    CLOCK: [2017-03-21 Tue 11:47]--[2017-03-21 Tue 11:52] =>  0:05
+    CLOCK: [2017-03-21 Tue 11:02]--[2017-03-21 Tue 11:46] =>  0:44
+
+At present the housekeeper is not deleting files in the header
+directory.
+
 *** STARTED Implement the database model using Northwind              :story:
     CLOCK: [2017-03-20 Mon 20:45]--[2017-03-20 Mon 22:43] =>  1:58
 
@@ -112,6 +122,128 @@ Tasks:
   entity, but that then causes an exception.
 - =head -n 200 northwind_ascii.sql | grep ^INSERT | cut -b 1-150 | uniq=
 - paper:
+
+*** STARTED Allow users to override string prefixes in test data      :story:
+    CLOCK: [2017-03-21 Tue 07:10]--[2017-03-21 Tue 07:24] =>  0:14
+    CLOCK: [2017-03-21 Tue 06:41]--[2017-03-21 Tue 07:04] =>  0:23
+
+At present we have a hard-coded string prefix in test data:
+=a_string_". This has been is fine up to now, but we have bumped into
+a problem when using it with ORM: some fields in the database are too
+small to fit the prefix (e.g. =VARCHAR[5]=). The quick solution for
+this is to make the prefix customisable when we instantiate the
+generator.
+
+Actually this is not quite that straightforward: in order to allow
+users to configure the string prefix, we'd have to extend all helpers
+to have a "prefix" argument of type string because we do not know
+which helpers are the string helpers. An alternative is to have a test
+data configuration, with the following configurable points:
+
+- string prefix
+- path prefix
+- numeric start
+- date start
+
+The configuration is an optional parameter supplied to the
+generator. If empty we use the default configuration which could
+potentially be read from meta-data, although we do not have a use case
+for this.
+
+However, we have a slight problem: if a model M0 has types from
+another model M1, we will end up with two configurations (one per
+model). When we call a M0 generator which calls an M1 generator, we
+need to somehow send the configuration across as well. Since they are
+different types (even though identical in layout) we need to copy the
+configuration across. This could be achieved with a template
+method. Alternatively we could make all helper methods a template
+method that takes in a configuration:
+
+#+begin_src c++
+template<typename Configuration>
+create_XYZ(unsigned int position, const Configuratio& c) {
+...
+}
+#+end_src
+
+Actually this won't work: we still have the problem of calling
+external generators.
+
+A simpler but less typed solution is to use =std::tuple=:
+
+: std::tuple<std::string, std::string, int, int> configuration
+
+The other interesting point is that this is perhaps an ORM
+problem. After all, we could have a =VARCHAR[2]= string, and
+configuring the prefix won't help. What we really need is to figure
+out how many digits one can put in the string, given the available
+size. Users can supply the sizes as part of the ORM configuration. We
+can then do a simple heuristic:
+
+- does the prefix fit? if not, drop it.
+- what is the max value for the counter that will fit the string size?
+  Use it as a modulus.
+
+Tasks:
+
+- inject a new fabric type for test data configuration. It can be a
+  simple struct.
+
+*** ODB options does not cater for types placed in namespaces         :story:
+
+At present the regexes assume the types are placed on the top-level
+ODB directory.
+
+*** Concepts do not work in namespaces                                :story:
+
+We just fail to resole them and do not even throw an error.
+
+We can either always place concepts on the model namespace or we can
+fix resolver to default to current scope.
+
+*** Types in namespaces do not have ORM properties applied            :story:
+
+We seem to be missing the schema and in some cases primary key too.
+
+*** Ignore ODB files automatically                                    :story:
+
+At present we are adding the following regular expressions to knitter
+whenever we are using ODB with dogen:
+
+:        --ignore-files-matching-regex .*sql
+:        --ignore-files-matching-regex .*-odb.*)
+
+We should inject the ODB files automatically into the list of expected
+files. For a given element =foreign_key=, we will have a dogen file
+
+: foreign_key_pragmas.hpp
+
+We will also have the following ODB files:
+
+: foreign_key-odb.cxx
+: foreign_key-odb.hxx
+: foreign_key-odb.ipp
+: foreign_key-odb.ixx
+
+The first file can either be on the =include/odb= directory or on the
+=src/odb= directory (it is moved by the ODB target). All other files
+are placed in the =include/odb= folder. Note that at present we are
+using =cpp= extension rather than =cxx=.
+
+In addition, on a multi-database environment we also have:
+
+- =repository-odb-oracle.hxx=
+- =repository-odb-pgsql.hxx=
+- ...
+
+Ideally we should also add the ODB include files to the master
+includes. However, we probably need a separate master include file
+just for ODB files.
+
+One of the amazing side-effects of this approach is that we will
+automatically delete any ODB files which are no longer required
+(because we will not generate ignores for them). At present we are
+manually deleting them.
 
 *** Check for incompatibility between input language and enabled kernels :story:
 
@@ -268,46 +400,6 @@ The "c++-" seems a bit redundant.
 Previously we were automatically adding the ODB pragma =no_id= to
 objects that had no primary key set. This no longer seems to be
 happening.
-
-*** Ignore ODB files automatically                                    :story:
-
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
-
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
-
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
-
-: foreign_key_pragmas.hpp
-
-We will also have the following ODB files:
-
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ipp
-: foreign_key-odb.ixx
-
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
-
-In addition, on a multi-database environment we also have:
-
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
-- ...
-
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
 
 *** Rename main Dogen package in Debian                               :story:
 
