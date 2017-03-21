@@ -93,7 +93,7 @@ format(const context& ctx, const yarn::element& e) const {
 <#+
         }
 
-        if (!o.databases().empty()) {
+        if (o.databases().size() > 1) {
 #>
 # enable multi-database support
 --multi-database static
@@ -104,6 +104,9 @@ format(const context& ctx, const yarn::element& e) const {
         if (!o.databases().empty()) {
 #>
 # target databases
+<#+
+            if (o.databases().size() > 1)
+#>
 --database common
 <#+
 
