@@ -558,38 +558,53 @@ name resolver::resolve(const intermediate_model& im, const indices& idx,
     return r;
 }
 
-boost::optional<name> resolver::try_resolve_concept_name(const std::string& s,
-    const intermediate_model& im) const {
+boost::optional<name> resolver::try_resolve_concept_name(name ctx,
+    const std::string& s, const intermediate_model& im) const {
+
+    BOOST_LOG_SEV(lg, debug) << "Resolving concept name: " << s;
+
     /*
-     * Compute a tentative yarn name based on the model.
+     * We first start at the same level as the context, including any
+     * internal modules.
      */
+    name n;
+    n.simple(s);
+
     name_factory nf;
-    const auto n(nf.build_element_in_model(im.name(), s));
-    BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+    auto r(nf.build_combined_element_name(ctx, n,
+            true/*populate_model_modules_if_blank*/,
+            true/*populate_internal_modules_if_blank*/));
 
-    /*
-     * If we can locate a concept with that name, the stereotype is
-     * deemed to be referring to it.
-     */
-    const auto i(im.concepts().find(n.id()));
+    BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+
+    auto i(im.concepts().find(r.id()));
     if (i != im.concepts().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
-        return i->second.name();
+        BOOST_LOG_SEV(lg, debug) << "Found concept.";
+        return r;
     }
+    BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
 
     /*
-     * Lets try using the references instead.
+     * If we did not have any luck and there are internal modules, we
+     * start a climb towards the model module and see if that finds us
+     * any concepts.
      */
-    for (const auto& pair : im.references()) {
-        const auto& ref(pair.first);
-        const auto n(nf.build_element_in_model(ref, s));
-        BOOST_LOG_SEV(lg, debug) << "Tentative concept name: " << n;
+    if (!ctx.location().internal_modules().empty()) {
+        do {
+            ctx.location().internal_modules().pop_back();
+            r.location().internal_modules().clear();
+            r = nf.build_combined_element_name(ctx, r,
+                true/*populate_model_modules_if_blank*/,
+                true/*populate_internal_modules_if_blank*/);
 
-        const auto i(im.concepts().find(n.id()));
-        if (i != im.concepts().end()) {
-            BOOST_LOG_SEV(lg, debug) << "Found concept with tentative name.";
-            return i->second.name();
-        }
+            BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
+
+            i = im.concepts().find(r.id());
+            if (i != im.concepts().end()) {
+                BOOST_LOG_SEV(lg, debug) << "Found concept.";
+                return r;
+            }
+        } while (!ctx.location().internal_modules().empty());
     }
 
     /*

@@ -277,7 +277,7 @@ bool stereotypes_expander::try_expand_concept(
     const std::string& s, object& o, const intermediate_model& im) const {
 
     resolver rs;
-    const auto on(rs.try_resolve_concept_name(s, im));
+    const auto on(rs.try_resolve_concept_name(o.name(), s, im));
     if (!on)
         return false;
 

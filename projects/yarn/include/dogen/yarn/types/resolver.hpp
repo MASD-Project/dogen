@@ -151,8 +151,8 @@ public:
     /**
      * @brief Resolves the name as a concept name.
      */
-    boost::optional<name> try_resolve_concept_name(const std::string& s,
-        const intermediate_model& im) const;
+    boost::optional<name> try_resolve_concept_name(name ctx,
+        const std::string& s, const intermediate_model& im) const;
 };
 
 } }
