@@ -8825,6 +8825,9 @@ it in anger with dogen:
   git but the diagram was opened in dia, and did not refresh.
 - crossing lines (associations, etc) should "curve" up so that one can
   still follow the relationship.
+- dia should have a UUID associated with each element so we can track
+  those and know of renames.
+- dia should have an XMI export.
 
 It seems like dia is also using GitHub these days:
 
