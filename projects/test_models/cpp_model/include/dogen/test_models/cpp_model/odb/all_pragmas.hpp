@@ -81,6 +81,7 @@
 #include "dogen/test_models/cpp_model/odb/package_1/class_4_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/package_1/class_5_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/package_2/class_1_pragmas.hpp"
+#include "dogen/test_models/cpp_model/odb/package_2/class_2_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/base_concept_model_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/child_via_settings_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/child_with_members_pragmas.hpp"

@@ -81,6 +81,7 @@
 #include "dogen/test_models/cpp_model/io/package_1/class_4_io.hpp"
 #include "dogen/test_models/cpp_model/io/package_1/class_5_io.hpp"
 #include "dogen/test_models/cpp_model/io/package_2/class_1_io.hpp"
+#include "dogen/test_models/cpp_model/io/package_2/class_2_io.hpp"
 #include "dogen/test_models/cpp_model/io/base_concept_model_io.hpp"
 #include "dogen/test_models/cpp_model/io/child_via_settings_io.hpp"
 #include "dogen/test_models/cpp_model/io/child_with_members_io.hpp"

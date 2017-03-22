@@ -85,6 +85,7 @@
 #include "dogen/test_models/cpp_model/types/package_1/class_4.hpp"
 #include "dogen/test_models/cpp_model/types/package_1/class_5.hpp"
 #include "dogen/test_models/cpp_model/types/package_2/class_1.hpp"
+#include "dogen/test_models/cpp_model/types/package_2/class_2.hpp"
 #include "dogen/test_models/cpp_model/types/service_interface.hpp"
 #include "dogen/test_models/cpp_model/types/base_concept_model.hpp"
 #include "dogen/test_models/cpp_model/types/child_via_settings.hpp"

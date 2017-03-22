@@ -81,6 +81,7 @@
 #include "dogen/test_models/cpp_model/hash/package_1/class_4_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/package_1/class_5_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/package_2/class_1_hash.hpp"
+#include "dogen/test_models/cpp_model/hash/package_2/class_2_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/base_concept_model_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/child_via_settings_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/child_with_members_hash.hpp"

@@ -826,6 +826,27 @@
     },
     {
       "name": {
+        "simple": "class_2",
+        "internal_modules": "package_2"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "class_1"
+        },
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "cpp_model::class_1"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "child",
         "internal_modules": "package_6"
       },

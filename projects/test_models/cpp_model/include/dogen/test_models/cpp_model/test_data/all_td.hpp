@@ -81,6 +81,7 @@
 #include "dogen/test_models/cpp_model/test_data/package_1/class_4_td.hpp"
 #include "dogen/test_models/cpp_model/test_data/package_1/class_5_td.hpp"
 #include "dogen/test_models/cpp_model/test_data/package_2/class_1_td.hpp"
+#include "dogen/test_models/cpp_model/test_data/package_2/class_2_td.hpp"
 #include "dogen/test_models/cpp_model/test_data/base_concept_model_td.hpp"
 #include "dogen/test_models/cpp_model/test_data/child_via_settings_td.hpp"
 #include "dogen/test_models/cpp_model/test_data/child_with_members_td.hpp"

@@ -81,6 +81,7 @@
 #include "dogen/test_models/cpp_model/serialization/package_1/class_4_ser.hpp"
 #include "dogen/test_models/cpp_model/serialization/package_1/class_5_ser.hpp"
 #include "dogen/test_models/cpp_model/serialization/package_2/class_1_ser.hpp"
+#include "dogen/test_models/cpp_model/serialization/package_2/class_2_ser.hpp"
 #include "dogen/test_models/cpp_model/serialization/base_concept_model_ser.hpp"
 #include "dogen/test_models/cpp_model/serialization/child_via_settings_ser.hpp"
 #include "dogen/test_models/cpp_model/serialization/child_with_members_ser.hpp"
