@@ -46,12 +46,14 @@ message(STATUS "Created data set for model: ${model_name}")
 
 set(target_name "diff_${model_name}")
 add_custom_target(${target_name}
+    COMMENT "Diffing ${model_name}"
     COMMAND diff -r -u ${expected_dir} ${actual_dir}
     WORKING_DIRECTORY ${stage_bin_dir})
 add_dependencies(diff_test_models ${target_name})
 
 set(target_name "rebase_${model_name}")
 add_custom_target(${target_name}
+    COMMENT "Rebasing ${model_name}"
     COMMAND rm -rf ${git_dir}
     COMMAND cp -r ${actual_dir}/src ${git_dir}
     WORKING_DIRECTORY ${stage_bin_dir})
@@ -59,6 +61,7 @@ add_dependencies(rebase_test_models ${target_name})
 
 set(target_name "clean_${model_name}")
 add_custom_target(${target_name}
+    COMMENT "Cleaning ${model_name}"
     COMMAND rm -rf ${actual_dir}
     COMMAND mkdir ${actual_dir}
     WORKING_DIRECTORY ${stage_bin_dir})

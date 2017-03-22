@@ -22,6 +22,12 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cc")
 
+set(odb_files "")
+file(GLOB_RECURSE odb_files RELATIVE
+   "${CMAKE_CURRENT_SOURCE_DIR}/"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+set(files ${files} ${odb_files})
+
 add_library(all_path_and_directory_settings STATIC ${files})
 set_target_properties(all_path_and_directory_settings PROPERTIES
     OUTPUT_NAME dogen.all_path_and_directory_settings)

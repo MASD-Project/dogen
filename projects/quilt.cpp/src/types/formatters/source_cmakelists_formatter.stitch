@@ -83,6 +83,18 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.<#= c.implementation_file_extension() #>")
 
+<#+
+        if (a.is_odb_facet_enabled()) {
+#>
+set(odb_files "")
+file(GLOB_RECURSE odb_files RELATIVE
+   "${CMAKE_CURRENT_SOURCE_DIR}/"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+set(files ${files} ${odb_files})
+
+<#+
+        }
+#>
 add_library(<#= model_name #> STATIC ${files})
 set_target_properties(<#= model_name #> PROPERTIES
 <#+

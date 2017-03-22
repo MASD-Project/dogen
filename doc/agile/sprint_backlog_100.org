@@ -12,21 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-22 Wed 16:55]
+#+CAPTION: Clock summary at [2017-03-22 Wed 18:05]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:39* |       |      | 100.0 |
+| *Total time*                                                                | *13:46* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:39   |       |      | 100.0 |
-| Active                                                                      |         | 12:39 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:30 |   4.0 |
-| COMPLETED Header directory is not part of housekeeping                      |         |       | 0:49 |   6.5 |
-| COMPLETED Disable common support on ODB for a single database               |         |       | 0:08 |   1.1 |
-| COMPLETED Concepts cannot be placed inside of packages                      |         |       | 8:26 |  66.7 |
-| STARTED Implement the database model using Northwind                        |         |       | 1:58 |  15.5 |
-| STARTED Allow users to override string prefixes in test data                |         |       | 0:37 |   4.9 |
+| Stories                                                                     | 13:46   |       |      | 100.0 |
+| Active                                                                      |         | 13:46 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:30 |   3.6 |
+| COMPLETED Header directory is not part of housekeeping                      |         |       | 0:49 |   5.9 |
+| COMPLETED Disable common support on ODB for a single database               |         |       | 0:08 |   1.0 |
+| COMPLETED Concepts cannot be placed inside of packages                      |         |       | 8:26 |  61.3 |
+| STARTED Implement the database model using Northwind                        |         |       | 1:58 |  14.3 |
+| STARTED Allow users to override string prefixes in test data                |         |       | 0:37 |   4.5 |
+| STARTED Ignore ODB files automatically                                      |         |       | 0:39 |   4.7 |
+| STARTED Use =cxx= extension with ODB files                                  |         |       | 0:28 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -254,16 +256,8 @@ Tasks:
 - inject a new fabric type for test data configuration. It can be a
   simple struct.
 
-*** ODB options does not cater for types placed in namespaces         :story:
-
-At present the regexes assume the types are placed on the top-level
-ODB directory.
-
-*** Types in namespaces do not have ORM properties applied            :story:
-
-We seem to be missing the schema and in some cases primary key too.
-
-*** Ignore ODB files automatically                                    :story:
+*** STARTED Ignore ODB files automatically                            :story:
+    CLOCK: [2017-03-22 Wed 16:56]--[2017-03-22 Wed 17:35] =>  0:39
 
 At present we are adding the following regular expressions to knitter
 whenever we are using ODB with dogen:
@@ -302,6 +296,40 @@ One of the amazing side-effects of this approach is that we will
 automatically delete any ODB files which are no longer required
 (because we will not generate ignores for them). At present we are
 manually deleting them.
+
+This also means we can add the ODB files to the visual studio project
+even before they get generated.
+
+*** STARTED Use =cxx= extension with ODB files                        :story:
+    CLOCK: [2017-03-22 Wed 17:56]--[2017-03-22 Wed 18:05] =>  0:09
+    CLOCK: [2017-03-22 Wed 17:36]--[2017-03-22 Wed 17:55] =>  0:19
+
+At present we renamed the ODB extension to =.cpp=. This is to make the
+ODB files part of the project:
+
+: set(files "")
+: file(GLOB_RECURSE files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+However, it's quite nice to have distinct extensions for ODB and Dogen
+files. We should add a conditional in CMake that detects ODB and if
+found adds:
+
+: set(odb_files "")
+: file(GLOB_RECURSE odb_files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+: set(files ${files} ${odb_files})
+
+*** ODB options does not cater for types placed in namespaces         :story:
+
+At present the regexes assume the types are placed on the top-level
+ODB directory.
+
+*** Types in namespaces do not have ORM properties applied            :story:
+
+We seem to be missing the schema and in some cases primary key too.
 
 *** Check for incompatibility between input language and enabled kernels :story:
 
@@ -726,26 +754,6 @@ Then hopefully the existing pipeline would take over and we'd generate
 the files for the first time but then let the user overwrite it. This
 would also be applicable to all fabric types (registrar, etc) but we'd
 have to manually read each stereotype on each factory.
-
-*** Use =cxx= extension with ODB files                                :story:
-
-At present we renamed the ODB extension to =.cpp=. This is to make the
-ODB files part of the project:
-
-: set(files "")
-: file(GLOB_RECURSE files RELATIVE
-:    "${CMAKE_CURRENT_SOURCE_DIR}/"
-:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-
-However, it's quite nice to have distinct extensions for ODB and Dogen
-files. We should add a conditional in CMake that detects ODB and if
-found adds:
-
-: set(odb_files "")
-: file(GLOB_RECURSE odb_files RELATIVE
-:    "${CMAKE_CURRENT_SOURCE_DIR}/"
-:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
-: set(files ${files} ${odb_files})
 
 *** Clean up annotation scope types                                   :story:
 

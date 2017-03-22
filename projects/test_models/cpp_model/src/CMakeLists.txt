@@ -22,6 +22,12 @@ file(GLOB_RECURSE files RELATIVE
     "${CMAKE_CURRENT_SOURCE_DIR}/"
     "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
 
+set(odb_files "")
+file(GLOB_RECURSE odb_files RELATIVE
+   "${CMAKE_CURRENT_SOURCE_DIR}/"
+   "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+set(files ${files} ${odb_files})
+
 add_library(cpp_model STATIC ${files})
 set_target_properties(cpp_model PROPERTIES
     OUTPUT_NAME dogen.cpp_model)

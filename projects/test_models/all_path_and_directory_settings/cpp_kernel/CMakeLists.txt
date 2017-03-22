@@ -38,7 +38,7 @@ endif()
 
 add_custom_target(odb_all_path_and_directory_settings
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND mv ${include_odb_dir}/*.cpp ${src_odb_dir})
+    COMMAND mv ${include_odb_dir}/*.cxx ${src_odb_dir})
 
 set(ignore_file false)
 set(include_types_dir "${CMAKE_CURRENT_SOURCE_DIR}/some_include_dir/dogen/test_models/all_path_and_directory_settings/types_dir")

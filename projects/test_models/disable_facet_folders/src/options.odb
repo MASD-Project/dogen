@@ -28,10 +28,10 @@
 --generate-schema
 --schema-format embedded
 
-# use extensions similar to the dogen ones
-# --ixx-suffix .ipp
-# --hxx-suffix .hpp
---cxx-suffix .cpp
+# force odb extensions to be different from dogen ones just in case.
+--ixx-suffix .ixx
+--hxx-suffix .hxx
+--cxx-suffix .cxx
 
 # fix domain includes
 --include-regex '%(.*).hpp%dogen/test_models/disable_facet_folders/$1.hpp%'

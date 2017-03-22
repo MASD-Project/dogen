@@ -105,6 +105,14 @@ a.stream() << "file(GLOB_RECURSE files RELATIVE" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
 a.stream() << "    \"${CMAKE_CURRENT_SOURCE_DIR}/*." << c.implementation_file_extension() << "\")" << std::endl;
 a.stream() << std::endl;
+        if (a.is_odb_facet_enabled()) {
+a.stream() << "set(odb_files \"\")" << std::endl;
+a.stream() << "file(GLOB_RECURSE odb_files RELATIVE" << std::endl;
+a.stream() << "   \"${CMAKE_CURRENT_SOURCE_DIR}/\"" << std::endl;
+a.stream() << "   \"${CMAKE_CURRENT_SOURCE_DIR}/*.cxx\")" << std::endl;
+a.stream() << "set(files ${files} ${odb_files})" << std::endl;
+a.stream() << std::endl;
+        }
 a.stream() << "add_library(" << model_name << " STATIC ${files})" << std::endl;
 a.stream() << "set_target_properties(" << model_name << " PROPERTIES" << std::endl;
         if (a.is_cpp_standard_98()) {

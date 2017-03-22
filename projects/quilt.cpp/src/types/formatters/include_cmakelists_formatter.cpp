@@ -124,7 +124,7 @@ a.stream() << "endif()" << std::endl;
 a.stream() << std::endl;
 a.stream() << "add_custom_target(odb_" << model_name << std::endl;
 a.stream() << "    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl;
-a.stream() << "    COMMAND mv ${include_odb_dir}/*.cpp ${src_odb_dir})" << std::endl;
+a.stream() << "    COMMAND mv ${include_odb_dir}/*.cxx ${src_odb_dir})" << std::endl;
 a.stream() << std::endl;
 a.stream() << "set(ignore_file false)" << std::endl;
 a.stream() << "set(include_types_dir \"${CMAKE_CURRENT_SOURCE_DIR}/" << c.types_include_directory_path() << "\")" << std::endl;
