@@ -6170,6 +6170,9 @@ concept C0 is declared in module M0; all types of M0 can have C0 as
 stereotype and that will resolve. However any types on any other
 module cannot see the concept.
 
+One suggestion is to allow scoped names in stereotypes:
+=module::Concept=.
+
 *** Consider removing filtering ostream                               :story:
 
 Originally we added a boost based stream to handle
