@@ -180,67 +180,6 @@ resolve_name(const intermediate_model& im, const indices& idx,
         }
 
         /*
-         * FIXME: the next two rules are really a bug. At present, if
-         * we have a module in a model say "A" and the user refers to
-         * a type like "A::B", we assume that A must mean module A and
-         * we set the model modules of this property to the model that
-         * contains A (say M). However, let's imagine that there also
-         * is a model called A. Because of this we are now forced to
-         * override the model M with A - which is what the two rules
-         * below do - and see if it matches. This is not very
-         * nice. This means for example that if a user specifically
-         * asks for a type in model A but mistypes it and it happens
-         * that this type also exists in model M, we incorrectly
-         * resolve it.
-         *
-         * An alternative is to not set the model module in cases
-         * where there is a potential conflict and leave it up to
-         * resolver.
-         */
-
-        /*
-         * Now we handle the case where a model has a package with the
-         * same name as a model. In this case, we have mis-classified
-         * a model module into an internal path. We must take the
-         * model's external module path. Let's first try it with the
-         * main model.
-         */
-        /*
-        {
-            BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
-
-            auto r(nf.build_promoted_module_name(im.name(), n));
-            if (is_name_referable(idx, r)) {
-                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-                return r;
-            }
-        }
-        */
-
-        /*
-         * Let's try the same thing but for the references. Note that
-         * we do not need to go through all of this, we could simply
-         * slot the references into a set and see if the internal
-         * module path maps any of the references.
-         */
-        /*
-        BOOST_LOG_SEV(lg, debug) << "Resolving as module collision with"
-                                 << " model name.";
-
-        for (const auto& pair : im.references()) {
-            const auto& ref(pair.first);
-            BOOST_LOG_SEV(lg, debug) << "Resolving using reference: "
-                                     << ref;
-
-            auto r(nf.build_promoted_module_name(context, n));
-            if (is_name_referable(idx, r)) {
-                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-                return r;
-            }
-        }
-        */
-
-        /*
          * The name cannot be resolved.
          */
         BOOST_LOG_SEV(lg, error) << undefined_type << n.id();
@@ -259,65 +198,14 @@ resolve_name(const intermediate_model& im, const indices& idx,
         BOOST_LOG_SEV(lg, debug) << "Name has internal modules.";
 
         /*
-         * First we handle the case where a model has a package with
-         * the same name as a model. In this case, we have
-         * mis-classified a model module into an internal path. We
-         * must take the model's external module path.
-         */
-        {
-            BOOST_LOG_SEV(lg, debug) << "Trying promotion on its own.";
-
-            auto r(nf.build_promoted_module_name(n));
-            if (is_name_referable(idx, r)) {
-                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-                return r;
-            }
-        }
-
-        /*
-         * Now let's try it with the main model.
-         */
-        {
-            BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
-
-            auto r(nf.build_promoted_module_name(im.name(), n));
-            if (is_name_referable(idx, r)) {
-                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-                return r;
-            }
-        }
-
-        /*
-         * Now let's try the same thing but for the references. Note
-         * that we do not need to go through all of this, we could
-         * simply slot the references into a set and see if the
-         * internal module path maps any of the references.
-         */
-        BOOST_LOG_SEV(lg, debug) << "Resolving as module collision with"
-                                 << " model name.";
-
-        for (const auto& pair : im.references()) {
-            const auto& ref(pair.first);
-            BOOST_LOG_SEV(lg, debug) << "Resolving using reference: "
-                                     << ref;
-
-            auto r(nf.build_promoted_module_name(context, n));
-            if (is_name_referable(idx, r)) {
-                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-                return r;
-            }
-        }
-
-        /*
-         * Now we know it's a "real" internal module path. Since the
-         * user has bothered to provide an internal module path, we
-         * should just go with what we got and not worry. This caters
-         * for the case of the user providing an absolute internal
-         * path, either to the current package or to elsewhere in the
-         * same model as the context. Note that we do not support
-         * relative paths from the context (e.g. add the user path to
-         * the context path); we simply assume all provided paths are
-         * absolute.
+         * Since the user has bothered to provide an internal module
+         * path, we should just go with what we got and see if it
+         * resolves. This caters for the case of the user providing an
+         * absolute internal path, either to the current package or to
+         * elsewhere in the same model as the context. Note that we do
+         * not support relative paths from the context (e.g. add the
+         * user path to the context path); we simply assume all
+         * provided paths are absolute.
          *
          * We also handle the case where the context does not have an
          * internal module path - there is not much else we can do.
@@ -330,6 +218,70 @@ resolve_name(const intermediate_model& im, const indices& idx,
         if (is_name_referable(idx, r)) {
             BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
+        }
+
+        /*
+         * Now we handle the case where we have mis-classified a model
+         * module as an internal path. The problem is that when we are
+         * parsing attribute types, we do not know if the user is
+         * referring to an internal module or to a model. So we
+         * classify _everything_ as an internal module. We now need to
+         * try to use the internal module as a model module and see if
+         * it resolves. Note that we handle correctly cases where
+         * there are both an internal module and a model module with
+         * the same name; first we check for the internal module, and
+         * if that fails (above), we check for the model module.
+         */
+        BOOST_LOG_SEV(lg, debug) << "Resolving using internal module promotion.";
+
+        {
+            /*
+             * We first try to promote the internal module without
+             * relying on external modules at all. This catches the
+             * classic "std::string" et al. scenarios.
+             */
+            BOOST_LOG_SEV(lg, debug) << "Trying promotion on its own.";
+
+            auto r(nf.build_promoted_module_name(n));
+            if (is_name_referable(idx, r)) {
+                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+                return r;
+            }
+        }
+
+        {
+            /*
+             * Then we try using the main model's external
+             * modules. This is for cases where the user has made an
+             * explicit reference to the current model (it would fail
+             * because of the missing external modules).
+             */
+
+            BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
+
+            auto r(nf.build_promoted_module_name(im.name(), n));
+            if (is_name_referable(idx, r)) {
+                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+                return r;
+            }
+        }
+
+        /*
+         * Now let's try the same thing but for the references. Note
+         * that we do not really need to go through all of this, we
+         * could simply slot the references into a set and see if the
+         * internal module path maps any of the references.
+         */
+        for (const auto& pair : im.references()) {
+            const auto& ref(pair.first);
+            BOOST_LOG_SEV(lg, debug) << "Resolving using reference: "
+                                     << ref;
+
+            auto r(nf.build_promoted_module_name(context, n));
+            if (is_name_referable(idx, r)) {
+                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+                return r;
+            }
         }
 
         /*
