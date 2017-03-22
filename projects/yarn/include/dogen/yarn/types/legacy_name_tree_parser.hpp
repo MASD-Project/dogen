@@ -44,15 +44,9 @@ public:
     /**
      * @brief Initialises the parser.
      *
-     * @param top_level_modules names of all the top-level modules in
-     * the current model.
-     * @param model_location location for the element representing the
-     * model.
      * @param language what programming language syntax to use.
      */
-    legacy_name_tree_parser(
-        const std::unordered_set<std::string>& top_level_modules,
-        const location& model_location, const languages language);
+    explicit legacy_name_tree_parser(const languages language);
 
 public:
     /**
@@ -61,8 +55,6 @@ public:
     name_tree parse(const std::string& s) const;
 
 private:
-    const std::unordered_set<std::string>& top_level_modules_;
-    const location& model_location_;
     const languages language_;
 };
 

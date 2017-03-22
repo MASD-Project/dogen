@@ -46,18 +46,8 @@ auto lg(logger_factory("yarn.name_tree_builder"));
 namespace dogen {
 namespace yarn {
 
-name_tree_builder::name_tree_builder(
-    const std::unordered_set<std::string>& top_level_modules,
-    const location& model_location)
-    : top_level_modules_(top_level_modules),
-      model_location_(model_location),
-      root_(new node) {
-
-    current_ = root_;
-    BOOST_LOG_SEV(lg, debug) << "Initialised with inputs:";
-    BOOST_LOG_SEV(lg, debug) << "modules: " << top_level_modules_;
-    BOOST_LOG_SEV(lg, debug) << "location: " << model_location_;
-}
+name_tree_builder::name_tree_builder()
+    : root_(new node), current_(root_) {}
 
 void name_tree_builder::add_name(const std::string& s) {
     BOOST_LOG_SEV(lg, debug) << "Pushing back name: '" << s << "'";
@@ -81,8 +71,7 @@ void name_tree_builder::finish_current_node() {
     if (names_.empty())
         return;
 
-    const auto& ml(model_location_);
-    current_->data(name_builder::build(ml, top_level_modules_, names_));
+    current_->data(name_builder::build(names_));
     names_.clear();
 }
 

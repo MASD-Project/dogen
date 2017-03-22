@@ -72,26 +72,18 @@ public:
      * @brief One shot-builder method that, given a list of names,
      * performs some heuristics to build a vaguely plausible name.
      *
-     * @param model_location Location of the model containing the name.
-     * @param top_level_modules Top-level modules of that model.
      * @param names List of names. By copy non-const by design.
      */
-    static name build(const yarn::location& model_location,
-        const std::unordered_set<std::string>& top_level_modules,
-        std::list<std::string> names);
+    static name build(std::list<std::string> names);
 
     /**
      * @brief One shot-builder method that, given a string encoded
      * with a list of names, splits it into a list of names and
      * performs some heuristics to build a vaguely plausible name.
      *
-     * @param model_location Location of the model containing the name.
-     * @param top_level_modules Top-level modules of that model.
      * @param names String encoding a list of names.
      */
-    static name build(const yarn::location& model_location,
-        const std::unordered_set<std::string>& top_level_modules,
-        const std::string& names);
+    static name build(const std::string& names);
 
 private:
     const bool model_name_mode_;

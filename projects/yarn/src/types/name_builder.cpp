@@ -170,10 +170,7 @@ name name_builder::build() {
     return name_;
 }
 
-name name_builder::build(const yarn::location& /*model_location*/,
-    const std::unordered_set<std::string>& /*top_level_modules*/,
-    std::list<std::string> names) {
-
+name name_builder::build(std::list<std::string> names) {
     name_builder b;
 
     /*
@@ -189,25 +186,6 @@ name name_builder::build(const yarn::location& /*model_location*/,
         BOOST_LOG_SEV(lg, debug) << "Simple name: " << front;
         return b.build();
     }
-
-    /*
-     * Check to see if the first name matches a top-level module in
-     * this model. If it does, we must be referencing a type in a
-     * module in the current model. If it does not, we are referencing
-     * a type on a different model, and this is the foreign model
-     * name.
-     */
-    /*
-    const auto i(top_level_modules.find(front));
-    if (i != top_level_modules.end()) {
-        b.model_name(model_location);
-        BOOST_LOG_SEV(lg, debug) << "Found module in current model: " << front;
-    } else {
-        BOOST_LOG_SEV(lg, debug) << "Foreign model name: " << front;
-        b.model_name(front);
-        names.pop_front(); // consume the foreign model name.
-    }
-    */
 
     /*
      * The back of the list must now be the type's simple name.
@@ -229,13 +207,11 @@ name name_builder::build(const yarn::location& /*model_location*/,
     return b.build();
 }
 
-name name_builder::build(const yarn::location& model_location,
-    const std::unordered_set<std::string>& top_level_modules,
-    const std::string& names) {
+name name_builder::build(const std::string& names) {
 
     using utility::string::splitter;
     const auto names_as_list(splitter::split_scoped(names));
-    return build(model_location, top_level_modules, names_as_list);
+    return build(names_as_list);
 }
 
 } }

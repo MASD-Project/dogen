@@ -48,16 +48,13 @@ namespace yarn {
  */
 class name_tree_builder {
 public:
-    name_tree_builder() = delete;
     name_tree_builder(const name_tree_builder&) = delete;
     ~name_tree_builder() = default;
     name_tree_builder(name_tree_builder&&) = delete;
     name_tree_builder& operator=(const name_tree_builder&) = delete;
 
 public:
-    name_tree_builder(
-        const std::unordered_set<std::string>& top_level_modules,
-        const location& model_location);
+    name_tree_builder();
 
 private:
     /**
@@ -107,8 +104,6 @@ public:
     name_tree build();
 
 private:
-    const std::unordered_set<std::string>& top_level_modules_;
-    const location& model_location_;
     std::list<std::string> names_;
     boost::shared_ptr<node> root_;
     boost::shared_ptr<node> current_;

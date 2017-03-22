@@ -116,46 +116,9 @@ obtain_value_attribute_simple_name(const languages l) const {
     } }
 }
 
-
-std::unordered_set<std::string>
-parsing_expander::obtain_top_level_modules(const intermediate_model& m) const {
-    std::unordered_set<std::string> r;
-    BOOST_LOG_SEV(lg, debug) << "Obtaining top-level modules for: "
-                             << m.name().id();
-
-    for (const auto& pair : m.modules()) {
-        const auto& module(pair.second);
-
-        if (!module.contained_by()) {
-            BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
-                                     << pair.first;
-            continue;
-        }
-
-        const auto& cm(*module.contained_by());
-        if (cm != m.name()) {
-            BOOST_LOG_SEV(lg, debug) << "Module is not a top-level module: "
-                                     << pair.first
-                                     << " containing module: "
-                                     << cm.id()
-                                     << " model name: " << m.name().id();
-        }
-        r.insert(module.name().simple());
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Top-level model names for "
-                             << m.name().id() << " : "
-                             << r;
-    return r;
-}
-
 void parsing_expander::
-parse_attributes(const location& model_location,
-    const std::unordered_set<std::string>& top_level_modules,
-    const languages language, std::list<attribute>& attrs) const {
-
-    const auto& tlm(top_level_modules);
-    const legacy_name_tree_parser ntp(tlm, model_location, language);
+parse_attributes(const languages language, std::list<attribute>& attrs) const {
+    const legacy_name_tree_parser ntp(language);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
 
@@ -173,9 +136,7 @@ parse_attributes(const location& model_location,
     }
 }
 
-void parsing_expander::
-parse_parent(const type_group& tg, const location& model_location,
-    const std::unordered_set<std::string>& top_level_modules, object& o) const {
+void parsing_expander::parse_parent(const type_group& tg, object& o) const {
 
     /*
      * Obtain the parent name from the meta-data. If there is no
@@ -199,15 +160,12 @@ parse_parent(const type_group& tg, const location& model_location,
      * Convert the string obtained via meta-data into a yarn name and
      * set it as our parent name.
      */
-    const auto& tpm(top_level_modules);
-    const auto pn(name_builder::build(model_location, tpm, parent));
+    const auto pn(name_builder::build(parent));
     o.parents().push_back(pn);
 }
 
-void parsing_expander::parse_underlying_element(const type_group& tg,
-    const location& model_location,
-    const std::unordered_set<std::string>& top_level_modules,
-    enumeration& e) const {
+void parsing_expander::
+parse_underlying_element(const type_group& tg, enumeration& e) const {
 
     /*
      * Obtain the underlying element name from the meta-data. If there
@@ -232,15 +190,12 @@ void parsing_expander::parse_underlying_element(const type_group& tg,
      * Convert the string obtained via meta-data into a yarn name and
      * set it as our underlying element name.
      */
-    const auto& tpm(top_level_modules);
-    const auto ue(name_builder::build(model_location, tpm, s));
+    const auto ue(name_builder::build(s));
     e.underlying_element(ue);
 }
 
 void parsing_expander::parse_underlying_element(const type_group& tg,
-    const location& model_location, const languages l,
-    const std::unordered_set<std::string>& top_level_modules,
-    primitive& p) const {
+    const languages l, primitive& p) const {
 
     const auto id(p.name().id());
 
@@ -267,7 +222,7 @@ void parsing_expander::parse_underlying_element(const type_group& tg,
     attr.unparsed_type(ut);
     attr.documentation(documentation);
 
-    const legacy_name_tree_parser ntp(top_level_modules, model_location, l);
+    const legacy_name_tree_parser ntp(l);
     auto nt(ntp.parse(ut));
     attr.parsed_type(nt);
 
@@ -277,8 +232,6 @@ void parsing_expander::parse_underlying_element(const type_group& tg,
 void parsing_expander::
 expand(const annotations::type_repository& atrp, intermediate_model& m) const {
     const auto tg(make_type_group(atrp));
-    const auto tlmn(obtain_top_level_modules(m));
-    const auto ml(m.name().location());
     const auto l(m.input_language());
 
     for (auto& pair : m.objects()) {
@@ -286,8 +239,8 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
         const auto id(o.name().id());
 
         try {
-            parse_attributes(ml, tlmn, l, o.local_attributes());
-            parse_parent(tg, ml, tlmn, o);
+            parse_attributes(l, o.local_attributes());
+            parse_parent(tg, o);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
@@ -299,7 +252,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
         const auto id(c.name().id());
 
         try {
-            parse_attributes(ml, tlmn, l, c.local_attributes());
+            parse_attributes(l, c.local_attributes());
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
@@ -311,7 +264,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
         const auto id(e.name().id());
 
         try {
-            parse_underlying_element(tg, ml, tlmn, e);
+            parse_underlying_element(tg, e);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;
@@ -323,7 +276,7 @@ expand(const annotations::type_repository& atrp, intermediate_model& m) const {
         const auto id(p.name().id());
 
         try {
-            parse_underlying_element(tg, ml, l, tlmn, p);
+            parse_underlying_element(tg, l, p);
         } catch (boost::exception& e) {
             e << errmsg_parsing_owner(id);
             throw;

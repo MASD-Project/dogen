@@ -204,17 +204,13 @@ struct grammar : qi::grammar<Iterator> {
 namespace dogen {
 namespace yarn {
 
-legacy_name_tree_parser::legacy_name_tree_parser(
-    const std::unordered_set<std::string>& top_level_modules,
-    const location& model_location, const languages language)
-    : top_level_modules_(top_level_modules), model_location_(model_location),
-      language_(language) {}
+legacy_name_tree_parser::legacy_name_tree_parser(const languages language)
+    : language_(language) {}
 
 name_tree legacy_name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
-    auto builder(std::make_shared<name_tree_builder>(
-            top_level_modules_, model_location_));
+    auto builder(std::make_shared<name_tree_builder>());
     grammar<std::string::const_iterator> g(builder, language_);
 
     std::string::const_iterator i(s.begin());

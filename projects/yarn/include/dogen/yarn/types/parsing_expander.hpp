@@ -76,42 +76,25 @@ private:
 
 private:
     /**
-     * @brief Returns all of the top-level modules in the supplied
-     * model.
-     */
-    std::unordered_set<std::string>
-    obtain_top_level_modules(const intermediate_model& m) const;
-
-private:
-    /**
      * @brief Parses all attributes in the supplied attribute list..
      */
-    void parse_attributes(const location& model_location,
-        const std::unordered_set<std::string>& top_level_modules,
-        const languages language, std::list<attribute>& attrs) const;
+    void parse_attributes(const languages l, std::list<attribute>& attrs) const;
 
     /**
      * @brief Parses parent name in the supplied object.
      */
-    void parse_parent(const type_group& tg, const location& model_location,
-        const std::unordered_set<std::string>& top_level_modules,
-        object& o) const;
+    void parse_parent(const type_group& tg, object& o) const;
 
     /**
      * @brief Parses the underlying element in the supplied
      * enumeration.
      */
-    void parse_underlying_element(const type_group& tg,
-        const location& model_location,
-        const std::unordered_set<std::string>& top_level_modules,
-        enumeration& e) const;
+    void parse_underlying_element(const type_group& tg, enumeration& e) const;
 
     /**
      * @brief Parses underlying element in the supplied primitive.
      */
-    void parse_underlying_element(const type_group& tg,
-        const location& model_location, const languages l,
-        const std::unordered_set<std::string>& top_level_modules,
+    void parse_underlying_element(const type_group& tg, const languages l,
         primitive& p) const;
 
 public:
