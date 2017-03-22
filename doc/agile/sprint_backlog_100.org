@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-22 Wed 18:10]
+#+CAPTION: Clock summary at [2017-03-22 Wed 22:06]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:50* |       |      | 100.0 |
+| *Total time*                                                                | *15:06* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:50   |       |      | 100.0 |
-| Active                                                                      |         | 13:50 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:30 |   3.6 |
-| COMPLETED Header directory is not part of housekeeping                      |         |       | 0:49 |   5.9 |
-| COMPLETED Disable common support on ODB for a single database               |         |       | 0:08 |   1.0 |
-| COMPLETED Concepts cannot be placed inside of packages                      |         |       | 8:26 |  61.0 |
-| COMPLETED Use =cxx= extension with ODB files                                |         |       | 0:32 |   3.9 |
-| STARTED Implement the database model using Northwind                        |         |       | 1:58 |  14.2 |
-| STARTED Allow users to override string prefixes in test data                |         |       | 0:37 |   4.5 |
-| STARTED Ignore ODB files automatically                                      |         |       | 0:39 |   4.7 |
+| Stories                                                                     | 15:06   |       |      | 100.0 |
+| Active                                                                      |         | 15:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.2 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:30 |   3.3 |
+| COMPLETED Header directory is not part of housekeeping                      |         |       | 0:49 |   5.4 |
+| COMPLETED Disable common support on ODB for a single database               |         |       | 0:08 |   0.9 |
+| COMPLETED Concepts cannot be placed inside of packages                      |         |       | 8:26 |  55.8 |
+| COMPLETED Use =cxx= extension with ODB files                                |         |       | 0:32 |   3.5 |
+| STARTED Implement the database model using Northwind                        |         |       | 1:58 |  13.0 |
+| STARTED Allow users to override string prefixes in test data                |         |       | 0:37 |   4.1 |
+| STARTED Ignore ODB files automatically                                      |         |       | 1:55 |  12.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -281,6 +281,7 @@ Tasks:
   simple struct.
 
 *** STARTED Ignore ODB files automatically                            :story:
+    CLOCK: [2017-03-22 Wed 20:45]--[2017-03-22 Wed 22:01] =>  1:16
     CLOCK: [2017-03-22 Wed 16:56]--[2017-03-22 Wed 17:35] =>  0:39
 
 At present we are adding the following regular expressions to knitter
@@ -323,6 +324,31 @@ manually deleting them.
 
 This also means we can add the ODB files to the visual studio project
 even before they get generated.
+
+*** Improve ODB implementation                                        :story:
+
+We have a number of stories related to ODB problems. Basically our
+current implementation is too brittle:
+
+- we cannot easily ignore ODB files;
+- our ODB targets stop working when we place elements arbitrarily in
+  element space.
+
+The key problem is that we made a lot of assumptions about where the
+ODB files (both inputs and outputs) were to be placed and we are now
+paying the price. The right solution for this is to take out all of
+the inputs for the CMakeLists and create types for them:
+
+- augment ODB options with missing parameters;
+- add database types to formattables model, and add "to string";
+- create a type to represent the ODB targets and add it to
+  formattables model. Must also include the regexes too. We should
+  exclude all types that have "generate ORM mapping" set to false.
+
+With all of this data we can now:
+
+- supply it to CMakeLists and create explicit targets for each file.
+- create a msbuild proj file for windows with explicit targets.
 
 *** ODB options does not cater for types placed in namespaces         :story:
 
