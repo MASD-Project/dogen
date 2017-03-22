@@ -55,6 +55,8 @@ public:
     name build_element_name(const std::string& simple_name) const;
     name build_element_name(const std::string& model_name,
         const std::string& simple_name) const;
+    name build_element_name(const std::string& simple_name,
+        const std::list<std::string>& internal_modules) const;
     /**@}*/
 
     /**
@@ -101,8 +103,11 @@ public:
      * @brief Promotes the first name of the internal module path to
      * become the model name.
      */
+    /**@{*/
+    name build_promoted_module_name(const name& element_name) const;
     name build_promoted_module_name(const name& model_name,
         const name& element_name) const;
+    /**@}*/
 
     /**
      * @brief Builds an attribute name.

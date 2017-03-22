@@ -154,8 +154,8 @@ parse_attributes(const location& model_location,
     const std::unordered_set<std::string>& top_level_modules,
     const languages language, std::list<attribute>& attrs) const {
 
-    const legacy_name_tree_parser
-        ntp(top_level_modules, model_location, language);
+    const auto& tlm(top_level_modules);
+    const legacy_name_tree_parser ntp(tlm, model_location, language);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
 

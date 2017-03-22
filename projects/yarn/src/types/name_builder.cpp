@@ -170,8 +170,8 @@ name name_builder::build() {
     return name_;
 }
 
-name name_builder::build(const yarn::location& model_location,
-    const std::unordered_set<std::string>& top_level_modules,
+name name_builder::build(const yarn::location& /*model_location*/,
+    const std::unordered_set<std::string>& /*top_level_modules*/,
     std::list<std::string> names) {
 
     name_builder b;
@@ -197,6 +197,7 @@ name name_builder::build(const yarn::location& model_location,
      * a type on a different model, and this is the foreign model
      * name.
      */
+    /*
     const auto i(top_level_modules.find(front));
     if (i != top_level_modules.end()) {
         b.model_name(model_location);
@@ -206,6 +207,7 @@ name name_builder::build(const yarn::location& model_location,
         b.model_name(front);
         names.pop_front(); // consume the foreign model name.
     }
+    */
 
     /*
      * The back of the list must now be the type's simple name.

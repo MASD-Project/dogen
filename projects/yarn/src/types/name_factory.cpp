@@ -61,6 +61,17 @@ name name_factory::build_element_name(const std::string& model_name,
     return b.build();
 }
 
+name name_factory::build_element_name(const std::string& simple_name,
+    const std::list<std::string>& internal_modules) const {
+
+    yarn::name n;
+    n.simple(simple_name);
+    n.location().internal_modules(internal_modules);
+
+    name_builder b(n);
+    return b.build();
+}
+
 name name_factory::build_element_in_model(const name& model_name,
     const std::string& simple_name) const {
 
@@ -170,14 +181,39 @@ name name_factory::build_combined_element_name(const name& model_name,
     return b.build();
 }
 
+name name_factory::build_promoted_module_name(const name& element_name) const {
+    name n;
+    n.simple(element_name.simple());
+
+    const auto& l(element_name.location());
+
+    /*
+     * We can only promote the internal module to model name if the
+     * name does not have any internal modules already.
+     */
+    if (!l.internal_modules().empty()) {
+        auto im(l.internal_modules());
+        n.location().model_modules().push_back(im.front());
+        im.pop_front();
+        n.location().internal_modules(im);
+    }
+
+    name_builder b(n);
+    return b.build();
+}
+
 name name_factory::build_promoted_module_name(const name& model_name,
     const name& element_name) const {
     name n;
     n.simple(element_name.simple());
 
     const auto& l(element_name.location());
-    if (!l.internal_modules().empty())
-        n.location().model_modules().push_back(l.internal_modules().front());
+    if (!l.internal_modules().empty()) {
+        auto im(l.internal_modules());
+        n.location().model_modules().push_back(im.front());
+        im.pop_front();
+        n.location().internal_modules(im);
+    }
 
     n.location().external_modules(model_name.location().external_modules());
 

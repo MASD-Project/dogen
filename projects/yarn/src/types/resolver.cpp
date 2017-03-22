@@ -205,6 +205,7 @@ resolve_name(const intermediate_model& im, const indices& idx,
          * model's external module path. Let's first try it with the
          * main model.
          */
+        /*
         {
             BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
 
@@ -214,6 +215,7 @@ resolve_name(const intermediate_model& im, const indices& idx,
                 return r;
             }
         }
+        */
 
         /*
          * Let's try the same thing but for the references. Note that
@@ -221,6 +223,7 @@ resolve_name(const intermediate_model& im, const indices& idx,
          * slot the references into a set and see if the internal
          * module path maps any of the references.
          */
+        /*
         BOOST_LOG_SEV(lg, debug) << "Resolving as module collision with"
                                  << " model name.";
 
@@ -235,6 +238,7 @@ resolve_name(const intermediate_model& im, const indices& idx,
                 return r;
             }
         }
+        */
 
         /*
          * The name cannot be resolved.
@@ -258,8 +262,20 @@ resolve_name(const intermediate_model& im, const indices& idx,
          * First we handle the case where a model has a package with
          * the same name as a model. In this case, we have
          * mis-classified a model module into an internal path. We
-         * must take the model's external module path. Let's first try
-         * it with the main model.
+         * must take the model's external module path.
+         */
+        {
+            BOOST_LOG_SEV(lg, debug) << "Trying promotion on its own.";
+
+            auto r(nf.build_promoted_module_name(n));
+            if (is_name_referable(idx, r)) {
+                BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
+                return r;
+            }
+        }
+
+        /*
+         * Now let's try it with the main model.
          */
         {
             BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
