@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-22 Wed 18:05]
+#+CAPTION: Clock summary at [2017-03-22 Wed 18:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:46* |       |      | 100.0 |
+| *Total time*                                                                | *13:50* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:46   |       |      | 100.0 |
-| Active                                                                      |         | 13:46 |      | 100.0 |
+| Stories                                                                     | 13:50   |       |      | 100.0 |
+| Active                                                                      |         | 13:50 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:11 |   1.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:30 |   3.6 |
 | COMPLETED Header directory is not part of housekeeping                      |         |       | 0:49 |   5.9 |
 | COMPLETED Disable common support on ODB for a single database               |         |       | 0:08 |   1.0 |
-| COMPLETED Concepts cannot be placed inside of packages                      |         |       | 8:26 |  61.3 |
-| STARTED Implement the database model using Northwind                        |         |       | 1:58 |  14.3 |
+| COMPLETED Concepts cannot be placed inside of packages                      |         |       | 8:26 |  61.0 |
+| COMPLETED Use =cxx= extension with ODB files                                |         |       | 0:32 |   3.9 |
+| STARTED Implement the database model using Northwind                        |         |       | 1:58 |  14.2 |
 | STARTED Allow users to override string prefixes in test data                |         |       | 0:37 |   4.5 |
 | STARTED Ignore ODB files automatically                                      |         |       | 0:39 |   4.7 |
-| STARTED Use =cxx= extension with ODB files                                  |         |       | 0:28 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -162,6 +162,30 @@ We just fail to resole them and do not even throw an error.
 
 We can either always place concepts on the model namespace or we can
 fix resolver to default to current scope.
+
+*** COMPLETED Use =cxx= extension with ODB files                      :story:
+    CLOSED: [2017-03-22 Wed 18:10]
+    CLOCK: [2017-03-22 Wed 18:06]--[2017-03-22 Wed 18:10] =>  0:04
+    CLOCK: [2017-03-22 Wed 17:56]--[2017-03-22 Wed 18:05] =>  0:09
+    CLOCK: [2017-03-22 Wed 17:36]--[2017-03-22 Wed 17:55] =>  0:19
+
+At present we renamed the ODB extension to =.cpp=. This is to make the
+ODB files part of the project:
+
+: set(files "")
+: file(GLOB_RECURSE files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
+
+However, it's quite nice to have distinct extensions for ODB and Dogen
+files. We should add a conditional in CMake that detects ODB and if
+found adds:
+
+: set(odb_files "")
+: file(GLOB_RECURSE odb_files RELATIVE
+:    "${CMAKE_CURRENT_SOURCE_DIR}/"
+:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
+: set(files ${files} ${odb_files})
 
 *** STARTED Implement the database model using Northwind              :story:
     CLOCK: [2017-03-20 Mon 20:45]--[2017-03-20 Mon 22:43] =>  1:58
@@ -299,28 +323,6 @@ manually deleting them.
 
 This also means we can add the ODB files to the visual studio project
 even before they get generated.
-
-*** STARTED Use =cxx= extension with ODB files                        :story:
-    CLOCK: [2017-03-22 Wed 17:56]--[2017-03-22 Wed 18:05] =>  0:09
-    CLOCK: [2017-03-22 Wed 17:36]--[2017-03-22 Wed 17:55] =>  0:19
-
-At present we renamed the ODB extension to =.cpp=. This is to make the
-ODB files part of the project:
-
-: set(files "")
-: file(GLOB_RECURSE files RELATIVE
-:    "${CMAKE_CURRENT_SOURCE_DIR}/"
-:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cpp")
-
-However, it's quite nice to have distinct extensions for ODB and Dogen
-files. We should add a conditional in CMake that detects ODB and if
-found adds:
-
-: set(odb_files "")
-: file(GLOB_RECURSE odb_files RELATIVE
-:    "${CMAKE_CURRENT_SOURCE_DIR}/"
-:    "${CMAKE_CURRENT_SOURCE_DIR}/*.cxx")
-: set(files ${files} ${odb_files})
 
 *** ODB options does not cater for types placed in namespaces         :story:
 
