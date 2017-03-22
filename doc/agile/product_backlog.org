@@ -6161,6 +6161,15 @@ error at model building time if an user tries to do this.
 This bucket contains stories with ideas that have potential but for
 which we do not currently have a use case.
 
+*** Cannot make qualified references to concepts                      :story:
+
+At present it is not possible to consume concepts defined in a
+referenced model, nor is it possible to refer to a concept in a
+different module from the module in which the element is in, e.g.: say
+concept C0 is declared in module M0; all types of M0 can have C0 as
+stereotype and that will resolve. However any types on any other
+module cannot see the concept.
+
 *** Consider removing filtering ostream                               :story:
 
 Originally we added a boost based stream to handle
