@@ -56,6 +56,7 @@ public:
     name_builder& simple_name(const std::string& sn);
     name_builder& model_name(const std::string& mn);
     name_builder& model_name(const yarn::location& l);
+    name_builder& model_modules(const std::string& mm);
     name_builder& model_modules(const std::list<std::string>& mm);
     name_builder& internal_modules(const std::string& im);
     name_builder& internal_modules(const std::list<std::string>& im);

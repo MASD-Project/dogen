@@ -149,14 +149,21 @@ name name_factory::build_module_name(const name& model_name,
 
 name name_factory::build_combined_element_name(const name& model_name,
     const name& partial_element_name,
-    const bool populate_model_name_if_blank) const {
+    const bool populate_model_modules_if_blank,
+    const bool populate_internal_modules_if_blank) const {
     name n(partial_element_name);
 
     const auto& l(model_name.location());
-    if (populate_model_name_if_blank &&
+    if (populate_model_modules_if_blank &&
         n.location().model_modules().empty()) {
         n.location().model_modules(l.model_modules());
     }
+
+    if (populate_internal_modules_if_blank &&
+        n.location().internal_modules().empty()) {
+        n.location().internal_modules(l.internal_modules());
+    }
+
     n.location().external_modules(l.external_modules());
 
     name_builder b(n);

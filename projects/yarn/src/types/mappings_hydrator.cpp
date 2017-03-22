@@ -107,7 +107,7 @@ name mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
 
     const auto mm(pt.get<std::string>(model_modules_key, empty));
     if (!mm.empty())
-        b.internal_modules(mm);
+        b.model_modules(mm);
 
     const auto r(b.build());
     return r;

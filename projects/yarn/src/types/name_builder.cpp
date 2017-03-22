@@ -39,6 +39,7 @@ auto lg(logger_factory("yarn.name_builder"));
 
 const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
+const std::string empty_model_modules("Model modules are empty.");
 const std::string empty_internal_modules("Internal modules are empty.");
 const std::string unexpected_simple_name("Simple name is not expected.");
 
@@ -101,6 +102,18 @@ name_builder& name_builder::model_name(const yarn::location& l) {
     name_.location().model_modules(l.model_modules());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
+    return *this;
+}
+
+name_builder& name_builder::model_modules(const std::string& mm) {
+    if (mm.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_model_modules));
+    }
+
+    using utility::string::splitter;
+    name_.location().model_modules(splitter::split_scoped(mm));
+    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
     return *this;
 }
 

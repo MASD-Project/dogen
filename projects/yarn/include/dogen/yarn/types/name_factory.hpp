@@ -94,7 +94,8 @@ public:
      */
     name build_combined_element_name(const name& model_name,
         const name& partial_element_name,
-        const bool populate_model_name_if_blank = false) const;
+        const bool populate_model_modules_if_blank = false,
+        const bool populate_internal_modules_if_blank = false) const;
 
     /**
      * @brief Promotes the first name of the internal module path to
