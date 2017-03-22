@@ -121,85 +121,27 @@ bool resolver::is_name_referable(const indices& idx, const name& n) const {
     return false;
 }
 
-name resolver::resolve_name_with_model_modules(const intermediate_model& im,
-    const indices& idx, const name& context, const name& n) const {
-
-    /*
-     * If the user has explicitly asked for a set of model
-     * modules, the name is either correct as-is or it can only be
-     * missing the external module path from either the context or
-     * the references. Note that we always assume the types are
-     * fully qualified when the user has populated the model
-     * modules.
-     */
-    BOOST_LOG_SEV(lg, debug) << "Name has model modules.";
-    name_factory nf;
-
-    /*
-     * First we try as-is.
-     */
-    BOOST_LOG_SEV(lg, debug) << "Resolving as is.";
-    if (is_name_referable(idx, n)) {
-        BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-        return n;
-    }
-
-    /*
-     * Now we try using the context's external modules.
-     */
-    {
-        BOOST_LOG_SEV(lg, debug) << "Resolving using context: " << context;
-        auto r(nf.build_combined_element_name(context, n));
-        if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-            return r;
-        }
-    }
-
-    /*
-     * Does the name must belong to a reference?
-     */
-    for (const auto& pair : im.references()) {
-        const auto& ref(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Resolving using reference: " << ref;
-        const auto r(nf.build_combined_element_name(ref, n));
-
-        if (is_name_referable(idx, r)) {
-            BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
-            return r;
-        }
-    }
-
-    /*
-     * The name cannot be resolved.
-     */
-    BOOST_LOG_SEV(lg, error) << undefined_type << n.id();
-    BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
-}
-
 name resolver::resolve_name_with_internal_modules(const intermediate_model& im,
-    const indices& idx, const name& context, const name& n) const {
+    const indices& idx, const name& ctx, const name& n) const {
 
     /*
-     * Since the user has bothered to provide an internal module
-     * path, we should just go with what we got and see if it
-     * resolves. This caters for the case of the user providing an
-     * absolute internal path, either to the current package or to
-     * elsewhere in the same model as the context. Note that we do
-     * not support relative paths from the context (e.g. add the
-     * user path to the context path); we simply assume all
-     * provided paths are absolute.
+     * Since the user has bothered to provide an internal module path,
+     * we should just go with what we got and see if it resolves. This
+     * caters for the case of the user providing an absolute internal
+     * path, either to the current package or to elsewhere in the same
+     * model as the context.
      *
-     * We also handle the case where the context does not have an
-     * internal module path - there is not much else we can do.
+     * Very important: we do not support relative paths from the
+     * context - e.g. add the user path to the context path. We simply
+     * assume all paths provided are absolute. Thus if there is an
+     * internal path in the context as well, we simply ignore it. This
+     * may be a surprising behaviour for some users so we may need to
+     * revisit it in the future.
      */
-    BOOST_LOG_SEV(lg, debug) << "Name has internal modules.";
-
     name_factory nf;
-    auto r(nf.build_combined_element_name(context, n,
+    auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/));
-
-    BOOST_LOG_SEV(lg, debug) << "With internal modules supplied: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Resolving with internal modules: " << r;
 
     if (is_name_referable(idx, r)) {
         BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
@@ -210,13 +152,17 @@ name resolver::resolve_name_with_internal_modules(const intermediate_model& im,
      * Now we handle the case where we have mis-classified a model
      * module as an internal path. The problem is that when we are
      * parsing attribute types, we do not know if the user is
-     * referring to an internal module or to a model. So we
-     * classify _everything_ as an internal module. We now need to
-     * try to use the internal module as a model module and see if
-     * it resolves. Note that we handle correctly cases where
-     * there are both an internal module and a model module with
-     * the same name; first we check for the internal module, and
-     * if that fails (above), we check for the model module.
+     * referring to an internal module or to a model. So at parsing
+     * time we classify /everything/ as an internal module. At
+     * resolution time, we are now left with the task of trying to
+     * figure out the real internal modules from the model
+     * modules. The only way to do this is to try it and see if it
+     * resolves.
+     *
+     * Note that we handle correctly cases where there are both an
+     * internal module and a model module with the same name; first we
+     * check for the internal module, and if that fails (above), we
+     * then check for the model module.
      */
     BOOST_LOG_SEV(lg, debug) << "Resolving using internal module promotion.";
 
@@ -237,12 +183,11 @@ name resolver::resolve_name_with_internal_modules(const intermediate_model& im,
 
     {
         /*
-         * Then we try using the main model's external
-         * modules. This is for cases where the user has made an
-         * explicit reference to the current model (it would fail
-         * because of the missing external modules).
+         * Then we try using the main model's external modules. This
+         * is for cases where the user has made an explicit reference
+         * to the current model - it would fail because of the missing
+         * external modules.
          */
-
         BOOST_LOG_SEV(lg, debug) << "Resolving using model: " << im.name();
 
         auto r(nf.build_promoted_module_name(im.name(), n));
@@ -263,7 +208,7 @@ name resolver::resolve_name_with_internal_modules(const intermediate_model& im,
         BOOST_LOG_SEV(lg, debug) << "Resolving using reference: "
                                  << ref;
 
-        auto r(nf.build_promoted_module_name(context, n));
+        auto r(nf.build_promoted_module_name(ctx, n));
         if (is_name_referable(idx, r)) {
             BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
@@ -278,8 +223,8 @@ name resolver::resolve_name_with_internal_modules(const intermediate_model& im,
 }
 
 boost::optional<name>
-resolver::try_resolve_name_with_context_with_internal_modules(
-    const indices& idx, name context, const name& n) const {
+resolver::try_resolve_name_with_context_internal_modules(const indices& idx,
+    name ctx, const name& n) const {
 
     BOOST_LOG_SEV(lg, debug) << "Context has internal modules.";
 
@@ -290,15 +235,15 @@ resolver::try_resolve_name_with_context_with_internal_modules(
      * allows us to refer to types inside a package without
      * having to fully qualify them.
      *
-     * We start at the outermost internal module and make our
-     * way upwards.
+     * We start at the innermost internal module and make our way
+     * upwards.
      */
     name_factory nf;
-    auto r(nf.build_combined_element_name(context, n,
+    auto r(nf.build_combined_element_name(ctx, n,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/));
 
-    BOOST_LOG_SEV(lg, debug) << "Internal modules descent: " << r;
+    BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
 
     if (is_name_referable(idx, r)) {
         BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
@@ -306,73 +251,68 @@ resolver::try_resolve_name_with_context_with_internal_modules(
     }
 
     do {
-        context.location().internal_modules().pop_back();
+        ctx.location().internal_modules().pop_back();
         r.location().internal_modules().clear();
-        r = nf.build_combined_element_name(context, r,
+        r = nf.build_combined_element_name(ctx, r,
             true/*populate_model_modules_if_blank*/,
             true/*populate_internal_modules_if_blank*/);
 
-        BOOST_LOG_SEV(lg, debug) << "Internal modules descent: " << r;
+        BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
 
         if (is_name_referable(idx, r)) {
             BOOST_LOG_SEV(lg, debug) << "Resolution succeeded.";
             return r;
         }
-    } while (!context.location().internal_modules().empty());
+    } while (!ctx.location().internal_modules().empty());
 
+    /*
+     * If we didn't find anything, we should not throw as there still
+     * are other possibilities left to try.
+     */
     return boost::optional<name>();
 }
 
-name resolver::
-resolve_name(const intermediate_model& im, const indices& idx,
-    const name& context, const name& n) const {
+name resolver:: resolve_name(const intermediate_model& im, const indices& idx,
+    const name& ctx, const name& n) const {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
     BOOST_LOG_SEV(lg, debug) << "Initial state: " << n;
-    BOOST_LOG_SEV(lg, debug) << "Context: " << context;
+    BOOST_LOG_SEV(lg, debug) << "Context: " << ctx;
 
     /*
-     * If the user has supplied model modules, this takes priority
-     * over all cases.
+     * If the user has supplied internal modules we must use those, to
+     * the exclusion of everything else.
      */
-    const auto& l(n.location());
-    const bool has_model_modules(!l.model_modules().empty());
-    if (has_model_modules)
-        return resolve_name_with_model_modules(im, idx, context, n);
+    if (!n.location().internal_modules().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Name has internal modules.";
+        return resolve_name_with_internal_modules(im, idx, ctx, n);
+    }
 
     /*
-     * If the user has not supplied model modules, there are only two
-     * possibilities: it is either referring to a name in the current
-     * context or a name in the global module. The current context
-     * takes precedence.
+     * If the context has internal modules we should try to use those
+     * and see if anything comes up.
      */
-    BOOST_LOG_SEV(lg, debug) << "Name does not have model modules.";
-    const bool has_internal_modules(!l.internal_modules().empty());
-    if (has_internal_modules)
-        return resolve_name_with_internal_modules(im, idx, context, n);
-
     BOOST_LOG_SEV(lg, debug) << "Name does not have internal modules.";
-
-    name_factory nf;
-    const bool context_has_internal_modules(
-        !context.location().internal_modules().empty());
-    if (context_has_internal_modules) {
-        const auto r(try_resolve_name_with_context_with_internal_modules(
-                idx, context, n));
-
+    if (!ctx.location().internal_modules().empty()) {
+        auto r(try_resolve_name_with_context_internal_modules(idx, ctx, n));
         if (r)
             return *r;
+
+        BOOST_LOG_SEV(lg, debug) << "Failed to resolve with context's "
+                                 << "internal modules.";
     } else
         BOOST_LOG_SEV(lg, debug) << "Context does not have internal modules.";
 
     /*
-     * If the name has no internal or external modules, and the
-     * context hasn't got them either (or it did, but it didn't help),
-     * then perhaps the user just wants to refer to a type in the
-     * model.
+     * Perhaps the user just wants to refer to a type in the current
+     * model. We use the context to obtain both the module path and
+     * the external module path. The scenario is that the user
+     * provided a name but said nothing else about it, so we assume it
+     * refers to something in the current context.
      */
+    name_factory nf;
     {
-        auto r(nf.build_combined_element_name(context, n,
+        auto r(nf.build_combined_element_name(ctx, n,
                 true/*populate_model_modules_if_blank*/));
 
         if (is_name_referable(idx, r)) {
@@ -382,8 +322,8 @@ resolve_name(const intermediate_model& im, const indices& idx,
     }
 
     /*
-     * Finally, the only other possibility is that the name is on
-     * the global module.
+     * Finally, the only other possibility is that the name is on the
+     * global module.
      */
     BOOST_LOG_SEV(lg, debug) << "Trying global module.";
     if (is_name_referable(idx, n)) {
@@ -610,9 +550,9 @@ void resolver::resolve(const indices& idx, intermediate_model& im) const {
 }
 
 name resolver::resolve(const intermediate_model& im, const indices& idx,
-    const name& context, const name& n) const {
+    const name& ctx, const name& n) const {
 
-    const auto r(resolve_name(im, idx, context, n));
+    const auto r(resolve_name(im, idx, ctx, n));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
                              << " to: " << r.id();
     return r;

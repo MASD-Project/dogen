@@ -63,28 +63,22 @@ private:
     bool is_name_referable(const indices& idx, const name& n) const;
 
     /**
-     * @brief Resolves a name that has model modules set.
-     */
-    name resolve_name_with_model_modules(const intermediate_model& im,
-        const indices& idx, const name& context, const name& n) const;
-
-    /**
      * @brief Resolves a name that has internal modules set.
      */
     name resolve_name_with_internal_modules(const intermediate_model& im,
-        const indices& idx, const name& context, const name& n) const;
+        const indices& idx, const name& ctx, const name& n) const;
 
     /**
-     * @brief Resolves a name where the context has internal modules.
+     * @brief Resolves a name where the ctx has internal modules.
      */
-    boost::optional<name> try_resolve_name_with_context_with_internal_modules(
-        const indices& idx, name context, const name& n) const;
+    boost::optional<name> try_resolve_name_with_context_internal_modules(
+        const indices& idx, name ctx, const name& n) const;
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
     name resolve_name(const intermediate_model& im, const indices& idx,
-        const name& context, const name& n) const;
+        const name& ctx, const name& n) const;
 
     /**
      * @brief Resolves all references contained in a name tree.
@@ -152,7 +146,7 @@ public:
      * @brief Resolves the name against the supplied model.
      */
     name resolve(const intermediate_model& im, const indices& idx,
-        const name& context, const name& n) const;
+        const name& ctx, const name& n) const;
 
     /**
      * @brief Resolves the name as a concept name.

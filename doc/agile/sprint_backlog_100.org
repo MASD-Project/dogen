@@ -201,6 +201,7 @@ Tasks:
   simple struct.
 
 *** STARTED Concepts cannot be placed inside of packages              :story:
+    CLOCK: [2017-03-22 Wed 15:21]--[2017-03-22 Wed 15:47] =>  0:26
     CLOCK: [2017-03-22 Wed 14:35]--[2017-03-22 Wed 15:20] =>  0:45
     CLOCK: [2017-03-22 Wed 14:03]--[2017-03-22 Wed 14:34] =>  0:31
     CLOCK: [2017-03-22 Wed 12:44]--[2017-03-22 Wed 12:59] =>  0:15
