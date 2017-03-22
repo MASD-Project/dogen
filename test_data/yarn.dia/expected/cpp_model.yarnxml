@@ -49,16 +49,86 @@
 		<item_version>0</item_version>
 	</leaves>
 	<modules class_id="21" tracking_level="0" version="0">
-		<count>12</count>
+		<count>13</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="22" tracking_level="0" version="0">
-			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_9&gt;</first>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_10&gt;</first>
 			<second class_id="9" tracking_level="1" version="0" object_id="_0">
 				<element class_id="23" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation class_id="24" tracking_level="0" version="0">
 						<entries class_id="25" tracking_level="0" version="0">
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_10&gt;</id>
+						<simple>package_10</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::cpp_model::package_10</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.cpp_model.package_10</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>cpp_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_cpp_model_package_10</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by class_id="26" tracking_level="0" version="0">
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes class_id="27" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<members>
+					<count>0</count>
+					<item_version>0</item_version>
+				</members>
+				<is_root>0</is_root>
+				<is_global_module>0</is_global_module>
+				<orm_properties class_id="28" tracking_level="0" version="0">
+					<initialized>0</initialized>
+				</orm_properties>
+			</second>
+		</item>
+		<item>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_9&gt;</first>
+			<second object_id="_1">
+				<element>
+					<documentation></documentation>
+					<annotation>
+						<entries>
 							<count>0</count>
 							<bucket_count>1</bucket_count>
 							<item_version>0</item_version>
@@ -101,11 +171,11 @@
 						<identifiable>dogen_test_models_cpp_model_package_9</identifiable>
 					</name>
 					<origin_type>4</origin_type>
-					<contained_by class_id="26" tracking_level="0" version="0">
+					<contained_by>
 						<initialized>0</initialized>
 					</contained_by>
 					<in_global_module>0</in_global_module>
-					<stereotypes class_id="27" tracking_level="0" version="0">
+					<stereotypes>
 						<count>0</count>
 						<item_version>0</item_version>
 					</stereotypes>
@@ -117,14 +187,14 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_properties class_id="28" tracking_level="0" version="0">
+				<orm_properties>
 					<initialized>0</initialized>
 				</orm_properties>
 			</second>
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_4&gt;</first>
-			<second object_id="_1">
+			<second object_id="_2">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -194,7 +264,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_1&gt;</first>
-			<second object_id="_2">
+			<second object_id="_3">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -264,7 +334,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_0&gt;</first>
-			<second object_id="_3">
+			<second object_id="_4">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -334,7 +404,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;</first>
-			<second object_id="_4">
+			<second object_id="_5">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -404,7 +474,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_7&gt;</first>
-			<second object_id="_5">
+			<second object_id="_6">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -474,7 +544,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_3&gt;&lt;package_1&gt;</first>
-			<second object_id="_6">
+			<second object_id="_7">
 				<element>
 					<documentation>inner package
 </documentation>
@@ -546,7 +616,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_5&gt;</first>
-			<second object_id="_7">
+			<second object_id="_8">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -616,7 +686,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_2&gt;</first>
-			<second object_id="_8">
+			<second object_id="_9">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -686,7 +756,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_6&gt;</first>
-			<second object_id="_9">
+			<second object_id="_10">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -756,7 +826,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_3&gt;</first>
-			<second object_id="_10">
+			<second object_id="_11">
 				<element>
 					<documentation>package
 </documentation>
@@ -827,7 +897,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_8&gt;</first>
-			<second object_id="_11">
+			<second object_id="_12">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -897,15 +967,14 @@
 		</item>
 	</modules>
 	<concepts class_id="29" tracking_level="0" version="0">
-		<count>7</count>
+		<count>8</count>
 		<bucket_count>11</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="30" tracking_level="0" version="0">
-			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;MultipleRefinements&gt;</first>
-			<second class_id="6" tracking_level="1" version="0" object_id="_12">
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_10&gt;&lt;ConceptInAPackage&gt;</first>
+			<second class_id="6" tracking_level="1" version="0" object_id="_13">
 				<element>
-					<documentation>Multiple refinements concept
-</documentation>
+					<documentation></documentation>
 					<annotation>
 						<entries>
 							<count>0</count>
@@ -915,18 +984,18 @@
 						<scope>0</scope>
 					</annotation>
 					<name>
-						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;MultipleRefinements&gt;</id>
-						<simple>MultipleRefinements</simple>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_10&gt;&lt;ConceptInAPackage&gt;</id>
+						<simple>ConceptInAPackage</simple>
 						<qualified>
 							<count>2</count>
 							<item_version>0</item_version>
 							<item>
 								<first>1</first>
-								<second>dogen::test_models::cpp_model::MultipleRefinements</second>
+								<second>dogen::test_models::cpp_model::package_10::ConceptInAPackage</second>
 							</item>
 							<item>
 								<first>2</first>
-								<second>dogen.test_models.cpp_model.MultipleRefinements</second>
+								<second>dogen.test_models.cpp_model.package_10.ConceptInAPackage</second>
 							</item>
 						</qualified>
 						<location>
@@ -942,12 +1011,13 @@
 								<item>cpp_model</item>
 							</model_modules>
 							<internal_modules>
-								<count>0</count>
+								<count>1</count>
 								<item_version>0</item_version>
+								<item>package_10</item>
 							</internal_modules>
 							<element></element>
 						</location>
-						<identifiable>dogen_test_models_cpp_model_MultipleRefinements</identifiable>
+						<identifiable>dogen_test_models_cpp_model_package_10_ConceptInAPackage</identifiable>
 					</name>
 					<origin_type>4</origin_type>
 					<contained_by>
@@ -968,8 +1038,7 @@
 					<count>1</count>
 					<item_version>0</item_version>
 					<item class_id="32" tracking_level="0" version="0">
-						<documentation>Multiple refinements property.
-</documentation>
+						<documentation></documentation>
 						<annotation>
 							<entries>
 								<count>0</count>
@@ -980,7 +1049,7 @@
 						</annotation>
 						<name>
 							<id></id>
-							<simple>prop_3</simple>
+							<simple>prop_0</simple>
 							<qualified>
 								<count>0</count>
 								<item_version>0</item_version>
@@ -1057,6 +1126,169 @@
 				<is_immutable>0</is_immutable>
 				<is_fluent>0</is_fluent>
 				<refines class_id="37" tracking_level="0" version="0">
+					<count>0</count>
+					<item_version>0</item_version>
+				</refines>
+				<is_child>0</is_child>
+			</second>
+		</item>
+		<item>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;MultipleRefinements&gt;</first>
+			<second object_id="_14">
+				<element>
+					<documentation>Multiple refinements concept
+</documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;MultipleRefinements&gt;</id>
+						<simple>MultipleRefinements</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::cpp_model::MultipleRefinements</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.cpp_model.MultipleRefinements</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>cpp_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_cpp_model_MultipleRefinements</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<all_attributes>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_attributes>
+				<local_attributes>
+					<count>1</count>
+					<item_version>0</item_version>
+					<item>
+						<documentation>Multiple refinements property.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<name>
+							<id></id>
+							<simple>prop_3</simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<unparsed_type>int</unparsed_type>
+						<parsed_type>
+							<current>
+								<id></id>
+								<simple></simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</current>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<identifiable></identifiable>
+							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
+						</parsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<orm_properties>
+							<initialized>0</initialized>
+						</orm_properties>
+					</item>
+				</local_attributes>
+				<inherited_attributes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_attributes>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<refines>
 					<count>2</count>
 					<item_version>0</item_version>
 					<item>
@@ -1135,7 +1367,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;SecondRefinement&gt;</first>
-			<second object_id="_13">
+			<second object_id="_15">
 				<element>
 					<documentation>Second refinement
 </documentation>
@@ -1333,7 +1565,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;FirstRefinement&gt;</first>
-			<second object_id="_14">
+			<second object_id="_16">
 				<element>
 					<documentation>First refinement
 </documentation>
@@ -1531,7 +1763,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;SimpleConcept&gt;</first>
-			<second object_id="_15">
+			<second object_id="_17">
 				<element>
 					<documentation>This is an example of a concept.
 </documentation>
@@ -1775,7 +2007,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;BaseConcept&gt;</first>
-			<second object_id="_16">
+			<second object_id="_18">
 				<element>
 					<documentation>This is the base concept.
 </documentation>
@@ -1938,7 +2170,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;Refinement&gt;</first>
-			<second object_id="_17">
+			<second object_id="_19">
 				<element>
 					<documentation>This concept refines BaseConcept.
 </documentation>
@@ -2136,7 +2368,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;BaseConcept2&gt;</first>
-			<second object_id="_18">
+			<second object_id="_20">
 				<element>
 					<documentation>Base concept.
 </documentation>
@@ -2309,7 +2541,7 @@
 		<item_version>0</item_version>
 		<item class_id="40" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_4&gt;&lt;shape_types&gt;</first>
-			<second class_id="7" tracking_level="1" version="0" object_id="_19">
+			<second class_id="7" tracking_level="1" version="0" object_id="_21">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -2546,7 +2778,7 @@
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;book_types&gt;</first>
-			<second object_id="_20">
+			<second object_id="_22">
 				<element>
 					<documentation>this is a brief comment
 
@@ -2749,7 +2981,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;hex_flags&gt;</first>
-			<second object_id="_21">
+			<second object_id="_23">
 				<element>
 					<documentation>This is an example of an enumeration using hex flags.
 </documentation>
@@ -3022,7 +3254,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;colour_types&gt;</first>
-			<second object_id="_22">
+			<second object_id="_24">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -3261,7 +3493,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;short_enum&gt;</first>
-			<second object_id="_23">
+			<second object_id="_25">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -3425,7 +3657,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;test_all_knobs&gt;</first>
-			<second object_id="_24">
+			<second object_id="_26">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -3595,7 +3827,7 @@ this is a long comment
 		<item_version>0</item_version>
 		<item class_id="44" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;bool_primitive&gt;</first>
-			<second class_id="11" tracking_level="1" version="0" object_id="_25">
+			<second class_id="11" tracking_level="1" version="0" object_id="_27">
 				<element>
 					<documentation>Test a primitive with an underlying bool.
 </documentation>
@@ -3743,7 +3975,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;float_primitive&gt;</first>
-			<second object_id="_26">
+			<second object_id="_28">
 				<element>
 					<documentation>Test a primitive with an underlying float.
 </documentation>
@@ -3891,7 +4123,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;int_primitive&gt;</first>
-			<second object_id="_27">
+			<second object_id="_29">
 				<element>
 					<documentation>Test a primitive with an underlying int.
 </documentation>
@@ -4039,7 +4271,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;long_primitive&gt;</first>
-			<second object_id="_28">
+			<second object_id="_30">
 				<element>
 					<documentation>Test a primitive with an underlying long.
 </documentation>
@@ -4187,7 +4419,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;short_primitive&gt;</first>
-			<second object_id="_29">
+			<second object_id="_31">
 				<element>
 					<documentation>Test a primitive with an underlying short.
 </documentation>
@@ -4335,7 +4567,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;uint_primitive&gt;</first>
-			<second object_id="_30">
+			<second object_id="_32">
 				<element>
 					<documentation>Test a primitive with an underlying unsigned int.
 </documentation>
@@ -4483,7 +4715,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;char_primitive&gt;</first>
-			<second object_id="_31">
+			<second object_id="_33">
 				<element>
 					<documentation>Test a primitive with an underlying char.
 </documentation>
@@ -4631,7 +4863,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;immutable_primitive&gt;</first>
-			<second object_id="_32">
+			<second object_id="_34">
 				<element>
 					<documentation>Test for a primitive which is also immutable.
 </documentation>
@@ -4780,7 +5012,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;uchar_primitive&gt;</first>
-			<second object_id="_33">
+			<second object_id="_35">
 				<element>
 					<documentation>Test a primitive with an underlying unsigned char.
 </documentation>
@@ -4928,7 +5160,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;ulong_primitive&gt;</first>
-			<second object_id="_34">
+			<second object_id="_36">
 				<element>
 					<documentation>Test a primitive with an underlying unsigned long.
 </documentation>
@@ -5076,7 +5308,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;ushort_primitive&gt;</first>
-			<second object_id="_35">
+			<second object_id="_37">
 				<element>
 					<documentation>Test a primitive with an underlying unsgined short.
 </documentation>
@@ -5224,7 +5456,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;double_primitive&gt;</first>
-			<second object_id="_36">
+			<second object_id="_38">
 				<element>
 					<documentation>Test a primitive with an underlying double.
 </documentation>
@@ -5372,12 +5604,12 @@ this is a long comment
 		</item>
 	</primitives>
 	<objects class_id="46" tracking_level="0" version="0">
-		<count>64</count>
+		<count>65</count>
 		<bucket_count>97</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="47" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_2&gt;&lt;class_2&gt;</first>
-			<second class_id="10" tracking_level="1" version="0" object_id="_37">
+			<second class_id="10" tracking_level="1" version="0" object_id="_39">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -5667,7 +5899,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_9&gt;&lt;child&gt;</first>
-			<second object_id="_38">
+			<second object_id="_40">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -5912,7 +6144,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_9&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_39">
+			<second object_id="_41">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -6122,7 +6354,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_8&gt;&lt;child&gt;</first>
-			<second object_id="_40">
+			<second object_id="_42">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -6368,7 +6600,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_7&gt;&lt;parent&gt;</first>
-			<second object_id="_41">
+			<second object_id="_43">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -6578,7 +6810,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_6&gt;&lt;parent&gt;</first>
-			<second object_id="_42">
+			<second object_id="_44">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -6788,7 +7020,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;non_final_orphan&gt;</first>
-			<second object_id="_43">
+			<second object_id="_45">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -6997,7 +7229,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;non_final_leaf&gt;</first>
-			<second object_id="_44">
+			<second object_id="_46">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -7241,7 +7473,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;move_ctor_empty_descendant&gt;</first>
-			<second object_id="_45">
+			<second object_id="_47">
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -7406,7 +7638,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;move_ctor_descendant&gt;</first>
-			<second object_id="_46">
+			<second object_id="_48">
 				<element>
 					<documentation>Descendant class for scenario that tests code generated move contructors.
 </documentation>
@@ -7652,7 +7884,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_6&gt;&lt;child&gt;</first>
-			<second object_id="_47">
+			<second object_id="_49">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -7898,7 +8130,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;descendant1&gt;</first>
-			<second object_id="_48">
+			<second object_id="_50">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -8062,7 +8294,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;simple_concept_model&gt;</first>
-			<second object_id="_49">
+			<second object_id="_51">
 				<element>
 					<documentation>This class models simple concept.
 </documentation>
@@ -8274,7 +8506,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;refinement_concept_model&gt;</first>
-			<second object_id="_50">
+			<second object_id="_52">
 				<element>
 					<documentation>This class models the Refinement concept.
 </documentation>
@@ -8405,7 +8637,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_6&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_51">
+			<second object_id="_53">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -8615,7 +8847,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;multiple_refinement_concept_model&gt;</first>
-			<second object_id="_52">
+			<second object_id="_54">
 				<element>
 					<documentation>Model of MultipleRefinements concept.
 </documentation>
@@ -8827,7 +9059,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;move_ctor_base&gt;</first>
-			<second object_id="_53">
+			<second object_id="_55">
 				<element>
 					<documentation>Base class for scenario that tests code generated move contructors.
 </documentation>
@@ -9038,7 +9270,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;immutable_one_non_builtin&gt;</first>
-			<second object_id="_54">
+			<second object_id="_56">
 				<element>
 					<documentation>Immutable class with one pod property
 </documentation>
@@ -9249,7 +9481,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;parent_outside&gt;</first>
-			<second object_id="_55">
+			<second object_id="_57">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -9458,7 +9690,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;immutable_one_builtin&gt;</first>
-			<second object_id="_56">
+			<second object_id="_58">
 				<element>
 					<documentation>Immutable class with a built-in property.
 </documentation>
@@ -9669,7 +9901,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;some_type&gt;</first>
-			<second object_id="_57">
+			<second object_id="_59">
 				<element>
 					<documentation>Type is non-generatable.
 </documentation>
@@ -9880,7 +10112,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;class_1&gt;</first>
-			<second object_id="_58">
+			<second object_id="_60">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -10088,8 +10320,139 @@ this is a long comment
 			</second>
 		</item>
 		<item>
+			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_10&gt;&lt;consume_concept&gt;</first>
+			<second object_id="_61">
+				<element>
+					<documentation></documentation>
+					<annotation>
+						<entries>
+							<count>0</count>
+							<bucket_count>1</bucket_count>
+							<item_version>0</item_version>
+						</entries>
+						<scope>0</scope>
+					</annotation>
+					<name>
+						<id>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_10&gt;&lt;consume_concept&gt;</id>
+						<simple>consume_concept</simple>
+						<qualified>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>
+								<first>1</first>
+								<second>dogen::test_models::cpp_model::package_10::consume_concept</second>
+							</item>
+							<item>
+								<first>2</first>
+								<second>dogen.test_models.cpp_model.package_10.consume_concept</second>
+							</item>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>dogen</item>
+								<item>test_models</item>
+							</external_modules>
+							<model_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>cpp_model</item>
+							</model_modules>
+							<internal_modules>
+								<count>1</count>
+								<item_version>0</item_version>
+								<item>package_10</item>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable>dogen_test_models_cpp_model_package_10_consume_concept</identifiable>
+					</name>
+					<origin_type>4</origin_type>
+					<contained_by>
+						<initialized>0</initialized>
+					</contained_by>
+					<in_global_module>0</in_global_module>
+					<stereotypes>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>ConceptInAPackage</item>
+					</stereotypes>
+					<is_element_extension>0</is_element_extension>
+				</element>
+				<all_attributes>
+					<count>0</count>
+					<item_version>0</item_version>
+				</all_attributes>
+				<local_attributes>
+					<count>0</count>
+					<item_version>0</item_version>
+				</local_attributes>
+				<inherited_attributes>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</inherited_attributes>
+				<is_immutable>0</is_immutable>
+				<is_fluent>0</is_fluent>
+				<is_parent>0</is_parent>
+				<is_child>0</is_child>
+				<is_leaf>0</is_leaf>
+				<is_final>0</is_final>
+				<is_abstract>0</is_abstract>
+				<in_inheritance_relationship>0</in_inheritance_relationship>
+				<root_parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</root_parents>
+				<parents>
+					<count>0</count>
+					<item_version>0</item_version>
+				</parents>
+				<leaves>
+					<count>0</count>
+					<item_version>0</item_version>
+				</leaves>
+				<transparent_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</transparent_associations>
+				<opaque_associations>
+					<count>0</count>
+					<item_version>0</item_version>
+				</opaque_associations>
+				<base_visitor>
+					<initialized>0</initialized>
+				</base_visitor>
+				<derived_visitor>
+					<initialized>0</initialized>
+				</derived_visitor>
+				<is_visitation_root>0</is_visitation_root>
+				<is_visitation_leaf>0</is_visitation_leaf>
+				<type_parameters>
+					<variable_number_of_parameters>0</variable_number_of_parameters>
+					<count>0</count>
+					<always_in_heap>0</always_in_heap>
+				</type_parameters>
+				<object_type>0</object_type>
+				<modeled_concepts>
+					<count>0</count>
+					<item_version>0</item_version>
+				</modeled_concepts>
+				<associative_container_keys>
+					<count>0</count>
+					<item_version>0</item_version>
+				</associative_container_keys>
+				<provides_opaqueness>0</provides_opaqueness>
+				<can_be_primitive_underlier>0</can_be_primitive_underlier>
+				<orm_properties>
+					<initialized>0</initialized>
+				</orm_properties>
+			</second>
+		</item>
+		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;base_with_concept&gt;</first>
-			<second object_id="_59">
+			<second object_id="_62">
 				<element>
 					<documentation>Base class that models a refined concept.
 </documentation>
@@ -10220,7 +10583,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;service&gt;</first>
-			<second object_id="_60">
+			<second object_id="_63">
 				<element>
 					<documentation>Type is a service.
 </documentation>
@@ -10431,7 +10794,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;child_without_members&gt;</first>
-			<second object_id="_61">
+			<second object_id="_64">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -10595,7 +10958,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_8&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_62">
+			<second object_id="_65">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -10805,7 +11168,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;immutable_two&gt;</first>
-			<second object_id="_63">
+			<second object_id="_66">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -11095,7 +11458,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_1&gt;&lt;class_2&gt;</first>
-			<second object_id="_64">
+			<second object_id="_67">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -11305,7 +11668,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;immutable_four&gt;</first>
-			<second object_id="_65">
+			<second object_id="_68">
 				<element>
 					<documentation>Immutable class with non-immutable and immutable pods as properties.
 </documentation>
@@ -11756,7 +12119,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;consumer&gt;</first>
-			<second object_id="_66">
+			<second object_id="_69">
 				<element>
 					<documentation>This type makes use of all primitves in this test model.
 </documentation>
@@ -12766,7 +13129,7 @@ this is a long comment
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;multi_line&gt;</first>
-			<second object_id="_67">
+			<second object_id="_70">
 				<element>
 					<documentation>first line
 
@@ -12899,7 +13262,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;child_with_members&gt;</first>
-			<second object_id="_68">
+			<second object_id="_71">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -13143,7 +13506,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_1&gt;&lt;class_4&gt;</first>
-			<second object_id="_69">
+			<second object_id="_72">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -13353,7 +13716,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;base_concept_model&gt;</first>
-			<second object_id="_70">
+			<second object_id="_73">
 				<element>
 					<documentation>This class models the BaseConcept.
 </documentation>
@@ -13484,7 +13847,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;class_a&gt;</first>
-			<second object_id="_71">
+			<second object_id="_74">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -13693,7 +14056,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_1&gt;&lt;class_1&gt;</first>
-			<second object_id="_72">
+			<second object_id="_75">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -13903,7 +14266,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;immutable_zero&gt;</first>
-			<second object_id="_73">
+			<second object_id="_76">
 				<element>
 					<documentation>Immutable class with no properties.
 </documentation>
@@ -14034,7 +14397,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;third_child_with_members&gt;</first>
-			<second object_id="_74">
+			<second object_id="_77">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -14278,7 +14641,7 @@ third line with &quot;quote&quot;
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;one_line&gt;</first>
-			<second object_id="_75">
+			<second object_id="_78">
 				<element>
 					<documentation>this is the brief comment
 </documentation>
@@ -14652,7 +15015,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_1&gt;&lt;class_5&gt;</first>
-			<second object_id="_76">
+			<second object_id="_79">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -14862,7 +15225,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;base&gt;</first>
-			<second object_id="_77">
+			<second object_id="_80">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -14992,7 +15355,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_1&gt;&lt;class_3&gt;</first>
-			<second object_id="_78">
+			<second object_id="_81">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -15202,7 +15565,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;class_0&gt;</first>
-			<second object_id="_79">
+			<second object_id="_82">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -15331,7 +15694,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;class_d&gt;</first>
-			<second object_id="_80">
+			<second object_id="_83">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -15460,7 +15823,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;fluent&gt;</first>
-			<second object_id="_81">
+			<second object_id="_84">
 				<element>
 					<documentation>Tests the fluent scenario across the different types of properties.
 </documentation>
@@ -15831,7 +16194,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_2&gt;&lt;class_1&gt;</first>
-			<second object_id="_82">
+			<second object_id="_85">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -16041,7 +16404,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;second_refinement_concept_model&gt;</first>
-			<second object_id="_83">
+			<second object_id="_86">
 				<element>
 					<documentation>Second refinement model
 </documentation>
@@ -16253,7 +16616,7 @@ a second line
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;further_refined&gt;</first>
-			<second object_id="_84">
+			<second object_id="_87">
 				<element>
 					<documentation>Descendant class that models a concept which is a refinement of the concept
 modeled by the base.
@@ -16420,7 +16783,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;a_class&gt;</first>
-			<second object_id="_85">
+			<second object_id="_88">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -16789,7 +17152,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;multi_concept_model&gt;</first>
-			<second object_id="_86">
+			<second object_id="_89">
 				<element>
 					<documentation>Type that refines more than one concept.
 </documentation>
@@ -17002,7 +17365,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;value&gt;</first>
-			<second object_id="_87">
+			<second object_id="_90">
 				<element>
 					<documentation>Type is a value.
 </documentation>
@@ -17212,7 +17575,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;child_of_a_child2&gt;</first>
-			<second object_id="_88">
+			<second object_id="_91">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -17456,7 +17819,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;class_c&gt;</first>
-			<second object_id="_89">
+			<second object_id="_92">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -17585,7 +17948,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;second_child_without_members&gt;</first>
-			<second object_id="_90">
+			<second object_id="_93">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -17749,7 +18112,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;parent_without_members&gt;</first>
-			<second object_id="_91">
+			<second object_id="_94">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -17878,7 +18241,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;child_via_settings&gt;</first>
-			<second object_id="_92">
+			<second object_id="_95">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -18087,7 +18450,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;builtins&gt;</first>
-			<second object_id="_93">
+			<second object_id="_96">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -19256,7 +19619,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;parent_with_members&gt;</first>
-			<second object_id="_94">
+			<second object_id="_97">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -19465,7 +19828,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;descendant3&gt;</first>
-			<second object_id="_95">
+			<second object_id="_98">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -19709,7 +20072,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;child_of_a_child1&gt;</first>
-			<second object_id="_96">
+			<second object_id="_99">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -19873,7 +20236,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;service_interface&gt;</first>
-			<second object_id="_97">
+			<second object_id="_100">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -20003,7 +20366,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;class_b&gt;</first>
-			<second object_id="_98">
+			<second object_id="_101">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -20212,7 +20575,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;a_service&gt;</first>
-			<second object_id="_99">
+			<second object_id="_102">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -20342,7 +20705,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;descendant2&gt;</first>
-			<second object_id="_100">
+			<second object_id="_103">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -20591,7 +20954,7 @@ modeled by the base.
 		<item_version>0</item_version>
 		<item class_id="51" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;package_5&gt;&lt;catastrophic_error&gt;</first>
-			<second class_id="8" tracking_level="1" version="0" object_id="_101">
+			<second class_id="8" tracking_level="1" version="0" object_id="_104">
 				<element>
 					<documentation></documentation>
 					<annotation>
@@ -20653,7 +21016,7 @@ modeled by the base.
 		</item>
 		<item>
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;cpp_model&gt;&lt;my_error&gt;</first>
-			<second object_id="_102">
+			<second object_id="_105">
 				<element>
 					<documentation>this is an exception
 </documentation>
@@ -20725,7 +21088,7 @@ modeled by the base.
 		<item_version>0</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
-	<root_module object_id="_103">
+	<root_module object_id="_106">
 		<element>
 			<documentation></documentation>
 			<annotation>

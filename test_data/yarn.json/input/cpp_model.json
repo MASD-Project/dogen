@@ -736,6 +736,16 @@
     },
     {
       "name": {
+        "simple": "consume_concept",
+        "internal_modules": "package_10"
+      },
+      "meta_type": "object",
+      "stereotypes": [
+        "ConceptInAPackage"
+      ]
+    },
+    {
+      "name": {
         "simple": "class_1",
         "internal_modules": "package_1"
       },
@@ -1321,7 +1331,28 @@
     },
     {
       "name": {
+        "simple": "ConceptInAPackage",
+        "internal_modules": "package_10"
+      },
+      "meta_type": "concept",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
         "simple": "package_0"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_10"
       },
       "meta_type": "module"
     },

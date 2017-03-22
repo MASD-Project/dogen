@@ -98,6 +98,7 @@
 #include "dogen/test_models/cpp_model/io/third_child_with_members_io.hpp"
 #include "dogen/test_models/cpp_model/io/immutable_one_non_builtin_io.hpp"
 #include "dogen/test_models/cpp_model/io/move_ctor_empty_descendant_io.hpp"
+#include "dogen/test_models/cpp_model/io/package_10/consume_concept_io.hpp"
 #include "dogen/test_models/cpp_model/io/package_6/child_via_settings_io.hpp"
 #include "dogen/test_models/cpp_model/io/package_8/child_via_settings_io.hpp"
 #include "dogen/test_models/cpp_model/io/package_9/child_via_settings_io.hpp"

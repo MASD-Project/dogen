@@ -104,6 +104,7 @@
 #include "dogen/test_models/cpp_model/types/third_child_with_members.hpp"
 #include "dogen/test_models/cpp_model/types/immutable_one_non_builtin.hpp"
 #include "dogen/test_models/cpp_model/types/move_ctor_empty_descendant.hpp"
+#include "dogen/test_models/cpp_model/types/package_10/consume_concept.hpp"
 #include "dogen/test_models/cpp_model/types/package_5/catastrophic_error.hpp"
 #include "dogen/test_models/cpp_model/types/package_6/child_via_settings.hpp"
 #include "dogen/test_models/cpp_model/types/package_8/child_via_settings.hpp"

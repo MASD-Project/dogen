@@ -98,6 +98,7 @@
 #include "dogen/test_models/cpp_model/odb/third_child_with_members_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/immutable_one_non_builtin_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/move_ctor_empty_descendant_pragmas.hpp"
+#include "dogen/test_models/cpp_model/odb/package_10/consume_concept_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/package_6/child_via_settings_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/package_8/child_via_settings_pragmas.hpp"
 #include "dogen/test_models/cpp_model/odb/package_9/child_via_settings_pragmas.hpp"

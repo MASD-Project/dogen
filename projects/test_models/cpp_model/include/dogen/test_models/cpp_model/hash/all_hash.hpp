@@ -98,6 +98,7 @@
 #include "dogen/test_models/cpp_model/hash/third_child_with_members_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/immutable_one_non_builtin_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/move_ctor_empty_descendant_hash.hpp"
+#include "dogen/test_models/cpp_model/hash/package_10/consume_concept_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/package_6/child_via_settings_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/package_8/child_via_settings_hash.hpp"
 #include "dogen/test_models/cpp_model/hash/package_9/child_via_settings_hash.hpp"
