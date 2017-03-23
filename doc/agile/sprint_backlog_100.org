@@ -33,6 +33,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-03-23 Thu 06:24]--[2017-03-23 Thu 07:05] =>  0:41
     CLOCK: [2017-03-20 Mon 11:11]--[2017-03-20 Mon 11:22] =>  0:11
 
 Updates to sprint and product backlog.

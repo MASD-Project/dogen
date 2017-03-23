@@ -7116,6 +7116,25 @@ to go about this is:
   eCore as a plain meta-model is useful because it is directly related
   to XMI and to UML profiles (since its just UML meta-model in
   disguise).
+- proxy models now become just regular XMI models (either JSON or XML)
+  with suitably annotated models indicating its a proxy model.
+- the total set of expanders are our implementation of meta-model to
+  meta-model transformation. Some of these expanders are replaceable
+  by generated code: all that are simply reading meta-data. Others
+  must remain. This task will be tricky because we have mixed the
+  meta-data expansion with additional logic in the expanders. We now
+  need to decouple the two.
+- we will lose scoping on the tagged values. We can still have some
+  kind of hierarchical structure, perhaps =MODEL.CLASS.ATTRIBUTE= but
+  this is now limited to the meta-model structure because we must be
+  able to mechanically map from a tag value to a class and
+  attribute. We should also read the UML spec on valid tagged values
+  in case they forbid some characters such as dots.
+- up to now we have extended the dia format to perform yarn-like
+  operations; for example, we read stereotypes in the =yarn.dia=
+  frontend and convert them into =yarn= types. In an XMI world this
+  will no longer happen. We must pass-through the dia stereotypes into
+  a XMI class. All changes to dia must be seen as XMI extensions.
 
 Advantages of this approach:
 
