@@ -140,18 +140,8 @@ a.stream() << "--ixx-suffix .ixx" << std::endl;
 a.stream() << "--hxx-suffix .hxx" << std::endl;
 a.stream() << "--cxx-suffix .cxx" << std::endl;
 a.stream() << std::endl;
-a.stream() << "# fix domain includes" << std::endl;
-a.stream() << "--include-regex '%(.*).hpp%" << o.types_include_directory_path() << "/$1.hpp%'" << std::endl;
-a.stream() << std::endl;
-a.stream() << "# fix odb generated includes" << std::endl;
-a.stream() << "--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%" << o.odb_include_directory_path() << "/$1-odb$2%'" << std::endl;
-a.stream() << "--include-regex '%" << o.types_include_directory_path() << "/(.*)-odb(.*)%" << o.odb_include_directory_path() << "/$1-odb$2%'" << std::endl;
-a.stream() << std::endl;
 a.stream() << "# debug regexes" << std::endl;
 a.stream() << "# --include-regex-trace" << std::endl;
-a.stream() << std::endl;
-a.stream() << "# make the header guards similar to dogen ones" << std::endl;
-a.stream() << "--guard-prefix " << o.header_guard_prefix() << std::endl;
     } // sbf
     return a.make_artefact();
 }

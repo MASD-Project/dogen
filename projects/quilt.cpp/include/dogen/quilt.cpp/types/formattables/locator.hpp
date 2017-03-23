@@ -203,6 +203,17 @@ public:
     boost::filesystem::path make_full_path_to_include_directory() const;
 
     /**
+     * @brief Generate the full path to the implementation directory
+     */
+    boost::filesystem::path make_full_path_to_implementation_directory() const;
+
+    /**
+     * @brief Generate the full path to the facet include directory.
+     */
+    boost::filesystem::path make_full_path_to_include_facet_directory(
+        const std::string& facet) const;
+
+    /**
      * @brief Generate the full path for C++ headers.
      */
     boost::filesystem::path make_full_path_for_cpp_header(

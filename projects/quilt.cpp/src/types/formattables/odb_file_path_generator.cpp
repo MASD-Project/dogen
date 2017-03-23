@@ -18,20 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
+#include "dogen/quilt.cpp/types/formattables/odb_file_path_generator.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace fabric {
+namespace formattables {
 
-std::ostream& operator<<(std::ostream& s, const cmakelists& v) {
-    v.to_stream(s);
-    return(s);
+bool odb_file_path_generator::operator==(const odb_file_path_generator& /*rhs*/) const {
+    return true;
 }
 
 } } } }

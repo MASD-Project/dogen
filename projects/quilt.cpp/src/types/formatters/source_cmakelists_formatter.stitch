@@ -108,6 +108,51 @@ set_target_properties(<#= model_name #> PROPERTIES
 
 install(TARGETS <#= model_name #> ARCHIVE DESTINATION lib COMPONENT libraries)
 <#+
+        if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
+            const auto targets(c.odb_targets());
+#>
+
+add_custom_target(<#= targets.main_target_name() #>)
+
+if (NOT ODB_EXECUTABLE)
+    message(FATAL "ODB Executable not defined.")
+endif()
+
+if (NOT ODB_INCLUDE_DIRS)
+    message(FATAL "ODB include directories not defined.")
+endif()
+
+get_directory_property(dirs INCLUDE_DIRECTORIES)
+set(global_includes "")
+foreach(dir in ${dirs})
+    set(global_includes ${global_includes} -I ${dir})
+
+<#+
+            for (const auto& target : targets.targets()) {
+#>
+    add_custom_target(<#= target.name() #>
+        COMMENT "<#= target.comment() #>"
+        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+        COMMAND ${ODB_EXECUTABLE}
+            --options-file <#= targets.options_file() #>
+            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.output_directory() #>
+            --odb-epilogue '\#include \"<#= target.pragmas_file() #>\"'
+<#+
+                for (const auto& regex : target.include_regexes())
+#>
+            --include-regex '<#= regex #>'
+            -I ${ODB_INCLUDE_DIRS} ${global_includes}
+            ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.types_file() #>
+<#+
+                for (const auto& pair : target.move_parameters())
+#>
+        COMMAND mv <#= pair.first #> <#= pair.second #>
+    )
+
+    add_dependencies(<#= targets.main_target_name() #> <#= target.name() #>)
+<#+
+            }
+        }
     } // sbf
         return a.make_artefact();
 }

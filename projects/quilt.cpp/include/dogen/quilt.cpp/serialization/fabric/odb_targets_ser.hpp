@@ -18,20 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
+#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_TARGETS_SER_HPP
+#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_TARGETS_SER_HPP
 
-namespace dogen {
-namespace quilt {
-namespace cpp {
-namespace fabric {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-std::ostream& operator<<(std::ostream& s, const cmakelists& v) {
-    v.to_stream(s);
-    return(s);
-}
+#include <boost/serialization/split_free.hpp>
+#include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
 
-} } } }
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::fabric::odb_targets)
+namespace boost {
+namespace serialization {
+
+template<typename Archive>
+void save(Archive& ar, const dogen::quilt::cpp::fabric::odb_targets& v, unsigned int version);
+
+template<typename Archive>
+void load(Archive& ar, dogen::quilt::cpp::fabric::odb_targets& v, unsigned int version);
+
+} }
+
+#endif

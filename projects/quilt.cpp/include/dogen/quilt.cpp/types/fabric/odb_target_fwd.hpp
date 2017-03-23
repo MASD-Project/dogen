@@ -18,20 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_TARGET_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_TARGET_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::ostream& operator<<(std::ostream& s, const cmakelists& v) {
-    v.to_stream(s);
-    return(s);
-}
+class odb_target;
 
 } } } }
+
+#endif

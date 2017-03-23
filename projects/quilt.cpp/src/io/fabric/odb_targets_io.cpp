@@ -20,17 +20,43 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/odb_target_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
+
+inline std::string tidy_up_string(std::string s) {
+    boost::replace_all(s, "\r\n", "<new_line>");
+    boost::replace_all(s, "\n", "<new_line>");
+    boost::replace_all(s, "\"", "<quote>");
+    boost::replace_all(s, "\\", "<backslash>");
+    return s;
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::fabric::odb_target>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::ostream& operator<<(std::ostream& s, const cmakelists& v) {
-    v.to_stream(s);
+std::ostream& operator<<(std::ostream& s, const odb_targets& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::odb_targets\"" << ", "
+      << "\"main_target_name\": " << "\"" << tidy_up_string(v.main_target_name()) << "\"" << ", "
+      << "\"options_file\": " << "\"" << tidy_up_string(v.options_file()) << "\"" << ", "
+      << "\"targets\": " << v.targets()
+      << " }";
     return(s);
 }
 

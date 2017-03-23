@@ -33,15 +33,5 @@
 --hxx-suffix .hxx
 --cxx-suffix .cxx
 
-# fix domain includes
---include-regex '%(.*).hpp%dogen/test_models/compressed/types/$1.hpp%'
-
-# fix odb generated includes
---include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/test_models/compressed/odb/$1-odb$2%'
---include-regex '%dogen/test_models/compressed/types/(.*)-odb(.*)%dogen/test_models/compressed/odb/$1-odb$2%'
-
 # debug regexes
 # --include-regex-trace
-
-# make the header guards similar to dogen ones
---guard-prefix DOGEN_TEST_MODELS_COMPRESSED_ODB

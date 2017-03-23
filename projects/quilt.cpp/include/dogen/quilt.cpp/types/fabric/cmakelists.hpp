@@ -29,6 +29,7 @@
 #include <string>
 #include <algorithm>
 #include "dogen/yarn/types/element.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,14 +57,9 @@ public:
         const bool is_element_extension,
         const std::string& include_directory_path,
         const std::string& source_directory_name,
-        const std::string& odb_include_directory_path,
-        const std::string& odb_inclusion_directory_path,
-        const std::string& odb_source_directory_path,
-        const std::string& odb_options_file_path,
-        const std::string& odb_postfix,
-        const std::string& types_include_directory_path,
         const std::string& header_file_extension,
-        const std::string& implementation_file_extension);
+        const std::string& implementation_file_extension,
+        const dogen::quilt::cpp::fabric::odb_targets& odb_targets);
 
 private:
     template<typename Archive>
@@ -93,36 +89,6 @@ public:
     void source_directory_name(const std::string& v);
     void source_directory_name(const std::string&& v);
 
-    const std::string& odb_include_directory_path() const;
-    std::string& odb_include_directory_path();
-    void odb_include_directory_path(const std::string& v);
-    void odb_include_directory_path(const std::string&& v);
-
-    const std::string& odb_inclusion_directory_path() const;
-    std::string& odb_inclusion_directory_path();
-    void odb_inclusion_directory_path(const std::string& v);
-    void odb_inclusion_directory_path(const std::string&& v);
-
-    const std::string& odb_source_directory_path() const;
-    std::string& odb_source_directory_path();
-    void odb_source_directory_path(const std::string& v);
-    void odb_source_directory_path(const std::string&& v);
-
-    const std::string& odb_options_file_path() const;
-    std::string& odb_options_file_path();
-    void odb_options_file_path(const std::string& v);
-    void odb_options_file_path(const std::string&& v);
-
-    const std::string& odb_postfix() const;
-    std::string& odb_postfix();
-    void odb_postfix(const std::string& v);
-    void odb_postfix(const std::string&& v);
-
-    const std::string& types_include_directory_path() const;
-    std::string& types_include_directory_path();
-    void types_include_directory_path(const std::string& v);
-    void types_include_directory_path(const std::string&& v);
-
     const std::string& header_file_extension() const;
     std::string& header_file_extension();
     void header_file_extension(const std::string& v);
@@ -132,6 +98,11 @@ public:
     std::string& implementation_file_extension();
     void implementation_file_extension(const std::string& v);
     void implementation_file_extension(const std::string&& v);
+
+    const dogen::quilt::cpp::fabric::odb_targets& odb_targets() const;
+    dogen::quilt::cpp::fabric::odb_targets& odb_targets();
+    void odb_targets(const dogen::quilt::cpp::fabric::odb_targets& v);
+    void odb_targets(const dogen::quilt::cpp::fabric::odb_targets&& v);
 
 public:
     bool operator==(const cmakelists& rhs) const;
@@ -149,14 +120,9 @@ public:
 private:
     std::string include_directory_path_;
     std::string source_directory_name_;
-    std::string odb_include_directory_path_;
-    std::string odb_inclusion_directory_path_;
-    std::string odb_source_directory_path_;
-    std::string odb_options_file_path_;
-    std::string odb_postfix_;
-    std::string types_include_directory_path_;
     std::string header_file_extension_;
     std::string implementation_file_extension_;
+    dogen::quilt::cpp::fabric::odb_targets odb_targets_;
 };
 
 } } } }

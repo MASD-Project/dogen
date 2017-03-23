@@ -121,6 +121,43 @@ a.stream() << "    CXX_STANDARD 98" << std::endl;
 a.stream() << "    OUTPUT_NAME " << product_name << (product_name.empty() ? "" : ".") << model_name << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "install(TARGETS " << model_name << " ARCHIVE DESTINATION lib COMPONENT libraries)" << std::endl;
+        if (a.is_odb_facet_enabled() && !c.odb_targets().targets().empty()) {
+            const auto targets(c.odb_targets());
+a.stream() << std::endl;
+a.stream() << "add_custom_target(" << targets.main_target_name() << ")" << std::endl;
+a.stream() << std::endl;
+a.stream() << "if (NOT ODB_EXECUTABLE)" << std::endl;
+a.stream() << "    message(FATAL \"ODB Executable not defined.\")" << std::endl;
+a.stream() << "endif()" << std::endl;
+a.stream() << std::endl;
+a.stream() << "if (NOT ODB_INCLUDE_DIRS)" << std::endl;
+a.stream() << "    message(FATAL \"ODB include directories not defined.\")" << std::endl;
+a.stream() << "endif()" << std::endl;
+a.stream() << std::endl;
+a.stream() << "get_directory_property(dirs INCLUDE_DIRECTORIES)" << std::endl;
+a.stream() << "set(global_includes \"\")" << std::endl;
+a.stream() << "foreach(dir in ${dirs})" << std::endl;
+a.stream() << "    set(global_includes ${global_includes} -I ${dir})" << std::endl;
+a.stream() << std::endl;
+            for (const auto& target : targets.targets()) {
+a.stream() << "    add_custom_target(" << target.name() << std::endl;
+a.stream() << "        COMMENT \"" << target.comment() << "\"" << std::endl;
+a.stream() << "        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl;
+a.stream() << "        COMMAND ${ODB_EXECUTABLE}" << std::endl;
+a.stream() << "            --options-file " << targets.options_file() << std::endl;
+a.stream() << "            --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/" << target.output_directory() << std::endl;
+a.stream() << "            --odb-epilogue '\\#include \\\"" << target.pragmas_file() << "\\\"'" << std::endl;
+                for (const auto& regex : target.include_regexes())
+a.stream() << "            --include-regex '" << regex << "'" << std::endl;
+a.stream() << "            -I ${ODB_INCLUDE_DIRS} ${global_includes}" << std::endl;
+a.stream() << "            ${CMAKE_CURRENT_SOURCE_DIR}/" << target.types_file() << std::endl;
+                for (const auto& pair : target.move_parameters())
+a.stream() << "        COMMAND mv " << pair.first << " " << pair.second << std::endl;
+a.stream() << "    )" << std::endl;
+a.stream() << std::endl;
+a.stream() << "    add_dependencies(" << targets.main_target_name() << " " << target.name() << ")" << std::endl;
+            }
+        }
     } // sbf
         return a.make_artefact();
 }

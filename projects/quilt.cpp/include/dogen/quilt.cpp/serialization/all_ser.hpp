@@ -27,7 +27,9 @@
 
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/odb_target_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"

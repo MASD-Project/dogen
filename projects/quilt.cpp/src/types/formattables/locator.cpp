@@ -399,6 +399,22 @@ boost::filesystem::path locator::make_full_path_to_include_directory() const {
     return r;
 }
 
+boost::filesystem::path
+locator::make_full_path_to_implementation_directory() const {
+    auto r(project_path_);
+    const auto& cfg(configuration_);
+    r /= cfg.source_directory_name();
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_to_include_facet_directory(
+    const std::string& facet) const {
+
+    auto r(make_full_path_to_include_directory());
+    r /= make_relative_include_path_for_facet(facet, true/**/);
+    return r;
+}
+
 boost::filesystem::path locator::make_full_path_for_cpp_header(
     const yarn::name& n, const std::string& archetype) const {
     auto r(make_full_path_to_include_directory());
@@ -422,10 +438,9 @@ boost::filesystem::path locator::make_relative_implementation_path_for_facet(
 boost::filesystem::path locator::make_full_path_for_cpp_implementation(
     const yarn::name& n, const std::string& archetype) const {
 
-    auto r(project_path_);
-    const auto& cfg(configuration_);
-    r /= cfg.source_directory_name();
+    auto r(make_full_path_to_implementation_directory());
 
+    const auto& cfg(configuration_);
     const auto extension(cfg.implementation_file_extension());
     const auto facet_path(make_facet_path(archetype, extension, n));
     r /= facet_path;
@@ -446,8 +461,7 @@ boost::filesystem::path locator::make_full_path_for_include_cmakelists(
 
 boost::filesystem::path locator::make_full_path_for_source_cmakelists(
     const yarn::name& n, const std::string& /*archetype*/) const {
-    auto r(project_path_);
-    r /= configuration_.source_directory_name();
+    auto r(make_full_path_to_implementation_directory());
     r /= n.simple() + ".txt"; // FIXME: hack for extension
     return r;
 }
