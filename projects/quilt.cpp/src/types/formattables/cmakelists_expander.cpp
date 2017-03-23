@@ -19,6 +19,7 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
@@ -38,6 +39,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.cmakelists_expander"));
 
+const std::string separator("_");
 const std::string missing_odb_options("Could not find the ODB Options element");
 const std::string missing_qualified_name(
     "Qualified name not found for object: ");
@@ -63,20 +65,23 @@ public:
 
 private:
     const locator locator_;
+    const std::string target_name_;
     fabric::odb_targets result_;
 };
 
 odb_targets_factory::
 odb_targets_factory(const locator& l, const yarn::name& model_name)
-    : locator_(l) {
-    result_.main_target_name("odb_" + model_name.identifiable());
+    : locator_(l),
+      target_name_("odb_" + boost::join(model_name.location().model_modules(),
+              separator)) {
+    result_.main_target_name(target_name_);
 }
 
 void odb_targets_factory::visit(const fabric::odb_options& oo) {
     const auto arch(formatters::odb::traits::odb_options_archetype());
     result_.options_file(
-        locator_.make_relative_path_for_odb_options(oo.name(), arch)
-        .generic_string()
+        locator_.make_relative_path_for_odb_options(oo.name(), arch,
+            false/*include_source_directory*/).generic_string()
         );
 }
 
@@ -89,51 +94,47 @@ void odb_targets_factory::visit(const yarn::object& o) {
 
     fabric::odb_target t;
     const auto& n(o.name());
-    t.name(n.identifiable());
-
-    const auto i(n.qualified().find(yarn::languages::cpp));
-    if (i == n.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << missing_qualified_name << n.id();
-        BOOST_THROW_EXCEPTION(expansion_error(missing_qualified_name + n.id()));
-    }
-    const auto qn(i->second);
-    t.comment("ODB " + qn);
+    t.name(target_name_ + separator + n.simple());
+    t.comment("ODB " + n.simple());
 
     /*
      * We need to compute relative paths, from the project directory
      * into the headers project directory.
      */
     const auto& l(locator_);
-    const auto id(l.make_full_path_to_include_directory());
+    const auto odb_arch(formatters::odb::traits::class_header_archetype());
+    const auto odb_fp(l.make_full_path_for_cpp_header(n, odb_arch)
+        .parent_path());
     const auto src_dir(l.make_full_path_to_implementation_directory());
-    const auto rp(id.lexically_relative(src_dir));
+    const auto rp(odb_fp.lexically_relative(src_dir));
     t.output_directory(rp.generic_string());
 
-    const auto odb_arch(formatters::odb::traits::class_header_archetype());
-    t.pragmas_file(l.make_inclusion_path_for_cpp_header(n, odb_arch)
-        .generic_string());
+
+    const auto odb_rp(l.make_inclusion_path_for_cpp_header(n, odb_arch));
+    t.pragmas_file(odb_rp.generic_string());
 
     const auto types_arch(formatters::types::traits::class_header_archetype());
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
     t.types_file(tp.lexically_relative(src_dir).generic_string());
 
-    const auto odb_fctn(formatters::odb::traits::facet());
-    const auto odb_rp(locator_.make_relative_include_path_for_facet(odb_fctn,
-            true/*for_include_statement*/));
+    /*
+     * Regular expressions.
+     */
+    const auto types_rp(locator_.make_inclusion_path_for_cpp_header(n,
+            types_arch).parent_path());
 
-    // --include-regex '%(.*).hpp%<#= o.types_include_directory_path() #>/$1.hpp%'
     std::ostringstream os;
-    os << "%(^[a-zA-Z0-9_]+)-odb(.*)%" << odb_rp.generic_string() << "$1-odb$2";
+    os << "%\\(.*\\).hpp%" << types_rp.generic_string() << "/$1.hpp%";
     t.include_regexes().push_back(os.str());
 
     os.str("");
+    os << "%\\(^[a-zA-Z0-9_]+\\)-odb\\(.*\\)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2";
+    t.include_regexes().push_back(os.str());
 
-    const auto types_fctn(formatters::types::traits::facet());
-    const auto types_rp(locator_.make_relative_include_path_for_facet(
-            types_fctn, true/*for_include_statement*/));
-
-    os << "%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
-       << odb_rp.generic_string() << "/$1-odb$2%";
+    os.str("");
+    os << "%" << types_rp.generic_string() << "/\\(.*\\)-odb\\(.*\\)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
     t.include_regexes().push_back(os.str());
 
     t.header_guard_prefix(header_guard_factory::make(types_rp.parent_path()));

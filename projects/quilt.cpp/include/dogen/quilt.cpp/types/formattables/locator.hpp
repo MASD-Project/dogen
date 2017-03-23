@@ -247,7 +247,8 @@ public:
      * @brief Generate the relatvie path for odb options.
      */
     boost::filesystem::path make_relative_path_for_odb_options(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::name& n, const std::string& archetype,
+        bool include_source_directory = true) const;
 
     /**
      * @brief Generate the full path for odb options.

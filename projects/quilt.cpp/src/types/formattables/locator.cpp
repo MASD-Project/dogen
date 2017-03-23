@@ -467,10 +467,23 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
 }
 
 boost::filesystem::path locator::make_relative_path_for_odb_options(
-    const yarn::name& /*n*/, const std::string& /*archetype*/) const {
+    const yarn::name& /*n*/, const std::string& archetype,
+    const bool include_source_directory) const {
 
-    boost::filesystem::path r(configuration_.source_directory_name());
-    r /= "options.odb"; // FIXME: hack for filename
+    boost::filesystem::path r;
+    if (include_source_directory)
+        r /= configuration_.source_directory_name();
+
+    /*
+     * If there is a facet directory, and it is configured to
+     * contribute to the file name path, add it.
+     */
+    const auto& cfg(configuration_);
+    const auto& arch_cfg(configuration_for_archetype(archetype));
+    if (!arch_cfg.facet_directory().empty() && !cfg.disable_facet_directories())
+        r /= arch_cfg.facet_directory();
+
+    r /= "options.odb"; // FIXME: hack for extension
     return r;
 }
 
