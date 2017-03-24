@@ -185,10 +185,10 @@ create_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > r;
+std::list<boost::shared_ptr<dogen::yarn::element> > create_std_list_boost_shared_ptr_dogen_yarn_element(unsigned int position) {
+    std::list<boost::shared_ptr<dogen::yarn::element> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_yarn_element(position + i)));
+        r.push_back(create_boost_shared_ptr_dogen_yarn_element(position + i));
     }
     return r;
 }
@@ -256,7 +256,7 @@ populate(const unsigned int position, result_type& v) {
     v.objects(create_std_unordered_map_std_string_dogen_yarn_object(position + 9));
     v.exceptions(create_std_unordered_map_std_string_dogen_yarn_exception(position + 10));
     v.visitors(create_std_unordered_map_std_string_dogen_yarn_visitor(position + 11));
-    v.injected_elements(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(position + 12));
+    v.injected_elements(create_std_list_boost_shared_ptr_dogen_yarn_element(position + 12));
     v.has_generatable_types(create_bool(position + 13));
     v.root_module(create_dogen_yarn_module(position + 14));
     v.input_language(create_dogen_yarn_languages(position + 15));

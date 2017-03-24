@@ -90,10 +90,9 @@ public:
     void operator()(const yarn::visitor& v) { add(v); }
 
 public:
-    void add_injected_elements(
-        const std::unordered_map<std::string, boost::shared_ptr<element>>& ie) {
-        for (const auto& pair : ie)
-            add_element(pair.second);
+    void add(const std::list<boost::shared_ptr<element>>& ie) {
+        for (const auto& e : ie)
+            add_element(e);
     }
 
 public:
@@ -144,7 +143,7 @@ model transformer::transform(const intermediate_model& im) const {
 
     model_populator mp(r);
     yarn::elements_traversal(im, mp);
-    mp.add_injected_elements(im.injected_elements());
+    mp.add(im.injected_elements());
 
     return r;
 }

@@ -72,7 +72,7 @@ intermediate_model::intermediate_model(
     const std::unordered_map<std::string, dogen::yarn::object>& objects,
     const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
     const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
+    const std::list<boost::shared_ptr<dogen::yarn::element> >& injected_elements,
     const bool has_generatable_types,
     const dogen::yarn::module& root_module,
     const dogen::yarn::languages input_language,
@@ -334,19 +334,19 @@ void intermediate_model::visitors(const std::unordered_map<std::string, dogen::y
     visitors_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& intermediate_model::injected_elements() const {
+const std::list<boost::shared_ptr<dogen::yarn::element> >& intermediate_model::injected_elements() const {
     return injected_elements_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& intermediate_model::injected_elements() {
+std::list<boost::shared_ptr<dogen::yarn::element> >& intermediate_model::injected_elements() {
     return injected_elements_;
 }
 
-void intermediate_model::injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v) {
+void intermediate_model::injected_elements(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
     injected_elements_ = v;
 }
 
-void intermediate_model::injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v) {
+void intermediate_model::injected_elements(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v) {
     injected_elements_ = std::move(v);
 }
 

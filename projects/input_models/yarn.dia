@@ -7008,7 +7008,7 @@ etc.#</dia:string>
         <dia:point val="120.302,77"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.865,66.35;121.052,77.8"/>
+        <dia:rectangle val="105.48,66.35;121.052,77.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7016,8 +7016,8 @@ etc.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="120.302,77"/>
         <dia:point val="120.302,72"/>
-        <dia:point val="105.915,72"/>
-        <dia:point val="105.915,66.4"/>
+        <dia:point val="105.53,72"/>
+        <dia:point val="105.53,66.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10691,7 +10691,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="114,38.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="105.865,38.05;114.75,50.8"/>
+        <dia:rectangle val="105.48,38.05;114.75,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10699,8 +10699,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="114,38.8"/>
         <dia:point val="114,45"/>
-        <dia:point val="105.915,45"/>
-        <dia:point val="105.915,50"/>
+        <dia:point val="105.53,45"/>
+        <dia:point val="105.53,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12992,13 +12992,13 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:point val="75,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.95,49.95;105.965,66.45"/>
+        <dia:rectangle val="74.95,49.95;105.58,66.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="75,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="30.914999999999999"/>
+        <dia:real val="30.530000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="16.400000000000002"/>
@@ -13328,13 +13328,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
             <dia:string>#injected_elements#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;element&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;element&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>##</dia:string>
+            <dia:string>#Elements injected externally.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -13988,17 +13988,17 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="90.4575,66.4"/>
+        <dia:point val="90.265,66.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.4075,66.35;95.315,77.8"/>
+        <dia:rectangle val="90.215,66.35;95.315,77.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="90.4575,66.4"/>
-        <dia:point val="90.4575,72"/>
+        <dia:point val="90.265,66.4"/>
+        <dia:point val="90.265,72"/>
         <dia:point val="94.565,72"/>
         <dia:point val="94.565,77"/>
       </dia:attribute>
@@ -24936,7 +24936,7 @@ space.#</dia:string>
         <dia:point val="105.99,34.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="90.4075,34.05;106.74,50.8"/>
+        <dia:rectangle val="90.215,34.05;106.74,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24944,8 +24944,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="105.99,34.8"/>
         <dia:point val="105.99,43"/>
-        <dia:point val="90.4575,43"/>
-        <dia:point val="90.4575,50"/>
+        <dia:point val="90.265,43"/>
+        <dia:point val="90.265,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

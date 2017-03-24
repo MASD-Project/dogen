@@ -5986,8 +5986,7 @@
 	</visitors>
 	<injected_elements class_id="51" tracking_level="0" version="0">
 		<count>0</count>
-		<bucket_count>1</bucket_count>
-		<item_version>0</item_version>
+		<item_version>1</item_version>
 	</injected_elements>
 	<has_generatable_types>0</has_generatable_types>
 	<root_module object_id="_18">

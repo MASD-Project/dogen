@@ -80,7 +80,7 @@ public:
         const std::unordered_map<std::string, dogen::yarn::object>& objects,
         const std::unordered_map<std::string, dogen::yarn::exception>& exceptions,
         const std::unordered_map<std::string, dogen::yarn::visitor>& visitors,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements,
+        const std::list<boost::shared_ptr<dogen::yarn::element> >& injected_elements,
         const bool has_generatable_types,
         const dogen::yarn::module& root_module,
         const dogen::yarn::languages input_language,
@@ -216,10 +216,15 @@ public:
     void visitors(const std::unordered_map<std::string, dogen::yarn::visitor>&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& injected_elements();
-    void injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v);
-    void injected_elements(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >&& v);
+    /**
+     * @brief Elements injected externally.
+     */
+    /**@{*/
+    const std::list<boost::shared_ptr<dogen::yarn::element> >& injected_elements() const;
+    std::list<boost::shared_ptr<dogen::yarn::element> >& injected_elements();
+    void injected_elements(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
+    void injected_elements(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
+    /**@}*/
 
     /**
      * @brief If true the intermediate model has at least one generable type, false otherwise.
@@ -285,7 +290,7 @@ private:
     std::unordered_map<std::string, dogen::yarn::object> objects_;
     std::unordered_map<std::string, dogen::yarn::exception> exceptions_;
     std::unordered_map<std::string, dogen::yarn::visitor> visitors_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> > injected_elements_;
+    std::list<boost::shared_ptr<dogen::yarn::element> > injected_elements_;
     bool has_generatable_types_;
     dogen::yarn::module root_module_;
     dogen::yarn::languages input_language_;

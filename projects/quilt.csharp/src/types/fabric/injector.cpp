@@ -52,13 +52,7 @@ std::string injector::id() const {
 
 void injector::add_element(const boost::shared_ptr<yarn::element>& e,
     yarn::intermediate_model& im) const {
-    const auto id(e->name().id());
-    const auto pair(im.injected_elements().insert(std::make_pair(id, e)));
-    if (!pair.second) {
-        using yarn::injection_error;
-        BOOST_LOG_SEV(lg, error) << duplicate_qualified_name << id;
-        BOOST_THROW_EXCEPTION(injection_error(duplicate_qualified_name + id));
-    }
+    im.injected_elements().push_back(e);
 }
 
 void injector::

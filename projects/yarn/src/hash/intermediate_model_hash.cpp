@@ -137,11 +137,10 @@ inline std::size_t hash_boost_shared_ptr_dogen_yarn_element(const boost::shared_
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::element> >& v) {
+inline std::size_t hash_std_list_boost_shared_ptr_dogen_yarn_element(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_yarn_element(i.second));
+        combine(seed, hash_boost_shared_ptr_dogen_yarn_element(i));
     }
     return seed;
 }
@@ -193,7 +192,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_object(v.objects()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_exception(v.exceptions()));
     combine(seed, hash_std_unordered_map_std_string_dogen_yarn_visitor(v.visitors()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_element(v.injected_elements()));
+    combine(seed, hash_std_list_boost_shared_ptr_dogen_yarn_element(v.injected_elements()));
     combine(seed, v.has_generatable_types());
     combine(seed, v.root_module());
     combine(seed, v.input_language());
