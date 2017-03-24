@@ -21,7 +21,7 @@
 --std c++11
 
 # casing
---sql-name-case 0
+--sql-name-case upper
 
 # enable multi-database support
 --multi-database static

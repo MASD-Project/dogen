@@ -57,6 +57,7 @@ add_custom_target(odb_northwind_order_details
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/order_details_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details.hpp
@@ -69,6 +70,7 @@ add_custom_target(odb_northwind_categories
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/categories_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/categories.hpp
@@ -81,6 +83,7 @@ add_custom_target(odb_northwind_shippers
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/shippers_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/shippers.hpp
@@ -93,6 +96,7 @@ add_custom_target(odb_northwind_suppliers
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/suppliers_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/suppliers.hpp
@@ -105,6 +109,7 @@ add_custom_target(odb_northwind_orders
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/orders_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/orders.hpp
@@ -117,6 +122,7 @@ add_custom_target(odb_northwind_products
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/products_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/products.hpp
@@ -129,6 +135,7 @@ add_custom_target(odb_northwind_order_details_key
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/order_details_key_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details_key.hpp
@@ -141,6 +148,7 @@ add_custom_target(odb_northwind_customers
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/customers_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/customers.hpp
@@ -153,6 +161,7 @@ add_custom_target(odb_northwind_employees
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/employees_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/employees.hpp
