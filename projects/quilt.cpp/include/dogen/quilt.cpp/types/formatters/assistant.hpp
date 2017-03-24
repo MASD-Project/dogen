@@ -339,11 +339,6 @@ public:
      */
     std::string get_odb_type() const;
 
-    /**
-     * @brief Returns the type of letter casing to use.
-     */
-    std::string get_letter_case(const yarn::letter_cases lc) const;
-
 public:
     /**
      * @brief Returns the subset of names for which the supplied

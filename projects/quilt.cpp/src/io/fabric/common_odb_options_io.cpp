@@ -18,40 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_FACTORY_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <list>
-#include <string>
-#include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/orm_model_properties.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/orm_database_systems.hpp"
+#include <ostream>
+#include <boost/algorithm/string.hpp>
+#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class odb_options_factory final {
-public:
-    static std::string to_odb_database(const yarn::orm_database_systems ds);
-    static std::string to_odb_sql_name_case(const yarn::letter_cases lc);
-
-private:
-    std::list<std::string>
-    make_databases(const yarn::orm_model_properties& cfg) const;
-
-public:
-    std::list<boost::shared_ptr<yarn::element>>
-    make(const yarn::intermediate_model& im) const;
-};
+std::ostream& operator<<(std::ostream& s, const common_odb_options& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } } } }
-
-#endif

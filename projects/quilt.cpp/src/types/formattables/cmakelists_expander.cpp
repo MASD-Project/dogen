@@ -26,7 +26,7 @@
 #include "dogen/quilt.cpp/types/fabric/odb_target.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
@@ -57,7 +57,7 @@ public:
 
 public:
     using fabric::element_visitor::visit;
-    void visit(const fabric::odb_options& oo);
+    void visit(const fabric::common_odb_options& coo);
     void visit(const yarn::object& o);
 
 public:
@@ -77,10 +77,10 @@ odb_targets_factory(const locator& l, const yarn::name& model_name)
     result_.main_target_name(target_name_);
 }
 
-void odb_targets_factory::visit(const fabric::odb_options& oo) {
-    const auto arch(formatters::odb::traits::odb_options_archetype());
+void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
+    const auto arch(formatters::odb::traits::common_odb_options_archetype());
     result_.options_file(
-        locator_.make_relative_path_for_odb_options(oo.name(), arch,
+        locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()
         );
 }
@@ -109,35 +109,12 @@ void odb_targets_factory::visit(const yarn::object& o) {
     const auto rp(odb_fp.lexically_relative(src_dir));
     t.output_directory(rp.generic_string());
 
-
     const auto odb_rp(l.make_inclusion_path_for_cpp_header(n, odb_arch));
     t.pragmas_file(odb_rp.generic_string());
 
     const auto types_arch(formatters::types::traits::class_header_archetype());
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
     t.types_file(tp.lexically_relative(src_dir).generic_string());
-
-    /*
-     * Regular expressions.
-     */
-    const auto types_rp(locator_.make_inclusion_path_for_cpp_header(n,
-            types_arch).parent_path());
-
-    std::ostringstream os;
-    os << "%\\(.*\\).hpp%" << types_rp.generic_string() << "/$1.hpp%";
-    t.include_regexes().push_back(os.str());
-
-    os.str("");
-    os << "%\\(^[a-zA-Z0-9_]+\\)-odb\\(.*\\)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2";
-    t.include_regexes().push_back(os.str());
-
-    os.str("");
-    os << "%" << types_rp.generic_string() << "/\\(.*\\)-odb\\(.*\\)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
-    t.include_regexes().push_back(os.str());
-
-    t.header_guard_prefix(header_guard_factory::make(types_rp.parent_path()));
 
     // FIXME: compute move targets
 

@@ -28,8 +28,9 @@
 #include "dogen/yarn/types/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists_fwd.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_fwd.hpp"
 
 namespace dogen {
@@ -58,6 +59,16 @@ public:
     /**@}*/
 
     /**
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::common_odb_options
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::cpp::fabric::common_odb_options&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::common_odb_options&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::common_odb_options&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::common_odb_options&) { }
+    /**@}*/
+
+    /**
      * @brief Accept visits for type dogen::quilt::cpp::fabric::forward_declarations
      */
     /**@{*/
@@ -78,13 +89,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Accept visits for type dogen::quilt::cpp::fabric::odb_options
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::object_odb_options
      */
     /**@{*/
-    virtual void visit(const dogen::quilt::cpp::fabric::odb_options&) const { }
-    virtual void visit(const dogen::quilt::cpp::fabric::odb_options&) { }
-    virtual void visit(dogen::quilt::cpp::fabric::odb_options&) const { }
-    virtual void visit(dogen::quilt::cpp::fabric::odb_options&) { }
+    virtual void visit(const dogen::quilt::cpp::fabric::object_odb_options&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::object_odb_options&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::object_odb_options&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::object_odb_options&) { }
     /**@}*/
 
     /**

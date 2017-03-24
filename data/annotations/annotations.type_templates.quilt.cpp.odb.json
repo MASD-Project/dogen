@@ -80,13 +80,29 @@
   {
     "name": {
       "simple": "postfix",
-      "qualified": "quilt.cpp.odb.odb_options.postfix"
+      "qualified": "quilt.cpp.odb.common_odb_options.postfix"
     },
     "archetype_location": {
       "family": "quilt",
       "kernel": "quilt.cpp",
       "facet": "quilt.cpp.odb",
-      "archetype": "quilt.cpp.odb.odb_options"
+      "archetype": "quilt.cpp.odb.common_odb_options"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.odb.object_odb_options.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.odb",
+      "archetype": "quilt.cpp.odb.object_odb_options"
     },
     "value_type": "text",
     "template_kind": "instance",

@@ -18,37 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_OPTIONS_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_OPTIONS_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace fabric {
 
-namespace boost {
+class object_odb_options;
 
-template<>struct
-is_virtual_base_of<
-    dogen::yarn::element,
-    dogen::quilt::cpp::fabric::odb_options
-> : public mpl::true_ {};
-
-}
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::fabric::odb_options)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
-
-} }
+} } } }
 
 #endif

@@ -22,7 +22,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 
 namespace {
@@ -60,7 +61,9 @@ expand(const dogen::formatters::decoration_properties_factory& dpf,
          */
         if (ti == std::type_index(typeid(fabric::cmakelists)))
             eprops.decoration_properties(dpf.make(cmake_modeline_name));
-        else if (ti == std::type_index(typeid(fabric::odb_options)))
+        else if (ti == std::type_index(typeid(fabric::common_odb_options)))
+            eprops.decoration_properties(dpf.make(odb_modeline_name));
+        else if (ti == std::type_index(typeid(fabric::object_odb_options)))
             eprops.decoration_properties(dpf.make(odb_modeline_name));
         else
             eprops.decoration_properties(dc);

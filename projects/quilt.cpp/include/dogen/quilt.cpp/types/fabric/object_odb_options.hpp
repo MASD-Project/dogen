@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,28 +29,24 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include <boost/optional.hpp>
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/letter_cases.hpp"
-#include "dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/object_odb_options_fwd_ser.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class odb_options final : public dogen::yarn::element {
+class object_odb_options final : public dogen::yarn::element {
 public:
-    odb_options() = default;
-    odb_options(const odb_options&) = default;
+    object_odb_options() = default;
+    object_odb_options(const object_odb_options&) = default;
+    object_odb_options(object_odb_options&&) = default;
 
-    virtual ~odb_options() noexcept { }
-
-public:
-    odb_options(odb_options&& rhs);
+    virtual ~object_odb_options() noexcept { }
 
 public:
-    odb_options(
+    object_odb_options(
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
         const dogen::yarn::name& name,
@@ -59,18 +55,16 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const std::list<std::string>& databases,
-        const boost::optional<dogen::yarn::letter_cases>& letter_case,
-        const std::string& odb_include_directory_path,
-        const std::string& types_include_directory_path,
+        const std::string& epilogue,
+        const std::list<std::string>& include_regexes,
         const std::string& header_guard_prefix);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
 
 public:
     using dogen::yarn::element::accept;
@@ -83,25 +77,15 @@ public:
     void to_stream(std::ostream& s) const override;
 
 public:
-    const std::list<std::string>& databases() const;
-    std::list<std::string>& databases();
-    void databases(const std::list<std::string>& v);
-    void databases(const std::list<std::string>&& v);
+    const std::string& epilogue() const;
+    std::string& epilogue();
+    void epilogue(const std::string& v);
+    void epilogue(const std::string&& v);
 
-    const boost::optional<dogen::yarn::letter_cases>& letter_case() const;
-    boost::optional<dogen::yarn::letter_cases>& letter_case();
-    void letter_case(const boost::optional<dogen::yarn::letter_cases>& v);
-    void letter_case(const boost::optional<dogen::yarn::letter_cases>&& v);
-
-    const std::string& odb_include_directory_path() const;
-    std::string& odb_include_directory_path();
-    void odb_include_directory_path(const std::string& v);
-    void odb_include_directory_path(const std::string&& v);
-
-    const std::string& types_include_directory_path() const;
-    std::string& types_include_directory_path();
-    void types_include_directory_path(const std::string& v);
-    void types_include_directory_path(const std::string&& v);
+    const std::list<std::string>& include_regexes() const;
+    std::list<std::string>& include_regexes();
+    void include_regexes(const std::list<std::string>& v);
+    void include_regexes(const std::list<std::string>&& v);
 
     const std::string& header_guard_prefix() const;
     std::string& header_guard_prefix();
@@ -109,8 +93,8 @@ public:
     void header_guard_prefix(const std::string&& v);
 
 public:
-    bool operator==(const odb_options& rhs) const;
-    bool operator!=(const odb_options& rhs) const {
+    bool operator==(const object_odb_options& rhs) const;
+    bool operator!=(const object_odb_options& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -118,14 +102,12 @@ public:
     bool equals(const dogen::yarn::element& other) const override;
 
 public:
-    void swap(odb_options& other) noexcept;
-    odb_options& operator=(odb_options other);
+    void swap(object_odb_options& other) noexcept;
+    object_odb_options& operator=(object_odb_options other);
 
 private:
-    std::list<std::string> databases_;
-    boost::optional<dogen::yarn::letter_cases> letter_case_;
-    std::string odb_include_directory_path_;
-    std::string types_include_directory_path_;
+    std::string epilogue_;
+    std::list<std::string> include_regexes_;
     std::string header_guard_prefix_;
 };
 
@@ -135,8 +117,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::quilt::cpp::fabric::odb_options& lhs,
-    dogen::quilt::cpp::fabric::odb_options& rhs) {
+    dogen::quilt::cpp::fabric::object_odb_options& lhs,
+    dogen::quilt::cpp::fabric::object_odb_options& rhs) {
     lhs.swap(rhs);
 }
 

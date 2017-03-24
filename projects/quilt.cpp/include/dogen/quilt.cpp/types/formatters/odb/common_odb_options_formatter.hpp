@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_OPTIONS_FORMATTER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_OPTIONS_FORMATTER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_COMMON_ODB_OPTIONS_FORMATTER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_COMMON_ODB_OPTIONS_FORMATTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-class odb_options_formatter final : public artefact_formatter_interface {
+class common_odb_options_formatter final : public artefact_formatter_interface {
 public:
     static std::string static_artefact();
 

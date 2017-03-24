@@ -305,7 +305,8 @@
 #DOGEN quilt.cpp.odb.class_header.postfix=0_2_0
 #DOGEN quilt.cpp.odb.enum_header.postfix=0_2_1
 #DOGEN quilt.cpp.odb.primitive_header.postfix=0_2_2
-#DOGEN quilt.cpp.odb.odb_options.postfix=0_2_3
+#DOGEN quilt.cpp.odb.common_odb_options.postfix=0_2_3
+#DOGEN quilt.cpp.odb.object_odb_options.postfix=0_2_3
 #DOGEN quilt.cpp.odb.master_header.postfix=0_2_4
 #DOGEN quilt.cpp.serialization.directory=serialization_dir
 #DOGEN quilt.cpp.serialization.postfix=the_serialization

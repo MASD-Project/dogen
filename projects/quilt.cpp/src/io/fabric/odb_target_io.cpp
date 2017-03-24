@@ -32,20 +32,6 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
 inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
@@ -84,8 +70,6 @@ std::ostream& operator<<(std::ostream& s, const odb_target& v) {
       << "\"output_directory\": " << "\"" << tidy_up_string(v.output_directory()) << "\"" << ", "
       << "\"pragmas_file\": " << "\"" << tidy_up_string(v.pragmas_file()) << "\"" << ", "
       << "\"types_file\": " << "\"" << tidy_up_string(v.types_file()) << "\"" << ", "
-      << "\"include_regexes\": " << v.include_regexes() << ", "
-      << "\"header_guard_prefix\": " << "\"" << tidy_up_string(v.header_guard_prefix()) << "\"" << ", "
       << "\"move_parameters\": " << v.move_parameters()
       << " }";
     return(s);

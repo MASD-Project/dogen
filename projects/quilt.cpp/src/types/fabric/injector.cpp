@@ -25,7 +25,6 @@
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
@@ -40,7 +39,6 @@ const std::string id("quilt.cpp.fabric.injector");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
-const std::string odb_options_name("options.odb");
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
 }
@@ -92,8 +90,8 @@ void injector::inject_cmakelists(yarn::intermediate_model& im) const {
 
 void injector::inject_odb_options(yarn::intermediate_model& im) const {
     odb_options_factory f;
-    const auto e(f.make(im));
-    add_element(e, im);
+    const auto elements(f.make(im));
+    add_elements(elements, im);
 }
 
 void injector::inject_master_headers(yarn::intermediate_model& im) const {

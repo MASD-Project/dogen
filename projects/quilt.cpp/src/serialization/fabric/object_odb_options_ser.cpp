@@ -25,17 +25,15 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
-#include <boost/serialization/optional.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/element_ser.hpp"
-#include "dogen/yarn/serialization/letter_cases_ser.hpp"
-#include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::quilt::cpp::fabric::odb_options,
+    dogen::quilt::cpp::fabric::object_odb_options,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -43,27 +41,23 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::quilt::cpp::fabric::odb_options& v,
+    const dogen::quilt::cpp::fabric::object_odb_options& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar << make_nvp("databases", v.databases_);
-    ar << make_nvp("letter_case", v.letter_case_);
-    ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
-    ar << make_nvp("types_include_directory_path", v.types_include_directory_path_);
+    ar << make_nvp("epilogue", v.epilogue_);
+    ar << make_nvp("include_regexes", v.include_regexes_);
     ar << make_nvp("header_guard_prefix", v.header_guard_prefix_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::quilt::cpp::fabric::odb_options& v,
+    dogen::quilt::cpp::fabric::object_odb_options& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
 
-    ar >> make_nvp("databases", v.databases_);
-    ar >> make_nvp("letter_case", v.letter_case_);
-    ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
-    ar >> make_nvp("types_include_directory_path", v.types_include_directory_path_);
+    ar >> make_nvp("epilogue", v.epilogue_);
+    ar >> make_nvp("include_regexes", v.include_regexes_);
     ar >> make_nvp("header_guard_prefix", v.header_guard_prefix_);
 }
 
@@ -72,16 +66,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
 
 } }

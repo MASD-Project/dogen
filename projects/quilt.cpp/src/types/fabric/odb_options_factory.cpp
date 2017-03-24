@@ -23,9 +23,12 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/io/letter_cases_io.hpp"
 #include "dogen/yarn/io/orm_database_systems_io.hpp"
 #include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/fabric/building_error.hpp"
+#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 
 namespace {
@@ -40,8 +43,12 @@ const std::string oracle("oracle");
 const std::string sql_server("sqlserver");
 const std::string sqllite("sqllite");
 
+const std::string upper_case("upper");
+const std::string lower_case("lower");
+
 const std::string invalid_daatabase_system(
     "Database system is invalid or unsupported: ");
+const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 }
 
@@ -51,7 +58,7 @@ namespace cpp {
 namespace fabric {
 
 std::string
-odb_options_factory::to_string(const yarn::orm_database_systems ds) {
+odb_options_factory::to_odb_database(const yarn::orm_database_systems ds) {
     using yarn::orm_database_systems;
 
     switch (ds) {
@@ -67,32 +74,77 @@ odb_options_factory::to_string(const yarn::orm_database_systems ds) {
     } }
 }
 
+std::string
+odb_options_factory::to_odb_sql_name_case(const yarn::letter_cases lc) {
+    switch (lc) {
+    case yarn::letter_cases::upper_case: return upper_case;
+    case yarn::letter_cases::lower_case: return lower_case;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(lc));
+        BOOST_LOG_SEV(lg, error) << invalid_case << s;
+        BOOST_THROW_EXCEPTION(building_error(invalid_case + s));
+    } }
+}
 
 std::list<std::string> odb_options_factory::
 make_databases(const yarn::orm_model_properties& cfg) const {
     std::list<std::string> r;
+
+    if (cfg.database_systems().size() > 1)
+        r.push_back("common");
+
     for (const auto ds : cfg.database_systems())
-        r.push_back(to_string(ds));
+        r.push_back(to_odb_database(ds));
 
     return r;
 }
 
-boost::shared_ptr<yarn::element>
+std::list<boost::shared_ptr<yarn::element>>
 odb_options_factory::make(const yarn::intermediate_model& im) const {
-
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
+
+    std::list<boost::shared_ptr<yarn::element>> r;
+    for (const auto& pair : im.objects()) {
+        const auto& o(pair.second);
+
+        /*
+         * We only care about objects which have ORM enabled.
+         */
+        if (!o.orm_properties())
+            continue;
+
+        const auto id(o.name().id());
+        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
+
+        auto ooo(boost::make_shared<object_odb_options>());
+        ooo->name(o.name());
+        ooo->origin_type(o.origin_type());
+        ooo->annotation(o.annotation());
+        ooo->is_element_extension(true);
+        r.push_back(ooo);
+    }
+
+    /*
+     * We need at least one object with needs ORM support in order to
+     * generate the common options.
+     */
+    if (r.empty())
+        return r;
 
     yarn::name_factory nf;
     const auto n(nf.build_element_in_model(im.name(), odb_options_name));
-    auto r(boost::make_shared<odb_options>());
-    r->name(n);
-    r->origin_type(im.origin_type());
+
+    auto coo(boost::make_shared<common_odb_options>());
+    coo->name(n);
+    coo->origin_type(im.origin_type());
 
     if (im.orm_properties()) {
         const auto cfg(*im.orm_properties());
-        r->databases(make_databases(cfg));
-        r->letter_case(cfg.letter_case());
+        coo->databases(make_databases(cfg));
+        if (cfg.letter_case())
+            coo->sql_name_case(to_odb_sql_name_case(*cfg.letter_case()));
     }
+    r.push_back(coo);
 
     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";
 

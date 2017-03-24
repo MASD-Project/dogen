@@ -31,16 +31,12 @@ odb_target::odb_target(
     const std::string& output_directory,
     const std::string& pragmas_file,
     const std::string& types_file,
-    const std::list<std::string>& include_regexes,
-    const std::string& header_guard_prefix,
     const std::list<std::pair<std::string, std::string> >& move_parameters)
     : name_(name),
       comment_(comment),
       output_directory_(output_directory),
       pragmas_file_(pragmas_file),
       types_file_(types_file),
-      include_regexes_(include_regexes),
-      header_guard_prefix_(header_guard_prefix),
       move_parameters_(move_parameters) { }
 
 void odb_target::swap(odb_target& other) noexcept {
@@ -50,8 +46,6 @@ void odb_target::swap(odb_target& other) noexcept {
     swap(output_directory_, other.output_directory_);
     swap(pragmas_file_, other.pragmas_file_);
     swap(types_file_, other.types_file_);
-    swap(include_regexes_, other.include_regexes_);
-    swap(header_guard_prefix_, other.header_guard_prefix_);
     swap(move_parameters_, other.move_parameters_);
 }
 
@@ -61,8 +55,6 @@ bool odb_target::operator==(const odb_target& rhs) const {
         output_directory_ == rhs.output_directory_ &&
         pragmas_file_ == rhs.pragmas_file_ &&
         types_file_ == rhs.types_file_ &&
-        include_regexes_ == rhs.include_regexes_ &&
-        header_guard_prefix_ == rhs.header_guard_prefix_ &&
         move_parameters_ == rhs.move_parameters_;
 }
 
@@ -150,38 +142,6 @@ void odb_target::types_file(const std::string& v) {
 
 void odb_target::types_file(const std::string&& v) {
     types_file_ = std::move(v);
-}
-
-const std::list<std::string>& odb_target::include_regexes() const {
-    return include_regexes_;
-}
-
-std::list<std::string>& odb_target::include_regexes() {
-    return include_regexes_;
-}
-
-void odb_target::include_regexes(const std::list<std::string>& v) {
-    include_regexes_ = v;
-}
-
-void odb_target::include_regexes(const std::list<std::string>&& v) {
-    include_regexes_ = std::move(v);
-}
-
-const std::string& odb_target::header_guard_prefix() const {
-    return header_guard_prefix_;
-}
-
-std::string& odb_target::header_guard_prefix() {
-    return header_guard_prefix_;
-}
-
-void odb_target::header_guard_prefix(const std::string& v) {
-    header_guard_prefix_ = v;
-}
-
-void odb_target::header_guard_prefix(const std::string&& v) {
-    header_guard_prefix_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, std::string> >& odb_target::move_parameters() const {

@@ -1,0 +1,87 @@
+<#@ annotations.profile=dogen.stitch #>
+<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::odb #>
+<#@ stitch.inclusion_dependency=<typeinfo> #>
+<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
+<#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
+<#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
+<#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/object_odb_options.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/formatting_error.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp" #>
+<#+
+
+std::string object_odb_options_formatter::static_artefact() {
+    return traits::object_odb_options_archetype();
+}
+
+std::string object_odb_options_formatter::formatter_name() const {
+    static auto r(archetype_location().archetype());
+    return r;
+}
+
+annotations::archetype_location
+object_odb_options_formatter::archetype_location() const {
+    static annotations::archetype_location
+        r(cpp::traits::family(), cpp::traits::kernel(),
+          traits::facet(), object_odb_options_formatter::static_artefact());
+    return r;
+}
+
+std::type_index object_odb_options_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::object_odb_options)));
+    return r;
+}
+
+inclusion_support_types object_odb_options_formatter::inclusion_support_type() const {
+    return inclusion_support_types::not_supported;
+}
+
+boost::filesystem::path object_odb_options_formatter::inclusion_path(
+    const formattables::locator& /*l*/, const yarn::name& n) const {
+    using namespace dogen::utility::log;
+    static logger
+        lg(logger_factory("quilt.cpp.formatters.odb.object_odb_options_formatter"));
+
+        const std::string not_supported("Inclusion path is not supported: ");
+
+    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
+    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+}
+
+boost::filesystem::path object_odb_options_formatter::full_path(
+    const formattables::locator& l, const yarn::name& n) const {
+    return l.make_full_path_for_odb_options(n, static_artefact());
+}
+
+std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
+    const formattables::dependencies_builder_factory& /*f*/,
+    const yarn::element& /*e*/) const {
+    static std::list<std::string> r;
+    return r;
+}
+
+dogen::formatters::artefact object_odb_options_formatter::
+format(const context& ctx, const yarn::element& e) const {
+    const auto id(e.name().id());
+    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+    // const auto& o(a.as<fabric::object_odb_options>(static_artefact(), e));
+
+    {
+        a.make_decoration_preamble();
+#>
+# use the boost profile
+--profile boost
+
+<#+
+    } // sbf
+    return a.make_artefact();
+}
+#>

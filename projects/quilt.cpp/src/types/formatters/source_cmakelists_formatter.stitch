@@ -141,9 +141,9 @@ add_custom_target(<#= target.name() #>
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.output_directory() #>
         --odb-epilogue '#include "<#= target.pragmas_file() #>"'
 <#+
-                for (const auto& regex : target.include_regexes())
+                // for (const auto& regex : target.include_regexes())
+//        --include-regex ' regex
 #>
-        --include-regex '<#= regex #>'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.types_file() #>
 <#+

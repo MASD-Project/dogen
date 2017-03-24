@@ -55,9 +55,14 @@ struct traits {
     static std::string enum_header_archetype();
 
     /**
-     * @brief Name of the odb options archetype.
+     * @brief Name of the common odb options archetype.
      */
-    static std::string odb_options_archetype();
+    static std::string common_odb_options_archetype();
+
+    /**
+     * @brief Name of the object odb options archetype.
+     */
+    static std::string object_odb_options_archetype();
 
     /**
      * @brief The pragma used by the ODB compiler.

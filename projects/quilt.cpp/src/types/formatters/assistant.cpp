@@ -65,9 +65,6 @@ const bool use_documentation_tool_markup(true);
 const bool last_line_is_blank(true);
 const bool documenting_previous_identifier(true);
 
-const std::string upper_case("upper");
-const std::string lower_case("lower");
-
 const std::string file_path_not_set(
     "File path for formatter is not set. Formatter: ");
 const std::string header_guard_not_set(
@@ -83,7 +80,6 @@ const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string helpless_family("No registered helpers found for family: ");
-const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 }
 
@@ -632,17 +628,6 @@ std::string assistant::get_odb_type() const {
     if (odb_props->is_value())
         return odb_value_type;
     return odb_object_type;
-}
-
-std::string assistant::get_letter_case(const yarn::letter_cases lc) const {
-    if (lc == yarn::letter_cases::upper_case)
-        return upper_case;
-    else if (lc == yarn::letter_cases::lower_case)
-        return lower_case;
-
-    const auto s(boost::lexical_cast<std::string>(lc));
-    BOOST_LOG_SEV(lg, error) << invalid_case << s;
-    BOOST_THROW_EXCEPTION(formatting_error(invalid_case + s));
 }
 
 std::list<yarn::name> assistant::

@@ -50,8 +50,6 @@ public:
         const std::string& output_directory,
         const std::string& pragmas_file,
         const std::string& types_file,
-        const std::list<std::string>& include_regexes,
-        const std::string& header_guard_prefix,
         const std::list<std::pair<std::string, std::string> >& move_parameters);
 
 private:
@@ -87,16 +85,6 @@ public:
     void types_file(const std::string& v);
     void types_file(const std::string&& v);
 
-    const std::list<std::string>& include_regexes() const;
-    std::list<std::string>& include_regexes();
-    void include_regexes(const std::list<std::string>& v);
-    void include_regexes(const std::list<std::string>&& v);
-
-    const std::string& header_guard_prefix() const;
-    std::string& header_guard_prefix();
-    void header_guard_prefix(const std::string& v);
-    void header_guard_prefix(const std::string&& v);
-
     const std::list<std::pair<std::string, std::string> >& move_parameters() const;
     std::list<std::pair<std::string, std::string> >& move_parameters();
     void move_parameters(const std::list<std::pair<std::string, std::string> >& v);
@@ -118,8 +106,6 @@ private:
     std::string output_directory_;
     std::string pragmas_file_;
     std::string types_file_;
-    std::list<std::string> include_regexes_;
-    std::string header_guard_prefix_;
     std::list<std::pair<std::string, std::string> > move_parameters_;
 };
 

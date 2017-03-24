@@ -18,20 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
-#include "dogen/yarn/io/letter_cases_io.hpp"
-#include "dogen/quilt.cpp/io/fabric/odb_options_io.hpp"
+#ifndef DOGEN_QUILT_CPP_IO_FABRIC_OBJECT_ODB_OPTIONS_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FABRIC_OBJECT_ODB_OPTIONS_IO_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::ostream& operator<<(std::ostream& s, const odb_options& v) {
-    v.to_stream(s);
-    return(s);
-}
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::fabric::object_odb_options& v);
 
 } } } }
+
+#endif

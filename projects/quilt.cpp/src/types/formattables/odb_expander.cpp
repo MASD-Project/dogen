@@ -27,7 +27,8 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
@@ -66,7 +67,7 @@ private:
 
 public:
     using fabric::element_visitor::visit;
-    void visit(fabric::odb_options& oo);
+    void visit(fabric::object_odb_options& ooo);
     void visit(yarn::object& o);
     void visit(yarn::primitive& p);
 
@@ -93,19 +94,41 @@ updator::make_odb_pragmas(const odb_expander::type_group& tg,
     return s.get_text_collection_content(tg.odb_pragma);
 }
 
-void updator::visit(fabric::odb_options& oo) {
-    const bool for_include_statement(true);
-    const auto odb_fctn(formatters::odb::traits::facet());
-    const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
-            for_include_statement));
-    oo.odb_include_directory_path(odb_dp.generic_string());
-    oo.header_guard_prefix(header_guard_factory::make(odb_dp));
+void updator::visit(fabric::object_odb_options& /*ooo*/) {
+    // const bool for_include_statement(true);
+    // const auto odb_fctn(formatters::odb::traits::facet());
+    // const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
+    //         for_include_statement));
+    // coo.odb_include_directory_path(odb_dp.generic_string());
+    // coo.header_guard_prefix(header_guard_factory::make(odb_dp));
 
-    const auto types_fctn(formatters::types::traits::facet());
-    oo.types_include_directory_path(
-        locator_.make_relative_include_path_for_facet(types_fctn,
-            for_include_statement)
-        .generic_string());
+    // const auto types_fctn(formatters::types::traits::facet());
+    // coo.types_include_directory_path(
+    //     locator_.make_relative_include_path_for_facet(types_fctn,
+    //         for_include_statement)
+        // .generic_string());
+
+    /*
+     * Regular expressions.
+     */
+    // const auto types_rp(locator_.make_inclusion_path_for_cpp_header(n,
+    //         types_arch).parent_path());
+
+    // std::ostringstream os;
+    // os << "%\\(.*\\).hpp%" << types_rp.generic_string() << "/$1.hpp%";
+    // t.include_regexes().push_back(os.str());
+
+    // os.str("");
+    // os << "%\\(^[a-zA-Z0-9_]+\\)-odb\\(.*\\)%"
+    //    << odb_rp.parent_path().generic_string() << "/$1-odb$2";
+    // t.include_regexes().push_back(os.str());
+
+    // os.str("");
+    // os << "%" << types_rp.generic_string() << "/\\(.*\\)-odb\\(.*\\)%"
+    //    << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
+    // t.include_regexes().push_back(os.str());
+
+    // t.header_guard_prefix(header_guard_factory::make(types_rp.parent_path()));
 }
 
 void updator::visit(yarn::object& o) {
@@ -176,7 +199,7 @@ void updator::visit(yarn::object& o) {
 
                     const auto ds(pair.first);
                     const auto type(pair.second);
-                    s << fabric::odb_options_factory::to_string(ds)
+                    s << fabric::odb_options_factory::to_odb_database(ds)
                       << ":type(\"" << type << "\")";
 
                     is_first = false;

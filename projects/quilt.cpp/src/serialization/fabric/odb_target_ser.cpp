@@ -44,8 +44,6 @@ void save(Archive& ar,
     ar << make_nvp("output_directory", v.output_directory_);
     ar << make_nvp("pragmas_file", v.pragmas_file_);
     ar << make_nvp("types_file", v.types_file_);
-    ar << make_nvp("include_regexes", v.include_regexes_);
-    ar << make_nvp("header_guard_prefix", v.header_guard_prefix_);
     ar << make_nvp("move_parameters", v.move_parameters_);
 }
 
@@ -58,8 +56,6 @@ void load(Archive& ar,
     ar >> make_nvp("output_directory", v.output_directory_);
     ar >> make_nvp("pragmas_file", v.pragmas_file_);
     ar >> make_nvp("types_file", v.types_file_);
-    ar >> make_nvp("include_regexes", v.include_regexes_);
-    ar >> make_nvp("header_guard_prefix", v.header_guard_prefix_);
     ar >> make_nvp("move_parameters", v.move_parameters_);
 }
 

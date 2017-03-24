@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
@@ -26,7 +26,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -41,37 +41,37 @@ namespace cpp {
 namespace formatters {
 namespace odb {
 
-std::string odb_options_formatter::static_artefact() {
-    return traits::odb_options_archetype();
+std::string common_odb_options_formatter::static_artefact() {
+    return traits::common_odb_options_archetype();
 }
 
-std::string odb_options_formatter::formatter_name() const {
+std::string common_odb_options_formatter::formatter_name() const {
     static auto r(archetype_location().archetype());
     return r;
 }
 
 annotations::archetype_location
-odb_options_formatter::archetype_location() const {
+common_odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::family(), cpp::traits::kernel(),
-          traits::facet(), odb_options_formatter::static_artefact());
+          traits::facet(), common_odb_options_formatter::static_artefact());
     return r;
 }
 
-std::type_index odb_options_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::odb_options)));
+std::type_index common_odb_options_formatter::element_type_index() const {
+    static auto r(std::type_index(typeid(fabric::common_odb_options)));
     return r;
 }
 
-inclusion_support_types odb_options_formatter::inclusion_support_type() const {
+inclusion_support_types common_odb_options_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
-boost::filesystem::path odb_options_formatter::inclusion_path(
+boost::filesystem::path common_odb_options_formatter::inclusion_path(
     const formattables::locator& /*l*/, const yarn::name& n) const {
     using namespace dogen::utility::log;
     static logger
-        lg(logger_factory("quilt.cpp.formatters.odb.odb_options_formatter"));
+        lg(logger_factory("quilt.cpp.formatters.odb.common_odb_options_formatter"));
 
         const std::string not_supported("Inclusion path is not supported: ");
 
@@ -79,23 +79,23 @@ boost::filesystem::path odb_options_formatter::inclusion_path(
     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
 }
 
-boost::filesystem::path odb_options_formatter::full_path(
+boost::filesystem::path common_odb_options_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
     return l.make_full_path_for_odb_options(n, static_artefact());
 }
 
-std::list<std::string> odb_options_formatter::inclusion_dependencies(
+std::list<std::string> common_odb_options_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
     const yarn::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact odb_options_formatter::
+dogen::formatters::artefact common_odb_options_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& o(a.as<fabric::odb_options>(static_artefact(), e));
+    const auto& o(a.as<fabric::common_odb_options>(static_artefact(), e));
 
     {
         a.make_decoration_preamble();
@@ -106,9 +106,9 @@ a.stream() << "--std c++11" << std::endl;
 a.stream() << std::endl;
         }
 
-        if (o.letter_case()) {
+        if (!o.sql_name_case().empty()) {
 a.stream() << "# casing" << std::endl;
-a.stream() << "--sql-name-case " << a.get_letter_case(*o.letter_case()) << std::endl;
+a.stream() << "--sql-name-case " << o.sql_name_case().empty() << std::endl;
 a.stream() << std::endl;
         }
 
@@ -120,8 +120,6 @@ a.stream() << std::endl;
 
         if (!o.databases().empty()) {
 a.stream() << "# target databases" << std::endl;
-            if (o.databases().size() > 1)
-a.stream() << "--database common" << std::endl;
 
             for (const auto& d : o.databases())
 a.stream() << "--database " << d << std::endl;
