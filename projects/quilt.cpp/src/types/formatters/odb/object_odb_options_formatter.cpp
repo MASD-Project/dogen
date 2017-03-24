@@ -95,13 +95,19 @@ dogen::formatters::artefact object_odb_options_formatter::
 format(const context& ctx, const yarn::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    // const auto& o(a.as<fabric::object_odb_options>(static_artefact(), e));
+    const auto& ooo(a.as<fabric::object_odb_options>(static_artefact(), e));
 
     {
         a.make_decoration_preamble(e);
-a.stream() << "# use the boost profile" << std::endl;
-a.stream() << "--profile boost" << std::endl;
+a.stream() << "# epilogue" << std::endl;
+a.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
 a.stream() << std::endl;
+        if (!ooo.include_regexes().empty()) {
+a.stream() << "# regexes" << std::endl;
+            for (const auto& regex : ooo.include_regexes())
+a.stream() << "--include-regex " << regex << std::endl;
+a.stream() << std::endl;
+        }
     } // sbf
     return a.make_artefact();
 }

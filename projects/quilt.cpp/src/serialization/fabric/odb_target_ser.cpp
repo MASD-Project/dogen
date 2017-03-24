@@ -45,6 +45,8 @@ void save(Archive& ar,
     ar << make_nvp("pragmas_file", v.pragmas_file_);
     ar << make_nvp("types_file", v.types_file_);
     ar << make_nvp("move_parameters", v.move_parameters_);
+    ar << make_nvp("common_odb_options", v.common_odb_options_);
+    ar << make_nvp("object_odb_options", v.object_odb_options_);
 }
 
 template<typename Archive>
@@ -57,6 +59,8 @@ void load(Archive& ar,
     ar >> make_nvp("pragmas_file", v.pragmas_file_);
     ar >> make_nvp("types_file", v.types_file_);
     ar >> make_nvp("move_parameters", v.move_parameters_);
+    ar >> make_nvp("common_odb_options", v.common_odb_options_);
+    ar >> make_nvp("object_odb_options", v.object_odb_options_);
 }
 
 } }

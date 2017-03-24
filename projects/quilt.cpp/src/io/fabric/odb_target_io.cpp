@@ -70,7 +70,9 @@ std::ostream& operator<<(std::ostream& s, const odb_target& v) {
       << "\"output_directory\": " << "\"" << tidy_up_string(v.output_directory()) << "\"" << ", "
       << "\"pragmas_file\": " << "\"" << tidy_up_string(v.pragmas_file()) << "\"" << ", "
       << "\"types_file\": " << "\"" << tidy_up_string(v.types_file()) << "\"" << ", "
-      << "\"move_parameters\": " << v.move_parameters()
+      << "\"move_parameters\": " << v.move_parameters() << ", "
+      << "\"common_odb_options\": " << "\"" << tidy_up_string(v.common_odb_options()) << "\"" << ", "
+      << "\"object_odb_options\": " << "\"" << tidy_up_string(v.object_odb_options()) << "\""
       << " }";
     return(s);
 }

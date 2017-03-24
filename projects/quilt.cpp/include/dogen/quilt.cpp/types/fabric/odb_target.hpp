@@ -50,7 +50,9 @@ public:
         const std::string& output_directory,
         const std::string& pragmas_file,
         const std::string& types_file,
-        const std::list<std::pair<std::string, std::string> >& move_parameters);
+        const std::list<std::pair<std::string, std::string> >& move_parameters,
+        const std::string& common_odb_options,
+        const std::string& object_odb_options);
 
 private:
     template<typename Archive>
@@ -90,6 +92,16 @@ public:
     void move_parameters(const std::list<std::pair<std::string, std::string> >& v);
     void move_parameters(const std::list<std::pair<std::string, std::string> >&& v);
 
+    const std::string& common_odb_options() const;
+    std::string& common_odb_options();
+    void common_odb_options(const std::string& v);
+    void common_odb_options(const std::string&& v);
+
+    const std::string& object_odb_options() const;
+    std::string& object_odb_options();
+    void object_odb_options(const std::string& v);
+    void object_odb_options(const std::string&& v);
+
 public:
     bool operator==(const odb_target& rhs) const;
     bool operator!=(const odb_target& rhs) const {
@@ -107,6 +119,8 @@ private:
     std::string pragmas_file_;
     std::string types_file_;
     std::list<std::pair<std::string, std::string> > move_parameters_;
+    std::string common_odb_options_;
+    std::string object_odb_options_;
 };
 
 } } } }

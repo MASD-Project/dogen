@@ -31,13 +31,17 @@ odb_target::odb_target(
     const std::string& output_directory,
     const std::string& pragmas_file,
     const std::string& types_file,
-    const std::list<std::pair<std::string, std::string> >& move_parameters)
+    const std::list<std::pair<std::string, std::string> >& move_parameters,
+    const std::string& common_odb_options,
+    const std::string& object_odb_options)
     : name_(name),
       comment_(comment),
       output_directory_(output_directory),
       pragmas_file_(pragmas_file),
       types_file_(types_file),
-      move_parameters_(move_parameters) { }
+      move_parameters_(move_parameters),
+      common_odb_options_(common_odb_options),
+      object_odb_options_(object_odb_options) { }
 
 void odb_target::swap(odb_target& other) noexcept {
     using std::swap;
@@ -47,6 +51,8 @@ void odb_target::swap(odb_target& other) noexcept {
     swap(pragmas_file_, other.pragmas_file_);
     swap(types_file_, other.types_file_);
     swap(move_parameters_, other.move_parameters_);
+    swap(common_odb_options_, other.common_odb_options_);
+    swap(object_odb_options_, other.object_odb_options_);
 }
 
 bool odb_target::operator==(const odb_target& rhs) const {
@@ -55,7 +61,9 @@ bool odb_target::operator==(const odb_target& rhs) const {
         output_directory_ == rhs.output_directory_ &&
         pragmas_file_ == rhs.pragmas_file_ &&
         types_file_ == rhs.types_file_ &&
-        move_parameters_ == rhs.move_parameters_;
+        move_parameters_ == rhs.move_parameters_ &&
+        common_odb_options_ == rhs.common_odb_options_ &&
+        object_odb_options_ == rhs.object_odb_options_;
 }
 
 odb_target& odb_target::operator=(odb_target other) {
@@ -158,6 +166,38 @@ void odb_target::move_parameters(const std::list<std::pair<std::string, std::str
 
 void odb_target::move_parameters(const std::list<std::pair<std::string, std::string> >&& v) {
     move_parameters_ = std::move(v);
+}
+
+const std::string& odb_target::common_odb_options() const {
+    return common_odb_options_;
+}
+
+std::string& odb_target::common_odb_options() {
+    return common_odb_options_;
+}
+
+void odb_target::common_odb_options(const std::string& v) {
+    common_odb_options_ = v;
+}
+
+void odb_target::common_odb_options(const std::string&& v) {
+    common_odb_options_ = std::move(v);
+}
+
+const std::string& odb_target::object_odb_options() const {
+    return object_odb_options_;
+}
+
+std::string& odb_target::object_odb_options() {
+    return object_odb_options_;
+}
+
+void odb_target::object_odb_options(const std::string& v) {
+    object_odb_options_ = v;
+}
+
+void odb_target::object_odb_options(const std::string&& v) {
+    object_odb_options_ = std::move(v);
 }
 
 } } } }

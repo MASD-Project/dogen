@@ -149,9 +149,6 @@ a.stream() << "    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}" << std::endl;
 a.stream() << "    COMMAND ${ODB_EXECUTABLE}" << std::endl;
 a.stream() << "        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/" << targets.options_file() << std::endl;
 a.stream() << "        --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/" << target.output_directory() << std::endl;
-a.stream() << "        --odb-epilogue '#include \"" << target.pragmas_file() << "\"'" << std::endl;
-                // for (const auto& regex : target.include_regexes())
-//        --include-regex ' regex
 a.stream() << "        -I ${ODB_INCLUDE_DIRS} ${global_includes}" << std::endl;
 a.stream() << "        ${CMAKE_CURRENT_SOURCE_DIR}/" << target.types_file() << std::endl;
                 for (const auto& pair : target.move_parameters())

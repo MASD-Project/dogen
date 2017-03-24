@@ -94,41 +94,37 @@ updator::make_odb_pragmas(const odb_expander::type_group& tg,
     return s.get_text_collection_content(tg.odb_pragma);
 }
 
-void updator::visit(fabric::object_odb_options& /*ooo*/) {
-    // const bool for_include_statement(true);
-    // const auto odb_fctn(formatters::odb::traits::facet());
-    // const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
-    //         for_include_statement));
-    // coo.odb_include_directory_path(odb_dp.generic_string());
-    // coo.header_guard_prefix(header_guard_factory::make(odb_dp));
+void updator::visit(fabric::object_odb_options& ooo) {
+    const auto odb_arch(formatters::odb::traits::class_header_archetype());
+    const auto odb_rp(locator_.make_inclusion_path_for_cpp_header(ooo.name(),
+            odb_arch));
 
-    // const auto types_fctn(formatters::types::traits::facet());
-    // coo.types_include_directory_path(
-    //     locator_.make_relative_include_path_for_facet(types_fctn,
-    //         for_include_statement)
-        // .generic_string());
+    std::ostringstream os;
+    os << "'#include \"" << odb_rp.generic_string() << "\"'";
+    ooo.epilogue(os.str());
+    os.str("");
 
-    /*
-     * Regular expressions.
-     */
-    // const auto types_rp(locator_.make_inclusion_path_for_cpp_header(n,
-    //         types_arch).parent_path());
+    const auto types_arch(formatters::types::traits::class_header_archetype());
+    const auto types_rp(locator_.make_inclusion_path_for_cpp_header(ooo.name(),
+            types_arch).parent_path());
 
-    // std::ostringstream os;
-    // os << "%\\(.*\\).hpp%" << types_rp.generic_string() << "/$1.hpp%";
-    // t.include_regexes().push_back(os.str());
+    os << "%(.*).hpp%" << types_rp.generic_string() << "/$1.hpp%";
+    ooo.include_regexes().push_back(os.str());
 
-    // os.str("");
-    // os << "%\\(^[a-zA-Z0-9_]+\\)-odb\\(.*\\)%"
-    //    << odb_rp.parent_path().generic_string() << "/$1-odb$2";
-    // t.include_regexes().push_back(os.str());
+    os.str("");
+    os << "%(^[a-zA-Z0-9_]+)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2";
+    ooo.include_regexes().push_back(os.str());
 
-    // os.str("");
-    // os << "%" << types_rp.generic_string() << "/\\(.*\\)-odb\\(.*\\)%"
-    //    << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
-    // t.include_regexes().push_back(os.str());
+    os.str("");
+    os << "%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
+    ooo.include_regexes().push_back(os.str());
 
-    // t.header_guard_prefix(header_guard_factory::make(types_rp.parent_path()));
+    const auto odb_fctn(formatters::odb::traits::facet());
+    const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
+            true/*for_include_statement*/));
+    ooo.header_guard_prefix(header_guard_factory::make(odb_dp));
 }
 
 void updator::visit(yarn::object& o) {
@@ -310,13 +306,6 @@ void odb_expander::expand(const annotations::type_repository& atrp,
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
         auto& formattable(pair.second);
-
-        /*
-         * We only want to process the master segment; the element
-         * extensions can be ignored.
-         */
-        auto segment(formattable.master_segment());
-
         /*
          * We only need to generate the aspect properties for
          * elements of the target model. However, we can't perform
@@ -324,21 +313,21 @@ void odb_expander::expand(const annotations::type_repository& atrp,
          * be build prior to reduction or else we will not get aspects
          * for referenced models.
          */
+        auto segment(formattable.master_segment());
         if (segment->origin_type() != yarn::origin_types::target)
             continue;
 
-        /*
-         * Update the odb properties, if any exist.
-         */
-        auto& e(*segment);
-        updator g(l, tg);
-        e.accept(g);
+        for (const auto& ptr : formattable.all_segments()) {
+            auto& e(*ptr);
+            updator g(l, tg);
+            e.accept(g);
 
-        if (!g.result())
-            continue;
+            if (!g.result())
+                continue;
 
-        auto& eprops(formattable.element_properties());
-        eprops.odb_properties(*g.result());
+            auto& eprops(formattable.element_properties());
+            eprops.odb_properties(*g.result());
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding odb properties. ";
