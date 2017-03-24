@@ -137,7 +137,8 @@ add_custom_target(<#= target.name() #>
     COMMENT "<#= target.comment() #>"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/<#= targets.options_file() #>
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/<#= targets.common_odb_options() #>
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.object_odb_options() #>
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.output_directory() #>
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.types_file() #>

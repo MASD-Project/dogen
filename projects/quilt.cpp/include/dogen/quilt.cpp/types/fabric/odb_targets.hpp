@@ -46,7 +46,7 @@ public:
 public:
     odb_targets(
         const std::string& main_target_name,
-        const std::string& options_file,
+        const std::string& common_odb_options,
         const std::list<dogen::quilt::cpp::fabric::odb_target>& targets);
 
 private:
@@ -62,10 +62,10 @@ public:
     void main_target_name(const std::string& v);
     void main_target_name(const std::string&& v);
 
-    const std::string& options_file() const;
-    std::string& options_file();
-    void options_file(const std::string& v);
-    void options_file(const std::string&& v);
+    const std::string& common_odb_options() const;
+    std::string& common_odb_options();
+    void common_odb_options(const std::string& v);
+    void common_odb_options(const std::string&& v);
 
     const std::list<dogen::quilt::cpp::fabric::odb_target>& targets() const;
     std::list<dogen::quilt::cpp::fabric::odb_target>& targets();
@@ -84,7 +84,7 @@ public:
 
 private:
     std::string main_target_name_;
-    std::string options_file_;
+    std::string common_odb_options_;
     std::list<dogen::quilt::cpp::fabric::odb_target> targets_;
 };
 

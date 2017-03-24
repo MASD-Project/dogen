@@ -54,7 +54,7 @@ std::ostream& operator<<(std::ostream& s, const odb_targets& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::odb_targets\"" << ", "
       << "\"main_target_name\": " << "\"" << tidy_up_string(v.main_target_name()) << "\"" << ", "
-      << "\"options_file\": " << "\"" << tidy_up_string(v.options_file()) << "\"" << ", "
+      << "\"common_odb_options\": " << "\"" << tidy_up_string(v.common_odb_options()) << "\"" << ", "
       << "\"targets\": " << v.targets()
       << " }";
     return(s);

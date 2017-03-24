@@ -79,7 +79,7 @@ odb_targets_factory(const locator& l, const yarn::name& model_name)
 
 void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
     const auto arch(formatters::odb::traits::common_odb_options_archetype());
-    result_.options_file(
+    result_.common_odb_options(
         locator_.make_relative_path_for_odb_options(coo.name(), arch,
             false/*include_source_directory*/).generic_string()
         );
@@ -109,12 +109,14 @@ void odb_targets_factory::visit(const yarn::object& o) {
     const auto rp(odb_fp.lexically_relative(src_dir));
     t.output_directory(rp.generic_string());
 
-    const auto odb_rp(l.make_inclusion_path_for_cpp_header(n, odb_arch));
-    t.pragmas_file(odb_rp.generic_string());
-
     const auto types_arch(formatters::types::traits::class_header_archetype());
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
     t.types_file(tp.lexically_relative(src_dir).generic_string());
+
+    t.object_odb_options(
+        locator_.make_relative_path_for_odb_options(o.name(), odb_arch,
+            false/*include_source_directory*/).generic_string()
+        );
 
     // FIXME: compute move targets
 

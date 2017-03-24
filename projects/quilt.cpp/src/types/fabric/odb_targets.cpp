@@ -27,22 +27,22 @@ namespace fabric {
 
 odb_targets::odb_targets(
     const std::string& main_target_name,
-    const std::string& options_file,
+    const std::string& common_odb_options,
     const std::list<dogen::quilt::cpp::fabric::odb_target>& targets)
     : main_target_name_(main_target_name),
-      options_file_(options_file),
+      common_odb_options_(common_odb_options),
       targets_(targets) { }
 
 void odb_targets::swap(odb_targets& other) noexcept {
     using std::swap;
     swap(main_target_name_, other.main_target_name_);
-    swap(options_file_, other.options_file_);
+    swap(common_odb_options_, other.common_odb_options_);
     swap(targets_, other.targets_);
 }
 
 bool odb_targets::operator==(const odb_targets& rhs) const {
     return main_target_name_ == rhs.main_target_name_ &&
-        options_file_ == rhs.options_file_ &&
+        common_odb_options_ == rhs.common_odb_options_ &&
         targets_ == rhs.targets_;
 }
 
@@ -68,20 +68,20 @@ void odb_targets::main_target_name(const std::string&& v) {
     main_target_name_ = std::move(v);
 }
 
-const std::string& odb_targets::options_file() const {
-    return options_file_;
+const std::string& odb_targets::common_odb_options() const {
+    return common_odb_options_;
 }
 
-std::string& odb_targets::options_file() {
-    return options_file_;
+std::string& odb_targets::common_odb_options() {
+    return common_odb_options_;
 }
 
-void odb_targets::options_file(const std::string& v) {
-    options_file_ = v;
+void odb_targets::common_odb_options(const std::string& v) {
+    common_odb_options_ = v;
 }
 
-void odb_targets::options_file(const std::string&& v) {
-    options_file_ = std::move(v);
+void odb_targets::common_odb_options(const std::string&& v) {
+    common_odb_options_ = std::move(v);
 }
 
 const std::list<dogen::quilt::cpp::fabric::odb_target>& odb_targets::targets() const {

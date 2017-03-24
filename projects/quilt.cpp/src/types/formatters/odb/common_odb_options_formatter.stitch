@@ -88,7 +88,7 @@ format(const context& ctx, const yarn::element& e) const {
         if (!o.sql_name_case().empty()) {
 #>
 # casing
---sql-name-case <#= o.sql_name_case().empty() #>
+--sql-name-case <#= o.sql_name_case() #>
 
 <#+
         }

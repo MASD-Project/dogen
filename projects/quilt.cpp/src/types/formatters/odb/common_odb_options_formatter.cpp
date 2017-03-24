@@ -108,7 +108,7 @@ a.stream() << std::endl;
 
         if (!o.sql_name_case().empty()) {
 a.stream() << "# casing" << std::endl;
-a.stream() << "--sql-name-case " << o.sql_name_case().empty() << std::endl;
+a.stream() << "--sql-name-case " << o.sql_name_case() << std::endl;
 a.stream() << std::endl;
         }
 

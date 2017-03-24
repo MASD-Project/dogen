@@ -40,7 +40,7 @@ void save(Archive& ar,
     const dogen::quilt::cpp::fabric::odb_targets& v,
     const unsigned int /*version*/) {
     ar << make_nvp("main_target_name", v.main_target_name_);
-    ar << make_nvp("options_file", v.options_file_);
+    ar << make_nvp("common_odb_options", v.common_odb_options_);
     ar << make_nvp("targets", v.targets_);
 }
 
@@ -49,7 +49,7 @@ void load(Archive& ar,
     dogen::quilt::cpp::fabric::odb_targets& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("main_target_name", v.main_target_name_);
-    ar >> make_nvp("options_file", v.options_file_);
+    ar >> make_nvp("common_odb_options", v.common_odb_options_);
     ar >> make_nvp("targets", v.targets_);
 }
 
