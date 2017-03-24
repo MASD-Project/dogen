@@ -11,6 +11,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add full support for type_index                                   :story:
+
+At present we cannot create containers using =std::type_index= as a
+key because we do not have hashing, IO and serialisation support.
+
+Links:
+
+- [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
+
 *** "Assistant" type found in test model                              :story:
 
 We seem to be generating an "Assistant" type on the =primitve= test model:
