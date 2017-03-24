@@ -113,7 +113,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
 
     os.str("");
     os << "'%(^[a-zA-Z0-9_]+)-odb(.*)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2'";
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
     ooo.include_regexes().push_back(os.str());
 
     os.str("");
