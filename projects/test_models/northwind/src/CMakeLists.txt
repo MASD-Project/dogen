@@ -58,7 +58,6 @@ add_custom_target(odb_northwind_order_details
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/order_details_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details.hpp
     VERBATIM
@@ -71,7 +70,6 @@ add_custom_target(odb_northwind_categories
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/categories_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/categories.hpp
     VERBATIM
@@ -84,7 +82,6 @@ add_custom_target(odb_northwind_shippers
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/shippers_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/shippers.hpp
     VERBATIM
@@ -97,7 +94,6 @@ add_custom_target(odb_northwind_suppliers
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/suppliers_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/suppliers.hpp
     VERBATIM
@@ -110,7 +106,6 @@ add_custom_target(odb_northwind_orders
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/orders_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/orders.hpp
     VERBATIM
@@ -123,7 +118,6 @@ add_custom_target(odb_northwind_products
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/products_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/products.hpp
     VERBATIM
@@ -136,7 +130,6 @@ add_custom_target(odb_northwind_order_details_key
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/order_details_key_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details_key.hpp
     VERBATIM
@@ -149,7 +142,6 @@ add_custom_target(odb_northwind_customers
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/customers_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/customers.hpp
     VERBATIM
@@ -162,7 +154,6 @@ add_custom_target(odb_northwind_employees
     COMMAND ${ODB_EXECUTABLE}
         --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/employees_pragmas.hpp"'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/employees.hpp
     VERBATIM

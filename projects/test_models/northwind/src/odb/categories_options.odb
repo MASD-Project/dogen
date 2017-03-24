@@ -17,6 +17,11 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-# use the boost profile
---profile boost
+# epilogue
+--odb-epilogue '#include "dogen/test_models/northwind/odb/categories_pragmas.hpp"'
+
+# regexes
+--include-regex %(.*).hpp%dogen/test_models/northwind/types/$1.hpp%
+--include-regex %(^[a-zA-Z0-9_]+)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2
+--include-regex %dogen/test_models/northwind/types/(.*)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2%
 
