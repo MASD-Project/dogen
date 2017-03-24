@@ -17,32 +17,6 @@
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
 # MA 02110-1301, USA.
 #
-# enable C++11
---std c++11
-
-# casing
---sql-name-case upper
-
-# enable multi-database support
---multi-database static
-
-# target databases
---database common
---database pgsql
---database oracle
-
 # use the boost profile
 --profile boost
 
-# generate queries and embedded schemas
---generate-query
---generate-schema
---schema-format embedded
-
-# force odb extensions to be different from dogen ones just in case.
---ixx-suffix .ixx
---hxx-suffix .hxx
---cxx-suffix .cxx
-
-# debug regexes
-# --include-regex-trace

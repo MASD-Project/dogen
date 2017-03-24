@@ -56,12 +56,9 @@ add_custom_target(odb_northwind_order_details
     COMMENT "ODB order_details"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/order_details_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details.hpp
     VERBATIM
@@ -72,60 +69,48 @@ add_custom_target(odb_northwind_categories
     COMMENT "ODB categories"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/categories_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/categories.hpp
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_categories)
 
-add_custom_target(odb_northwind_suppliers
-    COMMENT "ODB suppliers"
-    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-    COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
-        --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
-        --odb-epilogue '#include "dogen/test_models/northwind/odb/suppliers_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
-        -I ${ODB_INCLUDE_DIRS} ${global_includes}
-        ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/suppliers.hpp
-    VERBATIM
-)
-add_dependencies(odb_northwind odb_northwind_suppliers)
-
 add_custom_target(odb_northwind_shippers
     COMMENT "ODB shippers"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/shippers_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/shippers.hpp
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_shippers)
 
+add_custom_target(odb_northwind_suppliers
+    COMMENT "ODB suppliers"
+    WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
+    COMMAND ${ODB_EXECUTABLE}
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
+        --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
+        --odb-epilogue '#include "dogen/test_models/northwind/odb/suppliers_pragmas.hpp"'
+        -I ${ODB_INCLUDE_DIRS} ${global_includes}
+        ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/suppliers.hpp
+    VERBATIM
+)
+add_dependencies(odb_northwind odb_northwind_suppliers)
+
 add_custom_target(odb_northwind_orders
     COMMENT "ODB orders"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/orders_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/orders.hpp
     VERBATIM
@@ -136,12 +121,9 @@ add_custom_target(odb_northwind_products
     COMMENT "ODB products"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/products_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/products.hpp
     VERBATIM
@@ -152,12 +134,9 @@ add_custom_target(odb_northwind_order_details_key
     COMMENT "ODB order_details_key"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/order_details_key_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details_key.hpp
     VERBATIM
@@ -168,12 +147,9 @@ add_custom_target(odb_northwind_customers
     COMMENT "ODB customers"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/customers_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/customers.hpp
     VERBATIM
@@ -184,12 +160,9 @@ add_custom_target(odb_northwind_employees
     COMMENT "ODB employees"
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMAND ${ODB_EXECUTABLE}
-        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/options.odb
+        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/odb/common_options.odb
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         --odb-epilogue '#include "dogen/test_models/northwind/odb/employees_pragmas.hpp"'
-        --include-regex '%\(.*\).hpp%dogen/test_models/northwind/types/$1.hpp%'
-        --include-regex '%\(^[a-zA-Z0-9_]+\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2'
-        --include-regex '%dogen/test_models/northwind/types/\(.*\)-odb\(.*\)%dogen/test_models/northwind/odb/$1-odb$2%'
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/employees.hpp
     VERBATIM
