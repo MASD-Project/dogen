@@ -22,7 +22,7 @@
 
 # regexes
 --include-regex '%(.*).hpp%dogen/test_models/northwind/types/$1.hpp%'
---include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2'
+--include-regex '%(^[a-zA-Z0-9_]+)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2%'
 --include-regex '%dogen/test_models/northwind/types/(.*)-odb(.*)%dogen/test_models/northwind/odb/$1-odb$2%'
 
 # debug regexes
