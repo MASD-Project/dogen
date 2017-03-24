@@ -120,7 +120,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& o(a.as<yarn::object>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         a.add_helper_methods(o.name().id());
 
         const auto qn(a.get_qualified_name(o.name()));

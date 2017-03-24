@@ -52,7 +52,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& p(a.as<yarn::primitive>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         a.add_helper_methods(p.name().id());
 
         {

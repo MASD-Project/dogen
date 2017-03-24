@@ -109,7 +109,7 @@ format(const context& ctx, const yarn::element& e) const {
     {
         const auto sn(o.name().simple());
         const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         if (!o.local_attributes().empty()) {
 a.stream() << "namespace {" << std::endl;
         a.add_helper_methods(o.name().id());

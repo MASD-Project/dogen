@@ -89,7 +89,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& fd(a.as<fabric::forward_declarations>(arch, e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
             const auto ns(a.make_namespaces(fd.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));

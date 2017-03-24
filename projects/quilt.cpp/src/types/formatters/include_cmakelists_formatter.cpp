@@ -98,7 +98,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& c(a.as<fabric::cmakelists>(static_artefact(), e));
 
     {
-        a.make_decoration_preamble();
+        a.make_decoration_preamble(e);
 a.stream() << "add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/" << c.source_directory_name() << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "install(" << std::endl;

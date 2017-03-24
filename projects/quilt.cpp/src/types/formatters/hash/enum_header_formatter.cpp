@@ -89,7 +89,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
 a.stream() << std::endl;
 a.stream() << "namespace std {" << std::endl;
 a.stream() << std::endl;

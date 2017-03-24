@@ -98,7 +98,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto qn(a.get_qualified_name(p.name()));
     {
 
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
 a.stream() << "BOOST_SERIALIZATION_SPLIT_FREE(" << qn << ")" << std::endl;
 a.stream() << std::endl;
 a.stream() << "namespace boost {" << std::endl;

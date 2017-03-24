@@ -37,6 +37,7 @@
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/yarn/types/letter_cases.hpp"
@@ -245,12 +246,19 @@ public:
      */
     bool is_streaming_enabled(const formattables::helper_properties& hp) const;
 
+private:
+    /**
+     * @brief Returns the decoration properties for a given yarn element.
+     */
+    const dogen::formatters::decoration_properties&
+    get_decoration_properties(const yarn::element& e) const;
+
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
     dogen::formatters::cpp::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter();
+    make_scoped_boilerplate_formatter(const yarn::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -262,7 +270,7 @@ public:
      * @brief Creates the decoration preamble.
      */
     /**@{*/
-    void make_decoration_preamble();
+    void make_decoration_preamble(const yarn::element& e);
     void make_decoration_preamble(
         const boost::optional<dogen::formatters::decoration_properties> dc);
     /**@}*/

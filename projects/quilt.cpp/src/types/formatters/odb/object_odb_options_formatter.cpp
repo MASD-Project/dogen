@@ -98,7 +98,7 @@ format(const context& ctx, const yarn::element& e) const {
     // const auto& o(a.as<fabric::object_odb_options>(static_artefact(), e));
 
     {
-        a.make_decoration_preamble();
+        a.make_decoration_preamble(e);
 a.stream() << "# use the boost profile" << std::endl;
 a.stream() << "--profile boost" << std::endl;
 a.stream() << std::endl;

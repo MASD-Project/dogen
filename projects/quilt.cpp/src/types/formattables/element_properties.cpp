@@ -34,7 +34,7 @@ element_properties::element_properties(element_properties&& rhs)
       odb_properties_(std::move(rhs.odb_properties_)) { }
 
 element_properties::element_properties(
-    const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
+    const std::unordered_map<std::string, dogen::formatters::decoration_properties>& decoration_properties,
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& artefact_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
@@ -72,19 +72,19 @@ element_properties& element_properties::operator=(element_properties other) {
     return *this;
 }
 
-const boost::optional<dogen::formatters::decoration_properties>& element_properties::decoration_properties() const {
+const std::unordered_map<std::string, dogen::formatters::decoration_properties>& element_properties::decoration_properties() const {
     return decoration_properties_;
 }
 
-boost::optional<dogen::formatters::decoration_properties>& element_properties::decoration_properties() {
+std::unordered_map<std::string, dogen::formatters::decoration_properties>& element_properties::decoration_properties() {
     return decoration_properties_;
 }
 
-void element_properties::decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v) {
+void element_properties::decoration_properties(const std::unordered_map<std::string, dogen::formatters::decoration_properties>& v) {
     decoration_properties_ = v;
 }
 
-void element_properties::decoration_properties(const boost::optional<dogen::formatters::decoration_properties>&& v) {
+void element_properties::decoration_properties(const std::unordered_map<std::string, dogen::formatters::decoration_properties>&& v) {
     decoration_properties_ = std::move(v);
 }
 

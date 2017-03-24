@@ -98,7 +98,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& o(a.as<fabric::common_odb_options>(static_artefact(), e));
 
     {
-        a.make_decoration_preamble();
+        a.make_decoration_preamble(e);
 
         if (!a.is_cpp_standard_98()) {
 a.stream() << "# enable C++11" << std::endl;

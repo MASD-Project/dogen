@@ -42,7 +42,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
             const auto ns(a.make_namespaces(ye.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));

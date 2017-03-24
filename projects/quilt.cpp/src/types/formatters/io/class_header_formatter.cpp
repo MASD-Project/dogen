@@ -92,7 +92,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& o(a.as<yarn::object>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
             const auto ns(a.make_namespaces(o.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));

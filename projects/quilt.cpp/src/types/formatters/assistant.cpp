@@ -80,6 +80,8 @@ const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string helpless_family("No registered helpers found for family: ");
+const std::string missing_decoration(
+    "No decoration properties found for type: ");
 
 }
 
@@ -333,11 +335,22 @@ bool assistant::is_odb_facet_enabled() const {
     return is_facet_enabled(traits::facet());
 }
 
-dogen::formatters::cpp::scoped_boilerplate_formatter
-assistant::make_scoped_boilerplate_formatter() {
+const dogen::formatters::decoration_properties& assistant::
+get_decoration_properties(const yarn::element& e) const {
     const auto& ep(context_.element_properties());
     const auto& dp(ep.decoration_properties());
+    const auto key(typeid(e).name());
+    const auto i(dp.find(key));
+    if (i == dp.end()) {
+        BOOST_LOG_SEV(lg, error) << missing_decoration << key;
+        BOOST_THROW_EXCEPTION(formatting_error(missing_decoration + key));
+    }
+    return i->second;
+}
 
+dogen::formatters::cpp::scoped_boilerplate_formatter
+assistant::make_scoped_boilerplate_formatter(const yarn::element& e) {
+    const auto dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.inclusion_dependencies());
     const auto& hg(art_props.header_guard());
@@ -353,9 +366,9 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/);
 }
 
-void assistant::make_decoration_preamble() {
-    const auto dc(context_.element_properties().decoration_properties());
-    make_decoration_preamble(dc);
+void assistant::make_decoration_preamble(const yarn::element& e) {
+    const auto dp(get_decoration_properties(e));
+    make_decoration_preamble(dp);
 }
 
 void assistant::make_decoration_preamble(

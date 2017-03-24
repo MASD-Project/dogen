@@ -94,7 +94,7 @@ format(const context& ctx, const yarn::element& e) const {
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
 a.stream() << std::endl;
     } // sbf
     return a.make_artefact();

@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 
@@ -34,6 +35,11 @@ namespace cpp {
 namespace formattables {
 
 class decoration_expander {
+private:
+    dogen::formatters::decoration_properties make_decoration_properties(
+        const dogen::formatters::decoration_properties_factory& dpf,
+        const yarn::element& e) const;
+
 public:
     void expand(const dogen::formatters::decoration_properties_factory& dpf,
         model& fm) const;

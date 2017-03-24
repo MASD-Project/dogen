@@ -19,6 +19,7 @@
  *
  */
 #include <typeindex>
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
@@ -42,32 +43,47 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
+dogen::formatters::decoration_properties
+decoration_expander::make_decoration_properties(
+    const dogen::formatters::decoration_properties_factory& dpf,
+    const yarn::element& e) const {
+    /*
+     * Not brilliant but at present we determine the type of
+     * decoration to apply based on the element meta-type.
+     */
+    const auto ti(std::type_index(typeid(e)));
+    if (ti == std::type_index(typeid(fabric::cmakelists)))
+        return dpf.make(cmake_modeline_name);
+    else if (ti == std::type_index(typeid(fabric::common_odb_options)))
+        return dpf.make(odb_modeline_name);
+    else if (ti == std::type_index(typeid(fabric::object_odb_options)))
+        return dpf.make(odb_modeline_name);
+
+    return dpf.make(cpp_modeline_name);
+}
+
 void decoration_expander::
 expand(const dogen::formatters::decoration_properties_factory& dpf,
     model& fm) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating decoration properties.";
 
-    const auto dc(dpf.make(cpp_modeline_name));
     for (auto& pair : fm.formattables()) {
-        const auto id(pair.first);
         auto& formattable(pair.second);
         auto& eprops(formattable.element_properties());
+        auto& map(eprops.decoration_properties());
+        for (const auto ptr : formattable.all_segments()) {
+            const auto& e(*ptr);
+            const auto key(typeid(e).name());
+            const auto dc(make_decoration_properties(dpf, e));
 
-        const auto& e(*formattable.master_segment());
-        const auto ti(std::type_index(typeid(e)));
-
-        /*
-         * Not brilliant but at present we determine the type of
-         * decoration to apply based on the element meta-type.
-         */
-        if (ti == std::type_index(typeid(fabric::cmakelists)))
-            eprops.decoration_properties(dpf.make(cmake_modeline_name));
-        else if (ti == std::type_index(typeid(fabric::common_odb_options)))
-            eprops.decoration_properties(dpf.make(odb_modeline_name));
-        else if (ti == std::type_index(typeid(fabric::object_odb_options)))
-            eprops.decoration_properties(dpf.make(odb_modeline_name));
-        else
-            eprops.decoration_properties(dc);
+            /*
+             * Note that we don't mind duplicate keys - they map to
+             * the same decoration properties.
+             */
+            map.insert(std::make_pair(key, dc));
+        }
     }
+    BOOST_LOG_SEV(lg, debug) << "Finished generating decoration properties.";
 }
 
 } } } }

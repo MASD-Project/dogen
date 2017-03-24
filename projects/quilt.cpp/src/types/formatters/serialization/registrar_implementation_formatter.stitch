@@ -61,7 +61,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& rg(a.as<fabric::registrar>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
             const auto ns(a.make_namespaces(rg.name()));
             auto snf(a.make_scoped_namespace_formatter(ns));

@@ -62,7 +62,7 @@ format(const artefact_formatter_interface& stock_formatter, const context& ctx,
     {
         const auto& n(e.name());
         const auto qn(a.get_qualified_name(n));
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
             const auto ns(a.make_namespaces(n));
             auto snf(a.make_scoped_namespace_formatter(ns));

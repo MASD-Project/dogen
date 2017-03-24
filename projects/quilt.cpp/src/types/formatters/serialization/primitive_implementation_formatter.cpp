@@ -119,7 +119,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto attr(p.value_attribute());
 a.stream() << std::endl;
 a.stream() << "namespace boost {" << std::endl;

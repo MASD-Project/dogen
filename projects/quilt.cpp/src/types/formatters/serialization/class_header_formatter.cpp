@@ -100,7 +100,7 @@ format(const context& ctx, const yarn::element& e) const {
 
     {
         const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
 
         if (!o.is_parent() && !o.parents().empty()) {
             const auto& pn(o.parents().front());

@@ -102,7 +102,7 @@ format(const context& ctx, const yarn::element& e) const {
         return dogen::formatters::artefact();
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto qn(a.get_qualified_name(fd.name()));
 a.stream() << std::endl;
 a.stream() << "namespace boost {" << std::endl;

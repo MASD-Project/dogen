@@ -89,7 +89,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
 a.stream() << std::endl;
 a.stream() << "template<class Archive>" << std::endl;
 a.stream() << "void serialize(Archive& ar, " << a.get_qualified_name(ye.name()) << "& v, unsigned int /*version*/){" << std::endl;

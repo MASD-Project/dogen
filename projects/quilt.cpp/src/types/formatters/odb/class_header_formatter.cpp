@@ -100,7 +100,7 @@ format(const context& ctx, const yarn::element& e) const {
     {
         const auto sn(o.name().simple());
         const auto qn(a.get_qualified_name(o.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto top_level_pragmas(a.get_odb_pragmas());
         if (top_level_pragmas.empty()) {
 a.stream() << "// class has no ODB pragmas defined." << std::endl;
