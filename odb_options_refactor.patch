@@ -1,0 +1,3691 @@
+diff --git a/data/annotations/annotations.type_templates.quilt.cpp.odb.json b/data/annotations/annotations.type_templates.quilt.cpp.odb.json
+index e03cb11a2..8e1b787af 100644
+--- a/data/annotations/annotations.type_templates.quilt.cpp.odb.json
++++ b/data/annotations/annotations.type_templates.quilt.cpp.odb.json
+@@ -80,13 +80,29 @@
+   {
+     "name": {
+       "simple": "postfix",
+-      "qualified": "quilt.cpp.odb.odb_options.postfix"
++      "qualified": "quilt.cpp.odb.common_odb_options.postfix"
+     },
+     "archetype_location": {
+       "family": "quilt",
+       "kernel": "quilt.cpp",
+       "facet": "quilt.cpp.odb",
+-      "archetype": "quilt.cpp.odb.odb_options"
++      "archetype": "quilt.cpp.odb.common_odb_options"
++    },
++    "value_type": "text",
++    "template_kind": "instance",
++    "scope": "root_module",
++    "default_value": ""
++  },
++  {
++    "name": {
++      "simple": "postfix",
++      "qualified": "quilt.cpp.odb.object_odb_options.postfix"
++    },
++    "archetype_location": {
++      "family": "quilt",
++      "kernel": "quilt.cpp",
++      "facet": "quilt.cpp.odb",
++      "archetype": "quilt.cpp.odb.object_odb_options"
+     },
+     "value_type": "text",
+     "template_kind": "instance",
+diff --git a/doc/agile/sprint_backlog_100.org b/doc/agile/sprint_backlog_100.org
+index 05022f86b..f72331b0a 100644
+--- a/doc/agile/sprint_backlog_100.org
++++ b/doc/agile/sprint_backlog_100.org
+@@ -327,6 +327,7 @@ This also means we can add the ODB files to the visual studio project
+ even before they get generated.
+ 
+ *** STARTED Improve ODB implementation                                :story:
++    CLOCK: [2017-03-23 Thu 16:22]
+     CLOCK: [2017-03-23 Thu 14:05]--[2017-03-23 Thu 16:21] =>  2:16
+     CLOCK: [2017-03-23 Thu 07:21]--[2017-03-23 Thu 12:02] =>  4:41
+ 
+diff --git a/projects/input_models/quilt.cpp.dia b/projects/input_models/quilt.cpp.dia
+index 872625b20..44639deb7 100644
+--- a/projects/input_models/quilt.cpp.dia
++++ b/projects/input_models/quilt.cpp.dia
+@@ -3596,22 +3596,22 @@
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O32">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="117,250"/>
++        <dia:point val="117,256"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="116.95,249.95;127.787,253.05"/>
++        <dia:rectangle val="116.95,255.95;131.998,259.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="117,250"/>
++        <dia:point val="117,256"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="10.737500000000001"/>
++        <dia:real val="14.9475"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#odb_options_formatter#</dia:string>
++        <dia:string>#common_odb_options_formatter#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>#C++ Artefact Formatter#</dia:string>
+@@ -15464,22 +15464,22 @@ an enumeration, false otherwise.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O121">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="334.083,43"/>
++        <dia:point val="343,43"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="334.033,42.95;353.498,49.05"/>
++        <dia:rectangle val="342.95,42.95;356.64,46.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="334.083,43"/>
++        <dia:point val="343,43"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="19.365000000000002"/>
++        <dia:real val="13.59"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="6"/>
++        <dia:real val="3.6000000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+-        <dia:string>#odb_options#</dia:string>
++        <dia:string>#common_odb_options#</dia:string>
+       </dia:attribute>
+       <dia:attribute name="stereotype">
+         <dia:string>##</dia:string>
+@@ -15568,53 +15568,7 @@ an enumeration, false otherwise.#</dia:string>
+       <dia:attribute name="attributes">
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#databases#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#letter_case#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#boost::optional&lt;yarn::letter_cases&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#odb_include_directory_path#</dia:string>
++            <dia:string>#sql_name_case#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+             <dia:string>#std::string#</dia:string>
+@@ -15637,33 +15591,10 @@ an enumeration, false otherwise.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#types_include_directory_path#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#header_guard_prefix#</dia:string>
++            <dia:string>#databases#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
++            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -15727,19 +15658,19 @@ an enumeration, false otherwise.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="333.728,60"/>
++        <dia:point val="344.373,60"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="332.978,48.95;343.965,60.8"/>
++        <dia:rectangle val="343.623,46.55;349.995,60.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="333.728,60"/>
+-        <dia:point val="333.728,55.8334"/>
+-        <dia:point val="343.765,55.8334"/>
+-        <dia:point val="343.765,49"/>
++        <dia:point val="344.373,60"/>
++        <dia:point val="344.373,55.8334"/>
++        <dia:point val="349.795,55.8334"/>
++        <dia:point val="349.795,46.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -15756,7 +15687,7 @@ an enumeration, false otherwise.#</dia:string>
+         <dia:color val="#000000"/>
+       </dia:attribute>
+       <dia:connections>
+-        <dia:connection handle="0" to="O274" connection="1"/>
++        <dia:connection handle="0" to="O274" connection="2"/>
+         <dia:connection handle="1" to="O121" connection="6"/>
+       </dia:connections>
+       <dia:childnode parent="O96"/>
+@@ -16461,13 +16392,13 @@ and element.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O129">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="117,256"/>
++        <dia:point val="117,250"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="116.95,255.95;128.8,259.05"/>
++        <dia:rectangle val="116.95,249.95;128.8,253.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="117,256"/>
++        <dia:point val="117,250"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="11.75"/>
+@@ -33024,13 +32955,13 @@ an "odd" formatter.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O276">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="322.083,43"/>
++        <dia:point val="327,43"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="322.033,42.95;328.993,46.05"/>
++        <dia:rectangle val="326.95,42.95;333.91,46.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="322.083,43"/>
++        <dia:point val="327,43"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="6.8600000000000003"/>
+@@ -34379,7 +34310,7 @@ an "odd" formatter.#</dia:string>
+         <dia:point val="242,74"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="241.95,73.95;267.19,82.45"/>
++        <dia:rectangle val="241.95,73.95;267.19,80.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="242,74"/>
+@@ -34388,7 +34319,7 @@ an "odd" formatter.#</dia:string>
+         <dia:real val="25.140000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+-        <dia:real val="8.4000000000000004"/>
++        <dia:real val="6.8000000000000007"/>
+       </dia:attribute>
+       <dia:attribute name="name">
+         <dia:string>#odb_target#</dia:string>
+@@ -34595,52 +34526,6 @@ an "odd" formatter.#</dia:string>
+         </dia:composite>
+         <dia:composite type="umlattribute">
+           <dia:attribute name="name">
+-            <dia:string>#include_regexes#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+-            <dia:string>#header_guard_prefix#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="type">
+-            <dia:string>#std::string#</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="value">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="comment">
+-            <dia:string>##</dia:string>
+-          </dia:attribute>
+-          <dia:attribute name="visibility">
+-            <dia:enum val="0"/>
+-          </dia:attribute>
+-          <dia:attribute name="abstract">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-          <dia:attribute name="class_scope">
+-            <dia:boolean val="false"/>
+-          </dia:attribute>
+-        </dia:composite>
+-        <dia:composite type="umlattribute">
+-          <dia:attribute name="name">
+             <dia:string>#move_parameters#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+@@ -35209,5 +35094,369 @@ an "odd" formatter.#</dia:string>
+       </dia:connections>
+       <dia:childnode parent="O0"/>
+     </dia:object>
++    <dia:object type="UML - Class" version="0" id="O292">
++      <dia:attribute name="obj_pos">
++        <dia:point val="303,43"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="302.95,42.95;318.95,47.45"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="303,43"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="15.9"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="4.4000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#object_odb_options#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##DOGEN yarn.generalization.parent=yarn::element#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes">
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#epilogue#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#include_regexes#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::list&lt;std::string&gt;#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++        <dia:composite type="umlattribute">
++          <dia:attribute name="name">
++            <dia:string>#header_guard_prefix#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="type">
++            <dia:string>#std::string#</dia:string>
++          </dia:attribute>
++          <dia:attribute name="value">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="comment">
++            <dia:string>##</dia:string>
++          </dia:attribute>
++          <dia:attribute name="visibility">
++            <dia:enum val="0"/>
++          </dia:attribute>
++          <dia:attribute name="abstract">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++          <dia:attribute name="class_scope">
++            <dia:boolean val="false"/>
++          </dia:attribute>
++        </dia:composite>
++      </dia:attribute>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++      <dia:childnode parent="O96"/>
++    </dia:object>
++    <dia:object type="UML - Association" version="2" id="O293">
++      <dia:attribute name="name">
++        <dia:string>#&lt; makes#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="direction">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="show_direction">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="assoc_type">
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="role_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_a">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_a">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_a">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="role_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="multipicity_b">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="visibility_b">
++        <dia:enum val="3"/>
++      </dia:attribute>
++      <dia:attribute name="show_arrow_b">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="obj_pos">
++        <dia:point val="323.083,60"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="310.9,47.35;323.833,61.6"/>
++      </dia:attribute>
++      <dia:attribute name="meta">
++        <dia:composite type="dict"/>
++      </dia:attribute>
++      <dia:attribute name="orth_points">
++        <dia:point val="323.083,60"/>
++        <dia:point val="323.083,56"/>
++        <dia:point val="310.95,56"/>
++        <dia:point val="310.95,47.4"/>
++      </dia:attribute>
++      <dia:attribute name="orth_orient">
++        <dia:enum val="1"/>
++        <dia:enum val="0"/>
++        <dia:enum val="1"/>
++      </dia:attribute>
++      <dia:attribute name="orth_autoroute">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="text_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="line_colour">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:connections>
++        <dia:connection handle="0" to="O274" connection="0"/>
++        <dia:connection handle="1" to="O292" connection="6"/>
++      </dia:connections>
++      <dia:childnode parent="O96"/>
++    </dia:object>
++    <dia:object type="UML - Class" version="0" id="O294">
++      <dia:attribute name="obj_pos">
++        <dia:point val="117,262"/>
++      </dia:attribute>
++      <dia:attribute name="obj_bb">
++        <dia:rectangle val="116.95,261.95;130.985,265.05"/>
++      </dia:attribute>
++      <dia:attribute name="elem_corner">
++        <dia:point val="117,262"/>
++      </dia:attribute>
++      <dia:attribute name="elem_width">
++        <dia:real val="13.934999999999999"/>
++      </dia:attribute>
++      <dia:attribute name="elem_height">
++        <dia:real val="3"/>
++      </dia:attribute>
++      <dia:attribute name="name">
++        <dia:string>#object_odb_options_formatter#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="stereotype">
++        <dia:string>#C++ Artefact Formatter#</dia:string>
++      </dia:attribute>
++      <dia:attribute name="comment">
++        <dia:string>##</dia:string>
++      </dia:attribute>
++      <dia:attribute name="abstract">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_attributes">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="suppress_operations">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="visible_attributes">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="visible_comments">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_operations">
++        <dia:boolean val="true"/>
++      </dia:attribute>
++      <dia:attribute name="wrap_after_char">
++        <dia:int val="40"/>
++      </dia:attribute>
++      <dia:attribute name="comment_line_length">
++        <dia:int val="17"/>
++      </dia:attribute>
++      <dia:attribute name="comment_tagging">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="line_width">
++        <dia:real val="0.10000000000000001"/>
++      </dia:attribute>
++      <dia:attribute name="line_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="fill_color">
++        <dia:color val="#ffffff"/>
++      </dia:attribute>
++      <dia:attribute name="text_color">
++        <dia:color val="#000000"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font">
++        <dia:font family="monospace" style="0" name="Courier"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font">
++        <dia:font family="monospace" style="88" name="Courier-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font">
++        <dia:font family="monospace" style="8" name="Courier-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font">
++        <dia:font family="sans" style="80" name="Helvetica-Bold"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font">
++        <dia:font family="sans" style="88" name="Helvetica-BoldOblique"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font">
++        <dia:font family="sans" style="8" name="Helvetica-Oblique"/>
++      </dia:attribute>
++      <dia:attribute name="normal_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="polymorphic_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_font_height">
++        <dia:real val="0.80000000000000004"/>
++      </dia:attribute>
++      <dia:attribute name="classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="abstract_classname_font_height">
++        <dia:real val="1"/>
++      </dia:attribute>
++      <dia:attribute name="comment_font_height">
++        <dia:real val="0.69999999999999996"/>
++      </dia:attribute>
++      <dia:attribute name="attributes"/>
++      <dia:attribute name="operations"/>
++      <dia:attribute name="template">
++        <dia:boolean val="false"/>
++      </dia:attribute>
++      <dia:attribute name="templates"/>
++      <dia:childnode parent="O30"/>
++    </dia:object>
+   </dia:layer>
+ </dia:diagram>
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/io/all_io.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/io/all_io.hpp
+index fcf9d2587..bcec217a7 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/io/all_io.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/io/all_io.hpp
+@@ -28,12 +28,13 @@
+ #include "dogen/quilt.cpp/io/fabric/registrar_io.hpp"
+ #include "dogen/quilt.cpp/io/fabric/cmakelists_io.hpp"
+ #include "dogen/quilt.cpp/io/fabric/odb_target_io.hpp"
+-#include "dogen/quilt.cpp/io/fabric/odb_options_io.hpp"
+ #include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
+ #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
+ #include "dogen/quilt.cpp/io/fabric/master_header_io.hpp"
+ #include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
+ #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
++#include "dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp"
++#include "dogen/quilt.cpp/io/fabric/object_odb_options_io.hpp"
+ #include "dogen/quilt.cpp/io/formattables/cpp_standards_io.hpp"
+ #include "dogen/quilt.cpp/io/fabric/forward_declarations_io.hpp"
+ #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/odb_options_io.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp
+similarity index 81%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/odb_options_io.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp
+index 2c742f87f..f0c314358 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/odb_options_io.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp
+@@ -18,15 +18,15 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_IO_FABRIC_ODB_OPTIONS_IO_HPP
+-#define DOGEN_QUILT_CPP_IO_FABRIC_ODB_OPTIONS_IO_HPP
++#ifndef DOGEN_QUILT_CPP_IO_FABRIC_COMMON_ODB_OPTIONS_IO_HPP
++#define DOGEN_QUILT_CPP_IO_FABRIC_COMMON_ODB_OPTIONS_IO_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+ #endif
+ 
+ #include <iosfwd>
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+@@ -35,7 +35,7 @@ namespace fabric {
+ 
+ std::ostream&
+ operator<<(std::ostream& s,
+-     const dogen::quilt::cpp::fabric::odb_options& v);
++     const dogen::quilt::cpp::fabric::common_odb_options& v);
+ 
+ } } } }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/object_odb_options_io.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/object_odb_options_io.hpp
+new file mode 100644
+index 000000000..51c14422e
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/io/fabric/object_odb_options_io.hpp
+@@ -0,0 +1,42 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_IO_FABRIC_OBJECT_ODB_OPTIONS_IO_HPP
++#define DOGEN_QUILT_CPP_IO_FABRIC_OBJECT_ODB_OPTIONS_IO_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <iosfwd>
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace fabric {
++
++std::ostream&
++operator<<(std::ostream& s,
++     const dogen::quilt::cpp::fabric::object_odb_options& v);
++
++} } } }
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/all_ser.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/all_ser.hpp
+index 62f7597e9..fff144456 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/all_ser.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/all_ser.hpp
+@@ -28,11 +28,12 @@
+ #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/odb_target_ser.hpp"
+-#include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/formattables/cpp_standards_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/formattables/odb_properties_ser.hpp"
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/common_odb_options_fwd_ser.hpp
+similarity index 71%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/common_odb_options_fwd_ser.hpp
+index c8ce8519a..ced43e4d1 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/common_odb_options_fwd_ser.hpp
+@@ -18,23 +18,23 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_OPTIONS_FWD_SER_HPP
+-#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_OPTIONS_FWD_SER_HPP
++#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_COMMON_ODB_OPTIONS_FWD_SER_HPP
++#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_COMMON_ODB_OPTIONS_FWD_SER_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+ #endif
+ 
+-#include "dogen/quilt.cpp/types/fabric/odb_options_fwd.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp"
+ 
+ namespace boost {
+ namespace serialization {
+ 
+ template<class Archive>
+-void save(Archive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++void save(Archive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
+ 
+ template<class Archive>
+-void load(Archive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++void load(Archive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
+ 
+ } }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp
+similarity index 70%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp
+index 6f2cae076..8f9862e4d 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp
+@@ -18,8 +18,8 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_OPTIONS_SER_HPP
+-#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_ODB_OPTIONS_SER_HPP
++#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_COMMON_ODB_OPTIONS_SER_HPP
++#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_COMMON_ODB_OPTIONS_SER_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+@@ -27,27 +27,27 @@
+ 
+ #include <boost/serialization/split_free.hpp>
+ #include <boost/type_traits/is_virtual_base_of.hpp>
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+ 
+ namespace boost {
+ 
+ template<>struct
+ is_virtual_base_of<
+     dogen::yarn::element,
+-    dogen::quilt::cpp::fabric::odb_options
++    dogen::quilt::cpp::fabric::common_odb_options
+ > : public mpl::true_ {};
+ 
+ }
+ 
+-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::fabric::odb_options)
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::fabric::common_odb_options)
+ namespace boost {
+ namespace serialization {
+ 
+ template<typename Archive>
+-void save(Archive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++void save(Archive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
+ 
+ template<typename Archive>
+-void load(Archive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++void load(Archive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
+ 
+ } }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/object_odb_options_fwd_ser.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/object_odb_options_fwd_ser.hpp
+new file mode 100644
+index 000000000..6c3451d76
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/object_odb_options_fwd_ser.hpp
+@@ -0,0 +1,41 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_OBJECT_ODB_OPTIONS_FWD_SER_HPP
++#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_OBJECT_ODB_OPTIONS_FWD_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include "dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp"
++
++namespace boost {
++namespace serialization {
++
++template<class Archive>
++void save(Archive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++
++template<class Archive>
++void load(Archive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp
+new file mode 100644
+index 000000000..513347049
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp
+@@ -0,0 +1,54 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_OBJECT_ODB_OPTIONS_SER_HPP
++#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_OBJECT_ODB_OPTIONS_SER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <boost/serialization/split_free.hpp>
++#include <boost/type_traits/is_virtual_base_of.hpp>
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
++
++namespace boost {
++
++template<>struct
++is_virtual_base_of<
++    dogen::yarn::element,
++    dogen::quilt::cpp::fabric::object_odb_options
++> : public mpl::true_ {};
++
++}
++
++BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::fabric::object_odb_options)
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++
++template<typename Archive>
++void load(Archive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++
++} }
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp
+index 85bf782f7..14ed20d1d 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/all.hpp
+@@ -36,7 +36,6 @@
+ #include "dogen/quilt.cpp/types/fabric/odb_target.hpp"
+ #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+ #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+ #include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
+ #include "dogen/quilt.cpp/types/formattables/model.hpp"
+ #include "dogen/quilt.cpp/types/formatters/context.hpp"
+@@ -59,6 +58,8 @@
+ #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+ #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
+ #include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
+ #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
+ #include "dogen/quilt.cpp/types/formatters/building_error.hpp"
+ #include "dogen/quilt.cpp/types/formatters/io/initializer.hpp"
+@@ -138,7 +139,6 @@
+ #include "dogen/quilt.cpp/types/formatters/hash/time_duration_helper.hpp"
+ #include "dogen/quilt.cpp/types/formatters/io/class_header_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
+-#include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/serialization/initializer.hpp"
+ #include "dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp"
+ #include "dogen/quilt.cpp/types/formatters/test_data/optional_helper.hpp"
+@@ -177,6 +177,8 @@
+ #include "dogen/quilt.cpp/types/formatters/test_data/enum_header_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formattables/local_enablement_configuration.hpp"
+ #include "dogen/quilt.cpp/types/formatters/io/enum_implementation_formatter.hpp"
++#include "dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
++#include "dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/test_data/class_header_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/types/exception_header_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/types/namespace_header_formatter.hpp"
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/common_odb_options.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/common_odb_options.hpp
+new file mode 100644
+index 000000000..9f33d38fc
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/common_odb_options.hpp
+@@ -0,0 +1,120 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_COMMON_ODB_OPTIONS_HPP
++#define DOGEN_QUILT_CPP_TYPES_FABRIC_COMMON_ODB_OPTIONS_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <list>
++#include <iosfwd>
++#include <string>
++#include <algorithm>
++#include "dogen/yarn/types/element.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/common_odb_options_fwd_ser.hpp"
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace fabric {
++
++class common_odb_options final : public dogen::yarn::element {
++public:
++    common_odb_options() = default;
++    common_odb_options(const common_odb_options&) = default;
++    common_odb_options(common_odb_options&&) = default;
++
++    virtual ~common_odb_options() noexcept { }
++
++public:
++    common_odb_options(
++        const std::string& documentation,
++        const dogen::annotations::annotation& annotation,
++        const dogen::yarn::name& name,
++        const dogen::yarn::origin_types origin_type,
++        const boost::optional<dogen::yarn::name>& contained_by,
++        const bool in_global_module,
++        const std::vector<std::string>& stereotypes,
++        const bool is_element_extension,
++        const std::string& sql_name_case,
++        const std::list<std::string>& databases);
++
++private:
++    template<typename Archive>
++    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++
++    template<typename Archive>
++    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++
++public:
++    using dogen::yarn::element::accept;
++
++    virtual void accept(const dogen::yarn::element_visitor& v) const override;
++    virtual void accept(dogen::yarn::element_visitor& v) const override;
++    virtual void accept(const dogen::yarn::element_visitor& v) override;
++    virtual void accept(dogen::yarn::element_visitor& v) override;
++public:
++    void to_stream(std::ostream& s) const override;
++
++public:
++    const std::string& sql_name_case() const;
++    std::string& sql_name_case();
++    void sql_name_case(const std::string& v);
++    void sql_name_case(const std::string&& v);
++
++    const std::list<std::string>& databases() const;
++    std::list<std::string>& databases();
++    void databases(const std::list<std::string>& v);
++    void databases(const std::list<std::string>&& v);
++
++public:
++    bool operator==(const common_odb_options& rhs) const;
++    bool operator!=(const common_odb_options& rhs) const {
++        return !this->operator==(rhs);
++    }
++
++public:
++    bool equals(const dogen::yarn::element& other) const override;
++
++public:
++    void swap(common_odb_options& other) noexcept;
++    common_odb_options& operator=(common_odb_options other);
++
++private:
++    std::string sql_name_case_;
++    std::list<std::string> databases_;
++};
++
++} } } }
++
++namespace std {
++
++template<>
++inline void swap(
++    dogen::quilt::cpp::fabric::common_odb_options& lhs,
++    dogen::quilt::cpp::fabric::common_odb_options& rhs) {
++    lhs.swap(rhs);
++}
++
++}
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_fwd.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp
+similarity index 87%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_fwd.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp
+index e7f073ed4..ea11e0421 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_fwd.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp
+@@ -18,8 +18,8 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_FWD_HPP
+-#define DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_FWD_HPP
++#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_COMMON_ODB_OPTIONS_FWD_HPP
++#define DOGEN_QUILT_CPP_TYPES_FABRIC_COMMON_ODB_OPTIONS_FWD_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+@@ -30,7 +30,7 @@ namespace quilt {
+ namespace cpp {
+ namespace fabric {
+ 
+-class odb_options;
++class common_odb_options;
+ 
+ } } } }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/element_visitor.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/element_visitor.hpp
+index c06c32f1b..bf04677d9 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/element_visitor.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/element_visitor.hpp
+@@ -28,8 +28,9 @@
+ #include "dogen/yarn/types/element_visitor.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
+ #include "dogen/quilt.cpp/types/fabric/cmakelists_fwd.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options_fwd.hpp"
+ #include "dogen/quilt.cpp/types/fabric/master_header_fwd.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp"
+ #include "dogen/quilt.cpp/types/fabric/forward_declarations_fwd.hpp"
+ 
+ namespace dogen {
+@@ -58,6 +59,16 @@ public:
+     /**@}*/
+ 
+     /**
++     * @brief Accept visits for type dogen::quilt::cpp::fabric::common_odb_options
++     */
++    /**@{*/
++    virtual void visit(const dogen::quilt::cpp::fabric::common_odb_options&) const { }
++    virtual void visit(const dogen::quilt::cpp::fabric::common_odb_options&) { }
++    virtual void visit(dogen::quilt::cpp::fabric::common_odb_options&) const { }
++    virtual void visit(dogen::quilt::cpp::fabric::common_odb_options&) { }
++    /**@}*/
++
++    /**
+      * @brief Accept visits for type dogen::quilt::cpp::fabric::forward_declarations
+      */
+     /**@{*/
+@@ -78,13 +89,13 @@ public:
+     /**@}*/
+ 
+     /**
+-     * @brief Accept visits for type dogen::quilt::cpp::fabric::odb_options
++     * @brief Accept visits for type dogen::quilt::cpp::fabric::object_odb_options
+      */
+     /**@{*/
+-    virtual void visit(const dogen::quilt::cpp::fabric::odb_options&) const { }
+-    virtual void visit(const dogen::quilt::cpp::fabric::odb_options&) { }
+-    virtual void visit(dogen::quilt::cpp::fabric::odb_options&) const { }
+-    virtual void visit(dogen::quilt::cpp::fabric::odb_options&) { }
++    virtual void visit(const dogen::quilt::cpp::fabric::object_odb_options&) const { }
++    virtual void visit(const dogen::quilt::cpp::fabric::object_odb_options&) { }
++    virtual void visit(dogen::quilt::cpp::fabric::object_odb_options&) const { }
++    virtual void visit(dogen::quilt::cpp::fabric::object_odb_options&) { }
+     /**@}*/
+ 
+     /**
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/object_odb_options.hpp
+similarity index 54%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/object_odb_options.hpp
+index 512b2c1c1..50df98f74 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/object_odb_options.hpp
+@@ -18,8 +18,8 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_HPP
+-#define DOGEN_QUILT_CPP_TYPES_FABRIC_ODB_OPTIONS_HPP
++#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
++#define DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+@@ -29,28 +29,24 @@
+ #include <iosfwd>
+ #include <string>
+ #include <algorithm>
+-#include <boost/optional.hpp>
+ #include "dogen/yarn/types/element.hpp"
+-#include "dogen/yarn/types/letter_cases.hpp"
+-#include "dogen/quilt.cpp/serialization/fabric/odb_options_fwd_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/object_odb_options_fwd_ser.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+ namespace cpp {
+ namespace fabric {
+ 
+-class odb_options final : public dogen::yarn::element {
++class object_odb_options final : public dogen::yarn::element {
+ public:
+-    odb_options() = default;
+-    odb_options(const odb_options&) = default;
++    object_odb_options() = default;
++    object_odb_options(const object_odb_options&) = default;
++    object_odb_options(object_odb_options&&) = default;
+ 
+-    virtual ~odb_options() noexcept { }
++    virtual ~object_odb_options() noexcept { }
+ 
+ public:
+-    odb_options(odb_options&& rhs);
+-
+-public:
+-    odb_options(
++    object_odb_options(
+         const std::string& documentation,
+         const dogen::annotations::annotation& annotation,
+         const dogen::yarn::name& name,
+@@ -59,18 +55,16 @@ public:
+         const bool in_global_module,
+         const std::vector<std::string>& stereotypes,
+         const bool is_element_extension,
+-        const std::list<std::string>& databases,
+-        const boost::optional<dogen::yarn::letter_cases>& letter_case,
+-        const std::string& odb_include_directory_path,
+-        const std::string& types_include_directory_path,
++        const std::string& epilogue,
++        const std::list<std::string>& include_regexes,
+         const std::string& header_guard_prefix);
+ 
+ private:
+     template<typename Archive>
+-    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++    friend void boost::serialization::save(Archive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+ 
+     template<typename Archive>
+-    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++    friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+ 
+ public:
+     using dogen::yarn::element::accept;
+@@ -83,25 +77,15 @@ public:
+     void to_stream(std::ostream& s) const override;
+ 
+ public:
+-    const std::list<std::string>& databases() const;
+-    std::list<std::string>& databases();
+-    void databases(const std::list<std::string>& v);
+-    void databases(const std::list<std::string>&& v);
+-
+-    const boost::optional<dogen::yarn::letter_cases>& letter_case() const;
+-    boost::optional<dogen::yarn::letter_cases>& letter_case();
+-    void letter_case(const boost::optional<dogen::yarn::letter_cases>& v);
+-    void letter_case(const boost::optional<dogen::yarn::letter_cases>&& v);
+-
+-    const std::string& odb_include_directory_path() const;
+-    std::string& odb_include_directory_path();
+-    void odb_include_directory_path(const std::string& v);
+-    void odb_include_directory_path(const std::string&& v);
+-
+-    const std::string& types_include_directory_path() const;
+-    std::string& types_include_directory_path();
+-    void types_include_directory_path(const std::string& v);
+-    void types_include_directory_path(const std::string&& v);
++    const std::string& epilogue() const;
++    std::string& epilogue();
++    void epilogue(const std::string& v);
++    void epilogue(const std::string&& v);
++
++    const std::list<std::string>& include_regexes() const;
++    std::list<std::string>& include_regexes();
++    void include_regexes(const std::list<std::string>& v);
++    void include_regexes(const std::list<std::string>&& v);
+ 
+     const std::string& header_guard_prefix() const;
+     std::string& header_guard_prefix();
+@@ -109,8 +93,8 @@ public:
+     void header_guard_prefix(const std::string&& v);
+ 
+ public:
+-    bool operator==(const odb_options& rhs) const;
+-    bool operator!=(const odb_options& rhs) const {
++    bool operator==(const object_odb_options& rhs) const;
++    bool operator!=(const object_odb_options& rhs) const {
+         return !this->operator==(rhs);
+     }
+ 
+@@ -118,14 +102,12 @@ public:
+     bool equals(const dogen::yarn::element& other) const override;
+ 
+ public:
+-    void swap(odb_options& other) noexcept;
+-    odb_options& operator=(odb_options other);
++    void swap(object_odb_options& other) noexcept;
++    object_odb_options& operator=(object_odb_options other);
+ 
+ private:
+-    std::list<std::string> databases_;
+-    boost::optional<dogen::yarn::letter_cases> letter_case_;
+-    std::string odb_include_directory_path_;
+-    std::string types_include_directory_path_;
++    std::string epilogue_;
++    std::list<std::string> include_regexes_;
+     std::string header_guard_prefix_;
+ };
+ 
+@@ -135,8 +117,8 @@ namespace std {
+ 
+ template<>
+ inline void swap(
+-    dogen::quilt::cpp::fabric::odb_options& lhs,
+-    dogen::quilt::cpp::fabric::odb_options& rhs) {
++    dogen::quilt::cpp::fabric::object_odb_options& lhs,
++    dogen::quilt::cpp::fabric::object_odb_options& rhs) {
+     lhs.swap(rhs);
+ }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp
+new file mode 100644
+index 000000000..33479c623
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp
+@@ -0,0 +1,37 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_FWD_HPP
++#define DOGEN_QUILT_CPP_TYPES_FABRIC_OBJECT_ODB_OPTIONS_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace fabric {
++
++class object_odb_options;
++
++} } } }
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_factory.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_factory.hpp
+index cfb4cad3a..4125c5f72 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_factory.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_options_factory.hpp
+@@ -32,7 +32,6 @@
+ #include "dogen/yarn/types/orm_model_properties.hpp"
+ #include "dogen/yarn/types/intermediate_model.hpp"
+ #include "dogen/yarn/types/orm_database_systems.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+@@ -41,14 +40,15 @@ namespace fabric {
+ 
+ class odb_options_factory final {
+ public:
+-    static std::string to_string(const yarn::orm_database_systems ds);
++    static std::string to_odb_database(const yarn::orm_database_systems ds);
++    static std::string to_odb_sql_name_case(const yarn::letter_cases lc);
+ 
+ private:
+     std::list<std::string>
+     make_databases(const yarn::orm_model_properties& cfg) const;
+ 
+ public:
+-    boost::shared_ptr<yarn::element>
++    std::list<boost::shared_ptr<yarn::element>>
+     make(const yarn::intermediate_model& im) const;
+ };
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_target.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_target.hpp
+index cbef821b0..25de6a9f6 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_target.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/fabric/odb_target.hpp
+@@ -50,8 +50,6 @@ public:
+         const std::string& output_directory,
+         const std::string& pragmas_file,
+         const std::string& types_file,
+-        const std::list<std::string>& include_regexes,
+-        const std::string& header_guard_prefix,
+         const std::list<std::pair<std::string, std::string> >& move_parameters);
+ 
+ private:
+@@ -87,16 +85,6 @@ public:
+     void types_file(const std::string& v);
+     void types_file(const std::string&& v);
+ 
+-    const std::list<std::string>& include_regexes() const;
+-    std::list<std::string>& include_regexes();
+-    void include_regexes(const std::list<std::string>& v);
+-    void include_regexes(const std::list<std::string>&& v);
+-
+-    const std::string& header_guard_prefix() const;
+-    std::string& header_guard_prefix();
+-    void header_guard_prefix(const std::string& v);
+-    void header_guard_prefix(const std::string&& v);
+-
+     const std::list<std::pair<std::string, std::string> >& move_parameters() const;
+     std::list<std::pair<std::string, std::string> >& move_parameters();
+     void move_parameters(const std::list<std::pair<std::string, std::string> >& v);
+@@ -118,8 +106,6 @@ private:
+     std::string output_directory_;
+     std::string pragmas_file_;
+     std::string types_file_;
+-    std::list<std::string> include_regexes_;
+-    std::string header_guard_prefix_;
+     std::list<std::pair<std::string, std::string> > move_parameters_;
+ };
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+index c2bd3884b..eb9e388fd 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/assistant.hpp
+@@ -339,11 +339,6 @@ public:
+      */
+     std::string get_odb_type() const;
+ 
+-    /**
+-     * @brief Returns the type of letter casing to use.
+-     */
+-    std::string get_letter_case(const yarn::letter_cases lc) const;
+-
+ public:
+     /**
+      * @brief Returns the subset of names for which the supplied
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp
+similarity index 89%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp
+index 723b85362..563f6e7ed 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp
+@@ -18,8 +18,8 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_OPTIONS_FORMATTER_HPP
+-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_OPTIONS_FORMATTER_HPP
++#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_COMMON_ODB_OPTIONS_FORMATTER_HPP
++#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_COMMON_ODB_OPTIONS_FORMATTER_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+@@ -34,7 +34,7 @@ namespace cpp {
+ namespace formatters {
+ namespace odb {
+ 
+-class odb_options_formatter final : public artefact_formatter_interface {
++class common_odb_options_formatter final : public artefact_formatter_interface {
+ public:
+     static std::string static_artefact();
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_fwd.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter_fwd.hpp
+similarity index 84%
+rename from projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_fwd.hpp
+rename to projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter_fwd.hpp
+index a31c44206..235d0f40e 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/odb_options_formatter_fwd.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter_fwd.hpp
+@@ -18,8 +18,8 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_OPTIONS_FORMATTER_FWD_HPP
+-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_ODB_OPTIONS_FORMATTER_FWD_HPP
++#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_COMMON_ODB_OPTIONS_FORMATTER_FWD_HPP
++#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_COMMON_ODB_OPTIONS_FORMATTER_FWD_HPP
+ 
+ #if defined(_MSC_VER) && (_MSC_VER >= 1200)
+ #pragma once
+@@ -31,7 +31,7 @@ namespace cpp {
+ namespace formatters {
+ namespace odb {
+ 
+-class odb_options_formatter;
++class common_odb_options_formatter;
+ 
+ } } } } }
+ 
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp
+new file mode 100644
+index 000000000..804152c70
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp
+@@ -0,0 +1,66 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_OBJECT_ODB_OPTIONS_FORMATTER_HPP
++#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_OBJECT_ODB_OPTIONS_FORMATTER_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++#include <algorithm>
++#include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace formatters {
++namespace odb {
++
++class object_odb_options_formatter final : public artefact_formatter_interface {
++public:
++    static std::string static_artefact();
++
++public:
++    std::string formatter_name() const override;
++    annotations::archetype_location archetype_location() const override;
++    std::type_index element_type_index() const override;
++
++public:
++    std::list<std::string> inclusion_dependencies(
++        const formattables::dependencies_builder_factory& f,
++        const yarn::element& e) const override;
++
++    inclusion_support_types inclusion_support_type() const override;
++
++    boost::filesystem::path inclusion_path(
++        const formattables::locator& l, const yarn::name& n) const override;
++
++    boost::filesystem::path full_path(
++        const formattables::locator& l, const yarn::name& n) const override;
++
++public:
++    dogen::formatters::artefact
++    format(const context& ctx, const yarn::element& e) const override;
++};
++
++} } } } }
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter_fwd.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter_fwd.hpp
+new file mode 100644
+index 000000000..ba13612a0
+--- /dev/null
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter_fwd.hpp
+@@ -0,0 +1,38 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_OBJECT_ODB_OPTIONS_FORMATTER_FWD_HPP
++#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_ODB_OBJECT_ODB_OPTIONS_FORMATTER_FWD_HPP
++
++#if defined(_MSC_VER) && (_MSC_VER >= 1200)
++#pragma once
++#endif
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace formatters {
++namespace odb {
++
++class object_odb_options_formatter;
++
++} } } } }
++
++#endif
+diff --git a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/traits.hpp b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/traits.hpp
+index a8d1a41c7..e2f588176 100644
+--- a/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/traits.hpp
++++ b/projects/quilt.cpp/include/dogen/quilt.cpp/types/formatters/odb/traits.hpp
+@@ -55,9 +55,14 @@ struct traits {
+     static std::string enum_header_archetype();
+ 
+     /**
+-     * @brief Name of the odb options archetype.
++     * @brief Name of the common odb options archetype.
+      */
+-    static std::string odb_options_archetype();
++    static std::string common_odb_options_archetype();
++
++    /**
++     * @brief Name of the object odb options archetype.
++     */
++    static std::string object_odb_options_archetype();
+ 
+     /**
+      * @brief The pragma used by the ODB compiler.
+diff --git a/projects/quilt.cpp/src/io/fabric/odb_options_io.cpp b/projects/quilt.cpp/src/io/fabric/common_odb_options_io.cpp
+similarity index 86%
+rename from projects/quilt.cpp/src/io/fabric/odb_options_io.cpp
+rename to projects/quilt.cpp/src/io/fabric/common_odb_options_io.cpp
+index a95cb8294..ece705b95 100644
+--- a/projects/quilt.cpp/src/io/fabric/odb_options_io.cpp
++++ b/projects/quilt.cpp/src/io/fabric/common_odb_options_io.cpp
+@@ -21,15 +21,14 @@
+ #include <ostream>
+ #include <boost/algorithm/string.hpp>
+ #include "dogen/yarn/io/element_io.hpp"
+-#include "dogen/yarn/io/letter_cases_io.hpp"
+-#include "dogen/quilt.cpp/io/fabric/odb_options_io.hpp"
++#include "dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp"
+ 
+ namespace dogen {
+ namespace quilt {
+ namespace cpp {
+ namespace fabric {
+ 
+-std::ostream& operator<<(std::ostream& s, const odb_options& v) {
++std::ostream& operator<<(std::ostream& s, const common_odb_options& v) {
+     v.to_stream(s);
+     return(s);
+ }
+diff --git a/projects/quilt.cpp/src/io/fabric/object_odb_options_io.cpp b/projects/quilt.cpp/src/io/fabric/object_odb_options_io.cpp
+new file mode 100644
+index 000000000..de957f38e
+--- /dev/null
++++ b/projects/quilt.cpp/src/io/fabric/object_odb_options_io.cpp
+@@ -0,0 +1,36 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include <boost/algorithm/string.hpp>
++#include "dogen/yarn/io/element_io.hpp"
++#include "dogen/quilt.cpp/io/fabric/object_odb_options_io.hpp"
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace fabric {
++
++std::ostream& operator<<(std::ostream& s, const object_odb_options& v) {
++    v.to_stream(s);
++    return(s);
++}
++
++} } } }
+diff --git a/projects/quilt.cpp/src/io/fabric/odb_target_io.cpp b/projects/quilt.cpp/src/io/fabric/odb_target_io.cpp
+index ffae0160e..dbc285bef 100644
+--- a/projects/quilt.cpp/src/io/fabric/odb_target_io.cpp
++++ b/projects/quilt.cpp/src/io/fabric/odb_target_io.cpp
+@@ -32,20 +32,6 @@ inline std::string tidy_up_string(std::string s) {
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+-    s << "[ ";
+-    for (auto i(v.begin()); i != v.end(); ++i) {
+-        if (i != v.begin()) s << ", ";
+-        s << "\"" << tidy_up_string(*i) << "\"";
+-    }
+-    s << "] ";
+-    return s;
+-}
+-
+-}
+-
+-namespace std {
+-
+ inline std::ostream& operator<<(std::ostream& s, const std::pair<std::string, std::string>& v) {
+     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
+ 
+@@ -84,8 +70,6 @@ std::ostream& operator<<(std::ostream& s, const odb_target& v) {
+       << "\"output_directory\": " << "\"" << tidy_up_string(v.output_directory()) << "\"" << ", "
+       << "\"pragmas_file\": " << "\"" << tidy_up_string(v.pragmas_file()) << "\"" << ", "
+       << "\"types_file\": " << "\"" << tidy_up_string(v.types_file()) << "\"" << ", "
+-      << "\"include_regexes\": " << v.include_regexes() << ", "
+-      << "\"header_guard_prefix\": " << "\"" << tidy_up_string(v.header_guard_prefix()) << "\"" << ", "
+       << "\"move_parameters\": " << v.move_parameters()
+       << " }";
+     return(s);
+diff --git a/projects/quilt.cpp/src/serialization/fabric/common_odb_options_ser.cpp b/projects/quilt.cpp/src/serialization/fabric/common_odb_options_ser.cpp
+new file mode 100644
+index 000000000..375365657
+--- /dev/null
++++ b/projects/quilt.cpp/src/serialization/fabric/common_odb_options_ser.cpp
+@@ -0,0 +1,79 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <boost/serialization/nvp.hpp>
++#include <boost/serialization/list.hpp>
++#include <boost/archive/xml_iarchive.hpp>
++#include <boost/archive/xml_oarchive.hpp>
++#include <boost/serialization/string.hpp>
++#include <boost/archive/text_iarchive.hpp>
++#include <boost/archive/text_oarchive.hpp>
++#include <boost/archive/binary_iarchive.hpp>
++#include <boost/archive/binary_oarchive.hpp>
++#include <boost/archive/polymorphic_iarchive.hpp>
++#include <boost/archive/polymorphic_oarchive.hpp>
++#include "dogen/yarn/serialization/element_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp"
++
++BOOST_CLASS_TRACKING(
++    dogen::quilt::cpp::fabric::common_odb_options,
++    boost::serialization::track_selectively)
++
++namespace boost {
++namespace serialization {
++
++template<typename Archive>
++void save(Archive& ar,
++    const dogen::quilt::cpp::fabric::common_odb_options& v,
++    const unsigned int /*version*/) {
++    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
++
++    ar << make_nvp("sql_name_case", v.sql_name_case_);
++    ar << make_nvp("databases", v.databases_);
++}
++
++template<typename Archive>
++void load(Archive& ar,
++    dogen::quilt::cpp::fabric::common_odb_options& v,
++    const unsigned int /*version*/) {
++    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
++
++    ar >> make_nvp("sql_name_case", v.sql_name_case_);
++    ar >> make_nvp("databases", v.databases_);
++}
++
++} }
++
++namespace boost {
++namespace serialization {
++
++template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++
++template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++
++template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++
++template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
++
++} }
+diff --git a/projects/quilt.cpp/src/serialization/fabric/odb_options_ser.cpp b/projects/quilt.cpp/src/serialization/fabric/object_odb_options_ser.cpp
+similarity index 66%
+rename from projects/quilt.cpp/src/serialization/fabric/odb_options_ser.cpp
+rename to projects/quilt.cpp/src/serialization/fabric/object_odb_options_ser.cpp
+index 90ebf7b0e..14042672d 100644
+--- a/projects/quilt.cpp/src/serialization/fabric/odb_options_ser.cpp
++++ b/projects/quilt.cpp/src/serialization/fabric/object_odb_options_ser.cpp
+@@ -25,17 +25,15 @@
+ #include <boost/serialization/string.hpp>
+ #include <boost/archive/text_iarchive.hpp>
+ #include <boost/archive/text_oarchive.hpp>
+-#include <boost/serialization/optional.hpp>
+ #include <boost/archive/binary_iarchive.hpp>
+ #include <boost/archive/binary_oarchive.hpp>
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
+ #include "dogen/yarn/serialization/element_ser.hpp"
+-#include "dogen/yarn/serialization/letter_cases_ser.hpp"
+-#include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"
+ 
+ BOOST_CLASS_TRACKING(
+-    dogen::quilt::cpp::fabric::odb_options,
++    dogen::quilt::cpp::fabric::object_odb_options,
+     boost::serialization::track_selectively)
+ 
+ namespace boost {
+@@ -43,27 +41,23 @@ namespace serialization {
+ 
+ template<typename Archive>
+ void save(Archive& ar,
+-    const dogen::quilt::cpp::fabric::odb_options& v,
++    const dogen::quilt::cpp::fabric::object_odb_options& v,
+     const unsigned int /*version*/) {
+     ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+ 
+-    ar << make_nvp("databases", v.databases_);
+-    ar << make_nvp("letter_case", v.letter_case_);
+-    ar << make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+-    ar << make_nvp("types_include_directory_path", v.types_include_directory_path_);
++    ar << make_nvp("epilogue", v.epilogue_);
++    ar << make_nvp("include_regexes", v.include_regexes_);
+     ar << make_nvp("header_guard_prefix", v.header_guard_prefix_);
+ }
+ 
+ template<typename Archive>
+ void load(Archive& ar,
+-    dogen::quilt::cpp::fabric::odb_options& v,
++    dogen::quilt::cpp::fabric::object_odb_options& v,
+     const unsigned int /*version*/) {
+     ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+ 
+-    ar >> make_nvp("databases", v.databases_);
+-    ar >> make_nvp("letter_case", v.letter_case_);
+-    ar >> make_nvp("odb_include_directory_path", v.odb_include_directory_path_);
+-    ar >> make_nvp("types_include_directory_path", v.types_include_directory_path_);
++    ar >> make_nvp("epilogue", v.epilogue_);
++    ar >> make_nvp("include_regexes", v.include_regexes_);
+     ar >> make_nvp("header_guard_prefix", v.header_guard_prefix_);
+ }
+ 
+@@ -72,16 +66,16 @@ void load(Archive& ar,
+ namespace boost {
+ namespace serialization {
+ 
+-template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+-template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++template void save(archive::polymorphic_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++template void load(archive::polymorphic_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+ 
+-template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+-template void load(archive::text_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++template void save(archive::text_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++template void load(archive::text_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+ 
+-template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+-template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++template void save(archive::binary_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++template void load(archive::binary_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+ 
+-template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
+-template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::fabric::odb_options& v, unsigned int version);
++template void save(archive::xml_oarchive& ar, const dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
++template void load(archive::xml_iarchive& ar, dogen::quilt::cpp::fabric::object_odb_options& v, unsigned int version);
+ 
+ } }
+diff --git a/projects/quilt.cpp/src/serialization/fabric/odb_target_ser.cpp b/projects/quilt.cpp/src/serialization/fabric/odb_target_ser.cpp
+index 10c188d44..bdbb45916 100644
+--- a/projects/quilt.cpp/src/serialization/fabric/odb_target_ser.cpp
++++ b/projects/quilt.cpp/src/serialization/fabric/odb_target_ser.cpp
+@@ -44,8 +44,6 @@ void save(Archive& ar,
+     ar << make_nvp("output_directory", v.output_directory_);
+     ar << make_nvp("pragmas_file", v.pragmas_file_);
+     ar << make_nvp("types_file", v.types_file_);
+-    ar << make_nvp("include_regexes", v.include_regexes_);
+-    ar << make_nvp("header_guard_prefix", v.header_guard_prefix_);
+     ar << make_nvp("move_parameters", v.move_parameters_);
+ }
+ 
+@@ -58,8 +56,6 @@ void load(Archive& ar,
+     ar >> make_nvp("output_directory", v.output_directory_);
+     ar >> make_nvp("pragmas_file", v.pragmas_file_);
+     ar >> make_nvp("types_file", v.types_file_);
+-    ar >> make_nvp("include_regexes", v.include_regexes_);
+-    ar >> make_nvp("header_guard_prefix", v.header_guard_prefix_);
+     ar >> make_nvp("move_parameters", v.move_parameters_);
+ }
+ 
+diff --git a/projects/quilt.cpp/src/serialization/registrar_ser.cpp b/projects/quilt.cpp/src/serialization/registrar_ser.cpp
+index 50b64d7f0..b36f515e6 100644
+--- a/projects/quilt.cpp/src/serialization/registrar_ser.cpp
++++ b/projects/quilt.cpp/src/serialization/registrar_ser.cpp
+@@ -33,8 +33,9 @@
+ #include "dogen/annotations/serialization/registrar_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
+-#include "dogen/quilt.cpp/serialization/fabric/odb_options_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp"
++#include "dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"
+ #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
+ 
+ namespace dogen {
+@@ -49,9 +50,10 @@ void register_types(Archive& ar) {
+     dogen::annotations::register_types(ar);
+ 
+     ar.template register_type<dogen::quilt::cpp::fabric::cmakelists>();
++    ar.template register_type<dogen::quilt::cpp::fabric::common_odb_options>();
+     ar.template register_type<dogen::quilt::cpp::fabric::forward_declarations>();
+     ar.template register_type<dogen::quilt::cpp::fabric::master_header>();
+-    ar.template register_type<dogen::quilt::cpp::fabric::odb_options>();
++    ar.template register_type<dogen::quilt::cpp::fabric::object_odb_options>();
+     ar.template register_type<dogen::quilt::cpp::fabric::registrar>();
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/fabric/common_odb_options.cpp b/projects/quilt.cpp/src/types/fabric/common_odb_options.cpp
+new file mode 100644
+index 000000000..e0cfaee39
+--- /dev/null
++++ b/projects/quilt.cpp/src/types/fabric/common_odb_options.cpp
+@@ -0,0 +1,174 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include <boost/algorithm/string.hpp>
++#include "dogen/yarn/io/element_io.hpp"
++#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
++
++inline std::string tidy_up_string(std::string s) {
++    boost::replace_all(s, "\r\n", "<new_line>");
++    boost::replace_all(s, "\n", "<new_line>");
++    boost::replace_all(s, "\"", "<quote>");
++    boost::replace_all(s, "\\", "<backslash>");
++    return s;
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "\"" << tidy_up_string(*i) << "\"";
++    }
++    s << "] ";
++    return s;
++}
++
++}
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace fabric {
++
++common_odb_options::common_odb_options(
++    const std::string& documentation,
++    const dogen::annotations::annotation& annotation,
++    const dogen::yarn::name& name,
++    const dogen::yarn::origin_types origin_type,
++    const boost::optional<dogen::yarn::name>& contained_by,
++    const bool in_global_module,
++    const std::vector<std::string>& stereotypes,
++    const bool is_element_extension,
++    const std::string& sql_name_case,
++    const std::list<std::string>& databases)
++    : dogen::yarn::element(
++      documentation,
++      annotation,
++      name,
++      origin_type,
++      contained_by,
++      in_global_module,
++      stereotypes,
++      is_element_extension),
++      sql_name_case_(sql_name_case),
++      databases_(databases) { }
++
++void common_odb_options::accept(const dogen::yarn::element_visitor& v) const {
++    typedef const element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++}
++
++void common_odb_options::accept(dogen::yarn::element_visitor& v) const {
++    typedef element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++    }
++
++void common_odb_options::accept(const dogen::yarn::element_visitor& v) {
++    typedef const element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++}
++
++void common_odb_options::accept(dogen::yarn::element_visitor& v) {
++    typedef element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++}
++
++void common_odb_options::to_stream(std::ostream& s) const {
++    s << " { "
++      << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::common_odb_options\"" << ", "
++      << "\"__parent_0__\": ";
++    dogen::yarn::element::to_stream(s);
++    s << ", "
++      << "\"sql_name_case\": " << "\"" << tidy_up_string(sql_name_case_) << "\"" << ", "
++      << "\"databases\": " << databases_
++      << " }";
++}
++
++void common_odb_options::swap(common_odb_options& other) noexcept {
++    dogen::yarn::element::swap(other);
++
++    using std::swap;
++    swap(sql_name_case_, other.sql_name_case_);
++    swap(databases_, other.databases_);
++}
++
++bool common_odb_options::equals(const dogen::yarn::element& other) const {
++    const common_odb_options* const p(dynamic_cast<const common_odb_options* const>(&other));
++    if (!p) return false;
++    return *this == *p;
++}
++
++bool common_odb_options::operator==(const common_odb_options& rhs) const {
++    return dogen::yarn::element::compare(rhs) &&
++        sql_name_case_ == rhs.sql_name_case_ &&
++        databases_ == rhs.databases_;
++}
++
++common_odb_options& common_odb_options::operator=(common_odb_options other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++const std::string& common_odb_options::sql_name_case() const {
++    return sql_name_case_;
++}
++
++std::string& common_odb_options::sql_name_case() {
++    return sql_name_case_;
++}
++
++void common_odb_options::sql_name_case(const std::string& v) {
++    sql_name_case_ = v;
++}
++
++void common_odb_options::sql_name_case(const std::string&& v) {
++    sql_name_case_ = std::move(v);
++}
++
++const std::list<std::string>& common_odb_options::databases() const {
++    return databases_;
++}
++
++std::list<std::string>& common_odb_options::databases() {
++    return databases_;
++}
++
++void common_odb_options::databases(const std::list<std::string>& v) {
++    databases_ = v;
++}
++
++void common_odb_options::databases(const std::list<std::string>&& v) {
++    databases_ = std::move(v);
++}
++
++} } } }
+diff --git a/projects/quilt.cpp/src/types/fabric/injector.cpp b/projects/quilt.cpp/src/types/fabric/injector.cpp
+index 34631013b..d6e7460a1 100644
+--- a/projects/quilt.cpp/src/types/fabric/injector.cpp
++++ b/projects/quilt.cpp/src/types/fabric/injector.cpp
+@@ -25,7 +25,6 @@
+ #include "dogen/yarn/types/injection_error.hpp"
+ #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
+ #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+ #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
+ #include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
+ #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
+@@ -40,7 +39,6 @@ const std::string id("quilt.cpp.fabric.injector");
+ using namespace dogen::utility::log;
+ static logger lg(logger_factory(id));
+ 
+-const std::string odb_options_name("options.odb");
+ const std::string duplicate_qualified_name("Duplicate qualified name: ");
+ 
+ }
+@@ -92,8 +90,8 @@ void injector::inject_cmakelists(yarn::intermediate_model& im) const {
+ 
+ void injector::inject_odb_options(yarn::intermediate_model& im) const {
+     odb_options_factory f;
+-    const auto e(f.make(im));
+-    add_element(e, im);
++    const auto elements(f.make(im));
++    add_elements(elements, im);
+ }
+ 
+ void injector::inject_master_headers(yarn::intermediate_model& im) const {
+diff --git a/projects/quilt.cpp/src/types/fabric/object_odb_options.cpp b/projects/quilt.cpp/src/types/fabric/object_odb_options.cpp
+new file mode 100644
+index 000000000..125dfd0a4
+--- /dev/null
++++ b/projects/quilt.cpp/src/types/fabric/object_odb_options.cpp
+@@ -0,0 +1,195 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include <ostream>
++#include <boost/algorithm/string.hpp>
++#include "dogen/yarn/io/element_io.hpp"
++#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
++
++inline std::string tidy_up_string(std::string s) {
++    boost::replace_all(s, "\r\n", "<new_line>");
++    boost::replace_all(s, "\n", "<new_line>");
++    boost::replace_all(s, "\"", "<quote>");
++    boost::replace_all(s, "\\", "<backslash>");
++    return s;
++}
++
++namespace std {
++
++inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
++    s << "[ ";
++    for (auto i(v.begin()); i != v.end(); ++i) {
++        if (i != v.begin()) s << ", ";
++        s << "\"" << tidy_up_string(*i) << "\"";
++    }
++    s << "] ";
++    return s;
++}
++
++}
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace fabric {
++
++object_odb_options::object_odb_options(
++    const std::string& documentation,
++    const dogen::annotations::annotation& annotation,
++    const dogen::yarn::name& name,
++    const dogen::yarn::origin_types origin_type,
++    const boost::optional<dogen::yarn::name>& contained_by,
++    const bool in_global_module,
++    const std::vector<std::string>& stereotypes,
++    const bool is_element_extension,
++    const std::string& epilogue,
++    const std::list<std::string>& include_regexes,
++    const std::string& header_guard_prefix)
++    : dogen::yarn::element(
++      documentation,
++      annotation,
++      name,
++      origin_type,
++      contained_by,
++      in_global_module,
++      stereotypes,
++      is_element_extension),
++      epilogue_(epilogue),
++      include_regexes_(include_regexes),
++      header_guard_prefix_(header_guard_prefix) { }
++
++void object_odb_options::accept(const dogen::yarn::element_visitor& v) const {
++    typedef const element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++}
++
++void object_odb_options::accept(dogen::yarn::element_visitor& v) const {
++    typedef element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++    }
++
++void object_odb_options::accept(const dogen::yarn::element_visitor& v) {
++    typedef const element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++}
++
++void object_odb_options::accept(dogen::yarn::element_visitor& v) {
++    typedef element_visitor* derived_ptr;
++    const auto dv(dynamic_cast<derived_ptr>(&v));
++    if (dv)
++        dv->visit(*this);
++}
++
++void object_odb_options::to_stream(std::ostream& s) const {
++    s << " { "
++      << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::object_odb_options\"" << ", "
++      << "\"__parent_0__\": ";
++    dogen::yarn::element::to_stream(s);
++    s << ", "
++      << "\"epilogue\": " << "\"" << tidy_up_string(epilogue_) << "\"" << ", "
++      << "\"include_regexes\": " << include_regexes_ << ", "
++      << "\"header_guard_prefix\": " << "\"" << tidy_up_string(header_guard_prefix_) << "\""
++      << " }";
++}
++
++void object_odb_options::swap(object_odb_options& other) noexcept {
++    dogen::yarn::element::swap(other);
++
++    using std::swap;
++    swap(epilogue_, other.epilogue_);
++    swap(include_regexes_, other.include_regexes_);
++    swap(header_guard_prefix_, other.header_guard_prefix_);
++}
++
++bool object_odb_options::equals(const dogen::yarn::element& other) const {
++    const object_odb_options* const p(dynamic_cast<const object_odb_options* const>(&other));
++    if (!p) return false;
++    return *this == *p;
++}
++
++bool object_odb_options::operator==(const object_odb_options& rhs) const {
++    return dogen::yarn::element::compare(rhs) &&
++        epilogue_ == rhs.epilogue_ &&
++        include_regexes_ == rhs.include_regexes_ &&
++        header_guard_prefix_ == rhs.header_guard_prefix_;
++}
++
++object_odb_options& object_odb_options::operator=(object_odb_options other) {
++    using std::swap;
++    swap(*this, other);
++    return *this;
++}
++
++const std::string& object_odb_options::epilogue() const {
++    return epilogue_;
++}
++
++std::string& object_odb_options::epilogue() {
++    return epilogue_;
++}
++
++void object_odb_options::epilogue(const std::string& v) {
++    epilogue_ = v;
++}
++
++void object_odb_options::epilogue(const std::string&& v) {
++    epilogue_ = std::move(v);
++}
++
++const std::list<std::string>& object_odb_options::include_regexes() const {
++    return include_regexes_;
++}
++
++std::list<std::string>& object_odb_options::include_regexes() {
++    return include_regexes_;
++}
++
++void object_odb_options::include_regexes(const std::list<std::string>& v) {
++    include_regexes_ = v;
++}
++
++void object_odb_options::include_regexes(const std::list<std::string>&& v) {
++    include_regexes_ = std::move(v);
++}
++
++const std::string& object_odb_options::header_guard_prefix() const {
++    return header_guard_prefix_;
++}
++
++std::string& object_odb_options::header_guard_prefix() {
++    return header_guard_prefix_;
++}
++
++void object_odb_options::header_guard_prefix(const std::string& v) {
++    header_guard_prefix_ = v;
++}
++
++void object_odb_options::header_guard_prefix(const std::string&& v) {
++    header_guard_prefix_ = std::move(v);
++}
++
++} } } }
+diff --git a/projects/quilt.cpp/src/types/fabric/odb_options.cpp b/projects/quilt.cpp/src/types/fabric/odb_options.cpp
+deleted file mode 100644
+index c5c4202d2..000000000
+--- a/projects/quilt.cpp/src/types/fabric/odb_options.cpp
++++ /dev/null
+@@ -1,262 +0,0 @@
+-/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
+- *
+- * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
+- *
+- * This program is free software; you can redistribute it and/or modify
+- * it under the terms of the GNU General Public License as published by
+- * the Free Software Foundation; either version 3 of the License, or
+- * (at your option) any later version.
+- *
+- * This program is distributed in the hope that it will be useful,
+- * but WITHOUT ANY WARRANTY; without even the implied warranty of
+- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+- * GNU General Public License for more details.
+- *
+- * You should have received a copy of the GNU General Public License
+- * along with this program; if not, write to the Free Software
+- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+- * MA 02110-1301, USA.
+- *
+- */
+-#include <ostream>
+-#include <boost/algorithm/string.hpp>
+-#include "dogen/yarn/io/element_io.hpp"
+-#include "dogen/yarn/io/letter_cases_io.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
+-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+-
+-inline std::string tidy_up_string(std::string s) {
+-    boost::replace_all(s, "\r\n", "<new_line>");
+-    boost::replace_all(s, "\n", "<new_line>");
+-    boost::replace_all(s, "\"", "<quote>");
+-    boost::replace_all(s, "\\", "<backslash>");
+-    return s;
+-}
+-
+-namespace std {
+-
+-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+-    s << "[ ";
+-    for (auto i(v.begin()); i != v.end(); ++i) {
+-        if (i != v.begin()) s << ", ";
+-        s << "\"" << tidy_up_string(*i) << "\"";
+-    }
+-    s << "] ";
+-    return s;
+-}
+-
+-}
+-
+-namespace boost {
+-
+-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::letter_cases>& v) {
+-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
+-
+-    if (v)
+-        s << "\"data\": " << *v;
+-    else
+-        s << "\"data\": ""\"<null>\"";
+-    s << " }";
+-    return s;
+-}
+-
+-}
+-
+-namespace dogen {
+-namespace quilt {
+-namespace cpp {
+-namespace fabric {
+-
+-odb_options::odb_options(odb_options&& rhs)
+-    : dogen::yarn::element(
+-        std::forward<dogen::yarn::element>(rhs)),
+-      databases_(std::move(rhs.databases_)),
+-      letter_case_(std::move(rhs.letter_case_)),
+-      odb_include_directory_path_(std::move(rhs.odb_include_directory_path_)),
+-      types_include_directory_path_(std::move(rhs.types_include_directory_path_)),
+-      header_guard_prefix_(std::move(rhs.header_guard_prefix_)) { }
+-
+-odb_options::odb_options(
+-    const std::string& documentation,
+-    const dogen::annotations::annotation& annotation,
+-    const dogen::yarn::name& name,
+-    const dogen::yarn::origin_types origin_type,
+-    const boost::optional<dogen::yarn::name>& contained_by,
+-    const bool in_global_module,
+-    const std::vector<std::string>& stereotypes,
+-    const bool is_element_extension,
+-    const std::list<std::string>& databases,
+-    const boost::optional<dogen::yarn::letter_cases>& letter_case,
+-    const std::string& odb_include_directory_path,
+-    const std::string& types_include_directory_path,
+-    const std::string& header_guard_prefix)
+-    : dogen::yarn::element(
+-      documentation,
+-      annotation,
+-      name,
+-      origin_type,
+-      contained_by,
+-      in_global_module,
+-      stereotypes,
+-      is_element_extension),
+-      databases_(databases),
+-      letter_case_(letter_case),
+-      odb_include_directory_path_(odb_include_directory_path),
+-      types_include_directory_path_(types_include_directory_path),
+-      header_guard_prefix_(header_guard_prefix) { }
+-
+-void odb_options::accept(const dogen::yarn::element_visitor& v) const {
+-    typedef const element_visitor* derived_ptr;
+-    const auto dv(dynamic_cast<derived_ptr>(&v));
+-    if (dv)
+-        dv->visit(*this);
+-}
+-
+-void odb_options::accept(dogen::yarn::element_visitor& v) const {
+-    typedef element_visitor* derived_ptr;
+-    const auto dv(dynamic_cast<derived_ptr>(&v));
+-    if (dv)
+-        dv->visit(*this);
+-    }
+-
+-void odb_options::accept(const dogen::yarn::element_visitor& v) {
+-    typedef const element_visitor* derived_ptr;
+-    const auto dv(dynamic_cast<derived_ptr>(&v));
+-    if (dv)
+-        dv->visit(*this);
+-}
+-
+-void odb_options::accept(dogen::yarn::element_visitor& v) {
+-    typedef element_visitor* derived_ptr;
+-    const auto dv(dynamic_cast<derived_ptr>(&v));
+-    if (dv)
+-        dv->visit(*this);
+-}
+-
+-void odb_options::to_stream(std::ostream& s) const {
+-    s << " { "
+-      << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::odb_options\"" << ", "
+-      << "\"__parent_0__\": ";
+-    dogen::yarn::element::to_stream(s);
+-    s << ", "
+-      << "\"databases\": " << databases_ << ", "
+-      << "\"letter_case\": " << letter_case_ << ", "
+-      << "\"odb_include_directory_path\": " << "\"" << tidy_up_string(odb_include_directory_path_) << "\"" << ", "
+-      << "\"types_include_directory_path\": " << "\"" << tidy_up_string(types_include_directory_path_) << "\"" << ", "
+-      << "\"header_guard_prefix\": " << "\"" << tidy_up_string(header_guard_prefix_) << "\""
+-      << " }";
+-}
+-
+-void odb_options::swap(odb_options& other) noexcept {
+-    dogen::yarn::element::swap(other);
+-
+-    using std::swap;
+-    swap(databases_, other.databases_);
+-    swap(letter_case_, other.letter_case_);
+-    swap(odb_include_directory_path_, other.odb_include_directory_path_);
+-    swap(types_include_directory_path_, other.types_include_directory_path_);
+-    swap(header_guard_prefix_, other.header_guard_prefix_);
+-}
+-
+-bool odb_options::equals(const dogen::yarn::element& other) const {
+-    const odb_options* const p(dynamic_cast<const odb_options* const>(&other));
+-    if (!p) return false;
+-    return *this == *p;
+-}
+-
+-bool odb_options::operator==(const odb_options& rhs) const {
+-    return dogen::yarn::element::compare(rhs) &&
+-        databases_ == rhs.databases_ &&
+-        letter_case_ == rhs.letter_case_ &&
+-        odb_include_directory_path_ == rhs.odb_include_directory_path_ &&
+-        types_include_directory_path_ == rhs.types_include_directory_path_ &&
+-        header_guard_prefix_ == rhs.header_guard_prefix_;
+-}
+-
+-odb_options& odb_options::operator=(odb_options other) {
+-    using std::swap;
+-    swap(*this, other);
+-    return *this;
+-}
+-
+-const std::list<std::string>& odb_options::databases() const {
+-    return databases_;
+-}
+-
+-std::list<std::string>& odb_options::databases() {
+-    return databases_;
+-}
+-
+-void odb_options::databases(const std::list<std::string>& v) {
+-    databases_ = v;
+-}
+-
+-void odb_options::databases(const std::list<std::string>&& v) {
+-    databases_ = std::move(v);
+-}
+-
+-const boost::optional<dogen::yarn::letter_cases>& odb_options::letter_case() const {
+-    return letter_case_;
+-}
+-
+-boost::optional<dogen::yarn::letter_cases>& odb_options::letter_case() {
+-    return letter_case_;
+-}
+-
+-void odb_options::letter_case(const boost::optional<dogen::yarn::letter_cases>& v) {
+-    letter_case_ = v;
+-}
+-
+-void odb_options::letter_case(const boost::optional<dogen::yarn::letter_cases>&& v) {
+-    letter_case_ = std::move(v);
+-}
+-
+-const std::string& odb_options::odb_include_directory_path() const {
+-    return odb_include_directory_path_;
+-}
+-
+-std::string& odb_options::odb_include_directory_path() {
+-    return odb_include_directory_path_;
+-}
+-
+-void odb_options::odb_include_directory_path(const std::string& v) {
+-    odb_include_directory_path_ = v;
+-}
+-
+-void odb_options::odb_include_directory_path(const std::string&& v) {
+-    odb_include_directory_path_ = std::move(v);
+-}
+-
+-const std::string& odb_options::types_include_directory_path() const {
+-    return types_include_directory_path_;
+-}
+-
+-std::string& odb_options::types_include_directory_path() {
+-    return types_include_directory_path_;
+-}
+-
+-void odb_options::types_include_directory_path(const std::string& v) {
+-    types_include_directory_path_ = v;
+-}
+-
+-void odb_options::types_include_directory_path(const std::string&& v) {
+-    types_include_directory_path_ = std::move(v);
+-}
+-
+-const std::string& odb_options::header_guard_prefix() const {
+-    return header_guard_prefix_;
+-}
+-
+-std::string& odb_options::header_guard_prefix() {
+-    return header_guard_prefix_;
+-}
+-
+-void odb_options::header_guard_prefix(const std::string& v) {
+-    header_guard_prefix_ = v;
+-}
+-
+-void odb_options::header_guard_prefix(const std::string&& v) {
+-    header_guard_prefix_ = std::move(v);
+-}
+-
+-} } } }
+diff --git a/projects/quilt.cpp/src/types/fabric/odb_options_factory.cpp b/projects/quilt.cpp/src/types/fabric/odb_options_factory.cpp
+index 71efa41bf..349694be5 100644
+--- a/projects/quilt.cpp/src/types/fabric/odb_options_factory.cpp
++++ b/projects/quilt.cpp/src/types/fabric/odb_options_factory.cpp
+@@ -23,9 +23,12 @@
+ #include <boost/lexical_cast.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/yarn/types/name_factory.hpp"
++#include "dogen/yarn/io/letter_cases_io.hpp"
+ #include "dogen/yarn/io/orm_database_systems_io.hpp"
+ #include "dogen/yarn/types/orm_database_systems.hpp"
+ #include "dogen/quilt.cpp/types/fabric/building_error.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
+ #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
+ 
+ namespace {
+@@ -40,8 +43,12 @@ const std::string oracle("oracle");
+ const std::string sql_server("sqlserver");
+ const std::string sqllite("sqllite");
+ 
++const std::string upper_case("upper");
++const std::string lower_case("lower");
++
+ const std::string invalid_daatabase_system(
+     "Database system is invalid or unsupported: ");
++const std::string invalid_case("Letter case is invalid or unsupported: ");
+ 
+ }
+ 
+@@ -51,7 +58,7 @@ namespace cpp {
+ namespace fabric {
+ 
+ std::string
+-odb_options_factory::to_string(const yarn::orm_database_systems ds) {
++odb_options_factory::to_odb_database(const yarn::orm_database_systems ds) {
+     using yarn::orm_database_systems;
+ 
+     switch (ds) {
+@@ -67,32 +74,77 @@ odb_options_factory::to_string(const yarn::orm_database_systems ds) {
+     } }
+ }
+ 
++std::string
++odb_options_factory::to_odb_sql_name_case(const yarn::letter_cases lc) {
++    switch (lc) {
++    case yarn::letter_cases::upper_case: return upper_case;
++    case yarn::letter_cases::lower_case: return lower_case;
++    default: {
++        const auto s(boost::lexical_cast<std::string>(lc));
++        BOOST_LOG_SEV(lg, error) << invalid_case << s;
++        BOOST_THROW_EXCEPTION(building_error(invalid_case + s));
++    } }
++}
+ 
+ std::list<std::string> odb_options_factory::
+ make_databases(const yarn::orm_model_properties& cfg) const {
+     std::list<std::string> r;
++
++    if (cfg.database_systems().size() > 1)
++        r.push_back("common");
++
+     for (const auto ds : cfg.database_systems())
+-        r.push_back(to_string(ds));
++        r.push_back(to_odb_database(ds));
+ 
+     return r;
+ }
+ 
+-boost::shared_ptr<yarn::element>
++std::list<boost::shared_ptr<yarn::element>>
+ odb_options_factory::make(const yarn::intermediate_model& im) const {
+-
+     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
+ 
++    std::list<boost::shared_ptr<yarn::element>> r;
++    for (const auto& pair : im.objects()) {
++        const auto& o(pair.second);
++
++        /*
++         * We only care about objects which have ORM enabled.
++         */
++        if (!o.orm_properties())
++            continue;
++
++        const auto id(o.name().id());
++        BOOST_LOG_SEV(lg, debug) << "Processing: " << id;
++
++        auto ooo(boost::make_shared<object_odb_options>());
++        ooo->name(o.name());
++        ooo->origin_type(o.origin_type());
++        ooo->annotation(o.annotation());
++        ooo->is_element_extension(true);
++        r.push_back(ooo);
++    }
++
++    /*
++     * We need at least one object with needs ORM support in order to
++     * generate the common options.
++     */
++    if (r.empty())
++        return r;
++
+     yarn::name_factory nf;
+     const auto n(nf.build_element_in_model(im.name(), odb_options_name));
+-    auto r(boost::make_shared<odb_options>());
+-    r->name(n);
+-    r->origin_type(im.origin_type());
++
++    auto coo(boost::make_shared<common_odb_options>());
++    coo->name(n);
++    coo->origin_type(im.origin_type());
+ 
+     if (im.orm_properties()) {
+         const auto cfg(*im.orm_properties());
+-        r->databases(make_databases(cfg));
+-        r->letter_case(cfg.letter_case());
++        coo->databases(make_databases(cfg));
++        if (cfg.letter_case())
++            coo->sql_name_case(to_odb_sql_name_case(*cfg.letter_case()));
+     }
++    r.push_back(coo);
+ 
+     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";
+ 
+diff --git a/projects/quilt.cpp/src/types/fabric/odb_target.cpp b/projects/quilt.cpp/src/types/fabric/odb_target.cpp
+index caa4bc6f1..3c89f94be 100644
+--- a/projects/quilt.cpp/src/types/fabric/odb_target.cpp
++++ b/projects/quilt.cpp/src/types/fabric/odb_target.cpp
+@@ -31,16 +31,12 @@ odb_target::odb_target(
+     const std::string& output_directory,
+     const std::string& pragmas_file,
+     const std::string& types_file,
+-    const std::list<std::string>& include_regexes,
+-    const std::string& header_guard_prefix,
+     const std::list<std::pair<std::string, std::string> >& move_parameters)
+     : name_(name),
+       comment_(comment),
+       output_directory_(output_directory),
+       pragmas_file_(pragmas_file),
+       types_file_(types_file),
+-      include_regexes_(include_regexes),
+-      header_guard_prefix_(header_guard_prefix),
+       move_parameters_(move_parameters) { }
+ 
+ void odb_target::swap(odb_target& other) noexcept {
+@@ -50,8 +46,6 @@ void odb_target::swap(odb_target& other) noexcept {
+     swap(output_directory_, other.output_directory_);
+     swap(pragmas_file_, other.pragmas_file_);
+     swap(types_file_, other.types_file_);
+-    swap(include_regexes_, other.include_regexes_);
+-    swap(header_guard_prefix_, other.header_guard_prefix_);
+     swap(move_parameters_, other.move_parameters_);
+ }
+ 
+@@ -61,8 +55,6 @@ bool odb_target::operator==(const odb_target& rhs) const {
+         output_directory_ == rhs.output_directory_ &&
+         pragmas_file_ == rhs.pragmas_file_ &&
+         types_file_ == rhs.types_file_ &&
+-        include_regexes_ == rhs.include_regexes_ &&
+-        header_guard_prefix_ == rhs.header_guard_prefix_ &&
+         move_parameters_ == rhs.move_parameters_;
+ }
+ 
+@@ -152,38 +144,6 @@ void odb_target::types_file(const std::string&& v) {
+     types_file_ = std::move(v);
+ }
+ 
+-const std::list<std::string>& odb_target::include_regexes() const {
+-    return include_regexes_;
+-}
+-
+-std::list<std::string>& odb_target::include_regexes() {
+-    return include_regexes_;
+-}
+-
+-void odb_target::include_regexes(const std::list<std::string>& v) {
+-    include_regexes_ = v;
+-}
+-
+-void odb_target::include_regexes(const std::list<std::string>&& v) {
+-    include_regexes_ = std::move(v);
+-}
+-
+-const std::string& odb_target::header_guard_prefix() const {
+-    return header_guard_prefix_;
+-}
+-
+-std::string& odb_target::header_guard_prefix() {
+-    return header_guard_prefix_;
+-}
+-
+-void odb_target::header_guard_prefix(const std::string& v) {
+-    header_guard_prefix_ = v;
+-}
+-
+-void odb_target::header_guard_prefix(const std::string&& v) {
+-    header_guard_prefix_ = std::move(v);
+-}
+-
+ const std::list<std::pair<std::string, std::string> >& odb_target::move_parameters() const {
+     return move_parameters_;
+ }
+diff --git a/projects/quilt.cpp/src/types/formattables/cmakelists_expander.cpp b/projects/quilt.cpp/src/types/formattables/cmakelists_expander.cpp
+index bea750857..6e6b2b614 100644
+--- a/projects/quilt.cpp/src/types/formattables/cmakelists_expander.cpp
++++ b/projects/quilt.cpp/src/types/formattables/cmakelists_expander.cpp
+@@ -26,7 +26,7 @@
+ #include "dogen/quilt.cpp/types/fabric/odb_target.hpp"
+ #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+ #include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+ #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+@@ -57,7 +57,7 @@ public:
+ 
+ public:
+     using fabric::element_visitor::visit;
+-    void visit(const fabric::odb_options& oo);
++    void visit(const fabric::common_odb_options& coo);
+     void visit(const yarn::object& o);
+ 
+ public:
+@@ -77,10 +77,10 @@ odb_targets_factory(const locator& l, const yarn::name& model_name)
+     result_.main_target_name(target_name_);
+ }
+ 
+-void odb_targets_factory::visit(const fabric::odb_options& oo) {
+-    const auto arch(formatters::odb::traits::odb_options_archetype());
++void odb_targets_factory::visit(const fabric::common_odb_options& coo) {
++    const auto arch(formatters::odb::traits::common_odb_options_archetype());
+     result_.options_file(
+-        locator_.make_relative_path_for_odb_options(oo.name(), arch,
++        locator_.make_relative_path_for_odb_options(coo.name(), arch,
+             false/*include_source_directory*/).generic_string()
+         );
+ }
+@@ -109,7 +109,6 @@ void odb_targets_factory::visit(const yarn::object& o) {
+     const auto rp(odb_fp.lexically_relative(src_dir));
+     t.output_directory(rp.generic_string());
+ 
+-
+     const auto odb_rp(l.make_inclusion_path_for_cpp_header(n, odb_arch));
+     t.pragmas_file(odb_rp.generic_string());
+ 
+@@ -117,28 +116,6 @@ void odb_targets_factory::visit(const yarn::object& o) {
+     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
+     t.types_file(tp.lexically_relative(src_dir).generic_string());
+ 
+-    /*
+-     * Regular expressions.
+-     */
+-    const auto types_rp(locator_.make_inclusion_path_for_cpp_header(n,
+-            types_arch).parent_path());
+-
+-    std::ostringstream os;
+-    os << "%\\(.*\\).hpp%" << types_rp.generic_string() << "/$1.hpp%";
+-    t.include_regexes().push_back(os.str());
+-
+-    os.str("");
+-    os << "%\\(^[a-zA-Z0-9_]+\\)-odb\\(.*\\)%"
+-       << odb_rp.parent_path().generic_string() << "/$1-odb$2";
+-    t.include_regexes().push_back(os.str());
+-
+-    os.str("");
+-    os << "%" << types_rp.generic_string() << "/\\(.*\\)-odb\\(.*\\)%"
+-       << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
+-    t.include_regexes().push_back(os.str());
+-
+-    t.header_guard_prefix(header_guard_factory::make(types_rp.parent_path()));
+-
+     // FIXME: compute move targets
+ 
+     result_.targets().push_back(t);
+diff --git a/projects/quilt.cpp/src/types/formattables/decoration_expander.cpp b/projects/quilt.cpp/src/types/formattables/decoration_expander.cpp
+index ace00f801..1aa38a1bf 100644
+--- a/projects/quilt.cpp/src/types/formattables/decoration_expander.cpp
++++ b/projects/quilt.cpp/src/types/formattables/decoration_expander.cpp
+@@ -22,7 +22,8 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/yarn/types/element.hpp"
+ #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
+ #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
+ 
+ namespace {
+@@ -60,7 +61,9 @@ expand(const dogen::formatters::decoration_properties_factory& dpf,
+          */
+         if (ti == std::type_index(typeid(fabric::cmakelists)))
+             eprops.decoration_properties(dpf.make(cmake_modeline_name));
+-        else if (ti == std::type_index(typeid(fabric::odb_options)))
++        else if (ti == std::type_index(typeid(fabric::common_odb_options)))
++            eprops.decoration_properties(dpf.make(odb_modeline_name));
++        else if (ti == std::type_index(typeid(fabric::object_odb_options)))
+             eprops.decoration_properties(dpf.make(odb_modeline_name));
+         else
+             eprops.decoration_properties(dc);
+diff --git a/projects/quilt.cpp/src/types/formattables/odb_expander.cpp b/projects/quilt.cpp/src/types/formattables/odb_expander.cpp
+index b798139da..b3271a062 100644
+--- a/projects/quilt.cpp/src/types/formattables/odb_expander.cpp
++++ b/projects/quilt.cpp/src/types/formattables/odb_expander.cpp
+@@ -27,7 +27,8 @@
+ #include "dogen/annotations/io/type_io.hpp"
+ #include "dogen/yarn/types/object.hpp"
+ #include "dogen/yarn/types/primitive.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
+ #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+ #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
+ #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
+@@ -66,7 +67,7 @@ private:
+ 
+ public:
+     using fabric::element_visitor::visit;
+-    void visit(fabric::odb_options& oo);
++    void visit(fabric::object_odb_options& ooo);
+     void visit(yarn::object& o);
+     void visit(yarn::primitive& p);
+ 
+@@ -93,19 +94,41 @@ updator::make_odb_pragmas(const odb_expander::type_group& tg,
+     return s.get_text_collection_content(tg.odb_pragma);
+ }
+ 
+-void updator::visit(fabric::odb_options& oo) {
+-    const bool for_include_statement(true);
+-    const auto odb_fctn(formatters::odb::traits::facet());
+-    const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
+-            for_include_statement));
+-    oo.odb_include_directory_path(odb_dp.generic_string());
+-    oo.header_guard_prefix(header_guard_factory::make(odb_dp));
+-
+-    const auto types_fctn(formatters::types::traits::facet());
+-    oo.types_include_directory_path(
+-        locator_.make_relative_include_path_for_facet(types_fctn,
+-            for_include_statement)
+-        .generic_string());
++void updator::visit(fabric::object_odb_options& /*ooo*/) {
++    // const bool for_include_statement(true);
++    // const auto odb_fctn(formatters::odb::traits::facet());
++    // const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
++    //         for_include_statement));
++    // coo.odb_include_directory_path(odb_dp.generic_string());
++    // coo.header_guard_prefix(header_guard_factory::make(odb_dp));
++
++    // const auto types_fctn(formatters::types::traits::facet());
++    // coo.types_include_directory_path(
++    //     locator_.make_relative_include_path_for_facet(types_fctn,
++    //         for_include_statement)
++        // .generic_string());
++
++    /*
++     * Regular expressions.
++     */
++    // const auto types_rp(locator_.make_inclusion_path_for_cpp_header(n,
++    //         types_arch).parent_path());
++
++    // std::ostringstream os;
++    // os << "%\\(.*\\).hpp%" << types_rp.generic_string() << "/$1.hpp%";
++    // t.include_regexes().push_back(os.str());
++
++    // os.str("");
++    // os << "%\\(^[a-zA-Z0-9_]+\\)-odb\\(.*\\)%"
++    //    << odb_rp.parent_path().generic_string() << "/$1-odb$2";
++    // t.include_regexes().push_back(os.str());
++
++    // os.str("");
++    // os << "%" << types_rp.generic_string() << "/\\(.*\\)-odb\\(.*\\)%"
++    //    << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
++    // t.include_regexes().push_back(os.str());
++
++    // t.header_guard_prefix(header_guard_factory::make(types_rp.parent_path()));
+ }
+ 
+ void updator::visit(yarn::object& o) {
+@@ -176,7 +199,7 @@ void updator::visit(yarn::object& o) {
+ 
+                     const auto ds(pair.first);
+                     const auto type(pair.second);
+-                    s << fabric::odb_options_factory::to_string(ds)
++                    s << fabric::odb_options_factory::to_odb_database(ds)
+                       << ":type(\"" << type << "\")";
+ 
+                     is_first = false;
+diff --git a/projects/quilt.cpp/src/types/formatters/assistant.cpp b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+index 6e3d95f6f..98ef21317 100644
+--- a/projects/quilt.cpp/src/types/formatters/assistant.cpp
++++ b/projects/quilt.cpp/src/types/formatters/assistant.cpp
+@@ -65,9 +65,6 @@ const bool use_documentation_tool_markup(true);
+ const bool last_line_is_blank(true);
+ const bool documenting_previous_identifier(true);
+ 
+-const std::string upper_case("upper");
+-const std::string lower_case("lower");
+-
+ const std::string file_path_not_set(
+     "File path for formatter is not set. Formatter: ");
+ const std::string header_guard_not_set(
+@@ -83,7 +80,6 @@ const std::string element_not_found("Element not found: ");
+ const std::string no_helpers_for_family("No helpers found for family: ");
+ const std::string qn_missing("Could not find qualified name for language.");
+ const std::string helpless_family("No registered helpers found for family: ");
+-const std::string invalid_case("Letter case is invalid or unsupported: ");
+ 
+ }
+ 
+@@ -634,17 +630,6 @@ std::string assistant::get_odb_type() const {
+     return odb_object_type;
+ }
+ 
+-std::string assistant::get_letter_case(const yarn::letter_cases lc) const {
+-    if (lc == yarn::letter_cases::upper_case)
+-        return upper_case;
+-    else if (lc == yarn::letter_cases::lower_case)
+-        return lower_case;
+-
+-    const auto s(boost::lexical_cast<std::string>(lc));
+-    BOOST_LOG_SEV(lg, error) << invalid_case << s;
+-    BOOST_THROW_EXCEPTION(formatting_error(invalid_case + s));
+-}
+-
+ std::list<yarn::name> assistant::
+ names_with_enabled_archetype(const std::string& archetype,
+     const std::list<yarn::name> names) const {
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp b/projects/quilt.cpp/src/types/formatters/odb/common_odb_options_formatter.cpp
+similarity index 77%
+rename from projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp
+rename to projects/quilt.cpp/src/types/formatters/odb/common_odb_options_formatter.cpp
+index a1ed011ab..5ca2310c7 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/odb/common_odb_options_formatter.cpp
+@@ -18,7 +18,7 @@
+  * MA 02110-1301, USA.
+  *
+  */
+-#include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
++#include "dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
+ #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
+@@ -26,7 +26,7 @@
+ #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
+ #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+ #include "dogen/quilt.cpp/types/traits.hpp"
+-#include "dogen/quilt.cpp/types/fabric/odb_options.hpp"
++#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+ #include "dogen/formatters/types/sequence_formatter.hpp"
+ #include "dogen/yarn/types/object.hpp"
+ #include "dogen/utility/log/logger.hpp"
+@@ -41,37 +41,37 @@ namespace cpp {
+ namespace formatters {
+ namespace odb {
+ 
+-std::string odb_options_formatter::static_artefact() {
+-    return traits::odb_options_archetype();
++std::string common_odb_options_formatter::static_artefact() {
++    return traits::common_odb_options_archetype();
+ }
+ 
+-std::string odb_options_formatter::formatter_name() const {
++std::string common_odb_options_formatter::formatter_name() const {
+     static auto r(archetype_location().archetype());
+     return r;
+ }
+ 
+ annotations::archetype_location
+-odb_options_formatter::archetype_location() const {
++common_odb_options_formatter::archetype_location() const {
+     static annotations::archetype_location
+         r(cpp::traits::family(), cpp::traits::kernel(),
+-          traits::facet(), odb_options_formatter::static_artefact());
++          traits::facet(), common_odb_options_formatter::static_artefact());
+     return r;
+ }
+ 
+-std::type_index odb_options_formatter::element_type_index() const {
+-    static auto r(std::type_index(typeid(fabric::odb_options)));
++std::type_index common_odb_options_formatter::element_type_index() const {
++    static auto r(std::type_index(typeid(fabric::common_odb_options)));
+     return r;
+ }
+ 
+-inclusion_support_types odb_options_formatter::inclusion_support_type() const {
++inclusion_support_types common_odb_options_formatter::inclusion_support_type() const {
+     return inclusion_support_types::not_supported;
+ }
+ 
+-boost::filesystem::path odb_options_formatter::inclusion_path(
++boost::filesystem::path common_odb_options_formatter::inclusion_path(
+     const formattables::locator& /*l*/, const yarn::name& n) const {
+     using namespace dogen::utility::log;
+     static logger
+-        lg(logger_factory("quilt.cpp.formatters.odb.odb_options_formatter"));
++        lg(logger_factory("quilt.cpp.formatters.odb.common_odb_options_formatter"));
+ 
+         const std::string not_supported("Inclusion path is not supported: ");
+ 
+@@ -79,23 +79,23 @@ boost::filesystem::path odb_options_formatter::inclusion_path(
+     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+ }
+ 
+-boost::filesystem::path odb_options_formatter::full_path(
++boost::filesystem::path common_odb_options_formatter::full_path(
+     const formattables::locator& l, const yarn::name& n) const {
+     return l.make_full_path_for_odb_options(n, static_artefact());
+ }
+ 
+-std::list<std::string> odb_options_formatter::inclusion_dependencies(
++std::list<std::string> common_odb_options_formatter::inclusion_dependencies(
+     const formattables::dependencies_builder_factory& /*f*/,
+     const yarn::element& /*e*/) const {
+     static std::list<std::string> r;
+     return r;
+ }
+ 
+-dogen::formatters::artefact odb_options_formatter::
++dogen::formatters::artefact common_odb_options_formatter::
+ format(const context& ctx, const yarn::element& e) const {
+     const auto id(e.name().id());
+     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+-    const auto& o(a.as<fabric::odb_options>(static_artefact(), e));
++    const auto& o(a.as<fabric::common_odb_options>(static_artefact(), e));
+ 
+     {
+         a.make_decoration_preamble();
+@@ -106,9 +106,9 @@ a.stream() << "--std c++11" << std::endl;
+ a.stream() << std::endl;
+         }
+ 
+-        if (o.letter_case()) {
++        if (!o.sql_name_case().empty()) {
+ a.stream() << "# casing" << std::endl;
+-a.stream() << "--sql-name-case " << a.get_letter_case(*o.letter_case()) << std::endl;
++a.stream() << "--sql-name-case " << o.sql_name_case().empty() << std::endl;
+ a.stream() << std::endl;
+         }
+ 
+@@ -120,8 +120,6 @@ a.stream() << std::endl;
+ 
+         if (!o.databases().empty()) {
+ a.stream() << "# target databases" << std::endl;
+-            if (o.databases().size() > 1)
+-a.stream() << "--database common" << std::endl;
+ 
+             for (const auto& d : o.databases())
+ a.stream() << "--database " << d << std::endl;
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.stitch b/projects/quilt.cpp/src/types/formatters/odb/common_odb_options_formatter.stitch
+similarity index 72%
+rename from projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.stitch
+rename to projects/quilt.cpp/src/types/formatters/odb/common_odb_options_formatter.stitch
+index 5b94e4b13..502d3e825 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/odb_options_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/odb/common_odb_options_formatter.stitch
+@@ -7,7 +7,7 @@
+ <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/odb_options.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/common_odb_options.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
+@@ -15,40 +15,40 @@
+ <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/formatting_error.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/traits.hpp" #>
+ <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
+-<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp" #>
+ <#+
+ 
+-std::string odb_options_formatter::static_artefact() {
+-    return traits::odb_options_archetype();
++std::string common_odb_options_formatter::static_artefact() {
++    return traits::common_odb_options_archetype();
+ }
+ 
+-std::string odb_options_formatter::formatter_name() const {
++std::string common_odb_options_formatter::formatter_name() const {
+     static auto r(archetype_location().archetype());
+     return r;
+ }
+ 
+ annotations::archetype_location
+-odb_options_formatter::archetype_location() const {
++common_odb_options_formatter::archetype_location() const {
+     static annotations::archetype_location
+         r(cpp::traits::family(), cpp::traits::kernel(),
+-          traits::facet(), odb_options_formatter::static_artefact());
++          traits::facet(), common_odb_options_formatter::static_artefact());
+     return r;
+ }
+ 
+-std::type_index odb_options_formatter::element_type_index() const {
+-    static auto r(std::type_index(typeid(fabric::odb_options)));
++std::type_index common_odb_options_formatter::element_type_index() const {
++    static auto r(std::type_index(typeid(fabric::common_odb_options)));
+     return r;
+ }
+ 
+-inclusion_support_types odb_options_formatter::inclusion_support_type() const {
++inclusion_support_types common_odb_options_formatter::inclusion_support_type() const {
+     return inclusion_support_types::not_supported;
+ }
+ 
+-boost::filesystem::path odb_options_formatter::inclusion_path(
++boost::filesystem::path common_odb_options_formatter::inclusion_path(
+     const formattables::locator& /*l*/, const yarn::name& n) const {
+     using namespace dogen::utility::log;
+     static logger
+-        lg(logger_factory("quilt.cpp.formatters.odb.odb_options_formatter"));
++        lg(logger_factory("quilt.cpp.formatters.odb.common_odb_options_formatter"));
+ 
+         const std::string not_supported("Inclusion path is not supported: ");
+ 
+@@ -56,23 +56,23 @@ boost::filesystem::path odb_options_formatter::inclusion_path(
+     BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
+ }
+ 
+-boost::filesystem::path odb_options_formatter::full_path(
++boost::filesystem::path common_odb_options_formatter::full_path(
+     const formattables::locator& l, const yarn::name& n) const {
+     return l.make_full_path_for_odb_options(n, static_artefact());
+ }
+ 
+-std::list<std::string> odb_options_formatter::inclusion_dependencies(
++std::list<std::string> common_odb_options_formatter::inclusion_dependencies(
+     const formattables::dependencies_builder_factory& /*f*/,
+     const yarn::element& /*e*/) const {
+     static std::list<std::string> r;
+     return r;
+ }
+ 
+-dogen::formatters::artefact odb_options_formatter::
++dogen::formatters::artefact common_odb_options_formatter::
+ format(const context& ctx, const yarn::element& e) const {
+     const auto id(e.name().id());
+     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
+-    const auto& o(a.as<fabric::odb_options>(static_artefact(), e));
++    const auto& o(a.as<fabric::common_odb_options>(static_artefact(), e));
+ 
+     {
+         a.make_decoration_preamble();
+@@ -85,10 +85,10 @@ format(const context& ctx, const yarn::element& e) const {
+ <#+
+         }
+ 
+-        if (o.letter_case()) {
++        if (!o.sql_name_case().empty()) {
+ #>
+ # casing
+---sql-name-case <#= a.get_letter_case(*o.letter_case()) #>
++--sql-name-case <#= o.sql_name_case().empty() #>
+ 
+ <#+
+         }
+@@ -105,10 +105,6 @@ format(const context& ctx, const yarn::element& e) const {
+ #>
+ # target databases
+ <#+
+-            if (o.databases().size() > 1)
+-#>
+---database common
+-<#+
+ 
+             for (const auto& d : o.databases())
+ #>
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/initializer.cpp b/projects/quilt.cpp/src/types/formatters/odb/initializer.cpp
+index b8a217315..6eb699c2a 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/initializer.cpp
++++ b/projects/quilt.cpp/src/types/formatters/odb/initializer.cpp
+@@ -24,7 +24,8 @@
+ #include "dogen/quilt.cpp/types/formatters/odb/primitive_header_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/class_header_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
+-#include "dogen/quilt.cpp/types/formatters/odb/odb_options_formatter.hpp"
++#include "dogen/quilt.cpp/types/formatters/odb/common_odb_options_formatter.hpp"
++#include "dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
+ #include "dogen/quilt.cpp/types/formatters/odb/initializer.hpp"
+ 
+ namespace dogen {
+@@ -39,7 +40,8 @@ void initializer::initialize(registrar& rg) {
+     register_formatter<primitive_header_formatter>(rg);
+     register_formatter<class_header_formatter>(rg);
+     register_formatter<enum_header_formatter>(rg);
+-    register_formatter<odb_options_formatter>(rg);
++    register_formatter<common_odb_options_formatter>(rg);
++    register_formatter<object_odb_options_formatter>(rg);
+ }
+ 
+ } } } } }
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/object_odb_options_formatter.cpp b/projects/quilt.cpp/src/types/formatters/odb/object_odb_options_formatter.cpp
+new file mode 100644
+index 000000000..6b02dea2d
+--- /dev/null
++++ b/projects/quilt.cpp/src/types/formatters/odb/object_odb_options_formatter.cpp
+@@ -0,0 +1,108 @@
++/* -*- mode: c++; tab-width: 4; indent-tabs-mode: nil; c-basic-offset: 4 -*-
++ *
++ * Copyright (C) 2012-2015 Marco Craveiro <marco.craveiro@gmail.com>
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 3 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
++ * MA 02110-1301, USA.
++ *
++ */
++#include "dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp"
++#include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
++#include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
++#include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
++#include "dogen/quilt.cpp/types/formatters/inclusion_constants.hpp"
++#include "dogen/quilt.cpp/types/formatters/assistant.hpp"
++#include "dogen/quilt.cpp/types/formatters/traits.hpp"
++#include "dogen/quilt.cpp/types/traits.hpp"
++#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
++#include "dogen/formatters/types/sequence_formatter.hpp"
++#include "dogen/yarn/types/object.hpp"
++#include "dogen/utility/log/logger.hpp"
++#include <boost/algorithm/string/case_conv.hpp>
++#include <boost/throw_exception.hpp>
++#include <boost/make_shared.hpp>
++#include <typeinfo>
++
++namespace dogen {
++namespace quilt {
++namespace cpp {
++namespace formatters {
++namespace odb {
++
++std::string object_odb_options_formatter::static_artefact() {
++    return traits::object_odb_options_archetype();
++}
++
++std::string object_odb_options_formatter::formatter_name() const {
++    static auto r(archetype_location().archetype());
++    return r;
++}
++
++annotations::archetype_location
++object_odb_options_formatter::archetype_location() const {
++    static annotations::archetype_location
++        r(cpp::traits::family(), cpp::traits::kernel(),
++          traits::facet(), object_odb_options_formatter::static_artefact());
++    return r;
++}
++
++std::type_index object_odb_options_formatter::element_type_index() const {
++    static auto r(std::type_index(typeid(fabric::object_odb_options)));
++    return r;
++}
++
++inclusion_support_types object_odb_options_formatter::inclusion_support_type() const {
++    return inclusion_support_types::not_supported;
++}
++
++boost::filesystem::path object_odb_options_formatter::inclusion_path(
++    const formattables::locator& /*l*/, const yarn::name& n) const {
++    using namespace dogen::utility::log;
++    static logger
++        lg(logger_factory("quilt.cpp.formatters.odb.object_odb_options_formatter"));
++
++        const std::string not_supported("Inclusion path is not supported: ");
++
++    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
++    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
++}
++
++boost::filesystem::path object_odb_options_formatter::full_path(
++    const formattables::locator& l, const yarn::name& n) const {
++    return l.make_full_path_for_odb_options(n, static_artefact());
++}
++
++std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
++    const formattables::dependencies_builder_factory& /*f*/,
++    const yarn::element& /*e*/) const {
++    static std::list<std::string> r;
++    return r;
++}
++
++dogen::formatters::artefact object_odb_options_formatter::
++format(const context& ctx, const yarn::element& e) const {
++    const auto id(e.name().id());
++    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
++    // const auto& o(a.as<fabric::object_odb_options>(static_artefact(), e));
++
++    {
++        a.make_decoration_preamble();
++a.stream() << "# use the boost profile" << std::endl;
++a.stream() << "--profile boost" << std::endl;
++a.stream() << std::endl;
++    } // sbf
++    return a.make_artefact();
++}
++} } } } }
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/object_odb_options_formatter.stitch b/projects/quilt.cpp/src/types/formatters/odb/object_odb_options_formatter.stitch
+new file mode 100644
+index 000000000..97a59072a
+--- /dev/null
++++ b/projects/quilt.cpp/src/types/formatters/odb/object_odb_options_formatter.stitch
+@@ -0,0 +1,87 @@
++<#@ annotations.profile=dogen.stitch #>
++<#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::odb #>
++<#@ stitch.inclusion_dependency=<typeinfo> #>
++<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
++<#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
++<#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
++<#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/object_odb_options.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/inclusion_constants.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/formatting_error.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/traits.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
++<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/odb/object_odb_options_formatter.hpp" #>
++<#+
++
++std::string object_odb_options_formatter::static_artefact() {
++    return traits::object_odb_options_archetype();
++}
++
++std::string object_odb_options_formatter::formatter_name() const {
++    static auto r(archetype_location().archetype());
++    return r;
++}
++
++annotations::archetype_location
++object_odb_options_formatter::archetype_location() const {
++    static annotations::archetype_location
++        r(cpp::traits::family(), cpp::traits::kernel(),
++          traits::facet(), object_odb_options_formatter::static_artefact());
++    return r;
++}
++
++std::type_index object_odb_options_formatter::element_type_index() const {
++    static auto r(std::type_index(typeid(fabric::object_odb_options)));
++    return r;
++}
++
++inclusion_support_types object_odb_options_formatter::inclusion_support_type() const {
++    return inclusion_support_types::not_supported;
++}
++
++boost::filesystem::path object_odb_options_formatter::inclusion_path(
++    const formattables::locator& /*l*/, const yarn::name& n) const {
++    using namespace dogen::utility::log;
++    static logger
++        lg(logger_factory("quilt.cpp.formatters.odb.object_odb_options_formatter"));
++
++        const std::string not_supported("Inclusion path is not supported: ");
++
++    BOOST_LOG_SEV(lg, error) << not_supported << n.id();
++    BOOST_THROW_EXCEPTION(formatting_error(not_supported + n.id()));
++}
++
++boost::filesystem::path object_odb_options_formatter::full_path(
++    const formattables::locator& l, const yarn::name& n) const {
++    return l.make_full_path_for_odb_options(n, static_artefact());
++}
++
++std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
++    const formattables::dependencies_builder_factory& /*f*/,
++    const yarn::element& /*e*/) const {
++    static std::list<std::string> r;
++    return r;
++}
++
++dogen::formatters::artefact object_odb_options_formatter::
++format(const context& ctx, const yarn::element& e) const {
++    const auto id(e.name().id());
++    assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
++    // const auto& o(a.as<fabric::object_odb_options>(static_artefact(), e));
++
++    {
++        a.make_decoration_preamble();
++#>
++# use the boost profile
++--profile boost
++
++<#+
++    } // sbf
++    return a.make_artefact();
++}
++#>
+diff --git a/projects/quilt.cpp/src/types/formatters/odb/traits.cpp b/projects/quilt.cpp/src/types/formatters/odb/traits.cpp
+index 5eb1fe4a4..a7bbc62eb 100644
+--- a/projects/quilt.cpp/src/types/formatters/odb/traits.cpp
++++ b/projects/quilt.cpp/src/types/formatters/odb/traits.cpp
+@@ -48,8 +48,13 @@ std::string traits::enum_header_archetype() {
+     return r;
+ }
+ 
+-std::string traits::odb_options_archetype() {
+-    static std::string r(traits::facet() + ".odb_options");
++std::string traits::common_odb_options_archetype() {
++    static std::string r(traits::facet() + ".common_odb_options");
++    return r;
++}
++
++std::string traits::object_odb_options_archetype() {
++    static std::string r(traits::facet() + ".object_odb_options");
+     return r;
+ }
+ 
+diff --git a/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.cpp b/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.cpp
+index d8747b9ef..08ee81490 100644
+--- a/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.cpp
++++ b/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.cpp
+@@ -150,8 +150,8 @@ a.stream() << "    COMMAND ${ODB_EXECUTABLE}" << std::endl;
+ a.stream() << "        --options-file ${CMAKE_CURRENT_SOURCE_DIR}/" << targets.options_file() << std::endl;
+ a.stream() << "        --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/" << target.output_directory() << std::endl;
+ a.stream() << "        --odb-epilogue '#include \"" << target.pragmas_file() << "\"'" << std::endl;
+-                for (const auto& regex : target.include_regexes())
+-a.stream() << "        --include-regex '" << regex << "'" << std::endl;
++                // for (const auto& regex : target.include_regexes())
++//        --include-regex ' regex
+ a.stream() << "        -I ${ODB_INCLUDE_DIRS} ${global_includes}" << std::endl;
+ a.stream() << "        ${CMAKE_CURRENT_SOURCE_DIR}/" << target.types_file() << std::endl;
+                 for (const auto& pair : target.move_parameters())
+diff --git a/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.stitch b/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.stitch
+index ad972028e..bc9f9b8c3 100644
+--- a/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.stitch
++++ b/projects/quilt.cpp/src/types/formatters/source_cmakelists_formatter.stitch
+@@ -141,9 +141,9 @@ add_custom_target(<#= target.name() #>
+         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.output_directory() #>
+         --odb-epilogue '#include "<#= target.pragmas_file() #>"'
+ <#+
+-                for (const auto& regex : target.include_regexes())
++                // for (const auto& regex : target.include_regexes())
++//        --include-regex ' regex
+ #>
+-        --include-regex '<#= regex #>'
+         -I ${ODB_INCLUDE_DIRS} ${global_includes}
+         ${CMAKE_CURRENT_SOURCE_DIR}/<#= target.types_file() #>
+ <#+
