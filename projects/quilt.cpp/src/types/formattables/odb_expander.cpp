@@ -108,17 +108,17 @@ void updator::visit(fabric::object_odb_options& ooo) {
     const auto types_rp(locator_.make_inclusion_path_for_cpp_header(ooo.name(),
             types_arch).parent_path());
 
-    os << "%(.*).hpp%" << types_rp.generic_string() << "/$1.hpp%";
+    os << "'%(.*).hpp%" << types_rp.generic_string() << "/$1.hpp%'";
     ooo.include_regexes().push_back(os.str());
 
     os.str("");
-    os << "%(^[a-zA-Z0-9_]+)-odb(.*)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2";
+    os << "'%(^[a-zA-Z0-9_]+)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2'";
     ooo.include_regexes().push_back(os.str());
 
     os.str("");
-    os << "%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
-       << odb_rp.parent_path().generic_string() << "/$1-odb$2%";
+    os << "'%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
+       << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
     ooo.include_regexes().push_back(os.str());
 
     const auto odb_fctn(formatters::odb::traits::facet());

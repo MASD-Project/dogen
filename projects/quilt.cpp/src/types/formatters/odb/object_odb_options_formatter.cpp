@@ -107,6 +107,11 @@ a.stream() << "# regexes" << std::endl;
             for (const auto& regex : ooo.include_regexes())
 a.stream() << "--include-regex " << regex << std::endl;
 a.stream() << std::endl;
+a.stream() << "# debug regexes" << std::endl;
+a.stream() << "# --include-regex-trace" << std::endl;
+a.stream() << std::endl;
+a.stream() << "# make the header guards similar to dogen ones" << std::endl;
+a.stream() << "--guard-prefix " << ooo.header_guard_prefix() << std::endl;
         }
     } // sbf
     return a.make_artefact();

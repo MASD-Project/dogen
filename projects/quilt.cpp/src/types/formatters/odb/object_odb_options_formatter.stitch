@@ -89,6 +89,11 @@ format(const context& ctx, const yarn::element& e) const {
 #>
 --include-regex <#= regex #>
 
+# debug regexes
+# --include-regex-trace
+
+# make the header guards similar to dogen ones
+--guard-prefix <#= ooo.header_guard_prefix() #>
 <#+
         }
     } // sbf
