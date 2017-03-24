@@ -467,7 +467,7 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
 }
 
 boost::filesystem::path locator::make_relative_path_for_odb_options(
-    const yarn::name& /*n*/, const std::string& archetype,
+    const yarn::name& n, const std::string& archetype,
     const bool include_source_directory) const {
 
     boost::filesystem::path r;
@@ -483,7 +483,20 @@ boost::filesystem::path locator::make_relative_path_for_odb_options(
     if (!arch_cfg.facet_directory().empty() && !cfg.disable_facet_directories())
         r /= arch_cfg.facet_directory();
 
-    r /= "options.odb"; // FIXME: hack for extension
+
+    std::ostringstream stream;
+    stream << n.simple();
+
+    if (!arch_cfg.archetype_postfix().empty())
+        stream << underscore << arch_cfg.archetype_postfix();
+
+    if (!arch_cfg.facet_postfix().empty())
+        stream << underscore << "options";
+
+    const auto extension("odb");
+    stream << dot << extension;
+    r /= stream.str();
+
     return r;
 }
 

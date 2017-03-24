@@ -36,7 +36,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.fabric.odb_options_factory"));
 
-const std::string odb_options_name("options.odb");
+const std::string common_odb_options_name("common");
 const std::string mysql("mysql");
 const std::string postgresql("pgsql");
 const std::string oracle("oracle");
@@ -132,7 +132,7 @@ odb_options_factory::make(const yarn::intermediate_model& im) const {
         return r;
 
     yarn::name_factory nf;
-    const auto n(nf.build_element_in_model(im.name(), odb_options_name));
+    const auto n(nf.build_element_in_model(im.name(), common_odb_options_name));
 
     auto coo(boost::make_shared<common_odb_options>());
     coo->name(n);
