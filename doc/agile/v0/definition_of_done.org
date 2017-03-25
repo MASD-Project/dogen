@@ -1,0 +1,30 @@
+#+title: Definition of Done
+#+options: date:nil toc:nil author:nil num:nil
+
+* About
+
+This document defines what we consider to be the objective of release
+v1.0; once all these boxes have been ticked, we can ship it.
+
+* What do we need to achieve
+
+The following must be attained in order for it to be done:
+
+- it must be possible to add a new file formatter by just adding a new
+  stitch template.
+- dynamic extensions must be able to supply licences, copyright
+  information and all other user specific information. Nothing is
+  hard-coded.
+- all models must have doxygen documentation describing their
+  purpose. The key types should be documented too.
+- sanity scripts must run on all packages across all platforms to
+  ensure we are providing good packages.
+- unstable packages (e.g latest) must be available for Download off of
+  CI.
+- stable packages must be available in Debian via apt-get.
+- a language other than C++ must be supported in order to prove that
+  the framework works with multiple languages.
+- a basic manual must exist, with both user and developer information,
+  including examples all the main features of Dogen.
+
+All of these tasks are already in the backlog.
