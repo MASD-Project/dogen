@@ -22,6 +22,8 @@
 #include <boost/algorithm/string/join.hpp>
 #include <boost/filesystem/operations.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/pair_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_target.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
@@ -53,7 +55,8 @@ namespace formattables {
 
 class odb_targets_factory : public fabric::element_visitor {
 public:
-    odb_targets_factory(const locator& l, const yarn::name& model_name);
+    odb_targets_factory(const model& fm,
+        const locator& l, const yarn::name& model_name);
 
 public:
     using fabric::element_visitor::visit;
@@ -64,14 +67,15 @@ public:
     const fabric::odb_targets& result() const;
 
 private:
+    const model& model_;
     const locator locator_;
     const std::string target_name_;
     fabric::odb_targets result_;
 };
 
-odb_targets_factory::
-odb_targets_factory(const locator& l, const yarn::name& model_name)
-    : locator_(l),
+odb_targets_factory::odb_targets_factory(const model& fm, const locator& l,
+    const yarn::name& model_name)
+    : model_(fm), locator_(l),
       target_name_("odb_" + boost::join(model_name.location().model_modules(),
               separator)) {
     result_.main_target_name(target_name_);
@@ -113,13 +117,26 @@ void odb_targets_factory::visit(const yarn::object& o) {
     const auto tp(l.make_full_path_for_cpp_header(n, types_arch));
     t.types_file(tp.lexically_relative(src_dir).generic_string());
 
-    t.object_odb_options(
+    const auto odb_options_rp(
         locator_.make_relative_path_for_odb_options(o.name(), odb_arch,
-            false/*include_source_directory*/).generic_string()
-        );
+            false/*include_source_directory*/));
+    t.object_odb_options(odb_options_rp.generic_string());
 
-    // FIXME: compute move targets
+    BOOST_LOG_SEV(lg, debug) << "Databases: " << model_.odb_databases();
+    const auto odb_rp(odb_options_rp.parent_path().generic_string());
+    for (const auto& db : model_.odb_databases()) {
+        if (db == "common")
+            continue;
 
+        std::ostringstream os;
+        os << n.simple() << "-odb-" << db << ".cxx";
+        const auto file_name(os.str());
+
+        std::pair<std::string, std::string> pair;
+        pair.first = t.output_directory() + "/" + file_name;
+        pair.second = odb_rp + "/" + file_name;
+        t.move_parameters().push_back(pair);
+    }
     result_.targets().push_back(t);
 }
 
@@ -152,7 +169,7 @@ void cmakelists_updater::visit(fabric::cmakelists& c) {
 }
 
 void cmakelists_expander::expand(const locator& l, model& fm) const {
-    odb_targets_factory f(l, fm.name());
+    odb_targets_factory f(fm, l, fm.name());
     for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
 

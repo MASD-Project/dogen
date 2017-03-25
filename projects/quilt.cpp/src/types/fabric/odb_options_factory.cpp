@@ -20,12 +20,8 @@
  */
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
-#include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/io/letter_cases_io.hpp"
-#include "dogen/yarn/io/orm_database_systems_io.hpp"
-#include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/fabric/building_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
@@ -37,18 +33,6 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quit.cpp.fabric.odb_options_factory"));
 
 const std::string common_odb_options_name("common");
-const std::string mysql("mysql");
-const std::string postgresql("pgsql");
-const std::string oracle("oracle");
-const std::string sql_server("sqlserver");
-const std::string sqllite("sqllite");
-
-const std::string upper_case("upper");
-const std::string lower_case("lower");
-
-const std::string invalid_daatabase_system(
-    "Database system is invalid or unsupported: ");
-const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 }
 
@@ -56,48 +40,6 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
-
-std::string
-odb_options_factory::to_odb_database(const yarn::orm_database_systems ds) {
-    using yarn::orm_database_systems;
-
-    switch (ds) {
-    case orm_database_systems::mysql: return mysql;
-    case orm_database_systems::postgresql: return postgresql;
-    case orm_database_systems::oracle: return oracle;
-    case orm_database_systems::sql_server: return sql_server;
-    case orm_database_systems::sqllite: return sqllite;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(ds));
-        BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
-        BOOST_THROW_EXCEPTION(building_error(invalid_daatabase_system + s));
-    } }
-}
-
-std::string
-odb_options_factory::to_odb_sql_name_case(const yarn::letter_cases lc) {
-    switch (lc) {
-    case yarn::letter_cases::upper_case: return upper_case;
-    case yarn::letter_cases::lower_case: return lower_case;
-    default: {
-        const auto s(boost::lexical_cast<std::string>(lc));
-        BOOST_LOG_SEV(lg, error) << invalid_case << s;
-        BOOST_THROW_EXCEPTION(building_error(invalid_case + s));
-    } }
-}
-
-std::list<std::string> odb_options_factory::
-make_databases(const yarn::orm_model_properties& cfg) const {
-    std::list<std::string> r;
-
-    if (cfg.database_systems().size() > 1)
-        r.push_back("common");
-
-    for (const auto ds : cfg.database_systems())
-        r.push_back(to_odb_database(ds));
-
-    return r;
-}
 
 std::list<boost::shared_ptr<yarn::element>>
 odb_options_factory::make(const yarn::intermediate_model& im) const {
@@ -137,13 +79,6 @@ odb_options_factory::make(const yarn::intermediate_model& im) const {
     auto coo(boost::make_shared<common_odb_options>());
     coo->name(n);
     coo->origin_type(im.origin_type());
-
-    if (im.orm_properties()) {
-        const auto cfg(*im.orm_properties());
-        coo->databases(make_databases(cfg));
-        if (cfg.letter_case())
-            coo->sql_name_case(to_odb_sql_name_case(*cfg.letter_case()));
-    }
     r.push_back(coo);
 
     BOOST_LOG_SEV(lg, debug) << "Generated ODB Options.";

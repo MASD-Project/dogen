@@ -27,6 +27,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/primitive.hpp"
+#include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
@@ -59,7 +60,7 @@ namespace formattables {
 
 class updator : public fabric::element_visitor {
 public:
-    updator(const locator& l, const odb_expander::type_group& tg);
+    updator(model& fm, const locator& l, const odb_expander::type_group& tg);
 
 private:
     std::list<std::string> make_odb_pragmas(const odb_expander::type_group& tg,
@@ -67,6 +68,7 @@ private:
 
 public:
     using fabric::element_visitor::visit;
+    void visit(fabric::common_odb_options& coo);
     void visit(fabric::object_odb_options& ooo);
     void visit(yarn::object& o);
     void visit(yarn::primitive& p);
@@ -75,13 +77,15 @@ public:
     const boost::optional<odb_properties>& result() const;
 
 private:
+    const model& model_;
     const locator locator_;
     const odb_expander::type_group& type_group_;
     boost::optional<odb_properties> result_;
 };
 
-updator::updator(const locator& l,
-    const odb_expander::type_group& tg) : locator_(l), type_group_(tg) {}
+updator::
+updator(model& fm, const locator& l, const odb_expander::type_group& tg)
+    : model_(fm), locator_(l), type_group_(tg) {}
 
 std::list<std::string>
 updator::make_odb_pragmas(const odb_expander::type_group& tg,
@@ -92,6 +96,11 @@ updator::make_odb_pragmas(const odb_expander::type_group& tg,
         return std::list<std::string>();
 
     return s.get_text_collection_content(tg.odb_pragma);
+}
+
+void updator::visit(fabric::common_odb_options& coo) {
+    coo.databases(model_.odb_databases());
+    coo.sql_name_case(model_.odb_sql_name_case());
 }
 
 void updator::visit(fabric::object_odb_options& ooo) {
@@ -195,7 +204,7 @@ void updator::visit(yarn::object& o) {
 
                     const auto ds(pair.first);
                     const auto type(pair.second);
-                    s << fabric::odb_options_factory::to_odb_database(ds)
+                    s << transformer::to_odb_database(ds)
                       << ":type(\"" << type << "\")";
 
                     is_first = false;
@@ -319,7 +328,7 @@ void odb_expander::expand(const annotations::type_repository& atrp,
 
         for (const auto& ptr : formattable.all_segments()) {
             auto& e(*ptr);
-            updator g(l, tg);
+            updator g(fm, l, tg);
             e.accept(g);
 
             if (!g.result())

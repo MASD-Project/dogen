@@ -28,8 +28,12 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/orm_database_systems.hpp"
+#include "dogen/yarn/types/letter_cases.hpp"
+#include "dogen/yarn/types/orm_model_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -42,10 +46,19 @@ namespace formattables {
  */
 class transformer {
 public:
+    static std::string to_odb_database(const yarn::orm_database_systems ds);
+
+private:
+    std::string to_odb_sql_name_case(const yarn::letter_cases lc) const;
+
+    std::list<std::string>
+    make_databases(const yarn::orm_model_properties& omp) const;
+
+public:
     /**
      * @brief Given a yarn model, produces the corresponding formattables.
      */
-    std::unordered_map<std::string, formattable>
+    model
     transform(const formatters::repository& frp, const yarn::model& m) const;
 };
 

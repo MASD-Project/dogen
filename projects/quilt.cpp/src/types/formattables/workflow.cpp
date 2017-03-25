@@ -37,13 +37,8 @@ namespace formattables {
 
 model workflow::
 make_model(const formatters::repository& frp, const yarn::model& m) const {
-    model r;
-    r.name(m.name());
-
     transformer t;
-    r.formattables(t.transform(frp, m));
-
-    return r;
+    return t.transform(frp, m);
 }
 
 void workflow::expand_model(

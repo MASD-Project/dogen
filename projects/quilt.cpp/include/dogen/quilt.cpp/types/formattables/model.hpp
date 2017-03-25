@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <string>
 #include <algorithm>
 #include <unordered_map>
@@ -55,7 +56,9 @@ public:
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::streaming_properties>& streaming_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable>& formattables,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties>& facet_properties,
-        const dogen::quilt::cpp::formattables::cpp_standards cpp_standard);
+        const dogen::quilt::cpp::formattables::cpp_standards cpp_standard,
+        const std::list<std::string>& odb_databases,
+        const std::string& odb_sql_name_case);
 
 private:
     template<typename Archive>
@@ -88,6 +91,16 @@ public:
     dogen::quilt::cpp::formattables::cpp_standards cpp_standard() const;
     void cpp_standard(const dogen::quilt::cpp::formattables::cpp_standards v);
 
+    const std::list<std::string>& odb_databases() const;
+    std::list<std::string>& odb_databases();
+    void odb_databases(const std::list<std::string>& v);
+    void odb_databases(const std::list<std::string>&& v);
+
+    const std::string& odb_sql_name_case() const;
+    std::string& odb_sql_name_case();
+    void odb_sql_name_case(const std::string& v);
+    void odb_sql_name_case(const std::string&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -104,6 +117,8 @@ private:
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::formattable> formattables_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::facet_properties> facet_properties_;
     dogen::quilt::cpp::formattables::cpp_standards cpp_standard_;
+    std::list<std::string> odb_databases_;
+    std::string odb_sql_name_case_;
 };
 
 } } } }

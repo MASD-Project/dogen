@@ -19,6 +19,7 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
+#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/serialization/string.hpp>
@@ -48,6 +49,8 @@ void save(Archive& ar,
     ar << make_nvp("formattables", v.formattables_);
     ar << make_nvp("facet_properties", v.facet_properties_);
     ar << make_nvp("cpp_standard", v.cpp_standard_);
+    ar << make_nvp("odb_databases", v.odb_databases_);
+    ar << make_nvp("odb_sql_name_case", v.odb_sql_name_case_);
 }
 
 template<typename Archive>
@@ -59,6 +62,8 @@ void load(Archive& ar,
     ar >> make_nvp("formattables", v.formattables_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
     ar >> make_nvp("cpp_standard", v.cpp_standard_);
+    ar >> make_nvp("odb_databases", v.odb_databases_);
+    ar >> make_nvp("odb_sql_name_case", v.odb_sql_name_case_);
 }
 
 } }

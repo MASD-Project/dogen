@@ -89,6 +89,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "\"" << tidy_up_string(*i) << "\"";
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -101,7 +115,9 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"streaming_properties\": " << v.streaming_properties() << ", "
       << "\"formattables\": " << v.formattables() << ", "
       << "\"facet_properties\": " << v.facet_properties() << ", "
-      << "\"cpp_standard\": " << v.cpp_standard()
+      << "\"cpp_standard\": " << v.cpp_standard() << ", "
+      << "\"odb_databases\": " << v.odb_databases() << ", "
+      << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\""
       << " }";
     return(s);
 }

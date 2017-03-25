@@ -19,8 +19,12 @@
  *
  */
 #include <typeindex>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/letter_cases_io.hpp"
+#include "dogen/yarn/io/orm_database_systems_io.hpp"
+#include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -31,9 +35,21 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
 
+const std::string mysql("mysql");
+const std::string postgresql("pgsql");
+const std::string oracle("oracle");
+const std::string sql_server("sqlserver");
+const std::string sqllite("sqllite");
+
+const std::string upper_case("upper");
+const std::string lower_case("lower");
+
 const std::string duplicate_archetype("Duplicate archetype: ");
 const std::string duplicate_master(
     "More than one master segment found. Last: ");
+const std::string invalid_daatabase_system(
+    "Database system is invalid or unsupported: ");
+const std::string invalid_case("Letter case is invalid or unsupported: ");
 
 }
 
@@ -42,12 +58,63 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::unordered_map<std::string, formattable> transformer::
+std::string transformer::to_odb_database(const yarn::orm_database_systems ds) {
+    using yarn::orm_database_systems;
+
+    switch (ds) {
+    case orm_database_systems::mysql: return mysql;
+    case orm_database_systems::postgresql: return postgresql;
+    case orm_database_systems::oracle: return oracle;
+    case orm_database_systems::sql_server: return sql_server;
+    case orm_database_systems::sqllite: return sqllite;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(ds));
+        BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(invalid_daatabase_system + s));
+    } }
+}
+
+std::string
+transformer::to_odb_sql_name_case(const yarn::letter_cases lc) const {
+    switch (lc) {
+    case yarn::letter_cases::upper_case: return upper_case;
+    case yarn::letter_cases::lower_case: return lower_case;
+    default: {
+        const auto s(boost::lexical_cast<std::string>(lc));
+        BOOST_LOG_SEV(lg, error) << invalid_case << s;
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
+    } }
+}
+
+std::list<std::string> transformer::
+make_databases(const yarn::orm_model_properties& omp) const {
+    std::list<std::string> r;
+
+    if (omp.database_systems().size() > 1)
+        r.push_back("common");
+
+    for (const auto ds : omp.database_systems())
+        r.push_back(to_odb_database(ds));
+
+    return r;
+}
+
+model transformer::
 transform(const formatters::repository& frp, const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 
-    std::unordered_map<std::string, formattable> r;
+    model r;
+    r.name(m.name());
+
+    if (m.orm_properties()) {
+        const auto op(*m.orm_properties());
+        r.odb_databases(make_databases(op));
+        if (op.letter_case())
+            r.odb_sql_name_case(to_odb_sql_name_case(*op.letter_case()));
+    }
+
     for (const auto& ptr : m.elements()) {
         const auto& e(*ptr);
         const auto id(e.name().id());
@@ -58,11 +125,11 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
          * element due to the segmentation of elements - we may need
          * to process the master element and one or more extensions.
          */
-        auto i(r.find(id));
-        if (i == r.end()) {
+        auto i(r.formattables().find(id));
+        if (i == r.formattables().end()) {
             formattable fbl;
             const auto pair(std::make_pair(id, fbl));
-            const auto ret(r.insert(pair));
+            const auto ret(r.formattables().insert(pair));
             i = ret.first;
             BOOST_LOG_SEV(lg, debug) << "Inserted element: " << id;
         } else
@@ -119,7 +186,7 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
-                             << "Size: " << r.size();
+                             << "Size: " << r.formattables().size();
     return r;
 }
 

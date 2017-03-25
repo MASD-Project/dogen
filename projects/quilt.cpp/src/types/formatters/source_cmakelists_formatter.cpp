@@ -153,7 +153,7 @@ a.stream() << "        --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/" << target.outp
 a.stream() << "        -I ${ODB_INCLUDE_DIRS} ${global_includes}" << std::endl;
 a.stream() << "        ${CMAKE_CURRENT_SOURCE_DIR}/" << target.types_file() << std::endl;
                 for (const auto& pair : target.move_parameters())
-a.stream() << "    COMMAND mv " << pair.first << " " << pair.second << std::endl;
+a.stream() << "    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/" << pair.first << " ${CMAKE_CURRENT_SOURCE_DIR}/" << pair.second << std::endl;
 a.stream() << "    VERBATIM" << std::endl;
 a.stream() << ")" << std::endl;
 a.stream() << "add_dependencies(" << targets.main_target_name() << " " << target.name() << ")" << std::endl;

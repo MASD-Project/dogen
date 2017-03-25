@@ -26,6 +26,7 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
 
 namespace {

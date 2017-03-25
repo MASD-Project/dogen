@@ -145,7 +145,7 @@ add_custom_target(<#= target.name() #>
 <#+
                 for (const auto& pair : target.move_parameters())
 #>
-    COMMAND mv <#= pair.first #> <#= pair.second #>
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/<#= pair.first #> ${CMAKE_CURRENT_SOURCE_DIR}/<#= pair.second #>
     VERBATIM
 )
 add_dependencies(<#= targets.main_target_name() #> <#= target.name() #>)
