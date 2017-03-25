@@ -6,13 +6,13 @@ work with [[http://www.codesynthesis.com/products/odb/][ODB]] - [[http://www.cod
 Object-Relational Mapping tool, built on the back of the GCC plugin
 system. I've personally always been in awe of what Boris Kolpackov has
 achieved, and, of course, it being a South African company made me all
-the more keen to use their products. More importantly: the product
-just seems to rock in terms of polish, features and documentation.
+the more keen to use their wares. More importantly: the product just
+seems to rock in terms of polish, features and documentation.
 
 Astute readers of this blog will point out that Dogen has been
 supporting ODB for quite some time. That is indeed true, but since I
 haven't used this feature in anger, I wasn't sure how good the support
-really was; our fairly trivial database model ([[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/master/projects/input_models/database.dia][Dia]]) explored only a
+really was; our fairly trivial database model ([[https://raw.githubusercontent.com/DomainDrivenConsulting/dogen/fe6a0c7b48b49554d3211e1a2c2b07fb0f09d502/projects/input_models/database.dia][Dia]]) explored only a
 small fraction of what is possible. Now that I finally had a chance to
 use it in production, I needed to expand the tests and try to
 replicate the customer's scenario as close as possible. As always in

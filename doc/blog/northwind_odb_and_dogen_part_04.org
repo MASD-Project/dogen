@@ -341,9 +341,10 @@ you follow the convention.
 
 Whilst I was playing around with ODB and Oracle, I noticed a slight
 problem: there is no bulk fetch support in the ODB Oracle wrappers at
-present. I reported this to the main ODB mailing list [[http://www.codesynthesis.com/pipermail/odb-users/2017-February/003641.html][here]]. By the by,
-the ODB community is very friendly and their mailing list is a very
-responsive place to chat about ODB issues.
+present; it works for other scenarios, but not for selects. I reported
+this to the main ODB mailing list [[http://www.codesynthesis.com/pipermail/odb-users/2017-February/003641.html][here]]. By the by, the ODB community
+is very friendly and their mailing list is a very responsive place to
+chat about ODB issues.
 
 Anyway, so you can have an idea of this problem, here's a fetch of our
 generated customers without prefetch support:
