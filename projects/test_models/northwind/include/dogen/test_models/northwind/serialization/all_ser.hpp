@@ -40,6 +40,7 @@
 #include "dogen/test_models/northwind/serialization/employee_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/supplier_id_ser.hpp"
 #include "dogen/test_models/northwind/serialization/order_details_ser.hpp"
+#include "dogen/test_models/northwind/serialization/package/class_0_ser.hpp"
 #include "dogen/test_models/northwind/serialization/order_details_key_ser.hpp"
 
 #endif

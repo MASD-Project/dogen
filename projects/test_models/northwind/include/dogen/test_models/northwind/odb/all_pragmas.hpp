@@ -40,6 +40,7 @@
 #include "dogen/test_models/northwind/odb/employee_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/supplier_id_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/order_details_pragmas.hpp"
+#include "dogen/test_models/northwind/odb/package/class_0_pragmas.hpp"
 #include "dogen/test_models/northwind/odb/order_details_key_pragmas.hpp"
 
 #endif

@@ -483,6 +483,11 @@ boost::filesystem::path locator::make_relative_path_for_odb_options(
     if (!arch_cfg.facet_directory().empty() && !cfg.disable_facet_directories())
         r /= arch_cfg.facet_directory();
 
+    /*
+     * Add the module path of all the modules that contain this name.
+     */
+    for (const auto& m : n.location().internal_modules())
+        r /= m;
 
     std::ostringstream stream;
     stream << n.simple();
