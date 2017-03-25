@@ -110,7 +110,7 @@ set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/yarn.json/input")
 file(GLOB samples "${input_dir}/*.dia")
 install(FILES ${samples} DESTINATION share/samples/dia)
 
-if (DOGEN_TAILOR_COMMAND)
+if (DOGEN_TAILOR_EXECUTABLE)
     set(ignore false)
     set(ignore_models package_without_name class_without_name two_empty_layers)
     foreach(sample ${samples})
@@ -121,7 +121,7 @@ if (DOGEN_TAILOR_COMMAND)
             add_custom_target(tailor_${model_name}
                 COMMENT "Tailoring ${model_name}."
                 WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-                COMMAND ${DOGEN_TAILOR_COMMAND} --log-level=${DOGEN_LOG_LEVEL} --target ${sample} --output ${output_dir}/${model_name}.json)
+                COMMAND ${DOGEN_TAILOR_EXECUTABLE} --log-level=${DOGEN_LOG_LEVEL} --target ${sample} --output ${output_dir}/${model_name}.json)
 
             add_dependencies(tailor_all tailor_${model_name})
         endif()
@@ -131,7 +131,7 @@ if (DOGEN_TAILOR_COMMAND)
     add_custom_target(tailor_${model_name}
         COMMENT "Tailoring ${model_name}."
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_TAILOR_COMMAND} --log-level=${DOGEN_LOG_LEVEL} --target ${CMAKE_CURRENT_SOURCE_DIR}/yarn.upsilon/input/Zeta.Model.Configuration.xml --output ${output_dir}/${model_name}.json)
+        COMMAND ${DOGEN_TAILOR_EXECUTABLE} --log-level=${DOGEN_LOG_LEVEL} --target ${CMAKE_CURRENT_SOURCE_DIR}/yarn.upsilon/input/Zeta.Model.Configuration.xml --output ${output_dir}/${model_name}.json)
 
     add_dependencies(tailor_all tailor_${model_name})
 

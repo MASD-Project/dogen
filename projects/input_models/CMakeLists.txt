@@ -19,7 +19,7 @@
 set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
 set(models_dir "${projects_dir}/input_models")
 
-if (DOGEN_KNITTER_COMMAND)
+if (DOGEN_KNITTER_EXECUTABLE)
     set(ignore_regexes --ignore-files-matching-regex .*/CMakeLists.txt)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/test/.*)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/tests/.*)
@@ -35,7 +35,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Yarn model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -44,7 +44,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Yarn JSON model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -53,7 +53,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Dia model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -62,7 +62,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Options model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -71,7 +71,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}x
         COMMENT "Knitting Quilt model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target}x)
@@ -80,7 +80,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Quilt C++ model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -89,7 +89,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Quilt C# model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -98,7 +98,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Northwind model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         --output-dir ${projects_dir}/test_models
         ${other_options}
@@ -111,7 +111,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting knit model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -120,7 +120,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Yarn Dia model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -129,7 +129,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting the Formatters Model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -138,7 +138,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Annotations model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -147,7 +147,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Stitch model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -156,7 +156,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Wale model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -165,7 +165,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Upsilon model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -174,7 +174,7 @@ if (DOGEN_KNITTER_COMMAND)
     add_custom_target(knit_${target}
         COMMENT "Knitting Yarn Upsilon model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_COMMAND}
+        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
         --target ${models_dir}/${target}.dia
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
@@ -186,7 +186,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -196,7 +196,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -206,7 +206,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -216,7 +216,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -226,7 +226,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target}x)
 
@@ -236,7 +236,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -246,7 +246,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -256,7 +256,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             --output-dir ${projects_dir}/test_models
             ${other_options}
             ${ignore_regexes}
@@ -270,7 +270,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -280,7 +280,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -290,7 +290,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -300,7 +300,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -310,7 +310,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -320,7 +320,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -330,7 +330,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
 
@@ -340,7 +340,7 @@ if (DOGEN_KNITTER_COMMAND)
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_COMMAND} --target ${models_dir}/${target}.dia
+            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
             ${common_arguments})
         add_dependencies(benchmark_all benchmark_knit_${target})
     endif()

@@ -318,73 +318,9 @@ endif()
 set(DOGEN_LOG_LEVEL "debug")
 
 #
-# knitter setup.
+# Dogen
 #
-list(APPEND CMAKE_PROGRAM_PATH ${stage_bin_dir})
-find_program(DOGEN_KNITTER_COMMAND NAMES dogen.knitter)
-if (DOGEN_KNITTER_COMMAND)
-    execute_process(
-        COMMAND ${DOGEN_KNITTER_COMMAND} --version
-        COMMAND grep ^Dogen
-        COMMAND cut -b15-
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        ERROR_VARIABLE git_error
-        OUTPUT_VARIABLE DOGEN_KNITTER_VERSION
-        RESULT_VARIABLE ret_var
-        OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-      set(knitter "${DOGEN_KNITTER_VERSION} (${DOGEN_KNITTER_COMMAND})")
-      message(STATUS "Found dogen knitter: ${knitter}...")
-      add_custom_target(knit_all)
-else()
-    message(STATUS "Dogen Knitter not found, not adding knit targets.")
-endif()
-
-#
-# Stitcher setup.
-#
-set(stitcher_binary "${stage_bin_dir}/dogen.stitcher")
-find_program(DOGEN_STITCHER_COMMAND NAMES dogen.stitcher)
-if (DOGEN_STITCHER_COMMAND)
-    execute_process(
-        COMMAND ${DOGEN_STITCHER_COMMAND} --version
-        COMMAND grep ^Dogen
-        COMMAND cut -b15-
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        ERROR_VARIABLE git_error
-        OUTPUT_VARIABLE DOGEN_STITCHER_VERSION
-        RESULT_VARIABLE ret_var
-        OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-      set(stitcher "${DOGEN_STITCHER_VERSION} (${DOGEN_STITCHER_COMMAND})")
-      message(STATUS "Found Dogen Stitcher: ${stitcher}...")
-      add_custom_target(stitch_all)
-else()
-    message(STATUS "Dogen Stitcher not found, not adding stitch targets.")
-endif()
-
-#
-# Tailor setup.
-#
-set(tailor_binary "${stage_bin_dir}/dogen.tailor")
-find_program(DOGEN_TAILOR_COMMAND NAMES dogen.tailor)
-if (DOGEN_TAILOR_COMMAND)
-    execute_process(
-        COMMAND ${DOGEN_TAILOR_COMMAND} --version
-        COMMAND grep ^Dogen
-        COMMAND cut -b15-
-        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-        ERROR_VARIABLE git_error
-        OUTPUT_VARIABLE DOGEN_TAILOR_VERSION
-        RESULT_VARIABLE ret_var
-        OUTPUT_STRIP_TRAILING_WHITESPACE)
-
-      set(tailor "${DOGEN_TAILOR_VERSION} (${DOGEN_TAILOR_COMMAND})")
-      message(STATUS "Found Dogen Tailor: ${tailor}...")
-      add_custom_target(tailor_all)
-else()
-    message(STATUS "Dogen Tailor not found, not adding tailor targets.")
-endif()
+find_package(Dogen REQUIRED)
 
 #
 # aggregate targets
@@ -393,7 +329,7 @@ add_custom_target(run_all_tests)
 add_custom_target(run_windows_green_tests)
 add_custom_target(rebase)
 add_custom_target(diff)
-if (DOGEN_KNITTER_COMMAND AND DOGEN_STITCHER_COMMAND)
+if (DOGEN_KNITTER_EXECUTABLE AND DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(knit_and_stitch)
     add_dependencies(knit_and_stitch knit_all)
     add_dependencies(knit_and_stitch stitch_all)
@@ -405,7 +341,19 @@ endif()
 add_custom_target(rat)
 add_dependencies(rat run_all_tests)
 
-if (DOGEN_KNITTER_COMMAND AND DOGEN_STITCHER_COMMAND)
+if (DOGEN_KNITTER_EXECUTABLE)
+    add_custom_target(knit_all)
+endif()
+
+if (DOGEN_STITCHER_EXECUTABLE)
+    add_custom_target(stitch_all)
+endif()
+
+if (DOGEN_TAILOR_EXECUTABLE)
+    add_custom_target(tailor_all)
+endif()
+
+if (DOGEN_KNITTER_EXECUTABLE AND DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(kas)
     add_custom_target(ka)
     add_custom_target(sa)
