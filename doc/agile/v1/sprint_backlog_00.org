@@ -1,10 +1,11 @@
-#+title: Sprint Backlog 100
+#+title: Sprint Backlog 00
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) }
 
 * Mission Statement
 
+- Finish ODB support;
 - Improve Visual Studio support.
 
 * Stories
