@@ -148,7 +148,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#product_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -258,7 +258,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#products#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -599,7 +599,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#supplier_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -709,7 +709,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#suppliers#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1096,7 +1096,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#category_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -1206,7 +1206,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#order_details#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1410,7 +1410,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#order_details_key#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value#</dia:string>
+        <dia:string>#orm value#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -1567,7 +1567,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#orders#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2000,7 +2000,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#order_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -2110,7 +2110,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#employee_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -2220,7 +2220,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#categories#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2423,7 +2423,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#employees#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2929,7 +2929,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#shipper_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -3039,7 +3039,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#shippers#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3219,7 +3219,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#customer_id#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_value, primitive#</dia:string>
+        <dia:string>#orm value, primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.primitive.underlying_element=int#</dia:string>
@@ -3329,7 +3329,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#customers#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3879,7 +3879,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:point val="100.448,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.698,-107.75;104.07,-99.2"/>
+        <dia:rectangle val="99.6975,-107.75;104.07,-99.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4819,7 +4819,7 @@ It's objective is to test Dogen integration with ODB.
         <dia:string>#class_0#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#orm_object#</dia:string>
+        <dia:string>#orm object#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
