@@ -35,6 +35,7 @@
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
+#include "dogen/quilt.cpp/types/formattables/test_data_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_fwd_ser.hpp"
 
 namespace dogen {
@@ -61,7 +62,8 @@ public:
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& artefact_properties,
         const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
-        const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties);
+        const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties,
+        const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& attribute_level_test_data_properties);
 
 private:
     template<typename Archive>
@@ -101,6 +103,11 @@ public:
     void odb_properties(const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& v);
     void odb_properties(const boost::optional<dogen::quilt::cpp::formattables::odb_properties>&& v);
 
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& attribute_level_test_data_properties() const;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& attribute_level_test_data_properties();
+    void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& v);
+    void attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>&& v);
+
 public:
     bool operator==(const element_properties& rhs) const;
     bool operator!=(const element_properties& rhs) const {
@@ -118,6 +125,7 @@ private:
     std::list<dogen::quilt::cpp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, std::string> canonical_archetype_to_archetype_;
     boost::optional<dogen::quilt::cpp::formattables::odb_properties> odb_properties_;
+    std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties> attribute_level_test_data_properties_;
 };
 
 } } } }

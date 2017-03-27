@@ -31,7 +31,8 @@ element_properties::element_properties(element_properties&& rhs)
       artefact_properties_(std::move(rhs.artefact_properties_)),
       helper_properties_(std::move(rhs.helper_properties_)),
       canonical_archetype_to_archetype_(std::move(rhs.canonical_archetype_to_archetype_)),
-      odb_properties_(std::move(rhs.odb_properties_)) { }
+      odb_properties_(std::move(rhs.odb_properties_)),
+      attribute_level_test_data_properties_(std::move(rhs.attribute_level_test_data_properties_)) { }
 
 element_properties::element_properties(
     const std::unordered_map<std::string, dogen::formatters::decoration_properties>& decoration_properties,
@@ -39,13 +40,15 @@ element_properties::element_properties(
     const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& artefact_properties,
     const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
     const std::unordered_map<std::string, std::string>& canonical_archetype_to_archetype,
-    const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties)
+    const boost::optional<dogen::quilt::cpp::formattables::odb_properties>& odb_properties,
+    const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& attribute_level_test_data_properties)
     : decoration_properties_(decoration_properties),
       aspect_properties_(aspect_properties),
       artefact_properties_(artefact_properties),
       helper_properties_(helper_properties),
       canonical_archetype_to_archetype_(canonical_archetype_to_archetype),
-      odb_properties_(odb_properties) { }
+      odb_properties_(odb_properties),
+      attribute_level_test_data_properties_(attribute_level_test_data_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
@@ -55,6 +58,7 @@ void element_properties::swap(element_properties& other) noexcept {
     swap(helper_properties_, other.helper_properties_);
     swap(canonical_archetype_to_archetype_, other.canonical_archetype_to_archetype_);
     swap(odb_properties_, other.odb_properties_);
+    swap(attribute_level_test_data_properties_, other.attribute_level_test_data_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
@@ -63,7 +67,8 @@ bool element_properties::operator==(const element_properties& rhs) const {
         artefact_properties_ == rhs.artefact_properties_ &&
         helper_properties_ == rhs.helper_properties_ &&
         canonical_archetype_to_archetype_ == rhs.canonical_archetype_to_archetype_ &&
-        odb_properties_ == rhs.odb_properties_;
+        odb_properties_ == rhs.odb_properties_ &&
+        attribute_level_test_data_properties_ == rhs.attribute_level_test_data_properties_;
 }
 
 element_properties& element_properties::operator=(element_properties other) {
@@ -166,6 +171,22 @@ void element_properties::odb_properties(const boost::optional<dogen::quilt::cpp:
 
 void element_properties::odb_properties(const boost::optional<dogen::quilt::cpp::formattables::odb_properties>&& v) {
     odb_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() const {
+    return attribute_level_test_data_properties_;
+}
+
+std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& element_properties::attribute_level_test_data_properties() {
+    return attribute_level_test_data_properties_;
+}
+
+void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>& v) {
+    attribute_level_test_data_properties_ = v;
+}
+
+void element_properties::attribute_level_test_data_properties(const std::unordered_map<std::string, dogen::quilt::cpp::formattables::test_data_properties>&& v) {
+    attribute_level_test_data_properties_ = std::move(v);
 }
 
 } } } }

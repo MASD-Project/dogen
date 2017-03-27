@@ -37,6 +37,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/helper_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/element_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/artefact_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/formattables/test_data_properties_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -51,6 +52,7 @@ void save(Archive& ar,
     ar << make_nvp("helper_properties", v.helper_properties_);
     ar << make_nvp("canonical_archetype_to_archetype", v.canonical_archetype_to_archetype_);
     ar << make_nvp("odb_properties", v.odb_properties_);
+    ar << make_nvp("attribute_level_test_data_properties", v.attribute_level_test_data_properties_);
 }
 
 template<typename Archive>
@@ -63,6 +65,7 @@ void load(Archive& ar,
     ar >> make_nvp("helper_properties", v.helper_properties_);
     ar >> make_nvp("canonical_archetype_to_archetype", v.canonical_archetype_to_archetype_);
     ar >> make_nvp("odb_properties", v.odb_properties_);
+    ar >> make_nvp("attribute_level_test_data_properties", v.attribute_level_test_data_properties_);
 }
 
 } }
