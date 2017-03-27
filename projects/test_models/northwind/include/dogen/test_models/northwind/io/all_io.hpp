@@ -39,6 +39,7 @@
 #include "dogen/test_models/northwind/io/customer_id_io.hpp"
 #include "dogen/test_models/northwind/io/employee_id_io.hpp"
 #include "dogen/test_models/northwind/io/supplier_id_io.hpp"
+#include "dogen/test_models/northwind/io/non_orm_class_io.hpp"
 #include "dogen/test_models/northwind/io/order_details_io.hpp"
 #include "dogen/test_models/northwind/io/package/class_0_io.hpp"
 #include "dogen/test_models/northwind/io/order_details_key_io.hpp"
