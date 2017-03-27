@@ -85,7 +85,7 @@ managed_directories(const formattables::locator& l) const {
     std::list<boost::filesystem::path> r;
     r.push_back(l.project_path());
     if (l.project_path() != l.headers_project_path())
-      r.push_back(l.headers_project_path());
+        r.push_back(l.headers_model_path());
 
     return r;
 }

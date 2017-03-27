@@ -242,9 +242,8 @@ boost::filesystem::path locator::make_project_path(
     const yarn::name& model_name, const locator_configuration& lc,
     const bool enable_kernel_directories) const {
 
-    boost::filesystem::path r;
+    boost::filesystem::path r(output_directory_path);
     const auto& mmp(model_name.location().model_modules());
-    r = output_directory_path;
     r /= boost::algorithm::join(mmp, dot);
     if (enable_kernel_directories) {
         if (lc.kernel_directory_name().empty()) {
@@ -340,6 +339,12 @@ boost::filesystem::path locator::project_path() const {
 
 boost::filesystem::path locator::headers_project_path() const {
     return headers_project_path_;
+}
+
+boost::filesystem::path locator::headers_model_path() const {
+    auto r(headers_project_path_);
+    r /= make_inclusion_path_prefix(model_name_);
+    return r;
 }
 
 std::string locator::include_directory_name() const {

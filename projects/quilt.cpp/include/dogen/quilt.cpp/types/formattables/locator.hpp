@@ -166,6 +166,11 @@ public:
      */
     boost::filesystem::path headers_project_path() const;
 
+    /**
+     * @brief Top-level headers model directory.
+     */
+    boost::filesystem::path headers_model_path() const;
+
 public:
     /**
      * @brief Name of the include directory.
