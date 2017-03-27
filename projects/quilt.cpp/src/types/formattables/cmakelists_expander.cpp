@@ -53,6 +53,11 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
+bool odb_target_comparer(
+    const fabric::odb_target& lhs, const fabric::odb_target& rhs) {
+    return lhs.name() < rhs.name();
+}
+
 class odb_targets_factory : public fabric::element_visitor {
 public:
     odb_targets_factory(const model& fm,
@@ -187,7 +192,15 @@ void cmakelists_expander::expand(const locator& l, model& fm) const {
         e.accept(f);
     }
 
-    cmakelists_updater cu(l, f.result());
+    /*
+     * Obtain the targets and sort them to ensure the container is
+     * stable. We obtained the formattables from an unordered map so
+     * they could have come in in any order.
+     */
+    auto odb_targets(f.result());
+    odb_targets.targets().sort(odb_target_comparer);
+
+    cmakelists_updater cu(l, odb_targets);
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
