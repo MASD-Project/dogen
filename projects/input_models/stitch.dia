@@ -3840,6 +3840,7 @@
 #DOGEN yarn.reference=formatters.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>

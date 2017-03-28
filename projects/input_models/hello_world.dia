@@ -254,6 +254,7 @@ level.
 #DOGEN yarn.dia.external_modules=dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.csharp.enabled=false#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">
