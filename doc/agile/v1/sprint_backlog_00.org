@@ -13,26 +13,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-26 Sun 11:30]
+#+CAPTION: Clock summary at [2017-03-28 Tue 11:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *36:34* |       |       | 100.0 |
+| *Total time*                                                                | *37:18* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 36:34   |       |       | 100.0 |
-| Active                                                                      |         | 36:34 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:16 |   3.5 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.4 |
+| Stories                                                                     | 37:18   |       |       | 100.0 |
+| Active                                                                      |         | 37:18 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:16 |   3.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.3 |
 | COMPLETED Header directory is not part of housekeeping                      |         |       |  0:49 |   2.2 |
 | COMPLETED Disable common support on ODB for a single database               |         |       |  0:08 |   0.4 |
-| COMPLETED Concepts cannot be placed inside of packages                      |         |       |  8:26 |  23.1 |
-| COMPLETED Use =cxx= extension with ODB files                                |         |       |  0:32 |   1.5 |
-| COMPLETED Implement the database model using Northwind                      |         |       |  6:11 |  16.9 |
+| COMPLETED Concepts cannot be placed inside of packages                      |         |       |  8:26 |  22.6 |
+| COMPLETED Use =cxx= extension with ODB files                                |         |       |  0:32 |   1.4 |
+| COMPLETED Implement the database model using Northwind                      |         |       |  6:11 |  16.6 |
 | COMPLETED ODB options does not cater for types placed in namespaces         |         |       |  0:16 |   0.7 |
-| COMPLETED Improve ODB implementation                                        |         |       | 14:26 |  39.5 |
+| COMPLETED Improve ODB implementation                                        |         |       | 14:26 |  38.7 |
 | COMPLETED Do not use underscores in ORM stereotypes                         |         |       |  0:13 |   0.6 |
-| STARTED Allow users to override string prefixes in test data                |         |       |  1:52 |   5.1 |
-| STARTED Ignore ODB files automatically                                      |         |       |  1:55 |   5.2 |
+| STARTED Allow users to override string prefixes in test data                |         |       |  1:52 |   5.0 |
+| STARTED Ignore ODB files automatically                                      |         |       |  1:55 |   5.1 |
+| STARTED Add msbuild targets for ODB                                         |         |       |  0:44 |   2.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -445,6 +446,51 @@ manually deleting them.
 
 This also means we can add the ODB files to the visual studio project
 even before they get generated.
+
+*** STARTED Add msbuild targets for ODB                               :story:
+    CLOCK: [2017-03-28 Tue 10:35]--[2017-03-28 Tue 11:19] =>  0:44
+
+We need to start generating an msbuild project with targets for ODB so
+we can build ODB on windows.
+
+Sample:
+
+#+begin_example
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+    <!--[
+    .NAME: odb.targets
+
+    .SYNOPSIS:
+        Generates all of the ODB files for this project.
+
+    .DESCRIPTION:
+        Calls the ODB compiler against each of the files in this Dogen model that require
+        ODB compilation. Also moves the generated files to their correct location.
+
+    .INPUTS:
+
+    .OUTPUTS:
+
+  ]-->
+
+  <Target Name="odb_MODEL_NAME"
+          DependsOnTargets="odb_ MODEL_NAME _TARGET;
+">
+    <Message Importance="high" Text="ODB MODEL_NAME "/>
+  </Target>
+
+  <Target Name="odb_ MODEL_NAME _TARGET">
+    <Message Importance="high" Text="ODB MODEL_NAME TARGET"/>
+    <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)/src/odb/common_options.odb --options-file $(MSBuildThisFileDirectory)/SOURCE_PATH/TARGET_options.odb --output-dir $(MSBuildThisFileDirectory)/../../../INCLUDE_PATH/odb/NAMESPACE $(MSBuildThisFileDirectory)/../../../INCLUDE_PATH/odb/NAMESPACE /types/NAMESPACE/TARGET.hpp" />
+    <Move
+        SourceFiles="$(MSBuildThisFileDirectory)/../../../INCLUDE_PATH/odb/NAMESPACE/TARGET-odb.cxx"
+        DestinationFolder="$(MSBuildThisFileDirectory)src/odb/NAMESPACE/" />
+  </Target>
+  ...
+</Project>
+#+end_example
 
 *** Generate Redis get/set code                                       :story:
 

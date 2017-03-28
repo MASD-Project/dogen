@@ -51,6 +51,7 @@
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
+#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"

@@ -31,6 +31,7 @@
 #include "dogen/quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/msbuild_targets_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"

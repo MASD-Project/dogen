@@ -32,6 +32,7 @@
 #include "dogen/quilt.cpp/io/formattables/model_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/master_header_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/msbuild_targets_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formattable_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/common_odb_options_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/object_odb_options_io.hpp"
