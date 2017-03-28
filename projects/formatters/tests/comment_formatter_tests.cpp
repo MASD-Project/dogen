@@ -143,9 +143,10 @@ const std::string multi_line_text_shell_style(R"(# use extensions similar to the
 )");
 
 const std::string multi_line_text_xml_style(R"(<!--  use extensions similar to the dogen ones
-      --ixx-suffix .ipp
-      --hxx-suffix .hpp
--->)");
+   - --ixx-suffix .ipp
+   - --hxx-suffix .hpp
+-->
+)");
 
 const std::string enumeration("Represents an uninitialised enum");
 const std::string enumeration_doxygen(R"(///< Represents an uninitialised enum)");

@@ -95,11 +95,11 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& c(a.as<fabric::msbuild_targets>(static_artefact(), e));
 
     {
-        // auto sbf(a.make_scoped_boilerplate_formatter(e));
+        const auto cs(dogen::formatters::comment_styles::xml_style);
+        a.make_decoration_preamble(cs, e);
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
         const auto targets(c.odb_targets());
-a.stream() << "<?xml version=\"1.0\" encoding=\"utf-8\"?>" << std::endl;
 a.stream() << "<Project DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\" ToolsVersion=\"4.0\">" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    <!--[" << std::endl;

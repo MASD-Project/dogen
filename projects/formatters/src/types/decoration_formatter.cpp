@@ -73,8 +73,12 @@ void decoration_formatter::format_preamble(
     const comment_styles& multi_line_cs,
     const decoration_properties& dc) const {
 
-    if (single_line_cs == comment_styles::xml_style)
-        s << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>";
+    if (single_line_cs == comment_styles::xml_style) {
+        /*
+         * If we're in XML, add the XML declaration.
+         */
+        s << "<?xml version=\"1.0\" encoding=\"UTF-8\"?>" << std::endl;
+    }
 
     bool is_top(false);
     const auto top(modeline_locations::top);

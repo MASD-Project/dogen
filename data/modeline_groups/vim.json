@@ -12,7 +12,7 @@
         },
         {
           "name": "tabstop",
-          "value": "8"
+          "value": "4"
         },
         {
           "name": "expandtab",
@@ -39,7 +39,7 @@
         },
         {
           "name": "tabstop",
-          "value": "8"
+          "value": "4"
         },
         {
           "name": "expandtab",
@@ -66,7 +66,7 @@
         },
         {
           "name": "tabstop",
-          "value": "8"
+          "value": "4"
         },
         {
           "name": "expandtab",
@@ -93,7 +93,34 @@
         },
         {
           "name": "tabstop",
-          "value": "8"
+          "value": "4"
+        },
+        {
+          "name": "expandtab",
+          "value": ""
+        },
+        {
+          "name": "shiftwidth",
+          "value": "4"
+        },
+        {
+          "name": "softtabstop",
+          "value": "4"
+        }
+      ]
+    },
+    {
+      "modeline_name": "xml",
+      "editor": "vim",
+      "location": "top",
+      "fields": [
+        {
+          "name": "ft",
+          "value": "xml"
+        },
+        {
+          "name": "tabstop",
+          "value": "4"
         },
         {
           "name": "expandtab",

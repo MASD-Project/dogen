@@ -84,6 +84,25 @@
           "value": "nil"
         }
       ]
+    },
+    {
+      "modeline_name": "xml",
+      "editor": "emacs",
+      "location": "top",
+      "fields": [
+        {
+          "name": "mode",
+          "value": "nxml"
+        },
+        {
+          "name": "tab-width",
+          "value": "4"
+        },
+        {
+          "name": "indent-tabs-mode",
+          "value": "nil"
+        }
+      ]
     }
   ]
 }

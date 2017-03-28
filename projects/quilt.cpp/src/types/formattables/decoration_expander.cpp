@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
@@ -33,6 +34,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formattables.decoration_expander"));
 
 const std::string cpp_modeline_name("cpp");
+const std::string xml_modeline_name("xml");
 const std::string cmake_modeline_name("cmake");
 const std::string odb_modeline_name("odb");
 
@@ -52,6 +54,8 @@ decoration_expander::make_decoration_properties(
      * decoration to apply based on the element meta-type.
      */
     const auto ti(std::type_index(typeid(e)));
+    if (ti == std::type_index(typeid(fabric::msbuild_targets)))
+        return dpf.make(xml_modeline_name);
     if (ti == std::type_index(typeid(fabric::cmakelists)))
         return dpf.make(cmake_modeline_name);
     else if (ti == std::type_index(typeid(fabric::common_odb_options)))
