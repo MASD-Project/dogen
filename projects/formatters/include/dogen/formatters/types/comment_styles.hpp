@@ -37,7 +37,8 @@ enum class comment_styles : unsigned int {
     cpp_style = 2, ///< One line, C++ style.
     csharp_style = 3, ///< C# programming language style.
     shell_style = 4, ///< Comments start with a hash.
-    sql_style = 5 ///< Comments start with a double-dash.
+    sql_style = 5, ///< Comments start with a double-dash.
+    xml_style = 6
 };
 
 } }

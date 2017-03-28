@@ -34,6 +34,9 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("formatters.comment_formatter"));
 
 const std::string empty;
+const std::string xml_style_start("<!-- ");
+const std::string xml_style_middle("     ");
+const std::string xml_style_end("-->");
 const std::string plain_c_style_start("/*");
 const std::string c_style_middle(" *");
 const std::string doxygen_c_style_start("/**");
@@ -78,6 +81,7 @@ comment_formatter::comment_formatter(
 
 void comment_formatter::validate() const {
     bool is_syle_supported(
+        style_ == comment_styles::xml_style ||
         style_ == comment_styles::c_style ||
         style_ == comment_styles::shell_style ||
         style_ == comment_styles::sql_style ||
@@ -130,7 +134,10 @@ void comment_formatter::add_end_body(std::ostream& s) const {
 }
 
 void comment_formatter::add_comment_start_marker(std::ostream& s) const {
-    if (style_ != comment_styles::c_style) {
+    if (style_ == comment_styles::xml_style) {
+        s << xml_style_start;
+        return;
+    } else if (style_ != comment_styles::c_style) {
         add_comment_middle_marker(s);
         return;
     }
@@ -145,6 +152,9 @@ void comment_formatter::add_comment_start_marker(std::ostream& s) const {
 
 void comment_formatter::add_comment_middle_marker(std::ostream& s) const {
     switch(style_) {
+    case comment_styles::xml_style:
+        s << xml_style_middle;
+        break;
     case comment_styles::c_style:
         s << c_style_middle;
         break;
@@ -176,7 +186,9 @@ void comment_formatter::add_comment_middle_marker(std::ostream& s) const {
 }
 
 void comment_formatter::add_comment_end_marker(std::ostream& s) const {
-    if (style_ == comment_styles::c_style)
+    if (style_ == comment_styles::xml_style) {
+        s << xml_style_end;
+    } else if (style_ == comment_styles::c_style)
         s << space << c_style_end << std::endl;
 }
 

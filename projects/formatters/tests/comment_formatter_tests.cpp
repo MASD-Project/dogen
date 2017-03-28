@@ -142,6 +142,11 @@ const std::string multi_line_text_shell_style(R"(# use extensions similar to the
 # --hxx-suffix .hpp
 )");
 
+const std::string multi_line_text_xml_style(R"(<!--  use extensions similar to the dogen ones
+      --ixx-suffix .ipp
+      --hxx-suffix .hpp
+-->)");
+
 const std::string enumeration("Represents an uninitialised enum");
 const std::string enumeration_doxygen(R"(///< Represents an uninitialised enum)");
 
@@ -367,6 +372,20 @@ BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_shell_style_comment_produces_
 
     const auto r(format(f, multi_line_text));
     BOOST_CHECK(asserter::assert_equals_marker(multi_line_text_shell_style, r));
+}
+
+BOOST_AUTO_TEST_CASE(formatting_multi_line_text_as_xml_style_comment_produces_expected_output) {
+    SETUP_TEST_LOG_SOURCE("formatting_multi_line_text_as_xml_style_comment_produces_expected_output");
+
+    dogen::formatters::comment_formatter f(
+        start_on_first_line,
+        !use_documentation_tool_markup,
+        !documenting_previous_identifier,
+        dogen::formatters::comment_styles::xml_style,
+        !last_line_is_blank);
+
+    const auto r(format(f, multi_line_text));
+    BOOST_CHECK(asserter::assert_equals_marker(multi_line_text_xml_style, r));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

@@ -49,6 +49,9 @@ std::ostream& operator<<(std::ostream& s, const comment_styles& v) {
     case comment_styles::sql_style:
         attr = "\"sql_style\"";
         break;
+    case comment_styles::xml_style:
+        attr = "\"xml_style\"";
+        break;
     default:
         throw std::invalid_argument("Invalid value for comment_styles");
     }
