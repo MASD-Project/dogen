@@ -140,6 +140,7 @@
 #include "dogen/quilt.cpp/types/formatters/hash/smart_pointer_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/time_duration_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/class_header_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/msbuild_targets_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/odb/enum_header_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/initializer.hpp"
 #include "dogen/quilt.cpp/types/formatters/serialization/path_helper.hpp"

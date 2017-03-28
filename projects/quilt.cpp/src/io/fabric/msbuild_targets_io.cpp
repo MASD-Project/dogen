@@ -19,22 +19,9 @@
  *
  */
 #include <ostream>
-#include "dogen/quilt.cpp/io/fabric/odb_target_io.hpp"
+#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/msbuild_targets_io.hpp"
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::quilt::cpp::fabric::odb_target>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
 
 namespace dogen {
 namespace quilt {
@@ -42,10 +29,7 @@ namespace cpp {
 namespace fabric {
 
 std::ostream& operator<<(std::ostream& s, const msbuild_targets& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::msbuild_targets\"" << ", "
-      << "\"odb_targets\": " << v.odb_targets()
-      << " }";
+    v.to_stream(s);
     return(s);
 }
 

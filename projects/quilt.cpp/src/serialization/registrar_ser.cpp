@@ -34,6 +34,7 @@
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/master_header_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/msbuild_targets_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/common_odb_options_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/object_odb_options_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/forward_declarations_ser.hpp"
@@ -53,6 +54,7 @@ void register_types(Archive& ar) {
     ar.template register_type<dogen::quilt::cpp::fabric::common_odb_options>();
     ar.template register_type<dogen::quilt::cpp::fabric::forward_declarations>();
     ar.template register_type<dogen::quilt::cpp::fabric::master_header>();
+    ar.template register_type<dogen::quilt::cpp::fabric::msbuild_targets>();
     ar.template register_type<dogen::quilt::cpp::fabric::object_odb_options>();
     ar.template register_type<dogen::quilt::cpp::fabric::registrar>();
 }

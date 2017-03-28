@@ -19,7 +19,6 @@
  *
  */
 #include <boost/serialization/nvp.hpp>
-#include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
 #include <boost/archive/text_iarchive.hpp>
@@ -28,8 +27,13 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/quilt.cpp/serialization/fabric/odb_target_ser.hpp"
+#include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/msbuild_targets_ser.hpp"
+
+BOOST_CLASS_TRACKING(
+    dogen::quilt::cpp::fabric::msbuild_targets,
+    boost::serialization::track_selectively)
 
 namespace boost {
 namespace serialization {
@@ -38,6 +42,8 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::fabric::msbuild_targets& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+
     ar << make_nvp("odb_targets", v.odb_targets_);
 }
 
@@ -45,6 +51,8 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::fabric::msbuild_targets& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+
     ar >> make_nvp("odb_targets", v.odb_targets_);
 }
 

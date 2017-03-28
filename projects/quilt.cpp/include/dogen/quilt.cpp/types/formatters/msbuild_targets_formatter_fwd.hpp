@@ -18,37 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_MSBUILD_TARGETS_SER_HPP
-#define DOGEN_QUILT_CPP_SERIALIZATION_FABRIC_MSBUILD_TARGETS_SER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_MSBUILD_TARGETS_FORMATTER_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_MSBUILD_TARGETS_FORMATTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
+namespace dogen {
+namespace quilt {
+namespace cpp {
+namespace formatters {
 
-namespace boost {
+class msbuild_targets_formatter;
 
-template<>struct
-is_virtual_base_of<
-    dogen::yarn::element,
-    dogen::quilt::cpp::fabric::msbuild_targets
-> : public mpl::true_ {};
-
-}
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::quilt::cpp::fabric::msbuild_targets)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::quilt::cpp::fabric::msbuild_targets& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::quilt::cpp::fabric::msbuild_targets& v, unsigned int version);
-
-} }
+} } } }
 
 #endif

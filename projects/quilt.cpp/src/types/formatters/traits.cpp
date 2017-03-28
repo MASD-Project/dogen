@@ -57,6 +57,16 @@ std::string traits::source_cmakelists_archetype() {
     return r;
 }
 
+std::string traits::msbuild_facet() {
+    static std::string r("quilt.cpp.msbuild");
+    return r;
+}
+
+std::string traits::msbuild_targets_archetype() {
+    static std::string r("quilt.cpp.msbuild.targets");
+    return r;
+}
+
 std::string traits::canonical_archetype(const std::string& facet) {
     return facet + canonical_archetype_postfix;
 }

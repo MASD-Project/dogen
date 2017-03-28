@@ -29,6 +29,7 @@
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/msbuild_targets_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_fwd.hpp"
@@ -86,6 +87,16 @@ public:
     virtual void visit(const dogen::quilt::cpp::fabric::master_header&) { }
     virtual void visit(dogen::quilt::cpp::fabric::master_header&) const { }
     virtual void visit(dogen::quilt::cpp::fabric::master_header&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::msbuild_targets
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::cpp::fabric::msbuild_targets&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::msbuild_targets&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::msbuild_targets&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::msbuild_targets&) { }
     /**@}*/
 
     /**
