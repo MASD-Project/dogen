@@ -81,22 +81,20 @@ format(const context& ctx, const yarn::element& e) const {
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 
     <!--[
-    .NAME: odb.targets
+        .NAME: odb.targets
 
-    .SYNOPSIS:
-        Generates all of the ODB files for this project.
+        .SYNOPSIS:
+            Generates all of the ODB files for this project.
 
-    .DESCRIPTION:
-        Calls the ODB compiler against each of the files in this Dogen model that require
-        ODB compilation. Also moves the generated files to their correct location.
+        .DESCRIPTION:
+            Calls the ODB compiler against each of the files in this Dogen model that require
+            ODB compilation. Also moves the generated files to their correct location.
 
-    .INPUTS:
+        .INPUTS:
 
-    .OUTPUTS:
-
-  ]-->
-
-  <Target Name="<#= targets.main_target_name() #>"
+        .OUTPUTS:
+    ]-->
+    <Target Name="<#= targets.main_target_name() #>"
 <#+
             dogen::formatters::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
@@ -110,26 +108,26 @@ format(const context& ctx, const yarn::element& e) const {
                 sf.next();
             }
 #>
-    <Message Importance="high" Text="ODB <#= model_name #> "/>
-  </Target>
+        <Message Importance="high" Text="ODB <#= model_name #> "/>
+    </Target>
 
 <#+
             for (const auto& target : targets.targets()) {
                 
 #>
-  <Target Name="<#= target.name() #>">
-    <Message Importance="high" Text="<#= target.comment() #>"/>
-    <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)<#= targets.common_odb_options() #> --options-file $(MSBuildThisFileDirectory)<#= target.object_odb_options() #> --output-dir $(MSBuildThisFileDirectory)<#= target.output_directory() #> $(MSBuildThisFileDirectory)<#= target.types_file() #>" />
+    <Target Name="<#= target.name() #>">
+        <Message Importance="high" Text="<#= target.comment() #>"/>
+        <Exec WorkingDirectory="$(OutputDirectory)" Command="&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)<#= targets.common_odb_options() #> --options-file $(MSBuildThisFileDirectory)<#= target.object_odb_options() #> --output-dir $(MSBuildThisFileDirectory)<#= target.output_directory() #> $(MSBuildThisFileDirectory)<#= target.types_file() #>" />
 <#+
                 for (const auto& pair : target.move_parameters()) {
 #>
-<Move
-        SourceFiles="$(MSBuildThisFileDirectory)<#= pair.first #>"
-        DestinationFolder="$(MSBuildThisFileDirectory)<#= pair.second #>" />
+        <Move
+            SourceFiles="$(MSBuildThisFileDirectory)<#= pair.first #>"
+            DestinationFolder="$(MSBuildThisFileDirectory)<#= pair.second #>" />
 <#+
                 }
 #>
-  </Target>
+    </Target>
 <#+
             }
 #>

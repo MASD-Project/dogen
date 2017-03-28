@@ -2,23 +2,21 @@
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
 
     <!--[
-    .NAME: odb.targets
+        .NAME: odb.targets
 
-    .SYNOPSIS:
-        Generates all of the ODB files for this project.
+        .SYNOPSIS:
+            Generates all of the ODB files for this project.
 
-    .DESCRIPTION:
-        Calls the ODB compiler against each of the files in this Dogen model that require
-        ODB compilation. Also moves the generated files to their correct location.
+        .DESCRIPTION:
+            Calls the ODB compiler against each of the files in this Dogen model that require
+            ODB compilation. Also moves the generated files to their correct location.
 
-    .INPUTS:
+        .INPUTS:
 
-    .OUTPUTS:
-
-  ]-->
-
-  <Target Name="odb_Zeta"
-    <Message Importance="high" Text="ODB Zeta "/>
-  </Target>
+        .OUTPUTS:
+    ]-->
+    <Target Name="odb_Zeta"
+        <Message Importance="high" Text="ODB Zeta "/>
+    </Target>
 
 </Project>

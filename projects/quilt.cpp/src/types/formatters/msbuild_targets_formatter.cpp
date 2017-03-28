@@ -103,22 +103,20 @@ format(const context& ctx, const yarn::element& e) const {
 a.stream() << "<Project DefaultTargets=\"Build\" xmlns=\"http://schemas.microsoft.com/developer/msbuild/2003\" ToolsVersion=\"4.0\">" << std::endl;
 a.stream() << std::endl;
 a.stream() << "    <!--[" << std::endl;
-a.stream() << "    .NAME: odb.targets" << std::endl;
+a.stream() << "        .NAME: odb.targets" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    .SYNOPSIS:" << std::endl;
-a.stream() << "        Generates all of the ODB files for this project." << std::endl;
+a.stream() << "        .SYNOPSIS:" << std::endl;
+a.stream() << "            Generates all of the ODB files for this project." << std::endl;
 a.stream() << std::endl;
-a.stream() << "    .DESCRIPTION:" << std::endl;
-a.stream() << "        Calls the ODB compiler against each of the files in this Dogen model that require" << std::endl;
-a.stream() << "        ODB compilation. Also moves the generated files to their correct location." << std::endl;
+a.stream() << "        .DESCRIPTION:" << std::endl;
+a.stream() << "            Calls the ODB compiler against each of the files in this Dogen model that require" << std::endl;
+a.stream() << "            ODB compilation. Also moves the generated files to their correct location." << std::endl;
 a.stream() << std::endl;
-a.stream() << "    .INPUTS:" << std::endl;
+a.stream() << "        .INPUTS:" << std::endl;
 a.stream() << std::endl;
-a.stream() << "    .OUTPUTS:" << std::endl;
-a.stream() << std::endl;
-a.stream() << "  ]-->" << std::endl;
-a.stream() << std::endl;
-a.stream() << "  <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
+a.stream() << "        .OUTPUTS:" << std::endl;
+a.stream() << "    ]-->" << std::endl;
+a.stream() << "    <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
             dogen::formatters::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
                                      .not_first("                            ");
@@ -128,20 +126,20 @@ a.stream() << "  <Target Name=\"" << targets.main_target_name() << "\"" << std::
 a.stream() << sf.prefix() << target.name() << sf.postfix() << std::endl;
                 sf.next();
             }
-a.stream() << "    <Message Importance=\"high\" Text=\"ODB " << model_name << " \"/>" << std::endl;
-a.stream() << "  </Target>" << std::endl;
+a.stream() << "        <Message Importance=\"high\" Text=\"ODB " << model_name << " \"/>" << std::endl;
+a.stream() << "    </Target>" << std::endl;
 a.stream() << std::endl;
             for (const auto& target : targets.targets()) {
                 
-a.stream() << "  <Target Name=\"" << target.name() << "\">" << std::endl;
-a.stream() << "    <Message Importance=\"high\" Text=\"" << target.comment() << "\"/>" << std::endl;
-a.stream() << "    <Exec WorkingDirectory=\"$(OutputDirectory)\" Command=\"&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)" << targets.common_odb_options() << " --options-file $(MSBuildThisFileDirectory)" << target.object_odb_options() << " --output-dir $(MSBuildThisFileDirectory)" << target.output_directory() << " $(MSBuildThisFileDirectory)" << target.types_file() << "\" />" << std::endl;
+a.stream() << "    <Target Name=\"" << target.name() << "\">" << std::endl;
+a.stream() << "        <Message Importance=\"high\" Text=\"" << target.comment() << "\"/>" << std::endl;
+a.stream() << "        <Exec WorkingDirectory=\"$(OutputDirectory)\" Command=\"&quot;$(OdbPath)&quot; -D_SECURE_SCL=0 $(OdbIncludeDirectories) --options-file $(MSBuildThisFileDirectory)" << targets.common_odb_options() << " --options-file $(MSBuildThisFileDirectory)" << target.object_odb_options() << " --output-dir $(MSBuildThisFileDirectory)" << target.output_directory() << " $(MSBuildThisFileDirectory)" << target.types_file() << "\" />" << std::endl;
                 for (const auto& pair : target.move_parameters()) {
-a.stream() << "<Move" << std::endl;
-a.stream() << "        SourceFiles=\"$(MSBuildThisFileDirectory)" << pair.first << "\"" << std::endl;
-a.stream() << "        DestinationFolder=\"$(MSBuildThisFileDirectory)" << pair.second << "\" />" << std::endl;
+a.stream() << "        <Move" << std::endl;
+a.stream() << "            SourceFiles=\"$(MSBuildThisFileDirectory)" << pair.first << "\"" << std::endl;
+a.stream() << "            DestinationFolder=\"$(MSBuildThisFileDirectory)" << pair.second << "\" />" << std::endl;
                 }
-a.stream() << "  </Target>" << std::endl;
+a.stream() << "    </Target>" << std::endl;
             }
 a.stream() << "</Project>" << std::endl;
     } // sbf
