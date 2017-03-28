@@ -129,11 +129,7 @@ void updator::visit(fabric::object_odb_options& ooo) {
     os << "'%" << types_rp.generic_string() << "/(.*)-odb(.*)%"
        << odb_rp.parent_path().generic_string() << "/$1-odb$2%'";
     ooo.include_regexes().push_back(os.str());
-
-    const auto odb_fctn(formatters::odb::traits::facet());
-    const auto odb_dp(locator_.make_relative_include_path_for_facet(odb_fctn,
-            true/*for_include_statement*/));
-    ooo.header_guard_prefix(header_guard_factory::make(odb_dp));
+    ooo.header_guard_prefix(header_guard_factory::make(odb_rp.parent_path()));
 }
 
 void updator::visit(yarn::object& o) {
