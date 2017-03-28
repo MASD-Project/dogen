@@ -43,6 +43,12 @@ namespace cpp {
 
 kernel::~kernel() noexcept { }
 
+const formatters::repository& kernel::formatters_repository() const {
+    const auto& rg(formatters::workflow::registrar());
+    rg.validate();
+    return rg.formatter_repository();
+}
+
 formattables::model kernel::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
@@ -115,7 +121,7 @@ kernel_output kernel::generate(const options::knitting_options& ko,
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";
 
     const auto ra(m.root_module().annotation());
-    const auto& frp(formatters::workflow::registrar().formatter_repository());
+    const auto& frp(formatters_repository());
     const auto l(make_locator(ko, atrp, ra, frp, enable_kernel_directories, m));
     const auto fm(create_formattables_model(atrp, ra, dpf, frp, l, m));
 

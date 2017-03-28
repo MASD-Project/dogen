@@ -180,7 +180,7 @@ transform(const formatters::repository& frp, const yarn::model& m) const {
                     transformation_error(duplicate_archetype + arch));
             }
 
-            BOOST_LOG_SEV(lg, trace) << "Added formatter: " << arch
+            BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch
                                      << " to element: " << id;
         }
     }

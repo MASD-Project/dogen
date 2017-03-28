@@ -18,25 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_CMAKELISTS_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_CMAKELISTS_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_BUILD_FILES_EXPANDER_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_BUILD_FILES_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include "dogen/quilt.cpp/types/formattables/locator.hpp"
-#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class cmakelists_expander final {
-public:
-    void expand(const locator& l, model& fm) const;
-};
+class build_files_expander;
 
 } } } }
 

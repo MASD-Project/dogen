@@ -471,6 +471,13 @@ boost::filesystem::path locator::make_full_path_for_source_cmakelists(
     return r;
 }
 
+boost::filesystem::path locator::make_full_path_for_msbuild_targets(
+    const yarn::name& /*n*/, const std::string& /*archetype*/) const {
+    auto r(make_full_path_to_implementation_directory());
+    r /= "msbuild.targets"; // FIXME: hack
+    return r;
+}
+
 boost::filesystem::path locator::make_relative_path_for_odb_options(
     const yarn::name& n, const std::string& archetype,
     const bool include_source_directory) const {

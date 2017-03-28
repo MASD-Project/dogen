@@ -24,9 +24,8 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
@@ -70,14 +69,10 @@ void injector::inject_registrar(yarn::intermediate_model& im) const {
     add_elements(elements, im);
 }
 
-void injector::inject_cmakelists(yarn::intermediate_model& im) const {
-    BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
-
-    cmakelists_factory f;
-    const auto e(f.make(im));
-    add_element(e, im);
-
-    BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
+void injector::inject_build_files(yarn::intermediate_model& im) const {
+    build_files_factory f;
+    const auto elements(f.make(im));
+    add_elements(elements, im);
 }
 
 void injector::inject_odb_options(yarn::intermediate_model& im) const {
@@ -103,7 +98,7 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
 void injector::inject(const annotations::type_repository& /*atrp*/,
     yarn::intermediate_model& im) const {
     inject_registrar(im);
-    inject_cmakelists(im);
+    inject_build_files(im);
     inject_odb_options(im);
     inject_master_headers(im);
     inject_forward_declarations(im);

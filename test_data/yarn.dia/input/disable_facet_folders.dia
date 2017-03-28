@@ -294,6 +294,7 @@
 #DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_facet_directories#</dia:string>
           </dia:attribute>

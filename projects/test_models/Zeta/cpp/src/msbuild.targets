@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+
+    <!--[
+    .NAME: odb.targets
+
+    .SYNOPSIS:
+        Generates all of the ODB files for this project.
+
+    .DESCRIPTION:
+        Calls the ODB compiler against each of the files in this Dogen model that require
+        ODB compilation. Also moves the generated files to their correct location.
+
+    .INPUTS:
+
+    .OUTPUTS:
+
+  ]-->
+
+  <Target Name="odb_Zeta">
+    <Message Importance="high" Text="ODB Zeta "/>
+  </Target>
+
+</Project>

@@ -793,7 +793,7 @@
 			<second class_id="50" tracking_level="0" version="0">
 				<parent class_id="51" tracking_level="0" version="0">
 					<entries class_id="52" tracking_level="0" version="0">
-						<count>6</count>
+						<count>7</count>
 						<item_version>0</item_version>
 						<item class_id="53" tracking_level="0" version="0">
 							<first>yarn.dia.comment</first>
@@ -810,6 +810,10 @@
 						<item>
 							<first>quilt.cpp.enabled</first>
 							<second>true</second>
+						</item>
+						<item>
+							<first>quilt.cpp.msbuild.enabled</first>
+							<second>false</second>
 						</item>
 						<item>
 							<first>quilt.csharp.enabled</first>

@@ -26,8 +26,9 @@
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
 
 namespace {
 
@@ -35,6 +36,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.fabric"));
 
 const std::string cmakelists_name("CMakeLists");
+const std::string msbuild_targets_name("msbuild_targets");
 
 }
 
@@ -43,8 +45,8 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-boost::shared_ptr<yarn::element> cmakelists_factory::
-make(const yarn::intermediate_model& im) const {
+boost::shared_ptr<yarn::element> build_files_factory::
+make_cmakelists(const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
     yarn::name_factory nf;
@@ -54,6 +56,32 @@ make(const yarn::intermediate_model& im) const {
     r->origin_type(im.origin_type());
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
+    return r;
+}
+
+boost::shared_ptr<yarn::element> build_files_factory::
+make_msbuild_targets(const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
+
+    yarn::name_factory nf;
+    const auto n(nf.build_element_in_model(im.name(), msbuild_targets_name));
+    auto r(boost::make_shared<msbuild_targets>());
+    r->name(n);
+    r->origin_type(im.origin_type());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated MSBuild Targets.";
+    return r;
+}
+
+std::list<boost::shared_ptr<yarn::element>> build_files_factory::
+make(const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating Build Files.";
+
+    std::list<boost::shared_ptr<yarn::element>> r;
+    r.push_back(make_cmakelists(im));
+    r.push_back(make_msbuild_targets(im));
+
+    BOOST_LOG_SEV(lg, debug) << "Generated Build Files.";
     return r;
 }
 

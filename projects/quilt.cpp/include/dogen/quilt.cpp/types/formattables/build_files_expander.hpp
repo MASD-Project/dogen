@@ -18,30 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_CMAKELISTS_FACTORY_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_CMAKELISTS_FACTORY_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_BUILD_FILES_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_BUILD_FILES_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <utility>
-#include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/quilt.cpp/types/formatters/repository.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/formattables/locator.hpp"
+#include "dogen/quilt.cpp/types/formattables/model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace fabric {
+namespace formattables {
 
-class cmakelists_factory final {
+class build_files_expander final {
 public:
-    boost::shared_ptr<yarn::element>
-    make(const yarn::intermediate_model& im) const;
+    void expand(const locator& l, model& fm) const;
 };
 
 } } } }

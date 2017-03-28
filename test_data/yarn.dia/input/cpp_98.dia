@@ -296,6 +296,7 @@
 #DOGEN yarn.dia.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
+#DOGEN quilt.cpp.msbuild.enabled=false
 #DOGEN quilt.csharp.enabled=false
 #DOGEN quilt.cpp.standard=c++-98
 #DOGEN quilt.cpp.hash.enabled=false#</dia:string>

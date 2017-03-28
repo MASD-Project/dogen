@@ -8,6 +8,7 @@
     "yarn.output_language": "csharp",
     "yarn.output_language": "cpp",
     "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
     "quilt.csharp.enabled": "true",
     "annotations.profile": "dogen"
   },

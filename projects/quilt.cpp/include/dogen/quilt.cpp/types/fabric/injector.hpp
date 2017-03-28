@@ -49,7 +49,7 @@ private:
 
 private:
     void inject_registrar(yarn::intermediate_model& im) const;
-    void inject_cmakelists(yarn::intermediate_model& im) const;
+    void inject_build_files(yarn::intermediate_model& im) const;
     void inject_odb_options(yarn::intermediate_model& im) const;
     void inject_master_headers(yarn::intermediate_model& im) const;
     void inject_forward_declarations(yarn::intermediate_model& im) const;

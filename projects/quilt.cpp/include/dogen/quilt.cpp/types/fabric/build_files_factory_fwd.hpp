@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_CMAKELISTS_FACTORY_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_CMAKELISTS_FACTORY_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_BUILD_FILES_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_BUILD_FILES_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class cmakelists_factory;
+class build_files_factory;
 
 } } } }
 

@@ -249,6 +249,12 @@ public:
         const yarn::name& n, const std::string& archetype) const;
 
     /**
+     * @brief Generate the full path for cmakelists in source.
+     */
+    boost::filesystem::path make_full_path_for_msbuild_targets(
+        const yarn::name& n, const std::string& archetype) const;
+
+    /**
      * @brief Generate the relatvie path for odb options.
      */
     boost::filesystem::path make_relative_path_for_odb_options(

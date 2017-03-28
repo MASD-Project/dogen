@@ -78,7 +78,7 @@ boost::filesystem::path msbuild_targets_formatter::inclusion_path(
 
 boost::filesystem::path msbuild_targets_formatter::full_path(
     const formattables::locator& l, const yarn::name& n) const {
-    return l.make_full_path_for_source_cmakelists(n, static_artefact());
+    return l.make_full_path_for_msbuild_targets(n, static_artefact());
 }
 
 std::list<std::string> msbuild_targets_formatter::inclusion_dependencies(
@@ -95,7 +95,7 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& c(a.as<fabric::msbuild_targets>(static_artefact(), e));
 
     {
-        auto sbf(a.make_scoped_boilerplate_formatter(e));
+        // auto sbf(a.make_scoped_boilerplate_formatter(e));
         const auto model_name(a.get_identifiable_model_name(c.name()));
         const auto product_name(a.get_product_name(c.name()));
         const auto targets(c.odb_targets());
@@ -118,7 +118,7 @@ a.stream() << "    .OUTPUTS:" << std::endl;
 a.stream() << std::endl;
 a.stream() << "  ]-->" << std::endl;
 a.stream() << std::endl;
-a.stream() << "  <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
+a.stream() << "  <Target Name=\"" << targets.main_target_name() << "\">" << std::endl;
             dogen::formatters::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
                                      .not_first("                           ");

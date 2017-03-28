@@ -58,6 +58,11 @@ public:
 
 private:
     /**
+     * @brief Get the formatters repository.
+     */
+    const formatters::repository& formatters_repository() const;
+
+    /**
      * @brief Create the formattables representation of the yarn model.
      */
     formattables::model create_formattables_model(

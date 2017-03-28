@@ -6,6 +6,7 @@
     "yarn.dia.external_modules": "dogen::test_models",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
+    "quilt.cpp.msbuild.enabled": "false",
     "quilt.csharp.enabled": "false",
     "annotations.profile": "dogen.enable_cmake_types"
   },

@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_target.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
@@ -34,12 +35,12 @@
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/header_guard_factory.hpp"
-#include "dogen/quilt.cpp/types/formattables/cmakelists_expander.hpp"
+#include "dogen/quilt.cpp/types/formattables/build_files_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.formattables.cmakelists_expander"));
+static logger lg(logger_factory("quilt.cpp.formattables.build_files_expander"));
 
 const std::string separator("_");
 const std::string missing_odb_options("Could not find the ODB Options element");
@@ -149,23 +150,24 @@ const fabric::odb_targets& odb_targets_factory::result() const {
     return result_;
 }
 
-class cmakelists_updater : public fabric::element_visitor {
+class build_files_updater : public fabric::element_visitor {
 public:
-    cmakelists_updater(const locator& l, const fabric::odb_targets& targets);
+    build_files_updater(const locator& l, const fabric::odb_targets& targets);
 
 public:
     using fabric::element_visitor::visit;
     void visit(fabric::cmakelists& c);
+    void visit(fabric::msbuild_targets& mt);
 
 private:
     const locator& locator_;
     const fabric::odb_targets& targets_;
 };
 
-cmakelists_updater::cmakelists_updater(const locator& l,
+build_files_updater::build_files_updater(const locator& l,
     const fabric::odb_targets& targets) : locator_(l), targets_(targets) {}
 
-void cmakelists_updater::visit(fabric::cmakelists& c) {
+void build_files_updater::visit(fabric::cmakelists& c) {
     c.odb_targets(targets_);
     c.include_directory_path(locator_.include_directory_name());
     c.source_directory_name(locator_.source_directory_name());
@@ -173,7 +175,11 @@ void cmakelists_updater::visit(fabric::cmakelists& c) {
     c.implementation_file_extension(locator_.implementation_file_extension());
 }
 
-void cmakelists_expander::expand(const locator& l, model& fm) const {
+void build_files_updater::visit(fabric::msbuild_targets& mt) {
+    mt.odb_targets(targets_);
+}
+
+void build_files_expander::expand(const locator& l, model& fm) const {
     odb_targets_factory f(fm, l, fm.name());
     for (auto& pair : fm.formattables()) {
         auto& formattable(pair.second);
@@ -200,7 +206,7 @@ void cmakelists_expander::expand(const locator& l, model& fm) const {
     auto odb_targets(f.result());
     odb_targets.targets().sort(odb_target_comparer);
 
-    cmakelists_updater cu(l, odb_targets);
+    build_files_updater cu(l, odb_targets);
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;

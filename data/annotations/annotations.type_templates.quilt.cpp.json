@@ -356,5 +356,21 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.msbuild.targets.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.cmake",
+      "archetype": "quilt.cpp.msbuild.targets.postfix"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]
