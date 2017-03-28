@@ -118,13 +118,16 @@ a.stream() << "    .OUTPUTS:" << std::endl;
 a.stream() << std::endl;
 a.stream() << "  ]-->" << std::endl;
 a.stream() << std::endl;
-a.stream() << "  <Target Name=\"" << targets.main_target_name() << "\">" << std::endl;
+a.stream() << "  <Target Name=\"" << targets.main_target_name() << "\"" << std::endl;
             dogen::formatters::sequence_formatter sf(targets.targets().size());
             sf.prefix_configuration().first("          DependsOnTargets=\"")
-                                     .not_first("                           ");
-            sf.postfix_configuration().last("\">").not_last(";");
-            for (const auto& target : targets.targets())
+                                     .not_first("                            ");
+            sf.postfix_configuration().last("\">");
+            sf.element_separator(";");
+            for (const auto& target : targets.targets()) {
 a.stream() << sf.prefix() << target.name() << sf.postfix() << std::endl;
+                sf.next();
+            }
 a.stream() << "    <Message Importance=\"high\" Text=\"ODB " << model_name << " \"/>" << std::endl;
 a.stream() << "  </Target>" << std::endl;
 a.stream() << std::endl;

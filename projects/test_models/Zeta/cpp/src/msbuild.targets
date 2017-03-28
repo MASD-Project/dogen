@@ -17,7 +17,7 @@
 
   ]-->
 
-  <Target Name="odb_Zeta">
+  <Target Name="odb_Zeta"
     <Message Importance="high" Text="ODB Zeta "/>
   </Target>
 

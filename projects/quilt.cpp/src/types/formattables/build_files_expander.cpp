@@ -130,17 +130,22 @@ void odb_targets_factory::visit(const yarn::object& o) {
 
     BOOST_LOG_SEV(lg, debug) << "Databases: " << model_.odb_databases();
     const auto odb_rp(odb_options_rp.parent_path().generic_string());
+    const auto db_count(model_.odb_databases().size());
     for (const auto& db : model_.odb_databases()) {
         if (db == "common")
             continue;
 
         std::ostringstream os;
-        os << n.simple() << "-odb-" << db << ".cxx";
+        if (db_count > 1)
+            os << n.simple() << "-odb-" << db << ".cxx";
+        else
+            os << n.simple() << "-odb.cxx";
+
         const auto file_name(os.str());
 
         std::pair<std::string, std::string> pair;
         pair.first = t.output_directory() + "/" + file_name;
-        pair.second = odb_rp + "/" + file_name;
+        pair.second = odb_rp + "/";
         t.move_parameters().push_back(pair);
     }
     result_.targets().push_back(t);

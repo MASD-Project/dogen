@@ -61,8 +61,8 @@ add_custom_target(odb_northwind_categories
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/categories.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/categories-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/categories-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/categories-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/categories-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/categories-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/categories-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_categories)
@@ -76,8 +76,8 @@ add_custom_target(odb_northwind_class_0
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/package
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/package/class_0.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/package/class_0-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/package/class_0-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/package/class_0-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/package/class_0-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/package/class_0-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/package/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/package/class_0-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/package/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_class_0)
@@ -91,8 +91,8 @@ add_custom_target(odb_northwind_customers
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/customers.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/customers-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/customers-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/customers-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/customers-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/customers-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/customers-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_customers)
@@ -106,8 +106,8 @@ add_custom_target(odb_northwind_employees
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/employees.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/employees-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/employees-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/employees-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/employees-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/employees-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/employees-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_employees)
@@ -121,8 +121,8 @@ add_custom_target(odb_northwind_order_details
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/order_details-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/order_details-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_order_details)
@@ -136,8 +136,8 @@ add_custom_target(odb_northwind_order_details_key
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/order_details_key.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details_key-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/order_details_key-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details_key-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/order_details_key-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details_key-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/order_details_key-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_order_details_key)
@@ -151,8 +151,8 @@ add_custom_target(odb_northwind_orders
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/orders.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/orders-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/orders-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/orders-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/orders-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/orders-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/orders-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_orders)
@@ -166,8 +166,8 @@ add_custom_target(odb_northwind_products
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/products.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/products-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/products-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/products-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/products-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/products-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/products-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_products)
@@ -181,8 +181,8 @@ add_custom_target(odb_northwind_shippers
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/shippers.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/shippers-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/shippers-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/shippers-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/shippers-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/shippers-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/shippers-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_shippers)
@@ -196,8 +196,8 @@ add_custom_target(odb_northwind_suppliers
         --output-dir ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb
         -I ${ODB_INCLUDE_DIRS} ${global_includes}
         ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/types/suppliers.hpp
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/suppliers-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/suppliers-odb-pgsql.cxx
-    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/suppliers-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/suppliers-odb-oracle.cxx
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/suppliers-odb-pgsql.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
+    COMMAND mv ${CMAKE_CURRENT_SOURCE_DIR}/../include/dogen/test_models/northwind/odb/suppliers-odb-oracle.cxx ${CMAKE_CURRENT_SOURCE_DIR}/odb/
     VERBATIM
 )
 add_dependencies(odb_northwind odb_northwind_suppliers)
