@@ -366,20 +366,20 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/);
 }
 
-void assistant::make_decoration_preamble(const yarn::element& e) {
+void assistant::make_decoration_preamble(
+    const dogen::formatters::comment_styles cs, const yarn::element& e) {
     const auto dp(get_decoration_properties(e));
-    make_decoration_preamble(dp);
+    make_decoration_preamble(cs, dp);
 }
 
 void assistant::make_decoration_preamble(
+    const dogen::formatters::comment_styles cs,
     const boost::optional<dogen::formatters::decoration_properties> dc) {
     if (!dc)
         return;
 
-    // FIXME: we should not hard code the comment styles.
     dogen::formatters::decoration_formatter fmt;
-    const auto comment_style(dogen::formatters::comment_styles::shell_style);
-    fmt.format_preamble(stream(), comment_style, *dc);
+    fmt.format_preamble(stream(), cs, *dc);
 }
 
 void assistant::comment(const std::string& c) {

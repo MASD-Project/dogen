@@ -34,6 +34,7 @@
 #include <boost/iostreams/filtering_stream.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/formatters/types/comment_styles.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 #include "dogen/yarn/types/name.hpp"
@@ -270,8 +271,11 @@ public:
      * @brief Creates the decoration preamble.
      */
     /**@{*/
-    void make_decoration_preamble(const yarn::element& e);
     void make_decoration_preamble(
+        const dogen::formatters::comment_styles cs,
+        const yarn::element& e);
+    void make_decoration_preamble(
+        const dogen::formatters::comment_styles cs,
         const boost::optional<dogen::formatters::decoration_properties> dc);
     /**@}*/
 

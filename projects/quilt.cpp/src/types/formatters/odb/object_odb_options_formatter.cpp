@@ -98,7 +98,8 @@ format(const context& ctx, const yarn::element& e) const {
     const auto& ooo(a.as<fabric::object_odb_options>(static_artefact(), e));
 
     {
-        a.make_decoration_preamble(e);
+        const auto cs(dogen::formatters::comment_styles::shell_style);
+        a.make_decoration_preamble(cs, e);
 a.stream() << "# epilogue" << std::endl;
 a.stream() << "--odb-epilogue " << ooo.epilogue() << std::endl;
 a.stream() << std::endl;
