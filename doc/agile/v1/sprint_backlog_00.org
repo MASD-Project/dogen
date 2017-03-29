@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-29 Wed 18:10]
+#+CAPTION: Clock summary at [2017-03-29 Wed 18:20]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *42:55* |       |       | 100.0 |
+| *Total time*                                                                | *43:04* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 42:55   |       |       | 100.0 |
-| Active                                                                      |         | 42:55 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:16 |   3.0 |
+| Stories                                                                     | 43:04   |       |       | 100.0 |
+| Active                                                                      |         | 43:04 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:16 |   2.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.2 |
 | COMPLETED Header directory is not part of housekeeping                      |         |       |  0:49 |   1.9 |
 | COMPLETED Disable common support on ODB for a single database               |         |       |  0:08 |   0.3 |
-| COMPLETED Concepts cannot be placed inside of packages                      |         |       |  8:26 |  19.7 |
+| COMPLETED Concepts cannot be placed inside of packages                      |         |       |  8:26 |  19.6 |
 | COMPLETED Use =cxx= extension with ODB files                                |         |       |  0:32 |   1.2 |
 | COMPLETED Implement the database model using Northwind                      |         |       |  6:11 |  14.4 |
 | COMPLETED ODB options does not cater for types placed in namespaces         |         |       |  0:16 |   0.6 |
-| COMPLETED Improve ODB implementation                                        |         |       | 14:26 |  33.6 |
+| COMPLETED Improve ODB implementation                                        |         |       | 14:26 |  33.5 |
 | COMPLETED Do not use underscores in ORM stereotypes                         |         |       |  0:13 |   0.5 |
 | COMPLETED Add msbuild targets for ODB                                       |         |       |  3:49 |   8.9 |
 | COMPLETED Add boilerplate for XML files                                     |         |       |  1:27 |   3.4 |
@@ -37,6 +37,7 @@
 | STARTED Allow users to override string prefixes in test data                |         |       |  1:52 |   4.3 |
 | STARTED Ignore ODB files automatically                                      |         |       |  1:55 |   4.5 |
 | STARTED Add a top-level "Visual Studio" knob                                |         |       |  0:33 |   1.3 |
+| STARTED Add support for Visual Studio C++ projects                          |         |       |  0:09 |   0.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -572,6 +573,42 @@ There are several aspects:
 - functions for the dynamic dependencies that take in an element
 - the computation of the enablement.
 
+*** STARTED Add support for Visual Studio C++ projects                :story:
+    CLOCK: [2017-03-29 Wed 18:11]--[2017-03-29 Wed 18:20] =>  0:09
+
+Visual studio project needs the files to be listed by hand. We can
+either generate the project or the user has to manually add the
+files. This is a problem every time they change. Requirements:
+
+- we need to be able to support multiple VS versions as well (user
+  configurable)
+- user may want to import property sheets
+- need guids (as per C# projects)
+- need additional library/include directories
+- need to add pre-compiled headers support with /FI.
+- add a solution for good measure, using the C# code.
+- add filter files for headers and source files.
+
+As per ODB, users may also want to build with different versions of
+VS. We should allow generating more than one solution and postfix them
+with the VS version.
+
+We should also generate filters for the project:
+
+- header files
+- source files
+- ODB header files
+- ODB source files
+
+The inclusion of ODB files must be done using regular expressions
+because we do not want to have to do two passes for knit; so we don't
+really know what files are available. However, if the ODB files have a
+=cxx= extension, we can just =CLInclude= =*cxx=.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
+
 *** Generate Redis get/set code                                       :story:
 
 In theory, there is nothing stopping us from having a Redis facet that
@@ -961,41 +998,6 @@ include.
 We should have a quilt setting for pre-compilation. We should also
 check that visual studio support is enabled in order to generate
 =stdafx=.
-
-*** Add support for Visual Studio C++ projects                        :story:
-
-Visual studio project needs the files to be listed by hand. We can
-either generate the project or the user has to manually add the
-files. This is a problem every time they change. Requirements:
-
-- we need to be able to support multiple VS versions as well (user
-  configurable)
-- user may want to import property sheets
-- need guids (as per C# projects)
-- need additional library/include directories
-- need to add pre-compiled headers support with /FI.
-- add a solution for good measure, using the C# code.
-- add filter files for headers and source files.
-
-As per ODB, users may also want to build with different versions of
-VS. We should allow generating more than one solution and postfix them
-with the VS version.
-
-We should also generate filters for the project:
-
-- header files
-- source files
-- ODB header files
-- ODB source files
-
-The inclusion of ODB files must be done using regular expressions
-because we do not want to have to do two passes for knit; so we don't
-really know what files are available. However, if the ODB files have a
-=cxx= extension, we can just =CLInclude= =*cxx=.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
 
 *** Handcrafted support for fabric types                              :story:
 

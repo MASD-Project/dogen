@@ -33,6 +33,8 @@
 #include "dogen/quilt.cpp/types/fabric/common_odb_options_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options_fwd.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_project_fwd.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_solution_fwd.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -117,6 +119,26 @@ public:
     virtual void visit(const dogen::quilt::cpp::fabric::registrar&) { }
     virtual void visit(dogen::quilt::cpp::fabric::registrar&) const { }
     virtual void visit(dogen::quilt::cpp::fabric::registrar&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::visual_studio_project
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::cpp::fabric::visual_studio_project&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::visual_studio_project&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::visual_studio_project&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::visual_studio_project&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::quilt::cpp::fabric::visual_studio_solution
+     */
+    /**@{*/
+    virtual void visit(const dogen::quilt::cpp::fabric::visual_studio_solution&) const { }
+    virtual void visit(const dogen::quilt::cpp::fabric::visual_studio_solution&) { }
+    virtual void visit(dogen::quilt::cpp::fabric::visual_studio_solution&) const { }
+    virtual void visit(dogen::quilt::cpp::fabric::visual_studio_solution&) { }
     /**@}*/
 };
 
