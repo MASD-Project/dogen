@@ -13,28 +13,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-03-28 Tue 21:00]
+#+CAPTION: Clock summary at [2017-03-29 Wed 06:57]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *41:50* |       |       | 100.0 |
+| *Total time*                                                                | *42:23* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 41:50   |       |       | 100.0 |
-| Active                                                                      |         | 41:50 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:16 |   3.0 |
+| Stories                                                                     | 42:23   |       |       | 100.0 |
+| Active                                                                      |         | 42:23 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  1:49 |   4.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:30 |   1.2 |
-| COMPLETED Header directory is not part of housekeeping                      |         |       |  0:49 |   2.0 |
+| COMPLETED Header directory is not part of housekeeping                      |         |       |  0:49 |   1.9 |
 | COMPLETED Disable common support on ODB for a single database               |         |       |  0:08 |   0.3 |
-| COMPLETED Concepts cannot be placed inside of packages                      |         |       |  8:26 |  20.2 |
+| COMPLETED Concepts cannot be placed inside of packages                      |         |       |  8:26 |  19.9 |
 | COMPLETED Use =cxx= extension with ODB files                                |         |       |  0:32 |   1.3 |
-| COMPLETED Implement the database model using Northwind                      |         |       |  6:11 |  14.8 |
+| COMPLETED Implement the database model using Northwind                      |         |       |  6:11 |  14.6 |
 | COMPLETED ODB options does not cater for types placed in namespaces         |         |       |  0:16 |   0.6 |
-| COMPLETED Improve ODB implementation                                        |         |       | 14:26 |  34.5 |
+| COMPLETED Improve ODB implementation                                        |         |       | 14:26 |  34.1 |
 | COMPLETED Do not use underscores in ORM stereotypes                         |         |       |  0:13 |   0.5 |
-| COMPLETED Add msbuild targets for ODB                                       |         |       |  3:49 |   9.1 |
-| COMPLETED Add boilerplate for XML files                                     |         |       |  1:27 |   3.5 |
-| STARTED Allow users to override string prefixes in test data                |         |       |  1:52 |   4.5 |
-| STARTED Ignore ODB files automatically                                      |         |       |  1:55 |   4.6 |
+| COMPLETED Add msbuild targets for ODB                                       |         |       |  3:49 |   9.0 |
+| COMPLETED Add boilerplate for XML files                                     |         |       |  1:27 |   3.4 |
+| STARTED Allow users to override string prefixes in test data                |         |       |  1:52 |   4.4 |
+| STARTED Ignore ODB files automatically                                      |         |       |  1:55 |   4.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -506,6 +506,62 @@ manually deleting them.
 This also means we can add the ODB files to the visual studio project
 even before they get generated.
 
+*** STARTED Add a top-level "Visual Studio" knob                      :story:
+    CLOCK: [2017-03-29 Wed 06:24]--[2017-03-29 Wed 06:57] =>  0:33
+
+We have a number of features that only make sense when on Windows and
+building for Visual Studio. We should have a top-level knob that
+enables or disables all of these features in one go:
+
+- =quilt.cpp.visual_studio.enabled=
+
+However, we don't really seem to have a way to "link" features such
+that when a feature is enabled all of its sub-features are enabled. We
+have some hacks for this for the relationship between facets and
+formatters but this is not general. We need a general way to declare a
+dependency between two "things" and to state a few rules for B depends
+on A:
+
+- if A is explicitly enabled, it does not matter if B is enabled or
+  disabled.
+- if A is not explicitly enabled, it is enabled if B is enabled and
+  vice-versa; it defaults to B.
+- if B is not explicitly enabled, it uses its default value.
+
+It should be possible to declare arbitrary graphs with these
+dependencies.
+
+In this way we'd see features as a graph, with platform-independent
+and platform-specific nodes:
+
+- platform independent: types, test_data, io, serialisation, visual
+  studio, etc.
+- platform specific: c++ types. c++ test data. boost serialisation,
+  c++ visual studio, etc.
+
+Dependencies between features can be static or dynamic:
+
+- static means that the state of the instances of the meta-model are
+  not relevant to determining the outcome.
+- dynamic means the opposite.
+
+For example, forward declarations has a dynamic dependency on types
+because depending on the state of the type we may need to force it to
+come out. For example, if there is a pointer.
+
+It would be nice if we could move all of these machinery into yarn or
+quilt. It doesn't make a lot of sense to place it in either, to be
+fair, since its not a platform-independent meta-model concept
+(e.g. yarn) and whilst it is a platform-specific concept, it is not
+kernel specific. Perhaps it should leave on its own model.
+
+There are several aspects:
+
+- the total list of formatters and facets
+- the relationships between them
+- functions for the dynamic dependencies that take in an element
+- the computation of the enablement.
+
 *** Generate Redis get/set code                                       :story:
 
 In theory, there is nothing stopping us from having a Redis facet that
@@ -930,14 +986,6 @@ really know what files are available. However, if the ODB files have a
 Links:
 
 - [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
-
-*** Add a top-level "Visual Studio" knob                              :story:
-
-We have a number of features that only make sense when on Windows and
-building for Visual Studio. We should have a top-level knob that
-enables or disables all of these features in one go:
-
-- =quilt.cpp.visual_studio.enabled=
 
 *** Handcrafted support for fabric types                              :story:
 
