@@ -111,6 +111,12 @@
           }
         }
       ]
+    },
+    {
+      "name": {
+        "simple": "an_exception"
+      },
+      "meta_type": "exception"
     }
   ]
 }

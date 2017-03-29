@@ -98,14 +98,31 @@ a.stream() << std::endl;
             a.comment(ye.documentation());
 a.stream() << "class " << ye.name().simple() << " : public virtual std::exception, public virtual boost::exception {" << std::endl;
 a.stream() << "public:" << std::endl;
+            if (a.is_cpp_standard_98()) {
+a.stream() << "    " << ye.name().simple() << "() {}" << std::endl;
+a.stream() << "    ~" << ye.name().simple() << "() {}" << std::endl;
+            } else {
 a.stream() << "    " << ye.name().simple() << "() = default;" << std::endl;
 a.stream() << "    ~" << ye.name().simple() << "()" << a.make_noexcept_keyword_text() << " = default;" << std::endl;
+            }
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
 a.stream() << "    explicit " << ye.name().simple() << "(const std::string& message) : message_(message) { }" << std::endl;
 a.stream() << std::endl;
 a.stream() << "public:" << std::endl;
+            if (a.is_cpp_standard_98()) {
+                // Note: we are using BOOST_NOEXCEPT here by design. The problem is
+                // users may include this header in a C++ 98 project or in a C++ > 11 project;
+                // and we need to have different behaviours. Depending on this inclusion.
+                // If we do not, we will cause compilation errors when including C++ 98 code
+                // on a C++ 11 project. This is because the standard library will have noexcept
+                // but we won't (as we were generated for C++ 98), so we'd be weakening the exception
+                // guarantees. By using the boost macro we will do the right thing hopefully.
+                // And since we already need boost for exception, we should be ok.
+a.stream() << "    const char* what() const BOOST_NOEXCEPT { return(message_.c_str()); }" << std::endl;
+            } else {
 a.stream() << "    const char* what() const" << a.make_noexcept_keyword_text() << " { return(message_.c_str()); }" << std::endl;
+            }
 a.stream() << std::endl;
 a.stream() << "private:" << std::endl;
 a.stream() << "    const std::string message_;" << std::endl;
