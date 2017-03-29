@@ -51,6 +51,7 @@ void save(Archive& ar,
     ar << make_nvp("cpp_standard", v.cpp_standard_);
     ar << make_nvp("odb_databases", v.odb_databases_);
     ar << make_nvp("odb_sql_name_case", v.odb_sql_name_case_);
+    ar << make_nvp("project_items", v.project_items_);
 }
 
 template<typename Archive>
@@ -64,6 +65,7 @@ void load(Archive& ar,
     ar >> make_nvp("cpp_standard", v.cpp_standard_);
     ar >> make_nvp("odb_databases", v.odb_databases_);
     ar >> make_nvp("odb_sql_name_case", v.odb_sql_name_case_);
+    ar >> make_nvp("project_items", v.project_items_);
 }
 
 } }

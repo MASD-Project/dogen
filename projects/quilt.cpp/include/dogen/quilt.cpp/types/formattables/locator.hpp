@@ -267,6 +267,12 @@ public:
     boost::filesystem::path make_full_path_for_odb_options(
         const yarn::name& n, const std::string& archetype) const;
 
+    boost::filesystem::path make_full_path_for_project(
+        const yarn::name& n, const std::string& archetype) const;
+
+    boost::filesystem::path make_full_path_for_solution(
+        const yarn::name& n, const std::string& archetype) const;
+
 public:
     std::unordered_map<std::string, std::string> facet_directories() const;
 

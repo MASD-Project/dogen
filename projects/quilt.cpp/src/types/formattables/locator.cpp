@@ -524,6 +524,22 @@ boost::filesystem::path locator::make_full_path_for_odb_options(
     return r;
 }
 
+boost::filesystem::path locator::make_full_path_for_project(
+    const yarn::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+    const auto facet_path(make_facet_path(archetype, empty, n));
+    r /= facet_path;
+    return r;
+}
+
+boost::filesystem::path locator::make_full_path_for_solution(
+    const yarn::name& n, const std::string& archetype) const {
+    auto r(project_path_);
+    const auto facet_path(make_facet_path(archetype, empty, n));
+    r /= facet_path;
+    return r;
+}
+
 std::unordered_map<std::string, std::string>
 locator::facet_directories() const {
     std::unordered_map<std::string, std::string> r;

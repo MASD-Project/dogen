@@ -117,7 +117,8 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
       << "\"facet_properties\": " << v.facet_properties() << ", "
       << "\"cpp_standard\": " << v.cpp_standard() << ", "
       << "\"odb_databases\": " << v.odb_databases() << ", "
-      << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\""
+      << "\"odb_sql_name_case\": " << "\"" << tidy_up_string(v.odb_sql_name_case()) << "\"" << ", "
+      << "\"project_items\": " << v.project_items()
       << " }";
     return(s);
 }
