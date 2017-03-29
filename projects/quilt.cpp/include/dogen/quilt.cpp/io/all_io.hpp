@@ -52,6 +52,7 @@
 #include "dogen/quilt.cpp/io/formattables/helper_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/test_data_properties_io.hpp"
+#include "dogen/quilt.cpp/io/fabric/visual_studio_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/locator_configuration_io.hpp"
 #include "dogen/quilt.cpp/io/formatters/inclusion_support_types_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/formatting_configuration_io.hpp"

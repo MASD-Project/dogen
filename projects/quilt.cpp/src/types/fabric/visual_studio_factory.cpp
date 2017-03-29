@@ -18,15 +18,140 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/name_flattener.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_project.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.cpp/types/fabric/visual_studio_factory.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(
+        "quit.cpp.fabric.visual_studio_project_factory"));
+
+const std::string dot(".");
+const std::string proj_extension(".vcxproj");
+const std::string sln_extension(".sln");
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-bool visual_studio_factory::operator==(const visual_studio_factory& /*rhs*/) const {
-    return true;
+visual_studio_factory::type_group visual_studio_factory::make_type_group(
+    const annotations::type_repository& atrp) const {
+
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+
+    using formatters::traits;
+    const auto& psg(traits::visual_studio_project_solution_guid());
+    r.project_solution_guid = s.select_type_by_name(psg);
+
+    const auto& pg(traits::visual_studio_project_guid());
+    r.project_guid = s.select_type_by_name(pg);
+
+    return r;
+}
+
+visual_studio_configuration visual_studio_factory::
+make_configuration(const type_group& tg,
+    const annotations::annotation& ra) const {
+
+    visual_studio_configuration r;
+    const annotations::entry_selector s(ra);
+
+    const auto& psg(tg.project_solution_guid);
+    r.project_solution_guid(s.get_text_content_or_default(psg));
+
+    const auto& pg(tg.project_guid);
+    r.project_guid(s.get_text_content_or_default(pg));
+
+    return r;
+}
+
+visual_studio_configuration visual_studio_factory::
+make_configuration(const annotations::type_repository& atrp,
+    const annotations::annotation& ra) const {
+
+    const auto tg(make_type_group(atrp));
+    const auto r(make_configuration(tg, ra));
+    return r;
+}
+
+std::string visual_studio_factory::
+obtain_project_name(const yarn::intermediate_model& im) const {
+    yarn::name_flattener nfl(false/*detect_model_name*/);
+    const auto ns(nfl.flatten(im.name()));
+
+    using boost::algorithm::join;
+    const auto r(join(ns, dot));
+    return r;
+}
+
+boost::shared_ptr<yarn::element> visual_studio_factory::
+make_solution(const visual_studio_configuration cfg,
+    const std::string& project_name, const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
+
+    yarn::name_factory nf;
+    const auto sn(project_name + "-vc." + sln_extension);
+    const auto n(nf.build_element_in_model(im.name(), sn));
+
+    auto r(boost::make_shared<visual_studio_solution>());
+    r->name(n);
+    r->origin_type(im.origin_type());
+    r->project_name(project_name);
+    r->project_guid(cfg.project_guid());
+    r->project_solution_guid(cfg.project_solution_guid());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated Visual Studio Solution.";
+
+    return r;
+}
+
+boost::shared_ptr<yarn::element> visual_studio_factory::
+make_project(const visual_studio_configuration cfg,
+    const std::string& project_name, const yarn::intermediate_model& im) const {
+    BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
+
+    yarn::name_factory nf;
+    const auto sn(project_name + proj_extension);
+    const auto n(nf.build_element_in_model(im.name(), sn));
+
+    auto r(boost::make_shared<visual_studio_project>());
+    r->name(n);
+    r->origin_type(im.origin_type());
+    r->project_name(project_name);
+    r->project_guid(cfg.project_guid());
+
+    BOOST_LOG_SEV(lg, debug) << "Generated Visual Studio Project.";
+
+    return r;
+}
+
+std::list<boost::shared_ptr<yarn::element>> visual_studio_factory::
+make(const annotations::type_repository& atrp,
+    const yarn::intermediate_model& im) const {
+
+    const auto pn(obtain_project_name(im));
+    const auto ra(im.root_module().annotation());
+    const auto cfg(make_configuration(atrp, ra));
+
+    std::list<boost::shared_ptr<yarn::element>> r;
+    r.push_back(make_solution(cfg, pn, im));
+    r.push_back(make_project(cfg, pn, im));
+
+    return r;
 }
 
 } } } }

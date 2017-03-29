@@ -372,5 +372,67 @@
     "template_kind": "instance",
     "scope": "root_module",
     "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "project_solution_guid",
+      "qualified": "quilt.cpp.visual_studio.project_solution_guid"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.visual_studio"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "name": {
+      "simple": "project_guid",
+      "qualified": "quilt.cpp.visual_studio.project_guid"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.visual_studio"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": "00000000-0000-0000-0000-000000000000"
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.visual_studio.solution.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.visual_studio",
+      "archetype": "quilt.cpp.visual_studio.solution.postfix"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
+  },
+  {
+    "name": {
+      "simple": "postfix",
+      "qualified": "quilt.cpp.visual_studio.project.postfix"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.cpp",
+      "facet": "quilt.cpp.visual_studio",
+      "archetype": "quilt.cpp.visual_studio.project.postfix"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module",
+    "default_value": ""
   }
 ]

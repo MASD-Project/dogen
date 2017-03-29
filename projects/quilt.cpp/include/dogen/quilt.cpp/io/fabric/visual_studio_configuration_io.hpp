@@ -18,43 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTERS_TRAITS_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTERS_TRAITS_HPP
+#ifndef DOGEN_QUILT_CPP_IO_FABRIC_VISUAL_STUDIO_CONFIGURATION_IO_HPP
+#define DOGEN_QUILT_CPP_IO_FABRIC_VISUAL_STUDIO_CONFIGURATION_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
+#include <iosfwd>
+#include "dogen/quilt.cpp/types/fabric/visual_studio_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
-namespace formatters {
+namespace fabric {
 
-struct traits {
-    /**
-     * @brief Name of the master header archetype for a given facet.
-     */
-    static std::string master_header_archetype(const std::string& facet);
-
-    static std::string to_formatter_name(const std::string& archetype);
-
-    static std::string cmake_facet();
-    static std::string include_cmakelists_archetype();
-    static std::string source_cmakelists_archetype();
-    static std::string msbuild_facet();
-    static std::string msbuild_targets_archetype();
-
-    static std::string visual_studio_facet();
-    static std::string visual_studio_project_archetype();
-    static std::string visual_studio_solution_archetype();
-
-    static std::string visual_studio_project_solution_guid();
-    static std::string visual_studio_project_guid();
-
-    static std::string canonical_archetype(const std::string& facet);
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::quilt::cpp::fabric::visual_studio_configuration& v);
 
 } } } }
 

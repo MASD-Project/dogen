@@ -129,6 +129,7 @@
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/ptime_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/test_data/ptree_helper.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_configuration.hpp"
 #include "dogen/quilt.cpp/types/formattables/cpp_standard_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator_configuration.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"

@@ -28,6 +28,7 @@
 #include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
 
@@ -89,18 +90,26 @@ void injector::inject_master_headers(yarn::intermediate_model& im) const {
     add_element(e, im);
 }
 
+void injector::inject_visual_studio(const annotations::type_repository& atrp,
+    yarn::intermediate_model& im) const {
+    visual_studio_factory f;
+    const auto e(f.make(atrp, im));
+    add_elements(e, im);
+}
+
 void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
     forward_declarations_factory f;
     const auto e(f.make(im));
     add_elements(e, im);
 }
 
-void injector::inject(const annotations::type_repository& /*atrp*/,
+void injector::inject(const annotations::type_repository& atrp,
     yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_build_files(im);
     inject_odb_options(im);
     inject_master_headers(im);
+    inject_visual_studio(atrp, im);
     inject_forward_declarations(im);
 }
 

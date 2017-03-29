@@ -25,7 +25,14 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_configuration.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -33,19 +40,39 @@ namespace cpp {
 namespace fabric {
 
 class visual_studio_factory final {
-public:
-    visual_studio_factory() = default;
-    visual_studio_factory(const visual_studio_factory&) = default;
-    visual_studio_factory(visual_studio_factory&&) = default;
-    ~visual_studio_factory() = default;
-    visual_studio_factory& operator=(const visual_studio_factory&) = default;
+private:
+    struct type_group {
+        annotations::type project_solution_guid;
+        annotations::type project_guid;
+    };
+
+    type_group make_type_group(const annotations::type_repository& atrp) const;
+
+    visual_studio_configuration make_configuration(const type_group& tg,
+        const annotations::annotation& ra) const;
+
+    visual_studio_configuration make_configuration(
+        const annotations::type_repository& atrp,
+        const annotations::annotation& ra) const;
+
+private:
+    std::string obtain_project_name(const yarn::intermediate_model& im) const;
+
+private:
+    boost::shared_ptr<yarn::element>
+    make_solution(const visual_studio_configuration cfg,
+        const std::string& project_name,
+        const yarn::intermediate_model& im) const;
+
+    boost::shared_ptr<yarn::element>
+    make_project(const visual_studio_configuration cfg,
+        const std::string& project_name,
+        const yarn::intermediate_model& im) const;
 
 public:
-    bool operator==(const visual_studio_factory& rhs) const;
-    bool operator!=(const visual_studio_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<boost::shared_ptr<yarn::element>>
+    make(const annotations::type_repository& atrp,
+        const yarn::intermediate_model& im) const;
 };
 
 } } } }

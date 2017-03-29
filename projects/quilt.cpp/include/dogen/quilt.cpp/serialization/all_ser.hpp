@@ -51,6 +51,7 @@
 #include "dogen/quilt.cpp/serialization/formattables/helper_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/streaming_properties_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/test_data_properties_ser.hpp"
+#include "dogen/quilt.cpp/serialization/fabric/visual_studio_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/locator_configuration_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formatters/inclusion_support_types_ser.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formatting_configuration_ser.hpp"
