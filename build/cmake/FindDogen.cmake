@@ -39,7 +39,7 @@ if (DOGEN_STITCHER_EXECUTABLE)
     execute_process(
         COMMAND ${DOGEN_STITCHER_EXECUTABLE} --version
         COMMAND grep ^Dogen
-        COMMAND cut -b15-
+        COMMAND cut -b16-
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         ERROR_VARIABLE DOGEN_ERROR
         OUTPUT_VARIABLE DOGEN_STITCHER_VERSION
@@ -56,7 +56,7 @@ if (DOGEN_TAILOR_EXECUTABLE)
     execute_process(
         COMMAND ${DOGEN_TAILOR_EXECUTABLE} --version
         COMMAND grep ^Dogen
-        COMMAND cut -b15-
+        COMMAND cut -b14-
         WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
         ERROR_VARIABLE DOGEN_ERROR
         OUTPUT_VARIABLE DOGEN_TAILOR_VERSION
