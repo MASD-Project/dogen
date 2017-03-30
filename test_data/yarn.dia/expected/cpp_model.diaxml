@@ -2526,8 +2526,8 @@
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
+#DOGEN quilt.cpp.visual_studio.project_guid=876B2828-8A0B-495F-8340-0357690162E4
+#DOGEN quilt.cpp.visual_studio.project_solution_guid=3103CA57-FD70-4EC9-98BD-1C2C7360AF53
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen#</value>
 															</value>

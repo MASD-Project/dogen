@@ -21470,12 +21470,12 @@ modeled by the base.
 							<second>false</second>
 						</item>
 						<item>
-							<first>quilt.cpp.visual_studio.project.enabled</first>
-							<second>false</second>
+							<first>quilt.cpp.visual_studio.project_guid</first>
+							<second>876B2828-8A0B-495F-8340-0357690162E4</second>
 						</item>
 						<item>
-							<first>quilt.cpp.visual_studio.solution.enabled</first>
-							<second>false</second>
+							<first>quilt.cpp.visual_studio.project_solution_guid</first>
+							<second>3103CA57-FD70-4EC9-98BD-1C2C7360AF53</second>
 						</item>
 						<item>
 							<first>quilt.csharp.enabled</first>

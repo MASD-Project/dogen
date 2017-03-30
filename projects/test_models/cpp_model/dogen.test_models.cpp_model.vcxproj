@@ -3,7 +3,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{00000000-0000-0000-0000-000000000000}</ProjectGuid>
+    <ProjectGuid>{876B2828-8A0B-495F-8340-0357690162E4}</ProjectGuid>
     <OutputType>Library</OutputType>
     <RootNamespace>dogen.test_models.cpp_model</RootNamespace>
     <AssemblyName>dogen.test_models.cpp_model</AssemblyName>
