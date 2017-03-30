@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/quilt.cpp/types/formatters/visual_studio_solution_formatter.hpp"
+#include "dogen/quilt.cpp/types/formatters/visual_studio_project_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/include_cmakelists_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/source_cmakelists_formatter.hpp"
 #include "dogen/quilt.cpp/types/formatters/msbuild_targets_formatter.hpp"
@@ -35,6 +37,8 @@ namespace cpp {
 namespace formatters {
 
 void initializer::initialize(registrar& rg) {
+    register_formatter<visual_studio_solution_formatter>(rg);
+    register_formatter<visual_studio_project_formatter>(rg);
     register_formatter<include_cmakelists_formatter>(rg);
     register_formatter<source_cmakelists_formatter>(rg);
     register_formatter<msbuild_targets_formatter>(rg);

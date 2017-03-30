@@ -301,7 +301,8 @@ boost::filesystem::path locator::make_facet_path(
     if (!arch_cfg.facet_postfix().empty())
         stream << underscore << arch_cfg.facet_postfix();
 
-    stream << dot << extension;
+    if (!extension.empty())
+        stream << dot << extension;
     r /= stream.str();
 
     BOOST_LOG_SEV(lg, debug) << "Done making the facet path. Result: "

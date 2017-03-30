@@ -8,6 +8,8 @@
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
     "quilt.csharp.enabled": "false",
     "quilt.cpp.standard": "c++-98",
     "quilt.cpp.hash.enabled": "false"

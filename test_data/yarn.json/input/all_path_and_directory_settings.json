@@ -11,6 +11,8 @@
     "yarn.output_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",
+    "quilt.cpp.visual_studio.project.enabled": "false",
+    "quilt.cpp.visual_studio.solution.enabled": "false",
     "quilt.csharp.enabled": "true",
     "quilt.cpp.directory": "cpp_kernel",
     "quilt.cpp.source_directory_name": "some_source_dir",

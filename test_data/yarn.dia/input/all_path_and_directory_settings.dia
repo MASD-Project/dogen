@@ -278,6 +278,8 @@
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.csharp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
+#DOGEN quilt.cpp.visual_studio.project.enabled=false
+#DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.cpp.directory=cpp_kernel
 #DOGEN quilt.cpp.source_directory_name=some_source_dir
 #DOGEN quilt.cpp.include_directory_name=some_include_dir

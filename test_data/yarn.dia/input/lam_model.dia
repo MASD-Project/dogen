@@ -274,6 +274,8 @@
 #DOGEN yarn.output_language=csharp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
+#DOGEN quilt.cpp.visual_studio.project.enabled=false
+#DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=true
 #DOGEN annotations.profile=dogen#</dia:string>
           </dia:attribute>

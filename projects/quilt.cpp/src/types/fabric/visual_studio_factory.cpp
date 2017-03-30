@@ -104,7 +104,7 @@ make_solution(const visual_studio_configuration cfg,
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
     yarn::name_factory nf;
-    const auto sn(project_name + "-vc." + sln_extension);
+    const auto sn(project_name + "-vc" + sln_extension);
     const auto n(nf.build_element_in_model(im.name(), sn));
 
     auto r(boost::make_shared<visual_studio_solution>());
