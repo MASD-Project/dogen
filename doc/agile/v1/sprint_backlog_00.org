@@ -406,6 +406,26 @@ for it.
 We need to add exceptions to the C++ 98 test model. At present they
 are using C++ 14 keywords and thus causing errors.
 
+*** COMPLETED Add option to capitalise column and table names         :story:
+    CLOSED: [2017-03-30 Thu 08:16]
+
+One very useful thing is to allow users to define types in camel case
+or underscore separated but then have the ODB names generated all in
+caps (schema name, table name, column name). The database we are
+currently working with is all in caps and we are forced to manually
+enter pragmas for every single type because of this. Instead, we
+should have some meta-data:
+
+: odb.use_capitals=true
+
+This would automatically generate the pragmas.
+
+One slight downside is that if a user then tries to manually override
+the pragmas, we will have duplicates, in effect:
+
+: #DOGEN odb_pragma=schema("northwind")
+: #DOGEN odb_pragma=schema("NORTHWIND")
+
 *** STARTED Allow users to override string prefixes in test data      :story:
     CLOCK: [2017-03-26 Sun 10:15]--[2017-03-26 Sun 11:30] =>  1:15
     CLOCK: [2017-03-21 Tue 07:10]--[2017-03-21 Tue 07:24] =>  0:14
@@ -612,6 +632,14 @@ really know what files are available. However, if the ODB files have a
 Links:
 
 - [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
+
+*** Add support for "project capitalisation"                          :story:
+
+It would be nice if facets, classes etc which are at present in lower
+case could be camel cased if the user chooses.
+
+At present we need to override all facet directories, include
+directories, etc.
 
 *** Generate Redis get/set code                                       :story:
 
@@ -1085,25 +1113,6 @@ practice we ended up still defining a lot of things in each model. We
 need a way to associate a profile with a model by supplying it on the
 command line. That way users can create profiles and store them next
 to the model rather than having to create a data directory, etc etc.
-
-*** Add option to capitalise column and table names                   :story:
-
-One very useful thing is to allow users to define types in camel case
-or underscore separated but then have the ODB names generated all in
-caps (schema name, table name, column name). The database we are
-currently working with is all in caps and we are forced to manually
-enter pragmas for every single type because of this. Instead, we
-should have some meta-data:
-
-: odb.use_capitals=true
-
-This would automatically generate the pragmas.
-
-One slight downside is that if a user then tries to manually override
-the pragmas, we will have duplicates, in effect:
-
-: #DOGEN odb_pragma=schema("northwind")
-: #DOGEN odb_pragma=schema("NORTHWIND")
 
 *** Add prefetch support to ODB                                       :story:
 
