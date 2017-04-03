@@ -13,16 +13,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-04-03 Mon 10:47]
+#+CAPTION: Clock summary at [2017-04-03 Mon 11:07]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:25* |      |      | 100.0 |
+| *Total time*                                                                | *0:44* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:25   |      |      | 100.0 |
-| Active                                                                      |        | 0:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |  32.0 |
-| STARTED Edit release notes for previous sprint                              |        |      | 0:17 |  68.0 |
+| Stories                                                                     | 0:44   |      |      | 100.0 |
+| Active                                                                      |        | 0:44 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |  18.2 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:36 |  81.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -31,7 +31,9 @@
 
 Updates to sprint and product backlog.
 
-*** STARTED Edit release notes for previous sprint                    :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-04-03 Mon 11:07]
+    CLOCK: [2017-04-03 Mon 10:48]--[2017-04-03 Mon 11:07] =>  0:19
     CLOCK: [2017-04-03 Mon 10:30]--[2017-04-03 Mon 10:47] =>  0:17
 
 Add github release notes for previous sprint.
@@ -39,26 +41,26 @@ Add github release notes for previous sprint.
 Title: Dogen v1.0.0, "Dunes"
 
 #+begin_src markdown
-![Dunes from the Namib Desert](http://www.welcometoangola.co.ao/op/image/?co=4446&h=be640).
+![Dunas](https://travelgest.co.ao/wp-content/uploads/2016/09/Dunas-Ba%C3%ADa-dos-Tigres-Namibe-1.jpg)
+_Dunes from the Namib Desert, by Baia dos Tigres. (C) 2016, Travelgest Angola._
 
 Overview
 =======
-This was yet another sprint with a focus on ODB/ORM improvements; we have finally completed our series of blog posts on Dogen and ORM:
-
+This was yet another sprint with a focus on ODB/ORM improvements. As part of this work, we have finally completed our series of blog posts on Dogen and ORM:
 
 - [Nerd Food: Northwind, or Using Dogen with ODB - Part IV](http://mcraveiro.blogspot.co.uk/2017/03/nerd-food-northwind-or-using-dogen-with_25.html)
 
-Also, you won't fail to notice we labelled this release /v1.0/. In truth, it continues to fit the mold of our slow and incremental releases, and as such its no different from any other release. In fact, we decided to call it v1.0 mainly because the sprint numbers were becoming a bit to unwieldy - adding an extra zero the 100th sprint just seemed a tad /too/ much. And when we looked at our /Definition of Done/ for a v1.0, we are ticking pretty much all the boxes we had originally defined, so its not totally unfair to call it v1.0.
+Also, you won't fail to notice we labelled this release _v1.0_. In truth, we continue with our approach of slow and incremental releases, and as such this release is no different from any other. The main reason we have decided to call it v1.0 is because the sprint numbers were becoming a bit too unwieldy - adding an extra zero the 100th sprint just seemed a tad much. And when we looked at our [Definition of Done for v1.0](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v0/definition_of_done.org), we noticed that we are ticking pretty much all the boxes we had originally defined, so its not entirely unfair to call it v1.0.
 
 User visible changes
 ===============
 In this sprint, a number of user visible changes were made, but all mainly bug-fixes:
 
-- **Fixes for Split directory**: Files in the header directory were being ignored by housekeeping.
+- **Fixes for split directory mode**: Files in the header directory were being ignored by housekeeping.
 - **Concept improvements**: You can now place concepts inside of namespaces.
-- **Use distinct ODB extension**: We are now using =cxx= as the extension for ODB files, allowing one to distinguish between ODB and Dogen files.
-- **Changes to ORM stereotypes**: We no longer use underscores in stereotypes. This is a breaking change. You need to replace =orm_object=, =orm_value= and so forth with =orm object=, =orm value= etc.
-- **ODB now has MSBuild targets**: For Windows users, you can now create a very simple wrapper script that calls =msbuild= and executes ODB.
+- **Use distinct ODB extension**: We are now using ```cxx``` as the extension for ODB files, allowing one to distinguish between ODB and Dogen files quite easily.
+- **Changes to ORM stereotypes**: We no longer use underscores in stereotypes. This is a breaking change. You need to replace ```orm_object```, ```orm_value``` and so forth with ```orm object```, ```orm value``` etc.
+- **ODB now has MSBuild targets**: For Windows users, you can now create a very simple wrapper script to call ```msbuild``` and execute ODB.
 
 For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_00.org).
 
