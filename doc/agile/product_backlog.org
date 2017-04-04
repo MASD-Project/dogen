@@ -173,10 +173,15 @@ about:
   a stereotype of =stereotype=, a name of the stereotype we'd like to
   define (say =Serializable=) and then its tagged values are the keys
   and values of the meta-data we want to define. This is strictly
-  speaking not correct UML because we are stating we are overloading
-  the UML meta-model (hence =stereotype=) but then we
+  speaking not correct UML because we are stating we are augmenting
+  the UML meta-model (hence =stereotype=) but then we end up
+  instantiating a meta-model class with some predefined values. Its
+  not clear how to express this in UML. Note that we have exactly the
+  same issue with concepts.
 
-the purpose of profiles is to instantiate meta-model
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
 *** Name all project paths according to a scheme                      :story:
 
@@ -7292,6 +7297,31 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Consider creating a TextUML frontend                              :story:
+
+We could create a frontend that reads TextUML files:
+
+- https://github.com/abstratt/textuml
+
+Example (copied from the [[http://abstratt.github.io/textuml/docs/tutorial.html][tutorial]]):
+
+#+begin_example
+package payment;
+
+class PaymentMethod
+end;
+
+class Cheque specializes PaymentMethod
+end;
+#+end_example
+
+Now that we are thinking about moving to XMI, this may make slightly
+less sense, but nevertheless, its worth capturing the idea.
+
+Links:
+
+- [[https://blog.abstratt.com/2007/11/01/uml-101-the-templates-package/][UML 101 with TextUML: the Templates package]]
 
 *** Add support for UML profiles and XMI                               :epic:
 
