@@ -11,6 +11,314 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Map upsilon primitives to intrinsics                              :story:
+
+Upsilon allows users to create "strong typedefs" around primitve
+types. We need to unpack these into their intrinsic counterparts and
+them map the intrinsics to native types.
+
+Slight mistake: we mapped the primitive types themselves but in
+reality what needs to be mapped are the fields making references to
+the primitive types. We should just filter out all primitives.
+
+Additional wrinkle: what the end users want is to unpack "real
+primitives" into intrinsics, but "other" primitives should be mapped
+to objects. This can be achieved by hard-coding =Plaform= primitives
+into the mapping layer. However, some non-platform primitives may also
+be candidates too. We need to create a list of these to see how
+widespread the problem is.
+
+Another alternative is to apply hard-coded regexes:
+
+- if the name matches any of the intrinsic names
+
+Finally, the last option may be to have yet another mapping data file
+format that lists the primitives to unbox.
+
+*** Immutable types cannot be owned by mutable types                  :story:
+
+When we try to create a mutable class that has a property of an
+immutable type, the code fails to compile due to the swap
+method. This is because immutable types do not provide swap.
+
+*** Rename main Dogen package in Debian                               :story:
+
+At present we seem to have called our package =dogen-applications=:
+
+: $ apt-cache search dogen-applications
+: dogen-applications - The Domain Generator - Generates source code for domain driven development.
+
+We should try to call it just =dogen=.
+
+*** Check for incompatibility between input language and enabled kernels :story:
+
+At present it is possible to have a model with input language of say
+C++ but with the C# kernel enabled. We should throw if the input
+language is incompatible with the enabled kernels.
+
+Sadly this is not trivial. This is because quilt only sees the mapped
+models; thus as far as knit is concerned, we ask for the input
+language (e.g. c++) and there is an enabled kernel for it. We don't
+look at it from the enabled kernel's perspective (e.g. "C# is enabled,
+why is there no input language for it?"). We could have a method in
+quilt that returns all enabled kernels; we could then look at all
+models we are going to build and if there is a mismatch we can
+throw. But extracting the =configuration_factory= out of quilt
+workflow is not going to be easy without screwing up the API.
+
+*** Handcrafted support for fabric types                              :story:
+
+At present we can either disable fabric types or enable them
+(CMakeLists, etc). However, there is a third common use case: to
+handcraft them. To do this we normally disable them and then add the
+file to the ignore list:
+
+:  --ignore-files-matching-regex .*/CMakeLists.txt)
+
+One could conceive of some meta-data support that would make this
+process a tad easier and more generic:
+
+: quilt.cpp.cmakelists.stereotypes=handcrafted
+
+Then hopefully the existing pipeline would take over and we'd generate
+the files for the first time but then let the user overwrite it. This
+would also be applicable to all fabric types (registrar, etc) but we'd
+have to manually read each stereotype on each factory.
+
+*** Clean up annotation scope types                                   :story:
+
+As part of the attribute rename (which used to be called property) we
+should have renamed the annotation scope as well to attribute.
+
+In addition, we have a scope type of "entity" but the yarn meta-model
+type is really "element".
+
+We should also check if "not applicable" scope is in use, and if not
+delete it.
+
+*** Add a new annotation type of "pair"                               :story:
+
+It would be nice to be able to declare a annotation type with a value
+type of "pair" or "key value pair" and have the annotations
+automatically perform the splitting. The separator should not be
+equals, since we already use that for annotations kvps, but it could
+be comma, pipe, etc. The API would be augmented to return a
+=std::pair= with key and value.
+
+One slight snag: the value could be of any type:
+
+- boolean
+- string
+- enumeration (when we support these)
+- even text collection
+
+We can start by just supporting strings, but probably worthwhile
+having a think on how to specify the type.
+
+*** Create a base options class across all tools                      :story:
+
+At present we are copying and pasting a bit of code related to general
+options across all the command line tools (knitter, darter, stitcher,
+tailor). We could create a base class that has the common options and
+then have a factory that populates the boost program options
+associated with that class.
+
+Ideally we should also have a log initialisation class that uses those
+common options.
+
+*** Introduce dogen projects                                          :story:
+
+At present we are manually configuring each dogen target, adding each
+separately to the build system. Perhaps a better approach is to have a
+dogen project file where one can configure all of the targets in one
+go. We don’t necessarily have to call dogen directly – perhaps another
+command line tool is responsible for invoking dogen? The problem here
+is that we’d end up with all dogen models in memory.
+
+At any rate, the project file would contain all models for a given
+product. We could possibly run with “all” or “specific” whereby the
+user would supply one or more projects to code generate. For all
+properties that are common, we’d defined them only once somehow
+(common regexes, log level, etc).
+
+*** Add support for "one off" profiles                                :story:
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
+
+Actually the problem is that profiles aren't really implemented
+correctly. First we should not call them profiles at all since they
+are not UML profiles and overloading the term just generates
+confusion. Second its important to understand how Dogen profiles come
+about:
+
+- we extend the UML meta-model via stereotypes to support all of the
+  required yarn and quilt concepts.
+- when we instantiate the yarn/quilt types via a UML model, we need to
+  supply the values for the attributes which have been extended. If
+  done properly this would happen via UML tagged values. Dia does not
+  support these. At any rate, at present we use Dogen meta-data which
+  is almost like tagged values.
+- Dogen profiles are then an attempt to create bundles of tagged
+  values with pre-populated values so that we do not need to manually
+  populate them for every type. Instead, we can associate a stereotype
+  with the type and then the system will automatically populate the
+  values from the bundle.
+- From all of this it follows that it should be possible to define
+  these "bundles" directly in a UML diagram. If we were to use UML
+  properly (or at least almost properly), we would define a class with
+  a stereotype of =stereotype=, a name of the stereotype we'd like to
+  define (say =Serializable=) and then its tagged values are the keys
+  and values of the meta-data we want to define. This is strictly
+  speaking not correct UML because we are stating we are overloading
+  the UML meta-model (hence =stereotype=) but then we
+
+the purpose of profiles is to instantiate meta-model
+
+*** Name all project paths according to a scheme                      :story:
+
+The locator API looks really confusing due to the various kinds of
+paths. We need to catalogue them all and name them properly.
+
+- output directory: directory into which knitter will write all files,
+  unless "c++ headers output directory" is set, in which case it will
+  write all files except for the headers.
+- c++ headers output directory: directory in which knitter will write
+  the headers. Only applicable to c++.
+- include directory: aka inclusion directory; directory to place in
+  the include path.
+
+*** Not setting output language results in weird errors               :story:
+
+When setting the input language to language agnostic and not setting
+the output languages, we get the following error:
+
+: /dogen/projects/yarn/src/types/legacy_name_tree_parser.cpp(123): Throw in function std::__cxx11::string {anonymous}::grammar<Iterator>::scope_operator_for_language(dogen::yarn::languages) [with Iterator = __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >; std::__cxx11::string = std::__cxx11::basic_string<char>]
+: Dynamic exception type: boost::exception_detail::clone_impl<dogen::yarn::parsing_error>
+: std::exception::what: Invalid or unsupported language: { "__type__": "languages", "value": "language_agnostic" }
+: [tag_workflow*] = Code generation failure.
+: [owner*] = <dogen><test_models><all_path_and_directory_settings><package_0><package_0_1><class_2>
+: unknown location(0): fatal error: in "workflow_tests/all_path_and_directory_settings_generates_expected_code_dia": std::runtime_error: Error during test
+: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/tests/workflow_tests.cpp(213): last checkpoint
+
+*** Using underscores with C# results in invalid code                 :story:
+
+When building in LAM, if one uses underscore notation we create code
+like so:
+
+:        public int prop_0 { get; set; }
+:        public class_0(int prop_0)
+:        {
+:            prop_0 = prop_0;
+:        }
+
+C# thinks we're assigning the parameter to itself rather than making
+use of the property.
+
+The right fix for this is to support the "camel case mode" where we
+will interpret underscores and generate camel case identifiers.
+
+For now we should warn users when they try to use lower case
+attributes in C#.
+
+*** Support containers correctly in annotations                       :story:
+
+At present we are allowing users to enter the same key multiple times
+to represent a container:
+
+: #DOGEN yarn.output_language=cpp
+: #DOGEN yarn.output_language=csharp
+
+
+This was an acceptable pattern from a Dia perspective, because we had
+control of the KVP semantics. However, when we copied the pattern
+across to the JSON representation things did not work out so
+well. This is because the following JSON:
+
+:     "yarn.output_language": "csharp",
+:     "yarn.output_language": "cpp",
+
+Is interpreted by a lot of JSON parsers as a duplicate, and results on
+only a single KVP making it. We could try to solve a lot of problems
+in one go and standardise all of the meta-data on JSON:
+
+- use start and end markers to enclose the JSON when in dia. Story:
+  [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-a-start-and-end-dogen-variable-block-in-dia][Consider adding a start and end dogen variable block in dia]]
+- this would also solve the problem with pairs (or at least part of
+  it). Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-a-new-annotation-type-of-pair][Add a new annotation type of “pair”]]
+- we could allow users to keep the JSON externally. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-support-for-one-off-profiles][Add support
+  for “one off” profiles]]
+- the JSON would also work nicely with the concept of a dogen
+  project. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#introduce-dogen-projects][Introduce dogen projects]]
+
+However, before we embark on this story we need to perform a lot of
+analysis on this.
+
+Notes:
+
+- [[http://json-schema.org/][JSON Schema]]
+- [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
+- yarn.dia.comment is no longer necessary, just look for the
+  markers.
+- we should only allow arrays of simple types.
+- the fragment used inside Dia should be identical to the file
+  supplied as argument for the one-off profile and it should also
+  identical to a fragment inside a project. Do we need to support both
+  projects and one-off profiles?
+
+Sample:
+
+#+begin_src
+  "annotation": {
+    "yarn.dia.comment": true,
+    "yarn.dia.external_modules": "dogen::test_models",
+    "annotations.profile": "dogen",
+    "yarn.input_language": "language_agnostic",
+    "yarn.output_language": [ "csharp", "cpp" ]
+#+end_src
+
+This error has been picked up by codacy too:
+
+- [[https://www.codacy.com/app/marco-craveiro/dogen/commit?cid%3D79696432&bid%3D3493157&utm_campaign%3Dnew_commit&utm_medium%3DEmail&utm_source%3DInternal][Commit 91886c6]]&
+
+*** Setting include and source directory to empty                     :story:
+
+At present it does not seem possible to set either the include or
+source directories to empty. This probably just requires annotations
+to understand empty values, e.g.
+
+: a.b.c=
+
+*** Drop the "c++-" prefix in meta-data for standard                  :story:
+
+At present we do:
+
+: quilt.cpp.standard=c++-98
+
+The "c++-" seems a bit redundant.
+
+*** Add a "flat directory" mode                                       :story:
+
+It would be nice to have a mode in which all files get placed in a
+single-directory: no src, include, etc – just one big folder with all
+files.
+
+Actually we can already achieve this:
+
+- set =quilt.cpp.disable_facet_directories= to true
+- set =quilt.cpp.include_directory_name= to empty
+- set =quilt.cpp.source_directory_name= to empty
+
+It is however a bit painful. It would be nice to have a shorthand for
+this, which could be the "flat directory" mode. It is also compatible
+with split project mode (we just have flat directories in two
+different top-level directories), which is nice.
+
+We should check that =enable_unique_file_names= is set to true.
+
 *** Add full support for type_index                                   :story:
 
 At present we cannot create containers using =std::type_index= as a
@@ -672,21 +980,6 @@ able to serialise across languages. This could be done as follows:
   back to LAM types when writing the XML.
 - JSON: similar approach to XML, minus the schema.
 - POF: use the coherence libraries to dump the models into POF.
-
-*** Code-generate a "one-shot" serialisation API                      :story:
-
-For the dia model we manually generated a class called
-=diagram_serialization_helper=. It provided a simple API to read/write
-the dia model:
-
-: static void to_xml(std::ostream& s, const diagram& d);
-: static diagram from_xml(std::istream& s);
-
-It would be nice to have this code-generated and also to cover the
-other two archives (text, binary).
-
-Users should be able to mark types with some property so that we know
-we need to generate these wrappers.
 
 *** Rename yarn types that clash with reserved keywords               :story:
 
@@ -1847,40 +2140,11 @@ unfortunately its not about indenting:
 - [[http://zed0.co.uk/clang-format-configurator/][clang-format configurator]]
 - [[http://clangformat.com/][online clang format]] - older site
 
-*** Consider using a proper JSON library                              :story:
+*** Replace boost property tree with real JSON support                :story:
 
-We could use a full-blow JSON parser rather than the property tree
-one. One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-
-Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-
-Actually there is a project comparing JSON libraries:
-
-[[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
-
-One interesting library is [[https://github.com/dropbox/json11][Json11]].
-
-When we implement this we should first provide support for JSON with
-roundtripping tests and only then change io to be implemented in terms
-of JSON. These should be two totally separate stories.
-
-For the previous attempt to integrate RapidJson see this commit:
-
-b2cce41 * third party: remove includes and rapid json
-
-Merged stories:
-
-*Add support for JSON serialisation*
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
+Once we support JSON fully we should go through all of the uses of
+JSON we have at present and replace them with the JSON serialised
+version of the types.
 
 *** Identifier parser has hard-coded built-ins                        :story:
 

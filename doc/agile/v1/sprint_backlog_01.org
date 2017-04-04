@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 00
+#+title: Sprint Backlog 01
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) }
@@ -13,20 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-04-03 Mon 11:07]
+#+CAPTION: Clock summary at [2017-04-04 Tue 20:43]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:44* |      |      | 100.0 |
+| *Total time*                                                                | *1:35* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:44   |      |      | 100.0 |
-| Active                                                                      |        | 0:44 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:08 |  18.2 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:36 |  81.8 |
+| Stories                                                                     | 1:35   |      |      | 100.0 |
+| Active                                                                      |        | 1:35 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:59 |  62.1 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:36 |  37.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-04-04 Tue 18:35]--[2017-04-04 Tue 19:26] =>  0:51
     CLOCK: [2017-04-03 Mon 10:21]--[2017-04-03 Mon 10:29] =>  0:08
 
 Updates to sprint and product backlog.
@@ -83,6 +84,139 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 - [[https://twitter.com/MarcoCraveiro/status/843812829148954625][Tweet]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6249579000297975808/][LinkedIn]]
+
+*** COMPLETED Replace the database model with the northwind model     :story:
+    CLOSED: [2017-04-04 Tue 18:53]
+
+*Rationale*: we more or less completed this. We probably need more
+tests, but its sufficient for now.
+
+As part of the [[https://github.com/DomainDrivenConsulting/zango][zango]] project we are creating a model that exercises
+Dogen and ODB. It is largely based on the database model, minus the
+basic types we had added a while ago. We should just drop the database
+model and adopt the northwind model from zango.
+
+*** Add support for proper JSON serialisation in C++                  :story:
+
+We need to add support for JSON in C++. It will eventually have to
+roundtrip to JSON in C# but that will be handled as two separate
+stories.
+
+Libraries:
+
+- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+- One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should provide support for JSON with
+roundtripping tests.
+
+We will not replace the current IO implementation; it should continue
+to exist as is, requiring no external dependencies.
+
+We should consider supporting multiple JSON libraries: instead of
+making the mistake we did with serialisation where we bound the name
+=serialization= with boost serialisation, we should call it by its
+real name, e.g. =json_spirit= etc. Then when a user creates a
+stereotype for a profile such as =Serializable= it can choose which
+serialisation codecs to enable for which language. This means that the
+same stereotypes can have different meanings in different
+architectures, which is the desired behaviour.
+
+Merged stories:
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+*Add support for JSON serialisation*
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*** Add column name support to ORM                                    :story:
+
+At present we need to fall back to ODB pragmas in order to rename a
+column. We should have =yarn.orm.column_name=.
+
+*** Rename ODB parameters                                             :story:
+
+At present we use the following form:
+
+: #DOGEN ODB_PRAGMA=no_id
+
+We need to use the new naming style =cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
+
+Finally we should no longer attempt to derive the ODB pragma
+context. We should just add it verbatim.
+
+*** Add prefetch support to ODB                                       :story:
+
+As per Boris email:
+
+#+begin_quote
+Hm, I am not sure the bulk approach (with a compiler-time pragma) is
+right in this case. There we don't really have a choice since we need
+to know the "batch buffer" size.
+
+But here it is all runtime. Plus, you may want to have different
+prefetch for different queries of the same object. In fact, you
+can already customize it for queries (but not for object loads)
+by using prepared queries (Section 4.5 in the manual):
+
+1. Create prepared query.
+
+2. Get its statement (statement()).
+
+3. Cast it to odb::oracle::select_statement.
+
+4. Call handle() on the result to get OCIStmt*.
+
+5. Set custom OCI_ATTR_PREFETCH_ROWS.
+
+6. Execute the query.
+
+The problems with this approach are: (1) it is tedious and (2) it
+doesn't work for non-query SELECT's (e.g., database::load()). So
+perhaps the way to do it is:
+
+1. Provide prefetch() functions on oracle::database() and
+   oracle::connection() that can be used to modify database-wide
+   and connection-wide prefetch values. Also set it to some
+   reasonable default (say 512?)
+
+2. Provide oracle::select_statement::prefetch() to make the
+   prepared query approach less tedious.
+#+end_quote
+
+*** Add ODB to the build machine                                      :story:
+
+At present we are only compiling and running the ODB tests
+locally. Now that ODB is becoming a core dependency, we need to make
+sure we are running these tests on the build machines - Windows and
+Linux at least.
+
+However, at present we are already running out of time for the main
+build. If we simply add ODB to Linux we will not complete the build in
+the allocated slot. One way to achieve this is to have a build that
+does ODB only.
+
+We should also add oracle OCI to the dogen dependencies package so
+that we test oracle support as well as postgres. However, to run the
+tests we need some way to configure postgres to allow connections. It
+is also possible to install oracle by copying the DEB to dropbox and
+creating a simple installation script that sets up the users etc. We
+could make similar scripts for postgres and oracle. However, we need
+to convert the oracle schema into postgres.
 
 *** Allow users to override string prefixes in test data              :story:
 
@@ -311,7 +445,16 @@ additional dependencies.
 However, it should also be possible to use say =memcached= as the
 cache rather than redis. We need to create a layer of indirection
 between the generic caching (meta-model concept) and the actual
-caching (platform, implementation layer).
+caching (platform, implementation layer). In fact we can leave this
+for later and for now only worry about redis. =cacheable= will then be
+built on top of the existing facets.
+
+What we do need though is the ability to configure the meta-model to
+link the serialisation type to the cache type. Say for example we
+support BSON and JSON and boost serialisation. We may want the cache
+facet to support one or more or all of these. We can think of these as
+aspects that are enabled by the user at the model level (but possibly
+overridable at the element level).
 
 *** Primitives are not comparable                                     :story:
 
@@ -328,26 +471,9 @@ primitives to make this possible:
 With this we would generate the appropriate operators by delegating to
 the underlying type.
 
-*** Add column name support to ORM                                    :story:
-
-At present we need to fall back to ODB pragmas in order to rename a
-column. We should have =yarn.orm.column_name=.
-
-*** Check for incompatibility between input language and enabled kernels :story:
-
-At present it is possible to have a model with input language of say
-C++ but with the C# kernel enabled. We should throw if the input
-language is incompatible with the enabled kernels.
-
-Sadly this is not trivial. This is because quilt only sees the mapped
-models; thus as far as knit is concerned, we ask for the input
-language (e.g. c++) and there is an enabled kernel for it. We don't
-look at it from the enabled kernel's perspective (e.g. "C# is enabled,
-why is there no input language for it?"). We could have a method in
-quilt that returns all enabled kernels; we could then look at all
-models we are going to build and if there is a mismatch we can
-throw. But extracting the =configuration_factory= out of quilt
-workflow is not going to be easy without screwing up the API.
+We probably need some way of knowing if the underlying type supports
+comparisons. A meta-data flag used to annotate proxy models would be
+sufficient.
 
 *** Build on tags for Windows                                         :story:
 
@@ -358,25 +484,6 @@ tag separately. We need to setup appveyor correctly.
 Links:
 
 - [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
-
-*** Add a "flat directory" mode                                       :story:
-
-It would be nice to have a mode in which all files get placed in a
-single-directory: no src, include, etc – just one big folder with all
-files.
-
-Actually we can already achieve this:
-
-- set =quilt.cpp.disable_facet_directories= to true
-- set =quilt.cpp.include_directory_name= to empty
-- set =quilt.cpp.source_directory_name= to empty
-
-It is however a bit painful. It would be nice to have a shorthand for
-this, which could be the "flat directory" mode. It is also compatible
-with split project mode (we just have flat directories in two
-different top-level directories), which is nice.
-
-We should check that =enable_unique_file_names= is set to true.
 
 *** Handling of visual studio projects and solutions is incorrect     :story:
 
@@ -455,31 +562,6 @@ includes. There are some differences though:
   "apply archetype postfix" supplied as an argument. Since we have the
   Visual Studio element we have visibility of all enabled versions.
 
-*** Setting include and source directory to empty                     :story:
-
-At present it does not seem possible to set either the include or
-source directories to empty. This probably just requires annotations
-to understand empty values, e.g.
-
-: a.b.c=
-
-*** Drop the "c++-" prefix in meta-data for standard                  :story:
-
-At present we do:
-
-: quilt.cpp.standard=c++-98
-
-The "c++-" seems a bit redundant.
-
-*** Rename main Dogen package in Debian                               :story:
-
-At present we seem to have called our package =dogen-applications=:
-
-: $ apt-cache search dogen-applications
-: dogen-applications - The Domain Generator - Generates source code for domain driven development.
-
-We should try to call it just =dogen=.
-
 *** Split out the file extension from the formatter                   :story:
 
 At present we have handled file extensions in one of two ways:
@@ -508,106 +590,6 @@ extension kind, archetype etc. This would replace the proliferation of
 
 We also have the concept of inclusion paths. We should generalise this
 to just "relative paths" and have a "add project directory?" flag.
-
-*** Name all project paths according to a scheme                      :story:
-
-The locator API looks really confusing due to the various kinds of
-paths. We need to catalogue them all and name them properly.
-
-- output directory: directory into which knitter will write all files,
-  unless "c++ headers output directory" is set, in which case it will
-  write all files except for the headers.
-- c++ headers output directory: directory in which knitter will write
-  the headers. Only applicable to c++.
-- include directory: aka inclusion directory; directory to place in
-  the include path.
-
-*** Not setting output language results in weird errors               :story:
-
-When setting the input language to language agnostic and not setting
-the output languages, we get the following error:
-
-: /dogen/projects/yarn/src/types/legacy_name_tree_parser.cpp(123): Throw in function std::__cxx11::string {anonymous}::grammar<Iterator>::scope_operator_for_language(dogen::yarn::languages) [with Iterator = __gnu_cxx::__normal_iterator<const char*, std::__cxx11::basic_string<char> >; std::__cxx11::string = std::__cxx11::basic_string<char>]
-: Dynamic exception type: boost::exception_detail::clone_impl<dogen::yarn::parsing_error>
-: std::exception::what: Invalid or unsupported language: { "__type__": "languages", "value": "language_agnostic" }
-: [tag_workflow*] = Code generation failure.
-: [owner*] = <dogen><test_models><all_path_and_directory_settings><package_0><package_0_1><class_2>
-: unknown location(0): fatal error: in "workflow_tests/all_path_and_directory_settings_generates_expected_code_dia": std::runtime_error: Error during test
-: /home/marco/Development/DomainDrivenConsulting/dogen/projects/knit/tests/workflow_tests.cpp(213): last checkpoint
-
-*** Using underscores with C# results in invalid code                 :story:
-
-When building in LAM, if one uses underscore notation we create code
-like so:
-
-:        public int prop_0 { get; set; }
-:        public class_0(int prop_0)
-:        {
-:            prop_0 = prop_0;
-:        }
-
-C# thinks we're assigning the parameter to itself rather than making
-use of the property.
-
-*** Support containers correctly in annotations                       :story:
-
-At present we are allowing users to enter the same key multiple times
-to represent a container:
-
-: #DOGEN yarn.output_language=cpp
-: #DOGEN yarn.output_language=csharp
-
-
-This was an acceptable pattern from a Dia perspective, because we had
-control of the KVP semantics. However, when we copied the pattern
-across to the JSON representation things did not work out so
-well. This is because the following JSON:
-
-:     "yarn.output_language": "csharp",
-:     "yarn.output_language": "cpp",
-
-Is interpreted by a lot of JSON parsers as a duplicate, and results on
-only a single KVP making it. We could try to solve a lot of problems
-in one go and standardise all of the meta-data on JSON:
-
-- use start and end markers to enclose the JSON when in dia. Story:
-  [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#consider-adding-a-start-and-end-dogen-variable-block-in-dia][Consider adding a start and end dogen variable block in dia]]
-- this would also solve the problem with pairs (or at least part of
-  it). Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-a-new-annotation-type-of-pair][Add a new annotation type of “pair”]]
-- we could allow users to keep the JSON externally. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#add-support-for-one-off-profiles][Add support
-  for “one off” profiles]]
-- the JSON would also work nicely with the concept of a dogen
-  project. Story: [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_99.org#introduce-dogen-projects][Introduce dogen projects]]
-
-However, before we embark on this story we need to perform a lot of
-analysis on this.
-
-Notes:
-
-- [[http://json-schema.org/][JSON Schema]]
-- [[https://github.com/aspnet/Home/wiki/Project.json-file][Project.Json]]
-- yarn.dia.comment is no longer necessary, just look for the
-  markers.
-- we should only allow arrays of simple types.
-- the fragment used inside Dia should be identical to the file
-  supplied as argument for the one-off profile and it should also
-  identical to a fragment inside a project. Do we need to support both
-  projects and one-off profiles?
-
-Sample:
-
-#+begin_src
-  "annotation": {
-    "yarn.dia.comment": true,
-    "yarn.dia.external_modules": "dogen::test_models",
-    "annotations.profile": "dogen",
-    "yarn.input_language": "language_agnostic",
-    "yarn.output_language": [ "csharp", "cpp" ]
-#+end_src
-
-This error has been picked up by codacy too:
-
-- [[https://www.codacy.com/app/marco-craveiro/dogen/commit?cid%3D79696432&bid%3D3493157&utm_campaign%3Dnew_commit&utm_medium%3DEmail&utm_source%3DInternal][Commit 91886c6]]&
 
 *** Add support for exports on windows                                :story:
 
@@ -678,182 +660,24 @@ We should have a quilt setting for pre-compilation. We should also
 check that visual studio support is enabled in order to generate
 =stdafx=.
 
-*** Handcrafted support for fabric types                              :story:
+*** Code-generate a "one-shot" serialisation API                      :story:
 
-At present we can either disable fabric types or enable them
-(CMakeLists, etc). However, there is a third common use case: to
-handcraft them. To do this we normally disable them and then add the
-file to the ignore list:
+For the dia model we manually generated a class called
+=diagram_serialization_helper=. It provided a simple API to read/write
+the dia model:
 
-:  --ignore-files-matching-regex .*/CMakeLists.txt)
+: static void to_xml(std::ostream& s, const diagram& d);
+: static diagram from_xml(std::istream& s);
 
-One could conceive of some meta-data support that would make this
-process a tad easier and more generic:
+It would be nice to have this code-generated and also to cover the
+other two archives (text, binary).
 
-: quilt.cpp.cmakelists.stereotypes=handcrafted
+Users should be able to mark types with some property so that we know
+we need to generate these wrappers.
 
-Then hopefully the existing pipeline would take over and we'd generate
-the files for the first time but then let the user overwrite it. This
-would also be applicable to all fabric types (registrar, etc) but we'd
-have to manually read each stereotype on each factory.
+Another common use case is to serialise from and to string. It would
+be nice to have helpers for strings too.
 
-*** Clean up annotation scope types                                   :story:
-
-As part of the attribute rename (which used to be called property) we
-should have renamed the annotation scope as well to attribute.
-
-In addition, we have a scope type of "entity" but the yarn meta-model
-type is really "element".
-
-We should also check if "not applicable" scope is in use, and if not
-delete it.
-
-*** Add a new annotation type of "pair"                               :story:
-
-It would be nice to be able to declare a annotation type with a value
-type of "pair" or "key value pair" and have the annotations
-automatically perform the splitting. The separator should not be
-equals, since we already use that for annotations kvps, but it could
-be comma, pipe, etc. The API would be augmented to return a
-=std::pair= with key and value.
-
-One slight snag: the value could be of any type:
-
-- boolean
-- string
-- enumeration (when we support these)
-- even text collection
-
-We can start by just supporting strings, but probably worthwhile
-having a think on how to specify the type.
-
-*** Create a base options class across all tools                      :story:
-
-At present we are copying and pasting a bit of code related to general
-options across all the command line tools (knitter, darter, stitcher,
-tailor). We could create a base class that has the common options and
-then have a factory that populates the boost program options
-associated with that class.
-
-Ideally we should also have a log initialisation class that uses those
-common options.
-
-*** Introduce dogen projects                                          :story:
-
-At present we are manually configuring each dogen target, adding each
-separately to the build system. Perhaps a better approach is to have a
-dogen project file where one can configure all of the targets in one
-go. We don’t necessarily have to call dogen directly – perhaps another
-command line tool is responsible for invoking dogen? The problem here
-is that we’d end up with all dogen models in memory.
-
-At any rate, the project file would contain all models for a given
-product. We could possibly run with “all” or “specific” whereby the
-user would supply one or more projects to code generate. For all
-properties that are common, we’d defined them only once somehow
-(common regexes, log level, etc).
-
-*** Add support for "one off" profiles                                :story:
-
-At present one can define top-level profiles. These are useful, but in
-practice we ended up still defining a lot of things in each model. We
-need a way to associate a profile with a model by supplying it on the
-command line. That way users can create profiles and store them next
-to the model rather than having to create a data directory, etc etc.
-
-*** Add prefetch support to ODB                                       :story:
-
-As per Boris email:
-
-#+begin_quote
-Hm, I am not sure the bulk approach (with a compiler-time pragma) is
-right in this case. There we don't really have a choice since we need
-to know the "batch buffer" size.
-
-But here it is all runtime. Plus, you may want to have different
-prefetch for different queries of the same object. In fact, you
-can already customize it for queries (but not for object loads)
-by using prepared queries (Section 4.5 in the manual):
-
-1. Create prepared query.
-
-2. Get its statement (statement()).
-
-3. Cast it to odb::oracle::select_statement.
-
-4. Call handle() on the result to get OCIStmt*.
-
-5. Set custom OCI_ATTR_PREFETCH_ROWS.
-
-6. Execute the query.
-
-The problems with this approach are: (1) it is tedious and (2) it
-doesn't work for non-query SELECT's (e.g., database::load()). So
-perhaps the way to do it is:
-
-1. Provide prefetch() functions on oracle::database() and
-   oracle::connection() that can be used to modify database-wide
-   and connection-wide prefetch values. Also set it to some
-   reasonable default (say 512?)
-
-2. Provide oracle::select_statement::prefetch() to make the
-   prepared query approach less tedious.
-#+end_quote
-
-*** Replace the database model with the northwind model               :story:
-
-As part of the [[https://github.com/DomainDrivenConsulting/zango][zango]] project we are creating a model that exercises
-Dogen and ODB. It is largely based on the database model, minus the
-basic types we had added a while ago. We should just drop the database
-model and adopt the northwind model from zango.
-
-*** Add ODB to the build machine                                      :story:
-
-At present we are only compiling and running the ODB tests
-locally. Now that ODB is becoming a core dependency, we need to make
-sure we are running these tests on the build machines - Windows and
-Linux at least.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
-Finally we should no longer attempt to derive the ODB pragma
-context. We should just add it verbatim.
-
-*** Map upsilon primitives to intrinsics                              :story:
-
-Upsilon allows users to create "strong typedefs" around primitve
-types. We need to unpack these into their intrinsic counterparts and
-them map the intrinsics to native types.
-
-Slight mistake: we mapped the primitive types themselves but in
-reality what needs to be mapped are the fields making references to
-the primitive types. We should just filter out all primitives.
-
-Additional wrinkle: what the end users want is to unpack "real
-primitives" into intrinsics, but "other" primitives should be mapped
-to objects. This can be achieved by hard-coding =Plaform= primitives
-into the mapping layer. However, some non-platform primitives may also
-be candidates too. We need to create a list of these to see how
-widespread the problem is.
-
-Another alternative is to apply hard-coded regexes:
-
-- if the name matches any of the intrinsic names
-
-Finally, the last option may be to have yet another mapping data file
-format that lists the primitives to unbox.
-
-*** Immutable types cannot be owned by mutable types                  :story:
-
-When we try to create a mutable class that has a property of an
-immutable type, the code fails to compile due to the swap
-method. This is because immutable types do not provide swap.
+These APIs can then be reused by the caching layer.
 
 ** Deprecated
