@@ -38,7 +38,7 @@ set_target_properties(${name} PROPERTIES OUTPUT_NAME ${binary_name})
 set_target_properties(${name}
     PROPERTIES VERSION ${DOGEN_VERSION} SOVERSION ${DOGEN_MAJOR_VERSION})
 
-if (DOGEN_STITCHER_COMMAND)
+if (DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(stitch_${name}
         COMMENT "Stitching Quilt C++ model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
