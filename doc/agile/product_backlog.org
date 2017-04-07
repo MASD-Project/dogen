@@ -372,13 +372,14 @@ Notes:
 We need to work through the list of issues with the Zeta model and get
 it to a compilable state.
 
-*** Add support for Language Agnostic Models (LAM)                    :story:
+*** Finish adding support for Language Agnostic Models (LAM)          :story:
 
 Tasks:
 
-- create the basic LAM types and add mapping for both C# and C++.
-- create a LAM test model which tests that the mapping for all types
-  generates compilable code.
+- add the missing types to LAM.
+- add optional to the list of types. This is actually quite
+  complicated because for some types in C# you want to map it to
+  nullable, to others just a pointer will do.
 
 LAM type map:
 
@@ -525,19 +526,6 @@ would just generate camel case for both C++ and C#.
 In keeping with the rest of Dogen we should also use a sewing term for
 LAM. Wool is an interesting one.
 
-*** Windows package has element mappings                              :story:
-
-For some reason even after renaming the mappings file it is still on
-windows. This could also be a bug of the installer; after a uninstall
-and reinstall the problem went away. Double check with a clean
-install.
-
-*** Comments in C# appear to be the attribute name                    :story:
-
-It seems we are copying across the attribute name rather than a
-comment. This could also be a problem with the input. Check the Zeta
-model.
-
 *** Add support for generic container types to C#                     :story:
 
 We should add all major container types and tests for them.
@@ -569,6 +557,10 @@ meta-data in the model and uses the requested element map. For this we
 need to name the element maps and we also need to create a "mapping
 set". These can be indexed by name in the mapping repository. Mapper
 chooses the mapping set to use.
+
+In keeping with the idea that profiles are model-level concepts,
+mappings should be too. We should be able to import mappings in a UML
+diagram and override them or define new ones too.
 
 *** Allow users to override mapping sets at the element level         :story:
 
@@ -609,6 +601,9 @@ or:
 : --meta-data a=b
 
 This is the case with Upsilon.
+
+These are in effect model-module level tagged values. We should be
+able to supply them in a file or as command-line parameters.
 
 *** Do not generate upsilon proxy models                              :story:
 
@@ -653,7 +648,11 @@ of the types being ignored.
 
 Isn't this just using "enable=false" for all formatters?
 
-*** Add auxiliary function properties to c#                           :story:
+In a world where we can define bundles of meta-types, and import them
+from system models, we could possibly just define a bundle called
+=Ignored= with all formatters set to false.
+
+*** Add auxiliary function properties to C#                           :story:
 
 We need to associate a function with an attribute and a
 formatter. This could be the helper or the assistant (or nothing).
@@ -681,7 +680,7 @@ Actually we should also create "attribute properties" as a top-level
 container so that in the future we can latch on other attribute level
 properties.
 
-*** Add internal object dumper resolution                             :story:
+*** Add internal object dumper resolution in C#                       :story:
 
 We should try to resolve an object to a local dumper, if one exists;
 for all model types and primitives. Add a registrar for local dumpers.
@@ -725,6 +724,13 @@ are part of the meta-data. However, the =yarn.json= model breaks when
 we remove the reference to annotation even though it does not use this
 model directly and =yarn= is referencing it correctly.
 
+The reason why is that we load up references to all intermediate
+models, but then on merge we only take target references. What we
+really need to do is to combine the reference containers on merge. For
+this we need to create a method that loops through the map and inserts
+all keys which have not yet been inserted. Something like "merge
+references".
+
 *** Add support for boxed types                                       :story:
 
 At present we support built-in types such as =int= but not
@@ -743,11 +749,16 @@ Actually in order to get handcrafted types to work we need support for
 enablement. This is a somewhat tricky feature so we should leave it
 for after all the main ones are done.
 
+In addition, we should also wait for the model level stereotypes. We
+should have a system model that enables/disables formatters, sets the
+overwrite flags, etc.
+
 *** Add support for arrays                                            :story:
 
-At present the yarn parser does not support array notation:
+At present the legacy yarn parser does not support array notation:
 =string[]=. We need to look into how arrays would work for C++ and
-implement it in a compatible way.
+implement it in a compatible way. This has been implemented in the new
+parser but we haven't yet moved it into production.
 
 Links:
 
@@ -819,9 +830,30 @@ be able to supply an output directory as meta-data.
 
 A proxy model may require obtaining a nuget package. Users should be
 able to define a proxy model as requiring a nuget package and then
-Dogen should generate packages.config and add all such models to it.
+Dogen should generate =packages.config= and add all such models to it.
 
 : +  <package id="NUnit" version="2.6.4" targetFramework="net45" />
+
+This can be done by defining meta-data at the model level that allows
+it to specify the required packages; then, when importing models, we
+need to copy across that meta-data and create the set of all dependent
+packages and use that to create the =package.config= file.
+
+Meta-data:
+
+- =quilt.csharp.package_name=
+- =quilt.csharp.package_version=
+- =quilt.csharp.package_target_framework=
+
+Each proxy model can define only one set of these. When merging, we
+need to read the meta-data of each referenced model and create a set
+for all of them.
+
+The only slight problem is for hand-crafted types. We may need to add
+more entries due to hand-crafting, so that a user model may end up
+with lots of these. It needs to be a collection.
+
+Interestingly, a similar approach could be done for C++ with say conan.
 
 *** Augment element ID with meta-model type                           :story:
 
