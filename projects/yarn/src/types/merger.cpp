@@ -136,8 +136,10 @@ void merger::merge_model(const intermediate_model& m) {
                              << " concepts: " << m.concepts().size()
                              << " builtins: " << m.builtins().size()
                              << " enumerations: " << m.enumerations().size()
-                             << " primitive: " << m.primitives().size()
-                             << " objects: " << m.objects().size();
+                             << " primitives: " << m.primitives().size()
+                             << " objects: " << m.objects().size()
+                             << " exceptions: " << m.exceptions().size()
+                             << " visitors: " << m.visitors().size();
 
     copy(m.modules(), merged_model_.modules());
     copy(m.concepts(), merged_model_.concepts());
