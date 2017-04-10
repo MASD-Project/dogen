@@ -7536,6 +7536,11 @@ Note:
   meta-model. Problems start when users try to make use of UML
   meta-model types for their own templates though.
 
+Links:
+
+- [[https://github.com/catedrasaes-umu/emf4cpp][EMF4CPP]]
+- [[https://github.com/MDE4CPP][MDE4CPP]]
+
 *Previous Understanding*
 
 It would be nice to be able to read an eCore model and generate code
