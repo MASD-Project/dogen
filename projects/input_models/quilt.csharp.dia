@@ -68,7 +68,7 @@
         <dia:point val="-17,-116"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-116.05;4.74,-105.45"/>
+        <dia:rectangle val="-17.05,-116.05;4.74,-104.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="10.500000000000002"/>
+        <dia:real val="11.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -105,8 +105,6 @@
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
-#DOGEN quilt.cpp.visual_studio.project.enabled=false
-#DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>

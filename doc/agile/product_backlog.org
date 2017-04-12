@@ -6039,7 +6039,7 @@ function of "from string" and vice-versa.
 
 #+begin_quote
 *Story*: As a dogen user, I want to output user defined strings from
-enumerations so that I can adapt it to my requirements..
+enumerations so that I can adapt it to my requirements.
 #+end_quote
 
 It should be possible to pass in a string value as a dynamic extension
