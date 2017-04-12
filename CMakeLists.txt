@@ -108,6 +108,15 @@ else()
     message(STATUS "Oracle not found.")
 endif()
 
+# rapidjson
+find_package(RapidJSON)
+if(RAPIDJSON_FOUND)
+    message(STATUS "Found RapidJSON...")
+    include_directories(SYSTEM ${RAPIDJSON_INCLUDEDIR})
+else()
+    message(STATUS "RapidJson not found.")
+endif()
+
 # packaging type
 if(WITH_MINIMAL_PACKAGING)
     message(STATUS "Packaging just the main application")
