@@ -42,7 +42,7 @@ if (DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(stitch_${name}
         COMMENT "Stitching Quilt C++ model" VERBATIM
         WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_STITCHER_COMMAND}
+        COMMAND ${DOGEN_STITCHER_EXECUTABLE}
         --target ${CMAKE_CURRENT_SOURCE_DIR}/
         --log-level ${DOGEN_LOG_LEVEL})
     add_dependencies(stitch_all stitch_${name})
