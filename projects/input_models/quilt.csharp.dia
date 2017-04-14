@@ -65,22 +65,22 @@
   <dia:layer name="Background" visible="true" active="true">
     <dia:object type="UML - Note" version="0" id="O0">
       <dia:attribute name="obj_pos">
-        <dia:point val="-17,-116"/>
+        <dia:point val="-17,-118"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.05,-116.05;4.74,-104.65"/>
+        <dia:rectangle val="-17.05,-118.05;4.74,-105.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-17,-116"/>
+        <dia:point val="-17,-118"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="11.300000000000001"/>
+        <dia:real val="12.9"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -105,6 +105,8 @@
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
+#DOGEN quilt.cpp.visual_studio.project.enabled=false
+#DOGEN quilt.cpp.visual_studio.solution.enabled=false
 #DOGEN quilt.csharp.enabled=false
 #DOGEN annotations.profile=dogen.disable_common_facets#</dia:string>
           </dia:attribute>
@@ -115,7 +117,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-16.65,-114.755"/>
+            <dia:point val="-16.65,-116.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
