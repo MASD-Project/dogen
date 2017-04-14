@@ -3987,9 +3987,6 @@ properties against each facet in the meta-data.
 
 *** Code generation of dynamic instances                              :story:
 
-Note: this story probably should wait until we rename settings to
-annotations.
-
 We seem to have a pretty well established usage pattern for dynamic,
 so it may be a candidate for code generation. All we need is:
 
@@ -7759,6 +7756,22 @@ would be great if we could do it using just JSON.
 Actually even better would be if we could have a text file in docopt
 format and parse it and then use it to generate the code described
 above.
+
+Actually maybe we are just making this too complicated. We probably
+just need some very trivial meta-data extensions that express the
+required concept:
+
+- create a yarn element to model this new meta-class. We basically
+  need to model the structure of program options with option groups
+  and options.
+- define a stereotype for the new yarn elements, say
+  =CommandLineOptionGroup=.
+- for types facet we simply generate the regular c++ code. But in
+  addition, we also generate a new facet that: a) injects the
+  propertties into boost program options b) instantiates the c++
+  objects from boost program options.
+- this means that instead of creating a new meta-type, we need to
+  augment =yarn::object= with command line options stuff.
 
 *** Easy addition of facets and formatters                             :epic:
 
