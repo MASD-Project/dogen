@@ -25,9 +25,10 @@ as much as possible: the user creates domain models in one of the
 supported front-end formats and respecting a set of predefined
 restrictions; Dogen then uses this input to generate a source code
 representation of the model. At present the main front-end
-is [Dia](https://en.wikipedia.org/wiki/Dia_(software)), but we also
-support JSON
-([Dia test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input),
+is [Dia](https://en.wikipedia.org/wiki/Dia_(software))
+([Dia test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input)),
+but we also support
+JSON
 [JSON test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input)). Depending
 on use cases and user demand, other frontends may follow. The
 generated code contains most of the functionality required from a
