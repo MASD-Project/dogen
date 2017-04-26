@@ -78,6 +78,16 @@
   :group 'polymodes
   :type 'object)
 
+(defcustom pm-weaver/stitcher
+  (pm-shell-weaver "stitcher"
+                   :from-to
+                   '(("stitch" "\\.\\(stitch\\|cpp\\)\\'" "stitch" "C++" "dogen.stitcher --target %i --log-directory /tmp")))
+  "Dogen stitcher weaver."
+  :group 'polymode-weave
+  :type 'object)
+
+(polymode-register-weaver pm-weaver/stitcher nil pm-poly/stitch)
+
 (define-polymode poly-stitch-mode pm-poly/stitch)
 
 ;; (add-to-list 'auto-mode-alist '("\\.stitch" . poly-stitch-mode))
