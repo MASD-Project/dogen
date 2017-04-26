@@ -13,17 +13,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-04-14 Fri 13:06]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:24* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:24   |      |      | 100.0 |
-| Active                                                                      |        | 8:24 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 5:17 |  62.9 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:49 |   9.7 |
-| STARTED Add support for proper JSON serialisation in C++                    |        |      | 2:18 |  27.4 |
+#+CAPTION: Clock summary at [2017-04-26 Wed 21:53]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *12:09* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 12:09   |       |      | 100.0 |
+| Active                                                                      |         | 12:09 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 5:17 |  43.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:49 |   6.7 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       | 2:18 |  18.9 |
+| STARTED Create a simple Emacs mode for stitch                               |         |       | 3:45 |  30.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -202,6 +203,53 @@ If we do implement customisable JSON serialisation, we should still
 use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
+
+*** STARTED Create a simple Emacs mode for stitch                     :story:
+    CLOCK: [2017-04-26 Wed 18:05]--[2017-04-26 Wed 21:50] =>  3:45
+
+Create a really simple emacs mode that just has different visual
+representations for the stitch code and the template itself.
+
+Links:
+
+- [[https://github.com/vspinu/polymode/issues/133][Request for a review/comments on a new mode derived from polymode]]
+
+Merged stories:
+
+*Try creating a mode with generic mode*
+
+Tried with generic mode:
+
+ #+begin_src emacs-lisp
+(require 'generic-x) ;; we need this
+
+(define-generic-mode 'stitch-mode
+  () ;; comments not supported
+  '("licence_name" "copyright_notice" "modeline_group_name"
+    "stream_variable_name" "inclusion_dependency"
+    "containing_namespaces") ;; keywords
+  '(("<#@" "<#+" "<#=" "#>" . 'font-lock-operator)) ;; operator
+  '("\\.stitch$") ;; extension
+  nil
+  "Major mode for editing Dogen's Stitch template files."
+  )
+
+;;; stitch-mode.el ends here
+#+end_src
+
+*Consider creating an Emacs mode for stitch*
+
+It would be nice to have syntax highlighting for stitch templates. We
+have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
+which is rather unusable.
+
+See also [[https://github.com/fxbois/web-mode][web-mode]].
+
+*Investigate adding polymode support for stitch templates*
+
+We need a way to visualise stitch templates that is a bit more
+readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
+
 
 *** Make creating new facets easier                                   :story:
 

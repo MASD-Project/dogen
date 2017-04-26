@@ -6984,47 +6984,6 @@ we are not checking to see if it exists:
 We need to detect it and only add this targets if diff has been
 found. We probably should look for a =FindDiff.cmake= script.
 
-*** Create a simple Emacs mode for stitch                             :story:
-
-Create a really simple emacs mode that just has different visual
-representations for the stitch code and the template itself.
-
-Merged stories:
-
-*Try creating a mode with generic mode*
-
-Tried with generic mode:
-
- #+begin_src emacs-lisp
-(require 'generic-x) ;; we need this
-
-(define-generic-mode 'stitch-mode
-  () ;; comments not supported
-  '("licence_name" "copyright_notice" "modeline_group_name"
-    "stream_variable_name" "inclusion_dependency"
-    "containing_namespaces") ;; keywords
-  '(("<#@" "<#+" "<#=" "#>" . 'font-lock-operator)) ;; operator
-  '("\\.stitch$") ;; extension
-  nil
-  "Major mode for editing Dogen's Stitch template files."
-  )
-
-;;; stitch-mode.el ends here
-#+end_src
-
-*Consider creating an Emacs mode for stitch*
-
-It would be nice to have syntax highlighting for stitch templates. We
-have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
-which is rather unusable.
-
-See also [[https://github.com/fxbois/web-mode][web-mode]].
-
-*Investigate adding polymode support for stitch templates*
-
-We need a way to visualise stitch templates that is a bit more
-readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
-
 *** Installable package names should follow a well-known convention   :story:
 
 We need to make sure our package names are consistent with the
@@ -7337,6 +7296,56 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
+
+*** Allow generating executables from dogen                           :story:
+
+At present dogen always assumes we want to generate a static
+library. It would be nice to be able to generate an executable too,
+with all of the cmake infrastructure generated.
+
+*** Consider generating program options code                          :story:
+
+If there was a syntax to describe boost program options, we should be
+able to generate most of the code for it:
+
+- the code that initialises the options;
+- the domain objects that will store the options;
+- the copying of values from program options objects into domain
+  objects.
+
+This would mean that creating a command line tool would be a matter of
+just supplying an options file. We could then have a stereotype for
+this (name to be yet identified). Marking a type with this stereotype
+and supplying the appropriate meta-data so one could locate the
+options file would cause dogen to emit the program options binding
+code.
+
+A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
+the same syntax. We just need to have a well defined domain object for
+these. The aim would be to replace config.
+
+For models such as these, the dia representation is just overhead. It
+would be great if we could do it using just JSON.
+
+Actually even better would be if we could have a text file in docopt
+format and parse it and then use it to generate the code described
+above.
+
+Actually maybe we are just making this too complicated. We probably
+just need some very trivial meta-data extensions that express the
+required concept:
+
+- create a yarn element to model this new meta-class. We basically
+  need to model the structure of program options with option groups
+  and options.
+- define a stereotype for the new yarn elements, say
+  =CommandLineOptionGroup=.
+- for types facet we simply generate the regular c++ code. But in
+  addition, we also generate a new facet that: a) injects the
+  propertties into boost program options b) instantiates the c++
+  objects from boost program options.
+- this means that instead of creating a new meta-type, we need to
+  augment =yarn::object= with command line options stuff.
 
 *** Consider creating a TextUML frontend                              :story:
 
@@ -7734,56 +7743,6 @@ to, optionally, add the tests directory with skeleton code and a
 sample test. If the directory already exists (or if the option is off)
 we do nothing.
 
-*** Allow generating executables from dogen                           :story:
-
-At present dogen always assumes we want to generate a static
-library. It would be nice to be able to generate an executable too,
-with all of the cmake infrastructure generated.
-
-*** Consider generating program options code                          :story:
-
-If there was a syntax to describe boost program options, we should be
-able to generate most of the code for it:
-
-- the code that initialises the options;
-- the domain objects that will store the options;
-- the copying of values from program options objects into domain
-  objects.
-
-This would mean that creating a command line tool would be a matter of
-just supplying an options file. We could then have a stereotype for
-this (name to be yet identified). Marking a type with this stereotype
-and supplying the appropriate meta-data so one could locate the
-options file would cause dogen to emit the program options binding
-code.
-
-A similar concept seems to exist for python: [[http://docopt.org/][docopt]]. We should keep
-the same syntax. We just need to have a well defined domain object for
-these. The aim would be to replace config.
-
-For models such as these, the dia representation is just overhead. It
-would be great if we could do it using just JSON.
-
-Actually even better would be if we could have a text file in docopt
-format and parse it and then use it to generate the code described
-above.
-
-Actually maybe we are just making this too complicated. We probably
-just need some very trivial meta-data extensions that express the
-required concept:
-
-- create a yarn element to model this new meta-class. We basically
-  need to model the structure of program options with option groups
-  and options.
-- define a stereotype for the new yarn elements, say
-  =CommandLineOptionGroup=.
-- for types facet we simply generate the regular c++ code. But in
-  addition, we also generate a new facet that: a) injects the
-  propertties into boost program options b) instantiates the c++
-  objects from boost program options.
-- this means that instead of creating a new meta-type, we need to
-  augment =yarn::object= with command line options stuff.
-
 *** Easy addition of facets and formatters                             :epic:
 
 The ideal state of the world is one where:
@@ -8037,7 +7996,7 @@ In MDSD, we have the notion of "location strngs":
 #+begin_quote
 A third and very useful technique is the application of location
 strings that identify the transformation or the template used, as well
-as the underlying model elements in the gen- erated code. A location
+as the underlying model elements in the generated code. A location
 string might look like this:
 
 : [2003-10-04 17:05:36]
