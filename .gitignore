@@ -30,3 +30,4 @@ TestResult.xml
 # coati
 *.coatidb
 *.coatiproject
+poly-stitch.elc
