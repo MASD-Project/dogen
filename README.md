@@ -29,7 +29,7 @@ is [Dia](https://en.wikipedia.org/wiki/Dia_(software))
 ([Dia test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input)),
 but we also support
 JSON
-[JSON test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input)). Depending
+([JSON test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input)). Depending
 on use cases and user demand, other frontends may follow. The
 generated code contains most of the functionality required from a
 typical C++/C# domain object such as serialisation, hashing, streaming
