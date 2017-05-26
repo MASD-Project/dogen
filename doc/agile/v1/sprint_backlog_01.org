@@ -6,28 +6,31 @@
 * Mission Statement
 
 - Start work on the theoretical side of Dogen.
+- Start moving common kernel infrastructure into yarn.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-04-26 Wed 22:31]
-| <75>                                                                        |         |       |      |       |
-| Headline                                                                    | Time    |       |      |     % |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:49* |       |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:49   |       |      | 100.0 |
-| Active                                                                      |         | 12:49 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 5:17 |  41.2 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:49 |   6.4 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       | 2:18 |  17.9 |
-| STARTED Create a simple Emacs mode for stitch                               |         |       | 4:25 |  34.5 |
+#+CAPTION: Clock summary at [2017-05-26 Fri 15:11]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *24:47* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 24:47   |       |       | 100.0 |
+| Active                                                                      |         | 24:47 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  6:26 |  26.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   3.3 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  17.8 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   9.3 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  43.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-05-26 Fri 14:02]--[2017-05-26 Fri 15:21] =>  1:19
     CLOCK: [2017-04-14 Fri 11:31]--[2017-04-14 Fri 13:05] =>  1:34
     CLOCK: [2017-04-13 Thu 06:29]--[2017-04-13 Thu 07:21] =>  0:52
     CLOCK: [2017-04-04 Tue 22:26]--[2017-04-04 Tue 23:33] =>  1:07
@@ -252,6 +255,8 @@ JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
 *** STARTED Start documenting the theoretical aspects of Dogen        :story:
+    CLOCK: [2017-05-26 Fri 13:02]--[2017-05-26 Fri 14:00] =>  0:58
+    CLOCK: [2017-05-26 Fri 10:02]--[2017-05-26 Fri 12:01] =>  1:59
     CLOCK: [2017-05-13 Sat 16:07]--[2017-05-13 Sat 18:07] =>  2:00
     CLOCK: [2017-05-12 Fri 14:02]--[2017-05-12 Fri 17:01] =>  2:59
     CLOCK: [2017-05-12 Fri 09:02]--[2017-05-12 Fri 11:55] =>  2:53
@@ -262,6 +267,86 @@ the work we were carrying out. However, as we reached v1.0, the theory
 took center stage. We cannot proceed to the next phase of the product
 without a firm grasp of the theory. This story is a starting point so
 we can decide on how to break up the work.
+
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+*** Move decoration into yarn                                         :story:
+
+We need to handle decorations from yarn, since its common to all
+kernels.
+
+*** Move enablement into yarn                                         :story:
+
+It seems that the concepts around enablement are actually not kernel
+specific but instead can be generalised at the meta-model level. We
+need to create adequate representations in yarn to handle facets,
+etc. We then need to move across the code that computes enablement
+into yarn so that all kernels can make use of it.
+
+*Previous Understanding*
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
+
+*** Move dependencies into yarn                                       :story:
+
+It seems all languages we support have some form of "dependencies":
+
+- in c++ these are the includes
+- in c# these are the usings
+- in java these are the imports
+
+So, it would make sense to move these into yarn. The process of
+obtaining the dependencies must still be done in a kernel dependent
+way because we need to build any language-specific structures that the
+dependencies builder requires. However, we can create an interface for
+the dependencies builder in yarn and implement it in each kernel. Each
+kernel must also supply a factory for the builders.
+
+*** Move helpers into yarn                                            :story:
+
+Looking at helpers, it is clear that they are common to all
+languages. We just need to rename the terminology slightly -
+particularly wrt to streaming properties - and then move this code
+across into yarn.
+
+*** Move facet properties into yarn                                   :story:
+
+We should be able to handle these generically in yarn.
+
+*** Move ORM camel-case and databases into yarn                       :story:
+
+We should handle this property at the ORM level, rather than at the
+ODB level.
+
+Similarly, we should move the ODB databases into yarn and make that a
+ORM-level concept.
+
+*** Create "opaque" kernel and element properties                     :story:
+
+As part of the element container, we can have a set of base classes
+that are empty: =opaque_element_properties=. This class is then
+specialised in each kernel with the properties that are specific to
+it. We probably need an equivalent for:
+
+- kernel level properties
+- element level properties
+- attribute level properties.
+
+We then have to do a lot of casting in the helpers.
+
+Once we got these opaque properties, we can then create "kernel
+specific expanders" which are passed in to the yarn workflow. These
+populate the opaque properties.
 
 *** Make creating new facets easier                                   :story:
 

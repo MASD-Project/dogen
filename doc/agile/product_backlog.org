@@ -885,13 +885,6 @@ CPack can now generate MSIs directly:
 
 We need to investigate how to get the build to produce MSIs using WIX.
 
-*** Move enablement into quilt                                        :story:
-
-We need to make use of the exact same logic as implemented in
-=quilt.cpp= for enablement. Perhaps all of the enablement related
-functionality can be lifted and grafted onto quilt without any major
-changes.
-
 *** Add feature to disable regions                                    :story:
 
 We need a way to stop outputting regions if the user does not want
