@@ -11,6 +11,55 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Spirit: Improve error reporting
+
+# Overview
+
+At present when the parser fails we give the user no idea as to why it
+failed; we just return the failed state. In theory we should be
+reporting errors:
+
+#+begin_example
+        on_error<fail>
+            (
+                type_name,
+                std::cout << val("Error! Expecting ")
+                << _4                             // what failed?
+                << val(" here: \"")
+                << construct<std::string>(_3, _2) // iterators to error-pos, end
+                << val("\"")
+                << std::endl
+                );
+#+end_example
+
+In practice this never does anything.
+
+# Requirements
+
+- get the =on_error= expression to trigger when an error occurs
+- raise an exception with the contents that we are sending to
+  std::cout at present.
+
+*** Spirit: Add support for "native" arrays                           :story:
+
+At present our parser does not support arrays such as:
+
+#+begin_example
+int[50];
+#+end_example
+
+This should result on a name with a size associated with it. The
+parser cannot cope with this. Ideally one should be able to declare a
+const for the size on the class too:
+
+#+begin_example
+            static const int maxLimit = 50;
+            int objects[maxLimit];
+#+end_example
+
+So that we'd just recall the size parameter as a string in the name
+tree rather than just expect it to be an integer.
+
 *** Map upsilon primitives to intrinsics                              :story:
 
 Upsilon allows users to create "strong typedefs" around primitve
