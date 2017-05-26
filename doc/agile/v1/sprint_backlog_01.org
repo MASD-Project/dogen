@@ -5,8 +5,7 @@
 
 * Mission Statement
 
-- Finish ODB support;
-- Improve Visual Studio support.
+- Start work on the theoretical side of Dogen.
 
 * Stories
 
@@ -122,6 +121,54 @@ It seems we are copying across the attribute name rather than a
 comment. This could also be a problem with the input. Check the Zeta
 model.
 
+*** COMPLETED Create a simple Emacs mode for stitch                   :story:
+    CLOSED: [2017-05-12 Fri 14:31]
+    CLOCK: [2017-04-26 Wed 21:51]--[2017-04-26 Wed 22:31] =>  0:40
+    CLOCK: [2017-04-26 Wed 18:05]--[2017-04-26 Wed 21:50] =>  3:45
+
+Create a really simple emacs mode that just has different visual
+representations for the stitch code and the template itself.
+
+Links:
+
+- [[https://github.com/vspinu/polymode/issues/133][Request for a review/comments on a new mode derived from polymode]]
+
+Merged stories:
+
+*Try creating a mode with generic mode*
+
+Tried with generic mode:
+
+ #+begin_src emacs-lisp
+(require 'generic-x) ;; we need this
+
+(define-generic-mode 'stitch-mode
+  () ;; comments not supported
+  '("licence_name" "copyright_notice" "modeline_group_name"
+    "stream_variable_name" "inclusion_dependency"
+    "containing_namespaces") ;; keywords
+  '(("<#@" "<#+" "<#=" "#>" . 'font-lock-operator)) ;; operator
+  '("\\.stitch$") ;; extension
+  nil
+  "Major mode for editing Dogen's Stitch template files."
+  )
+
+;;; stitch-mode.el ends here
+#+end_src
+
+*Consider creating an Emacs mode for stitch*
+
+It would be nice to have syntax highlighting for stitch templates. We
+have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
+which is rather unusable.
+
+See also [[https://github.com/fxbois/web-mode][web-mode]].
+
+*Investigate adding polymode support for stitch templates*
+
+We need a way to visualise stitch templates that is a bit more
+readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
+
 *** STARTED Add support for proper JSON serialisation in C++          :story:
     CLOCK: [2017-04-12 Wed 20:56]--[2017-04-12 Wed 23:14] =>  2:18
 
@@ -204,53 +251,17 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** STARTED Create a simple Emacs mode for stitch                     :story:
-    CLOCK: [2017-04-26 Wed 21:51]--[2017-04-26 Wed 22:31] =>  0:40
-    CLOCK: [2017-04-26 Wed 18:05]--[2017-04-26 Wed 21:50] =>  3:45
+*** STARTED Start documenting the theoretical aspects of Dogen        :story:
+    CLOCK: [2017-05-13 Sat 16:07]--[2017-05-13 Sat 18:07] =>  2:00
+    CLOCK: [2017-05-12 Fri 14:02]--[2017-05-12 Fri 17:01] =>  2:59
+    CLOCK: [2017-05-12 Fri 09:02]--[2017-05-12 Fri 11:55] =>  2:53
 
-Create a really simple emacs mode that just has different visual
-representations for the stitch code and the template itself.
-
-Links:
-
-- [[https://github.com/vspinu/polymode/issues/133][Request for a review/comments on a new mode derived from polymode]]
-
-Merged stories:
-
-*Try creating a mode with generic mode*
-
-Tried with generic mode:
-
- #+begin_src emacs-lisp
-(require 'generic-x) ;; we need this
-
-(define-generic-mode 'stitch-mode
-  () ;; comments not supported
-  '("licence_name" "copyright_notice" "modeline_group_name"
-    "stream_variable_name" "inclusion_dependency"
-    "containing_namespaces") ;; keywords
-  '(("<#@" "<#+" "<#=" "#>" . 'font-lock-operator)) ;; operator
-  '("\\.stitch$") ;; extension
-  nil
-  "Major mode for editing Dogen's Stitch template files."
-  )
-
-;;; stitch-mode.el ends here
-#+end_src
-
-*Consider creating an Emacs mode for stitch*
-
-It would be nice to have syntax highlighting for stitch templates. We
-have a [[https://github.com/mcraveiro/cunene/blob/master/lisp/other/utils/t4-mode.el][mumamo-based version]] in cunene - originally done for t4 - but
-which is rather unusable.
-
-See also [[https://github.com/fxbois/web-mode][web-mode]].
-
-*Investigate adding polymode support for stitch templates*
-
-We need a way to visualise stitch templates that is a bit more
-readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
-
+Up to now we have more or less coded Dogen as we went along; we
+haven't really spent a lot of time worrying about the theory behind
+the work we were carrying out. However, as we reached v1.0, the theory
+took center stage. We cannot proceed to the next phase of the product
+without a firm grasp of the theory. This story is a starting point so
+we can decide on how to break up the work.
 
 *** Make creating new facets easier                                   :story:
 

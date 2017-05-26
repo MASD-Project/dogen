@@ -29,6 +29,7 @@
 \usepackage{listings}
 \usepackage{etoolbox}
 \usepackage{titlesec}
+\usepackage[inline]{enumitem}
 
 \newtheorem{concept}{Definition}
 
@@ -52,7 +53,7 @@
 
 \hypersetup{
   pdfauthor={Marco Craveiro},
-  pdftitle={Dogen: The Domain Generator},
+  pdftitle={Dogen: The Product-Line Generation Framework},
   pdfcreator={Emacs 24.5.1}}
 
 \begin{document}
@@ -68,7 +69,7 @@
 \nbvspace[1]
 \Huge
 {\nbtitlestretch\huge
-  DOGEN\\THE DOMAIN GENERATOR}
+  DOGEN\\THE PRODUCT-LINE GENERATION FRAMEWORK}
 
 \nbvspace[1]
 \normalsize
@@ -149,15 +150,15 @@ entitled ``GNU Free Documentation License.''
 labour of love, we are all well too aware. The tragedy is that most of
 the code consumers do not know \emph{just how much love} is required
 to create and maintain a successful project in your spare time. The
-only way to find out is to do one yourself. When I started Dogen, I
-had absolutely no idea of the long and tortuous journey that awaited
-me. This is in itself rather ironic, as I have spent the best part of
-two decades in the commercial software industry~--- including many a
-time on the front lines of new product development~--- and I've used
-free software on a daily basis for decades. Looking back, the only
-explanation I can conceive of for this blind spot is that programmers
-are perennial optimists by nature or have \emph{very} short term
-memory. Or both.
+only way to find out is to do one yourself. When I started Dogen back
+in 2012, I had absolutely no idea of the long and tortuous journey
+that awaited me. That is, in itself, rather ironic, as I have spent
+the best part of two decades in the commercial software industry~---
+including many a year on the front lines of new product
+development~--- and I've used free software on a daily basis for
+decades. Looking back, the only explanation I can conceive of for this
+blind spot is that programmers are perennial optimists by nature or
+have \emph{very} short term memory. Or both.
 
 As it was, I attempted to ``create a simple code generator and then
 get on with real work''; I thought ``it would take me a couple of
@@ -167,23 +168,22 @@ satisfaction. And, lest you start blaming my organisational skills, it
 wasn't as if there has been a lack of ``professionalism and
 focus''. I've been to enough management school lessons to learn all
 the buzzwords, including the need to define the \emph{vision} before
-embarking on the road to \emph{execution}.
+embarking on the road to \emph{execution}. Its just not easy to
+develop software products; to develop products that \emph{make
+  products} is doubly so.
 
-Dogen's vision eventually stabilised to the following:
-
-\begin{itemize}
-\item to create a suite of code generation tools targeting model and
-  product generation, according to a well-specified product line;
-\item for these tools to have the potential to be useful to developers
-  in multiple programming languages, and to be designed to be
-  integrated with IDEs and text editors;
-\item to make the suite extensible, such that users can come up with
-  modifications suited to their particular domain.
-\end{itemize}
+Nevertheless, somehow, through slit and snow, Dogen persisted. After
+many twists and ever more surprising turns, the project figured out
+what its domain really is and is now more focused than ever in
+bringing to life my thoughts and opinions on the engineering of
+software products and product lines.
 
 What you have on your hands then is a document describing how Dogen
-realises this vision. I hope you enjoy reading this book as much as I
-have enjoyed this wild ride.
+realises this vision. It also offers a basic explanation of the
+theoretical background required to understand the choices we've made.
+
+I hope you enjoy reading this book as much as I have enjoyed this wild
+ride.
 
 \begin{flushright}\emph{Marco Craveiro}, \the\year\end{flushright}
 
@@ -193,23 +193,62 @@ have enjoyed this wild ride.
   it will write itself.}{\emph{author}}
 
 \lettrine{T}{his book is} the official manual for
-\emph{Dogen}. Dogen~--- the domain generator~--- is a suite of code
-generation tools designed specifically to target domain models. Dogen
-was created to make the modeling process simpler: the user creates a
-domain model using a supported UML editor and the tools provided by
-Dogen use its output to generate a source code representation. The
-generated code contains most of the services required from a typical
-domain object such as serialisation, hashing, debug printing and so
-on.
+\emph{Dogen}. Dogen~--- the Product-Line Generation Framework~--- is a
+suite of code generation tools and libraries that aim to support a
+Model Driven Engineering (MDE) approach to software
+development. Wikipedia defines MDE as follows:
 
-The book is split into three parts. Part I summarises the key domain
-knowledge around code generation and Domain Driven Development. It
-provides a basic theoretical foundation that serves as the background
-to the remainder of the book and, hopefully, supplies enough context
-to understand the design choices made. The second part describes the
-internals of the product, allowing one to make sense of the code base
-and adapt it as required. The third part is a user manual for the
-different tools in the suite.
+\begin{quote}
+Model-driven engineering (MDE) is a software development methodology
+that focuses on creating and exploiting domain models, which are
+conceptual models of all the topics related to a specific
+problem. Hence, it highlights and aims at abstract representations of
+the knowledge and activities that govern a particular application
+domain, rather than the computing (f.e. algorithmic) concepts.
+\end{quote}
+
+Dogen is designed specifically to target the generation of products
+and product-lines, allowing a narrow amount of variability between
+them. We will define these and other related terms more precisely in
+the rest of this manual. However, to gain an intuitive understanding
+of what Dogen is after, a typical usage is as follows: users create
+domain models via one of the supported UML editors; the tools provided
+in the Dogen suite convert the output of the UML editor to a source
+code representation on one ore more selected programming
+languages. The generated code contains most of the services required
+from a typical domain object such as serialisation, hashing, debug
+printing and so on.
+
+It is important to note that Dogen is \emph{not a generalised modeling
+  framework} like the Eclipse Modeling Framework
+(EMF)\cite{Steinberg:2009:EEM:1197540}. There are many areas which we
+do not cover~--- by design~--- and many cases where we do not allow
+variability but instead explicitly dictate one and only one way of
+doing things. In fact, unlike most other tools in this space, Dogen is
+\emph{extremely opinionated}. We shall try our best to offer a
+rationale for the decisions taken, but its perfectly understandable
+that some users will not be happy with our choices and will, perhaps,
+have to look to other tools to satisfy their use cases.
+
+The book is split into three rather distinctive parts:
+
+\begin{itemize}
+  \item \textbf{Part I~--- Theory} provides a broad summary of MDE as
+    a domain, as applied to Dogen. As you can imagine, MDE itself is
+    vast, and only a small part is required in order to understand
+    Dogen, so we focus solely on these aspects. The objective is to
+    provide the theory that will serve as the foundation for the
+    remainder of the book and, hopefully, supplies enough context to
+    understand the design choices made.
+  \item \textbf{Part II~--- Internals} describes the internals of the
+    product, allowing one to make sense of the code base and adapt it
+    as required. It is intended to be used by those wanting to extend
+    Dogen.
+  \item finally, \textbf{Part III~--- Usage} is a practical user
+    manual, with examples of all the tools in the suite. In order to
+    bring these tools to life, we use a somewhat realistic case-study
+    which makes use of most features of the suite.
+\end{itemize}
 
 For those that are also interested in coding folklore, the appendix
 provides a number of ``lessons learned'' stories. They were originally
@@ -239,28 +278,107 @@ The following web resources are available:
 \end{itemize}
 
 \part{Theory}
+\label{theory}
 
-\epigraph{Malembe, Malembe.}{Angola proverb}
+\chapter{The State of Automation}
 
-Unfortunately, these topics are not the most approachable. This is
-both due to their unfamiliarity~--- most developers do not spend a lot
-of time contemplating these matters on their day to day jobs~--- as
-well as the innate complexity of these ideas. Alas, just like
-Tanenbaum's \emph{Operating Systems Design and Implementation}
-provided Linus with a solid foundation on which to build Linux upon,
-so do these theories inform the decisions around Dogen's development;
-you cannot understand the latter without the former.
+\epigraph{The programmer, like the poet, works only slightly removed
+  from pure thought-stuff. He builds his castles in the air, from air,
+  creating by exertion of the imagination. Few media of creation are
+  so flexible, so easy to polish and rework, so readily capable of
+  realizing grand conceptual structures.}{Frederick P. Brooks
+  Jr.\cite{Brooks:1995:MM:207583}}
 
-The part is organised as follows:
+\lettrine{T}{hroughout our} software engineering career, one of the
+biggest and most paradoxical problems we faced was the lack of
+automation in the development process. This is paradoxical because it
+is in the nature of programmers to automate all the tasks they
+consider mundane or routine. In the words of
+Raymond\cite{Raymond:2015}:
 
-\begin{itemize}
-  \item chapter \ref{mdsd} provides an explanation of the core
-    concepts of the Model Driven Software Development methodology.
-  \item chapter
-\end{itemize}
+\begin{quote}
+Hackers (and creative people in general) should never be bored or have
+to drudge at stupid repetitive work, because when this happens it
+means they aren't doing what only they can do~--- solve new
+problems. This wastefulness hurts everybody. Therefore boredom and
+drudgery are not just unpleasant but actually evil.
 
-underpinnings behind Dogen, its internal architecture and assorted
-aspects around its development.
+To behave like a hacker, you have to believe this enough to want to
+automate away the boring bits as much as possible, not just for
+yourself but for everybody else (especially other hackers).
+\end{quote}
+
+To be fair to developers, the last couple of decades has seen a
+massive rise in automation and it has manifested itself in several
+ways. First, scripting is now very prevalent in the industry, across
+all operative systems~--- even including the Windows family, which
+appears to have resisted it for most of its existence. The DevOps
+movement has made the importance of this kind of automation rather
+visible.
+
+Secondly, there has been a proliferation of specialised code
+generation tools, focusing on specific areas such as the generation
+of:
+\begin{enumerate*}[label=(\roman*)]
+\item skeletons and other helpers in IDEs and UML modeling tools;
+\item serialisation code from XSDs and other schemas;
+\item Relational and Object-Relational Mappings (ORMs);
+\item inter-process communication code, via IDLs;
+\item cross-language interoperability and mappings;
+\item text-templates for code-generation.
+\end{enumerate*}
+Many other examples of this ilk could be given. Here, a specific tool
+is created to tackle a well-defined area, but none of the tools are
+aware of each other and most software projects end up requiring a
+variety of tools for different purposes.
+
+However, after we add up all of these technologies together, one finds
+that its still the case that most systems are made up of highly
+repetitive infrastructural code that could be generated by automated
+means. Alas, automating it remains elusive; it is as if all of the
+low-hanging fruit has been picked and now what is left is at the top
+of the tree, too far to reach. Interestingly, this is yet another
+example of the industry and the practitioners catching up with the
+theoreticians. The truth is, all of the theoretical basis that is
+required to automate the remaining parts of the system exist at
+present and have existed for several decades. And even more puzzling,
+products based on this theory have existed for a decade or more: C++
+developers had Generic Modeling Environment (GME), Java programmers
+have had the Eclipse Modeling Framework (EMF) and so forth.
+
+Which raises a really important question: why is no one making use of
+these technologies outside of academia and highly specialised
+projects?
+
+
+
+obtain
+this remaining
+
+
+
+
+Much of the technology that is
+required to provide this last part
+
+
+
+The Object Management Group (OMG)
+and the UML tooling vendors have been pushing
+
+
+
+
+However, the bulk of a software product
+continues to be manually crafted, and integrates these disparate
+code-generated bits into a whole.
+
+
+
+
+\chapter{Product}
+
+
 
 \chapter{Conceptual Model}
 
@@ -1259,7 +1377,8 @@ started off by trying to implement the vision as a C++ tool; but the
 notions are general enough that they would apply to any programming
 language.
 
-\part{Implementation}
+\part{Internals}
+\label{internals}
 
 \chapter{The Architecture}
 
@@ -1939,7 +2058,8 @@ build numbers you must have the tool
 the path. If the tool is not available, the default build number is
 assigned: \texttt{no\_build\_number\_assigned}.
 
-\part{Use}
+\part{Usage}
+\label{usage}
 
 In this part we describe how to build and install Dogen, and how to
 use it effectively~--- from very simple use cases all the way to the
@@ -4583,6 +4703,42 @@ the results of our research
 Note that Dogen is specifically tailored for our needs. We are,
 however, wiling to accept any patches for functionality not directly
 required by us.
+
+\epigraph{Malembe, Malembe.}{Angola proverb}
+
+Unfortunately, these topics are not the most approachable. This is
+both due to their unfamiliarity~--- most developers do not spend a lot
+of time contemplating these matters on their day to day jobs~--- as
+well as the innate complexity of these ideas. Alas, just like
+Tanenbaum's \emph{Operating Systems Design and Implementation}
+provided Linus with a solid foundation on which to build Linux upon,
+so do these theories inform the decisions around Dogen's development;
+you cannot understand the latter without the former.
+
+The part is organised as follows:
+
+\begin{itemize}
+  \item chapter \ref{mdsd} provides an explanation of the core
+    concepts of the Model Driven Software Development methodology.
+  \item chapter
+\end{itemize}
+
+underpinnings behind Dogen, its internal architecture and assorted
+aspects around its development.
+
+Dogen's vision eventually stabilised to the following:
+
+\begin{itemize}
+\item to create a suite of code generation tools targeting model and
+  product generation, according to a well-specified product line;
+\item for these tools to have the potential to be useful to developers
+  in multiple programming languages, and to be designed to be
+  integrated with IDEs and text editors;
+\item to make the suite extensible, such that users can come up with
+  modifications suited to their particular domain.
+\end{itemize}
+
+
 
 \backmatter
 \bibliographystyle{plain}
