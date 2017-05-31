@@ -29,7 +29,7 @@ build_script:
   - ps: .\build\scripts\build.windows.ps1 -build_type $build_type -compiler $env:compiler -third_party $third_party -target $target
   - ps: if ($build_type -eq "Release") {
             cd $project_dir\build\output\$env:compiler\$build_type;
-            $env:Path += ";" + $env:WIX
+            $env:Path += ";" + $env:WIX;
             cpack -G WIX -C Release;
         }
 
