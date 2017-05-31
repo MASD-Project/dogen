@@ -41,7 +41,10 @@ auto lg(logger_factory("utility.xml.text_reader"));
  */
 class libxml_scope_guard {
 public:
-    libxml_scope_guard() { xmlInitParser(); }
+    libxml_scope_guard() {
+        xmlInitParser();
+        xmlSetBufferAllocationScheme(XML_BUFFER_ALLOC_DOUBLEIT);
+    }
     ~libxml_scope_guard() { xmlCleanupParser(); }
 };
 
