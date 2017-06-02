@@ -194,7 +194,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
 
     intermediate_model_repository r;
     /*
-     * Next We need to obtain the target intermediate model and
+     * Next we need to obtain the target intermediate model and
      * post-process it. This is done because we need to access the
      * annotations inside this model in order to figure out what the
      * user reference intermediate models are. In addition we also
@@ -217,7 +217,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
 
         /*
          * First we need to get our hands on the target model for this
-         * language.
+         * language. We can only have one target model.
          */
         auto& list(pair.second);
         if (list.size() != 1) {

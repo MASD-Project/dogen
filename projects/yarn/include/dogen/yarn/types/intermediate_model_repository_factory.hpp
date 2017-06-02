@@ -43,6 +43,12 @@ namespace yarn {
 
 /**
  *  @brief Creates an intermdiate model repository,
+ *
+ * The objective of the intermediate repository is to organise models
+ * by language, so this factory's job is to expand the original set of
+ * modules into one per language as requested by the user in the
+ * target model. We perform any required mappings from a language
+ * agnostic model into the concrete languages requested by the user.
  */
 class intermediate_model_repository_factory final {
 private:
