@@ -21,14 +21,14 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/registrar_error.hpp"
-#include "dogen/yarn/types/injector_registrar.hpp"
+#include "dogen/yarn/types/external_expander_registrar.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.injector_registrar"));
+static logger lg(logger_factory("yarn.external_expander_registrar"));
 
-const std::string no_injectors("No injectors provided.");
+const std::string no_expanders("No expanders provided.");
 const std::string null_frontend("Frontend supplied is null.");
 
 }
@@ -36,33 +36,33 @@ const std::string null_frontend("Frontend supplied is null.");
 namespace dogen {
 namespace yarn {
 
-void injector_registrar::
-register_injector(std::shared_ptr<const injector_interface> inj) {
+void external_expander_registrar::register_external_expander(
+    std::shared_ptr<const external_expander_interface> ee) {
     // note: not logging by design
-    if (!inj)
+    if (!ee)
         BOOST_THROW_EXCEPTION(registrar_error(null_frontend));
 
-    injectors_.push_back(inj);
+    external_expanders_.push_back(ee);
 }
 
-void injector_registrar::validate() const {
-    if (injectors_.empty()) {
-        BOOST_LOG_SEV(lg, debug) << no_injectors;
-        BOOST_THROW_EXCEPTION(registrar_error(no_injectors));
+void external_expander_registrar::validate() const {
+    if (external_expanders_.empty()) {
+        BOOST_LOG_SEV(lg, debug) << no_expanders;
+        BOOST_THROW_EXCEPTION(registrar_error(no_expanders));
     }
     BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 
     BOOST_LOG_SEV(lg, debug) << "Found "
-                             << injectors_.size()
-                             << " registered injectors. Details: ";
+                             << external_expanders_.size()
+                             << " registered external expanders. Details: ";
 
-    for (const auto& inj : injectors_)
-        BOOST_LOG_SEV(lg, debug) << "id: '" << inj->id() << "'";
+    for (const auto& ee : external_expanders_)
+        BOOST_LOG_SEV(lg, debug) << "id: '" << ee->id() << "'";
 }
 
-std::list<std::shared_ptr<const injector_interface>>
-injector_registrar::injectors() const {
-    return injectors_;
+std::list<std::shared_ptr<const external_expander_interface>>
+external_expander_registrar::external_expanders() const {
+    return external_expanders_;
 }
 
 } }

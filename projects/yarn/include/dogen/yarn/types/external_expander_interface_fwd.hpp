@@ -18,12 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INJECTOR_INTERFACE_HPP
-#define DOGEN_YARN_TYPES_INJECTOR_INTERFACE_HPP
-
-#include <string>
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#ifndef DOGEN_YARN_TYPES_EXTERNAL_EXPANDER_INTERFACE_FWD_HPP
+#define DOGEN_YARN_TYPES_EXTERNAL_EXPANDER_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -32,18 +28,7 @@
 namespace dogen {
 namespace yarn {
 
-class injector_interface {
-public:
-    injector_interface() = default;
-    injector_interface(const injector_interface&) = delete;
-    injector_interface(injector_interface&&) = default;
-    virtual ~injector_interface() noexcept = 0;
-
-public:
-    virtual std::string id() const = 0;
-    virtual void inject(const annotations::type_repository& atrp,
-        intermediate_model& im) const = 0;
-};
+class external_expander_interface;
 
 } }
 

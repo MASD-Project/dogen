@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
@@ -103,7 +103,7 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
     add_elements(e, im);
 }
 
-void injector::inject(const annotations::type_repository& atrp,
+void injector::expand(const annotations::type_repository& atrp,
     yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_build_files(im);

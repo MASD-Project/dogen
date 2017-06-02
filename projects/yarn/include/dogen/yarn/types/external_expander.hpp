@@ -18,11 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/injector_interface.hpp"
+#ifndef DOGEN_YARN_TYPES_EXTERNAL_EXPANDER_HPP
+#define DOGEN_YARN_TYPES_EXTERNAL_EXPANDER_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/external_expander_registrar.hpp"
 
 namespace dogen {
 namespace yarn {
 
-injector_interface::~injector_interface() noexcept { }
+class external_expander {
+public:
+    void expand(const annotations::type_repository& atrp,
+        const external_expander_registrar& rg, intermediate_model& im);
+};
 
 } }
+
+#endif

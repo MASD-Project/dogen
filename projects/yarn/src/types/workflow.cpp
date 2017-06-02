@@ -41,7 +41,8 @@ namespace dogen {
 namespace yarn {
 
 std::shared_ptr<frontend_registrar> workflow::frontend_registrar_;
-std::shared_ptr<injector_registrar> workflow::injector_registrar_;
+std::shared_ptr<external_expander_registrar>
+workflow::external_expander_registrar_;
 
 workflow::workflow() {
     validate();
@@ -54,17 +55,18 @@ yarn::frontend_registrar& workflow::frontend_registrar() {
     return *frontend_registrar_;
 }
 
-yarn::injector_registrar& workflow::injector_registrar() {
-    if (!injector_registrar_)
-        injector_registrar_ = std::make_shared<yarn::injector_registrar>();
+yarn::external_expander_registrar& workflow::external_expander_registrar() {
+    if (!external_expander_registrar_)
+        external_expander_registrar_ =
+            std::make_shared<yarn::external_expander_registrar>();
 
-    return *injector_registrar_;
+    return *external_expander_registrar_;
 }
 
 void workflow::validate() const {
     BOOST_LOG_SEV(lg, debug) << "Validating registrars.";
     frontend_registrar().validate();
-    injector_registrar().validate();
+    external_expander_registrar().validate();
     BOOST_LOG_SEV(lg, debug) << "Finished validating registrars. ";
 }
 
@@ -82,7 +84,7 @@ intermediate_model workflow::peform_second_stage_expansion(
     const annotations::type_repository& atrp,
     const std::list<intermediate_model>& ims) const {
     second_stage_expander ex;
-    return ex.make(atrp, injector_registrar(), ims);
+    return ex.make(atrp, external_expander_registrar(), ims);
 }
 
 model workflow::transform_to_model(const intermediate_model& im) const {

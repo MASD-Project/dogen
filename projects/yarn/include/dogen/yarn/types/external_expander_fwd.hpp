@@ -18,40 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INJECTOR_REGISTRAR_HPP
-#define DOGEN_YARN_TYPES_INJECTOR_REGISTRAR_HPP
+#ifndef DOGEN_YARN_TYPES_EXTERNAL_EXPANDER_FWD_HPP
+#define DOGEN_YARN_TYPES_EXTERNAL_EXPANDER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <memory>
-#include "dogen/yarn/types/injector_interface.hpp"
-
 namespace dogen {
 namespace yarn {
 
-class injector_registrar {
-public:
-    void register_injector(std::shared_ptr<const injector_interface> inj);
-
-public:
-    void validate() const;
-    std::list<std::shared_ptr<const injector_interface>> injectors() const;
-
-private:
-    std::list<std::shared_ptr<const injector_interface>> injectors_;
-};
-
-/*
- * Helper method to register injectors.
- */
-template<typename Injector>
-inline void register_injector(injector_registrar& rg) {
-    auto inj(std::make_shared<Injector>());
-    rg.register_injector(inj);
-}
+class external_expander;
 
 } }
 

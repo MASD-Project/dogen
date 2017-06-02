@@ -26,8 +26,8 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-void initializer::initialize(yarn::injector_registrar& rg) {
-    yarn::register_injector<injector>(rg);
+void initializer::initialize(yarn::external_expander_registrar& rg) {
+    yarn::register_external_expander<injector>(rg);
 }
 
 } } } }

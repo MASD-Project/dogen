@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/injection_error.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
@@ -81,7 +80,7 @@ void injector::inject_assistant(yarn::intermediate_model& im) const {
     add_element(e, im);
 }
 
-void injector::inject(const annotations::type_repository& atrp,
+void injector::expand(const annotations::type_repository& atrp,
     yarn::intermediate_model& im) const {
     inject_visual_studio(atrp, im);
     inject_assembly_info(im);

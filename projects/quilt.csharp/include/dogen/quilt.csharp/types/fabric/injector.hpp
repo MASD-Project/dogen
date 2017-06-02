@@ -28,14 +28,14 @@
 #include <list>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/injector_interface.hpp"
+#include "dogen/yarn/types/external_expander_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class injector : public yarn::injector_interface {
+class injector : public yarn::external_expander_interface {
 public:
     virtual ~injector() noexcept;
 
@@ -55,7 +55,7 @@ private:
 
 public:
     std::string id() const override;
-    void inject(const annotations::type_repository& atrp,
+    void expand(const annotations::type_repository& atrp,
         yarn::intermediate_model& im) const override;
 };
 

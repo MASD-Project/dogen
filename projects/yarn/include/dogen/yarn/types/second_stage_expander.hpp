@@ -30,7 +30,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/injector_registrar.hpp"
+#include "dogen/yarn/types/external_expander_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/indices.hpp"
 
@@ -119,10 +119,10 @@ private:
     void update_model_generability(intermediate_model& im) const;
 
     /**
-     * @brief Injects any external types into the model.
+     * @brief Performs all external expansions to the model.
      */
-    void inject_model(const annotations::type_repository& atrp,
-        const injector_registrar& rg, intermediate_model& im) const;
+    void perform_external_expansion(const annotations::type_repository& atrp,
+        const external_expander_registrar& rg, intermediate_model& im) const;
 
     /**
      * @brief Ensures the model passes all validation rules.
@@ -134,7 +134,8 @@ public:
      * @brief Make the final model.
      */
     intermediate_model
-    make(const annotations::type_repository& atrp, const injector_registrar& rg,
+    make(const annotations::type_repository& atrp,
+        const external_expander_registrar& rg,
         const std::list<intermediate_model>& ims) const;
 };
 

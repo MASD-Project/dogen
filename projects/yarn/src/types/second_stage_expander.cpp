@@ -31,7 +31,7 @@
 #include "dogen/yarn/types/attributes_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/generalization_expander.hpp"
-#include "dogen/yarn/types/injection_expander.hpp"
+#include "dogen/yarn/types/external_expander.hpp"
 #include "dogen/yarn/types/orm_properties_expander.hpp"
 #include "dogen/yarn/types/second_stage_validator.hpp"
 #include "dogen/yarn/types/second_stage_expander.hpp"
@@ -170,9 +170,9 @@ update_model_generability(intermediate_model& im) const {
 }
 
 void second_stage_expander::
-inject_model(const annotations::type_repository& atrp,
-    const injector_registrar& rg, intermediate_model& im) const {
-    injection_expander ex;
+perform_external_expansion(const annotations::type_repository& atrp,
+    const external_expander_registrar& rg, intermediate_model& im) const {
+    external_expander ex;
     ex.expand(atrp, rg, im);
 }
 
@@ -182,8 +182,9 @@ validate(const indices& idx, const intermediate_model& im) const {
     v.validate(idx, im);
 }
 
-intermediate_model second_stage_expander::
-make(const annotations::type_repository& atrp, const injector_registrar& rg,
+intermediate_model
+second_stage_expander::make(const annotations::type_repository& atrp,
+    const external_expander_registrar& rg,
     const std::list<intermediate_model>& ims) const {
     BOOST_LOG_SEV(lg, debug) << "Starting second stage expansion.";
 
@@ -202,8 +203,9 @@ make(const annotations::type_repository& atrp, const injector_registrar& rg,
 
     /*
      * Create all indices first as its needed by generalisation. Note
-     * that this means injected types are not part of indices, which
-     * is not ideal - but for now, its not a major problem.
+     * that this means generated types (such as visitor etc) are not
+     * part of indices, which is not ideal - but for now, its not a
+     * major problem.
      */
     const auto idx(create_indices(r));
 
@@ -232,8 +234,9 @@ make(const annotations::type_repository& atrp, const injector_registrar& rg,
 
     /*
      * Resolution must be done after system elements have been
-     * injected or else it will fail to find any references to those
-     * elements.
+     * generated (such as visitor, etc) or else it will fail to find
+     * any references to those elements. This is done in stereotype
+     * expansion.
      */
     resolve_element_references(idx, r);
 
@@ -257,10 +260,10 @@ make(const annotations::type_repository& atrp, const injector_registrar& rg,
     update_model_generability(r);
 
     /*
-     * We can inject types into the model last as no one should be
-     * relying on them.
+     * We can perform external expansion last as no one should be
+     * relying on these expansions.
      */
-    inject_model(atrp, rg, r);
+    perform_external_expansion(atrp, rg, r);
 
     /*
      * Ensure the model is valid.

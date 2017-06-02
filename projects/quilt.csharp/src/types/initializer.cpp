@@ -32,7 +32,8 @@ namespace csharp {
 
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
-    fabric::initializer::initialize(yarn::workflow::injector_registrar());
+    fabric::initializer::initialize(
+        yarn::workflow::external_expander_registrar());
     quilt::register_kernel<kernel>(quilt::workflow::registrar());
 }
 

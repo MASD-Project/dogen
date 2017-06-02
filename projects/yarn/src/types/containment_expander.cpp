@@ -23,7 +23,7 @@
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/injection_error.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/containment_expander.hpp"
 
 using namespace dogen::utility::log;
@@ -71,7 +71,7 @@ void containment_expander::inject_global_module(intermediate_model& im) {
         const auto id(im.name().id());
         BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
         BOOST_THROW_EXCEPTION(
-            injection_error(model_already_has_global_module + id));
+            expansion_error(model_already_has_global_module + id));
     }
     im.modules().insert(std::make_pair(gmn.id(), gm));
 

@@ -1142,7 +1142,7 @@ intermediate merged model.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_expander#</dia:string>
+        <dia:string>#external_expander#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -1536,7 +1536,7 @@ intermediate merged model.#</dia:string>
         <dia:point val="-202,-66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.05,-66.05;-174.1,-35.45"/>
+        <dia:rectangle val="-202.05,-66.05;-174.1,-33.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1548,7 +1548,7 @@ intermediate merged model.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="30.500000000000004"/>
+        <dia:real val="32.899999999999999"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1623,28 +1623,28 @@ and to build it.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O12">
       <dia:attribute name="obj_pos">
-        <dia:point val="5,50"/>
+        <dia:point val="7,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="4.95,49.95;12.1425,53.05"/>
+        <dia:rectangle val="6.95,49.95;19,53.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="5,50"/>
+        <dia:point val="7,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0924999999999994"/>
+        <dia:real val="11.949999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injection_error#</dia:string>
+        <dia:string>#external_expansion_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#An error has occurred while injecting types.#</dia:string>
+        <dia:string>#An error has occurred while performing an external expansion.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -1772,7 +1772,7 @@ and to build it.
         <dia:point val="10.8,35.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="8.49625,34.85;11.55,50.8"/>
+        <dia:rectangle val="10.05,34.85;13.175,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1780,8 +1780,8 @@ and to build it.
       <dia:attribute name="orth_points">
         <dia:point val="10.8,35.6"/>
         <dia:point val="10.8,40"/>
-        <dia:point val="8.54625,40"/>
-        <dia:point val="8.54625,50"/>
+        <dia:point val="12.975,40"/>
+        <dia:point val="12.975,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -12579,13 +12579,13 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O97">
       <dia:attribute name="obj_pos">
-        <dia:point val="32,50"/>
+        <dia:point val="35,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,49.95;53.34,58.45"/>
+        <dia:rectangle val="34.95,49.95;56.34,58.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="32,50"/>
+        <dia:point val="35,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="21.289999999999999"/>
@@ -12957,17 +12957,17 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="32,58.4"/>
+        <dia:point val="35,58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.3975,57.65;32.75,65.8"/>
+        <dia:rectangle val="3.3975,57.65;35.75,65.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="32,58.4"/>
-        <dia:point val="32,62"/>
+        <dia:point val="35,58.4"/>
+        <dia:point val="35,62"/>
         <dia:point val="3.4475,62"/>
         <dia:point val="3.4475,65"/>
       </dia:attribute>
@@ -13655,13 +13655,13 @@ Leaves are types concrete types which have a parent.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O102">
       <dia:attribute name="obj_pos">
-        <dia:point val="17,50"/>
+        <dia:point val="22,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.95,49.95;27.0325,53.05"/>
+        <dia:rectangle val="21.95,49.95;32.0325,53.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="17,50"/>
+        <dia:point val="22,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.9824999999999999"/>
@@ -13804,7 +13804,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:point val="25,35.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.9413,34.85;25.75,50.8"/>
+        <dia:rectangle val="24.25,34.85;27.1913,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -13812,8 +13812,8 @@ Leaves are types concrete types which have a parent.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="25,35.6"/>
         <dia:point val="25,40"/>
-        <dia:point val="21.9913,40"/>
-        <dia:point val="21.9913,50"/>
+        <dia:point val="26.9913,40"/>
+        <dia:point val="26.9913,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20490,7 +20490,7 @@ space.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injector_interface#</dia:string>
+        <dia:string>#external_expander_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -20499,7 +20499,7 @@ space.#</dia:string>
         <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
-        <dia:boolean val="false"/>
+        <dia:boolean val="true"/>
       </dia:attribute>
       <dia:attribute name="suppress_attributes">
         <dia:boolean val="false"/>
@@ -20610,7 +20610,7 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#inject#</dia:string>
+            <dia:string>#expand#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -20720,7 +20720,7 @@ space.#</dia:string>
         <dia:point val="-1,35.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-10.865,34.85;-0.25,50.8"/>
+        <dia:rectangle val="-11.4,34.85;-0.25,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20728,8 +20728,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-1,35.6"/>
         <dia:point val="-1,40"/>
-        <dia:point val="-10.815,40"/>
-        <dia:point val="-10.815,50"/>
+        <dia:point val="-11.35,40"/>
+        <dia:point val="-11.35,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -20752,22 +20752,22 @@ space.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O167">
       <dia:attribute name="obj_pos">
-        <dia:point val="-23,50"/>
+        <dia:point val="-27,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-23.05,49.95;1.42,54.45"/>
+        <dia:rectangle val="-27.05,49.95;4.35,54.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-23,50"/>
+        <dia:point val="-27,50"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="24.369999999999997"/>
+        <dia:real val="31.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#injector_registrar#</dia:string>
+        <dia:string>#external_expander_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -20857,7 +20857,7 @@ space.#</dia:string>
       <dia:attribute name="operations">
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#register_injector#</dia:string>
+            <dia:string>#register_external_expander#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
@@ -20905,13 +20905,13 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#injectors#</dia:string>
+            <dia:string>#external_expanders#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::list&lt;boost::shared_ptr&lt;injector_interface&gt;&gt;#</dia:string>
+            <dia:string>#std::list&lt;boost::shared_ptr&lt;external_expander_interface&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20977,17 +20977,17 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-10.815,54.4"/>
+        <dia:point val="-11.35,54.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-30.3675,53.65;-10.065,65.7497"/>
+        <dia:rectangle val="-30.3675,53.65;-10.6,65.7497"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-10.815,54.4"/>
-        <dia:point val="-10.815,62"/>
+        <dia:point val="-11.35,54.4"/>
+        <dia:point val="-11.35,62"/>
         <dia:point val="-30.3175,62"/>
         <dia:point val="-30.3175,64.9497"/>
       </dia:attribute>
@@ -25393,7 +25393,7 @@ space.#</dia:string>
         <dia:point val="73.065,38"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="31.95,37.25;73.815,50.8"/>
+        <dia:rectangle val="34.95,37.25;73.815,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -25401,8 +25401,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="73.065,38"/>
         <dia:point val="73.065,43"/>
-        <dia:point val="32,43"/>
-        <dia:point val="32,50"/>
+        <dia:point val="35,43"/>
+        <dia:point val="35,50"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -29816,17 +29816,17 @@ output languages.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="53.29,50"/>
+        <dia:point val="56.29,50"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.54,46.25;60.2,50.8"/>
+        <dia:rectangle val="55.54,46.25;60.2,50.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="53.29,50"/>
-        <dia:point val="53.29,47"/>
+        <dia:point val="56.29,50"/>
+        <dia:point val="56.29,47"/>
         <dia:point val="60,47"/>
         <dia:point val="60,50"/>
       </dia:attribute>
@@ -32108,17 +32108,17 @@ output languages.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="53.29,58.4"/>
+        <dia:point val="56.29,58.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="52.54,57.65;62.2,77.8"/>
+        <dia:rectangle val="55.54,57.65;62.2,77.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="53.29,58.4"/>
-        <dia:point val="53.29,72"/>
+        <dia:point val="56.29,58.4"/>
+        <dia:point val="56.29,72"/>
         <dia:point val="62,72"/>
         <dia:point val="62,77"/>
       </dia:attribute>

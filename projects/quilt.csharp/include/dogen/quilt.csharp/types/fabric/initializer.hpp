@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/injector_registrar.hpp"
+#include "dogen/yarn/types/external_expander_registrar.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -34,7 +34,7 @@ namespace fabric {
 
 class initializer final {
 public:
-    static void initialize(yarn::injector_registrar& rg);
+    static void initialize(yarn::external_expander_registrar& rg);
 };
 
 } } } }

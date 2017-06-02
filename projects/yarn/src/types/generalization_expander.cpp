@@ -88,8 +88,9 @@ generalization_expander::update_and_collect_parent_ids(const indices& idx,
          * have been supplied via meta-data, and as such, be
          * incomplete. We can't wait for the resolution step proper
          * because there is a circular dependency: resolution needs
-         * injection and injection needs generalization, which needs
-         * resolution. So we must resolve here.
+         * streotype expansion and streotype expansion needs
+         * generalization, which needs resolution. So we must resolve
+         * here.
          */
         std::list<name> resolved_parents;
         for (const auto& pn : o.parents()) {

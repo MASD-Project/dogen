@@ -18,37 +18,31 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INJECTION_ERROR_HPP
-#define DOGEN_YARN_TYPES_INJECTION_ERROR_HPP
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/external_expander.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+using namespace dogen::utility::log;
 
-#include <string>
-#include <boost/exception/info.hpp>
+namespace {
+
+auto lg(logger_factory("yarn.external_expander"));
+
+}
 
 namespace dogen {
 namespace yarn {
 
-/**
- * @brief An error has occurred while injecting types.
- */
-class injection_error : public virtual std::exception, public virtual boost::exception {
-public:
-    injection_error() = default;
-    ~injection_error() noexcept = default;
+void external_expander::expand(const annotations::type_repository& atrp,
+    const external_expander_registrar& rg, intermediate_model& m) {
 
-public:
-    explicit injection_error(const std::string& message) : message_(message) { }
+    const auto id(m.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Performing external expansion on: " << id;
 
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
+    for (const auto& ee : rg.external_expanders())
+        ee->expand(atrp, m);
 
-private:
-    const std::string message_;
-};
+    BOOST_LOG_SEV(lg, debug) << "Finished performing external expansion.";
+}
 
 } }
-
-#endif

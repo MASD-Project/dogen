@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_INJECTOR_INTERFACE_FWD_HPP
-#define DOGEN_YARN_TYPES_INJECTOR_INTERFACE_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_EXTERNAL_EXPANSION_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_EXTERNAL_EXPANSION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,7 +28,7 @@
 namespace dogen {
 namespace yarn {
 
-class injector_interface;
+class external_expansion_error;
 
 } }
 

@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
-#include "dogen/yarn/types/injector_registrar.hpp"
+#include "dogen/yarn/types/external_expander_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
 #include "dogen/yarn/types/model.hpp"
 
@@ -50,10 +50,10 @@ public:
     static yarn::frontend_registrar& frontend_registrar();
 
     /**
-     * @brief Returns the injector registrar. If it has not yet been
-     * initialised, initialises it.
+     * @brief Returns the external expander registrar. If it has not
+     * yet been initialised, initialises it.
      */
-    static yarn::injector_registrar& injector_registrar();
+    static yarn::external_expander_registrar& external_expander_registrar();
 
 private:
     void validate() const;
@@ -87,7 +87,8 @@ public:
 
 private:
     static std::shared_ptr<yarn::frontend_registrar> frontend_registrar_;
-    static std::shared_ptr<yarn::injector_registrar> injector_registrar_;
+    static std::shared_ptr<yarn::external_expander_registrar>
+    external_expander_registrar_;
 };
 
 } }
