@@ -334,10 +334,21 @@ Notes:
   then see where segmentation ends.
 
 *** STARTED Move decoration into yarn                                 :story:
+    CLOCK: [2017-06-02 Fri 14:12]--[2017-06-02 Fri 15:03] =>  0:51
     CLOCK: [2017-06-02 Fri 13:11]--[2017-06-02 Fri 14:11] =>  1:00
 
 We need to handle decorations from yarn, since its common to all
 kernels.
+
+- move injection to last in second stage expansion. This proves there
+  are no dependencies with other expansion steps.
+- rename injection to external expansion. Ensure there are no injector
+  remnants in terms of terminology in yarn. Use expansion error
+  instead of injection error.
+- add parameters required for decoration expansion. Drill across the
+  APIs to supply those parameters.
+- create a decoration expander based on external expansion
+  interface. Add decoration element properties, etc.
 
 *** Move enablement into yarn                                         :story:
 
