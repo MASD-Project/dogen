@@ -13,21 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-06-02 Fri 11:56]
+#+CAPTION: Clock summary at [2017-06-02 Fri 14:11]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *25:52* |       |       | 100.0 |
+| *Total time*                                                                | *26:52* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 25:52   |       |       | 100.0 |
-| Active                                                                      |         | 25:52 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  25.9 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   3.2 |
-| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  17.1 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   8.9 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  41.8 |
+| Stories                                                                     | 26:52   |       |       | 100.0 |
+| Active                                                                      |         | 26:52 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  24.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   3.0 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  16.4 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   8.6 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  40.3 |
 | STARTED WIX Path has changed on appveyor                                    |         |       |  0:09 |   0.6 |
-| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   2.6 |
+| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   2.5 |
+| STARTED Move decoration into yarn                                           |         |       |  1:00 |   3.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -332,7 +333,8 @@ Notes:
   into yarn (basically decoration and artefact properties) first and
   then see where segmentation ends.
 
-*** Move decoration into yarn                                         :story:
+*** STARTED Move decoration into yarn                                 :story:
+    CLOCK: [2017-06-02 Fri 13:11]--[2017-06-02 Fri 14:11] =>  1:00
 
 We need to handle decorations from yarn, since its common to all
 kernels.
