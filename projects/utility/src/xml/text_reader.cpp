@@ -44,6 +44,7 @@ public:
     libxml_scope_guard() {
         xmlInitParser();
         xmlSetBufferAllocationScheme(XML_BUFFER_ALLOC_DOUBLEIT);
+        xmlThrDefBufferAllocScheme(XML_BUFFER_ALLOC_DOUBLEIT);
     }
     ~libxml_scope_guard() { xmlCleanupParser(); }
 };
