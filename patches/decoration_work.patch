@@ -1,0 +1,412 @@
+diff --git a/projects/knit/include/dogen/knit/types/workflow.hpp b/projects/knit/include/dogen/knit/types/workflow.hpp
+index 01db2a950..698b77c44 100644
+--- a/projects/knit/include/dogen/knit/types/workflow.hpp
++++ b/projects/knit/include/dogen/knit/types/workflow.hpp
+@@ -35,6 +35,7 @@
+ #include <boost/filesystem/path.hpp>
+ #include "dogen/annotations/types/annotation_groups_factory.hpp"
+ #include "dogen/annotations/types/type_repository.hpp"
++#include "dogen/formatters/types/decoration_properties_factory.hpp"
+ #include "dogen/options/types/knitting_options.hpp"
+ #include "dogen/yarn/types/model.hpp"
+ #include "dogen/yarn/types/descriptor.hpp"
+@@ -118,6 +119,21 @@ private:
+         const annotations::type_repository& atrp) const;
+ 
+     /**
++     * @brief Creates the formatters' repository with decoration data.
++     */
++    dogen::formatters::repository create_formatters_decoration_repository(const
++        std::vector<boost::filesystem::path>& data_directories) const;
++
++    /**
++     * @brief Create the decoration configuration factory.
++     */
++    dogen::formatters::decoration_properties_factory
++    create_decoration_properties_factory(
++        const annotations::type_repository& atrp,
++        const dogen::formatters::repository& frp,
++        const annotations::annotation& ra) const;
++
++    /**
+      * @brief Obtain the yarn models.
+      */
+     std::list<yarn::model>
+diff --git a/projects/knit/src/types/workflow.cpp b/projects/knit/src/types/workflow.cpp
+index 7758c3b89..3c3217382 100644
+--- a/projects/knit/src/types/workflow.cpp
++++ b/projects/knit/src/types/workflow.cpp
+@@ -29,6 +29,7 @@
+ #include "dogen/options/types/knitting_options_validator.hpp"
+ #include "dogen/options/io/knitting_options_io.hpp"
+ #include "dogen/yarn/types/workflow.hpp"
++#include "dogen/formatters/types/repository_factory.hpp"
+ #include "dogen/formatters/types/formatting_error.hpp"
+ #include "dogen/formatters/types/filesystem_writer.hpp"
+ #include "dogen/quilt/types/workflow.hpp"
+@@ -101,6 +102,13 @@ workflow::create_annotation_groups_factory(
+     return r;
+ }
+ 
++dogen::formatters::repository workflow::
++create_formatters_decoration_repository(
++    const std::vector<boost::filesystem::path>& data_directories) const {
++    dogen::formatters::repository_factory hw;
++    return hw.make(data_directories);
++}
++
+ std::list<yarn::model> workflow::
+ obtain_yarn_models(const std::vector<boost::filesystem::path>& data_dirs,
+     const annotations::annotation_groups_factory& agf,
+@@ -151,11 +159,12 @@ void workflow::execute() const {
+     BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
+ 
+     try {
+-        const auto data_dirs(obtain_data_dirs());
++        const auto dd(obtain_data_dirs());
+         const auto alrp(obtain_archetype_location_repository());
+-        const auto atrp(setup_annotations_repository(data_dirs, alrp));
+-        const auto agf(create_annotation_groups_factory(data_dirs, alrp, atrp));
+-        const auto models(obtain_yarn_models(data_dirs, agf, atrp));
++        const auto atrp(setup_annotations_repository(dd, alrp));
++        const auto drp(create_formatters_decoration_repository(dd));
++        const auto agf(create_annotation_groups_factory(dd, alrp, atrp));
++        const auto models(obtain_yarn_models(dd, agf, atrp));
+ 
+         for (const auto& m : models) {
+             if (!m.has_generatable_types()) {
+@@ -163,8 +172,11 @@ void workflow::execute() const {
+                 return;
+             }
+ 
++            const auto& ra(m.root_module().annotation());
++            const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
++
+             quilt::workflow w(knitting_options_, atrp, agf);
+-            const auto ko(w.execute(m));
++            const auto ko(w.execute(drp, dpf, m));
+             if (!ko || ko->artefacts().empty()) {
+                 BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
+                 return;
+diff --git a/projects/quilt/include/dogen/quilt/types/kernel_interface.hpp b/projects/quilt/include/dogen/quilt/types/kernel_interface.hpp
+index e88dc557d..0e7e36caf 100644
+--- a/projects/quilt/include/dogen/quilt/types/kernel_interface.hpp
++++ b/projects/quilt/include/dogen/quilt/types/kernel_interface.hpp
+@@ -25,7 +25,9 @@
+ #pragma once
+ #endif
+ 
++#include <list>
+ #include <forward_list>
++#include <boost/shared_ptr.hpp>
+ #include <boost/filesystem/path.hpp>
+ #include "dogen/options/types/knitting_options.hpp"
+ #include "dogen/annotations/types/type_repository.hpp"
+@@ -34,6 +36,7 @@
+ #include "dogen/formatters/types/repository.hpp"
+ #include "dogen/formatters/types/decoration_properties_factory.hpp"
+ #include "dogen/yarn/types/model.hpp"
++#include "dogen/yarn/types/external_expander_interface.hpp"
+ #include "dogen/yarn/types/languages.hpp"
+ #include "dogen/formatters/types/artefact.hpp"
+ #include "dogen/quilt/types/kernel_output.hpp"
+@@ -81,6 +84,13 @@ public:
+     virtual yarn::languages language() const = 0;
+ 
+     /**
++     * @brief Retrieves all of the external expanders supported by
++     * this kernel.
++     */
++    virtual std::list<boost::shared_ptr<yarn::external_expander_interface>>
++    external_expanders() const = 0;
++
++    /**
+      * @brief Generates the source code for the kernel.
+      */
+     virtual kernel_output generate(const options::knitting_options& ko,
+diff --git a/projects/quilt/include/dogen/quilt/types/workflow.hpp b/projects/quilt/include/dogen/quilt/types/workflow.hpp
+index 7e08034bc..48d7d1077 100644
+--- a/projects/quilt/include/dogen/quilt/types/workflow.hpp
++++ b/projects/quilt/include/dogen/quilt/types/workflow.hpp
+@@ -38,6 +38,7 @@
+ #include "dogen/formatters/types/artefact.hpp"
+ #include "dogen/formatters/types/repository.hpp"
+ #include "dogen/formatters/types/decoration_properties_factory.hpp"
++#include "dogen/formatters/types/repository.hpp"
+ #include "dogen/yarn/types/model.hpp"
+ #include "dogen/quilt/types/kernel_output.hpp"
+ #include "dogen/quilt/types/kernel_registrar.hpp"
+@@ -62,21 +63,6 @@ private:
+ private:
+     std::vector<boost::filesystem::path> obtain_data_directories() const;
+ 
+-    /**
+-     * @brief Creates the formatters' repository with decoration data.
+-     */
+-    dogen::formatters::repository create_formatters_decoration_repository(const
+-        std::vector<boost::filesystem::path>& data_directories) const;
+-
+-    /**
+-     * @brief Create the decoration configuration factory.
+-     */
+-    dogen::formatters::decoration_properties_factory
+-    create_decoration_properties_factory(
+-        const annotations::type_repository& atrp,
+-        const dogen::formatters::repository& frp,
+-        const annotations::annotation& ra) const;
+-
+ public:
+     /**
+      * @brief Returns the registrar. If it has not yet been
+@@ -96,7 +82,10 @@ public:
+      * @brief Generates files for the supplied model using all
+      * registered kernels.
+      */
+-    boost::optional<kernel_output> execute(const yarn::model& m) const;
++    boost::optional<kernel_output>
++    execute(const dogen::formatters::repository& drp,
++        const dogen::formatters::decoration_properties_factory& dpf,
++        const yarn::model& m) const;
+ 
+ private:
+     static std::shared_ptr<kernel_registrar> registrar_;
+diff --git a/projects/quilt/src/types/workflow.cpp b/projects/quilt/src/types/workflow.cpp
+index 9c400b0a4..c19695798 100644
+--- a/projects/quilt/src/types/workflow.cpp
++++ b/projects/quilt/src/types/workflow.cpp
+@@ -23,7 +23,6 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/utility/filesystem/path.hpp"
+ #include "dogen/annotations/io/type_io.hpp"
+-#include "dogen/formatters/types/repository_factory.hpp"
+ #include "dogen/yarn/io/languages_io.hpp"
+ #include "dogen/quilt/types/configuration_factory.hpp"
+ #include "dogen/quilt/types/workflow_error.hpp"
+@@ -71,13 +70,6 @@ obtain_data_directories() const {
+     return r;
+ }
+ 
+-dogen::formatters::repository workflow::
+-create_formatters_decoration_repository(
+-    const std::vector<boost::filesystem::path>& data_directories) const {
+-    dogen::formatters::repository_factory hw;
+-    return hw.make(data_directories);
+-}
+-
+ dogen::formatters::decoration_properties_factory
+ workflow::create_decoration_properties_factory(
+     const annotations::type_repository& atrp,
+@@ -106,7 +98,10 @@ std::list<annotations::archetype_location> workflow::archetype_locations() {
+     return r;
+ }
+ 
+-boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
++boost::optional<kernel_output>
++workflow::execute(const dogen::formatters::repository& drp,
++    const dogen::formatters::decoration_properties_factory& dpf,
++    const yarn::model& m) const {
+     /*
+      * We expect the output directory to be absolute. This just makes
+      * our life easier in terms of assumptions. Note that this does
+@@ -129,10 +124,6 @@ boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
+     const auto& atrp(repository_);
+     const auto& af(annotation_factory_);
+ 
+-    const auto dd(obtain_data_directories());
+-    const auto drp(create_formatters_decoration_repository(dd));
+-    const auto dpf(create_decoration_properties_factory(repository_, drp, ra));
+-
+     const auto ol(m.output_language());
+     BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << ol;
+ 
+diff --git a/projects/yarn/include/dogen/yarn/types/all.hpp b/projects/yarn/include/dogen/yarn/types/all.hpp
+index 2a191b924..743b3f123 100644
+--- a/projects/yarn/include/dogen/yarn/types/all.hpp
++++ b/projects/yarn/include/dogen/yarn/types/all.hpp
+@@ -125,7 +125,10 @@
+ #include "dogen/yarn/types/orm_primitive_properties.hpp"
+ #include "dogen/yarn/types/type_parameters_expander.hpp"
+ #include "dogen/yarn/types/external_expander_interface.hpp"
++<<<<<<< Updated upstream
+ #include "dogen/yarn/types/external_expander_registrar.hpp"
++=======
++>>>>>>> Stashed changes
+ #include "dogen/yarn/types/intermediate_model_repository.hpp"
+ #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
+ #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
+diff --git a/projects/yarn/include/dogen/yarn/types/second_stage_expander.hpp b/projects/yarn/include/dogen/yarn/types/second_stage_expander.hpp
+index 385a5b37e..6c283b3a3 100644
+--- a/projects/yarn/include/dogen/yarn/types/second_stage_expander.hpp
++++ b/projects/yarn/include/dogen/yarn/types/second_stage_expander.hpp
+@@ -27,12 +27,15 @@
+ 
+ #include <list>
+ #include <utility>
++#include <boost/shared_ptr.hpp>
+ #include "dogen/annotations/types/annotation.hpp"
+ #include "dogen/annotations/types/type_repository.hpp"
++#include "dogen/formatters/types/decoration_properties_factory.hpp"
+ #include "dogen/yarn/types/intermediate_model.hpp"
+ #include "dogen/yarn/types/external_expander_registrar.hpp"
+ #include "dogen/yarn/types/element.hpp"
+ #include "dogen/yarn/types/indices.hpp"
++#include "dogen/yarn/types/external_expander_interface.hpp"
+ 
+ namespace dogen {
+ namespace yarn {
+@@ -125,6 +128,14 @@ private:
+         const external_expander_registrar& rg, intermediate_model& im) const;
+ 
+     /**
++     * @brief Performs external expansions.
++     */
++    void perform_external_expansions(
++        const dogen::formatters::decoration_properties_factory& dpf,
++        const std::list<boost::shared_ptr<external_expander_interface>>& ee,
++        intermediate_model& im) const;
++
++    /**
+      * @brief Ensures the model passes all validation rules.
+      */
+     void validate(const indices& idx, const intermediate_model& im) const;
+@@ -134,8 +145,14 @@ public:
+      * @brief Make the final model.
+      */
+     intermediate_model
++<<<<<<< Updated upstream
+     make(const annotations::type_repository& atrp,
+         const external_expander_registrar& rg,
++=======
++    make(const annotations::type_repository& atrp, const injector_registrar& rg,
++        const dogen::formatters::decoration_properties_factory& dpf,
++        const std::list<boost::shared_ptr<external_expander_interface>>& ee,
++>>>>>>> Stashed changes
+         const std::list<intermediate_model>& ims) const;
+ };
+ 
+diff --git a/projects/yarn/include/dogen/yarn/types/workflow.hpp b/projects/yarn/include/dogen/yarn/types/workflow.hpp
+index 49e19cf19..6aeb33013 100644
+--- a/projects/yarn/include/dogen/yarn/types/workflow.hpp
++++ b/projects/yarn/include/dogen/yarn/types/workflow.hpp
+@@ -26,13 +26,16 @@
+ #endif
+ 
+ #include <vector>
++#include <boost/shared_ptr.hpp>
+ #include <boost/filesystem/path.hpp>
+ #include "dogen/annotations/types/annotation_groups_factory.hpp"
+ #include "dogen/annotations/types/type_repository.hpp"
++#include "dogen/formatters/types/decoration_properties_factory.hpp"
+ #include "dogen/options/types/knitting_options.hpp"
+ #include "dogen/yarn/types/frontend_registrar.hpp"
+ #include "dogen/yarn/types/external_expander_registrar.hpp"
+ #include "dogen/yarn/types/intermediate_model_repository.hpp"
++#include "dogen/yarn/types/external_expander_interface.hpp"
+ #include "dogen/yarn/types/model.hpp"
+ 
+ namespace dogen {
+@@ -72,6 +75,8 @@ private:
+      */
+     intermediate_model peform_second_stage_expansion(
+         const annotations::type_repository& atrp,
++        const dogen::formatters::decoration_properties_factory& dpf,
++        const std::list<boost::shared_ptr<external_expander_interface>>& ee,
+         const std::list<intermediate_model>& ims) const;
+ 
+     /**
+@@ -83,6 +88,8 @@ public:
+     std::list<model> execute(const std::vector<boost::filesystem::path>& dirs,
+         const annotations::annotation_groups_factory& agf,
+         const annotations::type_repository& atrp,
++        const dogen::formatters::decoration_properties_factory& dpf,
++        const std::list<boost::shared_ptr<external_expander_interface>>& ee,
+         const options::knitting_options& ko) const;
+ 
+ private:
+diff --git a/projects/yarn/src/types/second_stage_expander.cpp b/projects/yarn/src/types/second_stage_expander.cpp
+index 9fd1bfd69..27d05705e 100644
+--- a/projects/yarn/src/types/second_stage_expander.cpp
++++ b/projects/yarn/src/types/second_stage_expander.cpp
+@@ -176,15 +176,31 @@ perform_external_expansion(const annotations::type_repository& atrp,
+     ex.expand(atrp, rg, im);
+ }
+ 
++void second_stage_expander::perform_external_expansions(
++    const dogen::formatters::decoration_properties_factory& dpf,
++    const std::list<boost::shared_ptr<external_expander_interface>>& ee,
++    intermediate_model& im) const {
++
++    for (const auto expander : ee)
++        expander->expand(dpf, im);
++}
++
+ void second_stage_expander::
+ validate(const indices& idx, const intermediate_model& im) const {
+     second_stage_validator v;
+     v.validate(idx, im);
+ }
+ 
++<<<<<<< Updated upstream
+ intermediate_model
+ second_stage_expander::make(const annotations::type_repository& atrp,
+     const external_expander_registrar& rg,
++=======
++intermediate_model second_stage_expander::
++make(const annotations::type_repository& atrp, const injector_registrar& rg,
++    const dogen::formatters::decoration_properties_factory& dpf,
++    const std::list<boost::shared_ptr<external_expander_interface>>& ee,
++>>>>>>> Stashed changes
+     const std::list<intermediate_model>& ims) const {
+     BOOST_LOG_SEV(lg, debug) << "Starting second stage expansion.";
+ 
+@@ -266,6 +282,12 @@ second_stage_expander::make(const annotations::type_repository& atrp,
+     perform_external_expansion(atrp, rg, r);
+ 
+     /*
++     * Finally, we can perform all of the external - kernel specific -
++     * expansions.
++     */
++    perform_external_expansions(dpf, ee, r);
++
++    /*
+      * Ensure the model is valid.
+      */
+     validate(idx, r);
+diff --git a/projects/yarn/src/types/workflow.cpp b/projects/yarn/src/types/workflow.cpp
+index a9dfc9c8f..aadf75757 100644
+--- a/projects/yarn/src/types/workflow.cpp
++++ b/projects/yarn/src/types/workflow.cpp
+@@ -82,9 +82,15 @@ intermediate_model_repository workflow::create_intermediate_model_repository(
+ 
+ intermediate_model workflow::peform_second_stage_expansion(
+     const annotations::type_repository& atrp,
++    const dogen::formatters::decoration_properties_factory& dpf,
++    const std::list<boost::shared_ptr<external_expander_interface>>& ee,
+     const std::list<intermediate_model>& ims) const {
+     second_stage_expander ex;
++<<<<<<< Updated upstream
+     return ex.make(atrp, external_expander_registrar(), ims);
++=======
++    return ex.make(atrp, injector_registrar(), dpf, ee, ims);
++>>>>>>> Stashed changes
+ }
+ 
+ model workflow::transform_to_model(const intermediate_model& im) const {
+@@ -96,6 +102,8 @@ std::list<model>
+ workflow::execute(const std::vector<boost::filesystem::path>& dirs,
+     const annotations::annotation_groups_factory& agf,
+     const annotations::type_repository& atrp,
++    const dogen::formatters::decoration_properties_factory& dpf,
++    const std::list<boost::shared_ptr<external_expander_interface>>& ee,
+     const options::knitting_options& ko) const {
+     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
+ 
+@@ -103,7 +111,7 @@ workflow::execute(const std::vector<boost::filesystem::path>& dirs,
+     const auto imrp(create_intermediate_model_repository(dirs, agf, atrp, ko));
+     for(const auto& pair : imrp.by_language()) {
+         const auto& ims(pair.second);
+-        const auto im(peform_second_stage_expansion(atrp, ims));
++        const auto im(peform_second_stage_expansion(atrp, dpf, ee, ims));
+         r.push_back(transform_to_model(im));
+     }
+ 
