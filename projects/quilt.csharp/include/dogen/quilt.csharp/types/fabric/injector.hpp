@@ -56,6 +56,7 @@ private:
 public:
     std::string id() const override;
     void expand(const annotations::type_repository& atrp,
+        const dogen::formatters::decoration_properties_factory& dpf,
         yarn::intermediate_model& im) const override;
 };
 

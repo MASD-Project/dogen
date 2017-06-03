@@ -29,6 +29,7 @@
 #include <utility>
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/external_expander_registrar.hpp"
 #include "dogen/yarn/types/element.hpp"
@@ -50,6 +51,22 @@ private:
      * generation, false otherwise.
      */
     bool has_generatable_types(const intermediate_model& m) const;
+
+private:
+    /**
+     * @brief Creates the formatters' repository with decoration data.
+     */
+    dogen::formatters::repository create_formatters_decoration_repository(const
+        std::vector<boost::filesystem::path>& data_directories) const;
+
+    /**
+     * @brief Create the decoration configuration factory.
+     */
+    dogen::formatters::decoration_properties_factory
+    create_decoration_properties_factory(
+        const annotations::type_repository& atrp,
+        const dogen::formatters::repository& frp,
+        const annotations::annotation& ra) const;
 
 private:
     /**
@@ -121,7 +138,9 @@ private:
     /**
      * @brief Performs all external expansions to the model.
      */
-    void perform_external_expansion(const annotations::type_repository& atrp,
+    void perform_external_expansion(
+        const std::vector<boost::filesystem::path>& dirs,
+        const annotations::type_repository& atrp,
         const external_expander_registrar& rg, intermediate_model& im) const;
 
     /**
@@ -134,7 +153,8 @@ public:
      * @brief Make the final model.
      */
     intermediate_model
-    make(const annotations::type_repository& atrp,
+    make(const std::vector<boost::filesystem::path>& dirs,
+        const annotations::type_repository& atrp,
         const external_expander_registrar& rg,
         const std::list<intermediate_model>& ims) const;
 };

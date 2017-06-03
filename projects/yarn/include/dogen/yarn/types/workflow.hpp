@@ -71,6 +71,7 @@ private:
      * @brief Performs the second stage expansion.
      */
     intermediate_model peform_second_stage_expansion(
+        const std::vector<boost::filesystem::path>& dirs,
         const annotations::type_repository& atrp,
         const std::list<intermediate_model>& ims) const;
 

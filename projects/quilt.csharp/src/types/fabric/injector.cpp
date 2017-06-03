@@ -81,6 +81,7 @@ void injector::inject_assistant(yarn::intermediate_model& im) const {
 }
 
 void injector::expand(const annotations::type_repository& atrp,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
     yarn::intermediate_model& im) const {
     inject_visual_studio(atrp, im);
     inject_assembly_info(im);

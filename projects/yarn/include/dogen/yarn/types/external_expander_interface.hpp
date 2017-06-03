@@ -23,6 +23,7 @@
 
 #include <string>
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
@@ -42,6 +43,7 @@ public:
 public:
     virtual std::string id() const = 0;
     virtual void expand(const annotations::type_repository& atrp,
+        const dogen::formatters::decoration_properties_factory& dpf,
         intermediate_model& im) const = 0;
 };
 

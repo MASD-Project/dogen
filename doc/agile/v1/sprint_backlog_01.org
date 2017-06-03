@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-06-02 Fri 17:37]
+#+CAPTION: Clock summary at [2017-06-03 Sat 16:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *28:41* |       |       | 100.0 |
+| *Total time*                                                                | *30:05* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 28:41   |       |       | 100.0 |
-| Active                                                                      |         | 28:41 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  23.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   2.8 |
-| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  15.4 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   8.0 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  37.7 |
-| STARTED WIX Path has changed on appveyor                                    |         |       |  0:09 |   0.5 |
-| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   2.3 |
-| STARTED Move decoration into yarn                                           |         |       |  2:49 |   9.8 |
+| Stories                                                                     | 30:05   |       |       | 100.0 |
+| Active                                                                      |         | 30:05 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  22.3 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   2.7 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  14.7 |
+| COMPLETED WIX Path has changed on appveyor                                  |         |       |  0:09 |   0.5 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   7.6 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  36.0 |
+| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   2.2 |
+| STARTED Move decoration into yarn                                           |         |       |  4:13 |  14.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -176,6 +176,40 @@ See also [[https://github.com/fxbois/web-mode][web-mode]].
 We need a way to visualise stitch templates that is a bit more
 readable than fundamental mode. One option is [[https://github.com/vspinu/polymode/tree/master/modes][polymode]].
 
+*** COMPLETED WIX Path has changed on appveyor                        :story:
+    CLOSED: [2017-06-03 Sat 16:08]
+    CLOCK: [2017-05-26 Fri 15:22]--[2017-05-26 Fri 15:31] =>  0:09
+
+At present we have hard-coded the path to WIX:
+
+#+begin_example
+  - ps: if ($build_type -eq "Release") {
+            cd $project_dir\build\output\$env:compiler\$build_type;
+            $env:Path += ";C:\Program Files (x86)\WiX Toolset v3.10\bin";
+            $env:WIX = "C:\Program Files (x86)\WiX Toolset v3.10\bin";
+            cpack -G WIX -C Release;
+        }
+#+end_example
+
+This means that every time WIX has a minor upgrade, our scripts break:
+
+#+begin_example
+CPack: Create package
+cpack : CMake Error at C:/Program Files (x86)/CMake/share/cmake-3.4/Modules/CPackWIX.cmake:261 (message):
+At line:1 char:211
++ ... rogram Files (x86)\WiX Toolset v3.10\bin"; cpack -G WIX -C Release; }
++                                                ~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (CMake Error at ...:261 (message)::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+
+  Could not find the WiX candle executable.
+CPack Error: Error while executing CPackWIX.cmake
+#+end_example
+
+The right way to do this is to use the WIX environment variable:
+
+- [[https://github.com/appveyor/ci/issues/1267][Add WiX toolset to PATH]]
+
 *** STARTED Add support for proper JSON serialisation in C++          :story:
     CLOCK: [2017-04-12 Wed 20:56]--[2017-04-12 Wed 23:14] =>  2:18
 
@@ -272,39 +306,6 @@ took center stage. We cannot proceed to the next phase of the product
 without a firm grasp of the theory. This story is a starting point so
 we can decide on how to break up the work.
 
-*** STARTED WIX Path has changed on appveyor                          :story:
-    CLOCK: [2017-05-26 Fri 15:22]--[2017-05-26 Fri 15:31] =>  0:09
-
-At present we have hard-coded the path to WIX:
-
-#+begin_example
-  - ps: if ($build_type -eq "Release") {
-            cd $project_dir\build\output\$env:compiler\$build_type;
-            $env:Path += ";C:\Program Files (x86)\WiX Toolset v3.10\bin";
-            $env:WIX = "C:\Program Files (x86)\WiX Toolset v3.10\bin";
-            cpack -G WIX -C Release;
-        }
-#+end_example
-
-This means that every time WIX has a minor upgrade, our scripts break:
-
-#+begin_example
-CPack: Create package
-cpack : CMake Error at C:/Program Files (x86)/CMake/share/cmake-3.4/Modules/CPackWIX.cmake:261 (message):
-At line:1 char:211
-+ ... rogram Files (x86)\WiX Toolset v3.10\bin"; cpack -G WIX -C Release; }
-+                                                ~~~~~~~~~~~~~~~~~~~~~~~
-    + CategoryInfo          : NotSpecified: (CMake Error at ...:261 (message)::String) [], RemoteException
-    + FullyQualifiedErrorId : NativeCommandError
-
-  Could not find the WiX candle executable.
-CPack Error: Error while executing CPackWIX.cmake
-#+end_example
-
-The right way to do this is to use the WIX environment variable:
-
-- [[https://github.com/appveyor/ci/issues/1267][Add WiX toolset to PATH]]
-
 *** STARTED Move element segmentation into yarn                       :story:
     CLOCK: [2017-06-02 Fri 11:16]--[2017-06-02 Fri 11:56] =>  0:40
 
@@ -334,12 +335,16 @@ Notes:
   then see where segmentation ends.
 
 *** STARTED Move decoration into yarn                                 :story:
+    CLOCK: [2017-06-03 Sat 16:09]--[2017-06-03 Sat 16:27] =>  0:18
+    CLOCK: [2017-06-03 Sat 15:02]--[2017-06-03 Sat 16:08] =>  1:06
     CLOCK: [2017-06-02 Fri 15:04]--[2017-06-02 Fri 16:02] =>  0:58
     CLOCK: [2017-06-02 Fri 14:12]--[2017-06-02 Fri 15:03] =>  0:51
     CLOCK: [2017-06-02 Fri 13:11]--[2017-06-02 Fri 14:11] =>  1:00
 
 We need to handle decorations from yarn, since its common to all
 kernels.
+
+Done:
 
 - move injection to last in second stage expansion. This proves there
   are no dependencies with other expansion steps.
@@ -348,8 +353,17 @@ kernels.
   instead of injection error.
 - add parameters required for decoration expansion. Drill across the
   APIs to supply those parameters.
+- move creation of drp and dpf into yarn workflow.
+- revert all changes to knit and quilt. We'll just recreate drp/dpf in
+  quilt for now.
+
+To do:
+
+- add element properties and decoration properties to yarn.
 - create a decoration expander based on external expansion
-  interface. Add decoration element properties, etc.
+  interface. Populate decoration properties.
+- update assistant to read decoration properties from yarn.
+- remove decoration properties from quilt cpp and csharp.
 
 *** Move enablement into yarn                                         :story:
 

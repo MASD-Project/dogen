@@ -34,13 +34,14 @@ namespace dogen {
 namespace yarn {
 
 void external_expander::expand(const annotations::type_repository& atrp,
+    const dogen::formatters::decoration_properties_factory& dpf,
     const external_expander_registrar& rg, intermediate_model& m) {
 
     const auto id(m.name().id());
     BOOST_LOG_SEV(lg, debug) << "Performing external expansion on: " << id;
 
     for (const auto& ee : rg.external_expanders())
-        ee->expand(atrp, m);
+        ee->expand(atrp, dpf, m);
 
     BOOST_LOG_SEV(lg, debug) << "Finished performing external expansion.";
 }

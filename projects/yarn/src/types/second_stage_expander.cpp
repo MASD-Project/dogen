@@ -20,6 +20,8 @@
  */
 #include <boost/filesystem/path.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/merger.hpp"
 #include "dogen/yarn/types/indexer.hpp"
@@ -89,6 +91,23 @@ has_generatable_types(const intermediate_model& im) const {
     }
 
     return false;
+}
+
+dogen::formatters::repository second_stage_expander::
+create_formatters_decoration_repository(
+    const std::vector<boost::filesystem::path>& data_directories) const {
+    dogen::formatters::repository_factory hw;
+    return hw.make(data_directories);
+}
+
+dogen::formatters::decoration_properties_factory
+second_stage_expander::create_decoration_properties_factory(
+    const annotations::type_repository& atrp,
+    const dogen::formatters::repository& frp,
+    const annotations::annotation& ra) const {
+    using dogen::formatters::decoration_properties_factory;
+    decoration_properties_factory r(atrp, frp, ra);
+    return r;
 }
 
 intermediate_model second_stage_expander::
@@ -170,10 +189,16 @@ update_model_generability(intermediate_model& im) const {
 }
 
 void second_stage_expander::
-perform_external_expansion(const annotations::type_repository& atrp,
+perform_external_expansion(const std::vector<boost::filesystem::path>& dirs,
+    const annotations::type_repository& atrp,
     const external_expander_registrar& rg, intermediate_model& im) const {
+
+    const auto ra(im.root_module().annotation());
+    const auto drp(create_formatters_decoration_repository(dirs));
+    const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
+
     external_expander ex;
-    ex.expand(atrp, rg, im);
+    ex.expand(atrp, dpf, rg, im);
 }
 
 void second_stage_expander::
@@ -182,8 +207,9 @@ validate(const indices& idx, const intermediate_model& im) const {
     v.validate(idx, im);
 }
 
-intermediate_model
-second_stage_expander::make(const annotations::type_repository& atrp,
+intermediate_model second_stage_expander::
+make(const std::vector<boost::filesystem::path>& dirs,
+    const annotations::type_repository& atrp,
     const external_expander_registrar& rg,
     const std::list<intermediate_model>& ims) const {
     BOOST_LOG_SEV(lg, debug) << "Starting second stage expansion.";
@@ -261,9 +287,9 @@ second_stage_expander::make(const annotations::type_repository& atrp,
 
     /*
      * We can perform external expansion last as no one should be
-     * relying on these expansions.
+     * relying on these expansions. These are kernel specific.
      */
-    perform_external_expansion(atrp, rg, r);
+    perform_external_expansion(dirs, atrp, rg, r);
 
     /*
      * Ensure the model is valid.

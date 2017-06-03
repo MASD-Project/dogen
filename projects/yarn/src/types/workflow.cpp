@@ -81,10 +81,11 @@ intermediate_model_repository workflow::create_intermediate_model_repository(
 }
 
 intermediate_model workflow::peform_second_stage_expansion(
+    const std::vector<boost::filesystem::path>& dirs,
     const annotations::type_repository& atrp,
     const std::list<intermediate_model>& ims) const {
     second_stage_expander ex;
-    return ex.make(atrp, external_expander_registrar(), ims);
+    return ex.make(dirs, atrp, external_expander_registrar(), ims);
 }
 
 model workflow::transform_to_model(const intermediate_model& im) const {
@@ -103,7 +104,7 @@ workflow::execute(const std::vector<boost::filesystem::path>& dirs,
     const auto imrp(create_intermediate_model_repository(dirs, agf, atrp, ko));
     for(const auto& pair : imrp.by_language()) {
         const auto& ims(pair.second);
-        const auto im(peform_second_stage_expansion(atrp, ims));
+        const auto im(peform_second_stage_expansion(dirs, atrp, ims));
         r.push_back(transform_to_model(im));
     }
 

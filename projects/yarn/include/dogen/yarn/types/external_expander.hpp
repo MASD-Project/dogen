@@ -27,6 +27,7 @@
 
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/external_expander_registrar.hpp"
 
@@ -36,6 +37,7 @@ namespace yarn {
 class external_expander {
 public:
     void expand(const annotations::type_repository& atrp,
+        const dogen::formatters::decoration_properties_factory& dpf,
         const external_expander_registrar& rg, intermediate_model& im);
 };
 

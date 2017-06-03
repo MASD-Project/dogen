@@ -104,6 +104,7 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
 }
 
 void injector::expand(const annotations::type_repository& atrp,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
     yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_build_files(im);
