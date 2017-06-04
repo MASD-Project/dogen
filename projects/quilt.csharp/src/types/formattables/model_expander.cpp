@@ -19,7 +19,6 @@
  *
  */
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
-#include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/reducer.hpp"
@@ -31,13 +30,6 @@ namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
-
-void model_expander::expand_decoration(
-    const dogen::formatters::decoration_properties_factory& dpf,
-    model& fm) const {
-    decoration_expander ex;
-    ex.expand(dpf, fm);
-}
 
 void model_expander::expand_file_paths(
     const formatters::repository& frp, const locator& l, model& fm) const {
@@ -78,7 +70,6 @@ void model_expander::expand_helpers(const annotations::type_repository& atrp,
 void model_expander::expand(
     const annotations::type_repository& atrp,
     const annotations::annotation& /*ra*/,
-    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
@@ -98,7 +89,6 @@ void model_expander::expand(
 
     reduce(fm);
 
-    expand_decoration(dpf, fm);
     expand_file_paths(frp, l, fm);
     expand_project_items(fm);
 }

@@ -20,26 +20,10 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/decoration_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/element_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/artefact_properties_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/attribute_properties_io.hpp"
-
-namespace boost {
-
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::formatters::decoration_properties>& v) {
-    s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
-
-    if (v)
-        s << "\"data\": " << *v;
-    else
-        s << "\"data\": ""\"<null>\"";
-    s << " }";
-    return s;
-}
-
-}
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -107,7 +91,6 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::formattables::element_properties\"" << ", "
-      << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "
       << "\"attribute_properties\": " << v.attribute_properties()

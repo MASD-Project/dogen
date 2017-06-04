@@ -29,8 +29,6 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include <boost/optional.hpp>
-#include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/helper_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/attribute_properties.hpp"
@@ -48,14 +46,11 @@ class element_properties final {
 public:
     element_properties() = default;
     element_properties(const element_properties&) = default;
+    element_properties(element_properties&&) = default;
     ~element_properties() = default;
 
 public:
-    element_properties(element_properties&& rhs);
-
-public:
     element_properties(
-        const boost::optional<dogen::formatters::decoration_properties>& decoration_properties,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties,
         const std::list<dogen::quilt::csharp::formattables::helper_properties>& helper_properties,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties>& attribute_properties);
@@ -68,11 +63,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::csharp::formattables::element_properties& v, unsigned int version);
 
 public:
-    const boost::optional<dogen::formatters::decoration_properties>& decoration_properties() const;
-    boost::optional<dogen::formatters::decoration_properties>& decoration_properties();
-    void decoration_properties(const boost::optional<dogen::formatters::decoration_properties>& v);
-    void decoration_properties(const boost::optional<dogen::formatters::decoration_properties>&& v);
-
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties() const;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& artefact_properties();
     void artefact_properties(const std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties>& v);
@@ -99,7 +89,6 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    boost::optional<dogen::formatters::decoration_properties> decoration_properties_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::artefact_properties> artefact_properties_;
     std::list<dogen::quilt::csharp::formattables::helper_properties> helper_properties_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::attribute_properties> attribute_properties_;

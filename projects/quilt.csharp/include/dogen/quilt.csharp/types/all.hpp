@@ -80,7 +80,6 @@
 #include "dogen/quilt.csharp/types/formatters/io/enumerable_helper.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/enum_formatter.hpp"
 #include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
-#include "dogen/quilt.csharp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/test_data/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/class_formatter.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
