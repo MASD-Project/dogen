@@ -20,6 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
+#include "dogen/quilt.cpp/types/fabric/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/fabric/external_expander.hpp"
 
 namespace {
@@ -43,14 +44,22 @@ void external_expander::expand_injection(
     i.inject(atrp, im);
 }
 
+void external_expander::expand_decoration(
+    const dogen::formatters::decoration_properties_factory& dpf,
+    yarn::intermediate_model& im) const {
+    decoration_expander de;
+    de.expand(dpf, im);
+}
+
 std::string external_expander::id() const {
     return ::id;
 }
 
 void external_expander::expand(const annotations::type_repository& atrp,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    const dogen::formatters::decoration_properties_factory& dpf,
     yarn::intermediate_model& im) const {
     expand_injection(atrp, im);
+    expand_decoration(dpf, im);
 }
 
 } } } }

@@ -18,34 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_EXPANDER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_EXPANDER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_DECORATION_EXPANDER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_DECORATION_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/external_expander_interface.hpp"
+#include "dogen/formatters/types/decoration_properties.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class external_expander final : public yarn::external_expander_interface {
-private:
-    void expand_injection(const annotations::type_repository& atrp,
-        yarn::intermediate_model& im) const;
-
-    void expand_decoration(
-        const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::intermediate_model& im) const;
-
+class decoration_expander final {
 public:
-    std::string id() const override;
-    void expand(const annotations::type_repository& atrp,
-        const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::intermediate_model& im) const override;
+    void expand(const dogen::formatters::decoration_properties_factory& dpf,
+        yarn::intermediate_model& im) const;
 };
 
 } } } }

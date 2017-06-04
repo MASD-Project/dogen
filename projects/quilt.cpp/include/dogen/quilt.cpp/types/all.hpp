@@ -67,6 +67,7 @@
 #include "dogen/quilt.cpp/types/formatters/io/pair_helper.hpp"
 #include "dogen/quilt.cpp/types/formatters/wale_formatter.hpp"
 #include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
 #include "dogen/quilt.cpp/types/formattables/cpp_standards.hpp"
 #include "dogen/quilt.cpp/types/formatters/io/ptree_helper.hpp"
