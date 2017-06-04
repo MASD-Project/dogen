@@ -22,34 +22,24 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
-#include "dogen/quilt.cpp/types/fabric/registrar.hpp"
-#include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
-#include "dogen/quilt.cpp/types/fabric/master_header.hpp"
-#include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
-#include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
-#include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
-#include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
-#include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
-#include "dogen/quilt.cpp/types/fabric/decoration_expander.hpp"
+#include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.fabric.decoration_expander"));
+static logger lg(logger_factory("quilt.csharp.fabric.decoration_expander"));
 
-const std::string cpp_modeline_name("cpp");
+const std::string cs_modeline_name("cs");
 const std::string xml_modeline_name("xml");
-const std::string cmake_modeline_name("cmake");
-const std::string odb_modeline_name("odb");
 
 }
 
 namespace dogen {
 namespace quilt {
-namespace cpp {
+namespace csharp {
 namespace fabric {
 
-class decoration_updater : public element_visitor {
+class decoration_updater {
 public:
     decoration_updater(
         const dogen::formatters::decoration_properties_factory& dpf)
@@ -57,15 +47,15 @@ public:
 
 private:
     void update(yarn::element& e,
-        const std::string & modeline_name = cpp_modeline_name) {
+        const std::string & modeline_name = cs_modeline_name) {
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << e.name().id();
         auto& ep(e.element_properties());
         ep.decoration_properties(factory_.make(modeline_name));
     }
 
 public:
-    bool include_injected_elements() { return true; }
-    void operator()(yarn::element& e) { e.accept(*this); }
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element& /*e*/) {  }
     void operator()(yarn::module& m) { update(m); }
     void operator()(yarn::concept& c) { update(c); }
     void operator()(yarn::builtin& b) { update(b); }
@@ -74,16 +64,6 @@ public:
     void operator()(yarn::object& o) { update(o); }
     void operator()(yarn::exception& e) { update(e); }
     void operator()(yarn::visitor& v) { update(v); }
-
-public:
-    using element_visitor::visit;
-    void visit(cmakelists& cm) { update(cm, cmake_modeline_name); }
-    void visit(common_odb_options& coo) { update(coo, odb_modeline_name); }
-    void visit(forward_declarations& fd) { update(fd); }
-    void visit(master_header& mh) { update(mh); }
-    void visit(object_odb_options& ooo) { update(ooo, odb_modeline_name); }
-    void visit(msbuild_targets& mt) { update(mt, xml_modeline_name); }
-    void visit(registrar& rg) { update(rg); }
 
 private:
     const dogen::formatters::decoration_properties_factory& factory_;
