@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
 #include "dogen/quilt.cpp/types/fabric/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/fabric/external_expander.hpp"
@@ -30,12 +32,26 @@ const std::string id("quilt.cpp.fabric.external_expander");
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
 
+const std::string too_many_output_languages(
+    "Expected only one output language");
+
 }
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
+
+bool external_expander::
+requires_expansion(const yarn::intermediate_model& im) const {
+    if (im.output_languages().size() != 1) {
+        BOOST_LOG_SEV(lg, error) << too_many_output_languages;
+        BOOST_THROW_EXCEPTION(yarn::expansion_error(too_many_output_languages));
+    }
+
+    const auto l(im.output_languages().front());
+    return l == yarn::languages::cpp;
+}
 
 void external_expander::expand_injection(
     const annotations::type_repository& atrp,
@@ -58,6 +74,10 @@ std::string external_expander::id() const {
 void external_expander::expand(const annotations::type_repository& atrp,
     const dogen::formatters::decoration_properties_factory& dpf,
     yarn::intermediate_model& im) const {
+
+    if (!requires_expansion(im))
+        return;
+
     expand_injection(atrp, im);
     expand_decoration(dpf, im);
 }

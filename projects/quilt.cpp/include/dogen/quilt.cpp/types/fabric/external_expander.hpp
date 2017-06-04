@@ -34,6 +34,8 @@ namespace fabric {
 
 class external_expander final : public yarn::external_expander_interface {
 private:
+    bool requires_expansion(const yarn::intermediate_model& im) const;
+
     void expand_injection(const annotations::type_repository& atrp,
         yarn::intermediate_model& im) const;
 
