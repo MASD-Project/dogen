@@ -80,8 +80,6 @@ const std::string element_not_found("Element not found: ");
 const std::string no_helpers_for_family("No helpers found for family: ");
 const std::string qn_missing("Could not find qualified name for language.");
 const std::string helpless_family("No registered helpers found for family: ");
-const std::string missing_decoration(
-    "No decoration properties found for type: ");
 
 }
 
@@ -337,15 +335,8 @@ bool assistant::is_odb_facet_enabled() const {
 
 const dogen::formatters::decoration_properties& assistant::
 get_decoration_properties(const yarn::element& e) const {
-    const auto& ep(context_.element_properties());
-    const auto& dp(ep.decoration_properties());
-    const auto key(typeid(e).name());
-    const auto i(dp.find(key));
-    if (i == dp.end()) {
-        BOOST_LOG_SEV(lg, error) << missing_decoration << key;
-        BOOST_THROW_EXCEPTION(formatting_error(missing_decoration + key));
-    }
-    return i->second;
+    const auto& ep(e.element_properties());
+    return ep.decoration_properties();
 }
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
