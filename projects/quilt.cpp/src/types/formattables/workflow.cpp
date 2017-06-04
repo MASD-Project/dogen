@@ -44,21 +44,19 @@ make_model(const formatters::repository& frp, const yarn::model& m) const {
 void workflow::expand_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
-    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
     model_expander ex;
-    ex.expand(atrp, ra, dpf, frp, l, fm);
+    ex.expand(atrp, ra, frp, l, fm);
 }
 
 model workflow::execute(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
-    const dogen::formatters::decoration_properties_factory& dpf,
     const locator& l, const formatters::repository& frp,
     const yarn::model& m) const {
 
     auto r(make_model(frp, m));
-    expand_model(atrp, ra, dpf, frp, l, r);
+    expand_model(atrp, ra, frp, l, r);
     return r;
 }
 

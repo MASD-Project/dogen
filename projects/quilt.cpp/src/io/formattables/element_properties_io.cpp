@@ -20,7 +20,6 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/formatters/io/decoration_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/odb_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/aspect_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
@@ -34,24 +33,6 @@ inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\"", "<quote>");
     boost::replace_all(s, "\\", "<backslash>");
     return s;
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::formatters::decoration_properties>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
 }
 
 namespace std {
@@ -145,7 +126,6 @@ namespace formattables {
 std::ostream& operator<<(std::ostream& s, const element_properties& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::formattables::element_properties\"" << ", "
-      << "\"decoration_properties\": " << v.decoration_properties() << ", "
       << "\"aspect_properties\": " << v.aspect_properties() << ", "
       << "\"artefact_properties\": " << v.artefact_properties() << ", "
       << "\"helper_properties\": " << v.helper_properties() << ", "

@@ -68,7 +68,6 @@ private:
     formattables::model create_formattables_model(
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
-        const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const formattables::locator& l,
         const yarn::model& m) const;
 

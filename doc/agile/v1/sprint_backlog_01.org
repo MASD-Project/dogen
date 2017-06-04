@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-06-04 Sun 17:03]
+#+CAPTION: Clock summary at [2017-06-04 Sun 17:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
@@ -335,6 +335,7 @@ Notes:
   then see where segmentation ends.
 
 *** STARTED Move decoration into yarn                                 :story:
+    CLOCK: [2017-06-04 Sun 17:04]
     CLOCK: [2017-06-04 Sun 16:55]--[2017-06-04 Sun 17:03] =>  0:08
     CLOCK: [2017-06-04 Sun 15:20]--[2017-06-04 Sun 16:54] =>  1:34
     CLOCK: [2017-06-04 Sun 15:12]--[2017-06-04 Sun 15:19] =>  0:07

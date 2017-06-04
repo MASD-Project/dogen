@@ -22,7 +22,6 @@
 #include "dogen/quilt.cpp/types/formattables/enablement_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/inclusion_expander.hpp"
-#include "dogen/quilt.cpp/types/formattables/decoration_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/reducer.hpp"
@@ -63,13 +62,6 @@ void model_expander::expand_inclusion(
     const locator& l, model& fm) const {
     inclusion_expander ex;
     ex.expand(atrp, frp, l, fm);
-}
-
-void model_expander::expand_decoration(
-    const dogen::formatters::decoration_properties_factory& dpf,
-    model& fm) const {
-    decoration_expander ex;
-    ex.expand(dpf, fm);
 }
 
 void model_expander::expand_aspects(const annotations::type_repository& atrp,
@@ -128,7 +120,6 @@ model_expander::expand_cpp_standard(const annotations::type_repository& atrp,
 
 void model_expander::expand(
     const annotations::type_repository& atrp, const annotations::annotation& ra,
-    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
@@ -158,7 +149,6 @@ void model_expander::expand(
     expand_canonical_archetypes(frp, fm);
 
     expand_inclusion(atrp, frp, l, fm);
-    expand_decoration(dpf, fm);
     expand_aspects(atrp, fm);
     expand_helpers(atrp, frp, fm);
 

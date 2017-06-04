@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <unordered_map>
 #include <boost/optional.hpp>
-#include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
@@ -57,7 +56,6 @@ public:
 
 public:
     element_properties(
-        const std::unordered_map<std::string, dogen::formatters::decoration_properties>& decoration_properties,
         const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties,
         const std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties>& artefact_properties,
         const std::list<dogen::quilt::cpp::formattables::helper_properties>& helper_properties,
@@ -73,11 +71,6 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::element_properties& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::formatters::decoration_properties>& decoration_properties() const;
-    std::unordered_map<std::string, dogen::formatters::decoration_properties>& decoration_properties();
-    void decoration_properties(const std::unordered_map<std::string, dogen::formatters::decoration_properties>& v);
-    void decoration_properties(const std::unordered_map<std::string, dogen::formatters::decoration_properties>&& v);
-
     const dogen::quilt::cpp::formattables::aspect_properties& aspect_properties() const;
     dogen::quilt::cpp::formattables::aspect_properties& aspect_properties();
     void aspect_properties(const dogen::quilt::cpp::formattables::aspect_properties& v);
@@ -119,7 +112,6 @@ public:
     element_properties& operator=(element_properties other);
 
 private:
-    std::unordered_map<std::string, dogen::formatters::decoration_properties> decoration_properties_;
     dogen::quilt::cpp::formattables::aspect_properties aspect_properties_;
     std::unordered_map<std::string, dogen::quilt::cpp::formattables::artefact_properties> artefact_properties_;
     std::list<dogen::quilt::cpp::formattables::helper_properties> helper_properties_;
