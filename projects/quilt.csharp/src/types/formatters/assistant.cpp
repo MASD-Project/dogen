@@ -115,11 +115,15 @@ obtain_artefact_properties(const std::string& archetype) const {
     return i->second;
 }
 
-dogen::formatters::csharp::scoped_boilerplate_formatter
-assistant::make_scoped_boilerplate_formatter() {
-    const auto& ep(context_.element_properties());
-    const auto& dp(ep.decoration_properties());
+const dogen::formatters::decoration_properties& assistant::
+get_decoration_properties(const yarn::element& e) const {
+    const auto& ep(e.element_properties());
+    return ep.decoration_properties();
+}
 
+dogen::formatters::csharp::scoped_boilerplate_formatter
+assistant::make_scoped_boilerplate_formatter(const yarn::element& e) {
+    const auto& dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.using_dependencies());
 

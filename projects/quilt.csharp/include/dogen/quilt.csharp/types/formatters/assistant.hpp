@@ -79,12 +79,19 @@ public:
     std::string get_qualified_name(const yarn::name_tree& nt) const;
     /**@}*/
 
+private:
+    /**
+     * @brief Returns the decoration properties for a given yarn element.
+     */
+    const dogen::formatters::decoration_properties&
+    get_decoration_properties(const yarn::element& e) const;
+
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
     dogen::formatters::csharp::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter();
+    make_scoped_boilerplate_formatter(const yarn::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.

@@ -73,7 +73,7 @@ assistant_formatter::format(const context& ctx, const yarn::element& e) const {
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
 a.stream() << "using System;" << std::endl;
 a.stream() << "using System.Text;" << std::endl;

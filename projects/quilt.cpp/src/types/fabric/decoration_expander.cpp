@@ -99,25 +99,6 @@ expand(const dogen::formatters::decoration_properties_factory& dpf,
     decoration_updater du(dpf);
     yarn::elements_traversal(im, du);
 
-
-    /*
-     * Type dispatching is not brilliant but at present we
-     * determine the type of decoration to apply based on the
-     * element meta-type.
-     */
-/*    std::string modeline_name(cpp_modeline_name);
-    const auto ti(std::type_index(typeid(e)));
-    if (ti == std::type_index(typeid(fabric::msbuild_targets)))
-        modeline_name = xml_modeline_name;
-    if (ti == std::type_index(typeid(fabric::cmakelists)))
-        modeline_name = cmake_modeline_name;
-    else if (ti == std::type_index(typeid(fabric::common_odb_options)))
-        modeline_name = odb_modeline_name;
-    else if (ti == std::type_index(typeid(fabric::object_odb_options)))
-        modeline_name = odb_modeline_name;
-*/
-
-
     BOOST_LOG_SEV(lg, debug) << "Finished populating decoration properties.";
 }
 

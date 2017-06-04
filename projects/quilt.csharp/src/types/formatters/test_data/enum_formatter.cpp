@@ -73,7 +73,7 @@ enum_formatter::format(const context& ctx, const yarn::element& e) const {
     const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
-        auto sbf(a.make_scoped_boilerplate_formatter());
+        auto sbf(a.make_scoped_boilerplate_formatter(e));
         {
 a.stream() << "using System;" << std::endl;
 a.stream() << "using System.Collections;" << std::endl;
