@@ -20,6 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
 #include "dogen/quilt.cpp/types/fabric/decoration_expander.hpp"
@@ -50,7 +51,12 @@ requires_expansion(const yarn::intermediate_model& im) const {
     }
 
     const auto l(im.output_languages().front());
-    return l == yarn::languages::cpp;
+    const auto r(l == yarn::languages::cpp);
+    if (!r) {
+        BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
+                                 << im.name().id() << " for language: " << l;
+    }
+    return r;
 }
 
 void external_expander::expand_injection(

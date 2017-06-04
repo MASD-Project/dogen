@@ -22,6 +22,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
 
 namespace {
@@ -39,7 +41,7 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class decoration_updater {
+class decoration_updater : public element_visitor {
 public:
     decoration_updater(
         const dogen::formatters::decoration_properties_factory& dpf)
@@ -54,8 +56,8 @@ private:
     }
 
 public:
-    bool include_injected_elements() { return false; }
-    void operator()(yarn::element& /*e*/) {  }
+    bool include_injected_elements() { return true; }
+    void operator()(yarn::element& e) { e.accept(*this); }
     void operator()(yarn::module& m) { update(m); }
     void operator()(yarn::concept& c) { update(c); }
     void operator()(yarn::builtin& b) { update(b); }
@@ -64,6 +66,10 @@ public:
     void operator()(yarn::object& o) { update(o); }
     void operator()(yarn::exception& e) { update(e); }
     void operator()(yarn::visitor& v) { update(v); }
+
+public:
+    using element_visitor::visit;
+    void visit(assistant& a) { update(a); }
 
 private:
     const dogen::formatters::decoration_properties_factory& factory_;
