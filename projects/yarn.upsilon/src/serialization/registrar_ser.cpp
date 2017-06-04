@@ -28,6 +28,7 @@
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/upsilon/serialization/registrar_ser.hpp"
+#include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
 #include "dogen/yarn.upsilon/serialization/registrar_ser.hpp"
 
@@ -40,6 +41,7 @@ void register_types(Archive& ar) {
     dogen::yarn::register_types(ar);
     dogen::upsilon::register_types(ar);
     dogen::annotations::register_types(ar);
+    dogen::formatters::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

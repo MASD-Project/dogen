@@ -3432,7 +3432,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-117,19"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-117.05,18.95;-86.79,107.15"/>
+        <dia:rectangle val="-117.05,18.95;-86.79,110.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -3444,7 +3444,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:real val="30.160000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="88.099999999999994"/>
+        <dia:real val="91.299999999999997"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -3563,6 +3563,7 @@ the root of an inheritance tree.
 #DOGEN yarn.reference=dia.dia
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=yarn.dia
+#DOGEN yarn.reference=formatters.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
