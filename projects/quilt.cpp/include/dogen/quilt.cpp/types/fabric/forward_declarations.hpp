@@ -56,6 +56,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const bool is_enum,
         const dogen::yarn::name& underlying_element,
         const bool is_exception);

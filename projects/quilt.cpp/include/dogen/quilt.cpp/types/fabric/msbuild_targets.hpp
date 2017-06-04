@@ -54,6 +54,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const dogen::quilt::cpp::fabric::odb_targets& odb_targets);
 
 private:

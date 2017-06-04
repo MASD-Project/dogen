@@ -55,6 +55,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const std::string& include_directory_path,
         const std::string& source_directory_name,
         const std::string& header_file_extension,

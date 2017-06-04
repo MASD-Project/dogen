@@ -35,6 +35,7 @@
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
+#include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
 
 namespace dogen {
@@ -43,6 +44,7 @@ namespace yarn {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::annotations::register_types(ar);
+    dogen::formatters::register_types(ar);
 
     ar.template register_type<dogen::yarn::builtin>();
     ar.template register_type<dogen::yarn::concept>();

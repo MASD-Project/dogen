@@ -56,6 +56,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const bool is_default_enumeration_type,
         const bool is_floating_point,
         const bool can_be_enumeration_underlier,

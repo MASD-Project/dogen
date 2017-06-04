@@ -53,7 +53,8 @@ public:
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
-        const bool is_element_extension);
+        const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties);
 
 private:
     template<typename Archive>

@@ -54,6 +54,7 @@
 #include "dogen/yarn/io/mapping_actions_io.hpp"
 #include "dogen/yarn/io/mapping_context_io.hpp"
 #include "dogen/yarn/io/type_parameters_io.hpp"
+#include "dogen/yarn/io/element_properties_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/decomposition_result_io.hpp"
 #include "dogen/yarn/io/orm_database_systems_io.hpp"

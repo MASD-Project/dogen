@@ -110,6 +110,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties class_id="28" tracking_level="0" version="0">
+						<decoration_properties class_id="29" tracking_level="0" version="0">
+							<generate_decoration>0</generate_decoration>
+							<modeline class_id="30" tracking_level="0" version="0">
+								<initialized>0</initialized>
+							</modeline>
+							<licence class_id="31" tracking_level="0" version="0">
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<members>
 					<count>0</count>
@@ -117,7 +129,7 @@
 				</members>
 				<is_root>0</is_root>
 				<is_global_module>0</is_global_module>
-				<orm_properties class_id="28" tracking_level="0" version="0">
+				<orm_properties class_id="32" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_properties>
 			</second>
@@ -180,6 +192,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<members>
 					<count>0</count>
@@ -193,21 +217,21 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="29" tracking_level="0" version="0">
+	<concepts class_id="33" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</concepts>
-	<builtins class_id="30" tracking_level="0" version="0">
+	<builtins class_id="34" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</builtins>
-	<enumerations class_id="31" tracking_level="0" version="0">
+	<enumerations class_id="35" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="32" tracking_level="0" version="0">
+		<item class_id="36" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;enum_with_std_builtin&gt;</first>
 			<second class_id="7" tracking_level="1" version="0" object_id="_2">
 				<element>
@@ -265,6 +289,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<underlying_element>
 					<id></id>
@@ -290,10 +326,10 @@
 					</location>
 					<identifiable></identifiable>
 				</underlying_element>
-				<enumerators class_id="33" tracking_level="0" version="0">
+				<enumerators class_id="37" tracking_level="0" version="0">
 					<count>2</count>
 					<item_version>0</item_version>
-					<item class_id="34" tracking_level="0" version="0">
+					<item class_id="38" tracking_level="0" version="0">
 						<documentation></documentation>
 						<name>
 							<id></id>
@@ -372,11 +408,11 @@
 			</second>
 		</item>
 	</enumerations>
-	<primitives class_id="35" tracking_level="0" version="0">
+	<primitives class_id="39" tracking_level="0" version="0">
 		<count>1</count>
 		<bucket_count>2</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="36" tracking_level="0" version="0">
+		<item class_id="40" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;string_primitive&gt;</first>
 			<second class_id="11" tracking_level="1" version="0" object_id="_3">
 				<element>
@@ -435,9 +471,21 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<is_nullable>0</is_nullable>
-				<value_attribute class_id="37" tracking_level="0" version="0">
+				<value_attribute class_id="41" tracking_level="0" version="0">
 					<documentation></documentation>
 					<annotation>
 						<entries>
@@ -472,7 +520,7 @@
 						<identifiable></identifiable>
 					</name>
 					<unparsed_type></unparsed_type>
-					<parsed_type class_id="38" tracking_level="0" version="0">
+					<parsed_type class_id="42" tracking_level="0" version="0">
 						<current>
 							<id></id>
 							<simple></simple>
@@ -497,7 +545,7 @@
 							</location>
 							<identifiable></identifiable>
 						</current>
-						<children class_id="39" tracking_level="0" version="0">
+						<children class_id="43" tracking_level="0" version="0">
 							<count>0</count>
 							<item_version>0</item_version>
 						</children>
@@ -513,23 +561,23 @@
 					</parsed_type>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
-					<orm_properties class_id="40" tracking_level="0" version="0">
+					<orm_properties class_id="44" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</orm_properties>
 				</value_attribute>
 				<use_type_aliasing>0</use_type_aliasing>
 				<is_immutable>0</is_immutable>
-				<orm_properties class_id="41" tracking_level="0" version="0">
+				<orm_properties class_id="45" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_properties>
 			</second>
 		</item>
 	</primitives>
-	<objects class_id="42" tracking_level="0" version="0">
+	<objects class_id="46" tracking_level="0" version="0">
 		<count>14</count>
 		<bucket_count>23</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="43" tracking_level="0" version="0">
+		<item class_id="47" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;class_j&gt;</first>
 			<second class_id="10" tracking_level="1" version="0" object_id="_4">
 				<element>
@@ -587,8 +635,20 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
-				<all_attributes class_id="44" tracking_level="0" version="0">
+				<all_attributes class_id="48" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</all_attributes>
@@ -836,7 +896,7 @@
 						</orm_properties>
 					</item>
 				</local_attributes>
-				<inherited_attributes class_id="45" tracking_level="0" version="0">
+				<inherited_attributes class_id="49" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -849,7 +909,7 @@
 				<is_final>0</is_final>
 				<is_abstract>0</is_abstract>
 				<in_inheritance_relationship>0</in_inheritance_relationship>
-				<root_parents class_id="46" tracking_level="0" version="0">
+				<root_parents class_id="50" tracking_level="0" version="0">
 					<count>0</count>
 					<item_version>0</item_version>
 				</root_parents>
@@ -877,7 +937,7 @@
 				</derived_visitor>
 				<is_visitation_root>0</is_visitation_root>
 				<is_visitation_leaf>0</is_visitation_leaf>
-				<type_parameters class_id="47" tracking_level="0" version="0">
+				<type_parameters class_id="51" tracking_level="0" version="0">
 					<variable_number_of_parameters>0</variable_number_of_parameters>
 					<count>0</count>
 					<always_in_heap>0</always_in_heap>
@@ -893,7 +953,7 @@
 				</associative_container_keys>
 				<provides_opaqueness>0</provides_opaqueness>
 				<can_be_primitive_underlier>0</can_be_primitive_underlier>
-				<orm_properties class_id="48" tracking_level="0" version="0">
+				<orm_properties class_id="52" tracking_level="0" version="0">
 					<initialized>0</initialized>
 				</orm_properties>
 			</second>
@@ -956,6 +1016,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -1725,6 +1797,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2335,6 +2419,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -2624,6 +2720,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3233,6 +3341,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3523,6 +3643,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3733,6 +3865,18 @@
 						<item>handcrafted</item>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -3942,6 +4086,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4551,6 +4707,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -4920,6 +5088,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5289,6 +5469,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5498,6 +5690,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5742,6 +5946,18 @@
 						<item_version>0</item_version>
 					</stereotypes>
 					<is_element_extension>0</is_element_extension>
+					<element_properties>
+						<decoration_properties>
+							<generate_decoration>0</generate_decoration>
+							<modeline>
+								<initialized>0</initialized>
+							</modeline>
+							<licence>
+								<initialized>0</initialized>
+							</licence>
+							<code_generation_marker></code_generation_marker>
+						</decoration_properties>
+					</element_properties>
 				</element>
 				<all_attributes>
 					<count>0</count>
@@ -5974,17 +6190,17 @@
 			</second>
 		</item>
 	</objects>
-	<exceptions class_id="49" tracking_level="0" version="0">
+	<exceptions class_id="53" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</exceptions>
-	<visitors class_id="50" tracking_level="0" version="0">
+	<visitors class_id="54" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
 		<item_version>0</item_version>
 	</visitors>
-	<injected_elements class_id="51" tracking_level="0" version="0">
+	<injected_elements class_id="55" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>1</item_version>
 	</injected_elements>
@@ -6034,6 +6250,18 @@
 				<item_version>0</item_version>
 			</stereotypes>
 			<is_element_extension>0</is_element_extension>
+			<element_properties>
+				<decoration_properties>
+					<generate_decoration>0</generate_decoration>
+					<modeline>
+						<initialized>0</initialized>
+					</modeline>
+					<licence>
+						<initialized>0</initialized>
+					</licence>
+					<code_generation_marker></code_generation_marker>
+				</decoration_properties>
+			</element_properties>
 		</element>
 		<members>
 			<count>0</count>
@@ -6046,22 +6274,22 @@
 		</orm_properties>
 	</root_module>
 	<input_language>0</input_language>
-	<output_languages class_id="52" tracking_level="0" version="0">
+	<output_languages class_id="56" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
 	</output_languages>
-	<scribble_groups class_id="53" tracking_level="0" version="0">
+	<scribble_groups class_id="57" tracking_level="0" version="0">
 		<count>3</count>
 		<bucket_count>5</bucket_count>
 		<item_version>0</item_version>
-		<item class_id="54" tracking_level="0" version="0">
+		<item class_id="58" tracking_level="0" version="0">
 			<first>&lt;dogen&gt;&lt;test_models&gt;&lt;std_model&gt;&lt;string_primitive&gt;</first>
-			<second class_id="55" tracking_level="0" version="0">
-				<parent class_id="56" tracking_level="0" version="0">
-					<entries class_id="57" tracking_level="0" version="0">
+			<second class_id="59" tracking_level="0" version="0">
+				<parent class_id="60" tracking_level="0" version="0">
+					<entries class_id="61" tracking_level="0" version="0">
 						<count>1</count>
 						<item_version>0</item_version>
-						<item class_id="58" tracking_level="0" version="0">
+						<item class_id="62" tracking_level="0" version="0">
 							<first>yarn.primitive.underlying_element</first>
 							<second>std::string</second>
 						</item>
@@ -6072,7 +6300,7 @@
 						<item_version>0</item_version>
 					</candidate_labels>
 				</parent>
-				<children class_id="59" tracking_level="0" version="0">
+				<children class_id="63" tracking_level="0" version="0">
 					<count>0</count>
 					<bucket_count>1</bucket_count>
 					<item_version>0</item_version>
@@ -6162,7 +6390,7 @@
 			</second>
 		</item>
 	</scribble_groups>
-	<orm_properties class_id="60" tracking_level="0" version="0">
+	<orm_properties class_id="64" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_properties>
 </entity>

@@ -31,6 +31,7 @@
 #include "dogen/yarn/test_data/enumeration_td.hpp"
 #include "dogen/yarn/test_data/origin_types_td.hpp"
 #include "dogen/annotations/test_data/annotation_td.hpp"
+#include "dogen/yarn/test_data/element_properties_td.hpp"
 
 namespace {
 
@@ -74,6 +75,11 @@ std::vector<std::string> create_std_vector_std_string(unsigned int position) {
     return r;
 }
 
+dogen::yarn::element_properties
+create_dogen_yarn_element_properties(const unsigned int position) {
+    return dogen::yarn::element_properties_generator::create(position);
+}
+
 }
 
 namespace dogen {
@@ -89,6 +95,7 @@ populate(const unsigned int position, result_type& v) {
     v.in_global_module(create_bool(position + 5));
     v.stereotypes(create_std_vector_std_string(position + 6));
     v.is_element_extension(create_bool(position + 7));
+    v.element_properties(create_dogen_yarn_element_properties(position + 8));
 }
 
 element_generator::result_type*

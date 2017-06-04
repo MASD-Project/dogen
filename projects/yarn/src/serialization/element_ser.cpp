@@ -42,6 +42,7 @@
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"
 #include "dogen/annotations/serialization/annotation_ser.hpp"
+#include "dogen/yarn/serialization/element_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(
     dogen::yarn::element,
@@ -62,6 +63,7 @@ void save(Archive& ar,
     ar << make_nvp("in_global_module", v.in_global_module_);
     ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("is_element_extension", v.is_element_extension_);
+    ar << make_nvp("element_properties", v.element_properties_);
 }
 
 template<typename Archive>
@@ -76,6 +78,7 @@ void load(Archive& ar,
     ar >> make_nvp("in_global_module", v.in_global_module_);
     ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("is_element_extension", v.is_element_extension_);
+    ar >> make_nvp("element_properties", v.element_properties_);
 }
 
 } }

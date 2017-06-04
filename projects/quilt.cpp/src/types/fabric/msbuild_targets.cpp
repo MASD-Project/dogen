@@ -38,6 +38,7 @@ msbuild_targets::msbuild_targets(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const dogen::quilt::cpp::fabric::odb_targets& odb_targets)
     : dogen::yarn::element(
       documentation,
@@ -47,7 +48,8 @@ msbuild_targets::msbuild_targets(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       odb_targets_(odb_targets) { }
 
 void msbuild_targets::accept(const dogen::yarn::element_visitor& v) const {

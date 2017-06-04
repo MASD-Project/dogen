@@ -22,6 +22,7 @@
 #include "dogen/yarn/hash/element_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
 #include "dogen/annotations/hash/annotation_hash.hpp"
+#include "dogen/yarn/hash/element_properties_hash.hpp"
 
 namespace {
 
@@ -65,6 +66,7 @@ std::size_t element_hasher::hash(const element& v) {
     combine(seed, v.in_global_module());
     combine(seed, hash_std_vector_std_string(v.stereotypes()));
     combine(seed, v.is_element_extension());
+    combine(seed, v.element_properties());
 
     return seed;
 }

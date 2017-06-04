@@ -71,6 +71,7 @@ visitor::visitor(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const std::list<dogen::yarn::name>& visits,
     const boost::optional<dogen::yarn::name>& parent)
     : dogen::yarn::element(
@@ -81,7 +82,8 @@ visitor::visitor(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       visits_(visits),
       parent_(parent) { }
 

@@ -97,6 +97,7 @@ master_header::master_header(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
     : dogen::yarn::element(
       documentation,
@@ -106,7 +107,8 @@ master_header::master_header(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       inclusion_by_facet_(inclusion_by_facet) { }
 
 void master_header::accept(const dogen::yarn::element_visitor& v) const {

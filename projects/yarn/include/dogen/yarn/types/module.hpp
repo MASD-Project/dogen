@@ -64,6 +64,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const std::list<std::string>& members,
         const bool is_root,
         const bool is_global_module,

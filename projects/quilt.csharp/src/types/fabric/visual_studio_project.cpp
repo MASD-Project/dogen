@@ -46,6 +46,7 @@ visual_studio_project::visual_studio_project(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const std::string& project_guid,
     const std::string& project_name,
     const std::string& tools_version)
@@ -57,7 +58,8 @@ visual_studio_project::visual_studio_project(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       project_guid_(project_guid),
       project_name_(project_name),
       tools_version_(tools_version) { }

@@ -52,6 +52,7 @@ registrar::registrar(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const std::list<dogen::yarn::name>& leaves,
     const std::list<dogen::yarn::name>& model_dependencies,
     const std::list<dogen::yarn::name>& registrar_dependencies)
@@ -63,7 +64,8 @@ registrar::registrar(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       leaves_(leaves),
       model_dependencies_(model_dependencies),
       registrar_dependencies_(registrar_dependencies) { }

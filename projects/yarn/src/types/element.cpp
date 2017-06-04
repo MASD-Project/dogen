@@ -25,6 +25,7 @@
 #include "dogen/yarn/types/element.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"
 #include "dogen/annotations/io/annotation_io.hpp"
+#include "dogen/yarn/io/element_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -79,7 +80,8 @@ element::element(element&& rhs)
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
       stereotypes_(std::move(rhs.stereotypes_)),
-      is_element_extension_(std::move(rhs.is_element_extension_)) { }
+      is_element_extension_(std::move(rhs.is_element_extension_)),
+      element_properties_(std::move(rhs.element_properties_)) { }
 
 element::element(
     const std::string& documentation,
@@ -89,7 +91,8 @@ element::element(
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
-    const bool is_element_extension)
+    const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties)
     : documentation_(documentation),
       annotation_(annotation),
       name_(name),
@@ -97,7 +100,8 @@ element::element(
       contained_by_(contained_by),
       in_global_module_(in_global_module),
       stereotypes_(stereotypes),
-      is_element_extension_(is_element_extension) { }
+      is_element_extension_(is_element_extension),
+      element_properties_(element_properties) { }
 
 void element::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
@@ -115,7 +119,8 @@ void element::to_stream(std::ostream& s) const {
       << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
       << "\"stereotypes\": " << stereotypes_ << ", "
-      << "\"is_element_extension\": " << is_element_extension_
+      << "\"is_element_extension\": " << is_element_extension_ << ", "
+      << "\"element_properties\": " << element_properties_
       << " }";
 }
 
@@ -129,6 +134,7 @@ void element::swap(element& other) noexcept {
     swap(in_global_module_, other.in_global_module_);
     swap(stereotypes_, other.stereotypes_);
     swap(is_element_extension_, other.is_element_extension_);
+    swap(element_properties_, other.element_properties_);
 }
 
 bool element::compare(const element& rhs) const {
@@ -139,7 +145,8 @@ bool element::compare(const element& rhs) const {
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
         stereotypes_ == rhs.stereotypes_ &&
-        is_element_extension_ == rhs.is_element_extension_;
+        is_element_extension_ == rhs.is_element_extension_ &&
+        element_properties_ == rhs.element_properties_;
 }
 
 const std::string& element::documentation() const {
@@ -244,6 +251,22 @@ bool element::is_element_extension() const {
 
 void element::is_element_extension(const bool v) {
     is_element_extension_ = v;
+}
+
+const dogen::yarn::element_properties& element::element_properties() const {
+    return element_properties_;
+}
+
+dogen::yarn::element_properties& element::element_properties() {
+    return element_properties_;
+}
+
+void element::element_properties(const dogen::yarn::element_properties& v) {
+    element_properties_ = v;
+}
+
+void element::element_properties(const dogen::yarn::element_properties&& v) {
+    element_properties_ = std::move(v);
 }
 
 } }

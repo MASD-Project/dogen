@@ -33,6 +33,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/annotations/types/annotation.hpp"
+#include "dogen/yarn/types/element_properties.hpp"
 #include "dogen/yarn/types/element_visitor_fwd.hpp"
 #include "dogen/yarn/serialization/element_fwd_ser.hpp"
 
@@ -67,7 +68,8 @@ public:
         const boost::optional<dogen::yarn::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
-        const bool is_element_extension);
+        const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties);
 
 private:
     template<typename Archive>
@@ -159,6 +161,11 @@ public:
     void is_element_extension(const bool v);
     /**@}*/
 
+    const dogen::yarn::element_properties& element_properties() const;
+    dogen::yarn::element_properties& element_properties();
+    void element_properties(const dogen::yarn::element_properties& v);
+    void element_properties(const dogen::yarn::element_properties&& v);
+
 protected:
     bool compare(const element& rhs) const;
 public:
@@ -176,6 +183,7 @@ private:
     bool in_global_module_;
     std::vector<std::string> stereotypes_;
     bool is_element_extension_;
+    dogen::yarn::element_properties element_properties_;
 };
 
 inline element::~element() noexcept { }

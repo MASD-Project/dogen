@@ -93,6 +93,7 @@
 #include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/name_tree_builder.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
+#include "dogen/yarn/types/element_properties.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/frontend_interface.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"

@@ -59,6 +59,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const std::list<dogen::yarn::name>& visits,
         const boost::optional<dogen::yarn::name>& parent);
 

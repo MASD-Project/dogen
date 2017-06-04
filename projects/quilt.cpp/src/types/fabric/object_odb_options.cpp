@@ -60,6 +60,7 @@ object_odb_options::object_odb_options(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const std::string& epilogue,
     const std::list<std::string>& include_regexes,
     const std::string& header_guard_prefix)
@@ -71,7 +72,8 @@ object_odb_options::object_odb_options(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       epilogue_(epilogue),
       include_regexes_(include_regexes),
       header_guard_prefix_(header_guard_prefix) { }

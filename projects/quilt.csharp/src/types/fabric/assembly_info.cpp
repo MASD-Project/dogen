@@ -36,7 +36,8 @@ assembly_info::assembly_info(
     const boost::optional<dogen::yarn::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
-    const bool is_element_extension)
+    const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties)
     : dogen::yarn::element(
       documentation,
       annotation,
@@ -45,7 +46,8 @@ assembly_info::assembly_info(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension) { }
+      is_element_extension,
+      element_properties) { }
 
 void assembly_info::accept(const dogen::yarn::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;

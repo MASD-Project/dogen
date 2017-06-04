@@ -54,6 +54,7 @@
 #include "dogen/yarn/serialization/mapping_actions_ser.hpp"
 #include "dogen/yarn/serialization/mapping_context_ser.hpp"
 #include "dogen/yarn/serialization/type_parameters_ser.hpp"
+#include "dogen/yarn/serialization/element_properties_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"
 #include "dogen/yarn/serialization/orm_database_systems_ser.hpp"

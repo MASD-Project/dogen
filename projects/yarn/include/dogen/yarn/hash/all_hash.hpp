@@ -54,6 +54,7 @@
 #include "dogen/yarn/hash/mapping_actions_hash.hpp"
 #include "dogen/yarn/hash/mapping_context_hash.hpp"
 #include "dogen/yarn/hash/type_parameters_hash.hpp"
+#include "dogen/yarn/hash/element_properties_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/decomposition_result_hash.hpp"
 #include "dogen/yarn/hash/orm_database_systems_hash.hpp"

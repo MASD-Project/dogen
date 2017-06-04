@@ -60,6 +60,7 @@ common_odb_options::common_odb_options(
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
+    const dogen::yarn::element_properties& element_properties,
     const std::string& sql_name_case,
     const std::list<std::string>& databases)
     : dogen::yarn::element(
@@ -70,7 +71,8 @@ common_odb_options::common_odb_options(
       contained_by,
       in_global_module,
       stereotypes,
-      is_element_extension),
+      is_element_extension,
+      element_properties),
       sql_name_case_(sql_name_case),
       databases_(databases) { }
 

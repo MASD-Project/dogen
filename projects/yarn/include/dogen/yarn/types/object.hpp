@@ -72,6 +72,7 @@ public:
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
+        const dogen::yarn::element_properties& element_properties,
         const std::list<dogen::yarn::attribute>& all_attributes,
         const std::list<dogen::yarn::attribute>& local_attributes,
         const std::unordered_map<dogen::yarn::name, std::list<dogen::yarn::attribute> >& inherited_attributes,
