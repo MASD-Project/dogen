@@ -18,16 +18,39 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/quilt.cpp/types/fabric/injector.hpp"
 #include "dogen/quilt.cpp/types/fabric/external_expander.hpp"
-#include "dogen/quilt.cpp/types/fabric/initializer.hpp"
+
+namespace {
+
+const std::string id("quilt.cpp.fabric.external_expander");
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory(id));
+
+}
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-void initializer::initialize(yarn::external_expander_registrar& rg) {
-    yarn::register_external_expander<external_expander>(rg);
+void external_expander::expand_injection(
+    const annotations::type_repository& atrp,
+    yarn::intermediate_model& im) const {
+    injector i;
+    i.inject(atrp, im);
+}
+
+std::string external_expander::id() const {
+    return ::id;
+}
+
+void external_expander::expand(const annotations::type_repository& atrp,
+    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+    yarn::intermediate_model& im) const {
+    expand_injection(atrp, im);
 }
 
 } } } }

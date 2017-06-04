@@ -48,10 +48,6 @@ namespace fabric {
 
 injector::~injector() noexcept {}
 
-std::string injector::id() const {
-    return ::id;
-}
-
 void injector::add_element(const boost::shared_ptr<yarn::element>& e,
     yarn::intermediate_model& im) const {
     im.injected_elements().push_back(e);
@@ -103,8 +99,7 @@ void injector::inject_forward_declarations(yarn::intermediate_model& im) const {
     add_elements(e, im);
 }
 
-void injector::expand(const annotations::type_repository& atrp,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+void injector::inject(const annotations::type_repository& atrp,
     yarn::intermediate_model& im) const {
     inject_registrar(im);
     inject_build_files(im);

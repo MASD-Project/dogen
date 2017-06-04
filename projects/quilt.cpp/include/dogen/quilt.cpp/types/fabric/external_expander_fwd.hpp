@@ -18,16 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/fabric/external_expander.hpp"
-#include "dogen/quilt.cpp/types/fabric/initializer.hpp"
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_EXPANDER_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_EXPANDER_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-void initializer::initialize(yarn::external_expander_registrar& rg) {
-    yarn::register_external_expander<external_expander>(rg);
-}
+class external_expander;
 
 } } } }
+
+#endif

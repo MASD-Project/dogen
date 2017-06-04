@@ -13,22 +13,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-06-04 Sun 08:58]
+#+CAPTION: Clock summary at [2017-06-04 Sun 15:11]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *30:45* |       |       | 100.0 |
+| *Total time*                                                                | *31:15* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 30:45   |       |       | 100.0 |
-| Active                                                                      |         | 30:45 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  21.8 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   2.7 |
-| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  14.4 |
+| Stories                                                                     | 31:15   |       |       | 100.0 |
+| Active                                                                      |         | 31:15 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  21.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   2.6 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  14.1 |
 | COMPLETED WIX Path has changed on appveyor                                  |         |       |  0:09 |   0.5 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   7.5 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  35.2 |
-| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   2.2 |
-| STARTED Move decoration into yarn                                           |         |       |  4:53 |  15.9 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   7.4 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  34.6 |
+| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   2.1 |
+| STARTED Move decoration into yarn                                           |         |       |  5:23 |  17.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -335,6 +335,7 @@ Notes:
   then see where segmentation ends.
 
 *** STARTED Move decoration into yarn                                 :story:
+    CLOCK: [2017-06-04 Sun 14:41]--[2017-06-04 Sun 15:11] =>  0:30
     CLOCK: [2017-06-04 Sun 08:43]--[2017-06-04 Sun 08:58] =>  0:15
     CLOCK: [2017-06-03 Sat 16:36]--[2017-06-03 Sat 16:54] =>  0:18
     CLOCK: [2017-06-03 Sat 16:28]--[2017-06-03 Sat 16:35] =>  0:07
@@ -359,10 +360,12 @@ Done:
 - move creation of drp and dpf into yarn workflow.
 - revert all changes to knit and quilt. We'll just recreate drp/dpf in
   quilt for now.
+- add element properties and decoration properties to yarn.
 
 To do:
 
-- add element properties and decoration properties to yarn.
+- create a kernel based top-level expander that includes other
+  expanders.
 - create a decoration expander based on external expansion
   interface. Populate decoration properties.
 - update assistant to read decoration properties from yarn.

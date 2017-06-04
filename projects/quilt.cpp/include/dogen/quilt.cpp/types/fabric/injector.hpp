@@ -27,15 +27,16 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/external_expander_interface.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class injector : public yarn::external_expander_interface {
+class injector {
 public:
     virtual ~injector() noexcept;
 
@@ -57,10 +58,8 @@ private:
     void inject_forward_declarations(yarn::intermediate_model& im) const;
 
 public:
-    std::string id() const override;
-    void expand(const annotations::type_repository& atrp,
-        const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::intermediate_model& im) const override;
+    void inject(const annotations::type_repository& atrp,
+        yarn::intermediate_model& im) const;
 };
 
 } } } }
