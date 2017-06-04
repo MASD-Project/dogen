@@ -74,6 +74,8 @@ private:
     }
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(yarn::module& m) { update_scribble(m); }
     void operator()(yarn::concept& c) { update_scribble(c); }
     void operator()(yarn::builtin& b) { update_scribble(b); }
@@ -149,6 +151,8 @@ private:
     }
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(yarn::module& m) { update_extensible(m); }
     void operator()(yarn::concept& c) { update_extensible_and_stateful(c); }
     void operator()(yarn::builtin& b) { update_extensible(b); }

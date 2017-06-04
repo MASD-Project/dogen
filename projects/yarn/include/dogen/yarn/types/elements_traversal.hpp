@@ -68,6 +68,11 @@ inline void elements_traversal(const intermediate_model& m,
 
     for (const auto& pair : m.visitors())
         v(pair.second);
+
+    if (v.include_injected_elements()) {
+        for (const auto ptr : m.injected_elements())
+            v(*ptr);
+    }
 }
 
 template<typename TraversalVisitor>
@@ -96,6 +101,11 @@ inline void elements_traversal(const intermediate_model& m,
 
     for (auto& pair : m.visitors())
         v(pair.second);
+
+    if (v.include_injected_elements()) {
+        for (auto ptr : m.injected_elements())
+            v(*ptr);
+    }
 }
 
 template<typename TraversalVisitor>
@@ -123,6 +133,11 @@ inline void elements_traversal(intermediate_model& m, TraversalVisitor& v) {
 
     for (auto& pair : m.visitors())
         v(pair.second);
+
+    if (v.include_injected_elements()) {
+        for (auto ptr : m.injected_elements())
+            v(*ptr);
+    }
 }
 /**@}*/
 

@@ -53,6 +53,8 @@ public:
     std::list<boost::shared_ptr<yarn::element>> result() { return result_; }
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(const yarn::concept&) {}
     void operator()(const yarn::builtin&) {}
     void operator()(const yarn::module&) {}

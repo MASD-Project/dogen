@@ -48,6 +48,8 @@ private:
     void process(const name& n);
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(yarn::module& m) { process(m.name()); }
     void operator()(yarn::concept& c) { process(c.name()); }
     void operator()(yarn::builtin& b) { process(b.name()); }
@@ -89,6 +91,8 @@ private:
     void update(element& e);
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(yarn::module& m) { update(m); }
     void operator()(yarn::concept& c) { update(c); }
     void operator()(yarn::builtin& b) { update(b); }

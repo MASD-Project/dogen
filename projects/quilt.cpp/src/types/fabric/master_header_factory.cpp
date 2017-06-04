@@ -79,6 +79,8 @@ private:
     void process_element(const yarn::element& e);
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(const yarn::concept&) {}
     void operator()(const yarn::builtin&) {}
     void operator()(const dogen::yarn::visitor& v) { process_element(v); }

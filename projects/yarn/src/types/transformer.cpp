@@ -77,6 +77,8 @@ private:
     void add(const Element& e) { add_element(boost::make_shared<Element>(e)); }
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(const yarn::module& m) {
         result_.module_ids().insert(m.name().id());
         add(m);

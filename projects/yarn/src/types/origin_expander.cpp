@@ -51,6 +51,8 @@ public:
     void update(DeterminableOrigin& d) { d.origin_type(origin_types_); }
 
 public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
     void operator()(yarn::module& m) { update(m); }
     void operator()(yarn::concept& c) { update(c); }
     void operator()(yarn::builtin& b) { update(b); }
