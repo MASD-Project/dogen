@@ -83,6 +83,7 @@ public:
     void visit(forward_declarations& fd) { update(fd); }
     void visit(master_header& mh) { update(mh); }
     void visit(object_odb_options& ooo) { update(ooo, odb_modeline_name); }
+    void visit(msbuild_targets& mt) { update(mt, xml_modeline_name); }
     void visit(registrar& rg) { update(rg); }
 
 private:
