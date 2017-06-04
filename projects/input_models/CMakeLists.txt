@@ -23,6 +23,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
     set(ignore_regexes --ignore-files-matching-regex .*/CMakeLists.txt)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/test/.*)
     set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/tests/.*)
+    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/poly-stitch.el)
 
     set(other_options --log-level ${DOGEN_LOG_LEVEL})
     set(other_options ${other_options} --delete-extra-files)
