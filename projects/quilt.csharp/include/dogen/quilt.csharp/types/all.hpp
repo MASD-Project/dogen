@@ -50,6 +50,7 @@
 #include "dogen/quilt.csharp/types/formatters/initializer.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
+#include "dogen/quilt.csharp/types/fabric/external_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/types/formattables/transformer.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/initializer.hpp"

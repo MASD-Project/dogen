@@ -18,45 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_INJECTOR_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_INJECTOR_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_EXTERNAL_EXPANDER_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_EXTERNAL_EXPANDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <boost/shared_ptr.hpp>
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/external_expander_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class injector {
-public:
-    virtual ~injector() noexcept;
-
+class external_expander final : public yarn::external_expander_interface {
 private:
-    void add_element(const boost::shared_ptr<yarn::element>& e,
+    void expand_injection(const annotations::type_repository& atrp,
         yarn::intermediate_model& im) const;
-
-    void add_elements(
-        const std::list<boost::shared_ptr<yarn::element>>& elements,
-        yarn::intermediate_model& im) const;
-
-private:
-    void inject_visual_studio(const annotations::type_repository& atrp,
-        yarn::intermediate_model& im) const;
-    void inject_assembly_info(yarn::intermediate_model& im) const;
-    void inject_assistant(yarn::intermediate_model& im) const;
 
 public:
-    void inject(const annotations::type_repository& atrp,
-        yarn::intermediate_model& im) const;
+    std::string id() const override;
+    void expand(const annotations::type_repository& atrp,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        yarn::intermediate_model& im) const override;
 };
 
 } } } }

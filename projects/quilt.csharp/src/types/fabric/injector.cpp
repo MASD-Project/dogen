@@ -29,10 +29,8 @@
 
 namespace {
 
-const std::string id("quilt.csharp.fabric.injector");
-
 using namespace dogen::utility::log;
-static logger lg(logger_factory(id));
+static logger lg(logger_factory("quilt.csharp.fabric.injector"));
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 
@@ -44,10 +42,6 @@ namespace csharp {
 namespace fabric {
 
 injector::~injector() noexcept {}
-
-std::string injector::id() const {
-    return ::id;
-}
 
 void injector::add_element(const boost::shared_ptr<yarn::element>& e,
     yarn::intermediate_model& im) const {
@@ -80,8 +74,7 @@ void injector::inject_assistant(yarn::intermediate_model& im) const {
     add_element(e, im);
 }
 
-void injector::expand(const annotations::type_repository& atrp,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
+void injector::inject(const annotations::type_repository& atrp,
     yarn::intermediate_model& im) const {
     inject_visual_studio(atrp, im);
     inject_assembly_info(im);
