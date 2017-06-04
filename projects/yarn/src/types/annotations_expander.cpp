@@ -43,7 +43,7 @@ public:
         annotations::scribble_group>& sgrps) : scribble_groups_(sgrps) {}
 
 private:
-    void update_scribble(const element& e, const bool is_root = false) {
+    void update_scribble(const element& e) {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
@@ -68,8 +68,7 @@ private:
         sg.parent().candidate_labels(e.stereotypes());
 
         using annotations::scope_types;
-        const auto st(is_root ? scope_types::root_module : scope_types::entity);
-        sg.parent().scope(st);
+        sg.parent().scope(scope_types::entity);
 
         scribble_groups_[id] = sg;
     }
