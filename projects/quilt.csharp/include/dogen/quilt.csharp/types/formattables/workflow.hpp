@@ -28,7 +28,6 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
-#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
@@ -57,7 +56,6 @@ public:
     model execute(
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
-        const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const locator& l,
         const yarn::model& m) const;
 };

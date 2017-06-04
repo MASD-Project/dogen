@@ -114,7 +114,6 @@ kernel_output kernel::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
-    const dogen::formatters::decoration_properties_factory& /*dpf*/,
     const bool enable_kernel_directories,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";

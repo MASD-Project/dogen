@@ -62,7 +62,6 @@ private:
     formattables::model create_formattables_model(
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
-        const dogen::formatters::decoration_properties_factory& dpf,
         const formatters::repository& frp, const formattables::locator & l,
         const yarn::model& m) const;
 
@@ -86,7 +85,6 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
-        const dogen::formatters::decoration_properties_factory& dpf,
         const bool enable_kernel_directories,
         const yarn::model& m) const override;
 };

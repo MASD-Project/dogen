@@ -131,7 +131,6 @@ boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
 
     const auto dd(obtain_data_directories());
     const auto drp(create_formatters_decoration_repository(dd));
-    const auto dpf(create_decoration_properties_factory(repository_, drp, ra));
 
     const auto ol(m.output_language());
     BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << ol;
@@ -154,7 +153,7 @@ boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
     }
 
     const bool ekd(cfg.enable_kernel_directories());
-    const auto r(k.generate(ko, atrp, af, drp, dpf, ekd, m));
+    const auto r(k.generate(ko, atrp, af, drp, ekd, m));
     BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
                              << ". Total files: "
                              << std::distance(r.artefacts().begin(),

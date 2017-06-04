@@ -45,11 +45,10 @@ kernel::~kernel() noexcept { }
 formattables::model kernel::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
-    const dogen::formatters::decoration_properties_factory& dpf,
     const formatters::repository& frp, const formattables::locator& l,
     const yarn::model& m) const {
     formattables::workflow fw;
-    return fw.execute(atrp, ra, dpf, frp, l, m);
+    return fw.execute(atrp, ra, frp, l, m);
 }
 
 std::string kernel::id() const {
@@ -84,7 +83,6 @@ kernel_output kernel::generate(const options::knitting_options& ko,
     const annotations::type_repository& atrp,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
-    const dogen::formatters::decoration_properties_factory& dpf,
     const bool enable_kernel_directories,
     const yarn::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";
@@ -96,7 +94,7 @@ kernel_output kernel::generate(const options::knitting_options& ko,
     const auto odp(ko.output_directory_path());
     const bool ekd(enable_kernel_directories);
     const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);
-    const auto fm(create_formattables_model(atrp, ra, dpf, frp, l, m));
+    const auto fm(create_formattables_model(atrp, ra, frp, l, m));
 
     kernel_output r;
     r.artefacts(format(atrp, agf, drp, fm));

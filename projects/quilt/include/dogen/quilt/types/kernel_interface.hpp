@@ -32,7 +32,6 @@
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/formatters/types/artefact.hpp"
@@ -87,7 +86,6 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
-        const dogen::formatters::decoration_properties_factory& dpf,
         const bool requires_kernel_directory,
         const yarn::model& m) const = 0;
 };
