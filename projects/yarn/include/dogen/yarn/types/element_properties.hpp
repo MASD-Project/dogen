@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
 #include <algorithm>
+#include <unordered_map>
+#include "dogen/yarn/types/artefact_properties.hpp"
 #include "dogen/formatters/types/decoration_properties.hpp"
 #include "dogen/yarn/serialization/element_properties_fwd_ser.hpp"
 
@@ -40,7 +43,9 @@ public:
     ~element_properties() = default;
 
 public:
-    explicit element_properties(const dogen::formatters::decoration_properties& decoration_properties);
+    element_properties(
+        const dogen::formatters::decoration_properties& decoration_properties,
+        const std::unordered_map<std::string, dogen::yarn::artefact_properties>& artefact_properties);
 
 private:
     template<typename Archive>
@@ -55,6 +60,11 @@ public:
     void decoration_properties(const dogen::formatters::decoration_properties& v);
     void decoration_properties(const dogen::formatters::decoration_properties&& v);
 
+    const std::unordered_map<std::string, dogen::yarn::artefact_properties>& artefact_properties() const;
+    std::unordered_map<std::string, dogen::yarn::artefact_properties>& artefact_properties();
+    void artefact_properties(const std::unordered_map<std::string, dogen::yarn::artefact_properties>& v);
+    void artefact_properties(const std::unordered_map<std::string, dogen::yarn::artefact_properties>&& v);
+
 public:
     bool operator==(const element_properties& rhs) const;
     bool operator!=(const element_properties& rhs) const {
@@ -67,6 +77,7 @@ public:
 
 private:
     dogen::formatters::decoration_properties decoration_properties_;
+    std::unordered_map<std::string, dogen::yarn::artefact_properties> artefact_properties_;
 };
 
 } }

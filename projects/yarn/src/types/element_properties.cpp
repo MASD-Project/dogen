@@ -23,16 +23,21 @@
 namespace dogen {
 namespace yarn {
 
-element_properties::element_properties(const dogen::formatters::decoration_properties& decoration_properties)
-    : decoration_properties_(decoration_properties) { }
+element_properties::element_properties(
+    const dogen::formatters::decoration_properties& decoration_properties,
+    const std::unordered_map<std::string, dogen::yarn::artefact_properties>& artefact_properties)
+    : decoration_properties_(decoration_properties),
+      artefact_properties_(artefact_properties) { }
 
 void element_properties::swap(element_properties& other) noexcept {
     using std::swap;
     swap(decoration_properties_, other.decoration_properties_);
+    swap(artefact_properties_, other.artefact_properties_);
 }
 
 bool element_properties::operator==(const element_properties& rhs) const {
-    return decoration_properties_ == rhs.decoration_properties_;
+    return decoration_properties_ == rhs.decoration_properties_ &&
+        artefact_properties_ == rhs.artefact_properties_;
 }
 
 element_properties& element_properties::operator=(element_properties other) {
@@ -55,6 +60,22 @@ void element_properties::decoration_properties(const dogen::formatters::decorati
 
 void element_properties::decoration_properties(const dogen::formatters::decoration_properties&& v) {
     decoration_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::artefact_properties>& element_properties::artefact_properties() const {
+    return artefact_properties_;
+}
+
+std::unordered_map<std::string, dogen::yarn::artefact_properties>& element_properties::artefact_properties() {
+    return artefact_properties_;
+}
+
+void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::yarn::artefact_properties>& v) {
+    artefact_properties_ = v;
+}
+
+void element_properties::artefact_properties(const std::unordered_map<std::string, dogen::yarn::artefact_properties>&& v) {
+    artefact_properties_ = std::move(v);
 }
 
 } }

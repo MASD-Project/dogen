@@ -18,7 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
 #include "dogen/yarn/test_data/element_properties_td.hpp"
+#include "dogen/yarn/test_data/artefact_properties_td.hpp"
 #include "dogen/formatters/test_data/decoration_properties_td.hpp"
 
 namespace {
@@ -26,6 +28,25 @@ namespace {
 dogen::formatters::decoration_properties
 create_dogen_formatters_decoration_properties(const unsigned int position) {
     return dogen::formatters::decoration_properties_generator::create(position);
+}
+
+std::string create_std_string(const unsigned int position) {
+    std::ostringstream s;
+    s << "a_string_" << position;
+    return s.str();
+}
+
+dogen::yarn::artefact_properties
+create_dogen_yarn_artefact_properties(const unsigned int position) {
+    return dogen::yarn::artefact_properties_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::yarn::artefact_properties> create_std_unordered_map_std_string_dogen_yarn_artefact_properties(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::artefact_properties> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_artefact_properties(position + i)));
+    }
+    return r;
 }
 
 }
@@ -38,6 +59,7 @@ element_properties_generator::element_properties_generator() : position_(0) { }
 void element_properties_generator::
 populate(const unsigned int position, result_type& v) {
     v.decoration_properties(create_dogen_formatters_decoration_properties(position + 0));
+    v.artefact_properties(create_std_unordered_map_std_string_dogen_yarn_artefact_properties(position + 1));
 }
 
 element_properties_generator::result_type

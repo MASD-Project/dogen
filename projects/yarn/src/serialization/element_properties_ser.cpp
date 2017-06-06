@@ -21,13 +21,16 @@
 #include <boost/serialization/nvp.hpp>
 #include <boost/archive/xml_iarchive.hpp>
 #include <boost/archive/xml_oarchive.hpp>
+#include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/element_properties_ser.hpp"
+#include "dogen/yarn/serialization/artefact_properties_ser.hpp"
 #include "dogen/formatters/serialization/decoration_properties_ser.hpp"
 
 namespace boost {
@@ -38,6 +41,7 @@ void save(Archive& ar,
     const dogen::yarn::element_properties& v,
     const unsigned int /*version*/) {
     ar << make_nvp("decoration_properties", v.decoration_properties_);
+    ar << make_nvp("artefact_properties", v.artefact_properties_);
 }
 
 template<typename Archive>
@@ -45,6 +49,7 @@ void load(Archive& ar,
     dogen::yarn::element_properties& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("decoration_properties", v.decoration_properties_);
+    ar >> make_nvp("artefact_properties", v.artefact_properties_);
 }
 
 } }

@@ -18,9 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/element_properties_hash.hpp"
+#include "dogen/yarn/hash/formatting_styles_hash.hpp"
 #include "dogen/yarn/hash/artefact_properties_hash.hpp"
-#include "dogen/formatters/hash/decoration_properties_hash.hpp"
 
 namespace {
 
@@ -30,11 +29,16 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_artefact_properties(const std::unordered_map<std::string, dogen::yarn::artefact_properties>& v) {
+inline std::size_t hash_boost_filesystem_path(const boost::filesystem::path& v) {
+    std::size_t seed(0);
+    combine(seed, v.generic_string());
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_string(const std::list<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, i.second);
+        combine(seed, i);
     }
     return seed;
 }
@@ -44,11 +48,15 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_artefact_propert
 namespace dogen {
 namespace yarn {
 
-std::size_t element_properties_hasher::hash(const element_properties& v) {
+std::size_t artefact_properties_hasher::hash(const artefact_properties& v) {
     std::size_t seed(0);
 
-    combine(seed, v.decoration_properties());
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_artefact_properties(v.artefact_properties()));
+    combine(seed, v.enabled());
+    combine(seed, v.overwrite());
+    combine(seed, hash_boost_filesystem_path(v.file_path()));
+    combine(seed, hash_std_list_std_string(v.dependencies()));
+    combine(seed, v.formatting_style());
+    combine(seed, v.formatting_input());
 
     return seed;
 }

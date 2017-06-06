@@ -19,10 +19,10 @@
  *
  */
 #include <ostream>
+#include <boost/io/ios_state.hpp>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_properties_io.hpp"
+#include "dogen/yarn/io/formatting_styles_io.hpp"
 #include "dogen/yarn/io/artefact_properties_io.hpp"
-#include "dogen/formatters/io/decoration_properties_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -34,17 +34,13 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::artefact_properties>& v) {
-    s << "[";
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
+    s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
+        s << "\"" << tidy_up_string(*i) << "\"";
     }
-    s << " ] ";
+    s << "] ";
     return s;
 }
 
@@ -53,11 +49,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace yarn {
 
-std::ostream& operator<<(std::ostream& s, const element_properties& v) {
+std::ostream& operator<<(std::ostream& s, const artefact_properties& v) {
+    boost::io::ios_flags_saver ifs(s);
+    s.setf(std::ios_base::boolalpha);
+    s.setf(std::ios::fixed, std::ios::floatfield);
+    s.precision(6);
+    s.setf(std::ios::showpoint);
+
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::element_properties\"" << ", "
-      << "\"decoration_properties\": " << v.decoration_properties() << ", "
-      << "\"artefact_properties\": " << v.artefact_properties()
+      << "\"__type__\": " << "\"dogen::yarn::artefact_properties\"" << ", "
+      << "\"enabled\": " << v.enabled() << ", "
+      << "\"overwrite\": " << v.overwrite() << ", "
+      << "\"file_path\": " << "\"" << v.file_path().generic_string() << "\"" << ", "
+      << "\"dependencies\": " << v.dependencies() << ", "
+      << "\"formatting_style\": " << v.formatting_style() << ", "
+      << "\"formatting_input\": " << "\"" << tidy_up_string(v.formatting_input()) << "\""
       << " }";
     return(s);
 }
