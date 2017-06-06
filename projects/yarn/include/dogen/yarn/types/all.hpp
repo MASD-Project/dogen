@@ -103,6 +103,7 @@
 #include "dogen/yarn/types/primitive_expander.hpp"
 #include "dogen/yarn/types/artefact_properties.hpp"
 #include "dogen/yarn/types/attributes_expander.hpp"
+#include "dogen/yarn/types/enablement_expander.hpp"
 #include "dogen/yarn/types/annotations_expander.hpp"
 #include "dogen/yarn/types/association_expander.hpp"
 #include "dogen/yarn/types/containment_expander.hpp"
@@ -130,7 +131,9 @@
 #include "dogen/yarn/types/external_expander_interface.hpp"
 #include "dogen/yarn/types/external_expander_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
+#include "dogen/yarn/types/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
+#include "dogen/yarn/types/global_enablement_configuration.hpp"
 #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 

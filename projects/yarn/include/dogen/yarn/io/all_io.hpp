@@ -67,5 +67,7 @@
 #include "dogen/yarn/io/orm_attribute_properties_io.hpp"
 #include "dogen/yarn/io/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/io/intermediate_model_repository_io.hpp"
+#include "dogen/yarn/io/local_enablement_configuration_io.hpp"
+#include "dogen/yarn/io/global_enablement_configuration_io.hpp"
 
 #endif

@@ -67,5 +67,7 @@
 #include "dogen/yarn/test_data/orm_attribute_properties_td.hpp"
 #include "dogen/yarn/test_data/orm_primitive_properties_td.hpp"
 #include "dogen/yarn/test_data/intermediate_model_repository_td.hpp"
+#include "dogen/yarn/test_data/local_enablement_configuration_td.hpp"
+#include "dogen/yarn/test_data/global_enablement_configuration_td.hpp"
 
 #endif
