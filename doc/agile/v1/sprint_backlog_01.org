@@ -352,6 +352,7 @@ without a firm grasp of the theory. This story is a starting point so
 we can decide on how to break up the work.
 
 *** STARTED Move element segmentation into yarn                       :story:
+    CLOCK: [2017-06-06 Tue 17:31]--[2017-06-06 Tue 18:23] =>  0:52
     CLOCK: [2017-06-02 Fri 11:16]--[2017-06-02 Fri 11:56] =>  0:40
 
 We've added the notion that an element can be composed of other
