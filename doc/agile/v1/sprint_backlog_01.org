@@ -13,22 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-06-04 Sun 20:56]
+#+CAPTION: Clock summary at [2017-06-07 Wed 22:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *34:30* |       |       | 100.0 |
+| *Total time*                                                                | *39:38* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 34:30   |       |       | 100.0 |
-| Active                                                                      |         | 34:30 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  19.4 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   2.4 |
-| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  12.8 |
+| Stories                                                                     | 39:38   |       |       | 100.0 |
+| Active                                                                      |         | 39:38 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  16.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   2.1 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |  11.1 |
 | COMPLETED WIX Path has changed on appveyor                                  |         |       |  0:09 |   0.4 |
-| COMPLETED Move decoration into yarn                                         |         |       |  8:38 |  25.0 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   6.7 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  31.4 |
-| STARTED Move element segmentation into yarn                                 |         |       |  0:40 |   1.9 |
+| COMPLETED Move decoration into yarn                                         |         |       |  8:38 |  21.8 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   5.8 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  27.3 |
+| STARTED Move element segmentation into yarn                                 |         |       |  1:32 |   3.9 |
+| STARTED Clean up yarn                                                       |         |       |  4:16 |  10.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -379,6 +380,47 @@ Notes:
 - so in conclusion, we to move decoration, enablement and dependencies
   into yarn (basically decoration and artefact properties) first and
   then see where segmentation ends.
+
+*** STARTED Clean up yarn                                             :story:
+    CLOCK: [2017-06-07 Wed 18:25]--[2017-06-07 Wed 22:41] =>  4:16
+
+It seems we have reached the need to perform yet another clean up in
+yarn. The merging of the code in quilt provides us with a good reason
+to do this clean up. The objectives of the clean up are as follows:
+
+- use domain terminology where possible. Examples: model to model
+  transform, model to text transform, etc.
+- make yarn the core model and get rid of "modelets" such as knit and
+  parts of quilt. In reality, yarn should perform a complete workflow
+  from knitting options to generated files. The remaining models
+  should just hook up into this workflow.
+
+In effect, yarn is made up of a set of transformations, themselves
+composed of transformations and so forth. These are:
+
+- model to model:
+
+Sample code:
+
+#+begin_src
+transforms::model_to_model_transform:
+
+const auto context(context_source(ko));
+auto target(model_source(context));
+pre_process(context, target);
+auto expanded(expand(context, target));
+map(expanded);
+
+for(auto& m : expanded) {
+    auto refs(model_source(context, m));
+    pre_process(refs);
+    map(refs);
+    auto combined(combine(m, refs))
+    post_process(combined);
+    r.push_back(convert(combined));
+}
+#+end_src
+
 
 *** Move enablement into yarn                                         :story:
 
