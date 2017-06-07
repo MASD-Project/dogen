@@ -159,9 +159,9 @@ try_expand_reference(const annotations::annotation_groups_factory& agf,
     const auto l(im.input_language());
     if (!are_languages_compatible(target_language, l)) {
         BOOST_LOG_SEV(lg, warn) << "Reference model language does not"
-                                 << " match target model language."
-                                 << " Model: " << im.name().id()
-                                 << " Language: " << l
+                                << " match target model language."
+                                << " Model: " << im.name().id()
+                                << " Language: " << l
                                 << " Aborting expansion.";
         return false;
     } else {
