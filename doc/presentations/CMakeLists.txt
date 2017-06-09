@@ -27,6 +27,9 @@ if (WITH_LATEX)
         file(MAKE_DIRECTORY ${presentation_dir})
     endif()
 
+    file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/images
+      DESTINATION ${presentation_dir}/)
+
     set(all_files "")
     file(GLOB all_files RELATIVE
          "${CMAKE_CURRENT_SOURCE_DIR}/"
@@ -53,4 +56,4 @@ if (WITH_LATEX)
 
             add_dependencies(latex_docs presentation_${file})
     endforeach()
-endif()    
+endif()
