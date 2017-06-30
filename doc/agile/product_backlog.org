@@ -373,6 +373,8 @@ different top-level directories), which is nice.
 
 We should check that =enable_unique_file_names= is set to true.
 
+Key: =quilt.cpp.flat_directory_mode.enabled=.
+
 *** Add full support for type_index                                   :story:
 
 At present we cannot create containers using =std::type_index= as a
