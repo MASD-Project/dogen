@@ -1587,7 +1587,7 @@ intermediate merged model.#</dia:string>
         <dia:point val="-202,-66"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-202.05,-66.05;-174.1,-32.25"/>
+        <dia:rectangle val="-202.05,-66.05;-174.1,-31.45"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1599,7 +1599,7 @@ intermediate merged model.#</dia:string>
         <dia:real val="27.850000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="33.700000000000003"/>
+        <dia:real val="34.5"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000149011612"/>
@@ -1647,6 +1647,7 @@ and to build it.
 #DOGEN yarn.dia.external_modules=dogen
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=formatters.dia
+#DOGEN yarn.reference=options.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -10675,7 +10676,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="123.8,20.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="123.05,20.05;165.657,32.8"/>
+        <dia:rectangle val="123.05,20.05;165.658,32.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34784,7 +34785,7 @@ output languages.#</dia:string>
         <dia:point val="-99.0825,135"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-99.8325,130.25;-65.77,136.6"/>
+        <dia:rectangle val="-99.8325,130.25;-65.77,135.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35087,7 +35088,7 @@ output languages.#</dia:string>
         <dia:point val="-94,148"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-99.1325,140.15;-93.25,149.6"/>
+        <dia:rectangle val="-99.1325,140.15;-93.25,148.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35159,7 +35160,7 @@ output languages.#</dia:string>
         <dia:point val="-68.86,148"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-69.61,140.15;-65.77,149.6"/>
+        <dia:rectangle val="-69.61,140.15;-65.77,148.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35391,7 +35392,7 @@ output languages.#</dia:string>
         <dia:point val="-148,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-148.75,152.95;-93.8,169.6"/>
+        <dia:rectangle val="-148.75,152.95;-93.8,168.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -35640,7 +35641,7 @@ output languages.#</dia:string>
         <dia:point val="-29,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.145,163.95;-28.25,169.6"/>
+        <dia:rectangle val="-64.145,163.25;-28.25,168.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36014,7 +36015,7 @@ output languages.#</dia:string>
         <dia:point val="-11.945,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-68.91,152.95;-11.195,169.6"/>
+        <dia:rectangle val="-68.91,152.95;-11.195,168.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36085,7 +36086,7 @@ output languages.#</dia:string>
         <dia:point val="-122.86,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-123.61,163.95;-84.8,169.6"/>
+        <dia:rectangle val="-123.61,163.25;-84.8,168.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36334,7 +36335,7 @@ output languages.#</dia:string>
         <dia:point val="-88,196"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-135.48,171.55;-87.25,197.6"/>
+        <dia:rectangle val="-135.48,171.55;-87.25,196.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36406,7 +36407,7 @@ output languages.#</dia:string>
         <dia:point val="-78.51,199.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-83.1325,198.85;-77.76,210.6"/>
+        <dia:rectangle val="-83.1325,198.85;-77.76,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36815,7 +36816,7 @@ output languages.#</dia:string>
         <dia:point val="-88,199.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-129.145,198.85;-87.25,210.6"/>
+        <dia:rectangle val="-129.145,198.85;-87.25,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36887,7 +36888,7 @@ output languages.#</dia:string>
         <dia:point val="-69.02,199.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-69.77,198.85;-51.69,210.6"/>
+        <dia:rectangle val="-69.77,198.85;-51.69,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37667,7 +37668,7 @@ output languages.#</dia:string>
         <dia:point val="-85,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-98.145,167.25;-84.25,170.7"/>
+        <dia:rectangle val="-98.145,167.25;-84.25,169.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37739,7 +37740,7 @@ output languages.#</dia:string>
         <dia:point val="-85,169.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-98.145,168.35;-84.25,175.7"/>
+        <dia:rectangle val="-98.145,168.35;-84.25,174.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37811,7 +37812,7 @@ output languages.#</dia:string>
         <dia:point val="-74.5475,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-81.5975,160.55;-73.7975,169.6"/>
+        <dia:rectangle val="-81.5975,160.55;-73.7975,168.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -37883,7 +37884,7 @@ output languages.#</dia:string>
         <dia:point val="-64.095,168"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.845,167.25;-53.95,170.7"/>
+        <dia:rectangle val="-64.845,167.25;-53.95,169.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38132,7 +38133,7 @@ output languages.#</dia:string>
         <dia:point val="-64.095,169.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.845,168.35;-53.95,175.7"/>
+        <dia:rectangle val="-64.845,168.35;-53.95,174.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38381,7 +38382,7 @@ output languages.#</dia:string>
         <dia:point val="-85,171.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-89.5975,170.85;-84.25,180.6"/>
+        <dia:rectangle val="-89.5975,170.85;-84.25,179.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38630,7 +38631,7 @@ output languages.#</dia:string>
         <dia:point val="-74.5475,171.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-75.5975,170.85;-73.7975,186.6"/>
+        <dia:rectangle val="-75.5975,170.85;-73.7975,185.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -38879,7 +38880,7 @@ output languages.#</dia:string>
         <dia:point val="-64.095,171.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-64.845,170.85;-60.3475,180.6"/>
+        <dia:rectangle val="-64.845,170.85;-60.3475,179.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -39005,7 +39006,7 @@ output languages.#</dia:string>
         <dia:point val="-69.02,196"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-69.77,171.55;-20.2725,197.6"/>
+        <dia:rectangle val="-69.77,171.55;-20.2725,196.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41752,7 +41753,7 @@ output languages.#</dia:string>
         <dia:point val="-139.548,209"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-140.298,199.55;-133.348,210.6"/>
+        <dia:rectangle val="-140.298,199.55;-133.348,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41824,7 +41825,7 @@ output languages.#</dia:string>
         <dia:point val="-150,209"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-158.598,199.55;-149.25,210.6"/>
+        <dia:rectangle val="-158.598,199.55;-149.25,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41896,7 +41897,7 @@ output languages.#</dia:string>
         <dia:point val="-150,209"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-172.598,205.6;-149.929,210.6"/>
+        <dia:rectangle val="-172.598,205.6;-149.929,209.85"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -41968,7 +41969,7 @@ output languages.#</dia:string>
         <dia:point val="-150,210.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-160.145,209.35;-149.25,213.7"/>
+        <dia:rectangle val="-160.145,209.35;-149.25,212.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42040,7 +42041,7 @@ output languages.#</dia:string>
         <dia:point val="-150,212.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-175.598,211.35;-149.25,220.6"/>
+        <dia:rectangle val="-175.598,211.35;-149.25,219.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42114,7 +42115,7 @@ output languages.#</dia:string>
         <dia:point val="-150,212.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-151.598,211.85;-149.25,220.6"/>
+        <dia:rectangle val="-151.598,211.85;-149.25,219.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42186,7 +42187,7 @@ output languages.#</dia:string>
         <dia:point val="-139.548,212.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-140.298,211.85;-138.348,228.6"/>
+        <dia:rectangle val="-140.298,211.85;-138.348,227.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42258,7 +42259,7 @@ output languages.#</dia:string>
         <dia:point val="-129.095,212.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-129.845,211.85;-124.347,220.6"/>
+        <dia:rectangle val="-129.845,211.85;-124.347,219.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42330,7 +42331,7 @@ output languages.#</dia:string>
         <dia:point val="-129.095,212.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-129.845,211.35;-120.95,216.7"/>
+        <dia:rectangle val="-129.845,211.35;-120.95,215.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42401,7 +42402,7 @@ output languages.#</dia:string>
         <dia:point val="-129.095,210.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-129.845,209.35;-120.95,213.7"/>
+        <dia:rectangle val="-129.845,209.35;-120.95,212.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42473,7 +42474,7 @@ output languages.#</dia:string>
         <dia:point val="-139.548,209"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-140.298,199.55;-113.005,210.6"/>
+        <dia:rectangle val="-140.298,199.55;-113.005,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42545,7 +42546,7 @@ output languages.#</dia:string>
         <dia:point val="-149,230.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-154.405,229.85;-148.25,240.6"/>
+        <dia:rectangle val="-154.405,229.85;-148.25,239.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -42617,7 +42618,7 @@ output languages.#</dia:string>
         <dia:point val="-128.095,230.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-128.845,229.85;-119.498,240.6"/>
+        <dia:rectangle val="-128.845,229.85;-119.498,239.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43278,7 +43279,7 @@ output languages.#</dia:string>
         <dia:point val="-58,197.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-69.07,196.35;-57.25,200.7"/>
+        <dia:rectangle val="-69.07,196.35;-57.25,199.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43350,7 +43351,7 @@ output languages.#</dia:string>
         <dia:point val="-41.33,197.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-42.08,196.35;-27.95,200.7"/>
+        <dia:rectangle val="-42.08,196.35;-27.95,199.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43533,7 +43534,7 @@ output languages.#</dia:string>
         <dia:point val="6.395,196"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.8375,187.95;7.145,197.6"/>
+        <dia:rectangle val="3.8375,187.95;7.145,196.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43604,7 +43605,7 @@ output languages.#</dia:string>
         <dia:point val="-18.125,196"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.875,187.95;-12.8,197.6"/>
+        <dia:rectangle val="-18.875,187.95;-12.8,196.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43676,7 +43677,7 @@ output languages.#</dia:string>
         <dia:point val="-8.1997,197.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-8.9497,197.05;-1.95,199.4"/>
+        <dia:rectangle val="-8.9497,196.35;-1.95,198.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43748,7 +43749,7 @@ output languages.#</dia:string>
         <dia:point val="-18.125,199.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-18.875,198.85;-15.77,210.6"/>
+        <dia:rectangle val="-18.875,198.85;-15.77,209.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43820,7 +43821,7 @@ output languages.#</dia:string>
         <dia:point val="-134,240.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-143.71,239.35;-133.25,242.4"/>
+        <dia:rectangle val="-143.71,239.35;-133.25,241.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -43892,7 +43893,7 @@ output languages.#</dia:string>
         <dia:point val="-85.165,136.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-85.915,135.35;-76.95,139.7"/>
+        <dia:rectangle val="-85.915,135.35;-76.95,138.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

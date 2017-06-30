@@ -69,5 +69,6 @@
 #include "dogen/yarn/serialization/intermediate_model_repository_ser.hpp"
 #include "dogen/yarn/serialization/local_enablement_configuration_ser.hpp"
 #include "dogen/yarn/serialization/global_enablement_configuration_ser.hpp"
+#include "dogen/yarn/serialization/transforms/code_generation_output_ser.hpp"
 
 #endif

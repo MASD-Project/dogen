@@ -69,5 +69,6 @@
 #include "dogen/yarn/hash/intermediate_model_repository_hash.hpp"
 #include "dogen/yarn/hash/local_enablement_configuration_hash.hpp"
 #include "dogen/yarn/hash/global_enablement_configuration_hash.hpp"
+#include "dogen/yarn/hash/transforms/code_generation_output_hash.hpp"
 
 #endif
