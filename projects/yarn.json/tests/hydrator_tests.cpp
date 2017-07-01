@@ -158,7 +158,7 @@ dogen::yarn::intermediate_model hydrate(std::istream& s) {
     const auto rp(create_repository());
 
     dogen::yarn::json::hydrator h;
-    return h.hydrate(s, false/*is_target*/);
+    return h.hydrate(s);
 }
 
 dogen::yarn::intermediate_model hydrate(const boost::filesystem::path& p) {

@@ -408,6 +408,10 @@ At present we seem to be supplying the =is_target= flag to the
 frontends, but its not clear why that is. Ideally, we should not care
 at this point who the target is. Try removing it and see what happens.
 
+- remove is target from the frontends
+- remove is target from descriptor
+- remove is not yet determined from origin types
+
 *** STARTED Clean up yarn                                             :story:
     CLOCK: [2017-06-30 Fri 09:10]--[2017-06-30 Fri 13:33] =>  4:23
     CLOCK: [2017-06-07 Wed 18:25]--[2017-06-07 Wed 22:41] =>  4:16

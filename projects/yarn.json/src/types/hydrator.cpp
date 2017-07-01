@@ -319,7 +319,6 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
     e.name(n);
-    e.origin_type(origin_types::not_yet_determined);
     e.in_global_module(in_global_module);
     e.documentation(read_documentation(pt));
     e.stereotypes(read_stereotypes(pt));
@@ -516,8 +515,7 @@ void hydrator::dispatch_meta_type(const boost::property_tree::ptree& pt,
     }
 }
 
-yarn::intermediate_model
-hydrator::read_stream(std::istream& s, const bool is_target) const {
+yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
     yarn::intermediate_model r;
     boost::property_tree::ptree pt;
     read_json(s, pt);
@@ -528,18 +526,12 @@ hydrator::read_stream(std::istream& s, const bool is_target) const {
     r.name(nf.build_model_name(mn, em));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
-    const auto tg(origin_types::target);
-    const auto nyd(origin_types::not_yet_determined);
-    const auto ot(is_target ? tg : nyd);
-    r.origin_type(ot);
-
     yarn::module m;
     const auto st(annotations::scope_types::root_module);
     read_and_insert_scribble_group(r.name(), st, pt, r);
 
     m.documentation(read_documentation(pt));
     m.name(r.name());
-    m.origin_type(origin_types::not_yet_determined);
     r.modules().insert(std::make_pair(m.name().id(), m));
 
     const auto i(pt.find(elements_key));
@@ -571,11 +563,11 @@ to_object_type(const boost::optional<std::string>& s) const {
 }
 
 intermediate_model
-hydrator::hydrate(std::istream& s, const bool is_target) const {
+hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
     try {
-        auto r(read_stream(s, is_target));
+        auto r(read_stream(s));
         BOOST_LOG_SEV(lg, debug) << "Parsed JSON stream successfully.";
         return r;
     } catch (const json_parser_error& e) {
@@ -592,7 +584,7 @@ hydrator::hydrate(std::istream& s, const bool is_target) const {
 }
 
 intermediate_model hydrator::
-hydrate(const boost::filesystem::path& p, const bool is_target) const {
+hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
     boost::filesystem::ifstream s(p);
@@ -602,7 +594,7 @@ hydrate(const boost::filesystem::path& p, const bool is_target) const {
         BOOST_THROW_EXCEPTION(hydration_error(failed_to_open_file + gs));
     }
 
-    const auto r(hydrate(s, is_target));
+    const auto r(hydrate(s));
     BOOST_LOG_SEV(lg, debug) << "Parsed JSON file successfully.";
     return r;
 }

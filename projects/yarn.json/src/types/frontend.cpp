@@ -51,7 +51,7 @@ bool frontend::can_read(const boost::filesystem::path& p) const {
 
 yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     hydrator h;
-    return h.hydrate(d.path(), d.is_target());
+    return h.hydrate(d.path());
 }
 
 bool frontend::can_write() const {
