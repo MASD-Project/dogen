@@ -1499,7 +1499,16 @@ Notes:
 - add CMake file to find knitter etc and include those files in
   package. We probably should install dogen now and have dogen rely on
   installed dogen first, with an option to switch to "built" dogen.
+
+Links:
+
+- [[https://github.com/bkaradzic/GENie][GENie - Project generator tool]]
 - see [[https://github.com/cginternals/cmake-init][cmake-init]] for ideas.
+- [[https://github.com/premake/premake-core][Premake: powerfully simple build configuration.]]
+- [[https://jgcoded.github.io/CMakeStarter/][CMake Starter]]: "This website is a simple tool to help C++ developers
+  quickly start new CMake-based projects. The tool generates an entire
+  C++ project with boiler-plate CMake files and source code, and the
+  generated project can be downloaded as a zip file."
 
 *** Merge properties factory with stitching factory                   :story:
 
