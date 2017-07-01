@@ -13,29 +13,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-01 Sat 16:34]
+#+CAPTION: Clock summary at [2017-07-01 Sat 17:19]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *46:47* |       |       | 100.0 |
+| *Total time*                                                                | *47:32* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 46:47   |       |       | 100.0 |
-| Active                                                                      |         | 46:47 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  6:42 |  14.3 |
+| Stories                                                                     | 47:32   |       |       | 100.0 |
+| Active                                                                      |         | 47:32 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  7:02 |  14.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   1.7 |
-| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |   9.4 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |   9.3 |
 | COMPLETED WIX Path has changed on appveyor                                  |         |       |  0:09 |   0.3 |
-| COMPLETED Move decoration into yarn                                         |         |       |  8:38 |  18.5 |
-| COMPLETED Fix broken builds due to disk space                               |         |       |  1:32 |   3.3 |
+| COMPLETED Move decoration into yarn                                         |         |       |  8:38 |  18.2 |
+| COMPLETED Fix broken builds due to disk space                               |         |       |  1:32 |   3.2 |
 | COMPLETED Remove =is_target= from frontends                                 |         |       |  1:14 |   2.6 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   4.9 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  23.1 |
-| STARTED Move element segmentation into yarn                                 |         |       |  1:32 |   3.3 |
-| STARTED Clean up yarn                                                       |         |       |  8:39 |  18.5 |
+| COMPLETED Analysis: major yarn clean-up                                     |         |       |  9:04 |  19.1 |
+| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   4.8 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  22.8 |
+| STARTED Move element segmentation into yarn                                 |         |       |  1:32 |   3.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-01 Sat 17:00]--[2017-07-01 Sat 17:20] =>  0:20
     CLOCK: [2017-05-26 Fri 15:32]--[2017-05-26 Fri 15:38] =>  0:06
     CLOCK: [2017-05-26 Fri 14:02]--[2017-05-26 Fri 15:21] =>  1:19
     CLOCK: [2017-04-14 Fri 11:31]--[2017-04-14 Fri 13:05] =>  1:34
@@ -289,6 +290,52 @@ at this point who the target is. Try removing it and see what happens.
 - remove is target from descriptor
 - remove is not yet determined from origin types
 
+*** COMPLETED Analysis: major yarn clean-up                           :story:
+    CLOSED: [2017-07-01 Sat 16:59]
+    CLOCK: [2017-07-01 Sat 16:34]--[2017-07-01 Sat 16:59] =>  0:25
+    CLOCK: [2017-06-30 Fri 09:10]--[2017-06-30 Fri 13:33] =>  4:23
+    CLOCK: [2017-06-07 Wed 18:25]--[2017-06-07 Wed 22:41] =>  4:16
+
+It seems we have reached the need to perform yet another clean up in
+yarn. The merging of the code in quilt provides us with a good reason
+to do this clean up. The objectives of the clean up are as follows:
+
+- use domain terminology where possible. Examples: model to model
+  transform, model to text transform, etc.
+- make yarn the core model and get rid of "modelets" such as knit and
+  parts of quilt. In reality, yarn should perform a complete workflow
+  from knitting options to generated files. The remaining models
+  should just hook up into this workflow.
+
+In effect, yarn is made up of a set of transformations, themselves
+composed of transformations and so forth. We should follow the
+[[http://www.morganclaypool.com/doi/abs/10.2200/S00751ED2V01Y201701SWE004][Brambilia]] approach and name all of these classes according to the
+vocabulary of the domain experts.
+
+Sample code:
+
+#+begin_src
+transforms::model_to_model_transform:
+
+const auto context(context_source(ko));
+auto target(model_source(context));
+pre_process(context, target);
+auto expanded(expand(context, target));
+map(expanded);
+
+for(auto& m : expanded) {
+    auto refs(model_source(context, m));
+    pre_process(refs);
+    map(refs);
+    auto combined(combine(m, refs))
+    post_process(combined);
+    r.push_back(convert(combined));
+}
+#+end_src
+
+The objective of this story is just to clean up the design. We will
+raise individual stories for the implementation.
+
 *** STARTED Add support for proper JSON serialisation in C++          :story:
     CLOCK: [2017-04-12 Wed 20:56]--[2017-04-12 Wed 23:14] =>  2:18
 
@@ -414,753 +461,89 @@ Notes:
   into yarn (basically decoration and artefact properties) first and
   then see where segmentation ends.
 
-*** STARTED Clean up yarn                                             :story:
-    CLOCK: [2017-06-30 Fri 09:10]--[2017-06-30 Fri 13:33] =>  4:23
-    CLOCK: [2017-06-07 Wed 18:25]--[2017-06-07 Wed 22:41] =>  4:16
-
-It seems we have reached the need to perform yet another clean up in
-yarn. The merging of the code in quilt provides us with a good reason
-to do this clean up. The objectives of the clean up are as follows:
-
-- use domain terminology where possible. Examples: model to model
-  transform, model to text transform, etc.
-- make yarn the core model and get rid of "modelets" such as knit and
-  parts of quilt. In reality, yarn should perform a complete workflow
-  from knitting options to generated files. The remaining models
-  should just hook up into this workflow.
-
-In effect, yarn is made up of a set of transformations, themselves
-composed of transformations and so forth. These are:
-
-- model to model:
-
-Sample code:
-
-#+begin_src
-transforms::model_to_model_transform:
-
-const auto context(context_source(ko));
-auto target(model_source(context));
-pre_process(context, target);
-auto expanded(expand(context, target));
-map(expanded);
-
-for(auto& m : expanded) {
-    auto refs(model_source(context, m));
-    pre_process(refs);
-    map(refs);
-    auto combined(combine(m, refs))
-    post_process(combined);
-    r.push_back(convert(combined));
-}
-#+end_src
-
-*** Move enablement into yarn                                         :story:
-
-It seems that the concepts around enablement are actually not kernel
-specific but instead can be generalised at the meta-model level. We
-need to create adequate representations in yarn to handle facets,
-etc. We then need to move across the code that computes enablement
-into yarn so that all kernels can make use of it.
-
-*Previous Understanding*
-
-We need to make use of the exact same logic as implemented in
-=quilt.cpp= for enablement. Perhaps all of the enablement related
-functionality can be lifted and grafted onto quilt without any major
-changes.
-
-*** Move dependencies into yarn                                       :story:
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
-*** Move helpers into yarn                                            :story:
-
-Looking at helpers, it is clear that they are common to all
-languages. We just need to rename the terminology slightly -
-particularly wrt to streaming properties - and then move this code
-across into yarn.
-
-*** Move facet properties into yarn                                   :story:
-
-We should be able to handle these generically in yarn.
-
-*** Move ORM camel-case and databases into yarn                       :story:
-
-We should handle this property at the ORM level, rather than at the
-ODB level.
-
-Similarly, we should move the ODB databases into yarn and make that a
-ORM-level concept.
-
-*** Create "opaque" kernel and element properties                     :story:
-
-As part of the element container, we can have a set of base classes
-that are empty: =opaque_element_properties=. This class is then
-specialised in each kernel with the properties that are specific to
-it. We probably need an equivalent for:
-
-- kernel level properties
-- element level properties
-- attribute level properties.
-
-We then have to do a lot of casting in the helpers.
-
-Once we got these opaque properties, we can then create "kernel
-specific expanders" which are passed in to the yarn workflow. These
-populate the opaque properties.
-
-*** Make creating new facets easier                                   :story:
-
-For types that are stitchable such as formatters, we need to always
-copy and paste the template form another formatter and then update
-values. It would be great if we could have dogen generate a bare-bones
-stitch template. This is pretty crazy so it requires a bit of
-concentration to understand what we're doing here:
-
-- detect that the =yarn::object= is annotated as
-  =quilt.cpp.types.class_implementation.formatting_style= =stitch=.
-- find the corresponding expected stitch file. If none is available,
-  /dynamically/ change the =formatting_style= to =stock= and locate a
-  well-known stitch formatter.
-- the stitch formatter uses a stitch template that generates stitch
-  templates. Since we cannot escape stitch markup, we will have to use
-  the assistant. One problem we have is that the formatter does not
-  state all of the required information such as what yarn types does
-  it format and so forth. We probably need a meta-model concept to
-  capture the idea of formatters - and this could be in yarn - and
-  make sure it has all of this information. This also has the
-  advantage of making traits, initialisers etc easier. We can do the
-  same for helpers too.
-- an additional wrinkle is that we need different templates for
-  different languages. However, perhaps these are just wale templates
-  in disguise rather than stitch templates? Then we can have the
-  associated default wale templates, very much in the same way we have
-  wale templates for the header files. They just happen to have stitch
-  markup rather than say C++ code.
-
-This is a radically different way from looking at the code. We are now
-saying that yarn should have concepts for:
-
-- facets: specialisation of modules with meta-data such as facet name
-  etc. This can be done via composition to make our life easier.
-- formatters and helpers: elements which belong to a facet and know of
-  their archetype, wale templates, associated yarn element and so
-  forth.
-
-We then create stereotypes for these just like we did for
-=enumeration=. As part of the yarn parsing we instantiate these
-meta-objects with all of their required information. In addition, we
-need to create what we are calling at present "profiles" to define
-their enablement and to default some of its meta-data.
-
-When time comes for code-generation, these new meta-types behave in a
-more interesting way:
-
-- if there is no stitch template, we use wale to generate it.
-- once we have a stitch template, we use stitch to generate the c++
-  code. From then on, we do not touch the stitch template. This
-  happens because overwrite is set to false on the enablement
-  "profile".
-
-Merged stories:
-
-*Code generate initialisers and traits*
-
-If we could mark the modules containing facets with a stereotype
-somehow - say =facet= for example, we could automatically inject two
-meta-types:
-
-- =initialzer=: for each type marked as =requires_initialisation=,
-  register the formatter. Register the types as a formatter or as a
-  helper.
-- =traits=: for each formatter in this module (e.g. classes with the
-  stereotype of =C++ Artefact Formatter= or =C# Artefact Formatter=),
-  ask for their archetype. The formatters would have a meta-data
-  parameter to set their archetype. In fact we probably should have a
-  separate meta-data parameter (archetype source? archetype?).
-
-We may need to solve the stereotype registration problem though, since
-only C++ would know of this facet. Or we could hard-code it in yarn
-for now.
-
-Motes:
-
-- how does the initialiser know the formatter is a =quilt.cpp=
-  formatter rather than say a C# formatter? this could be done via the
-  formatter's archetype - its the kernel.
-- users can make use of this very same mechanism to generate their own
-  formatters. We can then load up the DLL with boost plugin. Note that
-  users are not constrained by the yarn meta-model. That is to say,
-  they can create new meta-types using the fabric approach as we do in
-  =quilt.cpp=. Their DLL then defines the formatters which are able to
-  process those meta-types. The only snag in all of this is the
-  expansion machinery. We use static visitors all over the place, and
-  without somehow dynamically knowing about the new types, they will
-  not get expanded. We need to revisit expansion in this light to see
-  if there is a way to make it more dynamic somehow, or at least have
-  a "default" behaviour for all unknown types where we do the generic
-  things to them such as computing the file path, etc. This is
-  probably sufficient for the vast majority of use cases. The other
-  wrinkle is also locator. We are hard-coding paths. If the users
-  limit themselves to creating "regular" entities rather than say
-  CMakeLists/msbuild like entities which have some special way to
-  compute their names, then we don't have a problem. But there should
-  be a generic way to obtain all path elements apart from the file
-  name from locator. And also perhaps have facets that do not have a
-  facet directory so that we can place types above the facet
-  directories such as SLNs, CMakeLists, etc.
-
-*** Add column name support to ORM                                    :story:
-
-At present we need to fall back to ODB pragmas in order to rename a
-column. We should have =yarn.orm.column_name=.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
-Finally we should no longer attempt to derive the ODB pragma
-context. We should just add it verbatim.
-
-*** Add prefetch support to ODB                                       :story:
-
-As per Boris email:
-
-#+begin_quote
-Hm, I am not sure the bulk approach (with a compiler-time pragma) is
-right in this case. There we don't really have a choice since we need
-to know the "batch buffer" size.
-
-But here it is all runtime. Plus, you may want to have different
-prefetch for different queries of the same object. In fact, you
-can already customize it for queries (but not for object loads)
-by using prepared queries (Section 4.5 in the manual):
-
-1. Create prepared query.
-
-2. Get its statement (statement()).
-
-3. Cast it to odb::oracle::select_statement.
-
-4. Call handle() on the result to get OCIStmt*.
-
-5. Set custom OCI_ATTR_PREFETCH_ROWS.
-
-6. Execute the query.
-
-The problems with this approach are: (1) it is tedious and (2) it
-doesn't work for non-query SELECT's (e.g., database::load()). So
-perhaps the way to do it is:
-
-1. Provide prefetch() functions on oracle::database() and
-   oracle::connection() that can be used to modify database-wide
-   and connection-wide prefetch values. Also set it to some
-   reasonable default (say 512?)
-
-2. Provide oracle::select_statement::prefetch() to make the
-   prepared query approach less tedious.
-#+end_quote
-
-*** Add ODB to the build machine                                      :story:
-
-At present we are only compiling and running the ODB tests
-locally. Now that ODB is becoming a core dependency, we need to make
-sure we are running these tests on the build machines - Windows and
-Linux at least.
-
-However, at present we are already running out of time for the main
-build. If we simply add ODB to Linux we will not complete the build in
-the allocated slot. One way to achieve this is to have a build that
-does ODB only.
-
-We should also add oracle OCI to the dogen dependencies package so
-that we test oracle support as well as postgres. However, to run the
-tests we need some way to configure postgres to allow connections. It
-is also possible to install oracle by copying the DEB to dropbox and
-creating a simple installation script that sets up the users etc. We
-could make similar scripts for postgres and oracle. However, we need
-to convert the oracle schema into postgres.
-
-*** Allow users to override string prefixes in test data              :story:
-
-At present we have a hard-coded string prefix in test data:
-=a_string_". This has been is fine up to now, but we have bumped into
-a problem when using it with ORM: some fields in the database are too
-small to fit the prefix (e.g. =VARCHAR[5]=). The quick solution for
-this is to make the prefix customisable when we instantiate the
-generator.
-
-Actually this is not quite that straightforward: in order to allow
-users to configure the string prefix, we'd have to extend all helpers
-to have a "prefix" argument of type string because we do not know
-which helpers are the string helpers. An alternative is to have a test
-data configuration, with the following configurable points:
-
-- string prefix
-- path prefix
-- numeric start
-- date start
-
-The configuration is an optional parameter supplied to the
-generator. If empty we use the default configuration which could
-potentially be read from meta-data, although we do not have a use case
-for this.
-
-However, we have a slight problem: if a model M0 has types from
-another model M1, we will end up with two configurations (one per
-model). When we call a M0 generator which calls an M1 generator, we
-need to somehow send the configuration across as well. Since they are
-different types (even though identical in layout) we need to copy the
-configuration across. This could be achieved with a template
-method. Alternatively we could make all helper methods a template
-method that takes in a configuration:
-
-#+begin_src c++
-template<typename Configuration>
-create_XYZ(unsigned int position, const Configuratio& c) {
-...
-}
-#+end_src
-
-Actually this won't work: we still have the problem of calling
-external generators.
-
-A simpler but less typed solution is to use =std::tuple=:
-
-: std::tuple<std::string, std::string, int, int> configuration
-
-The other interesting point is that this is perhaps an ORM
-problem. After all, we could have a =VARCHAR[2]= string, and
-configuring the prefix won't help. What we really need is to figure
-out how many digits one can put in the string, given the available
-size. Users can supply the sizes as part of the ORM configuration. We
-can then do a simple heuristic:
-
-- does the prefix fit? if not, drop it.
-- what is the max value for the counter that will fit the string size?
-  Use it as a modulus.
+*** Implement the context class                                       :story:
 
 Tasks:
 
-- inject a new fabric type for test data configuration. It can be a
-  simple struct.
+- create the transformation context, populate it with all the main
+  objects needed by yarn at present.
+- Add a method to generate the context and then unpack it to fit the
+  current API.
 
-*** Ignore ODB files automatically                                    :story:
+*** Implement the exogenous transformation chain                      :story:
 
-At present we are adding the following regular expressions to knitter
-whenever we are using ODB with dogen:
+Tasks:
 
-:        --ignore-files-matching-regex .*sql
-:        --ignore-files-matching-regex .*-odb.*)
+- in yarn, implement:
+  - model generation chain;
+  - initial target chain; and
+  - exogenous transforms (registration etc).
+- in the frontends: implement the exogenous transforms interface.
+- update knit to conditionally use the transforms code or the legacy
+  code.
 
-We should inject the ODB files automatically into the list of expected
-files. For a given element =foreign_key=, we will have a dogen file
+*** Implement the pre-processing chain                                :story:
 
-: foreign_key_pragmas.hpp
+This story may be too big as one story.
 
-We will also have the following ODB files:
+Tasks:
 
-: foreign_key-odb.cxx
-: foreign_key-odb.hxx
-: foreign_key-odb.ixx
+- implement all of the transforms required by the pre-processing
+  chain.
+- implement the pre-processing chain in terms of those transforms.
+- plug in the pre-processing chain into the initial target chain.
 
-The first file can either be on the =include/odb= directory or on the
-=src/odb= directory (it is moved by the ODB target). All other files
-are placed in the =include/odb= folder. Note that at present we are
-using =cpp= extension rather than =cxx=.
+*** Implement the references chain                                    :story:
 
-In addition, on a multi-database environment we also have:
+Tasks:
 
-- =repository-odb-oracle.hxx=
-- =repository-odb-pgsql.hxx=
+- implement the references expansion in the references chain.
+- plug in the references chain into the model generation chain.
+- consider using a multi-threaded approach. If its too hard we should
+  just stick to the single-threaded implementation we have at present.
+
+*** Implement the model generation chain                              :story:
+
+Tasks:
+
+- implement the output languages expansion, considering
+  multi-threading. If its too hard we should just stick to the
+  single-threaded implementation we have at present.
+- implement the merge transform.
+- implement the intermediate model transform.
+
+*** Implement the post-processing chain                               :story:
+
+This story may be too big as one story.
+
+Tasks:
+
+- implement the external transform chain.
+- implement all other transforms required by the post-processing
+  chain.
+- plug it in the model generation chain.
+- fix all errors when we replace the legacy code with the new
+  transform-based code.
+
+*** Implement the code-generation chain                               :story:
+
+Tasks:
+
+- Add registration, interfaces etc.
+- implement the kernels in terms of the new interfaces.
+- update knit to use the code generator.
+
+*** Move all data types into its own namespace                        :story:
+
+Now we have placed all the transforms under namespace =transforms=,
+for symmetry purposes it would be nice to have some top-level
+namespace for the data types. Names:
+
+- entities
 - ...
 
-Ideally we should also add the ODB include files to the master
-includes. However, we probably need a separate master include file
-just for ODB files.
-
-One of the amazing side-effects of this approach is that we will
-automatically delete any ODB files which are no longer required
-(because we will not generate ignores for them). At present we are
-manually deleting them.
-
-This also means we can add the ODB files to the visual studio project
-even before they get generated.
-
-*** Add a top-level "Visual Studio" knob                              :story:
-
-We have a number of features that only make sense when on Windows and
-building for Visual Studio. We should have a top-level knob that
-enables or disables all of these features in one go:
-
-- =quilt.cpp.visual_studio.enabled=
-
-However, we don't really seem to have a way to "link" features such
-that when a feature is enabled all of its sub-features are enabled. We
-have some hacks for this for the relationship between facets and
-formatters but this is not general. We need a general way to declare a
-dependency between two "things" and to state a few rules for B depends
-on A:
-
-- if A is explicitly enabled, it does not matter if B is enabled or
-  disabled.
-- if A is not explicitly enabled, it is enabled if B is enabled and
-  vice-versa; it defaults to B.
-- if B is not explicitly enabled, it uses its default value.
-
-It should be possible to declare arbitrary graphs with these
-dependencies.
-
-In this way we'd see features as a graph, with platform-independent
-and platform-specific nodes:
-
-- platform independent: types, test_data, io, serialisation, visual
-  studio, etc.
-- platform specific: c++ types. c++ test data. boost serialisation,
-  c++ visual studio, etc.
-
-Dependencies between features can be static or dynamic:
-
-- static means that the state of the instances of the meta-model are
-  not relevant to determining the outcome.
-- dynamic means the opposite.
-
-For example, forward declarations has a dynamic dependency on types
-because depending on the state of the type we may need to force it to
-come out. For example, if there is a pointer.
-
-It would be nice if we could move all of these machinery into yarn or
-quilt. It doesn't make a lot of sense to place it in either, to be
-fair, since its not a platform-independent meta-model concept
-(e.g. yarn) and whilst it is a platform-specific concept, it is not
-kernel specific. Perhaps it should leave on its own model.
-
-There are several aspects:
-
-- the total list of formatters and facets
-- the relationships between them
-- functions for the dynamic dependencies that take in an element
-- the computation of the enablement.
-
-*** Add support for Visual Studio C++ projects                        :story:
-
-Visual studio project needs the files to be listed by hand. We can
-either generate the project or the user has to manually add the
-files. This is a problem every time they change. Requirements:
-
-- we need to be able to support multiple VS versions as well (user
-  configurable)
-- user may want to import property sheets
-- need guids (as per C# projects)
-- need additional library/include directories
-- need to add pre-compiled headers support with /FI.
-- add a solution for good measure, using the C# code.
-- add filter files for headers and source files.
-
-As per ODB, users may also want to build with different versions of
-VS. We should allow generating more than one solution and postfix them
-with the VS version.
-
-We should also generate filters for the project:
-
-- header files
-- source files
-- ODB header files
-- ODB source files
-
-The inclusion of ODB files must be done using regular expressions
-because we do not want to have to do two passes for knit; so we don't
-really know what files are available. However, if the ODB files have a
-=cxx= extension, we can just =CLInclude= =*cxx=.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
-
-*** Add support for "project capitalisation"                          :story:
-
-It would be nice if facets, classes etc which are at present in lower
-case could be camel cased if the user chooses.
-
-At present we need to override all facet directories, include
-directories, etc.
-
-*** Generate Redis get/set code                                       :story:
-
-In theory, there is nothing stopping us from having a Redis facet that
-takes in as an input the serialisation method. For now we just need to
-support boost serialisation. The interface could be configurable so
-that users can choose the archive type. Types could be marked as
-=cacheable= and then suitable parameters supplied such as the
-serialisation mechanism.
-
-As with hashing, we do not want to generate code for all objects; only
-for those the user marks as cacheable.
-
-The interface should support two main methods:
-
-- get
-- set
-
-Both receive an instance of Redis. We could implement it in C to avoid
-additional dependencies.
-
-However, it should also be possible to use say =memcached= as the
-cache rather than redis. We need to create a layer of indirection
-between the generic caching (meta-model concept) and the actual
-caching (platform, implementation layer). In fact we can leave this
-for later and for now only worry about redis. =cacheable= will then be
-built on top of the existing facets.
-
-What we do need though is the ability to configure the meta-model to
-link the serialisation type to the cache type. Say for example we
-support BSON and JSON and boost serialisation. We may want the cache
-facet to support one or more or all of these. We can think of these as
-aspects that are enabled by the user at the model level (but possibly
-overridable at the element level).
-
-*** Primitives are not comparable                                     :story:
-
-Our wrapping code around primitives means we can no longer perform
-arithmetic operations on them or comparisons. This may be what is
-intended (e.g. adding or multiplying =customer_id= does not make
-sense) but it also means we can't delete ranges from the database for
-example. It would be nice if there was some meta-data we could add to
-primitives to make this possible:
-
-- =comparable=
-- etc
-
-With this we would generate the appropriate operators by delegating to
-the underlying type.
-
-We probably need some way of knowing if the underlying type supports
-comparisons. A meta-data flag used to annotate proxy models would be
-sufficient.
-
-*** Build on tags for Windows                                         :story:
-
-At present we are not building and deploying for tags on Windows. This
-is a major pain because it means we must remember to always push the
-tag separately. We need to setup appveyor correctly.
-
-Links:
-
-- [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
-
-*** Handling of visual studio projects and solutions is incorrect     :story:
-
-At present we added the extension of the solution/project to the
-element name, e.g.:
-
-: all_path_and_directory_settings.csproj
-
-This happens to work for the simpler cases, but if we try to add a
-postfix we then have a problem:
-
-: dogen.test_models.all_path_and_directory_settings.csproj_vc15_
-
-Projects and solutions do not seem to fit our conceptual model for the
-element space. We need to somehow have distinct element IDs but yet
-not associate the extension with the name directly. Up to now we never
-had two distinct elements with the exact same name but generating two
-different artefacts with different extensions.
-
-This is a problem because we will need to have the ability to generate
-multiple project files for different versions of visual studio.
-
-For now we removed the project and solution postfixes:
-
-: #DOGEN quilt.csharp.visual_studio.solution.postfix=_vs15_
-: #DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
-
-In order to fit our conceptual model, we need to make some adjustments
-to our implementation of projects and solutions. First, there is only
-one meta-model element for *both* projects and solutions. This is
-derived from the fact that they both share a common name. The
-conceptual model does not involve file extensions - or file paths for
-that matter; archetypes exist only in archetype space, and their
-"paths" in this space are only related to the facets they belong
-to. The physical location is a property of files, which are
-expressions of archetypes in "file space". Thus, there is only one
-single element, provisionally called "visual studio", which has
-multiple archetypes (and their associated formatters):
-
-- solution
-- project
-
-Second, a solution and project may be instantiated multiple times,
-depending on the version of visual studio and the associated
-compiler. Externally users supply a visual studio version and that
-internally will map to different instances of the formatters. We must
-instantiate the formatters for each supported version because we may
-need to create multiple versions simultaneously: his is the use case
-where users want to generate projects and solutions for multiple
-versions of VS at the same time.
-
-THe good news is that we already have something similar: master
-includes. We can adapt a lot of the logic we have for master
-includes. There are some differences though:
-
-- we will have multiple instances on the same facet.
-- we need some external mechanism to determine if a given version is
-  enabled. We could force users to enter the "enabled" property for
-  each version in the meta-data, but that would get really messy since
-  there are only a few valid combinations of solution and project
-  version. Its better if users supply the Visual Studio versions and
-  we infer the solution and projects to enable. But we do not have a
-  mechanism for this at present. We could add a "is enabled" to
-  formatters like we did for helpers, supplying the element; we would
-  then check the Visual Studio version in the element and return false
-  if it didn't match the formatters version. Or we could change the
-  formatter's interface to return optional artefact. Whilst this is a
-  bit more painful - we'd have to change all formatters - it fits the
-  code structure slightly better.
-- we need to have different file names depending on the
-  version. Worse: if there is just a single version we do not need to
-  have a "version prefix". If there are multiple versions we need to
-  add the prefix. The fist use case is easy: we already have archetype
-  prefixes; we just need to add a prefix for each version. The second
-  part requires some hacking. We could have an option in locator:
-  "apply archetype postfix" supplied as an argument. Since we have the
-  Visual Studio element we have visibility of all enabled versions.
-
-*** Split out the file extension from the formatter                   :story:
-
-At present we have handled file extensions in one of two ways:
-
-- we baked them in into locator, dynamically: this is the case for
-  =hpp= and =cpp=, where locator is responsible for retrieving the
-  meta-data related to extensions.
-- we hacked them in into locator, statically: this is the case for
-  CMakeLists, where the =txt= is hard-coded in.
-- we hacked them in into the elements: this is the case for Visual
-  Studio solutions and projects.
-
-In reality, what we need is to create a separation between the
-archetype, the extension "kind" and the actual extension. All
-archetypes have a fixed "extension kind". For example, C++ headers
-will always have a C++ header extension even though the actual header
-extension used is not known. In other cases the extension kind has a
-fixed extension (CMakeLists, Visual Studio projects, solutions). At
-present this mapping is done via the multiple functions locator
-supplies.
-
-We could conceivably have an enumeration for extension kind and then
-have a single function for full paths, that just takes in the
-extension kind, archetype etc. This would replace the proliferation of
-"full path for XYZ".
-
-We also have the concept of inclusion paths. We should generalise this
-to just "relative paths" and have a "add project directory?" flag.
-
-*** Add support for exports on windows                                :story:
-
-We should add export macros for shared objects/DLLs for windows. We
-should create a file =exports.hpp= probably at top-level with all the
-exports.
-
-#+begin_example
-#pragma once
-
-#ifdef MODEL_DECL
-    #undef MODEL _DECL
-#endif
-
-#ifdef MODEL _EXPORTS
-    #define MODEL _DECL __declspec(dllexport)
-#else
-    #define MODEL _DECL __declspec(dllimport)
-#endif
-#+end_example
-
-It is used as follows:
-
-: class MODEL_DECL Tags xxx
-
-We should probably also add GCC support.
-
-- [[https://gcc.gnu.org/wiki/Visibility][GCC Visibility]]
-
-*** Add =targetver.h= support                                         :story:
-
-On windows we should be generating the targetver header.
-
-Links:
-
-- [[https://github.com/Microsoft/Windows-classic-samples/blob/master/Samples/RadialController/cpp/targetver.h][targetver.h]]
-
-*** Add support for DLL Main on windows                               :story:
-
-At present we are manually generating DLL Main by hand and then
-excluding it on regexes. This is not ideal and will be more of a
-problem when we generate project files. Ideally we should code
-generate it. Requirements:
-
-- user must be able to disable it;
-- user must be able to handcraft it in case they want different
-  contents;
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/aa370448(v%3Dvs.85).aspx][DLL Main]]
-
-*** Add support for pre-compiled headers on windows                   :story:
-
-Most VS users have pre-compiled headers. We need to generate
-=stdafx.h= etc. For now we can have it minimally populated until we
-understand better the requirements.
-
-Actually we could probably do a very simple computation in quilt to
-figure out the most frequently used headers and add those to
-=stdafx=. We just need to go through the entire model in the inclusion
-expander to perform this calculation.
-
-In addition we need to make sure =stdafx= is added as the first
-include.
-
-We should have a quilt setting for pre-compilation. We should also
-check that visual studio support is enabled in order to generate
-=stdafx=.
-
-*** Code-generate a "one-shot" serialisation API                      :story:
-
-For the dia model we manually generated a class called
-=diagram_serialization_helper=. It provided a simple API to read/write
-the dia model:
-
-: static void to_xml(std::ostream& s, const diagram& d);
-: static diagram from_xml(std::istream& s);
-
-It would be nice to have this code-generated and also to cover the
-other two archives (text, binary).
-
-Users should be able to mark types with some property so that we know
-we need to generate these wrappers.
-
-Another common use case is to serialise from and to string. It would
-be nice to have helpers for strings too.
-
-These APIs can then be reused by the caching layer.
-
-We could have a stereotype that marks a class as requiring this kind
-of serialisation, such as "serialisation entry point".
+If we cannot find any good names, we may need to leave these objects
+at the top-level. However, we should probably also place the code
+generator at the top-level as well.
 
 ** Deprecated
