@@ -72,41 +72,28 @@ template<typename Element> void add_element(
 }
 
 builder::builder(const std::string& model_name,
-    const std::string& external_modules, bool is_target,
+    const std::string& external_modules,
     const std::unordered_map<std::string, std::list<std::string> >&
     child_id_to_parent_ids) {
-    repository_.model(setup_model(model_name, external_modules, is_target));
+    repository_.model(setup_model(model_name, external_modules));
     repository_.child_id_to_parent_ids(child_id_to_parent_ids);
 }
 
-yarn::module builder::create_module_for_model(const yarn::name& n,
-    const yarn::origin_types ot) const {
-
+yarn::module builder::create_module_for_model(const yarn::name& n) const {
     yarn::module r;
     r.name(n);
-    r.origin_type(ot);
-
     return r;
 }
 
 yarn::intermediate_model builder::setup_model(const std::string& model_name,
-    const std::string& external_modules, bool is_target) const {
+    const std::string& external_modules) const {
 
     yarn::intermediate_model r;
     yarn::name_factory nf;
     r.name(nf.build_model_name(model_name, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Model: " << r.name().id();
 
-    /*
-     * If we are not a target model, nothing else can be said about it
-     * at this point in time.
-     */
-    const auto tg(origin_types::target);
-    const auto nyd(origin_types::not_yet_determined);
-    const auto ot(is_target ? tg : nyd);
-
-    r.origin_type(ot);
-    const auto mm(create_module_for_model(r.name(), ot));
+    const auto mm(create_module_for_model(r.name()));
     r.modules().insert(std::make_pair(mm.name().id(), mm));
 
     return r;

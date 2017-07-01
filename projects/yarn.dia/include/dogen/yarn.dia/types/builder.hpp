@@ -42,15 +42,14 @@ namespace dia {
 class builder {
 public:
     builder(const std::string& model_name, const std::string& external_modules,
-        const bool is_target, const std::unordered_map<std::string,
-        std::list<std::string>>& child_id_to_parent_ids);
+        const std::unordered_map<std::string, std::list<std::string>>&
+        child_id_to_parent_ids);
 
 private:
-    yarn::module create_module_for_model(const yarn::name& n,
-        const yarn::origin_types ot) const;
+    yarn::module create_module_for_model(const yarn::name& n) const;
 
     yarn::intermediate_model setup_model(const std::string& model_name,
-        const std::string& external_modules, bool is_target) const;
+        const std::string& external_modules) const;
 
     void update_scribble_group(const yarn::name& n, const processed_object& po);
 

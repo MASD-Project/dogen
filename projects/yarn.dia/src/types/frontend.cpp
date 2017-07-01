@@ -62,7 +62,7 @@ yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
     dogen::yarn::dia::workflow wf;
     const auto name(d.path().stem().string());
-    const auto r(wf.execute(diagram, name, d.is_target()));
+    const auto r(wf.execute(diagram, name));
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
 
     return r;

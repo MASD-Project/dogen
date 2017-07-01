@@ -35,7 +35,7 @@
 		</location>
 		<identifiable>empty</identifiable>
 	</name>
-	<origin_type>1</origin_type>
+	<origin_type>0</origin_type>
 	<references class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<bucket_count>1</bucket_count>
@@ -96,7 +96,7 @@
 						</location>
 						<identifiable>empty</identifiable>
 					</name>
-					<origin_type>1</origin_type>
+					<origin_type>0</origin_type>
 					<contained_by class_id="26" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</contained_by>

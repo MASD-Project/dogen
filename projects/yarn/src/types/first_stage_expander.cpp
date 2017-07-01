@@ -98,6 +98,11 @@ void first_stage_expander::validate(const intermediate_model& im) const {
 void first_stage_expander::
 expand_target(const annotations::annotation_groups_factory& agf,
     const annotations::type_repository& atrp, intermediate_model& im) const {
+
+    // FIXME: hack for now. This has been moved from the frontend
+    // whilst we are trying to move to the new world.
+    im.origin_type(origin_types::target);
+
     /*
      * We must expand annotations before we expand modules to
      * ensure the root module is populated with entries

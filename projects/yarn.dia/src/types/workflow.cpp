@@ -85,11 +85,11 @@ workflow::generate_graph(const std::list<processed_object>& pos) {
 }
 
 builder workflow::create_builder(const std::string& model_name,
-    const std::string& external_modules, const bool is_target,
+    const std::string& external_modules,
     const std::unordered_map<std::string, std::list<std::string>>&
     child_id_to_parent_ids) const {
 
-    builder b(model_name, external_modules, is_target, child_id_to_parent_ids);
+    builder b(model_name, external_modules, child_id_to_parent_ids);
     return b;
 }
 
@@ -101,7 +101,7 @@ workflow::generate_model(builder& b, const graph_type& g) {
 }
 
 yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
-    const std::string& model_name, bool is_target) {
+    const std::string& model_name) {
 
     /*
      * Convert the original dia diagram into a list of dia objects
@@ -124,7 +124,7 @@ yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
      * Go through the dependency graph and build a yarn model from
      * it.
      */
-    auto b(create_builder(model_name, external_modules, is_target, ctp));
+    auto b(create_builder(model_name, external_modules, ctp));
     const auto r(generate_model(b, g));
 
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;

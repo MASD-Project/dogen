@@ -120,7 +120,7 @@ intermediate_model_repository_factory::intermediate_model_for_descriptor(
                              << "Descriptor: " << d;
 
     auto& fe(rg.frontend_for_path(d.path()));
-    auto r(fe.read(d));
+    const auto r(fe.read(d));
 
     BOOST_LOG_SEV(lg, debug) << "Read intermediate model from descriptor.";
     return r;

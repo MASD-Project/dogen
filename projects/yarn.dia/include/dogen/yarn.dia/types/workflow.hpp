@@ -68,7 +68,7 @@ private:
     generate_graph(const std::list<processed_object>& pos);
 
     builder create_builder(const std::string& model_name,
-        const std::string& external_modules, const bool is_target,
+        const std::string& external_modules,
         const std::unordered_map<std::string, std::list<std::string>>&
         child_id_to_parent_ids) const;
 
@@ -80,7 +80,7 @@ private:
 
 public:
     yarn::intermediate_model execute(const dogen::dia::diagram& diagram,
-        const std::string& model_name, bool is_target);
+        const std::string& model_name);
 };
 
 } } }
