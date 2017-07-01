@@ -13,25 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-01 Sat 17:19]
+#+CAPTION: Clock summary at [2017-07-01 Sat 21:44]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *47:32* |       |       | 100.0 |
+| *Total time*                                                                | *47:48* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 47:32   |       |       | 100.0 |
-| Active                                                                      |         | 47:32 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  7:02 |  14.8 |
+| Stories                                                                     | 47:48   |       |       | 100.0 |
+| Active                                                                      |         | 47:48 |       | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  7:02 |  14.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   1.7 |
-| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |   9.3 |
+| COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |   9.2 |
 | COMPLETED WIX Path has changed on appveyor                                  |         |       |  0:09 |   0.3 |
-| COMPLETED Move decoration into yarn                                         |         |       |  8:38 |  18.2 |
+| COMPLETED Move decoration into yarn                                         |         |       |  8:38 |  18.1 |
 | COMPLETED Fix broken builds due to disk space                               |         |       |  1:32 |   3.2 |
 | COMPLETED Remove =is_target= from frontends                                 |         |       |  1:14 |   2.6 |
-| COMPLETED Analysis: major yarn clean-up                                     |         |       |  9:04 |  19.1 |
+| COMPLETED Analysis: major yarn clean-up                                     |         |       |  9:04 |  19.0 |
 | STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   4.8 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  22.8 |
+| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  22.6 |
 | STARTED Move element segmentation into yarn                                 |         |       |  1:32 |   3.2 |
+| STARTED Implement the context class                                         |         |       |  0:16 |   0.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -461,7 +462,8 @@ Notes:
   into yarn (basically decoration and artefact properties) first and
   then see where segmentation ends.
 
-*** Implement the context class                                       :story:
+*** STARTED Implement the context class                               :story:
+    CLOCK: [2017-07-01 Sat 21:28]--[2017-07-01 Sat 21:44] =>  0:16
 
 Tasks:
 

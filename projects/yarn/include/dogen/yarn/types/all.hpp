@@ -131,6 +131,7 @@
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 #include "dogen/yarn/types/type_parameters_expander.hpp"
 #include "dogen/yarn/types/transforms/code_generator.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/external_expander_interface.hpp"
 #include "dogen/yarn/types/external_expander_registrar.hpp"
