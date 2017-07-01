@@ -256,6 +256,24 @@ Done:
 - update assistant to read decoration properties from yarn.
 - remove decoration properties from quilt cpp and csharp.
 
+*** COMPLETED Fix broken builds due to disk space                     :story:
+    CLOSED: [2017-07-01 Sat 15:17]
+    CLOCK: [2017-07-01 Sat 15:12]--[2017-07-01 Sat 15:17] =>  0:05
+    CLOCK: [2017-07-01 Sat 13:44]--[2017-07-01 Sat 15:11] =>  1:27
+
+The linux travis builds are failing because we do not seem to have
+enough disk space:
+
+#+begin_example
+License: GPLv3 - GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>.
+Error: boost::filesystem::create_directory: No space left on device: "/tmp/log"
+terminate called after throwing an instance of 'boost::filesystem::filesystem_error'
+  what():  boost::filesystem::create_directory: No space left on device: "/tmp/log"
+/home/travis/build/DomainDrivenConsulting/dogen/build/scripts/test_package.linux.sh: line 84: 14428 Aborted                 (core dumped) /usr/bin/dogen.knitter -t hello_world.dia
+#+end_example
+
+We need to start removing some files to create some space.
+
 *** STARTED Add support for proper JSON serialisation in C++          :story:
     CLOCK: [2017-04-12 Wed 20:56]--[2017-04-12 Wed 23:14] =>  2:18
 
