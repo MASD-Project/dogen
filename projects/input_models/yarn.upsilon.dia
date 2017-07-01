@@ -68,7 +68,7 @@
         <dia:point val="2,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="1.95,2.95;24.895,18.35"/>
+        <dia:rectangle val="1.95,2.95;24.895,19.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="22.845000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="15.300000000000001"/>
+        <dia:real val="16.100000000000001"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -105,6 +105,7 @@ formats, it will be deprecated.
 #DOGEN yarn.reference=upsilon.dia
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=formatters.dia
+#DOGEN yarn.reference=options.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
