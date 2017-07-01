@@ -7618,6 +7618,7 @@ Links:
 
 - [[https://github.com/catedrasaes-umu/emf4cpp][EMF4CPP]]
 - [[https://github.com/MDE4CPP][MDE4CPP]]
+- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
 *Previous Understanding*
 
