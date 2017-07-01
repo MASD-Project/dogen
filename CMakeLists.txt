@@ -366,10 +366,12 @@ if (DOGEN_KNITTER_EXECUTABLE AND DOGEN_STITCHER_EXECUTABLE)
     add_custom_target(kas)
     add_custom_target(ka)
     add_custom_target(sa)
+    add_custom_target(ta)
 
     add_dependencies(kas knit_and_stitch)
     add_dependencies(ka knit_all)
     add_dependencies(sa stitch_all)
+    add_dependencies(ta tailor_all)
 endif()
 
 #
