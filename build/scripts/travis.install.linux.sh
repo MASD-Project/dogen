@@ -30,6 +30,7 @@ extract_dir="/tmp/dogen_deps"
 wget --no-check-certificate ${input_location} -O ${output_location}
 mkdir ${extract_dir}
 tar -xaf ${output_location} -C ${extract_dir}
+rm ${output_location}
 
 #
 # common repos
@@ -92,3 +93,6 @@ sudo cp -r /tmp/${cmake_name}/* /usr
 # coverage
 #
 sudo pip install cpp-coveralls
+
+
+sudo apt-get clean
