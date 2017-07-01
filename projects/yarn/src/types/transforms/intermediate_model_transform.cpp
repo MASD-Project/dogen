@@ -18,18 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#include <ostream>
-#include "dogen/yarn/io/descriptor_io.hpp"
+#include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace transforms {
 
-std::ostream& operator<<(std::ostream& s, const descriptor& v) {
-    s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::descriptor\"" << ", "
-      << "\"path\": " << "\"" << v.path().generic_string() << "\""
-      << " }";
-    return(s);
+bool intermediate_model_transform::operator==(const intermediate_model_transform& /*rhs*/) const {
+    return true;
 }
 
-} }
+} } }

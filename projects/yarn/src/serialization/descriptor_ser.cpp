@@ -61,7 +61,6 @@ void save(Archive& ar,
     const dogen::yarn::descriptor& v,
     const unsigned int /*version*/) {
     ar << make_nvp("path", v.path_);
-    ar << make_nvp("is_target", v.is_target_);
 }
 
 template<typename Archive>
@@ -69,7 +68,6 @@ void load(Archive& ar,
     dogen::yarn::descriptor& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("path", v.path_);
-    ar >> make_nvp("is_target", v.is_target_);
 }
 
 } }

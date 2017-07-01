@@ -43,8 +43,6 @@ std::size_t descriptor_hasher::hash(const descriptor& v) {
     std::size_t seed(0);
 
     combine(seed, hash_boost_filesystem_path(v.path()));
-    combine(seed, v.is_target());
-
     return seed;
 }
 

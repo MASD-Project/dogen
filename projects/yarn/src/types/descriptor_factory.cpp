@@ -105,7 +105,6 @@ make(const std::vector<boost::filesystem::path>& dirs) const {
 
             descriptor d;
             d.path(f);
-            d.is_target(false);
             r.push_back(d);
         }
     }
@@ -135,7 +134,6 @@ descriptor_factory::make(const boost::filesystem::path& target) const {
 
     descriptor r;
     r.path(target);
-    r.is_target(true);
 
     BOOST_LOG_SEV(lg, trace) << "Added target model: " << r.path();
     BOOST_LOG_SEV(lg, debug) << "Created descriptor for target model: " << r;

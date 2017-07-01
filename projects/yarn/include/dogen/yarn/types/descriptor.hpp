@@ -37,19 +37,15 @@ namespace yarn {
  */
 class descriptor final {
 public:
+    descriptor() = default;
     descriptor(const descriptor&) = default;
     ~descriptor() = default;
-
-public:
-    descriptor();
 
 public:
     descriptor(descriptor&& rhs);
 
 public:
-    descriptor(
-        const boost::filesystem::path& path,
-        const bool is_target);
+    explicit descriptor(const boost::filesystem::path& path);
 
 private:
     template<typename Archive>
@@ -69,14 +65,6 @@ public:
     void path(const boost::filesystem::path&& v);
     /**@}*/
 
-    /**
-     * @brief If true, the input contains the intermediate target model.
-     */
-    /**@{*/
-    bool is_target() const;
-    void is_target(const bool v);
-    /**@}*/
-
 public:
     bool operator==(const descriptor& rhs) const;
     bool operator!=(const descriptor& rhs) const {
@@ -89,7 +77,6 @@ public:
 
 private:
     boost::filesystem::path path_;
-    bool is_target_;
 };
 
 } }

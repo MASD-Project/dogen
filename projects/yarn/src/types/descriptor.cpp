@@ -23,28 +23,19 @@
 namespace dogen {
 namespace yarn {
 
-descriptor::descriptor()
-    : is_target_(static_cast<bool>(0)) { }
-
 descriptor::descriptor(descriptor&& rhs)
-    : path_(std::move(rhs.path_)),
-      is_target_(std::move(rhs.is_target_)) { }
+    : path_(std::move(rhs.path_)) { }
 
-descriptor::descriptor(
-    const boost::filesystem::path& path,
-    const bool is_target)
-    : path_(path),
-      is_target_(is_target) { }
+descriptor::descriptor(const boost::filesystem::path& path)
+    : path_(path) { }
 
 void descriptor::swap(descriptor& other) noexcept {
     using std::swap;
     swap(path_, other.path_);
-    swap(is_target_, other.is_target_);
 }
 
 bool descriptor::operator==(const descriptor& rhs) const {
-    return path_ == rhs.path_ &&
-        is_target_ == rhs.is_target_;
+    return path_ == rhs.path_;
 }
 
 descriptor& descriptor::operator=(descriptor other) {
@@ -67,14 +58,6 @@ void descriptor::path(const boost::filesystem::path& v) {
 
 void descriptor::path(const boost::filesystem::path&& v) {
     path_ = std::move(v);
-}
-
-bool descriptor::is_target() const {
-    return is_target_;
-}
-
-void descriptor::is_target(const bool v) {
-    is_target_ = v;
 }
 
 } }
