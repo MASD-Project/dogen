@@ -171,6 +171,7 @@
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/external_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/code_generator_transform_interface.hpp"
