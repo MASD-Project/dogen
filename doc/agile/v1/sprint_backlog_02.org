@@ -1,0 +1,279 @@
+#+title: Sprint Backlog 02
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Continue work on the yarn refactor
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2017-07-03 Mon 10:13]
+| <75>                                                                        |        |   |   |     |
+| Headline                                                                    | Time   |   |   |   % |
+|-----------------------------------------------------------------------------+--------+---+---+-----|
+| *Total time*                                                                | *0:00* |   |   | 0.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** Sprint and product backlog grooming                               :story:
+
+Updates to sprint and product backlog.
+
+*** Edit release notes for previous sprint                            :story:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.0, "Dunes"
+
+#+begin_src markdown
+![Dunas](https://travelgest.co.ao/wp-content/uploads/2016/09/Dunas-Ba%C3%ADa-dos-Tigres-Namibe-1.jpg)
+_Dunes from the Namib Desert, by Baia dos Tigres. (C) 2016, Travelgest Angola._
+
+Overview
+=======
+This was yet another sprint with a focus on ODB/ORM improvements. As part of this work, we have finally completed our series of blog posts on Dogen and ORM:
+
+- [Nerd Food: Northwind, or Using Dogen with ODB - Part IV](http://mcraveiro.blogspot.co.uk/2017/03/nerd-food-northwind-or-using-dogen-with_25.html)
+
+Also, you won't fail to notice we labelled this release _v1.0_. In truth, we continue with our approach of slow and incremental releases, and as such this release is no different from any other. The main reason we have decided to call it v1.0 is because the sprint numbers were becoming a bit too unwieldy - adding an extra zero the 100th sprint just seemed a tad much. And when we looked at our [Definition of Done for v1.0](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v0/definition_of_done.org), we noticed that we are ticking pretty much all the boxes we had originally defined, so its not entirely unfair to call it v1.0.
+
+User visible changes
+===============
+In this sprint, a number of user visible changes were made, but all mainly bug-fixes:
+
+- **Fixes for split directory mode**: Files in the header directory were being ignored by housekeeping.
+- **Concept improvements**: You can now place concepts inside of namespaces.
+- **Use distinct ODB extension**: We are now using ```cxx``` as the extension for ODB files, allowing one to distinguish between ODB and Dogen files quite easily.
+- **Changes to ORM stereotypes**: We no longer use underscores in stereotypes. This is a breaking change. You need to replace ```orm_object```, ```orm_value``` and so forth with ```orm object```, ```orm value``` etc.
+- **ODB now has MSBuild targets**: For Windows users, you can now create a very simple wrapper script to call ```msbuild``` and execute ODB.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_00.org).
+
+Next Sprint
+===========
+In the next sprint we'll mop up more ODB issues and continue improving our Visual Studio support.
+
+Binaries
+======
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.0/dogen_1.0.0_amd64-applications.deb)
+- [dogen-1.0.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.0/dogen-1.0.0-Darwin-x86_64.dmg)
+- [dogen-1.0.0-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.0-Windows-AMD64.msi)
+
+**Note**: They are produced by CI so they may not yet be ready.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/849371311789019138][Tweet]]
+- [[https://www.linkedin.com/hp/update/6255137468270542848/][LinkedIn]]
+
+*** Implement the context class                                       :story:
+
+Tasks:
+
+- create the transformation context, populate it with all the main
+  objects needed by yarn at present.
+- Add a method to generate the context and then unpack it to fit the
+  current API.
+
+*** Implement the exogenous transformation chain                      :story:
+
+Tasks:
+
+- in yarn, implement:
+  - model generation chain;
+  - initial target chain; and
+  - exogenous transforms (registration etc).
+- in the frontends: implement the exogenous transforms interface.
+- update knit to conditionally use the transforms code or the legacy
+  code.
+
+*** Implement the pre-processing chain                                :story:
+
+This story may be too big as one story.
+
+Tasks:
+
+- implement all of the transforms required by the pre-processing
+  chain.
+- implement the pre-processing chain in terms of those transforms.
+- plug in the pre-processing chain into the initial target chain.
+
+*** Implement the references chain                                    :story:
+
+Tasks:
+
+- implement the references expansion in the references chain.
+- plug in the references chain into the model generation chain.
+- consider using a multi-threaded approach. If its too hard we should
+  just stick to the single-threaded implementation we have at present.
+
+*** Implement the model generation chain                              :story:
+
+Tasks:
+
+- implement the output languages expansion, considering
+  multi-threading. If its too hard we should just stick to the
+  single-threaded implementation we have at present.
+- implement the merge transform.
+- implement the intermediate model transform.
+
+*** Implement the post-processing chain                               :story:
+
+This story may be too big as one story.
+
+Tasks:
+
+- implement the external transform chain.
+- implement all other transforms required by the post-processing
+  chain.
+- plug it in the model generation chain.
+- fix all errors when we replace the legacy code with the new
+  transform-based code.
+
+*** Implement the code-generation chain                               :story:
+
+Tasks:
+
+- Add registration, interfaces etc.
+- implement the kernels in terms of the new interfaces.
+- update knit to use the code generator.
+
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+*** Start documenting the theoretical aspects of Dogen                :story:
+
+Up to now we have more or less coded Dogen as we went along; we
+haven't really spent a lot of time worrying about the theory behind
+the work we were carrying out. However, as we reached v1.0, the theory
+took center stage. We cannot proceed to the next phase of the product
+without a firm grasp of the theory. This story is a starting point so
+we can decide on how to break up the work.
+
+*** Add support for proper JSON serialisation in C++                  :story:
+
+We need to add support for JSON in C++. It will eventually have to
+roundtrip to JSON in C# but that will be handled as two separate
+stories.
+
+Libraries:
+
+- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+- One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should provide support for JSON with
+roundtripping tests.
+
+We will not replace the current IO implementation; it should continue
+to exist as is, requiring no external dependencies.
+
+We should consider supporting multiple JSON libraries: instead of
+making the mistake we did with serialisation where we bound the name
+=serialization= with boost serialisation, we should call it by its
+real name, e.g. =json_spirit= etc. Then when a user creates a
+stereotype for a profile such as =Serializable= it can choose which
+serialisation codecs to enable for which language. This means that the
+same stereotypes can have different meanings in different
+architectures, which is the desired behaviour.
+
+We should create a serialise / deserialise functions following the
+same logic as boost:
+
+#+begin_src c++
+void serialize(Value& v, const object& o);
+void serialize(Value& v, const base& b);
+
+void deserialize(const Value& v, object& o);
+base* deserialize(const Value& v);
+#+end_src
+
+Or perhaps even better, we can make the above the internal methods and
+use =operator<<= and =operator>>= as the external methods:
+
+#+begin_src c++
+void operator<<(Value& v, const object& o);
+void operator>>(const Value& v, object& o);
+#+end_src
+
+Notes:
+
+- create a registrar with a map for each base type. The function
+  returns a base type pointer.
+- when you deserialize a base type pointer, you call the pointer
+  deserialize above. Same for when you have a pointer to an object. It
+  will internally call the registrar (if its a base type) and get the
+  right function.
+- this means we only need to look at type for inheritance. Although we
+  should probably always do it for validation? However, what happens
+  if we want to make a model so we can read external JSON? It won't
+  contain type markings.
+- =operator>>= will not be defined for pointers or base classes.
+- this wont work for the case of =doc << base=. For this we need a map
+  that looks up on type_index.
+
+Merged stories:
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+*Add support for JSON serialisation*
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*** Move all data types into its own namespace                        :story:
+
+Now we have placed all the transforms under namespace =transforms=,
+for symmetry purposes it would be nice to have some top-level
+namespace for the data types. Names:
+
+- entities
+- ...
+
+If we cannot find any good names, we may need to leave these objects
+at the top-level. However, we should probably also place the code
+generator at the top-level as well.
+
+** Deprecated
