@@ -28,43 +28,36 @@ Updates to sprint and product backlog.
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.0, "Dunes"
+Title: Dogen v1.0.01, "Academia de Pesca"
 
 #+begin_src markdown
-![Dunas](https://travelgest.co.ao/wp-content/uploads/2016/09/Dunas-Ba%C3%ADa-dos-Tigres-Namibe-1.jpg)
-_Dunes from the Namib Desert, by Baia dos Tigres. (C) 2016, Travelgest Angola._
+![Academia de Pesca](http://cdn1.portalangop.co.ao/angola/pt_pt/files/highlight/2015/10/45/0,6bd49eb1-adcc-40fd-93c8-257b4d4aae16.jpg)
+_Academia de Pesca, Namibe. (C) Angola Press._
 
 Overview
 =======
-This was yet another sprint with a focus on ODB/ORM improvements. As part of this work, we have finally completed our series of blog posts on Dogen and ORM:
 
-- [Nerd Food: Northwind, or Using Dogen with ODB - Part IV](http://mcraveiro.blogspot.co.uk/2017/03/nerd-food-northwind-or-using-dogen-with_25.html)
-
-Also, you won't fail to notice we labelled this release _v1.0_. In truth, we continue with our approach of slow and incremental releases, and as such this release is no different from any other. The main reason we have decided to call it v1.0 is because the sprint numbers were becoming a bit too unwieldy - adding an extra zero the 100th sprint just seemed a tad much. And when we looked at our [Definition of Done for v1.0](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v0/definition_of_done.org), we noticed that we are ticking pretty much all the boxes we had originally defined, so its not entirely unfair to call it v1.0.
+This was an extremely quiet and long sprint, mainly focused on reading the literature on Model Driven Engineering.
 
 User visible changes
 ===============
-In this sprint, a number of user visible changes were made, but all mainly bug-fixes:
+In this sprint, a couple of minor user visible features were added:
 
-- **Fixes for split directory mode**: Files in the header directory were being ignored by housekeeping.
-- **Concept improvements**: You can now place concepts inside of namespaces.
-- **Use distinct ODB extension**: We are now using ```cxx``` as the extension for ODB files, allowing one to distinguish between ODB and Dogen files quite easily.
-- **Changes to ORM stereotypes**: We no longer use underscores in stereotypes. This is a breaking change. You need to replace ```orm_object```, ```orm_value``` and so forth with ```orm object```, ```orm value``` etc.
-- **ODB now has MSBuild targets**: For Windows users, you can now create a very simple wrapper script to call ```msbuild``` and execute ODB.
+- **Emacs mode for stitch**: we now have syntax highlighting in emacs for stitch templates.
 
-For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_00.org).
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_01.org).
 
 Next Sprint
 ===========
-In the next sprint we'll mop up more ODB issues and continue improving our Visual Studio support.
+In the next sprint we'll continue to work on cleaning up yarn's internals.
 
 Binaries
 ======
 You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.0_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.0/dogen_1.0.0_amd64-applications.deb)
-- [dogen-1.0.0-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.0/dogen-1.0.0-Darwin-x86_64.dmg)
-- [dogen-1.0.0-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.0-Windows-AMD64.msi)
+- [dogen_1.0.01_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.01/dogen_1.0.01_amd64-applications.deb)
+- [dogen-1.0.01-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.01/dogen-1.0.01-Darwin-x86_64.dmg)
+- [dogen-1.0.01-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.01-Windows-AMD64.msi)
 
 **Note**: They are produced by CI so they may not yet be ready.
 
