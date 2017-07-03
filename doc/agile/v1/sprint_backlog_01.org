@@ -13,7 +13,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-01 Sat 22:17]
+#+CAPTION: Clock summary at [2017-07-03 Mon 10:09]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
@@ -21,7 +21,7 @@
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
 | Stories                                                                     | 48:20   |       |       | 100.0 |
 | Active                                                                      |         | 48:20 |       | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  7:02 |  14.6 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  7:02 |  14.6 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:49 |   1.7 |
 | COMPLETED Create a simple Emacs mode for stitch                             |         |       |  4:25 |   9.1 |
 | COMPLETED WIX Path has changed on appveyor                                  |         |       |  0:09 |   0.3 |
@@ -29,14 +29,15 @@
 | COMPLETED Fix broken builds due to disk space                               |         |       |  1:32 |   3.2 |
 | COMPLETED Remove =is_target= from frontends                                 |         |       |  1:14 |   2.6 |
 | COMPLETED Analysis: major yarn clean-up                                     |         |       |  9:04 |  18.8 |
-| STARTED Add support for proper JSON serialisation in C++                    |         |       |  2:18 |   4.8 |
-| STARTED Start documenting the theoretical aspects of Dogen                  |         |       | 10:49 |  22.4 |
-| STARTED Move element segmentation into yarn                                 |         |       |  1:32 |   3.2 |
-| STARTED Implement the context class                                         |         |       |  0:48 |   1.7 |
+| POSTPONED Add support for proper JSON serialisation in C++                  |         |       |  2:18 |   4.8 |
+| POSTPONED Start documenting the theoretical aspects of Dogen                |         |       | 10:49 |  22.4 |
+| POSTPONED Move element segmentation into yarn                               |         |       |  1:32 |   3.2 |
+| POSTPONED Implement the context class                                       |         |       |  0:48 |   1.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2017-07-03 Mon 10:09]
     CLOCK: [2017-07-01 Sat 17:00]--[2017-07-01 Sat 17:20] =>  0:20
     CLOCK: [2017-05-26 Fri 15:32]--[2017-05-26 Fri 15:38] =>  0:06
     CLOCK: [2017-05-26 Fri 14:02]--[2017-05-26 Fri 15:21] =>  1:19
@@ -337,7 +338,8 @@ for(auto& m : expanded) {
 The objective of this story is just to clean up the design. We will
 raise individual stories for the implementation.
 
-*** STARTED Add support for proper JSON serialisation in C++          :story:
+*** POSTPONED Add support for proper JSON serialisation in C++        :story:
+    CLOSED: [2017-07-03 Mon 10:09]
     CLOCK: [2017-04-12 Wed 20:56]--[2017-04-12 Wed 23:14] =>  2:18
 
 We need to add support for JSON in C++. It will eventually have to
@@ -419,7 +421,8 @@ use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
 
-*** STARTED Start documenting the theoretical aspects of Dogen        :story:
+*** POSTPONED Start documenting the theoretical aspects of Dogen      :story:
+    CLOSED: [2017-07-03 Mon 10:09]
     CLOCK: [2017-05-26 Fri 13:02]--[2017-05-26 Fri 14:00] =>  0:58
     CLOCK: [2017-05-26 Fri 10:02]--[2017-05-26 Fri 12:01] =>  1:59
     CLOCK: [2017-05-13 Sat 16:07]--[2017-05-13 Sat 18:07] =>  2:00
@@ -433,7 +436,8 @@ took center stage. We cannot proceed to the next phase of the product
 without a firm grasp of the theory. This story is a starting point so
 we can decide on how to break up the work.
 
-*** STARTED Move element segmentation into yarn                       :story:
+*** POSTPONED Move element segmentation into yarn                     :story:
+    CLOSED: [2017-07-03 Mon 10:09]
     CLOCK: [2017-06-06 Tue 17:31]--[2017-06-06 Tue 18:23] =>  0:52
     CLOCK: [2017-06-02 Fri 11:16]--[2017-06-02 Fri 11:56] =>  0:40
 
@@ -462,7 +466,8 @@ Notes:
   into yarn (basically decoration and artefact properties) first and
   then see where segmentation ends.
 
-*** STARTED Implement the context class                               :story:
+*** POSTPONED Implement the context class                             :story:
+    CLOSED: [2017-07-03 Mon 10:09]
     CLOCK: [2017-07-01 Sat 21:45]--[2017-07-01 Sat 22:17] =>  0:32
     CLOCK: [2017-07-01 Sat 21:28]--[2017-07-01 Sat 21:44] =>  0:16
 
@@ -472,81 +477,5 @@ Tasks:
   objects needed by yarn at present.
 - Add a method to generate the context and then unpack it to fit the
   current API.
-
-*** Implement the exogenous transformation chain                      :story:
-
-Tasks:
-
-- in yarn, implement:
-  - model generation chain;
-  - initial target chain; and
-  - exogenous transforms (registration etc).
-- in the frontends: implement the exogenous transforms interface.
-- update knit to conditionally use the transforms code or the legacy
-  code.
-
-*** Implement the pre-processing chain                                :story:
-
-This story may be too big as one story.
-
-Tasks:
-
-- implement all of the transforms required by the pre-processing
-  chain.
-- implement the pre-processing chain in terms of those transforms.
-- plug in the pre-processing chain into the initial target chain.
-
-*** Implement the references chain                                    :story:
-
-Tasks:
-
-- implement the references expansion in the references chain.
-- plug in the references chain into the model generation chain.
-- consider using a multi-threaded approach. If its too hard we should
-  just stick to the single-threaded implementation we have at present.
-
-*** Implement the model generation chain                              :story:
-
-Tasks:
-
-- implement the output languages expansion, considering
-  multi-threading. If its too hard we should just stick to the
-  single-threaded implementation we have at present.
-- implement the merge transform.
-- implement the intermediate model transform.
-
-*** Implement the post-processing chain                               :story:
-
-This story may be too big as one story.
-
-Tasks:
-
-- implement the external transform chain.
-- implement all other transforms required by the post-processing
-  chain.
-- plug it in the model generation chain.
-- fix all errors when we replace the legacy code with the new
-  transform-based code.
-
-*** Implement the code-generation chain                               :story:
-
-Tasks:
-
-- Add registration, interfaces etc.
-- implement the kernels in terms of the new interfaces.
-- update knit to use the code generator.
-
-*** Move all data types into its own namespace                        :story:
-
-Now we have placed all the transforms under namespace =transforms=,
-for symmetry purposes it would be nice to have some top-level
-namespace for the data types. Names:
-
-- entities
-- ...
-
-If we cannot find any good names, we may need to leave these objects
-at the top-level. However, we should probably also place the code
-generator at the top-level as well.
 
 ** Deprecated
