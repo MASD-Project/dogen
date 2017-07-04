@@ -18,14 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/filesystem/path.hpp"
+#include "dogen/utility/filesystem/file.hpp"
+#include "dogen/annotations/types/type_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool context_factory::operator==(const context_factory& /*rhs*/) const {
-    return true;
+context context_factory::make(const options::knitting_options& o,
+    const std::list<annotations::archetype_location>& als) const {
+    using namespace dogen::utility::filesystem;
+    const auto data_dir(dogen::utility::filesystem::data_files_directory());
+    const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
+
+    annotations::archetype_location_repository_factory alrpf;
+    const auto alrp(alrpf.make(als));
+
+    annotations::type_repository_factory atrpf;
+    return context(data_dirs, o, alrp, atrpf.make(alrp, data_dirs));
 }
 
 } } }

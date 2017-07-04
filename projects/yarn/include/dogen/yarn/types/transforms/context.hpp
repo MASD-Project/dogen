@@ -26,10 +26,11 @@
 #endif
 
 #include <vector>
-#include <algorithm>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -37,60 +38,28 @@ namespace transforms {
 
 class context final {
 public:
-    context() = default;
-    context(const context&) = default;
-    context(context&&) = default;
-    ~context() = default;
-
-public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
-        const dogen::annotations::type_repository& type_repository,
-        const dogen::options::knitting_options& options);
+        const options::knitting_options& options,
+        const annotations::archetype_location_repository& alrp,
+        const annotations::type_repository& atrp);
 
 public:
     const std::vector<boost::filesystem::path>& data_directories() const;
-    std::vector<boost::filesystem::path>& data_directories();
-    void data_directories(const std::vector<boost::filesystem::path>& v);
-    void data_directories(const std::vector<boost::filesystem::path>&& v);
-
-    const dogen::annotations::type_repository& type_repository() const;
-    dogen::annotations::type_repository& type_repository();
-    void type_repository(const dogen::annotations::type_repository& v);
-    void type_repository(const dogen::annotations::type_repository&& v);
-
-    const dogen::options::knitting_options& options() const;
-    dogen::options::knitting_options& options();
-    void options(const dogen::options::knitting_options& v);
-    void options(const dogen::options::knitting_options&& v);
+    const options::knitting_options& options() const;
+    const annotations::type_repository& type_repository() const;
+    const annotations::annotation_groups_factory& groups_factory() const;
 
 public:
-    bool operator==(const context& rhs) const;
-    bool operator!=(const context& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(context& other) noexcept;
-    context& operator=(context other);
 
 private:
-    std::vector<boost::filesystem::path> data_directories_;
-    dogen::annotations::type_repository type_repository_;
-    dogen::options::knitting_options options_;
+    const std::vector<boost::filesystem::path> data_directories_;
+    const dogen::options::knitting_options options_;
+    const annotations::archetype_location_repository location_repository_;
+    const dogen::annotations::type_repository type_repository_;
+    const annotations::annotation_groups_factory groups_factory_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::transforms::context& lhs,
-    dogen::yarn::transforms::context& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

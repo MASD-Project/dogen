@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +34,8 @@ namespace transforms {
 
 class context_factory final {
 public:
-    context_factory() = default;
-    context_factory(const context_factory&) = default;
-    context_factory(context_factory&&) = default;
-    ~context_factory() = default;
-    context_factory& operator=(const context_factory&) = default;
-
-public:
-    bool operator==(const context_factory& rhs) const;
-    bool operator!=(const context_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    context make(const options::knitting_options& o,
+        const std::list<annotations::archetype_location>& als) const;
 };
 
 } } }

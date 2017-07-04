@@ -25,78 +25,28 @@ namespace yarn {
 namespace transforms {
 
 context::context(
-    const std::vector<boost::filesystem::path>& data_directories,
-    const dogen::annotations::type_repository& type_repository,
-    const dogen::options::knitting_options& options)
-    : data_directories_(data_directories),
-      type_repository_(type_repository),
-      options_(options) { }
-
-void context::swap(context& other) noexcept {
-    using std::swap;
-    swap(data_directories_, other.data_directories_);
-    swap(type_repository_, other.type_repository_);
-    swap(options_, other.options_);
-}
-
-bool context::operator==(const context& rhs) const {
-    return data_directories_ == rhs.data_directories_ &&
-        type_repository_ == rhs.type_repository_ &&
-        options_ == rhs.options_;
-}
-
-context& context::operator=(context other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
+        const std::vector<boost::filesystem::path>& data_directories,
+        const options::knitting_options& options,
+        const annotations::archetype_location_repository& alrp,
+        const annotations::type_repository& atrp) :
+    data_directories_(data_directories), options_(options),
+    location_repository_(alrp), type_repository_(atrp), 
+    groups_factory_(data_directories, location_repository_, type_repository_) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
 }
 
-std::vector<boost::filesystem::path>& context::data_directories() {
-    return data_directories_;
-}
-
-void context::data_directories(const std::vector<boost::filesystem::path>& v) {
-    data_directories_ = v;
-}
-
-void context::data_directories(const std::vector<boost::filesystem::path>&& v) {
-    data_directories_ = std::move(v);
-}
-
-const dogen::annotations::type_repository& context::type_repository() const {
-    return type_repository_;
-}
-
-dogen::annotations::type_repository& context::type_repository() {
-    return type_repository_;
-}
-
-void context::type_repository(const dogen::annotations::type_repository& v) {
-    type_repository_ = v;
-}
-
-void context::type_repository(const dogen::annotations::type_repository&& v) {
-    type_repository_ = std::move(v);
-}
-
-const dogen::options::knitting_options& context::options() const {
+const options::knitting_options& context::options() const {
     return options_;
 }
 
-dogen::options::knitting_options& context::options() {
-    return options_;
+const annotations::type_repository& context::type_repository() const {
+    return type_repository_;
 }
 
-void context::options(const dogen::options::knitting_options& v) {
-    options_ = v;
-}
-
-void context::options(const dogen::options::knitting_options&& v) {
-    options_ = std::move(v);
+const annotations::annotation_groups_factory& context::groups_factory() const {
+    return groups_factory_;
 }
 
 } } }

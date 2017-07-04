@@ -12,11 +12,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-03 Mon 10:13]
-| <75>                                                                        |        |   |   |     |
-| Headline                                                                    | Time   |   |   |   % |
-|-----------------------------------------------------------------------------+--------+---+---+-----|
-| *Total time*                                                                | *0:00* |   |   | 0.0 |
+#+CAPTION: Clock summary at [2017-07-04 Tue 08:43]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:40* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:40   |      |      | 100.0 |
+| Active                                                                      |        | 0:40 |      | 100.0 |
+| STARTED Implement the context class                                         |        |      | 0:40 | 100.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -67,7 +71,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/849371311789019138][Tweet]]
 - [[https://www.linkedin.com/hp/update/6255137468270542848/][LinkedIn]]
 
-*** Implement the context class                                       :story:
+*** STARTED Implement the context class                               :story:
+    CLOCK: [2017-07-04 Tue 08:03]--[2017-07-04 Tue 08:43] =>  0:40
 
 Tasks:
 
