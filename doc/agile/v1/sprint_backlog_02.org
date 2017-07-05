@@ -28,7 +28,8 @@
 
 Updates to sprint and product backlog.
 
-*** Edit release notes for previous sprint                            :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-07-05 Wed 16:08]
 
 Add github release notes for previous sprint.
 
@@ -68,8 +69,8 @@ You can download experimental binaries from [Bintray](https://bintray.com/domain
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/849371311789019138][Tweet]]
-- [[https://www.linkedin.com/hp/update/6255137468270542848/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/881860977330880512][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6287627272706891776/][LinkedIn]]
 
 *** STARTED Implement the context class                               :story:
     CLOCK: [2017-07-04 Tue 08:03]--[2017-07-04 Tue 08:43] =>  0:40

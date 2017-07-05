@@ -30,7 +30,7 @@ context::context(
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp) :
     data_directories_(data_directories), options_(options),
-    location_repository_(alrp), type_repository_(atrp), 
+    location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, location_repository_, type_repository_) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
