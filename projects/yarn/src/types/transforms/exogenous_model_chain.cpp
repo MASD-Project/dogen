@@ -24,38 +24,4 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-exogenous_model_chain::exogenous_model_chain(const dogen::yarn::transforms::exogenous_transform_registrar& registrar_)
-    : registrar__(registrar_) { }
-
-void exogenous_model_chain::swap(exogenous_model_chain& other) noexcept {
-    using std::swap;
-    swap(registrar__, other.registrar__);
-}
-
-bool exogenous_model_chain::operator==(const exogenous_model_chain& rhs) const {
-    return registrar__ == rhs.registrar__;
-}
-
-exogenous_model_chain& exogenous_model_chain::operator=(exogenous_model_chain other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
-}
-
-const dogen::yarn::transforms::exogenous_transform_registrar& exogenous_model_chain::registrar_() const {
-    return registrar__;
-}
-
-dogen::yarn::transforms::exogenous_transform_registrar& exogenous_model_chain::registrar_() {
-    return registrar__;
-}
-
-void exogenous_model_chain::registrar_(const dogen::yarn::transforms::exogenous_transform_registrar& v) {
-    registrar__ = v;
-}
-
-void exogenous_model_chain::registrar_(const dogen::yarn::transforms::exogenous_transform_registrar&& v) {
-    registrar__ = std::move(v);
-}
-
 } } }

@@ -24,8 +24,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool initial_target_chain::operator==(const initial_target_chain& /*rhs*/) const {
-    return true;
+intermediate_model initial_target_chain::transform(const context& /*ctx*/) {
+    intermediate_model r;
+    return r;
 }
 
 } } }

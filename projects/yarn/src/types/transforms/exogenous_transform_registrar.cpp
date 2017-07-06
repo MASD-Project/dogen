@@ -24,8 +24,16 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool exogenous_transform_registrar::operator==(const exogenous_transform_registrar& /*rhs*/) const {
-    return true;
+void exogenous_transform_registrar::validate() {
 }
 
+void exogenous_transform_registrar::register_exogenous_transform(
+    std::shared_ptr<exogenous_transform_interface> /*t*/) {
+}
+
+/*
+exogenous_transform_interface& exogenous_transform_registrar::
+transform_for_path(const boost::filesystem::path& p) {
+}
+*/
 } } }

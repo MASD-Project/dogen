@@ -26,53 +26,14 @@
 #endif
 
 #include <algorithm>
-#include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class exogenous_model_chain final {
-public:
-    exogenous_model_chain() = default;
-    exogenous_model_chain(const exogenous_model_chain&) = default;
-    exogenous_model_chain(exogenous_model_chain&&) = default;
-    ~exogenous_model_chain() = default;
-
-public:
-    explicit exogenous_model_chain(const dogen::yarn::transforms::exogenous_transform_registrar& registrar_);
-
-public:
-    const dogen::yarn::transforms::exogenous_transform_registrar& registrar_() const;
-    dogen::yarn::transforms::exogenous_transform_registrar& registrar_();
-    void registrar_(const dogen::yarn::transforms::exogenous_transform_registrar& v);
-    void registrar_(const dogen::yarn::transforms::exogenous_transform_registrar&& v);
-
-public:
-    bool operator==(const exogenous_model_chain& rhs) const;
-    bool operator!=(const exogenous_model_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(exogenous_model_chain& other) noexcept;
-    exogenous_model_chain& operator=(exogenous_model_chain other);
-
-private:
-    dogen::yarn::transforms::exogenous_transform_registrar registrar__;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::transforms::exogenous_model_chain& lhs,
-    dogen::yarn::transforms::exogenous_model_chain& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

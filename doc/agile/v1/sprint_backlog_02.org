@@ -90,6 +90,7 @@ Tasks:
   current API.
 
 *** STARTED Implement the exogenous transformation chain              :story:
+    CLOCK: [2017-07-06 Thu 19:08]--[2017-07-06 Thu 19:30] =>  0:22
     CLOCK: [2017-07-06 Thu 18:57]--[2017-07-06 Thu 19:07] =>  0:10
     CLOCK: [2017-07-06 Thu 07:26]--[2017-07-06 Thu 07:36] =>  0:10
 

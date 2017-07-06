@@ -25,27 +25,56 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <memory>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Keeps track of all the available exogenous transformers.
+ */
 class exogenous_transform_registrar final {
 public:
-    exogenous_transform_registrar() = default;
-    exogenous_transform_registrar(const exogenous_transform_registrar&) = default;
-    exogenous_transform_registrar(exogenous_transform_registrar&&) = default;
-    ~exogenous_transform_registrar() = default;
-    exogenous_transform_registrar& operator=(const exogenous_transform_registrar&) = default;
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    static void validate();
 
-public:
-    bool operator==(const exogenous_transform_registrar& rhs) const;
-    bool operator!=(const exogenous_transform_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /*
+     * @brief Registers a given frontend.
+     *
+     * @pre Frontend is not yet registered.
+     */
+    void register_exogenous_transform(
+        std::shared_ptr<exogenous_transform_interface> t);
 
+    /**
+     * @brief Returns the frontend that handles the supplied path.
+     *
+     * @pre A frontend must have been registered for this path.
+     */
+    exogenous_transform_interface&
+    transform_for_path(const boost::filesystem::path& p);
+
+private:
+    std::unordered_map<std::string,
+                       std::shared_ptr<exogenous_transform_interface>>
+    transforms_;
 };
+
+/*
+ * Helper method to register exogenous transforms.
+ */
+template<typename ExogenousTransforms>
+inline void register_exogenous_transform(exogenous_transform_registrar& rg) {
+    auto t(std::make_shared<ExogenousTransforms>());
+    rg.register_exogenous_transform(t);
+}
 
 } } }
 

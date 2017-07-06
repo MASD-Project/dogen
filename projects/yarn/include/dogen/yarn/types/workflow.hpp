@@ -45,7 +45,7 @@ public:
 
 public:
     /**
-    p * @brief Returns the frontend registrar. If it has not yet been
+     * @brief Returns the frontend registrar. If it has not yet been
      * initialised, initialises it.
      */
     static yarn::frontend_registrar& frontend_registrar();
