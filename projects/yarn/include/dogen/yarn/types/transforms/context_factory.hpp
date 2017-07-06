@@ -32,6 +32,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Factory that creates transformation contexts.
+ */
 class context_factory final {
 public:
     context make(const options::knitting_options& o,

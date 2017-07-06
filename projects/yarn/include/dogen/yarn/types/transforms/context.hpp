@@ -36,6 +36,18 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Context for all transformations.
+ *
+ * Contains all of the external data required for the transformations
+ * to execute. It's not ideal to have a huge "global" class, with lots
+ * of unrelated state; however, over time, we found that a number of
+ * arguments were being supplied across the call graph, resulting in a
+ * lot of repetitive code. The context gathers together all of these.
+ *
+ * Note that this class needs to be handcrafted because we have some
+ * factories in the state - not just data objects.
+ */
 class context final {
 public:
     context(
@@ -45,12 +57,27 @@ public:
         const annotations::type_repository& atrp);
 
 public:
+    /**
+     * @brief System directories containing Dogen's configuration,
+     * profiles, etc.
+     */
     const std::vector<boost::filesystem::path>& data_directories() const;
-    const options::knitting_options& options() const;
-    const annotations::type_repository& type_repository() const;
-    const annotations::annotation_groups_factory& groups_factory() const;
 
-public:
+    /**
+     * @brief User supplied parameters.
+     */
+    const options::knitting_options& options() const;
+
+    /**
+     * @brief Repository with annotation types, used to validate and
+     * access meta-data.
+     */
+    const annotations::type_repository& type_repository() const;
+
+    /**
+     * @brief Factory to generate annotation groups.
+     */
+    const annotations::annotation_groups_factory& groups_factory() const;
 
 private:
     const std::vector<boost::filesystem::path> data_directories_;

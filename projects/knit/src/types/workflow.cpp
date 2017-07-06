@@ -29,6 +29,7 @@
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/quilt/types/workflow.hpp"
@@ -71,42 +72,17 @@ bool workflow::housekeeping_required() const {
     return knitting_options_.delete_extra_files();
 }
 
-std::vector<boost::filesystem::path> workflow::obtain_data_dirs() const {
-    using namespace dogen::utility::filesystem;
-    const auto data_dir(dogen::utility::filesystem::data_files_directory());
-    return std::vector<boost::filesystem::path>({ data_dir });
-}
-
-annotations::archetype_location_repository workflow::
-obtain_archetype_location_repository() const {
-    const auto als(quilt::workflow::archetype_locations());
-    annotations::archetype_location_repository_factory f;
-    const auto r(f.make(als));
-    return r;
-}
-
-annotations::type_repository workflow::setup_annotations_repository(
-    const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp) const {
-    annotations::type_repository_factory f;
-    return f.make(alrp, data_dirs);
-}
-
-annotations::annotation_groups_factory
-workflow::create_annotation_groups_factory(
-    const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::archetype_location_repository& alrp,
-    const annotations::type_repository& atrp) const {
-    annotations::annotation_groups_factory r(data_dirs, alrp, atrp);
-    return r;
+yarn::transforms::context workflow::create_context(
+    const options::knitting_options& o,
+    const std::list<annotations::archetype_location>& als)  const {
+    yarn::transforms::context_factory f;
+    return f.make(o, als);
 }
 
 std::list<yarn::model> workflow::
-obtain_yarn_models(const std::vector<boost::filesystem::path>& data_dirs,
-    const annotations::annotation_groups_factory& agf,
-    const annotations::type_repository& atrp) const {
+obtain_yarn_models(const yarn::transforms::context& ctx) const {
     yarn::workflow w;
-    return w.execute(data_dirs, agf, atrp, knitting_options_);
+    return w.execute(ctx);
 }
 
 void workflow::perform_housekeeping(
@@ -151,11 +127,9 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
-        const auto data_dirs(obtain_data_dirs());
-        const auto alrp(obtain_archetype_location_repository());
-        const auto atrp(setup_annotations_repository(data_dirs, alrp));
-        const auto agf(create_annotation_groups_factory(data_dirs, alrp, atrp));
-        const auto models(obtain_yarn_models(data_dirs, agf, atrp));
+        const auto als(quilt::workflow::archetype_locations());
+        const auto ctx(create_context(knitting_options_, als));
+        const auto models(obtain_yarn_models(ctx));
 
         for (const auto& m : models) {
             if (!m.has_generatable_types()) {
@@ -163,7 +137,8 @@ void workflow::execute() const {
                 return;
             }
 
-            quilt::workflow w(knitting_options_, atrp, agf);
+            quilt::workflow w(knitting_options_, ctx.type_repository(),
+                ctx.groups_factory());
             const auto ko(w.execute(m));
             if (!ko || ko->artefacts().empty()) {
                 BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";

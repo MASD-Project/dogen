@@ -30,6 +30,7 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/frontend_registrar.hpp"
 #include "dogen/yarn/types/external_expander_registrar.hpp"
 #include "dogen/yarn/types/intermediate_model_repository.hpp"
@@ -81,10 +82,7 @@ private:
     model transform_to_model(const intermediate_model& im) const;
 
 public:
-    std::list<model> execute(const std::vector<boost::filesystem::path>& dirs,
-        const annotations::annotation_groups_factory& agf,
-        const annotations::type_repository& atrp,
-        const options::knitting_options& ko) const;
+    std::list<model> execute(const transforms::context& ctx) const;
 
 private:
     static std::shared_ptr<yarn::frontend_registrar> frontend_registrar_;

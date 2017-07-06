@@ -94,13 +94,15 @@ model workflow::transform_to_model(const intermediate_model& im) const {
 }
 
 std::list<model>
-workflow::execute(const std::vector<boost::filesystem::path>& dirs,
-    const annotations::annotation_groups_factory& agf,
-    const annotations::type_repository& atrp,
-    const options::knitting_options& ko) const {
+workflow::execute(const transforms::context& ctx) const {
     BOOST_LOG_SEV(lg, debug) << "Starting workflow.";
 
     std::list<model> r;
+    const std::vector<boost::filesystem::path>& dirs(ctx.data_directories());
+    const annotations::annotation_groups_factory& agf(ctx.groups_factory());
+    const annotations::type_repository& atrp(ctx.type_repository());
+    const options::knitting_options& ko(ctx.options());
+
     const auto imrp(create_intermediate_model_repository(dirs, agf, atrp, ko));
     for(const auto& pair : imrp.by_language()) {
         const auto& ims(pair.second);

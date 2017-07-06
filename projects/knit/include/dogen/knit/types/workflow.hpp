@@ -33,10 +33,10 @@
 #include <functional>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/descriptor.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/artefact_writer_interface.hpp"
@@ -92,38 +92,18 @@ public: // public section for testing purposes only
     bool housekeeping_required() const;
 
 private:
-    std::vector<boost::filesystem::path> obtain_data_dirs() const;
-
     /**
-     * @brief Obtains the complete ownership hierarchy across all
-     * backends.
+     * @brief Creates the yarn context.
      */
-    annotations::archetype_location_repository
-    obtain_archetype_location_repository() const;
-
-    /**
-     * @brief Sets up the annotations repository.
-     */
-    annotations::type_repository setup_annotations_repository(
-        const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp) const;
-
-
-    /**
-     * @brief Create the annotations group factory.
-     */
-    annotations::annotation_groups_factory create_annotation_groups_factory(
-        const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp) const;
+    yarn::transforms::context create_context(
+        const options::knitting_options& o,
+        const std::list<annotations::archetype_location>& als)  const;
 
     /**
      * @brief Obtain the yarn models.
      */
     std::list<yarn::model>
-    obtain_yarn_models(const std::vector<boost::filesystem::path>& data_dirs,
-        const annotations::annotation_groups_factory& agf,
-        const annotations::type_repository& atrp) const;
+    obtain_yarn_models(const yarn::transforms::context& ctx) const;
 
     /**
      * @brief Performs a housekeeping run for the supplied directories.
