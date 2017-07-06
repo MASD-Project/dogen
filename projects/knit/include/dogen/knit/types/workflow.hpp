@@ -106,12 +106,6 @@ private:
     obtain_yarn_models(const yarn::transforms::context& ctx) const;
 
     /**
-     * @brief Obtain the yarn models via the new API.
-     */
-    std::list<yarn::model>
-    obtain_yarn_models_new(const yarn::transforms::context& ctx) const;
-
-    /**
      * @brief Performs a housekeeping run for the supplied directories.
      */
     void perform_housekeeping(

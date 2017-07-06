@@ -35771,7 +35771,7 @@ output languages.#</dia:string>
             <dia:boolean val="false"/>
           </dia:attribute>
           <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
+            <dia:boolean val="true"/>
           </dia:attribute>
           <dia:attribute name="parameters">
             <dia:composite type="umlparameter">
@@ -44347,7 +44347,7 @@ output languages.#</dia:string>
         <dia:point val="-88,197.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-95.4047,196.35;-87.25,199.4"/>
+        <dia:rectangle val="-95.4047,196.35;-87.25,198.65"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -44579,7 +44579,7 @@ output languages.#</dia:string>
         <dia:point val="-159.933,135"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-160.683,130.95;-132.23,136.6"/>
+        <dia:rectangle val="-160.683,130.25;-132.23,135.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

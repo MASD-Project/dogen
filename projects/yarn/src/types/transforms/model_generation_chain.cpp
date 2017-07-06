@@ -25,7 +25,7 @@ namespace yarn {
 namespace transforms {
 
 std::list<model>
-model_generation_chain::transform(const context& /*ctx*/) const {
+model_generation_chain::transform(const context& /*ctx*/) {
     std::list<model> r;
     return r;
 }

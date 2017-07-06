@@ -35,9 +35,9 @@ namespace transforms {
 
 class model_generation_chain final {
 public:
-    std::list<model> transform(const context& ctx) const;
+    static std::list<model> transform(const context& ctx);
 };
- 
+
 } } }
 
 #endif
