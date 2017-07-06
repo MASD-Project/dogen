@@ -12,17 +12,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-06 Thu 07:26]
+#+CAPTION: Clock summary at [2017-07-06 Thu 08:06]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:16* |      |      | 100.0 |
+| *Total time*                                                                | *2:26* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:16   |      |      | 100.0 |
-| Active                                                                      |        | 2:16 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |  29.4 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:24 |  17.6 |
-| COMPLETED Implement the context class                                       |        |      | 1:12 |  52.9 |
+| Stories                                                                     | 2:26   |      |      | 100.0 |
+| Active                                                                      |        | 2:26 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |  27.4 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:24 |  16.4 |
+| COMPLETED Implement the context class                                       |        |      | 1:12 |  49.3 |
+| STARTED Implement the exogenous transformation chain                        |        |      | 0:10 |   6.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -88,7 +89,8 @@ Tasks:
 - Add a method to generate the context and then unpack it to fit the
   current API.
 
-*** Implement the exogenous transformation chain                      :story:
+*** STARTED Implement the exogenous transformation chain              :story:
+    CLOCK: [2017-07-06 Thu 07:26]--[2017-07-06 Thu 07:36] =>  0:10
 
 Tasks:
 

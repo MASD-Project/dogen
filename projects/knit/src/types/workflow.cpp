@@ -29,6 +29,7 @@
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
 #include "dogen/yarn/types/workflow.hpp"
+#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -85,6 +86,12 @@ obtain_yarn_models(const yarn::transforms::context& ctx) const {
     return w.execute(ctx);
 }
 
+std::list<yarn::model> workflow::
+obtain_yarn_models_new(const yarn::transforms::context& ctx) const {
+    yarn::transforms::model_generation_chain mgc;
+    return mgc.transform(ctx);
+}
+
 void workflow::perform_housekeeping(
     const std::list<formatters::artefact>& artefacts,
     const std::list<boost::filesystem::path>& dirs) const {
@@ -130,8 +137,10 @@ void workflow::execute() const {
         const auto als(quilt::workflow::archetype_locations());
         const auto ctx(create_context(knitting_options_, als));
         const auto models(obtain_yarn_models(ctx));
+        const auto models_new(obtain_yarn_models_new(ctx));
+        const bool use_new(false);
 
-        for (const auto& m : models) {
+        for (const auto& m : (use_new ? models_new : models)) {
             if (!m.has_generatable_types()) {
                 BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
                 return;

@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,20 +35,9 @@ namespace transforms {
 
 class model_generation_chain final {
 public:
-    model_generation_chain() = default;
-    model_generation_chain(const model_generation_chain&) = default;
-    model_generation_chain(model_generation_chain&&) = default;
-    ~model_generation_chain() = default;
-    model_generation_chain& operator=(const model_generation_chain&) = default;
-
-public:
-    bool operator==(const model_generation_chain& rhs) const;
-    bool operator!=(const model_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<model> transform(const context& ctx) const;
 };
-
+ 
 } } }
 
 #endif

@@ -24,8 +24,10 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool model_generation_chain::operator==(const model_generation_chain& /*rhs*/) const {
-    return true;
+std::list<model>
+model_generation_chain::transform(const context& /*ctx*/) const {
+    std::list<model> r;
+    return r;
 }
 
 } } }
