@@ -25,26 +25,31 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class origin_transform final {
-public:
-    origin_transform() = default;
-    origin_transform(const origin_transform&) = default;
-    origin_transform(origin_transform&&) = default;
-    ~origin_transform() = default;
-    origin_transform& operator=(const origin_transform&) = default;
+private:
+    struct type_group {
+        annotations::type is_proxy_model;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static bool is_proxy_model(const type_group& tg,
+        const intermediate_model& im);
+
+    static origin_types compute_origin_types(const intermediate_model& im,
+        const bool is_proxy_model);
 
 public:
-    bool operator==(const origin_transform& rhs) const;
-    bool operator!=(const origin_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, intermediate_model& im);
 };
 
 } } }

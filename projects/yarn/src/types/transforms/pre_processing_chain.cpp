@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
@@ -41,6 +42,7 @@ transform(const context& ctx, intermediate_model& im) {
      * modules.
      */
     modules_transform::transform(im);
+    origin_transform::transform(ctx, im);
 }
 
 } } }

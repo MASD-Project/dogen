@@ -18,14 +18,101 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.transforms.origin_transform"));
+
+const std::string target_cannot_be_proxy(
+    "Model has origin set to target but is also a proxy: ");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool origin_transform::operator==(const origin_transform& /*rhs*/) const {
-    return true;
+namespace {
+
+class updater {
+public:
+    explicit updater(const origin_types ot) : origin_types_(ot) {}
+
+public:
+    template<typename DeterminableOrigin>
+    void update(DeterminableOrigin& d) { d.origin_type(origin_types_); }
+
+public:
+    bool include_injected_elements() { return false; }
+    void operator()(yarn::element&) { }
+    void operator()(yarn::module& m) { update(m); }
+    void operator()(yarn::concept& c) { update(c); }
+    void operator()(yarn::builtin& b) { update(b); }
+    void operator()(yarn::enumeration& e) { update(e); }
+    void operator()(yarn::primitive& p) { update(p); }
+    void operator()(yarn::object& o) { update(o); }
+    void operator()(yarn::exception& e) { update(e); }
+    void operator()(yarn::visitor& v) { update(v); }
+
+private:
+    const origin_types origin_types_;
+};
+
+}
+
+origin_transform::type_group origin_transform::
+make_type_group(const annotations::type_repository& atrp) {
+
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+    r.is_proxy_model = s.select_type_by_name(traits::is_proxy_model());
+    return r;
+}
+
+bool origin_transform::
+is_proxy_model(const type_group& tg, const intermediate_model& im) {
+    const auto& o(im.root_module().annotation());
+    const annotations::entry_selector s(o);
+    const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
+    BOOST_LOG_SEV(lg, debug) << "Read is proxy model: " << r
+                             << " for model: " << im.name().id();
+    return r;
+}
+
+origin_types
+origin_transform::compute_origin_types(const intermediate_model& im,
+    const bool is_proxy_model) {
+    if (is_proxy_model && im.origin_type() == origin_types::target) {
+        const auto& id(im.name().id());
+        BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
+        BOOST_THROW_EXCEPTION(expansion_error(target_cannot_be_proxy + id));
+    }
+
+    if (im.origin_type() == origin_types::target)
+        return origin_types::target;
+    else if (is_proxy_model)
+        return origin_types::proxy_reference;
+
+    return origin_types::non_proxy_reference;
+}
+
+void origin_transform::transform(const context& ctx, intermediate_model& im) {
+    const auto tg(make_type_group(ctx.type_repository()));
+    const auto ipm(is_proxy_model(tg, im));
+    const auto ot(compute_origin_types(im, ipm));
+    im.origin_type(ot);
+
+    updater g(ot);
+    yarn::elements_traversal(im, g);
 }
 
 } } }
