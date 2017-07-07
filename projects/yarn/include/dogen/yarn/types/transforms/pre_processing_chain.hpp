@@ -33,8 +33,43 @@ namespace yarn {
 namespace transforms {
 
 class pre_processing_chain final {
+private:
+    /**
+     * @brief Returns true if the languages are compatible, false
+     * otherwise.
+     */
+    static bool are_languages_compatible(
+        const languages target_language, intermediate_model& im);
+
+private:
+    /**
+     * @brief Applies the first part of the pre-processing transforms.
+     */
+    static void apply_first_set_of_transforms(
+        const context& ctx, intermediate_model& im);
+
+    /**
+     * @brief Applies the second part of the pre-processing transforms.
+     */
+    static void apply_second_set_of_transforms(
+        const context& ctx, intermediate_model& im);
+
 public:
+    /**
+     * @brief Unconditionally applies all of the pre-processing
+     * transforms to the supplied intermediate model.
+     */
     static void transform(const context& ctx, intermediate_model& im);
+
+    /**
+     * @brief Determines if the language of the supplied model is
+     * compatible with the target language; if so, applies the
+     * pre-processing transforms and returns true. Otherwise returns
+     * false.
+     */
+    static bool try_transform(const context& ctx,
+        const languages target_language, intermediate_model& im);
+
 };
 
 } } }

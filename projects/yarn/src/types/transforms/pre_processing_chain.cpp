@@ -18,6 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
@@ -28,12 +30,38 @@
 #include "dogen/yarn/types/transforms/first_stage_validator.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.transforms.pre_processing_chain"));
+
+}
+
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+bool pre_processing_chain::are_languages_compatible(
+    const languages target_language, intermediate_model& im) {
+
+    const auto l(im.input_language());
+    if (l == target_language) {
+        BOOST_LOG_SEV(lg, warn) << "Reference model language does not"
+                                << " match target model language."
+                                << " Model: " << im.name().id()
+                                << " Language: " << l
+                                << " Aborting expansion.";
+        return false;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Reference model language is compatible."
+                             << " Model: " << im.name().id()
+                             << " Language: " << l;
+    return true;
+}
+
 void pre_processing_chain::
-transform(const context& ctx, intermediate_model& im) {
+apply_first_set_of_transforms(const context& ctx, intermediate_model& im) {
     /*
      * We must transform annotations before we transform modules to
      * ensure the root module is populated with entries before being
@@ -47,13 +75,16 @@ transform(const context& ctx, intermediate_model& im) {
      * modules.
      */
     modules_transform::transform(im);
-    origin_transform::transform(ctx, im);
     language_transform::transform(ctx, im);
+}
 
+void pre_processing_chain::
+apply_second_set_of_transforms(const context& ctx, intermediate_model& im) {
     /*
      * There are no particular dependencies on the next set of
      * transforms.
      */
+    origin_transform::transform(ctx, im);
     type_params_transform::transform(ctx, im);
     parsing_transform::transform(ctx, im);
 
@@ -67,6 +98,27 @@ transform(const context& ctx, intermediate_model& im) {
      * Ensure the model is valid.
      */
     first_stage_validator::validate(im);
+}
+
+void pre_processing_chain::
+transform(const context& ctx, intermediate_model& im) {
+    apply_first_set_of_transforms(ctx, im);
+    apply_second_set_of_transforms(ctx, im);
+}
+
+bool pre_processing_chain::try_transform(const context& ctx,
+    const languages target_language, intermediate_model& im) {
+    /*
+     * We must apply the first set of transforms because language
+     * expansion is required; we only want to process those types
+     * which are of the same language as target.
+     */
+    apply_first_set_of_transforms(ctx, im);
+    if (!are_languages_compatible(target_language, im))
+        return false;
+
+    apply_second_set_of_transforms(ctx, im);
+    return true;
 }
 
 } } }
