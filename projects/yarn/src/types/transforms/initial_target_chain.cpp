@@ -63,6 +63,10 @@ intermediate_model initial_target_chain::transform(const context& ctx) {
     const auto tp(ctx.options().target());
     validate_target_path(tp);
 
+    /*
+     * First we obtain the target model exactly as it was read out
+     * from the exogenous transformer.
+     */
     const auto r(exogenous_model_chain::transform(tp));
 
     BOOST_LOG_SEV(lg, debug) << "Initial target chain executed.";

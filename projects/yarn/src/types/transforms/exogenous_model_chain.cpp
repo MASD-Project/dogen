@@ -32,6 +32,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+std::shared_ptr<exogenous_transform_registrar>
+exogenous_model_chain::registrar_;
+
 exogenous_transform_registrar& exogenous_model_chain::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<exogenous_transform_registrar>();

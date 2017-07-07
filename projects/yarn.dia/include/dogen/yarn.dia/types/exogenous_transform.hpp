@@ -18,19 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/workflow.hpp"
-#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
-#include "dogen/yarn.dia/types/frontend.hpp"
-#include "dogen/yarn.dia/types/exogenous_transform.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_EXOGENOUS_TRANSFORM_HPP
+#define DOGEN_YARN_DIA_TYPES_EXOGENOUS_TRANSFORM_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+#include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-void initializer::initialize() {
-    yarn::transforms::register_exogenous_transform<exogenous_transform>();
-    yarn::register_frontend<frontend>(yarn::workflow::frontend_registrar());
-}
+class exogenous_transform final :
+        public yarn::transforms::exogenous_transform_interface {
+public:
+    exogenous_transform() = default;
+    ~exogenous_transform() noexcept;
+
+public:
+    std::string id() const;
+    yarn::transforms::exogenous_transform_types supported_transforms() const;
+    bool can_transform(const std::string& model_identifier) const;
+    intermediate_model transform(const boost::filesystem::path& p);
+    std::string transform(const intermediate_model& im);
+};
 
 } } }
+
+#endif

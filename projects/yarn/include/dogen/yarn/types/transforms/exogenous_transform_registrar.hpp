@@ -69,15 +69,6 @@ private:
     exogenous_transforms_;
 };
 
-/*
- * Helper method to register exogenous transforms.
- */
-template<typename ExogenousTransforms>
-inline void register_exogenous_transform(exogenous_transform_registrar& rg) {
-    auto t(std::make_shared<ExogenousTransforms>());
-    rg.register_exogenous_transform(t);
-}
-
 } } }
 
 #endif

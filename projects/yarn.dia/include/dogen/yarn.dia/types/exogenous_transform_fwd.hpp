@@ -18,19 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/workflow.hpp"
-#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
-#include "dogen/yarn.dia/types/frontend.hpp"
-#include "dogen/yarn.dia/types/exogenous_transform.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
+#ifndef DOGEN_YARN_DIA_TYPES_EXOGENOUS_TRANSFORM_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_EXOGENOUS_TRANSFORM_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-void initializer::initialize() {
-    yarn::transforms::register_exogenous_transform<exogenous_transform>();
-    yarn::register_frontend<frontend>(yarn::workflow::frontend_registrar());
-}
+class exogenous_transform;
 
 } } }
+
+#endif

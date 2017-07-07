@@ -59,6 +59,16 @@ private:
     static std::shared_ptr<exogenous_transform_registrar> registrar_;
 };
 
+/*
+ * Helper method to register exogenous transforms.
+ */
+template<typename ExogenousTransforms>
+inline void register_exogenous_transform() {
+    auto& rg(exogenous_model_chain::registrar());
+    auto t(std::make_shared<ExogenousTransforms>());
+    rg.register_exogenous_transform(t);
+}
+
 } } }
 
 #endif

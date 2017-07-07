@@ -40,6 +40,7 @@ namespace transforms {
  */
 class exogenous_transform_interface {
 public:
+    exogenous_transform_interface() = default;
     exogenous_transform_interface(
         const exogenous_transform_interface&) = delete;
     virtual ~exogenous_transform_interface() noexcept = 0;
