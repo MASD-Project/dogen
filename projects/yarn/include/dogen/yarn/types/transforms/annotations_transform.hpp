@@ -25,9 +25,9 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/annotations/types/annotation_groups_factory_fwd.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/intermediate_model_fwd.hpp"
 
 namespace dogen {
 namespace yarn {

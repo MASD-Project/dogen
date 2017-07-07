@@ -30,7 +30,7 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/type_parameters.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {

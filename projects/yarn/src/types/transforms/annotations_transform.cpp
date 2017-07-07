@@ -23,8 +23,11 @@
 #include "dogen/annotations/io/scope_types_io.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 
 namespace {

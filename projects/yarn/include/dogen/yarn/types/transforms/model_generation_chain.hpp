@@ -27,7 +27,7 @@
 
 #include <list>
 #include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {

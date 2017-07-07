@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/mappings_hydrator.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/output_language_transform.hpp"
 
 namespace {

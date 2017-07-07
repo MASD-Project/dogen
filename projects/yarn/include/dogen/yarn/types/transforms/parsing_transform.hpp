@@ -35,7 +35,7 @@
 #include "dogen/yarn/types/attribute.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
