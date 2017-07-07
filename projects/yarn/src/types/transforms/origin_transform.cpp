@@ -23,8 +23,8 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 
 namespace {
@@ -94,7 +94,8 @@ origin_transform::compute_origin_types(const intermediate_model& im,
     if (is_proxy_model && im.origin_type() == origin_types::target) {
         const auto& id(im.name().id());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
-        BOOST_THROW_EXCEPTION(expansion_error(target_cannot_be_proxy + id));
+        BOOST_THROW_EXCEPTION(
+            transformation_error(target_cannot_be_proxy + id));
     }
 
     if (im.origin_type() == origin_types::target)

@@ -23,8 +23,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 
 namespace {
@@ -186,7 +186,7 @@ void updater::update(element& e) {
     if (i == model_.modules().end()) {
         const auto sn(e.contained_by()->simple());
         BOOST_LOG_SEV(lg, error) << missing_module << sn;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_module + sn));
+        BOOST_THROW_EXCEPTION(transformation_error(missing_module + sn));
     }
 }
 
@@ -197,7 +197,7 @@ void modules_transform::populate_root_module(intermediate_model& im) {
     if (i == im.modules().end()) {
         const auto id(im.name().id());
         BOOST_LOG_SEV(lg, error) << missing_root_module << id;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_root_module + id));
+        BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + id));
     }
 
     i->second.is_root(true);
