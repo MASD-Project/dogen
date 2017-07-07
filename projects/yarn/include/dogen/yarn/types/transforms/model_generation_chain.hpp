@@ -26,7 +26,10 @@
 #endif
 
 #include <list>
+#include <iosfwd>
 #include "dogen/yarn/types/model.hpp"
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -34,6 +37,33 @@ namespace yarn {
 namespace transforms {
 
 class model_generation_chain final {
+private:
+    struct type_group {
+        annotations::type reference;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const type_group& v);
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static std::list<std::string> make_user_references(const type_group& tg,
+        const annotations::annotation& a);
+
+    static std::list<boost::filesystem::path> obtain_paths_to_user_references(
+        const context& ctx, const annotations::annotation& ra);
+
+private:
+    static std::vector<boost::filesystem::path> to_library_dirs(
+        const std::vector<boost::filesystem::path>& data_dirs);
+
+    static std::list<boost::filesystem::path> obtain_paths_to_system_models(
+        const context& ctx);
+
+private:
+    static std::list<boost::filesystem::path>
+    obtain_paths_to_all_auxiliary_models(const context& ctx,
+        const annotations::annotation& ra);
+
 public:
     static std::list<model> transform(const context& ctx);
 };

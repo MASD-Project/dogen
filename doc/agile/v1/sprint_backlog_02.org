@@ -12,22 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-07 Fri 21:19]
+#+CAPTION: Clock summary at [2017-07-07 Fri 22:03]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:16* |      |      | 100.0 |
+| *Total time*                                                                | *9:59* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:16   |      |      | 100.0 |
-| Active                                                                      |        | 9:16 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:45 |   8.1 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:24 |   4.3 |
-| COMPLETED Implement the context class                                       |        |      | 1:12 |  12.9 |
-| COMPLETED Implement the exogenous transformation chain                      |        |      | 4:11 |  45.1 |
-| COMPLETED Implement the pre-processing chain                                |        |      | 1:35 |  17.1 |
-| COMPLETED Refactor mapping repository factory                               |        |      | 0:12 |   2.2 |
-| COMPLETED Implement the output languages transform                          |        |      | 0:37 |   6.7 |
-| COMPLETED Use forward declaration for context                               |        |      | 0:20 |   3.6 |
+| Stories                                                                     | 9:59   |      |      | 100.0 |
+| Active                                                                      |        | 9:59 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:45 |   7.5 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:24 |   4.0 |
+| COMPLETED Implement the context class                                       |        |      | 1:12 |  12.0 |
+| COMPLETED Implement the exogenous transformation chain                      |        |      | 4:11 |  41.9 |
+| COMPLETED Implement the pre-processing chain                                |        |      | 1:35 |  15.9 |
+| COMPLETED Refactor mapping repository factory                               |        |      | 0:12 |   2.0 |
+| COMPLETED Implement the output languages transform                          |        |      | 0:37 |   6.2 |
+| COMPLETED Use forward declaration for context                               |        |      | 0:20 |   3.3 |
+| STARTED Implement the references chain                                      |        |      | 0:43 |   7.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -166,7 +167,8 @@ references. Now, when we change context, we end up with a massive
 rebuild. We should be able to change all of the headers to include the
 forward declaration.
 
-*** Implement the references chain                                    :story:
+*** STARTED Implement the references chain                            :story:
+    CLOCK: [2017-07-07 Fri 21:20]--[2017-07-07 Fri 22:03] =>  0:43
 
 Tasks:
 
