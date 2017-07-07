@@ -24,4 +24,17 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+exogenous_transform_registrar& exogenous_model_chain::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<exogenous_transform_registrar>();
+
+    return *registrar_;
+}
+
+intermediate_model exogenous_model_chain::
+transform(const context& /*ctx*/, const boost::filesystem::path& /*p*/) {
+    intermediate_model r;
+    return r;
+}
+
 } } }

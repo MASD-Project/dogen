@@ -18,34 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/yarn/io/transforms/exogenous_transform_types_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class exogenous_model_chain final {
-public:
-    static exogenous_transform_registrar& registrar();
+std::ostream& operator<<(std::ostream& s, const exogenous_transform_types& v) {
+    s << "{ " << "\"__type__\": " << "\"exogenous_transform_types\", " << "\"value\": ";
 
-public:
-    static intermediate_model
-    transform(const context& ctx, const boost::filesystem::path& p);
-
-private:
-    static std::shared_ptr<exogenous_transform_registrar> registrar_;
-};
+    std::string attr;
+    switch (v) {
+    case exogenous_transform_types::invalid:
+        attr = "\"invalid\"";
+        break;
+    case exogenous_transform_types::from_intermediate_model:
+        attr = "\"from_intermediate_model\"";
+        break;
+    case exogenous_transform_types::to_intermediate_model:
+        attr = "\"to_intermediate_model\"";
+        break;
+    case exogenous_transform_types::bi_directional:
+        attr = "\"bi_directional\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for exogenous_transform_types");
+    }
+    s << attr << " }";
+    return s;
+}
 
 } } }
-
-#endif

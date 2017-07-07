@@ -18,34 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
+#ifndef DOGEN_YARN_HASH_TRANSFORMS_EXOGENOUS_TRANSFORM_TYPES_HASH_HPP
+#define DOGEN_YARN_HASH_TRANSFORMS_EXOGENOUS_TRANSFORM_TYPES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
+#include <functional>
+#include "dogen/yarn/types/transforms/exogenous_transform_types.hpp"
 
-namespace dogen {
-namespace yarn {
-namespace transforms {
+namespace std {
 
-class exogenous_model_chain final {
+template<>
+struct hash<dogen::yarn::transforms::exogenous_transform_types> {
 public:
-    static exogenous_transform_registrar& registrar();
-
-public:
-    static intermediate_model
-    transform(const context& ctx, const boost::filesystem::path& p);
-
-private:
-    static std::shared_ptr<exogenous_transform_registrar> registrar_;
+    size_t operator()(const dogen::yarn::transforms::exogenous_transform_types& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
 };
 
-} } }
+}
 
 #endif

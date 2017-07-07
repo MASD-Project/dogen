@@ -18,32 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_REGISTRAR_ERROR_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_REGISTRAR_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class exogenous_model_chain final {
+class registrar_error : public virtual std::exception, public virtual boost::exception {
 public:
-    static exogenous_transform_registrar& registrar();
+    registrar_error() = default;
+    ~registrar_error() noexcept = default;
 
 public:
-    static intermediate_model
-    transform(const context& ctx, const boost::filesystem::path& p);
+    explicit registrar_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
 
 private:
-    static std::shared_ptr<exogenous_transform_registrar> registrar_;
+    const std::string message_;
 };
 
 } } }

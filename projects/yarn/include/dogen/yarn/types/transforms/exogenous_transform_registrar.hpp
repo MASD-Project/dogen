@@ -28,7 +28,6 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 
 namespace dogen {
@@ -36,35 +35,38 @@ namespace yarn {
 namespace transforms {
 
 /**
- * @brief Keeps track of all the available exogenous transformers.
+ * @brief Keeps track of all the available exogenous transforms.
  */
 class exogenous_transform_registrar final {
 public:
     /**
      * @brief Ensures the registrar is ready to be used.
      */
-    static void validate();
+    void validate();
 
     /*
-     * @brief Registers a given frontend.
+     * @brief Registers a given exogenous transform.
      *
-     * @pre Frontend is not yet registered.
+     * @pre Exogenous transform is not yet registered.
+     * @pre Pointer must not be null.
      */
     void register_exogenous_transform(
-        std::shared_ptr<exogenous_transform_interface> t);
+        std::shared_ptr<exogenous_transform_interface> et);
 
     /**
-     * @brief Returns the frontend that handles the supplied path.
+     * @brief Returns the exogenous transform that handles the
+     * supplied model identifier.
      *
-     * @pre A frontend must have been registered for this path.
+     * @pre An exogenous transform must have been registered for this
+     * model identifier.
      */
     exogenous_transform_interface&
-    transform_for_path(const boost::filesystem::path& p);
+    transform_for_model(const std::string& model_identifier);
 
 private:
     std::unordered_map<std::string,
                        std::shared_ptr<exogenous_transform_interface>>
-    transforms_;
+    exogenous_transforms_;
 };
 
 /*

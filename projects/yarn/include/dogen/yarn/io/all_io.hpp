@@ -70,5 +70,6 @@
 #include "dogen/yarn/io/local_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/global_enablement_configuration_io.hpp"
 #include "dogen/yarn/io/transforms/code_generation_output_io.hpp"
+#include "dogen/yarn/io/transforms/exogenous_transform_types_io.hpp"
 
 #endif

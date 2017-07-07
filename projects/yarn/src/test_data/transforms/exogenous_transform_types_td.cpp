@@ -18,34 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXOGENOUS_MODEL_CHAIN_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
+#include "dogen/yarn/test_data/transforms/exogenous_transform_types_td.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class exogenous_model_chain final {
-public:
-    static exogenous_transform_registrar& registrar();
+exogenous_transform_types_generator::exogenous_transform_types_generator() : position_(0) { }
+void exogenous_transform_types_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<exogenous_transform_types>(position % 4);
+}
 
-public:
-    static intermediate_model
-    transform(const context& ctx, const boost::filesystem::path& p);
+exogenous_transform_types_generator::result_type
+exogenous_transform_types_generator::create(const unsigned int  position) {
+    result_type r;
+    exogenous_transform_types_generator::populate(position, r);
+    return r;
+}
 
-private:
-    static std::shared_ptr<exogenous_transform_registrar> registrar_;
-};
+exogenous_transform_types_generator::result_type
+exogenous_transform_types_generator::operator()() {
+    return create(position_++);
+}
 
 } } }
-
-#endif
