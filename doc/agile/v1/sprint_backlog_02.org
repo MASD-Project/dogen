@@ -12,22 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-07 Fri 11:17]
+#+CAPTION: Clock summary at [2017-07-07 Fri 11:47]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:13* |      |      | 100.0 |
+| *Total time*                                                                | *5:42* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:13   |      |      | 100.0 |
-| Active                                                                      |        | 5:13 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:40 |  12.8 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:24 |   7.7 |
-| COMPLETED Implement the context class                                       |        |      | 1:12 |  23.0 |
-| STARTED Implement the exogenous transformation chain                        |        |      | 2:57 |  56.5 |
+| Stories                                                                     | 5:42   |      |      | 100.0 |
+| Active                                                                      |        | 5:42 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:45 |  13.2 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:24 |   7.0 |
+| COMPLETED Implement the context class                                       |        |      | 1:12 |  21.1 |
+| STARTED Implement the exogenous transformation chain                        |        |      | 3:21 |  58.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-07 Fri 11:18]--[2017-07-07 Fri 11:23] =>  0:05
     CLOCK: [2017-07-03 Thu 20:15]--[2017-07-03 Thu 20:55] =>  0:40
 
 Updates to sprint and product backlog.
@@ -90,6 +91,7 @@ Tasks:
   current API.
 
 *** STARTED Implement the exogenous transformation chain              :story:
+    CLOCK: [2017-07-07 Fri 11:23]--[2017-07-07 Fri 11:47] =>  0:24
     CLOCK: [2017-07-07 Fri 11:03]--[2017-07-07 Fri 11:17] =>  0:14
     CLOCK: [2017-07-07 Fri 09:01]--[2017-07-07 Fri 11:02] =>  2:01
     CLOCK: [2017-07-06 Thu 19:08]--[2017-07-06 Thu 19:30] =>  0:22
@@ -156,6 +158,13 @@ Tasks:
 - Add registration, interfaces etc.
 - implement the kernels in terms of the new interfaces.
 - update knit to use the code generator.
+
+*** Use the in-memory interface of LibXml                             :story:
+
+At present, our C++ wrappers on top of LibXml are using the file based
+interface. We should do in-memory processing of the XML file. Once
+this is in place, we can change the exogenous transformers to use
+strings rather than paths to files.
 
 *** Move element segmentation into yarn                               :story:
 

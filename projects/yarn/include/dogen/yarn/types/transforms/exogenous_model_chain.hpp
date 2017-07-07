@@ -27,20 +27,33 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Given the location of a supported exogenous model, it
+ * obtains it and transforms it into an intermediate model.
+ */
 class exogenous_model_chain final {
 public:
+    /**
+     * @brief Registrar that keeps track of the available exogenous
+     * transforms.
+     */
     static exogenous_transform_registrar& registrar();
 
 public:
-    static intermediate_model
-    transform(const context& ctx, const boost::filesystem::path& p);
+    /**
+     * @brief Apply the tansformation to the exogenous model at path
+     * @e p.
+     *
+     * @pre @e p must point to a valid file, and contain a supported
+     * exogenous model.
+     */
+    static intermediate_model transform(const boost::filesystem::path& p);
 
 private:
     static std::shared_ptr<exogenous_transform_registrar> registrar_;

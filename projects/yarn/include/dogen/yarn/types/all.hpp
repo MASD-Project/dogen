@@ -151,6 +151,7 @@
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"

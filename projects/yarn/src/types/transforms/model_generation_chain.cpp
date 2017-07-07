@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 
 namespace dogen {
@@ -26,6 +27,8 @@ namespace transforms {
 
 std::list<model>
 model_generation_chain::transform(const context& /*ctx*/) {
+    // initial_target_chain::transform(ctx);
+
     std::list<model> r;
     return r;
 }

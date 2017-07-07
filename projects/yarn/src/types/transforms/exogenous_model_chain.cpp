@@ -18,7 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.transforms.exogenous_model_chain"));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -31,9 +39,19 @@ exogenous_transform_registrar& exogenous_model_chain::registrar() {
     return *registrar_;
 }
 
-intermediate_model exogenous_model_chain::
-transform(const context& /*ctx*/, const boost::filesystem::path& /*p*/) {
-    intermediate_model r;
+intermediate_model
+exogenous_model_chain::transform(const boost::filesystem::path& p) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
+                             << p.generic_string();
+
+    auto& rg(registrar());
+    rg.validate();
+
+    const auto model_identifier(p.filename().string());
+    auto& t(rg.transform_for_model(model_identifier));
+
+    const auto r(t.transform(p));
+    BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
     return r;
 }
 

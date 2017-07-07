@@ -18,29 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INITIAL_TARGET_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INITIAL_TARGET_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_TRANSFORMATION_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_TRANSFORMATION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class initial_target_chain final {
-public:
-    static void validate_target_path(const boost::filesystem::path& p);
-    static intermediate_model obtain_target(const context& ctx);
-
-public:
-    static intermediate_model transform(const context& ctx);
-};
+class transformation_error;
 
 } } }
 

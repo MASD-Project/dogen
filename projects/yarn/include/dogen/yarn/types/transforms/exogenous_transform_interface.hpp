@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_types.hpp"
 
@@ -66,18 +67,24 @@ public:
     virtual bool can_transform(const std::string& model_identifier) const = 0;
 
     /**
-     * @brief Transforms the exogenous model supplied as a string into
-     * an intermediate model.
+     * @brief Transforms the exogenous model supplied into an
+     * intermediate model.
      *
-     * @param s String representation of the exogenous model.
+     * @param s Path to an exogenous model.
      *
      * @pre Model must conform to the format supported by the
      * transformer, as validated by @e can_transform.
      *
      * @note Method is non-const by design at the moment as some
      * exogenous transformers have state.
+     *
+     * @note This function is receiving a path to the model, rather
+     * than the file contents because at the moment the exogenous
+     * transformers cannot cope with string processing - our LibXml
+     * reader has been hard-coded to read a file. In the future this
+     * will change to a string.
      */
-    virtual intermediate_model transform(const std::string& s) = 0;
+    virtual intermediate_model transform(const boost::filesystem::path& p) = 0;
 
     /**
      * @brief Transforms the intermediate model into a string
