@@ -18,20 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_UPSILON_TYPES_ALL_HPP
-#define DOGEN_YARN_UPSILON_TYPES_ALL_HPP
+#ifndef DOGEN_YARN_UPSILON_TYPES_EXOGENOUS_TRANSFORM_HPP
+#define DOGEN_YARN_UPSILON_TYPES_EXOGENOUS_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn.upsilon/types/upsilon.hpp"
-#include "dogen/yarn.upsilon/types/frontend.hpp"
-#include "dogen/yarn.upsilon/types/workflow.hpp"
-#include "dogen/yarn.upsilon/types/initializer.hpp"
-#include "dogen/yarn.upsilon/types/transformer.hpp"
-#include "dogen/yarn.upsilon/types/workflow_error.hpp"
-#include "dogen/yarn.upsilon/types/exogenous_transform.hpp"
-#include "dogen/yarn.upsilon/types/transformation_error.hpp"
+#include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
+
+namespace dogen {
+namespace yarn {
+namespace upsilon {
+
+class exogenous_transform final :
+        public yarn::transforms::exogenous_transform_interface {
+public:
+    exogenous_transform() = default;
+    ~exogenous_transform() noexcept;
+
+public:
+    std::string id() const override;
+    yarn::transforms::exogenous_transform_types
+    supported_transforms() const override;
+    bool can_transform(const std::string& model_identifier) const override;
+    intermediate_model transform(const boost::filesystem::path& p) override;
+    void transform(const intermediate_model& im,
+        const boost::filesystem::path& p) override;
+};
+
+} } }
 
 #endif

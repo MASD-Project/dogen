@@ -19,7 +19,9 @@
  *
  */
 #include "dogen/yarn/types/workflow.hpp"
+#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
 #include "dogen/yarn.upsilon/types/frontend.hpp"
+#include "dogen/yarn.upsilon/types/exogenous_transform.hpp"
 #include "dogen/yarn.upsilon/types/initializer.hpp"
 
 namespace dogen {
@@ -27,6 +29,7 @@ namespace yarn {
 namespace upsilon {
 
 void initializer::initialize() {
+    yarn::transforms::register_exogenous_transform<exogenous_transform>();
     yarn::register_frontend<frontend>(yarn::workflow::frontend_registrar());
 }
 

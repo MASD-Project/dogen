@@ -21,28 +21,27 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/dia/types/hydrator.hpp"
-#include "dogen/dia/types/persister.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn.dia/types/workflow.hpp"
-#include "dogen/yarn.dia/types/exogenous_transform.hpp"
+#include "dogen/upsilon/types/hydrator.hpp"
+#include "dogen/yarn.upsilon/types/workflow.hpp"
+#include "dogen/yarn.upsilon/types/exogenous_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-const std::string id("yarn.dia.exogenous_transform");
+const std::string id("yarn.upsilon.exogenous_transform");
 auto lg(logger_factory(id));
 
-const std::string extension(".dia");
+const std::string to_upsilon_support_unavailable(
+    "Transformer cannot convert model into Upsilon representation");
 
-const std::string to_dia_support_unavailable(
-    "Transformer cannot convert model into Dia representation");
+const std::string extension("Configuration.xml");
 
 }
 
 namespace dogen {
 namespace yarn {
-namespace dia {
+namespace upsilon {
 
 exogenous_transform::~exogenous_transform() noexcept {}
 
@@ -62,16 +61,15 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
 
 intermediate_model
 exogenous_transform::transform(const boost::filesystem::path& p) {
-    BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
+    BOOST_LOG_SEV(lg, debug) << "Reading Upsilon model.";
 
-    dogen::dia::hydrator h;
-    const auto diagram(h.hydrate(p));
-    BOOST_LOG_SEV(lg, debug) << "read Dia diagram.";
+    dogen::upsilon::hydrator h;
+    const auto m(h.hydrate(p));
+    BOOST_LOG_SEV(lg, debug) << "Read Upsilon model.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
-    dogen::yarn::dia::workflow wf;
-    const auto name(p.stem().string());
-    const auto r(wf.execute(diagram, name));
+    workflow w;
+    const auto r(w.execute(m));
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
 
     return r;
@@ -79,10 +77,10 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
 
 void exogenous_transform::transform(const intermediate_model& /*im*/,
     const boost::filesystem::path& /*p*/) {
-    BOOST_LOG_SEV(lg, error) << to_dia_support_unavailable;
+    BOOST_LOG_SEV(lg, error) << to_upsilon_support_unavailable;
 
     using yarn::transforms::transformation_error;
-    BOOST_THROW_EXCEPTION(transformation_error(to_dia_support_unavailable));
+    BOOST_THROW_EXCEPTION(transformation_error(to_upsilon_support_unavailable));
 }
 
 } } }
