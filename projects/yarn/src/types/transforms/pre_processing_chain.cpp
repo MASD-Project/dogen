@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/transforms/type_params_transform.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
@@ -31,20 +32,26 @@ namespace transforms {
 void pre_processing_chain::
 transform(const context& ctx, intermediate_model& im) {
     /*
-     * We must expand annotations before we expand modules to
-     * ensure the root module is populated with entries
-     * before being copied over.
+     * We must transform annotations before we transform modules to
+     * ensure the root module is populated with entries before being
+     * copied over.
      */
     annotations_transform::transform(ctx, im);
 
     /*
-     * Module expansion must be done before origin and language
-     * expansion to get these properties populated on the new
+     * Module transform must be done before origin and language
+     * transforms to get these properties populated on the new
      * modules.
      */
     modules_transform::transform(im);
     origin_transform::transform(ctx, im);
     language_transform::transform(ctx, im);
+
+    /*
+     * There are no particular dependencies on the next set of
+     * transforms.
+     */
+    type_params_transform::transform(ctx, im);
 }
 
 } } }

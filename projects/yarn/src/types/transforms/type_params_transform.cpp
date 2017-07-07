@@ -18,14 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool type_params_transform::operator==(const type_params_transform& /*rhs*/) const {
-    return true;
+type_params_transform::type_group type_params_transform::
+make_type_group(const annotations::type_repository& atrp) {
+
+    type_group r;
+    const annotations::type_repository_selector s(atrp);
+    const auto& vnp(traits::type_parameters::variable_number_of_parameters());
+    r.variable_number_of_parameters = s.select_type_by_name(vnp);
+
+    const auto& tpc(traits::type_parameters::type_parameters_count());
+    r.type_parameters_count = s.select_type_by_name(tpc);
+
+    const auto& aih(traits::type_parameters::type_parameters_always_in_heap());
+    r.type_parameters_always_in_heap = s.select_type_by_name(aih);
+
+    return r;
+}
+
+type_parameters
+type_params_transform::make_type_parameters(const type_group& tg,
+    const annotations::annotation& a) {
+    type_parameters r;
+    const annotations::entry_selector s(a);
+
+    const auto& vnp(tg.variable_number_of_parameters);
+    r.variable_number_of_parameters(s.get_boolean_content_or_default(vnp));
+
+    const auto& tpc(tg.type_parameters_count);
+    r.count(s.get_number_content_or_default(tpc));
+
+    const auto& aih(tg.type_parameters_always_in_heap);
+    r.always_in_heap(s.get_boolean_content_or_default(aih));
+
+    return r;
+}
+
+void type_params_transform::
+expand_type_parameters(const type_group& tg, object& o) {
+    const auto tp(make_type_parameters(tg, o.annotation()));
+    o.type_parameters(tp);
+}
+
+void type_params_transform::
+transform(const context& ctx, intermediate_model& im) {
+    const auto tg(make_type_group(ctx.type_repository()));
+    for (auto& pair : im.objects()) {
+        auto& o(pair.second);
+        expand_type_parameters(tg, o);
+    }
 }
 
 } } }

@@ -25,26 +25,35 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/yarn/types/type_parameters.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class type_params_transform final {
-public:
-    type_params_transform() = default;
-    type_params_transform(const type_params_transform&) = default;
-    type_params_transform(type_params_transform&&) = default;
-    ~type_params_transform() = default;
-    type_params_transform& operator=(const type_params_transform&) = default;
+private:
+    struct type_group {
+        annotations::type variable_number_of_parameters;
+        annotations::type type_parameters_count;
+        annotations::type type_parameters_always_in_heap;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static type_parameters make_type_parameters(const type_group& tg,
+        const annotations::annotation& a);
+
+private:
+    static void expand_type_parameters(const type_group& tg, object& o);
 
 public:
-    bool operator==(const type_params_transform& rhs) const;
-    bool operator!=(const type_params_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, intermediate_model& im);
 };
 
 } } }
