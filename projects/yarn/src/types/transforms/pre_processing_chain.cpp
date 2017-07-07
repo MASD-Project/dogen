@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
@@ -33,6 +34,13 @@ transform(const context& ctx, intermediate_model& im) {
      * before being copied over.
      */
     annotations_transform::transform(ctx, im);
+
+    /*
+     * Module expansion must be done before origin and language
+     * expansion to get these properties populated on the new
+     * modules.
+     */
+    modules_transform::transform(im);
 }
 
 } } }

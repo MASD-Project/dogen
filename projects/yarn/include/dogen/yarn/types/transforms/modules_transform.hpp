@@ -25,26 +25,20 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class modules_transform final {
-public:
-    modules_transform() = default;
-    modules_transform(const modules_transform&) = default;
-    modules_transform(modules_transform&&) = default;
-    ~modules_transform() = default;
-    modules_transform& operator=(const modules_transform&) = default;
+private:
+    static void populate_root_module(intermediate_model& im);
+    static void create_missing_modules(intermediate_model& im);
+    static void expand_containing_module(intermediate_model& im);
 
 public:
-    bool operator==(const modules_transform& rhs) const;
-    bool operator!=(const modules_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(intermediate_model& im);
 };
 
 } } }
