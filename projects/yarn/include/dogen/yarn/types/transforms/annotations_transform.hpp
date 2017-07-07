@@ -25,26 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Reads raw meta-data and uses it to create the annotations
+ * objects.
+ */
 class annotations_transform final {
-public:
-    annotations_transform() = default;
-    annotations_transform(const annotations_transform&) = default;
-    annotations_transform(annotations_transform&&) = default;
-    ~annotations_transform() = default;
-    annotations_transform& operator=(const annotations_transform&) = default;
+private:
+    static void update_scribble_groups(intermediate_model& im);
+    static void update_annotations(
+        const annotations::annotation_groups_factory& agf,
+        intermediate_model& im);
 
 public:
-    bool operator==(const annotations_transform& rhs) const;
-    bool operator!=(const annotations_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, intermediate_model& im);
 };
 
 } } }

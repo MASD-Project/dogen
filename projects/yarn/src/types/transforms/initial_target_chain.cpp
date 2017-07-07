@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
+#include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 
 namespace {
@@ -38,15 +39,7 @@ namespace yarn {
 namespace transforms {
 
 void initial_target_chain::
-validate_target_path(const boost::filesystem::path& p) {
-    /*
-     * We require the target path supplied to us to be an absolute
-     * path. This is because we perform calculations off of it such as
-     * locating the reference models and so forth. The end-user is not
-     * required to have supplied an absolute path, but someone above
-     * us must be responsible for ensuring we receive an absolute
-     * path.
-     */
+ensure_target_path_is_absolute(const boost::filesystem::path& p) {
     const auto gs(p.generic_string());
     if (p.is_absolute()) {
         BOOST_LOG_SEV(lg, debug) << "Target path is valid: " << gs;
@@ -61,13 +54,26 @@ intermediate_model initial_target_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, debug) << "Executing the initial target chain.";
 
     const auto tp(ctx.options().target());
-    validate_target_path(tp);
+    ensure_target_path_is_absolute(tp);
 
     /*
      * First we obtain the target model exactly as it was read out
      * from the exogenous transformer.
      */
-    const auto r(exogenous_model_chain::transform(tp));
+    auto r(exogenous_model_chain::transform(tp));
+
+    /*
+     * Next, we set the origin of the target model to target so that
+     * further transforms can be applied such as the origin
+     * transforms.
+     */
+    r.origin_type(origin_types::target);
+
+    /*
+     * Finally, we apply all of the pre-processing transforms to the
+     * target.
+     */
+    pre_processing_chain::transform(ctx, r);
 
     BOOST_LOG_SEV(lg, debug) << "Initial target chain executed.";
     return r;

@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +34,7 @@ namespace transforms {
 
 class pre_processing_chain final {
 public:
-    pre_processing_chain() = default;
-    pre_processing_chain(const pre_processing_chain&) = default;
-    pre_processing_chain(pre_processing_chain&&) = default;
-    ~pre_processing_chain() = default;
-    pre_processing_chain& operator=(const pre_processing_chain&) = default;
-
-public:
-    bool operator==(const pre_processing_chain& rhs) const;
-    bool operator!=(const pre_processing_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, intermediate_model& im);
 };
 
 } } }

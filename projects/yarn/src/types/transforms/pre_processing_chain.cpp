@@ -18,14 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool pre_processing_chain::operator==(const pre_processing_chain& /*rhs*/) const {
-    return true;
+void pre_processing_chain::
+transform(const context& ctx, intermediate_model& im) {
+    /*
+     * We must expand annotations before we expand modules to
+     * ensure the root module is populated with entries
+     * before being copied over.
+     */
+    annotations_transform::transform(ctx, im);
 }
 
 } } }

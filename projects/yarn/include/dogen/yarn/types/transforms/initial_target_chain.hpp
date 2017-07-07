@@ -33,10 +33,24 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Obtains the target model from a source, as per the supplied
+ * options and performs some initial pre-processing on it.
+ */
 class initial_target_chain final {
 public:
-    static void validate_target_path(const boost::filesystem::path& p);
-    static intermediate_model obtain_target(const context& ctx);
+    /**
+     * @brief Checks that the supplied path is absolute.
+     *
+     * We require the target path supplied to us to be an absolute
+     * path. This is because we perform calculations off of it such as
+     * locating the reference models and so forth. The end-user is not
+     * required to have supplied an absolute path, but someone above
+     * us must be responsible for ensuring we receive an absolute
+     * path.
+     */
+    static void ensure_target_path_is_absolute(
+        const boost::filesystem::path& p);
 
 public:
     static intermediate_model transform(const context& ctx);
