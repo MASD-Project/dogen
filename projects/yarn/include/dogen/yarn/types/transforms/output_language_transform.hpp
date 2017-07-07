@@ -25,7 +25,10 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +36,13 @@ namespace transforms {
 
 class output_language_transform final {
 public:
-    output_language_transform() = default;
-    output_language_transform(const output_language_transform&) = default;
-    output_language_transform(output_language_transform&&) = default;
-    ~output_language_transform() = default;
-    output_language_transform& operator=(const output_language_transform&) = default;
+    static intermediate_model
+    transform(const context& ctx, const languages ol,
+        const intermediate_model& im);
 
-public:
-    bool operator==(const output_language_transform& rhs) const;
-    bool operator!=(const output_language_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<intermediate_model>
+    transform(const context& ctx, const std::list<languages> ol,
+        const intermediate_model& im);
 };
 
 } } }

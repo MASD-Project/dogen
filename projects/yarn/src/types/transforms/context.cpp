@@ -28,10 +28,12 @@ context::context(
         const std::vector<boost::filesystem::path>& data_directories,
         const options::knitting_options& options,
         const annotations::archetype_location_repository& alrp,
-        const annotations::type_repository& atrp) :
+        const annotations::type_repository& atrp,
+        const mapping_set_repository& msrp) :
     data_directories_(data_directories), options_(options),
     location_repository_(alrp), type_repository_(atrp),
-    groups_factory_(data_directories, location_repository_, type_repository_) {}
+    groups_factory_(data_directories, location_repository_, type_repository_),
+    mapping_repository_(msrp) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
@@ -47,6 +49,10 @@ const annotations::type_repository& context::type_repository() const {
 
 const annotations::annotation_groups_factory& context::groups_factory() const {
     return groups_factory_;
+}
+
+const mapping_set_repository& context::mapping_repository() const {
+    return mapping_repository_;
 }
 
 } } }

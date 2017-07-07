@@ -18,14 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/mapper.hpp"
+#include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/transforms/output_language_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.transforms.output_language_transform"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool output_language_transform::operator==(const output_language_transform& /*rhs*/) const {
-    return true;
+intermediate_model output_language_transform::transform(
+    const context& ctx, const languages ol, const intermediate_model& im) {
+    const mapper mp(ctx.mapping_repository());
+    return mp.map(im.input_language(), ol, im);
+}
+
+std::list<intermediate_model>
+output_language_transform::transform(const context& ctx,
+    const std::list<languages> ol, const intermediate_model& im) {
+    std::list<intermediate_model> r;
+    for (const auto l : ol) {
+        r.push_back(transform(ctx, l, im));
+    }
+    return r;
 }
 
 } } }

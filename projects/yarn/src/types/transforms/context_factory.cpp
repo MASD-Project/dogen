@@ -23,6 +23,8 @@
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/mapping_set_repository_factory.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -37,8 +39,13 @@ context context_factory::make(const options::knitting_options& o,
     annotations::archetype_location_repository_factory alrpf;
     const auto alrp(alrpf.make(als));
 
+    mapping_set_repository_factory msrpf;
+    const auto msrp(msrpf.make(data_dirs));
+
     annotations::type_repository_factory atrpf;
-    return context(data_dirs, o, alrp, atrpf.make(alrp, data_dirs));
+    const auto atrp(atrpf.make(alrp, data_dirs));
+
+    return context(data_dirs, o, alrp, atrp, msrp);
 }
 
 } } }
