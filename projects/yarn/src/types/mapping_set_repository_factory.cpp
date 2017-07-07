@@ -20,8 +20,17 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/filesystem/file.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/io/unordered_map_io.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/mapping_io.hpp"
+#include "dogen/yarn/io/mapping_set_io.hpp"
+#include "dogen/yarn/io/mapping_set_repository_io.hpp"
 #include "dogen/yarn/io/mapping_actions_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
+#include "dogen/yarn/types/mappings_hydrator.hpp"
+#include "dogen/yarn/types/mappings_validator.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
 
 namespace {
@@ -32,11 +41,59 @@ auto lg(logger_factory("yarn.mapping_set_repository_factory"));
 const std::string duplicate_lam_id("Duplicate language agnostic id: ");
 const std::string duplicate_upsilon_id("Duplicate upsilon id: ");
 const std::string default_mapping_set_name("default.mapping_set");
+const std::string duplicate_mapping_set(
+    "Found more than one mapping set with name: ");
+
+const std::string mappings_dir("mappings");
+
 
 }
 
 namespace dogen {
 namespace yarn {
+
+std::unordered_map<std::string, std::list<mapping>>
+mapping_set_repository_factory::
+obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
+    BOOST_LOG_SEV(lg, debug) << "Reading all mappings.";
+
+    mappings_hydrator h;
+    std::unordered_map<std::string, std::list<mapping>> r;
+    for (const auto& top_level_dir : dirs) {
+        const boost::filesystem::path mdir(top_level_dir / mappings_dir);
+        BOOST_LOG_SEV(lg, trace) << "Mapping directory: "
+                                 << mdir.generic_string();
+
+        using namespace dogen::utility::filesystem;
+        const auto files(find_files(mdir));
+
+        BOOST_LOG_SEV(lg, trace) << "Found " << files.size()
+                                 << " mapping files.";
+
+        for (const auto& f : files) {
+            BOOST_LOG_SEV(lg, trace) << "Mapping file: " << f.generic_string();
+
+            const auto n(f.stem().string());
+            const auto mappings(h.hydrate(f));
+            const auto pair(std::make_pair(n, mappings));
+            const auto inserted(r.insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_mapping_set << n;
+                BOOST_THROW_EXCEPTION(
+                    building_error(duplicate_mapping_set + n));
+            }
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Read all mappings. Result: " << r;
+    return r;
+}
+
+void mapping_set_repository_factory::validate_mappings(
+    const std::unordered_map<std::string, std::list<mapping>>& mappings) const {
+    mappings_validator v;
+    v.validate(mappings);
+}
 
 void mapping_set_repository_factory::
 insert(const std::string& upsilon_id, const std::string& lam_id,
@@ -163,7 +220,7 @@ void mapping_set_repository_factory::populate_mapping_set(
 }
 
 mapping_set_repository mapping_set_repository_factory::
-make(const std::unordered_map<std::string, std::list<mapping>>&
+create_repository(const std::unordered_map<std::string, std::list<mapping>>&
     mappings_by_set_name) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started creating mapping set repository.";
@@ -193,6 +250,13 @@ make(const std::unordered_map<std::string, std::list<mapping>>&
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating mapping set repository.";
     return r;
+}
+
+mapping_set_repository mapping_set_repository_factory::make(
+    const std::vector<boost::filesystem::path>& dirs) const {
+    const auto mappings(obtain_mappings(dirs));
+    validate_mappings(mappings);
+    return create_repository(mappings);
 }
 
 } }

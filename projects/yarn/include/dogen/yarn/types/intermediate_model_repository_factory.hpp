@@ -53,23 +53,10 @@ namespace yarn {
 class intermediate_model_repository_factory final {
 private:
     /**
-     * @brief Obtains all the element id mappings.
-     */
-    std::unordered_map<std::string, std::list<mapping>> obtain_mappings(
-        const std::vector<boost::filesystem::path>& dirs) const;
-
-    /**
-     * @brief Ensures the mappings are valid.
-     */
-    void validate_mappings(const std::unordered_map<std::string,
-        std::list<mapping>>& mappings) const;
-
-    /**
      * @brief Obtain the mapping repository.
      */
     mapping_set_repository obtain_mapping_set_repository(
-        const std::unordered_map<std::string, std::list<mapping>>&
-        mappings) const;
+        const std::vector<boost::filesystem::path>& dirs) const;
 
     /**
      * @brief Obtains an intermediate model.

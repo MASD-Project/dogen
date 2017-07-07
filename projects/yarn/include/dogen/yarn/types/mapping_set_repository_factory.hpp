@@ -26,8 +26,10 @@
 #endif
 
 #include <list>
+#include <vector>
 #include <string>
 #include <unordered_map>
+#include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/mapping.hpp"
 #include "dogen/yarn/types/mapping_set.hpp"
@@ -38,6 +40,19 @@ namespace dogen {
 namespace yarn {
 
 class mapping_set_repository_factory final {
+private:
+    /**
+     * @brief Obtains all the element id mappings.
+     */
+    std::unordered_map<std::string, std::list<mapping>> obtain_mappings(
+        const std::vector<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Ensures the mappings are valid.
+     */
+    void validate_mappings(const std::unordered_map<std::string,
+        std::list<mapping>>& mappings) const;
+
 private:
     void insert(const std::string& upsilon_id, const std::string& lam_id,
         std::unordered_map<std::string, std::string>& map) const;
@@ -53,9 +68,13 @@ private:
     void populate_mapping_set(const std::list<mapping>& mappings,
         mapping_set& ms) const;
 
-public:
-    mapping_set_repository make(const std::unordered_map<std::string,
+    mapping_set_repository create_repository(
+        const std::unordered_map<std::string,
         std::list<mapping>>& mappings_by_set_name) const;
+
+public:
+    mapping_set_repository make(
+        const std::vector<boost::filesystem::path>& dirs) const;
 };
 
 } }

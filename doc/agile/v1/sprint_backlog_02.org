@@ -134,6 +134,14 @@ Tasks:
 - implement the pre-processing chain in terms of those transforms.
 - plug in the pre-processing chain into the initial target chain.
 
+*** COMPLETED Refactor mapping repository factory                     :story:
+    CLOSED: [2017-07-07 Fri 15:23]
+    CLOCK: [2017-07-07 Fri 15:11]--[2017-07-07 Fri 15:23] =>  0:12
+
+At present we are doing a lot of work in the intermediate model
+repository factory that is mapping related. It would make more sense
+to just have the mapping repository factory take on all of that work.
+
 *** Implement the references chain                                    :story:
 
 Tasks:

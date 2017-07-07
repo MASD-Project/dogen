@@ -23,18 +23,15 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/utility/filesystem/file.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/descriptor_io.hpp"
 #include "dogen/yarn/io/mapping_io.hpp"
 #include "dogen/yarn/io/mapping_set_io.hpp"
 #include "dogen/yarn/io/mapping_set_repository_io.hpp"
 #include "dogen/yarn/types/mapper.hpp"
-#include "dogen/yarn/types/mappings_hydrator.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/descriptor_factory.hpp"
 #include "dogen/yarn/types/mapping_set_repository_factory.hpp"
-#include "dogen/yarn/types/mappings_validator.hpp"
 #include "dogen/yarn/types/first_stage_expander.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 
@@ -48,66 +45,19 @@ const std::string expected_empty_repository(
 const std::string expected_target_model(
     "Expcted only the target model but found: ");
 const std::string non_absolute_target("Target path is not absolute: ");
-const std::string duplicate_mapping_set(
-    "Found more than one mapping set with name: ");
 
-const std::string mappings_dir("mappings");
 
 }
 
 namespace dogen {
 namespace yarn {
 
-std::unordered_map<std::string, std::list<mapping>>
-intermediate_model_repository_factory::
-obtain_mappings(const std::vector<boost::filesystem::path>& dirs) const {
-    BOOST_LOG_SEV(lg, debug) << "Reading all mappings.";
-
-    mappings_hydrator h;
-    std::unordered_map<std::string, std::list<mapping>> r;
-    for (const auto& top_level_dir : dirs) {
-        const boost::filesystem::path mdir(top_level_dir / mappings_dir);
-        BOOST_LOG_SEV(lg, trace) << "Mapping directory: "
-                                 << mdir.generic_string();
-
-        using namespace dogen::utility::filesystem;
-        const auto files(find_files(mdir));
-
-        BOOST_LOG_SEV(lg, trace) << "Found " << files.size()
-                                 << " mapping files.";
-
-        for (const auto& f : files) {
-            BOOST_LOG_SEV(lg, trace) << "Mapping file: " << f.generic_string();
-
-            const auto n(f.stem().string());
-            const auto mappings(h.hydrate(f));
-            const auto pair(std::make_pair(n, mappings));
-            const auto inserted(r.insert(pair).second);
-            if (!inserted) {
-                BOOST_LOG_SEV(lg, error) << duplicate_mapping_set << n;
-                BOOST_THROW_EXCEPTION(
-                    building_error(duplicate_mapping_set + n));
-            }
-        }
-    }
-
-    BOOST_LOG_SEV(lg, debug) << "Read all mappings. Result: " << r;
-    return r;
-}
-
-void intermediate_model_repository_factory::validate_mappings(
-    const std::unordered_map<std::string, std::list<mapping>>& mappings) const {
-    mappings_validator v;
-    v.validate(mappings);
-}
-
 mapping_set_repository
-intermediate_model_repository_factory::
-obtain_mapping_set_repository(const std::unordered_map<std::string,
-    std::list<mapping>>& mappings) const {
+intermediate_model_repository_factory::obtain_mapping_set_repository(
+    const std::vector<boost::filesystem::path>& dirs) const {
     BOOST_LOG_SEV(lg, debug) << "Obtaining mapping repository.";
     mapping_set_repository_factory f;
-    const auto r(f.make(mappings));
+    const auto r(f.make(dirs));
     BOOST_LOG_SEV(lg, debug) << "Obtained mapping repository. Result: " << r;
     return r;
 }
@@ -188,9 +138,7 @@ make(const std::vector<boost::filesystem::path>& dirs,
      * We start by obtaining the mapping repository because it will be
      * used by all intermediate models.
      */
-    const auto mappings(obtain_mappings(dirs));
-    validate_mappings(mappings);
-    const auto msrp(obtain_mapping_set_repository(mappings));
+    const auto msrp(obtain_mapping_set_repository(dirs));
 
     intermediate_model_repository r;
     /*
