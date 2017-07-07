@@ -25,26 +25,36 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include <iosfwd>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Expands all primitives in model.
+ */
 class primitives_transform final {
-public:
-    primitives_transform() = default;
-    primitives_transform(const primitives_transform&) = default;
-    primitives_transform(primitives_transform&&) = default;
-    ~primitives_transform() = default;
-    primitives_transform& operator=(const primitives_transform&) = default;
+private:
+    struct type_group {
+        annotations::type is_nullable;
+        annotations::type use_type_aliasing;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+    static void populate_from_annotations(const type_group& tg, primitive& p);
 
 public:
-    bool operator==(const primitives_transform& rhs) const;
-    bool operator!=(const primitives_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, intermediate_model& im);
 };
 
 } } }

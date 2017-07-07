@@ -18,14 +18,79 @@
  * MA 02110-1301, USA.
  *
  */
+#include <ostream>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.transforms.primitives_transform"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool primitives_transform::operator==(const primitives_transform& /*rhs*/) const {
-    return true;
+std::ostream&
+operator<<(std::ostream& s, const primitives_transform::type_group& v) {
+    s << " { "
+      << "\"__type__\": " << "\"dogen::yarn::primitives_transform::type_group\""
+      << ", " << "\"is_nullable\": " << v.is_nullable << ", "
+      << "\"use_type_aliasing\": " << v.use_type_aliasing
+      << " }";
+
+    return s;
+}
+
+primitives_transform::type_group primitives_transform::
+make_type_group(const annotations::type_repository& atrp) {
+    BOOST_LOG_SEV(lg, debug) << "Creating type group.";
+
+    type_group r;
+
+    const annotations::type_repository_selector s(atrp);
+
+    const auto in(traits::primitive::is_nullable());
+    r.is_nullable = s.select_type_by_name(in);
+
+    const auto uta(traits::primitive::use_type_aliasing());
+    r.use_type_aliasing = s.select_type_by_name(uta);
+
+    BOOST_LOG_SEV(lg, debug) << "Created type group. Result" << r;
+    return r;
+}
+
+void primitives_transform::
+populate_from_annotations(const type_group& tg, primitive& p) {
+    const auto& a(p.annotation());
+    const annotations::entry_selector s(a);
+    p.is_nullable(s.get_boolean_content_or_default(tg.is_nullable));
+    p.use_type_aliasing(s.get_boolean_content_or_default(tg.use_type_aliasing));
+}
+
+void primitives_transform::
+transform(const context& ctx, intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Started expanding primitives for model: "
+                             << im.name().id();
+
+    const auto tg(make_type_group(ctx.type_repository()));
+    for (auto& pair : im.primitives()) {
+        const auto& id(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
+
+        auto& p(pair.second);
+        populate_from_annotations(tg, p);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding primitives for model.";
 }
 
 } } }

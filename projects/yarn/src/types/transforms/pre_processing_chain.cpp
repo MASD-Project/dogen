@@ -18,12 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/parsing_transform.hpp"
-#include "dogen/yarn/types/transforms/type_params_transform.hpp"
-#include "dogen/yarn/types/transforms/language_transform.hpp"
-#include "dogen/yarn/types/transforms/origin_transform.hpp"
-#include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
+#include "dogen/yarn/types/transforms/modules_transform.hpp"
+#include "dogen/yarn/types/transforms/origin_transform.hpp"
+#include "dogen/yarn/types/transforms/language_transform.hpp"
+#include "dogen/yarn/types/transforms/type_params_transform.hpp"
+#include "dogen/yarn/types/transforms/parsing_transform.hpp"
+#include "dogen/yarn/types/transforms/primitives_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
 namespace dogen {
@@ -54,6 +55,12 @@ transform(const context& ctx, intermediate_model& im) {
      */
     type_params_transform::transform(ctx, im);
     parsing_transform::transform(ctx, im);
+
+    /*
+     * Primitive expansion requires parsing expansion to populate the
+     * underlying elements.
+     */
+    primitives_transform::transform(ctx, im);
 }
 
 } } }
