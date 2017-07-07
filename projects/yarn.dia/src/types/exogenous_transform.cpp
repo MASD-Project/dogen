@@ -77,7 +77,8 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
     return r;
 }
 
-std::string exogenous_transform::transform(const intermediate_model& /*im*/) {
+void exogenous_transform::transform(const intermediate_model& /*im*/,
+    const boost::filesystem::path& /*p*/) {
     BOOST_LOG_SEV(lg, error) << to_dia_support_unavailable;
     BOOST_THROW_EXCEPTION(frontend_error(to_dia_support_unavailable));
 }

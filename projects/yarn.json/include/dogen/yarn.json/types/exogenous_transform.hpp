@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_EXOGENOUS_TRANSFORM_HPP
-#define DOGEN_YARN_DIA_TYPES_EXOGENOUS_TRANSFORM_HPP
+#ifndef DOGEN_YARN_JSON_TYPES_EXOGENOUS_TRANSFORM_HPP
+#define DOGEN_YARN_JSON_TYPES_EXOGENOUS_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 
 namespace dogen {
 namespace yarn {
-namespace dia {
+namespace json {
 
 class exogenous_transform final :
         public yarn::transforms::exogenous_transform_interface {

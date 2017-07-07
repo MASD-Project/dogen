@@ -19,15 +19,16 @@
  *
  */
 #include <boost/throw_exception.hpp>
+#include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
-#include "dogen/yarn.json/types/frontend.hpp"
+#include "dogen/yarn.json/types/exogenous_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-const std::string id("yarn.json.frontend");
+const std::string id("yarn.json.exogenous_transform");
 auto lg(logger_factory(id));
 
 const std::string extension(".json");
@@ -38,28 +39,32 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
-frontend::~frontend() noexcept { }
+exogenous_transform::~exogenous_transform() noexcept {}
 
-std::string frontend::id() const {
+std::string exogenous_transform::id() const {
     return ::id;
 }
 
-bool frontend::can_read(const boost::filesystem::path& p) const {
-    return p.extension() == extension;
+yarn::transforms::exogenous_transform_types
+exogenous_transform::supported_transforms() const {
+    return yarn::transforms::exogenous_transform_types::bi_directional;
 }
 
-yarn::intermediate_model frontend::read(const yarn::descriptor& d) {
+bool
+exogenous_transform::can_transform(const std::string& model_identifier) const {
+    return boost::ends_with(model_identifier, extension);
+}
+
+intermediate_model
+exogenous_transform::transform(const boost::filesystem::path& p) {
     hydrator h;
-    return h.hydrate(d.path());
+    return h.hydrate(p);
 }
 
-bool frontend::can_write() const {
-    return true;
-}
-
-void frontend::write(const intermediate_model& im, const descriptor& d) {
+void exogenous_transform::
+transform(const intermediate_model& im, const boost::filesystem::path& p) {
     dehydrator dh;
-    dh.dehydrate(im, d.path());
+    dh.dehydrate(im, p);
 }
 
 } } }

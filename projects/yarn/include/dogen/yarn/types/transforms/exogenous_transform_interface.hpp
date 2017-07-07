@@ -81,23 +81,27 @@ public:
      *
      * @note This function is receiving a path to the model, rather
      * than the file contents because at the moment the exogenous
-     * transformers cannot cope with string processing - our LibXml
-     * reader has been hard-coded to read a file. In the future this
-     * will change to a string.
+     * transformers cannot cope with string processing. In the future
+     * this will change to a string.
      */
     virtual intermediate_model transform(const boost::filesystem::path& p) = 0;
 
     /**
-     * @brief Transforms the intermediate model into a string
-     * representation of the native format supported by the exogneous
-     * transformer.
+     * @brief Transforms the intermediate model into a representation
+     * of the native format supported by the exogneous transformer.
      *
      * @param im Intermediate model to transform.
      *
      * @note Method is non-const by design at the moment as some
      * exogenous transformers have state.
+     *
+     * @note This function is receiving a path to the model, rather
+     * than return the file contents because at the moment the
+     * exogenous transformers cannot cope with string processing. In
+     * the future this will change to returning a string.
      */
-    virtual std::string transform(const intermediate_model& im) = 0;
+    virtual void transform(const intermediate_model& im,
+        const boost::filesystem::path& p) = 0;
 };
 
 } } }
