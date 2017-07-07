@@ -18,22 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_FIRST_STAGE_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_FIRST_STAGE_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_VALIDATION_ERROR_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_VALIDATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class first_stage_validator final {
+class validation_error : public virtual std::exception, public virtual boost::exception {
 public:
-    static void validate(const intermediate_model& im);
+    validation_error() = default;
+    ~validation_error() noexcept = default;
+
+public:
+    explicit validation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
 };
 
 } } }

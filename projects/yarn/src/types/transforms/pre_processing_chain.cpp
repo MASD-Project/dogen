@@ -25,6 +25,7 @@
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
+#include "dogen/yarn/types/transforms/first_stage_validator.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
 namespace dogen {
@@ -61,6 +62,11 @@ transform(const context& ctx, intermediate_model& im) {
      * underlying elements.
      */
     primitives_transform::transform(ctx, im);
+
+    /*
+     * Ensure the model is valid.
+     */
+    first_stage_validator::validate(im);
 }
 
 } } }
