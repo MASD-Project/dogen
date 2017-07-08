@@ -18,14 +18,78 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.containment_transform"));
+
+const std::string global_module_doc("Module that represents the global scope.");
+const std::string model_already_has_global_module(
+    "Found a global module in model: ");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool containment_transform::operator==(const containment_transform& /*rhs*/) const {
-    return true;
+template<typename AssociativeContainerOfContainable>
+inline void add_containing_module_to_non_contained_entities(
+    const name& container_name, AssociativeContainerOfContainable& c) {
+    for (auto& pair : c) {
+        auto& s(pair.second);
+        if (!s.contained_by())
+            s.contained_by(container_name);
+    }
+}
+
+module containment_transform::create_global_module(const origin_types ot) {
+    module r;
+    r.name().id("<global module>");
+    r.origin_type(ot);
+    r.documentation(global_module_doc);
+    r.is_global_module(true);
+    return r;
+}
+
+void containment_transform::inject_global_module(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
+                             << im.name().id();
+
+    const auto gm(create_global_module(im.origin_type()));
+    const auto gmn(gm.name());
+    const auto i(im.modules().find(gmn.id()));
+    if (i != im.modules().end()) {
+        const auto id(im.name().id());
+        BOOST_LOG_SEV(lg, error) << model_already_has_global_module << id;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(model_already_has_global_module + id));
+    }
+    im.modules().insert(std::make_pair(gmn.id(), gm));
+
+    add_containing_module_to_non_contained_entities(gmn, im.modules());
+    add_containing_module_to_non_contained_entities(gmn, im.concepts());
+    add_containing_module_to_non_contained_entities(gmn, im.builtins());
+    add_containing_module_to_non_contained_entities(gmn, im.enumerations());
+    add_containing_module_to_non_contained_entities(gmn, im.objects());
+    add_containing_module_to_non_contained_entities(gmn, im.exceptions());
+    add_containing_module_to_non_contained_entities(gmn, im.visitors());
+    add_containing_module_to_non_contained_entities(gmn, im.primitives());
+
+    BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
+}
+
+void containment_transform::transform(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding containment for: " << im.name().id();
+    inject_global_module(im);
+    BOOST_LOG_SEV(lg, debug) << "Finished expanding containment.";
 }
 
 } } }

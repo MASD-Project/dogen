@@ -24,6 +24,7 @@
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
+#include "dogen/yarn/types/transforms/containment_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -62,6 +63,7 @@ transform(const context& ctx, intermediate_model& im) {
      */
     stereotypes_transform::transform(im);
     concepts_transform::transform(im);
+    containment_transform::transform(im);
 }
 
 } } }

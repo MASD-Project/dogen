@@ -25,26 +25,34 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/origin_types.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class containment_transform final {
-public:
-    containment_transform() = default;
-    containment_transform(const containment_transform&) = default;
-    containment_transform(containment_transform&&) = default;
-    ~containment_transform() = default;
-    containment_transform& operator=(const containment_transform&) = default;
+private:
+    /**
+     * @brief Creates the module to represent the global namespace.
+     */
+    static module create_global_module(const origin_types ot);
+
+    /**
+     * @brief Injects the global module, and makes all modules that do
+     * not have a containing namespace be contained by it.
+     */
+    static void inject_global_module(intermediate_model& im);
 
 public:
-    bool operator==(const containment_transform& rhs) const;
-    bool operator!=(const containment_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
 
+    /**
+     * @brief Updates the containment relationships in the model.
+     *
+     * @param m Yarn model to operate on.
+     */
+    static void transform(intermediate_model& im);
 };
 
 } } }
