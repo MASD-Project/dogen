@@ -18,14 +18,212 @@
  * MA 02110-1301, USA.
  *
  */
+#include <set>
+#include <list>
+#include <unordered_map>
+#include <unordered_set>
+#include <boost/lexical_cast.hpp>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.attributes_transform"));
+
+const std::string relationship_not_found(
+    "Could not find relationship in object. Details: ");
+const std::string object_not_found("Object not found in model: ");
+const std::string concept_not_found("Concept not found in concept container: ");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool attributes_transform::operator==(const attributes_transform& /*rhs*/) const {
-    return true;
+object& attributes_transform::
+find_object(const name& n, intermediate_model& im) {
+    const auto id(n.id());
+    auto i(im.objects().find(id));
+    if (i == im.objects().end()) {
+        BOOST_LOG_SEV(lg, error) << object_not_found << id;
+        BOOST_THROW_EXCEPTION(transformation_error(object_not_found + id));
+    }
+    return i->second;
+}
+
+concept& attributes_transform::
+find_concept(const name& n, intermediate_model& im) {
+    const auto& id(n.id());
+    auto i(im.concepts().find(id));
+    if (i == im.concepts().end()) {
+        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
+        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
+    }
+    return i->second;
+}
+
+void attributes_transform::expand_object(object& o, intermediate_model& im,
+    std::unordered_set<std::string>& processed_ids) {
+    const auto id(o.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
+
+    if (processed_ids.find(id) != processed_ids.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Object already processed: " << id;
+        return;
+    }
+
+    /*
+     * Setup fluency and immutability on all local attributes.
+     */
+    if (o.is_fluent() || o.is_immutable()) {
+        for (auto& attr : o.local_attributes()) {
+            attr.is_fluent(o.is_fluent());
+            attr.is_immutable(o.is_immutable());
+        }
+    }
+
+    /*
+     * Grab all of the concept attributes in one go, and them add them
+     * to the local attributes at the beginning. The idea is to keep
+     * changes from rippling through, but there is no evidence that
+     * this order is more effective than other alternatives.
+     */
+    std::list<attribute> concept_attributes;
+    for (const auto& n : o.modeled_concepts()) {
+        auto& c(find_concept(n, im));
+        const auto& p(c.local_attributes());
+        concept_attributes.insert(concept_attributes.end(), p.begin(), p.end());
+    }
+
+    /*
+     * If we are a fluent or an immutable object, we need to mark all
+     * properties we've inherited via concepts - these have values
+     * that are specific to the object modeling the concept. This is
+     * actually a bit of a problem because this means we are modeling
+     * different concepts.
+     */
+    if (o.is_fluent() || o.is_immutable()) {
+        for(auto& attr : concept_attributes) {
+            attr.is_fluent(o.is_fluent());
+            attr.is_immutable(o.is_immutable());
+        }
+    }
+
+    o.local_attributes().insert(o.local_attributes().begin(),
+        concept_attributes.begin(), concept_attributes.end());
+
+    /*
+     * Expand all attribute names. At this point, we've only populated
+     * attribute simple names. Note that we are doing this after
+     * expanding concept attributes. This is because we want to ensure
+     * the attributes are located correctly in element space: they are
+     * no longer part of the concept but are now part of the object.
+     */
+    yarn::name_factory f;
+    for (auto& attr : o.local_attributes()) {
+        const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
+        attr.name(n);
+    }
+
+    /*
+     * Now handle all of the inherited properties. We insert our
+     * parent's properties first on our all attributes container by
+     * design; local attributes are last. This minimises changes when
+     * new properties are added to the descendant.
+     */
+    for (const auto& pn : o.parents()) {
+        auto& parent(find_object(pn, im));
+        expand_object(parent, im, processed_ids);
+
+        /*
+         * Note that we insert the parent and its attributes
+         * _regardless_ of whether it has any attributes or not into
+         * the inherited attributes container.
+         */
+        const auto& pattrs(parent.all_attributes());
+        o.inherited_attributes().insert(std::make_pair(pn, pattrs));
+
+        if (!pattrs.empty()) {
+            auto& attrs(o.all_attributes());
+            attrs.insert(attrs.end(), pattrs.begin(), pattrs.end());
+        }
+    }
+
+    o.all_attributes().insert(o.all_attributes().end(),
+        o.local_attributes().begin(), o.local_attributes().end());
+
+    processed_ids.insert(id);
+}
+
+void attributes_transform::expand_objects(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
+
+    std::unordered_set<std::string> processed_ids;
+    for (auto& pair : im.objects()) {
+        auto& o(pair.second);
+        expand_object(o, im, processed_ids);
+    }
+}
+
+void attributes_transform::expand_concept(concept& c, intermediate_model& im,
+    std::unordered_set<std::string>& processed_ids) {
+    const auto id(c.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Expanding concept: " << id;
+
+    if (processed_ids.find(c.name().id()) != processed_ids.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
+        return;
+    }
+
+    /*
+     * Expand all attribute names. At this point, we've only populated
+     * attribute simple names.
+     */
+    yarn::name_factory f;
+    for (auto& attr : c.local_attributes()) {
+        const auto n(f.build_attribute_name(c.name(), attr.name().simple()));
+        attr.name(n);
+    }
+
+    /*
+     * Setup the all attributes and inherited attributes containers.
+     */
+    c.all_attributes().insert(c.all_attributes().end(),
+        c.local_attributes().begin(), c.local_attributes().end());
+
+    for (const auto& n : c.refines()) {
+        auto& parent(find_concept(n, im));
+        expand_concept(parent, im, processed_ids);
+
+        c.inherited_attributes().insert(
+            std::make_pair(parent.name(), parent.local_attributes()));
+
+        c.all_attributes().insert(c.all_attributes().end(),
+            parent.local_attributes().begin(), parent.local_attributes().end());
+    }
+    processed_ids.insert(id);
+}
+
+void attributes_transform::expand_concepts(intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expanding concepts: " << im.concepts().size();
+
+    std::unordered_set<std::string> processed_ids;
+    for (auto& pair : im.concepts()) {
+        auto& c(pair.second);
+        expand_concept(c, im, processed_ids);
+    }
+}
+
+void attributes_transform::transform(intermediate_model& im) {
+    expand_concepts(im);
+    expand_objects(im);
 }
 
 } } }

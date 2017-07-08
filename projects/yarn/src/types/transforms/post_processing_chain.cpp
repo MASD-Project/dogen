@@ -27,6 +27,7 @@
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
+#include "dogen/yarn/types/transforms/attributes_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -80,6 +81,17 @@ transform(const context& ctx, intermediate_model& im) {
      * expansion.
      */
     resolver_transform::transform(idx, im);
+
+    /*
+     * We can only expand attributes after we've expanded:
+     *
+     * - concepts, as we rely on all attributes obtained from modeling
+     *   a concept already being present.
+     * - stereotypes, as we need settings such as immutability and
+     *   fluency to be populated.
+     *  - resolution, else we will copy unresolved attributes.
+     */
+    attributes_transform::transform(im);
 }
 
 } } }
