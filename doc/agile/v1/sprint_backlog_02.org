@@ -177,6 +177,15 @@ Tasks:
 - consider using a multi-threaded approach. If its too hard we should
   just stick to the single-threaded implementation we have at present.
 
+Notes:
+
+- add a reference extractor to extract all paths
+- make references chain PIM - but language must match target's. this
+  won't work: target LAM, converts to C#, reference is C#; reference
+  gets dropped. We need to supply all of the languages (input and
+  output) and if there is a match, we need to keep the reference.
+- handle PSM in model generation chain, for both target and references
+
 *** Implement the model generation chain                              :story:
 
 Tasks:
