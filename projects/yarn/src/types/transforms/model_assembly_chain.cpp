@@ -22,6 +22,7 @@
 #include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
+#include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
 
 namespace {
@@ -54,10 +55,10 @@ model model_assembly_chain::transform(const context& ctx, const languages l,
     const std::list<intermediate_model>& refs) {
 
     auto mm(obtain_merged_model(ctx, l , target, refs));
+    post_processing_chain::transform(ctx, mm);
 
     model r;
     return r;
-
 }
 
 } } }

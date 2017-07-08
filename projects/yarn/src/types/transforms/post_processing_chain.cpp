@@ -18,14 +18,15 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool post_processing_chain::operator==(const post_processing_chain& /*rhs*/) const {
-    return true;
+void post_processing_chain::
+transform(const context& /*ctx*/, intermediate_model& /*im*/) {
 }
 
 } } }
