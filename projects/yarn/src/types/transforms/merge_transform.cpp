@@ -18,14 +18,97 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.merge_transform"));
+
+/**
+ * @brief Copies the associative container across.
+ */
+template<typename ElementAssociativeContainer>
+void copy(const ElementAssociativeContainer& src,
+    ElementAssociativeContainer& dst) {
+    for (const auto& pair : src)
+        dst.insert(pair);
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool merge_transform::operator==(const merge_transform& /*rhs*/) const {
-    return true;
+void merge_transform::merge(const intermediate_model& src,
+    intermediate_model& dst) {
+
+    /*
+     * Skip any reference models for which the input language does
+     * not match.
+     *
+     * FIXME: we should just throw.
+     */
+    const auto& id(src.name().id());
+    if (src.input_language() != dst.input_language()) {
+        BOOST_LOG_SEV(lg, debug) << "Skipping model as language does "
+                                 << " not match target's. Model: "
+                                 << id << " Input language: "
+                                 << src.input_language();
+        return;
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Merging source model: '"
+                             << src.name().id()
+                             << " modules: " << src.modules().size()
+                             << " concepts: " << src.concepts().size()
+                             << " builtins: " << src.builtins().size()
+                             << " enumerations: " << src.enumerations().size()
+                             << " primitives: " << src.primitives().size()
+                             << " objects: " << src.objects().size()
+                             << " exceptions: " << src.exceptions().size()
+                             << " visitors: " << src.visitors().size();
+
+    copy(src.modules(), dst.modules());
+    copy(src.concepts(), dst.concepts());
+    copy(src.builtins(), dst.builtins());
+    copy(src.enumerations(), dst.enumerations());
+    copy(src.primitives(), dst.primitives());
+    copy(src.objects(), dst.objects());
+    copy(src.exceptions(), dst.exceptions());
+    copy(src.visitors(), dst.visitors());
+
+    /*
+     * Update the references of the merged model.
+     */
+    const auto p(std::make_pair(src.name(), src.origin_type()));
+    dst.references().insert(p);
+}
+
+intermediate_model
+merge_transform::transform(const intermediate_model& target,
+    const std::list<intermediate_model>& refs) {
+    BOOST_LOG_SEV(lg, debug) << "Executing the merge transform.";
+
+    /*
+     * We start by making a complete copy of the target model, which
+     * initialises all of the relevant parts of the merged model such
+     * as leaves etc as well as all of the element containers.
+     */
+    intermediate_model r(target);
+
+    /*
+     * Now we push all of the references into the merged model.
+     */
+    for (const auto& ref : refs)
+        merge(ref, r);
+
+    BOOST_LOG_SEV(lg, debug) << "Executed the merge transform.";
+    return r;
 }
 
 } } }

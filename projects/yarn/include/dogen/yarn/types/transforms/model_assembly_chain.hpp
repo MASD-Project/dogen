@@ -36,9 +36,15 @@ namespace yarn {
 namespace transforms {
 
 class model_assembly_chain final {
+private:
+    static intermediate_model obtain_merged_model(const context& ctx,
+        const languages l, const intermediate_model& target,
+        const std::list<intermediate_model>& refs);
+
 public:
     static model transform(const context& ctx, const languages l,
-        const std::list<intermediate_model>& ims);
+        const intermediate_model& target,
+        const std::list<intermediate_model>& refs);
 };
 
 } } }

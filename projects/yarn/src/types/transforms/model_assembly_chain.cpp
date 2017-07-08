@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
 
 namespace {
@@ -34,13 +35,25 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-model model_assembly_chain::transform(const context& ctx, const languages l,
-    const std::list<intermediate_model>& ims) {
+intermediate_model model_assembly_chain::obtain_merged_model(const context& ctx,
+    const languages l, const intermediate_model& target,
+    const std::list<intermediate_model>& refs) {
 
     const mapper mp(ctx.mapping_repository());
-    for (const auto& im : ims) {
-        const auto mm(mp.map(im.input_language(), l, im));
-    }
+    const auto mapped_target(mp.map(target.input_language(), l, target));
+
+    std::list<intermediate_model> mapped_refs;
+    for (const auto& ref : refs)
+        mapped_refs.push_back(mp.map(ref.input_language(), l, ref));
+
+    return merge_transform::transform(mapped_target, mapped_refs);
+}
+
+model model_assembly_chain::transform(const context& ctx, const languages l,
+    const intermediate_model& target,
+    const std::list<intermediate_model>& refs) {
+
+    auto mm(obtain_merged_model(ctx, l , target, refs));
 
     model r;
     return r;

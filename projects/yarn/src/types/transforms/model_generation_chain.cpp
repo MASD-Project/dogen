@@ -54,7 +54,7 @@ model_generation_chain::transform(const context& ctx) {
      * same; or it is a Platform Independent Model (PIM), making use
      * of LAM types (the Language Agnostic Model).
      */
-    const auto it(initial_target_chain::transform(ctx));
+    const auto target(initial_target_chain::transform(ctx));
 
     /*
      * Obain the references. Note that we are filtering them to only
@@ -71,16 +71,15 @@ model_generation_chain::transform(const context& ctx) {
      * - the target model is a PSM and the reference model is also a
      *   PSM, and they share the same language.
      */
-    auto ims(references_chain::transform(ctx, it));
-    ims.push_back(it); // FIXME: forward?
+    const auto refs(references_chain::transform(ctx, target));
 
     /*
      * Execute the assembly chain for each of the requested output
      * languages.
      */
     std::list<model> r;
-    for (const auto ol : it.output_languages())
-        r.push_back(model_assembly_chain::transform(ctx, ol, ims));
+    for (const auto ol : target.output_languages())
+        r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
 
     return r;
 }

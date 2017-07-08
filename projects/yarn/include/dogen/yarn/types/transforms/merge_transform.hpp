@@ -25,26 +25,47 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Combines a number of intermediate models into a single
+ * intermediate model.
+ *
+ * The role of the merger is to aggregate a number of intermediate
+ * models into a single, coherent model called the intermediate
+ * @e merged model.
+ *
+ * There are two kinds of intermediate models:
+ *
+ * @li the intermediate @e target model: the model which the user is
+ * focusing on, most likely with the intention of code generating
+ * it. There can only be one target model for a given merge.
+ *
+ * @li the intermediate @e reference models; a model is a reference
+ * model if the target model refers to one or more of its types - or a
+ * model referred to by the target model refers to its types and so
+ * on.
+ *
+ * In summary, the target model cannot be evaluated without the
+ * definition of all models it references, directly or
+ * indirectly. Merging will fail if one or more of the referenced
+ * models have not been supplied.
+ */
 class merge_transform final {
-public:
-    merge_transform() = default;
-    merge_transform(const merge_transform&) = default;
-    merge_transform(merge_transform&&) = default;
-    ~merge_transform() = default;
-    merge_transform& operator=(const merge_transform&) = default;
+private:
+    static void merge(const intermediate_model& src, intermediate_model& dst);
 
 public:
-    bool operator==(const merge_transform& rhs) const;
-    bool operator!=(const merge_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static intermediate_model transform(const intermediate_model& target,
+        const std::list<intermediate_model>& refs);
 };
 
 } } }
