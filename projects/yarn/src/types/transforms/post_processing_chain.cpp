@@ -23,6 +23,7 @@
 #include "dogen/yarn/types/transforms/indexer.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
+#include "dogen/yarn/types/transforms/concepts_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -32,7 +33,7 @@ namespace transforms {
 void post_processing_chain::
 transform(const context& ctx, intermediate_model& im) {
     /*
-     * Enumeration expansion must be done after merging as we need the
+     * Enumeration transform must be done after merging as we need the
      * built-in types; these are required in order to find the default
      * enumeration underlying element.
      */
@@ -47,19 +48,20 @@ transform(const context& ctx, intermediate_model& im) {
     const auto idx(indexer::index(im));
 
     /*
-     * We must expand generalisation relationships before we expand
-     * stereotypes because we need to know about leaves before we can
-     * generate visitors. Note also that generalisations must be
-     * expanded after merging models because we may inherit across
-     * models.
+     * We must expand generalisation relationships before we apply the
+     * stereotypes transform because we need to know about leaves
+     * before we can generate visitors. Note also that generalisations
+     * must be expanded after merging models because we may inherit
+     * across models.
      */
     generalization_transform::transform(ctx, idx, im);
 
     /*
-     * Stereotypes expansion must be done before concepts because we
+     * Stereotypes transform must be done before concepts because we
      * obtain concept information from the stereotypes.
      */
     stereotypes_transform::transform(im);
+    concepts_transform::transform(im);
 }
 
 } } }
