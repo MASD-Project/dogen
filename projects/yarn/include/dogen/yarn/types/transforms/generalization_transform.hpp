@@ -25,26 +25,48 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <unordered_set>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/transforms/indices.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class generalization_transform final {
-public:
-    generalization_transform() = default;
-    generalization_transform(const generalization_transform&) = default;
-    generalization_transform(generalization_transform&&) = default;
-    ~generalization_transform() = default;
-    generalization_transform& operator=(const generalization_transform&) = default;
+private:
+    struct type_group {
+        annotations::type is_final;
+    };
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static boost::optional<bool> make_is_final(const type_group& tg,
+        const annotations::annotation& a);
+
+private:
+    static std::unordered_set<std::string>
+    update_and_collect_parent_ids(const indices& idx,
+        intermediate_model& im);
+
+    static void populate_properties_up_the_generalization_tree(
+        const type_group& tg, const yarn::name& leaf,
+        intermediate_model& im, yarn::object& o);
+
+    static void populate_generalizable_properties(const type_group& tg,
+        const std::unordered_set<std::string>& parent_ids,
+        intermediate_model& im);
+
+    static void sort_leaves(intermediate_model& im);
 
 public:
-    bool operator==(const generalization_transform& rhs) const;
-    bool operator!=(const generalization_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void
+    transform(const context& ctx, const indices& idx, intermediate_model& im);
 };
 
 } } }

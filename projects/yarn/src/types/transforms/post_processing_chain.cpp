@@ -19,8 +19,9 @@
  *
  */
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/indexer.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
+#include "dogen/yarn/types/transforms/indexer.hpp"
+#include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -43,6 +44,15 @@ transform(const context& ctx, intermediate_model& im) {
      * major problem.
      */
     const auto idx(indexer::index(im));
+
+    /*
+     * We must expand generalisation relationships before we expand
+     * stereotypes because we need to know about leaves before we can
+     * generate visitors. Note also that generalisations must be
+     * expanded after merging models because we may inherit across
+     * models.
+     */
+    generalization_transform::transform(ctx, idx, im);
 }
 
 } } }

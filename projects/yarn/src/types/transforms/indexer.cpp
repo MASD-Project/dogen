@@ -22,7 +22,6 @@
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/io/transforms/indices_io.hpp"
 #include "dogen/yarn/types/transforms/indexer.hpp"
-#include "dogen/yarn/types/transforms/indexer.hpp"
 
 namespace {
 

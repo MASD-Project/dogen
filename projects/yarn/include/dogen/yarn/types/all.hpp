@@ -141,6 +141,7 @@
 #include "dogen/yarn/types/external_expander_registrar.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
+#include "dogen/yarn/types/transforms/resolution_error.hpp"
 #include "dogen/yarn/types/transforms/validation_error.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
