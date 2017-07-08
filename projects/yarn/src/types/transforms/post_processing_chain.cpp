@@ -28,6 +28,7 @@
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
+#include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -92,6 +93,13 @@ transform(const context& ctx, intermediate_model& im) {
      *  - resolution, else we will copy unresolved attributes.
      */
     attributes_transform::transform(im);
+
+    /*
+     * We must expand associations after attributes have been expanded
+     * as it relies on the various attribute containers being
+     * populated.
+     */
+    associations_transform::transform(im);
 }
 
 } } }
