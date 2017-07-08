@@ -24,8 +24,6 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool external_transform_interface::operator==(const external_transform_interface& /*rhs*/) const {
-    return true;
-}
+external_transform_interface::~external_transform_interface() noexcept { }
 
 } } }

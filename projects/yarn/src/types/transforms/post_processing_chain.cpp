@@ -30,6 +30,7 @@
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
+#include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -102,6 +103,12 @@ transform(const context& ctx, intermediate_model& im) {
      */
     associations_transform::transform(im);
     generability_transform::transform(im);
+
+    /*
+     * We can perform external expansion last as no one should be
+     * relying on these expansions. These are kernel specific.
+     */
+    // external_transforms_chain::transform(ctx, im);
 }
 
 } } }

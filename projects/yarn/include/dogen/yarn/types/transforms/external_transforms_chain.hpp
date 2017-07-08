@@ -25,7 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+
 
 namespace dogen {
 namespace yarn {
@@ -33,19 +38,28 @@ namespace transforms {
 
 class external_transforms_chain final {
 public:
-    external_transforms_chain() = default;
-    external_transforms_chain(const external_transforms_chain&) = default;
-    external_transforms_chain(external_transforms_chain&&) = default;
-    ~external_transforms_chain() = default;
-    external_transforms_chain& operator=(const external_transforms_chain&) = default;
+    /**
+     * @brief Registrar that keeps track of the available external
+     * transforms.
+     */
+    static external_transform_registrar& registrar();
 
 public:
-    bool operator==(const external_transforms_chain& rhs) const;
-    bool operator!=(const external_transforms_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    static void transform(const context& ctx, intermediate_model& im);
 
+private:
+    static std::shared_ptr<external_transform_registrar> registrar_;
 };
+
+/*
+ * Helper method to register external transforms.
+ */
+template<typename ExternalTransform>
+inline void register_external_transform() {
+    auto t(std::make_shared<ExternalTransform>());
+    auto& rg(external_transforms_chain::registrar());
+    rg.register_external_transform(t);
+}
 
 } } }
 

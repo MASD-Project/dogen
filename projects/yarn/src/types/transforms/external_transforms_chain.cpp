@@ -18,14 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.external_transforms_chain"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool external_transforms_chain::operator==(const external_transforms_chain& /*rhs*/) const {
-    return true;
+std::shared_ptr<external_transform_registrar>
+external_transforms_chain::registrar_;
+
+external_transform_registrar& external_transforms_chain::registrar() {
+    if (!registrar_)
+        registrar_ = std::make_shared<external_transform_registrar>();
+
+    return *registrar_;
+}
+
+void external_transforms_chain::
+transform(const context& ctx, intermediate_model& im) {
+    const auto id(im.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Performing external transforms on: " << id;
+
+    auto& rg(registrar());
+    rg.validate();
+
+    for (const auto& et : rg.external_transforms())
+        et->transform(ctx, im);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished performing external transforms.";
 }
 
 } } }

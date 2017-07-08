@@ -25,26 +25,27 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <string>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class external_transform_interface final {
+class external_transform_interface {
 public:
     external_transform_interface() = default;
-    external_transform_interface(const external_transform_interface&) = default;
+    external_transform_interface(const external_transform_interface&) = delete;
     external_transform_interface(external_transform_interface&&) = default;
-    ~external_transform_interface() = default;
-    external_transform_interface& operator=(const external_transform_interface&) = default;
+    virtual ~external_transform_interface() noexcept = 0;
 
 public:
-    bool operator==(const external_transform_interface& rhs) const;
-    bool operator!=(const external_transform_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    virtual std::string id() const = 0;
+    virtual void
+    transform(const context& ctx, intermediate_model& im) const = 0;
 };
 
 } } }

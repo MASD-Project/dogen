@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <memory>
+#include "dogen/yarn/types/transforms/external_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +35,30 @@ namespace transforms {
 
 class external_transform_registrar final {
 public:
-    external_transform_registrar() = default;
-    external_transform_registrar(const external_transform_registrar&) = default;
-    external_transform_registrar(external_transform_registrar&&) = default;
-    ~external_transform_registrar() = default;
-    external_transform_registrar& operator=(const external_transform_registrar&) = default;
+    /*
+     * @brief Registers a given external transform.
+     *
+     * @pre Pointer must not be null.
+     */
+    void register_external_transform(
+        std::shared_ptr<const external_transform_interface> t);
 
 public:
-    bool operator==(const external_transform_registrar& rhs) const;
-    bool operator!=(const external_transform_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
+public:
+    /**
+     * @brief Returns all of the registered external transforms.
+     */
+    std::list<std::shared_ptr<const external_transform_interface>>
+    external_transforms() const;
+
+private:
+    std::list<std::shared_ptr<const external_transform_interface>>
+    external_transforms_;
 };
 
 } } }
