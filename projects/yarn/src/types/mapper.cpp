@@ -189,6 +189,12 @@ map_attributes(const mapping_context& mc, std::list<attribute>& attrs) const {
         attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
 }
 
+bool mapper::is_mappable(const languages from, const languages to) const {
+    return from == to ||
+        from == languages::upsilon ||
+        from == languages::language_agnostic;
+}
+
 intermediate_model mapper::map(const languages from, const languages to,
     const intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();

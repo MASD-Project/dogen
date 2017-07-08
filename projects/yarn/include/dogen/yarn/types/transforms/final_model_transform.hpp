@@ -25,26 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class final_model_transform final {
-public:
-    final_model_transform() = default;
-    final_model_transform(const final_model_transform&) = default;
-    final_model_transform(final_model_transform&&) = default;
-    ~final_model_transform() = default;
-    final_model_transform& operator=(const final_model_transform&) = default;
+private:
+    static std::size_t compute_total_size(const intermediate_model& im);
 
 public:
-    bool operator==(const final_model_transform& rhs) const;
-    bool operator!=(const final_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static model transform(const intermediate_model& im);
 };
 
 } } }

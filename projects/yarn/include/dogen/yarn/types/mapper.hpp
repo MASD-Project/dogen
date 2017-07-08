@@ -59,6 +59,7 @@ private:
         std::list<attribute>& attrs) const;
 
 public:
+    bool is_mappable(const languages from, const languages to) const;
     intermediate_model map(const languages from, const languages to,
         const intermediate_model& im) const;
 

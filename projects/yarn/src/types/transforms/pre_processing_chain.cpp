@@ -112,11 +112,15 @@ bool pre_processing_chain::try_transform(const context& ctx,
     intermediate_model& im) {
     /*
      * We must apply the first set of transforms because language
-     * expansion is required; we only want to process those types
-     * which are of the same language as target.
+     * expansion is required.
      */
     apply_first_set_of_transforms(ctx, im);
-    if (is_language_relevant(relevant_languages, im))
+
+    /*
+     * Now we can check the predicate: we only want to process those
+     * types which are of the same language as target.
+     */
+    if (!is_language_relevant(relevant_languages, im))
         return false;
 
     apply_second_set_of_transforms(ctx, im);

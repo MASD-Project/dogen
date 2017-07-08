@@ -37,7 +37,6 @@ const std::string duplicate_qualified_name("Duplicate qualified name: ");
 const std::string expected_one_output_language(
     "Expected exactly one output language.");
 
-
 }
 
 namespace dogen {
