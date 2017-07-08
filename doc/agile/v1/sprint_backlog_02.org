@@ -12,27 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-08 Sat 20:53]
+#+CAPTION: Clock summary at [2017-07-08 Sat 20:59]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *14:52* |       |      | 100.0 |
+| *Total time*                                                                | *14:57* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 14:52   |       |      | 100.0 |
-| Active                                                                      |         | 14:52 |      | 100.0 |
+| Stories                                                                     | 14:57   |       |      | 100.0 |
+| Active                                                                      |         | 14:57 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   5.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   2.7 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   8.1 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  28.1 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |  10.7 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   8.0 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  28.0 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |  10.6 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   1.3 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   4.1 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   2.2 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |  18.3 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |  18.2 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   4.5 |
-| COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.5 |
+| COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.4 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   5.6 |
-| STARTED Implement the post-processing chain                                 |         |       | 1:07 |   7.5 |
+| STARTED Implement the post-processing chain                                 |         |       | 1:12 |   8.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -227,6 +227,7 @@ Tasks:
 - plug it in the model generation chain.
 
 *** STARTED Implement the post-processing chain                       :story:
+    CLOCK: [2017-07-08 Sat 20:54]--[2017-07-08 Sat 20:59] =>  0:05
     CLOCK: [2017-07-08 Sat 20:27]--[2017-07-08 Sat 20:53] =>  0:26
     CLOCK: [2017-07-08 Sat 20:21]--[2017-07-08 Sat 20:26] =>  0:05
     CLOCK: [2017-07-08 Sat 20:01]--[2017-07-08 Sat 20:20] =>  0:19

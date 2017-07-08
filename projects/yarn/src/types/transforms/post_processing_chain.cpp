@@ -22,6 +22,7 @@
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 #include "dogen/yarn/types/transforms/indexer.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
+#include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -53,6 +54,12 @@ transform(const context& ctx, intermediate_model& im) {
      * models.
      */
     generalization_transform::transform(ctx, idx, im);
+
+    /*
+     * Stereotypes expansion must be done before concepts because we
+     * obtain concept information from the stereotypes.
+     */
+    stereotypes_transform::transform(im);
 }
 
 } } }

@@ -25,26 +25,89 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <unordered_map>
+#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/hash/location_hash.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Locates objects with stereotypes and performs the required
+ * expansion.
+ */
 class stereotypes_transform final {
-public:
-    stereotypes_transform() = default;
-    stereotypes_transform(const stereotypes_transform&) = default;
-    stereotypes_transform(stereotypes_transform&&) = default;
-    ~stereotypes_transform() = default;
-    stereotypes_transform& operator=(const stereotypes_transform&) = default;
+private:
+    /**
+     * @brief If true, this stereotype is part of the list of
+     * stereotypes that are valid but require no action from this
+     * expander; it is someone else's problem.
+     */
+    static bool is_stereotype_handled_externally(const std::string& s);
+
+private:
+    struct visitor_details {
+        visitor_details(const name& b) : base(b) { }
+        visitor_details(const name& b, const name& d) : base(b), derived(d) { }
+
+        name base;
+        boost::optional<name> derived;
+    };
+
+    static std::unordered_map<location, std::list<name>>
+    bucket_leaves_by_location(const std::list<name>& leaves);
+
+    static void add_visitor_to_model(const visitor& v, intermediate_model& im);
+
+    /**
+     * @brief Create a visitor for the object o.
+     *
+     * @param o visitable object
+     * @param leaves cached leaves to avoid look-up.
+     *
+     * @pre leaves must not be empty.
+     */
+    static visitor create_visitor(const object& o, const location& l,
+        const origin_types ot, const std::list<name>& leaves);
+
+    /**
+     * @brief Injects an accept operation for the given visitor, to
+     * the supplied object and all its leaves.
+     */
+    static void update_visited_leaves(const std::list<name>& leaves,
+        const visitor_details& vd, intermediate_model& im);
+
+    /**
+     * @brief Performs the expansion of the visitable stereotype.
+     */
+    static void expand_visitable(object& o, intermediate_model& im);
+
+    /**
+     * @brief Try to expand the stereotype as a concept. Returns true
+     * on success, false otherwise.
+     */
+    static bool try_expand_concept(
+        const std::string& s, object& o, const intermediate_model& im);
+
+    /**
+     * @brief Expands all stereotypes for the object.
+     */
+    static void expand(object& o, intermediate_model& im);
+
+    /**
+     * @brief Expands all stereotypes for the primitive.
+     */
+    static void expand(primitive& p);
 
 public:
-    bool operator==(const stereotypes_transform& rhs) const;
-    bool operator!=(const stereotypes_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    /**
+     * @brief Expands all stereotypes used in model.
+     */
+    static void transform(intermediate_model& im);
 };
 
 } } }
