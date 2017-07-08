@@ -18,14 +18,63 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/yarn/io/transforms/indices_io.hpp"
 #include "dogen/yarn/types/transforms/indexer.hpp"
+#include "dogen/yarn/types/transforms/indexer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.indexer"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool indexer::operator==(const indexer& /*rhs*/) const {
-    return true;
+indices indexer::index(intermediate_model& m) {
+    indices r;
+
+    for (const auto& pair : m.builtins()) {
+        const auto id(pair.first);
+        r.elements_referable_by_attributes().insert(id);
+
+        const auto& b(pair.second);
+        if (b.can_be_enumeration_underlier())
+            r.enumeration_underliers().insert(id);
+
+        if (b.can_be_primitive_underlier())
+            r.primitive_underliers().insert(id);
+    }
+
+    for (const auto& pair : m.primitives()) {
+        const auto id(pair.first);
+        r.elements_referable_by_attributes().insert(id);
+    }
+
+    for (const auto& pair : m.enumerations())
+        r.elements_referable_by_attributes().insert(pair.first);
+
+    for (const auto& pair : m.objects()) {
+        const auto id(pair.first);
+        r.elements_referable_by_attributes().insert(id);
+
+        const auto& o(pair.second);
+        if (o.type_parameters().always_in_heap())
+            r.objects_always_in_heap().insert(id);
+
+        if (o.is_abstract())
+            r.abstract_elements().insert(id);
+
+        if (o.can_be_primitive_underlier())
+            r.primitive_underliers().insert(id);
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Indices: " << r;
+    return r;
 }
 
 } } }

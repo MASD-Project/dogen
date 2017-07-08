@@ -19,6 +19,7 @@
  *
  */
 #include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/indexer.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
@@ -34,6 +35,14 @@ transform(const context& ctx, intermediate_model& im) {
      * enumeration underlying element.
      */
     enumerations_transform::transform(ctx, im);
+
+    /*
+     * Create all indices first as its needed by generalisation. Note
+     * that this means generated types (such as visitor etc) are not
+     * part of indices, which is not ideal - but for now, its not a
+     * major problem.
+     */
+    const auto idx(indexer::index(im));
 }
 
 } } }

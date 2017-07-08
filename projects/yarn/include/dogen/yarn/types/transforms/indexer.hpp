@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <unordered_set>
+#include "dogen/yarn/types/transforms/indices.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +35,7 @@ namespace transforms {
 
 class indexer final {
 public:
-    indexer() = default;
-    indexer(const indexer&) = default;
-    indexer(indexer&&) = default;
-    ~indexer() = default;
-    indexer& operator=(const indexer&) = default;
-
-public:
-    bool operator==(const indexer& rhs) const;
-    bool operator!=(const indexer& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static indices index(intermediate_model& m);
 };
 
 } } }
