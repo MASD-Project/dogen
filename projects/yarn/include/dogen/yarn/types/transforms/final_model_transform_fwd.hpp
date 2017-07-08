@@ -18,14 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_FINAL_MODEL_TRANSFORM_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_FINAL_MODEL_TRANSFORM_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool intermediate_model_transform::operator==(const intermediate_model_transform& /*rhs*/) const {
-    return true;
-}
+class final_model_transform;
 
 } } }
+
+#endif

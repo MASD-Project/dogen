@@ -18,19 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_OUTPUT_LANGUAGE_TRANSFORM_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_OUTPUT_LANGUAGE_TRANSFORM_FWD_HPP
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/mapper.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
 
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.transforms.model_assembly_chain"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class output_language_transform;
+model model_assembly_chain::transform(const context& ctx, const languages l,
+    const std::list<intermediate_model>& ims) {
+
+    const mapper mp(ctx.mapping_repository());
+    for (const auto& im : ims) {
+        const auto mm(mp.map(im.input_language(), l, im));
+    }
+
+    model r;
+    return r;
+
+}
 
 } } }
-
-#endif

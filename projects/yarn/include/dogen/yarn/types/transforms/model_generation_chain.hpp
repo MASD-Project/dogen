@@ -36,10 +36,11 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief The model generation chain is the top-level transformation
+ * responsible for obtaining a set of code-generatable models.
+ */
 class model_generation_chain final {
-private:
-    
-    
 public:
     static std::list<model> transform(const context& ctx);
 };

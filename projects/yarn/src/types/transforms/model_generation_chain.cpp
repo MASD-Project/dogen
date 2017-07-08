@@ -31,7 +31,7 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
-#include "dogen/yarn/types/transforms/output_language_transform.hpp"
+#include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 
 namespace {
@@ -71,14 +71,16 @@ model_generation_chain::transform(const context& ctx) {
      * - the target model is a PSM and the reference model is also a
      *   PSM, and they share the same language.
      */
-    const auto refs(references_chain::transform(ctx, it));
+    auto ims(references_chain::transform(ctx, it));
+    ims.push_back(it); // FIXME: forward?
 
     /*
-     * Perform the assembly transform for each of the languages.
+     * Execute the assembly chain for each of the requested output
+     * languages.
      */
     std::list<model> r;
-    // for (const auto ol : it.output_languages())
-    //     ims.push_back();
+    for (const auto ol : it.output_languages())
+        r.push_back(model_assembly_chain::transform(ctx, ol, ims));
 
     return r;
 }

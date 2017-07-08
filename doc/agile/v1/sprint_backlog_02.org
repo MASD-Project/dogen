@@ -12,23 +12,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-08 Sat 17:19]
+#+CAPTION: Clock summary at [2017-07-08 Sat 17:44]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *12:02* |       |      | 100.0 |
+| *Total time*                                                                | *12:26* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 12:02   |       |      | 100.0 |
-| Active                                                                      |         | 12:02 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   6.6 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   3.3 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |  10.0 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  34.8 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |  13.2 |
-| COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   1.7 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   5.1 |
-| COMPLETED Use forward declaration for context                               |         |       | 0:20 |   2.8 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |  22.6 |
+| Stories                                                                     | 12:26   |       |      | 100.0 |
+| Active                                                                      |         | 12:26 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   6.4 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   3.2 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   9.7 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  33.6 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |  12.7 |
+| COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   1.6 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   5.0 |
+| COMPLETED Use forward declaration for context                               |         |       | 0:20 |   2.7 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |  21.8 |
+| STARTED Implement the model assembly chain                                  |         |       | 0:11 |   1.5 |
+| STARTED Implement the model generation chain                                |         |       | 0:13 |   1.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -190,7 +192,8 @@ Notes:
   output) and if there is a match, we need to keep the reference.
 - handle PSM in model generation chain, for both target and references
 
-*** Implement the model assembly chain                                :story:
+*** STARTED Implement the model assembly chain                        :story:
+    CLOCK: [2017-07-08 Sat 17:20]--[2017-07-08 Sat 17:31] =>  0:11
 
 Tasks:
 
@@ -200,7 +203,8 @@ Tasks:
 - convert models to their final representation.
 - plug it in the model generation chain.
 
-*** Implement the model generation chain                              :story:
+*** STARTED Implement the model generation chain                      :story:
+    CLOCK: [2017-07-08 Sat 17:31]--[2017-07-08 Sat 17:44] =>  0:13
 
 Tasks:
 
@@ -209,6 +213,11 @@ Tasks:
   single-threaded implementation we have at present.
 - implement the merge transform.
 - implement the intermediate model transform.
+
+*** Implement the merge transform                                     :story:
+
+We need to refactor the existing merger into a one-shot transform that
+takes a list of partial models and returns the merged model.
 
 *** Implement the post-processing chain                               :story:
 

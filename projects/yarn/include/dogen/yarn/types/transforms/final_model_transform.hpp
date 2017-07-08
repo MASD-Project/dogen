@@ -18,31 +18,33 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_OUTPUT_LANGUAGE_TRANSFORM_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_OUTPUT_LANGUAGE_TRANSFORM_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_FINAL_MODEL_TRANSFORM_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_FINAL_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include <algorithm>
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class output_language_transform final {
+class final_model_transform final {
 public:
-    static intermediate_model
-    transform(const context& ctx, const languages ol,
-        const intermediate_model& im);
+    final_model_transform() = default;
+    final_model_transform(const final_model_transform&) = default;
+    final_model_transform(final_model_transform&&) = default;
+    ~final_model_transform() = default;
+    final_model_transform& operator=(const final_model_transform&) = default;
 
-    static std::list<intermediate_model>
-    transform(const context& ctx, const std::list<languages> ol,
-        const intermediate_model& im);
+public:
+    bool operator==(const final_model_transform& rhs) const;
+    bool operator!=(const final_model_transform& rhs) const {
+        return !this->operator==(rhs);
+    }
+
 };
 
 } } }

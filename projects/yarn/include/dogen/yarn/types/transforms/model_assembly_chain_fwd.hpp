@@ -18,34 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INTERMEDIATE_MODEL_TRANSFORM_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INTERMEDIATE_MODEL_TRANSFORM_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_ASSEMBLY_CHAIN_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_ASSEMBLY_CHAIN_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class intermediate_model_transform final {
-public:
-    intermediate_model_transform() = default;
-    intermediate_model_transform(const intermediate_model_transform&) = default;
-    intermediate_model_transform(intermediate_model_transform&&) = default;
-    ~intermediate_model_transform() = default;
-    intermediate_model_transform& operator=(const intermediate_model_transform&) = default;
-
-public:
-    bool operator==(const intermediate_model_transform& rhs) const;
-    bool operator!=(const intermediate_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+class model_assembly_chain;
 
 } } }
 

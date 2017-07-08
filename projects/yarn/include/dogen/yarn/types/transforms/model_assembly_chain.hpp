@@ -18,37 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/mapper.hpp"
-#include "dogen/yarn/types/mappings_hydrator.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/output_language_transform.hpp"
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_ASSEMBLY_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_ASSEMBLY_CHAIN_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.output_language_transform"));
-
-}
+#include <list>
+#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-intermediate_model output_language_transform::transform(
-    const context& ctx, const languages ol, const intermediate_model& im) {
-    const mapper mp(ctx.mapping_repository());
-    return mp.map(im.input_language(), ol, im);
-}
-
-std::list<intermediate_model>
-output_language_transform::transform(const context& ctx,
-    const std::list<languages> ol, const intermediate_model& im) {
-    std::list<intermediate_model> r;
-    for (const auto l : ol) {
-        r.push_back(transform(ctx, l, im));
-    }
-    return r;
-}
+class model_assembly_chain final {
+public:
+    static model transform(const context& ctx, const languages l,
+        const std::list<intermediate_model>& ims);
+};
 
 } } }
+
+#endif
