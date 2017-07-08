@@ -12,26 +12,27 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-08 Sat 19:12]
+#+CAPTION: Clock summary at [2017-07-08 Sat 19:25]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:51* |       |      | 100.0 |
+| *Total time*                                                                | *14:02* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:51   |       |      | 100.0 |
-| Active                                                                      |         | 13:51 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   5.8 |
+| Stories                                                                     | 14:02   |       |      | 100.0 |
+| Active                                                                      |         | 14:02 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   5.7 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   2.9 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   8.7 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  30.2 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |  11.4 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   8.6 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  29.8 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |  11.3 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   1.4 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   4.5 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   4.4 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   2.4 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |  19.6 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |  19.4 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   4.8 |
-| COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.6 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:56 |   6.7 |
+| COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.5 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   5.9 |
+| STARTED Implement the post-processing chain                                 |         |       | 0:17 |   2.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -212,7 +213,7 @@ Tasks:
 
 *** COMPLETED Implement the model assembly chain                      :story:
     CLOSED: [2017-07-08 Sat 18:37]
-    CLOCK: [2017-07-08 Sat 18:38]--[2017-07-08 Sat 19:12] =>  0:34
+    CLOCK: [2017-07-08 Sat 18:44]--[2017-07-08 Sat 19:12] =>  0:28
     CLOCK: [2017-07-08 Sat 18:31]--[2017-07-08 Sat 18:37] =>  0:06
     CLOCK: [2017-07-08 Sat 18:25]--[2017-07-08 Sat 18:30] =>  0:05
     CLOCK: [2017-07-08 Sat 17:20]--[2017-07-08 Sat 17:31] =>  0:11
@@ -225,18 +226,23 @@ Tasks:
 - convert models to their final representation.
 - plug it in the model generation chain.
 
-*** Implement the post-processing chain                               :story:
-
-This story may be too big as one story.
+*** STARTED Implement the post-processing chain                       :story:
+    CLOCK: [2017-07-08 Sat 19:13]--[2017-07-08 Sat 19:24] =>  0:11
+    CLOCK: [2017-07-08 Sat 18:38]--[2017-07-08 Sat 18:44] =>  0:06
 
 Tasks:
 
-- implement the external transform chain.
-- implement all other transforms required by the post-processing
+- implement all internal transforms required by the post-processing
   chain.
-- plug it in the model generation chain.
+- implement the external transform chain.
 - fix all errors when we replace the legacy code with the new
   transform-based code.
+
+*** Implement the mapper as a transform                               :story:
+
+We did a quick hack and reused the existing mapper. We need to move
+it, and all the associated classes (repository etc) into the
+transforms namespace and clean it up.
 
 *** Implement the code-generation chain                               :story:
 

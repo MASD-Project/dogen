@@ -18,22 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/enumerations_transform.hpp"
-#include "dogen/yarn/types/transforms/post_processing_chain.hpp"
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_ENUMERATIONS_TRANSFORM_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_ENUMERATIONS_TRANSFORM_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void post_processing_chain::
-transform(const context& ctx, intermediate_model& im) {
-    /*
-     * Enumeration expansion must be done after merging as we need the
-     * built-in types; these are required in order to find the default
-     * enumeration underlying element.
-     */
-    enumerations_transform::transform(ctx, im);
-}
+class enumerations_transform;
 
 } } }
+
+#endif
