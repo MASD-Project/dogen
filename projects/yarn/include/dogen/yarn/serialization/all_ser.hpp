@@ -57,6 +57,7 @@
 #include "dogen/yarn/serialization/formatting_styles_ser.hpp"
 #include "dogen/yarn/serialization/element_properties_ser.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/yarn/serialization/transforms/indices_ser.hpp"
 #include "dogen/yarn/serialization/artefact_properties_ser.hpp"
 #include "dogen/yarn/serialization/decomposition_result_ser.hpp"
 #include "dogen/yarn/serialization/orm_database_systems_ser.hpp"

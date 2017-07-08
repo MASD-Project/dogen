@@ -57,6 +57,7 @@
 #include "dogen/yarn/hash/formatting_styles_hash.hpp"
 #include "dogen/yarn/hash/element_properties_hash.hpp"
 #include "dogen/yarn/hash/intermediate_model_hash.hpp"
+#include "dogen/yarn/hash/transforms/indices_hash.hpp"
 #include "dogen/yarn/hash/artefact_properties_hash.hpp"
 #include "dogen/yarn/hash/decomposition_result_hash.hpp"
 #include "dogen/yarn/hash/orm_database_systems_hash.hpp"

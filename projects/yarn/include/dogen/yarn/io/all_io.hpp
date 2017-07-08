@@ -57,6 +57,7 @@
 #include "dogen/yarn/io/formatting_styles_io.hpp"
 #include "dogen/yarn/io/element_properties_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
+#include "dogen/yarn/io/transforms/indices_io.hpp"
 #include "dogen/yarn/io/artefact_properties_io.hpp"
 #include "dogen/yarn/io/decomposition_result_io.hpp"
 #include "dogen/yarn/io/orm_database_systems_io.hpp"
