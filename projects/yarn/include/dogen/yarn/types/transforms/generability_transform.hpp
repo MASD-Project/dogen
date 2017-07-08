@@ -25,26 +25,19 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class generability_transform final {
-public:
-    generability_transform() = default;
-    generability_transform(const generability_transform&) = default;
-    generability_transform(generability_transform&&) = default;
-    ~generability_transform() = default;
-    generability_transform& operator=(const generability_transform&) = default;
+private:
+    static bool is_generatable(const element& e);
+    static bool has_generatable_types(const intermediate_model& im);
 
 public:
-    bool operator==(const generability_transform& rhs) const;
-    bool operator!=(const generability_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(intermediate_model& im);
 };
 
 } } }

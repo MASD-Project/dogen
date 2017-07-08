@@ -24,8 +24,53 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool generability_transform::operator==(const generability_transform& /*rhs*/) const {
-    return true;
+bool generability_transform::is_generatable(const element& e) {
+    const auto ot(e.origin_type());
+    return ot == origin_types::target;
+}
+
+bool generability_transform::
+has_generatable_types(const intermediate_model& im) {
+    for (const auto pair : im.objects()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : im.enumerations()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : im.enumerations()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : im.exceptions()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : im.builtins()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : im.concepts()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    for (const auto pair : im.primitives()) {
+        if (is_generatable(pair.second))
+            return true;
+    }
+
+    return false;
+}
+
+void generability_transform::transform(intermediate_model& im) {
+    im.has_generatable_types(has_generatable_types(im));
 }
 
 } } }

@@ -29,6 +29,7 @@
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
+#include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -100,6 +101,7 @@ transform(const context& ctx, intermediate_model& im) {
      * populated.
      */
     associations_transform::transform(im);
+    generability_transform::transform(im);
 }
 
 } } }
