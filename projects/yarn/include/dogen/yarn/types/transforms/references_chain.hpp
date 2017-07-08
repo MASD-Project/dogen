@@ -25,26 +25,24 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <unordered_set>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class references_chain final {
-public:
-    references_chain() = default;
-    references_chain(const references_chain&) = default;
-    references_chain(references_chain&&) = default;
-    ~references_chain() = default;
-    references_chain& operator=(const references_chain&) = default;
+private:
+    static std::unordered_set<languages>
+    obtain_relevant_languages(const intermediate_model& target);
 
 public:
-    bool operator==(const references_chain& rhs) const;
-    bool operator!=(const references_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<intermediate_model>
+    transform(const context& ctx, const intermediate_model& target);
 };
 
 } } }

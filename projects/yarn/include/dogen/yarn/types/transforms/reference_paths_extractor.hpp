@@ -25,26 +25,43 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class reference_paths_extractor final {
-public:
-    reference_paths_extractor() = default;
-    reference_paths_extractor(const reference_paths_extractor&) = default;
-    reference_paths_extractor(reference_paths_extractor&&) = default;
-    ~reference_paths_extractor() = default;
-    reference_paths_extractor& operator=(const reference_paths_extractor&) = default;
+private:
+    struct type_group {
+        annotations::type reference;
+    };
+    friend std::ostream& operator<<(std::ostream& s,
+        const type_group& v);
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static std::list<std::string> make_user_references(const type_group& tg,
+        const annotations::annotation& a);
+
+    static std::list<boost::filesystem::path> obtain_paths_to_user_references(
+        const context& ctx, const annotations::annotation& ra);
+
+private:
+    static std::vector<boost::filesystem::path> to_library_dirs(
+        const std::vector<boost::filesystem::path>& data_dirs);
+
+    static std::list<boost::filesystem::path> obtain_paths_to_system_models(
+        const context& ctx);
 
 public:
-    bool operator==(const reference_paths_extractor& rhs) const;
-    bool operator!=(const reference_paths_extractor& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static std::list<boost::filesystem::path>
+    extract(const context& ctx, const intermediate_model& target);
 };
 
 } } }

@@ -41,11 +41,12 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool pre_processing_chain::are_languages_compatible(
-    const languages target_language, intermediate_model& im) {
-
+bool pre_processing_chain::
+is_language_relevant(const std::unordered_set<languages>& relevant_languages,
+    const intermediate_model& im) {
     const auto l(im.input_language());
-    if (l == target_language) {
+    const auto i(relevant_languages.find(l));
+    if (i == relevant_languages.end()) {
         BOOST_LOG_SEV(lg, warn) << "Reference model language does not"
                                 << " match target model language."
                                 << " Model: " << im.name().id()
@@ -107,14 +108,15 @@ transform(const context& ctx, intermediate_model& im) {
 }
 
 bool pre_processing_chain::try_transform(const context& ctx,
-    const languages target_language, intermediate_model& im) {
+    const std::unordered_set<languages>& relevant_languages,
+    intermediate_model& im) {
     /*
      * We must apply the first set of transforms because language
      * expansion is required; we only want to process those types
      * which are of the same language as target.
      */
     apply_first_set_of_transforms(ctx, im);
-    if (!are_languages_compatible(target_language, im))
+    if (is_language_relevant(relevant_languages, im))
         return false;
 
     apply_second_set_of_transforms(ctx, im);

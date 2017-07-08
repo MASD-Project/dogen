@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <unordered_set>
+#include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
@@ -35,11 +37,12 @@ namespace transforms {
 class pre_processing_chain final {
 private:
     /**
-     * @brief Returns true if the languages are compatible, false
-     * otherwise.
+     * @brief Returns true if the model language is in the relevant
+     * languages set, false otherwise.
      */
-    static bool are_languages_compatible(
-        const languages target_language, intermediate_model& im);
+    static bool is_language_relevant(
+        const std::unordered_set<languages>& relevant_languages,
+        const intermediate_model& im);
 
 private:
     /**
@@ -62,13 +65,18 @@ public:
     static void transform(const context& ctx, intermediate_model& im);
 
     /**
-     * @brief Determines if the language of the supplied model is
-     * compatible with the target language; if so, applies the
-     * pre-processing transforms and returns true. Otherwise returns
-     * false.
+     * @brief Only pre-processes the model if its language is in the
+     * relevant languages set.
+     *
+     * Note: in order to determine this, we need to apply some of the
+     * pre-processing transforms, so even when we return false, we
+     * would have applied these. This is not ideal, but is ok for now
+     * since we just drop the model when it has an irrelevent
+     * language.
      */
     static bool try_transform(const context& ctx,
-        const languages target_language, intermediate_model& im);
+        const std::unordered_set<languages>& relevant_languages,
+        intermediate_model& im);
 
 };
 
