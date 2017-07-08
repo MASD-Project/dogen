@@ -26,6 +26,7 @@
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
+#include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace dogen {
@@ -71,6 +72,14 @@ transform(const context& ctx, intermediate_model& im) {
      * containment.
      */
     orm_transform::expand(ctx, im);
+
+    /*
+     * Resolution must be done after system elements have been
+     * generated (such as visitor, etc) or else it will fail to find
+     * any references to those elements. This is done in stereotype
+     * expansion.
+     */
+    resolver_transform::transform(idx, im);
 }
 
 } } }
