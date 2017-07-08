@@ -171,6 +171,7 @@
 #include "dogen/yarn/types/transforms/exogenous_transform_types.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
 #include "dogen/yarn/types/transforms/output_language_transform.hpp"
+#include "dogen/yarn/types/transforms/reference_paths_extractor.hpp"
 #include "dogen/yarn/types/intermediate_model_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/external_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"

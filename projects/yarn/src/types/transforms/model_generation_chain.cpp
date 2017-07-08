@@ -139,7 +139,11 @@ obtain_paths_to_all_auxiliary_models(const context& ctx,
 std::list<model>
 model_generation_chain::transform(const context& ctx) {
     /*
-     * Obtain the initial target, given the user options.
+     * Obtain the initial target, given the user options. The initial
+     * target is either a Platform Specific Model (PSM), in which case
+     * the input language and the output language are one and the
+     * same; or it is a Platform Independent Model (PIM), making use
+     * of LAM types (the Language Agnostic Model).
      */
     const auto it(initial_target_chain::transform(ctx));
 
