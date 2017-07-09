@@ -25,26 +25,25 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
+#include <unordered_map>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/helpers/mapping_value.hpp"
+#include "dogen/yarn/types/helpers/mapping.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
 class mappings_validator final {
-public:
-    mappings_validator() = default;
-    mappings_validator(const mappings_validator&) = default;
-    mappings_validator(mappings_validator&&) = default;
-    ~mappings_validator() = default;
-    mappings_validator& operator=(const mappings_validator&) = default;
+private:
+    void validate(const languages l, const mapping_value& mv) const;
+    void validate(const mapping& m) const;
 
 public:
-    bool operator==(const mappings_validator& rhs) const;
-    bool operator!=(const mappings_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    void validate(const std::unordered_map<std::string,
+        std::list<mapping>>& mappings_by_set_name) const;
 };
 
 } } }
