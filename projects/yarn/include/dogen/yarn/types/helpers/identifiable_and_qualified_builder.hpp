@@ -18,45 +18,42 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_LEGACY_NAME_TREE_PARSER_HPP
-#define DOGEN_YARN_TYPES_HELPERS_LEGACY_NAME_TREE_PARSER_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_IDENTIFIABLE_AND_QUALIFIED_BUILDER_HPP
+#define DOGEN_YARN_TYPES_HELPERS_IDENTIFIABLE_AND_QUALIFIED_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_set>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/location.hpp"
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/helpers/pretty_printer.hpp"
+#include "dogen/yarn/types/languages.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-/**
- * @brief Parses identifiers according to a well-defined syntax, and
- * generates a tree of names from them.
- */
-class legacy_name_tree_parser {
+class identifiable_and_qualified_builder final {
 public:
-    /**
-     * @brief Initialises the parser.
-     *
-     * @param language what programming language syntax to use.
-     */
-    explicit legacy_name_tree_parser(const languages language);
-
-public:
-    /**
-     * @brief Parse the string into a name tree.
-     */
-    name_tree parse(const std::string& s) const;
+    identifiable_and_qualified_builder();
 
 private:
-    const languages language_;
+    std::string obtain_qualified(const std::map<languages, std::string>& map,
+        const languages& l) const;
+
+public:
+    void add(const name& n);
+    void add(const name_tree& nt);
+
+public:
+    std::pair<std::string, std::map<languages, std::string>> build();
+    std::pair<std::string, std::map<languages, std::string>>
+    build(const name& n, const bool model_name_mode);
+
+private:
+    pretty_printer csharp_pp_;
+    pretty_printer cpp_pp_;
 };
 
 } } }

@@ -18,14 +18,44 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/algorithm/string.hpp>
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/string_processor.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.string_processor"));
+
+const std::string empty;
+const std::string comma(",");
+const std::string space(" ");
+const std::string less_than("<");
+const std::string more_than(">");
+const std::string separator("_");
+const std::string scope_operator("::");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-bool string_processor::operator==(const string_processor& /*rhs*/) const {
-    return true;
+std::string string_processor::to_identifiable(const std::string& s) {
+    std::string r(s);
+    BOOST_LOG_SEV(lg, trace) << "Before processing: " << r;
+
+    boost::replace_all(r, scope_operator, separator);
+    boost::replace_all(r, less_than, separator);
+
+    boost::replace_all(r, comma, empty);
+    boost::replace_all(r, more_than, empty);
+    boost::trim(r);
+
+    boost::replace_all(r, space, separator);
+
+    BOOST_LOG_SEV(lg, trace) << "After processing: " << r;
+    return r;
 }
 
 } } }

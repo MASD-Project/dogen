@@ -26,87 +26,90 @@
 #endif
 
 #include <list>
-#include <memory>
 #include <string>
-#include <algorithm>
 #include <unordered_set>
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/helpers/node_fwd.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/helpers/node.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-class name_tree_builder final {
+/**
+ * @brief Creates a name tree as directed by the external caller.
+ *
+ * Starts by producing an intermediate representation using @e nodes,
+ * and then transforms that intermediate representation into a name
+ * tree. The generation of the intermediate representation is done via
+ * a notification mechanism, with the client being responsible for
+ * providing the notifications into the builder.
+ */
+class name_tree_builder {
 public:
-    name_tree_builder() = default;
-    name_tree_builder(const name_tree_builder&) = default;
-    name_tree_builder(name_tree_builder&&) = default;
+    name_tree_builder(const name_tree_builder&) = delete;
     ~name_tree_builder() = default;
+    name_tree_builder(name_tree_builder&&) = delete;
+    name_tree_builder& operator=(const name_tree_builder&) = delete;
 
 public:
-    name_tree_builder(
-        const std::unordered_set<std::string>& top_level_modules_,
-        const dogen::yarn::location& model_location_,
-        const std::list<std::string>& names,
-        const std::shared_ptr<dogen::yarn::helpers::node>& root,
-        const std::shared_ptr<dogen::yarn::helpers::node>& current);
-
-public:
-    const std::unordered_set<std::string>& top_level_modules_() const;
-    std::unordered_set<std::string>& top_level_modules_();
-    void top_level_modules_(const std::unordered_set<std::string>& v);
-    void top_level_modules_(const std::unordered_set<std::string>&& v);
-
-    const dogen::yarn::location& model_location_() const;
-    dogen::yarn::location& model_location_();
-    void model_location_(const dogen::yarn::location& v);
-    void model_location_(const dogen::yarn::location&& v);
-
-    const std::list<std::string>& names() const;
-    std::list<std::string>& names();
-    void names(const std::list<std::string>& v);
-    void names(const std::list<std::string>&& v);
-
-    const std::shared_ptr<dogen::yarn::helpers::node>& root() const;
-    std::shared_ptr<dogen::yarn::helpers::node>& root();
-    void root(const std::shared_ptr<dogen::yarn::helpers::node>& v);
-    void root(const std::shared_ptr<dogen::yarn::helpers::node>&& v);
-
-    const std::shared_ptr<dogen::yarn::helpers::node>& current() const;
-    std::shared_ptr<dogen::yarn::helpers::node>& current();
-    void current(const std::shared_ptr<dogen::yarn::helpers::node>& v);
-    void current(const std::shared_ptr<dogen::yarn::helpers::node>&& v);
-
-public:
-    bool operator==(const name_tree_builder& rhs) const;
-    bool operator!=(const name_tree_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(name_tree_builder& other) noexcept;
-    name_tree_builder& operator=(name_tree_builder other);
+    name_tree_builder();
 
 private:
-    std::unordered_set<std::string> top_level_modules__;
-    dogen::yarn::location model_location__;
+    /**
+     * Notify the end of the current node, allowing for any required
+     * post-processing.
+     */
+    void finish_current_node();
+
+public:
+    /**
+     * @brief Adds the name to the tree.
+     */
+    void add_name(const std::string& n);
+
+    /**
+     * @brief Adds the built-in element name to the tree.
+     */
+    void add_builtin(const std::string& n);
+
+    /**
+     * @brief Notify the start of children.
+     */
+    void start_children();
+
+    /**
+     * @brief Notify the presence of an additional child name.
+     */
+    void next_child();
+
+    /**
+     * @brief Notify the end of children.
+     */
+    void end_children();
+
+private:
+    /**
+     * @brief Generate the name tree for the given node
+     * representation.
+     */
+    name_tree make_name_tree(const node& n);
+
+public:
+    /**
+     * @brief Generate the name tree representation for the current
+     * node representation.
+     */
+    name_tree build();
+
+private:
     std::list<std::string> names_;
-    std::shared_ptr<dogen::yarn::helpers::node> root_;
-    std::shared_ptr<dogen::yarn::helpers::node> current_;
+    boost::shared_ptr<node> root_;
+    boost::shared_ptr<node> current_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::helpers::name_tree_builder& lhs,
-    dogen::yarn::helpers::name_tree_builder& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

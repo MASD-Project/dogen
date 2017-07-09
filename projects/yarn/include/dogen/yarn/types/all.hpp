@@ -72,7 +72,8 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/artefact_properties.hpp"
 #include "dogen/yarn/types/helpers/mapping_set.hpp"
-#include "dogen/yarn/types/new_name_tree_parser.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/orm_database_systems.hpp"
 #include "dogen/yarn/types/orm_model_properties.hpp"
 #include "dogen/yarn/types/helpers/mapping_error.hpp"
@@ -145,6 +146,7 @@
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
+#include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/transforms/code_generator_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/code_generator_transform_registrar.hpp"
 

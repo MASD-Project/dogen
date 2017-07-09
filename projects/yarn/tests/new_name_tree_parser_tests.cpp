@@ -36,7 +36,7 @@
 #include "dogen/yarn/types/name_tree_parser.hpp"
 #include "dogen/yarn/types/merger.hpp"*/
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/new_name_tree_parser.hpp"
+#include "dogen/yarn/types/helpers/new_name_tree_parser.hpp"
 
 using dogen::utility::test::asserter;
 

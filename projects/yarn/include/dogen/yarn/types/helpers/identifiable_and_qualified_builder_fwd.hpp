@@ -18,12 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/new_name_tree_parser.hpp"
+#ifndef DOGEN_YARN_TYPES_HELPERS_IDENTIFIABLE_AND_QUALIFIED_BUILDER_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_IDENTIFIABLE_AND_QUALIFIED_BUILDER_FWD_HPP
 
-namespace {
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
-using namespace dogen::utility::log;
-auto lg2(logger_factory("yarn.new_name_tree_parser"));
+namespace dogen {
+namespace yarn {
+namespace helpers {
 
-}
+class identifiable_and_qualified_builder;
+
+} } }
+
+#endif

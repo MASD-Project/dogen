@@ -18,46 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_HELPERS_LEGACY_NAME_TREE_PARSER_HPP
-#define DOGEN_YARN_TYPES_HELPERS_LEGACY_NAME_TREE_PARSER_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_NAME_FACTORY_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_NAME_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <string>
-#include <unordered_set>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-/**
- * @brief Parses identifiers according to a well-defined syntax, and
- * generates a tree of names from them.
- */
-class legacy_name_tree_parser {
-public:
-    /**
-     * @brief Initialises the parser.
-     *
-     * @param language what programming language syntax to use.
-     */
-    explicit legacy_name_tree_parser(const languages language);
-
-public:
-    /**
-     * @brief Parse the string into a name tree.
-     */
-    name_tree parse(const std::string& s) const;
-
-private:
-    const languages language_;
-};
+class name_factory;
 
 } } }
 

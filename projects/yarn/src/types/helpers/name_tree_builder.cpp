@@ -18,15 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/helpers/node.hpp"
+#include <sstream>
+#include <boost/make_shared.hpp>
+#include <boost/throw_exception.hpp>
+#include <boost/algorithm/string.hpp>
+#include <boost/algorithm/string/join.hpp>
+#include <boost/algorithm/string/predicate.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/location_io.hpp"
+#include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
 
-namespace std {
+namespace {
 
-inline bool operator==(const std::shared_ptr<dogen::yarn::helpers::node>& lhs,
-const std::shared_ptr<dogen::yarn::helpers::node>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.name_tree_builder"));
 
 }
 
@@ -34,119 +46,119 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-name_tree_builder::name_tree_builder(
-    const std::unordered_set<std::string>& top_level_modules_,
-    const dogen::yarn::location& model_location_,
-    const std::list<std::string>& names,
-    const std::shared_ptr<dogen::yarn::helpers::node>& root,
-    const std::shared_ptr<dogen::yarn::helpers::node>& current)
-    : top_level_modules__(top_level_modules_),
-      model_location__(model_location_),
-      names_(names),
-      root_(root),
-      current_(current) { }
+name_tree_builder::name_tree_builder()
+    : root_(new node), current_(root_) {}
 
-void name_tree_builder::swap(name_tree_builder& other) noexcept {
-    using std::swap;
-    swap(top_level_modules__, other.top_level_modules__);
-    swap(model_location__, other.model_location__);
-    swap(names_, other.names_);
-    swap(root_, other.root_);
-    swap(current_, other.current_);
+void name_tree_builder::add_name(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "Pushing back name: '" << s << "'";
+    names_.push_back(s);
 }
 
-bool name_tree_builder::operator==(const name_tree_builder& rhs) const {
-    return top_level_modules__ == rhs.top_level_modules__ &&
-        model_location__ == rhs.model_location__ &&
-        names_ == rhs.names_ &&
-        root_ == rhs.root_ &&
-        current_ == rhs.current_;
+void name_tree_builder::add_builtin(const std::string& s) {
+    BOOST_LOG_SEV(lg, debug) << "Pushing back builtin: '" << s << "'";
+
+    name_builder b;
+    b.simple_name(s);
+    current_->data(b.build());
 }
 
-name_tree_builder& name_tree_builder::operator=(name_tree_builder other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+void name_tree_builder::finish_current_node() {
+    BOOST_LOG_SEV(lg, debug) << "Finishing current node. names: " << names_;
+
+    /*
+     * if there are no names, we do not have any work to do.
+     */
+    if (names_.empty())
+        return;
+
+    current_->data(name_builder::build(names_));
+    names_.clear();
 }
 
-const std::unordered_set<std::string>& name_tree_builder::top_level_modules_() const {
-    return top_level_modules__;
+void name_tree_builder::start_children() {
+    BOOST_LOG_SEV(lg, debug) << "Starting children.";
+
+    /*
+     * We are done building the parent's name so flush it.
+     */
+    finish_current_node();
+
+    /*
+     * Create a child node, link it up to its parent, link the parent
+     * to the child and then make the child the current node.
+     */
+    auto child(boost::make_shared<node>());
+    child->parent(current_);
+    current_->children().push_back(child);
+    current_ = child;
 }
 
-std::unordered_set<std::string>& name_tree_builder::top_level_modules_() {
-    return top_level_modules__;
+void name_tree_builder::next_child() {
+    BOOST_LOG_SEV(lg, debug) << "Moving to next child.";
+
+    /*
+     * We are done building the current child's name so flush it.
+     */
+    finish_current_node();
+
+    /*
+     * We are currently sitting on a child node. We first need to move
+     * back up to the parent; then add a new child node, link it to
+     * the parent and link the parent to the child; finally, make the
+     * new child the current node.
+     */
+    current_ = current_->parent();
+    auto child(boost::make_shared<node>());
+    child->parent(current_);
+    current_->children().push_back(child);
+    current_ = child;
 }
 
-void name_tree_builder::top_level_modules_(const std::unordered_set<std::string>& v) {
-    top_level_modules__ = v;
+void name_tree_builder::end_children() {
+    BOOST_LOG_SEV(lg, debug) << "Children have ended.";
+
+    /*
+     * We are done building the current child's name so flush it.
+     */
+    finish_current_node();
+
+    /*
+     * All the children are done, so move back up to the parent.
+     */
+    current_ = current_->parent();
 }
 
-void name_tree_builder::top_level_modules_(const std::unordered_set<std::string>&& v) {
-    top_level_modules__ = std::move(v);
+name_tree name_tree_builder::make_name_tree(const node& n) {
+    BOOST_LOG_SEV(lg, debug) << "Node: " << n.data();
+
+    name_tree r;
+    r.current(n.data());
+
+    for (const auto c : n.children()) {
+        const auto cnt(make_name_tree(*c));
+        r.children().push_back(cnt);
+    }
+
+    return r;
 }
 
-const dogen::yarn::location& name_tree_builder::model_location_() const {
-    return model_location__;
-}
+name_tree name_tree_builder::build() {
+    BOOST_LOG_SEV(lg, debug) << "Started building.";
 
-dogen::yarn::location& name_tree_builder::model_location_() {
-    return model_location__;
-}
+    /*
+     * Flush any pending work and build the name for it. This handles
+     * the case of a parent without any children.
+     */
+    finish_current_node();
 
-void name_tree_builder::model_location_(const dogen::yarn::location& v) {
-    model_location__ = v;
-}
+    /*
+     * Convert the node representation into a tree representation.
+     */
+    name_tree r(make_name_tree(*root_));
 
-void name_tree_builder::model_location_(const dogen::yarn::location&& v) {
-    model_location__ = std::move(v);
-}
+    BOOST_LOG_SEV(lg, debug) << "Finished building. Final name: " << r;
 
-const std::list<std::string>& name_tree_builder::names() const {
-    return names_;
-}
-
-std::list<std::string>& name_tree_builder::names() {
-    return names_;
-}
-
-void name_tree_builder::names(const std::list<std::string>& v) {
-    names_ = v;
-}
-
-void name_tree_builder::names(const std::list<std::string>&& v) {
-    names_ = std::move(v);
-}
-
-const std::shared_ptr<dogen::yarn::helpers::node>& name_tree_builder::root() const {
-    return root_;
-}
-
-std::shared_ptr<dogen::yarn::helpers::node>& name_tree_builder::root() {
-    return root_;
-}
-
-void name_tree_builder::root(const std::shared_ptr<dogen::yarn::helpers::node>& v) {
-    root_ = v;
-}
-
-void name_tree_builder::root(const std::shared_ptr<dogen::yarn::helpers::node>&& v) {
-    root_ = std::move(v);
-}
-
-const std::shared_ptr<dogen::yarn::helpers::node>& name_tree_builder::current() const {
-    return current_;
-}
-
-std::shared_ptr<dogen::yarn::helpers::node>& name_tree_builder::current() {
-    return current_;
-}
-
-void name_tree_builder::current(const std::shared_ptr<dogen::yarn::helpers::node>& v) {
-    current_ = v;
-}
-
-void name_tree_builder::current(const std::shared_ptr<dogen::yarn::helpers::node>&& v) {
-    current_ = std::move(v);
+    return r;
 }
 
 } } }
