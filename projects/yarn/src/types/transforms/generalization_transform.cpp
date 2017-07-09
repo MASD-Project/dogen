@@ -26,8 +26,8 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 
@@ -76,7 +76,7 @@ generalization_transform::update_and_collect_parent_ids(
     const helpers::indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
-    resolver_transform rst;
+    using helpers::resolver;
     std::unordered_set<std::string> r;
     for (auto& pair : im.objects()) {
         const auto& id(pair.first);
@@ -97,7 +97,7 @@ generalization_transform::update_and_collect_parent_ids(
          */
         std::list<name> resolved_parents;
         for (const auto& pn : o.parents()) {
-            const auto resolved_pn(rst.resolve(im, idx, o.name(), pn));
+            const auto resolved_pn(resolver::resolve(im, idx, o.name(), pn));
             r.insert(resolved_pn.id());
             resolved_parents.push_back(resolved_pn);
         }

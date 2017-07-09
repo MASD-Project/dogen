@@ -18,37 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_RESOLUTION_ERROR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_RESOLUTION_ERROR_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_RESOLUTION_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_RESOLUTION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
-
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-/**
- * @brief An error occurred while trying to resolve a type.
- */
-class resolution_error : public virtual std::exception, public virtual boost::exception {
-public:
-    resolution_error() = default;
-    ~resolution_error() noexcept = default;
-
-public:
-    explicit resolution_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+class resolution_error;
 
 } } }
 
