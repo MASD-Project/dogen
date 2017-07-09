@@ -28,9 +28,9 @@
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
-#include "dogen/yarn/types/stereotypes_expander.hpp"
+#include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 
 using dogen::yarn::object_types;
 
@@ -49,7 +49,7 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::expansion_error;
+using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
 
 BOOST_AUTO_TEST_SUITE(stereotypes_expander_tests)
@@ -66,8 +66,8 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_REQUIRE(a.concepts().empty());
     BOOST_REQUIRE(a.visitors().empty());
 
-    dogen::yarn::stereotypes_expander ex;
-    ex.expand(a);
+    using dogen::yarn::transforms::stereotypes_transform;
+    stereotypes_transform::transform(a);
 
     BOOST_CHECK(a.objects().size() == 1);
     BOOST_CHECK(a.visitors().empty());
@@ -88,9 +88,10 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
-    dogen::yarn::stereotypes_expander ex;
-    contains_checker<expansion_error> c(no_leaves);
-    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
+    using dogen::yarn::transforms::stereotypes_transform;
+    contains_checker<transformation_error> c(no_leaves);
+    BOOST_CHECK_EXCEPTION(
+        stereotypes_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
@@ -109,8 +110,8 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;
 
-    dogen::yarn::stereotypes_expander ex;
-    ex.expand(m);
+    using dogen::yarn::transforms::stereotypes_transform;
+    stereotypes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after: " << m;
 
     BOOST_CHECK(m.objects().size() == 2);
