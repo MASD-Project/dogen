@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/node_td.hpp"
 #include "dogen/yarn/test_data/model_td.hpp"
 #include "dogen/yarn/test_data/module_td.hpp"
 #include "dogen/yarn/test_data/object_td.hpp"

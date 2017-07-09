@@ -31,8 +31,8 @@
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/builtin.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 
@@ -197,7 +197,7 @@ read_stereotypes(const boost::property_tree::ptree& pt) const {
 }
 
 name hydrator::read_name(const boost::property_tree::ptree& pt) const {
-    yarn::name_builder b;
+    yarn::helpers::name_builder b;
     const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
 
@@ -217,7 +217,7 @@ name hydrator::read_name(const boost::property_tree::ptree& pt,
      * model. Note that we only handle element name's here, not the
      * model name itself.
      */
-    yarn::name_builder b;
+    yarn::helpers::name_builder b;
     if (!in_global_module) {
         b.model_name(model_name.location());
         b.external_modules(model_name.location().external_modules());
@@ -520,7 +520,7 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto mn(pt.get<std::string>(model_name_key));
     const auto em(pt.get<std::string>(external_modules_key, empty));
     r.name(nf.build_model_name(mn, em));

@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/visual_studio_project.hpp"
@@ -103,7 +103,7 @@ make_solution(const visual_studio_configuration cfg,
     const std::string& project_name, const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto sn(project_name + "-vc" + sln_extension);
     const auto n(nf.build_element_in_model(im.name(), sn));
 
@@ -124,7 +124,7 @@ make_project(const visual_studio_configuration cfg,
     const std::string& project_name, const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto sn(project_name + proj_extension);
     const auto n(nf.build_element_in_model(im.name(), sn));
 

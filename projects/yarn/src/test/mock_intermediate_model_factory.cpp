@@ -27,11 +27,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/builtin.hpp"
-#include "dogen/yarn/test/building_error.hpp"
+#include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 
 namespace {
@@ -107,7 +107,7 @@ std::string module_name(const unsigned int i) {
 }
 
 dogen::yarn::name mock_model_name(unsigned int i) {
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     return nf.build_model_name(model_name(i));
 }
 
@@ -120,7 +120,7 @@ dogen::yarn::name_tree mock_name_tree(const dogen::yarn::name& n) {
 dogen::yarn::name_tree
 mock_name_tree_shared_ptr(const dogen::yarn::name& n) {
     dogen::yarn::name_tree r;
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     r.current(nf.build_element_name("boost", "shared_ptr"));
     r.are_children_opaque(true);
 
@@ -155,7 +155,7 @@ dogen::yarn::name_tree mock_name_tree(
     using namespace dogen::yarn;
 
     name_tree r;
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     using test::mock_intermediate_model_factory;
     using attribute_types = mock_intermediate_model_factory::attribute_types;
 
@@ -187,7 +187,7 @@ dogen::yarn::name_tree mock_name_tree(
     }
     default:
         BOOST_LOG_SEV(lg, error) << invalid_attribute_type;
-        BOOST_THROW_EXCEPTION(test::building_error(invalid_attribute_type));
+        BOOST_THROW_EXCEPTION(helpers::building_error(invalid_attribute_type));
     }
     return r;
 }
@@ -227,7 +227,7 @@ std::string mock_unparsed_type(
     }
     default:
         BOOST_LOG_SEV(lg, error) << invalid_attribute_type;
-        BOOST_THROW_EXCEPTION(test::building_error(invalid_attribute_type));
+        BOOST_THROW_EXCEPTION(helpers::building_error(invalid_attribute_type));
     }
     return std::string();
 }
@@ -240,7 +240,7 @@ std::list<std::string> make_internal_modules(const unsigned int module_n) {
 }
 
 dogen::yarn::builtin make_builtin(const std::string& simple_name) {
-    dogen::yarn::name_builder b;
+    dogen::yarn::helpers::name_builder b;
     b.simple_name(simple_name);
 
     dogen::yarn::builtin r;
@@ -255,7 +255,7 @@ void populate_object(dogen::yarn::object& o, const unsigned int i,
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     o.name(n);
@@ -278,7 +278,7 @@ dogen::yarn::attribute mock_attribute(const dogen::yarn::name& owning_element,
     boost::optional<dogen::yarn::name> name =
     boost::optional<dogen::yarn::name>()) {
 
-    dogen::yarn::name_factory f;
+    dogen::yarn::helpers::name_factory f;
     const auto pn(f.build_attribute_name(owning_element, attribute_name(n)));
 
     dogen::yarn::attribute r;
@@ -570,7 +570,7 @@ make_builtin(const unsigned int i, const name& model_name,
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     builtin r;
@@ -611,7 +611,7 @@ object mock_intermediate_model_factory::make_value_object(unsigned int i,
 concept mock_intermediate_model_factory::make_concept(const unsigned int i,
     const name& model_name, const origin_types ot) const {
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, concept_name(i)));
 
     concept r;
@@ -632,7 +632,7 @@ make_enumeration(const unsigned int i, const name& model_name,
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     enumeration r;
@@ -667,7 +667,7 @@ exception mock_intermediate_model_factory::make_exception(const unsigned int i,
     const auto sn(type_name(i));
     const auto ipp(make_internal_modules(module_n));
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     dogen::yarn::name n(nf.build_element_in_model(model_name, sn, ipp));
 
     exception r;
@@ -699,7 +699,7 @@ module mock_intermediate_model_factory::make_module(const unsigned int module_n,
     const std::list<std::string>& internal_modules,
     const std::string& documentation) const {
 
-    name_factory nf;
+    helpers::name_factory nf;
     const auto mn(module_name(module_n));
     const auto n(nf.build_module_name(model_name, mn, internal_modules));
     return make_module(n, ot, documentation);
@@ -708,7 +708,7 @@ module mock_intermediate_model_factory::make_module(const unsigned int module_n,
 name mock_intermediate_model_factory::make_name(const unsigned int model_n,
     const unsigned int simple_n) const {
 
-    name_builder b;
+    helpers::name_builder b;
     b.simple_name(simple_type_name(simple_n));
     b.model_name(simple_model_name(model_n));
     return b.build();
@@ -772,7 +772,7 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
         break;
     default:
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
-        BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
+        BOOST_THROW_EXCEPTION(helpers::building_error(invalid_object_type));
     }
 
     return r;
@@ -1080,7 +1080,7 @@ object_with_both_transparent_and_opaque_associations(const origin_types ot,
     if (flags_.associations_indexed())
         o0.transparent_associations().push_back(o1.name());
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     object o2;
     o2.name(nf.build_element_name("boost", "shared_ptr"));
     o2.object_type(dogen::yarn::object_types::smart_pointer);
@@ -1134,7 +1134,7 @@ object_with_attribute(const origin_types ot, const object_types objt,
         o0 = make_value_object(0, mn, ot);
     else {
         BOOST_LOG_SEV(lg, error) << invalid_object_type;
-        BOOST_THROW_EXCEPTION(building_error(invalid_object_type));
+        BOOST_THROW_EXCEPTION(helpers::building_error(invalid_object_type));
     }
 
     const auto tp(flags_.types_parsed());
@@ -1143,7 +1143,7 @@ object_with_attribute(const origin_types ot, const object_types objt,
     if (flags_.attributes_indexed())
         o0.all_attributes().push_back(p);
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     intermediate_model r(make_empty_model(ot, 0, add_model_module));
     if (pt == attribute_types::value_object ||
         pt == attribute_types::boost_shared_ptr) {
@@ -1533,7 +1533,7 @@ object_with_group_of_attributes_of_different_types(const origin_types ot,
     lambda(p2);
 
     object o2;
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     o2.name(nf.build_element_name("boost", "shared_ptr"));
     o2.object_type(dogen::yarn::object_types::smart_pointer);
     insert_object(r, o2);

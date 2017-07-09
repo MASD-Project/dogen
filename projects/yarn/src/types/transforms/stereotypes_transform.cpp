@@ -25,8 +25,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/orm_object_properties.hpp"
@@ -96,7 +95,7 @@ bucket_leaves_by_location(const std::list<name>& leaves) {
 
 visitor stereotypes_transform::create_visitor(const object& o, const location& l,
     const origin_types ot, const std::list<name>& leaves) {
-    name_builder b;
+    helpers::name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
     b.location(l);
 

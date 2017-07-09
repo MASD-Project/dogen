@@ -22,7 +22,7 @@
 #include <forward_list>
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/building_error.hpp"
+#include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/module.hpp"
@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/exception.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -106,7 +106,7 @@ private:
 boost::shared_ptr<master_header>
 generator::create_master_header(const yarn::name& model_name) {
     auto r(boost::make_shared<master_header>());
-    yarn::name_factory f;
+    yarn::helpers::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
     r->origin_type(yarn::origin_types::target);
     return r;
@@ -160,7 +160,7 @@ void generator::process_element(const yarn::element& e) {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, error) << formatter_not_found_for_type << id;
         BOOST_THROW_EXCEPTION(
-            yarn::building_error(formatter_not_found_for_type + id));
+            yarn::helpers::building_error(formatter_not_found_for_type + id));
     }
 
     for (const auto& fmt : i->second) {

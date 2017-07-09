@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/origin_types.hpp"
 #include "dogen/yarn/types/module.hpp"
 #include "dogen/upsilon/types/type_visitor.hpp"
@@ -187,7 +187,7 @@ std::unordered_map<std::string, dogen::yarn::name>
 workflow::map_schema_name_to_model_name(const dogen::upsilon::model& um) const {
     std::unordered_map<std::string, dogen::yarn::name> r;
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     for (const auto& pair : um.schemas()) {
         const auto& schema(pair.second);
         const auto sn(schema.name());
@@ -216,7 +216,7 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     const auto& outputs(um.config().outputs());
     const auto& output(outputs[0]);
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto n(nf.build_model_name(output.schema_name()));
     r.name(n);
     r.origin_type(origin_types::target);

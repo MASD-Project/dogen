@@ -26,7 +26,7 @@
 #include <boost/algorithm/string/trim.hpp>
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/hydration_error.hpp"
 #include "dogen/yarn/types/helpers/mappings_hydrator.hpp"
 
@@ -98,7 +98,7 @@ languages mappings_hydrator::to_language(const std::string& s) const {
 }
 
 name mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
-    yarn::name_builder b;
+    helpers::name_builder b;
     const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
 

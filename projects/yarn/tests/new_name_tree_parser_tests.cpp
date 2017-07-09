@@ -83,7 +83,7 @@ bool check_parse(const std::string & s)
 }
 
 }
-using dogen::yarn::parsing_error;
+using dogen::yarn::helpers::parsing_error;
 
 BOOST_AUTO_TEST_SUITE(name_tree_parser_tests)
 

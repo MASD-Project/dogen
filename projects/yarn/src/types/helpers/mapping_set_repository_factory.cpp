@@ -28,7 +28,7 @@
 #include "dogen/yarn/io/helpers/mapping_set_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_repository_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_actions_io.hpp"
-#include "dogen/yarn/types/building_error.hpp"
+#include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/mappings_hydrator.hpp"
 #include "dogen/yarn/types/helpers/mappings_validator.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"

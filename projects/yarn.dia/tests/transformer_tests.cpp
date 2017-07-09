@@ -24,7 +24,7 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/io/object_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
@@ -66,7 +66,7 @@ const std::string immutable_stereotype("immutable");
 
 
 dogen::yarn::name mock_model_name(const std::string& mn) {
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     return nf.build_model_name(mn);;
 }
 

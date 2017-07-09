@@ -25,7 +25,6 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"

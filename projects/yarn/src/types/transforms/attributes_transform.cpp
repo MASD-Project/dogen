@@ -27,7 +27,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 
@@ -126,7 +126,7 @@ void attributes_transform::expand_object(object& o, intermediate_model& im,
      * the attributes are located correctly in element space: they are
      * no longer part of the concept but are now part of the object.
      */
-    yarn::name_factory f;
+    helpers::name_factory f;
     for (auto& attr : o.local_attributes()) {
         const auto n(f.build_attribute_name(o.name(), attr.name().simple()));
         attr.name(n);
@@ -186,7 +186,7 @@ void attributes_transform::expand_concept(concept& c, intermediate_model& im,
      * Expand all attribute names. At this point, we've only populated
      * attribute simple names.
      */
-    yarn::name_factory f;
+    helpers::name_factory f;
     for (auto& attr : c.local_attributes()) {
         const auto n(f.build_attribute_name(c.name(), attr.name().simple()));
         attr.name(n);

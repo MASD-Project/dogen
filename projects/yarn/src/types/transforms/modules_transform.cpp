@@ -21,9 +21,9 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 
@@ -128,7 +128,7 @@ boost::optional<name> updater::containing_module(const name& n) {
         return boost::optional<name>();
     }
 
-    name_builder b;
+    helpers::name_builder b;
 
     /* we can always take the external modules regardless because these
      * do not contribute to the modules in the model.
@@ -209,7 +209,7 @@ void modules_transform::create_missing_modules(intermediate_model& im) {
     yarn::elements_traversal(im, b);
 
     for (const auto& pair : b.result()) {
-        yarn::name_factory f;
+        helpers::name_factory f;
         const auto& ipp(pair.second);
         const auto n(f.build_module_name(im.name(), ipp));
         const auto i(im.modules().find(n.id()));

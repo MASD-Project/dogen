@@ -20,7 +20,7 @@
  */
 #include <sstream>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/upsilon/io/name_io.hpp"
 #include "dogen/yarn.upsilon/types/transformation_error.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"
@@ -83,7 +83,7 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
 
     e.documentation(t.comment());
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     const auto sn(t.name().schema_name());
     if (sn.empty() || sn == target_model_name_.simple()) {
         /*
@@ -126,7 +126,7 @@ transformer::to_object(const dogen::upsilon::compound& c) const {
     yarn::object r;
     populate_element_properties(c, r);
 
-    dogen::yarn::name_factory nf;
+    dogen::yarn::helpers::name_factory nf;
     BOOST_LOG_SEV(lg, debug) << "Total fields: " << c.fields().size();
     for (const auto& f : c.fields()) {
         yarn::attribute attr;

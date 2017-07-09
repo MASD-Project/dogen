@@ -23,7 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
@@ -49,7 +49,7 @@ boost::shared_ptr<yarn::element> build_files_factory::
 make_cmakelists(const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(im.name(), cmakelists_name));
     auto r(boost::make_shared<cmakelists>());
     r->name(n);
@@ -63,7 +63,7 @@ boost::shared_ptr<yarn::element> build_files_factory::
 make_msbuild_targets(const yarn::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(im.name(), msbuild_targets_name));
     auto r(boost::make_shared<msbuild_targets>());
     r->name(n);

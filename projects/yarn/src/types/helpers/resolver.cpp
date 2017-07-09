@@ -32,8 +32,8 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 

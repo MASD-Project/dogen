@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 
@@ -41,7 +41,7 @@ namespace fabric {
 
 boost::shared_ptr<fabric::registrar> registrar_factory::
 make(const yarn::name& model_name) const {
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<fabric::registrar>());
     r->name(n);

@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/node_hash.hpp"
 #include "dogen/yarn/hash/model_hash.hpp"
 #include "dogen/yarn/hash/module_hash.hpp"
 #include "dogen/yarn/hash/object_hash.hpp"

@@ -28,7 +28,7 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -227,7 +227,7 @@ make_invalid_enumerator(const name& n, const languages l) {
     r.documentation("Represents an uninitialised enum");
     r.value("0");
 
-    yarn::name_factory nf;
+    helpers::name_factory nf;
     const auto sn(obtain_invalid_enumerator_simple_name(l));
     r.name(nf.build_attribute_name(n, sn));
 
@@ -262,7 +262,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
      * names are unique.
      */
     unsigned int pos(e.add_invalid_enumerator() ? 1 : 0);
-    yarn::name_factory nf;
+    helpers::name_factory nf;
     std::set<std::string> enumerator_names;
     for (const auto& en : e.enumerators()) {
         const auto sn(en.name().simple());

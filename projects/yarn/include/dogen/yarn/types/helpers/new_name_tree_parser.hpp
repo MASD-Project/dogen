@@ -43,8 +43,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
-#include "dogen/yarn/types/parsing_error.hpp"
-#include "dogen/yarn/types/name_tree_builder.hpp"
+#include "dogen/yarn/types/helpers/parsing_error.hpp"
+#include "dogen/yarn/types/helpers/name_tree_builder.hpp"
 
 namespace {
 
@@ -55,7 +55,7 @@ const std::string unsupported_language = "Invalid or unsupported language: ";
 const std::string error_msg = "Failed to parse string: ";
 using namespace boost::spirit;
 
-using dogen::yarn::name_tree_builder;
+using dogen::yarn::helpers::name_tree_builder;
 
 namespace distinct {
 
@@ -290,7 +290,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
             const auto s(boost::lexical_cast<std::string>(l));
             BOOST_LOG_SEV(lg, error) << unsupported_language << s;
             BOOST_THROW_EXCEPTION(
-                dogen::yarn::parsing_error(unsupported_language + s));
+                dogen::yarn::helpers::parsing_error(unsupported_language + s));
             return "";
         } }
     }

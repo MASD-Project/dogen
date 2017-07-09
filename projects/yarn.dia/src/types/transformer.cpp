@@ -23,7 +23,7 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -62,14 +62,14 @@ void transformer::validate_dia_object_name(const std::string& n) const {
 
 yarn::name transformer::to_name(const std::string& n) const {
     validate_dia_object_name(n);
-    yarn::name_factory f;
+    yarn::helpers::name_factory f;
     return f.build_element_in_model(repository_.model().name(), n);
 }
 
 yarn::name transformer::
 to_name(const std::string& n, const yarn::name& module_n) const {
     validate_dia_object_name(n);
-    yarn::name_factory f;
+    yarn::helpers::name_factory f;
     return f.build_element_in_module(module_n, n);
 }
 

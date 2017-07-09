@@ -28,9 +28,9 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/legacy_name_tree_parser.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
@@ -120,7 +120,7 @@ obtain_value_attribute_simple_name(const languages l) {
 
 void parsing_transform::
 parse_attributes(const languages language, std::list<attribute>& attrs) {
-    const legacy_name_tree_parser ntp(language);
+    const helpers::legacy_name_tree_parser ntp(language);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
 
@@ -162,7 +162,7 @@ void parsing_transform::parse_parent(const type_group& tg, object& o) {
      * Convert the string obtained via meta-data into a yarn name and
      * set it as our parent name.
      */
-    const auto pn(name_builder::build(parent));
+    const auto pn(helpers::name_builder::build(parent));
     o.parents().push_back(pn);
 }
 
@@ -192,7 +192,7 @@ parse_underlying_element(const type_group& tg, enumeration& e) {
      * Convert the string obtained via meta-data into a yarn name and
      * set it as our underlying element name.
      */
-    const auto ue(name_builder::build(s));
+    const auto ue(helpers::name_builder::build(s));
     e.underlying_element(ue);
 }
 
@@ -215,7 +215,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
     /*
      * Create the value attribute.
      */
-    name_factory nf;
+    helpers::name_factory nf;
     const auto& n(p.name());
     const auto sn(obtain_value_attribute_simple_name(l));
 
@@ -224,7 +224,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
     attr.unparsed_type(ut);
     attr.documentation(documentation);
 
-    const legacy_name_tree_parser ntp(l);
+    const helpers::legacy_name_tree_parser ntp(l);
     auto nt(ntp.parse(ut));
     attr.parsed_type(nt);
 

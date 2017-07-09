@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/node_io.hpp"
 #include "dogen/yarn/io/model_io.hpp"
 #include "dogen/yarn/io/module_io.hpp"
 #include "dogen/yarn/io/object_io.hpp"

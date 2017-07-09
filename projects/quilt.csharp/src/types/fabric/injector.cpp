@@ -21,7 +21,6 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"

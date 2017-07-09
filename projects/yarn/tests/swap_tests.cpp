@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     test_swap<origin_types_generator>();
     test_swap<name_tree_generator>();
-    test_swap<node_generator>();
+    test_swap<helpers::node_generator>();
     test_swap<attribute_generator>();
     test_swap<name_generator>();
     test_swap<builtin_generator>();

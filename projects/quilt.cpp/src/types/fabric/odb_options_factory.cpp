@@ -21,7 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/building_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
@@ -73,7 +73,7 @@ odb_options_factory::make(const yarn::intermediate_model& im) const {
     if (r.empty())
         return r;
 
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(im.name(), common_odb_options_name));
 
     auto coo(boost::make_shared<common_odb_options>());

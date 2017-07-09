@@ -23,7 +23,7 @@
 #include "dogen/utility/io/pair_io.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
-#include "dogen/yarn/types/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/repository_selector.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
@@ -89,7 +89,7 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
     const std::string& external_modules) const {
 
     yarn::intermediate_model r;
-    yarn::name_factory nf;
+    yarn::helpers::name_factory nf;
     r.name(nf.build_model_name(model_name, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Model: " << r.name().id();
 

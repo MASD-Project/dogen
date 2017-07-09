@@ -12,33 +12,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-09 Sun 17:12]
+#+CAPTION: Clock summary at [2017-07-09 Sun 17:38]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:32* |       |      | 100.0 |
+| *Total time*                                                                | *21:56* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:32   |       |      | 100.0 |
-| Active                                                                      |         | 21:32 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   3.7 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.9 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   5.6 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  19.4 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   7.4 |
+| Stories                                                                     | 21:56   |       |      | 100.0 |
+| Active                                                                      |         | 21:56 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   3.6 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.8 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   5.5 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  19.1 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   7.2 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.9 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   2.9 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   2.8 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   1.5 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |  12.6 |
-| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   3.1 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |  12.4 |
+| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   3.0 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.0 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   3.9 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  16.3 |
-| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   3.5 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   3.8 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  16.0 |
+| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   3.4 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.2 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   3.3 |
-| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   4.3 |
-| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   3.6 |
-| STARTED Move helpers from main yarn namespace                               |         |       | 1:05 |   5.0 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   3.2 |
+| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   4.2 |
+| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   3.5 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   6.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -331,7 +331,9 @@ We did a quick hack and reused the existing mapper. We need to move
 it, and all the associated classes (repository etc) into the
 transforms namespace and clean it up. Name: =map_transform=.
 
-*** STARTED Move helpers from main yarn namespace                     :story:
+*** COMPLETED Move helpers from main yarn namespace                   :story:
+    CLOSED: [2017-07-09 Sun 17:38]
+    CLOCK: [2017-07-09 Sun 17:13]--[2017-07-09 Sun 17:37] =>  0:24
     CLOCK: [2017-07-09 Sun 17:10]--[2017-07-09 Sun 17:12] =>  0:02
     CLOCK: [2017-07-09 Sun 16:41]--[2017-07-09 Sun 17:09] =>  0:28
     CLOCK: [2017-07-09 Sun 16:22]--[2017-07-09 Sun 16:40] =>  0:18
