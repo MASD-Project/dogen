@@ -287,7 +287,13 @@ Tasks:
   expanders.
 - fix all resulting errors.
 
-*** Move helpers from main  namespace                                 :story:
+*** STARTED Remove all legacy classes from yarn                       :story:
+    CLOCK: [2017-07-09 Sun 12:36]--[2017-07-09 Sun 12:56] =>  0:20
+
+Remove all of the code that got moved into transforms, fixing tests
+and anything else that breaks as a result.
+
+*** Move helpers from main namespace                                  :story:
 
 Types such as name builder etc need to be moved to the helpers namespace.
 
@@ -296,11 +302,6 @@ Types such as name builder etc need to be moved to the helpers namespace.
 We did a quick hack and reused the existing mapper. We need to move
 it, and all the associated classes (repository etc) into the
 transforms namespace and clean it up. Name: =map_transform=.
-
-*** Remove all legacy classes from yarn                               :story:
-
-Remove all of the code that got moved into transforms, fixing tests
-and anything else that breaks as a result.
 
 *** Implement the code-generation chain                               :story:
 
