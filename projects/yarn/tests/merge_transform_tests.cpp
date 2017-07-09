@@ -30,14 +30,14 @@
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/merger.hpp"
-#include "dogen/yarn/types/merging_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/types/transforms/merge_transform.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
-const std::string test_suite("merger_tests");
+const std::string test_suite("merge_transform_tests");
 
 using dogen::yarn::test::mock_intermediate_model_factory;
 const mock_intermediate_model_factory::flags flags;
@@ -57,9 +57,8 @@ const std::string incorrect_meta_type("Type has incorrect meta_type");
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::merging_error;
 
-BOOST_AUTO_TEST_SUITE(merger_tests)
+BOOST_AUTO_TEST_SUITE(merge_transform_tests)
 
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
@@ -67,21 +66,19 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     const auto tg(dogen::yarn::origin_types::target);
     const auto target(factory.make_single_type_model(tg, 0));
 
-    dogen::yarn::merger mg;
-    mg.add(target);
-
     const unsigned int n(5);
+    std::list<dogen::yarn::intermediate_model> ims;
     const auto npr(dogen::yarn::origin_types::non_proxy_reference);
     for (unsigned int i(1); i < n; ++i) {
         const auto m(factory.make_single_type_model(npr, i));
-        mg.add(m);
+        ims.push_back(m);
     }
 
-    BOOST_CHECK(!mg.has_merged());
-    const auto combined(mg.merge());
+    using dogen::yarn::transforms::merge_transform;
+    const auto combined(merge_transform::transform(target, ims));
+
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
-    BOOST_CHECK(mg.has_merged());
     BOOST_CHECK(combined.objects().size() == n);
     BOOST_CHECK(combined.builtins().empty());
     BOOST_CHECK(combined.enumerations().empty());
@@ -131,58 +128,18 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
-    dogen::yarn::merger mg;
     const auto tg(dogen::yarn::origin_types::target);
     const auto m(factory.make_empty_model(tg));
 
-    BOOST_CHECK(!mg.has_target());
-    mg.add(m);
-    BOOST_CHECK(mg.has_target());
-
-    const auto combined(mg.merge());
+    const std::list<dogen::yarn::intermediate_model> ims;
+    using dogen::yarn::transforms::merge_transform;
+    const auto combined(merge_transform::transform(m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 
     BOOST_CHECK(combined.objects().empty());
     BOOST_CHECK(combined.builtins().empty());
     BOOST_CHECK(combined.enumerations().empty());
     BOOST_CHECK(combined.modules().empty());
-}
-
-BOOST_AUTO_TEST_CASE(not_adding_a_target_throws) {
-    SETUP_TEST_LOG("not_adding_a_target_throws");
-
-    const auto npr(dogen::yarn::origin_types::non_proxy_reference);
-    const auto m(factory.make_single_type_model(npr));
-    dogen::yarn::merger mg;
-    mg.add(m);
-
-    contains_checker<merging_error> c(missing_target);
-    BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);
-}
-
-BOOST_AUTO_TEST_CASE(adding_more_than_one_target_throws) {
-    SETUP_TEST_LOG("adding_more_than_one_target_throws");
-    const auto ot(dogen::yarn::origin_types::target);
-    const auto m0(factory.make_single_type_model(ot, 0));
-    const auto m1(factory.make_single_type_model(ot, 1));
-
-    dogen::yarn::merger mg;
-    mg.add(m0);
-
-    contains_checker<merging_error> c(too_many_targets);
-    BOOST_CHECK_EXCEPTION(mg.add(m1), merging_error, c);
-}
-
-BOOST_AUTO_TEST_CASE(merging_more_than_once_throws) {
-    SETUP_TEST_LOG("merging_more_than_once_throws");
-    auto m(factory.make_single_type_model());
-
-    dogen::yarn::merger mg;
-    mg.add(m);
-    mg.merge();
-
-    contains_checker<merging_error> c(double_merging);
-    BOOST_CHECK_EXCEPTION(mg.merge(), merging_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
