@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/yarn/types/mapping_set_repository.hpp"
+#include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -56,7 +56,7 @@ public:
         const options::knitting_options& options,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const mapping_set_repository& msrp);
+        const helpers::mapping_set_repository& msrp);
 
 public:
     /**
@@ -82,9 +82,9 @@ public:
     const annotations::annotation_groups_factory& groups_factory() const;
 
     /**
-     * @brief
+     * @brief Data to perform language mapping.
      */
-    const mapping_set_repository& mapping_repository() const;
+    const helpers::mapping_set_repository& mapping_repository() const;
 
 private:
     const std::vector<boost::filesystem::path> data_directories_;
@@ -92,7 +92,7 @@ private:
     const annotations::archetype_location_repository location_repository_;
     const dogen::annotations::type_repository type_repository_;
     const annotations::annotation_groups_factory groups_factory_;
-    const mapping_set_repository mapping_repository_;
+    const helpers::mapping_set_repository mapping_repository_;
 };
 
 } } }

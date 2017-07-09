@@ -111,6 +111,7 @@
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
+#include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"

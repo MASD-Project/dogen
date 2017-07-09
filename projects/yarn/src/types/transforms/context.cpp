@@ -29,7 +29,7 @@ context::context(
         const options::knitting_options& options,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const mapping_set_repository& msrp) :
+        const helpers::mapping_set_repository& msrp) :
     data_directories_(data_directories), options_(options),
     location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, location_repository_, type_repository_),
@@ -51,7 +51,7 @@ const annotations::annotation_groups_factory& context::groups_factory() const {
     return groups_factory_;
 }
 
-const mapping_set_repository& context::mapping_repository() const {
+const helpers::mapping_set_repository& context::mapping_repository() const {
     return mapping_repository_;
 }
 

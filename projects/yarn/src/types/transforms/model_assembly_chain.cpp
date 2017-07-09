@@ -19,8 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/mapper.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/final_model_transform.hpp"
@@ -45,8 +45,7 @@ intermediate_model model_assembly_chain::obtain_merged_model(const context& ctx,
      * Perform all the language mapping required for target and
      * references.
      */
-    const mapper mp(ctx.mapping_repository());
-    const auto mapped_target(mp.map(target.input_language(), l, target));
+    const auto mapped_target(mapping_transform::transform(ctx, target, l));
 
     std::list<intermediate_model> mapped_refs;
     for (const auto& ref : refs) {
@@ -55,14 +54,14 @@ intermediate_model model_assembly_chain::obtain_merged_model(const context& ctx,
          * requested by the target model. We are only concerned with
          * l, a member of that set. We need to exclude all models
          * which are not mappable to l such as for example the system
-         * models for some of the output languags.
+         * models for some of the output languages.
          */
-        if (!mp.is_mappable(ref.input_language(), l)) {
+        if (!mapping_transform::is_mappable(ref.input_language(), l)) {
             BOOST_LOG_SEV(lg, debug) << "Reference is not mappable: "
                                      << ref.name().id();
             continue;
         }
-        mapped_refs.push_back(mp.map(ref.input_language(), l, ref));
+        mapped_refs.push_back(mapping_transform::transform(ctx, ref, l));
     }
 
     /*

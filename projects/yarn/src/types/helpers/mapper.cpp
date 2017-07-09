@@ -190,7 +190,7 @@ map_attributes(const mapping_context& mc, std::list<attribute>& attrs) const {
         attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
 }
 
-bool mapper::is_mappable(const languages from, const languages to) const {
+bool mapper::is_mappable(const languages from, const languages to) {
     return from == to ||
         from == languages::upsilon ||
         from == languages::language_agnostic;
