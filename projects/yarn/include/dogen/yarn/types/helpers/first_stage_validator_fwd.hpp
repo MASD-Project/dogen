@@ -18,23 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_FIRST_STAGE_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_FIRST_STAGE_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_FIRST_STAGE_VALIDATOR_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_FIRST_STAGE_VALIDATOR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/intermediate_model.hpp"
-
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-class first_stage_validator final {
-public:
-    static void validate(const intermediate_model& im);
-};
+class first_stage_validator;
 
 } } }
 

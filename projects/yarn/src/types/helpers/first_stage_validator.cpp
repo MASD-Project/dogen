@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/transforms/validation_error.hpp"
-#include "dogen/yarn/types/transforms/first_stage_validator.hpp"
+#include "dogen/yarn/types/helpers/validation_error.hpp"
+#include "dogen/yarn/types/helpers/first_stage_validator.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.first_stage_validator"));
+auto lg(logger_factory("yarn.first_stage_validator"));
 
 const std::string multiple_inheritance_not_supported(
     "Multiple inheritance is not supported on target models: ");
@@ -42,7 +42,7 @@ const std::string nullable_primary_key(
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 class validator {
 public:
