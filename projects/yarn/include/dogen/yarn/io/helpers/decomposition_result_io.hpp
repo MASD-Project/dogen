@@ -18,18 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_SECOND_STAGE_VALIDATOR_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_SECOND_STAGE_VALIDATOR_FWD_HPP
+#ifndef DOGEN_YARN_IO_HELPERS_DECOMPOSITION_RESULT_IO_HPP
+#define DOGEN_YARN_IO_HELPERS_DECOMPOSITION_RESULT_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <iosfwd>
+#include "dogen/yarn/types/helpers/decomposition_result.hpp"
+
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-class second_stage_validator;
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::helpers::decomposition_result& v);
 
 } } }
 

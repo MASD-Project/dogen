@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 #include "dogen/yarn/types/transforms/indexer.hpp"
@@ -31,7 +32,15 @@
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+#include "dogen/yarn/types/helpers/second_stage_validator.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.post_processing_chain"));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -39,6 +48,8 @@ namespace transforms {
 
 void post_processing_chain::
 transform(const context& ctx, intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Executing post-processing chain.";
+
     /*
      * Enumeration transform must be done after merging as we need the
      * built-in types; these are required in order to find the default
@@ -109,6 +120,13 @@ transform(const context& ctx, intermediate_model& im) {
      * relying on these expansions. These are kernel specific.
      */
     external_transforms_chain::transform(ctx, im);
+
+    /*
+     * Ensure the model is valid.
+     */
+    helpers::second_stage_validator::validate(idx, im);
+
+    BOOST_LOG_SEV(lg, debug) << "Executed post-processing chain.";
 }
 
 } } }

@@ -18,34 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_SECOND_STAGE_VALIDATOR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_SECOND_STAGE_VALIDATOR_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_DECOMPOSER_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_DECOMPOSER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
-
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-class second_stage_validator final {
-public:
-    second_stage_validator() = default;
-    second_stage_validator(const second_stage_validator&) = default;
-    second_stage_validator(second_stage_validator&&) = default;
-    ~second_stage_validator() = default;
-    second_stage_validator& operator=(const second_stage_validator&) = default;
-
-public:
-    bool operator==(const second_stage_validator& rhs) const;
-    bool operator!=(const second_stage_validator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-};
+class decomposer;
 
 } } }
 
