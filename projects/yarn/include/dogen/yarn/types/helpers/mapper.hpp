@@ -25,7 +25,12 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/helpers/mapping_context.hpp"
+#include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +38,34 @@ namespace helpers {
 
 class mapper final {
 public:
-    mapper() = default;
-    mapper(const mapper&) = default;
-    mapper(mapper&&) = default;
-    ~mapper() = default;
-    mapper& operator=(const mapper&) = default;
+    explicit mapper(const mapping_set_repository& msrp);
+
+private:
+    const std::unordered_map<std::string, name>&
+    translations_for_language(const mapping_set& ms, const languages from,
+        const languages to) const;
+
+    std::unordered_map<std::string, name>
+    injections_for_language(const mapping_set& ms, const languages l,
+        const intermediate_model& im) const;
+
+    mapping_context create_mapping_context(const mapping_set& ms,
+        const languages from, const languages to,
+        const intermediate_model& im) const;
+
+private:
+    name_tree walk_name_tree(const mapping_context& mc,
+        const name_tree& nt, const bool skip_injection = false) const;
+    void map_attributes(const mapping_context& mc,
+        std::list<attribute>& attrs) const;
 
 public:
-    bool operator==(const mapper& rhs) const;
-    bool operator!=(const mapper& rhs) const {
-        return !this->operator==(rhs);
-    }
+    bool is_mappable(const languages from, const languages to) const;
+    intermediate_model map(const languages from, const languages to,
+        const intermediate_model& im) const;
 
+private:
+    const mapping_set_repository& mapping_set_repository_;
 };
 
 } } }
