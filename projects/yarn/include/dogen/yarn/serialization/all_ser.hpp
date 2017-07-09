@@ -42,6 +42,7 @@
 #include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/enumerator_ser.hpp"
 #include "dogen/yarn/serialization/enumeration_ser.hpp"
+#include "dogen/yarn/serialization/helpers/node_ser.hpp"
 #include "dogen/yarn/serialization/letter_cases_ser.hpp"
 #include "dogen/yarn/serialization/object_types_ser.hpp"
 #include "dogen/yarn/serialization/origin_types_ser.hpp"

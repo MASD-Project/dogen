@@ -42,6 +42,7 @@
 #include "dogen/yarn/io/primitive_io.hpp"
 #include "dogen/yarn/io/enumerator_io.hpp"
 #include "dogen/yarn/io/enumeration_io.hpp"
+#include "dogen/yarn/io/helpers/node_io.hpp"
 #include "dogen/yarn/io/letter_cases_io.hpp"
 #include "dogen/yarn/io/object_types_io.hpp"
 #include "dogen/yarn/io/origin_types_io.hpp"

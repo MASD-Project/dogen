@@ -42,6 +42,7 @@
 #include "dogen/yarn/hash/primitive_hash.hpp"
 #include "dogen/yarn/hash/enumerator_hash.hpp"
 #include "dogen/yarn/hash/enumeration_hash.hpp"
+#include "dogen/yarn/hash/helpers/node_hash.hpp"
 #include "dogen/yarn/hash/letter_cases_hash.hpp"
 #include "dogen/yarn/hash/object_types_hash.hpp"
 #include "dogen/yarn/hash/origin_types_hash.hpp"
