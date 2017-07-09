@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/quilt.csharp/types/fabric/injector.hpp"
 #include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
@@ -48,7 +48,8 @@ bool external_transform::
 requires_expansion(const yarn::intermediate_model& im) const {
     if (im.output_languages().size() != 1) {
         BOOST_LOG_SEV(lg, error) << too_many_output_languages;
-        BOOST_THROW_EXCEPTION(yarn::expansion_error(too_many_output_languages));
+        BOOST_THROW_EXCEPTION(
+            yarn::transforms::transformation_error(too_many_output_languages));
     }
 
     const auto l(im.output_languages().front());

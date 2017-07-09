@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/fabric/external_expander.hpp"
 #include "dogen/quilt.cpp/types/fabric/external_transform.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
@@ -28,9 +27,8 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-void initializer::initialize(yarn::external_expander_registrar& rg) {
+void initializer::initialize() {
     yarn::transforms::register_external_transform<external_transform>();
-    yarn::register_external_expander<external_expander>(rg);
 }
 
 } } } }

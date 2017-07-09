@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/types/transformation_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/final_model_transform.hpp"
 

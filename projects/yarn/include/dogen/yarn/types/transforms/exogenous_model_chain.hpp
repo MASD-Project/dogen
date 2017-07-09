@@ -55,6 +55,9 @@ public:
      */
     static intermediate_model transform(const boost::filesystem::path& p);
 
+    static void transform(const intermediate_model& im,
+        const boost::filesystem::path& p);
+
 private:
     static std::shared_ptr<exogenous_transform_registrar> registrar_;
 };

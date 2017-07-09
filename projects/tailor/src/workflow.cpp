@@ -27,7 +27,7 @@
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
 #include "dogen/options/types/tailoring_options.hpp"
-#include "dogen/yarn/types/workflow.hpp"
+#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
 #include "dogen/tailor/workflow.hpp"
 
 namespace {
@@ -105,21 +105,10 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
 void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
-    yarn::descriptor tgd;
-    tgd.path(o.target());
-
-    auto& rg(yarn::workflow::frontend_registrar());
-    auto& tgfe(rg.frontend_for_path(tgd.path()));
-
-    BOOST_LOG_SEV(lg, info) << "Reading: " << tgd.path().generic_string();
-    auto im(tgfe.read(tgd));
+    using yarn::transforms::exogenous_model_chain;
+    auto im(exogenous_model_chain::transform(o.target()));
     im.origin_type(yarn::origin_types::target);
-
-    yarn::descriptor od;
-    od.path(o.output());
-    auto& ofe(rg.frontend_for_path(od.path()));
-    ofe.write(im, od);
-    BOOST_LOG_SEV(lg, info) << "Writing: " << od.path().generic_string();
+    exogenous_model_chain::transform(im, o.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
 }

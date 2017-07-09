@@ -22,7 +22,6 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"

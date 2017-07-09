@@ -44,8 +44,7 @@ public:
 
 public:
     virtual std::string id() const = 0;
-    virtual void
-    transform(const context& ctx,
+    virtual void transform(const context& ctx,
         const dogen::formatters::decoration_properties_factory& dpf,
         intermediate_model& im) const = 0;
 };

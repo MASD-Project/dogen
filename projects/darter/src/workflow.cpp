@@ -27,7 +27,7 @@
 #include "dogen/darter/program_options_parser.hpp"
 #include "dogen/darter/parser_validation_error.hpp"
 #include "dogen/options/types/darting_options.hpp"
-#include "dogen/yarn/types/workflow.hpp"
+#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 #include "dogen/darter/workflow.hpp"
 
 namespace {

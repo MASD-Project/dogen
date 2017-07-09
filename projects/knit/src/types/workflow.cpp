@@ -28,7 +28,6 @@
 #include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
-#include "dogen/yarn/types/workflow.hpp"
 #include "dogen/yarn/types/transforms/model_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"

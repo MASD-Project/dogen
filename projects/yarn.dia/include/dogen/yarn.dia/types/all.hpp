@@ -31,7 +31,6 @@
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/reducer.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
-#include "dogen/yarn.dia/types/frontend.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/repository.hpp"

@@ -25,8 +25,6 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/external_expander_registrar.hpp"
-
 namespace dogen {
 namespace quilt {
 namespace cpp {
@@ -34,7 +32,7 @@ namespace fabric {
 
 class initializer {
 public:
-    static void initialize(yarn::external_expander_registrar& rg);
+    static void initialize();
 };
 
 } } } }

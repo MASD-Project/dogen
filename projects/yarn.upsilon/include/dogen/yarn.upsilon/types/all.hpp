@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/yarn.upsilon/types/upsilon.hpp"
-#include "dogen/yarn.upsilon/types/frontend.hpp"
 #include "dogen/yarn.upsilon/types/workflow.hpp"
 #include "dogen/yarn.upsilon/types/initializer.hpp"
 #include "dogen/yarn.upsilon/types/transformer.hpp"

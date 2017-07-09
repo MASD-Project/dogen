@@ -26,7 +26,6 @@
 #endif
 
 #include "dogen/yarn.json/types/json.hpp"
-#include "dogen/yarn.json/types/frontend.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/initializer.hpp"

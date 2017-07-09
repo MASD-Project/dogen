@@ -29,9 +29,7 @@
 #include "dogen/yarn/types/parsing_error.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/merging_error.hpp"
 #include "dogen/yarn/types/legacy_name_tree_parser.hpp"
-#include "dogen/yarn/types/merger.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;

@@ -58,4 +58,20 @@ exogenous_model_chain::transform(const boost::filesystem::path& p) {
     return r;
 }
 
+void exogenous_model_chain::
+transform(const intermediate_model& im, const boost::filesystem::path& p) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming yarn model: "
+                             << im.name().id();
+
+    auto& rg(registrar());
+    rg.validate();
+
+    const auto model_identifier(p.filename().string());
+    auto& t(rg.transform_for_model(model_identifier));
+
+    t.transform(im, p);
+    BOOST_LOG_SEV(lg, debug) << "Transformed yarn model. Location: "
+                             << p.generic_string();
+}
+
 } } }

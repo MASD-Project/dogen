@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/validation_error.hpp"
+#include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/types/mappings_validator.hpp"
 
 namespace {
@@ -48,6 +48,8 @@ const std::string unexpected_default_value(
 
 namespace dogen {
 namespace yarn {
+
+using helpers::validation_error; // FIXME: until we move to helpers
 
 void mappings_validator::
 validate(const languages l, const mapping_value& mv) const {
