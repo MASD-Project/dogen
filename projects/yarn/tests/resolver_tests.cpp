@@ -24,17 +24,15 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/merging_error.hpp"
-#include "dogen/yarn/types/resolution_error.hpp"
-#include "dogen/yarn/types/merger.hpp"
-#include "dogen/yarn/types/indexer.hpp"
-#include "dogen/yarn/types/resolver.hpp"
-#include "dogen/yarn/types/indices.hpp"
+#include "dogen/yarn/types/helpers/resolution_error.hpp"
+#include "dogen/yarn/types/transforms/merge_transform.hpp"
+#include "dogen/yarn/types/helpers/indexer.hpp"
+#include "dogen/yarn/types/helpers/indices.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/utility/test/equality_tester.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/types/helpers/resolver.hpp"
 
 namespace {
 
@@ -62,7 +60,7 @@ const mock_intermediate_model_factory::flags flags(false/*tagged*/,
 
 const mock_intermediate_model_factory factory(flags);
 
-const auto idx = dogen::yarn::indices();
+const auto idx = dogen::yarn::helpers::indices();
 
 const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
@@ -75,7 +73,7 @@ const std::string incorrect_meta_type("Object has incorrect meta_type");
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::resolution_error;
+using dogen::yarn::helpers::resolution_error;
 
 BOOST_AUTO_TEST_SUITE(resolver_tests)
 
@@ -95,14 +93,14 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
             t.id(t.simple());
         }
     }
-    dogen::yarn::indexer indexer;
-    const auto idx(indexer.index(m));
+    using dogen::yarn::helpers::indexer;
+    const auto idx(indexer::index(m));
 
     const auto original(m);
     BOOST_LOG_SEV(lg, debug) << "original: " << original;
 
-    dogen::yarn::resolver rs;
-    rs.resolve(idx, m);
+    using dogen::yarn::helpers::resolver;
+    resolver::resolve(idx, m);
     BOOST_LOG_SEV(lg, debug) << "resolved: " << m;
     BOOST_CHECK(m != original);
 
@@ -129,19 +127,17 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
 
     const auto m(factory.object_with_attribute_type_in_different_model());
 
-    dogen::yarn::merger mg;
-    mg.add(m[0]);
-    mg.add(m[1]);
-
-    auto combined(mg.merge());
+    using dogen::yarn::transforms::merge_transform;
+    const std::list<dogen::yarn::intermediate_model> refs = { m[1] };
+    auto combined(merge_transform::transform(m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
-    dogen::yarn::indexer indexer;
-    const auto idx(indexer.index(combined));
+    using dogen::yarn::helpers::indexer;
+    const auto idx(indexer::index(combined));
 
-    dogen::yarn::resolver rs;
-    rs.resolve(idx, combined);
+    using dogen::yarn::helpers::resolver;
+    resolver::resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -167,22 +163,23 @@ BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
     SETUP_TEST_LOG("object_with_missing_attribute_type_throws");
 
     auto m(factory.object_with_missing_attribute_type());
-    dogen::yarn::resolver rs;
+    using dogen::yarn::helpers::resolver;
     contains_checker<resolution_error> c(undefined_type);
-    BOOST_CHECK_EXCEPTION(rs.resolve(idx, m), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(resolver::resolve(idx, m), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
-    dogen::yarn::merger mg;
+    using dogen::yarn::transforms::merge_transform;
     const auto m(factory.object_with_parent_in_the_same_model());
-    mg.add(m);
-    auto combined(mg.merge());
+
+    const std::list<dogen::yarn::intermediate_model> refs;
+    auto combined(merge_transform::transform(m, refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
-    dogen::yarn::resolver rs;
-    rs.resolve(idx, combined);
+    using dogen::yarn::helpers::resolver;
+    resolver::resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -205,16 +202,17 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
 BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_different_models_resolves_successfully");
 
+
     const auto m(factory.object_with_parent_in_different_models());
-    dogen::yarn::merger mg;
-    mg.add(m[0]);
-    mg.add(m[1]);
-    auto combined(mg.merge());
+
+    using dogen::yarn::transforms::merge_transform;
+    const std::list<dogen::yarn::intermediate_model> refs = { m[1] };
+    auto combined(merge_transform::transform(m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
 
-    dogen::yarn::resolver rs;
-    rs.resolve(idx, combined);
+    using dogen::yarn::helpers::resolver;
+    resolver::resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -237,15 +235,15 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
     const auto m(factory.object_with_third_degree_parent_in_same_model());
-    dogen::yarn::merger mg;
-    mg.add(m);
+    using dogen::yarn::transforms::merge_transform;
+    const std::list<dogen::yarn::intermediate_model> refs;
 
-    auto combined(mg.merge());
+    auto combined(merge_transform::transform(m, refs));
     BOOST_CHECK(combined.objects().size() == 4);
     BOOST_CHECK(combined.builtins().empty());
 
-    dogen::yarn::resolver rs;
-    rs.resolve(idx, combined);
+    using dogen::yarn::helpers::resolver;
+    resolver::resolve(idx, combined);
 
     bool found_one(false);
     bool found_two(false);
@@ -279,33 +277,26 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_succ
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_missing_within_single_model_throws) {
     SETUP_TEST_LOG("object_with_third_degree_parent_missing_within_single_model_throws");
-    dogen::yarn::merger mg;
     auto m(factory.object_with_third_degree_parent_missing());
-    mg.add(m);
-    mg.merge();
-
     contains_checker<resolution_error> c(missing_parent);
-    dogen::yarn::resolver rs;
-    BOOST_CHECK_EXCEPTION(rs.resolve(idx, m), resolution_error, c);
+    using dogen::yarn::helpers::resolver;
+    BOOST_CHECK_EXCEPTION(resolver::resolve(idx, m), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
 
     const auto a(factory.object_with_third_degree_parent_in_different_models());
+    const std::list<dogen::yarn::intermediate_model>
+        refs = { a[1], a[2], a[3] };
 
-    dogen::yarn::merger mg;
-    mg.add(a[0]);
-    mg.add(a[1]);
-    mg.add(a[2]);
-    mg.add(a[3]);
-
-    auto combined(mg.merge());
+    using dogen::yarn::transforms::merge_transform;
+    auto combined(merge_transform::transform(a[0], refs));
     BOOST_CHECK(combined.objects().size() == 4);
     BOOST_CHECK(combined.builtins().empty());
 
-    dogen::yarn::resolver rs;
-    rs.resolve(idx, combined);
+    using dogen::yarn::helpers::resolver;
+    resolver::resolve(idx, combined);
 
     bool found(false);
     for (const auto pair : combined.objects()) {
@@ -327,18 +318,18 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
 
 BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models_throws) {
     SETUP_TEST_LOG("object_with_missing_third_degree_parent_in_different_models_throws");
-    dogen::yarn::merger mg;
+    using dogen::yarn::transforms::merge_transform;
     const auto a(
         factory.object_with_missing_third_degree_parent_in_different_models());
-    mg.add(a[0]);
-    mg.add(a[1]);
-    mg.add(a[2]);
 
-    auto combined(mg.merge());
-    dogen::yarn::resolver rs;
+    const std::list<dogen::yarn::intermediate_model> refs = { a[1], a[2] };
+
+    auto combined(merge_transform::transform(a[0], refs));
+    using dogen::yarn::helpers::resolver;
 
     contains_checker<resolution_error> c(missing_parent);
-    BOOST_CHECK_EXCEPTION(rs.resolve(idx, combined), resolution_error, c);
+    BOOST_CHECK_EXCEPTION(
+        resolver::resolve(idx, combined), resolution_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
