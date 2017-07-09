@@ -25,26 +25,36 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include <boost/property_tree/ptree.hpp>
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/helpers/mapping_actions.hpp"
+#include "dogen/yarn/types/helpers/mapping.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
 class mappings_hydrator final {
-public:
-    mappings_hydrator() = default;
-    mappings_hydrator(const mappings_hydrator&) = default;
-    mappings_hydrator(mappings_hydrator&&) = default;
-    ~mappings_hydrator() = default;
-    mappings_hydrator& operator=(const mappings_hydrator&) = default;
+private:
+    mapping_actions to_mapping_action(const std::string& s) const;
+    languages to_language(const std::string& s) const;
+
+private:
+    name read_name(const boost::property_tree::ptree& pt) const;
+
+    std::unordered_map<languages, mapping_value>
+    read_mapping_values(const boost::property_tree::ptree& pt) const;
+
+    std::list<mapping> read_stream(std::istream& s) const;
 
 public:
-    bool operator==(const mappings_hydrator& rhs) const;
-    bool operator!=(const mappings_hydrator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    std::list<mapping> hydrate(std::istream& s) const;
+    std::list<mapping> hydrate(const boost::filesystem::path& p) const;
 };
 
 } } }

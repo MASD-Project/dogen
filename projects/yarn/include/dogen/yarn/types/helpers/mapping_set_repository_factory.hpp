@@ -25,26 +25,57 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/helpers/mapping.hpp"
+#include "dogen/yarn/types/helpers/mapping_set.hpp"
+#include "dogen/yarn/types/helpers/mapping_value.hpp"
+#include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
 class mapping_set_repository_factory final {
-public:
-    mapping_set_repository_factory() = default;
-    mapping_set_repository_factory(const mapping_set_repository_factory&) = default;
-    mapping_set_repository_factory(mapping_set_repository_factory&&) = default;
-    ~mapping_set_repository_factory() = default;
-    mapping_set_repository_factory& operator=(const mapping_set_repository_factory&) = default;
+private:
+    /**
+     * @brief Obtains all the element id mappings.
+     */
+    std::unordered_map<std::string, std::list<mapping>> obtain_mappings(
+        const std::vector<boost::filesystem::path>& dirs) const;
+
+    /**
+     * @brief Ensures the mappings are valid.
+     */
+    void validate_mappings(const std::unordered_map<std::string,
+        std::list<mapping>>& mappings) const;
+
+private:
+    void insert(const std::string& upsilon_id, const std::string& lam_id,
+        std::unordered_map<std::string, std::string>& map) const;
+
+    void insert(const std::string& lam_id, const name& n,
+        const languages l, std::unordered_map<languages,
+        std::unordered_map<std::string, name>>& map) const;
+
+    void populate_upsilon_data(const std::string& lam_id,
+        const mapping& mapping, const mapping_value& upsilon_mv,
+        mapping_set& ms) const;
+
+    void populate_mapping_set(const std::list<mapping>& mappings,
+        mapping_set& ms) const;
+
+    mapping_set_repository create_repository(
+        const std::unordered_map<std::string,
+        std::list<mapping>>& mappings_by_set_name) const;
 
 public:
-    bool operator==(const mapping_set_repository_factory& rhs) const;
-    bool operator!=(const mapping_set_repository_factory& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    mapping_set_repository make(
+        const std::vector<boost::filesystem::path>& dirs) const;
 };
 
 } } }
