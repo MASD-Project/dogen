@@ -26,7 +26,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/io/orm_model_properties_io.hpp"
 #include "dogen/yarn/io/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/orm_primitive_properties_io.hpp"
@@ -78,7 +78,7 @@ to_orm_database_system(const std::string& s) {
     }
 
     BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
-    BOOST_THROW_EXCEPTION(expansion_error(invalid_daatabase_system + s));
+    BOOST_THROW_EXCEPTION(transformation_error(invalid_daatabase_system + s));
 }
 
 std::vector<orm_database_systems> orm_transform::
@@ -101,7 +101,7 @@ orm_transform::to_letter_case(const std::string& s) {
     }
 
     BOOST_LOG_SEV(lg, error) << invalid_letter_case << s;
-    BOOST_THROW_EXCEPTION(expansion_error(invalid_letter_case + s));
+    BOOST_THROW_EXCEPTION(transformation_error(invalid_letter_case + s));
 }
 
 std::unordered_map<orm_database_systems, std::string>
@@ -114,7 +114,8 @@ make_type_overrides(const std::list<std::string> ls) {
         const auto tokens(splitter::split_csv(s));
         if (tokens.size() != 2) {
             BOOST_LOG_SEV(lg, error) << invalid_type_override << s;
-            BOOST_THROW_EXCEPTION(expansion_error(invalid_type_override + s));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(invalid_type_override + s));
         }
 
         const auto ds(tokens.front());
@@ -125,7 +126,7 @@ make_type_overrides(const std::list<std::string> ls) {
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_database_system << ds;
             BOOST_THROW_EXCEPTION(
-                expansion_error(duplicate_database_system + ds));
+                transformation_error(duplicate_database_system + ds));
         }
     }
 

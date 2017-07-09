@@ -27,7 +27,7 @@
 #include "dogen/yarn/types/resolver.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/orm_object_properties.hpp"
 #include "dogen/yarn/types/orm_primitive_properties.hpp"
@@ -110,7 +110,7 @@ visitor stereotypes_transform::create_visitor(const object& o, const location& l
 
     if (leaves.empty()) {
         BOOST_LOG_SEV(lg, error) << no_visitees << n.id();
-        BOOST_THROW_EXCEPTION(expansion_error(no_visitees + n.id()));
+        BOOST_THROW_EXCEPTION(transformation_error(no_visitees + n.id()));
     }
 
     for (const auto& l : leaves)
@@ -129,7 +129,7 @@ update_visited_leaves(const std::list<name>& leaves, const visitor_details& vd,
         auto i(m.objects().find(l.id()));
         if (i == m.objects().end()) {
             BOOST_LOG_SEV(lg, error) << leaf_not_found << l.id();
-            BOOST_THROW_EXCEPTION(expansion_error(leaf_not_found + l.id()));
+            BOOST_THROW_EXCEPTION(transformation_error(leaf_not_found + l.id()));
         }
 
         auto& o(i->second);
@@ -150,7 +150,7 @@ add_visitor_to_model(const visitor& v, intermediate_model& im) {
     if (!i.second) {
         const auto id(v.name().id());
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
-        BOOST_THROW_EXCEPTION(expansion_error(duplicate_name + id));
+        BOOST_THROW_EXCEPTION(transformation_error(duplicate_name + id));
     }
     BOOST_LOG_SEV(lg, debug) << "Added visitor: " << v.name().id();
 }
@@ -166,7 +166,7 @@ expand_visitable(object& o, intermediate_model& im) {
     const auto id(o.name().id());
     if (o.is_child()) {
         BOOST_LOG_SEV(lg, error) << visitable_child << id;
-        BOOST_THROW_EXCEPTION(expansion_error(visitable_child + id));
+        BOOST_THROW_EXCEPTION(transformation_error(visitable_child + id));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found visitation root: " << o.name().id();
@@ -181,7 +181,7 @@ expand_visitable(object& o, intermediate_model& im) {
      */
     if (o.leaves().empty()) {
         BOOST_LOG_SEV(lg, error) << zero_leaves << id;
-        BOOST_THROW_EXCEPTION(expansion_error(zero_leaves + id));
+        BOOST_THROW_EXCEPTION(transformation_error(zero_leaves + id));
     }
 
     /*
@@ -200,7 +200,7 @@ expand_visitable(object& o, intermediate_model& im) {
     if (j == bucketed_leaves.end()) {
         const auto id(o.name().id());
         BOOST_LOG_SEV(lg, error) << leaves_not_found << id;
-        BOOST_THROW_EXCEPTION(expansion_error(leaves_not_found + id));
+        BOOST_THROW_EXCEPTION(transformation_error(leaves_not_found + id));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Found bucketed leaves. Total: "
@@ -330,7 +330,7 @@ void stereotypes_transform::expand(object& o, intermediate_model& im) {
     if (!unknown_stereotypes.empty()) {
         const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
         BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
-        BOOST_THROW_EXCEPTION(expansion_error(invalid_stereotypes + s));
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
 
     o.stereotypes(external_stereotypes);
@@ -356,7 +356,7 @@ void stereotypes_transform::expand(primitive& p) {
         } else if (s == stereotype_orm_object) {
             BOOST_LOG_SEV(lg, error) << invalid_primitive_properties << id;
             BOOST_THROW_EXCEPTION(
-                expansion_error(invalid_primitive_properties + id));
+                transformation_error(invalid_primitive_properties + id));
         } else
             unknown_stereotypes.push_back(s);
     }
@@ -364,7 +364,7 @@ void stereotypes_transform::expand(primitive& p) {
     if (!unknown_stereotypes.empty()) {
         const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));
         BOOST_LOG_SEV(lg, error) << invalid_stereotypes << s;
-        BOOST_THROW_EXCEPTION(expansion_error(invalid_stereotypes + s));
+        BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();

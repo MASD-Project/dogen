@@ -29,7 +29,7 @@
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/enumeration.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
@@ -189,7 +189,8 @@ name enumerations_transform::obtain_enumeration_default_underlying_element_name(
 
             if (found) {
                 BOOST_LOG_SEV(lg, error) << too_many_defaults << id;
-                BOOST_THROW_EXCEPTION(expansion_error(too_many_defaults + id));
+                BOOST_THROW_EXCEPTION(
+                    transformation_error(too_many_defaults + id));
             }
             found = true;
             r = b.name();
@@ -199,7 +200,7 @@ name enumerations_transform::obtain_enumeration_default_underlying_element_name(
     if (!found) {
         const auto id(im.name().id());
         BOOST_LOG_SEV(lg, error) << missing_default << id;
-        BOOST_THROW_EXCEPTION(expansion_error(missing_default + id));
+        BOOST_THROW_EXCEPTION(transformation_error(missing_default + id));
     }
 
     BOOST_LOG_SEV(lg, debug) << "Obtained default enumeration underlying "
@@ -216,7 +217,7 @@ obtain_invalid_enumerator_simple_name(const languages l) {
     default: {
         const auto s(boost::lexical_cast<std::string>(l));
         BOOST_LOG_SEV(lg, error) << unsupported_language << s;
-        BOOST_THROW_EXCEPTION(expansion_error(unsupported_language + s));
+        BOOST_THROW_EXCEPTION(transformation_error(unsupported_language + s));
     } }
 }
 
@@ -268,7 +269,8 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
         const auto i(enumerator_names.find(sn));
         if (i != enumerator_names.end()) {
             BOOST_LOG_SEV(lg, error) << duplicate_enumerator << sn;
-            BOOST_THROW_EXCEPTION(expansion_error(duplicate_enumerator + sn));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_enumerator + sn));
         }
 
         auto copy(en);
