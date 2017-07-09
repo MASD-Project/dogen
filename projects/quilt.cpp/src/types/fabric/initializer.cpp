@@ -19,6 +19,8 @@
  *
  */
 #include "dogen/quilt.cpp/types/fabric/external_expander.hpp"
+#include "dogen/quilt.cpp/types/fabric/external_transform.hpp"
+#include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
 
 namespace dogen {
@@ -27,6 +29,7 @@ namespace cpp {
 namespace fabric {
 
 void initializer::initialize(yarn::external_expander_registrar& rg) {
+    yarn::transforms::register_external_transform<external_transform>();
     yarn::register_external_expander<external_expander>(rg);
 }
 

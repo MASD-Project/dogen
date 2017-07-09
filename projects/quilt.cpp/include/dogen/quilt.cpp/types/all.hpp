@@ -60,6 +60,7 @@
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformer.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/external_transform.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_expander.hpp"
 #include "dogen/quilt.cpp/types/formatters/building_error.hpp"

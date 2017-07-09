@@ -108,7 +108,7 @@ transform(const context& ctx, intermediate_model& im) {
      * We can perform external expansion last as no one should be
      * relying on these expansions. These are kernel specific.
      */
-    // external_transforms_chain::transform(ctx, im);
+    external_transforms_chain::transform(ctx, im);
 }
 
 } } }

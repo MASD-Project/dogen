@@ -27,6 +27,7 @@
 
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
@@ -37,6 +38,23 @@ namespace yarn {
 namespace transforms {
 
 class external_transforms_chain final {
+private:
+    /**
+     * @brief Creates the formatters' repository with decoration data.
+     */
+    static dogen::formatters::repository
+    create_formatters_decoration_repository(
+        const std::vector<boost::filesystem::path>& data_directories);
+
+    /**
+     * @brief Create the decoration configuration factory.
+     */
+    static dogen::formatters::decoration_properties_factory
+    create_decoration_properties_factory(
+        const annotations::type_repository& atrp,
+        const dogen::formatters::repository& frp,
+        const annotations::annotation& ra);
+
 public:
     /**
      * @brief Registrar that keeps track of the available external

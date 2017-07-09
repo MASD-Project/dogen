@@ -18,38 +18,40 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXTERNAL_TRANSFORM_INTERFACE_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXTERNAL_TRANSFORM_INTERFACE_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_TRANSFORM_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/transforms/external_transform_interface.hpp"
 
 namespace dogen {
-namespace yarn {
-namespace transforms {
+namespace quilt {
+namespace cpp {
+namespace fabric {
 
-class external_transform_interface {
-public:
-    external_transform_interface() = default;
-    external_transform_interface(const external_transform_interface&) = delete;
-    external_transform_interface(external_transform_interface&&) = default;
-    virtual ~external_transform_interface() noexcept = 0;
+class external_transform final :
+        public yarn::transforms::external_transform_interface {
+private:
+    bool requires_expansion(const yarn::intermediate_model& im) const;
 
-public:
-    virtual std::string id() const = 0;
-    virtual void
-    transform(const context& ctx,
+    void expand_injection(const annotations::type_repository& atrp,
+        yarn::intermediate_model& im) const;
+
+    void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
-        intermediate_model& im) const = 0;
+        yarn::intermediate_model& im) const;
+
+public:
+    std::string id() const override;
+    void transform(const yarn::transforms::context& ctx,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        yarn::intermediate_model& im) const override;
 };
 
-} } }
+} } } }
 
 #endif
