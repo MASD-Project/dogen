@@ -19,10 +19,10 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
-#include "dogen/yarn/types/transforms/reference_paths_extractor.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 
 namespace {
@@ -57,7 +57,7 @@ transform(const context& ctx, const intermediate_model& target) {
      * Obtain the absolute paths to all reference models - system and
      * user.
      */
-    const auto rps(reference_paths_extractor::extract(ctx, target));
+    const auto rps(helpers::reference_paths_extractor::extract(ctx, target));
 
     /*
      * Obtain all languages that the target model is interested in. We

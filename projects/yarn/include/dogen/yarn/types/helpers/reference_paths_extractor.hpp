@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_REFERENCE_PATHS_EXTRACTOR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_REFERENCE_PATHS_EXTRACTOR_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_REFERENCE_PATHS_EXTRACTOR_HPP
+#define DOGEN_YARN_TYPES_HELPERS_REFERENCE_PATHS_EXTRACTOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -34,7 +34,7 @@
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 class reference_paths_extractor final {
 private:
@@ -50,18 +50,18 @@ private:
         const annotations::annotation& a);
 
     static std::list<boost::filesystem::path> obtain_paths_to_user_references(
-        const context& ctx, const annotations::annotation& ra);
+        const transforms::context& ctx, const annotations::annotation& ra);
 
 private:
     static std::vector<boost::filesystem::path> to_library_dirs(
         const std::vector<boost::filesystem::path>& data_dirs);
 
     static std::list<boost::filesystem::path> obtain_paths_to_system_models(
-        const context& ctx);
+        const transforms::context& ctx);
 
 public:
     static std::list<boost::filesystem::path>
-    extract(const context& ctx, const intermediate_model& target);
+    extract(const transforms::context& ctx, const intermediate_model& target);
 };
 
 } } }

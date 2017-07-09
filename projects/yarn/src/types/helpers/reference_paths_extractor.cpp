@@ -28,12 +28,12 @@
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/reference_paths_extractor.hpp"
+#include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.reference_paths_extractor"));
+static logger lg(logger_factory("yarn.helpers.reference_paths_extractor"));
 
 const std::string library_dir("library");
 
@@ -41,7 +41,7 @@ const std::string library_dir("library");
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 std::ostream&
 operator<<(std::ostream& s, const reference_paths_extractor::type_group& v) {
@@ -89,7 +89,7 @@ std::vector<boost::filesystem::path> reference_paths_extractor::to_library_dirs(
 }
 
 std::list<boost::filesystem::path> reference_paths_extractor::
-obtain_paths_to_system_models(const context& ctx) {
+obtain_paths_to_system_models(const transforms::context& ctx) {
     const auto library_dirs(to_library_dirs(ctx.data_directories()));
 
     BOOST_LOG_SEV(lg, debug) << "Creating descriptors for library models.";
@@ -112,7 +112,8 @@ obtain_paths_to_system_models(const context& ctx) {
 }
 
 std::list<boost::filesystem::path>
-reference_paths_extractor::obtain_paths_to_user_references(const context& ctx,
+reference_paths_extractor::
+obtain_paths_to_user_references(const transforms::context& ctx,
     const annotations::annotation& ra) {
 
     const auto target_dir(ctx.options().target().parent_path());
@@ -127,7 +128,7 @@ reference_paths_extractor::obtain_paths_to_user_references(const context& ctx,
 }
 
 std::list<boost::filesystem::path> reference_paths_extractor::
-extract(const context& ctx, const intermediate_model& target) {
+extract(const transforms::context& ctx, const intermediate_model& target) {
     /*
      * Obtain the root annotation and read the requested user
      * references from it.

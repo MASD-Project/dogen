@@ -12,28 +12,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-09 Sun 12:24]
+#+CAPTION: Clock summary at [2017-07-09 Sun 12:31]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:55* |       |      | 100.0 |
+| *Total time*                                                                | *18:01* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:55   |       |      | 100.0 |
-| Active                                                                      |         | 17:55 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   4.5 |
+| Stories                                                                     | 18:01   |       |      | 100.0 |
+| Active                                                                      |         | 18:01 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   4.4 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   2.2 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   6.7 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  23.3 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  23.2 |
 | COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   8.8 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   1.1 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   3.4 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   1.9 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |  15.2 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |  15.1 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   3.7 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.2 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   4.7 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  19.6 |
-| STARTED Move helpers from =transforms= namespace                            |         |       | 0:39 |   3.6 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   4.6 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  19.5 |
+| STARTED Move helpers from =transforms= namespace                            |         |       | 0:45 |   4.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -259,7 +259,9 @@ Notes:
 - for the external chain, we need to generate the decorations
   properties factory within the chain.
 
-*** STARTED Move helpers from =transforms= namespace                  :story:
+*** COMPLETED Move helpers from =transforms= namespace                :story:
+    CLOSED: [2017-07-09 Sun 12:31]
+    CLOCK: [2017-07-09 Sun 12:25]--[2017-07-09 Sun 12:31] =>  0:06
     CLOCK: [2017-07-09 Sun 12:12]--[2017-07-09 Sun 12:24] =>  0:12
     CLOCK: [2017-07-09 Sun 11:58]--[2017-07-09 Sun 12:11] =>  0:13
     CLOCK: [2017-07-09 Sun 11:49]--[2017-07-09 Sun 11:57] =>  0:08
