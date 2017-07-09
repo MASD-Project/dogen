@@ -28,9 +28,9 @@
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/types/expansion_error.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
-#include "dogen/yarn/types/concept_expander.hpp"
+#include "dogen/yarn/types/transforms/concepts_transform.hpp"
 
 namespace {
 
@@ -45,7 +45,7 @@ using dogen::yarn::test::mock_intermediate_model_factory;
 /* @note tagging should make no difference to tests, and not having tags
  * makes the model dumps easier to understand.
  *
- * However, strictly speaking, tagging happens before expansion so it
+ * However, strictly speaking, tagging happens before transform so it
  * would be more truthful to use a tagged model in the tests.
  */
 const mock_intermediate_model_factory::flags flags(false/*tagged*/,
@@ -57,7 +57,7 @@ const mock_intermediate_model_factory factory(flags);
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::expansion_error;
+using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using origin_types = dogen::yarn::origin_types;
 using object_types = dogen::yarn::test::mock_intermediate_model_factory::
@@ -73,11 +73,11 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_expander) {
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
     BOOST_CHECK(a.objects().empty());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -86,12 +86,12 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_co
 
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_CHECK(a.objects().size() == 1);
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -104,7 +104,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expa
     auto a(factory.object_with_attribute(ot, objt, pt));
     const auto e(factory.object_with_attribute(ot, objt, pt));
 
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     BOOST_CHECK(a.concepts().empty());
     BOOST_CHECK(a.enumerations().empty());
@@ -117,9 +117,9 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expa
     BOOST_CHECK(o.all_attributes().empty());
     BOOST_CHECK(o.modeled_concepts().empty());
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -128,7 +128,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_expander)
 
     auto a(factory.make_single_concept_model());
     const auto e(factory.make_single_concept_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
     const auto& o(a.objects().begin()->second);
@@ -138,9 +138,9 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_expander)
     const auto& c(a.concepts().begin()->second);
     BOOST_CHECK(c.refines().empty());
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -148,7 +148,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     SETUP_TEST_LOG_SOURCE("model_with_one_level_of_concept_inheritance_results_in_expected_indices");
 
     auto m(factory.make_first_degree_concepts_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
         const auto& o(pair.second);
@@ -182,9 +182,9 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(m);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(m);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.concepts()) {
         const auto& c(pair.second);
@@ -216,7 +216,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     SETUP_TEST_LOG_SOURCE("model_with_two_levels_of_concept_inheritance_results_in_expected_indices");
 
     auto m(factory.make_second_degree_concepts_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
         const auto& o(pair.second);
@@ -257,9 +257,9 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(m);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(m);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.concepts()) {
         const auto& c(pair.second);
@@ -295,7 +295,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     SETUP_TEST_LOG_SOURCE("model_with_diamond_concept_inheritance_results_in_expected_indices");
 
     auto m(factory.make_diamond_inheritance_concepts_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
@@ -337,9 +337,9 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(m);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(m);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
         const auto& c(pair.second);
@@ -382,14 +382,14 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_un
 
     auto a(factory.object_with_parent_in_the_same_model());
     const auto e(factory.object_with_parent_in_the_same_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.concepts().empty());
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -398,14 +398,14 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
 
     auto a(factory.object_with_third_degree_parent_in_same_model());
     const auto e(factory.object_with_third_degree_parent_in_same_model());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.concepts().empty());
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -414,7 +414,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     auto a(factory.make_object_with_parent_that_models_concept());
     const auto e(factory.make_object_with_parent_that_models_concept());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << a;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     BOOST_REQUIRE(a.concepts().size() == 1);
     for (const auto& pair : a.concepts()) {
@@ -445,9 +445,9 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(a);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << a;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(a);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
@@ -455,7 +455,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     SETUP_TEST_LOG_SOURCE("model_with_containing_object_with_parent_that_models_a_refined_concept_results_in_expected_indices");
 
     auto m(factory.make_object_with_parent_that_models_a_refined_concept());
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     BOOST_REQUIRE(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
@@ -489,9 +489,9 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    dogen::yarn::concept_expander ex;
-    ex.expand(m);
-    BOOST_LOG_SEV(lg, debug) << "after expansion: " << m;
+    using dogen::yarn::transforms::concepts_transform;
+    concepts_transform::transform(m);
+    BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_CHECK(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
@@ -548,11 +548,11 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    dogen::yarn::concept_expander ex;
-    contains_checker<expansion_error> c(concept_not_found);
-    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
+    using dogen::yarn::transforms::concepts_transform;
+    contains_checker<transformation_error> c(concept_not_found);
+    BOOST_CHECK_EXCEPTION(concepts_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
@@ -572,12 +572,12 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
                 o.modeled_concepts().front()));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    dogen::yarn::concept_expander ex;
-    using dogen::yarn::expansion_error;
-    contains_checker<expansion_error> c(concept_not_found);
-    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
+    using dogen::yarn::transforms::concepts_transform;
+    contains_checker<transformation_error> c(concept_not_found);
+    BOOST_CHECK_EXCEPTION(
+        concepts_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
@@ -612,12 +612,12 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    BOOST_LOG_SEV(lg, debug) << "before expansion: " << m;
+    BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    dogen::yarn::concept_expander ex;
-    using dogen::yarn::expansion_error;
-    contains_checker<expansion_error> c(object_not_found);
-    BOOST_CHECK_EXCEPTION(ex.expand(m), expansion_error, c);
+    using dogen::yarn::transforms::concepts_transform;
+    contains_checker<transformation_error> c(object_not_found);
+    BOOST_CHECK_EXCEPTION(
+        concepts_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

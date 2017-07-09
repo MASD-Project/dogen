@@ -12,30 +12,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-09 Sun 13:52]
+#+CAPTION: Clock summary at [2017-07-09 Sun 13:57]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:36* |       |      | 100.0 |
+| *Total time*                                                                | *18:41* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:36   |       |      | 100.0 |
-| Active                                                                      |         | 18:36 |      | 100.0 |
+| Stories                                                                     | 18:41   |       |      | 100.0 |
+| Active                                                                      |         | 18:41 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   4.3 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   2.2 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   6.5 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  22.5 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   2.1 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   6.4 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  22.4 |
 | COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   8.5 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   1.1 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   3.3 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   1.8 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |  14.6 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |  14.5 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   3.6 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   1.2 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   4.5 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  18.9 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  18.8 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   4.0 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.3 |
-| STARTED Port all expander unit tests to transforms                          |         |       | 0:12 |   1.1 |
+| STARTED Port all expander unit tests to transforms                          |         |       | 0:17 |   1.5 |
 | STARTED Remove all legacy classes from yarn                                 |         |       | 0:20 |   1.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
@@ -290,6 +290,7 @@ Tasks:
 - fix all resulting errors.
 
 *** STARTED Port all expander unit tests to transforms                :story:
+    CLOCK: [2017-07-09 Sun 13:52]--[2017-07-09 Sun 13:57] =>  0:05
     CLOCK: [2017-07-09 Sun 13:48]--[2017-07-09 Sun 13:51] =>  0:03
     CLOCK: [2017-07-09 Sun 13:41]--[2017-07-09 Sun 13:47] =>  0:06
     CLOCK: [2017-07-09 Sun 13:39]--[2017-07-09 Sun 13:40] =>  0:01
