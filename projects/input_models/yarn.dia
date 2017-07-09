@@ -46461,7 +46461,7 @@ output languages.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#second_stage_validator#</dia:string>
+        <dia:string>#post_processing_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -46876,7 +46876,7 @@ output languages.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#first_stage_validator#</dia:string>
+        <dia:string>#pre_processing_validator#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>

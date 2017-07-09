@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
-#include "dogen/yarn/types/helpers/second_stage_validator.hpp"
+#include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace {
@@ -124,7 +124,7 @@ transform(const context& ctx, intermediate_model& im) {
     /*
      * Ensure the model is valid.
      */
-    helpers::second_stage_validator::validate(idx, im);
+    helpers::post_processing_validator::validate(idx, im);
 
     BOOST_LOG_SEV(lg, debug) << "Executed post-processing chain.";
 }

@@ -27,7 +27,7 @@
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
-#include "dogen/yarn/types/helpers/first_stage_validator.hpp"
+#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
 namespace {
@@ -98,7 +98,7 @@ apply_second_set_of_transforms(const context& ctx, intermediate_model& im) {
     /*
      * Ensure the model is valid.
      */
-    helpers::first_stage_validator::validate(im);
+    helpers::pre_processing_validator::validate(im);
 }
 
 void pre_processing_chain::

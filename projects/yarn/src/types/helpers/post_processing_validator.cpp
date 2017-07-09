@@ -29,7 +29,7 @@
 #include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/types/helpers/decomposer.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
-#include "dogen/yarn/types/helpers/second_stage_validator.hpp"
+#include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 
 typedef boost::error_info<struct owner, std::string>
 errmsg_validation_owner;
@@ -37,7 +37,7 @@ errmsg_validation_owner;
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.second_stage_validator"));
+auto lg(logger_factory("yarn.helpers.post_processing_validator"));
 
 const std::string space(" ");
 
@@ -115,12 +115,12 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-bool second_stage_validator::
+bool post_processing_validator::
 allow_spaces_in_built_in_types(const languages l) {
     return l == languages::cpp;
 }
 
-decomposition_result second_stage_validator::
+decomposition_result post_processing_validator::
 decompose_model(const intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
 
@@ -154,7 +154,7 @@ decompose_model(const intermediate_model& im) {
     return dc.result();
 }
 
-void second_stage_validator::validate_enumerations(const transforms::indices& idx,
+void post_processing_validator::validate_enumerations(const transforms::indices& idx,
     const std::unordered_map<std::string, enumeration>& enumerations) {
 
     for (const auto& pair : enumerations) {
@@ -170,7 +170,7 @@ void second_stage_validator::validate_enumerations(const transforms::indices& id
     }
 }
 
-void second_stage_validator::validate_primitives(const transforms::indices& idx,
+void post_processing_validator::validate_primitives(const transforms::indices& idx,
     const std::unordered_map<std::string, primitive>& primitivess) {
 
     for (const auto& pair : primitivess) {
@@ -188,7 +188,7 @@ void second_stage_validator::validate_primitives(const transforms::indices& idx,
 }
 
 
-void second_stage_validator::
+void post_processing_validator::
 validate_string(const std::string& s, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "Sanity checking string: " << s;
     static std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
@@ -226,13 +226,13 @@ validate_string(const std::string& s, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "String passed all sanity checks.";
 }
 
-void second_stage_validator::
+void post_processing_validator::
 validate_strings(const std::list<std::string>& strings) {
     for (const auto& s : strings)
         validate_string(s);
 }
 
-void second_stage_validator::
+void post_processing_validator::
 validate_name(const name& n, const bool allow_spaces_in_built_in_types) {
     /*
      * Built-in types are defined at the global namespace level; if we
@@ -274,7 +274,7 @@ validate_name(const name& n, const bool allow_spaces_in_built_in_types) {
         validate_string(l.element());
 }
 
-void second_stage_validator::
+void post_processing_validator::
 validate_names(const std::list<std::pair<std::string, name>>& names,
     const languages l) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
@@ -312,7 +312,7 @@ validate_names(const std::list<std::pair<std::string, name>>& names,
     BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
 }
 
-void second_stage_validator::
+void post_processing_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     const languages l, const name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
@@ -329,7 +329,7 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
         validate_name_tree(ae, l, c, nt.are_children_opaque());
 }
 
-void second_stage_validator::validate_name_trees(
+void post_processing_validator::validate_name_trees(
     const std::unordered_set<std::string>& abstract_elements, const languages l,
     const std::list<std::pair<std::string, name_tree>>& nts) {
 
@@ -354,7 +354,7 @@ void second_stage_validator::validate_name_trees(
     }
 }
 
-void second_stage_validator::
+void post_processing_validator::
 validate(const transforms::indices& idx, const intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
