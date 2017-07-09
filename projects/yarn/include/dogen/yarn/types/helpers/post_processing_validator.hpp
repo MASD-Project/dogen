@@ -30,7 +30,7 @@
 #include <utility>
 #include <unordered_set>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/transforms/indices.hpp" // FIXME
+#include "dogen/yarn/types/helpers/indices.hpp"
 #include "dogen/yarn/types/languages.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
@@ -45,10 +45,10 @@ private:
     static decomposition_result decompose_model(const intermediate_model& im);
 
 private:
-    static void validate_enumerations(const transforms::indices& idx,
+    static void validate_enumerations(const indices& idx,
         const std::unordered_map<std::string, enumeration>& enumerations);
 
-    static void validate_primitives(const transforms::indices& idx,
+    static void validate_primitives(const indices& idx,
         const std::unordered_map<std::string, primitive>& primitivess);
 
 private:
@@ -70,8 +70,7 @@ private:
         const std::list<std::pair<std::string, name_tree>>& nts);
 
 public:
-    static void validate(
-        const transforms::indices& idx, const intermediate_model& im);
+    static void validate(const indices& idx, const intermediate_model& im);
 };
 
 } } }

@@ -18,37 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INDEXING_ERROR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INDEXING_ERROR_HPP
+#ifndef DOGEN_YARN_IO_HELPERS_INDICES_IO_HPP
+#define DOGEN_YARN_IO_HELPERS_INDICES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
+#include <iosfwd>
+#include "dogen/yarn/types/helpers/indices.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-/**
- * @brief A fatal error has occurred while indexing.
- */
-class indexing_error : public virtual std::exception, public virtual boost::exception {
-public:
-    indexing_error() = default;
-    ~indexing_error() noexcept = default;
-
-public:
-    explicit indexing_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::helpers::indices& v);
 
 } } }
 

@@ -154,7 +154,7 @@ decompose_model(const intermediate_model& im) {
     return dc.result();
 }
 
-void post_processing_validator::validate_enumerations(const transforms::indices& idx,
+void post_processing_validator::validate_enumerations(const indices& idx,
     const std::unordered_map<std::string, enumeration>& enumerations) {
 
     for (const auto& pair : enumerations) {
@@ -170,7 +170,7 @@ void post_processing_validator::validate_enumerations(const transforms::indices&
     }
 }
 
-void post_processing_validator::validate_primitives(const transforms::indices& idx,
+void post_processing_validator::validate_primitives(const indices& idx,
     const std::unordered_map<std::string, primitive>& primitivess) {
 
     for (const auto& pair : primitivess) {
@@ -355,7 +355,7 @@ void post_processing_validator::validate_name_trees(
 }
 
 void post_processing_validator::
-validate(const transforms::indices& idx, const intermediate_model& im) {
+validate(const indices& idx, const intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const auto l(im.input_language());

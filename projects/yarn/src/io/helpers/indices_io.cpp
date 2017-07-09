@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/transforms/indices_io.hpp"
+#include "dogen/yarn/io/helpers/indices_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -46,11 +46,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::s
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 std::ostream& operator<<(std::ostream& s, const indices& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::transforms::indices\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::helpers::indices\"" << ", "
       << "\"objects_always_in_heap\": " << v.objects_always_in_heap() << ", "
       << "\"elements_referable_by_attributes\": " << v.elements_referable_by_attributes() << ", "
       << "\"primitive_underliers\": " << v.primitive_underliers() << ", "

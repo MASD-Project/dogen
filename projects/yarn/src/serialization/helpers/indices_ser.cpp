@@ -29,14 +29,14 @@
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/transforms/indices_ser.hpp"
+#include "dogen/yarn/serialization/helpers/indices_ser.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::transforms::indices& v,
+    const dogen::yarn::helpers::indices& v,
     const unsigned int /*version*/) {
     ar << make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
     ar << make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
@@ -47,7 +47,7 @@ void save(Archive& ar,
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::transforms::indices& v,
+    dogen::yarn::helpers::indices& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("objects_always_in_heap", v.objects_always_in_heap_);
     ar >> make_nvp("elements_referable_by_attributes", v.elements_referable_by_attributes_);
@@ -61,16 +61,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::transforms::indices& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::transforms::indices& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::helpers::indices& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::helpers::indices& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::transforms::indices& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::transforms::indices& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::helpers::indices& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::helpers::indices& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::transforms::indices& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::transforms::indices& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::helpers::indices& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::helpers::indices& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::transforms::indices& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::transforms::indices& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::helpers::indices& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::helpers::indices& v, unsigned int version);
 
 } }

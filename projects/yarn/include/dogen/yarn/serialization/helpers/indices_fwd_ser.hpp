@@ -18,36 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_TRANSFORMS_INDICES_HASH_HPP
-#define DOGEN_YARN_HASH_TRANSFORMS_INDICES_HASH_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_HELPERS_INDICES_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_HELPERS_INDICES_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/transforms/indices.hpp"
+#include "dogen/yarn/types/helpers/indices_fwd.hpp"
 
-namespace dogen {
-namespace yarn {
-namespace transforms {
+namespace boost {
+namespace serialization {
 
-struct indices_hasher {
-public:
-    static std::size_t hash(const indices& v);
-};
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::helpers::indices& v, unsigned int version);
 
-} } }
+template<class Archive>
+void load(Archive& ar, dogen::yarn::helpers::indices& v, unsigned int version);
 
-namespace std {
+} }
 
-template<>
-struct hash<dogen::yarn::transforms::indices> {
-public:
-    size_t operator()(const dogen::yarn::transforms::indices& v) const {
-        return dogen::yarn::transforms::indices_hasher::hash(v);
-    }
-};
-
-}
 #endif

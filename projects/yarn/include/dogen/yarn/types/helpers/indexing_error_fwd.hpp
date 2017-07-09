@@ -18,26 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_TRANSFORMS_INDICES_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_TRANSFORMS_INDICES_SER_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_INDEXING_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_INDEXING_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include "dogen/yarn/types/transforms/indices.hpp"
+namespace dogen {
+namespace yarn {
+namespace helpers {
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::transforms::indices)
-namespace boost {
-namespace serialization {
+class indexing_error;
 
-template<typename Archive>
-void save(Archive& ar, const dogen::yarn::transforms::indices& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::yarn::transforms::indices& v, unsigned int version);
-
-} }
+} } }
 
 #endif

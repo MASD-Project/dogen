@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/concept.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/indices.hpp"
+#include "dogen/yarn/types/helpers/indices.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -61,43 +61,43 @@ private:
      * @brief Returns true if the name is in the model and can be
      * referred to from an attribute, false otherwise.
      */
-    static bool is_name_referable(const indices& idx, const name& n);
+    static bool is_name_referable(const helpers::indices& idx, const name& n);
 
     /**
      * @brief Resolves a name that has internal modules set.
      */
     static name resolve_name_with_internal_modules(const intermediate_model& im,
-        const indices& idx, const name& ctx, const name& n);
+        const helpers::indices& idx, const name& ctx, const name& n);
 
     /**
      * @brief Resolves a name where the ctx has internal modules.
      */
     static boost::optional<name> try_resolve_name_with_context_internal_modules(
-        const indices& idx, name ctx, const name& n);
+        const helpers::indices& idx, name ctx, const name& n);
 
     /**
      * @brief Resolves a partially formed name into a full name.
      */
-    static name resolve_name(const intermediate_model& im, const indices& idx,
-        const name& ctx, const name& n);
+    static name resolve_name(const intermediate_model& im,
+        const helpers::indices& idx, const name& ctx, const name& n);
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
     static void resolve_name_tree(const intermediate_model& im,
-        const indices& idx, const name& owner, name_tree& nt);
+        const helpers::indices& idx, const name& owner, name_tree& nt);
 
     /**
      * @brief Resolves all references to types in the supplied attribute.
      */
     static void resolve_attribute(const intermediate_model& im,
-        const indices& idx, const name& owner, attribute& attr);
+        const helpers::indices& idx, const name& owner, attribute& attr);
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
     static void resolve_attributes(const intermediate_model& im,
-        const indices& idx, const name& owner,
+        const helpers::indices& idx, const name& owner,
         std::list<attribute>& attributes);
 
     /**
@@ -120,12 +120,13 @@ private:
     /**
      * @brief Resolve all concepts.
      */
-    static void resolve_concepts(const indices& idx, intermediate_model& im);
+    static void resolve_concepts(const helpers::indices& idx,
+        intermediate_model& im);
 
     /**
      * @brief Resolve all objects.
      */
-    static void resolve_objects(const indices& idx, intermediate_model& im);
+    static void resolve_objects(const helpers::indices& idx, intermediate_model& im);
 
     /**
      * @brief Resolve all enumerations.
@@ -135,13 +136,13 @@ private:
     /**
      * @brief Resolve all primitives.
      */
-    static void resolve_primitives(const indices& idx, intermediate_model& im);
+    static void resolve_primitives(const helpers::indices& idx, intermediate_model& im);
 
 public:
     /**
      * @brief Resolves the name against the supplied model.
      */
-    static name resolve(const intermediate_model& im, const indices& idx,
+    static name resolve(const intermediate_model& im, const helpers::indices& idx,
         const name& ctx, const name& n);
 
     /**
@@ -154,7 +155,7 @@ public:
     /**
      * @brief Resolve all references to types within model.
      */
-    static void transform(const indices& idx, intermediate_model& im);
+    static void transform(const helpers::indices& idx, intermediate_model& im);
 };
 
 } } }

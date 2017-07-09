@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/indices.hpp"
+#include "dogen/yarn/types/helpers/indices.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 indices::indices(
     const std::unordered_set<std::string>& objects_always_in_heap,

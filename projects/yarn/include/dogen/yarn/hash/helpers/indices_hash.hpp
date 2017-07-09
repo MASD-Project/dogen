@@ -18,19 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INDEXER_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INDEXER_FWD_HPP
+#ifndef DOGEN_YARN_HASH_HELPERS_INDICES_HASH_HPP
+#define DOGEN_YARN_HASH_HELPERS_INDICES_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/yarn/types/helpers/indices.hpp"
+
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-class indexer;
+struct indices_hasher {
+public:
+    static std::size_t hash(const indices& v);
+};
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::helpers::indices> {
+public:
+    size_t operator()(const dogen::yarn::helpers::indices& v) const {
+        return dogen::yarn::helpers::indices_hasher::hash(v);
+    }
+};
+
+}
 #endif

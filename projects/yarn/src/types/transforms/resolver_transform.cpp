@@ -115,7 +115,7 @@ is_concept(const intermediate_model& im, const name& n) {
     return false;
 }
 
-bool resolver_transform::is_name_referable(const indices& idx, const name& n) {
+bool resolver_transform::is_name_referable(const helpers::indices& idx, const name& n) {
     BOOST_LOG_SEV(lg, debug) << "Checking to see if name is referable:" << n;
 
     const auto i(idx.elements_referable_by_attributes().find(n.id()));
@@ -128,7 +128,7 @@ bool resolver_transform::is_name_referable(const indices& idx, const name& n) {
 
 name resolver_transform::
 resolve_name_with_internal_modules(const intermediate_model& im,
-    const indices& idx, const name& ctx, const name& n) {
+    const helpers::indices& idx, const name& ctx, const name& n) {
 
     /*
      * Since the user has bothered to provide an internal module path,
@@ -229,7 +229,7 @@ resolve_name_with_internal_modules(const intermediate_model& im,
 }
 
 boost::optional<name> resolver_transform::
-try_resolve_name_with_context_internal_modules(const indices& idx,
+try_resolve_name_with_context_internal_modules(const helpers::indices& idx,
     name ctx, const name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Context has internal modules.";
@@ -279,7 +279,7 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
 }
 
 name resolver_transform::
-resolve_name(const intermediate_model& im, const indices& idx,
+resolve_name(const intermediate_model& im, const helpers::indices& idx,
     const name& ctx, const name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
@@ -346,7 +346,7 @@ resolve_name(const intermediate_model& im, const indices& idx,
 }
 
 void resolver_transform::resolve_name_tree(const intermediate_model& im,
-    const indices& idx, const name& owner, name_tree& nt) {
+    const helpers::indices& idx, const name& owner, name_tree& nt) {
     const name n(resolve_name(im, idx, owner, nt.current()));
 
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
@@ -387,7 +387,7 @@ void resolver_transform::resolve_name_tree(const intermediate_model& im,
 }
 
 void resolver_transform::resolve_attribute(const intermediate_model& im,
-    const indices& idx, const name& owner, attribute& attr) {
+    const helpers::indices& idx, const name& owner, attribute& attr) {
     try {
         resolve_name_tree(im, idx, owner, attr.parsed_type());
 
@@ -408,7 +408,7 @@ void resolver_transform::resolve_attribute(const intermediate_model& im,
 }
 
 void resolver_transform::resolve_attributes(const intermediate_model& im,
-    const indices& idx, const name& owner,
+    const helpers::indices& idx, const name& owner,
     std::list<attribute>& attributes) {
     for (auto& attr : attributes)
         resolve_attribute(im, idx, owner, attr);
@@ -463,7 +463,7 @@ validate_refinements(const intermediate_model& im, const concept& c) {
 }
 
 void resolver_transform::
-resolve_concepts(const indices& idx, intermediate_model& im) {
+resolve_concepts(const helpers::indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving concepts. Size: "
                              << im.concepts().size();
 
@@ -480,7 +480,7 @@ resolve_concepts(const indices& idx, intermediate_model& im) {
 }
 
 void resolver_transform::
-resolve_objects(const indices& idx, intermediate_model& im) {
+resolve_objects(const helpers::indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
                              << im.objects().size();
 
@@ -528,7 +528,7 @@ void resolver_transform::resolve_enumerations(intermediate_model& im) {
 }
 
 void resolver_transform::
-resolve_primitives(const indices& idx, intermediate_model& im) {
+resolve_primitives(const helpers::indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
                              << im.primitives().size();
 
@@ -544,7 +544,7 @@ resolve_primitives(const indices& idx, intermediate_model& im) {
 }
 
 name resolver_transform::resolve(const intermediate_model& im,
-    const indices& idx, const name& ctx, const name& n) {
+    const helpers::indices& idx, const name& ctx, const name& n) {
 
     const auto r(resolve_name(im, idx, ctx, n));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
@@ -608,7 +608,7 @@ boost::optional<name> resolver_transform::try_resolve_concept_name(name ctx,
     return boost::optional<name>();
 }
 
-void resolver_transform::transform(const indices& idx, intermediate_model& im) {
+void resolver_transform::transform(const helpers::indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
 
     resolve_concepts(idx, im);

@@ -20,19 +20,19 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/yarn/io/transforms/indices_io.hpp"
-#include "dogen/yarn/types/transforms/indexer.hpp"
+#include "dogen/yarn/io/helpers/indices_io.hpp"
+#include "dogen/yarn/types/helpers/indexer.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.indexer"));
+auto lg(logger_factory("yarn.helpers.indexer"));
 
 }
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 indices indexer::index(intermediate_model& m) {
     indices r;

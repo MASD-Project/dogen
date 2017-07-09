@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INDICES_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INDICES_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_INDICES_HPP
+#define DOGEN_YARN_TYPES_HELPERS_INDICES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,11 +28,11 @@
 #include <string>
 #include <algorithm>
 #include <unordered_set>
-#include "dogen/yarn/serialization/transforms/indices_fwd_ser.hpp"
+#include "dogen/yarn/serialization/helpers/indices_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 class indices final {
 public:
@@ -51,10 +51,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::transforms::indices& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::helpers::indices& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::transforms::indices& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::helpers::indices& v, unsigned int version);
 
 public:
     const std::unordered_set<std::string>& objects_always_in_heap() const;
@@ -106,8 +106,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::transforms::indices& lhs,
-    dogen::yarn::transforms::indices& rhs) {
+    dogen::yarn::helpers::indices& lhs,
+    dogen::yarn::helpers::indices& rhs) {
     lhs.swap(rhs);
 }
 

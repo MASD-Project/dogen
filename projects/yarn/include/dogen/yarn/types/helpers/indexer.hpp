@@ -18,18 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INDICES_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INDICES_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_INDEXER_HPP
+#define DOGEN_YARN_TYPES_HELPERS_INDEXER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <unordered_set>
+#include "dogen/yarn/types/helpers/indices.hpp"
+#include "dogen/yarn/types/intermediate_model.hpp"
+
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-class indices;
+class indexer final {
+public:
+    static indices index(intermediate_model& m);
+};
 
 } } }
 

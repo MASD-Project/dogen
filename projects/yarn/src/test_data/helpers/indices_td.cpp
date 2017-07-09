@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/transforms/indices_td.hpp"
+#include "dogen/yarn/test_data/helpers/indices_td.hpp"
 
 namespace {
 
@@ -41,7 +41,7 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
 indices_generator::indices_generator() : position_(0) { }
 

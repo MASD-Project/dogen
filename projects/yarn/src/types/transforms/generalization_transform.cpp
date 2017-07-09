@@ -72,8 +72,8 @@ generalization_transform::make_is_final(const type_group& tg,
 }
 
 std::unordered_set<std::string>
-generalization_transform::update_and_collect_parent_ids(const indices& idx,
-    intermediate_model& im) {
+generalization_transform::update_and_collect_parent_ids(
+    const helpers::indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     resolver_transform rst;
@@ -237,8 +237,8 @@ void generalization_transform::sort_leaves(intermediate_model& im) {
     }
 }
 
-void generalization_transform::
-transform(const context& ctx, const indices& idx, intermediate_model& im) {
+void generalization_transform::transform(
+    const context& ctx, const helpers::indices& idx, intermediate_model& im) {
     const auto parent_ids(update_and_collect_parent_ids(idx, im));
 
     const auto tg(make_type_group(ctx.type_repository()));

@@ -21,7 +21,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
-#include "dogen/yarn/types/transforms/indexer.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
@@ -32,6 +31,7 @@
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+#include "dogen/yarn/types/helpers/indexer.hpp"
 #include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
@@ -63,7 +63,7 @@ transform(const context& ctx, intermediate_model& im) {
      * part of indices, which is not ideal - but for now, its not a
      * major problem.
      */
-    const auto idx(indexer::index(im));
+    const auto idx(helpers::indexer::index(im));
 
     /*
      * We must expand generalisation relationships before we apply the

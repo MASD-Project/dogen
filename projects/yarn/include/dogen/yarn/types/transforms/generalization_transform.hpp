@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/transforms/indices.hpp"
+#include "dogen/yarn/types/helpers/indices.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -51,7 +51,7 @@ private:
 
 private:
     static std::unordered_set<std::string>
-    update_and_collect_parent_ids(const indices& idx,
+    update_and_collect_parent_ids(const helpers::indices& idx,
         intermediate_model& im);
 
     static void populate_properties_up_the_generalization_tree(
@@ -65,8 +65,8 @@ private:
     static void sort_leaves(intermediate_model& im);
 
 public:
-    static void
-    transform(const context& ctx, const indices& idx, intermediate_model& im);
+    static void transform(const context& ctx, const helpers::indices& idx,
+        intermediate_model& im);
 };
 
 } } }
