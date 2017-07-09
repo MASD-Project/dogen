@@ -18,19 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.csharp/types/fabric/external_expander.hpp"
-#include "dogen/quilt.csharp/types/fabric/external_transform.hpp"
-#include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
-#include "dogen/quilt.csharp/types/fabric/initializer.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_EXTERNAL_TRANSFORM_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_EXTERNAL_TRANSFORM_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-void initializer::initialize(yarn::external_expander_registrar& rg) {
-    yarn::transforms::register_external_transform<external_transform>();
-    yarn::register_external_expander<external_expander>(rg);
-}
+class external_transform;
 
 } } } }
+
+#endif

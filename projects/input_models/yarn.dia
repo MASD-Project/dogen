@@ -39058,16 +39058,16 @@ output languages.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O327">
       <dia:attribute name="obj_pos">
-        <dia:point val="-192,119.417"/>
+        <dia:point val="-203,120"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-192.05,119.367;-171.03,122.767"/>
+        <dia:rectangle val="-203.05,119.95;-182.03,123.35"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-192,119.417"/>
+        <dia:point val="-203,120"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="20.920000000000002"/>
@@ -39098,7 +39098,7 @@ output languages.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="-191.65,120.662"/>
+            <dia:point val="-202.65,121.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>

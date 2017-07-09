@@ -53,6 +53,7 @@
 #include "dogen/quilt.csharp/types/fabric/external_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/types/formattables/transformer.hpp"
+#include "dogen/quilt.csharp/types/fabric/external_transform.hpp"
 #include "dogen/quilt.csharp/types/formatters/io/initializer.hpp"
 #include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
 #include "dogen/quilt.csharp/types/formatters/registrar_error.hpp"
