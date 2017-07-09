@@ -25,10 +25,10 @@
 #include "dogen/utility/string/splitter.hpp"
 #include "dogen/yarn/io/location_io.hpp"
 #include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/separators.hpp"
+#include "dogen/yarn/types/helpers/separators.hpp"
 #include "dogen/yarn/types/building_error.hpp"
 #include "dogen/yarn/types/string_processor.hpp"
-#include "dogen/yarn/types/pretty_printer.hpp"
+#include "dogen/yarn/types/helpers/pretty_printer.hpp"
 #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 
@@ -55,7 +55,7 @@ name_builder::name_builder(const name& n, const bool model_name_mode)
     : model_name_mode_(model_name_mode), name_(n) { }
 
 std::string name_builder::compute_id() {
-    pretty_printer pp;
+    helpers::pretty_printer pp;
     pp.add(name_, model_name_mode_);
     const auto r(pp.print());
     BOOST_LOG_SEV(lg, debug) << "Computed id: " << r;

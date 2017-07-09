@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#include <string>
-#include <ostream>
-#include <stdexcept>
-#include "dogen/yarn/io/separators_io.hpp"
+#ifndef DOGEN_YARN_TYPES_HELPERS_PRINTING_ERROR_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_PRINTING_ERROR_FWD_HPP
+
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
-std::ostream& operator<<(std::ostream& s, const separators& v) {
-    s << "{ " << "\"__type__\": " << "\"separators\", " << "\"value\": ";
+class printing_error;
 
-    std::string attr;
-    switch (v) {
-    case separators::invalid:
-        attr = "\"invalid\"";
-        break;
-    case separators::angle_brackets:
-        attr = "\"angle_brackets\"";
-        break;
-    case separators::double_colons:
-        attr = "\"double_colons\"";
-        break;
-    case separators::dots:
-        attr = "\"dots\"";
-        break;
-    default:
-        throw std::invalid_argument("Invalid value for separators");
-    }
-    s << attr << " }";
-    return s;
-}
+} } }
 
-} }
+#endif

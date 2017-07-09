@@ -27,7 +27,7 @@
 
 #include "dogen/yarn/types/name.hpp"
 #include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/separators.hpp"
+#include "dogen/yarn/types/helpers/pretty_printer.hpp"
 #include "dogen/yarn/types/languages.hpp"
 
 namespace dogen {
@@ -51,8 +51,8 @@ public:
     build(const name& n, const bool model_name_mode);
 
 private:
-    pretty_printer csharp_pp_;
-    pretty_printer cpp_pp_;
+    helpers::pretty_printer csharp_pp_;
+    helpers::pretty_printer cpp_pp_;
 };
 
 } }

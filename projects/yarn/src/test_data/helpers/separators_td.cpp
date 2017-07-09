@@ -18,18 +18,28 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_SEPARATORS_FWD_HPP
-#define DOGEN_YARN_TYPES_SEPARATORS_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/yarn/test_data/helpers/separators_td.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
-enum class separators : unsigned int;
+separators_generator::separators_generator() : position_(0) { }
+void separators_generator::
+populate(const unsigned int position, result_type& v) {
+    v = static_cast<separators>(position % 4);
+}
 
-} }
+separators_generator::result_type
+separators_generator::create(const unsigned int  position) {
+    result_type r;
+    separators_generator::populate(position, r);
+    return r;
+}
 
-#endif
+separators_generator::result_type
+separators_generator::operator()() {
+    return create(position_++);
+}
+
+} } }

@@ -22,7 +22,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/types/building_error.hpp"
-#include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/string_processor.hpp"
 #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 
@@ -39,8 +38,8 @@ namespace dogen {
 namespace yarn {
 
 identifiable_and_qualified_builder::
-identifiable_and_qualified_builder() : csharp_pp_(separators::dots),
-                                       cpp_pp_(separators::double_colons) {}
+identifiable_and_qualified_builder() : csharp_pp_(helpers::separators::dots),
+                                       cpp_pp_(helpers::separators::double_colons) {}
 
 std::string identifiable_and_qualified_builder::obtain_qualified(
     const std::map<languages, std::string>& map, const languages& l) const {

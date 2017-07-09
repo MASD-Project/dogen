@@ -18,27 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/separators_td.hpp"
+#include <string>
+#include <ostream>
+#include <stdexcept>
+#include "dogen/yarn/io/helpers/separators_io.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
-separators_generator::separators_generator() : position_(0) { }
-void separators_generator::
-populate(const unsigned int position, result_type& v) {
-    v = static_cast<separators>(position % 4);
+std::ostream& operator<<(std::ostream& s, const separators& v) {
+    s << "{ " << "\"__type__\": " << "\"separators\", " << "\"value\": ";
+
+    std::string attr;
+    switch (v) {
+    case separators::invalid:
+        attr = "\"invalid\"";
+        break;
+    case separators::angle_brackets:
+        attr = "\"angle_brackets\"";
+        break;
+    case separators::double_colons:
+        attr = "\"double_colons\"";
+        break;
+    case separators::dots:
+        attr = "\"dots\"";
+        break;
+    default:
+        throw std::invalid_argument("Invalid value for separators");
+    }
+    s << attr << " }";
+    return s;
 }
 
-separators_generator::result_type
-separators_generator::create(const unsigned int  position) {
-    result_type r;
-    separators_generator::populate(position, r);
-    return r;
-}
-
-separators_generator::result_type
-separators_generator::operator()() {
-    return create(position_++);
-}
-
-} }
+} } }

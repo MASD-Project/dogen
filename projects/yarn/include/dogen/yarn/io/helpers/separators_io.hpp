@@ -18,21 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_IO_SEPARATORS_IO_HPP
-#define DOGEN_YARN_IO_SEPARATORS_IO_HPP
+#ifndef DOGEN_YARN_IO_HELPERS_SEPARATORS_IO_HPP
+#define DOGEN_YARN_IO_HELPERS_SEPARATORS_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <iosfwd>
-#include "dogen/yarn/types/separators.hpp"
+#include "dogen/yarn/types/helpers/separators.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
 std::ostream& operator<<(std::ostream& s, const separators& v);
 
-} }
+} } }
 
 #endif

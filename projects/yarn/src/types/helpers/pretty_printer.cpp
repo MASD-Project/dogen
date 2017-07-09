@@ -20,13 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/printing_error.hpp"
-#include "dogen/yarn/types/pretty_printer.hpp"
+#include "dogen/yarn/types/helpers/printing_error.hpp"
+#include "dogen/yarn/types/helpers/pretty_printer.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.pretty_printer"));
+auto lg(logger_factory("yarn.helpers.pretty_printer"));
 
 const char space(' ');
 const std::string comma_space(", ");
@@ -41,6 +41,7 @@ const std::string empty_child("Attempt to add an empty child.");
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
 pretty_printer::pretty_printer()
     : has_children_(false), last_child_had_children_(false),
@@ -174,4 +175,4 @@ void pretty_printer::clear() {
     stream_.str("");
 }
 
-} }
+} } }

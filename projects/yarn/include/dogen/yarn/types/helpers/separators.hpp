@@ -18,26 +18,27 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_SEPARATORS_HASH_HPP
-#define DOGEN_YARN_HASH_SEPARATORS_HASH_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_SEPARATORS_HPP
+#define DOGEN_YARN_TYPES_HELPERS_SEPARATORS_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/separators.hpp"
+namespace dogen {
+namespace yarn {
+namespace helpers {
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::separators> {
-public:
-    size_t operator()(const dogen::yarn::separators& v) const {
-        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
-    }
+/**
+ * @brief Available separators to be used by the pretty printer.
+ */
+enum class separators : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    angle_brackets = 1, ///< Enclose name elements in '<' and '>'.
+    double_colons = 2, ///< Separate name elements with a '::'.
+    dots = 3 ///< Separate name elements with a '.'.
 };
 
-}
+} } }
 
 #endif

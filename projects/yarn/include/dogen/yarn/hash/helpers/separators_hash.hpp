@@ -18,37 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PRINTING_ERROR_HPP
-#define DOGEN_YARN_TYPES_PRINTING_ERROR_HPP
+#ifndef DOGEN_YARN_HASH_HELPERS_SEPARATORS_HASH_HPP
+#define DOGEN_YARN_HASH_HELPERS_SEPARATORS_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
+#include <functional>
+#include "dogen/yarn/types/helpers/separators.hpp"
 
-namespace dogen {
-namespace yarn {
+namespace std {
 
-/**
- * @brief An error occurred whilst pretty printing.
- */
-class printing_error : public virtual std::exception, public virtual boost::exception {
+template<>
+struct hash<dogen::yarn::helpers::separators> {
 public:
-    printing_error() = default;
-    ~printing_error() noexcept = default;
-
-public:
-    explicit printing_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
+    size_t operator()(const dogen::yarn::helpers::separators& v) const {
+        return std::hash<unsigned int>()(static_cast<unsigned int>(v));
+    }
 };
 
-} }
+}
 
 #endif

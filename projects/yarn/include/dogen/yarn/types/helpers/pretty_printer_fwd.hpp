@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_SEPARATORS_HPP
-#define DOGEN_YARN_TYPES_SEPARATORS_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_PRETTY_PRINTER_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_PRETTY_PRINTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -27,17 +27,10 @@
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
-/**
- * @brief Available separators to be used by the pretty printer.
- */
-enum class separators : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    angle_brackets = 1, ///< Enclose name elements in '<' and '>'.
-    double_colons = 2, ///< Separate name elements with a '::'.
-    dots = 3 ///< Separate name elements with a '.'.
-};
+class pretty_printer;
 
-} }
+} } }
 
 #endif

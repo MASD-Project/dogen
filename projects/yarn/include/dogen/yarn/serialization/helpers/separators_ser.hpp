@@ -18,34 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_SEPARATORS_TD_HPP
-#define DOGEN_YARN_TEST_DATA_SEPARATORS_TD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_HELPERS_SEPARATORS_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_HELPERS_SEPARATORS_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/separators.hpp"
+#include <boost/serialization/nvp.hpp>
+#include "dogen/yarn/types/helpers/separators.hpp"
 
-namespace dogen {
-namespace yarn {
-
-class separators_generator {
-public:
-    separators_generator();
-
-public:
-    typedef dogen::yarn::separators result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-};
-
-} }
+template<class Archive>
+void serialize(Archive& ar, dogen::yarn::helpers::separators& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("separators", v);
+}
 
 #endif

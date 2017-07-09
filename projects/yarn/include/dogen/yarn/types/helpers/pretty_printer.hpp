@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PRETTY_PRINTER_HPP
-#define DOGEN_YARN_TYPES_PRETTY_PRINTER_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_PRETTY_PRINTER_HPP
+#define DOGEN_YARN_TYPES_HELPERS_PRETTY_PRINTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -28,10 +28,11 @@
 #include <string>
 #include <sstream>
 #include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/separators.hpp"
+#include "dogen/yarn/types/helpers/separators.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
 class pretty_printer {
 public:
@@ -63,6 +64,6 @@ private:
     const separators separator_;
 };
 
-} }
+} } }
 
 #endif

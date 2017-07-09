@@ -32,8 +32,6 @@
 #include "dogen/yarn/io/attribute_io.hpp"
 #include "dogen/yarn/io/intermediate_model_io.hpp"
 #include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/separators.hpp"
-#include "dogen/yarn/types/pretty_printer.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
