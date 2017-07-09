@@ -100,12 +100,6 @@ private:
         const std::list<annotations::archetype_location>& als)  const;
 
     /**
-     * @brief Obtain the yarn models.
-     */
-    std::list<yarn::model>
-    obtain_yarn_models(const yarn::transforms::context& ctx) const;
-
-    /**
      * @brief Performs a housekeeping run for the supplied directories.
      */
     void perform_housekeeping(

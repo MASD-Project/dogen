@@ -80,12 +80,6 @@ yarn::transforms::context workflow::create_context(
     return f.make(o, als);
 }
 
-std::list<yarn::model> workflow::
-obtain_yarn_models(const yarn::transforms::context& ctx) const {
-    yarn::workflow w;
-    return w.execute(ctx);
-}
-
 void workflow::perform_housekeeping(
     const std::list<formatters::artefact>& artefacts,
     const std::list<boost::filesystem::path>& dirs) const {
@@ -132,12 +126,8 @@ void workflow::execute() const {
         const auto ctx(create_context(knitting_options_, als));
 
         using namespace yarn::transforms;
-        const auto models_new(model_generation_chain::transform(ctx));
-
-        const auto models(obtain_yarn_models(ctx));
-        const bool use_new(false);
-
-        for (const auto& m : (use_new ? models_new : models)) {
+        const auto models(model_generation_chain::transform(ctx));
+        for (const auto& m : models) {
             if (!m.has_generatable_types()) {
                 BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
                 return;
