@@ -24,7 +24,7 @@
 #include "dogen/utility/io/vector_io.hpp"
 #include "dogen/yarn/types/object.hpp"
 #include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/resolver.hpp"
+#include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -276,8 +276,8 @@ expand_visitable(object& o, intermediate_model& im) {
 bool stereotypes_transform::try_expand_concept(
     const std::string& s, object& o, const intermediate_model& im) {
 
-    resolver rs;
-    const auto on(rs.try_resolve_concept_name(o.name(), s, im));
+    using helpers::resolver;
+    const auto on(resolver::try_resolve_concept_name(o.name(), s, im));
     if (!on)
         return false;
 
