@@ -18,37 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PERSISTER_HPP
-#define DOGEN_YARN_TYPES_PERSISTER_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_PERSISTER_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_PERSISTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
-/**
- * @brief Persists a model to a file.
- */
-class persister {
-public:
-    /**
-     * @brief Saves a model to the filesystem.
-     *
-     * @param m model to save.
-     * @param p full path of the file.
-     *
-     * The format to use is inferred by the extension supplied. If the
-     * extension supplied is not supported, an extension is thrown.
-     */
-    void persist(const intermediate_model& m,
-        const boost::filesystem::path& p) const;
-};
+class persister;
 
-} }
+} } }
 
 #endif

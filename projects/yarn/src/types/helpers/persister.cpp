@@ -22,14 +22,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
 #include "dogen/yarn/serialization/intermediate_model_ser.hpp"
-#include "dogen/yarn/types/persister_error.hpp"
-#include "dogen/yarn/types/persister.hpp"
-
-using namespace dogen::utility::log;
+#include "dogen/yarn/types/helpers/persister_error.hpp"
+#include "dogen/yarn/types/helpers/persister.hpp"
 
 namespace {
 
-auto lg(logger_factory("yarn.persister"));
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.persister"));
 
 const std::string xml_extension(".xml");
 const std::string unsupported_extension("Extension is not supported: ");
@@ -38,9 +37,10 @@ const std::string unsupported_extension("Extension is not supported: ");
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
 void persister::
-persist(const intermediate_model& m, const boost::filesystem::path& p) const {
+persist(const intermediate_model& m, const boost::filesystem::path& p) {
     const std::string extension(p.extension().string());
     if (extension != xml_extension) {
         BOOST_LOG_SEV(lg, error) << unsupported_extension << extension;
@@ -52,4 +52,4 @@ persist(const intermediate_model& m, const boost::filesystem::path& p) const {
     xml_serialize<intermediate_model>(p, m);
 }
 
-} }
+} } }

@@ -18,37 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_PERSISTER_ERROR_HPP
-#define DOGEN_YARN_TYPES_PERSISTER_ERROR_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_PERSISTER_HPP
+#define DOGEN_YARN_TYPES_HELPERS_PERSISTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
+#include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
+namespace helpers {
 
 /**
- * @brief An error occurred whilst tryng to persist a yarn model.
+ * @brief Persists a model to a file.
  */
-class persister_error : public virtual std::exception, public virtual boost::exception {
+class persister {
 public:
-    persister_error() = default;
-    ~persister_error() noexcept = default;
-
-public:
-    explicit persister_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
+    /**
+     * @brief Saves a model to the filesystem.
+     *
+     * @param m model to save.
+     * @param p full path of the file.
+     *
+     * The format to use is inferred by the extension supplied. If the
+     * extension supplied is not supported, an extension is thrown.
+     */
+    static void persist(const intermediate_model& m,
+        const boost::filesystem::path& p);
 };
 
-} }
+} } }
 
 #endif
