@@ -1,5 +1,5 @@
 diff --git a/doc/agile/v1/sprint_backlog_02.org b/doc/agile/v1/sprint_backlog_02.org
-index 6085c09e0..9ed715bd0 100644
+index 6085c09e0..a555527dc 100644
 --- a/doc/agile/v1/sprint_backlog_02.org
 +++ b/doc/agile/v1/sprint_backlog_02.org
 @@ -12,33 +12,34 @@
@@ -59,17 +59,19 @@ index 6085c09e0..9ed715bd0 100644
  #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
  #+end:
  
-@@ -343,7 +344,8 @@ transforms namespace and clean it up. Name: =map_transform=.
+@@ -343,7 +344,10 @@ transforms namespace and clean it up. Name: =map_transform=.
  Types such as name builder etc need to be moved to the helpers
  namespace.
  
 -*** Move all data types into its own namespace                        :story:
 +*** STARTED Move all data types into its own namespace                :story:
++    CLOCK: [2017-07-11 Tue 17:34]--[2017-07-11 Tue 18:22] =>  0:48
++    CLOCK: [2017-07-11 Tue 06:48]--[2017-07-11 Tue 07:36] =>  0:48
 +    CLOCK: [2017-07-10 Mon 18:46]--[2017-07-10 Mon 23:06] =>  4:20
  
  Now we have placed all the transforms under namespace =transforms=,
  for symmetry purposes it would be nice to have some top-level
-@@ -357,6 +359,12 @@ If we cannot find any good names, we may need to leave these objects
+@@ -357,6 +361,12 @@ If we cannot find any good names, we may need to leave these objects
  at the top-level. However, we should probably also place the code
  generator at the top-level as well.
  
@@ -4546,6 +4548,2742 @@ index 13fd40e7b..9b29f1e78 100644
      </dia:object>
    </dia:layer>
  </dia:diagram>
+diff --git a/projects/input_models/yarn.dia.dia b/projects/input_models/yarn.dia.dia
+index b6af15b61..667a44c0a 100644
+--- a/projects/input_models/yarn.dia.dia
++++ b/projects/input_models/yarn.dia.dia
+@@ -713,7 +713,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>#id_to_name#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::unordered_map&lt;std::string,yarn::name&gt;#</dia:string>
++            <dia:string>#std::unordered_map&lt;std::string,yarn::meta_model::name&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -736,7 +736,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>#model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="value">
+             <dia:string>##</dia:string>
+@@ -966,13 +966,13 @@ into its yarn representation.#</dia:string>
+         <dia:point val="56,49"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="55.95,48.95;86.965,55.85"/>
++        <dia:rectangle val="55.95,48.95;91.585,55.85"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="56,49"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="30.914999999999999"/>
++        <dia:real val="35.535000000000004"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6.8000000000000007"/>
+@@ -1074,7 +1074,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::exception#</dia:string>
++            <dia:string>#yarn::meta_model::exception#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1122,7 +1122,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::object#</dia:string>
++            <dia:string>#yarn::meta_model::object#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1187,7 +1187,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::enumeration#</dia:string>
++            <dia:string>#yarn::meta_model::enumeration#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1235,7 +1235,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::module#</dia:string>
++            <dia:string>#yarn::meta_model::module#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1283,7 +1283,7 @@ into its yarn representation.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::concept#</dia:string>
++            <dia:string>#yarn::meta_model::concept#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -1438,17 +1438,17 @@ into its yarn representation.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="71.4575,55.8"/>
++        <dia:point val="73.7675,55.8"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="54.9413,55.05;72.2075,68.8"/>
++        <dia:rectangle val="54.9413,55.05;74.5175,68.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="71.4575,55.8"/>
+-        <dia:point val="71.4575,61"/>
++        <dia:point val="73.7675,55.8"/>
++        <dia:point val="73.7675,61"/>
+         <dia:point val="54.9913,61"/>
+         <dia:point val="54.9913,68"/>
+       </dia:attribute>
+@@ -1988,7 +1988,7 @@ that make up dogen instructions.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -3397,7 +3397,7 @@ On the case of a UML note, represents the text of the note.#</dia:string>
+         <dia:point val="-37.7025,49"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-57.21,44.25;-36.9525,49.8"/>
++        <dia:rectangle val="-57.21,44.2;-36.9525,49.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -4546,7 +4546,7 @@ manageable format.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -4615,7 +4615,7 @@ manageable format.#</dia:string>
+         <dia:point val="-5.895,34"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-6.645,29.25;10.2,34.8"/>
++        <dia:rectangle val="-6.645,29.2;10.2,34.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -4938,7 +4938,7 @@ manageable format.#</dia:string>
+         <dia:point val="-21,80"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-25.155,75.25;-20.25,80.8"/>
++        <dia:rectangle val="-25.155,75.2;-20.25,80.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5009,7 +5009,7 @@ manageable format.#</dia:string>
+         <dia:point val="-36,79"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-42.295,75.25;-35.25,79.8"/>
++        <dia:rectangle val="-42.295,75.2;-35.25,79.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5222,7 +5222,7 @@ manageable format.#</dia:string>
+         <dia:point val="-15,67"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-40.225,62.25;-14.25,67.8"/>
++        <dia:rectangle val="-40.225,62.2;-14.25,67.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5878,7 +5878,7 @@ manageable format.#</dia:string>
+         <dia:point val="39.375,34"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="38.625,29.25;45.2,34.8"/>
++        <dia:rectangle val="38.625,29.2;45.2,34.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5949,7 +5949,7 @@ manageable format.#</dia:string>
+         <dia:point val="60.4575,38.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="59.7075,37.65;71.6575,49.8"/>
++        <dia:rectangle val="59.7075,37.65;73.9675,49.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -5957,8 +5957,8 @@ manageable format.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="60.4575,38.4"/>
+         <dia:point val="60.4575,45"/>
+-        <dia:point val="71.4575,45"/>
+-        <dia:point val="71.4575,49"/>
++        <dia:point val="73.7675,45"/>
++        <dia:point val="73.7675,49"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -5984,13 +5984,13 @@ manageable format.#</dia:string>
+         <dia:point val="83,34"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="82.95,33.95;108.96,40.05"/>
++        <dia:rectangle val="82.95,33.95;113.58,40.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="83,34"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="25.91"/>
++        <dia:real val="30.530000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="6"/>
+@@ -6005,7 +6005,7 @@ manageable format.#</dia:string>
+         <dia:string>##</dia:string>
+       </dia:attribute>
+       <dia:attribute name="abstract">
+-        <dia:boolean val="false"/>
++        <dia:boolean val="true"/>
+       </dia:attribute>
+       <dia:attribute name="suppress_attributes">
+         <dia:boolean val="false"/>
+@@ -6092,7 +6092,7 @@ manageable format.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::module&amp;#</dia:string>
++            <dia:string>#yarn::meta_model::module&amp;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6118,7 +6118,7 @@ manageable format.#</dia:string>
+                 <dia:string>#n#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#const yarn::name&amp;#</dia:string>
++                <dia:string>#const yarn::meta_model::name&amp;#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -6140,7 +6140,7 @@ manageable format.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::module&amp;#</dia:string>
++            <dia:string>#yarn::meta_model::module&amp;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6188,7 +6188,7 @@ manageable format.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#std::list&lt;yarn::name&gt;#</dia:string>
++            <dia:string>#std::list&lt;yarn::meta_model::name&gt;#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6236,7 +6236,7 @@ manageable format.#</dia:string>
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::name#</dia:string>
++            <dia:string>#yarn::meta_model::name#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -6320,17 +6320,17 @@ manageable format.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="86.915,49"/>
++        <dia:point val="91.535,49"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="82.95,39.95;87.665,49.8"/>
++        <dia:rectangle val="82.95,39.95;92.285,49.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="86.915,49"/>
+-        <dia:point val="86.915,45"/>
++        <dia:point val="91.535,49"/>
++        <dia:point val="91.535,45"/>
+         <dia:point val="83,45"/>
+         <dia:point val="83,40"/>
+       </dia:attribute>
+@@ -6394,7 +6394,7 @@ manageable format.#</dia:string>
+         <dia:point val="83,34"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="75.865,29.25;83.75,34.8"/>
++        <dia:rectangle val="75.865,29.2;83.75,34.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -6465,7 +6465,7 @@ manageable format.#</dia:string>
+         <dia:point val="24.6875,33.9502"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="23.9375,27.25;109.11,34.8"/>
++        <dia:rectangle val="23.9375,27.2;113.73,34.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -6473,8 +6473,8 @@ manageable format.#</dia:string>
+       <dia:attribute name="orth_points">
+         <dia:point val="24.6875,33.9502"/>
+         <dia:point val="24.6875,28"/>
+-        <dia:point val="108.91,28"/>
+-        <dia:point val="108.91,34"/>
++        <dia:point val="113.53,28"/>
++        <dia:point val="113.53,34"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6536,7 +6536,7 @@ manageable format.#</dia:string>
+         <dia:point val="-58,67"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="-71.64,63.25;-57.25,67.8"/>
++        <dia:rectangle val="-71.64,63.2;-57.25,67.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -6568,13 +6568,13 @@ manageable format.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O55">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="109,49"/>
++        <dia:point val="115,49"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="108.95,48.95;116.315,52.05"/>
++        <dia:rectangle val="114.95,48.95;122.315,52.05"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="109,49"/>
++        <dia:point val="115,49"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="7.2650000000000006"/>
+@@ -6714,19 +6714,19 @@ manageable format.#</dia:string>
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="108.91,40"/>
++        <dia:point val="113.53,40"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="108.16,39.25;112.832,49.8"/>
++        <dia:rectangle val="112.78,39.25;118.832,49.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="108.91,40"/>
+-        <dia:point val="108.91,45"/>
+-        <dia:point val="112.632,45"/>
+-        <dia:point val="112.632,49"/>
++        <dia:point val="113.53,40"/>
++        <dia:point val="113.53,45"/>
++        <dia:point val="118.632,45"/>
++        <dia:point val="118.632,49"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -6749,16 +6749,16 @@ manageable format.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Note" version="0" id="O57">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="91,45"/>
++        <dia:point val="95,44.7857"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="90.95,44.95;104.27,49.15"/>
++        <dia:rectangle val="94.95,44.7357;108.27,48.9357"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="91,45"/>
++        <dia:point val="95,44.7857"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+         <dia:real val="13.220000000000001"/>
+@@ -6790,7 +6790,7 @@ selector.#</dia:string>
+             <dia:real val="0.80000000000000004"/>
+           </dia:attribute>
+           <dia:attribute name="pos">
+-            <dia:point val="91.35,46.245"/>
++            <dia:point val="95.35,46.0307"/>
+           </dia:attribute>
+           <dia:attribute name="color">
+             <dia:color val="#000000"/>
+@@ -6803,17 +6803,17 @@ selector.#</dia:string>
+     </dia:object>
+     <dia:object type="UML - Message" version="0" id="O58">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="97.61,45"/>
++        <dia:point val="101.61,44.7857"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="95.5596,39.8268;97.6732,45.0632"/>
++        <dia:rectangle val="97.9085,39.7299;101.68,44.8553"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="conn_endpoints">
+-        <dia:point val="97.61,45"/>
+-        <dia:point val="95.955,40"/>
++        <dia:point val="101.61,44.7857"/>
++        <dia:point val="98.265,40"/>
+       </dia:attribute>
+       <dia:attribute name="text_colour">
+         <dia:color val="#000000"/>
+@@ -6828,7 +6828,7 @@ selector.#</dia:string>
+         <dia:enum val="0"/>
+       </dia:attribute>
+       <dia:attribute name="text_pos">
+-        <dia:point val="96.7828,43"/>
++        <dia:point val="99.9378,42.8929"/>
+       </dia:attribute>
+       <dia:connections>
+         <dia:connection handle="0" to="O57" connection="1"/>
+@@ -7125,7 +7125,7 @@ selector.#</dia:string>
+         <dia:point val="4.14,80"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="3.39,75.25;16.51,80.8"/>
++        <dia:rectangle val="3.39,75.2;16.51,80.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+diff --git a/projects/input_models/yarn.json.dia b/projects/input_models/yarn.json.dia
+index a57f85368..4bc4b454d 100644
+--- a/projects/input_models/yarn.json.dia
++++ b/projects/input_models/yarn.json.dia
+@@ -130,16 +130,16 @@
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O1">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="46,13"/>
++        <dia:point val="42,13"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="45.95,12.95;72.73,17.45"/>
++        <dia:rectangle val="41.95,12.95;75.66,17.45"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="46,13"/>
++        <dia:point val="42,13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="26.68"/>
++        <dia:real val="33.609999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="4.4000000000000004"/>
+@@ -241,7 +241,7 @@
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -289,7 +289,7 @@
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -483,17 +483,17 @@
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="59.34,13"/>
++        <dia:point val="58.805,13"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="58.59,0.95;69.9775,13.8"/>
++        <dia:rectangle val="58.055,0.95;69.9775,13.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="59.34,13"/>
+-        <dia:point val="59.34,8"/>
++        <dia:point val="58.805,13"/>
++        <dia:point val="58.805,8"/>
+         <dia:point val="69.7775,8"/>
+         <dia:point val="69.7775,1"/>
+       </dia:attribute>
+@@ -554,17 +554,17 @@
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="59.34,17.4"/>
++        <dia:point val="58.805,17.4"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="59.29,17.35;72.75,27.8"/>
++        <dia:rectangle val="58.755,17.35;72.75,27.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="59.34,17.4"/>
+-        <dia:point val="59.34,23"/>
++        <dia:point val="58.805,17.4"/>
++        <dia:point val="58.805,23"/>
+         <dia:point val="72,23"/>
+         <dia:point val="72,27"/>
+       </dia:attribute>
+@@ -730,16 +730,16 @@
+     </dia:object>
+     <dia:object type="UML - Class" version="0" id="O6">
+       <dia:attribute name="obj_pos">
+-        <dia:point val="84,13"/>
++        <dia:point val="85,13"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="83.95,12.95;104.955,18.25"/>
++        <dia:rectangle val="84.95,12.95;112.885,18.25"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+-        <dia:point val="84,13"/>
++        <dia:point val="85,13"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="20.905000000000001"/>
++        <dia:real val="27.835000000000001"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="5.2000000000000002"/>
+@@ -867,7 +867,7 @@
+                 <dia:string>#im#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#const intermediate_model&amp;#</dia:string>
++                <dia:string>#const yarn::meta_model::intermediate_model&amp;#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -915,7 +915,7 @@
+                 <dia:string>#im#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="type">
+-                <dia:string>#const intermediate_model&amp;#</dia:string>
++                <dia:string>#const yarn::meta_model::intermediate_model&amp;#</dia:string>
+               </dia:attribute>
+               <dia:attribute name="value">
+                 <dia:string>##</dia:string>
+@@ -993,7 +993,7 @@
+         <dia:point val="82.275,27"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="81.525,18.15;94.6525,27.8"/>
++        <dia:rectangle val="81.525,18.15;99.1175,27.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+@@ -1001,8 +1001,8 @@
+       <dia:attribute name="orth_points">
+         <dia:point val="82.275,27"/>
+         <dia:point val="82.275,23"/>
+-        <dia:point val="94.4525,23"/>
+-        <dia:point val="94.4525,18.2"/>
++        <dia:point val="98.9175,23"/>
++        <dia:point val="98.9175,18.2"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+diff --git a/projects/input_models/yarn.upsilon.dia b/projects/input_models/yarn.upsilon.dia
+index 6a3c4260c..be0743b3a 100644
+--- a/projects/input_models/yarn.upsilon.dia
++++ b/projects/input_models/yarn.upsilon.dia
+@@ -137,13 +137,13 @@ formats, it will be deprecated.
+         <dia:point val="47,29"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="46.95,28.95;70.65,32.65"/>
++        <dia:rectangle val="46.95,28.95;75.27,32.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="47,29"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="23.600000000000001"/>
++        <dia:real val="28.219999999999999"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -245,7 +245,7 @@ formats, it will be deprecated.
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -367,13 +367,13 @@ formats, it will be deprecated.
+         <dia:point val="70,18"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="69.95,17.95;94.42,21.65"/>
++        <dia:rectangle val="69.95,17.95;99.04,21.65"/>
+       </dia:attribute>
+       <dia:attribute name="elem_corner">
+         <dia:point val="70,18"/>
+       </dia:attribute>
+       <dia:attribute name="elem_width">
+-        <dia:real val="24.369999999999997"/>
++        <dia:real val="28.989999999999998"/>
+       </dia:attribute>
+       <dia:attribute name="elem_height">
+         <dia:real val="3.6000000000000001"/>
+@@ -475,7 +475,7 @@ formats, it will be deprecated.
+             <dia:string>##</dia:string>
+           </dia:attribute>
+           <dia:attribute name="type">
+-            <dia:string>#yarn::intermediate_model#</dia:string>
++            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+           </dia:attribute>
+           <dia:attribute name="visibility">
+             <dia:enum val="0"/>
+@@ -559,19 +559,19 @@ formats, it will be deprecated.
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="70.6,29"/>
++        <dia:point val="75.22,29"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="69.85,21.55;82.385,29.8"/>
++        <dia:rectangle val="74.47,21.55;84.695,29.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="70.6,29"/>
+-        <dia:point val="70.6,25"/>
+-        <dia:point val="82.185,25"/>
+-        <dia:point val="82.185,21.6"/>
++        <dia:point val="75.22,29"/>
++        <dia:point val="75.22,25"/>
++        <dia:point val="84.495,25"/>
++        <dia:point val="84.495,21.6"/>
+       </dia:attribute>
+       <dia:attribute name="orth_orient">
+         <dia:enum val="1"/>
+@@ -881,17 +881,17 @@ formats, it will be deprecated.
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="58.8,32.6501"/>
++        <dia:point val="61.11,32.6501"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="52.5888,31.9001;59.55,42.8"/>
++        <dia:rectangle val="52.5888,31.9001;61.86,42.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="58.8,32.6501"/>
+-        <dia:point val="58.8,38"/>
++        <dia:point val="61.11,32.6501"/>
++        <dia:point val="61.11,38"/>
+         <dia:point val="52.6388,38"/>
+         <dia:point val="52.6388,42"/>
+       </dia:attribute>
+@@ -1062,17 +1062,17 @@ formats, it will be deprecated.
+         <dia:boolean val="false"/>
+       </dia:attribute>
+       <dia:attribute name="obj_pos">
+-        <dia:point val="82.185,18"/>
++        <dia:point val="84.495,18"/>
+       </dia:attribute>
+       <dia:attribute name="obj_bb">
+-        <dia:rectangle val="81.435,8.95;89.1912,18.8"/>
++        <dia:rectangle val="83.745,8.95;89.1912,18.8"/>
+       </dia:attribute>
+       <dia:attribute name="meta">
+         <dia:composite type="dict"/>
+       </dia:attribute>
+       <dia:attribute name="orth_points">
+-        <dia:point val="82.185,18"/>
+-        <dia:point val="82.185,14"/>
++        <dia:point val="84.495,18"/>
++        <dia:point val="84.495,14"/>
+         <dia:point val="88.9912,14"/>
+         <dia:point val="88.9912,9"/>
+       </dia:attribute>
+diff --git a/projects/yarn.dia/include/dogen/yarn.dia/types/builder.hpp b/projects/yarn.dia/include/dogen/yarn.dia/types/builder.hpp
+index de46a8e9f..b5798e133 100644
+--- a/projects/yarn.dia/include/dogen/yarn.dia/types/builder.hpp
++++ b/projects/yarn.dia/include/dogen/yarn.dia/types/builder.hpp
+@@ -29,8 +29,8 @@
+ #include <string>
+ #include <unordered_map>
+ #include "dogen/annotations/types/scribble.hpp"
+-#include "dogen/yarn/types/name.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ #include "dogen/yarn.dia/types/repository.hpp"
+ #include "dogen/yarn.dia/types/transformer.hpp"
+ #include "dogen/yarn.dia/types/processed_object.hpp"
+@@ -46,18 +46,19 @@ public:
+         child_id_to_parent_ids);
+ 
+ private:
+-    yarn::module create_module_for_model(const yarn::name& n) const;
++    meta_model::module create_module_for_model(const meta_model::name& n) const;
+ 
+-    yarn::intermediate_model setup_model(const std::string& model_name,
++    meta_model::intermediate_model setup_model(const std::string& model_name,
+         const std::string& external_modules) const;
+ 
+-    void update_scribble_group(const yarn::name& n, const processed_object& po);
++    void update_scribble_group(const meta_model::name& n,
++        const processed_object& po);
+ 
+     void update_documentation(const processed_object& po);
+ 
+ public:
+     void add(const processed_object& po);
+-    yarn::intermediate_model build();
++    meta_model::intermediate_model build();
+ 
+ private:
+     repository repository_;
+diff --git a/projects/yarn.dia/include/dogen/yarn.dia/types/exogenous_transform.hpp b/projects/yarn.dia/include/dogen/yarn.dia/types/exogenous_transform.hpp
+index b1ae288a3..f14b1ce11 100644
+--- a/projects/yarn.dia/include/dogen/yarn.dia/types/exogenous_transform.hpp
++++ b/projects/yarn.dia/include/dogen/yarn.dia/types/exogenous_transform.hpp
+@@ -42,8 +42,9 @@ public:
+     yarn::transforms::exogenous_transform_types
+     supported_transforms() const override;
+     bool can_transform(const std::string& model_identifier) const override;
+-    intermediate_model transform(const boost::filesystem::path& p) override;
+-    void transform(const intermediate_model& im,
++    meta_model::intermediate_model
++    transform(const boost::filesystem::path& p) override;
++    void transform(const meta_model::intermediate_model& im,
+         const boost::filesystem::path& p) override;
+ };
+ 
+diff --git a/projects/yarn.dia/include/dogen/yarn.dia/types/repository.hpp b/projects/yarn.dia/include/dogen/yarn.dia/types/repository.hpp
+index a4e6596d8..a359c7c77 100644
+--- a/projects/yarn.dia/include/dogen/yarn.dia/types/repository.hpp
++++ b/projects/yarn.dia/include/dogen/yarn.dia/types/repository.hpp
+@@ -29,8 +29,8 @@
+ #include <string>
+ #include <algorithm>
+ #include <unordered_map>
+-#include "dogen/yarn/types/name.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ #include "dogen/yarn.dia/serialization/repository_fwd_ser.hpp"
+ 
+ namespace dogen {
+@@ -50,8 +50,8 @@ public:
+ public:
+     repository(
+         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
+-        const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
+-        const dogen::yarn::intermediate_model& model);
++        const std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name,
++        const dogen::yarn::meta_model::intermediate_model& model);
+ 
+ private:
+     template<typename Archive>
+@@ -75,20 +75,20 @@ public:
+      * @brief The name corresponding to a dia object ID.
+      */
+     /**@{*/
+-    const std::unordered_map<std::string, dogen::yarn::name>& id_to_name() const;
+-    std::unordered_map<std::string, dogen::yarn::name>& id_to_name();
+-    void id_to_name(const std::unordered_map<std::string, dogen::yarn::name>& v);
+-    void id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v);
++    const std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name() const;
++    std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name();
++    void id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v);
++    void id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>&& v);
+     /**@}*/
+ 
+     /**
+      * @brief Intermediate yarn model we are currently building.
+      */
+     /**@{*/
+-    const dogen::yarn::intermediate_model& model() const;
+-    dogen::yarn::intermediate_model& model();
+-    void model(const dogen::yarn::intermediate_model& v);
+-    void model(const dogen::yarn::intermediate_model&& v);
++    const dogen::yarn::meta_model::intermediate_model& model() const;
++    dogen::yarn::meta_model::intermediate_model& model();
++    void model(const dogen::yarn::meta_model::intermediate_model& v);
++    void model(const dogen::yarn::meta_model::intermediate_model&& v);
+     /**@}*/
+ 
+ public:
+@@ -103,8 +103,8 @@ public:
+ 
+ private:
+     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
+-    std::unordered_map<std::string, dogen::yarn::name> id_to_name_;
+-    dogen::yarn::intermediate_model model_;
++    std::unordered_map<std::string, dogen::yarn::meta_model::name> id_to_name_;
++    dogen::yarn::meta_model::intermediate_model model_;
+ };
+ 
+ } } }
+diff --git a/projects/yarn.dia/include/dogen/yarn.dia/types/repository_selector.hpp b/projects/yarn.dia/include/dogen/yarn.dia/types/repository_selector.hpp
+index 2ce4dd960..59f08a050 100644
+--- a/projects/yarn.dia/include/dogen/yarn.dia/types/repository_selector.hpp
++++ b/projects/yarn.dia/include/dogen/yarn.dia/types/repository_selector.hpp
+@@ -26,8 +26,8 @@
+ #endif
+ 
+ #include <string>
+-#include "dogen/yarn/types/name.hpp"
+-#include "dogen/yarn/types/module.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/types/meta_model/module.hpp"
+ #include "dogen/yarn.dia/types/repository.hpp"
+ 
+ namespace dogen {
+@@ -47,7 +47,7 @@ public:
+      *
+      * @pre module must exist in repository.
+      */
+-    const yarn::module& module_for_name(const yarn::name& n) const;
++    const meta_model::module& module_for_name(const meta_model::name& n) const;
+ 
+     /**
+      * @brief Returns the module associated with a dia package id.
+@@ -55,7 +55,7 @@ public:
+      * @pre id must be a valid package ID in the diagram.
+      * @pre corresponding module must have already been generated.
+      */
+-    const yarn::module& module_for_id(const std::string& id) const;
++    const meta_model::module& module_for_id(const std::string& id) const;
+ 
+     /**
+      * @brief Returns a list of all parent names for a given child dia
+@@ -63,9 +63,10 @@ public:
+      *
+      * @pre id must exist in repository.
+      */
+-    std::list<yarn::name> parent_names_for_id(const std::string& id) const;
++    std::list<meta_model::name>
++    parent_names_for_id(const std::string& id) const;
+ 
+-    yarn::name name_for_id(const std::string& id) const;
++    meta_model::name name_for_id(const std::string& id) const;
+ 
+ private:
+     const repository& repository_;
+@@ -81,7 +82,7 @@ public:
+      *
+      * @pre module must exist in repository.
+      */
+-    yarn::module& module_for_name(const yarn::name& n);
++    meta_model::module& module_for_name(const meta_model::name& n);
+ 
+     /**
+      * @brief Returns the module associated with a dia package id.
+@@ -89,7 +90,7 @@ public:
+      * @pre id must be a valid package ID in the diagram.
+      * @pre corresponding module must have already been generated.
+      */
+-    yarn::module& module_for_id(const std::string& id);
++    meta_model::module& module_for_id(const std::string& id);
+ 
+ private:
+     repository& repository_;
+diff --git a/projects/yarn.dia/include/dogen/yarn.dia/types/transformer.hpp b/projects/yarn.dia/include/dogen/yarn.dia/types/transformer.hpp
+index d2f8e0324..fd3b01f8b 100644
+--- a/projects/yarn.dia/include/dogen/yarn.dia/types/transformer.hpp
++++ b/projects/yarn.dia/include/dogen/yarn.dia/types/transformer.hpp
+@@ -28,14 +28,14 @@
+ #include <string>
+ #include <memory>
+ #include "dogen/dia/types/object.hpp"
+-#include "dogen/yarn/types/enumeration.hpp"
+-#include "dogen/yarn/types/primitive.hpp"
+-#include "dogen/yarn/types/exception.hpp"
+-#include "dogen/yarn/types/concept.hpp"
+-#include "dogen/yarn/types/element.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/types/module.hpp"
+ #include "dogen/dia/types/attribute.hpp"
++#include "dogen/yarn/types/meta_model/enumeration.hpp"
++#include "dogen/yarn/types/meta_model/primitive.hpp"
++#include "dogen/yarn/types/meta_model/exception.hpp"
++#include "dogen/yarn/types/meta_model/concept.hpp"
++#include "dogen/yarn/types/meta_model/element.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/module.hpp"
+ #include "dogen/yarn.dia/types/processed_object.hpp"
+ #include "dogen/yarn.dia/types/processed_object.hpp"
+ #include "dogen/yarn.dia/types/processed_attribute.hpp"
+@@ -77,7 +77,7 @@ private:
+      * @pre n must not be empty.
+      * @pre n must be a simple name, not a qualified name.
+      */
+-    yarn::name to_name(const std::string& n) const;
++    meta_model::name to_name(const std::string& n) const;
+ 
+     /**
+      * @brief Creates a name using the name provided, which is
+@@ -86,8 +86,8 @@ private:
+      * @pre n must not be empty.
+      * @pre n must be a simple name, not a qualified name.
+      */
+-    yarn::name to_name(const std::string& n,
+-        const yarn::name& module_name) const;
++    meta_model::name to_name(const std::string& n,
++        const meta_model::name& module_name) const;
+ 
+     /**
+      * @brief Converts a processed attribute into an yarn attribute.
+@@ -96,7 +96,7 @@ private:
+      *
+      * @pre name and type of attribute must not be empty.
+      */
+-    yarn::attribute to_attribute(const processed_attribute& a) const;
++    meta_model::attribute to_attribute(const processed_attribute& a) const;
+ 
+     /**
+      * @brief Converts a processed attribute into an yarn enumerator.
+@@ -105,13 +105,14 @@ private:
+      *
+      * @pre name and type of attribute must not be empty.
+      */
+-    yarn::enumerator to_enumerator(const processed_attribute& a) const;
++    meta_model::enumerator to_enumerator(const processed_attribute& a) const;
+ 
+ private:
+     /**
+      * @brief Update the yarn element using the processed object.
+      */
+-    void update_element(const processed_object& po, yarn::element& e) const;
++    void update_element(const processed_object& po,
++        meta_model::element& e) const;
+ 
+ public:
+     /**
+@@ -122,7 +123,7 @@ public:
+      *
+      * @pre processed object must have the exception flag set.
+      */
+-    yarn::exception to_exception(const processed_object& po) const;
++    meta_model::exception to_exception(const processed_object& po) const;
+ 
+     /**
+      * @brief Converts Dia a object containing a UML class with a
+@@ -133,7 +134,7 @@ public:
+      *
+      * @pre processed object must have the value object flag set.
+      */
+-    yarn::object to_object(const processed_object& po) const;
++    meta_model::object to_object(const processed_object& po) const;
+ 
+     /**
+      * @brief Converts a Dia object containing a class into an
+@@ -141,7 +142,7 @@ public:
+      *
+      * @param po the Dia UML class containing an enumeration.
+      */
+-    yarn::enumeration to_enumeration(const processed_object& po) const;
++    meta_model::enumeration to_enumeration(const processed_object& po) const;
+ 
+     /**
+      * @brief Converts a Dia object containing a class into a
+@@ -149,7 +150,7 @@ public:
+      *
+      * @param po the Dia UML class containing a primitive.
+      */
+-    yarn::primitive to_primitive(const processed_object& po) const;
++    meta_model::primitive to_primitive(const processed_object& po) const;
+ 
+     /**
+      * @brief Converts a Dia object of type large UML package into a
+@@ -157,7 +158,7 @@ public:
+      *
+      * @param po Dia object which contains a UML package.
+      */
+-    yarn::module to_module(const processed_object& po) const;
++    meta_model::module to_module(const processed_object& po) const;
+ 
+     /**
+      * @brief Converts a dia object with a stereotype of concept
+@@ -165,7 +166,7 @@ public:
+      *
+      * @param po Dia object which contains a concept.
+      */
+-    yarn::concept to_concept(const processed_object& o) const;
++    meta_model::concept to_concept(const processed_object& o) const;
+ 
+ private:
+     const repository& repository_;
+diff --git a/projects/yarn.dia/include/dogen/yarn.dia/types/workflow.hpp b/projects/yarn.dia/include/dogen/yarn.dia/types/workflow.hpp
+index 5cea48b5e..6aea63e61 100644
+--- a/projects/yarn.dia/include/dogen/yarn.dia/types/workflow.hpp
++++ b/projects/yarn.dia/include/dogen/yarn.dia/types/workflow.hpp
+@@ -28,7 +28,7 @@
+ #include <string>
+ #include <memory>
+ #include "dogen/dia/types/diagram_fwd.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ #include "dogen/yarn.dia/types/processed_object.hpp"
+ #include "dogen/yarn.dia/types/builder.hpp"
+ #include "dogen/yarn.dia/types/validator.hpp"
+@@ -76,10 +76,11 @@ private:
+      * @brief Transforms the entire graph of processed objects into a
+      * Yarn model.
+      */
+-    yarn::intermediate_model generate_model(builder& b, const graph_type& g);
++    meta_model::intermediate_model
++    generate_model(builder& b, const graph_type& g);
+ 
+ public:
+-    yarn::intermediate_model execute(const dogen::dia::diagram& diagram,
++    meta_model::intermediate_model execute(const dogen::dia::diagram& diagram,
+         const std::string& model_name);
+ };
+ 
+diff --git a/projects/yarn.dia/src/io/repository_io.cpp b/projects/yarn.dia/src/io/repository_io.cpp
+index 05749a135..f7dd38659 100644
+--- a/projects/yarn.dia/src/io/repository_io.cpp
++++ b/projects/yarn.dia/src/io/repository_io.cpp
+@@ -20,9 +20,9 @@
+  */
+ #include <ostream>
+ #include <boost/algorithm/string.hpp>
+-#include "dogen/yarn/io/name_io.hpp"
+ #include "dogen/yarn.dia/io/repository_io.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+ 
+ inline std::string tidy_up_string(std::string s) {
+     boost::replace_all(s, "\r\n", "<new_line>");
+@@ -66,7 +66,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
+ 
+ namespace std {
+ 
+-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::name>& v) {
++inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v) {
+     s << "[";
+     for (auto i(v.begin()); i != v.end(); ++i) {
+         if (i != v.begin()) s << ", ";
+diff --git a/projects/yarn.dia/src/serialization/repository_ser.cpp b/projects/yarn.dia/src/serialization/repository_ser.cpp
+index e7ba90b49..de70c3135 100644
+--- a/projects/yarn.dia/src/serialization/repository_ser.cpp
++++ b/projects/yarn.dia/src/serialization/repository_ser.cpp
+@@ -30,9 +30,9 @@
+ #include <boost/serialization/unordered_map.hpp>
+ #include <boost/archive/polymorphic_iarchive.hpp>
+ #include <boost/archive/polymorphic_oarchive.hpp>
+-#include "dogen/yarn/serialization/name_ser.hpp"
+ #include "dogen/yarn.dia/serialization/repository_ser.hpp"
+-#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
++#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
++#include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
+ 
+ namespace boost {
+ namespace serialization {
+diff --git a/projects/yarn.dia/src/types/builder.cpp b/projects/yarn.dia/src/types/builder.cpp
+index 3189fb1b9..1d326733d 100644
+--- a/projects/yarn.dia/src/types/builder.cpp
++++ b/projects/yarn.dia/src/types/builder.cpp
+@@ -48,7 +48,7 @@ namespace yarn {
+ namespace dia {
+ 
+ template<typename Element> void add_element(
+-    std::unordered_map<std::string, name>& id_to_name,
++    std::unordered_map<std::string, meta_model::name>& id_to_name,
+     std::unordered_map<std::string, Element>& container,
+     const Element& e, const std::string& id) {
+ 
+@@ -79,17 +79,18 @@ builder::builder(const std::string& model_name,
+     repository_.child_id_to_parent_ids(child_id_to_parent_ids);
+ }
+ 
+-yarn::module builder::create_module_for_model(const yarn::name& n) const {
+-    yarn::module r;
++meta_model::module
++builder::create_module_for_model(const meta_model::name& n) const {
++    meta_model::module r;
+     r.name(n);
+     return r;
+ }
+ 
+-yarn::intermediate_model builder::setup_model(const std::string& model_name,
++meta_model::intermediate_model builder::setup_model(const std::string& model_name,
+     const std::string& external_modules) const {
+ 
+-    yarn::intermediate_model r;
+-    yarn::helpers::name_factory nf;
++    meta_model::intermediate_model r;
++    helpers::name_factory nf;
+     r.name(nf.build_model_name(model_name, external_modules));
+     BOOST_LOG_SEV(lg, debug) << "Model: " << r.name().id();
+ 
+@@ -100,7 +101,7 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
+ }
+ 
+ void builder::
+-update_scribble_group(const yarn::name& n, const processed_object& po) {
++update_scribble_group(const meta_model::name& n, const processed_object& po) {
+ 
+     annotations::scribble psbl;
+     const auto& kvps(po.comment().key_value_pairs());
+@@ -166,7 +167,7 @@ void builder::update_documentation(const processed_object& po) {
+         return;
+     }
+ 
+-    yarn::module& module(rs.module_for_id(po.child_node_id()));
++    meta_model::module& module(rs.module_for_id(po.child_node_id()));
+     module.documentation(documentation);
+     update_scribble_group(module.name(), po);
+ }
+@@ -209,7 +210,7 @@ void builder::add(const processed_object& po) {
+     }
+ }
+ 
+-yarn::intermediate_model builder::build() {
++meta_model::intermediate_model builder::build() {
+     return repository_.model();
+ }
+ 
+diff --git a/projects/yarn.dia/src/types/exogenous_transform.cpp b/projects/yarn.dia/src/types/exogenous_transform.cpp
+index 4236243b5..dd77dd84a 100644
+--- a/projects/yarn.dia/src/types/exogenous_transform.cpp
++++ b/projects/yarn.dia/src/types/exogenous_transform.cpp
+@@ -60,7 +60,7 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
+     return boost::ends_with(model_identifier, extension);
+ }
+ 
+-intermediate_model
++meta_model::intermediate_model
+ exogenous_transform::transform(const boost::filesystem::path& p) {
+     BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
+ 
+@@ -77,7 +77,8 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
+     return r;
+ }
+ 
+-void exogenous_transform::transform(const intermediate_model& /*im*/,
++void exogenous_transform::transform(
++    const meta_model::intermediate_model& /*im*/,
+     const boost::filesystem::path& /*p*/) {
+     BOOST_LOG_SEV(lg, error) << to_dia_support_unavailable;
+ 
+diff --git a/projects/yarn.dia/src/types/repository.cpp b/projects/yarn.dia/src/types/repository.cpp
+index 4af2c84e8..aa70cfaa2 100644
+--- a/projects/yarn.dia/src/types/repository.cpp
++++ b/projects/yarn.dia/src/types/repository.cpp
+@@ -26,8 +26,8 @@ namespace dia {
+ 
+ repository::repository(
+     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
+-    const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
+-    const dogen::yarn::intermediate_model& model)
++    const std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name,
++    const dogen::yarn::meta_model::intermediate_model& model)
+     : child_id_to_parent_ids_(child_id_to_parent_ids),
+       id_to_name_(id_to_name),
+       model_(model) { }
+@@ -67,35 +67,35 @@ void repository::child_id_to_parent_ids(const std::unordered_map<std::string, st
+     child_id_to_parent_ids_ = std::move(v);
+ }
+ 
+-const std::unordered_map<std::string, dogen::yarn::name>& repository::id_to_name() const {
++const std::unordered_map<std::string, dogen::yarn::meta_model::name>& repository::id_to_name() const {
+     return id_to_name_;
+ }
+ 
+-std::unordered_map<std::string, dogen::yarn::name>& repository::id_to_name() {
++std::unordered_map<std::string, dogen::yarn::meta_model::name>& repository::id_to_name() {
+     return id_to_name_;
+ }
+ 
+-void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>& v) {
++void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v) {
+     id_to_name_ = v;
+ }
+ 
+-void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v) {
++void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>&& v) {
+     id_to_name_ = std::move(v);
+ }
+ 
+-const dogen::yarn::intermediate_model& repository::model() const {
++const dogen::yarn::meta_model::intermediate_model& repository::model() const {
+     return model_;
+ }
+ 
+-dogen::yarn::intermediate_model& repository::model() {
++dogen::yarn::meta_model::intermediate_model& repository::model() {
+     return model_;
+ }
+ 
+-void repository::model(const dogen::yarn::intermediate_model& v) {
++void repository::model(const dogen::yarn::meta_model::intermediate_model& v) {
+     model_ = v;
+ }
+ 
+-void repository::model(const dogen::yarn::intermediate_model&& v) {
++void repository::model(const dogen::yarn::meta_model::intermediate_model&& v) {
+     model_ = std::move(v);
+ }
+ 
+diff --git a/projects/yarn.dia/src/types/repository_selector.cpp b/projects/yarn.dia/src/types/repository_selector.cpp
+index d8bcd4726..3eb48c83c 100644
+--- a/projects/yarn.dia/src/types/repository_selector.cpp
++++ b/projects/yarn.dia/src/types/repository_selector.cpp
+@@ -50,8 +50,8 @@ void const_repository_selector::validate_id(const std::string& id) const {
+     }
+ }
+ 
+-const yarn::module& const_repository_selector::
+-module_for_name(const yarn::name& n) const {
++const meta_model::module& const_repository_selector::
++module_for_name(const meta_model::name& n) const {
+     const auto i(repository_.model().modules().find(n.id()));
+     if (i == repository_.model().modules().end()) {
+         const auto sn(n.simple());
+@@ -61,17 +61,17 @@ module_for_name(const yarn::name& n) const {
+     return i->second;
+ }
+ 
+-const yarn::module& const_repository_selector::
++const meta_model::module& const_repository_selector::
+ module_for_id(const std::string& id) const {
+     const auto n(name_for_id(id));
+     return module_for_name(n);
+ }
+ 
+-std::list<yarn::name> const_repository_selector::
++std::list<meta_model::name> const_repository_selector::
+ parent_names_for_id(const std::string& id) const {
+     validate_id(id);
+ 
+-    std::list<yarn::name> r;
++    std::list<meta_model::name> r;
+     const auto i(repository_.child_id_to_parent_ids().find(id));
+     if (i == repository_.child_id_to_parent_ids().end())
+         return r;
+@@ -98,7 +98,8 @@ parent_names_for_id(const std::string& id) const {
+     return r;
+ }
+ 
+-yarn::name const_repository_selector::name_for_id(const std::string& id) const {
++meta_model::name
++const_repository_selector::name_for_id(const std::string& id) const {
+     validate_id(id);
+     const auto i(repository_.id_to_name().find(id));
+     if (i == repository_.id_to_name().end()) {
+@@ -111,7 +112,8 @@ yarn::name const_repository_selector::name_for_id(const std::string& id) const {
+ repository_selector::repository_selector(repository& rp)
+     : repository_(rp) {}
+ 
+-yarn::module& repository_selector::module_for_name(const yarn::name& n) {
++meta_model::module&
++repository_selector::module_for_name(const meta_model::name& n) {
+     const auto i(repository_.model().modules().find(n.id()));
+     if (i == repository_.model().modules().end()) {
+         const auto sn(n.simple());
+@@ -121,7 +123,7 @@ yarn::module& repository_selector::module_for_name(const yarn::name& n) {
+     return i->second;
+ }
+ 
+-yarn::module& repository_selector::module_for_id(const std::string& id) {
++meta_model::module& repository_selector::module_for_id(const std::string& id) {
+     const_repository_selector crs(repository_);
+     const auto n(crs.name_for_id(id));
+     return module_for_name(n);
+diff --git a/projects/yarn.dia/src/types/transformer.cpp b/projects/yarn.dia/src/types/transformer.cpp
+index 6a88acef1..fb91f5f5d 100644
+--- a/projects/yarn.dia/src/types/transformer.cpp
++++ b/projects/yarn.dia/src/types/transformer.cpp
+@@ -60,30 +60,31 @@ void transformer::validate_dia_object_name(const std::string& n) const {
+     }
+ }
+ 
+-yarn::name transformer::to_name(const std::string& n) const {
++meta_model::name transformer::to_name(const std::string& n) const {
+     validate_dia_object_name(n);
+-    yarn::helpers::name_factory f;
++    helpers::name_factory f;
+     return f.build_element_in_model(repository_.model().name(), n);
+ }
+ 
+-yarn::name transformer::
+-to_name(const std::string& n, const yarn::name& module_n) const {
++meta_model::name transformer::
++to_name(const std::string& n, const meta_model::name& module_n) const {
+     validate_dia_object_name(n);
+-    yarn::helpers::name_factory f;
++    helpers::name_factory f;
+     return f.build_element_in_module(module_n, n);
+ }
+ 
+-yarn::attribute transformer::to_attribute(const processed_attribute& a) const {
++meta_model::attribute
++transformer::to_attribute(const processed_attribute& a) const {
+     validate_dia_object_name(a.name());
+ 
+-    yarn::attribute r;
++    meta_model::attribute r;
+     r.name().simple(a.name());
+     r.unparsed_type(a.type());
+     r.documentation(a.comment().documentation());
+     return r;
+ }
+ 
+-yarn::enumerator
++meta_model::enumerator
+ transformer::to_enumerator(const processed_attribute& a) const {
+     validate_dia_object_name(a.name());
+ 
+@@ -93,15 +94,15 @@ transformer::to_enumerator(const processed_attribute& a) const {
+                 enumerator_with_type + a.type()));
+     }
+ 
+-    yarn::enumerator r;
++    meta_model::enumerator r;
+     r.name().simple(a.name());
+     r.documentation(a.comment().documentation());
+     return r;
+ }
+ 
+ void transformer::
+-update_element(const processed_object& po, yarn::element& e) const {
+-    e.origin_type(origin_types::not_yet_determined);
++update_element(const processed_object& po, meta_model::element& e) const {
++    e.origin_type(meta_model::origin_types::not_yet_determined);
+ 
+     const auto package_id(po.child_node_id());
+     bool is_in_package(!package_id.empty());
+@@ -129,11 +130,11 @@ update_element(const processed_object& po, yarn::element& e) const {
+         e.stereotypes().push_back(us);
+ }
+ 
+-yarn::object transformer::to_object(const processed_object& po) const {
++meta_model::object transformer::to_object(const processed_object& po) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
+                              << po.id();
+ 
+-    yarn::object r;
++    meta_model::object r;
+     update_element(po, r);
+ 
+     for (const auto& p : po.attributes())
+@@ -157,21 +158,22 @@ yarn::object transformer::to_object(const processed_object& po) const {
+     return r;
+ }
+ 
+-yarn::exception transformer::to_exception(const processed_object& po) const {
++meta_model::exception
++transformer::to_exception(const processed_object& po) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
+                              << po.id();
+ 
+-    yarn::exception e;
++    meta_model::exception e;
+     update_element(po, e);
+     return e;
+ }
+ 
+-yarn::enumeration
++meta_model::enumeration
+ transformer::to_enumeration(const processed_object& po) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
+                              << po.id();
+ 
+-    yarn::enumeration r;
++    meta_model::enumeration r;
+     update_element(po, r);
+ 
+     for (const auto& attr : po.attributes())
+@@ -180,30 +182,30 @@ transformer::to_enumeration(const processed_object& po) const {
+     return r;
+ }
+ 
+-yarn::primitive
++meta_model::primitive
+ transformer::to_primitive(const processed_object& po) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
+                              << po.id();
+ 
+-    yarn::primitive r;
++    meta_model::primitive r;
+     update_element(po, r);
+     return r;
+ }
+ 
+-yarn::module transformer::to_module(const processed_object& po) const {
++meta_model::module transformer::to_module(const processed_object& po) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: "
+                              << po.id();
+ 
+-    yarn::module r;
++    meta_model::module r;
+     update_element(po, r);
+     return r;
+ }
+ 
+-yarn::concept transformer::to_concept(const processed_object& po) const {
++meta_model::concept transformer::to_concept(const processed_object& po) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
+                              << po.id();
+ 
+-    yarn::concept r;
++    meta_model::concept r;
+     update_element(po, r);
+ 
+     for (const auto& attr : po.attributes())
+diff --git a/projects/yarn.dia/src/types/workflow.cpp b/projects/yarn.dia/src/types/workflow.cpp
+index 086637712..69f1c19df 100644
+--- a/projects/yarn.dia/src/types/workflow.cpp
++++ b/projects/yarn.dia/src/types/workflow.cpp
+@@ -21,8 +21,7 @@
+ #include <boost/graph/depth_first_search.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/dia/types/diagram.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+ #include "dogen/yarn.dia/types/grapher.hpp"
+ #include "dogen/yarn.dia/types/visitor.hpp"
+ #include "dogen/yarn.dia/types/reducer.hpp"
+@@ -92,14 +91,14 @@ builder workflow::create_builder(const std::string& model_name,
+     return b;
+ }
+ 
+-yarn::intermediate_model
++meta_model::intermediate_model
+ workflow::generate_model(builder& b, const graph_type& g) {
+     visitor v(b);
+     boost::depth_first_search(g, boost::visitor(v));
+     return b.build();
+ }
+ 
+-yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
++meta_model::intermediate_model workflow::execute(const dogen::dia::diagram& d,
+     const std::string& model_name) {
+ 
+     /*
+diff --git a/projects/yarn.json/include/dogen/yarn.json/types/dehydrator.hpp b/projects/yarn.json/include/dogen/yarn.json/types/dehydrator.hpp
+index 02e061592..b25669a63 100644
+--- a/projects/yarn.json/include/dogen/yarn.json/types/dehydrator.hpp
++++ b/projects/yarn.json/include/dogen/yarn.json/types/dehydrator.hpp
+@@ -32,7 +32,7 @@
+ #include <boost/filesystem/path.hpp>
+ #include <boost/optional.hpp>
+ #include "dogen/annotations/types/scribble.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ 
+ namespace dogen {
+ namespace yarn {
+@@ -41,7 +41,7 @@ namespace json {
+ class dehydrator final {
+ private:
+     std::string tidy_up_string(std::string s) const;
+-    bool has_elements(const intermediate_model& im) const;
++    bool has_elements(const meta_model::intermediate_model& im) const;
+ 
+     template<typename Element>
+     std::map<std::string, Element>
+@@ -54,38 +54,41 @@ private:
+ 
+ private:
+     boost::optional<annotations::scribble_group> scribble_group_for_name(
+-        const intermediate_model& im, const yarn::name& n) const;
++        const meta_model::intermediate_model& im,
++        const meta_model::name& n) const;
+     boost::optional<annotations::scribble>
+     scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
+-        const yarn::name& n) const;
+-    void dehydrate_name(const name& n, std::ostream& s) const;
+-    void dehydrate_names(const std::list<name>& names, std::ostream& s) const;
++        const meta_model::name& n) const;
++    void dehydrate_name(const meta_model::name& n, std::ostream& s) const;
++    void dehydrate_names(const std::list<meta_model::name>& names,
++        std::ostream& s) const;
+     void dehydrate_annotations(
+         const boost::optional<annotations::scribble>& scribble,
+         std::ostream& s) const;
+     void dehydrate_element(
+         const boost::optional<annotations::scribble_group>& sg,
+-        const element& e, const std::string& meta_type, std::ostream& s) const;
++        const meta_model::element& e, const std::string& meta_type,
++        std::ostream& s) const;
+     void dehydrate_attributes(
+         const boost::optional<annotations::scribble_group>& sg,
+-        const std::list<attribute>& attrs, std::ostream& s) const;
++        const std::list<meta_model::attribute>& attrs, std::ostream& s) const;
+     void dehydrate_objects(const bool requires_leading_comma,
+-        const intermediate_model& im, std::ostream& s) const;
++        const meta_model::intermediate_model& im, std::ostream& s) const;
+     void dehydrate_concepts(const bool requires_leading_comma,
+-        const intermediate_model& im, std::ostream& s) const;
++        const meta_model::intermediate_model& im, std::ostream& s) const;
+     void dehydrate_modules(const bool requires_leading_comma,
+-        const intermediate_model& im, std::ostream& s) const;
++        const meta_model::intermediate_model& im, std::ostream& s) const;
+     void dehydrate_enumerations(const bool requires_leading_comma,
+-        const intermediate_model& im,
++        const meta_model::intermediate_model& im,
+         std::ostream& s) const;
+     void dehydrate_primitives(const bool requires_leading_comma,
+-        const intermediate_model& im, std::ostream& s) const;
++        const meta_model::intermediate_model& im, std::ostream& s) const;
+     void dehydrate_exceptions(const bool requires_leading_comma,
+-        const intermediate_model& im, std::ostream& s) const;
++        const meta_model::intermediate_model& im, std::ostream& s) const;
+ 
+ public:
+-    std::string dehydrate(const intermediate_model& im) const;
+-    void dehydrate(const intermediate_model& im,
++    std::string dehydrate(const meta_model::intermediate_model& im) const;
++    void dehydrate(const meta_model::intermediate_model& im,
+         const boost::filesystem::path& p) const;
+ };
+ 
+diff --git a/projects/yarn.json/include/dogen/yarn.json/types/exogenous_transform.hpp b/projects/yarn.json/include/dogen/yarn.json/types/exogenous_transform.hpp
+index 17baa3751..27a1c572d 100644
+--- a/projects/yarn.json/include/dogen/yarn.json/types/exogenous_transform.hpp
++++ b/projects/yarn.json/include/dogen/yarn.json/types/exogenous_transform.hpp
+@@ -42,8 +42,9 @@ public:
+     yarn::transforms::exogenous_transform_types
+     supported_transforms() const override;
+     bool can_transform(const std::string& model_identifier) const override;
+-    intermediate_model transform(const boost::filesystem::path& p) override;
+-    void transform(const intermediate_model& im,
++    meta_model::intermediate_model
++    transform(const boost::filesystem::path& p) override;
++    void transform(const meta_model::intermediate_model& im,
+         const boost::filesystem::path& p) override;
+ };
+ 
+diff --git a/projects/yarn.json/include/dogen/yarn.json/types/hydrator.hpp b/projects/yarn.json/include/dogen/yarn.json/types/hydrator.hpp
+index 378a15794..a0161a565 100644
+--- a/projects/yarn.json/include/dogen/yarn.json/types/hydrator.hpp
++++ b/projects/yarn.json/include/dogen/yarn.json/types/hydrator.hpp
+@@ -28,7 +28,7 @@
+ #include <iosfwd>
+ #include <boost/filesystem/path.hpp>
+ #include <boost/property_tree/ptree.hpp>
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ 
+ namespace dogen {
+ namespace yarn {
+@@ -62,20 +62,22 @@ private:
+     /**
+      * @brief Inserts the scribble group into the model's indicies.
+      */
+-    void insert_scribble_group(const yarn::name& owner,
+-        const annotations::scribble_group& sg, intermediate_model& im) const;
++    void insert_scribble_group(const yarn::meta_model::name& owner,
++        const annotations::scribble_group& sg,
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads and inserts the scribble group.
+      */
+-    void read_and_insert_scribble_group(const yarn::name& owner,
++    void read_and_insert_scribble_group(const meta_model::name& owner,
+         const annotations::scope_types st,
+-        const boost::property_tree::ptree& pt, intermediate_model& im) const;
++        const boost::property_tree::ptree& pt,
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Read and inserts the scribble into the scribble group.
+      */
+-    void read_and_insert_scribble(const yarn::name& owner,
++    void read_and_insert_scribble(const meta_model::name& owner,
+         const annotations::scope_types st,
+         const boost::property_tree::ptree& pt,
+         annotations::scribble_group& sg) const;
+@@ -84,15 +86,17 @@ private:
+      * @brief Read a name.
+      */
+     /**@{*/
+-    name read_name(const boost::property_tree::ptree& pt) const;
+-    name read_name(const boost::property_tree::ptree& pt,
+-        const name& model_name, const bool in_global_module = false) const;
++    meta_model::name read_name(const boost::property_tree::ptree& pt) const;
++    meta_model::name read_name(const boost::property_tree::ptree& pt,
++        const meta_model::name& model_name,
++        const bool in_global_module = false) const;
+     /**@}*/
+ 
+     /**
+      * @brief Reads a list of names.
+      */
+-    std::list<name> read_names(const boost::property_tree::ptree& pt) const;
++    std::list<meta_model::name>
++    read_names(const boost::property_tree::ptree& pt) const;
+ 
+     /**
+      * @brief Reads the stereotypes.
+@@ -108,14 +112,14 @@ private:
+     /**
+      * @brief Reads all enumerators from the node.
+      */
+-    std::vector<enumerator>
++    std::vector<meta_model::enumerator>
+     read_enumerators(const boost::property_tree::ptree& pt,
+         annotations::scribble_group& sg) const;
+ 
+     /**
+      * @brief Reads all attributes from the node.
+      */
+-    std::list<attribute>
++    std::list<meta_model::attribute>
+     read_attributes(const boost::property_tree::ptree& pt,
+         annotations::scribble_group& sg) const;
+ 
+@@ -124,80 +128,81 @@ private:
+      * its scribbles.
+      */
+     void populate_element(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im, yarn::element& e) const;
++        meta_model::intermediate_model& im, meta_model::element& e) const;
+ 
+     /**
+      * @brief Reads an object.
+      */
+     void read_object(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads a builtin.
+      */
+     void read_builtin(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads a module.
+      */
+     void read_module(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads an enumeration.
+      */
+     void read_enumeration(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads a primitive.
+      */
+     void read_primitive(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads an exception.
+      */
+     void read_exception(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads a concept.
+      */
+     void read_concept(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads the meta-type and dispatches to the correct read
+      * functions.
+      */
+     void dispatch_meta_type(const boost::property_tree::ptree& pt,
+-        yarn::intermediate_model& im) const;
++        meta_model::intermediate_model& im) const;
+ 
+     /**
+      * @brief Reads the entire stream as a property tree.
+      */
+-    intermediate_model read_stream(std::istream& s) const;
++    meta_model::intermediate_model read_stream(std::istream& s) const;
+ 
+     /**
+      * @brief Converts a string to a value in the object types
+      * enumeration.
+      */
+-    object_types
++    meta_model::object_types
+     to_object_type(const boost::optional<std::string>& s) const;
+ 
+ public:
+     /**
+      * @brief Hydrates the model from the JSON stream.
+      */
+-    intermediate_model hydrate(std::istream& s) const;
++    meta_model::intermediate_model hydrate(std::istream& s) const;
+ 
+     /**
+      * @brief Opens up the file at path and then hydrates the model
+      * from the JSON stream.
+      */
+-    intermediate_model hydrate(const boost::filesystem::path& p) const;
++    meta_model::intermediate_model
++    hydrate(const boost::filesystem::path& p) const;
+ };
+ 
+ } } }
+diff --git a/projects/yarn.json/src/serialization/registrar_ser.cpp b/projects/yarn.json/src/serialization/registrar_ser.cpp
+index 4378ed9a3..28917febd 100644
+--- a/projects/yarn.json/src/serialization/registrar_ser.cpp
++++ b/projects/yarn.json/src/serialization/registrar_ser.cpp
+@@ -38,10 +38,10 @@ namespace json {
+ 
+ template<typename Archive>
+ void register_types(Archive& ar) {
+-    dogen::annotations::register_types(ar);
+-    dogen::formatters::register_types(ar);
+     dogen::yarn::register_types(ar);
++    dogen::annotations::register_types(ar);
+     dogen::options::register_types(ar);
++    dogen::formatters::register_types(ar);
+ }
+ 
+ template void register_types(boost::archive::polymorphic_oarchive& ar);
+diff --git a/projects/yarn.json/src/types/dehydrator.cpp b/projects/yarn.json/src/types/dehydrator.cpp
+index ab3398368..f64d1304b 100644
+--- a/projects/yarn.json/src/types/dehydrator.cpp
++++ b/projects/yarn.json/src/types/dehydrator.cpp
+@@ -48,7 +48,7 @@ std::string dehydrator::tidy_up_string(std::string s) const {
+     return s;
+ }
+ 
+-bool dehydrator::has_elements(const intermediate_model& im) const {
++bool dehydrator::has_elements(const meta_model::intermediate_model& im) const {
+     return
+         !im.modules().empty() ||
+         !im.concepts().empty() ||
+@@ -59,8 +59,8 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
+ }
+ 
+ boost::optional<annotations::scribble_group>
+-dehydrator::scribble_group_for_name(const intermediate_model& im,
+-    const yarn::name& n) const {
++dehydrator::scribble_group_for_name(const meta_model::intermediate_model& im,
++    const meta_model::name& n) const {
+ 
+     const auto& scribble_groups(im.scribble_groups());
+     const auto i(scribble_groups.find(n.id()));
+@@ -72,7 +72,7 @@ dehydrator::scribble_group_for_name(const intermediate_model& im,
+ 
+ boost::optional<annotations::scribble> dehydrator::
+ scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
+-    const yarn::name& n) const {
++    const meta_model::name& n) const {
+ 
+     if (!sg)
+         return boost::optional<annotations::scribble>();
+@@ -84,7 +84,8 @@ scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
+     return i->second;
+ }
+ 
+-void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
++void dehydrator::
++dehydrate_name(const meta_model::name& n, std::ostream& s) const {
+     formatters::utility_formatter uf(s);
+     s << " { ";
+     uf.insert_quoted("simple");
+@@ -101,8 +102,8 @@ void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
+     s << " } ";
+ }
+ 
+-void dehydrator::
+-dehydrate_names(const std::list<name>& names, std::ostream& s) const {
++void dehydrator::dehydrate_names(const std::list<meta_model::name>& names,
++    std::ostream& s) const {
+     s << " [ ";
+     bool is_first(true);
+     for (const auto& n : names) {
+@@ -139,8 +140,9 @@ dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
+     s << " }";
+ }
+ 
+-void dehydrator::dehydrate_element(
+-    const boost::optional<annotations::scribble_group>& sg, const element& e,
++void dehydrator::
++dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
++    const meta_model::element& e,
+     const std::string& meta_type, std::ostream& s) const {
+ 
+     formatters::utility_formatter uf(s);
+@@ -182,7 +184,7 @@ void dehydrator::dehydrate_element(
+ 
+ void dehydrator::dehydrate_attributes(
+     const boost::optional<annotations::scribble_group>& sg,
+-    const std::list<attribute>& attrs, std::ostream& s) const {
++    const std::list<meta_model::attribute>& attrs, std::ostream& s) const {
+ 
+     formatters::utility_formatter uf(s);
+     uf.insert_quoted("attributes");
+@@ -222,7 +224,7 @@ void dehydrator::dehydrate_attributes(
+ }
+ 
+ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
+-    const intermediate_model& im, std::ostream& s) const {
++    const meta_model::intermediate_model& im, std::ostream& s) const {
+ 
+     using boost::algorithm::join;
+     formatters::utility_formatter uf(s);
+@@ -255,7 +257,7 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
+ }
+ 
+ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
+-    const intermediate_model& im, std::ostream& s) const {
++    const meta_model::intermediate_model& im, std::ostream& s) const {
+ 
+     using boost::algorithm::join;
+     formatters::utility_formatter uf(s);
+@@ -289,7 +291,7 @@ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
+ }
+ 
+ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
+-    const intermediate_model& im, std::ostream& s) const {
++    const meta_model::intermediate_model& im, std::ostream& s) const {
+     /*
+      * Remove the root module.
+      */
+@@ -317,7 +319,7 @@ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
+ }
+ 
+ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
+-    const intermediate_model& im, std::ostream& s) const {
++    const meta_model::intermediate_model& im, std::ostream& s) const {
+     using boost::algorithm::join;
+     formatters::utility_formatter uf(s);
+     bool output_comma(requires_leading_comma);
+@@ -336,7 +338,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
+         /*
+          * Remove invalid from enumerators.
+          */
+-        std::vector<enumerator> enumerators;
++        std::vector<meta_model::enumerator> enumerators;
+         enumerators.reserve(e.enumerators().size());
+         for (const auto& en : e.enumerators()) {
+             const auto n(boost::algorithm::to_lower_copy(en.name().simple()));
+@@ -381,7 +383,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
+ }
+ 
+ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
+-    const intermediate_model& im, std::ostream& s) const {
++    const meta_model::intermediate_model& im, std::ostream& s) const {
+     using boost::algorithm::join;
+     formatters::utility_formatter uf(s);
+ 
+@@ -403,7 +405,7 @@ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
+ 
+ void dehydrator::
+ dehydrate_exceptions(const bool requires_leading_comma,
+-    const intermediate_model& im, std::ostream& s) const {
++    const meta_model::intermediate_model& im, std::ostream& s) const {
+     using boost::algorithm::join;
+     formatters::utility_formatter uf(s);
+ 
+@@ -423,7 +425,8 @@ dehydrate_exceptions(const bool requires_leading_comma,
+     }
+ }
+ 
+-std::string dehydrator::dehydrate(const intermediate_model& im) const {
++std::string
++dehydrator::dehydrate(const meta_model::intermediate_model& im) const {
+     std::ostringstream s;
+     formatters::utility_formatter uf(s);
+     using boost::algorithm::join;
+@@ -486,7 +489,7 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
+     return s.str();
+ }
+ 
+-void dehydrator::dehydrate(const intermediate_model& im,
++void dehydrator::dehydrate(const meta_model::intermediate_model& im,
+     const boost::filesystem::path& p) const {
+ 
+     const auto s(dehydrate(im));
+diff --git a/projects/yarn.json/src/types/exogenous_transform.cpp b/projects/yarn.json/src/types/exogenous_transform.cpp
+index bad904c3d..191f9cf23 100644
+--- a/projects/yarn.json/src/types/exogenous_transform.cpp
++++ b/projects/yarn.json/src/types/exogenous_transform.cpp
+@@ -55,14 +55,14 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
+     return boost::ends_with(model_identifier, extension);
+ }
+ 
+-intermediate_model
++meta_model::intermediate_model
+ exogenous_transform::transform(const boost::filesystem::path& p) {
+     hydrator h;
+     return h.hydrate(p);
+ }
+ 
+-void exogenous_transform::
+-transform(const intermediate_model& im, const boost::filesystem::path& p) {
++void exogenous_transform::transform(const meta_model::intermediate_model& im,
++    const boost::filesystem::path& p) {
+     dehydrator dh;
+     dh.dehydrate(im, p);
+ }
+diff --git a/projects/yarn.json/src/types/hydrator.cpp b/projects/yarn.json/src/types/hydrator.cpp
+index 2896d60fb..ecae7bb9b 100644
+--- a/projects/yarn.json/src/types/hydrator.cpp
++++ b/projects/yarn.json/src/types/hydrator.cpp
+@@ -27,10 +27,10 @@
+ #include <boost/property_tree/json_parser.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/annotations/types/scribble_group.hpp"
+-#include "dogen/yarn/io/name_io.hpp"
+-#include "dogen/yarn/types/module.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/types/builtin.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
++#include "dogen/yarn/types/meta_model/module.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/builtin.hpp"
+ #include "dogen/yarn/types/helpers/name_builder.hpp"
+ #include "dogen/yarn/types/helpers/name_factory.hpp"
+ #include "dogen/yarn.json/types/hydration_error.hpp"
+@@ -134,8 +134,9 @@ hydrator::read_scribble_group(const boost::property_tree::ptree& pt,
+     return r;
+ }
+ 
+-void hydrator::insert_scribble_group(const yarn::name& owner,
+-    const annotations::scribble_group& sg, intermediate_model& im) const {
++void hydrator::insert_scribble_group(const meta_model::name& owner,
++    const annotations::scribble_group& sg,
++    meta_model::intermediate_model& im) const {
+ 
+     if (sg.parent().entries().empty() && sg.children().empty())
+         return;
+@@ -149,14 +150,14 @@ void hydrator::insert_scribble_group(const yarn::name& owner,
+     }
+ }
+ 
+-void hydrator::read_and_insert_scribble_group(const yarn::name& owner,
++void hydrator::read_and_insert_scribble_group(const meta_model::name& owner,
+     const annotations::scope_types st, const boost::property_tree::ptree& pt,
+-    intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+     const auto sg(read_scribble_group(pt, st));
+     insert_scribble_group(owner, sg, im);
+ }
+ 
+-void hydrator::read_and_insert_scribble(const yarn::name& owner,
++void hydrator::read_and_insert_scribble(const meta_model::name& owner,
+     const annotations::scope_types st, const boost::property_tree::ptree& pt,
+     annotations::scribble_group& sg) const {
+ 
+@@ -196,7 +197,8 @@ read_stereotypes(const boost::property_tree::ptree& pt) const {
+     return r;
+ }
+ 
+-name hydrator::read_name(const boost::property_tree::ptree& pt) const {
++meta_model::name
++hydrator::read_name(const boost::property_tree::ptree& pt) const {
+     yarn::helpers::name_builder b;
+     const auto sn(pt.get<std::string>(simple_key));
+     b.simple_name(sn);
+@@ -209,8 +211,8 @@ name hydrator::read_name(const boost::property_tree::ptree& pt) const {
+     return r;
+ }
+ 
+-name hydrator::read_name(const boost::property_tree::ptree& pt,
+-    const name& model_name, const bool in_global_module) const {
++meta_model::name hydrator::read_name(const boost::property_tree::ptree& pt,
++    const meta_model::name& model_name, const bool in_global_module) const {
+ 
+     /*
+      * If we're not in the global module, we must be be in the
+@@ -234,9 +236,9 @@ name hydrator::read_name(const boost::property_tree::ptree& pt,
+     return r;
+ }
+ 
+-std::list<name>
++std::list<meta_model::name>
+ hydrator::read_names(const boost::property_tree::ptree& pt) const {
+-    std::list<name> r;
++    std::list<meta_model::name> r;
+     for (auto i(pt.begin()); i != pt.end(); ++i) {
+         const auto& apt(i->second);
+         r.push_back(read_name(apt));
+@@ -255,14 +257,14 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
+     return r;
+ }
+ 
+-std::vector<enumerator>
++std::vector<meta_model::enumerator>
+ hydrator::read_enumerators(const boost::property_tree::ptree& pt,
+     annotations::scribble_group& sg) const {
+ 
+-    std::vector<enumerator> r;
++    std::vector<meta_model::enumerator> r;
+     for (auto i(pt.begin()); i != pt.end(); ++i) {
+         const auto& apt(i->second);
+-        enumerator en;
++        meta_model::enumerator en;
+         const auto j(apt.find(name_key));
+         if (j == apt.not_found()) {
+             BOOST_LOG_SEV(lg, error) << missing_name;
+@@ -278,14 +280,14 @@ hydrator::read_enumerators(const boost::property_tree::ptree& pt,
+     return r;
+ }
+ 
+-std::list<attribute>
++std::list<meta_model::attribute>
+ hydrator::read_attributes(const boost::property_tree::ptree& pt,
+     annotations::scribble_group& sg) const {
+-    std::list<attribute> r;
++    std::list<meta_model::attribute> r;
+ 
+     for (auto i(pt.begin()); i != pt.end(); ++i) {
+         const auto& apt(i->second);
+-        attribute a;
++        meta_model::attribute a;
+ 
+         const auto j(apt.find(name_key));
+         if (j == apt.not_found()) {
+@@ -305,7 +307,7 @@ hydrator::read_attributes(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::populate_element(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im, yarn::element& e) const {
++    meta_model::intermediate_model& im, meta_model::element& e) const {
+ 
+     const auto in_global_module(pt.get(in_global_module_key, false));
+     const auto i(pt.find(name_key));
+@@ -314,7 +316,7 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
+         BOOST_THROW_EXCEPTION(hydration_error(missing_name));
+     }
+ 
+-    yarn::name n(read_name(i->second, im.name(), in_global_module));
++    meta_model::name n(read_name(i->second, im.name(), in_global_module));
+     const auto id(n.id());
+ 
+     BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
+@@ -325,9 +327,9 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_object(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::object o;
++    meta_model::object o;
+     populate_element(pt, im, o);
+ 
+     const auto ot(pt.get_optional<std::string>(object_type_key));
+@@ -359,9 +361,9 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_builtin(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::builtin b;
++    meta_model::builtin b;
+     populate_element(pt, im, b);
+     const auto st(annotations::scope_types::entity);
+     read_and_insert_scribble_group(b.name(), st, pt, im);
+@@ -388,9 +390,9 @@ void hydrator::read_builtin(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_module(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::module m;
++    meta_model::module m;
+     populate_element(pt, im, m);
+     const auto st(annotations::scope_types::entity);
+     read_and_insert_scribble_group(m.name(), st, pt, im);
+@@ -405,9 +407,9 @@ void hydrator::read_module(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::enumeration e;
++    meta_model::enumeration e;
+     populate_element(pt, im, e);
+     const auto st(annotations::scope_types::entity);
+     auto sg(read_scribble_group(pt, st));
+@@ -428,9 +430,9 @@ void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_primitive(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::primitive p;
++    meta_model::primitive p;
+     populate_element(pt, im, p);
+     const auto st(annotations::scope_types::entity);
+     read_and_insert_scribble_group(p.name(), st, pt, im);
+@@ -445,9 +447,9 @@ void hydrator::read_primitive(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_exception(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::exception e;
++    meta_model::exception e;
+     populate_element(pt, im, e);
+     const auto st(annotations::scope_types::entity);
+     read_and_insert_scribble_group(e.name(), st, pt, im);
+@@ -462,9 +464,9 @@ void hydrator::read_exception(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::read_concept(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+-    yarn::concept c;
++    meta_model::concept c;
+     populate_element(pt, im, c);
+     const auto st(annotations::scope_types::entity);
+     auto sg(read_scribble_group(pt, st));
+@@ -491,7 +493,7 @@ void hydrator::read_concept(const boost::property_tree::ptree& pt,
+ }
+ 
+ void hydrator::dispatch_meta_type(const boost::property_tree::ptree& pt,
+-    yarn::intermediate_model& im) const {
++    meta_model::intermediate_model& im) const {
+ 
+     const auto s(pt.get<std::string>(meta_type_key));
+     if (s == meta_type_object_value)
+@@ -515,8 +517,8 @@ void hydrator::dispatch_meta_type(const boost::property_tree::ptree& pt,
+     }
+ }
+ 
+-yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
+-    yarn::intermediate_model r;
++meta_model::intermediate_model hydrator::read_stream(std::istream& s) const {
++    meta_model::intermediate_model r;
+     boost::property_tree::ptree pt;
+     read_json(s, pt);
+ 
+@@ -526,7 +528,7 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
+     r.name(nf.build_model_name(mn, em));
+     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
+ 
+-    yarn::module m;
++    meta_model::module m;
+     const auto st(annotations::scope_types::root_module);
+     read_and_insert_scribble_group(r.name(), st, pt, r);
+ 
+@@ -545,24 +547,24 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
+     return r;
+ }
+ 
+-yarn::object_types hydrator::
++meta_model::object_types hydrator::
+ to_object_type(const boost::optional<std::string>& s) const {
+     if (!s)
+-        return yarn::object_types::invalid;
++        return meta_model::object_types::invalid;
+ 
+     const auto ot(*s);
+     if (ot == object_type_smart_pointer_value)
+-        return yarn::object_types::smart_pointer;
++        return meta_model::object_types::smart_pointer;
+     else if (ot == object_type_associative_container_value)
+-        return yarn::object_types::associative_container;
++        return meta_model::object_types::associative_container;
+     else if (ot == object_type_sequence_container_value)
+-        return yarn::object_types::sequence_container;
++        return meta_model::object_types::sequence_container;
+ 
+     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
+     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
+ }
+ 
+-intermediate_model
++meta_model::intermediate_model
+ hydrator::hydrate(std::istream& s) const {
+     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
+     using namespace boost::property_tree;
+@@ -583,7 +585,7 @@ hydrator::hydrate(std::istream& s) const {
+     }
+ }
+ 
+-intermediate_model hydrator::
++meta_model::intermediate_model hydrator::
+ hydrate(const boost::filesystem::path& p) const {
+     const auto gs(p.generic_string());
+     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;
+diff --git a/projects/yarn.json/tests/hydrator_tests.cpp b/projects/yarn.json/tests/hydrator_tests.cpp
+index 968b260e5..fd9ad7e64 100644
+--- a/projects/yarn.json/tests/hydrator_tests.cpp
++++ b/projects/yarn.json/tests/hydrator_tests.cpp
+@@ -28,9 +28,9 @@
+ #include "dogen/annotations/test/mock_type_factory.hpp"
+ #include "dogen/annotations/test/mock_type_repository_factory.hpp"
+ #include "dogen/annotations/types/type.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+ #include "dogen/yarn.json/types/hydration_error.hpp"
+ #include "dogen/yarn.json/types/hydrator.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+@@ -154,19 +154,21 @@ dogen::annotations::type_repository create_repository() {
+     return rf.make(fds);
+ }
+ 
+-dogen::yarn::intermediate_model hydrate(std::istream& s) {
++dogen::yarn::meta_model::intermediate_model hydrate(std::istream& s) {
+     const auto rp(create_repository());
+ 
+     dogen::yarn::json::hydrator h;
+     return h.hydrate(s);
+ }
+ 
+-dogen::yarn::intermediate_model hydrate(const boost::filesystem::path& p) {
++dogen::yarn::meta_model::intermediate_model
++hydrate(const boost::filesystem::path& p) {
+     boost::filesystem::ifstream s(p);
+     return hydrate(s);
+ }
+ 
+-dogen::yarn::intermediate_model hydrate(const std::string& content) {
++dogen::yarn::meta_model::intermediate_model
++hydrate(const std::string& content) {
+     std::istringstream s(content);
+     return hydrate(s);
+ }
+diff --git a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/exogenous_transform.hpp b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/exogenous_transform.hpp
+index d2e0d1fc0..bf1701c33 100644
+--- a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/exogenous_transform.hpp
++++ b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/exogenous_transform.hpp
+@@ -42,8 +42,9 @@ public:
+     yarn::transforms::exogenous_transform_types
+     supported_transforms() const override;
+     bool can_transform(const std::string& model_identifier) const override;
+-    intermediate_model transform(const boost::filesystem::path& p) override;
+-    void transform(const intermediate_model& im,
++    meta_model::intermediate_model
++    transform(const boost::filesystem::path& p) override;
++    void transform(const meta_model::intermediate_model& im,
+         const boost::filesystem::path& p) override;
+ };
+ 
+diff --git a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp
+index 1bf26ff8a..17157c607 100644
+--- a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp
++++ b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/transformer.hpp
+@@ -27,11 +27,11 @@
+ 
+ #include <string>
+ #include <unordered_map>
+-#include "dogen/yarn/types/origin_types.hpp"
+-#include "dogen/yarn/types/name.hpp"
+-#include "dogen/yarn/types/builtin.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/types/enumeration.hpp"
++#include "dogen/yarn/types/meta_model/origin_types.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/types/meta_model/builtin.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/enumeration.hpp"
+ #include "dogen/upsilon/types/name.hpp"
+ #include "dogen/upsilon/types/model.hpp"
+ #include "dogen/upsilon/types/primitive.hpp"
+@@ -45,11 +45,11 @@ namespace upsilon {
+ 
+ class transformer final {
+ public:
+-    explicit transformer(const yarn::name& target_model_name);
++    explicit transformer(const yarn::meta_model::name& target_model_name);
+ 
+     transformer(
+-        const yarn::name& target_model_name,
+-        const std::unordered_map<std::string, dogen::yarn::name>&
++        const yarn::meta_model::name& target_model_name,
++        const std::unordered_map<std::string, yarn::meta_model::name>&
+         schema_name_to_model_name,
+         const std::unordered_map<std::string,
+         dogen::upsilon::name>& collection_names);
+@@ -58,19 +58,20 @@ private:
+     std::string to_unparsed_type(const dogen::upsilon::name& tn) const;
+ 
+     void populate_element_properties(const dogen::upsilon::type& t,
+-        yarn::element& e) const;
++        yarn::meta_model::element& e) const;
+ 
+ public:
+-    yarn::builtin to_builtin(const dogen::upsilon::primitive& p) const;
++    yarn::meta_model::builtin
++    to_builtin(const dogen::upsilon::primitive& p) const;
+ 
+-    yarn::object to_object(const dogen::upsilon::compound& c) const;
++    yarn::meta_model::object to_object(const dogen::upsilon::compound& c) const;
+ 
+-    yarn::enumeration
++    yarn::meta_model::enumeration
+     to_enumeration(const dogen::upsilon::enumeration& e) const;
+ 
+ private:
+-    const yarn::name& target_model_name_;
+-    const std::unordered_map<std::string, dogen::yarn::name>
++    const yarn::meta_model::name& target_model_name_;
++    const std::unordered_map<std::string, dogen::yarn::meta_model::name>
+     schema_name_to_model_name_;
+     const std::unordered_map<std::string, dogen::upsilon::name>
+     collection_names_;
+diff --git a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/workflow.hpp b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/workflow.hpp
+index 801a16d97..4defef540 100644
+--- a/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/workflow.hpp
++++ b/projects/yarn.upsilon/include/dogen/yarn.upsilon/types/workflow.hpp
+@@ -33,8 +33,8 @@
+ #include "dogen/upsilon/types/name.hpp"
+ #include "dogen/upsilon/types/model.hpp"
+ #include "dogen/upsilon/types/output.hpp"
+-#include "dogen/yarn/types/languages.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/languages.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ 
+ namespace dogen {
+ namespace yarn {
+@@ -46,13 +46,13 @@ private:
+      * @brief Obtains a list of output languages from the upsilon
+      * configuration.
+      */
+-    std::list<languages> obtain_output_languages(
++    std::list<yarn::meta_model::languages> obtain_output_languages(
+         const std::vector<dogen::upsilon::output>& outputs) const;
+ 
+     /**
+      * @brief Creates a map of schema names to yarn model names.
+      */
+-    std::unordered_map<std::string, dogen::yarn::name>
++    std::unordered_map<std::string, yarn::meta_model::name>
+     map_schema_name_to_model_name(const dogen::upsilon::model& um) const;
+ 
+     /**
+@@ -66,20 +66,21 @@ private:
+      * @brief Creates an empty yarn model with the basic properties
+      * set.
+      */
+-    yarn::intermediate_model
++    yarn::meta_model::intermediate_model
+     create_model(const dogen::upsilon::model& um) const;
+ 
+     /**
+      * @brief Populates the yarn model with all the upsilon types.
+      */
+     void populate_model(const dogen::upsilon::model& um,
+-        const std::unordered_map<std::string, dogen::yarn::name>&
++        const std::unordered_map<std::string, yarn::meta_model::name>&
+         schema_name_to_model_name,
+         const std::unordered_map<std::string, dogen::upsilon::name>&
+-        collection_names, yarn::intermediate_model& im) const;
++        collection_names, yarn::meta_model::intermediate_model& im) const;
+ 
+ public:
+-    yarn::intermediate_model execute(const dogen::upsilon::model& um) const;
++    yarn::meta_model::intermediate_model
++    execute(const dogen::upsilon::model& um) const;
+ };
+ 
+ } } }
+diff --git a/projects/yarn.upsilon/src/serialization/registrar_ser.cpp b/projects/yarn.upsilon/src/serialization/registrar_ser.cpp
+index f5dde0ba8..cb08e0e6f 100644
+--- a/projects/yarn.upsilon/src/serialization/registrar_ser.cpp
++++ b/projects/yarn.upsilon/src/serialization/registrar_ser.cpp
+@@ -39,11 +39,11 @@ namespace upsilon {
+ 
+ template<typename Archive>
+ void register_types(Archive& ar) {
+-    dogen::options::register_types(ar);
+-    dogen::yarn::register_types(ar);
+-    dogen::upsilon::register_types(ar);
+-    dogen::annotations::register_types(ar);
+     dogen::formatters::register_types(ar);
++    dogen::annotations::register_types(ar);
++    dogen::upsilon::register_types(ar);
++    dogen::yarn::register_types(ar);
++    dogen::options::register_types(ar);
+ }
+ 
+ template void register_types(boost::archive::polymorphic_oarchive& ar);
+diff --git a/projects/yarn.upsilon/src/types/exogenous_transform.cpp b/projects/yarn.upsilon/src/types/exogenous_transform.cpp
+index bda9ad175..f4f58e1e6 100644
+--- a/projects/yarn.upsilon/src/types/exogenous_transform.cpp
++++ b/projects/yarn.upsilon/src/types/exogenous_transform.cpp
+@@ -59,7 +59,7 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
+     return boost::ends_with(model_identifier, extension);
+ }
+ 
+-intermediate_model
++meta_model::intermediate_model
+ exogenous_transform::transform(const boost::filesystem::path& p) {
+     BOOST_LOG_SEV(lg, debug) << "Reading Upsilon model.";
+ 
+@@ -75,7 +75,8 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
+     return r;
+ }
+ 
+-void exogenous_transform::transform(const intermediate_model& /*im*/,
++void exogenous_transform::transform(
++    const meta_model::intermediate_model& /*im*/,
+     const boost::filesystem::path& /*p*/) {
+     BOOST_LOG_SEV(lg, error) << to_upsilon_support_unavailable;
+ 
+diff --git a/projects/yarn.upsilon/src/types/transformer.cpp b/projects/yarn.upsilon/src/types/transformer.cpp
+index b390531cc..28f871ef7 100644
+--- a/projects/yarn.upsilon/src/types/transformer.cpp
++++ b/projects/yarn.upsilon/src/types/transformer.cpp
+@@ -44,14 +44,14 @@ namespace dogen {
+ namespace yarn {
+ namespace upsilon {
+ 
+-transformer::transformer(const yarn::name& target_model_name)
++transformer::transformer(const yarn::meta_model::name& target_model_name)
+     : target_model_name_(target_model_name),
+       schema_name_to_model_name_(),
+       collection_names_() {}
+ 
+ transformer::
+-transformer(const yarn::name& target_model_name,
+-    const std::unordered_map<std::string, dogen::yarn::name>&
++transformer(const yarn::meta_model::name& target_model_name,
++    const std::unordered_map<std::string, yarn::meta_model::name>&
+     schema_name_to_model_name,
+     const std::unordered_map<std::string,
+     dogen::upsilon::name>& collection_names)
+@@ -79,11 +79,11 @@ transformer::to_unparsed_type(const dogen::upsilon::name& tn) const {
+ }
+ 
+ void transformer::populate_element_properties(const dogen::upsilon::type& t,
+-    yarn::element& e) const {
++    yarn::meta_model::element& e) const {
+ 
+     e.documentation(t.comment());
+ 
+-    dogen::yarn::helpers::name_factory nf;
++    yarn::helpers::name_factory nf;
+     const auto sn(t.name().schema_name());
+     if (sn.empty() || sn == target_model_name_.simple()) {
+         /*
+@@ -92,7 +92,7 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
+          * model.
+          */
+         e.name(nf.build_element_in_model(target_model_name_, t.name().value()));
+-        e.origin_type(dogen::yarn::origin_types::target);
++        e.origin_type(yarn::meta_model::origin_types::target);
+     } else {
+         /*
+          * Otherwise the type must belong to a reference model. Given
+@@ -107,29 +107,29 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
+                 transformation_error(missing_schema_reference + sn));
+         }
+         e.name(nf.build_element_in_model(i->second, t.name().value()));
+-        e.origin_type(dogen::yarn::origin_types::proxy_reference);
++        e.origin_type(yarn::meta_model::origin_types::proxy_reference);
+     }
+ }
+ 
+-yarn::builtin
++yarn::meta_model::builtin
+ transformer::to_builtin(const dogen::upsilon::primitive& p) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
+-    yarn::builtin r;
++    yarn::meta_model::builtin r;
+     populate_element_properties(p, r);
+     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
+     return r;
+ }
+ 
+-yarn::object
++yarn::meta_model::object
+ transformer::to_object(const dogen::upsilon::compound& c) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
+-    yarn::object r;
++    yarn::meta_model::object r;
+     populate_element_properties(c, r);
+ 
+     dogen::yarn::helpers::name_factory nf;
+     BOOST_LOG_SEV(lg, debug) << "Total fields: " << c.fields().size();
+     for (const auto& f : c.fields()) {
+-        yarn::attribute attr;
++        yarn::meta_model::attribute attr;
+         attr.name(nf.build_attribute_name(r.name(), f.name()));
+         attr.unparsed_type(to_unparsed_type(f.type_name()));
+         attr.documentation(f.comment());
+@@ -140,10 +140,10 @@ transformer::to_object(const dogen::upsilon::compound& c) const {
+     return r;
+ }
+ 
+-yarn::enumeration
++yarn::meta_model::enumeration
+ transformer::to_enumeration(const dogen::upsilon::enumeration& e) const {
+     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
+-    yarn::enumeration r;
++    yarn::meta_model::enumeration r;
+     populate_element_properties(e, r);
+     BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration";
+     return r;
+diff --git a/projects/yarn.upsilon/src/types/workflow.cpp b/projects/yarn.upsilon/src/types/workflow.cpp
+index 562b56fc4..0e8df9ac2 100644
+--- a/projects/yarn.upsilon/src/types/workflow.cpp
++++ b/projects/yarn.upsilon/src/types/workflow.cpp
+@@ -23,10 +23,10 @@
+ #include <boost/throw_exception.hpp>
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/utility/io/unordered_map_io.hpp"
+-#include "dogen/yarn/types/name.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/types/meta_model/origin_types.hpp"
++#include "dogen/yarn/types/meta_model/module.hpp"
+ #include "dogen/yarn/types/helpers/name_factory.hpp"
+-#include "dogen/yarn/types/origin_types.hpp"
+-#include "dogen/yarn/types/module.hpp"
+ #include "dogen/upsilon/types/type_visitor.hpp"
+ #include "dogen/upsilon/io/target_types_io.hpp"
+ #include "dogen/upsilon/io/name_io.hpp"
+@@ -82,10 +82,11 @@ collection_accumulator::result() const {
+ 
+ class model_populator : public dogen::upsilon::type_visitor {
+ public:
+-    model_populator(const std::unordered_map<std::string, dogen::yarn::name>&
++    model_populator(
++        const std::unordered_map<std::string, yarn::meta_model::name>&
+         schema_name_to_model_name,
+         const std::unordered_map<std::string, dogen::upsilon::name>&
+-        collection_names, yarn::intermediate_model& im);
++        collection_names, yarn::meta_model::intermediate_model& im);
+ 
+ private:
+     template<typename Nameable>
+@@ -107,15 +108,15 @@ public:
+     void visit(const dogen::upsilon::primitive& p);
+ 
+ private:
+-    yarn::intermediate_model& model_;
++    yarn::meta_model::intermediate_model& model_;
+     const transformer transformer_;
+ };
+ 
+ model_populator::
+-model_populator(const std::unordered_map<std::string, dogen::yarn::name>&
++model_populator(const std::unordered_map<std::string, yarn::meta_model::name>&
+     schema_name_to_model_name,
+     const std::unordered_map<std::string, dogen::upsilon::name>&
+-    collection_names, yarn::intermediate_model& im)
++    collection_names, yarn::meta_model::intermediate_model& im)
+     : model_(im),
+       transformer_(im.name(), schema_name_to_model_name, collection_names) {}
+ 
+@@ -134,16 +135,16 @@ void model_populator::visit(const dogen::upsilon::primitive& p) {
+     insert(b, model_.builtins());
+ }
+ 
+-std::list<languages> workflow::obtain_output_languages(
++std::list<yarn::meta_model::languages> workflow::obtain_output_languages(
+     const std::vector<dogen::upsilon::output>& outputs) const {
+-    std::list<languages> r;
++    std::list<yarn::meta_model::languages> r;
+     using dogen::upsilon::target_types;
+     for (const auto& o : outputs) {
+         for (const auto& rep : o.representations()) {
+             if (rep.target() == target_types::cpp)
+-                r.push_back(languages::cpp);
++                r.push_back(yarn::meta_model::languages::cpp);
+             else if (rep.target() == target_types::cs)
+-                r.push_back(languages::csharp);
++                r.push_back(meta_model::languages::csharp);
+             else if (rep.target() == target_types::java) {
+                 // FIXME: skip java for now as we do not have a model
+                 // FIXME: or mappings for it.
+@@ -183,9 +184,9 @@ obtain_collection_names(const dogen::upsilon::model& um) const {
+     return ca.result();
+ }
+ 
+-std::unordered_map<std::string, dogen::yarn::name>
++std::unordered_map<std::string, yarn::meta_model::name>
+ workflow::map_schema_name_to_model_name(const dogen::upsilon::model& um) const {
+-    std::unordered_map<std::string, dogen::yarn::name> r;
++    std::unordered_map<std::string, yarn::meta_model::name> r;
+ 
+     yarn::helpers::name_factory nf;
+     for (const auto& pair : um.schemas()) {
+@@ -202,7 +203,7 @@ workflow::map_schema_name_to_model_name(const dogen::upsilon::model& um) const {
+     return r;
+ }
+ 
+-yarn::intermediate_model
++yarn::meta_model::intermediate_model
+ workflow::create_model(const dogen::upsilon::model& um) const {
+     if (um.config().outputs().size() != 1) {
+         const auto gs(um.config().file_name().generic_string());
+@@ -210,8 +211,8 @@ workflow::create_model(const dogen::upsilon::model& um) const {
+         BOOST_THROW_EXCEPTION(workflow_error(incorrect_number_of_outputs + gs));
+     }
+ 
+-    yarn::intermediate_model r;
+-    r.input_language(yarn::languages::upsilon);
++    yarn::meta_model::intermediate_model r;
++    r.input_language(yarn::meta_model::languages::upsilon);
+ 
+     const auto& outputs(um.config().outputs());
+     const auto& output(outputs[0]);
+@@ -219,12 +220,12 @@ workflow::create_model(const dogen::upsilon::model& um) const {
+     yarn::helpers::name_factory nf;
+     const auto n(nf.build_model_name(output.schema_name()));
+     r.name(n);
+-    r.origin_type(origin_types::target);
++    r.origin_type(yarn::meta_model::origin_types::target);
+     r.output_languages(obtain_output_languages(outputs));
+ 
+-    yarn::module root_module;
++    yarn::meta_model::module root_module;
+     root_module.name(n);
+-    root_module.origin_type(origin_types::target);
++    root_module.origin_type(yarn::meta_model::origin_types::target);
+ 
+     r.modules()[n.id()] = root_module;
+ 
+@@ -232,10 +233,10 @@ workflow::create_model(const dogen::upsilon::model& um) const {
+ }
+ 
+ void workflow::populate_model(const dogen::upsilon::model& um,
+-    const std::unordered_map<std::string, dogen::yarn::name>&
++    const std::unordered_map<std::string, yarn::meta_model::name>&
+     schema_name_to_model_name,
+     const std::unordered_map<std::string, dogen::upsilon::name>&
+-    collection_names, yarn::intermediate_model& im) const {
++    collection_names, yarn::meta_model::intermediate_model& im) const {
+ 
+     model_populator mp(schema_name_to_model_name, collection_names, im);
+     for (const auto& pair : um.schemas()) {
+@@ -253,7 +254,7 @@ void workflow::populate_model(const dogen::upsilon::model& um,
+     }
+ }
+ 
+-yarn::intermediate_model
++yarn::meta_model::intermediate_model
+ workflow::execute(const dogen::upsilon::model& um) const {
+     BOOST_LOG_SEV(lg, debug) << "Executing workflow on upsilon model. Config: "
+                              << um.config().file_name().generic_string();
+diff --git a/projects/yarn.upsilon/tests/transformer_tests.cpp b/projects/yarn.upsilon/tests/transformer_tests.cpp
+index 730a9548c..b33aa428c 100644
+--- a/projects/yarn.upsilon/tests/transformer_tests.cpp
++++ b/projects/yarn.upsilon/tests/transformer_tests.cpp
+@@ -21,10 +21,10 @@
+ #include <boost/test/unit_test.hpp>
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/asserter.hpp"
+-#include "dogen/yarn/types/builtin.hpp"
+-#include "dogen/yarn/io/builtin_io.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/io/object_io.hpp"
++#include "dogen/yarn/types/meta_model/builtin.hpp"
++#include "dogen/yarn/io/meta_model/builtin_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/io/meta_model/object_io.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/upsilon/test/mock_model_factory.hpp"
+ #include "dogen/upsilon/types/primitive.hpp"
+@@ -52,7 +52,7 @@ const mock_intermediate_model_factory::flags flags(
+     false/*concepts_indexed*/, false/*attributes_indexed*/,
+     false/*associations_indexed*/);
+ const mock_intermediate_model_factory yarn_factory(flags);
+-const auto ot(dogen::yarn::origin_types::target);
++const auto ot(dogen::yarn::meta_model::origin_types::target);
+ 
+ }
+ 
+diff --git a/projects/yarn.upsilon/tests/workflow_tests.cpp b/projects/yarn.upsilon/tests/workflow_tests.cpp
+index 6a2829533..4fcf53fe4 100644
+--- a/projects/yarn.upsilon/tests/workflow_tests.cpp
++++ b/projects/yarn.upsilon/tests/workflow_tests.cpp
+@@ -32,9 +32,9 @@
+ #include "dogen/annotations/test/mock_type_repository_factory.hpp"
+ #include "dogen/upsilon/serialization/registrar_ser.hpp"
+ #include "dogen/yarn/serialization/registrar_ser.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
+ #include "dogen/yarn.upsilon/types/workflow.hpp"
+ #include "dogen/upsilon/serialization/model_ser.hpp"
+ 
+@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(zeta_model_transforms_into_expected_yarn) {
+     mock_type_repository_factory rf;
+     const auto rp(rf.make());
+     dogen::yarn::upsilon::workflow w;
+-    dogen::yarn::intermediate_model actual(w.execute(input));
++    dogen::yarn::meta_model::intermediate_model actual(w.execute(input));
+ 
+     const auto expected_path(yarn_upsilon::expected_zeta_model_yarn_xml());
+     const auto actual_path(yarn_upsilon::actual_zeta_model_yarn_xml());
 diff --git a/projects/yarn/include/dogen/yarn/hash/all_hash.hpp b/projects/yarn/include/dogen/yarn/hash/all_hash.hpp
 index 7a025c089..0cdc6156c 100644
 --- a/projects/yarn/include/dogen/yarn/hash/all_hash.hpp
@@ -36196,3 +38934,1256 @@ index 8f11f2935..ef4c678f7 100644
      const auto tg(make_type_group(ctx.type_repository()));
      for (auto& pair : im.objects()) {
          auto& o(pair.second);
+diff --git a/projects/yarn/tests/associations_transform_tests.cpp b/projects/yarn/tests/associations_transform_tests.cpp
+index add481498..5347554a5 100644
+--- a/projects/yarn/tests/associations_transform_tests.cpp
++++ b/projects/yarn/tests/associations_transform_tests.cpp
+@@ -23,11 +23,10 @@
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/types/transforms/transformation_error.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/io/object_io.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/io/meta_model/object_io.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/yarn/types/transforms/associations_transform.hpp"
+ 
+@@ -54,13 +53,13 @@ const mock_intermediate_model_factory factory(flags);
+ }
+ 
+ using dogen::utility::test::contains_checker;
+-using dogen::yarn::transforms::transformation_error;
+ using dogen::utility::test::asserter;
+-using origin_types = dogen::yarn::origin_types;
+-using object_types = dogen::yarn::test::mock_intermediate_model_factory::
+-    object_types;
+-using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+-    attribute_types;
++using dogen::yarn::meta_model::origin_types;
++using dogen::yarn::transforms::associations_transform;
++using object_types =
++    dogen::yarn::test::mock_intermediate_model_factory::object_types;
++using attribute_types =
++    dogen::yarn::test::mock_intermediate_model_factory::attribute_types;
+ 
+ BOOST_AUTO_TEST_SUITE(associations_transform_tests)
+ 
+@@ -72,7 +71,6 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_associations_transform) {
+     BOOST_REQUIRE(a.objects().empty());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -86,7 +84,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_as
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+     BOOST_REQUIRE(a.objects().size() == 1);
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -101,7 +98,6 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
+             attribute_types::unsigned_int));
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -120,7 +116,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_associations_tran
+     BOOST_REQUIRE(a.objects().empty());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -132,7 +127,6 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
+     auto m(factory.make_first_degree_concepts_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -155,7 +149,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
+     auto m(factory.object_with_group_of_attributes_of_different_types());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -215,7 +208,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
+             origin_types::target, true/*repeat_group*/));
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -278,7 +270,6 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indi
+     BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -308,7 +299,6 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
+     BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -337,7 +327,6 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
+     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+     BOOST_REQUIRE(m.objects().size() == 2);
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+     for (const auto& pair : m.objects()) {
+@@ -366,7 +355,6 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices)
+     auto m(factory.object_with_attribute(ot, objt, pt));
+     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -402,7 +390,6 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ind
+     BOOST_REQUIRE(m.builtins().size() == 2);
+ 
+     bool found(false);
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -443,7 +430,6 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indice
+     auto m(factory.object_with_attribute(ot, objt, pt));
+     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
+ 
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -475,7 +461,6 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
+     BOOST_REQUIRE(m.objects().size() == 3);
+ 
+     bool found(false);
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -507,7 +492,6 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
+     BOOST_REQUIRE(m.objects().size() == 5);
+ 
+     bool found(false);
+-    using dogen::yarn::transforms::associations_transform;
+     associations_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+diff --git a/projects/yarn/tests/attributes_transform_tests.cpp b/projects/yarn/tests/attributes_transform_tests.cpp
+index 16bd06ba3..d1fb8aef4 100644
+--- a/projects/yarn/tests/attributes_transform_tests.cpp
++++ b/projects/yarn/tests/attributes_transform_tests.cpp
+@@ -24,10 +24,10 @@
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/io/unordered_map_io.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/io/object_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/io/meta_model/object_io.hpp"
+ #include "dogen/yarn/types/transforms/transformation_error.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/yarn/types/transforms/attributes_transform.hpp"
+@@ -91,7 +91,8 @@ bool has_duplicate_attribute_names(const Stateful& s,
+ using dogen::utility::test::contains_checker;
+ using dogen::yarn::transforms::transformation_error;
+ using dogen::utility::test::asserter;
+-using origin_types = dogen::yarn::origin_types;
++using dogen::yarn::transforms::attributes_transform;
++using dogen::yarn::meta_model::origin_types;
+ using object_types = dogen::yarn::test::mock_intermediate_model_factory::
+ object_types;
+ using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+@@ -106,7 +107,6 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_attributes_transform) {
+     const auto e(factory.make_empty_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -119,7 +119,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_at
+     const auto e(factory.make_single_type_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -134,7 +133,6 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
+     auto m(factory.object_with_attribute(ot, objt, at));
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -150,7 +148,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
+ 
+     auto m(factory.make_single_concept_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+-    using dogen::yarn::transforms::attributes_transform;
++
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -179,7 +177,6 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+     auto m(factory.make_first_degree_concepts_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -230,7 +227,6 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+     auto m(factory.make_second_degree_concepts_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -296,7 +292,6 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+     auto m(factory.make_diamond_inheritance_concepts_model());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+     BOOST_CHECK(m.concepts().size() == 4);
+@@ -364,7 +359,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_resul
+     BOOST_REQUIRE(a.objects().size() == 2);
+     BOOST_REQUIRE(a.concepts().empty());
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -388,7 +382,6 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
+     BOOST_REQUIRE(a.objects().size() == 4);
+     BOOST_REQUIRE(a.concepts().empty());
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -404,7 +397,6 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
+     BOOST_REQUIRE(m.objects().size() == 4);
+     BOOST_REQUIRE(m.concepts().empty());
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+     BOOST_REQUIRE(m.objects().size() == 4);
+@@ -450,7 +442,6 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
+     auto m(factory.make_object_with_parent_that_models_concept());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -494,7 +485,6 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+     auto m(factory.make_object_with_parent_that_models_a_refined_concept());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     attributes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -548,7 +538,6 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
+     auto m(factory.make_concept_that_refines_missing_concept());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     contains_checker<transformation_error> c(concept_not_found);
+     BOOST_CHECK_EXCEPTION(
+         attributes_transform::transform(m), transformation_error, c);
+@@ -560,7 +549,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
+     auto m(factory.make_object_that_models_missing_concept());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     contains_checker<transformation_error> c(concept_not_found);
+     BOOST_CHECK_EXCEPTION(
+         attributes_transform::transform(m), transformation_error, c);
+@@ -572,7 +560,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
+     auto m(factory.make_object_that_models_concept_with_missing_parent());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::attributes_transform;
+     contains_checker<transformation_error> c(object_not_found);
+     BOOST_CHECK_EXCEPTION(
+         attributes_transform::transform(m), transformation_error, c);
+diff --git a/projects/yarn/tests/concepts_transform_tests.cpp b/projects/yarn/tests/concepts_transform_tests.cpp
+index 94b7871c1..af036671d 100644
+--- a/projects/yarn/tests/concepts_transform_tests.cpp
++++ b/projects/yarn/tests/concepts_transform_tests.cpp
+@@ -23,11 +23,11 @@
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+-#include "dogen/yarn/io/name_io.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/io/object_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/io/meta_model/object_io.hpp"
+ #include "dogen/yarn/types/transforms/transformation_error.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/yarn/types/transforms/concepts_transform.hpp"
+@@ -59,7 +59,8 @@ const mock_intermediate_model_factory factory(flags);
+ using dogen::utility::test::contains_checker;
+ using dogen::yarn::transforms::transformation_error;
+ using dogen::utility::test::asserter;
+-using origin_types = dogen::yarn::origin_types;
++using dogen::yarn::transforms::concepts_transform;
++using dogen::yarn::meta_model::origin_types;
+ using object_types = dogen::yarn::test::mock_intermediate_model_factory::
+     object_types;
+ using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+@@ -75,7 +76,6 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_expander) {
+     BOOST_CHECK(a.objects().empty());
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -89,7 +89,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_co
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
+     BOOST_CHECK(a.objects().size() == 1);
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -117,7 +116,6 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expa
+     BOOST_CHECK(o.all_attributes().empty());
+     BOOST_CHECK(o.modeled_concepts().empty());
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -138,7 +136,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_expander)
+     const auto& c(a.concepts().begin()->second);
+     BOOST_CHECK(c.refines().empty());
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -182,7 +179,6 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
+             BOOST_FAIL("Unexpected concept: " << n.id());
+     }
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -257,7 +253,6 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
+             BOOST_FAIL("Unexpected concept: " << n.id());
+     }
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -337,7 +332,6 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
+             BOOST_FAIL("Unexpected concept: " << n.id());
+     }
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+     BOOST_CHECK(m.concepts().size() == 4);
+@@ -387,7 +381,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_un
+     BOOST_REQUIRE(a.objects().size() == 2);
+     BOOST_REQUIRE(a.concepts().empty());
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -403,7 +396,6 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
+     BOOST_REQUIRE(a.objects().size() == 4);
+     BOOST_REQUIRE(a.concepts().empty());
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -445,7 +437,6 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
+             BOOST_FAIL("Unexpected object: " << n.id());
+     }
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(a);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
+     BOOST_CHECK(asserter::assert_object(e, a));
+@@ -489,7 +480,6 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
+             BOOST_FAIL("Unexpected object: " << n.id());
+     }
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     concepts_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
+ 
+@@ -550,9 +540,9 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     contains_checker<transformation_error> c(concept_not_found);
+-    BOOST_CHECK_EXCEPTION(concepts_transform::transform(m), transformation_error, c);
++    BOOST_CHECK_EXCEPTION(
++        concepts_transform::transform(m), transformation_error, c);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
+@@ -574,7 +564,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     contains_checker<transformation_error> c(concept_not_found);
+     BOOST_CHECK_EXCEPTION(
+         concepts_transform::transform(m), transformation_error, c);
+@@ -614,7 +603,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
+ 
+     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
+ 
+-    using dogen::yarn::transforms::concepts_transform;
+     contains_checker<transformation_error> c(object_not_found);
+     BOOST_CHECK_EXCEPTION(
+         concepts_transform::transform(m), transformation_error, c);
+diff --git a/projects/yarn/tests/equality_tests.cpp b/projects/yarn/tests/equality_tests.cpp
+index 5fdfaa86d..cf5a81cdd 100644
+--- a/projects/yarn/tests/equality_tests.cpp
++++ b/projects/yarn/tests/equality_tests.cpp
+@@ -36,7 +36,8 @@ const std::string test_suite("equality_tests");
+ 
+ }
+ 
+-using namespace dogen::yarn;
++using namespace dogen::yarn::helpers;
++using namespace dogen::yarn::meta_model;
+ using dogen::utility::test::asserter;
+ using namespace dogen::utility::test;
+ 
+@@ -47,7 +48,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
+ 
+     test_equality<origin_types_generator>();
+     test_equality<name_tree_generator>();
+-    test_equality<helpers::node_generator>();
++    test_equality<node_generator>();
+     test_equality<attribute_generator>();
+     test_equality<name_generator>();
+     test_equality<builtin_generator>();
+diff --git a/projects/yarn/tests/hashing_tests.cpp b/projects/yarn/tests/hashing_tests.cpp
+index 95e9f9729..6cd55c36f 100644
+--- a/projects/yarn/tests/hashing_tests.cpp
++++ b/projects/yarn/tests/hashing_tests.cpp
+@@ -34,7 +34,8 @@ const std::string test_suite("hashing_tests");
+ 
+ }
+ 
+-using namespace dogen::yarn;
++using namespace dogen::yarn::helpers;
++using namespace dogen::yarn::meta_model;
+ using namespace dogen::utility::test;
+ 
+ BOOST_AUTO_TEST_SUITE(hashing_tests)
+diff --git a/projects/yarn/tests/io_tests.cpp b/projects/yarn/tests/io_tests.cpp
+index 410a50db7..22244b988 100644
+--- a/projects/yarn/tests/io_tests.cpp
++++ b/projects/yarn/tests/io_tests.cpp
+@@ -33,7 +33,8 @@ const std::string test_suite("io_tests");
+ 
+ }
+ 
+-using namespace dogen::yarn;
++using namespace dogen::yarn::helpers;
++using namespace dogen::yarn::meta_model;
+ using namespace dogen::utility::test;
+ 
+ BOOST_AUTO_TEST_SUITE(io_tests)
+@@ -43,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
+ 
+     test_io<origin_types_generator>();
+     test_io<name_tree_generator>();
+-    test_io<helpers::node_generator>();
++    test_io<node_generator>();
+     test_io<attribute_generator>();
+     test_io<name_generator>();
+     test_io<builtin_generator>();
+diff --git a/projects/yarn/tests/legacy_name_tree_parser_tests.cpp b/projects/yarn/tests/legacy_name_tree_parser_tests.cpp
+index 32f344dbd..4a8fd14cc 100644
+--- a/projects/yarn/tests/legacy_name_tree_parser_tests.cpp
++++ b/projects/yarn/tests/legacy_name_tree_parser_tests.cpp
+@@ -24,14 +24,17 @@
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/io/list_io.hpp"
+ #include "dogen/yarn/types/helpers/name_factory.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ #include "dogen/yarn/types/helpers/parsing_error.hpp"
+-#include "dogen/yarn/io/name_tree_io.hpp"
+-#include "dogen/yarn/io/name_io.hpp"
++#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
+ #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+ 
+ using dogen::utility::test::asserter;
++using dogen::yarn::meta_model::name_tree;
++using dogen::yarn::helpers::legacy_name_tree_parser;
++using dogen::yarn::helpers::name_factory;
+ 
+ namespace  {
+ 
+@@ -39,20 +42,19 @@ const std::string empty;
+ const std::string test_module("yarn");
+ const std::string test_suite("legacy_name_tree_parser_tests");
+ 
+-const dogen::yarn::languages cpp(dogen::yarn::languages::cpp);
++const auto cpp(dogen::yarn::meta_model::languages::cpp);
+ 
+-dogen::yarn::
+-name_tree make(const dogen::yarn::name& n) {
+-    dogen::yarn::name_tree r;
++name_tree make(const dogen::yarn::meta_model::name& n) {
++    name_tree r;
+     r.current(n);
+     return r;
+ }
+ 
+ bool test_builtin(const std::string& s) {
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+ 
+-    dogen::yarn::helpers::name_factory nf;
++    name_factory nf;
+     const auto e(make(nf.build_element_name(s)));
+     return asserter::assert_equals(e, a);
+ }
+@@ -68,10 +70,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
+     const std::string s("a::b::c::z");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+ 
+-    dogen::yarn::helpers::name_factory nf;
++    name_factory nf;
+     const auto e(make(nf.build_element_name("z", { "a", "b", "c"})));
+ 
+     BOOST_CHECK(asserter::assert_equals(e, a));
+@@ -82,10 +84,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
+     const std::string s("zeta");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+ 
+-    dogen::yarn::helpers::name_factory nf;
++    name_factory nf;
+     const auto e(make(nf.build_element_name(s)));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+ }
+@@ -95,10 +97,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
+     const std::string s("a::z");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+ 
+-    dogen::yarn::helpers::name_factory nf;
++    name_factory nf;
+     const auto e(make(nf.build_element_name("z",
+                 std::list<std::string>({ "a" }))));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+@@ -108,7 +110,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
+     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_colon_fails_to_parse");
+     const std::string s("a:z");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+ }
+ 
+@@ -116,7 +118,7 @@ BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
+     SETUP_TEST_LOG_SOURCE("string_starting_with_digit_fails_to_parse");
+     const std::string s("0a");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+ }
+ 
+@@ -124,7 +126,7 @@ BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
+     SETUP_TEST_LOG_SOURCE("string_ending_with_scope_operator_fails_to_parse");
+     const std::string s("a::");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+ }
+ 
+@@ -132,7 +134,7 @@ BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
+     SETUP_TEST_LOG_SOURCE("scope_operator_followed_by_scope_operator_fails_to_parse");
+     const std::string s("A::::");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
+ }
+ 
+@@ -159,7 +161,7 @@ BOOST_AUTO_TEST_CASE(all_builtin_types_are_valid) {
+ 
+ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
+     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     BOOST_CHECK_THROW(ntp.parse("unsigned bool"), parsing_error);
+     BOOST_CHECK_THROW(ntp.parse("unsigned x"), parsing_error);
+     BOOST_CHECK_THROW(ntp.parse("unsigned float"), parsing_error);
+@@ -169,17 +171,17 @@ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
+ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_name_trees) {
+     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_name_trees");
+ 
+-    dogen::yarn::name_tree e;
+-    dogen::yarn::helpers::name_factory nf;
++    name_tree e;
++    name_factory nf;
+     e.current(nf.build_element_name("type"));
+ 
+-    dogen::yarn::name_tree c;
++    name_tree c;
+     c.current(nf.build_element_name("abc"));
+ 
+-    e.children(std::list<dogen::yarn::name_tree> { c });
++    e.children(std::list<name_tree> { c });
+ 
+     const std::string s("type<abc>");
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+ }
+@@ -187,42 +189,42 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
+ BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_name_trees) {
+     SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_name_trees");
+ 
+-    dogen::yarn::name_tree e;
+-    dogen::yarn::helpers::name_factory nf;
++    name_tree e;
++    name_factory nf;
+     e.current(nf.build_element_name("type"));
+ 
+-    dogen::yarn::name_tree c;
++    name_tree c;
+     c.current(nf.build_element_name("abc"));
+ 
+-    dogen::yarn::name_tree d;
++    name_tree d;
+     d.current(nf.build_element_name("cde"));
+ 
+-    e.children(std::list<dogen::yarn::name_tree> { c, d });
++    e.children(std::list<name_tree> { c, d });
+ 
+     const std::string s("type<abc,cde>");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+ }
+ 
+ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
+     SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_name_trees");
+-    dogen::yarn::name_tree e;
+-    dogen::yarn::helpers::name_factory nf;
++    name_tree e;
++    name_factory nf;
+     e.current(nf.build_element_name("vector",
+             std::list<std::string>({ "std" })));
+ 
+-    dogen::yarn::name_tree c;
++    name_tree c;
+     c.current(nf.build_element_name("string",
+             std::list<std::string>({ "std" })));
+-    e.children(std::list<dogen::yarn::name_tree> { c });
++    e.children(std::list<name_tree> { c });
+ 
+     const std::string s("std::vector<std::string>");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+ }
+@@ -230,20 +232,20 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
+ BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
+     SETUP_TEST_LOG_SOURCE("parsing_vector_of_builtin_produces_expected_name_trees");
+ 
+-    dogen::yarn::name_tree e;
+-    dogen::yarn::helpers::name_factory nf;
++    name_tree e;
++    name_factory nf;
+     e.current(nf.build_element_name("vector",
+             std::list<std::string>({ "std" })));
+ 
+-    dogen::yarn::name_tree c;
++    name_tree c;
+     c.current(nf.build_element_name("unsigned int"));
+ 
+-    e.children(std::list<dogen::yarn::name_tree> { c });
++    e.children(std::list<name_tree> { c });
+ 
+     const std::string s("std::vector<unsigned int>");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+ }
+@@ -251,26 +253,25 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
+ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
+     SETUP_TEST_LOG_SOURCE("parsing_unordered_map_produces_expected_name_trees");
+ 
+-    dogen::yarn::name_tree e;
+-
+-    dogen::yarn::helpers::name_factory nf;
++    name_tree e;
++    name_factory nf;
+     e.current(nf.build_element_name("unordered_map",
+             std::list<std::string>({ "std" })));
+ 
+-    dogen::yarn::name_tree c;
++    name_tree c;
+     c.current(nf.build_element_name("string",
+             std::list<std::string>({ "std" })));
+ 
+-    dogen::yarn::name_tree d;
++    name_tree d;
+     d.current(nf.build_element_name("type",
+             std::list<std::string>({ "my" })));
+ 
+-    e.children(std::list<dogen::yarn::name_tree> { c, d });
++    e.children(std::list<name_tree> { c, d });
+ 
+     const std::string s1("std::unordered_map<std::string,my::type>");
+     BOOST_LOG_SEV(lg, info) << "input: " << s1;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a1(ntp.parse(s1));
+     BOOST_CHECK(asserter::assert_equals(e, a1));
+ 
+@@ -284,26 +285,26 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
+ BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) {
+     SETUP_TEST_LOG_SOURCE("parsing_vector_of_shared_ptr_produces_expected_name_trees");
+ 
+-    dogen::yarn::name_tree e;
+-    dogen::yarn::helpers::name_factory nf;
++    name_tree e;
++    name_factory nf;
+     e.current(nf.build_element_name("vector",
+             std::list<std::string>({ "std" })));
+ 
+-    dogen::yarn::name_tree c;
++    name_tree c;
+     c.current(nf.build_element_name("shared_ptr",
+             std::list<std::string>({ "std" })));
+ 
+-    dogen::yarn::name_tree d;
++    name_tree d;
+     d.current(nf.build_element_name("string",
+             std::list<std::string>({ "std" })));
+ 
+-    c.children(std::list<dogen::yarn::name_tree> { d });
+-    e.children(std::list<dogen::yarn::name_tree> { c });
++    c.children(std::list<name_tree> { d });
++    e.children(std::list<name_tree> { c });
+ 
+     const std::string s("std::vector<std::shared_ptr<std::string>>");
+     BOOST_LOG_SEV(lg, info) << "input: " << s;
+ 
+-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
++    legacy_name_tree_parser ntp(cpp);
+     const auto a(ntp.parse(s));
+     BOOST_CHECK(asserter::assert_equals(e, a));
+ }
+diff --git a/projects/yarn/tests/merge_transform_tests.cpp b/projects/yarn/tests/merge_transform_tests.cpp
+index d1e68fef3..24481623e 100644
+--- a/projects/yarn/tests/merge_transform_tests.cpp
++++ b/projects/yarn/tests/merge_transform_tests.cpp
+@@ -24,11 +24,11 @@
+ #include <boost/algorithm/string/predicate.hpp>
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+-#include "dogen/yarn/types/name.hpp"
+-#include "dogen/yarn/io/name_io.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/types/object.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
+ #include "dogen/yarn/types/transforms/transformation_error.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/yarn/types/transforms/merge_transform.hpp"
+@@ -56,24 +56,26 @@ const std::string incorrect_meta_type("Type has incorrect meta_type");
+ }
+ 
+ using dogen::utility::test::contains_checker;
++using dogen::yarn::meta_model::origin_types;
++using dogen::yarn::meta_model::intermediate_model;
++using dogen::yarn::transforms::merge_transform;
+ 
+ BOOST_AUTO_TEST_SUITE(merge_transform_tests)
+ 
+ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
+     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
+ 
+-    const auto tg(dogen::yarn::origin_types::target);
++    const auto tg(origin_types::target);
+     const auto target(factory.make_single_type_model(tg, 0));
+ 
+     const unsigned int n(5);
+-    std::list<dogen::yarn::intermediate_model> ims;
+-    const auto npr(dogen::yarn::origin_types::non_proxy_reference);
++    std::list<intermediate_model> ims;
++    const auto npr(origin_types::non_proxy_reference);
+     for (unsigned int i(1); i < n; ++i) {
+         const auto m(factory.make_single_type_model(npr, i));
+         ims.push_back(m);
+     }
+ 
+-    using dogen::yarn::transforms::merge_transform;
+     const auto combined(merge_transform::transform(target, ims));
+ 
+     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
+@@ -127,11 +129,10 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
+ 
+ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
+     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
+-    const auto tg(dogen::yarn::origin_types::target);
++    const auto tg(origin_types::target);
+     const auto m(factory.make_empty_model(tg));
+ 
+-    const std::list<dogen::yarn::intermediate_model> ims;
+-    using dogen::yarn::transforms::merge_transform;
++    const std::list<intermediate_model> ims;
+     const auto combined(merge_transform::transform(m, ims));
+     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
+ 
+diff --git a/projects/yarn/tests/move_assignment_copy_tests.cpp b/projects/yarn/tests/move_assignment_copy_tests.cpp
+index 847d9450e..b30261fdf 100644
+--- a/projects/yarn/tests/move_assignment_copy_tests.cpp
++++ b/projects/yarn/tests/move_assignment_copy_tests.cpp
+@@ -34,7 +34,8 @@ const std::string test_suite("move_copy_assignment_tests");
+ 
+ }
+ 
+-using namespace dogen::yarn;
++using namespace dogen::yarn::helpers;
++using namespace dogen::yarn::meta_model;
+ using namespace dogen::utility::test;
+ 
+ BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)
+diff --git a/projects/yarn/tests/new_name_tree_parser_tests.cpp b/projects/yarn/tests/new_name_tree_parser_tests.cpp
+index 9215c2fcf..7f0a0409e 100644
+--- a/projects/yarn/tests/new_name_tree_parser_tests.cpp
++++ b/projects/yarn/tests/new_name_tree_parser_tests.cpp
+@@ -23,7 +23,7 @@
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/io/list_io.hpp"
+-#include "dogen/yarn/types/languages.hpp"
++#include "dogen/yarn/types/meta_model/languages.hpp"
+ 
+ /*
+ #include "dogen/yarn/types/name_builder.hpp"
+@@ -46,10 +46,10 @@ const std::string empty;
+ const std::string test_module("yarn");
+ const std::string test_suite("name_tree_parser_tests");
+ 
+-const dogen::yarn::languages cpp(dogen::yarn::languages::cpp);
++const auto cpp(dogen::yarn::meta_model::languages::cpp);
+ 
+ const auto top_level_modules = std::unordered_set<std::string>();
+-const auto model_location = dogen::yarn::location();
++const auto model_location = dogen::yarn::meta_model::location();
+ 
+ 
+ 
+diff --git a/projects/yarn/tests/resolver_tests.cpp b/projects/yarn/tests/resolver_tests.cpp
+index eeca15ff0..e5c126f65 100644
+--- a/projects/yarn/tests/resolver_tests.cpp
++++ b/projects/yarn/tests/resolver_tests.cpp
+@@ -22,14 +22,14 @@
+ #include <boost/test/unit_test.hpp>
+ #include <boost/algorithm/string/predicate.hpp>
+ #include "dogen/utility/test/logging.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+ #include "dogen/yarn/types/helpers/resolution_error.hpp"
+ #include "dogen/yarn/types/transforms/merge_transform.hpp"
+ #include "dogen/yarn/types/helpers/indexer.hpp"
+ #include "dogen/yarn/types/helpers/indices.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/io/attribute_io.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/io/meta_model/attribute_io.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/yarn/types/helpers/resolver.hpp"
+@@ -74,6 +74,10 @@ const std::string incorrect_meta_type("Object has incorrect meta_type");
+ 
+ using dogen::utility::test::contains_checker;
+ using dogen::yarn::helpers::resolution_error;
++using dogen::yarn::helpers::indexer;
++using dogen::yarn::helpers::resolver;
++using dogen::yarn::transforms::merge_transform;
++using dogen::yarn::meta_model::intermediate_model;
+ 
+ BOOST_AUTO_TEST_SUITE(resolver_tests)
+ 
+@@ -93,13 +97,11 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
+             t.id(t.simple());
+         }
+     }
+-    using dogen::yarn::helpers::indexer;
+     const auto idx(indexer::index(m));
+ 
+     const auto original(m);
+     BOOST_LOG_SEV(lg, debug) << "original: " << original;
+ 
+-    using dogen::yarn::helpers::resolver;
+     resolver::resolve(idx, m);
+     BOOST_LOG_SEV(lg, debug) << "resolved: " << m;
+     BOOST_CHECK(m != original);
+@@ -127,16 +129,12 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
+ 
+     const auto m(factory.object_with_attribute_type_in_different_model());
+ 
+-    using dogen::yarn::transforms::merge_transform;
+-    const std::list<dogen::yarn::intermediate_model> refs = { m[1] };
++    const std::list<intermediate_model> refs = { m[1] };
+     auto combined(merge_transform::transform(m[0], refs));
+     BOOST_CHECK(combined.objects().size() == 2);
+     BOOST_CHECK(combined.builtins().empty());
+ 
+-    using dogen::yarn::helpers::indexer;
+     const auto idx(indexer::index(combined));
+-
+-    using dogen::yarn::helpers::resolver;
+     resolver::resolve(idx, combined);
+ 
+     bool found(false);
+@@ -163,22 +161,19 @@ BOOST_AUTO_TEST_CASE(object_with_missing_attribute_type_throws) {
+     SETUP_TEST_LOG("object_with_missing_attribute_type_throws");
+ 
+     auto m(factory.object_with_missing_attribute_type());
+-    using dogen::yarn::helpers::resolver;
+     contains_checker<resolution_error> c(undefined_type);
+     BOOST_CHECK_EXCEPTION(resolver::resolve(idx, m), resolution_error, c);
+ }
+ 
+ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully) {
+     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
+-    using dogen::yarn::transforms::merge_transform;
+     const auto m(factory.object_with_parent_in_the_same_model());
+ 
+-    const std::list<dogen::yarn::intermediate_model> refs;
++    const std::list<intermediate_model> refs;
+     auto combined(merge_transform::transform(m, refs));
+     BOOST_CHECK(combined.objects().size() == 2);
+     BOOST_CHECK(combined.builtins().empty());
+ 
+-    using dogen::yarn::helpers::resolver;
+     resolver::resolve(idx, combined);
+ 
+     bool found(false);
+@@ -205,13 +200,11 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
+ 
+     const auto m(factory.object_with_parent_in_different_models());
+ 
+-    using dogen::yarn::transforms::merge_transform;
+-    const std::list<dogen::yarn::intermediate_model> refs = { m[1] };
++    const std::list<intermediate_model> refs = { m[1] };
+     auto combined(merge_transform::transform(m[0], refs));
+     BOOST_CHECK(combined.objects().size() == 2);
+     BOOST_CHECK(combined.builtins().empty());
+ 
+-    using dogen::yarn::helpers::resolver;
+     resolver::resolve(idx, combined);
+ 
+     bool found(false);
+@@ -235,14 +228,12 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
+ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
+     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
+     const auto m(factory.object_with_third_degree_parent_in_same_model());
+-    using dogen::yarn::transforms::merge_transform;
+-    const std::list<dogen::yarn::intermediate_model> refs;
++    const std::list<intermediate_model> refs;
+ 
+     auto combined(merge_transform::transform(m, refs));
+     BOOST_CHECK(combined.objects().size() == 4);
+     BOOST_CHECK(combined.builtins().empty());
+ 
+-    using dogen::yarn::helpers::resolver;
+     resolver::resolve(idx, combined);
+ 
+     bool found_one(false);
+@@ -287,15 +278,12 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
+     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
+ 
+     const auto a(factory.object_with_third_degree_parent_in_different_models());
+-    const std::list<dogen::yarn::intermediate_model>
+-        refs = { a[1], a[2], a[3] };
++    const std::list<intermediate_model> refs = { a[1], a[2], a[3] };
+ 
+-    using dogen::yarn::transforms::merge_transform;
+     auto combined(merge_transform::transform(a[0], refs));
+     BOOST_CHECK(combined.objects().size() == 4);
+     BOOST_CHECK(combined.builtins().empty());
+ 
+-    using dogen::yarn::helpers::resolver;
+     resolver::resolve(idx, combined);
+ 
+     bool found(false);
+@@ -318,14 +306,11 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
+ 
+ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models_throws) {
+     SETUP_TEST_LOG("object_with_missing_third_degree_parent_in_different_models_throws");
+-    using dogen::yarn::transforms::merge_transform;
+     const auto a(
+         factory.object_with_missing_third_degree_parent_in_different_models());
+ 
+-    const std::list<dogen::yarn::intermediate_model> refs = { a[1], a[2] };
+-
++    const std::list<intermediate_model> refs = { a[1], a[2] };
+     auto combined(merge_transform::transform(a[0], refs));
+-    using dogen::yarn::helpers::resolver;
+ 
+     contains_checker<resolution_error> c(missing_parent);
+     BOOST_CHECK_EXCEPTION(
+diff --git a/projects/yarn/tests/serialization_tests.cpp b/projects/yarn/tests/serialization_tests.cpp
+index 63d441192..f5056e987 100644
+--- a/projects/yarn/tests/serialization_tests.cpp
++++ b/projects/yarn/tests/serialization_tests.cpp
+@@ -39,7 +39,8 @@ const std::string test_suite("serialization_tests");
+ 
+ }
+ 
+-using namespace dogen::yarn;
++using namespace dogen::yarn::helpers;
++using namespace dogen::yarn::meta_model;
+ using namespace dogen::utility::test;
+ 
+ BOOST_AUTO_TEST_SUITE(serialization_tests)
+@@ -50,7 +51,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
+     roundtrip_type<object_generator>();
+     roundtrip_type<origin_types_generator>();
+     roundtrip_type<name_tree_generator>();
+-    roundtrip_type<helpers::node_generator>();
++    roundtrip_type<node_generator>();
+     roundtrip_type<attribute_generator>();
+     roundtrip_type<name_generator>();
+     roundtrip_type<builtin_generator>();
+diff --git a/projects/yarn/tests/stereotypes_transform_tests.cpp b/projects/yarn/tests/stereotypes_transform_tests.cpp
+index 22cc35152..a2fc2571a 100644
+--- a/projects/yarn/tests/stereotypes_transform_tests.cpp
++++ b/projects/yarn/tests/stereotypes_transform_tests.cpp
+@@ -24,16 +24,14 @@
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/asserter.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/types/object.hpp"
+-#include "dogen/yarn/io/object_io.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/io/meta_model/object_io.hpp"
+ #include "dogen/yarn/types/transforms/transformation_error.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+ #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
+ 
+-using dogen::yarn::object_types;
+-
+ namespace {
+ 
+ using dogen::yarn::test::mock_intermediate_model_factory;
+@@ -48,9 +46,11 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
+ 
+ }
+ 
++using dogen::yarn::meta_model::object_types;
+ using dogen::utility::test::contains_checker;
+ using dogen::yarn::transforms::transformation_error;
+ using dogen::utility::test::asserter;
++using dogen::yarn::transforms::stereotypes_transform;
+ 
+ BOOST_AUTO_TEST_SUITE(stereotypes_expander_tests)
+ 
+@@ -66,7 +66,6 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
+     BOOST_REQUIRE(a.concepts().empty());
+     BOOST_REQUIRE(a.visitors().empty());
+ 
+-    using dogen::yarn::transforms::stereotypes_transform;
+     stereotypes_transform::transform(a);
+ 
+     BOOST_CHECK(a.objects().size() == 1);
+@@ -88,7 +87,6 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
+     o.is_visitation_root(true);
+     BOOST_LOG_SEV(lg, debug) << "model: " << m;
+ 
+-    using dogen::yarn::transforms::stereotypes_transform;
+     contains_checker<transformation_error> c(no_leaves);
+     BOOST_CHECK_EXCEPTION(
+         stereotypes_transform::transform(m), transformation_error, c);
+@@ -110,7 +108,6 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
+     }
+     BOOST_LOG_SEV(lg, debug) << "before: " << m;
+ 
+-    using dogen::yarn::transforms::stereotypes_transform;
+     stereotypes_transform::transform(m);
+     BOOST_LOG_SEV(lg, debug) << "after: " << m;
+ 
+diff --git a/projects/yarn/tests/swap_tests.cpp b/projects/yarn/tests/swap_tests.cpp
+index 7de754bca..e7b0eb9e4 100644
+--- a/projects/yarn/tests/swap_tests.cpp
++++ b/projects/yarn/tests/swap_tests.cpp
+@@ -34,7 +34,8 @@ const std::string test_suite("swap_tests");
+ 
+ }
+ 
+-using namespace dogen::yarn;
++using namespace dogen::yarn::helpers;
++using namespace dogen::yarn::meta_model;
+ using namespace dogen::utility::test;
+ 
+ BOOST_AUTO_TEST_SUITE(swap_tests)
+@@ -44,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
+ 
+     test_swap<origin_types_generator>();
+     test_swap<name_tree_generator>();
+-    test_swap<helpers::node_generator>();
++    test_swap<node_generator>();
+     test_swap<attribute_generator>();
+     test_swap<name_generator>();
+     test_swap<builtin_generator>();
+diff --git a/projects/yarn/tests/validator_tests.cpp b/projects/yarn/tests/validator_tests.cpp
+index 88e661771..21f380950 100644
+--- a/projects/yarn/tests/validator_tests.cpp
++++ b/projects/yarn/tests/validator_tests.cpp
+@@ -24,11 +24,11 @@
+ #include <boost/algorithm/string/predicate.hpp>
+ #include "dogen/utility/test/logging.hpp"
+ #include "dogen/utility/test/exception_checkers.hpp"
+-#include "dogen/yarn/types/name.hpp"
+-#include "dogen/yarn/io/name_io.hpp"
+-#include "dogen/yarn/types/intermediate_model.hpp"
+-#include "dogen/yarn/io/intermediate_model_io.hpp"
+-#include "dogen/yarn/types/object.hpp"
++#include "dogen/yarn/types/meta_model/name.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
++#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
++#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
++#include "dogen/yarn/types/meta_model/object.hpp"
+ #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
+ #include "dogen/yarn/types/helpers/validation_error.hpp"
+ #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+@@ -52,20 +52,23 @@ const std::string inconsistent_kvp("Inconsistency between key and value");
+ 
+ using dogen::utility::test::contains_checker;
+ using dogen::yarn::helpers::validation_error;
++using dogen::yarn::meta_model::origin_types;
++using dogen::yarn::meta_model::languages;
++using dogen::yarn::helpers::pre_processing_validator;
++
+ 
+ BOOST_AUTO_TEST_SUITE(merger_tests)
+ 
+ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
+     SETUP_TEST_LOG_SOURCE("type_with_incorrect_model_name_throws");
+-    const auto ot(dogen::yarn::origin_types::target);
++    const auto ot(origin_types::target);
+     auto m(factory.make_single_type_model(ot));
+ 
+     m.name().location().model_modules().clear();
+     m.name().location().model_modules().push_back(invalid_model_name);
+-    m.input_language(dogen::yarn::languages::cpp);
++    m.input_language(languages::cpp);
+     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
+ 
+-    using dogen::yarn::helpers::pre_processing_validator;
+     contains_checker<validation_error> c(incorrect_model);
+     BOOST_CHECK_EXCEPTION(
+         pre_processing_validator::validate(m), validation_error, c);
+@@ -74,13 +77,12 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
+ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
+     SETUP_TEST_LOG_SOURCE("type_with_inconsistent_key_value_pair_throws");
+ 
+-    const auto ot(dogen::yarn::origin_types::target);
++    const auto ot(origin_types::target);
+     auto m(factory.make_multi_type_model(0, 2, ot));
+     m.objects().begin()->second.name().id(invalid_id);
+-    m.input_language(dogen::yarn::languages::cpp);
++    m.input_language(languages::cpp);
+     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
+ 
+-    using dogen::yarn::helpers::pre_processing_validator;
+     contains_checker<validation_error> c(inconsistent_kvp);
+     BOOST_CHECK_EXCEPTION(
+         pre_processing_validator::validate(m), validation_error, c);
