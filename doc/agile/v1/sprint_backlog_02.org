@@ -12,34 +12,35 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-12 Wed 20:16]
+#+CAPTION: Clock summary at [2017-07-12 Wed 21:13]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *30:56* |       |      | 100.0 |
+| *Total time*                                                                | *31:50* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 30:56   |       |      | 100.0 |
-| Active                                                                      |         | 30:56 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.6 |
+| Stories                                                                     | 31:50   |       |      | 100.0 |
+| Active                                                                      |         | 31:50 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.3 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.9 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  13.5 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   5.1 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.8 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  13.1 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   5.0 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.6 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   2.0 |
-| COMPLETED Use forward declaration for context                               |         |       | 0:20 |   1.1 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   8.8 |
-| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   2.2 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.9 |
+| COMPLETED Use forward declaration for context                               |         |       | 0:20 |   1.0 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   8.5 |
+| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   2.1 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.7 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.7 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  11.4 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.6 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  11.0 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.4 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.2 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   2.3 |
-| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   3.0 |
-| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.5 |
-| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.8 |
-| STARTED Move all data types into its own namespace                          |         |       | 9:00 |  29.1 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   2.2 |
+| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.9 |
+| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.4 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.7 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  28.3 |
+| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -344,7 +345,8 @@ transforms namespace and clean it up. Name: =map_transform=.
 Types such as name builder etc need to be moved to the helpers
 namespace.
 
-*** STARTED Move all data types into its own namespace                :story:
+*** COMPLETED Move all data types into its own namespace              :story:
+    CLOSED: [2017-07-12 Wed 20:21]
     CLOCK: [2017-07-12 Wed 19:02]--[2017-07-12 Wed 20:16] =>  1:14
     CLOCK: [2017-07-11 Tue 21:48]--[2017-07-11 Tue 23:38] =>  1:50
     CLOCK: [2017-07-11 Tue 17:34]--[2017-07-11 Tue 18:22] =>  0:48
@@ -369,16 +371,23 @@ Notes:
 - bug in resolution: cannot refer to a top-level namespace from
   another top-level namespace
 
+*** CANCELLED Move artefacts from formatters into meta-model          :story:
+    CLOSED: [2017-07-12 Wed 21:12]
+    CLOCK: [2017-07-12 Wed 20:39]--[2017-07-12 Wed 21:12] =>  0:33
+    CLOCK: [2017-07-12 Wed 20:17]--[2017-07-12 Wed 20:38] =>  0:21
+
+We originally placed artefacts in formatters. In the new
+understanding, it is actually a yarn meta-model concept. Move it
+across, with associated infrastructure (writers).
+
+Actually this does not result in a cleaner model: we need artefacts
+even when we do not use yarn: stitcher. Since this is not an obvious
+win, we'll cancel it for now.
+
 *** Implement the code-generation chain                               :story:
 
 Tasks:
 
-- create the yarn transform options with the relevant knitting
-  options. Add it to context and copy them across from knitting
-  options.
-- move artefact to meta-model.
-- move artefact writters to helpers.
-- move housekepper to helpers.
 - implement the code generator transform interface in c++ and c#.
 - implement the code generation chain, including the configuration
   factory from quilt.
@@ -386,7 +395,7 @@ Tasks:
   and the code generation chain together.
 - move context generation into code generator.
 - update knitter to use the code generator.
-- delete quilt and knit.
+- delete knit.
 
 *** Assorted problems to look at
 
