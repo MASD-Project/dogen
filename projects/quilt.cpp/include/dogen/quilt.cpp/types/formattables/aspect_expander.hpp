@@ -32,8 +32,8 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
@@ -67,12 +67,13 @@ private:
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 private:
-    void walk_name_tree(const yarn::name_tree& nt, const bool is_top_level,
-        const aspect_properties_type& element_aps, aspect_properties& ap) const;
+    void walk_name_tree(const yarn::meta_model::name_tree& nt,
+        const bool is_top_level, const aspect_properties_type& element_aps,
+        aspect_properties& ap) const;
 
     aspect_properties compute_aspect_properties(
         const aspect_properties_type& element_aps,
-        const std::list<yarn::attribute>& attrs) const;
+        const std::list<yarn::meta_model::attribute>& attrs) const;
 
     void populate_aspect_properties(const std::string& element_id,
         const aspect_properties_type& element_aps,

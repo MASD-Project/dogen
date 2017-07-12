@@ -30,8 +30,8 @@
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/mapping_actions.hpp"
 #include "dogen/yarn/types/helpers/mapping.hpp"
 
@@ -42,12 +42,12 @@ namespace helpers {
 class mappings_hydrator final {
 private:
     mapping_actions to_mapping_action(const std::string& s) const;
-    languages to_language(const std::string& s) const;
+    meta_model::languages to_language(const std::string& s) const;
 
 private:
-    name read_name(const boost::property_tree::ptree& pt) const;
+    meta_model::name read_name(const boost::property_tree::ptree& pt) const;
 
-    std::unordered_map<languages, mapping_value>
+    std::unordered_map<meta_model::languages, mapping_value>
     read_mapping_values(const boost::property_tree::ptree& pt) const;
 
     std::list<mapping> read_stream(std::istream& s) const;

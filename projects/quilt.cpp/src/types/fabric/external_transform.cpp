@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/quilt.cpp/types/fabric/injector.hpp"
@@ -45,7 +45,7 @@ namespace cpp {
 namespace fabric {
 
 bool external_transform::
-requires_expansion(const yarn::intermediate_model& im) const {
+requires_expansion(const yarn::meta_model::intermediate_model& im) const {
     if (im.output_languages().size() != 1) {
         BOOST_LOG_SEV(lg, error) << too_many_output_languages;
         BOOST_THROW_EXCEPTION(
@@ -53,7 +53,7 @@ requires_expansion(const yarn::intermediate_model& im) const {
     }
 
     const auto l(im.output_languages().front());
-    const auto r(l == yarn::languages::cpp);
+    const auto r(l == yarn::meta_model::languages::cpp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
                                  << im.name().id() << " for language: " << l;
@@ -63,14 +63,14 @@ requires_expansion(const yarn::intermediate_model& im) const {
 
 void external_transform::expand_injection(
     const annotations::type_repository& atrp,
-    yarn::intermediate_model& im) const {
+    yarn::meta_model::intermediate_model& im) const {
     injector i;
     i.inject(atrp, im);
 }
 
 void external_transform::expand_decoration(
     const dogen::formatters::decoration_properties_factory& dpf,
-    yarn::intermediate_model& im) const {
+    yarn::meta_model::intermediate_model& im) const {
     decoration_expander de;
     de.expand(dpf, im);
 }
@@ -81,7 +81,7 @@ std::string external_transform::id() const {
 
 void external_transform::transform(const yarn::transforms::context& ctx,
     const dogen::formatters::decoration_properties_factory& dpf,
-    yarn::intermediate_model& im) const {
+    yarn::meta_model::intermediate_model& im) const {
 
     if (!requires_expansion(im))
         return;

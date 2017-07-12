@@ -23,7 +23,7 @@
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -52,7 +52,7 @@ namespace_header_formatter::archetype_location() const {
 }
 
 std::type_index namespace_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::module)));
+    static auto r(std::type_index(typeid(yarn::meta_model::module)));
     return r;
 }
 
@@ -61,27 +61,27 @@ inclusion_support_types namespace_header_formatter::inclusion_support_type() con
 }
 
 boost::filesystem::path namespace_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path namespace_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 std::list<std::string> namespace_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
+    const yarn::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact namespace_header_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto& m(a.as<yarn::module>(static_artefact(), e));
+    const auto& m(a.as<yarn::meta_model::module>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

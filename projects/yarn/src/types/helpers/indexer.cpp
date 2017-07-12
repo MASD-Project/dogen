@@ -34,7 +34,7 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-indices indexer::index(intermediate_model& m) {
+indices indexer::index(meta_model::intermediate_model& m) {
     indices r;
 
     for (const auto& pair : m.builtins()) {

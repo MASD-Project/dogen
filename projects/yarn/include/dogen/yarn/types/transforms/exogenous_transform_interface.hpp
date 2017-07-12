@@ -27,7 +27,7 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_types.hpp"
 
 namespace dogen {
@@ -84,7 +84,8 @@ public:
      * transformers cannot cope with string processing. In the future
      * this will change to a string.
      */
-    virtual intermediate_model transform(const boost::filesystem::path& p) = 0;
+    virtual meta_model::intermediate_model
+    transform(const boost::filesystem::path& p) = 0;
 
     /**
      * @brief Transforms the intermediate model into a representation
@@ -100,7 +101,7 @@ public:
      * exogenous transformers cannot cope with string processing. In
      * the future this will change to returning a string.
      */
-    virtual void transform(const intermediate_model& im,
+    virtual void transform(const meta_model::intermediate_model& im,
         const boost::filesystem::path& p) = 0;
 };
 

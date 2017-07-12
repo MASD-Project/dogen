@@ -55,19 +55,19 @@ std::type_index assistant_formatter::element_type_index() const {
     return r;
 }
 
-boost::filesystem::path assistant_formatter::
-full_path(const formattables::locator& l, const yarn::name& n) const {
+boost::filesystem::path assistant_formatter::full_path(
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path(n, static_artefact());
 }
 
 std::list<std::string> assistant_formatter::
-inclusion_dependencies(const yarn::element& /*e*/) const {
+inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact
-assistant_formatter::format(const context& ctx, const yarn::element& e) const {
+dogen::formatters::artefact assistant_formatter::
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
     {

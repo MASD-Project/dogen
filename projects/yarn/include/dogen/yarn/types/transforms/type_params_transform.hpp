@@ -28,8 +28,8 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/type_parameters.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/type_parameters.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -46,14 +46,16 @@ private:
 
     static type_group make_type_group(const annotations::type_repository& atrp);
 
-    static type_parameters make_type_parameters(const type_group& tg,
-        const annotations::annotation& a);
+    static meta_model::type_parameters make_type_parameters(
+        const type_group& tg, const annotations::annotation& a);
 
 private:
-    static void expand_type_parameters(const type_group& tg, object& o);
+    static void expand_type_parameters(const type_group& tg,
+        meta_model::object& o);
 
 public:
-    static void transform(const context& ctx, intermediate_model& im);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& im);
 };
 
 } } }

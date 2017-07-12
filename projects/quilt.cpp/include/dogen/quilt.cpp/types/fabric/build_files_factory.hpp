@@ -29,8 +29,8 @@
 #include <string>
 #include <utility>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
@@ -40,15 +40,15 @@ namespace fabric {
 
 class build_files_factory final {
 private:
-    boost::shared_ptr<yarn::element>
-    make_cmakelists(const yarn::intermediate_model& im) const;
+    boost::shared_ptr<yarn::meta_model::element>
+    make_cmakelists(const yarn::meta_model::intermediate_model& im) const;
 
-    boost::shared_ptr<yarn::element>
-    make_msbuild_targets(const yarn::intermediate_model& im) const;
+    boost::shared_ptr<yarn::meta_model::element>
+    make_msbuild_targets(const yarn::meta_model::intermediate_model& im) const;
 
 public:
-    std::list<boost::shared_ptr<yarn::element>>
-    make(const yarn::intermediate_model& im) const;
+    std::list<boost::shared_ptr<yarn::meta_model::element>>
+    make(const yarn::meta_model::intermediate_model& im) const;
 };
 
 } } } }

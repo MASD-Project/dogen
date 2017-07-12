@@ -130,16 +130,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O1">
       <dia:attribute name="obj_pos">
-        <dia:point val="46,13"/>
+        <dia:point val="42,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.95,12.95;72.73,17.45"/>
+        <dia:rectangle val="41.95,12.95;75.66,17.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="46,13"/>
+        <dia:point val="42,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.68"/>
+        <dia:real val="33.609999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -241,7 +241,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::intermediate_model#</dia:string>
+            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -289,7 +289,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#intermediate_model#</dia:string>
+            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -483,17 +483,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.34,13"/>
+        <dia:point val="58.805,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="58.59,0.95;69.9775,13.8"/>
+        <dia:rectangle val="58.055,0.95;69.9775,13.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.34,13"/>
-        <dia:point val="59.34,8"/>
+        <dia:point val="58.805,13"/>
+        <dia:point val="58.805,8"/>
         <dia:point val="69.7775,8"/>
         <dia:point val="69.7775,1"/>
       </dia:attribute>
@@ -554,17 +554,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="59.34,17.4"/>
+        <dia:point val="58.805,17.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="59.29,17.35;72.75,27.8"/>
+        <dia:rectangle val="58.755,17.35;72.75,27.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="59.34,17.4"/>
-        <dia:point val="59.34,23"/>
+        <dia:point val="58.805,17.4"/>
+        <dia:point val="58.805,23"/>
         <dia:point val="72,23"/>
         <dia:point val="72,27"/>
       </dia:attribute>
@@ -730,16 +730,16 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O6">
       <dia:attribute name="obj_pos">
-        <dia:point val="84,13"/>
+        <dia:point val="85,13"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.95,12.95;104.955,18.25"/>
+        <dia:rectangle val="84.95,12.95;112.885,18.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="84,13"/>
+        <dia:point val="85,13"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.905000000000001"/>
+        <dia:real val="27.835000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000002"/>
@@ -867,7 +867,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const intermediate_model&amp;#</dia:string>
+                <dia:string>#const yarn::meta_model::intermediate_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -915,7 +915,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const intermediate_model&amp;#</dia:string>
+                <dia:string>#const yarn::meta_model::intermediate_model&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -993,7 +993,7 @@
         <dia:point val="82.275,27"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="81.525,18.15;94.6525,27.8"/>
+        <dia:rectangle val="81.525,18.15;99.1175,27.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1001,8 +1001,8 @@
       <dia:attribute name="orth_points">
         <dia:point val="82.275,27"/>
         <dia:point val="82.275,23"/>
-        <dia:point val="94.4525,23"/>
-        <dia:point val="94.4525,18.2"/>
+        <dia:point val="98.9175,23"/>
+        <dia:point val="98.9175,18.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

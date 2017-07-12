@@ -29,8 +29,8 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/annotations/types/scribble.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/repository.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -46,18 +46,19 @@ public:
         child_id_to_parent_ids);
 
 private:
-    yarn::module create_module_for_model(const yarn::name& n) const;
+    meta_model::module create_module_for_model(const meta_model::name& n) const;
 
-    yarn::intermediate_model setup_model(const std::string& model_name,
+    meta_model::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules) const;
 
-    void update_scribble_group(const yarn::name& n, const processed_object& po);
+    void update_scribble_group(const meta_model::name& n,
+        const processed_object& po);
 
     void update_documentation(const processed_object& po);
 
 public:
     void add(const processed_object& po);
-    yarn::intermediate_model build();
+    meta_model::intermediate_model build();
 
 private:
     repository repository_;

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,12 +33,12 @@ namespace transforms {
 
 class modules_transform final {
 private:
-    static void populate_root_module(intermediate_model& im);
-    static void create_missing_modules(intermediate_model& im);
-    static void expand_containing_module(intermediate_model& im);
+    static void populate_root_module(meta_model::intermediate_model& im);
+    static void create_missing_modules(meta_model::intermediate_model& im);
+    static void expand_containing_module(meta_model::intermediate_model& im);
 
 public:
-    static void transform(intermediate_model& im);
+    static void transform(meta_model::intermediate_model& im);
 };
 
 } } }

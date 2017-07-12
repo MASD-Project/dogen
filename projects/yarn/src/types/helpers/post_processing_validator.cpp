@@ -26,7 +26,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/helpers/decomposer.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/types/helpers/post_processing_validator.hpp"
@@ -116,12 +116,12 @@ namespace yarn {
 namespace helpers {
 
 bool post_processing_validator::
-allow_spaces_in_built_in_types(const languages l) {
-    return l == languages::cpp;
+allow_spaces_in_built_in_types(const meta_model::languages l) {
+    return l == meta_model::languages::cpp;
 }
 
 decomposition_result post_processing_validator::
-decompose_model(const intermediate_model& im) {
+decompose_model(const meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
 
     /*
@@ -154,8 +154,9 @@ decompose_model(const intermediate_model& im) {
     return dc.result();
 }
 
-void post_processing_validator::validate_enumerations(const indices& idx,
-    const std::unordered_map<std::string, enumeration>& enumerations) {
+void post_processing_validator::
+validate_enumerations(const indices& idx, const std::unordered_map<std::string,
+    meta_model::enumeration>& enumerations) {
 
     for (const auto& pair : enumerations) {
         const auto& e(pair.second);
@@ -171,7 +172,7 @@ void post_processing_validator::validate_enumerations(const indices& idx,
 }
 
 void post_processing_validator::validate_primitives(const indices& idx,
-    const std::unordered_map<std::string, primitive>& primitivess) {
+    const std::unordered_map<std::string, meta_model::primitive>& primitivess) {
 
     for (const auto& pair : primitivess) {
         const auto& p(pair.second);
@@ -232,8 +233,8 @@ validate_strings(const std::list<std::string>& strings) {
         validate_string(s);
 }
 
-void post_processing_validator::
-validate_name(const name& n, const bool allow_spaces_in_built_in_types) {
+void post_processing_validator::validate_name(const meta_model::name& n,
+    const bool allow_spaces_in_built_in_types) {
     /*
      * Built-in types are defined at the global namespace level; if we
      * are at the global namespace level, then built-ins are valid
@@ -275,8 +276,8 @@ validate_name(const name& n, const bool allow_spaces_in_built_in_types) {
 }
 
 void post_processing_validator::
-validate_names(const std::list<std::pair<std::string, name>>& names,
-    const languages l) {
+validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
+    const meta_model::languages l) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
     std::unordered_set<std::string> ids_done;
 
@@ -314,7 +315,7 @@ validate_names(const std::list<std::pair<std::string, name>>& names,
 
 void post_processing_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
-    const languages l, const name_tree& nt,
+    const meta_model::languages l, const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
     const auto& ae(abstract_elements);
@@ -330,14 +331,15 @@ validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
 }
 
 void post_processing_validator::validate_name_trees(
-    const std::unordered_set<std::string>& abstract_elements, const languages l,
-    const std::list<std::pair<std::string, name_tree>>& nts) {
+    const std::unordered_set<std::string>& abstract_elements,
+    const meta_model::languages l,
+    const std::list<std::pair<std::string, meta_model::name_tree>>& nts) {
 
     /*
      * The only validation we perform on name trees at present is done
      * just for c++, so we can ignore all other languages.
      */
-    if (l != languages::cpp)
+    if (l != meta_model::languages::cpp)
         return;
 
     for (const auto& pair : nts) {
@@ -355,7 +357,7 @@ void post_processing_validator::validate_name_trees(
 }
 
 void post_processing_validator::
-validate(const indices& idx, const intermediate_model& im) {
+validate(const indices& idx, const meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const auto l(im.input_language());

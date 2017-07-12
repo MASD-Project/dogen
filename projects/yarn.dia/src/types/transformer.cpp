@@ -60,30 +60,31 @@ void transformer::validate_dia_object_name(const std::string& n) const {
     }
 }
 
-yarn::name transformer::to_name(const std::string& n) const {
+meta_model::name transformer::to_name(const std::string& n) const {
     validate_dia_object_name(n);
-    yarn::helpers::name_factory f;
+    helpers::name_factory f;
     return f.build_element_in_model(repository_.model().name(), n);
 }
 
-yarn::name transformer::
-to_name(const std::string& n, const yarn::name& module_n) const {
+meta_model::name transformer::
+to_name(const std::string& n, const meta_model::name& module_n) const {
     validate_dia_object_name(n);
-    yarn::helpers::name_factory f;
+    helpers::name_factory f;
     return f.build_element_in_module(module_n, n);
 }
 
-yarn::attribute transformer::to_attribute(const processed_attribute& a) const {
+meta_model::attribute
+transformer::to_attribute(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
-    yarn::attribute r;
+    meta_model::attribute r;
     r.name().simple(a.name());
     r.unparsed_type(a.type());
     r.documentation(a.comment().documentation());
     return r;
 }
 
-yarn::enumerator
+meta_model::enumerator
 transformer::to_enumerator(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
@@ -93,15 +94,15 @@ transformer::to_enumerator(const processed_attribute& a) const {
                 enumerator_with_type + a.type()));
     }
 
-    yarn::enumerator r;
+    meta_model::enumerator r;
     r.name().simple(a.name());
     r.documentation(a.comment().documentation());
     return r;
 }
 
 void transformer::
-update_element(const processed_object& po, yarn::element& e) const {
-    e.origin_type(origin_types::not_yet_determined);
+update_element(const processed_object& po, meta_model::element& e) const {
+    e.origin_type(meta_model::origin_types::not_yet_determined);
 
     const auto package_id(po.child_node_id());
     bool is_in_package(!package_id.empty());
@@ -129,11 +130,11 @@ update_element(const processed_object& po, yarn::element& e) const {
         e.stereotypes().push_back(us);
 }
 
-yarn::object transformer::to_object(const processed_object& po) const {
+meta_model::object transformer::to_object(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
                              << po.id();
 
-    yarn::object r;
+    meta_model::object r;
     update_element(po, r);
 
     for (const auto& p : po.attributes())
@@ -157,21 +158,22 @@ yarn::object transformer::to_object(const processed_object& po) const {
     return r;
 }
 
-yarn::exception transformer::to_exception(const processed_object& po) const {
+meta_model::exception
+transformer::to_exception(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
                              << po.id();
 
-    yarn::exception e;
+    meta_model::exception e;
     update_element(po, e);
     return e;
 }
 
-yarn::enumeration
+meta_model::enumeration
 transformer::to_enumeration(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << po.id();
 
-    yarn::enumeration r;
+    meta_model::enumeration r;
     update_element(po, r);
 
     for (const auto& attr : po.attributes())
@@ -180,30 +182,30 @@ transformer::to_enumeration(const processed_object& po) const {
     return r;
 }
 
-yarn::primitive
+meta_model::primitive
 transformer::to_primitive(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
                              << po.id();
 
-    yarn::primitive r;
+    meta_model::primitive r;
     update_element(po, r);
     return r;
 }
 
-yarn::module transformer::to_module(const processed_object& po) const {
+meta_model::module transformer::to_module(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: "
                              << po.id();
 
-    yarn::module r;
+    meta_model::module r;
     update_element(po, r);
     return r;
 }
 
-yarn::concept transformer::to_concept(const processed_object& po) const {
+meta_model::concept transformer::to_concept(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
                              << po.id();
 
-    yarn::concept r;
+    meta_model::concept r;
     update_element(po, r);
 
     for (const auto& attr : po.attributes())

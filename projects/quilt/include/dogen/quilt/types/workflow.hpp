@@ -38,7 +38,7 @@
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/quilt/types/kernel_output.hpp"
 #include "dogen/quilt/types/kernel_registrar.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
@@ -96,7 +96,8 @@ public:
      * @brief Generates files for the supplied model using all
      * registered kernels.
      */
-    boost::optional<kernel_output> execute(const yarn::model& m) const;
+    boost::optional<kernel_output>
+    execute(const yarn::meta_model::model& m) const;
 
 private:
     static std::shared_ptr<kernel_registrar> registrar_;

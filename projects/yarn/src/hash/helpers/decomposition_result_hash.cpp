@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/hash/name_tree_hash.hpp"
+#include "dogen/yarn/hash/meta_model/name_hash.hpp"
+#include "dogen/yarn/hash/meta_model/name_tree_hash.hpp"
 #include "dogen/yarn/hash/helpers/decomposition_result_hash.hpp"
 
 namespace {
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_std_string_dogen_yarn_name(const std::pair<std::string, dogen::yarn::name>& v) {
+inline std::size_t hash_std_pair_std_string_dogen_yarn_meta_model_name(const std::pair<std::string, dogen::yarn::meta_model::name>& v) {
     std::size_t seed(0);
 
     combine(seed, v.first);
@@ -38,15 +38,15 @@ inline std::size_t hash_std_pair_std_string_dogen_yarn_name(const std::pair<std:
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_dogen_yarn_name(const std::list<std::pair<std::string, dogen::yarn::name> >& v) {
+inline std::size_t hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_dogen_yarn_name(i));
+        combine(seed, hash_std_pair_std_string_dogen_yarn_meta_model_name(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_std_string_dogen_yarn_name_tree(const std::pair<std::string, dogen::yarn::name_tree>& v) {
+inline std::size_t hash_std_pair_std_string_dogen_yarn_meta_model_name_tree(const std::pair<std::string, dogen::yarn::meta_model::name_tree>& v) {
     std::size_t seed(0);
 
     combine(seed, v.first);
@@ -54,10 +54,10 @@ inline std::size_t hash_std_pair_std_string_dogen_yarn_name_tree(const std::pair
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_std_string_dogen_yarn_name_tree(const std::list<std::pair<std::string, dogen::yarn::name_tree> >& v) {
+inline std::size_t hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name_tree(const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_std_string_dogen_yarn_name_tree(i));
+        combine(seed, hash_std_pair_std_string_dogen_yarn_meta_model_name_tree(i));
     }
     return seed;
 }
@@ -71,8 +71,8 @@ namespace helpers {
 std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_name(v.names()));
-    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_name_tree(v.name_trees()));
+    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name(v.names()));
+    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name_tree(v.name_trees()));
 
     return seed;
 }

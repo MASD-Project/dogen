@@ -59,7 +59,7 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
     return boost::ends_with(model_identifier, extension);
 }
 
-intermediate_model
+meta_model::intermediate_model
 exogenous_transform::transform(const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Reading Upsilon model.";
 
@@ -75,7 +75,8 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
     return r;
 }
 
-void exogenous_transform::transform(const intermediate_model& /*im*/,
+void exogenous_transform::transform(
+    const meta_model::intermediate_model& /*im*/,
     const boost::filesystem::path& /*p*/) {
     BOOST_LOG_SEV(lg, error) << to_upsilon_support_unavailable;
 

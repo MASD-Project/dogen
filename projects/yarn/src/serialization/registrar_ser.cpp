@@ -26,18 +26,18 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/module_ser.hpp"
-#include "dogen/yarn/serialization/object_ser.hpp"
-#include "dogen/yarn/serialization/builtin_ser.hpp"
-#include "dogen/yarn/serialization/concept_ser.hpp"
-#include "dogen/yarn/serialization/visitor_ser.hpp"
-#include "dogen/yarn/serialization/exception_ser.hpp"
-#include "dogen/yarn/serialization/primitive_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/yarn/serialization/enumeration_ser.hpp"
 #include "dogen/options/serialization/registrar_ser.hpp"
 #include "dogen/formatters/serialization/registrar_ser.hpp"
 #include "dogen/annotations/serialization/registrar_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/module_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/concept_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -45,17 +45,17 @@ namespace yarn {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::annotations::register_types(ar);
-    dogen::formatters::register_types(ar);
     dogen::options::register_types(ar);
+    dogen::formatters::register_types(ar);
 
-    ar.template register_type<dogen::yarn::builtin>();
-    ar.template register_type<dogen::yarn::concept>();
-    ar.template register_type<dogen::yarn::enumeration>();
-    ar.template register_type<dogen::yarn::exception>();
-    ar.template register_type<dogen::yarn::module>();
-    ar.template register_type<dogen::yarn::object>();
-    ar.template register_type<dogen::yarn::primitive>();
-    ar.template register_type<dogen::yarn::visitor>();
+    ar.template register_type<dogen::yarn::meta_model::builtin>();
+    ar.template register_type<dogen::yarn::meta_model::concept>();
+    ar.template register_type<dogen::yarn::meta_model::enumeration>();
+    ar.template register_type<dogen::yarn::meta_model::exception>();
+    ar.template register_type<dogen::yarn::meta_model::module>();
+    ar.template register_type<dogen::yarn::meta_model::object>();
+    ar.template register_type<dogen::yarn::meta_model::primitive>();
+    ar.template register_type<dogen::yarn::meta_model::visitor>();
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

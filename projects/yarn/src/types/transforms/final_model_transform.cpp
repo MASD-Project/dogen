@@ -23,9 +23,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/final_model_transform.hpp"
 
 namespace {
@@ -47,7 +47,7 @@ namespace {
 
 class model_populator {
 public:
-    explicit model_populator(model& m) : result_(m) { }
+    explicit model_populator(meta_model::model& m) : result_(m) { }
 
 private:
     void ensure_not_yet_processed(const std::string& id) {
@@ -59,7 +59,7 @@ private:
         }
     }
 
-    void add_element(boost::shared_ptr<element> e) {
+    void add_element(boost::shared_ptr<meta_model::element> e) {
         /*
          * Element extensions share the same id as the original
          * element, so they are not considered duplicates. All other
@@ -78,37 +78,37 @@ private:
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(const yarn::module& m) {
+    void operator()(meta_model::element&) { }
+    void operator()(const meta_model::module& m) {
         result_.module_ids().insert(m.name().id());
         add(m);
     }
-    void operator()(const yarn::concept& c) { add(c); }
-    void operator()(const yarn::builtin& b) { add(b); }
-    void operator()(const yarn::enumeration& e) { add(e); }
-    void operator()(const yarn::primitive& p) { add(p); }
-    void operator()(const yarn::object& o) { add(o); }
-    void operator()(const yarn::exception& e) { add(e); }
-    void operator()(const yarn::visitor& v) { add(v); }
+    void operator()(const meta_model::concept& c) { add(c); }
+    void operator()(const meta_model::builtin& b) { add(b); }
+    void operator()(const meta_model::enumeration& e) { add(e); }
+    void operator()(const meta_model::primitive& p) { add(p); }
+    void operator()(const meta_model::object& o) { add(o); }
+    void operator()(const meta_model::exception& e) { add(e); }
+    void operator()(const meta_model::visitor& v) { add(v); }
 
 public:
-    void add(const std::list<boost::shared_ptr<element>>& ie) {
+    void add(const std::list<boost::shared_ptr<meta_model::element>>& ie) {
         for (const auto& e : ie)
             add_element(e);
     }
 
 public:
-    const model& result() const { return result_; }
+    const meta_model::model& result() const { return result_; }
 
 private:
-    model& result_;
+    meta_model::model& result_;
     std::unordered_set<std::string> processed_ids_;
 };
 
 }
 
-std::size_t
-final_model_transform::compute_total_size(const intermediate_model& im) {
+std::size_t final_model_transform::
+compute_total_size(const meta_model::intermediate_model& im) {
     std::size_t r;
     r = im.modules().size();
     r += im.concepts().size();
@@ -122,8 +122,9 @@ final_model_transform::compute_total_size(const intermediate_model& im) {
     return r;
 }
 
-model final_model_transform::transform(const intermediate_model& im) {
-    model r;
+meta_model::model
+final_model_transform::transform(const meta_model::intermediate_model& im) {
+    meta_model::model r;
     r.name(im.name());
     r.input_language(im.input_language());
     if (im.output_languages().size() != 1) {
@@ -144,7 +145,7 @@ model final_model_transform::transform(const intermediate_model& im) {
     r.elements().reserve(size);
 
     model_populator mp(r);
-    yarn::elements_traversal(im, mp);
+    meta_model::elements_traversal(im, mp);
     mp.add(im.injected_elements());
 
     return r;

@@ -19,13 +19,13 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_value_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_actions_io.hpp"
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::meta_model::name>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::optional\"" << ", ";
 
     if (v)
@@ -40,7 +40,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

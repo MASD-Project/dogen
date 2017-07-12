@@ -5,7 +5,7 @@
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/yarn/types/primitive.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/meta_model/primitive.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
@@ -16,14 +16,16 @@
 <#@ stitch.wale.template=cpp_artefact_formatter_implementation.wale #>
 <#@ stitch.wale.kvp.class.simple_name=primitive_implementation_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=primitive_implementation #>
-<#@ stitch.wale.kvp.yarn_element=yarn::primitive #>
+<#@ stitch.wale.kvp.yarn_element=yarn::meta_model::primitive #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
-std::list<std::string> primitive_implementation_formatter::inclusion_dependencies(
+std::list<std::string>
+primitive_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
-    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    const yarn::meta_model::element& e) const {
+    using yarn::meta_model::primitive;
+    const auto& p(assistant::as<primitive>(static_artefact(), e));
     auto builder(f.make());
 
     const auto ph_fn(traits::primitive_header_archetype());
@@ -49,10 +51,10 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 }
 
 dogen::formatters::artefact primitive_implementation_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
 
     const auto sn(p.name().simple());
     const auto qn(a.get_qualified_name(p.name()));

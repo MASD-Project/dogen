@@ -19,8 +19,8 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/name_io.hpp"
 #include "dogen/yarn/io/helpers/node_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 
 namespace boost {
 

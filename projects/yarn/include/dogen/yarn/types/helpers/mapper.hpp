@@ -25,10 +25,11 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/mapping_context.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
@@ -41,28 +42,31 @@ public:
     explicit mapper(const mapping_set_repository& msrp);
 
 private:
-    const std::unordered_map<std::string, name>&
-    translations_for_language(const mapping_set& ms, const languages from,
-        const languages to) const;
+    const std::unordered_map<std::string, meta_model::name>&
+    translations_for_language(const mapping_set& ms,
+        const meta_model::languages from, const meta_model::languages to) const;
 
-    std::unordered_map<std::string, name>
-    injections_for_language(const mapping_set& ms, const languages l,
-        const intermediate_model& im) const;
+    std::unordered_map<std::string, meta_model::name> injections_for_language(
+        const mapping_set& ms, const meta_model::languages l,
+        const meta_model::intermediate_model& im) const;
 
     mapping_context create_mapping_context(const mapping_set& ms,
-        const languages from, const languages to,
-        const intermediate_model& im) const;
+        const meta_model::languages from, const meta_model::languages to,
+        const meta_model::intermediate_model& im) const;
 
 private:
-    name_tree walk_name_tree(const mapping_context& mc,
-        const name_tree& nt, const bool skip_injection = false) const;
+    meta_model::name_tree walk_name_tree(const mapping_context& mc,
+        const meta_model::name_tree& nt,
+        const bool skip_injection = false) const;
     void map_attributes(const mapping_context& mc,
-        std::list<attribute>& attrs) const;
+        std::list<meta_model::attribute>& attrs) const;
 
 public:
-    static bool is_mappable(const languages from, const languages to);
-    intermediate_model map(const languages from, const languages to,
-        const intermediate_model& im) const;
+    static bool is_mappable(const meta_model::languages from,
+        const meta_model::languages to);
+    meta_model::intermediate_model map(const meta_model::languages from,
+        const meta_model::languages to,
+        const meta_model::intermediate_model& im) const;
 
 private:
     const mapping_set_repository& mapping_set_repository_;

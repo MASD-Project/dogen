@@ -64,7 +64,7 @@ external_transforms_chain::create_decoration_properties_factory(
 }
 
 void external_transforms_chain::
-transform(const context& ctx, intermediate_model& im) {
+transform(const context& ctx, meta_model::intermediate_model& im) {
     const auto id(im.name().id());
     BOOST_LOG_SEV(lg, debug) << "Performing external transforms on: " << id;
 

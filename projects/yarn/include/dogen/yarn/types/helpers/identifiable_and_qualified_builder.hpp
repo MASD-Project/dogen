@@ -25,10 +25,10 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/pretty_printer.hpp"
-#include "dogen/yarn/types/languages.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -39,17 +39,20 @@ public:
     identifiable_and_qualified_builder();
 
 private:
-    std::string obtain_qualified(const std::map<languages, std::string>& map,
-        const languages& l) const;
+    std::string obtain_qualified(
+        const std::map<meta_model::languages, std::string>& map,
+        const meta_model::languages& l) const;
 
 public:
-    void add(const name& n);
-    void add(const name_tree& nt);
+    void add(const meta_model::name& n);
+    void add(const meta_model::name_tree& nt);
 
 public:
-    std::pair<std::string, std::map<languages, std::string>> build();
-    std::pair<std::string, std::map<languages, std::string>>
-    build(const name& n, const bool model_name_mode);
+    std::pair<std::string, std::map<meta_model::languages, std::string>>
+    build();
+
+    std::pair<std::string, std::map<meta_model::languages, std::string>>
+    build(const meta_model::name& n, const bool model_name_mode);
 
 private:
     pretty_printer csharp_pp_;

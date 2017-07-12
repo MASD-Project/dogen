@@ -63,7 +63,7 @@ visual_studio_solution_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path visual_studio_solution_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
+    const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
     
     using namespace dogen::utility::log;
     using namespace dogen::quilt::cpp::formatters;
@@ -76,19 +76,19 @@ boost::filesystem::path visual_studio_solution_formatter::inclusion_path(
 }
 
 boost::filesystem::path visual_studio_solution_formatter::
-full_path(const formattables::locator& l, const yarn::name& n) const {
+full_path(const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_solution(n, static_artefact());
 }
 
 std::list<std::string> visual_studio_solution_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
+    const yarn::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact
-visual_studio_solution_formatter::format(const context& ctx, const yarn::element& e) const {
+dogen::formatters::artefact visual_studio_solution_formatter::
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& vsl(a.as<fabric::visual_studio_solution>(static_artefact(), e));

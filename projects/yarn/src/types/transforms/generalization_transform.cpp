@@ -24,7 +24,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -45,8 +45,12 @@ const std::string incompatible_is_final(
 namespace dogen {
 namespace yarn {
 
+namespace meta_model {
+
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
+}
+
 }
 
 namespace transforms {
@@ -73,7 +77,7 @@ generalization_transform::make_is_final(const type_group& tg,
 
 std::unordered_set<std::string>
 generalization_transform::update_and_collect_parent_ids(
-    const helpers::indices& idx, intermediate_model& im) {
+    const helpers::indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Updating and collecting parent ids.";
 
     using helpers::resolver;
@@ -95,7 +99,7 @@ generalization_transform::update_and_collect_parent_ids(
          * generalization, which needs resolution. So we must resolve
          * here.
          */
-        std::list<name> resolved_parents;
+        std::list<meta_model::name> resolved_parents;
         for (const auto& pn : o.parents()) {
             const auto resolved_pn(resolver::resolve(im, idx, o.name(), pn));
             r.insert(resolved_pn.id());
@@ -110,8 +114,8 @@ generalization_transform::update_and_collect_parent_ids(
 }
 
 void generalization_transform::populate_properties_up_the_generalization_tree(
-    const type_group& tg, const yarn::name& leaf,
-    intermediate_model& im, yarn::object& o) {
+    const type_group& tg, const meta_model::name& leaf,
+    meta_model::intermediate_model& im, meta_model::object& o) {
 
     /*
      * Add the leaf to all nodes of the tree except for the leaf node
@@ -169,7 +173,7 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
 void generalization_transform::
 populate_generalizable_properties(const type_group& tg,
     const std::unordered_set<std::string>& parent_ids,
-    intermediate_model& im) {
+    meta_model::intermediate_model& im) {
 
     for (auto& pair : im.objects()) {
         const auto& id(pair.first);
@@ -230,15 +234,15 @@ populate_generalizable_properties(const type_group& tg,
     }
 }
 
-void generalization_transform::sort_leaves(intermediate_model& im) {
+void generalization_transform::sort_leaves(meta_model::intermediate_model& im) {
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
         o.leaves().sort();
     }
 }
 
-void generalization_transform::transform(
-    const context& ctx, const helpers::indices& idx, intermediate_model& im) {
+void generalization_transform::transform(const context& ctx,
+    const helpers::indices& idx, meta_model::intermediate_model& im) {
     const auto parent_ids(update_and_collect_parent_ids(idx, im));
 
     const auto tg(make_type_group(ctx.type_repository()));

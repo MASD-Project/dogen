@@ -42,7 +42,7 @@ exogenous_transform_registrar& exogenous_model_chain::registrar() {
     return *registrar_;
 }
 
-intermediate_model
+meta_model::intermediate_model
 exogenous_model_chain::transform(const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
                              << p.generic_string();
@@ -58,8 +58,8 @@ exogenous_model_chain::transform(const boost::filesystem::path& p) {
     return r;
 }
 
-void exogenous_model_chain::
-transform(const intermediate_model& im, const boost::filesystem::path& p) {
+void exogenous_model_chain::transform(const meta_model::intermediate_model& im,
+    const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn model: "
                              << im.name().id();
 

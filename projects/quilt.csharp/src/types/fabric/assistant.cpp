@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 
@@ -31,14 +31,14 @@ namespace fabric {
 assistant::assistant(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties)
-    : dogen::yarn::element(
+    const dogen::yarn::meta_model::element_properties& element_properties)
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -49,28 +49,28 @@ assistant::assistant(
       is_element_extension,
       element_properties) { }
 
-void assistant::accept(const dogen::yarn::element_visitor& v) const {
+void assistant::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void assistant::accept(dogen::yarn::element_visitor& v) const {
+void assistant::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void assistant::accept(const dogen::yarn::element_visitor& v) {
+void assistant::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void assistant::accept(dogen::yarn::element_visitor& v) {
+void assistant::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -81,23 +81,23 @@ void assistant::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::assistant\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << " }";
 }
 
 void assistant::swap(assistant& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
 }
 
-bool assistant::equals(const dogen::yarn::element& other) const {
+bool assistant::equals(const dogen::yarn::meta_model::element& other) const {
     const assistant* const p(dynamic_cast<const assistant* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool assistant::operator==(const assistant& rhs) const {
-    return dogen::yarn::element::compare(rhs);
+    return dogen::yarn::meta_model::element::compare(rhs);
 }
 
 assistant& assistant::operator=(assistant other) {

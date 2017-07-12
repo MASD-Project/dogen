@@ -51,11 +51,11 @@ namespace yarn {
 namespace helpers {
 
 void mappings_validator::
-validate(const languages l, const mapping_value& mv) const {
+validate(const meta_model::languages l, const mapping_value& mv) const {
     /*
      * Cannot map LAM to LAM.
      */
-    if (l == languages::language_agnostic) {
+    if (l == meta_model::languages::language_agnostic) {
         BOOST_LOG_SEV(lg, error) << invalid_language;
         BOOST_THROW_EXCEPTION(validation_error(invalid_lam_id));
     }
@@ -63,7 +63,7 @@ validate(const languages l, const mapping_value& mv) const {
     /*
      * Aliases can only be used for upsilon.
      */
-    if (l != languages::upsilon && !mv.aliases().empty()) {
+    if (l != meta_model::languages::upsilon && !mv.aliases().empty()) {
         BOOST_LOG_SEV(lg, error) << aliases_not_supported;
         BOOST_THROW_EXCEPTION(validation_error(aliases_not_supported));
     }

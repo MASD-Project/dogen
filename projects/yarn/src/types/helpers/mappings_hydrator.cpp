@@ -83,22 +83,23 @@ mappings_hydrator::to_mapping_action(const std::string& s) const {
     BOOST_THROW_EXCEPTION(hydration_error(unsupported_mapping_action + s));
 }
 
-languages mappings_hydrator::to_language(const std::string& s) const {
+meta_model::languages mappings_hydrator::to_language(const std::string& s) const {
     if (s == cpp_language)
-        return languages::cpp;
+        return meta_model::languages::cpp;
     else if (s == csharp_language)
-        return languages::csharp;
+        return meta_model::languages::csharp;
     else if (s == la_language)
-        return languages::language_agnostic;
+        return meta_model::languages::language_agnostic;
     else if (s == upsilon_language)
-        return languages::upsilon;
+        return meta_model::languages::upsilon;
 
     BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
     BOOST_THROW_EXCEPTION(hydration_error(unsupported_lanugage + s));
 }
 
-name mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
-    helpers::name_builder b;
+meta_model::name
+mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
+    name_builder b;
     const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
 
@@ -114,9 +115,9 @@ name mappings_hydrator::read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::unordered_map<languages, mapping_value> mappings_hydrator::
+std::unordered_map<meta_model::languages, mapping_value> mappings_hydrator::
 read_mapping_values(const boost::property_tree::ptree& pt) const {
-    std::unordered_map<languages, mapping_value> r;
+    std::unordered_map<meta_model::languages, mapping_value> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);

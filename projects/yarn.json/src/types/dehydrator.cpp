@@ -48,7 +48,7 @@ std::string dehydrator::tidy_up_string(std::string s) const {
     return s;
 }
 
-bool dehydrator::has_elements(const intermediate_model& im) const {
+bool dehydrator::has_elements(const meta_model::intermediate_model& im) const {
     return
         !im.modules().empty() ||
         !im.concepts().empty() ||
@@ -59,8 +59,8 @@ bool dehydrator::has_elements(const intermediate_model& im) const {
 }
 
 boost::optional<annotations::scribble_group>
-dehydrator::scribble_group_for_name(const intermediate_model& im,
-    const yarn::name& n) const {
+dehydrator::scribble_group_for_name(const meta_model::intermediate_model& im,
+    const meta_model::name& n) const {
 
     const auto& scribble_groups(im.scribble_groups());
     const auto i(scribble_groups.find(n.id()));
@@ -72,7 +72,7 @@ dehydrator::scribble_group_for_name(const intermediate_model& im,
 
 boost::optional<annotations::scribble> dehydrator::
 scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
-    const yarn::name& n) const {
+    const meta_model::name& n) const {
 
     if (!sg)
         return boost::optional<annotations::scribble>();
@@ -84,7 +84,8 @@ scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
     return i->second;
 }
 
-void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
+void dehydrator::
+dehydrate_name(const meta_model::name& n, std::ostream& s) const {
     formatters::utility_formatter uf(s);
     s << " { ";
     uf.insert_quoted("simple");
@@ -101,8 +102,8 @@ void dehydrator::dehydrate_name(const name& n, std::ostream& s) const {
     s << " } ";
 }
 
-void dehydrator::
-dehydrate_names(const std::list<name>& names, std::ostream& s) const {
+void dehydrator::dehydrate_names(const std::list<meta_model::name>& names,
+    std::ostream& s) const {
     s << " [ ";
     bool is_first(true);
     for (const auto& n : names) {
@@ -139,8 +140,9 @@ dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
     s << " }";
 }
 
-void dehydrator::dehydrate_element(
-    const boost::optional<annotations::scribble_group>& sg, const element& e,
+void dehydrator::
+dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
+    const meta_model::element& e,
     const std::string& meta_type, std::ostream& s) const {
 
     formatters::utility_formatter uf(s);
@@ -182,7 +184,7 @@ void dehydrator::dehydrate_element(
 
 void dehydrator::dehydrate_attributes(
     const boost::optional<annotations::scribble_group>& sg,
-    const std::list<attribute>& attrs, std::ostream& s) const {
+    const std::list<meta_model::attribute>& attrs, std::ostream& s) const {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("attributes");
@@ -222,7 +224,7 @@ void dehydrator::dehydrate_attributes(
 }
 
 void dehydrator::dehydrate_objects(const bool requires_leading_comma,
-    const intermediate_model& im, std::ostream& s) const {
+    const meta_model::intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
@@ -255,7 +257,7 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
-    const intermediate_model& im, std::ostream& s) const {
+    const meta_model::intermediate_model& im, std::ostream& s) const {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
@@ -289,7 +291,7 @@ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_modules(const bool requires_leading_comma,
-    const intermediate_model& im, std::ostream& s) const {
+    const meta_model::intermediate_model& im, std::ostream& s) const {
     /*
      * Remove the root module.
      */
@@ -317,7 +319,7 @@ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
-    const intermediate_model& im, std::ostream& s) const {
+    const meta_model::intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
@@ -336,7 +338,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
         /*
          * Remove invalid from enumerators.
          */
-        std::vector<enumerator> enumerators;
+        std::vector<meta_model::enumerator> enumerators;
         enumerators.reserve(e.enumerators().size());
         for (const auto& en : e.enumerators()) {
             const auto n(boost::algorithm::to_lower_copy(en.name().simple()));
@@ -381,7 +383,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
-    const intermediate_model& im, std::ostream& s) const {
+    const meta_model::intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
@@ -403,7 +405,7 @@ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
 
 void dehydrator::
 dehydrate_exceptions(const bool requires_leading_comma,
-    const intermediate_model& im, std::ostream& s) const {
+    const meta_model::intermediate_model& im, std::ostream& s) const {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
@@ -423,7 +425,8 @@ dehydrate_exceptions(const bool requires_leading_comma,
     }
 }
 
-std::string dehydrator::dehydrate(const intermediate_model& im) const {
+std::string
+dehydrator::dehydrate(const meta_model::intermediate_model& im) const {
     std::ostringstream s;
     formatters::utility_formatter uf(s);
     using boost::algorithm::join;
@@ -486,7 +489,7 @@ std::string dehydrator::dehydrate(const intermediate_model& im) const {
     return s.str();
 }
 
-void dehydrator::dehydrate(const intermediate_model& im,
+void dehydrator::dehydrate(const meta_model::intermediate_model& im,
     const boost::filesystem::path& p) const {
 
     const auto s(dehydrate(im));

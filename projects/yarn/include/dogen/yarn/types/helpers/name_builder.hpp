@@ -27,9 +27,8 @@
 
 #include <list>
 #include <string>
-#include <unordered_set>
-#include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/location.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -47,7 +46,8 @@ namespace helpers {
 class name_builder {
 public:
     explicit name_builder(const bool model_name_mode_ = false);
-    explicit name_builder(const name& n, const bool model_name_mode_ = false);
+    explicit name_builder(const meta_model::name& n,
+        const bool model_name_mode_ = false);
 
 private:
     std::string compute_id();
@@ -56,17 +56,17 @@ private:
 public:
     name_builder& simple_name(const std::string& sn);
     name_builder& model_name(const std::string& mn);
-    name_builder& model_name(const yarn::location& l);
+    name_builder& model_name(const meta_model::location& l);
     name_builder& model_modules(const std::string& mm);
     name_builder& model_modules(const std::list<std::string>& mm);
     name_builder& internal_modules(const std::string& im);
     name_builder& internal_modules(const std::list<std::string>& im);
     name_builder& external_modules(const std::string& em);
     name_builder& external_modules(const std::list<std::string>& em);
-    name_builder& location(const yarn::location& l);
+    name_builder& location(const meta_model::location& l);
 
 public:
-    name build();
+    meta_model::name build();
 
 public:
     /**
@@ -75,7 +75,7 @@ public:
      *
      * @param names List of names. By copy non-const by design.
      */
-    static name build(std::list<std::string> names);
+    static meta_model::name build(std::list<std::string> names);
 
     /**
      * @brief One shot-builder method that, given a string encoded
@@ -84,11 +84,11 @@ public:
      *
      * @param names String encoding a list of names.
      */
-    static name build(const std::string& names);
+    static meta_model::name build(const std::string& names);
 
 private:
     const bool model_name_mode_;
-    name name_;
+    meta_model::name name_;
 };
 
 } } }

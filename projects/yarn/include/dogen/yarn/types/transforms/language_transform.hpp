@@ -29,8 +29,8 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -39,7 +39,7 @@ namespace transforms {
 
 class language_transform final {
 private:
-    static languages to_language(const std::string& s);
+    static meta_model::languages to_language(const std::string& s);
 
 private:
     struct type_group {
@@ -49,14 +49,16 @@ private:
 
     static type_group make_type_group(const annotations::type_repository& atrp);
 
-    static languages make_input_language(const type_group& tg,
+    static meta_model::languages make_input_language(const type_group& tg,
         const annotations::annotation& a);
 
-    static std::list<languages> make_output_languages(const type_group& tg,
+    static std::list<meta_model::languages>
+    make_output_languages(const type_group& tg,
         const annotations::annotation& a);
 
 public:
-    static void transform(const context& ctx, intermediate_model& m);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& m);
 };
 
 } } }

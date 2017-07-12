@@ -34,7 +34,8 @@ const std::string test_suite("move_copy_assignment_tests");
 
 }
 
-using namespace dogen::yarn;
+using namespace dogen::yarn::helpers;
+using namespace dogen::yarn::meta_model;
 using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(move_assignment_copy_tests)

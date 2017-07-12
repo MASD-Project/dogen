@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,7 +33,7 @@ namespace helpers {
 
 class pre_processing_validator final {
 public:
-    static void validate(const intermediate_model& im);
+    static void validate(const meta_model::intermediate_model& im);
 };
 
 } } }

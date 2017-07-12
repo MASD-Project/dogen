@@ -23,8 +23,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
-#include "dogen/yarn/io/location_io.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/io/meta_model/location_io.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/separators.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/string_processor.hpp"
@@ -52,7 +52,8 @@ namespace helpers {
 name_builder::name_builder(const bool model_name_mode)
     : model_name_mode_(model_name_mode) { }
 
-name_builder::name_builder(const name& n, const bool model_name_mode)
+name_builder::
+name_builder(const meta_model::name& n, const bool model_name_mode)
     : model_name_mode_(model_name_mode), name_(n) { }
 
 std::string name_builder::compute_id() {
@@ -99,7 +100,7 @@ name_builder& name_builder::model_name(const std::string& mn) {
     return *this;
 }
 
-name_builder& name_builder::model_name(const yarn::location& l) {
+name_builder& name_builder::model_name(const meta_model::location& l) {
     name_.location().model_modules(l.model_modules());
 
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
@@ -160,20 +161,18 @@ name_builder& name_builder::external_modules(const std::list<std::string>& em) {
     return *this;
 }
 
-name_builder& name_builder::location(const yarn::location& l) {
+name_builder& name_builder::location(const meta_model::location& l) {
     BOOST_LOG_SEV(lg, debug) << "Added location: " << l;
     name_.location(l);
     return *this;
 }
 
-name name_builder::build() {
+meta_model::name name_builder::build() {
     setup_computed_properties();
     return name_;
 }
 
-name name_builder::build(std::list<std::string> names) {
-    name_builder b;
-
+meta_model::name name_builder::build(std::list<std::string> names) {
     /*
      * If we have a single name, we are either referencing a type
      * defined in the global namespace (possibly in a different
@@ -181,6 +180,7 @@ name name_builder::build(std::list<std::string> names) {
      * cannot tell the difference, we must fill in just the simple
      * name and let the resolver handle it properly later on.
      */
+    name_builder b;
     const auto front(names.front());
     if (names.size() == 1) {
         b.simple_name(front);
@@ -208,8 +208,7 @@ name name_builder::build(std::list<std::string> names) {
     return b.build();
 }
 
-name name_builder::build(const std::string& names) {
-
+meta_model::name name_builder::build(const std::string& names) {
     using utility::string::splitter;
     const auto names_as_list(splitter::split_scoped(names));
     return build(names_as_list);

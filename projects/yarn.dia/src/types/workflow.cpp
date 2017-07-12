@@ -21,8 +21,7 @@
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
 #include "dogen/yarn.dia/types/reducer.hpp"
@@ -92,14 +91,14 @@ builder workflow::create_builder(const std::string& model_name,
     return b;
 }
 
-yarn::intermediate_model
+meta_model::intermediate_model
 workflow::generate_model(builder& b, const graph_type& g) {
     visitor v(b);
     boost::depth_first_search(g, boost::visitor(v));
     return b.build();
 }
 
-yarn::intermediate_model workflow::execute(const dogen::dia::diagram& d,
+meta_model::intermediate_model workflow::execute(const dogen::dia::diagram& d,
     const std::string& model_name) {
 
     /*

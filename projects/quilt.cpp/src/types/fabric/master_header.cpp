@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 
@@ -35,7 +35,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -49,7 +49,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::na
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::yarn::name> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -67,7 +67,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -91,15 +91,15 @@ namespace fabric {
 master_header::master_header(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties,
-    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& inclusion_by_facet)
-    : dogen::yarn::element(
+    const dogen::yarn::meta_model::element_properties& element_properties,
+    const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& inclusion_by_facet)
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -111,28 +111,28 @@ master_header::master_header(
       element_properties),
       inclusion_by_facet_(inclusion_by_facet) { }
 
-void master_header::accept(const dogen::yarn::element_visitor& v) const {
+void master_header::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void master_header::accept(dogen::yarn::element_visitor& v) const {
+void master_header::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void master_header::accept(const dogen::yarn::element_visitor& v) {
+void master_header::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void master_header::accept(dogen::yarn::element_visitor& v) {
+void master_header::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -143,27 +143,27 @@ void master_header::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::master_header\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
       << "\"inclusion_by_facet\": " << inclusion_by_facet_
       << " }";
 }
 
 void master_header::swap(master_header& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
     swap(inclusion_by_facet_, other.inclusion_by_facet_);
 }
 
-bool master_header::equals(const dogen::yarn::element& other) const {
+bool master_header::equals(const dogen::yarn::meta_model::element& other) const {
     const master_header* const p(dynamic_cast<const master_header* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool master_header::operator==(const master_header& rhs) const {
-    return dogen::yarn::element::compare(rhs) &&
+    return dogen::yarn::meta_model::element::compare(rhs) &&
         inclusion_by_facet_ == rhs.inclusion_by_facet_;
 }
 
@@ -173,19 +173,19 @@ master_header& master_header::operator=(master_header other) {
     return *this;
 }
 
-const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& master_header::inclusion_by_facet() const {
+const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& master_header::inclusion_by_facet() const {
     return inclusion_by_facet_;
 }
 
-std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& master_header::inclusion_by_facet() {
+std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& master_header::inclusion_by_facet() {
     return inclusion_by_facet_;
 }
 
-void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >& v) {
+void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& v) {
     inclusion_by_facet_ = v;
 }
 
-void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::name> > >&& v) {
+void master_header::inclusion_by_facet(const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >&& v) {
     inclusion_by_facet_ = std::move(v);
 }
 

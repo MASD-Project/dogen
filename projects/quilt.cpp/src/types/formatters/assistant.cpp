@@ -28,9 +28,9 @@
 #include "dogen/formatters/types/comment_formatter.hpp"
 #include "dogen/formatters/types/decoration_formatter.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/io/letter_cases_io.hpp"
-#include "dogen/yarn/types/name_flattener.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/letter_cases_io.hpp"
+#include "dogen/yarn/types/helpers/name_flattener.hpp"
 #include "dogen/quilt.cpp/io/formattables/streaming_properties_io.hpp"
 #include "dogen/quilt.cpp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.cpp/types/formattables/canonical_archetype_resolver.hpp"
@@ -91,9 +91,10 @@ namespace formatters {
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>
 get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    const auto i(iaq.qualified().find(yarn::languages::cpp));
+    using yarn::meta_model::languages;
+    const auto i(iaq.qualified().find(languages::cpp));
     if (i == iaq.qualified().end()) {
-        BOOST_LOG_SEV(lg, error) << qn_missing << yarn::languages::cpp;
+        BOOST_LOG_SEV(lg, error) << qn_missing << languages::cpp;
         BOOST_THROW_EXCEPTION(formatting_error(qn_missing));
     }
 
@@ -135,7 +136,8 @@ void assistant::validate() const {
     }
 }
 
-std::string assistant::make_final_keyword_text(const yarn::object& o) const {
+std::string
+assistant::make_final_keyword_text(const yarn::meta_model::object& o) const {
     if (is_cpp_standard_98())
         return empty;
 
@@ -156,12 +158,14 @@ std::string assistant::make_noexcept_keyword_text() const {
     return noexcept_keyword_text;
 }
 
-std::string assistant::make_by_ref_text(const yarn::attribute& attr) {
+std::string
+assistant::make_by_ref_text(const yarn::meta_model::attribute& attr) {
     return attr.parsed_type().is_current_simple_type() ? empty : by_ref_text;
 }
 
-std::string assistant::make_setter_return_type(
-    const std::string& containing_type_name, const yarn::attribute& attr) {
+std::string assistant::
+make_setter_return_type(const std::string& containing_type_name,
+    const yarn::meta_model::attribute& attr) {
 
     std::ostringstream s;
     if (attr.is_fluent())
@@ -172,22 +176,25 @@ std::string assistant::make_setter_return_type(
     return s.str();
 }
 
-std::string assistant::get_qualified_name(const yarn::name& n) const {
+std::string
+assistant::get_qualified_name(const yarn::meta_model::name& n) const {
     const auto pair(get_identifiable_and_qualified(n));
     return pair.second;
 }
 
-std::string assistant::get_qualified_name(const yarn::name_tree& nt) const {
+std::string
+assistant::get_qualified_name(const yarn::meta_model::name_tree& nt) const {
     const auto pair(get_identifiable_and_qualified(nt));
     return pair.second;
 }
 
-std::string assistant::get_identifiable_model_name(const yarn::name& n) const {
+std::string
+assistant::get_identifiable_model_name(const yarn::meta_model::name& n) const {
     using boost::algorithm::join;
     return join(n.location().model_modules(), underscore);
 }
 
-std::string assistant::get_product_name(const yarn::name& n) const {
+std::string assistant::get_product_name(const yarn::meta_model::name& n) const {
     if (n.location().external_modules().empty())
         return empty;
 
@@ -241,17 +248,18 @@ obtain_facet_properties(const std::string& facet_name) const {
 }
 
 std::string assistant::
-make_member_variable_name(const yarn::attribute& attr) const {
+make_member_variable_name(const yarn::meta_model::attribute& attr) const {
     return attr.name().simple() + member_variable_postfix;
 }
 
 std::string assistant::
-make_getter_setter_name(const yarn::attribute& attr) const {
+make_getter_setter_name(const yarn::meta_model::attribute& attr) const {
     return attr.name().simple();
 }
 
-std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
-    yarn::name_flattener nf;
+std::list<std::string>
+assistant::make_namespaces(const yarn::meta_model::name& n) const {
+    yarn::helpers::name_flattener nf;
     return nf.flatten(n);
 }
 
@@ -334,13 +342,13 @@ bool assistant::is_odb_facet_enabled() const {
 }
 
 const dogen::formatters::decoration_properties& assistant::
-get_decoration_properties(const yarn::element& e) const {
+get_decoration_properties(const yarn::meta_model::element& e) const {
     const auto& ep(e.element_properties());
     return ep.decoration_properties();
 }
 
 dogen::formatters::cpp::scoped_boilerplate_formatter
-assistant::make_scoped_boilerplate_formatter(const yarn::element& e) {
+assistant::make_scoped_boilerplate_formatter(const yarn::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.inclusion_dependencies());
@@ -357,8 +365,9 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         true/*add_new_line*/);
 }
 
-void assistant::make_decoration_preamble(
-    const dogen::formatters::comment_styles cs, const yarn::element& e) {
+void assistant::
+make_decoration_preamble(const dogen::formatters::comment_styles cs,
+    const yarn::meta_model::element& e) {
     const auto dp(get_decoration_properties(e));
     make_decoration_preamble(cs, dp);
 }
@@ -562,8 +571,8 @@ streaming_for_type(const formattables::streaming_properties& sp,
     return stream.str();
 }
 
-std::string assistant::
-streaming_for_type(const yarn::name& n, const std::string& s) const {
+std::string assistant::streaming_for_type(const yarn::meta_model::name& n,
+    const std::string& s) const {
 
     const auto str_propss(context_.model().streaming_properties());
     const auto i(str_propss.find(n.id()));
@@ -585,7 +594,7 @@ streaming_for_type(const formattables::helper_descriptor& hd,
 }
 
 bool assistant::
-requires_hashing_helper_method(const yarn::attribute& attr) const {
+requires_hashing_helper_method(const yarn::meta_model::attribute& attr) const {
     const auto& eprops(context_.element_properties());
     for (const auto& hlp_props : eprops.helper_properties()) {
         const auto ident(attr.parsed_type().identifiable());
@@ -634,10 +643,10 @@ std::string assistant::get_odb_type() const {
     return odb_object_type;
 }
 
-std::list<yarn::name> assistant::
+std::list<yarn::meta_model::name> assistant::
 names_with_enabled_archetype(const std::string& archetype,
-    const std::list<yarn::name> names) const {
-    std::list<yarn::name> r;
+    const std::list<yarn::meta_model::name> names) const {
+    std::list<yarn::meta_model::name> r;
     for (const auto& n : names) {
         const auto id(n.id());
         BOOST_LOG_SEV(lg, debug) << "Checking enablement for name: " << id;

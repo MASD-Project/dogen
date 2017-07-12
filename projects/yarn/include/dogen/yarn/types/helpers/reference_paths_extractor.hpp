@@ -29,8 +29,8 @@
 #include <iosfwd>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -61,7 +61,8 @@ private:
 
 public:
     static std::list<boost::filesystem::path>
-    extract(const transforms::context& ctx, const intermediate_model& target);
+    extract(const transforms::context& ctx,
+        const meta_model::intermediate_model& target);
 };
 
 } } }

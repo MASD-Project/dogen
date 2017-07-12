@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
@@ -41,19 +41,19 @@ namespace fabric {
 cmakelists::cmakelists(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties,
+    const dogen::yarn::meta_model::element_properties& element_properties,
     const std::string& include_directory_path,
     const std::string& source_directory_name,
     const std::string& header_file_extension,
     const std::string& implementation_file_extension,
     const dogen::quilt::cpp::fabric::odb_targets& odb_targets)
-    : dogen::yarn::element(
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -69,28 +69,28 @@ cmakelists::cmakelists(
       implementation_file_extension_(implementation_file_extension),
       odb_targets_(odb_targets) { }
 
-void cmakelists::accept(const dogen::yarn::element_visitor& v) const {
+void cmakelists::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void cmakelists::accept(dogen::yarn::element_visitor& v) const {
+void cmakelists::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void cmakelists::accept(const dogen::yarn::element_visitor& v) {
+void cmakelists::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void cmakelists::accept(dogen::yarn::element_visitor& v) {
+void cmakelists::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -101,7 +101,7 @@ void cmakelists::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::cmakelists\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
       << "\"include_directory_path\": " << "\"" << tidy_up_string(include_directory_path_) << "\"" << ", "
       << "\"source_directory_name\": " << "\"" << tidy_up_string(source_directory_name_) << "\"" << ", "
@@ -112,7 +112,7 @@ void cmakelists::to_stream(std::ostream& s) const {
 }
 
 void cmakelists::swap(cmakelists& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
     swap(include_directory_path_, other.include_directory_path_);
@@ -122,14 +122,14 @@ void cmakelists::swap(cmakelists& other) noexcept {
     swap(odb_targets_, other.odb_targets_);
 }
 
-bool cmakelists::equals(const dogen::yarn::element& other) const {
+bool cmakelists::equals(const dogen::yarn::meta_model::element& other) const {
     const cmakelists* const p(dynamic_cast<const cmakelists* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool cmakelists::operator==(const cmakelists& rhs) const {
-    return dogen::yarn::element::compare(rhs) &&
+    return dogen::yarn::meta_model::element::compare(rhs) &&
         include_directory_path_ == rhs.include_directory_path_ &&
         source_directory_name_ == rhs.source_directory_name_ &&
         header_file_extension_ == rhs.header_file_extension_ &&

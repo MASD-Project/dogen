@@ -53,7 +53,7 @@ formattables::model kernel::create_formattables_model(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const formatters::repository& frp, const formattables::locator& l,
-    const yarn::model& m) const {
+    const yarn::meta_model::model& m) const {
     formattables::workflow fw;
     return fw.execute(atrp, ra, l, frp, m);
 }
@@ -61,7 +61,7 @@ formattables::model kernel::create_formattables_model(
 formattables::locator kernel::make_locator(const options::knitting_options& ko,
     const annotations::type_repository& atrp, const annotations::annotation& ra,
     const formatters::repository& frp, const bool enable_kernel_directories,
-    const yarn::model& m) const {
+    const yarn::meta_model::model& m) const {
 
     const auto& mn(m.name());
     const auto odp(ko.output_directory_path());
@@ -106,8 +106,8 @@ kernel::archetype_locations() const {
     return formatters::workflow::registrar().archetype_locations();
 }
 
-yarn::languages kernel::language() const {
-    return yarn::languages::cpp;
+yarn::meta_model::languages kernel::language() const {
+    return yarn::meta_model::languages::cpp;
 }
 
 kernel_output kernel::generate(const options::knitting_options& ko,
@@ -115,7 +115,7 @@ kernel_output kernel::generate(const options::knitting_options& ko,
     const annotations::annotation_groups_factory& agf,
     const dogen::formatters::repository& drp,
     const bool enable_kernel_directories,
-    const yarn::model& m) const {
+    const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";
 
     const auto ra(m.root_module().annotation());

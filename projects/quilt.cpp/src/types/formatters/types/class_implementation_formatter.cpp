@@ -28,7 +28,7 @@
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
@@ -59,7 +59,7 @@ class_implementation_formatter::archetype_location() const {
 }
 
 std::type_index class_implementation_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::object)));
+    static auto r(std::type_index(typeid(yarn::meta_model::object)));
     return r;
 }
 
@@ -68,7 +68,7 @@ inclusion_support_types class_implementation_formatter::inclusion_support_type()
 }
 
 boost::filesystem::path class_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
+    const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -80,14 +80,15 @@ boost::filesystem::path class_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path class_implementation_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_artefact());
 }
 
 std::list<std::string> class_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
-    const auto& o(assistant::as<yarn::object>(static_artefact(), e));
+    const yarn::meta_model::element& e) const {
+    using yarn::meta_model::object;
+    const auto& o(assistant::as<object>(static_artefact(), e));
     auto builder(f.make());
 
     const auto ch_arch(traits::class_header_archetype());
@@ -127,10 +128,10 @@ std::list<std::string> class_implementation_formatter::inclusion_dependencies(
 }
 
 dogen::formatters::artefact class_implementation_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& o(a.as<yarn::object>(static_artefact(), e));
+    const auto& o(a.as<yarn::meta_model::object>(static_artefact(), e));
 
     {
         const auto sn(o.name().simple());

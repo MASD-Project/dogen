@@ -40,10 +40,10 @@ namespace dia {
 template<typename Archive>
 void register_types(Archive& ar) {
     dogen::formatters::register_types(ar);
+    dogen::options::register_types(ar);
+    dogen::yarn::register_types(ar);
     dogen::annotations::register_types(ar);
     dogen::dia::register_types(ar);
-    dogen::yarn::register_types(ar);
-    dogen::options::register_types(ar);
 }
 
 template void register_types(boost::archive::polymorphic_oarchive& ar);

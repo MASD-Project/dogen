@@ -26,12 +26,12 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/io/name_tree_io.hpp"
-#include "dogen/yarn/io/attribute_io.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen/yarn/io/meta_model/attribute_io.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
@@ -58,13 +58,15 @@ namespace yarn {
 namespace helpers {
 
 bool resolver::
-is_floating_point(const intermediate_model& im, const name& n) {
+is_floating_point(const meta_model::intermediate_model& im,
+    const meta_model::name& n) {
     auto i(im.builtins().find(n.id()));
     return i != im.builtins().end() && i->second.is_floating_point();
 }
 
-bool resolver::
-is_builtin(const intermediate_model& im, const name& n) {
+bool resolver::is_builtin(const meta_model::intermediate_model& im,
+    const meta_model::name& n) {
+
     auto i(im.builtins().find(n.id()));
     if (i != im.builtins().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a built-in in model.";
@@ -73,8 +75,9 @@ is_builtin(const intermediate_model& im, const name& n) {
     return false;
 }
 
-bool resolver::
-is_primitive(const intermediate_model& im, const name& n) {
+bool resolver::is_primitive(const meta_model::intermediate_model& im,
+    const meta_model::name& n) {
+
     auto i(im.primitives().find(n.id()));
     if (i != im.primitives().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a primitive in model.";
@@ -83,8 +86,9 @@ is_primitive(const intermediate_model& im, const name& n) {
     return false;
 }
 
-bool resolver::
-is_enumeration(const intermediate_model& im, const name& n) {
+bool resolver::is_enumeration(const meta_model::intermediate_model& im,
+    const meta_model::name& n) {
+
     auto i(im.enumerations().find(n.id()));
     if (i != im.enumerations().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an enumeration in model.";
@@ -93,8 +97,9 @@ is_enumeration(const intermediate_model& im, const name& n) {
     return false;
 }
 
-bool resolver::
-is_object(const intermediate_model& im, const name& n) {
+bool resolver::is_object(const meta_model::intermediate_model& im,
+    const meta_model::name& n) {
+
     auto i(im.objects().find(n.id()));
     if (i != im.objects().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to an object in model.";
@@ -103,8 +108,9 @@ is_object(const intermediate_model& im, const name& n) {
     return false;
 }
 
-bool resolver::
-is_concept(const intermediate_model& im, const name& n) {
+bool resolver::is_concept(const meta_model::intermediate_model& im,
+    const meta_model::name& n) {
+
     auto i(im.concepts().find(n.id()));
     if (i != im.concepts().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a concept in model.";
@@ -113,7 +119,8 @@ is_concept(const intermediate_model& im, const name& n) {
     return false;
 }
 
-bool resolver::is_name_referable(const indices& idx, const name& n) {
+bool resolver::
+is_name_referable(const indices& idx, const meta_model::name& n) {
     BOOST_LOG_SEV(lg, debug) << "Checking to see if name is referable:" << n;
 
     const auto i(idx.elements_referable_by_attributes().find(n.id()));
@@ -124,9 +131,9 @@ bool resolver::is_name_referable(const indices& idx, const name& n) {
     return false;
 }
 
-name resolver::
-resolve_name_with_internal_modules(const intermediate_model& im,
-    const indices& idx, const name& ctx, const name& n) {
+meta_model::name resolver::resolve_name_with_internal_modules(
+    const meta_model::intermediate_model& im, const indices& idx,
+    const meta_model::name& ctx, const meta_model::name& n) {
 
     /*
      * Since the user has bothered to provide an internal module path,
@@ -226,9 +233,9 @@ resolve_name_with_internal_modules(const intermediate_model& im,
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
-boost::optional<name> resolver::
+boost::optional<meta_model::name> resolver::
 try_resolve_name_with_context_internal_modules(const indices& idx,
-    name ctx, const name& n) {
+    meta_model::name ctx, const meta_model::name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Context has internal modules.";
 
@@ -273,12 +280,12 @@ try_resolve_name_with_context_internal_modules(const indices& idx,
      * If we didn't find anything, we should not throw as there still
      * are other possibilities left to try.
      */
-    return boost::optional<name>();
+    return boost::optional<meta_model::name>();
 }
 
-name resolver::
-resolve_name(const intermediate_model& im, const indices& idx,
-    const name& ctx, const name& n) {
+meta_model::name resolver::
+resolve_name(const meta_model::intermediate_model& im, const indices& idx,
+    const meta_model::name& ctx, const meta_model::name& n) {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving name: " << n.id();
     BOOST_LOG_SEV(lg, debug) << "Initial state: " << n;
@@ -343,9 +350,11 @@ resolve_name(const intermediate_model& im, const indices& idx,
     BOOST_THROW_EXCEPTION(resolution_error(undefined_type + n.id()));
 }
 
-void resolver::resolve_name_tree(const intermediate_model& im,
-    const indices& idx, const name& owner, name_tree& nt) {
-    const name n(resolve_name(im, idx, owner, nt.current()));
+void resolver::resolve_name_tree(const meta_model::intermediate_model& im,
+    const indices& idx, const meta_model::name& owner,
+    meta_model::name_tree& nt) {
+
+    const meta_model::name n(resolve_name(im, idx, owner, nt.current()));
 
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << nt.current().id()
                              << " to: " << n.id();
@@ -384,8 +393,10 @@ void resolver::resolve_name_tree(const intermediate_model& im,
     nt.qualified(iq.second);
 }
 
-void resolver::resolve_attribute(const intermediate_model& im,
-    const indices& idx, const name& owner, attribute& attr) {
+void resolver::resolve_attribute(const meta_model::intermediate_model& im,
+    const indices& idx, const meta_model::name& owner,
+    meta_model::attribute& attr) {
+
     try {
         resolve_name_tree(im, idx, owner, attr.parsed_type());
 
@@ -405,15 +416,17 @@ void resolver::resolve_attribute(const intermediate_model& im,
     }
 }
 
-void resolver::resolve_attributes(const intermediate_model& im,
-    const indices& idx, const name& owner,
-    std::list<attribute>& attributes) {
+void resolver::resolve_attributes(const meta_model::intermediate_model& im,
+    const indices& idx, const meta_model::name& owner,
+    std::list<meta_model::attribute>& attributes) {
+
     for (auto& attr : attributes)
         resolve_attribute(im, idx, owner, attr);
 }
 
 void resolver::
-validate_inheritance_graph(const intermediate_model& im, const object& o) {
+validate_inheritance_graph(const meta_model::intermediate_model& im,
+    const meta_model::object& o) {
     /*
      * Ensure that all parents and original parents exist as objects.
      */
@@ -441,8 +454,8 @@ validate_inheritance_graph(const intermediate_model& im, const object& o) {
     }
 }
 
-void resolver::
-validate_refinements(const intermediate_model& im, const concept& c) {
+void resolver::validate_refinements(const meta_model::intermediate_model& im,
+    const meta_model::concept& c) {
     /*
      * Ensure that all refined concepts exist as concepts.
      */
@@ -461,12 +474,12 @@ validate_refinements(const intermediate_model& im, const concept& c) {
 }
 
 void resolver::
-resolve_concepts(const indices& idx, intermediate_model& im) {
+resolve_concepts(const indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving concepts. Size: "
                              << im.concepts().size();
 
     for (auto& pair : im.concepts()) {
-        concept& c(pair.second);
+        auto& c(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving concept: " << c.name().id();
         resolve_attributes(im, idx, c.name(), c.local_attributes());
@@ -478,7 +491,7 @@ resolve_concepts(const indices& idx, intermediate_model& im) {
 }
 
 void resolver::
-resolve_objects(const indices& idx, intermediate_model& im) {
+resolve_objects(const indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving objects. Size: "
                              << im.objects().size();
 
@@ -494,7 +507,7 @@ resolve_objects(const indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolved objects.";
 }
 
-void resolver::resolve_enumerations(intermediate_model& im) {
+void resolver::resolve_enumerations(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
                              << im.enumerations().size();
 
@@ -526,7 +539,7 @@ void resolver::resolve_enumerations(intermediate_model& im) {
 }
 
 void resolver::
-resolve_primitives(const indices& idx, intermediate_model& im) {
+resolve_primitives(const indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving primitives. Size: "
                              << im.primitives().size();
 
@@ -541,8 +554,9 @@ resolve_primitives(const indices& idx, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolved primitives.";
 }
 
-name resolver::resolve(const intermediate_model& im,
-    const indices& idx, const name& ctx, const name& n) {
+meta_model::name resolver::
+resolve(const meta_model::intermediate_model& im, const indices& idx,
+    const meta_model::name& ctx, const meta_model::name& n) {
 
     const auto r(resolve_name(im, idx, ctx, n));
     BOOST_LOG_SEV(lg, debug) << "Resolved name: " << n.id()
@@ -550,8 +564,9 @@ name resolver::resolve(const intermediate_model& im,
     return r;
 }
 
-boost::optional<name> resolver::try_resolve_concept_name(name ctx,
-    const std::string& s, const intermediate_model& im) {
+boost::optional<meta_model::name>
+resolver::try_resolve_concept_name(meta_model::name ctx, const std::string& s,
+    const meta_model::intermediate_model& im) {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving concept name: " << s;
 
@@ -559,7 +574,7 @@ boost::optional<name> resolver::try_resolve_concept_name(name ctx,
      * We first start at the same level as the context, including any
      * internal modules.
      */
-    name n;
+    meta_model::name n;
     n.simple(s);
 
     name_factory nf;
@@ -603,10 +618,10 @@ boost::optional<name> resolver::try_resolve_concept_name(name ctx,
      * There are no concepts in this model which match the stereotype name.
      */
     BOOST_LOG_SEV(lg, debug) << "Could not find a concept with tentative name.";
-    return boost::optional<name>();
+    return boost::optional<meta_model::name>();
 }
 
-void resolver::resolve(const indices& idx, intermediate_model& im) {
+void resolver::resolve(const indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
 
     resolve_concepts(idx, im);

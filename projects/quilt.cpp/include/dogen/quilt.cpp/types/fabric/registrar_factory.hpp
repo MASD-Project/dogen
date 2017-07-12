@@ -27,8 +27,8 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
 
 namespace dogen {
@@ -39,11 +39,11 @@ namespace fabric {
 class registrar_factory final {
 private:
     boost::shared_ptr<fabric::registrar>
-    make(const yarn::name& model_name) const;
+    make(const yarn::meta_model::name& model_name) const;
 
 public:
-    std::list<boost::shared_ptr<yarn::element>>
-    make(const yarn::intermediate_model& im) const;
+    std::list<boost::shared_ptr<yarn::meta_model::element>>
+    make(const yarn::meta_model::intermediate_model& im) const;
 };
 
 } } } }

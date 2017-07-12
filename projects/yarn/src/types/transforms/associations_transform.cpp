@@ -24,7 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 
@@ -39,8 +39,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void associations_transform::remove_duplicates(std::list<name>& names,
-    std::unordered_set<name> processed) {
+void associations_transform::remove_duplicates(
+    std::list<meta_model::name>& names,
+    std::unordered_set<meta_model::name> processed) {
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size() << ". Processed starts with size: "
                              << processed.size();
@@ -61,8 +62,9 @@ void associations_transform::remove_duplicates(std::list<name>& names,
                              << names.size();
 }
 
-void associations_transform::walk_name_tree(
-    const intermediate_model& im, object& o, const name_tree& nt,
+void associations_transform::
+walk_name_tree(const meta_model::intermediate_model& im, meta_model::object& o,
+    const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
     const auto n(nt.current());
@@ -78,7 +80,7 @@ void associations_transform::walk_name_tree(
      * keys.
      */
     bool is_first(true);
-    const auto ac(object_types::associative_container);
+    const auto ac(meta_model::object_types::associative_container);
     const auto i(im.objects().find(n.id()));
     const auto is_associative_container(i != im.objects().end() &&
         i->second.object_type() == ac);
@@ -93,7 +95,7 @@ void associations_transform::walk_name_tree(
 }
 
 void associations_transform::
-expand_object(const intermediate_model& im, object& o) {
+expand_object(const meta_model::intermediate_model& im, meta_model::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
@@ -101,7 +103,7 @@ expand_object(const intermediate_model& im, object& o) {
         walk_name_tree(im, o, nt, false/*inherit_opaqueness_from_parent*/);
     }
 
-    std::unordered_set<name> transparent_associations;
+    std::unordered_set<meta_model::name> transparent_associations;
     if (!o.transparent_associations().empty()) {
         remove_duplicates(o.transparent_associations());
         for (const auto n : o.transparent_associations())
@@ -120,7 +122,7 @@ expand_object(const intermediate_model& im, object& o) {
         remove_duplicates(o.associative_container_keys());
 }
 
-void associations_transform::transform(intermediate_model& im) {
+void associations_transform::transform(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects. Total objects: "
                              << im.objects().size();
 

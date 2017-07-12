@@ -20,7 +20,7 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
 
@@ -40,18 +40,18 @@ namespace fabric {
 visual_studio_solution::visual_studio_solution(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties,
+    const dogen::yarn::meta_model::element_properties& element_properties,
     const std::string& project_guid,
     const std::string& project_solution_guid,
     const std::string& version,
     const std::string& project_name)
-    : dogen::yarn::element(
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -66,28 +66,28 @@ visual_studio_solution::visual_studio_solution(
       version_(version),
       project_name_(project_name) { }
 
-void visual_studio_solution::accept(const dogen::yarn::element_visitor& v) const {
+void visual_studio_solution::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void visual_studio_solution::accept(dogen::yarn::element_visitor& v) const {
+void visual_studio_solution::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void visual_studio_solution::accept(const dogen::yarn::element_visitor& v) {
+void visual_studio_solution::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void visual_studio_solution::accept(dogen::yarn::element_visitor& v) {
+void visual_studio_solution::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -98,7 +98,7 @@ void visual_studio_solution::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::csharp::fabric::visual_studio_solution\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
       << "\"project_guid\": " << "\"" << tidy_up_string(project_guid_) << "\"" << ", "
       << "\"project_solution_guid\": " << "\"" << tidy_up_string(project_solution_guid_) << "\"" << ", "
@@ -108,7 +108,7 @@ void visual_studio_solution::to_stream(std::ostream& s) const {
 }
 
 void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
     swap(project_guid_, other.project_guid_);
@@ -117,14 +117,14 @@ void visual_studio_solution::swap(visual_studio_solution& other) noexcept {
     swap(project_name_, other.project_name_);
 }
 
-bool visual_studio_solution::equals(const dogen::yarn::element& other) const {
+bool visual_studio_solution::equals(const dogen::yarn::meta_model::element& other) const {
     const visual_studio_solution* const p(dynamic_cast<const visual_studio_solution* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool visual_studio_solution::operator==(const visual_studio_solution& rhs) const {
-    return dogen::yarn::element::compare(rhs) &&
+    return dogen::yarn::meta_model::element::compare(rhs) &&
         project_guid_ == rhs.project_guid_ &&
         project_solution_guid_ == rhs.project_solution_guid_ &&
         version_ == rhs.version_ &&

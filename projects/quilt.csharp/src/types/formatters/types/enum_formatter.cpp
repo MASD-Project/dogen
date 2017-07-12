@@ -23,7 +23,7 @@
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -51,26 +51,26 @@ annotations::archetype_location enum_formatter::archetype_location() const {
 }
 
 std::type_index enum_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::enumeration)));
+    static auto r(std::type_index(typeid(yarn::meta_model::enumeration)));
     return r;
 }
 
-boost::filesystem::path enum_formatter::
-full_path(const formattables::locator& l, const yarn::name& n) const {
+boost::filesystem::path enum_formatter::full_path(
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path(n, static_artefact());
 }
 
 std::list<std::string> enum_formatter::
-inclusion_dependencies(const yarn::element& /*e*/) const {
+inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact
-enum_formatter::format(const context& ctx, const yarn::element& e) const {
+dogen::formatters::artefact enum_formatter::
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
+    const auto& ye(a.as<yarn::meta_model::enumeration>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

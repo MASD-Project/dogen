@@ -28,14 +28,14 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/object.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/module.hpp"
 #include "dogen/dia/types/attribute.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
@@ -77,7 +77,7 @@ private:
      * @pre n must not be empty.
      * @pre n must be a simple name, not a qualified name.
      */
-    yarn::name to_name(const std::string& n) const;
+    meta_model::name to_name(const std::string& n) const;
 
     /**
      * @brief Creates a name using the name provided, which is
@@ -86,8 +86,8 @@ private:
      * @pre n must not be empty.
      * @pre n must be a simple name, not a qualified name.
      */
-    yarn::name to_name(const std::string& n,
-        const yarn::name& module_name) const;
+    meta_model::name to_name(const std::string& n,
+        const meta_model::name& module_name) const;
 
     /**
      * @brief Converts a processed attribute into an yarn attribute.
@@ -96,7 +96,7 @@ private:
      *
      * @pre name and type of attribute must not be empty.
      */
-    yarn::attribute to_attribute(const processed_attribute& a) const;
+    meta_model::attribute to_attribute(const processed_attribute& a) const;
 
     /**
      * @brief Converts a processed attribute into an yarn enumerator.
@@ -105,13 +105,14 @@ private:
      *
      * @pre name and type of attribute must not be empty.
      */
-    yarn::enumerator to_enumerator(const processed_attribute& a) const;
+    meta_model::enumerator to_enumerator(const processed_attribute& a) const;
 
 private:
     /**
      * @brief Update the yarn element using the processed object.
      */
-    void update_element(const processed_object& po, yarn::element& e) const;
+    void update_element(const processed_object& po,
+        meta_model::element& e) const;
 
 public:
     /**
@@ -122,7 +123,7 @@ public:
      *
      * @pre processed object must have the exception flag set.
      */
-    yarn::exception to_exception(const processed_object& po) const;
+    meta_model::exception to_exception(const processed_object& po) const;
 
     /**
      * @brief Converts Dia a object containing a UML class with a
@@ -133,7 +134,7 @@ public:
      *
      * @pre processed object must have the value object flag set.
      */
-    yarn::object to_object(const processed_object& po) const;
+    meta_model::object to_object(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object containing a class into an
@@ -141,7 +142,7 @@ public:
      *
      * @param po the Dia UML class containing an enumeration.
      */
-    yarn::enumeration to_enumeration(const processed_object& po) const;
+    meta_model::enumeration to_enumeration(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object containing a class into a
@@ -149,7 +150,7 @@ public:
      *
      * @param po the Dia UML class containing a primitive.
      */
-    yarn::primitive to_primitive(const processed_object& po) const;
+    meta_model::primitive to_primitive(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object of type large UML package into a
@@ -157,7 +158,7 @@ public:
      *
      * @param po Dia object which contains a UML package.
      */
-    yarn::module to_module(const processed_object& po) const;
+    meta_model::module to_module(const processed_object& po) const;
 
     /**
      * @brief Converts a dia object with a stereotype of concept
@@ -165,7 +166,7 @@ public:
      *
      * @param po Dia object which contains a concept.
      */
-    yarn::concept to_concept(const processed_object& o) const;
+    meta_model::concept to_concept(const processed_object& o) const;
 
 private:
     const repository& repository_;

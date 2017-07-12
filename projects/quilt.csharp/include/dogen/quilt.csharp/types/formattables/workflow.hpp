@@ -28,7 +28,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/options/types/knitting_options.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
@@ -44,8 +44,8 @@ private:
     /**
      * @brief Retrieves the ids of all the modules in the model.
      */
-    model
-    make_model(const formatters::repository& frp, const yarn::model& m) const;
+    model make_model(const formatters::repository& frp,
+        const yarn::meta_model::model& m) const;
 
     void expand_model(
         const annotations::type_repository& atrp,
@@ -57,7 +57,7 @@ public:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const formatters::repository& frp, const locator& l,
-        const yarn::model& m) const;
+        const yarn::meta_model::model& m) const;
 };
 
 } } } }

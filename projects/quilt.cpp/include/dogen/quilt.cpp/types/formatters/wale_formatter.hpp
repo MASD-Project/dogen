@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/yarn/types/element_fwd.hpp"
+#include "dogen/yarn/types/meta_model/element_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 
@@ -42,7 +42,7 @@ private:
 public:
     dogen::formatters::artefact
     format(const artefact_formatter_interface& stock_formatter,
-        const context& ctx, const yarn::element& e) const;
+        const context& ctx, const yarn::meta_model::element& e) const;
 };
 
 } } } }

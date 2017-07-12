@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_targets.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/msbuild_targets_fwd_ser.hpp"
 
@@ -36,7 +36,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class msbuild_targets final : public dogen::yarn::element {
+class msbuild_targets final : public dogen::yarn::meta_model::element {
 public:
     msbuild_targets() = default;
     msbuild_targets(const msbuild_targets&) = default;
@@ -48,13 +48,13 @@ public:
     msbuild_targets(
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::name& name,
-        const dogen::yarn::origin_types origin_type,
-        const boost::optional<dogen::yarn::name>& contained_by,
+        const dogen::yarn::meta_model::name& name,
+        const dogen::yarn::meta_model::origin_types origin_type,
+        const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const dogen::yarn::element_properties& element_properties,
+        const dogen::yarn::meta_model::element_properties& element_properties,
         const dogen::quilt::cpp::fabric::odb_targets& odb_targets);
 
 private:
@@ -65,12 +65,12 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::msbuild_targets& v, unsigned int version);
 
 public:
-    using dogen::yarn::element::accept;
+    using dogen::yarn::meta_model::element::accept;
 
-    virtual void accept(const dogen::yarn::element_visitor& v) const override;
-    virtual void accept(dogen::yarn::element_visitor& v) const override;
-    virtual void accept(const dogen::yarn::element_visitor& v) override;
-    virtual void accept(dogen::yarn::element_visitor& v) override;
+    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::yarn::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::yarn::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -87,7 +87,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::element& other) const override;
+    bool equals(const dogen::yarn::meta_model::element& other) const override;
 
 public:
     void swap(msbuild_targets& other) noexcept;

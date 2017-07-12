@@ -2,7 +2,7 @@
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
 <#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
-<#@ stitch.inclusion_dependency="dogen/yarn/types/object.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/meta_model/object.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/forward_declarations.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
@@ -22,13 +22,13 @@
 
 std::list<std::string> forward_declarations_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
+    const yarn::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact forward_declarations_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
     const auto arch(static_artefact());

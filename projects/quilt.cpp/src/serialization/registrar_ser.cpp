@@ -47,10 +47,10 @@ namespace cpp {
 
 template<typename Archive>
 void register_types(Archive& ar) {
-    dogen::options::register_types(ar);
-    dogen::yarn::register_types(ar);
     dogen::formatters::register_types(ar);
+    dogen::options::register_types(ar);
     dogen::annotations::register_types(ar);
+    dogen::yarn::register_types(ar);
 
     ar.template register_type<dogen::quilt::cpp::fabric::cmakelists>();
     ar.template register_type<dogen::quilt::cpp::fabric::common_odb_options>();

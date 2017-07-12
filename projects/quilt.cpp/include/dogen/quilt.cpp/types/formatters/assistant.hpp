@@ -37,11 +37,11 @@
 #include "dogen/formatters/types/comment_styles.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/letter_cases.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/letter_cases.hpp"
 #include "dogen/quilt.cpp/types/formatters/context.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties.hpp"
 
@@ -68,7 +68,7 @@ private:
 public:
     template<typename T>
     static const T&
-    as(const std::string& /*archetype*/, const yarn::element& e) {
+    as(const std::string& /*archetype*/, const yarn::meta_model::element& e) {
         return dynamic_cast<const T&>(e);
     }
 
@@ -76,7 +76,8 @@ public:
      * @brief Returns the text to use for a given class for the @code
      * final keyword. If non-empty, includes a trailing space.
      */
-    std::string make_final_keyword_text(const yarn::object& o) const;
+    std::string
+    make_final_keyword_text(const yarn::meta_model::object& o) const;
 
     /**
      * @brief Returns the override keyword, if supported by the
@@ -93,33 +94,36 @@ public:
     /**
      * @brief Returns the by-ref to use given the property.
      */
-    static std::string make_by_ref_text(const yarn::attribute& attr);
+    static std::string
+    make_by_ref_text(const yarn::meta_model::attribute& attr);
 
     /**
      * @brief Makes the return type of a setter, taking into account
      * fluency.
      */
     static std::string make_setter_return_type(
-        const std::string& containing_type_name, const yarn::attribute& attr);
+        const std::string& containing_type_name,
+        const yarn::meta_model::attribute& attr);
 
     /**
      * @brief Obtains the qualified name.
      */
     /**@{*/
-    std::string get_qualified_name(const yarn::name& n) const;
-    std::string get_qualified_name(const yarn::name_tree& nt) const;
+    std::string get_qualified_name(const yarn::meta_model::name& n) const;
+    std::string get_qualified_name(const yarn::meta_model::name_tree& nt) const;
     /**@}*/
 
     /**
      * @brief Obtains the model name as a string.
      */
-    std::string get_identifiable_model_name(const yarn::name& n) const;
+    std::string
+    get_identifiable_model_name(const yarn::meta_model::name& n) const;
 
     /**
      * @brief Obtains the product name. This is defined to be the
      * first external module, if any exists.
      */
-    std::string get_product_name(const yarn::name& n) const;
+    std::string get_product_name(const yarn::meta_model::name& n) const;
 
 private:
     /**
@@ -207,17 +211,20 @@ public:
     /**
      * @brief Returns the property as a member variable.
      */
-    std::string make_member_variable_name(const yarn::attribute& attr) const;
+    std::string
+    make_member_variable_name(const yarn::meta_model::attribute& attr) const;
 
     /**
      * @brief Returns the property as a getter.
      */
-    std::string make_getter_setter_name(const yarn::attribute& attr) const;
+    std::string
+    make_getter_setter_name(const yarn::meta_model::attribute& attr) const;
 
     /**
      * @brief returns the c++ namespaces for the name.
      */
-    std::list<std::string> make_namespaces(const yarn::name& n) const;
+    std::list<std::string>
+    make_namespaces(const yarn::meta_model::name& n) const;
 
  public:
     /**
@@ -252,14 +259,14 @@ private:
      * @brief Returns the decoration properties for a given yarn element.
      */
     const dogen::formatters::decoration_properties&
-    get_decoration_properties(const yarn::element& e) const;
+    get_decoration_properties(const yarn::meta_model::element& e) const;
 
 public:
     /**
      * @brief Returns a scoped boilerplate formatter.
      */
     dogen::formatters::cpp::scoped_boilerplate_formatter
-    make_scoped_boilerplate_formatter(const yarn::element& e);
+    make_scoped_boilerplate_formatter(const yarn::meta_model::element& e);
 
     /**
      * @brief Returns a scoped namespace formatter.
@@ -273,7 +280,7 @@ public:
     /**@{*/
     void make_decoration_preamble(
         const dogen::formatters::comment_styles cs,
-        const yarn::element& e);
+        const yarn::meta_model::element& e);
     void make_decoration_preamble(
         const dogen::formatters::comment_styles cs,
         const boost::optional<dogen::formatters::decoration_properties> dc);
@@ -325,7 +332,7 @@ public:
     /**@{*/
     std::string streaming_for_type(const formattables::helper_descriptor& hd,
         const std::string& s) const;
-    std::string streaming_for_type(const yarn::name& n,
+    std::string streaming_for_type(const yarn::meta_model::name& n,
         const std::string& s) const;
     /**@}*/
 
@@ -333,7 +340,8 @@ public:
      * @brief Returns true if the type can be hashed without requiring a
      * helper method.
      */
-    bool requires_hashing_helper_method(const yarn::attribute& attr) const;
+    bool requires_hashing_helper_method(
+        const yarn::meta_model::attribute& attr) const;
 
 public:
     /**
@@ -356,9 +364,9 @@ public:
      * @brief Returns the subset of names for which the supplied
      * archetype is enabled.
      */
-    std::list<yarn::name>
+    std::list<yarn::meta_model::name>
     names_with_enabled_archetype(const std::string& archetype,
-        const std::list<yarn::name> names) const;
+        const std::list<yarn::meta_model::name> names) const;
 
 public:
     const formattables::artefact_properties& artefact_properties() const;

@@ -26,8 +26,8 @@
 #endif
 
 #include <unordered_set>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -41,28 +41,29 @@ private:
      * languages set, false otherwise.
      */
     static bool is_language_relevant(
-        const std::unordered_set<languages>& relevant_languages,
-        const intermediate_model& im);
+        const std::unordered_set<meta_model::languages>& relevant_languages,
+        const meta_model::intermediate_model& im);
 
 private:
     /**
      * @brief Applies the first part of the pre-processing transforms.
      */
     static void apply_first_set_of_transforms(
-        const context& ctx, intermediate_model& im);
+        const context& ctx, meta_model::intermediate_model& im);
 
     /**
      * @brief Applies the second part of the pre-processing transforms.
      */
     static void apply_second_set_of_transforms(
-        const context& ctx, intermediate_model& im);
+        const context& ctx, meta_model::intermediate_model& im);
 
 public:
     /**
      * @brief Unconditionally applies all of the pre-processing
      * transforms to the supplied intermediate model.
      */
-    static void transform(const context& ctx, intermediate_model& im);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Only pre-processes the model if its language is in the
@@ -75,9 +76,8 @@ public:
      * language.
      */
     static bool try_transform(const context& ctx,
-        const std::unordered_set<languages>& relevant_languages,
-        intermediate_model& im);
-
+        const std::unordered_set<meta_model::languages>& relevant_languages,
+        meta_model::intermediate_model& im);
 };
 
 } } }

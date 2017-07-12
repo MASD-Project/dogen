@@ -22,9 +22,9 @@
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/letter_cases_io.hpp"
-#include "dogen/yarn/io/orm_database_systems_io.hpp"
-#include "dogen/yarn/types/orm_database_systems.hpp"
+#include "dogen/yarn/io/meta_model/letter_cases_io.hpp"
+#include "dogen/yarn/io/meta_model/orm_database_systems_io.hpp"
+#include "dogen/yarn/types/meta_model/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
@@ -58,8 +58,8 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::string transformer::to_odb_database(const yarn::orm_database_systems ds) {
-    using yarn::orm_database_systems;
+std::string transformer::to_odb_database(const yarn::meta_model::orm_database_systems ds) {
+    using yarn::meta_model::orm_database_systems;
 
     switch (ds) {
     case orm_database_systems::mysql: return mysql;
@@ -75,11 +75,13 @@ std::string transformer::to_odb_database(const yarn::orm_database_systems ds) {
     } }
 }
 
-std::string
-transformer::to_odb_sql_name_case(const yarn::letter_cases lc) const {
+std::string transformer::
+to_odb_sql_name_case(const yarn::meta_model::letter_cases lc) const {
+    using yarn::meta_model::letter_cases;
+
     switch (lc) {
-    case yarn::letter_cases::upper_case: return upper_case;
-    case yarn::letter_cases::lower_case: return lower_case;
+    case letter_cases::upper_case: return upper_case;
+    case letter_cases::lower_case: return lower_case;
     default: {
         const auto s(boost::lexical_cast<std::string>(lc));
         BOOST_LOG_SEV(lg, error) << invalid_case << s;
@@ -88,7 +90,7 @@ transformer::to_odb_sql_name_case(const yarn::letter_cases lc) const {
 }
 
 std::list<std::string> transformer::
-make_databases(const yarn::orm_model_properties& omp) const {
+make_databases(const yarn::meta_model::orm_model_properties& omp) const {
     std::list<std::string> r;
 
     if (omp.database_systems().size() > 1)
@@ -100,8 +102,8 @@ make_databases(const yarn::orm_model_properties& omp) const {
     return r;
 }
 
-model transformer::
-transform(const formatters::repository& frp, const yarn::model& m) const {
+model transformer:: transform(const formatters::repository& frp,
+    const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 

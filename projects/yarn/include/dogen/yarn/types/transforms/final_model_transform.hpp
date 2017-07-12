@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -34,10 +34,12 @@ namespace transforms {
 
 class final_model_transform final {
 private:
-    static std::size_t compute_total_size(const intermediate_model& im);
+    static std::size_t
+    compute_total_size(const meta_model::intermediate_model& im);
 
 public:
-    static model transform(const intermediate_model& im);
+    static meta_model::model
+    transform(const meta_model::intermediate_model& im);
 };
 
 } } }

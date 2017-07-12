@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/dependencies_builder_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/inclusion_support_types.hpp"
@@ -78,13 +78,14 @@ public:
      * @pre supports_inclusion must be true.
      */
     virtual boost::filesystem::path inclusion_path(
-        const formattables::locator& l, const yarn::name& n) const = 0;
+        const formattables::locator& l,
+        const yarn::meta_model::name& n) const = 0;
 
     /**
      * @brief Provides the full path.
      */
-    virtual boost::filesystem::path full_path(
-        const formattables::locator& l, const yarn::name& n) const = 0;
+    virtual boost::filesystem::path full_path(const formattables::locator& l,
+        const yarn::meta_model::name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter
@@ -92,14 +93,14 @@ public:
      */
     virtual std::list<std::string> inclusion_dependencies(
         const formattables::dependencies_builder_factory& f,
-        const yarn::element& e) const = 0;
+        const yarn::meta_model::element& e) const = 0;
 
 public:
     /**
      * @brief Generate a file representation for the element.
      */
     virtual dogen::formatters::artefact
-    format(const context& ctx, const yarn::element& e) const = 0;
+    format(const context& ctx, const yarn::meta_model::element& e) const = 0;
 };
 
 } } } }

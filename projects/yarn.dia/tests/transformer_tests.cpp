@@ -25,10 +25,10 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn/io/object_io.hpp"
-#include "dogen/yarn/io/enumeration_io.hpp"
-#include "dogen/yarn/io/module_io.hpp"
-#include "dogen/yarn/io/exception_io.hpp"
+#include "dogen/yarn/io/meta_model/object_io.hpp"
+#include "dogen/yarn/io/meta_model/enumeration_io.hpp"
+#include "dogen/yarn/io/meta_model/module_io.hpp"
+#include "dogen/yarn/io/meta_model/exception_io.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/selection_error.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
@@ -65,7 +65,7 @@ const std::string repository_stereotype("repository");
 const std::string immutable_stereotype("immutable");
 
 
-dogen::yarn::name mock_model_name(const std::string& mn) {
+dogen::yarn::meta_model::name mock_model_name(const std::string& mn) {
     dogen::yarn::helpers::name_factory nf;
     return nf.build_model_name(mn);;
 }
@@ -74,7 +74,7 @@ dogen::yarn::dia::repository mock_repository(const std::string& model_name) {
     dogen::yarn::dia::repository r;
     r.model().name(mock_model_name(model_name));
 
-    dogen::yarn::module m;
+    dogen::yarn::meta_model::module m;
     m.name(r.model().name());
     r.model().modules().insert(std::make_pair(m.name().id(), m));
     return r;

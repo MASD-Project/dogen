@@ -27,7 +27,6 @@
 
 #include <list>
 #include <string>
-#include "dogen/yarn/types/name_tree.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/helper_properties_fwd.hpp"
 

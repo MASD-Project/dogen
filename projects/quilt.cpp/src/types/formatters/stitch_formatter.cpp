@@ -54,7 +54,7 @@ bool stitch_formatter::is_header(const inclusion_support_types ist) const {
 
 dogen::formatters::artefact stitch_formatter::
 format(const artefact_formatter_interface& stock_formatter, const context& ctx,
-    const yarn::element& e) const {
+    const yarn::meta_model::element& e) const {
     const auto al(stock_formatter.archetype_location());
     const auto needs_guard(is_header(stock_formatter.inclusion_support_type()));
     const auto id(e.name().id());

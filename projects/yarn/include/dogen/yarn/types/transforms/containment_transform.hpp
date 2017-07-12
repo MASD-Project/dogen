@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/origin_types.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -37,13 +37,14 @@ private:
     /**
      * @brief Creates the module to represent the global namespace.
      */
-    static module create_global_module(const origin_types ot);
+    static meta_model::module
+    create_global_module(const meta_model::origin_types ot);
 
     /**
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static void inject_global_module(intermediate_model& im);
+    static void inject_global_module(meta_model::intermediate_model& im);
 
 public:
 
@@ -52,7 +53,7 @@ public:
      *
      * @param m Yarn model to operate on.
      */
-    static void transform(intermediate_model& im);
+    static void transform(meta_model::intermediate_model& im);
 };
 
 } } }

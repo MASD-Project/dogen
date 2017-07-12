@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/optional.hpp>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/helpers/mapping_actions.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_value_fwd_ser.hpp"
 
@@ -53,8 +53,8 @@ public:
 public:
     mapping_value(
         const dogen::yarn::helpers::mapping_actions mapping_action,
-        const boost::optional<dogen::yarn::name>& default_name,
-        const std::list<dogen::yarn::name>& aliases);
+        const boost::optional<dogen::yarn::meta_model::name>& default_name,
+        const std::list<dogen::yarn::meta_model::name>& aliases);
 
 private:
     template<typename Archive>
@@ -67,15 +67,15 @@ public:
     dogen::yarn::helpers::mapping_actions mapping_action() const;
     void mapping_action(const dogen::yarn::helpers::mapping_actions v);
 
-    const boost::optional<dogen::yarn::name>& default_name() const;
-    boost::optional<dogen::yarn::name>& default_name();
-    void default_name(const boost::optional<dogen::yarn::name>& v);
-    void default_name(const boost::optional<dogen::yarn::name>&& v);
+    const boost::optional<dogen::yarn::meta_model::name>& default_name() const;
+    boost::optional<dogen::yarn::meta_model::name>& default_name();
+    void default_name(const boost::optional<dogen::yarn::meta_model::name>& v);
+    void default_name(const boost::optional<dogen::yarn::meta_model::name>&& v);
 
-    const std::list<dogen::yarn::name>& aliases() const;
-    std::list<dogen::yarn::name>& aliases();
-    void aliases(const std::list<dogen::yarn::name>& v);
-    void aliases(const std::list<dogen::yarn::name>&& v);
+    const std::list<dogen::yarn::meta_model::name>& aliases() const;
+    std::list<dogen::yarn::meta_model::name>& aliases();
+    void aliases(const std::list<dogen::yarn::meta_model::name>& v);
+    void aliases(const std::list<dogen::yarn::meta_model::name>&& v);
 
 public:
     bool operator==(const mapping_value& rhs) const;
@@ -89,8 +89,8 @@ public:
 
 private:
     dogen::yarn::helpers::mapping_actions mapping_action_;
-    boost::optional<dogen::yarn::name> default_name_;
-    std::list<dogen::yarn::name> aliases_;
+    boost::optional<dogen::yarn::meta_model::name> default_name_;
+    std::list<dogen::yarn::meta_model::name> aliases_;
 };
 
 } } }

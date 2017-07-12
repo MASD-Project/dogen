@@ -27,10 +27,10 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/hash/name_hash.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/hash/meta_model/name_hash.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -68,28 +68,30 @@ private:
      * @param processed list of names that have already been processed
      * somewhere else, if any.
      */
-    static void remove_duplicates(std::list<name>& names,
-        std::unordered_set<name> processed =
-        std::unordered_set<name>());
+    static void remove_duplicates(std::list<meta_model::name>& names,
+        std::unordered_set<meta_model::name> processed =
+        std::unordered_set<meta_model::name>());
 
     /**
      * @brief Walks through the name tree, picking up associations as
      * it goes along.
      */
-    static void walk_name_tree(const intermediate_model& im, object& o,
-        const name_tree& nt, const bool inherit_opaqueness_from_parent);
+    static void walk_name_tree(const meta_model::intermediate_model& im,
+        meta_model::object& o, const meta_model::name_tree& nt,
+        const bool inherit_opaqueness_from_parent);
 
 private:
     /**
      * @brief Expands a specific object.
      */
-    static void expand_object(const intermediate_model& im, object& o);
+    static void expand_object(const meta_model::intermediate_model& im,
+        meta_model::object& o);
 
 public:
     /**
      * @brief Expands all association relationships.
      */
-    static void transform(intermediate_model& im);
+    static void transform(meta_model::intermediate_model& im);
 };
 
 } } }

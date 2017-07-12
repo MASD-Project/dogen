@@ -57,20 +57,20 @@ master_header_formatter::inclusion_support_type() const {
 }
 
 boost::filesystem::path master_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     const auto arch(archetype_location_.archetype());
     return l.make_inclusion_path_for_cpp_header(n, arch);
 }
 
 boost::filesystem::path master_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     const auto arch(archetype_location_.archetype());
     return l.make_full_path_for_cpp_header(n, arch);
 }
 
 std::list<std::string> master_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
+    const yarn::meta_model::element& e) const {
     const auto fct(archetype_location_.facet());
     const auto arch(archetype_location_.archetype());
     const auto& mh(assistant::as<fabric::master_header>(arch, e));
@@ -89,7 +89,7 @@ std::list<std::string> master_header_formatter::inclusion_dependencies(
 }
 
 dogen::formatters::artefact master_header_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
 

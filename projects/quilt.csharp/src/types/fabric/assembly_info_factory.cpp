@@ -39,8 +39,8 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-boost::shared_ptr<yarn::element>
-assembly_info_factory::make(const yarn::intermediate_model& im) const {
+boost::shared_ptr<yarn::meta_model::element> assembly_info_factory::
+make(const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Assembly Info.";
 
     yarn::helpers::name_factory nf;

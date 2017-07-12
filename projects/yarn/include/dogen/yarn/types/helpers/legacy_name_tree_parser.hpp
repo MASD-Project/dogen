@@ -28,9 +28,9 @@
 #include <list>
 #include <string>
 #include <unordered_set>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/location.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -47,16 +47,16 @@ public:
      *
      * @param language what programming language syntax to use.
      */
-    explicit legacy_name_tree_parser(const languages language);
+    explicit legacy_name_tree_parser(const meta_model::languages language);
 
 public:
     /**
      * @brief Parse the string into a name tree.
      */
-    name_tree parse(const std::string& s) const;
+    meta_model::name_tree parse(const std::string& s) const;
 
 private:
-    const languages language_;
+    const meta_model::languages language_;
 };
 
 } } }

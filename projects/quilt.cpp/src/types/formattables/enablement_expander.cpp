@@ -26,7 +26,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/hash/traits.hpp"
 #include "dogen/quilt.cpp/io/formattables/facet_properties_io.hpp"
@@ -316,12 +316,13 @@ obtain_local_configurations(const local_type_group_type& ltg,
     return r;
 }
 
-bool enablement_expander::is_element_disabled(const yarn::element& e) const {
+bool enablement_expander::
+is_element_disabled(const yarn::meta_model::element& e) const {
     /*
      * We're only interested in modules as these are the only elements
      * that can be enabled/disabled based on their state.
      */
-    const auto ptr(dynamic_cast<const yarn::module*>(&e));
+    const auto ptr(dynamic_cast<const yarn::meta_model::module*>(&e));
     if (!ptr)
         return false;
 

@@ -26,8 +26,8 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/traits.hpp"
@@ -146,7 +146,7 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 void enumerations_transform::populate_from_annotations(
-    const enumeration_type_group& tg, enumeration& e) {
+    const enumeration_type_group& tg, meta_model::enumeration& e) {
 
     const auto& a(e.annotation());
     const annotations::entry_selector s(a);
@@ -163,7 +163,7 @@ void enumerations_transform::populate_from_annotations(
 }
 
 void enumerations_transform::populate_from_annotations(
-    const enumerator_type_group& tg, enumerator& e) {
+    const enumerator_type_group& tg, meta_model::enumerator& e) {
     const auto& a(e.annotation());
     const annotations::entry_selector s(a);
     if (s.has_entry(tg.value)) {
@@ -173,12 +173,13 @@ void enumerations_transform::populate_from_annotations(
     }
 }
 
-name enumerations_transform::obtain_enumeration_default_underlying_element_name(
-    const intermediate_model& im) {
+meta_model::name
+enumerations_transform::obtain_enumeration_default_underlying_element_name(
+    const meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: " << im.name().id();
 
-    name r;
+    meta_model::name r;
     bool found(false);
     for (const auto& pair : im.builtins()) {
         const auto b(pair.second);
@@ -209,11 +210,11 @@ name enumerations_transform::obtain_enumeration_default_underlying_element_name(
 }
 
 std::string enumerations_transform::
-obtain_invalid_enumerator_simple_name(const languages l) {
+obtain_invalid_enumerator_simple_name(const meta_model::languages l) {
     switch(l) {
-    case languages::csharp: return csharp_invalid;
-    case languages::cpp: return cpp_invalid;
-    case languages::upsilon: return csharp_invalid;
+    case meta_model::languages::csharp: return csharp_invalid;
+    case meta_model::languages::cpp: return cpp_invalid;
+    case meta_model::languages::upsilon: return csharp_invalid;
     default: {
         const auto s(boost::lexical_cast<std::string>(l));
         BOOST_LOG_SEV(lg, error) << unsupported_language << s;
@@ -221,9 +222,9 @@ obtain_invalid_enumerator_simple_name(const languages l) {
     } }
 }
 
-enumerator enumerations_transform::
-make_invalid_enumerator(const name& n, const languages l) {
-    enumerator r;
+meta_model::enumerator enumerations_transform::make_invalid_enumerator(
+    const meta_model::name& n, const meta_model::languages l) {
+    meta_model::enumerator r;
     r.documentation("Represents an uninitialised enum");
     r.value("0");
 
@@ -235,7 +236,8 @@ make_invalid_enumerator(const name& n, const languages l) {
 }
 
 void enumerations_transform::expand_default_underlying_element(
-    const name& default_underlying_element_name, enumeration& e) {
+    const meta_model::name& default_underlying_element_name,
+    meta_model::enumeration& e) {
     const auto ue(e.underlying_element());
     BOOST_LOG_SEV(lg, debug) << "Underlying type: '" << ue.id() << "'";
 
@@ -248,8 +250,8 @@ void enumerations_transform::expand_default_underlying_element(
 }
 
 void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
-    const languages l, enumeration& e) {
-    std::vector<enumerator> enumerators;
+    const meta_model::languages l, meta_model::enumeration& e) {
+    std::vector<meta_model::enumerator> enumerators;
 
     if (e.add_invalid_enumerator()) {
         enumerators.reserve(e.enumerators().size() + 1/*invalid*/);
@@ -296,8 +298,8 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
     e.enumerators(enumerators);
 }
 
-void
-enumerations_transform::transform(const context& ctx, intermediate_model& im) {
+void enumerations_transform::transform(const context& ctx,
+    meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming enumerations for model: "
                              << im.name().id();
 

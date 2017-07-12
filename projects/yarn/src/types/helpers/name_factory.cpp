@@ -39,7 +39,7 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-name name_factory::build_model_name(const std::string& model_name,
+meta_model::name name_factory::build_model_name(const std::string& model_name,
     const std::string& external_modules) const {
     name_builder b(true/*model_name_mode*/);
     b.model_name(model_name);
@@ -47,51 +47,54 @@ name name_factory::build_model_name(const std::string& model_name,
     return b.build();
 }
 
-name name_factory::build_element_name(const std::string& simple_name) const {
+meta_model::name name_factory::build_element_name(
+    const std::string& simple_name) const {
     name_builder b;
     b.simple_name(simple_name);
     return b.build();
 }
 
-name name_factory::build_element_name(const std::string& model_name,
+meta_model::name name_factory::build_element_name(const std::string& model_name,
     const std::string& simple_name) const {
-
     name_builder b;
     b.simple_name(simple_name);
     b.model_name(model_name);
     return b.build();
 }
 
-name name_factory::build_element_name(const std::string& simple_name,
-    const std::list<std::string>& internal_modules) const {
-
-    yarn::name n;
-    n.simple(simple_name);
-    n.location().internal_modules(internal_modules);
-
-    name_builder b(n);
-    return b.build();
-}
-
-name name_factory::build_element_in_model(const name& model_name,
-    const std::string& simple_name) const {
-
-    yarn::name n;
-    n.simple(simple_name);
-
-    const auto& l(model_name.location());
-    n.location().model_modules(l.model_modules());
-    n.location().external_modules(l.external_modules());
-
-    name_builder b(n);
-    return b.build();
-}
-
-name name_factory::build_element_in_model(const name& model_name,
+meta_model::name name_factory::build_element_name(
     const std::string& simple_name,
     const std::list<std::string>& internal_modules) const {
 
-    yarn::name n;
+    meta_model::name n;
+    n.simple(simple_name);
+    n.location().internal_modules(internal_modules);
+
+    name_builder b(n);
+    return b.build();
+}
+
+meta_model::name name_factory::build_element_in_model(
+    const meta_model::name& model_name,
+    const std::string& simple_name) const {
+
+    meta_model::name n;
+    n.simple(simple_name);
+
+    const auto& l(model_name.location());
+    n.location().model_modules(l.model_modules());
+    n.location().external_modules(l.external_modules());
+
+    name_builder b(n);
+    return b.build();
+}
+
+meta_model::name name_factory::build_element_in_model(
+    const meta_model::name& model_name,
+    const std::string& simple_name,
+    const std::list<std::string>& internal_modules) const {
+
+    meta_model::name n;
     n.simple(simple_name);
 
     const auto& l(model_name.location());
@@ -103,9 +106,10 @@ name name_factory::build_element_in_model(const name& model_name,
     return b.build();
 }
 
-name name_factory::build_element_in_module(const name& module_name,
+meta_model::name name_factory::build_element_in_module(
+    const meta_model::name& module_name,
     const std::string& simple_name) const {
-    yarn::name n;
+    meta_model::name n;
     n.simple(simple_name);
 
     const auto& l(module_name.location());
@@ -120,7 +124,8 @@ name name_factory::build_element_in_module(const name& module_name,
     return b.build();
 }
 
-name name_factory::build_module_name(const name& model_name,
+meta_model::name name_factory::build_module_name(
+    const meta_model::name& model_name,
     const std::list<std::string>& internal_modules) const {
 
     if (internal_modules.empty()) {
@@ -128,7 +133,7 @@ name name_factory::build_module_name(const name& model_name,
         BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
     }
 
-    yarn::name n;
+    meta_model::name n;
     n.simple(internal_modules.back());
 
     const auto& l(model_name.location());
@@ -143,11 +148,12 @@ name name_factory::build_module_name(const name& model_name,
     return b.build();
 }
 
-name name_factory::build_module_name(const name& model_name,
+meta_model::name name_factory::build_module_name(
+    const meta_model::name& model_name,
     const std::string& module_name,
     const std::list<std::string>& internal_modules) const {
 
-    yarn::name n;
+    meta_model::name n;
     n.simple(module_name);
 
     const auto& l(model_name.location());
@@ -159,11 +165,12 @@ name name_factory::build_module_name(const name& model_name,
     return b.build();
 }
 
-name name_factory::build_combined_element_name(const name& model_name,
-    const name& partial_element_name,
+meta_model::name name_factory::build_combined_element_name(
+    const meta_model::name& model_name,
+    const meta_model::name& partial_element_name,
     const bool populate_model_modules_if_blank,
     const bool populate_internal_modules_if_blank) const {
-    name n(partial_element_name);
+    meta_model::name n(partial_element_name);
 
     const auto& l(model_name.location());
     if (populate_model_modules_if_blank &&
@@ -182,8 +189,9 @@ name name_factory::build_combined_element_name(const name& model_name,
     return b.build();
 }
 
-name name_factory::build_promoted_module_name(const name& element_name) const {
-    name n;
+meta_model::name name_factory::
+build_promoted_module_name(const meta_model::name& element_name) const {
+    meta_model::name n;
     n.simple(element_name.simple());
 
     const auto& l(element_name.location());
@@ -203,9 +211,10 @@ name name_factory::build_promoted_module_name(const name& element_name) const {
     return b.build();
 }
 
-name name_factory::build_promoted_module_name(const name& model_name,
-    const name& element_name) const {
-    name n;
+meta_model::name name_factory::build_promoted_module_name(
+    const meta_model::name& model_name,
+    const meta_model::name& element_name) const {
+    meta_model::name n;
     n.simple(element_name.simple());
 
     const auto& l(element_name.location());
@@ -222,13 +231,14 @@ name name_factory::build_promoted_module_name(const name& model_name,
     return b.build();
 }
 
-name name_factory::build_attribute_name(const name& owner_name,
+meta_model::name name_factory::build_attribute_name(
+    const meta_model::name& owner_name,
     const std::string& simple_name) const {
 
-    location l(owner_name.location());
+    auto l(owner_name.location());
     l.element(owner_name.simple());
 
-    name n;
+    meta_model::name n;
     n.location(l);
     n.simple(simple_name);
     name_builder b(n);

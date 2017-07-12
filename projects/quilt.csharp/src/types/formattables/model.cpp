@@ -26,7 +26,7 @@ namespace csharp {
 namespace formattables {
 
 model::model(
-    const dogen::yarn::name& name,
+    const dogen::yarn::meta_model::name& name,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
     const std::list<std::string>& project_items,
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties,
@@ -60,19 +60,19 @@ model& model::operator=(model other) {
     return *this;
 }
 
-const dogen::yarn::name& model::name() const {
+const dogen::yarn::meta_model::name& model::name() const {
     return name_;
 }
 
-dogen::yarn::name& model::name() {
+dogen::yarn::meta_model::name& model::name() {
     return name_;
 }
 
-void model::name(const dogen::yarn::name& v) {
+void model::name(const dogen::yarn::meta_model::name& v) {
     name_ = v;
 }
 
-void model::name(const dogen::yarn::name&& v) {
+void model::name(const dogen::yarn::meta_model::name&& v) {
     name_ = std::move(v);
 }
 

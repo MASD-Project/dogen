@@ -72,7 +72,8 @@ formattables::artefact_properties workflow::get_artefact_properties(
 }
 
 std::list<dogen::formatters::artefact>
-workflow::format(const formattables::model& fm, const yarn::element& e,
+workflow::format(const formattables::model& fm,
+    const yarn::meta_model::element& e,
     const formattables::element_properties& ep) const {
 
     const auto id(e.name().id());

@@ -28,8 +28,8 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -61,11 +61,13 @@ namespace transforms {
  */
 class merge_transform final {
 private:
-    static void merge(const intermediate_model& src, intermediate_model& dst);
+    static void merge(const meta_model::intermediate_model& src,
+        meta_model::intermediate_model& dst);
 
 public:
-    static intermediate_model transform(const intermediate_model& target,
-        const std::list<intermediate_model>& refs);
+    static meta_model::intermediate_model transform(
+        const meta_model::intermediate_model& target,
+        const std::list<meta_model::intermediate_model>& refs);
 };
 
 } } }

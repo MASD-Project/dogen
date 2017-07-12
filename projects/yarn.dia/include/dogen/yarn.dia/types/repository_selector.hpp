@@ -26,8 +26,8 @@
 #endif
 
 #include <string>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/module.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn.dia/types/repository.hpp"
 
 namespace dogen {
@@ -47,7 +47,7 @@ public:
      *
      * @pre module must exist in repository.
      */
-    const yarn::module& module_for_name(const yarn::name& n) const;
+    const meta_model::module& module_for_name(const meta_model::name& n) const;
 
     /**
      * @brief Returns the module associated with a dia package id.
@@ -55,7 +55,7 @@ public:
      * @pre id must be a valid package ID in the diagram.
      * @pre corresponding module must have already been generated.
      */
-    const yarn::module& module_for_id(const std::string& id) const;
+    const meta_model::module& module_for_id(const std::string& id) const;
 
     /**
      * @brief Returns a list of all parent names for a given child dia
@@ -63,9 +63,10 @@ public:
      *
      * @pre id must exist in repository.
      */
-    std::list<yarn::name> parent_names_for_id(const std::string& id) const;
+    std::list<meta_model::name>
+    parent_names_for_id(const std::string& id) const;
 
-    yarn::name name_for_id(const std::string& id) const;
+    meta_model::name name_for_id(const std::string& id) const;
 
 private:
     const repository& repository_;
@@ -81,7 +82,7 @@ public:
      *
      * @pre module must exist in repository.
      */
-    yarn::module& module_for_name(const yarn::name& n);
+    meta_model::module& module_for_name(const meta_model::name& n);
 
     /**
      * @brief Returns the module associated with a dia package id.
@@ -89,7 +90,7 @@ public:
      * @pre id must be a valid package ID in the diagram.
      * @pre corresponding module must have already been generated.
      */
-    yarn::module& module_for_id(const std::string& id);
+    meta_model::module& module_for_id(const std::string& id);
 
 private:
     repository& repository_;

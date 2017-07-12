@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/name_td.hpp"
 #include "dogen/yarn/test_data/helpers/node_td.hpp"
+#include "dogen/yarn/test_data/meta_model/name_td.hpp"
 
 namespace {
 
@@ -35,9 +35,9 @@ create_boost_shared_ptr_dogen_yarn_helpers_node(unsigned int position) {
     return r;
 }
 
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
+dogen::yarn::meta_model::name
+create_dogen_yarn_meta_model_name(const unsigned int position) {
+    return dogen::yarn::meta_model::name_generator::create(position);
 }
 
 std::list<boost::shared_ptr<dogen::yarn::helpers::node> > create_std_list_boost_shared_ptr_dogen_yarn_helpers_node(unsigned int position) {
@@ -59,7 +59,7 @@ node_generator::node_generator() : position_(0) { }
 void node_generator::
 populate(const unsigned int position, result_type& v) {
     v.parent(create_boost_shared_ptr_dogen_yarn_helpers_node(position + 0));
-    v.data(create_dogen_yarn_name(position + 1));
+    v.data(create_dogen_yarn_meta_model_name(position + 1));
     v.children(create_std_list_boost_shared_ptr_dogen_yarn_helpers_node(position + 2));
 }
 

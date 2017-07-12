@@ -26,7 +26,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
@@ -44,7 +44,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::list<model>
+std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {
     /*
      * Obtain the initial target, given the user options. The initial
@@ -76,7 +76,7 @@ model_generation_chain::transform(const context& ctx) {
      * Execute the assembly chain for each of the requested output
      * languages.
      */
-    std::list<model> r;
+    std::list<meta_model::model> r;
     for (const auto ol : target.output_languages())
         r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
 

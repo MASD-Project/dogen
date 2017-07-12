@@ -41,11 +41,11 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::list<boost::shared_ptr<yarn::element>>
-odb_options_factory::make(const yarn::intermediate_model& im) const {
+std::list<boost::shared_ptr<yarn::meta_model::element>>
+odb_options_factory::make(const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
-    std::list<boost::shared_ptr<yarn::element>> r;
+    std::list<boost::shared_ptr<yarn::meta_model::element>> r;
     for (const auto& pair : im.objects()) {
         const auto& o(pair.second);
 

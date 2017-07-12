@@ -29,8 +29,8 @@
 #include <string>
 #include <utility>
 #include <algorithm>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
 #include "dogen/yarn/serialization/helpers/decomposition_result_fwd_ser.hpp"
 
 namespace dogen {
@@ -46,8 +46,8 @@ public:
 
 public:
     decomposition_result(
-        const std::list<std::pair<std::string, dogen::yarn::name> >& names,
-        const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees);
+        const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names,
+        const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees);
 
 private:
     template<typename Archive>
@@ -57,15 +57,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::helpers::decomposition_result& v, unsigned int version);
 
 public:
-    const std::list<std::pair<std::string, dogen::yarn::name> >& names() const;
-    std::list<std::pair<std::string, dogen::yarn::name> >& names();
-    void names(const std::list<std::pair<std::string, dogen::yarn::name> >& v);
-    void names(const std::list<std::pair<std::string, dogen::yarn::name> >&& v);
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names() const;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names();
+    void names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v);
+    void names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v);
 
-    const std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees() const;
-    std::list<std::pair<std::string, dogen::yarn::name_tree> >& name_trees();
-    void name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >& v);
-    void name_trees(const std::list<std::pair<std::string, dogen::yarn::name_tree> >&& v);
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees() const;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees();
+    void name_trees(const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& v);
+    void name_trees(const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >&& v);
 
 public:
     bool operator==(const decomposition_result& rhs) const;
@@ -78,8 +78,8 @@ public:
     decomposition_result& operator=(decomposition_result other);
 
 private:
-    std::list<std::pair<std::string, dogen::yarn::name> > names_;
-    std::list<std::pair<std::string, dogen::yarn::name_tree> > name_trees_;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> > names_;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> > name_trees_;
 };
 
 } } }

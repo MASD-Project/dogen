@@ -24,11 +24,11 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
@@ -56,24 +56,26 @@ const std::string incorrect_meta_type("Type has incorrect meta_type");
 }
 
 using dogen::utility::test::contains_checker;
+using dogen::yarn::meta_model::origin_types;
+using dogen::yarn::meta_model::intermediate_model;
+using dogen::yarn::transforms::merge_transform;
 
 BOOST_AUTO_TEST_SUITE(merge_transform_tests)
 
 BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_n_distinct_models_with_one_object_each_results_in_n_objects_in_merged_model");
 
-    const auto tg(dogen::yarn::origin_types::target);
+    const auto tg(origin_types::target);
     const auto target(factory.make_single_type_model(tg, 0));
 
     const unsigned int n(5);
-    std::list<dogen::yarn::intermediate_model> ims;
-    const auto npr(dogen::yarn::origin_types::non_proxy_reference);
+    std::list<intermediate_model> ims;
+    const auto npr(origin_types::non_proxy_reference);
     for (unsigned int i(1); i < n; ++i) {
         const auto m(factory.make_single_type_model(npr, i));
         ims.push_back(m);
     }
 
-    using dogen::yarn::transforms::merge_transform;
     const auto combined(merge_transform::transform(target, ims));
 
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
@@ -127,11 +129,10 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
 
 BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     SETUP_TEST_LOG_SOURCE("merging_empty_model_results_in_empty_merged_model");
-    const auto tg(dogen::yarn::origin_types::target);
+    const auto tg(origin_types::target);
     const auto m(factory.make_empty_model(tg));
 
-    const std::list<dogen::yarn::intermediate_model> ims;
-    using dogen::yarn::transforms::merge_transform;
+    const std::list<intermediate_model> ims;
     const auto combined(merge_transform::transform(m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 

@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/scribble.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -41,7 +41,7 @@ namespace json {
 class dehydrator final {
 private:
     std::string tidy_up_string(std::string s) const;
-    bool has_elements(const intermediate_model& im) const;
+    bool has_elements(const meta_model::intermediate_model& im) const;
 
     template<typename Element>
     std::map<std::string, Element>
@@ -54,38 +54,41 @@ private:
 
 private:
     boost::optional<annotations::scribble_group> scribble_group_for_name(
-        const intermediate_model& im, const yarn::name& n) const;
+        const meta_model::intermediate_model& im,
+        const meta_model::name& n) const;
     boost::optional<annotations::scribble>
     scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
-        const yarn::name& n) const;
-    void dehydrate_name(const name& n, std::ostream& s) const;
-    void dehydrate_names(const std::list<name>& names, std::ostream& s) const;
+        const meta_model::name& n) const;
+    void dehydrate_name(const meta_model::name& n, std::ostream& s) const;
+    void dehydrate_names(const std::list<meta_model::name>& names,
+        std::ostream& s) const;
     void dehydrate_annotations(
         const boost::optional<annotations::scribble>& scribble,
         std::ostream& s) const;
     void dehydrate_element(
         const boost::optional<annotations::scribble_group>& sg,
-        const element& e, const std::string& meta_type, std::ostream& s) const;
+        const meta_model::element& e, const std::string& meta_type,
+        std::ostream& s) const;
     void dehydrate_attributes(
         const boost::optional<annotations::scribble_group>& sg,
-        const std::list<attribute>& attrs, std::ostream& s) const;
+        const std::list<meta_model::attribute>& attrs, std::ostream& s) const;
     void dehydrate_objects(const bool requires_leading_comma,
-        const intermediate_model& im, std::ostream& s) const;
+        const meta_model::intermediate_model& im, std::ostream& s) const;
     void dehydrate_concepts(const bool requires_leading_comma,
-        const intermediate_model& im, std::ostream& s) const;
+        const meta_model::intermediate_model& im, std::ostream& s) const;
     void dehydrate_modules(const bool requires_leading_comma,
-        const intermediate_model& im, std::ostream& s) const;
+        const meta_model::intermediate_model& im, std::ostream& s) const;
     void dehydrate_enumerations(const bool requires_leading_comma,
-        const intermediate_model& im,
+        const meta_model::intermediate_model& im,
         std::ostream& s) const;
     void dehydrate_primitives(const bool requires_leading_comma,
-        const intermediate_model& im, std::ostream& s) const;
+        const meta_model::intermediate_model& im, std::ostream& s) const;
     void dehydrate_exceptions(const bool requires_leading_comma,
-        const intermediate_model& im, std::ostream& s) const;
+        const meta_model::intermediate_model& im, std::ostream& s) const;
 
 public:
-    std::string dehydrate(const intermediate_model& im) const;
-    void dehydrate(const intermediate_model& im,
+    std::string dehydrate(const meta_model::intermediate_model& im) const;
+    void dehydrate(const meta_model::intermediate_model& im,
         const boost::filesystem::path& p) const;
 };
 

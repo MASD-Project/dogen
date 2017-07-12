@@ -24,8 +24,8 @@
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
@@ -47,7 +47,7 @@ public:
         annotations::scribble_group>& sgrps) : scribble_groups_(sgrps) {}
 
 private:
-    void update_scribble(const element& e) {
+    void update_scribble(const meta_model::element& e) {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
@@ -79,15 +79,15 @@ private:
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(yarn::module& m) { update_scribble(m); }
-    void operator()(yarn::concept& c) { update_scribble(c); }
-    void operator()(yarn::builtin& b) { update_scribble(b); }
-    void operator()(yarn::enumeration& e) { update_scribble(e); }
-    void operator()(yarn::primitive& p) { update_scribble(p); }
-    void operator()(yarn::object& o) { update_scribble(o); }
-    void operator()(yarn::exception& e) { update_scribble(e); }
-    void operator()(yarn::visitor& v) { update_scribble(v); }
+    void operator()(meta_model::element&) { }
+    void operator()(meta_model::module& m) { update_scribble(m); }
+    void operator()(meta_model::concept& c) { update_scribble(c); }
+    void operator()(meta_model::builtin& b) { update_scribble(b); }
+    void operator()(meta_model::enumeration& e) { update_scribble(e); }
+    void operator()(meta_model::primitive& p) { update_scribble(p); }
+    void operator()(meta_model::object& o) { update_scribble(o); }
+    void operator()(meta_model::exception& e) { update_scribble(e); }
+    void operator()(meta_model::visitor& v) { update_scribble(v); }
 
 private:
     std::unordered_map<std::string, annotations::scribble_group>&
@@ -96,7 +96,7 @@ private:
 
 class annotation_updater {
 public:
-    annotation_updater(const yarn::name& model_name,
+    annotation_updater(const meta_model::name& model_name,
         const std::unordered_map<std::string, annotations::annotation_group>&
         annotation_groups);
 
@@ -156,23 +156,27 @@ private:
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(yarn::module& m) { update_extensible(m); }
-    void operator()(yarn::concept& c) { update_extensible_and_stateful(c); }
-    void operator()(yarn::builtin& b) { update_extensible(b); }
-    void operator()(yarn::enumeration& e);
-    void operator()(yarn::primitive& p) { update_extensible(p); }
-    void operator()(yarn::object& o) { update_extensible_and_stateful(o); }
-    void operator()(yarn::exception& e) { update_extensible(e); }
-    void operator()(yarn::visitor& v) { update_extensible(v); }
+    void operator()(meta_model::element&) { }
+    void operator()(meta_model::module& m) { update_extensible(m); }
+    void operator()(meta_model::concept& c) {
+        update_extensible_and_stateful(c);
+    }
+    void operator()(meta_model::builtin& b) { update_extensible(b); }
+    void operator()(meta_model::enumeration& e);
+    void operator()(meta_model::primitive& p) { update_extensible(p); }
+    void operator()(meta_model::object& o) {
+        update_extensible_and_stateful(o);
+    }
+    void operator()(meta_model::exception& e) { update_extensible(e); }
+    void operator()(meta_model::visitor& v) { update_extensible(v); }
 
 private:
-    const yarn::name model_name_;
+    const meta_model::name model_name_;
     const std::unordered_map<std::string, annotations::annotation_group>&
     annotation_groups_;
 };
 
-void annotation_updater::operator()(yarn::enumeration& e) {
+void annotation_updater::operator()(meta_model::enumeration& e) {
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
 
@@ -204,12 +208,13 @@ void annotation_updater::operator()(yarn::enumeration& e) {
     }
 }
 
-annotation_updater::annotation_updater(const yarn::name& model_name,
+annotation_updater::annotation_updater(const meta_model::name& model_name,
     const std::unordered_map<std::string, annotations::annotation_group>&
     annotation_groups) : model_name_(model_name),
                          annotation_groups_(annotation_groups) {}
 
-void annotations_transform::update_scribble_groups(intermediate_model& im) {
+void annotations_transform::
+update_scribble_groups(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Updating scribble groups.";
 
     /*
@@ -217,7 +222,7 @@ void annotations_transform::update_scribble_groups(intermediate_model& im) {
      * effect the stereotypes.
      */
     scribble_updater u(im.scribble_groups());
-    yarn::elements_traversal(im, u);
+    meta_model::elements_traversal(im, u);
 
     BOOST_LOG_SEV(lg, debug) << "Updated scribble groups. Result: "
                              << im.scribble_groups();
@@ -225,7 +230,7 @@ void annotations_transform::update_scribble_groups(intermediate_model& im) {
 
 void annotations_transform::
 update_annotations(const annotations::annotation_groups_factory& agf,
-    intermediate_model& im) {
+    meta_model::intermediate_model& im) {
 
     /*
      * We first call the annotations group factory to convert our
@@ -238,11 +243,11 @@ update_annotations(const annotations::annotation_groups_factory& agf,
      * the yarn elements that own them with their annotations.
      */
     annotation_updater u(im.name(), annotation_groups);
-    yarn::elements_traversal(im, u);
+    meta_model::elements_traversal(im, u);
 }
 
 void annotations_transform::
-transform(const context& ctx, intermediate_model& im) {
+transform(const context& ctx, meta_model::intermediate_model& im) {
 
     BOOST_LOG_SEV(lg, debug) << "Starting annotations expansion for model: "
                              << im.name().id();

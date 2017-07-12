@@ -29,7 +29,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
@@ -196,7 +196,7 @@ public:
     /**
      * @brief Returns the model name derived from n.
      */
-    name model_name(const unsigned int n = 0) const;
+    meta_model::name model_name(const unsigned int n = 0) const;
 
 public:
     /**
@@ -204,7 +204,7 @@ public:
      * naming convention for model @e n.
      */
     /**@{*/
-    bool is_model_n(const unsigned int n, const name& name) const;
+    bool is_model_n(const unsigned int n, const meta_model::name& name) const;
     bool is_model_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
@@ -213,7 +213,8 @@ public:
      * naming convention for type @e n.
      */
     /**@{*/
-    bool is_type_name_n(const unsigned int n, const name& name) const;
+    bool is_type_name_n(const unsigned int n,
+        const meta_model::name& name) const;
     bool is_type_name_n(const unsigned int n, const std::string& name) const;
     /**@}*/
 
@@ -221,7 +222,8 @@ public:
      * @brief Returns true if the name matches the mock model factory
      * naming convention for module @e n.
      */
-    bool is_concept_name_n(const unsigned int n, const name& name) const;
+    bool is_concept_name_n(const unsigned int n,
+        const meta_model::name& name) const;
 
     /**
      * @brief Returns true if the name matches the mock model factory
@@ -234,72 +236,80 @@ public:
      * naming convention for type @e n, and the yarn naming convention
      * for visitors.
      */
-    bool is_type_name_n_visitor(const unsigned int n, const name& name) const;
+    bool is_type_name_n_visitor(const unsigned int n,
+        const meta_model::name& name) const;
 
     /**
      * @brief If required, adds a module for the model.
      */
     void handle_model_module(const bool add_model_module,
-        intermediate_model& m) const;
+        meta_model::intermediate_model& m) const;
 
 public:
     /**
      * @brief Creates a built-in.
      */
-    builtin make_builtin(const unsigned int i, const name& model_name,
-        const origin_types ot, const unsigned int module_n = 0) const;
+    meta_model::builtin make_builtin(const unsigned int i,
+        const meta_model::name& model_name, const meta_model::origin_types ot,
+        const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object.
      */
-    object make_value_object(const unsigned int i, const name& model_name,
-        const origin_types ot,
+    meta_model::object make_value_object(const unsigned int i,
+        const meta_model::name& model_name,
+        const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with an attribute
      */
-    object make_value_object_with_attribute(const unsigned int i,
-        const name& model_name,
-        const origin_types ot,
+    meta_model::object make_value_object_with_attribute(const unsigned int i,
+        const meta_model::name& model_name,
+        const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a value object with a model name based on @e i.
      */
-    object make_value_object(unsigned int i, const origin_types ot,
+    meta_model::object make_value_object(unsigned int i,
+        const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a concept.
      */
-    concept make_concept(const unsigned int i, const name& model_name,
-        const origin_types ot) const;
+    meta_model::concept make_concept(const unsigned int i,
+        const meta_model::name& model_name,
+        const meta_model::origin_types ot) const;
 
     /**
      * @brief Create an enumeration.
      */
-    enumeration make_enumeration(const unsigned int i,
-        const name& model_name, const origin_types ot,
+    meta_model::enumeration make_enumeration(const unsigned int i,
+        const meta_model::name& model_name, const meta_model::origin_types ot,
         const unsigned int module_n = 0) const;
 
     /**
      * @brief Create an exception.
      */
-    exception make_exception(const unsigned int i, const name& model_name,
-        const origin_types ot, const unsigned int module_n = 0) const;
+    meta_model::exception make_exception(const unsigned int i,
+        const meta_model::name& model_name,
+        const meta_model::origin_types ot,
+        const unsigned int module_n = 0) const;
 
     /**
      * @brief Create a module from a name.
      */
-    module make_module(const name& n, const origin_types ot,
+    meta_model::module make_module(const meta_model::name& n,
+        const meta_model::origin_types ot,
         const std::string& documentation = std::string()) const;
 
     /**
      * @brief Create a module from its components.
      */
-    module make_module(const unsigned int module_n,
-        const name& model_name, const origin_types ot,
+    meta_model::module make_module(const unsigned int module_n,
+        const meta_model::name& model_name, const meta_model::origin_types ot,
         const std::list<std::string>& internal_modules,
         const std::string& documentation) const;
 
@@ -307,22 +317,22 @@ public:
     /**
      * @brief Returns a name derived from the input parameters
      */
-    name make_name(const unsigned int model_n = 0,
+    meta_model::name make_name(const unsigned int model_n = 0,
         const unsigned int simple_n = 0) const;
 
     /**
      * @brief Builds a model with no types, concepts or modules.
      */
-    intermediate_model make_empty_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model make_empty_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
-    intermediate_model make_single_type_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model make_single_type_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
         const bool add_model_module = false) const;
@@ -331,8 +341,8 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n modules.
      */
-    intermediate_model make_single_type_model_in_module(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model make_single_type_model_in_module(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
         const unsigned int mod_n = 0,
@@ -342,10 +352,10 @@ public:
      * @brief Builds a model with a name derived from n, and a number
      * of types determined by type_n, inside mod_n module.
      */
-    intermediate_model make_multi_type_model(
+    meta_model::intermediate_model make_multi_type_model(
         const unsigned int n,
         const unsigned int type_n,
-        const origin_types ot = origin_types::target,
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const object_types objt = object_types::value_object,
         const unsigned int mod_n = 0,
         const bool add_model_module = false) const;
@@ -355,31 +365,33 @@ public:
      * @brief Builds a model with a concept, and a type that models
      * it.
      */
-    intermediate_model make_single_concept_model(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model make_single_concept_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines another
      * concept, and two types that model each concept.
      */
-    intermediate_model make_first_degree_concepts_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model make_first_degree_concepts_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    intermediate_model make_second_degree_concepts_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model make_second_degree_concepts_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with two base concepts and a concept that
      * refines both.
      */
-    intermediate_model make_multiple_inheritance_concepts_model(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model make_multiple_inheritance_concepts_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
@@ -387,47 +399,55 @@ public:
      * refine it, and a concept that refines both of these. Finally a
      * type last concept.
      */
-    intermediate_model make_diamond_inheritance_concepts_model(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model make_diamond_inheritance_concepts_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept.
      */
-    intermediate_model make_object_with_parent_that_models_concept(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model make_object_with_parent_that_models_concept(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
      * models a concept that refines a concept.
      */
-    intermediate_model make_object_with_parent_that_models_a_refined_concept(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model
+    make_object_with_parent_that_models_a_refined_concept(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    intermediate_model make_concept_that_refines_missing_concept(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model make_concept_that_refines_missing_concept(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    intermediate_model make_object_that_models_missing_concept(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model make_object_that_models_missing_concept(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief object that models concept with missing parent.
      */
-    intermediate_model make_object_that_models_concept_with_missing_parent(
-        const origin_types ot = origin_types::target, const unsigned int n = 0,
+    meta_model::intermediate_model
+    make_object_that_models_concept_with_missing_parent(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
         const bool add_model_module = false) const;
 
 public:
@@ -435,16 +455,17 @@ public:
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    intermediate_model object_with_both_transparent_and_opaque_associations(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model
+    object_with_both_transparent_and_opaque_associations(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with single attribute of a type existent in
      * current model.
      */
-    intermediate_model object_with_attribute(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model object_with_attribute(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const object_types objt = object_types::value_object,
         const attribute_types pt = attribute_types::value_object,
         const bool add_model_module = false) const;
@@ -453,52 +474,53 @@ public:
      * @brief Scenario: object with single attribute of a type existent in
      * a second model.
      */
-    std::array<intermediate_model, 2>
+    std::array<meta_model::intermediate_model, 2>
     object_with_attribute_type_in_different_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with attribute of missing type.
      */
-    intermediate_model object_with_missing_attribute_type(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model object_with_missing_attribute_type(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
-    intermediate_model object_with_parent_in_the_same_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model object_with_parent_in_the_same_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    intermediate_model object_with_missing_parent_in_the_same_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model object_with_missing_parent_in_the_same_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with a parent in a second model.
      */
-    std::array<intermediate_model, 2>
+    std::array<meta_model::intermediate_model, 2>
     object_with_parent_in_different_models(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three children.
      */
-    intermediate_model object_with_three_children_in_same_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model object_with_three_children_in_same_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three levels deep in inheritance tree
      * in current model.
      */
-    intermediate_model object_with_third_degree_parent_in_same_model(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model
+    object_with_third_degree_parent_in_same_model(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
 
@@ -506,15 +528,15 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * has missing parent.
      */
-    intermediate_model object_with_third_degree_parent_missing(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model object_with_third_degree_parent_missing(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object three levels deep in inheritance tree,
      * with parents in different models.
      */
-    std::array<intermediate_model, 4>
+    std::array<meta_model::intermediate_model, 4>
     object_with_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -523,7 +545,7 @@ public:
      * with parents in different models and a missing top-level
      * parent.
      */
-    std::array<intermediate_model, 4>
+    std::array<meta_model::intermediate_model, 4>
     object_with_missing_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -535,8 +557,9 @@ public:
      * @param repeat_group if true, adds two instances of the group,
      * otherwise just one.
      */
-    intermediate_model object_with_group_of_attributes_of_different_types(
-        const origin_types ot = origin_types::target,
+    meta_model::intermediate_model
+    object_with_group_of_attributes_of_different_types(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool repeat_group = false,
         const bool add_model_module = false) const;
 

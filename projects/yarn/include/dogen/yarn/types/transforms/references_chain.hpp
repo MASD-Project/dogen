@@ -27,8 +27,8 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -37,12 +37,12 @@ namespace transforms {
 
 class references_chain final {
 private:
-    static std::unordered_set<languages>
-    obtain_relevant_languages(const intermediate_model& target);
+    static std::unordered_set<meta_model::languages>
+    obtain_relevant_languages(const meta_model::intermediate_model& target);
 
 public:
-    static std::list<intermediate_model>
-    transform(const context& ctx, const intermediate_model& target);
+    static std::list<meta_model::intermediate_model>
+    transform(const context& ctx, const meta_model::intermediate_model& target);
 };
 
 } } }

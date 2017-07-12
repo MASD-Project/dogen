@@ -28,9 +28,9 @@
 #include <unordered_set>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
 
@@ -52,21 +52,21 @@ private:
 private:
     static std::unordered_set<std::string>
     update_and_collect_parent_ids(const helpers::indices& idx,
-        intermediate_model& im);
+        meta_model::intermediate_model& im);
 
     static void populate_properties_up_the_generalization_tree(
-        const type_group& tg, const yarn::name& leaf,
-        intermediate_model& im, yarn::object& o);
+        const type_group& tg, const meta_model::name& leaf,
+        meta_model::intermediate_model& im, meta_model::object& o);
 
     static void populate_generalizable_properties(const type_group& tg,
         const std::unordered_set<std::string>& parent_ids,
-        intermediate_model& im);
+        meta_model::intermediate_model& im);
 
-    static void sort_leaves(intermediate_model& im);
+    static void sort_leaves(meta_model::intermediate_model& im);
 
 public:
     static void transform(const context& ctx, const helpers::indices& idx,
-        intermediate_model& im);
+        meta_model::intermediate_model& im);
 };
 
 } } }

@@ -36,7 +36,8 @@ namespace formattables {
 class canonical_archetype_expander {
 private:
     void expand(const formatters::repository& frp,
-        formattables::element_properties& eprops, const yarn::element& e) const;
+        formattables::element_properties& eprops,
+        const yarn::meta_model::element& e) const;
 
 public:
     void expand(const formatters::repository& frp, model& fm) const;

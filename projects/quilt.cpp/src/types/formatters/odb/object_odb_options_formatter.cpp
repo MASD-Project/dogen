@@ -28,7 +28,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/throw_exception.hpp>
@@ -63,15 +63,16 @@ std::type_index object_odb_options_formatter::element_type_index() const {
     return r;
 }
 
-inclusion_support_types object_odb_options_formatter::inclusion_support_type() const {
+inclusion_support_types
+object_odb_options_formatter::inclusion_support_type() const {
     return inclusion_support_types::not_supported;
 }
 
 boost::filesystem::path object_odb_options_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
+    const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
     using namespace dogen::utility::log;
-    static logger
-        lg(logger_factory("quilt.cpp.formatters.odb.object_odb_options_formatter"));
+    static logger lg(logger_factory(
+            "quilt.cpp.formatters.odb.object_odb_options_formatter"));
 
         const std::string not_supported("Inclusion path is not supported: ");
 
@@ -80,19 +81,19 @@ boost::filesystem::path object_odb_options_formatter::inclusion_path(
 }
 
 boost::filesystem::path object_odb_options_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_odb_options(n, static_artefact());
 }
 
 std::list<std::string> object_odb_options_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
+    const yarn::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact object_odb_options_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& ooo(a.as<fabric::object_odb_options>(static_artefact(), e));

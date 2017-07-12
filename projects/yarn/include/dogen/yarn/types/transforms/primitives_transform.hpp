@@ -30,8 +30,8 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -51,10 +51,12 @@ private:
     friend std::ostream& operator<<(std::ostream& s, const type_group& v);
 
     static type_group make_type_group(const annotations::type_repository& atrp);
-    static void populate_from_annotations(const type_group& tg, primitive& p);
+    static void populate_from_annotations(const type_group& tg,
+        meta_model::primitive& p);
 
 public:
-    static void transform(const context& ctx, intermediate_model& im);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& im);
 };
 
 } } }

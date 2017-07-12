@@ -31,7 +31,7 @@
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
 #include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
@@ -58,14 +58,16 @@ private:
      *
      * @pre name must exist in path derivatives collection.
      */
-    boost::optional<directive_group> get_directive_group(const yarn::name& n,
+    boost::optional<directive_group>
+    get_directive_group(const yarn::meta_model::name& n,
         const std::string& archetype) const;
 
 public:
     /**
      * @brief Returns true if the formatter is enabled.
      */
-    bool is_enabled(const yarn::name& n, const std::string& archetype) const;
+    bool is_enabled(const yarn::meta_model::name& n,
+        const std::string& archetype) const;
 
 public:
     /**
@@ -82,8 +84,8 @@ public:
      * and name.
      */
     /**@{*/
-    void add(const yarn::name& n, const std::string& archetype);
-    void add(const boost::optional<yarn::name>& n,
+    void add(const yarn::meta_model::name& n, const std::string& archetype);
+    void add(const boost::optional<yarn::meta_model::name>& n,
         const std::string& archetype);
     /**@}*/
 
@@ -91,7 +93,7 @@ public:
      * @brief Adds the inclusion directives for the supplied
      * archetype, for each of the supplied names.
      */
-    void add(const std::list<yarn::name>& names,
+    void add(const std::list<yarn::meta_model::name>& names,
         const std::string& archetype);
 
 public:

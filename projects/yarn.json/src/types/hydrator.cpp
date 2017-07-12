@@ -27,10 +27,10 @@
 #include <boost/property_tree/json_parser.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/builtin.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
@@ -134,8 +134,9 @@ hydrator::read_scribble_group(const boost::property_tree::ptree& pt,
     return r;
 }
 
-void hydrator::insert_scribble_group(const yarn::name& owner,
-    const annotations::scribble_group& sg, intermediate_model& im) const {
+void hydrator::insert_scribble_group(const meta_model::name& owner,
+    const annotations::scribble_group& sg,
+    meta_model::intermediate_model& im) const {
 
     if (sg.parent().entries().empty() && sg.children().empty())
         return;
@@ -149,14 +150,14 @@ void hydrator::insert_scribble_group(const yarn::name& owner,
     }
 }
 
-void hydrator::read_and_insert_scribble_group(const yarn::name& owner,
+void hydrator::read_and_insert_scribble_group(const meta_model::name& owner,
     const annotations::scope_types st, const boost::property_tree::ptree& pt,
-    intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
     const auto sg(read_scribble_group(pt, st));
     insert_scribble_group(owner, sg, im);
 }
 
-void hydrator::read_and_insert_scribble(const yarn::name& owner,
+void hydrator::read_and_insert_scribble(const meta_model::name& owner,
     const annotations::scope_types st, const boost::property_tree::ptree& pt,
     annotations::scribble_group& sg) const {
 
@@ -196,7 +197,8 @@ read_stereotypes(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-name hydrator::read_name(const boost::property_tree::ptree& pt) const {
+meta_model::name
+hydrator::read_name(const boost::property_tree::ptree& pt) const {
     yarn::helpers::name_builder b;
     const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
@@ -209,8 +211,8 @@ name hydrator::read_name(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-name hydrator::read_name(const boost::property_tree::ptree& pt,
-    const name& model_name, const bool in_global_module) const {
+meta_model::name hydrator::read_name(const boost::property_tree::ptree& pt,
+    const meta_model::name& model_name, const bool in_global_module) const {
 
     /*
      * If we're not in the global module, we must be be in the
@@ -234,9 +236,9 @@ name hydrator::read_name(const boost::property_tree::ptree& pt,
     return r;
 }
 
-std::list<name>
+std::list<meta_model::name>
 hydrator::read_names(const boost::property_tree::ptree& pt) const {
-    std::list<name> r;
+    std::list<meta_model::name> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
         r.push_back(read_name(apt));
@@ -255,14 +257,14 @@ hydrator::read_documentation(const boost::property_tree::ptree& pt) const {
     return r;
 }
 
-std::vector<enumerator>
+std::vector<meta_model::enumerator>
 hydrator::read_enumerators(const boost::property_tree::ptree& pt,
     annotations::scribble_group& sg) const {
 
-    std::vector<enumerator> r;
+    std::vector<meta_model::enumerator> r;
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
-        enumerator en;
+        meta_model::enumerator en;
         const auto j(apt.find(name_key));
         if (j == apt.not_found()) {
             BOOST_LOG_SEV(lg, error) << missing_name;
@@ -278,14 +280,14 @@ hydrator::read_enumerators(const boost::property_tree::ptree& pt,
     return r;
 }
 
-std::list<attribute>
+std::list<meta_model::attribute>
 hydrator::read_attributes(const boost::property_tree::ptree& pt,
     annotations::scribble_group& sg) const {
-    std::list<attribute> r;
+    std::list<meta_model::attribute> r;
 
     for (auto i(pt.begin()); i != pt.end(); ++i) {
         const auto& apt(i->second);
-        attribute a;
+        meta_model::attribute a;
 
         const auto j(apt.find(name_key));
         if (j == apt.not_found()) {
@@ -305,7 +307,7 @@ hydrator::read_attributes(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::populate_element(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im, yarn::element& e) const {
+    meta_model::intermediate_model& im, meta_model::element& e) const {
 
     const auto in_global_module(pt.get(in_global_module_key, false));
     const auto i(pt.find(name_key));
@@ -314,7 +316,7 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
         BOOST_THROW_EXCEPTION(hydration_error(missing_name));
     }
 
-    yarn::name n(read_name(i->second, im.name(), in_global_module));
+    meta_model::name n(read_name(i->second, im.name(), in_global_module));
     const auto id(n.id());
 
     BOOST_LOG_SEV(lg, debug) << "Processing element: " << n.id();
@@ -325,9 +327,9 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_object(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::object o;
+    meta_model::object o;
     populate_element(pt, im, o);
 
     const auto ot(pt.get_optional<std::string>(object_type_key));
@@ -359,9 +361,9 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_builtin(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::builtin b;
+    meta_model::builtin b;
     populate_element(pt, im, b);
     const auto st(annotations::scope_types::entity);
     read_and_insert_scribble_group(b.name(), st, pt, im);
@@ -388,9 +390,9 @@ void hydrator::read_builtin(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_module(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::module m;
+    meta_model::module m;
     populate_element(pt, im, m);
     const auto st(annotations::scope_types::entity);
     read_and_insert_scribble_group(m.name(), st, pt, im);
@@ -405,9 +407,9 @@ void hydrator::read_module(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::enumeration e;
+    meta_model::enumeration e;
     populate_element(pt, im, e);
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
@@ -428,9 +430,9 @@ void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_primitive(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::primitive p;
+    meta_model::primitive p;
     populate_element(pt, im, p);
     const auto st(annotations::scope_types::entity);
     read_and_insert_scribble_group(p.name(), st, pt, im);
@@ -445,9 +447,9 @@ void hydrator::read_primitive(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_exception(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::exception e;
+    meta_model::exception e;
     populate_element(pt, im, e);
     const auto st(annotations::scope_types::entity);
     read_and_insert_scribble_group(e.name(), st, pt, im);
@@ -462,9 +464,9 @@ void hydrator::read_exception(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::read_concept(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
-    yarn::concept c;
+    meta_model::concept c;
     populate_element(pt, im, c);
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
@@ -491,7 +493,7 @@ void hydrator::read_concept(const boost::property_tree::ptree& pt,
 }
 
 void hydrator::dispatch_meta_type(const boost::property_tree::ptree& pt,
-    yarn::intermediate_model& im) const {
+    meta_model::intermediate_model& im) const {
 
     const auto s(pt.get<std::string>(meta_type_key));
     if (s == meta_type_object_value)
@@ -515,8 +517,8 @@ void hydrator::dispatch_meta_type(const boost::property_tree::ptree& pt,
     }
 }
 
-yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
-    yarn::intermediate_model r;
+meta_model::intermediate_model hydrator::read_stream(std::istream& s) const {
+    meta_model::intermediate_model r;
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
@@ -526,7 +528,7 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
     r.name(nf.build_model_name(mn, em));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
-    yarn::module m;
+    meta_model::module m;
     const auto st(annotations::scope_types::root_module);
     read_and_insert_scribble_group(r.name(), st, pt, r);
 
@@ -545,24 +547,24 @@ yarn::intermediate_model hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-yarn::object_types hydrator::
+meta_model::object_types hydrator::
 to_object_type(const boost::optional<std::string>& s) const {
     if (!s)
-        return yarn::object_types::invalid;
+        return meta_model::object_types::invalid;
 
     const auto ot(*s);
     if (ot == object_type_smart_pointer_value)
-        return yarn::object_types::smart_pointer;
+        return meta_model::object_types::smart_pointer;
     else if (ot == object_type_associative_container_value)
-        return yarn::object_types::associative_container;
+        return meta_model::object_types::associative_container;
     else if (ot == object_type_sequence_container_value)
-        return yarn::object_types::sequence_container;
+        return meta_model::object_types::sequence_container;
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
-intermediate_model
+meta_model::intermediate_model
 hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
@@ -583,7 +585,7 @@ hydrator::hydrate(std::istream& s) const {
     }
 }
 
-intermediate_model hydrator::
+meta_model::intermediate_model hydrator::
 hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;

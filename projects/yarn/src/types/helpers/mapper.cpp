@@ -21,8 +21,8 @@
 #include <boost/lexical_cast.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/types/attribute.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/helpers/mapping_error.hpp"
 #include "dogen/yarn/io/helpers/mapping_context_io.hpp"
 #include "dogen/yarn/types/helpers/mapper.hpp"
@@ -47,9 +47,10 @@ namespace helpers {
 mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
 
-const std::unordered_map<std::string, name>& mapper::translations_for_language(
-    const mapping_set& ms, const languages from, const languages to) const {
-    if (from == languages::upsilon) {
+const std::unordered_map<std::string, meta_model::name>&
+mapper::translations_for_language(const mapping_set& ms,
+    const meta_model::languages from, const meta_model::languages to) const {
+    if (from == meta_model::languages::upsilon) {
         const auto i(ms.by_upsilon_id().find(to));
         if (i != ms.by_upsilon_id().end())
             return i->second;
@@ -57,7 +58,7 @@ const std::unordered_map<std::string, name>& mapper::translations_for_language(
         const auto s(boost::lexical_cast<std::string>(to));
         BOOST_LOG_SEV(lg, error) << unsupported_lanugage << s;
         BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
-    } else if (from == languages::language_agnostic) {
+    } else if (from == meta_model::languages::language_agnostic) {
         const auto i(ms.by_language_agnostic_id().find(to));
         if (i != ms.by_upsilon_id().end())
             return i->second;
@@ -72,12 +73,13 @@ const std::unordered_map<std::string, name>& mapper::translations_for_language(
     BOOST_THROW_EXCEPTION(mapping_error(unsupported_lanugage + s));
 }
 
-std::unordered_map<std::string, name>
-mapper::injections_for_language(const mapping_set& ms, const languages l,
-    const intermediate_model& im) const {
+std::unordered_map<std::string, meta_model::name>
+mapper::injections_for_language(const mapping_set& ms,
+    const meta_model::languages l,
+    const meta_model::intermediate_model& im) const {
 
-    std::unordered_map<std::string, name> r;
-    const auto cpp(languages::cpp);
+    std::unordered_map<std::string, meta_model::name> r;
+    const auto cpp(meta_model::languages::cpp);
     if (l != cpp)
         return r;
 
@@ -106,9 +108,9 @@ mapper::injections_for_language(const mapping_set& ms, const languages l,
     return r;
 }
 
-mapping_context mapper::create_mapping_context(
-    const mapping_set& ms, const languages from, const languages to,
-    const intermediate_model& im) const {
+mapping_context mapper::create_mapping_context(const mapping_set& ms,
+    const meta_model::languages from, const meta_model::languages to,
+    const meta_model::intermediate_model& im) const {
     mapping_context r;
     r.translations(translations_for_language(ms, from, to));
     r.injections(injections_for_language(ms, to, im));
@@ -120,8 +122,8 @@ mapping_context mapper::create_mapping_context(
     return r;
 }
 
-name_tree mapper::walk_name_tree(const mapping_context& mc, const name_tree& nt,
-    const bool skip_injection) const {
+meta_model::name_tree mapper::walk_name_tree(const mapping_context& mc,
+    const meta_model::name_tree& nt, const bool skip_injection) const {
     const auto id(nt.current().id());
     if (mc.erasures().find(id) != mc.erasures().end()) {
         /*
@@ -149,7 +151,7 @@ name_tree mapper::walk_name_tree(const mapping_context& mc, const name_tree& nt,
      * parameter. We do not attempt injections if we are already under
      * an injection or else we would create an infinite loop.
      */
-    name_tree r;
+    meta_model::name_tree r;
     if (!skip_injection) {
         const auto i(mc.injections().find(id));
         if (i != mc.injections().end()) {
@@ -184,20 +186,22 @@ name_tree mapper::walk_name_tree(const mapping_context& mc, const name_tree& nt,
     return r;
 }
 
-void mapper::
-map_attributes(const mapping_context& mc, std::list<attribute>& attrs) const {
+void mapper::map_attributes(const mapping_context& mc,
+    std::list<meta_model::attribute>& attrs) const {
     for (auto& attr : attrs)
         attr.parsed_type(walk_name_tree(mc, attr.parsed_type()));
 }
 
-bool mapper::is_mappable(const languages from, const languages to) {
+bool mapper::
+is_mappable(const meta_model::languages from, const meta_model::languages to) {
     return from == to ||
-        from == languages::upsilon ||
-        from == languages::language_agnostic;
+        from == meta_model::languages::upsilon ||
+        from == meta_model::languages::language_agnostic;
 }
 
-intermediate_model mapper::map(const languages from, const languages to,
-    const intermediate_model& im) const {
+meta_model::intermediate_model
+mapper::map(const meta_model::languages from, const meta_model::languages to,
+    const meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Started mapping. Model: " << im.name().id();
     BOOST_LOG_SEV(lg, debug) << "Mapping from: " << from << " to: " << to;
     if (from == to) {

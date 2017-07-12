@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
@@ -32,15 +32,15 @@ namespace fabric {
 msbuild_targets::msbuild_targets(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties,
+    const dogen::yarn::meta_model::element_properties& element_properties,
     const dogen::quilt::cpp::fabric::odb_targets& odb_targets)
-    : dogen::yarn::element(
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -52,28 +52,28 @@ msbuild_targets::msbuild_targets(
       element_properties),
       odb_targets_(odb_targets) { }
 
-void msbuild_targets::accept(const dogen::yarn::element_visitor& v) const {
+void msbuild_targets::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void msbuild_targets::accept(dogen::yarn::element_visitor& v) const {
+void msbuild_targets::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void msbuild_targets::accept(const dogen::yarn::element_visitor& v) {
+void msbuild_targets::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void msbuild_targets::accept(dogen::yarn::element_visitor& v) {
+void msbuild_targets::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -84,27 +84,27 @@ void msbuild_targets::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::msbuild_targets\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
       << "\"odb_targets\": " << odb_targets_
       << " }";
 }
 
 void msbuild_targets::swap(msbuild_targets& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
     swap(odb_targets_, other.odb_targets_);
 }
 
-bool msbuild_targets::equals(const dogen::yarn::element& other) const {
+bool msbuild_targets::equals(const dogen::yarn::meta_model::element& other) const {
     const msbuild_targets* const p(dynamic_cast<const msbuild_targets* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool msbuild_targets::operator==(const msbuild_targets& rhs) const {
-    return dogen::yarn::element::compare(rhs) &&
+    return dogen::yarn::meta_model::element::compare(rhs) &&
         odb_targets_ == rhs.odb_targets_;
 }
 

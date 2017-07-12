@@ -68,7 +68,7 @@
         <dia:point val="3,3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,2.95;24.74,8.75"/>
+        <dia:rectangle val="2.95,2.95;24.74,11.15"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -80,7 +80,7 @@
         <dia:real val="21.690000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.7000000000000002"/>
+        <dia:real val="8.0999999999999996"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -545,17 +545,17 @@
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="67.68,19.4"/>
+        <dia:point val="68.065,19.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.93,18.65;74.6475,29.8"/>
+        <dia:rectangle val="67.315,18.65;74.6475,29.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="67.68,19.4"/>
-        <dia:point val="67.68,24"/>
+        <dia:point val="68.065,19.4"/>
+        <dia:point val="68.065,24"/>
         <dia:point val="74.4475,24"/>
         <dia:point val="74.4475,29"/>
       </dia:attribute>
@@ -654,13 +654,13 @@
         <dia:point val="41,15"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.95,14.95;67.73,19.45"/>
+        <dia:rectangle val="40.95,14.95;68.115,19.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="41,15"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="26.68"/>
+        <dia:real val="27.064999999999998"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -762,7 +762,7 @@
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::intermediate_model#</dia:string>
+            <dia:string>#yarn::mata_model::intermediate_model#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

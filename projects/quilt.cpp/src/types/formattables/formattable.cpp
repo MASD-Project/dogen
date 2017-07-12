@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::yarn::element>& lhs,
-const boost::shared_ptr<dogen::yarn::element>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::element>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::element>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -36,8 +36,8 @@ namespace cpp {
 namespace formattables {
 
 formattable::formattable(
-    const boost::shared_ptr<dogen::yarn::element>& master_segment,
-    const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments,
+    const boost::shared_ptr<dogen::yarn::meta_model::element>& master_segment,
+    const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& all_segments,
     const dogen::quilt::cpp::formattables::element_properties& element_properties)
     : master_segment_(master_segment),
       all_segments_(all_segments),
@@ -62,35 +62,35 @@ formattable& formattable::operator=(formattable other) {
     return *this;
 }
 
-const boost::shared_ptr<dogen::yarn::element>& formattable::master_segment() const {
+const boost::shared_ptr<dogen::yarn::meta_model::element>& formattable::master_segment() const {
     return master_segment_;
 }
 
-boost::shared_ptr<dogen::yarn::element>& formattable::master_segment() {
+boost::shared_ptr<dogen::yarn::meta_model::element>& formattable::master_segment() {
     return master_segment_;
 }
 
-void formattable::master_segment(const boost::shared_ptr<dogen::yarn::element>& v) {
+void formattable::master_segment(const boost::shared_ptr<dogen::yarn::meta_model::element>& v) {
     master_segment_ = v;
 }
 
-void formattable::master_segment(const boost::shared_ptr<dogen::yarn::element>&& v) {
+void formattable::master_segment(const boost::shared_ptr<dogen::yarn::meta_model::element>&& v) {
     master_segment_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::yarn::element> >& formattable::all_segments() const {
+const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& formattable::all_segments() const {
     return all_segments_;
 }
 
-std::list<boost::shared_ptr<dogen::yarn::element> >& formattable::all_segments() {
+std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& formattable::all_segments() {
     return all_segments_;
 }
 
-void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v) {
+void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v) {
     all_segments_ = v;
 }
 
-void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v) {
+void formattable::all_segments(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >&& v) {
     all_segments_ = std::move(v);
 }
 

@@ -112,7 +112,7 @@ private:
         const annotations::annotation& o) const;
 
 private:
-    bool is_element_disabled(const yarn::element& e) const;
+    bool is_element_disabled(const yarn::meta_model::element& e) const;
 
     void compute_enablement(
         const global_enablement_configurations_type& gcs,

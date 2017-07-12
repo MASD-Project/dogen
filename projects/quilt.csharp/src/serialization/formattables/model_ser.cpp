@@ -30,7 +30,7 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/model_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/formattable_ser.hpp"
 #include "dogen/quilt.csharp/serialization/formattables/aspect_properties_ser.hpp"

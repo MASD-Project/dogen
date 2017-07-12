@@ -22,7 +22,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt/types/registrar_error.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/quilt/types/kernel_registrar.hpp"
 
 namespace {
@@ -63,7 +63,7 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
 }
 
 std::shared_ptr<kernel_interface> kernel_registrar::
-kernel_for_language(const yarn::languages l) const {
+kernel_for_language(const yarn::meta_model::languages l) const {
     const auto i(kernels_by_language_.find(l));
     if (i == kernels_by_language_.end())
         return std::shared_ptr<kernel_interface>();
@@ -71,7 +71,8 @@ kernel_for_language(const yarn::languages l) const {
     return i->second;
 }
 
-const std::unordered_map<yarn::languages, std::shared_ptr<kernel_interface>>&
+const std::unordered_map<yarn::meta_model::languages, std::
+                         shared_ptr<kernel_interface>>&
 kernel_registrar::kernels_by_language() const {
     return kernels_by_language_;
 }

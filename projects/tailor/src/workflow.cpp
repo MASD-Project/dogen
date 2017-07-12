@@ -107,7 +107,7 @@ void workflow::tailor(const options::tailoring_options& o) const {
 
     using yarn::transforms::exogenous_model_chain;
     auto im(exogenous_model_chain::transform(o.target()));
-    im.origin_type(yarn::origin_types::target);
+    im.origin_type(yarn::meta_model::origin_types::target);
     exogenous_model_chain::transform(im, o.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";

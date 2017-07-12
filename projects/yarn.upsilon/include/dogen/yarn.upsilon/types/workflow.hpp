@@ -33,8 +33,8 @@
 #include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/model.hpp"
 #include "dogen/upsilon/types/output.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -46,13 +46,13 @@ private:
      * @brief Obtains a list of output languages from the upsilon
      * configuration.
      */
-    std::list<languages> obtain_output_languages(
+    std::list<yarn::meta_model::languages> obtain_output_languages(
         const std::vector<dogen::upsilon::output>& outputs) const;
 
     /**
      * @brief Creates a map of schema names to yarn model names.
      */
-    std::unordered_map<std::string, dogen::yarn::name>
+    std::unordered_map<std::string, yarn::meta_model::name>
     map_schema_name_to_model_name(const dogen::upsilon::model& um) const;
 
     /**
@@ -66,20 +66,21 @@ private:
      * @brief Creates an empty yarn model with the basic properties
      * set.
      */
-    yarn::intermediate_model
+    yarn::meta_model::intermediate_model
     create_model(const dogen::upsilon::model& um) const;
 
     /**
      * @brief Populates the yarn model with all the upsilon types.
      */
     void populate_model(const dogen::upsilon::model& um,
-        const std::unordered_map<std::string, dogen::yarn::name>&
+        const std::unordered_map<std::string, yarn::meta_model::name>&
         schema_name_to_model_name,
         const std::unordered_map<std::string, dogen::upsilon::name>&
-        collection_names, yarn::intermediate_model& im) const;
+        collection_names, yarn::meta_model::intermediate_model& im) const;
 
 public:
-    yarn::intermediate_model execute(const dogen::upsilon::model& um) const;
+    yarn::meta_model::intermediate_model
+    execute(const dogen::upsilon::model& um) const;
 };
 
 } } }

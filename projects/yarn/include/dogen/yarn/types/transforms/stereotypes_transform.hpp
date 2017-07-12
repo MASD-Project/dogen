@@ -27,10 +27,10 @@
 
 #include <list>
 #include <unordered_map>
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/hash/location_hash.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/hash/meta_model/location_hash.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -51,17 +51,19 @@ private:
 
 private:
     struct visitor_details {
-        visitor_details(const name& b) : base(b) { }
-        visitor_details(const name& b, const name& d) : base(b), derived(d) { }
+        visitor_details(const meta_model::name& b) : base(b) { }
+        visitor_details(const meta_model::name& b, const meta_model::name& d) :
+            base(b), derived(d) { }
 
-        name base;
-        boost::optional<name> derived;
+        meta_model::name base;
+        boost::optional<meta_model::name> derived;
     };
 
-    static std::unordered_map<location, std::list<name>>
-    bucket_leaves_by_location(const std::list<name>& leaves);
+    static std::unordered_map<meta_model::location, std::list<meta_model::name>>
+    bucket_leaves_by_location(const std::list<meta_model::name>& leaves);
 
-    static void add_visitor_to_model(const visitor& v, intermediate_model& im);
+    static void add_visitor_to_model(const meta_model::visitor& v,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Create a visitor for the object o.
@@ -71,43 +73,46 @@ private:
      *
      * @pre leaves must not be empty.
      */
-    static visitor create_visitor(const object& o, const location& l,
-        const origin_types ot, const std::list<name>& leaves);
+    static meta_model::visitor create_visitor(const meta_model::object& o,
+        const meta_model::location& l, const meta_model::origin_types ot,
+        const std::list<meta_model::name>& leaves);
 
     /**
      * @brief Injects an accept operation for the given visitor, to
      * the supplied object and all its leaves.
      */
-    static void update_visited_leaves(const std::list<name>& leaves,
-        const visitor_details& vd, intermediate_model& im);
+    static void update_visited_leaves(const std::list<meta_model::name>& leaves,
+        const visitor_details& vd, meta_model::intermediate_model& im);
 
     /**
      * @brief Performs the expansion of the visitable stereotype.
      */
-    static void expand_visitable(object& o, intermediate_model& im);
+    static void expand_visitable(meta_model::object& o,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Try to expand the stereotype as a concept. Returns true
      * on success, false otherwise.
      */
-    static bool try_expand_concept(
-        const std::string& s, object& o, const intermediate_model& im);
+    static bool try_expand_concept(const std::string& s, meta_model::object& o,
+        const meta_model::intermediate_model& im);
 
     /**
      * @brief Expands all stereotypes for the object.
      */
-    static void expand(object& o, intermediate_model& im);
+    static void expand(meta_model::object& o,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Expands all stereotypes for the primitive.
      */
-    static void expand(primitive& p);
+    static void expand(meta_model::primitive& p);
 
 public:
     /**
      * @brief Expands all stereotypes used in model.
      */
-    static void transform(intermediate_model& im);
+    static void transform(meta_model::intermediate_model& im);
 };
 
 } } }

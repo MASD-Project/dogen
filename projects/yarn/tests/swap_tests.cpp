@@ -34,7 +34,8 @@ const std::string test_suite("swap_tests");
 
 }
 
-using namespace dogen::yarn;
+using namespace dogen::yarn::helpers;
+using namespace dogen::yarn::meta_model;
 using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(swap_tests)
@@ -44,7 +45,7 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     test_swap<origin_types_generator>();
     test_swap<name_tree_generator>();
-    test_swap<helpers::node_generator>();
+    test_swap<node_generator>();
     test_swap<attribute_generator>();
     test_swap<name_generator>();
     test_swap<builtin_generator>();

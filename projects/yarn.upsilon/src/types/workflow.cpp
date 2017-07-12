@@ -23,10 +23,10 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/origin_types.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/module.hpp"
 #include "dogen/upsilon/types/type_visitor.hpp"
 #include "dogen/upsilon/io/target_types_io.hpp"
 #include "dogen/upsilon/io/name_io.hpp"
@@ -82,10 +82,11 @@ collection_accumulator::result() const {
 
 class model_populator : public dogen::upsilon::type_visitor {
 public:
-    model_populator(const std::unordered_map<std::string, dogen::yarn::name>&
+    model_populator(
+        const std::unordered_map<std::string, yarn::meta_model::name>&
         schema_name_to_model_name,
         const std::unordered_map<std::string, dogen::upsilon::name>&
-        collection_names, yarn::intermediate_model& im);
+        collection_names, yarn::meta_model::intermediate_model& im);
 
 private:
     template<typename Nameable>
@@ -107,15 +108,15 @@ public:
     void visit(const dogen::upsilon::primitive& p);
 
 private:
-    yarn::intermediate_model& model_;
+    yarn::meta_model::intermediate_model& model_;
     const transformer transformer_;
 };
 
 model_populator::
-model_populator(const std::unordered_map<std::string, dogen::yarn::name>&
+model_populator(const std::unordered_map<std::string, yarn::meta_model::name>&
     schema_name_to_model_name,
     const std::unordered_map<std::string, dogen::upsilon::name>&
-    collection_names, yarn::intermediate_model& im)
+    collection_names, yarn::meta_model::intermediate_model& im)
     : model_(im),
       transformer_(im.name(), schema_name_to_model_name, collection_names) {}
 
@@ -134,16 +135,16 @@ void model_populator::visit(const dogen::upsilon::primitive& p) {
     insert(b, model_.builtins());
 }
 
-std::list<languages> workflow::obtain_output_languages(
+std::list<yarn::meta_model::languages> workflow::obtain_output_languages(
     const std::vector<dogen::upsilon::output>& outputs) const {
-    std::list<languages> r;
+    std::list<yarn::meta_model::languages> r;
     using dogen::upsilon::target_types;
     for (const auto& o : outputs) {
         for (const auto& rep : o.representations()) {
             if (rep.target() == target_types::cpp)
-                r.push_back(languages::cpp);
+                r.push_back(yarn::meta_model::languages::cpp);
             else if (rep.target() == target_types::cs)
-                r.push_back(languages::csharp);
+                r.push_back(meta_model::languages::csharp);
             else if (rep.target() == target_types::java) {
                 // FIXME: skip java for now as we do not have a model
                 // FIXME: or mappings for it.
@@ -183,9 +184,9 @@ obtain_collection_names(const dogen::upsilon::model& um) const {
     return ca.result();
 }
 
-std::unordered_map<std::string, dogen::yarn::name>
+std::unordered_map<std::string, yarn::meta_model::name>
 workflow::map_schema_name_to_model_name(const dogen::upsilon::model& um) const {
-    std::unordered_map<std::string, dogen::yarn::name> r;
+    std::unordered_map<std::string, yarn::meta_model::name> r;
 
     yarn::helpers::name_factory nf;
     for (const auto& pair : um.schemas()) {
@@ -202,7 +203,7 @@ workflow::map_schema_name_to_model_name(const dogen::upsilon::model& um) const {
     return r;
 }
 
-yarn::intermediate_model
+yarn::meta_model::intermediate_model
 workflow::create_model(const dogen::upsilon::model& um) const {
     if (um.config().outputs().size() != 1) {
         const auto gs(um.config().file_name().generic_string());
@@ -210,8 +211,8 @@ workflow::create_model(const dogen::upsilon::model& um) const {
         BOOST_THROW_EXCEPTION(workflow_error(incorrect_number_of_outputs + gs));
     }
 
-    yarn::intermediate_model r;
-    r.input_language(yarn::languages::upsilon);
+    yarn::meta_model::intermediate_model r;
+    r.input_language(yarn::meta_model::languages::upsilon);
 
     const auto& outputs(um.config().outputs());
     const auto& output(outputs[0]);
@@ -219,12 +220,12 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     yarn::helpers::name_factory nf;
     const auto n(nf.build_model_name(output.schema_name()));
     r.name(n);
-    r.origin_type(origin_types::target);
+    r.origin_type(yarn::meta_model::origin_types::target);
     r.output_languages(obtain_output_languages(outputs));
 
-    yarn::module root_module;
+    yarn::meta_model::module root_module;
     root_module.name(n);
-    root_module.origin_type(origin_types::target);
+    root_module.origin_type(yarn::meta_model::origin_types::target);
 
     r.modules()[n.id()] = root_module;
 
@@ -232,10 +233,10 @@ workflow::create_model(const dogen::upsilon::model& um) const {
 }
 
 void workflow::populate_model(const dogen::upsilon::model& um,
-    const std::unordered_map<std::string, dogen::yarn::name>&
+    const std::unordered_map<std::string, yarn::meta_model::name>&
     schema_name_to_model_name,
     const std::unordered_map<std::string, dogen::upsilon::name>&
-    collection_names, yarn::intermediate_model& im) const {
+    collection_names, yarn::meta_model::intermediate_model& im) const {
 
     model_populator mp(schema_name_to_model_name, collection_names, im);
     for (const auto& pair : um.schemas()) {
@@ -253,7 +254,7 @@ void workflow::populate_model(const dogen::upsilon::model& um,
     }
 }
 
-yarn::intermediate_model
+yarn::meta_model::intermediate_model
 workflow::execute(const dogen::upsilon::model& um) const {
     BOOST_LOG_SEV(lg, debug) << "Executing workflow on upsilon model. Config: "
                              << um.config().file_name().generic_string();

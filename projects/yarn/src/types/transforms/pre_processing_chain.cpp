@@ -19,7 +19,8 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
@@ -27,7 +28,6 @@
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
-#include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 
 namespace {
@@ -41,9 +41,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool pre_processing_chain::
-is_language_relevant(const std::unordered_set<languages>& relevant_languages,
-    const intermediate_model& im) {
+bool pre_processing_chain::is_language_relevant(
+    const std::unordered_set<meta_model::languages>& relevant_languages,
+    const meta_model::intermediate_model& im) {
     const auto l(im.input_language());
     const auto i(relevant_languages.find(l));
     if (i == relevant_languages.end()) {
@@ -61,8 +61,8 @@ is_language_relevant(const std::unordered_set<languages>& relevant_languages,
     return true;
 }
 
-void pre_processing_chain::
-apply_first_set_of_transforms(const context& ctx, intermediate_model& im) {
+void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
+    meta_model::intermediate_model& im) {
     /*
      * We must transform annotations before we transform modules to
      * ensure the root module is populated with entries before being
@@ -79,8 +79,8 @@ apply_first_set_of_transforms(const context& ctx, intermediate_model& im) {
     language_transform::transform(ctx, im);
 }
 
-void pre_processing_chain::
-apply_second_set_of_transforms(const context& ctx, intermediate_model& im) {
+void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
+    meta_model::intermediate_model& im) {
     /*
      * There are no particular dependencies on the next set of
      * transforms.
@@ -102,14 +102,14 @@ apply_second_set_of_transforms(const context& ctx, intermediate_model& im) {
 }
 
 void pre_processing_chain::
-transform(const context& ctx, intermediate_model& im) {
+transform(const context& ctx, meta_model::intermediate_model& im) {
     apply_first_set_of_transforms(ctx, im);
     apply_second_set_of_transforms(ctx, im);
 }
 
 bool pre_processing_chain::try_transform(const context& ctx,
-    const std::unordered_set<languages>& relevant_languages,
-    intermediate_model& im) {
+    const std::unordered_set<meta_model::languages>& relevant_languages,
+    meta_model::intermediate_model& im) {
     /*
      * We must apply the first set of transforms because language
      * expansion is required.

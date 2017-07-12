@@ -28,7 +28,7 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
@@ -63,7 +63,8 @@ public:
     static external_transform_registrar& registrar();
 
 public:
-    static void transform(const context& ctx, intermediate_model& im);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& im);
 
 private:
     static std::shared_ptr<external_transform_registrar> registrar_;

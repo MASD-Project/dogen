@@ -28,9 +28,9 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/hash/languages_hash.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/mapping_value.hpp"
+#include "dogen/yarn/hash/meta_model/languages_hash.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_fwd_ser.hpp"
 
 namespace dogen {
@@ -50,7 +50,7 @@ public:
 public:
     mapping(
         const std::string& lam_id,
-        const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& by_language);
+        const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& by_language);
 
 private:
     template<typename Archive>
@@ -74,10 +74,10 @@ public:
      * @brief Values of the mapping, by language.
      */
     /**@{*/
-    const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& by_language() const;
-    std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& by_language();
-    void by_language(const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& v);
-    void by_language(const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>&& v);
+    const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& by_language() const;
+    std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& by_language();
+    void by_language(const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& v);
+    void by_language(const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>&& v);
     /**@}*/
 
 public:
@@ -92,7 +92,7 @@ public:
 
 private:
     std::string lam_id_;
-    std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value> by_language_;
+    std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value> by_language_;
 };
 
 } } }

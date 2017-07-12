@@ -27,11 +27,11 @@ inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
 }
 
 boost::filesystem::path {{class.simple_name}}::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path {{class.simple_name}}::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }

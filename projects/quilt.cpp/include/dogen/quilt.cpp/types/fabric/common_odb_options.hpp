@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include <string>
 #include <algorithm>
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/common_odb_options_fwd_ser.hpp"
 
 namespace dogen {
@@ -37,7 +37,7 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class common_odb_options final : public dogen::yarn::element {
+class common_odb_options final : public dogen::yarn::meta_model::element {
 public:
     common_odb_options() = default;
     common_odb_options(const common_odb_options&) = default;
@@ -49,13 +49,13 @@ public:
     common_odb_options(
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::name& name,
-        const dogen::yarn::origin_types origin_type,
-        const boost::optional<dogen::yarn::name>& contained_by,
+        const dogen::yarn::meta_model::name& name,
+        const dogen::yarn::meta_model::origin_types origin_type,
+        const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const dogen::yarn::element_properties& element_properties,
+        const dogen::yarn::meta_model::element_properties& element_properties,
         const std::string& sql_name_case,
         const std::list<std::string>& databases);
 
@@ -67,12 +67,12 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::fabric::common_odb_options& v, unsigned int version);
 
 public:
-    using dogen::yarn::element::accept;
+    using dogen::yarn::meta_model::element::accept;
 
-    virtual void accept(const dogen::yarn::element_visitor& v) const override;
-    virtual void accept(dogen::yarn::element_visitor& v) const override;
-    virtual void accept(const dogen::yarn::element_visitor& v) override;
-    virtual void accept(dogen::yarn::element_visitor& v) override;
+    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::yarn::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::yarn::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -94,7 +94,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::element& other) const override;
+    bool equals(const dogen::yarn::meta_model::element& other) const override;
 
 public:
     void swap(common_odb_options& other) noexcept;

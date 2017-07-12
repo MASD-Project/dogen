@@ -28,7 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/mapping_value.hpp"
 #include "dogen/yarn/types/helpers/mapping.hpp"
 
@@ -38,7 +38,7 @@ namespace helpers {
 
 class mappings_validator final {
 private:
-    void validate(const languages l, const mapping_value& mv) const;
+    void validate(const meta_model::languages l, const mapping_value& mv) const;
     void validate(const mapping& m) const;
 
 public:

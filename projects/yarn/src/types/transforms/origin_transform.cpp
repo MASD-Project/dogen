@@ -23,7 +23,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
@@ -46,7 +46,7 @@ namespace {
 
 class updater {
 public:
-    explicit updater(const origin_types ot) : origin_types_(ot) {}
+    explicit updater(const meta_model::origin_types ot) : origin_types_(ot) {}
 
 public:
     template<typename DeterminableOrigin>
@@ -54,18 +54,18 @@ public:
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(yarn::module& m) { update(m); }
-    void operator()(yarn::concept& c) { update(c); }
-    void operator()(yarn::builtin& b) { update(b); }
-    void operator()(yarn::enumeration& e) { update(e); }
-    void operator()(yarn::primitive& p) { update(p); }
-    void operator()(yarn::object& o) { update(o); }
-    void operator()(yarn::exception& e) { update(e); }
-    void operator()(yarn::visitor& v) { update(v); }
+    void operator()(meta_model::element&) { }
+    void operator()(meta_model::module& m) { update(m); }
+    void operator()(meta_model::concept& c) { update(c); }
+    void operator()(meta_model::builtin& b) { update(b); }
+    void operator()(meta_model::enumeration& e) { update(e); }
+    void operator()(meta_model::primitive& p) { update(p); }
+    void operator()(meta_model::object& o) { update(o); }
+    void operator()(meta_model::exception& e) { update(e); }
+    void operator()(meta_model::visitor& v) { update(v); }
 
 private:
-    const origin_types origin_types_;
+    const meta_model::origin_types origin_types_;
 };
 
 }
@@ -80,7 +80,7 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 bool origin_transform::
-is_proxy_model(const type_group& tg, const intermediate_model& im) {
+is_proxy_model(const type_group& tg, const meta_model::intermediate_model& im) {
     const auto& o(im.root_module().annotation());
     const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
@@ -89,9 +89,10 @@ is_proxy_model(const type_group& tg, const intermediate_model& im) {
     return r;
 }
 
-origin_types
-origin_transform::compute_origin_types(const intermediate_model& im,
+meta_model::origin_types
+origin_transform::compute_origin_types(const meta_model::intermediate_model& im,
     const bool is_proxy_model) {
+    using meta_model::origin_types;
     if (is_proxy_model && im.origin_type() == origin_types::target) {
         const auto& id(im.name().id());
         BOOST_LOG_SEV(lg, error) << target_cannot_be_proxy << id;
@@ -107,14 +108,15 @@ origin_transform::compute_origin_types(const intermediate_model& im,
     return origin_types::non_proxy_reference;
 }
 
-void origin_transform::transform(const context& ctx, intermediate_model& im) {
+void origin_transform::
+transform(const context& ctx, meta_model::intermediate_model& im) {
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ipm(is_proxy_model(tg, im));
     const auto ot(compute_origin_types(im, ipm));
     im.origin_type(ot);
 
     updater g(ot);
-    yarn::elements_traversal(im, g);
+    meta_model::elements_traversal(im, g);
 }
 
 } } }

@@ -18,13 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::yarn::element>& lhs,
-const boost::shared_ptr<dogen::yarn::element>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::element>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::element>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -37,7 +37,7 @@ namespace formattables {
 
 formattable::formattable(
     const dogen::quilt::csharp::formattables::element_properties& element_properties,
-    const boost::shared_ptr<dogen::yarn::element>& element)
+    const boost::shared_ptr<dogen::yarn::meta_model::element>& element)
     : element_properties_(element_properties),
       element_(element) { }
 
@@ -74,19 +74,19 @@ void formattable::element_properties(const dogen::quilt::csharp::formattables::e
     element_properties_ = std::move(v);
 }
 
-const boost::shared_ptr<dogen::yarn::element>& formattable::element() const {
+const boost::shared_ptr<dogen::yarn::meta_model::element>& formattable::element() const {
     return element_;
 }
 
-boost::shared_ptr<dogen::yarn::element>& formattable::element() {
+boost::shared_ptr<dogen::yarn::meta_model::element>& formattable::element() {
     return element_;
 }
 
-void formattable::element(const boost::shared_ptr<dogen::yarn::element>& v) {
+void formattable::element(const boost::shared_ptr<dogen::yarn::meta_model::element>& v) {
     element_ = v;
 }
 
-void formattable::element(const boost::shared_ptr<dogen::yarn::element>&& v) {
+void formattable::element(const boost::shared_ptr<dogen::yarn::meta_model::element>&& v) {
     element_ = std::move(v);
 }
 

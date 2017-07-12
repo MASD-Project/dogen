@@ -39,7 +39,8 @@ const std::string test_suite("serialization_tests");
 
 }
 
-using namespace dogen::yarn;
+using namespace dogen::yarn::helpers;
+using namespace dogen::yarn::meta_model;
 using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(serialization_tests)
@@ -50,7 +51,7 @@ BOOST_AUTO_TEST_CASE(validate_serialization) {
     roundtrip_type<object_generator>();
     roundtrip_type<origin_types_generator>();
     roundtrip_type<name_tree_generator>();
-    roundtrip_type<helpers::node_generator>();
+    roundtrip_type<node_generator>();
     roundtrip_type<attribute_generator>();
     roundtrip_type<name_generator>();
     roundtrip_type<builtin_generator>();

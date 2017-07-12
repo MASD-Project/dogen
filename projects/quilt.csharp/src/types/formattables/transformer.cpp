@@ -38,8 +38,8 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-std::unordered_map<std::string, formattable> transformer::
-transform(const formatters::repository& frp, const yarn::model& m) const {
+std::unordered_map<std::string, formattable> transformer::transform(
+    const formatters::repository& frp, const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 

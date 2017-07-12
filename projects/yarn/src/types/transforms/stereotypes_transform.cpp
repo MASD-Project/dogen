@@ -22,14 +22,14 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/orm_object_properties.hpp"
-#include "dogen/yarn/types/orm_primitive_properties.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
+#include "dogen/yarn/types/meta_model/orm_primitive_properties.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 
 namespace {
@@ -84,17 +84,20 @@ is_stereotype_handled_externally(const std::string& s) {
         s == stereotype_csharp_artefact_formatter;
 }
 
-std::unordered_map<location, std::list<name> > stereotypes_transform::
-bucket_leaves_by_location(const std::list<name>& leaves) {
-    std::unordered_map<location, std::list<name> >  r;
+std::unordered_map<meta_model::location,
+                   std::list<meta_model::name>> stereotypes_transform::
+bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
+    std::unordered_map<meta_model::location, std::list<meta_model::name>>  r;
     for (const auto& l : leaves)
         r[l.location()].push_back(l);
 
     return r;
 }
 
-visitor stereotypes_transform::create_visitor(const object& o, const location& l,
-    const origin_types ot, const std::list<name>& leaves) {
+meta_model::visitor
+stereotypes_transform::create_visitor(const meta_model::object& o,
+    const meta_model::location& l, const meta_model::origin_types ot,
+    const std::list<meta_model::name>& leaves) {
     helpers::name_builder b;
     b.simple_name(o.name().simple() + "_" + visitor_name);
     b.location(l);
@@ -102,7 +105,7 @@ visitor stereotypes_transform::create_visitor(const object& o, const location& l
     const auto n(b.build());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.id();
 
-    visitor r;
+    meta_model::visitor r;
     r.name(n);
     r.origin_type(ot);
     r.documentation(visitor_doc + o.name().simple());
@@ -120,15 +123,16 @@ visitor stereotypes_transform::create_visitor(const object& o, const location& l
 }
 
 void stereotypes_transform::
-update_visited_leaves(const std::list<name>& leaves, const visitor_details& vd,
-    intermediate_model& m) {
+update_visited_leaves(const std::list<meta_model::name>& leaves,
+    const visitor_details& vd, meta_model::intermediate_model& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating leaves for: " << vd.base.id();
 
     for (const auto& l : leaves) {
         auto i(m.objects().find(l.id()));
         if (i == m.objects().end()) {
             BOOST_LOG_SEV(lg, error) << leaf_not_found << l.id();
-            BOOST_THROW_EXCEPTION(transformation_error(leaf_not_found + l.id()));
+            BOOST_THROW_EXCEPTION(
+                transformation_error(leaf_not_found + l.id()));
         }
 
         auto& o(i->second);
@@ -141,7 +145,8 @@ update_visited_leaves(const std::list<name>& leaves, const visitor_details& vd,
 }
 
 void stereotypes_transform::
-add_visitor_to_model(const visitor& v, intermediate_model& im) {
+add_visitor_to_model(const meta_model::visitor& v,
+    meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << v.name().id();
 
     const auto pair(std::make_pair(v.name().id(), v));
@@ -155,7 +160,7 @@ add_visitor_to_model(const visitor& v, intermediate_model& im) {
 }
 
 void stereotypes_transform::
-expand_visitable(object& o, intermediate_model& im) {
+expand_visitable(meta_model::object& o, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << o.name().id();
 
     /*
@@ -256,7 +261,9 @@ expand_visitable(object& o, intermediate_model& im) {
         const auto& dv_location(pair.first);
         const auto immm(im.name().location().model_modules());
         const bool in_target_model(immm == dv_location.model_modules());
-        const auto ot(in_target_model ? origin_types::target : o.origin_type());
+        const auto ot(in_target_model ?
+            meta_model::origin_types::target :
+            o.origin_type());
 
         /*
          * Generate the derived visitor and update its leaves.
@@ -272,8 +279,8 @@ expand_visitable(object& o, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
-bool stereotypes_transform::try_expand_concept(
-    const std::string& s, object& o, const intermediate_model& im) {
+bool stereotypes_transform::try_expand_concept(const std::string& s,
+    meta_model::object& o, const meta_model::intermediate_model& im) {
 
     using helpers::resolver;
     const auto on(resolver::try_resolve_concept_name(o.name(), s, im));
@@ -284,7 +291,8 @@ bool stereotypes_transform::try_expand_concept(
     return true;
 }
 
-void stereotypes_transform::expand(object& o, intermediate_model& im) {
+void stereotypes_transform::expand(meta_model::object& o,
+    meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
     if (o.stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
@@ -305,11 +313,11 @@ void stereotypes_transform::expand(object& o, intermediate_model& im) {
         else if (s == stereotype_immutable)
             o.is_immutable(true);
         else if (s == stereotype_orm_object) {
-            orm_object_properties cfg;
+            meta_model::orm_object_properties cfg;
             cfg.generate_mapping(true);
             o.orm_properties(cfg);
         } else if (s == stereotype_orm_value) {
-            orm_object_properties cfg;
+            meta_model::orm_object_properties cfg;
             cfg.generate_mapping(true);
             cfg.is_value(true);
             o.orm_properties(cfg);
@@ -335,7 +343,7 @@ void stereotypes_transform::expand(object& o, intermediate_model& im) {
     o.stereotypes(external_stereotypes);
 }
 
-void stereotypes_transform::expand(primitive& p) {
+void stereotypes_transform::expand(meta_model::primitive& p) {
     const auto id(p.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << id;
     if (p.stereotypes().empty()) {
@@ -349,7 +357,7 @@ void stereotypes_transform::expand(primitive& p) {
         if (s == stereotype_immutable)
             p.is_immutable(true);
         else if (s == stereotype_orm_value) {
-            orm_primitive_properties cfg;
+            meta_model::orm_primitive_properties cfg;
             cfg.generate_mapping(true);
             p.orm_properties(cfg);
         } else if (s == stereotype_orm_object) {
@@ -369,7 +377,7 @@ void stereotypes_transform::expand(primitive& p) {
     BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();
 }
 
-void stereotypes_transform::transform(intermediate_model& im) {
+void stereotypes_transform::transform(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
 
     for (auto& pair : im.objects())

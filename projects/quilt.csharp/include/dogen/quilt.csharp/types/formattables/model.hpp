@@ -29,7 +29,7 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 #include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.csharp/types/formattables/assistant_properties.hpp"
@@ -49,7 +49,7 @@ public:
 
 public:
     model(
-        const dogen::yarn::name& name,
+        const dogen::yarn::meta_model::name& name,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables,
         const std::list<std::string>& project_items,
         const std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties>& aspect_properties,
@@ -63,10 +63,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::csharp::formattables::model& v, unsigned int version);
 
 public:
-    const dogen::yarn::name& name() const;
-    dogen::yarn::name& name();
-    void name(const dogen::yarn::name& v);
-    void name(const dogen::yarn::name&& v);
+    const dogen::yarn::meta_model::name& name() const;
+    dogen::yarn::meta_model::name& name();
+    void name(const dogen::yarn::meta_model::name& v);
+    void name(const dogen::yarn::meta_model::name&& v);
 
     const std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables() const;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable>& formattables();
@@ -99,7 +99,7 @@ public:
     model& operator=(model other);
 
 private:
-    dogen::yarn::name name_;
+    dogen::yarn::meta_model::name name_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::formattable> formattables_;
     std::list<std::string> project_items_;
     std::unordered_map<std::string, dogen::quilt::csharp::formattables::aspect_properties> aspect_properties_;

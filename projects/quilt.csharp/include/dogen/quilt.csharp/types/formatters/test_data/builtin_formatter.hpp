@@ -45,14 +45,14 @@ public:
 
 public:
     std::list<std::string> inclusion_dependencies(
-        const yarn::element& e) const override;
+        const yarn::meta_model::element& e) const override;
 
     boost::filesystem::path full_path(
-        const formattables::locator& l, const yarn::name& n) const override;
+        const formattables::locator& l, const yarn::meta_model::name& n) const override;
 
 public:
-    dogen::formatters::artefact
-    format(const context& ctx, const yarn::element& e) const override;
+    dogen::formatters::artefact format(const context& ctx,
+    const yarn::meta_model::element& e) const override;
 };
 
 } } } } }

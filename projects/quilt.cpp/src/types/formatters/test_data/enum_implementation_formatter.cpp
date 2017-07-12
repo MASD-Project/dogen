@@ -26,7 +26,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
@@ -58,7 +58,7 @@ enum_implementation_formatter::archetype_location() const {
 }
 
 std::type_index enum_implementation_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::enumeration)));
+    static auto r(std::type_index(typeid(yarn::meta_model::enumeration)));
     return r;
 }
 
@@ -67,7 +67,7 @@ inclusion_support_types enum_implementation_formatter::inclusion_support_type() 
 }
 
 boost::filesystem::path enum_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
+    const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -79,13 +79,13 @@ boost::filesystem::path enum_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path enum_implementation_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_artefact());
 }
 
 std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
+    const yarn::meta_model::element& e) const {
     auto builder(f.make());
 
     builder.add(e.name(), traits::enum_header_archetype());
@@ -93,10 +93,10 @@ std::list<std::string> enum_implementation_formatter::inclusion_dependencies(
 }
 
 dogen::formatters::artefact enum_implementation_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
+    const auto& ye(a.as<yarn::meta_model::enumeration>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

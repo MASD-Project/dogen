@@ -27,11 +27,11 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/yarn/types/origin_types.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/builtin.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/origin_types.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/upsilon/types/name.hpp"
 #include "dogen/upsilon/types/model.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
@@ -45,11 +45,11 @@ namespace upsilon {
 
 class transformer final {
 public:
-    explicit transformer(const yarn::name& target_model_name);
+    explicit transformer(const yarn::meta_model::name& target_model_name);
 
     transformer(
-        const yarn::name& target_model_name,
-        const std::unordered_map<std::string, dogen::yarn::name>&
+        const yarn::meta_model::name& target_model_name,
+        const std::unordered_map<std::string, yarn::meta_model::name>&
         schema_name_to_model_name,
         const std::unordered_map<std::string,
         dogen::upsilon::name>& collection_names);
@@ -58,19 +58,20 @@ private:
     std::string to_unparsed_type(const dogen::upsilon::name& tn) const;
 
     void populate_element_properties(const dogen::upsilon::type& t,
-        yarn::element& e) const;
+        yarn::meta_model::element& e) const;
 
 public:
-    yarn::builtin to_builtin(const dogen::upsilon::primitive& p) const;
+    yarn::meta_model::builtin
+    to_builtin(const dogen::upsilon::primitive& p) const;
 
-    yarn::object to_object(const dogen::upsilon::compound& c) const;
+    yarn::meta_model::object to_object(const dogen::upsilon::compound& c) const;
 
-    yarn::enumeration
+    yarn::meta_model::enumeration
     to_enumeration(const dogen::upsilon::enumeration& e) const;
 
 private:
-    const yarn::name& target_model_name_;
-    const std::unordered_map<std::string, dogen::yarn::name>
+    const yarn::meta_model::name& target_model_name_;
+    const std::unordered_map<std::string, dogen::yarn::meta_model::name>
     schema_name_to_model_name_;
     const std::unordered_map<std::string, dogen::upsilon::name>
     collection_names_;

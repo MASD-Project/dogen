@@ -30,7 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
 
@@ -67,22 +67,22 @@ public:
     /**
      * @brief Provides the full path.
      */
-    virtual boost::filesystem::path
-    full_path(const formattables::locator& l, const yarn::name& n) const = 0;
+    virtual boost::filesystem::path full_path(const formattables::locator& l,
+        const yarn::meta_model::name& n) const = 0;
 
     /**
      * @brief Creates the inclusion dependencies for this formatter
      * against the supplied element.
      */
     virtual std::list<std::string>
-    inclusion_dependencies(const yarn::element& e) const = 0;
+    inclusion_dependencies(const yarn::meta_model::element& e) const = 0;
 
 public:
     /**
      * @brief Generate a file representation for the element.
      */
     virtual dogen::formatters::artefact
-    format(const context& ctx, const yarn::element& e) const = 0;
+    format(const context& ctx, const yarn::meta_model::element& e) const = 0;
 };
 
 } } } }

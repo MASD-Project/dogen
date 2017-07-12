@@ -44,14 +44,14 @@ namespace dogen {
 namespace yarn {
 namespace upsilon {
 
-transformer::transformer(const yarn::name& target_model_name)
+transformer::transformer(const yarn::meta_model::name& target_model_name)
     : target_model_name_(target_model_name),
       schema_name_to_model_name_(),
       collection_names_() {}
 
 transformer::
-transformer(const yarn::name& target_model_name,
-    const std::unordered_map<std::string, dogen::yarn::name>&
+transformer(const yarn::meta_model::name& target_model_name,
+    const std::unordered_map<std::string, yarn::meta_model::name>&
     schema_name_to_model_name,
     const std::unordered_map<std::string,
     dogen::upsilon::name>& collection_names)
@@ -79,11 +79,11 @@ transformer::to_unparsed_type(const dogen::upsilon::name& tn) const {
 }
 
 void transformer::populate_element_properties(const dogen::upsilon::type& t,
-    yarn::element& e) const {
+    yarn::meta_model::element& e) const {
 
     e.documentation(t.comment());
 
-    dogen::yarn::helpers::name_factory nf;
+    yarn::helpers::name_factory nf;
     const auto sn(t.name().schema_name());
     if (sn.empty() || sn == target_model_name_.simple()) {
         /*
@@ -92,7 +92,7 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
          * model.
          */
         e.name(nf.build_element_in_model(target_model_name_, t.name().value()));
-        e.origin_type(dogen::yarn::origin_types::target);
+        e.origin_type(yarn::meta_model::origin_types::target);
     } else {
         /*
          * Otherwise the type must belong to a reference model. Given
@@ -107,29 +107,29 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
                 transformation_error(missing_schema_reference + sn));
         }
         e.name(nf.build_element_in_model(i->second, t.name().value()));
-        e.origin_type(dogen::yarn::origin_types::proxy_reference);
+        e.origin_type(yarn::meta_model::origin_types::proxy_reference);
     }
 }
 
-yarn::builtin
+yarn::meta_model::builtin
 transformer::to_builtin(const dogen::upsilon::primitive& p) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
-    yarn::builtin r;
+    yarn::meta_model::builtin r;
     populate_element_properties(p, r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
     return r;
 }
 
-yarn::object
+yarn::meta_model::object
 transformer::to_object(const dogen::upsilon::compound& c) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
-    yarn::object r;
+    yarn::meta_model::object r;
     populate_element_properties(c, r);
 
     dogen::yarn::helpers::name_factory nf;
     BOOST_LOG_SEV(lg, debug) << "Total fields: " << c.fields().size();
     for (const auto& f : c.fields()) {
-        yarn::attribute attr;
+        yarn::meta_model::attribute attr;
         attr.name(nf.build_attribute_name(r.name(), f.name()));
         attr.unparsed_type(to_unparsed_type(f.type_name()));
         attr.documentation(f.comment());
@@ -140,10 +140,10 @@ transformer::to_object(const dogen::upsilon::compound& c) const {
     return r;
 }
 
-yarn::enumeration
+yarn::meta_model::enumeration
 transformer::to_enumeration(const dogen::upsilon::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
-    yarn::enumeration r;
+    yarn::meta_model::enumeration r;
     populate_element_properties(e, r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration";
     return r;

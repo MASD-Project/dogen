@@ -33,7 +33,7 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator_configuration.hpp"
 
@@ -52,7 +52,7 @@ public:
         const boost::filesystem::path& cpp_headers_output_directory_path,
         const annotations::type_repository& atrp,
         const formatters::repository& frp, const annotations::annotation& root,
-        const yarn::name& model_name,
+        const yarn::meta_model::name& model_name,
         const std::unordered_set<std::string>& module_ids,
         const bool enable_kernel_directories);
 
@@ -130,7 +130,8 @@ private:
      */
     boost::filesystem::path make_project_path(
         const boost::filesystem::path& output_directory_path,
-        const yarn::name& model_name, const locator_configuration& lc,
+        const yarn::meta_model::name& model_name,
+        const locator_configuration& lc,
         const bool enable_kernel_directories) const;
 
     /**
@@ -140,20 +141,20 @@ private:
      * folders; it starts at the facet and includes the file name.
      */
     boost::filesystem::path make_facet_path(const std::string& archetype,
-        const std::string& extension, const yarn::name& n) const;
+        const std::string& extension, const yarn::meta_model::name& n) const;
 
     /**
      * @brief Makes the first part of the inclusion path.
      */
     boost::filesystem::path
-    make_inclusion_path_prefix(const yarn::name& n) const;
+    make_inclusion_path_prefix(const yarn::meta_model::name& n) const;
 
     /**
      * @brief Builds a relative path from the top-level include
      * directory for the supplied qualified name.
      */
     boost::filesystem::path make_inclusion_path(const std::string& archetype,
-        const std::string& extension, const yarn::name& n) const;
+        const std::string& extension, const yarn::meta_model::name& n) const;
 
 public:
     /**
@@ -200,7 +201,7 @@ public:
      * @brief Generate the inclusion path for C++ headers.
      */
     boost::filesystem::path make_inclusion_path_for_cpp_header(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path to the include directory
@@ -222,7 +223,7 @@ public:
      * @brief Generate the full path for C++ headers.
      */
     boost::filesystem::path make_full_path_for_cpp_header(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the relative implementation path for a facet.
@@ -234,50 +235,50 @@ public:
      * @brief Generate the full path for C++ implementation.
      */
     boost::filesystem::path make_full_path_for_cpp_implementation(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in include.
      */
     boost::filesystem::path make_full_path_for_include_cmakelists(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_source_cmakelists(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the full path for cmakelists in source.
      */
     boost::filesystem::path make_full_path_for_msbuild_targets(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     /**
      * @brief Generate the relatvie path for odb options.
      */
     boost::filesystem::path make_relative_path_for_odb_options(
-        const yarn::name& n, const std::string& archetype,
+        const yarn::meta_model::name& n, const std::string& archetype,
         bool include_source_directory = true) const;
 
     /**
      * @brief Generate the full path for odb options.
      */
     boost::filesystem::path make_full_path_for_odb_options(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_project(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
     boost::filesystem::path make_full_path_for_solution(
-        const yarn::name& n, const std::string& archetype) const;
+        const yarn::meta_model::name& n, const std::string& archetype) const;
 
 public:
     std::unordered_map<std::string, std::string> facet_directories() const;
 
 private:
-    const yarn::name& model_name_;
+    const yarn::meta_model::name& model_name_;
     const locator_configuration configuration_;
     const std::unordered_set<std::string> module_ids_;
     const boost::filesystem::path project_path_;

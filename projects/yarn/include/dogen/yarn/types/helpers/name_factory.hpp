@@ -26,7 +26,7 @@
 #endif
 
 #include <string>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -45,7 +45,7 @@ public:
      *
      * @pre @e model_name must not be empty.
      */
-    name build_model_name(const std::string& model_name,
+    meta_model::name build_model_name(const std::string& model_name,
         const std::string& external_modules = std::string()) const;
 
     /**
@@ -53,10 +53,10 @@ public:
      * the element name.
      */
     /**@{*/
-    name build_element_name(const std::string& simple_name) const;
-    name build_element_name(const std::string& model_name,
+    meta_model::name build_element_name(const std::string& simple_name) const;
+    meta_model::name build_element_name(const std::string& model_name,
         const std::string& simple_name) const;
-    name build_element_name(const std::string& simple_name,
+    meta_model::name build_element_name(const std::string& simple_name,
         const std::list<std::string>& internal_modules) const;
     /**@}*/
 
@@ -65,9 +65,9 @@ public:
      * model it is located in, creates the element name.
      */
     /**@{*/
-    name build_element_in_model(const name& model_name,
+    meta_model::name build_element_in_model(const meta_model::name& model_name,
         const std::string& simple_name) const;
-    name build_element_in_model(const name& model_name,
+    meta_model::name build_element_in_model(const meta_model::name& model_name,
         const std::string& simple_name,
         const std::list<std::string>& internal_modules) const;
     /**@}*/
@@ -76,7 +76,7 @@ public:
      * @brief Given a simple name for an element and the name of the
      * module it is located in, creates the element name.
      */
-    name build_element_in_module(const name& module_name,
+    meta_model::name build_element_in_module(const meta_model::name& module_name,
         const std::string& simple_name) const;
 
     /**
@@ -85,9 +85,9 @@ public:
      * the module.
      */
     /**@{*/
-    name build_module_name(const name& model_name,
+    meta_model::name build_module_name(const meta_model::name& model_name,
         const std::list<std::string>& internal_modules) const;
-    name build_module_name(const name& model_name,
+    meta_model::name build_module_name(const meta_model::name& model_name,
         const std::string& module_name,
         const std::list<std::string>& internal_modules) const;
     /**@}*/
@@ -95,8 +95,9 @@ public:
     /**
      * @brief Combines element name with model name.
      */
-    name build_combined_element_name(const name& model_name,
-        const name& partial_element_name,
+    meta_model::name build_combined_element_name(
+        const meta_model::name& model_name,
+        const meta_model::name& partial_element_name,
         const bool populate_model_modules_if_blank = false,
         const bool populate_internal_modules_if_blank = false) const;
 
@@ -105,15 +106,17 @@ public:
      * become the model name.
      */
     /**@{*/
-    name build_promoted_module_name(const name& element_name) const;
-    name build_promoted_module_name(const name& model_name,
-        const name& element_name) const;
+    meta_model::name build_promoted_module_name(
+        const meta_model::name& element_name) const;
+    meta_model::name build_promoted_module_name(
+        const meta_model::name& model_name,
+        const meta_model::name& element_name) const;
     /**@}*/
 
     /**
      * @brief Builds an attribute name.
      */
-    name build_attribute_name(const name& owner_name,
+    meta_model::name build_attribute_name(const meta_model::name& owner_name,
         const std::string& simple_name) const;
 };
 

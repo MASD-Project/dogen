@@ -23,7 +23,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 
 /*
 #include "dogen/yarn/types/name_builder.hpp"
@@ -46,10 +46,10 @@ const std::string empty;
 const std::string test_module("yarn");
 const std::string test_suite("name_tree_parser_tests");
 
-const dogen::yarn::languages cpp(dogen::yarn::languages::cpp);
+const auto cpp(dogen::yarn::meta_model::languages::cpp);
 
 const auto top_level_modules = std::unordered_set<std::string>();
-const auto model_location = dogen::yarn::location();
+const auto model_location = dogen::yarn::meta_model::location();
 
 
 

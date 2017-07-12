@@ -27,9 +27,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
@@ -62,7 +62,7 @@ bool test_workflow(
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     workflow w;
-    dogen::yarn::intermediate_model actual(w.execute(i, model_name));
+    const auto actual(w.execute(i, model_name));
     return asserter::assert_object(expected_path, actual_path, actual);
 }
 

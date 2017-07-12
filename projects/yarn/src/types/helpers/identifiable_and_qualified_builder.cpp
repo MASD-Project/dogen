@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/string_processor.hpp"
 #include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
@@ -42,8 +42,9 @@ identifiable_and_qualified_builder::
 identifiable_and_qualified_builder() : csharp_pp_(separators::dots),
                                        cpp_pp_(separators::double_colons) {}
 
-std::string identifiable_and_qualified_builder::obtain_qualified(
-    const std::map<languages, std::string>& map, const languages& l) const {
+std::string identifiable_and_qualified_builder::
+obtain_qualified(const std::map<meta_model::languages, std::string>& map,
+    const meta_model::languages& l) const {
     const auto i(map.find(l));
     if (i == map.end()) {
         BOOST_LOG_SEV(lg, error) << qn_missing << l;
@@ -52,20 +53,23 @@ std::string identifiable_and_qualified_builder::obtain_qualified(
     return i->second;
 }
 
-void identifiable_and_qualified_builder::add(const name& n) {
+void identifiable_and_qualified_builder::add(const meta_model::name& n) {
+    using meta_model::languages;
     csharp_pp_.add(obtain_qualified(n.qualified(), languages::csharp));
     cpp_pp_.add(obtain_qualified(n.qualified(), languages::cpp));
 }
 
-void identifiable_and_qualified_builder::add(const name_tree& nt) {
+void identifiable_and_qualified_builder::add(const meta_model::name_tree& nt) {
+    using meta_model::languages;
     csharp_pp_.add_child(obtain_qualified(nt.qualified(), languages::csharp));
     cpp_pp_.add_child(obtain_qualified(nt.qualified(), languages::cpp));
 }
 
-std::pair<std::string, std::map<languages, std::string> >
+std::pair<std::string, std::map<meta_model::languages, std::string>>
 identifiable_and_qualified_builder::build() {
+    using meta_model::languages;
     const auto cpp_qn(cpp_pp_.print());
-    const auto qualified(std::map<languages, std::string> {
+    const auto qualified(std::map<meta_model::languages, std::string> {
             { languages::csharp, csharp_pp_.print() },
             { languages::cpp, cpp_qn }
         });
@@ -80,9 +84,9 @@ identifiable_and_qualified_builder::build() {
     return r;
 }
 
-std::pair<std::string, std::map<languages, std::string> >
+std::pair<std::string, std::map<meta_model::languages, std::string>>
 identifiable_and_qualified_builder::
-build(const name& n, const bool model_name_mode) {
+build(const meta_model::name& n, const bool model_name_mode) {
     csharp_pp_.add(n, model_name_mode);
     cpp_pp_.add(n, model_name_mode);
     return build();

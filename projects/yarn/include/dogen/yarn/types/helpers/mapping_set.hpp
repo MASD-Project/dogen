@@ -29,9 +29,9 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/hash/languages_hash.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/hash/meta_model/languages_hash.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_set_fwd_ser.hpp"
 
 namespace dogen {
@@ -52,10 +52,10 @@ public:
 public:
     mapping_set(
         const std::string& name,
-        const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_language_agnostic_id,
-        const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_upsilon_id,
+        const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_language_agnostic_id,
+        const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_upsilon_id,
         const std::unordered_map<std::string, std::string>& upsilon_id_to_lam_id,
-        const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language);
+        const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language);
 
 private:
     template<typename Archive>
@@ -70,15 +70,15 @@ public:
     void name(const std::string& v);
     void name(const std::string&& v);
 
-    const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_language_agnostic_id() const;
-    std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_language_agnostic_id();
-    void by_language_agnostic_id(const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& v);
-    void by_language_agnostic_id(const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >&& v);
+    const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_language_agnostic_id() const;
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_language_agnostic_id();
+    void by_language_agnostic_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& v);
+    void by_language_agnostic_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >&& v);
 
-    const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_upsilon_id() const;
-    std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& by_upsilon_id();
-    void by_upsilon_id(const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >& v);
-    void by_upsilon_id(const std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> >&& v);
+    const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_upsilon_id() const;
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& by_upsilon_id();
+    void by_upsilon_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >& v);
+    void by_upsilon_id(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> >&& v);
 
     /**
      * @brief Map to resolve upsilon ID's into LAM IDs.
@@ -90,10 +90,10 @@ public:
     void upsilon_id_to_lam_id(const std::unordered_map<std::string, std::string>&& v);
     /**@}*/
 
-    const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language() const;
-    std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& erasures_by_language();
-    void erasures_by_language(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >& v);
-    void erasures_by_language(const std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> >&& v);
+    const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language() const;
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& erasures_by_language();
+    void erasures_by_language(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >& v);
+    void erasures_by_language(const std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> >&& v);
 
 public:
     bool operator==(const mapping_set& rhs) const;
@@ -107,10 +107,10 @@ public:
 
 private:
     std::string name_;
-    std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> > by_language_agnostic_id_;
-    std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> > by_upsilon_id_;
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> > by_language_agnostic_id_;
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> > by_upsilon_id_;
     std::unordered_map<std::string, std::string> upsilon_id_to_lam_id_;
-    std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> > erasures_by_language_;
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> > erasures_by_language_;
 };
 
 } } }

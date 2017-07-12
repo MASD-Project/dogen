@@ -27,7 +27,7 @@
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
-#include "dogen/yarn/types/visitor.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -56,7 +56,7 @@ visitor_header_formatter::archetype_location() const {
 }
 
 std::type_index visitor_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::visitor)));
+    static auto r(std::type_index(typeid(yarn::meta_model::visitor)));
     return r;
 }
 
@@ -65,19 +65,20 @@ inclusion_support_types visitor_header_formatter::inclusion_support_type() const
 }
 
 boost::filesystem::path visitor_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path visitor_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 std::list<std::string> visitor_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
-    const auto& v(assistant::as<yarn::visitor>(static_artefact(), e));
+    const yarn::meta_model::element& e) const {
+    using yarn::meta_model::visitor;
+    const auto& v(assistant::as<visitor>(static_artefact(), e));
     auto builder(f.make());
     builder.add(v.visits(), traits::forward_declarations_archetype());
 
@@ -88,10 +89,10 @@ std::list<std::string> visitor_header_formatter::inclusion_dependencies(
 }
 
 dogen::formatters::artefact visitor_header_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto& v(a.as<yarn::visitor>(static_artefact(), e));
+    const auto& v(a.as<yarn::meta_model::visitor>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

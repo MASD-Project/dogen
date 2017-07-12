@@ -34,8 +34,8 @@ mapping_value::mapping_value(mapping_value&& rhs)
 
 mapping_value::mapping_value(
     const dogen::yarn::helpers::mapping_actions mapping_action,
-    const boost::optional<dogen::yarn::name>& default_name,
-    const std::list<dogen::yarn::name>& aliases)
+    const boost::optional<dogen::yarn::meta_model::name>& default_name,
+    const std::list<dogen::yarn::meta_model::name>& aliases)
     : mapping_action_(mapping_action),
       default_name_(default_name),
       aliases_(aliases) { }
@@ -67,35 +67,35 @@ void mapping_value::mapping_action(const dogen::yarn::helpers::mapping_actions v
     mapping_action_ = v;
 }
 
-const boost::optional<dogen::yarn::name>& mapping_value::default_name() const {
+const boost::optional<dogen::yarn::meta_model::name>& mapping_value::default_name() const {
     return default_name_;
 }
 
-boost::optional<dogen::yarn::name>& mapping_value::default_name() {
+boost::optional<dogen::yarn::meta_model::name>& mapping_value::default_name() {
     return default_name_;
 }
 
-void mapping_value::default_name(const boost::optional<dogen::yarn::name>& v) {
+void mapping_value::default_name(const boost::optional<dogen::yarn::meta_model::name>& v) {
     default_name_ = v;
 }
 
-void mapping_value::default_name(const boost::optional<dogen::yarn::name>&& v) {
+void mapping_value::default_name(const boost::optional<dogen::yarn::meta_model::name>&& v) {
     default_name_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name>& mapping_value::aliases() const {
+const std::list<dogen::yarn::meta_model::name>& mapping_value::aliases() const {
     return aliases_;
 }
 
-std::list<dogen::yarn::name>& mapping_value::aliases() {
+std::list<dogen::yarn::meta_model::name>& mapping_value::aliases() {
     return aliases_;
 }
 
-void mapping_value::aliases(const std::list<dogen::yarn::name>& v) {
+void mapping_value::aliases(const std::list<dogen::yarn::meta_model::name>& v) {
     aliases_ = v;
 }
 
-void mapping_value::aliases(const std::list<dogen::yarn::name>&& v) {
+void mapping_value::aliases(const std::list<dogen::yarn::meta_model::name>&& v) {
     aliases_ = std::move(v);
 }
 

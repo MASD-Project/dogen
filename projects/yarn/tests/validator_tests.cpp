@@ -24,11 +24,11 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
@@ -52,20 +52,23 @@ const std::string inconsistent_kvp("Inconsistency between key and value");
 
 using dogen::utility::test::contains_checker;
 using dogen::yarn::helpers::validation_error;
+using dogen::yarn::meta_model::origin_types;
+using dogen::yarn::meta_model::languages;
+using dogen::yarn::helpers::pre_processing_validator;
+
 
 BOOST_AUTO_TEST_SUITE(merger_tests)
 
 BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_incorrect_model_name_throws");
-    const auto ot(dogen::yarn::origin_types::target);
+    const auto ot(origin_types::target);
     auto m(factory.make_single_type_model(ot));
 
     m.name().location().model_modules().clear();
     m.name().location().model_modules().push_back(invalid_model_name);
-    m.input_language(dogen::yarn::languages::cpp);
+    m.input_language(languages::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
-    using dogen::yarn::helpers::pre_processing_validator;
     contains_checker<validation_error> c(incorrect_model);
     BOOST_CHECK_EXCEPTION(
         pre_processing_validator::validate(m), validation_error, c);
@@ -74,13 +77,12 @@ BOOST_AUTO_TEST_CASE(type_with_incorrect_model_name_throws) {
 BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
     SETUP_TEST_LOG_SOURCE("type_with_inconsistent_key_value_pair_throws");
 
-    const auto ot(dogen::yarn::origin_types::target);
+    const auto ot(origin_types::target);
     auto m(factory.make_multi_type_model(0, 2, ot));
     m.objects().begin()->second.name().id(invalid_id);
-    m.input_language(dogen::yarn::languages::cpp);
+    m.input_language(languages::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 
-    using dogen::yarn::helpers::pre_processing_validator;
     contains_checker<validation_error> c(inconsistent_kvp);
     BOOST_CHECK_EXCEPTION(
         pre_processing_validator::validate(m), validation_error, c);

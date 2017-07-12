@@ -23,15 +23,15 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/module.hpp"
-#include "dogen/yarn/types/visitor.hpp"
-#include "dogen/yarn/types/concept.hpp"
-#include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
@@ -56,14 +56,15 @@ namespace {
 
 class generator final {
 public:
-    generator(const yarn::name& model_name, const formatters::repository& rp)
+    generator(const yarn::meta_model::name& model_name,
+        const formatters::repository& rp)
         : result_(create_master_header(model_name)),
           file_formatters_by_type_index_(
               filter_file_formatters_by_type_index(rp)) {}
 
 private:
     boost::shared_ptr<master_header>
-    create_master_header(const yarn::name& model_name);
+    create_master_header(const yarn::meta_model::name& model_name);
 
     std::forward_list<std::shared_ptr<formatters::artefact_formatter_interface>>
     filter_formatters(const std::forward_list<
@@ -76,19 +77,25 @@ private:
             std::shared_ptr<formatters::artefact_formatter_interface>>>
     filter_file_formatters_by_type_index(const formatters::repository& rp) const;
 
-    void process_element(const yarn::element& e);
+    void process_element(const yarn::meta_model::element& e);
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(const yarn::concept&) {}
-    void operator()(const yarn::builtin&) {}
-    void operator()(const dogen::yarn::visitor& v) { process_element(v); }
-    void operator()(const yarn::enumeration& e) { process_element(e); }
-    void operator()(const yarn::primitive& p) { process_element(p); }
-    void operator()(const yarn::object& o) { process_element(o); }
-    void operator()(const yarn::exception& e) { process_element(e); }
-    void operator()(const yarn::module& m) { process_element(m); }
+    void operator()(yarn::meta_model::element&) { }
+    void operator()(const yarn::meta_model::concept&) {}
+    void operator()(const yarn::meta_model::builtin&) {}
+    void operator()(const yarn::meta_model::visitor& v) { process_element(v); }
+    void operator()(const yarn::meta_model::enumeration& e) {
+        process_element(e);
+    }
+    void operator()(const yarn::meta_model::primitive& p) {
+        process_element(p);
+    }
+    void operator()(const yarn::meta_model::object& o) { process_element(o); }
+    void operator()(const yarn::meta_model::exception& e) {
+        process_element(e);
+    }
+    void operator()(const yarn::meta_model::module& m) { process_element(m); }
 
 public:
     boost::shared_ptr<master_header> result() { return result_; }
@@ -104,11 +111,11 @@ private:
 };
 
 boost::shared_ptr<master_header>
-generator::create_master_header(const yarn::name& model_name) {
+generator::create_master_header(const yarn::meta_model::name& model_name) {
     auto r(boost::make_shared<master_header>());
     yarn::helpers::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
-    r->origin_type(yarn::origin_types::target);
+    r->origin_type(yarn::meta_model::origin_types::target);
     return r;
 }
 
@@ -150,8 +157,8 @@ generator::filter_file_formatters_by_type_index(
     return r;
 }
 
-void generator::process_element(const yarn::element& e) {
-    if (e.origin_type() != yarn::origin_types::target)
+void generator::process_element(const yarn::meta_model::element& e) {
+    if (e.origin_type() != yarn::meta_model::origin_types::target)
         return;
 
     const auto ti(std::type_index(typeid(e)));
@@ -174,13 +181,13 @@ void generator::process_element(const yarn::element& e) {
 
 }
 
-boost::shared_ptr<yarn::element>
+boost::shared_ptr<yarn::meta_model::element>
 master_header_factory::make(const formatters::repository& frp,
-    const yarn::intermediate_model& im) const {
+    const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating the master header.";
 
     generator g(im.name(), frp);
-    yarn::elements_traversal(im, g);
+    yarn::meta_model::elements_traversal(im, g);
     const auto r(g.result());
 
     BOOST_LOG_SEV(lg, debug) << "Generated the master header.";

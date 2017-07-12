@@ -11,56 +11,7 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Move enablement into yarn                                         :story:
-
-It seems that the concepts around enablement are actually not kernel
-specific but instead can be generalised at the meta-model level. We
-need to create adequate representations in yarn to handle facets,
-etc. We then need to move across the code that computes enablement
-into yarn so that all kernels can make use of it.
-
-*Previous Understanding*
-
-We need to make use of the exact same logic as implemented in
-=quilt.cpp= for enablement. Perhaps all of the enablement related
-functionality can be lifted and grafted onto quilt without any major
-changes.
-
-*** Move dependencies into yarn                                       :story:
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
-*** Move helpers into yarn                                            :story:
-
-Looking at helpers, it is clear that they are common to all
-languages. We just need to rename the terminology slightly -
-particularly wrt to streaming properties - and then move this code
-across into yarn.
-
-*** Move facet properties into yarn                                   :story:
-
-We should be able to handle these generically in yarn.
-
-*** Move ORM camel-case and databases into yarn                       :story:
-
-We should handle this property at the ORM level, rather than at the
-ODB level.
-
-Similarly, we should move the ODB databases into yarn and make that a
-ORM-level concept.
-
-*** Create "opaque" kernel and element properties                     :story:
+**** Create "opaque" kernel and element properties                    :story:
 
 As part of the element container, we can have a set of base classes
 that are empty: =opaque_element_properties=. This class is then

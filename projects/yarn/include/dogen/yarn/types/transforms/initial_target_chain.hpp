@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -53,7 +53,7 @@ public:
         const boost::filesystem::path& p);
 
 public:
-    static intermediate_model transform(const context& ctx);
+    static meta_model::intermediate_model transform(const context& ctx);
 };
 
 } } }

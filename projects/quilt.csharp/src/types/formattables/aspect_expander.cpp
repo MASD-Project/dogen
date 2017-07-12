@@ -23,12 +23,12 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/exception.hpp"
-#include "dogen/yarn/types/builtin.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/aspect_properties.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -47,7 +47,7 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class aspect_properties_generator : public yarn::element_visitor {
+class aspect_properties_generator : public yarn::meta_model::element_visitor {
 private:
     struct type_group {
         annotations::type requires_static_reference_equals;
@@ -64,11 +64,11 @@ private:
         const std::string& id, const bool is_floating_point = false);
 
 public:
-    using yarn::element_visitor::visit;
-    void visit(const yarn::enumeration& e);
-    void visit(const yarn::exception& e);
-    void visit(const yarn::object& o);
-    void visit(const yarn::builtin& p);
+    using yarn::meta_model::element_visitor::visit;
+    void visit(const yarn::meta_model::enumeration& e);
+    void visit(const yarn::meta_model::exception& e);
+    void visit(const yarn::meta_model::object& o);
+    void visit(const yarn::meta_model::builtin& p);
 
 public:
     const std::unordered_map<std::string, formattables::aspect_properties>&
@@ -115,19 +115,19 @@ void aspect_properties_generator::handle_aspect_properties(
     result_[id] = ap;
 }
 
-void aspect_properties_generator::visit(const yarn::enumeration& e) {
+void aspect_properties_generator::visit(const yarn::meta_model::enumeration& e) {
     handle_aspect_properties(e.annotation(), e.name().id());
 }
 
-void aspect_properties_generator::visit(const yarn::exception& e) {
+void aspect_properties_generator::visit(const yarn::meta_model::exception& e) {
     handle_aspect_properties(e.annotation(), e.name().id());
 }
 
-void aspect_properties_generator::visit(const yarn::object& o) {
+void aspect_properties_generator::visit(const yarn::meta_model::object& o) {
     handle_aspect_properties(o.annotation(), o.name().id());
 }
 
-void aspect_properties_generator::visit(const yarn::builtin& p) {
+void aspect_properties_generator::visit(const yarn::meta_model::builtin& p) {
     handle_aspect_properties(p.annotation(), p.name().id());
 }
 

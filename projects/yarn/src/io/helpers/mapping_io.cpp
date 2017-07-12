@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn/io/languages_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_value_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -34,7 +34,7 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

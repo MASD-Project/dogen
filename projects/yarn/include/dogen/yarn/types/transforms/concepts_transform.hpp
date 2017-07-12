@@ -27,7 +27,7 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -100,47 +100,51 @@ private:
     /**
      * @brief Returns the object with the given name, or throws.
      */
-    static  object& find_object(const name& n, intermediate_model& im);
+    static  meta_model::object& find_object(const meta_model::name& n,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Returns the concept with the given name, or throws.
      */
-    static concept& find_concept(const name& n, intermediate_model& im);
+    static meta_model::concept& find_concept(const meta_model::name& n,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Removes duplicate names, preserving the original order
      * of elements in the list.
      */
-    static void remove_duplicates(std::list<name>& names);
+    static void remove_duplicates(std::list<meta_model::name>& names);
 
 private:
     /**
      * @brief Expands a specific object.
      */
-    static void expand_object(object& o, intermediate_model& im,
-        std::unordered_set<name>& processed_names);
+    static void expand_object(meta_model::object& o,
+        meta_model::intermediate_model& im,
+        std::unordered_set<meta_model::name>& processed_names);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(intermediate_model& im);
+    static void expand_objects(meta_model::intermediate_model& im);
 
     /**
      * @brief Expands a concept.
      */
-    static void expand_concept(concept& c, intermediate_model& im,
-        std::unordered_set<name>& processed_names);
+    static void expand_concept(meta_model::concept& c,
+        meta_model::intermediate_model& im,
+        std::unordered_set<meta_model::name>& processed_names);
 
     /**
      * @brief Expands all concepts in the model.
      */
-    static void expand_concepts(intermediate_model& im);
+    static void expand_concepts(meta_model::intermediate_model& im);
 
 public:
     /**
      * @brief Transforms the concepts the supplied model.
      */
-    static void transform(intermediate_model& im);
+    static void transform(meta_model::intermediate_model& im);
 };
 
 } } }

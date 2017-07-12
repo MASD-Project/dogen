@@ -40,7 +40,7 @@ namespace cpp {
 namespace fabric {
 
 boost::shared_ptr<fabric::registrar> registrar_factory::
-make(const yarn::name& model_name) const {
+make(const yarn::meta_model::name& model_name) const {
     yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<fabric::registrar>());
@@ -48,25 +48,26 @@ make(const yarn::name& model_name) const {
     return r;
 }
 
-std::list<boost::shared_ptr<yarn::element>>
-registrar_factory::make(const yarn::intermediate_model& im) const {
+std::list<boost::shared_ptr<yarn::meta_model::element>>
+registrar_factory::make(const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
 
-    std::list<boost::shared_ptr<yarn::element>> r;
+    std::list<boost::shared_ptr<yarn::meta_model::element>> r;
 
     auto rg(make(im.name()));
     rg->origin_type(im.origin_type());
     for (const auto& l : im.leaves())
         rg->leaves().push_back(l);
 
-    const auto lambda([](const yarn::name& a, const yarn::name& b) {
+    const auto lambda([](const yarn::meta_model::name& a,
+            const yarn::meta_model::name& b) {
             return a.id() < b.id();
         });
     rg->leaves().sort(lambda);
 
     for (const auto& pair : im.references()) {
         const auto origin_type(pair.second);
-        if (origin_type == yarn::origin_types::proxy_reference)
+        if (origin_type == yarn::meta_model::origin_types::proxy_reference)
             continue;
 
         const auto ref(pair.first);

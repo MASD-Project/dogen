@@ -27,7 +27,7 @@
 
 #include <string>
 #include <unordered_map>
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 
@@ -46,7 +46,8 @@ public:
      * @brief Given a yarn model, produces the corresponding formattables.
      */
     std::unordered_map<std::string, formattable>
-    transform(const formatters::repository& frp, const yarn::model& m) const;
+    transform(const formatters::repository& frp,
+        const yarn::meta_model::model& m) const;
 };
 
 } } } }

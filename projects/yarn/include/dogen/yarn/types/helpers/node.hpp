@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/helpers/node_fwd.hpp"
 #include "dogen/yarn/serialization/helpers/node_fwd_ser.hpp"
 
@@ -51,7 +51,7 @@ public:
 public:
     node(
         const boost::shared_ptr<dogen::yarn::helpers::node>& parent,
-        const dogen::yarn::name& data,
+        const dogen::yarn::meta_model::name& data,
         const std::list<boost::shared_ptr<dogen::yarn::helpers::node> >& children);
 
 private:
@@ -76,10 +76,10 @@ public:
      * @brief Current node.
      */
     /**@{*/
-    const dogen::yarn::name& data() const;
-    dogen::yarn::name& data();
-    void data(const dogen::yarn::name& v);
-    void data(const dogen::yarn::name&& v);
+    const dogen::yarn::meta_model::name& data() const;
+    dogen::yarn::meta_model::name& data();
+    void data(const dogen::yarn::meta_model::name& v);
+    void data(const dogen::yarn::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -104,7 +104,7 @@ public:
 
 private:
     boost::shared_ptr<dogen::yarn::helpers::node> parent_;
-    dogen::yarn::name data_;
+    dogen::yarn::meta_model::name data_;
     std::list<boost::shared_ptr<dogen::yarn::helpers::node> > children_;
 };
 

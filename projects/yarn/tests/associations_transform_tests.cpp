@@ -23,11 +23,10 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/io/object_io.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/io/meta_model/object_io.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 
@@ -54,13 +53,13 @@ const mock_intermediate_model_factory factory(flags);
 }
 
 using dogen::utility::test::contains_checker;
-using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
-using origin_types = dogen::yarn::origin_types;
-using object_types = dogen::yarn::test::mock_intermediate_model_factory::
-    object_types;
-using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
-    attribute_types;
+using dogen::yarn::meta_model::origin_types;
+using dogen::yarn::transforms::associations_transform;
+using object_types =
+    dogen::yarn::test::mock_intermediate_model_factory::object_types;
+using attribute_types =
+    dogen::yarn::test::mock_intermediate_model_factory::attribute_types;
 
 BOOST_AUTO_TEST_SUITE(associations_transform_tests)
 
@@ -72,7 +71,6 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_associations_transform) {
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -86,7 +84,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_as
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -101,7 +98,6 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
             attribute_types::unsigned_int));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -120,7 +116,6 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_associations_tran
     BOOST_REQUIRE(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
@@ -132,7 +127,6 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
     auto m(factory.make_first_degree_concepts_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -155,7 +149,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     auto m(factory.object_with_group_of_attributes_of_different_types());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -215,7 +208,6 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
             origin_types::target, true/*repeat_group*/));
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -278,7 +270,6 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indi
     BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -308,7 +299,6 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
     BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -337,7 +327,6 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     for (const auto& pair : m.objects()) {
@@ -366,7 +355,6 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices)
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -402,7 +390,6 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ind
     BOOST_REQUIRE(m.builtins().size() == 2);
 
     bool found(false);
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -443,7 +430,6 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indice
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;
 
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -475,7 +461,6 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
     BOOST_REQUIRE(m.objects().size() == 3);
 
     bool found(false);
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
@@ -507,7 +492,6 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
     BOOST_REQUIRE(m.objects().size() == 5);
 
     bool found(false);
-    using dogen::yarn::transforms::associations_transform;
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 

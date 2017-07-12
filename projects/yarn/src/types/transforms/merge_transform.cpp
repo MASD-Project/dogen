@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -44,8 +44,8 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void merge_transform::merge(const intermediate_model& src,
-    intermediate_model& dst) {
+void merge_transform::merge(const meta_model::intermediate_model& src,
+    meta_model::intermediate_model& dst) {
 
     /*
      * Skip any reference models for which the input language does
@@ -89,9 +89,9 @@ void merge_transform::merge(const intermediate_model& src,
     dst.references().insert(p);
 }
 
-intermediate_model
-merge_transform::transform(const intermediate_model& target,
-    const std::list<intermediate_model>& refs) {
+meta_model::intermediate_model
+merge_transform::transform(const meta_model::intermediate_model& target,
+    const std::list<meta_model::intermediate_model>& refs) {
     BOOST_LOG_SEV(lg, debug) << "Executing the merge transform.";
 
     /*
@@ -99,7 +99,7 @@ merge_transform::transform(const intermediate_model& target,
      * initialises all of the relevant parts of the merged model such
      * as leaves etc as well as all of the element containers.
      */
-    intermediate_model r(target);
+    auto r(target);
 
     /*
      * Now we push all of the references into the merged model.

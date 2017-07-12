@@ -28,7 +28,7 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/cmakelists_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/odb_targets_ser.hpp"
 
@@ -43,7 +43,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::fabric::cmakelists& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+    ar << make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
 
     ar << make_nvp("include_directory_path", v.include_directory_path_);
     ar << make_nvp("source_directory_name", v.source_directory_name_);
@@ -56,7 +56,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::fabric::cmakelists& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+    ar >> make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
 
     ar >> make_nvp("include_directory_path", v.include_directory_path_);
     ar >> make_nvp("source_directory_name", v.source_directory_name_);

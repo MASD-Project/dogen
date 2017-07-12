@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/serialization/xml_helper.hpp"
-#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
 #include "dogen/yarn/types/helpers/persister_error.hpp"
 #include "dogen/yarn/types/helpers/persister.hpp"
 
@@ -39,9 +39,9 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-void persister::
-persist(const intermediate_model& m, const boost::filesystem::path& p) {
-    const std::string extension(p.extension().string());
+void persister::persist(const meta_model::intermediate_model& m,
+    const boost::filesystem::path& p) {
+    const auto extension(p.extension().string());
     if (extension != xml_extension) {
         BOOST_LOG_SEV(lg, error) << unsupported_extension << extension;
         BOOST_THROW_EXCEPTION(
@@ -49,7 +49,7 @@ persist(const intermediate_model& m, const boost::filesystem::path& p) {
     }
 
     using dogen::utility::serialization::xml_serialize;
-    xml_serialize<intermediate_model>(p, m);
+    xml_serialize<meta_model::intermediate_model>(p, m);
 }
 
 } } }

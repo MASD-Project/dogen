@@ -29,8 +29,8 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
 #include "dogen/yarn/serialization/helpers/node_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
 
 namespace boost {
 namespace serialization {

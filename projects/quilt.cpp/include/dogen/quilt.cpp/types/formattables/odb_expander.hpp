@@ -29,7 +29,6 @@
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/object.hpp"
 #include "dogen/quilt.cpp/types/formattables/locator.hpp"
 #include "dogen/quilt.cpp/types/formattables/odb_properties.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"

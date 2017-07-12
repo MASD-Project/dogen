@@ -26,8 +26,8 @@
 #endif
 
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/formatters/repository.hpp"
 
 namespace dogen {
@@ -37,9 +37,9 @@ namespace fabric {
 
 class master_header_factory final {
 public:
-    boost::shared_ptr<yarn::element>
+    boost::shared_ptr<yarn::meta_model::element>
     make(const formatters::repository& rp,
-        const yarn::intermediate_model& im) const;
+        const yarn::meta_model::intermediate_model& im) const;
 };
 
 } } } }

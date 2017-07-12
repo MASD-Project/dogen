@@ -23,7 +23,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/io/unordered_map_io.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_io.hpp"
 #include "dogen/yarn/io/helpers/mapping_set_repository_io.hpp"
@@ -113,9 +113,9 @@ insert(const std::string& upsilon_id, const std::string& lam_id,
 }
 
 void mapping_set_repository_factory::
-insert(const std::string& lam_id, const name& n, const languages l,
-    std::unordered_map<languages, std::unordered_map<std::string, name>>&
-    by_languages) const {
+insert(const std::string& lam_id, const meta_model::name& n,
+    const meta_model::languages l, std::unordered_map<meta_model::languages,
+    std::unordered_map<std::string, meta_model::name>>& by_languages) const {
 
     auto& by_id(by_languages[l]);
     const auto pair(std::make_pair(lam_id, n));
@@ -132,7 +132,6 @@ insert(const std::string& lam_id, const name& n, const languages l,
 void mapping_set_repository_factory::populate_upsilon_data(
     const std::string& lam_id, const mapping& mapping,
     const mapping_value& upsilon_mv, mapping_set& ms) const {
-
     /*
      * A given LAM ID may map to zero, one or many upsilon names. We
      * are only interested in creating a map between the upsilon ID
@@ -152,7 +151,7 @@ void mapping_set_repository_factory::populate_upsilon_data(
     const auto default_upsilon_id(upsilon_mv.default_name()->id());
     for (const auto& pair : mapping.by_language()) {
         const auto l(pair.first);
-        if (l == languages::upsilon)
+        if (l == meta_model::languages::upsilon)
             continue;
 
         const auto& n(*(pair.second.default_name()));
@@ -171,7 +170,7 @@ void mapping_set_repository_factory::populate_upsilon_data(
     for (const auto& un : upsilon_mv.aliases()) {
         for (const auto& pair : mapping.by_language()) {
             const auto l(pair.first);
-            if (l == languages::upsilon)
+            if (l == meta_model::languages::upsilon)
                 continue;
 
             const auto& n(*(pair.second.default_name()));
@@ -200,7 +199,7 @@ void mapping_set_repository_factory::populate_mapping_set(
                 continue;
             }
 
-            if (l == languages::upsilon) {
+            if (l == meta_model::languages::upsilon) {
                 /*
                  * For upsilon we need to perform additional (complex)
                  * processing.

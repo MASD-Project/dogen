@@ -26,12 +26,13 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool mapping_transform::is_mappable(const languages from, const languages to) {
+bool mapping_transform::is_mappable(const meta_model::languages from,
+    const meta_model::languages to) {
     return helpers::mapper::is_mappable(from, to);
 }
 
-intermediate_model mapping_transform::transform(const context& ctx,
-    const intermediate_model& src, const languages to) {
+meta_model::intermediate_model mapping_transform::transform(const context& ctx,
+    const meta_model::intermediate_model& src, const meta_model::languages to) {
 
     const helpers::mapper mp(ctx.mapping_repository());
     return mp.map(src.input_language(), to, src);

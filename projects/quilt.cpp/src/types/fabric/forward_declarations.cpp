@@ -20,8 +20,8 @@
  */
 #include <ostream>
 #include <boost/io/ios_state.hpp>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 
@@ -37,17 +37,17 @@ forward_declarations::forward_declarations()
 forward_declarations::forward_declarations(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties,
+    const dogen::yarn::meta_model::element_properties& element_properties,
     const bool is_enum,
-    const dogen::yarn::name& underlying_element,
+    const dogen::yarn::meta_model::name& underlying_element,
     const bool is_exception)
-    : dogen::yarn::element(
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -61,28 +61,28 @@ forward_declarations::forward_declarations(
       underlying_element_(underlying_element),
       is_exception_(is_exception) { }
 
-void forward_declarations::accept(const dogen::yarn::element_visitor& v) const {
+void forward_declarations::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void forward_declarations::accept(dogen::yarn::element_visitor& v) const {
+void forward_declarations::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void forward_declarations::accept(const dogen::yarn::element_visitor& v) {
+void forward_declarations::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void forward_declarations::accept(dogen::yarn::element_visitor& v) {
+void forward_declarations::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -99,7 +99,7 @@ void forward_declarations::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::forward_declarations\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
       << "\"is_enum\": " << is_enum_ << ", "
       << "\"underlying_element\": " << underlying_element_ << ", "
@@ -108,7 +108,7 @@ void forward_declarations::to_stream(std::ostream& s) const {
 }
 
 void forward_declarations::swap(forward_declarations& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
     swap(is_enum_, other.is_enum_);
@@ -116,14 +116,14 @@ void forward_declarations::swap(forward_declarations& other) noexcept {
     swap(is_exception_, other.is_exception_);
 }
 
-bool forward_declarations::equals(const dogen::yarn::element& other) const {
+bool forward_declarations::equals(const dogen::yarn::meta_model::element& other) const {
     const forward_declarations* const p(dynamic_cast<const forward_declarations* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool forward_declarations::operator==(const forward_declarations& rhs) const {
-    return dogen::yarn::element::compare(rhs) &&
+    return dogen::yarn::meta_model::element::compare(rhs) &&
         is_enum_ == rhs.is_enum_ &&
         underlying_element_ == rhs.underlying_element_ &&
         is_exception_ == rhs.is_exception_;
@@ -143,19 +143,19 @@ void forward_declarations::is_enum(const bool v) {
     is_enum_ = v;
 }
 
-const dogen::yarn::name& forward_declarations::underlying_element() const {
+const dogen::yarn::meta_model::name& forward_declarations::underlying_element() const {
     return underlying_element_;
 }
 
-dogen::yarn::name& forward_declarations::underlying_element() {
+dogen::yarn::meta_model::name& forward_declarations::underlying_element() {
     return underlying_element_;
 }
 
-void forward_declarations::underlying_element(const dogen::yarn::name& v) {
+void forward_declarations::underlying_element(const dogen::yarn::meta_model::name& v) {
     underlying_element_ = v;
 }
 
-void forward_declarations::underlying_element(const dogen::yarn::name&& v) {
+void forward_declarations::underlying_element(const dogen::yarn::meta_model::name&& v) {
     underlying_element_ = std::move(v);
 }
 

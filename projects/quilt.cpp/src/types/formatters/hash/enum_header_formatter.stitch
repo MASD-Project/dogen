@@ -3,7 +3,7 @@
 <#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
-<#@ stitch.inclusion_dependency="dogen/yarn/types/enumeration.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/meta_model/enumeration.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/types/traits.hpp" #>
@@ -15,13 +15,13 @@
 <#@ stitch.wale.kvp.class.simple_name=enum_header_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=enum_header #>
 <#@ stitch.wale.kvp.class.inclusion_support_type=canonical_support #>
-<#@ stitch.wale.kvp.yarn_element=yarn::enumeration #>
+<#@ stitch.wale.kvp.yarn_element=yarn::meta_model::enumeration #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 
 std::list<std::string> enum_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
+    const yarn::meta_model::element& e) const {
     auto builder(f.make());
     builder.add(inclusion_constants::std::functional());
     builder.add(e.name(), types::traits::enum_header_archetype());
@@ -29,10 +29,10 @@ std::list<std::string> enum_header_formatter::inclusion_dependencies(
 }
 
 dogen::formatters::artefact enum_header_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), true/*requires_header_guard*/, id);
-    const auto& ye(a.as<yarn::enumeration>(static_artefact(), e));
+    const auto& ye(a.as<yarn::meta_model::enumeration>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

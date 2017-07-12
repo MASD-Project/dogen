@@ -28,13 +28,13 @@
 #include <string>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
-#include "dogen/yarn/types/primitive.hpp"
-#include "dogen/yarn/types/attribute.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -74,38 +74,41 @@ private:
         const annotations::annotation& a);
 
 private:
-    static std::string obtain_value_attribute_simple_name(const languages l);
+    static std::string
+    obtain_value_attribute_simple_name(const meta_model::languages l);
 
 private:
     /**
      * @brief Parses all attributes in the supplied attribute list..
      */
-    static void parse_attributes(const languages l,
-        std::list<attribute>& attrs);
+    static void parse_attributes(const meta_model::languages l,
+        std::list<meta_model::attribute>& attrs);
 
     /**
      * @brief Parses parent name in the supplied object.
      */
-    static void parse_parent(const type_group& tg, object& o);
+    static void parse_parent(const type_group& tg, meta_model::object& o);
 
     /**
      * @brief Parses the underlying element in the supplied
      * enumeration.
      */
-    static void parse_underlying_element(const type_group& tg, enumeration& e);
+    static void parse_underlying_element(const type_group& tg,
+        meta_model::enumeration& e);
 
     /**
      * @brief Parses underlying element in the supplied primitive.
      */
     static void parse_underlying_element(
-        const type_group& tg, const languages l, primitive& p);
+        const type_group& tg, const meta_model::languages l,
+        meta_model::primitive& p);
 
 public:
     /**
      * Execute the property expansion against the model.
      */
-    static void transform(const context& ctx, intermediate_model& m);
-
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& m);
 };
 
 } } }

@@ -27,7 +27,7 @@
 
 #include <iosfwd>
 #include <algorithm>
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.csharp/serialization/fabric/assistant_fwd_ser.hpp"
 
 namespace dogen {
@@ -35,7 +35,7 @@ namespace quilt {
 namespace csharp {
 namespace fabric {
 
-class assistant final : public dogen::yarn::element {
+class assistant final : public dogen::yarn::meta_model::element {
 public:
     assistant() = default;
     assistant(const assistant&) = default;
@@ -47,13 +47,13 @@ public:
     assistant(
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::name& name,
-        const dogen::yarn::origin_types origin_type,
-        const boost::optional<dogen::yarn::name>& contained_by,
+        const dogen::yarn::meta_model::name& name,
+        const dogen::yarn::meta_model::origin_types origin_type,
+        const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
         const bool is_element_extension,
-        const dogen::yarn::element_properties& element_properties);
+        const dogen::yarn::meta_model::element_properties& element_properties);
 
 private:
     template<typename Archive>
@@ -63,12 +63,12 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::csharp::fabric::assistant& v, unsigned int version);
 
 public:
-    using dogen::yarn::element::accept;
+    using dogen::yarn::meta_model::element::accept;
 
-    virtual void accept(const dogen::yarn::element_visitor& v) const override;
-    virtual void accept(dogen::yarn::element_visitor& v) const override;
-    virtual void accept(const dogen::yarn::element_visitor& v) override;
-    virtual void accept(dogen::yarn::element_visitor& v) override;
+    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) const override;
+    virtual void accept(dogen::yarn::meta_model::element_visitor& v) const override;
+    virtual void accept(const dogen::yarn::meta_model::element_visitor& v) override;
+    virtual void accept(dogen::yarn::meta_model::element_visitor& v) override;
 public:
     void to_stream(std::ostream& s) const override;
 
@@ -79,7 +79,7 @@ public:
     }
 
 public:
-    bool equals(const dogen::yarn::element& other) const override;
+    bool equals(const dogen::yarn::meta_model::element& other) const override;
 
 public:
     void swap(assistant& other) noexcept;

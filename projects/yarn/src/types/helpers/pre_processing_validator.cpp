@@ -46,36 +46,37 @@ namespace helpers {
 
 class validator {
 public:
-    validator(const name& model_name, const bool check_names,
+    validator(const meta_model::name& model_name, const bool check_names,
         const bool is_proxy_reference);
 
 private:
     void validate_name(const std::string& id, const bool in_global_namespace,
-        const name& n) const;
+        const meta_model::name& n) const;
 
 public:
-    void validate(const std::string& id, const yarn::concept& c) const;
-    void validate(const std::string& id, const yarn::builtin& b) const;
-    void validate(const std::string& id, const dogen::yarn::visitor& v) const;
-    void validate(const std::string& id, const yarn::enumeration& e) const;
-    void validate(const std::string& id, const yarn::object& o) const;
-    void validate(const std::string& id, const yarn::exception& e) const;
-    void validate(const std::string& id, const yarn::module& m) const;
+    void validate(const std::string& id, const meta_model::concept& c) const;
+    void validate(const std::string& id, const meta_model::builtin& b) const;
+    void validate(const std::string& id, const meta_model::visitor& v) const;
+    void validate(const std::string& id,
+        const meta_model::enumeration& e) const;
+    void validate(const std::string& id, const meta_model::object& o) const;
+    void validate(const std::string& id, const meta_model::exception& e) const;
+    void validate(const std::string& id, const meta_model::module& m) const;
 
 private:
-    const name model_name_;
+    const meta_model::name model_name_;
     const bool check_names_;
     const bool is_proxy_reference_;
 };
 
-validator::validator(const name& model_name, const bool check_names,
+validator::validator(const meta_model::name& model_name, const bool check_names,
     const bool is_proxy_reference) : model_name_(model_name),
                                      check_names_(check_names),
                                      is_proxy_reference_(is_proxy_reference) {}
 
 void validator::
 validate_name(const std::string& id, const bool in_global_namespace,
-    const name& n) const {
+    const meta_model::name& n) const {
     /*
      * Types in global namespace are known to have a mismatch between
      * their name and model name, so we need to ignore those.
@@ -104,26 +105,28 @@ validate_name(const std::string& id, const bool in_global_namespace,
     }
 }
 
-void validator::validate(const std::string& id, const yarn::concept& c) const {
+void validator::
+validate(const std::string& id, const meta_model::concept& c) const {
     validate_name(id, c.in_global_module(), c.name());
 }
 
 void validator::
-validate(const std::string& id, const yarn::builtin& b) const {
+validate(const std::string& id, const meta_model::builtin& b) const {
     validate_name(id, b.in_global_module(), b.name());
 }
 
 void validator::
-validate(const std::string& id, const dogen::yarn::visitor& v) const {
+validate(const std::string& id, const meta_model::visitor& v) const {
     validate_name(id, v.in_global_module(), v.name());
 }
 
 void validator::
-validate(const std::string& id, const yarn::enumeration& e) const {
+validate(const std::string& id, const meta_model::enumeration& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
-void validator::validate(const std::string& id, const yarn::object& o) const {
+void validator::
+validate(const std::string& id, const meta_model::object& o) const {
     validate_name(id, o.in_global_module(), o.name());
 
     /*
@@ -179,18 +182,23 @@ void validator::validate(const std::string& id, const yarn::object& o) const {
 }
 
 void validator::
-validate(const std::string& id, const yarn::exception& e) const {
+validate(const std::string& id, const meta_model::exception& e) const {
     validate_name(id, e.in_global_module(), e.name());
 }
 
-void validator::validate(const std::string& id, const yarn::module& m) const {
+void validator::
+validate(const std::string& id, const meta_model::module& m) const {
     validate_name(id, m.in_global_module(), m.name());
 }
 
-void pre_processing_validator::validate(const intermediate_model& im) {
+void pre_processing_validator::
+validate(const meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
+    using meta_model::origin_types;
     const bool ipr(im.origin_type() == origin_types::proxy_reference);
+
+    using meta_model::languages;
     const bool check_names(im.input_language() != languages::upsilon);
     validator v(im.name(), check_names, ipr/*is_proxy_reference*/);
 

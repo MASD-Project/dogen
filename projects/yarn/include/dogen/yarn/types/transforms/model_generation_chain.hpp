@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -42,7 +42,7 @@ namespace transforms {
  */
 class model_generation_chain final {
 public:
-    static std::list<model> transform(const context& ctx);
+    static std::list<meta_model::model> transform(const context& ctx);
 };
 
 } } }

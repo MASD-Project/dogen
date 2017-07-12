@@ -51,7 +51,8 @@ ensure_target_path_is_absolute(const boost::filesystem::path& p) {
     BOOST_THROW_EXCEPTION(transformation_error(non_absolute_target + gs));
 }
 
-intermediate_model initial_target_chain::transform(const context& ctx) {
+meta_model::intermediate_model
+initial_target_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, debug) << "Executing the initial target chain.";
 
     const auto tp(ctx.options().target());
@@ -68,7 +69,7 @@ intermediate_model initial_target_chain::transform(const context& ctx) {
      * further transforms can be applied such as the origin
      * transforms.
      */
-    r.origin_type(origin_types::target);
+    r.origin_type(meta_model::origin_types::target);
 
     /*
      * Finally, we apply all of the pre-processing transforms to the

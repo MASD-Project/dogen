@@ -95,7 +95,8 @@ private:
         directive_group_repository& dgrp) const;
 
     void compute_directives(const type_group& tg,
-        const yarn::element& e, const artefact_formatters_type& formatters,
+        const yarn::meta_model::element& e,
+        const artefact_formatters_type& formatters,
         const locator& l, directive_group_repository& dgrp) const;
 
     directive_group_repository make(const type_group& tg,

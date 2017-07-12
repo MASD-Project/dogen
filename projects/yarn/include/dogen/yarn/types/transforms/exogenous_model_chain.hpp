@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
 
 namespace dogen {
@@ -53,9 +53,10 @@ public:
      * @pre @e p must point to a valid file, and contain a supported
      * exogenous model.
      */
-    static intermediate_model transform(const boost::filesystem::path& p);
+    static meta_model::intermediate_model
+    transform(const boost::filesystem::path& p);
 
-    static void transform(const intermediate_model& im,
+    static void transform(const meta_model::intermediate_model& im,
         const boost::filesystem::path& p);
 
 private:

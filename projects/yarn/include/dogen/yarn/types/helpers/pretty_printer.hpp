@@ -27,7 +27,7 @@
 
 #include <string>
 #include <sstream>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/helpers/separators.hpp"
 
 namespace dogen {
@@ -40,7 +40,7 @@ public:
     explicit pretty_printer(const separators s);
 
 private:
-    std::list<std::string> to_list(const name& n,
+    std::list<std::string> to_list(const meta_model::name& n,
         const bool model_name_mode) const;
 
 private:
@@ -49,7 +49,7 @@ private:
     void print_enclosed(const std::list<std::string>& l);
 
 public:
-    void add(const name& n, const bool model_name_mode = false);
+    void add(const meta_model::name& n, const bool model_name_mode = false);
     void add(const std::string& c);
     void add_child(const std::string& c);
 

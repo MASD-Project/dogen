@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_value_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_actions_hash.hpp"
 
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dogen::yarn::name>& v) {
+inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::optional<dogen::yarn::meta_model::name>& v) {
     std::size_t seed(0);
 
     if (!v)
@@ -40,7 +40,7 @@ inline std::size_t hash_boost_optional_dogen_yarn_name(const boost::optional<dog
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_yarn_name(const std::list<dogen::yarn::name>& v) {
+inline std::size_t hash_std_list_dogen_yarn_meta_model_name(const std::list<dogen::yarn::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i);
@@ -58,8 +58,8 @@ std::size_t mapping_value_hasher::hash(const mapping_value& v) {
     std::size_t seed(0);
 
     combine(seed, v.mapping_action());
-    combine(seed, hash_boost_optional_dogen_yarn_name(v.default_name()));
-    combine(seed, hash_std_list_dogen_yarn_name(v.aliases()));
+    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.default_name()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.aliases()));
 
     return seed;
 }

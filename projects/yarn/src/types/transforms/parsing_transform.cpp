@@ -27,7 +27,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
@@ -106,7 +106,8 @@ std::string parsing_transform::make_primitive_underlying_element(
 }
 
 std::string parsing_transform::
-obtain_value_attribute_simple_name(const languages l) {
+obtain_value_attribute_simple_name(const meta_model::languages l) {
+    using meta_model::languages;
     switch(l) {
     case languages::csharp: return csharp_value;
     case languages::cpp: return cpp_value;
@@ -118,8 +119,8 @@ obtain_value_attribute_simple_name(const languages l) {
     } }
 }
 
-void parsing_transform::
-parse_attributes(const languages language, std::list<attribute>& attrs) {
+void parsing_transform::parse_attributes(const meta_model::languages language,
+    std::list<meta_model::attribute>& attrs) {
     const helpers::legacy_name_tree_parser ntp(language);
     for (auto& attr : attrs) {
         const auto ut(boost::algorithm::trim_copy(attr.unparsed_type()));
@@ -138,8 +139,8 @@ parse_attributes(const languages language, std::list<attribute>& attrs) {
     }
 }
 
-void parsing_transform::parse_parent(const type_group& tg, object& o) {
-
+void parsing_transform::
+parse_parent(const type_group& tg, meta_model::object& o) {
     /*
      * Obtain the parent name from the meta-data. If there is no
      * parent name there is nothing to do.
@@ -167,7 +168,7 @@ void parsing_transform::parse_parent(const type_group& tg, object& o) {
 }
 
 void parsing_transform::
-parse_underlying_element(const type_group& tg, enumeration& e) {
+parse_underlying_element(const type_group& tg, meta_model::enumeration& e) {
 
     /*
      * Obtain the underlying element name from the meta-data. If there
@@ -197,7 +198,7 @@ parse_underlying_element(const type_group& tg, enumeration& e) {
 }
 
 void parsing_transform::parse_underlying_element(const type_group& tg,
-    const languages l, primitive& p) {
+    const meta_model::languages l, meta_model::primitive& p) {
 
     const auto id(p.name().id());
 
@@ -219,7 +220,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
     const auto& n(p.name());
     const auto sn(obtain_value_attribute_simple_name(l));
 
-    yarn::attribute attr;
+    meta_model::attribute attr;
     attr.name(nf.build_attribute_name(n, sn));
     attr.unparsed_type(ut);
     attr.documentation(documentation);
@@ -232,7 +233,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 }
 
 void parsing_transform::
-transform(const context& ctx, intermediate_model& m) {
+transform(const context& ctx, meta_model::intermediate_model& m) {
     const auto tg(make_type_group(ctx.type_repository()));
     const auto l(m.input_language());
 

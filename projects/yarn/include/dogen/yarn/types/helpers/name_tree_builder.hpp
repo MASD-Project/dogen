@@ -29,9 +29,9 @@
 #include <string>
 #include <unordered_set>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/location.hpp"
-#include "dogen/yarn/types/name_tree.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/location.hpp"
+#include "dogen/yarn/types/meta_model/name_tree.hpp"
 #include "dogen/yarn/types/helpers/node.hpp"
 
 namespace dogen {
@@ -95,14 +95,14 @@ private:
      * @brief Generate the name tree for the given node
      * representation.
      */
-    name_tree make_name_tree(const node& n);
+    meta_model::name_tree make_name_tree(const node& n);
 
 public:
     /**
      * @brief Generate the name tree representation for the current
      * node representation.
      */
-    name_tree build();
+    meta_model::name_tree build();
 
 private:
     std::list<std::string> names_;

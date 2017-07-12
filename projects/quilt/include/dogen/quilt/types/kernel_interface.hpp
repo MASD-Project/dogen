@@ -32,8 +32,8 @@
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/quilt/types/kernel_output.hpp"
 
@@ -77,7 +77,7 @@ public:
     /**
      * @brief Language supported by this kernel.
      */
-    virtual yarn::languages language() const = 0;
+    virtual yarn::meta_model::languages language() const = 0;
 
     /**
      * @brief Generates the source code for the kernel.
@@ -87,7 +87,7 @@ public:
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
         const bool requires_kernel_directory,
-        const yarn::model& m) const = 0;
+        const yarn::meta_model::model& m) const = 0;
 };
 
 } }

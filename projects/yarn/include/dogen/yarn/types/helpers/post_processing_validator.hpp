@@ -29,10 +29,10 @@
 #include <string>
 #include <utility>
 #include <unordered_set>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
 
 namespace dogen {
@@ -41,36 +41,39 @@ namespace helpers {
 
 class post_processing_validator final {
 private:
-    static bool allow_spaces_in_built_in_types(const languages l);
-    static decomposition_result decompose_model(const intermediate_model& im);
+    static bool allow_spaces_in_built_in_types(const meta_model::languages l);
+    static decomposition_result
+    decompose_model(const meta_model::intermediate_model& im);
 
 private:
-    static void validate_enumerations(const indices& idx,
-        const std::unordered_map<std::string, enumeration>& enumerations);
+    static void validate_enumerations(const indices& idx, const
+        std::unordered_map<std::string, meta_model::enumeration>& enumerations);
 
-    static void validate_primitives(const indices& idx,
-        const std::unordered_map<std::string, primitive>& primitivess);
+    static void validate_primitives(const indices& idx, const
+        std::unordered_map<std::string, meta_model::primitive>& primitivess);
 
 private:
     static void validate_string(const std::string& s,
         bool check_not_builtin = true);
     static void validate_strings(const std::list<std::string>& strings);
-    static void validate_name(const name& n,
+    static void validate_name(const meta_model::name& n,
         const bool allow_spaces_in_built_in_types);
     static void validate_names(
-        const std::list<std::pair<std::string, name>>& names,
-        const languages l);
+        const std::list<std::pair<std::string, meta_model::name>>& names,
+        const meta_model::languages l);
 
     static void validate_name_tree(const std::unordered_set<std::string>&
-        abstract_elements, const languages l, const name_tree& nt,
+        abstract_elements, const meta_model::languages l,
+        const meta_model::name_tree& nt,
         const bool inherit_opaqueness_from_parent = false);
     static void validate_name_trees(
         const std::unordered_set<std::string>& abstract_elements,
-        const languages l,
-        const std::list<std::pair<std::string, name_tree>>& nts);
+        const meta_model::languages l,
+        const std::list<std::pair<std::string, meta_model::name_tree>>& nts);
 
 public:
-    static void validate(const indices& idx, const intermediate_model& im);
+    static void validate(const indices& idx,
+        const meta_model::intermediate_model& im);
 };
 
 } } }

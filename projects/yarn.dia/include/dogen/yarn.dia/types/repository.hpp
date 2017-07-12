@@ -29,8 +29,8 @@
 #include <string>
 #include <algorithm>
 #include <unordered_map>
-#include "dogen/yarn/types/name.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn.dia/serialization/repository_fwd_ser.hpp"
 
 namespace dogen {
@@ -50,8 +50,8 @@ public:
 public:
     repository(
         const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
-        const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
-        const dogen::yarn::intermediate_model& model);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name,
+        const dogen::yarn::meta_model::intermediate_model& model);
 
 private:
     template<typename Archive>
@@ -75,20 +75,20 @@ public:
      * @brief The name corresponding to a dia object ID.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::name>& id_to_name() const;
-    std::unordered_map<std::string, dogen::yarn::name>& id_to_name();
-    void id_to_name(const std::unordered_map<std::string, dogen::yarn::name>& v);
-    void id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v);
+    const std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name();
+    void id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v);
+    void id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>&& v);
     /**@}*/
 
     /**
      * @brief Intermediate yarn model we are currently building.
      */
     /**@{*/
-    const dogen::yarn::intermediate_model& model() const;
-    dogen::yarn::intermediate_model& model();
-    void model(const dogen::yarn::intermediate_model& v);
-    void model(const dogen::yarn::intermediate_model&& v);
+    const dogen::yarn::meta_model::intermediate_model& model() const;
+    dogen::yarn::meta_model::intermediate_model& model();
+    void model(const dogen::yarn::meta_model::intermediate_model& v);
+    void model(const dogen::yarn::meta_model::intermediate_model&& v);
     /**@}*/
 
 public:
@@ -103,8 +103,8 @@ public:
 
 private:
     std::unordered_map<std::string, std::list<std::string> > child_id_to_parent_ids_;
-    std::unordered_map<std::string, dogen::yarn::name> id_to_name_;
-    dogen::yarn::intermediate_model model_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::name> id_to_name_;
+    dogen::yarn::meta_model::intermediate_model model_;
 };
 
 } } }

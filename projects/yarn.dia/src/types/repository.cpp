@@ -26,8 +26,8 @@ namespace dia {
 
 repository::repository(
     const std::unordered_map<std::string, std::list<std::string> >& child_id_to_parent_ids,
-    const std::unordered_map<std::string, dogen::yarn::name>& id_to_name,
-    const dogen::yarn::intermediate_model& model)
+    const std::unordered_map<std::string, dogen::yarn::meta_model::name>& id_to_name,
+    const dogen::yarn::meta_model::intermediate_model& model)
     : child_id_to_parent_ids_(child_id_to_parent_ids),
       id_to_name_(id_to_name),
       model_(model) { }
@@ -67,35 +67,35 @@ void repository::child_id_to_parent_ids(const std::unordered_map<std::string, st
     child_id_to_parent_ids_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::name>& repository::id_to_name() const {
+const std::unordered_map<std::string, dogen::yarn::meta_model::name>& repository::id_to_name() const {
     return id_to_name_;
 }
 
-std::unordered_map<std::string, dogen::yarn::name>& repository::id_to_name() {
+std::unordered_map<std::string, dogen::yarn::meta_model::name>& repository::id_to_name() {
     return id_to_name_;
 }
 
-void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>& v) {
+void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v) {
     id_to_name_ = v;
 }
 
-void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::name>&& v) {
+void repository::id_to_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>&& v) {
     id_to_name_ = std::move(v);
 }
 
-const dogen::yarn::intermediate_model& repository::model() const {
+const dogen::yarn::meta_model::intermediate_model& repository::model() const {
     return model_;
 }
 
-dogen::yarn::intermediate_model& repository::model() {
+dogen::yarn::meta_model::intermediate_model& repository::model() {
     return model_;
 }
 
-void repository::model(const dogen::yarn::intermediate_model& v) {
+void repository::model(const dogen::yarn::meta_model::intermediate_model& v) {
     model_ = v;
 }
 
-void repository::model(const dogen::yarn::intermediate_model&& v) {
+void repository::model(const dogen::yarn::meta_model::intermediate_model&& v) {
     model_ = std::move(v);
 }
 

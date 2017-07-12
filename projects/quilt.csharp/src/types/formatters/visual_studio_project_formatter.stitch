@@ -20,7 +20,8 @@ std::string visual_studio_project_formatter::formatter_name() const {
     return r;
 }
 
-annotations::archetype_location visual_studio_project_formatter::archetype_location() const {
+annotations::archetype_location
+visual_studio_project_formatter::archetype_location() const {
     static annotations::archetype_location
         r(csharp::traits::family(), csharp::traits::kernel(),
           traits::visual_studio_facet(),
@@ -34,18 +35,18 @@ std::type_index visual_studio_project_formatter::element_type_index() const {
 }
 
 boost::filesystem::path visual_studio_project_formatter::
-full_path(const formattables::locator& l, const yarn::name& n) const {
+full_path(const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_project(n, static_artefact());
 }
 
 std::list<std::string> visual_studio_project_formatter::
-inclusion_dependencies(const yarn::element& /*e*/) const {
+inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact
-visual_studio_project_formatter::format(const context& ctx, const yarn::element& e) const {
+dogen::formatters::artefact visual_studio_project_formatter::
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
     const auto& vsp(a.as<fabric::visual_studio_project>(static_artefact(), e));

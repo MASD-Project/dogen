@@ -36,7 +36,7 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
@@ -63,7 +63,7 @@ private:
         const annotations::type_repository& atrp,
         const annotations::annotation& ra,
         const formatters::repository& frp, const formattables::locator & l,
-        const yarn::model& m) const;
+        const yarn::meta_model::model& m) const;
 
     std::list<dogen::formatters::artefact>
     format(const annotations::type_repository& atrp,
@@ -79,14 +79,14 @@ public:
     std::forward_list<annotations::archetype_location>
         archetype_locations() const override;
 
-    yarn::languages language() const override;
+    yarn::meta_model::languages language() const override;
 
     kernel_output generate(const options::knitting_options& ko,
         const annotations::type_repository& atrp,
         const annotations::annotation_groups_factory& agf,
         const dogen::formatters::repository& drp,
         const bool enable_kernel_directories,
-        const yarn::model& m) const override;
+        const yarn::meta_model::model& m) const override;
 };
 
 } } }

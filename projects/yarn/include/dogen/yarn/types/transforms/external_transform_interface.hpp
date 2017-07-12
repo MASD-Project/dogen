@@ -28,7 +28,7 @@
 #include <string>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -46,7 +46,7 @@ public:
     virtual std::string id() const = 0;
     virtual void transform(const context& ctx,
         const dogen::formatters::decoration_properties_factory& dpf,
-        intermediate_model& im) const = 0;
+        meta_model::intermediate_model& im) const = 0;
 };
 
 } } }

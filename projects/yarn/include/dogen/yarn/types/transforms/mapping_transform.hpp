@@ -25,8 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -35,9 +35,12 @@ namespace transforms {
 
 class mapping_transform final {
 public:
-    static bool is_mappable(const languages from, const languages to);
-    static intermediate_model transform(const context& ctx,
-        const intermediate_model& src, const languages to);
+    static bool is_mappable(const meta_model::languages from,
+        const meta_model::languages to);
+
+    static meta_model::intermediate_model transform(const context& ctx,
+        const meta_model::intermediate_model& src,
+        const meta_model::languages to);
 };
 
 } } }

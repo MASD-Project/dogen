@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/element_visitor.hpp"
+#include "dogen/yarn/types/meta_model/element_visitor.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_fwd.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_project_fwd.hpp"
@@ -39,12 +39,12 @@ namespace fabric {
 /**
  * @brief Visitor for element
  */
-class element_visitor : public dogen::yarn::element_visitor {
+class element_visitor : public dogen::yarn::meta_model::element_visitor {
 public:
     virtual ~element_visitor() noexcept = 0;
 
 public:
-    using dogen::yarn::element_visitor::visit;
+    using dogen::yarn::meta_model::element_visitor::visit;
 
     /**
      * @brief Accept visits for type dogen::quilt::csharp::fabric::assembly_info

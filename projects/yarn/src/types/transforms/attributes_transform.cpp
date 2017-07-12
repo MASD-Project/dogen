@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
@@ -47,8 +47,8 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-object& attributes_transform::
-find_object(const name& n, intermediate_model& im) {
+meta_model::object& attributes_transform::
+find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
     const auto id(n.id());
     auto i(im.objects().find(id));
     if (i == im.objects().end()) {
@@ -58,8 +58,8 @@ find_object(const name& n, intermediate_model& im) {
     return i->second;
 }
 
-concept& attributes_transform::
-find_concept(const name& n, intermediate_model& im) {
+meta_model::concept& attributes_transform::
+find_concept(const meta_model::name& n, meta_model::intermediate_model& im) {
     const auto& id(n.id());
     auto i(im.concepts().find(id));
     if (i == im.concepts().end()) {
@@ -69,7 +69,8 @@ find_concept(const name& n, intermediate_model& im) {
     return i->second;
 }
 
-void attributes_transform::expand_object(object& o, intermediate_model& im,
+void attributes_transform::expand_object(meta_model::object& o,
+    meta_model::intermediate_model& im,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(o.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << id;
@@ -95,7 +96,7 @@ void attributes_transform::expand_object(object& o, intermediate_model& im,
      * changes from rippling through, but there is no evidence that
      * this order is more effective than other alternatives.
      */
-    std::list<attribute> concept_attributes;
+    std::list<meta_model::attribute> concept_attributes;
     for (const auto& n : o.modeled_concepts()) {
         auto& c(find_concept(n, im));
         const auto& p(c.local_attributes());
@@ -162,7 +163,7 @@ void attributes_transform::expand_object(object& o, intermediate_model& im,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_objects(intermediate_model& im) {
+void attributes_transform::expand_objects(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
     std::unordered_set<std::string> processed_ids;
@@ -172,7 +173,8 @@ void attributes_transform::expand_objects(intermediate_model& im) {
     }
 }
 
-void attributes_transform::expand_concept(concept& c, intermediate_model& im,
+void attributes_transform::expand_concept(meta_model::concept& c,
+    meta_model::intermediate_model& im,
     std::unordered_set<std::string>& processed_ids) {
     const auto id(c.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding concept: " << id;
@@ -211,7 +213,7 @@ void attributes_transform::expand_concept(concept& c, intermediate_model& im,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_concepts(intermediate_model& im) {
+void attributes_transform::expand_concepts(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding concepts: " << im.concepts().size();
 
     std::unordered_set<std::string> processed_ids;
@@ -221,7 +223,7 @@ void attributes_transform::expand_concepts(intermediate_model& im) {
     }
 }
 
-void attributes_transform::transform(intermediate_model& im) {
+void attributes_transform::transform(meta_model::intermediate_model& im) {
     expand_concepts(im);
     expand_objects(im);
 }

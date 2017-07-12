@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,11 +33,11 @@ namespace transforms {
 
 class generability_transform final {
 private:
-    static bool is_generatable(const element& e);
-    static bool has_generatable_types(const intermediate_model& im);
+    static bool is_generatable(const meta_model::element& e);
+    static bool has_generatable_types(const meta_model::intermediate_model& im);
 
 public:
-    static void transform(intermediate_model& im);
+    static void transform(meta_model::intermediate_model& im);
 };
 
 } } }

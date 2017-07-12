@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/languages_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_hash.hpp"
+#include "dogen/yarn/hash/meta_model/languages_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_value_hash.hpp"
 
 namespace {
@@ -30,7 +30,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_dogen_yarn_languages_dogen_yarn_helpers_mapping_value(const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& v) {
+inline std::size_t hash_std_unordered_map_dogen_yarn_meta_model_languages_dogen_yarn_helpers_mapping_value(const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -49,7 +49,7 @@ std::size_t mapping_hasher::hash(const mapping& v) {
     std::size_t seed(0);
 
     combine(seed, v.lam_id());
-    combine(seed, hash_std_unordered_map_dogen_yarn_languages_dogen_yarn_helpers_mapping_value(v.by_language()));
+    combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_languages_dogen_yarn_helpers_mapping_value(v.by_language()));
 
     return seed;
 }

@@ -21,10 +21,10 @@
 #include <boost/test/unit_test.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
-#include "dogen/yarn/types/builtin.hpp"
-#include "dogen/yarn/io/builtin_io.hpp"
-#include "dogen/yarn/types/object.hpp"
-#include "dogen/yarn/io/object_io.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/io/meta_model/builtin_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
 #include "dogen/upsilon/test/mock_model_factory.hpp"
 #include "dogen/upsilon/types/primitive.hpp"
@@ -52,7 +52,7 @@ const mock_intermediate_model_factory::flags flags(
     false/*concepts_indexed*/, false/*attributes_indexed*/,
     false/*associations_indexed*/);
 const mock_intermediate_model_factory yarn_factory(flags);
-const auto ot(dogen::yarn::origin_types::target);
+const auto ot(dogen::yarn::meta_model::origin_types::target);
 
 }
 

@@ -24,14 +24,17 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/parsing_error.hpp"
-#include "dogen/yarn/io/name_tree_io.hpp"
-#include "dogen/yarn/io/name_io.hpp"
+#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 
 using dogen::utility::test::asserter;
+using dogen::yarn::meta_model::name_tree;
+using dogen::yarn::helpers::legacy_name_tree_parser;
+using dogen::yarn::helpers::name_factory;
 
 namespace  {
 
@@ -39,20 +42,19 @@ const std::string empty;
 const std::string test_module("yarn");
 const std::string test_suite("legacy_name_tree_parser_tests");
 
-const dogen::yarn::languages cpp(dogen::yarn::languages::cpp);
+const auto cpp(dogen::yarn::meta_model::languages::cpp);
 
-dogen::yarn::
-name_tree make(const dogen::yarn::name& n) {
-    dogen::yarn::name_tree r;
+name_tree make(const dogen::yarn::meta_model::name& n) {
+    name_tree r;
     r.current(n);
     return r;
 }
 
 bool test_builtin(const std::string& s) {
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
 
-    dogen::yarn::helpers::name_factory nf;
+    name_factory nf;
     const auto e(make(nf.build_element_name(s)));
     return asserter::assert_equals(e, a);
 }
@@ -68,10 +70,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_many_nested_scopes_produces_expected_na
     const std::string s("a::b::c::z");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
 
-    dogen::yarn::helpers::name_factory nf;
+    name_factory nf;
     const auto e(make(nf.build_element_name("z", { "a", "b", "c"})));
 
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -82,10 +84,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_without_scope_operator_produces_expected_nam
     const std::string s("zeta");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
 
-    dogen::yarn::helpers::name_factory nf;
+    name_factory nf;
     const auto e(make(nf.build_element_name(s)));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
@@ -95,10 +97,10 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_one_scope_operator_produces_expected_na
     const std::string s("a::z");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
 
-    dogen::yarn::helpers::name_factory nf;
+    name_factory nf;
     const auto e(make(nf.build_element_name("z",
                 std::list<std::string>({ "a" }))));
     BOOST_CHECK(asserter::assert_equals(e, a));
@@ -108,7 +110,7 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_colon_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_colon_fails_to_parse");
     const std::string s("a:z");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
 }
 
@@ -116,7 +118,7 @@ BOOST_AUTO_TEST_CASE(string_starting_with_digit_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("string_starting_with_digit_fails_to_parse");
     const std::string s("0a");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
 }
 
@@ -124,7 +126,7 @@ BOOST_AUTO_TEST_CASE(string_ending_with_scope_operator_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("string_ending_with_scope_operator_fails_to_parse");
     const std::string s("a::");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
 }
 
@@ -132,7 +134,7 @@ BOOST_AUTO_TEST_CASE(scope_operator_followed_by_scope_operator_fails_to_parse) {
     SETUP_TEST_LOG_SOURCE("scope_operator_followed_by_scope_operator_fails_to_parse");
     const std::string s("A::::");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     BOOST_CHECK_THROW(ntp.parse(s), parsing_error);
 }
 
@@ -159,7 +161,7 @@ BOOST_AUTO_TEST_CASE(all_builtin_types_are_valid) {
 
 BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
     SETUP_TEST_LOG("unsignable_types_cannot_be_unsigned");
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     BOOST_CHECK_THROW(ntp.parse("unsigned bool"), parsing_error);
     BOOST_CHECK_THROW(ntp.parse("unsigned x"), parsing_error);
     BOOST_CHECK_THROW(ntp.parse("unsigned float"), parsing_error);
@@ -169,17 +171,17 @@ BOOST_AUTO_TEST_CASE(unsignable_types_cannot_be_unsigned) {
 BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_single_template_argument_produces_expected_name_trees");
 
-    dogen::yarn::name_tree e;
-    dogen::yarn::helpers::name_factory nf;
+    name_tree e;
+    name_factory nf;
     e.current(nf.build_element_name("type"));
 
-    dogen::yarn::name_tree c;
+    name_tree c;
     c.current(nf.build_element_name("abc"));
 
-    e.children(std::list<dogen::yarn::name_tree> { c });
+    e.children(std::list<name_tree> { c });
 
     const std::string s("type<abc>");
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
@@ -187,42 +189,42 @@ BOOST_AUTO_TEST_CASE(parsing_string_with_single_template_argument_produces_expec
 BOOST_AUTO_TEST_CASE(parsing_string_with_two_template_argument_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_string_with_two_template_argument_produces_expected_name_trees");
 
-    dogen::yarn::name_tree e;
-    dogen::yarn::helpers::name_factory nf;
+    name_tree e;
+    name_factory nf;
     e.current(nf.build_element_name("type"));
 
-    dogen::yarn::name_tree c;
+    name_tree c;
     c.current(nf.build_element_name("abc"));
 
-    dogen::yarn::name_tree d;
+    name_tree d;
     d.current(nf.build_element_name("cde"));
 
-    e.children(std::list<dogen::yarn::name_tree> { c, d });
+    e.children(std::list<name_tree> { c, d });
 
     const std::string s("type<abc,cde>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
 
 BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_string_produces_expected_name_trees");
-    dogen::yarn::name_tree e;
-    dogen::yarn::helpers::name_factory nf;
+    name_tree e;
+    name_factory nf;
     e.current(nf.build_element_name("vector",
             std::list<std::string>({ "std" })));
 
-    dogen::yarn::name_tree c;
+    name_tree c;
     c.current(nf.build_element_name("string",
             std::list<std::string>({ "std" })));
-    e.children(std::list<dogen::yarn::name_tree> { c });
+    e.children(std::list<name_tree> { c });
 
     const std::string s("std::vector<std::string>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
@@ -230,20 +232,20 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_string_produces_expected_name_trees) {
 BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_builtin_produces_expected_name_trees");
 
-    dogen::yarn::name_tree e;
-    dogen::yarn::helpers::name_factory nf;
+    name_tree e;
+    name_factory nf;
     e.current(nf.build_element_name("vector",
             std::list<std::string>({ "std" })));
 
-    dogen::yarn::name_tree c;
+    name_tree c;
     c.current(nf.build_element_name("unsigned int"));
 
-    e.children(std::list<dogen::yarn::name_tree> { c });
+    e.children(std::list<name_tree> { c });
 
     const std::string s("std::vector<unsigned int>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }
@@ -251,26 +253,25 @@ BOOST_AUTO_TEST_CASE(parsing_vector_of_builtin_produces_expected_name_trees) {
 BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_unordered_map_produces_expected_name_trees");
 
-    dogen::yarn::name_tree e;
-
-    dogen::yarn::helpers::name_factory nf;
+    name_tree e;
+    name_factory nf;
     e.current(nf.build_element_name("unordered_map",
             std::list<std::string>({ "std" })));
 
-    dogen::yarn::name_tree c;
+    name_tree c;
     c.current(nf.build_element_name("string",
             std::list<std::string>({ "std" })));
 
-    dogen::yarn::name_tree d;
+    name_tree d;
     d.current(nf.build_element_name("type",
             std::list<std::string>({ "my" })));
 
-    e.children(std::list<dogen::yarn::name_tree> { c, d });
+    e.children(std::list<name_tree> { c, d });
 
     const std::string s1("std::unordered_map<std::string,my::type>");
     BOOST_LOG_SEV(lg, info) << "input: " << s1;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a1(ntp.parse(s1));
     BOOST_CHECK(asserter::assert_equals(e, a1));
 
@@ -284,26 +285,26 @@ BOOST_AUTO_TEST_CASE(parsing_unordered_map_produces_expected_name_trees) {
 BOOST_AUTO_TEST_CASE(parsing_vector_of_shared_ptr_produces_expected_name_trees) {
     SETUP_TEST_LOG_SOURCE("parsing_vector_of_shared_ptr_produces_expected_name_trees");
 
-    dogen::yarn::name_tree e;
-    dogen::yarn::helpers::name_factory nf;
+    name_tree e;
+    name_factory nf;
     e.current(nf.build_element_name("vector",
             std::list<std::string>({ "std" })));
 
-    dogen::yarn::name_tree c;
+    name_tree c;
     c.current(nf.build_element_name("shared_ptr",
             std::list<std::string>({ "std" })));
 
-    dogen::yarn::name_tree d;
+    name_tree d;
     d.current(nf.build_element_name("string",
             std::list<std::string>({ "std" })));
 
-    c.children(std::list<dogen::yarn::name_tree> { d });
-    e.children(std::list<dogen::yarn::name_tree> { c });
+    c.children(std::list<name_tree> { d });
+    e.children(std::list<name_tree> { c });
 
     const std::string s("std::vector<std::shared_ptr<std::string>>");
     BOOST_LOG_SEV(lg, info) << "input: " << s;
 
-    dogen::yarn::helpers::legacy_name_tree_parser ntp(cpp);
+    legacy_name_tree_parser ntp(cpp);
     const auto a(ntp.parse(s));
     BOOST_CHECK(asserter::assert_equals(e, a));
 }

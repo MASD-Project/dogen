@@ -30,9 +30,9 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/enumeration.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -74,23 +74,27 @@ private:
 
 private:
     static void populate_from_annotations(const enumeration_type_group& tg,
-        enumeration& e);
+        meta_model::enumeration& e);
     static void populate_from_annotations(const enumerator_type_group& tg,
-        enumerator& e);
+        meta_model::enumerator& e);
 
 private:
-    static name obtain_enumeration_default_underlying_element_name(
-        const intermediate_model& im);
-    static std::string obtain_invalid_enumerator_simple_name(const languages l);
-    static enumerator make_invalid_enumerator(const name& n, const languages l);
+    static meta_model::name obtain_enumeration_default_underlying_element_name(
+        const meta_model::intermediate_model& im);
+    static std::string obtain_invalid_enumerator_simple_name(
+        const meta_model::languages l);
+    static meta_model::enumerator make_invalid_enumerator(
+        const meta_model::name& n, const meta_model::languages l);
 
     static void expand_default_underlying_element(
-        const name& default_underlying_element_name, enumeration& e);
+        const meta_model::name& default_underlying_element_name,
+        meta_model::enumeration& e);
     static void expand_enumerators(const enumerator_type_group& tg,
-        const languages l, enumeration& e);
+        const meta_model::languages l, meta_model::enumeration& e);
 
 public:
-    static void transform(const context& ctx, intermediate_model& im);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& im);
 };
 
 } } }

@@ -24,44 +24,45 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-void decomposer::add_name(const std::string& owner, const name& n) {
-    std::pair<std::string, name> pair;
+void decomposer::add_name(const std::string& owner, const meta_model::name& n) {
+    std::pair<std::string, meta_model::name> pair;
     pair.first = owner;
     pair.second = n;
     result_.names().push_back(pair);
 }
 
-void decomposer::add_name_tree(const std::string& owner, const name_tree& nt) {
-    std::pair<std::string, name_tree> pair;
+void decomposer::
+add_name_tree(const std::string& owner, const meta_model::name_tree& nt) {
+    std::pair<std::string, meta_model::name_tree> pair;
     pair.first = owner;
     pair.second = nt;
     result_.name_trees().push_back(pair);
 }
 
 void decomposer::
-add_names(const std::string& owner, const std::list<name>& names) {
+add_names(const std::string& owner, const std::list<meta_model::name>& names) {
     for (const auto& n : names)
         add_name(owner, n);
 }
 
-void decomposer::
-process_attributes(const std::string& owner, const std::list<attribute>& attrs) {
+void decomposer::process_attributes(const std::string& owner,
+    const std::list<meta_model::attribute>& attrs) {
     for (const auto& attr : attrs) {
         add_name(owner, attr.name());
         add_name_tree(owner, attr.parsed_type());
     }
 }
 
-void decomposer::process_element(const element& e) {
+void decomposer::process_element(const meta_model::element& e) {
     add_name(e.name().id(), e.name());
 }
 
-void decomposer::decompose(const yarn::concept& c) {
+void decomposer::decompose(const meta_model::concept& c) {
     process_element(c);
     process_attributes(c.name().id(), c.local_attributes());
 }
 
-void decomposer::decompose(const yarn::module& m) {
+void decomposer::decompose(const meta_model::module& m) {
     /*
      * The global module represents the unnamed global
      * namespace. There can only be one of these and it is generated
@@ -73,22 +74,22 @@ void decomposer::decompose(const yarn::module& m) {
     process_element(m);
 }
 
-void decomposer::decompose(const yarn::enumeration& e) {
+void decomposer::decompose(const meta_model::enumeration& e) {
     process_element(e);
     for (const auto& en : e.enumerators())
         add_name(e.name().id(), en.name());
 }
 
-void decomposer::decompose(const yarn::exception& e) {
+void decomposer::decompose(const meta_model::exception& e) {
     process_element(e);
 }
 
-void decomposer::decompose(const yarn::object& o) {
+void decomposer::decompose(const meta_model::object& o) {
     process_element(o);
     process_attributes(o.name().id(), o.local_attributes());
 }
 
-void decomposer::decompose(const yarn::builtin& b) {
+void decomposer::decompose(const meta_model::builtin& b) {
     process_element(b);
 }
 

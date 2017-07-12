@@ -22,7 +22,7 @@
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
-#include "dogen/yarn/types/builtin.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -50,23 +50,23 @@ annotations::archetype_location builtin_formatter::archetype_location() const {
 }
 
 std::type_index builtin_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::builtin)));
+    static auto r(std::type_index(typeid(yarn::meta_model::builtin)));
     return r;
 }
 
-boost::filesystem::path builtin_formatter::
-full_path(const formattables::locator& l, const yarn::name& n) const {
+boost::filesystem::path builtin_formatter::full_path(
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path(n, static_artefact());
 }
 
 std::list<std::string> builtin_formatter::
-inclusion_dependencies(const yarn::element& /*e*/) const {
+inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact builtin_formatter::
-format(const context& /*ctx*/, const yarn::element& /*e*/) const {
+format(const context& /*ctx*/, const yarn::meta_model::element& /*e*/) const {
     dogen::formatters::artefact r;
     return r;
 }

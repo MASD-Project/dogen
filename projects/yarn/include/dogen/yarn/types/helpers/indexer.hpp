@@ -26,8 +26,8 @@
 #endif
 
 #include <unordered_set>
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -35,7 +35,7 @@ namespace helpers {
 
 class indexer final {
 public:
-    static indices index(intermediate_model& m);
+    static indices index(meta_model::intermediate_model& m);
 };
 
 } } }

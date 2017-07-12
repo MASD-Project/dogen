@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/diagram_fwd.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
@@ -76,10 +76,11 @@ private:
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.
      */
-    yarn::intermediate_model generate_model(builder& b, const graph_type& g);
+    meta_model::intermediate_model
+    generate_model(builder& b, const graph_type& g);
 
 public:
-    yarn::intermediate_model execute(const dogen::dia::diagram& diagram,
+    meta_model::intermediate_model execute(const dogen::dia::diagram& diagram,
         const std::string& model_name);
 };
 

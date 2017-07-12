@@ -27,7 +27,7 @@
 
 #include "dogen/annotations/types/annotation_groups_factory_fwd.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/intermediate_model_fwd.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -39,13 +39,14 @@ namespace transforms {
  */
 class annotations_transform final {
 private:
-    static void update_scribble_groups(intermediate_model& im);
+    static void update_scribble_groups(meta_model::intermediate_model& im);
     static void update_annotations(
         const annotations::annotation_groups_factory& agf,
-        intermediate_model& im);
+        meta_model::intermediate_model& im);
 
 public:
-    static void transform(const context& ctx, intermediate_model& im);
+    static void transform(const context& ctx,
+        meta_model::intermediate_model& im);
 };
 
 } } }

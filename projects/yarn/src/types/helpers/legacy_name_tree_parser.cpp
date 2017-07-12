@@ -32,8 +32,8 @@
 #include <boost/spirit/include/phoenix_object.hpp>
 #include <boost/spirit/repository/include/qi_distinct.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
 #include "dogen/yarn/types/helpers/parsing_error.hpp"
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
@@ -111,12 +111,13 @@ struct grammar : qi::grammar<Iterator> {
         end_template_ = std::bind(&grammar::end_template, this);
     }
 
-    std::string scope_operator_for_language(const dogen::yarn::languages l) {
+    std::string scope_operator_for_language(
+        const dogen::yarn::meta_model::languages l) {
         switch (l) {
-        case dogen::yarn::languages::csharp: return ".";
-        case dogen::yarn::languages::cpp:
-        case dogen::yarn::languages::upsilon:
-        case dogen::yarn::languages::language_agnostic: return "::";
+        case dogen::yarn::meta_model::languages::csharp: return ".";
+        case dogen::yarn::meta_model::languages::cpp:
+        case dogen::yarn::meta_model::languages::upsilon:
+        case dogen::yarn::meta_model::languages::language_agnostic: return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(l));
             BOOST_LOG_SEV(lg, error) << unsupported_language << s;
@@ -126,7 +127,7 @@ struct grammar : qi::grammar<Iterator> {
     }
 
     grammar(std::shared_ptr<name_tree_builder> b,
-        const dogen::yarn::languages language)
+        const dogen::yarn::meta_model::languages language)
         : grammar::base_type(type_name), builder(b) {
         setup_functors();
         using qi::on_error;
@@ -205,10 +206,11 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-legacy_name_tree_parser::legacy_name_tree_parser(const languages language)
+legacy_name_tree_parser::
+legacy_name_tree_parser(const meta_model::languages language)
     : language_(language) {}
 
-name_tree legacy_name_tree_parser::parse(const std::string& s) const {
+meta_model::name_tree legacy_name_tree_parser::parse(const std::string& s) const {
     BOOST_LOG_SEV(lg, debug) << "parsing name: " << s;
 
     auto builder(std::make_shared<name_tree_builder>());

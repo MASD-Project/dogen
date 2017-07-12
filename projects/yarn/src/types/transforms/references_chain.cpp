@@ -38,9 +38,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::unordered_set<languages> references_chain::
-obtain_relevant_languages(const intermediate_model& target) {
-    std::unordered_set<languages> r;
+std::unordered_set<meta_model::languages> references_chain::
+obtain_relevant_languages(const meta_model::intermediate_model& target) {
+    std::unordered_set<meta_model::languages> r;
     r.insert(target.input_language());
 
     for (const auto ol : target.output_languages())
@@ -49,8 +49,8 @@ obtain_relevant_languages(const intermediate_model& target) {
     return r;
 }
 
-std::list<intermediate_model> references_chain::
-transform(const context& ctx, const intermediate_model& target) {
+std::list<meta_model::intermediate_model> references_chain::
+transform(const context& ctx, const meta_model::intermediate_model& target) {
     BOOST_LOG_SEV(lg, debug) << "Executing the reference models chain.";
 
     /*
@@ -71,7 +71,7 @@ transform(const context& ctx, const intermediate_model& target) {
      * Load each reference model from the reference path, filter and
      * pre-process them.
      */
-    std::list<intermediate_model> r;
+    std::list<meta_model::intermediate_model> r;
     for (const auto& rp : rps) {
         /*
          * Obtain the reference model exactly as it was read out from

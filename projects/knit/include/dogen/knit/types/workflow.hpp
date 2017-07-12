@@ -35,7 +35,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/options/types/knitting_options.hpp"
-#include "dogen/yarn/types/model.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/artefact_writer_interface.hpp"

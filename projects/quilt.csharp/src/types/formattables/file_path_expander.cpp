@@ -20,7 +20,6 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/element.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.csharp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.csharp/types/formattables/file_path_expander.hpp"

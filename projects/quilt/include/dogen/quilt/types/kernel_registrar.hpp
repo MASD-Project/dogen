@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/quilt/types/kernel_interface.hpp"
 
 namespace dogen {
@@ -54,18 +54,18 @@ public:
      * exists. Otherwise returns a null shared pointer.
      */
     std::shared_ptr<kernel_interface>
-    kernel_for_language(const yarn::languages l) const;
+    kernel_for_language(const yarn::meta_model::languages l) const;
 
     /**
      * @brief Returns all available kernels, by language.
      */
-    const std::unordered_map<yarn::languages,
+    const std::unordered_map<yarn::meta_model::languages,
                              std::shared_ptr<kernel_interface>>&
     kernels_by_language() const;
 
 private:
-    std::unordered_map<yarn::languages, std::shared_ptr<kernel_interface>>
-    kernels_by_language_;
+    std::unordered_map<yarn::meta_model::languages,
+                       std::shared_ptr<kernel_interface>> kernels_by_language_;
 };
 
 /*

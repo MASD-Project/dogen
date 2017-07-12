@@ -23,7 +23,7 @@
 #include "dogen/quilt.csharp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 
@@ -51,26 +51,26 @@ annotations::archetype_location primitive_formatter::archetype_location() const 
 }
 
 std::type_index primitive_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::primitive)));
+    static auto r(std::type_index(typeid(yarn::meta_model::primitive)));
     return r;
 }
 
-boost::filesystem::path primitive_formatter::
-full_path(const formattables::locator& l, const yarn::name& n) const {
+boost::filesystem::path primitive_formatter::full_path(
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path(n, static_artefact());
 }
 
 std::list<std::string> primitive_formatter::
-inclusion_dependencies(const yarn::element& /*e*/) const {
+inclusion_dependencies(const yarn::meta_model::element& /*e*/) const {
     std::list<std::string> r;
     return r;
 }
 
-dogen::formatters::artefact
-primitive_formatter::format(const context& ctx, const yarn::element& e) const {
+dogen::formatters::artefact primitive_formatter::
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), id);
-    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
     {
         const auto sn(e.name().simple());
         const auto qn(a.get_qualified_name(e.name()));

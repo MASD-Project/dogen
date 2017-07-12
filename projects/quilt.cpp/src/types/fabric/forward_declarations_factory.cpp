@@ -20,7 +20,7 @@
  */
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 
@@ -50,50 +50,52 @@ private:
     }
 
 public:
-    std::list<boost::shared_ptr<yarn::element>> result() { return result_; }
+    std::list<boost::shared_ptr<yarn::meta_model::element>>
+    result() { return result_; }
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(const yarn::concept&) {}
-    void operator()(const yarn::builtin&) {}
-    void operator()(const yarn::module&) {}
+    void operator()(yarn::meta_model::element&) { }
+    void operator()(const yarn::meta_model::concept&) {}
+    void operator()(const yarn::meta_model::builtin&) {}
+    void operator()(const yarn::meta_model::module&) {}
 
-    void operator()(const dogen::yarn::visitor& v) {
+    void operator()(const dogen::yarn::meta_model::visitor& v) {
         result_.push_back(create(v));
     }
 
-    void operator()(const yarn::enumeration& e) {
+    void operator()(const yarn::meta_model::enumeration& e) {
         const auto fd(create(e));
         fd->is_enum(true);
         fd->underlying_element(e.underlying_element());
         result_.push_back(fd);
     }
 
-    void operator()(const yarn::primitive& p) {
+    void operator()(const yarn::meta_model::primitive& p) {
         result_.push_back(create(p));
     }
 
-    void operator()(const yarn::object& o) {
+    void operator()(const yarn::meta_model::object& o) {
         result_.push_back(create(o));
     }
 
-    void operator()(const yarn::exception& e) {
+    void operator()(const yarn::meta_model::exception& e) {
         const auto fd(create(e));
         fd->is_exception(true);
         result_.push_back(fd);
     }
 
 private:
-    std::list<boost::shared_ptr<yarn::element>> result_;
+    std::list<boost::shared_ptr<yarn::meta_model::element>> result_;
 };
 
-std::list<boost::shared_ptr<yarn::element>> forward_declarations_factory::
-make(const yarn::intermediate_model& im) const {
+std::list<boost::shared_ptr<yarn::meta_model::element>>
+forward_declarations_factory::
+make(const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating forward declarations.";
 
     generator g;
-    yarn::elements_traversal(im, g);
+    yarn::meta_model::elements_traversal(im, g);
     const auto r(g.result());
 
     BOOST_LOG_SEV(lg, debug) << "Generated forward declarations: " << r.size();

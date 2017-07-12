@@ -20,12 +20,12 @@
  */
 #include <set>
 #include <algorithm>
-#include"dogen/yarn/types/object.hpp"
-#include"dogen/yarn/types/visitor.hpp"
-#include"dogen/yarn/types/builtin.hpp"
-#include"dogen/yarn/types/exception.hpp"
-#include"dogen/yarn/types/enumeration.hpp"
-#include"dogen/yarn/types/primitive.hpp"
+#include"dogen/yarn/types/meta_model/object.hpp"
+#include"dogen/yarn/types/meta_model/visitor.hpp"
+#include"dogen/yarn/types/meta_model/builtin.hpp"
+#include"dogen/yarn/types/meta_model/exception.hpp"
+#include"dogen/yarn/types/meta_model/enumeration.hpp"
+#include"dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 
@@ -37,12 +37,12 @@ namespace formattables {
 bool project_items_expander::is_project_item(const std::type_index& ti) const {
     return
         ti == std::type_index(typeid(fabric::assistant)) ||
-        ti == std::type_index(typeid(yarn::enumeration)) ||
-        ti == std::type_index(typeid(yarn::primitive)) ||
-        ti == std::type_index(typeid(yarn::exception)) ||
-        ti == std::type_index(typeid(yarn::object)) ||
-        ti == std::type_index(typeid(yarn::builtin)) ||
-        ti == std::type_index(typeid(yarn::visitor));
+        ti == std::type_index(typeid(yarn::meta_model::enumeration)) ||
+        ti == std::type_index(typeid(yarn::meta_model::primitive)) ||
+        ti == std::type_index(typeid(yarn::meta_model::exception)) ||
+        ti == std::type_index(typeid(yarn::meta_model::object)) ||
+        ti == std::type_index(typeid(yarn::meta_model::builtin)) ||
+        ti == std::type_index(typeid(yarn::meta_model::visitor));
 }
 
 void project_items_expander::expand(model& fm) const {

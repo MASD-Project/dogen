@@ -20,7 +20,7 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
@@ -42,7 +42,8 @@ namespace transforms {
 
 template<typename AssociativeContainerOfContainable>
 inline void add_containing_module_to_non_contained_entities(
-    const name& container_name, AssociativeContainerOfContainable& c) {
+    const meta_model::name& container_name,
+    AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
         auto& s(pair.second);
         if (!s.contained_by())
@@ -50,8 +51,9 @@ inline void add_containing_module_to_non_contained_entities(
     }
 }
 
-module containment_transform::create_global_module(const origin_types ot) {
-    module r;
+meta_model::module
+containment_transform::create_global_module(const meta_model::origin_types ot) {
+    meta_model::module r;
     r.name().id("<global module>");
     r.origin_type(ot);
     r.documentation(global_module_doc);
@@ -59,7 +61,8 @@ module containment_transform::create_global_module(const origin_types ot) {
     return r;
 }
 
-void containment_transform::inject_global_module(intermediate_model& im) {
+void containment_transform::
+inject_global_module(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << im.name().id();
 
@@ -86,7 +89,7 @@ void containment_transform::inject_global_module(intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
 }
 
-void containment_transform::transform(intermediate_model& im) {
+void containment_transform::transform(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding containment for: " << im.name().id();
     inject_global_module(im);
     BOOST_LOG_SEV(lg, debug) << "Finished expanding containment.";

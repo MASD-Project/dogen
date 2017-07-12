@@ -30,7 +30,7 @@
 #include <string>
 #include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/helpers/mapping.hpp"
 #include "dogen/yarn/types/helpers/mapping_set.hpp"
 #include "dogen/yarn/types/helpers/mapping_value.hpp"
@@ -58,9 +58,9 @@ private:
     void insert(const std::string& upsilon_id, const std::string& lam_id,
         std::unordered_map<std::string, std::string>& map) const;
 
-    void insert(const std::string& lam_id, const name& n,
-        const languages l, std::unordered_map<languages,
-        std::unordered_map<std::string, name>>& map) const;
+    void insert(const std::string& lam_id, const meta_model::name& n,
+        const meta_model::languages l, std::unordered_map<meta_model::languages,
+        std::unordered_map<std::string, meta_model::name>>& map) const;
 
     void populate_upsilon_data(const std::string& lam_id,
         const mapping& mapping, const mapping_value& upsilon_mv,

@@ -26,7 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/object.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
 
@@ -45,6 +45,8 @@ const std::string concept_not_found("Concept not found in concept container: ");
 namespace dogen {
 namespace yarn {
 
+namespace meta_model {
+
 /**
  * @brief Add comparable support for names.
  *
@@ -55,9 +57,12 @@ inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
 }
 
+}
+
 namespace transforms {
 
-object& concepts_transform::find_object(const name& n, intermediate_model& im) {
+meta_model::object& concepts_transform::
+find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
     auto i(im.objects().find(n.id()));
     if (i == im.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
@@ -66,7 +71,8 @@ object& concepts_transform::find_object(const name& n, intermediate_model& im) {
     return i->second;
 }
 
-concept& concepts_transform::find_concept(const name& n, intermediate_model& im) {
+meta_model::concept& concepts_transform::
+find_concept(const meta_model::name& n, meta_model::intermediate_model& im) {
     auto i(im.concepts().find(n.id()));
     if (i == im.concepts().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << n.id();
@@ -75,8 +81,8 @@ concept& concepts_transform::find_concept(const name& n, intermediate_model& im)
     return i->second;
 }
 
-void concepts_transform::remove_duplicates(std::list<name>& names) {
-    std::unordered_set<name> processed;
+void concepts_transform::remove_duplicates(std::list<meta_model::name>& names) {
+    std::unordered_set<meta_model::name> processed;
 
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
                              << names.size();
@@ -97,8 +103,9 @@ void concepts_transform::remove_duplicates(std::list<name>& names) {
                              << names.size();
 }
 
-void concepts_transform::expand_object(object& o, intermediate_model& im,
-    std::unordered_set<name>& processed_names) {
+void concepts_transform::
+expand_object(meta_model::object& o, meta_model::intermediate_model& im,
+    std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
 
     if (processed_names.find(o.name()) != processed_names.end()) {
@@ -117,7 +124,7 @@ void concepts_transform::expand_object(object& o, intermediate_model& im,
      * including their parents and so on. We can rely on the concepts'
      * @e refines container for this.
      */
-    std::list<name> expanded_refines;
+    std::list<meta_model::name> expanded_refines;
     for (auto& n : o.modeled_concepts()) {
         auto& c(find_concept(n, im));
         expanded_refines.push_back(n);
@@ -147,10 +154,10 @@ void concepts_transform::expand_object(object& o, intermediate_model& im,
      */
     BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set difference.";
 
-    std::set<name> our_concepts;
+    std::set<meta_model::name> our_concepts;
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
 
-    std::set<name> their_concepts;
+    std::set<meta_model::name> their_concepts;
     const auto& n(o.parents().front());
     auto& parent(find_object(n, im));
     expand_object(parent, im, processed_names);
@@ -163,7 +170,7 @@ void concepts_transform::expand_object(object& o, intermediate_model& im,
      * We want to only model concepts which have not yet been modeled
      * by any of our parents.
      */
-    std::set<name> result;
+    std::set<meta_model::name> result;
     std::set_difference(our_concepts.begin(), our_concepts.end(),
         their_concepts.begin(), their_concepts.end(),
         std::inserter(result, result.end()));
@@ -181,18 +188,19 @@ void concepts_transform::expand_object(object& o, intermediate_model& im,
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
-void concepts_transform::expand_objects(intermediate_model& im) {
+void concepts_transform::expand_objects(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
-    std::unordered_set<name> processed_names;
+    std::unordered_set<meta_model::name> processed_names;
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
         expand_object(o, im, processed_names);
     }
 }
 
-void concepts_transform::expand_concept(concept& c, intermediate_model& im,
-    std::unordered_set<name>& processed_names) {
+void concepts_transform::
+expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
+    std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand concept: " << c.name().id();
 
     if (processed_names.find(c.name()) != processed_names.end()) {
@@ -206,7 +214,7 @@ void concepts_transform::expand_concept(concept& c, intermediate_model& im,
         return;
     }
 
-    std::list<name> expanded_refines;
+    std::list<meta_model::name> expanded_refines;
     for (auto& n : c.refines()) {
         auto& parent(find_concept(n, im));
         expand_concept(parent, im, processed_names);
@@ -221,17 +229,17 @@ void concepts_transform::expand_concept(concept& c, intermediate_model& im,
     processed_names.insert(c.name());
 }
 
-void concepts_transform::expand_concepts(intermediate_model& im) {
+void concepts_transform::expand_concepts(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << im.concepts().size();
 
-    std::unordered_set<name> processed_names;
+    std::unordered_set<meta_model::name> processed_names;
     for (auto& pair : im.concepts()) {
         auto& c(pair.second);
         expand_concept(c, im, processed_names);
     }
 }
 
-void concepts_transform::transform(intermediate_model& im) {
+void concepts_transform::transform(meta_model::intermediate_model& im) {
     /*
      * We must expand concepts before we expand objects as we rely on
      * the expanded attributes.

@@ -19,7 +19,7 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/odb_targets_io.hpp"
 #include "dogen/quilt.cpp/io/fabric/msbuild_targets_io.hpp"
 

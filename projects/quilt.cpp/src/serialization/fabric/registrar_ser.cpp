@@ -28,8 +28,8 @@
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/name_ser.hpp"
-#include "dogen/yarn/serialization/element_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/quilt.cpp/serialization/fabric/registrar_ser.hpp"
 
 BOOST_CLASS_TRACKING(
@@ -43,7 +43,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::quilt::cpp::fabric::registrar& v,
     const unsigned int /*version*/) {
-    ar << make_nvp("element", base_object<dogen::yarn::element>(v));
+    ar << make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
 
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("model_dependencies", v.model_dependencies_);
@@ -54,7 +54,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::quilt::cpp::fabric::registrar& v,
     const unsigned int /*version*/) {
-    ar >> make_nvp("element", base_object<dogen::yarn::element>(v));
+    ar >> make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
 
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("model_dependencies", v.model_dependencies_);

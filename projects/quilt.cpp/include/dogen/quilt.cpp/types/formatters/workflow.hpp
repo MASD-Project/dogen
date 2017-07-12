@@ -35,7 +35,7 @@
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/repository.hpp"
-#include "dogen/yarn/types/element.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/formattables/model.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
 #include "dogen/quilt.cpp/types/formatters/stitch_formatter.hpp"
@@ -68,7 +68,7 @@ private:
 
 private:
     std::list<dogen::formatters::artefact>
-    format(const formattables::model& fm, const yarn::element& e,
+    format(const formattables::model& fm, const yarn::meta_model::element& e,
         const formattables::element_properties& ep) const;
 
 public:

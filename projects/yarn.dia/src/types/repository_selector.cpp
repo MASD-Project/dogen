@@ -50,8 +50,8 @@ void const_repository_selector::validate_id(const std::string& id) const {
     }
 }
 
-const yarn::module& const_repository_selector::
-module_for_name(const yarn::name& n) const {
+const meta_model::module& const_repository_selector::
+module_for_name(const meta_model::name& n) const {
     const auto i(repository_.model().modules().find(n.id()));
     if (i == repository_.model().modules().end()) {
         const auto sn(n.simple());
@@ -61,17 +61,17 @@ module_for_name(const yarn::name& n) const {
     return i->second;
 }
 
-const yarn::module& const_repository_selector::
+const meta_model::module& const_repository_selector::
 module_for_id(const std::string& id) const {
     const auto n(name_for_id(id));
     return module_for_name(n);
 }
 
-std::list<yarn::name> const_repository_selector::
+std::list<meta_model::name> const_repository_selector::
 parent_names_for_id(const std::string& id) const {
     validate_id(id);
 
-    std::list<yarn::name> r;
+    std::list<meta_model::name> r;
     const auto i(repository_.child_id_to_parent_ids().find(id));
     if (i == repository_.child_id_to_parent_ids().end())
         return r;
@@ -98,7 +98,8 @@ parent_names_for_id(const std::string& id) const {
     return r;
 }
 
-yarn::name const_repository_selector::name_for_id(const std::string& id) const {
+meta_model::name
+const_repository_selector::name_for_id(const std::string& id) const {
     validate_id(id);
     const auto i(repository_.id_to_name().find(id));
     if (i == repository_.id_to_name().end()) {
@@ -111,7 +112,8 @@ yarn::name const_repository_selector::name_for_id(const std::string& id) const {
 repository_selector::repository_selector(repository& rp)
     : repository_(rp) {}
 
-yarn::module& repository_selector::module_for_name(const yarn::name& n) {
+meta_model::module&
+repository_selector::module_for_name(const meta_model::name& n) {
     const auto i(repository_.model().modules().find(n.id()));
     if (i == repository_.model().modules().end()) {
         const auto sn(n.simple());
@@ -121,7 +123,7 @@ yarn::module& repository_selector::module_for_name(const yarn::name& n) {
     return i->second;
 }
 
-yarn::module& repository_selector::module_for_id(const std::string& id) {
+meta_model::module& repository_selector::module_for_id(const std::string& id) {
     const_repository_selector crs(repository_);
     const auto n(crs.name_for_id(id));
     return module_for_name(n);

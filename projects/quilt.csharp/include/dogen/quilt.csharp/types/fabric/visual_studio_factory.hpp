@@ -30,8 +30,8 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/element.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_configuration.hpp"
 
 namespace dogen {
@@ -56,23 +56,24 @@ private:
         const annotations::annotation& ra) const;
 
 private:
-    std::string obtain_project_name(const yarn::intermediate_model& im) const;
+    std::string obtain_project_name(
+        const yarn::meta_model::intermediate_model& im) const;
 
 private:
-    boost::shared_ptr<yarn::element>
+    boost::shared_ptr<yarn::meta_model::element>
     make_solution(const visual_studio_configuration cfg,
         const std::string& project_name,
-        const yarn::intermediate_model& im) const;
+        const yarn::meta_model::intermediate_model& im) const;
 
-    boost::shared_ptr<yarn::element>
+    boost::shared_ptr<yarn::meta_model::element>
     make_project(const visual_studio_configuration cfg,
         const std::string& project_name,
-        const yarn::intermediate_model& im) const;
+        const yarn::meta_model::intermediate_model& im) const;
 
 public:
-    std::list<boost::shared_ptr<yarn::element>>
+    std::list<boost::shared_ptr<yarn::meta_model::element>>
     make(const annotations::type_repository& atrp,
-        const yarn::intermediate_model& im) const;
+        const yarn::meta_model::intermediate_model& im) const;
 };
 
 } } } }

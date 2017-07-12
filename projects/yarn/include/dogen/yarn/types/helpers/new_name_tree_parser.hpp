@@ -41,8 +41,8 @@
 #include <boost/phoenix/bind/bind_function.hpp>
 
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
-#include "dogen/yarn/io/name_tree_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
 #include "dogen/yarn/types/helpers/parsing_error.hpp"
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
 
@@ -246,7 +246,7 @@ struct name_tree_listener
 
     name_tree_listener() {}
     name_tree_listener(const std::unordered_set<std::string>& top_level_modules,
-        const ::dogen::yarn::location& model_location) : ntb(top_level_modules, model_location) {}
+        const ::dogen::yarn::meta_model::location& model_location) : ntb(top_level_modules, model_location) {}
 
     void apply()
     {
@@ -281,11 +281,11 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
 
-    std::string scope_operator_for_language(const dogen::yarn::languages l) {
+    std::string scope_operator_for_language(const dogen::yarn::meta_model::languages l) {
         switch (l) {
-        case dogen::yarn::languages::csharp:  return ".";
-        case dogen::yarn::languages::cpp:     return "::";
-        case dogen::yarn::languages::upsilon: return "::";
+        case dogen::yarn::meta_model::languages::csharp:  return ".";
+        case dogen::yarn::meta_model::languages::cpp:     return "::";
+        case dogen::yarn::meta_model::languages::upsilon: return "::";
         default: {
             const auto s(boost::lexical_cast<std::string>(l));
             BOOST_LOG_SEV(lg, error) << unsupported_language << s;
@@ -313,7 +313,7 @@ struct custom_type_grammar : qi::grammar<Iterator, Skipper>
     }
 
     std::string scope_str;
-    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const dogen::yarn::languages l)
+    custom_type_grammar(name_tree_listener<NameTreeBuilder> * listener, const dogen::yarn::meta_model::languages l)
           : custom_type_grammar::base_type(custom_type), listener(listener), scope_str(scope_operator_for_language(l))
     {
         namespace phoenix = boost::phoenix;
@@ -399,7 +399,7 @@ struct grammar : qi::grammar<Iterator, Skipper> {
     }
 
     grammar(listener_t &l,
-            const dogen::yarn::languages language)
+        const dogen::yarn::meta_model::languages language)
                 : grammar::base_type(type_name), listener(&l), custom_type{ &l , language } {
         setup_functors();
         using qi::on_error;

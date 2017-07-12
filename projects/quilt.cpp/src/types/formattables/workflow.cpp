@@ -35,8 +35,8 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-model workflow::
-make_model(const formatters::repository& frp, const yarn::model& m) const {
+model workflow::make_model(const formatters::repository& frp,
+    const yarn::meta_model::model& m) const {
     transformer t;
     return t.transform(frp, m);
 }
@@ -53,7 +53,7 @@ model workflow::execute(
     const annotations::type_repository& atrp,
     const annotations::annotation& ra,
     const locator& l, const formatters::repository& frp,
-    const yarn::model& m) const {
+    const yarn::meta_model::model& m) const {
 
     auto r(make_model(frp, m));
     expand_model(atrp, ra, frp, l, r);

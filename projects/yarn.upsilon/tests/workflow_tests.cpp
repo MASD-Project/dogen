@@ -32,9 +32,9 @@
 #include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/upsilon/serialization/registrar_ser.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
-#include "dogen/yarn/io/intermediate_model_io.hpp"
-#include "dogen/yarn/serialization/intermediate_model_ser.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
 #include "dogen/yarn.upsilon/types/workflow.hpp"
 #include "dogen/upsilon/serialization/model_ser.hpp"
 
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(zeta_model_transforms_into_expected_yarn) {
     mock_type_repository_factory rf;
     const auto rp(rf.make());
     dogen::yarn::upsilon::workflow w;
-    dogen::yarn::intermediate_model actual(w.execute(input));
+    dogen::yarn::meta_model::intermediate_model actual(w.execute(input));
 
     const auto expected_path(yarn_upsilon::expected_zeta_model_yarn_xml());
     const auto actual_path(yarn_upsilon::actual_zeta_model_yarn_xml());

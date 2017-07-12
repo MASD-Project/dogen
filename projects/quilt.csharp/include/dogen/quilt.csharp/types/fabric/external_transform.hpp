@@ -36,20 +36,21 @@ namespace fabric {
 class external_transform final :
         public yarn::transforms::external_transform_interface {
 private:
-    bool requires_expansion(const yarn::intermediate_model& im) const;
+    bool requires_expansion(
+        const yarn::meta_model::intermediate_model& im) const;
 
     void expand_injection(const annotations::type_repository& atrp,
-        yarn::intermediate_model& im) const;
+        yarn::meta_model::intermediate_model& im) const;
 
     void expand_decoration(
         const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::intermediate_model& im) const;
+        yarn::meta_model::intermediate_model& im) const;
 
 public:
     std::string id() const override;
     void transform(const yarn::transforms::context& ctx,
         const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::intermediate_model& im) const override;
+        yarn::meta_model::intermediate_model& im) const override;
 };
 
 } } } }

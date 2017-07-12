@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/name_tree_td.hpp"
+#include "dogen/yarn/test_data/meta_model/name_td.hpp"
+#include "dogen/yarn/test_data/meta_model/name_tree_td.hpp"
 #include "dogen/yarn/test_data/helpers/decomposition_result_td.hpp"
 
 namespace {
@@ -31,44 +31,44 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
+dogen::yarn::meta_model::name
+create_dogen_yarn_meta_model_name(const unsigned int position) {
+    return dogen::yarn::meta_model::name_generator::create(position);
 }
 
-std::pair<std::string, dogen::yarn::name>
-create_std_pair_std_string_dogen_yarn_name(unsigned int position) {
-    std::pair<std::string, dogen::yarn::name> r(
+std::pair<std::string, dogen::yarn::meta_model::name>
+create_std_pair_std_string_dogen_yarn_meta_model_name(unsigned int position) {
+    std::pair<std::string, dogen::yarn::meta_model::name> r(
         create_std_string(position),
-        create_dogen_yarn_name(position));
+        create_dogen_yarn_meta_model_name(position));
     return r;
 }
 
-std::list<std::pair<std::string, dogen::yarn::name> > create_std_list_std_pair_std_string_dogen_yarn_name(unsigned int position) {
-    std::list<std::pair<std::string, dogen::yarn::name> > r;
+std::list<std::pair<std::string, dogen::yarn::meta_model::name> > create_std_list_std_pair_std_string_dogen_yarn_meta_model_name(unsigned int position) {
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_std_string_dogen_yarn_name(position + i));
+        r.push_back(create_std_pair_std_string_dogen_yarn_meta_model_name(position + i));
     }
     return r;
 }
 
-dogen::yarn::name_tree
-create_dogen_yarn_name_tree(const unsigned int position) {
-    return dogen::yarn::name_tree_generator::create(position);
+dogen::yarn::meta_model::name_tree
+create_dogen_yarn_meta_model_name_tree(const unsigned int position) {
+    return dogen::yarn::meta_model::name_tree_generator::create(position);
 }
 
-std::pair<std::string, dogen::yarn::name_tree>
-create_std_pair_std_string_dogen_yarn_name_tree(unsigned int position) {
-    std::pair<std::string, dogen::yarn::name_tree> r(
+std::pair<std::string, dogen::yarn::meta_model::name_tree>
+create_std_pair_std_string_dogen_yarn_meta_model_name_tree(unsigned int position) {
+    std::pair<std::string, dogen::yarn::meta_model::name_tree> r(
         create_std_string(position),
-        create_dogen_yarn_name_tree(position));
+        create_dogen_yarn_meta_model_name_tree(position));
     return r;
 }
 
-std::list<std::pair<std::string, dogen::yarn::name_tree> > create_std_list_std_pair_std_string_dogen_yarn_name_tree(unsigned int position) {
-    std::list<std::pair<std::string, dogen::yarn::name_tree> > r;
+std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> > create_std_list_std_pair_std_string_dogen_yarn_meta_model_name_tree(unsigned int position) {
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_std_pair_std_string_dogen_yarn_name_tree(position + i));
+        r.push_back(create_std_pair_std_string_dogen_yarn_meta_model_name_tree(position + i));
     }
     return r;
 }
@@ -83,8 +83,8 @@ decomposition_result_generator::decomposition_result_generator() : position_(0) 
 
 void decomposition_result_generator::
 populate(const unsigned int position, result_type& v) {
-    v.names(create_std_list_std_pair_std_string_dogen_yarn_name(position + 0));
-    v.name_trees(create_std_list_std_pair_std_string_dogen_yarn_name_tree(position + 1));
+    v.names(create_std_list_std_pair_std_string_dogen_yarn_meta_model_name(position + 0));
+    v.name_trees(create_std_list_std_pair_std_string_dogen_yarn_meta_model_name_tree(position + 1));
 }
 
 decomposition_result_generator::result_type

@@ -26,7 +26,7 @@ namespace helpers {
 
 mapping::mapping(
     const std::string& lam_id,
-    const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& by_language)
+    const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& by_language)
     : lam_id_(lam_id),
       by_language_(by_language) { }
 
@@ -63,19 +63,19 @@ void mapping::lam_id(const std::string&& v) {
     lam_id_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& mapping::by_language() const {
+const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& mapping::by_language() const {
     return by_language_;
 }
 
-std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& mapping::by_language() {
+std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& mapping::by_language() {
     return by_language_;
 }
 
-void mapping::by_language(const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>& v) {
+void mapping::by_language(const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>& v) {
     by_language_ = v;
 }
 
-void mapping::by_language(const std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value>&& v) {
+void mapping::by_language(const std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value>&& v) {
     by_language_ = std::move(v);
 }
 

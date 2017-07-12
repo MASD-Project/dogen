@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/hash/name_hash.hpp"
+#include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/hash/helpers/mapping_context_hash.hpp"
 
 namespace {
@@ -29,7 +29,7 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_name(const std::unordered_map<std::string, dogen::yarn::name>& v) {
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_name(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -55,9 +55,9 @@ namespace helpers {
 std::size_t mapping_context_hasher::hash(const mapping_context& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.translations()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_name(v.translations()));
     combine(seed, hash_std_unordered_set_std_string(v.erasures()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_name(v.injections()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_name(v.injections()));
 
     return seed;
 }

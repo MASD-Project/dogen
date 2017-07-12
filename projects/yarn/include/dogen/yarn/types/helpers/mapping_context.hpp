@@ -29,7 +29,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
-#include "dogen/yarn/types/name.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_context_fwd_ser.hpp"
 
 namespace dogen {
@@ -45,9 +45,9 @@ public:
 
 public:
     mapping_context(
-        const std::unordered_map<std::string, dogen::yarn::name>& translations,
+        const std::unordered_map<std::string, dogen::yarn::meta_model::name>& translations,
         const std::unordered_set<std::string>& erasures,
-        const std::unordered_map<std::string, dogen::yarn::name>& injections);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::name>& injections);
 
 private:
     template<typename Archive>
@@ -57,20 +57,20 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::helpers::mapping_context& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, dogen::yarn::name>& translations() const;
-    std::unordered_map<std::string, dogen::yarn::name>& translations();
-    void translations(const std::unordered_map<std::string, dogen::yarn::name>& v);
-    void translations(const std::unordered_map<std::string, dogen::yarn::name>&& v);
+    const std::unordered_map<std::string, dogen::yarn::meta_model::name>& translations() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::name>& translations();
+    void translations(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v);
+    void translations(const std::unordered_map<std::string, dogen::yarn::meta_model::name>&& v);
 
     const std::unordered_set<std::string>& erasures() const;
     std::unordered_set<std::string>& erasures();
     void erasures(const std::unordered_set<std::string>& v);
     void erasures(const std::unordered_set<std::string>&& v);
 
-    const std::unordered_map<std::string, dogen::yarn::name>& injections() const;
-    std::unordered_map<std::string, dogen::yarn::name>& injections();
-    void injections(const std::unordered_map<std::string, dogen::yarn::name>& v);
-    void injections(const std::unordered_map<std::string, dogen::yarn::name>&& v);
+    const std::unordered_map<std::string, dogen::yarn::meta_model::name>& injections() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::name>& injections();
+    void injections(const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v);
+    void injections(const std::unordered_map<std::string, dogen::yarn::meta_model::name>&& v);
 
 public:
     bool operator==(const mapping_context& rhs) const;
@@ -83,9 +83,9 @@ public:
     mapping_context& operator=(mapping_context other);
 
 private:
-    std::unordered_map<std::string, dogen::yarn::name> translations_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::name> translations_;
     std::unordered_set<std::string> erasures_;
-    std::unordered_map<std::string, dogen::yarn::name> injections_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::name> injections_;
 };
 
 } } }

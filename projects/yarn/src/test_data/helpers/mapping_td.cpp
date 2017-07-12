@@ -19,8 +19,8 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/languages_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_td.hpp"
+#include "dogen/yarn/test_data/meta_model/languages_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_value_td.hpp"
 
 namespace {
@@ -31,9 +31,9 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::languages
-create_dogen_yarn_languages(const unsigned int position) {
-    return dogen::yarn::languages_generator::create(position);
+dogen::yarn::meta_model::languages
+create_dogen_yarn_meta_model_languages(const unsigned int position) {
+    return dogen::yarn::meta_model::languages_generator::create(position);
 }
 
 dogen::yarn::helpers::mapping_value
@@ -41,10 +41,10 @@ create_dogen_yarn_helpers_mapping_value(const unsigned int position) {
     return dogen::yarn::helpers::mapping_value_generator::create(position);
 }
 
-std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value> create_std_unordered_map_dogen_yarn_languages_dogen_yarn_helpers_mapping_value(unsigned int position) {
-    std::unordered_map<dogen::yarn::languages, dogen::yarn::helpers::mapping_value> r;
+std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value> create_std_unordered_map_dogen_yarn_meta_model_languages_dogen_yarn_helpers_mapping_value(unsigned int position) {
+    std::unordered_map<dogen::yarn::meta_model::languages, dogen::yarn::helpers::mapping_value> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_languages(position + i), create_dogen_yarn_helpers_mapping_value(position + i)));
+        r.insert(std::make_pair(create_dogen_yarn_meta_model_languages(position + i), create_dogen_yarn_helpers_mapping_value(position + i)));
     }
     return r;
 }
@@ -60,7 +60,7 @@ mapping_generator::mapping_generator() : position_(0) { }
 void mapping_generator::
 populate(const unsigned int position, result_type& v) {
     v.lam_id(create_std_string(position + 0));
-    v.by_language(create_std_unordered_map_dogen_yarn_languages_dogen_yarn_helpers_mapping_value(position + 1));
+    v.by_language(create_std_unordered_map_dogen_yarn_meta_model_languages_dogen_yarn_helpers_mapping_value(position + 1));
 }
 
 mapping_generator::result_type

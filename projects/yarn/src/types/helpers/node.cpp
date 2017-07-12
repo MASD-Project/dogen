@@ -35,7 +35,7 @@ namespace helpers {
 
 node::node(
     const boost::shared_ptr<dogen::yarn::helpers::node>& parent,
-    const dogen::yarn::name& data,
+    const dogen::yarn::meta_model::name& data,
     const std::list<boost::shared_ptr<dogen::yarn::helpers::node> >& children)
     : parent_(parent),
       data_(data),
@@ -76,19 +76,19 @@ void node::parent(const boost::shared_ptr<dogen::yarn::helpers::node>&& v) {
     parent_ = std::move(v);
 }
 
-const dogen::yarn::name& node::data() const {
+const dogen::yarn::meta_model::name& node::data() const {
     return data_;
 }
 
-dogen::yarn::name& node::data() {
+dogen::yarn::meta_model::name& node::data() {
     return data_;
 }
 
-void node::data(const dogen::yarn::name& v) {
+void node::data(const dogen::yarn::meta_model::name& v) {
     data_ = v;
 }
 
-void node::data(const dogen::yarn::name&& v) {
+void node::data(const dogen::yarn::meta_model::name&& v) {
     data_ = std::move(v);
 }
 

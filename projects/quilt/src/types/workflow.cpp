@@ -24,7 +24,7 @@
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/quilt/types/configuration_factory.hpp"
 #include "dogen/quilt/types/workflow_error.hpp"
 #include "dogen/quilt/types/workflow.hpp"
@@ -106,7 +106,8 @@ std::list<annotations::archetype_location> workflow::archetype_locations() {
     return r;
 }
 
-boost::optional<kernel_output> workflow::execute(const yarn::model& m) const {
+boost::optional<kernel_output>
+workflow::execute(const yarn::meta_model::model& m) const {
     /*
      * We expect the output directory to be absolute. This just makes
      * our life easier in terms of assumptions. Note that this does

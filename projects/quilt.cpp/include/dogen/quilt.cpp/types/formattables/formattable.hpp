@@ -28,7 +28,7 @@
 #include <list>
 #include <algorithm>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/element_fwd.hpp"
+#include "dogen/yarn/types/meta_model/element_fwd.hpp"
 #include "dogen/quilt.cpp/types/formattables/element_properties.hpp"
 #include "dogen/quilt.cpp/serialization/formattables/formattable_fwd_ser.hpp"
 
@@ -46,8 +46,8 @@ public:
 
 public:
     formattable(
-        const boost::shared_ptr<dogen::yarn::element>& master_segment,
-        const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments,
+        const boost::shared_ptr<dogen::yarn::meta_model::element>& master_segment,
+        const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& all_segments,
         const dogen::quilt::cpp::formattables::element_properties& element_properties);
 
 private:
@@ -58,15 +58,15 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::quilt::cpp::formattables::formattable& v, unsigned int version);
 
 public:
-    const boost::shared_ptr<dogen::yarn::element>& master_segment() const;
-    boost::shared_ptr<dogen::yarn::element>& master_segment();
-    void master_segment(const boost::shared_ptr<dogen::yarn::element>& v);
-    void master_segment(const boost::shared_ptr<dogen::yarn::element>&& v);
+    const boost::shared_ptr<dogen::yarn::meta_model::element>& master_segment() const;
+    boost::shared_ptr<dogen::yarn::meta_model::element>& master_segment();
+    void master_segment(const boost::shared_ptr<dogen::yarn::meta_model::element>& v);
+    void master_segment(const boost::shared_ptr<dogen::yarn::meta_model::element>&& v);
 
-    const std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments() const;
-    std::list<boost::shared_ptr<dogen::yarn::element> >& all_segments();
-    void all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >& v);
-    void all_segments(const std::list<boost::shared_ptr<dogen::yarn::element> >&& v);
+    const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& all_segments() const;
+    std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& all_segments();
+    void all_segments(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v);
+    void all_segments(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >&& v);
 
     const dogen::quilt::cpp::formattables::element_properties& element_properties() const;
     dogen::quilt::cpp::formattables::element_properties& element_properties();
@@ -84,8 +84,8 @@ public:
     formattable& operator=(formattable other);
 
 private:
-    boost::shared_ptr<dogen::yarn::element> master_segment_;
-    std::list<boost::shared_ptr<dogen::yarn::element> > all_segments_;
+    boost::shared_ptr<dogen::yarn::meta_model::element> master_segment_;
+    std::list<boost::shared_ptr<dogen::yarn::meta_model::element> > all_segments_;
     dogen::quilt::cpp::formattables::element_properties element_properties_;
 };
 

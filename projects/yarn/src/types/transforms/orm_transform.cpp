@@ -26,10 +26,10 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
+#include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/io/orm_model_properties_io.hpp"
-#include "dogen/yarn/io/orm_object_properties_io.hpp"
-#include "dogen/yarn/io/orm_primitive_properties_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 
@@ -61,9 +61,9 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-orm_database_systems orm_transform::
+meta_model::orm_database_systems orm_transform::
 to_orm_database_system(const std::string& s) {
-
+    using meta_model::orm_database_systems;
     const auto ls(boost::to_lower_copy(s));
     if (ls == mysql) {
         return orm_database_systems::mysql;
@@ -81,9 +81,9 @@ to_orm_database_system(const std::string& s) {
     BOOST_THROW_EXCEPTION(transformation_error(invalid_daatabase_system + s));
 }
 
-std::vector<orm_database_systems> orm_transform::
+std::vector<meta_model::orm_database_systems> orm_transform::
 to_orm_database_system(const std::list<std::string>& vs) {
-    std::vector<orm_database_systems> r;
+    std::vector<meta_model::orm_database_systems> r;
     r.reserve(vs.size());
     for (const auto& s : vs) {
         r.push_back(to_orm_database_system(s));
@@ -91,8 +91,9 @@ to_orm_database_system(const std::list<std::string>& vs) {
     return r;
 }
 
-letter_cases
+meta_model::letter_cases
 orm_transform::to_letter_case(const std::string& s) {
+    using meta_model::letter_cases;
     const auto ls(boost::to_lower_copy(s));
     if (ls == upper_case) {
         return letter_cases::upper_case;
@@ -104,10 +105,10 @@ orm_transform::to_letter_case(const std::string& s) {
     BOOST_THROW_EXCEPTION(transformation_error(invalid_letter_case + s));
 }
 
-std::unordered_map<orm_database_systems, std::string>
+std::unordered_map<meta_model::orm_database_systems, std::string>
 orm_transform::
 make_type_overrides(const std::list<std::string> ls) {
-    std::unordered_map<orm_database_systems, std::string> r;
+    std::unordered_map<meta_model::orm_database_systems, std::string> r;
 
     using utility::string::splitter;
     for (const auto& s : ls) {
@@ -187,7 +188,7 @@ make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-boost::optional<orm_model_properties>
+boost::optional<meta_model::orm_model_properties>
 orm_transform::make_model_properties(const type_group& tg,
     const annotations::annotation& a) {
 
@@ -195,7 +196,7 @@ orm_transform::make_model_properties(const type_group& tg,
     const annotations::entry_selector s(a);
     bool found_any(false);
 
-    orm_model_properties r;
+    meta_model::orm_model_properties r;
     if (s.has_entry(tg.database_system)) {
         found_any = true;
         const auto ds(s.get_text_collection_content(tg.database_system));
@@ -219,12 +220,12 @@ orm_transform::make_model_properties(const type_group& tg,
     }
 
     BOOST_LOG_SEV(lg, debug) << "Model configuration is empty.";
-    return boost::optional<orm_model_properties>();
+    return boost::optional<meta_model::orm_model_properties>();
 }
 
 void orm_transform::update_object_properties(
     const type_group& tg, const annotations::annotation& a,
-    orm_object_properties& cfg) {
+    meta_model::orm_object_properties& cfg) {
 
     const annotations::entry_selector s(a);
     if (s.has_entry(tg.schema_name))
@@ -234,14 +235,14 @@ void orm_transform::update_object_properties(
         cfg.table_name(s.get_text_content(tg.table_name));
 }
 
-boost::optional<orm_attribute_properties>
+boost::optional<meta_model::orm_attribute_properties>
 orm_transform::make_attribute_properties(const type_group& tg,
     const annotations::annotation& a) {
 
     const annotations::entry_selector s(a);
     bool found_any(false);
 
-    orm_attribute_properties r;
+    meta_model::orm_attribute_properties r;
     if (s.has_entry(tg.column_name)) {
         found_any = true;
         r.column_name(s.get_text_content(tg.column_name));
@@ -271,26 +272,26 @@ orm_transform::make_attribute_properties(const type_group& tg,
     if (found_any)
         return r;
 
-    return boost::optional<orm_attribute_properties>();
+    return boost::optional<meta_model::orm_attribute_properties>();
 }
 
 void orm_transform::update_primitive_properties(
     const type_group& tg, const annotations::annotation& a,
-    orm_primitive_properties& cfg) {
+    meta_model::orm_primitive_properties& cfg) {
 
     const annotations::entry_selector s(a);
     if (s.has_entry(tg.schema_name))
         cfg.schema_name(s.get_text_content(tg.schema_name));
 }
 
-boost::optional<orm_module_properties>
+boost::optional<meta_model::orm_module_properties>
 orm_transform::make_module_properties(const type_group& tg,
     const annotations::annotation& a) {
 
     const annotations::entry_selector s(a);
     bool found_any(false);
 
-    orm_module_properties r;
+    meta_model::orm_module_properties r;
     if (s.has_entry(tg.schema_name)) {
         found_any = true;
         r.schema_name(s.get_text_content(tg.schema_name));
@@ -299,14 +300,14 @@ orm_transform::make_module_properties(const type_group& tg,
     if (found_any)
         return r;
 
-    return boost::optional<orm_module_properties>();
+    return boost::optional<meta_model::orm_module_properties>();
 }
 
 void orm_transform::
-expand_objects(const type_group& tg, intermediate_model& im) {
+expand_objects(const type_group& tg, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started object expansion.";
 
-    boost::optional<letter_cases> lc;
+    boost::optional<meta_model::letter_cases> lc;
     if (im.orm_properties())
         lc = im.orm_properties()->letter_case();
 
@@ -356,7 +357,7 @@ expand_objects(const type_group& tg, intermediate_model& im) {
 }
 
 void orm_transform::
-expand_concepts(const type_group& tg, intermediate_model& im) {
+expand_concepts(const type_group& tg, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started concept expansion.";
 
     for (auto& pair : im.concepts()) {
@@ -371,11 +372,11 @@ expand_concepts(const type_group& tg, intermediate_model& im) {
 }
 
 void orm_transform::expand_primitives(
-    const type_group& tg, intermediate_model& im) {
+    const type_group& tg, meta_model::intermediate_model& im) {
 
     BOOST_LOG_SEV(lg, debug) << "Started primitive expansion.";
 
-    boost::optional<letter_cases> lc;
+    boost::optional<meta_model::letter_cases> lc;
     if (im.orm_properties())
         lc = im.orm_properties()->letter_case();
 
@@ -410,7 +411,7 @@ void orm_transform::expand_primitives(
 }
 
 void orm_transform::
-expand_modules(const type_group& tg, intermediate_model& im) {
+expand_modules(const type_group& tg, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started module expansion.";
 
     for (auto& pair : im.modules()) {
@@ -476,7 +477,8 @@ expand_modules(const type_group& tg, intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Finished module expansion.";
 }
 
-void orm_transform::expand(const context& ctx, intermediate_model& im) {
+void orm_transform::
+expand(const context& ctx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
 
     const auto tg(make_type_group(ctx.type_repository()));

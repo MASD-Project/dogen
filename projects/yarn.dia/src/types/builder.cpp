@@ -48,7 +48,7 @@ namespace yarn {
 namespace dia {
 
 template<typename Element> void add_element(
-    std::unordered_map<std::string, name>& id_to_name,
+    std::unordered_map<std::string, meta_model::name>& id_to_name,
     std::unordered_map<std::string, Element>& container,
     const Element& e, const std::string& id) {
 
@@ -79,17 +79,18 @@ builder::builder(const std::string& model_name,
     repository_.child_id_to_parent_ids(child_id_to_parent_ids);
 }
 
-yarn::module builder::create_module_for_model(const yarn::name& n) const {
-    yarn::module r;
+meta_model::module
+builder::create_module_for_model(const meta_model::name& n) const {
+    meta_model::module r;
     r.name(n);
     return r;
 }
 
-yarn::intermediate_model builder::setup_model(const std::string& model_name,
+meta_model::intermediate_model builder::setup_model(const std::string& model_name,
     const std::string& external_modules) const {
 
-    yarn::intermediate_model r;
-    yarn::helpers::name_factory nf;
+    meta_model::intermediate_model r;
+    helpers::name_factory nf;
     r.name(nf.build_model_name(model_name, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Model: " << r.name().id();
 
@@ -100,7 +101,7 @@ yarn::intermediate_model builder::setup_model(const std::string& model_name,
 }
 
 void builder::
-update_scribble_group(const yarn::name& n, const processed_object& po) {
+update_scribble_group(const meta_model::name& n, const processed_object& po) {
 
     annotations::scribble psbl;
     const auto& kvps(po.comment().key_value_pairs());
@@ -166,7 +167,7 @@ void builder::update_documentation(const processed_object& po) {
         return;
     }
 
-    yarn::module& module(rs.module_for_id(po.child_node_id()));
+    meta_model::module& module(rs.module_for_id(po.child_node_id()));
     module.documentation(documentation);
     update_scribble_group(module.name(), po);
 }
@@ -209,7 +210,7 @@ void builder::add(const processed_object& po) {
     }
 }
 
-yarn::intermediate_model builder::build() {
+meta_model::intermediate_model builder::build() {
     return repository_.model();
 }
 

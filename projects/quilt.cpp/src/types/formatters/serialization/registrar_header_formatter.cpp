@@ -63,24 +63,24 @@ inclusion_support_types registrar_header_formatter::inclusion_support_type() con
 }
 
 boost::filesystem::path registrar_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path registrar_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 std::list<std::string> registrar_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
+    const yarn::meta_model::element& /*e*/) const {
     static std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact registrar_header_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& rg(a.as<fabric::registrar>(static_artefact(), e));

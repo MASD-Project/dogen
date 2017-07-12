@@ -28,7 +28,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/yarn/types/primitive.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
@@ -59,7 +59,7 @@ primitive_implementation_formatter::archetype_location() const {
 }
 
 std::type_index primitive_implementation_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::primitive)));
+    static auto r(std::type_index(typeid(yarn::meta_model::primitive)));
     return r;
 }
 
@@ -68,7 +68,7 @@ inclusion_support_types primitive_implementation_formatter::inclusion_support_ty
 }
 
 boost::filesystem::path primitive_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
+    const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -80,15 +80,17 @@ boost::filesystem::path primitive_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path primitive_implementation_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_artefact());
 }
 
-std::list<std::string> primitive_implementation_formatter::inclusion_dependencies(
+std::list<std::string>
+primitive_implementation_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
+    const yarn::meta_model::element& e) const {
 
-    const auto& p(assistant::as<yarn::primitive>(static_artefact(), e));
+    using yarn::meta_model::primitive;
+    const auto& p(assistant::as<primitive>(static_artefact(), e));
     auto builder(f.make());
     const auto ph_fn(traits::primitive_header_archetype());
     builder.add(p.name(), ph_fn);
@@ -108,10 +110,10 @@ std::list<std::string> primitive_implementation_formatter::inclusion_dependencie
 }
 
 dogen::formatters::artefact primitive_implementation_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
-    const auto& p(a.as<yarn::primitive>(static_artefact(), e));
+    const auto& p(a.as<yarn::meta_model::primitive>(static_artefact(), e));
 
     {
         auto sbf(a.make_scoped_boilerplate_formatter(e));

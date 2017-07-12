@@ -26,9 +26,9 @@
 #endif
 
 #include <list>
-#include "dogen/yarn/types/model.hpp"
-#include "dogen/yarn/types/languages.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -37,14 +37,16 @@ namespace transforms {
 
 class model_assembly_chain final {
 private:
-    static intermediate_model obtain_merged_model(const context& ctx,
-        const languages l, const intermediate_model& target,
-        const std::list<intermediate_model>& refs);
+    static meta_model::intermediate_model
+    obtain_merged_model(const context& ctx, const meta_model::languages l,
+        const meta_model::intermediate_model& target,
+        const std::list<meta_model::intermediate_model>& refs);
 
 public:
-    static model transform(const context& ctx, const languages l,
-        const intermediate_model& target,
-        const std::list<intermediate_model>& refs);
+    static meta_model::model transform(const context& ctx,
+        const meta_model::languages l,
+        const meta_model::intermediate_model& target,
+        const std::list<meta_model::intermediate_model>& refs);
 };
 
 } } }

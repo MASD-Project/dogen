@@ -22,8 +22,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/indent_filter.hpp"
 #include "dogen/formatters/types/comment_formatter.hpp"
-#include "dogen/yarn/types/name_flattener.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/types/helpers/name_flattener.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/quilt.csharp/io/formattables/helper_properties_io.hpp"
 #include "dogen/quilt.csharp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
@@ -61,7 +61,7 @@ namespace formatters {
 template<typename IdentifiableAndQualified>
 inline std::pair<std::string, std::string>
 get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
-    const auto l(yarn::languages::csharp);
+    const auto l(yarn::meta_model::languages::csharp);
     const auto i(iaq.qualified().find(l));
     if (i == iaq.qualified().end()) {
         BOOST_LOG_SEV(lg, error) << qn_missing << l;
@@ -71,12 +71,14 @@ get_identifiable_and_qualified(const IdentifiableAndQualified& iaq) {
     return std::make_pair(iaq.identifiable(), i->second);
 }
 
-std::string assistant::get_qualified_name(const yarn::name& n) const {
+std::string
+assistant::get_qualified_name(const yarn::meta_model::name& n) const {
     const auto pair(get_identifiable_and_qualified(n));
     return pair.second;
 }
 
-std::string assistant::get_qualified_name(const yarn::name_tree& nt) const {
+std::string
+assistant::get_qualified_name(const yarn::meta_model::name_tree& nt) const {
     const auto pair(get_identifiable_and_qualified(nt));
     return pair.second;
 }
@@ -95,7 +97,8 @@ assistant(const context& ctx, const annotations::archetype_location& al,
     filtering_stream_.push(stream_);
 }
 
-std::string assistant::make_inheritance_keyword_text(const yarn::object& o) {
+std::string
+assistant::make_inheritance_keyword_text(const yarn::meta_model::object& o) {
     if (o.is_parent())
         return abstract_keyword_text;
 
@@ -116,13 +119,13 @@ obtain_artefact_properties(const std::string& archetype) const {
 }
 
 const dogen::formatters::decoration_properties& assistant::
-get_decoration_properties(const yarn::element& e) const {
+get_decoration_properties(const yarn::meta_model::element& e) const {
     const auto& ep(e.element_properties());
     return ep.decoration_properties();
 }
 
-dogen::formatters::csharp::scoped_boilerplate_formatter
-assistant::make_scoped_boilerplate_formatter(const yarn::element& e) {
+dogen::formatters::csharp::scoped_boilerplate_formatter assistant::
+make_scoped_boilerplate_formatter(const yarn::meta_model::element& e) {
     const auto& dp(get_decoration_properties(e));
     const auto& art_props(artefact_properties_);
     const auto& deps(art_props.using_dependencies());
@@ -137,12 +140,14 @@ assistant::make_scoped_namespace_formatter(const std::list<std::string>& ns) {
         stream(), ns, true/*add_new_line*/);
 }
 
-std::list<std::string> assistant::make_namespaces(const yarn::name& n) const {
-    yarn::name_flattener nf;
+std::list<std::string>
+assistant::make_namespaces(const yarn::meta_model::name& n) const {
+    yarn::helpers::name_flattener nf;
     return nf.flatten(n);
 }
 
-std::string assistant::reference_equals(const yarn::attribute& attr) const {
+std::string
+assistant::reference_equals(const yarn::meta_model::attribute& attr) const {
     const auto& c(context_.model().aspect_properties());
     const auto n(attr.parsed_type().current());
     const auto i(c.find(n.id()));
@@ -193,7 +198,8 @@ std::string assistant::comment_inline(const std::string& c) const {
     return s.str();
 }
 
-std::string assistant::make_argument_name(const yarn::attribute& attr) const {
+std::string
+assistant::make_argument_name(const yarn::meta_model::attribute& attr) const {
     auto r(attr.name().simple());
     if (r.empty()) {
         BOOST_LOG_SEV(lg, error) << attribute_with_no_simple_name;
@@ -221,7 +227,8 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
         const auto i(context_.helpers().find(fam));
         if (i == context_.helpers().end()) {
             BOOST_LOG_SEV(lg, error) << no_helpers_for_family << fam;
-            BOOST_THROW_EXCEPTION(formatting_error(no_helpers_for_family + fam));
+            BOOST_THROW_EXCEPTION(
+                formatting_error(no_helpers_for_family + fam));
         }
         BOOST_LOG_SEV(lg, debug) << "Found helpers for family: " << fam;
 
@@ -243,7 +250,7 @@ assistant::get_helpers(const formattables::helper_properties& hp) const {
 }
 
 boost::optional<formattables::assistant_properties> assistant::
-get_assistant_properties(const yarn::attribute& attr) const {
+get_assistant_properties(const yarn::meta_model::attribute& attr) const {
 
     const auto& ap(context_.model().assistant_properties());
     const auto i(ap.find(attr.parsed_type().current().id()));

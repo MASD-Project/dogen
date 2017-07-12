@@ -24,7 +24,7 @@
 #include "dogen/quilt.cpp/types/formatters/test_data/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
-#include "dogen/yarn/types/builtin.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
@@ -54,7 +54,7 @@ builtin_header_formatter::archetype_location() const {
 }
 
 std::type_index builtin_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::builtin)));
+    static auto r(std::type_index(typeid(yarn::meta_model::builtin)));
     return r;
 }
 
@@ -63,24 +63,24 @@ inclusion_support_types builtin_header_formatter::inclusion_support_type() const
 }
 
 boost::filesystem::path builtin_header_formatter::inclusion_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_inclusion_path_for_cpp_header(n, static_artefact());
 }
 
 boost::filesystem::path builtin_header_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_header(n, static_artefact());
 }
 
 std::list<std::string> builtin_header_formatter::inclusion_dependencies(
     const formattables::dependencies_builder_factory& /*f*/,
-    const yarn::element& /*e*/) const {
+    const yarn::meta_model::element& /*e*/) const {
     static const std::list<std::string> r;
     return r;
 }
 
 dogen::formatters::artefact builtin_header_formatter::
-format(const context& /*ctx*/, const yarn::element& /*e*/) const {
+format(const context& /*ctx*/, const yarn::meta_model::element& /*e*/) const {
     dogen::formatters::artefact r;
     return r;
 }

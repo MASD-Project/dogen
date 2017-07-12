@@ -27,10 +27,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/utility/io/list_io.hpp"
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/location_io.hpp"
-#include "dogen/yarn/io/name_tree_io.hpp"
-#include "dogen/yarn/types/languages.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/location_io.hpp"
+#include "dogen/yarn/io/meta_model/name_tree_io.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
@@ -128,10 +128,10 @@ void name_tree_builder::end_children() {
     current_ = current_->parent();
 }
 
-name_tree name_tree_builder::make_name_tree(const node& n) {
+meta_model::name_tree name_tree_builder::make_name_tree(const node& n) {
     BOOST_LOG_SEV(lg, debug) << "Node: " << n.data();
 
-    name_tree r;
+    meta_model::name_tree r;
     r.current(n.data());
 
     for (const auto c : n.children()) {
@@ -142,7 +142,7 @@ name_tree name_tree_builder::make_name_tree(const node& n) {
     return r;
 }
 
-name_tree name_tree_builder::build() {
+meta_model::name_tree name_tree_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Started building.";
 
     /*
@@ -154,7 +154,7 @@ name_tree name_tree_builder::build() {
     /*
      * Convert the node representation into a tree representation.
      */
-    name_tree r(make_name_tree(*root_));
+    auto r(make_name_tree(*root_));
 
     BOOST_LOG_SEV(lg, debug) << "Finished building. Final name: " << r;
 

@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -46,19 +46,19 @@ namespace {
 
 class internal_modules_builder {
 private:
-    void process(const name& n);
+    void process(const meta_model::name& n);
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(yarn::module& m) { process(m.name()); }
-    void operator()(yarn::concept& c) { process(c.name()); }
-    void operator()(yarn::builtin& b) { process(b.name()); }
-    void operator()(yarn::enumeration& e) { process(e.name()); }
-    void operator()(yarn::primitive& p) { process(p.name()); }
-    void operator()(yarn::object& o) { process(o.name()); }
-    void operator()(yarn::exception& e) { process(e.name()); }
-    void operator()(yarn::visitor& v) { process(v.name()); }
+    void operator()(meta_model::element&) { }
+    void operator()(meta_model::module& m) { process(m.name()); }
+    void operator()(meta_model::concept& c) { process(c.name()); }
+    void operator()(meta_model::builtin& b) { process(b.name()); }
+    void operator()(meta_model::enumeration& e) { process(e.name()); }
+    void operator()(meta_model::primitive& p) { process(p.name()); }
+    void operator()(meta_model::object& o) { process(o.name()); }
+    void operator()(meta_model::exception& e) { process(e.name()); }
+    void operator()(meta_model::visitor& v) { process(v.name()); }
 
 public:
     const std::unordered_map<std::string, std::list<std::string>>&
@@ -69,7 +69,7 @@ private:
         distinct_internal_moduless_;
 };
 
-void internal_modules_builder::process(const name& n) {
+void internal_modules_builder::process(const meta_model::name& n) {
     auto imp(n.location().internal_modules());
     while (!imp.empty()) {
         const std::string key(boost::join(imp, separator));
@@ -85,29 +85,31 @@ const std::unordered_map<std::string, std::list<std::string>>&
 
 class updater {
 public:
-    updater(intermediate_model& im) : model_(im) { }
+    updater(meta_model::intermediate_model& im) : model_(im) { }
 
 private:
-    boost::optional<name> containing_module(const name& n);
-    void update(element& e);
+    boost::optional<meta_model::name>
+    containing_module(const meta_model::name& n);
+    void update(meta_model::element& e);
 
 public:
     bool include_injected_elements() { return false; }
-    void operator()(yarn::element&) { }
-    void operator()(yarn::module& m) { update(m); }
-    void operator()(yarn::concept& c) { update(c); }
-    void operator()(yarn::builtin& b) { update(b); }
-    void operator()(yarn::enumeration& e) { update(e); }
-    void operator()(yarn::primitive& p) { update(p); }
-    void operator()(yarn::object& o) { update(o); }
-    void operator()(yarn::exception& e) { update(e); }
-    void operator()(yarn::visitor& v) { update(v); }
+    void operator()(meta_model::element&) { }
+    void operator()(meta_model::module& m) { update(m); }
+    void operator()(meta_model::concept& c) { update(c); }
+    void operator()(meta_model::builtin& b) { update(b); }
+    void operator()(meta_model::enumeration& e) { update(e); }
+    void operator()(meta_model::primitive& p) { update(p); }
+    void operator()(meta_model::object& o) { update(o); }
+    void operator()(meta_model::exception& e) { update(e); }
+    void operator()(meta_model::visitor& v) { update(v); }
 
 public:
-    intermediate_model& model_;
+    meta_model::intermediate_model& model_;
 };
 
-boost::optional<name> updater::containing_module(const name& n) {
+boost::optional<meta_model::name>
+updater::containing_module(const meta_model::name& n) {
     BOOST_LOG_SEV(lg, debug) << "Finding containing module for: "
                              << n.id();
 
@@ -116,7 +118,7 @@ boost::optional<name> updater::containing_module(const name& n) {
         BOOST_LOG_SEV(lg, debug) << "Type is in global module so, it has"
                                  << " no containing module yet. Type: "
                                  << n.id();
-        return boost::optional<name>();
+        return boost::optional<meta_model::name>();
     }
 
     const bool at_model_level(n.location().internal_modules().empty());
@@ -125,7 +127,7 @@ boost::optional<name> updater::containing_module(const name& n) {
         BOOST_LOG_SEV(lg, debug) << "Type is a model module, so containing "
                                  << "module will be handled later. Type: "
                                  << n.id();
-        return boost::optional<name>();
+        return boost::optional<meta_model::name>();
     }
 
     helpers::name_builder b;
@@ -173,10 +175,10 @@ boost::optional<name> updater::containing_module(const name& n) {
 
     BOOST_LOG_SEV(lg, warn) << "Could not find containing module: "
                             << module_n.id();
-    return boost::optional<name>();
+    return boost::optional<meta_model::name>();
 }
 
-void updater::update(element& e) {
+void updater::update(meta_model::element& e) {
     e.contained_by(containing_module(e.name()));
 
     if (!e.contained_by())
@@ -192,7 +194,8 @@ void updater::update(element& e) {
 
 }
 
-void modules_transform::populate_root_module(intermediate_model& im) {
+void modules_transform::
+populate_root_module(meta_model::intermediate_model& im) {
     const auto i(im.modules().find(im.name().id()));
     if (i == im.modules().end()) {
         const auto id(im.name().id());
@@ -204,9 +207,10 @@ void modules_transform::populate_root_module(intermediate_model& im) {
     im.root_module(i->second);
 }
 
-void modules_transform::create_missing_modules(intermediate_model& im) {
+void modules_transform::
+create_missing_modules(meta_model::intermediate_model& im) {
     internal_modules_builder b;
-    yarn::elements_traversal(im, b);
+    meta_model::elements_traversal(im, b);
 
     for (const auto& pair : b.result()) {
         helpers::name_factory f;
@@ -214,7 +218,7 @@ void modules_transform::create_missing_modules(intermediate_model& im) {
         const auto n(f.build_module_name(im.name(), ipp));
         const auto i(im.modules().find(n.id()));
         if (i == im.modules().end()) {
-            yarn::module mod;
+            meta_model::module mod;
             mod.name(n);
             mod.origin_type(im.origin_type());
             im.modules().insert(std::make_pair(n.id(), mod));
@@ -222,12 +226,13 @@ void modules_transform::create_missing_modules(intermediate_model& im) {
     }
 }
 
-void modules_transform::expand_containing_module(intermediate_model& im) {
+void modules_transform::
+expand_containing_module(meta_model::intermediate_model& im) {
     updater u(im);
-    yarn::elements_traversal(im, u);
+    meta_model::elements_traversal(im, u);
 }
 
-void modules_transform::transform(intermediate_model& im) {
+void modules_transform::transform(meta_model::intermediate_model& im) {
     populate_root_module(im);
     create_missing_modules(im);
     expand_containing_module(im);

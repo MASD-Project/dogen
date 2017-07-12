@@ -33,7 +33,8 @@ const std::string test_suite("io_tests");
 
 }
 
-using namespace dogen::yarn;
+using namespace dogen::yarn::helpers;
+using namespace dogen::yarn::meta_model;
 using namespace dogen::utility::test;
 
 BOOST_AUTO_TEST_SUITE(io_tests)
@@ -43,7 +44,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
 
     test_io<origin_types_generator>();
     test_io<name_tree_generator>();
-    test_io<helpers::node_generator>();
+    test_io<node_generator>();
     test_io<attribute_generator>();
     test_io<name_generator>();
     test_io<builtin_generator>();

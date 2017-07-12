@@ -69,7 +69,7 @@ inclusion_support_types registrar_implementation_formatter::inclusion_support_ty
 }
 
 boost::filesystem::path registrar_implementation_formatter::inclusion_path(
-    const formattables::locator& /*l*/, const yarn::name& n) const {
+    const formattables::locator& /*l*/, const yarn::meta_model::name& n) const {
 
     using namespace dogen::utility::log;
     static logger lg(
@@ -81,14 +81,14 @@ boost::filesystem::path registrar_implementation_formatter::inclusion_path(
 }
 
 boost::filesystem::path registrar_implementation_formatter::full_path(
-    const formattables::locator& l, const yarn::name& n) const {
+    const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path_for_cpp_implementation(n, static_artefact());
 }
 
 std::list<std::string> registrar_implementation_formatter::
 inclusion_dependencies(
     const formattables::dependencies_builder_factory& f,
-    const yarn::element& e) const {
+    const yarn::meta_model::element& e) const {
     const auto arch(static_artefact());
     const auto& rg(assistant::as<fabric::registrar>(arch, e));
     auto builder(f.make());
@@ -117,7 +117,7 @@ inclusion_dependencies(
 }
 
 dogen::formatters::artefact registrar_implementation_formatter::
-format(const context& ctx, const yarn::element& e) const {
+format(const context& ctx, const yarn::meta_model::element& e) const {
     const auto id(e.name().id());
     assistant a(ctx, archetype_location(), false/*requires_header_guard*/, id);
     const auto& rg(a.as<fabric::registrar>(static_artefact(), e));

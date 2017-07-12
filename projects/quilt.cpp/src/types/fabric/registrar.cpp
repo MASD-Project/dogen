@@ -19,14 +19,14 @@
  *
  */
 #include <ostream>
-#include "dogen/yarn/io/name_io.hpp"
-#include "dogen/yarn/io/element_io.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -46,17 +46,17 @@ namespace fabric {
 registrar::registrar(
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::name& name,
-    const dogen::yarn::origin_types origin_type,
-    const boost::optional<dogen::yarn::name>& contained_by,
+    const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::origin_types origin_type,
+    const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
     const bool is_element_extension,
-    const dogen::yarn::element_properties& element_properties,
-    const std::list<dogen::yarn::name>& leaves,
-    const std::list<dogen::yarn::name>& model_dependencies,
-    const std::list<dogen::yarn::name>& registrar_dependencies)
-    : dogen::yarn::element(
+    const dogen::yarn::meta_model::element_properties& element_properties,
+    const std::list<dogen::yarn::meta_model::name>& leaves,
+    const std::list<dogen::yarn::meta_model::name>& model_dependencies,
+    const std::list<dogen::yarn::meta_model::name>& registrar_dependencies)
+    : dogen::yarn::meta_model::element(
       documentation,
       annotation,
       name,
@@ -70,28 +70,28 @@ registrar::registrar(
       model_dependencies_(model_dependencies),
       registrar_dependencies_(registrar_dependencies) { }
 
-void registrar::accept(const dogen::yarn::element_visitor& v) const {
+void registrar::accept(const dogen::yarn::meta_model::element_visitor& v) const {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void registrar::accept(dogen::yarn::element_visitor& v) const {
+void registrar::accept(dogen::yarn::meta_model::element_visitor& v) const {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
     }
 
-void registrar::accept(const dogen::yarn::element_visitor& v) {
+void registrar::accept(const dogen::yarn::meta_model::element_visitor& v) {
     typedef const element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
         dv->visit(*this);
 }
 
-void registrar::accept(dogen::yarn::element_visitor& v) {
+void registrar::accept(dogen::yarn::meta_model::element_visitor& v) {
     typedef element_visitor* derived_ptr;
     const auto dv(dynamic_cast<derived_ptr>(&v));
     if (dv)
@@ -102,7 +102,7 @@ void registrar::to_stream(std::ostream& s) const {
     s << " { "
       << "\"__type__\": " << "\"dogen::quilt::cpp::fabric::registrar\"" << ", "
       << "\"__parent_0__\": ";
-    dogen::yarn::element::to_stream(s);
+    dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"model_dependencies\": " << model_dependencies_ << ", "
@@ -111,7 +111,7 @@ void registrar::to_stream(std::ostream& s) const {
 }
 
 void registrar::swap(registrar& other) noexcept {
-    dogen::yarn::element::swap(other);
+    dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
     swap(leaves_, other.leaves_);
@@ -119,14 +119,14 @@ void registrar::swap(registrar& other) noexcept {
     swap(registrar_dependencies_, other.registrar_dependencies_);
 }
 
-bool registrar::equals(const dogen::yarn::element& other) const {
+bool registrar::equals(const dogen::yarn::meta_model::element& other) const {
     const registrar* const p(dynamic_cast<const registrar* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
 bool registrar::operator==(const registrar& rhs) const {
-    return dogen::yarn::element::compare(rhs) &&
+    return dogen::yarn::meta_model::element::compare(rhs) &&
         leaves_ == rhs.leaves_ &&
         model_dependencies_ == rhs.model_dependencies_ &&
         registrar_dependencies_ == rhs.registrar_dependencies_;
@@ -138,51 +138,51 @@ registrar& registrar::operator=(registrar other) {
     return *this;
 }
 
-const std::list<dogen::yarn::name>& registrar::leaves() const {
+const std::list<dogen::yarn::meta_model::name>& registrar::leaves() const {
     return leaves_;
 }
 
-std::list<dogen::yarn::name>& registrar::leaves() {
+std::list<dogen::yarn::meta_model::name>& registrar::leaves() {
     return leaves_;
 }
 
-void registrar::leaves(const std::list<dogen::yarn::name>& v) {
+void registrar::leaves(const std::list<dogen::yarn::meta_model::name>& v) {
     leaves_ = v;
 }
 
-void registrar::leaves(const std::list<dogen::yarn::name>&& v) {
+void registrar::leaves(const std::list<dogen::yarn::meta_model::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name>& registrar::model_dependencies() const {
+const std::list<dogen::yarn::meta_model::name>& registrar::model_dependencies() const {
     return model_dependencies_;
 }
 
-std::list<dogen::yarn::name>& registrar::model_dependencies() {
+std::list<dogen::yarn::meta_model::name>& registrar::model_dependencies() {
     return model_dependencies_;
 }
 
-void registrar::model_dependencies(const std::list<dogen::yarn::name>& v) {
+void registrar::model_dependencies(const std::list<dogen::yarn::meta_model::name>& v) {
     model_dependencies_ = v;
 }
 
-void registrar::model_dependencies(const std::list<dogen::yarn::name>&& v) {
+void registrar::model_dependencies(const std::list<dogen::yarn::meta_model::name>&& v) {
     model_dependencies_ = std::move(v);
 }
 
-const std::list<dogen::yarn::name>& registrar::registrar_dependencies() const {
+const std::list<dogen::yarn::meta_model::name>& registrar::registrar_dependencies() const {
     return registrar_dependencies_;
 }
 
-std::list<dogen::yarn::name>& registrar::registrar_dependencies() {
+std::list<dogen::yarn::meta_model::name>& registrar::registrar_dependencies() {
     return registrar_dependencies_;
 }
 
-void registrar::registrar_dependencies(const std::list<dogen::yarn::name>& v) {
+void registrar::registrar_dependencies(const std::list<dogen::yarn::meta_model::name>& v) {
     registrar_dependencies_ = v;
 }
 
-void registrar::registrar_dependencies(const std::list<dogen::yarn::name>&& v) {
+void registrar::registrar_dependencies(const std::list<dogen::yarn::meta_model::name>&& v) {
     registrar_dependencies_ = std::move(v);
 }
 

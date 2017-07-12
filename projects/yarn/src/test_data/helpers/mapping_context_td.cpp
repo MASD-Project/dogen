@@ -19,7 +19,7 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/name_td.hpp"
+#include "dogen/yarn/test_data/meta_model/name_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_context_td.hpp"
 
 namespace {
@@ -30,15 +30,15 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
+dogen::yarn::meta_model::name
+create_dogen_yarn_meta_model_name(const unsigned int position) {
+    return dogen::yarn::meta_model::name_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::yarn::name> create_std_unordered_map_std_string_dogen_yarn_name(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::name> r;
+std::unordered_map<std::string, dogen::yarn::meta_model::name> create_std_unordered_map_std_string_dogen_yarn_meta_model_name(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_name(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_name(position + i)));
     }
     return r;
 }
@@ -61,9 +61,9 @@ mapping_context_generator::mapping_context_generator() : position_(0) { }
 
 void mapping_context_generator::
 populate(const unsigned int position, result_type& v) {
-    v.translations(create_std_unordered_map_std_string_dogen_yarn_name(position + 0));
+    v.translations(create_std_unordered_map_std_string_dogen_yarn_meta_model_name(position + 0));
     v.erasures(create_std_unordered_set_std_string(position + 1));
-    v.injections(create_std_unordered_map_std_string_dogen_yarn_name(position + 2));
+    v.injections(create_std_unordered_map_std_string_dogen_yarn_meta_model_name(position + 2));
 }
 
 mapping_context_generator::result_type

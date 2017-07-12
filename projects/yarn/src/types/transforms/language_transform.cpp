@@ -24,7 +24,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/io/languages_io.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
@@ -48,7 +48,8 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-languages language_transform::to_language(const std::string& s) {
+meta_model::languages language_transform::to_language(const std::string& s) {
+    using meta_model::languages;
     if (s == cpp_language)
         return languages::cpp;
     else if (s == csharp_language)
@@ -71,19 +72,19 @@ make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-languages language_transform::make_input_language(const type_group& tg,
+meta_model::languages language_transform::make_input_language(const type_group& tg,
     const annotations::annotation& a) {
     const annotations::entry_selector s(a);
     const auto lang_str(s.get_text_content_or_default(tg.input_language));
     return to_language(lang_str);
 }
 
-std::list<languages>
+std::list<meta_model::languages>
 language_transform::make_output_languages(const type_group& tg,
     const annotations::annotation& a) {
     const annotations::entry_selector s(a);
 
-    std::list<languages> r;
+    std::list<meta_model::languages> r;
     if (!s.has_entry(tg.output_language))
         return r;
 
@@ -94,11 +95,13 @@ language_transform::make_output_languages(const type_group& tg,
     return r;
 }
 
-void language_transform::transform(const context& ctx, intermediate_model& im) {
+void language_transform::
+transform(const context& ctx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding language. Model: " << im.name().id();
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ra(im.root_module().annotation());
+    using meta_model::languages;
     const bool has_input_language(im.input_language() != languages::invalid);
     if (!has_input_language) {
         const auto il(make_input_language(tg, ra));

@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/test_data/name_td.hpp"
+#include "dogen/yarn/test_data/meta_model/name_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_value_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_actions_td.hpp"
 
@@ -29,22 +29,22 @@ create_dogen_yarn_helpers_mapping_actions(const unsigned int position) {
     return dogen::yarn::helpers::mapping_actions_generator::create(position);
 }
 
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
+dogen::yarn::meta_model::name
+create_dogen_yarn_meta_model_name(const unsigned int position) {
+    return dogen::yarn::meta_model::name_generator::create(position);
 }
 
-boost::optional<dogen::yarn::name>
-create_boost_optional_dogen_yarn_name(unsigned int position) {
-    boost::optional<dogen::yarn::name> r(
-        create_dogen_yarn_name(position));
+boost::optional<dogen::yarn::meta_model::name>
+create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
+    boost::optional<dogen::yarn::meta_model::name> r(
+        create_dogen_yarn_meta_model_name(position));
     return r;
 }
 
-std::list<dogen::yarn::name> create_std_list_dogen_yarn_name(unsigned int position) {
-    std::list<dogen::yarn::name> r;
+std::list<dogen::yarn::meta_model::name> create_std_list_dogen_yarn_meta_model_name(unsigned int position) {
+    std::list<dogen::yarn::meta_model::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.push_back(create_dogen_yarn_name(position + i));
+        r.push_back(create_dogen_yarn_meta_model_name(position + i));
     }
     return r;
 }
@@ -60,8 +60,8 @@ mapping_value_generator::mapping_value_generator() : position_(0) { }
 void mapping_value_generator::
 populate(const unsigned int position, result_type& v) {
     v.mapping_action(create_dogen_yarn_helpers_mapping_actions(position + 0));
-    v.default_name(create_boost_optional_dogen_yarn_name(position + 1));
-    v.aliases(create_std_list_dogen_yarn_name(position + 2));
+    v.default_name(create_boost_optional_dogen_yarn_meta_model_name(position + 1));
+    v.aliases(create_std_list_dogen_yarn_meta_model_name(position + 2));
 }
 
 mapping_value_generator::result_type

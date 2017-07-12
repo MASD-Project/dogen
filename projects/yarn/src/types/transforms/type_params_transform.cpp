@@ -45,10 +45,10 @@ make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-type_parameters
+meta_model::type_parameters
 type_params_transform::make_type_parameters(const type_group& tg,
     const annotations::annotation& a) {
-    type_parameters r;
+    meta_model::type_parameters r;
     const annotations::entry_selector s(a);
 
     const auto& vnp(tg.variable_number_of_parameters);
@@ -64,13 +64,13 @@ type_params_transform::make_type_parameters(const type_group& tg,
 }
 
 void type_params_transform::
-expand_type_parameters(const type_group& tg, object& o) {
+expand_type_parameters(const type_group& tg, meta_model::object& o) {
     const auto tp(make_type_parameters(tg, o.annotation()));
     o.type_parameters(tp);
 }
 
 void type_params_transform::
-transform(const context& ctx, intermediate_model& im) {
+transform(const context& ctx, meta_model::intermediate_model& im) {
     const auto tg(make_type_group(ctx.type_repository()));
     for (auto& pair : im.objects()) {
         auto& o(pair.second);

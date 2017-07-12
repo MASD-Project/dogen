@@ -69,7 +69,7 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 void primitives_transform::
-populate_from_annotations(const type_group& tg, primitive& p) {
+populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
     const auto& a(p.annotation());
     const annotations::entry_selector s(a);
     p.is_nullable(s.get_boolean_content_or_default(tg.is_nullable));
@@ -77,7 +77,7 @@ populate_from_annotations(const type_group& tg, primitive& p) {
 }
 
 void primitives_transform::
-transform(const context& ctx, intermediate_model& im) {
+transform(const context& ctx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expanding primitives for model: "
                              << im.name().id();
 

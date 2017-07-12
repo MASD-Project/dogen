@@ -29,8 +29,8 @@
 #include <boost/serialization/unordered_map.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
-#include "dogen/yarn/serialization/languages_ser.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/languages_ser.hpp"
 #include "dogen/yarn/serialization/helpers/mapping_value_ser.hpp"
 
 namespace boost {

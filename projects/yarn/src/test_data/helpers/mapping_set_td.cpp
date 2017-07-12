@@ -19,9 +19,9 @@
  *
  */
 #include <sstream>
-#include "dogen/yarn/test_data/name_td.hpp"
-#include "dogen/yarn/test_data/languages_td.hpp"
+#include "dogen/yarn/test_data/meta_model/name_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_set_td.hpp"
+#include "dogen/yarn/test_data/meta_model/languages_td.hpp"
 
 namespace {
 
@@ -31,28 +31,28 @@ std::string create_std_string(const unsigned int position) {
     return s.str();
 }
 
-dogen::yarn::languages
-create_dogen_yarn_languages(const unsigned int position) {
-    return dogen::yarn::languages_generator::create(position);
+dogen::yarn::meta_model::languages
+create_dogen_yarn_meta_model_languages(const unsigned int position) {
+    return dogen::yarn::meta_model::languages_generator::create(position);
 }
 
-dogen::yarn::name
-create_dogen_yarn_name(const unsigned int position) {
-    return dogen::yarn::name_generator::create(position);
+dogen::yarn::meta_model::name
+create_dogen_yarn_meta_model_name(const unsigned int position) {
+    return dogen::yarn::meta_model::name_generator::create(position);
 }
 
-std::unordered_map<std::string, dogen::yarn::name> create_std_unordered_map_std_string_dogen_yarn_name(unsigned int position) {
-    std::unordered_map<std::string, dogen::yarn::name> r;
+std::unordered_map<std::string, dogen::yarn::meta_model::name> create_std_unordered_map_std_string_dogen_yarn_meta_model_name(unsigned int position) {
+    std::unordered_map<std::string, dogen::yarn::meta_model::name> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_name(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_yarn_meta_model_name(position + i)));
     }
     return r;
 }
 
-std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> > create_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(unsigned int position) {
-    std::unordered_map<dogen::yarn::languages, std::unordered_map<std::string, dogen::yarn::name> > r;
+std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> > create_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_map_std_string_dogen_yarn_meta_model_name(unsigned int position) {
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_map<std::string, dogen::yarn::meta_model::name> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_languages(position + i), create_std_unordered_map_std_string_dogen_yarn_name(position + i)));
+        r.insert(std::make_pair(create_dogen_yarn_meta_model_languages(position + i), create_std_unordered_map_std_string_dogen_yarn_meta_model_name(position + i)));
     }
     return r;
 }
@@ -73,10 +73,10 @@ std::unordered_set<std::string> create_std_unordered_set_std_string(unsigned int
     return r;
 }
 
-std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> > create_std_unordered_map_dogen_yarn_languages_std_unordered_set_std_string(unsigned int position) {
-    std::unordered_map<dogen::yarn::languages, std::unordered_set<std::string> > r;
+std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> > create_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_set_std_string(unsigned int position) {
+    std::unordered_map<dogen::yarn::meta_model::languages, std::unordered_set<std::string> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_dogen_yarn_languages(position + i), create_std_unordered_set_std_string(position + i)));
+        r.insert(std::make_pair(create_dogen_yarn_meta_model_languages(position + i), create_std_unordered_set_std_string(position + i)));
     }
     return r;
 }
@@ -92,10 +92,10 @@ mapping_set_generator::mapping_set_generator() : position_(0) { }
 void mapping_set_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_std_string(position + 0));
-    v.by_language_agnostic_id(create_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(position + 1));
-    v.by_upsilon_id(create_std_unordered_map_dogen_yarn_languages_std_unordered_map_std_string_dogen_yarn_name(position + 2));
+    v.by_language_agnostic_id(create_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_map_std_string_dogen_yarn_meta_model_name(position + 1));
+    v.by_upsilon_id(create_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_map_std_string_dogen_yarn_meta_model_name(position + 2));
     v.upsilon_id_to_lam_id(create_std_unordered_map_std_string_std_string(position + 3));
-    v.erasures_by_language(create_std_unordered_map_dogen_yarn_languages_std_unordered_set_std_string(position + 4));
+    v.erasures_by_language(create_std_unordered_map_dogen_yarn_meta_model_languages_std_unordered_set_std_string(position + 4));
 }
 
 mapping_set_generator::result_type
