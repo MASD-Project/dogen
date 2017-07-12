@@ -74,6 +74,7 @@
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
 #include "dogen/yarn/types/helpers/string_processor.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
+#include "dogen/yarn/types/transforms/configuration.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 #include "dogen/yarn/types/helpers/mappings_hydrator.hpp"
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
@@ -84,6 +85,8 @@
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/transforms/registrar_error.hpp"
+#include "dogen/yarn/types/transforms/kernel_interface.hpp"
+#include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
@@ -138,7 +141,5 @@
 #include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
 #include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
-#include "dogen/yarn/types/transforms/code_generator_transform_interface.hpp"
-#include "dogen/yarn/types/transforms/code_generator_transform_registrar.hpp"
 
 #endif

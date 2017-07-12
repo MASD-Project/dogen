@@ -18,33 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_TRANSFORM_INTERFACE_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_TRANSFORM_INTERFACE_HPP
+#ifndef DOGEN_YARN_TEST_DATA_TRANSFORMS_CONFIGURATION_TD_HPP
+#define DOGEN_YARN_TEST_DATA_TRANSFORMS_CONFIGURATION_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/transforms/configuration.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generator_transform_interface final {
+class configuration_generator {
 public:
-    code_generator_transform_interface() = default;
-    code_generator_transform_interface(const code_generator_transform_interface&) = default;
-    code_generator_transform_interface(code_generator_transform_interface&&) = default;
-    ~code_generator_transform_interface() = default;
-    code_generator_transform_interface& operator=(const code_generator_transform_interface&) = default;
+    configuration_generator();
 
 public:
-    bool operator==(const code_generator_transform_interface& rhs) const;
-    bool operator!=(const code_generator_transform_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
+    typedef dogen::yarn::transforms::configuration result_type;
 
+public:
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
+
+private:
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } } }

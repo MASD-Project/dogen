@@ -18,14 +18,37 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/code_generator_transform_interface.hpp"
+#include "dogen/yarn/hash/transforms/configuration_hash.hpp"
+
+namespace {
+
+template <typename HashableType>
+inline void combine(std::size_t& seed, const HashableType& value) {
+    std::hash<HashableType> hasher;
+    seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
+}
+
+inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
+    return seed;
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool code_generator_transform_interface::operator==(const code_generator_transform_interface& /*rhs*/) const {
-    return true;
+std::size_t configuration_hasher::hash(const configuration& v) {
+    std::size_t seed(0);
+
+    combine(seed, hash_std_unordered_set_std_string(v.enabled_kernels()));
+    combine(seed, v.enable_kernel_directories());
+
+    return seed;
 }
 
 } } }

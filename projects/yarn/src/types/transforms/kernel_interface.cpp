@@ -18,19 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_TRANSFORM_REGISTRAR_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_TRANSFORM_REGISTRAR_FWD_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
+#include "dogen/yarn/types/transforms/kernel_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generator_transform_registrar;
+bool kernel_interface::operator==(const kernel_interface& /*rhs*/) const {
+    return true;
+}
 
 } } }
-
-#endif

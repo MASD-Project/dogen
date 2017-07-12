@@ -52,6 +52,7 @@
 #include "dogen/yarn/hash/meta_model/letter_cases_hash.hpp"
 #include "dogen/yarn/hash/meta_model/object_types_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
+#include "dogen/yarn/hash/transforms/configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/type_parameters_hash.hpp"
 #include "dogen/yarn/hash/helpers/decomposition_result_hash.hpp"
 #include "dogen/yarn/hash/meta_model/formatting_styles_hash.hpp"

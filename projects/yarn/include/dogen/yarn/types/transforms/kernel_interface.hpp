@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_TRANSFORM_REGISTRAR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_TRANSFORM_REGISTRAR_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_KERNEL_INTERFACE_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_KERNEL_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -31,17 +31,17 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class code_generator_transform_registrar final {
+class kernel_interface final {
 public:
-    code_generator_transform_registrar() = default;
-    code_generator_transform_registrar(const code_generator_transform_registrar&) = default;
-    code_generator_transform_registrar(code_generator_transform_registrar&&) = default;
-    ~code_generator_transform_registrar() = default;
-    code_generator_transform_registrar& operator=(const code_generator_transform_registrar&) = default;
+    kernel_interface() = default;
+    kernel_interface(const kernel_interface&) = default;
+    kernel_interface(kernel_interface&&) = default;
+    ~kernel_interface() = default;
+    kernel_interface& operator=(const kernel_interface&) = default;
 
 public:
-    bool operator==(const code_generator_transform_registrar& rhs) const;
-    bool operator!=(const code_generator_transform_registrar& rhs) const {
+    bool operator==(const kernel_interface& rhs) const;
+    bool operator!=(const kernel_interface& rhs) const {
         return !this->operator==(rhs);
     }
 
