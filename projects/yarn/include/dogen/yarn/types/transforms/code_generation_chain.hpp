@@ -25,7 +25,9 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/transforms/kernel_registrar.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,19 +35,48 @@ namespace transforms {
 
 class code_generation_chain final {
 public:
-    code_generation_chain() = default;
-    code_generation_chain(const code_generation_chain&) = default;
-    code_generation_chain(code_generation_chain&&) = default;
-    ~code_generation_chain() = default;
-    code_generation_chain& operator=(const code_generation_chain&) = default;
+    /**
+     * @brief Registrar that keeps track of the available kernels.
+     */
+    static kernel_registrar& registrar();
+
+private:
+    /**
+     * @brief Checks that the supplied path is absolute.
+     *
+     * We expect the output directory to be absolute. This just makes
+     * our life easier in terms of assumptions. Note that this does
+     * not mean the end user must supply an absolute path, just that
+     * someone above must have ensured they converted it into
+     * absolute.
+     */
+    static void ensure_output_directory_path_is_absolute(
+        const boost::filesystem::path& p);
+
+    /**
+     * @brief Create the decoration configuration factory.
+     */
+    static dogen::formatters::decoration_properties_factory
+    create_decoration_properties_factory(
+        const context& ctx,
+        const annotations::annotation& ra);
 
 public:
-    bool operator==(const code_generation_chain& rhs) const;
-    bool operator!=(const code_generation_chain& rhs) const {
-        return !this->operator==(rhs);
-    }
+    static void transform(const context& ctx, meta_model::model& m);
 
+private:
+    static std::shared_ptr<kernel_registrar> registrar_;
 };
+
+/*
+ * Helper method to register kernels.
+ */
+template<typename Kernel>
+inline void register_kernels() {
+    auto k(std::make_shared<Kernel>());
+    auto& rg(code_generation_chain::registrar());
+    rg.register_kernel(k);
+}
 
 } } }
 

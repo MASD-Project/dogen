@@ -25,26 +25,65 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <forward_list>
+#include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
+#include "dogen/yarn/types/transforms/code_generation_output.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class kernel_interface final {
+/**
+ * @brief Performs a model to text transformation of a meta-model,
+ * into its supported language.
+ */
+class kernel_interface {
 public:
     kernel_interface() = default;
-    kernel_interface(const kernel_interface&) = default;
+    kernel_interface(const kernel_interface&) = delete;
     kernel_interface(kernel_interface&&) = default;
-    ~kernel_interface() = default;
-    kernel_interface& operator=(const kernel_interface&) = default;
+    virtual ~kernel_interface() noexcept = 0;
 
 public:
-    bool operator==(const kernel_interface& rhs) const;
-    bool operator!=(const kernel_interface& rhs) const {
-        return !this->operator==(rhs);
-    }
+    /**
+     * @brief Returns the identity of this kernel.
+     */
+    virtual std::string id() const = 0;
 
+    /**
+     * @brief The artefact location for the kernel itself.
+     *
+     * Note that this is not a "true" archetype location, but a
+     * location of a container of archetypes (the kernel).
+     */
+    virtual annotations::archetype_location archetype_location() const = 0;
+
+    /**
+     * @brief All archetype locations for the archetypes owned by this
+     * kernel, listing all available kernels, facets and archetypes.
+     *
+     * FIXME: we need a better name for this.
+     */
+    virtual std::forward_list<annotations::archetype_location>
+    archetype_locations() const = 0;
+
+    /**
+     * @brief Language supported by this kernel.
+     */
+    virtual yarn::meta_model::languages language() const = 0;
+
+    /**
+     * @brief Generates the source code for the kernel.
+     */
+    virtual code_generation_output
+    generate(const context& ctx, const bool requires_kernel_directory,
+        const meta_model::model& m) const = 0;
 };
 
 } } }

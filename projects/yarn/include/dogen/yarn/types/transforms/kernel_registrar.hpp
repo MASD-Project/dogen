@@ -25,56 +25,52 @@
 #pragma once
 #endif
 
-#include <list>
+#include <string>
 #include <memory>
-#include <algorithm>
-#include "dogen/yarn/types/transforms/kernel_interface_fwd.hpp"
+#include <unordered_map>
+#include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/transforms/kernel_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class kernel_registrar final {
+/**
+ * @brief Keeps track of all the available kernels.
+ */
+class kernel_registrar {
 public:
-    kernel_registrar() = default;
-    kernel_registrar(const kernel_registrar&) = default;
-    kernel_registrar(kernel_registrar&&) = default;
-    ~kernel_registrar() = default;
+    /**
+     * @brief Registers a kernel.
+     */
+    void register_kernel(std::shared_ptr<kernel_interface> k);
 
 public:
-    explicit kernel_registrar(const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& kernels_);
+    /**
+     * @brief Ensures the registrar is ready to be used.
+     */
+    void validate() const;
 
 public:
-    const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& kernels_() const;
-    std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& kernels_();
-    void kernels_(const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& v);
-    void kernels_(const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >&& v);
+    /**
+     * @brief Returns the kernel for the supplied language, if any
+     * exists. Otherwise returns a null shared pointer.
+     */
+    std::shared_ptr<kernel_interface>
+    kernel_for_language(const yarn::meta_model::languages l) const;
 
-public:
-    bool operator==(const kernel_registrar& rhs) const;
-    bool operator!=(const kernel_registrar& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(kernel_registrar& other) noexcept;
-    kernel_registrar& operator=(kernel_registrar other);
+    /**
+     * @brief Returns all available kernels, by language.
+     */
+    const std::unordered_map<yarn::meta_model::languages,
+                             std::shared_ptr<kernel_interface>>&
+    kernels_by_language() const;
 
 private:
-    std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> > kernels__;
+    std::unordered_map<yarn::meta_model::languages,
+                       std::shared_ptr<kernel_interface>> kernels_by_language_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::transforms::kernel_registrar& lhs,
-    dogen::yarn::transforms::kernel_registrar& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

@@ -18,15 +18,21 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/kernel_interface.hpp"
+#include <sstream>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/transforms/registrar_error.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 
-namespace std {
+namespace {
 
-inline bool operator==(const std::shared_ptr<dogen::yarn::transforms::kernel_interface>& lhs,
-const std::shared_ptr<dogen::yarn::transforms::kernel_interface>& rhs) {
-    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
-}
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.meta_model.kernel_registrar"));
+
+const std::string no_kernels("No kernels provided.");
+const std::string null_kernel("Kernel supplied is null");
+const std::string language_taken("Kernel already registered for language: ");
 
 }
 
@@ -34,38 +40,42 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-kernel_registrar::kernel_registrar(const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& kernels_)
-    : kernels__(kernels_) { }
+void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
+    // no logging by design
+    if (!k)
+        BOOST_THROW_EXCEPTION(registrar_error(null_kernel));
 
-void kernel_registrar::swap(kernel_registrar& other) noexcept {
-    using std::swap;
-    swap(kernels__, other.kernels__);
+    const auto l(k->language());
+    const auto pair(std::make_pair(l, k));
+    const auto inserted(kernels_by_language_.insert(pair).second);
+    if (!inserted) {
+        std::ostringstream s;
+        s << language_taken << l << " kernel: " << k->id();
+        BOOST_THROW_EXCEPTION(registrar_error(s.str()));
+    }
 }
 
-bool kernel_registrar::operator==(const kernel_registrar& rhs) const {
-    return kernels__ == rhs.kernels__;
+void kernel_registrar::validate() const {
+    if (kernels_by_language_.empty()) {
+        BOOST_LOG_SEV(lg, error) << no_kernels;
+        BOOST_THROW_EXCEPTION(registrar_error(no_kernels));
+    }
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
 }
 
-kernel_registrar& kernel_registrar::operator=(kernel_registrar other) {
-    using std::swap;
-    swap(*this, other);
-    return *this;
+std::shared_ptr<kernel_interface> kernel_registrar::
+kernel_for_language(const yarn::meta_model::languages l) const {
+    const auto i(kernels_by_language_.find(l));
+    if (i == kernels_by_language_.end())
+        return std::shared_ptr<kernel_interface>();
+
+    return i->second;
 }
 
-const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& kernel_registrar::kernels_() const {
-    return kernels__;
-}
-
-std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& kernel_registrar::kernels_() {
-    return kernels__;
-}
-
-void kernel_registrar::kernels_(const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >& v) {
-    kernels__ = v;
-}
-
-void kernel_registrar::kernels_(const std::list<std::shared_ptr<dogen::yarn::transforms::kernel_interface> >&& v) {
-    kernels__ = std::move(v);
+const std::unordered_map<yarn::meta_model::languages, std::
+                         shared_ptr<kernel_interface>>&
+kernel_registrar::kernels_by_language() const {
+    return kernels_by_language_;
 }
 
 } } }

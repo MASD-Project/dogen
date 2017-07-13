@@ -24,8 +24,6 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool kernel_interface::operator==(const kernel_interface& /*rhs*/) const {
-    return true;
-}
+kernel_interface::~kernel_interface() noexcept {}
 
 } } }

@@ -40,20 +40,11 @@ namespace transforms {
 class external_transforms_chain final {
 private:
     /**
-     * @brief Creates the formatters' repository with decoration data.
-     */
-    static dogen::formatters::repository
-    create_formatters_decoration_repository(
-        const std::vector<boost::filesystem::path>& data_directories);
-
-    /**
      * @brief Create the decoration configuration factory.
      */
     static dogen::formatters::decoration_properties_factory
     create_decoration_properties_factory(
-        const annotations::type_repository& atrp,
-        const dogen::formatters::repository& frp,
-        const annotations::annotation& ra);
+        const context& ctx, const annotations::annotation& ra);
 
 public:
     /**

@@ -31,6 +31,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/formatters/types/repository.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
 namespace dogen {
@@ -56,7 +57,8 @@ public:
         const options::knitting_options& options,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
-        const helpers::mapping_set_repository& msrp);
+        const helpers::mapping_set_repository& msrp,
+        const dogen::formatters::repository& frp);
 
 public:
     /**
@@ -86,6 +88,12 @@ public:
      */
     const helpers::mapping_set_repository& mapping_repository() const;
 
+
+    /**
+     * @brief Repository with formatter data.
+     */
+    const dogen::formatters::repository& formatters_repository() const;
+
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const dogen::options::knitting_options options_;
@@ -93,6 +101,7 @@ private:
     const dogen::annotations::type_repository type_repository_;
     const annotations::annotation_groups_factory groups_factory_;
     const helpers::mapping_set_repository mapping_repository_;
+    const dogen::formatters::repository formatters_repository_;
 };
 
 } } }

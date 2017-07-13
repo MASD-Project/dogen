@@ -46,20 +46,12 @@ external_transform_registrar& external_transforms_chain::registrar() {
     return *registrar_;
 }
 
-dogen::formatters::repository external_transforms_chain::
-create_formatters_decoration_repository(
-    const std::vector<boost::filesystem::path>& data_directories) {
-    dogen::formatters::repository_factory hw;
-    return hw.make(data_directories);
-}
-
 dogen::formatters::decoration_properties_factory
 external_transforms_chain::create_decoration_properties_factory(
-    const annotations::type_repository& atrp,
-    const dogen::formatters::repository& frp,
-    const annotations::annotation& ra) {
+    const context& ctx, const annotations::annotation& ra) {
     using dogen::formatters::decoration_properties_factory;
-    decoration_properties_factory r(atrp, frp, ra);
+    decoration_properties_factory
+        r(ctx.type_repository(), ctx.formatters_repository(), ra);
     return r;
 }
 
@@ -71,12 +63,8 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
     auto& rg(registrar());
     rg.validate();
 
-    const auto& dirs(ctx.data_directories());
     const auto& ra(im.root_module().annotation());
-    const auto& atrp(ctx.type_repository());
-    const auto drp(create_formatters_decoration_repository(dirs));
-    const auto dpf(create_decoration_properties_factory(atrp, drp, ra));
-
+    const auto dpf(create_decoration_properties_factory(ctx, ra));
     for (const auto& et : rg.external_transforms())
         et->transform(ctx, dpf, im);
 

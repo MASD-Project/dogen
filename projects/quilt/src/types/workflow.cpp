@@ -34,7 +34,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.workflow"));
 
-std::string empty;
 const std::string null_registrar("Registrar is null");
 const std::string no_generatable_model_modules(
     "No generatable model modules found.");

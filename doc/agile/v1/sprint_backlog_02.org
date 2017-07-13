@@ -402,6 +402,7 @@ to generate the decorations property factory. This cannot be done when
 context is being created.
 
 *** STARTED Implement the code-generation chain                       :story:
+    CLOCK: [2017-07-13 Thu 06:31]--[2017-07-13 Thu 07:42] =>  1:11
     CLOCK: [2017-07-12 Wed 21:34]--[2017-07-12 Wed 22:02] =>  0:28
 
 Tasks:
@@ -414,6 +415,13 @@ Tasks:
 - move context generation into code generator.
 - update knitter to use the code generator.
 - delete knit.
+- sort out traits.
+
+*** Create an options validator                                       :story:
+
+At present we are checking that the paths are absolute in the
+transforms. We should do an upfront check, perhaps when creating the
+context.
 
 *** Assorted problems to look at                                      :story:
 
