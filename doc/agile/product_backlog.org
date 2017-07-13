@@ -11,7 +11,7 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-**** Create "opaque" kernel and element properties                    :story:
+*** Create "opaque" kernel and element properties                     :story:
 
 As part of the element container, we can have a set of base classes
 that are empty: =opaque_element_properties=. This class is then
