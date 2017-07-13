@@ -19,6 +19,11 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/io/type_io.hpp"
+#include "dogen/annotations/types/entry_selector.hpp"
+#include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 
@@ -37,6 +42,66 @@ namespace yarn {
 namespace transforms {
 
 std::shared_ptr<kernel_registrar> code_generation_chain::registrar_;
+
+code_generation_chain::type_group code_generation_chain::
+make_type_group(const annotations::type_repository& atrp,
+    const std::list<annotations::archetype_location>& als) {
+    type_group r;
+
+    const annotations::type_repository_selector rs(atrp);
+    const auto ekd(traits::enable_kernel_directories());
+    r.enable_kernel_directories = rs.select_type_by_name(ekd);
+
+    const auto en(traits::enabled());
+    for (const auto al : als) {
+        type_group tg;
+        const auto kernel(al.kernel());
+        r.enabled.push_back(rs.select_type_by_name(kernel, en));
+    }
+
+    return r;
+}
+
+std::unordered_set<std::string>
+code_generation_chain::obtain_enabled_kernels(const type_group& tg,
+    const annotations::annotation& ra) {
+
+    std::unordered_set<std::string> r;
+    const annotations::entry_selector s(ra);
+    for (const auto& t : tg.enabled) {
+        const bool enabled(s.get_boolean_content_or_default(t));
+        if (!enabled)
+            continue;
+
+        r.insert(t.archetype_location().kernel());
+    }
+
+    return r;
+}
+
+bool code_generation_chain::obtain_enable_kernel_directories(
+    const type_group& tg, const annotations::annotation& ra) {
+    const annotations::entry_selector s(ra);
+    return s.get_boolean_content_or_default(tg.enable_kernel_directories);
+}
+
+configuration code_generation_chain::make_configuration(
+    const context& ctx, const std::list<annotations::archetype_location>& als,
+    const annotations::annotation& ra) {
+
+    configuration r;
+    const auto tg(make_type_group(ctx.type_repository(), als));
+    r.enabled_kernels(obtain_enabled_kernels(tg, ra));
+    if (r.enabled_kernels().size() > 1) {
+        BOOST_LOG_SEV(lg, warn) << "More than one kernel is enabled: "
+                                << r.enabled_kernels().size()
+                                << ". Forcing enable_kernel_directories.";
+        r.enable_kernel_directories(true);
+    } else
+        r.enable_kernel_directories(obtain_enable_kernel_directories(tg, ra));
+
+    return r;
+}
 
 kernel_registrar& code_generation_chain::registrar() {
     if (!registrar_)
@@ -63,12 +128,69 @@ code_generation_chain::create_decoration_properties_factory(
     return r;
 }
 
-void code_generation_chain::
-transform(const context& ctx, meta_model::model& /*m*/) {
+std::list<annotations::archetype_location>
+code_generation_chain::archetype_locations() {
+    std::list<annotations::archetype_location> r;
+    for (const auto& pair : registrar().kernels_by_language()) {
+        const auto& k(*pair.second);
+        // not splicing due to a mistmatch in the list types
+        for (const auto al : k.archetype_locations())
+            r.push_back(al);
+    }
+    return r;
+}
+
+code_generation_output code_generation_chain::
+transform(const context& ctx, const std::list<meta_model::model>& models) {
     const auto& odp(ctx.options().output_directory_path());
     ensure_output_directory_path_is_absolute(odp);
 
+    code_generation_output r;
+    const auto als(archetype_locations());
+    for (const auto& m : models) {
+        if (!m.has_generatable_types()) {
+            BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
+            continue;
+        }
 
+        const auto ra(m.root_module().annotation());
+        const auto drp(create_decoration_properties_factory(ctx, ra));
+        const auto cfg(make_configuration(ctx, als, ra));
+
+        const auto ol(m.output_language());
+        BOOST_LOG_SEV(lg, debug) << "Looking for a kernel for language: " << ol;
+
+        const auto ptr(registrar().kernel_for_language(ol));
+        if (!ptr) {
+            // FIXME: should we throw? user requested a language but
+            // FIXME: it is not available.
+            BOOST_LOG_SEV(lg, debug) << "Could not find kernel for language.";
+            return code_generation_output();
+        }
+
+        const auto& k(*ptr);
+        const auto id(k.id());
+        BOOST_LOG_SEV(lg, debug) << "Found kernel: " << id;
+
+        const auto& ek(cfg.enabled_kernels());
+        const auto is_enabled(ek.find(id) != ek.end());
+        if (!is_enabled) {
+            BOOST_LOG_SEV(lg, warn) << "Kernel is not enabled.";
+            return code_generation_output();
+        }
+
+        const bool ekd(cfg.enable_kernel_directories());
+        auto cgo(k.generate(ctx, ekd, m));
+        BOOST_LOG_SEV(lg, debug) << "Generated files for : " << id
+                                 << ". Total files: "
+                                 << std::distance(r.artefacts().begin(),
+                                     r.artefacts().end());
+
+        r.artefacts().splice(r.artefacts().end(), cgo.artefacts());
+        r.managed_directories().splice(r.managed_directories().end(),
+            cgo.managed_directories());
+    }
+    return r;
 }
 
 } } }

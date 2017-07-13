@@ -31,10 +31,12 @@ namespace dogen {
 namespace yarn {
 
 struct traits {
+    static std::string enabled();
     static std::string input_language();
     static std::string output_language();
     static std::string is_proxy_model();
     static std::string reference();
+    static std::string enable_kernel_directories();
 
     struct type_parameters {
         static std::string variable_number_of_parameters();

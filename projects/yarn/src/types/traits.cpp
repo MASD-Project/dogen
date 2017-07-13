@@ -23,6 +23,11 @@
 namespace dogen {
 namespace yarn {
 
+std::string traits::enabled() {
+    static std::string r("enabled");
+    return r;
+}
+
 std::string traits::input_language() {
     static std::string r("yarn.input_language");
     return r;
@@ -40,6 +45,11 @@ std::string traits::is_proxy_model() {
 
 std::string traits::reference() {
     static std::string r("yarn.reference");
+    return r;
+}
+
+std::string traits::enable_kernel_directories() {
+    static std::string r("quilt.enable_kernel_directories");
     return r;
 }
 

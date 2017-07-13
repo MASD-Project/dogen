@@ -12,37 +12,37 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-12 Wed 22:04]
+#+CAPTION: Clock summary at [2017-07-13 Thu 20:18]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *32:38* |       |      | 100.0 |
+| *Total time*                                                                | *34:39* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 32:38   |       |      | 100.0 |
-| Active                                                                      |         | 32:38 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.5 |
+| Stories                                                                     | 34:39   |       |      | 100.0 |
+| Active                                                                      |         | 34:39 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.3 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.2 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.7 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  12.8 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.9 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.5 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  12.1 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.6 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.6 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.9 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.8 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   1.0 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   8.3 |
-| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   2.0 |
-| COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.7 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.6 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  10.8 |
-| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.3 |
-| COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.2 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   2.1 |
-| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.8 |
-| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.3 |
-| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.5 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  27.6 |
-| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.8 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.8 |
+| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.9 |
+| COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.4 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  10.1 |
+| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.2 |
+| COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   2.0 |
+| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.6 |
+| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.2 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.3 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  26.0 |
+| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.6 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   1.0 |
-| STARTED Implement the code-generation chain                                 |         |       | 0:28 |   1.4 |
+| STARTED Implement the code-generation chain                                 |         |       | 2:29 |   7.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -402,6 +402,7 @@ to generate the decorations property factory. This cannot be done when
 context is being created.
 
 *** STARTED Implement the code-generation chain                       :story:
+    CLOCK: [2017-07-13 Thu 18:55]--[2017-07-13 Thu 19:45] =>  0:50
     CLOCK: [2017-07-13 Thu 06:31]--[2017-07-13 Thu 07:42] =>  1:11
     CLOCK: [2017-07-12 Wed 21:34]--[2017-07-12 Wed 22:02] =>  0:28
 
