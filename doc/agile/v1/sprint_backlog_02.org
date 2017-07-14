@@ -12,23 +12,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 12:23]
+#+CAPTION: Clock summary at [2017-07-14 Fri 12:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *37:17* |       |      | 100.0 |
+| *Total time*                                                                | *37:35* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 37:17   |       |      | 100.0 |
-| Active                                                                      |         | 37:17 |      | 100.0 |
+| Stories                                                                     | 37:35   |       |      | 100.0 |
+| Active                                                                      |         | 37:35 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   3.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.1 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   3.2 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.2 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.1 |
 | COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.2 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.5 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.7 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.6 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.9 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.3 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.2 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.8 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.2 |
@@ -36,14 +36,14 @@
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.0 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
 | COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.9 |
-| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.5 |
-| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.1 |
-| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.0 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  24.1 |
+| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.4 |
+| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.0 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.9 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  23.9 |
 | CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.4 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.9 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.7 |
-| STARTED Implement the code-generation chain                                 |         |       | 4:09 |  11.1 |
+| STARTED Implement the code-generation chain                                 |         |       | 4:27 |  11.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -543,7 +543,24 @@ that if two models are extending the base visitor, you will need to
 visit twice, but at least for the most common case (one model
 extending another) it provides a workable solution.
 
+*** COMPLETED Knitting =quilt= does not work                          :story:
+    CLOSED: [2017-07-14 Fri 12:41]
+
+*Rationale*: removing quilt solved this problem.
+
+When we invoke =knit_quilt= for some reason we seem to knit
+=quilt.cpp=:
+
+: $ ninja knit_quilt
+: [1/1] Knitting Quilt C++ model
+
+This seems to be some kind of ninja "feature".
+
+For the moment we've put in a very ugly fix: we renamed the target
+=knit_quiltx=.
+
 *** STARTED Implement the code-generation chain                       :story:
+    CLOCK: [2017-07-14 Fri 12:25]--[2017-07-14 Fri 12:43] =>  0:18
     CLOCK: [2017-07-14 Fri 11:51]--[2017-07-14 Fri 12:04] =>  0:13
     CLOCK: [2017-07-14 Fri 10:50]--[2017-07-14 Fri 11:50] =>  1:00
     CLOCK: [2017-07-14 Fri 09:29]--[2017-07-14 Fri 09:56] =>  0:27

@@ -68,15 +68,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
 
-    set(target quilt)
-    add_custom_target(knit_${target}x
-        COMMENT "Knitting Quilt model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.dia
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target}x)
-
     set(target quilt.cpp)
     add_custom_target(knit_${target}
         COMMENT "Knitting Quilt C++ model" VERBATIM

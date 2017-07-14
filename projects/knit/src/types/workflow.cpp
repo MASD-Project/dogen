@@ -31,7 +31,6 @@
 #include "dogen/yarn/types/code_generator.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
-#include "dogen/quilt/types/workflow.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
 #include "dogen/knit/types/housekeeper.hpp"
 #include "dogen/knit/types/workflow.hpp"

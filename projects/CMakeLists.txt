@@ -181,7 +181,6 @@ include_directories(
 
     # real code
     ${CMAKE_SOURCE_DIR}/projects/dia/include
-    ${CMAKE_SOURCE_DIR}/projects/quilt/include
     ${CMAKE_SOURCE_DIR}/projects/yarn/include
     ${CMAKE_SOURCE_DIR}/projects/yarn.json/include
     ${CMAKE_SOURCE_DIR}/projects/yarn.dia/include
@@ -209,7 +208,6 @@ set(COVERALLS_SRC "")
 #
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/input_models)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/dia)
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/quilt)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn.json)
 add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/yarn.dia)

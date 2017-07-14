@@ -1877,19 +1877,6 @@ class name. We need a way of controlling all of the default
 constructors and all of the operators in one go so we can set it on
 the handcrafted profile.
 
-*** Knitting =quilt= does not work                                    :story:
-
-When we invoke =knit_quilt= for some reason we seem to knit
-=quilt.cpp=:
-
-: $ ninja knit_quilt
-: [1/1] Knitting Quilt C++ model
-
-This seems to be some kind of ninja "feature".
-
-For the moment we've put in a very ugly fix: we renamed the target
-=knit_quiltx=.
-
 *** Use templates for directory and prefix fields                     :story:
 
 At present we have a lot of duplication on the annotations for certain

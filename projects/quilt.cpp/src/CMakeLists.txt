@@ -29,7 +29,6 @@ target_link_libraries(${name}
     annotations
     formatters
     yarn
-    quilt
     wale
     stitch
     ${Boost_LIBRARIES})
