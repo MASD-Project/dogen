@@ -12,40 +12,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 14:50]
+#+CAPTION: Clock summary at [2017-07-14 Fri 15:45]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *39:26* |       |      | 100.0 |
+| *Total time*                                                                | *40:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 39:26   |       |      | 100.0 |
-| Active                                                                      |         | 39:26 |      | 100.0 |
+| Stories                                                                     | 40:18   |       |      | 100.0 |
+| Active                                                                      |         | 40:18 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   2.8 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.0 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   3.0 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  10.6 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.0 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  10.4 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   3.9 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.5 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.6 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.5 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.8 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   6.9 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   6.7 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.7 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.5 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.1 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   8.9 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   8.7 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   1.9 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.8 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.7 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.3 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   1.9 |
-| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.8 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  22.8 |
-| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.3 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.7 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  22.3 |
+| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.2 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.8 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.6 |
-| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  11.5 |
+| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  11.3 |
 | COMPLETED Fix options test break on windows                                 |         |       | 0:10 |   0.4 |
-| STARTED Move enablement into yarn                                           |         |       | 1:35 |   4.0 |
+| STARTED Move enablement into yarn                                           |         |       | 2:27 |   6.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -600,6 +600,9 @@ windows:
 : C:/projects/dogen/projects/options/tests/knitting_options_validator_tests.cpp(109): error : in "knitting_options_validator_tests/options_with_a_relative_output_directory_are_invalid": exception "validation_error" raised as expected: validation on the raised exception through predicate "c" [C:\projects\dogen\build\output\msvc\Release\projects\options\tests\run_options.tests.vcxproj]
 
 *** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-07-14 Fri 15:18]--[2017-07-14 Fri 15:44] =>  0:26
+    CLOCK: [2017-07-14 Fri 15:16]--[2017-07-14 Fri 15:17] =>  0:01
+    CLOCK: [2017-07-14 Fri 14:51]--[2017-07-14 Fri 15:16] =>  0:25
     CLOCK: [2017-07-14 Fri 14:42]--[2017-07-14 Fri 14:50] =>  0:08
     CLOCK: [2017-07-14 Fri 14:12]--[2017-07-14 Fri 14:41] =>  0:29
     CLOCK: [2017-07-14 Fri 13:44]--[2017-07-14 Fri 14:11] =>  0:27
@@ -617,6 +620,16 @@ Problems:
 - we are checking to see if the hash facet is enabled with c++ 98; if
   so, we throw as this facet is incompatible. We cannot do this from
   yarn since we do not know what c++ standards are.
+- because we do not have a mapping between a archetype location and
+  the meta-type, we will be enabling/disabling all archetype locations
+  across all meta-types.
+- because we do not have element segmentation, the element extensions
+  will be disabled.
+
+To do:
+
+- kernel registrar type index map
+- c# formatter registrar type index map
 
 *Previous Understanding*
 
@@ -624,6 +637,33 @@ We need to make use of the exact same logic as implemented in
 =quilt.cpp= for enablement. Perhaps all of the enablement related
 functionality can be lifted and grafted onto quilt without any major
 changes.
+
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
 
 *** Move dependencies into yarn                                       :story:
 
@@ -658,33 +698,6 @@ ODB level.
 
 Similarly, we should move the ODB databases into yarn and make that a
 ORM-level concept.
-
-*** Move element segmentation into yarn                               :story:
-
-We've added the notion that an element can be composed of other
-elements in quilt, in order to handle forward declarations. However,
-with a little bit of effort we can generalise it into yarn. It would
-be useful for other things such as inner classes. We don't need to
-actually implement inner classes right now but we should make sure the
-moving of this feature into yarn is compatible with it.
-
-Notes:
-
-- seems like we have two use cases: a) we need all elements, master
-  and extensions and we don't really care about which is which. b) we
-  only want masters. However, we must be able to access the same
-  element properties from either the master or the extension. Having
-  said all that, it seems we don't really need all of the element
-  properties for both - forward declarations probably only need:
-  decoration and artefact properties.
-- we don't seem to use the map in formattables model anywhere, other
-  than to find master/extension elements.
-- Yarn model could have two simple list containers (masters and
-  all). Or maybe we don't even need this to start off with, we can
-  just iterate and skip extensions where required.
-- so in conclusion, we to move decoration, enablement and dependencies
-  into yarn (basically decoration and artefact properties) first and
-  then see where segmentation ends.
 
 *** Start documenting the theoretical aspects of Dogen                :story:
 
