@@ -21,17 +21,15 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/options/types/validation_error.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
-#include "dogen/utility/log/logger.hpp"
-
-using namespace dogen::utility::log;
 
 namespace {
 
-auto lg(logger_factory("options.knitting_options_validator"));
-
 const std::string missing_target("Mandatory parameter target is missing");
+const std::string non_absolute_target("Target path is not absolute: ");
 const std::string missing_output_dir(
-    "You must supply the project directory path for split projects");
+    "You must supply the output directory path");
+const std::string non_absolute_output(
+    "The output directory path is not absolute: ");
 
 }
 
@@ -39,15 +37,43 @@ namespace dogen {
 namespace options {
 
 void knitting_options_validator::validate(const knitting_options& o) {
-    if (o.target().empty()) {
-        BOOST_LOG_SEV(lg, error) << missing_target;
-        BOOST_THROW_EXCEPTION(validation_error(missing_target));
-    }
+    // Note: not logging by design: log is not yet setup.
 
-    if (o.output_directory_path().empty()) {
-        BOOST_LOG_SEV(lg, error) << missing_output_dir;
+    /*
+     * User must supply a path to the target.
+     */
+    const auto tp(o.target());
+    if (tp.empty())
+        BOOST_THROW_EXCEPTION(validation_error(missing_target));
+
+    /**
+     * We require the target path supplied to us to be an absolute
+     * path. This is because we perform calculations off of it such as
+     * locating the reference models and so forth. The end-user is not
+     * required to have supplied an absolute path, but someone above
+     * us must be responsible for ensuring we receive an absolute
+     * path.
+     */
+    auto gs(tp.generic_string());
+    if (!tp.is_absolute())
+        BOOST_THROW_EXCEPTION(validation_error(non_absolute_target + gs));
+
+    /*
+     * User must supply a path to the output directory, or the system
+     * must have defaulted it to something sensible.
+     */
+    const auto odp(o.output_directory_path());
+    if (odp.empty())
         BOOST_THROW_EXCEPTION(validation_error(missing_output_dir));
-    }
+
+    /*
+     * As with the target, we also expect the output directory to be
+     * absolute. This just makes our life easier in terms of
+     * assumptions.
+     */
+    gs = odp.generic_string();
+    if (!odp.is_absolute())
+        BOOST_THROW_EXCEPTION(validation_error(non_absolute_output + gs));
 }
 
 } }

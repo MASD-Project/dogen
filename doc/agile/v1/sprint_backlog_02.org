@@ -12,37 +12,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 09:56]
+#+CAPTION: Clock summary at [2017-07-14 Fri 10:38]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *35:06* |       |      | 100.0 |
+| *Total time*                                                                | *35:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 35:06   |       |      | 100.0 |
-| Active                                                                      |         | 35:06 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.3 |
+| Stories                                                                     | 35:45   |       |      | 100.0 |
+| Active                                                                      |         | 35:45 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.1 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   3.4 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.9 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.5 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.7 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.4 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.6 |
-| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.8 |
+| COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.7 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.9 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.7 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.6 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.9 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.4 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |  10.0 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.3 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.8 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.1 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
 | COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   2.0 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.6 |
-| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.2 |
-| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.2 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  25.6 |
-| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.6 |
+| COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.1 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.1 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  25.2 |
+| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.5 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.9 |
-| STARTED Implement the code-generation chain                                 |         |       | 2:56 |   8.4 |
+| COMPLETED Create an options validator                                       |         |       | 0:39 |   1.8 |
+| STARTED Implement the code-generation chain                                 |         |       | 2:56 |   8.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -401,6 +402,19 @@ Actually this won't work because we need the root annotation in order
 to generate the decorations property factory. This cannot be done when
 context is being created.
 
+*** COMPLETED Create an options validator                             :story:
+    CLOSED: [2017-07-14 Fri 10:22]
+    CLOCK: [2017-07-14 Fri 10:36]--[2017-07-14 Fri 10:38] =>  0:02
+    CLOCK: [2017-07-14 Fri 10:23]--[2017-07-14 Fri 10:35] =>  0:12
+    CLOCK: [2017-07-14 Fri 10:01]--[2017-07-14 Fri 10:22] =>  0:21
+    CLOCK: [2017-07-14 Fri 09:57]--[2017-07-14 Fri 10:01] =>  0:04
+
+At present we are checking that the paths are absolute in the
+transforms. We should do an upfront check, perhaps when creating the
+context.
+
+Actually we already have one, so update it.
+
 *** STARTED Implement the code-generation chain                       :story:
     CLOCK: [2017-07-14 Fri 09:29]--[2017-07-14 Fri 09:56] =>  0:27
     CLOCK: [2017-07-13 Thu 18:55]--[2017-07-13 Thu 19:45] =>  0:50
@@ -418,12 +432,6 @@ Tasks:
 - update knitter to use the code generator.
 - delete knit.
 - sort out traits.
-
-*** Create an options validator                                       :story:
-
-At present we are checking that the paths are absolute in the
-transforms. We should do an upfront check, perhaps when creating the
-context.
 
 *** Assorted problems to look at                                      :story:
 

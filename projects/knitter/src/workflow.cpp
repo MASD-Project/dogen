@@ -89,8 +89,7 @@ generate_knitting_options_activity(const int argc, const char* argv[]) const {
     if (!r)
         return r;
 
-    options::knitting_options_validator v;
-    v.validate(*r);
+    options::knitting_options_validator::validate(*r);
 
     return r;
 }

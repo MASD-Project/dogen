@@ -33,8 +33,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.transforms.code_generation_chain"));
 
-const std::string non_absolute_output(
-    "The output directory path is not absolute: ");
 const std::string unsupported_language(
     "Could not find kernel for language: ");
 const std::string disabled_kernel(
@@ -115,17 +113,17 @@ kernel_registrar& code_generation_chain::registrar() {
     return *registrar_;
 }
 
-void code_generation_chain::ensure_output_directory_path_is_absolute(
-    const boost::filesystem::path& p) {
-    if (!p.is_absolute()) {
-        const auto gs(p.generic_string());
-        BOOST_LOG_SEV(lg, error) << non_absolute_output << gs;
-        BOOST_THROW_EXCEPTION(transformation_error(non_absolute_output + gs));
-    }
+void code_generation_chain::
+merge(code_generation_output&& src, code_generation_output& dst) {
+    dst.artefacts().splice(dst.artefacts().end(), src.artefacts());
+    dst.managed_directories().splice(dst.managed_directories().end(),
+        src.managed_directories());
 }
 
 code_generation_output code_generation_chain::
 transform(const context& ctx, const meta_model::model& m) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming model: " << m.name().id();
+
     /*
      * No point in proceeding if the model has not types to
      * transform to text.
@@ -178,21 +176,20 @@ transform(const context& ctx, const meta_model::model& m) {
                              << ". Total files: "
                              << std::distance(r.artefacts().begin(),
                                  r.artefacts().end());
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed model.";
     return r;
 }
 
 code_generation_output code_generation_chain::
 transform(const context& ctx, const std::list<meta_model::model>& models) {
-    const auto& odp(ctx.options().output_directory_path());
-    ensure_output_directory_path_is_absolute(odp);
+    BOOST_LOG_SEV(lg, debug) << "Transforming models: " << models.size();
 
     code_generation_output r;
-    for (const auto& m : models) {
-        auto cgo(transform(ctx, m));
-        r.artefacts().splice(r.artefacts().end(), cgo.artefacts());
-        r.managed_directories().splice(r.managed_directories().end(),
-            cgo.managed_directories());
-    }
+    for (const auto& m : models)
+        merge(transform(ctx, m), r);
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed models.";
     return r;
 }
 

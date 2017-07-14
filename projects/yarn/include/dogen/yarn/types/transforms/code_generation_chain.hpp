@@ -68,17 +68,11 @@ public:
     static kernel_registrar& registrar();
 
 private:
-    /**
-     * @brief Checks that the supplied path is absolute.
-     *
-     * We expect the output directory to be absolute. This just makes
-     * our life easier in terms of assumptions. Note that this does
-     * not mean the end user must supply an absolute path, just that
-     * someone above must have ensured they converted it into
-     * absolute.
+    /*
+     * Merges source into destination.
      */
-    static void ensure_output_directory_path_is_absolute(
-        const boost::filesystem::path& p);
+    static void
+    merge(code_generation_output&& src, code_generation_output& dst);
 
 public:
     static code_generation_output

@@ -32,15 +32,8 @@ namespace options {
 
 class knitting_options_validator {
 public:
-    knitting_options_validator() = default;
-    knitting_options_validator(const knitting_options_validator&) = default;
-    ~knitting_options_validator() = default;
-    knitting_options_validator(knitting_options_validator&&) = default;
-    knitting_options_validator&
-    operator=(const knitting_options_validator&) = default;
-
 public:
-    void validate(const knitting_options& s);
+    static void validate(const knitting_options& s);
 };
 
 } }
