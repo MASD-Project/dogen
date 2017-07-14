@@ -41,6 +41,7 @@ target_link_libraries(${tests_name}
 set(command $<TARGET_FILE:${tests_name}> ${boost_test_parameters})
 
 add_custom_target(run_${tests_name}
+    COMMENT "Running ${tests_name}" VERBATIM
     COMMAND ${command}
     WORKING_DIRECTORY ${stage_bin_dir}
     DEPENDS ${tests_name})
