@@ -18,14 +18,13 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/code_generator.hpp"
+#include "dogen/yarn/types/code_generator.hpp"
 
 namespace dogen {
 namespace yarn {
-namespace transforms {
 
 bool code_generator::operator==(const code_generator& /*rhs*/) const {
     return true;
 }
 
-} } }
+} }

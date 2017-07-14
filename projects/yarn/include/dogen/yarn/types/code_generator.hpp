@@ -18,19 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CODE_GENERATOR_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_CODE_GENERATOR_HPP
+#define DOGEN_YARN_TYPES_CODE_GENERATOR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <algorithm>
+
 namespace dogen {
 namespace yarn {
-namespace transforms {
 
-class code_generator;
+class code_generator final {
+public:
+    code_generator() = default;
+    code_generator(const code_generator&) = default;
+    code_generator(code_generator&&) = default;
+    ~code_generator() = default;
+    code_generator& operator=(const code_generator&) = default;
 
-} } }
+public:
+    bool operator==(const code_generator& rhs) const;
+    bool operator!=(const code_generator& rhs) const {
+        return !this->operator==(rhs);
+    }
+
+};
+
+} }
 
 #endif
