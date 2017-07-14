@@ -62,7 +62,7 @@ std::ostream& operator<<(std::ostream& s, const global_enablement_configuration&
       << "\"kernel_enabled\": " << v.kernel_enabled() << ", "
       << "\"facet_enabled\": " << v.facet_enabled() << ", "
       << "\"facet_name\": " << "\"" << tidy_up_string(v.facet_name()) << "\"" << ", "
-      << "\"archetype_enabled\": " << "\"" << tidy_up_string(v.archetype_enabled()) << "\"" << ", "
+      << "\"archetype_enabled\": " << v.archetype_enabled() << ", "
       << "\"facet_overwrite\": " << v.facet_overwrite() << ", "
       << "\"archetype_overwrite\": " << v.archetype_overwrite()
       << " }";

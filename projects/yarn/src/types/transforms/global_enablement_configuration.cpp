@@ -27,6 +27,7 @@ namespace transforms {
 global_enablement_configuration::global_enablement_configuration()
     : kernel_enabled_(static_cast<bool>(0)),
       facet_enabled_(static_cast<bool>(0)),
+      archetype_enabled_(static_cast<bool>(0)),
       facet_overwrite_(static_cast<bool>(0)) { }
 
 global_enablement_configuration::global_enablement_configuration(global_enablement_configuration&& rhs)
@@ -41,7 +42,7 @@ global_enablement_configuration::global_enablement_configuration(
     const bool kernel_enabled,
     const bool facet_enabled,
     const std::string& facet_name,
-    const std::string& archetype_enabled,
+    const bool archetype_enabled,
     const bool facet_overwrite,
     const boost::optional<bool>& archetype_overwrite)
     : kernel_enabled_(kernel_enabled),
@@ -108,20 +109,12 @@ void global_enablement_configuration::facet_name(const std::string&& v) {
     facet_name_ = std::move(v);
 }
 
-const std::string& global_enablement_configuration::archetype_enabled() const {
+bool global_enablement_configuration::archetype_enabled() const {
     return archetype_enabled_;
 }
 
-std::string& global_enablement_configuration::archetype_enabled() {
-    return archetype_enabled_;
-}
-
-void global_enablement_configuration::archetype_enabled(const std::string& v) {
+void global_enablement_configuration::archetype_enabled(const bool v) {
     archetype_enabled_ = v;
-}
-
-void global_enablement_configuration::archetype_enabled(const std::string&& v) {
-    archetype_enabled_ = std::move(v);
 }
 
 bool global_enablement_configuration::facet_overwrite() const {

@@ -50,7 +50,7 @@ public:
         const bool kernel_enabled,
         const bool facet_enabled,
         const std::string& facet_name,
-        const std::string& archetype_enabled,
+        const bool archetype_enabled,
         const bool facet_overwrite,
         const boost::optional<bool>& archetype_overwrite);
 
@@ -73,10 +73,8 @@ public:
     void facet_name(const std::string& v);
     void facet_name(const std::string&& v);
 
-    const std::string& archetype_enabled() const;
-    std::string& archetype_enabled();
-    void archetype_enabled(const std::string& v);
-    void archetype_enabled(const std::string&& v);
+    bool archetype_enabled() const;
+    void archetype_enabled(const bool v);
 
     bool facet_overwrite() const;
     void facet_overwrite(const bool v);
@@ -100,7 +98,7 @@ private:
     bool kernel_enabled_;
     bool facet_enabled_;
     std::string facet_name_;
-    std::string archetype_enabled_;
+    bool archetype_enabled_;
     bool facet_overwrite_;
     boost::optional<bool> archetype_overwrite_;
 };

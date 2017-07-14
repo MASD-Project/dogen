@@ -33588,7 +33588,7 @@ Temporary data structure used to build trees of names.#</dia:string>
             <dia:string>#archetype_enabled#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::string#</dia:string>
+            <dia:string>#bool#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

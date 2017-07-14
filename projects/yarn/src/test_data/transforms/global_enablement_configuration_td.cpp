@@ -53,7 +53,7 @@ populate(const unsigned int position, result_type& v) {
     v.kernel_enabled(create_bool(position + 0));
     v.facet_enabled(create_bool(position + 1));
     v.facet_name(create_std_string(position + 2));
-    v.archetype_enabled(create_std_string(position + 3));
+    v.archetype_enabled(create_bool(position + 3));
     v.facet_overwrite(create_bool(position + 4));
     v.archetype_overwrite(create_boost_optional_bool(position + 5));
 }
