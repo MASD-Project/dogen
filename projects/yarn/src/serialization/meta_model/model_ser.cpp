@@ -29,6 +29,7 @@
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
+#include <boost/serialization/unordered_map.hpp>
 #include <boost/serialization/unordered_set.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
@@ -37,6 +38,7 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/languages_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
 
 namespace boost {
@@ -54,6 +56,7 @@ void save(Archive& ar,
     ar << make_nvp("input_language", v.input_language_);
     ar << make_nvp("output_language", v.output_language_);
     ar << make_nvp("orm_properties", v.orm_properties_);
+    ar << make_nvp("facet_properties", v.facet_properties_);
 }
 
 template<typename Archive>
@@ -68,6 +71,7 @@ void load(Archive& ar,
     ar >> make_nvp("input_language", v.input_language_);
     ar >> make_nvp("output_language", v.output_language_);
     ar >> make_nvp("orm_properties", v.orm_properties_);
+    ar >> make_nvp("facet_properties", v.facet_properties_);
 }
 
 } }

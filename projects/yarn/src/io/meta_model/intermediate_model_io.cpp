@@ -34,6 +34,7 @@
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
+#include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 
@@ -298,6 +299,24 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
 
 }
 
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
+    s << "[";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
+        s << "\"" << tidy_up_string(i->first) << "\"";
+        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
+        s << i->second;
+        s << " } ]";
+    }
+    s << " ] ";
+    return s;
+}
+
+}
+
 namespace dogen {
 namespace yarn {
 namespace meta_model {
@@ -329,7 +348,8 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
       << "\"input_language\": " << v.input_language() << ", "
       << "\"output_languages\": " << v.output_languages() << ", "
       << "\"scribble_groups\": " << v.scribble_groups() << ", "
-      << "\"orm_properties\": " << v.orm_properties()
+      << "\"orm_properties\": " << v.orm_properties() << ", "
+      << "\"facet_properties\": " << v.facet_properties()
       << " }";
     return(s);
 }

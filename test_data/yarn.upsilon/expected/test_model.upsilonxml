@@ -4,7 +4,7 @@
 <entity class_id="4" tracking_level="0" version="0">
 	<schemas class_id="5" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>5</bucket_count>
+		<bucket_count>3</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="6" tracking_level="0" version="0">
 			<first>Phi</first>
@@ -537,7 +537,7 @@
 	</schemas>
 	<type_information class_id="20" tracking_level="0" version="0">
 		<count>2</count>
-		<bucket_count>5</bucket_count>
+		<bucket_count>3</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="21" tracking_level="0" version="0">
 			<first>Phi</first>

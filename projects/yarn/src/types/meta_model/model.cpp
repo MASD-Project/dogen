@@ -47,7 +47,8 @@ model::model(model&& rhs)
       has_generatable_types_(std::move(rhs.has_generatable_types_)),
       input_language_(std::move(rhs.input_language_)),
       output_language_(std::move(rhs.output_language_)),
-      orm_properties_(std::move(rhs.orm_properties_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)),
+      facet_properties_(std::move(rhs.facet_properties_)) { }
 
 model::model(
     const dogen::yarn::meta_model::name& name,
@@ -57,7 +58,8 @@ model::model(
     const bool has_generatable_types,
     const dogen::yarn::meta_model::languages input_language,
     const dogen::yarn::meta_model::languages output_language,
-    const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties)
+    const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties)
     : name_(name),
       elements_(elements),
       root_module_(root_module),
@@ -65,7 +67,8 @@ model::model(
       has_generatable_types_(has_generatable_types),
       input_language_(input_language),
       output_language_(output_language),
-      orm_properties_(orm_properties) { }
+      orm_properties_(orm_properties),
+      facet_properties_(facet_properties) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -77,6 +80,7 @@ void model::swap(model& other) noexcept {
     swap(input_language_, other.input_language_);
     swap(output_language_, other.output_language_);
     swap(orm_properties_, other.orm_properties_);
+    swap(facet_properties_, other.facet_properties_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -87,7 +91,8 @@ bool model::operator==(const model& rhs) const {
         has_generatable_types_ == rhs.has_generatable_types_ &&
         input_language_ == rhs.input_language_ &&
         output_language_ == rhs.output_language_ &&
-        orm_properties_ == rhs.orm_properties_;
+        orm_properties_ == rhs.orm_properties_ &&
+        facet_properties_ == rhs.facet_properties_;
 }
 
 model& model::operator=(model other) {
@@ -198,6 +203,22 @@ void model::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_mo
 
 void model::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>&& v) {
     orm_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& model::facet_properties() const {
+    return facet_properties_;
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& model::facet_properties() {
+    return facet_properties_;
+}
+
+void model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
+    facet_properties_ = v;
+}
+
+void model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v) {
+    facet_properties_ = std::move(v);
 }
 
 } } }

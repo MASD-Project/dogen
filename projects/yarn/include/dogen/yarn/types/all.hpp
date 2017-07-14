@@ -85,6 +85,7 @@
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/transforms/registrar_error.hpp"
+#include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/transforms/kernel_interface.hpp"
 #include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"

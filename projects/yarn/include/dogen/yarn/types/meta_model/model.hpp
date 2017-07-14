@@ -28,6 +28,7 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
 #include <unordered_set>
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
@@ -35,6 +36,7 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
+#include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/model_fwd_ser.hpp"
 
@@ -65,7 +67,8 @@ public:
         const bool has_generatable_types,
         const dogen::yarn::meta_model::languages input_language,
         const dogen::yarn::meta_model::languages output_language,
-        const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties);
+        const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
+        const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties);
 
 private:
     template<typename Archive>
@@ -139,6 +142,11 @@ public:
     void orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>& v);
     void orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>&& v);
 
+    const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties() const;
+    std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties();
+    void facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v);
+    void facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v);
+
 public:
     bool operator==(const model& rhs) const;
     bool operator!=(const model& rhs) const {
@@ -158,6 +166,7 @@ private:
     dogen::yarn::meta_model::languages input_language_;
     dogen::yarn::meta_model::languages output_language_;
     boost::optional<dogen::yarn::meta_model::orm_model_properties> orm_properties_;
+    std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
 };
 
 } } }

@@ -46,6 +46,7 @@
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
 
@@ -75,6 +76,7 @@ void save(Archive& ar,
     ar << make_nvp("output_languages", v.output_languages_);
     ar << make_nvp("scribble_groups", v.scribble_groups_);
     ar << make_nvp("orm_properties", v.orm_properties_);
+    ar << make_nvp("facet_properties", v.facet_properties_);
 }
 
 template<typename Archive>
@@ -100,6 +102,7 @@ void load(Archive& ar,
     ar >> make_nvp("output_languages", v.output_languages_);
     ar >> make_nvp("scribble_groups", v.scribble_groups_);
     ar >> make_nvp("orm_properties", v.orm_properties_);
+    ar >> make_nvp("facet_properties", v.facet_properties_);
 }
 
 } }

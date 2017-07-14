@@ -23,6 +23,7 @@
 #include "dogen/yarn/hash/meta_model/module_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/languages_hash.hpp"
+#include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
 
 namespace {
@@ -65,6 +66,15 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_orm_model_propertie
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -82,6 +92,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.input_language());
     combine(seed, v.output_language());
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_orm_model_properties(v.orm_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(v.facet_properties()));
 
     return seed;
 }

@@ -140,6 +140,7 @@ final_model_transform::transform(const meta_model::intermediate_model& im) {
     r.root_module(im.root_module());
     r.has_generatable_types(im.has_generatable_types());
     r.orm_properties(im.orm_properties());
+    r.facet_properties(im.facet_properties());
 
     const auto size(compute_total_size(im));
     r.elements().reserve(size);

@@ -54,6 +54,7 @@
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/transforms/configuration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/type_parameters_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/helpers/decomposition_result_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/formatting_styles_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_properties_ser.hpp"

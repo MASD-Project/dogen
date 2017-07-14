@@ -54,6 +54,7 @@
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/yarn/io/transforms/configuration_io.hpp"
 #include "dogen/yarn/io/meta_model/type_parameters_io.hpp"
+#include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/helpers/decomposition_result_io.hpp"
 #include "dogen/yarn/io/meta_model/formatting_styles_io.hpp"
 #include "dogen/yarn/io/meta_model/element_properties_io.hpp"

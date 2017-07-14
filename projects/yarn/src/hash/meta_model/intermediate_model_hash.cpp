@@ -31,6 +31,7 @@
 #include "dogen/annotations/hash/scribble_group_hash.hpp"
 #include "dogen/yarn/hash/meta_model/enumeration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
+#include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
 
@@ -172,6 +173,15 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_orm_model_propertie
     return seed;
 }
 
+inline std::size_t hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i.first);
+        combine(seed, i.second);
+    }
+    return seed;
+}
+
 }
 
 namespace dogen {
@@ -200,6 +210,7 @@ std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
     combine(seed, hash_std_list_dogen_yarn_meta_model_languages(v.output_languages()));
     combine(seed, hash_std_unordered_map_std_string_dogen_annotations_scribble_group(v.scribble_groups()));
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_orm_model_properties(v.orm_properties()));
+    combine(seed, hash_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(v.facet_properties()));
 
     return seed;
 }

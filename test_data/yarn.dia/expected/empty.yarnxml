@@ -48,7 +48,7 @@
 	</leaves>
 	<modules class_id="21" tracking_level="0" version="0">
 		<count>1</count>
-		<bucket_count>2</bucket_count>
+		<bucket_count>3</bucket_count>
 		<item_version>0</item_version>
 		<item class_id="22" tracking_level="0" version="0">
 			<first>&lt;empty&gt;</first>
@@ -262,6 +262,11 @@
 	<orm_properties class_id="44" tracking_level="0" version="0">
 		<initialized>0</initialized>
 	</orm_properties>
+	<facet_properties class_id="45" tracking_level="0" version="0">
+		<count>0</count>
+		<bucket_count>1</bucket_count>
+		<item_version>0</item_version>
+	</facet_properties>
 </entity>
 </boost_serialization>
 

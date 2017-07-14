@@ -58,7 +58,8 @@ intermediate_model::intermediate_model(intermediate_model&& rhs)
       input_language_(std::move(rhs.input_language_)),
       output_languages_(std::move(rhs.output_languages_)),
       scribble_groups_(std::move(rhs.scribble_groups_)),
-      orm_properties_(std::move(rhs.orm_properties_)) { }
+      orm_properties_(std::move(rhs.orm_properties_)),
+      facet_properties_(std::move(rhs.facet_properties_)) { }
 
 intermediate_model::intermediate_model(
     const dogen::yarn::meta_model::name& name,
@@ -79,7 +80,8 @@ intermediate_model::intermediate_model(
     const dogen::yarn::meta_model::languages input_language,
     const std::list<dogen::yarn::meta_model::languages>& output_languages,
     const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
-    const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties)
+    const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
+    const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties)
     : name_(name),
       origin_type_(origin_type),
       references_(references),
@@ -98,7 +100,8 @@ intermediate_model::intermediate_model(
       input_language_(input_language),
       output_languages_(output_languages),
       scribble_groups_(scribble_groups),
-      orm_properties_(orm_properties) { }
+      orm_properties_(orm_properties),
+      facet_properties_(facet_properties) { }
 
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
@@ -121,6 +124,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(output_languages_, other.output_languages_);
     swap(scribble_groups_, other.scribble_groups_);
     swap(orm_properties_, other.orm_properties_);
+    swap(facet_properties_, other.facet_properties_);
 }
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
@@ -142,7 +146,8 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         input_language_ == rhs.input_language_ &&
         output_languages_ == rhs.output_languages_ &&
         scribble_groups_ == rhs.scribble_groups_ &&
-        orm_properties_ == rhs.orm_properties_;
+        orm_properties_ == rhs.orm_properties_ &&
+        facet_properties_ == rhs.facet_properties_;
 }
 
 intermediate_model& intermediate_model::operator=(intermediate_model other) {
@@ -429,6 +434,22 @@ void intermediate_model::orm_properties(const boost::optional<dogen::yarn::meta_
 
 void intermediate_model::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>&& v) {
     orm_properties_ = std::move(v);
+}
+
+const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& intermediate_model::facet_properties() const {
+    return facet_properties_;
+}
+
+std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& intermediate_model::facet_properties() {
+    return facet_properties_;
+}
+
+void intermediate_model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
+    facet_properties_ = v;
+}
+
+void intermediate_model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v) {
+    facet_properties_ = std::move(v);
 }
 
 } } }
