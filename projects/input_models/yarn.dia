@@ -19823,13 +19823,13 @@ space.#</dia:string>
         <dia:point val="-21,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,74.95;8.04,84.25"/>
+        <dia:rectangle val="-21.05,74.95;10.35,84.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-21,75"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="28.989999999999998"/>
+        <dia:real val="31.300000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="9.1999999999999993"/>
@@ -19985,13 +19985,13 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#archetype_locations_for_type#</dia:string>
+            <dia:string>#archetype_locations_for_type_index#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::undordered_map&lt;std::type_index, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::type_index, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20164,13 +20164,13 @@ space.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O151">
       <dia:attribute name="obj_pos">
-        <dia:point val="-9,91"/>
+        <dia:point val="-6,91"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,90.95;31.975,100.85"/>
+        <dia:rectangle val="-6.05,90.95;34.975,100.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="-9,91"/>
+        <dia:point val="-6,91"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="40.924999999999997"/>
@@ -20479,13 +20479,13 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#archetype_locations_for_type#</dia:string>
+            <dia:string>#archetype_locations_for_type_index#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::undordered_map&lt;std::type_index, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::type_index, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20627,7 +20627,7 @@ space.#</dia:string>
         <dia:point val="-19.25,94.1"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-20,91.3;-8.95,94.9"/>
+        <dia:rectangle val="-20,91.3;-5.95,94.9"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20636,7 +20636,7 @@ space.#</dia:string>
         <dia:point val="-19.25,94.1"/>
         <dia:point val="-16,94.1"/>
         <dia:point val="-16,92.1"/>
-        <dia:point val="-9,92.1"/>
+        <dia:point val="-6,92.1"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="0"/>
@@ -32510,19 +32510,19 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="11.4625,91"/>
+        <dia:point val="14.4625,91"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.94,84.15;12.2125,91.8"/>
+        <dia:rectangle val="10.25,84.15;15.2125,91.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="11.4625,91"/>
-        <dia:point val="11.4625,87.25"/>
-        <dia:point val="7.99,87.25"/>
-        <dia:point val="7.99,84.2"/>
+        <dia:point val="14.4625,91"/>
+        <dia:point val="14.4625,87.25"/>
+        <dia:point val="10.3,87.25"/>
+        <dia:point val="10.3,84.2"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
