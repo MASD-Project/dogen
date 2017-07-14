@@ -52,7 +52,7 @@ formattables::model kernel::create_formattables_model(
 }
 
 std::string kernel::id() const {
-    return archetype_location().kernel();
+    return traits::kernel();
 }
 
 std::list<dogen::formatters::artefact>
@@ -62,12 +62,6 @@ kernel::format(const annotations::type_repository& /*atrp*/,
     const formattables::model& fm) const {
     formatters::workflow wf;
     return wf.execute(fm);
-}
-
-annotations::archetype_location kernel::archetype_location() const {
-    static annotations::archetype_location r(traits::family(), traits::kernel(),
-        empty/*facet*/, empty/*archetype*/);
-    return r;
 }
 
 std::forward_list<annotations::archetype_location>

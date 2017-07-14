@@ -74,8 +74,6 @@ private:
 public:
     std::string id() const override;
 
-    annotations::archetype_location archetype_location() const override;
-
     std::forward_list<annotations::archetype_location>
         archetype_locations() const override;
 

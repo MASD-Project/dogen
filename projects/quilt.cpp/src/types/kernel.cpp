@@ -73,7 +73,7 @@ formattables::locator kernel::make_locator(const options::knitting_options& ko,
 }
 
 std::string kernel::id() const {
-    return archetype_location().kernel();
+    return traits::kernel();
 }
 
 std::list<dogen::formatters::artefact>
@@ -92,12 +92,6 @@ managed_directories(const formattables::locator& l) const {
     if (l.project_path() != l.headers_project_path())
         r.push_back(l.headers_model_path());
 
-    return r;
-}
-
-annotations::archetype_location kernel::archetype_location() const {
-    static annotations::archetype_location r(traits::family(), traits::kernel(),
-        empty/*facet*/, empty/*archetype*/);
     return r;
 }
 

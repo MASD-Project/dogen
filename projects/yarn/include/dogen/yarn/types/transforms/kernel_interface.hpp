@@ -57,18 +57,8 @@ public:
     virtual std::string id() const = 0;
 
     /**
-     * @brief The artefact location for the kernel itself.
-     *
-     * Note that this is not a "true" archetype location, but a
-     * location of a container of archetypes (the kernel).
-     */
-    virtual annotations::archetype_location archetype_location() const = 0;
-
-    /**
      * @brief All archetype locations for the archetypes owned by this
      * kernel, listing all available kernels, facets and archetypes.
-     *
-     * FIXME: we need a better name for this.
      */
     virtual std::forward_list<annotations::archetype_location>
     archetype_locations() const = 0;
