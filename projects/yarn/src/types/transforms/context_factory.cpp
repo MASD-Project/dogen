@@ -43,8 +43,7 @@ context context_factory::make(const options::knitting_options& o,
     const std::list<annotations::archetype_location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
-    using namespace dogen::utility::filesystem;
-    const auto data_dir(dogen::utility::filesystem::data_files_directory());
+    const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 
     annotations::archetype_location_repository_factory alrpf;
@@ -56,9 +55,9 @@ context context_factory::make(const options::knitting_options& o,
     annotations::type_repository_factory atrpf;
     const auto atrp(atrpf.make(alrp, data_dirs));
 
-    dogen::formatters::repository_factory frpf;
+    formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const context r(data_dirs, o, alrp, atrp, msrp, frp);
+    const context r(data_dirs, o, als, alrp, atrp, msrp, frp);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;
