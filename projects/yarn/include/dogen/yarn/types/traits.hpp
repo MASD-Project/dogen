@@ -32,6 +32,8 @@ namespace yarn {
 
 struct traits {
     static std::string enabled();
+    static std::string supported();
+    static std::string overwrite();
     static std::string input_language();
     static std::string output_language();
     static std::string is_proxy_model();

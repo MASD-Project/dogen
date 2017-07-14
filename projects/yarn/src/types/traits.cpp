@@ -28,6 +28,16 @@ std::string traits::enabled() {
     return r;
 }
 
+std::string traits::supported() {
+    static std::string r("supported");
+    return r;
+}
+
+std::string traits::overwrite() {
+    static std::string r("overwrite");
+    return r;
+}
+
 std::string traits::input_language() {
     static std::string r("yarn.input_language");
     return r;
