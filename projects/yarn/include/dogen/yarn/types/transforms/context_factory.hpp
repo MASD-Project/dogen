@@ -37,8 +37,8 @@ namespace transforms {
  */
 class context_factory final {
 public:
-    context make(const options::knitting_options& o,
-        const std::list<annotations::archetype_location>& als) const;
+    static context make(const options::knitting_options& o,
+        const std::list<annotations::archetype_location>& als);
 };
 
 } } }

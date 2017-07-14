@@ -40,7 +40,7 @@ namespace yarn {
 namespace transforms {
 
 context context_factory::make(const options::knitting_options& o,
-    const std::list<annotations::archetype_location>& als) const {
+    const std::list<annotations::archetype_location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     using namespace dogen::utility::filesystem;

@@ -35,7 +35,6 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/options/types/knitting_options.hpp"
-#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/formatters/types/artefact_writer_interface.hpp"
 
@@ -90,13 +89,6 @@ public: // public section for testing purposes only
     bool housekeeping_required() const;
 
 private:
-    /**
-     * @brief Creates the yarn context.
-     */
-    yarn::transforms::context create_context(
-        const options::knitting_options& o,
-        const std::list<annotations::archetype_location>& als)  const;
-
     /**
      * @brief Performs a housekeeping run for the supplied directories.
      */

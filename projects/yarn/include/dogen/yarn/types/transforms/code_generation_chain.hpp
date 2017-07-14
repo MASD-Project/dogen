@@ -88,7 +88,7 @@ private:
  * Helper method to register kernels.
  */
 template<typename Kernel>
-inline void register_kernels() {
+inline void register_kernel() {
     auto k(std::make_shared<Kernel>());
     auto& rg(code_generation_chain::registrar());
     rg.register_kernel(k);

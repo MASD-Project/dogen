@@ -37,7 +37,7 @@
 #include "dogen/formatters/types/repository.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/quilt/types/kernel_interface.hpp"
+#include "dogen/yarn/types/transforms/kernel_interface.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
@@ -49,7 +49,7 @@ namespace csharp {
 /**
  * @brief Manages the c# kernel kernel.
  */
-class kernel final : public quilt::kernel_interface {
+class kernel final : public yarn::transforms::kernel_interface {
 public:
     kernel() = default;
     kernel(const kernel&) = delete;
@@ -81,10 +81,8 @@ public:
 
     yarn::meta_model::languages language() const override;
 
-    kernel_output generate(const options::knitting_options& ko,
-        const annotations::type_repository& atrp,
-        const annotations::annotation_groups_factory& agf,
-        const dogen::formatters::repository& drp,
+    yarn::transforms::code_generation_output
+    generate(const yarn::transforms::context& ctx,
         const bool enable_kernel_directories,
         const yarn::meta_model::model& m) const override;
 };

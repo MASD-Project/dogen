@@ -18,13 +18,45 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("dogen.yarn.code_generator"));
+
+}
 
 namespace dogen {
 namespace yarn {
 
-bool code_generator::operator==(const code_generator& /*rhs*/) const {
-    return true;
+transforms::code_generation_output
+code_generator::generate(const options::knitting_options& o) {
+    BOOST_LOG_SEV(lg, info) << "Starting code generation.";
+
+    /*
+     * First we obtain the context for all transformations.
+     */
+    using namespace transforms;
+    const auto als(code_generation_chain::registrar().archetype_locations());
+    const auto ctx(context_factory::make(o, als));
+
+    /*
+     * Then we generate all models.
+     */
+    const auto models(model_generation_chain::transform(ctx));
+
+    /*
+     * Finally we transform them into text.
+     */
+    const auto r(code_generation_chain::transform(ctx, models));
+
+    BOOST_LOG_SEV(lg, info) << "Finished code generation.";
+    return r;
 }
 
 } }

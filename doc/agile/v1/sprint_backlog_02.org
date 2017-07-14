@@ -12,38 +12,38 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 10:38]
+#+CAPTION: Clock summary at [2017-07-14 Fri 11:51]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *35:45* |       |      | 100.0 |
+| *Total time*                                                                | *36:45* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 35:45   |       |      | 100.0 |
-| Active                                                                      |         | 35:45 |      | 100.0 |
+| Stories                                                                     | 36:45   |       |      | 100.0 |
+| Active                                                                      |         | 36:45 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.2 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.1 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.4 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.7 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.4 |
-| COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.6 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.3 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.4 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.3 |
+| COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.5 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.7 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.9 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.6 |
-| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.9 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.4 |
+| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.8 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.3 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.8 |
-| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.1 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.6 |
+| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.0 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   2.0 |
-| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.6 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.9 |
+| COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.5 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.1 |
-| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.1 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  25.2 |
-| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.5 |
+| COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.0 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  24.5 |
+| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.4 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.9 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.8 |
-| STARTED Implement the code-generation chain                                 |         |       | 2:56 |   8.2 |
+| STARTED Implement the code-generation chain                                 |         |       | 3:56 |  10.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -416,6 +416,7 @@ context.
 Actually we already have one, so update it.
 
 *** STARTED Implement the code-generation chain                       :story:
+    CLOCK: [2017-07-14 Fri 10:50]--[2017-07-14 Fri 11:50] =>  1:00
     CLOCK: [2017-07-14 Fri 09:29]--[2017-07-14 Fri 09:56] =>  0:27
     CLOCK: [2017-07-13 Thu 18:55]--[2017-07-13 Thu 19:45] =>  0:50
     CLOCK: [2017-07-13 Thu 06:31]--[2017-07-13 Thu 07:42] =>  1:11
@@ -430,8 +431,7 @@ Tasks:
   and the code generation chain together.
 - move context generation into code generator.
 - update knitter to use the code generator.
-- delete knit.
-- sort out traits.
+- delete quilt.
 
 *** Assorted problems to look at                                      :story:
 
@@ -441,6 +441,7 @@ Tasks:
 - No vcxproj for c++ and no way to add code-generated files. Ideally
   one should be able to include a code-generated file into project
   with list of items
+- sort out traits.
 
 *** Move enablement into yarn                                         :story:
 

@@ -79,24 +79,34 @@ yarn::meta_model::languages kernel::language() const {
     return yarn::meta_model::languages::csharp;
 }
 
-kernel_output kernel::generate(const options::knitting_options& ko,
-    const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& agf,
-    const dogen::formatters::repository& drp,
+yarn::transforms::code_generation_output
+kernel::generate(const yarn::transforms::context& ctx,
     const bool enable_kernel_directories,
     const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";
 
-    const auto ra(m.root_module().annotation());
-    const auto& frp(formatters::workflow::registrar().formatter_repository());
-
+    /*
+     * Create the locator.
+     */
     const auto mn(m.name());
-    const auto odp(ko.output_directory_path());
+    const auto& ra(m.root_module().annotation());
+    const auto& atrp(ctx.type_repository());
+    const auto odp(ctx.options().output_directory_path());
+    const auto& frp(formatters::workflow::registrar().formatter_repository());
     const bool ekd(enable_kernel_directories);
     const formattables::locator l(odp, atrp, frp, ra, mn, m.module_ids(), ekd);
+
+    /*
+     * Generate the formattables model.
+     */
     const auto fm(create_formattables_model(atrp, ra, frp, l, m));
 
-    kernel_output r;
+    /*
+     * Code-generate all artefacts.
+     */
+    yarn::transforms::code_generation_output r;
+    const auto& drp(ctx.formatters_repository());
+    const auto& agf(ctx.groups_factory());
     r.artefacts(format(atrp, agf, drp, fm));
     r.managed_directories().push_back(l.project_path());
 

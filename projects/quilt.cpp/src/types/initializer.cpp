@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt/types/workflow.hpp"
+#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 #include "dogen/quilt.cpp/types/formatters/initializer.hpp"
@@ -33,7 +33,7 @@ namespace cpp {
 void initializer::initialize() {
     formatters::initializer::initialize(formatters::workflow::registrar());
     fabric::initializer::initialize();
-    quilt::register_kernel<kernel>(quilt::workflow::registrar());
+    yarn::transforms::register_kernel<kernel>();
 }
 
 } } }

@@ -110,20 +110,33 @@ yarn::meta_model::languages kernel::language() const {
     return yarn::meta_model::languages::cpp;
 }
 
-kernel_output kernel::generate(const options::knitting_options& ko,
-    const annotations::type_repository& atrp,
-    const annotations::annotation_groups_factory& agf,
-    const dogen::formatters::repository& drp,
+yarn::transforms::code_generation_output
+kernel::generate(const yarn::transforms::context& ctx,
     const bool enable_kernel_directories,
     const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Started kernel.";
 
-    const auto ra(m.root_module().annotation());
+    /*
+     * Create the locator.
+     */
+    const auto& ko(ctx.options());
+    const auto& atrp(ctx.type_repository());
+    const auto& ra(m.root_module().annotation());
     const auto& frp(formatters_repository());
     const auto l(make_locator(ko, atrp, ra, frp, enable_kernel_directories, m));
+
+    /*
+     * Generate the formattables model.
+     */
     const auto fm(create_formattables_model(atrp, ra, frp, l, m));
 
-    kernel_output r;
+    /*
+     * Code-generate all artefacts.
+     */
+    yarn::transforms::code_generation_output r;
+    const auto& drp(ctx.formatters_repository());
+    const auto& agf(ctx.groups_factory());
+
     r.artefacts(format(atrp, agf, drp, fm));
     r.managed_directories(managed_directories(l));
 

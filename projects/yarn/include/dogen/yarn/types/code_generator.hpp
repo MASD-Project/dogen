@@ -25,25 +25,16 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/options/types/knitting_options.hpp"
+#include "dogen/yarn/types/transforms/code_generation_output.hpp"
 
 namespace dogen {
 namespace yarn {
 
 class code_generator final {
 public:
-    code_generator() = default;
-    code_generator(const code_generator&) = default;
-    code_generator(code_generator&&) = default;
-    ~code_generator() = default;
-    code_generator& operator=(const code_generator&) = default;
-
-public:
-    bool operator==(const code_generator& rhs) const;
-    bool operator!=(const code_generator& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static transforms::code_generation_output
+    generate(const options::knitting_options& o);
 };
 
 } }

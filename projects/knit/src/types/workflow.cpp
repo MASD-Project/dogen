@@ -28,8 +28,7 @@
 #include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
 #include "dogen/options/io/knitting_options_io.hpp"
-#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
-#include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/code_generator.hpp"
 #include "dogen/formatters/types/formatting_error.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
 #include "dogen/quilt/types/workflow.hpp"
@@ -70,13 +69,6 @@ workflow(const options::knitting_options& o) : knitting_options_(o) {
 
 bool workflow::housekeeping_required() const {
     return knitting_options_.delete_extra_files();
-}
-
-yarn::transforms::context workflow::create_context(
-    const options::knitting_options& o,
-    const std::list<annotations::archetype_location>& als)  const {
-    yarn::transforms::context_factory f;
-    return f.make(o, als);
 }
 
 void workflow::perform_housekeeping(
@@ -121,33 +113,27 @@ void workflow::execute() const {
     BOOST_LOG_SEV(lg, info) << "Knitting options: " << knitting_options_;
 
     try {
-        const auto als(quilt::workflow::archetype_locations());
-        const auto ctx(create_context(knitting_options_, als));
+        /*
+         * Generate all files.
+         */
+        const auto cdo(yarn::code_generator::generate(knitting_options_));
+        if (cdo.artefacts().empty()) {
+            BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
+            return;
+        }
 
-        using namespace yarn::transforms;
-        const auto models(model_generation_chain::transform(ctx));
-        for (const auto& m : models) {
-            if (!m.has_generatable_types()) {
-                BOOST_LOG_SEV(lg, warn) << "No generatable types found.";
-                return;
-            }
+        /*
+         * Write them to the filesystem.
+         */
+        const auto writer(obtain_file_writer());
+        write_files(writer, cdo.artefacts());
 
-            quilt::workflow w(knitting_options_, ctx.type_repository(),
-                ctx.groups_factory());
-            const auto ko(w.execute(m));
-            if (!ko || ko->artefacts().empty()) {
-                BOOST_LOG_SEV(lg, warn) << "No artefacts generated.";
-                return;
-            }
-
-            const auto& art(ko->artefacts());
-            const auto writer(obtain_file_writer());
-            write_files(writer, art);
-
-            if (housekeeping_required()) {
-                const auto& md(ko->managed_directories());
-                perform_housekeeping(art, md);
-            }
+        /*
+         * Perform any housekeeping if need be.
+         */
+        if (housekeeping_required()) {
+            const auto& md(cdo.managed_directories());
+            perform_housekeeping(cdo.artefacts(), md);
         }
     } catch(const dogen::formatters::formatting_error& e) {
         BOOST_THROW_EXCEPTION(workflow_error(e.what()));
