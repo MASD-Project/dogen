@@ -35,10 +35,11 @@ const boost::filesystem::path empty_dir;
 const std::string test_module("options");
 const std::string test_suite("knitting_options_validator_tests");
 
-const boost::filesystem::path absolute_target("/some_target");
-const boost::filesystem::path relative_target("some_target");
-const boost::filesystem::path absolute_output_dir("/out dir");
-const boost::filesystem::path relative_output_dir("out dir");
+using namespace boost::filesystem;
+const path absolute_target(current_path() / "some_target");
+const path relative_target("some_target");
+const path absolute_output_dir(current_path());
+const path relative_output_dir("out dir");
 
 const std::string epp("package::path");
 

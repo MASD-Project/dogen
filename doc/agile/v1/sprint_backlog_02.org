@@ -12,14 +12,14 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 12:43]
+#+CAPTION: Clock summary at [2017-07-14 Fri 13:07]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *37:35* |       |      | 100.0 |
+| *Total time*                                                                | *37:51* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 37:35   |       |      | 100.0 |
-| Active                                                                      |         | 37:35 |      | 100.0 |
+| Stories                                                                     | 37:51   |       |      | 100.0 |
+| Active                                                                      |         | 37:51 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   3.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.1 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   3.2 |
@@ -32,18 +32,19 @@
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.8 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.2 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.4 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.3 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.0 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.9 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.8 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.4 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.0 |
 | COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.9 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  23.9 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  23.8 |
 | CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.4 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.9 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.7 |
-| STARTED Implement the code-generation chain                                 |         |       | 4:27 |  11.8 |
+| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  12.0 |
+| COMPLETED Fix options test break on windows                                 |         |       | 0:10 |   0.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -559,7 +560,9 @@ This seems to be some kind of ninja "feature".
 For the moment we've put in a very ugly fix: we renamed the target
 =knit_quiltx=.
 
-*** STARTED Implement the code-generation chain                       :story:
+*** COMPLETED Implement the code-generation chain                     :story:
+    CLOSED: [2017-07-14 Fri 12:57]
+    CLOCK: [2017-07-14 Fri 12:43]--[2017-07-14 Fri 12:49] =>  0:06
     CLOCK: [2017-07-14 Fri 12:25]--[2017-07-14 Fri 12:43] =>  0:18
     CLOCK: [2017-07-14 Fri 11:51]--[2017-07-14 Fri 12:04] =>  0:13
     CLOCK: [2017-07-14 Fri 10:50]--[2017-07-14 Fri 11:50] =>  1:00
@@ -578,6 +581,22 @@ Tasks:
 - move context generation into code generator.
 - update knitter to use the code generator.
 - delete quilt.
+
+*** COMPLETED Fix options test break on windows                       :story:
+    CLOSED: [2017-07-14 Fri 13:07]
+    CLOCK: [2017-07-14 Fri 12:57]--[2017-07-14 Fri 13:07] =>  0:10
+
+It seems the tests for knitter options validation are borked on
+windows:
+
+:  C:\projects\dogen\projects\options\src\types\knitting_options_validator.cpp(59): Throw in function void __cdecl dogen::options::knitting_options_validator::validate(const class dogen::options::knitting_options &)
+:  Dynamic exception type: class boost::exception_detail::clone_impl<class dogen::options::validation_error>
+:  std::exception::what: Target path is not absolute: /some_target
+: Running 5 test cases...
+: unknown location : fatal error : in "knitting_options_validator_tests/options_with_a_target_are_valid": class std::runtime_error: Error during test [C:\projects\dogen\build\output\msvc\Release\projects\options\tests\run_options.tests.vcxproj]
+:  C:\projects\dogen\projects\options\tests\knitting_options_validator_tests.cpp(90): last checkpoint: options_with_a_target_are_valid
+: C:/projects/dogen/projects/options/tests/knitting_options_validator_tests.cpp(100): error : in "knitting_options_validator_tests/options_without_a_output_directory_are_invalid": exception "validation_error" raised as expected: validation on the raised exception through predicate "c" [C:\projects\dogen\build\output\msvc\Release\projects\options\tests\run_options.tests.vcxproj]
+: C:/projects/dogen/projects/options/tests/knitting_options_validator_tests.cpp(109): error : in "knitting_options_validator_tests/options_with_a_relative_output_directory_are_invalid": exception "validation_error" raised as expected: validation on the raised exception through predicate "c" [C:\projects\dogen\build\output\msvc\Release\projects\options\tests\run_options.tests.vcxproj]
 
 *** Assorted problems to look at                                      :story:
 
