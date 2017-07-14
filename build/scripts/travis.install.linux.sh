@@ -22,8 +22,8 @@
 # deps
 #
 dropbox="https://www.dropbox.com/s/axf22srjkiltvr7/"
-version=8
-package="dogen_deps_gcc_5.3_linux_amd64_v${version}.bz2"
+version=9
+package="dogen_deps_gcc_5.3_linux_amd64_v${version}.tar.bz2"
 input_location="${dropbox}/${package}"
 output_location="/tmp/${package}"
 extract_dir="/tmp/dogen_deps"
