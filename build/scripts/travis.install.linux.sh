@@ -21,7 +21,7 @@
 #
 # deps
 #
-dropbox="https://www.dropbox.com/s/axf22srjkiltvr7/"
+dropbox="https://www.dropbox.com/s/trikqhe5uw3orjk/dogen_deps_gcc_5.3_linux_amd64_v9.tar.bz2?dl=0"
 version=9
 package="dogen_deps_gcc_5.3_linux_amd64_v${version}.tar.bz2"
 input_location="${dropbox}/${package}"
