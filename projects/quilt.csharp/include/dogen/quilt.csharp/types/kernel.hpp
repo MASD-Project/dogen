@@ -77,6 +77,11 @@ public:
     std::forward_list<annotations::archetype_location>
         archetype_locations() const override;
 
+    const std::unordered_map<std::type_index,
+                             std::list<annotations::archetype_location>>&
+    archetype_locations_by_element_type_index() const override;
+
+
     yarn::meta_model::languages language() const override;
 
     yarn::transforms::code_generation_output

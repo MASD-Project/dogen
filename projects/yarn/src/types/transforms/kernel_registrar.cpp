@@ -56,6 +56,13 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
 
     for (const auto al : k->archetype_locations())
         archetype_locations_.push_back(al);
+
+    for (const auto& pair : k->archetype_locations_by_element_type_index()) {
+        const auto& ti(pair.first);
+        auto& alsti(archetype_locations_by_element_type_index_[ti]);
+        for (const auto& al : pair.second)
+            alsti.push_back(al);
+    }
 }
 
 void kernel_registrar::validate() const {
@@ -84,6 +91,12 @@ kernel_registrar::kernels_by_language() const {
 const std::list<annotations::archetype_location>&
 kernel_registrar::archetype_locations() const {
     return archetype_locations_;
+}
+
+const std::unordered_map<std::type_index,
+                         std::list<annotations::archetype_location>>&
+kernel_registrar::archetype_locations_by_element_type_index() const {
+    return archetype_locations_by_element_type_index_;
 }
 
 } } }

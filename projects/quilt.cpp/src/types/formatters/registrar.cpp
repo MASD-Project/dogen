@@ -213,6 +213,12 @@ registrar::archetype_locations() const {
     return archetype_locations_;
 }
 
+const std::unordered_map<std::type_index,
+                         std::list<annotations::archetype_location>>&
+registrar::archetype_locations_by_element_type_index() const {
+    return archetype_locations_by_element_type_index_;
+}
+
 const std::unordered_map<
     std::string, std::unordered_map<
                      std::string,

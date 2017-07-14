@@ -66,7 +66,16 @@ kernel::format(const annotations::type_repository& /*atrp*/,
 
 std::forward_list<annotations::archetype_location>
 kernel::archetype_locations() const {
-    return formatters::workflow::registrar().archetype_locations();
+    const auto& rg(formatters::workflow::registrar());
+    return rg.archetype_locations();
+}
+
+const std::unordered_map<
+    std::type_index,
+    std::list<annotations::archetype_location>>&
+kernel::archetype_locations_by_element_type_index() const {
+    const auto& rg(formatters::workflow::registrar());
+    return rg.archetype_locations_by_element_type_index();
 }
 
 yarn::meta_model::languages kernel::language() const {

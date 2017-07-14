@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <typeindex>
 #include <forward_list>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
@@ -62,6 +63,15 @@ public:
      */
     virtual std::forward_list<annotations::archetype_location>
     archetype_locations() const = 0;
+
+    /**
+     * @brief Returns the archetype locations for each element type
+     * index.
+     */
+    virtual const std::unordered_map<
+        std::type_index,
+        std::list<annotations::archetype_location>>&
+    archetype_locations_by_element_type_index() const = 0;
 
     /**
      * @brief Language supported by this kernel.

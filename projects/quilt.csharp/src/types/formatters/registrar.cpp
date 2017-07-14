@@ -88,15 +88,20 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     if (al.kernel().empty())
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
 
-    archetype_locations_.push_front(al);
     formatter_repository_.stock_artefact_formatters_.push_front(f);
+
+    /*
+     * Add the formatter to the archetype location stores.
+     */
+    archetype_locations_.push_front(al);
+    const auto ti(f->element_type_index());
+    archetype_locations_by_element_type_index_[ti].push_back(al);
 
     /*
      * Add the formatter to the index by element type index.
      */
     auto& ffti(formatter_repository_.stock_artefact_formatters_by_type_index());
-    auto& ti(ffti[f->element_type_index()]);
-    ti.push_front(f);
+    ffti[ti].push_front(f);
 
     /*
      * Add formatter to the index by archetype name. Inserting the
@@ -133,6 +138,12 @@ const repository& registrar::formatter_repository() const {
 const std::forward_list<annotations::archetype_location>&
 registrar::archetype_locations() const {
     return archetype_locations_;
+}
+
+const std::unordered_map<std::type_index,
+                         std::list<annotations::archetype_location>>&
+registrar::archetype_locations_by_element_type_index() const {
+    return archetype_locations_by_element_type_index_;
 }
 
 } } } }

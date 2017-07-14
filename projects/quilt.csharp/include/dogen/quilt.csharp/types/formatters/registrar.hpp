@@ -25,8 +25,11 @@
 #pragma once
 #endif
 
+#include <list>
 #include <memory>
+#include <typeindex>
 #include <forward_list>
+#include <unordered_map>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
@@ -69,9 +72,20 @@ public:
     const std::forward_list<annotations::archetype_location>&
     archetype_locations() const;
 
+    /**
+     * @brief Returns the archetype locations for each element type
+     * index.
+     */
+    const std::unordered_map<std::type_index,
+                             std::list<annotations::archetype_location>>&
+    archetype_locations_by_element_type_index() const;
+
 private:
     repository formatter_repository_;
     std::forward_list<annotations::archetype_location> archetype_locations_;
+    std::unordered_map<std::type_index,
+                       std::list<annotations::archetype_location>>
+    archetype_locations_by_element_type_index_;
 };
 
 template<typename Formatter>
