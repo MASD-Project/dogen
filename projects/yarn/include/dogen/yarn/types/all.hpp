@@ -107,6 +107,7 @@
 #include "dogen/yarn/types/meta_model/orm_database_systems.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
+#include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
@@ -140,6 +141,8 @@
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
+#include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
 
 #endif

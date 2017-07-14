@@ -12,39 +12,40 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 13:07]
+#+CAPTION: Clock summary at [2017-07-14 Fri 13:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *37:51* |       |      | 100.0 |
+| *Total time*                                                                | *38:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 37:51   |       |      | 100.0 |
-| Active                                                                      |         | 37:51 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   3.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.1 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.2 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.1 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.2 |
+| Stories                                                                     | 38:22   |       |      | 100.0 |
+| Active                                                                      |         | 38:22 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   2.9 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.0 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.1 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  10.9 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.1 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.5 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.6 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.9 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.2 |
-| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.8 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.1 |
+| COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.7 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.2 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.3 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.2 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.0 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
 | COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.8 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.4 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.0 |
 | COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.9 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  23.8 |
-| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.4 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  23.5 |
+| CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.3 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.9 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.7 |
-| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  12.0 |
+| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  11.9 |
 | COMPLETED Fix options test break on windows                                 |         |       | 0:10 |   0.4 |
+| STARTED Move enablement into yarn                                           |         |       | 0:31 |   1.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -598,17 +599,9 @@ windows:
 : C:/projects/dogen/projects/options/tests/knitting_options_validator_tests.cpp(100): error : in "knitting_options_validator_tests/options_without_a_output_directory_are_invalid": exception "validation_error" raised as expected: validation on the raised exception through predicate "c" [C:\projects\dogen\build\output\msvc\Release\projects\options\tests\run_options.tests.vcxproj]
 : C:/projects/dogen/projects/options/tests/knitting_options_validator_tests.cpp(109): error : in "knitting_options_validator_tests/options_with_a_relative_output_directory_are_invalid": exception "validation_error" raised as expected: validation on the raised exception through predicate "c" [C:\projects\dogen\build\output\msvc\Release\projects\options\tests\run_options.tests.vcxproj]
 
-*** Assorted problems to look at                                      :story:
-
-- No flat mode: we need to be able to generate no folders at all.
-- Registrar coming out even when there is no inheritance.
-- No setting to add include for precompiled headers: stdafx.h
-- No vcxproj for c++ and no way to add code-generated files. Ideally
-  one should be able to include a code-generated file into project
-  with list of items
-- sort out traits.
-
-*** Move enablement into yarn                                         :story:
+*** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-07-14 Fri 13:41]--[2017-07-14 Fri 13:43] =>  0:02
+    CLOCK: [2017-07-14 Fri 13:12]--[2017-07-14 Fri 13:41] =>  0:29
 
 It seems that the concepts around enablement are actually not kernel
 specific but instead can be generalised at the meta-model level. We
@@ -692,6 +685,18 @@ the work we were carrying out. However, as we reached v1.0, the theory
 took center stage. We cannot proceed to the next phase of the product
 without a firm grasp of the theory. This story is a starting point so
 we can decide on how to break up the work.
+
+*** Assorted problems to look at                                      :story:
+
+These need to be put into stories:
+
+- No flat mode: we need to be able to generate no folders at all.
+- Registrar coming out even when there is no inheritance.
+- No setting to add include for precompiled headers: stdafx.h
+- No vcxproj for c++ and no way to add code-generated files. Ideally
+  one should be able to include a code-generated file into project
+  with list of items
+- sort out traits.
 
 *** Add support for proper JSON serialisation in C++                  :story:
 

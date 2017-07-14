@@ -68,5 +68,7 @@
 #include "dogen/yarn/serialization/meta_model/orm_attribute_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_primitive_properties_ser.hpp"
 #include "dogen/yarn/serialization/transforms/exogenous_transform_types_ser.hpp"
+#include "dogen/yarn/serialization/transforms/local_enablement_configuration_ser.hpp"
+#include "dogen/yarn/serialization/transforms/global_enablement_configuration_ser.hpp"
 
 #endif
