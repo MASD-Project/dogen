@@ -1584,17 +1584,6 @@ slightly more performant code. We need to look at all the use cases.
 
 At present we are building identifiables with underscores.
 
-*** Generate windows packages with CPack                              :story:
-
-We tried to generate windows packages by using the NSIS tool, but
-there are no binaries available for it at present. However, it seems
-CPack can now generate MSIs directly:
-
-- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
-- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
-
-We need to investigate how to get the build to produce MSIs using WIX.
-
 *** Add feature to disable regions                                    :story:
 
 We need a way to stop outputting regions if the user does not want
@@ -1872,13 +1861,6 @@ also inferring "abstractness", and use the new flag.
 Figure out if element configuration is context or if it is better
 expressed as a stand alone formatting parameter.
 
-*** Formatters' repository should be created in quilt                 :story:
-
-At present we are creating the formatters' repository in
-=quilt.cpp=. However it will be shared by all backends in the
-kernel. Move it up to =quilt= level and supply it as a paramter to the
-backends.
-
 *** Initialise formatters in the formatter's translation unit         :story:
 
 At present we are initialising the formatters in each of the facet
@@ -1938,20 +1920,6 @@ Tasks:
   values to profiles.
 - make directory a recursive field at facet level,  adding default
   values to profiles.
-
-*** Add an example of redis and dogen                                 :story:
-
-Building external project:
-
-: cd /home/marco/Development/DomainDrivenConsulting/redis/build/output/gcc-6/Release &&
-: CMAKE_PROGRAM_PATH=/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin
-: CMAKE_INCLUDE_PATH=/usr/local/personal/include CMAKE_LIB_PATH=/usr/local/personal/lib
-: cmake ../../../.. -G Ninja && Ninja -j5
-
-Redis client:
-
-https://github.com/nekipelov/redisclient
-git@github.com:nekipelov/redisclient.git
 
 *** Add support for object caches                                      :epic:
 
@@ -2082,6 +2050,10 @@ studio. A sample project has been added to test data:
 
 We should also extend tailor to output these projects so we can test
 it with existing models.
+
+Note that the XMI support approach may make this unnecessary. Where
+possible, we should just use XMI instead of having lots of different
+exogenous models.
 
 *** Create a tool to generate product skeletons                       :story:
 
@@ -2385,14 +2357,6 @@ This is a bit more relevant now we are generating wale templates
 because we are including algorithm all over the place on the generated
 templates.
 
-*** Move odb options file into odb folder                             :story:
-
-There is not particularly good reason for this file to exist at the
-src level.
-
-In order to implement this story we need to have a working odb setup
-to test it and ensure we didn't break anything.
-
 *** Tidy-up of inclusion terminology                                  :story:
 
 Random notes:
@@ -2445,13 +2409,6 @@ enum into int?]]
 Giving us:
 
 : name.qualified[to_underlying(styles::double_colon_separated_style)]
-
-*** Add description to profile and value templates                    :story:
-
-It would be nice to put some kind of comments as to what the profile
-is doing and where required, the rationale behind some defaulting on
-the value templates. We probably should look into supporting
-descriptions in data as a whole.
 
 *** Multiple inheritance and profiles do not work                     :story:
 
@@ -3635,12 +3592,6 @@ consistent with the field's type. This could be done with a
 Actually since we can only create fields from JSON, we should just add
 a check there.
 
-*** Consider renaming cpp's name builder to name factory              :story:
-
-The name builder is just a factory so make the name reflect it.
-
-Actually, we don't just build names either.
-
 *** Hydrators provide no context when errors occur                    :story:
 
 We tried to parse a JSON file using the INI parser and got the
@@ -3712,13 +3663,6 @@ logging and the exception message.
 In addition we should be using =string_converter= for qnames now
 instead of io'ing them directly.
 
-*** Names in C++ namespaces                                           :story:
-
-It appears we are not using the entity name for a C++ namespace. If
-that is the case, this is wrong and needs to be fixed. We are probably
-inferring the name by looking at the =front= (or =back=) of the
-namespaces list. Investigate this.
-
 *** Improve errors in dia objects                                     :story:
 
 At present when adding blank spaces in a dia object we get the
@@ -3778,28 +3722,6 @@ make use of it, we should error. The user must then go and disable
 explicitly the facet on the affected object via the meta data. We
 should not silently disable facets.
 
-*** References to objects in package should assume package            :story:
-
-#+begin_quote
-*Story*: As a dogen user, I don't want to have to specify fully
-qualified names when referring to types in the same package so that I
-don't have to type information that can be deduced by the system.
-#+end_quote
-
-At present if we define two objects in a package =p=, say =a= and =b=,
-where =b= refers to =a= it must do so using a fully qualified path,
-e.g.: =p::a=. Failure to do so results in an error:
-
-: 2014-09-10 08:27:10.662113 [ERROR] [sml.resolver] Object has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "simple_name": "registrar" }
-: 2014-09-10 08:27:10.665861 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/sml/src/types/resolver.cpp(178): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname &) const
-: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen3sml16resolution_errorEEE
-: std::exception::what: Object has property with undefined type: registrar
-: [P12tag_workflow] = Code generation failure.
-
-This should be fairly trivial to implement: all we need to do is to
-add =owner= to =resolve_name= in =resolver= and add an extra
-resolution step that uses the owner's location.
-
 *** Handling of unsupported dia objects                               :story:
 
 #+begin_quote
@@ -3841,11 +3763,6 @@ workflow does in each model.
 
 We should only implement this story when all of the major refactoring
 has been done.
-
-*** Update comments in C++ model                                      :story:
-
-We have a very large blurb in this model that is rather old, and
-reflects a legacy understanding of the role of the C++ model.
 
 *** Improve error message for blank types                             :story:
 
@@ -3936,15 +3853,6 @@ Some simple tests come to mind:
 - more than one data files directory results in expected load;
 - creating annotation for test model types works as expected.
 - missing fields result in expected exceptions.
-
-*** Remove references to PFH in makefiles                             :story:
-
-Seems like the correct way of finding libraries is to use
-=CMAKE_PREFIX_PATH= as explained [[https://blogs.kde.org/2008/12/12/how-get-cmake-find-what-you-want-it][in this article]]. We should stop using
-any references to PFH and let the users provide a path to local
-installs via this.
-
-We need to add a note on the read me too.
 
 *** Improve error messages for unconnected objects                    :story:
 
@@ -4257,12 +4165,6 @@ One solution for this problem would be to create serialisers which
 hide the machinery of serialisation internally; one should be able to
 just pass in a stream in and get a type out.
 
-*** Comments seem to be trimmed                                       :story:
-
-For some reason we seem to be munching any blank lines at the end of
-comments. We should only remove the lines with the well known dogen
-marker, all other lines should be left untouched.
-
 *** Type resolution in referenced models                              :story:
 
 We did a hack a while ago whereby if a type is of a referenced model,
@@ -4293,15 +4195,6 @@ not, sort them.
 As per MEC 33. We should probably do the same for the move and copy
 constructors.
 
-*** Change transformation code to use a type visitor                  :story:
-
-Now we have a base type, we could probably simplify some of the
-transformation code:
-
-- dia to sml
-- sml to c++
-- potentially merger
-
 *** Test data generator with immutability looks wrong                 :story:
 
 We are using the full constructor for immutability, but its not clear
@@ -4323,10 +4216,6 @@ rationale behind it was that it would break the current diffing and
 rebaselining logic; we would either have to ignore specs on the diff
 or find a way to copy them after code generation. Both options are a
 bit of a hack. So instead we created a model with all the specs.
-
-*** Consider renaming dependencies to references in model             :story:
-
-Dependencies is a map of reference; why not call it references?
 
 *** Add warning support for validation                                :story:
 
@@ -4735,40 +4624,12 @@ the majority of cases, we have traits just to access the fields. But
 there are a few cases where we use traits for other purposes such as
 formatter naming.
 
-*** Do not copy models in merger                                      :story:
-
-At present we are adding the partial models into the merger by copying
-them into an associative container. It would be nicer to avoid the
-copying as it adds no value. This should wait until we have a way to
-get performance numbers out.
-
-In fact do we even need to have a two step process? Can we not add and
-merge as we go along.
-
 *** Add support for inlining                                          :story:
 
 We should be able to set a model-wide property that tells dogen to
 generate inline methods for properties. We could be more flexible and
 allow inlining at class level or just for a single property. We don't
 have any use cases for these at present.
-
-*** Add a file formatter interface to formatters                      :story:
-
-It probably makes sense to have a top-level interface for file
-formatting in the formatters model. At present we have a lot of
-=quilt.cpp= specific things in there. Maybe we should just extract the
-common attributes and use them to create the generic interface.
-
-This still makes sense after the current refactor, but it requires
-some thinking.
-
-Notes:
-
-- formattable becomes a concept at the formatters' model level, but it
-  has just an id.
-- it seems we should be able to also have the formatters container and
-  even the formatters workflow in =formatters=; however, this would
-  increase the amount of casting required.
 
 *** Consider enabling =-Wshadow=                                      :story:
 
@@ -6298,23 +6159,6 @@ GCC equivalent explained [[https://gcc.gnu.org/wiki/Visibility][here]].
 We should have some dynamic extensions to control the outputting of
 these.
 
-*** Improve cross model visitation support                            :story:
-
-One of the problems we have at present is that its not possible to
-define a base class in a model with a visitor and then extend it in
-leaves in order
-to dispatch. There seem to be some ideas in this space which may
-provide a solution:
-
-- [[http://stackoverflow.com/questions/11796121/implementing-the-visitor-pattern-using-c-templates][Implementing the visitor pattern using C++ Templates]]
-
-One simpler but hacky way of solving this problem is perhaps to have
-"model specific" visitors in each model, and have them extend the base
-visitor. Clients can then decide which visitor to use. This does mean
-that if two models are extending the base visitor, you will need to
-visit twice, but at least for the most common case (one model
-extending another) it provides a workable solution.
-
 *** Modeling of visitors in =cpp= can be improved                     :story:
 
 In the =cpp= model we are assuming that if the original parent was
@@ -7587,40 +7431,6 @@ function already has documented parameters. We should consider
 enabling warnings for all undocumented code. We also need to figure
 out how to mark code as ignored (for example serialisation helpers,
 etc won't require documentation).
-
-*** Add WinSock definition in CMakeLists for ODB support              :story:
-
-We did a crude implementation of finding WinSock just to get windows
-to build. There should be a FindWinSock somewhere. If not create one.
-
-Do we need this anymore? we probably need it for linking the database
-model, but we should check - maybe ODB has some magic around this.
-
-Actually this was commented out in code so removed it. Was:
-
-: # WinSock (for database)
-: # if (WIN32)
-: #     find_library(WSOCK_LIB NAMES wsock32 DOC "The winsock library")
-: #     if(WSOCK_LIB)
-: #         list(APPEND CMAKE_REQUIRED_LIBRARIES wsock32)
-: #     else()
-: #         message(FATAL_ERROR "winsock not found.")
-: #     endif()
-:
-: #     find_library(WSOCK2_LIB NAMES ws2_32 DOC "The winsock 2 library")
-: #     if(WSOCK2_LIB)
-: #         list(APPEND CMAKE_REQUIRED_LIBRARIES ws2_32)
-: #     else()
-: #         message(FATAL_ERROR "winsock2 not found.")
-: #     endif()
-:
-: #     find_library(MSWSOCK_LIB NAMES mswsock DOC "The winsock 2 library")
-: #     if(MSWSOCK_LIB)
-: #         list(APPEND CMAKE_REQUIRED_LIBRARIES mswsock)
-: #     else()
-: #         message(FATAL_ERROR "mswsock not found.")
-: #     endif()
-: # endif()
 
 *** Support for cmake components and groups                           :story:
 

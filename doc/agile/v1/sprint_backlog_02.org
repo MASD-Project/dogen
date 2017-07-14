@@ -12,42 +12,43 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-14 Fri 11:51]
+#+CAPTION: Clock summary at [2017-07-14 Fri 12:23]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *36:45* |       |      | 100.0 |
+| *Total time*                                                                | *37:17* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 36:45   |       |      | 100.0 |
-| Active                                                                      |         | 36:45 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:48 |   2.2 |
+| Stories                                                                     | 37:17   |       |      | 100.0 |
+| Active                                                                      |         | 37:17 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   3.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   1.1 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.3 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.4 |
-| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.3 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   3.2 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |  11.2 |
+| COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   4.2 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.5 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.7 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.9 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.4 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   7.3 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.8 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.6 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.3 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.6 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   2.2 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   9.4 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   2.0 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
 | COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.9 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.5 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   2.1 |
 | COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   4.0 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  24.5 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  24.1 |
 | CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.4 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.9 |
-| COMPLETED Create an options validator                                       |         |       | 0:39 |   1.8 |
-| STARTED Implement the code-generation chain                                 |         |       | 3:56 |  10.7 |
+| COMPLETED Create an options validator                                       |         |       | 0:39 |   1.7 |
+| STARTED Implement the code-generation chain                                 |         |       | 4:09 |  11.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-14 Fri 12:04]--[2017-07-14 Fri 12:23] =>  0:19
     CLOCK: [2017-07-08 Sat 17:16]--[2017-07-08 Sat 17:19] =>  0:03
     CLOCK: [2017-07-07 Fri 11:18]--[2017-07-07 Fri 11:23] =>  0:05
     CLOCK: [2017-07-03 Thu 20:15]--[2017-07-03 Thu 20:55] =>  0:40
@@ -415,7 +416,135 @@ context.
 
 Actually we already have one, so update it.
 
+*** COMPLETED Generate windows packages with CPack                    :story:
+    CLOSED: [2017-07-14 Fri 12:05]
+
+*Rationale*: implemented on previous sprints.
+
+We tried to generate windows packages by using the NSIS tool, but
+there are no binaries available for it at present. However, it seems
+CPack can now generate MSIs directly:
+
+- [[http://stackoverflow.com/questions/18437356/how-to-generate-msi-installer-with-cmake][How to generate .msi installer with cmake?]]
+- [[https://cmake.org/cmake/help/v3.0/module/CPackWIX.html][CPackWIX]]
+
+We need to investigate how to get the build to produce MSIs using WIX.
+
+*** COMPLETED Add an example of redis and dogen                       :story:
+    CLOSED: [2017-07-14 Fri 12:06]
+
+*Rationale*: northwind blog posts have this.
+
+Building external project:
+
+: cd /home/marco/Development/DomainDrivenConsulting/redis/build/output/gcc-6/Release &&
+: CMAKE_PROGRAM_PATH=/home/marco/Development/DomainDrivenConsulting/dogen/build/output/gcc/Release/stage/bin
+: CMAKE_INCLUDE_PATH=/usr/local/personal/include CMAKE_LIB_PATH=/usr/local/personal/lib
+: cmake ../../../.. -G Ninja && Ninja -j5
+
+Redis client:
+
+https://github.com/nekipelov/redisclient
+git@github.com:nekipelov/redisclient.git
+
+*** COMPLETED Move odb options file into odb folder                   :story:
+    CLOSED: [2017-07-14 Fri 12:07]
+
+*Rationale*: done in previous sprint.
+
+There is not particularly good reason for this file to exist at the
+src level.
+
+In order to implement this story we need to have a working odb setup
+to test it and ensure we didn't break anything.
+
+*** COMPLETED References to objects in package should assume package  :story:
+    CLOSED: [2017-07-14 Fri 12:11]
+
+*Rationale*: implemented in previous sprints.
+
+#+begin_quote
+*Story*: As a dogen user, I don't want to have to specify fully
+qualified names when referring to types in the same package so that I
+don't have to type information that can be deduced by the system.
+#+end_quote
+
+At present if we define two objects in a package =p=, say =a= and =b=,
+where =b= refers to =a= it must do so using a fully qualified path,
+e.g.: =p::a=. Failure to do so results in an error:
+
+: 2014-09-10 08:27:10.662113 [ERROR] [sml.resolver] Object has property with undefined type:  { "__type__": "dogen::sml::qname", "model_name": "", "external_module_path": [ ] , "module_path": [ ] , "simple_name": "registrar" }
+: 2014-09-10 08:27:10.665861 [FATAL] [knitter] Error: /home/marco/Development/DomainDrivenConsulting/dogen/projects/sml/src/types/resolver.cpp(178): Throw in function dogen::sml::qname dogen::sml::resolver::resolve_partial_type(const dogen::sml::qname &) const
+: Dynamic exception type: N5boost16exception_detail10clone_implIN5dogen3sml16resolution_errorEEE
+: std::exception::what: Object has property with undefined type: registrar
+: [P12tag_workflow] = Code generation failure.
+
+This should be fairly trivial to implement: all we need to do is to
+add =owner= to =resolve_name= in =resolver= and add an extra
+resolution step that uses the owner's location.
+
+*** COMPLETED Update comments in C++ model                            :story:
+    CLOSED: [2017-07-14 Fri 12:15]
+
+*Rationale*: implemented in previous sprints.
+
+We have a very large blurb in this model that is rather old, and
+reflects a legacy understanding of the role of the C++ model.
+
+*** COMPLETED Remove references to PFH in makefiles                   :story:
+    CLOSED: [2017-07-14 Fri 12:16]
+
+*Rationale*: implemented in previous sprints.
+
+Seems like the correct way of finding libraries is to use
+=CMAKE_PREFIX_PATH= as explained [[https://blogs.kde.org/2008/12/12/how-get-cmake-find-what-you-want-it][in this article]]. We should stop using
+any references to PFH and let the users provide a path to local
+installs via this.
+
+We need to add a note on the read me too.
+
+*** COMPLETED Consider renaming dependencies to references in model   :story:
+    CLOSED: [2017-07-14 Fri 12:19]
+
+*Rationale*: implemented in previous sprints.
+
+Dependencies is a map of reference; why not call it references?
+
+*** COMPLETED Do not copy models in merger                            :story:
+    CLOSED: [2017-07-14 Fri 12:19]
+
+*Rationale*: new implementation of merge transform fixes this.
+
+At present we are adding the partial models into the merger by copying
+them into an associative container. It would be nicer to avoid the
+copying as it adds no value. This should wait until we have a way to
+get performance numbers out.
+
+In fact do we even need to have a two step process? Can we not add and
+merge as we go along.
+
+*** COMPLETED Improve cross model visitation support                  :story:
+    CLOSED: [2017-07-14 Fri 12:20]
+
+*Rationale*: implemented in previous sprints.
+
+One of the problems we have at present is that its not possible to
+define a base class in a model with a visitor and then extend it in
+leaves in order
+to dispatch. There seem to be some ideas in this space which may
+provide a solution:
+
+- [[http://stackoverflow.com/questions/11796121/implementing-the-visitor-pattern-using-c-templates][Implementing the visitor pattern using C++ Templates]]
+
+One simpler but hacky way of solving this problem is perhaps to have
+"model specific" visitors in each model, and have them extend the base
+visitor. Clients can then decide which visitor to use. This does mean
+that if two models are extending the base visitor, you will need to
+visit twice, but at least for the most common case (one model
+extending another) it provides a workable solution.
+
 *** STARTED Implement the code-generation chain                       :story:
+    CLOCK: [2017-07-14 Fri 11:51]--[2017-07-14 Fri 12:04] =>  0:13
     CLOCK: [2017-07-14 Fri 10:50]--[2017-07-14 Fri 11:50] =>  1:00
     CLOCK: [2017-07-14 Fri 09:29]--[2017-07-14 Fri 09:56] =>  0:27
     CLOCK: [2017-07-13 Thu 18:55]--[2017-07-13 Thu 19:45] =>  0:50
@@ -617,3 +746,121 @@ this is in place, we can change the exogenous transformers to use
 strings rather than paths to files.
 
 ** Deprecated
+*** CANCELLED Add description to profile and value templates          :story:
+    CLOSED: [2017-07-14 Fri 12:08]
+
+*Rationale*: it won't be needed in the new implementation of profiles.
+
+It would be nice to put some kind of comments as to what the profile
+is doing and where required, the rationale behind some defaulting on
+the value templates. We probably should look into supporting
+descriptions in data as a whole.
+
+*** CANCELLED Consider renaming cpp's name builder to name factory    :story:
+    CLOSED: [2017-07-14 Fri 12:09]
+
+*Rationale*: we've already have a name builder.
+
+The name builder is just a factory so make the name reflect it.
+
+Actually, we don't just build names either.
+
+*** CANCELLED Names in C++ namespaces                                 :story:
+    CLOSED: [2017-07-14 Fri 12:10]
+
+*Rationale*: story bit-rotted and now makes no sense.
+
+It appears we are not using the entity name for a C++ namespace. If
+that is the case, this is wrong and needs to be fixed. We are probably
+inferring the name by looking at the =front= (or =back=) of the
+namespaces list. Investigate this.
+
+*** CANCELLED Change transformation code to use a type visitor        :story:
+    CLOSED: [2017-07-14 Fri 12:12]
+
+*Rationale*: story bit-rotted and now makes no sense.
+
+Now we have a base type, we could probably simplify some of the
+transformation code:
+
+- dia to sml
+- sml to c++
+- potentially merger
+
+*** CANCELLED Add a file formatter interface to formatters            :story:
+    CLOSED: [2017-07-14 Fri 12:12]
+
+*Rationale*: this does not fit our current understanding any more.
+
+It probably makes sense to have a top-level interface for file
+formatting in the formatters model. At present we have a lot of
+=quilt.cpp= specific things in there. Maybe we should just extract the
+common attributes and use them to create the generic interface.
+
+This still makes sense after the current refactor, but it requires
+some thinking.
+
+Notes:
+
+- formattable becomes a concept at the formatters' model level, but it
+  has just an id.
+- it seems we should be able to also have the formatters container and
+  even the formatters workflow in =formatters=; however, this would
+  increase the amount of casting required.
+
+*** CANCELLED Add WinSock definition in CMakeLists for ODB support    :story:
+    CLOSED: [2017-07-14 Fri 12:13]
+
+*Rationale*: we are using ODB without any errors so no need for this
+it seems.
+
+We did a crude implementation of finding WinSock just to get windows
+to build. There should be a FindWinSock somewhere. If not create one.
+
+Do we need this anymore? we probably need it for linking the database
+model, but we should check - maybe ODB has some magic around this.
+
+Actually this was commented out in code so removed it. Was:
+
+: # WinSock (for database)
+: # if (WIN32)
+: #     find_library(WSOCK_LIB NAMES wsock32 DOC "The winsock library")
+: #     if(WSOCK_LIB)
+: #         list(APPEND CMAKE_REQUIRED_LIBRARIES wsock32)
+: #     else()
+: #         message(FATAL_ERROR "winsock not found.")
+: #     endif()
+:
+: #     find_library(WSOCK2_LIB NAMES ws2_32 DOC "The winsock 2 library")
+: #     if(WSOCK2_LIB)
+: #         list(APPEND CMAKE_REQUIRED_LIBRARIES ws2_32)
+: #     else()
+: #         message(FATAL_ERROR "winsock2 not found.")
+: #     endif()
+:
+: #     find_library(MSWSOCK_LIB NAMES mswsock DOC "The winsock 2 library")
+: #     if(MSWSOCK_LIB)
+: #         list(APPEND CMAKE_REQUIRED_LIBRARIES mswsock)
+: #     else()
+: #         message(FATAL_ERROR "mswsock not found.")
+: #     endif()
+: # endif()
+
+*** CANCELLED Formatters' repository should be created in quilt       :story:
+    CLOSED: [2017-07-14 Fri 12:17]
+
+*Rationale*: we do not have quilt any longer.
+
+At present we are creating the formatters' repository in
+=quilt.cpp=. However it will be shared by all backends in the
+kernel. Move it up to =quilt= level and supply it as a paramter to the
+backends.
+
+*** CANCELLED Comments seem to be trimmed                             :story:
+    CLOSED: [2017-07-14 Fri 12:18]
+
+*Rationale*: comments seem fine at the moment.
+
+For some reason we seem to be munching any blank lines at the end of
+comments. We should only remove the lines with the well known dogen
+marker, all other lines should be left untouched.
