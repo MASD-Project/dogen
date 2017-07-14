@@ -17,3 +17,8 @@ The vision for Dogen is:
   with IDEs and text editors;
 - to make the suite extensible, such that users can come up with
   modifications suited to their particular domain.
+
+* Vision Quotes
+
+- code that can be reduced to an heuristic must be codegened; code
+  that cannot, must be helped.
