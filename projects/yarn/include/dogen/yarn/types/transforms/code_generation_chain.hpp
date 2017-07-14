@@ -80,22 +80,9 @@ private:
     static void ensure_output_directory_path_is_absolute(
         const boost::filesystem::path& p);
 
-    /**
-     * @brief Create the decoration configuration factory.
-     */
-    static dogen::formatters::decoration_properties_factory
-    create_decoration_properties_factory(
-        const context& ctx,
-        const annotations::annotation& ra);
-
-    /**
-     * @brief Returns all of the available archetype locations across
-     * all kernels.
-     */
-    static std::list<annotations::archetype_location>
-    archetype_locations();
-
 public:
+    static code_generation_output
+    transform(const context& ctx, const meta_model::model& m);
     static code_generation_output
     transform(const context& ctx, const std::list<meta_model::model>& models);
 

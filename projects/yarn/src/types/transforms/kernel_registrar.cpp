@@ -53,6 +53,9 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
         s << language_taken << l << " kernel: " << k->id();
         BOOST_THROW_EXCEPTION(registrar_error(s.str()));
     }
+
+    for (const auto al : k->archetype_locations())
+        archetype_locations_.push_back(al);
 }
 
 void kernel_registrar::validate() const {
@@ -76,6 +79,11 @@ const std::unordered_map<yarn::meta_model::languages, std::
                          shared_ptr<kernel_interface>>&
 kernel_registrar::kernels_by_language() const {
     return kernels_by_language_;
+}
+
+const std::list<annotations::archetype_location>&
+kernel_registrar::archetype_locations() const {
+    return archetype_locations_;
 }
 
 } } }

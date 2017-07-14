@@ -28,6 +28,7 @@
 #include <string>
 #include <memory>
 #include <unordered_map>
+#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/transforms/kernel_interface.hpp"
 
@@ -66,7 +67,15 @@ public:
                              std::shared_ptr<kernel_interface>>&
     kernels_by_language() const;
 
+    /**
+     * @brief Returns all of the available archetype locations across
+     * all kernels.
+     */
+    const std::list<annotations::archetype_location>&
+    archetype_locations() const;
+
 private:
+    std::list<annotations::archetype_location> archetype_locations_;
     std::unordered_map<yarn::meta_model::languages,
                        std::shared_ptr<kernel_interface>> kernels_by_language_;
 };
