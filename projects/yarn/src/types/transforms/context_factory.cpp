@@ -25,6 +25,7 @@
 #include "dogen/annotations/types/archetype_location_repository_factory.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 
@@ -39,13 +40,14 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-context context_factory::make(const options::knitting_options& o,
-    const std::list<annotations::archetype_location>& als) {
+context context_factory::make(const options::knitting_options& o) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 
+    const auto& rg = code_generation_chain::registrar();
+    const auto& als(rg.archetype_locations());
     annotations::archetype_location_repository_factory alrpf;
     const auto alrp(alrpf.make(als));
 
@@ -57,7 +59,8 @@ context context_factory::make(const options::knitting_options& o,
 
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const context r(data_dirs, o, als, alrp, atrp, msrp, frp);
+    const auto& albeti(rg.archetype_locations_by_element_type_index());
+    const context r(data_dirs, o, als, albeti, alrp, atrp, msrp, frp);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

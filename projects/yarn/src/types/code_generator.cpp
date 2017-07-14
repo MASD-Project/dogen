@@ -42,8 +42,7 @@ code_generator::generate(const options::knitting_options& o) {
      * First we obtain the context for all transformations.
      */
     using namespace transforms;
-    const auto als(code_generation_chain::registrar().archetype_locations());
-    const auto ctx(context_factory::make(o, als));
+    const auto ctx(context_factory::make(o));
 
     /*
      * Then we generate all models.
