@@ -15,6 +15,44 @@
   },
   {
     "name": {
+      "simple": "supported"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "boolean",
+    "template_kind": "facet_template",
+    "scope": "entity",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "overwrite"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "boolean",
+    "template_kind": "facet_template",
+    "scope": "any",
+    "default_value": true
+  },
+  {
+    "name": {
+      "simple": "overwrite"
+    },
+    "archetype_location": {
+      "family": "quilt",
+      "kernel": "quilt.csharp"
+    },
+    "value_type": "boolean",
+    "template_kind": "archetype_template",
+    "scope": "any"
+  },
+  {
+    "name": {
       "simple": "requires_static_reference_equals",
       "qualified": "quilt.csharp.aspect.requires_static_reference_equals"
     },
