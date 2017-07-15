@@ -31,6 +31,7 @@
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+#include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/helpers/indexer.hpp"
 #include "dogen/yarn/types/helpers/post_processing_validator.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
@@ -120,6 +121,13 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      * relying on these expansions. These are kernel specific.
      */
     external_transforms_chain::transform(ctx, im);
+
+    /*
+     * Enablement transform must be applied after the external
+     * transform chain as it needs to compute enablement for any
+     * kernel specific types that might have been added.
+     */
+    // enablement_transform::transform(ctx, im);
 
     /*
      * Ensure the model is valid.
