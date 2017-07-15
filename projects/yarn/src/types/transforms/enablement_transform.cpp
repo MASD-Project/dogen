@@ -330,7 +330,7 @@ is_element_disabled(const yarn::meta_model::element& e) {
     return false;
 }
 
-void enablement_transform::compute_enablement(
+void enablement_transform::compute_enablement_for_artefact_properties(
     const global_enablement_configurations_type& gcs,
     const local_enablement_configurations_type& lcs,
     const std::string& archetype, meta_model::artefact_properties& ap) {
@@ -437,7 +437,7 @@ void enablement_transform::compute_enablement(
                              << " value: " << ap.enabled();
 }
 
-void enablement_transform::compute_enablement_a(
+void enablement_transform::compute_enablement_for_element(
     const global_enablement_configurations_type& gcs,
     const std::unordered_map<std::type_index, local_type_group_type>& ltgti,
     meta_model::element& e) {
@@ -481,7 +481,7 @@ void enablement_transform::compute_enablement_a(
     for (auto& pair : e.element_properties().artefact_properties()) {
         const auto arch(pair.first);
         auto& art_props(pair.second);
-        compute_enablement(gcs, lcs, arch, art_props);
+        compute_enablement_for_artefact_properties(gcs, lcs, arch, art_props);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
@@ -521,9 +521,12 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      */
     const auto albeti(ctx.archetype_locations_by_element_type_index());
     const auto ltgti(bucket_local_type_group_by_type_index(ltg, albeti));
-    // using namespace std::placeholders;
-    // auto v(std::bind(enablement_transform::compute_enablement_a, gcs, ltgti, _1));
-    // meta_model::elements_traversal(im, v);
+
+    using namespace std::placeholders;
+    const auto f(enablement_transform::compute_enablement_for_element);
+    const auto v(std::bind(f, gcs, ltgti, _1));
+    const bool include_injected_elements(true);
+    meta_model::elements_traversal(im, v, include_injected_elements);
 
     BOOST_LOG_SEV(lg, debug) << "Finished enablement transform.";
 }

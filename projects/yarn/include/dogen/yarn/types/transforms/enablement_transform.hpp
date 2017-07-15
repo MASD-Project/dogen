@@ -106,13 +106,13 @@ private:
 private:
     static bool is_element_disabled(const meta_model::element& e);
 
-    static void compute_enablement(
+    static void compute_enablement_for_artefact_properties(
         const global_enablement_configurations_type& gcs,
         const local_enablement_configurations_type& lcs,
         const std::string& archetype,
         meta_model::artefact_properties& ap);
 
-    static void compute_enablement_a(
+    static void compute_enablement_for_element(
         const global_enablement_configurations_type& gcs,
         const std::unordered_map<std::type_index, local_type_group_type>& ltgti,
         meta_model::element& e);
