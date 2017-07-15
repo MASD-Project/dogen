@@ -64,7 +64,6 @@ private:
     }
 
 public:
-    bool include_injected_elements() { return true; }
     void operator()(yarn::meta_model::element& e) { e.accept(*this); }
     void operator()(yarn::meta_model::module& m) { update(m); }
     void operator()(yarn::meta_model::concept& c) { update(c); }
@@ -96,7 +95,8 @@ expand(const dogen::formatters::decoration_properties_factory& dpf,
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";
 
     decoration_updater du(dpf);
-    yarn::meta_model::elements_traversal(im, du);
+    const bool include_injected_elements(true);
+    yarn::meta_model::elements_traversal(im, du, include_injected_elements);
 
     BOOST_LOG_SEV(lg, debug) << "Finished populating decoration properties.";
 }

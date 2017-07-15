@@ -53,7 +53,6 @@ public:
     void update(DeterminableOrigin& d) { d.origin_type(origin_types_); }
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { update(m); }
     void operator()(meta_model::concept& c) { update(c); }

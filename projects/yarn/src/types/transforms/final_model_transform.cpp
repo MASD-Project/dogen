@@ -77,7 +77,6 @@ private:
     void add(const Element& e) { add_element(boost::make_shared<Element>(e)); }
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(meta_model::element&) { }
     void operator()(const meta_model::module& m) {
         result_.module_ids().insert(m.name().id());

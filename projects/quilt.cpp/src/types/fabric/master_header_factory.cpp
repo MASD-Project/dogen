@@ -80,7 +80,6 @@ private:
     void process_element(const yarn::meta_model::element& e);
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(yarn::meta_model::element&) { }
     void operator()(const yarn::meta_model::concept&) {}
     void operator()(const yarn::meta_model::builtin&) {}

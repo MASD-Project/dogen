@@ -54,7 +54,6 @@ public:
     result() { return result_; }
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(yarn::meta_model::element&) { }
     void operator()(const yarn::meta_model::concept&) {}
     void operator()(const yarn::meta_model::builtin&) {}

@@ -78,7 +78,6 @@ private:
     }
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { update_scribble(m); }
     void operator()(meta_model::concept& c) { update_scribble(c); }
@@ -155,7 +154,6 @@ private:
     }
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { update_extensible(m); }
     void operator()(meta_model::concept& c) {

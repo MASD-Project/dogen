@@ -45,7 +45,7 @@ namespace meta_model {
 /**@{*/
 template<typename TraversalVisitor>
 inline void elements_traversal(const meta_model::intermediate_model& m,
-    const TraversalVisitor& v) {
+    const TraversalVisitor& v, const bool include_injected_elements = false) {
     for (const auto& pair : m.modules())
         v(pair.second);
 
@@ -70,7 +70,7 @@ inline void elements_traversal(const meta_model::intermediate_model& m,
     for (const auto& pair : m.visitors())
         v(pair.second);
 
-    if (v.include_injected_elements()) {
+    if (include_injected_elements) {
         for (const auto ptr : m.injected_elements())
             v(*ptr);
     }
@@ -78,7 +78,7 @@ inline void elements_traversal(const meta_model::intermediate_model& m,
 
 template<typename TraversalVisitor>
 inline void elements_traversal(const meta_model::intermediate_model& m,
-    TraversalVisitor& v) {
+    TraversalVisitor& v, const bool include_injected_elements = false) {
     for (auto& pair : m.modules())
         v(pair.second);
 
@@ -103,7 +103,7 @@ inline void elements_traversal(const meta_model::intermediate_model& m,
     for (auto& pair : m.visitors())
         v(pair.second);
 
-    if (v.include_injected_elements()) {
+    if (include_injected_elements) {
         for (auto ptr : m.injected_elements())
             v(*ptr);
     }
@@ -111,7 +111,7 @@ inline void elements_traversal(const meta_model::intermediate_model& m,
 
 template<typename TraversalVisitor>
 inline void elements_traversal(meta_model::intermediate_model& m,
-    TraversalVisitor& v) {
+    TraversalVisitor& v, const bool include_injected_elements = false) {
     for (auto& pair : m.modules())
         v(pair.second);
 
@@ -136,7 +136,7 @@ inline void elements_traversal(meta_model::intermediate_model& m,
     for (auto& pair : m.visitors())
         v(pair.second);
 
-    if (v.include_injected_elements()) {
+    if (include_injected_elements) {
         for (auto ptr : m.injected_elements())
             v(*ptr);
     }

@@ -49,7 +49,6 @@ private:
     void process(const meta_model::name& n);
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { process(m.name()); }
     void operator()(meta_model::concept& c) { process(c.name()); }
@@ -93,7 +92,6 @@ private:
     void update(meta_model::element& e);
 
 public:
-    bool include_injected_elements() { return false; }
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { update(m); }
     void operator()(meta_model::concept& c) { update(c); }
