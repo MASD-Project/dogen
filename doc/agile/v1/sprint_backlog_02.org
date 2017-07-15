@@ -5,48 +5,50 @@
 
 * Mission Statement
 
-- Continue work on the yarn refactor
+- Finish the transformation and meta-model yarn refactor
+- Continue work on moving "generic" types from the quilt models into
+  yarn.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-15 Sat 23:53]
+#+CAPTION: Clock summary at [2017-07-16 Sun 00:28]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *44:52* |       |      | 100.0 |
+| *Total time*                                                                | *45:25* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 44:52   |       |      | 100.0 |
-| Active                                                                      |         | 44:52 |      | 100.0 |
+| Stories                                                                     | 45:25   |       |      | 100.0 |
+| Active                                                                      |         | 45:25 |      | 100.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   2.5 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   0.9 |
-| COMPLETED Implement the context class                                       |         |       | 1:12 |   2.7 |
-| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |   9.3 |
+| COMPLETED Implement the context class                                       |         |       | 1:12 |   2.6 |
+| COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |   9.2 |
 | COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   3.5 |
 | COMPLETED Refactor mapping repository factory                               |         |       | 0:12 |   0.4 |
 | COMPLETED Implement the output languages transform                          |         |       | 0:37 |   1.4 |
 | COMPLETED Use forward declaration for context                               |         |       | 0:20 |   0.7 |
-| COMPLETED Implement the references chain                                    |         |       | 2:43 |   6.1 |
+| COMPLETED Implement the references chain                                    |         |       | 2:43 |   6.0 |
 | COMPLETED Implement the merge transform                                     |         |       | 0:40 |   1.5 |
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.5 |
-| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   1.9 |
-| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   7.8 |
+| COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   1.8 |
+| COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   7.7 |
 | COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   1.7 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
-| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.6 |
+| COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.5 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.0 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   1.7 |
 | COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.3 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  20.1 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  19.8 |
 | CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.0 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.7 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.4 |
-| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  10.1 |
+| COMPLETED Implement the code-generation chain                               |         |       | 4:33 |  10.0 |
 | COMPLETED Fix options test break on windows                                 |         |       | 0:10 |   0.4 |
 | COMPLETED Investigate why gcc builds are slower than clang                  |         |       | 1:03 |   2.3 |
-| STARTED Move enablement into yarn                                           |         |       | 5:58 |  13.3 |
+| STARTED Move enablement into yarn                                           |         |       | 6:31 |  14.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -611,6 +613,8 @@ Removing the pragma notes seems to have bought us a little bit of
 time, which may be enough for now.
 
 *** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-07-16 Sun 00:16]--[2017-07-16 Sun 00:28] =>  0:12
+    CLOCK: [2017-07-15 Sat 23:54]--[2017-07-16 Sun 00:15] =>  0:21
     CLOCK: [2017-07-15 Sat 23:51]--[2017-07-15 Sat 23:53] =>  0:02
     CLOCK: [2017-07-15 Sat 23:30]--[2017-07-15 Sat 23:50] =>  0:20
     CLOCK: [2017-07-15 Sat 21:15]--[2017-07-15 Sat 21:49] =>  0:34
@@ -649,6 +653,8 @@ Problems:
   will be disabled.
 - enablement must be done after external transformations so it picks
   up fabric types.
+- we need to support formatting styles in order to be able to use the
+  artefact properties from the meta-model.
 
 To do:
 
@@ -663,6 +669,10 @@ We need to make use of the exact same logic as implemented in
 =quilt.cpp= for enablement. Perhaps all of the enablement related
 functionality can be lifted and grafted onto quilt without any major
 changes.
+
+*** Move formatting styles into yarn                                  :story:
+
+We need to support the formatting styles at the meta-model level.
 
 *** Move element segmentation into yarn                               :story:
 

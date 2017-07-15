@@ -26,6 +26,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/io/meta_model/model_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
@@ -46,6 +47,8 @@ namespace transforms {
 
 std::list<meta_model::model>
 model_generation_chain::transform(const context& ctx) {
+    BOOST_LOG_SEV(lg, info) << "Executing the model generation chain.";
+
     /*
      * Obtain the initial target, given the user options. The initial
      * target is either a Platform Specific Model (PSM), in which case
@@ -79,6 +82,9 @@ model_generation_chain::transform(const context& ctx) {
     std::list<meta_model::model> r;
     for (const auto ol : target.output_languages())
         r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
+
+    BOOST_LOG_SEV(lg, info) << "Executed the model generation chain. Result: "
+                            << r;
 
     return r;
 }
