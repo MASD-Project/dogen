@@ -310,7 +310,7 @@ instantiate_archetype_template(const type_template& tt) const {
     std::list<type> r;
     const auto ttal(tt.archetype_location());
     for (const auto al : repository_.archetype_locations()) {
-        if (!is_match(ttal.kernel(), al.kernel()) &&
+        if (!is_match(ttal.kernel(), al.kernel()) ||
             !is_match(ttal.facet(), al.facet()))
             continue;
 
@@ -389,8 +389,9 @@ template_instantiator::instantiate_archetype_template(
     std::list<std::pair<std::string, boost::shared_ptr<value>>> r;
 
     const auto etal(et.archetype_location());
+
     for (const auto al : repository_.archetype_locations()) {
-        if (!is_match(etal.kernel(), al.kernel()) &&
+        if (!is_match(etal.kernel(), al.kernel()) ||
             !is_match(etal.facet(), al.facet()))
             continue;
 

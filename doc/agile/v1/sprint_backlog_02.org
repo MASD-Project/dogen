@@ -611,6 +611,7 @@ Removing the pragma notes seems to have bought us a little bit of
 time, which may be enough for now.
 
 *** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-07-15 Sat 23:30]--[2017-07-15 Sat 23:50] =>  0:20
     CLOCK: [2017-07-15 Sat 21:15]--[2017-07-15 Sat 21:49] =>  0:34
     CLOCK: [2017-07-15 Sat 21:09]--[2017-07-15 Sat 21:14] =>  0:05
     CLOCK: [2017-07-15 Sat 20:58]--[2017-07-15 Sat 21:08] =>  0:10
