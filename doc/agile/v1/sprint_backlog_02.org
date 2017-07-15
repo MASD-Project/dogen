@@ -14,15 +14,15 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-16 Sun 00:28]
+#+CAPTION: Clock summary at [2017-07-16 Sun 00:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *45:25* |       |      | 100.0 |
+| *Total time*                                                                | *45:38* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 45:25   |       |      | 100.0 |
-| Active                                                                      |         | 45:25 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:07 |   2.5 |
+| Stories                                                                     | 45:38   |       |      | 100.0 |
+| Active                                                                      |         | 45:38 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |   2.9 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   0.9 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   2.6 |
 | COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |   9.2 |
@@ -35,13 +35,13 @@
 | COMPLETED Implement the model generation chain                              |         |       | 0:13 |   0.5 |
 | COMPLETED Implement the model assembly chain                                |         |       | 0:50 |   1.8 |
 | COMPLETED Implement the post-processing chain                               |         |       | 3:31 |   7.7 |
-| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   1.7 |
+| COMPLETED Move helpers from =transforms= namespace                          |         |       | 0:45 |   1.6 |
 | COMPLETED Replace expanders with transforms                                 |         |       | 0:03 |   0.1 |
 | COMPLETED Port all expander unit tests to transforms                        |         |       | 0:42 |   1.5 |
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.0 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   1.7 |
 | COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.3 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  19.8 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  19.7 |
 | CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   2.0 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.7 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.4 |
@@ -53,6 +53,7 @@
 #+end:
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-16 Sun 00:29]--[2017-07-16 Sun 00:42] =>  0:13
     CLOCK: [2017-07-14 Fri 12:04]--[2017-07-14 Fri 12:23] =>  0:19
     CLOCK: [2017-07-08 Sat 17:16]--[2017-07-08 Sat 17:19] =>  0:03
     CLOCK: [2017-07-07 Fri 11:18]--[2017-07-07 Fri 11:23] =>  0:05
@@ -650,18 +651,23 @@ Problems:
   the meta-type, we will be enabling/disabling all archetype locations
   across all meta-types.
 - because we do not have element segmentation, the element extensions
-  will be disabled.
+  will be disabled. Actually this will probably work just the same,
+  given that all elements exist.
 - enablement must be done after external transformations so it picks
   up fabric types.
 - we need to support formatting styles in order to be able to use the
   artefact properties from the meta-model.
+- in quilt.cpp, someone did an upfront generation of all archetype
+  properties against the archetype locations. We not doing that in
+  yarn, so nothing is coming out. This was done during transformation
+  in formattables.
 
 To do:
 
-- kernel registrar type index map
-- c# formatter registrar type index map
+- kernel registrar type index map - done.
+- c# formatter registrar type index map - done.
 - bug in template instantiating: artefact expansions do not seem to
-  take kernel into account.
+  take kernel into account - done.
 
 *Previous Understanding*
 
@@ -669,6 +675,12 @@ We need to make use of the exact same logic as implemented in
 =quilt.cpp= for enablement. Perhaps all of the enablement related
 functionality can be lifted and grafted onto quilt without any major
 changes.
+
+*** Create a transformation that expands artefact properties          :story:
+
+Before we can start populating the artefact properties we need to set
+them up. This was done in formattables in the transformer. We now need
+a transformation in yarn for this.
 
 *** Move formatting styles into yarn                                  :story:
 
