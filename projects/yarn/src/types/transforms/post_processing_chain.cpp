@@ -127,7 +127,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      * transform chain as it needs to compute enablement for any
      * kernel specific types that might have been added.
      */
-    // enablement_transform::transform(ctx, im);
+    enablement_transform::transform(ctx, im);
 
     /*
      * Ensure the model is valid.
