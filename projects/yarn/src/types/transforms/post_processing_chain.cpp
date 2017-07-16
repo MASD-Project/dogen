@@ -124,17 +124,18 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
     external_transforms_chain::transform(ctx, im);
 
     /*
+     * Expand the artefact properties against the suitable archetype
+     * locations. Must be done before enablement transform and any
+     * other transform that populates these properties.
+     */
+    artefact_properties_transform::transform(ctx, im);
+
+    /*
      * Enablement transform must be applied after the external
      * transform chain as it needs to compute enablement for any
      * kernel specific types that might have been added.
      */
     enablement_transform::transform(ctx, im);
-
-    /*
-     * Expand the artefact properties against the suitable archetype
-     * locations.
-     */
-    artefact_properties_transform::transform(ctx, im);
 
     /*
      * Ensure the model is valid.
