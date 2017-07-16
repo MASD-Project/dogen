@@ -107,19 +107,22 @@ workflow::format(const formattables::model& fm,
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
-        {
-            // FIXME: whilst we are moving enablement to yarn
-            const auto& aps(e.element_properties().artefact_properties());
-            const auto& art_props(get_artefact_properties(aps, arch));
+        const auto& aps(ep.artefact_properties());
+        const auto& art_props(get_artefact_properties(aps, arch));
+
+        // {
+        //     // FIXME: whilst we are moving enablement to yarn
+        //     const auto& aps(e.element_properties().artefact_properties());
+        //     const auto& art_props(get_artefact_properties(aps, arch));
             if (!art_props.enabled()) {
                 BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
                 continue;
-            }
-        }
+             }
+        // }
 
         // FIXME: whilst we are moving enablement to yarn
-        const auto& aps(ep.artefact_properties());
-        const auto& art_props(get_artefact_properties(aps, arch));
+        // const auto& aps(ep.artefact_properties());
+        // const auto& art_props(get_artefact_properties(aps, arch));
 
         using formattables::formatting_styles;
         const auto& frp(registrar().formatter_repository());
