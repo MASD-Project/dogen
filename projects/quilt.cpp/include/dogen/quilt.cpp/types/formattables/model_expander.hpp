@@ -41,10 +41,6 @@ private:
     void expand_streaming(
         const annotations::type_repository& atrp, model& fm) const;
 
-    void expand_enablement(const annotations::type_repository& atrp,
-        const annotations::annotation& ra, const formatters::repository& frp,
-        model& fm) const;
-
     void expand_canonical_archetypes(const formatters::repository& frp,
         model& fm) const;
 
