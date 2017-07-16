@@ -71,6 +71,19 @@ formattables::artefact_properties workflow::get_artefact_properties(
     return i->second;
 }
 
+yarn::meta_model::artefact_properties workflow::get_artefact_properties(
+    const std::unordered_map<std::string,
+    yarn::meta_model::artefact_properties>& artefact_properties,
+    const std::string& archetype) const {
+
+    const auto i(artefact_properties.find(archetype));
+    if (i == artefact_properties.end()) {
+        BOOST_LOG_SEV(lg, error) << archetype_not_found << archetype;
+        BOOST_THROW_EXCEPTION(workflow_error(archetype_not_found + archetype));
+    }
+    return i->second;
+}
+
 std::list<dogen::formatters::artefact>
 workflow::format(const formattables::model& fm,
     const yarn::meta_model::element& e,
@@ -94,12 +107,19 @@ workflow::format(const formattables::model& fm,
     for (const auto& ptr : fmts) {
         const auto& fmt(*ptr);
         const auto arch(fmt.archetype_location().archetype());
+        {
+            // FIXME: whilst we are moving enablement to yarn
+            const auto& aps(e.element_properties().artefact_properties());
+            const auto& art_props(get_artefact_properties(aps, arch));
+            if (!art_props.enabled()) {
+                BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
+                continue;
+            }
+        }
+
+        // FIXME: whilst we are moving enablement to yarn
         const auto& aps(ep.artefact_properties());
         const auto& art_props(get_artefact_properties(aps, arch));
-        if (!art_props.enabled()) {
-            BOOST_LOG_SEV(lg, debug) << "Archetype is disabled: " << arch;
-            continue;
-        }
 
         using formattables::formatting_styles;
         const auto& frp(registrar().formatter_repository());

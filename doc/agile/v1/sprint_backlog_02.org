@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-16 Sun 11:19]
+#+CAPTION: Clock summary at [2017-07-16 Sun 11:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *46:15* |       |      | 100.0 |
+| *Total time*                                                                | *46:26* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 46:15   |       |      | 100.0 |
-| Active                                                                      |         | 46:15 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |   2.9 |
+| Stories                                                                     | 46:26   |       |      | 100.0 |
+| Active                                                                      |         | 46:26 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   0.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |   2.9 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   2.6 |
 | COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |   9.0 |
 | COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   3.4 |
@@ -41,26 +41,17 @@
 | COMPLETED Remove all legacy classes from yarn                               |         |       | 0:55 |   2.0 |
 | COMPLETED Implement the mapper as a transform                               |         |       | 0:46 |   1.7 |
 | COMPLETED Move helpers from main yarn namespace                             |         |       | 1:29 |   3.2 |
-| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  19.5 |
+| COMPLETED Move all data types into its own namespace                        |         |       | 9:00 |  19.4 |
 | CANCELLED Move artefacts from formatters into meta-model                    |         |       | 0:54 |   1.9 |
 | CANCELLED Use transformation context in quilt                               |         |       | 0:20 |   0.7 |
 | COMPLETED Create an options validator                                       |         |       | 0:39 |   1.4 |
 | COMPLETED Implement the code-generation chain                               |         |       | 4:33 |   9.8 |
 | COMPLETED Fix options test break on windows                                 |         |       | 0:10 |   0.4 |
 | COMPLETED Investigate why gcc builds are slower than clang                  |         |       | 1:03 |   2.3 |
-| COMPLETED Create a transformation that expands artefact properties          |         |       | 0:37 |   1.3 |
-| STARTED Move enablement into yarn                                           |         |       | 6:31 |  14.1 |
+| COMPLETED Create a transformation that expands artefact properties          |         |       | 0:45 |   1.6 |
+| STARTED Move enablement into yarn                                           |         |       | 6:34 |  14.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
-
-*** STARTED Sprint and product backlog grooming                       :story:
-    CLOCK: [2017-07-16 Sun 00:29]--[2017-07-16 Sun 00:42] =>  0:13
-    CLOCK: [2017-07-14 Fri 12:04]--[2017-07-14 Fri 12:23] =>  0:19
-    CLOCK: [2017-07-08 Sat 17:16]--[2017-07-08 Sat 17:19] =>  0:03
-    CLOCK: [2017-07-07 Fri 11:18]--[2017-07-07 Fri 11:23] =>  0:05
-    CLOCK: [2017-07-03 Thu 20:15]--[2017-07-03 Thu 20:55] =>  0:40
-
-Updates to sprint and product backlog.
 
 *** COMPLETED Edit release notes for previous sprint                  :story:
     CLOSED: [2017-07-05 Wed 16:08]
@@ -106,6 +97,15 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 - [[https://twitter.com/MarcoCraveiro/status/881860977330880512][Tweet]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6287627272706891776/][LinkedIn]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-16 Sun 00:29]--[2017-07-16 Sun 00:42] =>  0:13
+    CLOCK: [2017-07-14 Fri 12:04]--[2017-07-14 Fri 12:23] =>  0:19
+    CLOCK: [2017-07-08 Sat 17:16]--[2017-07-08 Sat 17:19] =>  0:03
+    CLOCK: [2017-07-07 Fri 11:18]--[2017-07-07 Fri 11:23] =>  0:05
+    CLOCK: [2017-07-03 Thu 20:15]--[2017-07-03 Thu 20:55] =>  0:40
+
+Updates to sprint and product backlog.
 
 *** COMPLETED Implement the context class                             :story:
     CLOSED: [2017-07-06 Thu 07:25]
@@ -616,6 +616,7 @@ time, which may be enough for now.
 
 *** COMPLETED Create a transformation that expands artefact properties :story:
     CLOSED: [2017-07-16 Sun 11:19]
+    CLOCK: [2017-07-16 Sun 11:20]--[2017-07-16 Sun 11:28] =>  0:08
     CLOCK: [2017-07-16 Sun 10:42]--[2017-07-16 Sun 11:19] =>  0:37
 
 Before we can start populating the artefact properties we need to set
@@ -623,6 +624,7 @@ them up. This was done in formattables in the transformer. We now need
 a transformation in yarn for this.
 
 *** STARTED Move enablement into yarn                                 :story:
+    CLOCK: [2017-07-16 Sun 11:29]--[2017-07-16 Sun 11:32] =>  0:03
     CLOCK: [2017-07-16 Sun 00:16]--[2017-07-16 Sun 00:28] =>  0:12
     CLOCK: [2017-07-15 Sat 23:54]--[2017-07-16 Sun 00:15] =>  0:21
     CLOCK: [2017-07-15 Sat 23:51]--[2017-07-15 Sat 23:53] =>  0:02
