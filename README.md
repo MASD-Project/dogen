@@ -13,21 +13,21 @@
 
 # Overview
 
-**Dogen** is a suite of tools focusing on bringing
-[Model Driven Software Development](https://en.wikipedia.org/wiki/Model-driven_software_development) (MDSD)
-workflows to C++ development.
-
-In lay terms, our main objective is to automate the development
-process as much as possible: the user creates domain models according
-to one of the supported front-end formats and respecting a set of
-predefined restrictions; Dogen then uses this input to generate a
-source code representation of the model. At present the main front-end
+**Dogen** is a suite of tools focusing on
+bringing [Model Driven Software Development](https://en.wikipedia.org/wiki/Model-driven_software_development) (MDSD)
+workflows to C++ development. In lay terms, our main objective is to
+automate the development process as much as possible: the user creates
+domain models according to one of the supported front-end formats and
+respecting a set of predefined restrictions; Dogen then uses this
+input to generate a source code representation of the model. At
+present the main front-end
 is [Dia](https://en.wikipedia.org/wiki/Dia_(software))
 ([Dia test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input)),
 but we also support JSON
 ([JSON test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.json/input)). Depending
-on use cases and user demand, other frontends may follow. The
-generated code contains most of the functionality required from a
+on use cases and user demand, other frontends may follow.
+
+The generated code contains most of the functionality required from a
 typical C++ domain object such as serialisation, hashing, streaming
 and so on. Whilst we intend for the suite to be useful out of the box
 for most use cases, our end goal is enable users to extend Dogen,
@@ -41,7 +41,8 @@ parity with the C++ support.
 We have started to provide binary packages on BinTray. At present we
 support Debian Linux, OSX and Windows, all in 64-bit. The packages are
 generated at the end of each sprint - with the exception of Windows,
-due to a [problem with AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag).
+due to a [problem with AppVeyor](http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag),
+where we generate packages on each commit.
 
 You can download the packages from this location: [https://bintray.com/domaindrivenconsulting/Dogen](https://bintray.com/domaindrivenconsulting/Dogen)
 
