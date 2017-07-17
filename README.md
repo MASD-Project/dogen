@@ -48,11 +48,8 @@ You can download the packages from this location: [https://bintray.com/domaindri
 
 # Building From Source
 
-To build Dogen on Linux and OSX you need a moderately recent compiler
-such as GCC 4.7 or clang 3.7 and a very recent version of Boost:
-ideally 1.62. Older Boost versions work, but require patches. See
-our
-[patches directory](https://github.com/DomainDrivenConsulting/dogen/tree/master/patches).
+To build Dogen on Linux and OSX you need a recent compiler such as GCC
+6 or clang 3.8 and a very recent version of Boost: 1.62 or later.
 
 Once you have Boost installed, you can simply do:
 
