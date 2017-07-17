@@ -11,22 +11,64 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
-*** Create "opaque" kernel and element properties                     :story:
+*** Use the in-memory interface of LibXml                             :story:
 
-As part of the element container, we can have a set of base classes
-that are empty: =opaque_element_properties=. This class is then
-specialised in each kernel with the properties that are specific to
-it. We probably need an equivalent for:
+At present, our C++ wrappers on top of LibXml are using the file based
+interface. We should do in-memory processing of the XML file. Once
+this is in place, we can change the exogenous transformers to use
+strings rather than paths to files.
 
-- kernel level properties
-- element level properties
-- attribute level properties.
+*** Initialisation of meta-data                                       :story:
 
-We then have to do a lot of casting in the helpers.
+At present we are reading meta-data files for every transformation. In
+reality, it makes no sense to allow the meta-data files to change
+dynamically, because the consumers of the meta-data are hard-coded. So
+it would make more sense to treat them as a initialisation step. This
+will make even more sense when we code-generate the types instead of
+using JSON. Then we can hook up the generated code to the
+initialisers.
 
-Once we got these opaque properties, we can then create "kernel
-specific expanders" which are passed in to the yarn workflow. These
-populate the opaque properties.
+*** Add support for "one off" profiles                                :story:
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
+
+Actually the problem is that profiles aren't really implemented
+correctly. First we should not call them profiles at all since they
+are not UML profiles and overloading the term just generates
+confusion. Second its important to understand how Dogen profiles come
+about:
+
+- we extend the UML meta-model via stereotypes to support all of the
+  required yarn and quilt concepts.
+- when we instantiate the yarn/quilt types via a UML model, we need to
+  supply the values for the attributes which have been extended. If
+  done properly this would happen via UML tagged values. Dia does not
+  support these. At any rate, at present we use Dogen meta-data which
+  is almost like tagged values.
+- Dogen profiles are then an attempt to create bundles of tagged
+  values with pre-populated values so that we do not need to manually
+  populate them for every type. Instead, we can associate a stereotype
+  with the type and then the system will automatically populate the
+  values from the bundle.
+- From all of this it follows that it should be possible to define
+  these "bundles" directly in a UML diagram. If we were to use UML
+  properly (or at least almost properly), we would define a class with
+  a stereotype of =stereotype=, a name of the stereotype we'd like to
+  define (say =Serializable=) and then its tagged values are the keys
+  and values of the meta-data we want to define. This is strictly
+  speaking not correct UML because we are stating we are augmenting
+  the UML meta-model (hence =stereotype=) but then we end up
+  instantiating a meta-model class with some predefined values. Its
+  not clear how to express this in UML. Note that we have exactly the
+  same issue with concepts.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
 *** Make creating new facets easier                                   :story:
 
@@ -146,65 +188,6 @@ rename the opaque_parameters to reflect ODB specific data.
 Finally we should no longer attempt to derive the ODB pragma
 context. We should just add it verbatim.
 
-*** Add prefetch support to ODB                                       :story:
-
-As per Boris email:
-
-#+begin_quote
-Hm, I am not sure the bulk approach (with a compiler-time pragma) is
-right in this case. There we don't really have a choice since we need
-to know the "batch buffer" size.
-
-But here it is all runtime. Plus, you may want to have different
-prefetch for different queries of the same object. In fact, you
-can already customize it for queries (but not for object loads)
-by using prepared queries (Section 4.5 in the manual):
-
-1. Create prepared query.
-
-2. Get its statement (statement()).
-
-3. Cast it to odb::oracle::select_statement.
-
-4. Call handle() on the result to get OCIStmt*.
-
-5. Set custom OCI_ATTR_PREFETCH_ROWS.
-
-6. Execute the query.
-
-The problems with this approach are: (1) it is tedious and (2) it
-doesn't work for non-query SELECT's (e.g., database::load()). So
-perhaps the way to do it is:
-
-1. Provide prefetch() functions on oracle::database() and
-   oracle::connection() that can be used to modify database-wide
-   and connection-wide prefetch values. Also set it to some
-   reasonable default (say 512?)
-
-2. Provide oracle::select_statement::prefetch() to make the
-   prepared query approach less tedious.
-#+end_quote
-
-*** Add ODB to the build machine                                      :story:
-
-At present we are only compiling and running the ODB tests
-locally. Now that ODB is becoming a core dependency, we need to make
-sure we are running these tests on the build machines - Windows and
-Linux at least.
-
-However, at present we are already running out of time for the main
-build. If we simply add ODB to Linux we will not complete the build in
-the allocated slot. One way to achieve this is to have a build that
-does ODB only.
-
-We should also add oracle OCI to the dogen dependencies package so
-that we test oracle support as well as postgres. However, to run the
-tests we need some way to configure postgres to allow connections. It
-is also possible to install oracle by copying the DEB to dropbox and
-creating a simple installation script that sets up the users etc. We
-could make similar scripts for postgres and oracle. However, we need
-to convert the oracle schema into postgres.
-
 *** Allow users to override string prefixes in test data              :story:
 
 At present we have a hard-coded string prefix in test data:
@@ -311,6 +294,169 @@ manually deleting them.
 This also means we can add the ODB files to the visual studio project
 even before they get generated.
 
+*** Code-generate a "one-shot" serialisation API                      :story:
+
+For the dia model we manually generated a class called
+=diagram_serialization_helper=. It provided a simple API to read/write
+the dia model:
+
+: static void to_xml(std::ostream& s, const diagram& d);
+: static diagram from_xml(std::istream& s);
+
+It would be nice to have this code-generated and also to cover the
+other two archives (text, binary).
+
+Users should be able to mark types with some property so that we know
+we need to generate these wrappers.
+
+Another common use case is to serialise from and to string. It would
+be nice to have helpers for strings too.
+
+These APIs can then be reused by the caching layer.
+
+We could have a stereotype that marks a class as requiring this kind
+of serialisation, such as "serialisation entry point".
+
+*** Primitives are not comparable                                     :story:
+
+Our wrapping code around primitives means we can no longer perform
+arithmetic operations on them or comparisons. This may be what is
+intended (e.g. adding or multiplying =customer_id= does not make
+sense) but it also means we can't delete ranges from the database for
+example. It would be nice if there was some meta-data we could add to
+primitives to make this possible:
+
+- =comparable=
+- etc
+
+With this we would generate the appropriate operators by delegating to
+the underlying type.
+
+We probably need some way of knowing if the underlying type supports
+comparisons. A meta-data flag used to annotate proxy models would be
+sufficient.
+
+*** Handling of visual studio projects and solutions is incorrect     :story:
+
+At present we added the extension of the solution/project to the
+element name, e.g.:
+
+: all_path_and_directory_settings.csproj
+
+This happens to work for the simpler cases, but if we try to add a
+postfix we then have a problem:
+
+: dogen.test_models.all_path_and_directory_settings.csproj_vc15_
+
+Projects and solutions do not seem to fit our conceptual model for the
+element space. We need to somehow have distinct element IDs but yet
+not associate the extension with the name directly. Up to now we never
+had two distinct elements with the exact same name but generating two
+different artefacts with different extensions.
+
+This is a problem because we will need to have the ability to generate
+multiple project files for different versions of visual studio.
+
+For now we removed the project and solution postfixes:
+
+: #DOGEN quilt.csharp.visual_studio.solution.postfix=_vs15_
+: #DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
+
+In order to fit our conceptual model, we need to make some adjustments
+to our implementation of projects and solutions. First, there is only
+one meta-model element for *both* projects and solutions. This is
+derived from the fact that they both share a common name. The
+conceptual model does not involve file extensions - or file paths for
+that matter; archetypes exist only in archetype space, and their
+"paths" in this space are only related to the facets they belong
+to. The physical location is a property of files, which are
+expressions of archetypes in "file space". Thus, there is only one
+single element, provisionally called "visual studio", which has
+multiple archetypes (and their associated formatters):
+
+- solution
+- project
+
+Second, a solution and project may be instantiated multiple times,
+depending on the version of visual studio and the associated
+compiler. Externally users supply a visual studio version and that
+internally will map to different instances of the formatters. We must
+instantiate the formatters for each supported version because we may
+need to create multiple versions simultaneously: his is the use case
+where users want to generate projects and solutions for multiple
+versions of VS at the same time.
+
+THe good news is that we already have something similar: master
+includes. We can adapt a lot of the logic we have for master
+includes. There are some differences though:
+
+- we will have multiple instances on the same facet.
+- we need some external mechanism to determine if a given version is
+  enabled. We could force users to enter the "enabled" property for
+  each version in the meta-data, but that would get really messy since
+  there are only a few valid combinations of solution and project
+  version. Its better if users supply the Visual Studio versions and
+  we infer the solution and projects to enable. But we do not have a
+  mechanism for this at present. We could add a "is enabled" to
+  formatters like we did for helpers, supplying the element; we would
+  then check the Visual Studio version in the element and return false
+  if it didn't match the formatters version. Or we could change the
+  formatter's interface to return optional artefact. Whilst this is a
+  bit more painful - we'd have to change all formatters - it fits the
+  code structure slightly better.
+- we need to have different file names depending on the
+  version. Worse: if there is just a single version we do not need to
+  have a "version prefix". If there are multiple versions we need to
+  add the prefix. The fist use case is easy: we already have archetype
+  prefixes; we just need to add a prefix for each version. The second
+  part requires some hacking. We could have an option in locator:
+  "apply archetype postfix" supplied as an argument. Since we have the
+  Visual Studio element we have visibility of all enabled versions.
+
+*** Introduce dogen projects                                          :story:
+
+At present we are manually configuring each dogen target, adding each
+separately to the build system. Perhaps a better approach is to have a
+dogen project file where one can configure all of the targets in one
+go. We don’t necessarily have to call dogen directly – perhaps another
+command line tool is responsible for invoking dogen? The problem here
+is that we’d end up with all dogen models in memory.
+
+At any rate, the project file would contain all models for a given
+product. We could possibly run with “all” or “specific” whereby the
+user would supply one or more projects to code generate. For all
+properties that are common, we’d defined them only once somehow
+(common regexes, log level, etc).
+
+*** Split out the file extension from the formatter                   :story:
+
+At present we have handled file extensions in one of two ways:
+
+- we baked them in into locator, dynamically: this is the case for
+  =hpp= and =cpp=, where locator is responsible for retrieving the
+  meta-data related to extensions.
+- we hacked them in into locator, statically: this is the case for
+  CMakeLists, where the =txt= is hard-coded in.
+- we hacked them in into the elements: this is the case for Visual
+  Studio solutions and projects.
+
+In reality, what we need is to create a separation between the
+archetype, the extension "kind" and the actual extension. All
+archetypes have a fixed "extension kind". For example, C++ headers
+will always have a C++ header extension even though the actual header
+extension used is not known. In other cases the extension kind has a
+fixed extension (CMakeLists, Visual Studio projects, solutions). At
+present this mapping is done via the multiple functions locator
+supplies.
+
+We could conceivably have an enumeration for extension kind and then
+have a single function for full paths, that just takes in the
+extension kind, archetype etc. This would replace the proliferation of
+"full path for XYZ".
+
+We also have the concept of inclusion paths. We should generalise this
+to just "relative paths" and have a "add project directory?" flag.
+
 *** Add a top-level "Visual Studio" knob                              :story:
 
 We have a number of features that only make sense when on Windows and
@@ -401,183 +547,6 @@ Links:
 
 - [[https://msdn.microsoft.com/en-us/library/2208a1f2.aspx][Project Files]]
 
-*** Add support for "project capitalisation"                          :story:
-
-It would be nice if facets, classes etc which are at present in lower
-case could be camel cased if the user chooses.
-
-At present we need to override all facet directories, include
-directories, etc.
-
-*** Generate Redis get/set code                                       :story:
-
-In theory, there is nothing stopping us from having a Redis facet that
-takes in as an input the serialisation method. For now we just need to
-support boost serialisation. The interface could be configurable so
-that users can choose the archive type. Types could be marked as
-=cacheable= and then suitable parameters supplied such as the
-serialisation mechanism.
-
-As with hashing, we do not want to generate code for all objects; only
-for those the user marks as cacheable.
-
-The interface should support two main methods:
-
-- get
-- set
-
-Both receive an instance of Redis. We could implement it in C to avoid
-additional dependencies.
-
-However, it should also be possible to use say =memcached= as the
-cache rather than redis. We need to create a layer of indirection
-between the generic caching (meta-model concept) and the actual
-caching (platform, implementation layer). In fact we can leave this
-for later and for now only worry about redis. =cacheable= will then be
-built on top of the existing facets.
-
-What we do need though is the ability to configure the meta-model to
-link the serialisation type to the cache type. Say for example we
-support BSON and JSON and boost serialisation. We may want the cache
-facet to support one or more or all of these. We can think of these as
-aspects that are enabled by the user at the model level (but possibly
-overridable at the element level).
-
-*** Primitives are not comparable                                     :story:
-
-Our wrapping code around primitives means we can no longer perform
-arithmetic operations on them or comparisons. This may be what is
-intended (e.g. adding or multiplying =customer_id= does not make
-sense) but it also means we can't delete ranges from the database for
-example. It would be nice if there was some meta-data we could add to
-primitives to make this possible:
-
-- =comparable=
-- etc
-
-With this we would generate the appropriate operators by delegating to
-the underlying type.
-
-We probably need some way of knowing if the underlying type supports
-comparisons. A meta-data flag used to annotate proxy models would be
-sufficient.
-
-*** Build on tags for Windows                                         :story:
-
-At present we are not building and deploying for tags on Windows. This
-is a major pain because it means we must remember to always push the
-tag separately. We need to setup appveyor correctly.
-
-Links:
-
-- [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
-
-*** Handling of visual studio projects and solutions is incorrect     :story:
-
-At present we added the extension of the solution/project to the
-element name, e.g.:
-
-: all_path_and_directory_settings.csproj
-
-This happens to work for the simpler cases, but if we try to add a
-postfix we then have a problem:
-
-: dogen.test_models.all_path_and_directory_settings.csproj_vc15_
-
-Projects and solutions do not seem to fit our conceptual model for the
-element space. We need to somehow have distinct element IDs but yet
-not associate the extension with the name directly. Up to now we never
-had two distinct elements with the exact same name but generating two
-different artefacts with different extensions.
-
-This is a problem because we will need to have the ability to generate
-multiple project files for different versions of visual studio.
-
-For now we removed the project and solution postfixes:
-
-: #DOGEN quilt.csharp.visual_studio.solution.postfix=_vs15_
-: #DOGEN quilt.csharp.visual_studio.project.postfix=_vc15_
-
-In order to fit our conceptual model, we need to make some adjustments
-to our implementation of projects and solutions. First, there is only
-one meta-model element for *both* projects and solutions. This is
-derived from the fact that they both share a common name. The
-conceptual model does not involve file extensions - or file paths for
-that matter; archetypes exist only in archetype space, and their
-"paths" in this space are only related to the facets they belong
-to. The physical location is a property of files, which are
-expressions of archetypes in "file space". Thus, there is only one
-single element, provisionally called "visual studio", which has
-multiple archetypes (and their associated formatters):
-
-- solution
-- project
-
-Second, a solution and project may be instantiated multiple times,
-depending on the version of visual studio and the associated
-compiler. Externally users supply a visual studio version and that
-internally will map to different instances of the formatters. We must
-instantiate the formatters for each supported version because we may
-need to create multiple versions simultaneously: his is the use case
-where users want to generate projects and solutions for multiple
-versions of VS at the same time.
-
-THe good news is that we already have something similar: master
-includes. We can adapt a lot of the logic we have for master
-includes. There are some differences though:
-
-- we will have multiple instances on the same facet.
-- we need some external mechanism to determine if a given version is
-  enabled. We could force users to enter the "enabled" property for
-  each version in the meta-data, but that would get really messy since
-  there are only a few valid combinations of solution and project
-  version. Its better if users supply the Visual Studio versions and
-  we infer the solution and projects to enable. But we do not have a
-  mechanism for this at present. We could add a "is enabled" to
-  formatters like we did for helpers, supplying the element; we would
-  then check the Visual Studio version in the element and return false
-  if it didn't match the formatters version. Or we could change the
-  formatter's interface to return optional artefact. Whilst this is a
-  bit more painful - we'd have to change all formatters - it fits the
-  code structure slightly better.
-- we need to have different file names depending on the
-  version. Worse: if there is just a single version we do not need to
-  have a "version prefix". If there are multiple versions we need to
-  add the prefix. The fist use case is easy: we already have archetype
-  prefixes; we just need to add a prefix for each version. The second
-  part requires some hacking. We could have an option in locator:
-  "apply archetype postfix" supplied as an argument. Since we have the
-  Visual Studio element we have visibility of all enabled versions.
-
-*** Split out the file extension from the formatter                   :story:
-
-At present we have handled file extensions in one of two ways:
-
-- we baked them in into locator, dynamically: this is the case for
-  =hpp= and =cpp=, where locator is responsible for retrieving the
-  meta-data related to extensions.
-- we hacked them in into locator, statically: this is the case for
-  CMakeLists, where the =txt= is hard-coded in.
-- we hacked them in into the elements: this is the case for Visual
-  Studio solutions and projects.
-
-In reality, what we need is to create a separation between the
-archetype, the extension "kind" and the actual extension. All
-archetypes have a fixed "extension kind". For example, C++ headers
-will always have a C++ header extension even though the actual header
-extension used is not known. In other cases the extension kind has a
-fixed extension (CMakeLists, Visual Studio projects, solutions). At
-present this mapping is done via the multiple functions locator
-supplies.
-
-We could conceivably have an enumeration for extension kind and then
-have a single function for full paths, that just takes in the
-extension kind, archetype etc. This would replace the proliferation of
-"full path for XYZ".
-
-We also have the concept of inclusion paths. We should generalise this
-to just "relative paths" and have a "add project directory?" flag.
-
 *** Add support for exports on windows                                :story:
 
 We should add export macros for shared objects/DLLs for windows. We
@@ -646,29 +615,6 @@ include.
 We should have a quilt setting for pre-compilation. We should also
 check that visual studio support is enabled in order to generate
 =stdafx=.
-
-*** Code-generate a "one-shot" serialisation API                      :story:
-
-For the dia model we manually generated a class called
-=diagram_serialization_helper=. It provided a simple API to read/write
-the dia model:
-
-: static void to_xml(std::ostream& s, const diagram& d);
-: static diagram from_xml(std::istream& s);
-
-It would be nice to have this code-generated and also to cover the
-other two archives (text, binary).
-
-Users should be able to mark types with some property so that we know
-we need to generate these wrappers.
-
-Another common use case is to serialise from and to string. It would
-be nice to have helpers for strings too.
-
-These APIs can then be reused by the caching layer.
-
-We could have a stereotype that marks a class as requiring this kind
-of serialisation, such as "serialisation entry point".
 
 *** Spirit: Improve error reporting                                   :story:
 
@@ -833,63 +779,6 @@ associated with that class.
 
 Ideally we should also have a log initialisation class that uses those
 common options.
-
-*** Introduce dogen projects                                          :story:
-
-At present we are manually configuring each dogen target, adding each
-separately to the build system. Perhaps a better approach is to have a
-dogen project file where one can configure all of the targets in one
-go. We don’t necessarily have to call dogen directly – perhaps another
-command line tool is responsible for invoking dogen? The problem here
-is that we’d end up with all dogen models in memory.
-
-At any rate, the project file would contain all models for a given
-product. We could possibly run with “all” or “specific” whereby the
-user would supply one or more projects to code generate. For all
-properties that are common, we’d defined them only once somehow
-(common regexes, log level, etc).
-
-*** Add support for "one off" profiles                                :story:
-
-At present one can define top-level profiles. These are useful, but in
-practice we ended up still defining a lot of things in each model. We
-need a way to associate a profile with a model by supplying it on the
-command line. That way users can create profiles and store them next
-to the model rather than having to create a data directory, etc etc.
-
-Actually the problem is that profiles aren't really implemented
-correctly. First we should not call them profiles at all since they
-are not UML profiles and overloading the term just generates
-confusion. Second its important to understand how Dogen profiles come
-about:
-
-- we extend the UML meta-model via stereotypes to support all of the
-  required yarn and quilt concepts.
-- when we instantiate the yarn/quilt types via a UML model, we need to
-  supply the values for the attributes which have been extended. If
-  done properly this would happen via UML tagged values. Dia does not
-  support these. At any rate, at present we use Dogen meta-data which
-  is almost like tagged values.
-- Dogen profiles are then an attempt to create bundles of tagged
-  values with pre-populated values so that we do not need to manually
-  populate them for every type. Instead, we can associate a stereotype
-  with the type and then the system will automatically populate the
-  values from the bundle.
-- From all of this it follows that it should be possible to define
-  these "bundles" directly in a UML diagram. If we were to use UML
-  properly (or at least almost properly), we would define a class with
-  a stereotype of =stereotype=, a name of the stereotype we'd like to
-  define (say =Serializable=) and then its tagged values are the keys
-  and values of the meta-data we want to define. This is strictly
-  speaking not correct UML because we are stating we are augmenting
-  the UML meta-model (hence =stereotype=) but then we end up
-  instantiating a meta-model class with some predefined values. Its
-  not clear how to express this in UML. Note that we have exactly the
-  same issue with concepts.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
 *** Name all project paths according to a scheme                      :story:
 
@@ -1907,19 +1796,6 @@ Tasks:
   values to profiles.
 - make directory a recursive field at facet level,  adding default
   values to profiles.
-
-*** Add support for object caches                                      :epic:
-
-It would be good to have meta-model knowledge of "cacheability". This
-is done by marking objects with a stereotype of =Cacheable=. It then
-could translate to:
-
-- adding a serialisation like interface with gets, puts, etc. We need
-  to bind this to a specific cache such as memcache, coherence, etc.
-- create a type to string which converts a key made up of built-ins or
-  built-in into a underscore delimited string, used as a key in the
-  cache.
-- we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
 
 *** Add support for thrift and protocol buffers                        :epic:
 
@@ -3391,6 +3267,61 @@ The release will not be made unless these stories are closed, but we
 won't be addressing them in the near term. This release is all about
 getting the architecture right.
 
+*** Add support for "project capitalisation"                          :story:
+
+It would be nice if facets, classes etc which are at present in lower
+case could be camel cased if the user chooses.
+
+At present we need to override all facet directories, include
+directories, etc.
+
+*** Add support for object caches                                      :epic:
+
+It would be good to have meta-model knowledge of "cacheability". This
+is done by marking objects with a stereotype of =Cacheable=. It then
+could translate to:
+
+- adding a serialisation like interface with gets, puts, etc. We need
+  to bind this to a specific cache such as memcache, coherence, etc.
+- create a type to string which converts a key made up of built-ins or
+  built-in into a underscore delimited string, used as a key in the
+  cache.
+- we should also consider external libraries like [[https://github.com/cripplet/cachepp][cachepp]].
+
+*** Generate Redis get/set code                                       :story:
+
+In theory, there is nothing stopping us from having a Redis facet that
+takes in as an input the serialisation method. For now we just need to
+support boost serialisation. The interface could be configurable so
+that users can choose the archive type. Types could be marked as
+=cacheable= and then suitable parameters supplied such as the
+serialisation mechanism.
+
+As with hashing, we do not want to generate code for all objects; only
+for those the user marks as cacheable.
+
+The interface should support two main methods:
+
+- get
+- set
+
+Both receive an instance of Redis. We could implement it in C to avoid
+additional dependencies.
+
+However, it should also be possible to use say =memcached= as the
+cache rather than redis. We need to create a layer of indirection
+between the generic caching (meta-model concept) and the actual
+caching (platform, implementation layer). In fact we can leave this
+for later and for now only worry about redis. =cacheable= will then be
+built on top of the existing facets.
+
+What we do need though is the ability to configure the meta-model to
+link the serialisation type to the cache type. Say for example we
+support BSON and JSON and boost serialisation. We may want the cache
+facet to support one or more or all of these. We can think of these as
+aspects that are enabled by the user at the model level (but possibly
+overridable at the element level).
+
 *** Using =std::set<std::string>= causes compilation errors           :story:
 
 In theory sets of strings (and any other type that has =operator<=
@@ -3553,7 +3484,7 @@ example =$(facet_name)= could be made to mean the facet name. With
 just support for this we could probably handle all of the use cases
 except for =postfix=.
 
-*** Consider using the same API as boost property tree in selector :reviewing:story:
+*** Consider using the same API as boost property tree in selector    :story:
 
 At present we have the type of the value in the method names in the
 selector, e.g. =get_text_content=. It would be better to have a =get=
@@ -6771,7 +6702,7 @@ enumeration groups. Out of the box we have:
 Users could then add implementation specific properties to create
 other groups if needed.
 
-*** Add support for user supplied test data sets            :reviewing:story:
+*** Add support for user supplied test data sets                      :story:
 
 #+begin_quote
 *Story*: As a dogen user, I want to make use of test data without
@@ -7079,6 +7010,74 @@ symmetric for both use cases.
 Stuff that is not directly related to the problem domain but its
 needed by Dogen.
 
+*** Build on tags for Windows                                         :story:
+
+At present we are not building and deploying for tags on Windows. This
+is a major pain because it means we must remember to always push the
+tag separately. We need to setup appveyor correctly.
+
+Links:
+
+- [[http://help.appveyor.com/discussions/problems/6209-build-is-not-triggered-for-tag][Build is not triggered for tag]]
+
+*** Add prefetch support to ODB                                       :story:
+
+As per Boris email:
+
+#+begin_quote
+Hm, I am not sure the bulk approach (with a compiler-time pragma) is
+right in this case. There we don't really have a choice since we need
+to know the "batch buffer" size.
+
+But here it is all runtime. Plus, you may want to have different
+prefetch for different queries of the same object. In fact, you
+can already customize it for queries (but not for object loads)
+by using prepared queries (Section 4.5 in the manual):
+
+1. Create prepared query.
+
+2. Get its statement (statement()).
+
+3. Cast it to odb::oracle::select_statement.
+
+4. Call handle() on the result to get OCIStmt*.
+
+5. Set custom OCI_ATTR_PREFETCH_ROWS.
+
+6. Execute the query.
+
+The problems with this approach are: (1) it is tedious and (2) it
+doesn't work for non-query SELECT's (e.g., database::load()). So
+perhaps the way to do it is:
+
+1. Provide prefetch() functions on oracle::database() and
+   oracle::connection() that can be used to modify database-wide
+   and connection-wide prefetch values. Also set it to some
+   reasonable default (say 512?)
+
+2. Provide oracle::select_statement::prefetch() to make the
+   prepared query approach less tedious.
+#+end_quote
+
+*** Add ODB to the build machine                                      :story:
+
+At present we are only compiling and running the ODB tests
+locally. Now that ODB is becoming a core dependency, we need to make
+sure we are running these tests on the build machines - Windows and
+Linux at least.
+
+However, at present we are already running out of time for the main
+build. If we simply add ODB to Linux we will not complete the build in
+the allocated slot. One way to achieve this is to have a build that
+does ODB only.
+
+We should also add oracle OCI to the dogen dependencies package so
+that we test oracle support as well as postgres. However, to run the
+tests we need some way to configure postgres to allow connections. It
+is also possible to install oracle by copying the DEB to dropbox and
+creating a simple installation script that sets up the users etc. We
+could make similar scripts for postgres and oracle. However, we need
+to convert the oracle schema into postgres.
 
 *** Build static and dynamic libraries                                :story:
 
@@ -7794,13 +7793,46 @@ breaks whenever one includes something which is not required.
 - [[http://mpd.jinr.ru/svn/mpdroot/trunk/cmake/modules/FindIWYU.cmake][FindIWYU.cmake]]
 - [[https://github.com/christophgysin/addp/blob/master/cmake/iwyu.cmake][iwyu.cmake]]
 
+build.linux:
+
+: cmake_defines="${cmake_defines} -DCMAKE_CXX_INCLUDE_WHAT_YOU_USE=/path/to/include-what-you-use/build/include-what-you-use"
+
+Patches:
+
+: diff --git a/CMakeLists.txt b/CMakeLists.txt
+: index 7489d14..863162f 100644
+: --- a/CMakeLists.txt
+: +++ b/CMakeLists.txt
+: @@ -161,7 +161,7 @@ target_link_libraries(include-what-you-use
+:    LLVMObject # BitReader, Core, Support
+:    LLVMBitReader # Core, Support
+:    LLVMCore # BinaryFormat, Support
+: - LLVMBinaryFormat # Support
+: - # LLVMBinaryFormat # Support
+:   LLVMSupport # Demangle
+:   LLVMDemangle
+:   )
+: diff --git a/iwyu_include_picker.cc b/iwyu_include_picker.cc
+: index 840057f..232a5c6 100644
+: --- a/iwyu_include_picker.cc
+: +++ b/iwyu_include_picker.cc
+: @@ -832,7 +832,7 @@ void MakeNodeTransitive(IncludePicker::IncludeMap* filename_map,
+:      // in /internal/.  We could CHECK-fail in such a case, but it's
+:      // probably better to just keep going.
+:      if (StartsWith(key, "\"third_party/") ||
+: -        key.find("internal/") != string::npos) {
+: +        key.find("boost/") != string::npos) {
+:        VERRS(4) << "Ignoring a cyclical mapping involving " << key << "\n";
+:        return;
+:      }
+
 *** Add support for Address Sanitizer (ASan)                          :story:
 
 This seems like another interest dynamic analysis tool:
 
 [[https://code.google.com/p/address-sanitizer/wiki/AddressSanitizer#Introduction][Address Sanitizer]]
 
-*** Add support for CPPCheck                                          :story:
+**** Add support for CPPCheck                                         :story:
 
 Seems like CPPCheck has a different take on dynamic analysis when
 compared to Valgrind. We should look into how hard it is to integrate
