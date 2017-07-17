@@ -519,7 +519,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      * Bucket the local types by element - i.e., we only care about
      * those formatters which are valid for a particular element.
      */
-    const auto albeti(ctx.archetype_locations_by_element_type_index());
+    const auto& albeti(ctx.archetype_locations_by_element_type_index());
     const auto ltgti(bucket_local_type_group_by_type_index(ltg, albeti));
 
     using namespace std::placeholders;
