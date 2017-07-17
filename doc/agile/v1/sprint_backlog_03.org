@@ -1,0 +1,361 @@
+#+title: Sprint Backlog 03
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Continue work on moving "generic" types from the quilt models into
+  yarn.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2017-07-17 Mon 20:37]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:06* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:06   |      |      | 100.0 |
+| Active                                                                      |        | 0:06 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:06 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** Edit release notes for previous sprint                            :story:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.01, "Academia de Pesca"
+
+#+begin_src markdown
+![Academia de Pesca](http://cdn1.portalangop.co.ao/angola/pt_pt/files/highlight/2015/10/45/0,6bd49eb1-adcc-40fd-93c8-257b4d4aae16.jpg)
+_Academia de Pesca, Namibe. (C) Angola Press._
+
+Overview
+=======
+
+This was an extremely quiet and long sprint, mainly focused on reading the literature on Model Driven Engineering.
+
+User visible changes
+===============
+In this sprint, a couple of minor user visible features were added:
+
+- **Emacs mode for stitch**: we now have syntax highlighting in emacs for stitch templates.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_01.org).
+
+Next Sprint
+===========
+In the next sprint we'll continue to work on cleaning up yarn's internals.
+
+Binaries
+======
+You can download experimental binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.01_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.01/dogen_1.0.01_amd64-applications.deb)
+- [dogen-1.0.01-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.01/dogen-1.0.01-Darwin-x86_64.dmg)
+- [dogen-1.0.01-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.01-Windows-AMD64.msi)
+
+**Note**: They are produced by CI so they may not yet be ready.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/881860977330880512][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6287627272706891776/][LinkedIn]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-17 Mon 20:31]--[2017-07-17 Mon 20:37] =>  0:06
+
+Updates to sprint and product backlog.
+
+*** Move enablement into yarn                                         :story:
+
+It seems that the concepts around enablement are actually not kernel
+specific but instead can be generalised at the meta-model level. We
+need to create adequate representations in yarn to handle facets,
+etc. We then need to move across the code that computes enablement
+into yarn so that all kernels can make use of it.
+
+Problems:
+
+- we are checking to see if the hash facet is enabled with c++ 98; if
+  so, we throw as this facet is incompatible. We cannot do this from
+  yarn since we do not know what c++ standards are.
+- because we do not have a mapping between a archetype location and
+  the meta-type, we will be enabling/disabling all archetype locations
+  across all meta-types.
+- because we do not have element segmentation, the element extensions
+  will be disabled. Actually this will probably work just the same,
+  given that all elements exist.
+- enablement must be done after external transformations so it picks
+  up fabric types.
+- we need to support formatting styles in order to be able to use the
+  artefact properties from the meta-model.
+- in quilt.cpp, someone did an upfront generation of all archetype
+  properties against the archetype locations. We not doing that in
+  yarn, so nothing is coming out. This was done during transformation
+  in formattables.
+- with a move into yarn, we seem to have broken the overwrite flag
+  logic; changes no longer result in new code being generated.
+- we also have borked the includes: dependency builder is looking into
+  the formattables instead of element. However, we then run into
+  segmentation issues because we cannot find forward declarations on
+  the main element.
+
+To do:
+
+- kernel registrar type index map - done.
+- c# formatter registrar type index map - done.
+- bug in template instantiating: artefact expansions do not seem to
+  take kernel into account - done.
+
+*Previous Understanding*
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
+
+*** Move formatting styles into yarn                                  :story:
+
+We need to support the formatting styles at the meta-model level.
+
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+*** Create a yarn locator                                             :story:
+
+We need to move all functionality which is not kernel specific into
+yarn for the locator. This will exist in the helpers namespace. We
+then need to implement the C++ locator as a composite of yarn
+locator. It will live in fabric.
+
+*** Add canonical archetype support to yarn                           :story:
+
+We need to create a class to contain all archetype location related
+properties and add it to context. We also need to add a new property
+which captures the canonical archetypes. We can now have the registrar
+own this new class, populate it all during registration and return it
+at the start, via the kernel API.
+
+*** Move dependencies into yarn                                       :story:
+
+Actually the dependencies will be generated at the kernel level
+because 99% of the code is kernel specific. However, we need to make
+it an external transform.
+
+Tasks:
+
+- create the locator in the C++ external transform
+- create a dependencies transform that uses the existing include
+  generation code.
+
+*Previous understanding*
+
+It seems all languages we support have some form of "dependencies":
+
+- in c++ these are the includes
+- in c# these are the usings
+- in java these are the imports
+
+So, it would make sense to move these into yarn. The process of
+obtaining the dependencies must still be done in a kernel dependent
+way because we need to build any language-specific structures that the
+dependencies builder requires. However, we can create an interface for
+the dependencies builder in yarn and implement it in each kernel. Each
+kernel must also supply a factory for the builders.
+
+*** Generate file paths as a transform                                :story:
+
+Add a fabric transform for file path generation.
+
+*** Create "opaque" kernel and element properties                     :story:
+
+As part of the element container, we can have a set of base classes
+that are empty: =opaque_element_properties=. This class is then
+specialised in each kernel with the properties that are specific to
+it. We probably need an equivalent for:
+
+- kernel level properties
+- element level properties
+- attribute level properties.
+
+We then have to do a lot of casting in the helpers.
+
+Once we got these opaque properties, we can then create "kernel
+specific expanders" which are passed in to the yarn workflow. These
+populate the opaque properties.
+
+*** Add support for inline namespaces                                 :story:
+
+Enable c++17. - windows requires cpp latest. Then fix inner namespaces
+(e.g. a::b::c).
+
+We still need to support the old syntax for pre c++-17.
+
+*** Move helpers into yarn                                            :story:
+
+Looking at helpers, it is clear that they are common to all
+languages. We just need to rename the terminology slightly -
+particularly wrt to streaming properties - and then move this code
+across into yarn.
+
+*** Move facet properties into yarn                                   :story:
+
+We should be able to handle these generically in yarn.
+
+*** Move ORM camel-case and databases into yarn                       :story:
+
+We should handle this property at the ORM level, rather than at the
+ODB level.
+
+Similarly, we should move the ODB databases into yarn and make that a
+ORM-level concept.
+
+*** Rename fabric and formattables                                    :story:
+
+In the long run, we should use proper names for these namespaces:
+
+- fabric is meta-model;
+- formattables houses transformations.
+
+*** Start documenting the theoretical aspects of Dogen                :story:
+
+Up to now we have more or less coded Dogen as we went along; we
+haven't really spent a lot of time worrying about the theory behind
+the work we were carrying out. However, as we reached v1.0, the theory
+took center stage. We cannot proceed to the next phase of the product
+without a firm grasp of the theory. This story is a starting point so
+we can decide on how to break up the work.
+
+*** Assorted problems to look at                                      :story:
+
+These need to be put into stories:
+
+- No flat mode: we need to be able to generate no folders at all.
+- Registrar coming out even when there is no inheritance.
+- No setting to add include for precompiled headers: stdafx.h
+- No vcxproj for c++ and no way to add code-generated files. Ideally
+  one should be able to include a code-generated file into project
+  with list of items
+- sort out traits.
+
+*** Add support for proper JSON serialisation in C++                  :story:
+
+We need to add support for JSON in C++. It will eventually have to
+roundtrip to JSON in C# but that will be handled as two separate
+stories.
+
+Libraries:
+
+- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+- One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should provide support for JSON with
+roundtripping tests.
+
+We will not replace the current IO implementation; it should continue
+to exist as is, requiring no external dependencies.
+
+We should consider supporting multiple JSON libraries: instead of
+making the mistake we did with serialisation where we bound the name
+=serialization= with boost serialisation, we should call it by its
+real name, e.g. =json_spirit= etc. Then when a user creates a
+stereotype for a profile such as =Serializable= it can choose which
+serialisation codecs to enable for which language. This means that the
+same stereotypes can have different meanings in different
+architectures, which is the desired behaviour.
+
+We should create a serialise / deserialise functions following the
+same logic as boost:
+
+#+begin_src c++
+void serialize(Value& v, const object& o);
+void serialize(Value& v, const base& b);
+
+void deserialize(const Value& v, object& o);
+base* deserialize(const Value& v);
+#+end_src
+
+Or perhaps even better, we can make the above the internal methods and
+use =operator<<= and =operator>>= as the external methods:
+
+#+begin_src c++
+void operator<<(Value& v, const object& o);
+void operator>>(const Value& v, object& o);
+#+end_src
+
+Notes:
+
+- create a registrar with a map for each base type. The function
+  returns a base type pointer.
+- when you deserialize a base type pointer, you call the pointer
+  deserialize above. Same for when you have a pointer to an object. It
+  will internally call the registrar (if its a base type) and get the
+  right function.
+- this means we only need to look at type for inheritance. Although we
+  should probably always do it for validation? However, what happens
+  if we want to make a model so we can read external JSON? It won't
+  contain type markings.
+- =operator>>= will not be defined for pointers or base classes.
+- this wont work for the case of =doc << base=. For this we need a map
+  that looks up on type_index.
+
+Merged stories:
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+*Add support for JSON serialisation*
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+** Deprecated
