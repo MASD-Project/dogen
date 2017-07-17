@@ -96,7 +96,7 @@ one should give you an idea of its workflow.
 
 [![Alt text](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
 
-## Problems
+# Reporting Problems
 
 If you have a failure building Dogen or running its unit tests, please
 submit a bug report that includes:
