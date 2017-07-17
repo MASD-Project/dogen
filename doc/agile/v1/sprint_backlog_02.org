@@ -14,7 +14,7 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-16 Sun 16:49]
+#+CAPTION: Clock summary at [2017-07-17 Mon 20:33]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
@@ -23,7 +23,7 @@
 | Stories                                                                     | 46:51   |       |      | 100.0 |
 | Active                                                                      |         | 46:51 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:24 |   0.9 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:20 |   2.8 |
+| COMPLETED Sprint and product backlog grooming                               |         |       | 1:20 |   2.8 |
 | COMPLETED Implement the context class                                       |         |       | 1:12 |   2.6 |
 | COMPLETED Implement the exogenous transformation chain                      |         |       | 4:11 |   8.9 |
 | COMPLETED Implement the pre-processing chain                                |         |       | 1:35 |   3.4 |
@@ -49,7 +49,7 @@
 | COMPLETED Fix options test break on windows                                 |         |       | 0:10 |   0.4 |
 | COMPLETED Investigate why gcc builds are slower than clang                  |         |       | 1:03 |   2.2 |
 | COMPLETED Create a transformation that expands artefact properties          |         |       | 0:45 |   1.6 |
-| STARTED Move enablement into yarn                                           |         |       | 6:59 |  14.9 |
+| POSTPONED Move enablement into yarn                                         |         |       | 6:59 |  14.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -98,7 +98,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://twitter.com/MarcoCraveiro/status/881860977330880512][Tweet]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6287627272706891776/][LinkedIn]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2017-07-17 Mon 20:32]
     CLOCK: [2017-07-16 Sun 00:29]--[2017-07-16 Sun 00:42] =>  0:13
     CLOCK: [2017-07-14 Fri 12:04]--[2017-07-14 Fri 12:23] =>  0:19
     CLOCK: [2017-07-08 Sat 17:16]--[2017-07-08 Sat 17:19] =>  0:03
@@ -623,7 +624,8 @@ Before we can start populating the artefact properties we need to set
 them up. This was done in formattables in the transformer. We now need
 a transformation in yarn for this.
 
-*** STARTED Move enablement into yarn                                 :story:
+*** POSTPONED Move enablement into yarn                               :story:
+    CLOSED: [2017-07-17 Mon 20:32]
     CLOCK: [2017-07-16 Sun 16:46]--[2017-07-16 Sun 16:49] =>  0:03
     CLOCK: [2017-07-16 Sun 16:38]--[2017-07-16 Sun 16:45] =>  0:06
     CLOCK: [2017-07-16 Sun 16:30]--[2017-07-16 Sun 16:37] =>  0:07
@@ -697,197 +699,6 @@ We need to make use of the exact same logic as implemented in
 =quilt.cpp= for enablement. Perhaps all of the enablement related
 functionality can be lifted and grafted onto quilt without any major
 changes.
-
-*** Move formatting styles into yarn                                  :story:
-
-We need to support the formatting styles at the meta-model level.
-
-*** Move element segmentation into yarn                               :story:
-
-We've added the notion that an element can be composed of other
-elements in quilt, in order to handle forward declarations. However,
-with a little bit of effort we can generalise it into yarn. It would
-be useful for other things such as inner classes. We don't need to
-actually implement inner classes right now but we should make sure the
-moving of this feature into yarn is compatible with it.
-
-Notes:
-
-- seems like we have two use cases: a) we need all elements, master
-  and extensions and we don't really care about which is which. b) we
-  only want masters. However, we must be able to access the same
-  element properties from either the master or the extension. Having
-  said all that, it seems we don't really need all of the element
-  properties for both - forward declarations probably only need:
-  decoration and artefact properties.
-- we don't seem to use the map in formattables model anywhere, other
-  than to find master/extension elements.
-- Yarn model could have two simple list containers (masters and
-  all). Or maybe we don't even need this to start off with, we can
-  just iterate and skip extensions where required.
-- so in conclusion, we to move decoration, enablement and dependencies
-  into yarn (basically decoration and artefact properties) first and
-  then see where segmentation ends.
-
-*** Move dependencies into yarn                                       :story:
-
-It seems all languages we support have some form of "dependencies":
-
-- in c++ these are the includes
-- in c# these are the usings
-- in java these are the imports
-
-So, it would make sense to move these into yarn. The process of
-obtaining the dependencies must still be done in a kernel dependent
-way because we need to build any language-specific structures that the
-dependencies builder requires. However, we can create an interface for
-the dependencies builder in yarn and implement it in each kernel. Each
-kernel must also supply a factory for the builders.
-
-*** Move helpers into yarn                                            :story:
-
-Looking at helpers, it is clear that they are common to all
-languages. We just need to rename the terminology slightly -
-particularly wrt to streaming properties - and then move this code
-across into yarn.
-
-*** Move facet properties into yarn                                   :story:
-
-We should be able to handle these generically in yarn.
-
-*** Move ORM camel-case and databases into yarn                       :story:
-
-We should handle this property at the ORM level, rather than at the
-ODB level.
-
-Similarly, we should move the ODB databases into yarn and make that a
-ORM-level concept.
-
-*** Rename fabric and formattables                                    :story:
-
-In the long run, we should use proper names for these namespaces:
-
-- fabric is meta-model;
-- formattables houses transformations.
-
-*** Start documenting the theoretical aspects of Dogen                :story:
-
-Up to now we have more or less coded Dogen as we went along; we
-haven't really spent a lot of time worrying about the theory behind
-the work we were carrying out. However, as we reached v1.0, the theory
-took center stage. We cannot proceed to the next phase of the product
-without a firm grasp of the theory. This story is a starting point so
-we can decide on how to break up the work.
-
-*** Assorted problems to look at                                      :story:
-
-These need to be put into stories:
-
-- No flat mode: we need to be able to generate no folders at all.
-- Registrar coming out even when there is no inheritance.
-- No setting to add include for precompiled headers: stdafx.h
-- No vcxproj for c++ and no way to add code-generated files. Ideally
-  one should be able to include a code-generated file into project
-  with list of items
-- sort out traits.
-
-*** Add support for proper JSON serialisation in C++                  :story:
-
-We need to add support for JSON in C++. It will eventually have to
-roundtrip to JSON in C# but that will be handled as two separate
-stories.
-
-Libraries:
-
-- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
-- One interesting library is [[https://github.com/dropbox/json11][Json11]].
-
-When we implement this we should provide support for JSON with
-roundtripping tests.
-
-We will not replace the current IO implementation; it should continue
-to exist as is, requiring no external dependencies.
-
-We should consider supporting multiple JSON libraries: instead of
-making the mistake we did with serialisation where we bound the name
-=serialization= with boost serialisation, we should call it by its
-real name, e.g. =json_spirit= etc. Then when a user creates a
-stereotype for a profile such as =Serializable= it can choose which
-serialisation codecs to enable for which language. This means that the
-same stereotypes can have different meanings in different
-architectures, which is the desired behaviour.
-
-We should create a serialise / deserialise functions following the
-same logic as boost:
-
-#+begin_src c++
-void serialize(Value& v, const object& o);
-void serialize(Value& v, const base& b);
-
-void deserialize(const Value& v, object& o);
-base* deserialize(const Value& v);
-#+end_src
-
-Or perhaps even better, we can make the above the internal methods and
-use =operator<<= and =operator>>= as the external methods:
-
-#+begin_src c++
-void operator<<(Value& v, const object& o);
-void operator>>(const Value& v, object& o);
-#+end_src
-
-Notes:
-
-- create a registrar with a map for each base type. The function
-  returns a base type pointer.
-- when you deserialize a base type pointer, you call the pointer
-  deserialize above. Same for when you have a pointer to an object. It
-  will internally call the registrar (if its a base type) and get the
-  right function.
-- this means we only need to look at type for inheritance. Although we
-  should probably always do it for validation? However, what happens
-  if we want to make a model so we can read external JSON? It won't
-  contain type markings.
-- =operator>>= will not be defined for pointers or base classes.
-- this wont work for the case of =doc << base=. For this we need a map
-  that looks up on type_index.
-
-Merged stories:
-
-For the previous attempt to integrate RapidJson see this commit:
-
-b2cce41 * third party: remove includes and rapid json
-
-*Add support for JSON serialisation*
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
-
-*** Use the in-memory interface of LibXml                             :story:
-
-At present, our C++ wrappers on top of LibXml are using the file based
-interface. We should do in-memory processing of the XML file. Once
-this is in place, we can change the exogenous transformers to use
-strings rather than paths to files.
-
-*** Initialisation of meta-data                                       :story:
-
-At present we are reading meta-data files for every transformation. In
-reality, it makes no sense to allow the meta-data files to change
-dynamically, because the consumers of the meta-data are hard-coded. So
-it would make more sense to treat them as a initialisation step. This
-will make even more sense when we code-generate the types instead of
-using JSON. Then we can hook up the generated code to the
-initialisers.
 
 ** Deprecated
 *** CANCELLED Add description to profile and value templates          :story:
