@@ -60,7 +60,10 @@ set(Boost_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_USE_STATIC_RUNTIME ON)
 set(BOOST_ALL_DYN_LINK OFF)
-find_package(Boost 1.59 REQUIRED COMPONENTS
+
+# Note: it is possible to build with older versions of boost, but
+# these require patches.
+find_package(Boost 1.62 REQUIRED COMPONENTS
     system
     chrono
     serialization
