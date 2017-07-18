@@ -56,6 +56,7 @@ public:
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
+        const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::yarn::meta_model::element_properties& element_properties,
         const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& inclusion_by_facet);

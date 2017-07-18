@@ -95,8 +95,9 @@ populate(const unsigned int position, result_type& v) {
     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
     v.in_global_module(create_bool(position + 5));
     v.stereotypes(create_std_vector_std_string(position + 6));
-    v.is_element_extension(create_bool(position + 7));
-    v.element_properties(create_dogen_yarn_meta_model_element_properties(position + 8));
+    v.meta_name(create_dogen_yarn_meta_model_name(position + 7));
+    v.is_element_extension(create_bool(position + 8));
+    v.element_properties(create_dogen_yarn_meta_model_element_properties(position + 9));
 }
 
 element_generator::result_type*

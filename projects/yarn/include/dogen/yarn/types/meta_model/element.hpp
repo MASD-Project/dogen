@@ -69,6 +69,7 @@ public:
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
         const std::vector<std::string>& stereotypes,
+        const dogen::yarn::meta_model::name& meta_name,
         const bool is_element_extension,
         const dogen::yarn::meta_model::element_properties& element_properties);
 
@@ -155,6 +156,16 @@ public:
     void stereotypes(const std::vector<std::string>&& v);
 
     /**
+     * @brief Name of the element in the meta-model that this instance conforms to.
+     */
+    /**@{*/
+    const dogen::yarn::meta_model::name& meta_name() const;
+    dogen::yarn::meta_model::name& meta_name();
+    void meta_name(const dogen::yarn::meta_model::name& v);
+    void meta_name(const dogen::yarn::meta_model::name&& v);
+    /**@}*/
+
+    /**
      * @brief If true, this element extends another element with the same id.
      */
     /**@{*/
@@ -183,6 +194,7 @@ private:
     boost::optional<dogen::yarn::meta_model::name> contained_by_;
     bool in_global_module_;
     std::vector<std::string> stereotypes_;
+    dogen::yarn::meta_model::name meta_name_;
     bool is_element_extension_;
     dogen::yarn::meta_model::element_properties element_properties_;
 };

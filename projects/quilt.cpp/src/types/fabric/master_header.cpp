@@ -96,6 +96,7 @@ master_header::master_header(
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
+    const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::yarn::meta_model::element_properties& element_properties,
     const std::unordered_map<std::string, std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > >& inclusion_by_facet)
@@ -107,6 +108,7 @@ master_header::master_header(
       contained_by,
       in_global_module,
       stereotypes,
+      meta_name,
       is_element_extension,
       element_properties),
       inclusion_by_facet_(inclusion_by_facet) { }

@@ -105,6 +105,30 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</stereotypes>
+					<meta_name>
+						<id></id>
+						<simple></simple>
+						<qualified>
+							<count>0</count>
+							<item_version>0</item_version>
+						</qualified>
+						<location>
+							<external_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</external_modules>
+							<model_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</model_modules>
+							<internal_modules>
+								<count>0</count>
+								<item_version>0</item_version>
+							</internal_modules>
+							<element></element>
+						</location>
+						<identifiable></identifiable>
+					</meta_name>
 					<is_element_extension>0</is_element_extension>
 					<element_properties class_id="28" tracking_level="0" version="0">
 						<decoration_properties class_id="29" tracking_level="0" version="0">
@@ -220,6 +244,30 @@
 				<count>0</count>
 				<item_version>0</item_version>
 			</stereotypes>
+			<meta_name>
+				<id></id>
+				<simple></simple>
+				<qualified>
+					<count>0</count>
+					<item_version>0</item_version>
+				</qualified>
+				<location>
+					<external_modules>
+						<count>0</count>
+						<item_version>0</item_version>
+					</external_modules>
+					<model_modules>
+						<count>0</count>
+						<item_version>0</item_version>
+					</model_modules>
+					<internal_modules>
+						<count>0</count>
+						<item_version>0</item_version>
+					</internal_modules>
+					<element></element>
+				</location>
+				<identifiable></identifiable>
+			</meta_name>
 			<is_element_extension>0</is_element_extension>
 			<element_properties>
 				<decoration_properties>

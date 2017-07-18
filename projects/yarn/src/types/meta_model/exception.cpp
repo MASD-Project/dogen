@@ -35,6 +35,7 @@ exception::exception(
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
     const std::vector<std::string>& stereotypes,
+    const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::yarn::meta_model::element_properties& element_properties)
     : dogen::yarn::meta_model::element(
@@ -45,6 +46,7 @@ exception::exception(
       contained_by,
       in_global_module,
       stereotypes,
+      meta_name,
       is_element_extension,
       element_properties) { }
 
