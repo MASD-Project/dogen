@@ -493,7 +493,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
 
     const auto& atrp(ctx.type_repository());
     const auto& ra(im.root_module().annotation());
-    const auto& als(ctx.archetype_locations());
+    const auto& als(ctx.archetype_location_repository().archetype_locations());
 
     /*
      * Obtain the types at the global level. These are types that only

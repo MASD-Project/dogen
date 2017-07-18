@@ -27,7 +27,6 @@ namespace transforms {
 context::context(
         const std::vector<boost::filesystem::path>& data_directories,
         const options::knitting_options& options,
-        const std::list<annotations::archetype_location>& als,
         const std::unordered_map<
         std::type_index, std::list<annotations::archetype_location>>&
         als_by_type,
@@ -36,10 +35,10 @@ context::context(
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp) :
     data_directories_(data_directories), options_(options),
-    archetype_locations_(als),
     archetype_locations_by_element_type_index_(als_by_type),
-    location_repository_(alrp), type_repository_(atrp),
-    groups_factory_(data_directories, location_repository_, type_repository_),
+    archetype_location_repository_(alrp), type_repository_(atrp),
+    groups_factory_(data_directories, archetype_location_repository_,
+        type_repository_),
     mapping_repository_(msrp), formatters_repository_(frp) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
@@ -50,9 +49,9 @@ const options::knitting_options& context::options() const {
     return options_;
 }
 
-const std::list<annotations::archetype_location>&
-context::archetype_locations() const {
-    return archetype_locations_;
+const annotations::archetype_location_repository&
+context::archetype_location_repository() const {
+    return archetype_location_repository_;
 }
 
 const std::unordered_map<std::type_index,

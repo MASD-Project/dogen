@@ -46,10 +46,9 @@ context context_factory::make(const options::knitting_options& o) {
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 
-    const auto& rg = code_generation_chain::registrar();
-    const auto& als(rg.archetype_locations());
     annotations::archetype_location_repository_factory alrpf;
-    const auto alrp(alrpf.make(als));
+    const auto& rg = code_generation_chain::registrar();
+    const auto alrp(alrpf.make(rg.archetype_locations()));
 
     helpers::mapping_set_repository_factory msrpf;
     const auto msrp(msrpf.make(data_dirs));
@@ -60,7 +59,7 @@ context context_factory::make(const options::knitting_options& o) {
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
     const auto& albeti(rg.archetype_locations_by_element_type_index());
-    const context r(data_dirs, o, als, albeti, alrp, atrp, msrp, frp);
+    const context r(data_dirs, o, albeti, alrp, atrp, msrp, frp);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

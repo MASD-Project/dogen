@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include <vector>
 #include <typeindex>
 #include <boost/filesystem/path.hpp>
@@ -57,7 +58,6 @@ public:
     context(
         const std::vector<boost::filesystem::path>& data_directories,
         const options::knitting_options& options,
-        const std::list<annotations::archetype_location>& als,
         const std::unordered_map<
         std::type_index, std::list<annotations::archetype_location>>&
         als_by_type,
@@ -81,8 +81,8 @@ public:
     /**
      * @brief All of the available archetype locations.
      */
-    const std::list<annotations::archetype_location>&
-    archetype_locations() const;
+    const annotations::archetype_location_repository&
+    archetype_location_repository() const;
 
     /**
      * @brief Returns the archetype locations for each element type
@@ -117,11 +117,11 @@ public:
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const dogen::options::knitting_options options_;
-    const std::list<annotations::archetype_location>& archetype_locations_;
     const std::unordered_map<std::type_index,
                              std::list<annotations::archetype_location>>&
     archetype_locations_by_element_type_index_;
-    const annotations::archetype_location_repository location_repository_;
+    const annotations::archetype_location_repository
+    archetype_location_repository_;
     const annotations::type_repository type_repository_;
     const annotations::annotation_groups_factory groups_factory_;
     const helpers::mapping_set_repository mapping_repository_;
