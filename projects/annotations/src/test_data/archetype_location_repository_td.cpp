@@ -29,8 +29,8 @@ create_dogen_annotations_archetype_location(const unsigned int position) {
     return dogen::annotations::archetype_location_generator::create(position);
 }
 
-std::vector<dogen::annotations::archetype_location> create_std_vector_dogen_annotations_archetype_location(unsigned int position) {
-    std::vector<dogen::annotations::archetype_location> r;
+std::list<dogen::annotations::archetype_location> create_std_list_dogen_annotations_archetype_location(unsigned int position) {
+    std::list<dogen::annotations::archetype_location> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_annotations_archetype_location(position + i));
     }
@@ -68,7 +68,7 @@ archetype_location_repository_generator::archetype_location_repository_generator
 
 void archetype_location_repository_generator::
 populate(const unsigned int position, result_type& v) {
-    v.archetype_locations(create_std_vector_dogen_annotations_archetype_location(position + 0));
+    v.archetype_locations(create_std_list_dogen_annotations_archetype_location(position + 0));
     v.facet_names_by_kernel_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
     v.formatter_names_by_kernel_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
 }

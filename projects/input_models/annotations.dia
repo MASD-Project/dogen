@@ -2445,7 +2445,7 @@ content of entries.#</dia:string>
         <dia:point val="129.995,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="129.245,-110.75;143.832,-106.2"/>
+        <dia:rectangle val="129.245,-110.8;143.832,-106.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8400,7 +8400,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="120.295,-63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="119.545,-67.75;153.2,-62.2"/>
+        <dia:rectangle val="119.545,-67.8;153.2,-62.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9359,7 +9359,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="-10,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-25.1425,-100.75;-9.25,-95.2"/>
+        <dia:rectangle val="-25.1425,-100.8;-9.25,-95.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9430,7 +9430,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="79.95,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="5.465,-110.75;80.7,-95.2"/>
+        <dia:rectangle val="5.465,-110.8;80.7,-95.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10101,13 +10101,13 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O72">
       <dia:attribute name="obj_pos">
-        <dia:point val="10,-95"/>
+        <dia:point val="10,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-95.05;47.895,-90.55"/>
+        <dia:rectangle val="9.95,-96.05;47.895,-91.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="10,-95"/>
+        <dia:point val="10,-96"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="37.844999999999999"/>
@@ -10208,7 +10208,7 @@ The starting point of the recursion is the level supplied by an archetype locati
             <dia:string>#archetype_locations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::vector&lt;archetype_location&gt;#</dia:string>
+            <dia:string>#std::list&lt;archetype_location&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -10689,16 +10689,16 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="47.845,-90.6"/>
+        <dia:point val="47.845,-91.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="40.6275,-91.35;48.595,-79.2"/>
+        <dia:rectangle val="40.6275,-92.35;48.595,-79.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="47.845,-90.6"/>
+        <dia:point val="47.845,-91.6"/>
         <dia:point val="47.845,-85"/>
         <dia:point val="40.6775,-85"/>
         <dia:point val="40.6775,-80"/>
@@ -10763,7 +10763,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="19.375,-80"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-90.65;20.125,-79.2"/>
+        <dia:rectangle val="9.95,-91.65;20.125,-79.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10772,7 +10772,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="19.375,-80"/>
         <dia:point val="19.375,-85"/>
         <dia:point val="10,-85"/>
-        <dia:point val="10,-90.6"/>
+        <dia:point val="10,-91.6"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10834,7 +10834,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="42.9175,-103.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="28.8725,-104.15;43.6675,-94.2"/>
+        <dia:rectangle val="28.8725,-104.15;43.6675,-95.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -10843,7 +10843,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="42.9175,-103.4"/>
         <dia:point val="42.9175,-100"/>
         <dia:point val="28.9225,-100"/>
-        <dia:point val="28.9225,-95"/>
+        <dia:point val="28.9225,-96"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10905,7 +10905,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="-10,-77.3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-17.085,-79.65;-9.25,-76.45"/>
+        <dia:rectangle val="-17.085,-79.7;-9.25,-76.5"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11408,7 +11408,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="85.145,-59.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="84.395,-61.85;94.05,-59.05"/>
+        <dia:rectangle val="84.395,-61.9;94.05,-59.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

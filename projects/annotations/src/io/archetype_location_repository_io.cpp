@@ -25,7 +25,7 @@
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::vector<dogen::annotations::archetype_location>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::annotations::archetype_location>& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

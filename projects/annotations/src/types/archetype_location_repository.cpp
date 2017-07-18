@@ -24,7 +24,7 @@ namespace dogen {
 namespace annotations {
 
 archetype_location_repository::archetype_location_repository(
-    const std::vector<dogen::annotations::archetype_location>& archetype_locations,
+    const std::list<dogen::annotations::archetype_location>& archetype_locations,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_kernel_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name)
     : archetype_locations_(archetype_locations),
@@ -50,19 +50,19 @@ archetype_location_repository& archetype_location_repository::operator=(archetyp
     return *this;
 }
 
-const std::vector<dogen::annotations::archetype_location>& archetype_location_repository::archetype_locations() const {
+const std::list<dogen::annotations::archetype_location>& archetype_location_repository::archetype_locations() const {
     return archetype_locations_;
 }
 
-std::vector<dogen::annotations::archetype_location>& archetype_location_repository::archetype_locations() {
+std::list<dogen::annotations::archetype_location>& archetype_location_repository::archetype_locations() {
     return archetype_locations_;
 }
 
-void archetype_location_repository::archetype_locations(const std::vector<dogen::annotations::archetype_location>& v) {
+void archetype_location_repository::archetype_locations(const std::list<dogen::annotations::archetype_location>& v) {
     archetype_locations_ = v;
 }
 
-void archetype_location_repository::archetype_locations(const std::vector<dogen::annotations::archetype_location>&& v) {
+void archetype_location_repository::archetype_locations(const std::list<dogen::annotations::archetype_location>&& v) {
     archetype_locations_ = std::move(v);
 }
 

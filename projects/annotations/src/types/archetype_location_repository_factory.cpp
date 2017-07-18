@@ -63,14 +63,6 @@ validate(const std::list<archetype_location>& als) const {
 }
 
 void archetype_location_repository_factory::
-populate_archetype_locations(const std::list<archetype_location>& als,
-    archetype_location_repository& rp) const {
-    rp.archetype_locations().reserve(als.size());
-    for (const auto& al : als)
-        rp.archetype_locations().push_back(al);
-}
-
-void archetype_location_repository_factory::
 populate_facet_names_by_kernel_name(archetype_location_repository& rp) const {
     for (const auto& al : rp.archetype_locations())
         rp.facet_names_by_kernel_name()[al.kernel()].insert(al.facet());
@@ -92,7 +84,7 @@ make(const std::list<archetype_location>& als) const {
     validate(als);
 
     archetype_location_repository r;
-    populate_archetype_locations(als, r);
+    r.archetype_locations(als);
     populate_facet_names_by_kernel_name(r);
     populate_formatter_names_by_kernel_name(r);
      BOOST_LOG_SEV(lg, debug) << "Created archetype location repository. "
