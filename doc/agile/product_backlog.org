@@ -6844,17 +6844,70 @@ set on the default constructor, if the type is a built-in or a
 These could be added as dynamic extensions; however, they should not
 be model specific - the same defaults should apply to all
 languages. However, note that in certain cases the default values may
-be language specific (e.g. =0.0f= for float, etc).
+be language specific (e.g. =0.0f= for float, etc). We should have a
+language independent way to express defaults and then interpret them
+in language specific ways at the template level.
 
 Note also that there are two levels of default values: the type-level
 (all built-ins of type =x= default to =y=) and the property level
 (instances of type =x= in class =z= default to =y=). The meta-data can
 be applied at each level to achieve the desired effect.
 
+Defaults are also useful with const properties, both if the class is
+immutable, or if just the defaulted property is immutable.
+
 Validation rules:
 
 - property can only have a default value if built-in
 - property default value must be castable to built-in type.
+
+*** Add support for immutable attributes                              :story:
+
+Once we have support for defaults on attributes, we can consider
+adding immutable attributes. These are attributes in mutable classes
+which have been marked as immutable.
+
+Validation:
+
+- class must not be immutable (probably a mistake)
+- attribute must have a default value.
+
+*** Add support for static attributes                                 :story:
+
+At present we cannot add attributes that are static to objects. This
+should be fairly straightforward:
+
+- add a "is static" property to attribute
+- populate it by reading static information from front-end such as
+  dia's field for "class scope".
+- update templates to mark property as static.
+
+Open questions:
+
+- what do we do for serialisation? Maybe it only makes sense to have
+  const static properties.
+
+*** Immutable static attributes and inheritance                       :story:
+
+In some cases it may make sense to attach an "attribute" at class
+level to all derived classes, and provide a virtual function in the
+base class to retrieve it. For example, we could have a "meta-id"
+attached to the base class:
+
+: virtual std::string base::meta_id() const = 0;
+
+The "meta-id" is populated to reflect the derived class, like so:
+
+: std::string derived::meta_id() override {
+:     static const std::string r("derived");
+:     return r;
+: }
+
+This pattern could be supported directly by the code-generator by
+having a "meta_attribute" flag in the base class. The derived class
+would then also define this attribute (possibly repeating the
+"meta_attribute" flag for good measure) and supplying the default
+value.
 
 *** Add support for interfaces                                         :epic:
 
@@ -7069,15 +7122,6 @@ is also possible to install oracle by copying the DEB to dropbox and
 creating a simple installation script that sets up the users etc. We
 could make similar scripts for postgres and oracle. However, we need
 to convert the oracle schema into postgres.
-
-*** Build static and dynamic libraries                                :story:
-
-At present we are always building static libraries from
-Dogen. However, CMake supports both.
-
-Links:
-
-- [[http://stackoverflow.com/questions/2152077/is-it-possible-to-get-cmake-to-build-both-a-static-and-shared-version-of-the-sam][Is it possible to get CMake to build both a static and shared version of the same library?]]
 
 *** Add proper DEB support to bintray                                 :story:
 
@@ -7530,6 +7574,31 @@ CMake to let the user configure how the libraries are generated
 (static or dynamic). Look for a best practices presentation on CMake
 that talks about this.
 
+Merged Stories:
+
+*Build static and dynamic libraries*
+
+At present we are always building static libraries from
+Dogen. However, CMake supports both.
+
+Links:
+
+- [[http://stackoverflow.com/questions/2152077/is-it-possible-to-get-cmake-to-build-both-a-static-and-shared-version-of-the-sam][Is it possible to get CMake to build both a static and shared version of the same library?]]
+
+*** Generated models should support both static and dynamic libraries :story:
+
+At present we have hard-coded the CMake files to generate static
+libraries on all generated . We should allow the user to choose at
+build time. See other story:
+
+- Allow user to choose whether to build shared or static libraries
+
+*** Allow generating executables from dogen                           :story:
+
+At present dogen always assumes we want to generate a static
+library. It would be nice to be able to generate an executable too,
+with all of the cmake infrastructure generated.
+
 *** Migrate from Boost Test to Catch                                  :story:
 
 The [[https://github.com/philsquared/Catch][Catch]] testing framework appears to be very nice:
@@ -7836,12 +7905,6 @@ Links:
 ** Visionary work and random ideas
 
 These stories are far in the future or just plain crazy.
-
-*** Allow generating executables from dogen                           :story:
-
-At present dogen always assumes we want to generate a static
-library. It would be nice to be able to generate an executable too,
-with all of the cmake infrastructure generated.
 
 *** Consider generating program options code                          :story:
 
