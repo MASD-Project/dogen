@@ -63,7 +63,7 @@ set(BOOST_ALL_DYN_LINK OFF)
 
 # Note: it is possible to build with older versions of boost, but
 # these require patches.
-find_package(Boost 1.62 REQUIRED COMPONENTS
+find_package(Boost 1.61 REQUIRED COMPONENTS
     system
     chrono
     serialization
