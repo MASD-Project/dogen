@@ -68,8 +68,8 @@ You can download experimental binaries from [Bintray](https://bintray.com/domain
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/881860977330880512][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6287627272706891776/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/887172610487922688][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6292938732865617920/][LinkedIn]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2017-07-17 Mon 20:58]--[2017-07-17 Mon 21:05] =>  0:07
