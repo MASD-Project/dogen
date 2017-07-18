@@ -72,22 +72,68 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6292938732865617920/][LinkedIn]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-18 Tue 05:40]--[2017-07-18 Tue 05:58] =>  0:18
     CLOCK: [2017-07-17 Mon 20:58]--[2017-07-17 Mon 21:05] =>  0:07
     CLOCK: [2017-07-17 Mon 20:31]--[2017-07-17 Mon 20:37] =>  0:06
 
 Updates to sprint and product backlog.
 
-*** Create a tagging checklist                                        :story:
+*** COMPLETED Create a tagging checklist                              :story:
+    CLOSED: [2017-07-18 Tue 06:43]
+    CLOCK: [2017-07-18 Tue 06:36]--[2017-07-18 Tue 06:43] =>  0:07
 
 We now have a number of things that need to be done for the tag of the
 sprint. We should document these to make sure we tag the releases
 correctly.
 
-Steps:
+Checklist:
 
-- sign tag with key.
-- write release notes.
-- open new sprint, updating CMake version, appveyor version
+- make a copy of current sprint and name it current sprint + 1;
+- close current sprint.
+- sign tag with key. Push tag separately so we build the correct
+  windows version.
+- open new sprint, updating CMake version and appveyor version. This
+  should all be in one commit.
+- write up release notes, publish them in github.
+- when tag build is finished, announce on twitter and linked in.
+- update bintray with the correct release notes.
+
+*** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
+    CLOCK: [2017-07-18 Tue 06:45]--[2017-07-18 Tue 07:27] =>  0:42
+
+We need to create a class to contain all archetype location related
+properties and add it to context. We also need to add a new property
+which captures the canonical archetypes. We can now have the registrar
+own this new class, populate it all during registration and return it
+at the start, via the kernel API.
+
+Actually we already have the annotation's archetype location
+repository, which we should have been using all along. Extend it to
+cope with type related information.
+
+Notes:
+
+- delete all usages of the list of archetype locations, make use of
+  repository instead.
+- add archetype_locations_by_element_type_index to repository.
+- kernels should only return
+  =archetype_locations_by_element_type_index=. Factory should use this
+  to build all containers. Factory should take multiple of these. We
+  should have a builder instead of a factory.
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+
+*** Add full support for type_index                                   :story:
+
+At present we cannot create containers using =std::type_index= as a
+key because we do not have hashing, IO and serialisation support.
+
+Links:
+
+- [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
 
 *** Move enablement into yarn                                         :story:
 
@@ -182,14 +228,6 @@ We need to move all functionality which is not kernel specific into
 yarn for the locator. This will exist in the helpers namespace. We
 then need to implement the C++ locator as a composite of yarn
 locator. It will live in fabric.
-
-*** Add canonical archetype support to yarn                           :story:
-
-We need to create a class to contain all archetype location related
-properties and add it to context. We also need to add a new property
-which captures the canonical archetypes. We can now have the registrar
-own this new class, populate it all during registration and return it
-at the start, via the kernel API.
 
 *** Move dependencies into yarn                                       :story:
 

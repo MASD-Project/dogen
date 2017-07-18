@@ -923,15 +923,6 @@ We should check that =enable_unique_file_names= is set to true.
 
 Key: =quilt.cpp.flat_directory_mode.enabled=.
 
-*** Add full support for type_index                                   :story:
-
-At present we cannot create containers using =std::type_index= as a
-key because we do not have hashing, IO and serialisation support.
-
-Links:
-
-- [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
-
 *** "Assistant" type found in test model                              :story:
 
 We seem to be generating an "Assistant" type on the =primitve= test model:
