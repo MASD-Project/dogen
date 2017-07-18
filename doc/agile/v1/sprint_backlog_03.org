@@ -77,6 +77,18 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 Updates to sprint and product backlog.
 
+*** Create a tagging checklist                                        :story:
+
+We now have a number of things that need to be done for the tag of the
+sprint. We should document these to make sure we tag the releases
+correctly.
+
+Steps:
+
+- sign tag with key.
+- write release notes.
+- open new sprint, updating CMake version, appveyor version
+
 *** Move enablement into yarn                                         :story:
 
 It seems that the concepts around enablement are actually not kernel
