@@ -13,18 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-18 Tue 17:47]
+#+CAPTION: Clock summary at [2017-07-18 Tue 18:05]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *2:18* |      |      | 100.0 |
+| *Total time*                                                                | *2:36* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 2:18   |      |      | 100.0 |
-| Active                                                                      |        | 2:18 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |  13.8 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:05 |  47.1 |
-| COMPLETED Create a tagging checklist                                        |        |      | 0:07 |   5.1 |
-| STARTED Add canonical archetype support to yarn                             |        |      | 0:47 |  34.1 |
+| Stories                                                                     | 2:36   |      |      | 100.0 |
+| Active                                                                      |        | 2:36 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |  12.2 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:05 |  41.7 |
+| COMPLETED Create a tagging checklist                                        |        |      | 0:07 |   4.5 |
+| STARTED Add meta-type support to yarn                                       |        |      | 0:18 |  11.5 |
+| STARTED Add canonical archetype support to yarn                             |        |      | 0:47 |  30.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -100,6 +101,51 @@ Checklist:
 - write up release notes, publish them in github.
 - when tag build is finished, announce on twitter and linked in.
 - update bintray with the correct release notes.
+
+*** STARTED Add meta-type support to yarn                             :story:
+    CLOCK: [2017-07-18 Tue 17:47]--[2017-07-18 Tue 18:05] =>  0:18
+
+At present we are relying on type indexes to create containers of
+archetype locations. This has worked so far, but it does mean that we
+cannot serialise (and thus code-generate) any type using these
+containers.
+
+We could try to add support for type index serialisation, but this is
+non-trivial because it involves registration of types. This facility
+already exists in the guts of boost serialisation, so it does not make
+sense to roll our own as well; however, it will require quite a bit of
+fiddling to understand the boost serialisation implementation. It may
+even required some form of mapping between the =std::type_index= and
+boost's implementation.
+
+An easier solution to this problem, which is also conceptually
+sensible, is to support meta-modeling locations. Just as we have
+modeling locations - i.e. positions in modeling space - one can
+imagine that there are also positions in meta-modeling space, with
+similar properties (external modules, internal modules and so
+forth). These should by all means be static on meta-model elements
+(e.g. yarn's =object= is located in =dogen::yarn::meta_model= and that
+is the same for all of its instances) but given that code generation
+does not support this pattern, we need to simulate it by having
+instance level copies of the meta-model location. This is expensive
+but its also easy to do, so we'll go with it for now.
+
+Tasks:
+
+- add a new concept: =MetaNameable= with one property: =meta_name=.
+- create a =meta_name_factory= in meta-model which generates names for
+  elements. This can be simply hard-coded on the names,
+  e.g. =make_object_name=, etc.
+- update the frontends to set the meta-name when constructing the
+  elements.
+- add a factory in each kernel's fabric to create meta-names for
+  fabric elements.
+- update element construction in fabric to use factory.
+- update formatters to return meta-name.
+- update the type index maps to use the meta-name's id instead.
+- update the archetype location containers that are using the type
+  index to use the meta name's id.
+- remove any references to type index.
 
 *** STARTED Add canonical archetype support to yarn                   :story:
     CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
