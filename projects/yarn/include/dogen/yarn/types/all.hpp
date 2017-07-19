@@ -78,6 +78,7 @@
 #include "dogen/yarn/types/transforms/configuration.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 #include "dogen/yarn/types/helpers/mappings_hydrator.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
 #include "dogen/yarn/types/helpers/mappings_validator.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"

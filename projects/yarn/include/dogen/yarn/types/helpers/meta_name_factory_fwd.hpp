@@ -18,32 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_META_NAME_TRANSFORM_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_META_NAME_TRANSFORM_HPP
+#ifndef DOGEN_YARN_TYPES_HELPERS_META_NAME_FACTORY_FWD_HPP
+#define DOGEN_YARN_TYPES_HELPERS_META_NAME_FACTORY_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/intermediate_model_fwd.hpp"
-
 namespace dogen {
 namespace yarn {
-namespace transforms {
+namespace helpers {
 
-/**
- * @brief Updates the meta-names of all of the yarn meta-model
- * elements.
- *
- * Note that any injected meta-model elements are not updated as part
- * of this transform; these are expected to be handled internally as
- * they are generated. We only concern ourselves with well-known
- * meta-model elements from yarn.
- */
-class meta_name_transform final {
-public:
-    static void transform(meta_model::intermediate_model& im);
-};
+class meta_name_factory;
 
 } } }
 

@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_name_transform.hpp"
 
@@ -36,68 +36,73 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+using helpers::meta_name_factory;
+
 class updater {
-private:
-    meta_model::location create_location() const {
-        meta_model::location r;
-        r.external_modules().push_back("dogen");
-        r.model_modules().push_back("yarn");
-        r.internal_modules().push_back("meta_model");
-        return r;
-    }
-
-    meta_model::name create_name(const std::string& sn) const {
-        static const auto l(create_location());
-        helpers::name_builder b;
-        b.location(l);
-        b.simple_name(sn);
-        return b.build();
-    }
-
-private:
-    void update(const meta_model::name& mn, meta_model::element& e) const {
-        e.meta_name(mn);
-    }
-
 public:
-    void operator()(meta_model::element&) { }
+    void operator()(meta_model::element&) {
+        /*
+         * Element ignored on purpose; we cannot update non-yarn
+         * meta-model elements.
+         */
+    }
+
     void operator()(meta_model::module& m) {
-        static const auto n(create_name("module"));
-        update(n, m);
+        static const auto n(meta_name_factory::make_module_name());
+        m.meta_name(n);
     }
+
     void operator()(meta_model::concept& c) {
-        static const auto n(create_name("concept"));
-        update(n, c);
+        static const auto n(meta_name_factory::make_concept_name());
+        c.meta_name(n);
     }
+
     void operator()(meta_model::builtin& b) {
-        static const auto n(create_name("builtin"));
-        update(n, b);
+        static const auto n(meta_name_factory::make_builtin_name());
+        b.meta_name(n);
     }
+
     void operator()(meta_model::enumeration& e) {
-        static const auto n(create_name("enumeration"));
-        update(n, e);
+        static const auto n(meta_name_factory::make_enumeration_name());
+        e.meta_name(n);
     }
+
     void operator()(meta_model::primitive& p) {
-        static const auto n(create_name("primitive"));
-        update(n, p);
+        static const auto n(meta_name_factory::make_primitive_name());
+        p.meta_name(n);
     }
+
     void operator()(meta_model::object& o) {
-        static const auto n(create_name("object"));
-        update(n, o);
+        static const auto n(meta_name_factory::make_object_name());
+        o.meta_name(n);
     }
+
     void operator()(meta_model::exception& e) {
-        static const auto n(create_name("exception"));
-        update(n, e);
+        static const auto n(meta_name_factory::make_exception_name());
+        e.meta_name(n);
     }
+
     void operator()(meta_model::visitor& v) {
-        static const auto n(create_name("visitor"));
-        update(n, v);
+        static const auto n(meta_name_factory::make_visitor_name());
+        v.meta_name(n);
     }
 };
 
 void meta_name_transform::transform(meta_model::intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Starting meta-name transform for model: "
+                             << im.name().id();
+
     updater u;
+
+    /*
+     * We are setting include_injected_elements to false by design as
+     * we cannot known the correct meta-names for those types - even
+     * if the types were in the model, which they aren't yet since we
+     * are in the pre-processing chain. But you get the idea.
+     */
     meta_model::elements_traversal(im, u);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished meta-name transform.";
 }
 
 } } }

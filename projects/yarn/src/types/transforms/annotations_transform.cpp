@@ -246,14 +246,13 @@ update_annotations(const annotations::annotation_groups_factory& agf,
 
 void annotations_transform::
 transform(const context& ctx, meta_model::intermediate_model& im) {
-
-    BOOST_LOG_SEV(lg, debug) << "Starting annotations expansion for model: "
+    BOOST_LOG_SEV(lg, debug) << "Starting annotations transform for model: "
                              << im.name().id();
 
     update_scribble_groups(im);
     update_annotations(ctx.groups_factory(), im);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished annotations expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Finished annotations transform.";
 }
 
 } } }
