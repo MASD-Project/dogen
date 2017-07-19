@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/building_error.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
@@ -41,8 +42,8 @@ namespace quilt {
 namespace cpp {
 namespace fabric {
 
-std::list<boost::shared_ptr<yarn::meta_model::element>>
-odb_options_factory::make(const yarn::meta_model::intermediate_model& im) const {
+std::list<boost::shared_ptr<yarn::meta_model::element>> odb_options_factory::
+make(const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;
@@ -60,6 +61,7 @@ odb_options_factory::make(const yarn::meta_model::intermediate_model& im) const 
 
         auto ooo(boost::make_shared<object_odb_options>());
         ooo->name(o.name());
+        ooo->meta_name(meta_name_factory::make_name("object_odb_options"));
         ooo->origin_type(o.origin_type());
         ooo->annotation(o.annotation());
         ooo->is_element_extension(true);
@@ -78,6 +80,7 @@ odb_options_factory::make(const yarn::meta_model::intermediate_model& im) const 
 
     auto coo(boost::make_shared<common_odb_options>());
     coo->name(n);
+    coo->meta_name(meta_name_factory::make_name("common_odb_options"));
     coo->origin_type(im.origin_type());
     r.push_back(coo);
 

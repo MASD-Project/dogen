@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations_factory.hpp"
 
@@ -43,6 +44,7 @@ private:
     boost::shared_ptr<forward_declarations> create(const Element& e) const {
         auto r(boost::make_shared<forward_declarations>());
         r->name(e.name());
+        r->meta_name(meta_name_factory::make_name("forward_declarations"));
         r->origin_type(e.origin_type());
         r->annotation(e.annotation());
         r->is_element_extension(true);

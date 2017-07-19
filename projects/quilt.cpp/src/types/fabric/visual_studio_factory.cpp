@@ -26,6 +26,7 @@
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/visual_studio_project.hpp"
 #include "dogen/quilt.cpp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.cpp/types/fabric/visual_studio_factory.hpp"
@@ -110,6 +111,7 @@ visual_studio_factory::make_solution(const visual_studio_configuration cfg,
 
     auto r(boost::make_shared<visual_studio_solution>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("visual_studio_solution"));
     r->origin_type(im.origin_type());
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
@@ -132,6 +134,7 @@ visual_studio_factory::make_project(const visual_studio_configuration cfg,
 
     auto r(boost::make_shared<visual_studio_project>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("visual_studio_project"));
     r->origin_type(im.origin_type());
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());

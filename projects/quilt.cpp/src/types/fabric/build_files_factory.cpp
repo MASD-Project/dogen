@@ -27,7 +27,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
 #include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
-#include "dogen/quilt.cpp/types/fabric/odb_options_factory.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/build_files_factory.hpp"
 
 namespace {
@@ -53,6 +53,7 @@ make_cmakelists(const yarn::meta_model::intermediate_model& im) const {
     const auto n(nf.build_element_in_model(im.name(), cmakelists_name));
     auto r(boost::make_shared<cmakelists>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("cmakelists"));
     r->origin_type(im.origin_type());
 
     BOOST_LOG_SEV(lg, debug) << "Generated CMakeLists.";
@@ -67,6 +68,7 @@ make_msbuild_targets(const yarn::meta_model::intermediate_model& im) const {
     const auto n(nf.build_element_in_model(im.name(), msbuild_targets_name));
     auto r(boost::make_shared<msbuild_targets>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("msbuild_targets"));
     r->origin_type(im.origin_type());
 
     BOOST_LOG_SEV(lg, debug) << "Generated MSBuild Targets.";

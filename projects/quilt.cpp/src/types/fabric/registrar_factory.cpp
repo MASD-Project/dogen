@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_factory.hpp"
 
 namespace {
@@ -43,8 +44,9 @@ boost::shared_ptr<fabric::registrar> registrar_factory::
 make(const yarn::meta_model::name& model_name) const {
     yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(model_name, simple_name));
-    auto r(boost::make_shared<fabric::registrar>());
+    auto r(boost::make_shared<registrar>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("registrar"));
     return r;
 }
 

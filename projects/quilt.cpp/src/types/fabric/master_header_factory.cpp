@@ -33,6 +33,7 @@
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header_factory.hpp"
 
@@ -75,7 +76,8 @@ private:
         std::type_index,
         std::forward_list<
             std::shared_ptr<formatters::artefact_formatter_interface>>>
-    filter_file_formatters_by_type_index(const formatters::repository& rp) const;
+    filter_file_formatters_by_type_index(
+        const formatters::repository& rp) const;
 
     void process_element(const yarn::meta_model::element& e);
 
@@ -114,6 +116,7 @@ generator::create_master_header(const yarn::meta_model::name& model_name) {
     auto r(boost::make_shared<master_header>());
     yarn::helpers::name_factory f;
     r->name(f.build_element_in_model(model_name, master_header_name));
+    r->meta_name(meta_name_factory::make_name("master_header"));
     r->origin_type(yarn::meta_model::origin_types::target);
     return r;
 }
