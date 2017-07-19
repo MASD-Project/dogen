@@ -281,6 +281,7 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
     std::unordered_set<std::string> ids_done;
 
+    const bool allow_spaces(allow_spaces_in_built_in_types(l));
     for (const auto& pair : names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
@@ -301,7 +302,6 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
             /*
              * Element name must pass all sanity checks.
              */
-            const bool allow_spaces(allow_spaces_in_built_in_types(l));
             validate_name(n, allow_spaces);
 
             BOOST_LOG_SEV(lg, debug) << "Name is valid.";
