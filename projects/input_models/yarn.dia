@@ -4971,7 +4971,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:string>#model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable#</dia:string>
+        <dia:string>#Nameable, MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Yarn model.#</dia:string>
@@ -5339,7 +5339,7 @@ meta-types (concepts) and non-types (modules and backend specific entities).#</d
         <dia:string>#intermediate_model#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Nameable, DeterminableOrigin#</dia:string>
+        <dia:string>#Nameable, MetaNameable, DeterminableOrigin#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Intermediate representation of a yarn model.#</dia:string>

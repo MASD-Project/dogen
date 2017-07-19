@@ -118,14 +118,15 @@ model_generator::model_generator() : position_(0) { }
 void model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
-    v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(position + 1));
-    v.root_module(create_dogen_yarn_meta_model_module(position + 2));
-    v.module_ids(create_std_unordered_set_std_string(position + 3));
-    v.has_generatable_types(create_bool(position + 4));
-    v.input_language(create_dogen_yarn_meta_model_languages(position + 5));
-    v.output_language(create_dogen_yarn_meta_model_languages(position + 6));
-    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 7));
-    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 8));
+    v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
+    v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(position + 2));
+    v.root_module(create_dogen_yarn_meta_model_module(position + 3));
+    v.module_ids(create_std_unordered_set_std_string(position + 4));
+    v.has_generatable_types(create_bool(position + 5));
+    v.input_language(create_dogen_yarn_meta_model_languages(position + 6));
+    v.output_language(create_dogen_yarn_meta_model_languages(position + 7));
+    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 8));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 9));
 }
 
 model_generator::result_type

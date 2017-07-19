@@ -260,25 +260,26 @@ intermediate_model_generator::intermediate_model_generator() : position_(0) { }
 void intermediate_model_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
-    v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 1));
-    v.references(create_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(position + 2));
-    v.leaves(create_std_unordered_set_dogen_yarn_meta_model_name(position + 3));
-    v.modules(create_std_unordered_map_std_string_dogen_yarn_meta_model_module(position + 4));
-    v.concepts(create_std_unordered_map_std_string_dogen_yarn_meta_model_concept(position + 5));
-    v.builtins(create_std_unordered_map_std_string_dogen_yarn_meta_model_builtin(position + 6));
-    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_meta_model_enumeration(position + 7));
-    v.primitives(create_std_unordered_map_std_string_dogen_yarn_meta_model_primitive(position + 8));
-    v.objects(create_std_unordered_map_std_string_dogen_yarn_meta_model_object(position + 9));
-    v.exceptions(create_std_unordered_map_std_string_dogen_yarn_meta_model_exception(position + 10));
-    v.visitors(create_std_unordered_map_std_string_dogen_yarn_meta_model_visitor(position + 11));
-    v.injected_elements(create_std_list_boost_shared_ptr_dogen_yarn_meta_model_element(position + 12));
-    v.has_generatable_types(create_bool(position + 13));
-    v.root_module(create_dogen_yarn_meta_model_module(position + 14));
-    v.input_language(create_dogen_yarn_meta_model_languages(position + 15));
-    v.output_languages(create_std_list_dogen_yarn_meta_model_languages(position + 16));
-    v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 17));
-    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 18));
-    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 19));
+    v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
+    v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 2));
+    v.references(create_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(position + 3));
+    v.leaves(create_std_unordered_set_dogen_yarn_meta_model_name(position + 4));
+    v.modules(create_std_unordered_map_std_string_dogen_yarn_meta_model_module(position + 5));
+    v.concepts(create_std_unordered_map_std_string_dogen_yarn_meta_model_concept(position + 6));
+    v.builtins(create_std_unordered_map_std_string_dogen_yarn_meta_model_builtin(position + 7));
+    v.enumerations(create_std_unordered_map_std_string_dogen_yarn_meta_model_enumeration(position + 8));
+    v.primitives(create_std_unordered_map_std_string_dogen_yarn_meta_model_primitive(position + 9));
+    v.objects(create_std_unordered_map_std_string_dogen_yarn_meta_model_object(position + 10));
+    v.exceptions(create_std_unordered_map_std_string_dogen_yarn_meta_model_exception(position + 11));
+    v.visitors(create_std_unordered_map_std_string_dogen_yarn_meta_model_visitor(position + 12));
+    v.injected_elements(create_std_list_boost_shared_ptr_dogen_yarn_meta_model_element(position + 13));
+    v.has_generatable_types(create_bool(position + 14));
+    v.root_module(create_dogen_yarn_meta_model_module(position + 15));
+    v.input_language(create_dogen_yarn_meta_model_languages(position + 16));
+    v.output_languages(create_std_list_dogen_yarn_meta_model_languages(position + 17));
+    v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 18));
+    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 19));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 20));
 }
 
 intermediate_model_generator::result_type

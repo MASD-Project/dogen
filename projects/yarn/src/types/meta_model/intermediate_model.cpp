@@ -41,6 +41,7 @@ intermediate_model::intermediate_model()
 
 intermediate_model::intermediate_model(intermediate_model&& rhs)
     : name_(std::move(rhs.name_)),
+      meta_name_(std::move(rhs.meta_name_)),
       origin_type_(std::move(rhs.origin_type_)),
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
@@ -63,6 +64,7 @@ intermediate_model::intermediate_model(intermediate_model&& rhs)
 
 intermediate_model::intermediate_model(
     const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::name& meta_name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
     const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
@@ -83,6 +85,7 @@ intermediate_model::intermediate_model(
     const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties)
     : name_(name),
+      meta_name_(meta_name),
       origin_type_(origin_type),
       references_(references),
       leaves_(leaves),
@@ -106,6 +109,7 @@ intermediate_model::intermediate_model(
 void intermediate_model::swap(intermediate_model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(meta_name_, other.meta_name_);
     swap(origin_type_, other.origin_type_);
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
@@ -129,6 +133,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
 
 bool intermediate_model::operator==(const intermediate_model& rhs) const {
     return name_ == rhs.name_ &&
+        meta_name_ == rhs.meta_name_ &&
         origin_type_ == rhs.origin_type_ &&
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
@@ -170,6 +175,22 @@ void intermediate_model::name(const dogen::yarn::meta_model::name& v) {
 
 void intermediate_model::name(const dogen::yarn::meta_model::name&& v) {
     name_ = std::move(v);
+}
+
+const dogen::yarn::meta_model::name& intermediate_model::meta_name() const {
+    return meta_name_;
+}
+
+dogen::yarn::meta_model::name& intermediate_model::meta_name() {
+    return meta_name_;
+}
+
+void intermediate_model::meta_name(const dogen::yarn::meta_model::name& v) {
+    meta_name_ = v;
+}
+
+void intermediate_model::meta_name(const dogen::yarn::meta_model::name&& v) {
+    meta_name_ = std::move(v);
 }
 
 dogen::yarn::meta_model::origin_types intermediate_model::origin_type() const {

@@ -331,6 +331,7 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::intermediate_model\"" << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "

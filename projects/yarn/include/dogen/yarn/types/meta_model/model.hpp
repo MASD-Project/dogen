@@ -61,6 +61,7 @@ public:
 public:
     model(
         const dogen::yarn::meta_model::name& name,
+        const dogen::yarn::meta_model::name& meta_name,
         const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements,
         const dogen::yarn::meta_model::module& root_module,
         const std::unordered_set<std::string>& module_ids,
@@ -86,6 +87,16 @@ public:
     dogen::yarn::meta_model::name& name();
     void name(const dogen::yarn::meta_model::name& v);
     void name(const dogen::yarn::meta_model::name&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the element in the meta-model that this instance conforms to.
+     */
+    /**@{*/
+    const dogen::yarn::meta_model::name& meta_name() const;
+    dogen::yarn::meta_model::name& meta_name();
+    void meta_name(const dogen::yarn::meta_model::name& v);
+    void meta_name(const dogen::yarn::meta_model::name&& v);
     /**@}*/
 
     const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements() const;
@@ -159,6 +170,7 @@ public:
 
 private:
     dogen::yarn::meta_model::name name_;
+    dogen::yarn::meta_model::name meta_name_;
     std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> > elements_;
     dogen::yarn::meta_model::module root_module_;
     std::unordered_set<std::string> module_ids_;

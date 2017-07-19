@@ -71,6 +71,7 @@ public:
 public:
     intermediate_model(
         const dogen::yarn::meta_model::name& name,
+        const dogen::yarn::meta_model::name& meta_name,
         const dogen::yarn::meta_model::origin_types origin_type,
         const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
         const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
@@ -107,6 +108,16 @@ public:
     dogen::yarn::meta_model::name& name();
     void name(const dogen::yarn::meta_model::name& v);
     void name(const dogen::yarn::meta_model::name&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the element in the meta-model that this instance conforms to.
+     */
+    /**@{*/
+    const dogen::yarn::meta_model::name& meta_name() const;
+    dogen::yarn::meta_model::name& meta_name();
+    void meta_name(const dogen::yarn::meta_model::name& v);
+    void meta_name(const dogen::yarn::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -287,6 +298,7 @@ public:
 
 private:
     dogen::yarn::meta_model::name name_;
+    dogen::yarn::meta_model::name meta_name_;
     dogen::yarn::meta_model::origin_types origin_type_;
     std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types> references_;
     std::unordered_set<dogen::yarn::meta_model::name> leaves_;

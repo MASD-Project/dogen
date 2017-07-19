@@ -128,6 +128,7 @@ std::ostream& operator<<(std::ostream& s, const model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::model\"" << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"elements\": " << v.elements() << ", "
       << "\"root_module\": " << v.root_module() << ", "
       << "\"module_ids\": " << v.module_ids() << ", "

@@ -41,6 +41,7 @@ model::model()
 
 model::model(model&& rhs)
     : name_(std::move(rhs.name_)),
+      meta_name_(std::move(rhs.meta_name_)),
       elements_(std::move(rhs.elements_)),
       root_module_(std::move(rhs.root_module_)),
       module_ids_(std::move(rhs.module_ids_)),
@@ -52,6 +53,7 @@ model::model(model&& rhs)
 
 model::model(
     const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::name& meta_name,
     const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements,
     const dogen::yarn::meta_model::module& root_module,
     const std::unordered_set<std::string>& module_ids,
@@ -61,6 +63,7 @@ model::model(
     const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
     const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties)
     : name_(name),
+      meta_name_(meta_name),
       elements_(elements),
       root_module_(root_module),
       module_ids_(module_ids),
@@ -73,6 +76,7 @@ model::model(
 void model::swap(model& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(meta_name_, other.meta_name_);
     swap(elements_, other.elements_);
     swap(root_module_, other.root_module_);
     swap(module_ids_, other.module_ids_);
@@ -85,6 +89,7 @@ void model::swap(model& other) noexcept {
 
 bool model::operator==(const model& rhs) const {
     return name_ == rhs.name_ &&
+        meta_name_ == rhs.meta_name_ &&
         elements_ == rhs.elements_ &&
         root_module_ == rhs.root_module_ &&
         module_ids_ == rhs.module_ids_ &&
@@ -115,6 +120,22 @@ void model::name(const dogen::yarn::meta_model::name& v) {
 
 void model::name(const dogen::yarn::meta_model::name&& v) {
     name_ = std::move(v);
+}
+
+const dogen::yarn::meta_model::name& model::meta_name() const {
+    return meta_name_;
+}
+
+dogen::yarn::meta_model::name& model::meta_name() {
+    return meta_name_;
+}
+
+void model::meta_name(const dogen::yarn::meta_model::name& v) {
+    meta_name_ = v;
+}
+
+void model::meta_name(const dogen::yarn::meta_model::name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& model::elements() const {

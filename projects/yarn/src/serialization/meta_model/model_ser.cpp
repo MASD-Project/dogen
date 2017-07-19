@@ -49,6 +49,7 @@ void save(Archive& ar,
     const dogen::yarn::meta_model::model& v,
     const unsigned int /*version*/) {
     ar << make_nvp("name", v.name_);
+    ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("elements", v.elements_);
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("module_ids", v.module_ids_);
@@ -64,6 +65,7 @@ void load(Archive& ar,
     dogen::yarn::meta_model::model& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("name", v.name_);
+    ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("elements", v.elements_);
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("module_ids", v.module_ids_);

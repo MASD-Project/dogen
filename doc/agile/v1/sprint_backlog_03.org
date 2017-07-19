@@ -13,19 +13,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-19 Wed 20:33]
+#+CAPTION: Clock summary at [2017-07-19 Wed 20:51]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *5:01* |      |      | 100.0 |
+| *Total time*                                                                | *5:18* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 5:01   |      |      | 100.0 |
-| Active                                                                      |        | 5:01 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   6.3 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:05 |  21.6 |
-| COMPLETED Create a tagging checklist                                        |        |      | 0:07 |   2.3 |
-| STARTED Add meta-type support to yarn                                       |        |      | 2:43 |  54.2 |
-| STARTED Add canonical archetype support to yarn                             |        |      | 0:47 |  15.6 |
+| Stories                                                                     | 5:18   |      |      | 100.0 |
+| Active                                                                      |        | 5:18 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   6.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:05 |  20.4 |
+| COMPLETED Create a tagging checklist                                        |        |      | 0:07 |   2.2 |
+| STARTED Add meta-type support to yarn                                       |        |      | 3:00 |  56.6 |
+| STARTED Add canonical archetype support to yarn                             |        |      | 0:47 |  14.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -103,6 +103,7 @@ Checklist:
 - update bintray with the correct release notes.
 
 *** STARTED Add meta-type support to yarn                             :story:
+    CLOCK: [2017-07-19 Wed 20:34]--[2017-07-19 Wed 20:51] =>  0:17
     CLOCK: [2017-07-19 Wed 20:05]--[2017-07-19 Wed 20:33] =>  0:28
     CLOCK: [2017-07-19 Wed 19:49]--[2017-07-19 Wed 20:04] =>  0:15
     CLOCK: [2017-07-19 Wed 19:24]--[2017-07-19 Wed 19:48] =>  0:24
@@ -142,6 +143,7 @@ Tasks:
 - create a transform to populate all of yarn's meta-types.
 - add a factory in each kernel's fabric to create meta-names for
   fabric elements.
+- populate model and global module meta-names
 - update element construction in fabric to use factory.
 - update formatters to return meta-name.
 - update the type index maps to use the meta-name's id instead.
@@ -151,6 +153,8 @@ Tasks:
 
 Notes:
 
+- actually this cannot be part of pre-processing as we will miss the
+  injected types such as global module, visitor, etc.
 - create a =meta_name_factory= in meta-model which generates names for
   elements. This can be simply hard-coded on the names,
   e.g. =make_object_name=, etc.
