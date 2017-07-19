@@ -35,6 +35,7 @@
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
+#include "dogen/yarn/types/transforms/meta_name_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
 
 namespace {
@@ -83,6 +84,13 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
     stereotypes_transform::transform(im);
     concepts_transform::transform(im);
     containment_transform::transform(im);
+
+    /*
+     * Meta-name transform must be applied after all transforms that
+     * inject new meta-model types for the yarn model. At present that
+     * is stereotypes and containment transforms.
+     */
+    meta_name_transform::transform(im);
 
     /*
      * ORM properties must be expanded after stereotypes and

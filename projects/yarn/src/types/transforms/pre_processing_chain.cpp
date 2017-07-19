@@ -26,7 +26,6 @@
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
-#include "dogen/yarn/types/transforms/meta_name_transform.hpp"
 #include "dogen/yarn/types/transforms/parsing_transform.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
@@ -88,7 +87,6 @@ void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
      */
     origin_transform::transform(ctx, im);
     type_params_transform::transform(ctx, im);
-    meta_name_transform::transform(im);
     parsing_transform::transform(ctx, im);
 
     /*
