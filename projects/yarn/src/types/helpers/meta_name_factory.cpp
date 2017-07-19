@@ -41,6 +41,16 @@ meta_model::name meta_name_factory::make_name(const std::string& sn) {
     return b.build();
 }
 
+meta_model::name meta_name_factory::make_intermediate_model_name() {
+    static const auto r(make_name("intermediate_model"));
+    return r;
+}
+
+meta_model::name meta_name_factory::make_model_name() {
+    static const auto r(make_name("model"));
+    return r;
+}
+
 meta_model::name meta_name_factory::make_module_name() {
     static const auto r(make_name("module"));
     return r;

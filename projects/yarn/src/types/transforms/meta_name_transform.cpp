@@ -92,7 +92,7 @@ void meta_name_transform::transform(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-name transform for model: "
                              << im.name().id();
 
-    updater u;
+    im.meta_name(meta_name_factory::make_intermediate_model_name());
 
     /*
      * We are setting include_injected_elements to false by design as
@@ -100,6 +100,7 @@ void meta_name_transform::transform(meta_model::intermediate_model& im) {
      * if the types were in the model, which they aren't yet since we
      * are in the pre-processing chain. But you get the idea.
      */
+    updater u;
     meta_model::elements_traversal(im, u);
 
     BOOST_LOG_SEV(lg, debug) << "Finished meta-name transform.";

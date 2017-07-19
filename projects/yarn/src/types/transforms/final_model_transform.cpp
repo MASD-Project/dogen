@@ -24,8 +24,9 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
-#include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/final_model_transform.hpp"
 
 namespace {
@@ -125,6 +126,8 @@ meta_model::model
 final_model_transform::transform(const meta_model::intermediate_model& im) {
     meta_model::model r;
     r.name(im.name());
+    r.meta_name(helpers::meta_name_factory::make_model_name());
+
     r.input_language(im.input_language());
     if (im.output_languages().size() != 1) {
         BOOST_LOG_SEV(lg, error) << expected_one_output_language

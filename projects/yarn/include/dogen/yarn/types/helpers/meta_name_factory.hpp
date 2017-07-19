@@ -38,6 +38,9 @@ private:
     static meta_model::name make_name(const std::string& sn);
 
 public:
+    static meta_model::name make_intermediate_model_name();
+    static meta_model::name make_model_name();
+
     static meta_model::name make_module_name();
     static meta_model::name make_concept_name();
     static meta_model::name make_builtin_name();
