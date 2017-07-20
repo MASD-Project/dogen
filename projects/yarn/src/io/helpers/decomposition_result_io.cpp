@@ -94,6 +94,7 @@ std::ostream& operator<<(std::ostream& s, const decomposition_result& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::helpers::decomposition_result\"" << ", "
       << "\"names\": " << v.names() << ", "
+      << "\"meta_names\": " << v.meta_names() << ", "
       << "\"name_trees\": " << v.name_trees()
       << " }";
     return(s);

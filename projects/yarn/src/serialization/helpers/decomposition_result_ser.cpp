@@ -42,6 +42,7 @@ void save(Archive& ar,
     const dogen::yarn::helpers::decomposition_result& v,
     const unsigned int /*version*/) {
     ar << make_nvp("names", v.names_);
+    ar << make_nvp("meta_names", v.meta_names_);
     ar << make_nvp("name_trees", v.name_trees_);
 }
 
@@ -50,6 +51,7 @@ void load(Archive& ar,
     dogen::yarn::helpers::decomposition_result& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("names", v.names_);
+    ar >> make_nvp("meta_names", v.meta_names_);
     ar >> make_nvp("name_trees", v.name_trees_);
 }
 

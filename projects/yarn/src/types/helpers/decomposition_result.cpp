@@ -26,18 +26,22 @@ namespace helpers {
 
 decomposition_result::decomposition_result(
     const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names,
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& meta_names,
     const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees)
     : names_(names),
+      meta_names_(meta_names),
       name_trees_(name_trees) { }
 
 void decomposition_result::swap(decomposition_result& other) noexcept {
     using std::swap;
     swap(names_, other.names_);
+    swap(meta_names_, other.meta_names_);
     swap(name_trees_, other.name_trees_);
 }
 
 bool decomposition_result::operator==(const decomposition_result& rhs) const {
     return names_ == rhs.names_ &&
+        meta_names_ == rhs.meta_names_ &&
         name_trees_ == rhs.name_trees_;
 }
 
@@ -61,6 +65,22 @@ void decomposition_result::names(const std::list<std::pair<std::string, dogen::y
 
 void decomposition_result::names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v) {
     names_ = std::move(v);
+}
+
+const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& decomposition_result::meta_names() const {
+    return meta_names_;
+}
+
+std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& decomposition_result::meta_names() {
+    return meta_names_;
+}
+
+void decomposition_result::meta_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v) {
+    meta_names_ = v;
+}
+
+void decomposition_result::meta_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v) {
+    meta_names_ = std::move(v);
 }
 
 const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& decomposition_result::name_trees() const {

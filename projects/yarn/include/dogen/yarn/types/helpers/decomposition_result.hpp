@@ -47,6 +47,7 @@ public:
 public:
     decomposition_result(
         const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names,
+        const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& meta_names,
         const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees);
 
 private:
@@ -61,6 +62,11 @@ public:
     std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names();
     void names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v);
     void names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v);
+
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& meta_names() const;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& meta_names();
+    void meta_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v);
+    void meta_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v);
 
     const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees() const;
     std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees();
@@ -79,6 +85,7 @@ public:
 
 private:
     std::list<std::pair<std::string, dogen::yarn::meta_model::name> > names_;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> > meta_names_;
     std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> > name_trees_;
 };
 
