@@ -120,40 +120,6 @@ allow_spaces_in_built_in_types(const meta_model::languages l) {
     return l == meta_model::languages::cpp;
 }
 
-decomposition_result post_processing_validator::
-decompose_model(const meta_model::intermediate_model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
-
-    /*
-     * Collect the names of all elements and attributes.
-     */
-    decomposer dc;
-    for (const auto& pair : im.modules())
-        dc.decompose(pair.second);
-
-    for (const auto& pair : im.concepts())
-        dc.decompose(pair.second);
-
-    for (const auto& pair : im.builtins())
-        dc.decompose(pair.second);
-
-    for (const auto& pair : im.enumerations())
-        dc.decompose(pair.second);
-
-    for (const auto& pair : im.objects())
-        dc.decompose(pair.second);
-
-    for (const auto& pair : im.exceptions())
-        dc.decompose(pair.second);
-
-    /*
-     * Note that we do not add the model name itself; this is because
-     * we will validate the model's module, which is generated from
-     * the model name.
-     */
-    return dc.result();
-}
-
 void post_processing_validator::
 validate_enumerations(const indices& idx, const std::unordered_map<std::string,
     meta_model::enumeration>& enumerations) {
@@ -361,7 +327,7 @@ validate(const indices& idx, const meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const auto l(im.input_language());
-    const auto dr(decompose_model(im));
+    const auto dr(decomposer::decompose(im));
     validate_names(dr.names(), l);
     validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
     validate_enumerations(idx, im.enumerations());

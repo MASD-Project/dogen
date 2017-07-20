@@ -33,14 +33,25 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
+/**
+ * @brief Collect the names of all elements and attributes, for
+ * subsequent validation.
+ *
+ * Note that we do not add the model name itself; this is because we
+ * will validate the model's module, which is generated from the model
+ * name.
+ */
 class decomposer final {
 private:
     void add_name(const std::string& owner, const meta_model::name& n);
@@ -48,20 +59,31 @@ private:
         const meta_model::name_tree& nt);
     void add_names(const std::string& owner,
         const std::list<meta_model::name>& names);
-    void process_attributes(const std::string& owner,
+    void decompose_attributes(const std::string& owner,
         const std::list<meta_model::attribute>& attrs);
-    void process_element(const meta_model::element& e);
+    void decompose_element(const meta_model::element& e);
 
 public:
-    void decompose(const meta_model::concept& c);
-    void decompose(const meta_model::module& m);
-    void decompose(const meta_model::enumeration& e);
-    void decompose(const meta_model::exception& e);
-    void decompose(const meta_model::object& o);
-    void decompose(const meta_model::builtin& b);
+    /*
+     * These methods are morally private, but are required to be
+     * public due to the traversal.
+     */
+    void operator()(const meta_model::element& e);
+    void operator()(const meta_model::module& m);
+    void operator()(const meta_model::concept& c);
+    void operator()(const meta_model::builtin& b);
+    void operator()(const meta_model::enumeration& e);
+    void operator()(const meta_model::primitive& p);
+    void operator()(const meta_model::object& o);
+    void operator()(const meta_model::exception& e);
+    void operator()(const meta_model::visitor& v);
 
-public:
+private:
     const decomposition_result& result() const;
+
+public:
+    static decomposition_result
+    decompose(const meta_model::intermediate_model& im);
 
 private:
     decomposition_result result_;

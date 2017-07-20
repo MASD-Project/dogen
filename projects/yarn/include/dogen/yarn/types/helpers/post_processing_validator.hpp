@@ -42,8 +42,6 @@ namespace helpers {
 class post_processing_validator final {
 private:
     static bool allow_spaces_in_built_in_types(const meta_model::languages l);
-    static decomposition_result
-    decompose_model(const meta_model::intermediate_model& im);
 
 private:
     static void validate_enumerations(const indices& idx, const

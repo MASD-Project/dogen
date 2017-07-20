@@ -18,7 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/io/helpers/decomposition_result_io.hpp"
 #include "dogen/yarn/types/helpers/decomposer.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.decomposer"));
+
+}
 
 namespace dogen {
 namespace yarn {
@@ -45,7 +55,7 @@ add_names(const std::string& owner, const std::list<meta_model::name>& names) {
         add_name(owner, n);
 }
 
-void decomposer::process_attributes(const std::string& owner,
+void decomposer::decompose_attributes(const std::string& owner,
     const std::list<meta_model::attribute>& attrs) {
     for (const auto& attr : attrs) {
         add_name(owner, attr.name());
@@ -53,16 +63,15 @@ void decomposer::process_attributes(const std::string& owner,
     }
 }
 
-void decomposer::process_element(const meta_model::element& e) {
+void decomposer::decompose_element(const meta_model::element& e) {
     add_name(e.name().id(), e.name());
 }
 
-void decomposer::decompose(const meta_model::concept& c) {
-    process_element(c);
-    process_attributes(c.name().id(), c.local_attributes());
+void decomposer::operator()(const meta_model::element& e) {
+    decompose_element(e);
 }
 
-void decomposer::decompose(const meta_model::module& m) {
+void decomposer::operator()(const meta_model::module& m) {
     /*
      * The global module represents the unnamed global
      * namespace. There can only be one of these and it is generated
@@ -71,30 +80,55 @@ void decomposer::decompose(const meta_model::module& m) {
     if (m.is_global_module())
         return;
 
-    process_element(m);
+    decompose_element(m);
 }
 
-void decomposer::decompose(const meta_model::enumeration& e) {
-    process_element(e);
+void decomposer::operator()(const meta_model::concept& c) {
+    decompose_element(c);
+    decompose_attributes(c.name().id(), c.local_attributes());
+}
+
+void decomposer::operator()(const meta_model::builtin& b) {
+    decompose_element(b);
+}
+
+void decomposer::operator()(const meta_model::enumeration& e) {
+    decompose_element(e);
     for (const auto& en : e.enumerators())
         add_name(e.name().id(), en.name());
 }
 
-void decomposer::decompose(const meta_model::exception& e) {
-    process_element(e);
+void decomposer::operator()(const meta_model::primitive& p) {
+    decompose_element(p);
 }
 
-void decomposer::decompose(const meta_model::object& o) {
-    process_element(o);
-    process_attributes(o.name().id(), o.local_attributes());
+void decomposer::operator()(const meta_model::object& o) {
+    decompose_element(o);
+    decompose_attributes(o.name().id(), o.local_attributes());
 }
 
-void decomposer::decompose(const meta_model::builtin& b) {
-    process_element(b);
+void decomposer::operator()(const meta_model::exception& e) {
+    decompose_element(e);
+}
+
+void decomposer::operator()(const meta_model::visitor& v) {
+    decompose_element(v);
 }
 
 const decomposition_result&  decomposer::result() const {
     return result_;
+}
+
+decomposition_result
+decomposer::decompose(const meta_model::intermediate_model& im) {
+    BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
+
+    decomposer dc;
+    meta_model::elements_traversal(im, dc);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished decomposing model. Result: "
+                             << dc.result();;
+    return dc.result();
 }
 
 } } }
