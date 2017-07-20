@@ -44,6 +44,7 @@ void save(Archive& ar,
     ar << make_nvp("names", v.names_);
     ar << make_nvp("meta_names", v.meta_names_);
     ar << make_nvp("name_trees", v.name_trees_);
+    ar << make_nvp("injected_names", v.injected_names_);
 }
 
 template<typename Archive>
@@ -53,6 +54,7 @@ void load(Archive& ar,
     ar >> make_nvp("names", v.names_);
     ar >> make_nvp("meta_names", v.meta_names_);
     ar >> make_nvp("name_trees", v.name_trees_);
+    ar >> make_nvp("injected_names", v.injected_names_);
 }
 
 } }

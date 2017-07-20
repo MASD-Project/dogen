@@ -74,6 +74,7 @@ std::size_t decomposition_result_hasher::hash(const decomposition_result& v) {
     combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name(v.names()));
     combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name(v.meta_names()));
     combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name_tree(v.name_trees()));
+    combine(seed, hash_std_list_std_pair_std_string_dogen_yarn_meta_model_name(v.injected_names()));
 
     return seed;
 }

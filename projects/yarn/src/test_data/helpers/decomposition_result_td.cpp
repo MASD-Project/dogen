@@ -86,6 +86,7 @@ populate(const unsigned int position, result_type& v) {
     v.names(create_std_list_std_pair_std_string_dogen_yarn_meta_model_name(position + 0));
     v.meta_names(create_std_list_std_pair_std_string_dogen_yarn_meta_model_name(position + 1));
     v.name_trees(create_std_list_std_pair_std_string_dogen_yarn_meta_model_name_tree(position + 2));
+    v.injected_names(create_std_list_std_pair_std_string_dogen_yarn_meta_model_name(position + 3));
 }
 
 decomposition_result_generator::result_type

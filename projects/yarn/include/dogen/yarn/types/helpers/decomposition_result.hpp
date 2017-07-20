@@ -48,7 +48,8 @@ public:
     decomposition_result(
         const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names,
         const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& meta_names,
-        const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees);
+        const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees,
+        const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& injected_names);
 
 private:
     template<typename Archive>
@@ -73,6 +74,11 @@ public:
     void name_trees(const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& v);
     void name_trees(const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >&& v);
 
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& injected_names() const;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& injected_names();
+    void injected_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v);
+    void injected_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v);
+
 public:
     bool operator==(const decomposition_result& rhs) const;
     bool operator!=(const decomposition_result& rhs) const {
@@ -87,6 +93,7 @@ private:
     std::list<std::pair<std::string, dogen::yarn::meta_model::name> > names_;
     std::list<std::pair<std::string, dogen::yarn::meta_model::name> > meta_names_;
     std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> > name_trees_;
+    std::list<std::pair<std::string, dogen::yarn::meta_model::name> > injected_names_;
 };
 
 } } }

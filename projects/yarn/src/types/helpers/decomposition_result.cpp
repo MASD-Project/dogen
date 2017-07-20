@@ -27,22 +27,26 @@ namespace helpers {
 decomposition_result::decomposition_result(
     const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& names,
     const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& meta_names,
-    const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees)
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >& name_trees,
+    const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& injected_names)
     : names_(names),
       meta_names_(meta_names),
-      name_trees_(name_trees) { }
+      name_trees_(name_trees),
+      injected_names_(injected_names) { }
 
 void decomposition_result::swap(decomposition_result& other) noexcept {
     using std::swap;
     swap(names_, other.names_);
     swap(meta_names_, other.meta_names_);
     swap(name_trees_, other.name_trees_);
+    swap(injected_names_, other.injected_names_);
 }
 
 bool decomposition_result::operator==(const decomposition_result& rhs) const {
     return names_ == rhs.names_ &&
         meta_names_ == rhs.meta_names_ &&
-        name_trees_ == rhs.name_trees_;
+        name_trees_ == rhs.name_trees_ &&
+        injected_names_ == rhs.injected_names_;
 }
 
 decomposition_result& decomposition_result::operator=(decomposition_result other) {
@@ -97,6 +101,22 @@ void decomposition_result::name_trees(const std::list<std::pair<std::string, dog
 
 void decomposition_result::name_trees(const std::list<std::pair<std::string, dogen::yarn::meta_model::name_tree> >&& v) {
     name_trees_ = std::move(v);
+}
+
+const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& decomposition_result::injected_names() const {
+    return injected_names_;
+}
+
+std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& decomposition_result::injected_names() {
+    return injected_names_;
+}
+
+void decomposition_result::injected_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >& v) {
+    injected_names_ = v;
+}
+
+void decomposition_result::injected_names(const std::list<std::pair<std::string, dogen::yarn::meta_model::name> >&& v) {
+    injected_names_ = std::move(v);
 }
 
 } } }
