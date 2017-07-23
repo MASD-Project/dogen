@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <regex>
 #include <array>
 #include <algorithm>
 #include <unordered_set>
@@ -40,7 +39,8 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.post_processing_validator"));
 
 const std::string space(" ");
-const std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
+const std::regex strict_name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
+const std::regex loose_name_regex("^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$");
 
 /*
  * FIXME: we've removed the following keywords for now because yarn
@@ -136,15 +136,15 @@ allow_spaces_in_built_in_types(const meta_model::languages l) {
     return l == meta_model::languages::cpp;
 }
 
-void post_processing_validator::
-validate_string(const std::string& s, bool check_not_builtin) {
+void post_processing_validator::validate_string(const std::string& s,
+    const std::regex& regex, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "Sanity checking string: " << s;
 
     /*
      * String must match the regular expression for a valid
      * identifier across all supported languages.
      */
-    if (!std::regex_match(s, name_regex)) {
+    if (!std::regex_match(s, regex)) {
         BOOST_LOG_SEV(lg, error) << invalid_string << "'" << s << "'";
         BOOST_THROW_EXCEPTION(validation_error(invalid_string + s));
     }
@@ -174,14 +174,14 @@ validate_string(const std::string& s, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "String passed all sanity checks.";
 }
 
-void post_processing_validator::
-validate_strings(const std::list<std::string>& strings) {
+void post_processing_validator::validate_strings(
+    const std::list<std::string>& strings, const std::regex& regex) {
     for (const auto& s : strings)
-        validate_string(s);
+        validate_string(s, regex);
 }
 
 void post_processing_validator::validate_name(const meta_model::name& n,
-    const bool allow_spaces_in_built_in_types) {
+    const std::regex& regex, const bool allow_spaces_in_built_in_types) {
     /*
      * All names must have a non-empty id.
      */
@@ -218,21 +218,21 @@ void post_processing_validator::validate_name(const meta_model::name& n,
         const auto splitted(splitter::split_delimited(n.simple(), space));
         BOOST_LOG_SEV(lg, debug) << "Splitted simple name: " << splitted;
         for (const auto& s : splitted)
-            validate_string(s, check_not_builtin);
+            validate_string(s, regex, check_not_builtin);
     } else
-        validate_string(n.simple(), check_not_builtin);
+        validate_string(n.simple(), regex, check_not_builtin);
 
-    validate_strings(l.external_modules());
-    validate_strings(l.model_modules());
-    validate_strings(l.internal_modules());
+    validate_strings(l.external_modules(), regex);
+    validate_strings(l.model_modules(), regex);
+    validate_strings(l.internal_modules(), regex);
 
     if (!l.element().empty())
-        validate_string(l.element());
+        validate_string(l.element(), regex);
 }
 
 void post_processing_validator::
 validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
-    const meta_model::languages l) {
+    const std::regex& regex, const meta_model::languages l) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
     std::unordered_set<std::string> ids_done;
 
@@ -257,7 +257,7 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
             /*
              * Element name must pass all sanity checks.
              */
-            validate_name(n, allow_spaces);
+            validate_name(n, regex, allow_spaces);
 
             BOOST_LOG_SEV(lg, debug) << "Name is valid.";
         } catch (boost::exception& e) {
@@ -272,6 +272,11 @@ void post_processing_validator::validate_meta_names(
     const std::list<std::pair<std::string, meta_model::name>>& meta_names) {
     BOOST_LOG_SEV(lg, debug) << "Sanity checking all meta-names.";
 
+    /*
+     * Note that we can't just simply call validate_names here because
+     * meta-names are known to have duplicates - i.e. we use the same
+     * meta-model element many times).
+     */
     for (const auto& pair : meta_names) {
         const auto& owner(pair.first);
         const auto& n(pair.second);
@@ -282,7 +287,7 @@ void post_processing_validator::validate_meta_names(
             /*
              * Element name must pass all sanity checks.
              */
-            validate_name(n, false/*allow_spaces*/);
+            validate_name(n, strict_name_regex, false/*allow_spaces*/);
 
             BOOST_LOG_SEV(lg, debug) << "Name is valid.";
         } catch (boost::exception& e) {
@@ -291,11 +296,6 @@ void post_processing_validator::validate_meta_names(
         }
     }
     BOOST_LOG_SEV(lg, debug) << "Finished validating all meta-names.";
-}
-
-void post_processing_validator::validate_injected_names(
-    const std::list<std::pair<std::string, meta_model::name>>& /*names*/,
-    const meta_model::languages /*l*/) {
 }
 
 void post_processing_validator::
@@ -350,7 +350,23 @@ validate(const indices& idx, const meta_model::intermediate_model& im) {
 
     const auto l(im.input_language());
     const auto dr(decomposer::decompose(im));
-    validate_names(dr.names(), l);
+
+    /*
+     * Note: we need both strict and a loose regular expressions
+     * because the injected types represent in many cases file names -
+     * e.g. CMakeLists, Visual Studio solutions and project files,
+     * etc. These may require things such as dashes and dots. All
+     * other model types which map to programming language constructs
+     * do not allow these characters. So to make our life easier we
+     * use strict validation for most model types and the loose
+     * validation for the injected types. This is, of course, not
+     * strictly correct, because in theory one can inject fabric types
+     * which do not correspond to a file - e.g. serialisation
+     * registrar in c++). However, this is a good enough approximation
+     * for now.
+     */
+    validate_names(dr.names(), strict_name_regex, l);
+    validate_names(dr.injected_names(), loose_name_regex, l);
     validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
 

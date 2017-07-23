@@ -26,6 +26,7 @@
 #endif
 
 #include <list>
+#include <regex>
 #include <string>
 #include <utility>
 #include <unordered_set>
@@ -45,18 +46,16 @@ private:
 
 private:
     static void validate_string(const std::string& s,
-        bool check_not_builtin = true);
-    static void validate_strings(const std::list<std::string>& strings);
+        const std::regex& regex, bool check_not_builtin = true);
+    static void validate_strings(const std::list<std::string>& strings,
+        const std::regex& regex);
     static void validate_name(const meta_model::name& n,
-        const bool allow_spaces_in_built_in_types);
+        const std::regex& regex, const bool allow_spaces_in_built_in_types);
     static void validate_names(
         const std::list<std::pair<std::string, meta_model::name>>& names,
-        const meta_model::languages l);
+        const std::regex& regex, const meta_model::languages l);
     static void validate_meta_names(
         const std::list<std::pair<std::string, meta_model::name>>& meta_names);
-    static void validate_injected_names(
-        const std::list<std::pair<std::string, meta_model::name>>& names,
-        const meta_model::languages l);
 
     static void validate_name_tree(const std::unordered_set<std::string>&
         abstract_elements, const meta_model::languages l,
