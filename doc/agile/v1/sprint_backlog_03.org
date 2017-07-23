@@ -74,6 +74,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 - [[https://twitter.com/MarcoCraveiro/status/887172610487922688][Tweet]]
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6292938732865617920/][LinkedIn]]
+- [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
     CLOCK: [2017-07-18 Tue 17:13]--[2017-07-18 Tue 17:47] =>  0:34
