@@ -40,6 +40,7 @@ using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.post_processing_validator"));
 
 const std::string space(" ");
+const std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
 
 /*
  * FIXME: we've removed the following keywords for now because yarn
@@ -112,7 +113,6 @@ const std::string reserved_keyword(
 const std::string builtin_name("String matches the name of a built in type: ");
 const std::string abstract_instance(
     "Attempt to instantiate an abstract type: ");
-const std::string invalid_underlying_type("Invalid underlying type: ");
 const std::string invalid_empty_id("Name must have a non-empty id.");
 
 }
@@ -137,40 +137,6 @@ allow_spaces_in_built_in_types(const meta_model::languages l) {
 }
 
 void post_processing_validator::
-validate_enumerations(const indices& idx, const std::unordered_map<std::string,
-    meta_model::enumeration>& enumerations) {
-
-    for (const auto& pair : enumerations) {
-        const auto& e(pair.second);
-        const auto ue_id(e.underlying_element().id());
-        const auto i(idx.enumeration_underliers().find(ue_id));
-        if (i == idx.enumeration_underliers().end()) {
-            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
-                                     << " for enumeration: " << e.name().id();
-            BOOST_THROW_EXCEPTION(
-                validation_error(invalid_underlying_type + ue_id));
-        }
-    }
-}
-
-void post_processing_validator::validate_primitives(const indices& idx,
-    const std::unordered_map<std::string, meta_model::primitive>& primitivess) {
-
-    for (const auto& pair : primitivess) {
-        const auto& p(pair.second);
-        const auto& attr(p.value_attribute());
-        const auto& ue_id(attr.parsed_type().current().id());
-        const auto i(idx.primitive_underliers().find(ue_id));
-        if (i == idx.primitive_underliers().end()) {
-            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
-                                     << " for primitive: " << p.name().id();
-            BOOST_THROW_EXCEPTION(
-                validation_error(invalid_underlying_type + ue_id));
-        }
-    }
-}
-
-void post_processing_validator::
 validate_string(const std::string& s, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "Sanity checking string: " << s;
 
@@ -178,7 +144,6 @@ validate_string(const std::string& s, bool check_not_builtin) {
      * String must match the regular expression for a valid
      * identifier across all supported languages.
      */
-    static std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
     if (!std::regex_match(s, name_regex)) {
         BOOST_LOG_SEV(lg, error) << invalid_string << "'" << s << "'";
         BOOST_THROW_EXCEPTION(validation_error(invalid_string + s));
@@ -388,8 +353,6 @@ validate(const indices& idx, const meta_model::intermediate_model& im) {
     validate_names(dr.names(), l);
     validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
-    validate_enumerations(idx, im.enumerations());
-    validate_primitives(idx, im.primitives());
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

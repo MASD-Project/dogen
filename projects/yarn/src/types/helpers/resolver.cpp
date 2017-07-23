@@ -46,8 +46,7 @@ const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
 const std::string orphan_concept("Refined concept could not be located: ");
 const std::string undefined_type("Object has attribute with undefined type: ");
-const std::string invalid_underlying_element(
-    "Could not find enumeration's underlying element: ");
+const std::string invalid_underlying_type("Invalid underlying type: ");
 
 typedef boost::error_info<struct tag_errmsg, std::string> errmsg_info;
 
@@ -507,7 +506,8 @@ resolve_objects(const indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolved objects.";
 }
 
-void resolver::resolve_enumerations(meta_model::intermediate_model& im) {
+void resolver::
+resolve_enumerations(const indices& idx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving enumerations. Size: "
                              << im.enumerations().size();
 
@@ -524,13 +524,15 @@ void resolver::resolve_enumerations(meta_model::intermediate_model& im) {
             continue;
 
         const auto ue(e.underlying_element());
-        const auto id(ue.id());
-        BOOST_LOG_SEV(lg, debug) << "Underlying element: '" << id << "'";
+        const auto ue_id(ue.id());
+        BOOST_LOG_SEV(lg, debug) << "Underlying element: '" << ue_id << "'";
 
-        if (!is_builtin(im, ue)) {
-            BOOST_LOG_SEV(lg, error) << invalid_underlying_element << id;
+        const auto i(idx.enumeration_underliers().find(ue_id));
+        if (i == idx.enumeration_underliers().end()) {
+            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
+                                     << " for enumeration: " << e.name().id();
             BOOST_THROW_EXCEPTION(
-                resolution_error(invalid_underlying_element + id));
+                resolution_error(invalid_underlying_type + ue_id));
         }
         BOOST_LOG_SEV(lg, debug) << "Resolved enumeration.";
     }
@@ -547,7 +549,23 @@ resolve_primitives(const indices& idx, meta_model::intermediate_model& im) {
         auto& p(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving primitive: " << p.name().id();
-        resolve_attribute(im, idx, p.name(), p.value_attribute());
+
+        /*
+         * We must resolve the attribute as well as validate it
+         * because we need to update its properties as part of
+         * resolution.
+         */
+        auto& attr(p.value_attribute());
+        resolve_attribute(im, idx, p.name(), attr);
+
+        const auto& ue_id(attr.parsed_type().current().id());
+        const auto i(idx.primitive_underliers().find(ue_id));
+        if (i == idx.primitive_underliers().end()) {
+            BOOST_LOG_SEV(lg, error) << invalid_underlying_type << ue_id
+                                     << " for primitive: " << p.name().id();
+            BOOST_THROW_EXCEPTION(
+                resolution_error(invalid_underlying_type + ue_id));
+        }
         BOOST_LOG_SEV(lg, debug) << "Resolved primitive.";
     }
 
@@ -626,7 +644,7 @@ void resolver::resolve(const indices& idx, meta_model::intermediate_model& im) {
 
     resolve_concepts(idx, im);
     resolve_objects(idx, im);
-    resolve_enumerations(im);
+    resolve_enumerations(idx, im);
     resolve_primitives(idx, im);
 
     BOOST_LOG_SEV(lg, debug) << "Resolved model.";

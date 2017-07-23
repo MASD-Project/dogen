@@ -44,13 +44,6 @@ private:
     static bool allow_spaces_in_built_in_types(const meta_model::languages l);
 
 private:
-    static void validate_enumerations(const indices& idx, const
-        std::unordered_map<std::string, meta_model::enumeration>& enumerations);
-
-    static void validate_primitives(const indices& idx, const
-        std::unordered_map<std::string, meta_model::primitive>& primitivess);
-
-private:
     static void validate_string(const std::string& s,
         bool check_not_builtin = true);
     static void validate_strings(const std::list<std::string>& strings);

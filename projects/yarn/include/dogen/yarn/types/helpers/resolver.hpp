@@ -145,7 +145,8 @@ private:
     /**
      * @brief Resolve all enumerations.
      */
-    static void resolve_enumerations(meta_model::intermediate_model& im);
+    static void resolve_enumerations(const indices& idx,
+        meta_model::intermediate_model& im);
 
     /**
      * @brief Resolve all primitives.
