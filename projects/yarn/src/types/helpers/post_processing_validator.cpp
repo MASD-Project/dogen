@@ -43,8 +43,7 @@ const std::string space(" ");
 
 /*
  * FIXME: we've removed the following keywords for now because yarn
- * uses these terms: module, concept. We need to first rename it to
- * package or somesuch other name and then add it back.
+ * uses these terms: "module", "concept".
  */
 std::array<std::string, 81> cpp_reserved = { {
         "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
@@ -70,10 +69,8 @@ std::array<std::string, 11> cpp_builtins = { {
 
 /*
  * FIXME: we've removed the following keywords for now because test
- * models use these terms: "base". We need to first rename it
- * to package or somesuch other name and then add it back.
+ * models use these terms: "base".
  */
-
 std::array<std::string, 64> csharp_reserved = { {
         "abstract", "as", "break",
         "case", "catch", "checked", "class",
@@ -93,9 +90,17 @@ std::array<std::string, 64> csharp_reserved = { {
         "void", "volatile", "while"
     } };
 
-std::array<std::string, 15> csharp_builtins = { {
-        "byte", "bool", "char", "decimal", "double", "float", "int", "long",
-        "sbyte", "short",  "uint", "ulong", "ushort", "object", "string"
+/*
+ * FIXME: we've removed the following builtins for now, because they
+ * are being used by the following models:
+ *
+ * - "decimal": yarn.upsilon
+ * - "object": yarn
+ * - "string": std
+ */
+std::array<std::string, 12> csharp_builtins = { {
+        "byte", "bool", "char", "double", "float", "int", "long",
+        "sbyte", "short",  "uint", "ulong", "ushort"
     }
 };
 
@@ -108,12 +113,23 @@ const std::string builtin_name("String matches the name of a built in type: ");
 const std::string abstract_instance(
     "Attempt to instantiate an abstract type: ");
 const std::string invalid_underlying_type("Invalid underlying type: ");
+const std::string invalid_empty_id("Name must have a non-empty id.");
 
 }
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
+
+template<typename Container>
+inline void check_not_in_container(const Container& c, const std::string& str,
+    const std::string& error_msg) {
+    const auto i(std::find(c.begin(), c.end(), str));
+    if (i != c.end()) {
+        BOOST_LOG_SEV(lg, error) << error_msg << str;
+        BOOST_THROW_EXCEPTION(validation_error(error_msg + str));
+    }
+}
 
 bool post_processing_validator::
 allow_spaces_in_built_in_types(const meta_model::languages l) {
@@ -154,40 +170,40 @@ void post_processing_validator::validate_primitives(const indices& idx,
     }
 }
 
-
 void post_processing_validator::
 validate_string(const std::string& s, bool check_not_builtin) {
     BOOST_LOG_SEV(lg, trace) << "Sanity checking string: " << s;
+
+    /*
+     * String must match the regular expression for a valid
+     * identifier across all supported languages.
+     */
     static std::regex name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
     if (!std::regex_match(s, name_regex)) {
         BOOST_LOG_SEV(lg, error) << invalid_string << "'" << s << "'";
         BOOST_THROW_EXCEPTION(validation_error(invalid_string + s));
     }
 
-    const auto i(std::find(cpp_reserved.begin(), cpp_reserved.end(), s));
-    if (i != cpp_reserved.end()) {
-        BOOST_LOG_SEV(lg, error) << reserved_keyword << s;
-        BOOST_THROW_EXCEPTION(validation_error(reserved_keyword + s));
-    }
+    /*
+     * String must not be in our list of reserved keywords for C++.
+     */
+    check_not_in_container(cpp_reserved, s, reserved_keyword);
 
-    const auto j(std::find(csharp_reserved.begin(), csharp_reserved.end(), s));
-    if (j != csharp_reserved.end()) {
-        BOOST_LOG_SEV(lg, error) << reserved_keyword << s;
-        BOOST_THROW_EXCEPTION(validation_error(reserved_keyword + s));
-    }
+    /*
+     * String must not be in our list of reserved keywords for C#.
+     */
+    check_not_in_container(csharp_reserved, s, reserved_keyword);
 
     if (check_not_builtin) {
-        const auto k(std::find(cpp_builtins.begin(), cpp_builtins.end(), s));
-        if (k != cpp_builtins.end()) {
-            BOOST_LOG_SEV(lg, error) << builtin_name << s;
-            BOOST_THROW_EXCEPTION(validation_error(builtin_name + s));
-        }
+        /*
+         * String must not be in our list of builtins for C++.
+         */
+        check_not_in_container(cpp_builtins, s, builtin_name);
 
-        const auto l(std::find(cpp_builtins.begin(), cpp_builtins.end(), s));
-        if (l != cpp_builtins.end()) {
-            BOOST_LOG_SEV(lg, error) << builtin_name << s;
-            BOOST_THROW_EXCEPTION(validation_error(builtin_name + s));
-        }
+        /*
+         * String must not be in our list of builtins for C#.
+         */
+        check_not_in_container(csharp_builtins, s, builtin_name);
     }
 
     BOOST_LOG_SEV(lg, trace) << "String passed all sanity checks.";
@@ -201,6 +217,15 @@ validate_strings(const std::list<std::string>& strings) {
 
 void post_processing_validator::validate_name(const meta_model::name& n,
     const bool allow_spaces_in_built_in_types) {
+
+    /*
+     * All names must have a non-empty id.
+     */
+    if (n.id().empty()) {
+        BOOST_LOG_SEV(lg, error) << invalid_empty_id;
+        BOOST_THROW_EXCEPTION(validation_error(invalid_empty_id));
+    }
+
     /*
      * Built-in types are defined at the global namespace level; if we
      * are at the global namespace level, then built-ins are valid
