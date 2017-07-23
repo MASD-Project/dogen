@@ -59,6 +59,12 @@ private:
     static void validate_names(
         const std::list<std::pair<std::string, meta_model::name>>& names,
         const meta_model::languages l);
+    static void validate_meta_names(
+        const std::list<std::pair<std::string, meta_model::name>>& names,
+        const meta_model::languages l);
+    static void validate_injected_names(
+        const std::list<std::pair<std::string, meta_model::name>>& names,
+        const meta_model::languages l);
 
     static void validate_name_tree(const std::unordered_set<std::string>&
         abstract_elements, const meta_model::languages l,

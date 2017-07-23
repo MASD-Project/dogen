@@ -35,18 +35,22 @@ namespace yarn {
 namespace helpers {
 
 void decomposer::add_name(const std::string& owner, const meta_model::name& n) {
-    std::pair<std::string, meta_model::name> pair;
-    pair.first = owner;
-    pair.second = n;
-    result_.names().push_back(pair);
+    result_.names().push_back(std::make_pair(owner, n));
+}
+
+void decomposer::
+add_meta_name(const std::string& owner, const meta_model::name& n) {
+    result_.meta_names().push_back(std::make_pair(owner, n));
+}
+
+void decomposer::
+add_injected_name(const std::string& owner, const meta_model::name& n) {
+    result_.injected_names().push_back(std::make_pair(owner, n));
 }
 
 void decomposer::
 add_name_tree(const std::string& owner, const meta_model::name_tree& nt) {
-    std::pair<std::string, meta_model::name_tree> pair;
-    pair.first = owner;
-    pair.second = nt;
-    result_.name_trees().push_back(pair);
+    result_.name_trees().push_back(std::make_pair(owner, nt));
 }
 
 void decomposer::
@@ -65,10 +69,15 @@ void decomposer::decompose_attributes(const std::string& owner,
 
 void decomposer::decompose_element(const meta_model::element& e) {
     add_name(e.name().id(), e.name());
+    add_meta_name(e.meta_name().id(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::element& e) {
-    decompose_element(e);
+    /*
+     * Injected names go to a separate validation bucket.
+     */
+    add_injected_name(e.name().id(), e.name());
+    add_meta_name(e.meta_name().id(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::module& m) {
@@ -124,7 +133,7 @@ decomposer::decompose(const meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Decomposing model: " << im.name().id();
 
     decomposer dc;
-    meta_model::elements_traversal(im, dc);
+    meta_model::elements_traversal(im, dc, true/*include_injected_elements*/);
 
     BOOST_LOG_SEV(lg, debug) << "Finished decomposing model. Result: "
                              << dc.result();;
