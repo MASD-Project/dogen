@@ -23,6 +23,7 @@
 #include "dogen/quilt.csharp/types/formatters/io/traits.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
@@ -52,6 +53,12 @@ annotations::archetype_location enum_formatter::archetype_location() const {
 
 std::type_index enum_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(yarn::meta_model::enumeration)));
+    return r;
+}
+
+const yarn::meta_model::name& enum_formatter::meta_name() const {
+    using yarn::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_enumeration_name());
     return r;
 }
 

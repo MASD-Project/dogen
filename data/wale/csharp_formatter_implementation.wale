@@ -21,6 +21,12 @@ std::type_index {{class.simple_name}}::element_type_index() const {
     return r;
 }
 
+const yarn::meta_model::name& {{class.simple_name}}::meta_name() const {
+    using {{meta_name_factory}};
+    static auto r(meta_name_factory::make_{{meta_element}}_name());
+    return r;
+}
+
 boost::filesystem::path {{class.simple_name}}::full_path(
     const formattables::locator& l, const yarn::meta_model::name& n) const {
     return l.make_full_path(n, static_artefact());

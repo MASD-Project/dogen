@@ -30,6 +30,7 @@
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.csharp/types/formattables/locator.hpp"
 #include "dogen/quilt.csharp/types/formatters/context.hpp"
@@ -62,6 +63,12 @@ public:
      * formatter.
      */
     virtual std::type_index element_type_index() const = 0;
+
+    /**
+     * @brief Returns name of the meta-model element that this
+     * formatter supports.
+     */
+    virtual const yarn::meta_model::name& meta_name() const = 0;
 
 public:
     /**

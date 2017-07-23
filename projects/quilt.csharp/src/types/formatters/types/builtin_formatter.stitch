@@ -3,6 +3,7 @@
 <#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/yarn/types/meta_model/builtin.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.csharp/types/formatters/assistant.hpp" #>
@@ -11,6 +12,8 @@
 <#@ stitch.wale.kvp.class.simple_name=builtin_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=builtin #>
 <#@ stitch.wale.kvp.yarn_element=yarn::meta_model::builtin #>
+<#@ stitch.wale.kvp.meta_element=builtin #>
+<#@ stitch.wale.kvp.meta_name_factory=yarn::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

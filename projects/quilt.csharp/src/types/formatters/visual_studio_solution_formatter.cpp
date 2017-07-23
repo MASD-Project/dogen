@@ -19,10 +19,11 @@
  *
  */
 #include "dogen/quilt.csharp/types/formatters/visual_studio_solution_formatter.hpp"
-#include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.csharp/types/formatters/assistant.hpp"
 #include "dogen/quilt.csharp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formatters/traits.hpp"
+#include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
+#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
@@ -53,6 +54,12 @@ visual_studio_solution_formatter::archetype_location() const {
 
 std::type_index visual_studio_solution_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(fabric::visual_studio_solution)));
+    return r;
+}
+
+const yarn::meta_model::name&
+visual_studio_solution_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
     return r;
 }
 
