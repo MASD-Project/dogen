@@ -44,7 +44,7 @@ private:
     boost::shared_ptr<forward_declarations> create(const Element& e) const {
         auto r(boost::make_shared<forward_declarations>());
         r->name(e.name());
-        r->meta_name(meta_name_factory::make_name("forward_declarations"));
+        r->meta_name(meta_name_factory::make_forward_declarations_name());
         r->origin_type(e.origin_type());
         r->annotation(e.annotation());
         r->is_element_extension(true);

@@ -61,7 +61,7 @@ make(const yarn::meta_model::intermediate_model& im) const {
 
         auto ooo(boost::make_shared<object_odb_options>());
         ooo->name(o.name());
-        ooo->meta_name(meta_name_factory::make_name("object_odb_options"));
+        ooo->meta_name(meta_name_factory::make_object_odb_options_name());
         ooo->origin_type(o.origin_type());
         ooo->annotation(o.annotation());
         ooo->is_element_extension(true);
@@ -80,7 +80,7 @@ make(const yarn::meta_model::intermediate_model& im) const {
 
     auto coo(boost::make_shared<common_odb_options>());
     coo->name(n);
-    coo->meta_name(meta_name_factory::make_name("common_odb_options"));
+    coo->meta_name(meta_name_factory::make_common_odb_options_name());
     coo->origin_type(im.origin_type());
     r.push_back(coo);
 

@@ -46,7 +46,7 @@ make(const yarn::meta_model::name& model_name) const {
     const auto n(nf.build_element_in_model(model_name, simple_name));
     auto r(boost::make_shared<registrar>());
     r->name(n);
-    r->meta_name(meta_name_factory::make_name("registrar"));
+    r->meta_name(meta_name_factory::make_registrar_name());
     return r;
 }
 

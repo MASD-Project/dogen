@@ -43,4 +43,49 @@ yarn::meta_model::name meta_name_factory::make_name(const std::string& sn) {
     return b.build();
 }
 
+yarn::meta_model::name meta_name_factory::make_cmakelists_name() {
+    static const auto r(make_name("cmakelists"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_master_header_name() {
+    static const auto r(make_name("maste_header"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_msbuild_targets_name() {
+    static const auto r(make_name("msbuild_targets"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_visual_studio_project_name() {
+    static const auto r(make_name("visual_studio_project"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
+    static const auto r(make_name("visual_studio_solution"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_common_odb_options_name() {
+    static const auto r(make_name("common_odb_options"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_object_odb_options_name() {
+    static const auto r(make_name("object_odb_options"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_registrar_name() {
+    static const auto r(make_name("registrar"));
+    return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_forward_declarations_name() {
+    static const auto r(make_name("forward_declarations"));
+    return r;
+}
+
 } } } }

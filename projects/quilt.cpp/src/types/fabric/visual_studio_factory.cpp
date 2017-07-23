@@ -111,7 +111,7 @@ visual_studio_factory::make_solution(const visual_studio_configuration cfg,
 
     auto r(boost::make_shared<visual_studio_solution>());
     r->name(n);
-    r->meta_name(meta_name_factory::make_name("visual_studio_solution"));
+    r->meta_name(meta_name_factory::make_visual_studio_solution_name());
     r->origin_type(im.origin_type());
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
@@ -134,7 +134,7 @@ visual_studio_factory::make_project(const visual_studio_configuration cfg,
 
     auto r(boost::make_shared<visual_studio_project>());
     r->name(n);
-    r->meta_name(meta_name_factory::make_name("visual_studio_project"));
+    r->meta_name(meta_name_factory::make_visual_studio_project_name());
     r->origin_type(im.origin_type());
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
