@@ -22,6 +22,7 @@
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/fabric/cmakelists.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
@@ -56,6 +57,11 @@ archetype_location() const {
 
 std::type_index source_cmakelists_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(fabric::cmakelists)));
+    return r;
+}
+
+const yarn::meta_model::name& source_cmakelists_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_cmakelists_name());
     return r;
 }
 

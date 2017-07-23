@@ -25,6 +25,7 @@
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
@@ -58,6 +59,12 @@ primitive_implementation_formatter::archetype_location() const {
 
 std::type_index primitive_implementation_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(yarn::meta_model::primitive)));
+    return r;
+}
+
+const yarn::meta_model::name& primitive_implementation_formatter::meta_name() const {
+    using yarn::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_primitive_name());
     return r;
 }
 

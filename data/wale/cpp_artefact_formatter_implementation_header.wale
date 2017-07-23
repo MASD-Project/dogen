@@ -22,6 +22,12 @@ std::type_index {{class.simple_name}}::element_type_index() const {
     return r;
 }
 
+const yarn::meta_model::name& {{class.simple_name}}::meta_name() const {
+    using {{meta_name_factory}};
+    static auto r(meta_name_factory::make_{{meta_element}}_name());
+    return r;
+}
+
 inclusion_support_types {{class.simple_name}}::inclusion_support_type() const {
     return inclusion_support_types::{{class.inclusion_support_type}};
 }

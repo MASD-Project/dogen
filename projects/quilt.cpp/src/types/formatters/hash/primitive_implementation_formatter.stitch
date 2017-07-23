@@ -5,6 +5,7 @@
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/yarn/types/meta_model/primitive.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/yarn/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
@@ -18,6 +19,8 @@
 <#@ stitch.wale.kvp.class.simple_name=primitive_implementation_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=primitive_implementation #>
 <#@ stitch.wale.kvp.yarn_element=yarn::meta_model::primitive #>
+<#@ stitch.wale.kvp.meta_element=primitive #>
+<#@ stitch.wale.kvp.meta_name_factory=yarn::helpers::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

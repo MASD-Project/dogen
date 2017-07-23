@@ -19,11 +19,12 @@
  *
  */
 #include "dogen/quilt.cpp/types/formatters/visual_studio_solution_formatter.hpp"
-#include "dogen/quilt.cpp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.cpp/types/formatters/formatting_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/formatters/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
+#include "dogen/quilt.cpp/types/fabric/visual_studio_solution.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -44,7 +45,8 @@ std::string visual_studio_solution_formatter::formatter_name() const {
     return r;
 }
 
-annotations::archetype_location visual_studio_solution_formatter::archetype_location() const {
+annotations::archetype_location
+visual_studio_solution_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::family(), cpp::traits::kernel(),
           traits::visual_studio_facet(),
@@ -54,6 +56,13 @@ annotations::archetype_location visual_studio_solution_formatter::archetype_loca
 
 std::type_index visual_studio_solution_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(fabric::visual_studio_solution)));
+    return r;
+}
+
+const yarn::meta_model::name&
+visual_studio_solution_formatter::meta_name() const {
+    using fabric::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
 }
 

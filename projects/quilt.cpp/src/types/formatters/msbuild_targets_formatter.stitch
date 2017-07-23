@@ -3,6 +3,7 @@
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/msbuild_targets.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
@@ -32,6 +33,11 @@ msbuild_targets_formatter::archetype_location() const {
 
 std::type_index msbuild_targets_formatter::element_type_index() const {
     auto r(std::type_index(typeid(fabric::msbuild_targets)));
+    return r;
+}
+
+const yarn::meta_model::name& msbuild_targets_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_msbuild_targets_name());
     return r;
 }
 

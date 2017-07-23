@@ -26,6 +26,7 @@
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/forward_declarations.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include <boost/make_shared.hpp>
@@ -57,6 +58,12 @@ forward_declarations_formatter::archetype_location() const {
 
 std::type_index forward_declarations_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(fabric::forward_declarations)));
+    return r;
+}
+
+const yarn::meta_model::name& forward_declarations_formatter::meta_name() const {
+    using fabric::meta_name_factory;
+    static auto r(meta_name_factory::make_forward_declarations_name());
     return r;
 }
 

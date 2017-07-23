@@ -25,6 +25,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/fabric/msbuild_targets.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
@@ -55,6 +56,11 @@ msbuild_targets_formatter::archetype_location() const {
 
 std::type_index msbuild_targets_formatter::element_type_index() const {
     auto r(std::type_index(typeid(fabric::msbuild_targets)));
+    return r;
+}
+
+const yarn::meta_model::name& msbuild_targets_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_msbuild_targets_name());
     return r;
 }
 

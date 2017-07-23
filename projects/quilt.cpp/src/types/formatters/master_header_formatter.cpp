@@ -24,6 +24,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
@@ -48,6 +49,11 @@ master_header_formatter::archetype_location() const {
 
 std::type_index master_header_formatter::element_type_index() const {
     auto r(std::type_index(typeid(fabric::master_header)));
+    return r;
+}
+
+const yarn::meta_model::name& master_header_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_master_header_name());
     return r;
 }
 

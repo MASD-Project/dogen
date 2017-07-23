@@ -28,6 +28,7 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/assistant.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
@@ -58,6 +59,12 @@ class_header_formatter::archetype_location() const {
 
 std::type_index class_header_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(yarn::meta_model::object)));
+    return r;
+}
+
+const yarn::meta_model::name& class_header_formatter::meta_name() const {
+    using yarn::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_object_name());
     return r;
 }
 

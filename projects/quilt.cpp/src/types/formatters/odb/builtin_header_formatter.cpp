@@ -24,6 +24,7 @@
 #include "dogen/quilt.cpp/types/formatters/odb/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include <boost/make_shared.hpp>
 #include <typeinfo>
@@ -54,6 +55,12 @@ builtin_header_formatter::archetype_location() const {
 
 std::type_index builtin_header_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(yarn::meta_model::builtin)));
+    return r;
+}
+
+const yarn::meta_model::name& builtin_header_formatter::meta_name() const {
+    using yarn::helpers::meta_name_factory;
+    static auto r(meta_name_factory::make_builtin_name());
     return r;
 }
 

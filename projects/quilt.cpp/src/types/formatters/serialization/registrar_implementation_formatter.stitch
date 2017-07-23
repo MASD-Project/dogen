@@ -8,6 +8,7 @@
 <#@ stitch.inclusion_dependency="dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/registrar.hpp" #>
+<#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/traits.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/assistant.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/formatters/serialization/traits.hpp" #>
@@ -20,6 +21,8 @@
 <#@ stitch.wale.kvp.class.simple_name=registrar_implementation_formatter #>
 <#@ stitch.wale.kvp.archetype.simple_name=registrar_implementation #>
 <#@ stitch.wale.kvp.yarn_element=fabric::registrar #>
+<#@ stitch.wale.kvp.meta_element=registrar #>
+<#@ stitch.wale.kvp.meta_name_factory=fabric::meta_name_factory #>
 <#$ stitch.wale.template_instantiation_result #>
 <#+
 

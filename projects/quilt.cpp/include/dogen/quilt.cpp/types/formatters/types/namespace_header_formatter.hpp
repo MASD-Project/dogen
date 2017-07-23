@@ -42,6 +42,7 @@ public:
     std::string formatter_name() const override;
     annotations::archetype_location archetype_location() const override;
     std::type_index element_type_index() const override;
+    const yarn::meta_model::name& meta_name() const override;
 
 public:
     std::list<std::string> inclusion_dependencies(

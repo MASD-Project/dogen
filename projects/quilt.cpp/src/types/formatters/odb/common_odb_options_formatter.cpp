@@ -27,6 +27,7 @@
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
+#include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/utility/log/logger.hpp"
@@ -60,6 +61,11 @@ common_odb_options_formatter::archetype_location() const {
 
 std::type_index common_odb_options_formatter::element_type_index() const {
     static auto r(std::type_index(typeid(fabric::common_odb_options)));
+    return r;
+}
+
+const yarn::meta_model::name& common_odb_options_formatter::meta_name() const {
+    static auto r(fabric::meta_name_factory::make_common_odb_options_name());
     return r;
 }
 
