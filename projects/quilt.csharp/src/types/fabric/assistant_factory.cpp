@@ -42,7 +42,7 @@ assistant_factory::make(const yarn::meta_model::intermediate_model& im) const {
 
     auto r(boost::make_shared<assistant>());
     r->name(n);
-    r->meta_name(meta_name_factory::make_name("assistant"));
+    r->meta_name(meta_name_factory::make_assistant_name());
     r->origin_type(im.origin_type());
 
     return r;

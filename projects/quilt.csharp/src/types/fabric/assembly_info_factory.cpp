@@ -50,7 +50,7 @@ make(const yarn::meta_model::intermediate_model& im) const {
 
     auto r(boost::make_shared<assembly_info>());
     r->name(n);
-    r->meta_name(meta_name_factory::make_name("assembly_info"));
+    r->meta_name(meta_name_factory::make_assembly_info_name());
     r->origin_type(im.origin_type());
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";

@@ -43,4 +43,20 @@ yarn::meta_model::name meta_name_factory::make_name(const std::string& sn) {
     return b.build();
 }
 
+yarn::meta_model::name meta_name_factory::make_assembly_info_name() {
+    return make_name("assembly_info");
+}
+
+yarn::meta_model::name meta_name_factory::make_assistant_name() {
+    return make_name("assistant");
+}
+
+yarn::meta_model::name meta_name_factory::make_visual_studio_project_name() {
+    return make_name("visual_studio_project");
+}
+
+yarn::meta_model::name meta_name_factory::make_visual_studio_solution_name() {
+    return make_name("visual_studio_solution");
+}
+
 } } } }

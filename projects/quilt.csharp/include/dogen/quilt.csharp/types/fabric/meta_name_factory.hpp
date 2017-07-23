@@ -37,8 +37,14 @@ class meta_name_factory final {
 private:
     static yarn::meta_model::location make_location();
 
-public:
+private:
     static yarn::meta_model::name make_name(const std::string& sn);
+
+public:
+    static yarn::meta_model::name make_assembly_info_name();
+    static yarn::meta_model::name make_assistant_name();
+    static yarn::meta_model::name make_visual_studio_project_name();
+    static yarn::meta_model::name make_visual_studio_solution_name();
 };
 
 } } } }
