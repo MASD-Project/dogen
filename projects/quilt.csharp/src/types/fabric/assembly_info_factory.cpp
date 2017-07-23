@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info.hpp"
+#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/assembly_info_factory.hpp"
 
 namespace {
@@ -49,6 +50,7 @@ make(const yarn::meta_model::intermediate_model& im) const {
 
     auto r(boost::make_shared<assembly_info>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("assembly_info"));
     r->origin_type(im.origin_type());
 
     BOOST_LOG_SEV(lg, debug) << "Generated Assembly Info.";

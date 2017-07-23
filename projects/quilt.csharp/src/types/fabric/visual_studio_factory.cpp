@@ -26,6 +26,7 @@
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
 #include "dogen/quilt.csharp/types/fabric/traits.hpp"
+#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_project.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_solution.hpp"
 #include "dogen/quilt.csharp/types/fabric/visual_studio_factory.hpp"
@@ -109,6 +110,7 @@ make_solution(const visual_studio_configuration cfg,
 
     auto r(boost::make_shared<visual_studio_solution>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("visual_studio_solution"));
     r->origin_type(im.origin_type());
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());
@@ -121,7 +123,8 @@ make_solution(const visual_studio_configuration cfg,
 
 boost::shared_ptr<yarn::meta_model::element> visual_studio_factory::
 make_project(const visual_studio_configuration cfg,
-    const std::string& project_name, const yarn::meta_model::intermediate_model& im) const {
+    const std::string& project_name,
+    const yarn::meta_model::intermediate_model& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
     yarn::helpers::name_factory nf;
@@ -130,6 +133,7 @@ make_project(const visual_studio_configuration cfg,
 
     auto r(boost::make_shared<visual_studio_project>());
     r->name(n);
+    r->meta_name(meta_name_factory::make_name("visual_studio_project"));
     r->origin_type(im.origin_type());
     r->project_name(project_name);
     r->project_guid(cfg.project_guid());

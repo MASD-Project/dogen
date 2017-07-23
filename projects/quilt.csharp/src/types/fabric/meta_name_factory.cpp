@@ -18,34 +18,29 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
-
-namespace {
-
-const std::string assistant_name("Assistant");
-
-}
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-boost::shared_ptr<yarn::meta_model::element>
-assistant_factory::make(const yarn::meta_model::intermediate_model& im) const {
-    yarn::helpers::name_factory nf;
-    const auto n(nf.build_element_in_model(im.name(), assistant_name));
-
-    auto r(boost::make_shared<assistant>());
-    r->name(n);
-    r->meta_name(meta_name_factory::make_name("assistant"));
-    r->origin_type(im.origin_type());
-
+yarn::meta_model::location meta_name_factory::make_location() {
+    yarn::meta_model::location r;
+    r.external_modules().push_back("dogen");
+    r.model_modules().push_back("quilt");
+    r.model_modules().push_back("csharp");
+    r.internal_modules().push_back("fabric");
     return r;
+}
+
+yarn::meta_model::name meta_name_factory::make_name(const std::string& sn) {
+    static const auto l(make_location());
+    yarn::helpers::name_builder b;
+    b.location(l);
+    b.simple_name(sn);
+    return b.build();
 }
 
 } } } }

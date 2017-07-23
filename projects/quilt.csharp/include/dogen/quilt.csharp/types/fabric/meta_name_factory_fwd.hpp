@@ -18,34 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#include <boost/make_shared.hpp>
-#include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant.hpp"
-#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
-#include "dogen/quilt.csharp/types/fabric/assistant_factory.hpp"
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_META_NAME_FACTORY_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_META_NAME_FACTORY_FWD_HPP
 
-namespace {
-
-const std::string assistant_name("Assistant");
-
-}
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace fabric {
 
-boost::shared_ptr<yarn::meta_model::element>
-assistant_factory::make(const yarn::meta_model::intermediate_model& im) const {
-    yarn::helpers::name_factory nf;
-    const auto n(nf.build_element_in_model(im.name(), assistant_name));
-
-    auto r(boost::make_shared<assistant>());
-    r->name(n);
-    r->meta_name(meta_name_factory::make_name("assistant"));
-    r->origin_type(im.origin_type());
-
-    return r;
-}
+class meta_name_factory;
 
 } } } }
+
+#endif
