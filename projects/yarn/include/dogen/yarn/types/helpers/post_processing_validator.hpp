@@ -60,8 +60,7 @@ private:
         const std::list<std::pair<std::string, meta_model::name>>& names,
         const meta_model::languages l);
     static void validate_meta_names(
-        const std::list<std::pair<std::string, meta_model::name>>& names,
-        const meta_model::languages l);
+        const std::list<std::pair<std::string, meta_model::name>>& meta_names);
     static void validate_injected_names(
         const std::list<std::pair<std::string, meta_model::name>>& names,
         const meta_model::languages l);

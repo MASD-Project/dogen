@@ -217,7 +217,6 @@ validate_strings(const std::list<std::string>& strings) {
 
 void post_processing_validator::validate_name(const meta_model::name& n,
     const bool allow_spaces_in_built_in_types) {
-
     /*
      * All names must have a non-empty id.
      */
@@ -304,6 +303,36 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
     BOOST_LOG_SEV(lg, debug) << "Finished validating all names.";
 }
 
+void post_processing_validator::validate_meta_names(
+    const std::list<std::pair<std::string, meta_model::name>>& meta_names) {
+    BOOST_LOG_SEV(lg, debug) << "Sanity checking all meta-names.";
+
+    for (const auto& pair : meta_names) {
+        const auto& owner(pair.first);
+        const auto& n(pair.second);
+        const auto& id(n.id());
+        BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
+
+        try {
+            /*
+             * Element name must pass all sanity checks.
+             */
+            validate_name(n, false/*allow_spaces*/);
+
+            BOOST_LOG_SEV(lg, debug) << "Name is valid.";
+        } catch (boost::exception& e) {
+            e << errmsg_validation_owner(owner);
+            throw;
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished validating all meta-names.";
+}
+
+void post_processing_validator::validate_injected_names(
+    const std::list<std::pair<std::string, meta_model::name>>& /*names*/,
+    const meta_model::languages /*l*/) {
+}
+
 void post_processing_validator::
 validate_name_tree(const std::unordered_set<std::string>& abstract_elements,
     const meta_model::languages l, const meta_model::name_tree& nt,
@@ -328,7 +357,10 @@ void post_processing_validator::validate_name_trees(
 
     /*
      * The only validation we perform on name trees at present is done
-     * just for c++, so we can ignore all other languages.
+     * just for c++, so we can ignore all other languages. Note that
+     * we already resolve all of the names in the name tree so we know
+     * they are valid. These are just additional checks we perform on
+     * these names.
      */
     if (l != meta_model::languages::cpp)
         return;
@@ -354,6 +386,7 @@ validate(const indices& idx, const meta_model::intermediate_model& im) {
     const auto l(im.input_language());
     const auto dr(decomposer::decompose(im));
     validate_names(dr.names(), l);
+    validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
     validate_enumerations(idx, im.enumerations());
     validate_primitives(idx, im.primitives());
