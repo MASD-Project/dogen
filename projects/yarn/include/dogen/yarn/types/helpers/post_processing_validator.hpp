@@ -53,7 +53,9 @@ private:
         const std::regex& regex, const bool allow_spaces_in_built_in_types);
     static void validate_names(
         const std::list<std::pair<std::string, meta_model::name>>& names,
-        const std::regex& regex, const meta_model::languages l);
+        const meta_model::languages l);
+    static void validate_injected_names(
+        const std::list<std::pair<std::string, meta_model::name>>& names);
     static void validate_meta_names(
         const std::list<std::pair<std::string, meta_model::name>>& meta_names);
 

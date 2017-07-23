@@ -69,7 +69,7 @@ void decomposer::decompose_attributes(const std::string& owner,
 
 void decomposer::decompose_element(const meta_model::element& e) {
     add_name(e.name().id(), e.name());
-    add_meta_name(e.meta_name().id(), e.meta_name());
+    add_meta_name(e.name().id(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::element& e) {
@@ -77,7 +77,7 @@ void decomposer::operator()(const meta_model::element& e) {
      * Injected names go to a separate validation bucket.
      */
     add_injected_name(e.name().id(), e.name());
-    add_meta_name(e.meta_name().id(), e.meta_name());
+    add_meta_name(e.name().id(), e.meta_name());
 }
 
 void decomposer::operator()(const meta_model::module& m) {
@@ -124,7 +124,7 @@ void decomposer::operator()(const meta_model::visitor& v) {
     decompose_element(v);
 }
 
-const decomposition_result&  decomposer::result() const {
+const decomposition_result& decomposer::result() const {
     return result_;
 }
 

@@ -13,20 +13,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-23 Sun 13:10]
+#+CAPTION: Clock summary at [2017-07-23 Sun 14:21]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:18* |      |      | 100.0 |
+| *Total time*                                                                | *9:28* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:18   |      |      | 100.0 |
-| Active                                                                      |        | 8:18 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   3.8 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:05 |  13.1 |
-| COMPLETED Create a tagging checklist                                        |        |      | 0:07 |   1.4 |
-| COMPLETED Tidy-up post-processing validation                                |        |      | 2:31 |  30.3 |
-| STARTED Add meta-type support to yarn                                       |        |      | 3:29 |  42.0 |
-| STARTED Add canonical archetype support to yarn                             |        |      | 0:47 |   9.4 |
+| Stories                                                                     | 9:28   |      |      | 100.0 |
+| Active                                                                      |        | 9:28 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:19 |   3.3 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:05 |  11.4 |
+| COMPLETED Create a tagging checklist                                        |        |      | 0:07 |   1.2 |
+| COMPLETED Tidy-up post-processing validation                                |        |      | 3:41 |  38.9 |
+| STARTED Add meta-type support to yarn                                       |        |      | 3:29 |  36.8 |
+| STARTED Add canonical archetype support to yarn                             |        |      | 0:47 |   8.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -106,6 +106,7 @@ Checklist:
 
 *** COMPLETED Tidy-up post-processing validation                      :story:
     CLOSED: [2017-07-23 Sun 13:10]
+    CLOCK: [2017-07-23 Sun 13:11]--[2017-07-23 Sun 14:21] =>  1:10
     CLOCK: [2017-07-23 Sun 12:49]--[2017-07-23 Sun 13:10] =>  0:21
     CLOCK: [2017-07-23 Sun 12:41]--[2017-07-23 Sun 12:48] =>  0:07
     CLOCK: [2017-07-23 Sun 12:18]--[2017-07-23 Sun 12:40] =>  0:22

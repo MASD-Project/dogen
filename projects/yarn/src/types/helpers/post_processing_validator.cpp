@@ -232,8 +232,8 @@ void post_processing_validator::validate_name(const meta_model::name& n,
 
 void post_processing_validator::
 validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
-    const std::regex& regex, const meta_model::languages l) {
-    BOOST_LOG_SEV(lg, debug) << "Sanity checking all names.";
+    const meta_model::languages l) {
+    BOOST_LOG_SEV(lg, debug) << "Sanity checking names.";
     std::unordered_set<std::string> ids_done;
 
     const bool allow_spaces(allow_spaces_in_built_in_types(l));
@@ -257,7 +257,62 @@ validate_names(const std::list<std::pair<std::string, meta_model::name>>& names,
             /*
              * Element name must pass all sanity checks.
              */
-            validate_name(n, regex, allow_spaces);
+            validate_name(n, strict_name_regex, allow_spaces);
+
+            BOOST_LOG_SEV(lg, debug) << "Name is valid.";
+        } catch (boost::exception& e) {
+            e << errmsg_validation_owner(owner);
+            throw;
+        }
+    }
+    BOOST_LOG_SEV(lg, debug) << "Finished validating names.";
+}
+
+void post_processing_validator::
+validate_injected_names(
+    const std::list<std::pair<std::string, meta_model::name>>& names) {
+    BOOST_LOG_SEV(lg, debug) << "Sanity checking injected names.";
+
+    /*
+     * Injected names have a number of peculiarities that make
+     * validation harder:
+     *
+     * - we need a looser regular expression validation because the
+     *   injected types represent in many cases file names -
+     *   e.g. CMakeLists, Visual Studio solutions and project files,
+     *   etc. These may require things such as dashes and dots. All
+     *   other model types which map to programming language
+     *   constructs do not allow these characters. So to make our life
+     *   easier we use strict validation for most model types and the
+     *   loose validation for the injected types. This is, of course,
+     *   not strictly correct, because in theory one can inject fabric
+     *   types which do not correspond to a file - e.g. serialisation
+     *   registrar in c++). However, this is a good enough
+     *   approximation for now.
+     *
+     * - injected types can have duplicate names. This is due to
+     *   element extensions such as forward declarations and ODB
+     *   options. These take on the name of the element they are
+     *   extending; now, normally, this is not a problem because the
+     *   extended element will be processed as part of the names
+     *   collection and the extension as part of the injected
+     *   elements. However, when we are using ORM support, we end up
+     *   with more than one extension for each element (both forward
+     *   declaration and the ODB option). This means that duplicates
+     *   will occur even within the injected names collection. So we
+     *   just ignore duplicates altogether to make our life easier.
+     */
+    for (const auto& pair : names) {
+        const auto& owner(pair.first);
+        const auto& n(pair.second);
+        const auto& id(n.id());
+        BOOST_LOG_SEV(lg, debug) << "Validating: '" << id << "'";
+
+        try {
+            /*
+             * Element name must pass all sanity checks. Note that in
+             */
+            validate_name(n, loose_name_regex, false/*allow_spaces*/);
 
             BOOST_LOG_SEV(lg, debug) << "Name is valid.";
         } catch (boost::exception& e) {
@@ -350,23 +405,8 @@ validate(const indices& idx, const meta_model::intermediate_model& im) {
 
     const auto l(im.input_language());
     const auto dr(decomposer::decompose(im));
-
-    /*
-     * Note: we need both strict and a loose regular expressions
-     * because the injected types represent in many cases file names -
-     * e.g. CMakeLists, Visual Studio solutions and project files,
-     * etc. These may require things such as dashes and dots. All
-     * other model types which map to programming language constructs
-     * do not allow these characters. So to make our life easier we
-     * use strict validation for most model types and the loose
-     * validation for the injected types. This is, of course, not
-     * strictly correct, because in theory one can inject fabric types
-     * which do not correspond to a file - e.g. serialisation
-     * registrar in c++). However, this is a good enough approximation
-     * for now.
-     */
-    validate_names(dr.names(), strict_name_regex, l);
-    validate_names(dr.injected_names(), loose_name_regex, l);
+    validate_names(dr.names(), l);
+    validate_injected_names(dr.injected_names());
     validate_meta_names(dr.meta_names());
     validate_name_trees(idx.abstract_elements(), l, dr.name_trees());
 
