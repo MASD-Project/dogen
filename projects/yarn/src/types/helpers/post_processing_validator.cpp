@@ -40,7 +40,7 @@ auto lg(logger_factory("yarn.helpers.post_processing_validator"));
 
 const std::string space(" ");
 const std::regex strict_name_regex("^[a-zA-Z_][a-zA-Z0-9_]*$");
-const std::regex loose_name_regex("^[a-zA-Z_][a-zA-Z0-9_\\-\\.]*$");
+const std::regex loose_name_regex("^[a-zA-Z_][\\-\\.a-zA-Z0-9_]*$");
 
 /*
  * FIXME: we've removed the following keywords for now because yarn
