@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-25 Tue 23:25]
+#+CAPTION: Clock summary at [2017-07-25 Tue 23:29]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:00* |       |      | 100.0 |
+| *Total time*                                                                | *16:03* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:00   |       |      | 100.0 |
-| Active                                                                      |         | 16:00 |      | 100.0 |
+| Stories                                                                     | 16:03   |       |      | 100.0 |
+| Active                                                                      |         | 16:03 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   2.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:18 |   8.1 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.7 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  23.0 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  22.9 |
 | COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   7.9 |
-| STARTED Add meta-type support to yarn                                       |         |       | 8:32 |  53.3 |
 | STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.9 |
+| STARTED Add meta-type support to yarn                                       |         |       | 8:35 |  53.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -139,7 +139,36 @@ This is a bit of a more pressing issue because we now make use of name
 builders during initialisation in order to setup the formatter's
 meta-type.
 
+*** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
+    CLOCK: [2017-07-18 Tue 06:45]--[2017-07-18 Tue 07:27] =>  0:42
+
+We need to create a class to contain all archetype location related
+properties and add it to context. We also need to add a new property
+which captures the canonical archetypes. We can now have the registrar
+own this new class, populate it all during registration and return it
+at the start, via the kernel API.
+
+Actually we already have the annotation's archetype location
+repository, which we should have been using all along. Extend it to
+cope with type related information.
+
+Notes:
+
+- delete all usages of the list of archetype locations, make use of
+  repository instead.
+- add archetype_locations_by_element_type_index to repository.
+- kernels should only return
+  =archetype_locations_by_element_type_index=. Factory should use this
+  to build all containers. Factory should take multiple of these. We
+  should have a builder instead of a factory.
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+
 *** STARTED Add meta-type support to yarn                             :story:
+    CLOCK: [2017-07-25 Tue 23:26]--[2017-07-25 Tue 23:29] =>  0:03
     CLOCK: [2017-07-25 Tue 23:06]--[2017-07-25 Tue 23:25] =>  0:19
     CLOCK: [2017-07-25 Tue 22:15]--[2017-07-25 Tue 23:06] =>  0:51
     CLOCK: [2017-07-25 Tue 08:05]--[2017-07-25 Tue 08:11] =>  0:06
@@ -212,33 +241,13 @@ Notes:
 - update the frontends to set the meta-name when constructing the
   elements.
 
-*** STARTED Add canonical archetype support to yarn                   :story:
-    CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
-    CLOCK: [2017-07-18 Tue 06:45]--[2017-07-18 Tue 07:27] =>  0:42
+Problems:
 
-We need to create a class to contain all archetype location related
-properties and add it to context. We also need to add a new property
-which captures the canonical archetypes. We can now have the registrar
-own this new class, populate it all during registration and return it
-at the start, via the kernel API.
+- we are using meta-type and meta-name, use just one.
+- c# project id's seem to have weird id's:
 
-Actually we already have the annotation's archetype location
-repository, which we should have been using all along. Extend it to
-cope with type related information.
-
-Notes:
-
-- delete all usages of the list of archetype locations, make use of
-  repository instead.
-- add archetype_locations_by_element_type_index to repository.
-- kernels should only return
-  =archetype_locations_by_element_type_index=. Factory should use this
-  to build all containers. Factory should take multiple of these. We
-  should have a builder instead of a factory.
-- kernel must also return canonical archetype by element type
-  index. Perhaps we should have a struct that aggregates both:
-  archetype locations for meta-type? Or kernel can just return a
-  =std::pair=.
+: Processing element: <dogen><test_models><all_path_and_directory_settings><dogen.test_models.all_path_and_directory_settings.sln>
+: for archetype: quilt.csharp.visual_studio.solution
 
 *** Rename transformers to adapters                                   :story:
 
