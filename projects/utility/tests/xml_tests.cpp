@@ -123,8 +123,11 @@ void check_invalid_filename(
 /**
  * @brief Performs a read on an invalid file and checks the exception
  * thrown.
+ *
+ * FIXME: commented out since the only test using it is ignored at
+ * present.
  */
-void check_invalid_content(
+/*void check_invalid_content(
     dogen::utility::xml::text_reader& reader, std::string message) {
 
     using dogen::utility::xml::exception;
@@ -134,7 +137,7 @@ void check_invalid_content(
         exception,
         std::bind(check_xml_exception, _1, message)
         );
-}
+}*/
 
 /**
  * @brief Checks the state of the reader before reading the first
@@ -198,12 +201,15 @@ BOOST_AUTO_TEST_CASE(text_reader_throws_if_file_name_is_a_directory) {
     check_invalid_filename(path, message_error_file_not_regular);
 }
 
-BOOST_AUTO_TEST_CASE(text_reader_throws_if_file_is_empty) {
-    SETUP_TEST_LOG("text_reader_throws_if_file_is_empty");
-    using dogen::utility::test_data::xml_reader;
-    dogen::utility::xml::text_reader reader(xml_reader::input_empty_file());
-    check_invalid_content(reader, message_error_read_node);
-}
+// FIXME: test ignored because it outputs a libxml error to the
+// console, which is quite distracting - it appears its a build
+// error.
+// BOOST_IGNORE_AUTO_TEST_CASE(text_reader_throws_if_file_is_empty) {
+//     SETUP_TEST_LOG("text_reader_throws_if_file_is_empty");
+//     using dogen::utility::test_data::xml_reader;
+//     dogen::utility::xml::text_reader reader(xml_reader::input_empty_file());
+//     check_invalid_content(reader, message_error_read_node);
+// }
 
 BOOST_AUTO_TEST_CASE(text_reader_parses_file_one_node_inlined) {
     SETUP_TEST_LOG("text_reader_parses_file_one_node_inlined");
