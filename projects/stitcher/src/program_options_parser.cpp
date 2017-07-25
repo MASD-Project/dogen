@@ -22,12 +22,13 @@
 #include "dogen/stitcher/parser_validation_error.hpp"
 #include "dogen/stitcher/program_options_parser.hpp"
 
-// Note on logging: we are NOT logging any of the exceptions to the
-// log in this file. This is by design. The logger is only initialised
-// after the options have been parsed; were we to log prior to this,
-// we would dump all the messages into the console. The output is very
-// confusing users that are accustomed to normal console applications.
-
+/*
+ * Note on logging: we are NOT logging any of the exceptions to the
+ * log in this file. This is by design. The logger is only initialised
+ * after the options have been parsed; were we to log prior to this,
+ * we would dump all the messages into the console. The output is very
+ * confusing users that are accustomed to normal console applications.
+ */
 namespace {
 
 const std::string more_information(

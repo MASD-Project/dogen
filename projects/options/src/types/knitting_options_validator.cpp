@@ -37,7 +37,10 @@ namespace dogen {
 namespace options {
 
 void knitting_options_validator::validate(const knitting_options& o) {
-    // Note: not logging by design: log is not yet setup.
+    /*
+     * Note: not logging by design: log is not yet setup, since we
+     * need the options to initialise the logging.
+     */
 
     /*
      * User must supply a path to the target.

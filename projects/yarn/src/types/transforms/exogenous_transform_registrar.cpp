@@ -64,31 +64,33 @@ void exogenous_transform_registrar::validate() {
 
 void exogenous_transform_registrar::register_exogenous_transform(
     std::shared_ptr<exogenous_transform_interface> et) {
-
-    /*
-     * Note: not logging by design as this method is intended to be
-     * called before the log has been initialised.
-     */
-
     /*
      * Transformer must not be null.
      */
-    if (!et)
+    if (!et) {
+        BOOST_LOG_SEV(lg, error) << null_transformer;
         BOOST_THROW_EXCEPTION(registrar_error(null_transformer));
+    }
 
     /*
      * A transformer with the same ID must not have already been
      * registered.
      */
     const auto i(exogenous_transforms_.insert(std::make_pair(et->id(), et)));
-    if (!i.second)
+    if (!i.second) {
+        BOOST_LOG_SEV(lg, error) << already_registered << et->id();
         BOOST_THROW_EXCEPTION(registrar_error(already_registered + et->id()));
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrered exogenous transform: "
+                             << et->id();
 }
 
 exogenous_transform_interface& exogenous_transform_registrar::
 transform_for_model(const std::string& model_identifier) {
+    const auto& mid(model_identifier);
     BOOST_LOG_SEV(lg, debug) << "Looking for exogenous transformer for model: "
-                             << model_identifier << ".";
+                             << mid << ".";
 
     /*
      * We must do a linear search for the transform because the match
@@ -101,17 +103,16 @@ transform_for_model(const std::string& model_identifier) {
     for (const auto& pair : exogenous_transforms_) {
         const auto& et(pair.second);
 
-        if (!et->can_transform(model_identifier))
+        if (!et->can_transform(mid))
             continue;
 
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Found transform: '" << id << "'";
 
         if (found) {
-            BOOST_LOG_SEV(lg, error) << multiple_transforms << model_identifier
+            BOOST_LOG_SEV(lg, error) << multiple_transforms << mid
                                      << " Transformer: '" << id << "'";
-            BOOST_THROW_EXCEPTION(
-                registrar_error(multiple_transforms + model_identifier));
+            BOOST_THROW_EXCEPTION(registrar_error(multiple_transforms + mid));
         }
         found = true;
         r = pair.second;
@@ -120,9 +121,8 @@ transform_for_model(const std::string& model_identifier) {
     if (found)
         return *r;
 
-    BOOST_LOG_SEV(lg, error) << unsupported_model << model_identifier;
-    BOOST_THROW_EXCEPTION(
-        registrar_error(unsupported_model + model_identifier));
+    BOOST_LOG_SEV(lg, error) << unsupported_model << mid;
+    BOOST_THROW_EXCEPTION(registrar_error(unsupported_model + mid));
 }
 
 } } }

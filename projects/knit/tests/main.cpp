@@ -20,13 +20,18 @@
  */
 #define BOOST_TEST_MODULE knit_tests
 #include <boost/test/included/unit_test.hpp>
+#include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/fixture.hpp"
 #include "dogen/knit/types/initializer.hpp"
 
 namespace  {
 
+const std::string test_suite("initializer");
+const std::string test_module("knit");
+
 struct initializer {
     initializer() {
+        SETUP_TEST_LOG("initializer");
         dogen::knit::initializer::initialize();
     }
 };

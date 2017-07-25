@@ -145,19 +145,26 @@ void registrar::validate() const {
 
 void registrar::
 register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
-    // note: not logging by design
-    if (!f)
+    if (!f) {
+        BOOST_LOG_SEV(lg, error) << null_formatter;
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+    }
 
     const auto& al(f->archetype_location());
-    if (al.archetype().empty())
+    if (al.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+    }
 
-    if (al.facet().empty())
+    if (al.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_facet_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
+    }
 
-    if (al.kernel().empty())
+    if (al.kernel().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_name;
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
+    }
 
     formatter_repository_.stock_artefact_formatters_.push_front(f);
 
@@ -187,21 +194,30 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: "
+                             << f->formatter_name();
 }
 
-void registrar::register_formatter_helper(
-    std::shared_ptr<helper_formatter_interface> fh) {
+void registrar::
+register_formatter_helper(std::shared_ptr<helper_formatter_interface> fh) {
 
-    // note: not logging by design
-    if (!fh)
+    if (!fh) {
+        BOOST_LOG_SEV(lg, error) << null_formatter_helper;
         BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
+    }
 
-    if(fh->family().empty())
+    if(fh->family().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_family;
         BOOST_THROW_EXCEPTION(registrar_error(empty_family));
+    }
 
     auto& f(formatter_repository_.helper_formatters_[fh->family()]);
     for (const auto& of : fh->owning_formatters())
         f[of].push_back(fh);
+
+    BOOST_LOG_SEV(lg, debug) << "Registrered formatter helper: "
+                             << fh->helper_name();
 }
 
 const repository& registrar::formatter_repository() const {

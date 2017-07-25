@@ -41,9 +41,10 @@ namespace yarn {
 namespace transforms {
 
 void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
-    // no logging by design
-    if (!k)
+    if (!k) {
+        BOOST_LOG_SEV(lg, error) << null_kernel;
         BOOST_THROW_EXCEPTION(registrar_error(null_kernel));
+    }
 
     const auto l(k->language());
     const auto pair(std::make_pair(l, k));
@@ -51,7 +52,9 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
     if (!inserted) {
         std::ostringstream s;
         s << language_taken << l << " kernel: " << k->id();
-        BOOST_THROW_EXCEPTION(registrar_error(s.str()));
+        const auto msg(s.str());
+        BOOST_LOG_SEV(lg, error) << msg;
+        BOOST_THROW_EXCEPTION(registrar_error(msg));
     }
 
     for (const auto al : k->archetype_locations())
@@ -63,6 +66,8 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
         for (const auto& al : pair.second)
             alsti.push_back(al);
     }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrered kernel: " << k->id();
 }
 
 void kernel_registrar::validate() const {

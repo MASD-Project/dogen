@@ -40,11 +40,15 @@ namespace transforms {
 
 void external_transform_registrar::register_external_transform(
     std::shared_ptr<const external_transform_interface> ee) {
-    // note: not logging by design
-    if (!ee)
+    if (!ee) {
+        BOOST_LOG_SEV(lg, error) << null_frontend;
         BOOST_THROW_EXCEPTION(registrar_error(null_frontend));
+    }
 
     external_transforms_.push_back(ee);
+
+    BOOST_LOG_SEV(lg, debug) << "Registrered external transform: "
+                             << ee->id();
 }
 
 void external_transform_registrar::validate() const {

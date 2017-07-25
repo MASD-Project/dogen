@@ -18,11 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/knit/types/initializer.hpp"
 #include "dogen/knitter/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
-    dogen::knit::initializer::initialize();
     dogen::knitter::workflow w;
     return w.execute(argc, argv);
 }

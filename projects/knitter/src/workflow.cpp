@@ -20,15 +20,16 @@
  */
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
+#include "dogen/version.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/options/types/knitting_options.hpp"
 #include "dogen/options/types/knitting_options_validator.hpp"
-#include "dogen/version.hpp"
+#include "dogen/knit/types/initializer.hpp"
+#include "dogen/knit/types/workflow.hpp"
 #include "dogen/knitter/program_options_parser.hpp"
 #include "dogen/knitter/parser_validation_error.hpp"
-#include "dogen/options/types/knitting_options.hpp"
-#include "dogen/knit/types/workflow.hpp"
 #include "dogen/knitter/workflow.hpp"
 
 namespace {
@@ -80,7 +81,7 @@ initialise_model_name(const dogen::options::knitting_options& o) {
 }
 
 boost::optional<options::knitting_options> workflow::
-generate_knitting_options_activity(const int argc, const char* argv[]) const {
+generate_knitting_options(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
@@ -94,7 +95,7 @@ generate_knitting_options_activity(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::initialise_logging_activity(const options::knitting_options& o) {
+void workflow::initialise_logging(const options::knitting_options& o) {
     const auto dir(o.log_directory());
     const auto sev(utility::log::to_severity_level(o.log_level()));
     const std::string log_file_name(log_file_prefix + model_name_ + ".log");
@@ -105,10 +106,13 @@ void workflow::initialise_logging_activity(const options::knitting_options& o) {
     can_log_ = true;
 }
 
-void workflow::knit_activity(const options::knitting_options& o) const {
+void workflow::knit(const options::knitting_options& o) const {
     BOOST_LOG_SEV(lg, info) << knitter_product << " started.";
+
+    knit::initializer::initialize();
     knit::workflow w(o);
     w.execute();
+
     BOOST_LOG_SEV(lg, info) << knitter_product << " finished.";
 }
 
@@ -150,7 +154,7 @@ void workflow::report_exception() const {
 
 int workflow::execute(const int argc, const char* argv[]) {
     try {
-        const auto o(generate_knitting_options_activity(argc, argv));
+        const auto o(generate_knitting_options(argc, argv));
 
         /*
          * Can only happen if the options are valid but do not
@@ -161,8 +165,8 @@ int workflow::execute(const int argc, const char* argv[]) {
 
         const auto& s(*o);
         initialise_model_name(s);
-        initialise_logging_activity(s);
-        knit_activity(s);
+        initialise_logging(s);
+        knit(s);
     } catch (const knitter::parser_validation_error& e) {
         /*
          * Log known not to be initialised as we are still parsing
