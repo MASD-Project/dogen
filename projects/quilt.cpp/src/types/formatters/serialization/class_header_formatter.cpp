@@ -27,8 +27,6 @@
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include <boost/make_shared.hpp>
-#include <typeinfo>
 #include "dogen/formatters/types/sequence_formatter.hpp"
 
 namespace dogen {

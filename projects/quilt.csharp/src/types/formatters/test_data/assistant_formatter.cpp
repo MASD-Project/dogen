@@ -25,8 +25,6 @@
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
-#include <boost/make_shared.hpp>
-#include <typeinfo>
 
 namespace dogen {
 namespace quilt {

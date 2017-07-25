@@ -1,8 +1,6 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::serialization #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp" #>
-<#@ stitch.inclusion_dependency=<typeinfo> #>
-<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/cpp/scoped_namespace_formatter.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/registrar.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/quilt.cpp/types/fabric/meta_name_factory.hpp" #>

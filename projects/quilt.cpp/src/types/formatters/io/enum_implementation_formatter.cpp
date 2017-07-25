@@ -30,8 +30,6 @@
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/throw_exception.hpp>
-#include <boost/make_shared.hpp>
-#include <typeinfo>
 #include "dogen/formatters/types/sequence_formatter.hpp"
 
 namespace dogen {

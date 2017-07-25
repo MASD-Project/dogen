@@ -26,8 +26,6 @@
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar.hpp"
 #include "dogen/formatters/types/cpp/scoped_namespace_formatter.hpp"
-#include <boost/make_shared.hpp>
-#include <typeinfo>
 #include "dogen/formatters/types/cpp/scoped_boilerplate_formatter.hpp"
 
 namespace dogen {

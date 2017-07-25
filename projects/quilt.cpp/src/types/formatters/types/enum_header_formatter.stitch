@@ -1,7 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::types #>
-<#@ stitch.inclusion_dependency=<typeinfo> #>
-<#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/yarn/types/meta_model/enumeration.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/yarn/types/helpers/meta_name_factory.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
