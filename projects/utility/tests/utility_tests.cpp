@@ -138,13 +138,11 @@ BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
 BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
     using namespace dogen::utility::log;
     logger lg(logger_factory(test_suite));
-    const bool log_to_console(true);
 
     {
         scoped_life_cycle_manager slcm(
             log_file_name("exercise_scoped_log_life_cycle_manager", 1),
-            severity_level::debug,
-            log_to_console);
+            severity_level::debug);
         BOOST_LOG_SEV(lg, trace)
             << "scoped1: " << "this statement should not appear";
         BOOST_LOG_SEV(lg, error)
@@ -154,8 +152,7 @@ BOOST_AUTO_TEST_CASE(exercise_scoped_log_life_cycle_manager) {
     {
         scoped_life_cycle_manager slcm(
             log_file_name("exercise_scoped_log_life_cycle_manager", 2),
-            severity_level::trace,
-            log_to_console);
+            severity_level::trace);
         BOOST_LOG_SEV(lg, trace)
             << "scoped3: " << "this statement should appear";
         BOOST_LOG_SEV(lg, error)
