@@ -25,7 +25,6 @@
 #pragma once
 #endif
 
-#include <typeindex>
 #include <unordered_map>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/annotation.hpp"
@@ -98,8 +97,8 @@ private:
     make_local_type_group(const annotations::type_repository& atrp,
         const formatters::repository& frp) const;
 
-    std::unordered_map<std::type_index, local_type_group_type>
-    bucket_local_type_group_by_type_index(
+    std::unordered_map<std::string, local_type_group_type>
+    bucket_local_type_group_by_meta_type(
         const local_type_group_type& unbucketed_ltgs,
         const formatters::repository& frp) const;
 

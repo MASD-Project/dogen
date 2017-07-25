@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <string>
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
@@ -88,12 +89,12 @@ private:
     make_local_type_group(const annotations::type_repository& atrp,
         const std::list<annotations::archetype_location>& als);
 
-    static std::unordered_map<std::type_index, local_type_group_type>
-    bucket_local_type_group_by_type_index(
+    static std::unordered_map<std::string, local_type_group_type>
+    bucket_local_type_group_by_meta_type(
         const local_type_group_type& unbucketed_ltgs,
-        const std::unordered_map<std::type_index,
+        const std::unordered_map<std::string,
         std::list<annotations::archetype_location>>&
-        archetype_locations_by_element_type_index);
+        archetype_locations_by_meta_type);
 
 private:
     typedef std::unordered_map<std::string, local_enablement_configuration>
@@ -114,7 +115,7 @@ private:
 
     static void compute_enablement_for_element(
         const global_enablement_configurations_type& gcs,
-        const std::unordered_map<std::type_index, local_type_group_type>& ltgti,
+        const std::unordered_map<std::string, local_type_group_type>& ltgmt,
         meta_model::element& e);
 
 public:

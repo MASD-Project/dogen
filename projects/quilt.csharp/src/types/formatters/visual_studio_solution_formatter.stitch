@@ -37,7 +37,8 @@ std::type_index visual_studio_solution_formatter::element_type_index() const {
 
 const yarn::meta_model::name&
 visual_studio_solution_formatter::meta_name() const {
-    static auto r(fabric::meta_name_factory::make_visual_studio_project_name());
+    using fabric::meta_name_factory;
+    static auto r(meta_name_factory::make_visual_studio_solution_name());
     return r;
 }
 

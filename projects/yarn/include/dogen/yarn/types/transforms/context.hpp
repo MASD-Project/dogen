@@ -27,7 +27,7 @@
 
 #include <list>
 #include <vector>
-#include <typeindex>
+#include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/options/types/knitting_options.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
@@ -59,8 +59,8 @@ public:
         const std::vector<boost::filesystem::path>& data_directories,
         const options::knitting_options& options,
         const std::unordered_map<
-        std::type_index, std::list<annotations::archetype_location>>&
-        als_by_type,
+        std::string, std::list<annotations::archetype_location>>&
+        als_by_meta_type,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
@@ -85,12 +85,11 @@ public:
     archetype_location_repository() const;
 
     /**
-     * @brief Returns the archetype locations for each element type
-     * index.
+     * @brief Returns the archetype locations for each meta-type.
      */
-    const std::unordered_map<std::type_index,
+    const std::unordered_map<std::string,
                              std::list<annotations::archetype_location>>&
-    archetype_locations_by_element_type_index() const;
+    archetype_locations_by_meta_type() const;
 
     /**
      * @brief Repository with annotation types, used to validate and
@@ -117,9 +116,9 @@ public:
 private:
     const std::vector<boost::filesystem::path> data_directories_;
     const dogen::options::knitting_options options_;
-    const std::unordered_map<std::type_index,
+    const std::unordered_map<std::string,
                              std::list<annotations::archetype_location>>&
-    archetype_locations_by_element_type_index_;
+    archetype_locations_by_meta_type_;
     const annotations::archetype_location_repository
     archetype_location_repository_;
     const annotations::type_repository type_repository_;

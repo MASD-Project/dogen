@@ -83,11 +83,8 @@ public:
     artefact_formatters_type remove_non_includible_formatters(
         const artefact_formatters_type& formatters) const;
 
-    typedef std::unordered_map<std::type_index, artefact_formatters_type>
-    artefact_formatters_by_type_index_type;
-
-    artefact_formatters_by_type_index_type includible_formatters_by_type_index(
-        const formatters::repository& frp) const;
+    std::unordered_map<std::string, artefact_formatters_type>
+    includible_formatters_by_meta_type(const formatters::repository& frp) const;
 
 private:
     void insert_inclusion_directive(const std::string& id,
@@ -100,7 +97,8 @@ private:
         const locator& l, directive_group_repository& dgrp) const;
 
     directive_group_repository make(const type_group& tg,
-        const artefact_formatters_by_type_index_type& afti, const locator& l,
+        const std::unordered_map<std::string, artefact_formatters_type>& afmt,
+        const locator& l,
         const std::unordered_map<std::string, formattable>& formattables) const;
 
 public:

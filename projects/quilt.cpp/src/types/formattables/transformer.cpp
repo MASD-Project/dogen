@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <typeindex>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -156,9 +155,9 @@ model transformer:: transform(const formatters::repository& frp,
          * elements such as concepts do not have formatters at
          * present.
          */
-        const auto ti(std::type_index(typeid(e)));
-        const auto j(frp.stock_artefact_formatters_by_type_index().find(ti));
-        if (j == frp.stock_artefact_formatters_by_type_index().end()) {
+        const auto mt(e.meta_name().id());
+        const auto j(frp.stock_artefact_formatters_by_meta_type().find(mt));
+        if (j == frp.stock_artefact_formatters_by_meta_type().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;
             continue;
         }

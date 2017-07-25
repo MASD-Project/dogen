@@ -27,10 +27,10 @@ namespace csharp {
 namespace formatters {
 
 std::unordered_map<
-    std::type_index,
+    std::string,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
-repository::stock_artefact_formatters_by_type_index() {
-    return stock_artefact_formatters_by_type_index_;
+repository::stock_artefact_formatters_by_meta_type() {
+    return stock_artefact_formatters_by_meta_type_;
 }
 
 std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
@@ -53,10 +53,10 @@ std::unordered_map<
 }
 
 const std::unordered_map<
-    std::type_index,
+    std::string,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
-repository::stock_artefact_formatters_by_type_index() const {
-    return stock_artefact_formatters_by_type_index_;
+repository::stock_artefact_formatters_by_meta_type() const {
+    return stock_artefact_formatters_by_meta_type_;
 }
 
 const std::unordered_map<std::string,

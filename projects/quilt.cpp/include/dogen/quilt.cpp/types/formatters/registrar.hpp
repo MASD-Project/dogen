@@ -26,8 +26,8 @@
 #endif
 
 #include <list>
+#include <string>
 #include <memory>
-#include <typeindex>
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/annotations/types/archetype_location.hpp"
@@ -73,12 +73,11 @@ public:
     archetype_locations() const;
 
     /**
-     * @brief Returns the archetype locations for each element type
-     * index.
+     * @brief Returns the archetype locations for each meta-type.
      */
-    const std::unordered_map<std::type_index,
+    const std::unordered_map<std::string,
                              std::list<annotations::archetype_location>>&
-    archetype_locations_by_element_type_index() const;
+    archetype_locations_by_meta_type() const;
 
     /**
      * @brief Returns all of the available helper formatters.
@@ -93,9 +92,9 @@ public:
 private:
     repository formatter_repository_;
     std::forward_list<annotations::archetype_location> archetype_locations_;
-    std::unordered_map<std::type_index,
+    std::unordered_map<std::string,
                        std::list<annotations::archetype_location>>
-    archetype_locations_by_element_type_index_;
+    archetype_locations_by_meta_type_;
 };
 
 template<typename Formatter>

@@ -18,7 +18,6 @@
  * MA 02110-1301, USA.
  *
  */
-#include <typeindex>
 #include <functional>
 #include <unordered_map>
 #include <boost/optional.hpp>
@@ -224,22 +223,22 @@ make_local_type_group(const annotations::type_repository& atrp,
     return r;
 }
 
-std::unordered_map<std::type_index, enablement_transform::local_type_group_type>
-enablement_transform::bucket_local_type_group_by_type_index(
+std::unordered_map<std::string, enablement_transform::local_type_group_type>
+enablement_transform::bucket_local_type_group_by_meta_type(
     const local_type_group_type& unbucketed_ltgs,
-    const std::unordered_map<std::type_index,
+    const std::unordered_map<std::string,
     std::list<annotations::archetype_location>>&
-    archetype_locations_by_element_type_index) {
+    archetype_locations_by_meta_type) {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
-                             << "by type index.";
-    std::unordered_map<std::type_index, local_type_group_type> r;
+                             << "by meta-type.";
+    std::unordered_map<std::string, local_type_group_type> r;
 
-    for (const auto& pair: archetype_locations_by_element_type_index) {
-        const auto& ti(pair.first);
+    for (const auto& pair: archetype_locations_by_meta_type) {
+        const auto& mt(pair.first);
         const auto& als(pair.second);
 
-        local_type_group_type& ltg(r[ti]);
+        local_type_group_type& ltg(r[mt]);
         for (const auto& al : als) {
             const auto arch(al.archetype());
             const auto i(unbucketed_ltgs.find(arch));
@@ -439,7 +438,7 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 
 void enablement_transform::compute_enablement_for_element(
     const global_enablement_configurations_type& gcs,
-    const std::unordered_map<std::type_index, local_type_group_type>& ltgti,
+    const std::unordered_map<std::string, local_type_group_type>& ltgmt,
     meta_model::element& e) {
 
     const auto id(e.name().id());
@@ -452,15 +451,15 @@ void enablement_transform::compute_enablement_for_element(
     if (is_element_disabled(e))
         return;
 
-    const auto ti(std::type_index(typeid(e)));
-    BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
+    const auto mt(e.meta_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*
      * Not all elements have formatters; for example, concepts don't
      * have any at present. If so, skip the element.
      */
-    const auto i(ltgti.find(ti));
-    if (i == ltgti.end()) {
+    const auto i(ltgmt.find(mt));
+    if (i == ltgmt.end()) {
         BOOST_LOG_SEV(lg, debug) << "Element has no formatters, "
                                  << " so nothing enable.";
         return;
@@ -519,12 +518,12 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      * Bucket the local types by element - i.e., we only care about
      * those formatters which are valid for a particular element.
      */
-    const auto& albeti(ctx.archetype_locations_by_element_type_index());
-    const auto ltgti(bucket_local_type_group_by_type_index(ltg, albeti));
+    const auto& albmt(ctx.archetype_locations_by_meta_type());
+    const auto ltgmt(bucket_local_type_group_by_meta_type(ltg, albmt));
 
     using namespace std::placeholders;
     const auto f(enablement_transform::compute_enablement_for_element);
-    const auto v(std::bind(f, gcs, ltgti, _1));
+    const auto v(std::bind(f, gcs, ltgmt, _1));
     const bool include_injected_elements(true);
     meta_model::elements_traversal(im, v, include_injected_elements);
 

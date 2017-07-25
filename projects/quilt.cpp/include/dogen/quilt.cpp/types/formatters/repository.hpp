@@ -27,7 +27,7 @@
 
 #include <list>
 #include <memory>
-#include <typeindex>
+#include <string>
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/quilt.cpp/types/formatters/helper_formatter_interface_fwd.hpp"
@@ -52,10 +52,10 @@ private:
      * @brief Returns all available file formatters by type indx.
      */
     std::unordered_map<
-        std::type_index,
+        std::string,
         std::forward_list<std::shared_ptr<artefact_formatter_interface>>
     >&
-    stock_artefact_formatters_by_type_index();
+    stock_artefact_formatters_by_meta_type();
 
     /**
      * @brief Returns all available file formatters by archetype name.
@@ -85,9 +85,9 @@ public:
      * @brief Returns all available file formatters by type indx.
      */
     const std::unordered_map<
-    std::type_index,
+    std::string,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
-    stock_artefact_formatters_by_type_index() const;
+    stock_artefact_formatters_by_meta_type() const;
 
     /**
      * @brief Returns all available file formatters by formatter name.
@@ -114,9 +114,9 @@ public:
 
 private:
     std::unordered_map<
-        std::type_index,
+        std::string,
         std::forward_list<std::shared_ptr<artefact_formatter_interface>>>
-    stock_artefact_formatters_by_type_index_;
+    stock_artefact_formatters_by_meta_type_;
     std::unordered_map<std::string,
                        std::shared_ptr<artefact_formatter_interface>>
     stock_artefact_formatters_by_archetype_;

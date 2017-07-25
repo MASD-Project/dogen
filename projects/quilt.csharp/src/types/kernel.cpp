@@ -71,11 +71,11 @@ kernel::archetype_locations() const {
 }
 
 const std::unordered_map<
-    std::type_index,
+    std::string,
     std::list<annotations::archetype_location>>&
-kernel::archetype_locations_by_element_type_index() const {
+kernel::archetype_locations_by_meta_type() const {
     const auto& rg(formatters::workflow::registrar());
-    return rg.archetype_locations_by_element_type_index();
+    return rg.archetype_locations_by_meta_type();
 }
 
 yarn::meta_model::languages kernel::language() const {

@@ -122,7 +122,7 @@ inclusion_expander::compute_inclusion_dependencies(
      * formatters' collection - for example, we do not have any
      * formatters for concepts at present. If so, we're done.
      *
-     * Note also that we must query the formatters by type index
+     * Note also that we must query the formatters by meta-type
      * rather than use the archetype configuration container
      * directly. This is due to element segmentation, as we may have
      * more than one element associated with an id. To generate the
@@ -130,10 +130,10 @@ inclusion_expander::compute_inclusion_dependencies(
      * element and the formatters that support it.
      */
     element_inclusion_dependencies_type r;
-    const auto ti(std::type_index(typeid(e)));
-    const auto i(frp.stock_artefact_formatters_by_type_index().find(ti));
-    if (i == frp.stock_artefact_formatters_by_type_index().end()) {
-        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
+    const auto mt(e.meta_name().id());
+    const auto i(frp.stock_artefact_formatters_by_meta_type().find(mt));
+    if (i == frp.stock_artefact_formatters_by_meta_type().end()) {
+        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << mt;
         return r;
     }
 

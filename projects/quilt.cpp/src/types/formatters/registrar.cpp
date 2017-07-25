@@ -67,7 +67,7 @@ void registrar::validate() const {
      * way of troubleshooting validation errors.
      */
     const auto& frp(formatter_repository_);
-    if (frp.stock_artefact_formatters_by_type_index().empty()) {
+    if (frp.stock_artefact_formatters_by_meta_type().empty()) {
         BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
         BOOST_THROW_EXCEPTION(
             registrar_error(no_file_formatters_by_type_index));
@@ -77,10 +77,10 @@ void registrar::validate() const {
      * Validate the registered canonical formatters.
      */
     const auto cs(inclusion_support_types::canonical_support);
-    for (const auto& pair : frp.stock_artefact_formatters_by_type_index()) {
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << pair.first.name();
+    for (const auto& pair : frp.stock_artefact_formatters_by_meta_type()) {
+        const auto mt(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing type: " << mt;
 
-        const auto& ti(pair.first);
         const auto& formatters(pair.second);
         std::set<std::string> facets_found;
         std::set<std::string> all_facets;
@@ -100,7 +100,7 @@ void registrar::validate() const {
                 const auto arch(al.archetype());
                 BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
                                          << fct << " archetype: " << arch
-                                         << " type: " << ti.name();
+                                         << " meta_type: " << mt;
                 BOOST_THROW_EXCEPTION(registrar_error(
                         more_than_one_canonical_archetype + fct));
             }
@@ -172,14 +172,14 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
      * Add the formatter to the archetype location stores.
      */
     archetype_locations_.push_front(al);
-    const auto ti(f->element_type_index());
-    archetype_locations_by_element_type_index_[ti].push_back(al);
+    const auto mt(f->meta_name().id());
+    archetype_locations_by_meta_type_[mt].push_back(al);
 
     /*
      * Add the formatter to the index by element type index.
      */
-    auto& ffti(formatter_repository_.stock_artefact_formatters_by_type_index());
-    ffti[ti].push_front(f);
+    auto& safbmt(formatter_repository_.stock_artefact_formatters_by_meta_type());
+    safbmt[mt].push_front(f);
 
     /*
      * Add formatter to the index by archetype name. Inserting the
@@ -195,8 +195,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(duplicate_formatter_name + arch));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: "
-                             << f->formatter_name();
+    BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->formatter_name()
+                             << " against meta-type: " << mt;
 }
 
 void registrar::
@@ -229,10 +229,10 @@ registrar::archetype_locations() const {
     return archetype_locations_;
 }
 
-const std::unordered_map<std::type_index,
+const std::unordered_map<std::string,
                          std::list<annotations::archetype_location>>&
-registrar::archetype_locations_by_element_type_index() const {
-    return archetype_locations_by_element_type_index_;
+registrar::archetype_locations_by_meta_type() const {
+    return archetype_locations_by_meta_type_;
 }
 
 const std::unordered_map<

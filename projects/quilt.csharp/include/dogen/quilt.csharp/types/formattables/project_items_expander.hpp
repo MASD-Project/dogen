@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <typeindex>
+#include <string>
+#include <unordered_set>
 #include "dogen/quilt.csharp/types/formattables/model.hpp"
 
 namespace dogen {
@@ -35,7 +36,8 @@ namespace formattables {
 
 class project_items_expander final {
 private:
-    bool is_project_item(const std::type_index& ti) const;
+    static std::unordered_set<std::string> meta_types_project_items();
+    bool is_project_item(const std::string& mt) const;
 
 public:
     void expand(model& fm) const;

@@ -92,14 +92,14 @@ workflow::format(const formattables::model& fm,
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
-    const auto ti(std::type_index(typeid(e)));
-    BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
+    const auto mt(e.meta_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     std::list<dogen::formatters::artefact> r;
     const auto& frp(registrar().formatter_repository());
-    const auto i(frp.stock_artefact_formatters_by_type_index().find(ti));
-    if (i == frp.stock_artefact_formatters_by_type_index().end()) {
-        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << ti.name();
+    const auto i(frp.stock_artefact_formatters_by_meta_type().find(mt));
+    if (i == frp.stock_artefact_formatters_by_meta_type().end()) {
+        BOOST_LOG_SEV(lg, debug) << "No formatters for meta-type: " << mt;
         return r;
     }
 

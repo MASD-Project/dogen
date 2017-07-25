@@ -244,21 +244,21 @@ make_local_type_group(const annotations::type_repository& atrp,
     return r;
 }
 
-std::unordered_map<std::type_index, enablement_expander::local_type_group_type>
-enablement_expander::bucket_local_type_group_by_type_index(
+std::unordered_map<std::string, enablement_expander::local_type_group_type>
+enablement_expander::bucket_local_type_group_by_meta_type(
     const local_type_group_type& unbucketed_ltgs,
     const formatters::repository& frp) const {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
                              << "by type index.";
-    std::unordered_map<std::type_index,
+    std::unordered_map<std::string,
                        enablement_expander::local_type_group_type> r;
 
-    for (const auto& pair: frp.stock_artefact_formatters_by_type_index()) {
-        const auto& ti(pair.first);
+    for (const auto& pair: frp.stock_artefact_formatters_by_meta_type()) {
+        const auto& mt(pair.first);
         const auto& fmts(pair.second);
 
-        local_type_group_type& ltg(r[ti]);
+        local_type_group_type& ltg(r[mt]);
         for (const auto& fmt: fmts) {
             const auto arch(fmt->archetype_location().archetype());
             const auto i(unbucketed_ltgs.find(arch));
@@ -496,7 +496,7 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
      * Bucket the local types by element - i.e., we only care about
      * those formatters which are valid for a particular element.
      */
-    const auto ltgti(bucket_local_type_group_by_type_index(ltg, frp));
+    const auto ltgmt(bucket_local_type_group_by_meta_type(ltg, frp));
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);
@@ -513,15 +513,15 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
             if (is_element_disabled(e))
                 continue;
 
-            const auto ti(std::type_index(typeid(e)));
-            BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
+            const auto mt(e.meta_name().id());
+            BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
             /*
              * Not all elements have formatters; for example, concepts
              * don't have any at present. If so, skip the element.
              */
-            const auto i(ltgti.find(ti));
-            if (i == ltgti.end()) {
+            const auto i(ltgmt.find(mt));
+            if (i == ltgmt.end()) {
                 BOOST_LOG_SEV(lg, debug) << "Element has no formatters, "
                                          << " so nothing enable.";
                 continue;

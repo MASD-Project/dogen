@@ -46,9 +46,9 @@ update_element(const context& ctx, meta_model::element& e) {
      * such as concepts do not have any at present.
      */
     const auto id(e.name().id());
-    const auto ti(std::type_index(typeid(e)));
-    const auto& c(ctx.archetype_locations_by_element_type_index());
-    const auto i(c.find(ti));
+    const auto mt(e.meta_name().id());
+    const auto& c(ctx.archetype_locations_by_meta_type());
+    const auto i(c.find(mt));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, debug) << "Element has no archetypes: " << id;
         return;

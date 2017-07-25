@@ -211,16 +211,15 @@ directive_group_repository_factory::remove_non_includible_formatters(
     return r;
 }
 
+std::unordered_map<std::string,
+                   directive_group_repository_factory::artefact_formatters_type>
 directive_group_repository_factory::
-artefact_formatters_by_type_index_type
-directive_group_repository_factory::
-includible_formatters_by_type_index(const formatters::repository& frp) const {
-
-    artefact_formatters_by_type_index_type r;
-    for (const auto& pair : frp.stock_artefact_formatters_by_type_index()) {
-        const auto& ti(pair.first);
+includible_formatters_by_meta_type(const formatters::repository& frp) const {
+    std::unordered_map<std::string, artefact_formatters_type> r;
+    for (const auto& pair : frp.stock_artefact_formatters_by_meta_type()) {
+        const auto& mt(pair.first);
         const auto& fmts(pair.second);
-        r[ti] = remove_non_includible_formatters(fmts);
+        r[mt] = remove_non_includible_formatters(fmts);
     }
     return r;
 }
@@ -336,7 +335,8 @@ compute_directives(const type_group& tg, const yarn::meta_model::element& e,
 
 directive_group_repository
 directive_group_repository_factory::make(const type_group& tg,
-    const artefact_formatters_by_type_index_type& afti, const locator& l,
+    const std::unordered_map<std::string, artefact_formatters_type>& afmt,
+    const locator& l,
     const std::unordered_map<std::string, formattable>& formattables) const {
 
     /*
@@ -351,10 +351,10 @@ directive_group_repository_factory::make(const type_group& tg,
         for (const auto& segment : formattable.all_segments()) {
             const auto& e(*segment);
             const auto id(e.name().id());
-            const auto ti(std::type_index(typeid(e)));
+            const auto mt(e.meta_name().id());
 
-            const auto i(afti.find(ti));
-            if (i == afti.end() || i->second.empty()) {
+            const auto i(afmt.find(mt));
+            if (i == afmt.end() || i->second.empty()) {
                 BOOST_LOG_SEV(lg, debug) << formatter_not_found_for_type << id;
                 continue;
             }
@@ -379,9 +379,9 @@ make(const annotations::type_repository& atrp,
      * files that can be included via an include directive. Filter out
      * all of those that do not, and bucket them all by type index.
      */
-    const auto afti(includible_formatters_by_type_index(frp));
+    const auto afmt(includible_formatters_by_meta_type(frp));
     const auto tg(make_type_group(atrp, frp));
-    const auto r(make(tg, afti, l, formattables));
+    const auto r(make(tg, afmt, l, formattables));
 
     BOOST_LOG_SEV(lg, debug) << "Finished creating inclusion dependencies "
                              << "group repository.";

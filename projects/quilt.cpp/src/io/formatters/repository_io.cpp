@@ -68,13 +68,13 @@ inline std::ostream& to_stream(std::ostream& s,
 }
 
 inline std::ostream& to_stream(std::ostream& s,
-    const std::unordered_map<std::type_index,
-    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>& safti) {
-    s << "\"stock_artefact_formatters_by_type_index\": " << "[ ";
+    const std::unordered_map<std::string,
+    std::forward_list<std::shared_ptr<artefact_formatter_interface>>>& safmt) {
+    s << "\"stock_artefact_formatters_by_meta_type\": " << "[ ";
 
-    for(auto i(safti.begin()); i != safti.end(); ++i) {
-        if (i != safti.begin()) s << ", ";
-        s <<  "{ \"" << i->first.name() << "\":" << "[ ";
+    for(auto i(safmt.begin()); i != safmt.end(); ++i) {
+        if (i != safmt.begin()) s << ", ";
+        s <<  "{ \"" << i->first << "\":" << "[ ";
         for(auto j(i->second.begin()); j != i->second.end(); ++j) {
             if (j != i->second.begin()) s << ", ";
                 s <<  "\"" << (*j)->formatter_name() << "\"";
@@ -89,7 +89,7 @@ inline std::ostream& to_stream(std::ostream& s,
 std::ostream& operator<<(std::ostream& s, const repository& rp) {
     s << "{ " << "\"__type__\": "
       << "\"dogen::quilt::cpp::formatters::container\", ";
-    to_stream(s, rp.stock_artefact_formatters_by_type_index());
+    to_stream(s, rp.stock_artefact_formatters_by_meta_type());
     to_stream(s, "stock_artefact_formatters", rp.stock_artefact_formatters());
     to_stream(s, rp.helper_formatters());
     s << " }";

@@ -44,20 +44,20 @@ void canonical_archetype_expander::expand(const formatters::repository& frp,
     const yarn::meta_model::element& e) const {
     BOOST_LOG_SEV(lg, debug) << "Procesing element: " << e.name().id();
     const auto cs(formatters::inclusion_support_types::canonical_support);
-    const auto& safti(frp.stock_artefact_formatters_by_type_index());
+    const auto& safmt(frp.stock_artefact_formatters_by_meta_type());
 
     /*
      * For each element segment, find the corresponding formatters.
      */
-    const auto ti(std::type_index(typeid(e)));
-    BOOST_LOG_SEV(lg, debug) << "Type index: " << ti.name();
+    const auto mt(e.meta_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*
      * Not all elements have formatters; for example, concepts don't
      * have any at present. If so, skip the element.
      */
-    const auto i(safti.find(ti));
-    if (i == safti.end()) {
+    const auto i(safmt.find(mt));
+    if (i == safmt.end()) {
         BOOST_LOG_SEV(lg, debug) << "Element has no formatters.";
         return;
     }

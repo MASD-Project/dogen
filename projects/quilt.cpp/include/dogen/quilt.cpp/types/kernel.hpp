@@ -102,9 +102,9 @@ public:
     archetype_locations() const override;
 
     const std::unordered_map<
-        std::type_index,
+        std::string,
         std::list<annotations::archetype_location>>&
-    archetype_locations_by_element_type_index() const override;
+    archetype_locations_by_meta_type() const override;
 
     yarn::meta_model::languages language() const override;
 

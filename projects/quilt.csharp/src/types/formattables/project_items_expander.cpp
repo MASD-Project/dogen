@@ -20,6 +20,7 @@
  */
 #include <set>
 #include <algorithm>
+#include"dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include"dogen/yarn/types/meta_model/object.hpp"
 #include"dogen/yarn/types/meta_model/visitor.hpp"
 #include"dogen/yarn/types/meta_model/builtin.hpp"
@@ -27,6 +28,7 @@
 #include"dogen/yarn/types/meta_model/enumeration.hpp"
 #include"dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
+#include "dogen/quilt.csharp/types/fabric/meta_name_factory.hpp"
 #include "dogen/quilt.csharp/types/formattables/project_items_expander.hpp"
 
 namespace dogen {
@@ -34,15 +36,27 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-bool project_items_expander::is_project_item(const std::type_index& ti) const {
-    return
-        ti == std::type_index(typeid(fabric::assistant)) ||
-        ti == std::type_index(typeid(yarn::meta_model::enumeration)) ||
-        ti == std::type_index(typeid(yarn::meta_model::primitive)) ||
-        ti == std::type_index(typeid(yarn::meta_model::exception)) ||
-        ti == std::type_index(typeid(yarn::meta_model::object)) ||
-        ti == std::type_index(typeid(yarn::meta_model::builtin)) ||
-        ti == std::type_index(typeid(yarn::meta_model::visitor));
+std::unordered_set<std::string>
+project_items_expander::meta_types_project_items() {
+    std::unordered_set<std::string> r;
+
+    using ymnf = yarn::helpers::meta_name_factory;
+    r.insert(ymnf::make_enumeration_name().id());
+    r.insert(ymnf::make_primitive_name().id());
+    r.insert(ymnf::make_exception_name().id());
+    r.insert(ymnf::make_object_name().id());
+    r.insert(ymnf::make_builtin_name().id());
+    r.insert(ymnf::make_visitor_name().id());
+
+    r.insert(fabric::meta_name_factory::make_assistant_name().id());
+    return r;
+}
+
+
+bool project_items_expander::is_project_item(const std::string& mt) const {
+    static const auto mtpi(meta_types_project_items());
+    const auto i(mtpi.find(mt));
+    return i != mtpi.end();
 }
 
 void project_items_expander::expand(model& fm) const {
@@ -51,8 +65,8 @@ void project_items_expander::expand(model& fm) const {
         const auto& formattable(pair.second);
         const auto& e(*formattable.element());
 
-        const auto ti(std::type_index(typeid(e)));
-        if (!is_project_item(ti))
+        const auto mt(e.meta_name().id());
+        if (!is_project_item(mt))
             continue;
 
         const auto& eprops(formattable.element_properties());
