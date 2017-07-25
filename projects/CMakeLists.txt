@@ -172,7 +172,7 @@ elseif(MSVC)
 endif()
 
 # parameters for boost tests
-set(boost_test_parameters "--log_level=nothing")
+set(boost_test_parameters "--log_level=error")
 
 # user includes
 include_directories(
