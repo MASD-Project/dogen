@@ -2338,15 +2338,6 @@ sanitizer.
 We are computing the set of all built-in id's in quilt but this should
 really be part of yarn.
 
-*** Allow logging during initialisation                               :story:
-
-At present we assume the log has not been initialised during
-initialisation. The only reason for this is with unit testing because
-each test initialises the log differently. However, one simple way
-around this is to have a log file for the entire test suite and
-separate log files for each test as we have now. Initialisation
-logging would go in this main file.
-
 *** Consider automatic injection of helpers                           :story:
 
 At present we are manually calling:

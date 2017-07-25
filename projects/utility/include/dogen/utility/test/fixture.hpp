@@ -18,9 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#define BOOST_TEST_MODULE stitcher_tests
-#include <boost/test/included/unit_test.hpp>
-#include "dogen/utility/test/fixture.hpp"
+#ifndef DOGEN_UTILITY_TEST_FIXTURE_HPP
+#define DOGEN_UTILITY_TEST_FIXTURE_HPP
 
-using namespace dogen::utility::test;
-BOOST_GLOBAL_FIXTURE(exception_fixture);
+#if defined(_MSC_VER) && (_MSC_VER >= 1200)
+#pragma once
+#endif
+
+namespace dogen {
+namespace utility {
+namespace test {
+
+/**
+ * @brief Translates boost expcetions by dumping diagnostic
+ * information.
+ */
+struct exception_fixture {
+    exception_fixture();
+};
+
+} } }
+
+#endif

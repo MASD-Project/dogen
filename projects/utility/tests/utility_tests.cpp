@@ -104,10 +104,8 @@ BOOST_AUTO_TEST_CASE(exercise_log_life_cycle_manager) {
     // exericise 1: write a simple type to log file.
     using namespace dogen::utility::log;
     life_cycle_manager lcm;
-    const bool log_to_console(true);
     lcm.initialise(log_file_name("exercise_log_life_cycle_manager", 1),
-        severity_level::debug,
-        log_to_console);
+        severity_level::debug);
 
     using namespace boost::log;
     logger lg(logger_factory(test_suite));
@@ -221,16 +219,6 @@ BOOST_AUTO_TEST_CASE(exception_shall_be_usable_as_a_boost_exception) {
         BOOST_CHECK(true);
     }
 }
-
-// BOOST_IGNORE_AUTO_TEST_CASE(exercise_array_inserter) {
-//     SETUP_TEST_LOG_SOURCE("exercise_array_inserter");
-//     std::array<int, 3> ints({{ 0, 5, 10 }});
-//     ints[0] = 10;
-//     ints[1] = 20;
-//     ints[2] = 30;
-//     BOOST_LOG_SEV(lg, debug) << "ints: " << ints;
-//     BOOST_CHECK(true);
-// }
 
 BOOST_AUTO_TEST_CASE(exercise_vector_inserter) {
     SETUP_TEST_LOG_SOURCE("exercise_vector_inserter");

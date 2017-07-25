@@ -19,27 +19,8 @@
  *
  */
 #define BOOST_TEST_MODULE dart_tests
-#include <iostream>
 #include <boost/test/included/unit_test.hpp>
-#include <boost/test/unit_test_monitor.hpp>
-#include <boost/exception/diagnostic_information.hpp>
+#include "dogen/utility/test/fixture.hpp"
 
-namespace  {
-
-const std::string error_msg("Error during test");
-
-inline void translate(const boost::exception& e) {
-    std::cerr << std::endl << boost::diagnostic_information(e);
-    throw std::runtime_error(error_msg);
-}
-
-struct exception_fixture {
-    exception_fixture() {
-        ::boost::unit_test::unit_test_monitor.register_exception_translator<
-            boost::exception>(&translate);
-    }
-};
-
-}
-
+using namespace dogen::utility::test;
 BOOST_GLOBAL_FIXTURE(exception_fixture);
