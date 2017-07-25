@@ -34,7 +34,6 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
-#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -56,11 +55,6 @@ common_odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::family(), cpp::traits::kernel(),
           traits::facet(), common_odb_options_formatter::static_artefact());
-    return r;
-}
-
-std::type_index common_odb_options_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::common_odb_options)));
     return r;
 }
 

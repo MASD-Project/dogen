@@ -27,7 +27,6 @@
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
-#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -49,11 +48,6 @@ visual_studio_project_formatter::archetype_location() const {
         r(csharp::traits::family(), csharp::traits::kernel(),
           traits::visual_studio_facet(),
           visual_studio_project_formatter::static_artefact());
-    return r;
-}
-
-std::type_index visual_studio_project_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::visual_studio_project)));
     return r;
 }
 

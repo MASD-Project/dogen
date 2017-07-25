@@ -59,12 +59,6 @@ public:
     virtual annotations::archetype_location archetype_location() const = 0;
 
     /**
-     * @brief Returns the type index of the element supported by this
-     * formatter.
-     */
-    virtual std::type_index element_type_index() const = 0;
-
-    /**
      * @brief Returns name of the meta-model element that this
      * formatter supports.
      */

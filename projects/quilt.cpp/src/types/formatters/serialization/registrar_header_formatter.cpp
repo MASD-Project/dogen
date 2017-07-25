@@ -54,11 +54,6 @@ registrar_header_formatter::archetype_location() const {
     return r;
 }
 
-std::type_index registrar_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::registrar)));
-    return r;
-}
-
 const yarn::meta_model::name& registrar_header_formatter::meta_name() const {
     using fabric::meta_name_factory;
     static auto r(meta_name_factory::make_registrar_name());

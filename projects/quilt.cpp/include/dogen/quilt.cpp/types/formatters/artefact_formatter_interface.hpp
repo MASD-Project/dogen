@@ -26,7 +26,6 @@
 #endif
 
 #include <string>
-#include <typeindex>
 #include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/formatters/types/artefact.hpp"
@@ -59,12 +58,6 @@ public:
      * @brief Ownership hierarchy for this formatter
      */
     virtual annotations::archetype_location archetype_location() const = 0;
-
-    /**
-     * @brief Returns the type index of the element supported by this
-     * formatter.
-     */
-    virtual std::type_index element_type_index() const = 0;
 
     /**
      * @brief Returns name of the meta-model element that this

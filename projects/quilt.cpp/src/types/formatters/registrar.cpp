@@ -21,7 +21,6 @@
 #include <set>
 #include <iterator>
 #include <typeinfo>
-#include <typeindex>
 #include <algorithm>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -38,8 +37,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.registrar"));
 
 const std::string no_file_formatters("File formatters repository is empty.");
-const std::string no_file_formatters_by_type_index(
-    "No file formatters by type index provided.");
+const std::string no_file_formatters_by_meta_type(
+    "No file formatters by meta_type provided.");
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null.");
@@ -68,9 +67,8 @@ void registrar::validate() const {
      */
     const auto& frp(formatter_repository_);
     if (frp.stock_artefact_formatters_by_meta_type().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_type_index;
-        BOOST_THROW_EXCEPTION(
-            registrar_error(no_file_formatters_by_type_index));
+        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_meta_type;
+        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters_by_meta_type));
     }
 
     /*

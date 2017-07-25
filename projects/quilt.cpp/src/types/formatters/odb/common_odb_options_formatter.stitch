@@ -1,6 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters::odb #>
-<#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/throw_exception.hpp> #>
 <#@ stitch.inclusion_dependency=<boost/algorithm/string/case_conv.hpp> #>
@@ -33,11 +32,6 @@ common_odb_options_formatter::archetype_location() const {
     static annotations::archetype_location
         r(cpp::traits::family(), cpp::traits::kernel(),
           traits::facet(), common_odb_options_formatter::static_artefact());
-    return r;
-}
-
-std::type_index common_odb_options_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::common_odb_options)));
     return r;
 }
 

@@ -29,7 +29,6 @@
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include "dogen/utility/log/logger.hpp"
 #include <boost/make_shared.hpp>
-#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -51,11 +50,6 @@ msbuild_targets_formatter::archetype_location() const {
         r(cpp::traits::family(), cpp::traits::kernel(),
           traits::msbuild_facet(),
           msbuild_targets_formatter::static_artefact());
-    return r;
-}
-
-std::type_index msbuild_targets_formatter::element_type_index() const {
-    auto r(std::type_index(typeid(fabric::msbuild_targets)));
     return r;
 }
 

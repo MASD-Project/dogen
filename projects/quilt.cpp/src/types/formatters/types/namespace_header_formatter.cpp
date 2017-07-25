@@ -52,11 +52,6 @@ namespace_header_formatter::archetype_location() const {
     return r;
 }
 
-std::type_index namespace_header_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(yarn::meta_model::module)));
-    return r;
-}
-
 const yarn::meta_model::name& namespace_header_formatter::meta_name() const {
     using yarn::helpers::meta_name_factory;
     static auto r(meta_name_factory::make_module_name());

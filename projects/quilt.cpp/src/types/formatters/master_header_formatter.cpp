@@ -27,7 +27,6 @@
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
 #include "dogen/formatters/types/sequence_formatter.hpp"
 #include <boost/make_shared.hpp>
-#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -45,11 +44,6 @@ std::string master_header_formatter::formatter_name() const {
 annotations::archetype_location
 master_header_formatter::archetype_location() const {
     return archetype_location_;
-}
-
-std::type_index master_header_formatter::element_type_index() const {
-    auto r(std::type_index(typeid(fabric::master_header)));
-    return r;
 }
 
 const yarn::meta_model::name& master_header_formatter::meta_name() const {

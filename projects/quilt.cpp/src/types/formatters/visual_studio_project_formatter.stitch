@@ -1,6 +1,5 @@
 <#@ annotations.profile=dogen.stitch #>
 <#@ stitch.containing_namespaces=dogen::quilt::cpp::formatters #>
-<#@ stitch.inclusion_dependency=<typeinfo> #>
 <#@ stitch.inclusion_dependency=<boost/make_shared.hpp> #>
 <#@ stitch.inclusion_dependency="dogen/utility/log/logger.hpp" #>
 <#@ stitch.inclusion_dependency="dogen/formatters/types/sequence_formatter.hpp" #>
@@ -29,11 +28,6 @@ visual_studio_project_formatter::archetype_location() const {
         r(cpp::traits::family(), cpp::traits::kernel(),
           traits::visual_studio_facet(),
           visual_studio_project_formatter::static_artefact());
-    return r;
-}
-
-std::type_index visual_studio_project_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::visual_studio_project)));
     return r;
 }
 

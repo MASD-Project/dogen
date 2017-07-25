@@ -31,7 +31,6 @@
 #include <boost/algorithm/string/case_conv.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/make_shared.hpp>
-#include <typeinfo>
 
 namespace dogen {
 namespace quilt {
@@ -53,11 +52,6 @@ archetype_location() const {
         r(cpp::traits::family(), cpp::traits::kernel(),
           traits::cmake_facet(),
           include_cmakelists_formatter::static_artefact());
-    return r;
-}
-
-std::type_index include_cmakelists_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::cmakelists)));
     return r;
 }
 

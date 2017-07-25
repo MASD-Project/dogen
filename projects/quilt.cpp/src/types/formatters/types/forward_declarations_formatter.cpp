@@ -56,11 +56,6 @@ forward_declarations_formatter::archetype_location() const {
     return r;
 }
 
-std::type_index forward_declarations_formatter::element_type_index() const {
-    static auto r(std::type_index(typeid(fabric::forward_declarations)));
-    return r;
-}
-
 const yarn::meta_model::name& forward_declarations_formatter::meta_name() const {
     using fabric::meta_name_factory;
     static auto r(meta_name_factory::make_forward_declarations_name());
