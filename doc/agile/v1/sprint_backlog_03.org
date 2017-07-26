@@ -13,21 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-26 Wed 22:16]
+#+CAPTION: Clock summary at [2017-07-26 Wed 23:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *17:18* |       |      | 100.0 |
+| *Total time*                                                                | *18:32* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 17:18   |       |      | 100.0 |
-| Active                                                                      |         | 17:18 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.8 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |   9.1 |
-| COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.7 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  21.3 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   7.3 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.5 |
-| STARTED Add meta-type support to yarn                                       |         |       | 9:34 |  55.3 |
+| Stories                                                                     | 18:32   |       |      | 100.0 |
+| Active                                                                      |         | 18:32 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.7 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |   8.5 |
+| COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.6 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  19.9 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   6.8 |
+| STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.7 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.2 |
+| STARTED Add meta-type support to yarn                                       |         |       | 9:34 |  51.6 |
+| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -139,6 +141,12 @@ logging would go in this main file.
 This is a bit of a more pressing issue because we now make use of name
 builders during initialisation in order to setup the formatter's
 meta-type.
+
+*** STARTED Rename =meta_type= in JSON                                :story:
+    CLOCK: [2017-07-26 Wed 22:17]--[2017-07-26 Wed 22:36] =>  0:19
+
+Now we have meta-names we should use the same terminology for JSON
+documents.
 
 *** STARTED Add canonical archetype support to yarn                   :story:
     CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
@@ -252,6 +260,83 @@ Problems:
 
 : Processing element: <dogen><test_models><all_path_and_directory_settings><dogen.test_models.all_path_and_directory_settings.sln>
 : for archetype: quilt.csharp.visual_studio.solution
+
+*** STARTED Move external module processing into yarn                 :story:
+    CLOCK: [2017-07-26 Wed 22:37]--[2017-07-26 Wed 23:32] =>  0:55
+
+At present we have a hack in =yarn.dia= whereby we are looking for a
+key =yarn.dia.external_modules= and then using it to populate the
+external module path of all names read on that model, as we traverse
+the graph of dia objects.
+
+The problem is, this functionality is also required on other frontends
+such as JSON. We should use the traditional annotation machinery to
+populate the external modules inside of yarn pre-processing.
+
+One thing to bear in mind is that we need to trash all containers and
+re-insert all elements, because the IDs will change as part of this
+exercise.
+
+*** Add a property for the model modules as an annotation             :story:
+
+We should read out the model name as an annotation instead of
+inferring it from the filename on some frontends (Dia) and allowing
+the user to set it internally on others (JSON).
+
+This is not quite as trivial as it may look: we create the model
+module using the model name; this is necessary because we need to read
+its annotations and place it in the right element. Without a model
+name, this becomes a bit tricky.
+
+*Previous Understanding*
+
+#+begin_quote
+*Story*: As a dogen user in a constrained environment, I am forced to
+use file names that are not suitable for a model name so that I need
+to supply an override somewhere else.
+#+end_quote
+
+It would be nice to be able to generate a model with a name other than
+the diagram file. We should have a command line option for this that
+overrides the default diagram name.
+
+This could also be supplied as part of dynamic extensions. The command
+line option is useful when we want to use the same diagram to test
+different aspects of the generation, as we do with the tests. The
+dynamic extensions option is useful when we don't want the file name
+to have the full name of the model.
+
+We now have a use case for this: the dynamic models. See Rename
+dynamic models.
+
+*** Create an exogenous model                                         :story:
+
+At present we are allowing the frontends to directly create
+intermediate models. However, this doesn't make a lot of sense: there
+are many properties in the intermediate models which should not be
+touched by the frontends. We should have a specific model that has
+only the properties that can be set by the frontends -
+=exogenous_model=. The exogenous model chain is then responsible for
+converting it into an intermediate model.
+
+Tasks:
+
+- create the exogenous model with the required attributes. Add a root
+  module, remove model name. All containers should be lists of a pair
+  of scribble group to concrete element.
+- move annotations transform to exogenous chain. Add a transform to
+  update element names by reading model modules and external modules.
+- drop scribble groups from intermediate model.
+- add an adaptor to convert from exogenous model to intermediate
+  model.
+- use some kind of reference to figure out where to place the
+  documentation of a module. We can't use the IDs any longer. We could
+  simply remember the list iterators. Since we are only pushing back
+  into the list, the iterators should remain valid. However, for this
+  to work we need to add support to iterators in dogen or manually
+  create the context/repository.
+- Refactor yarn.dia, splitting out the model from the repository and
+  renaming repository to context.
 
 *** Rename transformers to adapters                                   :story:
 

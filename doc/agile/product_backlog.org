@@ -4203,27 +4203,6 @@ it with the existing parsers:
 - [[http://stackoverflow.com/questions/21960167/prevent-the-boost-spirit-symbol-parser-from-accepting-a-keyword-too-early][Prevent the Boost Spirit Symbol parser from accepting a keyword too early]]
 - [[http://www.boost.org/doc/libs/1_53_0/libs/spirit/repository/doc/html/spirit_repository/qi_components/directives/kwd.html][Qi Keyword Parser Directive]]
 
-*** Add a property for the model name as dynamic extensions           :story:
-
-#+begin_quote
-*Story*: As a dogen user in a constrained environment, I am forced to
-use file names that are not suitable for a model name so that I need
-to supply an override somewhere else.
-#+end_quote
-
-It would be nice to be able to generate a model with a name other than
-the diagram file. We should have a command line option for this that
-overrides the default diagram name.
-
-This could also be supplied as part of dynamic extensions. The command
-line option is useful when we want to use the same diagram to test
-different aspects of the generation, as we do with the tests. The
-dynamic extensions option is useful when we don't want the file name
-to have the full name of the model.
-
-We now have a use case for this: the dynamic models. See Rename
-dynamic models.
-
 *** Warn if value or entity has methods                               :story:
 
 We should issue a warning if a user defines methods in value or entity
