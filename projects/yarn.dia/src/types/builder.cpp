@@ -86,7 +86,8 @@ builder::create_module_for_model(const meta_model::name& n) const {
     return r;
 }
 
-meta_model::intermediate_model builder::setup_model(const std::string& model_name,
+meta_model::intermediate_model
+builder::setup_model(const std::string& model_name,
     const std::string& external_modules) const {
 
     meta_model::intermediate_model r;
@@ -102,7 +103,6 @@ meta_model::intermediate_model builder::setup_model(const std::string& model_nam
 
 void builder::
 update_scribble_group(const meta_model::name& n, const processed_object& po) {
-
     annotations::scribble psbl;
     const auto& kvps(po.comment().key_value_pairs());
     psbl.entries(kvps);
