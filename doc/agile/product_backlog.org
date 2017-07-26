@@ -11,6 +11,15 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Add full support for type_index                                   :story:
+
+At present we cannot create containers using =std::type_index= as a
+key because we do not have hashing, IO and serialisation support.
+
+Links:
+
+- [[http://stackoverflow.com/questions/36219532/serializing-stdtype-index][Serializing `std::type_index`]]
+
 *** Use the in-memory interface of LibXml                             :story:
 
 At present, our C++ wrappers on top of LibXml are using the file based
@@ -1866,6 +1875,38 @@ it would be very difficult to get this right.
 Links:
 
 - [[https://github.com/protobuf-c/protobuf-c][protobuf-c]]: protobuf stand alone library in C.
+- [[https://github.com/mapbox/protozero][protozero]]: Minimalist protocol buffer decoder and encoder in C++
+
+*** Add support for flatbuffers                                       :story:
+
+Flatbuffers is a technology similar to protocol buffers but with a
+simpler implementation. The generated code is not brilliant. We can
+add support at several levels:
+
+- add stereotypes and other meta-model constructs to allow users to
+  express flatbuffer concepts: interop::table? ideally something which
+  is not hard-coded to flatbuffers but can be extended to other IDL
+  constructs such as Corba, etc. We will need a mapping layer for both
+  types and meta-model concepts from a set of generic yarn terms to
+  the concrete terms of the implementation technology. This needs to
+  be hooked in to the mapping layer somehow.
+- on a first stage we can just generate the IDL and then use their
+  compiler to generate code. This is already useful because we can
+  have a single model that covers the entire system.
+- a second stage would be to generate the flatbuffers code
+  directly. This is easier to achieve that with other technologies
+  such as protobuf because the flatbuffers code is simpler. We could
+  tidy-up a lot of their generated code: use string views, array
+  views, do not inline helper methods, create better builders, add
+  comments, use enum classes and make enums more readable, etc. We
+  should generate this code into types, rather than into a flatbuffers
+  facet directory. This directory is reserved for the code generated
+  using their compiler (as we did for ODB). Once we generate the code
+  in types we can also do other things such as generate test data, io
+  etc for these types.
+- inner classes support is required if we want to allow the user to
+  generate more than one type in a file. However, since flatbuffers
+  supports includes this is not a mandatory requirement.
 
 *** Add support for BSON serialisation                                :story:
 
@@ -7283,6 +7324,12 @@ See also:
 
 - [[https://github.com/JoakimSoderberg/coveralls-cmake-example/blob/master/CMakeLists.txt][example use of coveralls-cmake]]
 - [[https://github.com/SpinWaveGenie/SpinWaveGenie/blob/master/libSpinWaveGenie/CMakeLists.txt][SpinWaveGenie's support for Coveralls]]
+- maybe we should just use a different coverage provider. [[https://codecov.io/gh/DomainDrivenConsulting/dogen][CodeCov]]
+  seems to be used by the kool kids. Example: [[https://github.com/ChaiScript/ChaiScript/blob/develop/CMakeLists.txt][ChaiScript]]. Example repo
+  [[https://github.com/codecov/example-cpp11][here]] and for CMake specifically, [[https://github.com/codecov/example-cpp11-cmake][here]].
+- we should generate coverage from the clang debug build only since
+  that is the fastest build we have. We should use the clang coverage
+  tool. See [[https://clang.llvm.org/docs/SourceBasedCodeCoverage.html][this document]].
 
 Previous story [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/sprint_backlog_84.org#add-initial-support-for-coveralls][here]].
 
@@ -9630,6 +9677,19 @@ http://plantuml.com/
   generation, with language options; formatting; etc. Each is a
   distinct end point.
 
+Motes:
+
+- we must cache system models so we don't reload them for every
+  request.
+- we should load per language (references?)
+- we need to verify the JSON input to avoid large blobs, buffer
+  overruns, etc.
+- support for workspaces so that users can save references.
+- system data: load once, reload on changes. Data "dirs" can be
+  stored/cached on redis or DB.
+- we need to move XML reader to memory.
+- hydrators need a data store scoped to the user.
+
 *Previous Understanding*
 
 One way of testing new functionality added to dogen is to try to
@@ -9864,6 +9924,12 @@ few select types. The following would have to be done:
 Now we just need a way of creating some generic interfaces that take a
 wire client and a wire service and plug the framer and the dispatcher
 into it.
+
+Notes:
+
+- we need basic support for operations so that we can convert the
+  operations into messages.
+- we need some wire format support such as flat buffers.
 
 *** Generate state diagrams                                            :epic:
 
