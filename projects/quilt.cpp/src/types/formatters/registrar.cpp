@@ -20,7 +20,6 @@
  */
 #include <set>
 #include <iterator>
-#include <typeinfo>
 #include <algorithm>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
