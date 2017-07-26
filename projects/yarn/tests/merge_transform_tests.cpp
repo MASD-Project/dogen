@@ -45,13 +45,11 @@ const mock_intermediate_model_factory factory(flags);
 const std::string invalid_id("INVALID");
 const std::string invalid_model_name("INVALID");
 
-const std::string incorrect_model("Type does not belong to this model");
 const std::string double_merging("Attempt to merge more than once");
 const std::string inconsistent_kvp("Inconsistency between key and value");
 
 const std::string missing_target("Target model not present");
 const std::string too_many_targets("Only one target expected.");
-const std::string incorrect_meta_type("Type has incorrect meta_type");
 
 }
 

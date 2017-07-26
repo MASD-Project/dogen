@@ -62,13 +62,11 @@ const mock_intermediate_model_factory factory(flags);
 
 const auto idx = dogen::yarn::helpers::indices();
 
-const std::string incorrect_model("Object does not belong to this model");
 const std::string inconsistent_kvp("Inconsistency between key and value");
 const std::string missing_target("No target model found");
 const std::string too_many_targets("Only one target expected.");
 const std::string undefined_type("Object has attribute with undefined type");
 const std::string missing_parent("Object's parent could not be located");
-const std::string incorrect_meta_type("Object has incorrect meta_type");
 
 }
 
