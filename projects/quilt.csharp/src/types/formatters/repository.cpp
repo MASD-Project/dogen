@@ -29,8 +29,8 @@ namespace formatters {
 std::unordered_map<
     std::string,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
-repository::stock_artefact_formatters_by_meta_type() {
-    return stock_artefact_formatters_by_meta_type_;
+repository::stock_artefact_formatters_by_meta_name() {
+    return stock_artefact_formatters_by_meta_name_;
 }
 
 std::unordered_map<std::string, std::shared_ptr<artefact_formatter_interface>>&
@@ -55,8 +55,8 @@ std::unordered_map<
 const std::unordered_map<
     std::string,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
-repository::stock_artefact_formatters_by_meta_type() const {
-    return stock_artefact_formatters_by_meta_type_;
+repository::stock_artefact_formatters_by_meta_name() const {
+    return stock_artefact_formatters_by_meta_name_;
 }
 
 const std::unordered_map<std::string,

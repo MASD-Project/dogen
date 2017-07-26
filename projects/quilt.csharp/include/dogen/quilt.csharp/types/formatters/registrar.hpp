@@ -72,18 +72,18 @@ public:
     archetype_locations() const;
 
     /**
-     * @brief Returns the archetype locations for each meta-type.
+     * @brief Returns the archetype locations for each meta name.
      */
     const std::unordered_map<std::string,
                              std::list<annotations::archetype_location>>&
-    archetype_locations_by_meta_type() const;
+    archetype_locations_by_meta_name() const;
 
 private:
     repository formatter_repository_;
     std::forward_list<annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string,
                        std::list<annotations::archetype_location>>
-    archetype_locations_by_meta_type_;
+    archetype_locations_by_meta_name_;
 };
 
 template<typename Formatter>

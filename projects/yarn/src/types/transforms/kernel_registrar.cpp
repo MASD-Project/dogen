@@ -60,9 +60,9 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
     for (const auto al : k->archetype_locations())
         archetype_locations_.push_back(al);
 
-    for (const auto& pair : k->archetype_locations_by_meta_type()) {
-        const auto& mt(pair.first);
-        auto& albmt(archetype_locations_by_meta_type_[mt]);
+    for (const auto& pair : k->archetype_locations_by_meta_name()) {
+        const auto& mn(pair.first);
+        auto& albmt(archetype_locations_by_meta_name_[mn]);
         for (const auto& al : pair.second)
             albmt.push_back(al);
     }
@@ -100,8 +100,8 @@ kernel_registrar::archetype_locations() const {
 
 const std::unordered_map<std::string,
                          std::list<annotations::archetype_location>>&
-kernel_registrar::archetype_locations_by_meta_type() const {
-    return archetype_locations_by_meta_type_;
+kernel_registrar::archetype_locations_by_meta_name() const {
+    return archetype_locations_by_meta_name_;
 }
 
 } } }

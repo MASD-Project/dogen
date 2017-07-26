@@ -103,9 +103,9 @@ kernel::archetype_locations() const {
 
 const std::unordered_map<std::string,
                          std::list<annotations::archetype_location>>&
-kernel::archetype_locations_by_meta_type() const {
+kernel::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
-    return rg.archetype_locations_by_meta_type();
+    return rg.archetype_locations_by_meta_name();
 }
 
 yarn::meta_model::languages kernel::language() const {

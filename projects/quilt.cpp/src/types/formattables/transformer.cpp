@@ -156,8 +156,8 @@ model transformer:: transform(const formatters::repository& frp,
          * present.
          */
         const auto mt(e.meta_name().id());
-        const auto j(frp.stock_artefact_formatters_by_meta_type().find(mt));
-        if (j == frp.stock_artefact_formatters_by_meta_type().end()) {
+        const auto j(frp.stock_artefact_formatters_by_meta_name().find(mt));
+        if (j == frp.stock_artefact_formatters_by_meta_name().end()) {
             BOOST_LOG_SEV(lg, debug) << "Element has no formatters: " << id;
             continue;
         }

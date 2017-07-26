@@ -36,8 +36,8 @@ namespace formattables {
 
 class project_items_expander final {
 private:
-    static std::unordered_set<std::string> meta_types_project_items();
-    bool is_project_item(const std::string& mt) const;
+    static std::unordered_set<std::string> meta_names_for_project_items();
+    bool is_project_item(const std::string& mn) const;
 
 public:
     void expand(model& fm) const;

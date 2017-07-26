@@ -245,7 +245,7 @@ make_local_type_group(const annotations::type_repository& atrp,
 }
 
 std::unordered_map<std::string, enablement_expander::local_type_group_type>
-enablement_expander::bucket_local_type_group_by_meta_type(
+enablement_expander::bucket_local_type_group_by_meta_name(
     const local_type_group_type& unbucketed_ltgs,
     const formatters::repository& frp) const {
 
@@ -254,11 +254,11 @@ enablement_expander::bucket_local_type_group_by_meta_type(
     std::unordered_map<std::string,
                        enablement_expander::local_type_group_type> r;
 
-    for (const auto& pair: frp.stock_artefact_formatters_by_meta_type()) {
-        const auto& mt(pair.first);
+    for (const auto& pair: frp.stock_artefact_formatters_by_meta_name()) {
+        const auto& mn(pair.first);
         const auto& fmts(pair.second);
 
-        local_type_group_type& ltg(r[mt]);
+        local_type_group_type& ltg(r[mn]);
         for (const auto& fmt: fmts) {
             const auto arch(fmt->archetype_location().archetype());
             const auto i(unbucketed_ltgs.find(arch));
@@ -496,7 +496,7 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
      * Bucket the local types by element - i.e., we only care about
      * those formatters which are valid for a particular element.
      */
-    const auto ltgmt(bucket_local_type_group_by_meta_type(ltg, frp));
+    const auto ltgmt(bucket_local_type_group_by_meta_name(ltg, frp));
 
     for (auto& pair : fm.formattables()) {
         const auto id(pair.first);

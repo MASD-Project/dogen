@@ -55,7 +55,7 @@ private:
         std::string,
         std::forward_list<std::shared_ptr<artefact_formatter_interface>>
     >&
-    stock_artefact_formatters_by_meta_type();
+    stock_artefact_formatters_by_meta_name();
 
     /**
      * @brief Returns all available file formatters by archetype name.
@@ -87,7 +87,7 @@ public:
     const std::unordered_map<
     std::string,
     std::forward_list<std::shared_ptr<artefact_formatter_interface>>>&
-    stock_artefact_formatters_by_meta_type() const;
+    stock_artefact_formatters_by_meta_name() const;
 
     /**
      * @brief Returns all available file formatters by formatter name.
@@ -116,7 +116,7 @@ private:
     std::unordered_map<
         std::string,
         std::forward_list<std::shared_ptr<artefact_formatter_interface>>>
-    stock_artefact_formatters_by_meta_type_;
+    stock_artefact_formatters_by_meta_name_;
     std::unordered_map<std::string,
                        std::shared_ptr<artefact_formatter_interface>>
     stock_artefact_formatters_by_archetype_;

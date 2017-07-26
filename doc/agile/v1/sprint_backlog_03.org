@@ -13,21 +13,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-26 Wed 19:18]
+#+CAPTION: Clock summary at [2017-07-26 Wed 22:16]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *16:47* |       |      | 100.0 |
+| *Total time*                                                                | *17:18* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 16:47   |       |      | 100.0 |
-| Active                                                                      |         | 16:47 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.9 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |   9.3 |
+| Stories                                                                     | 17:18   |       |      | 100.0 |
+| Active                                                                      |         | 17:18 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.8 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |   9.1 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.7 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  21.9 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   7.5 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.7 |
-| STARTED Add meta-type support to yarn                                       |         |       | 9:03 |  53.9 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  21.3 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   7.3 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.5 |
+| STARTED Add meta-type support to yarn                                       |         |       | 9:34 |  55.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -169,6 +169,7 @@ Notes:
   =std::pair=.
 
 *** STARTED Add meta-type support to yarn                             :story:
+    CLOCK: [2017-07-26 Wed 21:45]--[2017-07-26 Wed 22:16] =>  0:31
     CLOCK: [2017-07-25 Tue 23:43]--[2017-07-25 Tue 23:59] =>  0:16
     CLOCK: [2017-07-25 Tue 23:30]--[2017-07-25 Tue 23:42] =>  0:12
     CLOCK: [2017-07-25 Tue 23:26]--[2017-07-25 Tue 23:29] =>  0:03

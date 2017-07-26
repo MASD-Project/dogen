@@ -214,9 +214,9 @@ directive_group_repository_factory::remove_non_includible_formatters(
 std::unordered_map<std::string,
                    directive_group_repository_factory::artefact_formatters_type>
 directive_group_repository_factory::
-includible_formatters_by_meta_type(const formatters::repository& frp) const {
+includible_formatters_by_meta_name(const formatters::repository& frp) const {
     std::unordered_map<std::string, artefact_formatters_type> r;
-    for (const auto& pair : frp.stock_artefact_formatters_by_meta_type()) {
+    for (const auto& pair : frp.stock_artefact_formatters_by_meta_name()) {
         const auto& mt(pair.first);
         const auto& fmts(pair.second);
         r[mt] = remove_non_includible_formatters(fmts);
@@ -379,7 +379,7 @@ make(const annotations::type_repository& atrp,
      * files that can be included via an include directive. Filter out
      * all of those that do not, and bucket them all by type index.
      */
-    const auto afmt(includible_formatters_by_meta_type(frp));
+    const auto afmt(includible_formatters_by_meta_name(frp));
     const auto tg(make_type_group(atrp, frp));
     const auto r(make(tg, afmt, l, formattables));
 

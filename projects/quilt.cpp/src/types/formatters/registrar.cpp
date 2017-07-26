@@ -36,8 +36,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.cpp.formatters.registrar"));
 
 const std::string no_file_formatters("File formatters repository is empty.");
-const std::string no_file_formatters_by_meta_type(
-    "No file formatters by meta_type provided.");
+const std::string no_file_formatters_by_meta_name(
+    "No file formatters by meta name provided.");
 const std::string no_forward_declarations_formatters(
     "No forward declarations formatters provided.");
 const std::string null_formatter("Formatter supplied is null.");
@@ -65,18 +65,18 @@ void registrar::validate() const {
      * way of troubleshooting validation errors.
      */
     const auto& frp(formatter_repository_);
-    if (frp.stock_artefact_formatters_by_meta_type().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_meta_type;
-        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters_by_meta_type));
+    if (frp.stock_artefact_formatters_by_meta_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_meta_name;
+        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters_by_meta_name));
     }
 
     /*
      * Validate the registered canonical formatters.
      */
     const auto cs(inclusion_support_types::canonical_support);
-    for (const auto& pair : frp.stock_artefact_formatters_by_meta_type()) {
-        const auto mt(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing type: " << mt;
+    for (const auto& pair : frp.stock_artefact_formatters_by_meta_name()) {
+        const auto mn(pair.first);
+        BOOST_LOG_SEV(lg, debug) << "Processing type: " << mn;
 
         const auto& formatters(pair.second);
         std::set<std::string> facets_found;
@@ -97,7 +97,7 @@ void registrar::validate() const {
                 const auto arch(al.archetype());
                 BOOST_LOG_SEV(lg, error) << more_than_one_canonical_archetype
                                          << fct << " archetype: " << arch
-                                         << " meta_type: " << mt;
+                                         << " meta name: " << mn;
                 BOOST_THROW_EXCEPTION(registrar_error(
                         more_than_one_canonical_archetype + fct));
             }
@@ -163,20 +163,21 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
         BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
     }
 
-    formatter_repository_.stock_artefact_formatters_.push_front(f);
+    auto& frp(formatter_repository_);
+    frp.stock_artefact_formatters_.push_front(f);
 
     /*
      * Add the formatter to the archetype location stores.
      */
     archetype_locations_.push_front(al);
-    const auto mt(f->meta_name().id());
-    archetype_locations_by_meta_type_[mt].push_back(al);
+    const auto mn(f->meta_name().id());
+    archetype_locations_by_meta_name_[mn].push_back(al);
 
     /*
      * Add the formatter to the index by element type index.
      */
-    auto& safbmt(formatter_repository_.stock_artefact_formatters_by_meta_type());
-    safbmt[mt].push_front(f);
+    auto& safbmt(frp.stock_artefact_formatters_by_meta_name());
+    safbmt[mn].push_front(f);
 
     /*
      * Add formatter to the index by archetype name. Inserting the
@@ -184,7 +185,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
      * ensuring the formatter id is unique in formatter space.
      */
     const auto arch(al.archetype());
-    auto& fffn(formatter_repository_.stock_artefact_formatters_by_archetype());
+    auto& fffn(frp.stock_artefact_formatters_by_archetype());
     const auto pair(std::make_pair(arch, f));
     const auto inserted(fffn.insert(pair).second);
     if (!inserted) {
@@ -193,7 +194,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->formatter_name()
-                             << " against meta-type: " << mt;
+                             << " against meta name: " << mn;
 }
 
 void registrar::
@@ -209,7 +210,8 @@ register_formatter_helper(std::shared_ptr<helper_formatter_interface> fh) {
         BOOST_THROW_EXCEPTION(registrar_error(empty_family));
     }
 
-    auto& f(formatter_repository_.helper_formatters_[fh->family()]);
+    auto& frp(formatter_repository_);
+    auto& f(frp.helper_formatters_[fh->family()]);
     for (const auto& of : fh->owning_formatters())
         f[of].push_back(fh);
 
@@ -228,8 +230,8 @@ registrar::archetype_locations() const {
 
 const std::unordered_map<std::string,
                          std::list<annotations::archetype_location>>&
-registrar::archetype_locations_by_meta_type() const {
-    return archetype_locations_by_meta_type_;
+registrar::archetype_locations_by_meta_name() const {
+    return archetype_locations_by_meta_name_;
 }
 
 const std::unordered_map<

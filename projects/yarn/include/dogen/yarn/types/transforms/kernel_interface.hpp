@@ -65,11 +65,11 @@ public:
     archetype_locations() const = 0;
 
     /**
-     * @brief Returns the archetype locations for each meta-type.
+     * @brief Returns the archetype locations for each meta name.
      */
     virtual const std::unordered_map<
         std::string, std::list<annotations::archetype_location>>&
-    archetype_locations_by_meta_type() const = 0;
+    archetype_locations_by_meta_name() const = 0;
 
     /**
      * @brief Language supported by this kernel.

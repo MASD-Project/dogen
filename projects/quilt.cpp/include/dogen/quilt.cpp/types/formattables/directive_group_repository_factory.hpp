@@ -84,7 +84,7 @@ public:
         const artefact_formatters_type& formatters) const;
 
     std::unordered_map<std::string, artefact_formatters_type>
-    includible_formatters_by_meta_type(const formatters::repository& frp) const;
+    includible_formatters_by_meta_name(const formatters::repository& frp) const;
 
 private:
     void insert_inclusion_directive(const std::string& id,

@@ -37,7 +37,7 @@ namespace csharp {
 namespace formattables {
 
 std::unordered_set<std::string>
-project_items_expander::meta_types_project_items() {
+project_items_expander::meta_names_for_project_items() {
     std::unordered_set<std::string> r;
 
     using ymnf = yarn::helpers::meta_name_factory;
@@ -47,16 +47,16 @@ project_items_expander::meta_types_project_items() {
     r.insert(ymnf::make_object_name().id());
     r.insert(ymnf::make_builtin_name().id());
     r.insert(ymnf::make_visitor_name().id());
-
     r.insert(fabric::meta_name_factory::make_assistant_name().id());
+
     return r;
 }
 
 
-bool project_items_expander::is_project_item(const std::string& mt) const {
-    static const auto mtpi(meta_types_project_items());
-    const auto i(mtpi.find(mt));
-    return i != mtpi.end();
+bool project_items_expander::is_project_item(const std::string& mn) const {
+    static const auto mnfpi(meta_names_for_project_items());
+    const auto i(mnfpi.find(mn));
+    return i != mnfpi.end();
 }
 
 void project_items_expander::expand(model& fm) const {

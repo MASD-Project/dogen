@@ -130,10 +130,10 @@ inclusion_expander::compute_inclusion_dependencies(
      * element and the formatters that support it.
      */
     element_inclusion_dependencies_type r;
-    const auto mt(e.meta_name().id());
-    const auto i(frp.stock_artefact_formatters_by_meta_type().find(mt));
-    if (i == frp.stock_artefact_formatters_by_meta_type().end()) {
-        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << mt;
+    const auto mn(e.meta_name().id());
+    const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
+    if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
+        BOOST_LOG_SEV(lg, debug) << "No formatters for type: " << mn;
         return r;
     }
 

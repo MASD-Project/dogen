@@ -58,7 +58,7 @@ context context_factory::make(const options::knitting_options& o) {
 
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const auto& albmt(rg.archetype_locations_by_meta_type());
+    const auto& albmt(rg.archetype_locations_by_meta_name());
     const context r(data_dirs, o, albmt, alrp, atrp, msrp, frp);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";

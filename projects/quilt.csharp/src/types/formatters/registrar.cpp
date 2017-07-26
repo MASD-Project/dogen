@@ -32,8 +32,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("quilt.csharp.formatters.registrar"));
 
 const std::string no_file_formatters("File formatters repository is empty.");
-const std::string no_file_formatters_by_meta_type(
-    "No file formatters by meta-type provided.");
+const std::string no_file_formatters_by_meta_name(
+    "No file formatters by meta name provided.");
 
 const std::string null_formatter_helper("Formatter helper supplied is null");
 const std::string null_formatter("Formatter supplied is null.");
@@ -56,9 +56,9 @@ void registrar::validate() const {
      * way of troubleshooting validation errors.
      */
     const auto& frp(formatter_repository_);
-    if (frp.stock_artefact_formatters_by_meta_type().empty()) {
-        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_meta_type;
-        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters_by_meta_type));
+    if (frp.stock_artefact_formatters_by_meta_name().empty()) {
+        BOOST_LOG_SEV(lg, error) << no_file_formatters_by_meta_name;
+        BOOST_THROW_EXCEPTION(registrar_error(no_file_formatters_by_meta_name));
     }
 
     if (frp.stock_artefact_formatters().empty()) {
@@ -100,14 +100,14 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
      * Add the formatter to the archetype location stores.
      */
     archetype_locations_.push_front(al);
-    const auto mt(f->meta_name().id());
-    archetype_locations_by_meta_type_[mt].push_back(al);
+    const auto mn(f->meta_name().id());
+    archetype_locations_by_meta_name_[mn].push_back(al);
 
     /*
      * Add the formatter to the index by element type index.
      */
-    auto& safmt(formatter_repository_.stock_artefact_formatters_by_meta_type());
-    safmt[mt].push_front(f);
+    auto& safmt(formatter_repository_.stock_artefact_formatters_by_meta_name());
+    safmt[mn].push_front(f);
 
     /*
      * Add formatter to the index by archetype name. Inserting the
@@ -124,7 +124,7 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     }
 
     BOOST_LOG_SEV(lg, debug) << "Registrered formatter: " << f->formatter_name()
-                             << " against meta-type: " << mt;
+                             << " against meta name: " << mn;
 }
 
 void registrar::register_formatter_helper(
@@ -160,8 +160,8 @@ registrar::archetype_locations() const {
 
 const std::unordered_map<std::string,
                          std::list<annotations::archetype_location>>&
-registrar::archetype_locations_by_meta_type() const {
-    return archetype_locations_by_meta_type_;
+registrar::archetype_locations_by_meta_name() const {
+    return archetype_locations_by_meta_name_;
 }
 
 } } } }

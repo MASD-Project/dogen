@@ -60,8 +60,8 @@ public:
     generator(const yarn::meta_model::name& model_name,
         const formatters::repository& rp)
         : result_(create_master_header(model_name)),
-          file_formatters_by_meta_type_(
-              filter_file_formatters_by_meta_type(rp)) {}
+          file_formatters_by_meta_name_(
+              filter_file_formatters_by_meta_name(rp)) {}
 
 private:
     boost::shared_ptr<master_header>
@@ -76,7 +76,7 @@ private:
         std::string,
         std::forward_list<
             std::shared_ptr<formatters::artefact_formatter_interface>>>
-    filter_file_formatters_by_meta_type(const formatters::repository& rp) const;
+    filter_file_formatters_by_meta_name(const formatters::repository& rp) const;
 
     void process_element(const yarn::meta_model::element& e);
 
@@ -106,7 +106,7 @@ private:
         std::string,
         std::forward_list<
             std::shared_ptr<formatters::artefact_formatter_interface>>>
-    file_formatters_by_meta_type_;
+    file_formatters_by_meta_name_;
 
 };
 
@@ -143,14 +143,14 @@ std::unordered_map<
     std::string,
     std::forward_list<
         std::shared_ptr<formatters::artefact_formatter_interface>>>
-generator::filter_file_formatters_by_meta_type(
+generator::filter_file_formatters_by_meta_name(
     const formatters::repository& rp) const {
     std::unordered_map<
         std::string,
         std::forward_list<
             std::shared_ptr<formatters::artefact_formatter_interface>>> r;
 
-    for (const auto& pair : rp.stock_artefact_formatters_by_meta_type()) {
+    for (const auto& pair : rp.stock_artefact_formatters_by_meta_name()) {
         const auto& mt(pair.first);
         const auto& fmts(pair.second);
         r[mt] = filter_formatters(fmts);
@@ -163,8 +163,8 @@ void generator::process_element(const yarn::meta_model::element& e) {
         return;
 
     const auto mt(e.meta_name().id());
-    const auto i(file_formatters_by_meta_type_.find(mt));
-    if (i == file_formatters_by_meta_type_.end()) {
+    const auto i(file_formatters_by_meta_name_.find(mt));
+    if (i == file_formatters_by_meta_name_.end()) {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, error) << formatter_not_found_for_type << id;
         BOOST_THROW_EXCEPTION(

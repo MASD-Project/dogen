@@ -90,11 +90,11 @@ private:
         const std::list<annotations::archetype_location>& als);
 
     static std::unordered_map<std::string, local_type_group_type>
-    bucket_local_type_group_by_meta_type(
+    bucket_local_type_group_by_meta_name(
         const local_type_group_type& unbucketed_ltgs,
         const std::unordered_map<std::string,
         std::list<annotations::archetype_location>>&
-        archetype_locations_by_meta_type);
+        archetype_locations_by_meta_name);
 
 private:
     typedef std::unordered_map<std::string, local_enablement_configuration>

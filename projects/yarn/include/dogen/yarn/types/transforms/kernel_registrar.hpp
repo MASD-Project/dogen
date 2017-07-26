@@ -82,13 +82,13 @@ public:
      */
     const std::unordered_map<std::string,
                              std::list<annotations::archetype_location>>&
-    archetype_locations_by_meta_type() const;
+    archetype_locations_by_meta_name() const;
 
 private:
     std::list<annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string,
                        std::list<annotations::archetype_location>>
-    archetype_locations_by_meta_type_;
+    archetype_locations_by_meta_name_;
     std::unordered_map<yarn::meta_model::languages,
                        std::shared_ptr<kernel_interface>> kernels_by_language_;
 };

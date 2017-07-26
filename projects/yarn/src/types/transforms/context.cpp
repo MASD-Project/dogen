@@ -29,13 +29,13 @@ context::context(
         const options::knitting_options& options,
         const std::unordered_map<
         std::string, std::list<annotations::archetype_location>>&
-        als_by_meta_type,
+        als_by_meta_name,
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
         const dogen::formatters::repository& frp) :
     data_directories_(data_directories), options_(options),
-    archetype_locations_by_meta_type_(als_by_meta_type),
+    archetype_locations_by_meta_name_(als_by_meta_name),
     archetype_location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, archetype_location_repository_,
         type_repository_),
@@ -56,8 +56,8 @@ context::archetype_location_repository() const {
 
 const std::unordered_map<std::string,
                          std::list<annotations::archetype_location>>&
-context::archetype_locations_by_meta_type() const {
-    return archetype_locations_by_meta_type_;
+context::archetype_locations_by_meta_name() const {
+    return archetype_locations_by_meta_name_;
 }
 
 const annotations::type_repository& context::type_repository() const {

@@ -77,7 +77,7 @@ public:
      */
     const std::unordered_map<std::string,
                              std::list<annotations::archetype_location>>&
-    archetype_locations_by_meta_type() const;
+    archetype_locations_by_meta_name() const;
 
     /**
      * @brief Returns all of the available helper formatters.
@@ -94,7 +94,7 @@ private:
     std::forward_list<annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string,
                        std::list<annotations::archetype_location>>
-    archetype_locations_by_meta_type_;
+    archetype_locations_by_meta_name_;
 };
 
 template<typename Formatter>

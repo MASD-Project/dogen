@@ -224,17 +224,17 @@ make_local_type_group(const annotations::type_repository& atrp,
 }
 
 std::unordered_map<std::string, enablement_transform::local_type_group_type>
-enablement_transform::bucket_local_type_group_by_meta_type(
+enablement_transform::bucket_local_type_group_by_meta_name(
     const local_type_group_type& unbucketed_ltgs,
     const std::unordered_map<std::string,
     std::list<annotations::archetype_location>>&
-    archetype_locations_by_meta_type) {
+    archetype_locations_by_meta_name) {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
-                             << "by meta-type.";
+                             << "by meta name.";
     std::unordered_map<std::string, local_type_group_type> r;
 
-    for (const auto& pair: archetype_locations_by_meta_type) {
+    for (const auto& pair: archetype_locations_by_meta_name) {
         const auto& mt(pair.first);
         const auto& als(pair.second);
 
@@ -518,12 +518,12 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      * Bucket the local types by element - i.e., we only care about
      * those formatters which are valid for a particular element.
      */
-    const auto& albmt(ctx.archetype_locations_by_meta_type());
-    const auto ltgmt(bucket_local_type_group_by_meta_type(ltg, albmt));
+    const auto& albmn(ctx.archetype_locations_by_meta_name());
+    const auto ltgmn(bucket_local_type_group_by_meta_name(ltg, albmn));
 
     using namespace std::placeholders;
     const auto f(enablement_transform::compute_enablement_for_element);
-    const auto v(std::bind(f, gcs, ltgmt, _1));
+    const auto v(std::bind(f, gcs, ltgmn, _1));
     const bool include_injected_elements(true);
     meta_model::elements_traversal(im, v, include_injected_elements);
 

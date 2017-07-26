@@ -58,13 +58,13 @@ workflow::execute(const formattables::model& fm) const {
         const auto id(e.name().id());
         BOOST_LOG_SEV(lg, debug) << "Procesing element: " << id;
 
-        const auto mt(e.meta_name().id());
-        BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
+        const auto mn(e.meta_name().id());
+        BOOST_LOG_SEV(lg, debug) << "Meta name: " << mn;
 
         const auto& frp(registrar().formatter_repository());
-        const auto i(frp.stock_artefact_formatters_by_meta_type().find(mt));
-        if (i == frp.stock_artefact_formatters_by_meta_type().end()) {
-            BOOST_LOG_SEV(lg, debug) << "No formatters for meta-type: " << mt;
+        const auto i(frp.stock_artefact_formatters_by_meta_name().find(mn));
+        if (i == frp.stock_artefact_formatters_by_meta_name().end()) {
+            BOOST_LOG_SEV(lg, debug) << "No formatters for meta name: " << mn;
             return r;
         }
 
