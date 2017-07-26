@@ -521,13 +521,13 @@
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#element_type_index#</dia:string>
+            <dia:string>#element_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::type_index#</dia:string>
+            <dia:string>#std::string#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -5679,10 +5679,10 @@ facet of the C++ language.
       <dia:attribute name="attributes">
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#stock_artefact_formatters_by_type_index#</dia:string>
+            <dia:string>#stock_artefact_formatters_by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::type_index, std::forward_list&lt;std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::forward_list&lt;std::shared_ptr&lt;formatters::artefact_formatter_interface&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

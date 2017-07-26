@@ -20291,13 +20291,13 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#archetype_locations_for_type_index#</dia:string>
+            <dia:string>#archetype_locations_for_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::type_index, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -20785,13 +20785,13 @@ space.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#archetype_locations_for_type_index#</dia:string>
+            <dia:string>#archetype_locations_for_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::type_index, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;annotations::archetype_location&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
