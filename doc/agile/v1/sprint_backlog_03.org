@@ -13,23 +13,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-26 Wed 23:32]
+#+CAPTION: Clock summary at [2017-07-27 Thu 07:32]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:32* |       |      | 100.0 |
+| *Total time*                                                                | *19:17* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:32   |       |      | 100.0 |
-| Active                                                                      |         | 18:32 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.7 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:34 |   8.5 |
+| Stories                                                                     | 19:17   |       |      | 100.0 |
+| Active                                                                      |         | 19:17 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 2:19 |  12.0 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.6 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  19.9 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   6.8 |
-| STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.7 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.2 |
-| STARTED Add meta-type support to yarn                                       |         |       | 9:34 |  51.6 |
-| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.9 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  19.1 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   6.6 |
+| STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.6 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   4.1 |
+| STARTED Add meta-type support to yarn                                       |         |       | 9:34 |  49.6 |
+| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -80,6 +80,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-27 Thu 06:47]--[2017-07-27 Thu 07:32] =>  0:45
     CLOCK: [2017-07-26 Wed 19:02]--[2017-07-26 Wed 19:18] =>  0:16
     CLOCK: [2017-07-23 Sun 15:32]--[2017-07-23 Sun 15:45] =>  0:13
     CLOCK: [2017-07-18 Tue 17:13]--[2017-07-18 Tue 17:47] =>  0:34
@@ -277,6 +278,35 @@ One thing to bear in mind is that we need to trash all containers and
 re-insert all elements, because the IDs will change as part of this
 exercise.
 
+*** STARTED Create an exogenous model                                 :story:
+
+At present we are allowing the frontends to directly create
+intermediate models. However, this doesn't make a lot of sense: there
+are many properties in the intermediate models which should not be
+touched by the frontends. We should have a specific model that has
+only the properties that can be set by the frontends -
+=exogenous_model=. The exogenous model chain is then responsible for
+converting it into an intermediate model.
+
+Tasks:
+
+- create the exogenous model with the required attributes. Add a root
+  module, remove model name. All containers should be lists of a pair
+  of scribble group to concrete element.
+- move annotations transform to exogenous chain. Add a transform to
+  update element names by reading model modules and external modules.
+- drop scribble groups from intermediate model.
+- add an adaptor to convert from exogenous model to intermediate
+  model.
+- use some kind of reference to figure out where to place the
+  documentation of a module. We can't use the IDs any longer. We could
+  simply remember the list iterators. Since we are only pushing back
+  into the list, the iterators should remain valid. However, for this
+  to work we need to add support to iterators in dogen or manually
+  create the context/repository.
+- Refactor yarn.dia, splitting out the model from the repository and
+  renaming repository to context.
+
 *** Add a property for the model modules as an annotation             :story:
 
 We should read out the model name as an annotation instead of
@@ -308,35 +338,6 @@ to have the full name of the model.
 
 We now have a use case for this: the dynamic models. See Rename
 dynamic models.
-
-*** Create an exogenous model                                         :story:
-
-At present we are allowing the frontends to directly create
-intermediate models. However, this doesn't make a lot of sense: there
-are many properties in the intermediate models which should not be
-touched by the frontends. We should have a specific model that has
-only the properties that can be set by the frontends -
-=exogenous_model=. The exogenous model chain is then responsible for
-converting it into an intermediate model.
-
-Tasks:
-
-- create the exogenous model with the required attributes. Add a root
-  module, remove model name. All containers should be lists of a pair
-  of scribble group to concrete element.
-- move annotations transform to exogenous chain. Add a transform to
-  update element names by reading model modules and external modules.
-- drop scribble groups from intermediate model.
-- add an adaptor to convert from exogenous model to intermediate
-  model.
-- use some kind of reference to figure out where to place the
-  documentation of a module. We can't use the IDs any longer. We could
-  simply remember the list iterators. Since we are only pushing back
-  into the list, the iterators should remain valid. However, for this
-  to work we need to add support to iterators in dogen or manually
-  create the context/repository.
-- Refactor yarn.dia, splitting out the model from the repository and
-  renaming repository to context.
 
 *** Rename transformers to adapters                                   :story:
 
@@ -468,6 +469,68 @@ We need to move all functionality which is not kernel specific into
 yarn for the locator. This will exist in the helpers namespace. We
 then need to implement the C++ locator as a composite of yarn
 locator. It will live in fabric.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit
+ad-hoc. We could potentially create a pattern. Say for C++, we have
+the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine
+  the placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or
+  "natural" location inside of facet.
+- archetype location: used to determine the facet and archetype
+  postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location
+(a given artefact has a fixed placement). So a naive approach to this
+seems to imply one could create a data driven locator, that works for
+all languages if supplied suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project
+  sub-directories". There is a mapping between the artefact location
+  and a project sub-directory.
+- there is a mapping between the artefact location and the facet and
+  artefact postfixes.
+- extensions are a slight complication: a) we want to allow users to
+  override header/implementation extensions, but to do it so for the
+  entire project (except maybe for ODB files). However, what yarn's
+  locator needs is a mapping of artefact location to  extension. It
+  would be a tad cumbersome to have to specify extensions one artefact
+  location at a time. So someone has to read a kernel level
+  configuration parameter with the artefact extensions and expand it
+  to the required mappings. Whilst dealing with this we also have the
+  issue of elements which have extension in their names such as visual
+  studio projects and solutions. The correct solution is to implement
+  these using element extensions, and to remove the extension from the
+  element name.
+- each kernel can supply its configuration to yarn's locator via the
+  kernel interface. This is fairly static so it can be supplied early
+  on during initialisation.
+- there is still something not quite right. We are performing a
+  mapping between some logical space (the modeling space) and the
+  physical space (paths in the filesystem). Some modeling elements
+  such as the various CMakeLists.txt do not have enough information at
+  the logical level to tell us about their location; at present the
+  formatter itself gives us this hint ("include cmakelists" or "source
+  cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the
+  archetype location and the physical space. Although, if this is the
+  only case of a modeling element not mapping uniquely, perhaps we
+  should do exactly this.
+- However, we still have inclusion paths to worry about. As we done
+  with the source/include directories, we need to somehow create a
+  concept of inclusion path which is not language specific; "relative
+  path" and "requires relative path" perhaps? These could be a
+  function of archetype location.
 
 *** Move dependencies into yarn                                       :story:
 
