@@ -1388,6 +1388,11 @@ When we run the benchmarks for utility we get an error:
 Seems like the tests do not clean up after themselves. We need to add
 some clean up logic and re-enable the tests.
 
+*** Generate benchmarking code                                        :story:
+
+We should automatically add the benchmarking code in the generated
+CMakeLists. This could be behind a feature switch in meta-data.
+
 *** Add cross-model support to C#                                     :story:
 
 At present we do not have any tests that prove that cross-model
@@ -2025,6 +2030,16 @@ Notes:
 - add CMake file to find knitter etc and include those files in
   package. We probably should install dogen now and have dogen rely on
   installed dogen first, with an option to switch to "built" dogen.
+- generate git ignore files with common regexes. See [[https://github.com/github/gitignore][A collection of
+  useful .gitignore templates]]
+- generate top-level CMake, allowing user to enter dependencies and
+  their versions (e.g. Boost 1.62 etc) and CMake version.
+- inject dogen support automatically to CMake (on a feature switch).
+- determine the list of projects by looking at the contents of the
+  input models directory.
+- user to enter copyright, github URL.
+- we probably need to create a kernel for dart due to the
+  peculiarities of the directory structure.
 
 Links:
 
@@ -2849,6 +2864,7 @@ We need a test for composition / recursion.
 - =-Wunused-private-field=: Seems like this warning is not part of
   =-Wall=
 - =-Winconsistent-missing-override=: new clang warning, probably 3.6.
+- =-Wdocumentation=: clang doxygen warning.
 
 *** Create utility methods for =__type__= etc                         :story:
 
@@ -7967,6 +7983,27 @@ required concept:
 - this means that instead of creating a new meta-type, we need to
   augment =yarn::object= with command line options stuff.
 
+Notes:
+
+- create stereotypes for options group, options; allow users to define
+  members of type options in options group. Or should the options just
+  be member variables? In which case we could have
+  =command_line::options= as the stereotype.
+- generate the options classes.
+- inject a hand-crafted validator or consider generating the validator
+  given the meta-data supplied by the user (mandatory, at most X
+  times, etc).
+- generate an options builder that takes on the building
+  responsibilities from the parser.
+- generate a parser that hooks the builder and copies data from the
+  options map into the options.
+- allow users to supply the help text and the version text as
+  parameters; these should probably be done in a similar way to what
+  we do with the modeline etc.
+- allow users to set default values in the options attributes and set
+  them in generated code. This is probably just adding default value
+  support to dogen, for which we have a separate story.
+
 *** Consider creating a TextUML frontend                              :story:
 
 We could create a frontend that reads TextUML files:
@@ -8363,6 +8400,11 @@ When we create a dogen project for the first time, we should be able
 to, optionally, add the tests directory with skeleton code and a
 sample test. If the directory already exists (or if the option is off)
 we do nothing.
+
+*** Automatically ignore tests                                        :story:
+
+If a project has tests (see story above) we should automatically
+ignore the test regular expressions.
 
 *** Easy addition of facets and formatters                             :epic:
 
