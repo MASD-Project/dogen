@@ -18,17 +18,35 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_FACTORY_FWD_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_FACTORY_FWD_HPP
+#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
+#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
+#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
+
 namespace dogen {
 namespace annotations {
 
-class archetype_location_repository_factory;
+class archetype_location_repository_builder final {
+private:
+    void validate(const std::list<archetype_location>& als) const;
+    void populate_facet_names_by_kernel_name();
+    void populate_formatter_names_by_kernel_name();
+
+public:
+    void add(const std::list<archetype_location>& als);
+
+public:
+    const archetype_location_repository& build();
+
+private:
+    archetype_location_repository repository_;
+};
 
 } }
 

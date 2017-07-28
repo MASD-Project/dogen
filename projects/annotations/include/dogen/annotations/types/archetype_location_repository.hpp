@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
+#include <map>
 #include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/serialization/archetype_location_repository_fwd_ser.hpp"
 
@@ -47,7 +48,8 @@ public:
     archetype_location_repository(
         const std::list<dogen::annotations::archetype_location>& archetype_locations,
         const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_kernel_name,
-        const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name);
+        const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name,
+        const std::map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_meta_name);
 
 private:
     template<typename Archive>
@@ -72,6 +74,11 @@ public:
     void formatter_names_by_kernel_name(const std::unordered_map<std::string, std::unordered_set<std::string> >& v);
     void formatter_names_by_kernel_name(const std::unordered_map<std::string, std::unordered_set<std::string> >&& v);
 
+    const std::map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_meta_name() const;
+    std::map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_meta_name();
+    void archetype_locations_by_meta_name(const std::map<std::string, std::list<dogen::annotations::archetype_location> >& v);
+    void archetype_locations_by_meta_name(const std::map<std::string, std::list<dogen::annotations::archetype_location> >&& v);
+
 public:
     bool operator==(const archetype_location_repository& rhs) const;
     bool operator!=(const archetype_location_repository& rhs) const {
@@ -86,6 +93,7 @@ private:
     std::list<dogen::annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string, std::unordered_set<std::string> > facet_names_by_kernel_name_;
     std::unordered_map<std::string, std::unordered_set<std::string> > formatter_names_by_kernel_name_;
+    std::map<std::string, std::list<dogen::annotations::archetype_location> > archetype_locations_by_meta_name_;
 };
 
 } }

@@ -28,7 +28,7 @@
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/annotations/types/type_repository_factory.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
-#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/formatters/io/artefact_io.hpp"
 #include "dogen/formatters/types/filesystem_writer.hpp"
@@ -100,9 +100,9 @@ workflow::obtain_archetype_location_repository() const {
     formatter fmt;
     als.push_back(fmt.archetype_location());
 
-    annotations::archetype_location_repository_factory f;
-    const auto r(f.make(als));
-    return r;
+    annotations::archetype_location_repository_builder b;
+    b.add(als);
+    return b.build();
 }
 
 dogen::formatters::repository workflow::create_formatters_repository(

@@ -13,24 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-28 Fri 12:37]
+#+CAPTION: Clock summary at [2017-07-28 Fri 13:03]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:43* |       |      | 100.0 |
+| *Total time*                                                                | *22:07* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:43   |       |      | 100.0 |
-| Active                                                                      |         | 21:43 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  14.3 |
+| Stories                                                                     | 22:07   |       |      | 100.0 |
+| Active                                                                      |         | 22:07 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  14.0 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.5 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  17.0 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.8 |
-| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.6 |
-| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  44.1 |
-| STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.5 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   3.6 |
-| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.2 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  16.7 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.7 |
+| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.5 |
+| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  43.3 |
+| STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.4 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   3.5 |
+| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.1 |
+| STARTED Use the archetype locations repository in yarn                      |         |       | 0:24 |   1.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -310,7 +311,8 @@ Tasks:
 - Refactor yarn.dia, splitting out the model from the repository and
   renaming repository to context.
 
-*** Use the archetype locations repository in yarn                    :story:
+*** STARTED Use the archetype locations repository in yarn            :story:
+    CLOCK: [2017-07-28 Fri 12:38]--[2017-07-28 Fri 13:02] =>  0:24
 
 Originally we created a repository for archetype locations, with
 several indices. However, it seems we forgotten about it and are

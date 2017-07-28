@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/serialization/map.hpp>
 #include <boost/serialization/nvp.hpp>
 #include <boost/serialization/list.hpp>
 #include <boost/archive/xml_iarchive.hpp>
@@ -44,6 +45,7 @@ void save(Archive& ar,
     ar << make_nvp("archetype_locations", v.archetype_locations_);
     ar << make_nvp("facet_names_by_kernel_name", v.facet_names_by_kernel_name_);
     ar << make_nvp("formatter_names_by_kernel_name", v.formatter_names_by_kernel_name_);
+    ar << make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
 }
 
 template<typename Archive>
@@ -53,6 +55,7 @@ void load(Archive& ar,
     ar >> make_nvp("archetype_locations", v.archetype_locations_);
     ar >> make_nvp("facet_names_by_kernel_name", v.facet_names_by_kernel_name_);
     ar >> make_nvp("formatter_names_by_kernel_name", v.formatter_names_by_kernel_name_);
+    ar >> make_nvp("archetype_locations_by_meta_name", v.archetype_locations_by_meta_name_);
 }
 
 } }

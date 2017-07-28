@@ -21,13 +21,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/building_error.hpp"
 #include "dogen/annotations/io/archetype_location_repository_io.hpp"
-#include "dogen/annotations/types/archetype_location_repository_factory.hpp"
+#include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
 static logger
-lg(logger_factory("annotations.archetype_location_repository_factory"));
+lg(logger_factory("annotations.archetype_location_repository_builder"));
 
 const std::string empty_kernel("Kernel name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
@@ -38,7 +38,7 @@ const std::string empty_archetype("Archetype name cannot be empty.");
 namespace dogen {
 namespace annotations {
 
-void archetype_location_repository_factory::
+void archetype_location_repository_builder::
 validate(const std::list<archetype_location>& als) const {
     BOOST_LOG_SEV(lg, debug) << "Validating archetype locations.";
 
@@ -62,34 +62,36 @@ validate(const std::list<archetype_location>& als) const {
     BOOST_LOG_SEV(lg, debug) << "Archetype locations are valid.";
 }
 
-void archetype_location_repository_factory::
-populate_facet_names_by_kernel_name(archetype_location_repository& rp) const {
-    for (const auto& al : rp.archetype_locations())
-        rp.facet_names_by_kernel_name()[al.kernel()].insert(al.facet());
+void archetype_location_repository_builder::
+populate_facet_names_by_kernel_name() {
+    auto& fnbkn(repository_.facet_names_by_kernel_name());
+    for (const auto& al : repository_.archetype_locations())
+        fnbkn[al.kernel()].insert(al.facet());
 }
 
-void archetype_location_repository_factory::
-populate_formatter_names_by_kernel_name(
-    archetype_location_repository& rp) const {
-
-    for (const auto& al : rp.archetype_locations()) {
-        const auto arch(al.archetype());
-        rp.formatter_names_by_kernel_name()[al.kernel()].insert(arch);
-    }
+void archetype_location_repository_builder::
+populate_formatter_names_by_kernel_name() {
+    auto& fnbkn(repository_.formatter_names_by_kernel_name());
+    for (const auto& al : repository_.archetype_locations())
+        fnbkn[al.kernel()].insert(al.archetype());
 }
 
-archetype_location_repository archetype_location_repository_factory::
-make(const std::list<archetype_location>& als) const {
-    BOOST_LOG_SEV(lg, debug) << "Creating archetype location repository.";
+void archetype_location_repository_builder::
+add(const std::list<archetype_location>& als) {
+    BOOST_LOG_SEV(lg, debug) << "Adding list of archetype location.";
+
     validate(als);
+    repository_.archetype_locations(als);
+    populate_facet_names_by_kernel_name();
+    populate_formatter_names_by_kernel_name();
 
-    archetype_location_repository r;
-    r.archetype_locations(als);
-    populate_facet_names_by_kernel_name(r);
-    populate_formatter_names_by_kernel_name(r);
-     BOOST_LOG_SEV(lg, debug) << "Created archetype location repository. "
-                             << "Result: " << r;
-    return r;
+    BOOST_LOG_SEV(lg, debug) << "Added archetype location list. ";
+}
+
+const archetype_location_repository&
+archetype_location_repository_builder::build() {
+    BOOST_LOG_SEV(lg, debug) << "Repository built: " << repository_;
+    return repository_;
 }
 
 } }
