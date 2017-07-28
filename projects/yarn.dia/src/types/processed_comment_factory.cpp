@@ -44,8 +44,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-processed_comment
-processed_comment_factory::make(const std::string& c) const {
+processed_comment processed_comment_factory::make(const std::string& c) {
     processed_comment r;
 
     if (c.empty())

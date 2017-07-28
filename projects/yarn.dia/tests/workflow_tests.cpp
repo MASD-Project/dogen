@@ -61,8 +61,7 @@ bool test_workflow(
     using namespace dogen::annotations::test;
     mock_type_repository_factory rf;
     const auto rp(rf.make());
-    workflow w;
-    const auto actual(w.execute(i, model_name));
+    const auto actual(workflow::execute(i, model_name));
     return asserter::assert_object(expected_path, actual_path, actual);
 }
 

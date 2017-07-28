@@ -135,7 +135,15 @@ public:
      *
      * @pre Graph must not yet have been generated.
      */
+    /**@{*/
     void generate();
+
+    template<typename Container>
+    void generate(const Container& c) {
+        add(c);
+        generate();
+    }
+    /**@}*/
 
 public:
     /**

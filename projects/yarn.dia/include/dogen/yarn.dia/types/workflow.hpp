@@ -39,46 +39,22 @@ namespace yarn {
 namespace dia {
 
 class workflow {
-public:
-    workflow() = default;
-    workflow(const workflow&) = delete;
-    workflow(workflow&&) = default;
-    ~workflow() = default;
+private:
+    static std::string
+    obtain_external_modules(const std::list<processed_object>& pos);
 
 private:
-    std::list<processed_object>
-    create_processed_objects(const dogen::dia::diagram& d) const;
-
-    void validate_processed_objects(
-        const std::list<processed_object>& pos) const;
-
-    std::string obtain_external_modules(
-        const std::list<processed_object>& pos) const;
-
-private:
-    /**
-     * @brief Setup the DAG of processed objects.
-     */
-    std::pair<graph_type,
-              const std::unordered_map<std::string, std::list<std::string>>
-              >
-    generate_graph(const std::list<processed_object>& pos);
-
-    builder create_builder(const std::string& model_name,
-        const std::string& external_modules,
-        const std::unordered_map<std::string, std::list<std::string>>&
-        child_id_to_parent_ids) const;
-
     /**
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.
      */
-    meta_model::intermediate_model
-    generate_model(builder& b, const graph_type& g);
+    static meta_model::intermediate_model
+    generate_model(const std::list<processed_object>& pos,
+        const std::string& model_name, const std::string& external_modules);
 
 public:
-    meta_model::intermediate_model execute(const dogen::dia::diagram& diagram,
-        const std::string& model_name);
+    static meta_model::intermediate_model
+    execute(const dogen::dia::diagram& diagram, const std::string& model_name);
 };
 
 } } }

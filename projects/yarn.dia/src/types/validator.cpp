@@ -47,7 +47,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-void validator::validate_yarn(const processed_object& po) const {
+void validator::validate_yarn(const processed_object& po) {
     /*
      * We only have validation rules for yarn objects and primitives;
      * if we're neither, there's nothing to do.
@@ -68,7 +68,7 @@ void validator::validate_yarn(const processed_object& po) const {
     }
 }
 
-void validator::validate_uml(const processed_object& po) const {
+void validator::validate_uml(const processed_object& po) {
     /*
      * All objects must have a valid UML type.
      */
@@ -78,12 +78,12 @@ void validator::validate_uml(const processed_object& po) const {
     }
 }
 
-void validator::validate(const processed_object& po) const {
+void validator::validate(const processed_object& po) {
     validate_uml(po);
     validate_yarn(po);
 }
 
-void validator::validate(const std::list<processed_object>& pos) const {
+void validator::validate(const std::list<processed_object>& pos) {
     for (const auto& po : pos)
         validate(po);
 }

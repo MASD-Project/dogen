@@ -69,9 +69,8 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
-    dogen::yarn::dia::workflow wf;
     const auto name(p.stem().string());
-    const auto r(wf.execute(diagram, name));
+    const auto r(dogen::yarn::dia::workflow::execute(diagram, name));
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
 
     return r;

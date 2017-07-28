@@ -47,14 +47,6 @@ namespace dia {
  */
 class processed_comment_factory {
 public:
-    processed_comment_factory() = default;
-    processed_comment_factory(const processed_comment_factory&) = default;
-    ~processed_comment_factory() = default;
-    processed_comment_factory(processed_comment_factory&&) = default;
-    processed_comment_factory& operator=(
-        const processed_comment_factory&) = default;
-
-public:
     /**
      * @brief Parses a string carrying the comments in the dia object.
      *
@@ -64,7 +56,7 @@ public:
      * @pre lines starting with the instruction marker must follow the
      * defined syntax or else a parsing_error is thrown.
      */
-    processed_comment make(const std::string& c) const;
+    static processed_comment make(const std::string& c);
 };
 
 } } }

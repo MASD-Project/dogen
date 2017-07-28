@@ -59,25 +59,25 @@ private:
     /**
      * @brief Checks all data related to Yarn.
      */
-    void validate_yarn(const processed_object& p) const;
+    static void validate_yarn(const processed_object& p);
 
     /**
      * @brief Checks all data related to UML.
      */
-    void validate_uml(const processed_object& p) const;
+    static void validate_uml(const processed_object& p);
 
 public:
     /**
      * @brief Validates a processed object.
      *
      */
-    void validate(const processed_object& p) const;
+    static void validate(const processed_object& p);
 
     /**
      * @brief Throws an exception if any of the processed objects are
      * not considered to be valid.
      */
-    void validate(const std::list<processed_object>& pos) const;
+    static void validate(const std::list<processed_object>& pos);
 };
 
 } } }

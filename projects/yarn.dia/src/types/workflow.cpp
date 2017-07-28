@@ -54,20 +54,8 @@ inline bool is_not_relevant(const processed_object& po) {
     return !is_relevant;
 }
 
-std::list<processed_object> workflow::
-create_processed_objects(const dogen::dia::diagram& d) const {
-    processed_object_factory f;
-    return f.make(d);
-}
-
-void workflow::
-validate_processed_objects(const std::list<processed_object>& pos) const {
-    validator vd;
-    vd.validate(pos);
-}
-
-std::string workflow::
-obtain_external_modules(const std::list<processed_object>& pos) const {
+std::string
+workflow::obtain_external_modules(const std::list<processed_object>& pos) {
     std::string r;
     for (const auto& po : pos) {
         if (po.child_node_id().empty() &&
@@ -79,30 +67,24 @@ obtain_external_modules(const std::list<processed_object>& pos) const {
     return r;
 }
 
-std::pair<graph_type,
-          const std::unordered_map<std::string, std::list<std::string>>
-          >
-workflow::generate_graph(const std::list<processed_object>& pos) {
-    grapher g;
-    g.add(pos);
-    g.generate();
-    const auto r(std::make_pair(g.graph(), g.child_id_to_parent_ids()));
-    return r;
-}
-
-builder workflow::create_builder(const std::string& model_name,
-    const std::string& external_modules,
-    const std::unordered_map<std::string, std::list<std::string>>&
-    child_id_to_parent_ids) const {
-
-    builder b(model_name, external_modules, child_id_to_parent_ids);
-    return b;
-}
-
 meta_model::intermediate_model
-workflow::generate_model(builder& b, const graph_type& g) {
+workflow::generate_model(const std::list<processed_object>& pos,
+    const std::string& model_name, const std::string& external_modules) {
+
+    /*
+     * Create a dependency graph of the objects, and a map of children
+     * to their respective parents.
+     */
+    grapher g;
+    g.generate(pos);
+
+    /*
+     * Go through the dependency graph and build a yarn model from
+     * it.
+     */
+    builder b(model_name, external_modules, g.child_id_to_parent_ids());
     visitor v(b);
-    boost::depth_first_search(g, boost::visitor(v));
+    boost::depth_first_search(g.graph(), boost::visitor(v));
     return b.build();
 }
 
@@ -112,32 +94,29 @@ workflow::execute(const dogen::dia::diagram& d, const std::string& model_name) {
      * Convert the original dia diagram into a list of dia objects
      * reading for processing.
      */
-    auto pos(create_processed_objects(d));
+    auto pos(processed_object_factory::make(d));
 
     /*
      * Remove all the non-relevant process objects.
      */
     boost::range::remove_erase_if(pos, is_not_relevant);
 
-    validate_processed_objects(pos);
+    /*
+     * Sanity check the processed objects to make sure they are valid.
+     */
+    validator::validate(pos);
+
+    /*
+     * Now obtain the external module path.
+     */
     const auto external_modules(obtain_external_modules(pos));
 
     /*
-     * Create a dependency graph of the objects, and a map of children
-     * to their respective parents.
+     * Finally generate the model.
      */
-    const auto pair(generate_graph(pos));
-    const auto& g(pair.first);
-    const auto& ctp(pair.second);
-
-    /*
-     * Go through the dependency graph and build a yarn model from
-     * it.
-     */
-    auto b(create_builder(model_name, external_modules, ctp));
-    const auto r(generate_model(b, g));
-
+    const auto r(generate_model(pos, model_name, external_modules));
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
+
     return r;
 }
 

@@ -33,7 +33,6 @@
 #include "dogen/dia/types/diagram_fwd.hpp"
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_object_fwd.hpp"
-#include "dogen/yarn.dia/types/processed_comment_factory.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -43,88 +42,78 @@ namespace dia {
  * @brief Processes dia objects into an intermediate format.
  */
 class processed_object_factory {
-public:
-    processed_object_factory(const processed_object_factory&) = delete;
-    processed_object_factory(processed_object_factory&&) = default;
-
-public:
-    processed_object_factory();
-
 private:
     /**
      * @brief Parses the dia attribute as a string, returning its value.
      */
-    std::string parse_string_attribute(const dogen::dia::attribute& a) const;
+    static std::string parse_string_attribute(const dogen::dia::attribute& a);
 
     /**
      * @brief Makes a processed comment from the input attribute.
      *
      * @pre Attribute must be of type string.
      */
-    processed_comment create_processed_comment(
-      const dogen::dia::attribute& a) const;
+    static processed_comment
+    create_processed_comment(const dogen::dia::attribute& a);
 
     /**
      * @brief Given a string with a dia object type, returns the
      * appropriate enum.
      */
-    dia_object_types parse_object_type(const std::string& ot) const;
+    static dia_object_types parse_object_type(const std::string& ot);
 
     /**
      * @brief Parse connection information from Dia object.
      */
-    void
-    parse_connections(const dogen::dia::object& o, processed_object& po) const;
+    static void
+    parse_connections(const dogen::dia::object& o, processed_object& po);
 
     /**
      * @brief Parse the attribute as a Dia text.
      */
-    void parse_as_dia_text(
-        const dogen::dia::attribute a, processed_object& po) const;
+    static void
+    parse_as_dia_text(const dogen::dia::attribute a, processed_object& po);
 
     /**
      * @brief Throws if the yarn type has already been setup.
      */
-    void require_yarn_type_not_set(const yarn_object_types yot) const;
+    static void require_yarn_type_not_set(const yarn_object_types yot);
 
     /**
      * @brief Processes the raw Dia stereotypes.
      */
-    void parse_as_stereotypes(
-        dogen::dia::attribute a, processed_object& po) const;
+    static void
+    parse_as_stereotypes(dogen::dia::attribute a, processed_object& po);
 
     /**
      * @brief Parses the contents of the Dia attribute assuming it
      * contains UML attributes.
      */
-    void parse_as_class_attributes(
-        const dogen::dia::attribute a, processed_object& po) const;
+    static void parse_as_class_attributes(
+        const dogen::dia::attribute a, processed_object& po);
 
     /**
      * @brief Parses the Dia attributes from the Dia object.
      */
-    void
-    parse_attributes(const dogen::dia::object& o, processed_object& po) const;
+    static void
+    parse_attributes(const dogen::dia::object& o, processed_object& po);
 
     /**
      * @brief Defaults the yarn object type, if required.
      */
-    void setup_yarn_object_type(processed_object& po) const;
+    static void setup_yarn_object_type(processed_object& po);
 
 public:
     /**
      * @brief Generates a processed object.
      */
-    processed_object make(const dogen::dia::object& o) const;
+    static processed_object make(const dogen::dia::object& o);
 
     /**
      * @brief Generates a processed object representation of the
      * diagram.
      */
-    std::list<processed_object> make(const dogen::dia::diagram& d) const;
-
-private:
-    const processed_comment_factory processed_comment_factory_;
+    static std::list<processed_object> make(const dogen::dia::diagram& d);
 };
 
 } } }

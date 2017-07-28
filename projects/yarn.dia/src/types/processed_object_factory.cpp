@@ -31,6 +31,7 @@
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
+#include "dogen/yarn.dia/types/processed_comment_factory.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
 
 namespace {
@@ -120,11 +121,8 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-processed_object_factory::
-processed_object_factory() : processed_comment_factory_() { }
-
 std::string processed_object_factory::
-parse_string_attribute(const dogen::dia::attribute& a) const {
+parse_string_attribute(const dogen::dia::attribute& a) {
     const auto values(a.values());
     if (values.size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected attribute to have one"
@@ -144,13 +142,13 @@ parse_string_attribute(const dogen::dia::attribute& a) const {
 }
 
 processed_comment processed_object_factory::
-create_processed_comment(const dogen::dia::attribute& a) const {
+create_processed_comment(const dogen::dia::attribute& a) {
     const auto s(parse_string_attribute(a));
-    return processed_comment_factory_.make(s);
+    return processed_comment_factory::make(s);
 }
 
 dia_object_types processed_object_factory::
-parse_object_type(const std::string& ot) const {
+parse_object_type(const std::string& ot) {
     if (ot == uml_large_package)
         return dia_object_types::uml_large_package;
 
@@ -177,7 +175,7 @@ parse_object_type(const std::string& ot) const {
 }
 
 void processed_object_factory::
-parse_connections(const dogen::dia::object& o, processed_object& po) const {
+parse_connections(const dogen::dia::object& o, processed_object& po) {
     /*
      * If there are no connections we have no work to do.
      */
@@ -213,7 +211,7 @@ parse_connections(const dogen::dia::object& o, processed_object& po) const {
 }
 
 void processed_object_factory::
-parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) const {
+parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) {
     if (a.values().size() != 1) {
         BOOST_LOG_SEV(lg, error) << "Expected text attribute to "
                                  << "have a single value but found "
@@ -246,7 +244,7 @@ parse_as_dia_text(const dogen::dia::attribute a, processed_object& po) const {
 }
 
 void  processed_object_factory::parse_as_class_attributes(
-    const dogen::dia::attribute a, processed_object& po) const {
+    const dogen::dia::attribute a, processed_object& po) {
 
     const auto& values(a.values());
     if (values.empty()) {
@@ -282,7 +280,7 @@ void  processed_object_factory::parse_as_class_attributes(
 }
 
 void processed_object_factory::
-require_yarn_type_not_set(const yarn_object_types yot) const {
+require_yarn_type_not_set(const yarn_object_types yot) {
     if (yot == yarn_object_types::invalid)
         return;
 
@@ -291,7 +289,7 @@ require_yarn_type_not_set(const yarn_object_types yot) const {
 }
 
 void processed_object_factory::
-parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) const {
+parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
     const auto s(parse_string_attribute(a));
 
     using utility::string::splitter;
@@ -316,7 +314,7 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) const {
 }
 
 void processed_object_factory::
-parse_attributes(const dogen::dia::object& o, processed_object& po) const {
+parse_attributes(const dogen::dia::object& o, processed_object& po) {
     for (auto a : o.attributes()) {
         if (a.name() == dia_name)
             po.name(parse_string_attribute(a));
@@ -332,7 +330,7 @@ parse_attributes(const dogen::dia::object& o, processed_object& po) const {
 }
 
 void processed_object_factory::
-setup_yarn_object_type(processed_object& po) const {
+setup_yarn_object_type(processed_object& po) {
     /*
      * If its already setup there's nothing for us to do.
      */
@@ -349,8 +347,7 @@ setup_yarn_object_type(processed_object& po) const {
         po.yarn_object_type(yarn_object_types::not_applicable);
 }
 
-processed_object
-processed_object_factory::make(const dogen::dia::object& o) const {
+processed_object processed_object_factory::make(const dogen::dia::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Processing dia object " << o.id();
 
     processed_object r;
@@ -369,7 +366,7 @@ processed_object_factory::make(const dogen::dia::object& o) const {
 }
 
 std::list<processed_object>
-processed_object_factory::make(const dogen::dia::diagram& d) const {
+processed_object_factory::make(const dogen::dia::diagram& d) {
     std::list<processed_object> r;
     for (const auto& l : d.layers()) {
         for (const auto& o : l.objects())
