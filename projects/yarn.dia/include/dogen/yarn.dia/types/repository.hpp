@@ -38,7 +38,7 @@ namespace yarn {
 namespace dia {
 
 /**
- * @brief Collects all the information required by the builder.
+ * @brief Collects all the information required by the builder and the transformer.
  */
 class repository final {
 public:

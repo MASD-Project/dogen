@@ -39,6 +39,12 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
+/**
+ * @brief Builds a yarn intermediate model from dia processed
+ * objects.
+ *
+ * Expects the objects to have been supplied in dependency order.
+ */
 class builder {
 public:
     builder(const std::string& model_name, const std::string& external_modules,

@@ -175,7 +175,7 @@ void builder::update_documentation(const processed_object& po) {
 void builder::add(const processed_object& po) {
     auto& im(repository_.model());
     auto& itn(repository_.id_to_name());
-    transformer t(repository_);
+    const transformer t(repository_);
 
     const auto id(po.id());
     const auto dot(po.dia_object_type());
