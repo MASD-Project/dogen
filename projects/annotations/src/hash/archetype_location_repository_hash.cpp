@@ -54,7 +54,7 @@ inline std::size_t hash_std_unordered_map_std_string_std_unordered_set_std_strin
     return seed;
 }
 
-inline std::size_t hash_std_map_std_string_std_list_dogen_annotations_archetype_location(const std::map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -74,7 +74,7 @@ std::size_t archetype_location_repository_hasher::hash(const archetype_location_
     combine(seed, hash_std_list_dogen_annotations_archetype_location(v.archetype_locations()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.facet_names_by_kernel_name()));
     combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.formatter_names_by_kernel_name()));
-    combine(seed, hash_std_map_std_string_std_list_dogen_annotations_archetype_location(v.archetype_locations_by_meta_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(v.archetype_locations_by_meta_name()));
 
     return seed;
 }

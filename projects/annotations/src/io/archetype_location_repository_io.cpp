@@ -79,7 +79,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";

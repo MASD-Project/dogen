@@ -88,6 +88,18 @@ add(const std::list<archetype_location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Added archetype location list. ";
 }
 
+void archetype_location_repository_builder::add(const std::unordered_map<
+    std::string, std::list<annotations::archetype_location>>&
+    archetype_locations_by_meta_name) {
+    auto& albmn(repository_.archetype_locations_by_meta_name());
+    for (const auto& pair : archetype_locations_by_meta_name) {
+        const auto& mn(pair.first);
+        const auto& als(pair.second);
+        albmn[mn] = als;
+        add(als);
+    }
+}
+
 const archetype_location_repository&
 archetype_location_repository_builder::build() {
     BOOST_LOG_SEV(lg, debug) << "Repository built: " << repository_;

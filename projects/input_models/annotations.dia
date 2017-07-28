@@ -10277,7 +10277,7 @@ The starting point of the recursion is the level supplied by an archetype locati
             <dia:string>#archetype_locations_by_meta_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::map&lt;std::string, std::list&lt;archetype_location&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::list&lt;archetype_location&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>

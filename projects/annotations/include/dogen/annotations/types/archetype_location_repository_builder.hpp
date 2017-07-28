@@ -40,6 +40,9 @@ private:
 
 public:
     void add(const std::list<archetype_location>& als);
+    void add(const std::unordered_map<
+        std::string, std::list<annotations::archetype_location>>&
+        archetype_locations_by_meta_name);
 
 public:
     const archetype_location_repository& build();
