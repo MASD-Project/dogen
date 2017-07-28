@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-28 Fri 16:19]
+#+CAPTION: Clock summary at [2017-07-28 Fri 16:43]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *22:59* |       |      | 100.0 |
+| *Total time*                                                                | *23:23* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 22:59   |       |      | 100.0 |
-| Active                                                                      |         | 22:59 |      | 100.0 |
+| Stories                                                                     | 23:23   |       |      | 100.0 |
+| Active                                                                      |         | 23:23 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.4 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  13.5 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  13.3 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.5 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  16.0 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.5 |
-| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.2 |
-| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  41.6 |
-| COMPLETED Use the archetype locations repository in yarn                    |         |       | 1:16 |   5.5 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  15.8 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.4 |
+| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.1 |
+| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  40.9 |
+| COMPLETED Use the archetype locations repository in yarn                    |         |       | 1:16 |   5.4 |
 | STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.4 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   3.4 |
-| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.0 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 1:11 |   5.1 |
+| STARTED Move external module processing into yarn                           |         |       | 0:55 |   3.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -282,16 +282,37 @@ Now we have meta-names we should use the same terminology for JSON
 documents.
 
 *** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-07-28 Fri 16:19]--[2017-07-28 Fri 16:43] =>  0:24
     CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
     CLOCK: [2017-07-18 Tue 06:45]--[2017-07-18 Tue 07:27] =>  0:42
 
 We need to add a new attribute in context which captures the canonical
 archetypes.
 
+Notes:
+
 - kernel must also return canonical archetype by element type
   index. Perhaps we should have a struct that aggregates both:
   archetype locations for meta-type? Or kernel can just return a
   =std::pair=.
+- at present we have placed the canonical archetype resolution as part
+  of the element properties. However, we do not need to have this at
+  the element level since its a meta-type property and can be
+  determined up-front. However, we do need to resolve a name into a
+  meta-type before we can resolve a meta-type into a concrete
+  archetype.
+- we need to unpick the notion of whether a formatter is "includible"
+  or not from the notion of canonical archetypes. Canonical archetypes
+  is meta-model concept: given a facet and a meta-model type, which
+  archetype represents the "key" definition of the element. It just so
+  happens that this function has a use in identifying the files to
+  include.
+
+Tasks:
+
+- add a map from name id to meta-name id in intermediate model.
+- add a map from meta name id to map of canonical archetype to
+  archetype location.
 
 *** STARTED Move external module processing into yarn                 :story:
     CLOCK: [2017-07-26 Wed 22:37]--[2017-07-26 Wed 23:32] =>  0:55

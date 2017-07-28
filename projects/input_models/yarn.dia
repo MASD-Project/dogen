@@ -20129,7 +20129,7 @@ space.#</dia:string>
         <dia:point val="-21,75"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-21.05,74.95;9.965,84.25"/>
+        <dia:rectangle val="-21.05,74.95;9.965,83.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-21,75"/>
@@ -20138,7 +20138,7 @@ space.#</dia:string>
         <dia:real val="30.914999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="9.1999999999999993"/>
+        <dia:real val="8.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
         <dia:string>#kernel_interface#</dia:string>
@@ -20250,36 +20250,6 @@ space.#</dia:string>
           </dia:attribute>
           <dia:attribute name="inheritance_type">
             <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="query">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="class_scope">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="parameters"/>
-        </dia:composite>
-        <dia:composite type="umloperation">
-          <dia:attribute name="name">
-            <dia:string>#archetype_locations#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="stereotype">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="type">
-            <dia:string>#std::forward_list&lt;annotations::archetype_location&gt;#</dia:string>
-          </dia:attribute>
-          <dia:attribute name="visibility">
-            <dia:enum val="0"/>
-          </dia:attribute>
-          <dia:attribute name="comment">
-            <dia:string>##</dia:string>
-          </dia:attribute>
-          <dia:attribute name="abstract">
-            <dia:boolean val="false"/>
-          </dia:attribute>
-          <dia:attribute name="inheritance_type">
-            <dia:enum val="2"/>
           </dia:attribute>
           <dia:attribute name="query">
             <dia:boolean val="false"/>
@@ -20861,7 +20831,7 @@ space.#</dia:string>
         <dia:point val="-29.125,91"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-29.875,84.15;-20.8,91.8"/>
+        <dia:rectangle val="-29.875,83.35;-20.8,91.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -20870,7 +20840,7 @@ space.#</dia:string>
         <dia:point val="-29.125,91"/>
         <dia:point val="-29.125,87"/>
         <dia:point val="-21,87"/>
-        <dia:point val="-21,84.2"/>
+        <dia:point val="-21,83.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -32865,16 +32835,16 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="14.4625,91"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.865,84.15;15.2125,91.8"/>
+        <dia:rectangle val="9.865,83.35;15.2125,91.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="14.4625,91"/>
-        <dia:point val="14.4625,87.25"/>
-        <dia:point val="9.915,87.25"/>
-        <dia:point val="9.915,84.2"/>
+        <dia:point val="14.4625,86.85"/>
+        <dia:point val="9.915,86.85"/>
+        <dia:point val="9.915,83.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
