@@ -82,6 +82,7 @@
 #include "dogen/yarn/types/helpers/name_tree_builder.hpp"
 #include "dogen/yarn/types/helpers/mappings_validator.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 #include "dogen/yarn/types/meta_model/type_parameters.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"

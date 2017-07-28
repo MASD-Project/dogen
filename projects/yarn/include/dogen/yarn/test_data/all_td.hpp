@@ -53,6 +53,7 @@
 #include "dogen/yarn/test_data/meta_model/object_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/transforms/configuration_td.hpp"
+#include "dogen/yarn/test_data/meta_model/exogenous_model_td.hpp"
 #include "dogen/yarn/test_data/meta_model/type_parameters_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/helpers/decomposition_result_td.hpp"
