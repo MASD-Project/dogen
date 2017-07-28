@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/yarn/types/transforms/kernel_registrar.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 
 namespace dogen {
@@ -36,8 +37,13 @@ namespace transforms {
  * @brief Factory that creates transformation contexts.
  */
 class context_factory final {
+private:
+    static annotations::archetype_location_repository
+    create_archetype_location_repository(const kernel_registrar& rg);
+
 public:
-    static context make(const options::knitting_options& o);
+    static context
+    make(const kernel_registrar& rg, const options::knitting_options& o);
 };
 
 } } }

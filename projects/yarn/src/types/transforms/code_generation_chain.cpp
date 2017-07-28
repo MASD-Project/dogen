@@ -158,7 +158,8 @@ transform(const context& ctx, const meta_model::model& m) {
      * kernel for language X - so we need to throw to let it know.
      */
     const auto& ra(m.root_module().annotation());
-    const auto& als(registrar().archetype_locations());
+    const auto& alrp(ctx.archetype_location_repository());
+    const auto& als(alrp.archetype_locations());
     const auto cfg(make_configuration(ctx, als, ra));
     const auto& ek(cfg.enabled_kernels());
     const auto is_enabled(ek.find(id) != ek.end());

@@ -47,7 +47,8 @@ update_element(const context& ctx, meta_model::element& e) {
      */
     const auto id(e.name().id());
     const auto mt(e.meta_name().id());
-    const auto& c(ctx.archetype_locations_by_meta_name());
+    const auto& alrp(ctx.archetype_location_repository());
+    const auto& c(alrp.archetype_locations_by_meta_name());
     const auto i(c.find(mt));
     if (i == c.end()) {
         BOOST_LOG_SEV(lg, debug) << "Element has no archetypes: " << id;

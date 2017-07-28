@@ -518,7 +518,8 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
      * Bucket the local types by element - i.e., we only care about
      * those formatters which are valid for a particular element.
      */
-    const auto& albmn(ctx.archetype_locations_by_meta_name());
+    const auto& alrp(ctx.archetype_location_repository());
+    const auto& albmn(alrp.archetype_locations_by_meta_name());
     const auto ltgmn(bucket_local_type_group_by_meta_name(ltg, albmn));
 
     using namespace std::placeholders;

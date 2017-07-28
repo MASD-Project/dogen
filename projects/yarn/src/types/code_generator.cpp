@@ -39,10 +39,18 @@ code_generator::generate(const options::knitting_options& o) {
     BOOST_LOG_SEV(lg, info) << "Starting code generation.";
 
     /*
-     * First we obtain the context for all transformations.
+     * First we obtain the kernel registrar and ensure it has been
+     * setup.
      */
     using namespace transforms;
-    const auto ctx(context_factory::make(o));
+    const auto& rg(code_generation_chain::registrar());
+    rg.validate();
+
+    /*
+     * Next we obtain the transformation context, used by (most)
+     * transformations.
+     */
+    const auto ctx(context_factory::make(rg, o));
 
     /*
      * Then we generate all models.

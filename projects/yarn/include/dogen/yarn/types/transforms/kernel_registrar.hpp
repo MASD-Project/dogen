@@ -69,26 +69,7 @@ public:
                              std::shared_ptr<kernel_interface>>&
     kernels_by_language() const;
 
-    /**
-     * @brief Returns all of the available archetype locations across
-     * all kernels.
-     */
-    const std::list<annotations::archetype_location>&
-    archetype_locations() const;
-
-    /**
-     * @brief Returns the archetype locations for each element type
-     * index.
-     */
-    const std::unordered_map<std::string,
-                             std::list<annotations::archetype_location>>&
-    archetype_locations_by_meta_name() const;
-
 private:
-    std::list<annotations::archetype_location> archetype_locations_;
-    std::unordered_map<std::string,
-                       std::list<annotations::archetype_location>>
-    archetype_locations_by_meta_name_;
     std::unordered_map<yarn::meta_model::languages,
                        std::shared_ptr<kernel_interface>> kernels_by_language_;
 };

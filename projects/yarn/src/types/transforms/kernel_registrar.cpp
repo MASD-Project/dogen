@@ -57,16 +57,6 @@ void kernel_registrar::register_kernel(std::shared_ptr<kernel_interface> k) {
         BOOST_THROW_EXCEPTION(registrar_error(msg));
     }
 
-    for (const auto al : k->archetype_locations())
-        archetype_locations_.push_back(al);
-
-    for (const auto& pair : k->archetype_locations_by_meta_name()) {
-        const auto& mn(pair.first);
-        auto& albmt(archetype_locations_by_meta_name_[mn]);
-        for (const auto& al : pair.second)
-            albmt.push_back(al);
-    }
-
     BOOST_LOG_SEV(lg, debug) << "Registrered kernel: " << k->id();
 }
 
@@ -91,17 +81,6 @@ const std::unordered_map<yarn::meta_model::languages, std::
                          shared_ptr<kernel_interface>>&
 kernel_registrar::kernels_by_language() const {
     return kernels_by_language_;
-}
-
-const std::list<annotations::archetype_location>&
-kernel_registrar::archetype_locations() const {
-    return archetype_locations_;
-}
-
-const std::unordered_map<std::string,
-                         std::list<annotations::archetype_location>>&
-kernel_registrar::archetype_locations_by_meta_name() const {
-    return archetype_locations_by_meta_name_;
 }
 
 } } }

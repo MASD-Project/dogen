@@ -40,27 +40,33 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-context context_factory::make(const options::knitting_options& o) {
+annotations::archetype_location_repository context_factory::
+create_archetype_location_repository(const kernel_registrar& rg) {
+    annotations::archetype_location_repository_builder b;
+    for (const auto& pair : rg.kernels_by_language()) {
+        const auto& k(*pair.second);
+        b.add(k.archetype_locations_by_meta_name());
+    }
+    return b.build();
+}
+
+context context_factory::
+make(const kernel_registrar& rg, const options::knitting_options& o) {
     BOOST_LOG_SEV(lg, debug) << "Creating the context.";
 
     const auto data_dir(utility::filesystem::data_files_directory());
     const auto data_dirs(std::vector<boost::filesystem::path>{ data_dir });
 
-    annotations::archetype_location_repository_builder alrpb;
-    const auto& rg = code_generation_chain::registrar();
-    alrpb.add(rg.archetype_locations());
-    const auto alrp(alrpb.build());
-
     helpers::mapping_set_repository_factory msrpf;
     const auto msrp(msrpf.make(data_dirs));
 
+    const auto alrp(create_archetype_location_repository(rg));
     annotations::type_repository_factory atrpf;
     const auto atrp(atrpf.make(alrp, data_dirs));
 
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const auto& albmt(rg.archetype_locations_by_meta_name());
-    const context r(data_dirs, o, albmt, alrp, atrp, msrp, frp);
+    const context r(data_dirs, o, alrp, atrp, msrp, frp);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

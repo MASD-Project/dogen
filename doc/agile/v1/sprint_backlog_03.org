@@ -13,25 +13,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-28 Fri 13:03]
+#+CAPTION: Clock summary at [2017-07-28 Fri 16:19]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *22:07* |       |      | 100.0 |
+| *Total time*                                                                | *22:59* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 22:07   |       |      | 100.0 |
-| Active                                                                      |         | 22:07 |      | 100.0 |
+| Stories                                                                     | 22:59   |       |      | 100.0 |
+| Active                                                                      |         | 22:59 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.4 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  14.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  13.5 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.5 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  16.7 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.7 |
-| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.5 |
-| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  43.3 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  16.0 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.5 |
+| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.2 |
+| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  41.6 |
+| COMPLETED Use the archetype locations repository in yarn                    |         |       | 1:16 |   5.5 |
 | STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.4 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   3.5 |
-| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.1 |
-| STARTED Use the archetype locations repository in yarn                      |         |       | 0:24 |   1.8 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   3.4 |
+| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -248,6 +248,33 @@ Problems:
 : Processing element: <dogen><test_models><all_path_and_directory_settings><dogen.test_models.all_path_and_directory_settings.sln>
 : for archetype: quilt.csharp.visual_studio.solution
 
+*** COMPLETED Use the archetype locations repository in yarn          :story:
+    CLOSED: [2017-07-28 Fri 16:15]
+    CLOCK: [2017-07-28 Fri 16:04]--[2017-07-28 Fri 16:18] =>  0:14
+    CLOCK: [2017-07-28 Fri 15:35]--[2017-07-28 Fri 16:03] =>  0:28
+    CLOCK: [2017-07-28 Fri 13:03]--[2017-07-28 Fri 13:13] =>  0:10
+    CLOCK: [2017-07-28 Fri 12:38]--[2017-07-28 Fri 13:02] =>  0:24
+
+Originally we created a repository for archetype locations, with
+several indices. However, it seems we forgotten about it and are
+passing around various containers of archetype locations. We need to
+remove these and use the repository. We also need to add it to
+context.
+
+We can now have the registrar own the repository, populate it all
+during registration and return it at the start, via the kernel API and
+the archetype location repository factory.
+
+Notes:
+
+- delete all usages of the list of archetype locations, make use of
+  repository instead.
+- add archetype_locations_by_meta_name to repository.
+- kernels should only return
+  =archetype_locations_by_meta_name=. Repository factory should use
+  this to build all containers. Factory should take multiple of
+  these. We should have a builder instead of a factory.
+
 *** STARTED Rename =meta_type= in JSON                                :story:
     CLOCK: [2017-07-26 Wed 22:17]--[2017-07-26 Wed 22:36] =>  0:19
 
@@ -310,29 +337,6 @@ Tasks:
   create the context/repository.
 - Refactor yarn.dia, splitting out the model from the repository and
   renaming repository to context.
-
-*** STARTED Use the archetype locations repository in yarn            :story:
-    CLOCK: [2017-07-28 Fri 12:38]--[2017-07-28 Fri 13:02] =>  0:24
-
-Originally we created a repository for archetype locations, with
-several indices. However, it seems we forgotten about it and are
-passing around various containers of archetype locations. We need to
-remove these and use the repository. We also need to add it to
-context.
-
-We can now have the registrar own the repository, populate it all
-during registration and return it at the start, via the kernel API and
-the archetype location repository factory.
-
-Notes:
-
-- delete all usages of the list of archetype locations, make use of
-  repository instead.
-- add archetype_locations_by_meta_name to repository.
-- kernels should only return
-  =archetype_locations_by_meta_name=. Repository factory should use
-  this to build all containers. Factory should take multiple of
-  these. We should have a builder instead of a factory.
 
 *** Add models for the executables                                    :story:
 
