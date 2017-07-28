@@ -13,24 +13,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-28 Fri 12:20]
+#+CAPTION: Clock summary at [2017-07-28 Fri 12:37]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:28* |       |      | 100.0 |
+| *Total time*                                                                | *21:43* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:28   |       |      | 100.0 |
-| Active                                                                      |         | 21:28 |      | 100.0 |
+| Stories                                                                     | 21:43   |       |      | 100.0 |
+| Active                                                                      |         | 21:43 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 2:51 |  13.3 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  14.3 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.5 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  17.2 |
-| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.9 |
-| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.7 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  17.0 |
+| COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   5.8 |
+| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   7.6 |
+| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  44.1 |
 | STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.5 |
 | STARTED Add canonical archetype support to yarn                             |         |       | 0:47 |   3.6 |
-| STARTED Add meta-type support to yarn                                       |         |       | 9:34 |  44.6 |
-| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.3 |
+| STARTED Move external module processing into yarn                           |         |       | 0:55 |   4.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -81,6 +81,8 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-07-28 Fri 12:33]--[2017-07-28 Fri 12:37] =>  0:04
+    CLOCK: [2017-07-28 Fri 12:21]--[2017-07-28 Fri 12:32] =>  0:11
     CLOCK: [2017-07-28 Fri 10:01]--[2017-07-28 Fri 10:33] =>  0:32
     CLOCK: [2017-07-27 Thu 06:47]--[2017-07-27 Thu 07:32] =>  0:45
     CLOCK: [2017-07-26 Wed 19:02]--[2017-07-26 Wed 19:18] =>  0:16
@@ -159,41 +161,8 @@ Tasks:
 
 - use remove reducer; use =remove_if= instead.
 
-*** STARTED Rename =meta_type= in JSON                                :story:
-    CLOCK: [2017-07-26 Wed 22:17]--[2017-07-26 Wed 22:36] =>  0:19
-
-Now we have meta-names we should use the same terminology for JSON
-documents.
-
-*** STARTED Add canonical archetype support to yarn                   :story:
-    CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
-    CLOCK: [2017-07-18 Tue 06:45]--[2017-07-18 Tue 07:27] =>  0:42
-
-We need to create a class to contain all archetype location related
-properties and add it to context. We also need to add a new property
-which captures the canonical archetypes. We can now have the registrar
-own this new class, populate it all during registration and return it
-at the start, via the kernel API.
-
-Actually we already have the annotation's archetype location
-repository, which we should have been using all along. Extend it to
-cope with type related information.
-
-Notes:
-
-- delete all usages of the list of archetype locations, make use of
-  repository instead.
-- add archetype_locations_by_element_type_index to repository.
-- kernels should only return
-  =archetype_locations_by_element_type_index=. Factory should use this
-  to build all containers. Factory should take multiple of these. We
-  should have a builder instead of a factory.
-- kernel must also return canonical archetype by element type
-  index. Perhaps we should have a struct that aggregates both:
-  archetype locations for meta-type? Or kernel can just return a
-  =std::pair=.
-
-*** STARTED Add meta-type support to yarn                             :story:
+*** COMPLETED Add meta-type support to yarn                           :story:
+    CLOSED: [2017-07-28 Fri 12:30]
     CLOCK: [2017-07-26 Wed 21:45]--[2017-07-26 Wed 22:16] =>  0:31
     CLOCK: [2017-07-25 Tue 23:43]--[2017-07-25 Tue 23:59] =>  0:16
     CLOCK: [2017-07-25 Tue 23:30]--[2017-07-25 Tue 23:42] =>  0:12
@@ -278,6 +247,24 @@ Problems:
 : Processing element: <dogen><test_models><all_path_and_directory_settings><dogen.test_models.all_path_and_directory_settings.sln>
 : for archetype: quilt.csharp.visual_studio.solution
 
+*** STARTED Rename =meta_type= in JSON                                :story:
+    CLOCK: [2017-07-26 Wed 22:17]--[2017-07-26 Wed 22:36] =>  0:19
+
+Now we have meta-names we should use the same terminology for JSON
+documents.
+
+*** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-07-18 Tue 07:28]--[2017-07-18 Tue 07:33] =>  0:05
+    CLOCK: [2017-07-18 Tue 06:45]--[2017-07-18 Tue 07:27] =>  0:42
+
+We need to add a new attribute in context which captures the canonical
+archetypes.
+
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+
 *** STARTED Move external module processing into yarn                 :story:
     CLOCK: [2017-07-26 Wed 22:37]--[2017-07-26 Wed 23:32] =>  0:55
 
@@ -322,6 +309,28 @@ Tasks:
   create the context/repository.
 - Refactor yarn.dia, splitting out the model from the repository and
   renaming repository to context.
+
+*** Use the archetype locations repository in yarn                    :story:
+
+Originally we created a repository for archetype locations, with
+several indices. However, it seems we forgotten about it and are
+passing around various containers of archetype locations. We need to
+remove these and use the repository. We also need to add it to
+context.
+
+We can now have the registrar own the repository, populate it all
+during registration and return it at the start, via the kernel API and
+the archetype location repository factory.
+
+Notes:
+
+- delete all usages of the list of archetype locations, make use of
+  repository instead.
+- add archetype_locations_by_meta_name to repository.
+- kernels should only return
+  =archetype_locations_by_meta_name=. Repository factory should use
+  this to build all containers. Factory should take multiple of
+  these. We should have a builder instead of a factory.
 
 *** Add models for the executables                                    :story:
 
