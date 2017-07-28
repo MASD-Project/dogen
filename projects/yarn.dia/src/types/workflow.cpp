@@ -18,13 +18,16 @@
  * MA 02110-1301, USA.
  *
  */
+#include <algorithm>
+#include <boost/range/algorithm_ext/erase.hpp>
 #include <boost/graph/depth_first_search.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
-#include "dogen/yarn.dia/types/reducer.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
 #include "dogen/yarn.dia/types/workflow.hpp"
@@ -40,16 +43,21 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
+inline bool is_not_relevant(const processed_object& po) {
+    const auto ot(po.dia_object_type());
+    const bool is_relevant(
+        ot == dia_object_types::uml_large_package ||
+        ot == dia_object_types::uml_generalization ||
+        ot == dia_object_types::uml_class ||
+        ot == dia_object_types::uml_note);
+
+    return !is_relevant;
+}
+
 std::list<processed_object> workflow::
 create_processed_objects(const dogen::dia::diagram& d) const {
     processed_object_factory f;
     return f.make(d);
-}
-
-std::list<processed_object> workflow::
-reduce_processed_objects(const std::list<processed_object>& pos) const {
-    reducer rd;
-    return rd.reduce(pos);
 }
 
 void workflow::
@@ -98,23 +106,27 @@ workflow::generate_model(builder& b, const graph_type& g) {
     return b.build();
 }
 
-meta_model::intermediate_model workflow::execute(const dogen::dia::diagram& d,
-    const std::string& model_name) {
-
+meta_model::intermediate_model
+workflow::execute(const dogen::dia::diagram& d, const std::string& model_name) {
     /*
      * Convert the original dia diagram into a list of dia objects
      * reading for processing.
      */
-    const auto original(create_processed_objects(d));
-    const auto reduced(reduce_processed_objects(original));
-    validate_processed_objects(reduced);
-    const auto external_modules(obtain_external_modules(reduced));
+    auto pos(create_processed_objects(d));
+
+    /*
+     * Remove all the non-relevant process objects.
+     */
+    boost::range::remove_erase_if(pos, is_not_relevant);
+
+    validate_processed_objects(pos);
+    const auto external_modules(obtain_external_modules(pos));
 
     /*
      * Create a dependency graph of the objects, and a map of children
      * to their respective parents.
      */
-    const auto pair(generate_graph(reduced));
+    const auto pair(generate_graph(pos));
     const auto& g(pair.first);
     const auto& ctp(pair.second);
 

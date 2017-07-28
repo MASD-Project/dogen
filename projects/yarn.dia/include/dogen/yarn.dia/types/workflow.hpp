@@ -49,9 +49,6 @@ private:
     std::list<processed_object>
     create_processed_objects(const dogen::dia::diagram& d) const;
 
-    std::list<processed_object>
-    reduce_processed_objects(const std::list<processed_object>& pos) const;
-
     void validate_processed_objects(
         const std::list<processed_object>& pos) const;
 

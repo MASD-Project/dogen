@@ -308,6 +308,17 @@ Tasks:
 - Refactor yarn.dia, splitting out the model from the repository and
   renaming repository to context.
 
+*** STARTED Refactor =yarn.dia=                                       :story:
+    CLOCK: [2017-07-28 Fri 11:02]--[2017-07-28 Fri 11:39] =>  0:37
+    CLOCK: [2017-07-28 Fri 10:35]--[2017-07-28 Fri 10:58] =>  0:23
+
+There are a number of small issues with =yarn.dia=, which has
+bit-rotted somewhat; address them.
+
+Tasks:
+
+- use remove reducer; use =remove_if= instead.
+
 *** Add models for the executables                                    :story:
 
 At present the executables are all hand-crafted. However, as we want
@@ -328,10 +339,6 @@ Tasks:
 In some cases we may support a feature in one language but not on
 others like say ORM at present. If a user requests ORM in a C# model,
 we should throw.
-
-*** Remove reducer in yarn.dia                                        :story:
-
-Use =std::remove_if= instead.
 
 *** Add a property for the model modules as an annotation             :story:
 
