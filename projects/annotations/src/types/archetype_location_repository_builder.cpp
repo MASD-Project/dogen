@@ -63,6 +63,12 @@ validate(const std::list<archetype_location>& als) const {
 }
 
 void archetype_location_repository_builder::
+populate_locations(const std::list<archetype_location>& als) {
+    for(const auto& al : als)
+        repository_.archetype_locations().push_back(al);
+}
+
+void archetype_location_repository_builder::
 populate_facet_names_by_kernel_name() {
     auto& fnbkn(repository_.facet_names_by_kernel_name());
     for (const auto& al : repository_.archetype_locations())
@@ -81,9 +87,7 @@ add(const std::list<archetype_location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Adding list of archetype location.";
 
     validate(als);
-    repository_.archetype_locations(als);
-    populate_facet_names_by_kernel_name();
-    populate_formatter_names_by_kernel_name();
+    populate_locations(als);
 
     BOOST_LOG_SEV(lg, debug) << "Added archetype location list. ";
 }
@@ -102,6 +106,9 @@ void archetype_location_repository_builder::add(const std::unordered_map<
 
 const archetype_location_repository&
 archetype_location_repository_builder::build() {
+    populate_facet_names_by_kernel_name();
+    populate_formatter_names_by_kernel_name();
+
     BOOST_LOG_SEV(lg, debug) << "Repository built: " << repository_;
     return repository_;
 }
