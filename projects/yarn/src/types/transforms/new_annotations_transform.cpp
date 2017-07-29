@@ -18,14 +18,88 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/annotations/io/scope_types_io.hpp"
+#include "dogen/annotations/io/scribble_group_io.hpp"
+#include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/new_annotations_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.transforms.new_annotations_transform"));
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool new_annotations_transform::operator==(const new_annotations_transform& /*rhs*/) const {
-    return true;
+annotations::annotation_group
+new_annotations_transform::obtain_annotation_group(const context& ctx,
+    annotations::scribble_group sg, const meta_model::element& e) {
+    const auto id(e.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing element: " << id;
+
+    if (!e.stereotypes().empty()) {
+        /*
+         * Note that we are ignoring children here on purpose;
+         * candidate labels are not used by children at present.
+         */
+        sg.parent().candidate_labels(e.stereotypes());
+    }
+
+    return ctx.groups_factory().make(sg);
+}
+
+void new_annotations_transform::process_attributes(
+    const annotations::annotation_group& ag,
+    std::list<meta_model::attribute>& attrs) {
+
+    for (auto& attr : attrs) {
+        /*
+         * Note that we use the simple name because the frontends are
+         * expected to insert by simple name, since the insertion
+         * preceeds the naming transform.
+         */
+        const auto sn(attr.name().simple());
+        const auto j(ag.children().find(sn));
+        if (j == ag.children().end()) {
+            BOOST_LOG_SEV(lg, debug) << "Attribute has no annotation: " << sn;
+            continue;
+        }
+
+        attr.annotation(j->second);
+        BOOST_LOG_SEV(lg, debug) << "Created annotations for attribute: " << sn;
+    }
+}
+
+void new_annotations_transform::process(const annotations::annotation_group& ag,
+    meta_model::element& e) {
+    e.annotation(ag.parent());
+}
+
+void new_annotations_transform::process(const annotations::annotation_group& ag,
+    meta_model::concept& c) {
+    c.annotation(ag.parent());
+    process_attributes(ag, c.local_attributes());
+}
+
+void new_annotations_transform::process(const annotations::annotation_group& ag,
+    meta_model::object& o) {
+    o.annotation(ag.parent());
+    process_attributes(ag, o.local_attributes());
+}
+
+void new_annotations_transform::
+transform(const context& ctx, meta_model::exogenous_model& em) {
+    process(ctx, em.modules());
+    process(ctx, em.concepts());
+    process(ctx, em.builtins());
+    process(ctx, em.enumerations());
+    process(ctx, em.primitives());
+    process(ctx, em.objects());
+    process(ctx, em.exceptions());
 }
 
 } } }

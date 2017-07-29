@@ -25,26 +25,50 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <utility>
+#include "dogen/annotations/types/annotation_group.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class new_annotations_transform final {
-public:
-    new_annotations_transform() = default;
-    new_annotations_transform(const new_annotations_transform&) = default;
-    new_annotations_transform(new_annotations_transform&&) = default;
-    ~new_annotations_transform() = default;
-    new_annotations_transform& operator=(const new_annotations_transform&) = default;
+private:
+    static annotations::annotation_group
+    obtain_annotation_group(const context& ctx, annotations::scribble_group sg,
+        const meta_model::element& e);
 
-public:
-    bool operator==(const new_annotations_transform& rhs) const;
-    bool operator!=(const new_annotations_transform& rhs) const {
-        return !this->operator==(rhs);
+private:
+    static void process_attributes(const annotations::annotation_group& ag,
+        std::list<meta_model::attribute>& attrs);
+
+private:
+    static void process(const annotations::annotation_group& ag,
+        meta_model::element& e);
+    static void process(const annotations::annotation_group& sg,
+        meta_model::concept& c);
+    static void process(const annotations::annotation_group& sg,
+        meta_model::object& o);
+
+    template<typename Element>
+    static void process(const context& ctx,
+        std::list<std::pair<annotations::scribble_group, Element>>& elements) {
+        for (auto& pair : elements) {
+            const auto& sg(pair.first);
+            auto& e(pair.second);
+            const auto ag(obtain_annotation_group(ctx, sg, e));
+            process(ag, e);
+        }
     }
 
+public:
+    static void transform(const context& ctx, meta_model::exogenous_model& em);
 };
 
 } } }
