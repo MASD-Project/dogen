@@ -64,6 +64,7 @@
 #include "dogen/yarn/hash/meta_model/artefact_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_database_systems_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
+#include "dogen/yarn/hash/transforms/naming_configuration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_module_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_object_properties_hash.hpp"
 #include "dogen/yarn/hash/transforms/code_generation_output_hash.hpp"

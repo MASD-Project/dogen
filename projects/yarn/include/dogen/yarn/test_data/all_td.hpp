@@ -64,6 +64,7 @@
 #include "dogen/yarn/test_data/meta_model/artefact_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_database_systems_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
+#include "dogen/yarn/test_data/transforms/naming_configuration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_module_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_object_properties_td.hpp"
 #include "dogen/yarn/test_data/transforms/code_generation_output_td.hpp"

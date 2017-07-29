@@ -64,6 +64,7 @@
 #include "dogen/yarn/io/meta_model/artefact_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_database_systems_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
+#include "dogen/yarn/io/transforms/naming_configuration_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_module_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/transforms/code_generation_output_io.hpp"

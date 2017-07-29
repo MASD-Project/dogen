@@ -115,6 +115,7 @@
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
+#include "dogen/yarn/types/transforms/naming_configuration.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/primitives_transform.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"

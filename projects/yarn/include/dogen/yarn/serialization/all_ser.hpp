@@ -64,6 +64,7 @@
 #include "dogen/yarn/serialization/meta_model/artefact_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_database_systems_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
+#include "dogen/yarn/serialization/transforms/naming_configuration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_module_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_object_properties_ser.hpp"
 #include "dogen/yarn/serialization/transforms/code_generation_output_ser.hpp"
