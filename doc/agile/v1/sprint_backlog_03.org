@@ -332,6 +332,7 @@ re-insert all elements, because the IDs will change as part of this
 exercise.
 
 *** STARTED Create an exogenous model                                 :story:
+    CLOCK: [2017-07-29 Sat 08:46]--[2017-07-29 Sat 09:14] =>  0:28
     CLOCK: [2017-07-28 Fri 23:21]--[2017-07-28 Fri 23:40] =>  0:19
 
 At present we are allowing the frontends to directly create
@@ -360,6 +361,15 @@ Tasks:
   create the context/repository.
 - Refactor yarn.dia, splitting out the model from the repository and
   renaming repository to context.
+
+Notes:
+
+- we need a completely different annotations transform. In the new
+  world, scribble updating and annotation updating are done in one go
+  by the updater, who has the annotation group as state. The annotation
+  classes need to be updated to take in just one scribble group rather
+  than a map. The updater needs to be a regular element visitor. The
+  transform runs on the exogenous model.
 
 *** Add models for the executables                                    :story:
 
