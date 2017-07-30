@@ -25,54 +25,35 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <string>
 #include "dogen/yarn/types/meta_model/location.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
+/**
+ * @brief Builds a location.
+ */
 class location_builder final {
 public:
-    location_builder() = default;
-    location_builder(const location_builder&) = default;
-    location_builder(location_builder&&) = default;
-    ~location_builder() = default;
+    location_builder& external_modules(const std::string& em);
+    location_builder& external_modules(const std::list<std::string>& em);
+    location_builder& model_modules(const std::string& mm);
+    location_builder& model_modules(const std::list<std::string>& mm);
+    location_builder& internal_modules(const std::string& im);
+    location_builder& internal_modules(const std::list<std::string>& im);
+
+    location_builder& location(const meta_model::location& l);
 
 public:
-    explicit location_builder(const dogen::yarn::meta_model::location& location_);
-
-public:
-    const dogen::yarn::meta_model::location& location_() const;
-    dogen::yarn::meta_model::location& location_();
-    void location_(const dogen::yarn::meta_model::location& v);
-    void location_(const dogen::yarn::meta_model::location&& v);
-
-public:
-    bool operator==(const location_builder& rhs) const;
-    bool operator!=(const location_builder& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(location_builder& other) noexcept;
-    location_builder& operator=(location_builder other);
+    meta_model::location build();
 
 private:
-    dogen::yarn::meta_model::location location__;
+    meta_model::location location_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::helpers::location_builder& lhs,
-    dogen::yarn::helpers::location_builder& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

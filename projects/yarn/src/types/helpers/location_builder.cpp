@@ -18,44 +18,90 @@
  * MA 02110-1301, USA.
  *
  */
+#include <sstream>
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/utility/io/list_io.hpp"
+#include "dogen/utility/string/splitter.hpp"
+#include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+auto lg(logger_factory("yarn.helpers.location_builder"));
+
+const std::string empty_model_modules("Model modules are empty.");
+const std::string empty_internal_modules("Internal modules are empty.");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace helpers {
 
-location_builder::location_builder(const dogen::yarn::meta_model::location& location_)
-    : location__(location_) { }
+location_builder& location_builder::external_modules(const std::string& em) {
+    if (em.empty())
+        return *this;
 
-void location_builder::swap(location_builder& other) noexcept {
-    using std::swap;
-    swap(location__, other.location__);
-}
-
-bool location_builder::operator==(const location_builder& rhs) const {
-    return location__ == rhs.location__;
-}
-
-location_builder& location_builder::operator=(location_builder other) {
-    using std::swap;
-    swap(*this, other);
+    using utility::string::splitter;
+    location_.external_modules(splitter::split_scoped(em));
+    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
     return *this;
 }
 
-const dogen::yarn::meta_model::location& location_builder::location_() const {
-    return location__;
+location_builder&
+location_builder::external_modules(const std::list<std::string>& em) {
+    location_.external_modules(em);
+    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
+    return *this;
 }
 
-dogen::yarn::meta_model::location& location_builder::location_() {
-    return location__;
+location_builder& location_builder::model_modules(const std::string& mm) {
+    if (mm.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_model_modules));
+    }
+
+    using utility::string::splitter;
+    location_.model_modules(splitter::split_scoped(mm));
+    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
+    return *this;
 }
 
-void location_builder::location_(const dogen::yarn::meta_model::location& v) {
-    location__ = v;
+location_builder& location_builder::
+model_modules(const std::list<std::string>& mm) {
+    location_.model_modules(mm);
+    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
+    return *this;
 }
 
-void location_builder::location_(const dogen::yarn::meta_model::location&& v) {
-    location__ = std::move(v);
+location_builder& location_builder::internal_modules(const std::string& im) {
+    if (im.empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_internal_modules;
+        BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
+    }
+
+    using utility::string::splitter;
+    location_.internal_modules(splitter::split_scoped(im));
+    BOOST_LOG_SEV(lg, debug) << "Added internal modules: " << im;
+    return *this;
+}
+
+location_builder& location_builder::internal_modules(
+    const std::list<std::string>& im) {
+    location_.internal_modules(im);
+    BOOST_LOG_SEV(lg, debug) << "Added external models: " << im;
+    return *this;
+}
+
+location_builder& location_builder::location(const meta_model::location& l) {
+    location_ = l;
+    return *this;
+}
+
+meta_model::location location_builder::build() {
+    return location_;
 }
 
 } } }
