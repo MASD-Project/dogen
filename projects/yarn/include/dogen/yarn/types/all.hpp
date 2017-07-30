@@ -72,6 +72,7 @@
 #include "dogen/yarn/types/meta_model/letter_cases.hpp"
 #include "dogen/yarn/types/meta_model/object_types.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
+#include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
 #include "dogen/yarn/types/helpers/string_processor.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
