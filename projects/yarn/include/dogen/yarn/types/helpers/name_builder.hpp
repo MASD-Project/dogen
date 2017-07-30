@@ -29,6 +29,7 @@
 #include <string>
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
+#include "dogen/yarn/types/helpers/location_builder.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -49,7 +50,6 @@ public:
 
 private:
     std::string compute_id();
-    void setup_computed_properties();
 
 public:
     name_builder& simple_name(const std::string& sn);
@@ -87,6 +87,7 @@ public:
 private:
     const bool model_name_mode_;
     meta_model::name name_;
+    location_builder location_builder_;
 };
 
 } } }

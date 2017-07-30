@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/helpers/separators.hpp"
@@ -37,10 +38,7 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.helpers.name_builder"));
 
-const std::string empty_type_name("Type name is empty.");
 const std::string empty_model_name("Model name is empty.");
-const std::string empty_model_modules("Model modules are empty.");
-const std::string empty_internal_modules("Internal modules are empty.");
 const std::string unexpected_simple_name("Simple name is not expected.");
 
 }
@@ -60,15 +58,6 @@ std::string name_builder::compute_id() {
     return r;
 }
 
-void name_builder::setup_computed_properties() {
-    name_.id(compute_id());
-
-    identifiable_and_qualified_builder iqb;
-    const auto iq(iqb.build(name_, model_name_mode_));
-    name_.identifiable(iq.first);
-    name_.qualified(iq.second);
-}
-
 name_builder& name_builder::simple_name(const std::string& sn) {
     if (model_name_mode_) {
         BOOST_LOG_SEV(lg, error) << unexpected_simple_name;
@@ -86,85 +75,66 @@ name_builder& name_builder::model_name(const std::string& mn) {
         BOOST_THROW_EXCEPTION(building_error(empty_model_name));
     }
 
-    using utility::string::splitter;
-    name_.location().model_modules(splitter::split_scoped(mn));
-
-    if (model_name_mode_)
-        name_.simple(*name_.location().model_modules().rbegin());
-
+    location_builder_.model_modules(mn);
     BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;
     return *this;
 }
 
 name_builder& name_builder::model_name(const meta_model::location& l) {
-    name_.location().model_modules(l.model_modules());
-
+    location_builder_.model_modules(l.model_modules());
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
     return *this;
 }
 
 name_builder& name_builder::external_modules(const std::string& em) {
-    if (em.empty())
-        return *this;
-
-    using utility::string::splitter;
-    name_.location().external_modules(splitter::split_scoped(em));
-    BOOST_LOG_SEV(lg, debug) << "Added external models: " << em;
+    location_builder_.external_modules(em);
     return *this;
 }
 
 name_builder& name_builder::external_modules(const std::list<std::string>& em) {
-    name_.location().external_modules(em);
-    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
+    location_builder_.external_modules(em);
     return *this;
 }
 
 name_builder& name_builder::model_modules(const std::string& mm) {
-    if (mm.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_model_modules;
-        BOOST_THROW_EXCEPTION(building_error(empty_model_modules));
-    }
-
-    using utility::string::splitter;
-    name_.location().model_modules(splitter::split_scoped(mm));
-    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
+    location_builder_.model_modules(mm);
     return *this;
 }
 
 name_builder& name_builder::
 model_modules(const std::list<std::string>& mm) {
-    name_.location().model_modules(mm);
-    BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
+    location_builder_.model_modules(mm);
     return *this;
 }
 
 name_builder& name_builder::internal_modules(const std::string& im) {
-    if (im.empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_internal_modules;
-        BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
-    }
-
-    using utility::string::splitter;
-    name_.location().internal_modules(splitter::split_scoped(im));
-    BOOST_LOG_SEV(lg, debug) << "Added internal modules: " << im;
+    location_builder_.internal_modules(im);
     return *this;
 }
 
-name_builder& name_builder::internal_modules(
-    const std::list<std::string>& im) {
-    name_.location().internal_modules(im);
-    BOOST_LOG_SEV(lg, debug) << "Added external models: " << im;
+name_builder& name_builder::internal_modules(const std::list<std::string>& im) {
+    location_builder_.internal_modules(im);
     return *this;
 }
 
 name_builder& name_builder::location(const meta_model::location& l) {
-    BOOST_LOG_SEV(lg, debug) << "Added location: " << l;
-    name_.location(l);
+    location_builder_.location(l);
     return *this;
 }
 
 meta_model::name name_builder::build() {
-    setup_computed_properties();
+    name_.location(location_builder_.build());
+    if (model_name_mode_)
+        name_.simple(*name_.location().model_modules().rbegin());
+
+    name_.id(compute_id());
+
+    identifiable_and_qualified_builder iqb;
+    const auto iq(iqb.build(name_, model_name_mode_));
+    name_.identifiable(iq.first);
+    name_.qualified(iq.second);
+
+    BOOST_LOG_SEV(lg, debug) << "Built name: " << name_;
     return name_;
 }
 

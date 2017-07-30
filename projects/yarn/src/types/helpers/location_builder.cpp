@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/string/splitter.hpp"
+#include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
 
@@ -101,6 +102,7 @@ location_builder& location_builder::location(const meta_model::location& l) {
 }
 
 meta_model::location location_builder::build() {
+    BOOST_LOG_SEV(lg, debug) << "Built location: " << location_;
     return location_;
 }
 
