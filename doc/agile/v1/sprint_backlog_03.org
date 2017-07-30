@@ -13,26 +13,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-07-30 Sun 20:27]
+#+CAPTION: Clock summary at [2017-07-30 Sun 20:39]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *28:36* |       |      | 100.0 |
+| *Total time*                                                                | *28:47* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 28:36   |       |      | 100.0 |
-| Active                                                                      |         | 28:36 |      | 100.0 |
+| Stories                                                                     | 28:47   |       |      | 100.0 |
+| Active                                                                      |         | 28:47 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:19 |   1.1 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 3:06 |  10.8 |
 | COMPLETED Create a tagging checklist                                        |         |       | 0:07 |   0.4 |
-| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  12.9 |
+| COMPLETED Tidy-up post-processing validation                                |         |       | 3:41 |  12.8 |
 | COMPLETED Allow logging during initialisation                               |         |       | 1:16 |   4.4 |
-| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   5.8 |
-| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  33.4 |
+| COMPLETED Refactor =yarn.dia=                                               |         |       | 1:39 |   5.7 |
+| COMPLETED Add meta-type support to yarn                                     |         |       | 9:34 |  33.2 |
 | COMPLETED Use the archetype locations repository in yarn                    |         |       | 1:16 |   4.4 |
 | STARTED Rename =meta_type= in JSON                                          |         |       | 0:19 |   1.1 |
 | STARTED Add canonical archetype support to yarn                             |         |       | 1:11 |   4.1 |
 | STARTED Move external module processing into yarn                           |         |       | 0:55 |   3.2 |
-| STARTED Create an exogenous model                                           |         |       | 5:13 |  18.2 |
+| STARTED Create an exogenous model                                           |         |       | 5:24 |  18.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -332,6 +332,7 @@ re-insert all elements, because the IDs will change as part of this
 exercise.
 
 *** STARTED Create an exogenous model                                 :story:
+    CLOCK: [2017-07-30 Sun 20:28]--[2017-07-30 Sun 20:39] =>  0:11
     CLOCK: [2017-07-30 Sun 20:09]--[2017-07-30 Sun 20:27] =>  0:18
     CLOCK: [2017-07-30 Sun 18:57]--[2017-07-30 Sun 19:23] =>  0:26
     CLOCK: [2017-07-30 Sun 18:53]--[2017-07-30 Sun 18:56] =>  0:03
@@ -381,6 +382,10 @@ Notes:
   classes need to be updated to take in just one scribble group rather
   than a map. The updater needs to be a regular element visitor. The
   transform runs on the exogenous model.
+- repository in yarn.dia must not rely on qualified names for lookups;
+  instead it must have a pointer to the element, which is known to be
+  owned by the model. To make life easier this could be a shared
+  pointer with a custom deleter.
 
 Steps:
 

@@ -47,7 +47,7 @@ public:
 
 public:
     /**
-     * @brief Apply the tansformation to the exogenous model at path
+     * @brief Apply the transformation to the exogenous model at path
      * @e p.
      *
      * @pre @e p must point to a valid file, and contain a supported
@@ -56,6 +56,13 @@ public:
     static meta_model::intermediate_model
     transform(const boost::filesystem::path& p);
 
+    /**
+     * @brief Transform the supplied intermediate model to its
+     * exogenous model representation.
+     *
+     * @pre @e p must point to a path that has a supported exogenous
+     * model transform.
+     */
     static void transform(const meta_model::intermediate_model& im,
         const boost::filesystem::path& p);
 

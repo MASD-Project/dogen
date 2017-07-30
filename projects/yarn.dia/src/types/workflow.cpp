@@ -70,7 +70,6 @@ workflow::obtain_external_modules(const std::list<processed_object>& pos) {
 meta_model::intermediate_model
 workflow::generate_model(const std::list<processed_object>& pos,
     const std::string& model_name, const std::string& external_modules) {
-
     /*
      * Create a dependency graph of the objects, and a map of children
      * to their respective parents.
