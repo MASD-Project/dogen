@@ -58,7 +58,7 @@ std::string name_builder::compute_id() {
     return r;
 }
 
-name_builder& name_builder::simple_name(const std::string& sn) {
+void name_builder::simple_name(const std::string& sn) {
     if (model_name_mode_) {
         BOOST_LOG_SEV(lg, error) << unexpected_simple_name;
         BOOST_THROW_EXCEPTION(building_error(unexpected_simple_name));
@@ -66,10 +66,9 @@ name_builder& name_builder::simple_name(const std::string& sn) {
 
     name_.simple(sn);
     BOOST_LOG_SEV(lg, debug) << "Added simple name: " << sn;
-    return *this;
 }
 
-name_builder& name_builder::model_name(const std::string& mn) {
+void name_builder::model_name(const std::string& mn) {
     if (mn.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_name;
         BOOST_THROW_EXCEPTION(building_error(empty_model_name));
@@ -77,49 +76,40 @@ name_builder& name_builder::model_name(const std::string& mn) {
 
     location_builder_.model_modules(mn);
     BOOST_LOG_SEV(lg, debug) << "Added model name: " << mn;
-    return *this;
 }
 
-name_builder& name_builder::model_name(const meta_model::location& l) {
+void name_builder::model_name(const meta_model::location& l) {
     location_builder_.model_modules(l.model_modules());
     BOOST_LOG_SEV(lg, debug) << "Added model name from location: " << l;
-    return *this;
 }
 
-name_builder& name_builder::external_modules(const std::string& em) {
+void name_builder::external_modules(const std::string& em) {
     location_builder_.external_modules(em);
-    return *this;
 }
 
-name_builder& name_builder::external_modules(const std::list<std::string>& em) {
+void name_builder::external_modules(const std::list<std::string>& em) {
     location_builder_.external_modules(em);
-    return *this;
 }
 
-name_builder& name_builder::model_modules(const std::string& mm) {
+void name_builder::model_modules(const std::string& mm) {
     location_builder_.model_modules(mm);
-    return *this;
 }
 
-name_builder& name_builder::
+void name_builder::
 model_modules(const std::list<std::string>& mm) {
     location_builder_.model_modules(mm);
-    return *this;
 }
 
-name_builder& name_builder::internal_modules(const std::string& im) {
+void name_builder::internal_modules(const std::string& im) {
     location_builder_.internal_modules(im);
-    return *this;
 }
 
-name_builder& name_builder::internal_modules(const std::list<std::string>& im) {
+void name_builder::internal_modules(const std::list<std::string>& im) {
     location_builder_.internal_modules(im);
-    return *this;
 }
 
-name_builder& name_builder::location(const meta_model::location& l) {
+void name_builder::location(const meta_model::location& l) {
     location_builder_.location(l);
-    return *this;
 }
 
 meta_model::name name_builder::build() {

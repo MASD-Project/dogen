@@ -38,14 +38,14 @@ namespace helpers {
  */
 class location_builder final {
 public:
-    location_builder& external_modules(const std::string& em);
-    location_builder& external_modules(const std::list<std::string>& em);
-    location_builder& model_modules(const std::string& mm);
-    location_builder& model_modules(const std::list<std::string>& mm);
-    location_builder& internal_modules(const std::string& im);
-    location_builder& internal_modules(const std::list<std::string>& im);
+    void external_modules(const std::string& em);
+    void external_modules(const std::list<std::string>& em);
+    void model_modules(const std::string& mm);
+    void model_modules(const std::list<std::string>& mm);
+    void internal_modules(const std::string& im);
+    void internal_modules(const std::list<std::string>& im);
 
-    location_builder& location(const meta_model::location& l);
+    void location(const meta_model::location& l);
 
 public:
     meta_model::location build();

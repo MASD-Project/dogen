@@ -41,24 +41,22 @@ namespace dogen {
 namespace yarn {
 namespace helpers {
 
-location_builder& location_builder::external_modules(const std::string& em) {
+void location_builder::external_modules(const std::string& em) {
     if (em.empty())
-        return *this;
+        return;
 
     using utility::string::splitter;
     location_.external_modules(splitter::split_scoped(em));
     BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
-    return *this;
 }
 
-location_builder&
+void
 location_builder::external_modules(const std::list<std::string>& em) {
     location_.external_modules(em);
     BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
-    return *this;
 }
 
-location_builder& location_builder::model_modules(const std::string& mm) {
+void location_builder::model_modules(const std::string& mm) {
     if (mm.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_modules;
         BOOST_THROW_EXCEPTION(building_error(empty_model_modules));
@@ -67,17 +65,15 @@ location_builder& location_builder::model_modules(const std::string& mm) {
     using utility::string::splitter;
     location_.model_modules(splitter::split_scoped(mm));
     BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
-    return *this;
 }
 
-location_builder& location_builder::
+void location_builder::
 model_modules(const std::list<std::string>& mm) {
     location_.model_modules(mm);
     BOOST_LOG_SEV(lg, debug) << "Added model modules: " << mm;
-    return *this;
 }
 
-location_builder& location_builder::internal_modules(const std::string& im) {
+void location_builder::internal_modules(const std::string& im) {
     if (im.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_internal_modules;
         BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
@@ -86,19 +82,16 @@ location_builder& location_builder::internal_modules(const std::string& im) {
     using utility::string::splitter;
     location_.internal_modules(splitter::split_scoped(im));
     BOOST_LOG_SEV(lg, debug) << "Added internal modules: " << im;
-    return *this;
 }
 
-location_builder& location_builder::internal_modules(
+void location_builder::internal_modules(
     const std::list<std::string>& im) {
     location_.internal_modules(im);
     BOOST_LOG_SEV(lg, debug) << "Added external models: " << im;
-    return *this;
 }
 
-location_builder& location_builder::location(const meta_model::location& l) {
+void location_builder::location(const meta_model::location& l) {
     location_ = l;
-    return *this;
 }
 
 meta_model::location location_builder::build() {

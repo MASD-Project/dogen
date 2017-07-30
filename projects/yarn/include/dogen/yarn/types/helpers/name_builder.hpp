@@ -52,16 +52,16 @@ private:
     std::string compute_id();
 
 public:
-    name_builder& simple_name(const std::string& sn);
-    name_builder& model_name(const std::string& mn);
-    name_builder& model_name(const meta_model::location& l);
-    name_builder& external_modules(const std::string& em);
-    name_builder& external_modules(const std::list<std::string>& em);
-    name_builder& model_modules(const std::string& mm);
-    name_builder& model_modules(const std::list<std::string>& mm);
-    name_builder& internal_modules(const std::string& im);
-    name_builder& internal_modules(const std::list<std::string>& im);
-    name_builder& location(const meta_model::location& l);
+    void simple_name(const std::string& sn);
+    void model_name(const std::string& mn);
+    void model_name(const meta_model::location& l);
+    void external_modules(const std::string& em);
+    void external_modules(const std::list<std::string>& em);
+    void model_modules(const std::string& mm);
+    void model_modules(const std::list<std::string>& mm);
+    void internal_modules(const std::string& im);
+    void internal_modules(const std::list<std::string>& im);
+    void location(const meta_model::location& l);
 
 public:
     meta_model::name build();
