@@ -40,6 +40,13 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Updates all names in the exogenous model to take into
+ * account any overrides the user may have done.
+ *
+ * The only overrides that are available to the user is the model
+ * module and the external modules.
+ */
 class naming_transform final {
 private:
     struct type_group {
@@ -54,6 +61,28 @@ private:
     static boost::optional<naming_configuration>
     make_naming_configuration(const type_group& tg,
         const annotations::annotation& a);
+
+private:
+    static void process_element(const meta_model::location& l,
+        meta_model::element& e);
+
+    static void process_attributes(const meta_model::location& l,
+        std::list<meta_model::attribute>& attrs);
+
+private:
+    static void process(const meta_model::location& l,
+        meta_model::element& e);
+    static void process(const meta_model::location& l,
+        meta_model::concept& c);
+    static void process(const meta_model::location& l,
+        meta_model::object& o);
+
+    template<typename Element>
+    static void process(const meta_model::location& l,
+        std::list<std::pair<annotations::scribble_group, Element>>& elements) {
+        for (auto& pair : elements)
+            process(l, pair.second);
+    }
 
 private:
     static const annotations::annotation&

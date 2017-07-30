@@ -23,6 +23,8 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
+#include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
@@ -104,14 +106,60 @@ obtain_root_annotation(const meta_model::exogenous_model& em) {
 }
 
 meta_model::location
-naming_transform::create_location(const naming_configuration& /*cfg*/) {
-    meta_model::location r;
-    return r;
+naming_transform::create_location(const naming_configuration& cfg) {
+    helpers::location_builder b;
+    b.external_modules(cfg.external_modules());
+    b.model_modules(cfg.model_modules());
+    return b.build();
 }
 
-void naming_transform::update_names(const meta_model::location& /*l*/,
-    meta_model::exogenous_model& /*em*/) {
+void naming_transform::process_element(const meta_model::location& l,
+    meta_model::element& e) {
+    helpers::name_builder b;
+    b.simple_name(e.name().simple());
+    b.external_modules(l.external_modules());
+    b.model_modules(l.model_modules());
+    b.internal_modules(e.name().location().model_modules());
+    e.name(b.build());
+}
 
+void naming_transform::process_attributes(const meta_model::location& l,
+    std::list<meta_model::attribute>& attrs) {
+
+    for (auto& attr : attrs) {
+        helpers::name_builder b;
+        b.simple_name(attr.name().simple());
+        b.external_modules(l.external_modules());
+        b.model_modules(l.model_modules());
+        b.internal_modules(attr.name().location().model_modules());
+        attr.name(b.build());
+    }
+}
+
+void naming_transform::process(const meta_model::location& l,
+    meta_model::element& e) {
+    process_element(l, e);
+}
+
+void naming_transform::process(const meta_model::location& l,
+    meta_model::concept& c) {
+    process_element(l, c);
+}
+
+void naming_transform::process(const meta_model::location& l,
+    meta_model::object& o) {
+    process_element(l, o);
+}
+
+void naming_transform::
+update_names(const meta_model::location& l, meta_model::exogenous_model& em) {
+    process(l, em.modules());
+    process(l, em.concepts());
+    process(l, em.builtins());
+    process(l, em.enumerations());
+    process(l, em.primitives());
+    process(l, em.objects());
+    process(l, em.exceptions());
 }
 
 void naming_transform::
