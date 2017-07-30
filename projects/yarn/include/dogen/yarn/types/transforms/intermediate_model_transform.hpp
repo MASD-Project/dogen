@@ -25,7 +25,8 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,18 +34,8 @@ namespace transforms {
 
 class intermediate_model_transform final {
 public:
-    intermediate_model_transform() = default;
-    intermediate_model_transform(const intermediate_model_transform&) = default;
-    intermediate_model_transform(intermediate_model_transform&&) = default;
-    ~intermediate_model_transform() = default;
-    intermediate_model_transform& operator=(const intermediate_model_transform&) = default;
-
-public:
-    bool operator==(const intermediate_model_transform& rhs) const;
-    bool operator!=(const intermediate_model_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static meta_model::intermediate_model
+    transform(const meta_model::exogenous_model& em);
 };
 
 } } }

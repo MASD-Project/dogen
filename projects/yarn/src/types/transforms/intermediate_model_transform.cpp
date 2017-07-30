@@ -18,14 +18,60 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/throw_exception.hpp>
+#include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
+
+namespace {
+
+using namespace dogen::utility::log;
+static logger lg(logger_factory("yarn.dia.builder"));
+
+const std::string duplicate_element_id("Element id already exists: ");
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-bool intermediate_model_transform::operator==(const intermediate_model_transform& /*rhs*/) const {
-    return true;
+template<typename Element>
+inline std::unordered_map<std::string, Element>
+to_element_map(const std::list<std::pair<annotations::scribble_group,
+    Element>>& elements) {
+
+    std::unordered_map<std::string, Element> r;
+    for (const auto& pair : elements) {
+        const auto& e(pair.second);
+        const auto id(e.name().id());
+        bool inserted(r.insert(std::make_pair(id, e)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_element_id + id));
+        }
+    }
+    return r;
+}
+
+meta_model::intermediate_model intermediate_model_transform::
+transform(const meta_model::exogenous_model& em) {
+    BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model "
+                             << "intermediate model.";
+
+    meta_model::intermediate_model r;
+    r.modules(to_element_map(em.modules()));
+    r.concepts(to_element_map(em.concepts()));
+    r.builtins(to_element_map(em.builtins()));
+    r.enumerations(to_element_map(em.enumerations()));
+    r.primitives(to_element_map(em.primitives()));
+    r.objects(to_element_map(em.objects()));
+    r.exceptions(to_element_map(em.exceptions()));
+
+    BOOST_LOG_SEV(lg, debug) << "Transformed exogenous model "
+                             << "intermediate model.";
+    return r;
 }
 
 } } }
