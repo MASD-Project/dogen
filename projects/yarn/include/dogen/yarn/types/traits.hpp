@@ -38,6 +38,8 @@ struct traits {
     static std::string output_language();
     static std::string is_proxy_model();
     static std::string reference();
+    static std::string external_modules();
+    static std::string model_modules();
     static std::string enable_kernel_directories();
 
     struct type_parameters {

@@ -25,26 +25,48 @@
 #pragma once
 #endif
 
-#include <algorithm>
+#include <list>
+#include <iosfwd>
+#include <vector>
+#include <unordered_map>
+#include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/yarn/types/transforms/naming_configuration.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class naming_transform final {
-public:
-    naming_transform() = default;
-    naming_transform(const naming_transform&) = default;
-    naming_transform(naming_transform&&) = default;
-    ~naming_transform() = default;
-    naming_transform& operator=(const naming_transform&) = default;
+private:
+    struct type_group {
+        annotations::type external_modules;
+        annotations::type model_modules;
+    };
+
+    friend std::ostream& operator<<(std::ostream& s, const type_group& v);
+
+    static type_group make_type_group(const annotations::type_repository& atrp);
+
+    static boost::optional<naming_configuration>
+    make_naming_configuration(const type_group& tg,
+        const annotations::annotation& a);
+
+private:
+    static const annotations::annotation&
+    obtain_root_annotation(const meta_model::exogenous_model& em);
+
+    static meta_model::location
+    create_location(const naming_configuration& cfg);
+
+    static void update_names(const meta_model::location& l,
+        meta_model::exogenous_model& em);
 
 public:
-    bool operator==(const naming_transform& rhs) const;
-    bool operator!=(const naming_transform& rhs) const {
-        return !this->operator==(rhs);
-    }
-
+    static void transform(const context& ctx, meta_model::exogenous_model& em);
 };
 
 } } }

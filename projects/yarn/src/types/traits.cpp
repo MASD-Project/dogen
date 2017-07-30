@@ -58,7 +58,18 @@ std::string traits::reference() {
     return r;
 }
 
+std::string traits::external_modules() {
+    static std::string r("yarn.external_modules");
+    return r;
+}
+
+std::string traits::model_modules() {
+    static std::string r("yarn.model_modules");
+    return r;
+}
+
 std::string traits::enable_kernel_directories() {
+    // FIXME: rename to yarn
     static std::string r("quilt.enable_kernel_directories");
     return r;
 }

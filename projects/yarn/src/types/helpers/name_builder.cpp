@@ -107,6 +107,22 @@ name_builder& name_builder::model_name(const meta_model::location& l) {
     return *this;
 }
 
+name_builder& name_builder::external_modules(const std::string& em) {
+    if (em.empty())
+        return *this;
+
+    using utility::string::splitter;
+    name_.location().external_modules(splitter::split_scoped(em));
+    BOOST_LOG_SEV(lg, debug) << "Added external models: " << em;
+    return *this;
+}
+
+name_builder& name_builder::external_modules(const std::list<std::string>& em) {
+    name_.location().external_modules(em);
+    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
+    return *this;
+}
+
 name_builder& name_builder::model_modules(const std::string& mm) {
     if (mm.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_model_modules;
@@ -142,22 +158,6 @@ name_builder& name_builder::internal_modules(
     const std::list<std::string>& im) {
     name_.location().internal_modules(im);
     BOOST_LOG_SEV(lg, debug) << "Added external models: " << im;
-    return *this;
-}
-
-name_builder& name_builder::external_modules(const std::string& em) {
-    if (em.empty())
-        return *this;
-
-    using utility::string::splitter;
-    name_.location().external_modules(splitter::split_scoped(em));
-    BOOST_LOG_SEV(lg, debug) << "Added external models: " << em;
-    return *this;
-}
-
-name_builder& name_builder::external_modules(const std::list<std::string>& em) {
-    name_.location().external_modules(em);
-    BOOST_LOG_SEV(lg, debug) << "Added external modules: " << em;
     return *this;
 }
 
