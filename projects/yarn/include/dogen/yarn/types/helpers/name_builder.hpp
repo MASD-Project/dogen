@@ -46,8 +46,6 @@ namespace helpers {
 class name_builder {
 public:
     explicit name_builder(const bool model_name_mode_ = false);
-    explicit name_builder(const meta_model::name& n,
-        const bool model_name_mode_ = false);
 
 private:
     std::string compute_id();

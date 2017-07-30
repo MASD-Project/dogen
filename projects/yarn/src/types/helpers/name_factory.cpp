@@ -59,6 +59,7 @@ meta_model::name name_factory::build_element_name(const std::string& model_name,
     name_builder b;
     b.simple_name(simple_name);
     b.model_name(model_name);
+
     return b.build();
 }
 
@@ -66,11 +67,10 @@ meta_model::name name_factory::build_element_name(
     const std::string& simple_name,
     const std::list<std::string>& internal_modules) const {
 
-    meta_model::name n;
-    n.simple(simple_name);
-    n.location().internal_modules(internal_modules);
+    name_builder b;
+    b.simple_name(simple_name);
+    b.internal_modules(internal_modules);
 
-    name_builder b(n);
     return b.build();
 }
 
@@ -78,14 +78,12 @@ meta_model::name name_factory::build_element_in_model(
     const meta_model::name& model_name,
     const std::string& simple_name) const {
 
-    meta_model::name n;
-    n.simple(simple_name);
-
+    name_builder b;
     const auto& l(model_name.location());
-    n.location().model_modules(l.model_modules());
-    n.location().external_modules(l.external_modules());
+    b.simple_name(simple_name);
+    b.model_modules(l.model_modules());
+    b.external_modules(l.external_modules());
 
-    name_builder b(n);
     return b.build();
 }
 
@@ -94,33 +92,31 @@ meta_model::name name_factory::build_element_in_model(
     const std::string& simple_name,
     const std::list<std::string>& internal_modules) const {
 
-    meta_model::name n;
-    n.simple(simple_name);
+    name_builder b;
+    b.simple_name(simple_name);
 
     const auto& l(model_name.location());
-    n.location().model_modules(l.model_modules());
-    n.location().external_modules(l.external_modules());
-    n.location().internal_modules(internal_modules);
+    b.model_modules(l.model_modules());
+    b.external_modules(l.external_modules());
+    b.internal_modules(internal_modules);
 
-    name_builder b(n);
     return b.build();
 }
 
 meta_model::name name_factory::build_element_in_module(
     const meta_model::name& module_name,
     const std::string& simple_name) const {
-    meta_model::name n;
-    n.simple(simple_name);
+    name_builder b;
+    b.simple_name(simple_name);
 
     const auto& l(module_name.location());
-    n.location().model_modules(l.model_modules());
-    n.location().external_modules(l.external_modules());
+    b.model_modules(l.model_modules());
+    b.external_modules(l.external_modules());
 
     auto pp(l.internal_modules());
     pp.push_back(module_name.simple());
-    n.location().internal_modules(pp);
+    b.internal_modules(pp);
 
-    name_builder b(n);
     return b.build();
 }
 
@@ -133,18 +129,17 @@ meta_model::name name_factory::build_module_name(
         BOOST_THROW_EXCEPTION(building_error(empty_internal_modules));
     }
 
-    meta_model::name n;
-    n.simple(internal_modules.back());
+    name_builder b;
+    b.simple_name(internal_modules.back());
 
     const auto& l(model_name.location());
-    n.location().model_modules(l.model_modules());
-    n.location().external_modules(l.external_modules());
+    b.model_modules(l.model_modules());
+    b.external_modules(l.external_modules());
 
     auto ipp(internal_modules);
     ipp.pop_back();
-    n.location().internal_modules(ipp);
+    b.internal_modules(ipp);
 
-    name_builder b(n);
     return b.build();
 }
 
@@ -153,15 +148,14 @@ meta_model::name name_factory::build_module_name(
     const std::string& module_name,
     const std::list<std::string>& internal_modules) const {
 
-    meta_model::name n;
-    n.simple(module_name);
+    name_builder b;
+    b.simple_name(module_name);
 
     const auto& l(model_name.location());
-    n.location().model_modules(l.model_modules());
-    n.location().external_modules(l.external_modules());
-    n.location().internal_modules(internal_modules);
+    b.model_modules(l.model_modules());
+    b.external_modules(l.external_modules());
+    b.internal_modules(internal_modules);
 
-    name_builder b(n);
     return b.build();
 }
 
@@ -170,64 +164,64 @@ meta_model::name name_factory::build_combined_element_name(
     const meta_model::name& partial_element_name,
     const bool populate_model_modules_if_blank,
     const bool populate_internal_modules_if_blank) const {
-    meta_model::name n(partial_element_name);
+
+    name_builder b;
+    b.simple_name(partial_element_name.simple());
 
     const auto& l(model_name.location());
     if (populate_model_modules_if_blank &&
-        n.location().model_modules().empty()) {
-        n.location().model_modules(l.model_modules());
-    }
+        partial_element_name.location().model_modules().empty()) {
+        b.model_modules(l.model_modules());
+    } else
+        b.model_modules(partial_element_name.location().model_modules());
 
     if (populate_internal_modules_if_blank &&
-        n.location().internal_modules().empty()) {
-        n.location().internal_modules(l.internal_modules());
-    }
+        partial_element_name.location().internal_modules().empty()) {
+        b.internal_modules(l.internal_modules());
+    } else
+        b.internal_modules(partial_element_name.location().internal_modules());
 
-    n.location().external_modules(l.external_modules());
+    b.external_modules(l.external_modules());
 
-    name_builder b(n);
     return b.build();
 }
 
 meta_model::name name_factory::
 build_promoted_module_name(const meta_model::name& element_name) const {
-    meta_model::name n;
-    n.simple(element_name.simple());
-
-    const auto& l(element_name.location());
+    name_builder b;
+    b.simple_name(element_name.simple());
 
     /*
      * We can only promote the internal module to model name if the
      * name does not have any internal modules already.
      */
+    const auto& l(element_name.location());
     if (!l.internal_modules().empty()) {
         auto im(l.internal_modules());
-        n.location().model_modules().push_back(im.front());
+        b.model_modules(im.front());
         im.pop_front();
-        n.location().internal_modules(im);
+        b.internal_modules(im);
     }
 
-    name_builder b(n);
     return b.build();
 }
 
 meta_model::name name_factory::build_promoted_module_name(
     const meta_model::name& model_name,
     const meta_model::name& element_name) const {
-    meta_model::name n;
-    n.simple(element_name.simple());
+    name_builder b;
+    b.simple_name(element_name.simple());
 
     const auto& l(element_name.location());
     if (!l.internal_modules().empty()) {
         auto im(l.internal_modules());
-        n.location().model_modules().push_back(im.front());
+        b.model_modules(im.front());
         im.pop_front();
-        n.location().internal_modules(im);
+        b.internal_modules(im);
     }
 
-    n.location().external_modules(model_name.location().external_modules());
+    b.external_modules(model_name.location().external_modules());
 
-    name_builder b(n);
     return b.build();
 }
 
@@ -235,13 +229,13 @@ meta_model::name name_factory::build_attribute_name(
     const meta_model::name& owner_name,
     const std::string& simple_name) const {
 
+    name_builder b;
     auto l(owner_name.location());
     l.element(owner_name.simple());
 
-    meta_model::name n;
-    n.location(l);
-    n.simple(simple_name);
-    name_builder b(n);
+    b.location(l);
+    b.simple_name(simple_name);
+
     return b.build();
 }
 

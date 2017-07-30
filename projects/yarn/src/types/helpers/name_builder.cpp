@@ -52,10 +52,6 @@ namespace helpers {
 name_builder::name_builder(const bool model_name_mode)
     : model_name_mode_(model_name_mode) { }
 
-name_builder::
-name_builder(const meta_model::name& n, const bool model_name_mode)
-    : model_name_mode_(model_name_mode), name_(n) { }
-
 std::string name_builder::compute_id() {
     helpers::pretty_printer pp;
     pp.add(name_, model_name_mode_);
