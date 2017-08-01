@@ -10,7 +10,7 @@
 
 * Stories
 
-** Active
+* Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
 #+CAPTION: Clock summary at [2017-08-01 Tue 20:39]
