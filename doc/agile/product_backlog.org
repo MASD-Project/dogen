@@ -11,6 +11,144 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Investigate code-generation around annotations                    :story:
+
+We have two cases where code-generation makes sense for
+annotations. Let look at them in turn.
+
+*Type templates*
+
+At present we are supplying JSON files with type templates. In truth
+these are not really "data files" because changing them will cause
+problems to the system; its tightly coupled to them. It would make
+more sense to allow models to define their type templates inside the
+model itself. We could use a stereotype of
+=annotations::type_template= and then use meta-data for all of the
+fields, as per JSON, e.g.:
+
+:  {
+:    "name": {
+:      "simple": "profile",
+:      "qualified": "annotations.profile"
+:    },
+:    "archetype_location": {
+:      "family": "annotations"
+:    },
+:    "value_type": "text",
+:    "template_kind": "instance",
+:    "scope": "any"
+:  }
+
+We then code-generate the insertion of the type template into the
+annotations type templates repository via an initialisers-like
+framework.
+
+It may make more sense to have one UML class with all the type
+templates; the type templates then become attributes of that
+class. The problem then is what to name that class. also, we may want
+to have a couple of these, to group type templates logically (for
+example we want the top-level templates like =enabled= separated from
+the namespace-specific templates).
+
+But the gist of it is that its very straightforward to add some
+machinery that generates the code required to inject the type
+templates into the system, and that it is triggered during
+initialisation, replacing JSON loading.
+
+*Use of annotations*
+
+We then have the following usage pattern:
+
+- define a class with all the related fields (with types of the type
+  templates above). We call this class =type_group=. We may need to
+  instantiate it for specific fields, or by facet, etc. We need to
+  look at all of the examples in the code-base. Note that the layout
+  of this class will (likely) bear no resemblance to the type
+  templates grouping - this is just a "bag" with all of the available
+  type templates, whereas the type group aggregation does normally
+  have some useful meaning (e.g. =orm_properties=, etc).
+- define a "factory" class for the type group class that uses the
+  traits to locate the types (instances of type templates). For this,
+  the type group class attributes need to refer to the fully qualified
+  field name (possibly requiring some inputs such as kernel, facet).
+- define a c++ class with the properties we're interested in. We
+  normally call this class =_configuration= if its just used to read
+  the meta-data, or =_properties= if its used as a real type. Note
+  that at present we have allowed the layout of the type group class
+  and the properties/configuration classes to be possibly quite
+  different; we gather _all_ of the types of interest in the type
+  group class, but then have multiple properties/configuration classes
+  to match our needs.
+- finally, we define a "factory" class that takes in the type group
+  and produces the configuration/properties class.
+
+In a code-generated world:
+
+- we need to somehow force the type group class to match the
+  configuration class; this will probably result on a lot of
+  duplication. For example, for the ORM properties, we probably have a
+  couple in common across object/model/attributes.
+- we need to map C++ types into annotation types such that we can back
+  out the annotation type from a c++ type. For example, given an
+  enumeration, we want to create a annotation type of "text" but then
+  automatically generate the "from/to" converters for the enumeration.
+
+Merged stories:
+
+*Code generation of dynamic instances*
+
+We seem to have a pretty well established usage pattern for dynamic,
+so it may be a candidate for code generation. All we need is:
+
+- a stereotype to mark a class as dynamic; the attributes of the class
+  are dynamic fields, and their types must be one of the valid values
+  for dynamic fields. The default value is used for the field's
+  default value. Qualified name, ownership hierarchy, definition type,
+  scope, etc are supplied as meta-data.
+- stereotype name should be something like =DynamicFieldGroup=.
+- the injection of the settings class is done by looking at the
+  =DynamicFieldGroup= class and mapping the dynamic types to C++
+  types. Note: this mapping should be dynamic too so that we can use
+  it for other languages. We just need a meta-data tag for this, like
+  we do with default enum value.
+- the injection of the settings factory class is a bit more
+  complicated; we need to mark the object as a settings factory. At
+  present we have object types, but it was supposed to be removed
+  after a refactoring. Actually we just need to create a new kind of
+  element (=dynamic_settings_factory=?). In addition, settings factory
+  may also need to take in some parameters such as facet/formatter.
+- a stitch template that generates the settings factory.
+- a stitch template that registers the dynamic field definition;
+  instead of JSON we can just generate c++ code to perform the
+  injection.
+- we could also generate the repository and in most cases the
+  repository factory. The only case where this breaks down is when we
+  need to look at properties too.
+- we should have a number of knobs to control generation: a) generate
+  field injection b) generate settings factory c) generate repository
+  d) generate repository factory.
+
+We also need to merge the traits class directly into the factory. In
+the majority of cases, we have traits just to access the fields. But
+there are a few cases where we use traits for other purposes such as
+formatter naming.
+
+*** Add support for boost pointer container                           :story:
+
+It should be fairly straightforward to add support for the boost
+pointer containers: list, vector, array, set, map, unordered set and
+unordered map. In general we can rely on the existing families for the
+STL containers. The only snag is that the element on the pointer
+container is a pointer in some cases - but no all, as the container
+will automatically dereference sometimes. This means we may have some
+weird impedance mismatches.
+
+We already have serialisation support for all containers.
+
+Links:
+
+- [[http://www.boost.org/doc/libs/1_64_0/libs/ptr_container/doc/headers.html][Pointer Container Library - Library Headers]]
+
 *** Add full support for type_index                                   :story:
 
 At present we cannot create containers using =std::type_index= as a
@@ -4521,44 +4659,6 @@ use of it for:
 And so forth. For example, names and name trees don't really require
 comparing the entire state of the object. We need a way to mark
 properties against each facet in the meta-data.
-
-*** Code generation of dynamic instances                              :story:
-
-We seem to have a pretty well established usage pattern for dynamic,
-so it may be a candidate for code generation. All we need is:
-
-- a stereotype to mark a class as dynamic; the attributes of the class
-  are dynamic fields, and their types must be one of the valid values
-  for dynamic fields. The default value is used for the field's
-  default value. Qualified name, ownership hierarchy, definition type,
-  scope, etc are supplied as meta-data.
-- stereotype name should be something like =DynamicFieldGroup=.
-- the injection of the settings class is done by looking at the
-  =DynamicFieldGroup= class and mapping the dynamic types to C++
-  types. Note: this mapping should be dynamic too so that we can use
-  it for other languages. We just need a meta-data tag for this, like
-  we do with default enum value.
-- the injection of the settings factory class is a bit more
-  complicated; we need to mark the object as a settings factory. At
-  present we have object types, but it was supposed to be removed
-  after a refactoring. Actually we just need to create a new kind of
-  element (=dynamic_settings_factory=?). In addition, settings factory
-  may also need to take in some parameters such as facet/formatter.
-- a stitch template that generates the settings factory.
-- a stitch template that registers the dynamic field definition;
-  instead of JSON we can just generate c++ code to perform the
-  injection.
-- we could also generate the repository and in most cases the
-  repository factory. The only case where this breaks down is when we
-  need to look at properties too.
-- we should have a number of knobs to control generation: a) generate
-  field injection b) generate settings factory c) generate repository
-  d) generate repository factory.
-
-We also need to merge the traits class directly into the factory. In
-the majority of cases, we have traits just to access the fields. But
-there are a few cases where we use traits for other purposes such as
-formatter naming.
 
 *** Add support for inlining                                          :story:
 
