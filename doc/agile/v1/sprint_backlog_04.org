@@ -14,18 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-04 Fri 17:14]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:38* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:38   |      |      | 100.0 |
-| Active                                                                      |        | 9:38 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   6.1 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:13 |   2.2 |
-| COMPLETED Use shared pointers in all models                                 |        |      | 6:22 |  66.1 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |        |      | 2:28 |  25.6 |
+#+CAPTION: Clock summary at [2017-08-04 Fri 17:37]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *10:00* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 10:00   |       |      | 100.0 |
+| Active                                                                      |         | 10:00 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   5.8 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:13 |   2.2 |
+| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  63.7 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  28.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -95,6 +95,9 @@ go along, making the transformers/adapters mutable.
 
 *** COMPLETED Update repository in yarn.dia to use pointers           :story:
     CLOSED: [2017-08-04 Fri 17:14]
+    CLOCK: [2017-08-04 Fri 17:27]--[2017-08-04 Fri 17:37] =>  0:10
+    CLOCK: [2017-08-04 Fri 17:23]--[2017-08-04 Fri 17:26] =>  0:03
+    CLOCK: [2017-08-04 Fri 17:14]--[2017-08-04 Fri 17:23] =>  0:09
     CLOCK: [2017-08-04 Fri 14:45]--[2017-08-04 Fri 17:13] =>  2:28
 
 At present we are using a three-way map from dia object (child) to dia
@@ -105,6 +108,17 @@ directly to parent (and module).
 - dia id to module name.
 - dia id to parent names
 - model name
+
+Notes:
+
+- due to the way we now record parent and child relationships in the
+  graph, we caused the order of parents to move. Before we used to
+  keep track of all parents for a given child; we now keep track of
+  all children for a given parent. When builder starts accumulating
+  parents for each children, it now does so from the parent's
+  perspective. This seems to have caused the order of the parents to
+  change. However, since we still do things in diagram order,
+  hopefully the order is stable - just different.
 
 Tasks:
 
