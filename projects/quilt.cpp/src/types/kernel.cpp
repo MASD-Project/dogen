@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/path.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/workflow.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
@@ -123,7 +124,7 @@ kernel::generate(const yarn::transforms::context& ctx,
      */
     const auto& ko(ctx.options());
     const auto& atrp(ctx.type_repository());
-    const auto& ra(m.root_module().annotation());
+    const auto& ra(m.root_module()->annotation());
     const auto& frp(formatters_repository());
     const auto l(make_locator(ko, atrp, ra, frp, enable_kernel_directories, m));
 

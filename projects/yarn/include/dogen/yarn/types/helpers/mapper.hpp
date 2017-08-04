@@ -25,6 +25,10 @@
 #pragma once
 #endif
 
+#include <string>
+#include <unordered_map>
+#include <boost/shared_ptr.hpp>
+#include <boost/make_shared.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/name_tree.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
@@ -40,6 +44,20 @@ namespace helpers {
 class mapper final {
 public:
     explicit mapper(const mapping_set_repository& msrp);
+
+private:
+    template<typename Element>
+    std::unordered_map<std::string, boost::shared_ptr<Element>>
+    clone(const std::unordered_map<std::string,
+        boost::shared_ptr<Element>>& src) const {
+        std::unordered_map<std::string, boost::shared_ptr<Element>> r;
+        for (const auto& pair : src)
+            r[pair.first] = boost::make_shared<Element>(*pair.second);
+        return r;
+    }
+
+    meta_model::intermediate_model
+    clone(const meta_model::intermediate_model& im) const;
 
 private:
     const std::unordered_map<std::string, meta_model::name>&

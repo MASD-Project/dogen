@@ -26,6 +26,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
@@ -134,7 +135,7 @@ reference_paths_extractor::extract(const transforms::context& ctx,
      * Obtain the root annotation and read the requested user
      * references from it.
      */
-    const auto& ra(target.root_module().annotation());
+    const auto& ra(target.root_module()->annotation());
     auto r(obtain_paths_to_user_references(ctx, ra));
 
     /*

@@ -19,6 +19,7 @@
  *
  */
 #include <sstream>
+#include <boost/make_shared.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/upsilon/io/name_io.hpp"
@@ -111,40 +112,40 @@ void transformer::populate_element_properties(const dogen::upsilon::type& t,
     }
 }
 
-yarn::meta_model::builtin
+boost::shared_ptr<yarn::meta_model::builtin>
 transformer::to_builtin(const dogen::upsilon::primitive& p) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming primitive: " << p.name();
-    yarn::meta_model::builtin r;
-    populate_element_properties(p, r);
+    auto r(boost::make_shared<yarn::meta_model::builtin>());
+    populate_element_properties(p, *r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming primitive";
     return r;
 }
 
-yarn::meta_model::object
+boost::shared_ptr<yarn::meta_model::object>
 transformer::to_object(const dogen::upsilon::compound& c) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming compound: " << c.name();
-    yarn::meta_model::object r;
-    populate_element_properties(c, r);
+    auto r(boost::make_shared<yarn::meta_model::object>());
+    populate_element_properties(c, *r);
 
     dogen::yarn::helpers::name_factory nf;
     BOOST_LOG_SEV(lg, debug) << "Total fields: " << c.fields().size();
     for (const auto& f : c.fields()) {
         yarn::meta_model::attribute attr;
-        attr.name(nf.build_attribute_name(r.name(), f.name()));
+        attr.name(nf.build_attribute_name(r->name(), f.name()));
         attr.unparsed_type(to_unparsed_type(f.type_name()));
         attr.documentation(f.comment());
-        r.local_attributes().push_back(attr);
+        r->local_attributes().push_back(attr);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished transforming compound";
     return r;
 }
 
-yarn::meta_model::enumeration
+boost::shared_ptr<yarn::meta_model::enumeration>
 transformer::to_enumeration(const dogen::upsilon::enumeration& e) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming enumeration: " << e.name();
-    yarn::meta_model::enumeration r;
-    populate_element_properties(e, r);
+    auto r(boost::make_shared<yarn::meta_model::enumeration>());
+    populate_element_properties(e, *r);
     BOOST_LOG_SEV(lg, debug) << "Finished transforming enumeration";
     return r;
 }

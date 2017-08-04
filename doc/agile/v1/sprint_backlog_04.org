@@ -14,16 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-01 Tue 21:25]
+#+CAPTION: Clock summary at [2017-08-04 Fri 14:31]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:48* |      |      | 100.0 |
+| *Total time*                                                                | *7:10* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:48   |      |      | 100.0 |
-| Active                                                                      |        | 0:48 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |  72.9 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:13 |  27.1 |
+| Stories                                                                     | 7:10   |      |      | 100.0 |
+| Active                                                                      |        | 7:10 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   8.1 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:13 |   3.0 |
+| COMPLETED Use shared pointers in all models                                 |        |      | 6:22 |  88.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -78,6 +79,18 @@ For all other architectures and/or operative systems, you will need to build Dog
     CLOCK: [2017-08-01 Tue 20:35]--[2017-08-01 Tue 20:42] =>  0:07
 
 Updates to sprint and product backlog.
+
+*** COMPLETED Use shared pointers in all models                       :story:
+    CLOSED: [2017-08-04 Fri 14:30]
+    CLOCK: [2017-08-04 Fri 13:58]--[2017-08-04 Fri 14:30] =>  0:32
+    CLOCK: [2017-08-04 Fri 10:12]--[2017-08-04 Fri 13:48] =>  3:36
+    CLOCK: [2017-08-03 Thu 07:36]--[2017-08-03 Thu 08:21] =>  0:45
+    CLOCK: [2017-08-02 Wed 18:05]--[2017-08-02 Wed 18:52] =>  0:47
+    CLOCK: [2017-08-02 Wed 07:41]--[2017-08-02 Wed 08:23] =>  0:42
+
+We need to start using unique pointers in exogenous model, and shared
+pointers in intermediate model. We should transfer the ownership as we
+go along, making the transformers/adapters mutable.
 
 *** Rename =meta_type= in JSON                                        :story:
 
@@ -177,12 +190,6 @@ Steps:
 - convert scribble group into annotation group.
 - process element annotation.
 - process attribute annotations, if stateful.
-
-*** Use shared pointers in all models                                 :story:
-
-We need to start using unique pointers in exogenous model, and shared
-pointers in intermediate model. We should transfer the ownership as we
-go along, making the transformers/adapters mutable.
 
 *** Update repository in yarn.dia to use pointers                     :story:
 
@@ -627,5 +634,20 @@ If we do implement customisable JSON serialisation, we should still
 use the raw format in streaming. We need a way to disable the cooked
 JSON internally. We should also re-implement streaming in terms of
 this JSON mode.
+
+*** Add support for object cloning                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to clone object state so
+that I don't have to do this manually.
+#+end_quote
+
+We should have a clone method which copy constructs all non-pointer
+types, and then creates new objects for pointer types.
+
+Ideally users should be able to mark specific object as "cloneable"
+rather than generate clone methods for all objects in a model since it
+only makes sense for objects which have pointers. We need some
+meta-data knob to control the generation of the clone method.
 
 ** Deprecated

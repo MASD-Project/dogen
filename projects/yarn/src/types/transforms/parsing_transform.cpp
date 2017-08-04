@@ -27,6 +27,15 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
@@ -238,7 +247,7 @@ transform(const context& ctx, meta_model::intermediate_model& m) {
     const auto l(m.input_language());
 
     for (auto& pair : m.objects()) {
-        auto& o(pair.second);
+        auto& o(*pair.second);
         const auto id(o.name().id());
 
         try {
@@ -251,7 +260,7 @@ transform(const context& ctx, meta_model::intermediate_model& m) {
     }
 
     for (auto& pair : m.concepts()) {
-        auto& c(pair.second);
+        auto& c(*pair.second);
         const auto id(c.name().id());
 
         try {
@@ -263,7 +272,7 @@ transform(const context& ctx, meta_model::intermediate_model& m) {
     }
 
     for (auto& pair : m.enumerations()) {
-        auto& e(pair.second);
+        auto& e(*pair.second);
         const auto id(e.name().id());
 
         try {
@@ -275,7 +284,7 @@ transform(const context& ctx, meta_model::intermediate_model& m) {
     }
 
     for (auto& pair : m.primitives()) {
-        auto& p(pair.second);
+        auto& p(*pair.second);
         const auto id(p.name().id());
 
         try {

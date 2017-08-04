@@ -31,8 +31,16 @@
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
@@ -491,7 +499,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started enablement transform.";
 
     const auto& atrp(ctx.type_repository());
-    const auto& ra(im.root_module().annotation());
+    const auto& ra(im.root_module()->annotation());
     const auto& als(ctx.archetype_location_repository().archetype_locations());
 
     /*

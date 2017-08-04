@@ -73,7 +73,7 @@ BOOST_AUTO_TEST_CASE(upsilon_builtin_transforms_into_expected_yarn_builtin) {
     dogen::yarn::upsilon::transformer t(mn);
     const auto a(t.to_builtin(i));
 
-    BOOST_CHECK(asserter::assert_object(e, a));
+    BOOST_CHECK(asserter::assert_object(e, *a));
 }
 
 BOOST_AUTO_TEST_CASE(upsilon_compound_transforms_into_expected_yarn_object) {
@@ -83,12 +83,12 @@ BOOST_AUTO_TEST_CASE(upsilon_compound_transforms_into_expected_yarn_object) {
     const auto i(mock_model_factory::make_compound_with_field(0));
     BOOST_LOG_SEV(lg, debug) << "input: " << i;
 
-    const auto e(yarn_factory.make_value_object_with_attribute(0, mn, ot));
+    const auto e(yarn_factory.make_object_with_attribute(0, mn, ot));
 
     dogen::yarn::upsilon::transformer t(mn);
     const auto a(t.to_object(i));
 
-    BOOST_CHECK(asserter::assert_object(e, a));
+    BOOST_CHECK(asserter::assert_object(*e, *a));
 }
 
 BOOST_AUTO_TEST_SUITE_END()

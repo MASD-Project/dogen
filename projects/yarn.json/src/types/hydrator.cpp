@@ -28,6 +28,10 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -329,29 +333,29 @@ void hydrator::populate_element(const boost::property_tree::ptree& pt,
 void hydrator::read_object(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::object o;
-    populate_element(pt, im, o);
+    auto o(boost::make_shared<meta_model::object>());
+    populate_element(pt, im, *o);
 
     const auto ot(pt.get_optional<std::string>(object_type_key));
-    o.object_type(to_object_type(ot));
+    o->object_type(to_object_type(ot));
 
     const auto cbpu(pt.get(can_be_primitive_underlier_key, false));
-    o.can_be_primitive_underlier(cbpu);
+    o->can_be_primitive_underlier(cbpu);
 
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
 
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        o.local_attributes(read_attributes(i->second, sg));
+        o->local_attributes(read_attributes(i->second, sg));
 
-    insert_scribble_group(o.name(), sg, im);
+    insert_scribble_group(o->name(), sg, im);
 
     i = pt.find(parents_key);
     if (i != pt.not_found())
-        o.parents(read_names(i->second));
+        o->parents(read_names(i->second));
 
-    const auto id(o.name().id());
+    const auto id(o->name().id());
     const auto pair(std::make_pair(id, o));
     const bool inserted(im.objects().insert(pair).second);
     if (!inserted) {
@@ -363,24 +367,24 @@ void hydrator::read_object(const boost::property_tree::ptree& pt,
 void hydrator::read_builtin(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::builtin b;
-    populate_element(pt, im, b);
+    auto b(boost::make_shared<meta_model::builtin>());
+    populate_element(pt, im, *b);
     const auto st(annotations::scope_types::entity);
-    read_and_insert_scribble_group(b.name(), st, pt, im);
+    read_and_insert_scribble_group(b->name(), st, pt, im);
 
     const auto dit(pt.get(is_default_enumeration_type_key, false));
-    b.is_default_enumeration_type(dit);
+    b->is_default_enumeration_type(dit);
 
     const auto ifp(pt.get(is_floating_point_key, false));
-    b.is_floating_point(ifp);
+    b->is_floating_point(ifp);
 
     const auto cbeu(pt.get(can_be_enumeration_underlier_key, false));
-    b.can_be_enumeration_underlier(cbeu);
+    b->can_be_enumeration_underlier(cbeu);
 
     const auto cbpu(pt.get(can_be_primitive_underlier_key, false));
-    b.can_be_primitive_underlier(cbpu);
+    b->can_be_primitive_underlier(cbpu);
 
-    const auto id(b.name().id());
+    const auto id(b->name().id());
     const auto pair(std::make_pair(id, b));
     const bool inserted(im.builtins().insert(pair).second);
     if (!inserted) {
@@ -392,12 +396,12 @@ void hydrator::read_builtin(const boost::property_tree::ptree& pt,
 void hydrator::read_module(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::module m;
-    populate_element(pt, im, m);
+    auto m(boost::make_shared<meta_model::module>());
+    populate_element(pt, im, *m);
     const auto st(annotations::scope_types::entity);
-    read_and_insert_scribble_group(m.name(), st, pt, im);
+    read_and_insert_scribble_group(m->name(), st, pt, im);
 
-    const auto id(m.name().id());
+    const auto id(m->name().id());
     const auto pair(std::make_pair(id, m));
     const bool inserted(im.modules().insert(pair).second);
     if (!inserted) {
@@ -409,18 +413,18 @@ void hydrator::read_module(const boost::property_tree::ptree& pt,
 void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::enumeration e;
-    populate_element(pt, im, e);
+    auto e(boost::make_shared<meta_model::enumeration>());
+    populate_element(pt, im, *e);
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
 
     const auto i(pt.find(enumerators_key));
     if (i != pt.not_found())
-        e.enumerators(read_enumerators(i->second, sg));
+        e->enumerators(read_enumerators(i->second, sg));
 
-    insert_scribble_group(e.name(), sg, im);
+    insert_scribble_group(e->name(), sg, im);
 
-    const auto id(e.name().id());
+    const auto id(e->name().id());
     const auto pair(std::make_pair(id, e));
     const bool inserted(im.enumerations().insert(pair).second);
     if (!inserted) {
@@ -432,12 +436,12 @@ void hydrator::read_enumeration(const boost::property_tree::ptree& pt,
 void hydrator::read_primitive(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::primitive p;
-    populate_element(pt, im, p);
+    auto p(boost::make_shared<meta_model::primitive>());
+    populate_element(pt, im, *p);
     const auto st(annotations::scope_types::entity);
-    read_and_insert_scribble_group(p.name(), st, pt, im);
+    read_and_insert_scribble_group(p->name(), st, pt, im);
 
-    const auto id(p.name().id());
+    const auto id(p->name().id());
     const auto pair(std::make_pair(id, p));
     const bool inserted(im.primitives().insert(pair).second);
     if (!inserted) {
@@ -449,12 +453,12 @@ void hydrator::read_primitive(const boost::property_tree::ptree& pt,
 void hydrator::read_exception(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::exception e;
-    populate_element(pt, im, e);
+    auto e(boost::make_shared<meta_model::exception>());
+    populate_element(pt, im, *e);
     const auto st(annotations::scope_types::entity);
-    read_and_insert_scribble_group(e.name(), st, pt, im);
+    read_and_insert_scribble_group(e->name(), st, pt, im);
 
-    const auto id(e.name().id());
+    const auto id(e->name().id());
     const auto pair(std::make_pair(id, e));
     const bool inserted(im.exceptions().insert(pair).second);
     if (!inserted) {
@@ -466,24 +470,24 @@ void hydrator::read_exception(const boost::property_tree::ptree& pt,
 void hydrator::read_concept(const boost::property_tree::ptree& pt,
     meta_model::intermediate_model& im) const {
 
-    meta_model::concept c;
-    populate_element(pt, im, c);
+    auto c(boost::make_shared<meta_model::concept>());
+    populate_element(pt, im, *c);
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
 
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        c.local_attributes(read_attributes(i->second, sg));
+        c->local_attributes(read_attributes(i->second, sg));
 
-    insert_scribble_group(c.name(), sg, im);
+    insert_scribble_group(c->name(), sg, im);
 
     i = pt.find(refines_key);
     if (i != pt.not_found()) {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            c.refines().push_back(read_name(j->second, im.name()));
+            c->refines().push_back(read_name(j->second, im.name()));
     }
 
-    const auto id(c.name().id());
+    const auto id(c->name().id());
     const auto pair(std::make_pair(id, c));
     const bool inserted(im.concepts().insert(pair).second);
     if (!inserted) {
@@ -528,13 +532,13 @@ meta_model::intermediate_model hydrator::read_stream(std::istream& s) const {
     r.name(nf.build_model_name(mn, em));
     BOOST_LOG_SEV(lg, debug) << "Processing model: " << r.name().id();
 
-    meta_model::module m;
+    auto m(boost::make_shared<meta_model::module>());
     const auto st(annotations::scope_types::root_module);
     read_and_insert_scribble_group(r.name(), st, pt, r);
 
-    m.documentation(read_documentation(pt));
-    m.name(r.name());
-    r.modules().insert(std::make_pair(m.name().id(), m));
+    m->documentation(read_documentation(pt));
+    m->name(r.name());
+    r.modules().insert(std::make_pair(m->name().id(), m));
 
     const auto i(pt.find(elements_key));
     if (i == pt.not_found() || i->second.empty()) {

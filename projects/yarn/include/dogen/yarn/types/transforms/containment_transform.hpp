@@ -25,6 +25,8 @@
 #pragma once
 #endif
 
+#include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
@@ -37,7 +39,7 @@ private:
     /**
      * @brief Creates the module to represent the global namespace.
      */
-    static meta_model::module
+    static boost::shared_ptr<meta_model::module>
     create_global_module(const meta_model::origin_types ot);
 
     /**

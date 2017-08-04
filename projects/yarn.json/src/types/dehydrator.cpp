@@ -22,6 +22,14 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/filesystem/file.hpp"
 #include "dogen/formatters/types/utility_formatter.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 
 namespace {
@@ -235,7 +243,7 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
         if (output_comma)
             s << comma_space;
 
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto sg(scribble_group_for_name(im, o.name()));
 
         s << " { ";
@@ -268,7 +276,7 @@ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
         if (output_comma)
             s << comma_space;
 
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto sg(scribble_group_for_name(im, c.name()));
 
         s << " { ";
@@ -307,7 +315,7 @@ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
         if (output_comma)
             s << comma_space;
 
-        const auto& m(pair.second);
+        const auto& m(*pair.second);
         const auto sg(scribble_group_for_name(im, m.name()));
 
         s << " { ";
@@ -328,7 +336,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
         if (output_comma)
             s << comma_space;
 
-        const auto& e(pair.second);
+        const auto& e(*pair.second);
         const auto sg(scribble_group_for_name(im, e.name()));
 
         s << " { ";
@@ -393,7 +401,7 @@ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
         if (output_comma)
             s << comma_space;
 
-        const auto& p(pair.second);
+        const auto& p(*pair.second);
         const auto sg(scribble_group_for_name(im, p.name()));
 
         s << " { ";
@@ -415,7 +423,7 @@ dehydrate_exceptions(const bool requires_leading_comma,
         if (output_comma)
             s << comma_space;
 
-        const auto& p(pair.second);
+        const auto& p(*pair.second);
         const auto sg(scribble_group_for_name(im, p.name()));
 
         s << " { ";
@@ -444,7 +452,7 @@ dehydrator::dehydrate(const meta_model::intermediate_model& im) const {
 
     const auto i(im.modules().find(im.name().id()));
     if (i != im.modules().end()) {
-        const auto& root_module(i->second);
+        const auto& root_module(*i->second);
         if (!root_module.documentation().empty()) {
             s << comma_space;
             uf.insert_quoted("documentation");

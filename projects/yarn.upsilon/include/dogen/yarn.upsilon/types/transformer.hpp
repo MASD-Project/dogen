@@ -27,6 +27,7 @@
 
 #include <string>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -61,12 +62,13 @@ private:
         yarn::meta_model::element& e) const;
 
 public:
-    yarn::meta_model::builtin
+    boost::shared_ptr<yarn::meta_model::builtin>
     to_builtin(const dogen::upsilon::primitive& p) const;
 
-    yarn::meta_model::object to_object(const dogen::upsilon::compound& c) const;
+    boost::shared_ptr<yarn::meta_model::object>
+    to_object(const dogen::upsilon::compound& c) const;
 
-    yarn::meta_model::enumeration
+    boost::shared_ptr<yarn::meta_model::enumeration>
     to_enumeration(const dogen::upsilon::enumeration& e) const;
 
 private:

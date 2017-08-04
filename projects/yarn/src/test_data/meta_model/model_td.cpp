@@ -54,9 +54,16 @@ std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> > create_std_vec
     return r;
 }
 
-dogen::yarn::meta_model::module
-create_dogen_yarn_meta_model_module(const unsigned int position) {
-    return dogen::yarn::meta_model::module_generator::create(position);
+dogen::yarn::meta_model::module*
+create_dogen_yarn_meta_model_module_ptr(const unsigned int position) {
+    return dogen::yarn::meta_model::module_generator::create_ptr(position);
+}
+
+boost::shared_ptr<dogen::yarn::meta_model::module>
+create_boost_shared_ptr_dogen_yarn_meta_model_module(unsigned int position) {
+    boost::shared_ptr<dogen::yarn::meta_model::module> r(
+        create_dogen_yarn_meta_model_module_ptr(position));
+    return r;
 }
 
 std::string create_std_string(const unsigned int position) {
@@ -120,7 +127,7 @@ populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
     v.elements(create_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(position + 2));
-    v.root_module(create_dogen_yarn_meta_model_module(position + 3));
+    v.root_module(create_boost_shared_ptr_dogen_yarn_meta_model_module(position + 3));
     v.module_ids(create_std_unordered_set_std_string(position + 4));
     v.has_generatable_types(create_bool(position + 5));
     v.input_language(create_dogen_yarn_meta_model_languages(position + 6));

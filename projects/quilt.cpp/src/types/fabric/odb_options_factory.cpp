@@ -21,6 +21,7 @@
 #include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/quilt.cpp/types/fabric/building_error.hpp"
 #include "dogen/quilt.cpp/types/fabric/meta_name_factory.hpp"
@@ -48,7 +49,7 @@ make(const yarn::meta_model::intermediate_model& im) const {
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;
     for (const auto& pair : im.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
 
         /*
          * We only care about objects which have ORM enabled.

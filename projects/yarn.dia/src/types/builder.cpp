@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/pair_io.hpp"
@@ -49,26 +50,25 @@ namespace dia {
 
 template<typename Element> void add_element(
     std::unordered_map<std::string, meta_model::name>& id_to_name,
-    std::unordered_map<std::string, Element>& container,
-    const Element& e, const std::string& id) {
+    std::unordered_map<std::string, boost::shared_ptr<Element>>& container,
+    const boost::shared_ptr<Element>& e, const std::string& dia_id) {
 
-    const auto element_pair(std::make_pair(e.name().id(), e));
+    const auto id(e->name().id());
+    const auto element_pair(std::make_pair(id, e));
     bool inserted(container.insert(element_pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_element_id << e.name().id();
-        BOOST_THROW_EXCEPTION(
-            building_error(duplicate_element_id + e.name().id()));
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + id));
     }
-    BOOST_LOG_SEV(lg, debug) << "Added element to model " << e.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Added element to model " << id;
 
-    const auto id_name_pair(std::make_pair(id, e.name()));
+    const auto id_name_pair(std::make_pair(dia_id, e->name()));
     inserted = id_to_name.insert(id_name_pair).second;
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_dia_id << id;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_dia_id + id));
+        BOOST_LOG_SEV(lg, error) << duplicate_dia_id << dia_id;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_dia_id + dia_id));
     }
-    BOOST_LOG_SEV(lg, debug) << "Mapped " << id << " to "
-                             << e.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Mapped " << dia_id << " to " << id;
 }
 
 builder::builder(const std::string& model_name,
@@ -79,10 +79,10 @@ builder::builder(const std::string& model_name,
     repository_.child_id_to_parent_ids(child_id_to_parent_ids);
 }
 
-meta_model::module
+boost::shared_ptr<meta_model::module>
 builder::create_module_for_model(const meta_model::name& n) const {
-    meta_model::module r;
-    r.name(n);
+    auto r(boost::make_shared<meta_model::module>());
+    r->name(n);
     return r;
 }
 
@@ -96,7 +96,7 @@ builder::setup_model(const std::string& model_name,
     BOOST_LOG_SEV(lg, debug) << "Model: " << r.name().id();
 
     const auto mm(create_module_for_model(r.name()));
-    r.modules().insert(std::make_pair(mm.name().id(), mm));
+    r.modules().insert(std::make_pair(mm->name().id(), mm));
 
     return r;
 }
@@ -186,27 +186,27 @@ void builder::add(const processed_object& po) {
     } else if (dot == dia_object_types::uml_large_package) {
         const auto m(t.to_module(po));
         add_element(itn, im.modules(), m, id);
-        update_scribble_group(m.name(), po);
+        update_scribble_group(m->name(), po);
     } else if (yot == yarn_object_types::enumeration) {
         const auto e(t.to_enumeration(po));
         add_element(itn, im.enumerations(), e, id);
-        update_scribble_group(e.name(), po);
+        update_scribble_group(e->name(), po);
     } else if (yot == yarn_object_types::primitive) {
         const auto p(t.to_primitive(po));
         add_element(itn, im.primitives(), p, id);
-        update_scribble_group(p.name(), po);
+        update_scribble_group(p->name(), po);
     } else if (yot == yarn_object_types::concept) {
         const auto c(t.to_concept(po));
         add_element(itn, im.concepts(), c, id);
-        update_scribble_group(c.name(), po);
+        update_scribble_group(c->name(), po);
     } else if (yot == yarn_object_types::exception) {
         const auto e(t.to_exception(po));
         add_element(itn, im.exceptions(), e, id);
-        update_scribble_group(e.name(), po);
+        update_scribble_group(e->name(), po);
     } else {
         const auto o(t.to_object(po));
         add_element(itn, im.objects(), o, id);
-        update_scribble_group(o.name(), po);
+        update_scribble_group(o->name(), po);
     }
 }
 

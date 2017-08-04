@@ -130,98 +130,102 @@ update_element(const processed_object& po, meta_model::element& e) const {
         e.stereotypes().push_back(us);
 }
 
-meta_model::object transformer::to_object(const processed_object& po) const {
+boost::shared_ptr<meta_model::object>
+transformer::to_object(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
                              << po.id();
 
-    meta_model::object r;
-    update_element(po, r);
+    auto r(boost::make_shared<meta_model::object>());
+    update_element(po, *r);
 
     for (const auto& p : po.attributes())
-        r.local_attributes().push_back(to_attribute(p));
+        r->local_attributes().push_back(to_attribute(p));
 
     /*
      * If we have any parents, setup generalisation properties.
      */
+    const auto id(r->name().id());
     const_repository_selector crs(repository_);
     const auto parent_names(crs.parent_names_for_id(po.id()));
     if (!parent_names.empty()) {
         for (const auto& pn : parent_names) {
-            r.parents().push_back(pn);
-
-            BOOST_LOG_SEV(lg, debug) << "Added parent. Child: " << r.name().id()
+            r->parents().push_back(pn);
+            BOOST_LOG_SEV(lg, debug) << "Added parent. Child: " << id
                                      << " parent: " << pn.id();
         }
     } else
-        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r.name().id();
+        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << id;
 
     return r;
 }
 
-meta_model::exception
+boost::shared_ptr<meta_model::exception>
 transformer::to_exception(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
                              << po.id();
 
-    meta_model::exception e;
-    update_element(po, e);
+    auto e(boost::make_shared<meta_model::exception>());
+    update_element(po, *e);
     return e;
 }
 
-meta_model::enumeration
+boost::shared_ptr<meta_model::enumeration>
 transformer::to_enumeration(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << po.id();
 
-    meta_model::enumeration r;
-    update_element(po, r);
+    auto r(boost::make_shared<meta_model::enumeration>());
+    update_element(po, *r);
 
     for (const auto& attr : po.attributes())
-        r.enumerators().push_back(to_enumerator(attr));
+        r->enumerators().push_back(to_enumerator(attr));
 
     return r;
 }
 
-meta_model::primitive
+boost::shared_ptr<meta_model::primitive>
 transformer::to_primitive(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
                              << po.id();
 
-    meta_model::primitive r;
-    update_element(po, r);
+    auto r(boost::make_shared<meta_model::primitive>());
+    update_element(po, *r);
     return r;
 }
 
-meta_model::module transformer::to_module(const processed_object& po) const {
+boost::shared_ptr<meta_model::module>
+transformer::to_module(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: "
                              << po.id();
 
-    meta_model::module r;
-    update_element(po, r);
+    auto r(boost::make_shared<meta_model::module>());
+    update_element(po, *r);
     return r;
 }
 
-meta_model::concept transformer::to_concept(const processed_object& po) const {
+boost::shared_ptr<meta_model::concept>
+transformer::to_concept(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
                              << po.id();
 
-    meta_model::concept r;
-    update_element(po, r);
+    auto r(boost::make_shared<meta_model::concept>());
+    update_element(po, *r);
 
     for (const auto& attr : po.attributes())
-        r.local_attributes().push_back(to_attribute(attr));
+        r->local_attributes().push_back(to_attribute(attr));
 
     const_repository_selector crs(repository_);
     const auto parent_names(crs.parent_names_for_id(po.id()));
-    r.is_child(!parent_names.empty());
+    r->is_child(!parent_names.empty());
 
     if (parent_names.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r.name().id();
+        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r->name().id();
         return r;
     }
 
     for (const auto parent_name : parent_names)
-        r.refines().push_back(parent_name);
+        r->refines().push_back(parent_name);
+
     return r;
 }
 

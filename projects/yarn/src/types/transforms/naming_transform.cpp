@@ -23,6 +23,15 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -96,7 +105,7 @@ naming_transform::make_naming_configuration(const type_group& tg,
 const annotations::annotation& naming_transform::
 obtain_root_annotation(const meta_model::exogenous_model& em) {
     for (const auto& pair : em.modules()) {
-        const auto& m(pair.second);
+        const auto& m(*pair.second);
         if (m.is_root())
             return m.annotation();
     }

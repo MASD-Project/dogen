@@ -27,6 +27,7 @@
 
 #include <string>
 #include <memory>
+#include <boost/shared_ptr.hpp>
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia/types/attribute.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
@@ -123,7 +124,8 @@ public:
      *
      * @pre processed object must have the exception flag set.
      */
-    meta_model::exception to_exception(const processed_object& po) const;
+    boost::shared_ptr<meta_model::exception>
+    to_exception(const processed_object& po) const;
 
     /**
      * @brief Converts Dia a object containing a UML class with a
@@ -134,7 +136,8 @@ public:
      *
      * @pre processed object must have the value object flag set.
      */
-    meta_model::object to_object(const processed_object& po) const;
+    boost::shared_ptr<meta_model::object>
+    to_object(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object containing a class into an
@@ -142,7 +145,8 @@ public:
      *
      * @param po the Dia UML class containing an enumeration.
      */
-    meta_model::enumeration to_enumeration(const processed_object& po) const;
+    boost::shared_ptr<meta_model::enumeration>
+    to_enumeration(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object containing a class into a
@@ -150,7 +154,8 @@ public:
      *
      * @param po the Dia UML class containing a primitive.
      */
-    meta_model::primitive to_primitive(const processed_object& po) const;
+    boost::shared_ptr<meta_model::primitive>
+    to_primitive(const processed_object& po) const;
 
     /**
      * @brief Converts a Dia object of type large UML package into a
@@ -158,7 +163,8 @@ public:
      *
      * @param po Dia object which contains a UML package.
      */
-    meta_model::module to_module(const processed_object& po) const;
+    boost::shared_ptr<meta_model::module>
+    to_module(const processed_object& po) const;
 
     /**
      * @brief Converts a dia object with a stereotype of concept
@@ -166,7 +172,8 @@ public:
      *
      * @param po Dia object which contains a concept.
      */
-    meta_model::concept to_concept(const processed_object& o) const;
+    boost::shared_ptr<meta_model::concept>
+    to_concept(const processed_object& o) const;
 
 private:
     const repository& repository_;

@@ -23,6 +23,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_flattener.hpp"
 #include "dogen/quilt.cpp/types/formatters/traits.hpp"
@@ -149,7 +150,7 @@ make(const annotations::type_repository& atrp,
     const yarn::meta_model::intermediate_model& im) const {
 
     const auto pn(obtain_project_name(im));
-    const auto ra(im.root_module().annotation());
+    const auto ra(im.root_module()->annotation());
     const auto cfg(make_configuration(atrp, ra));
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;

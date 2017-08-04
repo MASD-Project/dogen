@@ -18,8 +18,88 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::module>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::module>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::concept>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::concept>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::builtin>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::builtin>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::enumeration>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::enumeration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::primitive>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::primitive>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::object>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::object>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::exception>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::exception>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::visitor>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::visitor>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace boost {
 
@@ -68,17 +148,17 @@ intermediate_model::intermediate_model(
     const dogen::yarn::meta_model::origin_types origin_type,
     const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
     const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::module>& modules,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::concept>& concepts,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& builtins,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& enumerations,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& primitives,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::object>& objects,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::exception>& exceptions,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& visitors,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors,
     const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& injected_elements,
     const bool has_generatable_types,
-    const dogen::yarn::meta_model::module& root_module,
+    const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
     const dogen::yarn::meta_model::languages input_language,
     const std::list<dogen::yarn::meta_model::languages>& output_languages,
     const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
@@ -233,131 +313,131 @@ void intermediate_model::leaves(const std::unordered_set<dogen::yarn::meta_model
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::module>& intermediate_model::modules() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& intermediate_model::modules() const {
     return modules_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::module>& intermediate_model::modules() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& intermediate_model::modules() {
     return modules_;
 }
 
-void intermediate_model::modules(const std::unordered_map<std::string, dogen::yarn::meta_model::module>& v) {
+void intermediate_model::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
     modules_ = v;
 }
 
-void intermediate_model::modules(const std::unordered_map<std::string, dogen::yarn::meta_model::module>&& v) {
+void intermediate_model::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::concept>& intermediate_model::concepts() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& intermediate_model::concepts() const {
     return concepts_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::concept>& intermediate_model::concepts() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& intermediate_model::concepts() {
     return concepts_;
 }
 
-void intermediate_model::concepts(const std::unordered_map<std::string, dogen::yarn::meta_model::concept>& v) {
+void intermediate_model::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
     concepts_ = v;
 }
 
-void intermediate_model::concepts(const std::unordered_map<std::string, dogen::yarn::meta_model::concept>&& v) {
+void intermediate_model::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >&& v) {
     concepts_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& intermediate_model::builtins() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& intermediate_model::builtins() const {
     return builtins_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& intermediate_model::builtins() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& intermediate_model::builtins() {
     return builtins_;
 }
 
-void intermediate_model::builtins(const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& v) {
+void intermediate_model::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& v) {
     builtins_ = v;
 }
 
-void intermediate_model::builtins(const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>&& v) {
+void intermediate_model::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >&& v) {
     builtins_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& intermediate_model::enumerations() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& intermediate_model::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& intermediate_model::enumerations() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& intermediate_model::enumerations() {
     return enumerations_;
 }
 
-void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& v) {
+void intermediate_model::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& v) {
     enumerations_ = v;
 }
 
-void intermediate_model::enumerations(const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>&& v) {
+void intermediate_model::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& intermediate_model::primitives() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& intermediate_model::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& intermediate_model::primitives() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& intermediate_model::primitives() {
     return primitives_;
 }
 
-void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& v) {
+void intermediate_model::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& v) {
     primitives_ = v;
 }
 
-void intermediate_model::primitives(const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>&& v) {
+void intermediate_model::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::object>& intermediate_model::objects() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& intermediate_model::objects() const {
     return objects_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::object>& intermediate_model::objects() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& intermediate_model::objects() {
     return objects_;
 }
 
-void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::meta_model::object>& v) {
+void intermediate_model::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& v) {
     objects_ = v;
 }
 
-void intermediate_model::objects(const std::unordered_map<std::string, dogen::yarn::meta_model::object>&& v) {
+void intermediate_model::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >&& v) {
     objects_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::exception>& intermediate_model::exceptions() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& intermediate_model::exceptions() const {
     return exceptions_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::exception>& intermediate_model::exceptions() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& intermediate_model::exceptions() {
     return exceptions_;
 }
 
-void intermediate_model::exceptions(const std::unordered_map<std::string, dogen::yarn::meta_model::exception>& v) {
+void intermediate_model::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& v) {
     exceptions_ = v;
 }
 
-void intermediate_model::exceptions(const std::unordered_map<std::string, dogen::yarn::meta_model::exception>&& v) {
+void intermediate_model::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >&& v) {
     exceptions_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& intermediate_model::visitors() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& intermediate_model::visitors() const {
     return visitors_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& intermediate_model::visitors() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& intermediate_model::visitors() {
     return visitors_;
 }
 
-void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& v) {
+void intermediate_model::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& v) {
     visitors_ = v;
 }
 
-void intermediate_model::visitors(const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>&& v) {
+void intermediate_model::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >&& v) {
     visitors_ = std::move(v);
 }
 
@@ -385,19 +465,19 @@ void intermediate_model::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-const dogen::yarn::meta_model::module& intermediate_model::root_module() const {
+const boost::shared_ptr<dogen::yarn::meta_model::module>& intermediate_model::root_module() const {
     return root_module_;
 }
 
-dogen::yarn::meta_model::module& intermediate_model::root_module() {
+boost::shared_ptr<dogen::yarn::meta_model::module>& intermediate_model::root_module() {
     return root_module_;
 }
 
-void intermediate_model::root_module(const dogen::yarn::meta_model::module& v) {
+void intermediate_model::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
     root_module_ = v;
 }
 
-void intermediate_model::root_module(const dogen::yarn::meta_model::module&& v) {
+void intermediate_model::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v) {
     root_module_ = std::move(v);
 }
 

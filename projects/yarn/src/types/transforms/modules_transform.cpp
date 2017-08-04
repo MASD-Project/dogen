@@ -18,9 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include <boost/algorithm/string.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
@@ -167,7 +170,8 @@ updater::containing_module(const meta_model::name& n) {
         BOOST_LOG_SEV(lg, debug) << "Adding type to module. Type: '"
                                  << n.id()
                                  << "' Module: '" << module_n.id();
-        i->second.members().push_back(n.id());
+        auto& o(*i->second);
+        o.members().push_back(n.id());
         return module_n;
     }
 
@@ -201,7 +205,8 @@ populate_root_module(meta_model::intermediate_model& im) {
         BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + id));
     }
 
-    i->second.is_root(true);
+    auto& m(*i->second);
+    m.is_root(true);
     im.root_module(i->second);
 }
 
@@ -216,10 +221,10 @@ create_missing_modules(meta_model::intermediate_model& im) {
         const auto n(f.build_module_name(im.name(), ipp));
         const auto i(im.modules().find(n.id()));
         if (i == im.modules().end()) {
-            meta_model::module mod;
-            mod.name(n);
-            mod.origin_type(im.origin_type());
-            im.modules().insert(std::make_pair(n.id(), mod));
+            auto m(boost::make_shared<meta_model::module>());
+            m->name(n);
+            m->origin_type(im.origin_type());
+            im.modules().insert(std::make_pair(n.id(), m));
         }
     }
 }

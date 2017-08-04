@@ -26,6 +26,15 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
@@ -317,7 +326,7 @@ expand_objects(const type_group& tg, meta_model::intermediate_model& im) {
          * done for this object. Configurations are setup during
          * stereotype expansion, if the ORM stereotypes were present.
          */
-        auto& o(pair.second);
+        auto& o(*pair.second);
         if (!o.orm_properties())
             continue;
 
@@ -361,7 +370,7 @@ expand_concepts(const type_group& tg, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started concept expansion.";
 
     for (auto& pair : im.concepts()) {
-        auto& c(pair.second);
+        auto& c(*pair.second);
         for (auto& attr : c.local_attributes()) {
             const auto& a(attr.annotation());
             attr.orm_properties(make_attribute_properties(tg, a));
@@ -386,7 +395,7 @@ void orm_transform::expand_primitives(
          * done for this primitive. Configurations are setup during
          * stereotype expansion, if the ORM stereotypes were present.
          */
-        auto& p(pair.second);
+        auto& p(*pair.second);
         if (!p.orm_properties())
             continue;
 
@@ -415,7 +424,7 @@ expand_modules(const type_group& tg, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started module expansion.";
 
     for (auto& pair : im.modules()) {
-        auto& m(pair.second);
+        auto& m(*pair.second);
         const auto& a(m.annotation());
         auto cfg(make_module_properties(tg, a));
         if (!cfg)
@@ -443,7 +452,7 @@ expand_modules(const type_group& tg, meta_model::intermediate_model& im) {
 
             const auto i(im.objects().find(id));
             if (i != im.objects().end()) {
-                auto& o(i->second);
+                auto& o(*i->second);
                 auto& cfg(o.orm_properties());
                 const bool update_schema_name(cfg && cfg->schema_name().empty()
                     && (cfg->generate_mapping() || cfg->is_value()));
@@ -459,7 +468,7 @@ expand_modules(const type_group& tg, meta_model::intermediate_model& im) {
                 if (j == im.primitives().end())
                     continue;
 
-                auto& p(j->second);
+                auto& p(*j->second);
                 auto& cfg(p.orm_properties());
                 const bool update_schema_name(cfg &&
                     cfg->schema_name().empty() && cfg->generate_mapping());
@@ -482,7 +491,7 @@ expand(const context& ctx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
 
     const auto tg(make_type_group(ctx.type_repository()));
-    const auto& rm(im.root_module());
+    const auto& rm(*im.root_module());
     im.orm_properties(make_model_properties(tg, rm.annotation()));
 
     expand_objects(tg, im);

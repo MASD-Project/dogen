@@ -18,20 +18,90 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::module>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::module>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::concept>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::concept>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::builtin>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::builtin>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::enumeration>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::enumeration>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::primitive>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::primitive>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::object>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::object>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::exception>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::exception>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
 exogenous_model::exogenous_model(
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module> >& modules,
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept> >& concepts,
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin> >& builtins,
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration> >& enumerations,
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive> >& primitives,
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object> >& objects,
-    const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception> >& exceptions)
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions)
     : modules_(modules),
       concepts_(concepts),
       builtins_(builtins),
@@ -67,115 +137,115 @@ exogenous_model& exogenous_model::operator=(exogenous_model other) {
     return *this;
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module> >& exogenous_model::modules() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& exogenous_model::modules() const {
     return modules_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module> >& exogenous_model::modules() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& exogenous_model::modules() {
     return modules_;
 }
 
-void exogenous_model::modules(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module> >& v) {
+void exogenous_model::modules(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& v) {
     modules_ = v;
 }
 
-void exogenous_model::modules(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module> >&& v) {
+void exogenous_model::modules(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >&& v) {
     modules_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept> >& exogenous_model::concepts() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& exogenous_model::concepts() const {
     return concepts_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept> >& exogenous_model::concepts() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& exogenous_model::concepts() {
     return concepts_;
 }
 
-void exogenous_model::concepts(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept> >& v) {
+void exogenous_model::concepts(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& v) {
     concepts_ = v;
 }
 
-void exogenous_model::concepts(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept> >&& v) {
+void exogenous_model::concepts(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >&& v) {
     concepts_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin> >& exogenous_model::builtins() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& exogenous_model::builtins() const {
     return builtins_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin> >& exogenous_model::builtins() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& exogenous_model::builtins() {
     return builtins_;
 }
 
-void exogenous_model::builtins(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin> >& v) {
+void exogenous_model::builtins(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& v) {
     builtins_ = v;
 }
 
-void exogenous_model::builtins(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin> >&& v) {
+void exogenous_model::builtins(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >&& v) {
     builtins_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration> >& exogenous_model::enumerations() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& exogenous_model::enumerations() const {
     return enumerations_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration> >& exogenous_model::enumerations() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& exogenous_model::enumerations() {
     return enumerations_;
 }
 
-void exogenous_model::enumerations(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration> >& v) {
+void exogenous_model::enumerations(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& v) {
     enumerations_ = v;
 }
 
-void exogenous_model::enumerations(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration> >&& v) {
+void exogenous_model::enumerations(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive> >& exogenous_model::primitives() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& exogenous_model::primitives() const {
     return primitives_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive> >& exogenous_model::primitives() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& exogenous_model::primitives() {
     return primitives_;
 }
 
-void exogenous_model::primitives(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive> >& v) {
+void exogenous_model::primitives(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& v) {
     primitives_ = v;
 }
 
-void exogenous_model::primitives(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive> >&& v) {
+void exogenous_model::primitives(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >&& v) {
     primitives_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object> >& exogenous_model::objects() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& exogenous_model::objects() const {
     return objects_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object> >& exogenous_model::objects() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& exogenous_model::objects() {
     return objects_;
 }
 
-void exogenous_model::objects(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object> >& v) {
+void exogenous_model::objects(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& v) {
     objects_ = v;
 }
 
-void exogenous_model::objects(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object> >&& v) {
+void exogenous_model::objects(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >&& v) {
     objects_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception> >& exogenous_model::exceptions() const {
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exogenous_model::exceptions() const {
     return exceptions_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception> >& exogenous_model::exceptions() {
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exogenous_model::exceptions() {
     return exceptions_;
 }
 
-void exogenous_model::exceptions(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception> >& v) {
+void exogenous_model::exceptions(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& v) {
     exceptions_ = v;
 }
 
-void exogenous_model::exceptions(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception> >&& v) {
+void exogenous_model::exceptions(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >&& v) {
     exceptions_ = std::move(v);
 }
 

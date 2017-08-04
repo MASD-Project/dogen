@@ -35,6 +35,10 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Merges target and references, post-processes the result and
+ * converts to the final model representation.
+ */
 class model_assembly_chain final {
 private:
     static meta_model::intermediate_model

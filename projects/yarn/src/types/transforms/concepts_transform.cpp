@@ -26,6 +26,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
@@ -68,7 +69,7 @@ find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
         BOOST_THROW_EXCEPTION(transformation_error(object_not_found +  n.id()));
     }
-    return i->second;
+    return *i->second;
 }
 
 meta_model::concept& concepts_transform::
@@ -78,7 +79,7 @@ find_concept(const meta_model::name& n, meta_model::intermediate_model& im) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << n.id();
         BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + n.id()));
     }
-    return i->second;
+    return *i->second;
 }
 
 void concepts_transform::remove_duplicates(std::list<meta_model::name>& names) {
@@ -193,7 +194,7 @@ void concepts_transform::expand_objects(meta_model::intermediate_model& im) {
 
     std::unordered_set<meta_model::name> processed_names;
     for (auto& pair : im.objects()) {
-        auto& o(pair.second);
+        auto& o(*pair.second);
         expand_object(o, im, processed_names);
     }
 }
@@ -234,7 +235,7 @@ void concepts_transform::expand_concepts(meta_model::intermediate_model& im) {
 
     std::unordered_set<meta_model::name> processed_names;
     for (auto& pair : im.concepts()) {
-        auto& c(pair.second);
+        auto& c(*pair.second);
         expand_concept(c, im, processed_names);
     }
 }

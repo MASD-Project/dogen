@@ -33,7 +33,6 @@ bool mapping_transform::is_mappable(const meta_model::languages from,
 
 meta_model::intermediate_model mapping_transform::transform(const context& ctx,
     const meta_model::intermediate_model& src, const meta_model::languages to) {
-
     const helpers::mapper mp(ctx.mapping_repository());
     return mp.map(src.input_language(), to, src);
 }

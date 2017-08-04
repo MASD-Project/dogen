@@ -24,6 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
@@ -83,7 +84,7 @@ walk_name_tree(const meta_model::intermediate_model& im, meta_model::object& o,
     const auto ac(meta_model::object_types::associative_container);
     const auto i(im.objects().find(n.id()));
     const auto is_associative_container(i != im.objects().end() &&
-        i->second.object_type() == ac);
+        i->second->object_type() == ac);
 
     for (const auto c : nt.children()) {
         if (is_first && is_associative_container)
@@ -128,7 +129,7 @@ void associations_transform::transform(meta_model::intermediate_model& im) {
 
     for (auto& pair : im.objects()) {
         auto& o(pair.second);
-        expand_object(im, o);
+        expand_object(im, *o);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished expanding objects.";
 }

@@ -22,6 +22,14 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/helpers/mapping_error.hpp"
 #include "dogen/yarn/io/helpers/mapping_context_io.hpp"
@@ -46,6 +54,20 @@ namespace helpers {
 
 mapper::mapper(const mapping_set_repository& msrp)
     : mapping_set_repository_(msrp) { }
+
+meta_model::intermediate_model mapper::
+clone(const meta_model::intermediate_model& im) const {
+    auto r(im);
+    r.modules(clone(im.modules()));
+    r.concepts(clone(im.concepts()));
+    r.builtins(clone(im.builtins()));
+    r.enumerations(clone(im.enumerations()));
+    r.primitives(clone(im.primitives()));
+    r.objects(clone(im.objects()));
+    r.exceptions(clone(im.exceptions()));
+    r.visitors(clone(im.visitors()));
+    return r;
+}
 
 const std::unordered_map<std::string, meta_model::name>&
 mapper::translations_for_language(const mapping_set& ms,
@@ -99,7 +121,7 @@ mapper::injections_for_language(const mapping_set& ms,
     const auto& n(j->second);
     for (const auto& pair : im.objects()) {
         const auto& o(pair.second);
-        for (const auto& pn : o.parents()) {
+        for (const auto& pn : o->parents()) {
             const auto pair(std::make_pair(pn.id(), n));
             r.insert(pair);
         }
@@ -209,7 +231,13 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
         return im;
     }
 
-    auto r(im);
+    /*
+     * We make a clone of the original intermediate model, so that we
+     * have our own set of elements. Otherwise, all mapped models
+     * would be pointing to the same elements, causing confusion and
+     * chaos.
+     */
+    auto r(clone(im));
 
     /*
      * For now we always use the default mapping set. In the future
@@ -219,11 +247,14 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
     const auto mc(create_mapping_context(ms, from, to, im));
     BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
 
-    for (auto& pair : r.objects())
-        map_attributes(mc, pair.second.local_attributes());
+    for (auto& pair : r.objects()) {
+        auto o(boost::make_shared<meta_model::object>(*pair.second));
+        map_attributes(mc, o->local_attributes());
+        pair.second.swap(o);
+    }
 
     for (auto& pair : r.concepts())
-        map_attributes(mc, pair.second.local_attributes());
+        map_attributes(mc, pair.second->local_attributes());
 
     r.input_language(to);
     r.output_languages().clear();

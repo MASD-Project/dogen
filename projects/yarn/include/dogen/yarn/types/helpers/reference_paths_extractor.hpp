@@ -27,7 +27,9 @@
 
 #include <list>
 #include <iosfwd>
+#include <boost/filesystem/path.hpp>
 #include "dogen/annotations/types/type.hpp"
+#include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"

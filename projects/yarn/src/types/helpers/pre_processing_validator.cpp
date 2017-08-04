@@ -20,6 +20,13 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 
@@ -203,25 +210,25 @@ validate(const meta_model::intermediate_model& im) {
     validator v(im.name(), check_names, ipr/*is_proxy_reference*/);
 
     for (const auto& pair : im.modules())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.concepts())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.builtins())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.enumerations())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.objects())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.exceptions())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.visitors())
-        v.validate(pair.first, pair.second);
+        v.validate(pair.first, *pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished validation.";
 }

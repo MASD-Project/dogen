@@ -28,6 +28,7 @@
 #include <list>
 #include <string>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
@@ -52,7 +53,8 @@ public:
         child_id_to_parent_ids);
 
 private:
-    meta_model::module create_module_for_model(const meta_model::name& n) const;
+    boost::shared_ptr<meta_model::module>
+    create_module_for_model(const meta_model::name& n) const;
 
     meta_model::intermediate_model setup_model(const std::string& model_name,
         const std::string& external_modules) const;

@@ -26,6 +26,7 @@
 #endif
 
 #include <string>
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"

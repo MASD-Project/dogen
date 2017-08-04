@@ -19,12 +19,22 @@
  *
  */
 #include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 
 namespace boost {
 
 inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::element>& lhs,
 const boost::shared_ptr<dogen::yarn::meta_model::element>& rhs) {
+    return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
+}
+
+}
+
+namespace boost {
+
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::module>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::module>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -55,7 +65,7 @@ model::model(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
     const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements,
-    const dogen::yarn::meta_model::module& root_module,
+    const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
     const std::unordered_set<std::string>& module_ids,
     const bool has_generatable_types,
     const dogen::yarn::meta_model::languages input_language,
@@ -154,19 +164,19 @@ void model::elements(const std::vector<boost::shared_ptr<dogen::yarn::meta_model
     elements_ = std::move(v);
 }
 
-const dogen::yarn::meta_model::module& model::root_module() const {
+const boost::shared_ptr<dogen::yarn::meta_model::module>& model::root_module() const {
     return root_module_;
 }
 
-dogen::yarn::meta_model::module& model::root_module() {
+boost::shared_ptr<dogen::yarn::meta_model::module>& model::root_module() {
     return root_module_;
 }
 
-void model::root_module(const dogen::yarn::meta_model::module& v) {
+void model::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
     root_module_ = v;
 }
 
-void model::root_module(const dogen::yarn::meta_model::module&& v) {
+void model::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v) {
     root_module_ = std::move(v);
 }
 

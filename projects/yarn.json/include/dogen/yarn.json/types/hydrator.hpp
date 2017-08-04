@@ -28,6 +28,9 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen/yarn/types/meta_model/attribute.hpp"
+#include "dogen/yarn/types/meta_model/enumerator.hpp"
+#include "dogen/yarn/types/meta_model/object_types.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {

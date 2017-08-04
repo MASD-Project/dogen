@@ -33,8 +33,8 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
+#include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
@@ -63,7 +63,7 @@ public:
         const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::name& meta_name,
         const std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> >& elements,
-        const dogen::yarn::meta_model::module& root_module,
+        const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
         const std::unordered_set<std::string>& module_ids,
         const bool has_generatable_types,
         const dogen::yarn::meta_model::languages input_language,
@@ -108,10 +108,10 @@ public:
      * @brief The module that represents the model.
      */
     /**@{*/
-    const dogen::yarn::meta_model::module& root_module() const;
-    dogen::yarn::meta_model::module& root_module();
-    void root_module(const dogen::yarn::meta_model::module& v);
-    void root_module(const dogen::yarn::meta_model::module&& v);
+    const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module() const;
+    boost::shared_ptr<dogen::yarn::meta_model::module>& root_module();
+    void root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v);
+    void root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v);
     /**@}*/
 
     /**
@@ -172,7 +172,7 @@ private:
     dogen::yarn::meta_model::name name_;
     dogen::yarn::meta_model::name meta_name_;
     std::vector<boost::shared_ptr<dogen::yarn::meta_model::element> > elements_;
-    dogen::yarn::meta_model::module root_module_;
+    boost::shared_ptr<dogen::yarn::meta_model::module> root_module_;
     std::unordered_set<std::string> module_ids_;
     bool has_generatable_types_;
     dogen::yarn::meta_model::languages input_language_;

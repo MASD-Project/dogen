@@ -103,7 +103,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
 
     BOOST_REQUIRE(m.objects().size() == 1);
 
-    const auto& o(m.objects().begin()->second);
+    const auto& o(*m.objects().begin()->second);
     BOOST_CHECK(o.transparent_associations().size() == 1);
     BOOST_CHECK(o.opaque_associations().empty());
 }
@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n) || factory.is_type_name_n(1, n)) {
@@ -155,7 +155,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 5);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -214,7 +214,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     bool found0(false), found1(false), found3(false);
     BOOST_REQUIRE(m.objects().size() == 5);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -267,7 +267,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indi
     const auto pt(attribute_types::unsigned_int);
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::transform(m);
@@ -275,7 +275,7 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indi
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -296,7 +296,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
     const auto pt(attribute_types::boolean);
     auto m(factory.object_with_attribute(ot, objt, pt));
     BOOST_REQUIRE(m.objects().size() == 1);
-    BOOST_REQUIRE(m.objects().begin()->second.local_attributes().size() == 1);
+    BOOST_REQUIRE(m.objects().begin()->second->local_attributes().size() == 1);
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::transform(m);
@@ -304,7 +304,7 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -330,7 +330,7 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
     associations_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -361,7 +361,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices)
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -394,7 +394,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ind
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -436,7 +436,7 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indice
     bool found(false);
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -465,7 +465,7 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -496,7 +496,7 @@ BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {

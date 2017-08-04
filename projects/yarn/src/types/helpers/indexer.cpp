@@ -21,6 +21,8 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
 #include "dogen/yarn/io/helpers/indices_io.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/helpers/indexer.hpp"
 
 namespace {
@@ -41,7 +43,7 @@ indices indexer::index(meta_model::intermediate_model& m) {
         const auto id(pair.first);
         r.elements_referable_by_attributes().insert(id);
 
-        const auto& b(pair.second);
+        const auto& b(*pair.second);
         if (b.can_be_enumeration_underlier())
             r.enumeration_underliers().insert(id);
 
@@ -61,7 +63,7 @@ indices indexer::index(meta_model::intermediate_model& m) {
         const auto id(pair.first);
         r.elements_referable_by_attributes().insert(id);
 
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         if (o.type_parameters().always_in_heap())
             r.objects_always_in_heap().insert(id);
 

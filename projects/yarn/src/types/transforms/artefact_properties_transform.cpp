@@ -20,6 +20,15 @@
  */
 #include <functional>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -46,15 +55,17 @@ update_element(const context& ctx, meta_model::element& e) {
      * such as concepts do not have any at present.
      */
     const auto id(e.name().id());
-    const auto mt(e.meta_name().id());
+    BOOST_LOG_SEV(lg, debug) << "Updating element: " << id;
+
+    const auto mn(e.meta_name().id());
     const auto& alrp(ctx.archetype_location_repository());
     const auto& c(alrp.archetype_locations_by_meta_name());
-    const auto i(c.find(mt));
+    const auto i(c.find(mn));
     if (i == c.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Element has no archetypes: " << id;
+        BOOST_LOG_SEV(lg, debug) << "Element has no archetypes.";
         return;
     }
-    BOOST_LOG_SEV(lg, debug) << "Element has archetypes " << id;
+    BOOST_LOG_SEV(lg, debug) << "Element has archetypes.";
 
     /*
      * Perform the artefact expansion by looking at all the archetype
@@ -66,14 +77,13 @@ update_element(const context& ctx, meta_model::element& e) {
         const auto a(al.archetype());
         const auto pair(std::make_pair(a, meta_model::artefact_properties()));
         const auto inserted(ap.insert(pair).second);
-        if (inserted)
+        if (inserted) {
+            BOOST_LOG_SEV(lg, debug) << "Added archetype location: " << a;
             continue;
+        }
 
         BOOST_LOG_SEV(lg, error) << duplicate_archetype << a;
         BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype + a));
-
-        BOOST_LOG_SEV(lg, debug) << "Added archetype location: " << a
-                                 << " to element: " << id;
     }
 }
 

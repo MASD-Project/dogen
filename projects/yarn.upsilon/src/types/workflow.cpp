@@ -19,6 +19,7 @@
  *
  */
 #include <list>
+#include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
@@ -90,9 +91,10 @@ public:
 
 private:
     template<typename Nameable>
-    void insert(const Nameable& nbl,
-        std::unordered_map<std::string, Nameable>& target) const {
-        const auto id(nbl.name().id());
+    void insert(const boost::shared_ptr<Nameable>& nbl,
+        std::unordered_map<std::string,
+        boost::shared_ptr<Nameable>>& target) const {
+        const auto id(nbl->name().id());
         const auto pair(std::make_pair(id, nbl));
         const auto inserted(target.insert(pair).second);
         if (!inserted) {
@@ -223,10 +225,9 @@ workflow::create_model(const dogen::upsilon::model& um) const {
     r.origin_type(yarn::meta_model::origin_types::target);
     r.output_languages(obtain_output_languages(outputs));
 
-    yarn::meta_model::module root_module;
-    root_module.name(n);
-    root_module.origin_type(yarn::meta_model::origin_types::target);
-
+    auto root_module(boost::make_shared<yarn::meta_model::module>());
+    root_module->name(n);
+    root_module->origin_type(yarn::meta_model::origin_types::target);
     r.modules()[n.id()] = root_module;
 
     return r;

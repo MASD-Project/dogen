@@ -29,6 +29,8 @@
 #include "dogen/annotations/test/mock_type_repository_factory.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
@@ -196,14 +198,14 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.modules().size() == 1);
     {
         const auto& pair(*m.modules().begin());
-        BOOST_CHECK(pair.second.documentation() == documentation);
-        BOOST_CHECK(pair.second.annotation().entries().empty());
+        BOOST_CHECK(pair.second->documentation() == documentation);
+        BOOST_CHECK(pair.second->annotation().entries().empty());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
         const auto& pair(*m.objects().begin());
-        const auto& n(pair.second.name());
+        const auto& n(pair.second->name());
 
         BOOST_CHECK(pair.first == n.id());
         BOOST_CHECK(n.simple() == type_name);
@@ -211,7 +213,7 @@ BOOST_AUTO_TEST_CASE(trivial_model_hydrates_into_expected_model) {
         BOOST_CHECK(nl.model_modules() == ml.model_modules());
         BOOST_CHECK(nl.internal_modules().empty());
         BOOST_CHECK(nl.external_modules().empty());
-        BOOST_CHECK(pair.second.documentation() == documentation);
+        BOOST_CHECK(pair.second->documentation() == documentation);
     }
 }
 
@@ -224,13 +226,13 @@ BOOST_AUTO_TEST_CASE(no_documentation_model_hydrates_into_expected_model) {
     BOOST_REQUIRE(m.modules().size() == 1);
     {
         const auto& pair(*m.modules().begin());
-        BOOST_CHECK(pair.second.documentation().empty());
+        BOOST_CHECK(pair.second->documentation().empty());
     }
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
         const auto& pair(m.objects().begin());
-        BOOST_CHECK(pair->second.documentation().empty());
+        BOOST_CHECK(pair->second->documentation().empty());
     }
 }
 
@@ -283,7 +285,7 @@ BOOST_AUTO_TEST_CASE(internal_modules_model_hydrates_into_expected_model) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& pair(*m.objects().begin());
-    const auto& n(pair.second.name());
+    const auto& n(pair.second->name());
 
     BOOST_CHECK(pair.first == n.id());
     {
@@ -314,7 +316,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
     for (const auto& pair : objects) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto n(o.name());
 
         BOOST_REQUIRE(n.location().model_modules().size() == 1);
@@ -326,7 +328,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
     const auto builtins(m.builtins());
     BOOST_CHECK(!m.builtins().empty());
     for (const auto& pair : builtins) {
-        const auto p(pair.second);
+        const auto p(*pair.second);
         const auto n(p.name());
         BOOST_REQUIRE(n.location().model_modules().size() == 1);
         BOOST_CHECK(n.location().model_modules().front() ==
@@ -336,7 +338,7 @@ BOOST_AUTO_TEST_CASE(cpp_std_model_hydrates_into_expected_model) {
 
     BOOST_CHECK(m.enumerations().empty());
     BOOST_REQUIRE(m.modules().size() == 1);
-    const auto& n(m.modules().begin()->second.name());
+    const auto& n(m.modules().begin()->second->name());
     BOOST_REQUIRE(n.simple() == cpp_std_model_name);
     BOOST_REQUIRE(n.location().model_modules().size() == 1);
     BOOST_CHECK(n.location().model_modules().front() ==
@@ -361,7 +363,7 @@ BOOST_AUTO_TEST_CASE(cpp_boost_model_hydrates_into_expected_model) {
     const auto& objects(m.objects());
     BOOST_CHECK(!objects.empty());
     for (const auto& pair : objects) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto n(o.name());
         BOOST_REQUIRE(n.location().model_modules().size() == 1);
         BOOST_CHECK(n.location().model_modules().front() ==
@@ -393,7 +395,7 @@ BOOST_AUTO_TEST_CASE(hardware_model_hydrates_into_expected_model) {
     const auto builtins(m.builtins());
     BOOST_CHECK(!builtins.empty());
     for (const auto& pair : builtins) {
-        const auto p(pair.second);
+        const auto& p(*pair.second);
         const auto n(p.name());
         BOOST_CHECK(n.location().model_modules().empty());
         BOOST_CHECK(n.location().external_modules().empty());

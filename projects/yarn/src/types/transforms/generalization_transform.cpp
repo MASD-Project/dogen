@@ -26,6 +26,7 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -86,7 +87,7 @@ generalization_transform::update_and_collect_parent_ids(
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
-        auto& o(pair.second);
+        auto& o(*pair.second);
         if (o.parents().empty())
             continue;
 
@@ -149,7 +150,7 @@ void generalization_transform::populate_properties_up_the_generalization_tree(
                 transformation_error(parent_not_found + pn.id()));
         }
 
-        auto& parent(i->second);
+        auto& parent(*i->second);
         populate_properties_up_the_generalization_tree(tg, leaf, im, parent);
 
         if (parent.parents().empty()) {
@@ -179,7 +180,7 @@ populate_generalizable_properties(const type_group& tg,
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Processing type: " << id;
 
-        auto& o(pair.second);
+        auto& o(*pair.second);
 
         /*
          * We are a child if we have at least one parent.
@@ -236,7 +237,7 @@ populate_generalizable_properties(const type_group& tg,
 
 void generalization_transform::sort_leaves(meta_model::intermediate_model& im) {
     for (auto& pair : im.objects()) {
-        auto& o(pair.second);
+        auto& o(*pair.second);
         o.leaves().sort();
     }
 }

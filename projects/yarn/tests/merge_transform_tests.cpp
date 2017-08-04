@@ -91,7 +91,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     std::set<std::string> object_names;
     std::set<std::string> model_names;
     for (const auto& pair : combined.objects()) {
-        const auto& n(pair.second.name());
+        const auto& n(pair.second->name());
         BOOST_REQUIRE(n.location().model_modules().size() == 1);
         object_names.insert(n.location().model_modules().front() + "_" +
             n.simple());

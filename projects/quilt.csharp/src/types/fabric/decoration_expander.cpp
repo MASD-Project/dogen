@@ -21,6 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/quilt.csharp/types/fabric/assistant.hpp"
 #include "dogen/quilt.csharp/types/fabric/element_visitor.hpp"

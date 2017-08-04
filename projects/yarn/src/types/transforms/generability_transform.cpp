@@ -18,6 +18,14 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 
 namespace dogen {
@@ -31,38 +39,43 @@ bool generability_transform::is_generatable(const meta_model::element& e) {
 
 bool generability_transform::
 has_generatable_types(const meta_model::intermediate_model& im) {
+    /*
+     * Note: we are deliberately excluding modules since we do not
+     * want to generate an empty model with just a module because its
+     * documented.
+     */
     for (const auto pair : im.objects()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : im.enumerations()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : im.enumerations()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : im.exceptions()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : im.builtins()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : im.concepts()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 
     for (const auto pair : im.primitives()) {
-        if (is_generatable(pair.second))
+        if (is_generatable(*pair.second))
             return true;
     }
 

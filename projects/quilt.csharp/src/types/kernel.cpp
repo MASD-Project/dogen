@@ -20,6 +20,7 @@
  */
 #include <boost/algorithm/string/join.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/quilt.csharp/types/traits.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/types/formatters/workflow.hpp"
@@ -92,7 +93,7 @@ kernel::generate(const yarn::transforms::context& ctx,
      * Create the locator.
      */
     const auto mn(m.name());
-    const auto& ra(m.root_module().annotation());
+    const auto& ra(m.root_module()->annotation());
     const auto& atrp(ctx.type_repository());
     const auto odp(ctx.options().output_directory_path());
     const auto& frp(formatters::workflow::registrar().formatter_repository());

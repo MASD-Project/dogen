@@ -79,9 +79,10 @@ private:
 
     template<typename Element>
     static void process(const meta_model::location& l,
-        std::list<std::pair<annotations::scribble_group, Element>>& elements) {
+        std::list<std::pair<annotations::scribble_group,
+        boost::shared_ptr<Element>>>& elements) {
         for (auto& pair : elements)
-            process(l, pair.second);
+            process(l, *pair.second);
     }
 
 private:

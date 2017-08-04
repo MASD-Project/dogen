@@ -18,11 +18,11 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/vector_io.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
@@ -94,7 +94,7 @@ bucket_leaves_by_location(const std::list<meta_model::name>& leaves) {
     return r;
 }
 
-meta_model::visitor
+boost::shared_ptr<meta_model::visitor>
 stereotypes_transform::create_visitor(const meta_model::object& o,
     const meta_model::location& l, const meta_model::origin_types ot,
     const std::list<meta_model::name>& leaves) {
@@ -105,10 +105,10 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     const auto n(b.build());
     BOOST_LOG_SEV(lg, debug) << "Creating visitor: " << n.id();
 
-    meta_model::visitor r;
-    r.name(n);
-    r.origin_type(ot);
-    r.documentation(visitor_doc + o.name().simple());
+    auto r(boost::make_shared<meta_model::visitor>());
+    r->name(n);
+    r->origin_type(ot);
+    r->documentation(visitor_doc + o.name().simple());
 
     if (leaves.empty()) {
         BOOST_LOG_SEV(lg, error) << no_visitees << n.id();
@@ -116,7 +116,7 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
     }
 
     for (const auto& l : leaves)
-        r.visits().push_back(l);
+        r->visits().push_back(l);
 
     BOOST_LOG_SEV(lg, debug) << "Created visitor: " << n.id();
     return r;
@@ -135,7 +135,7 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
                 transformation_error(leaf_not_found + l.id()));
         }
 
-        auto& o(i->second);
+        auto& o(*i->second);
         o.is_visitation_leaf(true);
         o.base_visitor(vd.base);
         o.derived_visitor(vd.derived);
@@ -145,18 +145,18 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
 }
 
 void stereotypes_transform::
-add_visitor_to_model(const meta_model::visitor& v,
+add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
     meta_model::intermediate_model& im) {
-    BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << v.name().id();
+    const auto id(v->name().id());
+    BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
 
-    const auto pair(std::make_pair(v.name().id(), v));
+    const auto pair(std::make_pair(id, v));
     const auto i(im.visitors().insert(pair));
     if (!i.second) {
-        const auto id(v.name().id());
         BOOST_LOG_SEV(lg, error) << duplicate_name << id;
         BOOST_THROW_EXCEPTION(transformation_error(duplicate_name + id));
     }
-    BOOST_LOG_SEV(lg, debug) << "Added visitor: " << v.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Added visitor: " << id;
 }
 
 void stereotypes_transform::
@@ -222,7 +222,7 @@ expand_visitable(meta_model::object& o, meta_model::intermediate_model& im) {
      * visitor base.
      */
     const auto bv(create_visitor(o, loc, o.origin_type(), bvl));
-    const auto bvn(bv.name());
+    const auto bvn(bv->name());
     o.is_visitation_root(true);
     o.base_visitor(bvn);
     update_visited_leaves(bvl, visitor_details(bvn), im);
@@ -270,8 +270,8 @@ expand_visitable(meta_model::object& o, meta_model::intermediate_model& im) {
          */
         const auto& bl(pair.second);
         auto dv(create_visitor(o, dv_location, ot, bl));
-        const auto dvn(dv.name());
-        dv.parent(bvn);
+        const auto dvn(dv->name());
+        dv->parent(bvn);
         update_visited_leaves(bl, visitor_details(bvn, dvn), im);
         add_visitor_to_model(dv, im);
     }
@@ -381,10 +381,10 @@ void stereotypes_transform::transform(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
 
     for (auto& pair : im.objects())
-        expand(pair.second, im);
+        expand(*pair.second, im);
 
     for (auto& pair : im.primitives())
-        expand(pair.second);
+        expand(*pair.second);
 
     BOOST_LOG_SEV(lg, debug) << "Finished expanding stereotypes.";
 }

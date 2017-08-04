@@ -24,6 +24,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
@@ -157,7 +158,7 @@ transform(const context& ctx, const meta_model::model& m) {
      * conflicting options - output on language X but disable
      * kernel for language X - so we need to throw to let it know.
      */
-    const auto& ra(m.root_module().annotation());
+    const auto& ra(m.root_module()->annotation());
     const auto& alrp(ctx.archetype_location_repository());
     const auto& als(alrp.archetype_locations());
     const auto cfg(make_configuration(ctx, als, ra));

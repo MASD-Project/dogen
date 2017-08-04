@@ -29,8 +29,15 @@
 #include <utility>
 #include "dogen/annotations/types/annotation_group.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 
@@ -58,10 +65,11 @@ private:
 
     template<typename Element>
     static void process(const context& ctx,
-        std::list<std::pair<annotations::scribble_group, Element>>& elements) {
+        std::list<std::pair<annotations::scribble_group,
+        boost::shared_ptr<Element>>>& elements) {
         for (auto& pair : elements) {
             const auto& sg(pair.first);
-            auto& e(pair.second);
+            auto& e(*pair.second);
             const auto ag(obtain_annotation_group(ctx, sg, e));
             process(ag, e);
         }

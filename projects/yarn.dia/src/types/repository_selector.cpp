@@ -58,7 +58,7 @@ module_for_name(const meta_model::name& n) const {
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
         BOOST_THROW_EXCEPTION(selection_error(missing_module_for_name + sn));
     }
-    return i->second;
+    return *i->second;
 }
 
 const meta_model::module& const_repository_selector::
@@ -120,7 +120,7 @@ repository_selector::module_for_name(const meta_model::name& n) {
         BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
         BOOST_THROW_EXCEPTION(selection_error(missing_module_for_name + sn));
     }
-    return i->second;
+    return *i->second;
 }
 
 meta_model::module& repository_selector::module_for_id(const std::string& id) {

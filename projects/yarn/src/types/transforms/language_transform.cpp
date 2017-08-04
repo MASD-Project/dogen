@@ -24,6 +24,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -72,7 +73,8 @@ make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-meta_model::languages language_transform::make_input_language(const type_group& tg,
+meta_model::languages
+language_transform::make_input_language(const type_group& tg,
     const annotations::annotation& a) {
     const annotations::entry_selector s(a);
     const auto lang_str(s.get_text_content_or_default(tg.input_language));
@@ -100,7 +102,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding language. Model: " << im.name().id();
 
     const auto tg(make_type_group(ctx.type_repository()));
-    const auto ra(im.root_module().annotation());
+    const auto ra(im.root_module()->annotation());
     using meta_model::languages;
     const bool has_input_language(im.input_language() != languages::invalid);
     if (!has_input_language) {

@@ -59,7 +59,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
 
     auto a(factory.make_single_type_model());
     BOOST_REQUIRE(a.objects().size() == 1);
-    BOOST_CHECK(!a.objects().begin()->second.contained_by());
+    BOOST_CHECK(!a.objects().begin()->second->contained_by());
     BOOST_REQUIRE(a.modules().empty());
     BOOST_REQUIRE(a.builtins().empty());
     BOOST_REQUIRE(a.enumerations().empty());
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
 
     auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
-    auto& o(m.objects().begin()->second);
+    auto& o(*(m.objects().begin()->second));
     o.stereotypes().push_back("visitable");
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
@@ -98,9 +98,9 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     auto m(factory.object_with_parent_in_the_same_model());
     BOOST_REQUIRE(m.objects().size() == 2);
     for (auto& pair : m.objects()) {
-        const auto& n(pair.second.name());
+        const auto& n(pair.second->name());
         if (factory.is_type_name_n(1, n)) {
-            auto& o(pair.second);
+            auto& o(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             o.is_visitation_root(true);
             o.stereotypes().push_back("visitable");
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     BOOST_CHECK(m.objects().size() == 2);
     bool type_one(false);
     for (const auto& pair : m.objects()) {
-        const auto& n(pair.second.name());
+        const auto& n(pair.second->name());
         if (factory.is_type_name_n(1, n)) {
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             type_one = true;
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
     BOOST_CHECK(type_one);
 
     BOOST_REQUIRE(m.visitors().size() == 1);
-    const auto v(m.visitors().begin()->second);
+    const auto v(*(m.visitors().begin()->second));
     BOOST_LOG_SEV(lg, debug) << "found visitor: " << v.name().id();
     BOOST_CHECK(factory.is_type_name_n_visitor(1, v.name()));
     BOOST_REQUIRE(v.visits().size() == 1);

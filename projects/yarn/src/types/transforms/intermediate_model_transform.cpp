@@ -20,6 +20,15 @@
  */
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
 
@@ -37,14 +46,15 @@ namespace yarn {
 namespace transforms {
 
 template<typename Element>
-inline std::unordered_map<std::string, Element>
+inline std::unordered_map<std::string, boost::shared_ptr<Element>>
 to_element_map(const std::list<std::pair<annotations::scribble_group,
-    Element>>& elements) {
+    boost::shared_ptr<Element>>>& elements) {
 
-    std::unordered_map<std::string, Element> r;
-    for (const auto& pair : elements) {
-        const auto& e(pair.second);
-        const auto id(e.name().id());
+    std::unordered_map<std::string, boost::shared_ptr<Element>> r;
+    for (const auto pair : elements) {
+        const auto e(pair.second);
+        const auto id(e->name().id());
+
         bool inserted(r.insert(std::make_pair(id, e)).second);
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;

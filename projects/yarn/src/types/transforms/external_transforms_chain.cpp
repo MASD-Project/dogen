@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
 
@@ -63,7 +64,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
     auto& rg(registrar());
     rg.validate();
 
-    const auto& ra(im.root_module().annotation());
+    const auto& ra(im.root_module()->annotation());
     const auto dpf(create_decoration_properties_factory(ctx, ra));
     for (const auto& et : rg.external_transforms())
         et->transform(ctx, dpf, im);

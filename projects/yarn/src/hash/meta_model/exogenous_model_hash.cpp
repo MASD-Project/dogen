@@ -36,114 +36,156 @@ inline void combine(std::size_t& seed, const HashableType& value) {
     seed ^= hasher(value) + 0x9e3779b9 + (seed << 6) + (seed >> 2);
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_module(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_module(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::module> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_module(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_module(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_concept(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_concept(const boost::shared_ptr<dogen::yarn::meta_model::concept>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_concept(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::concept> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_concept(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_concept(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_builtin(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_builtin(const boost::shared_ptr<dogen::yarn::meta_model::builtin>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_builtin(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::builtin> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_builtin(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_builtin(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_enumeration(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_enumeration(const boost::shared_ptr<dogen::yarn::meta_model::enumeration>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_enumeration(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::enumeration> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_enumeration(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_enumeration(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_primitive(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_primitive(const boost::shared_ptr<dogen::yarn::meta_model::primitive>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_primitive(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::primitive> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_primitive(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_primitive(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_object(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_object(const boost::shared_ptr<dogen::yarn::meta_model::object>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_object(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::object> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_object(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_object(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(i));
     }
     return seed;
 }
 
-inline std::size_t hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_exception(const std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_exception(const boost::shared_ptr<dogen::yarn::meta_model::exception>& v) {
     std::size_t seed(0);
-
-    combine(seed, v.first);
-    combine(seed, v.second);
+    combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_exception(const std::list<std::pair<dogen::annotations::scribble_group, dogen::yarn::meta_model::exception> >& v) {
+inline std::size_t hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> >& v) {
+    std::size_t seed(0);
+
+    combine(seed, v.first);
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_exception(v.second));
+    return seed;
+}
+
+inline std::size_t hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
-        combine(seed, hash_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_exception(i));
+        combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(i));
     }
     return seed;
 }
@@ -157,13 +199,13 @@ namespace meta_model {
 std::size_t exogenous_model_hasher::hash(const exogenous_model& v) {
     std::size_t seed(0);
 
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_module(v.modules()));
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_concept(v.concepts()));
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_builtin(v.builtins()));
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_enumeration(v.enumerations()));
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_primitive(v.primitives()));
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_object(v.objects()));
-    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_dogen_yarn_meta_model_exception(v.exceptions()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(v.concepts()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(v.builtins()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(v.enumerations()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(v.primitives()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(v.objects()));
+    combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(v.exceptions()));
 
     return seed;
 }

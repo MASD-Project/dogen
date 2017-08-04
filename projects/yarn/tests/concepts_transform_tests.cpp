@@ -24,6 +24,7 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
@@ -110,7 +111,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expa
     BOOST_CHECK(a.builtins().size() == 1);
 
     BOOST_REQUIRE(a.objects().size() == 1);
-    const auto& o(a.objects().begin()->second);
+    const auto& o(*(a.objects().begin()->second));
     BOOST_CHECK(o.local_attributes().size() == 1);
     BOOST_CHECK(o.inherited_attributes().empty());
     BOOST_CHECK(o.all_attributes().empty());
@@ -129,11 +130,11 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_expander)
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_REQUIRE(a.objects().size() == 1);
 
-    const auto& o(a.objects().begin()->second);
+    const auto& o(*(a.objects().begin()->second));
     BOOST_CHECK(o.modeled_concepts().size() == 1);
 
     BOOST_REQUIRE(a.concepts().size() == 1);
-    const auto& c(a.concepts().begin()->second);
+    const auto& c(*(a.concepts().begin()->second));
     BOOST_CHECK(c.refines().empty());
 
     concepts_transform::transform(a);
@@ -148,7 +149,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -167,7 +168,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
 
     BOOST_REQUIRE(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n))
@@ -183,7 +184,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
@@ -196,7 +197,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n))
@@ -215,7 +216,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -238,7 +239,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 
     BOOST_REQUIRE(m.concepts().size() == 3);
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n))
@@ -257,7 +258,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
@@ -272,7 +273,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
 
     BOOST_REQUIRE(m.objects().size() == 3);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n))
@@ -294,7 +295,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& o(m.objects().begin()->second);
+        const auto& o(*(m.objects().begin()->second));
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -309,7 +310,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
 
     BOOST_REQUIRE(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, c.name()))
@@ -336,7 +337,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     BOOST_CHECK(m.concepts().size() == 4);
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, c.name())) {
@@ -364,7 +365,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& o(m.objects().begin()->second);
+        const auto& o(*(m.objects().begin()->second));
         const auto& n(o.name());
         BOOST_CHECK(factory.is_type_name_n(0, n));
         BOOST_CHECK(o.modeled_concepts().size() == 4);
@@ -410,7 +411,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_REQUIRE(a.concepts().size() == 1);
     for (const auto& pair : a.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n))
@@ -421,7 +422,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
 
     BOOST_CHECK(a.objects().size() == 2);
     for (const auto& pair : a.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -450,7 +451,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_REQUIRE(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n))
@@ -464,7 +465,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
@@ -485,7 +486,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_CHECK(m.concepts().size() == 2);
     for (const auto& pair : m.concepts()) {
-        const auto& c(pair.second);
+        const auto& c(*pair.second);
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(0, n)) {
@@ -499,7 +500,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
 
     BOOST_REQUIRE(m.objects().size() == 2);
     for (const auto& pair : m.objects()) {
-        const auto& o(pair.second);
+        const auto& o(*pair.second);
         const auto& n(o.name());
 
         const auto& mc(o.modeled_concepts());
@@ -528,7 +529,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     BOOST_REQUIRE(m.objects().empty());
     BOOST_REQUIRE(m.concepts().size() == 1);
     {
-        const auto& c(m.concepts().begin()->second);
+        const auto& c(*(m.concepts().begin()->second));
         const auto& n(c.name());
 
         if (factory.is_concept_name_n(1, c.name())) {
@@ -552,11 +553,11 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     BOOST_REQUIRE(m.concepts().empty());
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& n(m.objects().begin()->second.name());
+        const auto& n(m.objects().begin()->second->name());
         if (!factory.is_type_name_n(0, n))
             BOOST_FAIL("Unexpected object: " << n);
 
-        const auto& o(m.objects().begin()->second);
+        const auto& o(*(m.objects().begin()->second));
         BOOST_REQUIRE(o.modeled_concepts().size() == 1);
         BOOST_REQUIRE(factory.is_concept_name_n(0,
                 o.modeled_concepts().front()));
@@ -576,7 +577,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
     BOOST_REQUIRE(m.concepts().size() == 1);
     {
         const auto& n(m.concepts().begin()->first);
-        const auto& c(m.concepts().begin()->second);
+        const auto& c(*(m.concepts().begin()->second));
 
         if (factory.is_concept_name_n(0, c.name()))
             BOOST_REQUIRE(c.refines().empty());
@@ -586,7 +587,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
 
     BOOST_REQUIRE(m.objects().size() == 1);
     {
-        const auto& o(m.objects().begin()->second);
+        const auto& o(*(m.objects().begin()->second));
         const auto& n(o.name());
 
         const auto& mc(o.modeled_concepts());

@@ -23,6 +23,15 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
@@ -60,7 +69,7 @@ private:
         }
     }
 
-    void add_element(boost::shared_ptr<meta_model::element> e) {
+    void add(boost::shared_ptr<meta_model::element> e) {
         /*
          * Element extensions share the same id as the original
          * element, so they are not considered duplicates. All other
@@ -74,27 +83,24 @@ private:
         result_.elements().push_back(e);
     }
 
-    template<typename Element>
-    void add(const Element& e) { add_element(boost::make_shared<Element>(e)); }
-
 public:
-    void operator()(meta_model::element&) { }
-    void operator()(const meta_model::module& m) {
-        result_.module_ids().insert(m.name().id());
+    void operator()(boost::shared_ptr<meta_model::element>) { }
+    void operator()(boost::shared_ptr<meta_model::module> m) {
+        result_.module_ids().insert(m->name().id());
         add(m);
     }
-    void operator()(const meta_model::concept& c) { add(c); }
-    void operator()(const meta_model::builtin& b) { add(b); }
-    void operator()(const meta_model::enumeration& e) { add(e); }
-    void operator()(const meta_model::primitive& p) { add(p); }
-    void operator()(const meta_model::object& o) { add(o); }
-    void operator()(const meta_model::exception& e) { add(e); }
-    void operator()(const meta_model::visitor& v) { add(v); }
+    void operator()(boost::shared_ptr<meta_model::concept> c) { add(c); }
+    void operator()(boost::shared_ptr<meta_model::builtin> b) { add(b); }
+    void operator()(boost::shared_ptr<meta_model::enumeration> e) { add(e); }
+    void operator()(boost::shared_ptr<meta_model::primitive> p) { add(p); }
+    void operator()(boost::shared_ptr<meta_model::object> o) { add(o); }
+    void operator()(boost::shared_ptr<meta_model::exception> e) { add(e); }
+    void operator()(boost::shared_ptr<meta_model::visitor> v) { add(v); }
 
 public:
     void add(const std::list<boost::shared_ptr<meta_model::element>>& ie) {
         for (const auto& e : ie)
-            add_element(e);
+            add(e);
     }
 
 public:
@@ -148,7 +154,7 @@ final_model_transform::transform(const meta_model::intermediate_model& im) {
     r.elements().reserve(size);
 
     model_populator mp(r);
-    meta_model::elements_traversal(im, mp);
+    meta_model::shared_elements_traversal(im, mp);
     mp.add(im.injected_elements());
 
     return r;

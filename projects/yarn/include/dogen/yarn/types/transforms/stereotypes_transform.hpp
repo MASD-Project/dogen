@@ -27,7 +27,9 @@
 
 #include <list>
 #include <unordered_map>
+#include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/hash/meta_model/location_hash.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
@@ -62,7 +64,8 @@ private:
     static std::unordered_map<meta_model::location, std::list<meta_model::name>>
     bucket_leaves_by_location(const std::list<meta_model::name>& leaves);
 
-    static void add_visitor_to_model(const meta_model::visitor& v,
+    static void add_visitor_to_model(
+        const boost::shared_ptr<meta_model::visitor> v,
         meta_model::intermediate_model& im);
 
     /**
@@ -73,7 +76,8 @@ private:
      *
      * @pre leaves must not be empty.
      */
-    static meta_model::visitor create_visitor(const meta_model::object& o,
+    static boost::shared_ptr<meta_model::visitor>
+    create_visitor(const meta_model::object& o,
         const meta_model::location& l, const meta_model::origin_types ot,
         const std::list<meta_model::name>& leaves);
 

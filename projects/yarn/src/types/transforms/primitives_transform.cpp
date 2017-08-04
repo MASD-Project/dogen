@@ -86,7 +86,7 @@ transform(const context& ctx, meta_model::intermediate_model& im) {
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
-        auto& p(pair.second);
+        auto& p(*pair.second);
         populate_from_annotations(tg, p);
     }
 

@@ -79,7 +79,7 @@ BOOST_AUTO_TEST_CASE(type_with_inconsistent_key_value_pair_throws) {
 
     const auto ot(origin_types::target);
     auto m(factory.make_multi_type_model(0, 2, ot));
-    m.objects().begin()->second.name().id(invalid_id);
+    m.objects().begin()->second->name().id(invalid_id);
     m.input_language(languages::cpp);
     BOOST_LOG_SEV(lg, debug) << "Model: " << m;
 

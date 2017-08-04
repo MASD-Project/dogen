@@ -18,9 +18,17 @@
  * MA 02110-1301, USA.
  *
  */
+#include <boost/make_shared.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
@@ -45,19 +53,19 @@ inline void add_containing_module_to_non_contained_entities(
     const meta_model::name& container_name,
     AssociativeContainerOfContainable& c) {
     for (auto& pair : c) {
-        auto& s(pair.second);
+        auto& s(*pair.second);
         if (!s.contained_by())
             s.contained_by(container_name);
     }
 }
 
-meta_model::module
+boost::shared_ptr<meta_model::module>
 containment_transform::create_global_module(const meta_model::origin_types ot) {
-    meta_model::module r;
-    r.name().id("<global module>");
-    r.origin_type(ot);
-    r.documentation(global_module_doc);
-    r.is_global_module(true);
+    auto r(boost::make_shared<meta_model::module>());
+    r->name().id("<global module>");
+    r->origin_type(ot);
+    r->documentation(global_module_doc);
+    r->is_global_module(true);
     return r;
 }
 
@@ -67,7 +75,7 @@ inject_global_module(meta_model::intermediate_model& im) {
                              << im.name().id();
 
     const auto gm(create_global_module(im.origin_type()));
-    const auto gmn(gm.name());
+    const auto gmn(gm->name());
     const auto i(im.modules().find(gmn.id()));
     if (i != im.modules().end()) {
         const auto id(im.name().id());

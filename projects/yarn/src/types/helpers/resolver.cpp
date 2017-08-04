@@ -26,6 +26,9 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/unordered_set_io.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/name_tree_io.hpp"
@@ -60,7 +63,7 @@ bool resolver::
 is_floating_point(const meta_model::intermediate_model& im,
     const meta_model::name& n) {
     auto i(im.builtins().find(n.id()));
-    return i != im.builtins().end() && i->second.is_floating_point();
+    return i != im.builtins().end() && i->second->is_floating_point();
 }
 
 bool resolver::is_builtin(const meta_model::intermediate_model& im,
@@ -480,9 +483,9 @@ resolve_concepts(const indices& idx, meta_model::intermediate_model& im) {
     for (auto& pair : im.concepts()) {
         auto& c(pair.second);
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving concept: " << c.name().id();
-        resolve_attributes(im, idx, c.name(), c.local_attributes());
-        validate_refinements(im, c);
+        BOOST_LOG_SEV(lg, debug) << "Resolving concept: " << c->name().id();
+        resolve_attributes(im, idx, c->name(), c->local_attributes());
+        validate_refinements(im, *c);
         BOOST_LOG_SEV(lg, debug) << "Resolved concept.";
     }
 
@@ -495,7 +498,7 @@ resolve_objects(const indices& idx, meta_model::intermediate_model& im) {
                              << im.objects().size();
 
     for (auto& pair : im.objects()) {
-        auto& o(pair.second);
+        auto& o(*pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving object: " << o.name().id();
         validate_inheritance_graph(im, o);
@@ -512,7 +515,7 @@ resolve_enumerations(const indices& idx, meta_model::intermediate_model& im) {
                              << im.enumerations().size();
 
     for (auto& pair : im.enumerations()) {
-        auto& e(pair.second);
+        auto& e(*pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving enumeration: " << e.name().id();
 
@@ -546,7 +549,7 @@ resolve_primitives(const indices& idx, meta_model::intermediate_model& im) {
                              << im.primitives().size();
 
     for (auto& pair : im.primitives()) {
-        auto& p(pair.second);
+        auto& p(*pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving primitive: " << p.name().id();
 

@@ -33,19 +33,19 @@
 #include <boost/optional.hpp>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
-#include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
-#include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/annotations/types/scribble_group.hpp"
+#include "dogen/yarn/types/meta_model/module_fwd.hpp"
+#include "dogen/yarn/types/meta_model/object_fwd.hpp"
+#include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
+#include "dogen/yarn/types/meta_model/concept_fwd.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
-#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/visitor_fwd.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
+#include "dogen/yarn/types/meta_model/exception_fwd.hpp"
+#include "dogen/yarn/types/meta_model/primitive_fwd.hpp"
+#include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/intermediate_model_fwd_ser.hpp"
@@ -75,17 +75,17 @@ public:
         const dogen::yarn::meta_model::origin_types origin_type,
         const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
         const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::module>& modules,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::concept>& concepts,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& builtins,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& enumerations,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& primitives,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::object>& objects,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::exception>& exceptions,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& visitors,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors,
         const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& injected_elements,
         const bool has_generatable_types,
-        const dogen::yarn::meta_model::module& root_module,
+        const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
         const dogen::yarn::meta_model::languages input_language,
         const std::list<dogen::yarn::meta_model::languages>& output_languages,
         const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
@@ -154,80 +154,80 @@ public:
      * @brief Modules contained in the intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::module>& modules() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::module>& modules();
-    void modules(const std::unordered_map<std::string, dogen::yarn::meta_model::module>& v);
-    void modules(const std::unordered_map<std::string, dogen::yarn::meta_model::module>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules();
+    void modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v);
+    void modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v);
     /**@}*/
 
     /**
      * @brief All the concepts available in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::concept>& concepts() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::concept>& concepts();
-    void concepts(const std::unordered_map<std::string, dogen::yarn::meta_model::concept>& v);
-    void concepts(const std::unordered_map<std::string, dogen::yarn::meta_model::concept>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts();
+    void concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v);
+    void concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >&& v);
     /**@}*/
 
     /**
      * @brief All built-ins contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& builtins() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& builtins();
-    void builtins(const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>& v);
-    void builtins(const std::unordered_map<std::string, dogen::yarn::meta_model::builtin>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins();
+    void builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& v);
+    void builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >&& v);
     /**@}*/
 
     /**
      * @brief All enumerations contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& enumerations() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& enumerations();
-    void enumerations(const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>& v);
-    void enumerations(const std::unordered_map<std::string, dogen::yarn::meta_model::enumeration>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations();
+    void enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& v);
+    void enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >&& v);
     /**@}*/
 
     /**
      * @brief All primitives in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& primitives() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& primitives();
-    void primitives(const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>& v);
-    void primitives(const std::unordered_map<std::string, dogen::yarn::meta_model::primitive>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives();
+    void primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& v);
+    void primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >&& v);
     /**@}*/
 
     /**
      * @brief All objects contained in this intermediate model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::object>& objects() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::object>& objects();
-    void objects(const std::unordered_map<std::string, dogen::yarn::meta_model::object>& v);
-    void objects(const std::unordered_map<std::string, dogen::yarn::meta_model::object>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects();
+    void objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& v);
+    void objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >&& v);
     /**@}*/
 
     /**
      * @brief All exceptions in this model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::exception>& exceptions() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::exception>& exceptions();
-    void exceptions(const std::unordered_map<std::string, dogen::yarn::meta_model::exception>& v);
-    void exceptions(const std::unordered_map<std::string, dogen::yarn::meta_model::exception>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions();
+    void exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& v);
+    void exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >&& v);
     /**@}*/
 
     /**
      * @brief All visitors in this model.
      */
     /**@{*/
-    const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& visitors() const;
-    std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& visitors();
-    void visitors(const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>& v);
-    void visitors(const std::unordered_map<std::string, dogen::yarn::meta_model::visitor>&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors();
+    void visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& v);
+    void visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >&& v);
     /**@}*/
 
     /**
@@ -248,10 +248,10 @@ public:
     void has_generatable_types(const bool v);
     /**@}*/
 
-    const dogen::yarn::meta_model::module& root_module() const;
-    dogen::yarn::meta_model::module& root_module();
-    void root_module(const dogen::yarn::meta_model::module& v);
-    void root_module(const dogen::yarn::meta_model::module&& v);
+    const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module() const;
+    boost::shared_ptr<dogen::yarn::meta_model::module>& root_module();
+    void root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v);
+    void root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v);
 
     /**
      * @brief Language in which this model was written.
@@ -302,17 +302,17 @@ private:
     dogen::yarn::meta_model::origin_types origin_type_;
     std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types> references_;
     std::unordered_set<dogen::yarn::meta_model::name> leaves_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::module> modules_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::concept> concepts_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::builtin> builtins_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::enumeration> enumerations_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::primitive> primitives_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::object> objects_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::exception> exceptions_;
-    std::unordered_map<std::string, dogen::yarn::meta_model::visitor> visitors_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> > modules_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> > concepts_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> > builtins_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > enumerations_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> > primitives_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> > objects_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> > exceptions_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> > visitors_;
     std::list<boost::shared_ptr<dogen::yarn::meta_model::element> > injected_elements_;
     bool has_generatable_types_;
-    dogen::yarn::meta_model::module root_module_;
+    boost::shared_ptr<dogen::yarn::meta_model::module> root_module_;
     dogen::yarn::meta_model::languages input_language_;
     std::list<dogen::yarn::meta_model::languages> output_languages_;
     std::unordered_map<std::string, dogen::annotations::scribble_group> scribble_groups_;

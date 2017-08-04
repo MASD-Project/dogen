@@ -21,6 +21,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/type_params_transform.hpp"
 
@@ -73,7 +74,7 @@ void type_params_transform::
 transform(const context& ctx, meta_model::intermediate_model& im) {
     const auto tg(make_type_group(ctx.type_repository()));
     for (auto& pair : im.objects()) {
-        auto& o(pair.second);
+        auto& o(*pair.second);
         expand_type_parameters(tg, o);
     }
 }

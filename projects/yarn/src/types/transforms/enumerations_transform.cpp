@@ -26,6 +26,8 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
@@ -182,7 +184,7 @@ enumerations_transform::obtain_enumeration_default_underlying_element_name(
     meta_model::name r;
     bool found(false);
     for (const auto& pair : im.builtins()) {
-        const auto b(pair.second);
+        const auto b(*pair.second);
         const auto id(b.name().id());
         if (b.is_default_enumeration_type()) {
             BOOST_LOG_SEV(lg, debug) << "Found default enumeration underlying "
@@ -320,7 +322,7 @@ void enumerations_transform::transform(const context& ctx,
         const auto& id(pair.first);
         BOOST_LOG_SEV(lg, debug) << "Expanding: " << id;
 
-        auto& e(pair.second);
+        auto& e(*pair.second);
         populate_from_annotations(tg.enumeration, e);
         expand_default_underlying_element(duen, e);
         expand_enumerators(tg.enumerator, l, e);

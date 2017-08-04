@@ -48,6 +48,12 @@ inline std::size_t hash_std_vector_boost_shared_ptr_dogen_yarn_meta_model_elemen
     return seed;
 }
 
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
+    std::size_t seed(0);
+    combine(seed, *v);
+    return seed;
+}
+
 inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
@@ -87,7 +93,7 @@ std::size_t model_hasher::hash(const model& v) {
     combine(seed, v.name());
     combine(seed, v.meta_name());
     combine(seed, hash_std_vector_boost_shared_ptr_dogen_yarn_meta_model_element(v.elements()));
-    combine(seed, v.root_module());
+    combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_module(v.root_module()));
     combine(seed, hash_std_unordered_set_std_string(v.module_ids()));
     combine(seed, v.has_generatable_types());
     combine(seed, v.input_language());

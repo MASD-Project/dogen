@@ -6317,16 +6317,6 @@ It seems it is possible to document a concept in doxygen:
 
 [[http://stackoverflow.com/questions/10087171/documenting-a-c-concept-using-doxygen][Documenting a C++ concept using doxygen?]]
 
-*** Add support for object cloning                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to clone object state so
-that I don't have to do this manually.
-#+end_quote
-
-We should have a clone method which copy constructs all non-pointer
-types, and then creates new objects for pointer types.
-
 *** Consider adding support for keys                                   :epic:
 
 We had originally added some half-baked support for key
