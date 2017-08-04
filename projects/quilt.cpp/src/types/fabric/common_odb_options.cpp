@@ -52,9 +52,9 @@ namespace cpp {
 namespace fabric {
 
 common_odb_options::common_odb_options(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -65,9 +65,9 @@ common_odb_options::common_odb_options(
     const std::string& sql_name_case,
     const std::list<std::string>& databases)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

@@ -58,18 +58,18 @@ bool create_bool(const unsigned int position) {
     return (position % 2) != 0;
 }
 
+boost::optional<dogen::yarn::meta_model::name>
+create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
+    boost::optional<dogen::yarn::meta_model::name> r(
+        create_dogen_yarn_meta_model_name(position));
+    return r;
+}
+
 std::list<dogen::yarn::meta_model::name> create_std_list_dogen_yarn_meta_model_name(unsigned int position) {
     std::list<dogen::yarn::meta_model::name> r;
     for (unsigned int i(0); i < 4; ++i) {
         r.push_back(create_dogen_yarn_meta_model_name(position + i));
     }
-    return r;
-}
-
-boost::optional<dogen::yarn::meta_model::name>
-create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
-    boost::optional<dogen::yarn::meta_model::name> r(
-        create_dogen_yarn_meta_model_name(position));
     return r;
 }
 
@@ -111,21 +111,21 @@ populate(const unsigned int position, result_type& v) {
     v.inherited_attributes(create_std_unordered_map_dogen_yarn_meta_model_name_std_list_dogen_yarn_meta_model_attribute(position + 2));
     v.is_immutable(create_bool(position + 3));
     v.is_fluent(create_bool(position + 4));
-    v.is_parent(create_bool(position + 5));
-    v.is_child(create_bool(position + 6));
-    v.is_leaf(create_bool(position + 7));
-    v.is_final(create_bool(position + 8));
-    v.is_abstract(create_bool(position + 9));
-    v.in_inheritance_relationship(create_bool(position + 10));
-    v.root_parents(create_std_list_dogen_yarn_meta_model_name(position + 11));
-    v.parents(create_std_list_dogen_yarn_meta_model_name(position + 12));
-    v.leaves(create_std_list_dogen_yarn_meta_model_name(position + 13));
-    v.transparent_associations(create_std_list_dogen_yarn_meta_model_name(position + 14));
-    v.opaque_associations(create_std_list_dogen_yarn_meta_model_name(position + 15));
-    v.base_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 16));
-    v.derived_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 17));
-    v.is_visitation_root(create_bool(position + 18));
-    v.is_visitation_leaf(create_bool(position + 19));
+    v.base_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 5));
+    v.derived_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 6));
+    v.is_visitation_root(create_bool(position + 7));
+    v.is_visitation_leaf(create_bool(position + 8));
+    v.transparent_associations(create_std_list_dogen_yarn_meta_model_name(position + 9));
+    v.opaque_associations(create_std_list_dogen_yarn_meta_model_name(position + 10));
+    v.is_parent(create_bool(position + 11));
+    v.is_child(create_bool(position + 12));
+    v.is_leaf(create_bool(position + 13));
+    v.is_final(create_bool(position + 14));
+    v.is_abstract(create_bool(position + 15));
+    v.in_inheritance_relationship(create_bool(position + 16));
+    v.root_parents(create_std_list_dogen_yarn_meta_model_name(position + 17));
+    v.parents(create_std_list_dogen_yarn_meta_model_name(position + 18));
+    v.leaves(create_std_list_dogen_yarn_meta_model_name(position + 19));
     v.type_parameters(create_dogen_yarn_meta_model_type_parameters(position + 20));
     v.object_type(create_dogen_yarn_meta_model_object_types(position + 21));
     v.modeled_concepts(create_std_list_dogen_yarn_meta_model_name(position + 22));

@@ -45,9 +45,9 @@ public:
 
 public:
     assistant(
+        const dogen::yarn::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,

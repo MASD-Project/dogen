@@ -81,15 +81,6 @@
 			<second class_id="23" tracking_level="0" version="1">
 				<px class_id="9" tracking_level="1" version="0" object_id="_0">
 					<element class_id="24" tracking_level="0" version="0">
-						<documentation></documentation>
-						<annotation class_id="25" tracking_level="0" version="0">
-							<entries class_id="26" tracking_level="0" version="0">
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;pkg1&gt;</id>
 							<simple>pkg1</simple>
@@ -125,6 +116,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_pkg1</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation class_id="25" tracking_level="0" version="0">
+							<entries class_id="26" tracking_level="0" version="0">
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by class_id="27" tracking_level="0" version="0">
 							<initialized>0</initialized>
@@ -194,15 +194,6 @@
 			<second>
 				<px class_id_reference="9" object_id="_1">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;</id>
 							<simple>boost_model</simple>
@@ -238,6 +229,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>0</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -327,16 +327,6 @@
 			<second class_id="40" tracking_level="0" version="1">
 				<px class_id="11" tracking_level="1" version="0" object_id="_2">
 					<element>
-						<documentation>Test a primitive with an underlying time_duration.
-</documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;date_primitive&gt;</id>
 							<simple>date_primitive</simple>
@@ -372,6 +362,16 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_date_primitive</identifiable>
 						</name>
+						<documentation>Test a primitive with an underlying time_duration.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -518,16 +518,6 @@
 			<second>
 				<px class_id_reference="11" object_id="_3">
 					<element>
-						<documentation>Test a primitive with an underlying ptime.
-</documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;ptime_primitive&gt;</id>
 							<simple>ptime_primitive</simple>
@@ -563,6 +553,16 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_ptime_primitive</identifiable>
 						</name>
+						<documentation>Test a primitive with an underlying ptime.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -709,16 +709,6 @@
 			<second>
 				<px class_id_reference="11" object_id="_4">
 					<element>
-						<documentation>Test a primitive with an underlying time_duration.
-</documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;time_duration_primitive&gt;</id>
 							<simple>time_duration_primitive</simple>
@@ -754,6 +744,16 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_time_duration_primitive</identifiable>
 						</name>
+						<documentation>Test a primitive with an underlying time_duration.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -905,15 +905,6 @@
 			<second class_id="48" tracking_level="0" version="1">
 				<px class_id="10" tracking_level="1" version="0" object_id="_5">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_h&gt;</id>
 							<simple>class_h</simple>
@@ -949,6 +940,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_h</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -1096,13 +1096,29 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations class_id="51" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
 					<in_inheritance_relationship>0</in_inheritance_relationship>
-					<root_parents class_id="51" tracking_level="0" version="0">
+					<root_parents>
 						<count>0</count>
 						<item_version>0</item_version>
 					</root_parents>
@@ -1114,22 +1130,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters class_id="52" tracking_level="0" version="0">
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -1157,15 +1157,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_6">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_e&gt;</id>
 							<simple>class_e</simple>
@@ -1201,6 +1192,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_e</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -1588,6 +1588,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -1606,22 +1622,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -1649,15 +1649,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_7">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;some_service&gt;</id>
 							<simple>some_service</simple>
@@ -1693,6 +1684,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_some_service</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -1841,6 +1841,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -1859,22 +1875,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -1902,15 +1902,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_8">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_j&gt;</id>
 							<simple>class_j</simple>
@@ -1946,6 +1937,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_j</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -2253,6 +2253,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -2271,22 +2287,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -2314,15 +2314,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_9">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_base&gt;</id>
 							<simple>class_base</simple>
@@ -2358,6 +2349,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_base</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -2505,6 +2505,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -2523,22 +2539,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -2566,15 +2566,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_10">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_b&gt;</id>
 							<simple>class_b</simple>
@@ -2610,6 +2601,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_b</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -3237,6 +3237,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -3255,22 +3271,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -3298,15 +3298,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_11">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_a&gt;</id>
 							<simple>class_a</simple>
@@ -3342,6 +3333,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_a</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -3489,6 +3489,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -3507,22 +3523,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -3550,15 +3550,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_12">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_d&gt;</id>
 							<simple>class_d</simple>
@@ -3594,6 +3585,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_d</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -3981,6 +3981,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -3999,22 +4015,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -4042,15 +4042,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_13">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_f&gt;</id>
 							<simple>class_f</simple>
@@ -4086,6 +4077,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_f</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -4633,6 +4633,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -4651,22 +4667,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -4694,15 +4694,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_14">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;pkg1&gt;&lt;class_c&gt;</id>
 							<simple>class_c</simple>
@@ -4739,6 +4730,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_pkg1_class_c</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -4966,6 +4966,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -4984,22 +5000,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -5027,15 +5027,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_15">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_g&gt;</id>
 							<simple>class_g</simple>
@@ -5071,6 +5062,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_g</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -5298,6 +5298,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>0</is_child>
 					<is_leaf>0</is_leaf>
@@ -5316,22 +5332,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
@@ -5359,15 +5359,6 @@
 			<second>
 				<px class_id_reference="10" object_id="_16">
 					<element>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;dogen&gt;&lt;test_models&gt;&lt;boost_model&gt;&lt;class_derived&gt;</id>
 							<simple>class_derived</simple>
@@ -5403,6 +5394,15 @@
 							</location>
 							<identifiable>dogen_test_models_boost_model_class_derived</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>4</origin_type>
 						<contained_by>
 							<initialized>0</initialized>
@@ -5550,6 +5550,22 @@
 					</inherited_attributes>
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
 					<is_parent>0</is_parent>
 					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
@@ -5603,22 +5619,6 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
 					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>

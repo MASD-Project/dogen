@@ -44,9 +44,9 @@ namespace cpp {
 namespace fabric {
 
 registrar::registrar(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -58,9 +58,9 @@ registrar::registrar(
     const std::list<dogen::yarn::meta_model::name>& model_dependencies,
     const std::list<dogen::yarn::meta_model::name>& registrar_dependencies)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

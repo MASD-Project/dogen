@@ -79,15 +79,6 @@
 			<second class_id="23" tracking_level="0" version="1">
 				<px class_id="9" tracking_level="1" version="0" object_id="_0">
 					<element class_id="24" tracking_level="0" version="0">
-						<documentation></documentation>
-						<annotation class_id="25" tracking_level="0" version="0">
-							<entries class_id="26" tracking_level="0" version="0">
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
 						<name>
 							<id>&lt;empty&gt;</id>
 							<simple>empty</simple>
@@ -121,6 +112,15 @@
 							</location>
 							<identifiable>empty</identifiable>
 						</name>
+						<documentation></documentation>
+						<annotation class_id="25" tracking_level="0" version="0">
+							<entries class_id="26" tracking_level="0" version="0">
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
 						<origin_type>0</origin_type>
 						<contained_by class_id="27" tracking_level="0" version="0">
 							<initialized>0</initialized>

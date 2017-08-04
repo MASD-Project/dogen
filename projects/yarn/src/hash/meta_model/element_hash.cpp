@@ -59,9 +59,9 @@ namespace meta_model {
 std::size_t element_hasher::hash(const element& v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, v.documentation());
     combine(seed, v.annotation());
-    combine(seed, v.name());
     combine(seed, v.origin_type());
     combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.contained_by()));
     combine(seed, v.in_global_module());

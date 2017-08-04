@@ -35,9 +35,9 @@ builtin::builtin()
       can_be_primitive_underlier_(static_cast<bool>(0)) { }
 
 builtin::builtin(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -50,9 +50,9 @@ builtin::builtin(
     const bool can_be_enumeration_underlier,
     const bool can_be_primitive_underlier)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

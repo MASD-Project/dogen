@@ -35,9 +35,9 @@ forward_declarations::forward_declarations()
       is_exception_(static_cast<bool>(0)) { }
 
 forward_declarations::forward_declarations(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -49,9 +49,9 @@ forward_declarations::forward_declarations(
     const dogen::yarn::meta_model::name& underlying_element,
     const bool is_exception)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

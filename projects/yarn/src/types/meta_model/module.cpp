@@ -80,9 +80,9 @@ module::module(module&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)) { }
 
 module::module(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -95,9 +95,9 @@ module::module(
     const bool is_global_module,
     const boost::optional<dogen::yarn::meta_model::orm_module_properties>& orm_properties)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

@@ -74,9 +74,9 @@ element::element()
       is_element_extension_(static_cast<bool>(0)) { }
 
 element::element(element&& rhs)
-    : documentation_(std::move(rhs.documentation_)),
+    : name_(std::move(rhs.name_)),
+      documentation_(std::move(rhs.documentation_)),
       annotation_(std::move(rhs.annotation_)),
-      name_(std::move(rhs.name_)),
       origin_type_(std::move(rhs.origin_type_)),
       contained_by_(std::move(rhs.contained_by_)),
       in_global_module_(std::move(rhs.in_global_module_)),
@@ -86,9 +86,9 @@ element::element(element&& rhs)
       element_properties_(std::move(rhs.element_properties_)) { }
 
 element::element(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -96,9 +96,9 @@ element::element(
     const dogen::yarn::meta_model::name& meta_name,
     const bool is_element_extension,
     const dogen::yarn::meta_model::element_properties& element_properties)
-    : documentation_(documentation),
+    : name_(name),
+      documentation_(documentation),
       annotation_(annotation),
-      name_(name),
       origin_type_(origin_type),
       contained_by_(contained_by),
       in_global_module_(in_global_module),
@@ -116,9 +116,9 @@ void element::to_stream(std::ostream& s) const {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::element\"" << ", "
+      << "\"name\": " << name_ << ", "
       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
       << "\"annotation\": " << annotation_ << ", "
-      << "\"name\": " << name_ << ", "
       << "\"origin_type\": " << origin_type_ << ", "
       << "\"contained_by\": " << contained_by_ << ", "
       << "\"in_global_module\": " << in_global_module_ << ", "
@@ -131,9 +131,9 @@ void element::to_stream(std::ostream& s) const {
 
 void element::swap(element& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(documentation_, other.documentation_);
     swap(annotation_, other.annotation_);
-    swap(name_, other.name_);
     swap(origin_type_, other.origin_type_);
     swap(contained_by_, other.contained_by_);
     swap(in_global_module_, other.in_global_module_);
@@ -144,9 +144,9 @@ void element::swap(element& other) noexcept {
 }
 
 bool element::compare(const element& rhs) const {
-    return documentation_ == rhs.documentation_ &&
+    return name_ == rhs.name_ &&
+        documentation_ == rhs.documentation_ &&
         annotation_ == rhs.annotation_ &&
-        name_ == rhs.name_ &&
         origin_type_ == rhs.origin_type_ &&
         contained_by_ == rhs.contained_by_ &&
         in_global_module_ == rhs.in_global_module_ &&
@@ -154,6 +154,22 @@ bool element::compare(const element& rhs) const {
         meta_name_ == rhs.meta_name_ &&
         is_element_extension_ == rhs.is_element_extension_ &&
         element_properties_ == rhs.element_properties_;
+}
+
+const dogen::yarn::meta_model::name& element::name() const {
+    return name_;
+}
+
+dogen::yarn::meta_model::name& element::name() {
+    return name_;
+}
+
+void element::name(const dogen::yarn::meta_model::name& v) {
+    name_ = v;
+}
+
+void element::name(const dogen::yarn::meta_model::name&& v) {
+    name_ = std::move(v);
 }
 
 const std::string& element::documentation() const {
@@ -186,22 +202,6 @@ void element::annotation(const dogen::annotations::annotation& v) {
 
 void element::annotation(const dogen::annotations::annotation&& v) {
     annotation_ = std::move(v);
-}
-
-const dogen::yarn::meta_model::name& element::name() const {
-    return name_;
-}
-
-dogen::yarn::meta_model::name& element::name() {
-    return name_;
-}
-
-void element::name(const dogen::yarn::meta_model::name& v) {
-    name_ = v;
-}
-
-void element::name(const dogen::yarn::meta_model::name&& v) {
-    name_ = std::move(v);
 }
 
 dogen::yarn::meta_model::origin_types element::origin_type() const {

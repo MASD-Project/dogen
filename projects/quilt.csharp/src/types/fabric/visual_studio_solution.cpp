@@ -38,9 +38,9 @@ namespace csharp {
 namespace fabric {
 
 visual_studio_solution::visual_studio_solution(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -53,9 +53,9 @@ visual_studio_solution::visual_studio_solution(
     const std::string& version,
     const std::string& project_name)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

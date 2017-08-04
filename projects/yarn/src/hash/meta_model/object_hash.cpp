@@ -51,14 +51,6 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_meta_model_name_std_list_do
     return seed;
 }
 
-inline std::size_t hash_std_list_dogen_yarn_meta_model_name(const std::list<dogen::yarn::meta_model::name>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
 inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::optional<dogen::yarn::meta_model::name>& v) {
     std::size_t seed(0);
 
@@ -66,6 +58,14 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::o
         return seed;
 
     combine(seed, *v);
+    return seed;
+}
+
+inline std::size_t hash_std_list_dogen_yarn_meta_model_name(const std::list<dogen::yarn::meta_model::name>& v) {
+    std::size_t seed(0);
+    for (const auto i : v) {
+        combine(seed, i);
+    }
     return seed;
 }
 
@@ -95,6 +95,12 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_name_std_list_dogen_yarn_meta_model_attribute(v.inherited_attributes()));
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
+    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.base_visitor()));
+    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.derived_visitor()));
+    combine(seed, v.is_visitation_root());
+    combine(seed, v.is_visitation_leaf());
+    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.transparent_associations()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.opaque_associations()));
     combine(seed, v.is_parent());
     combine(seed, v.is_child());
     combine(seed, v.is_leaf());
@@ -104,12 +110,6 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.root_parents()));
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.parents()));
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.leaves()));
-    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.transparent_associations()));
-    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.opaque_associations()));
-    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.base_visitor()));
-    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.derived_visitor()));
-    combine(seed, v.is_visitation_root());
-    combine(seed, v.is_visitation_leaf());
     combine(seed, v.type_parameters());
     combine(seed, v.object_type());
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.modeled_concepts()));

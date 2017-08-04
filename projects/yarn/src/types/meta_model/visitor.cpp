@@ -64,9 +64,9 @@ visitor::visitor(visitor&& rhs)
       parent_(std::move(rhs.parent_)) { }
 
 visitor::visitor(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -77,9 +77,9 @@ visitor::visitor(
     const std::list<dogen::yarn::meta_model::name>& visits,
     const boost::optional<dogen::yarn::meta_model::name>& parent)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

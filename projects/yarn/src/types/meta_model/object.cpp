@@ -61,20 +61,6 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
 
 }
 
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << *i;
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
 namespace boost {
 
 inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::meta_model::name>& v) {
@@ -85,6 +71,20 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
     else
         s << "\"data\": ""\"<null>\"";
     s << " }";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
     return s;
 }
 
@@ -112,14 +112,14 @@ namespace meta_model {
 object::object()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
+      is_visitation_root_(static_cast<bool>(0)),
+      is_visitation_leaf_(static_cast<bool>(0)),
       is_parent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)),
       is_leaf_(static_cast<bool>(0)),
       is_final_(static_cast<bool>(0)),
       is_abstract_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
-      is_visitation_root_(static_cast<bool>(0)),
-      is_visitation_leaf_(static_cast<bool>(0)),
       object_type_(static_cast<dogen::yarn::meta_model::object_types>(0)),
       provides_opaqueness_(static_cast<bool>(0)),
       can_be_primitive_underlier_(static_cast<bool>(0)) { }
@@ -132,6 +132,12 @@ object::object(object&& rhs)
       inherited_attributes_(std::move(rhs.inherited_attributes_)),
       is_immutable_(std::move(rhs.is_immutable_)),
       is_fluent_(std::move(rhs.is_fluent_)),
+      base_visitor_(std::move(rhs.base_visitor_)),
+      derived_visitor_(std::move(rhs.derived_visitor_)),
+      is_visitation_root_(std::move(rhs.is_visitation_root_)),
+      is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
+      transparent_associations_(std::move(rhs.transparent_associations_)),
+      opaque_associations_(std::move(rhs.opaque_associations_)),
       is_parent_(std::move(rhs.is_parent_)),
       is_child_(std::move(rhs.is_child_)),
       is_leaf_(std::move(rhs.is_leaf_)),
@@ -141,12 +147,6 @@ object::object(object&& rhs)
       root_parents_(std::move(rhs.root_parents_)),
       parents_(std::move(rhs.parents_)),
       leaves_(std::move(rhs.leaves_)),
-      transparent_associations_(std::move(rhs.transparent_associations_)),
-      opaque_associations_(std::move(rhs.opaque_associations_)),
-      base_visitor_(std::move(rhs.base_visitor_)),
-      derived_visitor_(std::move(rhs.derived_visitor_)),
-      is_visitation_root_(std::move(rhs.is_visitation_root_)),
-      is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
       type_parameters_(std::move(rhs.type_parameters_)),
       object_type_(std::move(rhs.object_type_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
@@ -156,9 +156,9 @@ object::object(object&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)) { }
 
 object::object(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -171,6 +171,12 @@ object::object(
     const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& inherited_attributes,
     const bool is_immutable,
     const bool is_fluent,
+    const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
+    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
+    const bool is_visitation_root,
+    const bool is_visitation_leaf,
+    const std::list<dogen::yarn::meta_model::name>& transparent_associations,
+    const std::list<dogen::yarn::meta_model::name>& opaque_associations,
     const bool is_parent,
     const bool is_child,
     const bool is_leaf,
@@ -180,12 +186,6 @@ object::object(
     const std::list<dogen::yarn::meta_model::name>& root_parents,
     const std::list<dogen::yarn::meta_model::name>& parents,
     const std::list<dogen::yarn::meta_model::name>& leaves,
-    const std::list<dogen::yarn::meta_model::name>& transparent_associations,
-    const std::list<dogen::yarn::meta_model::name>& opaque_associations,
-    const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
-    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
-    const bool is_visitation_root,
-    const bool is_visitation_leaf,
     const dogen::yarn::meta_model::type_parameters& type_parameters,
     const dogen::yarn::meta_model::object_types object_type,
     const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
@@ -194,9 +194,9 @@ object::object(
     const bool can_be_primitive_underlier,
     const boost::optional<dogen::yarn::meta_model::orm_object_properties>& orm_properties)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,
@@ -209,6 +209,12 @@ object::object(
       inherited_attributes_(inherited_attributes),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
+      base_visitor_(base_visitor),
+      derived_visitor_(derived_visitor),
+      is_visitation_root_(is_visitation_root),
+      is_visitation_leaf_(is_visitation_leaf),
+      transparent_associations_(transparent_associations),
+      opaque_associations_(opaque_associations),
       is_parent_(is_parent),
       is_child_(is_child),
       is_leaf_(is_leaf),
@@ -218,12 +224,6 @@ object::object(
       root_parents_(root_parents),
       parents_(parents),
       leaves_(leaves),
-      transparent_associations_(transparent_associations),
-      opaque_associations_(opaque_associations),
-      base_visitor_(base_visitor),
-      derived_visitor_(derived_visitor),
-      is_visitation_root_(is_visitation_root),
-      is_visitation_leaf_(is_visitation_leaf),
       type_parameters_(type_parameters),
       object_type_(object_type),
       modeled_concepts_(modeled_concepts),
@@ -265,6 +265,12 @@ void object::to_stream(std::ostream& s) const {
       << "\"inherited_attributes\": " << inherited_attributes_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
+      << "\"base_visitor\": " << base_visitor_ << ", "
+      << "\"derived_visitor\": " << derived_visitor_ << ", "
+      << "\"is_visitation_root\": " << is_visitation_root_ << ", "
+      << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
+      << "\"transparent_associations\": " << transparent_associations_ << ", "
+      << "\"opaque_associations\": " << opaque_associations_ << ", "
       << "\"is_parent\": " << is_parent_ << ", "
       << "\"is_child\": " << is_child_ << ", "
       << "\"is_leaf\": " << is_leaf_ << ", "
@@ -274,12 +280,6 @@ void object::to_stream(std::ostream& s) const {
       << "\"root_parents\": " << root_parents_ << ", "
       << "\"parents\": " << parents_ << ", "
       << "\"leaves\": " << leaves_ << ", "
-      << "\"transparent_associations\": " << transparent_associations_ << ", "
-      << "\"opaque_associations\": " << opaque_associations_ << ", "
-      << "\"base_visitor\": " << base_visitor_ << ", "
-      << "\"derived_visitor\": " << derived_visitor_ << ", "
-      << "\"is_visitation_root\": " << is_visitation_root_ << ", "
-      << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
       << "\"type_parameters\": " << type_parameters_ << ", "
       << "\"object_type\": " << object_type_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
@@ -299,6 +299,12 @@ void object::swap(object& other) noexcept {
     swap(inherited_attributes_, other.inherited_attributes_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
+    swap(base_visitor_, other.base_visitor_);
+    swap(derived_visitor_, other.derived_visitor_);
+    swap(is_visitation_root_, other.is_visitation_root_);
+    swap(is_visitation_leaf_, other.is_visitation_leaf_);
+    swap(transparent_associations_, other.transparent_associations_);
+    swap(opaque_associations_, other.opaque_associations_);
     swap(is_parent_, other.is_parent_);
     swap(is_child_, other.is_child_);
     swap(is_leaf_, other.is_leaf_);
@@ -308,12 +314,6 @@ void object::swap(object& other) noexcept {
     swap(root_parents_, other.root_parents_);
     swap(parents_, other.parents_);
     swap(leaves_, other.leaves_);
-    swap(transparent_associations_, other.transparent_associations_);
-    swap(opaque_associations_, other.opaque_associations_);
-    swap(base_visitor_, other.base_visitor_);
-    swap(derived_visitor_, other.derived_visitor_);
-    swap(is_visitation_root_, other.is_visitation_root_);
-    swap(is_visitation_leaf_, other.is_visitation_leaf_);
     swap(type_parameters_, other.type_parameters_);
     swap(object_type_, other.object_type_);
     swap(modeled_concepts_, other.modeled_concepts_);
@@ -336,6 +336,12 @@ bool object::operator==(const object& rhs) const {
         inherited_attributes_ == rhs.inherited_attributes_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
+        base_visitor_ == rhs.base_visitor_ &&
+        derived_visitor_ == rhs.derived_visitor_ &&
+        is_visitation_root_ == rhs.is_visitation_root_ &&
+        is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
+        transparent_associations_ == rhs.transparent_associations_ &&
+        opaque_associations_ == rhs.opaque_associations_ &&
         is_parent_ == rhs.is_parent_ &&
         is_child_ == rhs.is_child_ &&
         is_leaf_ == rhs.is_leaf_ &&
@@ -345,12 +351,6 @@ bool object::operator==(const object& rhs) const {
         root_parents_ == rhs.root_parents_ &&
         parents_ == rhs.parents_ &&
         leaves_ == rhs.leaves_ &&
-        transparent_associations_ == rhs.transparent_associations_ &&
-        opaque_associations_ == rhs.opaque_associations_ &&
-        base_visitor_ == rhs.base_visitor_ &&
-        derived_visitor_ == rhs.derived_visitor_ &&
-        is_visitation_root_ == rhs.is_visitation_root_ &&
-        is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
         type_parameters_ == rhs.type_parameters_ &&
         object_type_ == rhs.object_type_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
@@ -428,6 +428,86 @@ bool object::is_fluent() const {
 
 void object::is_fluent(const bool v) {
     is_fluent_ = v;
+}
+
+const boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() const {
+    return base_visitor_;
+}
+
+boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() {
+    return base_visitor_;
+}
+
+void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
+    base_visitor_ = v;
+}
+
+void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
+    base_visitor_ = std::move(v);
+}
+
+const boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() const {
+    return derived_visitor_;
+}
+
+boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() {
+    return derived_visitor_;
+}
+
+void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
+    derived_visitor_ = v;
+}
+
+void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
+    derived_visitor_ = std::move(v);
+}
+
+bool object::is_visitation_root() const {
+    return is_visitation_root_;
+}
+
+void object::is_visitation_root(const bool v) {
+    is_visitation_root_ = v;
+}
+
+bool object::is_visitation_leaf() const {
+    return is_visitation_leaf_;
+}
+
+void object::is_visitation_leaf(const bool v) {
+    is_visitation_leaf_ = v;
+}
+
+const std::list<dogen::yarn::meta_model::name>& object::transparent_associations() const {
+    return transparent_associations_;
+}
+
+std::list<dogen::yarn::meta_model::name>& object::transparent_associations() {
+    return transparent_associations_;
+}
+
+void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>& v) {
+    transparent_associations_ = v;
+}
+
+void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
+    transparent_associations_ = std::move(v);
+}
+
+const std::list<dogen::yarn::meta_model::name>& object::opaque_associations() const {
+    return opaque_associations_;
+}
+
+std::list<dogen::yarn::meta_model::name>& object::opaque_associations() {
+    return opaque_associations_;
+}
+
+void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>& v) {
+    opaque_associations_ = v;
+}
+
+void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
+    opaque_associations_ = std::move(v);
 }
 
 bool object::is_parent() const {
@@ -524,86 +604,6 @@ void object::leaves(const std::list<dogen::yarn::meta_model::name>& v) {
 
 void object::leaves(const std::list<dogen::yarn::meta_model::name>&& v) {
     leaves_ = std::move(v);
-}
-
-const std::list<dogen::yarn::meta_model::name>& object::transparent_associations() const {
-    return transparent_associations_;
-}
-
-std::list<dogen::yarn::meta_model::name>& object::transparent_associations() {
-    return transparent_associations_;
-}
-
-void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>& v) {
-    transparent_associations_ = v;
-}
-
-void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
-    transparent_associations_ = std::move(v);
-}
-
-const std::list<dogen::yarn::meta_model::name>& object::opaque_associations() const {
-    return opaque_associations_;
-}
-
-std::list<dogen::yarn::meta_model::name>& object::opaque_associations() {
-    return opaque_associations_;
-}
-
-void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>& v) {
-    opaque_associations_ = v;
-}
-
-void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
-    opaque_associations_ = std::move(v);
-}
-
-const boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() const {
-    return base_visitor_;
-}
-
-boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() {
-    return base_visitor_;
-}
-
-void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
-    base_visitor_ = v;
-}
-
-void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
-    base_visitor_ = std::move(v);
-}
-
-const boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() const {
-    return derived_visitor_;
-}
-
-boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() {
-    return derived_visitor_;
-}
-
-void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
-    derived_visitor_ = v;
-}
-
-void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
-    derived_visitor_ = std::move(v);
-}
-
-bool object::is_visitation_root() const {
-    return is_visitation_root_;
-}
-
-void object::is_visitation_root(const bool v) {
-    is_visitation_root_ = v;
-}
-
-bool object::is_visitation_leaf() const {
-    return is_visitation_leaf_;
-}
-
-void object::is_visitation_leaf(const bool v) {
-    is_visitation_leaf_ = v;
 }
 
 const dogen::yarn::meta_model::type_parameters& object::type_parameters() const {

@@ -39,9 +39,9 @@ namespace cpp {
 namespace fabric {
 
 cmakelists::cmakelists(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -55,9 +55,9 @@ cmakelists::cmakelists(
     const std::string& implementation_file_extension,
     const dogen::quilt::cpp::fabric::odb_targets& odb_targets)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

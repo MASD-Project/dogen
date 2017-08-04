@@ -65,9 +65,9 @@ public:
 
 public:
     object(
+        const dogen::yarn::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
@@ -80,6 +80,12 @@ public:
         const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& inherited_attributes,
         const bool is_immutable,
         const bool is_fluent,
+        const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
+        const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
+        const bool is_visitation_root,
+        const bool is_visitation_leaf,
+        const std::list<dogen::yarn::meta_model::name>& transparent_associations,
+        const std::list<dogen::yarn::meta_model::name>& opaque_associations,
         const bool is_parent,
         const bool is_child,
         const bool is_leaf,
@@ -89,12 +95,6 @@ public:
         const std::list<dogen::yarn::meta_model::name>& root_parents,
         const std::list<dogen::yarn::meta_model::name>& parents,
         const std::list<dogen::yarn::meta_model::name>& leaves,
-        const std::list<dogen::yarn::meta_model::name>& transparent_associations,
-        const std::list<dogen::yarn::meta_model::name>& opaque_associations,
-        const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
-        const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
-        const bool is_visitation_root,
-        const bool is_visitation_leaf,
         const dogen::yarn::meta_model::type_parameters& type_parameters,
         const dogen::yarn::meta_model::object_types object_type,
         const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
@@ -180,6 +180,55 @@ public:
     /**@}*/
 
     /**
+     * @brief Base class of the visitor that visits the current element, if any.
+     */
+    /**@{*/
+    const boost::optional<dogen::yarn::meta_model::name>& base_visitor() const;
+    boost::optional<dogen::yarn::meta_model::name>& base_visitor();
+    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
+    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Derived class of the visitor that visits the current element, if any.
+     */
+    /**@{*/
+    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor() const;
+    boost::optional<dogen::yarn::meta_model::name>& derived_visitor();
+    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
+    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
+    /**@}*/
+
+    bool is_visitation_root() const;
+    void is_visitation_root(const bool v);
+
+    bool is_visitation_leaf() const;
+    void is_visitation_leaf(const bool v);
+
+    /**
+     * @brief Elements that are involved in aggregation or composition relationships.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::meta_model::name>& transparent_associations() const;
+    std::list<dogen::yarn::meta_model::name>& transparent_associations();
+    void transparent_associations(const std::list<dogen::yarn::meta_model::name>& v);
+    void transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v);
+    /**@}*/
+
+    /**
+     * @brief Elements that are involved in aggregation or composition relationships via
+     * indirection.
+     *
+     * This is used to break cycles where required.
+     */
+    /**@{*/
+    const std::list<dogen::yarn::meta_model::name>& opaque_associations() const;
+    std::list<dogen::yarn::meta_model::name>& opaque_associations();
+    void opaque_associations(const std::list<dogen::yarn::meta_model::name>& v);
+    void opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v);
+    /**@}*/
+
+    /**
      * @brief True if this element is the parent of one or more elements, false otherwise.
      */
     /**@{*/
@@ -257,55 +306,6 @@ public:
     void leaves(const std::list<dogen::yarn::meta_model::name>&& v);
     /**@}*/
 
-    /**
-     * @brief Elements that are involved in aggregation or composition relationships.
-     */
-    /**@{*/
-    const std::list<dogen::yarn::meta_model::name>& transparent_associations() const;
-    std::list<dogen::yarn::meta_model::name>& transparent_associations();
-    void transparent_associations(const std::list<dogen::yarn::meta_model::name>& v);
-    void transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Elements that are involved in aggregation or composition relationships via
-     * indirection.
-     *
-     * This is used to break cycles where required.
-     */
-    /**@{*/
-    const std::list<dogen::yarn::meta_model::name>& opaque_associations() const;
-    std::list<dogen::yarn::meta_model::name>& opaque_associations();
-    void opaque_associations(const std::list<dogen::yarn::meta_model::name>& v);
-    void opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Base class of the visitor that visits the current element, if any.
-     */
-    /**@{*/
-    const boost::optional<dogen::yarn::meta_model::name>& base_visitor() const;
-    boost::optional<dogen::yarn::meta_model::name>& base_visitor();
-    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
-    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
-    /**@}*/
-
-    /**
-     * @brief Derived class of the visitor that visits the current element, if any.
-     */
-    /**@{*/
-    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor() const;
-    boost::optional<dogen::yarn::meta_model::name>& derived_visitor();
-    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
-    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
-    /**@}*/
-
-    bool is_visitation_root() const;
-    void is_visitation_root(const bool v);
-
-    bool is_visitation_leaf() const;
-    void is_visitation_leaf(const bool v);
-
     const dogen::yarn::meta_model::type_parameters& type_parameters() const;
     dogen::yarn::meta_model::type_parameters& type_parameters();
     void type_parameters(const dogen::yarn::meta_model::type_parameters& v);
@@ -379,6 +379,12 @@ private:
     std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> > inherited_attributes_;
     bool is_immutable_;
     bool is_fluent_;
+    boost::optional<dogen::yarn::meta_model::name> base_visitor_;
+    boost::optional<dogen::yarn::meta_model::name> derived_visitor_;
+    bool is_visitation_root_;
+    bool is_visitation_leaf_;
+    std::list<dogen::yarn::meta_model::name> transparent_associations_;
+    std::list<dogen::yarn::meta_model::name> opaque_associations_;
     bool is_parent_;
     bool is_child_;
     bool is_leaf_;
@@ -388,12 +394,6 @@ private:
     std::list<dogen::yarn::meta_model::name> root_parents_;
     std::list<dogen::yarn::meta_model::name> parents_;
     std::list<dogen::yarn::meta_model::name> leaves_;
-    std::list<dogen::yarn::meta_model::name> transparent_associations_;
-    std::list<dogen::yarn::meta_model::name> opaque_associations_;
-    boost::optional<dogen::yarn::meta_model::name> base_visitor_;
-    boost::optional<dogen::yarn::meta_model::name> derived_visitor_;
-    bool is_visitation_root_;
-    bool is_visitation_leaf_;
     dogen::yarn::meta_model::type_parameters type_parameters_;
     dogen::yarn::meta_model::object_types object_type_;
     std::list<dogen::yarn::meta_model::name> modeled_concepts_;

@@ -50,9 +50,9 @@ enumeration::enumeration()
       add_invalid_enumerator_(static_cast<bool>(0)) { }
 
 enumeration::enumeration(
+    const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
-    const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::origin_types origin_type,
     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
     const bool in_global_module,
@@ -66,9 +66,9 @@ enumeration::enumeration(
     const bool use_implementation_defined_enumerator_values,
     const bool add_invalid_enumerator)
     : dogen::yarn::meta_model::element(
+      name,
       documentation,
       annotation,
-      name,
       origin_type,
       contained_by,
       in_global_module,

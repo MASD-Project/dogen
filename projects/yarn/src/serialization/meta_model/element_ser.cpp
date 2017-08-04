@@ -55,9 +55,9 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::meta_model::element& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("documentation", v.documentation_);
     ar << make_nvp("annotation", v.annotation_);
-    ar << make_nvp("name", v.name_);
     ar << make_nvp("origin_type", v.origin_type_);
     ar << make_nvp("contained_by", v.contained_by_);
     ar << make_nvp("in_global_module", v.in_global_module_);
@@ -71,9 +71,9 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::meta_model::element& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("documentation", v.documentation_);
     ar >> make_nvp("annotation", v.annotation_);
-    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("origin_type", v.origin_type_);
     ar >> make_nvp("contained_by", v.contained_by_);
     ar >> make_nvp("in_global_module", v.in_global_module_);

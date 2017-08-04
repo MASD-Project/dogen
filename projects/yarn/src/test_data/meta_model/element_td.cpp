@@ -35,6 +35,11 @@
 
 namespace {
 
+dogen::yarn::meta_model::name
+create_dogen_yarn_meta_model_name(const unsigned int position) {
+    return dogen::yarn::meta_model::name_generator::create(position);
+}
+
 std::string create_std_string(const unsigned int position) {
     std::ostringstream s;
     s << "a_string_" << position;
@@ -44,11 +49,6 @@ std::string create_std_string(const unsigned int position) {
 dogen::annotations::annotation
 create_dogen_annotations_annotation(const unsigned int position) {
     return dogen::annotations::annotation_generator::create(position);
-}
-
-dogen::yarn::meta_model::name
-create_dogen_yarn_meta_model_name(const unsigned int position) {
-    return dogen::yarn::meta_model::name_generator::create(position);
 }
 
 dogen::yarn::meta_model::origin_types
@@ -88,9 +88,9 @@ namespace meta_model {
 
 void element_generator::
 populate(const unsigned int position, result_type& v) {
-    v.documentation(create_std_string(position + 0));
-    v.annotation(create_dogen_annotations_annotation(position + 1));
-    v.name(create_dogen_yarn_meta_model_name(position + 2));
+    v.name(create_dogen_yarn_meta_model_name(position + 0));
+    v.documentation(create_std_string(position + 1));
+    v.annotation(create_dogen_annotations_annotation(position + 2));
     v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 3));
     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
     v.in_global_module(create_bool(position + 5));

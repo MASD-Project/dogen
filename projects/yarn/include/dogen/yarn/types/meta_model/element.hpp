@@ -62,9 +62,9 @@ public:
 
 public:
     element(
+        const dogen::yarn::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
-        const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::origin_types origin_type,
         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
         const bool in_global_module,
@@ -91,6 +91,16 @@ public:
 
 public:
     /**
+     * @brief Fully qualified name.
+     */
+    /**@{*/
+    const dogen::yarn::meta_model::name& name() const;
+    dogen::yarn::meta_model::name& name();
+    void name(const dogen::yarn::meta_model::name& v);
+    void name(const dogen::yarn::meta_model::name&& v);
+    /**@}*/
+
+    /**
      * @brief Code comments.
      *
      * These are expected to follow the grammar of the comment processing tools
@@ -112,16 +122,6 @@ public:
     dogen::annotations::annotation& annotation();
     void annotation(const dogen::annotations::annotation& v);
     void annotation(const dogen::annotations::annotation&& v);
-    /**@}*/
-
-    /**
-     * @brief Fully qualified name.
-     */
-    /**@{*/
-    const dogen::yarn::meta_model::name& name() const;
-    dogen::yarn::meta_model::name& name();
-    void name(const dogen::yarn::meta_model::name& v);
-    void name(const dogen::yarn::meta_model::name&& v);
     /**@}*/
 
     /**
@@ -187,9 +187,9 @@ protected:
     void swap(element& other) noexcept;
 
 private:
+    dogen::yarn::meta_model::name name_;
     std::string documentation_;
     dogen::annotations::annotation annotation_;
-    dogen::yarn::meta_model::name name_;
     dogen::yarn::meta_model::origin_types origin_type_;
     boost::optional<dogen::yarn::meta_model::name> contained_by_;
     bool in_global_module_;
