@@ -18,24 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_REPOSITORY_IO_HPP
-#define DOGEN_YARN_DIA_IO_REPOSITORY_IO_HPP
+#ifndef DOGEN_YARN_DIA_SERIALIZATION_CONTEXT_FWD_SER_HPP
+#define DOGEN_YARN_DIA_SERIALIZATION_CONTEXT_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn.dia/types/repository.hpp"
+#include "dogen/yarn.dia/types/context_fwd.hpp"
 
-namespace dogen {
-namespace yarn {
-namespace dia {
+namespace boost {
+namespace serialization {
 
-std::ostream&
-operator<<(std::ostream& s,
-     const dogen::yarn::dia::repository& v);
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::dia::context& v, unsigned int version);
 
-} } }
+template<class Archive>
+void load(Archive& ar, dogen::yarn::dia::context& v, unsigned int version);
+
+} }
 
 #endif

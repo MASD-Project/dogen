@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_SERIALIZATION_REPOSITORY_SER_HPP
-#define DOGEN_YARN_DIA_SERIALIZATION_REPOSITORY_SER_HPP
+#ifndef DOGEN_YARN_DIA_SERIALIZATION_CONTEXT_SER_HPP
+#define DOGEN_YARN_DIA_SERIALIZATION_CONTEXT_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <boost/serialization/split_free.hpp>
-#include "dogen/yarn.dia/types/repository.hpp"
+#include "dogen/yarn.dia/types/context.hpp"
 
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::dia::repository)
+BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::dia::context)
 namespace boost {
 namespace serialization {
 
 template<typename Archive>
-void save(Archive& ar, const dogen::yarn::dia::repository& v, unsigned int version);
+void save(Archive& ar, const dogen::yarn::dia::context& v, unsigned int version);
 
 template<typename Archive>
-void load(Archive& ar, dogen::yarn::dia::repository& v, unsigned int version);
+void load(Archive& ar, dogen::yarn::dia::context& v, unsigned int version);
 
 } }
 

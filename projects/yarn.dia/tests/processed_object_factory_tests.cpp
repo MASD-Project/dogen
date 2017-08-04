@@ -26,7 +26,6 @@
 #include "dogen/dia/io/object_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_object_factory.hpp"
-#include "dogen/yarn.dia/io/repository_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/dia/test/mock_object_factory.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"

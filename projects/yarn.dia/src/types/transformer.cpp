@@ -28,9 +28,8 @@
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
-#include "dogen/yarn.dia/io/repository_io.hpp"
+#include "dogen/yarn.dia/io/context_io.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
-#include "dogen/yarn.dia/types/repository_selector.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 
 namespace {
@@ -42,6 +41,8 @@ const std::string enumerator_with_type("Enumerators cannot have a type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string multiple_inheritance(
     "Child has more than one parent, but multiple inheritance not supported:");
+const std::string package_not_mapped(
+    "Dia package ID is not mapped to yarn module: ");
 
 }
 
@@ -49,8 +50,9 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-transformer::transformer(const repository& rp) : repository_(rp) {
-    BOOST_LOG_SEV(lg, debug) << "Initial repository: " << repository_;
+transformer::transformer(const context& ctx, const meta_model::name& mn)
+    : model_name_(mn), context_(ctx) {
+    BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
 
 void transformer::validate_dia_object_name(const std::string& n) const {
@@ -63,7 +65,7 @@ void transformer::validate_dia_object_name(const std::string& n) const {
 meta_model::name transformer::to_name(const std::string& n) const {
     validate_dia_object_name(n);
     helpers::name_factory f;
-    return f.build_element_in_model(repository_.model().name(), n);
+    return f.build_element_in_model(model_name_, n);
 }
 
 meta_model::name transformer::
@@ -89,9 +91,9 @@ transformer::to_enumerator(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
     if (!a.type().empty()) {
-        BOOST_LOG_SEV(lg, error) << enumerator_with_type << a.type();
-        BOOST_THROW_EXCEPTION(transformation_error(
-                enumerator_with_type + a.type()));
+        const auto t(a.type());
+        BOOST_LOG_SEV(lg, error) << enumerator_with_type << t;
+        BOOST_THROW_EXCEPTION(transformation_error(enumerator_with_type + t));
     }
 
     meta_model::enumerator r;
@@ -108,11 +110,16 @@ update_element(const processed_object& po, meta_model::element& e) const {
     bool is_in_package(!package_id.empty());
     if (is_in_package) {
         /*
-         * Create the element name taking into account the
-         * packages the element is contained in.
+         * Create the element name taking into account the packages
+         * the element is contained in.
          */
-        const_repository_selector crs(repository_);
-        const auto& module(crs.module_for_id(package_id));
+        const auto i(context_.dia_id_to_module().find(package_id));
+        if (i == context_.dia_id_to_module().end()) {
+            BOOST_LOG_SEV(lg, error) << package_not_mapped << package_id;
+            BOOST_THROW_EXCEPTION(
+                transformation_error(package_not_mapped + package_id));
+        }
+        const auto& module(*i->second);
         e.name(to_name(po.name(), module.name()));
     } else {
         /*
@@ -141,21 +148,13 @@ transformer::to_object(const processed_object& po) const {
     for (const auto& p : po.attributes())
         r->local_attributes().push_back(to_attribute(p));
 
-    /*
-     * If we have any parents, setup generalisation properties.
-     */
-    const auto id(r->name().id());
-    const_repository_selector crs(repository_);
-    const auto parent_names(crs.parent_names_for_id(po.id()));
-    if (!parent_names.empty()) {
-        for (const auto& pn : parent_names) {
-            r->parents().push_back(pn);
-            BOOST_LOG_SEV(lg, debug) << "Added parent. Child: " << id
-                                     << " parent: " << pn.id();
-        }
-    } else
-        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << id;
-
+    const auto i(context_.child_dia_id_to_parent_names().find(po.id()));
+    if (i == context_.child_dia_id_to_parent_names().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << r->name().id();
+    else {
+        r->is_child(true);
+        r->parents(i->second);
+    }
     return r;
 }
 
@@ -214,18 +213,13 @@ transformer::to_concept(const processed_object& po) const {
     for (const auto& attr : po.attributes())
         r->local_attributes().push_back(to_attribute(attr));
 
-    const_repository_selector crs(repository_);
-    const auto parent_names(crs.parent_names_for_id(po.id()));
-    r->is_child(!parent_names.empty());
-
-    if (parent_names.empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Object has no parent: " << r->name().id();
-        return r;
+    const auto i(context_.child_dia_id_to_parent_names().find(po.id()));
+    if (i == context_.child_dia_id_to_parent_names().end() || i->second.empty())
+        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << r->name().id();
+    else {
+        r->is_child(true);
+        r->refines(i->second);
     }
-
-    for (const auto parent_name : parent_names)
-        r->refines().push_back(parent_name);
-
     return r;
 }
 

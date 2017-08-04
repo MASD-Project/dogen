@@ -20,9 +20,9 @@
  */
 #include <ostream>
 #include <boost/algorithm/string.hpp>
-#include "dogen/yarn.dia/io/repository_io.hpp"
+#include "dogen/yarn.dia/io/context_io.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/io/meta_model/module_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
     boost::replace_all(s, "\r\n", "<new_line>");
@@ -32,15 +32,17 @@ inline std::string tidy_up_string(std::string s) {
     return s;
 }
 
-namespace std {
+namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
+    s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
+      << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
+
+    if (v)
+        s << "\"data\": " << *v;
+    else
+        s << "\"data\": ""\"<null>\"";
+    s << " }";
     return s;
 }
 
@@ -48,7 +50,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::string>& v
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -66,7 +68,21 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::yarn::meta_model::name>& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
+    s << "[ ";
+    for (auto i(v.begin()); i != v.end(); ++i) {
+        if (i != v.begin()) s << ", ";
+        s << *i;
+    }
+    s << "] ";
+    return s;
+}
+
+}
+
+namespace std {
+
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -86,12 +102,11 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const repository& v) {
+std::ostream& operator<<(std::ostream& s, const context& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::dia::repository\"" << ", "
-      << "\"child_id_to_parent_ids\": " << v.child_id_to_parent_ids() << ", "
-      << "\"id_to_name\": " << v.id_to_name() << ", "
-      << "\"model\": " << v.model()
+      << "\"__type__\": " << "\"dogen::yarn::dia::context\"" << ", "
+      << "\"dia_id_to_module\": " << v.dia_id_to_module() << ", "
+      << "\"child_dia_id_to_parent_names\": " << v.child_dia_id_to_parent_names()
       << " }";
     return(s);
 }

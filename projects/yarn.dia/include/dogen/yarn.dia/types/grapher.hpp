@@ -53,10 +53,6 @@ private:
     typedef std::unordered_map<std::string, vertex_descriptor_type>
     id_to_vertex_type;
 
-    typedef std::unordered_map<std::string,
-                               std::list<std::string>
-                               > child_id_to_parent_ids_type;
-
 public:
     grapher();
 
@@ -154,11 +150,12 @@ public:
     const graph_type& graph() const;
 
     /**
-     * @brief Returns the child to parent relationships.
+     * @brief Returns the parent to child relationships.
      *
      * @pre The graph must have already been generated.
      */
-    const child_id_to_parent_ids_type& child_id_to_parent_ids() const;
+    const std::unordered_map<std::string, std::list<std::string>>&
+    parent_id_to_child_ids() const;
 
 private:
     bool generated_;
@@ -166,7 +163,8 @@ private:
     id_to_vertex_type id_to_vertex_;
     id_to_vertex_type orphanage_;
     vertex_descriptor_type root_vertex_;
-    child_id_to_parent_ids_type child_id_to_parent_ids_;
+    std::unordered_map<std::string, std::list<std::string>>
+    parent_id_to_child_ids_;
     std::unordered_set<std::string> connected_ids_;
 };
 

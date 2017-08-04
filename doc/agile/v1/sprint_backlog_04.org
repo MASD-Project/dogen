@@ -14,17 +14,18 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-04 Fri 14:31]
+#+CAPTION: Clock summary at [2017-08-04 Fri 17:14]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:10* |      |      | 100.0 |
+| *Total time*                                                                | *9:38* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:10   |      |      | 100.0 |
-| Active                                                                      |        | 7:10 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   8.1 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:13 |   3.0 |
-| COMPLETED Use shared pointers in all models                                 |        |      | 6:22 |  88.8 |
+| Stories                                                                     | 9:38   |      |      | 100.0 |
+| Active                                                                      |        | 9:38 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:35 |   6.1 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:13 |   2.2 |
+| COMPLETED Use shared pointers in all models                                 |        |      | 6:22 |  66.1 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |        |      | 2:28 |  25.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -91,6 +92,26 @@ Updates to sprint and product backlog.
 We need to start using unique pointers in exogenous model, and shared
 pointers in intermediate model. We should transfer the ownership as we
 go along, making the transformers/adapters mutable.
+
+*** COMPLETED Update repository in yarn.dia to use pointers           :story:
+    CLOSED: [2017-08-04 Fri 17:14]
+    CLOCK: [2017-08-04 Fri 14:45]--[2017-08-04 Fri 17:13] =>  2:28
+
+At present we are using a three-way map from dia object (child) to dia
+object (parent) and then from parent to name and then from name to
+element. Once the models have pointers we can simply map dia object
+directly to parent (and module).
+
+- dia id to module name.
+- dia id to parent names
+- model name
+
+Tasks:
+
+- move model out of repository, into builder.
+- rename repository to context.
+- create two maps for modules and parent names in context, delete existing maps.
+- delete selector.
 
 *** Rename =meta_type= in JSON                                        :story:
 
@@ -190,13 +211,6 @@ Steps:
 - convert scribble group into annotation group.
 - process element annotation.
 - process attribute annotations, if stateful.
-
-*** Update repository in yarn.dia to use pointers                     :story:
-
-At present we are using a three-way map from dia object (child) to dia
-object (parent) and then from parent to name and then from name to
-element. Once the models have pointers we can simply map dia object
-directly to parent (and module).
 
 *** Enable kernel directories trait is on quilt                       :story:
 

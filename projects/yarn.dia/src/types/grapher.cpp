@@ -165,18 +165,7 @@ void grapher::process_connections(const processed_object& o) {
     BOOST_LOG_SEV(lg, debug) << "Created edge between '" << child_id
                              << "' and: '" << parent_id << "'";
 
-    auto i(child_id_to_parent_ids_.find(child_id));
-    if (i == child_id_to_parent_ids_.end()) {
-        std::list<std::string> l = { parent_id };
-        child_id_to_parent_ids_.insert(std::make_pair(child_id, l));
-        BOOST_LOG_SEV(lg, debug) << "First parent for Child: " << child_id;
-
-    } else {
-        i->second.push_back(parent_id);
-        BOOST_LOG_SEV(lg, debug) << "Child has more than one parent: "
-                                 << child_id;
-    }
-
+    parent_id_to_child_ids_[parent_id].push_back(child_id);
     if (connected_ids_.find(child_id) == connected_ids_.end()) {
         orphanage_.insert(std::make_pair(child_id, child_vertex));
         BOOST_LOG_SEV(lg, debug) << "Vertex for object joined orphanage: "
@@ -209,10 +198,10 @@ const graph_type& grapher::graph() const {
     return graph_;
 }
 
-const grapher::child_id_to_parent_ids_type& grapher::
-child_id_to_parent_ids() const {
+const std::unordered_map<std::string, std::list<std::string>>&
+grapher::parent_id_to_child_ids() const {
     require_generated();
-    return child_id_to_parent_ids_;
+    return parent_id_to_child_ids_;
 }
 
 void grapher::generate() {

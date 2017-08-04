@@ -32,7 +32,7 @@
 #include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn.dia/types/repository.hpp"
+#include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 
@@ -50,18 +50,29 @@ class builder {
 public:
     builder(const std::string& model_name, const std::string& external_modules,
         const std::unordered_map<std::string, std::list<std::string>>&
-        child_id_to_parent_ids);
+        parent_id_to_child_ids);
+
+private:
+    /**
+     * @brief Returns the module associated with a name.
+     *
+     * @pre module must exist in repository.
+     */
+    meta_model::module& module_for_name(const meta_model::name& n);
 
 private:
     boost::shared_ptr<meta_model::module>
     create_module_for_model(const meta_model::name& n) const;
 
-    meta_model::intermediate_model setup_model(const std::string& model_name,
-        const std::string& external_modules) const;
+    void setup_model(const std::string& model_name,
+        const std::string& external_modules);
 
     void update_scribble_group(const meta_model::name& n,
         const processed_object& po);
 
+    void update_parentage(const std::string& dia_id, const meta_model::name& n);
+    void update_module(const std::string& dia_id,
+        boost::shared_ptr<meta_model::module> m);
     void update_documentation(const processed_object& po);
 
 public:
@@ -69,7 +80,10 @@ public:
     meta_model::intermediate_model build();
 
 private:
-    repository repository_;
+    const std::unordered_map<std::string, std::list<std::string>>&
+    parent_id_to_child_ids_;
+    meta_model::intermediate_model model_;
+    context context_;
 };
 
 } } }

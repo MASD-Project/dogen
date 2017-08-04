@@ -81,7 +81,7 @@ workflow::generate_model(const std::list<processed_object>& pos,
      * Go through the dependency graph and build a yarn model from
      * it.
      */
-    builder b(model_name, external_modules, g.child_id_to_parent_ids());
+    builder b(model_name, external_modules, g.parent_id_to_child_ids());
     visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     return b.build();

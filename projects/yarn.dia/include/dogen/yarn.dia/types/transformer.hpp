@@ -40,7 +40,7 @@
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
-#include "dogen/yarn.dia/types/repository.hpp"
+#include "dogen/yarn.dia/types/context.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -60,10 +60,10 @@ public:
     /**
      * @brief Initialises the transformer.
      *
-     * @pre model in repository must be populated with all the types
-     * required by the current step of transformation.
+     * @pre context pre-prepopulated with all the names and IDs
+     * required for the transformations requested.
      */
-    explicit transformer(const repository& rp);
+    transformer(const context& rp, const meta_model::name& mn);
 
 private:
     /**
@@ -176,7 +176,8 @@ public:
     to_concept(const processed_object& o) const;
 
 private:
-    const repository& repository_;
+    const meta_model::name model_name_;
+    const context& context_;
 };
 
 } } }

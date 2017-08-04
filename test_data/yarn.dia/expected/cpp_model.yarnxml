@@ -7839,7 +7839,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -9058,7 +9058,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -9519,7 +9519,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -10153,7 +10153,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -10440,7 +10440,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -10647,7 +10647,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -12491,7 +12491,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -13032,7 +13032,7 @@ this is a long comment
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -15070,7 +15070,7 @@ a second line
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -16119,7 +16119,7 @@ a second line
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -17341,7 +17341,7 @@ a second line
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -17721,7 +17721,7 @@ a second line
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -18688,7 +18688,7 @@ a second line
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -21431,7 +21431,7 @@ third line with &quot;quote&quot;
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -24722,7 +24722,7 @@ modeled by the base.
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -25353,7 +25353,7 @@ modeled by the base.
 					<is_immutable>0</is_immutable>
 					<is_fluent>0</is_fluent>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
