@@ -5469,6 +5469,13 @@ as a way of generating random data for test systems.
 
 See also [[http://www.json-generator.com/][JSON generator]].
 
+*** Use coroutines in test data generators                            :story:
+
+We should look at these articles for ideas on how to create generators
+that use coroutines.
+
+- [[https://kirit.com/How%2520C%252B%252B%2520coroutines%2520work/Generating%2520Iterators][Generating Iterators]]
+
 *** Forward declaration is not always correct for services            :story:
 
 In cases where we used a service as a way of declaring a stand alone
@@ -6809,6 +6816,11 @@ enumeration groups. Out of the box we have:
 
 Users could then add implementation specific properties to create
 other groups if needed.
+
+Links:
+
+- [[https://github.com/nadult/fwk_enum%0A][fwk_enum]]: Improved C++14 enum class with iteration and conversion to
+  strings
 
 *** Add support for user supplied test data sets                      :story:
 
