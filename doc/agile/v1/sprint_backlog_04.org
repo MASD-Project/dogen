@@ -14,19 +14,20 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-08 Tue 06:53]
+#+CAPTION: Clock summary at [2017-08-08 Tue 09:05]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:56* |       |      | 100.0 |
+| *Total time*                                                                | *15:06* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:56   |       |      | 100.0 |
-| Active                                                                      |         | 13:56 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   4.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   3.0 |
-| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  45.7 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  20.3 |
-| STARTED Create an exogenous model                                           |         |       | 3:44 |  26.8 |
+| Stories                                                                     | 15:06   |       |      | 100.0 |
+| Active                                                                      |         | 15:06 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   3.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   2.8 |
+| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  42.2 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  18.8 |
+| STARTED Create an exogenous model                                           |         |       | 3:44 |  24.7 |
+| STARTED Remove support for upsilon                                          |         |       | 1:10 |   7.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -192,7 +193,8 @@ Steps:
 - process element annotation.
 - process attribute annotations, if stateful.
 
-*** Remove support for upsilon                                        :story:
+*** STARTED Remove support for upsilon                                :story:
+    CLOCK: [2017-08-08 Tue 06:54]--[2017-08-08 Tue 08:04] =>  1:10
 
 It seems we will no longer be using upsilon, so we should remove it as
 its adding to the maintenance costs. If required in the future we can
@@ -200,6 +202,12 @@ always resurrect it.
 
 This will also hopefully free up some time in the build machine,
 solving the amount of red builds we get due to time outs.
+
+*** Model naming                                                      :story:
+
+- exogenous model: exomodel; all the models obtained externally.
+- intermediate model: endogenous model, endomodel; all models used internally.
+- model: final model.
 
 *** Rename yarn object types in yarn.dia                              :story:
 

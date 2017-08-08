@@ -30,7 +30,6 @@
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/utility/test_data/yarn_json.hpp"
-#include "dogen/utility/test_data/yarn_upsilon.hpp"
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
 #include "dogen/knit/types/workflow_error.hpp"
@@ -50,11 +49,9 @@
 #define ENABLE_DIA_TESTS
 #define ENABLE_JSON_TESTS
 #define ENABLE_CSHARP_TESTS
-#define ENABLE_UPSILON_TESTS
 
 using dogen::utility::test_data::yarn_dia;
 using dogen::utility::test_data::yarn_json;
-using dogen::utility::test_data::yarn_upsilon;
 
 namespace  {
 
@@ -66,7 +63,6 @@ const std::string test_suite("workflow_tests");
 const std::string expected("/expected");
 const std::string actual_dia_dir("/actual.dia");
 const std::string actual_json_dir("/actual.json");
-const std::string actual_upsilon_dir("/actual.upsilon");
 
 const std::string domain_facet_must_be_enabled("Domain facet must be enabled");
 const std::string dia_invalid_name("Dia object name is empty");
@@ -398,11 +394,5 @@ BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_json) {
 #endif // ENABLE_CSHARP_TESTS
 
 #endif // ENABLE_JSON_TESTS
-
-BOOST_AUTO_TEST_CASE(upsilon_model_generates_expected_code) {
-    SETUP_TEST_LOG("upsilon_model_generates_expected_code");
-    const auto upsilon(yarn_upsilon::input_zeta_model_configuration_xml());
-    BOOST_CHECK(test_knit_workflow("Zeta", upsilon, actual_upsilon_dir));
-}
 
 BOOST_AUTO_TEST_SUITE_END()

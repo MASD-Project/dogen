@@ -153,24 +153,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
         ${common_arguments})
     add_dependencies(knit_all knit_${target})
 
-    set(target upsilon)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Upsilon model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.dia
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
-    set(target yarn.upsilon)
-    add_custom_target(knit_${target}
-        COMMENT "Knitting Yarn Upsilon model" VERBATIM
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMAND ${DOGEN_KNITTER_EXECUTABLE}
-        --target ${models_dir}/${target}.dia
-        ${common_arguments})
-    add_dependencies(knit_all knit_${target})
-
     if(WITH_BENCHMARKS)
         set(target yarn)
         add_custom_target(benchmark_knit_${target}
@@ -309,26 +291,6 @@ if (DOGEN_KNITTER_EXECUTABLE)
         set(target wale)
         add_custom_target(benchmark_knit_${target}
             COMMENT "Benchmarking knitting Wale model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target upsilon)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Upsilon model" VERBATIM
-            WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-            COMMAND ${benchmark_command} ${benchmark_repeats}
-            ${benchmark_directory}/${benchmark_prefix}${target}.csv
-            ${DOGEN_KNITTER_EXECUTABLE} --target ${models_dir}/${target}.dia
-            ${common_arguments})
-        add_dependencies(benchmark_all benchmark_knit_${target})
-
-        set(target yarn.upsilon)
-        add_custom_target(benchmark_knit_${target}
-            COMMENT "Benchmarking knitting Yarn Upsilon model" VERBATIM
             WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
             COMMAND ${benchmark_command} ${benchmark_repeats}
             ${benchmark_directory}/${benchmark_prefix}${target}.csv
