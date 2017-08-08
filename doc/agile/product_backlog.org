@@ -812,30 +812,6 @@ const for the size on the class too:
 So that we'd just recall the size parameter as a string in the name
 tree rather than just expect it to be an integer.
 
-*** Map upsilon primitives to intrinsics                              :story:
-
-Upsilon allows users to create "strong typedefs" around primitve
-types. We need to unpack these into their intrinsic counterparts and
-them map the intrinsics to native types.
-
-Slight mistake: we mapped the primitive types themselves but in
-reality what needs to be mapped are the fields making references to
-the primitive types. We should just filter out all primitives.
-
-Additional wrinkle: what the end users want is to unpack "real
-primitives" into intrinsics, but "other" primitives should be mapped
-to objects. This can be achieved by hard-coding =Plaform= primitives
-into the mapping layer. However, some non-platform primitives may also
-be candidates too. We need to create a list of these to see how
-widespread the problem is.
-
-Another alternative is to apply hard-coded regexes:
-
-- if the name matches any of the intrinsic names
-
-Finally, the last option may be to have yet another mapping data file
-format that lists the primitives to unbox.
-
 *** Immutable types cannot be owned by mutable types                  :story:
 
 When we try to create a mutable class that has a property of an
@@ -1078,32 +1054,6 @@ We seem to be generating an "Assistant" type on the =primitve= test model:
 
 Figure out what this type is and why its appearing on this test model.
 
-*** Add mapping support between upsilon and LAM                       :story:
-
-At present we map upsilon directly to a language-specific model
-(C++/C#), which gets code-generated. However, from a tailor
-perspective, this is not ideal; we would end up with N different
-models. Ideally, we should get a LAM representation of the JSON model
-which could then be used to code-generate multiple languages.
-
-This is probably not too hard, given the mapper knows how to convert
-between upsilon and LAM. We just need to finish LAM support and then
-try mapping them and see what breaks. Tailor would have to somehow
-tell yarn to set the output language to LAM.
-
-Notes:
-
-- if output is more than one language, change it to LAM. Otherwise
-  leave it as language specific.
-- we need to inject via meta-data the annotations for the output
-  languages.
-- We only need to perform mapping if input language is upsilon. For
-  all other languages we can leave it as is. But for upsilon, tailor
-  needs to do a full intermediate model workflow.
-- unparsed type needs to be recomputed as part of mapping.
-- we are not adding the LAM mapping to the upsilon id container.
-- we need to add support for "default mappings"
-
 *** Make the Zeta model compilable                                    :story:
 
 We need to work through the list of issues with the Zeta model and get
@@ -1120,33 +1070,33 @@ Tasks:
 
 LAM type map:
 
-| Type                            | C++                              | C#                                                | Upsilon              |
-|---------------------------------+----------------------------------+---------------------------------------------------+----------------------|
-| lam::byte                       | unsigned char                    | uchar                                             |                      |
-| lam::character                  | char                             | char                                              |                      |
-| lam::integer8                   | std::int8_t                      | sbyte                                             |                      |
-| lam::integer16                  | std::int16_t                     | System.Int16                                      |                      |
-| lam::integer32                  | std::int32_t                     | System.Int32                                      |                      |
-| lam::integer64                  | std::int64_t                     | System.Int64                                      | Integer64            |
-| lam::integer                    | int                              | int                                               |                      |
-| lam::single_floating            | float                            | float                                             |                      |
-| lam::double_floating            | double                           | double                                            | Double               |
-| lam::boolean                    | bool                             | bool                                              | Boolean              |
-| lam::string                     | std::string                      | string                                            | String, Binary, Guid |
-| lam::date                       | boost::gregorian::date           | System.DateTime                                   | Date                 |
-| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                                   | UtcTime              |
-| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                                   | UtcDateTime          |
-| lam::decimal                    | std::decimal                     | System.Decimal                                    | Decimal              |
-| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>                | Collection           |
-| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>               |                      |
-| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V>       |                      |
-| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.SortedDictionary<K, V> |                      |
-| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>             |                      |
-| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>           |                      |
-| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>               |                      |
-| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>               |                      |
-| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>          |                      |
-| lam::pointer<T>                 | boost::shared_ptr<T>             | <erase>                                           |                      |
+| Type                            | C++                              | C#                                                |
+|---------------------------------+----------------------------------+---------------------------------------------------+
+| lam::byte                       | unsigned char                    | uchar                                             |
+| lam::character                  | char                             | char                                              |
+| lam::integer8                   | std::int8_t                      | sbyte                                             |
+| lam::integer16                  | std::int16_t                     | System.Int16                                      |
+| lam::integer32                  | std::int32_t                     | System.Int32                                      |
+| lam::integer64                  | std::int64_t                     | System.Int64                                      |
+| lam::integer                    | int                              | int                                               |
+| lam::single_floating            | float                            | float                                             |
+| lam::double_floating            | double                           | double                                            |
+| lam::boolean                    | bool                             | bool                                              |
+| lam::string                     | std::string                      | string                                            |
+| lam::date                       | boost::gregorian::date           | System.DateTime                                   |
+| lam::time                       | boost::posix_time::time_duration | System.TimeSpan                                   |
+| lam::date_time                  | boost::posix_time::ptime         | System.DateTime                                   |
+| lam::decimal                    | std::decimal                     | System.Decimal                                    |
+| lam::dynamic_array<T>           | std::vector<T>                   | System.Collections.Generic.List<T>                |
+| lam::static_array<T>            | std::array<T>                    | System.Collections.Generic.Array<T>               |
+| lam::unordered_dictionary<K, V> | std::unordered_map<K, V>         | System.Collections.Generic.Dictionary<K, V>       |
+| lam::ordered_dictionary<K, V>   | std::map<K, V>                   | System.Collections.Generic.SortedDictionary<K, V> |
+| lam::unordered_set<K>           | std::unordered_set<K>            | System.Collections.Generic.HashSet<T>             |
+| lam::ordered_set<K>             | std::set<K>                      | System.Collections.Generic.SortedSet<T>           |
+| lam::queue<T>                   | std::queue<T>                    | System.Collections.Generic.Queue<T>               |
+| lam::stack<T>                   | std::stack<T>                    | System.Collections.Generic.Stack<T>               |
+| lam::linked_list<T>             | std::list<T>                     | System.Collections.Generic.LinkedList<T>          |
+| lam::pointer<T>                 | boost::shared_ptr<T>             | <erase>                                           |
 
 *Previous Understanding*
 
@@ -1218,11 +1168,6 @@ point":
 - floating
 - fixed
 - exact
-
-*** Enumerations coming out of Upsilon are empty                      :story:
-
-We don't seem to be translating the enumerators into yarn
-enumerators.
 
 *** Add support for nullable built-ins and primitives                 :story:
 
@@ -1337,15 +1282,8 @@ or:
 
 : --meta-data a=b
 
-This is the case with Upsilon.
-
 These are in effect model-module level tagged values. We should be
 able to supply them in a file or as command-line parameters.
-
-*** Do not generate upsilon proxy models                              :story:
-
-At present we are marking all types in an upsilon config as target. In
-practice, only one of the models is the target.
 
 *** Load system models based on language prefix                       :story:
 
@@ -1358,7 +1296,6 @@ prefix:
 : csharp.builtins.json
 : csharp.system.collections.generic.json
 : csharp.system.collections.json
-: upsilon.builtins.json
 
 Coincidentally, this could make life easier when it comes to filtering
 models by language: we could pattern match the file name depending on

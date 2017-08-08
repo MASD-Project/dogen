@@ -14,19 +14,19 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-06 Sun 22:34]
+#+CAPTION: Clock summary at [2017-08-08 Tue 06:53]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:44* |       |      | 100.0 |
+| *Total time*                                                                | *13:56* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:44   |       |      | 100.0 |
-| Active                                                                      |         | 13:44 |      | 100.0 |
+| Stories                                                                     | 13:56   |       |      | 100.0 |
+| Active                                                                      |         | 13:56 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   4.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:13 |   1.6 |
-| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  46.4 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  20.6 |
-| STARTED Create an exogenous model                                           |         |       | 3:44 |  27.2 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   3.0 |
+| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  45.7 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  20.3 |
+| STARTED Create an exogenous model                                           |         |       | 3:44 |  26.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -77,6 +77,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-08-08 Tue 06:41]--[2017-08-08 Tue 06:53] =>  0:12
     CLOCK: [2017-08-01 Tue 20:43]--[2017-08-01 Tue 20:49] =>  0:06
     CLOCK: [2017-08-01 Tue 20:35]--[2017-08-01 Tue 20:42] =>  0:07
 
@@ -727,3 +728,74 @@ only makes sense for objects which have pointers. We need some
 meta-data knob to control the generation of the clone method.
 
 ** Deprecated
+*** CANCELLED Map upsilon primitives to intrinsics                    :story:
+    CLOSED: [2017-08-08 Tue 06:51]
+
+*Rationale*: Upsilon is to be removed.
+
+Upsilon allows users to create "strong typedefs" around primitve
+types. We need to unpack these into their intrinsic counterparts and
+them map the intrinsics to native types.
+
+Slight mistake: we mapped the primitive types themselves but in
+reality what needs to be mapped are the fields making references to
+the primitive types. We should just filter out all primitives.
+
+Additional wrinkle: what the end users want is to unpack "real
+primitives" into intrinsics, but "other" primitives should be mapped
+to objects. This can be achieved by hard-coding =Plaform= primitives
+into the mapping layer. However, some non-platform primitives may also
+be candidates too. We need to create a list of these to see how
+widespread the problem is.
+
+Another alternative is to apply hard-coded regexes:
+
+- if the name matches any of the intrinsic names
+
+Finally, the last option may be to have yet another mapping data file
+format that lists the primitives to unbox.
+
+*** CANCELLED Add mapping support between upsilon and LAM             :story:
+    CLOSED: [2017-08-08 Tue 06:51]
+
+*Rationale*: Upsilon is to be removed.
+
+At present we map upsilon directly to a language-specific model
+(C++/C#), which gets code-generated. However, from a tailor
+perspective, this is not ideal; we would end up with N different
+models. Ideally, we should get a LAM representation of the JSON model
+which could then be used to code-generate multiple languages.
+
+This is probably not too hard, given the mapper knows how to convert
+between upsilon and LAM. We just need to finish LAM support and then
+try mapping them and see what breaks. Tailor would have to somehow
+tell yarn to set the output language to LAM.
+
+Notes:
+
+- if output is more than one language, change it to LAM. Otherwise
+  leave it as language specific.
+- we need to inject via meta-data the annotations for the output
+  languages.
+- We only need to perform mapping if input language is upsilon. For
+  all other languages we can leave it as is. But for upsilon, tailor
+  needs to do a full intermediate model workflow.
+- unparsed type needs to be recomputed as part of mapping.
+- we are not adding the LAM mapping to the upsilon id container.
+- we need to add support for "default mappings"
+
+*** CANCELLED Enumerations coming out of Upsilon are empty            :story:
+    CLOSED: [2017-08-08 Tue 06:51]
+
+*Rationale*: Upsilon is to be removed.
+
+We don't seem to be translating the enumerators into yarn
+enumerators.
+
+*** CANCELLED Do not generate upsilon proxy models                    :story:
+    CLOSED: [2017-08-08 Tue 06:51]
+
+*Rationale*: Upsilon is to be removed.
+
+At present we are marking all types in an upsilon config as target. In
+practice, only one of the models is the target.
