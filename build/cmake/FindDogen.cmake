@@ -29,7 +29,7 @@ if (DOGEN_KNITTER_EXECUTABLE)
         RESULT_VARIABLE DOGEN_RESULT
         OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-      message(STATUS "Found Dogen Knitter: ${DOGEN_KNITTER_VERSION}...")
+      message(STATUS "Found Dogen Knitter ${DOGEN_KNITTER_VERSION} (${DOGEN_KNITTER_EXECUTABLE})")
 else()
     message(STATUS "Dogen Knitter not found.")
 endif()
@@ -46,7 +46,7 @@ if (DOGEN_STITCHER_EXECUTABLE)
         RESULT_VARIABLE DOGEN_RESULT
         OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-      message(STATUS "Found Dogen Stitcher: ${DOGEN_STITCHER_VERSION}...")
+      message(STATUS "Found Dogen Stitcher ${DOGEN_STITCHER_VERSION} (${DOGEN_STITCHER_EXECUTABLE})")
 else()
     message(STATUS "Dogen Stitcher not found.")
 endif()
@@ -63,7 +63,7 @@ if (DOGEN_TAILOR_EXECUTABLE)
         RESULT_VARIABLE DOGEN_RESULT
         OUTPUT_STRIP_TRAILING_WHITESPACE)
 
-      message(STATUS "Found Dogen Tailor: ${DOGEN_TAILOR_VERSION}...")
+      message(STATUS "Found Dogen Tailor ${DOGEN_TAILOR_VERSION} (${DOGEN_TAILOR_EXECUTABLE})")
 else()
     message(STATUS "Dogen Tailor not found.")
 endif()
