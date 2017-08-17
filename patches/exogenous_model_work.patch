@@ -145,44 +145,33 @@ index 765a993b2..00d8cff56 100644
    },
    "elements": [
      {
-diff --git a/data/library/upsilon.builtins.json b/data/library/upsilon.builtins.json
-deleted file mode 100644
-index 51eea5338..000000000
---- a/data/library/upsilon.builtins.json
-+++ /dev/null
-@@ -1,32 +0,0 @@
--{
--  "model_name": "upsilon.builtins",
--  "documentation": "Built-in types for the upsilon models.",
--  "annotation": {
--    "yarn.input_language": "upsilon",
--    "yarn.is_proxy_model": true
--  },
--  "elements": [
--    {
--      "name": {
--        "simple": "ModelValue"
--      },
--      "meta_type": "object",
--      "in_global_module": true
--    },
--    {
--      "name": {
--        "simple": "Collection"
--      },
--      "meta_type": "object",
--      "in_global_module": true
--    },
--    {
--      "name": {
--        "simple": "int"
--      },
--      "meta_type": "builtin",
--      "is_default_enumeration_type": true,
--      "in_global_module": true
--    }
--  ]
--}
+diff --git a/projects/input_models/CMakeLists.txt b/projects/input_models/CMakeLists.txt
+index e9806151c..e47d88ebc 100644
+--- a/projects/input_models/CMakeLists.txt
++++ b/projects/input_models/CMakeLists.txt
+@@ -20,14 +20,18 @@ set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
+ set(models_dir "${projects_dir}/input_models")
+ 
+ if (DOGEN_KNITTER_EXECUTABLE)
+-    set(ignore_regexes --ignore-files-matching-regex .*/CMakeLists.txt)
+-    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/test/.*)
+-    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/tests/.*)
+-    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/poly-stitch.el)
++    set(ig_flg "--ignore-files-matching-regex")
++    set(ignore_regexes ${ig_flg} .*/CMakeLists.txt)
++    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/test/.*)
++    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/tests/.*)
++    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
+ 
+     set(other_options --log-level ${DOGEN_LOG_LEVEL})
+     set(other_options ${other_options} --delete-extra-files)
+ 
++    # uncomment the next line if you require compatibility support
++    set(other_options ${other_options} --compatibility-mode)
++
+     set(common_arguments --output-directory ${projects_dir}/)
+     set(common_arguments ${common_arguments} ${other_options})
+     set(common_arguments ${common_arguments} ${ignore_regexes})
 diff --git a/projects/input_models/annotations.dia b/projects/input_models/annotations.dia
 index 5b872a151..54cb8aeb0 100644
 --- a/projects/input_models/annotations.dia
@@ -282,10 +271,10 @@ index f2ab3b300..58a14248f 100644
  #DOGEN quilt.cpp.enabled=true
  #DOGEN quilt.cpp.hash.enabled=false
 diff --git a/projects/input_models/options.dia b/projects/input_models/options.dia
-index e5139aebf..0248bd354 100644
+index d231f1da9..2cc0d0519 100644
 --- a/projects/input_models/options.dia
 +++ b/projects/input_models/options.dia
-@@ -807,7 +807,8 @@ options for all the different Dogen applications, such as knitter,
+@@ -833,7 +833,8 @@ options for all the different Dogen applications, such as knitter,
  etc.
  
  #DOGEN yarn.dia.comment=true
@@ -3826,7 +3815,7 @@ index c966e673d..d0948b5ca 100644
  
      return r;
 diff --git a/projects/yarn.dia/src/types/transformer.cpp b/projects/yarn.dia/src/types/transformer.cpp
-index 1f2542f4d..259334f5f 100644
+index 1f2542f4d..135713fa6 100644
 --- a/projects/yarn.dia/src/types/transformer.cpp
 +++ b/projects/yarn.dia/src/types/transformer.cpp
 @@ -24,6 +24,7 @@
@@ -3876,7 +3865,7 @@ index 1f2542f4d..259334f5f 100644
          e.name(to_name(po.name(), module.name()));
      } else {
          /*
-@@ -137,59 +139,103 @@ update_element(const processed_object& po, meta_model::element& e) const {
+@@ -137,59 +139,100 @@ update_element(const processed_object& po, meta_model::element& e) const {
          e.stereotypes().push_back(us);
  }
  
@@ -3914,8 +3903,7 @@ index 1f2542f4d..259334f5f 100644
 +    return r;
 +}
 +
-+std::pair<annotations::scribble_group,
-+          boost::shared_ptr<meta_model::object>>
++std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>
  transformer::to_object(const processed_object& po) const {
      BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
                               << po.id();
@@ -3947,8 +3935,7 @@ index 1f2542f4d..259334f5f 100644
  }
  
 -boost::shared_ptr<meta_model::exception>
-+std::pair<annotations::scribble_group,
-+          boost::shared_ptr<meta_model::exception>>
++std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::exception>>
  transformer::to_exception(const processed_object& po) const {
      BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
                               << po.id();
@@ -3983,8 +3970,7 @@ index 1f2542f4d..259334f5f 100644
  }
  
 -boost::shared_ptr<meta_model::primitive>
-+std::pair<annotations::scribble_group,
-+          boost::shared_ptr<meta_model::primitive>>
++std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::primitive>>
  transformer::to_primitive(const processed_object& po) const {
      BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
                               << po.id();
@@ -4000,13 +3986,12 @@ index 1f2542f4d..259334f5f 100644
  }
  
  boost::shared_ptr<meta_model::module>
-@@ -202,25 +248,28 @@ transformer::to_module(const processed_object& po) const {
+@@ -202,25 +245,27 @@ transformer::to_module(const processed_object& po) const {
      return r;
  }
  
 -boost::shared_ptr<meta_model::concept>
-+std::pair<annotations::scribble_group,
-+          boost::shared_ptr<meta_model::concept>>
++std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::concept>>
  transformer::to_concept(const processed_object& po) const {
      BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
                               << po.id();
@@ -5500,126 +5485,25 @@ index 6c000e3db..ec93d0c2a 100644
  #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
  #include "dogen/yarn/types/transforms/external_transform_interface.hpp"
  #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/builtin.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/builtin.hpp
-index da4e19750..c87180e02 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/builtin.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/builtin.hpp
-@@ -49,9 +49,9 @@ public:
- 
- public:
-     builtin(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/concept.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/concept.hpp
-index e060c3e43..211c5603a 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/concept.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/concept.hpp
-@@ -64,9 +64,9 @@ public:
- 
- public:
-     concept(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/element.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/element.hpp
-index 2bcb29458..2aea58b85 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/element.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/element.hpp
-@@ -62,9 +62,9 @@ public:
- 
- public:
-     element(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-@@ -91,16 +91,6 @@ public:
- 
- public:
+diff --git a/projects/yarn/include/dogen/yarn/types/helpers/resolver.hpp b/projects/yarn/include/dogen/yarn/types/helpers/resolver.hpp
+index f832fe395..9c847f097 100644
+--- a/projects/yarn/include/dogen/yarn/types/helpers/resolver.hpp
++++ b/projects/yarn/include/dogen/yarn/types/helpers/resolver.hpp
+@@ -165,9 +165,14 @@ public:
      /**
--     * @brief Fully qualified name.
--     */
--    /**@{*/
--    const dogen::yarn::meta_model::name& name() const;
--    dogen::yarn::meta_model::name& name();
--    void name(const dogen::yarn::meta_model::name& v);
--    void name(const dogen::yarn::meta_model::name&& v);
--    /**@}*/
--
--    /**
-      * @brief Code comments.
-      *
-      * These are expected to follow the grammar of the comment processing tools
-@@ -125,6 +115,16 @@ public:
-     /**@}*/
- 
-     /**
-+     * @brief Fully qualified name.
-+     */
-+    /**@{*/
-+    const dogen::yarn::meta_model::name& name() const;
-+    dogen::yarn::meta_model::name& name();
-+    void name(const dogen::yarn::meta_model::name& v);
-+    void name(const dogen::yarn::meta_model::name&& v);
-+    /**@}*/
-+
-+    /**
-      * @brief How was this model element originated.
+      * @brief Resolves the name as a concept name.
       */
-     /**@{*/
-@@ -187,9 +187,9 @@ protected:
-     void swap(element& other) noexcept;
- 
- private:
--    dogen::yarn::meta_model::name name_;
-     std::string documentation_;
-     dogen::annotations::annotation annotation_;
-+    dogen::yarn::meta_model::name name_;
-     dogen::yarn::meta_model::origin_types origin_type_;
-     boost::optional<dogen::yarn::meta_model::name> contained_by_;
-     bool in_global_module_;
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/enumeration.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/enumeration.hpp
-index fb4e73456..c6b06910f 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/enumeration.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/enumeration.hpp
-@@ -53,9 +53,9 @@ public:
++    /**@{*/
+     static boost::optional<meta_model::name>
+     try_resolve_concept_name(meta_model::name ctx,
+         const std::string& s, const meta_model::intermediate_model& im);
++    static boost::optional<meta_model::name>
++    try_resolve_concept_name(const meta_model::name& ctx,
++        const meta_model::name& n, const meta_model::intermediate_model& im);
++    /**@}*/
  
  public:
-     enumeration(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/exception.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/exception.hpp
-index bbcf43f4a..006ba692b 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/exception.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/exception.hpp
-@@ -47,9 +47,9 @@ public:
- 
- public:
-     exception(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
+     /**
 diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/exogenous_model.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/exogenous_model.hpp
 index 4bee16595..fd4cf4aef 100644
 --- a/projects/yarn/include/dogen/yarn/types/meta_model/exogenous_model.hpp
@@ -5694,230 +5578,6 @@ index 4bee16595..fd4cf4aef 100644
  };
  
  } } }
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/module.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/module.hpp
-index c60cc22b1..81fe137a2 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/module.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/module.hpp
-@@ -57,9 +57,9 @@ public:
- 
- public:
-     module(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/object.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/object.hpp
-index 15eaeb8e7..b1db31ea4 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/object.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/object.hpp
-@@ -65,9 +65,9 @@ public:
- 
- public:
-     object(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-@@ -80,12 +80,6 @@ public:
-         const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& inherited_attributes,
-         const bool is_immutable,
-         const bool is_fluent,
--        const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
--        const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
--        const bool is_visitation_root,
--        const bool is_visitation_leaf,
--        const std::list<dogen::yarn::meta_model::name>& transparent_associations,
--        const std::list<dogen::yarn::meta_model::name>& opaque_associations,
-         const bool is_parent,
-         const bool is_child,
-         const bool is_leaf,
-@@ -95,6 +89,12 @@ public:
-         const std::list<dogen::yarn::meta_model::name>& root_parents,
-         const std::list<dogen::yarn::meta_model::name>& parents,
-         const std::list<dogen::yarn::meta_model::name>& leaves,
-+        const std::list<dogen::yarn::meta_model::name>& transparent_associations,
-+        const std::list<dogen::yarn::meta_model::name>& opaque_associations,
-+        const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
-+        const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
-+        const bool is_visitation_root,
-+        const bool is_visitation_leaf,
-         const dogen::yarn::meta_model::type_parameters& type_parameters,
-         const dogen::yarn::meta_model::object_types object_type,
-         const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
-@@ -180,55 +180,6 @@ public:
-     /**@}*/
- 
-     /**
--     * @brief Base class of the visitor that visits the current element, if any.
--     */
--    /**@{*/
--    const boost::optional<dogen::yarn::meta_model::name>& base_visitor() const;
--    boost::optional<dogen::yarn::meta_model::name>& base_visitor();
--    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
--    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
--    /**@}*/
--
--    /**
--     * @brief Derived class of the visitor that visits the current element, if any.
--     */
--    /**@{*/
--    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor() const;
--    boost::optional<dogen::yarn::meta_model::name>& derived_visitor();
--    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
--    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
--    /**@}*/
--
--    bool is_visitation_root() const;
--    void is_visitation_root(const bool v);
--
--    bool is_visitation_leaf() const;
--    void is_visitation_leaf(const bool v);
--
--    /**
--     * @brief Elements that are involved in aggregation or composition relationships.
--     */
--    /**@{*/
--    const std::list<dogen::yarn::meta_model::name>& transparent_associations() const;
--    std::list<dogen::yarn::meta_model::name>& transparent_associations();
--    void transparent_associations(const std::list<dogen::yarn::meta_model::name>& v);
--    void transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v);
--    /**@}*/
--
--    /**
--     * @brief Elements that are involved in aggregation or composition relationships via
--     * indirection.
--     *
--     * This is used to break cycles where required.
--     */
--    /**@{*/
--    const std::list<dogen::yarn::meta_model::name>& opaque_associations() const;
--    std::list<dogen::yarn::meta_model::name>& opaque_associations();
--    void opaque_associations(const std::list<dogen::yarn::meta_model::name>& v);
--    void opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v);
--    /**@}*/
--
--    /**
-      * @brief True if this element is the parent of one or more elements, false otherwise.
-      */
-     /**@{*/
-@@ -306,6 +257,55 @@ public:
-     void leaves(const std::list<dogen::yarn::meta_model::name>&& v);
-     /**@}*/
- 
-+    /**
-+     * @brief Elements that are involved in aggregation or composition relationships.
-+     */
-+    /**@{*/
-+    const std::list<dogen::yarn::meta_model::name>& transparent_associations() const;
-+    std::list<dogen::yarn::meta_model::name>& transparent_associations();
-+    void transparent_associations(const std::list<dogen::yarn::meta_model::name>& v);
-+    void transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v);
-+    /**@}*/
-+
-+    /**
-+     * @brief Elements that are involved in aggregation or composition relationships via
-+     * indirection.
-+     *
-+     * This is used to break cycles where required.
-+     */
-+    /**@{*/
-+    const std::list<dogen::yarn::meta_model::name>& opaque_associations() const;
-+    std::list<dogen::yarn::meta_model::name>& opaque_associations();
-+    void opaque_associations(const std::list<dogen::yarn::meta_model::name>& v);
-+    void opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v);
-+    /**@}*/
-+
-+    /**
-+     * @brief Base class of the visitor that visits the current element, if any.
-+     */
-+    /**@{*/
-+    const boost::optional<dogen::yarn::meta_model::name>& base_visitor() const;
-+    boost::optional<dogen::yarn::meta_model::name>& base_visitor();
-+    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
-+    void base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
-+    /**@}*/
-+
-+    /**
-+     * @brief Derived class of the visitor that visits the current element, if any.
-+     */
-+    /**@{*/
-+    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor() const;
-+    boost::optional<dogen::yarn::meta_model::name>& derived_visitor();
-+    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v);
-+    void derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v);
-+    /**@}*/
-+
-+    bool is_visitation_root() const;
-+    void is_visitation_root(const bool v);
-+
-+    bool is_visitation_leaf() const;
-+    void is_visitation_leaf(const bool v);
-+
-     const dogen::yarn::meta_model::type_parameters& type_parameters() const;
-     dogen::yarn::meta_model::type_parameters& type_parameters();
-     void type_parameters(const dogen::yarn::meta_model::type_parameters& v);
-@@ -379,12 +379,6 @@ private:
-     std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> > inherited_attributes_;
-     bool is_immutable_;
-     bool is_fluent_;
--    boost::optional<dogen::yarn::meta_model::name> base_visitor_;
--    boost::optional<dogen::yarn::meta_model::name> derived_visitor_;
--    bool is_visitation_root_;
--    bool is_visitation_leaf_;
--    std::list<dogen::yarn::meta_model::name> transparent_associations_;
--    std::list<dogen::yarn::meta_model::name> opaque_associations_;
-     bool is_parent_;
-     bool is_child_;
-     bool is_leaf_;
-@@ -394,6 +388,12 @@ private:
-     std::list<dogen::yarn::meta_model::name> root_parents_;
-     std::list<dogen::yarn::meta_model::name> parents_;
-     std::list<dogen::yarn::meta_model::name> leaves_;
-+    std::list<dogen::yarn::meta_model::name> transparent_associations_;
-+    std::list<dogen::yarn::meta_model::name> opaque_associations_;
-+    boost::optional<dogen::yarn::meta_model::name> base_visitor_;
-+    boost::optional<dogen::yarn::meta_model::name> derived_visitor_;
-+    bool is_visitation_root_;
-+    bool is_visitation_leaf_;
-     dogen::yarn::meta_model::type_parameters type_parameters_;
-     dogen::yarn::meta_model::object_types object_type_;
-     std::list<dogen::yarn::meta_model::name> modeled_concepts_;
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/primitive.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/primitive.hpp
-index c1dc242b5..748143239 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/primitive.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/primitive.hpp
-@@ -54,9 +54,9 @@ public:
- 
- public:
-     primitive(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
-diff --git a/projects/yarn/include/dogen/yarn/types/meta_model/visitor.hpp b/projects/yarn/include/dogen/yarn/types/meta_model/visitor.hpp
-index b6ed28c42..dd9bcc93b 100644
---- a/projects/yarn/include/dogen/yarn/types/meta_model/visitor.hpp
-+++ b/projects/yarn/include/dogen/yarn/types/meta_model/visitor.hpp
-@@ -52,9 +52,9 @@ public:
- 
- public:
-     visitor(
--        const dogen::yarn::meta_model::name& name,
-         const std::string& documentation,
-         const dogen::annotations::annotation& annotation,
-+        const dogen::yarn::meta_model::name& name,
-         const dogen::yarn::meta_model::origin_types origin_type,
-         const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-         const bool in_global_module,
 diff --git a/projects/yarn/include/dogen/yarn/types/transforms/annotations_transform.hpp b/projects/yarn/include/dogen/yarn/types/transforms/annotations_transform.hpp
 index f9192909f..873172cdc 100644
 --- a/projects/yarn/include/dogen/yarn/types/transforms/annotations_transform.hpp
@@ -5999,6 +5659,31 @@ index f9192909f..873172cdc 100644
  };
  
  } } }
+diff --git a/projects/yarn/include/dogen/yarn/types/transforms/concepts_transform.hpp b/projects/yarn/include/dogen/yarn/types/transforms/concepts_transform.hpp
+index fbba44657..ae40a9590 100644
+--- a/projects/yarn/include/dogen/yarn/types/transforms/concepts_transform.hpp
++++ b/projects/yarn/include/dogen/yarn/types/transforms/concepts_transform.hpp
+@@ -106,7 +106,8 @@ private:
+     /**
+      * @brief Returns the concept with the given name, or throws.
+      */
+-    static meta_model::concept& find_concept(const meta_model::name& n,
++    static meta_model::concept& resolve_concept(const meta_model::name& owner,
++        const meta_model::name& concept_name,
+         meta_model::intermediate_model& im);
+ 
+     /**
+@@ -131,8 +132,8 @@ private:
+     /**
+      * @brief Expands a concept.
+      */
+-    static void expand_concept(meta_model::concept& c,
+-        meta_model::intermediate_model& im,
++    static void
++    expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
+         std::unordered_set<meta_model::name>& processed_names);
+ 
+     /**
 diff --git a/projects/yarn/include/dogen/yarn/types/transforms/exogenous_model_chain.hpp b/projects/yarn/include/dogen/yarn/types/transforms/exogenous_model_chain.hpp
 index df1b8b2f0..55d8c674d 100644
 --- a/projects/yarn/include/dogen/yarn/types/transforms/exogenous_model_chain.hpp
@@ -6097,7 +5782,7 @@ index 2166637e2..6fc4ab9e1 100644
      static void expand_containing_module(meta_model::intermediate_model& im);
  
 diff --git a/projects/yarn/include/dogen/yarn/types/transforms/naming_transform.hpp b/projects/yarn/include/dogen/yarn/types/transforms/naming_transform.hpp
-index 4e29bf178..c28f17cf9 100644
+index 4e29bf178..b76e67f6f 100644
 --- a/projects/yarn/include/dogen/yarn/types/transforms/naming_transform.hpp
 +++ b/projects/yarn/include/dogen/yarn/types/transforms/naming_transform.hpp
 @@ -32,8 +32,11 @@
@@ -6123,7 +5808,7 @@ index 4e29bf178..c28f17cf9 100644
          const annotations::annotation& a);
  
  private:
-@@ -86,9 +88,6 @@ private:
+@@ -86,12 +88,11 @@ private:
      }
  
  private:
@@ -6132,6 +5817,11 @@ index 4e29bf178..c28f17cf9 100644
 -
      static meta_model::location
      create_location(const naming_configuration& cfg);
+ 
++    static meta_model::name compute_model_name(const meta_model::location& l);
++
+     static void update_names(const meta_model::location& l,
+         meta_model::exogenous_model& em);
  
 diff --git a/projects/yarn/include/dogen/yarn/types/transforms/new_annotations_transform.hpp b/projects/yarn/include/dogen/yarn/types/transforms/new_annotations_transform.hpp
 deleted file mode 100644
@@ -6265,21 +5955,6 @@ index 1a0b44a9e..000000000
 -} } }
 -
 -#endif
-diff --git a/projects/yarn/src/hash/meta_model/element_hash.cpp b/projects/yarn/src/hash/meta_model/element_hash.cpp
-index d4e5730f4..4b354a72c 100644
---- a/projects/yarn/src/hash/meta_model/element_hash.cpp
-+++ b/projects/yarn/src/hash/meta_model/element_hash.cpp
-@@ -59,9 +59,9 @@ namespace meta_model {
- std::size_t element_hasher::hash(const element& v) {
-     std::size_t seed(0);
- 
--    combine(seed, v.name());
-     combine(seed, v.documentation());
-     combine(seed, v.annotation());
-+    combine(seed, v.name());
-     combine(seed, v.origin_type());
-     combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.contained_by()));
-     combine(seed, v.in_global_module());
 diff --git a/projects/yarn/src/hash/meta_model/exogenous_model_hash.cpp b/projects/yarn/src/hash/meta_model/exogenous_model_hash.cpp
 index 46fb4fd48..4b791d04f 100644
 --- a/projects/yarn/src/hash/meta_model/exogenous_model_hash.cpp
@@ -6308,66 +5983,6 @@ index 46fb4fd48..4b791d04f 100644
  
      return seed;
  }
-diff --git a/projects/yarn/src/hash/meta_model/object_hash.cpp b/projects/yarn/src/hash/meta_model/object_hash.cpp
-index f3c2cf763..24d946ff6 100644
---- a/projects/yarn/src/hash/meta_model/object_hash.cpp
-+++ b/projects/yarn/src/hash/meta_model/object_hash.cpp
-@@ -51,6 +51,14 @@ inline std::size_t hash_std_unordered_map_dogen_yarn_meta_model_name_std_list_do
-     return seed;
- }
- 
-+inline std::size_t hash_std_list_dogen_yarn_meta_model_name(const std::list<dogen::yarn::meta_model::name>& v) {
-+    std::size_t seed(0);
-+    for (const auto i : v) {
-+        combine(seed, i);
-+    }
-+    return seed;
-+}
-+
- inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::optional<dogen::yarn::meta_model::name>& v) {
-     std::size_t seed(0);
- 
-@@ -61,14 +69,6 @@ inline std::size_t hash_boost_optional_dogen_yarn_meta_model_name(const boost::o
-     return seed;
- }
- 
--inline std::size_t hash_std_list_dogen_yarn_meta_model_name(const std::list<dogen::yarn::meta_model::name>& v) {
--    std::size_t seed(0);
--    for (const auto i : v) {
--        combine(seed, i);
--    }
--    return seed;
--}
--
- inline std::size_t hash_boost_optional_dogen_yarn_meta_model_orm_object_properties(const boost::optional<dogen::yarn::meta_model::orm_object_properties>& v) {
-     std::size_t seed(0);
- 
-@@ -95,12 +95,6 @@ std::size_t object_hasher::hash(const object& v) {
-     combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_name_std_list_dogen_yarn_meta_model_attribute(v.inherited_attributes()));
-     combine(seed, v.is_immutable());
-     combine(seed, v.is_fluent());
--    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.base_visitor()));
--    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.derived_visitor()));
--    combine(seed, v.is_visitation_root());
--    combine(seed, v.is_visitation_leaf());
--    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.transparent_associations()));
--    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.opaque_associations()));
-     combine(seed, v.is_parent());
-     combine(seed, v.is_child());
-     combine(seed, v.is_leaf());
-@@ -110,6 +104,12 @@ std::size_t object_hasher::hash(const object& v) {
-     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.root_parents()));
-     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.parents()));
-     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.leaves()));
-+    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.transparent_associations()));
-+    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.opaque_associations()));
-+    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.base_visitor()));
-+    combine(seed, hash_boost_optional_dogen_yarn_meta_model_name(v.derived_visitor()));
-+    combine(seed, v.is_visitation_root());
-+    combine(seed, v.is_visitation_leaf());
-     combine(seed, v.type_parameters());
-     combine(seed, v.object_type());
-     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.modeled_concepts()));
 diff --git a/projects/yarn/src/io/meta_model/exogenous_model_io.cpp b/projects/yarn/src/io/meta_model/exogenous_model_io.cpp
 index 166769792..c989820e6 100644
 --- a/projects/yarn/src/io/meta_model/exogenous_model_io.cpp
@@ -6397,32 +6012,6 @@ index 166769792..c989820e6 100644
        << " }";
      return(s);
  }
-diff --git a/projects/yarn/src/serialization/meta_model/element_ser.cpp b/projects/yarn/src/serialization/meta_model/element_ser.cpp
-index e8c70b779..2a98c0c24 100644
---- a/projects/yarn/src/serialization/meta_model/element_ser.cpp
-+++ b/projects/yarn/src/serialization/meta_model/element_ser.cpp
-@@ -55,9 +55,9 @@ template<typename Archive>
- void save(Archive& ar,
-     const dogen::yarn::meta_model::element& v,
-     const unsigned int /*version*/) {
--    ar << make_nvp("name", v.name_);
-     ar << make_nvp("documentation", v.documentation_);
-     ar << make_nvp("annotation", v.annotation_);
-+    ar << make_nvp("name", v.name_);
-     ar << make_nvp("origin_type", v.origin_type_);
-     ar << make_nvp("contained_by", v.contained_by_);
-     ar << make_nvp("in_global_module", v.in_global_module_);
-@@ -71,9 +71,9 @@ template<typename Archive>
- void load(Archive& ar,
-     dogen::yarn::meta_model::element& v,
-     const unsigned int /*version*/) {
--    ar >> make_nvp("name", v.name_);
-     ar >> make_nvp("documentation", v.documentation_);
-     ar >> make_nvp("annotation", v.annotation_);
-+    ar >> make_nvp("name", v.name_);
-     ar >> make_nvp("origin_type", v.origin_type_);
-     ar >> make_nvp("contained_by", v.contained_by_);
-     ar >> make_nvp("in_global_module", v.in_global_module_);
 diff --git a/projects/yarn/src/serialization/meta_model/exogenous_model_ser.cpp b/projects/yarn/src/serialization/meta_model/exogenous_model_ser.cpp
 index dfa1c43a1..8088c6dc1 100644
 --- a/projects/yarn/src/serialization/meta_model/exogenous_model_ser.cpp
@@ -6466,103 +6055,6 @@ index dfa1c43a1..8088c6dc1 100644
  }
  
  } }
-diff --git a/projects/yarn/src/serialization/meta_model/object_ser.cpp b/projects/yarn/src/serialization/meta_model/object_ser.cpp
-index 1fd155ac9..aa7991015 100644
---- a/projects/yarn/src/serialization/meta_model/object_ser.cpp
-+++ b/projects/yarn/src/serialization/meta_model/object_ser.cpp
-@@ -56,12 +56,6 @@ void save(Archive& ar,
-     ar << make_nvp("inherited_attributes", v.inherited_attributes_);
-     ar << make_nvp("is_immutable", v.is_immutable_);
-     ar << make_nvp("is_fluent", v.is_fluent_);
--    ar << make_nvp("base_visitor", v.base_visitor_);
--    ar << make_nvp("derived_visitor", v.derived_visitor_);
--    ar << make_nvp("is_visitation_root", v.is_visitation_root_);
--    ar << make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
--    ar << make_nvp("transparent_associations", v.transparent_associations_);
--    ar << make_nvp("opaque_associations", v.opaque_associations_);
-     ar << make_nvp("is_parent", v.is_parent_);
-     ar << make_nvp("is_child", v.is_child_);
-     ar << make_nvp("is_leaf", v.is_leaf_);
-@@ -71,6 +65,12 @@ void save(Archive& ar,
-     ar << make_nvp("root_parents", v.root_parents_);
-     ar << make_nvp("parents", v.parents_);
-     ar << make_nvp("leaves", v.leaves_);
-+    ar << make_nvp("transparent_associations", v.transparent_associations_);
-+    ar << make_nvp("opaque_associations", v.opaque_associations_);
-+    ar << make_nvp("base_visitor", v.base_visitor_);
-+    ar << make_nvp("derived_visitor", v.derived_visitor_);
-+    ar << make_nvp("is_visitation_root", v.is_visitation_root_);
-+    ar << make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
-     ar << make_nvp("type_parameters", v.type_parameters_);
-     ar << make_nvp("object_type", v.object_type_);
-     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
-@@ -91,12 +91,6 @@ void load(Archive& ar,
-     ar >> make_nvp("inherited_attributes", v.inherited_attributes_);
-     ar >> make_nvp("is_immutable", v.is_immutable_);
-     ar >> make_nvp("is_fluent", v.is_fluent_);
--    ar >> make_nvp("base_visitor", v.base_visitor_);
--    ar >> make_nvp("derived_visitor", v.derived_visitor_);
--    ar >> make_nvp("is_visitation_root", v.is_visitation_root_);
--    ar >> make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
--    ar >> make_nvp("transparent_associations", v.transparent_associations_);
--    ar >> make_nvp("opaque_associations", v.opaque_associations_);
-     ar >> make_nvp("is_parent", v.is_parent_);
-     ar >> make_nvp("is_child", v.is_child_);
-     ar >> make_nvp("is_leaf", v.is_leaf_);
-@@ -106,6 +100,12 @@ void load(Archive& ar,
-     ar >> make_nvp("root_parents", v.root_parents_);
-     ar >> make_nvp("parents", v.parents_);
-     ar >> make_nvp("leaves", v.leaves_);
-+    ar >> make_nvp("transparent_associations", v.transparent_associations_);
-+    ar >> make_nvp("opaque_associations", v.opaque_associations_);
-+    ar >> make_nvp("base_visitor", v.base_visitor_);
-+    ar >> make_nvp("derived_visitor", v.derived_visitor_);
-+    ar >> make_nvp("is_visitation_root", v.is_visitation_root_);
-+    ar >> make_nvp("is_visitation_leaf", v.is_visitation_leaf_);
-     ar >> make_nvp("type_parameters", v.type_parameters_);
-     ar >> make_nvp("object_type", v.object_type_);
-     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
-diff --git a/projects/yarn/src/test_data/meta_model/element_td.cpp b/projects/yarn/src/test_data/meta_model/element_td.cpp
-index 25143d938..fd58340b3 100644
---- a/projects/yarn/src/test_data/meta_model/element_td.cpp
-+++ b/projects/yarn/src/test_data/meta_model/element_td.cpp
-@@ -35,11 +35,6 @@
- 
- namespace {
- 
--dogen::yarn::meta_model::name
--create_dogen_yarn_meta_model_name(const unsigned int position) {
--    return dogen::yarn::meta_model::name_generator::create(position);
--}
--
- std::string create_std_string(const unsigned int position) {
-     std::ostringstream s;
-     s << "a_string_" << position;
-@@ -51,6 +46,11 @@ create_dogen_annotations_annotation(const unsigned int position) {
-     return dogen::annotations::annotation_generator::create(position);
- }
- 
-+dogen::yarn::meta_model::name
-+create_dogen_yarn_meta_model_name(const unsigned int position) {
-+    return dogen::yarn::meta_model::name_generator::create(position);
-+}
-+
- dogen::yarn::meta_model::origin_types
- create_dogen_yarn_meta_model_origin_types(const unsigned int position) {
-     return dogen::yarn::meta_model::origin_types_generator::create(position);
-@@ -88,9 +88,9 @@ namespace meta_model {
- 
- void element_generator::
- populate(const unsigned int position, result_type& v) {
--    v.name(create_dogen_yarn_meta_model_name(position + 0));
--    v.documentation(create_std_string(position + 1));
--    v.annotation(create_dogen_annotations_annotation(position + 2));
-+    v.documentation(create_std_string(position + 0));
-+    v.annotation(create_dogen_annotations_annotation(position + 1));
-+    v.name(create_dogen_yarn_meta_model_name(position + 2));
-     v.origin_type(create_dogen_yarn_meta_model_origin_types(position + 3));
-     v.contained_by(create_boost_optional_dogen_yarn_meta_model_name(position + 4));
-     v.in_global_module(create_bool(position + 5));
 diff --git a/projects/yarn/src/test_data/meta_model/exogenous_model_td.cpp b/projects/yarn/src/test_data/meta_model/exogenous_model_td.cpp
 index c651ae1bb..3a964c85b 100644
 --- a/projects/yarn/src/test_data/meta_model/exogenous_model_td.cpp
@@ -6610,298 +6102,69 @@ index c651ae1bb..3a964c85b 100644
  }
  
  exogenous_model_generator::result_type
-diff --git a/projects/yarn/src/test_data/meta_model/object_td.cpp b/projects/yarn/src/test_data/meta_model/object_td.cpp
-index 3ee1e6b65..bac6810aa 100644
---- a/projects/yarn/src/test_data/meta_model/object_td.cpp
-+++ b/projects/yarn/src/test_data/meta_model/object_td.cpp
-@@ -58,13 +58,6 @@ bool create_bool(const unsigned int position) {
-     return (position % 2) != 0;
- }
+diff --git a/projects/yarn/src/types/helpers/pre_processing_validator.cpp b/projects/yarn/src/types/helpers/pre_processing_validator.cpp
+index 980258109..392ec6a10 100644
+--- a/projects/yarn/src/types/helpers/pre_processing_validator.cpp
++++ b/projects/yarn/src/types/helpers/pre_processing_validator.cpp
+@@ -57,7 +57,7 @@ public:
+         const bool is_proxy_reference);
  
--boost::optional<dogen::yarn::meta_model::name>
--create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
--    boost::optional<dogen::yarn::meta_model::name> r(
--        create_dogen_yarn_meta_model_name(position));
--    return r;
--}
--
- std::list<dogen::yarn::meta_model::name> create_std_list_dogen_yarn_meta_model_name(unsigned int position) {
-     std::list<dogen::yarn::meta_model::name> r;
-     for (unsigned int i(0); i < 4; ++i) {
-@@ -73,6 +66,13 @@ std::list<dogen::yarn::meta_model::name> create_std_list_dogen_yarn_meta_model_n
+ private:
+-    void validate_name(const std::string& id, const bool in_global_namespace,
++    void validate_name(const std::string& id, const bool in_global_module,
+         const meta_model::name& n) const;
+ 
+ public:
+@@ -82,13 +82,16 @@ validator::validator(const meta_model::name& model_name, const bool check_names,
+                                      is_proxy_reference_(is_proxy_reference) {}
+ 
+ void validator::
+-validate_name(const std::string& id, const bool in_global_namespace,
++validate_name(const std::string& id, const bool in_global_module,
+     const meta_model::name& n) const {
+     /*
+-     * Types in global namespace are known to have a mismatch between
++     * Types in global module are known to have a mismatch between
+      * their name and model name, so we need to ignore those.
++     *
++     * FIXME: however we should check that types in global namespace
++     * do not have anything filled in location.
+      */
+-    if (!check_names_ || in_global_namespace)
++    if (!check_names_ || in_global_module)
+         return;
+ 
+     const auto nl(n.location());
+diff --git a/projects/yarn/src/types/helpers/resolver.cpp b/projects/yarn/src/types/helpers/resolver.cpp
+index 38f862dac..fe065c824 100644
+--- a/projects/yarn/src/types/helpers/resolver.cpp
++++ b/projects/yarn/src/types/helpers/resolver.cpp
+@@ -585,8 +585,8 @@ resolve(const meta_model::intermediate_model& im, const indices& idx,
      return r;
  }
  
-+boost::optional<dogen::yarn::meta_model::name>
-+create_boost_optional_dogen_yarn_meta_model_name(unsigned int position) {
-+    boost::optional<dogen::yarn::meta_model::name> r(
-+        create_dogen_yarn_meta_model_name(position));
-+    return r;
-+}
-+
- dogen::yarn::meta_model::type_parameters
- create_dogen_yarn_meta_model_type_parameters(const unsigned int position) {
-     return dogen::yarn::meta_model::type_parameters_generator::create(position);
-@@ -111,21 +111,21 @@ populate(const unsigned int position, result_type& v) {
-     v.inherited_attributes(create_std_unordered_map_dogen_yarn_meta_model_name_std_list_dogen_yarn_meta_model_attribute(position + 2));
-     v.is_immutable(create_bool(position + 3));
-     v.is_fluent(create_bool(position + 4));
--    v.base_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 5));
--    v.derived_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 6));
--    v.is_visitation_root(create_bool(position + 7));
--    v.is_visitation_leaf(create_bool(position + 8));
--    v.transparent_associations(create_std_list_dogen_yarn_meta_model_name(position + 9));
--    v.opaque_associations(create_std_list_dogen_yarn_meta_model_name(position + 10));
--    v.is_parent(create_bool(position + 11));
--    v.is_child(create_bool(position + 12));
--    v.is_leaf(create_bool(position + 13));
--    v.is_final(create_bool(position + 14));
--    v.is_abstract(create_bool(position + 15));
--    v.in_inheritance_relationship(create_bool(position + 16));
--    v.root_parents(create_std_list_dogen_yarn_meta_model_name(position + 17));
--    v.parents(create_std_list_dogen_yarn_meta_model_name(position + 18));
--    v.leaves(create_std_list_dogen_yarn_meta_model_name(position + 19));
-+    v.is_parent(create_bool(position + 5));
-+    v.is_child(create_bool(position + 6));
-+    v.is_leaf(create_bool(position + 7));
-+    v.is_final(create_bool(position + 8));
-+    v.is_abstract(create_bool(position + 9));
-+    v.in_inheritance_relationship(create_bool(position + 10));
-+    v.root_parents(create_std_list_dogen_yarn_meta_model_name(position + 11));
-+    v.parents(create_std_list_dogen_yarn_meta_model_name(position + 12));
-+    v.leaves(create_std_list_dogen_yarn_meta_model_name(position + 13));
-+    v.transparent_associations(create_std_list_dogen_yarn_meta_model_name(position + 14));
-+    v.opaque_associations(create_std_list_dogen_yarn_meta_model_name(position + 15));
-+    v.base_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 16));
-+    v.derived_visitor(create_boost_optional_dogen_yarn_meta_model_name(position + 17));
-+    v.is_visitation_root(create_bool(position + 18));
-+    v.is_visitation_leaf(create_bool(position + 19));
-     v.type_parameters(create_dogen_yarn_meta_model_type_parameters(position + 20));
-     v.object_type(create_dogen_yarn_meta_model_object_types(position + 21));
-     v.modeled_concepts(create_std_list_dogen_yarn_meta_model_name(position + 22));
-diff --git a/projects/yarn/src/types/meta_model/builtin.cpp b/projects/yarn/src/types/meta_model/builtin.cpp
-index ba54d4e0d..389797a28 100644
---- a/projects/yarn/src/types/meta_model/builtin.cpp
-+++ b/projects/yarn/src/types/meta_model/builtin.cpp
-@@ -35,9 +35,9 @@ builtin::builtin()
-       can_be_primitive_underlier_(static_cast<bool>(0)) { }
+-boost::optional<meta_model::name>
+-resolver::try_resolve_concept_name(meta_model::name ctx, const std::string& s,
++boost::optional<meta_model::name> resolver::
++try_resolve_concept_name(meta_model::name ctx, const std::string& s,
+     const meta_model::intermediate_model& im) {
  
- builtin::builtin(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -50,9 +50,9 @@ builtin::builtin(
-     const bool can_be_enumeration_underlier,
-     const bool can_be_primitive_underlier)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
-diff --git a/projects/yarn/src/types/meta_model/concept.cpp b/projects/yarn/src/types/meta_model/concept.cpp
-index ce212422b..f28716511 100644
---- a/projects/yarn/src/types/meta_model/concept.cpp
-+++ b/projects/yarn/src/types/meta_model/concept.cpp
-@@ -82,9 +82,9 @@ concept::concept()
-       is_child_(static_cast<bool>(0)) { }
- 
- concept::concept(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -100,9 +100,9 @@ concept::concept(
-     const std::list<dogen::yarn::meta_model::name>& refines,
-     const bool is_child)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
-diff --git a/projects/yarn/src/types/meta_model/element.cpp b/projects/yarn/src/types/meta_model/element.cpp
-index a50fb6157..3216b50c7 100644
---- a/projects/yarn/src/types/meta_model/element.cpp
-+++ b/projects/yarn/src/types/meta_model/element.cpp
-@@ -74,9 +74,9 @@ element::element()
-       is_element_extension_(static_cast<bool>(0)) { }
- 
- element::element(element&& rhs)
--    : name_(std::move(rhs.name_)),
--      documentation_(std::move(rhs.documentation_)),
-+    : documentation_(std::move(rhs.documentation_)),
-       annotation_(std::move(rhs.annotation_)),
-+      name_(std::move(rhs.name_)),
-       origin_type_(std::move(rhs.origin_type_)),
-       contained_by_(std::move(rhs.contained_by_)),
-       in_global_module_(std::move(rhs.in_global_module_)),
-@@ -86,9 +86,9 @@ element::element(element&& rhs)
-       element_properties_(std::move(rhs.element_properties_)) { }
- 
- element::element(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -96,9 +96,9 @@ element::element(
-     const dogen::yarn::meta_model::name& meta_name,
-     const bool is_element_extension,
-     const dogen::yarn::meta_model::element_properties& element_properties)
--    : name_(name),
--      documentation_(documentation),
-+    : documentation_(documentation),
-       annotation_(annotation),
-+      name_(name),
-       origin_type_(origin_type),
-       contained_by_(contained_by),
-       in_global_module_(in_global_module),
-@@ -116,9 +116,9 @@ void element::to_stream(std::ostream& s) const {
- 
-     s << " { "
-       << "\"__type__\": " << "\"dogen::yarn::meta_model::element\"" << ", "
--      << "\"name\": " << name_ << ", "
-       << "\"documentation\": " << "\"" << tidy_up_string(documentation_) << "\"" << ", "
-       << "\"annotation\": " << annotation_ << ", "
-+      << "\"name\": " << name_ << ", "
-       << "\"origin_type\": " << origin_type_ << ", "
-       << "\"contained_by\": " << contained_by_ << ", "
-       << "\"in_global_module\": " << in_global_module_ << ", "
-@@ -131,9 +131,9 @@ void element::to_stream(std::ostream& s) const {
- 
- void element::swap(element& other) noexcept {
-     using std::swap;
--    swap(name_, other.name_);
-     swap(documentation_, other.documentation_);
-     swap(annotation_, other.annotation_);
-+    swap(name_, other.name_);
-     swap(origin_type_, other.origin_type_);
-     swap(contained_by_, other.contained_by_);
-     swap(in_global_module_, other.in_global_module_);
-@@ -144,9 +144,9 @@ void element::swap(element& other) noexcept {
+     BOOST_LOG_SEV(lg, debug) << "Resolving concept name: " << s;
+@@ -642,6 +642,14 @@ resolver::try_resolve_concept_name(meta_model::name ctx, const std::string& s,
+     return boost::optional<meta_model::name>();
  }
  
- bool element::compare(const element& rhs) const {
--    return name_ == rhs.name_ &&
--        documentation_ == rhs.documentation_ &&
-+    return documentation_ == rhs.documentation_ &&
-         annotation_ == rhs.annotation_ &&
-+        name_ == rhs.name_ &&
-         origin_type_ == rhs.origin_type_ &&
-         contained_by_ == rhs.contained_by_ &&
-         in_global_module_ == rhs.in_global_module_ &&
-@@ -156,22 +156,6 @@ bool element::compare(const element& rhs) const {
-         element_properties_ == rhs.element_properties_;
- }
- 
--const dogen::yarn::meta_model::name& element::name() const {
--    return name_;
--}
--
--dogen::yarn::meta_model::name& element::name() {
--    return name_;
--}
--
--void element::name(const dogen::yarn::meta_model::name& v) {
--    name_ = v;
--}
--
--void element::name(const dogen::yarn::meta_model::name&& v) {
--    name_ = std::move(v);
--}
--
- const std::string& element::documentation() const {
-     return documentation_;
- }
-@@ -204,6 +188,22 @@ void element::annotation(const dogen::annotations::annotation&& v) {
-     annotation_ = std::move(v);
- }
- 
-+const dogen::yarn::meta_model::name& element::name() const {
-+    return name_;
++boost::optional<meta_model::name>
++resolver::try_resolve_concept_name(const meta_model::name& ctx,
++    const meta_model::name& n, const meta_model::intermediate_model& im) {
++    // FIXME: hack for now, just take simple name. Requires a bit more
++    // thinking.
++    return try_resolve_concept_name(ctx, n.simple(), im);
 +}
 +
-+dogen::yarn::meta_model::name& element::name() {
-+    return name_;
-+}
-+
-+void element::name(const dogen::yarn::meta_model::name& v) {
-+    name_ = v;
-+}
-+
-+void element::name(const dogen::yarn::meta_model::name&& v) {
-+    name_ = std::move(v);
-+}
-+
- dogen::yarn::meta_model::origin_types element::origin_type() const {
-     return origin_type_;
- }
-diff --git a/projects/yarn/src/types/meta_model/enumeration.cpp b/projects/yarn/src/types/meta_model/enumeration.cpp
-index 14c5e6c65..310025e51 100644
---- a/projects/yarn/src/types/meta_model/enumeration.cpp
-+++ b/projects/yarn/src/types/meta_model/enumeration.cpp
-@@ -50,9 +50,9 @@ enumeration::enumeration()
-       add_invalid_enumerator_(static_cast<bool>(0)) { }
+ void resolver::resolve(const indices& idx, meta_model::intermediate_model& im) {
+     BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
  
- enumeration::enumeration(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -66,9 +66,9 @@ enumeration::enumeration(
-     const bool use_implementation_defined_enumerator_values,
-     const bool add_invalid_enumerator)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
-diff --git a/projects/yarn/src/types/meta_model/exception.cpp b/projects/yarn/src/types/meta_model/exception.cpp
-index 2cab54944..73fced029 100644
---- a/projects/yarn/src/types/meta_model/exception.cpp
-+++ b/projects/yarn/src/types/meta_model/exception.cpp
-@@ -28,9 +28,9 @@ namespace yarn {
- namespace meta_model {
- 
- exception::exception(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -39,9 +39,9 @@ exception::exception(
-     const bool is_element_extension,
-     const dogen::yarn::meta_model::element_properties& element_properties)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
 diff --git a/projects/yarn/src/types/meta_model/exogenous_model.cpp b/projects/yarn/src/types/meta_model/exogenous_model.cpp
 index 58cea252b..1cf4b4d7f 100644
 --- a/projects/yarn/src/types/meta_model/exogenous_model.cpp
@@ -7004,499 +6267,6 @@ index 58cea252b..1cf4b4d7f 100644
 +}
 +
  } } }
-diff --git a/projects/yarn/src/types/meta_model/module.cpp b/projects/yarn/src/types/meta_model/module.cpp
-index 84edaaf2c..0ed362edc 100644
---- a/projects/yarn/src/types/meta_model/module.cpp
-+++ b/projects/yarn/src/types/meta_model/module.cpp
-@@ -80,9 +80,9 @@ module::module(module&& rhs)
-       orm_properties_(std::move(rhs.orm_properties_)) { }
- 
- module::module(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -95,9 +95,9 @@ module::module(
-     const bool is_global_module,
-     const boost::optional<dogen::yarn::meta_model::orm_module_properties>& orm_properties)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
-diff --git a/projects/yarn/src/types/meta_model/object.cpp b/projects/yarn/src/types/meta_model/object.cpp
-index 7f8e10626..f2b583211 100644
---- a/projects/yarn/src/types/meta_model/object.cpp
-+++ b/projects/yarn/src/types/meta_model/object.cpp
-@@ -61,6 +61,20 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<dogen:
- 
- }
- 
-+namespace std {
-+
-+inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
-+    s << "[ ";
-+    for (auto i(v.begin()); i != v.end(); ++i) {
-+        if (i != v.begin()) s << ", ";
-+        s << *i;
-+    }
-+    s << "] ";
-+    return s;
-+}
-+
-+}
-+
- namespace boost {
- 
- inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::meta_model::name>& v) {
-@@ -76,20 +90,6 @@ inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::ya
- 
- }
- 
--namespace std {
--
--inline std::ostream& operator<<(std::ostream& s, const std::list<dogen::yarn::meta_model::name>& v) {
--    s << "[ ";
--    for (auto i(v.begin()); i != v.end(); ++i) {
--        if (i != v.begin()) s << ", ";
--        s << *i;
--    }
--    s << "] ";
--    return s;
--}
--
--}
--
- namespace boost {
- 
- inline std::ostream& operator<<(std::ostream& s, const boost::optional<dogen::yarn::meta_model::orm_object_properties>& v) {
-@@ -112,14 +112,14 @@ namespace meta_model {
- object::object()
-     : is_immutable_(static_cast<bool>(0)),
-       is_fluent_(static_cast<bool>(0)),
--      is_visitation_root_(static_cast<bool>(0)),
--      is_visitation_leaf_(static_cast<bool>(0)),
-       is_parent_(static_cast<bool>(0)),
-       is_child_(static_cast<bool>(0)),
-       is_leaf_(static_cast<bool>(0)),
-       is_final_(static_cast<bool>(0)),
-       is_abstract_(static_cast<bool>(0)),
-       in_inheritance_relationship_(static_cast<bool>(0)),
-+      is_visitation_root_(static_cast<bool>(0)),
-+      is_visitation_leaf_(static_cast<bool>(0)),
-       object_type_(static_cast<dogen::yarn::meta_model::object_types>(0)),
-       provides_opaqueness_(static_cast<bool>(0)),
-       can_be_primitive_underlier_(static_cast<bool>(0)) { }
-@@ -132,12 +132,6 @@ object::object(object&& rhs)
-       inherited_attributes_(std::move(rhs.inherited_attributes_)),
-       is_immutable_(std::move(rhs.is_immutable_)),
-       is_fluent_(std::move(rhs.is_fluent_)),
--      base_visitor_(std::move(rhs.base_visitor_)),
--      derived_visitor_(std::move(rhs.derived_visitor_)),
--      is_visitation_root_(std::move(rhs.is_visitation_root_)),
--      is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
--      transparent_associations_(std::move(rhs.transparent_associations_)),
--      opaque_associations_(std::move(rhs.opaque_associations_)),
-       is_parent_(std::move(rhs.is_parent_)),
-       is_child_(std::move(rhs.is_child_)),
-       is_leaf_(std::move(rhs.is_leaf_)),
-@@ -147,6 +141,12 @@ object::object(object&& rhs)
-       root_parents_(std::move(rhs.root_parents_)),
-       parents_(std::move(rhs.parents_)),
-       leaves_(std::move(rhs.leaves_)),
-+      transparent_associations_(std::move(rhs.transparent_associations_)),
-+      opaque_associations_(std::move(rhs.opaque_associations_)),
-+      base_visitor_(std::move(rhs.base_visitor_)),
-+      derived_visitor_(std::move(rhs.derived_visitor_)),
-+      is_visitation_root_(std::move(rhs.is_visitation_root_)),
-+      is_visitation_leaf_(std::move(rhs.is_visitation_leaf_)),
-       type_parameters_(std::move(rhs.type_parameters_)),
-       object_type_(std::move(rhs.object_type_)),
-       modeled_concepts_(std::move(rhs.modeled_concepts_)),
-@@ -156,9 +156,9 @@ object::object(object&& rhs)
-       orm_properties_(std::move(rhs.orm_properties_)) { }
- 
- object::object(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -171,12 +171,6 @@ object::object(
-     const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& inherited_attributes,
-     const bool is_immutable,
-     const bool is_fluent,
--    const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
--    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
--    const bool is_visitation_root,
--    const bool is_visitation_leaf,
--    const std::list<dogen::yarn::meta_model::name>& transparent_associations,
--    const std::list<dogen::yarn::meta_model::name>& opaque_associations,
-     const bool is_parent,
-     const bool is_child,
-     const bool is_leaf,
-@@ -186,6 +180,12 @@ object::object(
-     const std::list<dogen::yarn::meta_model::name>& root_parents,
-     const std::list<dogen::yarn::meta_model::name>& parents,
-     const std::list<dogen::yarn::meta_model::name>& leaves,
-+    const std::list<dogen::yarn::meta_model::name>& transparent_associations,
-+    const std::list<dogen::yarn::meta_model::name>& opaque_associations,
-+    const boost::optional<dogen::yarn::meta_model::name>& base_visitor,
-+    const boost::optional<dogen::yarn::meta_model::name>& derived_visitor,
-+    const bool is_visitation_root,
-+    const bool is_visitation_leaf,
-     const dogen::yarn::meta_model::type_parameters& type_parameters,
-     const dogen::yarn::meta_model::object_types object_type,
-     const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
-@@ -194,9 +194,9 @@ object::object(
-     const bool can_be_primitive_underlier,
-     const boost::optional<dogen::yarn::meta_model::orm_object_properties>& orm_properties)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
-@@ -209,12 +209,6 @@ object::object(
-       inherited_attributes_(inherited_attributes),
-       is_immutable_(is_immutable),
-       is_fluent_(is_fluent),
--      base_visitor_(base_visitor),
--      derived_visitor_(derived_visitor),
--      is_visitation_root_(is_visitation_root),
--      is_visitation_leaf_(is_visitation_leaf),
--      transparent_associations_(transparent_associations),
--      opaque_associations_(opaque_associations),
-       is_parent_(is_parent),
-       is_child_(is_child),
-       is_leaf_(is_leaf),
-@@ -224,6 +218,12 @@ object::object(
-       root_parents_(root_parents),
-       parents_(parents),
-       leaves_(leaves),
-+      transparent_associations_(transparent_associations),
-+      opaque_associations_(opaque_associations),
-+      base_visitor_(base_visitor),
-+      derived_visitor_(derived_visitor),
-+      is_visitation_root_(is_visitation_root),
-+      is_visitation_leaf_(is_visitation_leaf),
-       type_parameters_(type_parameters),
-       object_type_(object_type),
-       modeled_concepts_(modeled_concepts),
-@@ -265,12 +265,6 @@ void object::to_stream(std::ostream& s) const {
-       << "\"inherited_attributes\": " << inherited_attributes_ << ", "
-       << "\"is_immutable\": " << is_immutable_ << ", "
-       << "\"is_fluent\": " << is_fluent_ << ", "
--      << "\"base_visitor\": " << base_visitor_ << ", "
--      << "\"derived_visitor\": " << derived_visitor_ << ", "
--      << "\"is_visitation_root\": " << is_visitation_root_ << ", "
--      << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
--      << "\"transparent_associations\": " << transparent_associations_ << ", "
--      << "\"opaque_associations\": " << opaque_associations_ << ", "
-       << "\"is_parent\": " << is_parent_ << ", "
-       << "\"is_child\": " << is_child_ << ", "
-       << "\"is_leaf\": " << is_leaf_ << ", "
-@@ -280,6 +274,12 @@ void object::to_stream(std::ostream& s) const {
-       << "\"root_parents\": " << root_parents_ << ", "
-       << "\"parents\": " << parents_ << ", "
-       << "\"leaves\": " << leaves_ << ", "
-+      << "\"transparent_associations\": " << transparent_associations_ << ", "
-+      << "\"opaque_associations\": " << opaque_associations_ << ", "
-+      << "\"base_visitor\": " << base_visitor_ << ", "
-+      << "\"derived_visitor\": " << derived_visitor_ << ", "
-+      << "\"is_visitation_root\": " << is_visitation_root_ << ", "
-+      << "\"is_visitation_leaf\": " << is_visitation_leaf_ << ", "
-       << "\"type_parameters\": " << type_parameters_ << ", "
-       << "\"object_type\": " << object_type_ << ", "
-       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
-@@ -299,12 +299,6 @@ void object::swap(object& other) noexcept {
-     swap(inherited_attributes_, other.inherited_attributes_);
-     swap(is_immutable_, other.is_immutable_);
-     swap(is_fluent_, other.is_fluent_);
--    swap(base_visitor_, other.base_visitor_);
--    swap(derived_visitor_, other.derived_visitor_);
--    swap(is_visitation_root_, other.is_visitation_root_);
--    swap(is_visitation_leaf_, other.is_visitation_leaf_);
--    swap(transparent_associations_, other.transparent_associations_);
--    swap(opaque_associations_, other.opaque_associations_);
-     swap(is_parent_, other.is_parent_);
-     swap(is_child_, other.is_child_);
-     swap(is_leaf_, other.is_leaf_);
-@@ -314,6 +308,12 @@ void object::swap(object& other) noexcept {
-     swap(root_parents_, other.root_parents_);
-     swap(parents_, other.parents_);
-     swap(leaves_, other.leaves_);
-+    swap(transparent_associations_, other.transparent_associations_);
-+    swap(opaque_associations_, other.opaque_associations_);
-+    swap(base_visitor_, other.base_visitor_);
-+    swap(derived_visitor_, other.derived_visitor_);
-+    swap(is_visitation_root_, other.is_visitation_root_);
-+    swap(is_visitation_leaf_, other.is_visitation_leaf_);
-     swap(type_parameters_, other.type_parameters_);
-     swap(object_type_, other.object_type_);
-     swap(modeled_concepts_, other.modeled_concepts_);
-@@ -336,12 +336,6 @@ bool object::operator==(const object& rhs) const {
-         inherited_attributes_ == rhs.inherited_attributes_ &&
-         is_immutable_ == rhs.is_immutable_ &&
-         is_fluent_ == rhs.is_fluent_ &&
--        base_visitor_ == rhs.base_visitor_ &&
--        derived_visitor_ == rhs.derived_visitor_ &&
--        is_visitation_root_ == rhs.is_visitation_root_ &&
--        is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
--        transparent_associations_ == rhs.transparent_associations_ &&
--        opaque_associations_ == rhs.opaque_associations_ &&
-         is_parent_ == rhs.is_parent_ &&
-         is_child_ == rhs.is_child_ &&
-         is_leaf_ == rhs.is_leaf_ &&
-@@ -351,6 +345,12 @@ bool object::operator==(const object& rhs) const {
-         root_parents_ == rhs.root_parents_ &&
-         parents_ == rhs.parents_ &&
-         leaves_ == rhs.leaves_ &&
-+        transparent_associations_ == rhs.transparent_associations_ &&
-+        opaque_associations_ == rhs.opaque_associations_ &&
-+        base_visitor_ == rhs.base_visitor_ &&
-+        derived_visitor_ == rhs.derived_visitor_ &&
-+        is_visitation_root_ == rhs.is_visitation_root_ &&
-+        is_visitation_leaf_ == rhs.is_visitation_leaf_ &&
-         type_parameters_ == rhs.type_parameters_ &&
-         object_type_ == rhs.object_type_ &&
-         modeled_concepts_ == rhs.modeled_concepts_ &&
-@@ -430,86 +430,6 @@ void object::is_fluent(const bool v) {
-     is_fluent_ = v;
- }
- 
--const boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() const {
--    return base_visitor_;
--}
--
--boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() {
--    return base_visitor_;
--}
--
--void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
--    base_visitor_ = v;
--}
--
--void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
--    base_visitor_ = std::move(v);
--}
--
--const boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() const {
--    return derived_visitor_;
--}
--
--boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() {
--    return derived_visitor_;
--}
--
--void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
--    derived_visitor_ = v;
--}
--
--void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
--    derived_visitor_ = std::move(v);
--}
--
--bool object::is_visitation_root() const {
--    return is_visitation_root_;
--}
--
--void object::is_visitation_root(const bool v) {
--    is_visitation_root_ = v;
--}
--
--bool object::is_visitation_leaf() const {
--    return is_visitation_leaf_;
--}
--
--void object::is_visitation_leaf(const bool v) {
--    is_visitation_leaf_ = v;
--}
--
--const std::list<dogen::yarn::meta_model::name>& object::transparent_associations() const {
--    return transparent_associations_;
--}
--
--std::list<dogen::yarn::meta_model::name>& object::transparent_associations() {
--    return transparent_associations_;
--}
--
--void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>& v) {
--    transparent_associations_ = v;
--}
--
--void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
--    transparent_associations_ = std::move(v);
--}
--
--const std::list<dogen::yarn::meta_model::name>& object::opaque_associations() const {
--    return opaque_associations_;
--}
--
--std::list<dogen::yarn::meta_model::name>& object::opaque_associations() {
--    return opaque_associations_;
--}
--
--void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>& v) {
--    opaque_associations_ = v;
--}
--
--void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
--    opaque_associations_ = std::move(v);
--}
--
- bool object::is_parent() const {
-     return is_parent_;
- }
-@@ -606,6 +526,86 @@ void object::leaves(const std::list<dogen::yarn::meta_model::name>&& v) {
-     leaves_ = std::move(v);
- }
- 
-+const std::list<dogen::yarn::meta_model::name>& object::transparent_associations() const {
-+    return transparent_associations_;
-+}
-+
-+std::list<dogen::yarn::meta_model::name>& object::transparent_associations() {
-+    return transparent_associations_;
-+}
-+
-+void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>& v) {
-+    transparent_associations_ = v;
-+}
-+
-+void object::transparent_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
-+    transparent_associations_ = std::move(v);
-+}
-+
-+const std::list<dogen::yarn::meta_model::name>& object::opaque_associations() const {
-+    return opaque_associations_;
-+}
-+
-+std::list<dogen::yarn::meta_model::name>& object::opaque_associations() {
-+    return opaque_associations_;
-+}
-+
-+void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>& v) {
-+    opaque_associations_ = v;
-+}
-+
-+void object::opaque_associations(const std::list<dogen::yarn::meta_model::name>&& v) {
-+    opaque_associations_ = std::move(v);
-+}
-+
-+const boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() const {
-+    return base_visitor_;
-+}
-+
-+boost::optional<dogen::yarn::meta_model::name>& object::base_visitor() {
-+    return base_visitor_;
-+}
-+
-+void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
-+    base_visitor_ = v;
-+}
-+
-+void object::base_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
-+    base_visitor_ = std::move(v);
-+}
-+
-+const boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() const {
-+    return derived_visitor_;
-+}
-+
-+boost::optional<dogen::yarn::meta_model::name>& object::derived_visitor() {
-+    return derived_visitor_;
-+}
-+
-+void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>& v) {
-+    derived_visitor_ = v;
-+}
-+
-+void object::derived_visitor(const boost::optional<dogen::yarn::meta_model::name>&& v) {
-+    derived_visitor_ = std::move(v);
-+}
-+
-+bool object::is_visitation_root() const {
-+    return is_visitation_root_;
-+}
-+
-+void object::is_visitation_root(const bool v) {
-+    is_visitation_root_ = v;
-+}
-+
-+bool object::is_visitation_leaf() const {
-+    return is_visitation_leaf_;
-+}
-+
-+void object::is_visitation_leaf(const bool v) {
-+    is_visitation_leaf_ = v;
-+}
-+
- const dogen::yarn::meta_model::type_parameters& object::type_parameters() const {
-     return type_parameters_;
- }
-diff --git a/projects/yarn/src/types/meta_model/primitive.cpp b/projects/yarn/src/types/meta_model/primitive.cpp
-index cfbdd1118..894ea5003 100644
---- a/projects/yarn/src/types/meta_model/primitive.cpp
-+++ b/projects/yarn/src/types/meta_model/primitive.cpp
-@@ -60,9 +60,9 @@ primitive::primitive(primitive&& rhs)
-       orm_properties_(std::move(rhs.orm_properties_)) { }
- 
- primitive::primitive(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -76,9 +76,9 @@ primitive::primitive(
-     const bool is_immutable,
-     const boost::optional<dogen::yarn::meta_model::orm_primitive_properties>& orm_properties)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
-diff --git a/projects/yarn/src/types/meta_model/visitor.cpp b/projects/yarn/src/types/meta_model/visitor.cpp
-index 331956595..685944838 100644
---- a/projects/yarn/src/types/meta_model/visitor.cpp
-+++ b/projects/yarn/src/types/meta_model/visitor.cpp
-@@ -64,9 +64,9 @@ visitor::visitor(visitor&& rhs)
-       parent_(std::move(rhs.parent_)) { }
- 
- visitor::visitor(
--    const dogen::yarn::meta_model::name& name,
-     const std::string& documentation,
-     const dogen::annotations::annotation& annotation,
-+    const dogen::yarn::meta_model::name& name,
-     const dogen::yarn::meta_model::origin_types origin_type,
-     const boost::optional<dogen::yarn::meta_model::name>& contained_by,
-     const bool in_global_module,
-@@ -77,9 +77,9 @@ visitor::visitor(
-     const std::list<dogen::yarn::meta_model::name>& visits,
-     const boost::optional<dogen::yarn::meta_model::name>& parent)
-     : dogen::yarn::meta_model::element(
--      name,
-       documentation,
-       annotation,
-+      name,
-       origin_type,
-       contained_by,
-       in_global_module,
 diff --git a/projects/yarn/src/types/transforms/annotations_transform.cpp b/projects/yarn/src/types/transforms/annotations_transform.cpp
 index 314077778..e4638e416 100644
 --- a/projects/yarn/src/types/transforms/annotations_transform.cpp
@@ -7786,6 +6556,101 @@ index 314077778..e4638e416 100644
  }
  
  } } }
+diff --git a/projects/yarn/src/types/transforms/concepts_transform.cpp b/projects/yarn/src/types/transforms/concepts_transform.cpp
+index 50fad3629..f8c54973b 100644
+--- a/projects/yarn/src/types/transforms/concepts_transform.cpp
++++ b/projects/yarn/src/types/transforms/concepts_transform.cpp
+@@ -28,6 +28,7 @@
+ #include "dogen/utility/log/logger.hpp"
+ #include "dogen/yarn/types/meta_model/concept.hpp"
+ #include "dogen/yarn/types/meta_model/object.hpp"
++#include "dogen/yarn/types/helpers/resolver.hpp"
+ #include "dogen/yarn/types/transforms/transformation_error.hpp"
+ #include "dogen/yarn/types/transforms/concepts_transform.hpp"
+ 
+@@ -72,12 +73,22 @@ find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
+     return *i->second;
+ }
+ 
+-meta_model::concept& concepts_transform::
+-find_concept(const meta_model::name& n, meta_model::intermediate_model& im) {
+-    auto i(im.concepts().find(n.id()));
++meta_model::concept&
++concepts_transform::resolve_concept(const meta_model::name& owner,
++    const meta_model::name& concept_name, meta_model::intermediate_model& im) {
++    using helpers::resolver;
++    const auto oc(resolver::try_resolve_concept_name(owner, concept_name, im));
++    if (!oc) {
++        const auto id(concept_name.id());
++        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
++        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
++    }
++
++    auto i(im.concepts().find(oc->id()));
+     if (i == im.concepts().end()) {
+-        BOOST_LOG_SEV(lg, error) << concept_not_found << n.id();
+-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + n.id()));
++        const auto id(oc->id());
++        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
++        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
+     }
+     return *i->second;
+ }
+@@ -126,9 +137,9 @@ expand_object(meta_model::object& o, meta_model::intermediate_model& im,
+      * @e refines container for this.
+      */
+     std::list<meta_model::name> expanded_refines;
+-    for (auto& n : o.modeled_concepts()) {
+-        auto& c(find_concept(n, im));
+-        expanded_refines.push_back(n);
++    for (auto& mc : o.modeled_concepts()) {
++        auto& c(resolve_concept(o.name(), mc, im));
++        expanded_refines.push_back(c.name());
+         expanded_refines.insert(expanded_refines.end(),
+             c.refines().begin(), c.refines().end());
+     }
+@@ -153,7 +164,7 @@ expand_object(meta_model::object& o, meta_model::intermediate_model& im,
+      * If an object does have a parent, we must then find out all of
+      * the concepts that our parents model.
+      */
+-    BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set difference.";
++    BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set diff.";
+ 
+     std::set<meta_model::name> our_concepts;
+     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
+@@ -199,8 +210,8 @@ void concepts_transform::expand_objects(meta_model::intermediate_model& im) {
+     }
+ }
+ 
+-void concepts_transform::
+-expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
++void concepts_transform::expand_concept(meta_model::concept& c,
++    meta_model::intermediate_model& im,
+     std::unordered_set<meta_model::name>& processed_names) {
+     BOOST_LOG_SEV(lg, debug) << "Expand concept: " << c.name().id();
+ 
+@@ -217,9 +228,9 @@ expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
+ 
+     std::list<meta_model::name> expanded_refines;
+     for (auto& n : c.refines()) {
+-        auto& parent(find_concept(n, im));
++        auto& parent(resolve_concept(c.name(), n, im));
+         expand_concept(parent, im, processed_names);
+-        expanded_refines.push_back(n);
++        expanded_refines.push_back(parent.name());
+         expanded_refines.insert(expanded_refines.end(),
+             parent.refines().begin(), parent.refines().end());
+     }
+@@ -240,7 +251,8 @@ void concepts_transform::expand_concepts(meta_model::intermediate_model& im) {
+     }
+ }
+ 
+-void concepts_transform::transform(meta_model::intermediate_model& im) {
++void concepts_transform::
++transform(meta_model::intermediate_model& im) {
+     /*
+      * We must expand concepts before we expand objects as we rely on
+      * the expanded attributes.
 diff --git a/projects/yarn/src/types/transforms/exogenous_model_chain.cpp b/projects/yarn/src/types/transforms/exogenous_model_chain.cpp
 index bc4362e48..4dc2769e9 100644
 --- a/projects/yarn/src/types/transforms/exogenous_model_chain.cpp
@@ -7904,7 +6769,7 @@ index 2d4f5ee14..f70eacb2e 100644
      /*
       * Next, we set the origin of the target model to target so that
 diff --git a/projects/yarn/src/types/transforms/intermediate_model_transform.cpp b/projects/yarn/src/types/transforms/intermediate_model_transform.cpp
-index 46133815e..fe8521572 100644
+index 46133815e..78c60714b 100644
 --- a/projects/yarn/src/types/transforms/intermediate_model_transform.cpp
 +++ b/projects/yarn/src/types/transforms/intermediate_model_transform.cpp
 @@ -37,7 +37,7 @@ namespace {
@@ -7931,7 +6796,15 @@ index 46133815e..fe8521572 100644
          }
      }
      return r;
-@@ -78,6 +76,7 @@ transform(const meta_model::exogenous_model& em) {
+@@ -71,6 +69,7 @@ transform(const meta_model::exogenous_model& em) {
+                              << "intermediate model.";
+ 
+     meta_model::intermediate_model r;
++    r.name(em.name());
+     r.modules(to_element_map(em.modules()));
+     r.concepts(to_element_map(em.concepts()));
+     r.builtins(to_element_map(em.builtins()));
+@@ -78,6 +77,7 @@ transform(const meta_model::exogenous_model& em) {
      r.primitives(to_element_map(em.primitives()));
      r.objects(to_element_map(em.objects()));
      r.exceptions(to_element_map(em.exceptions()));
@@ -7981,10 +6854,19 @@ index cef66905a..c577e7e5f 100644
      expand_containing_module(im);
  }
 diff --git a/projects/yarn/src/types/transforms/naming_transform.cpp b/projects/yarn/src/types/transforms/naming_transform.cpp
-index 2834c641f..d0ffcc5c2 100644
+index 2834c641f..f7431d59b 100644
 --- a/projects/yarn/src/types/transforms/naming_transform.cpp
 +++ b/projects/yarn/src/types/transforms/naming_transform.cpp
-@@ -43,8 +43,7 @@ namespace {
+@@ -32,6 +32,8 @@
+ #include "dogen/yarn/types/meta_model/exception.hpp"
+ #include "dogen/yarn/types/meta_model/primitive.hpp"
+ #include "dogen/yarn/types/meta_model/enumeration.hpp"
++#include "dogen/yarn/io/meta_model/name_io.hpp"
++#include "dogen/yarn/io/meta_model/location_io.hpp"
+ #include "dogen/yarn/types/helpers/name_builder.hpp"
+ #include "dogen/yarn/types/helpers/location_builder.hpp"
+ #include "dogen/yarn/types/transforms/context.hpp"
+@@ -43,8 +45,7 @@ namespace {
  using namespace dogen::utility::log;
  static logger lg(logger_factory("yarn.transforms.naming_transform"));
  
@@ -7994,7 +6876,7 @@ index 2834c641f..d0ffcc5c2 100644
  
  }
  
-@@ -78,40 +77,22 @@ naming_transform::make_type_group(const annotations::type_repository& atrp) {
+@@ -78,40 +79,22 @@ naming_transform::make_type_group(const annotations::type_repository& atrp) {
      return r;
  }
  
@@ -8045,12 +6927,34 @@ index 2834c641f..d0ffcc5c2 100644
  }
  
  meta_model::location
-@@ -128,19 +109,18 @@ void naming_transform::process_element(const meta_model::location& l,
+@@ -119,28 +102,37 @@ naming_transform::create_location(const naming_configuration& cfg) {
+     helpers::location_builder b;
+     b.external_modules(cfg.external_modules());
+     b.model_modules(cfg.model_modules());
+-    return b.build();
++
++    const auto r(b.build());
++    BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
++    return r;
+ }
+ 
+ void naming_transform::process_element(const meta_model::location& l,
+     meta_model::element& e) {
+     helpers::name_builder b;
      b.simple_name(e.name().simple());
-     b.external_modules(l.external_modules());
-     b.model_modules(l.model_modules());
+-    b.external_modules(l.external_modules());
+-    b.model_modules(l.model_modules());
 -    b.internal_modules(e.name().location().model_modules());
-+    b.internal_modules(e.name().location().internal_modules());
++
++    /*
++     * Types placed in the global module must not have any of the
++     * location properties set.
++     */
++    if (!e.in_global_module()) {
++        b.external_modules(l.external_modules());
++        b.model_modules(l.model_modules());
++        b.internal_modules(e.name().location().internal_modules());
++    }
      e.name(b.build());
  }
  
@@ -8067,8 +6971,21 @@ index 2834c641f..d0ffcc5c2 100644
          attr.name(b.build());
      }
  }
-@@ -173,18 +153,10 @@ update_names(const meta_model::location& l, meta_model::exogenous_model& em) {
+@@ -171,20 +163,24 @@ update_names(const meta_model::location& l, meta_model::exogenous_model& em) {
+     process(l, em.exceptions());
+ }
  
++meta_model::name
++naming_transform::compute_model_name(const meta_model::location& l) {
++    helpers::name_builder b;
++    b.simple_name(l.model_modules().front());
++    b.external_modules(l.external_modules());
++    b.model_modules(l.model_modules());
++    const auto r(b.build());
++    BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r;
++    return r;
++}
++
  void naming_transform::
  transform(const context& ctx, meta_model::exogenous_model& em) {
 -    const auto ra(obtain_root_annotation(em));
@@ -8086,6 +7003,7 @@ index 2834c641f..d0ffcc5c2 100644
 -
 -    const auto l(create_location(*cfg));
 +    const auto l(create_location(cfg));
++    em.name(compute_model_name(l));
      update_names(l, em);
  }
  
@@ -8244,6 +7162,25 @@ index c9d7d5368..d737a02b6 100644
  
          /*
           * Apply all of the pre-processing transforms to the reference
+diff --git a/projects/yarn/src/types/transforms/stereotypes_transform.cpp b/projects/yarn/src/types/transforms/stereotypes_transform.cpp
+index c156d86f3..41842ee6f 100644
+--- a/projects/yarn/src/types/transforms/stereotypes_transform.cpp
++++ b/projects/yarn/src/types/transforms/stereotypes_transform.cpp
+@@ -283,11 +283,11 @@ bool stereotypes_transform::try_expand_concept(const std::string& s,
+     meta_model::object& o, const meta_model::intermediate_model& im) {
+ 
+     using helpers::resolver;
+-    const auto on(resolver::try_resolve_concept_name(o.name(), s, im));
+-    if (!on)
++    const auto oc(resolver::try_resolve_concept_name(o.name(), s, im));
++    if (!oc)
+         return false;
+ 
+-    o.modeled_concepts().push_back(*on);
++    o.modeled_concepts().push_back(*oc);
+     return true;
+ }
+ 
 diff --git a/test_data/yarn.dia/expected/boost_model.yarnxml b/test_data/yarn.dia/expected/boost_model.yarnxml
 index fe9aafede..2a2b93f12 100644
 --- a/test_data/yarn.dia/expected/boost_model.yarnxml
