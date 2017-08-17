@@ -130,7 +130,22 @@ Tasks:
 - create two maps for modules and parent names in context, delete existing maps.
 - delete selector.
 
+*** COMPLETED Remove support for upsilon                              :story:
+    CLOSED: [2017-08-16 Wed 12:53]
+    CLOCK: [2017-08-08 Tue 06:54]--[2017-08-08 Tue 08:04] =>  1:10
+
+It seems we will no longer be using upsilon, so we should remove it as
+its adding to the maintenance costs. If required in the future we can
+always resurrect it.
+
+This will also hopefully free up some time in the build machine,
+solving the amount of red builds we get due to time outs.
+
 *** STARTED Create an exogenous model                                 :story:
+    CLOCK: [2017-08-17 Thu 09:43]--[2017-08-17 Thu 09:44] =>  0:01
+    CLOCK: [2017-08-16 Wed 22:20]--[2017-08-16 Wed 23:30] =>  1:10
+    CLOCK: [2017-08-16 Wed 20:49]--[2017-08-16 Wed 21:41] =>  0:52
+    CLOCK: [2017-08-16 Wed 12:23]--[2017-08-16 Wed 13:09] =>  0:46
     CLOCK: [2017-08-06 Sun 21:02]--[2017-08-06 Sun 22:34] =>  1:32
     CLOCK: [2017-08-06 Sun 11:41]--[2017-08-06 Sun 13:53] =>  2:12
 
@@ -185,6 +200,10 @@ Notes:
   first then the package. We can simply create a map of ID ->
   processed object; we then remember the module processed object. When
   the note appears we look up the module and merge it.
+- we should force json models to have a model module if they want to
+  provide documentation rather than support a documentation key.
+- compute model name in naming transform and copy it across to
+  intermediate model
 
 Steps:
 
@@ -193,15 +212,14 @@ Steps:
 - process element annotation.
 - process attribute annotations, if stateful.
 
-*** STARTED Remove support for upsilon                                :story:
-    CLOCK: [2017-08-08 Tue 06:54]--[2017-08-08 Tue 08:04] =>  1:10
+*** Add a backwards compatible flag                                   :story:
 
-It seems we will no longer be using upsilon, so we should remove it as
-its adding to the maintenance costs. If required in the future we can
-always resurrect it.
-
-This will also hopefully free up some time in the build machine,
-solving the amount of red builds we get due to time outs.
+Backwards compatibility is a problem; we should be able to ignore
+types that do not exist. This could be achieved by adding a "backwards
+compatibility mode" flag to the command line which tells annotations
+transform to proceed regardless. This way we still get strict checking
+for the common use case, but can override when required. Log can
+suggest this command line option, with a warning.
 
 *** Model naming                                                      :story:
 
