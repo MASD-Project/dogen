@@ -49,19 +49,18 @@ private:
      * @brief Given the main arguments, generates the knitting options.
      */
     boost::optional<dogen::options::stitching_options>
-    generate_stitching_options_activity(
-        const int argc, const char* argv[]) const;
+    generate_stitching_options(const int argc, const char* argv[]) const;
 
     /**
      * @brief Performs the initialisation of logging system.
      */
-    void initialise_logging_activity(const dogen::options::stitching_options& o);
+    void initialise_logging(const dogen::options::stitching_options& o);
 
     /**
      * @brief Executes the code generation workflow for the given the
      * application options.
      */
-    void stitch_activity(const dogen::options::stitching_options& o) const;
+    void stitch(const dogen::options::stitching_options& o) const;
 
 private:
      /**

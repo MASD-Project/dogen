@@ -65,6 +65,7 @@ void save(Archive& ar,
     ar << make_nvp("target", v.target_);
     ar << make_nvp("force_write", v.force_write_);
     ar << make_nvp("log_directory", v.log_directory_);
+    ar << make_nvp("compatibility_mode", v.compatibility_mode_);
 }
 
 template<typename Archive>
@@ -75,6 +76,7 @@ void load(Archive& ar,
     ar >> make_nvp("target", v.target_);
     ar >> make_nvp("force_write", v.force_write_);
     ar >> make_nvp("log_directory", v.log_directory_);
+    ar >> make_nvp("compatibility_mode", v.compatibility_mode_);
 }
 
 } }

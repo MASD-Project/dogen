@@ -49,7 +49,8 @@ public:
         const std::string& log_level,
         const boost::filesystem::path& target,
         const bool force_write,
-        const boost::filesystem::path& log_directory);
+        const boost::filesystem::path& log_directory,
+        const bool compatibility_mode);
 
 private:
     template<typename Archive>
@@ -82,6 +83,17 @@ public:
     void log_directory(const boost::filesystem::path& v);
     void log_directory(const boost::filesystem::path&& v);
 
+    /**
+     * @brief Try to process diagram even if there are errors.
+     *
+     * Only a certain class of errors are allowed, believed to be caused by backwards or
+     * forwards compatibility problems: missing types or types that do not exist.
+     */
+    /**@{*/
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const stitching_options& rhs) const;
     bool operator!=(const stitching_options& rhs) const {
@@ -97,6 +109,7 @@ private:
     boost::filesystem::path target_;
     bool force_write_;
     boost::filesystem::path log_directory_;
+    bool compatibility_mode_;
 };
 
 } }

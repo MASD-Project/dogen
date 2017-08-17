@@ -57,6 +57,9 @@ const std::string error_in_file("Failed to parse file: ");
 namespace dogen {
 namespace stitch {
 
+workflow::workflow(const bool compatibility_mode)
+    : compatibility_mode_(compatibility_mode) {}
+
 std::vector<boost::filesystem::path>
 workflow::create_data_directories() const {
     const auto data_dir(dogen::utility::filesystem::data_files_directory());
@@ -153,8 +156,9 @@ void workflow::execute(const boost::filesystem::path& p) const {
     const auto data_dirs(create_data_directories());
     const auto atrp(create_annotations_type_repository(data_dirs, alrp));
 
+    const auto cm(compatibility_mode_);
     const auto frp(create_formatters_repository(data_dirs));
-    annotations::annotation_groups_factory af(data_dirs, alrp, atrp);
+    annotations::annotation_groups_factory af(data_dirs, alrp, atrp, cm);
     properties_factory pf(atrp, frp);
     const auto artefacts(create_artefacts(atrp, af, frp, paths));
     write_artefacts(artefacts);

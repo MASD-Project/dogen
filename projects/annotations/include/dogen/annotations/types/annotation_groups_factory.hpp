@@ -58,7 +58,7 @@ public:
     annotation_groups_factory(
         const std::vector<boost::filesystem::path>& data_dirs,
         const archetype_location_repository& alrp,
-        const type_repository& trp);
+        const type_repository& trp, const bool compatibility_mode);
 
 private:
     struct type_group {
@@ -74,9 +74,10 @@ private:
 
 private:
     /**
-     * @brief Returns the field definition for the qualified name.
+     * @brief Returns the field definition for the qualified name, if
+     * any exists.
      */
-    type obtain_type(const std::string& n) const;
+    boost::optional<type> try_obtain_type(const std::string& n) const;
 
     /**
      * @brief Ensures the field definition is valid for the current
@@ -149,6 +150,7 @@ private:
     const type_repository& type_repository_;
     const std::unordered_map<std::string, annotation> profiles_;
     const type_group type_group_;
+    const bool compatibility_mode_;
 };
 
 } }

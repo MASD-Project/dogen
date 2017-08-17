@@ -51,6 +51,7 @@ const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string log_level_arg("log-level");
 const std::string log_directory_arg("log-directory");
+const std::string compatibility_mode_arg("compatibility-mode");
 const std::string target_arg("target");
 const std::string output_dir_arg("output-directory");
 const std::string cpp_headers_output_directory_arg(
@@ -87,12 +88,13 @@ program_options_parser::make_general_options_description() const {
     r.add_options()
         ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.")
-        ("log-level,l",
-            value<std::string>(),
-            "What level to use for logging. Options: "
-            "trace, debug, info, warn, error. Defaults to 'info'.")
+        ("log-level,l", value<std::string>(),
+            "What level to use for logging. Options: trace, debug, info, "
+            "warn, error. Defaults to 'info'.")
         ("log-directory,g", value<std::string>(),
-            "Directory to place the log file in. Defaults to 'log'.");
+            "Directory to place the log file in. Defaults to 'log'.")
+        ("compatibility-mode,m", "Attempt to process diagram, "
+            "ignoring certain types of errors.");
 
     return r;
 }
@@ -206,6 +208,7 @@ make_knitting_options(const variables_map& vm) const {
 
     r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
     r.force_write(vm.count(force_write_arg) != 0);
+    r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
 
     if (vm.count(ignore_files_matching_regex_arg)) {
         typedef std::vector<std::string> argument_type;

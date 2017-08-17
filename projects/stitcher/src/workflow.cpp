@@ -83,8 +83,8 @@ initialise_template_name(const dogen::options::stitching_options& o) {
         template_name_ = p.stem().filename().string();
 }
 
-boost::optional<options::stitching_options> workflow::
-generate_stitching_options_activity(const int argc, const char* argv[]) const {
+boost::optional<options::stitching_options>
+workflow::generate_stitching_options(const int argc, const char* argv[]) const {
     program_options_parser p(argc, argv);
     p.help_function(help);
     p.version_function(version);
@@ -92,8 +92,7 @@ generate_stitching_options_activity(const int argc, const char* argv[]) const {
     return r;
 }
 
-void workflow::
-initialise_logging_activity(const options::stitching_options& o) {
+void workflow::initialise_logging(const options::stitching_options& o) {
     const auto dir(o.log_directory());
     const auto sev(utility::log::to_severity_level(o.log_level()));
     const std::string log_file_name(log_file_prefix + template_name_ +
@@ -106,10 +105,12 @@ initialise_logging_activity(const options::stitching_options& o) {
     can_log_ = true;
 }
 
-void workflow::stitch_activity(const options::stitching_options& o) const {
+void workflow::stitch(const options::stitching_options& o) const {
     BOOST_LOG_SEV(lg, info) << stitcher_product << " started.";
-    stitch::workflow w;
+
+    stitch::workflow w(o.compatibility_mode());
     w.execute(o.target());
+
     BOOST_LOG_SEV(lg, info) << stitcher_product << " finished.";
 }
 
@@ -160,7 +161,7 @@ void workflow::report_exception() const {
 
 int workflow::execute(const int argc, const char* argv[]) {
     try {
-        const auto o(generate_stitching_options_activity(argc, argv));
+        const auto o(generate_stitching_options(argc, argv));
 
         /*
          * Can only happen if the options are valid but do not require
@@ -171,8 +172,8 @@ int workflow::execute(const int argc, const char* argv[]) {
 
         const auto& s(*o);
         initialise_template_name(s);
-        initialise_logging_activity(s);
-        stitch_activity(s);
+        initialise_logging(s);
+        stitch(s);
     } catch (const stitcher::parser_validation_error& e) {
         /*
          * Log known not to be initialised as we are still parsing

@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-17 Thu 10:32]
+#+CAPTION: Clock summary at [2017-08-17 Thu 14:37]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:12* |       |      | 100.0 |
+| *Total time*                                                                | *19:22* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:12   |       |      | 100.0 |
-| Active                                                                      |         | 18:12 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   3.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   2.3 |
-| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  35.0 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  15.6 |
-| COMPLETED Remove support for upsilon                                        |         |       | 1:10 |   6.4 |
-| STARTED Create an exogenous model                                           |         |       | 6:33 |  36.0 |
-| STARTED Add a backwards compatible flag                                     |         |       | 0:17 |   1.6 |
+| Stories                                                                     | 19:22   |       |      | 100.0 |
+| Active                                                                      |         | 19:22 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   3.0 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   2.2 |
+| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  32.9 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  14.6 |
+| COMPLETED Remove support for upsilon                                        |         |       | 1:10 |   6.0 |
+| COMPLETED Add a backwards compatible flag                                   |         |       | 1:27 |   7.5 |
+| STARTED Create an exogenous model                                           |         |       | 6:33 |  33.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -142,6 +142,21 @@ always resurrect it.
 This will also hopefully free up some time in the build machine,
 solving the amount of red builds we get due to time outs.
 
+*** COMPLETED Add a backwards compatible flag                         :story:
+    CLOSED: [2017-08-17 Thu 14:37]
+    CLOCK: [2017-08-17 Thu 14:18]--[2017-08-17 Thu 14:37] =>  0:19
+    CLOCK: [2017-08-17 Thu 13:45]--[2017-08-17 Thu 14:03] =>  0:18
+    CLOCK: [2017-08-17 Thu 10:46]--[2017-08-17 Thu 11:07] =>  0:21
+    CLOCK: [2017-08-17 Thu 10:33]--[2017-08-17 Thu 10:45] =>  0:12
+    CLOCK: [2017-08-17 Thu 10:15]--[2017-08-17 Thu 10:32] =>  0:17
+
+Backwards compatibility is a problem; we should be able to ignore
+types that do not exist. This could be achieved by adding a "backwards
+compatibility mode" flag to the command line which tells annotations
+transform to proceed regardless. This way we still get strict checking
+for the common use case, but can override when required. Log can
+suggest this command line option, with a warning.
+
 *** STARTED Create an exogenous model                                 :story:
     CLOCK: [2017-08-17 Thu 09:43]--[2017-08-17 Thu 09:44] =>  0:01
     CLOCK: [2017-08-16 Wed 22:20]--[2017-08-16 Wed 23:30] =>  1:10
@@ -212,16 +227,6 @@ Steps:
 - convert scribble group into annotation group.
 - process element annotation.
 - process attribute annotations, if stateful.
-
-*** STARTED Add a backwards compatible flag                           :story:
-    CLOCK: [2017-08-17 Thu 10:15]--[2017-08-17 Thu 10:32] =>  0:17
-
-Backwards compatibility is a problem; we should be able to ignore
-types that do not exist. This could be achieved by adding a "backwards
-compatibility mode" flag to the command line which tells annotations
-transform to proceed regardless. This way we still get strict checking
-for the common use case, but can override when required. Log can
-suggest this command line option, with a warning.
 
 *** Model naming                                                      :story:
 

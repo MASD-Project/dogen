@@ -40,6 +40,7 @@ const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string log_level_arg("log-level");
 const std::string log_directory_arg("log-directory");
+const std::string compatibility_mode_arg("compatibility-mode");
 const std::string target_arg("target");
 const std::string force_write_arg("force-write");
 const std::string info_level("info");
@@ -67,12 +68,13 @@ program_options_parser::general_options_factory() const {
     r.add_options()
         ("help,h", "Display usage and exit.")
         ("version,v", "Output version information and exit.")
-        ("log-directory,g", value<std::string>(),
-            "Where to place the log file. Defaults to log.")
-        ("log-level,l",
-            value<std::string>(),
+        ("log-level,l", value<std::string>(),
             "What level to use for logging. Options: "
-            "trace, debug, info, warn, error. Defaults to info.");
+            "trace, debug, info, warn, error. Defaults to info.")
+        ("log-directory,g", value<std::string>(),
+            "Where to place the log file. Defaults to 'log'.")
+        ("compatibility-mode,m", "Attempt to process diagram, "
+            "ignoring certain types of errors.");
 
     return r;
 }
@@ -174,6 +176,7 @@ transform_options(const variables_map& vm) const {
 
     r.target(vm[target_arg].as<std::string>());
     r.force_write(vm.count(force_write_arg));
+    r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
     return r;
 }
 

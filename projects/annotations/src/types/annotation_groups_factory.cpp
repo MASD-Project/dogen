@@ -70,10 +70,10 @@ annotation_groups_factory::
 annotation_groups_factory(
     const std::vector<boost::filesystem::path>& data_dirs,
     const archetype_location_repository& alrp,
-    const type_repository& trp)
+    const type_repository& trp, const bool compatibility_mode)
     : data_dirs_(data_dirs), archetype_location_repository_(alrp),
       type_repository_(trp), profiles_(create_annotation_profiles()),
-      type_group_(make_type_group()) { }
+      type_group_(make_type_group()), compatibility_mode_(compatibility_mode) {}
 
 inline std::ostream&
 operator<<(std::ostream& s, const annotation_groups_factory::type_group& v) {
@@ -111,7 +111,8 @@ obtain_profile_name(const type_group& tg, const annotation& a) const {
     return r;
 }
 
-type annotation_groups_factory::obtain_type(const std::string& n) const {
+boost::optional<type>
+annotation_groups_factory::try_obtain_type(const std::string& n) const {
     /*
      * First try a full match; if it exists, return the type.
      */
@@ -131,11 +132,7 @@ type annotation_groups_factory::obtain_type(const std::string& n) const {
             return t;
     }
 
-    /*
-     * If nothing matches we need to throw.
-     */
-    BOOST_LOG_SEV(lg, error) << type_not_found << n;
-    BOOST_THROW_EXCEPTION(building_error(type_not_found + n));
+    return boost::optional<type>();
 }
 
 void annotation_groups_factory::validate_scope(const type& t,
@@ -174,8 +171,29 @@ annotation annotation_groups_factory::create_annotation(const scope_types scope,
         all_kvps;
     for (auto kvp : aggregated_scribble_entries) {
         const auto& k(kvp.first);
-        const auto t(obtain_type(k));
+        const auto ot(try_obtain_type(k));
 
+        /*
+         * If we're in compatibility mode, skip any types for which we
+         * do not have definitions. This is for forward compatibility
+         * purposes (i.e. diagrams using types that we do not yet know
+         * about).
+         */
+        if (!ot && compatibility_mode_)
+            continue;
+        else if (!ot) {
+            /*
+             * If we are not in compatibility mode and nothing
+             * matches, we need to throw.
+             */
+            BOOST_LOG_SEV(lg, error) << type_not_found << k;
+            BOOST_THROW_EXCEPTION(building_error(type_not_found + k));
+        }
+
+        /*
+         * Ensure the entry is valid with regards to scope.
+         */
+        const auto& t(*ot);
         validate_scope(t, r.scope());
 
         const auto& v(kvp.second);

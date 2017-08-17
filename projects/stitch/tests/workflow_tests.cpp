@@ -35,6 +35,7 @@ const std::string test_module("stitch");
 const std::string test_suite("workflow_tests");
 
 const std::string empty_template("Template has no content");
+const bool compatibility_mode(false);
 
 }
 
@@ -47,7 +48,7 @@ BOOST_AUTO_TEST_SUITE(workflow_tests)
 BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("simple_template_results_in_expected_output");
 
-    dogen::stitch::workflow w;
+    dogen::stitch::workflow w(compatibility_mode);
     using namespace dogen::utility::test_data;
     w.execute(stitch::input_simple_template_stitch());
 
@@ -59,7 +60,7 @@ BOOST_AUTO_TEST_CASE(simple_template_results_in_expected_output) {
 BOOST_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
     SETUP_TEST_LOG_SOURCE("complex_template_results_in_expected_output");
 
-    dogen::stitch::workflow w;
+    dogen::stitch::workflow w(compatibility_mode);
     using namespace dogen::utility::test_data;
     w.execute(stitch::input_complex_template_stitch());
 
@@ -71,7 +72,7 @@ BOOST_AUTO_TEST_CASE(complex_template_results_in_expected_output) {
 BOOST_AUTO_TEST_CASE(empty_template_throws) {
     SETUP_TEST_LOG_SOURCE("empty_template_throws");
 
-    dogen::stitch::workflow w;
+    dogen::stitch::workflow w(compatibility_mode);
     using namespace dogen::utility::test_data;
     contains_checker<dogen::stitch::instantiation_error> c(empty_template);
     BOOST_CHECK_EXCEPTION(w.execute(stitch::input_empty_template_stitch());,

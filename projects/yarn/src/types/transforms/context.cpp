@@ -34,7 +34,7 @@ context::context(
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, archetype_location_repository_,
-        type_repository_),
+        type_repository_, options.compatibility_mode()),
     mapping_repository_(msrp), formatters_repository_(frp) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {

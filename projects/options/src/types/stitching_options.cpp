@@ -24,23 +24,27 @@ namespace dogen {
 namespace options {
 
 stitching_options::stitching_options()
-    : force_write_(static_cast<bool>(0)) { }
+    : force_write_(static_cast<bool>(0)),
+      compatibility_mode_(static_cast<bool>(0)) { }
 
 stitching_options::stitching_options(stitching_options&& rhs)
     : log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       force_write_(std::move(rhs.force_write_)),
-      log_directory_(std::move(rhs.log_directory_)) { }
+      log_directory_(std::move(rhs.log_directory_)),
+      compatibility_mode_(std::move(rhs.compatibility_mode_)) { }
 
 stitching_options::stitching_options(
     const std::string& log_level,
     const boost::filesystem::path& target,
     const bool force_write,
-    const boost::filesystem::path& log_directory)
+    const boost::filesystem::path& log_directory,
+    const bool compatibility_mode)
     : log_level_(log_level),
       target_(target),
       force_write_(force_write),
-      log_directory_(log_directory) { }
+      log_directory_(log_directory),
+      compatibility_mode_(compatibility_mode) { }
 
 void stitching_options::swap(stitching_options& other) noexcept {
     using std::swap;
@@ -48,13 +52,15 @@ void stitching_options::swap(stitching_options& other) noexcept {
     swap(target_, other.target_);
     swap(force_write_, other.force_write_);
     swap(log_directory_, other.log_directory_);
+    swap(compatibility_mode_, other.compatibility_mode_);
 }
 
 bool stitching_options::operator==(const stitching_options& rhs) const {
     return log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         force_write_ == rhs.force_write_ &&
-        log_directory_ == rhs.log_directory_;
+        log_directory_ == rhs.log_directory_ &&
+        compatibility_mode_ == rhs.compatibility_mode_;
 }
 
 stitching_options& stitching_options::operator=(stitching_options other) {
@@ -117,6 +123,14 @@ void stitching_options::log_directory(const boost::filesystem::path& v) {
 
 void stitching_options::log_directory(const boost::filesystem::path&& v) {
     log_directory_ = std::move(v);
+}
+
+bool stitching_options::compatibility_mode() const {
+    return compatibility_mode_;
+}
+
+void stitching_options::compatibility_mode(const bool v) {
+    compatibility_mode_ = v;
 }
 
 } }

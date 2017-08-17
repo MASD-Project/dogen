@@ -46,6 +46,9 @@ namespace stitch {
  * @brief Performs the stitch workflow.
  */
 class workflow {
+public:
+    explicit workflow(const bool compatibility_mode);
+
 private:
     std::vector<boost::filesystem::path> create_data_directories() const;
 
@@ -122,6 +125,9 @@ public:
      * @li if @code p is a file, code-generates the stitch template.
      */
     void execute(const boost::filesystem::path& p) const;
+
+private:
+    const bool compatibility_mode_;
 };
 
 } }

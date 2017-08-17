@@ -46,7 +46,8 @@ std::ostream& operator<<(std::ostream& s, const stitching_options& v) {
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"force_write\": " << v.force_write() << ", "
-      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\""
+      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\"" << ", "
+      << "\"compatibility_mode\": " << v.compatibility_mode()
       << " }";
     return(s);
 }
