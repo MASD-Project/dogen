@@ -57,7 +57,8 @@ public:
         const std::vector<std::string>& ignore_patterns,
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
-        const boost::filesystem::path& log_directory);
+        const boost::filesystem::path& log_directory,
+        const bool compatibility_mode);
 
 private:
     template<typename Archive>
@@ -138,6 +139,17 @@ public:
     void log_directory(const boost::filesystem::path& v);
     void log_directory(const boost::filesystem::path&& v);
 
+    /**
+     * @brief Try to process diagram even if there are errors.
+     *
+     * Only a certain class of errors are allowed, believed to be caused by backwards or
+     * forwards compatibility problems: missing types or types that do not exist.
+     */
+    /**@{*/
+    bool compatibility_mode() const;
+    void compatibility_mode(const bool v);
+    /**@}*/
+
 public:
     bool operator==(const knitting_options& rhs) const;
     bool operator!=(const knitting_options& rhs) const {
@@ -157,6 +169,7 @@ private:
     boost::filesystem::path output_directory_path_;
     boost::filesystem::path cpp_headers_output_directory_path_;
     boost::filesystem::path log_directory_;
+    bool compatibility_mode_;
 };
 
 } }

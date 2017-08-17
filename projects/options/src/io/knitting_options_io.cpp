@@ -64,7 +64,8 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
       << "\"ignore_patterns\": " << v.ignore_patterns() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"cpp_headers_output_directory_path\": " << "\"" << v.cpp_headers_output_directory_path().generic_string() << "\"" << ", "
-      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\""
+      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\"" << ", "
+      << "\"compatibility_mode\": " << v.compatibility_mode()
       << " }";
     return(s);
 }
