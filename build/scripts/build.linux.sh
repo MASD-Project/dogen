@@ -169,6 +169,7 @@ fi
 echo "* Starting C++ build."
 cd ${build_type_dir}
 cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
+ninja diff_yarn.dia
 if [ $? -ne 0 ]; then
     echo "Error running CMake." >&2
     exit 1;
