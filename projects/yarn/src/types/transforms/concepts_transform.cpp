@@ -53,7 +53,8 @@ namespace meta_model {
  * @brief Add comparable support for names.
  *
  * This is required as part of the current (very sub-optimal)
- * implementation of concept processing.
+ * implementation of concept processing. It is used in the set
+ * difference.
  */
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();

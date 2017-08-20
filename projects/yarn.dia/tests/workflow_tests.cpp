@@ -27,6 +27,12 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 #include "dogen/yarn/io/meta_model/exogenous_model_io.hpp"
 #include "dogen/yarn/serialization/meta_model/exogenous_model_ser.hpp"
@@ -48,6 +54,24 @@ namespace  {
 const std::string test_module("yarn.dia");
 const std::string test_suite("workflow_tests");
 
+template<typename Element> bool
+comparer(const std::pair<dogen::annotations::scribble_group,
+    boost::shared_ptr<Element>>& lhs,
+    const std::pair<dogen::annotations::scribble_group,
+    boost::shared_ptr<Element>>& rhs) {
+    return lhs.second->name().id() < rhs.second->name().id();
+}
+
+void sort_model(dogen::yarn::meta_model::exogenous_model& em) {
+    em.modules().sort(comparer<dogen::yarn::meta_model::module>);
+    em.concepts().sort(comparer<dogen::yarn::meta_model::concept>);
+    em.builtins().sort(comparer<dogen::yarn::meta_model::builtin>);
+    em.enumerations().sort(comparer<dogen::yarn::meta_model::enumeration>);
+    em.primitives().sort(comparer<dogen::yarn::meta_model::primitive>);
+    em.objects().sort(comparer<dogen::yarn::meta_model::object>);
+    em.exceptions().sort(comparer<dogen::yarn::meta_model::exception>);
+}
+
 bool test_workflow(
     boost::filesystem::path input_path,
     boost::filesystem::path expected_path,
@@ -60,7 +84,8 @@ bool test_workflow(
     using namespace dogen::annotations::test;
     mock_type_repository_factory rf;
     const auto rp(rf.make());
-    const auto actual(workflow::execute(i));
+    auto actual(workflow::execute(i));
+    sort_model(actual);
 
     /*
      * Set to true to rebase. Note that you still need to run the

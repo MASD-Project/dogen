@@ -180,7 +180,7 @@
 						<item_version>0</item_version>
 						<item class_id="42" tracking_level="0" version="0">
 							<first>yarn.primitive.underlying_element</first>
-							<second>boost::posix_time::ptime</second>
+							<second>boost::gregorian::date</second>
 						</item>
 					</entries>
 					<scope>5</scope>
@@ -199,18 +199,18 @@
 				<px class_id="11" tracking_level="1" version="0" object_id="_1">
 					<element>
 						<name>
-							<id>&lt;ptime_primitive&gt;</id>
-							<simple>ptime_primitive</simple>
+							<id>&lt;date_primitive&gt;</id>
+							<simple>date_primitive</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>ptime_primitive</second>
+									<second>date_primitive</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>ptime_primitive</second>
+									<second>date_primitive</second>
 								</item>
 							</qualified>
 							<location>
@@ -228,9 +228,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>ptime_primitive</identifiable>
+							<identifiable>date_primitive</identifiable>
 						</name>
-						<documentation>Test a primitive with an underlying ptime.
+						<documentation>Test a primitive with an underlying time_duration.
 </documentation>
 						<annotation>
 							<entries>
@@ -389,7 +389,7 @@
 						<item_version>0</item_version>
 						<item>
 							<first>yarn.primitive.underlying_element</first>
-							<second>boost::posix_time::time_duration</second>
+							<second>boost::posix_time::ptime</second>
 						</item>
 					</entries>
 					<scope>5</scope>
@@ -406,6 +406,215 @@
 			</first>
 			<second>
 				<px class_id_reference="11" object_id="_2">
+					<element>
+						<name>
+							<id>&lt;ptime_primitive&gt;</id>
+							<simple>ptime_primitive</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>ptime_primitive</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>ptime_primitive</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>ptime_primitive</identifiable>
+						</name>
+						<documentation>Test a primitive with an underlying ptime.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<origin_type>4</origin_type>
+						<contained_by>
+							<initialized>0</initialized>
+						</contained_by>
+						<in_global_module>0</in_global_module>
+						<stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</stereotypes>
+						<meta_name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</meta_name>
+						<is_element_extension>0</is_element_extension>
+						<element_properties>
+							<decoration_properties>
+								<generate_decoration>0</generate_decoration>
+								<modeline>
+									<initialized>0</initialized>
+								</modeline>
+								<licence>
+									<initialized>0</initialized>
+								</licence>
+								<code_generation_marker></code_generation_marker>
+							</decoration_properties>
+							<artefact_properties>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</artefact_properties>
+						</element_properties>
+					</element>
+					<is_nullable>0</is_nullable>
+					<value_attribute>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</name>
+						<unparsed_type></unparsed_type>
+						<parsed_type>
+							<current>
+								<id></id>
+								<simple></simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</current>
+							<children>
+								<count>0</count>
+								<item_version>0</item_version>
+							</children>
+							<are_children_opaque>0</are_children_opaque>
+							<is_circular_dependency>0</is_circular_dependency>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<identifiable></identifiable>
+							<is_current_simple_type>0</is_current_simple_type>
+							<is_floating_point>0</is_floating_point>
+						</parsed_type>
+						<is_immutable>0</is_immutable>
+						<is_fluent>0</is_fluent>
+						<orm_properties>
+							<initialized>0</initialized>
+						</orm_properties>
+					</value_attribute>
+					<use_type_aliasing>0</use_type_aliasing>
+					<is_immutable>0</is_immutable>
+					<orm_properties>
+						<initialized>0</initialized>
+					</orm_properties>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<parent>
+					<entries>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<first>yarn.primitive.underlying_element</first>
+							<second>boost::posix_time::time_duration</second>
+						</item>
+					</entries>
+					<scope>5</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</first>
+			<second>
+				<px class_id_reference="11" object_id="_3">
 					<element>
 						<name>
 							<id>&lt;time_duration_primitive&gt;</id>
@@ -590,16 +799,16 @@
 				</px>
 			</second>
 		</item>
-		<item>
+	</primitives>
+	<objects class_id="49" tracking_level="0" version="0">
+		<count>12</count>
+		<item_version>0</item_version>
+		<item class_id="50" tracking_level="0" version="0">
 			<first>
 				<parent>
 					<entries>
-						<count>1</count>
+						<count>0</count>
 						<item_version>0</item_version>
-						<item>
-							<first>yarn.primitive.underlying_element</first>
-							<second>boost::gregorian::date</second>
-						</item>
 					</entries>
 					<scope>5</scope>
 					<candidate_labels>
@@ -613,22 +822,22 @@
 					<item_version>0</item_version>
 				</children>
 			</first>
-			<second>
-				<px class_id_reference="11" object_id="_3">
+			<second class_id="51" tracking_level="0" version="1">
+				<px class_id="10" tracking_level="1" version="0" object_id="_4">
 					<element>
 						<name>
-							<id>&lt;date_primitive&gt;</id>
-							<simple>date_primitive</simple>
+							<id>&lt;class_a&gt;</id>
+							<simple>class_a</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>date_primitive</second>
+									<second>class_a</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>date_primitive</second>
+									<second>class_a</second>
 								</item>
 							</qualified>
 							<location>
@@ -646,10 +855,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>date_primitive</identifiable>
+							<identifiable>class_a</identifiable>
 						</name>
-						<documentation>Test a primitive with an underlying time_duration.
-</documentation>
+						<documentation></documentation>
 						<annotation>
 							<entries>
 								<count>0</count>
@@ -710,46 +918,26 @@
 							</artefact_properties>
 						</element_properties>
 					</element>
-					<is_nullable>0</is_nullable>
-					<value_attribute>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
+					<all_attributes class_id="52" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</all_attributes>
+					<local_attributes>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<documentation></documentation>
+							<annotation>
+								<entries>
 									<count>0</count>
+									<bucket_count>1</bucket_count>
 									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</name>
-						<unparsed_type></unparsed_type>
-						<parsed_type>
-							<current>
+								</entries>
+								<scope>0</scope>
+							</annotation>
+							<name>
 								<id></id>
-								<simple></simple>
+								<simple>prop_0</simple>
 								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -770,40 +958,118 @@
 									<element></element>
 								</location>
 								<identifiable></identifiable>
-							</current>
-							<children>
-								<count>0</count>
-								<item_version>0</item_version>
-							</children>
-							<are_children_opaque>0</are_children_opaque>
-							<is_circular_dependency>0</is_circular_dependency>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<identifiable></identifiable>
-							<is_current_simple_type>0</is_current_simple_type>
-							<is_floating_point>0</is_floating_point>
-						</parsed_type>
-						<is_immutable>0</is_immutable>
-						<is_fluent>0</is_fluent>
-						<orm_properties>
-							<initialized>0</initialized>
-						</orm_properties>
-					</value_attribute>
-					<use_type_aliasing>0</use_type_aliasing>
+							</name>
+							<unparsed_type>unsigned int</unparsed_type>
+							<parsed_type>
+								<current>
+									<id></id>
+									<simple></simple>
+									<qualified>
+										<count>0</count>
+										<item_version>0</item_version>
+									</qualified>
+									<location>
+										<external_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_modules>
+										<model_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</model_modules>
+										<internal_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</internal_modules>
+										<element></element>
+									</location>
+									<identifiable></identifiable>
+								</current>
+								<children>
+									<count>0</count>
+									<item_version>0</item_version>
+								</children>
+								<are_children_opaque>0</are_children_opaque>
+								<is_circular_dependency>0</is_circular_dependency>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<identifiable></identifiable>
+								<is_current_simple_type>0</is_current_simple_type>
+								<is_floating_point>0</is_floating_point>
+							</parsed_type>
+							<is_immutable>0</is_immutable>
+							<is_fluent>0</is_fluent>
+							<orm_properties>
+								<initialized>0</initialized>
+							</orm_properties>
+						</item>
+					</local_attributes>
+					<inherited_attributes class_id="53" tracking_level="0" version="0">
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</inherited_attributes>
 					<is_immutable>0</is_immutable>
-					<orm_properties>
+					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations class_id="54" tracking_level="0" version="0">
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
+					<is_parent>0</is_parent>
+					<is_child>0</is_child>
+					<is_leaf>0</is_leaf>
+					<is_final>0</is_final>
+					<is_abstract>0</is_abstract>
+					<in_inheritance_relationship>0</in_inheritance_relationship>
+					<root_parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</root_parents>
+					<parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</parents>
+					<leaves>
+						<count>0</count>
+						<item_version>0</item_version>
+					</leaves>
+					<type_parameters class_id="55" tracking_level="0" version="0">
+						<variable_number_of_parameters>0</variable_number_of_parameters>
+						<count>0</count>
+						<always_in_heap>0</always_in_heap>
+					</type_parameters>
+					<object_type>0</object_type>
+					<modeled_concepts>
+						<count>0</count>
+						<item_version>0</item_version>
+					</modeled_concepts>
+					<associative_container_keys>
+						<count>0</count>
+						<item_version>0</item_version>
+					</associative_container_keys>
+					<provides_opaqueness>0</provides_opaqueness>
+					<can_be_primitive_underlier>0</can_be_primitive_underlier>
+					<orm_properties class_id="56" tracking_level="0" version="0">
 						<initialized>0</initialized>
 					</orm_properties>
 				</px>
 			</second>
 		</item>
-	</primitives>
-	<objects class_id="49" tracking_level="0" version="0">
-		<count>12</count>
-		<item_version>0</item_version>
-		<item class_id="50" tracking_level="0" version="0">
+		<item>
 			<first>
 				<parent>
 					<entries>
@@ -822,8 +1088,8 @@
 					<item_version>0</item_version>
 				</children>
 			</first>
-			<second class_id="51" tracking_level="0" version="1">
-				<px class_id="10" tracking_level="1" version="0" object_id="_4">
+			<second>
+				<px class_id_reference="10" object_id="_5">
 					<element>
 						<name>
 							<id>&lt;class_b&gt;</id>
@@ -918,7 +1184,7 @@
 							</artefact_properties>
 						</element_properties>
 					</element>
-					<all_attributes class_id="52" tracking_level="0" version="0">
+					<all_attributes>
 						<count>0</count>
 						<item_version>0</item_version>
 					</all_attributes>
@@ -1486,7 +1752,7 @@
 							</orm_properties>
 						</item>
 					</local_attributes>
-					<inherited_attributes class_id="53" tracking_level="0" version="0">
+					<inherited_attributes>
 						<count>0</count>
 						<bucket_count>1</bucket_count>
 						<item_version>0</item_version>
@@ -1501,7 +1767,7 @@
 					</derived_visitor>
 					<is_visitation_root>0</is_visitation_root>
 					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations class_id="54" tracking_level="0" version="0">
+					<transparent_associations>
 						<count>0</count>
 						<item_version>0</item_version>
 					</transparent_associations>
@@ -1527,7 +1793,7 @@
 						<count>0</count>
 						<item_version>0</item_version>
 					</leaves>
-					<type_parameters class_id="55" tracking_level="0" version="0">
+					<type_parameters>
 						<variable_number_of_parameters>0</variable_number_of_parameters>
 						<count>0</count>
 						<always_in_heap>0</always_in_heap>
@@ -1543,7 +1809,7 @@
 					</associative_container_keys>
 					<provides_opaqueness>0</provides_opaqueness>
 					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties class_id="56" tracking_level="0" version="0">
+					<orm_properties>
 						<initialized>0</initialized>
 					</orm_properties>
 				</px>
@@ -1569,21 +1835,21 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_5">
+				<px class_id_reference="10" object_id="_6">
 					<element>
 						<name>
-							<id>&lt;class_a&gt;</id>
-							<simple>class_a</simple>
+							<id>&lt;class_base&gt;</id>
+							<simple>class_base</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>class_a</second>
+									<second>class_base</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>class_a</second>
+									<second>class_base</second>
 								</item>
 							</qualified>
 							<location>
@@ -1601,7 +1867,7 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>class_a</identifiable>
+							<identifiable>class_base</identifiable>
 						</name>
 						<documentation></documentation>
 						<annotation>
@@ -1705,354 +1971,7 @@
 								</location>
 								<identifiable></identifiable>
 							</name>
-							<unparsed_type>unsigned int</unparsed_type>
-							<parsed_type>
-								<current>
-									<id></id>
-									<simple></simple>
-									<qualified>
-										<count>0</count>
-										<item_version>0</item_version>
-									</qualified>
-									<location>
-										<external_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_modules>
-										<model_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</model_modules>
-										<internal_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</internal_modules>
-										<element></element>
-									</location>
-									<identifiable></identifiable>
-								</current>
-								<children>
-									<count>0</count>
-									<item_version>0</item_version>
-								</children>
-								<are_children_opaque>0</are_children_opaque>
-								<is_circular_dependency>0</is_circular_dependency>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<identifiable></identifiable>
-								<is_current_simple_type>0</is_current_simple_type>
-								<is_floating_point>0</is_floating_point>
-							</parsed_type>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-							<orm_properties>
-								<initialized>0</initialized>
-							</orm_properties>
-						</item>
-					</local_attributes>
-					<inherited_attributes>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</inherited_attributes>
-					<is_immutable>0</is_immutable>
-					<is_fluent>0</is_fluent>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<is_parent>0</is_parent>
-					<is_child>0</is_child>
-					<is_leaf>0</is_leaf>
-					<is_final>0</is_final>
-					<is_abstract>0</is_abstract>
-					<in_inheritance_relationship>0</in_inheritance_relationship>
-					<root_parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</root_parents>
-					<parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</parents>
-					<leaves>
-						<count>0</count>
-						<item_version>0</item_version>
-					</leaves>
-					<type_parameters>
-						<variable_number_of_parameters>0</variable_number_of_parameters>
-						<count>0</count>
-						<always_in_heap>0</always_in_heap>
-					</type_parameters>
-					<object_type>0</object_type>
-					<modeled_concepts>
-						<count>0</count>
-						<item_version>0</item_version>
-					</modeled_concepts>
-					<associative_container_keys>
-						<count>0</count>
-						<item_version>0</item_version>
-					</associative_container_keys>
-					<provides_opaqueness>0</provides_opaqueness>
-					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties>
-						<initialized>0</initialized>
-					</orm_properties>
-				</px>
-			</second>
-		</item>
-		<item>
-			<first>
-				<parent>
-					<entries>
-						<count>0</count>
-						<item_version>0</item_version>
-					</entries>
-					<scope>5</scope>
-					<candidate_labels>
-						<count>0</count>
-						<item_version>0</item_version>
-					</candidate_labels>
-				</parent>
-				<children>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</children>
-			</first>
-			<second>
-				<px class_id_reference="10" object_id="_6">
-					<element>
-						<name>
-							<id>&lt;pkg1&gt;&lt;class_c&gt;</id>
-							<simple>class_c</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>pkg1::class_c</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>pkg1.class_c</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>1</count>
-									<item_version>0</item_version>
-									<item>pkg1</item>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>pkg1_class_c</identifiable>
-						</name>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<origin_type>4</origin_type>
-						<contained_by>
-							<initialized>0</initialized>
-						</contained_by>
-						<in_global_module>0</in_global_module>
-						<stereotypes>
-							<count>0</count>
-							<item_version>0</item_version>
-						</stereotypes>
-						<meta_name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</meta_name>
-						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
-					</element>
-					<all_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</all_attributes>
-					<local_attributes>
-						<count>2</count>
-						<item_version>0</item_version>
-						<item>
-							<documentation></documentation>
-							<annotation>
-								<entries>
-									<count>0</count>
-									<bucket_count>1</bucket_count>
-									<item_version>0</item_version>
-								</entries>
-								<scope>0</scope>
-							</annotation>
-							<name>
-								<id></id>
-								<simple>prop_0</simple>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<location>
-									<external_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_modules>
-									<model_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_modules>
-									<internal_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_modules>
-									<element></element>
-								</location>
-								<identifiable></identifiable>
-							</name>
 							<unparsed_type>int</unparsed_type>
-							<parsed_type>
-								<current>
-									<id></id>
-									<simple></simple>
-									<qualified>
-										<count>0</count>
-										<item_version>0</item_version>
-									</qualified>
-									<location>
-										<external_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_modules>
-										<model_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</model_modules>
-										<internal_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</internal_modules>
-										<element></element>
-									</location>
-									<identifiable></identifiable>
-								</current>
-								<children>
-									<count>0</count>
-									<item_version>0</item_version>
-								</children>
-								<are_children_opaque>0</are_children_opaque>
-								<is_circular_dependency>0</is_circular_dependency>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<identifiable></identifiable>
-								<is_current_simple_type>0</is_current_simple_type>
-								<is_floating_point>0</is_floating_point>
-							</parsed_type>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-							<orm_properties>
-								<initialized>0</initialized>
-							</orm_properties>
-						</item>
-						<item>
-							<documentation></documentation>
-							<annotation>
-								<entries>
-									<count>0</count>
-									<bucket_count>1</bucket_count>
-									<item_version>0</item_version>
-								</entries>
-								<scope>0</scope>
-							</annotation>
-							<name>
-								<id></id>
-								<simple>prop_1</simple>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<location>
-									<external_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_modules>
-									<model_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_modules>
-									<internal_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_modules>
-									<element></element>
-								</location>
-								<identifiable></identifiable>
-							</name>
-							<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
 							<parsed_type>
 								<current>
 									<id></id>
@@ -2183,570 +2102,6 @@
 			</first>
 			<second>
 				<px class_id_reference="10" object_id="_7">
-					<element>
-						<name>
-							<id>&lt;class_base&gt;</id>
-							<simple>class_base</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>class_base</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>class_base</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>class_base</identifiable>
-						</name>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<origin_type>4</origin_type>
-						<contained_by>
-							<initialized>0</initialized>
-						</contained_by>
-						<in_global_module>0</in_global_module>
-						<stereotypes>
-							<count>0</count>
-							<item_version>0</item_version>
-						</stereotypes>
-						<meta_name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</meta_name>
-						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
-					</element>
-					<all_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</all_attributes>
-					<local_attributes>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<documentation></documentation>
-							<annotation>
-								<entries>
-									<count>0</count>
-									<bucket_count>1</bucket_count>
-									<item_version>0</item_version>
-								</entries>
-								<scope>0</scope>
-							</annotation>
-							<name>
-								<id></id>
-								<simple>prop_0</simple>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<location>
-									<external_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_modules>
-									<model_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_modules>
-									<internal_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_modules>
-									<element></element>
-								</location>
-								<identifiable></identifiable>
-							</name>
-							<unparsed_type>int</unparsed_type>
-							<parsed_type>
-								<current>
-									<id></id>
-									<simple></simple>
-									<qualified>
-										<count>0</count>
-										<item_version>0</item_version>
-									</qualified>
-									<location>
-										<external_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_modules>
-										<model_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</model_modules>
-										<internal_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</internal_modules>
-										<element></element>
-									</location>
-									<identifiable></identifiable>
-								</current>
-								<children>
-									<count>0</count>
-									<item_version>0</item_version>
-								</children>
-								<are_children_opaque>0</are_children_opaque>
-								<is_circular_dependency>0</is_circular_dependency>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<identifiable></identifiable>
-								<is_current_simple_type>0</is_current_simple_type>
-								<is_floating_point>0</is_floating_point>
-							</parsed_type>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-							<orm_properties>
-								<initialized>0</initialized>
-							</orm_properties>
-						</item>
-					</local_attributes>
-					<inherited_attributes>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</inherited_attributes>
-					<is_immutable>0</is_immutable>
-					<is_fluent>0</is_fluent>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<is_parent>0</is_parent>
-					<is_child>0</is_child>
-					<is_leaf>0</is_leaf>
-					<is_final>0</is_final>
-					<is_abstract>0</is_abstract>
-					<in_inheritance_relationship>0</in_inheritance_relationship>
-					<root_parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</root_parents>
-					<parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</parents>
-					<leaves>
-						<count>0</count>
-						<item_version>0</item_version>
-					</leaves>
-					<type_parameters>
-						<variable_number_of_parameters>0</variable_number_of_parameters>
-						<count>0</count>
-						<always_in_heap>0</always_in_heap>
-					</type_parameters>
-					<object_type>0</object_type>
-					<modeled_concepts>
-						<count>0</count>
-						<item_version>0</item_version>
-					</modeled_concepts>
-					<associative_container_keys>
-						<count>0</count>
-						<item_version>0</item_version>
-					</associative_container_keys>
-					<provides_opaqueness>0</provides_opaqueness>
-					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties>
-						<initialized>0</initialized>
-					</orm_properties>
-				</px>
-			</second>
-		</item>
-		<item>
-			<first>
-				<parent>
-					<entries>
-						<count>0</count>
-						<item_version>0</item_version>
-					</entries>
-					<scope>5</scope>
-					<candidate_labels>
-						<count>0</count>
-						<item_version>0</item_version>
-					</candidate_labels>
-				</parent>
-				<children>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</children>
-			</first>
-			<second>
-				<px class_id_reference="10" object_id="_8">
-					<element>
-						<name>
-							<id>&lt;class_derived&gt;</id>
-							<simple>class_derived</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>class_derived</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>class_derived</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>class_derived</identifiable>
-						</name>
-						<documentation></documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<origin_type>4</origin_type>
-						<contained_by>
-							<initialized>0</initialized>
-						</contained_by>
-						<in_global_module>0</in_global_module>
-						<stereotypes>
-							<count>0</count>
-							<item_version>0</item_version>
-						</stereotypes>
-						<meta_name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</meta_name>
-						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
-					</element>
-					<all_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</all_attributes>
-					<local_attributes>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<documentation></documentation>
-							<annotation>
-								<entries>
-									<count>0</count>
-									<bucket_count>1</bucket_count>
-									<item_version>0</item_version>
-								</entries>
-								<scope>0</scope>
-							</annotation>
-							<name>
-								<id></id>
-								<simple>prop_1</simple>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<location>
-									<external_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_modules>
-									<model_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_modules>
-									<internal_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_modules>
-									<element></element>
-								</location>
-								<identifiable></identifiable>
-							</name>
-							<unparsed_type>int</unparsed_type>
-							<parsed_type>
-								<current>
-									<id></id>
-									<simple></simple>
-									<qualified>
-										<count>0</count>
-										<item_version>0</item_version>
-									</qualified>
-									<location>
-										<external_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_modules>
-										<model_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</model_modules>
-										<internal_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</internal_modules>
-										<element></element>
-									</location>
-									<identifiable></identifiable>
-								</current>
-								<children>
-									<count>0</count>
-									<item_version>0</item_version>
-								</children>
-								<are_children_opaque>0</are_children_opaque>
-								<is_circular_dependency>0</is_circular_dependency>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<identifiable></identifiable>
-								<is_current_simple_type>0</is_current_simple_type>
-								<is_floating_point>0</is_floating_point>
-							</parsed_type>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-							<orm_properties>
-								<initialized>0</initialized>
-							</orm_properties>
-						</item>
-					</local_attributes>
-					<inherited_attributes>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</inherited_attributes>
-					<is_immutable>0</is_immutable>
-					<is_fluent>0</is_fluent>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<is_parent>0</is_parent>
-					<is_child>1</is_child>
-					<is_leaf>0</is_leaf>
-					<is_final>0</is_final>
-					<is_abstract>0</is_abstract>
-					<in_inheritance_relationship>0</in_inheritance_relationship>
-					<root_parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</root_parents>
-					<parents>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<id>&lt;class_base&gt;</id>
-							<simple>class_base</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>class_base</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>class_base</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>class_base</identifiable>
-						</item>
-					</parents>
-					<leaves>
-						<count>0</count>
-						<item_version>0</item_version>
-					</leaves>
-					<type_parameters>
-						<variable_number_of_parameters>0</variable_number_of_parameters>
-						<count>0</count>
-						<always_in_heap>0</always_in_heap>
-					</type_parameters>
-					<object_type>0</object_type>
-					<modeled_concepts>
-						<count>0</count>
-						<item_version>0</item_version>
-					</modeled_concepts>
-					<associative_container_keys>
-						<count>0</count>
-						<item_version>0</item_version>
-					</associative_container_keys>
-					<provides_opaqueness>0</provides_opaqueness>
-					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties>
-						<initialized>0</initialized>
-					</orm_properties>
-				</px>
-			</second>
-		</item>
-		<item>
-			<first>
-				<parent>
-					<entries>
-						<count>0</count>
-						<item_version>0</item_version>
-					</entries>
-					<scope>5</scope>
-					<candidate_labels>
-						<count>0</count>
-						<item_version>0</item_version>
-					</candidate_labels>
-				</parent>
-				<children>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</children>
-			</first>
-			<second>
-				<px class_id_reference="10" object_id="_9">
 					<element>
 						<name>
 							<id>&lt;class_d&gt;</id>
@@ -3252,21 +2607,21 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_10">
+				<px class_id_reference="10" object_id="_8">
 					<element>
 						<name>
-							<id>&lt;some_service&gt;</id>
-							<simple>some_service</simple>
+							<id>&lt;class_derived&gt;</id>
+							<simple>class_derived</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>some_service</second>
+									<second>class_derived</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>some_service</second>
+									<second>class_derived</second>
 								</item>
 							</qualified>
 							<location>
@@ -3284,7 +2639,7 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>some_service</identifiable>
+							<identifiable>class_derived</identifiable>
 						</name>
 						<documentation></documentation>
 						<annotation>
@@ -3301,9 +2656,8 @@
 						</contained_by>
 						<in_global_module>0</in_global_module>
 						<stereotypes>
-							<count>1</count>
+							<count>0</count>
 							<item_version>0</item_version>
-							<item>handcrafted</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -3367,7 +2721,7 @@
 							</annotation>
 							<name>
 								<id></id>
-								<simple>prop_0</simple>
+								<simple>prop_1</simple>
 								<qualified>
 									<count>0</count>
 									<item_version>0</item_version>
@@ -3389,7 +2743,7 @@
 								</location>
 								<identifiable></identifiable>
 							</name>
-							<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
+							<unparsed_type>int</unparsed_type>
 							<parsed_type>
 								<current>
 									<id></id>
@@ -3460,7 +2814,7 @@
 						<item_version>0</item_version>
 					</opaque_associations>
 					<is_parent>0</is_parent>
-					<is_child>0</is_child>
+					<is_child>1</is_child>
 					<is_leaf>0</is_leaf>
 					<is_final>0</is_final>
 					<is_abstract>0</is_abstract>
@@ -3470,8 +2824,40 @@
 						<item_version>0</item_version>
 					</root_parents>
 					<parents>
-						<count>0</count>
+						<count>1</count>
 						<item_version>0</item_version>
+						<item>
+							<id>&lt;class_base&gt;</id>
+							<simple>class_base</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>class_base</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>class_base</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>class_base</identifiable>
+						</item>
 					</parents>
 					<leaves>
 						<count>0</count>
@@ -3519,7 +2905,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_11">
+				<px class_id_reference="10" object_id="_9">
 					<element>
 						<name>
 							<id>&lt;class_e&gt;</id>
@@ -4025,7 +3411,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_12">
+				<px class_id_reference="10" object_id="_10">
 					<element>
 						<name>
 							<id>&lt;class_f&gt;</id>
@@ -4691,7 +4077,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_13">
+				<px class_id_reference="10" object_id="_11">
 					<element>
 						<name>
 							<id>&lt;class_g&gt;</id>
@@ -5037,7 +4423,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_14">
+				<px class_id_reference="10" object_id="_12">
 					<element>
 						<name>
 							<id>&lt;class_h&gt;</id>
@@ -5303,7 +4689,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_15">
+				<px class_id_reference="10" object_id="_13">
 					<element>
 						<name>
 							<id>&lt;class_j&gt;</id>
@@ -5600,6 +4986,620 @@
 								<identifiable></identifiable>
 							</name>
 							<unparsed_type>date_primitive</unparsed_type>
+							<parsed_type>
+								<current>
+									<id></id>
+									<simple></simple>
+									<qualified>
+										<count>0</count>
+										<item_version>0</item_version>
+									</qualified>
+									<location>
+										<external_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_modules>
+										<model_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</model_modules>
+										<internal_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</internal_modules>
+										<element></element>
+									</location>
+									<identifiable></identifiable>
+								</current>
+								<children>
+									<count>0</count>
+									<item_version>0</item_version>
+								</children>
+								<are_children_opaque>0</are_children_opaque>
+								<is_circular_dependency>0</is_circular_dependency>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<identifiable></identifiable>
+								<is_current_simple_type>0</is_current_simple_type>
+								<is_floating_point>0</is_floating_point>
+							</parsed_type>
+							<is_immutable>0</is_immutable>
+							<is_fluent>0</is_fluent>
+							<orm_properties>
+								<initialized>0</initialized>
+							</orm_properties>
+						</item>
+					</local_attributes>
+					<inherited_attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</inherited_attributes>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
+					<is_parent>0</is_parent>
+					<is_child>0</is_child>
+					<is_leaf>0</is_leaf>
+					<is_final>0</is_final>
+					<is_abstract>0</is_abstract>
+					<in_inheritance_relationship>0</in_inheritance_relationship>
+					<root_parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</root_parents>
+					<parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</parents>
+					<leaves>
+						<count>0</count>
+						<item_version>0</item_version>
+					</leaves>
+					<type_parameters>
+						<variable_number_of_parameters>0</variable_number_of_parameters>
+						<count>0</count>
+						<always_in_heap>0</always_in_heap>
+					</type_parameters>
+					<object_type>0</object_type>
+					<modeled_concepts>
+						<count>0</count>
+						<item_version>0</item_version>
+					</modeled_concepts>
+					<associative_container_keys>
+						<count>0</count>
+						<item_version>0</item_version>
+					</associative_container_keys>
+					<provides_opaqueness>0</provides_opaqueness>
+					<can_be_primitive_underlier>0</can_be_primitive_underlier>
+					<orm_properties>
+						<initialized>0</initialized>
+					</orm_properties>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<parent>
+					<entries>
+						<count>0</count>
+						<item_version>0</item_version>
+					</entries>
+					<scope>5</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</first>
+			<second>
+				<px class_id_reference="10" object_id="_14">
+					<element>
+						<name>
+							<id>&lt;pkg1&gt;&lt;class_c&gt;</id>
+							<simple>class_c</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>pkg1::class_c</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>pkg1.class_c</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>1</count>
+									<item_version>0</item_version>
+									<item>pkg1</item>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>pkg1_class_c</identifiable>
+						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<origin_type>4</origin_type>
+						<contained_by>
+							<initialized>0</initialized>
+						</contained_by>
+						<in_global_module>0</in_global_module>
+						<stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</stereotypes>
+						<meta_name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</meta_name>
+						<is_element_extension>0</is_element_extension>
+						<element_properties>
+							<decoration_properties>
+								<generate_decoration>0</generate_decoration>
+								<modeline>
+									<initialized>0</initialized>
+								</modeline>
+								<licence>
+									<initialized>0</initialized>
+								</licence>
+								<code_generation_marker></code_generation_marker>
+							</decoration_properties>
+							<artefact_properties>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</artefact_properties>
+						</element_properties>
+					</element>
+					<all_attributes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</all_attributes>
+					<local_attributes>
+						<count>2</count>
+						<item_version>0</item_version>
+						<item>
+							<documentation></documentation>
+							<annotation>
+								<entries>
+									<count>0</count>
+									<bucket_count>1</bucket_count>
+									<item_version>0</item_version>
+								</entries>
+								<scope>0</scope>
+							</annotation>
+							<name>
+								<id></id>
+								<simple>prop_0</simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</name>
+							<unparsed_type>int</unparsed_type>
+							<parsed_type>
+								<current>
+									<id></id>
+									<simple></simple>
+									<qualified>
+										<count>0</count>
+										<item_version>0</item_version>
+									</qualified>
+									<location>
+										<external_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_modules>
+										<model_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</model_modules>
+										<internal_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</internal_modules>
+										<element></element>
+									</location>
+									<identifiable></identifiable>
+								</current>
+								<children>
+									<count>0</count>
+									<item_version>0</item_version>
+								</children>
+								<are_children_opaque>0</are_children_opaque>
+								<is_circular_dependency>0</is_circular_dependency>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<identifiable></identifiable>
+								<is_current_simple_type>0</is_current_simple_type>
+								<is_floating_point>0</is_floating_point>
+							</parsed_type>
+							<is_immutable>0</is_immutable>
+							<is_fluent>0</is_fluent>
+							<orm_properties>
+								<initialized>0</initialized>
+							</orm_properties>
+						</item>
+						<item>
+							<documentation></documentation>
+							<annotation>
+								<entries>
+									<count>0</count>
+									<bucket_count>1</bucket_count>
+									<item_version>0</item_version>
+								</entries>
+								<scope>0</scope>
+							</annotation>
+							<name>
+								<id></id>
+								<simple>prop_1</simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</name>
+							<unparsed_type>std::vector&lt;class_a&gt;</unparsed_type>
+							<parsed_type>
+								<current>
+									<id></id>
+									<simple></simple>
+									<qualified>
+										<count>0</count>
+										<item_version>0</item_version>
+									</qualified>
+									<location>
+										<external_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_modules>
+										<model_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</model_modules>
+										<internal_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</internal_modules>
+										<element></element>
+									</location>
+									<identifiable></identifiable>
+								</current>
+								<children>
+									<count>0</count>
+									<item_version>0</item_version>
+								</children>
+								<are_children_opaque>0</are_children_opaque>
+								<is_circular_dependency>0</is_circular_dependency>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<identifiable></identifiable>
+								<is_current_simple_type>0</is_current_simple_type>
+								<is_floating_point>0</is_floating_point>
+							</parsed_type>
+							<is_immutable>0</is_immutable>
+							<is_fluent>0</is_fluent>
+							<orm_properties>
+								<initialized>0</initialized>
+							</orm_properties>
+						</item>
+					</local_attributes>
+					<inherited_attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</inherited_attributes>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
+					<is_parent>0</is_parent>
+					<is_child>0</is_child>
+					<is_leaf>0</is_leaf>
+					<is_final>0</is_final>
+					<is_abstract>0</is_abstract>
+					<in_inheritance_relationship>0</in_inheritance_relationship>
+					<root_parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</root_parents>
+					<parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</parents>
+					<leaves>
+						<count>0</count>
+						<item_version>0</item_version>
+					</leaves>
+					<type_parameters>
+						<variable_number_of_parameters>0</variable_number_of_parameters>
+						<count>0</count>
+						<always_in_heap>0</always_in_heap>
+					</type_parameters>
+					<object_type>0</object_type>
+					<modeled_concepts>
+						<count>0</count>
+						<item_version>0</item_version>
+					</modeled_concepts>
+					<associative_container_keys>
+						<count>0</count>
+						<item_version>0</item_version>
+					</associative_container_keys>
+					<provides_opaqueness>0</provides_opaqueness>
+					<can_be_primitive_underlier>0</can_be_primitive_underlier>
+					<orm_properties>
+						<initialized>0</initialized>
+					</orm_properties>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<parent>
+					<entries>
+						<count>0</count>
+						<item_version>0</item_version>
+					</entries>
+					<scope>5</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</first>
+			<second>
+				<px class_id_reference="10" object_id="_15">
+					<element>
+						<name>
+							<id>&lt;some_service&gt;</id>
+							<simple>some_service</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>some_service</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>some_service</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>some_service</identifiable>
+						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<origin_type>4</origin_type>
+						<contained_by>
+							<initialized>0</initialized>
+						</contained_by>
+						<in_global_module>0</in_global_module>
+						<stereotypes>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>handcrafted</item>
+						</stereotypes>
+						<meta_name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</meta_name>
+						<is_element_extension>0</is_element_extension>
+						<element_properties>
+							<decoration_properties>
+								<generate_decoration>0</generate_decoration>
+								<modeline>
+									<initialized>0</initialized>
+								</modeline>
+								<licence>
+									<initialized>0</initialized>
+								</licence>
+								<code_generation_marker></code_generation_marker>
+							</decoration_properties>
+							<artefact_properties>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</artefact_properties>
+						</element_properties>
+					</element>
+					<all_attributes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</all_attributes>
+					<local_attributes>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<documentation></documentation>
+							<annotation>
+								<entries>
+									<count>0</count>
+									<bucket_count>1</bucket_count>
+									<item_version>0</item_version>
+								</entries>
+								<scope>0</scope>
+							</annotation>
+							<name>
+								<id></id>
+								<simple>prop_0</simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</name>
+							<unparsed_type>boost::shared_ptr&lt;class_a&gt;</unparsed_type>
 							<parsed_type>
 								<current>
 									<id></id>

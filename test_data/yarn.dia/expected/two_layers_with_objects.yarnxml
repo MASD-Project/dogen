@@ -326,18 +326,18 @@
 				<px class_id="10" tracking_level="1" version="0" object_id="_2">
 					<element>
 						<name>
-							<id>&lt;package_1&gt;&lt;class_1&gt;</id>
-							<simple>class_1</simple>
+							<id>&lt;Package_2&gt;&lt;class_2&gt;</id>
+							<simple>class_2</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>package_1::class_1</second>
+									<second>Package_2::class_2</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>package_1.class_1</second>
+									<second>Package_2.class_2</second>
 								</item>
 							</qualified>
 							<location>
@@ -352,11 +352,11 @@
 								<internal_modules>
 									<count>1</count>
 									<item_version>0</item_version>
-									<item>package_1</item>
+									<item>Package_2</item>
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>package_1_class_1</identifiable>
+							<identifiable>Package_2_class_2</identifiable>
 						</name>
 						<documentation></documentation>
 						<annotation>
@@ -593,18 +593,18 @@
 				<px class_id_reference="10" object_id="_3">
 					<element>
 						<name>
-							<id>&lt;Package_2&gt;&lt;class_2&gt;</id>
-							<simple>class_2</simple>
+							<id>&lt;package_1&gt;&lt;class_1&gt;</id>
+							<simple>class_1</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>Package_2::class_2</second>
+									<second>package_1::class_1</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>Package_2.class_2</second>
+									<second>package_1.class_1</second>
 								</item>
 							</qualified>
 							<location>
@@ -619,11 +619,11 @@
 								<internal_modules>
 									<count>1</count>
 									<item_version>0</item_version>
-									<item>Package_2</item>
+									<item>package_1</item>
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>Package_2_class_2</identifiable>
+							<identifiable>package_1_class_1</identifiable>
 						</name>
 						<documentation></documentation>
 						<annotation>
