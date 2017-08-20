@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-20 Sun 21:22]
+#+CAPTION: Clock summary at [2017-08-20 Sun 21:41]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *25:01* |       |       | 100.0 |
+| *Total time*                                                                | *25:21* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 25:01   |       |       | 100.0 |
-| Active                                                                      |         | 25:01 |       | 100.0 |
+| Stories                                                                     | 25:21   |       |       | 100.0 |
+| Active                                                                      |         | 25:21 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:25 |   1.7 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  25.4 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  11.3 |
-| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.7 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.8 |
-| STARTED Create an exogenous model                                           |         |       | 12:12 |  48.8 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   3.0 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  25.1 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  11.2 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.6 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.7 |
+| STARTED Create an exogenous model                                           |         |       | 12:12 |  48.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -79,6 +79,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-08-20 Sun 21:21]--[2017-08-20 Sun 21:41] =>  0:20
     CLOCK: [2017-08-08 Tue 06:41]--[2017-08-08 Tue 06:53] =>  0:12
     CLOCK: [2017-08-01 Tue 20:43]--[2017-08-01 Tue 20:49] =>  0:06
     CLOCK: [2017-08-01 Tue 20:35]--[2017-08-01 Tue 20:42] =>  0:07
@@ -240,6 +241,12 @@ Steps:
 - process element annotation.
 - process attribute annotations, if stateful.
 
+*** Use extension matching for exogenous models                       :story:
+
+Now that we no longer support upsilon we can revert to the simplistic
+approach of matching the file extension to find the exogenous model
+transformer.
+
 *** Tailor is not handling initialisation correctly                   :story:
 
 It seems we forgot to update tailor after the logging changes around
@@ -270,11 +277,29 @@ During the exogenous model work, yarn's =Nameable= concept moved
 position. We need to look at how the parent changes were done to see
 if they are stable or not.
 
-*** Model naming                                                      :story:
+*** Use a consistent approach to model naming                         :story:
 
 - exogenous model: exomodel; all the models obtained externally.
 - intermediate model: endogenous model, endomodel; all models used internally.
-- model: final model.
+- model: final model, used for code-generation.
+
+With this we can now have three main chains:
+
+- =exomodel_generation_chain=;
+- =endomodel_generation_chain=;
+- =model_generation_chain=: top-level chain that includes all others.
+
+We should also probably rename the exogenous transforms to
+=exomodel_source=.
+
+*** Rename external transform                                         :story:
+
+The name "external transform" was always a quick hack, due to the
+confusion between "exogenous" and "external". We should rename it to
+"dynamic" given that these transforms are not known until run-time
+whereas all other transforms are "static" - known at compile
+time. This also means we can now have dynamic transforms in yarn. Not
+an ideal name, but ever so slightly better than "external transform".
 
 *** Rename yarn object types in yarn.dia                              :story:
 
