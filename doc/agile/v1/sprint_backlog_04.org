@@ -14,21 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-20 Sun 22:06]
+#+CAPTION: Clock summary at [2017-08-20 Sun 23:43]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *25:29* |       |       | 100.0 |
+| *Total time*                                                                | *26:04* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 25:29   |       |       | 100.0 |
-| Active                                                                      |         | 25:29 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.3 |
+| Stories                                                                     | 26:04   |       |       | 100.0 |
+| Active                                                                      |         | 26:04 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.2 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.9 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  25.0 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  11.1 |
-| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.6 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.7 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  48.4 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  24.4 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  10.9 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.5 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.6 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  47.3 |
+| STARTED Remove scribble group from intermediate model                       |         |       |  0:17 |   1.1 |
+| STARTED Tailor should rely only on exogenous models                         |         |       |  0:18 |   1.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -250,12 +252,22 @@ Now we have an exogenous model we no longer need the scribble group in
 the intermediate model. However, we were making use of it in the
 dehydration for tailor transformations.
 
-*** Tailor should rely only on exogenous models                       :story:
+*** STARTED Tailor should rely only on exogenous models               :story:
+    CLOCK: [2017-08-20 Sun 23:25]--[2017-08-20 Sun 23:43] =>  0:18
 
 At present we are transforming an intermediate model into the
 exogenous representation. However, we can probably get away with just
 the exogenous model. Update dehydrator and exogenous interfaces to
 work from just exogenous models.
+
+Notes:
+
+- drop documentation field; we can rely on it being present on the
+  root module. Which reveals a deeper problem: the model should not be
+  annotatable at all, since we have the root module for that. We must
+  have some hackery on the hydrator to read the model annotations and
+  populate the root module. It makes more sense to populate the root
+  module in the JSON.
 
 *** Use extension matching for exogenous models                       :story:
 
