@@ -97,7 +97,8 @@
             <dia:string>#Provides yarn file importing support for JSON.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=yarn.json
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=yarn.dia
 #DOGEN yarn.reference=formatters.dia

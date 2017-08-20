@@ -32,8 +32,11 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/transforms/naming_configuration.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/location.hpp"
+#include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/transforms/naming_configuration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -58,8 +61,7 @@ private:
 
     static type_group make_type_group(const annotations::type_repository& atrp);
 
-    static boost::optional<naming_configuration>
-    make_naming_configuration(const type_group& tg,
+    static naming_configuration make_naming_configuration(const type_group& tg,
         const annotations::annotation& a);
 
 private:
@@ -86,12 +88,10 @@ private:
     }
 
 private:
-    static const annotations::annotation&
-    obtain_root_annotation(const meta_model::exogenous_model& em);
-
     static meta_model::location
     create_location(const naming_configuration& cfg);
 
+    static meta_model::name compute_model_name(const meta_model::location& l);
     static void update_names(const meta_model::location& l,
         meta_model::exogenous_model& em);
 

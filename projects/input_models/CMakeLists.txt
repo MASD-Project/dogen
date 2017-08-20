@@ -20,13 +20,17 @@ set(projects_dir "${CMAKE_SOURCE_DIR}/projects")
 set(models_dir "${projects_dir}/input_models")
 
 if (DOGEN_KNITTER_EXECUTABLE)
-    set(ignore_regexes --ignore-files-matching-regex .*/CMakeLists.txt)
-    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/test/.*)
-    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/tests/.*)
-    set(ignore_regexes ${ignore_regexes} --ignore-files-matching-regex .*/poly-stitch.el)
+    set(ig_flg "--ignore-files-matching-regex")
+    set(ignore_regexes ${ig_flg} .*/CMakeLists.txt)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/test/.*)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/tests/.*)
+    set(ignore_regexes ${ignore_regexes} ${ig_flg} .*/poly-stitch.el)
 
     set(other_options --log-level ${DOGEN_LOG_LEVEL})
     set(other_options ${other_options} --delete-extra-files)
+
+    # uncomment the next line if you require compatibility support
+    set(other_options ${other_options} --compatibility-mode)
 
     set(common_arguments --output-directory ${projects_dir}/)
     set(common_arguments ${common_arguments} ${other_options})

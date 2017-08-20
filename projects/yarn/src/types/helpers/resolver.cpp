@@ -585,8 +585,8 @@ resolve(const meta_model::intermediate_model& im, const indices& idx,
     return r;
 }
 
-boost::optional<meta_model::name>
-resolver::try_resolve_concept_name(meta_model::name ctx, const std::string& s,
+boost::optional<meta_model::name> resolver::
+try_resolve_concept_name(meta_model::name ctx, const std::string& s,
     const meta_model::intermediate_model& im) {
 
     BOOST_LOG_SEV(lg, debug) << "Resolving concept name: " << s;
@@ -640,6 +640,14 @@ resolver::try_resolve_concept_name(meta_model::name ctx, const std::string& s,
      */
     BOOST_LOG_SEV(lg, debug) << "Could not find a concept with tentative name.";
     return boost::optional<meta_model::name>();
+}
+
+boost::optional<meta_model::name>
+resolver::try_resolve_concept_name(const meta_model::name& ctx,
+    const meta_model::name& n, const meta_model::intermediate_model& im) {
+    // FIXME: hack for now, just take simple name. Requires a bit more
+    // thinking.
+    return try_resolve_concept_name(ctx, n.simple(), im);
 }
 
 void resolver::resolve(const indices& idx, meta_model::intermediate_model& im) {

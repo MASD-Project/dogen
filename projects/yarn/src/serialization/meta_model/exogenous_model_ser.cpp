@@ -30,6 +30,7 @@
 #include <boost/serialization/shared_ptr.hpp>
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
+#include "dogen/yarn/serialization/meta_model/name_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
@@ -47,6 +48,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::yarn::meta_model::exogenous_model& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("name", v.name_);
     ar << make_nvp("modules", v.modules_);
     ar << make_nvp("concepts", v.concepts_);
     ar << make_nvp("builtins", v.builtins_);
@@ -54,12 +56,14 @@ void save(Archive& ar,
     ar << make_nvp("primitives", v.primitives_);
     ar << make_nvp("objects", v.objects_);
     ar << make_nvp("exceptions", v.exceptions_);
+    ar << make_nvp("root_module", v.root_module_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
     dogen::yarn::meta_model::exogenous_model& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("name", v.name_);
     ar >> make_nvp("modules", v.modules_);
     ar >> make_nvp("concepts", v.concepts_);
     ar >> make_nvp("builtins", v.builtins_);
@@ -67,6 +71,7 @@ void load(Archive& ar,
     ar >> make_nvp("primitives", v.primitives_);
     ar >> make_nvp("objects", v.objects_);
     ar >> make_nvp("exceptions", v.exceptions_);
+    ar >> make_nvp("root_module", v.root_module_);
 }
 
 } }

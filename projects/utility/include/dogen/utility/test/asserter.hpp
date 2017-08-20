@@ -76,24 +76,37 @@ public:
     /**
      * @brief Outputs the actual object and compares it to its serialised form.
      *
+     * @param rebase_mode If true, actual is written into expected.
      * @param actual_path File name where to place the actual object
      * @param actual Actual object
      * @param expected_path Baseline for the object.
      */
     template<typename Entity>
     static bool assert_object(
+        const bool rebase_mode,
         const boost::filesystem::path& expected_path,
         const boost::filesystem::path& actual_path,
         const Entity& actual) {
 
         using dogen::utility::test::xml_serialize;
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "writing actual: " << actual_path.string();
+
+        if (rebase_mode) {
+            BOOST_LOG_SEV(lg_, warn) << "In rebase mode. Actual: "
+                                     << actual_path.string();
+
+            BOOST_LOG_SEV(lg_, debug) << "Writing actual: "
+                                      << actual_path.string();
+            xml_serialize(actual_path, actual);
+            return true;
+        }
+
+        BOOST_LOG_SEV(lg_, debug) << "Writing actual: " << actual_path.string();
         xml_serialize(actual_path, actual);
 
         using dogen::utility::test::xml_deserialize;
         using namespace dogen::utility::log;
-        BOOST_LOG_SEV(lg_, debug) << "reading expected: "
+        BOOST_LOG_SEV(lg_, debug) << "Reading expected: "
                                   << expected_path.string();
 
         const auto expected(xml_deserialize<Entity>(expected_path));
@@ -102,6 +115,7 @@ public:
                                   << " " << actual_path.string();
 
         return assert_object(expected, actual);
+        return true;
     }
 
     /**

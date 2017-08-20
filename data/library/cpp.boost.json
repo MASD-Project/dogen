@@ -1,9 +1,9 @@
 {
-  "model_name": "boost",
   "documentation": "Boost Library types.",
   "annotation": {
     "yarn.input_language": "cpp",
-    "yarn.is_proxy_model": true
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules" : "boost"
   },
   "elements": [
     {

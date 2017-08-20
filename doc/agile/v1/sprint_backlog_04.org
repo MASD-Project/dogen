@@ -1,4 +1,4 @@
-#+title: Sprint Backlog 03
+#+title: Sprint Backlog 04
 #+options: date:nil toc:nil author:nil num:nil
 #+todo: STARTED | COMPLETED CANCELLED POSTPONED
 #+tags: { story(s) epic(e) }
@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-18 Fri 00:15]
-| <75>                                                                        |         |       |      |       |
-| Headline                                                                    | Time    |       |      |     % |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *21:05* |       |      | 100.0 |
-|-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 21:05   |       |      | 100.0 |
-| Active                                                                      |         | 21:05 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:35 |   2.8 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 0:25 |   2.0 |
-| COMPLETED Use shared pointers in all models                                 |         |       | 6:22 |  30.2 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       | 2:50 |  13.4 |
-| COMPLETED Remove support for upsilon                                        |         |       | 1:10 |   5.5 |
-| COMPLETED Add a backwards compatible flag                                   |         |       | 1:27 |   6.9 |
-| STARTED Create an exogenous model                                           |         |       | 8:16 |  39.2 |
+#+CAPTION: Clock summary at [2017-08-20 Sun 10:49]
+| <75>                                                                        |         |       |       |       |
+| Headline                                                                    | Time    |       |       |     % |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| *Total time*                                                                | *24:42* |       |       | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+-------+-------|
+| Stories                                                                     | 24:42   |       |       | 100.0 |
+| Active                                                                      |         | 24:42 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:25 |   1.7 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  25.8 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  11.5 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.7 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.9 |
+| STARTED Create an exogenous model                                           |         |       | 11:53 |  48.1 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -158,6 +158,13 @@ for the common use case, but can override when required. Log can
 suggest this command line option, with a warning.
 
 *** STARTED Create an exogenous model                                 :story:
+    CLOCK: [2017-08-20 Sun 10:45]--[2017-08-20 Sun 10:48] =>  0:03
+    CLOCK: [2017-08-20 Sun 10:12]--[2017-08-20 Sun 10:44] =>  0:32
+    CLOCK: [2017-08-18 Fri 16:48]--[2017-08-18 Fri 16:57] =>  0:09
+    CLOCK: [2017-08-18 Fri 15:02]--[2017-08-18 Fri 16:47] =>  1:45
+    CLOCK: [2017-08-18 Fri 13:26]--[2017-08-18 Fri 14:02] =>  0:36
+    CLOCK: [2017-08-18 Fri 11:39]--[2017-08-18 Fri 11:47] =>  0:08
+    CLOCK: [2017-08-18 Fri 10:52]--[2017-08-18 Fri 11:16] =>  0:24
     CLOCK: [2017-08-17 Thu 23:46]--[2017-08-18 Fri 00:15] =>  0:29
     CLOCK: [2017-08-17 Thu 20:45]--[2017-08-17 Thu 21:08] =>  0:23
     CLOCK: [2017-08-17 Thu 17:33]--[2017-08-17 Thu 17:54] =>  0:21
@@ -231,6 +238,15 @@ Steps:
 - convert scribble group into annotation group.
 - process element annotation.
 - process attribute annotations, if stateful.
+
+*** Tailor is not handling initialisation correctly                   :story:
+
+It seems we forgot to update tailor after the logging changes around
+initialisation:
+
+: [1/1] Tailoring boost_model.
+: [2017-08-18 16:05:05.284950] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.json.exogenous_transform
+: [2017-08-18 16:05:05.284992] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.dia.exogenous_transform
 
 *** Add support for field renaming in annotations                     :story:
 

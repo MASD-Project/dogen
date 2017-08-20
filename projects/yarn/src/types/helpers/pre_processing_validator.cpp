@@ -57,7 +57,7 @@ public:
         const bool is_proxy_reference);
 
 private:
-    void validate_name(const std::string& id, const bool in_global_namespace,
+    void validate_name(const std::string& id, const bool in_global_module,
         const meta_model::name& n) const;
 
 public:
@@ -82,13 +82,16 @@ validator::validator(const meta_model::name& model_name, const bool check_names,
                                      is_proxy_reference_(is_proxy_reference) {}
 
 void validator::
-validate_name(const std::string& id, const bool in_global_namespace,
+validate_name(const std::string& id, const bool in_global_module,
     const meta_model::name& n) const {
     /*
-     * Types in global namespace are known to have a mismatch between
+     * Types in global module are known to have a mismatch between
      * their name and model name, so we need to ignore those.
+     *
+     * FIXME: however we should check that types in global namespace
+     * do not have anything filled in location.
      */
-    if (!check_names_ || in_global_namespace)
+    if (!check_names_ || in_global_module)
         return;
 
     const auto nl(n.location());

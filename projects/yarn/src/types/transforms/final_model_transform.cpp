@@ -155,6 +155,10 @@ final_model_transform::transform(const meta_model::intermediate_model& im) {
 
     model_populator mp(r);
     meta_model::shared_elements_traversal(im, mp);
+
+    // FIXME: not using:
+    // shared_elements_traversal(im, mp, true/*include_injected_elements*/);
+    // as its causing issues at present.
     mp.add(im.injected_elements());
 
     return r;

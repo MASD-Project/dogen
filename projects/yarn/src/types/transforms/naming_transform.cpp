@@ -32,6 +32,8 @@
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -43,8 +45,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.transforms.naming_transform"));
 
-const std::string missing_root_module("Root module not found.");
-const std::string missing_naming_configuration("Must supply model modules.");
+const std::string missing_model_modules("Must supply model modules.");
 
 }
 
@@ -78,40 +79,22 @@ naming_transform::make_type_group(const annotations::type_repository& atrp) {
     return r;
 }
 
-boost::optional<naming_configuration>
-naming_transform::make_naming_configuration(const type_group& tg,
-    const annotations::annotation& a) {
+naming_configuration naming_transform::make_naming_configuration(
+    const type_group& tg, const annotations::annotation& a) {
 
     const annotations::entry_selector s(a);
+    if (!s.has_entry(tg.model_modules)) {
+        BOOST_LOG_SEV(lg, error) << missing_model_modules;
+        BOOST_THROW_EXCEPTION(transformation_error(missing_model_modules));
+    }
+
     naming_configuration r;
-    bool found_any(false);
+    r.model_modules(s.get_text_content(tg.model_modules));
 
-    if (s.has_entry(tg.external_modules)) {
-        found_any = true;
+    if (s.has_entry(tg.external_modules))
         r.external_modules(s.get_text_content(tg.external_modules));
-    }
 
-    if (s.has_entry(tg.model_modules)) {
-        found_any = true;
-        r.model_modules(s.get_text_content(tg.model_modules));
-    }
-
-    if (found_any)
-        return r;
-
-    return boost::optional<naming_configuration>();
-}
-
-const annotations::annotation& naming_transform::
-obtain_root_annotation(const meta_model::exogenous_model& em) {
-    for (const auto& pair : em.modules()) {
-        const auto& m(*pair.second);
-        if (m.is_root())
-            return m.annotation();
-    }
-
-    BOOST_LOG_SEV(lg, error) << missing_root_module;
-    BOOST_THROW_EXCEPTION(transformation_error(missing_root_module));
+    return r;
 }
 
 meta_model::location
@@ -119,28 +102,37 @@ naming_transform::create_location(const naming_configuration& cfg) {
     helpers::location_builder b;
     b.external_modules(cfg.external_modules());
     b.model_modules(cfg.model_modules());
-    return b.build();
+
+    const auto r(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Computed location: " << r;
+    return r;
 }
 
 void naming_transform::process_element(const meta_model::location& l,
     meta_model::element& e) {
     helpers::name_builder b;
     b.simple_name(e.name().simple());
-    b.external_modules(l.external_modules());
-    b.model_modules(l.model_modules());
-    b.internal_modules(e.name().location().model_modules());
+
+    /*
+     * Types placed in the global module must not have any of the
+     * location properties set.
+     */
+    if (!e.in_global_module()) {
+        b.external_modules(l.external_modules());
+        b.model_modules(l.model_modules());
+        b.internal_modules(e.name().location().internal_modules());
+    }
     e.name(b.build());
 }
 
 void naming_transform::process_attributes(const meta_model::location& l,
     std::list<meta_model::attribute>& attrs) {
-
     for (auto& attr : attrs) {
         helpers::name_builder b;
         b.simple_name(attr.name().simple());
         b.external_modules(l.external_modules());
         b.model_modules(l.model_modules());
-        b.internal_modules(attr.name().location().model_modules());
+        b.internal_modules(attr.name().location().internal_modules());
         attr.name(b.build());
     }
 }
@@ -171,20 +163,25 @@ update_names(const meta_model::location& l, meta_model::exogenous_model& em) {
     process(l, em.exceptions());
 }
 
+meta_model::name
+naming_transform::compute_model_name(const meta_model::location& l) {
+    helpers::name_builder b(true/*model_name_mode*/);
+    b.external_modules(l.external_modules());
+    b.model_modules(l.model_modules());
+
+    const auto r(b.build());
+    BOOST_LOG_SEV(lg, debug) << "Computed model name: " << r;
+    return r;
+}
+
 void naming_transform::
 transform(const context& ctx, meta_model::exogenous_model& em) {
-    const auto ra(obtain_root_annotation(em));
-    const auto& atrp(ctx.type_repository());
-    const auto tg(make_type_group(atrp));
+    const auto& ra(em.root_module().second->annotation());
+    const auto tg(make_type_group(ctx.type_repository()));
     const auto cfg(make_naming_configuration(tg, ra));
-
-    if (!cfg) {
-        BOOST_LOG_SEV(lg, error) << missing_naming_configuration;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(missing_naming_configuration));
-    }
-
-    const auto l(create_location(*cfg));
+    const auto l(create_location(cfg));
+    em.name(compute_model_name(l));
+    em.root_module().second->name(em.name());
     update_names(l, em);
 }
 

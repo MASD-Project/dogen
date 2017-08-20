@@ -19,6 +19,7 @@
  *
  */
 #include <ostream>
+#include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/io/meta_model/builtin_io.hpp"
@@ -337,13 +338,15 @@ namespace meta_model {
 std::ostream& operator<<(std::ostream& s, const exogenous_model& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exogenous_model\"" << ", "
+      << "\"name\": " << v.name() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"concepts\": " << v.concepts() << ", "
       << "\"builtins\": " << v.builtins() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"primitives\": " << v.primitives() << ", "
       << "\"objects\": " << v.objects() << ", "
-      << "\"exceptions\": " << v.exceptions()
+      << "\"exceptions\": " << v.exceptions() << ", "
+      << "\"root_module\": " << v.root_module()
       << " }";
     return(s);
 }

@@ -25,6 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/io/meta_model/exogenous_model_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
@@ -67,9 +68,8 @@ workflow::obtain_external_modules(const std::list<processed_object>& pos) {
     return r;
 }
 
-meta_model::intermediate_model
-workflow::generate_model(const std::list<processed_object>& pos,
-    const std::string& model_name, const std::string& external_modules) {
+meta_model::exogenous_model
+workflow::generate_model(const std::list<processed_object>& pos) {
     /*
      * Create a dependency graph of the objects, and a map of children
      * to their respective parents.
@@ -81,14 +81,13 @@ workflow::generate_model(const std::list<processed_object>& pos,
      * Go through the dependency graph and build a yarn model from
      * it.
      */
-    builder b(model_name, external_modules, g.parent_id_to_child_ids());
+    builder b(g.parent_id_to_child_ids());
     visitor v(b);
     boost::depth_first_search(g.graph(), boost::visitor(v));
     return b.build();
 }
 
-meta_model::intermediate_model
-workflow::execute(const dogen::dia::diagram& d, const std::string& model_name) {
+meta_model::exogenous_model workflow::execute(const dogen::dia::diagram& d) {
     /*
      * Convert the original dia diagram into a list of dia objects
      * reading for processing.
@@ -113,7 +112,7 @@ workflow::execute(const dogen::dia::diagram& d, const std::string& model_name) {
     /*
      * Finally generate the model.
      */
-    const auto r(generate_model(pos, model_name, external_modules));
+    const auto r(generate_model(pos));
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
 
     return r;

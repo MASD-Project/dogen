@@ -20,14 +20,17 @@
  */
 #include <iostream>
 #include <boost/exception/diagnostic_information.hpp>
+#include "dogen/version.hpp"
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/version.hpp"
+#include "dogen/options/types/knitting_options.hpp" // FIXME
+#include "dogen/options/types/tailoring_options.hpp"
+#include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
+#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
-#include "dogen/options/types/tailoring_options.hpp"
-#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
 #include "dogen/tailor/workflow.hpp"
 
 namespace {
@@ -105,8 +108,17 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
 void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
+    using namespace yarn::transforms;
+    const auto& rg(code_generation_chain::registrar());
+    rg.validate();
+
+    // FIXME: to be updated once we have yarn options.
+    options::knitting_options ko;
+    ko.target(o.target());
+    const auto ctx(context_factory::make(rg, ko));
+
     using yarn::transforms::exogenous_model_chain;
-    auto im(exogenous_model_chain::transform(o.target()));
+    auto im(exogenous_model_chain::transform(ctx, o.target()));
     im.origin_type(yarn::meta_model::origin_types::target);
     exogenous_model_chain::transform(im, o.output());
 

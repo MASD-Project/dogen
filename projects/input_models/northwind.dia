@@ -99,7 +99,8 @@ Northwind database, provided as a sample for Access and SQL Server.
 It's objective is to test Dogen integration with ODB.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN yarn.model_modules=northwind
+#DOGEN yarn.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.hash.enabled=false

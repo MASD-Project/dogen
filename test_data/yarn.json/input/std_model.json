@@ -1,9 +1,8 @@
 {
-  "model_name": "std_model",
-  "external_modules": "dogen::test_models",
   "annotation": {
     "yarn.dia.comment": "true",
-    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.model_modules": "std_model",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",

@@ -25,6 +25,7 @@
 #include <boost/serialization/string.hpp>
 #include <boost/archive/text_iarchive.hpp>
 #include <boost/archive/text_oarchive.hpp>
+#include <boost/serialization/utility.hpp>
 #include <boost/archive/binary_iarchive.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/serialization/shared_ptr.hpp>
@@ -34,6 +35,7 @@
 #include "dogen/yarn.dia/serialization/context_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/name_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
+#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 
 namespace boost {
 namespace serialization {

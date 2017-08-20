@@ -270,7 +270,8 @@
             <dia:string>#This model tests all settings related to paths and file names.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN yarn.model_modules=all_path_and_directory_settings
+#DOGEN yarn.external_modules=dogen::test_models
 #DOGEN annotations.profile=dogen
 #DOGEN yarn.input_language=language_agnostic
 #DOGEN yarn.output_language=cpp

@@ -37,7 +37,7 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.builder"));
 
-const std::string duplicate_element_id("Element id already exists: ");
+const std::string duplicate_element("Element id already exists: ");
 
 }
 
@@ -46,22 +46,27 @@ namespace yarn {
 namespace transforms {
 
 template<typename Element>
+inline void
+insert(const std::pair<annotations::scribble_group, boost::shared_ptr<Element>>&
+    pair, std::unordered_map<std::string, boost::shared_ptr<Element>>& dst) {
+
+    const auto e(pair.second);
+    const auto id(e->name().id());
+    bool inserted(dst.insert(std::make_pair(id, e)).second);
+    if (!inserted) {
+        BOOST_LOG_SEV(lg, error) << duplicate_element << id;
+        BOOST_THROW_EXCEPTION(transformation_error(duplicate_element + id));
+    }
+}
+
+template<typename Element>
 inline std::unordered_map<std::string, boost::shared_ptr<Element>>
 to_element_map(const std::list<std::pair<annotations::scribble_group,
     boost::shared_ptr<Element>>>& elements) {
-
     std::unordered_map<std::string, boost::shared_ptr<Element>> r;
-    for (const auto pair : elements) {
-        const auto e(pair.second);
-        const auto id(e->name().id());
+    for (const auto pair : elements)
+        insert(pair, r);
 
-        bool inserted(r.insert(std::make_pair(id, e)).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-            BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_element_id + id));
-        }
-    }
     return r;
 }
 
@@ -71,6 +76,7 @@ transform(const meta_model::exogenous_model& em) {
                              << "intermediate model.";
 
     meta_model::intermediate_model r;
+    r.name(em.name());
     r.modules(to_element_map(em.modules()));
     r.concepts(to_element_map(em.concepts()));
     r.builtins(to_element_map(em.builtins()));
@@ -78,6 +84,15 @@ transform(const meta_model::exogenous_model& em) {
     r.primitives(to_element_map(em.primitives()));
     r.objects(to_element_map(em.objects()));
     r.exceptions(to_element_map(em.exceptions()));
+
+    /*
+     * FIXME: For now, we must inject the root module into the element
+     * collection manually. This is not ideal - we should probably
+     * just process it from the root_module member variable - but this
+     * will be mopped up during the formattables clean up.
+     */
+    insert(em.root_module(), r.modules());
+    r.root_module(em.root_module().second);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exogenous model "
                              << "intermediate model.";

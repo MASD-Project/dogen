@@ -41,11 +41,11 @@ initial_target_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, debug) << "Executing the initial target chain.";
 
     /*
-     * First we obtain the target model exactly as it was read out
-     * from the exogenous transformer.
+     * First we obtain the target model in the internal representation
+     * of the exogenous model.
      */
     const auto tp(ctx.options().target());
-    auto r(exogenous_model_chain::transform(tp));
+    auto r(exogenous_model_chain::transform(ctx, tp));
 
     /*
      * Next, we set the origin of the target model to target so that

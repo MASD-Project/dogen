@@ -27,9 +27,9 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test_data/yarn_dia.hpp"
 #include "dogen/dia/io/diagram_io.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
-#include "dogen/yarn/serialization/meta_model/intermediate_model_ser.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/io/meta_model/exogenous_model_io.hpp"
+#include "dogen/yarn/serialization/meta_model/exogenous_model_ser.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/dia/test/diagram_serialization_helper.hpp"
 #include "dogen/yarn/serialization/registrar_ser.hpp"
@@ -56,13 +56,18 @@ bool test_workflow(
     boost::filesystem::ifstream s(input_path);
     using dogen::dia::test::diagram_serialization_helper;
     const auto i(diagram_serialization_helper::from_xml(s));
-    const std::string model_name(input_path.stem().string());
 
     using namespace dogen::annotations::test;
     mock_type_repository_factory rf;
     const auto rp(rf.make());
-    const auto actual(workflow::execute(i, model_name));
-    return asserter::assert_object(expected_path, actual_path, actual);
+    const auto actual(workflow::execute(i));
+
+    /*
+     * Set to true to rebase. Note that you still need to run the
+     * appropriate rebase target afterwards to copy the files across.
+     */
+    const bool rm(false);
+    return asserter::assert_object(rm, expected_path, actual_path, actual);
 }
 
 }

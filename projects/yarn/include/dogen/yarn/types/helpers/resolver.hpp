@@ -165,9 +165,14 @@ public:
     /**
      * @brief Resolves the name as a concept name.
      */
+    /**@{*/
     static boost::optional<meta_model::name>
     try_resolve_concept_name(meta_model::name ctx,
         const std::string& s, const meta_model::intermediate_model& im);
+    static boost::optional<meta_model::name>
+    try_resolve_concept_name(const meta_model::name& ctx,
+        const meta_model::name& n, const meta_model::intermediate_model& im);
+    /**@}*/
 
 public:
     /**

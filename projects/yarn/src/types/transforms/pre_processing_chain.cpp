@@ -21,7 +21,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
-#include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/modules_transform.hpp"
 #include "dogen/yarn/types/transforms/origin_transform.hpp"
 #include "dogen/yarn/types/transforms/language_transform.hpp"
@@ -63,13 +62,6 @@ bool pre_processing_chain::is_language_relevant(
 
 void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
     meta_model::intermediate_model& im) {
-    /*
-     * We must transform annotations before we transform modules to
-     * ensure the root module is populated with entries before being
-     * copied over.
-     */
-    annotations_transform::transform(ctx, im);
-
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new

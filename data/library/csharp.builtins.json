@@ -1,9 +1,9 @@
 {
-  "model_name": "csharp.builtins",
   "documentation": "CLR-provided built-in types.",
   "annotation": {
     "yarn.input_language": "csharp",
-    "yarn.is_proxy_model": true
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules" : "csharp.builtins"
   },
   "elements": [
     {

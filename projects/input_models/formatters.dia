@@ -4603,7 +4603,8 @@ which is not language specific. Language-specific models can
 then make use of it.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=formatters
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false

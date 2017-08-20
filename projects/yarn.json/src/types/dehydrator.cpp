@@ -439,16 +439,7 @@ dehydrator::dehydrate(const meta_model::intermediate_model& im) const {
     formatters::utility_formatter uf(s);
     using boost::algorithm::join;
 
-    const auto& l(im.name().location());
     s << "{ ";
-    uf.insert_quoted("model_name");
-    s << " : ";
-    uf.insert_quoted(join(l.model_modules(), scope));
-    s << comma_space;
-
-    uf.insert_quoted("external_modules");
-    s << " : ";
-    uf.insert_quoted(join(l.external_modules(), scope));
 
     const auto i(im.modules().find(im.name().id()));
     if (i != im.modules().end()) {

@@ -106,7 +106,8 @@ private:
     /**
      * @brief Returns the concept with the given name, or throws.
      */
-    static meta_model::concept& find_concept(const meta_model::name& n,
+    static meta_model::concept& resolve_concept(const meta_model::name& owner,
+        const meta_model::name& concept_name,
         meta_model::intermediate_model& im);
 
     /**
@@ -131,8 +132,8 @@ private:
     /**
      * @brief Expands a concept.
      */
-    static void expand_concept(meta_model::concept& c,
-        meta_model::intermediate_model& im,
+    static void
+    expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
         std::unordered_set<meta_model::name>& processed_names);
 
     /**

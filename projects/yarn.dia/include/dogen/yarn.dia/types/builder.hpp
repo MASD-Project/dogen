@@ -31,7 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -41,48 +41,46 @@ namespace yarn {
 namespace dia {
 
 /**
- * @brief Builds a yarn intermediate model from dia processed
- * objects.
+ * @brief Builds a yarn exogenous model from dia processed objects.
  *
  * Expects the objects to have been supplied in dependency order.
  */
 class builder {
 public:
-    builder(const std::string& model_name, const std::string& external_modules,
+    explicit builder(
         const std::unordered_map<std::string, std::list<std::string>>&
         parent_id_to_child_ids);
 
 private:
     /**
-     * @brief Returns the module associated with a name.
-     *
-     * @pre module must exist in repository.
+     * @brief Adds the supplied module into the context, slotting it
+     * against its dia ID.
      */
-    meta_model::module& module_for_name(const meta_model::name& n);
-
-private:
-    boost::shared_ptr<meta_model::module>
-    create_module_for_model(const meta_model::name& n) const;
-
-    void setup_model(const std::string& model_name,
-        const std::string& external_modules);
-
-    void update_scribble_group(const meta_model::name& n,
-        const processed_object& po);
-
-    void update_parentage(const std::string& dia_id, const meta_model::name& n);
-    void update_module(const std::string& dia_id,
+    void add_module_to_context(const std::string& dia_id,
         boost::shared_ptr<meta_model::module> m);
-    void update_documentation(const processed_object& po);
+
+    /**
+     * @brief Updates the parenting information for the given object
+     * identified by the dia ID.
+     */
+    void update_parentage(const std::string& dia_id, const meta_model::name& n);
+
+    /**
+     * @brief Updates the module documentation and scribbles, given
+     * the processed object.
+     *
+     * @pre po must be a UML note.
+     */
+    void update_module(const processed_object& po);
 
 public:
     void add(const processed_object& po);
-    meta_model::intermediate_model build();
+    meta_model::exogenous_model build();
 
 private:
     const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids_;
-    meta_model::intermediate_model model_;
+    meta_model::exogenous_model model_;
     context context_;
 };
 

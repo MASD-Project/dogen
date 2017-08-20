@@ -1,10 +1,9 @@
 {
-  "model_name": "all_path_and_directory_settings",
-  "external_modules": "dogen::test_models",
   "documentation": "This model tests all settings related to paths and file names.\n",
   "annotation": {
     "yarn.dia.comment": "true",
-    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.model_modules": "all_path_and_directory_settings",
     "annotations.profile": "dogen",
     "yarn.input_language": "language_agnostic",
     "yarn.output_language": "csharp",

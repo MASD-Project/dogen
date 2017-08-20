@@ -37,7 +37,6 @@ auto lg(logger_factory("yarn.transforms.modules_transform"));
 
 const std::string separator(".");
 const std::string missing_module("Could not find module: ");
-const std::string missing_root_module("Root module not found: ");
 
 }
 
@@ -197,20 +196,6 @@ void updater::update(meta_model::element& e) {
 }
 
 void modules_transform::
-populate_root_module(meta_model::intermediate_model& im) {
-    const auto i(im.modules().find(im.name().id()));
-    if (i == im.modules().end()) {
-        const auto id(im.name().id());
-        BOOST_LOG_SEV(lg, error) << missing_root_module << id;
-        BOOST_THROW_EXCEPTION(transformation_error(missing_root_module + id));
-    }
-
-    auto& m(*i->second);
-    m.is_root(true);
-    im.root_module(i->second);
-}
-
-void modules_transform::
 create_missing_modules(meta_model::intermediate_model& im) {
     internal_modules_builder b;
     meta_model::elements_traversal(im, b);
@@ -236,7 +221,6 @@ expand_containing_module(meta_model::intermediate_model& im) {
 }
 
 void modules_transform::transform(meta_model::intermediate_model& im) {
-    populate_root_module(im);
     create_missing_modules(im);
     expand_containing_module(im);
 }

@@ -47,7 +47,7 @@
  * Comment these out as required if testing only one frontend.
  */
 #define ENABLE_DIA_TESTS
-#define ENABLE_JSON_TESTS
+#define ENABLE_JSON_TESTS FIXME
 #define ENABLE_CSHARP_TESTS
 
 using dogen::utility::test_data::yarn_dia;
@@ -197,24 +197,12 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_dia) {
     BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
 }
 
-BOOST_AUTO_TEST_CASE(two_empty_layers_model_does_not_generate_code_dia) {
-    SETUP_TEST_LOG("two_empty_layers_model_does_not_generate_code_dia");
-    const auto dia(yarn_dia::input_two_empty_layers_dia());
-    BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
-}
-
 BOOST_AUTO_TEST_CASE(class_without_name_model_throws) {
     SETUP_TEST_LOG("class_without_name_model_throws");
     const auto target(yarn_dia::input_class_without_name_dia());
     contains_checker<std::exception> c(dia_invalid_name);
     BOOST_CHECK_EXCEPTION(test_knit_workflow(target, actual_dia_dir),
         std::exception, c);
-}
-
-BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code_dia) {
-    SETUP_TEST_LOG("empty_model_generates_expected_code_dia");
-    const auto dia(yarn_dia::input_empty_dia());
-    BOOST_CHECK(test_knit_workflow(dia, actual_dia_dir));
 }
 
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code_dia) {
@@ -329,21 +317,9 @@ BOOST_AUTO_TEST_CASE(enable_facet_io_generates_expected_code_json) {
     BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
 }
 
-BOOST_AUTO_TEST_CASE(empty_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("empty_model_generates_expected_code_json");
-    const auto json(yarn_json::input_empty_json());
-    BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
-}
-
 BOOST_AUTO_TEST_CASE(compressed_model_generates_expected_code_json) {
     SETUP_TEST_LOG("compressed_model_generates_expected_code_json");
     const auto json(yarn_json::input_compressed_json());
-    BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
-}
-
-BOOST_AUTO_TEST_CASE(two_layers_with_objects_model_generates_expected_code_json) {
-    SETUP_TEST_LOG("two_layers_with_objects_model_generates_expected_code_json");
-    const auto json(yarn_json::input_two_layers_with_objects_json());
     BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
 }
 

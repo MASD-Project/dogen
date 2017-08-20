@@ -1,9 +1,9 @@
 {
-  "model_name": "System.Collections.Generic",
   "documentation": "Basic generic collection types.",
   "annotation": {
     "yarn.input_language": "csharp",
-    "yarn.is_proxy_model": true
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules" : "System.Collections.Generic"
   },
   "elements": [
     {

@@ -293,7 +293,8 @@
             <dia:string>#Tests support for C++ 98.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN yarn.model_modules=cpp_98
+#DOGEN yarn.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false

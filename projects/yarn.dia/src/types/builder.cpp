@@ -35,10 +35,8 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.builder"));
 
 const std::string empty_package_id("Supplied package id is empty");
-const std::string missing_module_for_name("Missing module for name: ");
 const std::string missing_name_for_id("Missing name for dia object ID: ");
 const std::string duplicate_element_id("Element id already exists: ");
-const std::string duplicate_attribute_name("Attribute name already exists: ");
 const std::string duplicate_dia_id("Duplicate dia id: ");
 const std::string package_not_mapped(
     "Dia package ID is not mapped to yarn module: ");
@@ -49,99 +47,34 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-template<typename Element> void add_element(
-    std::unordered_map<std::string, boost::shared_ptr<Element>>& container,
-    const boost::shared_ptr<Element>& e) {
-
-    const auto id(e->name().id());
-    const auto pair(std::make_pair(id, e));
-    bool inserted(container.insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_element_id << id;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + id));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Added element to model " << id;
-}
-
-builder::builder(const std::string& model_name,
-    const std::string& external_modules,
-    const std::unordered_map<std::string, std::list<std::string> >&
+builder::builder(const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids) : parent_id_to_child_ids_(parent_id_to_child_ids) {
-    setup_model(model_name, external_modules);
+    /*
+     * Initialise the root module to (almost) nothing. We can't do
+     * much more at the moment since we do not process the root module
+     * name, nor do we know where it's scribbles are. We do it here
+     * just to make sure the root module is initialised, in case the
+     * user did not provide any documentation or scribbles for it.
+     */
+    auto rm(boost::make_shared<meta_model::module>());
+    rm->is_root(true);
+    model_.root_module().second = rm;
 }
 
-meta_model::module& builder::module_for_name(const meta_model::name& n) {
-    const auto i(model_.modules().find(n.id()));
-    if (i == model_.modules().end()) {
-        const auto sn(n.simple());
-        BOOST_LOG_SEV(lg, error) << missing_module_for_name << sn;
-        BOOST_THROW_EXCEPTION(building_error(missing_module_for_name + sn));
-    }
-    return *i->second;
-}
+void builder::add_module_to_context(const std::string& dia_id,
+    boost::shared_ptr<meta_model::module> m) {
 
-boost::shared_ptr<meta_model::module>
-builder::create_module_for_model(const meta_model::name& n) const {
-    auto r(boost::make_shared<meta_model::module>());
-    r->name(n);
-    return r;
-}
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<yarn::meta_model::module>> module_pair;
+    module_pair.second = m;
 
-void builder::setup_model(const std::string& model_name,
-    const std::string& external_modules) {
-
-    helpers::name_factory nf;
-    model_.name(nf.build_model_name(model_name, external_modules));
-    BOOST_LOG_SEV(lg, debug) << "Model: " << model_.name().id();
-
-    const auto mm(create_module_for_model(model_.name()));
-    model_.modules().insert(std::make_pair(mm->name().id(), mm));
-}
-
-void builder::
-update_scribble_group(const meta_model::name& n, const processed_object& po) {
-    annotations::scribble psbl;
-    const auto& kvps(po.comment().key_value_pairs());
-    psbl.entries(kvps);
-
-    using annotations::scope_types;
-    psbl.scope(n == model_.name() ?
-        scope_types::root_module : scope_types::entity);
-
-    annotations::scribble_group sg;
-    sg.parent(psbl);
-
-    for (const auto& attr : po.attributes()) {
-        const auto& kvps(attr.comment().key_value_pairs());
-        if (kvps.empty())
-            continue;
-
-        annotations::scribble csbl;
-        csbl.entries(kvps);
-        csbl.scope(scope_types::property);
-
-        const auto pair(std::make_pair(attr.name(), csbl));
-        const auto&inserted(sg.children().insert(pair).second);
-        if (!inserted) {
-            BOOST_LOG_SEV(lg, error) << duplicate_attribute_name << attr.name();
-            BOOST_THROW_EXCEPTION(
-                building_error(duplicate_attribute_name + attr.name()));
-        }
-    }
-
-    bool no_kvps(sg.parent().entries().empty() && sg.children().empty());
-    if (no_kvps)
-        return;
-
-    const auto pair(std::make_pair(n.id(), sg));
-    BOOST_LOG_SEV(lg, debug) << "Inserting scribble group: " << pair;
-
-    auto& sgrps(model_.scribble_groups());
-    const bool inserted(sgrps.insert(pair).second);
+    const auto dia_pair(std::make_pair(dia_id, module_pair));
+    bool inserted(context_.dia_id_to_module().insert(dia_pair).second);
     if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_element_id << n.id();
-        BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + n.id()));
+        BOOST_LOG_SEV(lg, error) << duplicate_element_id << dia_id;
+        BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + dia_id));
     }
+    BOOST_LOG_SEV(lg, debug) << "Added module to context: " << dia_id;
 }
 
 void builder::
@@ -166,19 +99,7 @@ update_parentage(const std::string& dia_id, const meta_model::name& n) {
         context_.child_dia_id_to_parent_names()[c].push_back(n);
 }
 
-void builder::update_module(const std::string& dia_id,
-    boost::shared_ptr<meta_model::module> m) {
-
-    const auto pair(std::make_pair(dia_id, m));
-    bool inserted(context_.dia_id_to_module().insert(pair).second);
-    if (!inserted) {
-        BOOST_LOG_SEV(lg, error) << duplicate_element_id << dia_id;
-        BOOST_THROW_EXCEPTION(building_error(duplicate_element_id + dia_id));
-    }
-    BOOST_LOG_SEV(lg, debug) << "Added module to context: " << dia_id;
-}
-
-void builder::update_documentation(const processed_object& po) {
+void builder::update_module(const processed_object& po) {
     BOOST_LOG_SEV(lg, debug) << "Object is a note: "
                              << po.id()
                              << ". Note text: '"
@@ -188,66 +109,102 @@ void builder::update_documentation(const processed_object& po) {
         !po.comment().applicable_to_parent_object())
         return;
 
+    const transformer t(context_);
     const auto& documentation(po.comment().documentation());
-
     if (po.child_node_id().empty()) {
-        auto& module(module_for_name(model_.name()));
-        module.documentation(documentation);
-        update_scribble_group(module.name(), po);
+        /*
+         * Since this note does not have a child, it is a top-level
+         * note. Thus is may be used to convey both scribbles and
+         * documentation for the root module.
+         */
+        auto& pair(model_.root_module());
+        pair.first = t.to_scribble_group(po, true/*is_root_module*/);
+        pair.second->documentation(documentation);
         return;
     }
 
+    /*
+     * If the note is contained inside of a package, we need to ensure
+     * we update the module for that package with its scribbles and
+     * documentation. The module must already exist.
+     */
     const auto package_id(po.child_node_id());
     const auto i(context_.dia_id_to_module().find(package_id));
     if (i == context_.dia_id_to_module().end()) {
         BOOST_LOG_SEV(lg, error) << package_not_mapped << package_id;
         BOOST_THROW_EXCEPTION(building_error(package_not_mapped + package_id));
     }
-    auto& module(*i->second);
-    module.documentation(documentation);
-    update_scribble_group(module.name(), po);
+    auto& pair(i->second);
+    pair.first = t.to_scribble_group(po, false/*is_root_module*/);
+    pair.second->documentation(documentation);
 }
 
 void builder::add(const processed_object& po) {
-    const transformer t(context_, model_.name());
-
-    const auto id(po.id());
+    /*
+     * First we handle module construction. Here, we have two
+     * scenarios: either we are a UML package - in which case we
+     * should process it into a yarn module - or we are a UML note,
+     * containing the scribble and documentation information for a
+     * module. This happens because dia does not support adding
+     * comments directly to packages, so we "extended" it via the use
+     * of UML notes.
+     *
+     * Note that we do not add the modules to the model at this stage;
+     * this is done during the building phase.
+     */
     const auto dot(po.dia_object_type());
-    const auto yot(po.yarn_object_type());
-    if (dot == dia_object_types::uml_note) {
-        update_documentation(po);
+    const transformer t(context_);
+    if (dot == dia_object_types::uml_large_package) {
+        add_module_to_context(po.id(), t.to_module(po));
         return;
-    } else if (dot == dia_object_types::uml_large_package) {
-        const auto m(t.to_module(po));
-        update_module(id, m);
-        add_element(model_.modules(), m);
-        update_scribble_group(m->name(), po);
-    } else if (yot == yarn_object_types::enumeration) {
-        const auto e(t.to_enumeration(po));
-        add_element(model_.enumerations(), e);
-        update_scribble_group(e->name(), po);
-    } else if (yot == yarn_object_types::primitive) {
-        const auto p(t.to_primitive(po));
-        add_element(model_.primitives(), p);
-        update_scribble_group(p->name(), po);
-    } else if (yot == yarn_object_types::concept) {
-        const auto c(t.to_concept(po));
-        update_parentage(po.id(), c->name());
-        add_element(model_.concepts(), c);
-        update_scribble_group(c->name(), po);
-    } else if (yot == yarn_object_types::exception) {
-        const auto e(t.to_exception(po));
-        add_element(model_.exceptions(), e);
-        update_scribble_group(e->name(), po);
-    } else {
-        const auto o(t.to_object(po));
-        update_parentage(po.id(), o->name());
-        add_element(model_.objects(), o);
-        update_scribble_group(o->name(), po);
+    } else if (dot == dia_object_types::uml_note) {
+        update_module(po);
+        return;
     }
+
+    /*
+     * Now we can handle the remaining objects, all mapped to yarn
+     * element types. For these, enumerations, primitives and
+     * exceptions are trivial; we just need to transform
+     * them. Concepts and objects have the notion of parenting, so for
+     * them we must also resolve the dia object ID containment into
+     * yarn names.
+     */
+    switch(po.yarn_object_type()) {
+    case yarn_object_types::enumeration:
+        model_.enumerations().push_back(t.to_enumeration(po));
+        break;
+    case yarn_object_types::primitive:
+        model_.primitives().push_back(t.to_primitive(po));
+        break;
+    case yarn_object_types::exception:
+        model_.exceptions().push_back(t.to_exception(po));
+        break;
+    case yarn_object_types::concept: {
+        const auto pair(t.to_concept(po));
+        update_parentage(po.id(), pair.second->name());
+        model_.concepts().push_back(pair);
+        break;
+    }
+    default: {
+        /*
+         * Objects are in effect anything which was not marked as
+         * something else so they are our default case.
+         */
+        const auto pair(t.to_object(po));
+        update_parentage(po.id(), pair.second->name());
+        model_.objects().push_back(pair);
+    } }
 }
 
-meta_model::intermediate_model builder::build() {
+meta_model::exogenous_model builder::build() {
+    /*
+     * Add all modules in context into the modules container in the
+     * model.
+     */
+    for (const auto& pair : context_.dia_id_to_module())
+        model_.modules().push_back(pair.second);
+
     return model_;
 }
 

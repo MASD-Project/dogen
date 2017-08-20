@@ -1,9 +1,8 @@
 {
-  "model_name": "CSharpModel",
-  "external_modules": "Dogen::TestModels",
   "annotation": {
     "yarn.dia.comment": "true",
-    "yarn.dia.external_modules": "Dogen.TestModels",
+    "yarn.external_modules": "Dogen.TestModels",
+    "yarn.model_modules": "CSharpModel",
     "yarn.input_language": "csharp",
     "quilt.csharp.enabled": "true",
     "quilt.cpp.enabled": "false",

@@ -60,7 +60,7 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
     return boost::ends_with(model_identifier, extension);
 }
 
-meta_model::intermediate_model
+meta_model::exogenous_model
 exogenous_transform::transform(const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Reading Dia diagram.";
 
@@ -69,8 +69,7 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "read Dia diagram.";
 
     BOOST_LOG_SEV(lg, debug) << "Converting it into yarn.";
-    const auto name(p.stem().string());
-    const auto r(dogen::yarn::dia::workflow::execute(diagram, name));
+    const auto r(yarn::dia::workflow::execute(diagram));
     BOOST_LOG_SEV(lg, debug) << "Finished converting it into yarn.";
 
     return r;

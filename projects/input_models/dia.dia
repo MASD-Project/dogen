@@ -4825,7 +4825,8 @@ between the class and the slot concepts, we renamed it.#</dia:string>
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=dia
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false

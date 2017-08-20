@@ -19,6 +19,10 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
+#include "dogen/yarn/io/meta_model/exogenous_model_io.hpp"
+#include "dogen/yarn/types/transforms/naming_transform.hpp"
+#include "dogen/yarn/types/transforms/annotations_transform.hpp"
+#include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
 #include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
 
 namespace {
@@ -35,6 +39,18 @@ namespace transforms {
 std::shared_ptr<exogenous_transform_registrar>
 exogenous_model_chain::registrar_;
 
+exogenous_transform_interface& exogenous_model_chain::
+transform_for_model(const boost::filesystem::path& p) {
+    /*
+     * Ensure the registrar is in a valid state before we proceed.
+     */
+    auto& rg(registrar());
+    rg.validate();
+
+    const auto model_identifier(p.filename().string());
+    return rg.transform_for_model(model_identifier);
+}
+
 exogenous_transform_registrar& exogenous_model_chain::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<exogenous_transform_registrar>();
@@ -42,18 +58,39 @@ exogenous_transform_registrar& exogenous_model_chain::registrar() {
     return *registrar_;
 }
 
-meta_model::intermediate_model
-exogenous_model_chain::transform(const boost::filesystem::path& p) {
+meta_model::intermediate_model exogenous_model_chain::
+transform(const context& ctx, const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
                              << p.generic_string();
 
-    auto& rg(registrar());
-    rg.validate();
+    /*
+     * Transform the exogenous model - in whatever supported
+     * representation it may be in, Dia, JSON, etc - into the internal
+     * represetnation of the exogenous model.
+     */
+    auto& t(transform_for_model(p));
+    auto em(t.transform(p));
 
-    const auto model_identifier(p.filename().string());
-    auto& t(rg.transform_for_model(model_identifier));
+    /*
+     * Now transform the annotations. This must be done at this point
+     * because the naming transform reads naming information from the
+     * annotations.
+     */
+    annotations_transform::transform(ctx, em);
 
-    const auto r(t.transform(p));
+    /*
+     * Update all element names and attributes to take into account
+     * the external modules and the model modules, supplied as meta-data.
+     */
+    naming_transform::transform(ctx, em);
+
+    /*
+     * Finally, we can convert the internal representation of the
+     * exogenous model into an intermediate model, ready for further
+     * processing.
+     */
+    const auto r(intermediate_model_transform::transform(em));
+
     BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
     return r;
 }
@@ -63,13 +100,9 @@ void exogenous_model_chain::transform(const meta_model::intermediate_model& im,
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn model: "
                              << im.name().id();
 
-    auto& rg(registrar());
-    rg.validate();
-
-    const auto model_identifier(p.filename().string());
-    auto& t(rg.transform_for_model(model_identifier));
-
+    auto& t(transform_for_model(p));
     t.transform(im, p);
+
     BOOST_LOG_SEV(lg, debug) << "Transformed yarn model. Location: "
                              << p.generic_string();
 }

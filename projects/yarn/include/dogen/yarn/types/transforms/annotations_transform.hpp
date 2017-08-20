@@ -25,28 +25,66 @@
 #pragma once
 #endif
 
-#include "dogen/annotations/types/annotation_groups_factory_fwd.hpp"
+#include <list>
+#include <utility>
+#include "dogen/annotations/types/annotation_group.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/primitive.hpp"
+#include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model_fwd.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-/**
- * @brief Reads raw meta-data and uses it to create the annotations
- * objects.
- */
 class annotations_transform final {
 private:
-    static void update_scribble_groups(meta_model::intermediate_model& im);
-    static void update_annotations(
-        const annotations::annotation_groups_factory& agf,
-        meta_model::intermediate_model& im);
+    static annotations::annotation_group
+    obtain_annotation_group(const context& ctx, annotations::scribble_group sg,
+        const meta_model::element& e);
+
+private:
+    static void process_attributes(const annotations::annotation_group& ag,
+        std::list<meta_model::attribute>& attrs);
+
+private:
+    static void process(const annotations::annotation_group& ag,
+        meta_model::element& e);
+    static void process(const annotations::annotation_group& sg,
+        meta_model::concept& c);
+    static void process(const annotations::annotation_group& sg,
+        meta_model::object& o);
+    static void process(const annotations::annotation_group& sg,
+        meta_model::enumeration& e);
+
+    template<typename Element>
+    static void process(const context& ctx,
+        std::pair<annotations::scribble_group,
+        boost::shared_ptr<Element>>& pair) {
+        const auto& sg(pair.first);
+        auto& e(*pair.second);
+        const auto ag(obtain_annotation_group(ctx, sg, e));
+        process(ag, e);
+    }
+
+    template<typename Element>
+    static void process(const context& ctx,
+        std::list<std::pair<annotations::scribble_group,
+        boost::shared_ptr<Element>>>& elements) {
+        for (auto& pair : elements)
+            process(ctx, pair);
+    }
 
 public:
-    static void transform(const context& ctx,
-        meta_model::intermediate_model& im);
+    static void transform(const context& ctx, meta_model::exogenous_model& em);
 };
 
 } } }

@@ -31,9 +31,11 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
+/**
+ * @brief Generates all of the modules implied by the defined types.
+ */
 class modules_transform final {
 private:
-    static void populate_root_module(meta_model::intermediate_model& im);
     static void create_missing_modules(meta_model::intermediate_model& im);
     static void expand_containing_module(meta_model::intermediate_model& im);
 

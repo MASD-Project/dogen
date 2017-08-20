@@ -1,9 +1,8 @@
 {
-  "model_name": "lam_model",
-  "external_modules": "dogen::test_models",
   "annotation": {
     "yarn.dia.comment": "true",
-    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.model_modules": "lam_model",
     "yarn.input_language": "language_agnostic",
     "yarn.output_language": "csharp",
     "yarn.output_language": "cpp",

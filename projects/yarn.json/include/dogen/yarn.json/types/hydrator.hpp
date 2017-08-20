@@ -28,10 +28,11 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"
 #include "dogen/yarn/types/meta_model/object_types.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -50,6 +51,14 @@ public:
 
 private:
     /**
+     * @brief Converts a string to a value in the object types
+     * enumeration.
+     */
+    meta_model::object_types
+    to_object_type(const boost::optional<std::string>& s) const;
+
+private:
+    /**
      * @brief Reads the key value pairs from the property tree.
      */
     std::list<std::pair<std::string, std::string>>
@@ -63,21 +72,6 @@ private:
         const annotations::scope_types st) const;
 
     /**
-     * @brief Inserts the scribble group into the model's indicies.
-     */
-    void insert_scribble_group(const yarn::meta_model::name& owner,
-        const annotations::scribble_group& sg,
-        meta_model::intermediate_model& im) const;
-
-    /**
-     * @brief Reads and inserts the scribble group.
-     */
-    void read_and_insert_scribble_group(const meta_model::name& owner,
-        const annotations::scope_types st,
-        const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
-
-    /**
      * @brief Read and inserts the scribble into the scribble group.
      */
     void read_and_insert_scribble(const meta_model::name& owner,
@@ -85,14 +79,12 @@ private:
         const boost::property_tree::ptree& pt,
         annotations::scribble_group& sg) const;
 
+private:
     /**
      * @brief Read a name.
      */
     /**@{*/
     meta_model::name read_name(const boost::property_tree::ptree& pt) const;
-    meta_model::name read_name(const boost::property_tree::ptree& pt,
-        const meta_model::name& model_name,
-        const bool in_global_module = false) const;
     /**@}*/
 
     /**
@@ -131,80 +123,85 @@ private:
      * its scribbles.
      */
     void populate_element(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im, meta_model::element& e) const;
+        meta_model::element& e) const;
+
+private:
+    /**
+     * @brief Sets up the root module.
+     */
+    std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::module>>
+    read_root_module(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads an object.
      */
-    void read_object(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>
+    read_object(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads a builtin.
      */
-    void read_builtin(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::builtin>>
+    read_builtin(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads a module.
      */
-    void read_module(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::module>>
+    read_module(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads an enumeration.
      */
-    void read_enumeration(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::enumeration>>
+    read_enumeration(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads a primitive.
      */
-    void read_primitive(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::primitive>>
+    read_primitive(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads an exception.
      */
-    void read_exception(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::exception>>
+    read_exception(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads a concept.
      */
-    void read_concept(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::concept>>
+    read_concept(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Reads the meta-type and dispatches to the correct read
-     * functions.
+     * @brief Reads an element according to its meta-type by
+     * dispatching to the correct read functions.
      */
-    void dispatch_meta_type(const boost::property_tree::ptree& pt,
-        meta_model::intermediate_model& im) const;
+    void read_element(const boost::property_tree::ptree& pt,
+        meta_model::exogenous_model& em) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    meta_model::intermediate_model read_stream(std::istream& s) const;
-
-    /**
-     * @brief Converts a string to a value in the object types
-     * enumeration.
-     */
-    meta_model::object_types
-    to_object_type(const boost::optional<std::string>& s) const;
+    meta_model::exogenous_model read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the model from the JSON stream.
      */
-    meta_model::intermediate_model hydrate(std::istream& s) const;
+    meta_model::exogenous_model hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the model
      * from the JSON stream.
      */
-    meta_model::intermediate_model
+    meta_model::exogenous_model
     hydrate(const boost::filesystem::path& p) const;
 };
 

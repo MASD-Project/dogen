@@ -74,10 +74,10 @@ transform(const context& ctx, const meta_model::intermediate_model& target) {
     std::list<meta_model::intermediate_model> r;
     for (const auto& rp : rps) {
         /*
-         * Obtain the reference model exactly as it was read out from
-         * the exogenous transformer.
+         * Obtain the reference model in the internal representation
+         * of the exogenous model.
          */
-        auto rm(exogenous_model_chain::transform(rp));
+        auto rm(exogenous_model_chain::transform(ctx, rp));
 
         /*
          * Apply all of the pre-processing transforms to the reference

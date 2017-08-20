@@ -50,6 +50,12 @@ const std::string ugly_dataset_expected("tds_test_ugly/expected");
 
 const std::string file_not_found("File not found: ");
 
+/*
+ * Set to true to rebase. Note that you still need to run the
+ * appropriate rebase target afterwards to copy the files across.
+ */
+const bool rm(false);
+
 struct test_serialization {
     test_serialization() : i_(0) {}
     test_serialization(int i) : i_(i) { }
@@ -169,7 +175,7 @@ BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_returns_true_if_items_a
 
     test_serialization ts(5);
     using dogen::utility::test::asserter;
-    BOOST_CHECK(asserter::assert_object(e, a, ts));
+    BOOST_CHECK(asserter::assert_object(rm, e, a, ts));
 }
 
 BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_returns_false_if_items_are_different) {
@@ -180,7 +186,7 @@ BOOST_AUTO_TEST_CASE(assert_object_serialize_and_compare_returns_false_if_items_
 
     test_serialization ts(10);
     using dogen::utility::test::asserter;
-    BOOST_CHECK(!asserter::assert_object(e, a, ts));
+    BOOST_CHECK(!asserter::assert_object(rm, e, a, ts));
 }
 
 BOOST_AUTO_TEST_CASE(assert_equals_returns_false_if_items_are_different) {

@@ -251,7 +251,8 @@ property. You can see the use of comments at the class level and property
 level.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=hello_world
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false

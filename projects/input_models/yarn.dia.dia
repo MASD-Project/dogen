@@ -586,13 +586,13 @@ into its yarn representation.#</dia:string>
         <dia:point val="48,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,33.95;85.895,37.65"/>
+        <dia:rectangle val="47.95,33.95;100.525,37.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,34"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="37.844999999999999"/>
+        <dia:real val="52.475000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -690,7 +690,7 @@ into its yarn representation.#</dia:string>
             <dia:string>#dia_id_to_module#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::unordered_map&lt;std::string, boost::shared_ptr&lt;yarn::meta_model::module&gt;&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::pair&lt;annotations::scribble_group, boost::shared_ptr&lt;yarn::meta_model::module&gt;&gt;&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -3536,7 +3536,8 @@ the root of an inheritance tree.
 @li @b comparable: unused as of yet.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=yarn.dia
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.reference=dia.dia
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=yarn.dia
@@ -5625,7 +5626,7 @@ manageable format.#</dia:string>
         <dia:point val="39.375,34"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="38.625,29.2;67.1225,34.8"/>
+        <dia:rectangle val="38.625,29.2;74.4375,34.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -5633,8 +5634,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="39.375,34"/>
         <dia:point val="39.375,30"/>
-        <dia:point val="66.9225,30"/>
-        <dia:point val="66.9225,34"/>
+        <dia:point val="74.2375,30"/>
+        <dia:point val="74.2375,34"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5693,17 +5694,17 @@ manageable format.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="66.9225,37.6"/>
+        <dia:point val="74.2375,37.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="66.1725,36.85;91.735,49.8"/>
+        <dia:rectangle val="73.4875,36.85;91.735,49.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="66.9225,37.6"/>
-        <dia:point val="66.9225,45"/>
+        <dia:point val="74.2375,37.6"/>
+        <dia:point val="74.2375,45"/>
         <dia:point val="91.535,45"/>
         <dia:point val="91.535,49"/>
       </dia:attribute>

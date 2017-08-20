@@ -35,7 +35,7 @@ namespace yarn {
 namespace dia {
 
 context::context(
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& dia_id_to_module,
+    const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& dia_id_to_module,
     const std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> >& child_dia_id_to_parent_names)
     : dia_id_to_module_(dia_id_to_module),
       child_dia_id_to_parent_names_(child_dia_id_to_parent_names) { }
@@ -57,19 +57,19 @@ context& context::operator=(context other) {
     return *this;
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& context::dia_id_to_module() const {
+const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& context::dia_id_to_module() const {
     return dia_id_to_module_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& context::dia_id_to_module() {
+std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& context::dia_id_to_module() {
     return dia_id_to_module_;
 }
 
-void context::dia_id_to_module(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
+void context::dia_id_to_module(const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& v) {
     dia_id_to_module_ = v;
 }
 
-void context::dia_id_to_module(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
+void context::dia_id_to_module(const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >&& v) {
     dia_id_to_module_ = std::move(v);
 }
 

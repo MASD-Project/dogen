@@ -42,7 +42,7 @@ public:
     yarn::transforms::exogenous_transform_types
     supported_transforms() const override;
     bool can_transform(const std::string& model_identifier) const override;
-    meta_model::intermediate_model
+    meta_model::exogenous_model
     transform(const boost::filesystem::path& p) override;
     void transform(const meta_model::intermediate_model& im,
         const boost::filesystem::path& p) override;

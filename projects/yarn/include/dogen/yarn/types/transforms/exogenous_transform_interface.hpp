@@ -27,6 +27,7 @@
 
 #include <string>
 #include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_types.hpp"
 
@@ -68,23 +69,24 @@ public:
     virtual bool can_transform(const std::string& model_identifier) const = 0;
 
     /**
-     * @brief Transforms the exogenous model supplied into an
-     * intermediate model.
+     * @brief Transforms the exogenous model at the supplied path and
+     * transforms it into an internal representation of an exogenous
+     * model.
      *
      * @param s Path to an exogenous model.
      *
      * @pre Model must conform to the format supported by the
-     * transformer, as validated by @e can_transform.
+     * transform, as validated by @e can_transform.
      *
      * @note Method is non-const by design at the moment as some
-     * exogenous transformers have state.
+     * exogenous transforms have mutable state.
      *
      * @note This function is receiving a path to the model, rather
      * than the file contents because at the moment the exogenous
-     * transformers cannot cope with string processing. In the future
-     * this will change to a string.
+     * transforms implementations cannot cope with string
+     * processing. In the future this will change to a string.
      */
-    virtual meta_model::intermediate_model
+    virtual meta_model::exogenous_model
     transform(const boost::filesystem::path& p) = 0;
 
     /**

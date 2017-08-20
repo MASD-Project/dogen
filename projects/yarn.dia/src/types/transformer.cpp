@@ -24,6 +24,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/dia/types/composite.hpp"
 #include "dogen/yarn.dia/types/transformation_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -38,6 +39,7 @@ using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.transformer"));
 
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
+const std::string duplicate_attribute_name("Attribute name already exists: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string multiple_inheritance(
     "Child has more than one parent, but multiple inheritance not supported:");
@@ -50,8 +52,7 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-transformer::transformer(const context& ctx, const meta_model::name& mn)
-    : model_name_(mn), context_(ctx) {
+transformer::transformer(const context& ctx) : context_(ctx) {
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
 
@@ -64,8 +65,9 @@ void transformer::validate_dia_object_name(const std::string& n) const {
 
 meta_model::name transformer::to_name(const std::string& n) const {
     validate_dia_object_name(n);
-    helpers::name_factory f;
-    return f.build_element_in_model(model_name_, n);
+    helpers::name_builder b;
+    b.simple_name(n);
+    return b.build();
 }
 
 meta_model::name transformer::
@@ -119,7 +121,7 @@ update_element(const processed_object& po, meta_model::element& e) const {
             BOOST_THROW_EXCEPTION(
                 transformation_error(package_not_mapped + package_id));
         }
-        const auto& module(*i->second);
+        const auto& module(*i->second.second);
         e.name(to_name(po.name(), module.name()));
     } else {
         /*
@@ -137,59 +139,100 @@ update_element(const processed_object& po, meta_model::element& e) const {
         e.stereotypes().push_back(us);
 }
 
-boost::shared_ptr<meta_model::object>
+annotations::scribble_group transformer::
+to_scribble_group(const processed_object& po, const bool is_root_module) const {
+    annotations::scribble psbl;
+    const auto& kvps(po.comment().key_value_pairs());
+    psbl.entries(kvps);
+
+    using annotations::scope_types;
+    psbl.scope(is_root_module ? scope_types::root_module : scope_types::entity);
+
+    annotations::scribble_group r;
+    r.parent(psbl);
+
+    for (const auto& attr : po.attributes()) {
+        const auto& kvps(attr.comment().key_value_pairs());
+        if (kvps.empty())
+            continue;
+
+        annotations::scribble csbl;
+        csbl.entries(kvps);
+        csbl.scope(scope_types::property);
+
+        const auto pair(std::make_pair(attr.name(), csbl));
+        const auto&inserted(r.children().insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_attribute_name << attr.name();
+            BOOST_THROW_EXCEPTION(
+                transformation_error(duplicate_attribute_name + attr.name()));
+        }
+    }
+
+    return r;
+}
+
+std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>
 transformer::to_object(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
                              << po.id();
 
-    auto r(boost::make_shared<meta_model::object>());
-    update_element(po, *r);
+    auto o(boost::make_shared<meta_model::object>());
+    update_element(po, *o);
 
-    for (const auto& p : po.attributes())
-        r->local_attributes().push_back(to_attribute(p));
+    for (const auto& attr : po.attributes())
+        o->local_attributes().push_back(to_attribute(attr));
 
     const auto i(context_.child_dia_id_to_parent_names().find(po.id()));
     if (i == context_.child_dia_id_to_parent_names().end() || i->second.empty())
-        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << r->name().id();
+        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << o->name().id();
     else {
-        r->is_child(true);
-        r->parents(i->second);
+        o->is_child(true);
+        o->parents(i->second);
     }
-    return r;
+
+    const auto sg(to_scribble_group(po, false/*is_root_module*/));
+    return std::make_pair(sg, o);
 }
 
-boost::shared_ptr<meta_model::exception>
+std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::exception>>
 transformer::to_exception(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
                              << po.id();
 
     auto e(boost::make_shared<meta_model::exception>());
     update_element(po, *e);
-    return e;
+
+    const auto sg(to_scribble_group(po, false/*is_root_module*/));
+    return std::make_pair(sg, e);
 }
 
-boost::shared_ptr<meta_model::enumeration>
+std::pair<annotations::scribble_group,
+          boost::shared_ptr<meta_model::enumeration>>
 transformer::to_enumeration(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << po.id();
 
-    auto r(boost::make_shared<meta_model::enumeration>());
-    update_element(po, *r);
+    auto e(boost::make_shared<meta_model::enumeration>());
+    update_element(po, *e);
 
     for (const auto& attr : po.attributes())
-        r->enumerators().push_back(to_enumerator(attr));
+        e->enumerators().push_back(to_enumerator(attr));
 
-    return r;
+    const auto sg(to_scribble_group(po, false/*is_root_module*/));
+    return std::make_pair(sg, e);
 }
 
-boost::shared_ptr<meta_model::primitive>
+std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::primitive>>
 transformer::to_primitive(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
                              << po.id();
 
-    auto r(boost::make_shared<meta_model::primitive>());
-    update_element(po, *r);
-    return r;
+    auto p(boost::make_shared<meta_model::primitive>());
+    update_element(po, *p);
+
+    const auto sg(to_scribble_group(po, false/*is_root_module*/));
+    return std::make_pair(sg, p);
 }
 
 boost::shared_ptr<meta_model::module>
@@ -202,25 +245,27 @@ transformer::to_module(const processed_object& po) const {
     return r;
 }
 
-boost::shared_ptr<meta_model::concept>
+std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::concept>>
 transformer::to_concept(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
                              << po.id();
 
-    auto r(boost::make_shared<meta_model::concept>());
-    update_element(po, *r);
+    auto c(boost::make_shared<meta_model::concept>());
+    update_element(po, *c);
 
     for (const auto& attr : po.attributes())
-        r->local_attributes().push_back(to_attribute(attr));
+        c->local_attributes().push_back(to_attribute(attr));
 
     const auto i(context_.child_dia_id_to_parent_names().find(po.id()));
     if (i == context_.child_dia_id_to_parent_names().end() || i->second.empty())
-        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << r->name().id();
+        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << c->name().id();
     else {
-        r->is_child(true);
-        r->refines(i->second);
+        c->is_child(true);
+        c->refines(i->second);
     }
-    return r;
+
+    const auto sg(to_scribble_group(po, false/*is_root_module*/));
+    return std::make_pair(sg, c);
 }
 
 } } }

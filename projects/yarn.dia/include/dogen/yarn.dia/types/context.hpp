@@ -27,10 +27,12 @@
 
 #include <list>
 #include <string>
+#include <utility>
 #include <algorithm>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
+#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn.dia/serialization/context_fwd_ser.hpp"
 
@@ -50,7 +52,7 @@ public:
 
 public:
     context(
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& dia_id_to_module,
+        const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& dia_id_to_module,
         const std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> >& child_dia_id_to_parent_names);
 
 private:
@@ -61,10 +63,10 @@ private:
     friend void boost::serialization::load(Archive& ar, dogen::yarn::dia::context& v, unsigned int version);
 
 public:
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& dia_id_to_module() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& dia_id_to_module();
-    void dia_id_to_module(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v);
-    void dia_id_to_module(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v);
+    const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& dia_id_to_module() const;
+    std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& dia_id_to_module();
+    void dia_id_to_module(const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& v);
+    void dia_id_to_module(const std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >&& v);
 
     const std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> >& child_dia_id_to_parent_names() const;
     std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> >& child_dia_id_to_parent_names();
@@ -82,7 +84,7 @@ public:
     context& operator=(context other);
 
 private:
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> > dia_id_to_module_;
+    std::unordered_map<std::string, std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > dia_id_to_module_;
     std::unordered_map<std::string, std::list<dogen::yarn::meta_model::name> > child_dia_id_to_parent_names_;
 };
 

@@ -135,7 +135,8 @@
             <dia:string>#CPP is the C++ model in the quilt kernel.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=quilt.cpp
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.reference=options.dia
 #DOGEN yarn.reference=yarn.dia
 #DOGEN yarn.reference=formatters.dia

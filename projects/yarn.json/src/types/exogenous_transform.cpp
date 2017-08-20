@@ -55,7 +55,7 @@ exogenous_transform::can_transform(const std::string& model_identifier) const {
     return boost::ends_with(model_identifier, extension);
 }
 
-meta_model::intermediate_model
+meta_model::exogenous_model
 exogenous_transform::transform(const boost::filesystem::path& p) {
     hydrator h;
     return h.hydrate(p);

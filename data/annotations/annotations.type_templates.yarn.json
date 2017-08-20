@@ -1,6 +1,30 @@
 [
   {
     "name": {
+      "simple": "external_modules",
+      "qualified": "yarn.external_modules"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module"
+  },
+  {
+    "name": {
+      "simple": "model_modules",
+      "qualified": "yarn.model_modules"
+    },
+    "archetype_location": {
+      "family": "yarn"
+    },
+    "value_type": "text",
+    "template_kind": "instance",
+    "scope": "root_module"
+  },
+  {
+    "name": {
       "simple": "variable_number_of_parameters",
       "qualified": "yarn.type_parameters.variable_number_of_parameters"
     },

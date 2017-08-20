@@ -822,7 +822,8 @@ formats and transform it to code in any of the supported programming
 languages.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=knit
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.reference=annotations.dia
 #DOGEN yarn.reference=options.dia
 #DOGEN yarn.reference=yarn.dia

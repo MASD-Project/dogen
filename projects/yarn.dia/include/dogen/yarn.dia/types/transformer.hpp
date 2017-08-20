@@ -27,6 +27,7 @@
 
 #include <string>
 #include <memory>
+#include <utility>
 #include <boost/shared_ptr.hpp>
 #include "dogen/dia/types/object.hpp"
 #include "dogen/dia/types/attribute.hpp"
@@ -63,7 +64,7 @@ public:
      * @pre context pre-prepopulated with all the names and IDs
      * required for the transformations requested.
      */
-    transformer(const context& rp, const meta_model::name& mn);
+    explicit transformer(const context& ctx);
 
 private:
     /**
@@ -117,6 +118,14 @@ private:
 
 public:
     /**
+     * @brief Generates a scribble group from the processed object.
+     *
+     * FIXME: public for now until we fix module processing.
+     */
+    annotations::scribble_group to_scribble_group(
+        const processed_object& po, const bool is_root_module) const;
+
+    /**
      * @brief Converts a processed object containing a UML class with a
      * stereotype of exception to a yarn exception.
      *
@@ -124,7 +133,8 @@ public:
      *
      * @pre processed object must have the exception flag set.
      */
-    boost::shared_ptr<meta_model::exception>
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::exception>>
     to_exception(const processed_object& po) const;
 
     /**
@@ -136,7 +146,8 @@ public:
      *
      * @pre processed object must have the value object flag set.
      */
-    boost::shared_ptr<meta_model::object>
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::object>>
     to_object(const processed_object& po) const;
 
     /**
@@ -145,7 +156,8 @@ public:
      *
      * @param po the Dia UML class containing an enumeration.
      */
-    boost::shared_ptr<meta_model::enumeration>
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::enumeration>>
     to_enumeration(const processed_object& po) const;
 
     /**
@@ -154,7 +166,8 @@ public:
      *
      * @param po the Dia UML class containing a primitive.
      */
-    boost::shared_ptr<meta_model::primitive>
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::primitive>>
     to_primitive(const processed_object& po) const;
 
     /**
@@ -172,11 +185,11 @@ public:
      *
      * @param po Dia object which contains a concept.
      */
-    boost::shared_ptr<meta_model::concept>
+    std::pair<annotations::scribble_group,
+              boost::shared_ptr<meta_model::concept>>
     to_concept(const processed_object& o) const;
 
 private:
-    const meta_model::name model_name_;
     const context& context_;
 };
 

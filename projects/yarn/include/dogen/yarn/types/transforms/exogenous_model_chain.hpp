@@ -27,6 +27,7 @@
 
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_registrar.hpp"
 
 namespace dogen {
@@ -38,6 +39,14 @@ namespace transforms {
  * obtains it and transforms it into an intermediate model.
  */
 class exogenous_model_chain final {
+private:
+    /*
+     * @brief Given a path to an exogenous model, returns the
+     * appropriate exogenous transform for it.
+     */
+    static exogenous_transform_interface&
+    transform_for_model(const boost::filesystem::path& p);
+
 public:
     /**
      * @brief Registrar that keeps track of the available exogenous
@@ -54,7 +63,7 @@ public:
      * exogenous model.
      */
     static meta_model::intermediate_model
-    transform(const boost::filesystem::path& p);
+    transform(const context& ctx, const boost::filesystem::path& p);
 
     /**
      * @brief Transform the supplied intermediate model to its

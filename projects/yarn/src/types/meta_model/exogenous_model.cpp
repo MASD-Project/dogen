@@ -95,23 +95,28 @@ namespace yarn {
 namespace meta_model {
 
 exogenous_model::exogenous_model(
+    const dogen::yarn::meta_model::name& name,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object> > >& objects,
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions)
-    : modules_(modules),
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
+    const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module)
+    : name_(name),
+      modules_(modules),
       concepts_(concepts),
       builtins_(builtins),
       enumerations_(enumerations),
       primitives_(primitives),
       objects_(objects),
-      exceptions_(exceptions) { }
+      exceptions_(exceptions),
+      root_module_(root_module) { }
 
 void exogenous_model::swap(exogenous_model& other) noexcept {
     using std::swap;
+    swap(name_, other.name_);
     swap(modules_, other.modules_);
     swap(concepts_, other.concepts_);
     swap(builtins_, other.builtins_);
@@ -119,22 +124,41 @@ void exogenous_model::swap(exogenous_model& other) noexcept {
     swap(primitives_, other.primitives_);
     swap(objects_, other.objects_);
     swap(exceptions_, other.exceptions_);
+    swap(root_module_, other.root_module_);
 }
 
 bool exogenous_model::operator==(const exogenous_model& rhs) const {
-    return modules_ == rhs.modules_ &&
+    return name_ == rhs.name_ &&
+        modules_ == rhs.modules_ &&
         concepts_ == rhs.concepts_ &&
         builtins_ == rhs.builtins_ &&
         enumerations_ == rhs.enumerations_ &&
         primitives_ == rhs.primitives_ &&
         objects_ == rhs.objects_ &&
-        exceptions_ == rhs.exceptions_;
+        exceptions_ == rhs.exceptions_ &&
+        root_module_ == rhs.root_module_;
 }
 
 exogenous_model& exogenous_model::operator=(exogenous_model other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const dogen::yarn::meta_model::name& exogenous_model::name() const {
+    return name_;
+}
+
+dogen::yarn::meta_model::name& exogenous_model::name() {
+    return name_;
+}
+
+void exogenous_model::name(const dogen::yarn::meta_model::name& v) {
+    name_ = v;
+}
+
+void exogenous_model::name(const dogen::yarn::meta_model::name&& v) {
+    name_ = std::move(v);
 }
 
 const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& exogenous_model::modules() const {
@@ -247,6 +271,22 @@ void exogenous_model::exceptions(const std::list<std::pair<dogen::annotations::s
 
 void exogenous_model::exceptions(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >&& v) {
     exceptions_ = std::move(v);
+}
+
+const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& exogenous_model::root_module() const {
+    return root_module_;
+}
+
+std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& exogenous_model::root_module() {
+    return root_module_;
+}
+
+void exogenous_model::root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
+    root_module_ = v;
+}
+
+void exogenous_model::root_module(const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
+    root_module_ = std::move(v);
 }
 
 } } }

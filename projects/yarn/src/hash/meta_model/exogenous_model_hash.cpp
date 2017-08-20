@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/hash/meta_model/module_hash.hpp"
 #include "dogen/yarn/hash/meta_model/object_hash.hpp"
 #include "dogen/yarn/hash/meta_model/builtin_hash.hpp"
@@ -199,6 +200,7 @@ namespace meta_model {
 std::size_t exogenous_model_hasher::hash(const exogenous_model& v) {
     std::size_t seed(0);
 
+    combine(seed, v.name());
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(v.concepts()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(v.builtins()));
@@ -206,6 +208,7 @@ std::size_t exogenous_model_hasher::hash(const exogenous_model& v) {
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(v.primitives()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(v.objects()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(v.exceptions()));
+    combine(seed, hash_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.root_module()));
 
     return seed;
 }

@@ -1,9 +1,9 @@
 {
-  "model_name": "cpp.builtins",
   "documentation": "Hardware-provided built-in types.",
   "annotation": {
     "yarn.input_language": "cpp",
-    "yarn.is_proxy_model": true
+    "yarn.is_proxy_model": true,
+    "yarn.model_modules" : "cpp::builtins"
   },
   "elements": [
     {

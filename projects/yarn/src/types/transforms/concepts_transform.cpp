@@ -28,6 +28,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
 
@@ -72,12 +73,22 @@ find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
     return *i->second;
 }
 
-meta_model::concept& concepts_transform::
-find_concept(const meta_model::name& n, meta_model::intermediate_model& im) {
-    auto i(im.concepts().find(n.id()));
+meta_model::concept&
+concepts_transform::resolve_concept(const meta_model::name& owner,
+    const meta_model::name& concept_name, meta_model::intermediate_model& im) {
+    using helpers::resolver;
+    const auto oc(resolver::try_resolve_concept_name(owner, concept_name, im));
+    if (!oc) {
+        const auto id(concept_name.id());
+        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
+        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
+    }
+
+    auto i(im.concepts().find(oc->id()));
     if (i == im.concepts().end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << n.id();
-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + n.id()));
+        const auto id(oc->id());
+        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
+        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
     }
     return *i->second;
 }
@@ -126,9 +137,9 @@ expand_object(meta_model::object& o, meta_model::intermediate_model& im,
      * @e refines container for this.
      */
     std::list<meta_model::name> expanded_refines;
-    for (auto& n : o.modeled_concepts()) {
-        auto& c(find_concept(n, im));
-        expanded_refines.push_back(n);
+    for (auto& mc : o.modeled_concepts()) {
+        auto& c(resolve_concept(o.name(), mc, im));
+        expanded_refines.push_back(c.name());
         expanded_refines.insert(expanded_refines.end(),
             c.refines().begin(), c.refines().end());
     }
@@ -153,7 +164,7 @@ expand_object(meta_model::object& o, meta_model::intermediate_model& im,
      * If an object does have a parent, we must then find out all of
      * the concepts that our parents model.
      */
-    BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set difference.";
+    BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set diff.";
 
     std::set<meta_model::name> our_concepts;
     our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
@@ -199,8 +210,8 @@ void concepts_transform::expand_objects(meta_model::intermediate_model& im) {
     }
 }
 
-void concepts_transform::
-expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
+void concepts_transform::expand_concept(meta_model::concept& c,
+    meta_model::intermediate_model& im,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand concept: " << c.name().id();
 
@@ -217,9 +228,9 @@ expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
 
     std::list<meta_model::name> expanded_refines;
     for (auto& n : c.refines()) {
-        auto& parent(find_concept(n, im));
+        auto& parent(resolve_concept(c.name(), n, im));
         expand_concept(parent, im, processed_names);
-        expanded_refines.push_back(n);
+        expanded_refines.push_back(parent.name());
         expanded_refines.insert(expanded_refines.end(),
             parent.refines().begin(), parent.refines().end());
     }
@@ -240,7 +251,8 @@ void concepts_transform::expand_concepts(meta_model::intermediate_model& im) {
     }
 }
 
-void concepts_transform::transform(meta_model::intermediate_model& im) {
+void concepts_transform::
+transform(meta_model::intermediate_model& im) {
     /*
      * We must expand concepts before we expand objects as we rely on
      * the expanded attributes.

@@ -2384,7 +2384,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>3,4</value>
+										<value>3,-8</value>
 									</value>
 								</item>
 							</values>
@@ -2397,7 +2397,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>2.95,3.95;23.585,9.75</value>
+										<value>2.95,-8.05;38.215,0.95</value>
 									</value>
 								</item>
 							</values>
@@ -2430,7 +2430,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>3,4</value>
+										<value>3,-8</value>
 									</value>
 								</item>
 							</values>
@@ -2443,7 +2443,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>20.535</value>
+										<value>35.164999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -2456,7 +2456,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>5.7000000000000002</value>
+										<value>8.9000000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -2522,7 +2522,8 @@
 															<which>6</which>
 															<value>
 																<value>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen::test_models
+#DOGEN yarn.model_modules=cpp_model
+#DOGEN yarn.external_modules=dogen::test_models
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
@@ -2576,7 +2577,7 @@
 														<item>
 															<which>5</which>
 															<value>
-																<value>3.35,5.245</value>
+																<value>3.35,-6.755</value>
 															</value>
 														</item>
 													</values>
@@ -70946,7 +70947,7 @@ name.#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>150.667,110.6;165.042,118.6</value>
+										<value>150.668,110.6;165.042,117.8</value>
 									</value>
 								</item>
 							</values>

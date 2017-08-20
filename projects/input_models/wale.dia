@@ -95,7 +95,8 @@
         <dia:composite type="text">
           <dia:attribute name="string">
             <dia:string>##DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=wale
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.reference=formatters.dia
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true

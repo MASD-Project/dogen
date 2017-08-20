@@ -143,7 +143,6 @@
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/exogenous_transform_types.hpp"
 #include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
-#include "dogen/yarn/types/transforms/new_annotations_transform.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/external_transform_interface.hpp"
 #include "dogen/yarn/types/transforms/external_transform_registrar.hpp"

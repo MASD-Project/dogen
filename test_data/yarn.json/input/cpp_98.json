@@ -1,10 +1,9 @@
 {
-  "model_name": "cpp_98",
-  "external_modules": "dogen::test_models",
   "documentation": "Tests support for C++ 98.\n",
   "annotation": {
     "yarn.dia.comment": "true",
-    "yarn.dia.external_modules": "dogen::test_models",
+    "yarn.external_modules": "dogen::test_models",
+    "yarn.model_modules": "cpp_98",
     "yarn.input_language": "cpp",
     "quilt.cpp.enabled": "true",
     "quilt.cpp.msbuild.enabled": "false",

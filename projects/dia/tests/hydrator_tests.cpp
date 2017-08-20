@@ -40,6 +40,8 @@ namespace {
 const std::string test_module("dia");
 const std::string test_suite("hydrator_tests");
 
+
+
 bool test_hydrator(
     boost::filesystem::path input_path,
     boost::filesystem::path expected_path,
@@ -49,7 +51,12 @@ bool test_hydrator(
     dogen::dia::diagram actual(h.hydrate(input_path));
 
     using dogen::utility::test::asserter;
-    return asserter::assert_object(expected_path, actual_path, actual);
+    /*
+     * Set to true to rebase. Note that you still need to run the
+     * appropriate rebase target afterwards to copy the files across.
+     */
+    const bool rm(false);
+    return asserter::assert_object(rm, expected_path, actual_path, actual);
 }
 
 }

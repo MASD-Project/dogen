@@ -101,7 +101,8 @@ formatting process without necessarily knowing about this data, but
 yet imposing some constraints on the shape of the data.
 
 #DOGEN yarn.dia.comment=true
-#DOGEN yarn.dia.external_modules=dogen
+#DOGEN yarn.model_modules=annotations
+#DOGEN yarn.external_modules=dogen
 #DOGEN yarn.input_language=cpp
 #DOGEN quilt.cpp.enabled=true
 #DOGEN quilt.cpp.msbuild.enabled=false
