@@ -137,13 +137,6 @@ public:
      */
     annotation_group make(const scribble_group& sgrp) const;
 
-    /**
-     * @brief Produce the annotations group for all scribble groups.
-     */
-    std::unordered_map<std::string, annotation_group>
-    make(const std::unordered_map<std::string, scribble_group>&
-        scribble_groups) const;
-
 private:
     const std::vector<boost::filesystem::path> data_dirs_;
     const archetype_location_repository& archetype_location_repository_;

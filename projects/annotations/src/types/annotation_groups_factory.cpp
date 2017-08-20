@@ -379,19 +379,4 @@ annotation_groups_factory::make(const scribble_group& sgrp) const {
     return r;
 }
 
-std::unordered_map<std::string, annotation_group> annotation_groups_factory::
-make(const std::unordered_map<std::string, scribble_group>&
-    scribble_groups) const {
-
-    std::unordered_map<std::string, annotation_group> r;
-    for (const auto& pair : scribble_groups) {
-        const auto id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Processing scribble group: " << id;
-        const auto& sgrp(pair.second);
-        const auto ag(make(sgrp));
-        r[id] = ag;
-    }
-    return r;
-}
-
 } }

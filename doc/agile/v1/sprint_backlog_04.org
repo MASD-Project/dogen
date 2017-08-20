@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-20 Sun 21:41]
+#+CAPTION: Clock summary at [2017-08-20 Sun 22:06]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *25:21* |       |       | 100.0 |
+| *Total time*                                                                | *25:29* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 25:21   |       |       | 100.0 |
-| Active                                                                      |         | 25:21 |       | 100.0 |
+| Stories                                                                     | 25:29   |       |       | 100.0 |
+| Active                                                                      |         | 25:29 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.3 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   3.0 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  25.1 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  11.2 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.9 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  25.0 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  11.1 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.6 |
 | COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.7 |
-| STARTED Create an exogenous model                                           |         |       | 12:12 |  48.1 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  48.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -158,7 +158,9 @@ transform to proceed regardless. This way we still get strict checking
 for the common use case, but can override when required. Log can
 suggest this command line option, with a warning.
 
-*** STARTED Create an exogenous model                                 :story:
+*** COMPLETED Create an exogenous model                               :story:
+    CLOSED: [2017-08-20 Sun 22:06]
+    CLOCK: [2017-08-20 Sun 21:57]--[2017-08-20 Sun 22:05] =>  0:08
     CLOCK: [2017-08-20 Sun 21:02]--[2017-08-20 Sun 21:21] =>  0:19
     CLOCK: [2017-08-20 Sun 10:45]--[2017-08-20 Sun 10:48] =>  0:03
     CLOCK: [2017-08-20 Sun 10:12]--[2017-08-20 Sun 10:44] =>  0:32
