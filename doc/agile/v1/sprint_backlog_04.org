@@ -243,6 +243,20 @@ Steps:
 - process element annotation.
 - process attribute annotations, if stateful.
 
+*** STARTED Remove scribble group from intermediate model             :story:
+    CLOCK: [2017-08-20 Sun 22:06]--[2017-08-20 Sun 22:23] =>  0:17
+
+Now we have an exogenous model we no longer need the scribble group in
+the intermediate model. However, we were making use of it in the
+dehydration for tailor transformations.
+
+*** Tailor should rely only on exogenous models                       :story:
+
+At present we are transforming an intermediate model into the
+exogenous representation. However, we can probably get away with just
+the exogenous model. Update dehydrator and exogenous interfaces to
+work from just exogenous models.
+
 *** Use extension matching for exogenous models                       :story:
 
 Now that we no longer support upsilon we can revert to the simplistic
