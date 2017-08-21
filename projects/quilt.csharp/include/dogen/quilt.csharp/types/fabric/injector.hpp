@@ -29,7 +29,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace quilt {
@@ -42,21 +42,21 @@ public:
 
 private:
     void add_element(const boost::shared_ptr<yarn::meta_model::element>& e,
-        yarn::meta_model::intermediate_model& im) const;
+        yarn::meta_model::endomodel& im) const;
 
     void add_elements(
         const std::list<boost::shared_ptr<yarn::meta_model::element>>& elements,
-        yarn::meta_model::intermediate_model& im) const;
+        yarn::meta_model::endomodel& im) const;
 
 private:
     void inject_visual_studio(const annotations::type_repository& atrp,
-        yarn::meta_model::intermediate_model& im) const;
-    void inject_assembly_info(yarn::meta_model::intermediate_model& im) const;
-    void inject_assistant(yarn::meta_model::intermediate_model& im) const;
+        yarn::meta_model::endomodel& im) const;
+    void inject_assembly_info(yarn::meta_model::endomodel& im) const;
+    void inject_assistant(yarn::meta_model::endomodel& im) const;
 
 public:
     void inject(const annotations::type_repository& atrp,
-        yarn::meta_model::intermediate_model& im) const;
+        yarn::meta_model::endomodel& im) const;
 };
 
 } } } }

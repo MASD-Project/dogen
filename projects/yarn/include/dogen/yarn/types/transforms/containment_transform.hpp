@@ -28,7 +28,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -46,7 +46,7 @@ private:
      * @brief Injects the global module, and makes all modules that do
      * not have a containing namespace be contained by it.
      */
-    static void inject_global_module(meta_model::intermediate_model& im);
+    static void inject_global_module(meta_model::endomodel& im);
 
 public:
 
@@ -55,7 +55,7 @@ public:
      *
      * @param m Yarn model to operate on.
      */
-    static void transform(meta_model::intermediate_model& im);
+    static void transform(meta_model::endomodel& im);
 };
 
 } } }

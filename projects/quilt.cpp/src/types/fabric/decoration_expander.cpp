@@ -91,7 +91,7 @@ private:
 
 void decoration_expander::
 expand(const dogen::formatters::decoration_properties_factory& dpf,
-    yarn::meta_model::intermediate_model& im) const {
+    yarn::meta_model::endomodel& im) const {
 
     BOOST_LOG_SEV(lg, debug) << "Populating decoration properties.";
 

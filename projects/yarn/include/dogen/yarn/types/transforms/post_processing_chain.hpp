@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -34,8 +34,7 @@ namespace transforms {
 
 class post_processing_chain final {
 public:
-    static void transform(const context& ctx,
-        meta_model::intermediate_model& im);
+    static void transform(const context& ctx, meta_model::endomodel& im);
 };
 
 } } }

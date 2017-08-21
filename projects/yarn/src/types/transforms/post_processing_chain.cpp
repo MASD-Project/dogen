@@ -50,7 +50,7 @@ namespace yarn {
 namespace transforms {
 
 void post_processing_chain::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Executing post-processing chain.";
 
     /*

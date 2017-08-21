@@ -53,7 +53,7 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<module_generator>();
     test_io<object_generator>();
     test_io<concept_generator>();
-    test_io<intermediate_model_generator>();
+    test_io<endomodel_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

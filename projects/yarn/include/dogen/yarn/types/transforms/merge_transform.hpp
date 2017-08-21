@@ -29,7 +29,7 @@
 #include <string>
 #include <unordered_map>
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -61,13 +61,12 @@ namespace transforms {
  */
 class merge_transform final {
 private:
-    static void merge(const meta_model::intermediate_model& src,
-        meta_model::intermediate_model& dst);
+    static void merge(const meta_model::endomodel& src,
+        meta_model::endomodel& dst);
 
 public:
-    static meta_model::intermediate_model transform(
-        const meta_model::intermediate_model& target,
-        const std::list<meta_model::intermediate_model>& refs);
+    static meta_model::endomodel transform(const meta_model::endomodel& target,
+        const std::list<meta_model::endomodel>& refs);
 };
 
 } } }

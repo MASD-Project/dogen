@@ -42,7 +42,7 @@ namespace transforms {
 
 bool pre_processing_chain::is_language_relevant(
     const std::unordered_set<meta_model::languages>& relevant_languages,
-    const meta_model::intermediate_model& im) {
+    const meta_model::endomodel& im) {
     const auto l(im.input_language());
     const auto i(relevant_languages.find(l));
     if (i == relevant_languages.end()) {
@@ -61,7 +61,7 @@ bool pre_processing_chain::is_language_relevant(
 }
 
 void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     /*
      * Module transform must be done before origin and language
      * transforms to get these properties populated on the new
@@ -72,7 +72,7 @@ void pre_processing_chain::apply_first_set_of_transforms(const context& ctx,
 }
 
 void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     /*
      * There are no particular dependencies on the next set of
      * transforms.
@@ -94,14 +94,14 @@ void pre_processing_chain::apply_second_set_of_transforms(const context& ctx,
 }
 
 void pre_processing_chain::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     apply_first_set_of_transforms(ctx, im);
     apply_second_set_of_transforms(ctx, im);
 }
 
 bool pre_processing_chain::try_transform(const context& ctx,
     const std::unordered_set<meta_model::languages>& relevant_languages,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     /*
      * We must apply the first set of transforms because language
      * expansion is required.

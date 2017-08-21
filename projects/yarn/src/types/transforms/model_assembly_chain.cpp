@@ -37,10 +37,10 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-meta_model::intermediate_model
+meta_model::endomodel
 model_assembly_chain::obtain_merged_model(const context& ctx,
-    const meta_model::languages l, const meta_model::intermediate_model& target,
-    const std::list<meta_model::intermediate_model>& refs) {
+    const meta_model::languages l, const meta_model::endomodel& target,
+    const std::list<meta_model::endomodel>& refs) {
 
     /*
      * Perform all the language mapping required for target and
@@ -48,7 +48,7 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
      */
     const auto mapped_target(mapping_transform::transform(ctx, target, l));
 
-    std::list<meta_model::intermediate_model> mapped_refs;
+    std::list<meta_model::endomodel> mapped_refs;
     for (const auto& ref : refs) {
         /*
          * We have all references for all the output languages
@@ -72,8 +72,8 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
 }
 
 meta_model::model model_assembly_chain::transform(const context& ctx,
-    const meta_model::languages l, const meta_model::intermediate_model& target,
-    const std::list<meta_model::intermediate_model>& refs) {
+    const meta_model::languages l, const meta_model::endomodel& target,
+    const std::list<meta_model::endomodel>& refs) {
 
     /*
      * First we obtain the merged (and mapped) model.

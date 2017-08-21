@@ -202,7 +202,7 @@ validate(const std::string& id, const meta_model::module& m) const {
 }
 
 void pre_processing_validator::
-validate(const meta_model::intermediate_model& im) {
+validate(const meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     using meta_model::origin_types;

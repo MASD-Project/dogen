@@ -31,7 +31,7 @@
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -64,7 +64,7 @@ private:
 public:
     static std::list<boost::filesystem::path>
     extract(const transforms::context& ctx,
-        const meta_model::intermediate_model& target);
+        const meta_model::endomodel& target);
 };
 
 } } }

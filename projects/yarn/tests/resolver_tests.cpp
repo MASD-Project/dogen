@@ -23,15 +23,15 @@
 #include <boost/algorithm/string/predicate.hpp>
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/helpers/indexer.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/attribute_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 
 namespace {
@@ -39,7 +39,7 @@ namespace {
 const std::string test_module("yarn");
 const std::string test_suite("resolver_tests");
 
-using dogen::yarn::test::mock_intermediate_model_factory;
+using dogen::yarn::test::mock_endomodel_factory;
 
 /*
  * FIXME: we need to update the mock factory to generate merged
@@ -53,12 +53,12 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  *
  * Flag was added but does nothing yet.
  */
-const mock_intermediate_model_factory::flags flags(false/*tagged*/,
+const mock_endomodel_factory::flags flags(false/*tagged*/,
     true/*merged*/, false/*resolved*/, false/*concepts_indexed*/,
     false/*attributes_indexed*/, false/*associations_indexed*/,
     true/*types parsed*/);
 
-const mock_intermediate_model_factory factory(flags);
+const mock_endomodel_factory factory(flags);
 
 const auto idx = dogen::yarn::helpers::indices();
 
@@ -75,7 +75,7 @@ using dogen::yarn::helpers::resolution_error;
 using dogen::yarn::helpers::indexer;
 using dogen::yarn::helpers::resolver;
 using dogen::yarn::transforms::merge_transform;
-using dogen::yarn::meta_model::intermediate_model;
+using dogen::yarn::meta_model::endomodel;
 
 BOOST_AUTO_TEST_SUITE(resolver_tests)
 
@@ -97,7 +97,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_the_same_model_resolves_succe
     }
     const auto idx(indexer::index(m));
     using namespace dogen::yarn::meta_model;
-    const auto original([](const intermediate_model& im) {
+    const auto original([](const endomodel& im) {
             auto r(im);
             r.objects().clear();
             for (const auto& pair : im.objects()) {
@@ -135,7 +135,7 @@ BOOST_AUTO_TEST_CASE(object_with_attribute_type_in_different_model_results_in_su
 
     const auto m(factory.object_with_attribute_type_in_different_model());
 
-    const std::list<intermediate_model> refs = { m[1] };
+    const std::list<endomodel> refs = { m[1] };
     auto combined(merge_transform::transform(m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
@@ -174,7 +174,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_the_same_model_resolves_successfully)
     SETUP_TEST_LOG_SOURCE("object_with_parent_in_the_same_model_resolves_successfully");
     const auto m(factory.object_with_parent_in_the_same_model());
 
-    const std::list<intermediate_model> refs;
+    const std::list<endomodel> refs;
     auto combined(merge_transform::transform(m, refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
@@ -205,7 +205,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 
     const auto m(factory.object_with_parent_in_different_models());
 
-    const std::list<intermediate_model> refs = { m[1] };
+    const std::list<endomodel> refs = { m[1] };
     auto combined(merge_transform::transform(m[0], refs));
     BOOST_CHECK(combined.objects().size() == 2);
     BOOST_CHECK(combined.builtins().empty());
@@ -233,7 +233,7 @@ BOOST_AUTO_TEST_CASE(object_with_parent_in_different_models_resolves_successfull
 BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_same_model_resolves_successfully) {
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_same_model_resolves_successfully");
     const auto m(factory.object_with_third_degree_parent_in_same_model());
-    const std::list<intermediate_model> refs;
+    const std::list<endomodel> refs;
 
     auto combined(merge_transform::transform(m, refs));
     BOOST_CHECK(combined.objects().size() == 4);
@@ -283,7 +283,7 @@ BOOST_AUTO_TEST_CASE(object_with_third_degree_parent_in_different_models_resolve
     SETUP_TEST_LOG_SOURCE("object_with_third_degree_parent_in_different_models_resolves_successfully");
 
     const auto a(factory.object_with_third_degree_parent_in_different_models());
-    const std::list<intermediate_model> refs = { a[1], a[2], a[3] };
+    const std::list<endomodel> refs = { a[1], a[2], a[3] };
 
     auto combined(merge_transform::transform(a[0], refs));
     BOOST_CHECK(combined.objects().size() == 4);
@@ -314,7 +314,7 @@ BOOST_AUTO_TEST_CASE(object_with_missing_third_degree_parent_in_different_models
     const auto a(
         factory.object_with_missing_third_degree_parent_in_different_models());
 
-    const std::list<intermediate_model> refs = { a[1], a[2] };
+    const std::list<endomodel> refs = { a[1], a[2] };
     auto combined(merge_transform::transform(a[0], refs));
 
     contains_checker<resolution_error> c(missing_parent);

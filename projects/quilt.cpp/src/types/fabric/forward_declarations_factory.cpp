@@ -93,7 +93,7 @@ private:
 
 std::list<boost::shared_ptr<yarn::meta_model::element>>
 forward_declarations_factory::
-make(const yarn::meta_model::intermediate_model& im) const {
+make(const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating forward declarations.";
 
     generator g;

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_INTERMEDIATE_MODEL_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_INTERMEDIATE_MODEL_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_ENDOMODEL_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_ENDOMODEL_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -47,7 +47,7 @@
 #include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
-#include "dogen/yarn/serialization/meta_model/intermediate_model_fwd_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/endomodel_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -56,19 +56,19 @@ namespace meta_model {
 /**
  * @brief Intermediate representation of a yarn model.
  */
-class intermediate_model final {
+class endomodel final {
 public:
-    intermediate_model(const intermediate_model&) = default;
-    ~intermediate_model() = default;
+    endomodel(const endomodel&) = default;
+    ~endomodel() = default;
 
 public:
-    intermediate_model();
+    endomodel();
 
 public:
-    intermediate_model(intermediate_model&& rhs);
+    endomodel(endomodel&& rhs);
 
 public:
-    intermediate_model(
+    endomodel(
         const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::name& meta_name,
         const dogen::yarn::meta_model::origin_types origin_type,
@@ -92,10 +92,10 @@ public:
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::intermediate_model& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::endomodel& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::intermediate_model& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::endomodel& v, unsigned int version);
 
 public:
     /**
@@ -280,14 +280,14 @@ public:
     void facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v);
 
 public:
-    bool operator==(const intermediate_model& rhs) const;
-    bool operator!=(const intermediate_model& rhs) const {
+    bool operator==(const endomodel& rhs) const;
+    bool operator!=(const endomodel& rhs) const {
         return !this->operator==(rhs);
     }
 
 public:
-    void swap(intermediate_model& other) noexcept;
-    intermediate_model& operator=(intermediate_model other);
+    void swap(endomodel& other) noexcept;
+    endomodel& operator=(endomodel other);
 
 private:
     dogen::yarn::meta_model::name name_;
@@ -318,8 +318,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::meta_model::intermediate_model& lhs,
-    dogen::yarn::meta_model::intermediate_model& rhs) {
+    dogen::yarn::meta_model::endomodel& lhs,
+    dogen::yarn::meta_model::endomodel& rhs) {
     lhs.swap(rhs);
 }
 

@@ -44,39 +44,39 @@ injector::~injector() noexcept {}
 
 void injector::
 add_element(const boost::shared_ptr<yarn::meta_model::element>& e,
-    yarn::meta_model::intermediate_model& im) const {
+    yarn::meta_model::endomodel& im) const {
     im.injected_elements().push_back(e);
 }
 
 void injector::add_elements(
     const std::list<boost::shared_ptr<yarn::meta_model::element>>& elements,
-    yarn::meta_model::intermediate_model& im) const {
+    yarn::meta_model::endomodel& im) const {
     for (auto& e : elements)
         add_element(e, im);
 }
 
 void injector::inject_visual_studio(const annotations::type_repository& atrp,
-    yarn::meta_model::intermediate_model& im) const {
+    yarn::meta_model::endomodel& im) const {
     visual_studio_factory f;
     const auto e(f.make(atrp, im));
     add_elements(e, im);
 }
 
 void injector::
-inject_assembly_info(yarn::meta_model::intermediate_model& im) const {
+inject_assembly_info(yarn::meta_model::endomodel& im) const {
     assembly_info_factory f;
     const auto e(f.make(im));
     add_element(e, im);
 }
 
-void injector::inject_assistant(yarn::meta_model::intermediate_model& im) const {
+void injector::inject_assistant(yarn::meta_model::endomodel& im) const {
     assistant_factory f;
     const auto e(f.make(im));
     add_element(e, im);
 }
 
 void injector::inject(const annotations::type_repository& atrp,
-    yarn::meta_model::intermediate_model& im) const {
+    yarn::meta_model::endomodel& im) const {
     inject_visual_studio(atrp, im);
     inject_assembly_info(im);
     inject_assistant(im);

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
@@ -44,7 +44,7 @@ namespace meta_model {
  */
 /**@{*/
 template<typename TraversalVisitor>
-inline void elements_traversal(const meta_model::intermediate_model& m,
+inline void elements_traversal(const meta_model::endomodel& m,
     const TraversalVisitor& v, const bool include_injected_elements = false) {
     for (const auto& pair : m.modules())
         v(*pair.second);
@@ -77,7 +77,7 @@ inline void elements_traversal(const meta_model::intermediate_model& m,
 }
 
 template<typename TraversalVisitor>
-inline void elements_traversal(const meta_model::intermediate_model& m,
+inline void elements_traversal(const meta_model::endomodel& m,
     TraversalVisitor& v, const bool include_injected_elements = false) {
     for (auto& pair : m.modules())
         v(*pair.second);
@@ -110,7 +110,7 @@ inline void elements_traversal(const meta_model::intermediate_model& m,
 }
 
 template<typename TraversalVisitor>
-inline void elements_traversal(meta_model::intermediate_model& m,
+inline void elements_traversal(meta_model::endomodel& m,
     TraversalVisitor& v, const bool include_injected_elements = false) {
     for (auto& pair : m.modules())
         v(*pair.second);
@@ -149,7 +149,7 @@ inline void elements_traversal(meta_model::intermediate_model& m,
  */
 /**@{*/
 template<typename TraversalVisitor>
-inline void shared_elements_traversal(const meta_model::intermediate_model& m,
+inline void shared_elements_traversal(const meta_model::endomodel& m,
     const TraversalVisitor& v, const bool include_injected_elements = false) {
     for (const auto& pair : m.modules())
         v(pair.second);
@@ -182,7 +182,7 @@ inline void shared_elements_traversal(const meta_model::intermediate_model& m,
 }
 
 template<typename TraversalVisitor>
-inline void shared_elements_traversal(const meta_model::intermediate_model& m,
+inline void shared_elements_traversal(const meta_model::endomodel& m,
     TraversalVisitor& v, const bool include_injected_elements = false) {
     for (auto& pair : m.modules())
         v(pair.second);
@@ -215,7 +215,7 @@ inline void shared_elements_traversal(const meta_model::intermediate_model& m,
 }
 
 template<typename TraversalVisitor>
-inline void shared_elements_traversal(meta_model::intermediate_model& m,
+inline void shared_elements_traversal(meta_model::endomodel& m,
     TraversalVisitor& v, const bool include_injected_elements = false) {
     for (auto& pair : m.modules())
         v(pair.second);

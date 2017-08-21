@@ -65,7 +65,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 namespace transforms {
 
 meta_model::object& concepts_transform::
-find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
+find_object(const meta_model::name& n, meta_model::endomodel& im) {
     auto i(im.objects().find(n.id()));
     if (i == im.objects().end()) {
         BOOST_LOG_SEV(lg, error) << object_not_found << n.id();
@@ -76,7 +76,7 @@ find_object(const meta_model::name& n, meta_model::intermediate_model& im) {
 
 meta_model::concept&
 concepts_transform::resolve_concept(const meta_model::name& owner,
-    const meta_model::name& concept_name, meta_model::intermediate_model& im) {
+    const meta_model::name& concept_name, meta_model::endomodel& im) {
     using helpers::resolver;
     const auto oc(resolver::try_resolve_concept_name(owner, concept_name, im));
     if (!oc) {
@@ -117,7 +117,7 @@ void concepts_transform::remove_duplicates(std::list<meta_model::name>& names) {
 }
 
 void concepts_transform::
-expand_object(meta_model::object& o, meta_model::intermediate_model& im,
+expand_object(meta_model::object& o, meta_model::endomodel& im,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
 
@@ -201,7 +201,7 @@ expand_object(meta_model::object& o, meta_model::intermediate_model& im,
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
-void concepts_transform::expand_objects(meta_model::intermediate_model& im) {
+void concepts_transform::expand_objects(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
     std::unordered_set<meta_model::name> processed_names;
@@ -212,7 +212,7 @@ void concepts_transform::expand_objects(meta_model::intermediate_model& im) {
 }
 
 void concepts_transform::expand_concept(meta_model::concept& c,
-    meta_model::intermediate_model& im,
+    meta_model::endomodel& im,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand concept: " << c.name().id();
 
@@ -242,7 +242,7 @@ void concepts_transform::expand_concept(meta_model::concept& c,
     processed_names.insert(c.name());
 }
 
-void concepts_transform::expand_concepts(meta_model::intermediate_model& im) {
+void concepts_transform::expand_concepts(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << im.concepts().size();
 
     std::unordered_set<meta_model::name> processed_names;
@@ -252,8 +252,7 @@ void concepts_transform::expand_concepts(meta_model::intermediate_model& im) {
     }
 }
 
-void concepts_transform::
-transform(meta_model::intermediate_model& im) {
+void concepts_transform::transform(meta_model::endomodel& im) {
     /*
      * We must expand concepts before we expand objects as we rely on
      * the expanded attributes.

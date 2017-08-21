@@ -27,7 +27,7 @@
 
 #include <list>
 #include <unordered_set>
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -101,14 +101,14 @@ private:
      * @brief Returns the object with the given name, or throws.
      */
     static  meta_model::object& find_object(const meta_model::name& n,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Returns the concept with the given name, or throws.
      */
     static meta_model::concept& resolve_concept(const meta_model::name& owner,
         const meta_model::name& concept_name,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Removes duplicate names, preserving the original order
@@ -121,31 +121,31 @@ private:
      * @brief Expands a specific object.
      */
     static void expand_object(meta_model::object& o,
-        meta_model::intermediate_model& im,
+        meta_model::endomodel& im,
         std::unordered_set<meta_model::name>& processed_names);
 
     /**
      * @brief Expands all objects in the model.
      */
-    static void expand_objects(meta_model::intermediate_model& im);
+    static void expand_objects(meta_model::endomodel& im);
 
     /**
      * @brief Expands a concept.
      */
     static void
-    expand_concept(meta_model::concept& c, meta_model::intermediate_model& im,
+    expand_concept(meta_model::concept& c, meta_model::endomodel& im,
         std::unordered_set<meta_model::name>& processed_names);
 
     /**
      * @brief Expands all concepts in the model.
      */
-    static void expand_concepts(meta_model::intermediate_model& im);
+    static void expand_concepts(meta_model::endomodel& im);
 
 public:
     /**
      * @brief Transforms the concepts the supplied model.
      */
-    static void transform(meta_model::intermediate_model& im);
+    static void transform(meta_model::endomodel& im);
 };
 
 } } }

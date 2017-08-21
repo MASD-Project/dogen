@@ -162,7 +162,7 @@ enablement_transform::obtain_global_configurations(
 void enablement_transform::update_facet_enablement(
     const std::list<annotations::archetype_location>& als,
     const global_enablement_configurations_type& gcs,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Updating facet enablement.";
 
     /*
@@ -495,7 +495,7 @@ void enablement_transform::compute_enablement_for_element(
 }
 
 void enablement_transform::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started enablement transform.";
 
     const auto& atrp(ctx.type_repository());

@@ -98,7 +98,7 @@ language_transform::make_output_languages(const type_group& tg,
 }
 
 void language_transform::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding language. Model: " << im.name().id();
 
     const auto tg(make_type_group(ctx.type_repository()));

@@ -24,19 +24,19 @@
 #include "dogen/utility/test/logging.hpp"
 #include "dogen/utility/test/asserter.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
 
 namespace {
 
-using dogen::yarn::test::mock_intermediate_model_factory;
-const mock_intermediate_model_factory::flags flags;
-const mock_intermediate_model_factory factory(flags);
+using dogen::yarn::test::mock_endomodel_factory;
+const mock_endomodel_factory::flags flags;
+const mock_endomodel_factory factory(flags);
 
 const std::string test_module("yarn");
 const std::string test_suite("stereotypes_expander_tests");

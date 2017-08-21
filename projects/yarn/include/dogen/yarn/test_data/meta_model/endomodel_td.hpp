@@ -18,25 +18,25 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_META_MODEL_INTERMEDIATE_MODEL_TD_HPP
-#define DOGEN_YARN_TEST_DATA_META_MODEL_INTERMEDIATE_MODEL_TD_HPP
+#ifndef DOGEN_YARN_TEST_DATA_META_MODEL_ENDOMODEL_TD_HPP
+#define DOGEN_YARN_TEST_DATA_META_MODEL_ENDOMODEL_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class intermediate_model_generator {
+class endomodel_generator {
 public:
-    intermediate_model_generator();
+    endomodel_generator();
 
 public:
-    typedef dogen::yarn::meta_model::intermediate_model result_type;
+    typedef dogen::yarn::meta_model::endomodel result_type;
 
 public:
     static void populate(const unsigned int position, result_type& v);

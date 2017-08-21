@@ -8304,7 +8304,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::intermediate_model&amp; #</dia:string>
+                <dia:string>#yarn::meta_model::endomodel&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9591,7 +9591,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::intermediate_model&amp; #</dia:string>
+                <dia:string>#yarn::meta_model::endomodel&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -9895,7 +9895,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::intermediate_model&amp; #</dia:string>
+                <dia:string>#yarn::meta_model::endomodel&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -14351,7 +14351,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::intermediate_model&amp; #</dia:string>
+                <dia:string>#yarn::meta_model::endomodel&amp; #</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16650,7 +16650,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::intermediate_model&amp;#</dia:string>
+                <dia:string>#yarn::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -16915,7 +16915,7 @@
                 <dia:string>#im#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#yarn::meta_model::intermediate_model&amp;#</dia:string>
+                <dia:string>#yarn::meta_model::endomodel&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>

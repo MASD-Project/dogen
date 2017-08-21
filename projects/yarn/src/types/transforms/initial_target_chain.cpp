@@ -36,7 +36,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-meta_model::intermediate_model
+meta_model::endomodel
 initial_target_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, debug) << "Executing the initial target chain.";
 

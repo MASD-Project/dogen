@@ -28,7 +28,7 @@
 #include <list>
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -41,16 +41,16 @@ namespace transforms {
  */
 class model_assembly_chain final {
 private:
-    static meta_model::intermediate_model
+    static meta_model::endomodel
     obtain_merged_model(const context& ctx, const meta_model::languages l,
-        const meta_model::intermediate_model& target,
-        const std::list<meta_model::intermediate_model>& refs);
+        const meta_model::endomodel& target,
+        const std::list<meta_model::endomodel>& refs);
 
 public:
     static meta_model::model transform(const context& ctx,
         const meta_model::languages l,
-        const meta_model::intermediate_model& target,
-        const std::list<meta_model::intermediate_model>& refs);
+        const meta_model::endomodel& target,
+        const std::list<meta_model::endomodel>& refs);
 };
 
 } } }

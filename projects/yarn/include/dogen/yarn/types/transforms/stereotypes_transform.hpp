@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/hash/meta_model/location_hash.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -66,7 +66,7 @@ private:
 
     static void add_visitor_to_model(
         const boost::shared_ptr<meta_model::visitor> v,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Create a visitor for the object o.
@@ -86,26 +86,26 @@ private:
      * the supplied object and all its leaves.
      */
     static void update_visited_leaves(const std::list<meta_model::name>& leaves,
-        const visitor_details& vd, meta_model::intermediate_model& im);
+        const visitor_details& vd, meta_model::endomodel& im);
 
     /**
      * @brief Performs the expansion of the visitable stereotype.
      */
     static void expand_visitable(meta_model::object& o,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Try to expand the stereotype as a concept. Returns true
      * on success, false otherwise.
      */
     static bool try_expand_concept(const std::string& s, meta_model::object& o,
-        const meta_model::intermediate_model& im);
+        const meta_model::endomodel& im);
 
     /**
      * @brief Expands all stereotypes for the object.
      */
     static void expand(meta_model::object& o,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Expands all stereotypes for the primitive.
@@ -116,7 +116,7 @@ public:
     /**
      * @brief Expands all stereotypes used in model.
      */
-    static void transform(meta_model::intermediate_model& im);
+    static void transform(meta_model::endomodel& im);
 };
 
 } } }

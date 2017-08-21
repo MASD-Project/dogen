@@ -29,7 +29,7 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/concept.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
 
 namespace dogen {
@@ -49,17 +49,17 @@ namespace helpers {
  */
 class resolver final {
 private:
-    static bool is_floating_point(const meta_model::intermediate_model& im,
+    static bool is_floating_point(const meta_model::endomodel& im,
         const meta_model::name& n);
-    static bool is_builtin(const meta_model::intermediate_model& im,
+    static bool is_builtin(const meta_model::endomodel& im,
         const meta_model::name& n);
-    static bool is_primitive(const meta_model::intermediate_model& im,
+    static bool is_primitive(const meta_model::endomodel& im,
         const meta_model::name& n);
-    static bool is_object(const meta_model::intermediate_model& im,
+    static bool is_object(const meta_model::endomodel& im,
         const meta_model::name& n);
-    static bool is_enumeration(const meta_model::intermediate_model& im,
+    static bool is_enumeration(const meta_model::endomodel& im,
         const meta_model::name& n);
-    static bool is_concept(const meta_model::intermediate_model& im,
+    static bool is_concept(const meta_model::endomodel& im,
         const meta_model::name& n);
 
 private:
@@ -74,7 +74,7 @@ private:
      * @brief Resolves a name that has internal modules set.
      */
     static meta_model::name resolve_name_with_internal_modules(
-        const meta_model::intermediate_model& im, const indices& idx,
+        const meta_model::endomodel& im, const indices& idx,
         const meta_model::name& ctx, const meta_model::name& n);
 
     /**
@@ -88,27 +88,27 @@ private:
      * @brief Resolves a partially formed name into a full name.
      */
     static meta_model::name resolve_name(
-        const meta_model::intermediate_model& im, const indices& idx,
+        const meta_model::endomodel& im, const indices& idx,
         const meta_model::name& ctx, const meta_model::name& n);
 
     /**
      * @brief Resolves all references contained in a name tree.
      */
-    static void resolve_name_tree(const meta_model::intermediate_model& im,
+    static void resolve_name_tree(const meta_model::endomodel& im,
         const indices& idx, const meta_model::name& owner,
         meta_model::name_tree& nt);
 
     /**
      * @brief Resolves all references to types in the supplied attribute.
      */
-    static void resolve_attribute(const meta_model::intermediate_model& im,
+    static void resolve_attribute(const meta_model::endomodel& im,
         const indices& idx, const meta_model::name& owner,
         meta_model::attribute& attr);
 
     /**
      * @brief Resolves all references to types in the supplied attributes.
      */
-    static void resolve_attributes(const meta_model::intermediate_model& im,
+    static void resolve_attributes(const meta_model::endomodel& im,
         const indices& idx, const meta_model::name& owner,
         std::list<meta_model::attribute>& attributes);
 
@@ -118,7 +118,7 @@ private:
      * @note should really be moved to validator.
      */
     static void validate_inheritance_graph(
-        const meta_model::intermediate_model& im,
+        const meta_model::endomodel& im,
         const meta_model::object& o);
 
     /**
@@ -127,38 +127,38 @@ private:
      *
      * @note should really be moved to validator.
      */
-    static void validate_refinements(const meta_model::intermediate_model& im,
+    static void validate_refinements(const meta_model::endomodel& im,
         const meta_model::concept& c);
 
     /**
      * @brief Resolve all concepts.
      */
     static void resolve_concepts(const indices& idx,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Resolve all objects.
      */
     static void resolve_objects(const indices& idx,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Resolve all enumerations.
      */
     static void resolve_enumerations(const indices& idx,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
     /**
      * @brief Resolve all primitives.
      */
     static void resolve_primitives(const indices& idx,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
 public:
     /**
      * @brief Resolves the name against the supplied model.
      */
-    static meta_model::name resolve(const meta_model::intermediate_model& im,
+    static meta_model::name resolve(const meta_model::endomodel& im,
         const indices& idx, const meta_model::name& ctx,
         const meta_model::name& n);
 
@@ -168,17 +168,17 @@ public:
     /**@{*/
     static boost::optional<meta_model::name>
     try_resolve_concept_name(meta_model::name ctx,
-        const std::string& s, const meta_model::intermediate_model& im);
+        const std::string& s, const meta_model::endomodel& im);
     static boost::optional<meta_model::name>
     try_resolve_concept_name(const meta_model::name& ctx,
-        const meta_model::name& n, const meta_model::intermediate_model& im);
+        const meta_model::name& n, const meta_model::endomodel& im);
     /**@}*/
 
 public:
     /**
      * @brief Resolve all references to types within model.
      */
-    static void resolve(const indices& idx, meta_model::intermediate_model& im);
+    static void resolve(const indices& idx, meta_model::endomodel& im);
 };
 
 } } }

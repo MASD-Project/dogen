@@ -18,36 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_META_MODEL_INTERMEDIATE_MODEL_HASH_HPP
-#define DOGEN_YARN_HASH_META_MODEL_INTERMEDIATE_MODEL_HASH_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_ENDOMODEL_FWD_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_ENDOMODEL_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <functional>
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-struct intermediate_model_hasher {
-public:
-    static std::size_t hash(const intermediate_model& v);
-};
+class endomodel;
 
 } } }
 
-namespace std {
-
-template<>
-struct hash<dogen::yarn::meta_model::intermediate_model> {
-public:
-    size_t operator()(const dogen::yarn::meta_model::intermediate_model& v) const {
-        return dogen::yarn::meta_model::intermediate_model_hasher::hash(v);
-    }
-};
-
-}
 #endif

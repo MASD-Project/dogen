@@ -177,7 +177,7 @@ void enumerations_transform::populate_from_annotations(
 
 meta_model::name
 enumerations_transform::obtain_enumeration_default_underlying_element_name(
-    const meta_model::intermediate_model& im) {
+    const meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Obtaining default enumeration underlying "
                              << "element name for model: " << im.name().id();
 
@@ -301,7 +301,7 @@ void enumerations_transform::expand_enumerators(const enumerator_type_group& tg,
 }
 
 void enumerations_transform::transform(const context& ctx,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started transforming enumerations for model: "
                              << im.name().id();
 

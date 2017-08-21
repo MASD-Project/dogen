@@ -27,7 +27,7 @@
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_primitive_properties.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
@@ -124,7 +124,7 @@ stereotypes_transform::create_visitor(const meta_model::object& o,
 
 void stereotypes_transform::
 update_visited_leaves(const std::list<meta_model::name>& leaves,
-    const visitor_details& vd, meta_model::intermediate_model& m) {
+    const visitor_details& vd, meta_model::endomodel& m) {
     BOOST_LOG_SEV(lg, debug) << "Updating leaves for: " << vd.base.id();
 
     for (const auto& l : leaves) {
@@ -146,7 +146,7 @@ update_visited_leaves(const std::list<meta_model::name>& leaves,
 
 void stereotypes_transform::
 add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     const auto id(v->name().id());
     BOOST_LOG_SEV(lg, debug) << "Adding visitor: " << id;
 
@@ -160,7 +160,7 @@ add_visitor_to_model(const boost::shared_ptr<meta_model::visitor> v,
 }
 
 void stereotypes_transform::
-expand_visitable(meta_model::object& o, meta_model::intermediate_model& im) {
+expand_visitable(meta_model::object& o, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding visitable for: " << o.name().id();
 
     /*
@@ -280,7 +280,7 @@ expand_visitable(meta_model::object& o, meta_model::intermediate_model& im) {
 }
 
 bool stereotypes_transform::try_expand_concept(const std::string& s,
-    meta_model::object& o, const meta_model::intermediate_model& im) {
+    meta_model::object& o, const meta_model::endomodel& im) {
 
     using helpers::resolver;
     const auto oc(resolver::try_resolve_concept_name(o.name(), s, im));
@@ -292,7 +292,7 @@ bool stereotypes_transform::try_expand_concept(const std::string& s,
 }
 
 void stereotypes_transform::expand(meta_model::object& o,
-    meta_model::intermediate_model& im) {
+    meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << o.name().id();
     if (o.stereotypes().empty()) {
         BOOST_LOG_SEV(lg, debug) << "No stereotypes found.";
@@ -377,7 +377,7 @@ void stereotypes_transform::expand(meta_model::primitive& p) {
     BOOST_LOG_SEV(lg, debug) << "Unknown: " << p.stereotypes();
 }
 
-void stereotypes_transform::transform(meta_model::intermediate_model& im) {
+void stereotypes_transform::transform(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding stereotypes for: " << im.name().id();
 
     for (auto& pair : im.objects())

@@ -88,7 +88,7 @@ make_type_group(const annotations::type_repository& atrp) {
 }
 
 bool origin_transform::
-is_proxy_model(const type_group& tg, const meta_model::intermediate_model& im) {
+is_proxy_model(const type_group& tg, const meta_model::endomodel& im) {
     const auto& o(im.root_module()->annotation());
     const annotations::entry_selector s(o);
     const bool r(s.get_boolean_content_or_default(tg.is_proxy_model));
@@ -98,7 +98,7 @@ is_proxy_model(const type_group& tg, const meta_model::intermediate_model& im) {
 }
 
 meta_model::origin_types
-origin_transform::compute_origin_types(const meta_model::intermediate_model& im,
+origin_transform::compute_origin_types(const meta_model::endomodel& im,
     const bool is_proxy_model) {
     using meta_model::origin_types;
     if (is_proxy_model && im.origin_type() == origin_types::target) {
@@ -117,7 +117,7 @@ origin_transform::compute_origin_types(const meta_model::intermediate_model& im,
 }
 
 void origin_transform::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     const auto tg(make_type_group(ctx.type_repository()));
     const auto ipm(is_proxy_model(tg, im));
     const auto ot(compute_origin_types(im, ipm));

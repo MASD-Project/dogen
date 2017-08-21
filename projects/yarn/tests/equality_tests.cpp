@@ -57,7 +57,7 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<module_generator>();
     test_equality<object_generator>();
     test_equality<concept_generator>();
-    test_equality<intermediate_model_generator>();
+    test_equality<endomodel_generator>();
 }
 
 BOOST_AUTO_TEST_SUITE_END()

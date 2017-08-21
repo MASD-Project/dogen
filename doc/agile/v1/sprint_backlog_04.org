@@ -14,25 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-21 Mon 17:12]
+#+CAPTION: Clock summary at [2017-08-21 Mon 21:37]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *29:47* |       |       | 100.0 |
+| *Total time*                                                                | *31:36* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 29:47   |       |       | 100.0 |
-| Active                                                                      |         | 29:47 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.1 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  21.4 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.5 |
-| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.9 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.9 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  41.4 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.4 |
-| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.2 |
+| Stories                                                                     | 31:36   |       |       | 100.0 |
+| Active                                                                      |         | 31:36 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.8 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.0 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  20.1 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.0 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.7 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.6 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  39.0 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.0 |
+| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.1 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.8 |
-| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.4 |
+| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.2 |
+| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -370,7 +371,13 @@ just a transform.
 As per analysis story on renaming, rename all instances of "exogenous
 model" to exomodel.
 
-*** Rename intermediate model to endomodel                            :story:
+*** COMPLETED Rename intermediate model to endomodel                  :story:
+    CLOSED: [2017-08-21 Mon 21:37]
+    CLOCK: [2017-08-21 Mon 21:30]--[2017-08-21 Mon 21:37] =>  0:07
+    CLOCK: [2017-08-21 Mon 21:16]--[2017-08-21 Mon 21:29] =>  0:13
+    CLOCK: [2017-08-21 Mon 21:01]--[2017-08-21 Mon 21:15] =>  0:14
+    CLOCK: [2017-08-21 Mon 17:46]--[2017-08-21 Mon 18:27] =>  0:41
+    CLOCK: [2017-08-21 Mon 17:11]--[2017-08-21 Mon 17:45] =>  0:34
 
 As per analysis story on renaming, rename all instances of "exogenous
 model" to exomodel.

@@ -34,7 +34,7 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -107,8 +107,7 @@ public:
     /**
      * Execute the property expansion against the model.
      */
-    static void transform(const context& ctx,
-        meta_model::intermediate_model& m);
+    static void transform(const context& ctx, meta_model::endomodel& m);
 };
 
 } } }

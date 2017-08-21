@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_registrar.hpp"
 
@@ -62,7 +62,7 @@ public:
      * @pre @e p must point to a valid file, and contain a supported
      * exogenous model.
      */
-    static meta_model::intermediate_model
+    static meta_model::endomodel
     transform(const context& ctx, const boost::filesystem::path& p);
 
 private:

@@ -28,7 +28,7 @@
 /*
 #include "dogen/yarn/types/name_builder.hpp"
 #include "dogen/yarn/types/name_factory.hpp"
-#include "dogen/yarn/types/intermediate_model.hpp"
+#include "dogen/yarn/types/endomodel.hpp"
 #include "dogen/yarn/types/parsing_error.hpp"
 #include "dogen/yarn/io/name_tree_io.hpp"
 #include "dogen/yarn/io/name_io.hpp"

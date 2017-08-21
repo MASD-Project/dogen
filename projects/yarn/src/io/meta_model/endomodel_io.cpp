@@ -28,13 +28,13 @@
 #include "dogen/yarn/io/meta_model/concept_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/visitor_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/exception_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/io/meta_model/primitive_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 
 namespace std {
@@ -430,7 +430,7 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
+std::ostream& operator<<(std::ostream& s, const endomodel& v) {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -438,7 +438,7 @@ std::ostream& operator<<(std::ostream& s, const intermediate_model& v) {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::intermediate_model\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::endomodel\"" << ", "
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"origin_type\": " << v.origin_type() << ", "

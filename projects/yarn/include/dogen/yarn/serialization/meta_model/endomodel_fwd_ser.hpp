@@ -18,19 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_INTERMEDIATE_MODEL_TRANSFORM_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_INTERMEDIATE_MODEL_TRANSFORM_FWD_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_ENDOMODEL_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_ENDOMODEL_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
-namespace transforms {
+#include "dogen/yarn/types/meta_model/endomodel_fwd.hpp"
 
-class intermediate_model_transform;
+namespace boost {
+namespace serialization {
 
-} } }
+template<class Archive>
+void save(Archive& ar, const dogen::yarn::meta_model::endomodel& v, unsigned int version);
+
+template<class Archive>
+void load(Archive& ar, dogen::yarn::meta_model::endomodel& v, unsigned int version);
+
+} }
 
 #endif

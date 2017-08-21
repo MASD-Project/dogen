@@ -400,7 +400,7 @@ void post_processing_validator::validate_name_trees(
 }
 
 void post_processing_validator::
-validate(const indices& idx, const meta_model::intermediate_model& im) {
+validate(const indices& idx, const meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started validation. Model: " << im.name().id();
 
     const auto l(im.input_language());

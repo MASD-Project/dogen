@@ -26,7 +26,7 @@
 #endif
 
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -39,7 +39,7 @@ namespace transforms {
  */
 class initial_target_chain final {
 public:
-    static meta_model::intermediate_model transform(const context& ctx);
+    static meta_model::endomodel transform(const context& ctx);
 };
 
 } } }

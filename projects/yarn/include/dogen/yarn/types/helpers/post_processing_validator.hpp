@@ -32,7 +32,7 @@
 #include <unordered_set>
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
 
@@ -69,8 +69,7 @@ private:
         const std::list<std::pair<std::string, meta_model::name_tree>>& nts);
 
 public:
-    static void validate(const indices& idx,
-        const meta_model::intermediate_model& im);
+    static void validate(const indices& idx, const meta_model::endomodel& im);
 };
 
 } } }

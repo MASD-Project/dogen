@@ -38,7 +38,7 @@ bool generability_transform::is_generatable(const meta_model::element& e) {
 }
 
 bool generability_transform::
-has_generatable_types(const meta_model::intermediate_model& im) {
+has_generatable_types(const meta_model::endomodel& im) {
     /*
      * Note: we are deliberately excluding modules since we do not
      * want to generate an empty model with just a module because its
@@ -82,7 +82,7 @@ has_generatable_types(const meta_model::intermediate_model& im) {
     return false;
 }
 
-void generability_transform::transform(meta_model::intermediate_model& im) {
+void generability_transform::transform(meta_model::endomodel& im) {
     im.has_generatable_types(has_generatable_types(im));
 }
 

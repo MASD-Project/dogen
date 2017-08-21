@@ -70,7 +70,7 @@ containment_transform::create_global_module(const meta_model::origin_types ot) {
 }
 
 void containment_transform::
-inject_global_module(meta_model::intermediate_model& im) {
+inject_global_module(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Injecting global module for: "
                              << im.name().id();
 
@@ -97,7 +97,7 @@ inject_global_module(meta_model::intermediate_model& im) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting global module";
 }
 
-void containment_transform::transform(meta_model::intermediate_model& im) {
+void containment_transform::transform(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding containment for: " << im.name().id();
     inject_global_module(im);
     BOOST_LOG_SEV(lg, debug) << "Finished expanding containment.";

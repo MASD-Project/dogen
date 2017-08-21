@@ -46,7 +46,7 @@ namespace cpp {
 namespace fabric {
 
 boost::shared_ptr<yarn::meta_model::element> build_files_factory::
-make_cmakelists(const yarn::meta_model::intermediate_model& im) const {
+make_cmakelists(const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating CMakeLists.";
 
     yarn::helpers::name_factory nf;
@@ -61,7 +61,7 @@ make_cmakelists(const yarn::meta_model::intermediate_model& im) const {
 }
 
 boost::shared_ptr<yarn::meta_model::element> build_files_factory::
-make_msbuild_targets(const yarn::meta_model::intermediate_model& im) const {
+make_msbuild_targets(const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating MSBuild Targets.";
 
     yarn::helpers::name_factory nf;
@@ -76,7 +76,7 @@ make_msbuild_targets(const yarn::meta_model::intermediate_model& im) const {
 }
 
 std::list<boost::shared_ptr<yarn::meta_model::element>> build_files_factory::
-make(const yarn::meta_model::intermediate_model& im) const {
+make(const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Build Files.";
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;

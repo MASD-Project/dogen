@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_MOCK_INTERMEDIATE_MODEL_FACTORY_HPP
-#define DOGEN_YARN_TEST_MOCK_INTERMEDIATE_MODEL_FACTORY_HPP
+#ifndef DOGEN_YARN_TEST_MOCK_ENDOMODEL_FACTORY_HPP
+#define DOGEN_YARN_TEST_MOCK_ENDOMODEL_FACTORY_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@
 #include <functional>
 #include <boost/optional.hpp>
 #include <boost/filesystem/path.hpp>
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/annotations/types/annotation.hpp"
 
 namespace dogen {
@@ -39,7 +39,7 @@ namespace test {
 /**
  * @brief Generates mock intermediate models.
  */
-class mock_intermediate_model_factory {
+class mock_endomodel_factory {
 public:
     /**
      * @brief Types of objects supported by the factory.
@@ -163,7 +163,7 @@ public:
      * @brief Initialises a new mock factory at a given stage in the
      * yarn pipeline, as given by the flags supplied.
      */
-    explicit mock_intermediate_model_factory(const flags& f,
+    explicit mock_endomodel_factory(const flags& f,
         annotation_function_type fn = annotation_function_type());
 
 public:
@@ -243,7 +243,7 @@ public:
      * @brief If required, adds a module for the model.
      */
     void handle_model_module(const bool add_model_module,
-        meta_model::intermediate_model& m) const;
+        meta_model::endomodel& m) const;
 
 public:
     /**
@@ -326,7 +326,7 @@ public:
     /**
      * @brief Builds a model with no types, concepts or modules.
      */
-    meta_model::intermediate_model make_empty_model(
+    meta_model::endomodel make_empty_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
@@ -334,7 +334,7 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n.
      */
-    meta_model::intermediate_model make_single_type_model(
+    meta_model::endomodel make_single_type_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
@@ -344,7 +344,7 @@ public:
      * @brief Builds a model with a name derived from n, containing a
      * single type with a name also deriving from n, inside mod_n modules.
      */
-    meta_model::intermediate_model make_single_type_model_in_module(
+    meta_model::endomodel make_single_type_model_in_module(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const object_types objt = object_types::value_object,
@@ -355,7 +355,7 @@ public:
      * @brief Builds a model with a name derived from n, and a number
      * of types determined by type_n, inside mod_n module.
      */
-    meta_model::intermediate_model make_multi_type_model(
+    meta_model::endomodel make_multi_type_model(
         const unsigned int n,
         const unsigned int type_n,
         const meta_model::origin_types ot = meta_model::origin_types::target,
@@ -368,7 +368,7 @@ public:
      * @brief Builds a model with a concept, and a type that models
      * it.
      */
-    meta_model::intermediate_model make_single_concept_model(
+    meta_model::endomodel make_single_concept_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -377,14 +377,14 @@ public:
      * @brief Builds a model with a concept that refines another
      * concept, and two types that model each concept.
      */
-    meta_model::intermediate_model make_first_degree_concepts_model(
+    meta_model::endomodel make_first_degree_concepts_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    meta_model::intermediate_model make_second_degree_concepts_model(
+    meta_model::endomodel make_second_degree_concepts_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
@@ -392,7 +392,7 @@ public:
      * @brief Builds a model with two base concepts and a concept that
      * refines both.
      */
-    meta_model::intermediate_model make_multiple_inheritance_concepts_model(
+    meta_model::endomodel make_multiple_inheritance_concepts_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -402,7 +402,7 @@ public:
      * refine it, and a concept that refines both of these. Finally a
      * type last concept.
      */
-    meta_model::intermediate_model make_diamond_inheritance_concepts_model(
+    meta_model::endomodel make_diamond_inheritance_concepts_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -411,7 +411,7 @@ public:
      * @brief Builds a model with a child object with a parent that
      * models a concept.
      */
-    meta_model::intermediate_model make_object_with_parent_that_models_concept(
+    meta_model::endomodel make_object_with_parent_that_models_concept(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -420,7 +420,7 @@ public:
      * @brief Builds a model with a child object with a parent that
      * models a concept that refines a concept.
      */
-    meta_model::intermediate_model
+    meta_model::endomodel
     make_object_with_parent_that_models_a_refined_concept(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
@@ -430,7 +430,7 @@ public:
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    meta_model::intermediate_model make_concept_that_refines_missing_concept(
+    meta_model::endomodel make_concept_that_refines_missing_concept(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -439,7 +439,7 @@ public:
      * @brief Builds a model with a concept that refines a
      * non-existing concept.
      */
-    meta_model::intermediate_model make_object_that_models_missing_concept(
+    meta_model::endomodel make_object_that_models_missing_concept(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
@@ -447,7 +447,7 @@ public:
     /**
      * @brief object that models concept with missing parent.
      */
-    meta_model::intermediate_model
+    meta_model::endomodel
     make_object_that_models_concept_with_missing_parent(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
@@ -458,7 +458,7 @@ public:
      * @brief Scenario: object that exercises both weak and regular
      * associations.
      */
-    meta_model::intermediate_model
+    meta_model::endomodel
     object_with_both_transparent_and_opaque_associations(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
@@ -467,7 +467,7 @@ public:
      * @brief Scenario: object with single attribute of a type existent in
      * current model.
      */
-    meta_model::intermediate_model object_with_attribute(
+    meta_model::endomodel object_with_attribute(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const object_types objt = object_types::value_object,
         const attribute_types pt = attribute_types::value_object,
@@ -477,21 +477,21 @@ public:
      * @brief Scenario: object with single attribute of a type existent in
      * a second model.
      */
-    std::array<meta_model::intermediate_model, 2>
+    std::array<meta_model::endomodel, 2>
     object_with_attribute_type_in_different_model(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with attribute of missing type.
      */
-    meta_model::intermediate_model object_with_missing_attribute_type(
+    meta_model::endomodel object_with_missing_attribute_type(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with parent in current model.
      */
-    meta_model::intermediate_model object_with_parent_in_the_same_model(
+    meta_model::endomodel object_with_parent_in_the_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool has_attribute = false,
         const bool add_model_module = false) const;
@@ -499,21 +499,21 @@ public:
     /**
      * @brief Scenario: object with missing parent in current model.
      */
-    meta_model::intermediate_model object_with_missing_parent_in_the_same_model(
+    meta_model::endomodel object_with_missing_parent_in_the_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with a parent in a second model.
      */
-    std::array<meta_model::intermediate_model, 2>
+    std::array<meta_model::endomodel, 2>
     object_with_parent_in_different_models(
         const bool add_model_module = false) const;
 
     /**
      * @brief Scenario: object with three children.
      */
-    meta_model::intermediate_model object_with_three_children_in_same_model(
+    meta_model::endomodel object_with_three_children_in_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
@@ -521,7 +521,7 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * in current model.
      */
-    meta_model::intermediate_model
+    meta_model::endomodel
     object_with_third_degree_parent_in_same_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool has_attribute = false,
@@ -531,7 +531,7 @@ public:
      * @brief Scenario: object with three levels deep in inheritance tree
      * has missing parent.
      */
-    meta_model::intermediate_model object_with_third_degree_parent_missing(
+    meta_model::endomodel object_with_third_degree_parent_missing(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool add_model_module = false) const;
 
@@ -539,7 +539,7 @@ public:
      * @brief Scenario: object three levels deep in inheritance tree,
      * with parents in different models.
      */
-    std::array<meta_model::intermediate_model, 4>
+    std::array<meta_model::endomodel, 4>
     object_with_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -548,7 +548,7 @@ public:
      * with parents in different models and a missing top-level
      * parent.
      */
-    std::array<meta_model::intermediate_model, 4>
+    std::array<meta_model::endomodel, 4>
     object_with_missing_third_degree_parent_in_different_models(
         const bool add_model_module = false) const;
 
@@ -560,7 +560,7 @@ public:
      * @param repeat_group if true, adds two instances of the group,
      * otherwise just one.
      */
-    meta_model::intermediate_model
+    meta_model::endomodel
     object_with_group_of_attributes_of_different_types(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const bool repeat_group = false,

@@ -44,7 +44,7 @@ namespace cpp {
 namespace fabric {
 
 std::list<boost::shared_ptr<yarn::meta_model::element>> odb_options_factory::
-make(const yarn::meta_model::intermediate_model& im) const {
+make(const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating ODB Options.";
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;

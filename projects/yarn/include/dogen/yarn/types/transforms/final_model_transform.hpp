@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -35,11 +35,10 @@ namespace transforms {
 class final_model_transform final {
 private:
     static std::size_t
-    compute_total_size(const meta_model::intermediate_model& im);
+    compute_total_size(const meta_model::endomodel& im);
 
 public:
-    static meta_model::model
-    transform(const meta_model::intermediate_model& im);
+    static meta_model::model transform(const meta_model::endomodel& im);
 };
 
 } } }

@@ -26,11 +26,11 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 
 namespace {
@@ -38,9 +38,9 @@ namespace {
 const std::string test_module("yarn");
 const std::string test_suite("merge_transform_tests");
 
-using dogen::yarn::test::mock_intermediate_model_factory;
-const mock_intermediate_model_factory::flags flags;
-const mock_intermediate_model_factory factory(flags);
+using dogen::yarn::test::mock_endomodel_factory;
+const mock_endomodel_factory::flags flags;
+const mock_endomodel_factory factory(flags);
 
 const std::string invalid_id("INVALID");
 const std::string invalid_model_name("INVALID");
@@ -55,7 +55,7 @@ const std::string too_many_targets("Only one target expected.");
 
 using dogen::utility::test::contains_checker;
 using dogen::yarn::meta_model::origin_types;
-using dogen::yarn::meta_model::intermediate_model;
+using dogen::yarn::meta_model::endomodel;
 using dogen::yarn::transforms::merge_transform;
 
 BOOST_AUTO_TEST_SUITE(merge_transform_tests)
@@ -67,7 +67,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     const auto target(factory.make_single_type_model(tg, 0));
 
     const unsigned int n(5);
-    std::list<intermediate_model> ims;
+    std::list<endomodel> ims;
     const auto npr(origin_types::non_proxy_reference);
     for (unsigned int i(1); i < n; ++i) {
         const auto m(factory.make_single_type_model(npr, i));
@@ -130,7 +130,7 @@ BOOST_AUTO_TEST_CASE(merging_empty_model_results_in_empty_merged_model) {
     const auto tg(origin_types::target);
     const auto m(factory.make_empty_model(tg));
 
-    const std::list<intermediate_model> ims;
+    const std::list<endomodel> ims;
     const auto combined(merge_transform::transform(m, ims));
     BOOST_LOG_SEV(lg, debug) << "Merged model: " << combined;
 

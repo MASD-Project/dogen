@@ -26,7 +26,7 @@ namespace yarn {
 namespace transforms {
 
 void resolver_transform::
-transform(const helpers::indices& idx, meta_model::intermediate_model& im) {
+transform(const helpers::indices& idx, meta_model::endomodel& im) {
     helpers::resolver::resolve(idx, im);
 }
 

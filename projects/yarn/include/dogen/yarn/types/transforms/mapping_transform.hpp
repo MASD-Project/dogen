@@ -26,7 +26,7 @@
 #endif
 
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -38,9 +38,8 @@ public:
     static bool is_mappable(const meta_model::languages from,
         const meta_model::languages to);
 
-    static meta_model::intermediate_model transform(const context& ctx,
-        const meta_model::intermediate_model& src,
-        const meta_model::languages to);
+    static meta_model::endomodel transform(const context& ctx,
+        const meta_model::endomodel& src, const meta_model::languages to);
 };
 
 } } }

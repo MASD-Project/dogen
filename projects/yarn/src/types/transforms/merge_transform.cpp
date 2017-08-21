@@ -44,8 +44,8 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void merge_transform::merge(const meta_model::intermediate_model& src,
-    meta_model::intermediate_model& dst) {
+void merge_transform::merge(const meta_model::endomodel& src,
+    meta_model::endomodel& dst) {
 
     /*
      * Skip any reference models for which the input language does
@@ -89,9 +89,9 @@ void merge_transform::merge(const meta_model::intermediate_model& src,
     dst.references().insert(p);
 }
 
-meta_model::intermediate_model
-merge_transform::transform(const meta_model::intermediate_model& target,
-    const std::list<meta_model::intermediate_model>& refs) {
+meta_model::endomodel
+merge_transform::transform(const meta_model::endomodel& target,
+    const std::list<meta_model::endomodel>& refs) {
     BOOST_LOG_SEV(lg, debug) << "Executing the merge transform.";
 
     /*

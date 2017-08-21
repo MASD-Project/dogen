@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/intermediate_model_fwd.hpp"
+#include "dogen/yarn/types/meta_model/endomodel_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -42,7 +42,7 @@ namespace transforms {
  */
 class meta_name_transform final {
 public:
-    static void transform(meta_model::intermediate_model& im);
+    static void transform(meta_model::endomodel& im);
 };
 
 } } }

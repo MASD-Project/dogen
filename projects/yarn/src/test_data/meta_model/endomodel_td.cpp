@@ -26,13 +26,13 @@
 #include "dogen/yarn/test_data/meta_model/concept_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/visitor_td.hpp"
+#include "dogen/yarn/test_data/meta_model/endomodel_td.hpp"
 #include "dogen/yarn/test_data/meta_model/exception_td.hpp"
 #include "dogen/yarn/test_data/meta_model/languages_td.hpp"
 #include "dogen/yarn/test_data/meta_model/primitive_td.hpp"
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
-#include "dogen/yarn/test_data/meta_model/intermediate_model_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
 
 namespace {
@@ -297,9 +297,9 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-intermediate_model_generator::intermediate_model_generator() : position_(0) { }
+endomodel_generator::endomodel_generator() : position_(0) { }
 
-void intermediate_model_generator::
+void endomodel_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
     v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
@@ -323,22 +323,22 @@ populate(const unsigned int position, result_type& v) {
     v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 19));
 }
 
-intermediate_model_generator::result_type
-intermediate_model_generator::create(const unsigned int position) {
-    intermediate_model r;
-    intermediate_model_generator::populate(position, r);
+endomodel_generator::result_type
+endomodel_generator::create(const unsigned int position) {
+    endomodel r;
+    endomodel_generator::populate(position, r);
     return r;
 }
 
-intermediate_model_generator::result_type*
-intermediate_model_generator::create_ptr(const unsigned int position) {
-    intermediate_model* p = new intermediate_model();
-    intermediate_model_generator::populate(position, *p);
+endomodel_generator::result_type*
+endomodel_generator::create_ptr(const unsigned int position) {
+    endomodel* p = new endomodel();
+    endomodel_generator::populate(position, *p);
     return p;
 }
 
-intermediate_model_generator::result_type
-intermediate_model_generator::operator()() {
+endomodel_generator::result_type
+endomodel_generator::operator()() {
     return create(position_++);
 }
 

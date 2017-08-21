@@ -32,7 +32,7 @@
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/types/meta_model/orm_module_properties.hpp"
@@ -98,16 +98,16 @@ private:
 
 private:
     static void expand_objects(const type_group& tg,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
     static void expand_concepts(const type_group& tg,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
     static void expand_primitives(const type_group& tg,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
     static void expand_modules(const type_group& tg,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
 public:
-    static void expand(const context& ctx, meta_model::intermediate_model& im);
+    static void expand(const context& ctx, meta_model::endomodel& im);
 };
 
 } } }

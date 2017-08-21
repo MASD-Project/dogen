@@ -22,7 +22,7 @@
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
-#include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
+#include "dogen/yarn/types/transforms/endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
 
 namespace {
@@ -58,7 +58,7 @@ exomodel_transform_registrar& exoendo_transform_chain::registrar() {
     return *registrar_;
 }
 
-meta_model::intermediate_model exoendo_transform_chain::
+meta_model::endomodel exoendo_transform_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
                              << p.generic_string();
@@ -89,7 +89,7 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * exogenous model into an intermediate model, ready for further
      * processing.
      */
-    const auto r(intermediate_model_transform::transform(em));
+    const auto r(endomodel_transform::transform(em));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
     return r;

@@ -39,7 +39,7 @@ namespace yarn {
 namespace transforms {
 
 std::unordered_set<meta_model::languages> references_chain::
-obtain_relevant_languages(const meta_model::intermediate_model& target) {
+obtain_relevant_languages(const meta_model::endomodel& target) {
     std::unordered_set<meta_model::languages> r;
     r.insert(target.input_language());
 
@@ -49,8 +49,8 @@ obtain_relevant_languages(const meta_model::intermediate_model& target) {
     return r;
 }
 
-std::list<meta_model::intermediate_model> references_chain::
-transform(const context& ctx, const meta_model::intermediate_model& target) {
+std::list<meta_model::endomodel> references_chain::
+transform(const context& ctx, const meta_model::endomodel& target) {
     BOOST_LOG_SEV(lg, debug) << "Executing the reference models chain.";
 
     /*
@@ -71,7 +71,7 @@ transform(const context& ctx, const meta_model::intermediate_model& target) {
      * Load each reference model from the reference path, filter and
      * pre-process them.
      */
-    std::list<meta_model::intermediate_model> r;
+    std::list<meta_model::endomodel> r;
     for (const auto& rp : rps) {
         /*
          * Obtain the reference model in the internal representation

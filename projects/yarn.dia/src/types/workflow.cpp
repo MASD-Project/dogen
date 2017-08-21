@@ -24,7 +24,6 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia/types/diagram.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"

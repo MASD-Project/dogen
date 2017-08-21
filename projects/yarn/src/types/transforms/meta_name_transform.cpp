@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/meta_name_transform.hpp"
@@ -89,11 +89,11 @@ public:
     }
 };
 
-void meta_name_transform::transform(meta_model::intermediate_model& im) {
+void meta_name_transform::transform(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-name transform for model: "
                              << im.name().id();
 
-    im.meta_name(meta_name_factory::make_intermediate_model_name());
+    im.meta_name(meta_name_factory::make_endomodel_name());
 
     /*
      * We are setting include_injected_elements to false by design as

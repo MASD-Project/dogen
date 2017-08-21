@@ -51,7 +51,7 @@ make(const yarn::meta_model::name& model_name) const {
 }
 
 std::list<boost::shared_ptr<yarn::meta_model::element>>
-registrar_factory::make(const yarn::meta_model::intermediate_model& im) const {
+registrar_factory::make(const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating registrars.";
 
     std::list<boost::shared_ptr<yarn::meta_model::element>> r;

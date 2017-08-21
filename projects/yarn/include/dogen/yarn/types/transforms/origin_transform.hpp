@@ -27,7 +27,7 @@
 
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -43,14 +43,13 @@ private:
     static type_group make_type_group(const annotations::type_repository& atrp);
 
     static bool is_proxy_model(const type_group& tg,
-        const meta_model::intermediate_model& im);
+        const meta_model::endomodel& im);
 
     static meta_model::origin_types compute_origin_types(
-        const meta_model::intermediate_model& im, const bool is_proxy_model);
+        const meta_model::endomodel& im, const bool is_proxy_model);
 
 public:
-    static void transform(const context& ctx,
-        meta_model::intermediate_model& im);
+    static void transform(const context& ctx, meta_model::endomodel& im);
 };
 
 } } }

@@ -33,7 +33,7 @@
 #include "dogen/yarn/types/meta_model/name_tree.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/mapping_context.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 
@@ -56,8 +56,8 @@ private:
         return r;
     }
 
-    meta_model::intermediate_model
-    clone(const meta_model::intermediate_model& im) const;
+    meta_model::endomodel
+    clone(const meta_model::endomodel& im) const;
 
 private:
     const std::unordered_map<std::string, meta_model::name>&
@@ -66,11 +66,11 @@ private:
 
     std::unordered_map<std::string, meta_model::name> injections_for_language(
         const mapping_set& ms, const meta_model::languages l,
-        const meta_model::intermediate_model& im) const;
+        const meta_model::endomodel& im) const;
 
     mapping_context create_mapping_context(const mapping_set& ms,
         const meta_model::languages from, const meta_model::languages to,
-        const meta_model::intermediate_model& im) const;
+        const meta_model::endomodel& im) const;
 
 private:
     meta_model::name_tree walk_name_tree(const mapping_context& mc,
@@ -82,9 +82,9 @@ private:
 public:
     static bool is_mappable(const meta_model::languages from,
         const meta_model::languages to);
-    meta_model::intermediate_model map(const meta_model::languages from,
+    meta_model::endomodel map(const meta_model::languages from,
         const meta_model::languages to,
-        const meta_model::intermediate_model& im) const;
+        const meta_model::endomodel& im) const;
 
 private:
     const mapping_set_repository& mapping_set_repository_;

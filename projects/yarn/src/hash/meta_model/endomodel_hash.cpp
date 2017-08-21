@@ -25,13 +25,13 @@
 #include "dogen/yarn/hash/meta_model/concept_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/visitor_hash.hpp"
+#include "dogen/yarn/hash/meta_model/endomodel_hash.hpp"
 #include "dogen/yarn/hash/meta_model/exception_hash.hpp"
 #include "dogen/yarn/hash/meta_model/languages_hash.hpp"
 #include "dogen/yarn/hash/meta_model/primitive_hash.hpp"
 #include "dogen/yarn/hash/meta_model/enumeration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
 #include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
-#include "dogen/yarn/hash/meta_model/intermediate_model_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
 
 namespace {
@@ -226,7 +226,7 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::size_t intermediate_model_hasher::hash(const intermediate_model& v) {
+std::size_t endomodel_hasher::hash(const endomodel& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());

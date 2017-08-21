@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
 
@@ -38,7 +38,7 @@ namespace transforms {
 class resolver_transform final {
 public:
     static void transform(const helpers::indices& idx,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 };
 
 } } }

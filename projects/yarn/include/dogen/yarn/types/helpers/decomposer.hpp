@@ -37,7 +37,7 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
 
 namespace dogen {
@@ -85,7 +85,7 @@ private:
 
 public:
     static decomposition_result
-    decompose(const meta_model::intermediate_model& im);
+    decompose(const meta_model::endomodel& im);
 
 private:
     decomposition_result result_;

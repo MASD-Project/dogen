@@ -91,7 +91,7 @@ make_configuration(const annotations::type_repository& atrp,
 }
 
 std::string visual_studio_factory::
-obtain_project_name(const yarn::meta_model::intermediate_model& im) const {
+obtain_project_name(const yarn::meta_model::endomodel& im) const {
     yarn::helpers::name_flattener nfl(false/*detect_model_name*/);
     const auto ns(nfl.flatten(im.name()));
 
@@ -103,7 +103,7 @@ obtain_project_name(const yarn::meta_model::intermediate_model& im) const {
 boost::shared_ptr<yarn::meta_model::element>
 visual_studio_factory::make_solution(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const yarn::meta_model::intermediate_model& im) const {
+    const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Solution.";
 
     yarn::helpers::name_factory nf;
@@ -126,7 +126,7 @@ visual_studio_factory::make_solution(const visual_studio_configuration cfg,
 boost::shared_ptr<yarn::meta_model::element>
 visual_studio_factory::make_project(const visual_studio_configuration cfg,
     const std::string& project_name,
-    const yarn::meta_model::intermediate_model& im) const {
+    const yarn::meta_model::endomodel& im) const {
     BOOST_LOG_SEV(lg, debug) << "Generating Visual Studio Project.";
 
     yarn::helpers::name_factory nf;
@@ -147,7 +147,7 @@ visual_studio_factory::make_project(const visual_studio_configuration cfg,
 
 std::list<boost::shared_ptr<yarn::meta_model::element>> visual_studio_factory::
 make(const annotations::type_repository& atrp,
-    const yarn::meta_model::intermediate_model& im) const {
+    const yarn::meta_model::endomodel& im) const {
 
     const auto pn(obtain_project_name(im));
     const auto ra(im.root_module()->annotation());

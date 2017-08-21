@@ -30,7 +30,7 @@
 #include "dogen/annotations/types/type_repository.hpp"
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -57,8 +57,7 @@ private:
         const annotations::annotation& a);
 
 public:
-    static void transform(const context& ctx,
-        meta_model::intermediate_model& m);
+    static void transform(const context& ctx, meta_model::endomodel& m);
 };
 
 } } }

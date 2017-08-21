@@ -242,7 +242,7 @@ void parsing_transform::parse_underlying_element(const type_group& tg,
 }
 
 void parsing_transform::
-transform(const context& ctx, meta_model::intermediate_model& m) {
+transform(const context& ctx, meta_model::endomodel& m) {
     const auto tg(make_type_group(ctx.type_repository()));
     const auto l(m.input_language());
 

@@ -86,7 +86,7 @@ const std::unordered_map<std::string, std::list<std::string>>&
 
 class updater {
 public:
-    updater(meta_model::intermediate_model& im) : model_(im) { }
+    updater(meta_model::endomodel& im) : model_(im) { }
 
 private:
     boost::optional<meta_model::name>
@@ -105,7 +105,7 @@ public:
     void operator()(meta_model::visitor& v) { update(v); }
 
 public:
-    meta_model::intermediate_model& model_;
+    meta_model::endomodel& model_;
 };
 
 boost::optional<meta_model::name>
@@ -196,7 +196,7 @@ void updater::update(meta_model::element& e) {
 }
 
 void modules_transform::
-create_missing_modules(meta_model::intermediate_model& im) {
+create_missing_modules(meta_model::endomodel& im) {
     internal_modules_builder b;
     meta_model::elements_traversal(im, b);
 
@@ -215,12 +215,12 @@ create_missing_modules(meta_model::intermediate_model& im) {
 }
 
 void modules_transform::
-expand_containing_module(meta_model::intermediate_model& im) {
+expand_containing_module(meta_model::endomodel& im) {
     updater u(im);
     meta_model::elements_traversal(im, u);
 }
 
-void modules_transform::transform(meta_model::intermediate_model& im) {
+void modules_transform::transform(meta_model::endomodel& im) {
     create_missing_modules(im);
     expand_containing_module(im);
 }

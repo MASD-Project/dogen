@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -76,7 +76,7 @@ private:
      * @brief Walks through the name tree, picking up associations as
      * it goes along.
      */
-    static void walk_name_tree(const meta_model::intermediate_model& im,
+    static void walk_name_tree(const meta_model::endomodel& im,
         meta_model::object& o, const meta_model::name_tree& nt,
         const bool inherit_opaqueness_from_parent);
 
@@ -84,14 +84,14 @@ private:
     /**
      * @brief Expands a specific object.
      */
-    static void expand_object(const meta_model::intermediate_model& im,
+    static void expand_object(const meta_model::endomodel& im,
         meta_model::object& o);
 
 public:
     /**
      * @brief Expands all association relationships.
      */
-    static void transform(meta_model::intermediate_model& im);
+    static void transform(meta_model::endomodel& im);
 };
 
 } } }

@@ -114,7 +114,7 @@ private:
 }
 
 std::size_t final_model_transform::
-compute_total_size(const meta_model::intermediate_model& im) {
+compute_total_size(const meta_model::endomodel& im) {
     std::size_t r;
     r = im.modules().size();
     r += im.concepts().size();
@@ -129,7 +129,7 @@ compute_total_size(const meta_model::intermediate_model& im) {
 }
 
 meta_model::model
-final_model_transform::transform(const meta_model::intermediate_model& im) {
+final_model_transform::transform(const meta_model::endomodel& im) {
     meta_model::model r;
     r.name(im.name());
     r.meta_name(helpers::meta_name_factory::make_model_name());

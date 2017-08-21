@@ -27,7 +27,7 @@
 
 #include <list>
 #include <boost/shared_ptr.hpp>
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/quilt.cpp/types/fabric/registrar_fwd.hpp"
 
@@ -43,7 +43,7 @@ private:
 
 public:
     std::list<boost::shared_ptr<yarn::meta_model::element>>
-    make(const yarn::meta_model::intermediate_model& im) const;
+    make(const yarn::meta_model::endomodel& im) const;
 };
 
 } } } }

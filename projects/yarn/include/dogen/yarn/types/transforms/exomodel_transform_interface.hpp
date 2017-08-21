@@ -28,7 +28,6 @@
 #include <string>
 #include <boost/filesystem/path.hpp>
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 #include "dogen/yarn/types/transforms/exomodel_transform_types.hpp"
 
 namespace dogen {

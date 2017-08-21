@@ -64,7 +64,7 @@ void associations_transform::remove_duplicates(
 }
 
 void associations_transform::
-walk_name_tree(const meta_model::intermediate_model& im, meta_model::object& o,
+walk_name_tree(const meta_model::endomodel& im, meta_model::object& o,
     const meta_model::name_tree& nt,
     const bool inherit_opaqueness_from_parent) {
 
@@ -96,7 +96,7 @@ walk_name_tree(const meta_model::intermediate_model& im, meta_model::object& o,
 }
 
 void associations_transform::
-expand_object(const meta_model::intermediate_model& im, meta_model::object& o) {
+expand_object(const meta_model::endomodel& im, meta_model::object& o) {
     BOOST_LOG_SEV(lg, debug) << "Expand object: " << o.name().id();
 
     for (const auto& p : o.local_attributes()) {
@@ -123,7 +123,7 @@ expand_object(const meta_model::intermediate_model& im, meta_model::object& o) {
         remove_duplicates(o.associative_container_keys());
 }
 
-void associations_transform::transform(meta_model::intermediate_model& im) {
+void associations_transform::transform(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects. Total objects: "
                              << im.objects().size();
 

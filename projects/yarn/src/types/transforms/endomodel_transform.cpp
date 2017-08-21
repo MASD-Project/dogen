@@ -30,7 +30,7 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/intermediate_model_transform.hpp"
+#include "dogen/yarn/types/transforms/endomodel_transform.hpp"
 
 namespace {
 
@@ -70,12 +70,12 @@ to_element_map(const std::list<std::pair<annotations::scribble_group,
     return r;
 }
 
-meta_model::intermediate_model intermediate_model_transform::
+meta_model::endomodel endomodel_transform::
 transform(const meta_model::exomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model "
                              << "intermediate model.";
 
-    meta_model::intermediate_model r;
+    meta_model::endomodel r;
     r.name(em.name());
     r.modules(to_element_map(em.modules()));
     r.concepts(to_element_map(em.concepts()));

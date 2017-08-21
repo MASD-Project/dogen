@@ -1965,7 +1965,7 @@ that make up dogen instructions.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+            <dia:string>#yarn::meta_model::endomodel#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -4524,7 +4524,7 @@ manageable format.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#yarn::meta_model::intermediate_model#</dia:string>
+            <dia:string>#yarn::meta_model::endomodel#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>

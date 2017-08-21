@@ -26,11 +26,11 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/concept.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 
 namespace {
@@ -41,17 +41,17 @@ const std::string test_suite("attributes_transform_tests");
 const std::string concept_not_found("Concept not found");
 const std::string object_not_found("Object not found in model");
 
-using dogen::yarn::test::mock_intermediate_model_factory;
+using dogen::yarn::test::mock_endomodel_factory;
 
 /**
  * @brief We require the concepts to have been indexed or else we
  * won't work.
  */
-const mock_intermediate_model_factory::flags
+const mock_endomodel_factory::flags
 flags(false/*tagged*/, false/*resolved*/, false/*merged*/,
     true/*concepts_indexed*/, false/*attributes_indexed*/,
     true/*types parsed*/);
-const mock_intermediate_model_factory factory(flags);
+const mock_endomodel_factory factory(flags);
 
 template<typename Stateful>
 bool has_duplicate_attribute_names(const Stateful& s,
@@ -94,9 +94,9 @@ using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using dogen::yarn::transforms::attributes_transform;
 using dogen::yarn::meta_model::origin_types;
-using object_types = dogen::yarn::test::mock_intermediate_model_factory::
+using object_types = dogen::yarn::test::mock_endomodel_factory::
 object_types;
-using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+using attribute_types = dogen::yarn::test::mock_endomodel_factory::
 attribute_types;
 
 BOOST_AUTO_TEST_SUITE(attributes_transform_tests)

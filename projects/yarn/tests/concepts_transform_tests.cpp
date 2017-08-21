@@ -25,12 +25,12 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/concept.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/test/mock_endomodel_factory.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
 
 namespace {
@@ -41,7 +41,7 @@ const std::string test_suite("concept_expander_tests");
 const std::string concept_not_found("Concept not found");
 const std::string object_not_found("Object not found in model");
 
-using dogen::yarn::test::mock_intermediate_model_factory;
+using dogen::yarn::test::mock_endomodel_factory;
 
 /* @note tagging should make no difference to tests, and not having tags
  * makes the model dumps easier to understand.
@@ -49,11 +49,11 @@ using dogen::yarn::test::mock_intermediate_model_factory;
  * However, strictly speaking, tagging happens before transform so it
  * would be more truthful to use a tagged model in the tests.
  */
-const mock_intermediate_model_factory::flags flags(false/*tagged*/,
+const mock_endomodel_factory::flags flags(false/*tagged*/,
     false/*resolved*/, false/*merged*/, false/*concepts_indexed*/,
     false/*attributes_indexed*/);
 
-const mock_intermediate_model_factory factory(flags);
+const mock_endomodel_factory factory(flags);
 
 }
 
@@ -62,9 +62,9 @@ using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using dogen::yarn::transforms::concepts_transform;
 using dogen::yarn::meta_model::origin_types;
-using object_types = dogen::yarn::test::mock_intermediate_model_factory::
+using object_types = dogen::yarn::test::mock_endomodel_factory::
     object_types;
-using attribute_types = dogen::yarn::test::mock_intermediate_model_factory::
+using attribute_types = dogen::yarn::test::mock_endomodel_factory::
     attribute_types;
 
 BOOST_AUTO_TEST_SUITE(concept_expander_tests)

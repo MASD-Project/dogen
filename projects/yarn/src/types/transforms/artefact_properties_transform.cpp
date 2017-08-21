@@ -88,7 +88,7 @@ update_element(const context& ctx, meta_model::element& e) {
 }
 
 void artefact_properties_transform::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started artefact properties transform.";
 
     using namespace std::placeholders;

@@ -26,21 +26,21 @@
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
-#include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
-#include "dogen/yarn/test/mock_intermediate_model_factory.hpp"
+#include "dogen/yarn/test/mock_endomodel_factory.hpp"
 
 namespace {
 
 const std::string test_module("yarn");
 const std::string test_suite("validator_tests");
 
-using dogen::yarn::test::mock_intermediate_model_factory;
-const mock_intermediate_model_factory::flags flags;
-const mock_intermediate_model_factory factory(flags);
+using dogen::yarn::test::mock_endomodel_factory;
+const mock_endomodel_factory::flags flags;
+const mock_endomodel_factory factory(flags);
 
 const std::string invalid_id("INVALID");
 const std::string invalid_model_name("INVALID");

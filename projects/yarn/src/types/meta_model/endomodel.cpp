@@ -24,10 +24,10 @@
 #include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace boost {
 
@@ -114,12 +114,12 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-intermediate_model::intermediate_model()
+endomodel::endomodel()
     : origin_type_(static_cast<dogen::yarn::meta_model::origin_types>(0)),
       has_generatable_types_(static_cast<bool>(0)),
       input_language_(static_cast<dogen::yarn::meta_model::languages>(0)) { }
 
-intermediate_model::intermediate_model(intermediate_model&& rhs)
+endomodel::endomodel(endomodel&& rhs)
     : name_(std::move(rhs.name_)),
       meta_name_(std::move(rhs.meta_name_)),
       origin_type_(std::move(rhs.origin_type_)),
@@ -141,7 +141,7 @@ intermediate_model::intermediate_model(intermediate_model&& rhs)
       orm_properties_(std::move(rhs.orm_properties_)),
       facet_properties_(std::move(rhs.facet_properties_)) { }
 
-intermediate_model::intermediate_model(
+endomodel::endomodel(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
     const dogen::yarn::meta_model::origin_types origin_type,
@@ -183,7 +183,7 @@ intermediate_model::intermediate_model(
       orm_properties_(orm_properties),
       facet_properties_(facet_properties) { }
 
-void intermediate_model::swap(intermediate_model& other) noexcept {
+void endomodel::swap(endomodel& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
@@ -207,7 +207,7 @@ void intermediate_model::swap(intermediate_model& other) noexcept {
     swap(facet_properties_, other.facet_properties_);
 }
 
-bool intermediate_model::operator==(const intermediate_model& rhs) const {
+bool endomodel::operator==(const endomodel& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
         origin_type_ == rhs.origin_type_ &&
@@ -230,305 +230,305 @@ bool intermediate_model::operator==(const intermediate_model& rhs) const {
         facet_properties_ == rhs.facet_properties_;
 }
 
-intermediate_model& intermediate_model::operator=(intermediate_model other) {
+endomodel& endomodel::operator=(endomodel other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const dogen::yarn::meta_model::name& intermediate_model::name() const {
+const dogen::yarn::meta_model::name& endomodel::name() const {
     return name_;
 }
 
-dogen::yarn::meta_model::name& intermediate_model::name() {
+dogen::yarn::meta_model::name& endomodel::name() {
     return name_;
 }
 
-void intermediate_model::name(const dogen::yarn::meta_model::name& v) {
+void endomodel::name(const dogen::yarn::meta_model::name& v) {
     name_ = v;
 }
 
-void intermediate_model::name(const dogen::yarn::meta_model::name&& v) {
+void endomodel::name(const dogen::yarn::meta_model::name&& v) {
     name_ = std::move(v);
 }
 
-const dogen::yarn::meta_model::name& intermediate_model::meta_name() const {
+const dogen::yarn::meta_model::name& endomodel::meta_name() const {
     return meta_name_;
 }
 
-dogen::yarn::meta_model::name& intermediate_model::meta_name() {
+dogen::yarn::meta_model::name& endomodel::meta_name() {
     return meta_name_;
 }
 
-void intermediate_model::meta_name(const dogen::yarn::meta_model::name& v) {
+void endomodel::meta_name(const dogen::yarn::meta_model::name& v) {
     meta_name_ = v;
 }
 
-void intermediate_model::meta_name(const dogen::yarn::meta_model::name&& v) {
+void endomodel::meta_name(const dogen::yarn::meta_model::name&& v) {
     meta_name_ = std::move(v);
 }
 
-dogen::yarn::meta_model::origin_types intermediate_model::origin_type() const {
+dogen::yarn::meta_model::origin_types endomodel::origin_type() const {
     return origin_type_;
 }
 
-void intermediate_model::origin_type(const dogen::yarn::meta_model::origin_types v) {
+void endomodel::origin_type(const dogen::yarn::meta_model::origin_types v) {
     origin_type_ = v;
 }
 
-const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& intermediate_model::references() const {
+const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& endomodel::references() const {
     return references_;
 }
 
-std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& intermediate_model::references() {
+std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& endomodel::references() {
     return references_;
 }
 
-void intermediate_model::references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& v) {
+void endomodel::references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& v) {
     references_ = v;
 }
 
-void intermediate_model::references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>&& v) {
+void endomodel::references(const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>&& v) {
     references_ = std::move(v);
 }
 
-const std::unordered_set<dogen::yarn::meta_model::name>& intermediate_model::leaves() const {
+const std::unordered_set<dogen::yarn::meta_model::name>& endomodel::leaves() const {
     return leaves_;
 }
 
-std::unordered_set<dogen::yarn::meta_model::name>& intermediate_model::leaves() {
+std::unordered_set<dogen::yarn::meta_model::name>& endomodel::leaves() {
     return leaves_;
 }
 
-void intermediate_model::leaves(const std::unordered_set<dogen::yarn::meta_model::name>& v) {
+void endomodel::leaves(const std::unordered_set<dogen::yarn::meta_model::name>& v) {
     leaves_ = v;
 }
 
-void intermediate_model::leaves(const std::unordered_set<dogen::yarn::meta_model::name>&& v) {
+void endomodel::leaves(const std::unordered_set<dogen::yarn::meta_model::name>&& v) {
     leaves_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& intermediate_model::modules() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& endomodel::modules() const {
     return modules_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& intermediate_model::modules() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& endomodel::modules() {
     return modules_;
 }
 
-void intermediate_model::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
+void endomodel::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& v) {
     modules_ = v;
 }
 
-void intermediate_model::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
+void endomodel::modules(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >&& v) {
     modules_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& intermediate_model::concepts() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& endomodel::concepts() const {
     return concepts_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& intermediate_model::concepts() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& endomodel::concepts() {
     return concepts_;
 }
 
-void intermediate_model::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
+void endomodel::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
     concepts_ = v;
 }
 
-void intermediate_model::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >&& v) {
+void endomodel::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >&& v) {
     concepts_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& intermediate_model::builtins() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& endomodel::builtins() const {
     return builtins_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& intermediate_model::builtins() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& endomodel::builtins() {
     return builtins_;
 }
 
-void intermediate_model::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& v) {
+void endomodel::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& v) {
     builtins_ = v;
 }
 
-void intermediate_model::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >&& v) {
+void endomodel::builtins(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >&& v) {
     builtins_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& intermediate_model::enumerations() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& endomodel::enumerations() const {
     return enumerations_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& intermediate_model::enumerations() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& endomodel::enumerations() {
     return enumerations_;
 }
 
-void intermediate_model::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& v) {
+void endomodel::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& v) {
     enumerations_ = v;
 }
 
-void intermediate_model::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >&& v) {
+void endomodel::enumerations(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >&& v) {
     enumerations_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& intermediate_model::primitives() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& endomodel::primitives() const {
     return primitives_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& intermediate_model::primitives() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& endomodel::primitives() {
     return primitives_;
 }
 
-void intermediate_model::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& v) {
+void endomodel::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& v) {
     primitives_ = v;
 }
 
-void intermediate_model::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >&& v) {
+void endomodel::primitives(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >&& v) {
     primitives_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& intermediate_model::objects() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& endomodel::objects() const {
     return objects_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& intermediate_model::objects() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& endomodel::objects() {
     return objects_;
 }
 
-void intermediate_model::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& v) {
+void endomodel::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& v) {
     objects_ = v;
 }
 
-void intermediate_model::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >&& v) {
+void endomodel::objects(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >&& v) {
     objects_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& intermediate_model::exceptions() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& endomodel::exceptions() const {
     return exceptions_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& intermediate_model::exceptions() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& endomodel::exceptions() {
     return exceptions_;
 }
 
-void intermediate_model::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& v) {
+void endomodel::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& v) {
     exceptions_ = v;
 }
 
-void intermediate_model::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >&& v) {
+void endomodel::exceptions(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >&& v) {
     exceptions_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& intermediate_model::visitors() const {
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& endomodel::visitors() const {
     return visitors_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& intermediate_model::visitors() {
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& endomodel::visitors() {
     return visitors_;
 }
 
-void intermediate_model::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& v) {
+void endomodel::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& v) {
     visitors_ = v;
 }
 
-void intermediate_model::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >&& v) {
+void endomodel::visitors(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >&& v) {
     visitors_ = std::move(v);
 }
 
-const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& intermediate_model::injected_elements() const {
+const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& endomodel::injected_elements() const {
     return injected_elements_;
 }
 
-std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& intermediate_model::injected_elements() {
+std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& endomodel::injected_elements() {
     return injected_elements_;
 }
 
-void intermediate_model::injected_elements(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v) {
+void endomodel::injected_elements(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >& v) {
     injected_elements_ = v;
 }
 
-void intermediate_model::injected_elements(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >&& v) {
+void endomodel::injected_elements(const std::list<boost::shared_ptr<dogen::yarn::meta_model::element> >&& v) {
     injected_elements_ = std::move(v);
 }
 
-bool intermediate_model::has_generatable_types() const {
+bool endomodel::has_generatable_types() const {
     return has_generatable_types_;
 }
 
-void intermediate_model::has_generatable_types(const bool v) {
+void endomodel::has_generatable_types(const bool v) {
     has_generatable_types_ = v;
 }
 
-const boost::shared_ptr<dogen::yarn::meta_model::module>& intermediate_model::root_module() const {
+const boost::shared_ptr<dogen::yarn::meta_model::module>& endomodel::root_module() const {
     return root_module_;
 }
 
-boost::shared_ptr<dogen::yarn::meta_model::module>& intermediate_model::root_module() {
+boost::shared_ptr<dogen::yarn::meta_model::module>& endomodel::root_module() {
     return root_module_;
 }
 
-void intermediate_model::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
+void endomodel::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>& v) {
     root_module_ = v;
 }
 
-void intermediate_model::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v) {
+void endomodel::root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v) {
     root_module_ = std::move(v);
 }
 
-dogen::yarn::meta_model::languages intermediate_model::input_language() const {
+dogen::yarn::meta_model::languages endomodel::input_language() const {
     return input_language_;
 }
 
-void intermediate_model::input_language(const dogen::yarn::meta_model::languages v) {
+void endomodel::input_language(const dogen::yarn::meta_model::languages v) {
     input_language_ = v;
 }
 
-const std::list<dogen::yarn::meta_model::languages>& intermediate_model::output_languages() const {
+const std::list<dogen::yarn::meta_model::languages>& endomodel::output_languages() const {
     return output_languages_;
 }
 
-std::list<dogen::yarn::meta_model::languages>& intermediate_model::output_languages() {
+std::list<dogen::yarn::meta_model::languages>& endomodel::output_languages() {
     return output_languages_;
 }
 
-void intermediate_model::output_languages(const std::list<dogen::yarn::meta_model::languages>& v) {
+void endomodel::output_languages(const std::list<dogen::yarn::meta_model::languages>& v) {
     output_languages_ = v;
 }
 
-void intermediate_model::output_languages(const std::list<dogen::yarn::meta_model::languages>&& v) {
+void endomodel::output_languages(const std::list<dogen::yarn::meta_model::languages>&& v) {
     output_languages_ = std::move(v);
 }
 
-const boost::optional<dogen::yarn::meta_model::orm_model_properties>& intermediate_model::orm_properties() const {
+const boost::optional<dogen::yarn::meta_model::orm_model_properties>& endomodel::orm_properties() const {
     return orm_properties_;
 }
 
-boost::optional<dogen::yarn::meta_model::orm_model_properties>& intermediate_model::orm_properties() {
+boost::optional<dogen::yarn::meta_model::orm_model_properties>& endomodel::orm_properties() {
     return orm_properties_;
 }
 
-void intermediate_model::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>& v) {
+void endomodel::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>& v) {
     orm_properties_ = v;
 }
 
-void intermediate_model::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>&& v) {
+void endomodel::orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>&& v) {
     orm_properties_ = std::move(v);
 }
 
-const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& intermediate_model::facet_properties() const {
+const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& endomodel::facet_properties() const {
     return facet_properties_;
 }
 
-std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& intermediate_model::facet_properties() {
+std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& endomodel::facet_properties() {
     return facet_properties_;
 }
 
-void intermediate_model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
+void endomodel::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v) {
     facet_properties_ = v;
 }
 
-void intermediate_model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v) {
+void endomodel::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v) {
     facet_properties_ = std::move(v);
 }
 

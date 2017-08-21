@@ -36,7 +36,7 @@ namespace csharp {
 namespace fabric {
 
 boost::shared_ptr<yarn::meta_model::element>
-assistant_factory::make(const yarn::meta_model::intermediate_model& im) const {
+assistant_factory::make(const yarn::meta_model::endomodel& im) const {
     yarn::helpers::name_factory nf;
     const auto n(nf.build_element_in_model(im.name(), assistant_name));
 

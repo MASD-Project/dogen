@@ -34,7 +34,7 @@ namespace dogen {
  *
  * Yarn is a meta-model that provides a programming-language-neutral type
  * representation, designed for code generation. There are two core types
- * in yarn: @e intermediate_model and @e model. Intermediate models are
+ * in yarn: @e endomodel and @e model. Intermediate models are
  * obtained via @frontends and post-processed until they form a cohesive
  * whole. They are then transformed into a final model representation, at
  * which point they are suitable for code generation.

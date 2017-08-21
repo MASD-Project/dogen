@@ -313,7 +313,7 @@ orm_transform::make_module_properties(const type_group& tg,
 }
 
 void orm_transform::
-expand_objects(const type_group& tg, meta_model::intermediate_model& im) {
+expand_objects(const type_group& tg, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started object expansion.";
 
     boost::optional<meta_model::letter_cases> lc;
@@ -366,7 +366,7 @@ expand_objects(const type_group& tg, meta_model::intermediate_model& im) {
 }
 
 void orm_transform::
-expand_concepts(const type_group& tg, meta_model::intermediate_model& im) {
+expand_concepts(const type_group& tg, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started concept expansion.";
 
     for (auto& pair : im.concepts()) {
@@ -381,7 +381,7 @@ expand_concepts(const type_group& tg, meta_model::intermediate_model& im) {
 }
 
 void orm_transform::expand_primitives(
-    const type_group& tg, meta_model::intermediate_model& im) {
+    const type_group& tg, meta_model::endomodel& im) {
 
     BOOST_LOG_SEV(lg, debug) << "Started primitive expansion.";
 
@@ -420,7 +420,7 @@ void orm_transform::expand_primitives(
 }
 
 void orm_transform::
-expand_modules(const type_group& tg, meta_model::intermediate_model& im) {
+expand_modules(const type_group& tg, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started module expansion.";
 
     for (auto& pair : im.modules()) {
@@ -487,7 +487,7 @@ expand_modules(const type_group& tg, meta_model::intermediate_model& im) {
 }
 
 void orm_transform::
-expand(const context& ctx, meta_model::intermediate_model& im) {
+expand(const context& ctx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expansion.";
 
     const auto tg(make_type_group(ctx.type_repository()));

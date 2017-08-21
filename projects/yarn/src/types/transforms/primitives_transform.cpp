@@ -77,7 +77,7 @@ populate_from_annotations(const type_group& tg, meta_model::primitive& p) {
 }
 
 void primitives_transform::
-transform(const context& ctx, meta_model::intermediate_model& im) {
+transform(const context& ctx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started expanding primitives for model: "
                              << im.name().id();
 

@@ -27,7 +27,7 @@
 
 #include <string>
 #include "dogen/yarn/types/meta_model/element.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
@@ -69,7 +69,7 @@ private:
     static void update_facet_enablement(
         const std::list<annotations::archetype_location>& als,
         const global_enablement_configurations_type& gcs,
-        meta_model::intermediate_model& im);
+        meta_model::endomodel& im);
 
 private:
     struct local_type_group {
@@ -120,8 +120,7 @@ private:
         meta_model::element& e);
 
 public:
-    static void transform(const context& ctx,
-        meta_model::intermediate_model& im);
+    static void transform(const context& ctx, meta_model::endomodel& im);
 };
 
 } } }
