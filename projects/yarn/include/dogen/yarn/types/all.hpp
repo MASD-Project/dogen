@@ -48,6 +48,7 @@
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/helpers/mapping_set.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
+#include "dogen/yarn/types/helpers/model_sorter.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
