@@ -43,7 +43,6 @@
 #include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/languages_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
-#include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
@@ -75,7 +74,6 @@ void save(Archive& ar,
     ar << make_nvp("root_module", v.root_module_);
     ar << make_nvp("input_language", v.input_language_);
     ar << make_nvp("output_languages", v.output_languages_);
-    ar << make_nvp("scribble_groups", v.scribble_groups_);
     ar << make_nvp("orm_properties", v.orm_properties_);
     ar << make_nvp("facet_properties", v.facet_properties_);
 }
@@ -102,7 +100,6 @@ void load(Archive& ar,
     ar >> make_nvp("root_module", v.root_module_);
     ar >> make_nvp("input_language", v.input_language_);
     ar >> make_nvp("output_languages", v.output_languages_);
-    ar >> make_nvp("scribble_groups", v.scribble_groups_);
     ar >> make_nvp("orm_properties", v.orm_properties_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
 }

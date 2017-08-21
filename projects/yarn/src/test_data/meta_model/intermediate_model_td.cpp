@@ -29,7 +29,6 @@
 #include "dogen/yarn/test_data/meta_model/exception_td.hpp"
 #include "dogen/yarn/test_data/meta_model/languages_td.hpp"
 #include "dogen/yarn/test_data/meta_model/primitive_td.hpp"
-#include "dogen/annotations/test_data/scribble_group_td.hpp"
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
@@ -267,19 +266,6 @@ std::list<dogen::yarn::meta_model::languages> create_std_list_dogen_yarn_meta_mo
     return r;
 }
 
-dogen::annotations::scribble_group
-create_dogen_annotations_scribble_group(const unsigned int position) {
-    return dogen::annotations::scribble_group_generator::create(position);
-}
-
-std::unordered_map<std::string, dogen::annotations::scribble_group> create_std_unordered_map_std_string_dogen_annotations_scribble_group(unsigned int position) {
-    std::unordered_map<std::string, dogen::annotations::scribble_group> r;
-    for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_scribble_group(position + i)));
-    }
-    return r;
-}
-
 dogen::yarn::meta_model::orm_model_properties
 create_dogen_yarn_meta_model_orm_model_properties(const unsigned int position) {
     return dogen::yarn::meta_model::orm_model_properties_generator::create(position);
@@ -333,9 +319,8 @@ populate(const unsigned int position, result_type& v) {
     v.root_module(create_boost_shared_ptr_dogen_yarn_meta_model_module(position + 15));
     v.input_language(create_dogen_yarn_meta_model_languages(position + 16));
     v.output_languages(create_std_list_dogen_yarn_meta_model_languages(position + 17));
-    v.scribble_groups(create_std_unordered_map_std_string_dogen_annotations_scribble_group(position + 18));
-    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 19));
-    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 20));
+    v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 18));
+    v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 19));
 }
 
 intermediate_model_generator::result_type

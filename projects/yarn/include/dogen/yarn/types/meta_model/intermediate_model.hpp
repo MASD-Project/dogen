@@ -35,7 +35,6 @@
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
-#include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/object_fwd.hpp"
 #include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
@@ -88,7 +87,6 @@ public:
         const boost::shared_ptr<dogen::yarn::meta_model::module>& root_module,
         const dogen::yarn::meta_model::languages input_language,
         const std::list<dogen::yarn::meta_model::languages>& output_languages,
-        const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups,
         const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
         const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties);
 
@@ -271,11 +269,6 @@ public:
     void output_languages(const std::list<dogen::yarn::meta_model::languages>&& v);
     /**@}*/
 
-    const std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups() const;
-    std::unordered_map<std::string, dogen::annotations::scribble_group>& scribble_groups();
-    void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>& v);
-    void scribble_groups(const std::unordered_map<std::string, dogen::annotations::scribble_group>&& v);
-
     const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties() const;
     boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties();
     void orm_properties(const boost::optional<dogen::yarn::meta_model::orm_model_properties>& v);
@@ -315,7 +308,6 @@ private:
     boost::shared_ptr<dogen::yarn::meta_model::module> root_module_;
     dogen::yarn::meta_model::languages input_language_;
     std::list<dogen::yarn::meta_model::languages> output_languages_;
-    std::unordered_map<std::string, dogen::annotations::scribble_group> scribble_groups_;
     boost::optional<dogen::yarn::meta_model::orm_model_properties> orm_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
 };
