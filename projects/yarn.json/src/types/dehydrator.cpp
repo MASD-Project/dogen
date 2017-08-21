@@ -49,38 +49,26 @@ namespace dogen {
 namespace yarn {
 namespace json {
 
-std::string dehydrator::tidy_up_string(std::string s) const {
+std::string dehydrator::tidy_up_string(std::string s) {
     boost::replace_all(s, "\r", "\\r");
     boost::replace_all(s, "\n", "\\n");
     boost::replace_all(s, "\"", "\\\"");
     return s;
 }
 
-bool dehydrator::has_elements(const meta_model::intermediate_model& im) const {
+bool dehydrator::has_elements(const meta_model::exogenous_model& em) {
     return
-        !im.modules().empty() ||
-        !im.concepts().empty() ||
-        !im.enumerations().empty() ||
-        !im.primitives().empty() ||
-        !im.objects().empty() ||
-        !im.exceptions().empty();
-}
-
-boost::optional<annotations::scribble_group>
-dehydrator::scribble_group_for_name(const meta_model::intermediate_model& im,
-    const meta_model::name& n) const {
-
-    const auto& scribble_groups(im.scribble_groups());
-    const auto i(scribble_groups.find(n.id()));
-    if (i == scribble_groups.end())
-        return boost::optional<annotations::scribble_group>();
-
-    return i->second;
+        !em.modules().empty() ||
+        !em.concepts().empty() ||
+        !em.enumerations().empty() ||
+        !em.primitives().empty() ||
+        !em.objects().empty() ||
+        !em.exceptions().empty();
 }
 
 boost::optional<annotations::scribble> dehydrator::
 scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
-    const meta_model::name& n) const {
+    const meta_model::name& n) {
 
     if (!sg)
         return boost::optional<annotations::scribble>();
@@ -93,7 +81,7 @@ scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
 }
 
 void dehydrator::
-dehydrate_name(const meta_model::name& n, std::ostream& s) const {
+dehydrate_name(const meta_model::name& n, std::ostream& s) {
     formatters::utility_formatter uf(s);
     s << " { ";
     uf.insert_quoted("simple");
@@ -111,7 +99,7 @@ dehydrate_name(const meta_model::name& n, std::ostream& s) const {
 }
 
 void dehydrator::dehydrate_names(const std::list<meta_model::name>& names,
-    std::ostream& s) const {
+    std::ostream& s) {
     s << " [ ";
     bool is_first(true);
     for (const auto& n : names) {
@@ -126,7 +114,7 @@ void dehydrator::dehydrate_names(const std::list<meta_model::name>& names,
 
 void dehydrator::
 dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
-    std::ostream& s) const {
+    std::ostream& s) {
 
     if (!scribble || scribble->entries().empty())
         return;
@@ -151,7 +139,7 @@ dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
 void dehydrator::
 dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
     const meta_model::element& e,
-    const std::string& meta_type, std::ostream& s) const {
+    const std::string& meta_type, std::ostream& s) {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
@@ -192,7 +180,7 @@ dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
 
 void dehydrator::dehydrate_attributes(
     const boost::optional<annotations::scribble_group>& sg,
-    const std::list<meta_model::attribute>& attrs, std::ostream& s) const {
+    const std::list<meta_model::attribute>& attrs, std::ostream& s) {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("attributes");
@@ -232,19 +220,18 @@ void dehydrator::dehydrate_attributes(
 }
 
 void dehydrator::dehydrate_objects(const bool requires_leading_comma,
-    const meta_model::intermediate_model& im, std::ostream& s) const {
+    const meta_model::exogenous_model& em, std::ostream& s) {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
-    const auto objects(to_map(im.objects()));
     bool output_comma(requires_leading_comma);
-    for (const auto& pair : objects) {
+    for (const auto& pair : em.objects()) {
         if (output_comma)
             s << comma_space;
 
+        const auto& sg(pair.first);
         const auto& o(*pair.second);
-        const auto sg(scribble_group_for_name(im, o.name()));
 
         s << " { ";
         dehydrate_element(sg, o, "object", s);
@@ -265,19 +252,18 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
-    const meta_model::intermediate_model& im, std::ostream& s) const {
+    const meta_model::exogenous_model& em, std::ostream& s) {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
 
-    const auto concepts(to_map(im.concepts()));
-    for (const auto& pair : concepts) {
+    for (const auto& pair : em.concepts()) {
         if (output_comma)
             s << comma_space;
 
+        const auto& sg(pair.first);
         const auto& c(*pair.second);
-        const auto sg(scribble_group_for_name(im, c.name()));
 
         s << " { ";
         dehydrate_element(sg, c, "concept", s);
@@ -299,24 +285,16 @@ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_modules(const bool requires_leading_comma,
-    const meta_model::intermediate_model& im, std::ostream& s) const {
-    /*
-     * Remove the root module.
-     */
-    auto modules(to_map(im.modules()));
-    const auto i(modules.find(im.name().id()));
-    if (i != modules.end())
-        modules.erase(i);
-
+    const meta_model::exogenous_model& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
-    for (const auto& pair : modules) {
+    for (const auto& pair : em.modules()) {
         if (output_comma)
             s << comma_space;
 
+        const auto& sg(pair.first);
         const auto& m(*pair.second);
-        const auto sg(scribble_group_for_name(im, m.name()));
 
         s << " { ";
         dehydrate_element(sg, m, "module", s);
@@ -327,17 +305,17 @@ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
-    const meta_model::intermediate_model& im, std::ostream& s) const {
+    const meta_model::exogenous_model& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
-    const auto enumerations(to_map(im.enumerations()));
-    for (const auto& pair : enumerations) {
+
+    for (const auto& pair : em.enumerations()) {
         if (output_comma)
             s << comma_space;
 
+        const auto& sg(pair.first);
         const auto& e(*pair.second);
-        const auto sg(scribble_group_for_name(im, e.name()));
 
         s << " { ";
         dehydrate_element(sg, e, "enumeration", s);
@@ -391,18 +369,17 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
-    const meta_model::intermediate_model& im, std::ostream& s) const {
+    const meta_model::exogenous_model& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
     bool output_comma(requires_leading_comma);
-    const auto primitives(to_map(im.primitives()));
-    for (const auto& pair : primitives) {
+    for (const auto& pair : em.primitives()) {
         if (output_comma)
             s << comma_space;
 
+        const auto& sg(pair.first);
         const auto& p(*pair.second);
-        const auto sg(scribble_group_for_name(im, p.name()));
 
         s << " { ";
         dehydrate_element(sg, p, "primitive", s);
@@ -413,72 +390,61 @@ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
 
 void dehydrator::
 dehydrate_exceptions(const bool requires_leading_comma,
-    const meta_model::intermediate_model& im, std::ostream& s) const {
+    const meta_model::exogenous_model& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
     bool output_comma(requires_leading_comma);
-    const auto exceptions(to_map(im.exceptions()));
-    for (const auto& pair : exceptions) {
+    for (const auto& pair : em.exceptions()) {
         if (output_comma)
             s << comma_space;
 
-        const auto& p(*pair.second);
-        const auto sg(scribble_group_for_name(im, p.name()));
+        const auto& sg(pair.first);
+        const auto& e(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, p, "exception", s);
+        dehydrate_element(sg, e, "exception", s);
         s << " }";
         output_comma = true;
     }
 }
 
-std::string
-dehydrator::dehydrate(const meta_model::intermediate_model& im) const {
+std::string dehydrator::dehydrate(const meta_model::exogenous_model& em) {
     std::ostringstream s;
     formatters::utility_formatter uf(s);
     using boost::algorithm::join;
 
     s << "{ ";
+    uf.insert_quoted("root_module");
+    s << " : ";
+    s << " { ";
+    const auto& rm(em.root_module());
+    dehydrate_element(rm.first, *rm.second, "module", s);
+    s << " }";
 
-    const auto i(im.modules().find(im.name().id()));
-    if (i != im.modules().end()) {
-        const auto& root_module(*i->second);
-        if (!root_module.documentation().empty()) {
-            s << comma_space;
-            uf.insert_quoted("documentation");
-            s << " : ";
-            uf.insert_quoted(tidy_up_string(root_module.documentation()));
-        }
-    }
-
-    const auto sg(scribble_group_for_name(im, im.name()));
-    if (sg)
-        dehydrate_annotations(sg->parent(), s);
-
-    if (has_elements(im)) {
+    if (has_elements(em)) {
         s << comma_space;
         uf.insert_quoted("elements");
         s << ": [";
 
         bool requires_leading_comma(false);
 
-        dehydrate_objects(requires_leading_comma, im, s);
-        requires_leading_comma |= !im.objects().empty();
+        dehydrate_objects(requires_leading_comma, em, s);
+        requires_leading_comma |= !em.objects().empty();
 
-        dehydrate_concepts(requires_leading_comma, im, s);
-        requires_leading_comma |= !im.concepts().empty();
+        dehydrate_concepts(requires_leading_comma, em, s);
+        requires_leading_comma |= !em.concepts().empty();
 
-        dehydrate_modules(requires_leading_comma, im, s);
-        requires_leading_comma |= im.modules().size() > 1/*root module*/;
+        dehydrate_modules(requires_leading_comma, em, s);
+        requires_leading_comma |= em.modules().size() > 1/*root module*/;
 
-        dehydrate_enumerations(requires_leading_comma, im, s);
-        requires_leading_comma |= !im.enumerations().empty();
+        dehydrate_enumerations(requires_leading_comma, em, s);
+        requires_leading_comma |= !em.enumerations().empty();
 
-        dehydrate_primitives(requires_leading_comma, im, s);
-        requires_leading_comma |= !im.primitives().empty();
+        dehydrate_primitives(requires_leading_comma, em, s);
+        requires_leading_comma |= !em.primitives().empty();
 
-        dehydrate_exceptions(requires_leading_comma, im, s);
+        dehydrate_exceptions(requires_leading_comma, em, s);
 
         s << " ]";
     }
@@ -488,10 +454,9 @@ dehydrator::dehydrate(const meta_model::intermediate_model& im) const {
     return s.str();
 }
 
-void dehydrator::dehydrate(const meta_model::intermediate_model& im,
-    const boost::filesystem::path& p) const {
-
-    const auto s(dehydrate(im));
+void dehydrator::dehydrate(const meta_model::exogenous_model& em,
+    const boost::filesystem::path& p) {
+    const auto s(dehydrate(em));
     utility::filesystem::write_file_content(p, s);
 }
 

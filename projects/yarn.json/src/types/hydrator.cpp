@@ -58,6 +58,7 @@ const std::string bool_true("true");
 const std::string bool_false("false");
 
 const std::string documentation_key("documentation");
+const std::string root_module_key("root_module");
 const std::string elements_key("elements");
 const std::string attributes_key("attributes");
 const std::string enumerators_key("enumerators");
@@ -98,6 +99,7 @@ const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_object_type("Invalid or unsupported object type: ");
 const std::string duplicate_element_id("Duplicate element id: ");
 const std::string missing_name("JSON element name is mandatory.");
+const std::string missing_root_module("Root module not found.");
 
 }
 
@@ -456,12 +458,17 @@ meta_model::exogenous_model hydrator::read_stream(std::istream& s) const {
     read_json(s, pt);
 
     meta_model::exogenous_model r;
-    r.root_module(read_root_module(pt));
-
-    const auto i(pt.find(elements_key));
+    auto i(pt.find(root_module_key));
     if (i == pt.not_found() || i->second.empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_root_module;
+        BOOST_THROW_EXCEPTION(hydration_error(missing_root_module));
+    }
+    r.root_module(read_root_module(i->second));
+
+    i = pt.find(elements_key);
+    if (i == pt.not_found() || i->second.empty())
         BOOST_LOG_SEV(lg, warn) << "Did not find any elements in model.";
-    } else {
+    else {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
             read_element(j->second, r);
     }

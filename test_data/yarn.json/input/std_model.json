@@ -1,15 +1,21 @@
 {
-  "annotation": {
-    "yarn.dia.comment": "true",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.model_modules": "std_model",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project.enabled": "false",
-    "quilt.cpp.visual_studio.solution.enabled": "false",
-    "quilt.csharp.enabled": "false",
-    "annotations.profile": "dogen"
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_type": "module",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "std_model",
+      "yarn.external_modules": "dogen::test_models",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen"
+    }
   },
   "elements": [
     {

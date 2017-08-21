@@ -1,9 +1,12 @@
 {
-  "documentation": "C++ Standard Library types.",
-  "annotation": {
-    "yarn.input_language": "cpp",
-    "yarn.is_proxy_model": true,
-    "yarn.model_modules" : "std"
+  "root_module": {
+    "meta_type": "module",
+    "documentation": "C++ Standard Library types.",
+    "annotation": {
+      "yarn.input_language": "cpp",
+      "yarn.is_proxy_model": true,
+      "yarn.model_modules": "std"
+    }
   },
   "elements": [
     {

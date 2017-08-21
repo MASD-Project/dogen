@@ -61,10 +61,9 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
     return h.hydrate(p);
 }
 
-void exogenous_transform::transform(const meta_model::intermediate_model& im,
+void exogenous_transform::transform(const meta_model::exogenous_model& em,
     const boost::filesystem::path& p) {
-    dehydrator dh;
-    dh.dehydrate(im, p);
+     return dehydrator::dehydrate(em, p);
 }
 
 } } }

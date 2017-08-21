@@ -44,7 +44,7 @@ public:
     bool can_transform(const std::string& model_identifier) const override;
     meta_model::exogenous_model
     transform(const boost::filesystem::path& p) override;
-    void transform(const meta_model::intermediate_model& im,
+    void transform(const meta_model::exogenous_model& em,
         const boost::filesystem::path& p) override;
 };
 

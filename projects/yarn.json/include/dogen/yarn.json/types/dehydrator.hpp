@@ -32,7 +32,7 @@
 #include <boost/filesystem/path.hpp>
 #include <boost/optional.hpp>
 #include "dogen/annotations/types/scribble.hpp"
-#include "dogen/yarn/types/meta_model/intermediate_model.hpp"
+#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -40,56 +40,47 @@ namespace json {
 
 class dehydrator final {
 private:
-    std::string tidy_up_string(std::string s) const;
-    bool has_elements(const meta_model::intermediate_model& im) const;
-
-    template<typename Element>
-    std::map<std::string, Element>
-    to_map(const std::unordered_map<std::string, Element>& original) const {
-        std::map<std::string, Element> r;
-        for (const auto& pair : original)
-            r.insert(pair);
-        return r;
-    }
+    static std::string tidy_up_string(std::string s);
+    static bool has_elements(const meta_model::exogenous_model& em);
 
 private:
-    boost::optional<annotations::scribble_group> scribble_group_for_name(
-        const meta_model::intermediate_model& im,
-        const meta_model::name& n) const;
-    boost::optional<annotations::scribble>
+    static boost::optional<annotations::scribble_group> scribble_group_for_name(
+        const meta_model::exogenous_model& im,
+        const meta_model::name& n);
+    static boost::optional<annotations::scribble>
     scribble_for_name(const boost::optional<annotations::scribble_group>& sg,
-        const meta_model::name& n) const;
-    void dehydrate_name(const meta_model::name& n, std::ostream& s) const;
-    void dehydrate_names(const std::list<meta_model::name>& names,
-        std::ostream& s) const;
-    void dehydrate_annotations(
+        const meta_model::name& n);
+    static void dehydrate_name(
+        const meta_model::name& n, std::ostream& s);
+    static void dehydrate_names(const std::list<meta_model::name>& names,
+        std::ostream& s);
+    static void dehydrate_annotations(
         const boost::optional<annotations::scribble>& scribble,
-        std::ostream& s) const;
-    void dehydrate_element(
+        std::ostream& s);
+    static void dehydrate_element(
         const boost::optional<annotations::scribble_group>& sg,
         const meta_model::element& e, const std::string& meta_type,
-        std::ostream& s) const;
-    void dehydrate_attributes(
+        std::ostream& s);
+    static void dehydrate_attributes(
         const boost::optional<annotations::scribble_group>& sg,
-        const std::list<meta_model::attribute>& attrs, std::ostream& s) const;
-    void dehydrate_objects(const bool requires_leading_comma,
-        const meta_model::intermediate_model& im, std::ostream& s) const;
-    void dehydrate_concepts(const bool requires_leading_comma,
-        const meta_model::intermediate_model& im, std::ostream& s) const;
-    void dehydrate_modules(const bool requires_leading_comma,
-        const meta_model::intermediate_model& im, std::ostream& s) const;
-    void dehydrate_enumerations(const bool requires_leading_comma,
-        const meta_model::intermediate_model& im,
-        std::ostream& s) const;
-    void dehydrate_primitives(const bool requires_leading_comma,
-        const meta_model::intermediate_model& im, std::ostream& s) const;
-    void dehydrate_exceptions(const bool requires_leading_comma,
-        const meta_model::intermediate_model& im, std::ostream& s) const;
+        const std::list<meta_model::attribute>& attrs, std::ostream& s);
+    static void dehydrate_objects(const bool requires_leading_comma,
+        const meta_model::exogenous_model& em, std::ostream& s);
+    static void dehydrate_concepts(const bool requires_leading_comma,
+        const meta_model::exogenous_model& em, std::ostream& s);
+    static void dehydrate_modules(const bool requires_leading_comma,
+        const meta_model::exogenous_model& em, std::ostream& s);
+    static void dehydrate_enumerations(const bool requires_leading_comma,
+        const meta_model::exogenous_model& em, std::ostream& s);
+    static void dehydrate_primitives(const bool requires_leading_comma,
+        const meta_model::exogenous_model& em, std::ostream& s);
+    static void dehydrate_exceptions(const bool requires_leading_comma,
+        const meta_model::exogenous_model& em, std::ostream& s);
 
 public:
-    std::string dehydrate(const meta_model::intermediate_model& im) const;
-    void dehydrate(const meta_model::intermediate_model& im,
-        const boost::filesystem::path& p) const;
+    static std::string dehydrate(const meta_model::exogenous_model& em);
+    static void dehydrate(const meta_model::exogenous_model& em,
+        const boost::filesystem::path& p);
 };
 
 } } }

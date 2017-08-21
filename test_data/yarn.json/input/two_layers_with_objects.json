@@ -6,33 +6,28 @@
     "meta_type": "module",
     "annotation": {
       "yarn.dia.comment": "true",
-      "yarn.model_modules": "flat_directory_mode",
+      "yarn.model_modules": "two_layers_with_objects",
       "yarn.external_modules": "dogen::test_models",
       "yarn.input_language": "cpp",
       "quilt.cpp.enabled": "true",
       "quilt.cpp.msbuild.enabled": "false",
       "quilt.cpp.visual_studio.project.enabled": "false",
       "quilt.cpp.visual_studio.solution.enabled": "false",
-      "quilt.csharp.enabled": "false"
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen"
     }
   },
   "elements": [
     {
       "name": {
-        "simple": "first_class",
-        "internal_modules": "package1"
+        "simple": "class_2",
+        "internal_modules": "Package_2"
       },
       "meta_type": "object",
       "attributes": [
         {
           "name": {
-            "simple": "public_attribute"
-          },
-          "unparsed_type": "int"
-        },
-        {
-          "name": {
-            "simple": "private_attribute"
+            "simple": "prop_0"
           },
           "unparsed_type": "int"
         }
@@ -40,7 +35,28 @@
     },
     {
       "name": {
-        "simple": "package1"
+        "simple": "class_1",
+        "internal_modules": "package_1"
+      },
+      "meta_type": "object",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Package_2"
+      },
+      "meta_type": "module"
+    },
+    {
+      "name": {
+        "simple": "package_1"
       },
       "meta_type": "module"
     }

@@ -1,15 +1,21 @@
 {
-  "annotation": {
-    "yarn.dia.comment": "true",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.model_modules": "cpp_model",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "true",
-    "quilt.cpp.msbuild.enabled": "false",
-    "quilt.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
-    "quilt.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
-    "quilt.csharp.enabled": "false",
-    "annotations.profile": "dogen"
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_type": "module",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "cpp_model",
+      "yarn.external_modules": "dogen::test_models",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project_guid": "876B2828-8A0B-495F-8340-0357690162E4",
+      "quilt.cpp.visual_studio.project_solution_guid": "3103CA57-FD70-4EC9-98BD-1C2C7360AF53",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen"
+    }
   },
   "elements": [
     {

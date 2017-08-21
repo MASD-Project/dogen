@@ -65,16 +65,6 @@ public:
     static meta_model::intermediate_model
     transform(const context& ctx, const boost::filesystem::path& p);
 
-    /**
-     * @brief Transform the supplied intermediate model to its
-     * exogenous model representation.
-     *
-     * @pre @e p must point to a path that has a supported exogenous
-     * model transform.
-     */
-    static void transform(const meta_model::intermediate_model& im,
-        const boost::filesystem::path& p);
-
 private:
     static std::shared_ptr<exogenous_transform_registrar> registrar_;
 };

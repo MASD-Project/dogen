@@ -68,8 +68,13 @@ const std::string missing_type_name("name is mandatory.");
 const std::string missing_elements("elements");
 
 const std::string trivial_model(R"({
-    "model_name" : "a_model",
-    "documentation" : "a_doc",
+    "root_module" : {
+        "meta_type": "module",
+        "documentation" : "a_doc",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    },
     "elements" : [
         {
             "name" : {
@@ -83,7 +88,12 @@ const std::string trivial_model(R"({
 )");
 
 const std::string no_documentation_model(R"({
-    "model_name" : "a_model",
+    "root_module" : {
+        "meta_type": "module",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    },
     "elements" : [
         {
             "name" : {
@@ -96,6 +106,12 @@ const std::string no_documentation_model(R"({
 )");
 
 const std::string no_name_model(R"({
+    "root_module" : {
+        "meta_type": "module",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    },
     "elements" : [
         {
             "name" : {
@@ -108,7 +124,12 @@ const std::string no_name_model(R"({
 )");
 
 const std::string no_type_name_model(R"({
-    "model_name" : "a_model",
+    "root_module" : {
+        "meta_type": "module",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    },
     "elements" : [
         {
             "meta_type" : "object"
@@ -118,18 +139,33 @@ const std::string no_type_name_model(R"({
 )");
 
 const std::string no_elements_model(R"({
-    "model_name" : "a_model"
+    "root_module" : {
+        "meta_type": "module",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    }
   }
 )");
 
 const std::string empty_elements_model(R"({
-    "model_name" : "a_model",
+    "root_module" : {
+        "meta_type": "module",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    },
     "elements" : [ ]
   }
 )");
 
 const std::string internal_modules_model(R"({
-    "model_name" : "a_model",
+    "root_module" : {
+        "meta_type": "module",
+        "annotation": {
+            "yarn.model_modules": "a_model"
+        }
+    },
     "elements" : [
         {
             "name" : {

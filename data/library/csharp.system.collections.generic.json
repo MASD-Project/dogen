@@ -1,9 +1,12 @@
 {
-  "documentation": "Basic generic collection types.",
-  "annotation": {
-    "yarn.input_language": "csharp",
-    "yarn.is_proxy_model": true,
-    "yarn.model_modules" : "System.Collections.Generic"
+  "root_module": {
+    "meta_type": "module",
+    "documentation": "Basic generic collection types.",
+    "annotation": {
+      "yarn.input_language": "csharp",
+      "yarn.is_proxy_model": true,
+      "yarn.model_modules": "System.Collections.Generic"
+    }
   },
   "elements": [
     {

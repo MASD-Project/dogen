@@ -1,14 +1,20 @@
 {
-  "annotation": {
-    "yarn.dia.comment": "true",
-    "yarn.external_modules": "Dogen.TestModels",
-    "yarn.model_modules": "CSharpModel",
-    "yarn.input_language": "csharp",
-    "quilt.csharp.enabled": "true",
-    "quilt.cpp.enabled": "false",
-    "quilt.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",
-    "quilt.csharp.visual_studio.project_solution_guid": "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
-    "annotations.profile": "dogen"
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_type": "module",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "CSharpModel",
+      "yarn.external_modules": "Dogen.TestModels",
+      "yarn.input_language": "csharp",
+      "quilt.csharp.enabled": "true",
+      "quilt.cpp.enabled": "false",
+      "quilt.csharp.visual_studio.project_guid": "9E645ACD-C04A-4734-AB23-C3FCC0F7981B",
+      "quilt.csharp.visual_studio.project_solution_guid": "FAE04EC0-301F-11D3-BF4B-00C04F79EFBC",
+      "annotations.profile": "dogen"
+    }
   },
   "elements": [
     {

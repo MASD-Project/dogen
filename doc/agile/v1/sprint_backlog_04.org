@@ -14,23 +14,23 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-20 Sun 23:43]
+#+CAPTION: Clock summary at [2017-08-21 Mon 11:18]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *26:04* |       |       | 100.0 |
+| *Total time*                                                                | *27:58* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 26:04   |       |       | 100.0 |
-| Active                                                                      |         | 26:04 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.2 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.9 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  24.4 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  10.9 |
-| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.5 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.6 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  47.3 |
-| STARTED Remove scribble group from intermediate model                       |         |       |  0:17 |   1.1 |
-| STARTED Tailor should rely only on exogenous models                         |         |       |  0:18 |   1.2 |
+| Stories                                                                     | 27:58   |       |       | 100.0 |
+| Active                                                                      |         | 27:58 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.7 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  22.8 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  10.1 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.2 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.2 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  44.1 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.9 |
+| STARTED Remove scribble group from intermediate model                       |         |       |  0:17 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -245,14 +245,11 @@ Steps:
 - process element annotation.
 - process attribute annotations, if stateful.
 
-*** STARTED Remove scribble group from intermediate model             :story:
-    CLOCK: [2017-08-20 Sun 22:06]--[2017-08-20 Sun 22:23] =>  0:17
-
-Now we have an exogenous model we no longer need the scribble group in
-the intermediate model. However, we were making use of it in the
-dehydration for tailor transformations.
-
-*** STARTED Tailor should rely only on exogenous models               :story:
+*** COMPLETED Tailor should rely only on exogenous models             :story:
+    CLOSED: [2017-08-21 Mon 11:18]
+    CLOCK: [2017-08-21 Mon 10:23]--[2017-08-21 Mon 11:18] =>  0:55
+    CLOCK: [2017-08-21 Mon 09:59]--[2017-08-21 Mon 10:23] =>  0:24
+    CLOCK: [2017-08-21 Mon 09:23]--[2017-08-21 Mon 09:58] =>  0:35
     CLOCK: [2017-08-20 Sun 23:25]--[2017-08-20 Sun 23:43] =>  0:18
 
 At present we are transforming an intermediate model into the
@@ -268,6 +265,19 @@ Notes:
   have some hackery on the hydrator to read the model annotations and
   populate the root module. It makes more sense to populate the root
   module in the JSON.
+
+*** STARTED Remove scribble group from intermediate model             :story:
+    CLOCK: [2017-08-20 Sun 22:06]--[2017-08-20 Sun 22:23] =>  0:17
+
+Now we have an exogenous model we no longer need the scribble group in
+the intermediate model. However, we were making use of it in the
+dehydration for tailor transformations.
+
+*** Investigate usage of origin type                                  :story:
+
+With the current setup of the transforms, we always know who the
+target model is. Thus the =origin_types= flag may not be used
+correctly at present.
 
 *** Use extension matching for exogenous models                       :story:
 

@@ -76,7 +76,7 @@ exogenous_transform::transform(const boost::filesystem::path& p) {
 }
 
 void exogenous_transform::transform(
-    const meta_model::intermediate_model& /*im*/,
+    const meta_model::exogenous_model& /*em*/,
     const boost::filesystem::path& /*p*/) {
     BOOST_LOG_SEV(lg, error) << to_dia_support_unavailable;
 

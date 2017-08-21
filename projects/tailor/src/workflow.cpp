@@ -24,11 +24,9 @@
 #include "dogen/utility/log/life_cycle_manager.hpp"
 #include "dogen/utility/log/severity_level.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/options/types/knitting_options.hpp" // FIXME
 #include "dogen/options/types/tailoring_options.hpp"
-#include "dogen/yarn/types/transforms/context_factory.hpp"
+#include "dogen/yarn/types/helpers/model_sorter.hpp"
 #include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
-#include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
 #include "dogen/tailor/workflow.hpp"
@@ -108,19 +106,18 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
 void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
-    using namespace yarn::transforms;
-    const auto& rg(code_generation_chain::registrar());
+    using yarn::transforms::exogenous_model_chain;
+    auto& rg(exogenous_model_chain::registrar());
     rg.validate();
 
-    // FIXME: to be updated once we have yarn options.
-    options::knitting_options ko;
-    ko.target(o.target());
-    const auto ctx(context_factory::make(rg, ko));
+    const auto src_model_identifier(o.target().filename().string());
+    auto& t0(rg.transform_for_model(src_model_identifier));
+    auto src(t0.transform(o.target()));
+    yarn::helpers::model_sorter::sort(src);
 
-    using yarn::transforms::exogenous_model_chain;
-    auto im(exogenous_model_chain::transform(ctx, o.target()));
-    im.origin_type(yarn::meta_model::origin_types::target);
-    exogenous_model_chain::transform(im, o.output());
+    const auto dst_model_identifier(o.output().filename().string());
+    auto& t1(rg.transform_for_model(dst_model_identifier));
+    t1.transform(src, o.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
 }

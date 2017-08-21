@@ -1,11 +1,17 @@
 {
-  "annotation": {
-    "yarn.dia.comment": "true",
-    "yarn.external_modules": "dogen::test_models",
-    "yarn.model_modules": "disable_all_kernels",
-    "yarn.input_language": "cpp",
-    "quilt.cpp.enabled": "false",
-    "quilt.csharp.enabled": "false"
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_type": "module",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "disable_all_kernels",
+      "yarn.external_modules": "dogen::test_models",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "false",
+      "quilt.csharp.enabled": "false"
+    }
   },
   "elements": [
     {

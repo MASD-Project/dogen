@@ -95,16 +95,4 @@ transform(const context& ctx, const boost::filesystem::path& p) {
     return r;
 }
 
-void exogenous_model_chain::transform(const meta_model::intermediate_model& im,
-    const boost::filesystem::path& p) {
-    BOOST_LOG_SEV(lg, debug) << "Transforming yarn model: "
-                             << im.name().id();
-
-    auto& t(transform_for_model(p));
-    t.transform(im, p);
-
-    BOOST_LOG_SEV(lg, debug) << "Transformed yarn model. Location: "
-                             << p.generic_string();
-}
-
 } } }

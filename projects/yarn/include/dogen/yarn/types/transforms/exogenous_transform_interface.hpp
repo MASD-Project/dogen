@@ -90,10 +90,10 @@ public:
     transform(const boost::filesystem::path& p) = 0;
 
     /**
-     * @brief Transforms the intermediate model into a representation
-     * of the native format supported by the exogneous transformer.
+     * @brief Transforms the exogenous model into a representation of
+     * the native format supported by the exogneous transformer.
      *
-     * @param im Intermediate model to transform.
+     * @param im Exogenous model to transform.
      *
      * @note Method is non-const by design at the moment as some
      * exogenous transformers have state.
@@ -103,7 +103,7 @@ public:
      * exogenous transformers cannot cope with string processing. In
      * the future this will change to returning a string.
      */
-    virtual void transform(const meta_model::intermediate_model& im,
+    virtual void transform(const meta_model::exogenous_model& em,
         const boost::filesystem::path& p) = 0;
 };
 
