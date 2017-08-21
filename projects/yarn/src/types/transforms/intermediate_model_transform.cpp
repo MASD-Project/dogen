@@ -71,7 +71,7 @@ to_element_map(const std::list<std::pair<annotations::scribble_group,
 }
 
 meta_model::intermediate_model intermediate_model_transform::
-transform(const meta_model::exogenous_model& em) {
+transform(const meta_model::exomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model "
                              << "intermediate model.";
 

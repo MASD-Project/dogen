@@ -35,7 +35,7 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/location.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/transforms/naming_configuration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
@@ -93,10 +93,10 @@ private:
 
     static meta_model::name compute_model_name(const meta_model::location& l);
     static void update_names(const meta_model::location& l,
-        meta_model::exogenous_model& em);
+        meta_model::exomodel& em);
 
 public:
-    static void transform(const context& ctx, meta_model::exogenous_model& em);
+    static void transform(const context& ctx, meta_model::exomodel& em);
 };
 
 } } }

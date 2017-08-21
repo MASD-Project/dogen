@@ -21,7 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
+#include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 
@@ -77,7 +77,7 @@ transform(const context& ctx, const meta_model::intermediate_model& target) {
          * Obtain the reference model in the internal representation
          * of the exogenous model.
          */
-        auto rm(exogenous_model_chain::transform(ctx, rp));
+        auto rm(exoendo_transform_chain::transform(ctx, rp));
 
         /*
          * Apply all of the pre-processing transforms to the reference

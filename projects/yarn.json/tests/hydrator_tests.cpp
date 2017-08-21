@@ -31,8 +31,8 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
-#include "dogen/yarn/io/meta_model/exogenous_model_io.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
@@ -191,20 +191,20 @@ dogen::annotations::type_repository create_repository() {
     return rf.make(fds);
 }
 
-dogen::yarn::meta_model::exogenous_model hydrate(std::istream& s) {
+dogen::yarn::meta_model::exomodel hydrate(std::istream& s) {
     const auto rp(create_repository());
 
     dogen::yarn::json::hydrator h;
     return h.hydrate(s);
 }
 
-dogen::yarn::meta_model::exogenous_model
+dogen::yarn::meta_model::exomodel
 hydrate(const boost::filesystem::path& p) {
     boost::filesystem::ifstream s(p);
     return hydrate(s);
 }
 
-dogen::yarn::meta_model::exogenous_model
+dogen::yarn::meta_model::exomodel
 hydrate(const std::string& content) {
     std::istringstream s(content);
     return hydrate(s);

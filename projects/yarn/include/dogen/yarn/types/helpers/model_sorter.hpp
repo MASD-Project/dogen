@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -33,7 +33,7 @@ namespace helpers {
 
 class model_sorter final {
 public:
-    static void sort(meta_model::exogenous_model& em);
+    static void sort(meta_model::exomodel& em);
 };
 
 } } }

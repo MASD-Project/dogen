@@ -39,7 +39,7 @@
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -84,7 +84,7 @@ private:
     }
 
 public:
-    static void transform(const context& ctx, meta_model::exogenous_model& em);
+    static void transform(const context& ctx, meta_model::exomodel& em);
 };
 
 } } }

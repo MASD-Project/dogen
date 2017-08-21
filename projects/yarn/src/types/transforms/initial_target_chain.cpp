@@ -21,7 +21,7 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
+#include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 
@@ -45,7 +45,7 @@ initial_target_chain::transform(const context& ctx) {
      * of the exogenous model.
      */
     const auto tp(ctx.options().target());
-    auto r(exogenous_model_chain::transform(ctx, tp));
+    auto r(exoendo_transform_chain::transform(ctx, tp));
 
     /*
      * Next, we set the origin of the target model to target so that

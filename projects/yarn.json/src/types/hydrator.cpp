@@ -430,7 +430,7 @@ hydrator::read_concept(const boost::property_tree::ptree& pt) const {
 }
 
 void hydrator::read_element(const boost::property_tree::ptree& pt,
-    meta_model::exogenous_model& em) const {
+    meta_model::exomodel& em) const {
 
     const auto s(pt.get<std::string>(meta_type_key));
     if (s == meta_type_object_value)
@@ -453,11 +453,11 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
     }
 }
 
-meta_model::exogenous_model hydrator::read_stream(std::istream& s) const {
+meta_model::exomodel hydrator::read_stream(std::istream& s) const {
     boost::property_tree::ptree pt;
     read_json(s, pt);
 
-    meta_model::exogenous_model r;
+    meta_model::exomodel r;
     auto i(pt.find(root_module_key));
     if (i == pt.not_found() || i->second.empty()) {
         BOOST_LOG_SEV(lg, error) << missing_root_module;
@@ -476,7 +476,7 @@ meta_model::exogenous_model hydrator::read_stream(std::istream& s) const {
     return r;
 }
 
-meta_model::exogenous_model
+meta_model::exomodel
 hydrator::hydrate(std::istream& s) const {
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON stream.";
     using namespace boost::property_tree;
@@ -497,7 +497,7 @@ hydrator::hydrate(std::istream& s) const {
     }
 }
 
-meta_model::exogenous_model hydrator::
+meta_model::exomodel hydrator::
 hydrate(const boost::filesystem::path& p) const {
     const auto gs(p.generic_string());
     BOOST_LOG_SEV(lg, debug) << "Parsing JSON file: " << gs;

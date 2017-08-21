@@ -25,7 +25,7 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/dia/types/diagram.hpp"
 #include "dogen/yarn/io/meta_model/intermediate_model_io.hpp"
-#include "dogen/yarn/io/meta_model/exogenous_model_io.hpp"
+#include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/types/grapher.hpp"
 #include "dogen/yarn.dia/types/visitor.hpp"
@@ -68,7 +68,7 @@ workflow::obtain_external_modules(const std::list<processed_object>& pos) {
     return r;
 }
 
-meta_model::exogenous_model
+meta_model::exomodel
 workflow::generate_model(const std::list<processed_object>& pos) {
     /*
      * Create a dependency graph of the objects, and a map of children
@@ -87,7 +87,7 @@ workflow::generate_model(const std::list<processed_object>& pos) {
     return b.build();
 }
 
-meta_model::exogenous_model workflow::execute(const dogen::dia::diagram& d) {
+meta_model::exomodel workflow::execute(const dogen::dia::diagram& d) {
     /*
      * Convert the original dia diagram into a list of dia objects
      * reading for processing.

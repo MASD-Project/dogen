@@ -31,7 +31,7 @@
 #include <boost/shared_ptr.hpp>
 #include "dogen/annotations/types/scribble.hpp"
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
 #include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
@@ -75,12 +75,12 @@ private:
 
 public:
     void add(const processed_object& po);
-    meta_model::exogenous_model build();
+    meta_model::exomodel build();
 
 private:
     const std::unordered_map<std::string, std::list<std::string>>&
     parent_id_to_child_ids_;
-    meta_model::exogenous_model model_;
+    meta_model::exomodel model_;
     context context_;
 };
 

@@ -25,7 +25,7 @@
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/intermediate_model.hpp"
 
 namespace dogen {
@@ -35,7 +35,7 @@ namespace transforms {
 class intermediate_model_transform final {
 public:
     static meta_model::intermediate_model
-    transform(const meta_model::exogenous_model& em);
+    transform(const meta_model::exomodel& em);
 };
 
 } } }

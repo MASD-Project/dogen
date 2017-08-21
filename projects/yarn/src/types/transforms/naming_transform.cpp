@@ -153,7 +153,7 @@ void naming_transform::process(const meta_model::location& l,
 }
 
 void naming_transform::
-update_names(const meta_model::location& l, meta_model::exogenous_model& em) {
+update_names(const meta_model::location& l, meta_model::exomodel& em) {
     process(l, em.modules());
     process(l, em.concepts());
     process(l, em.builtins());
@@ -175,7 +175,7 @@ naming_transform::compute_model_name(const meta_model::location& l) {
 }
 
 void naming_transform::
-transform(const context& ctx, meta_model::exogenous_model& em) {
+transform(const context& ctx, meta_model::exomodel& em) {
     const auto& ra(em.root_module().second->annotation());
     const auto tg(make_type_group(ctx.type_repository()));
     const auto cfg(make_naming_configuration(tg, ra));

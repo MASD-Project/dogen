@@ -40,14 +40,14 @@ comparer(const std::pair<annotations::scribble_group,
     return lhs.second->name().id() < rhs.second->name().id();
 }
 
-void model_sorter::sort(dogen::yarn::meta_model::exogenous_model& em) {
-    em.modules().sort(comparer<dogen::yarn::meta_model::module>);
-    em.concepts().sort(comparer<dogen::yarn::meta_model::concept>);
-    em.builtins().sort(comparer<dogen::yarn::meta_model::builtin>);
-    em.enumerations().sort(comparer<dogen::yarn::meta_model::enumeration>);
-    em.primitives().sort(comparer<dogen::yarn::meta_model::primitive>);
-    em.objects().sort(comparer<dogen::yarn::meta_model::object>);
-    em.exceptions().sort(comparer<dogen::yarn::meta_model::exception>);
+void model_sorter::sort(meta_model::exomodel& em) {
+    em.modules().sort(comparer<meta_model::module>);
+    em.concepts().sort(comparer<meta_model::concept>);
+    em.builtins().sort(comparer<meta_model::builtin>);
+    em.enumerations().sort(comparer<meta_model::enumeration>);
+    em.primitives().sort(comparer<meta_model::primitive>);
+    em.objects().sort(comparer<meta_model::object>);
+    em.exceptions().sort(comparer<meta_model::exception>);
 }
 
 } } }

@@ -118,7 +118,7 @@ void annotations_transform::process(const annotations::annotation_group& ag,
 }
 
 void annotations_transform::
-transform(const context& ctx, meta_model::exogenous_model& em) {
+transform(const context& ctx, meta_model::exomodel& em) {
     process(ctx, em.modules());
     process(ctx, em.concepts());
     process(ctx, em.builtins());

@@ -14,24 +14,25 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-21 Mon 15:27]
+#+CAPTION: Clock summary at [2017-08-21 Mon 17:12]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *28:46* |       |       | 100.0 |
+| *Total time*                                                                | *29:47* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 28:46   |       |       | 100.0 |
-| Active                                                                      |         | 28:46 |       | 100.0 |
+| Stories                                                                     | 29:47   |       |       | 100.0 |
+| Active                                                                      |         | 29:47 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.2 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  22.1 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.8 |
-| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.1 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.0 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  42.9 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.6 |
-| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.3 |
-| COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.1 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  21.4 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.5 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.9 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.9 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  41.4 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.4 |
+| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.2 |
+| COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.8 |
+| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -342,7 +343,10 @@ to have the full name of the model.
 We now have a use case for this: the dynamic models. See Rename
 dynamic models.
 
-*** Use a consistent approach to model naming                         :story:
+*** COMPLETED Use a consistent approach to model naming               :story:
+    CLOSED: [2017-08-21 Mon 16:48]
+
+*Rationale*: split into individual stories for each rename.
 
 - exogenous model: exomodel; all the models obtained externally.
 - intermediate model: endogenous model, endomodel; all models used internally.
@@ -355,7 +359,26 @@ With this we can now have three main chains:
 - =model_generation_chain=: top-level chain that includes all others.
 
 We should also probably rename the exogenous transforms to
-=exomodel_source=.
+=exomodel_source=. Actually, according to the literature, its still
+just a transform.
+
+*** COMPLETED Rename exogenous model to exomodel                      :story:
+    CLOSED: [2017-08-21 Mon 17:10]
+    CLOCK: [2017-08-21 Mon 16:51]--[2017-08-21 Mon 17:10] =>  0:19
+    CLOCK: [2017-08-21 Mon 15:28]--[2017-08-21 Mon 16:10] =>  0:42
+
+As per analysis story on renaming, rename all instances of "exogenous
+model" to exomodel.
+
+*** Rename intermediate model to endomodel                            :story:
+
+As per analysis story on renaming, rename all instances of "exogenous
+model" to exomodel.
+
+*** Add validation to tailor transforms                               :story:
+
+Check that the transforms support "from" and "to" for the user
+requested types.
 
 *** Rename =meta_type= in JSON                                        :story:
 

@@ -28,7 +28,7 @@
 #include <string>
 #include <memory>
 #include "dogen/dia/types/diagram_fwd.hpp"
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
@@ -48,12 +48,11 @@ private:
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.
      */
-    static meta_model::exogenous_model
+    static meta_model::exomodel
     generate_model(const std::list<processed_object>& pos);
 
 public:
-    static meta_model::exogenous_model
-    execute(const dogen::dia::diagram& diagram);
+    static meta_model::exomodel execute(const dogen::dia::diagram& diagram);
 };
 
 } } }

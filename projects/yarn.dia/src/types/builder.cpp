@@ -197,7 +197,7 @@ void builder::add(const processed_object& po) {
     } }
 }
 
-meta_model::exogenous_model builder::build() {
+meta_model::exomodel builder::build() {
     /*
      * Add all modules in context into the modules container in the
      * model.

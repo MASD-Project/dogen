@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"
 #include "dogen/yarn/types/meta_model/object_types.hpp"
-#include "dogen/yarn/types/meta_model/exogenous_model.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -184,24 +184,24 @@ private:
      * dispatching to the correct read functions.
      */
     void read_element(const boost::property_tree::ptree& pt,
-        meta_model::exogenous_model& em) const;
+        meta_model::exomodel& em) const;
 
     /**
      * @brief Reads the entire stream as a property tree.
      */
-    meta_model::exogenous_model read_stream(std::istream& s) const;
+    meta_model::exomodel read_stream(std::istream& s) const;
 
 public:
     /**
      * @brief Hydrates the model from the JSON stream.
      */
-    meta_model::exogenous_model hydrate(std::istream& s) const;
+    meta_model::exomodel hydrate(std::istream& s) const;
 
     /**
      * @brief Opens up the file at path and then hydrates the model
      * from the JSON stream.
      */
-    meta_model::exogenous_model
+    meta_model::exomodel
     hydrate(const boost::filesystem::path& p) const;
 };
 

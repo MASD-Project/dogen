@@ -6135,7 +6135,7 @@ manageable format.#</dia:string>
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#exogenous_transform#</dia:string>
+        <dia:string>#exomodel_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>

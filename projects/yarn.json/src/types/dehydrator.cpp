@@ -56,7 +56,7 @@ std::string dehydrator::tidy_up_string(std::string s) {
     return s;
 }
 
-bool dehydrator::has_elements(const meta_model::exogenous_model& em) {
+bool dehydrator::has_elements(const meta_model::exomodel& em) {
     return
         !em.modules().empty() ||
         !em.concepts().empty() ||
@@ -220,7 +220,7 @@ void dehydrator::dehydrate_attributes(
 }
 
 void dehydrator::dehydrate_objects(const bool requires_leading_comma,
-    const meta_model::exogenous_model& em, std::ostream& s) {
+    const meta_model::exomodel& em, std::ostream& s) {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
@@ -252,7 +252,7 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
-    const meta_model::exogenous_model& em, std::ostream& s) {
+    const meta_model::exomodel& em, std::ostream& s) {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
@@ -285,7 +285,7 @@ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_modules(const bool requires_leading_comma,
-    const meta_model::exogenous_model& em, std::ostream& s) {
+    const meta_model::exomodel& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
@@ -305,7 +305,7 @@ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
-    const meta_model::exogenous_model& em, std::ostream& s) {
+    const meta_model::exomodel& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
@@ -369,7 +369,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
 }
 
 void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
-    const meta_model::exogenous_model& em, std::ostream& s) {
+    const meta_model::exomodel& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
@@ -390,7 +390,7 @@ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
 
 void dehydrator::
 dehydrate_exceptions(const bool requires_leading_comma,
-    const meta_model::exogenous_model& em, std::ostream& s) {
+    const meta_model::exomodel& em, std::ostream& s) {
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
 
@@ -409,7 +409,7 @@ dehydrate_exceptions(const bool requires_leading_comma,
     }
 }
 
-std::string dehydrator::dehydrate(const meta_model::exogenous_model& em) {
+std::string dehydrator::dehydrate(const meta_model::exomodel& em) {
     std::ostringstream s;
     formatters::utility_formatter uf(s);
     using boost::algorithm::join;
@@ -454,7 +454,7 @@ std::string dehydrator::dehydrate(const meta_model::exogenous_model& em) {
     return s.str();
 }
 
-void dehydrator::dehydrate(const meta_model::exogenous_model& em,
+void dehydrator::dehydrate(const meta_model::exomodel& em,
     const boost::filesystem::path& p) {
     const auto s(dehydrate(em));
     utility::filesystem::write_file_content(p, s);

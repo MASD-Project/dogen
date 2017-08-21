@@ -30,6 +30,6 @@
 #include "dogen/yarn.json/types/dehydrator.hpp"
 #include "dogen/yarn.json/types/initializer.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
-#include "dogen/yarn.json/types/exogenous_transform.hpp"
+#include "dogen/yarn.json/types/exomodel_transform.hpp"
 
 #endif
