@@ -18,14 +18,9 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn.json/types/initializer.hpp"
-#include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/tailor/workflow.hpp"
 
 int main(const int argc, const char* argv[]) {
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
-    
     dogen::tailor::workflow w;
     return w.execute(argc, argv);
 }

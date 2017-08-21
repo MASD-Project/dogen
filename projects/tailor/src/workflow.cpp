@@ -27,6 +27,8 @@
 #include "dogen/options/types/tailoring_options.hpp"
 #include "dogen/yarn/types/helpers/model_sorter.hpp"
 #include "dogen/yarn/types/transforms/exogenous_model_chain.hpp"
+#include "dogen/yarn.json/types/initializer.hpp"
+#include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
 #include "dogen/tailor/workflow.hpp"
@@ -105,6 +107,9 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
 
 void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
+
+    dogen::yarn::json::initializer::initialize();
+    dogen::yarn::dia::initializer::initialize();
 
     using yarn::transforms::exogenous_model_chain;
     auto& rg(exogenous_model_chain::registrar());

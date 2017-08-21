@@ -14,23 +14,24 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-21 Mon 11:42]
+#+CAPTION: Clock summary at [2017-08-21 Mon 11:53]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *28:20* |       |       | 100.0 |
+| *Total time*                                                                | *28:35* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 28:20   |       |       | 100.0 |
-| Active                                                                      |         | 28:20 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.1 |
+| Stories                                                                     | 28:35   |       |       | 100.0 |
+| Active                                                                      |         | 28:35 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.6 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  22.5 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |  10.0 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  22.3 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.9 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.1 |
 | COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.1 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  43.5 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.8 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  43.1 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.7 |
 | COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.3 |
+| COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -276,6 +277,17 @@ Now we have an exogenous model we no longer need the scribble group in
 the intermediate model. However, we were making use of it in the
 dehydration for tailor transformations.
 
+*** COMPLETED Tailor is not handling initialisation correctly         :story:
+    CLOSED: [2017-08-21 Mon 11:53]
+    CLOCK: [2017-08-21 Mon 11:38]--[2017-08-21 Mon 11:53] =>  0:15
+
+It seems we forgot to update tailor after the logging changes around
+initialisation:
+
+: [1/1] Tailoring boost_model.
+: [2017-08-18 16:05:05.284950] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.json.exogenous_transform
+: [2017-08-18 16:05:05.284992] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.dia.exogenous_transform
+
 *** Investigate usage of origin type                                  :story:
 
 With the current setup of the transforms, we always know who the
@@ -287,15 +299,6 @@ correctly at present.
 Now that we no longer support upsilon we can revert to the simplistic
 approach of matching the file extension to find the exogenous model
 transformer.
-
-*** Tailor is not handling initialisation correctly                   :story:
-
-It seems we forgot to update tailor after the logging changes around
-initialisation:
-
-: [1/1] Tailoring boost_model.
-: [2017-08-18 16:05:05.284950] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.json.exogenous_transform
-: [2017-08-18 16:05:05.284992] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.dia.exogenous_transform
 
 *** Add support for field renaming in annotations                     :story:
 
