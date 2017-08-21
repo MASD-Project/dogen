@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-21 Mon 11:53]
+#+CAPTION: Clock summary at [2017-08-21 Mon 15:27]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *28:35* |       |       | 100.0 |
+| *Total time*                                                                | *28:46* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 28:35   |       |       | 100.0 |
-| Active                                                                      |         | 28:35 |       | 100.0 |
+| Stories                                                                     | 28:46   |       |       | 100.0 |
+| Active                                                                      |         | 28:46 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   2.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:45 |   2.6 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  22.3 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   3.2 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  22.1 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   9.8 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   4.1 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.1 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  43.1 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.7 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   5.0 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  42.9 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   7.6 |
 | COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.3 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
@@ -82,6 +82,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-08-21 Mon 15:16]--[2017-08-21 Mon 15:27] =>  0:11
     CLOCK: [2017-08-20 Sun 21:21]--[2017-08-20 Sun 21:41] =>  0:20
     CLOCK: [2017-08-08 Tue 06:41]--[2017-08-08 Tue 06:53] =>  0:12
     CLOCK: [2017-08-01 Tue 20:43]--[2017-08-01 Tue 20:49] =>  0:06
@@ -288,123 +289,10 @@ initialisation:
 : [2017-08-18 16:05:05.284950] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.json.exogenous_transform
 : [2017-08-18 16:05:05.284992] [0x00007f2329d9f080] [info]    Registrered exogenous transform: yarn.dia.exogenous_transform
 
-*** Investigate usage of origin type                                  :story:
+*** COMPLETED Move external module processing into yarn               :story:
+    CLOSED: [2017-08-21 Mon 15:20]
 
-With the current setup of the transforms, we always know who the
-target model is. Thus the =origin_types= flag may not be used
-correctly at present.
-
-*** Use extension matching for exogenous models                       :story:
-
-Now that we no longer support upsilon we can revert to the simplistic
-approach of matching the file extension to find the exogenous model
-transformer.
-
-*** Add support for field renaming in annotations                     :story:
-
-At present if a field changes its name between dogen releases,
-diagrams stop working. For example, we renamed:
-
-: yarn.dia.external_modules
-
-to
-
-: yarn.external_modules
-
-With this change, dogen stopped working. We need some way to
-"remember" the previous name before a rename so that previous versions
-still work.
-
-*** =Nameable= concept moved position on code generation              :story:
-
-During the exogenous model work, yarn's =Nameable= concept moved
-position. We need to look at how the parent changes were done to see
-if they are stable or not.
-
-*** Use a consistent approach to model naming                         :story:
-
-- exogenous model: exomodel; all the models obtained externally.
-- intermediate model: endogenous model, endomodel; all models used internally.
-- model: final model, used for code-generation.
-
-With this we can now have three main chains:
-
-- =exomodel_generation_chain=;
-- =endomodel_generation_chain=;
-- =model_generation_chain=: top-level chain that includes all others.
-
-We should also probably rename the exogenous transforms to
-=exomodel_source=.
-
-*** Rename external transform                                         :story:
-
-The name "external transform" was always a quick hack, due to the
-confusion between "exogenous" and "external". We should rename it to
-"dynamic" given that these transforms are not known until run-time
-whereas all other transforms are "static" - known at compile
-time. This also means we can now have dynamic transforms in yarn. Not
-an ideal name, but ever so slightly better than "external transform".
-
-*** Rename yarn object types in yarn.dia                              :story:
-
-These are not really object types. We could name them perhaps element
-types?
-
-*** Change order of includes according to Lakos major design rule     :story:
-
-Lakos says:
-
-#+begin_quote
-The .c file of every component should include its own .h file as the
-first substantive line of code.
-#+end_quote
-
-We decided to include it as the last line. However, Lakos approach has
-the side-effect of automatically detecting headers that are missing
-includes. We used to do this manually by generating =.cpp= files that
-just included the header but then had to remove it because it was
-slowing down compilation. With Lakos approach we get the best of both
-worlds.
-
-We need to also update the generated code to follow this
-approach. This will require some thinking.
-
-*** Rename =meta_type= in JSON                                        :story:
-
-Now we have meta-names we should use the same terminology for JSON
-documents.
-
-*** Add canonical archetype support to yarn                           :story:
-
-We need to add a new attribute in context which captures the canonical
-archetypes.
-
-Notes:
-
-- kernel must also return canonical archetype by element type
-  index. Perhaps we should have a struct that aggregates both:
-  archetype locations for meta-type? Or kernel can just return a
-  =std::pair=.
-- at present we have placed the canonical archetype resolution as part
-  of the element properties. However, we do not need to have this at
-  the element level since its a meta-type property and can be
-  determined up-front. However, we do need to resolve a name into a
-  meta-type before we can resolve a meta-type into a concrete
-  archetype.
-- we need to unpick the notion of whether a formatter is "includible"
-  or not from the notion of canonical archetypes. Canonical archetypes
-  is meta-model concept: given a facet and a meta-model type, which
-  archetype represents the "key" definition of the element. It just so
-  happens that this function has a use in identifying the files to
-  include.
-
-Tasks:
-
-- add a map from name id to meta-name id in intermediate model.
-- add a map from meta name id to map of canonical archetype to
-  archetype location.
-
-*** Move external module processing into yarn                         :story:
+*Rationale*: implemented as part of the exogenous model work.
 
 At present we have a hack in =yarn.dia= whereby we are looking for a
 key =yarn.dia.external_modules= and then using it to populate the
@@ -419,33 +307,10 @@ One thing to bear in mind is that we need to trash all containers and
 re-insert all elements, because the IDs will change as part of this
 exercise.
 
-*** Enable kernel directories trait is on quilt                       :story:
+*** COMPLETED Add a property for the model modules as an annotation   :story:
+    CLOSED: [2017-08-21 Mon 15:25]
 
-When we moved the kernel logic into yarn from quilt, we did not rename
-the traits.
-
-*** Add models for the executables                                    :story:
-
-At present the executables are all hand-crafted. However, as we want
-to move the options into each executable we need them to be in a
-model.
-
-Tasks:
-
-- create a model for each executable and add the options to the model;
-- create options in yarn and stop using knitting options;
-- add meta-data to generate an executable instead of a library in
-  CMake.
-- generate a main skeleton if one does not exist.
-- remove options project.
-
-*** Throw on unsupported stereotypes                                  :story:
-
-In some cases we may support a feature in one language but not on
-others like say ORM at present. If a user requests ORM in a C# model,
-we should throw.
-
-*** Add a property for the model modules as an annotation             :story:
+*Rationale*: implemented as part of the exogenous model work.
 
 We should read out the model name as an annotation instead of
 inferring it from the filename on some frontends (Dia) and allowing
@@ -477,6 +342,46 @@ to have the full name of the model.
 We now have a use case for this: the dynamic models. See Rename
 dynamic models.
 
+*** Use a consistent approach to model naming                         :story:
+
+- exogenous model: exomodel; all the models obtained externally.
+- intermediate model: endogenous model, endomodel; all models used internally.
+- model: final model, used for code-generation.
+
+With this we can now have three main chains:
+
+- =exomodel_generation_chain=;
+- =endomodel_generation_chain=;
+- =model_generation_chain=: top-level chain that includes all others.
+
+We should also probably rename the exogenous transforms to
+=exomodel_source=.
+
+*** Rename =meta_type= in JSON                                        :story:
+
+Now we have meta-names we should use the same terminology for JSON
+documents.
+
+*** Use extension matching for exogenous models                       :story:
+
+Now that we no longer support upsilon we can revert to the simplistic
+approach of matching the file extension to find the exogenous model
+transformer.
+
+*** Rename external transform                                         :story:
+
+The name "external transform" was always a quick hack, due to the
+confusion between "exogenous" and "external". We should rename it to
+"dynamic" given that these transforms are not known until run-time
+whereas all other transforms are "static" - known at compile
+time. This also means we can now have dynamic transforms in yarn. Not
+an ideal name, but ever so slightly better than "external transform".
+
+*** Rename yarn object types in yarn.dia                              :story:
+
+These are not really object types. We could name them perhaps element
+types?
+
 *** Rename transformers to adapters                                   :story:
 
 In the past we used the term "transformer" to mean a class that
@@ -485,6 +390,70 @@ we are using domain terminology, the term "transforms" is taken to
 mean a model transformation. To avoid confusion we should rename the
 existing transformers to converters, adapters or some other
 out-of-the-way name.
+
+*** Add canonical archetype support to yarn                           :story:
+
+We need to add a new attribute in context which captures the canonical
+archetypes.
+
+Notes:
+
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+- at present we have placed the canonical archetype resolution as part
+  of the element properties. However, we do not need to have this at
+  the element level since its a meta-type property and can be
+  determined up-front. However, we do need to resolve a name into a
+  meta-type before we can resolve a meta-type into a concrete
+  archetype.
+- we need to unpick the notion of whether a formatter is "includible"
+  or not from the notion of canonical archetypes. Canonical archetypes
+  is meta-model concept: given a facet and a meta-model type, which
+  archetype represents the "key" definition of the element. It just so
+  happens that this function has a use in identifying the files to
+  include.
+
+Tasks:
+
+- add a map from name id to meta-name id in intermediate model.
+- add a map from meta name id to map of canonical archetype to
+  archetype location.
+
+*** =Nameable= concept moved position on code generation              :story:
+
+During the exogenous model work, yarn's =Nameable= concept moved
+position. We need to look at how the parent changes were done to see
+if they are stable or not.
+
+*** Enable kernel directories trait is on quilt                       :story:
+
+When we moved the kernel logic into yarn from quilt, we did not rename
+the traits.
+
+*** Add models for the executables                                    :story:
+
+At present the executables are all hand-crafted. However, as we want
+to move the options into each executable we need them to be in a
+model.
+
+Tasks:
+
+- create a model for each executable and add the options to the model;
+- create options in yarn and stop using knitting options;
+- add meta-data to generate an executable instead of a library in
+  CMake.
+- generate a main skeleton if one does not exist.
+- remove options project.
+
+*** Throw on unsupported stereotypes                                  :story:
+
+In some cases we may support a feature in one language but not on
+others like say ORM at present. If a user requests ORM in a C# model,
+we should throw.
+
+If we are in compatibility mode, however, we should not throw.
 
 *** Add a modeline to stitch                                          :story:
 
@@ -754,15 +723,6 @@ In the long run, we should use proper names for these namespaces:
 - fabric is meta-model;
 - formattables houses transformations.
 
-*** Start documenting the theoretical aspects of Dogen                :story:
-
-Up to now we have more or less coded Dogen as we went along; we
-haven't really spent a lot of time worrying about the theory behind
-the work we were carrying out. However, as we reached v1.0, the theory
-took center stage. We cannot proceed to the next phase of the product
-without a firm grasp of the theory. This story is a starting point so
-we can decide on how to break up the work.
-
 *** Assorted problems to look at                                      :story:
 
 These need to be put into stories:
@@ -774,102 +734,6 @@ These need to be put into stories:
   one should be able to include a code-generated file into project
   with list of items
 - sort out traits.
-
-*** Add support for proper JSON serialisation in C++                  :story:
-
-We need to add support for JSON in C++. It will eventually have to
-roundtrip to JSON in C# but that will be handled as two separate
-stories.
-
-Libraries:
-
-- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
-- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
-- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
-- One interesting library is [[https://github.com/dropbox/json11][Json11]].
-
-When we implement this we should provide support for JSON with
-roundtripping tests.
-
-We will not replace the current IO implementation; it should continue
-to exist as is, requiring no external dependencies.
-
-We should consider supporting multiple JSON libraries: instead of
-making the mistake we did with serialisation where we bound the name
-=serialization= with boost serialisation, we should call it by its
-real name, e.g. =json_spirit= etc. Then when a user creates a
-stereotype for a profile such as =Serializable= it can choose which
-serialisation codecs to enable for which language. This means that the
-same stereotypes can have different meanings in different
-architectures, which is the desired behaviour.
-
-We should create a serialise / deserialise functions following the
-same logic as boost:
-
-#+begin_src c++
-void serialize(Value& v, const object& o);
-void serialize(Value& v, const base& b);
-
-void deserialize(const Value& v, object& o);
-base* deserialize(const Value& v);
-#+end_src
-
-Or perhaps even better, we can make the above the internal methods and
-use =operator<<= and =operator>>= as the external methods:
-
-#+begin_src c++
-void operator<<(Value& v, const object& o);
-void operator>>(const Value& v, object& o);
-#+end_src
-
-Notes:
-
-- create a registrar with a map for each base type. The function
-  returns a base type pointer.
-- when you deserialize a base type pointer, you call the pointer
-  deserialize above. Same for when you have a pointer to an object. It
-  will internally call the registrar (if its a base type) and get the
-  right function.
-- this means we only need to look at type for inheritance. Although we
-  should probably always do it for validation? However, what happens
-  if we want to make a model so we can read external JSON? It won't
-  contain type markings.
-- =operator>>= will not be defined for pointers or base classes.
-- this wont work for the case of =doc << base=. For this we need a map
-  that looks up on type_index.
-
-Merged stories:
-
-For the previous attempt to integrate RapidJson see this commit:
-
-b2cce41 * third party: remove includes and rapid json
-
-*Add support for JSON serialisation*
-
-We should have proper JSON serialisation support, for both reading and
-writing. We can then implement IO in terms of JSON.
-
-*Raw JSON vs cooked JSON*
-
-If we do implement customisable JSON serialisation, we should still
-use the raw format in streaming. We need a way to disable the cooked
-JSON internally. We should also re-implement streaming in terms of
-this JSON mode.
-
-*** Add support for object cloning                                    :story:
-
-#+begin_quote
-*Story*: As a dogen user, I want to be able to clone object state so
-that I don't have to do this manually.
-#+end_quote
-
-We should have a clone method which copy constructs all non-pointer
-types, and then creates new objects for pointer types.
-
-Ideally users should be able to mark specific object as "cloneable"
-rather than generate clone methods for all objects in a model since it
-only makes sense for objects which have pointers. We need some
-meta-data knob to control the generation of the clone method.
 
 ** Deprecated
 *** CANCELLED Map upsilon primitives to intrinsics                    :story:

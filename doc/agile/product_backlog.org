@@ -11,6 +11,151 @@ This document contains the [[http://www.mountaingoatsoftware.com/agile/scrum/pro
 
 Stories that we intend to look at in the very near future.
 
+*** Change order of includes according to Lakos major design rule     :story:
+
+Lakos says:
+
+#+begin_quote
+The .c file of every component should include its own .h file as the
+first substantive line of code.
+#+end_quote
+
+We decided to include it as the last line. However, Lakos approach has
+the side-effect of automatically detecting headers that are missing
+includes. We used to do this manually by generating =.cpp= files that
+just included the header but then had to remove it because it was
+slowing down compilation. With Lakos approach we get the best of both
+worlds.
+
+We need to also update the generated code to follow this
+approach. This will require some thinking.
+
+*** Investigate usage of origin type                                  :story:
+
+With the current setup of the transforms, we always know who the
+target model is. Thus the =origin_types= flag may not be used
+correctly at present.
+
+*** Add support for field renaming in annotations                     :story:
+
+At present if a field changes its name between dogen releases,
+diagrams stop working. For example, we renamed:
+
+: yarn.dia.external_modules
+
+to
+
+: yarn.external_modules
+
+With this change, dogen stopped working. We need some way to
+"remember" the previous name before a rename so that previous versions
+still work.
+
+*** Start documenting the theoretical aspects of Dogen                :story:
+
+Up to now we have more or less coded Dogen as we went along; we
+haven't really spent a lot of time worrying about the theory behind
+the work we were carrying out. However, as we reached v1.0, the theory
+took center stage. We cannot proceed to the next phase of the product
+without a firm grasp of the theory. This story is a starting point so
+we can decide on how to break up the work.
+
+*** Add support for proper JSON serialisation in C++                  :story:
+
+We need to add support for JSON in C++. It will eventually have to
+roundtrip to JSON in C# but that will be handled as two separate
+stories.
+
+Libraries:
+
+- One option is [[https://github.com/cierelabs/json_spirit][json_spirit]].
+- Another option is [[https://github.com/miloyip/rapidjson][RapidJson]].
+- Actually there is a project comparing JSON libraries: [[https://github.com/miloyip/nativejson-benchmark][nativejson-benchmark]]
+- One interesting library is [[https://github.com/dropbox/json11][Json11]].
+
+When we implement this we should provide support for JSON with
+roundtripping tests.
+
+We will not replace the current IO implementation; it should continue
+to exist as is, requiring no external dependencies.
+
+We should consider supporting multiple JSON libraries: instead of
+making the mistake we did with serialisation where we bound the name
+=serialization= with boost serialisation, we should call it by its
+real name, e.g. =json_spirit= etc. Then when a user creates a
+stereotype for a profile such as =Serializable= it can choose which
+serialisation codecs to enable for which language. This means that the
+same stereotypes can have different meanings in different
+architectures, which is the desired behaviour.
+
+We should create a serialise / deserialise functions following the
+same logic as boost:
+
+#+begin_src c++
+void serialize(Value& v, const object& o);
+void serialize(Value& v, const base& b);
+
+void deserialize(const Value& v, object& o);
+base* deserialize(const Value& v);
+#+end_src
+
+Or perhaps even better, we can make the above the internal methods and
+use =operator<<= and =operator>>= as the external methods:
+
+#+begin_src c++
+void operator<<(Value& v, const object& o);
+void operator>>(const Value& v, object& o);
+#+end_src
+
+Notes:
+
+- create a registrar with a map for each base type. The function
+  returns a base type pointer.
+- when you deserialize a base type pointer, you call the pointer
+  deserialize above. Same for when you have a pointer to an object. It
+  will internally call the registrar (if its a base type) and get the
+  right function.
+- this means we only need to look at type for inheritance. Although we
+  should probably always do it for validation? However, what happens
+  if we want to make a model so we can read external JSON? It won't
+  contain type markings.
+- =operator>>= will not be defined for pointers or base classes.
+- this wont work for the case of =doc << base=. For this we need a map
+  that looks up on type_index.
+
+Merged stories:
+
+For the previous attempt to integrate RapidJson see this commit:
+
+b2cce41 * third party: remove includes and rapid json
+
+*Add support for JSON serialisation*
+
+We should have proper JSON serialisation support, for both reading and
+writing. We can then implement IO in terms of JSON.
+
+*Raw JSON vs cooked JSON*
+
+If we do implement customisable JSON serialisation, we should still
+use the raw format in streaming. We need a way to disable the cooked
+JSON internally. We should also re-implement streaming in terms of
+this JSON mode.
+
+*** Add support for object cloning                                    :story:
+
+#+begin_quote
+*Story*: As a dogen user, I want to be able to clone object state so
+that I don't have to do this manually.
+#+end_quote
+
+We should have a clone method which copy constructs all non-pointer
+types, and then creates new objects for pointer types.
+
+Ideally users should be able to mark specific object as "cloneable"
+rather than generate clone methods for all objects in a model since it
+only makes sense for objects which have pointers. We need some
+meta-data knob to control the generation of the clone method.
+
 *** Investigate code-generation around annotations                    :story:
 
 We have two cases where code-generation makes sense for
