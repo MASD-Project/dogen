@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOENDO_TRANSFORM_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXOENDO_TRANSFORM_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOMODEL_GENERATION_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_EXOMODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -38,7 +38,7 @@ namespace transforms {
  * @brief Given the location of a supported exogenous model, it
  * obtains it and transforms it into an intermediate model.
  */
-class exoendo_transform_chain final {
+class exomodel_generation_chain final {
 private:
     /*
      * @brief Given a path to an exogenous model, returns the
@@ -74,7 +74,7 @@ private:
  */
 template<typename ExogenousTransforms>
 inline void register_exomodel_transform() {
-    auto& rg(exoendo_transform_chain::registrar());
+    auto& rg(exomodel_generation_chain::registrar());
     auto t(std::make_shared<ExogenousTransforms>());
     rg.register_exomodel_transform(t);
 }

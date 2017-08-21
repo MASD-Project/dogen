@@ -23,12 +23,12 @@
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
-#include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
+#include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.exoendo_transform_chain"));
+static logger lg(logger_factory("yarn.transforms.exomodel_generation_chain"));
 
 }
 
@@ -37,9 +37,9 @@ namespace yarn {
 namespace transforms {
 
 std::shared_ptr<exomodel_transform_registrar>
-exoendo_transform_chain::registrar_;
+exomodel_generation_chain::registrar_;
 
-exomodel_transform_interface& exoendo_transform_chain::
+exomodel_transform_interface& exomodel_generation_chain::
 transform_for_model(const boost::filesystem::path& p) {
     /*
      * Ensure the registrar is in a valid state before we proceed.
@@ -51,14 +51,14 @@ transform_for_model(const boost::filesystem::path& p) {
     return rg.transform_for_model(model_identifier);
 }
 
-exomodel_transform_registrar& exoendo_transform_chain::registrar() {
+exomodel_transform_registrar& exomodel_generation_chain::registrar() {
     if (!registrar_)
         registrar_ = std::make_shared<exomodel_transform_registrar>();
 
     return *registrar_;
 }
 
-meta_model::endomodel exoendo_transform_chain::
+meta_model::endomodel exomodel_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
                              << p.generic_string();

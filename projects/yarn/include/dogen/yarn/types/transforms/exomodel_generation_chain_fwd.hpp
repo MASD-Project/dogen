@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOENDO_TRANSFORM_CHAIN_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXOENDO_TRANSFORM_CHAIN_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXOMODEL_GENERATION_CHAIN_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_EXOMODEL_GENERATION_CHAIN_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -29,7 +29,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class exoendo_transform_chain;
+class exomodel_generation_chain;
 
 } } }
 

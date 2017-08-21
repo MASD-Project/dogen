@@ -18,7 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
+#include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn.json/types/exomodel_transform.hpp"
 #include "dogen/yarn.json/types/initializer.hpp"
 

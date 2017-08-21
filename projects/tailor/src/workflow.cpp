@@ -26,7 +26,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/options/types/tailoring_options.hpp"
 #include "dogen/yarn/types/helpers/model_sorter.hpp"
-#include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
+#include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn.json/types/initializer.hpp"
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
@@ -111,7 +111,7 @@ void workflow::tailor(const options::tailoring_options& o) const {
     dogen::yarn::json::initializer::initialize();
     dogen::yarn::dia::initializer::initialize();
 
-    auto& rg(yarn::transforms::exoendo_transform_chain::registrar());
+    auto& rg(yarn::transforms::exomodel_generation_chain::registrar());
     rg.validate();
 
     const auto src_model_identifier(o.target().filename().string());

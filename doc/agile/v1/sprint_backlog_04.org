@@ -392,6 +392,7 @@ After much faffing around, it seems we inadvertently removed c++
 output from JSON models, resulting in travis builds breaks.
 
 *** STARTED Clean up transforms to match exogenous/endogenous models  :story:
+    CLOCK: [2017-08-22 Tue 00:40]--[2017-08-22 Tue 00:44] =>  0:04
     CLOCK: [2017-08-22 Tue 00:37]--[2017-08-22 Tue 00:39] =>  0:02
     CLOCK: [2017-08-21 Mon 23:47]--[2017-08-22 Tue 00:37] =>  0:50
 
