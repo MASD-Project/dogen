@@ -170,7 +170,8 @@ echo "* Starting C++ build."
 cd ${build_type_dir}
 cmake ${product_dir} -G Ninja ${cmake_defines} && ninja -j${number_of_jobs} ${target}
 echo "Diff"
-diff -r -u ${build_type_dir}/stage/test_data/yarn.json/expected ${build_type_dir}/stage/test_data/yarn.json/actual
+diff -r -u ${build_type_dir}/stage/test_data/lam_model/expected ${build_type_dir}/stage/test_data/lam_model/actual.json/
+diff -r -u ${build_type_dir}/stage/test_data/all_path_and_directory_settings/expected/ ${build_type_dir}/stage/test_data/all_path_and_directory_settings/actual.json/
 if [ $? -ne 0 ]; then
     echo "Error running CMake." >&2
     exit 1;
