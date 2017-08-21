@@ -13237,7 +13237,7 @@ space.#</dia:string>
         <dia:point val="-112,45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-115.806,37.15;-111.25,45.8"/>
+        <dia:rectangle val="-115.807,37.15;-111.25,45.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -14547,7 +14547,7 @@ space.#</dia:string>
         <dia:point val="-107.917,93.2024"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-155.213,68.55;-107.167,94.0024"/>
+        <dia:rectangle val="-155.212,68.55;-107.167,94.0024"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19476,7 +19476,7 @@ space.#</dia:string>
         <dia:point val="-134.782,132.602"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-135.532,131.852;-128.415,142.002"/>
+        <dia:rectangle val="-135.532,131.852;-128.414,142.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33540,7 +33540,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-161.197,106.202"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-170.44,96.7524;-160.447,107.002"/>
+        <dia:rectangle val="-170.439,96.7524;-160.447,107.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -33862,7 +33862,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-178.917,93.2024"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-191.44,85.9524;-178.167,94.0024"/>
+        <dia:rectangle val="-191.439,85.9524;-178.167,94.0024"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -34161,7 +34161,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="-161.862,93.2024"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-168.44,85.1524;-161.112,94.0024"/>
+        <dia:rectangle val="-168.439,85.1524;-161.112,94.0024"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -36061,7 +36061,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#endomodel_transform#</dia:string>
+        <dia:string>#exomodel_to_endomodel_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>

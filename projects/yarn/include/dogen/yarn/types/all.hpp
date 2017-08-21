@@ -109,7 +109,6 @@
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
-#include "dogen/yarn/types/transforms/endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_name_transform.hpp"
 #include "dogen/yarn/types/helpers/legacy_name_tree_parser.hpp"
 #include "dogen/yarn/types/meta_model/orm_database_systems.hpp"
@@ -153,6 +152,7 @@
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/helpers/identifiable_and_qualified_builder.hpp"
+#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
 
 #endif

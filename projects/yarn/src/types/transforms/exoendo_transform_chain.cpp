@@ -22,7 +22,7 @@
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
-#include "dogen/yarn/types/transforms/endomodel_transform.hpp"
+#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/exoendo_transform_chain.hpp"
 
 namespace {
@@ -64,9 +64,9 @@ transform(const context& ctx, const boost::filesystem::path& p) {
                              << p.generic_string();
 
     /*
-     * Transform the exogenous model - in whatever supported
+     * Transform the exogenous model - in whatever supported exogenous
      * representation it may be in, Dia, JSON, etc - into the internal
-     * represetnation of the exogenous model.
+     * representation of an exogenous model.
      */
     auto& t(transform_for_model(p));
     auto em(t.transform(p));
@@ -89,7 +89,7 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * exogenous model into an intermediate model, ready for further
      * processing.
      */
-    const auto r(endomodel_transform::transform(em));
+    const auto r(exomodel_to_endomodel_transform::transform(em));
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
     return r;
