@@ -14,28 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-22 Tue 01:42]
+#+CAPTION: Clock summary at [2017-08-22 Tue 02:04]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *33:50* |       |       | 100.0 |
+| *Total time*                                                                | *34:10* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 33:50   |       |       | 100.0 |
-| Active                                                                      |         | 33:50 |       | 100.0 |
+| Stories                                                                     | 34:10   |       |       | 100.0 |
+| Active                                                                      |         | 34:10 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.7 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.8 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  18.8 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   8.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.7 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  18.6 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   8.3 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.4 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.3 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  36.5 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   6.5 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.2 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  36.1 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   6.4 |
 | COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.9 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.7 |
 | COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.0 |
-| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.4 |
+| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.3 |
 | COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.3 |
 | COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   5.3 |
+| COMPLETED Add validation to tailor transforms                               |         |       |  0:20 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -424,7 +425,10 @@ Tasks:
   model transform. Actually, doing this in the code generator
   suffices.
 
-*** Add validation to tailor transforms                               :story:
+*** COMPLETED Add validation to tailor transforms                     :story:
+    CLOSED: [2017-08-22 Tue 02:00]
+    CLOCK: [2017-08-22 Tue 02:01]--[2017-08-22 Tue 02:04] =>  0:03
+    CLOCK: [2017-08-22 Tue 01:43]--[2017-08-22 Tue 02:00] =>  0:17
 
 Check that the transforms support "from" and "to" for the user
 requested types.

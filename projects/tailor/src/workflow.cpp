@@ -31,6 +31,7 @@
 #include "dogen/yarn.dia/types/initializer.hpp"
 #include "dogen/tailor/program_options_parser.hpp"
 #include "dogen/tailor/parser_validation_error.hpp"
+#include "dogen/tailor/workflow_error.hpp"
 #include "dogen/tailor/workflow.hpp"
 
 namespace {
@@ -45,6 +46,7 @@ const std::string usage_error_msg("Usage error: ");
 const std::string fatal_error_msg("Fatal Error: " );
 const std::string log_file_msg("See the log file for details: ");
 const std::string errors_msg(" finished with errors.");
+const std::string transform_not_supported("Cannot transform into: ");
 
 /**
  * @brief Print the program's help text.
@@ -108,19 +110,38 @@ void workflow::initialise_logging(const options::tailoring_options& o) {
 void workflow::tailor(const options::tailoring_options& o) const {
     BOOST_LOG_SEV(lg, info) << tailor_product << " started.";
 
-    dogen::yarn::json::initializer::initialize();
-    dogen::yarn::dia::initializer::initialize();
+    yarn::json::initializer::initialize();
+    yarn::dia::initializer::initialize();
 
-    auto& rg(yarn::transforms::exomodel_generation_chain::registrar());
+    using namespace yarn::transforms;
+    auto& rg(exomodel_generation_chain::registrar());
     rg.validate();
 
     const auto src_model_identifier(o.target().filename().string());
     auto& t0(rg.transform_for_model(src_model_identifier));
+    const auto st0(t0.supported_transforms());
+    if (st0 != exomodel_transform_types::bidirectional &&
+        st0 != exomodel_transform_types::unidirectional_from) {
+        BOOST_LOG_SEV(lg, error) << transform_not_supported
+                                 << src_model_identifier;
+        BOOST_THROW_EXCEPTION(
+            workflow_error(transform_not_supported + src_model_identifier));
+    }
+
     auto src(t0.transform(o.target()));
     yarn::helpers::model_sorter::sort(src);
 
     const auto dst_model_identifier(o.output().filename().string());
     auto& t1(rg.transform_for_model(dst_model_identifier));
+    const auto st1(t1.supported_transforms());
+    if (st1 != exomodel_transform_types::bidirectional &&
+        st1 != exomodel_transform_types::unidirectional_to) {
+        BOOST_LOG_SEV(lg, error) << transform_not_supported
+                                 << dst_model_identifier;
+        BOOST_THROW_EXCEPTION(
+            workflow_error(transform_not_supported + dst_model_identifier));
+    }
+
     t1.transform(src, o.output());
 
     BOOST_LOG_SEV(lg, info) << tailor_product << " finished.";
