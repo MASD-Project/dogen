@@ -18,18 +18,30 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_FINAL_MODEL_TRANSFORM_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_FINAL_MODEL_TRANSFORM_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_TO_MODEL_TRANSFORM_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_TO_MODEL_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <list>
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class final_model_transform;
+class endomodel_to_model_transform final {
+private:
+    static std::size_t compute_total_size(const meta_model::endomodel& im);
+    static meta_model::model transform(const meta_model::endomodel& im);
+
+public:
+    static std::list<meta_model::model>
+    transform(const std::list<meta_model::endomodel>& ims);
+};
 
 } } }
 

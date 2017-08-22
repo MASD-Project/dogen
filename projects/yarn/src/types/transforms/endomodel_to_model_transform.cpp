@@ -36,12 +36,12 @@
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/final_model_transform.hpp"
+#include "dogen/yarn/types/transforms/endomodel_to_model_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.final_model_transform"));
+static logger lg(logger_factory("yarn.transforms.endomodel_to_model_transform"));
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 const std::string expected_one_output_language(
@@ -113,7 +113,7 @@ private:
 
 }
 
-std::size_t final_model_transform::
+std::size_t endomodel_to_model_transform::
 compute_total_size(const meta_model::endomodel& im) {
     std::size_t r;
     r = im.modules().size();
@@ -129,7 +129,7 @@ compute_total_size(const meta_model::endomodel& im) {
 }
 
 meta_model::model
-final_model_transform::transform(const meta_model::endomodel& im) {
+endomodel_to_model_transform::transform(const meta_model::endomodel& im) {
     meta_model::model r;
     r.name(im.name());
     r.meta_name(helpers::meta_name_factory::make_model_name());
@@ -164,8 +164,8 @@ final_model_transform::transform(const meta_model::endomodel& im) {
     return r;
 }
 
-std::list<meta_model::model>
-final_model_transform::transform(const std::list<meta_model::endomodel>& ims) {
+std::list<meta_model::model> endomodel_to_model_transform::
+transform(const std::list<meta_model::endomodel>& ims) {
     std::list<meta_model::model> r;
     for(const auto& im : ims)
         r.push_back(transform(im));
