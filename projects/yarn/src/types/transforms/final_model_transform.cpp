@@ -164,4 +164,13 @@ final_model_transform::transform(const meta_model::endomodel& im) {
     return r;
 }
 
+std::list<meta_model::model>
+final_model_transform::transform(const std::list<meta_model::endomodel>& ims) {
+    std::list<meta_model::model> r;
+    for(const auto& im : ims)
+        r.push_back(transform(im));
+
+    return r;
+}
+
 } } }

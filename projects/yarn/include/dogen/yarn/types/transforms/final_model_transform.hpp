@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include <list>
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 
@@ -34,11 +35,12 @@ namespace transforms {
 
 class final_model_transform final {
 private:
-    static std::size_t
-    compute_total_size(const meta_model::endomodel& im);
+    static std::size_t compute_total_size(const meta_model::endomodel& im);
+    static meta_model::model transform(const meta_model::endomodel& im);
 
 public:
-    static meta_model::model transform(const meta_model::endomodel& im);
+    static std::list<meta_model::model>
+    transform(const std::list<meta_model::endomodel>& ims);
 };
 
 } } }

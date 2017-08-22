@@ -29,7 +29,7 @@
 #include <iosfwd>
 #include "dogen/annotations/types/type.hpp"
 #include "dogen/annotations/types/type_repository.hpp"
-#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 
 namespace dogen {
@@ -37,12 +37,13 @@ namespace yarn {
 namespace transforms {
 
 /**
- * @brief The model generation chain is the top-level transformation
- * responsible for obtaining a set of code-generatable models.
+ * @brief The endomodel generation chain is a top-level transformation
+ * responsible for obtaining a set of endomodels to which all the
+ * internal transforms have been applied.
  */
 class endomodel_generation_chain final {
 public:
-    static std::list<meta_model::model> transform(const context& ctx);
+    static std::list<meta_model::endomodel> transform(const context& ctx);
 };
 
 } } }

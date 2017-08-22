@@ -23,7 +23,6 @@
 #include "dogen/yarn/types/transforms/mapping_transform.hpp"
 #include "dogen/yarn/types/transforms/merge_transform.hpp"
 #include "dogen/yarn/types/transforms/post_processing_chain.hpp"
-#include "dogen/yarn/types/transforms/final_model_transform.hpp"
 #include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
 
 namespace {
@@ -71,25 +70,22 @@ model_assembly_chain::obtain_merged_model(const context& ctx,
     return merge_transform::transform(mapped_target, mapped_refs);
 }
 
-meta_model::model model_assembly_chain::transform(const context& ctx,
+meta_model::endomodel model_assembly_chain::transform(const context& ctx,
     const meta_model::languages l, const meta_model::endomodel& target,
     const std::list<meta_model::endomodel>& refs) {
 
     /*
      * First we obtain the merged (and mapped) model.
      */
-    auto mm(obtain_merged_model(ctx, l , target, refs));
+    auto r(obtain_merged_model(ctx, l , target, refs));
 
     /*
      * Then we apply all of the post-processing transforms to the
      * merged model.
      */
-    post_processing_chain::transform(ctx, mm);
+    post_processing_chain::transform(ctx, r);
 
-    /*
-     * Lastly, we convert it to the final representation.
-     */
-    return final_model_transform::transform(mm);
+    return r;
 }
 
 } } }

@@ -26,7 +26,6 @@
 #endif
 
 #include <list>
-#include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
@@ -36,8 +35,7 @@ namespace yarn {
 namespace transforms {
 
 /**
- * @brief Merges target and references, post-processes the result and
- * converts to the final model representation.
+ * @brief Merges target and references and post-processes the result.
  */
 class model_assembly_chain final {
 private:
@@ -47,7 +45,7 @@ private:
         const std::list<meta_model::endomodel>& refs);
 
 public:
-    static meta_model::model transform(const context& ctx,
+    static meta_model::endomodel transform(const context& ctx,
         const meta_model::languages l,
         const meta_model::endomodel& target,
         const std::list<meta_model::endomodel>& refs);

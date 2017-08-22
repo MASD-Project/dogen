@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/final_model_transform.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
 
@@ -53,12 +54,17 @@ code_generator::generate(const options::knitting_options& o) {
     const auto ctx(context_factory::make(rg, o));
 
     /*
-     * Then we generate all models.
+     * Now we generate the endomodels.
      */
-    const auto models(endomodel_generation_chain::transform(ctx));
+    const auto endomodels(endomodel_generation_chain::transform(ctx));
 
     /*
-     * Finally we transform them into text.
+     * Then we convert the endomodels to the final representation.
+     */
+    const auto models(final_model_transform::transform(endomodels));
+
+    /*
+     * Finally we run the model to text transforms.
      */
     const auto r(code_generation_chain::transform(ctx, models));
 

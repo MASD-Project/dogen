@@ -26,7 +26,7 @@
 #include "dogen/annotations/types/entry_selector.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/yarn/types/traits.hpp"
-#include "dogen/yarn/io/meta_model/model_io.hpp"
+#include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
@@ -45,7 +45,7 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::list<meta_model::model>
+std::list<meta_model::endomodel>
 endomodel_generation_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, info) << "Executing the model generation chain.";
 
@@ -79,12 +79,11 @@ endomodel_generation_chain::transform(const context& ctx) {
      * Execute the assembly chain for each of the requested output
      * languages.
      */
-    std::list<meta_model::model> r;
+    std::list<meta_model::endomodel> r;
     for (const auto ol : target.output_languages())
         r.push_back(model_assembly_chain::transform(ctx, ol, target, refs));
 
-    BOOST_LOG_SEV(lg, info) << "Executed the model generation chain. Result: "
-                            << r;
+    BOOST_LOG_SEV(lg, info) << "Executed the model generation chain.";
 
     return r;
 }
