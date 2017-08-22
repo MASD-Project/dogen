@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_MODEL_GENERATION_CHAIN_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_ENDOMODEL_GENERATION_CHAIN_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,7 +40,7 @@ namespace transforms {
  * @brief The model generation chain is the top-level transformation
  * responsible for obtaining a set of code-generatable models.
  */
-class model_generation_chain final {
+class endomodel_generation_chain final {
 public:
     static std::list<meta_model::model> transform(const context& ctx);
 };

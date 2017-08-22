@@ -32,12 +32,12 @@
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 #include "dogen/yarn/types/transforms/model_assembly_chain.hpp"
-#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.model_generation_chain"));
+static logger lg(logger_factory("yarn.transforms.endomodel_generation_chain"));
 
 }
 
@@ -46,7 +46,7 @@ namespace yarn {
 namespace transforms {
 
 std::list<meta_model::model>
-model_generation_chain::transform(const context& ctx) {
+endomodel_generation_chain::transform(const context& ctx) {
     BOOST_LOG_SEV(lg, info) << "Executing the model generation chain.";
 
     /*

@@ -20,7 +20,7 @@
  */
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
-#include "dogen/yarn/types/transforms/model_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/endomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
 #include "dogen/yarn/types/code_generator.hpp"
 
@@ -55,7 +55,7 @@ code_generator::generate(const options::knitting_options& o) {
     /*
      * Then we generate all models.
      */
-    const auto models(model_generation_chain::transform(ctx));
+    const auto models(endomodel_generation_chain::transform(ctx));
 
     /*
      * Finally we transform them into text.

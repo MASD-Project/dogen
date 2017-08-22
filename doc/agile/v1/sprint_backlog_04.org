@@ -14,28 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-22 Tue 00:39]
+#+CAPTION: Clock summary at [2017-08-22 Tue 01:18]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *32:54* |       |       | 100.0 |
+| *Total time*                                                                | *33:28* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 32:54   |       |       | 100.0 |
-| Active                                                                      |         | 32:54 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.8 |
+| Stories                                                                     | 33:28   |       |       | 100.0 |
+| Active                                                                      |         | 33:28 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.7 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.8 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  19.4 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   8.6 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  19.0 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   8.5 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.5 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.4 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  37.5 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   6.7 |
-| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   2.0 |
-| COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.8 |
-| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.1 |
-| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.5 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.3 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  36.9 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   6.6 |
+| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.9 |
+| COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.7 |
+| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.0 |
+| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.4 |
 | COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.3 |
-| STARTED Clean up transforms to match exogenous/endogenous models            |         |       |  0:52 |   2.6 |
+| STARTED Clean up transforms to match exogenous/endogenous models            |         |       |  1:26 |   4.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -392,6 +392,9 @@ After much faffing around, it seems we inadvertently removed c++
 output from JSON models, resulting in travis builds breaks.
 
 *** STARTED Clean up transforms to match exogenous/endogenous models  :story:
+    CLOCK: [2017-08-22 Tue 01:15]--[2017-08-22 Tue 01:18] =>  0:03
+    CLOCK: [2017-08-22 Tue 01:11]--[2017-08-22 Tue 01:14] =>  0:03
+    CLOCK: [2017-08-22 Tue 01:01]--[2017-08-22 Tue 01:10] =>  0:09
     CLOCK: [2017-08-22 Tue 00:45]--[2017-08-22 Tue 01:00] =>  0:15
     CLOCK: [2017-08-22 Tue 00:40]--[2017-08-22 Tue 00:44] =>  0:04
     CLOCK: [2017-08-22 Tue 00:37]--[2017-08-22 Tue 00:39] =>  0:02
