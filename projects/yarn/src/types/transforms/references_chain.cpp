@@ -22,6 +22,7 @@
 #include "dogen/yarn/types/helpers/reference_paths_extractor.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/references_chain.hpp"
 
@@ -68,7 +69,7 @@ transform(const context& ctx, const meta_model::endomodel& target) {
     const auto rl(obtain_relevant_languages(target));
 
     /*
-     * Load each reference model from the reference path, filter and
+     * Load each reference model from the references path, filter and
      * pre-process them.
      */
     std::list<meta_model::endomodel> r;
@@ -77,7 +78,13 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Obtain the reference model in the internal representation
          * of the exogenous model.
          */
-        auto rm(exomodel_generation_chain::transform(ctx, rp));
+        const auto em(exomodel_generation_chain::transform(ctx, rp));
+
+        /*
+         * Convert the internal representation of the exogenous model into
+         * an endogenous model, ready for further processing.
+         */
+        auto m(exomodel_to_endomodel_transform::transform(em));
 
         /*
          * Apply all of the pre-processing transforms to the reference
@@ -97,8 +104,8 @@ transform(const context& ctx, const meta_model::endomodel& target) {
          * Given that the list of system models is very small at
          * present, we are ignoring these problems.
          */
-        if (pre_processing_chain::try_transform(ctx, rl, rm))
-            r.push_back(rm);
+        if (pre_processing_chain::try_transform(ctx, rl, m))
+            r.push_back(m);
     }
 
     BOOST_LOG_SEV(lg, debug) << "Reference models chain executed.";

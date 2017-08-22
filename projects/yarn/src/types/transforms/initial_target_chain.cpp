@@ -22,6 +22,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
+#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/pre_processing_chain.hpp"
 #include "dogen/yarn/types/transforms/initial_target_chain.hpp"
 
@@ -45,7 +46,13 @@ initial_target_chain::transform(const context& ctx) {
      * of the exogenous model.
      */
     const auto tp(ctx.options().target());
-    auto r(exomodel_generation_chain::transform(ctx, tp));
+    const auto em(exomodel_generation_chain::transform(ctx, tp));
+
+    /*
+     * Convert the internal representation of the exogenous model into
+     * an endogenous model, ready for further processing.
+     */
+    auto r(exomodel_to_endomodel_transform::transform(em));
 
     /*
      * Next, we set the origin of the target model to target so that

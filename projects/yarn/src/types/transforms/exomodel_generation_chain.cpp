@@ -22,7 +22,6 @@
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/types/transforms/naming_transform.hpp"
 #include "dogen/yarn/types/transforms/annotations_transform.hpp"
-#include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 
 namespace {
@@ -58,7 +57,7 @@ exomodel_transform_registrar& exomodel_generation_chain::registrar() {
     return *registrar_;
 }
 
-meta_model::endomodel exomodel_generation_chain::
+meta_model::exomodel exomodel_generation_chain::
 transform(const context& ctx, const boost::filesystem::path& p) {
     BOOST_LOG_SEV(lg, debug) << "Transforming exogenous model: "
                              << p.generic_string();
@@ -69,27 +68,21 @@ transform(const context& ctx, const boost::filesystem::path& p) {
      * representation of an exogenous model.
      */
     auto& t(transform_for_model(p));
-    auto em(t.transform(p));
+    auto r(t.transform(p));
 
     /*
      * Now transform the annotations. This must be done at this point
      * because the naming transform reads naming information from the
      * annotations.
      */
-    annotations_transform::transform(ctx, em);
+    annotations_transform::transform(ctx, r);
 
     /*
-     * Update all element names and attributes to take into account
-     * the external modules and the model modules, supplied as meta-data.
+     * Finally, update all element names and attributes to take into
+     * account the external modules and the model modules, supplied as
+     * meta-data.
      */
-    naming_transform::transform(ctx, em);
-
-    /*
-     * Finally, we can convert the internal representation of the
-     * exogenous model into an intermediate model, ready for further
-     * processing.
-     */
-    const auto r(exomodel_to_endomodel_transform::transform(em));
+    naming_transform::transform(ctx, r);
 
     BOOST_LOG_SEV(lg, debug) << "Transformed exogenous  model.";
     return r;
