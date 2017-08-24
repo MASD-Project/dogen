@@ -248,7 +248,7 @@
         "simple": "object"
       },
       "meta_name": {
-        "simple": "builtin",
+        "simple": "object",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
