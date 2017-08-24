@@ -25,6 +25,7 @@
 #pragma once
 #endif
 
+#include "dogen/yarn/types/meta_model/exomodel_fwd.hpp"
 #include "dogen/yarn/types/meta_model/endomodel_fwd.hpp"
 
 namespace dogen {
@@ -34,14 +35,22 @@ namespace transforms {
 /**
  * @brief Updates the meta-names of all of the yarn meta-model
  * elements.
- *
- * Note that any injected meta-model elements are not updated as part
- * of this transform; these are expected to be handled internally as
- * they are generated. We only concern ourselves with well-known
- * meta-model elements from yarn.
  */
 class meta_naming_transform final {
 public:
+    /**
+     * @brief Performs the transform on the exomodel.
+     */
+    static void transform(meta_model::exomodel& em);
+
+    /**
+     * @brief Performs the transform on the endomodel.
+     *
+     * Note that any injected meta-model elements are not updated as
+     * part of this transform; these are expected to be handled
+     * internally as they are generated. We only concern ourselves
+     * with well-known meta-model elements from yarn.
+     */
     static void transform(meta_model::endomodel& im);
 };
 

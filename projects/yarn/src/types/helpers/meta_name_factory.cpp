@@ -41,6 +41,11 @@ meta_model::name meta_name_factory::make_name(const std::string& sn) {
     return b.build();
 }
 
+meta_model::name meta_name_factory::make_exomodel_name() {
+    static const auto r(make_name("exomodel"));
+    return r;
+}
+
 meta_model::name meta_name_factory::make_endomodel_name() {
     static const auto r(make_name("endomodel"));
     return r;

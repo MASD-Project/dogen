@@ -21,6 +21,7 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
+#include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -88,6 +89,38 @@ public:
         v.meta_name(n);
     }
 };
+
+void meta_naming_transform::transform(meta_model::exomodel& em) {
+    BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
+                             << em.name().id();
+
+    em.meta_name(meta_name_factory::make_exomodel_name());
+
+    updater u;
+    for (const auto& pair : em.modules())
+        u(*pair.second);
+
+    for (const auto& pair : em.concepts())
+        u(*pair.second);
+
+    for (const auto& pair : em.builtins())
+        u(*pair.second);
+
+    for (const auto& pair : em.enumerations())
+        u(*pair.second);
+
+    for (const auto& pair : em.primitives())
+        u(*pair.second);
+
+    for (const auto& pair : em.objects())
+        u(*pair.second);
+
+    for (const auto& pair : em.exceptions())
+        u(*pair.second);
+
+    BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
+
+}
 
 void meta_naming_transform::transform(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
