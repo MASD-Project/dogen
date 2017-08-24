@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_META_NAME_TRANSFORM_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_META_NAME_TRANSFORM_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_META_NAMING_TRANSFORM_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_META_NAMING_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -40,7 +40,7 @@ namespace transforms {
  * they are generated. We only concern ourselves with well-known
  * meta-model elements from yarn.
  */
-class meta_name_transform final {
+class meta_naming_transform final {
 public:
     static void transform(meta_model::endomodel& im);
 };

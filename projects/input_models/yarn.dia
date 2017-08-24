@@ -34960,7 +34960,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#meta_name_transform#</dia:string>
+        <dia:string>#meta_naming_transform#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>

@@ -24,12 +24,12 @@
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/meta_name_transform.hpp"
+#include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.meta_name_transform"));
+auto lg(logger_factory("yarn.transforms.meta_naming_transform"));
 
 }
 
@@ -89,8 +89,8 @@ public:
     }
 };
 
-void meta_name_transform::transform(meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Starting meta-name transform for model: "
+void meta_naming_transform::transform(meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Starting meta-naming transform for model: "
                              << im.name().id();
 
     im.meta_name(meta_name_factory::make_endomodel_name());
@@ -104,7 +104,7 @@ void meta_name_transform::transform(meta_model::endomodel& im) {
     updater u;
     meta_model::elements_traversal(im, u);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished meta-name transform.";
+    BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
 }
 
 } } }
