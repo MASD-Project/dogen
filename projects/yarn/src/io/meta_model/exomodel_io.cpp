@@ -339,6 +339,7 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
     s << " { "
       << "\"__type__\": " << "\"dogen::yarn::meta_model::exomodel\"" << ", "
       << "\"name\": " << v.name() << ", "
+      << "\"meta_name\": " << v.meta_name() << ", "
       << "\"modules\": " << v.modules() << ", "
       << "\"concepts\": " << v.concepts() << ", "
       << "\"builtins\": " << v.builtins() << ", "

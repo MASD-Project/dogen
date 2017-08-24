@@ -201,6 +201,7 @@ std::size_t exomodel_hasher::hash(const exomodel& v) {
     std::size_t seed(0);
 
     combine(seed, v.name());
+    combine(seed, v.meta_name());
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(v.concepts()));
     combine(seed, hash_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(v.builtins()));

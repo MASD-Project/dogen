@@ -96,6 +96,7 @@ namespace meta_model {
 
 exomodel::exomodel(
     const dogen::yarn::meta_model::name& name,
+    const dogen::yarn::meta_model::name& meta_name,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
@@ -105,6 +106,7 @@ exomodel::exomodel(
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::exception> > >& exceptions,
     const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> >& root_module)
     : name_(name),
+      meta_name_(meta_name),
       modules_(modules),
       concepts_(concepts),
       builtins_(builtins),
@@ -117,6 +119,7 @@ exomodel::exomodel(
 void exomodel::swap(exomodel& other) noexcept {
     using std::swap;
     swap(name_, other.name_);
+    swap(meta_name_, other.meta_name_);
     swap(modules_, other.modules_);
     swap(concepts_, other.concepts_);
     swap(builtins_, other.builtins_);
@@ -129,6 +132,7 @@ void exomodel::swap(exomodel& other) noexcept {
 
 bool exomodel::operator==(const exomodel& rhs) const {
     return name_ == rhs.name_ &&
+        meta_name_ == rhs.meta_name_ &&
         modules_ == rhs.modules_ &&
         concepts_ == rhs.concepts_ &&
         builtins_ == rhs.builtins_ &&
@@ -159,6 +163,22 @@ void exomodel::name(const dogen::yarn::meta_model::name& v) {
 
 void exomodel::name(const dogen::yarn::meta_model::name&& v) {
     name_ = std::move(v);
+}
+
+const dogen::yarn::meta_model::name& exomodel::meta_name() const {
+    return meta_name_;
+}
+
+dogen::yarn::meta_model::name& exomodel::meta_name() {
+    return meta_name_;
+}
+
+void exomodel::meta_name(const dogen::yarn::meta_model::name& v) {
+    meta_name_ = v;
+}
+
+void exomodel::meta_name(const dogen::yarn::meta_model::name&& v) {
+    meta_name_ = std::move(v);
 }
 
 const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& exomodel::modules() const {

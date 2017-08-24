@@ -248,14 +248,15 @@ exomodel_generator::exomodel_generator() : position_(0) { }
 void exomodel_generator::
 populate(const unsigned int position, result_type& v) {
     v.name(create_dogen_yarn_meta_model_name(position + 0));
-    v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 1));
-    v.concepts(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(position + 2));
-    v.builtins(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + 3));
-    v.enumerations(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + 4));
-    v.primitives(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + 5));
-    v.objects(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + 6));
-    v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 7));
-    v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 8));
+    v.meta_name(create_dogen_yarn_meta_model_name(position + 1));
+    v.modules(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 2));
+    v.concepts(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_concept(position + 3));
+    v.builtins(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + 4));
+    v.enumerations(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + 5));
+    v.primitives(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + 6));
+    v.objects(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_object(position + 7));
+    v.exceptions(create_std_list_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_exception(position + 8));
+    v.root_module(create_std_pair_dogen_annotations_scribble_group_boost_shared_ptr_dogen_yarn_meta_model_module(position + 9));
 }
 
 exomodel_generator::result_type

@@ -26,6 +26,30 @@
 		</location>
 		<identifiable></identifiable>
 	</name>
+	<meta_name>
+		<id></id>
+		<simple></simple>
+		<qualified>
+			<count>0</count>
+			<item_version>0</item_version>
+		</qualified>
+		<location>
+			<external_modules>
+				<count>0</count>
+				<item_version>0</item_version>
+			</external_modules>
+			<model_modules>
+				<count>0</count>
+				<item_version>0</item_version>
+			</model_modules>
+			<internal_modules>
+				<count>0</count>
+				<item_version>0</item_version>
+			</internal_modules>
+			<element></element>
+		</location>
+		<identifiable></identifiable>
+	</meta_name>
 	<modules class_id="18" tracking_level="0" version="0">
 		<count>1</count>
 		<item_version>0</item_version>

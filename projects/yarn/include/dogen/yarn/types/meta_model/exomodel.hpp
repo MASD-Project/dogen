@@ -54,6 +54,7 @@ public:
 public:
     exomodel(
         const dogen::yarn::meta_model::name& name,
+        const dogen::yarn::meta_model::name& meta_name,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
@@ -79,6 +80,16 @@ public:
     dogen::yarn::meta_model::name& name();
     void name(const dogen::yarn::meta_model::name& v);
     void name(const dogen::yarn::meta_model::name&& v);
+    /**@}*/
+
+    /**
+     * @brief Name of the element in the meta-model that this instance conforms to.
+     */
+    /**@{*/
+    const dogen::yarn::meta_model::name& meta_name() const;
+    dogen::yarn::meta_model::name& meta_name();
+    void meta_name(const dogen::yarn::meta_model::name& v);
+    void meta_name(const dogen::yarn::meta_model::name&& v);
     /**@}*/
 
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules() const;
@@ -133,6 +144,7 @@ public:
 
 private:
     dogen::yarn::meta_model::name name_;
+    dogen::yarn::meta_model::name meta_name_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > modules_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > > concepts_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > > builtins_;
