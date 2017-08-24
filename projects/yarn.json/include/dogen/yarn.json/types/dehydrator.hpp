@@ -59,8 +59,7 @@ private:
         std::ostream& s);
     static void dehydrate_element(
         const boost::optional<annotations::scribble_group>& sg,
-        const meta_model::element& e, const std::string& meta_type,
-        std::ostream& s);
+        const meta_model::element& e, std::ostream& s);
     static void dehydrate_attributes(
         const boost::optional<annotations::scribble_group>& sg,
         const std::list<meta_model::attribute>& attrs, std::ostream& s);

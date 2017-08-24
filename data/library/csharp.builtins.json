@@ -1,6 +1,11 @@
 {
   "root_module": {
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "documentation": "CLR-provided built-in types.",
     "annotation": {
       "yarn.input_language": "csharp",
@@ -13,7 +18,12 @@
       "name": {
         "simple": "byte"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -27,7 +37,12 @@
       "name": {
         "simple": "sbyte"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -41,7 +56,12 @@
       "name": {
         "simple": "int"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "is_default_enumeration_type": true,
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
@@ -56,7 +76,12 @@
       "name": {
         "simple": "uint"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -70,7 +95,12 @@
       "name": {
         "simple": "short"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -84,7 +114,12 @@
       "name": {
         "simple": "ushort"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -98,7 +133,12 @@
       "name": {
         "simple": "long"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -112,7 +152,12 @@
       "name": {
         "simple": "ulong"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -126,7 +171,12 @@
       "name": {
         "simple": "float"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
@@ -141,7 +191,12 @@
       "name": {
         "simple": "double"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "is_floating_point": true,
       "can_be_primitive_underlier": true,
@@ -156,7 +211,12 @@
       "name": {
         "simple": "char"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "annotation": {
@@ -169,7 +229,12 @@
       "name": {
         "simple": "bool"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "annotation": {
@@ -182,7 +247,12 @@
       "name": {
         "simple": "object"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "annotation": {
         "quilt.csharp.assistant.requires_assistance": true,
@@ -193,7 +263,12 @@
       "name": {
         "simple": "string"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "annotation": {
@@ -205,7 +280,12 @@
       "name": {
         "simple": "decimal"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "in_global_module": true,
       "can_be_primitive_underlier": true,
       "annotation": {

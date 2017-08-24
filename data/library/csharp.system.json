@@ -1,6 +1,11 @@
 {
   "root_module": {
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "documentation": "System types.",
     "annotation": {
       "yarn.input_language": "csharp",
@@ -13,7 +18,12 @@
       "name": {
         "simple": "Int16"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -27,7 +37,12 @@
       "name": {
         "simple": "Int32"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,
@@ -41,7 +56,12 @@
       "name": {
         "simple": "Int64"
       },
-      "meta_type": "builtin",
+      "meta_name": {
+        "simple": "builtin",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "is_default_enumeration_type": false,
       "can_be_enumeration_underlier": true,
       "can_be_primitive_underlier": true,

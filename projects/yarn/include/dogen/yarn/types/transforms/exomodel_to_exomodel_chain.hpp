@@ -25,13 +25,22 @@
 #pragma once
 #endif
 
+#include <utility>
+#include <boost/tuple/tuple.hpp>
 #include <boost/filesystem/path.hpp>
+#include "dogen/yarn/types/transforms/exomodel_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
 class exomodel_to_exomodel_chain final {
+public:
+    static boost::tuple<exomodel_transform_interface&,
+                        exomodel_transform_interface&>
+    obtain_transforms(const boost::filesystem::path& src_path,
+        const boost::filesystem::path& dst_path);
+
 public:
     static void transform(const boost::filesystem::path& src_path,
         const boost::filesystem::path& dst_path);

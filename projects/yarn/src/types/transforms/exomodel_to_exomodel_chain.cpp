@@ -22,6 +22,7 @@
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/helpers/model_sorter.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
+#include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
 #include "dogen/yarn/types/transforms/exomodel_generation_chain.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_exomodel_chain.hpp"
 
@@ -38,16 +39,22 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-void exomodel_to_exomodel_chain::
-transform(const boost::filesystem::path& src_path,
+boost::tuple<exomodel_transform_interface&, exomodel_transform_interface&>
+exomodel_to_exomodel_chain::obtain_transforms(
+    const boost::filesystem::path& src_path,
     const boost::filesystem::path& dst_path) {
-    BOOST_LOG_SEV(lg, info) << "Transforming: " << src_path.generic_string()
-                            << " to: " << dst_path.generic_string();
-
+    /*
+     * Start by ensuring the registrar is in a good place.
+     */
     using namespace yarn::transforms;
     auto& rg(exomodel_generation_chain::registrar());
     rg.validate();
 
+    /*
+     * Now ensure we have the required support for the two
+     * transformations we intend to do. If not, there is no point
+     * continuing.
+     */
     const auto src_model_identifier(src_path.string());
     auto& t0(rg.transform_for_model(src_model_identifier));
     const auto st0(t0.supported_transforms());
@@ -70,9 +77,40 @@ transform(const boost::filesystem::path& src_path,
                 transform_not_supported + dst_model_identifier));
     }
 
-    auto src(t0.transform(src_path));
-    yarn::helpers::model_sorter::sort(src);
-    t1.transform(src, dst_path);
+    return boost::tie(t0, t1);
+}
+
+void exomodel_to_exomodel_chain::
+transform(const boost::filesystem::path& src_path,
+    const boost::filesystem::path& dst_path) {
+    BOOST_LOG_SEV(lg, info) << "Transforming: " << src_path.generic_string()
+                            << " to: " << dst_path.generic_string();
+
+    /*
+     * Obtain a tuple containing the source and destination
+     * transforms.
+     */
+    auto tuple(obtain_transforms(src_path, dst_path));
+    auto src(tuple.get<0>().transform(src_path));
+
+    /*
+     * Perform the meta-naming transform to the model. We need this to
+     * ensure all the meta-types have been populated or else they will
+     * come out blank on the generated file.
+     */
+    meta_naming_transform::transform(src);
+
+    /*
+     * Perform a sorting transform to ensure we output the elements in
+     * a known order, or else we'll start generating spurious
+     * differences.
+     */
+    helpers::model_sorter::sort(src);
+
+    /*
+     * Finally, transform the exomodel to text.
+     */
+    tuple.get<1>().transform(src, dst_path);
 
     BOOST_LOG_SEV(lg, info) << "Transformation done.";
 }

@@ -3,7 +3,12 @@
     "name": {
       "simple": ""
     },
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "documentation": "Tests support for C++ 98.\n",
     "annotation": {
       "yarn.dia.comment": "true",
@@ -24,7 +29,12 @@
       "name": {
         "simple": "child"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "parents": [
         {
           "simple": "parent"
@@ -43,7 +53,12 @@
       "name": {
         "simple": "no_default_ctor"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "documentation": "This class does not require a default constructor due to using simple types.\n",
       "attributes": [
         {
@@ -58,14 +73,24 @@
       "name": {
         "simple": "no_properties"
       },
-      "meta_type": "object"
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     },
     {
       "name": {
         "simple": "first_class",
         "internal_modules": "package1"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -85,7 +110,12 @@
       "name": {
         "simple": "parent"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -99,13 +129,23 @@
       "name": {
         "simple": "package1"
       },
-      "meta_type": "module"
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     },
     {
       "name": {
         "simple": "an_enumeration"
       },
-      "meta_type": "enumeration",
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "enumerators": [
         {
           "name": {
@@ -123,7 +163,12 @@
       "name": {
         "simple": "an_exception"
       },
-      "meta_type": "exception"
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     }
   ]
 }

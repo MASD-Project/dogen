@@ -3,7 +3,12 @@
     "name": {
       "simple": ""
     },
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "annotation": {
       "yarn.dia.comment": "true",
       "yarn.model_modules": "std_model",
@@ -22,7 +27,12 @@
       "name": {
         "simple": "base"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -36,7 +46,12 @@
       "name": {
         "simple": "builtins"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -92,7 +107,12 @@
       "name": {
         "simple": "class_a"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -113,7 +133,12 @@
       "name": {
         "simple": "class_b"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -157,7 +182,12 @@
       "name": {
         "simple": "class_d"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -201,7 +231,12 @@
       "name": {
         "simple": "class_e"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -245,7 +280,12 @@
       "name": {
         "simple": "class_f"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -271,7 +311,12 @@
       "name": {
         "simple": "class_g"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -297,7 +342,12 @@
       "name": {
         "simple": "class_h"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -317,7 +367,12 @@
       "name": {
         "simple": "class_j"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -343,7 +398,12 @@
       "name": {
         "simple": "class_k"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -357,7 +417,12 @@
       "name": {
         "simple": "derived"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "parents": [
         {
           "simple": "base"
@@ -377,7 +442,12 @@
         "simple": "class_c",
         "internal_modules": "pkg1"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -397,7 +467,12 @@
       "name": {
         "simple": "some_service"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "stereotypes": [
         "handcrafted"
       ],
@@ -414,13 +489,23 @@
       "name": {
         "simple": "pkg1"
       },
-      "meta_type": "module"
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     },
     {
       "name": {
         "simple": "enum_with_std_builtin"
       },
-      "meta_type": "enumeration",
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "yarn.enumeration.underlying_element": "std::int8_t"
       },
@@ -441,7 +526,12 @@
       "name": {
         "simple": "string_primitive"
       },
-      "meta_type": "primitive",
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "documentation": "Test a primitive with an underlying string.\n",
       "annotation": {
         "yarn.primitive.underlying_element": "std::string"

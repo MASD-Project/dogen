@@ -3,7 +3,12 @@
     "name": {
       "simple": ""
     },
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "annotation": {
       "yarn.dia.comment": "true",
       "yarn.model_modules": "lam_model",
@@ -24,7 +29,12 @@
       "name": {
         "simple": "builtins"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -93,7 +103,12 @@
         "simple": "class_in_package",
         "internal_modules": "package1"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -107,7 +122,12 @@
       "name": {
         "simple": "package1"
       },
-      "meta_type": "module"
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     }
   ]
 }

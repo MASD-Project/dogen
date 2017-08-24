@@ -89,13 +89,27 @@ dehydrate_name(const meta_model::name& n, std::ostream& s) {
     uf.insert_quoted(n.simple());
 
     const auto& l(n.location());
+    if (!l.external_modules().empty()) {
+        s << comma_space;
+        uf.insert_quoted("external_modules");
+        s << " : ";
+        uf.insert_quoted(join(l.external_modules(), scope));
+    }
+
+    if (!l.model_modules().empty()) {
+        s << comma_space;
+        uf.insert_quoted("model_modules");
+        s << " : ";
+        uf.insert_quoted(join(l.model_modules(), scope));
+    }
+
     if (!l.internal_modules().empty()) {
         s << comma_space;
         uf.insert_quoted("internal_modules");
         s << " : ";
         uf.insert_quoted(join(l.internal_modules(), scope));
     }
-    s << " } ";
+s << " } ";
 }
 
 void dehydrator::dehydrate_names(const std::list<meta_model::name>& names,
@@ -138,8 +152,7 @@ dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
 
 void dehydrator::
 dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
-    const meta_model::element& e,
-    const std::string& meta_type, std::ostream& s) {
+    const meta_model::element& e, std::ostream& s) {
 
     formatters::utility_formatter uf(s);
     uf.insert_quoted("name");
@@ -147,9 +160,9 @@ dehydrate_element(const boost::optional<annotations::scribble_group>& sg,
     dehydrate_name(e.name(), s);
     s << comma_space;
 
-    uf.insert_quoted("meta_type");
-    s << ": ";
-    uf.insert_quoted(meta_type);
+    uf.insert_quoted("meta_name");
+    s << " : ";
+    dehydrate_name(e.meta_name(), s);
 
     if (!e.documentation().empty()) {
         s << comma_space;
@@ -234,7 +247,7 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
         const auto& o(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, o, "object", s);
+        dehydrate_element(sg, o, s);
         if (!o.parents().empty()) {
             s << comma_space;
             uf.insert_quoted("parents");
@@ -266,7 +279,7 @@ void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
         const auto& c(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, c, "concept", s);
+        dehydrate_element(sg, c, s);
 
         if (!c.refines().empty()) {
             s << comma_space;
@@ -297,7 +310,7 @@ void dehydrator::dehydrate_modules(const bool requires_leading_comma,
         const auto& m(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, m, "module", s);
+        dehydrate_element(sg, m, s);
         s << " }";
 
         output_comma = true;
@@ -318,7 +331,7 @@ void dehydrator::dehydrate_enumerations(const bool requires_leading_comma,
         const auto& e(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, e, "enumeration", s);
+        dehydrate_element(sg, e, s);
         s << comma_space;
 
         /*
@@ -382,7 +395,7 @@ void dehydrator::dehydrate_primitives(const bool requires_leading_comma,
         const auto& p(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, p, "primitive", s);
+        dehydrate_element(sg, p, s);
         s << " }";
         output_comma = true;
     }
@@ -403,7 +416,7 @@ dehydrate_exceptions(const bool requires_leading_comma,
         const auto& e(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, e, "exception", s);
+        dehydrate_element(sg, e, s);
         s << " }";
         output_comma = true;
     }
@@ -419,7 +432,7 @@ std::string dehydrator::dehydrate(const meta_model::exomodel& em) {
     s << " : ";
     s << " { ";
     const auto& rm(em.root_module());
-    dehydrate_element(rm.first, *rm.second, "module", s);
+    dehydrate_element(rm.first, *rm.second, s);
     s << " }";
 
     if (has_elements(em)) {

@@ -69,7 +69,12 @@ const std::string missing_elements("elements");
 
 const std::string trivial_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "documentation" : "a_doc",
         "annotation": {
             "yarn.model_modules": "a_model"
@@ -80,7 +85,12 @@ const std::string trivial_model(R"({
             "name" : {
                 "simple" : "a_type"
             },
-            "meta_type" : "object",
+            "meta_name": {
+              "simple": "object",
+              "external_modules" : "dogen",
+              "model_modules" : "yarn",
+              "internal_modules" : "meta_model"
+            },
             "documentation" : "a_doc"
         }
      ]
@@ -89,7 +99,12 @@ const std::string trivial_model(R"({
 
 const std::string no_documentation_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "annotation": {
             "yarn.model_modules": "a_model"
         }
@@ -99,7 +114,12 @@ const std::string no_documentation_model(R"({
             "name" : {
                 "simple" : "a_type"
             },
-            "meta_type" : "object"
+            "meta_name": {
+              "simple": "object",
+              "external_modules" : "dogen",
+              "model_modules" : "yarn",
+              "internal_modules" : "meta_model"
+            }
         }
      ]
   }
@@ -107,7 +127,12 @@ const std::string no_documentation_model(R"({
 
 const std::string no_name_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "annotation": {
             "yarn.model_modules": "a_model"
         }
@@ -117,7 +142,12 @@ const std::string no_name_model(R"({
             "name" : {
                 "simple" : "a_type"
             },
-            "meta_type" : "object"
+            "meta_name": {
+              "simple": "object",
+              "external_modules" : "dogen",
+              "model_modules" : "yarn",
+              "internal_modules" : "meta_model"
+            }
         }
      ]
   }
@@ -125,14 +155,24 @@ const std::string no_name_model(R"({
 
 const std::string no_type_name_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "annotation": {
             "yarn.model_modules": "a_model"
         }
     },
     "elements" : [
         {
-            "meta_type" : "object"
+            "meta_name": {
+              "simple": "object",
+              "external_modules" : "dogen",
+              "model_modules" : "yarn",
+              "internal_modules" : "meta_model"
+            }
         }
      ]
   }
@@ -140,7 +180,12 @@ const std::string no_type_name_model(R"({
 
 const std::string no_elements_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "annotation": {
             "yarn.model_modules": "a_model"
         }
@@ -150,7 +195,12 @@ const std::string no_elements_model(R"({
 
 const std::string empty_elements_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "annotation": {
             "yarn.model_modules": "a_model"
         }
@@ -161,7 +211,12 @@ const std::string empty_elements_model(R"({
 
 const std::string internal_modules_model(R"({
     "root_module" : {
-        "meta_type": "module",
+        "meta_name": {
+          "simple": "module",
+          "external_modules" : "dogen",
+          "model_modules" : "yarn",
+          "internal_modules" : "meta_model"
+        },
         "annotation": {
             "yarn.model_modules": "a_model"
         }
@@ -172,7 +227,12 @@ const std::string internal_modules_model(R"({
                 "simple" : "a_type",
                 "internal_modules" : "module_1::module_2::module_3"
             },
-            "meta_type" : "object"
+            "meta_name": {
+              "simple": "object",
+              "external_modules" : "dogen",
+              "model_modules" : "yarn",
+              "internal_modules" : "meta_model"
+            }
         }
      ]
   }

@@ -3,7 +3,12 @@
     "name": {
       "simple": ""
     },
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "documentation": "This model tests all settings related to paths and file names.\n",
     "annotation": {
       "yarn.dia.comment": "true",
@@ -12,7 +17,6 @@
       "annotations.profile": "dogen",
       "yarn.input_language": "language_agnostic",
       "yarn.output_language": "csharp",
-      "yarn.output_language": "cpp",
       "quilt.cpp.enabled": "true",
       "quilt.csharp.enabled": "true",
       "quilt.cpp.msbuild.enabled": "false",
@@ -104,7 +108,12 @@
       "name": {
         "simple": "class_0"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -119,7 +128,12 @@
         "simple": "class_1",
         "internal_modules": "package_0"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -134,7 +148,12 @@
         "simple": "class_2",
         "internal_modules": "package_0::package_0_1"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -148,14 +167,24 @@
       "name": {
         "simple": "package_0"
       },
-      "meta_type": "module"
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     },
     {
       "name": {
         "simple": "package_0_1",
         "internal_modules": "package_0"
       },
-      "meta_type": "module"
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     }
   ]
 }

@@ -37,6 +37,7 @@
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
+#include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn.json/types/hydration_error.hpp"
 #include "dogen/yarn.json/types/hydrator.hpp"
 
@@ -64,14 +65,7 @@ const std::string attributes_key("attributes");
 const std::string enumerators_key("enumerators");
 const std::string stereotypes_key("stereotypes");
 
-const std::string meta_type_key("meta_type");
-const std::string meta_type_object_value("object");
-const std::string meta_type_builtin_value("builtin");
-const std::string meta_type_module_value("module");
-const std::string meta_type_enumeration_value("enumeration");
-const std::string meta_type_primitive_value("primitive");
-const std::string meta_type_exception_value("exception");
-const std::string meta_type_concept_value("concept");
+const std::string meta_name_key("meta_name");
 
 const std::string can_be_enumeration_underlier_key(
     "can_be_enumeration_underlier");
@@ -81,6 +75,7 @@ const std::string can_be_primitive_underlier_key(
 const std::string unparsed_type_key("unparsed_type");
 const std::string simple_key("simple");
 const std::string external_modules_key("external_modules");
+const std::string model_modules_key("model_modules");
 const std::string internal_modules_key("internal_modules");
 const std::string annotations_key("annotation");
 
@@ -93,12 +88,13 @@ const std::string object_type_sequence_container_value("sequence_container");
 const std::string invalid_json_file("Failed to parse JSON file: ");
 const std::string invalid_value_in_json("Failed to value in JSON: ");
 const std::string invalid_path("Failed to find JSON path: ");
-const std::string invalid_meta_type("Invalid value for meta type: ");
+const std::string invalid_meta_name("Invalid value for meta name: ");
 const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
 const std::string invalid_object_type("Invalid or unsupported object type: ");
 const std::string duplicate_element_id("Duplicate element id: ");
 const std::string missing_name("JSON element name is mandatory.");
+const std::string missing_meta_name("JSON element name is mandatory.");
 const std::string missing_root_module("Root module not found.");
 
 }
@@ -106,6 +102,17 @@ const std::string missing_root_module("Root module not found.");
 namespace dogen {
 namespace yarn {
 namespace json {
+
+hydrator::hydrator() {
+    helpers::meta_name_factory f;
+    meta_name_object_ = f.make_object_name();
+    meta_name_builtin_ = f.make_builtin_name();
+    meta_name_module_ = f.make_module_name();
+    meta_name_enumeration_ = f.make_enumeration_name();
+    meta_name_primitive_ = f.make_primitive_name();
+    meta_name_exception_ = f.make_exception_name();
+    meta_name_concept_ = f.make_concept_name();
+}
 
 meta_model::object_types hydrator::
 to_object_type(const boost::optional<std::string>& s) const {
@@ -207,6 +214,14 @@ hydrator::read_name(const boost::property_tree::ptree& pt) const {
     yarn::helpers::name_builder b;
     const auto sn(pt.get<std::string>(simple_key));
     b.simple_name(sn);
+
+    const auto em(pt.get<std::string>(external_modules_key, empty));
+    if (!em.empty())
+        b.external_modules(em);
+
+    const auto mm(pt.get<std::string>(model_modules_key, empty));
+    if (!mm.empty())
+        b.model_modules(mm);
 
     const auto im(pt.get<std::string>(internal_modules_key, empty));
     if (!im.empty())
@@ -432,24 +447,32 @@ hydrator::read_concept(const boost::property_tree::ptree& pt) const {
 void hydrator::read_element(const boost::property_tree::ptree& pt,
     meta_model::exomodel& em) const {
 
-    const auto s(pt.get<std::string>(meta_type_key));
-    if (s == meta_type_object_value)
+    auto i(pt.find(meta_name_key));
+    if (i == pt.not_found() || i->second.empty()) {
+        BOOST_LOG_SEV(lg, error) << missing_meta_name;
+        BOOST_THROW_EXCEPTION(hydration_error(missing_meta_name));
+    }
+
+    const auto mn(read_name(i->second));
+    const auto id(mn.id());
+    if (id == meta_name_object_.id())
         em.objects().push_back(read_object(pt));
-    else if (s == meta_type_builtin_value)
+    else if (id == meta_name_builtin_.id())
         em.builtins().push_back(read_builtin(pt));
-    else if (s == meta_type_module_value)
+    else if (id == meta_name_module_.id())
         em.modules().push_back(read_module(pt));
-    else if (s == meta_type_enumeration_value)
+    else if (id == meta_name_enumeration_.id())
         em.enumerations().push_back(read_enumeration(pt));
-    else if (s == meta_type_primitive_value)
+    else if (id == meta_name_primitive_.id())
         em.primitives().push_back(read_primitive(pt));
-    else if (s == meta_type_exception_value)
+    else if (id == meta_name_exception_.id())
         em.exceptions().push_back(read_exception(pt));
-    else if (s == meta_type_concept_value)
+    else if (id == meta_name_concept_.id())
         em.concepts().push_back(read_concept(pt));
     else {
-        BOOST_LOG_SEV(lg, error) << invalid_meta_type << s;
-        BOOST_THROW_EXCEPTION(hydration_error(invalid_meta_type + s));
+        BOOST_LOG_SEV(lg, debug) << meta_name_object_.id();
+        BOOST_LOG_SEV(lg, error) << invalid_meta_name << id;
+        BOOST_THROW_EXCEPTION(hydration_error(invalid_meta_name + id));
     }
 }
 

@@ -1,6 +1,11 @@
 {
   "root_module": {
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "documentation": "Boost Library types.",
     "annotation": {
       "yarn.input_language": "cpp",
@@ -13,7 +18,12 @@
       "name": {
         "simple": "shared_ptr"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "object_type": "smart_pointer",
       "annotation": {
         "quilt.cpp.helper.family": "SmartPointer",
@@ -29,7 +39,12 @@
       "name": {
         "simple": "weak_ptr"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "object_type": "smart_pointer",
       "annotation": {
         "quilt.cpp.helper.family": "SmartPointer",
@@ -45,7 +60,12 @@
       "name": {
         "simple": "scoped_ptr"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "object_type": "smart_pointer",
       "annotation": {
         "quilt.cpp.helper.family": "SmartPointer",
@@ -61,7 +81,12 @@
       "name": {
         "simple": "optional"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.helper.family": "Optional",
         "yarn.type_parameters.count": 1,
@@ -77,7 +102,12 @@
       "name": {
         "simple": "variant"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.helper.family": "BoostVariant",
         "yarn.type_parameters.variable_number_of_parameters": true,
@@ -97,7 +127,12 @@
         "simple": "io_service",
         "internal_modules": "asio"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/io_service.hpp>"
@@ -108,7 +143,12 @@
         "simple": "socket",
         "internal_modules": "asio::ip::tcp"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
@@ -119,7 +159,12 @@
         "simple": "acceptor",
         "internal_modules": "asio::ip::tcp"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.types.class_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>",
         "quilt.cpp.types.primitive_header.primary_inclusion_directive": "<boost/asio/ip/tcp.hpp>"
@@ -130,7 +175,12 @@
         "simple": "path",
         "internal_modules": "filesystem"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.helper.family": "BoostPath",
         "quilt.cpp.streaming.string_conversion_method": "generic_string()",
@@ -148,7 +198,12 @@
         "simple": "date",
         "internal_modules": "gregorian"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "BoostDate",
@@ -168,7 +223,12 @@
         "simple": "ptime",
         "internal_modules": "posix_time"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "BoostPTime",
@@ -188,7 +248,12 @@
         "simple": "time_duration",
         "internal_modules": "posix_time"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "can_be_primitive_underlier": true,
       "annotation": {
         "quilt.cpp.helper.family": "BoostTimeDuration",
@@ -207,7 +272,12 @@
         "simple": "ptree",
         "internal_modules": "property_tree"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "quilt.cpp.helper.family": "BoostPTree",
         "quilt.cpp.aspect.requires_manual_move_constructor": true,

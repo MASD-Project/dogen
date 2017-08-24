@@ -28,6 +28,7 @@
 #include <iosfwd>
 #include <boost/filesystem/path.hpp>
 #include <boost/property_tree/ptree.hpp>
+#include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"
@@ -44,10 +45,7 @@ namespace json {
  */
 class hydrator {
 public:
-    hydrator() = default;
-    hydrator(const hydrator&) = default;
-    hydrator(hydrator&&) = default;
-    ~hydrator() noexcept = default;
+    hydrator();
 
 private:
     /**
@@ -203,6 +201,15 @@ public:
      */
     meta_model::exomodel
     hydrate(const boost::filesystem::path& p) const;
+
+private:
+    meta_model::name meta_name_object_;
+    meta_model::name meta_name_builtin_;
+    meta_model::name meta_name_module_;
+    meta_model::name meta_name_enumeration_;
+    meta_model::name meta_name_primitive_;
+    meta_model::name meta_name_exception_;
+    meta_model::name meta_name_concept_;
 };
 
 } } }

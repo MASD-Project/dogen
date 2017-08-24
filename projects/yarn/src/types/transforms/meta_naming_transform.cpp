@@ -118,6 +118,8 @@ void meta_naming_transform::transform(meta_model::exomodel& em) {
     for (const auto& pair : em.exceptions())
         u(*pair.second);
 
+    u(*em.root_module().second);
+
     BOOST_LOG_SEV(lg, debug) << "Finished meta-naming transform.";
 
 }

@@ -3,6 +3,11 @@
     "name": {
       "simple": ""
     },
-    "meta_type": "module"
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    }
   }
 }

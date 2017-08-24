@@ -3,7 +3,12 @@
     "name": {
       "simple": ""
     },
-    "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "annotation": {
       "yarn.dia.comment": "true",
       "yarn.model_modules": "boost_model",
@@ -22,7 +27,12 @@
       "name": {
         "simple": "class_a"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -36,7 +46,12 @@
       "name": {
         "simple": "class_b"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -86,7 +101,12 @@
       "name": {
         "simple": "class_base"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -100,7 +120,12 @@
       "name": {
         "simple": "class_d"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -132,7 +157,12 @@
       "name": {
         "simple": "class_derived"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "parents": [
         {
           "simple": "class_base"
@@ -151,7 +181,12 @@
       "name": {
         "simple": "class_e"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -183,7 +218,12 @@
       "name": {
         "simple": "class_f"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -227,7 +267,12 @@
       "name": {
         "simple": "class_g"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -247,7 +292,12 @@
       "name": {
         "simple": "class_h"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -261,7 +311,12 @@
       "name": {
         "simple": "class_j"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -288,7 +343,12 @@
         "simple": "class_c",
         "internal_modules": "pkg1"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "attributes": [
         {
           "name": {
@@ -308,7 +368,12 @@
       "name": {
         "simple": "some_service"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "stereotypes": [
         "handcrafted"
       ],
@@ -325,13 +390,23 @@
       "name": {
         "simple": "pkg1"
       },
-      "meta_type": "module"
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
     },
     {
       "name": {
         "simple": "date_primitive"
       },
-      "meta_type": "primitive",
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "documentation": "Test a primitive with an underlying time_duration.\n",
       "annotation": {
         "yarn.primitive.underlying_element": "boost::gregorian::date"
@@ -341,7 +416,12 @@
       "name": {
         "simple": "ptime_primitive"
       },
-      "meta_type": "primitive",
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "documentation": "Test a primitive with an underlying ptime.\n",
       "annotation": {
         "yarn.primitive.underlying_element": "boost::posix_time::ptime"
@@ -351,7 +431,12 @@
       "name": {
         "simple": "time_duration_primitive"
       },
-      "meta_type": "primitive",
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "documentation": "Test a primitive with an underlying time_duration.\n",
       "annotation": {
         "yarn.primitive.underlying_element": "boost::posix_time::time_duration"

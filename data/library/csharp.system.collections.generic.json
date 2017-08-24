@@ -1,6 +1,12 @@
 {
   "root_module": {
     "meta_type": "module",
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
     "documentation": "Basic generic collection types.",
     "annotation": {
       "yarn.input_language": "csharp",
@@ -13,7 +19,12 @@
       "name": {
         "simple": "IEnumerable"
       },
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "yarn.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
@@ -29,7 +40,12 @@
           "simple": "IEnumerable"
         }
       ],
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "yarn.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
@@ -45,7 +61,12 @@
           "simple": "ICollection"
         }
       ],
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "yarn.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
@@ -61,7 +82,12 @@
           "simple": "ICollection"
         }
       ],
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "yarn.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
@@ -77,7 +103,12 @@
           "simple": "ICollection"
         }
       ],
-      "meta_type": "object",
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
       "annotation": {
         "yarn.type_parameters.count": 1,
         "quilt.csharp.aspect.requires_static_reference_equals": true,
