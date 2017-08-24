@@ -33,8 +33,8 @@ namespace transforms {
 
 class exomodel_to_exomodel_chain final {
 public:
-    static void transform(const boost::filesystem::path& src,
-        const boost::filesystem::path& dst);
+    static void transform(const boost::filesystem::path& src_path,
+        const boost::filesystem::path& dst_path);
 };
 
 } } }
