@@ -14,29 +14,30 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-22 Tue 02:04]
+#+CAPTION: Clock summary at [2017-08-24 Thu 15:52]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *34:10* |       |       | 100.0 |
+| *Total time*                                                                | *36:11* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 34:10   |       |       | 100.0 |
-| Active                                                                      |         | 34:10 |       | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.7 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.7 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  18.6 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   8.3 |
-| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.4 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.2 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  36.1 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   6.4 |
-| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.9 |
+| Stories                                                                     | 36:11   |       |       | 100.0 |
+| Active                                                                      |         | 36:11 |       | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.6 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  17.6 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   7.8 |
+| COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.2 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   4.0 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  34.1 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   6.1 |
+| COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.8 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.7 |
-| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   3.0 |
-| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.3 |
-| COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.3 |
-| COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   5.3 |
-| COMPLETED Add validation to tailor transforms                               |         |       |  0:20 |   1.0 |
+| COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   2.8 |
+| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   5.0 |
+| COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.2 |
+| COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   5.0 |
+| COMPLETED Add validation to tailor transforms                               |         |       |  0:20 |   0.9 |
+| STARTED Rename =meta_type= in JSON                                          |         |       |  2:01 |   5.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -433,10 +434,29 @@ Tasks:
 Check that the transforms support "from" and "to" for the user
 requested types.
 
-*** Rename =meta_type= in JSON                                        :story:
+*** STARTED Rename =meta_type= in JSON                                :story:
+    CLOCK: [2017-08-24 Thu 15:19]--[2017-08-24 Thu 15:52] =>  0:33
+    CLOCK: [2017-08-24 Thu 14:50]--[2017-08-24 Thu 15:18] =>  0:28
+    CLOCK: [2017-08-24 Thu 10:03]--[2017-08-24 Thu 11:03] =>  1:00
 
 Now we have meta-names we should use the same terminology for JSON
 documents.
+
+Notes:
+
+- the meta-name transform must be applied at the exomodel
+  level. Otherwise we are generating exomodels without setting their element
+  meta-names correctly.
+- in addition, we cannot call the entire exomodel generation chain in
+  tailor, because that then pulls in the context generation and so
+  forth. It also applies the annotations and naming transforms which
+  we don't require for tailor. Instead we should just apply the
+  meta-name transform manually. To make life easier we could create a
+  exomodel to exomodel transform chain in yarn and use that in tailor.
+- annoyingly, the exomodel registrar ownership now becomes a bit
+  messy. We have to go to the exomodel generation chain to get the
+  registrar, but we don't really use it for anything else. However,
+  this is no worse than tailor at present.
 
 *** Use extension matching for exogenous models                       :story:
 
