@@ -33,7 +33,7 @@
 #include <boost/optional.hpp>
 #include "dogen/yarn.dia/types/dia_object_types.hpp"
 #include "dogen/yarn.dia/types/processed_comment.hpp"
-#include "dogen/yarn.dia/types/yarn_object_types.hpp"
+#include "dogen/yarn.dia/types/yarn_element_types.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_fwd_ser.hpp"
 
@@ -60,7 +60,7 @@ public:
         const std::string& id,
         const std::string& name,
         const dogen::yarn::dia::dia_object_types dia_object_type,
-        const dogen::yarn::dia::yarn_object_types yarn_object_type,
+        const dogen::yarn::dia::yarn_element_types yarn_element_type,
         const std::vector<std::string>& stereotypes,
         const dogen::yarn::dia::processed_comment& comment,
         const std::string& child_node_id,
@@ -103,8 +103,8 @@ public:
     void dia_object_type(const dogen::yarn::dia::dia_object_types v);
     /**@}*/
 
-    dogen::yarn::dia::yarn_object_types yarn_object_type() const;
-    void yarn_object_type(const dogen::yarn::dia::yarn_object_types v);
+    dogen::yarn::dia::yarn_element_types yarn_element_type() const;
+    void yarn_element_type(const dogen::yarn::dia::yarn_element_types v);
 
     /**
      * @brief Stereotypes for this object that were not consumed by yarn.dia.
@@ -172,7 +172,7 @@ private:
     std::string id_;
     std::string name_;
     dogen::yarn::dia::dia_object_types dia_object_type_;
-    dogen::yarn::dia::yarn_object_types yarn_object_type_;
+    dogen::yarn::dia::yarn_element_types yarn_element_type_;
     std::vector<std::string> stereotypes_;
     dogen::yarn::dia::processed_comment comment_;
     std::string child_node_id_;

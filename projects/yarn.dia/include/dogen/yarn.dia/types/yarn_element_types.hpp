@@ -18,21 +18,26 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_IO_YARN_OBJECT_TYPES_IO_HPP
-#define DOGEN_YARN_DIA_IO_YARN_OBJECT_TYPES_IO_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_YARN_ELEMENT_TYPES_HPP
+#define DOGEN_YARN_DIA_TYPES_YARN_ELEMENT_TYPES_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <iosfwd>
-#include "dogen/yarn.dia/types/yarn_object_types.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const yarn_object_types& v);
+enum class yarn_element_types : unsigned int {
+    invalid = 0, ///< Represents an uninitialised enum
+    not_applicable = 1,
+    enumeration = 2,
+    exception = 3,
+    object = 4,
+    concept = 5,
+    primitive = 6
+};
 
 } } }
 

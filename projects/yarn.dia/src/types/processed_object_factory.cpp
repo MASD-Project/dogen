@@ -280,8 +280,8 @@ void  processed_object_factory::parse_as_class_attributes(
 }
 
 void processed_object_factory::
-require_yarn_type_not_set(const yarn_object_types yot) {
-    if (yot == yarn_object_types::invalid)
+require_yarn_type_not_set(const yarn_element_types yet) {
+    if (yet == yarn_element_types::invalid)
         return;
 
     BOOST_LOG_SEV(lg, warn) << too_many_yarn_types;
@@ -297,17 +297,17 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
 
     for (const auto& stereotype : stereotypes) {
         if (stereotype == enumeration) {
-            require_yarn_type_not_set(po.yarn_object_type());
-            po.yarn_object_type(yarn_object_types::enumeration);
+            require_yarn_type_not_set(po.yarn_element_type());
+            po.yarn_element_type(yarn_element_types::enumeration);
         } else if (stereotype == primitive) {
-            require_yarn_type_not_set(po.yarn_object_type());
-            po.yarn_object_type(yarn_object_types::primitive);
+            require_yarn_type_not_set(po.yarn_element_type());
+            po.yarn_element_type(yarn_element_types::primitive);
         } else if (stereotype == exception) {
-            require_yarn_type_not_set(po.yarn_object_type());
-            po.yarn_object_type(yarn_object_types::exception);
+            require_yarn_type_not_set(po.yarn_element_type());
+            po.yarn_element_type(yarn_element_types::exception);
         } else if (stereotype == concept) {
-            require_yarn_type_not_set(po.yarn_object_type());
-            po.yarn_object_type(yarn_object_types::concept);
+            require_yarn_type_not_set(po.yarn_element_type());
+            po.yarn_element_type(yarn_element_types::concept);
         } else
             po.stereotypes().push_back(stereotype);
     }
@@ -334,7 +334,7 @@ setup_yarn_object_type(processed_object& po) {
     /*
      * If its already setup there's nothing for us to do.
      */
-    if (po.yarn_object_type() != yarn_object_types::invalid)
+    if (po.yarn_element_type() != yarn_element_types::invalid)
         return;
 
     /*
@@ -342,9 +342,9 @@ setup_yarn_object_type(processed_object& po) {
      * don't have a mapping.
      */
     if (po.dia_object_type() == dia_object_types::uml_class)
-        po.yarn_object_type(yarn_object_types::object);
+        po.yarn_element_type(yarn_element_types::object);
     else
-        po.yarn_object_type(yarn_object_types::not_applicable);
+        po.yarn_element_type(yarn_element_types::not_applicable);
 }
 
 processed_object processed_object_factory::make(const dogen::dia::object& o) {

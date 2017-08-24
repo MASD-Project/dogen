@@ -18,27 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_YARN_OBJECT_TYPES_HPP
-#define DOGEN_YARN_DIA_TYPES_YARN_OBJECT_TYPES_HPP
+#ifndef DOGEN_YARN_DIA_SERIALIZATION_YARN_ELEMENT_TYPES_SER_HPP
+#define DOGEN_YARN_DIA_SERIALIZATION_YARN_ELEMENT_TYPES_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-namespace dogen {
-namespace yarn {
-namespace dia {
+#include <boost/serialization/nvp.hpp>
+#include "dogen/yarn.dia/types/yarn_element_types.hpp"
 
-enum class yarn_object_types : unsigned int {
-    invalid = 0, ///< Represents an uninitialised enum
-    not_applicable = 1,
-    enumeration = 2,
-    exception = 3,
-    object = 4,
-    concept = 5,
-    primitive = 6
-};
-
-} } }
+template<class Archive>
+void serialize(Archive& ar, dogen::yarn::dia::yarn_element_types& v, unsigned int /*version*/){
+    using boost::serialization::make_nvp;
+    ar & make_nvp("yarn_element_types", v);
+}
 
 #endif

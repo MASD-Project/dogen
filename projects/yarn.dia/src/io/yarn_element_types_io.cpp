@@ -21,40 +21,40 @@
 #include <string>
 #include <ostream>
 #include <stdexcept>
-#include "dogen/yarn.dia/io/yarn_object_types_io.hpp"
+#include "dogen/yarn.dia/io/yarn_element_types_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-std::ostream& operator<<(std::ostream& s, const yarn_object_types& v) {
-    s << "{ " << "\"__type__\": " << "\"yarn_object_types\", " << "\"value\": ";
+std::ostream& operator<<(std::ostream& s, const yarn_element_types& v) {
+    s << "{ " << "\"__type__\": " << "\"yarn_element_types\", " << "\"value\": ";
 
     std::string attr;
     switch (v) {
-    case yarn_object_types::invalid:
+    case yarn_element_types::invalid:
         attr = "\"invalid\"";
         break;
-    case yarn_object_types::not_applicable:
+    case yarn_element_types::not_applicable:
         attr = "\"not_applicable\"";
         break;
-    case yarn_object_types::enumeration:
+    case yarn_element_types::enumeration:
         attr = "\"enumeration\"";
         break;
-    case yarn_object_types::exception:
+    case yarn_element_types::exception:
         attr = "\"exception\"";
         break;
-    case yarn_object_types::object:
+    case yarn_element_types::object:
         attr = "\"object\"";
         break;
-    case yarn_object_types::concept:
+    case yarn_element_types::concept:
         attr = "\"concept\"";
         break;
-    case yarn_object_types::primitive:
+    case yarn_element_types::primitive:
         attr = "\"primitive\"";
         break;
     default:
-        throw std::invalid_argument("Invalid value for yarn_object_types");
+        throw std::invalid_argument("Invalid value for yarn_element_types");
     }
     s << attr << " }";
     return s;

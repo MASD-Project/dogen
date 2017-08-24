@@ -77,7 +77,7 @@ private:
     /**
      * @brief Throws if the yarn type has already been setup.
      */
-    static void require_yarn_type_not_set(const yarn_object_types yot);
+    static void require_yarn_type_not_set(const yarn_element_types yet);
 
     /**
      * @brief Processes the raw Dia stereotypes.

@@ -14,30 +14,31 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-24 Thu 20:18]
+#+CAPTION: Clock summary at [2017-08-24 Thu 20:39]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *37:39* |       |       | 100.0 |
+| *Total time*                                                                | *37:59* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 37:39   |       |       | 100.0 |
-| Active                                                                      |         | 37:39 |       | 100.0 |
+| Stories                                                                     | 37:59   |       |       | 100.0 |
+| Active                                                                      |         | 37:59 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.5 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.5 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  16.9 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  16.8 |
 | COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   7.5 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.1 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   3.9 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  32.8 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   3.8 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  32.5 |
 | COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   5.8 |
 | COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.7 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.7 |
 | COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   2.7 |
 | COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   4.8 |
-| COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.2 |
-| COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   4.8 |
+| COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.1 |
+| COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   4.7 |
 | COMPLETED Add validation to tailor transforms                               |         |       |  0:20 |   0.9 |
-| COMPLETED Rename =meta_type= in JSON                                        |         |       |  3:29 |   9.3 |
+| COMPLETED Rename =meta_type= in JSON                                        |         |       |  3:29 |   9.2 |
+| COMPLETED Rename yarn object types in yarn.dia                              |         |       |  0:20 |   0.9 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -466,6 +467,13 @@ Notes:
 - we seem to have a "naming" transform and a "meta-name"
   transform. They should be named consistently.
 
+*** COMPLETED Rename yarn object types in yarn.dia                    :story:
+    CLOSED: [2017-08-24 Thu 20:39]
+    CLOCK: [2017-08-24 Thu 20:19]--[2017-08-24 Thu 20:39] =>  0:20
+
+These are not really object types. We could name them perhaps element
+types?
+
 *** Use extension matching for exogenous models                       :story:
 
 Now that we no longer support upsilon we can revert to the simplistic
@@ -480,11 +488,6 @@ confusion between "exogenous" and "external". We should rename it to
 whereas all other transforms are "static" - known at compile
 time. This also means we can now have dynamic transforms in yarn. Not
 an ideal name, but ever so slightly better than "external transform".
-
-*** Rename yarn object types in yarn.dia                              :story:
-
-These are not really object types. We could name them perhaps element
-types?
 
 *** Rename transformers to adapters                                   :story:
 
@@ -531,7 +534,7 @@ During the exogenous model work, yarn's =Nameable= concept moved
 position. We need to look at how the parent changes were done to see
 if they are stable or not.
 
-*** Enable kernel directories trait is on quilt                       :story:
+*** Enable kernel directories trait is on quilqt                      :story:
 
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.

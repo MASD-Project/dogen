@@ -52,8 +52,8 @@ void validator::validate_yarn(const processed_object& po) {
      * We only have validation rules for yarn objects and primitives;
      * if we're neither, there's nothing to do.
      */
-    if (po.yarn_object_type() == yarn_object_types::object ||
-        po.yarn_object_type() == yarn_object_types::primitive)
+    if (po.yarn_element_type() == yarn_element_types::object ||
+        po.yarn_element_type() == yarn_element_types::primitive)
         return;
 
     /*

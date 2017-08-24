@@ -43,7 +43,7 @@ const std::string invalid_stereotypes("Stereotypes can only be used with yarn");
 using dogen::utility::test::contains_checker;
 using dogen::yarn::dia::validation_error;
 using dogen::yarn::dia::dia_object_types;
-using dogen::yarn::dia::yarn_object_types;
+using dogen::yarn::dia::yarn_element_types;
 
 BOOST_AUTO_TEST_SUITE(validator_tests)
 
@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
     dogen::yarn::dia::validator v;
     dogen::yarn::dia::processed_object po0;
     po0.dia_object_type(dia_object_types::uml_class);
-    po0.yarn_object_type(yarn_object_types::object);
+    po0.yarn_element_type(yarn_element_types::object);
     BOOST_LOG_SEV(lg, debug) << "input po0: " << po0;
 
     v.validate(po0);
@@ -123,7 +123,7 @@ BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
 
     dogen::yarn::dia::processed_object po1;
     po1.dia_object_type(dia_object_types::uml_class);
-    po1.yarn_object_type(yarn_object_types::enumeration);
+    po1.yarn_element_type(yarn_element_types::enumeration);
     BOOST_LOG_SEV(lg, debug) << "input po1: " << po1;
 
     v.validate(po1);
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(setting_one_yarn_type_validates) {
 
     dogen::yarn::dia::processed_object po2;
     po2.dia_object_type(dia_object_types::uml_class);
-    po2.yarn_object_type(yarn_object_types::exception);
+    po2.yarn_element_type(yarn_element_types::exception);
     BOOST_LOG_SEV(lg, debug) << "input po2: " << po2;
 
     v.validate(po2);

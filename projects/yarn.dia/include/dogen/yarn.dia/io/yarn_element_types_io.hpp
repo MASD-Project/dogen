@@ -18,20 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_SERIALIZATION_YARN_OBJECT_TYPES_SER_HPP
-#define DOGEN_YARN_DIA_SERIALIZATION_YARN_OBJECT_TYPES_SER_HPP
+#ifndef DOGEN_YARN_DIA_IO_YARN_ELEMENT_TYPES_IO_HPP
+#define DOGEN_YARN_DIA_IO_YARN_ELEMENT_TYPES_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/nvp.hpp>
-#include "dogen/yarn.dia/types/yarn_object_types.hpp"
+#include <iosfwd>
+#include "dogen/yarn.dia/types/yarn_element_types.hpp"
 
-template<class Archive>
-void serialize(Archive& ar, dogen::yarn::dia::yarn_object_types& v, unsigned int /*version*/){
-    using boost::serialization::make_nvp;
-    ar & make_nvp("yarn_object_types", v);
-}
+namespace dogen {
+namespace yarn {
+namespace dia {
+
+std::ostream& operator<<(std::ostream& s, const yarn_element_types& v);
+
+} } }
 
 #endif

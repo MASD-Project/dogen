@@ -35,7 +35,7 @@
 #include "dogen/yarn.dia/serialization/dia_object_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_object_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_comment_ser.hpp"
-#include "dogen/yarn.dia/serialization/yarn_object_types_ser.hpp"
+#include "dogen/yarn.dia/serialization/yarn_element_types_ser.hpp"
 #include "dogen/yarn.dia/serialization/processed_attribute_ser.hpp"
 
 namespace boost {
@@ -48,7 +48,7 @@ void save(Archive& ar,
     ar << make_nvp("id", v.id_);
     ar << make_nvp("name", v.name_);
     ar << make_nvp("dia_object_type", v.dia_object_type_);
-    ar << make_nvp("yarn_object_type", v.yarn_object_type_);
+    ar << make_nvp("yarn_element_type", v.yarn_element_type_);
     ar << make_nvp("stereotypes", v.stereotypes_);
     ar << make_nvp("comment", v.comment_);
     ar << make_nvp("child_node_id", v.child_node_id_);
@@ -63,7 +63,7 @@ void load(Archive& ar,
     ar >> make_nvp("id", v.id_);
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("dia_object_type", v.dia_object_type_);
-    ar >> make_nvp("yarn_object_type", v.yarn_object_type_);
+    ar >> make_nvp("yarn_element_type", v.yarn_element_type_);
     ar >> make_nvp("stereotypes", v.stereotypes_);
     ar >> make_nvp("comment", v.comment_);
     ar >> make_nvp("child_node_id", v.child_node_id_);

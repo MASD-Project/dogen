@@ -170,17 +170,17 @@ void builder::add(const processed_object& po) {
      * them we must also resolve the dia object ID containment into
      * yarn names.
      */
-    switch(po.yarn_object_type()) {
-    case yarn_object_types::enumeration:
+    switch(po.yarn_element_type()) {
+    case yarn_element_types::enumeration:
         model_.enumerations().push_back(t.to_enumeration(po));
         break;
-    case yarn_object_types::primitive:
+    case yarn_element_types::primitive:
         model_.primitives().push_back(t.to_primitive(po));
         break;
-    case yarn_object_types::exception:
+    case yarn_element_types::exception:
         model_.exceptions().push_back(t.to_exception(po));
         break;
-    case yarn_object_types::concept: {
+    case yarn_element_types::concept: {
         const auto pair(t.to_concept(po));
         update_parentage(po.id(), pair.second->name());
         model_.concepts().push_back(pair);

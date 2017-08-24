@@ -23,7 +23,7 @@
 #include "dogen/yarn.dia/io/dia_object_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/processed_comment_io.hpp"
-#include "dogen/yarn.dia/io/yarn_object_types_io.hpp"
+#include "dogen/yarn.dia/io/yarn_element_types_io.hpp"
 #include "dogen/yarn.dia/io/processed_attribute_io.hpp"
 
 inline std::string tidy_up_string(std::string s) {
@@ -100,7 +100,7 @@ std::ostream& operator<<(std::ostream& s, const processed_object& v) {
       << "\"id\": " << "\"" << tidy_up_string(v.id()) << "\"" << ", "
       << "\"name\": " << "\"" << tidy_up_string(v.name()) << "\"" << ", "
       << "\"dia_object_type\": " << v.dia_object_type() << ", "
-      << "\"yarn_object_type\": " << v.yarn_object_type() << ", "
+      << "\"yarn_element_type\": " << v.yarn_element_type() << ", "
       << "\"stereotypes\": " << v.stereotypes() << ", "
       << "\"comment\": " << v.comment() << ", "
       << "\"child_node_id\": " << "\"" << tidy_up_string(v.child_node_id()) << "\"" << ", "
