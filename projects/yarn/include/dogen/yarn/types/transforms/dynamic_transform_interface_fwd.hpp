@@ -18,20 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_EXTERNAL_TRANSFORM_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_EXTERNAL_TRANSFORM_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_FWD_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 namespace dogen {
-namespace quilt {
-namespace csharp {
-namespace fabric {
+namespace yarn {
+namespace transforms {
 
-class external_transform;
+class dynamic_transform_interface;
 
-} } } }
+} } }
 
 #endif

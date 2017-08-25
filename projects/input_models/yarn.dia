@@ -18332,19 +18332,19 @@ space.#</dia:string>
         <dia:point val="-155,128"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-155.05,127.95;-134.815,132.45"/>
+        <dia:rectangle val="-155.05,127.95;-135.2,132.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-155,128"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.134999999999998"/>
+        <dia:real val="19.75"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#external_transforms_chain#</dia:string>
+        <dia:string>#dynamic_transforms_chain#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -18440,7 +18440,7 @@ space.#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#static external_transform_registrar&amp; #</dia:string>
+            <dia:string>#static dynamic_transform_registrar&amp; #</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -18551,7 +18551,7 @@ space.#</dia:string>
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#external_transform_interface#</dia:string>
+        <dia:string>#dynamic_transform_interface#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -18728,7 +18728,7 @@ space.#</dia:string>
         <dia:real val="5.2000000000000002"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#external_transform_registrar#</dia:string>
+        <dia:string>#dynamic_transform_registrar#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -19188,7 +19188,7 @@ space.#</dia:string>
         <dia:point val="-161.197,109.802"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-161.947,109.052;-144.733,128.8"/>
+        <dia:rectangle val="-161.947,109.052;-144.925,128.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -19196,8 +19196,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-161.197,109.802"/>
         <dia:point val="-161.197,123.202"/>
-        <dia:point val="-144.933,123.202"/>
-        <dia:point val="-144.933,128"/>
+        <dia:point val="-145.125,123.202"/>
+        <dia:point val="-145.125,128"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -19473,17 +19473,17 @@ space.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-134.865,132.4"/>
+        <dia:point val="-135.25,132.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-135.615,131.65;-128.414,142.002"/>
+        <dia:rectangle val="-136,131.65;-128.415,142.002"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-134.865,132.4"/>
-        <dia:point val="-134.865,137.202"/>
+        <dia:point val="-135.25,132.4"/>
+        <dia:point val="-135.25,137.202"/>
         <dia:point val="-128.614,137.202"/>
         <dia:point val="-128.614,141.202"/>
       </dia:attribute>

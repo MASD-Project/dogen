@@ -18,40 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_TRANSFORM_HPP
-#define DOGEN_QUILT_CPP_TYPES_FABRIC_EXTERNAL_TRANSFORM_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FABRIC_DYNAMIC_TRANSFORM_FWD_HPP
+#define DOGEN_QUILT_CPP_TYPES_FABRIC_DYNAMIC_TRANSFORM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include "dogen/yarn/types/transforms/context_fwd.hpp"
-#include "dogen/yarn/types/transforms/external_transform_interface.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace fabric {
 
-class external_transform final :
-        public yarn::transforms::external_transform_interface {
-private:
-    bool requires_expansion(
-        const yarn::meta_model::endomodel& im) const;
-
-    void expand_injection(const annotations::type_repository& atrp,
-        yarn::meta_model::endomodel& im) const;
-
-    void expand_decoration(
-        const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::meta_model::endomodel& im) const;
-
-public:
-    std::string id() const override;
-    void transform(const yarn::transforms::context& ctx,
-        const dogen::formatters::decoration_properties_factory& dpf,
-        yarn::meta_model::endomodel& im) const override;
-};
+class dynamic_transform;
 
 } } } }
 

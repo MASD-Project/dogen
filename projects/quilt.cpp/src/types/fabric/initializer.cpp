@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/quilt.cpp/types/fabric/external_transform.hpp"
-#include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+#include "dogen/quilt.cpp/types/fabric/dynamic_transform.hpp"
+#include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen/quilt.cpp/types/fabric/initializer.hpp"
 
 namespace dogen {
@@ -28,7 +28,7 @@ namespace cpp {
 namespace fabric {
 
 void initializer::initialize() {
-    yarn::transforms::register_external_transform<external_transform>();
+    yarn::transforms::register_dynamic_transform<dynamic_transform>();
 }
 
 } } } }

@@ -14,32 +14,33 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-25 Fri 09:43]
+#+CAPTION: Clock summary at [2017-08-25 Fri 10:01]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *38:51* |       |       | 100.0 |
+| *Total time*                                                                | *39:08* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 38:51   |       |       | 100.0 |
-| Active                                                                      |         | 38:51 |       | 100.0 |
+| Stories                                                                     | 39:08   |       |       | 100.0 |
+| Active                                                                      |         | 39:08 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.5 |
 | STARTED Sprint and product backlog grooming                                 |         |       |  0:56 |   2.4 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  16.4 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   7.3 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  16.3 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   7.2 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   3.0 |
 | COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   3.7 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  31.7 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   5.7 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  31.5 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   5.6 |
 | COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.7 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.6 |
 | COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   2.6 |
-| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   4.7 |
+| COMPLETED Rename intermediate model to endomodel                            |         |       |  1:49 |   4.6 |
 | COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.1 |
 | COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   4.6 |
 | COMPLETED Add validation to tailor transforms                               |         |       |  0:20 |   0.9 |
-| COMPLETED Rename =meta_type= in JSON                                        |         |       |  3:29 |   9.0 |
+| COMPLETED Rename =meta_type= in JSON                                        |         |       |  3:29 |   8.9 |
 | COMPLETED Rename yarn object types in yarn.dia                              |         |       |  0:20 |   0.9 |
 | COMPLETED Use extension matching for exogenous models                       |         |       |  0:52 |   2.2 |
+| COMPLETED Rename external transform                                         |         |       |  0:17 |   0.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -483,7 +484,9 @@ Now that we no longer support upsilon we can revert to the simplistic
 approach of matching the file extension to find the exogenous model
 transformer.
 
-*** Rename external transform                                         :story:
+*** COMPLETED Rename external transform                               :story:
+    CLOSED: [2017-08-25 Fri 10:01]
+    CLOCK: [2017-08-25 Fri 09:44]--[2017-08-25 Fri 10:01] =>  0:17
 
 The name "external transform" was always a quick hack, due to the
 confusion between "exogenous" and "external". We should rename it to

@@ -18,18 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXTERNAL_TRANSFORM_REGISTRAR_FWD_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXTERNAL_TRANSFORM_REGISTRAR_FWD_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_DYNAMIC_TRANSFORM_INTERFACE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <string>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/formatters/types/decoration_properties_factory.hpp"
+#include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/transforms/context_fwd.hpp"
+
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-class external_transform_registrar;
+class dynamic_transform_interface {
+public:
+    dynamic_transform_interface() = default;
+    dynamic_transform_interface(const dynamic_transform_interface&) = delete;
+    dynamic_transform_interface(dynamic_transform_interface&&) = default;
+    virtual ~dynamic_transform_interface() noexcept = 0;
+
+public:
+    virtual std::string id() const = 0;
+    virtual void transform(const context& ctx,
+        const dogen::formatters::decoration_properties_factory& dpf,
+        meta_model::endomodel& im) const = 0;
+};
 
 } } }
 

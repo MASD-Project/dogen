@@ -24,12 +24,12 @@
 #include "dogen/formatters/types/decoration_properties_factory.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+#include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.transforms.external_transforms_chain"));
+auto lg(logger_factory("yarn.transforms.dynamic_transforms_chain"));
 
 }
 
@@ -37,18 +37,18 @@ namespace dogen {
 namespace yarn {
 namespace transforms {
 
-std::shared_ptr<external_transform_registrar>
-external_transforms_chain::registrar_;
+std::shared_ptr<dynamic_transform_registrar>
+dynamic_transforms_chain::registrar_;
 
-external_transform_registrar& external_transforms_chain::registrar() {
+dynamic_transform_registrar& dynamic_transforms_chain::registrar() {
     if (!registrar_)
-        registrar_ = std::make_shared<external_transform_registrar>();
+        registrar_ = std::make_shared<dynamic_transform_registrar>();
 
     return *registrar_;
 }
 
 dogen::formatters::decoration_properties_factory
-external_transforms_chain::create_decoration_properties_factory(
+dynamic_transforms_chain::create_decoration_properties_factory(
     const context& ctx, const annotations::annotation& ra) {
     using dogen::formatters::decoration_properties_factory;
     decoration_properties_factory
@@ -56,7 +56,7 @@ external_transforms_chain::create_decoration_properties_factory(
     return r;
 }
 
-void external_transforms_chain::
+void dynamic_transforms_chain::
 transform(const context& ctx, meta_model::endomodel& im) {
     const auto id(im.name().id());
     BOOST_LOG_SEV(lg, debug) << "Performing external transforms on: " << id;
@@ -66,8 +66,8 @@ transform(const context& ctx, meta_model::endomodel& im) {
 
     const auto& ra(im.root_module()->annotation());
     const auto dpf(create_decoration_properties_factory(ctx, ra));
-    for (const auto& et : rg.external_transforms())
-        et->transform(ctx, dpf, im);
+    for (const auto& dt : rg.dynamic_transforms())
+        dt->transform(ctx, dpf, im);
 
     BOOST_LOG_SEV(lg, debug) << "Finished performing external transforms.";
 }

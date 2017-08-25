@@ -32,7 +32,7 @@
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
 #include "dogen/yarn/types/transforms/associations_transform.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
-#include "dogen/yarn/types/transforms/external_transforms_chain.hpp"
+#include "dogen/yarn/types/transforms/dynamic_transforms_chain.hpp"
 #include "dogen/yarn/types/transforms/enablement_transform.hpp"
 #include "dogen/yarn/types/transforms/artefact_properties_transform.hpp"
 #include "dogen/yarn/types/transforms/meta_naming_transform.hpp"
@@ -127,10 +127,10 @@ transform(const context& ctx, meta_model::endomodel& im) {
     generability_transform::transform(im);
 
     /*
-     * We can perform external expansion last as no one should be
+     * We can perform dynamic expansion last as no one should be
      * relying on these expansions. These are kernel specific.
      */
-    external_transforms_chain::transform(ctx, im);
+    dynamic_transforms_chain::transform(ctx, im);
 
     /*
      * Expand the artefact properties against the suitable archetype

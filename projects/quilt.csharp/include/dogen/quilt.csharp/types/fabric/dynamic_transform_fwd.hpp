@@ -18,49 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_EXTERNAL_TRANSFORM_REGISTRAR_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_EXTERNAL_TRANSFORM_REGISTRAR_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FABRIC_DYNAMIC_TRANSFORM_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FABRIC_DYNAMIC_TRANSFORM_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include <memory>
-#include "dogen/yarn/types/transforms/external_transform_interface.hpp"
-
 namespace dogen {
-namespace yarn {
-namespace transforms {
+namespace quilt {
+namespace csharp {
+namespace fabric {
 
-class external_transform_registrar final {
-public:
-    /*
-     * @brief Registers a given external transform.
-     *
-     * @pre Pointer must not be null.
-     */
-    void register_external_transform(
-        std::shared_ptr<const external_transform_interface> t);
+class dynamic_transform;
 
-public:
-    /**
-     * @brief Ensures the registrar is ready to be used.
-     */
-    void validate() const;
-
-public:
-    /**
-     * @brief Returns all of the registered external transforms.
-     */
-    std::list<std::shared_ptr<const external_transform_interface>>
-    external_transforms() const;
-
-private:
-    std::list<std::shared_ptr<const external_transform_interface>>
-    external_transforms_;
-};
-
-} } }
+} } } }
 
 #endif

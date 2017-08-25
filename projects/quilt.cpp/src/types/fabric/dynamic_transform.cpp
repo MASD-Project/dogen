@@ -23,13 +23,13 @@
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
-#include "dogen/quilt.csharp/types/fabric/injector.hpp"
-#include "dogen/quilt.csharp/types/fabric/decoration_expander.hpp"
-#include "dogen/quilt.csharp/types/fabric/external_transform.hpp"
+#include "dogen/quilt.cpp/types/fabric/injector.hpp"
+#include "dogen/quilt.cpp/types/fabric/decoration_expander.hpp"
+#include "dogen/quilt.cpp/types/fabric/dynamic_transform.hpp"
 
 namespace {
 
-const std::string id("quilt.csharp.fabric.external_transform");
+const std::string id("quilt.cpp.fabric.dynamic_transform");
 
 using namespace dogen::utility::log;
 static logger lg(logger_factory(id));
@@ -41,10 +41,10 @@ const std::string too_many_output_languages(
 
 namespace dogen {
 namespace quilt {
-namespace csharp {
+namespace cpp {
 namespace fabric {
 
-bool external_transform::
+bool dynamic_transform::
 requires_expansion(const yarn::meta_model::endomodel& im) const {
     if (im.output_languages().size() != 1) {
         BOOST_LOG_SEV(lg, error) << too_many_output_languages;
@@ -53,7 +53,7 @@ requires_expansion(const yarn::meta_model::endomodel& im) const {
     }
 
     const auto l(im.output_languages().front());
-    const auto r(l == yarn::meta_model::languages::csharp);
+    const auto r(l == yarn::meta_model::languages::cpp);
     if (!r) {
         BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
                                  << im.name().id() << " for language: " << l;
@@ -61,33 +61,30 @@ requires_expansion(const yarn::meta_model::endomodel& im) const {
     return r;
 }
 
-void external_transform::expand_injection(
+void dynamic_transform::expand_injection(
     const annotations::type_repository& atrp,
     yarn::meta_model::endomodel& im) const {
     injector i;
     i.inject(atrp, im);
 }
 
-void external_transform::expand_decoration(
+void dynamic_transform::expand_decoration(
     const dogen::formatters::decoration_properties_factory& dpf,
     yarn::meta_model::endomodel& im) const {
     decoration_expander de;
     de.expand(dpf, im);
 }
 
-std::string external_transform::id() const {
+std::string dynamic_transform::id() const {
     return ::id;
 }
 
-void external_transform:: transform(const yarn::transforms::context& ctx,
+void dynamic_transform::transform(const yarn::transforms::context& ctx,
     const dogen::formatters::decoration_properties_factory& dpf,
     yarn::meta_model::endomodel& im) const {
 
-    if (!requires_expansion(im)) {
-        BOOST_LOG_SEV(lg, debug) << "Expansion not required: "
-                                 << im.name().id();
+    if (!requires_expansion(im))
         return;
-    }
 
     expand_injection(ctx.type_repository(), im);
     expand_decoration(dpf, im);

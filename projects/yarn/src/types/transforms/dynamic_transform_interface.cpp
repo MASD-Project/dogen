@@ -18,12 +18,12 @@
  * MA 02110-1301, USA.
  *
  */
-#include "dogen/yarn/types/transforms/external_transform_interface.hpp"
+#include "dogen/yarn/types/transforms/dynamic_transform_interface.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace transforms {
 
-external_transform_interface::~external_transform_interface() noexcept { }
+dynamic_transform_interface::~dynamic_transform_interface() noexcept { }
 
 } } }
