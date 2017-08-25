@@ -45,9 +45,7 @@ transform_for_model(const boost::filesystem::path& p) {
      */
     auto& rg(registrar());
     rg.validate();
-
-    const auto model_identifier(p.filename().string());
-    return rg.transform_for_model(model_identifier);
+    return rg.transform_for_model(p.filename());
 }
 
 exomodel_transform_registrar& exomodel_generation_chain::registrar() {

@@ -61,7 +61,7 @@ public:
      * model identifier.
      */
     exomodel_transform_interface&
-    transform_for_model(const std::string& model_identifier);
+    transform_for_model(const boost::filesystem::path& p);
 
 private:
     std::unordered_map<std::string,

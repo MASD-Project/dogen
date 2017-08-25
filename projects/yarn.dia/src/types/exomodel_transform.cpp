@@ -51,13 +51,13 @@ std::string exomodel_transform::id() const {
 }
 
 yarn::transforms::exomodel_transform_types
-exomodel_transform::supported_transforms() const {
-    return yarn::transforms::exomodel_transform_types::unidirectional_from;
+exomodel_transform::transform_types() const {
+    return transforms::exomodel_transform_types::unidirectional_from;
 }
 
-bool
-exomodel_transform::can_transform(const std::string& model_identifier) const {
-    return boost::ends_with(model_identifier, extension);
+std::list<std::string> exomodel_transform::supported_extensions() const {
+    static const auto extensions = std::list<std::string> { extension };
+    return extensions;
 }
 
 meta_model::exomodel

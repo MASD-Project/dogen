@@ -41,8 +41,7 @@ namespace transforms {
 class exomodel_transform_interface {
 public:
     exomodel_transform_interface() = default;
-    exomodel_transform_interface(
-        const exomodel_transform_interface&) = delete;
+    exomodel_transform_interface(const exomodel_transform_interface&) = delete;
     virtual ~exomodel_transform_interface() noexcept = 0;
 
 public:
@@ -56,16 +55,13 @@ public:
      * @brief Returns the exogenous transformations supported by this
      * transformer.
      */
-    virtual exomodel_transform_types supported_transforms() const = 0;
+    virtual exomodel_transform_types transform_types() const = 0;
 
     /**
-     * @brief Returns true if the exogenous transformer supports
-     * this kind of models.
-     *
-     * @param model_identifier Identifier for the model one wishes to
-     * transform - usually its file name.
+     * @brief Returns the extensions of the files that this transform
+     * can process.
      */
-    virtual bool can_transform(const std::string& model_identifier) const = 0;
+    virtual std::list<std::string> supported_extensions() const = 0;
 
     /**
      * @brief Transforms the exogenous model at the supplied path and

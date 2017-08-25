@@ -39,9 +39,8 @@ public:
 
 public:
     std::string id() const override;
-    yarn::transforms::exomodel_transform_types
-    supported_transforms() const override;
-    bool can_transform(const std::string& model_identifier) const override;
+    yarn::transforms::exomodel_transform_types transform_types() const override;
+    std::list<std::string> supported_extensions() const override;
     meta_model::exomodel
     transform(const boost::filesystem::path& p) override;
     void transform(const meta_model::exomodel& em,

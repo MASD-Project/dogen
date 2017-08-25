@@ -18,6 +18,7 @@
  * MA 02110-1301, USA.
  *
  */
+#include <unordered_set>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/transforms/registrar_error.hpp"
@@ -34,8 +35,10 @@ const std::string multiple_transforms(
     "More than one exomodel transform available for model: ");
 const std::string unsupported_model(
     "No exomodel transform is available for model: ");
-const std::string already_registered(
-    "Exomodel transform has already been registered: ");
+const std::string id_already_registered(
+    "Exomodel transform with this id has already been registered: ");
+const std::string ext_already_registered(
+    "Exomodel transform for this extension has already been registered: ");
 const std::string null_transformer("Exomodel transform supplied is null.");
 
 }
@@ -45,27 +48,42 @@ namespace yarn {
 namespace transforms {
 
 void exomodel_transform_registrar::validate() {
+    /*
+     * There must at least be one transformer.
+     */
     if (exomodel_transforms_.empty()) {
         BOOST_LOG_SEV(lg, debug) << no_transforms;
         BOOST_THROW_EXCEPTION(registrar_error(no_transforms));
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
+    /*
+     * A transformer with the same ID must not have already been
+     * registered.
+     */
+    std::unordered_set<std::string> ids;
+    for (const auto& pair : exomodel_transforms_) {
+        const auto& et(*pair.second);
+        const auto id(et.id());
+        const auto inserted(ids.insert(id).second);
 
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << id_already_registered << id;
+            BOOST_THROW_EXCEPTION(registrar_error(id_already_registered + id));
+        }
+    }
+
+    BOOST_LOG_SEV(lg, debug) << "Registrar is in a valid state.";
     BOOST_LOG_SEV(lg, debug) << "Found "
                              << exomodel_transforms_.size()
                              << " registered exomodel transforms. Details: ";
-
-    for (const auto& pair : exomodel_transforms_) {
-        const auto& et(*pair.second);
-        BOOST_LOG_SEV(lg, debug) << "id: '" << et.id() << "'";
-    }
 }
 
 void exomodel_transform_registrar::register_exomodel_transform(
     std::shared_ptr<exomodel_transform_interface> et) {
+    BOOST_LOG_SEV(lg, debug) << "Registring exomodel transform: " << et->id();
+
     /*
-     * Transformer must not be null.
+     * Transform must not be null.
      */
     if (!et) {
         BOOST_LOG_SEV(lg, error) << null_transformer;
@@ -73,56 +91,41 @@ void exomodel_transform_registrar::register_exomodel_transform(
     }
 
     /*
-     * A transformer with the same ID must not have already been
-     * registered.
+     * Register transform against all supported extensions.
      */
-    const auto i(exomodel_transforms_.insert(std::make_pair(et->id(), et)));
-    if (!i.second) {
-        BOOST_LOG_SEV(lg, error) << already_registered << et->id();
-        BOOST_THROW_EXCEPTION(registrar_error(already_registered + et->id()));
+
+    for (const auto ext : et->supported_extensions()) {
+        BOOST_LOG_SEV(lg, debug) << "Registering against extension: " << ext;
+
+        const auto pair(std::make_pair(ext, et));
+        const auto inserted(exomodel_transforms_.insert(pair).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << ext_already_registered << ext;
+            BOOST_THROW_EXCEPTION(
+                registrar_error(ext_already_registered + ext));
+        }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Registrered exomodel transform: "
-                             << et->id();
+    BOOST_LOG_SEV(lg, debug) << "Registrered exomodel transform.";
 }
 
 exomodel_transform_interface& exomodel_transform_registrar::
-transform_for_model(const std::string& model_identifier) {
-    const auto& mid(model_identifier);
-    BOOST_LOG_SEV(lg, debug) << "Looking for exomodel transform for model: "
-                             << mid << ".";
+transform_for_model(const boost::filesystem::path& p) {
+    const auto gs(p.generic_string());
+    const auto ext(p.extension().generic_string());
+    BOOST_LOG_SEV(lg, debug) << "Looking for exomodel transform for path: "
+                             << gs << ". Extension: '" << ext << "'";
 
-    /*
-     * We must do a linear search for the transform because the match
-     * with the model identifier is not always obvious - e.g. not just
-     * an extension, etc. However, since there are very few
-     * transforms, this is not a huge problem for now.
-     */
-    bool found(false);
-    std::shared_ptr<exomodel_transform_interface> r;
-    for (const auto& pair : exomodel_transforms_) {
-        const auto& et(pair.second);
-
-        if (!et->can_transform(mid))
-            continue;
-
-        const auto& id(pair.first);
-        BOOST_LOG_SEV(lg, debug) << "Found transform: '" << id << "'";
-
-        if (found) {
-            BOOST_LOG_SEV(lg, error) << multiple_transforms << mid
-                                     << " Transformer: '" << id << "'";
-            BOOST_THROW_EXCEPTION(registrar_error(multiple_transforms + mid));
-        }
-        found = true;
-        r = pair.second;
+    const auto i(exomodel_transforms_.find(ext));
+    if (i == exomodel_transforms_.end()) {
+        BOOST_LOG_SEV(lg, error) << unsupported_model << gs;
+        BOOST_THROW_EXCEPTION(registrar_error(unsupported_model + gs));
     }
 
-    if (found)
-        return *r;
-
-    BOOST_LOG_SEV(lg, error) << unsupported_model << mid;
-    BOOST_THROW_EXCEPTION(registrar_error(unsupported_model + mid));
+    auto& r(*i->second);
+    const auto& id(r.id());
+    BOOST_LOG_SEV(lg, debug) << "Found transform: '" << id << "'";
+    return r;
 }
 
 } } }

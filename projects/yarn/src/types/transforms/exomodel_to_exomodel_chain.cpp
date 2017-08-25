@@ -55,26 +55,24 @@ exomodel_to_exomodel_chain::obtain_transforms(
      * transformations we intend to do. If not, there is no point
      * continuing.
      */
-    const auto src_model_identifier(src_path.string());
-    auto& t0(rg.transform_for_model(src_model_identifier));
-    const auto st0(t0.supported_transforms());
-    if (st0 != exomodel_transform_types::bidirectional &&
-        st0 != exomodel_transform_types::unidirectional_from) {
-        BOOST_LOG_SEV(lg, error) << transform_not_supported
-                                 << src_model_identifier;
-        BOOST_THROW_EXCEPTION(transformation_error(
-                transform_not_supported + src_model_identifier));
+    auto& t0(rg.transform_for_model(src_path));
+    const auto tt0(t0.transform_types());
+    if (tt0 != exomodel_transform_types::bidirectional &&
+        tt0 != exomodel_transform_types::unidirectional_from) {
+        const auto gs(src_path.generic_string());
+        BOOST_LOG_SEV(lg, error) << transform_not_supported << gs;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(transform_not_supported + gs));
     }
 
-    const auto dst_model_identifier(dst_path.string());
-    auto& t1(rg.transform_for_model(dst_model_identifier));
-    const auto st1(t1.supported_transforms());
-    if (st1 != exomodel_transform_types::bidirectional &&
-        st1 != exomodel_transform_types::unidirectional_to) {
-        BOOST_LOG_SEV(lg, error) << transform_not_supported
-                                 << dst_model_identifier;
-        BOOST_THROW_EXCEPTION(transformation_error(
-                transform_not_supported + dst_model_identifier));
+    auto& t1(rg.transform_for_model(dst_path));
+    const auto tt1(t1.transform_types());
+    if (tt1 != exomodel_transform_types::bidirectional &&
+        tt1 != exomodel_transform_types::unidirectional_to) {
+        const auto gs(dst_path.generic_string());
+        BOOST_LOG_SEV(lg, error) << transform_not_supported << gs;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(transform_not_supported + gs));
     }
 
     return boost::tie(t0, t1);
