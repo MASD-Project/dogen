@@ -91,6 +91,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-08-28 Mon 17:01]--[2017-08-28 Mon 17:08] =>  0:07
     CLOCK: [2017-08-26 Sat 09:00]--[2017-08-26 Sat 09:20] =>  0:20
     CLOCK: [2017-08-26 Sat 08:51]--[2017-08-26 Sat 08:59] =>  0:08
     CLOCK: [2017-08-21 Mon 15:16]--[2017-08-21 Mon 15:27] =>  0:11
@@ -591,6 +592,14 @@ module cannot see the concept.
 One suggestion is to allow scoped names in stereotypes:
 =module::Concept=.
 
+The heuristic for concept resolution is then:
+
+- external modules are never part of the scoped name;
+- on a scoped concept with M names, we first start by assuming that
+  the first name is the model module and M-2 is/are the internal
+  module(s). We try this for all names in M-2, e.g. first two names
+  are model modules and M-3 names are internal modules and so forth.
+
 *** Add support for cross-model concept refinement                    :story:
 
 We've implemented support for cross-model inheritance in sprint 87 but
@@ -659,7 +668,6 @@ Tasks:
 Links:
 
 - [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
-
 
 ** Deprecated
 *** CANCELLED Map upsilon primitives to intrinsics                    :story:
