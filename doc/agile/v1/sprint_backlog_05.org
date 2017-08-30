@@ -14,16 +14,16 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-30 Wed 22:57]
+#+CAPTION: Clock summary at [2017-08-30 Wed 23:26]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:47* |      |      | 100.0 |
+| *Total time*                                                                | *1:14* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:47   |      |      | 100.0 |
-| Active                                                                      |        | 0:47 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  93.6 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |   6.4 |
+| Stories                                                                     | 1:14   |      |      | 100.0 |
+| Active                                                                      |        | 1:14 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  59.5 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:30 |  40.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -90,6 +90,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-08-30 Wed 22:58]--[2017-08-30 Wed 23:25] =>  0:27
     CLOCK: [2017-08-30 Wed 22:09]--[2017-08-30 Wed 22:12] =>  0:03
 
 Updates to sprint and product backlog.
@@ -265,4 +266,454 @@ Links:
 
 - [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
+*** Add canonical archetype support to yarn                           :story:
+
+We need to add a new attribute in context which captures the canonical
+archetypes.
+
+Notes:
+
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+- at present we have placed the canonical archetype resolution as part
+  of the element properties. However, we do not need to have this at
+  the element level since its a meta-type property and can be
+  determined up-front. However, we do need to resolve a name into a
+  meta-type before we can resolve a meta-type into a concrete
+  archetype.
+- we need to unpick the notion of whether a formatter is "includible"
+  or not from the notion of canonical archetypes. Canonical archetypes
+  is meta-model concept: given a facet and a meta-model type, which
+  archetype represents the "key" definition of the element. It just so
+  happens that this function has a use in identifying the files to
+  include.
+
+Tasks:
+
+- add a map from name id to meta-name id in intermediate model.
+- add a map from meta name id to map of canonical archetype to
+  archetype location.
+
+*** Move enablement into yarn                                         :story:
+It seems that the concepts around enablement are actually not kernel
+specific but instead can be generalised at the meta-model level. We
+need to create adequate representations in yarn to handle facets,
+etc. We then need to move across the code that computes enablement
+into yarn so that all kernels can make use of it.
+
+Problems:
+
+- we are checking to see if the hash facet is enabled with c++ 98; if
+  so, we throw as this facet is incompatible. We cannot do this from
+  yarn since we do not know what c++ standards are.
+- because we do not have a mapping between a archetype location and
+  the meta-type, we will be enabling/disabling all archetype locations
+  across all meta-types.
+- because we do not have element segmentation, the element extensions
+  will be disabled. Actually this will probably work just the same,
+  given that all elements exist.
+- enablement must be done after external transformations so it picks
+  up fabric types.
+- we need to support formatting styles in order to be able to use the
+  artefact properties from the meta-model.
+- in quilt.cpp, someone did an upfront generation of all archetype
+  properties against the archetype locations. We not doing that in
+  yarn, so nothing is coming out. This was done during transformation
+  in formattables.
+- with a move into yarn, we seem to have broken the overwrite flag
+  logic; changes no longer result in new code being generated.
+- we also have borked the includes: dependency builder is looking into
+  the formattables instead of element. However, we then run into
+  segmentation issues because we cannot find forward declarations on
+  the main element.
+
+To do:
+
+- kernel registrar type index map - done.
+- c# formatter registrar type index map - done.
+- bug in template instantiating: artefact expansions do not seem to
+  take kernel into account - done.
+
+*Previous Understanding*
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
+
+*** Move formatting styles into yarn                                  :story:
+
+We need to support the formatting styles at the meta-model level.
+
+*** Move element segmentation into yarn                               :story:
+
+We've added the notion that an element can be composed of other
+elements in quilt, in order to handle forward declarations. However,
+with a little bit of effort we can generalise it into yarn. It would
+be useful for other things such as inner classes. We don't need to
+actually implement inner classes right now but we should make sure the
+moving of this feature into yarn is compatible with it.
+
+Notes:
+
+- seems like we have two use cases: a) we need all elements, master
+  and extensions and we don't really care about which is which. b) we
+  only want masters. However, we must be able to access the same
+  element properties from either the master or the extension. Having
+  said all that, it seems we don't really need all of the element
+  properties for both - forward declarations probably only need:
+  decoration and artefact properties.
+- we don't seem to use the map in formattables model anywhere, other
+  than to find master/extension elements.
+- Yarn model could have two simple list containers (masters and
+  all). Or maybe we don't even need this to start off with, we can
+  just iterate and skip extensions where required.
+- so in conclusion, we to move decoration, enablement and dependencies
+  into yarn (basically decoration and artefact properties) first and
+  then see where segmentation ends.
+
+Tasks:
+
+- add a concept for element extensions: =Extensible=. Contains a list
+  of element pointers.
+- populate it with the extensions.
+- change enablement to merge all element properties of extensible
+  elements.
+
+*** Create a yarn locator                                             :story:
+
+We need to move all functionality which is not kernel specific into
+yarn for the locator. This will exist in the helpers namespace. We
+then need to implement the C++ locator as a composite of yarn
+locator. It will live in fabric.
+
+*Other Notes*
+
+At present we have multiple calls in locator, which are a bit
+ad-hoc. We could potentially create a pattern. Say for C++, we have
+the following parameters:
+
+- relative or full path
+- include or implementation: this is simultaneously used to determine
+  the placement (below) and the extension.
+- meta-model element:
+- "placement": top-level project directory, source directory or
+  "natural" location inside of facet.
+- archetype location: used to determine the facet and archetype
+  postfixes.
+
+E.g.:
+
+: make_full_path_for_enumeration_implementation
+
+Interestingly, the "placement" is a function of the archetype location
+(a given artefact has a fixed placement). So a naive approach to this
+seems to imply one could create a data driven locator, that works for
+all languages if supplied suitable configuration data. To generalise:
+
+- project directory is common to all languages.
+- source or include directories become "project
+  sub-directories". There is a mapping between the artefact location
+  and a project sub-directory.
+- there is a mapping between the artefact location and the facet and
+  artefact postfixes.
+- extensions are a slight complication: a) we want to allow users to
+  override header/implementation extensions, but to do it so for the
+  entire project (except maybe for ODB files). However, what yarn's
+  locator needs is a mapping of artefact location to  extension. It
+  would be a tad cumbersome to have to specify extensions one artefact
+  location at a time. So someone has to read a kernel level
+  configuration parameter with the artefact extensions and expand it
+  to the required mappings. Whilst dealing with this we also have the
+  issue of elements which have extension in their names such as visual
+  studio projects and solutions. The correct solution is to implement
+  these using element extensions, and to remove the extension from the
+  element name.
+- each kernel can supply its configuration to yarn's locator via the
+  kernel interface. This is fairly static so it can be supplied early
+  on during initialisation.
+- there is still something not quite right. We are performing a
+  mapping between some logical space (the modeling space) and the
+  physical space (paths in the filesystem). Some modeling elements
+  such as the various CMakeLists.txt do not have enough information at
+  the logical level to tell us about their location; at present the
+  formatter itself gives us this hint ("include cmakelists" or "source
+  cmakelists"?). It would be annoying to have to split these into
+  multiple archetypes just so we can have a function between the
+  archetype location and the physical space. Although, if this is the
+  only case of a modeling element not mapping uniquely, perhaps we
+  should do exactly this.
+- However, we still have inclusion paths to worry about. As we done
+  with the source/include directories, we need to somehow create a
+  concept of inclusion path which is not language specific; "relative
+  path" and "requires relative path" perhaps? These could be a
+  function of archetype location.
+
+*** Move dependencies into yarn                                       :story:
+
+Actually the dependencies will be generated at the kernel level
+because 99% of the code is kernel specific. However, we need to make
+it an external transform.
+
+Tasks:
+
+- create the locator in the C++ external transform
+- create a dependencies transform that uses the existing include
+  generation code.
+
+*Previous understanding*
+
+It seems all languages we support have some form of "dependencies":
+
+- in c++ these are the includes
+- in c# these are the usings
+- in java these are the imports
+
+So, it would make sense to move these into yarn. The process of
+obtaining the dependencies must still be done in a kernel dependent
+way because we need to build any language-specific structures that the
+dependencies builder requires. However, we can create an interface for
+the dependencies builder in yarn and implement it in each kernel. Each
+kernel must also supply a factory for the builders.
+
+*** Generate file paths as a transform                                :story:
+
+Add a fabric transform for file path generation.
+
+*** Create "opaque" kernel and element properties                     :story:
+
+As part of the element container, we can have a set of base classes
+that are empty: =opaque_element_properties=. This class is then
+specialised in each kernel with the properties that are specific to
+it. We probably need an equivalent for:
+
+- kernel level properties
+- element level properties
+- attribute level properties.
+
+We then have to do a lot of casting in the helpers.
+
+Once we got these opaque properties, we can then create "kernel
+specific expanders" which are passed in to the yarn workflow. These
+populate the opaque properties.
+
+*** Move helpers into yarn                                            :story:
+
+Looking at helpers, it is clear that they are common to all
+languages. We just need to rename the terminology slightly -
+particularly wrt to streaming properties - and then move this code
+across into yarn.
+
+*** Move facet properties into yarn                                   :story:
+
+We should be able to handle these generically in yarn.
+
+*** Move ORM camel-case and databases into yarn                       :story:
+
+We should handle this property at the ORM level, rather than at the
+ODB level.
+
+Similarly, we should move the ODB databases into yarn and make that a
+ORM-level concept.
+
+*** Investigate code-generation around annotations                    :story:
+
+We have two cases where code-generation makes sense for
+annotations. Let look at them in turn.
+
+*Type templates*
+
+At present we are supplying JSON files with type templates. In truth
+these are not really "data files" because changing them will cause
+problems to the system; its tightly coupled to them. It would make
+more sense to allow models to define their type templates inside the
+model itself. We could use a stereotype of
+=annotations::type_template= and then use meta-data for all of the
+fields, as per JSON, e.g.:
+
+:  {
+:    "name": {
+:      "simple": "profile",
+:      "qualified": "annotations.profile"
+:    },
+:    "archetype_location": {
+:      "family": "annotations"
+:    },
+:    "value_type": "text",
+:    "template_kind": "instance",
+:    "scope": "any"
+:  }
+
+We then code-generate the insertion of the type template into the
+annotations type templates repository via an initialisers-like
+framework.
+
+It may make more sense to have one UML class with all the type
+templates; the type templates then become attributes of that
+class. The problem then is what to name that class. also, we may want
+to have a couple of these, to group type templates logically (for
+example we want the top-level templates like =enabled= separated from
+the namespace-specific templates).
+
+But the gist of it is that its very straightforward to add some
+machinery that generates the code required to inject the type
+templates into the system, and that it is triggered during
+initialisation, replacing JSON loading.
+
+*Use of annotations*
+
+We then have the following usage pattern:
+
+- define a class with all the related fields (with types of the type
+  templates above). We call this class =type_group=. We may need to
+  instantiate it for specific fields, or by facet, etc. We need to
+  look at all of the examples in the code-base. Note that the layout
+  of this class will (likely) bear no resemblance to the type
+  templates grouping - this is just a "bag" with all of the available
+  type templates, whereas the type group aggregation does normally
+  have some useful meaning (e.g. =orm_properties=, etc).
+- define a "factory" class for the type group class that uses the
+  traits to locate the types (instances of type templates). For this,
+  the type group class attributes need to refer to the fully qualified
+  field name (possibly requiring some inputs such as kernel, facet).
+- define a c++ class with the properties we're interested in. We
+  normally call this class =_configuration= if its just used to read
+  the meta-data, or =_properties= if its used as a real type. Note
+  that at present we have allowed the layout of the type group class
+  and the properties/configuration classes to be possibly quite
+  different; we gather _all_ of the types of interest in the type
+  group class, but then have multiple properties/configuration classes
+  to match our needs.
+- finally, we define a "factory" class that takes in the type group
+  and produces the configuration/properties class.
+
+In a code-generated world:
+
+- we need to somehow force the type group class to match the
+  configuration class; this will probably result on a lot of
+  duplication. For example, for the ORM properties, we probably have a
+  couple in common across object/model/attributes.
+- we need to map C++ types into annotation types such that we can back
+  out the annotation type from a c++ type. For example, given an
+  enumeration, we want to create a annotation type of "text" but then
+  automatically generate the "from/to" converters for the enumeration.
+
+Merged stories:
+
+*Code generation of dynamic instances*
+
+We seem to have a pretty well established usage pattern for dynamic,
+so it may be a candidate for code generation. All we need is:
+
+- a stereotype to mark a class as dynamic; the attributes of the class
+  are dynamic fields, and their types must be one of the valid values
+  for dynamic fields. The default value is used for the field's
+  default value. Qualified name, ownership hierarchy, definition type,
+  scope, etc are supplied as meta-data.
+- stereotype name should be something like =DynamicFieldGroup=.
+- the injection of the settings class is done by looking at the
+  =DynamicFieldGroup= class and mapping the dynamic types to C++
+  types. Note: this mapping should be dynamic too so that we can use
+  it for other languages. We just need a meta-data tag for this, like
+  we do with default enum value.
+- the injection of the settings factory class is a bit more
+  complicated; we need to mark the object as a settings factory. At
+  present we have object types, but it was supposed to be removed
+  after a refactoring. Actually we just need to create a new kind of
+  element (=dynamic_settings_factory=?). In addition, settings factory
+  may also need to take in some parameters such as facet/formatter.
+- a stitch template that generates the settings factory.
+- a stitch template that registers the dynamic field definition;
+  instead of JSON we can just generate c++ code to perform the
+  injection.
+- we could also generate the repository and in most cases the
+  repository factory. The only case where this breaks down is when we
+  need to look at properties too.
+- we should have a number of knobs to control generation: a) generate
+  field injection b) generate settings factory c) generate repository
+  d) generate repository factory.
+
+We also need to merge the traits class directly into the factory. In
+the majority of cases, we have traits just to access the fields. But
+there are a few cases where we use traits for other purposes such as
+formatter naming.
+
+*** Initialisation of meta-data                                       :story:
+
+At present we are reading meta-data files for every transformation. In
+reality, it makes no sense to allow the meta-data files to change
+dynamically, because the consumers of the meta-data are hard-coded. So
+it would make more sense to treat them as a initialisation step. This
+will make even more sense when we code-generate the types instead of
+using JSON. Then we can hook up the generated code to the
+initialisers.
+
+*** Distinguish between meta-types that require canonical archetypes  :story:
+
+At present it is not possible to know which meta-types require
+canonical archetypes and which don't. In the validation we said:
+
+:         * We must have one canonical formatter per type per facet.
+:         * FIXME: this check is broken at the moment because this is
+:         * only applicable to yarn types, not fabric types. It is also
+:         * not applicable to forward declarations. We need some
+:         * additional information from yarn to be able to figure out
+:         * which types must have a canonical archetype.
+
+We should have some kind of flag in yarn to distinguish. This still
+requires a bit of thinking.
+
+*** Tidy-up of inclusion terminology                                  :story:
+
+Random notes:
+
+- imports and exports
+- some types support both (headers)
+- some support imports only (cpp)
+- some support neither (cmakelists, etc).
+
+*** Remove object types in yarn                                       :story:
+
+We need to figure out if this enumeration is still in use and if not
+what needs to be done to remove it.
+
+Seems like we are only using associative container at present. We
+could probably replace the enumeration with a simple flag
+
 ** Deprecated
+*** CANCELLED Make the Zeta model compilable                          :story:
+    CLOSED: [2017-08-30 Wed 23:01]
+
+*Rationale*: not required since Upsilon has been deprecated.
+
+We need to work through the list of issues with the Zeta model and get
+it to a compilable state.
+
+*** CANCELLED Registrar in quilt is not being generated               :story:
+    CLOSED: [2017-08-30 Wed 23:14]
+
+*Rationale*: quilt model has been deleted.
+
+We don't seem to change the contents of this file when regenerating.
+
+*** CANCELLED Stitcher log file names look weird                      :story:
+    CLOSED: [2017-08-30 Wed 23:19]
+
+*Rationale*: they look ok with the current release.
+
+At present we are writing files with names like:
+
+: dogen.stitcher...log
+
+*** CANCELLED ODB options file is generated to incorrect location     :story:
+    CLOSED: [2017-08-30 Wed 23:21]
+
+*Rationale*: ODB options generation changed dramatically recently (one
+per type, etc).
+
+Models with composite names seem to have their ODB options file
+generated under the =projects= directory, e.g.:
+
+: projects/vtk/geometry/src/options.odb
