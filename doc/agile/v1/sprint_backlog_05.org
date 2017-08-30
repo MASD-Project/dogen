@@ -1,0 +1,249 @@
+#+title: Sprint Backlog 05
+#+options: date:nil toc:nil author:nil num:nil
+#+todo: STARTED | COMPLETED CANCELLED POSTPONED
+#+tags: { story(s) epic(e) }
+
+* Mission Statement
+
+- Sort out concepts and profiles.
+- Resume and progress the work on moving "generic" types from the
+  quilt models into yarn.
+
+* Stories
+
+** Active
+
+#+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
+#+CAPTION: Clock summary at [2017-08-30 Wed 22:13]
+| <75>                                                                        |        |      |      |       |
+| Headline                                                                    | Time   |      |      |     % |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| *Total time*                                                                | *0:03* |      |      | 100.0 |
+|-----------------------------------------------------------------------------+--------+------+------+-------|
+| Stories                                                                     | 0:03   |      |      | 100.0 |
+| Active                                                                      |        | 0:03 |      | 100.0 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 | 100.0 |
+#+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
+#+end:
+
+*** Edit release notes for previous sprint                            :story:
+
+Add github release notes for previous sprint.
+
+Title: Dogen v1.0.04, "Pavilhão"
+
+#+begin_src markdown
+![Pavilhão Welvitchia Mirabilis](http://cdn2.portalangop.co.ao/angola/pt_pt/files/highlight/2016/9/42/0,cbf98d54-32d3-4634-b996-6dd02337f9ae.jpg)
+_Pavilhão Welvitchia Mirabilis, Moçâmedes, Namibe. (C) Angola Press 2016._
+
+Overview
+=======
+
+We continue with yet another sprint refactoring the core in yarn. Initially, the focus was on moving more code from the C++ and C# kernels into yarn, but a series of deficiencies were found on the way we are processing exogenous models and so we switched focus to fixing those. This work will continue into the next sprint.
+
+As part of this sprint we did manage to move away from using ```std::type_index``` and using instead our own meta-meta-model, which is consistent with our conceptual model and notions of modeling spaces. In addition, we cleaned up usages of the type repository, which greatly simplified the code.
+
+User visible changes
+===============
+There are no user visible changes in this sprint.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_03.org).
+
+Next Sprint
+===========
+In the next sprint we'll finish the work on exogenous models and resume the work on moving kernel-agnostic transformations from the kernels into yarn.
+
+Binaries
+======
+You can download binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
+
+- [dogen_1.0.03_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.03/dogen_1.0.03_amd64-applications.deb)
+- [dogen-1.0.03-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.03/dogen-1.0.03-Darwin-x86_64.dmg)
+- [dogen-1.0.03-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.03-Windows-AMD64.msi)
+
+**Note**: They are produced by CI so they may not yet be ready.
+
+For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
+#+end_src
+
+- [[https://twitter.com/MarcoCraveiro/status/887172610487922688][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6292938732865617920/][LinkedIn]]
+- [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
+
+*** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-08-30 Wed 22:09]--[2017-08-30 Wed 22:12] =>  0:03
+
+Updates to sprint and product backlog.
+
+*** Rename transformers to adapters                                   :story:
+
+In the past we used the term "transformer" to mean a class that
+converts types from one representation to another. However, now that
+we are using domain terminology, the term "transforms" is taken to
+mean a model transformation. To avoid confusion we should rename the
+existing transformers to converters, adapters or some other
+out-of-the-way name.
+
+*** Throw on unsupported stereotypes                                  :story:
+
+In some cases we may support a feature in one language but not on
+others like say ORM at present. If a user requests ORM in a C# model,
+we should throw.
+
+If we are in compatibility mode, however, we should not throw.
+
+*** Add a modeline to stitch                                          :story:
+
+It would be nice to be able to supply the mode and other emacs
+properties to stitch templates. For that we just need a special KVP
+used at the top that contains the modeline:
+
+: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
+
+Stitch can read this KVP and ignore it.
+
+*** Change order of includes according to Lakos major design rule     :story:
+
+Lakos says:
+
+#+begin_quote
+The .c file of every component should include its own .h file as the
+first substantive line of code.
+#+end_quote
+
+We decided to include it as the last line. However, Lakos approach has
+the side-effect of automatically detecting headers that are missing
+includes. We used to do this manually by generating =.cpp= files that
+just included the header but then had to remove it because it was
+slowing down compilation. With Lakos approach we get the best of both
+worlds.
+
+We need to also update the generated code to follow this
+approach. This will require some thinking.
+
+*** Investigate usage of origin type                                  :story:
+
+With the current setup of the transforms, we always know who the
+target model is. Thus the =origin_types= flag may not be used
+correctly at present.
+
+*** Rename ODB parameters                                             :story:
+
+At present we use the following form:
+
+: #DOGEN ODB_PRAGMA=no_id
+
+We need to use the new naming style =cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
+
+Finally we should no longer attempt to derive the ODB pragma
+context. We should just add it verbatim.
+
+*** Use namespaced stereotypes                                        :story:
+
+Originally we added a space in the ORM stereotypes:
+
+: orm value
+
+This is not a particularly good idea. We should just add support for
+namespaced stereotypes:
+
+: orm::value
+
+We should also change all of the existing stereotypes to have a
+namespace:
+
+: modeling::object
+
+And so forth. The namespace name probably needs a bit of thinking.
+
+*** Cannot make qualified references to concepts                      :story:
+
+At present it is not possible to consume concepts defined in a
+referenced model, nor is it possible to refer to a concept in a
+different module from the module in which the element is in, e.g.: say
+concept C0 is declared in module M0; all types of M0 can have C0 as
+stereotype and that will resolve. However any types on any other
+module cannot see the concept.
+
+One suggestion is to allow scoped names in stereotypes:
+=module::Concept=.
+
+The heuristic for concept resolution is then:
+
+- external modules are never part of the scoped name;
+- on a scoped concept with M names, we first start by assuming that
+  the first name is the model module and M-2 is/are the internal
+  module(s). We try this for all names in M-2, e.g. first two names
+  are model modules and M-3 names are internal modules and so forth.
+
+*** Add support for cross-model concept refinement                    :story:
+
+We've implemented support for cross-model inheritance in sprint 87 but
+we did not cover concepts. Most of the approach is the same, but
+unfortunately we can't just reuse it.
+
+Tasks:
+
+- we need a refines field which is a text collection.
+- we need refinement settings, factory etc.
+- update parsing expander.
+
+*** Add support for "one off" profiles                                :story:
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
+
+Actually the problem is that profiles aren't really implemented
+correctly. First we should not call them profiles at all since they
+are not UML profiles and overloading the term just generates
+confusion. Second its important to understand how Dogen profiles come
+about:
+
+- we extend the UML meta-model via stereotypes to support all of the
+  required yarn and quilt concepts.
+- when we instantiate the yarn/quilt types via a UML model, we need to
+  supply the values for the attributes which have been extended. If
+  done properly this would happen via UML tagged values. Dia does not
+  support these. At any rate, at present we use Dogen meta-data which
+  is almost like tagged values.
+- Dogen profiles are then an attempt to create bundles of tagged
+  values with pre-populated values so that we do not need to manually
+  populate them for every type. Instead, we can associate a stereotype
+  with the type and then the system will automatically populate the
+  values from the bundle.
+- From all of this it follows that it should be possible to define
+  these "bundles" directly in a UML diagram. If we were to use UML
+  properly (or at least almost properly), we would define a class with
+  a stereotype of =stereotype=, a name of the stereotype we'd like to
+  define (say =Serializable=) and then its tagged values are the keys
+  and values of the meta-data we want to define. This is strictly
+  speaking not correct UML because we are stating we are augmenting
+  the UML meta-model (hence =stereotype=) but then we end up
+  instantiating a meta-model class with some predefined values. Its
+  not clear how to express this in UML. Note that we have exactly the
+  same issue with concepts.
+- and, after some thinking, we are trying to do exactly the same thing
+  as we are already doing for concepts: i.e. some kind of meta-level
+  operation that allows us to add structural features to an
+  element. Thus we can just use concepts, which are not even defined
+  in UML - augmenting its meaning will not take us away from the
+  literature. We can very simply add a last step to concepts transform
+  which merges the annotations of the concept objects, using exactly
+  the machinery we defined for profiles. The only slight problem is
+  that we cannot reuse concepts across models.
+
+Tasks:
+
+- add annotations merging to concepts processing. Should cause no
+  changes at all on all models.
+- create a model in dogen defining basic concepts.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
+
+** Deprecated
