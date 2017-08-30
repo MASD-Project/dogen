@@ -14,52 +14,71 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-30 Wed 22:13]
+#+CAPTION: Clock summary at [2017-08-30 Wed 22:57]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *0:03* |      |      | 100.0 |
+| *Total time*                                                                | *0:47* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 0:03   |      |      | 100.0 |
-| Active                                                                      |        | 0:03 |      | 100.0 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 | 100.0 |
+| Stories                                                                     | 0:47   |      |      | 100.0 |
+| Active                                                                      |        | 0:47 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  93.6 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:03 |   6.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
-*** Edit release notes for previous sprint                            :story:
+*** COMPLETED Edit release notes for previous sprint                  :story:
+    CLOSED: [2017-08-30 Wed 22:57]
+    CLOCK: [2017-08-30 Wed 22:13]--[2017-08-30 Wed 22:57] =>  0:44
 
 Add github release notes for previous sprint.
 
-Title: Dogen v1.0.04, "Pavilhão"
+Title: Dogen v1.0.04, "Zona dos Riscos"
 
 #+begin_src markdown
-![Pavilhão Welvitchia Mirabilis](http://cdn2.portalangop.co.ao/angola/pt_pt/files/highlight/2016/9/42/0,cbf98d54-32d3-4634-b996-6dd02337f9ae.jpg)
-_Pavilhão Welvitchia Mirabilis, Moçâmedes, Namibe. (C) Angola Press 2016._
+![Zona dos Riscos](http://www.almadeviajante.com/wp-content/uploads/deserto-do-namibe.jpg)
+_Zona dos Riscos, Namibe, Angola. (C) Alma de Viajante, 2017._
 
 Overview
 =======
+As usual, yarn internal refactoring is the bulk of the work in this sprint. The refactoring work had three major themes:
 
-We continue with yet another sprint refactoring the core in yarn. Initially, the focus was on moving more code from the C++ and C# kernels into yarn, but a series of deficiencies were found on the way we are processing exogenous models and so we switched focus to fixing those. This work will continue into the next sprint.
+- **Use shared pointers across the board** for yarn elements, from frontend to the backend. This was done as a requirement for the exogenous models changes described below; as it happens, it has the nice side-effect of reducing the number of copies of model elements.
+- **Finish exogenous models support**: frontends now have a special purpose model type, designed only for the kind of operations supported at the frontend level. This cleaned up transformations quite a bit, making it obvious which ones apply at which stage. The conceptual model is now somewhat cleaner, with the introduction of _exomodels_ (previously "exogenous models") and _endomodels_ (previously "intermediate models"), which specific purposes.
+- **Name processing now done in core**: as part of the exogenous models change, we also moved the external and model module processing away from the frontends and into the core. This means less code duplication across frontends.
 
-As part of this sprint we did manage to move away from using ```std::type_index``` and using instead our own meta-meta-model, which is consistent with our conceptual model and notions of modeling spaces. In addition, we cleaned up usages of the type repository, which greatly simplified the code.
+In addition to these, there were a couple of additional stories that had user facing impact, described in the next section.
 
 User visible changes
-===============
-There are no user visible changes in this sprint.
+================
+This sprint introduced a number of user visible changes, all related to the internal clean-up work:
 
-For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_03.org).
+- Upsilon support was considered deprecated, since the customer for which we developed it no longer requires it. Since it was a custom-made frontend with no real application outside of this specific use case, all code related to upsilon has been removed.
+- Continuing the meta-name work, JSON now represents these as regular yarn names. Sadly this makes the JSON more verbose, but at least it's more consistent now. This change breaks backwards compatibility, so users with JSON models need to update them. Sample change:
+```
+-    "meta_type": "module",
++    "meta_name": {
++      "simple": "module",
++      "external_modules": "dogen",
++      "model_modules": "yarn",
++      "internal_modules": "meta_model"
++    }
+```
+- A new command line flag was introduced: ```--compatibility-mode```. The objective of this flag is to disable some of the model validation code, where the errors are known to be caused by a forwards or backwards incompatible change. However: a) this is an experimental flag, very incomplete at present; and b) even when finished, the generated code may just be invalid.
+
+For more details of the work carried out this sprint, see the [sprint log](https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/v1/sprint_backlog_04.org).
 
 Next Sprint
 ===========
-In the next sprint we'll finish the work on exogenous models and resume the work on moving kernel-agnostic transformations from the kernels into yarn.
+Next sprint we'll resume the work on moving kernel-agnostic transformations from the kernels into yarn, and start looking at the meta-data/concepts clean-up.
 
 Binaries
 ======
 You can download binaries from [Bintray](https://bintray.com/domaindrivenconsulting/Dogen) for OSX, Linux and Windows (all 64-bit):
 
-- [dogen_1.0.03_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.03/dogen_1.0.03_amd64-applications.deb)
-- [dogen-1.0.03-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.03/dogen-1.0.03-Darwin-x86_64.dmg)
-- [dogen-1.0.03-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.03-Windows-AMD64.msi)
+- [dogen_1.0.04_amd64-applications.deb](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.04/dogen_1.0.04_amd64-applications.deb)
+- [dogen-1.0.04-Darwin-x86_64.dmg](https://dl.bintray.com/domaindrivenconsulting/Dogen/1.0.04/dogen-1.0.04-Darwin-x86_64.dmg)
+- [dogen-1.0.04-Windows-AMD64.msi](https://dl.bintray.com/domaindrivenconsulting/Dogen/dogen-1.0.04-Windows-AMD64.msi)
 
 **Note**: They are produced by CI so they may not yet be ready.
 
