@@ -6,30 +6,28 @@
 * Mission Statement
 
 - Perform the exogenous model clean-up in yarn
-- Resume and progress the work on moving "generic" types from the
-  quilt models into yarn.
 
 * Stories
 
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-26 Sat 13:13]
+#+CAPTION: Clock summary at [2017-08-30 Wed 22:08]
 | <75>                                                                        |         |       |       |       |
 | Headline                                                                    | Time    |       |       |     % |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| *Total time*                                                                | *39:36* |       |       | 100.0 |
+| *Total time*                                                                | *39:51* |       |       | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+-------+-------|
-| Stories                                                                     | 39:36   |       |       | 100.0 |
-| Active                                                                      |         | 39:36 |       | 100.0 |
+| Stories                                                                     | 39:51   |       |       | 100.0 |
+| Active                                                                      |         | 39:51 |       | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       |  0:35 |   1.5 |
-| STARTED Sprint and product backlog grooming                                 |         |       |  1:24 |   3.5 |
-| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  16.1 |
-| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   7.2 |
+| COMPLETED Sprint and product backlog grooming                               |         |       |  1:39 |   4.1 |
+| COMPLETED Use shared pointers in all models                                 |         |       |  6:22 |  16.0 |
+| COMPLETED Update repository in yarn.dia to use pointers                     |         |       |  2:50 |   7.1 |
 | COMPLETED Remove support for upsilon                                        |         |       |  1:10 |   2.9 |
-| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   3.7 |
-| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  31.1 |
-| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   5.6 |
+| COMPLETED Add a backwards compatible flag                                   |         |       |  1:27 |   3.6 |
+| COMPLETED Create an exogenous model                                         |         |       | 12:20 |  30.9 |
+| COMPLETED Tailor should rely only on exogenous models                       |         |       |  2:12 |   5.5 |
 | COMPLETED Remove scribble group from intermediate model                     |         |       |  0:39 |   1.6 |
 | COMPLETED Tailor is not handling initialisation correctly                   |         |       |  0:15 |   0.6 |
 | COMPLETED Rename exogenous model to exomodel                                |         |       |  1:01 |   2.6 |
@@ -37,7 +35,7 @@
 | COMPLETED Fix broken build due to JSON tests                                |         |       |  0:26 |   1.1 |
 | COMPLETED Clean up transforms to match exogenous/endogenous models          |         |       |  1:48 |   4.5 |
 | COMPLETED Add validation to tailor transforms                               |         |       |  0:20 |   0.8 |
-| COMPLETED Rename =meta_type= in JSON                                        |         |       |  3:29 |   8.8 |
+| COMPLETED Rename =meta_type= in JSON                                        |         |       |  3:29 |   8.7 |
 | COMPLETED Rename yarn object types in yarn.dia                              |         |       |  0:20 |   0.8 |
 | COMPLETED Use extension matching for exogenous models                       |         |       |  0:52 |   2.2 |
 | COMPLETED Rename external transform                                         |         |       |  0:17 |   0.7 |
@@ -90,7 +88,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://www.linkedin.com/feed/update/urn:li:activity:6292938732865617920/][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
-*** STARTED Sprint and product backlog grooming                       :story:
+*** COMPLETED Sprint and product backlog grooming                     :story:
+    CLOSED: [2017-08-30 Wed 22:08]
+    CLOCK: [2017-08-30 Wed 22:00]--[2017-08-30 Wed 22:08] =>  0:08
     CLOCK: [2017-08-28 Mon 17:01]--[2017-08-28 Mon 17:08] =>  0:07
     CLOCK: [2017-08-26 Sat 09:00]--[2017-08-26 Sat 09:20] =>  0:20
     CLOCK: [2017-08-26 Sat 08:51]--[2017-08-26 Sat 08:59] =>  0:08
@@ -497,177 +497,6 @@ confusion between "exogenous" and "external". We should rename it to
 whereas all other transforms are "static" - known at compile
 time. This also means we can now have dynamic transforms in yarn. Not
 an ideal name, but ever so slightly better than "external transform".
-
-*** Rename transformers to adapters                                   :story:
-
-In the past we used the term "transformer" to mean a class that
-converts types from one representation to another. However, now that
-we are using domain terminology, the term "transforms" is taken to
-mean a model transformation. To avoid confusion we should rename the
-existing transformers to converters, adapters or some other
-out-of-the-way name.
-
-*** Throw on unsupported stereotypes                                  :story:
-
-In some cases we may support a feature in one language but not on
-others like say ORM at present. If a user requests ORM in a C# model,
-we should throw.
-
-If we are in compatibility mode, however, we should not throw.
-
-*** Add a modeline to stitch                                          :story:
-
-It would be nice to be able to supply the mode and other emacs
-properties to stitch templates. For that we just need a special KVP
-used at the top that contains the modeline:
-
-: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
-
-Stitch can read this KVP and ignore it.
-
-*** Change order of includes according to Lakos major design rule     :story:
-
-Lakos says:
-
-#+begin_quote
-The .c file of every component should include its own .h file as the
-first substantive line of code.
-#+end_quote
-
-We decided to include it as the last line. However, Lakos approach has
-the side-effect of automatically detecting headers that are missing
-includes. We used to do this manually by generating =.cpp= files that
-just included the header but then had to remove it because it was
-slowing down compilation. With Lakos approach we get the best of both
-worlds.
-
-We need to also update the generated code to follow this
-approach. This will require some thinking.
-
-*** Investigate usage of origin type                                  :story:
-
-With the current setup of the transforms, we always know who the
-target model is. Thus the =origin_types= flag may not be used
-correctly at present.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
-Finally we should no longer attempt to derive the ODB pragma
-context. We should just add it verbatim.
-
-*** Use namespaced stereotypes                                        :story:
-
-Originally we added a space in the ORM stereotypes:
-
-: orm value
-
-This is not a particularly good idea. We should just add support for
-namespaced stereotypes:
-
-: orm::value
-
-We should also change all of the existing stereotypes to have a
-namespace:
-
-: modeling::object
-
-And so forth. The namespace name probably needs a bit of thinking.
-
-*** Cannot make qualified references to concepts                      :story:
-
-At present it is not possible to consume concepts defined in a
-referenced model, nor is it possible to refer to a concept in a
-different module from the module in which the element is in, e.g.: say
-concept C0 is declared in module M0; all types of M0 can have C0 as
-stereotype and that will resolve. However any types on any other
-module cannot see the concept.
-
-One suggestion is to allow scoped names in stereotypes:
-=module::Concept=.
-
-The heuristic for concept resolution is then:
-
-- external modules are never part of the scoped name;
-- on a scoped concept with M names, we first start by assuming that
-  the first name is the model module and M-2 is/are the internal
-  module(s). We try this for all names in M-2, e.g. first two names
-  are model modules and M-3 names are internal modules and so forth.
-
-*** Add support for cross-model concept refinement                    :story:
-
-We've implemented support for cross-model inheritance in sprint 87 but
-we did not cover concepts. Most of the approach is the same, but
-unfortunately we can't just reuse it.
-
-Tasks:
-
-- we need a refines field which is a text collection.
-- we need refinement settings, factory etc.
-- update parsing expander.
-
-*** Add support for "one off" profiles                                :story:
-
-At present one can define top-level profiles. These are useful, but in
-practice we ended up still defining a lot of things in each model. We
-need a way to associate a profile with a model by supplying it on the
-command line. That way users can create profiles and store them next
-to the model rather than having to create a data directory, etc etc.
-
-Actually the problem is that profiles aren't really implemented
-correctly. First we should not call them profiles at all since they
-are not UML profiles and overloading the term just generates
-confusion. Second its important to understand how Dogen profiles come
-about:
-
-- we extend the UML meta-model via stereotypes to support all of the
-  required yarn and quilt concepts.
-- when we instantiate the yarn/quilt types via a UML model, we need to
-  supply the values for the attributes which have been extended. If
-  done properly this would happen via UML tagged values. Dia does not
-  support these. At any rate, at present we use Dogen meta-data which
-  is almost like tagged values.
-- Dogen profiles are then an attempt to create bundles of tagged
-  values with pre-populated values so that we do not need to manually
-  populate them for every type. Instead, we can associate a stereotype
-  with the type and then the system will automatically populate the
-  values from the bundle.
-- From all of this it follows that it should be possible to define
-  these "bundles" directly in a UML diagram. If we were to use UML
-  properly (or at least almost properly), we would define a class with
-  a stereotype of =stereotype=, a name of the stereotype we'd like to
-  define (say =Serializable=) and then its tagged values are the keys
-  and values of the meta-data we want to define. This is strictly
-  speaking not correct UML because we are stating we are augmenting
-  the UML meta-model (hence =stereotype=) but then we end up
-  instantiating a meta-model class with some predefined values. Its
-  not clear how to express this in UML. Note that we have exactly the
-  same issue with concepts.
-- and, after some thinking, we are trying to do exactly the same thing
-  as we are already doing for concepts: i.e. some kind of meta-level
-  operation that allows us to add structural features to an
-  element. Thus we can just use concepts, which are not even defined
-  in UML - augmenting its meaning will not take us away from the
-  literature. We can very simply add a last step to concepts transform
-  which merges the annotations of the concept objects, using exactly
-  the machinery we defined for profiles. The only slight problem is
-  that we cannot reuse concepts across models.
-
-Tasks:
-
-- add annotations merging to concepts processing. Should cause no
-  changes at all on all models.
-- create a model in dogen defining basic concepts.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
 ** Deprecated
 *** CANCELLED Map upsilon primitives to intrinsics                    :story:
