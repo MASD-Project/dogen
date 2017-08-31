@@ -89,8 +89,8 @@ You can download binaries from [Bintray](https://bintray.com/domaindrivenconsult
 For all other architectures and/or operative systems, you will need to build Dogen from source. Source downloads are available below.
 #+end_src
 
-- [[https://twitter.com/MarcoCraveiro/status/887172610487922688][Tweet]]
-- [[https://www.linkedin.com/feed/update/urn:li:activity:6292938732865617920/][LinkedIn]]
+- [[https://twitter.com/MarcoCraveiro/status/903140257218088960][Tweet]]
+- [[https://www.linkedin.com/feed/update/urn:li:activity:6308906359798657024/][LinkedIn]]
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
