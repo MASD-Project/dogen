@@ -37,9 +37,7 @@ namespace meta_model {
  */
 enum class object_types : unsigned int {
     invalid = 0, ///< Represents an uninitialised enum
-    smart_pointer = 1, ///< Value is a smart pointer.
-    associative_container = 2, ///< Type is an associative container.
-    sequence_container = 3 ///< Type is a sequence container.
+    associative_container = 1 ///< Type is an associative container.
 };
 
 } } }

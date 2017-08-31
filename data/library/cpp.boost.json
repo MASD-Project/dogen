@@ -24,7 +24,6 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "smart_pointer",
       "annotation": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -45,7 +44,6 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "smart_pointer",
       "annotation": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,
@@ -66,7 +64,6 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "smart_pointer",
       "annotation": {
         "quilt.cpp.helper.family": "SmartPointer",
         "yarn.type_parameters.count": 1,

@@ -120,12 +120,12 @@ to_object_type(const boost::optional<std::string>& s) const {
         return meta_model::object_types::invalid;
 
     const auto ot(*s);
-    if (ot == object_type_smart_pointer_value)
+    /*if (ot == object_type_smart_pointer_value)
         return meta_model::object_types::smart_pointer;
-    else if (ot == object_type_associative_container_value)
+        else*/ if (ot == object_type_associative_container_value)
         return meta_model::object_types::associative_container;
-    else if (ot == object_type_sequence_container_value)
-        return meta_model::object_types::sequence_container;
+    /*else if (ot == object_type_sequence_container_value)
+      return meta_model::object_types::sequence_container;*/
 
     BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
     BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));

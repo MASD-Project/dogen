@@ -1105,7 +1105,7 @@ object_with_both_transparent_and_opaque_associations(
     helpers::name_factory nf;
     auto o2(boost::make_shared<meta_model::object>());
     o2->name(nf.build_element_name("boost", "shared_ptr"));
-    o2->object_type(yarn::meta_model::object_types::smart_pointer);
+    // o2->object_type(yarn::meta_model::object_types::smart_pointer);
     insert_object(r, o2);
 
     const auto bsp(attribute_types::boost_shared_ptr);
@@ -1187,7 +1187,7 @@ object_with_attribute(const meta_model::origin_types ot,
     } else if (pt == attribute_types::boost_shared_ptr) {
         auto o2(boost::make_shared<meta_model::object>());
         o2->name(nf.build_element_name("boost", "shared_ptr"));
-        o2->object_type(meta_model::object_types::smart_pointer);
+        // o2->object_type(meta_model::object_types::smart_pointer);
         insert_object(r, o2);
 
         if (flags_.associations_indexed())
@@ -1561,7 +1561,7 @@ object_with_group_of_attributes_of_different_types(
     auto o2(boost::make_shared<meta_model::object>());
     yarn::helpers::name_factory nf;
     o2->name(nf.build_element_name("boost", "shared_ptr"));
-    o2->object_type(meta_model::object_types::smart_pointer);
+    // o2->object_type(meta_model::object_types::smart_pointer);
     insert_object(r, o2);
 
     auto o4(make_object(4, mn, ot));

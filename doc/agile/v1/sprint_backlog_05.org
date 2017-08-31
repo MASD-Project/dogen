@@ -14,16 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-30 Wed 23:26]
+#+CAPTION: Clock summary at [2017-08-31 Thu 08:31]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:14* |      |      | 100.0 |
+| *Total time*                                                                | *1:37* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:14   |      |      | 100.0 |
-| Active                                                                      |        | 1:14 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  59.5 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:30 |  40.5 |
+| Stories                                                                     | 1:37   |      |      | 100.0 |
+| Active                                                                      |        | 1:37 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  45.4 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:30 |  30.9 |
+| STARTED Remove object types in yarn                                         |        |      | 0:23 |  23.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -94,6 +95,37 @@ For all other architectures and/or operative systems, you will need to build Dog
     CLOCK: [2017-08-30 Wed 22:09]--[2017-08-30 Wed 22:12] =>  0:03
 
 Updates to sprint and product backlog.
+
+*** STARTED Remove object types in yarn                               :story:
+    CLOCK: [2017-08-31 Thu 08:08]--[2017-08-31 Thu 08:31] =>  0:23
+
+We need to figure out if this enumeration is still in use and if not
+what needs to be done to remove it.
+
+Seems like we are only using associative container at present. We
+could probably replace the enumeration with a simple flag
+
+*** Analysis on profiles and concepts                                 :story:
+
+When concepts were introduced, it was clear that something was not
+quite right on the naming. We used the C++ terminology because it
+mapped well enough to the idea, but it was understood that we were
+talking about two different things. As part of the clean-up required
+for profiles, its time to revisit concepts.
+
+A yarn concept is, really, an "object template". That is, it allows us
+to create a template of a subset of the structure of a yarn object,
+which can then be instantiated (pasted?) into actual objects. One
+would like to avoid the use of the word "template", due to its C++
+connotations, but sadly it seems there isn't a more appropriate word.
+
+Unlike objects, object templates support multiple inheritance.
+
+We consume the object templates via stereotypes.
+
+Profiles share a lot of similarities with object templates:
+
+- they are containers of annotation templates
 
 *** Rename transformers to adapters                                   :story:
 
@@ -673,14 +705,6 @@ Random notes:
 - some types support both (headers)
 - some support imports only (cpp)
 - some support neither (cmakelists, etc).
-
-*** Remove object types in yarn                                       :story:
-
-We need to figure out if this enumeration is still in use and if not
-what needs to be done to remove it.
-
-Seems like we are only using associative container at present. We
-could probably replace the enumeration with a simple flag
 
 ** Deprecated
 *** CANCELLED Make the Zeta model compilable                          :story:
