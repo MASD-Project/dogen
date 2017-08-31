@@ -22,7 +22,6 @@
 #include "dogen/yarn/test_data/meta_model/object_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/attribute_td.hpp"
-#include "dogen/yarn/test_data/meta_model/object_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/type_parameters_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_object_properties_td.hpp"
 
@@ -78,11 +77,6 @@ create_dogen_yarn_meta_model_type_parameters(const unsigned int position) {
     return dogen::yarn::meta_model::type_parameters_generator::create(position);
 }
 
-dogen::yarn::meta_model::object_types
-create_dogen_yarn_meta_model_object_types(const unsigned int position) {
-    return dogen::yarn::meta_model::object_types_generator::create(position);
-}
-
 dogen::yarn::meta_model::orm_object_properties
 create_dogen_yarn_meta_model_orm_object_properties(const unsigned int position) {
     return dogen::yarn::meta_model::orm_object_properties_generator::create(position);
@@ -127,7 +121,7 @@ populate(const unsigned int position, result_type& v) {
     v.parents(create_std_list_dogen_yarn_meta_model_name(position + 18));
     v.leaves(create_std_list_dogen_yarn_meta_model_name(position + 19));
     v.type_parameters(create_dogen_yarn_meta_model_type_parameters(position + 20));
-    v.object_type(create_dogen_yarn_meta_model_object_types(position + 21));
+    v.is_associative_container(create_bool(position + 21));
     v.modeled_concepts(create_std_list_dogen_yarn_meta_model_name(position + 22));
     v.associative_container_keys(create_std_list_dogen_yarn_meta_model_name(position + 23));
     v.provides_opaqueness(create_bool(position + 24));

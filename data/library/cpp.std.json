@@ -270,7 +270,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "associative_container",
+      "is_associative_container": true,
       "annotation": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 1,
@@ -288,7 +288,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "associative_container",
+      "is_associative_container": true,
       "annotation": {
         "quilt.cpp.helper.family": "SequenceContainer",
         "yarn.type_parameters.count": 1,
@@ -306,7 +306,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "associative_container",
+      "is_associative_container": true,
       "annotation": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 1,
@@ -324,7 +324,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "associative_container",
+      "is_associative_container": true,
       "annotation": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 2,
@@ -342,7 +342,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "associative_container",
+      "is_associative_container": true,
       "annotation": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 2,
@@ -360,7 +360,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "object_type": "associative_container",
+      "is_associative_container": true,
       "annotation": {
         "quilt.cpp.helper.family": "AssociativeContainer",
         "yarn.type_parameters.count": 2,

@@ -22,7 +22,6 @@
 #include "dogen/yarn/hash/meta_model/object_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/attribute_hash.hpp"
-#include "dogen/yarn/hash/meta_model/object_types_hash.hpp"
 #include "dogen/yarn/hash/meta_model/type_parameters_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_object_properties_hash.hpp"
 
@@ -111,7 +110,7 @@ std::size_t object_hasher::hash(const object& v) {
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.parents()));
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.leaves()));
     combine(seed, v.type_parameters());
-    combine(seed, v.object_type());
+    combine(seed, v.is_associative_container());
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.modeled_concepts()));
     combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.associative_container_keys()));
     combine(seed, v.provides_opaqueness());

@@ -73,7 +73,6 @@
 #include "dogen/yarn/types/helpers/mapping_context.hpp"
 #include "dogen/yarn/types/helpers/persister_error.hpp"
 #include "dogen/yarn/types/meta_model/letter_cases.hpp"
-#include "dogen/yarn/types/meta_model/object_types.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
 #include "dogen/yarn/types/helpers/location_builder.hpp"
 #include "dogen/yarn/types/helpers/resolution_error.hpp"

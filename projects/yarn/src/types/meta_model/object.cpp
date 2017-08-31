@@ -24,7 +24,6 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/attribute_io.hpp"
-#include "dogen/yarn/io/meta_model/object_types_io.hpp"
 #include "dogen/yarn/io/meta_model/type_parameters_io.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
@@ -120,7 +119,7 @@ object::object()
       is_final_(static_cast<bool>(0)),
       is_abstract_(static_cast<bool>(0)),
       in_inheritance_relationship_(static_cast<bool>(0)),
-      object_type_(static_cast<dogen::yarn::meta_model::object_types>(0)),
+      is_associative_container_(static_cast<bool>(0)),
       provides_opaqueness_(static_cast<bool>(0)),
       can_be_primitive_underlier_(static_cast<bool>(0)) { }
 
@@ -148,7 +147,7 @@ object::object(object&& rhs)
       parents_(std::move(rhs.parents_)),
       leaves_(std::move(rhs.leaves_)),
       type_parameters_(std::move(rhs.type_parameters_)),
-      object_type_(std::move(rhs.object_type_)),
+      is_associative_container_(std::move(rhs.is_associative_container_)),
       modeled_concepts_(std::move(rhs.modeled_concepts_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
       provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
@@ -187,7 +186,7 @@ object::object(
     const std::list<dogen::yarn::meta_model::name>& parents,
     const std::list<dogen::yarn::meta_model::name>& leaves,
     const dogen::yarn::meta_model::type_parameters& type_parameters,
-    const dogen::yarn::meta_model::object_types object_type,
+    const bool is_associative_container,
     const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
     const std::list<dogen::yarn::meta_model::name>& associative_container_keys,
     const bool provides_opaqueness,
@@ -225,7 +224,7 @@ object::object(
       parents_(parents),
       leaves_(leaves),
       type_parameters_(type_parameters),
-      object_type_(object_type),
+      is_associative_container_(is_associative_container),
       modeled_concepts_(modeled_concepts),
       associative_container_keys_(associative_container_keys),
       provides_opaqueness_(provides_opaqueness),
@@ -281,7 +280,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"parents\": " << parents_ << ", "
       << "\"leaves\": " << leaves_ << ", "
       << "\"type_parameters\": " << type_parameters_ << ", "
-      << "\"object_type\": " << object_type_ << ", "
+      << "\"is_associative_container\": " << is_associative_container_ << ", "
       << "\"modeled_concepts\": " << modeled_concepts_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
@@ -315,7 +314,7 @@ void object::swap(object& other) noexcept {
     swap(parents_, other.parents_);
     swap(leaves_, other.leaves_);
     swap(type_parameters_, other.type_parameters_);
-    swap(object_type_, other.object_type_);
+    swap(is_associative_container_, other.is_associative_container_);
     swap(modeled_concepts_, other.modeled_concepts_);
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
@@ -352,7 +351,7 @@ bool object::operator==(const object& rhs) const {
         parents_ == rhs.parents_ &&
         leaves_ == rhs.leaves_ &&
         type_parameters_ == rhs.type_parameters_ &&
-        object_type_ == rhs.object_type_ &&
+        is_associative_container_ == rhs.is_associative_container_ &&
         modeled_concepts_ == rhs.modeled_concepts_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
         provides_opaqueness_ == rhs.provides_opaqueness_ &&
@@ -622,12 +621,12 @@ void object::type_parameters(const dogen::yarn::meta_model::type_parameters&& v)
     type_parameters_ = std::move(v);
 }
 
-dogen::yarn::meta_model::object_types object::object_type() const {
-    return object_type_;
+bool object::is_associative_container() const {
+    return is_associative_container_;
 }
 
-void object::object_type(const dogen::yarn::meta_model::object_types v) {
-    object_type_ = v;
+void object::is_associative_container(const bool v) {
+    is_associative_container_ = v;
 }
 
 const std::list<dogen::yarn::meta_model::name>& object::modeled_concepts() const {

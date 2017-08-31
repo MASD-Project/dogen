@@ -75,16 +75,19 @@ walk_name_tree(const meta_model::endomodel& im, meta_model::object& o,
         o.transparent_associations().push_back(n);
 
     /*
-     * if the parent type is an associative container, the first child
+     * If the parent type is an associative container, the first child
      * type will represent the key of the associative container and
      * the second type will be its value. We need to remember the
      * keys.
+     *
+     * Note that we must still continue to walk the tree even if the
+     * type is not an associative container, since there are other
+     * properties to set (see above).
      */
     bool is_first(true);
-    const auto ac(meta_model::object_types::associative_container);
     const auto i(im.objects().find(n.id()));
     const auto is_associative_container(i != im.objects().end() &&
-        i->second->object_type() == ac);
+        i->second->is_associative_container());
 
     for (const auto c : nt.children()) {
         if (is_first && is_associative_container)

@@ -52,7 +52,6 @@
 #include "dogen/yarn/test_data/helpers/mapping_actions_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_context_td.hpp"
 #include "dogen/yarn/test_data/meta_model/letter_cases_td.hpp"
-#include "dogen/yarn/test_data/meta_model/object_types_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
 #include "dogen/yarn/test_data/transforms/configuration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/type_parameters_td.hpp"

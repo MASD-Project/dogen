@@ -78,12 +78,7 @@ const std::string external_modules_key("external_modules");
 const std::string model_modules_key("model_modules");
 const std::string internal_modules_key("internal_modules");
 const std::string annotations_key("annotation");
-
-const std::string object_type_key("object_type");
-const std::string object_type_smart_pointer_value("smart_pointer");
-const std::string object_type_associative_container_value(
-    "associative_container");
-const std::string object_type_sequence_container_value("sequence_container");
+const std::string is_associative_container_key("is_associative_container");
 
 const std::string invalid_json_file("Failed to parse JSON file: ");
 const std::string invalid_value_in_json("Failed to value in JSON: ");
@@ -91,7 +86,6 @@ const std::string invalid_path("Failed to find JSON path: ");
 const std::string invalid_meta_name("Invalid value for meta name: ");
 const std::string missing_module("Could not find module: ");
 const std::string failed_to_open_file("Failed to open file: ");
-const std::string invalid_object_type("Invalid or unsupported object type: ");
 const std::string duplicate_element_id("Duplicate element id: ");
 const std::string missing_name("JSON element name is mandatory.");
 const std::string missing_meta_name("JSON element name is mandatory.");
@@ -112,23 +106,6 @@ hydrator::hydrator() {
     meta_name_primitive_ = f.make_primitive_name();
     meta_name_exception_ = f.make_exception_name();
     meta_name_concept_ = f.make_concept_name();
-}
-
-meta_model::object_types hydrator::
-to_object_type(const boost::optional<std::string>& s) const {
-    if (!s)
-        return meta_model::object_types::invalid;
-
-    const auto ot(*s);
-    /*if (ot == object_type_smart_pointer_value)
-        return meta_model::object_types::smart_pointer;
-        else*/ if (ot == object_type_associative_container_value)
-        return meta_model::object_types::associative_container;
-    /*else if (ot == object_type_sequence_container_value)
-      return meta_model::object_types::sequence_container;*/
-
-    BOOST_LOG_SEV(lg, error) << invalid_object_type << ot;
-    BOOST_THROW_EXCEPTION(hydration_error(invalid_object_type + ot));
 }
 
 std::list<std::pair<std::string, std::string>>
@@ -327,8 +304,8 @@ hydrator::read_object(const boost::property_tree::ptree& pt) const {
     auto o(boost::make_shared<meta_model::object>());
     populate_element(pt, *o);
 
-    const auto ot(pt.get_optional<std::string>(object_type_key));
-    o->object_type(to_object_type(ot));
+    const auto iac(pt.get_optional<bool>(is_associative_container_key));
+    o->is_associative_container(iac ? *iac : false);
 
     const auto cbpu(pt.get(can_be_primitive_underlier_key, false));
     o->can_be_primitive_underlier(cbpu);

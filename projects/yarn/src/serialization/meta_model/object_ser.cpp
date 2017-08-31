@@ -34,7 +34,6 @@
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/attribute_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/object_types_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_object_properties_ser.hpp"
 
@@ -72,7 +71,7 @@ void save(Archive& ar,
     ar << make_nvp("parents", v.parents_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("type_parameters", v.type_parameters_);
-    ar << make_nvp("object_type", v.object_type_);
+    ar << make_nvp("is_associative_container", v.is_associative_container_);
     ar << make_nvp("modeled_concepts", v.modeled_concepts_);
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
     ar << make_nvp("provides_opaqueness", v.provides_opaqueness_);
@@ -107,7 +106,7 @@ void load(Archive& ar,
     ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("type_parameters", v.type_parameters_);
-    ar >> make_nvp("object_type", v.object_type_);
+    ar >> make_nvp("is_associative_container", v.is_associative_container_);
     ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);
     ar >> make_nvp("provides_opaqueness", v.provides_opaqueness_);

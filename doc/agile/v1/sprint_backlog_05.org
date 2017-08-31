@@ -14,17 +14,17 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-08-31 Thu 08:31]
+#+CAPTION: Clock summary at [2017-08-31 Thu 09:01]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *1:37* |      |      | 100.0 |
+| *Total time*                                                                | *2:06* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 1:37   |      |      | 100.0 |
-| Active                                                                      |        | 1:37 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  45.4 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 0:30 |  30.9 |
-| STARTED Remove object types in yarn                                         |        |      | 0:23 |  23.7 |
+| Stories                                                                     | 2:06   |      |      | 100.0 |
+| Active                                                                      |        | 2:06 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |  34.9 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 0:30 |  23.8 |
+| COMPLETED Remove object types in yarn                                       |        |      | 0:52 |  41.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -96,7 +96,9 @@ For all other architectures and/or operative systems, you will need to build Dog
 
 Updates to sprint and product backlog.
 
-*** STARTED Remove object types in yarn                               :story:
+*** COMPLETED Remove object types in yarn                             :story:
+    CLOSED: [2017-08-31 Thu 08:58]
+    CLOCK: [2017-08-31 Thu 08:32]--[2017-08-31 Thu 09:01] =>  0:29
     CLOCK: [2017-08-31 Thu 08:08]--[2017-08-31 Thu 08:31] =>  0:23
 
 We need to figure out if this enumeration is still in use and if not

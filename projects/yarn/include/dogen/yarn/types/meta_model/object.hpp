@@ -34,7 +34,6 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
-#include "dogen/yarn/types/meta_model/object_types.hpp"
 #include "dogen/yarn/types/meta_model/type_parameters.hpp"
 #include "dogen/yarn/types/meta_model/orm_object_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/object_fwd_ser.hpp"
@@ -96,7 +95,7 @@ public:
         const std::list<dogen::yarn::meta_model::name>& parents,
         const std::list<dogen::yarn::meta_model::name>& leaves,
         const dogen::yarn::meta_model::type_parameters& type_parameters,
-        const dogen::yarn::meta_model::object_types object_type,
+        const bool is_associative_container,
         const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
         const std::list<dogen::yarn::meta_model::name>& associative_container_keys,
         const bool provides_opaqueness,
@@ -312,11 +311,11 @@ public:
     void type_parameters(const dogen::yarn::meta_model::type_parameters&& v);
 
     /**
-     * @brief What kind of object is this.
+     * @brief Object is an associative container.
      */
     /**@{*/
-    dogen::yarn::meta_model::object_types object_type() const;
-    void object_type(const dogen::yarn::meta_model::object_types v);
+    bool is_associative_container() const;
+    void is_associative_container(const bool v);
     /**@}*/
 
     /**
@@ -395,7 +394,7 @@ private:
     std::list<dogen::yarn::meta_model::name> parents_;
     std::list<dogen::yarn::meta_model::name> leaves_;
     dogen::yarn::meta_model::type_parameters type_parameters_;
-    dogen::yarn::meta_model::object_types object_type_;
+    bool is_associative_container_;
     std::list<dogen::yarn::meta_model::name> modeled_concepts_;
     std::list<dogen::yarn::meta_model::name> associative_container_keys_;
     bool provides_opaqueness_;

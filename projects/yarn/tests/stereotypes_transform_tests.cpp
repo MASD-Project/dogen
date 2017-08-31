@@ -46,7 +46,6 @@ const std::string no_leaves("Type marked as visitable but has no leaves");
 
 }
 
-using dogen::yarn::meta_model::object_types;
 using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;

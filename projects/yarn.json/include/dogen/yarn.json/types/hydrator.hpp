@@ -32,7 +32,6 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"
-#include "dogen/yarn/types/meta_model/object_types.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 
 namespace dogen {
@@ -46,14 +45,6 @@ namespace json {
 class hydrator {
 public:
     hydrator();
-
-private:
-    /**
-     * @brief Converts a string to a value in the object types
-     * enumeration.
-     */
-    meta_model::object_types
-    to_object_type(const boost::optional<std::string>& s) const;
 
 private:
     /**
