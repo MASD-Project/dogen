@@ -17,10 +17,10 @@
 bringing [Model Driven Software Development](https://en.wikipedia.org/wiki/Model-driven_software_development) (MDSD)
 workflows to C++ development. In lay terms, our main objective is to
 automate the development process as much as possible: the user creates
-domain models according to one of the supported front-end formats and
+domain models according to one of the supported frontend formats and
 respecting a set of predefined restrictions; Dogen then uses this
 input to generate a source code representation of the model. At
-present the main front-end
+present the main frontend
 is [Dia](https://en.wikipedia.org/wiki/Dia_(software))
 ([Dia test models](https://github.com/DomainDrivenConsulting/dogen/tree/master/test_data/yarn.dia/input)),
 but we also support JSON
