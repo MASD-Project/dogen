@@ -49,15 +49,14 @@ initial_target_chain::transform(const context& ctx) {
     const auto em(exomodel_generation_chain::transform(ctx, tp));
 
     /*
-     * Convert the internal representation of the exogenous model into
-     * an endogenous model, ready for further processing.
+     * Then we convert the internal representation of the exogenous
+     * model into an endogenous model, ready for further processing.
      */
     auto r(exomodel_to_endomodel_transform::transform(em));
 
     /*
      * Next, we set the origin of the target model to target so that
-     * further transforms can be applied such as the origin
-     * transforms.
+     * further transforms can be applied such as the origin transform.
      */
     r.origin_type(meta_model::origin_types::target);
 

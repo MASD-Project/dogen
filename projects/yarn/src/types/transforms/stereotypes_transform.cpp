@@ -340,6 +340,11 @@ void stereotypes_transform::expand(meta_model::object& o,
         BOOST_THROW_EXCEPTION(transformation_error(invalid_stereotypes + s));
     }
 
+    /*
+     * Finally, we trim down the list of stereotypes to just those
+     * that are handled externally - e.g. consume the stereotypes
+     * which we've already dealt with here.
+     */
     o.stereotypes(external_stereotypes);
 }
 
