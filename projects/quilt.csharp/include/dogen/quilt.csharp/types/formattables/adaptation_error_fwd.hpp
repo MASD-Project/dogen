@@ -18,37 +18,19 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_TRANSFORMER_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_TRANSFORMER_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_ADAPTATION_ERROR_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_ADAPTATION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
-
-#include <string>
-#include <unordered_map>
-#include "dogen/yarn/types/meta_model/model.hpp"
-#include "dogen/quilt.csharp/types/formatters/repository.hpp"
-#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-/**
- * @brief Provides a number of useful transformations in the
- * formattables space.
- */
-class transformer {
-public:
-    /**
-     * @brief Given a yarn model, produces the corresponding formattables.
-     */
-    std::unordered_map<std::string, formattable>
-    transform(const formatters::repository& frp,
-        const yarn::meta_model::model& m) const;
-};
+class adaptation_error;
 
 } } } }
 

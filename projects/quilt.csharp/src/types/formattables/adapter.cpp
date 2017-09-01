@@ -21,14 +21,14 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/quilt.csharp/types/formattables/artefact_properties.hpp"
-#include "dogen/quilt.csharp/types/formattables/transformation_error.hpp"
+#include "dogen/quilt.csharp/types/formattables/adaptation_error.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.csharp/types/formattables/transformer.hpp"
+#include "dogen/quilt.csharp/types/formattables/adapter.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
+static logger lg(logger_factory("quilt.cpp.formattables.adapter"));
 
 }
 
@@ -37,7 +37,7 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-std::unordered_map<std::string, formattable> transformer::transform(
+std::unordered_map<std::string, formattable> adapter::adapt(
     const formatters::repository& frp, const yarn::meta_model::model& m) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
                              << " Elements in model: " << m.elements().size();

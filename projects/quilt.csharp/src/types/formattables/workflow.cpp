@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.csharp/types/formattables/transformer.hpp"
+#include "dogen/quilt.csharp/types/formattables/adapter.hpp"
 #include "dogen/quilt.csharp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.csharp/types/formattables/workflow.hpp"
 #include "dogen/quilt.csharp/io/formattables/model_io.hpp"
@@ -41,8 +41,8 @@ model workflow:: make_model(const formatters::repository& frp,
     model r;
     r.name(m.name());
 
-    transformer t;
-    r.formattables(t.transform(frp, m));
+    adapter a;
+    r.formattables(a.adapt(frp, m));
 
     return r;
 }

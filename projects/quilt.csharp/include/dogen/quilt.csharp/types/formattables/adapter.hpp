@@ -18,34 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_TRANSFORMATION_ERROR_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_TRANSFORMATION_ERROR_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_ADAPTER_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
 #include <string>
-#include <boost/exception/info.hpp>
+#include <unordered_map>
+#include "dogen/yarn/types/meta_model/model.hpp"
+#include "dogen/quilt.csharp/types/formatters/repository.hpp"
+#include "dogen/quilt.csharp/types/formattables/formattable.hpp"
 
 namespace dogen {
 namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class transformation_error : public virtual std::exception, public virtual boost::exception {
+/**
+ * @brief Provides a number of useful transformations in the
+ * formattables space.
+ */
+class adapter {
 public:
-    transformation_error() = default;
-    ~transformation_error() noexcept = default;
-
-public:
-    explicit transformation_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
+    /**
+     * @brief Given a yarn model, produces the corresponding formattables.
+     */
+    std::unordered_map<std::string, formattable>
+    adapt(const formatters::repository& frp,
+        const yarn::meta_model::model& m) const;
 };
 
 } } } }

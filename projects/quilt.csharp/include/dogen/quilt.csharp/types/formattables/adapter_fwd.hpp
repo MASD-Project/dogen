@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_TRANSFORMER_FWD_HPP
-#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_TRANSFORMER_FWD_HPP
+#ifndef DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_ADAPTER_FWD_HPP
+#define DOGEN_QUILT_CSHARP_TYPES_FORMATTABLES_ADAPTER_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -30,7 +30,7 @@ namespace quilt {
 namespace csharp {
 namespace formattables {
 
-class transformer;
+class adapter;
 
 } } } }
 
