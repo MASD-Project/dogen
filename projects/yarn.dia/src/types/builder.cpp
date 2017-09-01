@@ -25,7 +25,7 @@
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
-#include "dogen/yarn.dia/types/building_error.hpp"
+#include "dogen/yarn.dia/types/adapter.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 
@@ -109,7 +109,7 @@ void builder::update_module(const processed_object& po) {
         !po.comment().applicable_to_parent_object())
         return;
 
-    const transformer t(context_);
+    const adapter a(context_);
     const auto& documentation(po.comment().documentation());
     if (po.child_node_id().empty()) {
         /*
@@ -118,7 +118,7 @@ void builder::update_module(const processed_object& po) {
          * documentation for the root module.
          */
         auto& pair(model_.root_module());
-        pair.first = t.to_scribble_group(po, true/*is_root_module*/);
+        pair.first = a.to_scribble_group(po, true/*is_root_module*/);
         pair.second->documentation(documentation);
         return;
     }
@@ -135,7 +135,7 @@ void builder::update_module(const processed_object& po) {
         BOOST_THROW_EXCEPTION(building_error(package_not_mapped + package_id));
     }
     auto& pair(i->second);
-    pair.first = t.to_scribble_group(po, false/*is_root_module*/);
+    pair.first = a.to_scribble_group(po, false/*is_root_module*/);
     pair.second->documentation(documentation);
 }
 
@@ -153,9 +153,9 @@ void builder::add(const processed_object& po) {
      * this is done during the building phase.
      */
     const auto dot(po.dia_object_type());
-    const transformer t(context_);
+    const adapter a(context_);
     if (dot == dia_object_types::uml_large_package) {
-        add_module_to_context(po.id(), t.to_module(po));
+        add_module_to_context(po.id(), a.to_module(po));
         return;
     } else if (dot == dia_object_types::uml_note) {
         update_module(po);
@@ -172,16 +172,16 @@ void builder::add(const processed_object& po) {
      */
     switch(po.yarn_element_type()) {
     case yarn_element_types::enumeration:
-        model_.enumerations().push_back(t.to_enumeration(po));
+        model_.enumerations().push_back(a.to_enumeration(po));
         break;
     case yarn_element_types::primitive:
-        model_.primitives().push_back(t.to_primitive(po));
+        model_.primitives().push_back(a.to_primitive(po));
         break;
     case yarn_element_types::exception:
-        model_.exceptions().push_back(t.to_exception(po));
+        model_.exceptions().push_back(a.to_exception(po));
         break;
     case yarn_element_types::concept: {
-        const auto pair(t.to_concept(po));
+        const auto pair(a.to_concept(po));
         update_parentage(po.id(), pair.second->name());
         model_.concepts().push_back(pair);
         break;
@@ -191,7 +191,7 @@ void builder::add(const processed_object& po) {
          * Objects are in effect anything which was not marked as
          * something else so they are our default case.
          */
-        const auto pair(t.to_object(po));
+        const auto pair(a.to_object(po));
         update_parentage(po.id(), pair.second->name());
         model_.objects().push_back(pair);
     } }

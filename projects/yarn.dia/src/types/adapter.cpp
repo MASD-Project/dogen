@@ -26,17 +26,17 @@
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/dia/types/composite.hpp"
-#include "dogen/yarn.dia/types/transformation_error.hpp"
+#include "dogen/yarn.dia/types/adaptation_error.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/io/processed_object_io.hpp"
 #include "dogen/yarn.dia/io/context_io.hpp"
 #include "dogen/yarn.dia/types/validator.hpp"
-#include "dogen/yarn.dia/types/transformer.hpp"
+#include "dogen/yarn.dia/types/adapter.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.dia.transformer"));
+static logger lg(logger_factory("yarn.dia.adapter"));
 
 const std::string enumerator_with_type("Enumerators cannot have a type: ");
 const std::string duplicate_attribute_name("Attribute name already exists: ");
@@ -52,25 +52,25 @@ namespace dogen {
 namespace yarn {
 namespace dia {
 
-transformer::transformer(const context& ctx) : context_(ctx) {
+adapter::adapter(const context& ctx) : context_(ctx) {
     BOOST_LOG_SEV(lg, debug) << "Initial context: " << context_;
 }
 
-void transformer::validate_dia_object_name(const std::string& n) const {
+void adapter::validate_dia_object_name(const std::string& n) const {
     if (n.empty()) {
         BOOST_LOG_SEV(lg, error) << empty_dia_object_name;
-        BOOST_THROW_EXCEPTION(transformation_error(empty_dia_object_name));
+        BOOST_THROW_EXCEPTION(adaptation_error(empty_dia_object_name));
     }
 }
 
-meta_model::name transformer::to_name(const std::string& n) const {
+meta_model::name adapter::to_name(const std::string& n) const {
     validate_dia_object_name(n);
     helpers::name_builder b;
     b.simple_name(n);
     return b.build();
 }
 
-meta_model::name transformer::
+meta_model::name adapter::
 to_name(const std::string& n, const meta_model::name& module_n) const {
     validate_dia_object_name(n);
     helpers::name_factory f;
@@ -78,7 +78,7 @@ to_name(const std::string& n, const meta_model::name& module_n) const {
 }
 
 meta_model::attribute
-transformer::to_attribute(const processed_attribute& a) const {
+adapter::to_attribute(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
     meta_model::attribute r;
@@ -89,13 +89,13 @@ transformer::to_attribute(const processed_attribute& a) const {
 }
 
 meta_model::enumerator
-transformer::to_enumerator(const processed_attribute& a) const {
+adapter::to_enumerator(const processed_attribute& a) const {
     validate_dia_object_name(a.name());
 
     if (!a.type().empty()) {
         const auto t(a.type());
         BOOST_LOG_SEV(lg, error) << enumerator_with_type << t;
-        BOOST_THROW_EXCEPTION(transformation_error(enumerator_with_type + t));
+        BOOST_THROW_EXCEPTION(adaptation_error(enumerator_with_type + t));
     }
 
     meta_model::enumerator r;
@@ -104,7 +104,7 @@ transformer::to_enumerator(const processed_attribute& a) const {
     return r;
 }
 
-void transformer::
+void adapter::
 update_element(const processed_object& po, meta_model::element& e) const {
     e.origin_type(meta_model::origin_types::not_yet_determined);
 
@@ -119,7 +119,7 @@ update_element(const processed_object& po, meta_model::element& e) const {
         if (i == context_.dia_id_to_module().end()) {
             BOOST_LOG_SEV(lg, error) << package_not_mapped << package_id;
             BOOST_THROW_EXCEPTION(
-                transformation_error(package_not_mapped + package_id));
+                adaptation_error(package_not_mapped + package_id));
         }
         const auto& module(*i->second.second);
         e.name(to_name(po.name(), module.name()));
@@ -139,7 +139,7 @@ update_element(const processed_object& po, meta_model::element& e) const {
         e.stereotypes().push_back(us);
 }
 
-annotations::scribble_group transformer::
+annotations::scribble_group adapter::
 to_scribble_group(const processed_object& po, const bool is_root_module) const {
     annotations::scribble psbl;
     const auto& kvps(po.comment().key_value_pairs());
@@ -165,7 +165,7 @@ to_scribble_group(const processed_object& po, const bool is_root_module) const {
         if (!inserted) {
             BOOST_LOG_SEV(lg, error) << duplicate_attribute_name << attr.name();
             BOOST_THROW_EXCEPTION(
-                transformation_error(duplicate_attribute_name + attr.name()));
+                adaptation_error(duplicate_attribute_name + attr.name()));
         }
     }
 
@@ -173,7 +173,7 @@ to_scribble_group(const processed_object& po, const bool is_root_module) const {
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::object>>
-transformer::to_object(const processed_object& po) const {
+adapter::to_object(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object: "
                              << po.id();
 
@@ -196,7 +196,7 @@ transformer::to_object(const processed_object& po) const {
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::exception>>
-transformer::to_exception(const processed_object& po) const {
+adapter::to_exception(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to exception: "
                              << po.id();
 
@@ -209,7 +209,7 @@ transformer::to_exception(const processed_object& po) const {
 
 std::pair<annotations::scribble_group,
           boost::shared_ptr<meta_model::enumeration>>
-transformer::to_enumeration(const processed_object& po) const {
+adapter::to_enumeration(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to enumeration: "
                              << po.id();
 
@@ -224,7 +224,7 @@ transformer::to_enumeration(const processed_object& po) const {
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::primitive>>
-transformer::to_primitive(const processed_object& po) const {
+adapter::to_primitive(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to primitive: "
                              << po.id();
 
@@ -236,7 +236,7 @@ transformer::to_primitive(const processed_object& po) const {
 }
 
 boost::shared_ptr<meta_model::module>
-transformer::to_module(const processed_object& po) const {
+adapter::to_module(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to module: "
                              << po.id();
 
@@ -246,7 +246,7 @@ transformer::to_module(const processed_object& po) const {
 }
 
 std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::concept>>
-transformer::to_concept(const processed_object& po) const {
+adapter::to_concept(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
                              << po.id();
 

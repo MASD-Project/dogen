@@ -68,25 +68,25 @@
         <dia:point val="50,68"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.95,67.95;60.0325,71.05"/>
+        <dia:rectangle val="49.95,67.95;58.1525,71.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="50,68"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.9824999999999999"/>
+        <dia:real val="8.1025000000000009"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#transformation_error#</dia:string>
+        <dia:string>#adaptation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#A fatal error has occurred while transforming a Dia model
+        <dia:string>#A fatal error has occurred while adapting a Dia model object
 into its yarn representation.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
@@ -955,7 +955,7 @@ into its yarn representation.#</dia:string>
         <dia:real val="6.8000000000000007"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#transformer#</dia:string>
+        <dia:string>#adapter#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#handcrafted#</dia:string>
@@ -1418,7 +1418,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="73.7675,55.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.9413,55.05;74.5175,68.8"/>
+        <dia:rectangle val="54.0012,55.05;74.5175,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1426,8 +1426,8 @@ into its yarn representation.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="73.7675,55.8"/>
         <dia:point val="73.7675,61"/>
-        <dia:point val="54.9913,61"/>
-        <dia:point val="54.9913,68"/>
+        <dia:point val="54.0513,61"/>
+        <dia:point val="54.0513,68"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

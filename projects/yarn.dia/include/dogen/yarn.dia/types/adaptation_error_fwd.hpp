@@ -18,38 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_TRANSFORMATION_ERROR_HPP
-#define DOGEN_YARN_DIA_TYPES_TRANSFORMATION_ERROR_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_ADAPTATION_ERROR_FWD_HPP
+#define DOGEN_YARN_DIA_TYPES_ADAPTATION_ERROR_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <string>
-#include <boost/exception/info.hpp>
-
 namespace dogen {
 namespace yarn {
 namespace dia {
 
-/**
- * @brief A fatal error has occurred while transforming a Dia model
- * into its yarn representation.
- */
-class transformation_error : public virtual std::exception, public virtual boost::exception {
-public:
-    transformation_error() = default;
-    ~transformation_error() noexcept = default;
-
-public:
-    explicit transformation_error(const std::string& message) : message_(message) { }
-
-public:
-    const char* what() const noexcept { return(message_.c_str()); }
-
-private:
-    const std::string message_;
-};
+class adaptation_error;
 
 } } }
 

@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_DIA_TYPES_TRANSFORMER_HPP
-#define DOGEN_YARN_DIA_TYPES_TRANSFORMER_HPP
+#ifndef DOGEN_YARN_DIA_TYPES_ADAPTER_HPP
+#define DOGEN_YARN_DIA_TYPES_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -50,21 +50,21 @@ namespace dia {
 /**
  * @brief Transforms Dia objects into their yarn counterpart.
  */
-class transformer {
+class adapter {
 public:
-    transformer() = delete;
-    transformer(const transformer&) = delete;
-    transformer(transformer&&) = default;
-    ~transformer() noexcept = default;
+    adapter() = delete;
+    adapter(const adapter&) = delete;
+    adapter(adapter&&) = default;
+    ~adapter() noexcept = default;
 
 public:
     /**
-     * @brief Initialises the transformer.
+     * @brief Initialises the adapter.
      *
      * @pre context pre-prepopulated with all the names and IDs
      * required for the transformations requested.
      */
-    explicit transformer(const context& ctx);
+    explicit adapter(const context& ctx);
 
 private:
     /**

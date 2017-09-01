@@ -33,7 +33,6 @@
 #include "dogen/yarn/types/meta_model/name.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn.dia/types/context.hpp"
-#include "dogen/yarn.dia/types/transformer.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 
 namespace dogen {

@@ -28,8 +28,8 @@
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/exception_io.hpp"
-#include "dogen/yarn.dia/types/transformer.hpp"
-#include "dogen/yarn.dia/types/transformation_error.hpp"
+#include "dogen/yarn.dia/types/adapter.hpp"
+#include "dogen/yarn.dia/types/adaptation_error.hpp"
 #include "dogen/yarn.dia/io/context_io.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/test/mock_processed_object_factory.hpp"
@@ -42,7 +42,7 @@ using mock_factory = dogen::yarn::dia::test::mock_processed_object_factory;
 namespace  {
 
 const std::string test_module("yarn.dia");
-const std::string test_suite("transformer_tests");
+const std::string test_suite("adapter_tests");
 
 const std::string empty;
 const std::string model_name("test");
@@ -67,26 +67,26 @@ dogen::annotations::scribble_group empty_scribble_group;
 
 }
 
-using dogen::yarn::dia::transformation_error;
+using dogen::yarn::dia::adaptation_error;
 using dogen::utility::test::contains_checker;
 
-BOOST_AUTO_TEST_SUITE(transformer_tests)
+BOOST_AUTO_TEST_SUITE(adapter_tests)
 
 BOOST_AUTO_TEST_CASE(empty_named_uml_class_throws) {
     SETUP_TEST_LOG_SOURCE("empty_named_uml_class_throws");
 
-    contains_checker<transformation_error> cc(empty_name);
+    contains_checker<adaptation_error> cc(empty_name);
     const auto po(mock_factory::make_empty_named_class());
-    const transformer t(empty_context);
-    BOOST_CHECK_EXCEPTION(t.to_object(po), transformation_error, cc);
+    const adapter a(empty_context);
+    BOOST_CHECK_EXCEPTION(a.to_object(po), adaptation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_no_stereotype_transforms_into_expected_value_object");
-    const transformer t(empty_context);
+    const adapter a(empty_context);
 
     const auto po(mock_factory::make_class());
-    const auto pair(t.to_object(po));
+    const auto pair(a.to_object(po));
     const auto ptr(pair.second);
     const auto& o(*ptr);
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
@@ -100,11 +100,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_no_stereotype_transforms_into_expected_value
 BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_transforms_into_expected_enumeration");
 
-    const transformer t(empty_context);
+    const adapter a(empty_context);
 
     const auto st(enumeration_stereotype);
     const auto po(mock_factory::make_class(0, st));
-    const auto pair(t.to_enumeration(po));
+    const auto pair(a.to_enumeration(po));
     const auto ptr(pair.second);
     const auto& e(*ptr);
     BOOST_LOG_SEV(lg, debug) << "Enumeration: " << e;
@@ -116,10 +116,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_transforms_into_expec
 BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expected_exception) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_transforms_into_expected_exception");
 
-    const transformer t(empty_context);
+    const adapter a(empty_context);
     const auto st(exception_stereotype);
     const auto po(mock_factory::make_class(0, st));
-    const auto pair(t.to_enumeration(po));
+    const auto pair(a.to_enumeration(po));
     const auto ptr(pair.second);
     const auto& e(*ptr);
     BOOST_LOG_SEV(lg, debug) << "Exception: " << e;
@@ -131,9 +131,9 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_transforms_into_expecte
 BOOST_AUTO_TEST_CASE(uml_large_package_transforms_into_expected_module) {
     SETUP_TEST_LOG_SOURCE("uml_large_package_transforms_into_expected_module");
 
-    transformer t(empty_context);
+    adapter a(empty_context);
     const auto po(mock_factory::make_large_package());
-    const auto ptr(t.to_module(po));
+    const auto ptr(a.to_module(po));
     const auto& m(*ptr);
     BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
@@ -147,10 +147,10 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_package_transforms_into_expected_elements");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto pos(mock_factory::make_class_inside_large_package());
-    const auto ptr1(t.to_module(pos[0]));
+    const auto ptr1(a.to_module(pos[0]));
     const auto& m(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
@@ -162,7 +162,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_package_transforms_into_expected_elements) {
     ctx.dia_id_to_module()[pos[0].id()] =
         std::make_pair(empty_scribble_group, ptr1);
 
-    const auto pair(t.to_object(pos[1]));
+    const auto pair(a.to_object(pos[1]));
     const auto ptr2(pair.second);
     const auto o(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
@@ -179,11 +179,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_package_transforms_into_expected_elements");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto st(enumeration_stereotype);
     const auto pos(mock_factory::make_class_inside_large_package(0, st));
-    const auto ptr1(t.to_module(pos[0]));
+    const auto ptr1(a.to_module(pos[0]));
     const auto& m(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
@@ -196,7 +196,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_package_transforms
     ctx.dia_id_to_module()[pos[0].id()] =
         std::make_pair(empty_scribble_group, ptr1);
 
-    const auto pair(t.to_enumeration(pos[1]));
+    const auto pair(a.to_enumeration(pos[1]));
     const auto ptr2(pair.second);
     const auto& e(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Enumeration: " << e;
@@ -211,11 +211,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_package_transforms_into_expected_elements");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto st(exception_stereotype);
     const auto pos(mock_factory::make_class_inside_large_package(0, st));
-    const auto ptr1(t.to_module(pos[0]));
+    const auto ptr1(a.to_module(pos[0]));
     const auto& m(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Module: " << m;
 
@@ -228,7 +228,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
     ctx.dia_id_to_module()[pos[0].id()] =
         std::make_pair(empty_scribble_group, ptr1);
 
-    const auto pair(t.to_exception(pos[1]));
+    const auto pair(a.to_exception(pos[1]));
     const auto ptr2(pair.second);
     const auto e(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Exception: " << e;
@@ -242,33 +242,33 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_package_transforms_i
 BOOST_AUTO_TEST_CASE(uml_class_in_non_existing_package_throws) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_non_existing_package_throws");
 
-    const transformer t(empty_context);
+    const adapter a(empty_context);
     auto pos(mock_factory::make_class_inside_large_package());
-    contains_checker<transformation_error> cc(missing_mapping);
-    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), transformation_error, cc);
+    contains_checker<adaptation_error> cc(missing_mapping);
+    BOOST_CHECK_EXCEPTION(a.to_object(pos[1]), adaptation_error, cc);
 
     auto st(enumeration_stereotype);
     pos = mock_factory::make_class_inside_large_package(0 , st);
-    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), transformation_error, cc);
+    BOOST_CHECK_EXCEPTION(a.to_object(pos[1]), adaptation_error, cc);
 
     st = exception_stereotype;
     pos = mock_factory::make_class_inside_large_package(0 , st);
-    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), transformation_error, cc);
+    BOOST_CHECK_EXCEPTION(a.to_object(pos[1]), adaptation_error, cc);
 
     st = service_stereotype;
     pos = mock_factory::make_class_inside_large_package(0 , st);
-    BOOST_CHECK_EXCEPTION(t.to_object(pos[1]), transformation_error, cc);
+    BOOST_CHECK_EXCEPTION(a.to_object(pos[1]), adaptation_error, cc);
 }
 
 BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements) {
     SETUP_TEST_LOG_SOURCE("uml_class_in_two_packages_transforms_into_expected_elements");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto st(exception_stereotype);
     const auto pos(mock_factory::make_class_inside_two_large_packages());
-    const auto ptr0(t.to_module(pos[0]));
+    const auto ptr0(a.to_module(pos[0]));
     const auto& m0(*ptr0);
     BOOST_LOG_SEV(lg, debug) << "Module 0: " << m0;
 
@@ -280,7 +280,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements
     ctx.dia_id_to_module()[pos[0].id()] =
         std::make_pair(empty_scribble_group, ptr0);
 
-    const auto ptr1(t.to_module(pos[1]));
+    const auto ptr1(a.to_module(pos[1]));
     const auto& m1(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Module 1: " << m1;
 
@@ -292,7 +292,7 @@ BOOST_AUTO_TEST_CASE(uml_class_in_two_packages_transforms_into_expected_elements
     ctx.dia_id_to_module()[pos[1].id()] =
         std::make_pair(empty_scribble_group, ptr1);
 
-    const auto pair(t.to_object(pos[2]));
+    const auto pair(a.to_object(pos[2]));
     const auto ptr2(pair.second);
     const auto& o(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
@@ -309,11 +309,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
     SETUP_TEST_LOG_SOURCE("uml_class_with_enumeration_stereotype_in_two_packages_transforms_into_expected_elements");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto st(exception_stereotype);
     const auto pos(mock_factory::make_class_inside_two_large_packages());
-    const auto ptr0(t.to_module(pos[0]));
+    const auto ptr0(a.to_module(pos[0]));
     const auto& m0(*ptr0);
     BOOST_LOG_SEV(lg, debug) << "Module 0: " << m0;
 
@@ -325,7 +325,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
     ctx.dia_id_to_module()[pos[0].id()] =
         std::make_pair(empty_scribble_group, ptr0);
 
-    const auto ptr1(t.to_module(pos[1]));
+    const auto ptr1(a.to_module(pos[1]));
     const auto& m1(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Module 1: " << m1;
 
@@ -337,7 +337,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_enumeration_stereotype_in_two_packages_trans
     ctx.dia_id_to_module()[pos[1].id()] =
         std::make_pair(empty_scribble_group, ptr1);
 
-    const auto pair(t.to_enumeration(pos[2]));
+    const auto pair(a.to_enumeration(pos[2]));
     const auto ptr2(pair.second);
     const auto& e(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Enumeration: " << e;
@@ -353,11 +353,11 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     SETUP_TEST_LOG_SOURCE("uml_class_with_exception_stereotype_in_two_packages_transforms_into_expected_elements");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto st(exception_stereotype);
     const auto pos(mock_factory::make_class_inside_two_large_packages());
-    const auto ptr0(t.to_module(pos[0]));
+    const auto ptr0(a.to_module(pos[0]));
     const auto& m0(*ptr0);
     BOOST_LOG_SEV(lg, debug) << "Module 0: " << m0;
 
@@ -369,7 +369,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     ctx.dia_id_to_module()[pos[0].id()] =
         std::make_pair(empty_scribble_group, ptr0);
 
-    const auto ptr1(t.to_module(pos[1]));
+    const auto ptr1(a.to_module(pos[1]));
     const auto& m1(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Module 1: " << m1;
 
@@ -381,7 +381,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_exception_stereotype_in_two_packages_transfo
     ctx.dia_id_to_module()[pos[1].id()] =
         std::make_pair(empty_scribble_group, ptr1);
 
-    const auto pair(t.to_exception(pos[2]));
+    const auto pair(a.to_exception(pos[2]));
     const auto ptr2(pair.second);
     const auto& e(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Exception: " << e;
@@ -397,13 +397,13 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     SETUP_TEST_LOG_SOURCE("uml_class_with_inheritance_results_in_expected_object");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto pos(mock_factory::make_generalization());
     const auto con(pos[0].connection());
     BOOST_REQUIRE(con);
 
-    const auto pair1(t.to_object(pos[1]));
+    const auto pair1(a.to_object(pos[1]));
     const auto ptr1(pair1.second);
     const auto& p(*ptr1);
     BOOST_LOG_SEV(lg, debug) << "Parent: " << p;
@@ -416,7 +416,7 @@ BOOST_AUTO_TEST_CASE(uml_class_with_inheritance_results_in_expected_object) {
     BOOST_REQUIRE(p.name().location().internal_modules().empty());
     BOOST_CHECK(!p.documentation().empty());
 
-    const auto pair(t.to_object(pos[2]));
+    const auto pair(a.to_object(pos[2]));
     const auto ptr2(pair.second);
     const auto& c(*ptr2);
     BOOST_LOG_SEV(lg, debug) << "Child: " << c;
@@ -432,10 +432,10 @@ BOOST_AUTO_TEST_CASE(uml_class_with_one_attribute_transforms_into_object_with_on
     SETUP_TEST_LOG_SOURCE("uml_class_with_one_attribute_transforms_into_object_with_one_attribute");
 
     auto ctx(empty_context);
-    const transformer t(ctx);
+    const adapter a(ctx);
 
     const auto po(mock_factory::make_class_with_attribute());
-    const auto pair(t.to_object(po));
+    const auto pair(a.to_object(po));
     const auto ptr0(pair.second);
     const auto& o(*ptr0);
     BOOST_LOG_SEV(lg, debug) << "Object: " << o;
