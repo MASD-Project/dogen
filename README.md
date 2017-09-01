@@ -8,7 +8,7 @@
 [![Releases](https://badge.fury.io/gh/domaindrivenconsulting%2fdogen.svg)](https://github.com/domaindrivenconsulting/dogen/releases)
 [![Gitter](https://badges.gitter.im/chat.svg)](https://gitter.im/domaindrivenconsulting/dogen?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Coverity](https://img.shields.io/coverity/scan/9268.svg)](https://scan.coverity.com/projects/domaindrivenconsulting-dogen)
-[![Download](https://api.bintray.com/packages/domaindrivenconsulting/Dogen/Dogen/images/download.svg?version=1.0.03) ](https://bintray.com/domaindrivenconsulting/Dogen/Dogen/1.0.03/link)
+[![Download](https://api.bintray.com/packages/domaindrivenconsulting/Dogen/Dogen/images/download.svg?version=1.0.04) ](https://bintray.com/domaindrivenconsulting/Dogen/Dogen/1.0.04/link)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/5d7fca8ac9a64ea8b8d35bc8b0d534b5)](https://www.codacy.com/app/marco-craveiro/dogen?utm_source=github.com&utm_medium=referral&utm_content=DomainDrivenConsulting/dogen&utm_campaign=badger)
 
 # Overview
@@ -48,20 +48,21 @@ a
 
 # Building From Source
 
-The Dogen build has the following build dependencies, across all
-operative systems:
+The Dogen build has the following dependencies, across all operative
+systems:
 
 | Name   | Type      | Version                | Description                             |
 |--------|-----------|------------------------|-----------------------------------------|
-| Git    | Optional  | Any recent version.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/DomainDrivenConsulting/dogen)               |
-| CMake  | Mandatory | Version 3.3 or later.  | Required to generate the build files.   |
-| Boost  | Mandatory | Version 1.61 or later. | Earlier versions may also work, but patches are required. |
-| ODB    | Optional  | Any recent version     | If you want to build the ORM examples, you need ODB. You will also need a backend such as Oracle, Postgres, etc.|
+| Git    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/DomainDrivenConsulting/dogen).               |
+| CMake  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
+| Boost  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure
+to build and install the static libraries.|
+| ODB    | Optional  | Any recent.    | If you want to build the ORM examples, you need ODB. You will also need a backend such as Oracle, Postgres, etc.|
 
 In addition to these dependencies, you will also need a build
 toolchain. On Linux and OSX, you need a recent compiler - such as GCC
-6 or later, Clang 3.8 or later - and ninja or GNU Make. On Windows you
-will need Visual Studio 2015 or later.
+6 or Clang 3.8 - and Ninja or GNU Make. On Windows you will need
+Visual Studio 2015 or later.
 
 Once you have all dependencies installed and setup, you can then clone
 the repository and setup the build directory, using the shell of your
@@ -96,20 +97,17 @@ cmake --build . --config Release --target ALL_BUILD
 ```
 
 Note that if you have installed Boost on a non-standard location, you
-need to add ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH``` to
-the CMake command-line above:
+need to set ```CMAKE_INCLUDE_PATH``` and ```CMAKE_LIBRARY_PATH```
+accordingly:
 
 ```
 CMAKE_INCLUDE_PATH=/my/boost/include/path CMAKE_LIBRARY_PATH=/my/boost/lib/path cmake ../..
 ```
 
-**Important**: We link statically against Boost at present, so be sure
-to build and install the static libraries.
-
 # Demo
 
-At present we don't have a recent demo of Dogen, but this fairly old
-one should give you an idea of its workflow.
+We don't really have a recent demo of Dogen, but this fairly old one
+should give you an idea of its workflow:
 
 [![Alt text](https://img.youtube.com/vi/Z7k8qbImXkU/0.jpg)](https://youtu.be/Z7k8qbImXkU)
 
