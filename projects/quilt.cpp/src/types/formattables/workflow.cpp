@@ -19,7 +19,7 @@
  *
  */
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/quilt.cpp/types/formattables/transformer.hpp"
+#include "dogen/quilt.cpp/types/formattables/adapter.hpp"
 #include "dogen/quilt.cpp/types/formattables/model_expander.hpp"
 #include "dogen/quilt.cpp/types/formattables/workflow.hpp"
 
@@ -37,8 +37,8 @@ namespace formattables {
 
 model workflow::make_model(const formatters::repository& frp,
     const yarn::meta_model::model& m) const {
-    transformer t;
-    return t.transform(frp, m);
+    adapter a;
+    return a.adapt(frp, m);
 }
 
 void workflow::expand_model(

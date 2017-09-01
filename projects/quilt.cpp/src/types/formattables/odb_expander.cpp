@@ -27,7 +27,7 @@
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/quilt.cpp/types/formattables/transformer.hpp"
+#include "dogen/quilt.cpp/types/formattables/adapter.hpp"
 #include "dogen/quilt.cpp/types/fabric/common_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/object_odb_options.hpp"
 #include "dogen/quilt.cpp/types/fabric/element_visitor.hpp"
@@ -201,7 +201,7 @@ void updator::visit(yarn::meta_model::object& o) {
 
                     const auto ds(pair.first);
                     const auto type(pair.second);
-                    s << transformer::to_odb_database(ds)
+                    s << adapter::to_odb_database(ds)
                       << ":type(\"" << type << "\")";
 
                     is_first = false;

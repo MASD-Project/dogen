@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ADAPTER_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ADAPTER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -44,7 +44,7 @@ namespace formattables {
  * @brief Provides a number of useful transformations in the
  * formattables space.
  */
-class transformer {
+class adapter {
 public:
     static std::string
     to_odb_database(const yarn::meta_model::orm_database_systems ds);
@@ -60,7 +60,7 @@ public:
     /**
      * @brief Given a yarn model, produces the corresponding formattables.
      */
-    model transform(const formatters::repository& frp,
+    model adapt(const formatters::repository& frp,
         const yarn::meta_model::model& m) const;
 };
 

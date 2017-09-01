@@ -25,14 +25,14 @@
 #include "dogen/yarn/io/meta_model/orm_database_systems_io.hpp"
 #include "dogen/yarn/types/meta_model/orm_database_systems.hpp"
 #include "dogen/quilt.cpp/types/formattables/artefact_properties.hpp"
-#include "dogen/quilt.cpp/types/formattables/transformation_error.hpp"
+#include "dogen/quilt.cpp/types/formattables/adaptation_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
-#include "dogen/quilt.cpp/types/formattables/transformer.hpp"
+#include "dogen/quilt.cpp/types/formattables/adapter.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("quilt.cpp.formattables.transformer"));
+static logger lg(logger_factory("quilt.cpp.formattables.adapter"));
 
 const std::string mysql("mysql");
 const std::string postgresql("pgsql");
@@ -57,7 +57,8 @@ namespace quilt {
 namespace cpp {
 namespace formattables {
 
-std::string transformer::to_odb_database(const yarn::meta_model::orm_database_systems ds) {
+std::string
+adapter::to_odb_database(const yarn::meta_model::orm_database_systems ds) {
     using yarn::meta_model::orm_database_systems;
 
     switch (ds) {
@@ -69,12 +70,11 @@ std::string transformer::to_odb_database(const yarn::meta_model::orm_database_sy
     default: {
         const auto s(boost::lexical_cast<std::string>(ds));
         BOOST_LOG_SEV(lg, error) << invalid_daatabase_system << s;
-        BOOST_THROW_EXCEPTION(
-            transformation_error(invalid_daatabase_system + s));
+        BOOST_THROW_EXCEPTION(adaptation_error(invalid_daatabase_system + s));
     } }
 }
 
-std::string transformer::
+std::string adapter::
 to_odb_sql_name_case(const yarn::meta_model::letter_cases lc) const {
     using yarn::meta_model::letter_cases;
 
@@ -84,11 +84,11 @@ to_odb_sql_name_case(const yarn::meta_model::letter_cases lc) const {
     default: {
         const auto s(boost::lexical_cast<std::string>(lc));
         BOOST_LOG_SEV(lg, error) << invalid_case << s;
-        BOOST_THROW_EXCEPTION(transformation_error(invalid_case + s));
+        BOOST_THROW_EXCEPTION(adaptation_error(invalid_case + s));
     } }
 }
 
-std::list<std::string> transformer::
+std::list<std::string> adapter::
 make_databases(const yarn::meta_model::orm_model_properties& omp) const {
     std::list<std::string> r;
 
@@ -101,9 +101,9 @@ make_databases(const yarn::meta_model::orm_model_properties& omp) const {
     return r;
 }
 
-model transformer:: transform(const formatters::repository& frp,
+model adapter::adapt(const formatters::repository& frp,
     const yarn::meta_model::model& m) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming yarn to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Adapting yarn to formattables."
                              << " Elements in model: " << m.elements().size();
 
     model r;
@@ -144,8 +144,7 @@ model transformer:: transform(const formatters::repository& frp,
         if (!e.is_element_extension()) {
             if (fbl.master_segment()) {
                 BOOST_LOG_SEV(lg, error) << duplicate_master << id;
-                BOOST_THROW_EXCEPTION(
-                    transformation_error(duplicate_master + id));
+                BOOST_THROW_EXCEPTION(adaptation_error(duplicate_master + id));
             }
             fbl.master_segment(ptr);
         }
@@ -178,7 +177,7 @@ model transformer:: transform(const formatters::repository& frp,
             if (!inserted) {
                 BOOST_LOG_SEV(lg, error) << duplicate_archetype << arch;
                 BOOST_THROW_EXCEPTION(
-                    transformation_error(duplicate_archetype + arch));
+                    adaptation_error(duplicate_archetype + arch));
             }
 
             BOOST_LOG_SEV(lg, debug) << "Added formatter: " << arch
@@ -186,7 +185,7 @@ model transformer:: transform(const formatters::repository& frp,
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished transforming yarn to formattables."
+    BOOST_LOG_SEV(lg, debug) << "Finished adapting yarn to formattables."
                              << "Size: " << r.formattables().size();
     return r;
 }

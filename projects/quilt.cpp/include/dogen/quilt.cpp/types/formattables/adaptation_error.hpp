@@ -18,19 +18,38 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_FWD_HPP
-#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_TRANSFORMER_FWD_HPP
+#ifndef DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ADAPTATION_ERROR_HPP
+#define DOGEN_QUILT_CPP_TYPES_FORMATTABLES_ADAPTATION_ERROR_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
+
+#include <string>
+#include <boost/exception/info.hpp>
 
 namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formattables {
 
-class transformer;
+/**
+ * @brief An error occurred during adaptation.
+ */
+class adaptation_error : public virtual std::exception, public virtual boost::exception {
+public:
+    adaptation_error() = default;
+    ~adaptation_error() noexcept = default;
+
+public:
+    explicit adaptation_error(const std::string& message) : message_(message) { }
+
+public:
+    const char* what() const noexcept { return(message_.c_str()); }
+
+private:
+    const std::string message_;
+};
 
 } } } }
 
