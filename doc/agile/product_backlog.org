@@ -2105,8 +2105,7 @@ implement it.
 For some reason we are using a map, but its not clear that we need
 sorting. Change it to unordered and see what breaks.
 
-It seems we get errors in serialisation when using the map. Create a
-patch and investigate this later.
+It seems we get errors in serialisation when using the map.
 
 *** Add support for Decimal numbers in C++                            :story:
 
