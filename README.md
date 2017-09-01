@@ -55,8 +55,7 @@ systems:
 |--------|-----------|------------------------|-----------------------------------------|
 | Git    | Optional  | Any recent.    | Required to clone repository. Alternatively, download the zip from [GitHub](https://github.com/DomainDrivenConsulting/dogen).               |
 | CMake  | Mandatory | 3.3 or later.  | Required to generate the build files.   |
-| Boost  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure
-to build and install the static libraries.|
+| Boost  | Mandatory | 1.61 or later. | Earlier versions may also work, but patches are required. **Very Important**: We link statically against Boost at present, so be sure to build and install the static libraries.|
 | ODB    | Optional  | Any recent.    | If you want to build the ORM examples, you need ODB. You will also need a backend such as Oracle, Postgres, etc.|
 
 In addition to these dependencies, you will also need a build
