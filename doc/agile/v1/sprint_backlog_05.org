@@ -94,6 +94,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-09-02 Sat 12:45]--[2017-09-02 Sat 13:14] =>  0:29
     CLOCK: [2017-09-01 Fri 15:52]--[2017-09-01 Fri 16:07] =>  0:15
     CLOCK: [2017-08-30 Wed 22:58]--[2017-08-30 Wed 23:25] =>  0:27
     CLOCK: [2017-08-30 Wed 22:09]--[2017-08-30 Wed 22:12] =>  0:03
@@ -144,30 +145,12 @@ Affected models:
 - quilt.csharp
 - yarn.dia
 
-*** STARTED Analysis on profiles and concepts                         :story:
+*** COMPLETED Analysis on annotations and profiles                    :story:
+    CLOSED: [2017-09-02 Sat 13:06]
     CLOCK: [2017-09-01 Fri 15:25]--[2017-09-01 Fri 15:51] =>  0:26
     CLOCK: [2017-09-01 Fri 11:56]--[2017-09-01 Fri 13:56] =>  2:00
 
-When concepts were introduced, it was clear that something was not
-quite right on the naming. We used the C++ terminology because it
-mapped well enough to the idea, but it was understood that we were
-talking about two different things. As part of the clean-up required
-for profiles, its time to revisit concepts.
-
-A yarn concept is, really, an "object template". That is, it allows us
-to create a template of a subset of the structure of a yarn object,
-which can then be instantiated (pasted?) into actual objects. One
-would like to avoid the use of the word "template", due to its C++
-connotations, but sadly it seems there isn't a more appropriate word.
-
-Unlike objects, object templates support multiple inheritance.
-
-We consume the object templates via stereotypes.
-
-Thus so far we should just rename concepts to object templates.
-
-Annotations are a different beast altogether. We can broadly divide it
-into three parts:
+We can broadly divide annotations into three parts:
 
 - *The annotations type system*. This is at present done by loading type
   templates. The right thing to do is to allow each model to create
@@ -244,6 +227,185 @@ supply them globally or locally (ideally both), just before we do the
 annotations transform. We need to look into changing the annotations
 group factory API to cope with this.
 
+Merged stories:
+
+*Investigate code-generation around annotations*
+
+We have two cases where code-generation makes sense for
+annotations. Let look at them in turn.
+
+Type templates
+
+At present we are supplying JSON files with type templates. In truth
+these are not really "data files" because changing them will cause
+problems to the system; its tightly coupled to them. It would make
+more sense to allow models to define their type templates inside the
+model itself. We could use a stereotype of
+=annotations::type_template= and then use meta-data for all of the
+fields, as per JSON, e.g.:
+
+:  {
+:    "name": {
+:      "simple": "profile",
+:      "qualified": "annotations.profile"
+:    },
+:    "archetype_location": {
+:      "family": "annotations"
+:    },
+:    "value_type": "text",
+:    "template_kind": "instance",
+:    "scope": "any"
+:  }
+
+We then code-generate the insertion of the type template into the
+annotations type templates repository via an initialisers-like
+framework.
+
+It may make more sense to have one UML class with all the type
+templates; the type templates then become attributes of that
+class. The problem then is what to name that class. also, we may want
+to have a couple of these, to group type templates logically (for
+example we want the top-level templates like =enabled= separated from
+the namespace-specific templates).
+
+But the gist of it is that its very straightforward to add some
+machinery that generates the code required to inject the type
+templates into the system, and that it is triggered during
+initialisation, replacing JSON loading.
+
+Use of annotations
+
+We then have the following usage pattern:
+
+- define a class with all the related fields (with types of the type
+  templates above). We call this class =type_group=. We may need to
+  instantiate it for specific fields, or by facet, etc. We need to
+  look at all of the examples in the code-base. Note that the layout
+  of this class will (likely) bear no resemblance to the type
+  templates grouping - this is just a "bag" with all of the available
+  type templates, whereas the type group aggregation does normally
+  have some useful meaning (e.g. =orm_properties=, etc).
+- define a "factory" class for the type group class that uses the
+  traits to locate the types (instances of type templates). For this,
+  the type group class attributes need to refer to the fully qualified
+  field name (possibly requiring some inputs such as kernel, facet).
+- define a c++ class with the properties we're interested in. We
+  normally call this class =_configuration= if its just used to read
+  the meta-data, or =_properties= if its used as a real type. Note
+  that at present we have allowed the layout of the type group class
+  and the properties/configuration classes to be possibly quite
+  different; we gather _all_ of the types of interest in the type
+  group class, but then have multiple properties/configuration classes
+  to match our needs.
+- finally, we define a "factory" class that takes in the type group
+  and produces the configuration/properties class.
+
+In a code-generated world:
+
+- we need to somehow force the type group class to match the
+  configuration class; this will probably result on a lot of
+  duplication. For example, for the ORM properties, we probably have a
+  couple in common across object/model/attributes.
+- we need to map C++ types into annotation types such that we can back
+  out the annotation type from a c++ type. For example, given an
+  enumeration, we want to create a annotation type of "text" but then
+  automatically generate the "from/to" converters for the enumeration.
+
+*Code generation of dynamic instances*
+
+We seem to have a pretty well established usage pattern for dynamic,
+so it may be a candidate for code generation. All we need is:
+
+- a stereotype to mark a class as dynamic; the attributes of the class
+  are dynamic fields, and their types must be one of the valid values
+  for dynamic fields. The default value is used for the field's
+  default value. Qualified name, ownership hierarchy, definition type,
+  scope, etc are supplied as meta-data.
+- stereotype name should be something like =DynamicFieldGroup=.
+- the injection of the settings class is done by looking at the
+  =DynamicFieldGroup= class and mapping the dynamic types to C++
+  types. Note: this mapping should be dynamic too so that we can use
+  it for other languages. We just need a meta-data tag for this, like
+  we do with default enum value.
+- the injection of the settings factory class is a bit more
+  complicated; we need to mark the object as a settings factory. At
+  present we have object types, but it was supposed to be removed
+  after a refactoring. Actually we just need to create a new kind of
+  element (=dynamic_settings_factory=?). In addition, settings factory
+  may also need to take in some parameters such as facet/formatter.
+- a stitch template that generates the settings factory.
+- a stitch template that registers the dynamic field definition;
+  instead of JSON we can just generate c++ code to perform the
+  injection.
+- we could also generate the repository and in most cases the
+  repository factory. The only case where this breaks down is when we
+  need to look at properties too.
+- we should have a number of knobs to control generation: a) generate
+  field injection b) generate settings factory c) generate repository
+  d) generate repository factory.
+
+We also need to merge the traits class directly into the factory. In
+the majority of cases, we have traits just to access the fields. But
+there are a few cases where we use traits for other purposes such as
+formatter naming.
+
+*Add support for "one off" profiles*
+
+At present one can define top-level profiles. These are useful, but in
+practice we ended up still defining a lot of things in each model. We
+need a way to associate a profile with a model by supplying it on the
+command line. That way users can create profiles and store them next
+to the model rather than having to create a data directory, etc etc.
+
+Actually the problem is that profiles aren't really implemented
+correctly. First we should not call them profiles at all since they
+are not UML profiles and overloading the term just generates
+confusion. Second its important to understand how Dogen profiles come
+about:
+
+- we extend the UML meta-model via stereotypes to support all of the
+  required yarn and quilt concepts.
+- when we instantiate the yarn/quilt types via a UML model, we need to
+  supply the values for the attributes which have been extended. If
+  done properly this would happen via UML tagged values. Dia does not
+  support these. At any rate, at present we use Dogen meta-data which
+  is almost like tagged values.
+- Dogen profiles are then an attempt to create bundles of tagged
+  values with pre-populated values so that we do not need to manually
+  populate them for every type. Instead, we can associate a stereotype
+  with the type and then the system will automatically populate the
+  values from the bundle.
+- From all of this it follows that it should be possible to define
+  these "bundles" directly in a UML diagram. If we were to use UML
+  properly (or at least almost properly), we would define a class with
+  a stereotype of =stereotype=, a name of the stereotype we'd like to
+  define (say =Serializable=) and then its tagged values are the keys
+  and values of the meta-data we want to define. This is strictly
+  speaking not correct UML because we are stating we are augmenting
+  the UML meta-model (hence =stereotype=) but then we end up
+  instantiating a meta-model class with some predefined values. Its
+  not clear how to express this in UML. Note that we have exactly the
+  same issue with concepts.
+- and, after some thinking, we are trying to do exactly the same thing
+  as we are already doing for concepts: i.e. some kind of meta-level
+  operation that allows us to add structural features to an
+  element. Thus we can just use concepts, which are not even defined
+  in UML - augmenting its meaning will not take us away from the
+  literature. We can very simply add a last step to concepts transform
+  which merges the annotations of the concept objects, using exactly
+  the machinery we defined for profiles. The only slight problem is
+  that we cannot reuse concepts across models.
+
+Tasks:
+
+- add annotations merging to concepts processing. Should cause no
+  changes at all on all models.
+- create a model in dogen defining basic concepts.
+
+Links:
+
+- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
+
 *** Code-generate annotations type templates                          :story:
 
 Tasks:
@@ -283,127 +445,33 @@ will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
 
-*** Investigate code-generation around annotations                    :story:
+*** Rename yarn concepts                                              :story:
 
-We have two cases where code-generation makes sense for
-annotations. Let look at them in turn.
+When concepts were introduced, it was clear that something was not
+quite right on the naming. We used the C++ terminology because it
+mapped well enough to the idea, but it was understood that we were
+talking about two different things. As part of the clean-up required
+for profiles, its time to revisit concepts.
 
-*Type templates*
+A yarn concept is, really, an "object template". That is, it allows us
+to create a template of a subset of the structure of a yarn object,
+which can then be instantiated (pasted?) into actual objects. One
+would like to avoid the use of the word "template", due to its C++
+connotations, but sadly it seems there isn't a more appropriate word.
 
-At present we are supplying JSON files with type templates. In truth
-these are not really "data files" because changing them will cause
-problems to the system; its tightly coupled to them. It would make
-more sense to allow models to define their type templates inside the
-model itself. We could use a stereotype of
-=annotations::type_template= and then use meta-data for all of the
-fields, as per JSON, e.g.:
+Unlike objects, object templates support multiple inheritance.
 
-:  {
-:    "name": {
-:      "simple": "profile",
-:      "qualified": "annotations.profile"
-:    },
-:    "archetype_location": {
-:      "family": "annotations"
-:    },
-:    "value_type": "text",
-:    "template_kind": "instance",
-:    "scope": "any"
-:  }
+We consume the object templates via stereotypes.
 
-We then code-generate the insertion of the type template into the
-annotations type templates repository via an initialisers-like
-framework.
+Thus so far we should just rename concepts to object templates.
 
-It may make more sense to have one UML class with all the type
-templates; the type templates then become attributes of that
-class. The problem then is what to name that class. also, we may want
-to have a couple of these, to group type templates logically (for
-example we want the top-level templates like =enabled= separated from
-the namespace-specific templates).
+However, the downside is that we now have a verbose stereotype:
 
-But the gist of it is that its very straightforward to add some
-machinery that generates the code required to inject the type
-templates into the system, and that it is triggered during
-initialisation, replacing JSON loading.
+: object_template
+: yarn::object_template
 
-*Use of annotations*
-
-We then have the following usage pattern:
-
-- define a class with all the related fields (with types of the type
-  templates above). We call this class =type_group=. We may need to
-  instantiate it for specific fields, or by facet, etc. We need to
-  look at all of the examples in the code-base. Note that the layout
-  of this class will (likely) bear no resemblance to the type
-  templates grouping - this is just a "bag" with all of the available
-  type templates, whereas the type group aggregation does normally
-  have some useful meaning (e.g. =orm_properties=, etc).
-- define a "factory" class for the type group class that uses the
-  traits to locate the types (instances of type templates). For this,
-  the type group class attributes need to refer to the fully qualified
-  field name (possibly requiring some inputs such as kernel, facet).
-- define a c++ class with the properties we're interested in. We
-  normally call this class =_configuration= if its just used to read
-  the meta-data, or =_properties= if its used as a real type. Note
-  that at present we have allowed the layout of the type group class
-  and the properties/configuration classes to be possibly quite
-  different; we gather _all_ of the types of interest in the type
-  group class, but then have multiple properties/configuration classes
-  to match our needs.
-- finally, we define a "factory" class that takes in the type group
-  and produces the configuration/properties class.
-
-In a code-generated world:
-
-- we need to somehow force the type group class to match the
-  configuration class; this will probably result on a lot of
-  duplication. For example, for the ORM properties, we probably have a
-  couple in common across object/model/attributes.
-- we need to map C++ types into annotation types such that we can back
-  out the annotation type from a c++ type. For example, given an
-  enumeration, we want to create a annotation type of "text" but then
-  automatically generate the "from/to" converters for the enumeration.
-
-Merged stories:
-
-*Code generation of dynamic instances*
-
-We seem to have a pretty well established usage pattern for dynamic,
-so it may be a candidate for code generation. All we need is:
-
-- a stereotype to mark a class as dynamic; the attributes of the class
-  are dynamic fields, and their types must be one of the valid values
-  for dynamic fields. The default value is used for the field's
-  default value. Qualified name, ownership hierarchy, definition type,
-  scope, etc are supplied as meta-data.
-- stereotype name should be something like =DynamicFieldGroup=.
-- the injection of the settings class is done by looking at the
-  =DynamicFieldGroup= class and mapping the dynamic types to C++
-  types. Note: this mapping should be dynamic too so that we can use
-  it for other languages. We just need a meta-data tag for this, like
-  we do with default enum value.
-- the injection of the settings factory class is a bit more
-  complicated; we need to mark the object as a settings factory. At
-  present we have object types, but it was supposed to be removed
-  after a refactoring. Actually we just need to create a new kind of
-  element (=dynamic_settings_factory=?). In addition, settings factory
-  may also need to take in some parameters such as facet/formatter.
-- a stitch template that generates the settings factory.
-- a stitch template that registers the dynamic field definition;
-  instead of JSON we can just generate c++ code to perform the
-  injection.
-- we could also generate the repository and in most cases the
-  repository factory. The only case where this breaks down is when we
-  need to look at properties too.
-- we should have a number of knobs to control generation: a) generate
-  field injection b) generate settings factory c) generate repository
-  d) generate repository factory.
-
-We also need to merge the traits class directly into the factory. In
-the majority of cases, we have traits just to access the fields. But
-there are a few cases where we use traits for other purposes such as
-formatter naming.
+Having said that, we cannot have values for all attributes in an
+object, just the attribute collection.
 
 *** Use namespaced stereotypes                                        :story:
 
@@ -517,63 +585,6 @@ Tasks:
 - we need a refines field which is a text collection.
 - we need refinement settings, factory etc.
 - update parsing expander.
-
-*** Add support for "one off" profiles                                :story:
-
-At present one can define top-level profiles. These are useful, but in
-practice we ended up still defining a lot of things in each model. We
-need a way to associate a profile with a model by supplying it on the
-command line. That way users can create profiles and store them next
-to the model rather than having to create a data directory, etc etc.
-
-Actually the problem is that profiles aren't really implemented
-correctly. First we should not call them profiles at all since they
-are not UML profiles and overloading the term just generates
-confusion. Second its important to understand how Dogen profiles come
-about:
-
-- we extend the UML meta-model via stereotypes to support all of the
-  required yarn and quilt concepts.
-- when we instantiate the yarn/quilt types via a UML model, we need to
-  supply the values for the attributes which have been extended. If
-  done properly this would happen via UML tagged values. Dia does not
-  support these. At any rate, at present we use Dogen meta-data which
-  is almost like tagged values.
-- Dogen profiles are then an attempt to create bundles of tagged
-  values with pre-populated values so that we do not need to manually
-  populate them for every type. Instead, we can associate a stereotype
-  with the type and then the system will automatically populate the
-  values from the bundle.
-- From all of this it follows that it should be possible to define
-  these "bundles" directly in a UML diagram. If we were to use UML
-  properly (or at least almost properly), we would define a class with
-  a stereotype of =stereotype=, a name of the stereotype we'd like to
-  define (say =Serializable=) and then its tagged values are the keys
-  and values of the meta-data we want to define. This is strictly
-  speaking not correct UML because we are stating we are augmenting
-  the UML meta-model (hence =stereotype=) but then we end up
-  instantiating a meta-model class with some predefined values. Its
-  not clear how to express this in UML. Note that we have exactly the
-  same issue with concepts.
-- and, after some thinking, we are trying to do exactly the same thing
-  as we are already doing for concepts: i.e. some kind of meta-level
-  operation that allows us to add structural features to an
-  element. Thus we can just use concepts, which are not even defined
-  in UML - augmenting its meaning will not take us away from the
-  literature. We can very simply add a last step to concepts transform
-  which merges the annotations of the concept objects, using exactly
-  the machinery we defined for profiles. The only slight problem is
-  that we cannot reuse concepts across models.
-
-Tasks:
-
-- add annotations merging to concepts processing. Should cause no
-  changes at all on all models.
-- create a model in dogen defining basic concepts.
-
-Links:
-
-- [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
 *** Add canonical archetype support to yarn                           :story:
 

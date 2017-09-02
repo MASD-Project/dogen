@@ -17,7 +17,7 @@ During the exogenous model work, yarn's =Nameable= concept moved
 position. We need to look at how the parent changes were done to see
 if they are stable or not.
 
-*** Enable kernel directories trait is on quilqt                      :story:
+*** Enable kernel directories trait is on quilt                       :story:
 
 When we moved the kernel logic into yarn from quilt, we did not rename
 the traits.
