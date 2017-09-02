@@ -54,19 +54,6 @@ inline bool is_not_relevant(const processed_object& po) {
     return !is_relevant;
 }
 
-std::string
-workflow::obtain_external_modules(const std::list<processed_object>& pos) {
-    std::string r;
-    for (const auto& po : pos) {
-        if (po.child_node_id().empty() &&
-            po.dia_object_type() == dia_object_types::uml_note &&
-            po.comment().applicable_to_parent_object()) {
-            return po.comment().external_modules();
-        }
-    }
-    return r;
-}
-
 meta_model::exomodel
 workflow::generate_model(const std::list<processed_object>& pos) {
     /*
@@ -104,16 +91,10 @@ meta_model::exomodel workflow::execute(const dogen::dia::diagram& d) {
     validator::validate(pos);
 
     /*
-     * Now obtain the external module path.
-     */
-    const auto external_modules(obtain_external_modules(pos));
-
-    /*
-     * Finally generate the model.
+     * Finally, generate the exomodel.
      */
     const auto r(generate_model(pos));
     BOOST_LOG_SEV(lg, debug) << "Final model: " << r;
-
     return r;
 }
 

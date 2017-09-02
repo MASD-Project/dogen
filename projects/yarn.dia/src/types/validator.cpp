@@ -29,12 +29,6 @@ namespace {
 using namespace dogen::utility::log;
 static logger lg(logger_factory("yarn.dia.validator"));
 
-/*
- * Note: we use the terminology "options" and "stereotypes" for error
- * messages - rather than "flags" - to reflect the fact that external
- * clients don't particularly care that we chose to represent the
- * stereotypes as flags.
- */
 const std::string no_uml_type("No UML type.");
 const std::string invalid_use_of_stereotypes(
     "Stereotypes can only be used with yarn objects and primitives.");

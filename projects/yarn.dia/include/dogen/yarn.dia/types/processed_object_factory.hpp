@@ -99,9 +99,9 @@ private:
     parse_attributes(const dogen::dia::object& o, processed_object& po);
 
     /**
-     * @brief Defaults the yarn object type, if required.
+     * @brief Defaults the yarn element type, if required.
      */
-    static void setup_yarn_object_type(processed_object& po);
+    static void handle_yarn_element_type(processed_object& po);
 
 public:
     /**

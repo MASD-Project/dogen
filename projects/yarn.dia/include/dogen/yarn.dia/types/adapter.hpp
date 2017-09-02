@@ -111,9 +111,10 @@ private:
 
 private:
     /**
-     * @brief Update the yarn element using the processed object.
+     * @brief Populates the yarn element attributes using the
+     * processed object.
      */
-    void update_element(const processed_object& po,
+    void populate_element(const processed_object& po,
         meta_model::element& e) const;
 
 public:

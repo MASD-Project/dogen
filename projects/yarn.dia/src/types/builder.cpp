@@ -19,6 +19,7 @@
  *
  */
 #include <boost/make_shared.hpp>
+#include <boost/lexical_cast.hpp>
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/utility/io/pair_io.hpp"
@@ -27,6 +28,7 @@
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn.dia/types/adapter.hpp"
 #include "dogen/yarn.dia/types/building_error.hpp"
+#include "dogen/yarn.dia/io/yarn_element_types_io.hpp"
 #include "dogen/yarn.dia/types/builder.hpp"
 
 namespace {
@@ -40,6 +42,7 @@ const std::string duplicate_element_id("Element id already exists: ");
 const std::string duplicate_dia_id("Duplicate dia id: ");
 const std::string package_not_mapped(
     "Dia package ID is not mapped to yarn module: ");
+const std::string invalid_element_type("Invalid or unsupported element type: ");
 
 }
 
@@ -100,17 +103,15 @@ update_parentage(const std::string& dia_id, const meta_model::name& n) {
 }
 
 void builder::update_module(const processed_object& po) {
-    BOOST_LOG_SEV(lg, debug) << "Object is a note: "
-                             << po.id()
-                             << ". Note text: '"
-                             << po.comment().original_content() << "'";
+    const auto& c(po.comment());
+    BOOST_LOG_SEV(lg, debug) << "Object is a note: " << po.id()
+                             << ". Note text: '" << c.original_content() << "'";
 
-    if (po.comment().original_content().empty() ||
-        !po.comment().applicable_to_parent_object())
+    if (c.original_content().empty() || !c.applicable_to_parent_object())
         return;
 
     const adapter a(context_);
-    const auto& documentation(po.comment().documentation());
+    const auto& doc(c.documentation());
     if (po.child_node_id().empty()) {
         /*
          * Since this note does not have a child, it is a top-level
@@ -119,7 +120,7 @@ void builder::update_module(const processed_object& po) {
          */
         auto& pair(model_.root_module());
         pair.first = a.to_scribble_group(po, true/*is_root_module*/);
-        pair.second->documentation(documentation);
+        pair.second->documentation(doc);
         return;
     }
 
@@ -134,9 +135,10 @@ void builder::update_module(const processed_object& po) {
         BOOST_LOG_SEV(lg, error) << package_not_mapped << package_id;
         BOOST_THROW_EXCEPTION(building_error(package_not_mapped + package_id));
     }
+
     auto& pair(i->second);
     pair.first = a.to_scribble_group(po, false/*is_root_module*/);
-    pair.second->documentation(documentation);
+    pair.second->documentation(doc);
 }
 
 void builder::add(const processed_object& po) {
@@ -170,7 +172,8 @@ void builder::add(const processed_object& po) {
      * them we must also resolve the dia object ID containment into
      * yarn names.
      */
-    switch(po.yarn_element_type()) {
+    const auto yet(po.yarn_element_type());
+    switch(yet) {
     case yarn_element_types::enumeration:
         model_.enumerations().push_back(a.to_enumeration(po));
         break;
@@ -186,14 +189,16 @@ void builder::add(const processed_object& po) {
         model_.concepts().push_back(pair);
         break;
     }
-    default: {
-        /*
-         * Objects are in effect anything which was not marked as
-         * something else so they are our default case.
-         */
+    case yarn_element_types::object: {
         const auto pair(a.to_object(po));
         update_parentage(po.id(), pair.second->name());
         model_.objects().push_back(pair);
+        break;
+    }
+    default: {
+        const auto s(boost::lexical_cast<std::string>(yet));
+        BOOST_LOG_SEV(lg, error) << invalid_element_type << s;
+        BOOST_THROW_EXCEPTION(building_error(invalid_element_type + s));
     } }
 }
 

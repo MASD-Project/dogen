@@ -105,7 +105,7 @@ adapter::to_enumerator(const processed_attribute& a) const {
 }
 
 void adapter::
-update_element(const processed_object& po, meta_model::element& e) const {
+populate_element(const processed_object& po, meta_model::element& e) const {
     e.origin_type(meta_model::origin_types::not_yet_determined);
 
     const auto package_id(po.child_node_id());
@@ -178,7 +178,7 @@ adapter::to_object(const processed_object& po) const {
                              << po.id();
 
     auto o(boost::make_shared<meta_model::object>());
-    update_element(po, *o);
+    populate_element(po, *o);
 
     for (const auto& attr : po.attributes())
         o->local_attributes().push_back(to_attribute(attr));
@@ -201,7 +201,7 @@ adapter::to_exception(const processed_object& po) const {
                              << po.id();
 
     auto e(boost::make_shared<meta_model::exception>());
-    update_element(po, *e);
+    populate_element(po, *e);
 
     const auto sg(to_scribble_group(po, false/*is_root_module*/));
     return std::make_pair(sg, e);
@@ -214,7 +214,7 @@ adapter::to_enumeration(const processed_object& po) const {
                              << po.id();
 
     auto e(boost::make_shared<meta_model::enumeration>());
-    update_element(po, *e);
+    populate_element(po, *e);
 
     for (const auto& attr : po.attributes())
         e->enumerators().push_back(to_enumerator(attr));
@@ -229,7 +229,7 @@ adapter::to_primitive(const processed_object& po) const {
                              << po.id();
 
     auto p(boost::make_shared<meta_model::primitive>());
-    update_element(po, *p);
+    populate_element(po, *p);
 
     const auto sg(to_scribble_group(po, false/*is_root_module*/));
     return std::make_pair(sg, p);
@@ -241,7 +241,7 @@ adapter::to_module(const processed_object& po) const {
                              << po.id();
 
     auto r(boost::make_shared<meta_model::module>());
-    update_element(po, *r);
+    populate_element(po, *r);
     return r;
 }
 
@@ -251,14 +251,15 @@ adapter::to_concept(const processed_object& po) const {
                              << po.id();
 
     auto c(boost::make_shared<meta_model::concept>());
-    update_element(po, *c);
+    populate_element(po, *c);
 
     for (const auto& attr : po.attributes())
         c->local_attributes().push_back(to_attribute(attr));
 
     const auto i(context_.child_dia_id_to_parent_names().find(po.id()));
     if (i == context_.child_dia_id_to_parent_names().end() || i->second.empty())
-        BOOST_LOG_SEV(lg, debug) << "Object has no parents: " << c->name().id();
+        BOOST_LOG_SEV(lg, debug) << "Concept has no parents: "
+                                 << c->name().id();
     else {
         c->is_child(true);
         c->refines(i->second);

@@ -40,10 +40,6 @@ namespace dia {
 
 class workflow {
 private:
-    static std::string
-    obtain_external_modules(const std::list<processed_object>& pos);
-
-private:
     /**
      * @brief Transforms the entire graph of processed objects into a
      * Yarn model.

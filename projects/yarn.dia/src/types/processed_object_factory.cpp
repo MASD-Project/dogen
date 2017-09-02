@@ -59,6 +59,7 @@ const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string invalid_object_type("Invalid value for object type: ");
 
+const std::string object("object");
 const std::string concept("concept");
 const std::string enumeration("enumeration");
 const std::string primitive("primitive");
@@ -308,6 +309,9 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
         } else if (stereotype == concept) {
             require_yarn_type_not_set(po.yarn_element_type());
             po.yarn_element_type(yarn_element_types::concept);
+        } else if (stereotype == object) {
+            require_yarn_type_not_set(po.yarn_element_type());
+            po.yarn_element_type(yarn_element_types::object);
         } else
             po.stereotypes().push_back(stereotype);
     }
@@ -330,9 +334,10 @@ parse_attributes(const dogen::dia::object& o, processed_object& po) {
 }
 
 void processed_object_factory::
-setup_yarn_object_type(processed_object& po) {
+handle_yarn_element_type(processed_object& po) {
     /*
-     * If its already setup there's nothing for us to do.
+     * If its already setup there's nothing for us to do. This is the
+     * case if the user has populated the stereotypes with an element.
      */
     if (po.yarn_element_type() != yarn_element_types::invalid)
         return;
@@ -359,7 +364,7 @@ processed_object processed_object_factory::make(const dogen::dia::object& o) {
 
     parse_connections(o, r);
     parse_attributes(o, r);
-    setup_yarn_object_type(r);
+    handle_yarn_element_type(r);
 
     BOOST_LOG_SEV(lg, debug) << "Finished processing dia object";
     return r;
