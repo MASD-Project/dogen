@@ -9219,7 +9219,7 @@ languages other than C++ because we may be hacking things for C++
 which wont work for those languages. It will be much harder to change
 the code once we have a graph + pipeline.
 
-*** Consider c++ itself as a front-end                                 :epic:
+*** Consider C++ itself as a front-end                                 :epic:
 
 One can imagine a clang-based front-end that reads C++ code suitably
 annotated, perhaps with =Generatable= or some such attributes -
@@ -9262,6 +9262,12 @@ The c++ frontend would also open some interesting possibilities:
   would be quite hard to get right. We should create a separate tool
   for this.
 - *update existing diagrams*. See [[https://github.com/DomainDrivenConsulting/dogen/blob/master/doc/agile/product_backlog.org#investigate-support-for-automatic-diagram-updates][this story]].
+
+Links:
+
+- For clang source code transforms, see [[https://github.com/flexferrum/flex_lib][flex_lib]] and this
+  presentation: [[https://www.youtube.com/watch?v%3DaPTyatTI42k][Automatic C++ source code generation with clang -
+  Sergei Sadovnikov]]
 
 *** Consider compiling knit output with clang                         :story:
 
