@@ -47,7 +47,7 @@
  * Comment these out as required if testing only one frontend.
  */
 #define ENABLE_DIA_TESTS
-#define ENABLE_JSON_TESTS FIXME
+#define ENABLE_JSON_TESTS
 #define ENABLE_CSHARP_TESTS
 
 using dogen::utility::test_data::yarn_dia;
