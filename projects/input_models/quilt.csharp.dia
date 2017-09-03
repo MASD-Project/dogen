@@ -521,7 +521,7 @@
         <dia:string>#workflow_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -4207,7 +4207,7 @@
         <dia:string>#registrar_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#There was an error in the registrar.#</dia:string>
@@ -6120,7 +6120,7 @@
         <dia:string>#adaptation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -7915,7 +7915,7 @@
         <dia:string>#expansion_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst performing model expansion.#</dia:string>
@@ -9157,7 +9157,7 @@
         <dia:string>#formatting_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst formatting.#</dia:string>
@@ -11469,7 +11469,7 @@
         <dia:string>#location_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred while the locator was creating a path.#</dia:string>
@@ -15649,7 +15649,7 @@
         <dia:string>#auxiliary_function_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

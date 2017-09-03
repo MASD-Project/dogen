@@ -41,8 +41,8 @@ const std::string model_name("test");
 const std::string missing_name("Could not find name");
 const std::string empty_name("Dia object name is empty");
 
-const std::string enumeration_stereotype("enumeration");
-const std::string exception_stereotype("exception");
+const std::string enumeration_stereotype("yarn::enumeration");
+const std::string exception_stereotype("yarn::exception");
 
 }
 

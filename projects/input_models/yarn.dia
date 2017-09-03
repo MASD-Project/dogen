@@ -1330,13 +1330,13 @@ Children are concepts that refine at least one other concept.#</dia:string>
         <dia:point val="-112,-60"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-112.05,-60.05;-106.935,-56.35"/>
+        <dia:rectangle val="-112.05,-60.05;-104.905,-56.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-112,-60"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.0149999999999997"/>
+        <dia:real val="7.0449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -1345,7 +1345,7 @@ Children are concepts that refine at least one other concept.#</dia:string>
         <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a name.#</dia:string>
@@ -1480,7 +1480,7 @@ Children are concepts that refine at least one other concept.#</dia:string>
         <dia:string>#Documentable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to provide documentation.#</dia:string>
@@ -1619,7 +1619,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Annotatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have meta-data associated.#</dia:string>
@@ -1739,7 +1739,7 @@ for Java, etc.#</dia:string>
         <dia:point val="-139.553,-56.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-140.403,-56.45;-126.582,-47.0002"/>
+        <dia:rectangle val="-140.403,-56.45;-125.516,-46.9974"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -1747,8 +1747,8 @@ for Java, etc.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-139.553,-56.4"/>
         <dia:point val="-139.553,-51"/>
-        <dia:point val="-126.632,-51"/>
-        <dia:point val="-126.632,-47.0502"/>
+        <dia:point val="-125.803,-51"/>
+        <dia:point val="-125.569,-47.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -1865,13 +1865,13 @@ for Java, etc.#</dia:string>
         <dia:point val="-129,-47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-129.05,-47.05;-124.215,-43.95"/>
+        <dia:rectangle val="-129.05,-47.05;-121.905,-43.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-129,-47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7350000000000003"/>
+        <dia:real val="7.0449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1880,7 +1880,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A unit of modeling that can be code generated.
@@ -3324,13 +3324,13 @@ languages, using the entire name structure.#</dia:string>
         <dia:point val="-164,-76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-164.05,-76.05;-155.75,-69.95"/>
+        <dia:rectangle val="-164.05,-76.05;-155.365,-69.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-164,-76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1999999999999993"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -3339,7 +3339,7 @@ languages, using the entire name structure.#</dia:string>
         <dia:string>#origin_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#What originated the model element.#</dia:string>
@@ -3619,7 +3619,7 @@ can make use of these types.#</dia:string>
         <dia:string>#Stateful#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a state.#</dia:string>
@@ -3858,7 +3858,7 @@ formatting.#</dia:string>
         <dia:string>#DeterminableOrigin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A unit of modeling that can be code generated.#</dia:string>
@@ -4035,7 +4035,7 @@ formatting.#</dia:string>
         <dia:string>#Containable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The ability to be contained inside a module.#</dia:string>
@@ -4470,7 +4470,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
         <dia:string>#element#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#visitable, Element#</dia:string>
+        <dia:string>#yarn::visitable, Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Represents a generic modeling construct.
@@ -5781,7 +5781,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#TraversalVisitor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6349,7 +6349,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Visitable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The ability to handle visitation.#</dia:string>
@@ -6553,7 +6553,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Associatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to associate itself with other elements.#</dia:string>
@@ -6714,7 +6714,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>#Generalizable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to be part of a generalization relationship.#</dia:string>
@@ -7018,13 +7018,13 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-185,-47"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-185.05,-47.05;-180.165,-43.95"/>
+        <dia:rectangle val="-185.05,-47.05;-177.905,-43.95"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-185,-47"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="4.7850000000000001"/>
+        <dia:real val="7.0449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -7033,7 +7033,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>#Relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Element has the ability to have relationships with other elements.#</dia:string>
@@ -7129,7 +7129,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-170,-55.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-182.657,-55.65;-169.15,-47.0002"/>
+        <dia:rectangle val="-181.849,-55.65;-169.15,-46.9974"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7137,8 +7137,8 @@ This is used to break cycles where required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-170,-55.6"/>
         <dia:point val="-170,-51"/>
-        <dia:point val="-182.607,-51"/>
-        <dia:point val="-182.607,-47.0502"/>
+        <dia:point val="-181.796,-51"/>
+        <dia:point val="-181.567,-47.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7255,7 +7255,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-195.243,-70"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-196.093,-70.05;-182.557,-47.0002"/>
+        <dia:rectangle val="-196.093,-70.05;-181.514,-46.9974"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7263,8 +7263,8 @@ This is used to break cycles where required.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="-195.243,-70"/>
         <dia:point val="-195.243,-51"/>
-        <dia:point val="-182.607,-51"/>
-        <dia:point val="-182.607,-47.0502"/>
+        <dia:point val="-181.796,-51"/>
+        <dia:point val="-181.567,-47.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7608,7 +7608,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:point val="-86.2425,-42.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-159.587,-42.65;-85.3925,-18.95"/>
+        <dia:rectangle val="-159.588,-42.65;-85.3925,-18.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -7754,7 +7754,7 @@ space.#</dia:string>
         <dia:string>#Parameterisable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8403,7 +8403,7 @@ space.#</dia:string>
         <dia:string>#Stereotypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8565,13 +8565,13 @@ space.#</dia:string>
         <dia:point val="-36,-76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-36.05,-76.05;-28.52,-69.15"/>
+        <dia:rectangle val="-36.05,-76.05;-27.365,-69.15"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-36,-76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.4299999999999997"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -8580,7 +8580,7 @@ space.#</dia:string>
         <dia:string>#languages#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Models need to declare upfront the programming language they will target.#</dia:string>
@@ -9220,7 +9220,7 @@ space.#</dia:string>
         <dia:string>#orm_database_systems#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -9613,13 +9613,13 @@ space.#</dia:string>
         <dia:point val="-9,-33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-9.05,-33.05;-2.675,-28.55"/>
+        <dia:rectangle val="-9.05,-33.05;-0.365,-28.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-9,-33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -9628,7 +9628,7 @@ space.#</dia:string>
         <dia:string>#letter_cases#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11548,13 +11548,13 @@ space.#</dia:string>
         <dia:point val="-179,-3"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-179.05,-3.05;-170.53,2.25"/>
+        <dia:rectangle val="-179.05,-3.05;-170.365,2.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-179,-3"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.4199999999999999"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -11563,7 +11563,7 @@ space.#</dia:string>
         <dia:string>#formatting_styles#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -20950,13 +20950,13 @@ space.#</dia:string>
         <dia:point val="-127,22"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-127.05,21.95;-119.8,25.05"/>
+        <dia:rectangle val="-127.05,21.95;-119.135,25.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-127,22"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1500000000000004"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -20965,7 +20965,7 @@ space.#</dia:string>
         <dia:string>#registrar_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21148,7 +21148,7 @@ space.#</dia:string>
         <dia:string>#exomodel_transform_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -21401,7 +21401,7 @@ space.#</dia:string>
         <dia:string>#transformation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst applying a transformation.#</dia:string>
@@ -22452,13 +22452,13 @@ space.#</dia:string>
         <dia:point val="68,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.95,57.95;75.73,61.05"/>
+        <dia:rectangle val="67.95,57.95;75.865,61.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="68,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6799999999999997"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -22467,7 +22467,7 @@ space.#</dia:string>
         <dia:string>#validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred during validation.#</dia:string>
@@ -23094,13 +23094,13 @@ space.#</dia:string>
         <dia:point val="83,21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,20.95;90.12,24.05"/>
+        <dia:rectangle val="82.95,20.95;90.865,24.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="83,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0700000000000003"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23109,7 +23109,7 @@ space.#</dia:string>
         <dia:string>#indexing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A fatal error has occurred while indexing.#</dia:string>
@@ -23473,7 +23473,7 @@ space.#</dia:string>
         <dia:point val="96.18,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="86.485,23.9996;96.93,33.8"/>
+        <dia:rectangle val="86.768,23.9989;96.93,33.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -23481,8 +23481,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="96.18,33"/>
         <dia:point val="96.18,29"/>
-        <dia:point val="86.535,29"/>
-        <dia:point val="86.535,24.0496"/>
+        <dia:point val="86.8187,29"/>
+        <dia:point val="86.8863,24.0496"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -23857,13 +23857,13 @@ space.#</dia:string>
         <dia:point val="107,21"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="106.95,20.95;114.812,24.05"/>
+        <dia:rectangle val="106.95,20.95;114.865,24.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="107,21"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.7625000000000002"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -23872,7 +23872,7 @@ space.#</dia:string>
         <dia:string>#resolution_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred while trying to resolve a type.#</dia:string>
@@ -24361,13 +24361,13 @@ space.#</dia:string>
         <dia:point val="186,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="185.95,32.95;193.163,36.05"/>
+        <dia:rectangle val="185.95,32.95;193.865,36.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="186,33"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.1124999999999998"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -24376,7 +24376,7 @@ space.#</dia:string>
         <dia:string>#mapping_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error has occurred while mapping element names.#</dia:string>
@@ -24750,7 +24750,7 @@ space.#</dia:string>
         <dia:point val="202,33"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="189.506,28.2;202.75,33.8"/>
+        <dia:rectangle val="189.758,28.2;202.75,33.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -24758,8 +24758,8 @@ space.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="202,33"/>
         <dia:point val="202,29"/>
-        <dia:point val="189.556,29"/>
-        <dia:point val="189.556,32.9498"/>
+        <dia:point val="189.808,29"/>
+        <dia:point val="189.88,32.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -26372,13 +26372,13 @@ another.#</dia:string>
         <dia:point val="242,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="241.95,70.95;250.153,75.45"/>
+        <dia:rectangle val="241.95,70.95;250.635,75.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="242,71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1025000000000009"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -26387,7 +26387,7 @@ another.#</dia:string>
         <dia:string>#mapping_actions#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -26834,13 +26834,13 @@ another.#</dia:string>
         <dia:point val="195,71"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="194.95,70.95;202.605,74.05"/>
+        <dia:rectangle val="194.95,70.95;202.865,74.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="195,71"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.5549999999999997"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -26849,7 +26849,7 @@ another.#</dia:string>
         <dia:string>#hydration_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -27604,13 +27604,13 @@ another.#</dia:string>
         <dia:point val="154,58"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="153.95,57.95;161.282,61.05"/>
+        <dia:rectangle val="153.95,57.95;161.865,61.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="154,58"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.2324999999999999"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27619,7 +27619,7 @@ another.#</dia:string>
         <dia:string>#persister_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst tryng to persist a yarn model.#</dia:string>
@@ -27787,13 +27787,13 @@ another.#</dia:string>
         <dia:point val="100,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="99.95,62.95;106.84,66.05"/>
+        <dia:rectangle val="99.95,62.95;107.865,66.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="100,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.79"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -27802,7 +27802,7 @@ another.#</dia:string>
         <dia:string>#printing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst pretty printing.#</dia:string>
@@ -28201,13 +28201,13 @@ another.#</dia:string>
         <dia:point val="141,63"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="140.95,62.95;147.325,68.25"/>
+        <dia:rectangle val="140.95,62.95;149.635,68.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="141,63"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -28216,7 +28216,7 @@ another.#</dia:string>
         <dia:string>#separators#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Available separators to be used by the pretty printer.#</dia:string>
@@ -28869,13 +28869,13 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="194,101"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="193.95,100.95;200.91,104.05"/>
+        <dia:rectangle val="193.95,100.95;201.865,104.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="194,101"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.8600000000000003"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -28884,7 +28884,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#building_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst building.#</dia:string>
@@ -29764,7 +29764,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="173.88,104.6"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="173.13,103.85;197.63,109.05"/>
+        <dia:rectangle val="173.13,103.85;198.08,109.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -29772,8 +29772,8 @@ Temporary data structure used to build trees of names.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="173.88,104.6"/>
         <dia:point val="173.88,109"/>
-        <dia:point val="197.43,109"/>
-        <dia:point val="197.43,104.05"/>
+        <dia:point val="197.794,109"/>
+        <dia:point val="197.88,104.05"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -30278,13 +30278,13 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:point val="236,106"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="235.95,105.95;242.627,109.05"/>
+        <dia:rectangle val="235.95,105.95;243.865,109.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="236,106"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.5774999999999997"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -30293,7 +30293,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#parsing_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A fatal error has occurred while parsing.#</dia:string>
@@ -32211,17 +32211,17 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="-124.265,-45.9"/>
+        <dia:point val="-121.955,-45.9"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-125.015,-46.7;-93.95,-45.1"/>
+        <dia:rectangle val="-122.705,-46.7;-93.95,-45.1"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="-124.265,-45.9"/>
-        <dia:point val="-123.515,-45.9"/>
+        <dia:point val="-121.955,-45.9"/>
+        <dia:point val="-121.205,-45.9"/>
         <dia:point val="-94.05,-45.9"/>
         <dia:point val="-94,-45.9"/>
       </dia:attribute>
@@ -34458,7 +34458,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

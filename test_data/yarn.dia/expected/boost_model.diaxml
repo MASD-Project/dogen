@@ -3843,7 +3843,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>13.6875,31.4375</value>
+										<value>11,31</value>
 									</value>
 								</item>
 							</values>
@@ -3856,7 +3856,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>13.6375,31.3875;20.3,34.2875</value>
+										<value>10.95,30.95;17.6125,33.85</value>
 									</value>
 								</item>
 							</values>
@@ -3869,7 +3869,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>13.6875,31.4375</value>
+										<value>11,31</value>
 									</value>
 								</item>
 							</values>
@@ -4488,7 +4488,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>16.9187,26.0625;23.4225,31.4875</value>
+										<value>14.2312,26.0625;23.4225,31.05</value>
 									</value>
 								</item>
 							</values>
@@ -4527,19 +4527,19 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>22.5725,29.175</value>
+										<value>22.5725,29</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>16.9688,29.175</value>
+										<value>14.2812,29</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>16.9688,31.4375</value>
+										<value>14.2812,31</value>
 									</value>
 								</item>
 							</values>
@@ -4577,7 +4577,7 @@
 								<item>
 									<which>4</which>
 									<value>
-										<value>true</value>
+										<value>false</value>
 									</value>
 								</item>
 							</values>
@@ -9819,7 +9819,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>9.95,-8.05;31.355,0.15</value>
+										<value>9.95,-8.05;31.355,0.95</value>
 									</value>
 								</item>
 							</values>
@@ -9878,7 +9878,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.0999999999999996</value>
+										<value>8.9000000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -10080,7 +10080,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>73.95,22.95;81.6275,26.05</value>
+										<value>73.95,22.95;81.865,26.05</value>
 									</value>
 								</item>
 							</values>
@@ -10106,7 +10106,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.5775000000000006</value>
+										<value>7.8150000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -10145,7 +10145,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#primitive#</value>
+										<value>#yarn::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -10651,7 +10651,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#primitive#</value>
+										<value>#yarn::primitive#</value>
 									</value>
 								</item>
 							</values>
@@ -11092,7 +11092,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>73.95,29.95;81.06,33.05</value>
+										<value>73.95,29.95;81.865,33.05</value>
 									</value>
 								</item>
 							</values>
@@ -11118,7 +11118,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.0099999999999998</value>
+										<value>7.8150000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -11157,7 +11157,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#primitive#</value>
+										<value>#yarn::primitive#</value>
 									</value>
 								</item>
 							</values>

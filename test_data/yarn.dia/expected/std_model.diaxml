@@ -12466,7 +12466,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>1,-14</value>
+										<value>1,-17</value>
 									</value>
 								</item>
 							</values>
@@ -12479,7 +12479,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>0.95,-14.05;21.585,-8.25</value>
+										<value>0.95,-17.05;22.355,-8.05</value>
 									</value>
 								</item>
 							</values>
@@ -12512,7 +12512,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>1,-14</value>
+										<value>1,-17</value>
 									</value>
 								</item>
 							</values>
@@ -12525,7 +12525,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>20.535</value>
+										<value>21.305000000000003</value>
 									</value>
 								</item>
 							</values>
@@ -12538,7 +12538,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>5.7000000000000002</value>
+										<value>8.9000000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -12659,7 +12659,7 @@
 														<item>
 															<which>5</which>
 															<value>
-																<value>1.35,-12.755</value>
+																<value>1.35,-15.755</value>
 															</value>
 														</item>
 													</values>
@@ -12805,7 +12805,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#enumeration#</value>
+										<value>#yarn::enumeration#</value>
 									</value>
 								</item>
 							</values>
@@ -13545,7 +13545,7 @@
 								<item>
 									<which>6</which>
 									<value>
-										<value>#primitive#</value>
+										<value>#yarn::primitive#</value>
 									</value>
 								</item>
 							</values>

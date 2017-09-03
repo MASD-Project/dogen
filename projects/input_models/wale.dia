@@ -1560,7 +1560,7 @@
         <dia:string>#validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst validating.#</dia:string>
@@ -1741,7 +1741,7 @@
         <dia:string>#formatting_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst formatting.#</dia:string>
@@ -1922,7 +1922,7 @@
         <dia:string>#extraction_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred whilst extracting a key.#</dia:string>

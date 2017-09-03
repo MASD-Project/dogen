@@ -6249,7 +6249,7 @@ this is a long comment
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>immutable</item>
+							<item>yarn::immutable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -8534,7 +8534,7 @@ this is a long comment
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>visitable</item>
+							<item>yarn::visitable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -14863,7 +14863,7 @@ this is a long comment
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>fluent</item>
+							<item>yarn::fluent</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -15512,7 +15512,7 @@ modeled by the base.
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>immutable</item>
+							<item>yarn::immutable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -16020,7 +16020,7 @@ modeled by the base.
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>immutable</item>
+							<item>yarn::immutable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -16288,7 +16288,7 @@ modeled by the base.
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>immutable</item>
+							<item>yarn::immutable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -16555,7 +16555,7 @@ modeled by the base.
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>immutable</item>
+							<item>yarn::immutable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -16903,7 +16903,7 @@ modeled by the base.
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>immutable</item>
+							<item>yarn::immutable</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>

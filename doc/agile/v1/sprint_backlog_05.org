@@ -14,21 +14,21 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-02 Sat 21:11]
+#+CAPTION: Clock summary at [2017-09-03 Sun 18:55]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *7:33* |      |      | 100.0 |
+| *Total time*                                                                | *8:48* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 7:33   |      |      | 100.0 |
-| Active                                                                      |        | 7:33 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |   9.7 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  16.3 |
-| COMPLETED Remove object types in yarn                                       |        |      | 0:52 |  11.5 |
-| COMPLETED Clean-up readme                                                   |        |      | 1:15 |  16.6 |
-| COMPLETED Rename transformers to adapters                                   |        |      | 0:28 |   6.2 |
-| COMPLETED Analysis on annotations and profiles                              |        |      | 2:26 |  32.2 |
-| STARTED Use namespaced stereotypes                                          |        |      | 0:34 |   7.5 |
+| Stories                                                                     | 8:48   |      |      | 100.0 |
+| Active                                                                      |        | 8:48 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |   8.3 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  14.0 |
+| COMPLETED Remove object types in yarn                                       |        |      | 0:52 |   9.8 |
+| COMPLETED Clean-up readme                                                   |        |      | 1:15 |  14.2 |
+| COMPLETED Rename transformers to adapters                                   |        |      | 0:28 |   5.3 |
+| COMPLETED Analysis on annotations and profiles                              |        |      | 2:26 |  27.7 |
+| COMPLETED Use namespaced stereotypes                                        |        |      | 1:49 |  20.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -407,7 +407,9 @@ Links:
 
 - [[https://msdn.microsoft.com/en-us/library/dd465146.aspx][Standard stereotypes for UML models]]
 
-*** STARTED Use namespaced stereotypes                                :story:
+*** COMPLETED Use namespaced stereotypes                              :story:
+    CLOSED: [2017-09-03 Sun 18:55]
+    CLOCK: [2017-09-03 Sun 17:39]--[2017-09-03 Sun 18:54] =>  1:15
     CLOCK: [2017-09-02 Sat 20:35]--[2017-09-02 Sat 21:09] =>  0:34
 
 Originally we added a space in the ORM stereotypes:
@@ -439,7 +441,7 @@ and so forth.
 Tasks:
 
 - create a meta-model element for type templates. Add container in
-  exomodel for it.
+  exomodel for it. Name: =yarn::annotation_type_template=?
 - add frontend support for the type template element.
 - add a transform that reads all the meta-data from type templates and
   populates the yarn element of the type template. Add this transform

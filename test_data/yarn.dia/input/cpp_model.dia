@@ -2232,16 +2232,16 @@ it will be ignored.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O20">
       <dia:attribute name="obj_pos">
-        <dia:point val="13,43"/>
+        <dia:point val="15,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.95,42.95;19.325,48.25"/>
+        <dia:rectangle val="14.95,42.95;23.635,48.25"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13,43"/>
+        <dia:point val="15,43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="5.2000000000000011"/>
@@ -2250,7 +2250,7 @@ it will be ignored.#</dia:string>
         <dia:string>#book_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#this is a brief comment
@@ -2417,13 +2417,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,42.95;9.325,49.05"/>
+        <dia:rectangle val="2.95,42.95;11.635,49.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -2432,7 +2432,7 @@ this is a long comment#</dia:string>
         <dia:string>#colour_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -2617,13 +2617,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O22">
       <dia:attribute name="obj_pos">
-        <dia:point val="13,52"/>
+        <dia:point val="15,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="12.95,51.95;27.025,56.45"/>
+        <dia:rectangle val="14.95,51.95;29.025,56.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13,52"/>
+        <dia:point val="15,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="13.975"/>
@@ -2797,16 +2797,16 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O23">
       <dia:attribute name="obj_pos">
-        <dia:point val="25,43"/>
+        <dia:point val="27,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="24.95,42.95;32.865,47.45"/>
+        <dia:rectangle val="26.95,42.95;35.635,47.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="25,43"/>
+        <dia:point val="27,43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2815,7 +2815,7 @@ this is a long comment#</dia:string>
         <dia:string>#short_enum#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.enumeration.underlying_element=short#</dia:string>
@@ -2954,16 +2954,16 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O24">
       <dia:attribute name="obj_pos">
-        <dia:point val="36,43"/>
+        <dia:point val="39,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="35.95,42.95;43.865,47.45"/>
+        <dia:rectangle val="38.95,42.95;47.635,47.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="36,43"/>
+        <dia:point val="39,43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.8150000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
@@ -2972,7 +2972,7 @@ this is a long comment#</dia:string>
         <dia:string>#test_all_knobs#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.enumeration.use_implementation_defined_underlying_element=true
@@ -3116,13 +3116,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,52"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,51.95;9.325,58.85"/>
+        <dia:rectangle val="2.95,51.95;11.635,58.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,52"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.8000000000000007"/>
@@ -3131,7 +3131,7 @@ this is a long comment#</dia:string>
         <dia:string>#hex_flags#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This is an example of an enumeration using hex flags.
@@ -3379,16 +3379,16 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O27">
       <dia:attribute name="obj_pos">
-        <dia:point val="4,64"/>
+        <dia:point val="6,64"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="3.95,63.95;10.325,70.05"/>
+        <dia:rectangle val="5.95,63.95;14.635,70.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="4,64"/>
+        <dia:point val="6,64"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2750000000000004"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="6.0000000000000009"/>
@@ -3397,7 +3397,7 @@ this is a long comment#</dia:string>
         <dia:string>#shape_types#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3586,13 +3586,13 @@ this is a long comment#</dia:string>
         <dia:point val="54,43"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="53.95,42.95;59.555,46.05"/>
+        <dia:rectangle val="53.95,42.95;61.865,46.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="54,43"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.5049999999999999"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3601,7 +3601,7 @@ this is a long comment#</dia:string>
         <dia:string>#my_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#this is an exception#</dia:string>
@@ -3749,7 +3749,7 @@ this is a long comment#</dia:string>
         <dia:string>#catastrophic_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -3845,13 +3845,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,75.95;12.845,79.05"/>
+        <dia:rectangle val="2.95,75.95;17.41,79.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.7949999999999999"/>
+        <dia:real val="14.359999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -3860,7 +3860,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive, immutable#</dia:string>
+        <dia:string>#yarn::primitive, yarn::immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test for a primitive which is also immutable.
@@ -4321,13 +4321,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,81.95;10.395,85.05"/>
+        <dia:rectangle val="2.95,81.95;10.865,85.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.3450000000000006"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4336,7 +4336,7 @@ this is a long comment#</dia:string>
         <dia:string>#short_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying short.
@@ -4433,13 +4433,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,86.95;9.99,90.05"/>
+        <dia:rectangle val="2.95,86.95;10.865,90.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9400000000000004"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4448,7 +4448,7 @@ this is a long comment#</dia:string>
         <dia:string>#long_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying long.
@@ -4545,13 +4545,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,91.95;9.25,95.05"/>
+        <dia:rectangle val="2.95,91.95;10.865,95.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.2000000000000002"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4560,7 +4560,7 @@ this is a long comment#</dia:string>
         <dia:string>#int_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying int.
@@ -4657,13 +4657,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,96.95;10.0025,100.05"/>
+        <dia:rectangle val="2.95,96.95;10.865,100.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,97"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9525000000000006"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4672,7 +4672,7 @@ this is a long comment#</dia:string>
         <dia:string>#char_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying char.
@@ -4769,13 +4769,13 @@ this is a long comment#</dia:string>
         <dia:point val="15,97"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,96.95;22.5725,100.05"/>
+        <dia:rectangle val="14.95,96.95;22.865,100.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15,97"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.5224999999999991"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4784,7 +4784,7 @@ this is a long comment#</dia:string>
         <dia:string>#uchar_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying unsigned char.
@@ -4881,13 +4881,13 @@ this is a long comment#</dia:string>
         <dia:point val="15,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,86.95;22.56,90.05"/>
+        <dia:rectangle val="14.95,86.95;22.865,90.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.5099999999999998"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4896,7 +4896,7 @@ this is a long comment#</dia:string>
         <dia:string>#ulong_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying unsigned long.
@@ -4993,13 +4993,13 @@ this is a long comment#</dia:string>
         <dia:point val="15,92"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,91.95;21.82,95.05"/>
+        <dia:rectangle val="14.95,91.95;22.865,95.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15,92"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.7700000000000005"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5008,7 +5008,7 @@ this is a long comment#</dia:string>
         <dia:string>#uint_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying unsigned int.
@@ -5120,7 +5120,7 @@ this is a long comment#</dia:string>
         <dia:string>#ushort_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying unsgined short.
@@ -5232,7 +5232,7 @@ this is a long comment#</dia:string>
         <dia:string>#double_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying double.
@@ -5329,13 +5329,13 @@ this is a long comment#</dia:string>
         <dia:point val="15,102"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="14.95,101.95;22.0875,105.05"/>
+        <dia:rectangle val="14.95,101.95;22.865,105.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="15,102"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0374999999999996"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5344,7 +5344,7 @@ this is a long comment#</dia:string>
         <dia:string>#float_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying float.
@@ -5441,13 +5441,13 @@ this is a long comment#</dia:string>
         <dia:point val="3,107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="2.95,106.95;9.97,110.05"/>
+        <dia:rectangle val="2.95,106.95;10.865,110.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="3,107"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.9199999999999999"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -5456,7 +5456,7 @@ this is a long comment#</dia:string>
         <dia:string>#bool_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying bool.
@@ -5550,13 +5550,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O44">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,83"/>
+        <dia:point val="35,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,82.95;41.325,86.65"/>
+        <dia:rectangle val="34.95,81.95;41.325,85.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,83"/>
+        <dia:point val="35,82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
@@ -5684,13 +5684,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O45">
       <dia:attribute name="obj_pos">
-        <dia:point val="35,89"/>
+        <dia:point val="35,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="34.95,88.95;41.325,92.65"/>
+        <dia:rectangle val="34.95,86.95;41.325,90.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="35,89"/>
+        <dia:point val="35,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.2750000000000004"/>
@@ -5849,7 +5849,7 @@ this is a long comment#</dia:string>
         <dia:string>#fluent#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#fluent#</dia:string>
+        <dia:string>#yarn::fluent#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Tests the fluent scenario across the different types of properties.#</dia:string>
@@ -6014,13 +6014,13 @@ this is a long comment#</dia:string>
         <dia:point val="48,75.9667"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,75.9167;55.725,79.0167"/>
+        <dia:rectangle val="47.95,75.9167;55.865,79.0167"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,75.9667"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6749999999999998"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -6029,7 +6029,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable_zero#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#immutable#</dia:string>
+        <dia:string>#yarn::immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Immutable class with no properties.#</dia:string>
@@ -6139,7 +6139,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable_two#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#immutable#</dia:string>
+        <dia:string>#yarn::immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6278,13 +6278,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O49">
       <dia:attribute name="obj_pos">
-        <dia:point val="48,83"/>
+        <dia:point val="48,82"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,82.95;58.755,86.65"/>
+        <dia:rectangle val="47.95,81.95;58.755,85.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="48,83"/>
+        <dia:point val="48,82"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.705"/>
@@ -6296,7 +6296,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable_one_builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#immutable#</dia:string>
+        <dia:string>#yarn::immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Immutable class with a built-in property.#</dia:string>
@@ -6412,13 +6412,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O50">
       <dia:attribute name="obj_pos">
-        <dia:point val="48,89"/>
+        <dia:point val="48,87"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,88.95;60.845,92.65"/>
+        <dia:rectangle val="47.95,86.95;60.845,90.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="48,89"/>
+        <dia:point val="48,87"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="12.795"/>
@@ -6430,7 +6430,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable_one_non_builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#immutable#</dia:string>
+        <dia:string>#yarn::immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Immutable class with one pod property#</dia:string>
@@ -6564,7 +6564,7 @@ this is a long comment#</dia:string>
         <dia:string>#immutable_four#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#immutable#</dia:string>
+        <dia:string>#yarn::immutable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Immutable class with non-immutable and immutable pods as properties.#</dia:string>
@@ -6767,7 +6767,7 @@ this is a long comment#</dia:string>
         <dia:string>#SimpleConcept#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This is an example of a concept.#</dia:string>
@@ -7043,13 +7043,13 @@ this is a long comment#</dia:string>
         <dia:point val="74.062,82.9375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.012,82.8875;80.4595,86.5875"/>
+        <dia:rectangle val="74.012,82.8875;81.157,86.5875"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74.062,82.9375"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.3475000000000001"/>
+        <dia:real val="7.0449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7058,7 +7058,7 @@ this is a long comment#</dia:string>
         <dia:string>#BaseConcept#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This is the base concept.#</dia:string>
@@ -7174,16 +7174,16 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O55">
       <dia:attribute name="obj_pos">
-        <dia:point val="73.062,94.9375"/>
+        <dia:point val="70,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.012,94.8875;78.802,98.5875"/>
+        <dia:rectangle val="69.95,94.95;77.095,98.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73.062,94.9375"/>
+        <dia:point val="70,95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.6899999999999995"/>
+        <dia:real val="7.0449999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -7192,7 +7192,7 @@ this is a long comment#</dia:string>
         <dia:string>#Refinement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This concept refines BaseConcept.#</dia:string>
@@ -7308,19 +7308,19 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O56">
       <dia:attribute name="obj_pos">
-        <dia:point val="77.2357,86.5375"/>
+        <dia:point val="77.5845,86.5375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="75.857,86.4875;78.0857,94.9875"/>
+        <dia:rectangle val="73.4725,86.4875;78.4345,95.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="77.2357,86.5375"/>
-        <dia:point val="77.2357,90.5876"/>
-        <dia:point val="75.907,90.5876"/>
-        <dia:point val="75.907,94.9375"/>
+        <dia:point val="77.5845,86.5375"/>
+        <dia:point val="77.5845,90"/>
+        <dia:point val="73.5225,90"/>
+        <dia:point val="73.5225,95"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -7587,7 +7587,7 @@ this is a long comment#</dia:string>
         <dia:string>#BaseConcept2#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Base concept.#</dia:string>
@@ -7721,7 +7721,7 @@ this is a long comment#</dia:string>
         <dia:string>#FirstRefinement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#First refinement #</dia:string>
@@ -7855,7 +7855,7 @@ this is a long comment#</dia:string>
         <dia:string>#SecondRefinement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Second refinement #</dia:string>
@@ -8053,13 +8053,13 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O64">
       <dia:attribute name="obj_pos">
-        <dia:point val="74.062,121.938"/>
+        <dia:point val="73,122"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.012,121.888;83.9645,125.588"/>
+        <dia:rectangle val="72.95,121.95;82.9025,125.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="74.062,121.938"/>
+        <dia:point val="73,122"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="9.8525000000000009"/>
@@ -8071,7 +8071,7 @@ this is a long comment#</dia:string>
         <dia:string>#MultipleRefinements#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Multiple refinements concept#</dia:string>
@@ -8190,16 +8190,16 @@ this is a long comment#</dia:string>
         <dia:point val="67.9445,115.538"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.0945,115.488;74.112,121.988"/>
+        <dia:rectangle val="67.0945,115.488;73.05,122.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="67.9445,115.538"/>
-        <dia:point val="67.9445,119.138"/>
-        <dia:point val="74.062,119.138"/>
-        <dia:point val="74.062,121.938"/>
+        <dia:point val="67.9445,119"/>
+        <dia:point val="73,119"/>
+        <dia:point val="73,122"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8207,7 +8207,7 @@ this is a long comment#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -8231,16 +8231,16 @@ this is a long comment#</dia:string>
         <dia:point val="86.5495,115.538"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="83.8645,115.488;87.3995,121.988"/>
+        <dia:rectangle val="82.8025,115.488;87.3995,122.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="86.5495,115.538"/>
-        <dia:point val="86.5495,119.138"/>
-        <dia:point val="83.9145,119.138"/>
-        <dia:point val="83.9145,121.938"/>
+        <dia:point val="86.5495,119"/>
+        <dia:point val="82.8525,119"/>
+        <dia:point val="82.8525,122"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8248,7 +8248,7 @@ this is a long comment#</dia:string>
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -9960,16 +9960,16 @@ modeled by the base.#</dia:string>
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O85">
       <dia:attribute name="obj_pos">
-        <dia:point val="16,76"/>
+        <dia:point val="19,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.95,75.95;20.8,77.75"/>
+        <dia:rectangle val="18.95,75.95;23.8,77.75"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="16,76"/>
+        <dia:point val="19,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="4.75"/>
@@ -9998,7 +9998,7 @@ modeled by the base.#</dia:string>
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="16.35,77.245"/>
+            <dia:point val="19.35,77.245"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -11733,13 +11733,13 @@ modeled by the base.#</dia:string>
         <dia:point val="48,137"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="47.95,136.95;53.555,140.05"/>
+        <dia:rectangle val="47.95,136.95;55.865,140.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="48,137"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="5.5049999999999999"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -11748,7 +11748,7 @@ modeled by the base.#</dia:string>
         <dia:string>#base#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#visitable#</dia:string>
+        <dia:string>#yarn::visitable#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -11974,17 +11974,17 @@ modeled by the base.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O108">
       <dia:attribute name="obj_pos">
-        <dia:point val="50.7525,140"/>
+        <dia:point val="51.9075,140"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="49.9025,139.95;56.2,146.05"/>
+        <dia:rectangle val="51.0575,139.95;56.2,146.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50.7525,140"/>
-        <dia:point val="50.7525,143"/>
+        <dia:point val="51.9075,140"/>
+        <dia:point val="51.9075,143"/>
         <dia:point val="56.15,143"/>
         <dia:point val="56.15,146"/>
       </dia:attribute>
@@ -12125,17 +12125,17 @@ modeled by the base.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O110">
       <dia:attribute name="obj_pos">
-        <dia:point val="50.7525,140"/>
+        <dia:point val="51.9075,140"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="42.1,139.95;51.6025,146.05"/>
+        <dia:rectangle val="42.1,139.95;52.7575,146.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="50.7525,140"/>
-        <dia:point val="50.7525,143"/>
+        <dia:point val="51.9075,140"/>
+        <dia:point val="51.9075,143"/>
         <dia:point val="42.15,143"/>
         <dia:point val="42.15,146"/>
       </dia:attribute>
@@ -14941,7 +14941,7 @@ name.#</dia:string>
         <dia:string>#ConceptInAPackage#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#concept#</dia:string>
+        <dia:string>#yarn::concept#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15208,7 +15208,7 @@ name.#</dia:string>
         <dia:point val="164.292,117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="150.668,110.6;165.042,117.8"/>
+        <dia:rectangle val="150.667,110.6;165.042,117.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>

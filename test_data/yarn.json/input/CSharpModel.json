@@ -323,7 +323,7 @@
       },
       "documentation": "Immutable class with non-immutable and immutable elements as properties.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -364,7 +364,7 @@
       },
       "documentation": "Immutable class with a builtin property.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -386,7 +386,7 @@
         "internal_modules": "meta_model"
       },
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -415,7 +415,7 @@
       },
       "documentation": "Immutable class with no properties.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ]
     },
     {

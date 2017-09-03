@@ -39,7 +39,7 @@ const mock_endomodel_factory::flags flags;
 const mock_endomodel_factory factory(flags);
 
 const std::string test_module("yarn");
-const std::string test_suite("stereotypes_expander_tests");
+const std::string test_suite("stereotypes_transform_tests");
 const std::string version_name("version");
 const std::string missing_identity("Identity must have at least");
 const std::string no_leaves("Type marked as visitable but has no leaves");
@@ -51,7 +51,7 @@ using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
 using dogen::yarn::transforms::stereotypes_transform;
 
-BOOST_AUTO_TEST_SUITE(stereotypes_expander_tests)
+BOOST_AUTO_TEST_SUITE(stereotypes_transform_tests)
 
 BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     SETUP_TEST_LOG_SOURCE("expanding_non_visitable_type_does_nothing");
@@ -82,7 +82,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_with_no_leaves_throws) {
     auto m(factory.make_single_type_model());
     BOOST_REQUIRE(m.objects().size() == 1);
     auto& o(*(m.objects().begin()->second));
-    o.stereotypes().push_back("visitable");
+    o.stereotypes().push_back("yarn::visitable");
     o.is_visitation_root(true);
     BOOST_LOG_SEV(lg, debug) << "model: " << m;
 
@@ -102,7 +102,7 @@ BOOST_AUTO_TEST_CASE(visitable_object_has_visitor_injected) {
             auto& o(*pair.second);
             BOOST_LOG_SEV(lg, debug) << "found object: " << n.id();
             o.is_visitation_root(true);
-            o.stereotypes().push_back("visitable");
+            o.stereotypes().push_back("yarn::visitable");
         }
     }
     BOOST_LOG_SEV(lg, debug) << "before: " << m;

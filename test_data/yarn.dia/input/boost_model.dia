@@ -801,13 +801,13 @@
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O5">
       <dia:attribute name="obj_pos">
-        <dia:point val="13.6875,31.4375"/>
+        <dia:point val="11,31"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="13.6375,31.3875;20.3,34.2875"/>
+        <dia:rectangle val="10.95,30.95;17.6125,33.85"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="13.6875,31.4375"/>
+        <dia:point val="11,31"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="6.5625"/>
@@ -938,16 +938,16 @@
         <dia:point val="22.5725,26.1125"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="16.9187,26.0625;23.4225,31.4875"/>
+        <dia:rectangle val="14.2312,26.0625;23.4225,31.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
         <dia:point val="22.5725,26.1125"/>
-        <dia:point val="22.5725,29.175"/>
-        <dia:point val="16.9688,29.175"/>
-        <dia:point val="16.9688,31.4375"/>
+        <dia:point val="22.5725,29"/>
+        <dia:point val="14.2812,29"/>
+        <dia:point val="14.2812,31"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -955,7 +955,7 @@
         <dia:enum val="1"/>
       </dia:attribute>
       <dia:attribute name="orth_autoroute">
-        <dia:boolean val="true"/>
+        <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="text_colour">
         <dia:color val="#000000"/>
@@ -2059,7 +2059,7 @@
         <dia:point val="10,-8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="9.95,-8.05;31.355,0.15"/>
+        <dia:rectangle val="9.95,-8.05;31.355,0.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2071,7 +2071,7 @@
         <dia:real val="21.305000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="8.0999999999999996"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2119,13 +2119,13 @@
         <dia:point val="74,23"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,22.95;81.6275,26.05"/>
+        <dia:rectangle val="73.95,22.95;81.865,26.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74,23"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.5775000000000006"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2134,7 +2134,7 @@
         <dia:string>#ptime_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying ptime.
@@ -2246,7 +2246,7 @@
         <dia:string>#time_duration_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying time_duration.
@@ -2343,13 +2343,13 @@
         <dia:point val="74,30"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,29.95;81.06,33.05"/>
+        <dia:rectangle val="73.95,29.95;81.865,33.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74,30"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0099999999999998"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -2358,7 +2358,7 @@
         <dia:string>#date_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying time_duration.

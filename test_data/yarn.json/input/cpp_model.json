@@ -79,7 +79,7 @@
         "internal_modules": "meta_model"
       },
       "stereotypes": [
-        "visitable"
+        "yarn::visitable"
       ]
     },
     {
@@ -551,7 +551,7 @@
       },
       "documentation": "Tests the fluent scenario across the different types of properties.\n",
       "stereotypes": [
-        "fluent"
+        "yarn::fluent"
       ],
       "attributes": [
         {
@@ -606,7 +606,7 @@
       },
       "documentation": "Immutable class with non-immutable and immutable pods as properties.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -647,7 +647,7 @@
       },
       "documentation": "Immutable class with a built-in property.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -670,7 +670,7 @@
       },
       "documentation": "Immutable class with one pod property\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -692,7 +692,7 @@
         "internal_modules": "meta_model"
       },
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "attributes": [
         {
@@ -721,7 +721,7 @@
       },
       "documentation": "Immutable class with no properties.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ]
     },
     {
@@ -2146,7 +2146,7 @@
       },
       "documentation": "Test for a primitive which is also immutable.\n",
       "stereotypes": [
-        "immutable"
+        "yarn::immutable"
       ],
       "annotation": {
         "yarn.primitive.underlying_element": "short"

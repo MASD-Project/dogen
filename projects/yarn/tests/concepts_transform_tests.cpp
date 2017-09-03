@@ -36,7 +36,7 @@
 namespace {
 
 const std::string test_module("yarn");
-const std::string test_suite("concept_expander_tests");
+const std::string test_suite("concept_transform_tests");
 
 const std::string concept_not_found("Concept not found");
 const std::string object_not_found("Object not found in model");
@@ -67,10 +67,10 @@ using object_types = dogen::yarn::test::mock_endomodel_factory::
 using attribute_types = dogen::yarn::test::mock_endomodel_factory::
     attribute_types;
 
-BOOST_AUTO_TEST_SUITE(concept_expander_tests)
+BOOST_AUTO_TEST_SUITE(concept_transform_tests)
 
-BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("empty_model_is_untouched_by_concept_transform");
 
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
@@ -82,8 +82,8 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_expander) {
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_attributes_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_type_and_no_attributes_is_untouched_by_concept_transform");
 
     auto a(factory.make_single_type_model());
     const auto e(factory.make_single_type_model());
@@ -95,8 +95,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_co
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_is_untouched_by_concept_transform");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -122,8 +122,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_expa
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_concept_transform");
 
     auto a(factory.make_single_concept_model());
     const auto e(factory.make_single_concept_model());
@@ -372,8 +372,8 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
     }
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_parent_that_does_not_model_concepts_is_untouched_by_concept_transform");
 
     auto a(factory.object_with_parent_in_the_same_model());
     const auto e(factory.object_with_parent_in_the_same_model());
@@ -387,8 +387,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_un
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("model_with_third_degree_inheritance_that_does_not_model_concepts_is_untouched_by_concept_transform");
 
     auto a(factory.object_with_third_degree_parent_in_same_model());
     const auto e(factory.object_with_third_degree_parent_in_same_model());
@@ -402,8 +402,8 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_expander) {
-    SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_expander");
+BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_transform) {
+    SETUP_TEST_LOG_SOURCE("model_containing_object_with_parent_that_models_concept_is_untouched_by_concept_transform");
 
     auto a(factory.make_object_with_parent_that_models_concept());
     const auto e(factory.make_object_with_parent_that_models_concept());

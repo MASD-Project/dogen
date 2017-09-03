@@ -59,18 +59,17 @@ const std::string uml_message("UML - Message");
 const std::string uml_realization("UML - Realizes");
 const std::string invalid_object_type("Invalid value for object type: ");
 
-const std::string object("object");
-const std::string concept("concept");
-const std::string enumeration("enumeration");
-const std::string primitive("primitive");
-const std::string exception("exception");
+const std::string object("yarn::object");
+const std::string concept("yarn::concept");
+const std::string enumeration("yarn::enumeration");
+const std::string primitive("yarn::primitive");
+const std::string exception("yarn::exception");
 
 const std::string error_parsing_object_type("Fail to parse object type: ");
 const std::string empty_dia_object_name("Dia object name is empty");
 const std::string uml_attribute_expected("UML atttribute expected");
 const std::string text_attribute_expected("Text attribute expected");
-const std::string one_value_expected(
-    "Attribute should have exactly one value");
+const std::string one_value_expected("Attribute should have exactly one value");
 const std::string name_attribute_expected(
     "Could not find name attribute. ID: ");
 const std::string type_attribute_expected(

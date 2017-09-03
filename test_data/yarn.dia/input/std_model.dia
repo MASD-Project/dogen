@@ -2600,22 +2600,22 @@
     </dia:object>
     <dia:object type="UML - Note" version="0" id="O15">
       <dia:attribute name="obj_pos">
-        <dia:point val="1,-14"/>
+        <dia:point val="1,-17"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="0.95,-14.05;21.585,-8.25"/>
+        <dia:rectangle val="0.95,-17.05;22.355,-8.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="1,-14"/>
+        <dia:point val="1,-17"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="20.535"/>
+        <dia:real val="21.305000000000003"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
-        <dia:real val="5.7000000000000002"/>
+        <dia:real val="8.9000000000000004"/>
       </dia:attribute>
       <dia:attribute name="line_width">
         <dia:real val="0.10000000000000001"/>
@@ -2647,7 +2647,7 @@
             <dia:real val="0.80000000000000004"/>
           </dia:attribute>
           <dia:attribute name="pos">
-            <dia:point val="1.35,-12.755"/>
+            <dia:point val="1.35,-15.755"/>
           </dia:attribute>
           <dia:attribute name="color">
             <dia:color val="#000000"/>
@@ -2678,7 +2678,7 @@
         <dia:string>#enum_with_std_builtin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#enumeration#</dia:string>
+        <dia:string>#yarn::enumeration#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##DOGEN yarn.enumeration.underlying_element=std::int8_t#</dia:string>
@@ -2835,7 +2835,7 @@
         <dia:string>#string_primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#primitive#</dia:string>
+        <dia:string>#yarn::primitive#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Test a primitive with an underlying string.

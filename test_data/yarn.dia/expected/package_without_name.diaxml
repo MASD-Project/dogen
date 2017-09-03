@@ -1033,7 +1033,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>16,5</value>
+										<value>16,-2</value>
 									</value>
 								</item>
 							</values>
@@ -1046,7 +1046,7 @@
 								<item>
 									<which>8</which>
 									<value>
-										<value>15.95,4.95;29.27,7.55</value>
+										<value>15.95,-2.05;37.355,6.95</value>
 									</value>
 								</item>
 							</values>
@@ -1079,7 +1079,7 @@
 								<item>
 									<which>5</which>
 									<value>
-										<value>16,5</value>
+										<value>16,-2</value>
 									</value>
 								</item>
 							</values>
@@ -1092,7 +1092,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>13.220000000000001</value>
+										<value>21.305000000000003</value>
 									</value>
 								</item>
 							</values>
@@ -1105,7 +1105,7 @@
 								<item>
 									<which>1</which>
 									<value>
-										<value>2.5</value>
+										<value>8.9000000000000004</value>
 									</value>
 								</item>
 							</values>
@@ -1226,7 +1226,7 @@
 														<item>
 															<which>5</which>
 															<value>
-																<value>16.35,6.245</value>
+																<value>16.35,-0.755</value>
 															</value>
 														</item>
 													</values>

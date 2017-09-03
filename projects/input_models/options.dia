@@ -83,7 +83,7 @@
         <dia:string>#validation_error#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#exception#</dia:string>
+        <dia:string>#yarn::exception#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#An error occurred when validating options.#</dia:string>

@@ -37,13 +37,13 @@ namespace {
 using namespace dogen::utility::log;
 auto lg(logger_factory("yarn.transforms.stereotypes_transform"));
 
-const std::string stereotype_visitor("visitable");
-const std::string stereotype_fluent("fluent");
-const std::string stereotype_immutable("immutable");
-const std::string stereotype_orm_object("orm object");
-const std::string stereotype_orm_value("orm value");
-const std::string stereotype_exception("exception");
-const std::string stereotype_enumeration("enumeration");
+const std::string stereotype_visitor("yarn::visitable");
+const std::string stereotype_fluent("yarn::fluent");
+const std::string stereotype_immutable("yarn::immutable");
+const std::string stereotype_orm_object("yarn::orm::object");
+const std::string stereotype_orm_value("yarn::orm::value");
+const std::string stereotype_exception("yarn::exception");
+const std::string stereotype_enumeration("yarn::enumeration");
 const std::string stereotype_handcrafted("handcrafted");
 const std::string stereotype_cpp_helper_formatter("C++ Helper Formatter");
 const std::string stereotype_cpp_artefact_formatter("C++ Artefact Formatter");
