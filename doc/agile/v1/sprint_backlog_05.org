@@ -14,21 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-03 Sun 18:55]
+#+CAPTION: Clock summary at [2017-09-04 Mon 22:39]
 | <75>                                                                        |        |      |      |       |
 | Headline                                                                    | Time   |      |      |     % |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *8:48* |      |      | 100.0 |
+| *Total time*                                                                | *9:29* |      |      | 100.0 |
 |-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 8:48   |      |      | 100.0 |
-| Active                                                                      |        | 8:48 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |   8.3 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  14.0 |
-| COMPLETED Remove object types in yarn                                       |        |      | 0:52 |   9.8 |
-| COMPLETED Clean-up readme                                                   |        |      | 1:15 |  14.2 |
-| COMPLETED Rename transformers to adapters                                   |        |      | 0:28 |   5.3 |
-| COMPLETED Analysis on annotations and profiles                              |        |      | 2:26 |  27.7 |
-| COMPLETED Use namespaced stereotypes                                        |        |      | 1:49 |  20.6 |
+| Stories                                                                     | 9:29   |      |      | 100.0 |
+| Active                                                                      |        | 9:29 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |   7.7 |
+| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  13.0 |
+| COMPLETED Remove object types in yarn                                       |        |      | 0:52 |   9.1 |
+| COMPLETED Clean-up readme                                                   |        |      | 1:15 |  13.2 |
+| COMPLETED Rename transformers to adapters                                   |        |      | 0:28 |   4.9 |
+| COMPLETED Analysis on annotations and profiles                              |        |      | 2:26 |  25.7 |
+| COMPLETED Use namespaced stereotypes                                        |        |      | 1:49 |  19.2 |
+| STARTED Rename yarn concepts                                                |        |      | 0:41 |   7.2 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -436,6 +437,35 @@ namespace, and making it clear they are connected to yarn. Example:
 
 and so forth.
 
+*** STARTED Rename yarn concepts                                      :story:
+    CLOCK: [2017-09-04 Mon 21:58]--[2017-09-04 Mon 22:39] =>  0:41
+
+When concepts were introduced, it was clear that something was not
+quite right on the naming. We used the C++ terminology because it
+mapped well enough to the idea, but it was understood that we were
+talking about two different things. As part of the clean-up required
+for profiles, its time to revisit concepts.
+
+A yarn concept is, really, an "object template". That is, it allows us
+to create a template of a subset of the structure of a yarn object,
+which can then be instantiated (pasted?) into actual objects. One
+would like to avoid the use of the word "template", due to its C++
+connotations, but sadly it seems there isn't a more appropriate word.
+
+Unlike objects, object templates support multiple inheritance.
+
+We consume the object templates via stereotypes.
+
+Thus so far we should just rename concepts to object templates.
+
+However, the downside is that we now have a verbose stereotype:
+
+: object_template
+: yarn::object_template
+
+Having said that, we cannot have values for all attributes in an
+object, just the attribute collection.
+
 *** Code-generate annotations type templates                          :story:
 
 Tasks:
@@ -474,34 +504,6 @@ it would make more sense to treat them as a initialisation step. This
 will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
-
-*** Rename yarn concepts                                              :story:
-
-When concepts were introduced, it was clear that something was not
-quite right on the naming. We used the C++ terminology because it
-mapped well enough to the idea, but it was understood that we were
-talking about two different things. As part of the clean-up required
-for profiles, its time to revisit concepts.
-
-A yarn concept is, really, an "object template". That is, it allows us
-to create a template of a subset of the structure of a yarn object,
-which can then be instantiated (pasted?) into actual objects. One
-would like to avoid the use of the word "template", due to its C++
-connotations, but sadly it seems there isn't a more appropriate word.
-
-Unlike objects, object templates support multiple inheritance.
-
-We consume the object templates via stereotypes.
-
-Thus so far we should just rename concepts to object templates.
-
-However, the downside is that we now have a verbose stereotype:
-
-: object_template
-: yarn::object_template
-
-Having said that, we cannot have values for all attributes in an
-object, just the attribute collection.
 
 *** Throw on unsupported stereotypes                                  :story:
 
