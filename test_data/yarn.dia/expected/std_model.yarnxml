@@ -884,10 +884,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -1710,10 +1710,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -2057,10 +2057,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -2723,10 +2723,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -3389,10 +3389,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -4055,10 +4055,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -4481,10 +4481,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -4907,10 +4907,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -5253,10 +5253,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -5679,10 +5679,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -5945,10 +5945,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6243,10 +6243,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6590,10 +6590,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>
@@ -6857,10 +6857,10 @@
 						<always_in_heap>0</always_in_heap>
 					</type_parameters>
 					<is_associative_container>0</is_associative_container>
-					<modeled_concepts>
+					<object_templates>
 						<count>0</count>
 						<item_version>0</item_version>
-					</modeled_concepts>
+					</object_templates>
 					<associative_container_keys>
 						<count>0</count>
 						<item_version>0</item_version>

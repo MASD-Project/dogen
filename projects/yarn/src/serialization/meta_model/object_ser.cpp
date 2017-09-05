@@ -72,7 +72,7 @@ void save(Archive& ar,
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("type_parameters", v.type_parameters_);
     ar << make_nvp("is_associative_container", v.is_associative_container_);
-    ar << make_nvp("modeled_concepts", v.modeled_concepts_);
+    ar << make_nvp("object_templates", v.object_templates_);
     ar << make_nvp("associative_container_keys", v.associative_container_keys_);
     ar << make_nvp("provides_opaqueness", v.provides_opaqueness_);
     ar << make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);
@@ -107,7 +107,7 @@ void load(Archive& ar,
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("type_parameters", v.type_parameters_);
     ar >> make_nvp("is_associative_container", v.is_associative_container_);
-    ar >> make_nvp("modeled_concepts", v.modeled_concepts_);
+    ar >> make_nvp("object_templates", v.object_templates_);
     ar >> make_nvp("associative_container_keys", v.associative_container_keys_);
     ar >> make_nvp("provides_opaqueness", v.provides_opaqueness_);
     ar >> make_nvp("can_be_primitive_underlier", v.can_be_primitive_underlier_);

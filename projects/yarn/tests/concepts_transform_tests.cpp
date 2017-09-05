@@ -115,7 +115,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_tran
     BOOST_CHECK(o.local_attributes().size() == 1);
     BOOST_CHECK(o.inherited_attributes().empty());
     BOOST_CHECK(o.all_attributes().empty());
-    BOOST_CHECK(o.modeled_concepts().empty());
+    BOOST_CHECK(o.object_templates().empty());
 
     concepts_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -131,7 +131,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_transform
     BOOST_REQUIRE(a.objects().size() == 1);
 
     const auto& o(*(a.objects().begin()->second));
-    BOOST_CHECK(o.modeled_concepts().size() == 1);
+    BOOST_CHECK(o.object_templates().size() == 1);
 
     BOOST_REQUIRE(a.object_templates().size() == 1);
     const auto& c(*(a.object_templates().begin()->second));
@@ -153,13 +153,13 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(0,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(1,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else
             BOOST_FAIL("Unexpected object: " << n.id());
 
@@ -201,9 +201,9 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n))
-            BOOST_CHECK(o.modeled_concepts().size() == 1);
+            BOOST_CHECK(o.object_templates().size() == 1);
         else if (factory.is_type_name_n(1, n)) {
-            BOOST_CHECK(o.modeled_concepts().size() == 2);
+            BOOST_CHECK(o.object_templates().size() == 2);
         } else
             BOOST_FAIL("Unexpected object: " << n.id());
     }
@@ -220,17 +220,17 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(0,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(1,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else if (factory.is_type_name_n(2, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(2,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else
             BOOST_FAIL("Unexpected object: " << n.id());
 
@@ -277,11 +277,11 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n))
-            BOOST_CHECK(o.modeled_concepts().size() == 1);
+            BOOST_CHECK(o.object_templates().size() == 1);
         else if (factory.is_type_name_n(1, n)) {
-            BOOST_CHECK(o.modeled_concepts().size() == 2);
+            BOOST_CHECK(o.object_templates().size() == 2);
         } else if (factory.is_type_name_n(2, n)) {
-            BOOST_CHECK(o.modeled_concepts().size() == 3);
+            BOOST_CHECK(o.object_templates().size() == 3);
         } else
             BOOST_FAIL("Unexpected object: " << n.id());
     }
@@ -299,9 +299,9 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_CHECK(factory.is_concept_name_n(3,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
 
             BOOST_CHECK(o.parents().empty());
         } else
@@ -368,7 +368,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
         const auto& o(*(m.objects().begin()->second));
         const auto& n(o.name());
         BOOST_CHECK(factory.is_type_name_n(0, n));
-        BOOST_CHECK(o.modeled_concepts().size() == 4);
+        BOOST_CHECK(o.object_templates().size() == 4);
     }
 }
 
@@ -426,11 +426,11 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().empty());
+            BOOST_REQUIRE(o.object_templates().empty());
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto& pn(o.parents().front());
             BOOST_REQUIRE(factory.is_type_name_n(0, pn));
@@ -469,11 +469,11 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
         const auto& n(o.name());
 
         if (factory.is_type_name_n(0, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+            BOOST_REQUIRE(o.object_templates().size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(1,
-                    o.modeled_concepts().front()));
+                    o.object_templates().front()));
         } else if (factory.is_type_name_n(1, n)) {
-            BOOST_REQUIRE(o.modeled_concepts().empty());
+            BOOST_REQUIRE(o.object_templates().empty());
             BOOST_REQUIRE(o.parents().size() == 1);
             const auto& pn(o.parents().front());
             BOOST_REQUIRE(factory.is_type_name_n(0, pn));
@@ -503,7 +503,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
         const auto& o(*pair.second);
         const auto& n(o.name());
 
-        const auto& mc(o.modeled_concepts());
+        const auto& mc(o.object_templates());
         if (factory.is_type_name_n(0, n)) {
             BOOST_REQUIRE(mc.size() == 2);
             BOOST_REQUIRE(
@@ -558,9 +558,9 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
             BOOST_FAIL("Unexpected object: " << n);
 
         const auto& o(*(m.objects().begin()->second));
-        BOOST_REQUIRE(o.modeled_concepts().size() == 1);
+        BOOST_REQUIRE(o.object_templates().size() == 1);
         BOOST_REQUIRE(factory.is_concept_name_n(0,
-                o.modeled_concepts().front()));
+                o.object_templates().front()));
     }
 
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
@@ -590,7 +590,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
         const auto& o(*(m.objects().begin()->second));
         const auto& n(o.name());
 
-        const auto& mc(o.modeled_concepts());
+        const auto& mc(o.object_templates());
         if (factory.is_type_name_n(1, n)) {
             BOOST_REQUIRE(mc.size() == 1);
             BOOST_REQUIRE(factory.is_concept_name_n(0, mc.front()));

@@ -127,23 +127,23 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
         return;
     }
 
-    if (o.modeled_concepts().empty()) {
+    if (o.object_templates().empty()) {
         processed_names.insert(o.name());
         BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
         return;
     }
 
     /*
-     * For each of the concepts that we model, perform an expansion
-     * including their parents and so on. We can rely on the concepts'
-     * @e parents container for this.
+     * For each of the object templates that we model, perform an
+     * expansion including their parents and so on. We can rely on the
+     * concepts' @e parents container for this.
      */
     std::list<meta_model::name> expanded_parents;
-    for (auto& mc : o.modeled_concepts()) {
-        auto& c(resolve_concept(o.name(), mc, im));
-        expanded_parents.push_back(c.name());
+    for (auto& otn : o.object_templates()) {
+        auto& ot(resolve_concept(o.name(), otn, im));
+        expanded_parents.push_back(ot.name());
         expanded_parents.insert(expanded_parents.end(),
-            c.parents().begin(), c.parents().end());
+            ot.parents().begin(), ot.parents().end());
     }
 
     /*
@@ -157,7 +157,7 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
      * parent.
      */
     if (o.parents().empty()) {
-        o.modeled_concepts(expanded_parents);
+        o.object_templates(expanded_parents);
         BOOST_LOG_SEV(lg, debug) << "Object has no parent, using reduced set.";
         return;
     }
@@ -176,9 +176,9 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
     auto& parent(find_object(n, im));
     expand_object(parent, im, processed_names);
 
-    const auto& mc(parent.modeled_concepts());
-    if (!mc.empty())
-        their_concepts.insert(mc.begin(), mc.end());
+    const auto& ot(parent.object_templates());
+    if (!ot.empty())
+        their_concepts.insert(ot.begin(), ot.end());
 
     /*
      * We want to only model concepts which have not yet been modeled
@@ -194,10 +194,10 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
      * difference. We do this instead of just using the set difference
      * directly to preserve order.
      */
-    o.modeled_concepts().clear();
+    o.object_templates().clear();
     for (const auto& n : expanded_parents) {
         if (result.find(n) != result.end())
-            o.modeled_concepts().push_back(n);
+            o.object_templates().push_back(n);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }

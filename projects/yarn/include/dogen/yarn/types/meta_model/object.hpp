@@ -96,7 +96,7 @@ public:
         const std::list<dogen::yarn::meta_model::name>& leaves,
         const dogen::yarn::meta_model::type_parameters& type_parameters,
         const bool is_associative_container,
-        const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
+        const std::list<dogen::yarn::meta_model::name>& object_templates,
         const std::list<dogen::yarn::meta_model::name>& associative_container_keys,
         const bool provides_opaqueness,
         const bool can_be_primitive_underlier,
@@ -319,13 +319,13 @@ public:
     /**@}*/
 
     /**
-     * @brief Concepts modeled by this object.
+     * @brief All object templates associated with this object.
      */
     /**@{*/
-    const std::list<dogen::yarn::meta_model::name>& modeled_concepts() const;
-    std::list<dogen::yarn::meta_model::name>& modeled_concepts();
-    void modeled_concepts(const std::list<dogen::yarn::meta_model::name>& v);
-    void modeled_concepts(const std::list<dogen::yarn::meta_model::name>&& v);
+    const std::list<dogen::yarn::meta_model::name>& object_templates() const;
+    std::list<dogen::yarn::meta_model::name>& object_templates();
+    void object_templates(const std::list<dogen::yarn::meta_model::name>& v);
+    void object_templates(const std::list<dogen::yarn::meta_model::name>&& v);
     /**@}*/
 
     /**
@@ -395,7 +395,7 @@ private:
     std::list<dogen::yarn::meta_model::name> leaves_;
     dogen::yarn::meta_model::type_parameters type_parameters_;
     bool is_associative_container_;
-    std::list<dogen::yarn::meta_model::name> modeled_concepts_;
+    std::list<dogen::yarn::meta_model::name> object_templates_;
     std::list<dogen::yarn::meta_model::name> associative_container_keys_;
     bool provides_opaqueness_;
     bool can_be_primitive_underlier_;

@@ -99,9 +99,9 @@ void attributes_transform::expand_object(meta_model::object& o,
      * this order is more effective than other alternatives.
      */
     std::list<meta_model::attribute> concept_attributes;
-    for (const auto& n : o.modeled_concepts()) {
-        auto& c(find_concept(n, im));
-        const auto& p(c.local_attributes());
+    for (const auto& otn : o.object_templates()) {
+        auto& ot(find_concept(otn, im));
+        const auto& p(ot.local_attributes());
         concept_attributes.insert(concept_attributes.end(), p.begin(), p.end());
     }
 

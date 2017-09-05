@@ -122,7 +122,7 @@ populate(const unsigned int position, result_type& v) {
     v.leaves(create_std_list_dogen_yarn_meta_model_name(position + 19));
     v.type_parameters(create_dogen_yarn_meta_model_type_parameters(position + 20));
     v.is_associative_container(create_bool(position + 21));
-    v.modeled_concepts(create_std_list_dogen_yarn_meta_model_name(position + 22));
+    v.object_templates(create_std_list_dogen_yarn_meta_model_name(position + 22));
     v.associative_container_keys(create_std_list_dogen_yarn_meta_model_name(position + 23));
     v.provides_opaqueness(create_bool(position + 24));
     v.can_be_primitive_underlier(create_bool(position + 25));

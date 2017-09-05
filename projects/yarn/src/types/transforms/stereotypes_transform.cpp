@@ -283,11 +283,11 @@ bool stereotypes_transform::try_expand_concept(const std::string& s,
     meta_model::object& o, const meta_model::endomodel& im) {
 
     using helpers::resolver;
-    const auto oc(resolver::try_resolve_concept_name(o.name(), s, im));
-    if (!oc)
+    const auto oot(resolver::try_resolve_concept_name(o.name(), s, im));
+    if (!oot)
         return false;
 
-    o.modeled_concepts().push_back(*oc);
+    o.object_templates().push_back(*oot);
     return true;
 }
 

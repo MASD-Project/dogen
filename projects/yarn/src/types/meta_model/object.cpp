@@ -148,7 +148,7 @@ object::object(object&& rhs)
       leaves_(std::move(rhs.leaves_)),
       type_parameters_(std::move(rhs.type_parameters_)),
       is_associative_container_(std::move(rhs.is_associative_container_)),
-      modeled_concepts_(std::move(rhs.modeled_concepts_)),
+      object_templates_(std::move(rhs.object_templates_)),
       associative_container_keys_(std::move(rhs.associative_container_keys_)),
       provides_opaqueness_(std::move(rhs.provides_opaqueness_)),
       can_be_primitive_underlier_(std::move(rhs.can_be_primitive_underlier_)),
@@ -187,7 +187,7 @@ object::object(
     const std::list<dogen::yarn::meta_model::name>& leaves,
     const dogen::yarn::meta_model::type_parameters& type_parameters,
     const bool is_associative_container,
-    const std::list<dogen::yarn::meta_model::name>& modeled_concepts,
+    const std::list<dogen::yarn::meta_model::name>& object_templates,
     const std::list<dogen::yarn::meta_model::name>& associative_container_keys,
     const bool provides_opaqueness,
     const bool can_be_primitive_underlier,
@@ -225,7 +225,7 @@ object::object(
       leaves_(leaves),
       type_parameters_(type_parameters),
       is_associative_container_(is_associative_container),
-      modeled_concepts_(modeled_concepts),
+      object_templates_(object_templates),
       associative_container_keys_(associative_container_keys),
       provides_opaqueness_(provides_opaqueness),
       can_be_primitive_underlier_(can_be_primitive_underlier),
@@ -281,7 +281,7 @@ void object::to_stream(std::ostream& s) const {
       << "\"leaves\": " << leaves_ << ", "
       << "\"type_parameters\": " << type_parameters_ << ", "
       << "\"is_associative_container\": " << is_associative_container_ << ", "
-      << "\"modeled_concepts\": " << modeled_concepts_ << ", "
+      << "\"object_templates\": " << object_templates_ << ", "
       << "\"associative_container_keys\": " << associative_container_keys_ << ", "
       << "\"provides_opaqueness\": " << provides_opaqueness_ << ", "
       << "\"can_be_primitive_underlier\": " << can_be_primitive_underlier_ << ", "
@@ -315,7 +315,7 @@ void object::swap(object& other) noexcept {
     swap(leaves_, other.leaves_);
     swap(type_parameters_, other.type_parameters_);
     swap(is_associative_container_, other.is_associative_container_);
-    swap(modeled_concepts_, other.modeled_concepts_);
+    swap(object_templates_, other.object_templates_);
     swap(associative_container_keys_, other.associative_container_keys_);
     swap(provides_opaqueness_, other.provides_opaqueness_);
     swap(can_be_primitive_underlier_, other.can_be_primitive_underlier_);
@@ -352,7 +352,7 @@ bool object::operator==(const object& rhs) const {
         leaves_ == rhs.leaves_ &&
         type_parameters_ == rhs.type_parameters_ &&
         is_associative_container_ == rhs.is_associative_container_ &&
-        modeled_concepts_ == rhs.modeled_concepts_ &&
+        object_templates_ == rhs.object_templates_ &&
         associative_container_keys_ == rhs.associative_container_keys_ &&
         provides_opaqueness_ == rhs.provides_opaqueness_ &&
         can_be_primitive_underlier_ == rhs.can_be_primitive_underlier_ &&
@@ -629,20 +629,20 @@ void object::is_associative_container(const bool v) {
     is_associative_container_ = v;
 }
 
-const std::list<dogen::yarn::meta_model::name>& object::modeled_concepts() const {
-    return modeled_concepts_;
+const std::list<dogen::yarn::meta_model::name>& object::object_templates() const {
+    return object_templates_;
 }
 
-std::list<dogen::yarn::meta_model::name>& object::modeled_concepts() {
-    return modeled_concepts_;
+std::list<dogen::yarn::meta_model::name>& object::object_templates() {
+    return object_templates_;
 }
 
-void object::modeled_concepts(const std::list<dogen::yarn::meta_model::name>& v) {
-    modeled_concepts_ = v;
+void object::object_templates(const std::list<dogen::yarn::meta_model::name>& v) {
+    object_templates_ = v;
 }
 
-void object::modeled_concepts(const std::list<dogen::yarn::meta_model::name>&& v) {
-    modeled_concepts_ = std::move(v);
+void object::object_templates(const std::list<dogen::yarn::meta_model::name>&& v) {
+    object_templates_ = std::move(v);
 }
 
 const std::list<dogen::yarn::meta_model::name>& object::associative_container_keys() const {

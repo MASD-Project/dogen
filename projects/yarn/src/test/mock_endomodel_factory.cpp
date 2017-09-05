@@ -342,7 +342,7 @@ void add_attribute(StatefulAndNameable& sn,
 void model_concept(const bool attributes_indexed,
     meta_model::object& o, const meta_model::object_template& c) {
 
-    o.modeled_concepts().push_back(c.name());
+    o.object_templates().push_back(c.name());
     if (attributes_indexed) {
         for (const auto& p : c.all_attributes()) {
             o.local_attributes().push_back(p);
