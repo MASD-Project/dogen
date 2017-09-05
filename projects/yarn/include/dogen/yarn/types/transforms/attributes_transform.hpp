@@ -34,13 +34,13 @@ namespace yarn {
 namespace transforms {
 
 /**
- * @brief Information expander that specialises in expanding
- * attributes across the model.
+ * @brief Transformation that specialises in expanding attributes
+ * across the model.
  *
  * @section yarn_attributes_expander_0 Model requirements
  *
- * The basic expansion of local attributes and of concepts is expected
- * to have taken place.
+ * The basic expansion of local attributes and of object templates is
+ * expected to have taken place.
  *
  * @section yarn_attributes_expander_1 Types of attributes
  *
@@ -55,29 +55,32 @@ namespace transforms {
  * @subsection yarn_attributes_expander_11 Local attributes
  *
  * On a natural, pre-expanded state, local attributes encompass only
- * the attributes defined on the class directly. The expander behaves
- * differently depending on whether it is indexing an object or a
- * concept.
+ * the attributes defined on the class directly. The transform behaves
+ * differently depending on whether it is processing an object or an
+ * object template.
  *
  * For objects, the job of the expander is to expand the local
- * attributes to include all attributes obtained by modeling
- * concepts. This is because we treat them no differently from
+ * attributes to include all attributes obtained by instantiating
+ * object templates. This is because we treat them no differently from
  * attributes defined in the class for purposes of code generation. As
- * we rely on concept expansion, all we need is the set of all
- * attributes of all concepts we model. Local attributes are useful to
- * define all member variables owned by a class.
+ * we rely on the object template transform, all we need is the set of
+ * all attributes of all object templates we instantiate. Local
+ * attributes are useful to define all member variables owned by a
+ * class.
  *
- * For concepts, local attributes are untouched. This is for two
- * reasons. First, because we rely on the local attributes of concepts
- * to process the local attributes of objects, as explained above, via
- * concept expansion; thus local attributes provide a quick way to
- * access all the attributes of all concepts one models. The second
- * reason is due to the representation of concepts in source code:
- * there is no requirement for a "meta-concept" - something from which
- * concepts get attributes from. There is nothing above concepts that
- * replicate the relationship we have between concepts and
- * objects. When concepts get expressed in source code, all we require
- * is the set of all attributes for that concept (see below).
+ * For object templates, local attributes are untouched. This is for
+ * two reasons. First, because we rely on the local attributes of
+ * object templates to process the local attributes of objects, as
+ * explained above, via object template expansion; thus local
+ * attributes provide a quick way to access all the attributes of all
+ * object templates one models. The second reason is due to the
+ * representation of object templates in source code: there is no
+ * requirement for a "meta-object template" - something from which
+ * object templates get attributes from. There is nothing above object
+ * templates that replicate the relationship we have between object
+ * templates and objects. When object templates get expressed in
+ * source code - say as C++ concepts - all we require is the set of
+ * all attributes for that object template (see below).
  *
  * @subsection yarn_attributes_expander_12 Inherited attributes
  *
@@ -86,16 +89,18 @@ namespace transforms {
  * the "all attribute" set of each parent (see below). They are useful
  * to call parent constructors and the like.
  *
- * For concepts, inherited attributes are not particularly useful. We
- * still index them by, arbitrarily, adding all the local attributes
- * of the parent. However, we still haven't found a good use for them.
+ * For object templates, inherited attributes are not particularly
+ * useful. We still index them by, arbitrarily, adding all the local
+ * attributes of the parent. However, we haven't yet found a good use
+ * case for them.
  *
  * @subsection yarn_attributes_expander_13 All attributes
  *
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited
  * attributes. For objects it is useful for full constructors. For
- * concepts it is effectively the full interface of the concept.
+ * object templates it is effectively the full interface of the
+ * concept.
  *
  */
 class attributes_transform final {
@@ -107,7 +112,8 @@ private:
         meta_model::endomodel& im);
 
     /**
-     * @brief Returns the concept with the given name, or throws.
+     * @brief Returns the object template with the given name, or
+     * throws.
      */
     static meta_model::object_template& find_concept(const meta_model::name& n,
         meta_model::endomodel& im);

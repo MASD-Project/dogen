@@ -54,7 +54,7 @@ using dogen::yarn::test::mock_endomodel_factory;
  * Flag was added but does nothing yet.
  */
 const mock_endomodel_factory::flags flags(false/*tagged*/,
-    true/*merged*/, false/*resolved*/, false/*concepts_indexed*/,
+    true/*merged*/, false/*resolved*/, false/*object_templates_indexed*/,
     false/*attributes_indexed*/, false/*associations_indexed*/,
     true/*types parsed*/);
 

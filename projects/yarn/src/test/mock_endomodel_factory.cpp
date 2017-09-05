@@ -45,7 +45,7 @@ static logger lg(logger_factory("yarn.mock_endomodel_factory"));
 
 const std::string model_name_prefix("some_model_");
 const std::string type_name_prefix("some_type_");
-const std::string concept_name_prefix("some_concept_");
+const std::string object_template_name_prefix("some_object_template_");
 const std::string attribute_name_prefix("some_attribute_");
 const std::string module_name_prefix("some_module_");
 const std::string visitor_postfix("_visitor");
@@ -82,9 +82,9 @@ const std::string invalid_object_type("Invalid or unsupported object type.");
 
 const bool add_leaf(true);
 
-std::string concept_name(const unsigned int i) {
+std::string object_template_name(const unsigned int i) {
     std::ostringstream stream;
-    stream << concept_name_prefix << i;
+    stream << object_template_name_prefix << i;
     return stream.str();
 }
 
@@ -339,12 +339,12 @@ void add_attribute(StatefulAndNameable& sn,
         sn.all_attributes().push_back(p);
 }
 
-void model_concept(const bool attributes_indexed,
-    meta_model::object& o, const meta_model::object_template& c) {
+void instantiate_object_template(const bool attributes_indexed,
+    meta_model::object& o, const meta_model::object_template& otp) {
 
-    o.object_templates().push_back(c.name());
+    o.object_templates().push_back(otp.name());
     if (attributes_indexed) {
-        for (const auto& p : c.all_attributes()) {
+        for (const auto& p : otp.all_attributes()) {
             o.local_attributes().push_back(p);
             o.all_attributes().push_back(p);
         }
@@ -420,10 +420,10 @@ void add_test_annotationss(annotations::annotation& a) {
 
 mock_endomodel_factory::flags::flags(const bool tagged,
     const bool merged, const bool resolved,
-    const bool concepts_indexed, const bool attributes_indexed,
+    const bool object_templates_indexed, const bool attributes_indexed,
     const bool associations_indexed, const bool types_parsed) :
     tagged_(tagged), merged_(merged), resolved_(resolved),
-    concepts_indexed_(concepts_indexed),
+    object_templates_indexed_(object_templates_indexed),
     attributes_indexed_(attributes_indexed),
     associations_indexed_(associations_indexed),
     types_parsed_(types_parsed) { }
@@ -452,11 +452,11 @@ void mock_endomodel_factory::flags::resolved(const bool v) {
     resolved_ = v;
 }
 
-bool mock_endomodel_factory::flags::concepts_indexed() const {
-    return concepts_indexed_;
+bool mock_endomodel_factory::flags::object_templates_indexed() const {
+    return object_templates_indexed_;
 }
-void mock_endomodel_factory::flags::concepts_indexed(const bool v) {
-    concepts_indexed_ = v;
+void mock_endomodel_factory::flags::object_templates_indexed(const bool v) {
+    object_templates_indexed_ = v;
 }
 
 bool mock_endomodel_factory::flags::attributes_indexed() const {
@@ -495,8 +495,8 @@ simple_model_name(const unsigned int n) const {
 }
 
 std::string mock_endomodel_factory::
-simple_concept_name(const unsigned int n) const {
-    return ::concept_name(n);
+simple_object_template_name(const unsigned int n) const {
+    return ::object_template_name(n);
 }
 
 std::string mock_endomodel_factory::
@@ -539,9 +539,9 @@ is_type_name_n(const unsigned int n, const meta_model::name& name) const {
     return is_type_name_n(n, name.simple());
 }
 
-bool mock_endomodel_factory::
-is_concept_name_n(const unsigned int n, const meta_model::name& name) const {
-    return concept_name(n) == name.simple();
+bool mock_endomodel_factory::is_object_template_name_n(
+    const unsigned int n, const meta_model::name& name) const {
+    return object_template_name(n) == name.simple();
 }
 
 bool mock_endomodel_factory::
@@ -619,12 +619,13 @@ mock_endomodel_factory::make_object(unsigned int i,
 }
 
 boost::shared_ptr<meta_model::object_template>
-mock_endomodel_factory::make_concept(const unsigned int i,
+mock_endomodel_factory::make_object_template(const unsigned int i,
     const meta_model::name& model_name,
     const meta_model::origin_types ot) const {
 
     helpers::name_factory nf;
-    meta_model::name n(nf.build_element_in_model(model_name, concept_name(i)));
+    const auto otpn(object_template_name(i));
+    meta_model::name n(nf.build_element_in_model(model_name, otpn));
 
     auto r(boost::make_shared<meta_model::object_template>());
     r->name(n);
@@ -797,61 +798,61 @@ make_multi_type_model(const unsigned int n, const unsigned int type_n,
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_single_concept_model(const meta_model::origin_types ot,
+make_single_object_template_model(const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c(make_concept(0, r.name(), ot));
-    add_attribute(*c, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c);
+    auto otp(make_object_template(0, r.name(), ot));
+    add_attribute(*otp, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp);
 
     auto o(make_object(0, r.name(), ot));
     add_attribute(*o, flags_.attributes_indexed(), flags_.types_parsed(), 1);
 
-    model_concept(flags_.attributes_indexed(), *o, *c);
+    instantiate_object_template(flags_.attributes_indexed(), *o, *otp);
     insert_object(r, o);
 
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_first_degree_concepts_model(const meta_model::origin_types ot,
+make_first_degree_object_templates_model(const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
 
     auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
-    auto c1(make_concept(1, r.name(), ot));
-    add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->parents().push_back(c0->name());
-    insert_nameable(r.object_templates(), c1);
+    auto otp1(make_object_template(1, r.name(), ot));
+    add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
+    otp1->parents().push_back(otp0->name());
+    insert_nameable(r.object_templates(), otp1);
 
     auto o0(make_object(0, r.name(), ot));
-    model_concept(flags_.attributes_indexed(), *o0, *c0);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
     insert_object(r, o0);
 
     auto o1(make_object(1, r.name(), ot));
     add_attribute(*o1, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
-    if (flags_.concepts_indexed())
-        model_concept(flags_.attributes_indexed(), *o1, *c0);
+    if (flags_.object_templates_indexed())
+        instantiate_object_template(flags_.attributes_indexed(), *o1, *otp0);
 
-    model_concept(flags_.attributes_indexed(), *o1, *c1);
+    instantiate_object_template(flags_.attributes_indexed(), *o1, *otp1);
     insert_object(r, o1);
 
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_second_degree_concepts_model(const meta_model::origin_types ot,
+make_second_degree_object_templates_model(const meta_model::origin_types ot,
     const unsigned int n,
     const bool add_model_module) const {
     meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
@@ -859,131 +860,134 @@ make_second_degree_concepts_model(const meta_model::origin_types ot,
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
-    auto c1(make_concept(1, r.name(), ot));
-    add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->parents().push_back(c0->name());
-    insert_nameable(r.object_templates(), c1);
+    auto otp1(make_object_template(1, r.name(), ot));
+    add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
+    otp1->parents().push_back(otp0->name());
+    insert_nameable(r.object_templates(), otp1);
 
-    auto c2(make_concept(2, r.name(), ot));
-    add_attribute(*c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
+    auto otp2(make_object_template(2, r.name(), ot));
+    add_attribute(*otp2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
-    if (flags_.concepts_indexed())
-        c2->parents().push_back(c0->name());
+    if (flags_.object_templates_indexed())
+        otp2->parents().push_back(otp0->name());
 
-    c2->parents().push_back(c1->name());
-    insert_nameable(r.object_templates(), c2);
+    otp2->parents().push_back(otp1->name());
+    insert_nameable(r.object_templates(), otp2);
 
     auto o0(make_object(0, r.name(), ot));
-    model_concept(flags_.attributes_indexed(), *o0, *c0);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
     insert_object(r, o0);
 
     auto o1(make_object(1, r.name(), ot));
-    if (flags_.concepts_indexed())
-        model_concept(flags_.attributes_indexed(), *o1, *c0);
+    if (flags_.object_templates_indexed())
+        instantiate_object_template(flags_.attributes_indexed(), *o1, *otp0);
 
-    model_concept(flags_.attributes_indexed(), *o1, *c1);
+    instantiate_object_template(flags_.attributes_indexed(), *o1, *otp1);
     insert_object(r, o1);
 
     auto o2(make_object(2, r.name(), ot));
     add_attribute(*o2, flags_.attributes_indexed(), flags_.types_parsed(), 3);
-    if (flags_.concepts_indexed()) {
-        model_concept(flags_.attributes_indexed(), *o2, *c0);
-        model_concept(flags_.attributes_indexed(), *o2, *c1);
+    if (flags_.object_templates_indexed()) {
+        instantiate_object_template(flags_.attributes_indexed(), *o2, *otp0);
+        instantiate_object_template(flags_.attributes_indexed(), *o2, *otp1);
     }
-    model_concept(flags_.attributes_indexed(), *o2, *c2);
+    instantiate_object_template(flags_.attributes_indexed(), *o2, *otp2);
     insert_object(r, o2);
 
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_multiple_inheritance_concepts_model(const meta_model::origin_types ot,
-    const unsigned int n, const bool add_model_module) const {
+make_multiple_inheritance_object_templates_model(
+    const meta_model::origin_types ot, const unsigned int n,
+    const bool add_model_module) const {
     meta_model::endomodel r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
-    auto c1(make_concept(1, r.name(), ot));
-    add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    insert_nameable(r.object_templates(), c1);
+    auto otp1(make_object_template(1, r.name(), ot));
+    add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
+    insert_nameable(r.object_templates(), otp1);
 
-    auto c2(make_concept(1, r.name(), ot));
-    add_attribute(*c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
-    c2->parents().push_back(c0->name());
-    c2->parents().push_back(c1->name());
-    insert_nameable(r.object_templates(), c2);
+    auto otp2(make_object_template(1, r.name(), ot));
+    add_attribute(*otp2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
+    otp2->parents().push_back(otp0->name());
+    otp2->parents().push_back(otp1->name());
+    insert_nameable(r.object_templates(), otp2);
 
     auto o0(make_object(0, r.name(), ot));
-    model_concept(flags_.attributes_indexed(), *o0, *c2);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp2);
     insert_object(r, o0);
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_diamond_inheritance_concepts_model(const meta_model::origin_types ot,
-    const unsigned int n, const bool add_model_module) const {
+make_diamond_inheritance_object_templates_model(
+    const meta_model::origin_types ot, const unsigned int n,
+    const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
-    auto c1(make_concept(1, r.name(), ot));
-    add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->parents().push_back(c0->name());
-    insert_nameable(r.object_templates(), c1);
+    auto otp1(make_object_template(1, r.name(), ot));
+    add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
+    otp1->parents().push_back(otp0->name());
+    insert_nameable(r.object_templates(), otp1);
 
-    auto c2(make_concept(2, r.name(), ot));
-    add_attribute(*c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
-    c2->parents().push_back(c0->name());
-    insert_nameable(r.object_templates(), c2);
+    auto otp2(make_object_template(2, r.name(), ot));
+    add_attribute(*otp2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
+    otp2->parents().push_back(otp0->name());
+    insert_nameable(r.object_templates(), otp2);
 
-    auto c3(make_concept(3, r.name(), ot));
-    add_attribute(*c3, flags_.attributes_indexed(), flags_.types_parsed(), 3);
-    if (flags_.concepts_indexed())
-        c3->parents().push_back(c0->name());
+    auto otp3(make_object_template(3, r.name(), ot));
+    add_attribute(*otp3, flags_.attributes_indexed(), flags_.types_parsed(), 3);
+    if (flags_.object_templates_indexed())
+        otp3->parents().push_back(otp0->name());
 
-    c3->parents().push_back(c1->name());
-    c3->parents().push_back(c2->name());
-    insert_nameable(r.object_templates(), c3);
+    otp3->parents().push_back(otp1->name());
+    otp3->parents().push_back(otp2->name());
+    insert_nameable(r.object_templates(), otp3);
 
     auto o0(make_object(0, r.name(), ot));
-    if (flags_.concepts_indexed()) {
-        model_concept(flags_.attributes_indexed(), *o0, *c0);
-        model_concept(flags_.attributes_indexed(), *o0, *c1);
-        model_concept(flags_.attributes_indexed(), *o0, *c2);
+    if (flags_.object_templates_indexed()) {
+        instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
+        instantiate_object_template(flags_.attributes_indexed(), *o0, *otp1);
+        instantiate_object_template(flags_.attributes_indexed(), *o0, *otp2);
     }
-    model_concept(flags_.attributes_indexed(), *o0, *c3);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp3);
     insert_object(r, o0);
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_object_with_parent_that_models_concept(const meta_model::origin_types ot,
+make_object_with_parent_that_instantiates_object_template(
+    const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
     auto o0(make_object(0, r.name(), ot));
-    model_concept(flags_.attributes_indexed(), *o0, *c0);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
 
     insert_object(r, o0);
 
@@ -996,7 +1000,7 @@ make_object_with_parent_that_models_concept(const meta_model::origin_types ot,
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_object_with_parent_that_models_a_refined_concept(
+make_object_with_parent_that_instantiates_a_child_object_template(
     const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
@@ -1004,20 +1008,20 @@ make_object_with_parent_that_models_a_refined_concept(
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
-    auto c1(make_concept(1, r.name(), ot));
-    add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->parents().push_back(c0->name());
-    insert_nameable(r.object_templates(), c1);
+    auto otp1(make_object_template(1, r.name(), ot));
+    add_attribute(*otp1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
+    otp1->parents().push_back(otp0->name());
+    insert_nameable(r.object_templates(), otp1);
 
     auto o0(make_object(0, r.name(), ot));
 
-    model_concept(flags_.attributes_indexed(), *o0, *c1);
-    if (flags_.concepts_indexed())
-        model_concept(flags_.attributes_indexed(), *o0, *c0);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp1);
+    if (flags_.object_templates_indexed())
+        instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
 
     insert_object(r, o0);
 
@@ -1030,36 +1034,38 @@ make_object_with_parent_that_models_a_refined_concept(
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_concept_that_refines_missing_concept(const meta_model::origin_types ot,
-    const unsigned int n, const bool add_model_module) const {
+make_object_template_that_inherits_missing_object_template(
+    const meta_model::origin_types ot, const unsigned int n,
+    const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
-    auto c0(make_concept(0, r.name(), ot));
-    auto c1(make_concept(1, r.name(), ot));
-    c1->parents().push_back(c0->name());
-    insert_nameable(r.object_templates(), c1);
+    auto otp0(make_object_template(0, r.name(), ot));
+    auto otp1(make_object_template(1, r.name(), ot));
+    otp1->parents().push_back(otp0->name());
+    insert_nameable(r.object_templates(), otp1);
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_object_that_models_missing_concept(const meta_model::origin_types ot,
-    const unsigned int n, const bool add_model_module) const {
+make_object_that_instantiates_missing_object_template(
+    const meta_model::origin_types ot, const unsigned int n,
+    const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
 
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
 
     auto o0(make_object(0, r.name(), ot));
 
-    model_concept(flags_.attributes_indexed(), *o0, *c0);
+    instantiate_object_template(flags_.attributes_indexed(), *o0, *otp0);
     insert_object(r, o0);
     return r;
 }
 
 meta_model::endomodel mock_endomodel_factory::
-make_object_that_models_concept_with_missing_parent(
+make_object_that_instantiates_object_template_with_missing_parent(
     const meta_model::origin_types ot,
     const unsigned int n, const bool add_model_module) const {
     auto r(make_empty_model(ot, n, add_model_module));
@@ -1067,16 +1073,16 @@ make_object_that_models_concept_with_missing_parent(
     const auto ui(test::make_builtin(unsigned_int));
     r.builtins().insert(std::make_pair(ui->name().id(), ui));
 
-    auto c0(make_concept(0, r.name(), ot));
-    add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.object_templates(), c0);
+    auto otp0(make_object_template(0, r.name(), ot));
+    add_attribute(*otp0, flags_.attributes_indexed(), flags_.types_parsed());
+    insert_nameable(r.object_templates(), otp0);
 
     auto o0(make_object(0, r.name(), ot));
     auto o1(make_object(1, r.name(), ot));
     parent_to_child(flags_.attributes_indexed(), *o0, *o1);
     o0->is_parent(true);
 
-    model_concept(flags_.attributes_indexed(), *o1, *c0);
+    instantiate_object_template(flags_.attributes_indexed(), *o1, *otp0);
     insert_object(r, o1);
 
     return r;

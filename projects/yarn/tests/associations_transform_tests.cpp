@@ -46,7 +46,7 @@ using dogen::yarn::test::mock_endomodel_factory;
  */
 const mock_endomodel_factory::flags flags(
     false/*tagged*/, false/*merged*/, false/*resolved*/,
-    true/*concepts_indexed*/, true/*attributes_indexed*/,
+    true/*object_templates_indexed*/, true/*attributes_indexed*/,
     false/*associations_indexed*/, true/*types parsed*/);
 const mock_endomodel_factory factory(flags);
 
@@ -89,8 +89,8 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_as
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("model_with_type_with_attribute_results_in_expected_associations");
 
     auto m(factory.object_with_attribute(
             origin_types::target,
@@ -108,8 +108,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
     BOOST_CHECK(o.opaque_associations().empty());
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_associations_transform) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_concept_is_untouched_by_associations_transform");
+BOOST_AUTO_TEST_CASE(model_with_single_object_templates_is_untouched_by_associations_transform) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_object_templates_is_untouched_by_associations_transform");
 
     auto a(factory.make_empty_model());
     const auto e(factory.make_empty_model());
@@ -121,10 +121,10 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_associations_tran
     BOOST_CHECK(asserter::assert_object(e, a));
 }
 
-BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_more_than_one_attribute_of_the_same_type_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("model_with_more_than_one_attribute_of_the_same_type_results_in_expected_associations");
 
-    auto m(factory.make_first_degree_concepts_model());
+    auto m(factory.make_first_degree_object_templates_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     associations_transform::transform(m);
@@ -143,8 +143,8 @@ BOOST_AUTO_TEST_CASE(model_with_more_than_one_attribute_of_the_same_type_results
     }
 }
 
-BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_types_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_types_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_results_in_expected_associations");
 
     auto m(factory.object_with_group_of_attributes_of_different_types());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
@@ -201,8 +201,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     BOOST_CHECK(found3);
 }
 
-BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("model_with_object_with_multiple_attributes_of_different_types_that_are_repeated_results_in_expected_associations");
 
     auto m(factory.object_with_group_of_attributes_of_different_types(
             origin_types::target, true/*repeat_group*/));
@@ -259,8 +259,8 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_multiple_attributes_of_different_typ
     BOOST_CHECK(found3);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_unsigned_int_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_unsigned_int_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -288,8 +288,8 @@ BOOST_AUTO_TEST_CASE(object_with_unsigned_int_attribute_results_in_expected_indi
     }
 }
 
-BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_bool_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_bool_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -317,8 +317,8 @@ BOOST_AUTO_TEST_CASE(object_with_bool_attribute_results_in_expected_indices) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_object_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_object_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -346,8 +346,8 @@ BOOST_AUTO_TEST_CASE(object_with_object_attribute_results_in_expected_indices) {
     }
 }
 
-BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_std_pair_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_std_pair_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -378,8 +378,8 @@ BOOST_AUTO_TEST_CASE(object_with_std_pair_attribute_results_in_expected_indices)
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_boost_variant_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_boost_variant_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -421,8 +421,8 @@ BOOST_AUTO_TEST_CASE(object_with_boost_variant_attribute_results_in_expected_ind
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_std_string_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_std_string_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -450,8 +450,8 @@ BOOST_AUTO_TEST_CASE(object_with_std_string_attribute_results_in_expected_indice
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_boost_shared_ptr_attribute_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_boost_shared_ptr_attribute_results_in_expected_associations");
 
     const auto ot(origin_types::target);
     const auto objt(object_types::value_object);
@@ -484,8 +484,8 @@ BOOST_AUTO_TEST_CASE(object_with_boost_shared_ptr_attribute_results_in_expected_
     BOOST_CHECK(found);
 }
 
-BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("object_with_both_regular_and_opaque_associations_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(object_with_both_regular_and_opaque_associations_results_in_expected_associations) {
+    SETUP_TEST_LOG_SOURCE("object_with_both_regular_and_opaque_associations_results_in_expected_associations");
 
     auto m(factory.object_with_both_transparent_and_opaque_associations());
     BOOST_LOG_SEV(lg, debug) << "input model: " << m;

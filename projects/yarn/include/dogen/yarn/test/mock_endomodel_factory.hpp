@@ -76,7 +76,7 @@ public:
         explicit flags(const bool tagged = false,
             const bool merged = false,
             const bool resolved = false,
-            const bool concepts_indexed = false,
+            const bool object_templates_indexed = false,
             const bool attributes_indexed = false,
             const bool associations_indexed = false,
             const bool types_parsed = false);
@@ -110,12 +110,12 @@ public:
         /**@}*/
 
         /**
-         * @brief If true, returns a model as if concept indexing was
-         * already performed.
+         * @brief If true, returns a model as if object templates
+         * indexing was already performed.
          */
         /**@{*/
-        bool concepts_indexed() const;
-        void concepts_indexed(const bool v);
+        bool object_templates_indexed() const;
+        void object_templates_indexed(const bool v);
         /**@}*/
 
         /**
@@ -148,7 +148,7 @@ public:
         bool tagged_;
         bool merged_;
         bool resolved_;
-        bool concepts_indexed_;
+        bool object_templates_indexed_;
         bool attributes_indexed_;
         bool associations_indexed_;
         bool types_parsed_;
@@ -178,9 +178,9 @@ public:
     std::string simple_type_name(const unsigned int n = 0) const;
 
     /**
-     * @brief Returns the concept name derived from n.
+     * @brief Returns the object template name derived from n.
      */
-    std::string simple_concept_name(const unsigned int n = 0) const;
+    std::string simple_object_template_name(const unsigned int n = 0) const;
 
     /**
      * @brief Returns the module name derived from n.
@@ -222,7 +222,7 @@ public:
      * @brief Returns true if the name matches the mock model factory
      * naming convention for module @e n.
      */
-    bool is_concept_name_n(const unsigned int n,
+    bool is_object_template_name_n(const unsigned int n,
         const meta_model::name& name) const;
 
     /**
@@ -278,9 +278,9 @@ public:
         const unsigned int module_n = 0) const;
 
     /**
-     * @brief Create a concept.
+     * @brief Create an object template.
      */
-    boost::shared_ptr<meta_model::object_template> make_concept(
+    boost::shared_ptr<meta_model::object_template> make_object_template(
         const unsigned int i, const meta_model::name& model_name,
         const meta_model::origin_types ot) const;
 
@@ -324,7 +324,7 @@ public:
         const unsigned int simple_n = 0) const;
 
     /**
-     * @brief Builds a model with no types, concepts or modules.
+     * @brief Builds a model with no elements.
      */
     meta_model::endomodel make_empty_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
@@ -365,90 +365,96 @@ public:
 
 public:
     /**
-     * @brief Builds a model with a concept, and a type that models
-     * it.
+     * @brief Builds a model with an object template, and an object
+     * that instantiates it.
      */
-    meta_model::endomodel make_single_concept_model(
+    meta_model::endomodel make_single_object_template_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
-     * @brief Builds a model with a concept that refines another
-     * concept, and two types that model each concept.
+     * @brief Builds a model with an object template that inherits
+     * another object template, and two types that instantiate each
+     * object template.
      */
-    meta_model::endomodel make_first_degree_concepts_model(
+    meta_model::endomodel make_first_degree_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
      * @brief Same as first degree but with 2 levels of inheritance.
      */
-    meta_model::endomodel make_second_degree_concepts_model(
+    meta_model::endomodel make_second_degree_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0, const bool add_model_module = false) const;
 
     /**
-     * @brief Builds a model with two base concepts and a concept that
-     * refines both.
+     * @brief Builds a model with two base object templates and an
+     * object template that inherits from both.
      */
-    meta_model::endomodel make_multiple_inheritance_concepts_model(
+    meta_model::endomodel make_multiple_inheritance_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
-     * @brief Builds a model with a base concept, two concepts that
-     * refine it, and a concept that refines both of these. Finally a
-     * type last concept.
+     * @brief Builds a model with a base object template, two object
+     * templates that inherit from it, and an object template that
+     * refines both of these. Finally, an object that instantiates the
+     * last object template.
      */
-    meta_model::endomodel make_diamond_inheritance_concepts_model(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
-        const unsigned int n = 0,
-        const bool add_model_module = false) const;
-
-    /**
-     * @brief Builds a model with a child object with a parent that
-     * models a concept.
-     */
-    meta_model::endomodel make_object_with_parent_that_models_concept(
+    meta_model::endomodel make_diamond_inheritance_object_templates_model(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
      * @brief Builds a model with a child object with a parent that
-     * models a concept that refines a concept.
+     * instantiates an object template.
      */
     meta_model::endomodel
-    make_object_with_parent_that_models_a_refined_concept(
+    make_object_with_parent_that_instantiates_object_template(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
 
     /**
-     * @brief Builds a model with a concept that refines a
-     * non-existing concept.
-     */
-    meta_model::endomodel make_concept_that_refines_missing_concept(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
-        const unsigned int n = 0,
-        const bool add_model_module = false) const;
-
-    /**
-     * @brief Builds a model with a concept that refines a
-     * non-existing concept.
-     */
-    meta_model::endomodel make_object_that_models_missing_concept(
-        const meta_model::origin_types ot = meta_model::origin_types::target,
-        const unsigned int n = 0,
-        const bool add_model_module = false) const;
-
-    /**
-     * @brief object that models concept with missing parent.
+     * @brief Builds a model with a child object with a parent that
+     * instantiates an object template, which inherits from another
+     * object template.
      */
     meta_model::endomodel
-    make_object_that_models_concept_with_missing_parent(
+    make_object_with_parent_that_instantiates_a_child_object_template(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
+        const bool add_model_module = false) const;
+
+    /**
+     * @brief Builds a model with an object template that inherits
+     * from a non-existing object template.
+     */
+    meta_model::endomodel
+    make_object_template_that_inherits_missing_object_template(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
+        const bool add_model_module = false) const;
+
+    /**
+     * @brief Builds a model with an object that instantiates a
+     * non-existing object template.
+     */
+    meta_model::endomodel make_object_that_instantiates_missing_object_template(
+        const meta_model::origin_types ot = meta_model::origin_types::target,
+        const unsigned int n = 0,
+        const bool add_model_module = false) const;
+
+    /**
+     * @brief Object that instantiates object template with missing
+     * parent.
+     */
+    meta_model::endomodel
+    make_object_that_instantiates_object_template_with_missing_parent(
         const meta_model::origin_types ot = meta_model::origin_types::target,
         const unsigned int n = 0,
         const bool add_model_module = false) const;
