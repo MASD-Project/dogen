@@ -47,7 +47,8 @@ auto lg(logger_factory("yarn.helpers.resolver"));
 
 const std::string empty;
 const std::string orphan_object("Object's parent could not be located: ");
-const std::string orphan_concept("Refined concept could not be located: ");
+const std::string orphan_object_template(
+    "Instantiated object template could not be located: ");
 const std::string undefined_type("Object has attribute with undefined type: ");
 const std::string invalid_underlying_type("Invalid underlying type: ");
 
@@ -110,12 +111,12 @@ bool resolver::is_object(const meta_model::endomodel& im,
     return false;
 }
 
-bool resolver::is_concept(const meta_model::endomodel& im,
+bool resolver::is_object_template(const meta_model::endomodel& im,
     const meta_model::name& n) {
 
     auto i(im.object_templates().find(n.id()));
     if (i != im.object_templates().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Name belongs to a concept in model.";
+        BOOST_LOG_SEV(lg, debug) << "Name belongs to a object_template in model.";
         return true;
     }
     return false;
@@ -456,19 +457,16 @@ validate_inheritance_graph(const meta_model::endomodel& im,
     }
 }
 
-void resolver::validate_refinements(const meta_model::endomodel& im,
-    const meta_model::object_template& c) {
-    /*
-     * Ensure that all refined concepts exist as concepts.
-     */
-    const auto id(c.name().id());
-    for (const auto& n : c.parents()) {
-        if (is_concept(im, n))
+void resolver::validate_object_template_inheritance(
+    const meta_model::endomodel& im, const meta_model::object_template& otp) {
+    const auto id(otp.name().id());
+    for (const auto& n : otp.parents()) {
+        if (is_object_template(im, n))
             continue;
 
         std::ostringstream stream;
-        stream << orphan_concept << ". Concept: " << id
-               << ". Refined concept: " << n.id();
+        stream << orphan_object_template << ". Object template: " << id
+               << ". Inherited object template: " << n.id();
 
         BOOST_LOG_SEV(lg, error) << stream.str();
         BOOST_THROW_EXCEPTION(resolution_error(stream.str()));
@@ -476,20 +474,21 @@ void resolver::validate_refinements(const meta_model::endomodel& im,
 }
 
 void resolver::
-resolve_concepts(const indices& idx, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Resolving concepts. Size: "
+resolve_object_templates(const indices& idx, meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Resolving object templates. Size: "
                              << im.object_templates().size();
 
     for (auto& pair : im.object_templates()) {
-        auto& c(pair.second);
+        auto& otp(pair.second);
 
-        BOOST_LOG_SEV(lg, debug) << "Resolving concept: " << c->name().id();
-        resolve_attributes(im, idx, c->name(), c->local_attributes());
-        validate_refinements(im, *c);
-        BOOST_LOG_SEV(lg, debug) << "Resolved concept.";
+        BOOST_LOG_SEV(lg, debug) << "Resolving object template: "
+                                 << otp->name().id();
+        resolve_attributes(im, idx, otp->name(), otp->local_attributes());
+        validate_object_template_inheritance(im, *otp);
+        BOOST_LOG_SEV(lg, debug) << "Resolved object template.";
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Resolved concepts.";
+    BOOST_LOG_SEV(lg, debug) << "Resolved object templates.";
 }
 
 void resolver::
@@ -586,10 +585,10 @@ resolve(const meta_model::endomodel& im, const indices& idx,
 }
 
 boost::optional<meta_model::name> resolver::
-try_resolve_concept_name(meta_model::name ctx, const std::string& s,
+try_resolve_object_template_name(meta_model::name ctx, const std::string& s,
     const meta_model::endomodel& im) {
 
-    BOOST_LOG_SEV(lg, debug) << "Resolving concept name: " << s;
+    BOOST_LOG_SEV(lg, debug) << "Resolving object template name: " << s;
 
     /*
      * We first start at the same level as the context, including any
@@ -607,7 +606,7 @@ try_resolve_concept_name(meta_model::name ctx, const std::string& s,
 
     auto i(im.object_templates().find(r.id()));
     if (i != im.object_templates().end()) {
-        BOOST_LOG_SEV(lg, debug) << "Found concept.";
+        BOOST_LOG_SEV(lg, debug) << "Found object template.";
         return r;
     }
     BOOST_LOG_SEV(lg, debug) << "Resolution failed.";
@@ -615,7 +614,7 @@ try_resolve_concept_name(meta_model::name ctx, const std::string& s,
     /*
      * If we did not have any luck and there are internal modules, we
      * start a climb towards the model module and see if that finds us
-     * any concepts.
+     * any object templates.
      */
     if (!ctx.location().internal_modules().empty()) {
         do {
@@ -629,31 +628,32 @@ try_resolve_concept_name(meta_model::name ctx, const std::string& s,
 
             i = im.object_templates().find(r.id());
             if (i != im.object_templates().end()) {
-                BOOST_LOG_SEV(lg, debug) << "Found concept.";
+                BOOST_LOG_SEV(lg, debug) << "Found object templates.";
                 return r;
             }
         } while (!ctx.location().internal_modules().empty());
     }
 
     /*
-     * There are no concepts in this model which match the stereotype name.
+     * There are no object templates in this model which match the
+     * stereotype name.
      */
-    BOOST_LOG_SEV(lg, debug) << "Could not find a concept with tentative name.";
+    BOOST_LOG_SEV(lg, debug) << "Could not find a object template with tentative name.";
     return boost::optional<meta_model::name>();
 }
 
 boost::optional<meta_model::name>
-resolver::try_resolve_concept_name(const meta_model::name& ctx,
+resolver::try_resolve_object_template_name(const meta_model::name& ctx,
     const meta_model::name& n, const meta_model::endomodel& im) {
     // FIXME: hack for now, just take simple name. Requires a bit more
     // thinking.
-    return try_resolve_concept_name(ctx, n.simple(), im);
+    return try_resolve_object_template_name(ctx, n.simple(), im);
 }
 
 void resolver::resolve(const indices& idx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving model: " << im.name().id();
 
-    resolve_concepts(idx, im);
+    resolve_object_templates(idx, im);
     resolve_objects(idx, im);
     resolve_enumerations(idx, im);
     resolve_primitives(idx, im);

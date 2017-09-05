@@ -40,7 +40,7 @@ auto lg(logger_factory("yarn.object_templates_transform"));
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
 const std::string object_not_found("Object not found in model: ");
-const std::string concept_not_found(
+const std::string object_template_not_found(
     "Object template not found in object templates container: ");
 
 }
@@ -54,8 +54,8 @@ namespace meta_model {
  * @brief Add comparable support for names.
  *
  * This is required as part of the current (very sub-optimal)
- * implementation of concept processing. It is used in the set
- * difference.
+ * implementation of object templates processing. It is used in the
+ * set difference.
  */
 inline bool operator<(const name& lhs, const name& rhs) {
     return lhs.id() < rhs.id();
@@ -75,22 +75,25 @@ find_object(const meta_model::name& n, meta_model::endomodel& im) {
     return *i->second;
 }
 
-meta_model::object_template&
-object_templates_transform::resolve_concept(const meta_model::name& owner,
-    const meta_model::name& concept_name, meta_model::endomodel& im) {
+meta_model::object_template& object_templates_transform::
+resolve_object_template(const meta_model::name& owner,
+    const meta_model::name& object_template_name, meta_model::endomodel& im) {
     using helpers::resolver;
-    const auto oc(resolver::try_resolve_concept_name(owner, concept_name, im));
-    if (!oc) {
-        const auto id(concept_name.id());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
+    const auto& n(object_template_name);
+    const auto on(resolver::try_resolve_object_template_name(owner, n, im));
+    if (!on) {
+        const auto id(n.id());
+        BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(object_template_not_found + id));
     }
 
-    auto i(im.object_templates().find(oc->id()));
+    auto i(im.object_templates().find(on->id()));
     if (i == im.object_templates().end()) {
-        const auto id(oc->id());
-        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
+        const auto id(on->id());
+        BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(object_template_not_found + id));
     }
     return *i->second;
 }
@@ -130,18 +133,18 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
 
     if (o.object_templates().empty()) {
         processed_names.insert(o.name());
-        BOOST_LOG_SEV(lg, debug) << "Object models no concepts.";
+        BOOST_LOG_SEV(lg, debug) << "Object instantiates no object templates.";
         return;
     }
 
     /*
      * For each of the object templates that we model, perform an
      * expansion including their parents and so on. We can rely on the
-     * concepts' @e parents container for this.
+     * object templates'' @e parents container for this.
      */
     std::list<meta_model::name> expanded_parents;
     for (auto& otn : o.object_templates()) {
-        auto& ot(resolve_concept(o.name(), otn, im));
+        auto& ot(resolve_object_template(o.name(), otn, im));
         expanded_parents.push_back(ot.name());
         expanded_parents.insert(expanded_parents.end(),
             ot.parents().begin(), ot.parents().end());
@@ -165,39 +168,38 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
 
     /*
      * If an object does have a parent, we must then find out all of
-     * the concepts that our parents model.
+     * the object templates our parents model.
      */
     BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set diff.";
 
-    std::set<meta_model::name> our_concepts;
-    our_concepts.insert(expanded_parents.begin(), expanded_parents.end());
+    std::set<meta_model::name> ours;
+    ours.insert(expanded_parents.begin(), expanded_parents.end());
 
-    std::set<meta_model::name> their_concepts;
+    std::set<meta_model::name> theirs;
     const auto& n(o.parents().front());
     auto& parent(find_object(n, im));
     expand_object(parent, im, processed_names);
 
     const auto& ot(parent.object_templates());
     if (!ot.empty())
-        their_concepts.insert(ot.begin(), ot.end());
+        theirs.insert(ot.begin(), ot.end());
 
     /*
-     * We want to only model concepts which have not yet been modeled
-     * by any of our parents.
+     * We want to only instantiate object templates which have not yet
+     * been instantiated by any of our parents.
      */
-    std::set<meta_model::name> result;
-    std::set_difference(our_concepts.begin(), our_concepts.end(),
-        their_concepts.begin(), their_concepts.end(),
-        std::inserter(result, result.end()));
+    std::set<meta_model::name> diff;
+    std::set_difference(ours.begin(), ours.end(), theirs.begin(), theirs.end(),
+        std::inserter(diff, diff.end()));
 
     /*
-     * Reinsert all of the modeled concepts which are part of the set
-     * difference. We do this instead of just using the set difference
-     * directly to preserve order.
+     * Reinsert all of the instantiated object templates which are
+     * part of the set difference. We do this instead of just using
+     * the set difference directly to preserve order.
      */
     o.object_templates().clear();
     for (const auto& n : expanded_parents) {
-        if (result.find(n) != result.end())
+        if (diff.find(n) != diff.end())
             o.object_templates().push_back(n);
     }
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
@@ -213,54 +215,56 @@ void object_templates_transform::expand_objects(meta_model::endomodel& im) {
     }
 }
 
-void object_templates_transform::expand_concept(meta_model::object_template& ot,
+void object_templates_transform::
+expand_object_template(meta_model::object_template& otp,
     meta_model::endomodel& im,
     std::unordered_set<meta_model::name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Expand concept: " << ot.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expand object template: " << otp.name().id();
 
-    if (processed_names.find(ot.name()) != processed_names.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Concept already processed.";
+    if (processed_names.find(otp.name()) != processed_names.end()) {
+        BOOST_LOG_SEV(lg, debug) << "Object template already processed.";
         return;
     }
 
-    if (ot.parents().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Concept parents no concepts.";
-        processed_names.insert(ot.name());
+    if (otp.parents().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Object template has no parents.";
+        processed_names.insert(otp.name());
         return;
     }
 
     std::list<meta_model::name> expanded_parents;
-    for (auto& n : ot.parents()) {
-        auto& parent(resolve_concept(ot.name(), n, im));
-        expand_concept(parent, im, processed_names);
+    for (auto& n : otp.parents()) {
+        auto& parent(resolve_object_template(otp.name(), n, im));
+        expand_object_template(parent, im, processed_names);
         expanded_parents.push_back(parent.name());
         expanded_parents.insert(expanded_parents.end(),
             parent.parents().begin(), parent.parents().end());
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Computing reduced set for concept.";
+    BOOST_LOG_SEV(lg, debug) << "Computing reduced set for object template.";
     remove_duplicates(expanded_parents);
-    ot.parents(expanded_parents);
-    processed_names.insert(ot.name());
+    otp.parents(expanded_parents);
+    processed_names.insert(otp.name());
 }
 
-void object_templates_transform::expand_concepts(meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Expading concepts: "
+void
+object_templates_transform::expand_object_templates(meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Expading object templates: "
                              << im.object_templates().size();
 
     std::unordered_set<meta_model::name> processed_names;
     for (auto& pair : im.object_templates()) {
-        auto& c(*pair.second);
-        expand_concept(c, im, processed_names);
+        auto& otp(*pair.second);
+        expand_object_template(otp, im, processed_names);
     }
 }
 
 void object_templates_transform::transform(meta_model::endomodel& im) {
     /*
-     * We must expand concepts before we expand objects as we rely on
-     * the expanded attributes.
+     * We must expand object templates before we expand objects as we
+     * rely on the expanded attributes.
      */
-    expand_concepts(im);
+    expand_object_templates(im);
     expand_objects(im);
 }
 

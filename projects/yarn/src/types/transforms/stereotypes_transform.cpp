@@ -279,11 +279,11 @@ expand_visitable(meta_model::object& o, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Done injecting visitor.";
 }
 
-bool stereotypes_transform::try_expand_concept(const std::string& s,
+bool stereotypes_transform::try_expand_object_template(const std::string& s,
     meta_model::object& o, const meta_model::endomodel& im) {
 
     using helpers::resolver;
-    const auto oot(resolver::try_resolve_concept_name(o.name(), s, im));
+    const auto oot(resolver::try_resolve_object_template_name(o.name(), s, im));
     if (!oot)
         return false;
 
@@ -322,8 +322,8 @@ void stereotypes_transform::expand(meta_model::object& o,
             cfg.is_value(true);
             o.orm_properties(cfg);
         } else {
-            const bool is_concept(try_expand_concept(s, o, im));
-            if (!is_concept)
+            const bool is_object_template(try_expand_object_template(s, o, im));
+            if (!is_object_template)
                 unknown_stereotypes.push_back(s);
         }
     }
@@ -331,8 +331,8 @@ void stereotypes_transform::expand(meta_model::object& o,
     /*
      * If there are any stereotypes we do not know about, throw an
      * error. This way the user can figure out if its trying to use a
-     * concept but it has not been found or if its trying to use an
-     * unsupported feature.
+     * object template but it has not been found or if its trying to
+     * use an unsupported feature.
      */
     if (!unknown_stereotypes.empty()) {
         const auto s(boost::lexical_cast<std::string>(unknown_stereotypes));

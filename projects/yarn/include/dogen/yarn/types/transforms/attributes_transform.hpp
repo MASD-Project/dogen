@@ -99,8 +99,8 @@ namespace transforms {
  * The "all attribute" set contains every single attribute. It is the
  * sum all the local attributes with all of the inherited
  * attributes. For objects it is useful for full constructors. For
- * object templates it is effectively the full interface of the
- * concept.
+ * object templates it is effectively the full interface of the object
+ * template.
  *
  */
 class attributes_transform final {
@@ -115,8 +115,8 @@ private:
      * @brief Returns the object template with the given name, or
      * throws.
      */
-    static meta_model::object_template& find_concept(const meta_model::name& n,
-        meta_model::endomodel& im);
+    static meta_model::object_template&
+    find_object_template(const meta_model::name& n, meta_model::endomodel& im);
 
 private:
     /**
@@ -132,16 +132,16 @@ private:
     static void expand_objects(meta_model::endomodel& im);
 
     /**
-     * @brief Populates index information in a concept.
+     * @brief Expands a specific object template
      */
-    static void expand_concept(meta_model::object_template& ot,
+    static void expand_object_template(meta_model::object_template& ot,
         meta_model::endomodel& im,
         std::unordered_set<std::string>& processed_ids);
 
     /**
-     * @brief Indexes all concepts in the model.
+     * @brief Expands all object templates in the model.
      */
-    static void expand_concepts(meta_model::endomodel& im);
+    static void expand_object_templates(meta_model::endomodel& im);
 
 public:
     /**

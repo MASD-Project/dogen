@@ -95,11 +95,11 @@ private:
         meta_model::endomodel& im);
 
     /**
-     * @brief Try to expand the stereotype as a concept. Returns true
-     * on success, false otherwise.
+     * @brief Try to expand the stereotype as an object
+     * template. Returns true on success, false otherwise.
      */
-    static bool try_expand_concept(const std::string& s, meta_model::object& o,
-        const meta_model::endomodel& im);
+    static bool try_expand_object_template(const std::string& s,
+        meta_model::object& o, const meta_model::endomodel& im);
 
     /**
      * @brief Expands all stereotypes for the object.

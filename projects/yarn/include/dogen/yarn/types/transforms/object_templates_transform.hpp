@@ -34,65 +34,69 @@ namespace yarn {
 namespace transforms {
 
 /**
- * @brief Transform that specialises in indexing concept-related
- * relationships across the model.
+ * @brief Transform that specialises in indexing
+ * object-template-related relationships across the model.
  *
- * @section yarn_concept_expander_0 Model requirements
+ * @section yarn_object_templates_expander_0 Model requirements
  *
- * The concept expander expects to receive a merged intermediate model,
- * but in practice it makes no requirements in terms of any
+ * The object templates transform expects to receive a merged
+ * endmodel, but in practice it makes no requirements in terms of any
  * dependent transforms.
  *
- * @section yarn_concept_exapnder_1 Expansion Process
+ * @section yarn_object_templates_exapnder_1 Transformation
  *
- * The concept expander only touches two types of model elements:
- * concepts and objects. This is because these are the only two
- * elements involved in relationships that deal with concepts. Each of
- * these are processed differently.
+ * The object templates expander only touches two types of model
+ * elements: object templates and objects. This is because these are
+ * the only two elements involved in relationships that deal with
+ * object templates. Each of these are processed differently.
  *
- * @subsection yarn_concept_expander_11 First stage: expanding concepts
+ * @subsection yarn_object_templates_expander_11 First stage: expanding object templates
   *
- * The concept indexer starts by processing all concepts. Each concept
- * goes through two steps: @e expansion and @e reduction. Expansion is
- * defined as adding to each refined concept the set of all concepts
- * implied by the refinement graph of that concept: that is, the
- * concept itself, the concepts that the concept refines (lets call it
- * @e parents), the concepts that the parents refine and so on.
+ * The object templates transform starts by processing all object
+ * templates. Each object template goes through two steps: @e
+ * expansion and @e reduction. Expansion is defined as adding to each
+ * inherited object template the set of all object templates implied
+ * by the inheritance graph of that object template: that is, the
+ * object template itself, the object templates that the object
+ * template inherits from (lets call it @e parents), the object
+ * templates that the parents inherits from and so on.
  *
  * Once the expansion is complete, reduction takes place: that is, all
- * duplicate concepts are removed. The final result is known as the @e
- * reduced @e concept @e set.
+ * duplicate object templates are removed. The final result is known
+ * as the _reduced object templates set_.
  *
  * Note that we use the word @e set here in the mathematical sense, as
  * implementation-wise we use lists manage these relationships. This
  * is because we aim to preserve order where possible; this is to
  * avoid having the code generation move (potentially dramatically)
- * every time any alteration is done to the concept hierarchy.
+ * every time any alteration is done to the object templates
+ * hierarchy.
  *
- * @subsection yarn_concept_expander_12 Second stage: expand objects
+ * @subsection yarn_object_templates_expander_12 Second stage: expand objects
  *
- * The concept expander is also responsible for updating the modeled
- * concepts in an object - if any exist. Thus only objects that are
- * part of such relationships are affected. For example a child which
- * does not model any concepts is not affected, even if its parent
- * does model concepts.
+ * The object templates expander is also responsible for updating the
+ * instantiated object templates in an object - if any. Thus, only
+ * objects that are part of such relationships are affected. For
+ * example a child which does not instantiate any object templates is
+ * not affected, even if its parent does instantiate object templates.
  *
- * Note that object expansion must be done after the concept expansion
- * described above as it depends on it.
+ * Note that object expansion must be done after the object templates
+ * expansion described above, as it depends on it.
  *
  * For objects which do not have parents, the operation is simple: for
- * a given object o, we just need to compute the reduced concept set,
- * as implied by the concepts it models.
+ * a given object @e o, we just need to compute the reduced object
+ * template set, as implied by the object templates it instantiates.
  *
  * For objects with parents things are slightly more complicated. We
- * must first compute the reduced concept set implied by all its
- * parents; this includes @e all modeled concepts found in the
- * entirety of the inheritance graph of a given object. Lets call that
- * set P. We then take the set of all concepts modeled by the object
- * directly (say R). The final set of modeled concepts for the object
- * is given by the set difference between R and S; that is, we remove
- * all concepts in R which are part of S - leaving those that only
- * exist in R but not in S.
+ * must first compute the reduced object template set implied by all
+ * its parents; this includes @e all instantiated object templates
+ * found in the entirety of the inheritance graph of a given
+ * object. Lets call that set @e P. We then take the set of all object
+ * templates instantiated by the object directly (say @e R). The final
+ * set of instantiated object templates for the object is given by the
+ * set difference between @e R and @e S; that is, we remove all object
+ * templates in @e R which are part of @e S - leaving those that only
+ * exist in @e R but not in @e S.
  *
  */
 class object_templates_transform final {
@@ -104,10 +108,12 @@ private:
         meta_model::endomodel& im);
 
     /**
-     * @brief Returns the concept with the given name, or throws.
+     * @brief Returns the object template with the given name, or
+     * throws.
      */
-    static meta_model::object_template& resolve_concept(
-        const meta_model::name& owner, const meta_model::name& concept_name,
+    static meta_model::object_template& resolve_object_template(
+        const meta_model::name& owner,
+        const meta_model::name& object_template_name,
         meta_model::endomodel& im);
 
     /**
@@ -130,20 +136,21 @@ private:
     static void expand_objects(meta_model::endomodel& im);
 
     /**
-     * @brief Expands a concept.
+     * @brief Expands an object template.
      */
     static void
-    expand_concept(meta_model::object_template& c, meta_model::endomodel& im,
+    expand_object_template(meta_model::object_template& otp,
+        meta_model::endomodel& im,
         std::unordered_set<meta_model::name>& processed_names);
 
     /**
-     * @brief Expands all concepts in the model.
+     * @brief Expands all object templates in the model.
      */
-    static void expand_concepts(meta_model::endomodel& im);
+    static void expand_object_templates(meta_model::endomodel& im);
 
 public:
     /**
-     * @brief Transforms the concepts the supplied model.
+     * @brief Transforms the object templates the supplied model.
      */
     static void transform(meta_model::endomodel& im);
 };

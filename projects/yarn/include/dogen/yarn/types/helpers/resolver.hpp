@@ -59,7 +59,7 @@ private:
         const meta_model::name& n);
     static bool is_enumeration(const meta_model::endomodel& im,
         const meta_model::name& n);
-    static bool is_concept(const meta_model::endomodel& im,
+    static bool is_object_template(const meta_model::endomodel& im,
         const meta_model::name& n);
 
 private:
@@ -127,13 +127,14 @@ private:
      *
      * @note should really be moved to validator.
      */
-    static void validate_refinements(const meta_model::endomodel& im,
+    static void validate_object_template_inheritance(
+        const meta_model::endomodel& im,
         const meta_model::object_template& c);
 
     /**
-     * @brief Resolve all concepts.
+     * @brief Resolve all object templates.
      */
-    static void resolve_concepts(const indices& idx,
+    static void resolve_object_templates(const indices& idx,
         meta_model::endomodel& im);
 
     /**
@@ -163,14 +164,14 @@ public:
         const meta_model::name& n);
 
     /**
-     * @brief Resolves the name as a concept name.
+     * @brief Resolves the name as an object template name.
      */
     /**@{*/
     static boost::optional<meta_model::name>
-    try_resolve_concept_name(meta_model::name ctx,
+    try_resolve_object_template_name(meta_model::name ctx,
         const std::string& s, const meta_model::endomodel& im);
     static boost::optional<meta_model::name>
-    try_resolve_concept_name(const meta_model::name& ctx,
+    try_resolve_object_template_name(const meta_model::name& ctx,
         const meta_model::name& n, const meta_model::endomodel& im);
     /**@}*/
 

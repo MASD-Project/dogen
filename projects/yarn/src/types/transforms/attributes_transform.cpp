@@ -40,7 +40,7 @@ auto lg(logger_factory("yarn.transforms.attributes_transform"));
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
 const std::string object_not_found("Object not found in model: ");
-const std::string concept_not_found(
+const std::string object_template_not_found(
     "Object template not found in object templates container: ");
 
 }
@@ -61,12 +61,13 @@ find_object(const meta_model::name& n, meta_model::endomodel& im) {
 }
 
 meta_model::object_template& attributes_transform::
-find_concept(const meta_model::name& n, meta_model::endomodel& im) {
+find_object_template(const meta_model::name& n, meta_model::endomodel& im) {
     const auto& id(n.id());
     auto i(im.object_templates().find(id));
     if (i == im.object_templates().end()) {
-        BOOST_LOG_SEV(lg, error) << concept_not_found << id;
-        BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
+        BOOST_LOG_SEV(lg, error) << object_template_not_found << id;
+        BOOST_THROW_EXCEPTION(
+            transformation_error(object_template_not_found + id));
     }
     return *i->second;
 }
@@ -93,41 +94,43 @@ void attributes_transform::expand_object(meta_model::object& o,
     }
 
     /*
-     * Grab all of the concept attributes in one go, and them add them
-     * to the local attributes at the beginning. The idea is to keep
-     * changes from rippling through, but there is no evidence that
-     * this order is more effective than other alternatives.
+     * Grab all of the object template attributes in one go, and them
+     * add them to the local attributes at the beginning. The idea is
+     * to keep changes from rippling through, but there is no evidence
+     * that this order is more effective than other alternatives.
      */
-    std::list<meta_model::attribute> concept_attributes;
+    std::list<meta_model::attribute> object_template_attributes;
     for (const auto& otn : o.object_templates()) {
-        auto& ot(find_concept(otn, im));
+        auto& ot(find_object_template(otn, im));
         const auto& p(ot.local_attributes());
-        concept_attributes.insert(concept_attributes.end(), p.begin(), p.end());
+        object_template_attributes.insert(object_template_attributes.end(),
+            p.begin(), p.end());
     }
 
     /*
      * If we are a fluent or an immutable object, we need to mark all
-     * properties we've inherited via concepts - these have values
-     * that are specific to the object modeling the concept. This is
-     * actually a bit of a problem because this means we are modeling
-     * different concepts.
+     * properties we've inherited via object templates - these have
+     * values that are specific to the object modeling the object
+     * template. This is actually a bit of a problem because this
+     * means we are instantiating different object templates.
      */
     if (o.is_fluent() || o.is_immutable()) {
-        for(auto& attr : concept_attributes) {
+        for(auto& attr : object_template_attributes) {
             attr.is_fluent(o.is_fluent());
             attr.is_immutable(o.is_immutable());
         }
     }
 
     o.local_attributes().insert(o.local_attributes().begin(),
-        concept_attributes.begin(), concept_attributes.end());
+        object_template_attributes.begin(), object_template_attributes.end());
 
     /*
      * Expand all attribute names. At this point, we've only populated
      * attribute simple names. Note that we are doing this after
-     * expanding concept attributes. This is because we want to ensure
-     * the attributes are located correctly in element space: they are
-     * no longer part of the concept but are now part of the object.
+     * expanding object template attributes. This is because we want
+     * to ensure the attributes are located correctly in element
+     * space: they are no longer part of the object template but are
+     * now part of the object.
      */
     helpers::name_factory f;
     for (auto& attr : o.local_attributes()) {
@@ -175,10 +178,11 @@ void attributes_transform::expand_objects(meta_model::endomodel& im) {
     }
 }
 
-void attributes_transform::expand_concept(meta_model::object_template& ot,
-    meta_model::endomodel& im, std::unordered_set<std::string>& processed_ids) {
+void attributes_transform::expand_object_template(
+    meta_model::object_template& ot, meta_model::endomodel& im,
+    std::unordered_set<std::string>& processed_ids) {
     const auto id(ot.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Expanding concept: " << id;
+    BOOST_LOG_SEV(lg, debug) << "Expanding object template:" << id;
 
     if (processed_ids.find(ot.name().id()) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
@@ -202,8 +206,8 @@ void attributes_transform::expand_concept(meta_model::object_template& ot,
         ot.local_attributes().begin(), ot.local_attributes().end());
 
     for (const auto& n : ot.parents()) {
-        auto& parent(find_concept(n, im));
-        expand_concept(parent, im, processed_ids);
+        auto& parent(find_object_template(n, im));
+        expand_object_template(parent, im, processed_ids);
 
         ot.inherited_attributes().insert(
             std::make_pair(parent.name(), parent.local_attributes()));
@@ -214,19 +218,19 @@ void attributes_transform::expand_concept(meta_model::object_template& ot,
     processed_ids.insert(id);
 }
 
-void attributes_transform::expand_concepts(meta_model::endomodel& im) {
+void attributes_transform::expand_object_templates(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
                              << im.object_templates().size();
 
     std::unordered_set<std::string> processed_ids;
     for (auto& pair : im.object_templates()) {
-        auto& c(*pair.second);
-        expand_concept(c, im, processed_ids);
+        auto& otp(*pair.second);
+        expand_object_template(otp, im, processed_ids);
     }
 }
 
 void attributes_transform::transform(meta_model::endomodel& im) {
-    expand_concepts(im);
+    expand_object_templates(im);
     expand_objects(im);
 }
 
