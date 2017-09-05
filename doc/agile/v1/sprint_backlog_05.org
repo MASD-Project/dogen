@@ -438,6 +438,7 @@ namespace, and making it clear they are connected to yarn. Example:
 and so forth.
 
 *** STARTED Rename yarn concepts                                      :story:
+    CLOCK: [2017-09-05 Tue 18:43]--[2017-09-05 Tue 18:54] =>  0:11
     CLOCK: [2017-09-05 Tue 18:06]--[2017-09-05 Tue 18:42] =>  0:36
     CLOCK: [2017-09-05 Tue 07:35]--[2017-09-05 Tue 08:20] =>  0:45
     CLOCK: [2017-09-04 Mon 21:58]--[2017-09-04 Mon 22:39] =>  0:41
@@ -470,8 +471,8 @@ object, just the attribute collection.
 
 Tasks:
 
+- rename yarn element and model collections.
 - rename stereotype
-- rename yarn element and model collections
 - rename object's modeled concepts
 - rename meta-name, update JSON for tests
 - tidy-up mock factory (variables, method names)
