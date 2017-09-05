@@ -26,8 +26,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/attributes_transform.hpp"
@@ -40,7 +40,8 @@ auto lg(logger_factory("yarn.transforms.attributes_transform"));
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
 const std::string object_not_found("Object not found in model: ");
-const std::string concept_not_found("Concept not found in concept container: ");
+const std::string concept_not_found(
+    "Object template not found in object templates container: ");
 
 }
 
@@ -59,11 +60,11 @@ find_object(const meta_model::name& n, meta_model::endomodel& im) {
     return *i->second;
 }
 
-meta_model::concept& attributes_transform::
+meta_model::object_template& attributes_transform::
 find_concept(const meta_model::name& n, meta_model::endomodel& im) {
     const auto& id(n.id());
-    auto i(im.concepts().find(id));
-    if (i == im.concepts().end()) {
+    auto i(im.object_templates().find(id));
+    if (i == im.object_templates().end()) {
         BOOST_LOG_SEV(lg, error) << concept_not_found << id;
         BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
     }
@@ -174,13 +175,12 @@ void attributes_transform::expand_objects(meta_model::endomodel& im) {
     }
 }
 
-void attributes_transform::expand_concept(meta_model::concept& c,
-    meta_model::endomodel& im,
-    std::unordered_set<std::string>& processed_ids) {
-    const auto id(c.name().id());
+void attributes_transform::expand_concept(meta_model::object_template& ot,
+    meta_model::endomodel& im, std::unordered_set<std::string>& processed_ids) {
+    const auto id(ot.name().id());
     BOOST_LOG_SEV(lg, debug) << "Expanding concept: " << id;
 
-    if (processed_ids.find(c.name().id()) != processed_ids.end()) {
+    if (processed_ids.find(ot.name().id()) != processed_ids.end()) {
         BOOST_LOG_SEV(lg, debug) << "Object already processed:" << id;
         return;
     }
@@ -190,35 +190,36 @@ void attributes_transform::expand_concept(meta_model::concept& c,
      * attribute simple names.
      */
     helpers::name_factory f;
-    for (auto& attr : c.local_attributes()) {
-        const auto n(f.build_attribute_name(c.name(), attr.name().simple()));
+    for (auto& attr : ot.local_attributes()) {
+        const auto n(f.build_attribute_name(ot.name(), attr.name().simple()));
         attr.name(n);
     }
 
     /*
      * Setup the all attributes and inherited attributes containers.
      */
-    c.all_attributes().insert(c.all_attributes().end(),
-        c.local_attributes().begin(), c.local_attributes().end());
+    ot.all_attributes().insert(ot.all_attributes().end(),
+        ot.local_attributes().begin(), ot.local_attributes().end());
 
-    for (const auto& n : c.refines()) {
+    for (const auto& n : ot.parents()) {
         auto& parent(find_concept(n, im));
         expand_concept(parent, im, processed_ids);
 
-        c.inherited_attributes().insert(
+        ot.inherited_attributes().insert(
             std::make_pair(parent.name(), parent.local_attributes()));
 
-        c.all_attributes().insert(c.all_attributes().end(),
+        ot.all_attributes().insert(ot.all_attributes().end(),
             parent.local_attributes().begin(), parent.local_attributes().end());
     }
     processed_ids.insert(id);
 }
 
 void attributes_transform::expand_concepts(meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Expanding concepts: " << im.concepts().size();
+    BOOST_LOG_SEV(lg, debug) << "Expanding object templates: "
+                             << im.object_templates().size();
 
     std::unordered_set<std::string> processed_ids;
-    for (auto& pair : im.concepts()) {
+    for (auto& pair : im.object_templates()) {
         auto& c(*pair.second);
         expand_concept(c, im, processed_ids);
     }

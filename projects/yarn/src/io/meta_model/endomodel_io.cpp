@@ -25,7 +25,6 @@
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/io/meta_model/builtin_io.hpp"
-#include "dogen/yarn/io/meta_model/concept_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
 #include "dogen/yarn/io/meta_model/visitor_io.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
@@ -34,6 +33,7 @@
 #include "dogen/yarn/io/meta_model/primitive_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
 #include "dogen/yarn/io/meta_model/origin_types_io.hpp"
+#include "dogen/yarn/io/meta_model/object_template_io.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 
@@ -113,7 +113,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::meta_model::concept>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::meta_model::object_template>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -129,7 +129,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -445,7 +445,7 @@ std::ostream& operator<<(std::ostream& s, const endomodel& v) {
       << "\"references\": " << v.references() << ", "
       << "\"leaves\": " << v.leaves() << ", "
       << "\"modules\": " << v.modules() << ", "
-      << "\"concepts\": " << v.concepts() << ", "
+      << "\"object_templates\": " << v.object_templates() << ", "
       << "\"builtins\": " << v.builtins() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"primitives\": " << v.primitives() << ", "

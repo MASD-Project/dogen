@@ -92,9 +92,9 @@ void decomposer::operator()(const meta_model::module& m) {
     decompose_element(m);
 }
 
-void decomposer::operator()(const meta_model::concept& c) {
-    decompose_element(c);
-    decompose_attributes(c.name().id(), c.local_attributes());
+void decomposer::operator()(const meta_model::object_template& ot) {
+    decompose_element(ot);
+    decompose_attributes(ot.name().id(), ot.local_attributes());
 }
 
 void decomposer::operator()(const meta_model::builtin& b) {

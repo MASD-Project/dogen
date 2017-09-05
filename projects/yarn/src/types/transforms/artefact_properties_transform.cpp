@@ -22,13 +22,13 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/artefact_properties.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -52,7 +52,7 @@ void artefact_properties_transform::
 update_element(const context& ctx, meta_model::element& e) {
     /*
      * Check to see if the element has any archetypes. Some elements
-     * such as concepts do not have any at present.
+     * such as object templates do not have any at present.
      */
     const auto id(e.name().id());
     BOOST_LOG_SEV(lg, debug) << "Updating element: " << id;

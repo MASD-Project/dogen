@@ -28,7 +28,7 @@
 #include <list>
 #include <boost/optional.hpp>
 #include "dogen/yarn/types/meta_model/name.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/indices.hpp"
 
@@ -122,13 +122,13 @@ private:
         const meta_model::object& o);
 
     /**
-     * @brief Ensures that all concepts refined by the current concept
-     * are defined in the model.
+     * @brief Ensures that all object templates that are parents of
+     * the current object template are defined in the model.
      *
      * @note should really be moved to validator.
      */
     static void validate_refinements(const meta_model::endomodel& im,
-        const meta_model::concept& c);
+        const meta_model::object_template& c);
 
     /**
      * @brief Resolve all concepts.

@@ -26,12 +26,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/location_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
@@ -143,8 +143,8 @@ void naming_transform::process(const meta_model::location& l,
 }
 
 void naming_transform::process(const meta_model::location& l,
-    meta_model::concept& c) {
-    process_element(l, c);
+    meta_model::object_template& ot) {
+    process_element(l, ot);
 }
 
 void naming_transform::process(const meta_model::location& l,
@@ -155,7 +155,7 @@ void naming_transform::process(const meta_model::location& l,
 void naming_transform::
 update_names(const meta_model::location& l, meta_model::exomodel& em) {
     process(l, em.modules());
-    process(l, em.concepts());
+    process(l, em.object_templates());
     process(l, em.builtins());
     process(l, em.enumerations());
     process(l, em.primitives());

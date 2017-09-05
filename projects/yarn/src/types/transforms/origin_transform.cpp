@@ -26,12 +26,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/types/transforms/context.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
@@ -64,7 +64,7 @@ public:
 public:
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { update(m); }
-    void operator()(meta_model::concept& c) { update(c); }
+    void operator()(meta_model::object_template& ot) { update(ot); }
     void operator()(meta_model::builtin& b) { update(b); }
     void operator()(meta_model::enumeration& e) { update(e); }
     void operator()(meta_model::primitive& p) { update(p); }

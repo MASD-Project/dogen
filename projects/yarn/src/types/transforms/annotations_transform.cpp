@@ -82,11 +82,11 @@ void annotations_transform::process(const annotations::annotation_group& ag,
 }
 
 void annotations_transform::process(const annotations::annotation_group& ag,
-    meta_model::concept& c) {
-    const auto id(c.name().id());
-    BOOST_LOG_SEV(lg, debug) << "Processing concept: " << id;
-    c.annotation(ag.parent());
-    process_attributes(ag, c.local_attributes());
+    meta_model::object_template& ot) {
+    const auto id(ot.name().id());
+    BOOST_LOG_SEV(lg, debug) << "Processing object template: " << id;
+    ot.annotation(ag.parent());
+    process_attributes(ag, ot.local_attributes());
 }
 
 void annotations_transform::process(const annotations::annotation_group& ag,
@@ -120,7 +120,7 @@ void annotations_transform::process(const annotations::annotation_group& ag,
 void annotations_transform::
 transform(const context& ctx, meta_model::exomodel& em) {
     process(ctx, em.modules());
-    process(ctx, em.concepts());
+    process(ctx, em.object_templates());
     process(ctx, em.builtins());
     process(ctx, em.enumerations());
     process(ctx, em.primitives());

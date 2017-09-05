@@ -162,11 +162,11 @@ private:
     read_exception(const boost::property_tree::ptree& pt) const;
 
     /**
-     * @brief Reads a concept.
+     * @brief Reads an object template.
      */
     std::pair<annotations::scribble_group,
-              boost::shared_ptr<meta_model::concept>>
-    read_concept(const boost::property_tree::ptree& pt) const;
+              boost::shared_ptr<meta_model::object_template>>
+    read_object_template(const boost::property_tree::ptree& pt) const;
 
     /**
      * @brief Reads an element according to its meta-type by
@@ -200,7 +200,7 @@ private:
     meta_model::name meta_name_enumeration_;
     meta_model::name meta_name_primitive_;
     meta_model::name meta_name_exception_;
-    meta_model::name meta_name_concept_;
+    meta_model::name meta_name_object_template_;
 };
 
 } } }

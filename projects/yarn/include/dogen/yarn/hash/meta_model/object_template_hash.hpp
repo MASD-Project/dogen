@@ -18,19 +18,36 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_CONCEPT_FWD_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_CONCEPT_FWD_HPP
+#ifndef DOGEN_YARN_HASH_META_MODEL_OBJECT_TEMPLATE_HASH_HPP
+#define DOGEN_YARN_HASH_META_MODEL_OBJECT_TEMPLATE_HASH_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
+#include <functional>
+#include "dogen/yarn/types/meta_model/object_template.hpp"
+
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class concept;
+struct object_template_hasher {
+public:
+    static std::size_t hash(const object_template& v);
+};
 
 } } }
 
+namespace std {
+
+template<>
+struct hash<dogen::yarn::meta_model::object_template> {
+public:
+    size_t operator()(const dogen::yarn::meta_model::object_template& v) const {
+        return dogen::yarn::meta_model::object_template_hasher::hash(v);
+    }
+};
+
+}
 #endif

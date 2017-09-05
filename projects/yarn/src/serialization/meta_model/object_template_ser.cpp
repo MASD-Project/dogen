@@ -30,12 +30,12 @@
 #include <boost/archive/polymorphic_iarchive.hpp>
 #include <boost/archive/polymorphic_oarchive.hpp>
 #include "dogen/yarn/serialization/meta_model/name_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/concept_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/attribute_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 
 BOOST_CLASS_TRACKING(
-    dogen::yarn::meta_model::concept,
+    dogen::yarn::meta_model::object_template,
     boost::serialization::track_selectively)
 
 namespace boost {
@@ -43,7 +43,7 @@ namespace serialization {
 
 template<typename Archive>
 void save(Archive& ar,
-    const dogen::yarn::meta_model::concept& v,
+    const dogen::yarn::meta_model::object_template& v,
     const unsigned int /*version*/) {
     ar << make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
 
@@ -52,13 +52,13 @@ void save(Archive& ar,
     ar << make_nvp("inherited_attributes", v.inherited_attributes_);
     ar << make_nvp("is_immutable", v.is_immutable_);
     ar << make_nvp("is_fluent", v.is_fluent_);
-    ar << make_nvp("refines", v.refines_);
+    ar << make_nvp("parents", v.parents_);
     ar << make_nvp("is_child", v.is_child_);
 }
 
 template<typename Archive>
 void load(Archive& ar,
-    dogen::yarn::meta_model::concept& v,
+    dogen::yarn::meta_model::object_template& v,
     const unsigned int /*version*/) {
     ar >> make_nvp("element", base_object<dogen::yarn::meta_model::element>(v));
 
@@ -67,7 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("inherited_attributes", v.inherited_attributes_);
     ar >> make_nvp("is_immutable", v.is_immutable_);
     ar >> make_nvp("is_fluent", v.is_fluent_);
-    ar >> make_nvp("refines", v.refines_);
+    ar >> make_nvp("parents", v.parents_);
     ar >> make_nvp("is_child", v.is_child_);
 }
 
@@ -76,16 +76,16 @@ void load(Archive& ar,
 namespace boost {
 namespace serialization {
 
-template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
-template void load(archive::polymorphic_iarchive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
+template void save(archive::polymorphic_oarchive& ar, const dogen::yarn::meta_model::object_template& v, unsigned int version);
+template void load(archive::polymorphic_iarchive& ar, dogen::yarn::meta_model::object_template& v, unsigned int version);
 
-template void save(archive::text_oarchive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
-template void load(archive::text_iarchive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
+template void save(archive::text_oarchive& ar, const dogen::yarn::meta_model::object_template& v, unsigned int version);
+template void load(archive::text_iarchive& ar, dogen::yarn::meta_model::object_template& v, unsigned int version);
 
-template void save(archive::binary_oarchive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
-template void load(archive::binary_iarchive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
+template void save(archive::binary_oarchive& ar, const dogen::yarn::meta_model::object_template& v, unsigned int version);
+template void load(archive::binary_iarchive& ar, dogen::yarn::meta_model::object_template& v, unsigned int version);
 
-template void save(archive::xml_oarchive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
-template void load(archive::xml_iarchive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
+template void save(archive::xml_oarchive& ar, const dogen::yarn::meta_model::object_template& v, unsigned int version);
+template void load(archive::xml_iarchive& ar, dogen::yarn::meta_model::object_template& v, unsigned int version);
 
 } }

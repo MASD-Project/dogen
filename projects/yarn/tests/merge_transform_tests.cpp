@@ -81,7 +81,7 @@ BOOST_AUTO_TEST_CASE(merging_n_distinct_models_with_one_object_each_results_in_n
     BOOST_CHECK(combined.objects().size() == n);
     BOOST_CHECK(combined.builtins().empty());
     BOOST_CHECK(combined.enumerations().empty());
-    BOOST_CHECK(combined.concepts().empty());
+    BOOST_CHECK(combined.object_templates().empty());
     BOOST_CHECK(combined.modules().empty());
     BOOST_CHECK(combined.references().size() == 4);
 

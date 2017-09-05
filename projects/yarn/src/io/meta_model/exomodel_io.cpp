@@ -23,12 +23,12 @@
 #include "dogen/yarn/io/meta_model/module_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/io/meta_model/builtin_io.hpp"
-#include "dogen/yarn/io/meta_model/concept_io.hpp"
 #include "dogen/yarn/io/meta_model/exomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/exception_io.hpp"
 #include "dogen/yarn/io/meta_model/primitive_io.hpp"
 #include "dogen/annotations/io/scribble_group_io.hpp"
 #include "dogen/yarn/io/meta_model/enumeration_io.hpp"
+#include "dogen/yarn/io/meta_model/object_template_io.hpp"
 
 namespace boost {
 
@@ -75,7 +75,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<dogen
 
 namespace boost {
 
-inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::meta_model::concept>& v) {
+inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::yarn::meta_model::object_template>& v) {
     s << "{ " << "\"__type__\": " << "\"boost::shared_ptr\"" << ", "
       << "\"memory\": " << "\"" << static_cast<void*>(v.get()) << "\"" << ", ";
 
@@ -91,7 +91,7 @@ inline std::ostream& operator<<(std::ostream& s, const boost::shared_ptr<dogen::
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& v) {
     s << "{ " << "\"__type__\": " << "\"std::pair\"" << ", ";
 
     s << "\"first\": " << v.first << ", ";
@@ -104,7 +104,7 @@ inline std::ostream& operator<<(std::ostream& s, const std::pair<dogen::annotati
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& v) {
     s << "[ ";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
@@ -341,7 +341,7 @@ std::ostream& operator<<(std::ostream& s, const exomodel& v) {
       << "\"name\": " << v.name() << ", "
       << "\"meta_name\": " << v.meta_name() << ", "
       << "\"modules\": " << v.modules() << ", "
-      << "\"concepts\": " << v.concepts() << ", "
+      << "\"object_templates\": " << v.object_templates() << ", "
       << "\"builtins\": " << v.builtins() << ", "
       << "\"enumerations\": " << v.enumerations() << ", "
       << "\"primitives\": " << v.primitives() << ", "

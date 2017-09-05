@@ -62,7 +62,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_REQUIRE(a.modules().empty());
     BOOST_REQUIRE(a.builtins().empty());
     BOOST_REQUIRE(a.enumerations().empty());
-    BOOST_REQUIRE(a.concepts().empty());
+    BOOST_REQUIRE(a.object_templates().empty());
     BOOST_REQUIRE(a.visitors().empty());
 
     stereotypes_transform::transform(a);
@@ -72,7 +72,7 @@ BOOST_AUTO_TEST_CASE(expanding_non_visitable_type_does_nothing) {
     BOOST_CHECK(a.modules().empty());
     BOOST_CHECK(a.builtins().empty());
     BOOST_CHECK(a.enumerations().empty());
-    BOOST_CHECK(a.concepts().empty());
+    BOOST_CHECK(a.object_templates().empty());
     BOOST_CHECK(a.visitors().empty());
 }
 

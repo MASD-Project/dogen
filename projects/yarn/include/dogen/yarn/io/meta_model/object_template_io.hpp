@@ -18,37 +18,24 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_CONCEPT_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_CONCEPT_SER_HPP
+#ifndef DOGEN_YARN_IO_META_MODEL_OBJECT_TEMPLATE_IO_HPP
+#define DOGEN_YARN_IO_META_MODEL_OBJECT_TEMPLATE_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <boost/serialization/split_free.hpp>
-#include <boost/type_traits/is_virtual_base_of.hpp>
-#include "dogen/yarn/types/meta_model/concept.hpp"
+#include <iosfwd>
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 
-namespace boost {
+namespace dogen {
+namespace yarn {
+namespace meta_model {
 
-template<>struct
-is_virtual_base_of<
-    dogen::yarn::meta_model::element,
-    dogen::yarn::meta_model::concept
-> : public mpl::true_ {};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::yarn::meta_model::object_template& v);
 
-}
-
-BOOST_SERIALIZATION_SPLIT_FREE(dogen::yarn::meta_model::concept)
-namespace boost {
-namespace serialization {
-
-template<typename Archive>
-void save(Archive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
-
-template<typename Archive>
-void load(Archive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
-
-} }
+} } }
 
 #endif

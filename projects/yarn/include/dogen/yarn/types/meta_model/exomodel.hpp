@@ -34,10 +34,10 @@
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/object_fwd.hpp"
 #include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
-#include "dogen/yarn/types/meta_model/concept_fwd.hpp"
 #include "dogen/yarn/types/meta_model/exception_fwd.hpp"
 #include "dogen/yarn/types/meta_model/primitive_fwd.hpp"
 #include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
+#include "dogen/yarn/types/meta_model/object_template_fwd.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_fwd_ser.hpp"
 
 namespace dogen {
@@ -56,7 +56,7 @@ public:
         const dogen::yarn::meta_model::name& name,
         const dogen::yarn::meta_model::name& meta_name,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
-        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts,
+        const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations,
         const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
@@ -97,10 +97,10 @@ public:
     void modules(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& v);
     void modules(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >&& v);
 
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts() const;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts();
-    void concepts(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& v);
-    void concepts(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >&& v);
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates() const;
+    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates();
+    void object_templates(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& v);
+    void object_templates(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >&& v);
 
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins() const;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins();
@@ -146,7 +146,7 @@ private:
     dogen::yarn::meta_model::name name_;
     dogen::yarn::meta_model::name meta_name_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > > modules_;
-    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > > concepts_;
+    std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > > object_templates_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > > builtins_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > > enumerations_;
     std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > > primitives_;

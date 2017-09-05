@@ -29,12 +29,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/orm_model_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_object_properties_io.hpp"
 #include "dogen/yarn/io/meta_model/orm_primitive_properties_io.hpp"
@@ -369,7 +369,7 @@ void orm_transform::
 expand_concepts(const type_group& tg, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Started concept expansion.";
 
-    for (auto& pair : im.concepts()) {
+    for (auto& pair : im.object_templates()) {
         auto& c(*pair.second);
         for (auto& attr : c.local_attributes()) {
             const auto& a(attr.annotation());

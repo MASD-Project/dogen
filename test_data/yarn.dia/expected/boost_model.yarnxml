@@ -73,7 +73,7 @@
 				</children>
 			</first>
 			<second class_id="25" tracking_level="0" version="1">
-				<px class_id="9" tracking_level="1" version="0" object_id="_0">
+				<px class_id="8" tracking_level="1" version="0" object_id="_0">
 					<element class_id="26" tracking_level="0" version="0">
 						<name>
 							<id>&lt;pkg1&gt;</id>
@@ -181,10 +181,10 @@
 			</second>
 		</item>
 	</modules>
-	<concepts class_id="37" tracking_level="0" version="0">
+	<object_templates class_id="37" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</concepts>
+	</object_templates>
 	<builtins class_id="38" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
@@ -847,7 +847,7 @@
 				</children>
 			</first>
 			<second class_id="51" tracking_level="0" version="1">
-				<px class_id="10" tracking_level="1" version="0" object_id="_4">
+				<px class_id="9" tracking_level="1" version="0" object_id="_4">
 					<element>
 						<name>
 							<id>&lt;class_a&gt;</id>
@@ -1113,7 +1113,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_5">
+				<px class_id_reference="9" object_id="_5">
 					<element>
 						<name>
 							<id>&lt;class_b&gt;</id>
@@ -1859,7 +1859,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_6">
+				<px class_id_reference="9" object_id="_6">
 					<element>
 						<name>
 							<id>&lt;class_base&gt;</id>
@@ -2125,7 +2125,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_7">
+				<px class_id_reference="9" object_id="_7">
 					<element>
 						<name>
 							<id>&lt;class_d&gt;</id>
@@ -2631,7 +2631,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_8">
+				<px class_id_reference="9" object_id="_8">
 					<element>
 						<name>
 							<id>&lt;class_derived&gt;</id>
@@ -2929,7 +2929,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_9">
+				<px class_id_reference="9" object_id="_9">
 					<element>
 						<name>
 							<id>&lt;class_e&gt;</id>
@@ -3435,7 +3435,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_10">
+				<px class_id_reference="9" object_id="_10">
 					<element>
 						<name>
 							<id>&lt;class_f&gt;</id>
@@ -4101,7 +4101,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_11">
+				<px class_id_reference="9" object_id="_11">
 					<element>
 						<name>
 							<id>&lt;class_g&gt;</id>
@@ -4447,7 +4447,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_12">
+				<px class_id_reference="9" object_id="_12">
 					<element>
 						<name>
 							<id>&lt;class_h&gt;</id>
@@ -4713,7 +4713,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_13">
+				<px class_id_reference="9" object_id="_13">
 					<element>
 						<name>
 							<id>&lt;class_j&gt;</id>
@@ -5139,7 +5139,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_14">
+				<px class_id_reference="9" object_id="_14">
 					<element>
 						<name>
 							<id>&lt;pkg1&gt;&lt;class_c&gt;</id>
@@ -5486,7 +5486,7 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_15">
+				<px class_id_reference="9" object_id="_15">
 					<element>
 						<name>
 							<id>&lt;some_service&gt;</id>
@@ -5798,7 +5798,7 @@
 			</children>
 		</first>
 		<second>
-			<px class_id_reference="9" object_id="_16">
+			<px class_id_reference="8" object_id="_16">
 				<element>
 					<name>
 						<id></id>

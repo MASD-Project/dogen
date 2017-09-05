@@ -65,7 +65,7 @@ private:
         const std::list<meta_model::attribute>& attrs, std::ostream& s);
     static void dehydrate_objects(const bool requires_leading_comma,
         const meta_model::exomodel& em, std::ostream& s);
-    static void dehydrate_concepts(const bool requires_leading_comma,
+    static void dehydrate_object_templates(const bool requires_leading_comma,
         const meta_model::exomodel& em, std::ostream& s);
     static void dehydrate_modules(const bool requires_leading_comma,
         const meta_model::exomodel& em, std::ostream& s);

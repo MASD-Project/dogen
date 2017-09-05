@@ -20,12 +20,12 @@
  */
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/model_sorter.hpp"
 
 namespace dogen {
@@ -42,7 +42,7 @@ comparer(const std::pair<annotations::scribble_group,
 
 void model_sorter::sort(meta_model::exomodel& em) {
     em.modules().sort(comparer<meta_model::module>);
-    em.concepts().sort(comparer<meta_model::concept>);
+    em.object_templates().sort(comparer<meta_model::object_template>);
     em.builtins().sort(comparer<meta_model::builtin>);
     em.enumerations().sort(comparer<meta_model::enumeration>);
     em.primitives().sort(comparer<meta_model::primitive>);

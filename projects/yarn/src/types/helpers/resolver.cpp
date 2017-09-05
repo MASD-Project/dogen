@@ -113,8 +113,8 @@ bool resolver::is_object(const meta_model::endomodel& im,
 bool resolver::is_concept(const meta_model::endomodel& im,
     const meta_model::name& n) {
 
-    auto i(im.concepts().find(n.id()));
-    if (i != im.concepts().end()) {
+    auto i(im.object_templates().find(n.id()));
+    if (i != im.object_templates().end()) {
         BOOST_LOG_SEV(lg, debug) << "Name belongs to a concept in model.";
         return true;
     }
@@ -457,12 +457,12 @@ validate_inheritance_graph(const meta_model::endomodel& im,
 }
 
 void resolver::validate_refinements(const meta_model::endomodel& im,
-    const meta_model::concept& c) {
+    const meta_model::object_template& c) {
     /*
      * Ensure that all refined concepts exist as concepts.
      */
     const auto id(c.name().id());
-    for (const auto& n : c.refines()) {
+    for (const auto& n : c.parents()) {
         if (is_concept(im, n))
             continue;
 
@@ -478,9 +478,9 @@ void resolver::validate_refinements(const meta_model::endomodel& im,
 void resolver::
 resolve_concepts(const indices& idx, meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Resolving concepts. Size: "
-                             << im.concepts().size();
+                             << im.object_templates().size();
 
-    for (auto& pair : im.concepts()) {
+    for (auto& pair : im.object_templates()) {
         auto& c(pair.second);
 
         BOOST_LOG_SEV(lg, debug) << "Resolving concept: " << c->name().id();
@@ -605,8 +605,8 @@ try_resolve_concept_name(meta_model::name ctx, const std::string& s,
 
     BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
 
-    auto i(im.concepts().find(r.id()));
-    if (i != im.concepts().end()) {
+    auto i(im.object_templates().find(r.id()));
+    if (i != im.object_templates().end()) {
         BOOST_LOG_SEV(lg, debug) << "Found concept.";
         return r;
     }
@@ -627,8 +627,8 @@ try_resolve_concept_name(meta_model::name ctx, const std::string& s,
 
             BOOST_LOG_SEV(lg, debug) << "Internal modules climb: " << r;
 
-            i = im.concepts().find(r.id());
-            if (i != im.concepts().end()) {
+            i = im.object_templates().find(r.id());
+            if (i != im.object_templates().end()) {
                 BOOST_LOG_SEV(lg, debug) << "Found concept.";
                 return r;
             }

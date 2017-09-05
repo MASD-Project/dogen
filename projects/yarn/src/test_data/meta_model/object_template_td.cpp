@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/yarn/test_data/meta_model/name_td.hpp"
-#include "dogen/yarn/test_data/meta_model/concept_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/attribute_td.hpp"
+#include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
 
 namespace {
 
@@ -69,9 +69,9 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-concept_generator::concept_generator() : position_(0) { }
+object_template_generator::object_template_generator() : position_(0) { }
 
-void concept_generator::
+void object_template_generator::
 populate(const unsigned int position, result_type& v) {
     dogen::yarn::meta_model::element_generator::populate(position, v);
     v.all_attributes(create_std_list_dogen_yarn_meta_model_attribute(position + 0));
@@ -79,26 +79,26 @@ populate(const unsigned int position, result_type& v) {
     v.inherited_attributes(create_std_unordered_map_dogen_yarn_meta_model_name_std_list_dogen_yarn_meta_model_attribute(position + 2));
     v.is_immutable(create_bool(position + 3));
     v.is_fluent(create_bool(position + 4));
-    v.refines(create_std_list_dogen_yarn_meta_model_name(position + 5));
+    v.parents(create_std_list_dogen_yarn_meta_model_name(position + 5));
     v.is_child(create_bool(position + 6));
 }
 
-concept_generator::result_type
-concept_generator::create(const unsigned int position) {
-    concept r;
-    concept_generator::populate(position, r);
+object_template_generator::result_type
+object_template_generator::create(const unsigned int position) {
+    object_template r;
+    object_template_generator::populate(position, r);
     return r;
 }
 
-concept_generator::result_type*
-concept_generator::create_ptr(const unsigned int position) {
-    concept* p = new concept();
-    concept_generator::populate(position, *p);
+object_template_generator::result_type*
+object_template_generator::create_ptr(const unsigned int position) {
+    object_template* p = new object_template();
+    object_template_generator::populate(position, *p);
     return p;
 }
 
-concept_generator::result_type
-concept_generator::operator()() {
+object_template_generator::result_type
+object_template_generator::operator()() {
     return create(position_++);
 }
 

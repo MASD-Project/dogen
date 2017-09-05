@@ -53,7 +53,7 @@ private:
 public:
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { process(m.name()); }
-    void operator()(meta_model::concept& c) { process(c.name()); }
+    void operator()(meta_model::object_template& ot) { process(ot.name()); }
     void operator()(meta_model::builtin& b) { process(b.name()); }
     void operator()(meta_model::enumeration& e) { process(e.name()); }
     void operator()(meta_model::primitive& p) { process(p.name()); }
@@ -96,7 +96,7 @@ private:
 public:
     void operator()(meta_model::element&) { }
     void operator()(meta_model::module& m) { update(m); }
-    void operator()(meta_model::concept& c) { update(c); }
+    void operator()(meta_model::object_template& ot) { update(ot); }
     void operator()(meta_model::builtin& b) { update(b); }
     void operator()(meta_model::enumeration& e) { update(e); }
     void operator()(meta_model::primitive& p) { update(p); }

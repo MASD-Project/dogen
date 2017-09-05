@@ -19,9 +19,9 @@
  *
  */
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
-#include "dogen/yarn/hash/meta_model/concept_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/attribute_hash.hpp"
+#include "dogen/yarn/hash/meta_model/object_template_hash.hpp"
 
 namespace {
 
@@ -62,7 +62,7 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-std::size_t concept_hasher::hash(const concept& v) {
+std::size_t object_template_hasher::hash(const object_template& v) {
     std::size_t seed(0);
 
     combine(seed, dynamic_cast<const dogen::yarn::meta_model::element&>(v));
@@ -72,7 +72,7 @@ std::size_t concept_hasher::hash(const concept& v) {
     combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_name_std_list_dogen_yarn_meta_model_attribute(v.inherited_attributes()));
     combine(seed, v.is_immutable());
     combine(seed, v.is_fluent());
-    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.refines()));
+    combine(seed, hash_std_list_dogen_yarn_meta_model_name(v.parents()));
     combine(seed, v.is_child());
 
     return seed;

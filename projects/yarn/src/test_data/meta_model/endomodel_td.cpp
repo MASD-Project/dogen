@@ -23,7 +23,6 @@
 #include "dogen/yarn/test_data/meta_model/module_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_td.hpp"
 #include "dogen/yarn/test_data/meta_model/builtin_td.hpp"
-#include "dogen/yarn/test_data/meta_model/concept_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/visitor_td.hpp"
 #include "dogen/yarn/test_data/meta_model/endomodel_td.hpp"
@@ -32,6 +31,7 @@
 #include "dogen/yarn/test_data/meta_model/primitive_td.hpp"
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
+#include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
 
@@ -89,22 +89,22 @@ std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::modul
     return r;
 }
 
-dogen::yarn::meta_model::concept*
-create_dogen_yarn_meta_model_concept_ptr(const unsigned int position) {
-    return dogen::yarn::meta_model::concept_generator::create_ptr(position);
+dogen::yarn::meta_model::object_template*
+create_dogen_yarn_meta_model_object_template_ptr(const unsigned int position) {
+    return dogen::yarn::meta_model::object_template_generator::create_ptr(position);
 }
 
-boost::shared_ptr<dogen::yarn::meta_model::concept>
-create_boost_shared_ptr_dogen_yarn_meta_model_concept(unsigned int position) {
-    boost::shared_ptr<dogen::yarn::meta_model::concept> r(
-        create_dogen_yarn_meta_model_concept_ptr(position));
+boost::shared_ptr<dogen::yarn::meta_model::object_template>
+create_boost_shared_ptr_dogen_yarn_meta_model_object_template(unsigned int position) {
+    boost::shared_ptr<dogen::yarn::meta_model::object_template> r(
+        create_dogen_yarn_meta_model_object_template_ptr(position));
     return r;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_concept(unsigned int position) {
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> > r;
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> > create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object_template(unsigned int position) {
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> > r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_yarn_meta_model_concept(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + i)));
     }
     return r;
 }
@@ -307,7 +307,7 @@ populate(const unsigned int position, result_type& v) {
     v.references(create_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(position + 3));
     v.leaves(create_std_unordered_set_dogen_yarn_meta_model_name(position + 4));
     v.modules(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_module(position + 5));
-    v.concepts(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_concept(position + 6));
+    v.object_templates(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object_template(position + 6));
     v.builtins(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_builtin(position + 7));
     v.enumerations(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_enumeration(position + 8));
     v.primitives(create_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_primitive(position + 9));

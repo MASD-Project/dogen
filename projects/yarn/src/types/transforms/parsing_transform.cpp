@@ -30,12 +30,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
@@ -259,7 +259,7 @@ transform(const context& ctx, meta_model::endomodel& m) {
         }
     }
 
-    for (auto& pair : m.concepts()) {
+    for (auto& pair : m.object_templates()) {
         auto& c(*pair.second);
         const auto id(c.name().id());
 

@@ -43,7 +43,7 @@ public:
     static meta_model::name make_model_name();
 
     static meta_model::name make_module_name();
-    static meta_model::name make_concept_name();
+    static meta_model::name make_object_template_name();
     static meta_model::name make_builtin_name();
     static meta_model::name make_enumeration_name();
     static meta_model::name make_primitive_name();

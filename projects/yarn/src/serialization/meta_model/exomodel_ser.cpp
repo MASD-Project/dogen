@@ -34,12 +34,12 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/concept_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exomodel_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
 #include "dogen/annotations/serialization/scribble_group_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 
 namespace boost {
 namespace serialization {
@@ -51,7 +51,7 @@ void save(Archive& ar,
     ar << make_nvp("name", v.name_);
     ar << make_nvp("meta_name", v.meta_name_);
     ar << make_nvp("modules", v.modules_);
-    ar << make_nvp("concepts", v.concepts_);
+    ar << make_nvp("object_templates", v.object_templates_);
     ar << make_nvp("builtins", v.builtins_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("primitives", v.primitives_);
@@ -67,7 +67,7 @@ void load(Archive& ar,
     ar >> make_nvp("name", v.name_);
     ar >> make_nvp("meta_name", v.meta_name_);
     ar >> make_nvp("modules", v.modules_);
-    ar >> make_nvp("concepts", v.concepts_);
+    ar >> make_nvp("object_templates", v.object_templates_);
     ar >> make_nvp("builtins", v.builtins_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("primitives", v.primitives_);

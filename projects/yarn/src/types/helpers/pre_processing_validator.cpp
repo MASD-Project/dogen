@@ -22,11 +22,11 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/validation_error.hpp"
 #include "dogen/yarn/types/helpers/pre_processing_validator.hpp"
 
@@ -61,7 +61,8 @@ private:
         const meta_model::name& n) const;
 
 public:
-    void validate(const std::string& id, const meta_model::concept& c) const;
+    void validate(const std::string& id,
+        const meta_model::object_template& ot) const;
     void validate(const std::string& id, const meta_model::builtin& b) const;
     void validate(const std::string& id, const meta_model::visitor& v) const;
     void validate(const std::string& id,
@@ -116,8 +117,8 @@ validate_name(const std::string& id, const bool in_global_module,
 }
 
 void validator::
-validate(const std::string& id, const meta_model::concept& c) const {
-    validate_name(id, c.in_global_module(), c.name());
+validate(const std::string& id, const meta_model::object_template& ot) const {
+    validate_name(id, ot.in_global_module(), ot.name());
 }
 
 void validator::
@@ -215,7 +216,7 @@ validate(const meta_model::endomodel& im) {
     for (const auto& pair : im.modules())
         v.validate(pair.first, *pair.second);
 
-    for (const auto& pair : im.concepts())
+    for (const auto& pair : im.object_templates())
         v.validate(pair.first, *pair.second);
 
     for (const auto& pair : im.builtins())

@@ -33,11 +33,11 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/concept_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -49,11 +49,11 @@ void register_types(Archive& ar) {
     dogen::formatters::register_types(ar);
 
     ar.template register_type<dogen::yarn::meta_model::builtin>();
-    ar.template register_type<dogen::yarn::meta_model::concept>();
     ar.template register_type<dogen::yarn::meta_model::enumeration>();
     ar.template register_type<dogen::yarn::meta_model::exception>();
     ar.template register_type<dogen::yarn::meta_model::module>();
     ar.template register_type<dogen::yarn::meta_model::object>();
+    ar.template register_type<dogen::yarn::meta_model::object_template>();
     ar.template register_type<dogen::yarn::meta_model::primitive>();
     ar.template register_type<dogen::yarn::meta_model::visitor>();
 }

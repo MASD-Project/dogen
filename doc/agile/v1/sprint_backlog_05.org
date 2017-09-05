@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-04 Mon 22:39]
-| <75>                                                                        |        |      |      |       |
-| Headline                                                                    | Time   |      |      |     % |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| *Total time*                                                                | *9:29* |      |      | 100.0 |
-|-----------------------------------------------------------------------------+--------+------+------+-------|
-| Stories                                                                     | 9:29   |      |      | 100.0 |
-| Active                                                                      |        | 9:29 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |        |      | 0:44 |   7.7 |
-| STARTED Sprint and product backlog grooming                                 |        |      | 1:14 |  13.0 |
-| COMPLETED Remove object types in yarn                                       |        |      | 0:52 |   9.1 |
-| COMPLETED Clean-up readme                                                   |        |      | 1:15 |  13.2 |
-| COMPLETED Rename transformers to adapters                                   |        |      | 0:28 |   4.9 |
-| COMPLETED Analysis on annotations and profiles                              |        |      | 2:26 |  25.7 |
-| COMPLETED Use namespaced stereotypes                                        |        |      | 1:49 |  19.2 |
-| STARTED Rename yarn concepts                                                |        |      | 0:41 |   7.2 |
+#+CAPTION: Clock summary at [2017-09-05 Tue 18:42]
+| <75>                                                                        |         |       |      |       |
+| Headline                                                                    | Time    |       |      |     % |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| *Total time*                                                                | *10:50* |       |      | 100.0 |
+|-----------------------------------------------------------------------------+---------+-------+------+-------|
+| Stories                                                                     | 10:50   |       |      | 100.0 |
+| Active                                                                      |         | 10:50 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   6.8 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |  11.4 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   8.0 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |  11.5 |
+| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   4.3 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  22.5 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |  16.8 |
+| STARTED Rename yarn concepts                                                |         |       | 2:02 |  18.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -438,6 +438,8 @@ namespace, and making it clear they are connected to yarn. Example:
 and so forth.
 
 *** STARTED Rename yarn concepts                                      :story:
+    CLOCK: [2017-09-05 Tue 18:06]--[2017-09-05 Tue 18:42] =>  0:36
+    CLOCK: [2017-09-05 Tue 07:35]--[2017-09-05 Tue 08:20] =>  0:45
     CLOCK: [2017-09-04 Mon 21:58]--[2017-09-04 Mon 22:39] =>  0:41
 
 When concepts were introduced, it was clear that something was not
@@ -465,6 +467,17 @@ However, the downside is that we now have a verbose stereotype:
 
 Having said that, we cannot have values for all attributes in an
 object, just the attribute collection.
+
+Tasks:
+
+- rename stereotype
+- rename yarn element and model collections
+- rename object's modeled concepts
+- rename meta-name, update JSON for tests
+- tidy-up mock factory (variables, method names)
+- rename concept transform, tests
+- ORM transform uses expand instead of transform
+- rename test model types with concept in the name.
 
 *** Code-generate annotations type templates                          :story:
 

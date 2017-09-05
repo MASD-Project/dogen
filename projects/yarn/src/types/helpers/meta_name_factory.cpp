@@ -61,7 +61,8 @@ meta_model::name meta_name_factory::make_module_name() {
     return r;
 }
 
-meta_model::name meta_name_factory::make_concept_name() {
+meta_model::name meta_name_factory::make_object_template_name() {
+    // FIXME
     static const auto r(make_name("concept"));
     return r;
 }

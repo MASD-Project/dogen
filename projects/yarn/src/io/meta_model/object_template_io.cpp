@@ -18,36 +18,20 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_HASH_META_MODEL_CONCEPT_HASH_HPP
-#define DOGEN_YARN_HASH_META_MODEL_CONCEPT_HASH_HPP
-
-#if defined(_MSC_VER) && (_MSC_VER >= 1200)
-#pragma once
-#endif
-
-#include <functional>
-#include "dogen/yarn/types/meta_model/concept.hpp"
+#include <ostream>
+#include <boost/io/ios_state.hpp>
+#include "dogen/yarn/io/meta_model/name_io.hpp"
+#include "dogen/yarn/io/meta_model/element_io.hpp"
+#include "dogen/yarn/io/meta_model/attribute_io.hpp"
+#include "dogen/yarn/io/meta_model/object_template_io.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-struct concept_hasher {
-public:
-    static std::size_t hash(const concept& v);
-};
+std::ostream& operator<<(std::ostream& s, const object_template& v) {
+    v.to_stream(s);
+    return(s);
+}
 
 } } }
-
-namespace std {
-
-template<>
-struct hash<dogen::yarn::meta_model::concept> {
-public:
-    size_t operator()(const dogen::yarn::meta_model::concept& v) const {
-        return dogen::yarn::meta_model::concept_hasher::hash(v);
-    }
-};
-
-}
-#endif

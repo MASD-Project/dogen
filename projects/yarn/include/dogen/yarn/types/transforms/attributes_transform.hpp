@@ -109,7 +109,7 @@ private:
     /**
      * @brief Returns the concept with the given name, or throws.
      */
-    static meta_model::concept& find_concept(const meta_model::name& n,
+    static meta_model::object_template& find_concept(const meta_model::name& n,
         meta_model::endomodel& im);
 
 private:
@@ -128,7 +128,7 @@ private:
     /**
      * @brief Populates index information in a concept.
      */
-    static void expand_concept(meta_model::concept& c,
+    static void expand_concept(meta_model::object_template& ot,
         meta_model::endomodel& im,
         std::unordered_set<std::string>& processed_ids);
 

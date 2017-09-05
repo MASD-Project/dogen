@@ -24,13 +24,13 @@
 #include "dogen/yarn/test_data/meta_model/module_td.hpp"
 #include "dogen/yarn/test_data/meta_model/object_td.hpp"
 #include "dogen/yarn/test_data/meta_model/builtin_td.hpp"
-#include "dogen/yarn/test_data/meta_model/concept_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/visitor_td.hpp"
 #include "dogen/yarn/test_data/meta_model/exception_td.hpp"
 #include "dogen/yarn/test_data/meta_model/primitive_td.hpp"
 #include "dogen/yarn/test_data/meta_model/enumeration_td.hpp"
 #include "dogen/yarn/test_data/meta_model/origin_types_td.hpp"
+#include "dogen/yarn/test_data/meta_model/object_template_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_properties_td.hpp"
 
 namespace {
@@ -103,15 +103,15 @@ populate(const unsigned int position, result_type& v) {
 element_generator::result_type*
 element_generator::create_ptr(const unsigned int position) {
     if ((position % 7) == 0)
-        return dogen::yarn::meta_model::concept_generator::create_ptr(position);
-    if ((position % 7) == 1)
         return dogen::yarn::meta_model::enumeration_generator::create_ptr(position);
-    if ((position % 7) == 2)
+    if ((position % 7) == 1)
         return dogen::yarn::meta_model::exception_generator::create_ptr(position);
-    if ((position % 7) == 3)
+    if ((position % 7) == 2)
         return dogen::yarn::meta_model::module_generator::create_ptr(position);
-    if ((position % 7) == 4)
+    if ((position % 7) == 3)
         return dogen::yarn::meta_model::object_generator::create_ptr(position);
+    if ((position % 7) == 4)
+        return dogen::yarn::meta_model::object_template_generator::create_ptr(position);
     if ((position % 7) == 5)
         return dogen::yarn::meta_model::primitive_generator::create_ptr(position);
     if ((position % 7) == 6)

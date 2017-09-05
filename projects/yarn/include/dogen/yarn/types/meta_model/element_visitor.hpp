@@ -28,11 +28,11 @@
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/object_fwd.hpp"
 #include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
-#include "dogen/yarn/types/meta_model/concept_fwd.hpp"
 #include "dogen/yarn/types/meta_model/visitor_fwd.hpp"
 #include "dogen/yarn/types/meta_model/exception_fwd.hpp"
 #include "dogen/yarn/types/meta_model/primitive_fwd.hpp"
 #include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
+#include "dogen/yarn/types/meta_model/object_template_fwd.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -54,16 +54,6 @@ public:
     virtual void visit(const dogen::yarn::meta_model::builtin&) { }
     virtual void visit(dogen::yarn::meta_model::builtin&) const { }
     virtual void visit(dogen::yarn::meta_model::builtin&) { }
-    /**@}*/
-
-    /**
-     * @brief Accept visits for type dogen::yarn::meta_model::concept
-     */
-    /**@{*/
-    virtual void visit(const dogen::yarn::meta_model::concept&) const { }
-    virtual void visit(const dogen::yarn::meta_model::concept&) { }
-    virtual void visit(dogen::yarn::meta_model::concept&) const { }
-    virtual void visit(dogen::yarn::meta_model::concept&) { }
     /**@}*/
 
     /**
@@ -104,6 +94,16 @@ public:
     virtual void visit(const dogen::yarn::meta_model::object&) { }
     virtual void visit(dogen::yarn::meta_model::object&) const { }
     virtual void visit(dogen::yarn::meta_model::object&) { }
+    /**@}*/
+
+    /**
+     * @brief Accept visits for type dogen::yarn::meta_model::object_template
+     */
+    /**@{*/
+    virtual void visit(const dogen::yarn::meta_model::object_template&) const { }
+    virtual void visit(const dogen::yarn::meta_model::object_template&) { }
+    virtual void visit(dogen::yarn::meta_model::object_template&) const { }
+    virtual void visit(dogen::yarn::meta_model::object_template&) { }
     /**@}*/
 
     /**

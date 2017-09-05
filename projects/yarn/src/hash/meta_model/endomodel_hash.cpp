@@ -22,7 +22,6 @@
 #include "dogen/yarn/hash/meta_model/module_hash.hpp"
 #include "dogen/yarn/hash/meta_model/object_hash.hpp"
 #include "dogen/yarn/hash/meta_model/builtin_hash.hpp"
-#include "dogen/yarn/hash/meta_model/concept_hash.hpp"
 #include "dogen/yarn/hash/meta_model/element_hash.hpp"
 #include "dogen/yarn/hash/meta_model/visitor_hash.hpp"
 #include "dogen/yarn/hash/meta_model/endomodel_hash.hpp"
@@ -31,6 +30,7 @@
 #include "dogen/yarn/hash/meta_model/primitive_hash.hpp"
 #include "dogen/yarn/hash/meta_model/enumeration_hash.hpp"
 #include "dogen/yarn/hash/meta_model/origin_types_hash.hpp"
+#include "dogen/yarn/hash/meta_model/object_template_hash.hpp"
 #include "dogen/yarn/hash/meta_model/facet_properties_hash.hpp"
 #include "dogen/yarn/hash/meta_model/orm_model_properties_hash.hpp"
 
@@ -74,17 +74,17 @@ inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn
     return seed;
 }
 
-inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_concept(const boost::shared_ptr<dogen::yarn::meta_model::concept>& v) {
+inline std::size_t hash_boost_shared_ptr_dogen_yarn_meta_model_object_template(const boost::shared_ptr<dogen::yarn::meta_model::object_template>& v) {
     std::size_t seed(0);
     combine(seed, *v);
     return seed;
 }
 
-inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_concept(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
+inline std::size_t hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object_template(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
-        combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_concept(i.second));
+        combine(seed, hash_boost_shared_ptr_dogen_yarn_meta_model_object_template(i.second));
     }
     return seed;
 }
@@ -235,7 +235,7 @@ std::size_t endomodel_hasher::hash(const endomodel& v) {
     combine(seed, hash_std_unordered_map_dogen_yarn_meta_model_name_dogen_yarn_meta_model_origin_types(v.references()));
     combine(seed, hash_std_unordered_set_dogen_yarn_meta_model_name(v.leaves()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_module(v.modules()));
-    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_concept(v.concepts()));
+    combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_object_template(v.object_templates()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_builtin(v.builtins()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_enumeration(v.enumerations()));
     combine(seed, hash_std_unordered_map_std_string_boost_shared_ptr_dogen_yarn_meta_model_primitive(v.primitives()));

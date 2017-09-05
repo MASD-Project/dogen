@@ -21,11 +21,11 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/transforms/generability_transform.hpp"
 
 namespace dogen {
@@ -69,7 +69,7 @@ has_generatable_types(const meta_model::endomodel& im) {
             return true;
     }
 
-    for (const auto pair : im.concepts()) {
+    for (const auto pair : im.object_templates()) {
         if (is_generatable(*pair.second))
             return true;
     }

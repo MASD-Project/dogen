@@ -29,12 +29,12 @@
 #include "dogen/annotations/types/scribble_group.hpp"
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
@@ -105,7 +105,7 @@ hydrator::hydrator() {
     meta_name_enumeration_ = f.make_enumeration_name();
     meta_name_primitive_ = f.make_primitive_name();
     meta_name_exception_ = f.make_exception_name();
-    meta_name_concept_ = f.make_concept_name();
+    meta_name_object_template_ = f.make_object_template_name();
 }
 
 std::list<std::pair<std::string, std::string>>
@@ -399,26 +399,27 @@ hydrator::read_exception(const boost::property_tree::ptree& pt) const {
     return std::make_pair(sg, e);
 }
 
-std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::concept>>
-hydrator::read_concept(const boost::property_tree::ptree& pt) const {
+std::pair<annotations::scribble_group,
+          boost::shared_ptr<meta_model::object_template>>
+hydrator::read_object_template(const boost::property_tree::ptree& pt) const {
 
-    auto c(boost::make_shared<meta_model::concept>());
-    populate_element(pt, *c);
+    auto ot(boost::make_shared<meta_model::object_template>());
+    populate_element(pt, *ot);
 
     const auto st(annotations::scope_types::entity);
     auto sg(read_scribble_group(pt, st));
 
     auto i(pt.find(attributes_key));
     if (i != pt.not_found())
-        c->local_attributes(read_attributes(i->second, sg));
+        ot->local_attributes(read_attributes(i->second, sg));
 
     i = pt.find(refines_key);
     if (i != pt.not_found()) {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
-            c->refines().push_back(read_name(j->second));
+            ot->parents().push_back(read_name(j->second));
     }
 
-    return std::make_pair(sg, c);
+    return std::make_pair(sg, ot);
 }
 
 void hydrator::read_element(const boost::property_tree::ptree& pt,
@@ -444,8 +445,8 @@ void hydrator::read_element(const boost::property_tree::ptree& pt,
         em.primitives().push_back(read_primitive(pt));
     else if (id == meta_name_exception_.id())
         em.exceptions().push_back(read_exception(pt));
-    else if (id == meta_name_concept_.id())
-        em.concepts().push_back(read_concept(pt));
+    else if (id == meta_name_object_template_.id())
+        em.object_templates().push_back(read_object_template(pt));
     else {
         BOOST_LOG_SEV(lg, debug) << meta_name_object_.id();
         BOOST_LOG_SEV(lg, error) << invalid_meta_name << id;

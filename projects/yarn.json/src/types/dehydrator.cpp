@@ -29,7 +29,7 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn.json/types/dehydrator.hpp"
 
 namespace {
@@ -59,7 +59,7 @@ std::string dehydrator::tidy_up_string(std::string s) {
 bool dehydrator::has_elements(const meta_model::exomodel& em) {
     return
         !em.modules().empty() ||
-        !em.concepts().empty() ||
+        !em.object_templates().empty() ||
         !em.enumerations().empty() ||
         !em.primitives().empty() ||
         !em.objects().empty() ||
@@ -264,33 +264,33 @@ void dehydrator::dehydrate_objects(const bool requires_leading_comma,
     }
 }
 
-void dehydrator::dehydrate_concepts(const bool requires_leading_comma,
+void dehydrator::dehydrate_object_templates(const bool requires_leading_comma,
     const meta_model::exomodel& em, std::ostream& s) {
 
     using boost::algorithm::join;
     formatters::utility_formatter uf(s);
     bool output_comma(requires_leading_comma);
 
-    for (const auto& pair : em.concepts()) {
+    for (const auto& pair : em.object_templates()) {
         if (output_comma)
             s << comma_space;
 
         const auto& sg(pair.first);
-        const auto& c(*pair.second);
+        const auto& ot(*pair.second);
 
         s << " { ";
-        dehydrate_element(sg, c, s);
+        dehydrate_element(sg, ot, s);
 
-        if (!c.refines().empty()) {
+        if (!ot.parents().empty()) {
             s << comma_space;
-            uf.insert_quoted("refines");
+            uf.insert_quoted("parents");
             s << " : ";
-            dehydrate_names(c.refines(), s);
+            dehydrate_names(ot.parents(), s);
         }
 
-        if (!c.local_attributes().empty()) {
+        if (!ot.local_attributes().empty()) {
             s << comma_space;
-            dehydrate_attributes(sg, c.local_attributes(), s);
+            dehydrate_attributes(sg, ot.local_attributes(), s);
         }
         s << " }";
         output_comma = true;
@@ -445,8 +445,8 @@ std::string dehydrator::dehydrate(const meta_model::exomodel& em) {
         dehydrate_objects(requires_leading_comma, em, s);
         requires_leading_comma |= !em.objects().empty();
 
-        dehydrate_concepts(requires_leading_comma, em, s);
-        requires_leading_comma |= !em.concepts().empty();
+        dehydrate_object_templates(requires_leading_comma, em, s);
+        requires_leading_comma |= !em.object_templates().empty();
 
         dehydrate_modules(requires_leading_comma, em, s);
         requires_leading_comma |= em.modules().size() > 1/*root module*/;

@@ -22,9 +22,9 @@
 #include <boost/io/ios_state.hpp>
 #include "dogen/yarn/io/meta_model/name_io.hpp"
 #include "dogen/yarn/io/meta_model/element_io.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/io/meta_model/attribute_io.hpp"
 #include "dogen/yarn/types/meta_model/element_visitor.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 
 namespace std {
 
@@ -76,12 +76,12 @@ namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-concept::concept()
+object_template::object_template()
     : is_immutable_(static_cast<bool>(0)),
       is_fluent_(static_cast<bool>(0)),
       is_child_(static_cast<bool>(0)) { }
 
-concept::concept(
+object_template::object_template(
     const dogen::yarn::meta_model::name& name,
     const std::string& documentation,
     const dogen::annotations::annotation& annotation,
@@ -97,7 +97,7 @@ concept::concept(
     const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& inherited_attributes,
     const bool is_immutable,
     const bool is_fluent,
-    const std::list<dogen::yarn::meta_model::name>& refines,
+    const std::list<dogen::yarn::meta_model::name>& parents,
     const bool is_child)
     : dogen::yarn::meta_model::element(
       name,
@@ -115,26 +115,26 @@ concept::concept(
       inherited_attributes_(inherited_attributes),
       is_immutable_(is_immutable),
       is_fluent_(is_fluent),
-      refines_(refines),
+      parents_(parents),
       is_child_(is_child) { }
 
-void concept::accept(const element_visitor& v) const {
+void object_template::accept(const element_visitor& v) const {
     v.visit(*this);
 }
 
-void concept::accept(element_visitor& v) const {
+void object_template::accept(element_visitor& v) const {
     v.visit(*this);
     }
 
-void concept::accept(const element_visitor& v) {
+void object_template::accept(const element_visitor& v) {
     v.visit(*this);
 }
 
-void concept::accept(element_visitor& v) {
+void object_template::accept(element_visitor& v) {
     v.visit(*this);
 }
 
-void concept::to_stream(std::ostream& s) const {
+void object_template::to_stream(std::ostream& s) const {
     boost::io::ios_flags_saver ifs(s);
     s.setf(std::ios_base::boolalpha);
     s.setf(std::ios::fixed, std::ios::floatfield);
@@ -142,7 +142,7 @@ void concept::to_stream(std::ostream& s) const {
     s.setf(std::ios::showpoint);
 
     s << " { "
-      << "\"__type__\": " << "\"dogen::yarn::meta_model::concept\"" << ", "
+      << "\"__type__\": " << "\"dogen::yarn::meta_model::object_template\"" << ", "
       << "\"__parent_0__\": ";
     dogen::yarn::meta_model::element::to_stream(s);
     s << ", "
@@ -151,12 +151,12 @@ void concept::to_stream(std::ostream& s) const {
       << "\"inherited_attributes\": " << inherited_attributes_ << ", "
       << "\"is_immutable\": " << is_immutable_ << ", "
       << "\"is_fluent\": " << is_fluent_ << ", "
-      << "\"refines\": " << refines_ << ", "
+      << "\"parents\": " << parents_ << ", "
       << "\"is_child\": " << is_child_
       << " }";
 }
 
-void concept::swap(concept& other) noexcept {
+void object_template::swap(object_template& other) noexcept {
     dogen::yarn::meta_model::element::swap(other);
 
     using std::swap;
@@ -165,118 +165,118 @@ void concept::swap(concept& other) noexcept {
     swap(inherited_attributes_, other.inherited_attributes_);
     swap(is_immutable_, other.is_immutable_);
     swap(is_fluent_, other.is_fluent_);
-    swap(refines_, other.refines_);
+    swap(parents_, other.parents_);
     swap(is_child_, other.is_child_);
 }
 
-bool concept::equals(const dogen::yarn::meta_model::element& other) const {
-    const concept* const p(dynamic_cast<const concept* const>(&other));
+bool object_template::equals(const dogen::yarn::meta_model::element& other) const {
+    const object_template* const p(dynamic_cast<const object_template* const>(&other));
     if (!p) return false;
     return *this == *p;
 }
 
-bool concept::operator==(const concept& rhs) const {
+bool object_template::operator==(const object_template& rhs) const {
     return dogen::yarn::meta_model::element::compare(rhs) &&
         all_attributes_ == rhs.all_attributes_ &&
         local_attributes_ == rhs.local_attributes_ &&
         inherited_attributes_ == rhs.inherited_attributes_ &&
         is_immutable_ == rhs.is_immutable_ &&
         is_fluent_ == rhs.is_fluent_ &&
-        refines_ == rhs.refines_ &&
+        parents_ == rhs.parents_ &&
         is_child_ == rhs.is_child_;
 }
 
-concept& concept::operator=(concept other) {
+object_template& object_template::operator=(object_template other) {
     using std::swap;
     swap(*this, other);
     return *this;
 }
 
-const std::list<dogen::yarn::meta_model::attribute>& concept::all_attributes() const {
+const std::list<dogen::yarn::meta_model::attribute>& object_template::all_attributes() const {
     return all_attributes_;
 }
 
-std::list<dogen::yarn::meta_model::attribute>& concept::all_attributes() {
+std::list<dogen::yarn::meta_model::attribute>& object_template::all_attributes() {
     return all_attributes_;
 }
 
-void concept::all_attributes(const std::list<dogen::yarn::meta_model::attribute>& v) {
+void object_template::all_attributes(const std::list<dogen::yarn::meta_model::attribute>& v) {
     all_attributes_ = v;
 }
 
-void concept::all_attributes(const std::list<dogen::yarn::meta_model::attribute>&& v) {
+void object_template::all_attributes(const std::list<dogen::yarn::meta_model::attribute>&& v) {
     all_attributes_ = std::move(v);
 }
 
-const std::list<dogen::yarn::meta_model::attribute>& concept::local_attributes() const {
+const std::list<dogen::yarn::meta_model::attribute>& object_template::local_attributes() const {
     return local_attributes_;
 }
 
-std::list<dogen::yarn::meta_model::attribute>& concept::local_attributes() {
+std::list<dogen::yarn::meta_model::attribute>& object_template::local_attributes() {
     return local_attributes_;
 }
 
-void concept::local_attributes(const std::list<dogen::yarn::meta_model::attribute>& v) {
+void object_template::local_attributes(const std::list<dogen::yarn::meta_model::attribute>& v) {
     local_attributes_ = v;
 }
 
-void concept::local_attributes(const std::list<dogen::yarn::meta_model::attribute>&& v) {
+void object_template::local_attributes(const std::list<dogen::yarn::meta_model::attribute>&& v) {
     local_attributes_ = std::move(v);
 }
 
-const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& concept::inherited_attributes() const {
+const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& object_template::inherited_attributes() const {
     return inherited_attributes_;
 }
 
-std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& concept::inherited_attributes() {
+std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& object_template::inherited_attributes() {
     return inherited_attributes_;
 }
 
-void concept::inherited_attributes(const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& v) {
+void object_template::inherited_attributes(const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& v) {
     inherited_attributes_ = v;
 }
 
-void concept::inherited_attributes(const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >&& v) {
+void object_template::inherited_attributes(const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >&& v) {
     inherited_attributes_ = std::move(v);
 }
 
-bool concept::is_immutable() const {
+bool object_template::is_immutable() const {
     return is_immutable_;
 }
 
-void concept::is_immutable(const bool v) {
+void object_template::is_immutable(const bool v) {
     is_immutable_ = v;
 }
 
-bool concept::is_fluent() const {
+bool object_template::is_fluent() const {
     return is_fluent_;
 }
 
-void concept::is_fluent(const bool v) {
+void object_template::is_fluent(const bool v) {
     is_fluent_ = v;
 }
 
-const std::list<dogen::yarn::meta_model::name>& concept::refines() const {
-    return refines_;
+const std::list<dogen::yarn::meta_model::name>& object_template::parents() const {
+    return parents_;
 }
 
-std::list<dogen::yarn::meta_model::name>& concept::refines() {
-    return refines_;
+std::list<dogen::yarn::meta_model::name>& object_template::parents() {
+    return parents_;
 }
 
-void concept::refines(const std::list<dogen::yarn::meta_model::name>& v) {
-    refines_ = v;
+void object_template::parents(const std::list<dogen::yarn::meta_model::name>& v) {
+    parents_ = v;
 }
 
-void concept::refines(const std::list<dogen::yarn::meta_model::name>&& v) {
-    refines_ = std::move(v);
+void object_template::parents(const std::list<dogen::yarn::meta_model::name>&& v) {
+    parents_ = std::move(v);
 }
 
-bool concept::is_child() const {
+bool object_template::is_child() const {
     return is_child_;
 }
 
-void concept::is_child(const bool v) {
+void object_template::is_child(const bool v) {
     is_child_ = v;
 }
 

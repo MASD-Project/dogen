@@ -245,12 +245,13 @@ adapter::to_module(const processed_object& po) const {
     return r;
 }
 
-std::pair<annotations::scribble_group, boost::shared_ptr<meta_model::concept>>
-adapter::to_concept(const processed_object& po) const {
+std::pair<annotations::scribble_group,
+          boost::shared_ptr<meta_model::object_template>>
+adapter::to_object_template(const processed_object& po) const {
     BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
                              << po.id();
 
-    auto c(boost::make_shared<meta_model::concept>());
+    auto c(boost::make_shared<meta_model::object_template>());
     populate_element(po, *c);
 
     for (const auto& attr : po.attributes())
@@ -262,7 +263,7 @@ adapter::to_concept(const processed_object& po) const {
                                  << c->name().id();
     else {
         c->is_child(true);
-        c->refines(i->second);
+        c->parents(i->second);
     }
 
     const auto sg(to_scribble_group(po, false/*is_root_module*/));

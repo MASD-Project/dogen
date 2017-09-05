@@ -54,9 +54,9 @@ public:
         m.meta_name(n);
     }
 
-    void operator()(meta_model::concept& c) {
-        static const auto n(meta_name_factory::make_concept_name());
-        c.meta_name(n);
+    void operator()(meta_model::object_template& ot) {
+        static const auto n(meta_name_factory::make_object_template_name());
+        ot.meta_name(n);
     }
 
     void operator()(meta_model::builtin& b) {
@@ -100,7 +100,7 @@ void meta_naming_transform::transform(meta_model::exomodel& em) {
     for (const auto& pair : em.modules())
         u(*pair.second);
 
-    for (const auto& pair : em.concepts())
+    for (const auto& pair : em.object_templates())
         u(*pair.second);
 
     for (const auto& pair : em.builtins())

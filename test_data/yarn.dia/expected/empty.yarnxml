@@ -54,10 +54,10 @@
 		<count>0</count>
 		<item_version>0</item_version>
 	</modules>
-	<concepts class_id="19" tracking_level="0" version="0">
+	<object_templates class_id="19" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
-	</concepts>
+	</object_templates>
 	<builtins class_id="20" tracking_level="0" version="0">
 		<count>0</count>
 		<item_version>0</item_version>
@@ -98,7 +98,7 @@
 			</children>
 		</first>
 		<second class_id="31" tracking_level="0" version="1">
-			<px class_id="9" tracking_level="1" version="0" object_id="_0">
+			<px class_id="8" tracking_level="1" version="0" object_id="_0">
 				<element class_id="32" tracking_level="0" version="0">
 					<name>
 						<id></id>

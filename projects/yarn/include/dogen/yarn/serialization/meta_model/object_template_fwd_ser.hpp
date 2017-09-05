@@ -18,23 +18,23 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_CONCEPT_FWD_SER_HPP
-#define DOGEN_YARN_SERIALIZATION_META_MODEL_CONCEPT_FWD_SER_HPP
+#ifndef DOGEN_YARN_SERIALIZATION_META_MODEL_OBJECT_TEMPLATE_FWD_SER_HPP
+#define DOGEN_YARN_SERIALIZATION_META_MODEL_OBJECT_TEMPLATE_FWD_SER_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/concept_fwd.hpp"
+#include "dogen/yarn/types/meta_model/object_template_fwd.hpp"
 
 namespace boost {
 namespace serialization {
 
 template<class Archive>
-void save(Archive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
+void save(Archive& ar, const dogen::yarn::meta_model::object_template& v, unsigned int version);
 
 template<class Archive>
-void load(Archive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
+void load(Archive& ar, dogen::yarn::meta_model::object_template& v, unsigned int version);
 
 } }
 

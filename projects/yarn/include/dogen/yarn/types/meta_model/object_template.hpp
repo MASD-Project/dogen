@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_META_MODEL_CONCEPT_HPP
-#define DOGEN_YARN_TYPES_META_MODEL_CONCEPT_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_OBJECT_TEMPLATE_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_OBJECT_TEMPLATE_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -33,37 +33,27 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/hash/meta_model/name_hash.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
-#include "dogen/yarn/serialization/meta_model/concept_fwd_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_template_fwd_ser.hpp"
 
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
 /**
- * @brief Represents a concept in the generic programming sense.
- *
- * In generic programming, a concept is a description of supported operations on
- * a type, including syntax and semantics. In this way, concepts are related to
- * abstract base classes but concepts do not require a subtype relationship.
- *
- * A concept is used for two reasons in terms of modeling:
- *
- * @li to model the set of requirements a generic method has on a type;
- * @li to model commonalities between types that are not expressed using
- * generalisation relationships.
+ * @brief Represents a structural template for yarn objects.
  */
-class concept final : public dogen::yarn::meta_model::element {
+class object_template final : public dogen::yarn::meta_model::element {
 public:
-    concept(const concept&) = default;
-    concept(concept&&) = default;
+    object_template(const object_template&) = default;
+    object_template(object_template&&) = default;
 
 public:
-    concept();
+    object_template();
 
-    virtual ~concept() noexcept { }
+    virtual ~object_template() noexcept { }
 
 public:
-    concept(
+    object_template(
         const dogen::yarn::meta_model::name& name,
         const std::string& documentation,
         const dogen::annotations::annotation& annotation,
@@ -79,15 +69,15 @@ public:
         const std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> >& inherited_attributes,
         const bool is_immutable,
         const bool is_fluent,
-        const std::list<dogen::yarn::meta_model::name>& refines,
+        const std::list<dogen::yarn::meta_model::name>& parents,
         const bool is_child);
 
 private:
     template<typename Archive>
-    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::concept& v, unsigned int version);
+    friend void boost::serialization::save(Archive& ar, const dogen::yarn::meta_model::object_template& v, unsigned int version);
 
     template<typename Archive>
-    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::concept& v, unsigned int version);
+    friend void boost::serialization::load(Archive& ar, dogen::yarn::meta_model::object_template& v, unsigned int version);
 
 public:
     using element::accept;
@@ -159,23 +149,17 @@ public:
     /**@}*/
 
     /**
-     * @brief List of concepts that this concept is a refinement of.
-     *
-     * A concept B is said to refine a concept A if B has all of the same type
-     * requirements as A and possibly more. It is the generalisation relationship
-     * applied to concepts.
+     * @brief List of object templates that this object template inherits from, if any.
      */
     /**@{*/
-    const std::list<dogen::yarn::meta_model::name>& refines() const;
-    std::list<dogen::yarn::meta_model::name>& refines();
-    void refines(const std::list<dogen::yarn::meta_model::name>& v);
-    void refines(const std::list<dogen::yarn::meta_model::name>&& v);
+    const std::list<dogen::yarn::meta_model::name>& parents() const;
+    std::list<dogen::yarn::meta_model::name>& parents();
+    void parents(const std::list<dogen::yarn::meta_model::name>& v);
+    void parents(const std::list<dogen::yarn::meta_model::name>&& v);
     /**@}*/
 
     /**
-     * @brief If true, the concept has at least one parent.
-     *
-     * Children are concepts that refine at least one other concept.
+     * @brief If true, the object template has at least one parent.
      */
     /**@{*/
     bool is_child() const;
@@ -183,8 +167,8 @@ public:
     /**@}*/
 
 public:
-    bool operator==(const concept& rhs) const;
-    bool operator!=(const concept& rhs) const {
+    bool operator==(const object_template& rhs) const;
+    bool operator!=(const object_template& rhs) const {
         return !this->operator==(rhs);
     }
 
@@ -192,8 +176,8 @@ public:
     bool equals(const dogen::yarn::meta_model::element& other) const override;
 
 public:
-    void swap(concept& other) noexcept;
-    concept& operator=(concept other);
+    void swap(object_template& other) noexcept;
+    object_template& operator=(object_template other);
 
 private:
     std::list<dogen::yarn::meta_model::attribute> all_attributes_;
@@ -201,7 +185,7 @@ private:
     std::unordered_map<dogen::yarn::meta_model::name, std::list<dogen::yarn::meta_model::attribute> > inherited_attributes_;
     bool is_immutable_;
     bool is_fluent_;
-    std::list<dogen::yarn::meta_model::name> refines_;
+    std::list<dogen::yarn::meta_model::name> parents_;
     bool is_child_;
 };
 
@@ -211,8 +195,8 @@ namespace std {
 
 template<>
 inline void swap(
-    dogen::yarn::meta_model::concept& lhs,
-    dogen::yarn::meta_model::concept& rhs) {
+    dogen::yarn::meta_model::object_template& lhs,
+    dogen::yarn::meta_model::object_template& rhs) {
     lhs.swap(rhs);
 }
 

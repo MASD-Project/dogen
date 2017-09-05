@@ -75,7 +75,7 @@ private:
     static void process(const meta_model::location& l,
         meta_model::element& e);
     static void process(const meta_model::location& l,
-        meta_model::concept& c);
+        meta_model::object_template& ot);
     static void process(const meta_model::location& l,
         meta_model::object& o);
 

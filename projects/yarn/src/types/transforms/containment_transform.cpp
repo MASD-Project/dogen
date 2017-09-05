@@ -23,12 +23,12 @@
 #include "dogen/utility/log/logger.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
@@ -86,7 +86,7 @@ inject_global_module(meta_model::endomodel& im) {
     im.modules().insert(std::make_pair(gmn.id(), gm));
 
     add_containing_module_to_non_contained_entities(gmn, im.modules());
-    add_containing_module_to_non_contained_entities(gmn, im.concepts());
+    add_containing_module_to_non_contained_entities(gmn, im.object_templates());
     add_containing_module_to_non_contained_entities(gmn, im.builtins());
     add_containing_module_to_non_contained_entities(gmn, im.enumerations());
     add_containing_module_to_non_contained_entities(gmn, im.objects());

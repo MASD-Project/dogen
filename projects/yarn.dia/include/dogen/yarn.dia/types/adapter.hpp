@@ -34,10 +34,10 @@
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_object.hpp"
 #include "dogen/yarn.dia/types/processed_attribute.hpp"
@@ -181,14 +181,14 @@ public:
     to_module(const processed_object& po) const;
 
     /**
-     * @brief Converts a dia object with a stereotype of concept
-     * into a yarn concept.
+     * @brief Converts a dia object with a stereotype of object
+     * template into a yarn object template.
      *
      * @param po Dia object which contains a concept.
      */
     std::pair<annotations::scribble_group,
-              boost::shared_ptr<meta_model::concept>>
-    to_concept(const processed_object& o) const;
+              boost::shared_ptr<meta_model::object_template>>
+    to_object_template(const processed_object& o) const;
 
 private:
     const context& context_;

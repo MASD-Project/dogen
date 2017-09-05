@@ -21,11 +21,11 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 
 namespace boost {
 
@@ -38,8 +38,8 @@ const boost::shared_ptr<dogen::yarn::meta_model::module>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::concept>& lhs,
-const boost::shared_ptr<dogen::yarn::meta_model::concept>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::object_template>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::object_template>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -98,7 +98,7 @@ exomodel::exomodel(
     const dogen::yarn::meta_model::name& name,
     const dogen::yarn::meta_model::name& meta_name,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::module> > >& modules,
-    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& concepts,
+    const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& object_templates,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& builtins,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > >& enumerations,
     const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::primitive> > >& primitives,
@@ -108,7 +108,7 @@ exomodel::exomodel(
     : name_(name),
       meta_name_(meta_name),
       modules_(modules),
-      concepts_(concepts),
+      object_templates_(object_templates),
       builtins_(builtins),
       enumerations_(enumerations),
       primitives_(primitives),
@@ -121,7 +121,7 @@ void exomodel::swap(exomodel& other) noexcept {
     swap(name_, other.name_);
     swap(meta_name_, other.meta_name_);
     swap(modules_, other.modules_);
-    swap(concepts_, other.concepts_);
+    swap(object_templates_, other.object_templates_);
     swap(builtins_, other.builtins_);
     swap(enumerations_, other.enumerations_);
     swap(primitives_, other.primitives_);
@@ -134,7 +134,7 @@ bool exomodel::operator==(const exomodel& rhs) const {
     return name_ == rhs.name_ &&
         meta_name_ == rhs.meta_name_ &&
         modules_ == rhs.modules_ &&
-        concepts_ == rhs.concepts_ &&
+        object_templates_ == rhs.object_templates_ &&
         builtins_ == rhs.builtins_ &&
         enumerations_ == rhs.enumerations_ &&
         primitives_ == rhs.primitives_ &&
@@ -197,20 +197,20 @@ void exomodel::modules(const std::list<std::pair<dogen::annotations::scribble_gr
     modules_ = std::move(v);
 }
 
-const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& exomodel::concepts() const {
-    return concepts_;
+const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& exomodel::object_templates() const {
+    return object_templates_;
 }
 
-std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& exomodel::concepts() {
-    return concepts_;
+std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& exomodel::object_templates() {
+    return object_templates_;
 }
 
-void exomodel::concepts(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >& v) {
-    concepts_ = v;
+void exomodel::object_templates(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >& v) {
+    object_templates_ = v;
 }
 
-void exomodel::concepts(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::concept> > >&& v) {
-    concepts_ = std::move(v);
+void exomodel::object_templates(const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::object_template> > >&& v) {
+    object_templates_ = std::move(v);
 }
 
 const std::list<std::pair<dogen::annotations::scribble_group, boost::shared_ptr<dogen::yarn::meta_model::builtin> > >& exomodel::builtins() const {

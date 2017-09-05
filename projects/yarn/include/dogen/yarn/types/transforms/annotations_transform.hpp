@@ -32,12 +32,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/transforms/context_fwd.hpp"
 #include "dogen/yarn/types/meta_model/exomodel.hpp"
 
@@ -59,7 +59,7 @@ private:
     static void process(const annotations::annotation_group& ag,
         meta_model::element& e);
     static void process(const annotations::annotation_group& sg,
-        meta_model::concept& c);
+        meta_model::object_template& ot);
     static void process(const annotations::annotation_group& sg,
         meta_model::object& o);
     static void process(const annotations::annotation_group& sg,

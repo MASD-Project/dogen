@@ -29,13 +29,13 @@
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/helpers/decomposition_result.hpp"
@@ -72,7 +72,7 @@ public:
      */
     void operator()(const meta_model::element& e);
     void operator()(const meta_model::module& m);
-    void operator()(const meta_model::concept& c);
+    void operator()(const meta_model::object_template& ot);
     void operator()(const meta_model::builtin& b);
     void operator()(const meta_model::enumeration& e);
     void operator()(const meta_model::primitive& p);

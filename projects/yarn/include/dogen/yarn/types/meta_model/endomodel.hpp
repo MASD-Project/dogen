@@ -38,7 +38,6 @@
 #include "dogen/yarn/types/meta_model/module_fwd.hpp"
 #include "dogen/yarn/types/meta_model/object_fwd.hpp"
 #include "dogen/yarn/types/meta_model/builtin_fwd.hpp"
-#include "dogen/yarn/types/meta_model/concept_fwd.hpp"
 #include "dogen/yarn/types/meta_model/element_fwd.hpp"
 #include "dogen/yarn/types/meta_model/visitor_fwd.hpp"
 #include "dogen/yarn/types/meta_model/origin_types.hpp"
@@ -46,6 +45,7 @@
 #include "dogen/yarn/types/meta_model/primitive_fwd.hpp"
 #include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
+#include "dogen/yarn/types/meta_model/object_template_fwd.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
 #include "dogen/yarn/serialization/meta_model/endomodel_fwd_ser.hpp"
 
@@ -75,7 +75,7 @@ public:
         const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
         const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules,
-        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts,
+        const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& object_templates,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations,
         const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives,
@@ -127,7 +127,8 @@ public:
     /**@}*/
 
     /**
-     * @brief All other intermediate models that this intermediate model depends on, mapped to their origin.
+     * @brief All other intermediate models that this endomodel depends on, mapped to their
+     * origin.
      */
     /**@{*/
     const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references() const;
@@ -137,7 +138,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All leaf types in this intermediate model.
+     * @brief All leaf types in this endomodel.
      *
      * Leaves are types concrete types which have a parent.
      */
@@ -149,7 +150,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Modules contained in the intermediate model.
+     * @brief Modules contained in the endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules() const;
@@ -159,17 +160,17 @@ public:
     /**@}*/
 
     /**
-     * @brief All the concepts available in this intermediate model.
+     * @brief All the object templates available in this endomodel.
      */
     /**@{*/
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts() const;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts();
-    void concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v);
-    void concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >&& v);
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& object_templates() const;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& object_templates();
+    void object_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& v);
+    void object_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >&& v);
     /**@}*/
 
     /**
-     * @brief All built-ins contained in this intermediate model.
+     * @brief All built-ins contained in this endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins() const;
@@ -179,7 +180,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All enumerations contained in this intermediate model.
+     * @brief All enumerations contained in this endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations() const;
@@ -189,7 +190,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All primitives in this intermediate model.
+     * @brief All primitives in this endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives() const;
@@ -199,7 +200,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All objects contained in this intermediate model.
+     * @brief All objects contained in this endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object> >& objects() const;
@@ -209,7 +210,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All exceptions in this model.
+     * @brief All exceptions in this endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::exception> >& exceptions() const;
@@ -219,7 +220,7 @@ public:
     /**@}*/
 
     /**
-     * @brief All visitors in this model.
+     * @brief All visitors in this endomodel.
      */
     /**@{*/
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::visitor> >& visitors() const;
@@ -239,7 +240,7 @@ public:
     /**@}*/
 
     /**
-     * @brief If true the intermediate model has at least one generable type, false otherwise.
+     * @brief If true the endomodel has at least one generable type, false otherwise.
      */
     /**@{*/
     bool has_generatable_types() const;
@@ -252,7 +253,7 @@ public:
     void root_module(const boost::shared_ptr<dogen::yarn::meta_model::module>&& v);
 
     /**
-     * @brief Language in which this model was written.
+     * @brief Language in which this endomodel was written.
      */
     /**@{*/
     dogen::yarn::meta_model::languages input_language() const;
@@ -260,7 +261,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Languages in which to output this model.
+     * @brief Languages in which to output the final model.
      */
     /**@{*/
     const std::list<dogen::yarn::meta_model::languages>& output_languages() const;
@@ -296,7 +297,7 @@ private:
     std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types> references_;
     std::unordered_set<dogen::yarn::meta_model::name> leaves_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> > modules_;
-    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> > concepts_;
+    std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> > object_templates_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> > builtins_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> > enumerations_;
     std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> > primitives_;

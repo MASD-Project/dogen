@@ -58,7 +58,7 @@ public:
 
 public:
     void operator()(yarn::meta_model::element&) { }
-    void operator()(const yarn::meta_model::concept&) {}
+    void operator()(const yarn::meta_model::object_template&) {}
     void operator()(const yarn::meta_model::builtin&) {}
     void operator()(const yarn::meta_model::module&) {}
 

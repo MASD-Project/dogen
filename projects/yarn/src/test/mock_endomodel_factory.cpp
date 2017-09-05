@@ -28,7 +28,7 @@
 #include "dogen/utility/exception/utility_exception.hpp"
 #include "dogen/annotations/types/value_factory.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/helpers/name_builder.hpp"
@@ -340,7 +340,7 @@ void add_attribute(StatefulAndNameable& sn,
 }
 
 void model_concept(const bool attributes_indexed,
-    meta_model::object& o, const meta_model::concept& c) {
+    meta_model::object& o, const meta_model::object_template& c) {
 
     o.modeled_concepts().push_back(c.name());
     if (attributes_indexed) {
@@ -618,7 +618,7 @@ mock_endomodel_factory::make_object(unsigned int i,
     return make_object(i, mock_model_name(i), ot, module_n);
 }
 
-boost::shared_ptr<meta_model::concept>
+boost::shared_ptr<meta_model::object_template>
 mock_endomodel_factory::make_concept(const unsigned int i,
     const meta_model::name& model_name,
     const meta_model::origin_types ot) const {
@@ -626,7 +626,7 @@ mock_endomodel_factory::make_concept(const unsigned int i,
     helpers::name_factory nf;
     meta_model::name n(nf.build_element_in_model(model_name, concept_name(i)));
 
-    auto r(boost::make_shared<meta_model::concept>());
+    auto r(boost::make_shared<meta_model::object_template>());
     r->name(n);
     r->documentation(documentation);
     r->origin_type(ot);
@@ -806,7 +806,7 @@ make_single_concept_model(const meta_model::origin_types ot,
 
     auto c(make_concept(0, r.name(), ot));
     add_attribute(*c, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c);
+    insert_nameable(r.object_templates(), c);
 
     auto o(make_object(0, r.name(), ot));
     add_attribute(*o, flags_.attributes_indexed(), flags_.types_parsed(), 1);
@@ -827,12 +827,12 @@ make_first_degree_concepts_model(const meta_model::origin_types ot,
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto c1(make_concept(1, r.name(), ot));
     add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->refines().push_back(c0->name());
-    insert_nameable(r.concepts(), c1);
+    c1->parents().push_back(c0->name());
+    insert_nameable(r.object_templates(), c1);
 
     auto o0(make_object(0, r.name(), ot));
     model_concept(flags_.attributes_indexed(), *o0, *c0);
@@ -861,21 +861,21 @@ make_second_degree_concepts_model(const meta_model::origin_types ot,
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto c1(make_concept(1, r.name(), ot));
     add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->refines().push_back(c0->name());
-    insert_nameable(r.concepts(), c1);
+    c1->parents().push_back(c0->name());
+    insert_nameable(r.object_templates(), c1);
 
     auto c2(make_concept(2, r.name(), ot));
     add_attribute(*c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
 
     if (flags_.concepts_indexed())
-        c2->refines().push_back(c0->name());
+        c2->parents().push_back(c0->name());
 
-    c2->refines().push_back(c1->name());
-    insert_nameable(r.concepts(), c2);
+    c2->parents().push_back(c1->name());
+    insert_nameable(r.object_templates(), c2);
 
     auto o0(make_object(0, r.name(), ot));
     model_concept(flags_.attributes_indexed(), *o0, *c0);
@@ -910,17 +910,17 @@ make_multiple_inheritance_concepts_model(const meta_model::origin_types ot,
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto c1(make_concept(1, r.name(), ot));
     add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    insert_nameable(r.concepts(), c1);
+    insert_nameable(r.object_templates(), c1);
 
     auto c2(make_concept(1, r.name(), ot));
     add_attribute(*c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
-    c2->refines().push_back(c0->name());
-    c2->refines().push_back(c1->name());
-    insert_nameable(r.concepts(), c2);
+    c2->parents().push_back(c0->name());
+    c2->parents().push_back(c1->name());
+    insert_nameable(r.object_templates(), c2);
 
     auto o0(make_object(0, r.name(), ot));
     model_concept(flags_.attributes_indexed(), *o0, *c2);
@@ -938,26 +938,26 @@ make_diamond_inheritance_concepts_model(const meta_model::origin_types ot,
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto c1(make_concept(1, r.name(), ot));
     add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->refines().push_back(c0->name());
-    insert_nameable(r.concepts(), c1);
+    c1->parents().push_back(c0->name());
+    insert_nameable(r.object_templates(), c1);
 
     auto c2(make_concept(2, r.name(), ot));
     add_attribute(*c2, flags_.attributes_indexed(), flags_.types_parsed(), 2);
-    c2->refines().push_back(c0->name());
-    insert_nameable(r.concepts(), c2);
+    c2->parents().push_back(c0->name());
+    insert_nameable(r.object_templates(), c2);
 
     auto c3(make_concept(3, r.name(), ot));
     add_attribute(*c3, flags_.attributes_indexed(), flags_.types_parsed(), 3);
     if (flags_.concepts_indexed())
-        c3->refines().push_back(c0->name());
+        c3->parents().push_back(c0->name());
 
-    c3->refines().push_back(c1->name());
-    c3->refines().push_back(c2->name());
-    insert_nameable(r.concepts(), c3);
+    c3->parents().push_back(c1->name());
+    c3->parents().push_back(c2->name());
+    insert_nameable(r.object_templates(), c3);
 
     auto o0(make_object(0, r.name(), ot));
     if (flags_.concepts_indexed()) {
@@ -980,7 +980,7 @@ make_object_with_parent_that_models_concept(const meta_model::origin_types ot,
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto o0(make_object(0, r.name(), ot));
     model_concept(flags_.attributes_indexed(), *o0, *c0);
@@ -1006,12 +1006,12 @@ make_object_with_parent_that_models_a_refined_concept(
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto c1(make_concept(1, r.name(), ot));
     add_attribute(*c1, flags_.attributes_indexed(), flags_.types_parsed(), 1);
-    c1->refines().push_back(c0->name());
-    insert_nameable(r.concepts(), c1);
+    c1->parents().push_back(c0->name());
+    insert_nameable(r.object_templates(), c1);
 
     auto o0(make_object(0, r.name(), ot));
 
@@ -1035,8 +1035,8 @@ make_concept_that_refines_missing_concept(const meta_model::origin_types ot,
     auto r(make_empty_model(ot, n, add_model_module));
     auto c0(make_concept(0, r.name(), ot));
     auto c1(make_concept(1, r.name(), ot));
-    c1->refines().push_back(c0->name());
-    insert_nameable(r.concepts(), c1);
+    c1->parents().push_back(c0->name());
+    insert_nameable(r.object_templates(), c1);
     return r;
 }
 
@@ -1069,7 +1069,7 @@ make_object_that_models_concept_with_missing_parent(
 
     auto c0(make_concept(0, r.name(), ot));
     add_attribute(*c0, flags_.attributes_indexed(), flags_.types_parsed());
-    insert_nameable(r.concepts(), c0);
+    insert_nameable(r.object_templates(), c0);
 
     auto o0(make_object(0, r.name(), ot));
     auto o1(make_object(1, r.name(), ot));

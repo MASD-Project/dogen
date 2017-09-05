@@ -280,8 +280,8 @@ public:
     /**
      * @brief Create a concept.
      */
-    boost::shared_ptr<meta_model::concept> make_concept(const unsigned int i,
-        const meta_model::name& model_name,
+    boost::shared_ptr<meta_model::object_template> make_concept(
+        const unsigned int i, const meta_model::name& model_name,
         const meta_model::origin_types ot) const;
 
     /**

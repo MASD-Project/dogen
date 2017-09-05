@@ -27,9 +27,9 @@
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/quilt.cpp/types/fabric/master_header.hpp"
@@ -82,7 +82,7 @@ private:
 
 public:
     void operator()(yarn::meta_model::element&) { }
-    void operator()(const yarn::meta_model::concept&) {}
+    void operator()(const yarn::meta_model::object_template&) {}
     void operator()(const yarn::meta_model::builtin&) {}
     void operator()(const yarn::meta_model::visitor& v) { process_element(v); }
     void operator()(const yarn::meta_model::enumeration& e) {

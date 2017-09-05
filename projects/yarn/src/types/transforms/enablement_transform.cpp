@@ -35,12 +35,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
 #include "dogen/yarn/io/meta_model/facet_properties_io.hpp"
 #include "dogen/yarn/io/transforms/local_enablement_configuration_io.hpp"
@@ -463,8 +463,8 @@ void enablement_transform::compute_enablement_for_element(
     BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*
-     * Not all elements have formatters; for example, concepts don't
-     * have any at present. If so, skip the element.
+     * Not all elements have formatters; for example, object templates
+     * don't have any at present. If so, skip the element.
      */
     const auto i(ltgmt.find(mt));
     if (i == ltgmt.end()) {

@@ -23,12 +23,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/exomodel_to_endomodel_transform.hpp"
 
@@ -78,7 +78,7 @@ exomodel_to_endomodel_transform::transform(const meta_model::exomodel& em) {
     meta_model::endomodel r;
     r.name(em.name());
     r.modules(to_element_map(em.modules()));
-    r.concepts(to_element_map(em.concepts()));
+    r.object_templates(to_element_map(em.object_templates()));
     r.builtins(to_element_map(em.builtins()));
     r.enumerations(to_element_map(em.enumerations()));
     r.primitives(to_element_map(em.primitives()));

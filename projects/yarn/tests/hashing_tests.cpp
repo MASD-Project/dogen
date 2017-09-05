@@ -54,7 +54,7 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<enumeration_generator>();
     test_hashing<module_generator>();
     test_hashing<object_generator>();
-    test_hashing<concept_generator>();
+    test_hashing<object_template_generator>();
     test_hashing<endomodel_generator>();
 }
 

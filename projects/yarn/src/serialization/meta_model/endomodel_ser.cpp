@@ -37,7 +37,6 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/concept_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/endomodel_ser.hpp"
@@ -46,6 +45,7 @@
 #include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
 
@@ -62,7 +62,7 @@ void save(Archive& ar,
     ar << make_nvp("references", v.references_);
     ar << make_nvp("leaves", v.leaves_);
     ar << make_nvp("modules", v.modules_);
-    ar << make_nvp("concepts", v.concepts_);
+    ar << make_nvp("object_templates", v.object_templates_);
     ar << make_nvp("builtins", v.builtins_);
     ar << make_nvp("enumerations", v.enumerations_);
     ar << make_nvp("primitives", v.primitives_);
@@ -88,7 +88,7 @@ void load(Archive& ar,
     ar >> make_nvp("references", v.references_);
     ar >> make_nvp("leaves", v.leaves_);
     ar >> make_nvp("modules", v.modules_);
-    ar >> make_nvp("concepts", v.concepts_);
+    ar >> make_nvp("object_templates", v.object_templates_);
     ar >> make_nvp("builtins", v.builtins_);
     ar >> make_nvp("enumerations", v.enumerations_);
     ar >> make_nvp("primitives", v.primitives_);

@@ -26,8 +26,8 @@
 #include <boost/throw_exception.hpp>
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/utility/log/logger.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/types/transforms/concepts_transform.hpp"
@@ -40,7 +40,8 @@ auto lg(logger_factory("yarn.concepts_transform"));
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
 const std::string object_not_found("Object not found in model: ");
-const std::string concept_not_found("Concept not found in concept container: ");
+const std::string concept_not_found(
+    "Object template not found in object templates container: ");
 
 }
 
@@ -74,7 +75,7 @@ find_object(const meta_model::name& n, meta_model::endomodel& im) {
     return *i->second;
 }
 
-meta_model::concept&
+meta_model::object_template&
 concepts_transform::resolve_concept(const meta_model::name& owner,
     const meta_model::name& concept_name, meta_model::endomodel& im) {
     using helpers::resolver;
@@ -85,8 +86,8 @@ concepts_transform::resolve_concept(const meta_model::name& owner,
         BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
     }
 
-    auto i(im.concepts().find(oc->id()));
-    if (i == im.concepts().end()) {
+    auto i(im.object_templates().find(oc->id()));
+    if (i == im.object_templates().end()) {
         const auto id(oc->id());
         BOOST_LOG_SEV(lg, error) << concept_not_found << id;
         BOOST_THROW_EXCEPTION(transformation_error(concept_not_found + id));
@@ -135,28 +136,28 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
     /*
      * For each of the concepts that we model, perform an expansion
      * including their parents and so on. We can rely on the concepts'
-     * @e refines container for this.
+     * @e parents container for this.
      */
-    std::list<meta_model::name> expanded_refines;
+    std::list<meta_model::name> expanded_parents;
     for (auto& mc : o.modeled_concepts()) {
         auto& c(resolve_concept(o.name(), mc, im));
-        expanded_refines.push_back(c.name());
-        expanded_refines.insert(expanded_refines.end(),
-            c.refines().begin(), c.refines().end());
+        expanded_parents.push_back(c.name());
+        expanded_parents.insert(expanded_parents.end(),
+            c.parents().begin(), c.parents().end());
     }
 
     /*
      * Since the expanded list may include duplicates, we must first
      * remove those.
      */
-    remove_duplicates(expanded_refines);
+    remove_duplicates(expanded_parents);
 
     /*
      * First handle the simpler case of objects that do not have a
      * parent.
      */
     if (o.parents().empty()) {
-        o.modeled_concepts(expanded_refines);
+        o.modeled_concepts(expanded_parents);
         BOOST_LOG_SEV(lg, debug) << "Object has no parent, using reduced set.";
         return;
     }
@@ -168,7 +169,7 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
     BOOST_LOG_SEV(lg, debug) << "Object has a parent, computing set diff.";
 
     std::set<meta_model::name> our_concepts;
-    our_concepts.insert(expanded_refines.begin(), expanded_refines.end());
+    our_concepts.insert(expanded_parents.begin(), expanded_parents.end());
 
     std::set<meta_model::name> their_concepts;
     const auto& n(o.parents().front());
@@ -194,7 +195,7 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
      * directly to preserve order.
      */
     o.modeled_concepts().clear();
-    for (const auto& n : expanded_refines) {
+    for (const auto& n : expanded_parents) {
         if (result.find(n) != result.end())
             o.modeled_concepts().push_back(n);
     }
@@ -211,42 +212,43 @@ void concepts_transform::expand_objects(meta_model::endomodel& im) {
     }
 }
 
-void concepts_transform::expand_concept(meta_model::concept& c,
+void concepts_transform::expand_concept(meta_model::object_template& ot,
     meta_model::endomodel& im,
     std::unordered_set<meta_model::name>& processed_names) {
-    BOOST_LOG_SEV(lg, debug) << "Expand concept: " << c.name().id();
+    BOOST_LOG_SEV(lg, debug) << "Expand concept: " << ot.name().id();
 
-    if (processed_names.find(c.name()) != processed_names.end()) {
+    if (processed_names.find(ot.name()) != processed_names.end()) {
         BOOST_LOG_SEV(lg, debug) << "Concept already processed.";
         return;
     }
 
-    if (c.refines().empty()) {
-        BOOST_LOG_SEV(lg, debug) << "Concept refines no concepts.";
-        processed_names.insert(c.name());
+    if (ot.parents().empty()) {
+        BOOST_LOG_SEV(lg, debug) << "Concept parents no concepts.";
+        processed_names.insert(ot.name());
         return;
     }
 
-    std::list<meta_model::name> expanded_refines;
-    for (auto& n : c.refines()) {
-        auto& parent(resolve_concept(c.name(), n, im));
+    std::list<meta_model::name> expanded_parents;
+    for (auto& n : ot.parents()) {
+        auto& parent(resolve_concept(ot.name(), n, im));
         expand_concept(parent, im, processed_names);
-        expanded_refines.push_back(parent.name());
-        expanded_refines.insert(expanded_refines.end(),
-            parent.refines().begin(), parent.refines().end());
+        expanded_parents.push_back(parent.name());
+        expanded_parents.insert(expanded_parents.end(),
+            parent.parents().begin(), parent.parents().end());
     }
 
     BOOST_LOG_SEV(lg, debug) << "Computing reduced set for concept.";
-    remove_duplicates(expanded_refines);
-    c.refines(expanded_refines);
-    processed_names.insert(c.name());
+    remove_duplicates(expanded_parents);
+    ot.parents(expanded_parents);
+    processed_names.insert(ot.name());
 }
 
 void concepts_transform::expand_concepts(meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Indexing concepts: " << im.concepts().size();
+    BOOST_LOG_SEV(lg, debug) << "Expading concepts: "
+                             << im.object_templates().size();
 
     std::unordered_set<meta_model::name> processed_names;
-    for (auto& pair : im.concepts()) {
+    for (auto& pair : im.object_templates()) {
         auto& c(*pair.second);
         expand_concept(c, im, processed_names);
     }

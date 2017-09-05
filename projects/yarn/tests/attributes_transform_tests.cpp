@@ -25,7 +25,7 @@
 #include "dogen/utility/io/unordered_map_io.hpp"
 #include "dogen/utility/test/exception_checkers.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/io/meta_model/endomodel_io.hpp"
 #include "dogen/yarn/io/meta_model/object_io.hpp"
@@ -38,18 +38,18 @@ namespace {
 const std::string test_module("yarn");
 const std::string test_suite("attributes_transform_tests");
 
-const std::string concept_not_found("Concept not found");
+const std::string object_template_not_found("Object template not found");
 const std::string object_not_found("Object not found in model");
 
 using dogen::yarn::test::mock_endomodel_factory;
 
 /**
- * @brief We require the concepts to have been indexed or else we
- * won't work.
+ * @brief We require the object templates to have been indexed or else
+ * we won't work.
  */
 const mock_endomodel_factory::flags
 flags(false/*tagged*/, false/*resolved*/, false/*merged*/,
-    true/*concepts_indexed*/, false/*attributes_indexed*/,
+    true/*object_templates_indexed*/, false/*attributes_indexed*/,
     true/*types parsed*/);
 const mock_endomodel_factory factory(flags);
 
@@ -144,8 +144,8 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_results_in_expected_indices)
     BOOST_CHECK(o.inherited_attributes().empty());
 }
 
-BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
-    SETUP_TEST_LOG_SOURCE("model_with_single_concept_results_in_expected_indices");
+BOOST_AUTO_TEST_CASE(model_with_single_object_template_results_in_expected_indices) {
+    SETUP_TEST_LOG_SOURCE("model_with_single_object_template_results_in_expected_indices");
 
     auto m(factory.make_single_concept_model());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
@@ -153,11 +153,11 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_results_in_expected_indices) {
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_REQUIRE(m.concepts().size() == 1);
-    const auto& c(*(m.concepts().begin()->second));
-    BOOST_CHECK(c.local_attributes().size() == 1);
-    BOOST_CHECK(c.inherited_attributes().empty());
-    BOOST_CHECK(c.local_attributes() == c.all_attributes());
+    BOOST_REQUIRE(m.object_templates().size() == 1);
+    const auto& ot(*(m.object_templates().begin()->second));
+    BOOST_CHECK(ot.local_attributes().size() == 1);
+    BOOST_CHECK(ot.inherited_attributes().empty());
+    BOOST_CHECK(ot.local_attributes() == ot.all_attributes());
 
     BOOST_REQUIRE(m.objects().size() == 1);
     const auto& o(*(m.objects().begin()->second));
@@ -181,24 +181,24 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    for (const auto& pair : m.concepts()) {
-        const auto& c(*pair.second);
-        const auto& n(c.name());
+    for (const auto& pair : m.object_templates()) {
+        const auto& ot(*pair.second);
+        const auto& n(ot.name());
 
         if (factory.is_concept_name_n(0, n)) {
-            BOOST_CHECK(c.inherited_attributes().empty());
-            BOOST_CHECK(c.all_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes() == c.local_attributes());
-            BOOST_CHECK(c.refines().empty());
+            BOOST_CHECK(ot.inherited_attributes().empty());
+            BOOST_CHECK(ot.all_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes() == ot.local_attributes());
+            BOOST_CHECK(ot.parents().empty());
         } else if (factory.is_concept_name_n(1, n)) {
-            BOOST_CHECK(c.refines().size() == 1);
-            BOOST_REQUIRE(c.inherited_attributes().size() == 1);
-            const auto props(c.inherited_attributes().begin()->second);
+            BOOST_CHECK(ot.parents().size() == 1);
+            BOOST_REQUIRE(ot.inherited_attributes().size() == 1);
+            const auto props(ot.inherited_attributes().begin()->second);
             BOOST_REQUIRE(props.size() == 1);
 
-            BOOST_CHECK(c.all_attributes().size() == 2);
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
+            BOOST_CHECK(ot.all_attributes().size() == 2);
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
@@ -231,34 +231,34 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_REQUIRE(m.concepts().size() == 3);
-    for (const auto& pair : m.concepts()) {
-        const auto& c(*pair.second);
-        const auto& n(c.name());
+    BOOST_REQUIRE(m.object_templates().size() == 3);
+    for (const auto& pair : m.object_templates()) {
+        const auto& ot(*pair.second);
+        const auto& n(ot.name());
 
         if (factory.is_concept_name_n(0, n)) {
-            BOOST_CHECK(c.inherited_attributes().empty());
-            BOOST_CHECK(c.all_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes() == c.local_attributes());
-            BOOST_CHECK(c.refines().empty());
+            BOOST_CHECK(ot.inherited_attributes().empty());
+            BOOST_CHECK(ot.all_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes() == ot.local_attributes());
+            BOOST_CHECK(ot.parents().empty());
         } else if (factory.is_concept_name_n(1, n)) {
-            BOOST_REQUIRE(c.inherited_attributes().size() == 1);
-            const auto props(c.inherited_attributes().begin()->second);
+            BOOST_REQUIRE(ot.inherited_attributes().size() == 1);
+            const auto props(ot.inherited_attributes().begin()->second);
             BOOST_REQUIRE(props.size() == 1);
 
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes().size() == 2);
-            BOOST_CHECK(c.refines().size() == 1);
-            BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes().size() == 2);
+            BOOST_CHECK(ot.parents().size() == 1);
+            BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else if (factory.is_concept_name_n(2, n)) {
-            BOOST_CHECK(c.inherited_attributes().size() == 2);
-            for (const auto& pair : c.inherited_attributes())
+            BOOST_CHECK(ot.inherited_attributes().size() == 2);
+            for (const auto& pair : ot.inherited_attributes())
                 BOOST_CHECK(pair.second.size() == 1);
 
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes().size() == 3);
-            BOOST_CHECK(c.refines().size() == 2);
-            BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes().size() == 3);
+            BOOST_CHECK(ot.parents().size() == 2);
+            BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
@@ -295,39 +295,39 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
 
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
-    BOOST_CHECK(m.concepts().size() == 4);
-    for (const auto& pair : m.concepts()) {
-        const auto& c(*pair.second);
-        const auto& n(c.name());
+    BOOST_CHECK(m.object_templates().size() == 4);
+    for (const auto& pair : m.object_templates()) {
+        const auto& ot(*pair.second);
+        const auto& n(ot.name());
 
         if (factory.is_concept_name_n(0, n)) {
-            BOOST_CHECK(c.inherited_attributes().empty());
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes() == c.local_attributes());
+            BOOST_CHECK(ot.inherited_attributes().empty());
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes() == ot.local_attributes());
         } else if (factory.is_concept_name_n(1, n)) {
-            BOOST_CHECK(c.inherited_attributes().size() == 1);
-            for (const auto& pair : c.inherited_attributes())
+            BOOST_CHECK(ot.inherited_attributes().size() == 1);
+            for (const auto& pair : ot.inherited_attributes())
                 BOOST_CHECK(pair.second.size() == 1);
 
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes().size() == 2);
-            BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes().size() == 2);
+            BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else if (factory.is_concept_name_n(2, n)) {
-            BOOST_CHECK(c.inherited_attributes().size() == 1);
-            for (const auto& pair : c.inherited_attributes())
+            BOOST_CHECK(ot.inherited_attributes().size() == 1);
+            for (const auto& pair : ot.inherited_attributes())
                 BOOST_CHECK(pair.second.size() == 1);
 
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes().size() == 2);
-            BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes().size() == 2);
+            BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else if (factory.is_concept_name_n(3, n)) {
-            BOOST_CHECK(c.inherited_attributes().size() == 3);
-            for (const auto& pair : c.inherited_attributes())
+            BOOST_CHECK(ot.inherited_attributes().size() == 3);
+            for (const auto& pair : ot.inherited_attributes())
                 BOOST_CHECK(pair.second.size() == 1);
 
-            BOOST_CHECK(c.local_attributes().size() == 1);
-            BOOST_CHECK(c.all_attributes().size() == 4);
-            BOOST_CHECK(!has_duplicate_attribute_names(c, lg));
+            BOOST_CHECK(ot.local_attributes().size() == 1);
+            BOOST_CHECK(ot.all_attributes().size() == 4);
+            BOOST_CHECK(!has_duplicate_attribute_names(ot, lg));
         } else
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
@@ -358,7 +358,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_resul
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 2);
-    BOOST_REQUIRE(a.concepts().empty());
+    BOOST_REQUIRE(a.object_templates().empty());
 
     attributes_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -381,7 +381,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
     BOOST_REQUIRE(a.objects().size() == 4);
-    BOOST_REQUIRE(a.concepts().empty());
+    BOOST_REQUIRE(a.object_templates().empty());
 
     attributes_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
@@ -396,7 +396,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
     BOOST_REQUIRE(m.objects().size() == 4);
-    BOOST_REQUIRE(m.concepts().empty());
+    BOOST_REQUIRE(m.object_templates().empty());
 
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
@@ -446,8 +446,8 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_CHECK(m.concepts().size() == 1);
-    for (const auto& pair : m.concepts()) {
+    BOOST_CHECK(m.object_templates().size() == 1);
+    for (const auto& pair : m.object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -489,8 +489,8 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
     attributes_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
-    BOOST_CHECK(m.concepts().size() == 2);
-    for (const auto& pair : m.concepts()) {
+    BOOST_CHECK(m.object_templates().size() == 2);
+    for (const auto& pair : m.object_templates()) {
         const auto& c(*pair.second);
         const auto& n(c.name());
 
@@ -539,7 +539,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_refines_missing_concept_throws) {
     auto m(factory.make_concept_that_refines_missing_concept());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    contains_checker<transformation_error> c(concept_not_found);
+    contains_checker<transformation_error> c(object_template_not_found);
     BOOST_CHECK_EXCEPTION(
         attributes_transform::transform(m), transformation_error, c);
 }
@@ -550,7 +550,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
     auto m(factory.make_object_that_models_missing_concept());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << m;
 
-    contains_checker<transformation_error> c(concept_not_found);
+    contains_checker<transformation_error> c(object_template_not_found);
     BOOST_CHECK_EXCEPTION(
         attributes_transform::transform(m), transformation_error, c);
 }

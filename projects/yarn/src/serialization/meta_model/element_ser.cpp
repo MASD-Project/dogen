@@ -35,13 +35,13 @@
 #include "dogen/yarn/serialization/meta_model/module_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/builtin_ser.hpp"
-#include "dogen/yarn/serialization/meta_model/concept_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/visitor_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/exception_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/primitive_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/enumeration_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/element_properties_ser.hpp"
 
 BOOST_CLASS_TRACKING(

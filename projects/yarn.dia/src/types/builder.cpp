@@ -184,9 +184,9 @@ void builder::add(const processed_object& po) {
         model_.exceptions().push_back(a.to_exception(po));
         break;
     case yarn_element_types::concept: {
-        const auto pair(a.to_concept(po));
+        const auto pair(a.to_object_template(po));
         update_parentage(po.id(), pair.second->name());
-        model_.concepts().push_back(pair);
+        model_.object_templates().push_back(pair);
         break;
     }
     case yarn_element_types::object: {

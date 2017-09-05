@@ -26,13 +26,14 @@
 #endif
 
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
+#include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 
 namespace dogen {
 namespace yarn {
@@ -49,7 +50,7 @@ inline void elements_traversal(const meta_model::endomodel& m,
     for (const auto& pair : m.modules())
         v(*pair.second);
 
-    for (const auto& pair : m.concepts())
+    for (const auto& pair : m.object_templates())
         v(*pair.second);
 
     for (const auto& pair : m.builtins())
@@ -82,7 +83,7 @@ inline void elements_traversal(const meta_model::endomodel& m,
     for (auto& pair : m.modules())
         v(*pair.second);
 
-    for (auto& pair : m.concepts())
+    for (auto& pair : m.object_templates())
         v(*pair.second);
 
     for (auto& pair : m.builtins())
@@ -115,7 +116,7 @@ inline void elements_traversal(meta_model::endomodel& m,
     for (auto& pair : m.modules())
         v(*pair.second);
 
-    for (auto& pair : m.concepts())
+    for (auto& pair : m.object_templates())
         v(*pair.second);
 
     for (auto& pair : m.builtins())
@@ -154,7 +155,7 @@ inline void shared_elements_traversal(const meta_model::endomodel& m,
     for (const auto& pair : m.modules())
         v(pair.second);
 
-    for (const auto& pair : m.concepts())
+    for (const auto& pair : m.object_templates())
         v(pair.second);
 
     for (const auto& pair : m.builtins())
@@ -187,7 +188,7 @@ inline void shared_elements_traversal(const meta_model::endomodel& m,
     for (auto& pair : m.modules())
         v(pair.second);
 
-    for (auto& pair : m.concepts())
+    for (auto& pair : m.object_templates())
         v(pair.second);
 
     for (auto& pair : m.builtins())
@@ -220,7 +221,7 @@ inline void shared_elements_traversal(meta_model::endomodel& m,
     for (auto& pair : m.modules())
         v(pair.second);
 
-    for (auto& pair : m.concepts())
+    for (auto& pair : m.object_templates())
         v(pair.second);
 
     for (auto& pair : m.builtins())

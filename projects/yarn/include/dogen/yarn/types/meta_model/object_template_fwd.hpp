@@ -18,36 +18,18 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TEST_DATA_META_MODEL_CONCEPT_TD_HPP
-#define DOGEN_YARN_TEST_DATA_META_MODEL_CONCEPT_TD_HPP
+#ifndef DOGEN_YARN_TYPES_META_MODEL_OBJECT_TEMPLATE_FWD_HPP
+#define DOGEN_YARN_TYPES_META_MODEL_OBJECT_TEMPLATE_FWD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include "dogen/yarn/types/meta_model/concept.hpp"
-
 namespace dogen {
 namespace yarn {
 namespace meta_model {
 
-class concept_generator {
-public:
-    concept_generator();
-
-public:
-    typedef dogen::yarn::meta_model::concept result_type;
-
-public:
-    static void populate(const unsigned int position, result_type& v);
-    static result_type create(const unsigned int position);
-    result_type operator()();
-
-private:
-    unsigned int position_;
-public:
-    static result_type* create_ptr(const unsigned int position);
-};
+class object_template;
 
 } } }
 

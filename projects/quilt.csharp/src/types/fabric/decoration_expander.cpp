@@ -59,7 +59,7 @@ private:
 public:
     void operator()(yarn::meta_model::element& e) { e.accept(*this); }
     void operator()(yarn::meta_model::module& m) { update(m); }
-    void operator()(yarn::meta_model::concept& c) { update(c); }
+    void operator()(yarn::meta_model::object_template& ot) { update(ot); }
     void operator()(yarn::meta_model::builtin& b) { update(b); }
     void operator()(yarn::meta_model::enumeration& e) { update(e); }
     void operator()(yarn::meta_model::primitive& p) { update(p); }

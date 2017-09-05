@@ -26,12 +26,12 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/helpers/meta_name_factory.hpp"
 #include "dogen/yarn/types/meta_model/elements_traversal.hpp"
@@ -41,7 +41,8 @@
 namespace {
 
 using namespace dogen::utility::log;
-static logger lg(logger_factory("yarn.transforms.endomodel_to_model_transform"));
+static logger
+lg(logger_factory("yarn.transforms.endomodel_to_model_transform"));
 
 const std::string duplicate_qualified_name("Duplicate qualified name: ");
 const std::string expected_one_output_language(
@@ -89,7 +90,9 @@ public:
         result_.module_ids().insert(m->name().id());
         add(m);
     }
-    void operator()(boost::shared_ptr<meta_model::concept> c) { add(c); }
+    void operator()(boost::shared_ptr<meta_model::object_template> ot) {
+        add(ot);
+    }
     void operator()(boost::shared_ptr<meta_model::builtin> b) { add(b); }
     void operator()(boost::shared_ptr<meta_model::enumeration> e) { add(e); }
     void operator()(boost::shared_ptr<meta_model::primitive> p) { add(p); }
@@ -117,7 +120,7 @@ std::size_t endomodel_to_model_transform::
 compute_total_size(const meta_model::endomodel& im) {
     std::size_t r;
     r = im.modules().size();
-    r += im.concepts().size();
+    r += im.object_templates().size();
     r += im.builtins().size();
     r += im.enumerations().size();
     r += im.primitives().size();

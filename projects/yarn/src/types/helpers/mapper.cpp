@@ -23,13 +23,13 @@
 #include "dogen/utility/io/list_io.hpp"
 #include "dogen/yarn/io/meta_model/languages_io.hpp"
 #include "dogen/yarn/types/meta_model/module.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/meta_model/attribute.hpp"
 #include "dogen/yarn/types/helpers/mapping_error.hpp"
 #include "dogen/yarn/io/helpers/mapping_context_io.hpp"
@@ -59,7 +59,7 @@ meta_model::endomodel mapper::
 clone(const meta_model::endomodel& im) const {
     auto r(im);
     r.modules(clone(im.modules()));
-    r.concepts(clone(im.concepts()));
+    r.object_templates(clone(im.object_templates()));
     r.builtins(clone(im.builtins()));
     r.enumerations(clone(im.enumerations()));
     r.primitives(clone(im.primitives()));
@@ -253,7 +253,8 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
         pair.second.swap(o);
     }
 
-    for (auto& pair : r.concepts())
+    // FIXME: why are we not copying the concept?
+    for (auto& pair : r.object_templates())
         map_attributes(mc, pair.second->local_attributes());
 
     r.input_language(to);

@@ -65,7 +65,8 @@ void merge_transform::merge(const meta_model::endomodel& src,
     BOOST_LOG_SEV(lg, debug) << "Merging source model: '"
                              << src.name().id()
                              << " modules: " << src.modules().size()
-                             << " concepts: " << src.concepts().size()
+                             << " object templates: "
+                             << src.object_templates().size()
                              << " builtins: " << src.builtins().size()
                              << " enumerations: " << src.enumerations().size()
                              << " primitives: " << src.primitives().size()
@@ -74,7 +75,7 @@ void merge_transform::merge(const meta_model::endomodel& src,
                              << " visitors: " << src.visitors().size();
 
     copy(src.modules(), dst.modules());
-    copy(src.concepts(), dst.concepts());
+    copy(src.object_templates(), dst.object_templates());
     copy(src.builtins(), dst.builtins());
     copy(src.enumerations(), dst.enumerations());
     copy(src.primitives(), dst.primitives());

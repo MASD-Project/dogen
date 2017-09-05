@@ -21,13 +21,13 @@
 #include "dogen/yarn/types/meta_model/module.hpp"
 #include "dogen/yarn/types/meta_model/object.hpp"
 #include "dogen/yarn/types/meta_model/builtin.hpp"
-#include "dogen/yarn/types/meta_model/concept.hpp"
 #include "dogen/yarn/types/meta_model/element.hpp"
 #include "dogen/yarn/types/meta_model/visitor.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/meta_model/exception.hpp"
 #include "dogen/yarn/types/meta_model/primitive.hpp"
 #include "dogen/yarn/types/meta_model/enumeration.hpp"
+#include "dogen/yarn/types/meta_model/object_template.hpp"
 
 namespace boost {
 
@@ -40,8 +40,8 @@ const boost::shared_ptr<dogen::yarn::meta_model::module>& rhs) {
 
 namespace boost {
 
-inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::concept>& lhs,
-const boost::shared_ptr<dogen::yarn::meta_model::concept>& rhs) {
+inline bool operator==(const boost::shared_ptr<dogen::yarn::meta_model::object_template>& lhs,
+const boost::shared_ptr<dogen::yarn::meta_model::object_template>& rhs) {
     return (!lhs && !rhs) ||(lhs && rhs && (*lhs == *rhs));
 }
 
@@ -126,7 +126,7 @@ endomodel::endomodel(endomodel&& rhs)
       references_(std::move(rhs.references_)),
       leaves_(std::move(rhs.leaves_)),
       modules_(std::move(rhs.modules_)),
-      concepts_(std::move(rhs.concepts_)),
+      object_templates_(std::move(rhs.object_templates_)),
       builtins_(std::move(rhs.builtins_)),
       enumerations_(std::move(rhs.enumerations_)),
       primitives_(std::move(rhs.primitives_)),
@@ -148,7 +148,7 @@ endomodel::endomodel(
     const std::unordered_map<dogen::yarn::meta_model::name, dogen::yarn::meta_model::origin_types>& references,
     const std::unordered_set<dogen::yarn::meta_model::name>& leaves,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::module> >& modules,
-    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& concepts,
+    const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& object_templates,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& builtins,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::enumeration> >& enumerations,
     const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::primitive> >& primitives,
@@ -168,7 +168,7 @@ endomodel::endomodel(
       references_(references),
       leaves_(leaves),
       modules_(modules),
-      concepts_(concepts),
+      object_templates_(object_templates),
       builtins_(builtins),
       enumerations_(enumerations),
       primitives_(primitives),
@@ -191,7 +191,7 @@ void endomodel::swap(endomodel& other) noexcept {
     swap(references_, other.references_);
     swap(leaves_, other.leaves_);
     swap(modules_, other.modules_);
-    swap(concepts_, other.concepts_);
+    swap(object_templates_, other.object_templates_);
     swap(builtins_, other.builtins_);
     swap(enumerations_, other.enumerations_);
     swap(primitives_, other.primitives_);
@@ -214,7 +214,7 @@ bool endomodel::operator==(const endomodel& rhs) const {
         references_ == rhs.references_ &&
         leaves_ == rhs.leaves_ &&
         modules_ == rhs.modules_ &&
-        concepts_ == rhs.concepts_ &&
+        object_templates_ == rhs.object_templates_ &&
         builtins_ == rhs.builtins_ &&
         enumerations_ == rhs.enumerations_ &&
         primitives_ == rhs.primitives_ &&
@@ -324,20 +324,20 @@ void endomodel::modules(const std::unordered_map<std::string, boost::shared_ptr<
     modules_ = std::move(v);
 }
 
-const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& endomodel::concepts() const {
-    return concepts_;
+const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& endomodel::object_templates() const {
+    return object_templates_;
 }
 
-std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& endomodel::concepts() {
-    return concepts_;
+std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& endomodel::object_templates() {
+    return object_templates_;
 }
 
-void endomodel::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >& v) {
-    concepts_ = v;
+void endomodel::object_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >& v) {
+    object_templates_ = v;
 }
 
-void endomodel::concepts(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::concept> >&& v) {
-    concepts_ = std::move(v);
+void endomodel::object_templates(const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::object_template> >&& v) {
+    object_templates_ = std::move(v);
 }
 
 const std::unordered_map<std::string, boost::shared_ptr<dogen::yarn::meta_model::builtin> >& endomodel::builtins() const {

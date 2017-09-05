@@ -52,7 +52,7 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<enumeration_generator>();
     test_move_assignment_copy<module_generator>();
     test_move_assignment_copy<object_generator>();
-    test_move_assignment_copy<concept_generator>();
+    test_move_assignment_copy<object_template_generator>();
     test_move_assignment_copy<endomodel_generator>();
 }
 
