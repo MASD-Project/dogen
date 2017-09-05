@@ -31,7 +31,7 @@
 #include "dogen/yarn/io/meta_model/object_io.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
 #include "dogen/yarn/test/mock_endomodel_factory.hpp"
-#include "dogen/yarn/types/transforms/concepts_transform.hpp"
+#include "dogen/yarn/types/transforms/object_templates_transform.hpp"
 
 namespace {
 
@@ -60,7 +60,7 @@ const mock_endomodel_factory factory(flags);
 using dogen::utility::test::contains_checker;
 using dogen::yarn::transforms::transformation_error;
 using dogen::utility::test::asserter;
-using dogen::yarn::transforms::concepts_transform;
+using dogen::yarn::transforms::object_templates_transform;
 using dogen::yarn::meta_model::origin_types;
 using object_types = dogen::yarn::test::mock_endomodel_factory::
     object_types;
@@ -77,7 +77,7 @@ BOOST_AUTO_TEST_CASE(empty_model_is_untouched_by_concept_transform) {
     BOOST_CHECK(a.objects().empty());
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -90,7 +90,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_type_and_no_attributes_is_untouched_by_co
     BOOST_LOG_SEV(lg, debug) << "before transform: " << a;
     BOOST_CHECK(a.objects().size() == 1);
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -117,7 +117,7 @@ BOOST_AUTO_TEST_CASE(model_with_type_with_attribute_is_untouched_by_concept_tran
     BOOST_CHECK(o.all_attributes().empty());
     BOOST_CHECK(o.object_templates().empty());
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -137,7 +137,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_concept_is_untouched_by_concept_transform
     const auto& c(*(a.object_templates().begin()->second));
     BOOST_CHECK(c.parents().empty());
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -180,7 +180,7 @@ BOOST_AUTO_TEST_CASE(model_with_one_level_of_concept_inheritance_results_in_expe
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
-    concepts_transform::transform(m);
+    object_templates_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.object_templates()) {
@@ -254,7 +254,7 @@ BOOST_AUTO_TEST_CASE(model_with_two_levels_of_concept_inheritance_results_in_exp
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
-    concepts_transform::transform(m);
+    object_templates_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     for (const auto& pair : m.object_templates()) {
@@ -333,7 +333,7 @@ BOOST_AUTO_TEST_CASE(model_with_diamond_concept_inheritance_results_in_expected_
             BOOST_FAIL("Unexpected concept: " << n.id());
     }
 
-    concepts_transform::transform(m);
+    object_templates_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
     BOOST_CHECK(m.object_templates().size() == 4);
     for (const auto& pair : m.object_templates()) {
@@ -382,7 +382,7 @@ BOOST_AUTO_TEST_CASE(model_with_single_parent_that_does_not_model_concepts_is_un
     BOOST_REQUIRE(a.objects().size() == 2);
     BOOST_REQUIRE(a.object_templates().empty());
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -397,7 +397,7 @@ BOOST_AUTO_TEST_CASE(model_with_third_degree_inheritance_that_does_not_model_con
     BOOST_REQUIRE(a.objects().size() == 4);
     BOOST_REQUIRE(a.object_templates().empty());
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -438,7 +438,7 @@ BOOST_AUTO_TEST_CASE(model_containing_object_with_parent_that_models_concept_is_
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    concepts_transform::transform(a);
+    object_templates_transform::transform(a);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << a;
     BOOST_CHECK(asserter::assert_object(e, a));
 }
@@ -481,7 +481,7 @@ BOOST_AUTO_TEST_CASE(model_with_containing_object_with_parent_that_models_a_refi
             BOOST_FAIL("Unexpected object: " << n.id());
     }
 
-    concepts_transform::transform(m);
+    object_templates_transform::transform(m);
     BOOST_LOG_SEV(lg, debug) << "after transform: " << m;
 
     BOOST_CHECK(m.object_templates().size() == 2);
@@ -543,7 +543,7 @@ BOOST_AUTO_TEST_CASE(model_with_concept_that_parents_missing_concept_throws) {
 
     contains_checker<transformation_error> c(object_template_not_found);
     BOOST_CHECK_EXCEPTION(
-        concepts_transform::transform(m), transformation_error, c);
+        object_templates_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
@@ -567,7 +567,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_that_models_missing_concept_throws) {
 
     contains_checker<transformation_error> c(object_template_not_found);
     BOOST_CHECK_EXCEPTION(
-        concepts_transform::transform(m), transformation_error, c);
+        object_templates_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
@@ -606,7 +606,7 @@ BOOST_AUTO_TEST_CASE(model_with_object_with_missing_parent_throws) {
 
     contains_checker<transformation_error> c(object_not_found);
     BOOST_CHECK_EXCEPTION(
-        concepts_transform::transform(m), transformation_error, c);
+        object_templates_transform::transform(m), transformation_error, c);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

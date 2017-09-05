@@ -25,7 +25,7 @@
 #include "dogen/yarn/types/transforms/enumerations_transform.hpp"
 #include "dogen/yarn/types/transforms/generalization_transform.hpp"
 #include "dogen/yarn/types/transforms/stereotypes_transform.hpp"
-#include "dogen/yarn/types/transforms/concepts_transform.hpp"
+#include "dogen/yarn/types/transforms/object_templates_transform.hpp"
 #include "dogen/yarn/types/transforms/containment_transform.hpp"
 #include "dogen/yarn/types/transforms/orm_transform.hpp"
 #include "dogen/yarn/types/transforms/resolver_transform.hpp"
@@ -78,11 +78,11 @@ transform(const context& ctx, meta_model::endomodel& im) {
     generalization_transform::transform(ctx, idx, im);
 
     /*
-     * Stereotypes transform must be done before concepts because we
-     * obtain concept information from the stereotypes.
+     * Stereotypes transform must be done before object templates
+     * because we obtain concept information from the stereotypes.
      */
     stereotypes_transform::transform(im);
-    concepts_transform::transform(im);
+    object_templates_transform::transform(im);
     containment_transform::transform(im);
 
     /*

@@ -30,12 +30,12 @@
 #include "dogen/yarn/types/meta_model/object_template.hpp"
 #include "dogen/yarn/types/helpers/resolver.hpp"
 #include "dogen/yarn/types/transforms/transformation_error.hpp"
-#include "dogen/yarn/types/transforms/concepts_transform.hpp"
+#include "dogen/yarn/types/transforms/object_templates_transform.hpp"
 
 namespace {
 
 using namespace dogen::utility::log;
-auto lg(logger_factory("yarn.concepts_transform"));
+auto lg(logger_factory("yarn.object_templates_transform"));
 
 const std::string relationship_not_found(
     "Could not find relationship in object. Details: ");
@@ -65,7 +65,7 @@ inline bool operator<(const name& lhs, const name& rhs) {
 
 namespace transforms {
 
-meta_model::object& concepts_transform::
+meta_model::object& object_templates_transform::
 find_object(const meta_model::name& n, meta_model::endomodel& im) {
     auto i(im.objects().find(n.id()));
     if (i == im.objects().end()) {
@@ -76,7 +76,7 @@ find_object(const meta_model::name& n, meta_model::endomodel& im) {
 }
 
 meta_model::object_template&
-concepts_transform::resolve_concept(const meta_model::name& owner,
+object_templates_transform::resolve_concept(const meta_model::name& owner,
     const meta_model::name& concept_name, meta_model::endomodel& im) {
     using helpers::resolver;
     const auto oc(resolver::try_resolve_concept_name(owner, concept_name, im));
@@ -95,7 +95,8 @@ concepts_transform::resolve_concept(const meta_model::name& owner,
     return *i->second;
 }
 
-void concepts_transform::remove_duplicates(std::list<meta_model::name>& names) {
+void object_templates_transform::
+remove_duplicates(std::list<meta_model::name>& names) {
     std::unordered_set<meta_model::name> processed;
 
     BOOST_LOG_SEV(lg, debug) << "Removing duplicates from list. Original size: "
@@ -117,7 +118,7 @@ void concepts_transform::remove_duplicates(std::list<meta_model::name>& names) {
                              << names.size();
 }
 
-void concepts_transform::
+void object_templates_transform::
 expand_object(meta_model::object& o, meta_model::endomodel& im,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expanding object: " << o.name().id();
@@ -202,7 +203,7 @@ expand_object(meta_model::object& o, meta_model::endomodel& im,
     BOOST_LOG_SEV(lg, debug) << "Finished indexing object.";
 }
 
-void concepts_transform::expand_objects(meta_model::endomodel& im) {
+void object_templates_transform::expand_objects(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expanding objects: " << im.objects().size();
 
     std::unordered_set<meta_model::name> processed_names;
@@ -212,7 +213,7 @@ void concepts_transform::expand_objects(meta_model::endomodel& im) {
     }
 }
 
-void concepts_transform::expand_concept(meta_model::object_template& ot,
+void object_templates_transform::expand_concept(meta_model::object_template& ot,
     meta_model::endomodel& im,
     std::unordered_set<meta_model::name>& processed_names) {
     BOOST_LOG_SEV(lg, debug) << "Expand concept: " << ot.name().id();
@@ -243,7 +244,7 @@ void concepts_transform::expand_concept(meta_model::object_template& ot,
     processed_names.insert(ot.name());
 }
 
-void concepts_transform::expand_concepts(meta_model::endomodel& im) {
+void object_templates_transform::expand_concepts(meta_model::endomodel& im) {
     BOOST_LOG_SEV(lg, debug) << "Expading concepts: "
                              << im.object_templates().size();
 
@@ -254,7 +255,7 @@ void concepts_transform::expand_concepts(meta_model::endomodel& im) {
     }
 }
 
-void concepts_transform::transform(meta_model::endomodel& im) {
+void object_templates_transform::transform(meta_model::endomodel& im) {
     /*
      * We must expand concepts before we expand objects as we rely on
      * the expanded attributes.

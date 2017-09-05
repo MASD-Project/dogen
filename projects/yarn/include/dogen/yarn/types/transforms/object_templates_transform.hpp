@@ -18,8 +18,8 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_YARN_TYPES_TRANSFORMS_CONCEPTS_TRANSFORM_HPP
-#define DOGEN_YARN_TYPES_TRANSFORMS_CONCEPTS_TRANSFORM_HPP
+#ifndef DOGEN_YARN_TYPES_TRANSFORMS_OBJECT_TEMPLATES_TRANSFORM_HPP
+#define DOGEN_YARN_TYPES_TRANSFORMS_OBJECT_TEMPLATES_TRANSFORM_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
@@ -95,7 +95,7 @@ namespace transforms {
  * exist in R but not in S.
  *
  */
-class concepts_transform final {
+class object_templates_transform final {
 private:
     /**
      * @brief Returns the object with the given name, or throws.
