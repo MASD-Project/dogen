@@ -82,12 +82,12 @@ BOOST_AUTO_TEST_CASE(validate_serialisation) {
     roundtrip_type<immutable_two_generator>();
     roundtrip_type<fluent_generator>();
     roundtrip_type<fluent_generator>();
-    roundtrip_type<simple_concept_model_generator>();
-    roundtrip_type<base_concept_model_generator>();
-    roundtrip_type<refinement_concept_model_generator>();
-    roundtrip_type<multiple_refinement_concept_model_generator>();
-    roundtrip_type<multi_concept_model_generator>();
-    roundtrip_type<further_refined_generator>();
+    roundtrip_type<simple_object_template_instance_generator>();
+    roundtrip_type<base_object_template_instance_generator>();
+    roundtrip_type<descendant_object_template_instance_generator>();
+    roundtrip_type<multiple_parents_object_template_instance_generator>();
+    roundtrip_type<multi_object_template_instance_generator>();
+    roundtrip_type<further_inherited_generator>();
 
     roundtrip_type<class_a_generator>();
     roundtrip_type<class_b_generator>();

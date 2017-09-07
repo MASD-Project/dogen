@@ -82,11 +82,12 @@ BOOST_AUTO_TEST_CASE(validate_hashing) {
     test_hashing<immutable_two_generator>();
     test_hashing<fluent_generator>();
     test_hashing<fluent_generator>();
-    test_hashing<simple_concept_model_generator>();
-    test_hashing<base_concept_model_generator>();
-    test_hashing<refinement_concept_model_generator>();
-    test_hashing<multi_concept_model_generator>();
-    test_hashing<further_refined_generator>();
+    test_hashing<simple_object_template_instance_generator>();
+    test_hashing<base_object_template_instance_generator>();
+    test_hashing<descendant_object_template_instance_generator>();
+    test_hashing<multiple_parents_object_template_instance_generator>();
+    test_hashing<multi_object_template_instance_generator>();
+    test_hashing<further_inherited_generator>();
 
     test_hashing<class_a_generator>();
     test_hashing<class_b_generator>();

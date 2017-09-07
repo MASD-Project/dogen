@@ -6752,25 +6752,25 @@ this is a long comment#</dia:string>
         <dia:point val="74,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.95,75.95;81.3025,80.45"/>
+        <dia:rectangle val="73.95,75.95;84.6775,80.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.2525000000000004"/>
+        <dia:real val="10.627500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="4.4000000000000004"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#SimpleConcept#</dia:string>
+        <dia:string>#SimpleObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This is an example of a concept.#</dia:string>
+        <dia:string>#This is an example of an object template.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -6862,7 +6862,7 @@ this is a long comment#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#This is a sample property in a concept.#</dia:string>
+            <dia:string>#This is a sample property in an object template.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -6909,25 +6909,25 @@ this is a long comment#</dia:string>
         <dia:point val="98,76"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,75.95;108.662,79.65"/>
+        <dia:rectangle val="97.95,75.95;113.42,79.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="98,76"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="10.612500000000001"/>
+        <dia:real val="15.369999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#simple_concept_model#</dia:string>
+        <dia:string>#simple_object_template_instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#SimpleConcept#</dia:string>
+        <dia:string>#SimpleObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This class models simple concept.#</dia:string>
+        <dia:string>#This class instantiates the simple object template.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7043,25 +7043,25 @@ this is a long comment#</dia:string>
         <dia:point val="74.062,82.9375"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="74.012,82.8875;81.157,86.5875"/>
+        <dia:rectangle val="74.012,82.8875;84.237,86.5875"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="74.062,82.9375"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0449999999999999"/>
+        <dia:real val="10.125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#BaseConcept#</dia:string>
+        <dia:string>#BaseObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This is the base concept.#</dia:string>
+        <dia:string>#This is the base object template.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7153,7 +7153,7 @@ this is a long comment#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Property in the base concept.#</dia:string>
+            <dia:string>#Property in the base object template.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7177,25 +7177,25 @@ this is a long comment#</dia:string>
         <dia:point val="70,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.95,94.95;77.095,98.65"/>
+        <dia:rectangle val="69.95,94.95;82.94,98.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="70,95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.0449999999999999"/>
+        <dia:real val="12.890000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#Refinement#</dia:string>
+        <dia:string>#DescendantObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This concept refines BaseConcept.#</dia:string>
+        <dia:string>#This object template inherits from BaseObjectTemplate.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7287,7 +7287,7 @@ this is a long comment#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Refinement concept property.#</dia:string>
+            <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7352,25 +7352,25 @@ this is a long comment#</dia:string>
         <dia:point val="98,83"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="97.95,82.95;107.82,86.05"/>
+        <dia:rectangle val="97.95,82.95;112.578,86.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="98,83"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.7699999999999996"/>
+        <dia:real val="14.5275"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#base_concept_model#</dia:string>
+        <dia:string>#base_object_template_instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#BaseConcept#</dia:string>
+        <dia:string>#BaseObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This class models the BaseConcept.#</dia:string>
+        <dia:string>#This class instantiates the BaseObjectTemplate.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7462,25 +7462,25 @@ this is a long comment#</dia:string>
         <dia:point val="99,95"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,94.95;111.66,98.05"/>
+        <dia:rectangle val="98.95,94.95;116.69,98.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="99,95"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="12.609999999999999"/>
+        <dia:real val="17.640000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#refinement_concept_model#</dia:string>
+        <dia:string>#descendant_object_template_instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#Refinement#</dia:string>
+        <dia:string>#DescendantObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#This class models the Refinement concept.#</dia:string>
+        <dia:string>#This class instantiates the DescendantObjectTemplate obje.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7569,28 +7569,28 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O59">
       <dia:attribute name="obj_pos">
-        <dia:point val="73.062,101.938"/>
+        <dia:point val="73.062,102.009"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="73.012,101.888;81.312,105.588"/>
+        <dia:rectangle val="73.012,101.959;83.392,105.659"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="73.062,101.938"/>
+        <dia:point val="73.062,102.009"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.1999999999999993"/>
+        <dia:real val="10.279999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#BaseConcept2#</dia:string>
+        <dia:string>#BaseObjectTemplate2#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Base concept.#</dia:string>
+        <dia:string>#Base object template.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7706,25 +7706,25 @@ this is a long comment#</dia:string>
         <dia:point val="64.062,111.938"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.012,111.888;71.877,115.588"/>
+        <dia:rectangle val="64.012,111.888;76.022,115.588"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="64.062,111.938"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.7650000000000006"/>
+        <dia:real val="11.91"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#FirstRefinement#</dia:string>
+        <dia:string>#FirstChildObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#First refinement #</dia:string>
+        <dia:string>##</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7816,7 +7816,7 @@ this is a long comment#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#First refinement property#</dia:string>
+            <dia:string>#A property#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7840,25 +7840,25 @@ this is a long comment#</dia:string>
         <dia:point val="82.062,111.938"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.012,111.888;91.087,115.588"/>
+        <dia:rectangle val="82.012,111.888;95.232,115.588"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="82.062,111.938"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9749999999999996"/>
+        <dia:real val="13.120000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#SecondRefinement#</dia:string>
+        <dia:string>#SecondChildObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Second refinement #</dia:string>
+        <dia:string>#Second descendant#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -7950,7 +7950,7 @@ this is a long comment#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Second refinement property#</dia:string>
+            <dia:string>#Second descendant property#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -7971,19 +7971,19 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O62">
       <dia:attribute name="obj_pos">
-        <dia:point val="77.162,105.538"/>
+        <dia:point val="78.202,105.609"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="67.8945,105.488;78.012,111.988"/>
+        <dia:rectangle val="69.967,105.559;79.052,111.988"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="77.162,105.538"/>
-        <dia:point val="77.162,109.138"/>
-        <dia:point val="67.9445,109.138"/>
-        <dia:point val="67.9445,111.938"/>
+        <dia:point val="78.202,105.609"/>
+        <dia:point val="78.202,109.173"/>
+        <dia:point val="70.017,109.173"/>
+        <dia:point val="70.017,111.938"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8012,19 +8012,19 @@ this is a long comment#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O63">
       <dia:attribute name="obj_pos">
-        <dia:point val="77.162,105.538"/>
+        <dia:point val="78.202,105.609"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="76.312,105.488;86.5995,111.988"/>
+        <dia:rectangle val="77.352,105.559;88.672,111.988"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="77.162,105.538"/>
-        <dia:point val="77.162,109.138"/>
-        <dia:point val="86.5495,109.138"/>
-        <dia:point val="86.5495,111.938"/>
+        <dia:point val="78.202,105.609"/>
+        <dia:point val="78.202,109.173"/>
+        <dia:point val="88.622,109.173"/>
+        <dia:point val="88.622,111.938"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -8056,25 +8056,25 @@ this is a long comment#</dia:string>
         <dia:point val="73,122"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="72.95,121.95;82.9025,125.65"/>
+        <dia:rectangle val="72.95,121.95;87.7625,125.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="73,122"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.8525000000000009"/>
+        <dia:real val="14.7125"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#MultipleRefinements#</dia:string>
+        <dia:string>#MultipleParentsObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Multiple refinements concept#</dia:string>
+        <dia:string>#Multiple parents object template#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8166,7 +8166,7 @@ this is a long comment#</dia:string>
             <dia:string>##</dia:string>
           </dia:attribute>
           <dia:attribute name="comment">
-            <dia:string>#Multiple refinements property.#</dia:string>
+            <dia:string>#Multiple parents property.#</dia:string>
           </dia:attribute>
           <dia:attribute name="visibility">
             <dia:enum val="0"/>
@@ -8272,25 +8272,25 @@ this is a long comment#</dia:string>
         <dia:point val="99,112"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,111.95;115.245,115.65"/>
+        <dia:rectangle val="98.95,111.95;120.275,115.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="99,112"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.195"/>
+        <dia:real val="21.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#second_refinement_concept_model#</dia:string>
+        <dia:string>#second_descendant_object_template_instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#SecondRefinement#</dia:string>
+        <dia:string>#SecondChildObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Second refinement model#</dia:string>
+        <dia:string>#Second descendant instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8406,25 +8406,25 @@ this is a long comment#</dia:string>
         <dia:point val="99,122"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,121.95;115.785,125.65"/>
+        <dia:rectangle val="98.95,121.95;119.05,125.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="99,122"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="16.734999999999999"/>
+        <dia:real val="20"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#multiple_refinement_concept_model#</dia:string>
+        <dia:string>#multiple_parents_object_template_instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#MultipleRefinements#</dia:string>
+        <dia:string>#MultipleParentsObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Model of MultipleRefinements concept.#</dia:string>
+        <dia:string>#Instantiates object template MultipleParentsObjectTemplate.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8540,25 +8540,25 @@ this is a long comment#</dia:string>
         <dia:point val="99,105"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="98.95,104.95;113.795,108.65"/>
+        <dia:rectangle val="98.95,104.95;120.725,108.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="99,105"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="14.744999999999999"/>
+        <dia:real val="21.675000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#multi_concept_model#</dia:string>
+        <dia:string>#multi_object_template_instance#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#FirstRefinement, SecondRefinement#</dia:string>
+        <dia:string>#FirstChildObjectTemplate, SecondChildObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Type that refines more than one concept.#</dia:string>
+        <dia:string>#Type that instantiates more than one object template.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8674,25 +8674,25 @@ this is a long comment#</dia:string>
         <dia:point val="128,105"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="127.95,104.95;137.015,108.05"/>
+        <dia:rectangle val="127.95,104.95;140.715,108.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="128,105"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.9649999999999999"/>
+        <dia:real val="12.665000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#base_with_concept#</dia:string>
+        <dia:string>#base_with_object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#SecondRefinement#</dia:string>
+        <dia:string>#SecondChildObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Base class that models a refined concept.#</dia:string>
+        <dia:string>#Base class that instantiates a derived object template.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8784,26 +8784,26 @@ this is a long comment#</dia:string>
         <dia:point val="122,117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="121.95,116.95;131.405,120.05"/>
+        <dia:rectangle val="121.95,116.95;135.255,120.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="122,117"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.3550000000000004"/>
+        <dia:real val="13.205"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#further_refined#</dia:string>
+        <dia:string>#further_inherited#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#MultipleRefinements#</dia:string>
+        <dia:string>#MultipleParentsObjectTemplate#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
-        <dia:string>#Descendant class that models a concept which is a refinement of the concept
-modeled by the base.#</dia:string>
+        <dia:string>#Descendant class that instantiates an object template which is a descendant
+of the object template instantiated by the base class.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -8892,19 +8892,19 @@ modeled by the base.#</dia:string>
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O72">
       <dia:attribute name="obj_pos">
-        <dia:point val="132.482,108.05"/>
+        <dia:point val="134.333,108.05"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.627,108;133.332,117.05"/>
+        <dia:rectangle val="128.552,108;135.183,117.05"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="132.482,108.05"/>
-        <dia:point val="132.482,112.925"/>
-        <dia:point val="126.677,112.925"/>
-        <dia:point val="126.677,117"/>
+        <dia:point val="134.333,108.05"/>
+        <dia:point val="134.333,112.925"/>
+        <dia:point val="128.602,112.925"/>
+        <dia:point val="128.602,117"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -14923,22 +14923,22 @@ name.#</dia:string>
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O142">
       <dia:attribute name="obj_pos">
-        <dia:point val="146,107"/>
+        <dia:point val="145,107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="145.95,106.95;155.485,110.65"/>
+        <dia:rectangle val="144.95,106.95;157.86,110.65"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="146,107"/>
+        <dia:point val="145,107"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="9.4349999999999987"/>
+        <dia:real val="12.809999999999999"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#ConceptInAPackage#</dia:string>
+        <dia:string>#ObjectTemplateInAPackage#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
         <dia:string>#yarn::object_template#</dia:string>
@@ -15061,22 +15061,22 @@ name.#</dia:string>
         <dia:point val="160,117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="159.95,116.95;168.635,120.05"/>
+        <dia:rectangle val="159.95,116.95;172.233,120.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="160,117"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="8.5849999999999991"/>
+        <dia:real val="12.182500000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
       </dia:attribute>
       <dia:attribute name="name">
-        <dia:string>#consume_concept#</dia:string>
+        <dia:string>#consume_object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#ConceptInAPackage#</dia:string>
+        <dia:string>#ObjectTemplateInAPackage#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -15208,7 +15208,7 @@ name.#</dia:string>
         <dia:point val="164.292,117"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="150.667,110.6;165.042,117.8"/>
+        <dia:rectangle val="151.355,110.6;165.042,117.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15216,8 +15216,8 @@ name.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="164.292,117"/>
         <dia:point val="164.292,113"/>
-        <dia:point val="150.718,113"/>
-        <dia:point val="150.718,110.65"/>
+        <dia:point val="151.405,113"/>
+        <dia:point val="151.405,110.65"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -15244,7 +15244,7 @@ name.#</dia:string>
         <dia:point val="166,107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="165.95,106.95;181.195,109.55"/>
+        <dia:rectangle val="165.95,106.95;184.275,109.55"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -15253,7 +15253,7 @@ name.#</dia:string>
         <dia:point val="166,107"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="15.145"/>
+        <dia:real val="18.225000000000001"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="2.5"/>
@@ -15270,7 +15270,7 @@ name.#</dia:string>
       <dia:attribute name="text">
         <dia:composite type="text">
           <dia:attribute name="string">
-            <dia:string>#Concepts can be declared and consumed
+            <dia:string>#Object templates can be declared and consumed
 inside of a package.#</dia:string>
           </dia:attribute>
           <dia:attribute name="font">

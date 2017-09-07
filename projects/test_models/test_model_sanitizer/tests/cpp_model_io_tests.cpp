@@ -83,12 +83,12 @@ BOOST_AUTO_TEST_CASE(validate_io) {
     test_io<immutable_zero_generator>();
     test_io<fluent_generator>();
     test_io<fluent_generator>();
-    test_io<simple_concept_model_generator>();
-    test_io<base_concept_model_generator>();
-    test_io<refinement_concept_model_generator>();
-    test_io<multiple_refinement_concept_model_generator>();
-    test_io<multi_concept_model_generator>();
-    test_io<further_refined_generator>();
+    test_io<simple_object_template_instance_generator>();
+    test_io<base_object_template_instance_generator>();
+    test_io<descendant_object_template_instance_generator>();
+    test_io<multiple_parents_object_template_instance_generator>();
+    test_io<multi_object_template_instance_generator>();
+    test_io<further_inherited_generator>();
 
     test_io<class_a_generator>();
     test_io<class_b_generator>();

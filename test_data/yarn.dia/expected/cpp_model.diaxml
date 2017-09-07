@@ -31628,7 +31628,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>73.95,75.95;81.3025,80.45</value>
+										<value>73.95,75.95;84.6775,80.45</value>
 									</value>
 								</item>
 							</values>
@@ -31654,7 +31654,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.2525000000000004</value>
+										<value>10.627500000000001</value>
 									</value>
 								</item>
 							</values>
@@ -31680,7 +31680,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#SimpleConcept#</value>
+										<value>#SimpleObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -31706,7 +31706,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#This is an example of a concept.#</value>
+										<value>#This is an example of an object template.#</value>
 									</value>
 								</item>
 							</values>
@@ -32127,7 +32127,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#This is a sample property in a concept.#</value>
+																<value>#This is a sample property in an object template.#</value>
 															</value>
 														</item>
 													</values>
@@ -32368,7 +32368,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>97.95,75.95;108.662,79.65</value>
+										<value>97.95,75.95;113.42,79.65</value>
 									</value>
 								</item>
 							</values>
@@ -32394,7 +32394,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>10.612500000000001</value>
+										<value>15.369999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -32420,7 +32420,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#simple_concept_model#</value>
+										<value>#simple_object_template_instance#</value>
 									</value>
 								</item>
 							</values>
@@ -32433,7 +32433,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#SimpleConcept#</value>
+										<value>#SimpleObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -32446,7 +32446,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#This class models simple concept.#</value>
+										<value>#This class instantiates the simple object template.#</value>
 									</value>
 								</item>
 							</values>
@@ -32990,7 +32990,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>74.012,82.8875;81.157,86.5875</value>
+										<value>74.012,82.8875;84.237,86.5875</value>
 									</value>
 								</item>
 							</values>
@@ -33016,7 +33016,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.0449999999999999</value>
+										<value>10.125</value>
 									</value>
 								</item>
 							</values>
@@ -33042,7 +33042,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#BaseConcept#</value>
+										<value>#BaseObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -33068,7 +33068,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#This is the base concept.#</value>
+										<value>#This is the base object template.#</value>
 									</value>
 								</item>
 							</values>
@@ -33489,7 +33489,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#Property in the base concept.#</value>
+																<value>#Property in the base object template.#</value>
 															</value>
 														</item>
 													</values>
@@ -33612,7 +33612,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>69.95,94.95;77.095,98.65</value>
+										<value>69.95,94.95;82.94,98.65</value>
 									</value>
 								</item>
 							</values>
@@ -33638,7 +33638,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.0449999999999999</value>
+										<value>12.890000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -33664,7 +33664,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Refinement#</value>
+										<value>#DescendantObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -33690,7 +33690,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#This concept refines BaseConcept.#</value>
+										<value>#This object template inherits from BaseObjectTemplate.#</value>
 									</value>
 								</item>
 							</values>
@@ -34111,7 +34111,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#Refinement concept property.#</value>
+																<value>##</value>
 															</value>
 														</item>
 													</values>
@@ -34427,7 +34427,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>97.95,82.95;107.82,86.05</value>
+										<value>97.95,82.95;112.578,86.05</value>
 									</value>
 								</item>
 							</values>
@@ -34453,7 +34453,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>9.7699999999999996</value>
+										<value>14.5275</value>
 									</value>
 								</item>
 							</values>
@@ -34479,7 +34479,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#base_concept_model#</value>
+										<value>#base_object_template_instance#</value>
 									</value>
 								</item>
 							</values>
@@ -34492,7 +34492,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#BaseConcept#</value>
+										<value>#BaseObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -34505,7 +34505,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#This class models the BaseConcept.#</value>
+										<value>#This class instantiates the BaseObjectTemplate.#</value>
 									</value>
 								</item>
 							</values>
@@ -34931,7 +34931,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>98.95,94.95;111.66,98.05</value>
+										<value>98.95,94.95;116.69,98.05</value>
 									</value>
 								</item>
 							</values>
@@ -34957,7 +34957,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>12.609999999999999</value>
+										<value>17.640000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -34983,7 +34983,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#refinement_concept_model#</value>
+										<value>#descendant_object_template_instance#</value>
 									</value>
 								</item>
 							</values>
@@ -34996,7 +34996,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Refinement#</value>
+										<value>#DescendantObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -35009,7 +35009,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#This class models the Refinement concept.#</value>
+										<value>#This class instantiates the DescendantObjectTemplate obje.#</value>
 									</value>
 								</item>
 							</values>
@@ -35422,7 +35422,7 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>73.062,101.938</value>
+										<value>73.062,102.009</value>
 									</value>
 								</item>
 							</values>
@@ -35435,7 +35435,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>73.012,101.888;81.312,105.588</value>
+										<value>73.012,101.959;83.392,105.659</value>
 									</value>
 								</item>
 							</values>
@@ -35448,7 +35448,7 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>73.062,101.938</value>
+										<value>73.062,102.009</value>
 									</value>
 								</item>
 							</values>
@@ -35461,7 +35461,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.1999999999999993</value>
+										<value>10.279999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -35487,7 +35487,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#BaseConcept2#</value>
+										<value>#BaseObjectTemplate2#</value>
 									</value>
 								</item>
 							</values>
@@ -35513,7 +35513,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Base concept.#</value>
+										<value>#Base object template.#</value>
 									</value>
 								</item>
 							</values>
@@ -36057,7 +36057,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>64.012,111.888;71.877,115.588</value>
+										<value>64.012,111.888;76.022,115.588</value>
 									</value>
 								</item>
 							</values>
@@ -36083,7 +36083,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>7.7650000000000006</value>
+										<value>11.91</value>
 									</value>
 								</item>
 							</values>
@@ -36109,7 +36109,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#FirstRefinement#</value>
+										<value>#FirstChildObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -36135,7 +36135,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#First refinement #</value>
+										<value>##</value>
 									</value>
 								</item>
 							</values>
@@ -36556,7 +36556,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#First refinement property#</value>
+																<value>#A property#</value>
 															</value>
 														</item>
 													</values>
@@ -36679,7 +36679,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>82.012,111.888;91.087,115.588</value>
+										<value>82.012,111.888;95.232,115.588</value>
 									</value>
 								</item>
 							</values>
@@ -36705,7 +36705,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.9749999999999996</value>
+										<value>13.120000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -36731,7 +36731,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#SecondRefinement#</value>
+										<value>#SecondChildObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -36757,7 +36757,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Second refinement #</value>
+										<value>#Second descendant#</value>
 									</value>
 								</item>
 							</values>
@@ -37178,7 +37178,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#Second refinement property#</value>
+																<value>#Second descendant property#</value>
 															</value>
 														</item>
 													</values>
@@ -37298,7 +37298,7 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>77.162,105.538</value>
+										<value>78.202,105.609</value>
 									</value>
 								</item>
 							</values>
@@ -37311,7 +37311,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>67.8945,105.488;78.012,111.988</value>
+										<value>69.967,105.559;79.052,111.988</value>
 									</value>
 								</item>
 							</values>
@@ -37344,25 +37344,25 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>77.162,105.538</value>
+										<value>78.202,105.609</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>77.162,109.138</value>
+										<value>78.202,109.173</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>67.9445,109.138</value>
+										<value>70.017,109.173</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>67.9445,111.938</value>
+										<value>70.017,111.938</value>
 									</value>
 								</item>
 							</values>
@@ -37491,7 +37491,7 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>77.162,105.538</value>
+										<value>78.202,105.609</value>
 									</value>
 								</item>
 							</values>
@@ -37504,7 +37504,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>76.312,105.488;86.5995,111.988</value>
+										<value>77.352,105.559;88.672,111.988</value>
 									</value>
 								</item>
 							</values>
@@ -37537,25 +37537,25 @@ this is a long comment#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>77.162,105.538</value>
+										<value>78.202,105.609</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>77.162,109.138</value>
+										<value>78.202,109.173</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>86.5495,109.138</value>
+										<value>88.622,109.173</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>86.5495,111.938</value>
+										<value>88.622,111.938</value>
 									</value>
 								</item>
 							</values>
@@ -37687,7 +37687,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>72.95,121.95;82.9025,125.65</value>
+										<value>72.95,121.95;87.7625,125.65</value>
 									</value>
 								</item>
 							</values>
@@ -37713,7 +37713,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>9.8525000000000009</value>
+										<value>14.7125</value>
 									</value>
 								</item>
 							</values>
@@ -37739,7 +37739,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#MultipleRefinements#</value>
+										<value>#MultipleParentsObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -37765,7 +37765,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Multiple refinements concept#</value>
+										<value>#Multiple parents object template#</value>
 									</value>
 								</item>
 							</values>
@@ -38186,7 +38186,7 @@ this is a long comment#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#Multiple refinements property.#</value>
+																<value>#Multiple parents property.#</value>
 															</value>
 														</item>
 													</values>
@@ -38695,7 +38695,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>98.95,111.95;115.245,115.65</value>
+										<value>98.95,111.95;120.275,115.65</value>
 									</value>
 								</item>
 							</values>
@@ -38721,7 +38721,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>16.195</value>
+										<value>21.225000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -38747,7 +38747,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#second_refinement_concept_model#</value>
+										<value>#second_descendant_object_template_instance#</value>
 									</value>
 								</item>
 							</values>
@@ -38760,7 +38760,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#SecondRefinement#</value>
+										<value>#SecondChildObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -38773,7 +38773,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Second refinement model#</value>
+										<value>#Second descendant instance#</value>
 									</value>
 								</item>
 							</values>
@@ -39317,7 +39317,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>98.95,121.95;115.785,125.65</value>
+										<value>98.95,121.95;119.05,125.65</value>
 									</value>
 								</item>
 							</values>
@@ -39343,7 +39343,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>16.734999999999999</value>
+										<value>20</value>
 									</value>
 								</item>
 							</values>
@@ -39369,7 +39369,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#multiple_refinement_concept_model#</value>
+										<value>#multiple_parents_object_template_instance#</value>
 									</value>
 								</item>
 							</values>
@@ -39382,7 +39382,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#MultipleRefinements#</value>
+										<value>#MultipleParentsObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -39395,7 +39395,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Model of MultipleRefinements concept.#</value>
+										<value>#Instantiates object template MultipleParentsObjectTemplate.#</value>
 									</value>
 								</item>
 							</values>
@@ -39939,7 +39939,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>98.95,104.95;113.795,108.65</value>
+										<value>98.95,104.95;120.725,108.65</value>
 									</value>
 								</item>
 							</values>
@@ -39965,7 +39965,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>14.744999999999999</value>
+										<value>21.675000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -39991,7 +39991,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#multi_concept_model#</value>
+										<value>#multi_object_template_instance#</value>
 									</value>
 								</item>
 							</values>
@@ -40004,7 +40004,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#FirstRefinement, SecondRefinement#</value>
+										<value>#FirstChildObjectTemplate, SecondChildObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -40017,7 +40017,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Type that refines more than one concept.#</value>
+										<value>#Type that instantiates more than one object template.#</value>
 									</value>
 								</item>
 							</values>
@@ -40561,7 +40561,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>127.95,104.95;137.015,108.05</value>
+										<value>127.95,104.95;140.715,108.05</value>
 									</value>
 								</item>
 							</values>
@@ -40587,7 +40587,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.9649999999999999</value>
+										<value>12.665000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -40613,7 +40613,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#base_with_concept#</value>
+										<value>#base_with_object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -40626,7 +40626,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#SecondRefinement#</value>
+										<value>#SecondChildObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -40639,7 +40639,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Base class that models a refined concept.#</value>
+										<value>#Base class that instantiates a derived object template.#</value>
 									</value>
 								</item>
 							</values>
@@ -41065,7 +41065,7 @@ this is a long comment#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>121.95,116.95;131.405,120.05</value>
+										<value>121.95,116.95;135.255,120.05</value>
 									</value>
 								</item>
 							</values>
@@ -41091,7 +41091,7 @@ this is a long comment#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>9.3550000000000004</value>
+										<value>13.205</value>
 									</value>
 								</item>
 							</values>
@@ -41117,7 +41117,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#further_refined#</value>
+										<value>#further_inherited#</value>
 									</value>
 								</item>
 							</values>
@@ -41130,7 +41130,7 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#MultipleRefinements#</value>
+										<value>#MultipleParentsObjectTemplate#</value>
 									</value>
 								</item>
 							</values>
@@ -41143,8 +41143,8 @@ this is a long comment#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#Descendant class that models a concept which is a refinement of the concept
-modeled by the base.#</value>
+										<value>#Descendant class that instantiates an object template which is a descendant
+of the object template instantiated by the base class.#</value>
 									</value>
 								</item>
 							</values>
@@ -41567,7 +41567,7 @@ modeled by the base.#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>132.482,108.05</value>
+										<value>134.333,108.05</value>
 									</value>
 								</item>
 							</values>
@@ -41580,7 +41580,7 @@ modeled by the base.#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>126.627,108;133.332,117.05</value>
+										<value>128.552,108;135.183,117.05</value>
 									</value>
 								</item>
 							</values>
@@ -41613,25 +41613,25 @@ modeled by the base.#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>132.482,108.05</value>
+										<value>134.333,108.05</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>132.482,112.925</value>
+										<value>134.333,112.925</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>126.677,112.925</value>
+										<value>128.602,112.925</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>126.677,117</value>
+										<value>128.602,117</value>
 									</value>
 								</item>
 							</values>
@@ -69634,7 +69634,7 @@ name.#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>146,107</value>
+										<value>145,107</value>
 									</value>
 								</item>
 							</values>
@@ -69647,7 +69647,7 @@ name.#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>145.95,106.95;155.485,110.65</value>
+										<value>144.95,106.95;157.86,110.65</value>
 									</value>
 								</item>
 							</values>
@@ -69660,7 +69660,7 @@ name.#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>146,107</value>
+										<value>145,107</value>
 									</value>
 								</item>
 							</values>
@@ -69673,7 +69673,7 @@ name.#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>9.4349999999999987</value>
+										<value>12.809999999999999</value>
 									</value>
 								</item>
 							</values>
@@ -69699,7 +69699,7 @@ name.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#ConceptInAPackage#</value>
+										<value>#ObjectTemplateInAPackage#</value>
 									</value>
 								</item>
 							</values>
@@ -70273,7 +70273,7 @@ name.#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>159.95,116.95;168.635,120.05</value>
+										<value>159.95,116.95;172.233,120.05</value>
 									</value>
 								</item>
 							</values>
@@ -70299,7 +70299,7 @@ name.#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>8.5849999999999991</value>
+										<value>12.182500000000001</value>
 									</value>
 								</item>
 							</values>
@@ -70325,7 +70325,7 @@ name.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#consume_concept#</value>
+										<value>#consume_object_template#</value>
 									</value>
 								</item>
 							</values>
@@ -70338,7 +70338,7 @@ name.#</value>
 								<item>
 									<which>6</which>
 									<value>
-										<value>#ConceptInAPackage#</value>
+										<value>#ObjectTemplateInAPackage#</value>
 									</value>
 								</item>
 							</values>
@@ -70947,7 +70947,7 @@ name.#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>150.667,110.6;165.042,117.8</value>
+										<value>151.355,110.6;165.042,117.8</value>
 									</value>
 								</item>
 							</values>
@@ -70992,13 +70992,13 @@ name.#</value>
 								<item>
 									<which>5</which>
 									<value>
-										<value>150.718,113</value>
+										<value>151.405,113</value>
 									</value>
 								</item>
 								<item>
 									<which>5</which>
 									<value>
-										<value>150.718,110.65</value>
+										<value>151.405,110.65</value>
 									</value>
 								</item>
 							</values>
@@ -71108,7 +71108,7 @@ name.#</value>
 								<item>
 									<which>8</which>
 									<value>
-										<value>165.95,106.95;181.195,109.55</value>
+										<value>165.95,106.95;184.275,109.55</value>
 									</value>
 								</item>
 							</values>
@@ -71154,7 +71154,7 @@ name.#</value>
 								<item>
 									<which>1</which>
 									<value>
-										<value>15.145</value>
+										<value>18.225000000000001</value>
 									</value>
 								</item>
 							</values>
@@ -71232,7 +71232,7 @@ name.#</value>
 														<item>
 															<which>6</which>
 															<value>
-																<value>#Concepts can be declared and consumed
+																<value>#Object templates can be declared and consumed
 inside of a package.#</value>
 															</value>
 														</item>

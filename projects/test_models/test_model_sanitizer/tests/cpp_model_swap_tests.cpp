@@ -76,10 +76,11 @@ BOOST_AUTO_TEST_CASE(validate_swap) {
 
     test_swap<value_generator>();
     test_swap<fluent_generator>();
-    test_swap<simple_concept_model_generator>();
-    test_swap<base_concept_model_generator>();
-    test_swap<refinement_concept_model_generator>();
-    test_swap<multiple_refinement_concept_model_generator>();
+
+    test_swap<simple_object_template_instance_generator>();
+    test_swap<base_object_template_instance_generator>();
+    test_swap<descendant_object_template_instance_generator>();
+    test_swap<multiple_parents_object_template_instance_generator>();
 
     test_swap<class_a_generator>();
     test_swap<class_b_generator>();

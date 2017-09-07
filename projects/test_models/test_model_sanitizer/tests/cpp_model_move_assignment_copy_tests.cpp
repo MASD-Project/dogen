@@ -84,12 +84,13 @@ BOOST_AUTO_TEST_CASE(validate_move_assignment_copy) {
     test_move_assignment_copy<immutable_two_generator>();
     test_move_assignment_copy<fluent_generator>();
     test_move_assignment_copy<fluent_generator>();
-    test_move_assignment_copy<simple_concept_model_generator>();
-    test_move_assignment_copy<base_concept_model_generator>();
-    test_move_assignment_copy<refinement_concept_model_generator>();
-    test_move_assignment_copy<multiple_refinement_concept_model_generator>();
-    test_move_assignment_copy<multi_concept_model_generator>();
-    test_move_assignment_copy<further_refined_generator>();
+
+    test_move_assignment_copy<simple_object_template_instance_generator>();
+    test_move_assignment_copy<base_object_template_instance_generator>();
+    test_move_assignment_copy<descendant_object_template_instance_generator>();
+    test_move_assignment_copy<multiple_parents_object_template_instance_generator>();
+    test_move_assignment_copy<multi_object_template_instance_generator>();
+    test_move_assignment_copy<further_inherited_generator>();
 
     test_move_assignment_copy<class_a_generator>();
     test_move_assignment_copy<class_b_generator>();

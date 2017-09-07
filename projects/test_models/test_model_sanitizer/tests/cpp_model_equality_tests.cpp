@@ -82,12 +82,12 @@ BOOST_AUTO_TEST_CASE(validate_equality) {
     test_equality<immutable_two_generator>();
     test_equality<fluent_generator>();
     test_equality<fluent_generator>();
-    test_equality<simple_concept_model_generator>();
-    test_equality<base_concept_model_generator>();
-    test_equality<refinement_concept_model_generator>();
-    test_equality<multiple_refinement_concept_model_generator>();
-    test_equality<multi_concept_model_generator>();
-    test_equality<further_refined_generator>();
+    test_equality<simple_object_template_instance_generator>();
+    test_equality<base_object_template_instance_generator>();
+    test_equality<descendant_object_template_instance_generator>();
+    test_equality<multiple_parents_object_template_instance_generator>();
+    test_equality<multi_object_template_instance_generator>();
+    test_equality<further_inherited_generator>();
 
     test_equality<class_a_generator>();
     test_equality<class_b_generator>();

@@ -1615,18 +1615,18 @@
 				<px class_id="10" tracking_level="1" version="0" object_id="_12">
 					<element>
 						<name>
-							<id>&lt;BaseConcept2&gt;</id>
-							<simple>BaseConcept2</simple>
+							<id>&lt;BaseObjectTemplate2&gt;</id>
+							<simple>BaseObjectTemplate2</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>BaseConcept2</second>
+									<second>BaseObjectTemplate2</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>BaseConcept2</second>
+									<second>BaseObjectTemplate2</second>
 								</item>
 							</qualified>
 							<location>
@@ -1644,9 +1644,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>BaseConcept2</identifiable>
+							<identifiable>BaseObjectTemplate2</identifiable>
 						</name>
-						<documentation>Base concept.
+						<documentation>Base object template.
 </documentation>
 						<annotation>
 							<entries>
@@ -1835,18 +1835,18 @@
 				<px class_id_reference="10" object_id="_13">
 					<element>
 						<name>
-							<id>&lt;BaseConcept&gt;</id>
-							<simple>BaseConcept</simple>
+							<id>&lt;BaseObjectTemplate&gt;</id>
+							<simple>BaseObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>BaseConcept</second>
+									<second>BaseObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>BaseConcept</second>
+									<second>BaseObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -1864,9 +1864,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>BaseConcept</identifiable>
+							<identifiable>BaseObjectTemplate</identifiable>
 						</name>
-						<documentation>This is the base concept.
+						<documentation>This is the base object template.
 </documentation>
 						<annotation>
 							<entries>
@@ -1936,7 +1936,7 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<documentation>Property in the base concept.
+							<documentation>Property in the base object template.
 </documentation>
 							<annotation>
 								<entries>
@@ -2055,18 +2055,18 @@
 				<px class_id_reference="10" object_id="_14">
 					<element>
 						<name>
-							<id>&lt;FirstRefinement&gt;</id>
-							<simple>FirstRefinement</simple>
+							<id>&lt;DescendantObjectTemplate&gt;</id>
+							<simple>DescendantObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>FirstRefinement</second>
+									<second>DescendantObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>FirstRefinement</second>
+									<second>DescendantObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -2084,9 +2084,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>FirstRefinement</identifiable>
+							<identifiable>DescendantObjectTemplate</identifiable>
 						</name>
-						<documentation>First refinement
+						<documentation>This object template inherits from BaseObjectTemplate.
 </documentation>
 						<annotation>
 							<entries>
@@ -2156,7 +2156,257 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<documentation>First refinement property
+							<documentation></documentation>
+							<annotation>
+								<entries>
+									<count>0</count>
+									<bucket_count>1</bucket_count>
+									<item_version>0</item_version>
+								</entries>
+								<scope>0</scope>
+							</annotation>
+							<name>
+								<id></id>
+								<simple>prop_1</simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</name>
+							<unparsed_type>int</unparsed_type>
+							<parsed_type>
+								<current>
+									<id></id>
+									<simple></simple>
+									<qualified>
+										<count>0</count>
+										<item_version>0</item_version>
+									</qualified>
+									<location>
+										<external_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_modules>
+										<model_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</model_modules>
+										<internal_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</internal_modules>
+										<element></element>
+									</location>
+									<identifiable></identifiable>
+								</current>
+								<children>
+									<count>0</count>
+									<item_version>0</item_version>
+								</children>
+								<are_children_opaque>0</are_children_opaque>
+								<is_circular_dependency>0</is_circular_dependency>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<identifiable></identifiable>
+								<is_current_simple_type>0</is_current_simple_type>
+								<is_floating_point>0</is_floating_point>
+							</parsed_type>
+							<is_immutable>0</is_immutable>
+							<is_fluent>0</is_fluent>
+							<orm_properties>
+								<initialized>0</initialized>
+							</orm_properties>
+						</item>
+					</local_attributes>
+					<inherited_attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</inherited_attributes>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+					<parents>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<id>&lt;BaseObjectTemplate&gt;</id>
+							<simple>BaseObjectTemplate</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>BaseObjectTemplate</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>BaseObjectTemplate</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>BaseObjectTemplate</identifiable>
+						</item>
+					</parents>
+					<is_child>1</is_child>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<parent>
+					<entries>
+						<count>0</count>
+						<item_version>0</item_version>
+					</entries>
+					<scope>5</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</first>
+			<second>
+				<px class_id_reference="10" object_id="_15">
+					<element>
+						<name>
+							<id>&lt;FirstChildObjectTemplate&gt;</id>
+							<simple>FirstChildObjectTemplate</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>FirstChildObjectTemplate</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>FirstChildObjectTemplate</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>FirstChildObjectTemplate</identifiable>
+						</name>
+						<documentation></documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<origin_type>4</origin_type>
+						<contained_by>
+							<initialized>0</initialized>
+						</contained_by>
+						<in_global_module>0</in_global_module>
+						<stereotypes>
+							<count>0</count>
+							<item_version>0</item_version>
+						</stereotypes>
+						<meta_name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</meta_name>
+						<is_element_extension>0</is_element_extension>
+						<element_properties>
+							<decoration_properties>
+								<generate_decoration>0</generate_decoration>
+								<modeline>
+									<initialized>0</initialized>
+								</modeline>
+								<licence>
+									<initialized>0</initialized>
+								</licence>
+								<code_generation_marker></code_generation_marker>
+							</decoration_properties>
+							<artefact_properties>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</artefact_properties>
+						</element_properties>
+					</element>
+					<all_attributes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</all_attributes>
+					<local_attributes>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<documentation>A property
 </documentation>
 							<annotation>
 								<entries>
@@ -2248,18 +2498,18 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<id>&lt;BaseConcept2&gt;</id>
-							<simple>BaseConcept2</simple>
+							<id>&lt;BaseObjectTemplate2&gt;</id>
+							<simple>BaseObjectTemplate2</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>BaseConcept2</second>
+									<second>BaseObjectTemplate2</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>BaseConcept2</second>
+									<second>BaseObjectTemplate2</second>
 								</item>
 							</qualified>
 							<location>
@@ -2277,7 +2527,7 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>BaseConcept2</identifiable>
+							<identifiable>BaseObjectTemplate2</identifiable>
 						</item>
 					</parents>
 					<is_child>1</is_child>
@@ -2304,21 +2554,21 @@
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="10" object_id="_15">
+				<px class_id_reference="10" object_id="_16">
 					<element>
 						<name>
-							<id>&lt;MultipleRefinements&gt;</id>
-							<simple>MultipleRefinements</simple>
+							<id>&lt;MultipleParentsObjectTemplate&gt;</id>
+							<simple>MultipleParentsObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>MultipleRefinements</second>
+									<second>MultipleParentsObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>MultipleRefinements</second>
+									<second>MultipleParentsObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -2336,9 +2586,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>MultipleRefinements</identifiable>
+							<identifiable>MultipleParentsObjectTemplate</identifiable>
 						</name>
-						<documentation>Multiple refinements concept
+						<documentation>Multiple parents object template
 </documentation>
 						<annotation>
 							<entries>
@@ -2408,7 +2658,7 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<documentation>Multiple refinements property.
+							<documentation>Multiple parents property.
 </documentation>
 							<annotation>
 								<entries>
@@ -2500,18 +2750,18 @@
 						<count>2</count>
 						<item_version>0</item_version>
 						<item>
-							<id>&lt;FirstRefinement&gt;</id>
-							<simple>FirstRefinement</simple>
+							<id>&lt;FirstChildObjectTemplate&gt;</id>
+							<simple>FirstChildObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>FirstRefinement</second>
+									<second>FirstChildObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>FirstRefinement</second>
+									<second>FirstChildObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -2529,21 +2779,21 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>FirstRefinement</identifiable>
+							<identifiable>FirstChildObjectTemplate</identifiable>
 						</item>
 						<item>
-							<id>&lt;SecondRefinement&gt;</id>
-							<simple>SecondRefinement</simple>
+							<id>&lt;SecondChildObjectTemplate&gt;</id>
+							<simple>SecondChildObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>SecondRefinement</second>
+									<second>SecondChildObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>SecondRefinement</second>
+									<second>SecondChildObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -2561,259 +2811,7 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>SecondRefinement</identifiable>
-						</item>
-					</parents>
-					<is_child>1</is_child>
-				</px>
-			</second>
-		</item>
-		<item>
-			<first>
-				<parent>
-					<entries>
-						<count>0</count>
-						<item_version>0</item_version>
-					</entries>
-					<scope>5</scope>
-					<candidate_labels>
-						<count>0</count>
-						<item_version>0</item_version>
-					</candidate_labels>
-				</parent>
-				<children>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</children>
-			</first>
-			<second>
-				<px class_id_reference="10" object_id="_16">
-					<element>
-						<name>
-							<id>&lt;Refinement&gt;</id>
-							<simple>Refinement</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>Refinement</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>Refinement</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>Refinement</identifiable>
-						</name>
-						<documentation>This concept refines BaseConcept.
-</documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<origin_type>4</origin_type>
-						<contained_by>
-							<initialized>0</initialized>
-						</contained_by>
-						<in_global_module>0</in_global_module>
-						<stereotypes>
-							<count>0</count>
-							<item_version>0</item_version>
-						</stereotypes>
-						<meta_name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</meta_name>
-						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
-					</element>
-					<all_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</all_attributes>
-					<local_attributes>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<documentation>Refinement concept property.
-</documentation>
-							<annotation>
-								<entries>
-									<count>0</count>
-									<bucket_count>1</bucket_count>
-									<item_version>0</item_version>
-								</entries>
-								<scope>0</scope>
-							</annotation>
-							<name>
-								<id></id>
-								<simple>prop_1</simple>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<location>
-									<external_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_modules>
-									<model_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_modules>
-									<internal_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_modules>
-									<element></element>
-								</location>
-								<identifiable></identifiable>
-							</name>
-							<unparsed_type>int</unparsed_type>
-							<parsed_type>
-								<current>
-									<id></id>
-									<simple></simple>
-									<qualified>
-										<count>0</count>
-										<item_version>0</item_version>
-									</qualified>
-									<location>
-										<external_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_modules>
-										<model_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</model_modules>
-										<internal_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</internal_modules>
-										<element></element>
-									</location>
-									<identifiable></identifiable>
-								</current>
-								<children>
-									<count>0</count>
-									<item_version>0</item_version>
-								</children>
-								<are_children_opaque>0</are_children_opaque>
-								<is_circular_dependency>0</is_circular_dependency>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<identifiable></identifiable>
-								<is_current_simple_type>0</is_current_simple_type>
-								<is_floating_point>0</is_floating_point>
-							</parsed_type>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-							<orm_properties>
-								<initialized>0</initialized>
-							</orm_properties>
-						</item>
-					</local_attributes>
-					<inherited_attributes>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</inherited_attributes>
-					<is_immutable>0</is_immutable>
-					<is_fluent>0</is_fluent>
-					<parents>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<id>&lt;BaseConcept&gt;</id>
-							<simple>BaseConcept</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>BaseConcept</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>BaseConcept</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>BaseConcept</identifiable>
+							<identifiable>SecondChildObjectTemplate</identifiable>
 						</item>
 					</parents>
 					<is_child>1</is_child>
@@ -2843,18 +2841,18 @@
 				<px class_id_reference="10" object_id="_17">
 					<element>
 						<name>
-							<id>&lt;SecondRefinement&gt;</id>
-							<simple>SecondRefinement</simple>
+							<id>&lt;SecondChildObjectTemplate&gt;</id>
+							<simple>SecondChildObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>SecondRefinement</second>
+									<second>SecondChildObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>SecondRefinement</second>
+									<second>SecondChildObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -2872,9 +2870,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>SecondRefinement</identifiable>
+							<identifiable>SecondChildObjectTemplate</identifiable>
 						</name>
-						<documentation>Second refinement
+						<documentation>Second descendant
 </documentation>
 						<annotation>
 							<entries>
@@ -2944,7 +2942,7 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<documentation>Second refinement property
+							<documentation>Second descendant property
 </documentation>
 							<annotation>
 								<entries>
@@ -3036,18 +3034,18 @@
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<id>&lt;BaseConcept2&gt;</id>
-							<simple>BaseConcept2</simple>
+							<id>&lt;BaseObjectTemplate2&gt;</id>
+							<simple>BaseObjectTemplate2</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>BaseConcept2</second>
+									<second>BaseObjectTemplate2</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>BaseConcept2</second>
+									<second>BaseObjectTemplate2</second>
 								</item>
 							</qualified>
 							<location>
@@ -3065,7 +3063,7 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>BaseConcept2</identifiable>
+							<identifiable>BaseObjectTemplate2</identifiable>
 						</item>
 					</parents>
 					<is_child>1</is_child>
@@ -3095,18 +3093,18 @@
 				<px class_id_reference="10" object_id="_18">
 					<element>
 						<name>
-							<id>&lt;SimpleConcept&gt;</id>
-							<simple>SimpleConcept</simple>
+							<id>&lt;SimpleObjectTemplate&gt;</id>
+							<simple>SimpleObjectTemplate</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>SimpleConcept</second>
+									<second>SimpleObjectTemplate</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>SimpleConcept</second>
+									<second>SimpleObjectTemplate</second>
 								</item>
 							</qualified>
 							<location>
@@ -3124,9 +3122,9 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>SimpleConcept</identifiable>
+							<identifiable>SimpleObjectTemplate</identifiable>
 						</name>
-						<documentation>This is an example of a concept.
+						<documentation>This is an example of an object template.
 </documentation>
 						<annotation>
 							<entries>
@@ -3196,7 +3194,7 @@
 						<count>2</count>
 						<item_version>0</item_version>
 						<item>
-							<documentation>This is a sample property in a concept.
+							<documentation>This is a sample property in an object template.
 </documentation>
 							<annotation>
 								<entries>
@@ -3396,18 +3394,18 @@
 				<px class_id_reference="10" object_id="_19">
 					<element>
 						<name>
-							<id>&lt;package_10&gt;&lt;ConceptInAPackage&gt;</id>
-							<simple>ConceptInAPackage</simple>
+							<id>&lt;package_10&gt;&lt;ObjectTemplateInAPackage&gt;</id>
+							<simple>ObjectTemplateInAPackage</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>package_10::ConceptInAPackage</second>
+									<second>package_10::ObjectTemplateInAPackage</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>package_10.ConceptInAPackage</second>
+									<second>package_10.ObjectTemplateInAPackage</second>
 								</item>
 							</qualified>
 							<location>
@@ -3426,7 +3424,7 @@
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>package_10_ConceptInAPackage</identifiable>
+							<identifiable>package_10_ObjectTemplateInAPackage</identifiable>
 						</name>
 						<documentation></documentation>
 						<annotation>
@@ -8673,18 +8671,18 @@ this is a long comment
 				<px class_id_reference="9" object_id="_41">
 					<element>
 						<name>
-							<id>&lt;base_concept_model&gt;</id>
-							<simple>base_concept_model</simple>
+							<id>&lt;base_object_template_instance&gt;</id>
+							<simple>base_object_template_instance</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>base_concept_model</second>
+									<second>base_object_template_instance</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>base_concept_model</second>
+									<second>base_object_template_instance</second>
 								</item>
 							</qualified>
 							<location>
@@ -8702,9 +8700,9 @@ this is a long comment
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>base_concept_model</identifiable>
+							<identifiable>base_object_template_instance</identifiable>
 						</name>
-						<documentation>This class models the BaseConcept.
+						<documentation>This class instantiates the BaseObjectTemplate.
 </documentation>
 						<annotation>
 							<entries>
@@ -8722,7 +8720,7 @@ this is a long comment
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>BaseConcept</item>
+							<item>BaseObjectTemplate</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -8861,18 +8859,18 @@ this is a long comment
 				<px class_id_reference="9" object_id="_42">
 					<element>
 						<name>
-							<id>&lt;base_with_concept&gt;</id>
-							<simple>base_with_concept</simple>
+							<id>&lt;base_with_object_template&gt;</id>
+							<simple>base_with_object_template</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>base_with_concept</second>
+									<second>base_with_object_template</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>base_with_concept</second>
+									<second>base_with_object_template</second>
 								</item>
 							</qualified>
 							<location>
@@ -8890,9 +8888,9 @@ this is a long comment
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>base_with_concept</identifiable>
+							<identifiable>base_with_object_template</identifiable>
 						</name>
-						<documentation>Base class that models a refined concept.
+						<documentation>Base class that instantiates a derived object template.
 </documentation>
 						<annotation>
 							<entries>
@@ -8910,7 +8908,7 @@ this is a long comment
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>SecondRefinement</item>
+							<item>SecondChildObjectTemplate</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -14814,6 +14812,194 @@ this is a long comment
 				<px class_id_reference="9" object_id="_59">
 					<element>
 						<name>
+							<id>&lt;descendant_object_template_instance&gt;</id>
+							<simple>descendant_object_template_instance</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>descendant_object_template_instance</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>descendant_object_template_instance</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>descendant_object_template_instance</identifiable>
+						</name>
+						<documentation>This class instantiates the DescendantObjectTemplate obje.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<origin_type>4</origin_type>
+						<contained_by>
+							<initialized>0</initialized>
+						</contained_by>
+						<in_global_module>0</in_global_module>
+						<stereotypes>
+							<count>1</count>
+							<item_version>0</item_version>
+							<item>DescendantObjectTemplate</item>
+						</stereotypes>
+						<meta_name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</meta_name>
+						<is_element_extension>0</is_element_extension>
+						<element_properties>
+							<decoration_properties>
+								<generate_decoration>0</generate_decoration>
+								<modeline>
+									<initialized>0</initialized>
+								</modeline>
+								<licence>
+									<initialized>0</initialized>
+								</licence>
+								<code_generation_marker></code_generation_marker>
+							</decoration_properties>
+							<artefact_properties>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</artefact_properties>
+						</element_properties>
+					</element>
+					<all_attributes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</all_attributes>
+					<local_attributes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</local_attributes>
+					<inherited_attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</inherited_attributes>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
+					<is_parent>0</is_parent>
+					<is_child>0</is_child>
+					<is_leaf>0</is_leaf>
+					<is_final>0</is_final>
+					<is_abstract>0</is_abstract>
+					<in_inheritance_relationship>0</in_inheritance_relationship>
+					<root_parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</root_parents>
+					<parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</parents>
+					<leaves>
+						<count>0</count>
+						<item_version>0</item_version>
+					</leaves>
+					<type_parameters>
+						<variable_number_of_parameters>0</variable_number_of_parameters>
+						<count>0</count>
+						<always_in_heap>0</always_in_heap>
+					</type_parameters>
+					<is_associative_container>0</is_associative_container>
+					<object_templates>
+						<count>0</count>
+						<item_version>0</item_version>
+					</object_templates>
+					<associative_container_keys>
+						<count>0</count>
+						<item_version>0</item_version>
+					</associative_container_keys>
+					<provides_opaqueness>0</provides_opaqueness>
+					<can_be_primitive_underlier>0</can_be_primitive_underlier>
+					<orm_properties>
+						<initialized>0</initialized>
+					</orm_properties>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<parent>
+					<entries>
+						<count>0</count>
+						<item_version>0</item_version>
+					</entries>
+					<scope>5</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</first>
+			<second>
+				<px class_id_reference="9" object_id="_60">
+					<element>
+						<name>
 							<id>&lt;fluent&gt;</id>
 							<simple>fluent</simple>
 							<qualified>
@@ -15239,21 +15425,21 @@ this is a long comment
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_60">
+				<px class_id_reference="9" object_id="_61">
 					<element>
 						<name>
-							<id>&lt;further_refined&gt;</id>
-							<simple>further_refined</simple>
+							<id>&lt;further_inherited&gt;</id>
+							<simple>further_inherited</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>further_refined</second>
+									<second>further_inherited</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>further_refined</second>
+									<second>further_inherited</second>
 								</item>
 							</qualified>
 							<location>
@@ -15271,10 +15457,10 @@ this is a long comment
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>further_refined</identifiable>
+							<identifiable>further_inherited</identifiable>
 						</name>
-						<documentation>Descendant class that models a concept which is a refinement of the concept
-modeled by the base.
+						<documentation>Descendant class that instantiates an object template which is a descendant
+of the object template instantiated by the base class.
 </documentation>
 						<annotation>
 							<entries>
@@ -15292,7 +15478,7 @@ modeled by the base.
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>MultipleRefinements</item>
+							<item>MultipleParentsObjectTemplate</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -15382,18 +15568,18 @@ modeled by the base.
 						<count>1</count>
 						<item_version>0</item_version>
 						<item>
-							<id>&lt;base_with_concept&gt;</id>
-							<simple>base_with_concept</simple>
+							<id>&lt;base_with_object_template&gt;</id>
+							<simple>base_with_object_template</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>base_with_concept</second>
+									<second>base_with_object_template</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>base_with_concept</second>
+									<second>base_with_object_template</second>
 								</item>
 							</qualified>
 							<location>
@@ -15411,7 +15597,7 @@ modeled by the base.
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>base_with_concept</identifiable>
+							<identifiable>base_with_object_template</identifiable>
 						</item>
 					</parents>
 					<leaves>
@@ -15460,7 +15646,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_61">
+				<px class_id_reference="9" object_id="_62">
 					<element>
 						<name>
 							<id>&lt;immutable_four&gt;</id>
@@ -15968,7 +16154,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_62">
+				<px class_id_reference="9" object_id="_63">
 					<element>
 						<name>
 							<id>&lt;immutable_one_builtin&gt;</id>
@@ -16236,7 +16422,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_63">
+				<px class_id_reference="9" object_id="_64">
 					<element>
 						<name>
 							<id>&lt;immutable_one_non_builtin&gt;</id>
@@ -16504,7 +16690,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_64">
+				<px class_id_reference="9" object_id="_65">
 					<element>
 						<name>
 							<id>&lt;immutable_two&gt;</id>
@@ -16851,7 +17037,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_65">
+				<px class_id_reference="9" object_id="_66">
 					<element>
 						<name>
 							<id>&lt;immutable_zero&gt;</id>
@@ -17039,7 +17225,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_66">
+				<px class_id_reference="9" object_id="_67">
 					<element>
 						<name>
 							<id>&lt;move_ctor_base&gt;</id>
@@ -17307,7 +17493,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_67">
+				<px class_id_reference="9" object_id="_68">
 					<element>
 						<name>
 							<id>&lt;move_ctor_descendant&gt;</id>
@@ -17607,7 +17793,7 @@ modeled by the base.
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_68">
+				<px class_id_reference="9" object_id="_69">
 					<element>
 						<name>
 							<id>&lt;move_ctor_empty_descendant&gt;</id>
@@ -17779,276 +17965,6 @@ modeled by the base.
 							</location>
 							<identifiable>move_ctor_base</identifiable>
 						</item>
-					</parents>
-					<leaves>
-						<count>0</count>
-						<item_version>0</item_version>
-					</leaves>
-					<type_parameters>
-						<variable_number_of_parameters>0</variable_number_of_parameters>
-						<count>0</count>
-						<always_in_heap>0</always_in_heap>
-					</type_parameters>
-					<is_associative_container>0</is_associative_container>
-					<object_templates>
-						<count>0</count>
-						<item_version>0</item_version>
-					</object_templates>
-					<associative_container_keys>
-						<count>0</count>
-						<item_version>0</item_version>
-					</associative_container_keys>
-					<provides_opaqueness>0</provides_opaqueness>
-					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties>
-						<initialized>0</initialized>
-					</orm_properties>
-				</px>
-			</second>
-		</item>
-		<item>
-			<first>
-				<parent>
-					<entries>
-						<count>0</count>
-						<item_version>0</item_version>
-					</entries>
-					<scope>5</scope>
-					<candidate_labels>
-						<count>0</count>
-						<item_version>0</item_version>
-					</candidate_labels>
-				</parent>
-				<children>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</children>
-			</first>
-			<second>
-				<px class_id_reference="9" object_id="_69">
-					<element>
-						<name>
-							<id>&lt;multi_concept_model&gt;</id>
-							<simple>multi_concept_model</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>multi_concept_model</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>multi_concept_model</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>multi_concept_model</identifiable>
-						</name>
-						<documentation>Type that refines more than one concept.
-</documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<origin_type>4</origin_type>
-						<contained_by>
-							<initialized>0</initialized>
-						</contained_by>
-						<in_global_module>0</in_global_module>
-						<stereotypes>
-							<count>2</count>
-							<item_version>0</item_version>
-							<item>FirstRefinement</item>
-							<item>SecondRefinement</item>
-						</stereotypes>
-						<meta_name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</meta_name>
-						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
-					</element>
-					<all_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</all_attributes>
-					<local_attributes>
-						<count>1</count>
-						<item_version>0</item_version>
-						<item>
-							<documentation>Property of class.
-</documentation>
-							<annotation>
-								<entries>
-									<count>0</count>
-									<bucket_count>1</bucket_count>
-									<item_version>0</item_version>
-								</entries>
-								<scope>0</scope>
-							</annotation>
-							<name>
-								<id></id>
-								<simple>prop_10</simple>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<location>
-									<external_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</external_modules>
-									<model_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</model_modules>
-									<internal_modules>
-										<count>0</count>
-										<item_version>0</item_version>
-									</internal_modules>
-									<element></element>
-								</location>
-								<identifiable></identifiable>
-							</name>
-							<unparsed_type>int</unparsed_type>
-							<parsed_type>
-								<current>
-									<id></id>
-									<simple></simple>
-									<qualified>
-										<count>0</count>
-										<item_version>0</item_version>
-									</qualified>
-									<location>
-										<external_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</external_modules>
-										<model_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</model_modules>
-										<internal_modules>
-											<count>0</count>
-											<item_version>0</item_version>
-										</internal_modules>
-										<element></element>
-									</location>
-									<identifiable></identifiable>
-								</current>
-								<children>
-									<count>0</count>
-									<item_version>0</item_version>
-								</children>
-								<are_children_opaque>0</are_children_opaque>
-								<is_circular_dependency>0</is_circular_dependency>
-								<qualified>
-									<count>0</count>
-									<item_version>0</item_version>
-								</qualified>
-								<identifiable></identifiable>
-								<is_current_simple_type>0</is_current_simple_type>
-								<is_floating_point>0</is_floating_point>
-							</parsed_type>
-							<is_immutable>0</is_immutable>
-							<is_fluent>0</is_fluent>
-							<orm_properties>
-								<initialized>0</initialized>
-							</orm_properties>
-						</item>
-					</local_attributes>
-					<inherited_attributes>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</inherited_attributes>
-					<is_immutable>0</is_immutable>
-					<is_fluent>0</is_fluent>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<is_parent>0</is_parent>
-					<is_child>0</is_child>
-					<is_leaf>0</is_leaf>
-					<is_final>0</is_final>
-					<is_abstract>0</is_abstract>
-					<in_inheritance_relationship>0</in_inheritance_relationship>
-					<root_parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</root_parents>
-					<parents>
-						<count>0</count>
-						<item_version>0</item_version>
 					</parents>
 					<leaves>
 						<count>0</count>
@@ -18289,18 +18205,18 @@ third line with &quot;quote&quot;
 				<px class_id_reference="9" object_id="_71">
 					<element>
 						<name>
-							<id>&lt;multiple_refinement_concept_model&gt;</id>
-							<simple>multiple_refinement_concept_model</simple>
+							<id>&lt;multi_object_template_instance&gt;</id>
+							<simple>multi_object_template_instance</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>multiple_refinement_concept_model</second>
+									<second>multi_object_template_instance</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>multiple_refinement_concept_model</second>
+									<second>multi_object_template_instance</second>
 								</item>
 							</qualified>
 							<location>
@@ -18318,9 +18234,279 @@ third line with &quot;quote&quot;
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>multiple_refinement_concept_model</identifiable>
+							<identifiable>multi_object_template_instance</identifiable>
 						</name>
-						<documentation>Model of MultipleRefinements concept.
+						<documentation>Type that instantiates more than one object template.
+</documentation>
+						<annotation>
+							<entries>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</entries>
+							<scope>0</scope>
+						</annotation>
+						<origin_type>4</origin_type>
+						<contained_by>
+							<initialized>0</initialized>
+						</contained_by>
+						<in_global_module>0</in_global_module>
+						<stereotypes>
+							<count>2</count>
+							<item_version>0</item_version>
+							<item>FirstChildObjectTemplate</item>
+							<item>SecondChildObjectTemplate</item>
+						</stereotypes>
+						<meta_name>
+							<id></id>
+							<simple></simple>
+							<qualified>
+								<count>0</count>
+								<item_version>0</item_version>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable></identifiable>
+						</meta_name>
+						<is_element_extension>0</is_element_extension>
+						<element_properties>
+							<decoration_properties>
+								<generate_decoration>0</generate_decoration>
+								<modeline>
+									<initialized>0</initialized>
+								</modeline>
+								<licence>
+									<initialized>0</initialized>
+								</licence>
+								<code_generation_marker></code_generation_marker>
+							</decoration_properties>
+							<artefact_properties>
+								<count>0</count>
+								<bucket_count>1</bucket_count>
+								<item_version>0</item_version>
+							</artefact_properties>
+						</element_properties>
+					</element>
+					<all_attributes>
+						<count>0</count>
+						<item_version>0</item_version>
+					</all_attributes>
+					<local_attributes>
+						<count>1</count>
+						<item_version>0</item_version>
+						<item>
+							<documentation>Property of class.
+</documentation>
+							<annotation>
+								<entries>
+									<count>0</count>
+									<bucket_count>1</bucket_count>
+									<item_version>0</item_version>
+								</entries>
+								<scope>0</scope>
+							</annotation>
+							<name>
+								<id></id>
+								<simple>prop_10</simple>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<location>
+									<external_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</external_modules>
+									<model_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</model_modules>
+									<internal_modules>
+										<count>0</count>
+										<item_version>0</item_version>
+									</internal_modules>
+									<element></element>
+								</location>
+								<identifiable></identifiable>
+							</name>
+							<unparsed_type>int</unparsed_type>
+							<parsed_type>
+								<current>
+									<id></id>
+									<simple></simple>
+									<qualified>
+										<count>0</count>
+										<item_version>0</item_version>
+									</qualified>
+									<location>
+										<external_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</external_modules>
+										<model_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</model_modules>
+										<internal_modules>
+											<count>0</count>
+											<item_version>0</item_version>
+										</internal_modules>
+										<element></element>
+									</location>
+									<identifiable></identifiable>
+								</current>
+								<children>
+									<count>0</count>
+									<item_version>0</item_version>
+								</children>
+								<are_children_opaque>0</are_children_opaque>
+								<is_circular_dependency>0</is_circular_dependency>
+								<qualified>
+									<count>0</count>
+									<item_version>0</item_version>
+								</qualified>
+								<identifiable></identifiable>
+								<is_current_simple_type>0</is_current_simple_type>
+								<is_floating_point>0</is_floating_point>
+							</parsed_type>
+							<is_immutable>0</is_immutable>
+							<is_fluent>0</is_fluent>
+							<orm_properties>
+								<initialized>0</initialized>
+							</orm_properties>
+						</item>
+					</local_attributes>
+					<inherited_attributes>
+						<count>0</count>
+						<bucket_count>1</bucket_count>
+						<item_version>0</item_version>
+					</inherited_attributes>
+					<is_immutable>0</is_immutable>
+					<is_fluent>0</is_fluent>
+					<base_visitor>
+						<initialized>0</initialized>
+					</base_visitor>
+					<derived_visitor>
+						<initialized>0</initialized>
+					</derived_visitor>
+					<is_visitation_root>0</is_visitation_root>
+					<is_visitation_leaf>0</is_visitation_leaf>
+					<transparent_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</transparent_associations>
+					<opaque_associations>
+						<count>0</count>
+						<item_version>0</item_version>
+					</opaque_associations>
+					<is_parent>0</is_parent>
+					<is_child>0</is_child>
+					<is_leaf>0</is_leaf>
+					<is_final>0</is_final>
+					<is_abstract>0</is_abstract>
+					<in_inheritance_relationship>0</in_inheritance_relationship>
+					<root_parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</root_parents>
+					<parents>
+						<count>0</count>
+						<item_version>0</item_version>
+					</parents>
+					<leaves>
+						<count>0</count>
+						<item_version>0</item_version>
+					</leaves>
+					<type_parameters>
+						<variable_number_of_parameters>0</variable_number_of_parameters>
+						<count>0</count>
+						<always_in_heap>0</always_in_heap>
+					</type_parameters>
+					<is_associative_container>0</is_associative_container>
+					<object_templates>
+						<count>0</count>
+						<item_version>0</item_version>
+					</object_templates>
+					<associative_container_keys>
+						<count>0</count>
+						<item_version>0</item_version>
+					</associative_container_keys>
+					<provides_opaqueness>0</provides_opaqueness>
+					<can_be_primitive_underlier>0</can_be_primitive_underlier>
+					<orm_properties>
+						<initialized>0</initialized>
+					</orm_properties>
+				</px>
+			</second>
+		</item>
+		<item>
+			<first>
+				<parent>
+					<entries>
+						<count>0</count>
+						<item_version>0</item_version>
+					</entries>
+					<scope>5</scope>
+					<candidate_labels>
+						<count>0</count>
+						<item_version>0</item_version>
+					</candidate_labels>
+				</parent>
+				<children>
+					<count>0</count>
+					<bucket_count>1</bucket_count>
+					<item_version>0</item_version>
+				</children>
+			</first>
+			<second>
+				<px class_id_reference="9" object_id="_72">
+					<element>
+						<name>
+							<id>&lt;multiple_parents_object_template_instance&gt;</id>
+							<simple>multiple_parents_object_template_instance</simple>
+							<qualified>
+								<count>2</count>
+								<item_version>0</item_version>
+								<item>
+									<first>1</first>
+									<second>multiple_parents_object_template_instance</second>
+								</item>
+								<item>
+									<first>2</first>
+									<second>multiple_parents_object_template_instance</second>
+								</item>
+							</qualified>
+							<location>
+								<external_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</external_modules>
+								<model_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</model_modules>
+								<internal_modules>
+									<count>0</count>
+									<item_version>0</item_version>
+								</internal_modules>
+								<element></element>
+							</location>
+							<identifiable>multiple_parents_object_template_instance</identifiable>
+						</name>
+						<documentation>Instantiates object template MultipleParentsObjectTemplate.
 </documentation>
 						<annotation>
 							<entries>
@@ -18338,7 +18524,7 @@ third line with &quot;quote&quot;
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>MultipleRefinements</item>
+							<item>MultipleParentsObjectTemplate</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -18559,7 +18745,7 @@ third line with &quot;quote&quot;
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_72">
+				<px class_id_reference="9" object_id="_73">
 					<element>
 						<name>
 							<id>&lt;non_final_leaf&gt;</id>
@@ -18861,7 +19047,7 @@ third line with &quot;quote&quot;
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_73">
+				<px class_id_reference="9" object_id="_74">
 					<element>
 						<name>
 							<id>&lt;non_final_orphan&gt;</id>
@@ -19127,7 +19313,7 @@ third line with &quot;quote&quot;
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_74">
+				<px class_id_reference="9" object_id="_75">
 					<element>
 						<name>
 							<id>&lt;one_line&gt;</id>
@@ -19558,21 +19744,21 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_75">
+				<px class_id_reference="9" object_id="_76">
 					<element>
 						<name>
-							<id>&lt;package_10&gt;&lt;consume_concept&gt;</id>
-							<simple>consume_concept</simple>
+							<id>&lt;package_10&gt;&lt;consume_object_template&gt;</id>
+							<simple>consume_object_template</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>package_10::consume_concept</second>
+									<second>package_10::consume_object_template</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>package_10.consume_concept</second>
+									<second>package_10.consume_object_template</second>
 								</item>
 							</qualified>
 							<location>
@@ -19591,7 +19777,7 @@ a second line
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>package_10_consume_concept</identifiable>
+							<identifiable>package_10_consume_object_template</identifiable>
 						</name>
 						<documentation></documentation>
 						<annotation>
@@ -19610,7 +19796,7 @@ a second line
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>ConceptInAPackage</item>
+							<item>ObjectTemplateInAPackage</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -19746,7 +19932,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_76">
+				<px class_id_reference="9" object_id="_77">
 					<element>
 						<name>
 							<id>&lt;package_1&gt;&lt;class_1&gt;</id>
@@ -20013,7 +20199,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_77">
+				<px class_id_reference="9" object_id="_78">
 					<element>
 						<name>
 							<id>&lt;package_1&gt;&lt;class_2&gt;</id>
@@ -20280,7 +20466,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_78">
+				<px class_id_reference="9" object_id="_79">
 					<element>
 						<name>
 							<id>&lt;package_1&gt;&lt;class_3&gt;</id>
@@ -20547,7 +20733,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_79">
+				<px class_id_reference="9" object_id="_80">
 					<element>
 						<name>
 							<id>&lt;package_1&gt;&lt;class_4&gt;</id>
@@ -20814,7 +21000,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_80">
+				<px class_id_reference="9" object_id="_81">
 					<element>
 						<name>
 							<id>&lt;package_1&gt;&lt;class_5&gt;</id>
@@ -21081,7 +21267,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_81">
+				<px class_id_reference="9" object_id="_82">
 					<element>
 						<name>
 							<id>&lt;package_2&gt;&lt;class_1&gt;</id>
@@ -21348,7 +21534,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_82">
+				<px class_id_reference="9" object_id="_83">
 					<element>
 						<name>
 							<id>&lt;package_2&gt;&lt;class_2&gt;</id>
@@ -21695,7 +21881,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_83">
+				<px class_id_reference="9" object_id="_84">
 					<element>
 						<name>
 							<id>&lt;package_6&gt;&lt;child&gt;</id>
@@ -21999,7 +22185,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_84">
+				<px class_id_reference="9" object_id="_85">
 					<element>
 						<name>
 							<id>&lt;package_6&gt;&lt;child_via_settings&gt;</id>
@@ -22266,7 +22452,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_85">
+				<px class_id_reference="9" object_id="_86">
 					<element>
 						<name>
 							<id>&lt;package_6&gt;&lt;parent&gt;</id>
@@ -22533,7 +22719,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_86">
+				<px class_id_reference="9" object_id="_87">
 					<element>
 						<name>
 							<id>&lt;package_7&gt;&lt;parent&gt;</id>
@@ -22800,7 +22986,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_87">
+				<px class_id_reference="9" object_id="_88">
 					<element>
 						<name>
 							<id>&lt;package_8&gt;&lt;child&gt;</id>
@@ -23104,7 +23290,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_88">
+				<px class_id_reference="9" object_id="_89">
 					<element>
 						<name>
 							<id>&lt;package_8&gt;&lt;child_via_settings&gt;</id>
@@ -23371,7 +23557,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_89">
+				<px class_id_reference="9" object_id="_90">
 					<element>
 						<name>
 							<id>&lt;package_9&gt;&lt;child&gt;</id>
@@ -23674,7 +23860,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_90">
+				<px class_id_reference="9" object_id="_91">
 					<element>
 						<name>
 							<id>&lt;package_9&gt;&lt;child_via_settings&gt;</id>
@@ -23941,7 +24127,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_91">
+				<px class_id_reference="9" object_id="_92">
 					<element>
 						<name>
 							<id>&lt;parent_outside&gt;</id>
@@ -24207,7 +24393,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_92">
+				<px class_id_reference="9" object_id="_93">
 					<element>
 						<name>
 							<id>&lt;parent_with_members&gt;</id>
@@ -24473,7 +24659,7 @@ a second line
 				</children>
 			</first>
 			<second>
-				<px class_id_reference="9" object_id="_93">
+				<px class_id_reference="9" object_id="_94">
 					<element>
 						<name>
 							<id>&lt;parent_without_members&gt;</id>
@@ -24524,194 +24710,6 @@ a second line
 						<stereotypes>
 							<count>0</count>
 							<item_version>0</item_version>
-						</stereotypes>
-						<meta_name>
-							<id></id>
-							<simple></simple>
-							<qualified>
-								<count>0</count>
-								<item_version>0</item_version>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable></identifiable>
-						</meta_name>
-						<is_element_extension>0</is_element_extension>
-						<element_properties>
-							<decoration_properties>
-								<generate_decoration>0</generate_decoration>
-								<modeline>
-									<initialized>0</initialized>
-								</modeline>
-								<licence>
-									<initialized>0</initialized>
-								</licence>
-								<code_generation_marker></code_generation_marker>
-							</decoration_properties>
-							<artefact_properties>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</artefact_properties>
-						</element_properties>
-					</element>
-					<all_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</all_attributes>
-					<local_attributes>
-						<count>0</count>
-						<item_version>0</item_version>
-					</local_attributes>
-					<inherited_attributes>
-						<count>0</count>
-						<bucket_count>1</bucket_count>
-						<item_version>0</item_version>
-					</inherited_attributes>
-					<is_immutable>0</is_immutable>
-					<is_fluent>0</is_fluent>
-					<base_visitor>
-						<initialized>0</initialized>
-					</base_visitor>
-					<derived_visitor>
-						<initialized>0</initialized>
-					</derived_visitor>
-					<is_visitation_root>0</is_visitation_root>
-					<is_visitation_leaf>0</is_visitation_leaf>
-					<transparent_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</transparent_associations>
-					<opaque_associations>
-						<count>0</count>
-						<item_version>0</item_version>
-					</opaque_associations>
-					<is_parent>0</is_parent>
-					<is_child>0</is_child>
-					<is_leaf>0</is_leaf>
-					<is_final>0</is_final>
-					<is_abstract>0</is_abstract>
-					<in_inheritance_relationship>0</in_inheritance_relationship>
-					<root_parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</root_parents>
-					<parents>
-						<count>0</count>
-						<item_version>0</item_version>
-					</parents>
-					<leaves>
-						<count>0</count>
-						<item_version>0</item_version>
-					</leaves>
-					<type_parameters>
-						<variable_number_of_parameters>0</variable_number_of_parameters>
-						<count>0</count>
-						<always_in_heap>0</always_in_heap>
-					</type_parameters>
-					<is_associative_container>0</is_associative_container>
-					<object_templates>
-						<count>0</count>
-						<item_version>0</item_version>
-					</object_templates>
-					<associative_container_keys>
-						<count>0</count>
-						<item_version>0</item_version>
-					</associative_container_keys>
-					<provides_opaqueness>0</provides_opaqueness>
-					<can_be_primitive_underlier>0</can_be_primitive_underlier>
-					<orm_properties>
-						<initialized>0</initialized>
-					</orm_properties>
-				</px>
-			</second>
-		</item>
-		<item>
-			<first>
-				<parent>
-					<entries>
-						<count>0</count>
-						<item_version>0</item_version>
-					</entries>
-					<scope>5</scope>
-					<candidate_labels>
-						<count>0</count>
-						<item_version>0</item_version>
-					</candidate_labels>
-				</parent>
-				<children>
-					<count>0</count>
-					<bucket_count>1</bucket_count>
-					<item_version>0</item_version>
-				</children>
-			</first>
-			<second>
-				<px class_id_reference="9" object_id="_94">
-					<element>
-						<name>
-							<id>&lt;refinement_concept_model&gt;</id>
-							<simple>refinement_concept_model</simple>
-							<qualified>
-								<count>2</count>
-								<item_version>0</item_version>
-								<item>
-									<first>1</first>
-									<second>refinement_concept_model</second>
-								</item>
-								<item>
-									<first>2</first>
-									<second>refinement_concept_model</second>
-								</item>
-							</qualified>
-							<location>
-								<external_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</external_modules>
-								<model_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</model_modules>
-								<internal_modules>
-									<count>0</count>
-									<item_version>0</item_version>
-								</internal_modules>
-								<element></element>
-							</location>
-							<identifiable>refinement_concept_model</identifiable>
-						</name>
-						<documentation>This class models the Refinement concept.
-</documentation>
-						<annotation>
-							<entries>
-								<count>0</count>
-								<bucket_count>1</bucket_count>
-								<item_version>0</item_version>
-							</entries>
-							<scope>0</scope>
-						</annotation>
-						<origin_type>4</origin_type>
-						<contained_by>
-							<initialized>0</initialized>
-						</contained_by>
-						<in_global_module>0</in_global_module>
-						<stereotypes>
-							<count>1</count>
-							<item_version>0</item_version>
-							<item>Refinement</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -25068,18 +25066,18 @@ a second line
 				<px class_id_reference="9" object_id="_96">
 					<element>
 						<name>
-							<id>&lt;second_refinement_concept_model&gt;</id>
-							<simple>second_refinement_concept_model</simple>
+							<id>&lt;second_descendant_object_template_instance&gt;</id>
+							<simple>second_descendant_object_template_instance</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>second_refinement_concept_model</second>
+									<second>second_descendant_object_template_instance</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>second_refinement_concept_model</second>
+									<second>second_descendant_object_template_instance</second>
 								</item>
 							</qualified>
 							<location>
@@ -25097,9 +25095,9 @@ a second line
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>second_refinement_concept_model</identifiable>
+							<identifiable>second_descendant_object_template_instance</identifiable>
 						</name>
-						<documentation>Second refinement model
+						<documentation>Second descendant instance
 </documentation>
 						<annotation>
 							<entries>
@@ -25117,7 +25115,7 @@ a second line
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>SecondRefinement</item>
+							<item>SecondChildObjectTemplate</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
@@ -25792,18 +25790,18 @@ a second line
 				<px class_id_reference="9" object_id="_99">
 					<element>
 						<name>
-							<id>&lt;simple_concept_model&gt;</id>
-							<simple>simple_concept_model</simple>
+							<id>&lt;simple_object_template_instance&gt;</id>
+							<simple>simple_object_template_instance</simple>
 							<qualified>
 								<count>2</count>
 								<item_version>0</item_version>
 								<item>
 									<first>1</first>
-									<second>simple_concept_model</second>
+									<second>simple_object_template_instance</second>
 								</item>
 								<item>
 									<first>2</first>
-									<second>simple_concept_model</second>
+									<second>simple_object_template_instance</second>
 								</item>
 							</qualified>
 							<location>
@@ -25821,9 +25819,9 @@ a second line
 								</internal_modules>
 								<element></element>
 							</location>
-							<identifiable>simple_concept_model</identifiable>
+							<identifiable>simple_object_template_instance</identifiable>
 						</name>
-						<documentation>This class models simple concept.
+						<documentation>This class instantiates the simple object template.
 </documentation>
 						<annotation>
 							<entries>
@@ -25841,7 +25839,7 @@ a second line
 						<stereotypes>
 							<count>1</count>
 							<item_version>0</item_version>
-							<item>SimpleConcept</item>
+							<item>SimpleObjectTemplate</item>
 						</stereotypes>
 						<meta_name>
 							<id></id>
