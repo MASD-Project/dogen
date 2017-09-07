@@ -14,22 +14,22 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-05 Tue 23:32]
+#+CAPTION: Clock summary at [2017-09-07 Thu 08:31]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *13:40* |       |      | 100.0 |
+| *Total time*                                                                | *14:06* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 13:40   |       |      | 100.0 |
-| Active                                                                      |         | 13:40 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   5.4 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   9.0 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   6.3 |
-| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   9.1 |
-| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   3.4 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  17.8 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |  13.3 |
-| STARTED Rename yarn concepts                                                |         |       | 4:52 |  35.6 |
+| Stories                                                                     | 14:06   |       |      | 100.0 |
+| Active                                                                      |         | 14:06 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   5.2 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:14 |   8.7 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   6.1 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   8.9 |
+| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   3.3 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  17.3 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |  12.9 |
+| STARTED Rename yarn concepts                                                |         |       | 5:18 |  37.6 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -438,6 +438,7 @@ namespace, and making it clear they are connected to yarn. Example:
 and so forth.
 
 *** STARTED Rename yarn concepts                                      :story:
+    CLOCK: [2017-09-07 Thu 08:05]--[2017-09-07 Thu 08:31] =>  0:26
     CLOCK: [2017-09-05 Tue 22:55]--[2017-09-05 Tue 23:32] =>  0:37
     CLOCK: [2017-09-05 Tue 21:51]--[2017-09-05 Tue 22:54] =>  1:03
     CLOCK: [2017-09-05 Tue 21:39]--[2017-09-05 Tue 21:50] =>  0:11
@@ -478,11 +479,12 @@ Tasks:
 - rename yarn element and model collections.
 - rename object's modeled concepts
 - rename concept transform, tests
-- rename stereotype
 - rename meta-name, update JSON for tests
+- rename stereotype
 - tidy-up mock factory (variables, method names)
 - ORM transform uses expand instead of transform
 - rename test model types with concept in the name.
+- check that tailor generates correct code.
 
 *** Code-generate annotations type templates                          :story:
 

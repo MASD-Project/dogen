@@ -1530,7 +1530,7 @@
         "simple": "BaseConcept2"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1551,7 +1551,7 @@
         "simple": "BaseConcept"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1572,7 +1572,7 @@
         "simple": "FirstRefinement"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1598,7 +1598,7 @@
         "simple": "MultipleRefinements"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1627,7 +1627,7 @@
         "simple": "Refinement"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1653,7 +1653,7 @@
         "simple": "SecondRefinement"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1679,7 +1679,7 @@
         "simple": "SimpleConcept"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
@@ -1708,7 +1708,7 @@
         "internal_modules": "package_10"
       },
       "meta_name": {
-        "simple": "concept",
+        "simple": "object_template",
         "external_modules": "dogen",
         "model_modules": "yarn",
         "internal_modules": "meta_model"
