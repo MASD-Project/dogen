@@ -248,7 +248,7 @@ adapter::to_module(const processed_object& po) const {
 std::pair<annotations::scribble_group,
           boost::shared_ptr<meta_model::object_template>>
 adapter::to_object_template(const processed_object& po) const {
-    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to concept: "
+    BOOST_LOG_SEV(lg, debug) << "Transforming dia object to object template: "
                              << po.id();
 
     auto c(boost::make_shared<meta_model::object_template>());

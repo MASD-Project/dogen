@@ -476,13 +476,13 @@ into its yarn representation.#</dia:string>
         <dia:point val="-32,24"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-32.05,23.95;-24.705,27.05"/>
+        <dia:rectangle val="-32.05,23.95;-24.135,27.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-32,24"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.2450000000000001"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -1418,7 +1418,7 @@ into its yarn representation.#</dia:string>
         <dia:point val="73.7675,55.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="54.0012,55.05;74.5175,68.8"/>
+        <dia:rectangle val="54.0013,55.05;74.5175,68.8"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -2726,13 +2726,13 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-6,98"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-6.05,97.95;2.03,106.45"/>
+        <dia:rectangle val="-6.05,97.95;2.635,106.45"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-6,98"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.9799999999999995"/>
+        <dia:real val="8.5849999999999991"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="8.4000000000000004"/>
@@ -3228,13 +3228,13 @@ On the case of a UML note, represents the text of the note.#</dia:string>
         <dia:point val="-61,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="-61.05,48.95;-53.27,52.05"/>
+        <dia:rectangle val="-61.05,48.95;-53.135,52.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="-61,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="7.6799999999999997"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4628,13 +4628,13 @@ manageable format.#</dia:string>
         <dia:point val="12,49"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="11.95,48.95;18.91,52.05"/>
+        <dia:rectangle val="11.95,48.95;19.865,52.05"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="12,49"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="6.8600000000000003"/>
+        <dia:real val="7.8150000000000004"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3"/>
@@ -4774,7 +4774,7 @@ manageable format.#</dia:string>
         <dia:point val="24.6875,40.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.38,40.05;25.4375,49.7498"/>
+        <dia:rectangle val="15.7217,40.05;25.4375,49.7498"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -4782,8 +4782,8 @@ manageable format.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="24.6875,40.8"/>
         <dia:point val="24.6875,45"/>
-        <dia:point val="15.43,45"/>
-        <dia:point val="15.43,48.9498"/>
+        <dia:point val="15.7729,45"/>
+        <dia:point val="15.8696,48.9498"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -5996,7 +5996,7 @@ manageable format.#</dia:string>
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#concept#</dia:string>
+            <dia:string>#object_template#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>##</dia:string>

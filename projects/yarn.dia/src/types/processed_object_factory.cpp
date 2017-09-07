@@ -307,7 +307,7 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
             po.yarn_element_type(yarn_element_types::exception);
         } else if (stereotype == concept) {
             require_yarn_type_not_set(po.yarn_element_type());
-            po.yarn_element_type(yarn_element_types::concept);
+            po.yarn_element_type(yarn_element_types::object_template);
         } else if (stereotype == object) {
             require_yarn_type_not_set(po.yarn_element_type());
             po.yarn_element_type(yarn_element_types::object);

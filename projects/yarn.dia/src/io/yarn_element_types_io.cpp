@@ -47,8 +47,8 @@ std::ostream& operator<<(std::ostream& s, const yarn_element_types& v) {
     case yarn_element_types::object:
         attr = "\"object\"";
         break;
-    case yarn_element_types::concept:
-        attr = "\"concept\"";
+    case yarn_element_types::object_template:
+        attr = "\"object_template\"";
         break;
     case yarn_element_types::primitive:
         attr = "\"primitive\"";
