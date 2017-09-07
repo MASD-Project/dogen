@@ -1329,7 +1329,7 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
         <dia:string>#Nameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a name.#</dia:string>
@@ -1464,7 +1464,7 @@ Aggregates a group of logically related elements into a unit.#</dia:string>
         <dia:string>#Documentable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to provide documentation.#</dia:string>
@@ -1603,7 +1603,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Annotatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have meta-data associated.#</dia:string>
@@ -1864,7 +1864,7 @@ for Java, etc.#</dia:string>
         <dia:string>#Element#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A unit of modeling that can be code generated.
@@ -3603,7 +3603,7 @@ can make use of these types.#</dia:string>
         <dia:string>#Stateful#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Ability to have a state.#</dia:string>
@@ -3842,7 +3842,7 @@ formatting.#</dia:string>
         <dia:string>#DeterminableOrigin#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#A unit of modeling that can be code generated.#</dia:string>
@@ -4019,7 +4019,7 @@ formatting.#</dia:string>
         <dia:string>#Containable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The ability to be contained inside a module.#</dia:string>
@@ -5766,7 +5766,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#TraversalVisitor#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -6334,7 +6334,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Visitable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The ability to handle visitation.#</dia:string>
@@ -6538,7 +6538,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
         <dia:string>#Associatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to associate itself with other elements.#</dia:string>
@@ -6699,7 +6699,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>#Generalizable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#The element has the ability to be part of a generalization relationship.#</dia:string>
@@ -7018,7 +7018,7 @@ This is used to break cycles where required.#</dia:string>
         <dia:string>#Relatable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Element has the ability to have relationships with other elements.#</dia:string>
@@ -7739,7 +7739,7 @@ space.#</dia:string>
         <dia:string>#Parameterisable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -8388,7 +8388,7 @@ space.#</dia:string>
         <dia:string>#Stereotypable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>
@@ -34443,7 +34443,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         <dia:string>#MetaNameable#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

@@ -6767,7 +6767,7 @@ this is a long comment#</dia:string>
         <dia:string>#SimpleConcept#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This is an example of a concept.#</dia:string>
@@ -7058,7 +7058,7 @@ this is a long comment#</dia:string>
         <dia:string>#BaseConcept#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This is the base concept.#</dia:string>
@@ -7192,7 +7192,7 @@ this is a long comment#</dia:string>
         <dia:string>#Refinement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#This concept refines BaseConcept.#</dia:string>
@@ -7587,7 +7587,7 @@ this is a long comment#</dia:string>
         <dia:string>#BaseConcept2#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Base concept.#</dia:string>
@@ -7721,7 +7721,7 @@ this is a long comment#</dia:string>
         <dia:string>#FirstRefinement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#First refinement #</dia:string>
@@ -7855,7 +7855,7 @@ this is a long comment#</dia:string>
         <dia:string>#SecondRefinement#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Second refinement #</dia:string>
@@ -8071,7 +8071,7 @@ this is a long comment#</dia:string>
         <dia:string>#MultipleRefinements#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>#Multiple refinements concept#</dia:string>
@@ -14941,7 +14941,7 @@ name.#</dia:string>
         <dia:string>#ConceptInAPackage#</dia:string>
       </dia:attribute>
       <dia:attribute name="stereotype">
-        <dia:string>#yarn::concept#</dia:string>
+        <dia:string>#yarn::object_template#</dia:string>
       </dia:attribute>
       <dia:attribute name="comment">
         <dia:string>##</dia:string>

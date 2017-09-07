@@ -60,7 +60,7 @@ const std::string uml_realization("UML - Realizes");
 const std::string invalid_object_type("Invalid value for object type: ");
 
 const std::string object("yarn::object");
-const std::string concept("yarn::concept");
+const std::string object_template("yarn::object_template");
 const std::string enumeration("yarn::enumeration");
 const std::string primitive("yarn::primitive");
 const std::string exception("yarn::exception");
@@ -305,7 +305,7 @@ parse_as_stereotypes(dogen::dia::attribute a, processed_object& po) {
         } else if (stereotype == exception) {
             require_yarn_type_not_set(po.yarn_element_type());
             po.yarn_element_type(yarn_element_types::exception);
-        } else if (stereotype == concept) {
+        } else if (stereotype == object_template) {
             require_yarn_type_not_set(po.yarn_element_type());
             po.yarn_element_type(yarn_element_types::object_template);
         } else if (stereotype == object) {
