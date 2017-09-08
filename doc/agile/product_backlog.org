@@ -2884,6 +2884,11 @@ We need a test for composition / recursion.
 - =-Winconsistent-missing-override=: new clang warning, probably 3.6.
 - =-Wdocumentation=: clang doxygen warning.
 
+See also:
+
+- [[http://releases.llvm.org/5.0.0/tools/clang/docs/ReleaseNotes.html][Clang 5.0.0 Release Notes]], section "Improvements to Clang’s
+  diagnostics".
+
 *** Create utility methods for =__type__= etc                         :story:
 
 At present we've hard-coded the field name for =__type__= and so forth
