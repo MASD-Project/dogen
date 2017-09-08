@@ -1,1 +1,257 @@
-{ "root_module" :  { "name" :  { "simple" : "" } , "meta_name" :  { "simple" : "module", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "Stores the configuration options for Dogen applications.\n\nThe options model provides types to store general configuration\noptions for all the different Dogen applications, such as knitter,\netc.\n", "annotation" : {"yarn.dia.comment" : "true", "yarn.model_modules" : "options", "yarn.external_modules" : "dogen", "yarn.input_language" : "cpp", "quilt.cpp.enabled" : "true", "quilt.cpp.msbuild.enabled" : "false", "quilt.cpp.visual_studio.project.enabled" : "false", "quilt.cpp.visual_studio.solution.enabled" : "false", "quilt.csharp.enabled" : "false", "annotations.profile" : "dogen.disable_common_facets" } }, "elements": [ { "name" :  { "simple" : "darting_options" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "log_level" } , "unparsed_type" : "std::string", "documentation" : "What level of logging to log at.\n" },  { "name" : { "simple" : "force_write" } , "unparsed_type" : "bool" },  { "name" : { "simple" : "product_name" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "log_directory" } , "unparsed_type" : "boost::filesystem::path" } ] },  { "name" :  { "simple" : "knitting_options" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "Configuration options related to the knit library.\n", "attributes": [ { "name" : { "simple" : "log_level" } , "unparsed_type" : "std::string", "documentation" : "What level of logging to log at.\n" },  { "name" : { "simple" : "target" } , "unparsed_type" : "boost::filesystem::path", "documentation" : "Path to the Dia diagram that contains the model to generate.\n" },  { "name" : { "simple" : "delete_extra_files" } , "unparsed_type" : "bool", "documentation" : "Delete any extra files found in managed directories.\n" },  { "name" : { "simple" : "force_write" } , "unparsed_type" : "bool", "documentation" : "Always generate files even if there are no differences with existing file.\n" },  { "name" : { "simple" : "ignore_patterns" } , "unparsed_type" : "std::vector<std::string>", "documentation" : "List of regular expressions to filter out files to ignore.\n" },  { "name" : { "simple" : "output_directory_path" } , "unparsed_type" : "boost::filesystem::path", "documentation" : "Full path to the directory in which to place the generated code.\n" },  { "name" : { "simple" : "cpp_headers_output_directory_path" } , "unparsed_type" : "boost::filesystem::path", "documentation" : "If set, all c++ include files will be placed at this location.\n" },  { "name" : { "simple" : "log_directory" } , "unparsed_type" : "boost::filesystem::path" },  { "name" : { "simple" : "compatibility_mode" } , "unparsed_type" : "bool", "documentation" : "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n" } ] },  { "name" :  { "simple" : "knitting_options_validator" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "stitching_options" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "log_level" } , "unparsed_type" : "std::string", "documentation" : "What level of logging to log at.\n" },  { "name" : { "simple" : "target" } , "unparsed_type" : "boost::filesystem::path" },  { "name" : { "simple" : "force_write" } , "unparsed_type" : "bool" },  { "name" : { "simple" : "log_directory" } , "unparsed_type" : "boost::filesystem::path" },  { "name" : { "simple" : "compatibility_mode" } , "unparsed_type" : "bool", "documentation" : "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n" } ] },  { "name" :  { "simple" : "tailoring_options" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "log_level" } , "unparsed_type" : "std::string", "documentation" : "What level of logging to log at.\n" },  { "name" : { "simple" : "target" } , "unparsed_type" : "boost::filesystem::path" },  { "name" : { "simple" : "output" } , "unparsed_type" : "boost::filesystem::path" },  { "name" : { "simple" : "force_write" } , "unparsed_type" : "bool" },  { "name" : { "simple" : "log_directory" } , "unparsed_type" : "boost::filesystem::path" } ] },  { "name" :  { "simple" : "validation_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "An error occurred when validating options.\n" } ] }
+{
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
+    "documentation": "Stores the configuration options for Dogen applications.\n\nThe options model provides types to store general configuration\noptions for all the different Dogen applications, such as knitter,\netc.\n",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "options",
+      "yarn.external_modules": "dogen",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen.disable_common_facets"
+    }
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "darting_options"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "log_level"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "What level of logging to log at.\n"
+        },
+        {
+          "name": {
+            "simple": "force_write"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "product_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "log_directory"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "knitting_options"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Configuration options related to the knit library.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "log_level"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "What level of logging to log at.\n"
+        },
+        {
+          "name": {
+            "simple": "target"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Path to the Dia diagram that contains the model to generate.\n"
+        },
+        {
+          "name": {
+            "simple": "delete_extra_files"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Delete any extra files found in managed directories.\n"
+        },
+        {
+          "name": {
+            "simple": "force_write"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Always generate files even if there are no differences with existing file.\n"
+        },
+        {
+          "name": {
+            "simple": "ignore_patterns"
+          },
+          "unparsed_type": "std::vector<std::string>",
+          "documentation": "List of regular expressions to filter out files to ignore.\n"
+        },
+        {
+          "name": {
+            "simple": "output_directory_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Full path to the directory in which to place the generated code.\n"
+        },
+        {
+          "name": {
+            "simple": "cpp_headers_output_directory_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "If set, all c++ include files will be placed at this location.\n"
+        },
+        {
+          "name": {
+            "simple": "log_directory"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "compatibility_mode"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "knitting_options_validator"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "stitching_options"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "log_level"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "What level of logging to log at.\n"
+        },
+        {
+          "name": {
+            "simple": "target"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "force_write"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "log_directory"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "compatibility_mode"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Try to process diagram even if there are errors.\n\nOnly a certain class of errors are allowed, believed to be caused by backwards or\nforwards compatibility problems: missing types or types that do not exist.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "tailoring_options"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "log_level"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "What level of logging to log at.\n"
+        },
+        {
+          "name": {
+            "simple": "target"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "output"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "force_write"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "log_directory"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "validation_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred when validating options.\n"
+    }
+  ]
+}

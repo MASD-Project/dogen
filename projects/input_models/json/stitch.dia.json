@@ -1,1 +1,435 @@
-{ "root_module" :  { "name" :  { "simple" : "" } , "meta_name" :  { "simple" : "module", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "annotation" : {"yarn.dia.comment" : "true", "yarn.model_modules" : "stitch", "yarn.external_modules" : "dogen", "yarn.reference" : "annotations.dia", "yarn.reference" : "formatters.dia", "yarn.input_language" : "cpp", "quilt.cpp.enabled" : "true", "quilt.cpp.msbuild.enabled" : "false", "quilt.cpp.visual_studio.project.enabled" : "false", "quilt.cpp.visual_studio.solution.enabled" : "false", "quilt.csharp.enabled" : "false", "annotations.profile" : "dogen.disable_common_facets" } }, "elements": [ { "name" :  { "simple" : "block" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "type" } , "unparsed_type" : "block_types" },  { "name" : { "simple" : "content" } , "unparsed_type" : "std::string" } ] },  { "name" :  { "simple" : "formatter" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "instantiator" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "line" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "blocks" } , "unparsed_type" : "std::list<block>" } ] },  { "name" :  { "simple" : "parser" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "properties" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "decoration_properties" } , "unparsed_type" : "boost::optional<formatters::decoration_properties>" },  { "name" : { "simple" : "stitching_properties" } , "unparsed_type" : "stitching_properties" } ] },  { "name" :  { "simple" : "properties_factory" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "resolver" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "stitching_properties" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "stream_variable_name" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "relative_output_directory" } , "unparsed_type" : "boost::filesystem::path" },  { "name" : { "simple" : "inclusion_dependencies" } , "unparsed_type" : "std::list<std::string>" },  { "name" : { "simple" : "containing_namespaces" } , "unparsed_type" : "std::list<std::string>" },  { "name" : { "simple" : "wale_template" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "wale_kvps" } , "unparsed_type" : "std::unordered_map<std::string, std::string>" } ] },  { "name" :  { "simple" : "stitching_properties_factory" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "text_template" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "Domain representation of a stitch template.\n", "attributes": [ { "name" : { "simple" : "input_path" } , "unparsed_type" : "boost::filesystem::path", "documentation" : "Path where the template was read out from, if any.\n" },  { "name" : { "simple" : "output_path" } , "unparsed_type" : "boost::filesystem::path", "documentation" : "Path where the template should be outputted to, if any.\n" },  { "name" : { "simple" : "properties" } , "unparsed_type" : "properties", "documentation" : "Properties of the template.\n" },  { "name" : { "simple" : "variables" } , "unparsed_type" : "std::unordered_map<std::string, std::string>", "documentation" : "Any variables which may have been defined with the template.\n" },  { "name" : { "simple" : "body" } , "unparsed_type" : "text_template_body", "documentation" : "Body of the text template.\n" } ] },  { "name" :  { "simple" : "text_template_body" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "attributes": [ { "name" : { "simple" : "scribble_group" } , "unparsed_type" : "annotations::scribble_group" },  { "name" : { "simple" : "lines" } , "unparsed_type" : "std::list<line>" } ] },  { "name" :  { "simple" : "traits" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "workflow" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "handcrafted" ]  },  { "name" :  { "simple" : "block_types" } , "meta_name" :  { "simple" : "enumeration", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "enumerators": [ { "name" : { "simple" : "text_block" } },  { "name" : { "simple" : "standard_control_block" } },  { "name" : { "simple" : "expression_block" } },  { "name" : { "simple" : "variable_block" } } ] },  { "name" :  { "simple" : "building_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "An error occurred whilst building.\n" },  { "name" :  { "simple" : "formatting_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "An error occurred whilst formatting.\n" },  { "name" :  { "simple" : "instantiation_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" }  },  { "name" :  { "simple" : "parsing_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "An error occurred whilst parsing.\n" },  { "name" :  { "simple" : "resolution_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "An error occurred when trying to resolve a key.\n" },  { "name" :  { "simple" : "workflow_error" } , "meta_name" :  { "simple" : "exception", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" }  } ] }
+{
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "stitch",
+      "yarn.external_modules": "dogen",
+      "yarn.reference": "formatters.dia",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen.disable_common_facets"
+    }
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "block"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "type"
+          },
+          "unparsed_type": "block_types"
+        },
+        {
+          "name": {
+            "simple": "content"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatter"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "instantiator"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "line"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "blocks"
+          },
+          "unparsed_type": "std::list<block>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "parser"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "properties"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "decoration_properties"
+          },
+          "unparsed_type": "boost::optional<formatters::decoration_properties>"
+        },
+        {
+          "name": {
+            "simple": "stitching_properties"
+          },
+          "unparsed_type": "stitching_properties"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "properties_factory"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "resolver"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "stitching_properties"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "stream_variable_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "relative_output_directory"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "inclusion_dependencies"
+          },
+          "unparsed_type": "std::list<std::string>"
+        },
+        {
+          "name": {
+            "simple": "containing_namespaces"
+          },
+          "unparsed_type": "std::list<std::string>"
+        },
+        {
+          "name": {
+            "simple": "wale_template"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "wale_kvps"
+          },
+          "unparsed_type": "std::unordered_map<std::string, std::string>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "stitching_properties_factory"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "text_template"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Domain representation of a stitch template.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "input_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Path where the template was read out from, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "output_path"
+          },
+          "unparsed_type": "boost::filesystem::path",
+          "documentation": "Path where the template should be outputted to, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "properties"
+          },
+          "unparsed_type": "properties",
+          "documentation": "Properties of the template.\n"
+        },
+        {
+          "name": {
+            "simple": "variables"
+          },
+          "unparsed_type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Any variables which may have been defined with the template.\n"
+        },
+        {
+          "name": {
+            "simple": "body"
+          },
+          "unparsed_type": "text_template_body",
+          "documentation": "Body of the text template.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "text_template_body"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "scribble_group"
+          },
+          "unparsed_type": "annotations::scribble_group"
+        },
+        {
+          "name": {
+            "simple": "lines"
+          },
+          "unparsed_type": "std::list<line>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "traits"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "workflow"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "block_types"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "text_block"
+          }
+        },
+        {
+          "name": {
+            "simple": "standard_control_block"
+          }
+        },
+        {
+          "name": {
+            "simple": "expression_block"
+          }
+        },
+        {
+          "name": {
+            "simple": "variable_block"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "building_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst building.\n"
+    },
+    {
+      "name": {
+        "simple": "formatting_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst formatting.\n"
+    },
+    {
+      "name": {
+        "simple": "instantiation_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "parsing_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst parsing.\n"
+    },
+    {
+      "name": {
+        "simple": "resolution_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred when trying to resolve a key.\n"
+    },
+    {
+      "name": {
+        "simple": "workflow_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    }
+  ]
+}

@@ -1,1 +1,1013 @@
-{ "root_module" :  { "name" :  { "simple" : "" } , "meta_name" :  { "simple" : "module", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "The Northwind model is a \"transliteration\" of Microsoft's\nNorthwind database, provided as a sample for Access and SQL Server.\nIt's objective is to test Dogen integration with ODB.\n", "annotation" : {"yarn.dia.comment" : "true", "yarn.model_modules" : "northwind", "yarn.external_modules" : "dogen::test_models", "yarn.input_language" : "cpp", "quilt.cpp.enabled" : "true", "quilt.cpp.hash.enabled" : "false", "quilt.cpp.visual_studio.project.enabled" : "false", "quilt.cpp.visual_studio.solution.enabled" : "false", "quilt.csharp.enabled" : "false", "annotations.profile" : "dogen", "yarn.orm.database_system" : "oracle", "yarn.orm.database_system" : "postgresql", "yarn.orm.letter_case" : "upper_case", "yarn.orm.schema_name" : "northwind" } }, "elements": [ { "name" :  { "simple" : "categories" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "category_id" } , "unparsed_type" : "category_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "category_name" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "description" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "picutre" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } } ] },  { "name" :  { "simple" : "customers" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "customer_id" } , "unparsed_type" : "customer_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "customer_code" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "company_name" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "contact_name" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "contact_title" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "address" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "city" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "region" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "postal_code" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "country" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "phone" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "fax" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } } ] },  { "name" :  { "simple" : "employees" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "employee_id" } , "unparsed_type" : "employee_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "last_name" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "false", "odb_pragma" : "column("LASTNAME")" } },  { "name" : { "simple" : "first_name" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "false", "odb_pragma" : "column("FIRSTNAME")" } },  { "name" : { "simple" : "title" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "title_of_courtesy" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "birth_date" } , "unparsed_type" : "boost::gregorian::date", "annotation" : {"yarn.orm.is_nullable" : "true", "odb_pragma" : "column("BIRTHDATE")" } },  { "name" : { "simple" : "hire_date" } , "unparsed_type" : "boost::gregorian::date", "annotation" : {"yarn.orm.is_nullable" : "true", "odb_pragma" : "column("HIREDATE")" } },  { "name" : { "simple" : "address" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "city" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "region" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "postal_code" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "country" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "home_phone" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "extension" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "photo" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "notes" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "reports_to" } , "unparsed_type" : "employee_id", "annotation" : {"yarn.orm.is_nullable" : "true" } } ] },  { "name" :  { "simple" : "non_orm_class" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "documentation" : "test the ODB behaviour for non-ORM classes.\n", "attributes": [ { "name" : { "simple" : "prop_0" } , "unparsed_type" : "int" } ] },  { "name" :  { "simple" : "order_details" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "order_details_key" } , "unparsed_type" : "order_details_key", "annotation" : {"yarn.orm.is_primary_key" : "true", "yarn.orm.is_composite" : "true" } },  { "name" : { "simple" : "unit_price" } , "unparsed_type" : "double", "annotation" : {"yarn.orm.is_nullable" : "false" } },  { "name" : { "simple" : "quantity" } , "unparsed_type" : "int", "annotation" : {"yarn.orm.is_nullable" : "false" } },  { "name" : { "simple" : "discount" } , "unparsed_type" : "double", "annotation" : {"yarn.orm.is_nullable" : "false" } } ] },  { "name" :  { "simple" : "order_details_key" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "attributes": [ { "name" : { "simple" : "order_id" } , "unparsed_type" : "order_id" },  { "name" : { "simple" : "product_id" } , "unparsed_type" : "product_id" } ] },  { "name" :  { "simple" : "orders" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "order_id" } , "unparsed_type" : "order_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "customer_id" } , "unparsed_type" : "customer_id", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "employee_id" } , "unparsed_type" : "employee_id", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "order_date" } , "unparsed_type" : "boost::gregorian::date", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "required_date" } , "unparsed_type" : "boost::gregorian::date", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "shipped_date" } , "unparsed_type" : "boost::gregorian::date", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_via" } , "unparsed_type" : "int", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "freight" } , "unparsed_type" : "double", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_name" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_address" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_city" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_region" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_postal_code" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "ship_country" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } } ] },  { "name" :  { "simple" : "class_0", "internal_modules" : "package" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "prop_0" } , "unparsed_type" : "int" } ] },  { "name" :  { "simple" : "products" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "product_id" } , "unparsed_type" : "product_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "product_name" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "false" } },  { "name" : { "simple" : "supplier_id" } , "unparsed_type" : "supplier_id", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "category_id" } , "unparsed_type" : "category_id", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "quantity_per_unit" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "unit_price" } , "unparsed_type" : "double" },  { "name" : { "simple" : "units_in_stock" } , "unparsed_type" : "int" },  { "name" : { "simple" : "units_in_order" } , "unparsed_type" : "int" },  { "name" : { "simple" : "reorder_level" } , "unparsed_type" : "int" },  { "name" : { "simple" : "discontinued" } , "unparsed_type" : "bool" } ] },  { "name" :  { "simple" : "shippers" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "shipper_id" } , "unparsed_type" : "shipper_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "company_name" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "phone" } , "unparsed_type" : "std::string" } ] },  { "name" :  { "simple" : "suppliers" } , "meta_name" :  { "simple" : "object", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::object" ] , "attributes": [ { "name" : { "simple" : "supplier_id" } , "unparsed_type" : "supplier_id", "annotation" : {"yarn.orm.is_primary_key" : "true" } },  { "name" : { "simple" : "company_name" } , "unparsed_type" : "std::string" },  { "name" : { "simple" : "contact_name" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "contact_title" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "address" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "city" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "region" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "postal_code" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "country" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "phone" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "fax" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } },  { "name" : { "simple" : "home_page" } , "unparsed_type" : "std::string", "annotation" : {"yarn.orm.is_nullable" : "true" } } ] },  { "name" :  { "simple" : "package" } , "meta_name" :  { "simple" : "module", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" }  },  { "name" :  { "simple" : "category_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } },  { "name" :  { "simple" : "customer_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } },  { "name" :  { "simple" : "employee_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } },  { "name" :  { "simple" : "order_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } },  { "name" :  { "simple" : "product_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } },  { "name" :  { "simple" : "shipper_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } },  { "name" :  { "simple" : "supplier_id" } , "meta_name" :  { "simple" : "primitive", "external_modules" : "dogen", "model_modules" : "yarn", "internal_modules" : "meta_model" } , "stereotypes" : [ "yarn::orm::value" ] , "annotation" : {"yarn.primitive.underlying_element" : "int" } } ] }
+{
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
+    "documentation": "The Northwind model is a \"transliteration\" of Microsoft's\nNorthwind database, provided as a sample for Access and SQL Server.\nIt's objective is to test Dogen integration with ODB.\n",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "northwind",
+      "yarn.external_modules": "dogen::test_models",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.hash.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen",
+      "yarn.orm.database_system": "postgresql",
+      "yarn.orm.letter_case": "upper_case",
+      "yarn.orm.schema_name": "northwind"
+    }
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "categories"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "category_id"
+          },
+          "unparsed_type": "category_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "category_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "description"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "picutre"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "customers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "customer_id"
+          },
+          "unparsed_type": "customer_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "customer_code"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "company_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "contact_name"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "contact_title"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "address"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "city"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "region"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "postal_code"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "country"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "phone"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "fax"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "employees"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "employee_id"
+          },
+          "unparsed_type": "employee_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "last_name"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "false",
+            "odb_pragma": "column(\"LASTNAME\")"
+          }
+        },
+        {
+          "name": {
+            "simple": "first_name"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "false",
+            "odb_pragma": "column(\"FIRSTNAME\")"
+          }
+        },
+        {
+          "name": {
+            "simple": "title"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "title_of_courtesy"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "birth_date"
+          },
+          "unparsed_type": "boost::gregorian::date",
+          "annotation": {
+            "yarn.orm.is_nullable": "true",
+            "odb_pragma": "column(\"BIRTHDATE\")"
+          }
+        },
+        {
+          "name": {
+            "simple": "hire_date"
+          },
+          "unparsed_type": "boost::gregorian::date",
+          "annotation": {
+            "yarn.orm.is_nullable": "true",
+            "odb_pragma": "column(\"HIREDATE\")"
+          }
+        },
+        {
+          "name": {
+            "simple": "address"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "city"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "region"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "postal_code"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "country"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "home_phone"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "extension"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "photo"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "notes"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "reports_to"
+          },
+          "unparsed_type": "employee_id",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "non_orm_class"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "test the ODB behaviour for non-ORM classes.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "order_details"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "order_details_key"
+          },
+          "unparsed_type": "order_details_key",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true",
+            "yarn.orm.is_composite": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "unit_price"
+          },
+          "unparsed_type": "double",
+          "annotation": {
+            "yarn.orm.is_nullable": "false"
+          }
+        },
+        {
+          "name": {
+            "simple": "quantity"
+          },
+          "unparsed_type": "int",
+          "annotation": {
+            "yarn.orm.is_nullable": "false"
+          }
+        },
+        {
+          "name": {
+            "simple": "discount"
+          },
+          "unparsed_type": "double",
+          "annotation": {
+            "yarn.orm.is_nullable": "false"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "order_details_key"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "order_id"
+          },
+          "unparsed_type": "order_id"
+        },
+        {
+          "name": {
+            "simple": "product_id"
+          },
+          "unparsed_type": "product_id"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orders"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "order_id"
+          },
+          "unparsed_type": "order_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "customer_id"
+          },
+          "unparsed_type": "customer_id",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "employee_id"
+          },
+          "unparsed_type": "employee_id",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "order_date"
+          },
+          "unparsed_type": "boost::gregorian::date",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "required_date"
+          },
+          "unparsed_type": "boost::gregorian::date",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "shipped_date"
+          },
+          "unparsed_type": "boost::gregorian::date",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_via"
+          },
+          "unparsed_type": "int",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "freight"
+          },
+          "unparsed_type": "double",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_name"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_address"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_city"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_region"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_postal_code"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "ship_country"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "class_0",
+        "internal_modules": "package"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_0"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "products"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "product_id"
+          },
+          "unparsed_type": "product_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "product_name"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "false"
+          }
+        },
+        {
+          "name": {
+            "simple": "supplier_id"
+          },
+          "unparsed_type": "supplier_id",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "category_id"
+          },
+          "unparsed_type": "category_id",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "quantity_per_unit"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "unit_price"
+          },
+          "unparsed_type": "double"
+        },
+        {
+          "name": {
+            "simple": "units_in_stock"
+          },
+          "unparsed_type": "int"
+        },
+        {
+          "name": {
+            "simple": "units_in_order"
+          },
+          "unparsed_type": "int"
+        },
+        {
+          "name": {
+            "simple": "reorder_level"
+          },
+          "unparsed_type": "int"
+        },
+        {
+          "name": {
+            "simple": "discontinued"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "shippers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "shipper_id"
+          },
+          "unparsed_type": "shipper_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "company_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "phone"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "suppliers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::object"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "supplier_id"
+          },
+          "unparsed_type": "supplier_id",
+          "annotation": {
+            "yarn.orm.is_primary_key": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "company_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "contact_name"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "contact_title"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "address"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "city"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "region"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "postal_code"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "country"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "phone"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "fax"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        },
+        {
+          "name": {
+            "simple": "home_page"
+          },
+          "unparsed_type": "std::string",
+          "annotation": {
+            "yarn.orm.is_nullable": "true"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "package"
+      },
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "category_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "customer_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "employee_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "order_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "product_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "shipper_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    },
+    {
+      "name": {
+        "simple": "supplier_id"
+      },
+      "meta_name": {
+        "simple": "primitive",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "yarn::orm::value"
+      ],
+      "annotation": {
+        "yarn.primitive.underlying_element": "int"
+      }
+    }
+  ]
+}

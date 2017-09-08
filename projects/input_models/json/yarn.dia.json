@@ -901,7 +901,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Represents a generic modeling construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (concepts) and non-types (modules and backend specific entities).\n",
+      "documentation": "Represents a generic modeling construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (object templates) and non-types (modules and kernel specific entities).\n",
       "stereotypes": [
         "yarn::visitable",
         "Element"
@@ -3020,7 +3020,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "A unit of modeling that can be code generated.\n\nWe define the Element concept purely to make our life easier when creating\nthe element class (e.g. it expresses refinement in an easy to understand way).\nIt is not required for any other purpose.\n",
+      "documentation": "A unit of modeling that can be code generated.\n\nWe define the Element object template purely to make our life easier\nwhen creating the element class. It is not required for any other\npurpose.\n",
       "parents": [
         {
           "simple": "Nameable",
@@ -3242,7 +3242,7 @@
             "simple": "all_attributes"
           },
           "unparsed_type": "std::list<attribute>",
-          "documentation": "All attributes associated with this type.\n\nThis is a union of the following sets:\n\n@li the set of all attributes obtained via inheritance relationships;\n@li the set of all attributes obtained via modeling of concepts, including any refinements;\n@li the set of all attributes directly associated with the type (local).\n\nThe first and third sets are cached in this object. The second isn't as we do\nnot have a need for it.\n"
+          "documentation": "All attributes associated with this type.\n\nThis is a union of the following sets:\n\n@li the set of all attributes obtained via inheritance relationships;\n@li the set of all attributes obtained via instantiating object templates,\n    including their inheritance tree;\n@li the set of all attributes directly associated with the type (local).\n\nThe first and third sets are cached in this object. The second isn't as we do\nnot have a need for it.\n"
         },
         {
           "name": {
