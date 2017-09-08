@@ -33,7 +33,7 @@ matrix:
     # - os: osx
     #   compiler: clang
     #   osx_image: xcode8
-      env: BUILD_TYPE=Debug COMPILER="clang"
+    #   env: BUILD_TYPE=Debug COMPILER="clang"
     - os: linux
       compiler: gcc
       env: BUILD_TYPE=Release DEPLOY="1" COMPILER="gcc" WITH_CSHARP="1"
