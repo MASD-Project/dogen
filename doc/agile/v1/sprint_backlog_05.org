@@ -14,26 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-08 Fri 15:10]
+#+CAPTION: Clock summary at [2017-09-08 Fri 23:08]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:19* |       |      | 100.0 |
+| *Total time*                                                                | *18:51* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:19   |       |      | 100.0 |
-| Active                                                                      |         | 18:19 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   4.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:22 |   7.5 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   4.7 |
-| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   6.8 |
+| Stories                                                                     | 18:51   |       |      | 100.0 |
+| Active                                                                      |         | 18:51 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   3.9 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:22 |   7.3 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   4.6 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   6.6 |
 | COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   2.5 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  13.3 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   9.9 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  12.9 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   9.6 |
 | COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.9 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  42.7 |
-| COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.5 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   5.2 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  41.5 |
+| COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.4 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   5.0 |
 | COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   1.0 |
+| COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   1.3 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 0:17 |   1.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -561,6 +563,84 @@ correctly at present.
 Actually, we need way to figure out which types to generate, and which
 types are references. So we still need this flag.
 
+*** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-09-08 Fri 22:51]--[2017-09-08 Fri 23:08] =>  0:17
+
+We need to add a new attribute in context which captures the canonical
+archetypes.
+
+Notes:
+
+- kernel must also return canonical archetype by element type
+  index. Perhaps we should have a struct that aggregates both:
+  archetype locations for meta-type? Or kernel can just return a
+  =std::pair=.
+- at present we have placed the canonical archetype resolution as part
+  of the element properties. However, we do not need to have this at
+  the element level since its a meta-type property and can be
+  determined up-front. We do need to resolve a name into a meta-type
+  before we can resolve a meta-type into a concrete archetype.
+- we need to unpick the notion of whether a formatter is "includible"
+  or not from the notion of canonical archetypes. Canonical archetypes
+  is meta-model concept: given a facet and a meta-model type, which
+  archetype represents the "key" definition of the element. It just so
+  happens that this function has a use in identifying the files to
+  include.
+
+Tasks:
+
+- add a map from name id to meta-name id in intermediate model.
+- add a map from meta name id to map of canonical archetype to
+  archetype location.
+
+*** Move enablement into yarn                                         :story:
+
+It seems that the concepts around enablement are actually not kernel
+specific but instead can be generalised at the meta-model level. We
+need to create adequate representations in yarn to handle facets,
+etc. We then need to move across the code that computes enablement
+into yarn so that all kernels can make use of it.
+
+Problems:
+
+- we are checking to see if the hash facet is enabled with c++ 98; if
+  so, we throw as this facet is incompatible. We cannot do this from
+  yarn since we do not know what c++ standards are.
+- because we do not have a mapping between a archetype location and
+  the meta-type, we will be enabling/disabling all archetype locations
+  across all meta-types.
+- because we do not have element segmentation, the element extensions
+  will be disabled. Actually this will probably work just the same,
+  given that all elements exist.
+- enablement must be done after external transformations so it picks
+  up fabric types.
+- we need to support formatting styles in order to be able to use the
+  artefact properties from the meta-model.
+- in quilt.cpp, someone did an upfront generation of all archetype
+  properties against the archetype locations. We not doing that in
+  yarn, so nothing is coming out. This was done during transformation
+  in formattables.
+- with a move into yarn, we seem to have broken the overwrite flag
+  logic; changes no longer result in new code being generated.
+- we also have borked the includes: dependency builder is looking into
+  the formattables instead of element. However, we then run into
+  segmentation issues because we cannot find forward declarations on
+  the main element.
+
+To do:
+
+- kernel registrar type index map - done.
+- c# formatter registrar type index map - done.
+- bug in template instantiating: artefact expansions do not seem to
+  take kernel into account - done.
+
+*Previous Understanding*
+
+We need to make use of the exact same logic as implemented in
+=quilt.cpp= for enablement. Perhaps all of the enablement related
+functionality can be lifted and grafted onto quilt without any major
+changes.
+
 *** Code-generate annotations type templates                          :story:
 
 Tasks:
@@ -631,84 +711,6 @@ Tasks:
 - we need a refines field which is a text collection.
 - we need refinement settings, factory etc.
 - update parsing expander.
-
-*** Add canonical archetype support to yarn                           :story:
-
-We need to add a new attribute in context which captures the canonical
-archetypes.
-
-Notes:
-
-- kernel must also return canonical archetype by element type
-  index. Perhaps we should have a struct that aggregates both:
-  archetype locations for meta-type? Or kernel can just return a
-  =std::pair=.
-- at present we have placed the canonical archetype resolution as part
-  of the element properties. However, we do not need to have this at
-  the element level since its a meta-type property and can be
-  determined up-front. However, we do need to resolve a name into a
-  meta-type before we can resolve a meta-type into a concrete
-  archetype.
-- we need to unpick the notion of whether a formatter is "includible"
-  or not from the notion of canonical archetypes. Canonical archetypes
-  is meta-model concept: given a facet and a meta-model type, which
-  archetype represents the "key" definition of the element. It just so
-  happens that this function has a use in identifying the files to
-  include.
-
-Tasks:
-
-- add a map from name id to meta-name id in intermediate model.
-- add a map from meta name id to map of canonical archetype to
-  archetype location.
-
-*** Move enablement into yarn                                         :story:
-
-It seems that the concepts around enablement are actually not kernel
-specific but instead can be generalised at the meta-model level. We
-need to create adequate representations in yarn to handle facets,
-etc. We then need to move across the code that computes enablement
-into yarn so that all kernels can make use of it.
-
-Problems:
-
-- we are checking to see if the hash facet is enabled with c++ 98; if
-  so, we throw as this facet is incompatible. We cannot do this from
-  yarn since we do not know what c++ standards are.
-- because we do not have a mapping between a archetype location and
-  the meta-type, we will be enabling/disabling all archetype locations
-  across all meta-types.
-- because we do not have element segmentation, the element extensions
-  will be disabled. Actually this will probably work just the same,
-  given that all elements exist.
-- enablement must be done after external transformations so it picks
-  up fabric types.
-- we need to support formatting styles in order to be able to use the
-  artefact properties from the meta-model.
-- in quilt.cpp, someone did an upfront generation of all archetype
-  properties against the archetype locations. We not doing that in
-  yarn, so nothing is coming out. This was done during transformation
-  in formattables.
-- with a move into yarn, we seem to have broken the overwrite flag
-  logic; changes no longer result in new code being generated.
-- we also have borked the includes: dependency builder is looking into
-  the formattables instead of element. However, we then run into
-  segmentation issues because we cannot find forward declarations on
-  the main element.
-
-To do:
-
-- kernel registrar type index map - done.
-- c# formatter registrar type index map - done.
-- bug in template instantiating: artefact expansions do not seem to
-  take kernel into account - done.
-
-*Previous Understanding*
-
-We need to make use of the exact same logic as implemented in
-=quilt.cpp= for enablement. Perhaps all of the enablement related
-functionality can be lifted and grafted onto quilt without any major
-changes.
 
 *** Move formatting styles into yarn                                  :story:
 
