@@ -144,7 +144,7 @@ dehydrate_annotations(const boost::optional<annotations::scribble>& scribble,
             s << ", ";
         uf.insert_quoted(entry.first);
         s << " : ";
-        uf.insert_quoted(entry.second);
+        uf.insert_quoted_escaped(entry.second);
         is_first = false;
     }
     s << " }";
