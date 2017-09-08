@@ -1869,9 +1869,9 @@ for Java, etc.#</dia:string>
       <dia:attribute name="comment">
         <dia:string>#A unit of modeling that can be code generated.
 
-We define the Element concept purely to make our life easier when creating
-the element class (e.g. it expresses refinement in an easy to understand way).
-It is not required for any other purpose.#</dia:string>
+We define the Element object template purely to make our life easier
+when creating the element class. It is not required for any other
+purpose.#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -3703,7 +3703,8 @@ can make use of these types.#</dia:string>
 This is a union of the following sets:
 
 @li the set of all attributes obtained via inheritance relationships;
-@li the set of all attributes obtained via modeling of concepts, including any refinements;
+@li the set of all attributes obtained via instantiating object templates,
+    including their inheritance tree;
 @li the set of all attributes directly associated with the type (local).
 
 The first and third sets are cached in this object. The second isn't as we do
@@ -4461,7 +4462,7 @@ are not modules, such as attributes, inner classes, etc.#</dia:string>
 
 An element is anything of interest in a problem domain which needs to be
 expressed in code generation. It covers both types (objects, enumerations, etc),
-meta-types (concepts) and non-types (modules and backend specific entities).#</dia:string>
+meta-types (object templates) and non-types (modules and kernel specific entities).#</dia:string>
       </dia:attribute>
       <dia:attribute name="abstract">
         <dia:boolean val="false"/>
@@ -5981,7 +5982,7 @@ Leaves are types concrete types which have a parent.#</dia:string>
                 <dia:string>#c#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#const concept&amp;#</dia:string>
+                <dia:string>#const object_template&amp;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -35046,7 +35047,7 @@ Temporary data structure used to build trees of names.#</dia:string>
         </dia:composite>
         <dia:composite type="umloperation">
           <dia:attribute name="name">
-            <dia:string>#make_concept_name#</dia:string>
+            <dia:string>#make_object_template_name#</dia:string>
           </dia:attribute>
           <dia:attribute name="stereotype">
             <dia:string>##</dia:string>

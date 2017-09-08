@@ -96,7 +96,8 @@ public:
      * This is a union of the following sets:
      *
      * @li the set of all attributes obtained via inheritance relationships;
-     * @li the set of all attributes obtained via modeling of concepts, including any refinements;
+     * @li the set of all attributes obtained via instantiating object templates,
+     *     including their inheritance tree;
      * @li the set of all attributes directly associated with the type (local).
      *
      * The first and third sets are cached in this object. The second isn't as we do

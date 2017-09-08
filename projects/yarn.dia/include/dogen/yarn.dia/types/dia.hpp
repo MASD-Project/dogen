@@ -95,7 +95,7 @@ namespace yarn {
  * in the Domain Driven Design book.
  *
  * @li a number of yarn specific stereotypes were added: @e exception,
- * @e enumeration, @e concept, @e visitable, @e fluent, @e immutable,
+ * @e enumeration, @e object template, @e visitable, @e fluent, @e immutable,
  * @e comparable. These we describe below.
  *
  * @li any type without any stereotype defaults to @e value @e object.
@@ -114,11 +114,11 @@ namespace yarn {
  * @li @b enumeration: Can only have attributes, and the attributes must not
  * have types. Type defaults to unsigned int.
  *
- * @li @b concept: Very similar to a C++ concept. Defines new stereotypes on
- * the fly; that is, if you create a UML class @e MyConcept with property
- * @e a and mark it as a concept, you can then create a UML class @e my_class
- * with a stereotype of @e MyConcept; the result will be that my_class will
- * have a property @@e a too.
+ * @li @b object @b template: Defines new stereotypes on the fly; that
+ * is, if you create a UML class @e MyObjectTemplate with property @e a
+ * and mark it as an object template, you can then create a UML class @e
+ * my_class with a stereotype of @e MyObjectTemplate; the result will be
+ * that my_class will have a property @e a too.
  *
  * @li @b visitable: a visitor service will be create for the type. Must be
  * the root of an inheritance tree.

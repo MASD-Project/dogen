@@ -46,7 +46,7 @@ namespace meta_model {
  *
  * An element is anything of interest in a problem domain which needs to be
  * expressed in code generation. It covers both types (objects, enumerations, etc),
- * meta-types (concepts) and non-types (modules and backend specific entities).
+ * meta-types (object templates) and non-types (modules and kernel specific entities).
  */
 class element {
 public:

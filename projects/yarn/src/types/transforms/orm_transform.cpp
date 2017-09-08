@@ -313,8 +313,8 @@ orm_transform::make_module_properties(const type_group& tg,
 }
 
 void orm_transform::
-expand_objects(const type_group& tg, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started object expansion.";
+transform_objects(const type_group& tg, meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Started transforming objects.";
 
     boost::optional<meta_model::letter_cases> lc;
     if (im.orm_properties())
@@ -324,7 +324,7 @@ expand_objects(const type_group& tg, meta_model::endomodel& im) {
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this object. Configurations are setup during
-         * stereotype expansion, if the ORM stereotypes were present.
+         * stereotypes transform, if the ORM stereotypes were present.
          */
         auto& o(*pair.second);
         if (!o.orm_properties())
@@ -333,7 +333,8 @@ expand_objects(const type_group& tg, meta_model::endomodel& im) {
         auto& ocfg(*o.orm_properties());
 
         /*
-         * Letter case is always setup to match the model configuration.
+         * Letter case is always setup to match the model
+         * configuration.
          */
         ocfg.letter_case(lc);
 
@@ -362,12 +363,12 @@ expand_objects(const type_group& tg, meta_model::endomodel& im) {
                                  << pair.first << ": " << ocfg;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished object expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming objects.";
 }
 
 void orm_transform::
-expand_concepts(const type_group& tg, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started concept expansion.";
+transform_object_templates(const type_group& tg, meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Started transforming object templates.";
 
     for (auto& pair : im.object_templates()) {
         auto& c(*pair.second);
@@ -377,13 +378,13 @@ expand_concepts(const type_group& tg, meta_model::endomodel& im) {
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished module expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming object templates.";
 }
 
-void orm_transform::expand_primitives(
+void orm_transform::transform_primitives(
     const type_group& tg, meta_model::endomodel& im) {
 
-    BOOST_LOG_SEV(lg, debug) << "Started primitive expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Started transforming primitives.";
 
     boost::optional<meta_model::letter_cases> lc;
     if (im.orm_properties())
@@ -393,7 +394,7 @@ void orm_transform::expand_primitives(
         /*
          * If we do not have a configuration, there is nothing to be
          * done for this primitive. Configurations are setup during
-         * stereotype expansion, if the ORM stereotypes were present.
+         * stereotypes transform, if the ORM stereotypes were present.
          */
         auto& p(*pair.second);
         if (!p.orm_properties())
@@ -402,7 +403,8 @@ void orm_transform::expand_primitives(
         auto& cfg(*p.orm_properties());
 
         /*
-         * Letter case is always setup to match the model configuration.
+         * Letter case is always setup to match the model
+         * configuration.
          */
         cfg.letter_case(lc);
 
@@ -416,12 +418,12 @@ void orm_transform::expand_primitives(
                                  << pair.first << ": " << cfg;
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished primitive expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming primitives.";
 }
 
 void orm_transform::
-expand_modules(const type_group& tg, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started module expansion.";
+transform_modules(const type_group& tg, meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Started transforming modules.";
 
     for (auto& pair : im.modules()) {
         auto& m(*pair.second);
@@ -483,23 +485,23 @@ expand_modules(const type_group& tg, meta_model::endomodel& im) {
         }
     }
 
-    BOOST_LOG_SEV(lg, debug) << "Finished module expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Finished transforming modules.";
 }
 
 void orm_transform::
-expand(const context& ctx, meta_model::endomodel& im) {
-    BOOST_LOG_SEV(lg, debug) << "Started expansion.";
+transform(const context& ctx, meta_model::endomodel& im) {
+    BOOST_LOG_SEV(lg, debug) << "Started transform.";
 
     const auto tg(make_type_group(ctx.type_repository()));
     const auto& rm(*im.root_module());
     im.orm_properties(make_model_properties(tg, rm.annotation()));
 
-    expand_objects(tg, im);
-    expand_concepts(tg, im);
-    expand_primitives(tg, im);
-    expand_modules(tg, im);
+    transform_objects(tg, im);
+    transform_object_templates(tg, im);
+    transform_primitives(tg, im);
+    transform_modules(tg, im);
 
-    BOOST_LOG_SEV(lg, debug) << "Finished expansion.";
+    BOOST_LOG_SEV(lg, debug) << "Finished transform.";
 }
 
 } } }

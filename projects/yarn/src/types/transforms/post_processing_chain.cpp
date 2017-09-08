@@ -79,7 +79,8 @@ transform(const context& ctx, meta_model::endomodel& im) {
 
     /*
      * Stereotypes transform must be done before object templates
-     * because we obtain concept information from the stereotypes.
+     * because we obtain object template information from the
+     * stereotypes.
      */
     stereotypes_transform::transform(im);
     object_templates_transform::transform(im);
@@ -97,7 +98,7 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * ORM properties must be expanded after stereotypes and
      * containment.
      */
-    orm_transform::expand(ctx, im);
+    orm_transform::transform(ctx, im);
 
     /*
      * Resolution must be done after system elements have been
@@ -110,8 +111,8 @@ transform(const context& ctx, meta_model::endomodel& im) {
     /*
      * We can only expand attributes after we've expanded:
      *
-     * - concepts, as we rely on all attributes obtained from modeling
-     *   a concept already being present.
+     * - object templates, as we rely on all attributes obtained from
+     *   instantiating an object template on already being present.
      * - stereotypes, as we need settings such as immutability and
      *   fluency to be populated.
      *  - resolution, else we will copy unresolved attributes.

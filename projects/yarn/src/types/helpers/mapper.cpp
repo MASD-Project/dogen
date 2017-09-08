@@ -253,7 +253,7 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
         pair.second.swap(o);
     }
 
-    // FIXME: why are we not copying the concept?
+    // FIXME: why are we not copying the object template?
     for (auto& pair : r.object_templates())
         map_attributes(mc, pair.second->local_attributes());
 

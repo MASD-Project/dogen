@@ -97,17 +97,17 @@ private:
         const annotations::annotation& a);
 
 private:
-    static void expand_objects(const type_group& tg,
-        meta_model::endomodel& im);
-    static void expand_concepts(const type_group& tg,
-        meta_model::endomodel& im);
-    static void expand_primitives(const type_group& tg,
-        meta_model::endomodel& im);
-    static void expand_modules(const type_group& tg,
-        meta_model::endomodel& im);
+    static void transform_objects(const type_group& tg,
+        meta_model::endomodel& em);
+    static void transform_object_templates(const type_group& tg,
+        meta_model::endomodel& em);
+    static void transform_primitives(const type_group& tg,
+        meta_model::endomodel& em);
+    static void transform_modules(const type_group& tg,
+        meta_model::endomodel& em);
 
 public:
-    static void expand(const context& ctx, meta_model::endomodel& im);
+    static void transform(const context& ctx, meta_model::endomodel& em);
 };
 
 } } }

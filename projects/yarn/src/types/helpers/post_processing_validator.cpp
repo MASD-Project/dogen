@@ -44,7 +44,7 @@ const std::regex loose_name_regex("^[a-zA-Z_][\\-\\.a-zA-Z0-9_]*$");
 
 /*
  * FIXME: we've removed the following keywords for now because yarn
- * uses these terms: "module", "concept".
+ * uses these terms: "module"
  */
 std::array<std::string, 81> cpp_reserved = { {
         "alignas", "alignof", "and", "and_eq", "asm", "atomic_cancel",
@@ -60,6 +60,7 @@ std::array<std::string, 81> cpp_reserved = { {
         "synchronized", "template", "this", "thread_local", "throw", "true",
         "try", "typedef", "typeid", "typename", "union", "using", "virtual",
         "void", "volatile", "wchar_t", "while", "xor", "xor_eq", "xor_eqalignas"
+        "concept"
     } };
 
 std::array<std::string, 11> cpp_builtins = { {
