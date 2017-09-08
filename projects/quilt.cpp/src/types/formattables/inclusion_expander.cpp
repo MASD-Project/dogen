@@ -120,7 +120,7 @@ inclusion_expander::compute_inclusion_dependencies(
      * First we must obtain all formatters for the type of element we
      * are building includes for. They may or may not exist in the
      * formatters' collection - for example, we do not have any
-     * formatters for concepts at present. If so, we're done.
+     * formatters for object templates at present. If so, we're done.
      *
      * Note also that we must query the formatters by meta-type
      * rather than use the archetype configuration container

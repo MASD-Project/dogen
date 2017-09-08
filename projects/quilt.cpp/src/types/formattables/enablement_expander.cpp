@@ -517,8 +517,9 @@ void enablement_expander::expand(const annotations::type_repository& atrp,
             BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
             /*
-             * Not all elements have formatters; for example, concepts
-             * don't have any at present. If so, skip the element.
+             * Not all elements have formatters; for example, object
+             * templates don't have any at present. If so, skip the
+             * element.
              */
             const auto i(ltgmt.find(mt));
             if (i == ltgmt.end()) {

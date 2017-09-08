@@ -151,7 +151,7 @@ model adapter::adapt(const formatters::repository& frp,
 
         /*
          * Check to see if the element has any formatters. Some
-         * elements such as concepts do not have formatters at
+         * elements such as object templates do not have formatters at
          * present.
          */
         const auto mt(e.meta_name().id());

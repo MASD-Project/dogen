@@ -53,8 +53,8 @@ void canonical_archetype_expander::expand(const formatters::repository& frp,
     BOOST_LOG_SEV(lg, debug) << "Meta-type: " << mt;
 
     /*
-     * Not all elements have formatters; for example, concepts don't
-     * have any at present. If so, skip the element.
+     * Not all elements have formatters; for example, object templates
+     * don't have any at present. If so, skip the element.
      */
     const auto i(safmt.find(mt));
     if (i == safmt.end()) {
