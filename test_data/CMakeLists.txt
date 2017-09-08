@@ -103,13 +103,12 @@ endif()
 #
 set(input_dir "${CMAKE_CURRENT_SOURCE_DIR}/yarn.dia/input")
 set(output_dir "${CMAKE_CURRENT_SOURCE_DIR}/yarn.json/input")
+file(GLOB samples "${input_dir}/*.dia")
+install(FILES ${samples} DESTINATION share/samples/dia)
 
 #
 # Tailor targets
 #
-file(GLOB samples "${input_dir}/*.dia")
-install(FILES ${samples} DESTINATION share/samples/dia)
-
 if (DOGEN_TAILOR_EXECUTABLE)
     set(ignore false)
     set(ignore_models package_without_name class_without_name two_empty_layers)

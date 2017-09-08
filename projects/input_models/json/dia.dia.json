@@ -1,0 +1,546 @@
+{
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "dia",
+      "yarn.external_modules": "dogen",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen.disable_common_facets"
+    }
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "attribute"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Attribute in a Dia diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the attribute.\n"
+        },
+        {
+          "name": {
+            "simple": "values"
+          },
+          "unparsed_type": "std::vector<boost::variant<color,real,integer,font,boolean,point,string,enumeration,rectangle,composite>>",
+          "documentation": "Values for the attribute.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "boolean"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a boolean value.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of a boolean value.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "child_node"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a child_node in a diagram.\n\nChild nodes are used in Dia to represent the relationship between a\npackage and the entities it contains. For example, if class O1 is\ninside package O0 then class O1 will have a child node element with\na parent pointing to O0.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "parent"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Parent for this object.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "color"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a color in a diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of an RGB value in hex.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "composite"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Attribute value which is made up of other attributes.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "type"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Type of the composite node\n"
+        },
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::vector<boost::shared_ptr<attribute>>",
+          "documentation": "Underlying Dia attributes.\n"
+        },
+        {
+          "name": {
+            "simple": "inner_composite"
+          },
+          "unparsed_type": "boost::shared_ptr<composite>",
+          "documentation": "Some composites contain an inner composite field.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "connection"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Connection between entities in a Dia diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "handle"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Internal handle for the connection.\n"
+        },
+        {
+          "name": {
+            "simple": "to"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Object we're connected to.\n"
+        },
+        {
+          "name": {
+            "simple": "connection_slot"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Number of the connection slot we're connected to.\n\nThis is known in Dia as a connection but to avoid confusion\nbetween the class and the slot concepts, we renamed it.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "diagram"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a diagram in Dia.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "diagram_data"
+          },
+          "unparsed_type": "diagram_data",
+          "documentation": "Basic diagram definitions.\n"
+        },
+        {
+          "name": {
+            "simple": "layers"
+          },
+          "unparsed_type": "std::vector<layer>",
+          "documentation": "Visual layers on the diagram.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "diagram_data"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a all the data associated with a diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "attributes"
+          },
+          "unparsed_type": "std::vector<attribute>",
+          "documentation": "All attributes associated with the diagram data.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "enumeration"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a enumeration in a diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of a enumeration.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "font"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a font in a diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "family"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "style"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "name"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "hydrator"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Reads a Dia diagram and instatiates the dia model objects.\n",
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "integer"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents an integer value.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of an integer value.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "layer"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a layer in a Dia diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the layer.\n"
+        },
+        {
+          "name": {
+            "simple": "visible"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Whether the layer is visible on screen or not.\n"
+        },
+        {
+          "name": {
+            "simple": "active"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Whether the layer is active or not.\n"
+        },
+        {
+          "name": {
+            "simple": "objects"
+          },
+          "unparsed_type": "std::vector<object>",
+          "documentation": "Dia objects contained in layer.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "object"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a Dia object.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "type"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Type of the object.\n"
+        },
+        {
+          "name": {
+            "simple": "version"
+          },
+          "unparsed_type": "int",
+          "documentation": "Version of the object.\n"
+        },
+        {
+          "name": {
+            "simple": "id"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Unique identifier for the object in this diagram.\n"
+        },
+        {
+          "name": {
+            "simple": "connections"
+          },
+          "unparsed_type": "std::vector<connection>",
+          "documentation": "Connection details for this object.\n"
+        },
+        {
+          "name": {
+            "simple": "child_node"
+          },
+          "unparsed_type": "boost::optional<child_node>",
+          "documentation": "Parenting information for this object.\n"
+        },
+        {
+          "name": {
+            "simple": "attributes"
+          },
+          "unparsed_type": "std::vector<attribute>",
+          "documentation": "All attributes associated with the object.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "persister"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "point"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a point in a diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of a point with X/Y coordinates.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "real"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a real value.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of a real value.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "rectangle"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a rectangle in a diagram.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of a rectangle with a pair of X/Y coordinates.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "string"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a string value.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Text representation of a string value.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "hydration_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred while reading a diagram.\n"
+    },
+    {
+      "name": {
+        "simple": "persister_error"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst tryng to persist a Dia diagram.\n"
+    }
+  ]
+}

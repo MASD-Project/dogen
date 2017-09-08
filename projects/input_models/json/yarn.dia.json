@@ -1,0 +1,3782 @@
+{
+  "root_module": {
+    "name": {
+      "simple": ""
+    },
+    "meta_name": {
+      "simple": "module",
+      "external_modules": "dogen",
+      "model_modules": "yarn",
+      "internal_modules": "meta_model"
+    },
+    "documentation": "Yarn is the Dogen meta-model.\n\n@section yarn_0 Overview\n\nYarn is a meta-model that provides a programming-language-neutral type\nrepresentation, designed for code generation. There are two core types\nin yarn: @e endomodel and @e model. Intermediate models are\nobtained via @frontends and post-processed until they form a cohesive\nwhole. They are then transformed into a final model representation, at\nwhich point they are suitable for code generation.\n\n@section yarn_0 Mission\n\nYarn's objectives are:\n\n@li to provide a set of constructs that the frontends can map to\neasily, as well as the machinery for frontend management\n(registration, etc.).\n\n@li to provide the tooling required to combine multiple intermediate\nyarn models together into a bigger model - called the intermediate @e\nmerged model.\n\n@li to ensure the consistency of the intermediate merged model via\nvalidation rules (such as verifying that all types have a definitions,\netc.).\n\n@li to provide all the information required to build the final model\nand to build it.\n",
+    "annotation": {
+      "yarn.dia.comment": "true",
+      "yarn.model_modules": "yarn",
+      "yarn.external_modules": "dogen",
+      "yarn.reference": "options.dia",
+      "yarn.input_language": "cpp",
+      "quilt.cpp.enabled": "true",
+      "quilt.cpp.msbuild.enabled": "false",
+      "quilt.cpp.visual_studio.project.enabled": "false",
+      "quilt.cpp.visual_studio.solution.enabled": "false",
+      "quilt.csharp.enabled": "false",
+      "annotations.profile": "dogen.disable_odb_cmake"
+    }
+  },
+  "elements": [
+    {
+      "name": {
+        "simple": "code_generator"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "decomposer",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "decomposition_result",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "names"
+          },
+          "unparsed_type": "std::list<std::pair<std::string, meta_model::name>>"
+        },
+        {
+          "name": {
+            "simple": "meta_names"
+          },
+          "unparsed_type": "std::list<std::pair<std::string, meta_model::name>>"
+        },
+        {
+          "name": {
+            "simple": "name_trees"
+          },
+          "unparsed_type": "std::list<std::pair<std::string, meta_model::name_tree>>"
+        },
+        {
+          "name": {
+            "simple": "injected_names"
+          },
+          "unparsed_type": "std::list<std::pair<std::string, meta_model::name>>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "identifiable_and_qualified_builder",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "indexer",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "indices",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "objects_always_in_heap"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "elements_referable_by_attributes"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "primitive_underliers"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "enumeration_underliers"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "abstract_elements"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "legacy_name_tree_parser",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "modules"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "external_modules"
+          },
+          "unparsed_type": "std::list<std::string>"
+        },
+        {
+          "name": {
+            "simple": "model_name"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "location_builder",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "location_"
+          },
+          "unparsed_type": "meta_model::location"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapper",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Stores the mapping of a key (the element id) to its values, organised by language.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "lam_id"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Language agnostic ID of the element we're mapping from.\n"
+        },
+        {
+          "name": {
+            "simple": "by_language"
+          },
+          "unparsed_type": "std::unordered_map<meta_model::languages, mapping_value>",
+          "documentation": "Values of the mapping, by language.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping_context",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "translations"
+          },
+          "unparsed_type": "std::unordered_map<std::string, meta_model::name>"
+        },
+        {
+          "name": {
+            "simple": "erasures"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "injections"
+          },
+          "unparsed_type": "std::unordered_map<std::string, meta_model::name>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping_set",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Consistent unit of mapping that can be used to translate a model from a language to\nanother.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "by_language_agnostic_id"
+          },
+          "unparsed_type": "std::unordered_map<meta_model::languages, std::unordered_map<std::string, meta_model::name>>"
+        },
+        {
+          "name": {
+            "simple": "by_upsilon_id"
+          },
+          "unparsed_type": "std::unordered_map<meta_model::languages, std::unordered_map<std::string, meta_model::name>>"
+        },
+        {
+          "name": {
+            "simple": "upsilon_id_to_lam_id"
+          },
+          "unparsed_type": "std::unordered_map<std::string, std::string>",
+          "documentation": "Map to resolve upsilon ID's into LAM IDs.\n"
+        },
+        {
+          "name": {
+            "simple": "erasures_by_language"
+          },
+          "unparsed_type": "std::unordered_map<meta_model::languages, std::unordered_set<std::string>>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping_set_repository",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Stores all available mapping sets.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "default_mapping_set"
+          },
+          "unparsed_type": "mapping_set"
+        },
+        {
+          "name": {
+            "simple": "by_name"
+          },
+          "unparsed_type": "std::unordered_map<std::string, mapping_set>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping_set_repository_factory",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping_value",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Value of a mapping.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "mapping_action"
+          },
+          "unparsed_type": "mapping_actions"
+        },
+        {
+          "name": {
+            "simple": "default_name"
+          },
+          "unparsed_type": "boost::optional<meta_model::name>"
+        },
+        {
+          "name": {
+            "simple": "aliases"
+          },
+          "unparsed_type": "std::list<meta_model::name>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mappings_hydrator",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "mappings_validator",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "meta_name_factory",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_sorter",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "name_builder",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "name_"
+          },
+          "unparsed_type": "meta_model::name"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "name_factory",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "name_flattener",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "name_tree_builder",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "top_level_modules_"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "model_location_"
+          },
+          "unparsed_type": "meta_model::location"
+        },
+        {
+          "name": {
+            "simple": "names"
+          },
+          "unparsed_type": "std::list<std::string>"
+        },
+        {
+          "name": {
+            "simple": "root"
+          },
+          "unparsed_type": "std::shared_ptr<node>"
+        },
+        {
+          "name": {
+            "simple": "current"
+          },
+          "unparsed_type": "std::shared_ptr<node>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "new_name_tree_parser",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "node",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Node in a tree of names.\n\nTemporary data structure used to build trees of names.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "parent"
+          },
+          "unparsed_type": "boost::shared_ptr<node>",
+          "documentation": "Parent in a tree.\n"
+        },
+        {
+          "name": {
+            "simple": "data"
+          },
+          "unparsed_type": "meta_model::name",
+          "documentation": "Current node.\n"
+        },
+        {
+          "name": {
+            "simple": "children"
+          },
+          "unparsed_type": "std::list<boost::shared_ptr<node>>",
+          "documentation": "Child nodes in a tree.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "persister",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "post_processing_validator",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "pre_processing_validator",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "pretty_printer",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "reference_paths_extractor",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "resolver",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "string_processor",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "artefact_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "enabled"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "overwrite"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "file_path"
+          },
+          "unparsed_type": "boost::filesystem::path"
+        },
+        {
+          "name": {
+            "simple": "dependencies"
+          },
+          "unparsed_type": "std::list<std::string>"
+        },
+        {
+          "name": {
+            "simple": "formatting_style"
+          },
+          "unparsed_type": "formatting_styles"
+        },
+        {
+          "name": {
+            "simple": "formatting_input"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "attribute",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents an attribute in an object.\n",
+      "stereotypes": [
+        "Documentable",
+        "Annotatable",
+        "Nameable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "unparsed_type"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Original type name as it appeared in the source, without any parsing.\n\nName must be in one of the supported notations.\n"
+        },
+        {
+          "name": {
+            "simple": "parsed_type"
+          },
+          "unparsed_type": "name_tree",
+          "documentation": "Tree of names that represent the type of the attribute, after suitable parsing.\n"
+        },
+        {
+          "name": {
+            "simple": "is_immutable"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the attribute can only be read but not set.\n"
+        },
+        {
+          "name": {
+            "simple": "is_fluent"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the attribute's setter will return the object iteself.\n"
+        },
+        {
+          "name": {
+            "simple": "orm_properties"
+          },
+          "unparsed_type": "boost::optional<orm_attribute_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "builtin",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a value type that is built-in at the hardware level.\n",
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "is_default_enumeration_type"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this built-in is the default type to be used on enumerations.\n"
+        },
+        {
+          "name": {
+            "simple": "is_floating_point"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this built-in represents a floating point number.\n"
+        },
+        {
+          "name": {
+            "simple": "can_be_enumeration_underlier"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this element can be the underlying element of an enumeration.\n"
+        },
+        {
+          "name": {
+            "simple": "can_be_primitive_underlier"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this built-in can be the underlying element of a primitive.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "element",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a generic modeling construct.\n\nAn element is anything of interest in a problem domain which needs to be\nexpressed in code generation. It covers both types (objects, enumerations, etc),\nmeta-types (concepts) and non-types (modules and backend specific entities).\n",
+      "stereotypes": [
+        "yarn::visitable",
+        "Element"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "is_element_extension"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this element extends another element with the same id.\n"
+        },
+        {
+          "name": {
+            "simple": "element_properties"
+          },
+          "unparsed_type": "element_properties"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "element_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "decoration_properties"
+          },
+          "unparsed_type": "formatters::decoration_properties"
+        },
+        {
+          "name": {
+            "simple": "artefact_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, artefact_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "elements_traversal",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Intermediate representation of a yarn model.\n",
+      "stereotypes": [
+        "Nameable",
+        "MetaNameable",
+        "DeterminableOrigin"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "references"
+          },
+          "unparsed_type": "std::unordered_map<name,origin_types>",
+          "documentation": "All other intermediate models that this endomodel depends on, mapped to their\norigin.\n"
+        },
+        {
+          "name": {
+            "simple": "leaves"
+          },
+          "unparsed_type": "std::unordered_set<name>",
+          "documentation": "All leaf types in this endomodel.\n\nLeaves are types concrete types which have a parent.\n"
+        },
+        {
+          "name": {
+            "simple": "modules"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<module>>",
+          "documentation": "Modules contained in the endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "object_templates"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<object_template>>",
+          "documentation": "All the object templates available in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "builtins"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<builtin>>",
+          "documentation": "All built-ins contained in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "enumerations"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<enumeration>>",
+          "documentation": "All enumerations contained in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "primitives"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<primitive>>",
+          "documentation": "All primitives in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "objects"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<object>>",
+          "documentation": "All objects contained in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "exceptions"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<exception>>",
+          "documentation": "All exceptions in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "visitors"
+          },
+          "unparsed_type": "std::unordered_map<std::string, boost::shared_ptr<visitor>>",
+          "documentation": "All visitors in this endomodel.\n"
+        },
+        {
+          "name": {
+            "simple": "injected_elements"
+          },
+          "unparsed_type": "std::list<boost::shared_ptr<element>>",
+          "documentation": "Elements injected externally.\n"
+        },
+        {
+          "name": {
+            "simple": "has_generatable_types"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true the endomodel has at least one generable type, false otherwise.\n"
+        },
+        {
+          "name": {
+            "simple": "root_module"
+          },
+          "unparsed_type": "boost::shared_ptr<module>"
+        },
+        {
+          "name": {
+            "simple": "input_language"
+          },
+          "unparsed_type": "languages",
+          "documentation": "Language in which this endomodel was written.\n"
+        },
+        {
+          "name": {
+            "simple": "output_languages"
+          },
+          "unparsed_type": "std::list<languages>",
+          "documentation": "Languages in which to output the final model.\n"
+        },
+        {
+          "name": {
+            "simple": "orm_properties"
+          },
+          "unparsed_type": "boost::optional<orm_model_properties>"
+        },
+        {
+          "name": {
+            "simple": "facet_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, facet_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "enumeration",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Defines a bounded set of logically related values for a built-in type\nor a string.\n",
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "underlying_element"
+          },
+          "unparsed_type": "name",
+          "documentation": "Underlying element of each instance of the enumeration.\n"
+        },
+        {
+          "name": {
+            "simple": "enumerators"
+          },
+          "unparsed_type": "std::vector<enumerator>",
+          "documentation": "Enumerators for this enumeration.\n"
+        },
+        {
+          "name": {
+            "simple": "use_implementation_defined_underlying_element"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, we will use the implementation specific default enumeration type.\n"
+        },
+        {
+          "name": {
+            "simple": "use_implementation_defined_enumerator_values"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, we will rely on compiler generated enumeration values.\n"
+        },
+        {
+          "name": {
+            "simple": "add_invalid_enumerator"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, an enumerator for \"invalid\" will be added.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "enumerator",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "One of a set of valid values that an enumeration can assume.\n\nThe enumerator defines an element in the domain of the enumeration.\n",
+      "stereotypes": [
+        "Documentable",
+        "Nameable",
+        "Annotatable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "value"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Value for the enumerator.\n\nIt must be castable to instance of the type defined in the enumeration.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "exception",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents an exception which can be thrown.\n",
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "Nameable",
+        "MetaNameable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "modules"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<module>>>"
+        },
+        {
+          "name": {
+            "simple": "object_templates"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<object_template>>>"
+        },
+        {
+          "name": {
+            "simple": "builtins"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<builtin>>>"
+        },
+        {
+          "name": {
+            "simple": "enumerations"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<enumeration>>>"
+        },
+        {
+          "name": {
+            "simple": "primitives"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<primitive>>>"
+        },
+        {
+          "name": {
+            "simple": "objects"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<object>>>"
+        },
+        {
+          "name": {
+            "simple": "exceptions"
+          },
+          "unparsed_type": "std::list<std::pair<annotations::scribble_group, boost::shared_ptr<exception>>>"
+        },
+        {
+          "name": {
+            "simple": "root_module"
+          },
+          "unparsed_type": "std::pair<annotations::scribble_group, boost::shared_ptr<module>>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "facet_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "enabled"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "overwrite"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "directory"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "location",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Identifies a hierarchy of containment within the modeling space.\n\nElements exist at unique points within the modeling space called @e addresses.\nHowever, certain elements have the ability to contain other elements, creating\nin effect new dimensions in modeling space. The location class keeps track\nof these dimensions. Note that the attributes of this class are hierarchical, i.e.\nexternal modules contain model modules and so forth. These attributes are best\nthought of as a single linked list, where segments of that linked list have different\nmeaning. However, because we care about these meanings, we implemented the\ntype with a number of linked lists, one per meaning.\n\nA location is not necessarily connected to modules, although these are the main\nmodel elements that provide containment. For example, inner classes are\ncontained within classes; in yarn terms it means a location should also have an\n\"object\" attribute to represent this relationship.\n\nAlso, note that the location class itself encodes the address of the element that\nowns that location; returning to the linked list idea, the tail of the linked list is\nthe name of the element, and the remaining linked list provides the location of\nthe element.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "external_modules"
+          },
+          "unparsed_type": "std::list<std::string>",
+          "documentation": "All modules external to the model itself.\n\nIt is sometimes useful to create a model within a set of existing modules. In this\ncase, the model does not own the existing modules and they are considered\n\"external\" to the model. This is useful, for example, when declaring a model\nwithin a larger project such as @e dogen::yarn. In this case, @e dogen is the\nexternal module.\n"
+        },
+        {
+          "name": {
+            "simple": "model_modules"
+          },
+          "unparsed_type": "std::list<std::string>",
+          "documentation": "Modules related to just the model itself.\n\nIt is only different from the model name if the model name is composite;\nthat is, if the model name has multiple fields separated by dots, e.g. @ a.b.\n"
+        },
+        {
+          "name": {
+            "simple": "internal_modules"
+          },
+          "unparsed_type": "std::list<std::string>",
+          "documentation": "Sub-modules within a model.\n"
+        },
+        {
+          "name": {
+            "simple": "element"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the owning element, if any.\n\nFor modeling elements which are located within other modeling elements that\nare not modules, such as attributes, inner classes, etc.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "model",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Yarn model.\n",
+      "stereotypes": [
+        "Nameable",
+        "MetaNameable"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "elements"
+          },
+          "unparsed_type": "std::vector<boost::shared_ptr<element>>"
+        },
+        {
+          "name": {
+            "simple": "root_module"
+          },
+          "unparsed_type": "boost::shared_ptr<module>",
+          "documentation": "The module that represents the model.\n"
+        },
+        {
+          "name": {
+            "simple": "module_ids"
+          },
+          "unparsed_type": "std::unordered_set<std::string>",
+          "documentation": "IDs of all of the model elements which are modules.\n"
+        },
+        {
+          "name": {
+            "simple": "has_generatable_types"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true the intermediate model has at least one generable type, false otherwise.\n"
+        },
+        {
+          "name": {
+            "simple": "input_language"
+          },
+          "unparsed_type": "languages",
+          "documentation": "Language in which this model was written.\n"
+        },
+        {
+          "name": {
+            "simple": "output_language"
+          },
+          "unparsed_type": "languages",
+          "documentation": "Language in which to output the model.\n"
+        },
+        {
+          "name": {
+            "simple": "orm_properties"
+          },
+          "unparsed_type": "boost::optional<orm_model_properties>"
+        },
+        {
+          "name": {
+            "simple": "facet_properties"
+          },
+          "unparsed_type": "std::unordered_map<std::string, facet_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "module",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Container for other modeling elements.\n\nAggregates a group of logically related elements into a unit.\n",
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "members"
+          },
+          "unparsed_type": "std::list<std::string>",
+          "documentation": "All the model elements contained in this module.\n"
+        },
+        {
+          "name": {
+            "simple": "is_root"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this module is thee root module of the model.\n"
+        },
+        {
+          "name": {
+            "simple": "is_global_module"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this module is the pseudo module that models the global namespace.\n"
+        },
+        {
+          "name": {
+            "simple": "orm_properties"
+          },
+          "unparsed_type": "boost::optional<orm_module_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "name",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Name of an element in modeling space.\n\nA name represents a point in modeling space, and this point can only be\nused by one modeling element. Names can be uniquely identified by their\nqualified ID.\n\nName has the following properties: a) two different points in element space\ncannot have the same name and b) the same point in element space can only\nhave one and only one name.\n\nNames are required in addition to just using the qualfied ID representation\nbecause we use them to infer all sorts of properties for an element (namespaces,\nnaming files, etc).\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "id"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Unique identifier representation for this name, using a well-defined notation.\n\nNote that the qualified ID itself should not be part of the address, but it is\nplaced here as an optimisation. The ID is a bijective function on the address,\nbut designed not to have the ability to split out its constituent parts. The ID\nis generated by combining all the constituents of the address, including the\nlocation (but not the ID itself, of course).\n"
+        },
+        {
+          "name": {
+            "simple": "simple"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Simple (non-qualified) name of the modeling element at this address.\n\nThe simple name must be unique for a given location.\n"
+        },
+        {
+          "name": {
+            "simple": "qualified"
+          },
+          "unparsed_type": "std::map<languages, std::string>",
+          "documentation": "Qualified name in a language specific representation.\n"
+        },
+        {
+          "name": {
+            "simple": "location"
+          },
+          "unparsed_type": "location",
+          "documentation": "Where the name is located in element space.\n"
+        },
+        {
+          "name": {
+            "simple": "identifiable"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Representation of the name that can usable as an identifier on all of the supported\nlanguages, using the entire name structure.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "name_tree",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Adds support for name composition as a tree-like structure.\n\nA name tree has the responsibility of representing an instantiation of a generic\ntype with all of its type parameters, which themselves can also be generic types\nand so on. It may also represent the simpler case of a non-generic type, in which\ncase only the parent name is populated and there are no children.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "current"
+          },
+          "unparsed_type": "name",
+          "documentation": "Name for the current level of the tree.\n"
+        },
+        {
+          "name": {
+            "simple": "children"
+          },
+          "unparsed_type": "std::list<name_tree>",
+          "documentation": "Names of the child elements.\n"
+        },
+        {
+          "name": {
+            "simple": "are_children_opaque"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the association with its children can be opaque.\n\nChildren are considered opaque when the parent does not require knowledge\nabout the childs' internal structure. This is the case, for example, with C and\nC++ pointers, references and so on.\n"
+        },
+        {
+          "name": {
+            "simple": "is_circular_dependency"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the presence of the current name causes a circular dependency.\n"
+        },
+        {
+          "name": {
+            "simple": "qualified"
+          },
+          "unparsed_type": "std::map<languages, std::string>",
+          "documentation": "Qualified name in a language specific representation.\n"
+        },
+        {
+          "name": {
+            "simple": "identifiable"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Representation of the named tree that can usable as an identifier across all\nsupported languages.\n"
+        },
+        {
+          "name": {
+            "simple": "is_current_simple_type"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Returns true if @e current is a simple type such as a built-in or an enumeration.\n"
+        },
+        {
+          "name": {
+            "simple": "is_floating_point"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, \"current\" stores a floating point type.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "object",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Representation of the class notion in the OOP paradigm.\n\nThe yarn @e object is equivalent to a meta-class, but we decided against this\nname because all elements should also have the prefix meta - after all, yarn is a\nmeta-model. Since the word class cannot be used in c++ to name types, we\ndecided instead to use the word object.\n",
+      "stereotypes": [
+        "Stateful",
+        "Relatable",
+        "Parameterisable"
+      ],
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "is_associative_container"
+          },
+          "unparsed_type": "bool",
+          "documentation": "Object is an associative container.\n"
+        },
+        {
+          "name": {
+            "simple": "object_templates"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "All object templates associated with this object.\n"
+        },
+        {
+          "name": {
+            "simple": "associative_container_keys"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Elements that are keys in an associative container.\n"
+        },
+        {
+          "name": {
+            "simple": "provides_opaqueness"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this type provides opaqueness to any type parameters it may have.\n"
+        },
+        {
+          "name": {
+            "simple": "can_be_primitive_underlier"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this object can be the underlying element of a primitive.\n"
+        },
+        {
+          "name": {
+            "simple": "orm_properties"
+          },
+          "unparsed_type": "boost::optional<orm_object_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "object_template",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a structural template for yarn objects.\n",
+      "stereotypes": [
+        "Stateful"
+      ],
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "parents"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "List of object templates that this object template inherits from, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "is_child"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the object template has at least one parent.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_attribute_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "column_name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the column to use for this attribute. If populated, will override the attribute name.\n"
+        },
+        {
+          "name": {
+            "simple": "is_primary_key"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this attribute is a primary key for the relation.\n"
+        },
+        {
+          "name": {
+            "simple": "is_nullable"
+          },
+          "unparsed_type": "boost::optional<bool>",
+          "documentation": "If true, the attribute can be NULL.\n"
+        },
+        {
+          "name": {
+            "simple": "type_overrides"
+          },
+          "unparsed_type": "std::unordered_map<orm_database_systems, std::string>",
+          "documentation": "Override the default type for this attribute for a given database system.\n"
+        },
+        {
+          "name": {
+            "simple": "is_composite"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the value of this attribute is a composite value.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_model_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "database_systems"
+          },
+          "unparsed_type": "std::vector<orm_database_systems>"
+        },
+        {
+          "name": {
+            "simple": "schema_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "letter_case"
+          },
+          "unparsed_type": "boost::optional<letter_cases>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_module_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "schema_name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the database schema in which elements contained by this module will placed in.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_object_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "generate_mapping"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, object-relational mapping will be generated for this element.\n"
+        },
+        {
+          "name": {
+            "simple": "schema_name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the database schema in which to place this element.\n"
+        },
+        {
+          "name": {
+            "simple": "table_name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the table to map this element to.\n"
+        },
+        {
+          "name": {
+            "simple": "is_value"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, treat this object as a value type (e.g. simple type) rather than as an object.\n"
+        },
+        {
+          "name": {
+            "simple": "has_primary_key"
+          },
+          "unparsed_type": "bool",
+          "documentation": "True if the object has an attribute marked as a primary key, false otherwise.\n"
+        },
+        {
+          "name": {
+            "simple": "letter_case"
+          },
+          "unparsed_type": "boost::optional<letter_cases>",
+          "documentation": "What case to use for the database identifiers.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_primitive_properties",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "generate_mapping"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, object-relational mapping will be generated for this element.\n"
+        },
+        {
+          "name": {
+            "simple": "schema_name"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Name of the database schema in which to place this element.\n"
+        },
+        {
+          "name": {
+            "simple": "letter_case"
+          },
+          "unparsed_type": "boost::optional<letter_cases>",
+          "documentation": "What case to use for the database identifiers.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "primitive",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Defines an element created by the user to wrap another element, most likely a built-in.\n",
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "is_nullable"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, this element can be null (empty).\n"
+        },
+        {
+          "name": {
+            "simple": "value_attribute"
+          },
+          "unparsed_type": "attribute",
+          "documentation": "Attribute that represents the value of the primitive.\n"
+        },
+        {
+          "name": {
+            "simple": "use_type_aliasing"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true and if the programming language supports it, it uses type aliases\n"
+        },
+        {
+          "name": {
+            "simple": "is_immutable"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, do not generate a setter..\n"
+        },
+        {
+          "name": {
+            "simple": "orm_properties"
+          },
+          "unparsed_type": "boost::optional<orm_primitive_properties>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "type_parameters",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "variable_number_of_parameters"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "count"
+          },
+          "unparsed_type": "unsigned int"
+        },
+        {
+          "name": {
+            "simple": "always_in_heap"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "visitor",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Represents a visitor in the GOF visitor design pattern.\n",
+      "parents": [
+        {
+          "simple": "element",
+          "internal_modules": "meta_model"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "visits"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Elements that are visitable by the visitor.\n"
+        },
+        {
+          "name": {
+            "simple": "parent"
+          },
+          "unparsed_type": "boost::optional<name>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "traits"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "annotations_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "artefact_properties_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "associations_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "attributes_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "code_generation_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "code_generation_output",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "artefacts"
+          },
+          "unparsed_type": "std::list<formatters::artefact>"
+        },
+        {
+          "name": {
+            "simple": "managed_directories"
+          },
+          "unparsed_type": "std::list<boost::filesystem::path>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "configuration",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "enabled_kernels"
+          },
+          "unparsed_type": "std::unordered_set<std::string>"
+        },
+        {
+          "name": {
+            "simple": "enable_kernel_directories"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "containment_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "context",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "data_directories"
+          },
+          "unparsed_type": "std::vector<boost::filesystem::path>"
+        },
+        {
+          "name": {
+            "simple": "options"
+          },
+          "unparsed_type": "options::knitting_options"
+        },
+        {
+          "name": {
+            "simple": "type_repository"
+          },
+          "unparsed_type": "annotations::type_repository"
+        },
+        {
+          "name": {
+            "simple": "archetype_location_repository"
+          },
+          "unparsed_type": "annotations::archetype_location_repository"
+        },
+        {
+          "name": {
+            "simple": "groups_factory"
+          },
+          "unparsed_type": "annotations::annotation_groups_factory"
+        },
+        {
+          "name": {
+            "simple": "mapping_repository"
+          },
+          "unparsed_type": "helpers::mapping_set_repository"
+        },
+        {
+          "name": {
+            "simple": "formatters_repository"
+          },
+          "unparsed_type": "dogen::formatters::repository"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "context_factory",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "dynamic_transform_interface",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "dynamic_transform_registrar",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "dynamic_transforms_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "enablement_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel_generation_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "endomodel_to_model_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "enumerations_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel_generation_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel_to_endomodel_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel_to_exomodel_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel_transform_interface",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel_transform_registrar",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "generability_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "generalization_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "global_enablement_configuration",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "kernel_enabled"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "facet_enabled"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "facet_name"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "archetype_enabled"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "facet_overwrite"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "archetype_overwrite"
+          },
+          "unparsed_type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "initial_target_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "kernel_interface",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "kernel_registrar",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "kernels_by_language_"
+          },
+          "unparsed_type": "std::unordered_map<yarn::meta_model::languages, std::shared_ptr<kernel_interface>>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "language_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "local_enablement_configuration",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "facet_enabled"
+          },
+          "unparsed_type": "boost::optional<bool>"
+        },
+        {
+          "name": {
+            "simple": "archetype_enabled"
+          },
+          "unparsed_type": "boost::optional<bool>"
+        },
+        {
+          "name": {
+            "simple": "facet_supported"
+          },
+          "unparsed_type": "boost::optional<bool>"
+        },
+        {
+          "name": {
+            "simple": "facet_overwrite"
+          },
+          "unparsed_type": "boost::optional<bool>"
+        },
+        {
+          "name": {
+            "simple": "archetype_overwrite"
+          },
+          "unparsed_type": "boost::optional<bool>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "mapping_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "merge_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "meta_naming_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "model_assembly_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "modules_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "naming_configuration",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "external_modules"
+          },
+          "unparsed_type": "std::string"
+        },
+        {
+          "name": {
+            "simple": "model_modules"
+          },
+          "unparsed_type": "std::string"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "naming_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "object_templates_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "origin_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "parsing_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "post_processing_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "pre_processing_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "primitives_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "references_chain",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "resolver_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "stereotypes_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "type_params_transform",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "stereotypes": [
+        "handcrafted"
+      ]
+    },
+    {
+      "name": {
+        "simple": "Annotatable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Ability to have meta-data associated.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "annotation"
+          },
+          "unparsed_type": "annotations::annotation",
+          "documentation": "Annotation for this element.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Associatable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "The element has the ability to associate itself with other elements.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "transparent_associations"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Elements that are involved in aggregation or composition relationships.\n"
+        },
+        {
+          "name": {
+            "simple": "opaque_associations"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Elements that are involved in aggregation or composition relationships via\nindirection.\n\nThis is used to break cycles where required.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Containable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "The ability to be contained inside a module.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "contained_by"
+          },
+          "unparsed_type": "boost::optional<name>",
+          "documentation": "Name of the module in which we are contained.\n"
+        },
+        {
+          "name": {
+            "simple": "in_global_module"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the element is located in the global module.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "DeterminableOrigin",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "A unit of modeling that can be code generated.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "origin_type"
+          },
+          "unparsed_type": "origin_types",
+          "documentation": "How was this model element originated.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Documentable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Ability to provide documentation.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "documentation"
+          },
+          "unparsed_type": "std::string",
+          "documentation": "Code comments.\n\nThese are expected to follow the grammar of the comment processing tools\nof the programming language in question, e.g. Doxygen for C++, JavaDoc\nfor Java, etc.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Element",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "A unit of modeling that can be code generated.\n\nWe define the Element concept purely to make our life easier when creating\nthe element class (e.g. it expresses refinement in an easy to understand way).\nIt is not required for any other purpose.\n",
+      "parents": [
+        {
+          "simple": "Nameable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Documentable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Annotatable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "DeterminableOrigin",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Containable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Stereotypable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "MetaNameable",
+          "internal_modules": "meta_model"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Generalizable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "The element has the ability to be part of a generalization relationship.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "is_parent"
+          },
+          "unparsed_type": "bool",
+          "documentation": "True if this element is the parent of one or more elements, false otherwise.\n"
+        },
+        {
+          "name": {
+            "simple": "is_child"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the element has at least one parent.\n"
+        },
+        {
+          "name": {
+            "simple": "is_leaf"
+          },
+          "unparsed_type": "bool",
+          "documentation": "True if the type has a parent but no children.\n"
+        },
+        {
+          "name": {
+            "simple": "is_final"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the element cannot be inherited from.\n"
+        },
+        {
+          "name": {
+            "simple": "is_abstract"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, the type is an abstract type.\n"
+        },
+        {
+          "name": {
+            "simple": "in_inheritance_relationship"
+          },
+          "unparsed_type": "bool",
+          "documentation": "True if the object is related to at least one other object as a parent or a child.\n"
+        },
+        {
+          "name": {
+            "simple": "root_parents"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Top-most parents at the root of the inheritance hierarchy, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "parents"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Direct parent of this element, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "leaves"
+          },
+          "unparsed_type": "std::list<name>",
+          "documentation": "Elements that are at the bottom of the inheritance tree.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "MetaNameable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "meta_name"
+          },
+          "unparsed_type": "name",
+          "documentation": "Name of the element in the meta-model that this instance conforms to.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Nameable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Ability to have a name.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "name"
+          },
+          "unparsed_type": "name",
+          "documentation": "Fully qualified name.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Parameterisable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "type_parameters"
+          },
+          "unparsed_type": "type_parameters"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Relatable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Element has the ability to have relationships with other elements.\n",
+      "parents": [
+        {
+          "simple": "Containable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Visitable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Associatable",
+          "internal_modules": "meta_model"
+        },
+        {
+          "simple": "Generalizable",
+          "internal_modules": "meta_model"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Stateful",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Ability to have a state.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "all_attributes"
+          },
+          "unparsed_type": "std::list<attribute>",
+          "documentation": "All attributes associated with this type.\n\nThis is a union of the following sets:\n\n@li the set of all attributes obtained via inheritance relationships;\n@li the set of all attributes obtained via modeling of concepts, including any refinements;\n@li the set of all attributes directly associated with the type (local).\n\nThe first and third sets are cached in this object. The second isn't as we do\nnot have a need for it.\n"
+        },
+        {
+          "name": {
+            "simple": "local_attributes"
+          },
+          "unparsed_type": "std::list<attribute>",
+          "documentation": "The set of all attributes directly associated with the type.\n"
+        },
+        {
+          "name": {
+            "simple": "inherited_attributes"
+          },
+          "unparsed_type": "std::unordered_map<name, std::list<attribute>>",
+          "documentation": "The set of all attributes obtained via inheritance, by parent name.\n\nNote that we are using name as a key by design (instead of id); it is required for\nformatting.\n"
+        },
+        {
+          "name": {
+            "simple": "is_immutable"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, do not generate setters for the element's attributes.\n"
+        },
+        {
+          "name": {
+            "simple": "is_fluent"
+          },
+          "unparsed_type": "bool",
+          "documentation": "If true, generate fluent setters.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "Stereotypable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "attributes": [
+        {
+          "name": {
+            "simple": "stereotypes"
+          },
+          "unparsed_type": "std::vector<std::string>"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "TraversalVisitor",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "Visitable",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "The ability to handle visitation.\n",
+      "attributes": [
+        {
+          "name": {
+            "simple": "base_visitor"
+          },
+          "unparsed_type": "boost::optional<name>",
+          "documentation": "Base class of the visitor that visits the current element, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "derived_visitor"
+          },
+          "unparsed_type": "boost::optional<name>",
+          "documentation": "Derived class of the visitor that visits the current element, if any.\n"
+        },
+        {
+          "name": {
+            "simple": "is_visitation_root"
+          },
+          "unparsed_type": "bool"
+        },
+        {
+          "name": {
+            "simple": "is_visitation_leaf"
+          },
+          "unparsed_type": "bool"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "helpers"
+      },
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "meta_model"
+      },
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "transforms"
+      },
+      "meta_name": {
+        "simple": "module",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "mapping_actions",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "translate"
+          }
+        },
+        {
+          "name": {
+            "simple": "erase"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "separators",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Available separators to be used by the pretty printer.\n",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "angle_brackets"
+          },
+          "documentation": "Enclose name elements in '<' and '>'.\n"
+        },
+        {
+          "name": {
+            "simple": "double_colons"
+          },
+          "documentation": "Separate name elements with a '::'.\n"
+        },
+        {
+          "name": {
+            "simple": "dots"
+          },
+          "documentation": "Separate name elements with a '.'.\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "formatting_styles",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "stock"
+          }
+        },
+        {
+          "name": {
+            "simple": "wale"
+          }
+        },
+        {
+          "name": {
+            "simple": "stitch"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "languages",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Models need to declare upfront the programming language they will target.\n",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "cpp"
+          }
+        },
+        {
+          "name": {
+            "simple": "csharp"
+          }
+        },
+        {
+          "name": {
+            "simple": "java"
+          }
+        },
+        {
+          "name": {
+            "simple": "language_agnostic"
+          }
+        },
+        {
+          "name": {
+            "simple": "upsilon"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "letter_cases",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "upper_case"
+          }
+        },
+        {
+          "name": {
+            "simple": "lower_case"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "origin_types",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "What originated the model element.\n",
+      "enumerators": [
+        {
+          "name": {
+            "simple": "target"
+          },
+          "documentation": "The element is part of the target model.\n"
+        },
+        {
+          "name": {
+            "simple": "proxy_reference"
+          },
+          "documentation": "The element was part of a reference model which is a proxy model.\n\nProxy models expose types from existing code such as STL, boost, etc,\nproviding a way to expose third party code into Dogen so that we\ncan make use of these types.\n"
+        },
+        {
+          "name": {
+            "simple": "non_proxy_reference"
+          },
+          "documentation": "The element was part of a reference model which is regular dogen model.\n"
+        },
+        {
+          "name": {
+            "simple": "not_yet_determined"
+          },
+          "documentation": "The origin of the element is not yet known\n"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "orm_database_systems",
+        "internal_modules": "meta_model"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "mysql"
+          }
+        },
+        {
+          "name": {
+            "simple": "postgresql"
+          }
+        },
+        {
+          "name": {
+            "simple": "oracle"
+          }
+        },
+        {
+          "name": {
+            "simple": "sql_server"
+          }
+        },
+        {
+          "name": {
+            "simple": "sqllite"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "exomodel_transform_types",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "enumeration",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "enumerators": [
+        {
+          "name": {
+            "simple": "unidirectional_from"
+          }
+        },
+        {
+          "name": {
+            "simple": "unidirectional_to"
+          }
+        },
+        {
+          "name": {
+            "simple": "bidirectional"
+          }
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "building_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst building.\n"
+    },
+    {
+      "name": {
+        "simple": "hydration_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "indexing_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "A fatal error has occurred while indexing.\n"
+    },
+    {
+      "name": {
+        "simple": "mapping_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error has occurred while mapping element names.\n"
+    },
+    {
+      "name": {
+        "simple": "parsing_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "A fatal error has occurred while parsing.\n"
+    },
+    {
+      "name": {
+        "simple": "persister_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst tryng to persist a yarn model.\n"
+    },
+    {
+      "name": {
+        "simple": "printing_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst pretty printing.\n"
+    },
+    {
+      "name": {
+        "simple": "resolution_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred while trying to resolve a type.\n"
+    },
+    {
+      "name": {
+        "simple": "validation_error",
+        "internal_modules": "helpers"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred during validation.\n"
+    },
+    {
+      "name": {
+        "simple": "registrar_error",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      }
+    },
+    {
+      "name": {
+        "simple": "transformation_error",
+        "internal_modules": "transforms"
+      },
+      "meta_name": {
+        "simple": "exception",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "An error occurred whilst applying a transformation.\n"
+    }
+  ]
+}

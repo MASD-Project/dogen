@@ -355,6 +355,7 @@ add_dependencies(rat run_all_tests)
 
 if (DOGEN_KNITTER_EXECUTABLE)
     add_custom_target(knit_all)
+    add_custom_target(knit_all_json)
 endif()
 
 if (DOGEN_STITCHER_EXECUTABLE)
