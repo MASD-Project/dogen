@@ -89,6 +89,7 @@ cmake_output="/tmp/${cmake_tar}"
 wget --no-check-certificate ${cmake_input} -O ${cmake_output}
 tar xf ${cmake_output} -C /tmp
 sudo cp -r /tmp/${cmake_name}/* /usr
+rm -rf ${cmake_output} /tmp/${cmake_name}
 
 #
 # coverage
