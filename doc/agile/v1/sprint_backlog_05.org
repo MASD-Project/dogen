@@ -663,6 +663,7 @@ Tasks:
   archetype location.
 
 *** Move enablement into yarn                                         :story:
+
 It seems that the concepts around enablement are actually not kernel
 specific but instead can be generalised at the meta-model level. We
 need to create adequate representations in yarn to handle facets,

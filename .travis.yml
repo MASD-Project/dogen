@@ -25,16 +25,14 @@ git:
   depth: 5
 
 matrix:
-  allow_failures:
-    - os: osx
   include:
-    - os: osx
-      compiler: clang
-      osx_image: xcode8
-      env: BUILD_TYPE=Release DEPLOY="1" COMPILER="clang"
-    - os: osx
-      compiler: clang
-      osx_image: xcode8
+    # - os: osx
+    #   compiler: clang
+    #   osx_image: xcode8
+    #   env: BUILD_TYPE=Release DEPLOY="1" COMPILER="clang"
+    # - os: osx
+    #   compiler: clang
+    #   osx_image: xcode8
       env: BUILD_TYPE=Debug COMPILER="clang"
     - os: linux
       compiler: gcc
