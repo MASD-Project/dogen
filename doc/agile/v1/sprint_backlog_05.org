@@ -550,6 +550,17 @@ context. We should just add it verbatim.
 We need to use the new naming style =quilt.cpp.odb.pragma=. We also need to
 rename the opaque_parameters to reflect ODB specific data.
 
+*** COMPLETED Investigate usage of origin type                        :story:
+    CLOSED: [2017-09-08 Fri 22:50]
+    CLOCK: [2017-09-08 Fri 22:35]--[2017-09-08 Fri 22:50] =>  0:15
+
+With the current setup of the transforms, we always know who the
+target model is. Thus the =origin_types= flag may not be used
+correctly at present.
+
+Actually, we need way to figure out which types to generate, and which
+types are references. So we still need this flag.
+
 *** Code-generate annotations type templates                          :story:
 
 Tasks:
@@ -588,12 +599,6 @@ it would make more sense to treat them as a initialisation step. This
 will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
-
-*** Investigate usage of origin type                                  :story:
-
-With the current setup of the transforms, we always know who the
-target model is. Thus the =origin_types= flag may not be used
-correctly at present.
 
 *** Cannot make qualified references to concepts                      :story:
 
