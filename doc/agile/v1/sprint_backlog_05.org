@@ -14,25 +14,26 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-08 Fri 14:58]
+#+CAPTION: Clock summary at [2017-09-08 Fri 15:10]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *18:08* |       |      | 100.0 |
+| *Total time*                                                                | *18:19* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 18:08   |       |      | 100.0 |
-| Active                                                                      |         | 18:08 |      | 100.0 |
+| Stories                                                                     | 18:19   |       |      | 100.0 |
+| Active                                                                      |         | 18:19 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   4.0 |
 | STARTED Sprint and product backlog grooming                                 |         |       | 1:22 |   7.5 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   4.8 |
-| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   6.9 |
-| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   2.6 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  13.4 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |  10.0 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   4.7 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   6.8 |
+| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   2.5 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |  13.3 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   9.9 |
 | COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.9 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  43.1 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  42.7 |
 | COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.5 |
 | COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   5.2 |
+| COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   1.0 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -535,6 +536,20 @@ We need to somehow escape the quotes. However, why do we even need to
 have these set? Actually these are required because we are renaming
 the field (from =last_name=).
 
+*** COMPLETED Rename ODB parameters                                   :story:
+    CLOSED: [2017-09-08 Fri 15:10]
+    CLOCK: [2017-09-08 Fri 14:59]--[2017-09-08 Fri 15:10] =>  0:11
+
+At present we use the following form:
+
+: #DOGEN odb_pragma=no_id
+
+Finally we should no longer attempt to derive the ODB pragma
+context. We should just add it verbatim.
+
+We need to use the new naming style =quilt.cpp.odb.pragma=. We also need to
+rename the opaque_parameters to reflect ODB specific data.
+
 *** Code-generate annotations type templates                          :story:
 
 Tasks:
@@ -574,67 +589,11 @@ will make even more sense when we code-generate the types instead of
 using JSON. Then we can hook up the generated code to the
 initialisers.
 
-*** Throw on unsupported stereotypes                                  :story:
-
-In some cases we may support a feature in one language but not on
-others like say ORM at present. If a user requests ORM in a C# model,
-we should throw.
-
-If we are in compatibility mode, however, we should not throw.
-
-Note that we are already throwing if a stereotype is totally
-unknown. The problem here is that the stereotype is known, but not
-supported for all kernels. This is a bit trickier.
-
-We also need to check the existing code in stereotypes transform to
-stop trowing if compatibility flag is on.
-
-*** Add a modeline to stitch                                          :story:
-
-It would be nice to be able to supply the mode and other emacs
-properties to stitch templates. For that we just need a special KVP
-used at the top that contains the modeline:
-
-: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
-
-Stitch can read this KVP and ignore it.
-
-*** Change order of includes according to Lakos major design rule     :story:
-
-Lakos says:
-
-#+begin_quote
-The .c file of every component should include its own .h file as the
-first substantive line of code.
-#+end_quote
-
-We decided to include it as the last line. However, Lakos approach has
-the side-effect of automatically detecting headers that are missing
-includes. We used to do this manually by generating =.cpp= files that
-just included the header but then had to remove it because it was
-slowing down compilation. With Lakos approach we get the best of both
-worlds.
-
-We need to also update the generated code to follow this
-approach. This will require some thinking.
-
 *** Investigate usage of origin type                                  :story:
 
 With the current setup of the transforms, we always know who the
 target model is. Thus the =origin_types= flag may not be used
 correctly at present.
-
-*** Rename ODB parameters                                             :story:
-
-At present we use the following form:
-
-: #DOGEN ODB_PRAGMA=no_id
-
-We need to use the new naming style =cpp.odb.pragma=. We also need to
-rename the opaque_parameters to reflect ODB specific data.
-
-Finally we should no longer attempt to derive the ODB pragma
-context. We should just add it verbatim.
 
 *** Cannot make qualified references to concepts                      :story:
 
@@ -748,6 +707,40 @@ changes.
 *** Move formatting styles into yarn                                  :story:
 
 We need to support the formatting styles at the meta-model level.
+
+*** Throw on unsupported stereotypes                                  :story:
+
+In some cases we may support a feature in one language but not on
+others like say ORM at present. If a user requests ORM in a C# model,
+we should throw.
+
+If we are in compatibility mode, however, we should not throw.
+
+Note that we are already throwing if a stereotype is totally
+unknown. The problem here is that the stereotype is known, but not
+supported for all kernels. This is a bit trickier.
+
+We also need to check the existing code in stereotypes transform to
+stop trowing if compatibility flag is on.
+
+*** Change order of includes according to Lakos major design rule     :story:
+
+Lakos says:
+
+#+begin_quote
+The .c file of every component should include its own .h file as the
+first substantive line of code.
+#+end_quote
+
+We decided to include it as the last line. However, Lakos approach has
+the side-effect of automatically detecting headers that are missing
+includes. We used to do this manually by generating =.cpp= files that
+just included the header but then had to remove it because it was
+slowing down compilation. With Lakos approach we get the best of both
+worlds.
+
+We need to also update the generated code to follow this
+approach. This will require some thinking.
 
 *** Move element segmentation into yarn                               :story:
 
@@ -883,6 +876,16 @@ kernel must also supply a factory for the builders.
 *** Generate file paths as a transform                                :story:
 
 Add a fabric transform for file path generation.
+
+*** Add a modeline to stitch                                          :story:
+
+It would be nice to be able to supply the mode and other emacs
+properties to stitch templates. For that we just need a special KVP
+used at the top that contains the modeline:
+
+: <#@ modeline="-*- mode: poly-stitch; tab-width: 4; indent-tabs-mode: nil; -*-" #>
+
+Stitch can read this KVP and ignore it.
 
 *** Create "opaque" kernel and element properties                     :story:
 

@@ -127,8 +127,8 @@
   },
   {
     "name": {
-      "simple": "odb_pragma",
-      "qualified": "odb_pragma"
+      "simple": "pragma",
+      "qualified": "quilt.cpp.odb.pragma"
     },
     "archetype_location": {
       "family": "quilt",

@@ -59,7 +59,7 @@ std::string traits::object_odb_options_archetype() {
 }
 
 std::string traits::odb_pragma() {
-    static std::string r("odb_pragma");
+    static std::string r(traits::facet() + ".pragma");
     return r;
 }
 

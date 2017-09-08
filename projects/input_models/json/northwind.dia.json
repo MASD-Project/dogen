@@ -224,7 +224,7 @@
           "unparsed_type": "std::string",
           "annotation": {
             "yarn.orm.is_nullable": "false",
-            "odb_pragma": "column(\"LASTNAME\")"
+            "quilt.cpp.odb.pragma": "column(\"LASTNAME\")"
           }
         },
         {
@@ -234,7 +234,7 @@
           "unparsed_type": "std::string",
           "annotation": {
             "yarn.orm.is_nullable": "false",
-            "odb_pragma": "column(\"FIRSTNAME\")"
+            "quilt.cpp.odb.pragma": "column(\"FIRSTNAME\")"
           }
         },
         {
@@ -262,7 +262,7 @@
           "unparsed_type": "boost::gregorian::date",
           "annotation": {
             "yarn.orm.is_nullable": "true",
-            "odb_pragma": "column(\"BIRTHDATE\")"
+            "quilt.cpp.odb.pragma": "column(\"BIRTHDATE\")"
           }
         },
         {
@@ -272,7 +272,7 @@
           "unparsed_type": "boost::gregorian::date",
           "annotation": {
             "yarn.orm.is_nullable": "true",
-            "odb_pragma": "column(\"HIREDATE\")"
+            "quilt.cpp.odb.pragma": "column(\"HIREDATE\")"
           }
         },
         {
