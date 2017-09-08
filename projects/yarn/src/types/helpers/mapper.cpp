@@ -247,13 +247,9 @@ mapper::map(const meta_model::languages from, const meta_model::languages to,
     const auto mc(create_mapping_context(ms, from, to, im));
     BOOST_LOG_SEV(lg, debug) << "Mapping context: " << mc;
 
-    for (auto& pair : r.objects()) {
-        auto o(boost::make_shared<meta_model::object>(*pair.second));
-        map_attributes(mc, o->local_attributes());
-        pair.second.swap(o);
-    }
+    for (auto& pair : r.objects())
+        map_attributes(mc, pair.second->local_attributes());
 
-    // FIXME: why are we not copying the object template?
     for (auto& pair : r.object_templates())
         map_attributes(mc, pair.second->local_attributes());
 
