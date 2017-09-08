@@ -53,7 +53,6 @@ const std::string is_floating_point_key("is_floating_point");
 const std::string in_global_module_key("in_global_module");
 const std::string name_key("name");
 const std::string parents_key("parents");
-const std::string refines_key("refines");
 const std::string model_name_key("model_name");
 const std::string bool_true("true");
 const std::string bool_false("false");
@@ -413,7 +412,7 @@ hydrator::read_object_template(const boost::property_tree::ptree& pt) const {
     if (i != pt.not_found())
         ot->local_attributes(read_attributes(i->second, sg));
 
-    i = pt.find(refines_key);
+    i = pt.find(parents_key);
     if (i != pt.not_found()) {
         for (auto j(i->second.begin()); j != i->second.end(); ++j)
             ot->parents().push_back(read_name(j->second));

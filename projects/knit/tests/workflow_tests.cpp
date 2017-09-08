@@ -275,11 +275,11 @@ BOOST_AUTO_TEST_CASE(csharp_model_generates_expected_code_dia) {
 
 #ifdef ENABLE_JSON_TESTS
 
-// BOOST_AUTO_TEST_CASE(cpp_model_generates_expected_code_json) {
-//     SETUP_TEST_LOG("cpp_model_generates_expected_code_json");
-//     const auto json(yarn_json::input_cpp_model_json());
-//     BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
-// }
+BOOST_AUTO_TEST_CASE(cpp_model_generates_expected_code_json) {
+    SETUP_TEST_LOG("cpp_model_generates_expected_code_json");
+    const auto json(yarn_json::input_cpp_model_json());
+    BOOST_CHECK(test_knit_workflow(json, actual_json_dir));
+}
 
 BOOST_AUTO_TEST_CASE(disable_facet_folders_generates_expected_code_json) {
     SETUP_TEST_LOG("disable_facet_folders_generates_expected_code_json");

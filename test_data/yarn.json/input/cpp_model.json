@@ -84,7 +84,7 @@
     },
     {
       "name": {
-        "simple": "base_concept_model"
+        "simple": "base_object_template_instance"
       },
       "meta_name": {
         "simple": "object",
@@ -92,14 +92,14 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "This class models the BaseConcept.\n",
+      "documentation": "This class instantiates the BaseObjectTemplate.\n",
       "stereotypes": [
-        "BaseConcept"
+        "BaseObjectTemplate"
       ]
     },
     {
       "name": {
-        "simple": "base_with_concept"
+        "simple": "base_with_object_template"
       },
       "meta_name": {
         "simple": "object",
@@ -107,9 +107,9 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Base class that models a refined concept.\n",
+      "documentation": "Base class that instantiates a derived object template.\n",
       "stereotypes": [
-        "SecondRefinement"
+        "SecondChildObjectTemplate"
       ]
     },
     {
@@ -541,6 +541,21 @@
     },
     {
       "name": {
+        "simple": "descendant_object_template_instance"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "This class instantiates the DescendantObjectTemplate obje.\n",
+      "stereotypes": [
+        "DescendantObjectTemplate"
+      ]
+    },
+    {
+      "name": {
         "simple": "fluent"
       },
       "meta_name": {
@@ -576,7 +591,7 @@
     },
     {
       "name": {
-        "simple": "further_refined"
+        "simple": "further_inherited"
       },
       "meta_name": {
         "simple": "object",
@@ -584,13 +599,13 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Descendant class that models a concept which is a refinement of the concept\nmodeled by the base.\n",
+      "documentation": "Descendant class that instantiates an object template which is a descendant\nof the object template instantiated by the base class.\n",
       "stereotypes": [
-        "MultipleRefinements"
+        "MultipleParentsObjectTemplate"
       ],
       "parents": [
         {
-          "simple": "base_with_concept"
+          "simple": "base_with_object_template"
         }
       ]
     },
@@ -790,7 +805,7 @@
     },
     {
       "name": {
-        "simple": "multi_concept_model"
+        "simple": "multi_line"
       },
       "meta_name": {
         "simple": "object",
@@ -798,10 +813,22 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Type that refines more than one concept.\n",
+      "documentation": "first line\n\nsecond line\nthird line with \"quote\"\n"
+    },
+    {
+      "name": {
+        "simple": "multi_object_template_instance"
+      },
+      "meta_name": {
+        "simple": "object",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "documentation": "Type that instantiates more than one object template.\n",
       "stereotypes": [
-        "FirstRefinement",
-        "SecondRefinement"
+        "FirstChildObjectTemplate",
+        "SecondChildObjectTemplate"
       ],
       "attributes": [
         {
@@ -815,7 +842,7 @@
     },
     {
       "name": {
-        "simple": "multi_line"
+        "simple": "multiple_parents_object_template_instance"
       },
       "meta_name": {
         "simple": "object",
@@ -823,21 +850,9 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "first line\n\nsecond line\nthird line with \"quote\"\n"
-    },
-    {
-      "name": {
-        "simple": "multiple_refinement_concept_model"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Model of MultipleRefinements concept.\n",
+      "documentation": "Instantiates object template MultipleParentsObjectTemplate.\n",
       "stereotypes": [
-        "MultipleRefinements"
+        "MultipleParentsObjectTemplate"
       ],
       "attributes": [
         {
@@ -934,7 +949,7 @@
     },
     {
       "name": {
-        "simple": "consume_concept",
+        "simple": "consume_object_template",
         "internal_modules": "package_10"
       },
       "meta_name": {
@@ -944,7 +959,7 @@
         "internal_modules": "meta_model"
       },
       "stereotypes": [
-        "ConceptInAPackage"
+        "ObjectTemplateInAPackage"
       ]
     },
     {
@@ -1330,21 +1345,6 @@
     },
     {
       "name": {
-        "simple": "refinement_concept_model"
-      },
-      "meta_name": {
-        "simple": "object",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "This class models the Refinement concept.\n",
-      "stereotypes": [
-        "Refinement"
-      ]
-    },
-    {
-      "name": {
         "simple": "second_child_without_members"
       },
       "meta_name": {
@@ -1361,7 +1361,7 @@
     },
     {
       "name": {
-        "simple": "second_refinement_concept_model"
+        "simple": "second_descendant_object_template_instance"
       },
       "meta_name": {
         "simple": "object",
@@ -1369,9 +1369,9 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Second refinement model\n",
+      "documentation": "Second descendant instance\n",
       "stereotypes": [
-        "SecondRefinement"
+        "SecondChildObjectTemplate"
       ],
       "attributes": [
         {
@@ -1422,7 +1422,7 @@
     },
     {
       "name": {
-        "simple": "simple_concept_model"
+        "simple": "simple_object_template_instance"
       },
       "meta_name": {
         "simple": "object",
@@ -1430,9 +1430,9 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "This class models simple concept.\n",
+      "documentation": "This class instantiates the simple object template.\n",
       "stereotypes": [
-        "SimpleConcept"
+        "SimpleObjectTemplate"
       ],
       "attributes": [
         {
@@ -1527,7 +1527,7 @@
     },
     {
       "name": {
-        "simple": "BaseConcept2"
+        "simple": "BaseObjectTemplate2"
       },
       "meta_name": {
         "simple": "object_template",
@@ -1535,7 +1535,7 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Base concept.\n",
+      "documentation": "Base object template.\n",
       "attributes": [
         {
           "name": {
@@ -1548,7 +1548,7 @@
     },
     {
       "name": {
-        "simple": "BaseConcept"
+        "simple": "BaseObjectTemplate"
       },
       "meta_name": {
         "simple": "object_template",
@@ -1556,20 +1556,20 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "This is the base concept.\n",
+      "documentation": "This is the base object template.\n",
       "attributes": [
         {
           "name": {
             "simple": "prop_0"
           },
           "unparsed_type": "int",
-          "documentation": "Property in the base concept.\n"
+          "documentation": "Property in the base object template.\n"
         }
       ]
     },
     {
       "name": {
-        "simple": "FirstRefinement"
+        "simple": "DescendantObjectTemplate"
       },
       "meta_name": {
         "simple": "object_template",
@@ -1577,10 +1577,34 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "First refinement\n",
-      "refines": [
+      "documentation": "This object template inherits from BaseObjectTemplate.\n",
+      "parents": [
         {
-          "simple": "BaseConcept2"
+          "simple": "BaseObjectTemplate"
+        }
+      ],
+      "attributes": [
+        {
+          "name": {
+            "simple": "prop_1"
+          },
+          "unparsed_type": "int"
+        }
+      ]
+    },
+    {
+      "name": {
+        "simple": "FirstChildObjectTemplate"
+      },
+      "meta_name": {
+        "simple": "object_template",
+        "external_modules": "dogen",
+        "model_modules": "yarn",
+        "internal_modules": "meta_model"
+      },
+      "parents": [
+        {
+          "simple": "BaseObjectTemplate2"
         }
       ],
       "attributes": [
@@ -1589,13 +1613,13 @@
             "simple": "prop_1"
           },
           "unparsed_type": "int",
-          "documentation": "First refinement property\n"
+          "documentation": "A property\n"
         }
       ]
     },
     {
       "name": {
-        "simple": "MultipleRefinements"
+        "simple": "MultipleParentsObjectTemplate"
       },
       "meta_name": {
         "simple": "object_template",
@@ -1603,13 +1627,13 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "Multiple refinements concept\n",
-      "refines": [
+      "documentation": "Multiple parents object template\n",
+      "parents": [
         {
-          "simple": "FirstRefinement"
+          "simple": "FirstChildObjectTemplate"
         },
         {
-          "simple": "SecondRefinement"
+          "simple": "SecondChildObjectTemplate"
         }
       ],
       "attributes": [
@@ -1618,13 +1642,13 @@
             "simple": "prop_3"
           },
           "unparsed_type": "int",
-          "documentation": "Multiple refinements property.\n"
+          "documentation": "Multiple parents property.\n"
         }
       ]
     },
     {
       "name": {
-        "simple": "Refinement"
+        "simple": "SecondChildObjectTemplate"
       },
       "meta_name": {
         "simple": "object_template",
@@ -1632,36 +1656,10 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "This concept refines BaseConcept.\n",
-      "refines": [
+      "documentation": "Second descendant\n",
+      "parents": [
         {
-          "simple": "BaseConcept"
-        }
-      ],
-      "attributes": [
-        {
-          "name": {
-            "simple": "prop_1"
-          },
-          "unparsed_type": "int",
-          "documentation": "Refinement concept property.\n"
-        }
-      ]
-    },
-    {
-      "name": {
-        "simple": "SecondRefinement"
-      },
-      "meta_name": {
-        "simple": "object_template",
-        "external_modules": "dogen",
-        "model_modules": "yarn",
-        "internal_modules": "meta_model"
-      },
-      "documentation": "Second refinement\n",
-      "refines": [
-        {
-          "simple": "BaseConcept2"
+          "simple": "BaseObjectTemplate2"
         }
       ],
       "attributes": [
@@ -1670,13 +1668,13 @@
             "simple": "prop_2"
           },
           "unparsed_type": "int",
-          "documentation": "Second refinement property\n"
+          "documentation": "Second descendant property\n"
         }
       ]
     },
     {
       "name": {
-        "simple": "SimpleConcept"
+        "simple": "SimpleObjectTemplate"
       },
       "meta_name": {
         "simple": "object_template",
@@ -1684,14 +1682,14 @@
         "model_modules": "yarn",
         "internal_modules": "meta_model"
       },
-      "documentation": "This is an example of a concept.\n",
+      "documentation": "This is an example of an object template.\n",
       "attributes": [
         {
           "name": {
             "simple": "prop_0"
           },
           "unparsed_type": "int",
-          "documentation": "This is a sample property in a concept.\n"
+          "documentation": "This is a sample property in an object template.\n"
         },
         {
           "name": {
@@ -1704,7 +1702,7 @@
     },
     {
       "name": {
-        "simple": "ConceptInAPackage",
+        "simple": "ObjectTemplateInAPackage",
         "internal_modules": "package_10"
       },
       "meta_name": {
