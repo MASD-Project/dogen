@@ -25,6 +25,7 @@
 #include "dogen/yarn/test_data/meta_model/element_td.hpp"
 #include "dogen/yarn/test_data/meta_model/languages_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
+#include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen/yarn/test_data/meta_model/orm_model_properties_td.hpp"
 
 namespace {
@@ -114,6 +115,19 @@ std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> creat
     return r;
 }
 
+dogen::yarn::meta_model::element_archetype
+create_dogen_yarn_meta_model_element_archetype(const unsigned int position) {
+    return dogen::yarn::meta_model::element_archetype_generator::create(position);
+}
+
+std::unordered_set<dogen::yarn::meta_model::element_archetype> create_std_unordered_set_dogen_yarn_meta_model_element_archetype(unsigned int position) {
+    std::unordered_set<dogen::yarn::meta_model::element_archetype> r;
+    for (unsigned int i(0); i < 4; ++i) {
+        r.insert(create_dogen_yarn_meta_model_element_archetype(position + i));
+    }
+    return r;
+}
+
 }
 
 namespace dogen {
@@ -134,6 +148,7 @@ populate(const unsigned int position, result_type& v) {
     v.output_language(create_dogen_yarn_meta_model_languages(position + 7));
     v.orm_properties(create_boost_optional_dogen_yarn_meta_model_orm_model_properties(position + 8));
     v.facet_properties(create_std_unordered_map_std_string_dogen_yarn_meta_model_facet_properties(position + 9));
+    v.enabled_archetype_for_element(create_std_unordered_set_dogen_yarn_meta_model_element_archetype(position + 10));
 }
 
 model_generator::result_type

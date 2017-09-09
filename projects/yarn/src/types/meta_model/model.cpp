@@ -59,7 +59,8 @@ model::model(model&& rhs)
       input_language_(std::move(rhs.input_language_)),
       output_language_(std::move(rhs.output_language_)),
       orm_properties_(std::move(rhs.orm_properties_)),
-      facet_properties_(std::move(rhs.facet_properties_)) { }
+      facet_properties_(std::move(rhs.facet_properties_)),
+      enabled_archetype_for_element_(std::move(rhs.enabled_archetype_for_element_)) { }
 
 model::model(
     const dogen::yarn::meta_model::name& name,
@@ -71,7 +72,8 @@ model::model(
     const dogen::yarn::meta_model::languages input_language,
     const dogen::yarn::meta_model::languages output_language,
     const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
-    const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties)
+    const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
+    const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element)
     : name_(name),
       meta_name_(meta_name),
       elements_(elements),
@@ -81,7 +83,8 @@ model::model(
       input_language_(input_language),
       output_language_(output_language),
       orm_properties_(orm_properties),
-      facet_properties_(facet_properties) { }
+      facet_properties_(facet_properties),
+      enabled_archetype_for_element_(enabled_archetype_for_element) { }
 
 void model::swap(model& other) noexcept {
     using std::swap;
@@ -95,6 +98,7 @@ void model::swap(model& other) noexcept {
     swap(output_language_, other.output_language_);
     swap(orm_properties_, other.orm_properties_);
     swap(facet_properties_, other.facet_properties_);
+    swap(enabled_archetype_for_element_, other.enabled_archetype_for_element_);
 }
 
 bool model::operator==(const model& rhs) const {
@@ -107,7 +111,8 @@ bool model::operator==(const model& rhs) const {
         input_language_ == rhs.input_language_ &&
         output_language_ == rhs.output_language_ &&
         orm_properties_ == rhs.orm_properties_ &&
-        facet_properties_ == rhs.facet_properties_;
+        facet_properties_ == rhs.facet_properties_ &&
+        enabled_archetype_for_element_ == rhs.enabled_archetype_for_element_;
 }
 
 model& model::operator=(model other) {
@@ -250,6 +255,22 @@ void model::facet_properties(const std::unordered_map<std::string, dogen::yarn::
 
 void model::facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v) {
     facet_properties_ = std::move(v);
+}
+
+const std::unordered_set<dogen::yarn::meta_model::element_archetype>& model::enabled_archetype_for_element() const {
+    return enabled_archetype_for_element_;
+}
+
+std::unordered_set<dogen::yarn::meta_model::element_archetype>& model::enabled_archetype_for_element() {
+    return enabled_archetype_for_element_;
+}
+
+void model::enabled_archetype_for_element(const std::unordered_set<dogen::yarn::meta_model::element_archetype>& v) {
+    enabled_archetype_for_element_ = v;
+}
+
+void model::enabled_archetype_for_element(const std::unordered_set<dogen::yarn::meta_model::element_archetype>&& v) {
+    enabled_archetype_for_element_ = std::move(v);
 }
 
 } } }

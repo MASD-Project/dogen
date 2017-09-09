@@ -39,6 +39,7 @@
 #include "dogen/yarn/serialization/meta_model/element_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/languages_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
+#include "dogen/yarn/serialization/meta_model/element_archetype_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/orm_model_properties_ser.hpp"
 
 namespace boost {
@@ -58,6 +59,7 @@ void save(Archive& ar,
     ar << make_nvp("output_language", v.output_language_);
     ar << make_nvp("orm_properties", v.orm_properties_);
     ar << make_nvp("facet_properties", v.facet_properties_);
+    ar << make_nvp("enabled_archetype_for_element", v.enabled_archetype_for_element_);
 }
 
 template<typename Archive>
@@ -74,6 +76,7 @@ void load(Archive& ar,
     ar >> make_nvp("output_language", v.output_language_);
     ar >> make_nvp("orm_properties", v.orm_properties_);
     ar >> make_nvp("facet_properties", v.facet_properties_);
+    ar >> make_nvp("enabled_archetype_for_element", v.enabled_archetype_for_element_);
 }
 
 } }

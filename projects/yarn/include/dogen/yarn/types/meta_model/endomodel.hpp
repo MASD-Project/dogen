@@ -45,8 +45,10 @@
 #include "dogen/yarn/types/meta_model/primitive_fwd.hpp"
 #include "dogen/yarn/types/meta_model/enumeration_fwd.hpp"
 #include "dogen/yarn/types/meta_model/facet_properties.hpp"
+#include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/yarn/types/meta_model/object_template_fwd.hpp"
 #include "dogen/yarn/types/meta_model/orm_model_properties.hpp"
+#include "dogen/yarn/hash/meta_model/element_archetype_hash.hpp"
 #include "dogen/yarn/serialization/meta_model/endomodel_fwd_ser.hpp"
 
 namespace dogen {
@@ -88,7 +90,8 @@ public:
         const dogen::yarn::meta_model::languages input_language,
         const std::list<dogen::yarn::meta_model::languages>& output_languages,
         const boost::optional<dogen::yarn::meta_model::orm_model_properties>& orm_properties,
-        const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties);
+        const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& facet_properties,
+        const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element);
 
 private:
     template<typename Archive>
@@ -280,6 +283,11 @@ public:
     void facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>& v);
     void facet_properties(const std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties>&& v);
 
+    const std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element() const;
+    std::unordered_set<dogen::yarn::meta_model::element_archetype>& enabled_archetype_for_element();
+    void enabled_archetype_for_element(const std::unordered_set<dogen::yarn::meta_model::element_archetype>& v);
+    void enabled_archetype_for_element(const std::unordered_set<dogen::yarn::meta_model::element_archetype>&& v);
+
 public:
     bool operator==(const endomodel& rhs) const;
     bool operator!=(const endomodel& rhs) const {
@@ -311,6 +319,7 @@ private:
     std::list<dogen::yarn::meta_model::languages> output_languages_;
     boost::optional<dogen::yarn::meta_model::orm_model_properties> orm_properties_;
     std::unordered_map<std::string, dogen::yarn::meta_model::facet_properties> facet_properties_;
+    std::unordered_set<dogen::yarn::meta_model::element_archetype> enabled_archetype_for_element_;
 };
 
 } } }

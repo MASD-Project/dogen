@@ -57,6 +57,7 @@
 #include "dogen/yarn/test_data/meta_model/type_parameters_td.hpp"
 #include "dogen/yarn/test_data/meta_model/facet_properties_td.hpp"
 #include "dogen/yarn/test_data/helpers/decomposition_result_td.hpp"
+#include "dogen/yarn/test_data/meta_model/element_archetype_td.hpp"
 #include "dogen/yarn/test_data/meta_model/formatting_styles_td.hpp"
 #include "dogen/yarn/test_data/meta_model/element_properties_td.hpp"
 #include "dogen/yarn/test_data/helpers/mapping_set_repository_td.hpp"
