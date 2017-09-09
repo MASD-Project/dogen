@@ -14,28 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-10 Sun 00:18]
+#+CAPTION: Clock summary at [2017-09-10 Sun 00:30]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:19* |       |      | 100.0 |
+| *Total time*                                                                | *25:30* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:19   |       |      | 100.0 |
-| Active                                                                      |         | 25:19 |      | 100.0 |
+| Stories                                                                     | 25:30   |       |      | 100.0 |
+| Active                                                                      |         | 25:30 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.9 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:22 |   5.4 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   6.1 |
 | COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.4 |
 | COMPLETED Clean-up readme                                                   |         |       | 1:15 |   4.9 |
 | COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.8 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   9.6 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   7.2 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   9.5 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   7.1 |
 | COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.4 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  30.9 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  30.7 |
 | COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.3 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.8 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.7 |
 | COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.7 |
 | COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   1.0 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  26.7 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  26.5 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -102,6 +102,7 @@ For all other architectures and/or operative systems, you will need to build Dog
 - [[https://gitter.im/DomainDrivenConsulting/dogen][Gitter]]
 
 *** STARTED Sprint and product backlog grooming                       :story:
+    CLOCK: [2017-09-10 Sun 00:19]--[2017-09-10 Sun 00:30] =>  0:11
     CLOCK: [2017-09-08 Fri 13:45]--[2017-09-08 Fri 13:53] =>  0:08
     CLOCK: [2017-09-02 Sat 12:45]--[2017-09-02 Sat 13:14] =>  0:29
     CLOCK: [2017-09-01 Fri 15:52]--[2017-09-01 Fri 16:07] =>  0:15
@@ -751,6 +752,49 @@ convert them to element id's instead and see what breaks.
 We can't do this for:
 
 - visitor: we use the name in the formatter.
+
+*** Improve dumping of models                                         :story:
+
+At present it is very difficult to find the log information regarding
+models at different stages in the pipeline. It seems we are reaching
+the limits for what logging can do for us here:
+
+- the models are so large even emacs is struggling with the long line
+  sizes.
+- if we dump all models, we end up with extremely large log files. But
+  in practice we tend to be looking for specific dumps: a model at
+  transformation x or between x and y.
+
+It would be much better if:
+
+- there was a command line option that triggered the saving of
+  models to a user supplied directory.
+- we came up with a directory/file structure that allowed one to
+  quickly find the model one is after. For example, the nesting of
+  transformations could be the folder structure.
+
+To start off with we could dump all models for all transformations to
+get us up and running quickly, but in an ideal world we should be able
+to supply the stages/transformations for which we want dumps. We can
+then take the dumps and diff them from emacs.
+
+The folder structure could also include a "before" and "after" for
+each transform. Disk space is not an issue given that we would only be
+using this when things went wrong. It also means we can save the files
+as formatted JSON given that new lines are no longer an issue as they
+are with the log file.
+
+Similar to the context class, we could create a dumping context that
+keeps track of the nesting of transforms and their names and knows if
+dumping is enabled.
+
+For tests we should default to the directory of the logs. It should be
+possible to enable this feature for just one test, given that we will
+generate very large amounts of data.
+
+In a service setup we need a way for this data to be pushed somewhere
+else like a cache, but this will have to wait until there is clarity
+on just how IO will be implemented.
 
 *** Create yarn options                                               :story:
 
