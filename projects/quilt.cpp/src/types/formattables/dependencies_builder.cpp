@@ -130,7 +130,7 @@ add(const yarn::meta_model::name& n, const std::string& archetype) {
         return;
     }
 
-    const auto dg(get_directive_group(n, resolved_arch));
+    const auto dg(get_directive_group(n, archetype));
     if (dg) {
         add(dg->primary());
         add(dg->secondary());

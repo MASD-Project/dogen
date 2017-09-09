@@ -14,28 +14,28 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-09 Sat 23:27]
+#+CAPTION: Clock summary at [2017-09-09 Sat 23:39]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *24:31* |       |      | 100.0 |
+| *Total time*                                                                | *24:42* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 24:31   |       |      | 100.0 |
-| Active                                                                      |         | 24:31 |      | 100.0 |
+| Stories                                                                     | 24:42   |       |      | 100.0 |
+| Active                                                                      |         | 24:42 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   3.0 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:22 |   5.6 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:22 |   5.5 |
 | COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.5 |
 | COMPLETED Clean-up readme                                                   |         |       | 1:15 |   5.1 |
 | COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.9 |
 | COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   9.9 |
 | COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   7.4 |
 | COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.4 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  31.9 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  31.6 |
 | COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.3 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.9 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.8 |
 | COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.7 |
 | COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   1.0 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 5:57 |  24.3 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 6:08 |  24.8 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -564,6 +564,7 @@ Actually, we need way to figure out which types to generate, and which
 types are references. So we still need this flag.
 
 *** STARTED Add canonical archetype support to yarn                   :story:
+    CLOCK: [2017-09-09 Sat 23:28]--[2017-09-09 Sat 23:39] =>  0:11
     CLOCK: [2017-09-09 Sat 22:50]--[2017-09-09 Sat 23:27] =>  0:37
     CLOCK: [2017-09-09 Sat 22:05]--[2017-09-09 Sat 22:49] =>  0:44
     CLOCK: [2017-09-09 Sat 21:02]--[2017-09-09 Sat 21:29] =>  0:27

@@ -28,6 +28,7 @@
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/io/type_io.hpp"
 #include "dogen/quilt.cpp/types/traits.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/types/formatters/artefact_formatter_interface.hpp"
 #include "dogen/quilt.cpp/types/formattables/expansion_error.hpp"
 #include "dogen/quilt.cpp/types/formattables/directive_group.hpp"
@@ -289,9 +290,14 @@ compute_directives(const type_group& tg, const yarn::meta_model::element& e,
     /*
      * Now we start working at the formatter level.
      */
+    const auto cs(formatters::inclusion_support_types::canonical_support);
     for (const auto& fmt : formatters) {
-        const auto arch(fmt->archetype_location().archetype());
+        const auto& al(fmt->archetype_location());
+        const auto arch(al.archetype());
         BOOST_LOG_SEV(lg, trace) << "Archetype: " << arch;
+
+        const auto ist(fmt->inclusion_support_type());
+        const bool requires_canonical_archetype(ist == cs);
 
         /*
          * If the user has not provided any overrides at all, we can
@@ -309,6 +315,18 @@ compute_directives(const type_group& tg, const yarn::meta_model::element& e,
             insert_inclusion_directive(id, arch, dg, dgrp);
             BOOST_LOG_SEV(lg, trace) << "Inserting inclusion directive group: "
                                      << dg;
+
+            /*
+             * If this archetype location requires canonical archetype
+             * support, map the directive group to the canonical
+             * archetype name as well.
+             */
+            if (requires_canonical_archetype) {
+                const auto fct(al.facet());
+                const auto carch(formatters::traits::canonical_archetype(fct));
+                insert_inclusion_directive(id, carch, dg, dgrp);
+            }
+
             continue;
         }
 
@@ -327,6 +345,17 @@ compute_directives(const type_group& tg, const yarn::meta_model::element& e,
             insert_inclusion_directive(id, arch, *dg, dgrp);
             BOOST_LOG_SEV(lg, trace) << "Read primary directive from "
                                      << "meta-data: " << *dg;
+
+            /*
+             * If this archetype location requires canonical archetype
+             * support, map the directive group to the canonical
+             * archetype name as well.
+             */
+            if (requires_canonical_archetype) {
+                const auto fct(al.facet());
+                const auto carch(formatters::traits::canonical_archetype(fct));
+                insert_inclusion_directive(id, carch, *dg, dgrp);
+            }
         }
     }
 
