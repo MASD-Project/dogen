@@ -45,6 +45,15 @@ namespace formatters {
  * @brief Manages formatter registration.
  */
 class registrar final {
+private:
+    /**
+     * @brief Ensures the formatter passes a modicum of sanity checks.
+     */
+    /**@{*/
+    void validate(std::shared_ptr<artefact_formatter_interface> f) const;
+    void validate(std::shared_ptr<helper_formatter_interface> hf) const;
+    /**@{*/
+
 public:
     /**
      * @brief Ensures the registrar is ready to be used.
@@ -53,12 +62,15 @@ public:
 
 public:
     /**
-     * @brief Registers a file formatter.
+     * @brief Registers an artefact formatter.
      */
     void register_formatter(std::shared_ptr<artefact_formatter_interface> f);
 
-    void register_formatter_helper(
-        std::shared_ptr<helper_formatter_interface> fh);
+    /**
+     * @brief Registers a helper formatter.
+     */
+    void register_helper_formatter(
+        std::shared_ptr<helper_formatter_interface> hf);
 
 public:
     /**
@@ -88,7 +100,7 @@ public:
         std::unordered_map<std::string,
                            std::list<
                                std::shared_ptr<helper_formatter_interface>>>>&
-    formatter_helpers() const;
+    helper_formatters() const;
 
 private:
     repository formatter_repository_;
@@ -111,9 +123,9 @@ inline void register_formatter(registrar& rg, const std::string& facet_name) {
 }
 
 template<typename Formatter>
-inline void register_formatter_helper(registrar& rg) {
+inline void register_helper_formatter(registrar& rg) {
     const auto f(std::make_shared<Formatter>());
-    rg.register_formatter_helper(f);
+    rg.register_helper_formatter(f);
 }
 
 } } } }

@@ -97,13 +97,14 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
     formatter_repository_.stock_artefact_formatters_.push_front(f);
 
     /*
-     * Add the formatter to the archetype location stores.
+     * Add the formatter to the archetype location stores. Note that
+     * we need not worry about canonical archetypes since this kernel
+     * does not have them.
      */
     archetype_locations_.push_front(al);
     const auto mn(f->meta_name().id());
     auto& alg(archetype_locations_by_meta_name_[mn]);
     alg.archetype_locations().push_back(al);
-    // FIXME: populate canonical archetype
 
     /*
      * Add the formatter to the index by element type index.

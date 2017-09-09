@@ -60,22 +60,22 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_implementation_formatter>(rg);
     register_formatter<enum_header_formatter>(rg);
     register_formatter<enum_implementation_formatter>(rg);
-    register_formatter_helper<associative_container_helper>(rg);
-    register_formatter_helper<bool_helper>(rg);
-    register_formatter_helper<char_helper>(rg);
-    register_formatter_helper<date_helper>(rg);
-    register_formatter_helper<domain_type_helper>(rg);
-    register_formatter_helper<number_helper>(rg);
-    register_formatter_helper<optional_helper>(rg);
-    register_formatter_helper<pair_helper>(rg);
-    register_formatter_helper<path_helper>(rg);
-    register_formatter_helper<ptime_helper>(rg);
-    register_formatter_helper<ptree_helper>(rg);
-    register_formatter_helper<sequence_container_helper>(rg);
-    register_formatter_helper<smart_pointer_helper>(rg);
-    register_formatter_helper<string_helper>(rg);
-    register_formatter_helper<time_duration_helper>(rg);
-    register_formatter_helper<variant_helper>(rg);
+    register_helper_formatter<associative_container_helper>(rg);
+    register_helper_formatter<bool_helper>(rg);
+    register_helper_formatter<char_helper>(rg);
+    register_helper_formatter<date_helper>(rg);
+    register_helper_formatter<domain_type_helper>(rg);
+    register_helper_formatter<number_helper>(rg);
+    register_helper_formatter<optional_helper>(rg);
+    register_helper_formatter<pair_helper>(rg);
+    register_helper_formatter<path_helper>(rg);
+    register_helper_formatter<ptime_helper>(rg);
+    register_helper_formatter<ptree_helper>(rg);
+    register_helper_formatter<sequence_container_helper>(rg);
+    register_helper_formatter<smart_pointer_helper>(rg);
+    register_helper_formatter<string_helper>(rg);
+    register_helper_formatter<time_duration_helper>(rg);
+    register_helper_formatter<variant_helper>(rg);
 }
 
 } } } } }

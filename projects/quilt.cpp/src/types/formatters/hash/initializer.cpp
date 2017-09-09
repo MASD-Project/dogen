@@ -53,17 +53,17 @@ void initializer::initialize(registrar& rg) {
     register_formatter<class_header_formatter>(rg);
     register_formatter<class_implementation_formatter>(rg);
     register_formatter<enum_header_formatter>(rg);
-    register_formatter_helper<associative_container_helper>(rg);
-    register_formatter_helper<date_helper>(rg);
-    register_formatter_helper<optional_helper>(rg);
-    register_formatter_helper<pair_helper>(rg);
-    register_formatter_helper<path_helper>(rg);
-    register_formatter_helper<ptime_helper>(rg);
-    register_formatter_helper<ptree_helper>(rg);
-    register_formatter_helper<sequence_container_helper>(rg);
-    register_formatter_helper<smart_pointer_helper>(rg);
-    register_formatter_helper<time_duration_helper>(rg);
-    register_formatter_helper<variant_helper>(rg);
+    register_helper_formatter<associative_container_helper>(rg);
+    register_helper_formatter<date_helper>(rg);
+    register_helper_formatter<optional_helper>(rg);
+    register_helper_formatter<pair_helper>(rg);
+    register_helper_formatter<path_helper>(rg);
+    register_helper_formatter<ptime_helper>(rg);
+    register_helper_formatter<ptree_helper>(rg);
+    register_helper_formatter<sequence_container_helper>(rg);
+    register_helper_formatter<smart_pointer_helper>(rg);
+    register_helper_formatter<time_duration_helper>(rg);
+    register_helper_formatter<variant_helper>(rg);
 }
 
 } } } } }

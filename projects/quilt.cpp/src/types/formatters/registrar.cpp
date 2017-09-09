@@ -26,6 +26,7 @@
 #include "dogen/utility/io/set_io.hpp"
 #include "dogen/utility/io/forward_list_io.hpp"
 #include "dogen/annotations/io/archetype_location_io.hpp"
+#include "dogen/quilt.cpp/types/formatters/traits.hpp"
 #include "dogen/quilt.cpp/io/formatters/repository_io.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar_error.hpp"
 #include "dogen/quilt.cpp/types/formatters/registrar.hpp"
@@ -50,7 +51,7 @@ const std::string empty_facet_name("Facet name is empty.");
 const std::string empty_model_name("Model name is empty.");
 const std::string duplicate_formatter_name("Duplicate formatter name: ");
 const std::string empty_family("Family cannot be empty.");
-const std::string null_formatter_helper("Formatter helper supplied is null");
+const std::string null_helper_formatter("Formatter helper supplied is null");
 
 }
 
@@ -58,6 +59,42 @@ namespace dogen {
 namespace quilt {
 namespace cpp {
 namespace formatters {
+
+void registrar::
+validate(std::shared_ptr<artefact_formatter_interface> f) const {
+    if (!f) {
+        BOOST_LOG_SEV(lg, error) << null_formatter;
+        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
+    }
+
+    const auto& al(f->archetype_location());
+    if (al.archetype().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
+    }
+
+    if (al.facet().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_facet_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
+    }
+
+    if (al.kernel().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_model_name;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
+    }
+}
+
+void registrar::validate(std::shared_ptr<helper_formatter_interface> hf) const {
+    if (!hf) {
+        BOOST_LOG_SEV(lg, error) << null_helper_formatter;
+        BOOST_THROW_EXCEPTION(registrar_error(null_helper_formatter));
+    }
+
+    if(hf->family().empty()) {
+        BOOST_LOG_SEV(lg, error) << empty_family;
+        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
+    }
+}
 
 void registrar::validate() const {
     /*
@@ -142,49 +179,57 @@ void registrar::validate() const {
 
 void registrar::
 register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
-    if (!f) {
-        BOOST_LOG_SEV(lg, error) << null_formatter;
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter));
-    }
-
-    const auto& al(f->archetype_location());
-    if (al.archetype().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_formatter_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_formatter_name));
-    }
-
-    if (al.facet().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_facet_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_facet_name));
-    }
-
-    if (al.kernel().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_model_name;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_model_name));
-    }
-
+    /*
+     * First we ensure the formatter is vaguely valid and insert it
+     * into the main collection of stock formatters.
+     */
+    validate(f);
     auto& frp(formatter_repository_);
     frp.stock_artefact_formatters_.push_front(f);
 
     /*
      * Add the formatter to the archetype location stores.
      */
+    const auto& al(f->archetype_location());
     archetype_locations_.push_front(al);
+
+    /*
+     * Handle the meta-type collection of archetype locations.
+     */
     const auto mn(f->meta_name().id());
     auto& alg(archetype_locations_by_meta_name_[mn]);
     alg.archetype_locations().push_back(al);
-    // FIXME: compute canonical archetype.
 
     /*
-     * Add the formatter to the index by element type index.
+     * If the archetype location points to a canonical archetype,
+     * update the canonical archetype mapping.
+     */
+    auto& cal(alg.canonical_archetype_locations());
+    const auto cs(inclusion_support_types::canonical_support);
+    if (f->inclusion_support_type() == cs) {
+        const auto arch(al.archetype());
+        const auto fct(al.facet());
+        const auto carch(formatters::traits::canonical_archetype(fct));
+        const auto inserted(cal.insert(std::make_pair(arch, carch)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_formatter_name << arch;
+            BOOST_THROW_EXCEPTION(
+                registrar_error(duplicate_formatter_name + arch));
+        }
+        BOOST_LOG_SEV(lg, debug) << "Mapped " << carch << " to " << arch;
+    }
+
+    /*
+     * Add the formatter to the index of formatters by meta-name.
      */
     auto& safbmt(frp.stock_artefact_formatters_by_meta_name());
     safbmt[mn].push_front(f);
 
     /*
-     * Add formatter to the index by archetype name. Inserting the
-     * formatter into this repository has the helpful side-effect of
-     * ensuring the formatter id is unique in formatter space.
+     * Add formatter to the index of formatters by archetype
+     * name. Inserting the formatter into this repository has the
+     * helpful side-effect of ensuring the formatter id is unique in
+     * formatter space.
      */
     const auto arch(al.archetype());
     auto& fffn(frp.stock_artefact_formatters_by_archetype());
@@ -200,18 +245,8 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
 }
 
 void registrar::
-register_formatter_helper(std::shared_ptr<helper_formatter_interface> fh) {
-
-    if (!fh) {
-        BOOST_LOG_SEV(lg, error) << null_formatter_helper;
-        BOOST_THROW_EXCEPTION(registrar_error(null_formatter_helper));
-    }
-
-    if(fh->family().empty()) {
-        BOOST_LOG_SEV(lg, error) << empty_family;
-        BOOST_THROW_EXCEPTION(registrar_error(empty_family));
-    }
-
+register_helper_formatter(std::shared_ptr<helper_formatter_interface> fh) {
+    validate(fh);
     auto& frp(formatter_repository_);
     auto& f(frp.helper_formatters_[fh->family()]);
     for (const auto& of : fh->owning_formatters())
@@ -241,7 +276,7 @@ const std::unordered_map<
                      std::string,
                      std::list<
                          std::shared_ptr<helper_formatter_interface>>>>&
-registrar::formatter_helpers() const {
+registrar::helper_formatters() const {
     return formatter_repository_.helper_formatters();
 }
 

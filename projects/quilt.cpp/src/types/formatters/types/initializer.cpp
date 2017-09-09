@@ -51,7 +51,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter<namespace_header_formatter>(rg);
     register_formatter<visitor_header_formatter>(rg);
     register_formatter<forward_declarations_formatter>(rg);
-    register_formatter_helper<smart_pointer_helper>(rg);
+    register_helper_formatter<smart_pointer_helper>(rg);
 }
 
 } } } } }

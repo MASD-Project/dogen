@@ -49,7 +49,7 @@ void initializer::initialize(registrar& rg) {
     register_formatter<registrar_header_formatter>(rg);
     register_formatter<registrar_implementation_formatter>(rg);
     register_formatter<forward_declarations_formatter>(rg);
-    register_formatter_helper<path_helper>(rg);
+    register_helper_formatter<path_helper>(rg);
 }
 
 } } } } }
