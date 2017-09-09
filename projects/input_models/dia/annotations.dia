@@ -1827,13 +1827,13 @@ yet imposing some constraints on the shape of the data.
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O13">
       <dia:attribute name="obj_pos">
-        <dia:point val="27,-45"/>
+        <dia:point val="30,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="26.95,-45.05;65.28,-38.35"/>
+        <dia:rectangle val="29.95,-45.05;68.28,-38.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="27,-45"/>
+        <dia:point val="30,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="38.230000000000004"/>
@@ -6563,17 +6563,17 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Generalization" version="1" id="O37">
       <dia:attribute name="obj_pos">
-        <dia:point val="156.842,-59.9504"/>
+        <dia:point val="156.892,-59.9504"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="126.702,-60.0363;157.693,-50.0004"/>
+        <dia:rectangle val="126.702,-60.009;157.742,-50.0004"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="156.842,-59.9504"/>
-        <dia:point val="156.632,-55"/>
+        <dia:point val="156.892,-59.9504"/>
+        <dia:point val="156.842,-55"/>
         <dia:point val="126.752,-55"/>
         <dia:point val="126.752,-50.0504"/>
       </dia:attribute>
@@ -7479,13 +7479,13 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O43">
       <dia:attribute name="obj_pos">
-        <dia:point val="83,-45"/>
+        <dia:point val="88,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,-45.05;107.805,-41.35"/>
+        <dia:rectangle val="87.95,-45.05;112.805,-41.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="83,-45"/>
+        <dia:point val="88,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="24.755000000000003"/>
@@ -7919,17 +7919,17 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="27,-38.4"/>
+        <dia:point val="30,-38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="15.21,-39.15;27.75,-27.2"/>
+        <dia:rectangle val="15.21,-39.15;30.75,-27.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="27,-38.4"/>
-        <dia:point val="27,-32"/>
+        <dia:point val="30,-38.4"/>
+        <dia:point val="30,-32"/>
         <dia:point val="15.26,-32"/>
         <dia:point val="15.26,-28"/>
       </dia:attribute>
@@ -8721,7 +8721,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="25.95,-56.2"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="21.7059,-56.95;26.7,-44.2502"/>
+        <dia:rectangle val="21.9946,-56.95;26.7,-44.2502"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -8729,8 +8729,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="25.95,-56.2"/>
         <dia:point val="25.95,-50"/>
-        <dia:point val="21.7589,-50"/>
-        <dia:point val="22.046,-45.0502"/>
+        <dia:point val="22.046,-50"/>
+        <dia:point val="22.1786,-45.0502"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9147,7 +9147,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="82,-25"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="46.065,-38.45;82.75,-24.2"/>
+        <dia:rectangle val="49.065,-38.45;82.75,-24.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9155,8 +9155,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="82,-25"/>
         <dia:point val="82,-30"/>
-        <dia:point val="46.115,-30"/>
-        <dia:point val="46.115,-38.4"/>
+        <dia:point val="49.115,-30"/>
+        <dia:point val="49.115,-38.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9570,17 +9570,17 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="46.115,-45"/>
+        <dia:point val="49.115,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="45.365,-57.85;55.2,-44.2"/>
+        <dia:rectangle val="48.365,-57.85;55.2,-44.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="46.115,-45"/>
-        <dia:point val="46.115,-50"/>
+        <dia:point val="49.115,-45"/>
+        <dia:point val="49.115,-50"/>
         <dia:point val="55,-50"/>
         <dia:point val="55,-57.8"/>
       </dia:attribute>
@@ -9641,19 +9641,19 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:boolean val="false"/>
       </dia:attribute>
       <dia:attribute name="obj_pos">
-        <dia:point val="65.23,-38.4"/>
+        <dia:point val="68.23,-38.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="64.48,-41.3999;95.5775,-31.95"/>
+        <dia:rectangle val="67.48,-41.3999;100.578,-31.95"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
       </dia:attribute>
       <dia:attribute name="orth_points">
-        <dia:point val="65.23,-38.4"/>
-        <dia:point val="65.23,-32"/>
-        <dia:point val="95.3775,-32"/>
-        <dia:point val="95.3775,-41.3499"/>
+        <dia:point val="68.23,-38.4"/>
+        <dia:point val="68.23,-32"/>
+        <dia:point val="100.377,-32"/>
+        <dia:point val="100.377,-41.3499"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9715,7 +9715,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="85.145,-57.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="82.95,-58.55;85.895,-44.2"/>
+        <dia:rectangle val="84.395,-58.55;88.2,-44.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9723,8 +9723,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="85.145,-57.8"/>
         <dia:point val="85.145,-50"/>
-        <dia:point val="83,-50"/>
-        <dia:point val="83,-45"/>
+        <dia:point val="88,-50"/>
+        <dia:point val="88,-45"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -9786,7 +9786,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="94,-59.4"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="93.95,-59.45;108.505,-44.2"/>
+        <dia:rectangle val="93.95,-59.45;113.505,-44.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -9794,8 +9794,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="94,-59.4"/>
         <dia:point val="94,-50"/>
-        <dia:point val="107.755,-50"/>
-        <dia:point val="107.755,-45"/>
+        <dia:point val="112.755,-50"/>
+        <dia:point val="112.755,-45"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -10703,7 +10703,7 @@ The starting point of the recursion is the level supplied by an archetype locati
                 <dia:string>#archetype_locations_by_meta_name#</dia:string>
               </dia:attribute>
               <dia:attribute name="type">
-                <dia:string>#std::map&lt;std::string, std::list&lt;archetype_location&gt;&gt;#</dia:string>
+                <dia:string>#std::map&lt;std::string, archetype_locations_group&gt;#</dia:string>
               </dia:attribute>
               <dia:attribute name="value">
                 <dia:string>##</dia:string>
@@ -11220,13 +11220,13 @@ The starting point of the recursion is the level supplied by an archetype locati
     </dia:object>
     <dia:object type="UML - Class" version="0" id="O83">
       <dia:attribute name="obj_pos">
-        <dia:point val="69,-45"/>
+        <dia:point val="71,-45"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="68.95,-45.05;79.315,-40.55"/>
+        <dia:rectangle val="70.95,-45.05;81.315,-40.55"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
-        <dia:point val="69,-45"/>
+        <dia:point val="71,-45"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
         <dia:real val="10.265000000000001"/>
@@ -11439,7 +11439,7 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="70.0725,-57.8"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="69.3225,-58.55;74.3325,-44.2504"/>
+        <dia:rectangle val="69.3225,-58.55;76.3325,-44.2504"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11447,8 +11447,8 @@ The starting point of the recursion is the level supplied by an archetype locati
       <dia:attribute name="orth_points">
         <dia:point val="70.0725,-57.8"/>
         <dia:point val="70.0725,-50"/>
-        <dia:point val="74.1325,-50"/>
-        <dia:point val="74.1325,-45.0504"/>
+        <dia:point val="76.1325,-50"/>
+        <dia:point val="76.1325,-45.0504"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>
@@ -11720,13 +11720,13 @@ The starting point of the recursion is the level supplied by an archetype locati
         <dia:point val="11,-107"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="10.95,-107.05;38.5,-103.35"/>
+        <dia:rectangle val="10.95,-107.05;40.81,-103.35"/>
       </dia:attribute>
       <dia:attribute name="elem_corner">
         <dia:point val="11,-107"/>
       </dia:attribute>
       <dia:attribute name="elem_width">
-        <dia:real val="27.449999999999999"/>
+        <dia:real val="29.760000000000002"/>
       </dia:attribute>
       <dia:attribute name="elem_height">
         <dia:real val="3.6000000000000001"/>
@@ -11847,7 +11847,7 @@ The starting point of the recursion is the level supplied by an archetype locati
             <dia:string>#canonical_archetype_locations#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
-            <dia:string>#std::map_set&lt;std::string, std::string&gt;#</dia:string>
+            <dia:string>#std::unordered_map&lt;std::string, std::string&gt;#</dia:string>
           </dia:attribute>
           <dia:attribute name="value">
             <dia:string>##</dia:string>
@@ -11914,7 +11914,7 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
         <dia:point val="8,-96"/>
       </dia:attribute>
       <dia:attribute name="obj_bb">
-        <dia:rectangle val="7.25,-103.45;24.925,-94.4"/>
+        <dia:rectangle val="7.25,-103.45;26.08,-95.2"/>
       </dia:attribute>
       <dia:attribute name="meta">
         <dia:composite type="dict"/>
@@ -11922,8 +11922,8 @@ form is supported. Otherwise no such mapping will exist.#</dia:string>
       <dia:attribute name="orth_points">
         <dia:point val="8,-96"/>
         <dia:point val="8,-100"/>
-        <dia:point val="24.725,-100"/>
-        <dia:point val="24.725,-103.4"/>
+        <dia:point val="25.88,-100"/>
+        <dia:point val="25.88,-103.4"/>
       </dia:attribute>
       <dia:attribute name="orth_orient">
         <dia:enum val="1"/>

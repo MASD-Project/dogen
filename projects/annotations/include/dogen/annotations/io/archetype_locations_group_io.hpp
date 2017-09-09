@@ -18,39 +18,22 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
+#ifndef DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATIONS_GROUP_IO_HPP
+#define DOGEN_ANNOTATIONS_IO_ARCHETYPE_LOCATIONS_GROUP_IO_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "dogen/annotations/types/archetype_location.hpp"
+#include <iosfwd>
 #include "dogen/annotations/types/archetype_locations_group.hpp"
-#include "dogen/annotations/types/archetype_location_repository.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class archetype_location_repository_builder final {
-private:
-    void validate(const std::list<archetype_location>& als) const;
-    void populate_locations(const std::list<archetype_location>& als);
-    void populate_facet_names_by_kernel_name();
-    void populate_formatter_names_by_kernel_name();
-
-public:
-    void add(const std::list<archetype_location>& als);
-    void add(const std::unordered_map<std::string, archetype_locations_group>&
-        archetype_locations_by_meta_name);
-
-public:
-    const archetype_location_repository& build();
-
-private:
-    archetype_location_repository repository_;
-};
+std::ostream&
+operator<<(std::ostream& s,
+     const dogen::annotations::archetype_locations_group& v);
 
 } }
 

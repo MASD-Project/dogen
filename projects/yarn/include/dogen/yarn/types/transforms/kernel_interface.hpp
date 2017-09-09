@@ -28,8 +28,9 @@
 #include <list>
 #include <string>
 #include <forward_list>
+#include <unordered_map>
 #include <boost/filesystem/path.hpp>
-#include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/annotations/types/archetype_locations_group.hpp"
 #include "dogen/formatters/types/artefact.hpp"
 #include "dogen/yarn/types/meta_model/model.hpp"
 #include "dogen/yarn/types/meta_model/languages.hpp"
@@ -67,8 +68,8 @@ public:
     /**
      * @brief Returns the archetype locations for each meta name.
      */
-    virtual const std::unordered_map<
-        std::string, std::list<annotations::archetype_location>>&
+    virtual const std::unordered_map<std::string,
+                                     annotations::archetype_locations_group>&
     archetype_locations_by_meta_name() const = 0;
 
     /**

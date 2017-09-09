@@ -73,7 +73,7 @@ update_element(const context& ctx, meta_model::element& e) {
      * sourced from the formatters available in each kernel.
      */
     auto& ap(e.element_properties().artefact_properties());
-    for (const auto& al : i->second) {
+    for (const auto& al : i->second.archetype_locations()) {
         const auto a(al.archetype());
         const auto pair(std::make_pair(a, meta_model::artefact_properties()));
         const auto inserted(ap.insert(pair).second);

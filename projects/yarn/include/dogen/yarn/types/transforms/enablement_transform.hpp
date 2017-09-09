@@ -92,9 +92,8 @@ private:
 
     static std::unordered_map<std::string, local_type_group_type>
     bucket_local_type_group_by_meta_name(
-        const local_type_group_type& unbucketed_ltgs,
-        const std::unordered_map<std::string,
-        std::list<annotations::archetype_location>>&
+        const local_type_group_type& unbucketed_ltgs, const std::unordered_map<
+        std::string, annotations::archetype_locations_group>&
         archetype_locations_by_meta_name);
 
 private:

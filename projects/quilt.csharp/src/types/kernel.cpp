@@ -71,9 +71,8 @@ kernel::archetype_locations() const {
     return rg.archetype_locations();
 }
 
-const std::unordered_map<
-    std::string,
-    std::list<annotations::archetype_location>>&
+const std::unordered_map<std::string,
+                         annotations::archetype_locations_group>&
 kernel::archetype_locations_by_meta_name() const {
     const auto& rg(formatters::workflow::registrar());
     return rg.archetype_locations_by_meta_name();

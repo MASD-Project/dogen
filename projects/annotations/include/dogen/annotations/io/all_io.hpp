@@ -47,6 +47,7 @@
 #include "dogen/annotations/io/archetype_location_io.hpp"
 #include "dogen/annotations/io/profile_repository_io.hpp"
 #include "dogen/annotations/io/profiler_configuration_io.hpp"
+#include "dogen/annotations/io/archetype_locations_group_io.hpp"
 #include "dogen/annotations/io/archetype_location_repository_io.hpp"
 
 #endif

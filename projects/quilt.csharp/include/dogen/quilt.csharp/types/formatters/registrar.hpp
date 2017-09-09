@@ -30,6 +30,7 @@
 #include <forward_list>
 #include <unordered_map>
 #include "dogen/annotations/types/archetype_location.hpp"
+#include "dogen/annotations/types/archetype_locations_group.hpp"
 #include "dogen/quilt.csharp/types/formatters/repository.hpp"
 #include "dogen/quilt.csharp/types/formatters/helper_formatter_interface.hpp"
 #include "dogen/quilt.csharp/types/formatters/artefact_formatter_interface.hpp"
@@ -75,14 +76,14 @@ public:
      * @brief Returns the archetype locations for each meta name.
      */
     const std::unordered_map<std::string,
-                             std::list<annotations::archetype_location>>&
+                             annotations::archetype_locations_group>&
     archetype_locations_by_meta_name() const;
 
 private:
     repository formatter_repository_;
     std::forward_list<annotations::archetype_location> archetype_locations_;
     std::unordered_map<std::string,
-                       std::list<annotations::archetype_location>>
+                       annotations::archetype_locations_group>
     archetype_locations_by_meta_name_;
 };
 

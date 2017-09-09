@@ -64,6 +64,7 @@
 #include "dogen/annotations/types/type_templates_hydrator.hpp"
 #include "dogen/annotations/types/type_repository_selector.hpp"
 #include "dogen/annotations/types/annotation_groups_factory.hpp"
+#include "dogen/annotations/types/archetype_locations_group.hpp"
 #include "dogen/annotations/types/archetype_location_repository.hpp"
 #include "dogen/annotations/types/archetype_location_repository_builder.hpp"
 

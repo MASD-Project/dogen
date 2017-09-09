@@ -47,6 +47,7 @@
 #include "dogen/annotations/serialization/archetype_location_ser.hpp"
 #include "dogen/annotations/serialization/profile_repository_ser.hpp"
 #include "dogen/annotations/serialization/profiler_configuration_ser.hpp"
+#include "dogen/annotations/serialization/archetype_locations_group_ser.hpp"
 #include "dogen/annotations/serialization/archetype_location_repository_ser.hpp"
 
 #endif

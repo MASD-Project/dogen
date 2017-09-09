@@ -20,7 +20,6 @@
  */
 #include "dogen/annotations/hash/archetype_location_hash.hpp"
 #include "dogen/annotations/hash/archetype_locations_group_hash.hpp"
-#include "dogen/annotations/hash/archetype_location_repository_hash.hpp"
 
 namespace {
 
@@ -38,24 +37,7 @@ inline std::size_t hash_std_list_dogen_annotations_archetype_location(const std:
     return seed;
 }
 
-inline std::size_t hash_std_unordered_set_std_string(const std::unordered_set<std::string>& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i);
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_std_unordered_set_std_string(const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
-    std::size_t seed(0);
-    for (const auto i : v) {
-        combine(seed, i.first);
-        combine(seed, hash_std_unordered_set_std_string(i.second));
-    }
-    return seed;
-}
-
-inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v) {
+inline std::size_t hash_std_unordered_map_std_string_std_string(const std::unordered_map<std::string, std::string>& v) {
     std::size_t seed(0);
     for (const auto i : v) {
         combine(seed, i.first);
@@ -69,13 +51,11 @@ inline std::size_t hash_std_unordered_map_std_string_dogen_annotations_archetype
 namespace dogen {
 namespace annotations {
 
-std::size_t archetype_location_repository_hasher::hash(const archetype_location_repository& v) {
+std::size_t archetype_locations_group_hasher::hash(const archetype_locations_group& v) {
     std::size_t seed(0);
 
     combine(seed, hash_std_list_dogen_annotations_archetype_location(v.archetype_locations()));
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.facet_names_by_kernel_name()));
-    combine(seed, hash_std_unordered_map_std_string_std_unordered_set_std_string(v.formatter_names_by_kernel_name()));
-    combine(seed, hash_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(v.archetype_locations_by_meta_name()));
+    combine(seed, hash_std_unordered_map_std_string_std_string(v.canonical_archetype_locations()));
 
     return seed;
 }

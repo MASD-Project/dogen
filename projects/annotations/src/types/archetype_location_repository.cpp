@@ -27,7 +27,7 @@ archetype_location_repository::archetype_location_repository(
     const std::list<dogen::annotations::archetype_location>& archetype_locations,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& facet_names_by_kernel_name,
     const std::unordered_map<std::string, std::unordered_set<std::string> >& formatter_names_by_kernel_name,
-    const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_locations_by_meta_name)
+    const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_locations_by_meta_name)
     : archetype_locations_(archetype_locations),
       facet_names_by_kernel_name_(facet_names_by_kernel_name),
       formatter_names_by_kernel_name_(formatter_names_by_kernel_name),
@@ -102,19 +102,19 @@ void archetype_location_repository::formatter_names_by_kernel_name(const std::un
     formatter_names_by_kernel_name_ = std::move(v);
 }
 
-const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository::archetype_locations_by_meta_name() const {
+const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_location_repository::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }
 
-std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& archetype_location_repository::archetype_locations_by_meta_name() {
+std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& archetype_location_repository::archetype_locations_by_meta_name() {
     return archetype_locations_by_meta_name_;
 }
 
-void archetype_location_repository::archetype_locations_by_meta_name(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >& v) {
+void archetype_location_repository::archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v) {
     archetype_locations_by_meta_name_ = v;
 }
 
-void archetype_location_repository::archetype_locations_by_meta_name(const std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> >&& v) {
+void archetype_location_repository::archetype_locations_by_meta_name(const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>&& v) {
     archetype_locations_by_meta_name_ = std::move(v);
 }
 

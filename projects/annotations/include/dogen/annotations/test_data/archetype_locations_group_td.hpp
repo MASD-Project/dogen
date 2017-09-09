@@ -18,38 +18,34 @@
  * MA 02110-1301, USA.
  *
  */
-#ifndef DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
-#define DOGEN_ANNOTATIONS_TYPES_ARCHETYPE_LOCATION_REPOSITORY_BUILDER_HPP
+#ifndef DOGEN_ANNOTATIONS_TEST_DATA_ARCHETYPE_LOCATIONS_GROUP_TD_HPP
+#define DOGEN_ANNOTATIONS_TEST_DATA_ARCHETYPE_LOCATIONS_GROUP_TD_HPP
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1200)
 #pragma once
 #endif
 
-#include <list>
-#include "dogen/annotations/types/archetype_location.hpp"
 #include "dogen/annotations/types/archetype_locations_group.hpp"
-#include "dogen/annotations/types/archetype_location_repository.hpp"
 
 namespace dogen {
 namespace annotations {
 
-class archetype_location_repository_builder final {
-private:
-    void validate(const std::list<archetype_location>& als) const;
-    void populate_locations(const std::list<archetype_location>& als);
-    void populate_facet_names_by_kernel_name();
-    void populate_formatter_names_by_kernel_name();
+class archetype_locations_group_generator {
+public:
+    archetype_locations_group_generator();
 
 public:
-    void add(const std::list<archetype_location>& als);
-    void add(const std::unordered_map<std::string, archetype_locations_group>&
-        archetype_locations_by_meta_name);
+    typedef dogen::annotations::archetype_locations_group result_type;
 
 public:
-    const archetype_location_repository& build();
+    static void populate(const unsigned int position, result_type& v);
+    static result_type create(const unsigned int position);
+    result_type operator()();
 
 private:
-    archetype_location_repository repository_;
+    unsigned int position_;
+public:
+    static result_type* create_ptr(const unsigned int position);
 };
 
 } }

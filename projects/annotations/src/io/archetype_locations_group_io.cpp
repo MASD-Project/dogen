@@ -22,7 +22,6 @@
 #include <boost/algorithm/string.hpp>
 #include "dogen/annotations/io/archetype_location_io.hpp"
 #include "dogen/annotations/io/archetype_locations_group_io.hpp"
-#include "dogen/annotations/io/archetype_location_repository_io.hpp"
 
 namespace std {
 
@@ -48,46 +47,14 @@ inline std::string tidy_up_string(std::string s) {
 
 namespace std {
 
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_set<std::string>& v) {
-    s << "[ ";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "\"" << tidy_up_string(*i) << "\"";
-    }
-    s << "] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::unordered_set<std::string> >& v) {
+inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, std::string>& v) {
     s << "[";
     for (auto i(v.begin()); i != v.end(); ++i) {
         if (i != v.begin()) s << ", ";
         s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
         s << "\"" << tidy_up_string(i->first) << "\"";
         s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
-        s << " } ]";
-    }
-    s << " ] ";
-    return s;
-}
-
-}
-
-namespace std {
-
-inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::string, dogen::annotations::archetype_locations_group>& v) {
-    s << "[";
-    for (auto i(v.begin()); i != v.end(); ++i) {
-        if (i != v.begin()) s << ", ";
-        s << "[ { " << "\"__type__\": " << "\"key\"" << ", " << "\"data\": ";
-        s << "\"" << tidy_up_string(i->first) << "\"";
-        s << " }, { " << "\"__type__\": " << "\"value\"" << ", " << "\"data\": ";
-        s << i->second;
+        s << "\"" << tidy_up_string(i->second) << "\"";
         s << " } ]";
     }
     s << " ] ";
@@ -99,13 +66,11 @@ inline std::ostream& operator<<(std::ostream& s, const std::unordered_map<std::s
 namespace dogen {
 namespace annotations {
 
-std::ostream& operator<<(std::ostream& s, const archetype_location_repository& v) {
+std::ostream& operator<<(std::ostream& s, const archetype_locations_group& v) {
     s << " { "
-      << "\"__type__\": " << "\"dogen::annotations::archetype_location_repository\"" << ", "
+      << "\"__type__\": " << "\"dogen::annotations::archetype_locations_group\"" << ", "
       << "\"archetype_locations\": " << v.archetype_locations() << ", "
-      << "\"facet_names_by_kernel_name\": " << v.facet_names_by_kernel_name() << ", "
-      << "\"formatter_names_by_kernel_name\": " << v.formatter_names_by_kernel_name() << ", "
-      << "\"archetype_locations_by_meta_name\": " << v.archetype_locations_by_meta_name()
+      << "\"canonical_archetype_locations\": " << v.canonical_archetype_locations()
       << " }";
     return(s);
 }

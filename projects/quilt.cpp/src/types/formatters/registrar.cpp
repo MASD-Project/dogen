@@ -171,7 +171,9 @@ register_formatter(std::shared_ptr<artefact_formatter_interface> f) {
      */
     archetype_locations_.push_front(al);
     const auto mn(f->meta_name().id());
-    archetype_locations_by_meta_name_[mn].push_back(al);
+    auto& alg(archetype_locations_by_meta_name_[mn]);
+    alg.archetype_locations().push_back(al);
+    // FIXME: compute canonical archetype.
 
     /*
      * Add the formatter to the index by element type index.
@@ -229,7 +231,7 @@ registrar::archetype_locations() const {
 }
 
 const std::unordered_map<std::string,
-                         std::list<annotations::archetype_location>>&
+                   annotations::archetype_locations_group>&
 registrar::archetype_locations_by_meta_name() const {
     return archetype_locations_by_meta_name_;
 }

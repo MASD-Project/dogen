@@ -32,6 +32,7 @@ lg(logger_factory("annotations.archetype_location_repository_builder"));
 const std::string empty_kernel("Kernel name cannot be empty. Archetype: ");
 const std::string empty_facet("Facet name cannot be empty. Archetype: ");
 const std::string empty_archetype("Archetype name cannot be empty.");
+const std::string duplicate_archetype("Archetype name already inserted: ");
 
 }
 
@@ -43,6 +44,10 @@ validate(const std::list<archetype_location>& als) const {
     BOOST_LOG_SEV(lg, debug) << "Validating archetype locations.";
 
     for (const auto& al : als) {
+        /*
+         * We expect all three key coordinates of the location to be
+         * populated.
+         */
         if (al.archetype().empty()) {
             BOOST_LOG_SEV(lg, error) << empty_archetype;
             BOOST_THROW_EXCEPTION(building_error(empty_archetype));
@@ -92,15 +97,49 @@ add(const std::list<archetype_location>& als) {
     BOOST_LOG_SEV(lg, debug) << "Added archetype location list. ";
 }
 
-void archetype_location_repository_builder::add(const std::unordered_map<
-    std::string, std::list<annotations::archetype_location>>&
+void archetype_location_repository_builder::
+add(const std::unordered_map<std::string, archetype_locations_group>&
     archetype_locations_by_meta_name) {
     auto& albmn(repository_.archetype_locations_by_meta_name());
     for (const auto& pair : archetype_locations_by_meta_name) {
+        /*
+         * We start by inserting the archetype locations into the
+         * overall container with all archetype locations across all
+         * kernels.
+         */
+        const auto& src(pair.second);
+        add(src.archetype_locations());
+
+        /*
+         * Now lets populate the meta-name specific container.
+         */
         const auto& mn(pair.first);
-        const auto& als(pair.second);
-        albmn[mn] = als;
-        add(als);
+        auto& dst(albmn[mn]);
+
+        /*
+         * We need to merge the archetype locations at the meta-type
+         * level because each kernel is reusing the same yarn
+         * meta-types.
+         */
+        for (const auto& al : src.archetype_locations())
+            dst.archetype_locations().push_back(al);
+
+        /*
+         * However, when it comes down to the canonical archetype
+         * mapping, we expect each archetype to be unique - after all,
+         * no two formatters can be pointing to the same archetype
+         * location (by definition). So, if we spot any duplicates,
+         * its a logic error.
+         */
+        auto& cal(dst.canonical_archetype_locations());
+        for (const auto& pair : src.canonical_archetype_locations()) {
+            const bool inserted(cal.insert(pair).second);
+            if (!inserted) {
+                BOOST_LOG_SEV(lg, error) << duplicate_archetype << pair.first;
+                BOOST_THROW_EXCEPTION(
+                    building_error(duplicate_archetype + pair.first));
+            }
+        }
     }
 }
 

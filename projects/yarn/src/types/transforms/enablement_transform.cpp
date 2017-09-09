@@ -233,9 +233,8 @@ make_local_type_group(const annotations::type_repository& atrp,
 
 std::unordered_map<std::string, enablement_transform::local_type_group_type>
 enablement_transform::bucket_local_type_group_by_meta_name(
-    const local_type_group_type& unbucketed_ltgs,
-    const std::unordered_map<std::string,
-    std::list<annotations::archetype_location>>&
+    const local_type_group_type& unbucketed_ltgs, const std::unordered_map<
+    std::string, annotations::archetype_locations_group>&
     archetype_locations_by_meta_name) {
 
     BOOST_LOG_SEV(lg, debug) << "Started bucketing local field definitions "
@@ -244,10 +243,10 @@ enablement_transform::bucket_local_type_group_by_meta_name(
 
     for (const auto& pair: archetype_locations_by_meta_name) {
         const auto& mt(pair.first);
-        const auto& als(pair.second);
+        const auto& alg(pair.second);
 
         local_type_group_type& ltg(r[mt]);
-        for (const auto& al : als) {
+        for (const auto& al : alg.archetype_locations()) {
             const auto arch(al.archetype());
             const auto i(unbucketed_ltgs.find(arch));
             if (i == unbucketed_ltgs.end()) {

@@ -20,6 +20,7 @@
  */
 #include <sstream>
 #include "dogen/annotations/test_data/archetype_location_td.hpp"
+#include "dogen/annotations/test_data/archetype_locations_group_td.hpp"
 #include "dogen/annotations/test_data/archetype_location_repository_td.hpp"
 
 namespace {
@@ -59,10 +60,15 @@ std::unordered_map<std::string, std::unordered_set<std::string> > create_std_uno
     return r;
 }
 
-std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(unsigned int position) {
-    std::unordered_map<std::string, std::list<dogen::annotations::archetype_location> > r;
+dogen::annotations::archetype_locations_group
+create_dogen_annotations_archetype_locations_group(const unsigned int position) {
+    return dogen::annotations::archetype_locations_group_generator::create(position);
+}
+
+std::unordered_map<std::string, dogen::annotations::archetype_locations_group> create_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(unsigned int position) {
+    std::unordered_map<std::string, dogen::annotations::archetype_locations_group> r;
     for (unsigned int i(0); i < 4; ++i) {
-        r.insert(std::make_pair(create_std_string(position + i), create_std_list_dogen_annotations_archetype_location(position + i)));
+        r.insert(std::make_pair(create_std_string(position + i), create_dogen_annotations_archetype_locations_group(position + i)));
     }
     return r;
 }
@@ -79,7 +85,7 @@ populate(const unsigned int position, result_type& v) {
     v.archetype_locations(create_std_list_dogen_annotations_archetype_location(position + 0));
     v.facet_names_by_kernel_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 1));
     v.formatter_names_by_kernel_name(create_std_unordered_map_std_string_std_unordered_set_std_string(position + 2));
-    v.archetype_locations_by_meta_name(create_std_unordered_map_std_string_std_list_dogen_annotations_archetype_location(position + 3));
+    v.archetype_locations_by_meta_name(create_std_unordered_map_std_string_dogen_annotations_archetype_locations_group(position + 3));
 }
 
 archetype_location_repository_generator::result_type
