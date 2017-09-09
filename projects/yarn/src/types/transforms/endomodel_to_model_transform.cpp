@@ -117,61 +117,62 @@ private:
 }
 
 std::size_t endomodel_to_model_transform::
-compute_total_size(const meta_model::endomodel& im) {
+compute_total_size(const meta_model::endomodel& em) {
     std::size_t r;
-    r = im.modules().size();
-    r += im.object_templates().size();
-    r += im.builtins().size();
-    r += im.enumerations().size();
-    r += im.primitives().size();
-    r += im.objects().size();
-    r += im.exceptions().size();
-    r += im.visitors().size();
-    r += im.injected_elements().size();
+    r = em.modules().size();
+    r += em.object_templates().size();
+    r += em.builtins().size();
+    r += em.enumerations().size();
+    r += em.primitives().size();
+    r += em.objects().size();
+    r += em.exceptions().size();
+    r += em.visitors().size();
+    r += em.injected_elements().size();
     return r;
 }
 
 meta_model::model
-endomodel_to_model_transform::transform(const meta_model::endomodel& im) {
+endomodel_to_model_transform::transform(const meta_model::endomodel& em) {
     meta_model::model r;
-    r.name(im.name());
+    r.name(em.name());
     r.meta_name(helpers::meta_name_factory::make_model_name());
 
-    r.input_language(im.input_language());
-    if (im.output_languages().size() != 1) {
+    r.input_language(em.input_language());
+    if (em.output_languages().size() != 1) {
         BOOST_LOG_SEV(lg, error) << expected_one_output_language
                                  << " Output languages: "
-                                 << im.output_languages();
+                                 << em.output_languages();
         BOOST_THROW_EXCEPTION(
             transformation_error(expected_one_output_language));
     }
-    const auto ol(im.output_languages().front());
+    const auto ol(em.output_languages().front());
     r.output_language(ol);
 
-    r.root_module(im.root_module());
-    r.has_generatable_types(im.has_generatable_types());
-    r.orm_properties(im.orm_properties());
-    r.facet_properties(im.facet_properties());
+    r.root_module(em.root_module());
+    r.has_generatable_types(em.has_generatable_types());
+    r.orm_properties(em.orm_properties());
+    r.facet_properties(em.facet_properties());
+    r.enabled_archetype_for_element(em.enabled_archetype_for_element());
 
-    const auto size(compute_total_size(im));
+    const auto size(compute_total_size(em));
     r.elements().reserve(size);
 
     model_populator mp(r);
-    meta_model::shared_elements_traversal(im, mp);
+    meta_model::shared_elements_traversal(em, mp);
 
     // FIXME: not using:
     // shared_elements_traversal(im, mp, true/*include_injected_elements*/);
     // as its causing issues at present.
-    mp.add(im.injected_elements());
+    mp.add(em.injected_elements());
 
     return r;
 }
 
 std::list<meta_model::model> endomodel_to_model_transform::
-transform(const std::list<meta_model::endomodel>& ims) {
+transform(const std::list<meta_model::endomodel>& ems) {
     std::list<meta_model::model> r;
-    for(const auto& im : ims)
-        r.push_back(transform(im));
+    for(const auto& em : ems)
+        r.push_back(transform(em));
 
     return r;
 }

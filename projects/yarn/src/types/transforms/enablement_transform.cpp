@@ -56,11 +56,13 @@ static logger lg(logger_factory("yarn.transforms.enablement_transform"));
 const std::string global_configuration_not_found(
     "Could not find global enablement configuration for formatter: ");
 const std::string duplicate_archetype_name("Duplicate archetype name: ");
+const std::string duplicate_element_archetype("Duplicate element archetype: ");
 const std::string archetype_not_found("Archetype not found: ");
 const std::string incompatible_facet(
     "Facet is not compatible with C++ standard chosen: ");
 const std::string element_not_found("Element not found: ");
 const std::string default_value_unset("Default value not set for field: ");
+const std::string meta_name_not_found("Meta-name not found: ");
 
 }
 
@@ -446,6 +448,10 @@ void enablement_transform::compute_enablement_for_artefact_properties(
 void enablement_transform::compute_enablement_for_element(
     const global_enablement_configurations_type& gcs,
     const std::unordered_map<std::string, local_type_group_type>& ltgmt,
+    const std::unordered_map<std::string,
+    annotations::archetype_locations_group>& archetype_locations_by_meta_name,
+    std::unordered_set<meta_model::element_archetype>&
+    enabled_archetype_for_element,
     meta_model::element& e) {
 
     const auto id(e.name().id());
@@ -472,6 +478,15 @@ void enablement_transform::compute_enablement_for_element(
         return;
     }
 
+    const auto& mn(e.meta_name());
+    const auto j(archetype_locations_by_meta_name.find(mn.id()));
+    if (j == archetype_locations_by_meta_name.end()) {
+        BOOST_LOG_SEV(lg, error) << meta_name_not_found << mn.id();
+        BOOST_THROW_EXCEPTION(
+            transformation_error(meta_name_not_found + mn.id()));
+    }
+    const auto& cal(j->second.canonical_archetype_locations());
+
     /*
      * Now, for each element segment, find the corresponding local
      * types and use those to obtain the local configuration.
@@ -484,21 +499,54 @@ void enablement_transform::compute_enablement_for_element(
      * then compute the enablement values for this formattable, across
      * all the supported formatters.
      */
+    auto& eafe(enabled_archetype_for_element);
     for (auto& pair : e.element_properties().artefact_properties()) {
         const auto arch(pair.first);
         auto& art_props(pair.second);
         compute_enablement_for_artefact_properties(gcs, lcs, arch, art_props);
+
+        if (!art_props.enabled())
+            continue;
+
+        /*
+         * If we are enabled, we need to update the enablement
+         * index. First, we update it with the concrete archetype.
+         */
+        using meta_model::element_archetype;
+        auto inserted(eafe.insert(element_archetype(id, arch)).second);
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
+                                     << " " << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype_name
+                    + arch + " " + id));
+        }
+
+        /*
+         * Then, if this archetype maps to a canonical archetype, we
+         * create an entry for the canonical archetype as well.
+         */
+        const auto k(cal.find(arch));
+        if (k == cal.end())
+            continue;
+
+        inserted = eafe.insert(element_archetype(id, k->second)).second;
+        if (!inserted) {
+            BOOST_LOG_SEV(lg, error) << duplicate_element_archetype << arch
+                                     << " " << id;
+            BOOST_THROW_EXCEPTION(transformation_error(duplicate_archetype_name
+                    + arch + " " + id));
+        }
     }
 
     BOOST_LOG_SEV(lg, debug) << "Finished computing enablement.";
 }
 
 void enablement_transform::
-transform(const context& ctx, meta_model::endomodel& im) {
+transform(const context& ctx, meta_model::endomodel& em) {
     BOOST_LOG_SEV(lg, debug) << "Started enablement transform.";
 
     const auto& atrp(ctx.type_repository());
-    const auto& ra(im.root_module()->annotation());
+    const auto& ra(em.root_module()->annotation());
     const auto& als(ctx.archetype_location_repository().archetype_locations());
 
     /*
@@ -513,7 +561,7 @@ transform(const context& ctx, meta_model::endomodel& im) {
      * and update the facet configurations with it.
      */
     const auto gcs(obtain_global_configurations(gtg, ra));
-    update_facet_enablement(als, gcs, im);
+    update_facet_enablement(als, gcs, em);
 
     /*
      * Create the fields for the local types. These are generated
@@ -529,12 +577,14 @@ transform(const context& ctx, meta_model::endomodel& im) {
     const auto& alrp(ctx.archetype_location_repository());
     const auto& albmn(alrp.archetype_locations_by_meta_name());
     const auto ltgmn(bucket_local_type_group_by_meta_name(ltg, albmn));
+    std::unordered_set<meta_model::element_archetype> eafe;
 
     using namespace std::placeholders;
     const auto f(enablement_transform::compute_enablement_for_element);
-    const auto v(std::bind(f, gcs, ltgmn, _1));
+    auto v(std::bind(f, gcs, ltgmn, albmn, eafe, _1));
     const bool include_injected_elements(true);
-    meta_model::elements_traversal(im, v, include_injected_elements);
+    meta_model::elements_traversal(em, v, include_injected_elements);
+    em.enabled_archetype_for_element(eafe);
 
     BOOST_LOG_SEV(lg, debug) << "Finished enablement transform.";
 }

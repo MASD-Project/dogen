@@ -35,12 +35,12 @@ namespace transforms {
 
 class endomodel_to_model_transform final {
 private:
-    static std::size_t compute_total_size(const meta_model::endomodel& im);
-    static meta_model::model transform(const meta_model::endomodel& im);
+    static std::size_t compute_total_size(const meta_model::endomodel& em);
+    static meta_model::model transform(const meta_model::endomodel& em);
 
 public:
     static std::list<meta_model::model>
-    transform(const std::list<meta_model::endomodel>& ims);
+    transform(const std::list<meta_model::endomodel>& ems);
 };
 
 } } }

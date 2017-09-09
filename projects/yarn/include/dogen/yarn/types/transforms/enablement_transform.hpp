@@ -27,6 +27,7 @@
 
 #include <string>
 #include "dogen/yarn/types/meta_model/element.hpp"
+#include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/yarn/types/meta_model/endomodel.hpp"
 #include "dogen/yarn/types/transforms/local_enablement_configuration.hpp"
 #include "dogen/yarn/types/transforms/global_enablement_configuration.hpp"
@@ -116,7 +117,11 @@ private:
     static void compute_enablement_for_element(
         const global_enablement_configurations_type& gcs,
         const std::unordered_map<std::string, local_type_group_type>& ltgmt,
-        meta_model::element& e);
+        const std::unordered_map<std::string,
+        annotations::archetype_locations_group>&
+        archetype_locations_by_meta_name,
+        std::unordered_set<meta_model::element_archetype>&
+        enabled_archetype_for_element, meta_model::element& e);
 
 public:
     static void transform(const context& ctx, meta_model::endomodel& im);
