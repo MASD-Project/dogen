@@ -62,7 +62,7 @@ update_element(const context& ctx, meta_model::element& e) {
     const auto& c(alrp.archetype_locations_by_meta_name());
     const auto i(c.find(mn));
     if (i == c.end()) {
-        BOOST_LOG_SEV(lg, debug) << "Element has no archetypes.";
+        BOOST_LOG_SEV(lg, debug) << "No archetypes for meta-name: " << mn;
         return;
     }
     BOOST_LOG_SEV(lg, debug) << "Element has archetypes.";

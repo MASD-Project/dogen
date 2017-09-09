@@ -524,7 +524,8 @@ transform(const context& ctx, meta_model::endomodel& im) {
 
     /*
      * Bucket the local types by element - i.e., we only care about
-     * those formatters which are valid for a particular element.
+     * those archetype locations which are valid for a particular
+     * type of element.
      */
     const auto& alrp(ctx.archetype_location_repository());
     const auto& albmn(alrp.archetype_locations_by_meta_name());
