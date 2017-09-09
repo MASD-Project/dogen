@@ -26,8 +26,10 @@
 #endif
 
 #include <string>
+#include <unordered_set>
 #include <unordered_map>
 #include <boost/shared_ptr.hpp>
+#include "dogen/yarn/types/meta_model/element_archetype.hpp"
 #include "dogen/quilt.cpp/types/formattables/formattable.hpp"
 #include "dogen/quilt.cpp/types/formattables/dependencies_builder.hpp"
 #include "dogen/quilt.cpp/types/formattables/directive_group_repository.hpp"
@@ -53,7 +55,9 @@ class dependencies_builder_factory final {
 public:
     dependencies_builder_factory(
         const directive_group_repository& dgrp,
-        const std::unordered_map<std::string, formattable>& formattables);
+        const std::unordered_map<std::string, formattable>& formattables,
+        const std::unordered_set<yarn::meta_model::element_archetype>&
+        enabled_archetype_for_element);
 
 public:
     /**
@@ -64,6 +68,8 @@ public:
 private:
     const directive_group_repository& inclusion_directives_;
     const std::unordered_map<std::string, formattable>& formattables_;
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element_;
 };
 
 } } } }

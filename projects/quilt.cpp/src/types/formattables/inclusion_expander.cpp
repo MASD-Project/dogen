@@ -243,11 +243,13 @@ void inclusion_expander::populate_inclusion_dependencies(
 }
 
 void inclusion_expander::expand(const annotations::type_repository& atrp,
-    const formatters::repository& frp, const locator& l, model& fm) const {
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element, const formatters::repository& frp,
+    const locator& l, model& fm) const {
 
     auto& fbls(fm.formattables());
     const auto dgrp(create_directive_groups(atrp, frp, l, fbls));
-    dependencies_builder_factory df(dgrp, fbls);
+    dependencies_builder_factory df(dgrp, fbls, enabled_archetype_for_element);
     populate_inclusion_dependencies(frp, df, fbls);
 }
 

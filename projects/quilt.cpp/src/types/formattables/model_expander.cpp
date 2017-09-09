@@ -58,10 +58,12 @@ void model_expander::expand_canonical_archetypes(
 }
 
 void model_expander::expand_inclusion(
-    const annotations::type_repository& atrp, const formatters::repository& frp,
+    const annotations::type_repository& atrp,
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element, const formatters::repository& frp,
     const locator& l, model& fm) const {
     inclusion_expander ex;
-    ex.expand(atrp, frp, l, fm);
+    ex.expand(atrp, enabled_archetype_for_element, frp, l, fm);
 }
 
 void model_expander::expand_aspects(const annotations::type_repository& atrp,
@@ -120,6 +122,8 @@ model_expander::expand_cpp_standard(const annotations::type_repository& atrp,
 
 void model_expander::expand(
     const annotations::type_repository& atrp, const annotations::annotation& ra,
+    const std::unordered_set<yarn::meta_model::element_archetype>&
+    enabled_archetype_for_element,
     const formatters::repository& frp, const locator& l, model& fm) const {
 
     /*
@@ -148,7 +152,7 @@ void model_expander::expand(
      */
     expand_canonical_archetypes(frp, fm);
 
-    expand_inclusion(atrp, frp, l, fm);
+    expand_inclusion(atrp, enabled_archetype_for_element, frp, l, fm);
     expand_aspects(atrp, fm);
     expand_helpers(atrp, frp, fm);
 
