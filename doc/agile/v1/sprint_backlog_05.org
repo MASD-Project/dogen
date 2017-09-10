@@ -14,28 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-10 Sun 00:30]
+#+CAPTION: Clock summary at [2017-09-10 Sun 11:48]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *25:30* |       |      | 100.0 |
+| *Total time*                                                                | *26:23* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 25:30   |       |      | 100.0 |
-| Active                                                                      |         | 25:30 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.9 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   6.1 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.4 |
-| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   4.9 |
+| Stories                                                                     | 26:23   |       |      | 100.0 |
+| Active                                                                      |         | 26:23 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.8 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   5.9 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.3 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   4.7 |
 | COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.8 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   9.5 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   7.1 |
-| COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.4 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  30.7 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   9.2 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   6.9 |
+| COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.3 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  29.6 |
 | COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.3 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.7 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.6 |
 | COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.7 |
-| COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   1.0 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  26.5 |
+| COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   0.9 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  25.6 |
+| STARTED Improve dumping of models                                           |         |       | 0:53 |   3.3 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -662,6 +663,88 @@ Tasks:
   dependencies builder.
 - make is_enabled private in dependencies builder and see what breaks.
 
+*** STARTED Improve dumping of models                                 :story:
+    CLOCK: [2017-09-10 Sun 10:55]--[2017-09-10 Sun 11:48] =>  0:53
+
+At present it is very difficult to find the log information regarding
+models at different stages in the pipeline. It seems we are reaching
+the limits for what logging can do for us here:
+
+- the models are so large even emacs is struggling with the long line
+  sizes.
+- if we dump all models, we end up with extremely large log files. But
+  in practice we tend to be looking for specific dumps: a model at
+  transformation x or between x and y.
+
+It would be much better if:
+
+- there was a command line option that triggered the saving of
+  models to a user supplied directory.
+- we came up with a directory/file structure that allowed one to
+  quickly find the model one is after. For example, the nesting of
+  transformations could be the folder structure.
+
+To start off with we could dump all models for all transformations to
+get us up and running quickly, but in an ideal world we should be able
+to supply the stages/transformations for which we want dumps. We can
+then take the dumps and diff them from emacs.
+
+The folder structure could also include a "before" and "after" for
+each transform. Disk space is not an issue given that we would only be
+using this when things went wrong. It also means we can save the files
+as formatted JSON given that new lines are no longer an issue as they
+are with the log file.
+
+Similar to the context class, we could create a dumping context that
+keeps track of the nesting of transforms and their names and knows if
+dumping is enabled.
+
+For tests we should default to the directory of the logs. It should be
+possible to enable this feature for just one test, given that we will
+generate very large amounts of data.
+
+In a service setup we need a way for this data to be pushed somewhere
+else like a cache, but this will have to wait until there is clarity
+on just how IO will be implemented.
+
+Notes:
+
+- create a =probe= class that is supplied to all transforms. It is
+  const; any changeable state is marked as mutable, since it is
+  morally const.
+- If probing is off, nothing happens when we call methods of this
+  class.
+- a probe supports the following operations: start/finish chain,
+  start/finish transform. These pairs are called scopes.
+- Start operations take:
+  - a name which is the id of the transform. All transforms must now
+    have an ID.
+  - input: one of the  three kinds of models plus code generation
+    output for the model to text transforms.
+- Finish operations take:
+  - output.
+- each scope is logged as a guid. This makes it easier to correlate
+  the dumps with the log file.
+- the probe is initialised with a directory where all files will be
+  dumped.
+- every time we enter a chain scope, we create a new directory.
+- every time we enter a transform scope we bump the transform counter
+  by one. When we dump inputs and outputs, we write the files as:
+
+: [TRANSFORM_COUNTER]-[TRANSFORM_ID]-[GUID]-[input|output].json
+: 001-yarn.transforms.some_transform-e9d67262-f8f6-4291-a259-ebabe89b217a-input.json
+: 001-yarn.transforms.some_transform-e9d67262-f8f6-4291-a259-ebabe89b217a-output.json
+
+- command line arguments are:
+
+: transforms-dump-stats
+: transforms-dump-all
+: transforms-dump-directory
+
+- if =transform-print-stats= is enabled, a report is generated with
+  the transform graph and the total execution time taken by each
+  transform and chain. This is written in JSON for easy diffing.
+
 *** Move enablement into yarn                                         :story:
 
 It seems that the concepts around enablement are actually not kernel
@@ -752,49 +835,6 @@ convert them to element id's instead and see what breaks.
 We can't do this for:
 
 - visitor: we use the name in the formatter.
-
-*** Improve dumping of models                                         :story:
-
-At present it is very difficult to find the log information regarding
-models at different stages in the pipeline. It seems we are reaching
-the limits for what logging can do for us here:
-
-- the models are so large even emacs is struggling with the long line
-  sizes.
-- if we dump all models, we end up with extremely large log files. But
-  in practice we tend to be looking for specific dumps: a model at
-  transformation x or between x and y.
-
-It would be much better if:
-
-- there was a command line option that triggered the saving of
-  models to a user supplied directory.
-- we came up with a directory/file structure that allowed one to
-  quickly find the model one is after. For example, the nesting of
-  transformations could be the folder structure.
-
-To start off with we could dump all models for all transformations to
-get us up and running quickly, but in an ideal world we should be able
-to supply the stages/transformations for which we want dumps. We can
-then take the dumps and diff them from emacs.
-
-The folder structure could also include a "before" and "after" for
-each transform. Disk space is not an issue given that we would only be
-using this when things went wrong. It also means we can save the files
-as formatted JSON given that new lines are no longer an issue as they
-are with the log file.
-
-Similar to the context class, we could create a dumping context that
-keeps track of the nesting of transforms and their names and knows if
-dumping is enabled.
-
-For tests we should default to the directory of the logs. It should be
-possible to enable this feature for just one test, given that we will
-generate very large amounts of data.
-
-In a service setup we need a way for this data to be pushed somewhere
-else like a cache, but this will have to wait until there is clarity
-on just how IO will be implemented.
 
 *** Create yarn options                                               :story:
 
