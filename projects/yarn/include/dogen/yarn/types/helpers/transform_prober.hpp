@@ -27,6 +27,9 @@
 
 #include <algorithm>
 #include <boost/filesystem/path.hpp>
+#include "dogen/annotations/types/type_repository.hpp"
+#include "dogen/annotations/types/archetype_location_repository.hpp"
+#include "dogen/yarn/types/helpers/mapping_set_repository.hpp"
 #include "dogen/yarn/types/helpers/transform_metrics_builder.hpp"
 
 namespace dogen {
@@ -35,72 +38,29 @@ namespace helpers {
 
 class transform_prober final {
 public:
-    transform_prober(const transform_prober&) = default;
-    ~transform_prober() = default;
-
-public:
-    transform_prober();
-
-public:
-    transform_prober(transform_prober&& rhs);
-
-public:
-    transform_prober(
-        const dogen::yarn::helpers::transform_metrics_builder& builder_,
-        const bool probe_data_,
-        const bool probe_stats_,
-        const bool probe_stats_graph_,
-        const boost::filesystem::path& probe_data_directory_);
-
-public:
-    const dogen::yarn::helpers::transform_metrics_builder& builder_() const;
-    dogen::yarn::helpers::transform_metrics_builder& builder_();
-    void builder_(const dogen::yarn::helpers::transform_metrics_builder& v);
-    void builder_(const dogen::yarn::helpers::transform_metrics_builder&& v);
-
-    bool probe_data_() const;
-    void probe_data_(const bool v);
-
-    bool probe_stats_() const;
-    void probe_stats_(const bool v);
-
-    bool probe_stats_graph_() const;
-    void probe_stats_graph_(const bool v);
-
-    const boost::filesystem::path& probe_data_directory_() const;
-    boost::filesystem::path& probe_data_directory_();
-    void probe_data_directory_(const boost::filesystem::path& v);
-    void probe_data_directory_(const boost::filesystem::path&& v);
-
-public:
-    bool operator==(const transform_prober& rhs) const;
-    bool operator!=(const transform_prober& rhs) const {
-        return !this->operator==(rhs);
-    }
-
-public:
-    void swap(transform_prober& other) noexcept;
-    transform_prober& operator=(transform_prober other);
+    transform_prober(const bool probe_data, const bool probe_stats,
+        const bool probe_stats_graph,
+        const boost::filesystem::path& probe_directory,
+        const annotations::archetype_location_repository& alrp,
+        const annotations::type_repository& atrp,
+        const helpers::mapping_set_repository& msrp);
 
 private:
-    dogen::yarn::helpers::transform_metrics_builder builder__;
-    bool probe_data__;
-    bool probe_stats__;
-    bool probe_stats_graph__;
-    boost::filesystem::path probe_data_directory__;
+    void handle_probe_directory() const;
+
+    void write_initial_inputs(
+        const annotations::archetype_location_repository& alrp,
+        const annotations::type_repository& atrp,
+        const helpers::mapping_set_repository& msrp) const;
+
+private:
+    mutable transform_metrics_builder builder_;
+    const bool probe_data_;
+    const bool probe_stats_;
+    const bool probe_stats_graph_;
+    const boost::filesystem::path probe_directory_;
 };
 
 } } }
-
-namespace std {
-
-template<>
-inline void swap(
-    dogen::yarn::helpers::transform_prober& lhs,
-    dogen::yarn::helpers::transform_prober& rhs) {
-    lhs.swap(rhs);
-}
-
-}
 
 #endif

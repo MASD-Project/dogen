@@ -60,6 +60,7 @@
 #include "dogen/yarn/types/helpers/mapping_error.hpp"
 #include "dogen/yarn/types/helpers/mapping_value.hpp"
 #include "dogen/yarn/types/helpers/parsing_error.hpp"
+#include "dogen/yarn/types/helpers/probing_error.hpp"
 #include "dogen/yarn/types/meta_model/enumerator.hpp"
 #include "dogen/yarn/types/helpers/building_error.hpp"
 #include "dogen/yarn/types/helpers/indexing_error.hpp"

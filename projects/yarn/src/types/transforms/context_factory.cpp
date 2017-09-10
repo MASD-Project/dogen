@@ -26,6 +26,7 @@
 #include "dogen/formatters/types/repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 #include "dogen/yarn/types/transforms/code_generation_chain.hpp"
+#include "dogen/yarn/types/helpers/transform_prober.hpp"
 #include "dogen/yarn/types/helpers/mapping_set_repository_factory.hpp"
 #include "dogen/yarn/types/transforms/context_factory.hpp"
 
@@ -64,9 +65,17 @@ make(const kernel_registrar& rg, const options::knitting_options& o) {
     annotations::type_repository_factory atrpf;
     const auto atrp(atrpf.make(alrp, data_dirs));
 
+    bool probe_data(o.probe_all());
+    bool probe_stats(o.probe_all() || o.probe_stats());
+    bool probe_stats_graph(o.probe_all() || o.probe_stats_graph());
+    o.probe_directory();
+
+    helpers::transform_prober prober(probe_data, probe_stats, probe_stats_graph,
+        o.probe_directory(), alrp, atrp, msrp);
+
     formatters::repository_factory frpf;
     const auto frp(frpf.make(data_dirs));
-    const context r(data_dirs, o, alrp, atrp, msrp, frp);
+    const context r(data_dirs, o, alrp, atrp, msrp, frp, prober);
 
     BOOST_LOG_SEV(lg, debug) << "Created the context.";
     return r;

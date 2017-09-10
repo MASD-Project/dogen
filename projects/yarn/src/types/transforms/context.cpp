@@ -30,12 +30,13 @@ context::context(
         const annotations::archetype_location_repository& alrp,
         const annotations::type_repository& atrp,
         const helpers::mapping_set_repository& msrp,
-        const dogen::formatters::repository& frp) :
+        const dogen::formatters::repository& frp,
+        const helpers::transform_prober prober) :
     data_directories_(data_directories), options_(options),
     archetype_location_repository_(alrp), type_repository_(atrp),
     groups_factory_(data_directories, archetype_location_repository_,
         type_repository_, options.compatibility_mode()),
-    mapping_repository_(msrp), formatters_repository_(frp) {}
+    mapping_repository_(msrp), formatters_repository_(frp), prober_(prober) {}
 
 const std::vector<boost::filesystem::path>& context::data_directories() const {
     return data_directories_;
@@ -64,6 +65,10 @@ const helpers::mapping_set_repository& context::mapping_repository() const {
 
 const dogen::formatters::repository& context::formatters_repository() const {
     return formatters_repository_;
+}
+
+const helpers::transform_prober& context::prober() const {
+    return prober_;
 }
 
 } } }
