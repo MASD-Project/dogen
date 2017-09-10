@@ -53,6 +53,7 @@
 #include "dogen/yarn/serialization/meta_model/letter_cases_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/origin_types_ser.hpp"
 #include "dogen/yarn/serialization/transforms/configuration_ser.hpp"
+#include "dogen/yarn/serialization/helpers/transform_metrics_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/object_template_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/type_parameters_ser.hpp"
 #include "dogen/yarn/serialization/meta_model/facet_properties_ser.hpp"
