@@ -14,29 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-10 Sun 11:48]
+#+CAPTION: Clock summary at [2017-09-10 Sun 13:04]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *26:23* |       |      | 100.0 |
+| *Total time*                                                                | *27:38* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 26:23   |       |      | 100.0 |
-| Active                                                                      |         | 26:23 |      | 100.0 |
-| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.8 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   5.9 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.3 |
-| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   4.7 |
-| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.8 |
-| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   9.2 |
-| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   6.9 |
+| Stories                                                                     | 27:38   |       |      | 100.0 |
+| Active                                                                      |         | 27:38 |      | 100.0 |
+| COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.7 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   5.6 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.1 |
+| COMPLETED Clean-up readme                                                   |         |       | 1:15 |   4.5 |
+| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.7 |
+| COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   8.8 |
+| COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   6.6 |
 | COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.3 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  29.6 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  28.3 |
 | COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.3 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.6 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.4 |
 | COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.7 |
 | COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   0.9 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  25.6 |
-| STARTED Improve dumping of models                                           |         |       | 0:53 |   3.3 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  24.4 |
+| STARTED Improve dumping of models                                           |         |       | 2:08 |   7.7 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -664,6 +664,7 @@ Tasks:
 - make is_enabled private in dependencies builder and see what breaks.
 
 *** STARTED Improve dumping of models                                 :story:
+    CLOCK: [2017-09-10 Sun 11:49]--[2017-09-10 Sun 13:04] =>  1:15
     CLOCK: [2017-09-10 Sun 10:55]--[2017-09-10 Sun 11:48] =>  0:53
 
 At present it is very difficult to find the log information regarding
@@ -737,9 +738,10 @@ Notes:
 
 - command line arguments are:
 
-: transforms-dump-stats
-: transforms-dump-all
-: transforms-dump-directory
+: transforms-probe-stats
+: transforms-probe-stats-graph
+: transforms-probe-all
+: transforms-probe-directory
 
 - if =transform-print-stats= is enabled, a report is generated with
   the transform graph and the total execution time taken by each
