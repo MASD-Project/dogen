@@ -14,29 +14,29 @@
 ** Active
 
 #+begin: clocktable :maxlevel 3 :scope subtree :indent nil :emphasize nil :scope file :narrow 75 :formula %
-#+CAPTION: Clock summary at [2017-09-10 Sun 15:13]
+#+CAPTION: Clock summary at [2017-09-10 Sun 15:26]
 | <75>                                                                        |         |       |      |       |
 | Headline                                                                    | Time    |       |      |     % |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| *Total time*                                                                | *28:15* |       |      | 100.0 |
+| *Total time*                                                                | *28:27* |       |      | 100.0 |
 |-----------------------------------------------------------------------------+---------+-------+------+-------|
-| Stories                                                                     | 28:15   |       |      | 100.0 |
-| Active                                                                      |         | 28:15 |      | 100.0 |
+| Stories                                                                     | 28:27   |       |      | 100.0 |
+| Active                                                                      |         | 28:27 |      | 100.0 |
 | COMPLETED Edit release notes for previous sprint                            |         |       | 0:44 |   2.6 |
-| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   5.5 |
-| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.1 |
+| STARTED Sprint and product backlog grooming                                 |         |       | 1:33 |   5.4 |
+| COMPLETED Remove object types in yarn                                       |         |       | 0:52 |   3.0 |
 | COMPLETED Clean-up readme                                                   |         |       | 1:15 |   4.4 |
-| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.7 |
+| COMPLETED Rename transformers to adapters                                   |         |       | 0:28 |   1.6 |
 | COMPLETED Analysis on annotations and profiles                              |         |       | 2:26 |   8.6 |
 | COMPLETED Use namespaced stereotypes                                        |         |       | 1:49 |   6.4 |
 | COMPLETED Tailor dogen models                                               |         |       | 0:21 |   1.2 |
-| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  27.7 |
+| COMPLETED Rename yarn concepts                                              |         |       | 7:49 |  27.5 |
 | COMPLETED Remove extra copying in mapper                                    |         |       | 0:05 |   0.3 |
-| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.4 |
+| COMPLETED Investigate the JSON break on Northwind model                     |         |       | 0:57 |   3.3 |
 | COMPLETED Rename ODB parameters                                             |         |       | 0:11 |   0.6 |
 | COMPLETED Investigate usage of origin type                                  |         |       | 0:15 |   0.9 |
-| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  23.9 |
-| STARTED Improve dumping of models                                           |         |       | 2:45 |   9.7 |
+| STARTED Add canonical archetype support to yarn                             |         |       | 6:45 |  23.7 |
+| STARTED Improve dumping of models                                           |         |       | 2:57 |  10.4 |
 #+TBLFM: $5='(org-clock-time% @3$2 $2..$4);%.1f
 #+end:
 
@@ -664,6 +664,7 @@ Tasks:
 - make is_enabled private in dependencies builder and see what breaks.
 
 *** STARTED Improve dumping of models                                 :story:
+    CLOCK: [2017-09-10 Sun 15:14]--[2017-09-10 Sun 15:26] =>  0:12
     CLOCK: [2017-09-10 Sun 14:49]--[2017-09-10 Sun 15:13] =>  0:24
     CLOCK: [2017-09-10 Sun 14:35]--[2017-09-10 Sun 14:48] =>  0:13
     CLOCK: [2017-09-10 Sun 11:49]--[2017-09-10 Sun 13:04] =>  1:15
@@ -753,6 +754,22 @@ Notes:
   - version
   - log level
   - if dump data is enabled
+
+*** Remove dumping of models from log                                 :story:
+
+Once probing is in place, we need to remove all the dumps we are doing
+of models at present. These just add size to the log files for no
+reason.
+
+*** Run "changed" tests only                                          :story:
+
+Random idea: can we have a target that just runs "changed" tests? That
+is, tests that are impacted by the files that were changed since we
+last executed the tests.
+
+For this to work we need to create a file with every execution of
+tests and then use that as a dependency. There must be some prior art
+for this with CMake.
 
 *** Move enablement into yarn                                         :story:
 

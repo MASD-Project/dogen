@@ -351,7 +351,10 @@ BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
     BOOST_CHECK(ko.log_level() == log_level_value_arg);
-    BOOST_CHECK(ko.log_directory() == log_directory_value_arg);
+
+    using boost::algorithm::ends_with;
+    const auto gs(ko.log_directory().generic_string());
+    BOOST_CHECK(ends_with(gs, log_directory_value_arg));
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_a_default_log_level_set) {

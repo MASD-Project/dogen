@@ -226,8 +226,9 @@ make_knitting_options(const variables_map& vm) const {
     if (vm.count(target_arg) == 0)
         BOOST_THROW_EXCEPTION(parser_validation_error(missing_target));
 
+    using boost::filesystem::absolute;
     const auto target_str(vm[target_arg].as<std::string>());
-    r.target(boost::filesystem::absolute(target_str));
+    r.target(absolute(target_str));
 
     if (vm.count(log_level_arg) == 0)
         r.log_level(info_level);
@@ -235,9 +236,11 @@ make_knitting_options(const variables_map& vm) const {
         r.log_level(vm[log_level_arg].as<std::string>());
 
     if (vm.count(log_directory_arg) == 0)
-        r.log_directory(default_log_directory);
-    else
-        r.log_directory(vm[log_directory_arg].as<std::string>());
+        r.log_directory(absolute(default_log_directory));
+    else {
+        const auto s(vm[log_directory_arg].as<std::string>());
+        r.log_directory(absolute(s));
+    }
 
     r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
     r.force_write(vm.count(force_write_arg) != 0);
@@ -252,12 +255,12 @@ make_knitting_options(const variables_map& vm) const {
         r.output_directory_path(boost::filesystem::current_path());
     else {
         const auto s(vm[output_dir_arg].as<std::string>());
-        r.output_directory_path(boost::filesystem::absolute(s));
+        r.output_directory_path(absolute(s));
     }
 
     if (vm.count(cpp_headers_output_directory_arg)) {
         const auto s(vm[cpp_headers_output_directory_arg].as<std::string>());
-        r.cpp_headers_output_directory_path(boost::filesystem::absolute(s));
+        r.cpp_headers_output_directory_path(absolute(s));
     }
 
     r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
@@ -266,10 +269,10 @@ make_knitting_options(const variables_map& vm) const {
     r.probe_all(vm.count(probe_all_arg) != 0);
 
     if (vm.count(probe_directory_arg) == 0)
-        r.probe_directory(default_probe_directory);
+        r.probe_directory(absolute(default_probe_directory));
     else {
-        const auto d(vm[probe_directory_arg].as<std::string>());
-        r.probe_directory(d);
+        const auto s(vm[probe_directory_arg].as<std::string>());
+        r.probe_directory(absolute(s));
     }
 
     return r;
