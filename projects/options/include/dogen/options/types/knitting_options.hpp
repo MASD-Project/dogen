@@ -58,7 +58,11 @@ public:
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
         const boost::filesystem::path& log_directory,
-        const bool compatibility_mode);
+        const bool compatibility_mode,
+        const bool transforms_probe_stats,
+        const bool transforms_probe_stats_graph,
+        const bool transforms_probe_all,
+        const boost::filesystem::path& transforms_probe_data_directory);
 
 private:
     template<typename Archive>
@@ -150,6 +154,20 @@ public:
     void compatibility_mode(const bool v);
     /**@}*/
 
+    bool transforms_probe_stats() const;
+    void transforms_probe_stats(const bool v);
+
+    bool transforms_probe_stats_graph() const;
+    void transforms_probe_stats_graph(const bool v);
+
+    bool transforms_probe_all() const;
+    void transforms_probe_all(const bool v);
+
+    const boost::filesystem::path& transforms_probe_data_directory() const;
+    boost::filesystem::path& transforms_probe_data_directory();
+    void transforms_probe_data_directory(const boost::filesystem::path& v);
+    void transforms_probe_data_directory(const boost::filesystem::path&& v);
+
 public:
     bool operator==(const knitting_options& rhs) const;
     bool operator!=(const knitting_options& rhs) const {
@@ -170,6 +188,10 @@ private:
     boost::filesystem::path cpp_headers_output_directory_path_;
     boost::filesystem::path log_directory_;
     bool compatibility_mode_;
+    bool transforms_probe_stats_;
+    bool transforms_probe_stats_graph_;
+    bool transforms_probe_all_;
+    boost::filesystem::path transforms_probe_data_directory_;
 };
 
 } }
