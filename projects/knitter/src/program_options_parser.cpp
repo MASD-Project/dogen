@@ -63,6 +63,12 @@ const std::string force_write_arg("force-write");
 const std::string info_level("info");
 const std::string default_log_directory("log");
 
+const std::string probe_stats_arg("probe-stats");
+const std::string probe_stats_graph_arg("probe-stats-graph");
+const std::string probe_all_arg("probe-all");
+const std::string probe_directory_arg("probe-directory");
+const std::string default_probe_directory("probe");
+
 }
 
 namespace dogen {
@@ -87,14 +93,21 @@ program_options_parser::make_general_options_description() const {
     boost::program_options::options_description r("General options");
     r.add_options()
         ("help,h", "Display usage and exit.")
-        ("version,v", "Output version information and exit.")
+        ("version,v", "Output version information and exit.");
+
+    return r;
+}
+
+boost::program_options::options_description
+program_options_parser::make_logging_options_description() const {
+    using boost::program_options::value;
+    boost::program_options::options_description r("Logging options");
+    r.add_options()
         ("log-level,l", value<std::string>(),
             "What level to use for logging. Options: trace, debug, info, "
             "warn, error. Defaults to 'info'.")
         ("log-directory,g", value<std::string>(),
-            "Directory to place the log file in. Defaults to 'log'.")
-        ("compatibility-mode,m", "Attempt to process diagram, "
-            "ignoring certain types of errors.");
+            "Directory to place the log file in. Defaults to 'log'.");
 
     return r;
 }
@@ -137,11 +150,31 @@ program_options_parser::make_output_options_description() const {
 }
 
 boost::program_options::options_description
+program_options_parser::make_transforms_options_description() const {
+    using boost::program_options::value;
+    boost::program_options::options_description r("Transforms options");
+    r.add_options()
+        ("compatibility-mode,m", "Attempt to process inputs, "
+            "ignoring certain types of errors.")
+        ("probe-stats", "Generate stats about executed transforms.")
+        ("probe-stats-graph", "Generate a graph with stats about "
+            "executed transforms.")
+        ("probe-all", "Dump all available probing information "
+            "about transforms.")
+        ("probe-directory", "Directory in which to dump probe data. "
+            "Only used if transforms probing is enabled.");
+
+    return r;
+}
+
+boost::program_options::options_description
 program_options_parser::make_options_description() const {
     boost::program_options::options_description r;
     r.add(make_general_options_description());
+    r.add(make_logging_options_description());
     r.add(make_input_options_description());
     r.add(make_output_options_description());
+    r.add(make_transforms_options_description());
     return r;
 }
 
@@ -208,7 +241,6 @@ make_knitting_options(const variables_map& vm) const {
 
     r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
     r.force_write(vm.count(force_write_arg) != 0);
-    r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
 
     if (vm.count(ignore_files_matching_regex_arg)) {
         typedef std::vector<std::string> argument_type;
@@ -226,6 +258,18 @@ make_knitting_options(const variables_map& vm) const {
     if (vm.count(cpp_headers_output_directory_arg)) {
         const auto s(vm[cpp_headers_output_directory_arg].as<std::string>());
         r.cpp_headers_output_directory_path(boost::filesystem::absolute(s));
+    }
+
+    r.compatibility_mode(vm.count(compatibility_mode_arg) != 0);
+    r.probe_stats(vm.count(probe_stats_arg) != 0);
+    r.probe_stats_graph(vm.count(probe_stats_graph_arg)  != 0);
+    r.probe_all(vm.count(probe_all_arg) != 0);
+
+    if (vm.count(probe_directory_arg) == 0)
+        r.probe_directory(default_probe_directory);
+    else {
+        const auto d(vm[probe_directory_arg].as<std::string>());
+        r.probe_directory(d);
     }
 
     return r;

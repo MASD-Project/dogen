@@ -50,7 +50,8 @@ const std::string errors_msg(" finished with errors.");
  */
 void help(const std::string& d) {
     std::cout << "Dogen Knitter." << std::endl
-              << "Generates domain objects from a Dia diagram."
+              << "Model driven engineering tool to generate source code "
+              << std::endl << "from supported input models."
               << std::endl << std::endl << d << std::endl;
 }
 

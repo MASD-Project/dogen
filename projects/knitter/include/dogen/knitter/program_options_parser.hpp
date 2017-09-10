@@ -53,8 +53,10 @@ public:
 private:
     typedef boost::program_options::options_description options_description;
     options_description make_general_options_description() const;
+    options_description make_logging_options_description() const;
     options_description make_input_options_description() const;
     options_description make_output_options_description() const;
+    options_description make_transforms_options_description() const;
     options_description make_options_description() const;
 
 private:

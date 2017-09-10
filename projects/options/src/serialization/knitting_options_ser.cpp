@@ -71,10 +71,10 @@ void save(Archive& ar,
     ar << make_nvp("cpp_headers_output_directory_path", v.cpp_headers_output_directory_path_);
     ar << make_nvp("log_directory", v.log_directory_);
     ar << make_nvp("compatibility_mode", v.compatibility_mode_);
-    ar << make_nvp("transforms_probe_stats", v.transforms_probe_stats_);
-    ar << make_nvp("transforms_probe_stats_graph", v.transforms_probe_stats_graph_);
-    ar << make_nvp("transforms_probe_all", v.transforms_probe_all_);
-    ar << make_nvp("transforms_probe_data_directory", v.transforms_probe_data_directory_);
+    ar << make_nvp("probe_stats", v.probe_stats_);
+    ar << make_nvp("probe_stats_graph", v.probe_stats_graph_);
+    ar << make_nvp("probe_all", v.probe_all_);
+    ar << make_nvp("probe_directory", v.probe_directory_);
 }
 
 template<typename Archive>
@@ -90,10 +90,10 @@ void load(Archive& ar,
     ar >> make_nvp("cpp_headers_output_directory_path", v.cpp_headers_output_directory_path_);
     ar >> make_nvp("log_directory", v.log_directory_);
     ar >> make_nvp("compatibility_mode", v.compatibility_mode_);
-    ar >> make_nvp("transforms_probe_stats", v.transforms_probe_stats_);
-    ar >> make_nvp("transforms_probe_stats_graph", v.transforms_probe_stats_graph_);
-    ar >> make_nvp("transforms_probe_all", v.transforms_probe_all_);
-    ar >> make_nvp("transforms_probe_data_directory", v.transforms_probe_data_directory_);
+    ar >> make_nvp("probe_stats", v.probe_stats_);
+    ar >> make_nvp("probe_stats_graph", v.probe_stats_graph_);
+    ar >> make_nvp("probe_all", v.probe_all_);
+    ar >> make_nvp("probe_directory", v.probe_directory_);
 }
 
 } }

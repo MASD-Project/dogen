@@ -489,7 +489,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#transforms_probe_stats#</dia:string>
+            <dia:string>#probe_stats#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -512,7 +512,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#transforms_probe_stats_graph#</dia:string>
+            <dia:string>#probe_stats_graph#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -535,7 +535,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#transforms_probe_all#</dia:string>
+            <dia:string>#probe_all#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#bool#</dia:string>
@@ -558,7 +558,7 @@ forwards compatibility problems: missing types or types that do not exist.#</dia
         </dia:composite>
         <dia:composite type="umlattribute">
           <dia:attribute name="name">
-            <dia:string>#transforms_probe_data_directory#</dia:string>
+            <dia:string>#probe_directory#</dia:string>
           </dia:attribute>
           <dia:attribute name="type">
             <dia:string>#boost::filesystem::path#</dia:string>
