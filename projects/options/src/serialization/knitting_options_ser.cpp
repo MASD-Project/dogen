@@ -62,6 +62,7 @@ template<typename Archive>
 void save(Archive& ar,
     const dogen::options::knitting_options& v,
     const unsigned int /*version*/) {
+    ar << make_nvp("log_file", v.log_file_);
     ar << make_nvp("log_level", v.log_level_);
     ar << make_nvp("target", v.target_);
     ar << make_nvp("delete_extra_files", v.delete_extra_files_);
@@ -69,7 +70,6 @@ void save(Archive& ar,
     ar << make_nvp("ignore_patterns", v.ignore_patterns_);
     ar << make_nvp("output_directory_path", v.output_directory_path_);
     ar << make_nvp("cpp_headers_output_directory_path", v.cpp_headers_output_directory_path_);
-    ar << make_nvp("log_directory", v.log_directory_);
     ar << make_nvp("compatibility_mode", v.compatibility_mode_);
     ar << make_nvp("probe_stats", v.probe_stats_);
     ar << make_nvp("probe_stats_graph", v.probe_stats_graph_);
@@ -81,6 +81,7 @@ template<typename Archive>
 void load(Archive& ar,
     dogen::options::knitting_options& v,
     const unsigned int /*version*/) {
+    ar >> make_nvp("log_file", v.log_file_);
     ar >> make_nvp("log_level", v.log_level_);
     ar >> make_nvp("target", v.target_);
     ar >> make_nvp("delete_extra_files", v.delete_extra_files_);
@@ -88,7 +89,6 @@ void load(Archive& ar,
     ar >> make_nvp("ignore_patterns", v.ignore_patterns_);
     ar >> make_nvp("output_directory_path", v.output_directory_path_);
     ar >> make_nvp("cpp_headers_output_directory_path", v.cpp_headers_output_directory_path_);
-    ar >> make_nvp("log_directory", v.log_directory_);
     ar >> make_nvp("compatibility_mode", v.compatibility_mode_);
     ar >> make_nvp("probe_stats", v.probe_stats_);
     ar >> make_nvp("probe_stats_graph", v.probe_stats_graph_);

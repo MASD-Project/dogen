@@ -94,7 +94,7 @@ dogen::knitter::program_options_parser setup_parser(
     bool& version_called) {
 
     logger lg(logger_factory(test_suite));
-    BOOST_LOG_SEV(lg, debug) << "options: " << options;
+    BOOST_LOG_SEV(lg, debug) << "options as vector: " << options;
     dogen::knitter::program_options_parser r(options);
     r.help_function(help_mock_factory(help_called));
     r.version_function(version_mock_factory(version_called));
@@ -353,8 +353,11 @@ BOOST_AUTO_TEST_CASE(supplying_log_options_results_in_options_with_expected_log_
     BOOST_CHECK(ko.log_level() == log_level_value_arg);
 
     using boost::algorithm::ends_with;
-    const auto gs(ko.log_directory().generic_string());
-    BOOST_CHECK(ends_with(gs, log_directory_value_arg));
+    const auto gs(ko.log_file().generic_string());
+    const auto log_filename(log_directory_value_arg +
+        "/dogen.knitter." + target_value_arg + ".log");
+    BOOST_LOG_SEV(lg, debug) << "expected to end with: " << log_filename;
+    BOOST_CHECK(ends_with(gs, log_filename));
 }
 
 BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_a_default_log_level_set) {
@@ -364,7 +367,7 @@ BOOST_AUTO_TEST_CASE(not_supplying_log_level_results_in_a_default_log_level_set)
     const auto ko(check_valid_arguments(o));
     BOOST_LOG_SEV(lg, debug) << "options: " << ko;
     BOOST_CHECK(!ko.log_level().empty());
-    BOOST_CHECK(!ko.log_directory().empty());
+    BOOST_CHECK(!ko.log_file().empty());
 }
 
 BOOST_AUTO_TEST_SUITE_END()

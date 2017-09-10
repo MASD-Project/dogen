@@ -32,14 +32,14 @@ knitting_options::knitting_options()
       probe_all_(static_cast<bool>(0)) { }
 
 knitting_options::knitting_options(knitting_options&& rhs)
-    : log_level_(std::move(rhs.log_level_)),
+    : log_file_(std::move(rhs.log_file_)),
+      log_level_(std::move(rhs.log_level_)),
       target_(std::move(rhs.target_)),
       delete_extra_files_(std::move(rhs.delete_extra_files_)),
       force_write_(std::move(rhs.force_write_)),
       ignore_patterns_(std::move(rhs.ignore_patterns_)),
       output_directory_path_(std::move(rhs.output_directory_path_)),
       cpp_headers_output_directory_path_(std::move(rhs.cpp_headers_output_directory_path_)),
-      log_directory_(std::move(rhs.log_directory_)),
       compatibility_mode_(std::move(rhs.compatibility_mode_)),
       probe_stats_(std::move(rhs.probe_stats_)),
       probe_stats_graph_(std::move(rhs.probe_stats_graph_)),
@@ -47,6 +47,7 @@ knitting_options::knitting_options(knitting_options&& rhs)
       probe_directory_(std::move(rhs.probe_directory_)) { }
 
 knitting_options::knitting_options(
+    const boost::filesystem::path& log_file,
     const std::string& log_level,
     const boost::filesystem::path& target,
     const bool delete_extra_files,
@@ -54,20 +55,19 @@ knitting_options::knitting_options(
     const std::vector<std::string>& ignore_patterns,
     const boost::filesystem::path& output_directory_path,
     const boost::filesystem::path& cpp_headers_output_directory_path,
-    const boost::filesystem::path& log_directory,
     const bool compatibility_mode,
     const bool probe_stats,
     const bool probe_stats_graph,
     const bool probe_all,
     const boost::filesystem::path& probe_directory)
-    : log_level_(log_level),
+    : log_file_(log_file),
+      log_level_(log_level),
       target_(target),
       delete_extra_files_(delete_extra_files),
       force_write_(force_write),
       ignore_patterns_(ignore_patterns),
       output_directory_path_(output_directory_path),
       cpp_headers_output_directory_path_(cpp_headers_output_directory_path),
-      log_directory_(log_directory),
       compatibility_mode_(compatibility_mode),
       probe_stats_(probe_stats),
       probe_stats_graph_(probe_stats_graph),
@@ -76,6 +76,7 @@ knitting_options::knitting_options(
 
 void knitting_options::swap(knitting_options& other) noexcept {
     using std::swap;
+    swap(log_file_, other.log_file_);
     swap(log_level_, other.log_level_);
     swap(target_, other.target_);
     swap(delete_extra_files_, other.delete_extra_files_);
@@ -83,7 +84,6 @@ void knitting_options::swap(knitting_options& other) noexcept {
     swap(ignore_patterns_, other.ignore_patterns_);
     swap(output_directory_path_, other.output_directory_path_);
     swap(cpp_headers_output_directory_path_, other.cpp_headers_output_directory_path_);
-    swap(log_directory_, other.log_directory_);
     swap(compatibility_mode_, other.compatibility_mode_);
     swap(probe_stats_, other.probe_stats_);
     swap(probe_stats_graph_, other.probe_stats_graph_);
@@ -92,14 +92,14 @@ void knitting_options::swap(knitting_options& other) noexcept {
 }
 
 bool knitting_options::operator==(const knitting_options& rhs) const {
-    return log_level_ == rhs.log_level_ &&
+    return log_file_ == rhs.log_file_ &&
+        log_level_ == rhs.log_level_ &&
         target_ == rhs.target_ &&
         delete_extra_files_ == rhs.delete_extra_files_ &&
         force_write_ == rhs.force_write_ &&
         ignore_patterns_ == rhs.ignore_patterns_ &&
         output_directory_path_ == rhs.output_directory_path_ &&
         cpp_headers_output_directory_path_ == rhs.cpp_headers_output_directory_path_ &&
-        log_directory_ == rhs.log_directory_ &&
         compatibility_mode_ == rhs.compatibility_mode_ &&
         probe_stats_ == rhs.probe_stats_ &&
         probe_stats_graph_ == rhs.probe_stats_graph_ &&
@@ -111,6 +111,22 @@ knitting_options& knitting_options::operator=(knitting_options other) {
     using std::swap;
     swap(*this, other);
     return *this;
+}
+
+const boost::filesystem::path& knitting_options::log_file() const {
+    return log_file_;
+}
+
+boost::filesystem::path& knitting_options::log_file() {
+    return log_file_;
+}
+
+void knitting_options::log_file(const boost::filesystem::path& v) {
+    log_file_ = v;
+}
+
+void knitting_options::log_file(const boost::filesystem::path&& v) {
+    log_file_ = std::move(v);
 }
 
 const std::string& knitting_options::log_level() const {
@@ -207,22 +223,6 @@ void knitting_options::cpp_headers_output_directory_path(const boost::filesystem
 
 void knitting_options::cpp_headers_output_directory_path(const boost::filesystem::path&& v) {
     cpp_headers_output_directory_path_ = std::move(v);
-}
-
-const boost::filesystem::path& knitting_options::log_directory() const {
-    return log_directory_;
-}
-
-boost::filesystem::path& knitting_options::log_directory() {
-    return log_directory_;
-}
-
-void knitting_options::log_directory(const boost::filesystem::path& v) {
-    log_directory_ = v;
-}
-
-void knitting_options::log_directory(const boost::filesystem::path&& v) {
-    log_directory_ = std::move(v);
 }
 
 bool knitting_options::compatibility_mode() const {

@@ -47,6 +47,7 @@ namespace {
 const std::string empty;
 const std::string missing_target("Mandatory parameter target is missing. ");
 
+const std::string log_file_prefix("dogen.knitter.");
 const std::string help_arg("help");
 const std::string version_arg("version");
 const std::string log_level_arg("log-level");
@@ -119,8 +120,7 @@ program_options_parser::make_input_options_description() const {
     r.add_options()
         ("target,t",
             value<std::string>(),
-            "Model to generate code for, in any of the supported formats."
-            "If required, you can add the module path: FILE,MODULES.");
+            "Model to generate code for, in any of the supported formats.");
 
     return r;
 }
@@ -235,12 +235,18 @@ make_knitting_options(const variables_map& vm) const {
     else
         r.log_level(vm[log_level_arg].as<std::string>());
 
+
+    boost::filesystem::path log_path;
     if (vm.count(log_directory_arg) == 0)
-        r.log_directory(absolute(default_log_directory));
+        log_path = absolute(default_log_directory);
     else {
         const auto s(vm[log_directory_arg].as<std::string>());
-        r.log_directory(absolute(s));
+        log_path = absolute(s);
     }
+
+    const auto model_name = r.target().stem().filename().string();
+    const std::string log_file_name(log_file_prefix + model_name + ".log");
+    r.log_file(log_path / log_file_name);
 
     r.delete_extra_files(vm.count(delete_extra_files_arg) != 0);
     r.force_write(vm.count(force_write_arg) != 0);
@@ -268,12 +274,14 @@ make_knitting_options(const variables_map& vm) const {
     r.probe_stats_graph(vm.count(probe_stats_graph_arg)  != 0);
     r.probe_all(vm.count(probe_all_arg) != 0);
 
+    boost::filesystem::path probe_path;
     if (vm.count(probe_directory_arg) == 0)
-        r.probe_directory(absolute(default_probe_directory));
+        probe_path = absolute(default_probe_directory);
     else {
         const auto s(vm[probe_directory_arg].as<std::string>());
-        r.probe_directory(absolute(s));
+        probe_path = absolute(s);
     }
+    r.probe_directory(probe_path / model_name);
 
     return r;
 }

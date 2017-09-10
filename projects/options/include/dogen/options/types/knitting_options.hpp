@@ -50,6 +50,7 @@ public:
 
 public:
     knitting_options(
+        const boost::filesystem::path& log_file,
         const std::string& log_level,
         const boost::filesystem::path& target,
         const bool delete_extra_files,
@@ -57,7 +58,6 @@ public:
         const std::vector<std::string>& ignore_patterns,
         const boost::filesystem::path& output_directory_path,
         const boost::filesystem::path& cpp_headers_output_directory_path,
-        const boost::filesystem::path& log_directory,
         const bool compatibility_mode,
         const bool probe_stats,
         const bool probe_stats_graph,
@@ -73,6 +73,16 @@ private:
 
 public:
     /**
+     * @brief Full path to the log file.
+     */
+    /**@{*/
+    const boost::filesystem::path& log_file() const;
+    boost::filesystem::path& log_file();
+    void log_file(const boost::filesystem::path& v);
+    void log_file(const boost::filesystem::path&& v);
+    /**@}*/
+
+    /**
      * @brief What level of logging to log at.
      */
     /**@{*/
@@ -83,7 +93,7 @@ public:
     /**@}*/
 
     /**
-     * @brief Path to the Dia diagram that contains the model to generate.
+     * @brief Full path to the model to generate.
      */
     /**@{*/
     const boost::filesystem::path& target() const;
@@ -138,11 +148,6 @@ public:
     void cpp_headers_output_directory_path(const boost::filesystem::path&& v);
     /**@}*/
 
-    const boost::filesystem::path& log_directory() const;
-    boost::filesystem::path& log_directory();
-    void log_directory(const boost::filesystem::path& v);
-    void log_directory(const boost::filesystem::path&& v);
-
     /**
      * @brief Try to process diagram even if there are errors.
      *
@@ -154,19 +159,39 @@ public:
     void compatibility_mode(const bool v);
     /**@}*/
 
+    /**
+     * @brief Enable probing for statistics around transforms.
+     */
+    /**@{*/
     bool probe_stats() const;
     void probe_stats(const bool v);
+    /**@}*/
 
+    /**
+     * @brief Enable probing for statistics around transforms and generate a graph.
+     */
+    /**@{*/
     bool probe_stats_graph() const;
     void probe_stats_graph(const bool v);
+    /**@}*/
 
+    /**
+     * @brief Enable all probing.
+     */
+    /**@{*/
     bool probe_all() const;
     void probe_all(const bool v);
+    /**@}*/
 
+    /**
+     * @brief Full path to the directory in which to place probe information.
+     */
+    /**@{*/
     const boost::filesystem::path& probe_directory() const;
     boost::filesystem::path& probe_directory();
     void probe_directory(const boost::filesystem::path& v);
     void probe_directory(const boost::filesystem::path&& v);
+    /**@}*/
 
 public:
     bool operator==(const knitting_options& rhs) const;
@@ -179,6 +204,7 @@ public:
     knitting_options& operator=(knitting_options other);
 
 private:
+    boost::filesystem::path log_file_;
     std::string log_level_;
     boost::filesystem::path target_;
     bool delete_extra_files_;
@@ -186,7 +212,6 @@ private:
     std::vector<std::string> ignore_patterns_;
     boost::filesystem::path output_directory_path_;
     boost::filesystem::path cpp_headers_output_directory_path_;
-    boost::filesystem::path log_directory_;
     bool compatibility_mode_;
     bool probe_stats_;
     bool probe_stats_graph_;

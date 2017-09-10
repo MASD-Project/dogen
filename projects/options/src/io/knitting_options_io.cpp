@@ -57,6 +57,7 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
 
     s << " { "
       << "\"__type__\": " << "\"dogen::options::knitting_options\"" << ", "
+      << "\"log_file\": " << "\"" << v.log_file().generic_string() << "\"" << ", "
       << "\"log_level\": " << "\"" << tidy_up_string(v.log_level()) << "\"" << ", "
       << "\"target\": " << "\"" << v.target().generic_string() << "\"" << ", "
       << "\"delete_extra_files\": " << v.delete_extra_files() << ", "
@@ -64,7 +65,6 @@ std::ostream& operator<<(std::ostream& s, const knitting_options& v) {
       << "\"ignore_patterns\": " << v.ignore_patterns() << ", "
       << "\"output_directory_path\": " << "\"" << v.output_directory_path().generic_string() << "\"" << ", "
       << "\"cpp_headers_output_directory_path\": " << "\"" << v.cpp_headers_output_directory_path().generic_string() << "\"" << ", "
-      << "\"log_directory\": " << "\"" << v.log_directory().generic_string() << "\"" << ", "
       << "\"compatibility_mode\": " << v.compatibility_mode() << ", "
       << "\"probe_stats\": " << v.probe_stats() << ", "
       << "\"probe_stats_graph\": " << v.probe_stats_graph() << ", "

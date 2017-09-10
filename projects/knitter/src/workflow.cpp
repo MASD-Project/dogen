@@ -97,13 +97,11 @@ generate_knitting_options(const int argc, const char* argv[]) const {
 }
 
 void workflow::initialise_logging(const options::knitting_options& o) {
-    const auto dir(o.log_directory());
-    const auto sev(utility::log::to_severity_level(o.log_level()));
-    const std::string log_file_name(log_file_prefix + model_name_ + ".log");
-    log_path_ = dir / log_file_name;
+    log_path_ = o.log_file();
 
     life_cycle_manager lcm;
-    lcm.initialise(log_path_, sev);
+    const auto sev(utility::log::to_severity_level(o.log_level()));
+    lcm.initialise(o.log_file(), sev);
     can_log_ = true;
 }
 
